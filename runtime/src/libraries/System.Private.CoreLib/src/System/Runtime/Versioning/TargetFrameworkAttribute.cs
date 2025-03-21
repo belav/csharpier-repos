@@ -9,7 +9,7 @@ namespace System.Runtime.Versioning
     [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = false)]
     public sealed class TargetFrameworkAttribute : Attribute
     {
-        private readonly string _frameworkName;  // A target framework moniker
+        private readonly string _frameworkName; // A target framework moniker
         private string? _frameworkDisplayName;
 
         // The frameworkName parameter is intended to be the string form of a FrameworkName instance.

@@ -44,7 +44,9 @@ namespace XmlCoreTest.Common
 
         public static string GetWriteableTestRootPath()
         {
-            return (PlatformDetection.IsiOS || PlatformDetection.IstvOS) ? Path.GetTempPath() : string.Empty;
+            return (PlatformDetection.IsiOS || PlatformDetection.IstvOS)
+                ? Path.GetTempPath()
+                : string.Empty;
         }
 
         public static string GetTestDataPath()
@@ -77,7 +79,8 @@ namespace XmlCoreTest.Common
         {
             StringBuilder resultPath = new StringBuilder();
 
-            int lastPosition = 0, variableStart;
+            int lastPosition = 0,
+                variableStart;
             while (lastPosition < inputPath.Length)
             {
                 variableStart = inputPath.IndexOf('$', lastPosition);
@@ -88,7 +91,9 @@ namespace XmlCoreTest.Common
                 }
                 if (variableStart == inputPath.Length - 1 || inputPath[variableStart + 1] != '(')
                 {
-                    resultPath.Append(inputPath.Substring(lastPosition, variableStart - lastPosition) + '$');
+                    resultPath.Append(
+                        inputPath.Substring(lastPosition, variableStart - lastPosition) + '$'
+                    );
                     lastPosition = variableStart + 1;
                 }
                 else
@@ -99,7 +104,9 @@ namespace XmlCoreTest.Common
                         resultPath.Append(inputPath.Substring(lastPosition));
                         break;
                     }
-                    string variableValue = GetVariableValue(inputPath.Substring(variableStart + 2, variableEnd - variableStart - 2));
+                    string variableValue = GetVariableValue(
+                        inputPath.Substring(variableStart + 2, variableEnd - variableStart - 2)
+                    );
                     if (variableValue != null)
                     {
                         resultPath.Append(variableValue);
@@ -114,6 +121,7 @@ namespace XmlCoreTest.Common
         private static MyDict<string, MemoryStream> s_XmlFileInMemoryCache = null;
 
         private static readonly object s_XmlFileMemoryCacheLock = new object();
+
         static void initXmlFileCacheIfNotYet()
         {
             lock (s_XmlFileMemoryCacheLock)

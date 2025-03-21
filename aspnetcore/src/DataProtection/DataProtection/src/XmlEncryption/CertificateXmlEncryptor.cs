@@ -27,7 +27,11 @@ public sealed class CertificateXmlEncryptor : IInternalCertificateXmlEncryptor, 
     /// <see cref="ICertificateResolver"/> that can be used to resolve the certificate, and
     /// an <see cref="IServiceProvider"/>.
     /// </summary>
-    public CertificateXmlEncryptor(string thumbprint, ICertificateResolver certificateResolver, ILoggerFactory loggerFactory)
+    public CertificateXmlEncryptor(
+        string thumbprint,
+        ICertificateResolver certificateResolver,
+        ILoggerFactory loggerFactory
+    )
         : this(loggerFactory, encryptor: null)
     {
         ArgumentNullThrowHelper.ThrowIfNull(thumbprint);
@@ -48,7 +52,10 @@ public sealed class CertificateXmlEncryptor : IInternalCertificateXmlEncryptor, 
         _certFactory = () => certificate;
     }
 
-    internal CertificateXmlEncryptor(ILoggerFactory loggerFactory, IInternalCertificateXmlEncryptor? encryptor)
+    internal CertificateXmlEncryptor(
+        ILoggerFactory loggerFactory,
+        IInternalCertificateXmlEncryptor? encryptor
+    )
     {
         _encryptor = encryptor ?? this;
         _logger = loggerFactory.CreateLogger<CertificateXmlEncryptor>();
@@ -76,10 +83,16 @@ public sealed class CertificateXmlEncryptor : IInternalCertificateXmlEncryptor, 
         return new EncryptedXmlInfo(encryptedElement, typeof(EncryptedXmlDecryptor));
     }
 
-    [UnconditionalSuppressMessage("AOT", "IL2026:RequiresUnreferencedCode",
-        Justification = "This usage of EncryptedXml to encrypt an XElement using a X509Certificate2 does not use reflection.")]
-    [UnconditionalSuppressMessage("AOT", "IL3050:RequiresDynamicCode",
-        Justification = "This usage of EncryptedXml to encrypt an XElement using a X509Certificate2 does not use XSLTs.")]
+    [UnconditionalSuppressMessage(
+        "AOT",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "This usage of EncryptedXml to encrypt an XElement using a X509Certificate2 does not use reflection."
+    )]
+    [UnconditionalSuppressMessage(
+        "AOT",
+        "IL3050:RequiresDynamicCode",
+        Justification = "This usage of EncryptedXml to encrypt an XElement using a X509Certificate2 does not use XSLTs."
+    )]
     private XElement EncryptElement(XElement plaintextElement)
     {
         // EncryptedXml works with XmlDocument, not XLinq. When we perform the conversion
@@ -95,10 +108,15 @@ public sealed class CertificateXmlEncryptor : IInternalCertificateXmlEncryptor, 
         EncryptedXml.ReplaceElement(elementToEncrypt, encryptedData, content: false);
 
         // Strip the <root /> element back off and convert the XmlDocument to an XElement.
-        return XElement.Load(xmlDocument.DocumentElement.FirstChild!.CreateNavigator()!.ReadSubtree());
+        return XElement.Load(
+            xmlDocument.DocumentElement.FirstChild!.CreateNavigator()!.ReadSubtree()
+        );
     }
 
-    private Func<X509Certificate2> CreateCertFactory(string thumbprint, ICertificateResolver resolver)
+    private Func<X509Certificate2> CreateCertFactory(
+        string thumbprint,
+        ICertificateResolver resolver
+    )
     {
         return () =>
         {
@@ -120,10 +138,13 @@ public sealed class CertificateXmlEncryptor : IInternalCertificateXmlEncryptor, 
         };
     }
 
-    EncryptedData IInternalCertificateXmlEncryptor.PerformEncryption(EncryptedXml encryptedXml, XmlElement elementToEncrypt)
+    EncryptedData IInternalCertificateXmlEncryptor.PerformEncryption(
+        EncryptedXml encryptedXml,
+        XmlElement elementToEncrypt
+    )
     {
-        var cert = _certFactory()
-            ?? CryptoUtil.Fail<X509Certificate2>("Cert factory returned null.");
+        var cert =
+            _certFactory() ?? CryptoUtil.Fail<X509Certificate2>("Cert factory returned null.");
 
         _logger.EncryptingToX509CertificateWithThumbprint(cert.Thumbprint);
 
@@ -133,7 +154,10 @@ public sealed class CertificateXmlEncryptor : IInternalCertificateXmlEncryptor, 
         }
         catch (Exception ex)
         {
-            _logger.AnErrorOccurredWhileEncryptingToX509CertificateWithThumbprint(cert.Thumbprint, ex);
+            _logger.AnErrorOccurredWhileEncryptingToX509CertificateWithThumbprint(
+                cert.Thumbprint,
+                ex
+            );
             throw;
         }
     }

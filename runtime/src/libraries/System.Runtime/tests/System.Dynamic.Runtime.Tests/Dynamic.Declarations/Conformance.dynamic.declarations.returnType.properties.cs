@@ -37,8 +37,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.properties.property002.property002
 {
     public class Test
@@ -72,8 +70,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.properties.property003.property003
 {
     public class Test
@@ -106,8 +102,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.properties.property004.property004
 {
@@ -143,8 +137,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.properties.property005.property005
 {
     public class Test
@@ -154,10 +146,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
             public int x;
             public dynamic Foo
             {
-                set
-                {
-                    x = (int)value;
-                }
+                set { x = (int)value; }
             }
         }
 
@@ -179,8 +168,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.properties.property006.property006
 {
     public class Test
@@ -190,15 +177,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
             public static float f;
             public static dynamic Foo
             {
-                get
-                {
-                    return f;
-                }
-
-                set
-                {
-                    f = (float)value;
-                }
+                get { return f; }
+                set { f = (float)value; }
             }
         }
 
@@ -223,8 +203,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.properties.property007.property007
 {
     public class Test
@@ -234,15 +212,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
             public decimal dec;
             public dynamic Foo
             {
-                get
-                {
-                    return dec;
-                }
-
-                set
-                {
-                    dec = value;
-                }
+                get { return dec; }
+                set { dec = value; }
             }
         }
 
@@ -268,8 +239,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.properties.property008.property008
 {
     public class Test
@@ -279,15 +248,8 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
             public static string s;
             public static dynamic Foo
             {
-                get
-                {
-                    return s;
-                }
-
-                set
-                {
-                    s = value;
-                }
+                get { return s; }
+                set { s = value; }
             }
         }
 

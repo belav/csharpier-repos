@@ -18,6 +18,7 @@ using Xunit;
 public class Runtime_61045
 {
     public static byte[] s_1;
+
     [Fact]
     public static int TestEntryPoint()
     {

@@ -6,7 +6,12 @@ using System.Collections.Immutable;
 
 namespace Microsoft.CodeAnalysis.SignatureHelp
 {
-    internal readonly struct SignatureHelpState(int argumentIndex, int argumentCount, string? argumentName, ImmutableArray<string> argumentNames)
+    internal readonly struct SignatureHelpState(
+        int argumentIndex,
+        int argumentCount,
+        string? argumentName,
+        ImmutableArray<string> argumentNames
+    )
     {
         public readonly int ArgumentIndex = argumentIndex;
         public readonly int ArgumentCount = argumentCount;

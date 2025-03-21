@@ -13,33 +13,40 @@ public abstract class ComplianceTestBase
     [ConditionalFact]
     public virtual void All_test_bases_must_be_implemented()
     {
-        var concreteTests = TargetAssembly.GetTypes().Where(
-                c => c.BaseType != typeof(object)
-                    && !c.IsAbstract
-                    && (c.IsPublic || c.IsNestedPublic))
+        var concreteTests = TargetAssembly
+            .GetTypes()
+            .Where(c =>
+                c.BaseType != typeof(object) && !c.IsAbstract && (c.IsPublic || c.IsNestedPublic)
+            )
             .ToList();
-        var nonImplementedBases
-            = (from baseType in GetBaseTestClasses()
-               where !IgnoredTestBases.Contains(baseType)
-                   && baseType != typeof(NonSharedModelTestBase)
-                   && !concreteTests.Any(c => Implements(c, baseType))
-               select baseType.FullName)
-            .ToList();
+        var nonImplementedBases = (
+            from baseType in GetBaseTestClasses()
+            where
+                !IgnoredTestBases.Contains(baseType)
+                && baseType != typeof(NonSharedModelTestBase)
+                && !concreteTests.Any(c => Implements(c, baseType))
+            select baseType.FullName
+        ).ToList();
 
         Assert.False(
             nonImplementedBases.Count > 0,
-            "\r\n-- Missing derived classes for --\r\n" + string.Join(Environment.NewLine, nonImplementedBases));
+            "\r\n-- Missing derived classes for --\r\n"
+                + string.Join(Environment.NewLine, nonImplementedBases)
+        );
     }
 
-    protected virtual IEnumerable<Type> GetBaseTestClasses()
-        => typeof(ComplianceTestBase).Assembly.ExportedTypes.Where(t => t.Name.Contains("TestBase"));
+    protected virtual IEnumerable<Type> GetBaseTestClasses() =>
+        typeof(ComplianceTestBase).Assembly.ExportedTypes.Where(t => t.Name.Contains("TestBase"));
 
-    private static bool Implements(Type type, Type interfaceOrBaseType)
-        => (type.IsPublic || type.IsNestedPublic) && interfaceOrBaseType.IsGenericTypeDefinition
+    private static bool Implements(Type type, Type interfaceOrBaseType) =>
+        (type.IsPublic || type.IsNestedPublic) && interfaceOrBaseType.IsGenericTypeDefinition
             ? GetGenericTypeImplementations(type, interfaceOrBaseType).Any()
             : interfaceOrBaseType.IsAssignableFrom(type);
 
-    private static IEnumerable<Type> GetGenericTypeImplementations(Type type, Type interfaceOrBaseType)
+    private static IEnumerable<Type> GetGenericTypeImplementations(
+        Type type,
+        Type interfaceOrBaseType
+    )
     {
         var typeInfo = type.GetTypeInfo();
         if (!typeInfo.IsGenericTypeDefinition)
@@ -49,15 +56,16 @@ public abstract class ComplianceTestBase
                 : GetBaseTypes(type);
             foreach (var baseType in baseTypes)
             {
-                if (baseType.IsGenericType
-                    && baseType.GetGenericTypeDefinition() == interfaceOrBaseType)
+                if (
+                    baseType.IsGenericType
+                    && baseType.GetGenericTypeDefinition() == interfaceOrBaseType
+                )
                 {
                     yield return baseType;
                 }
             }
 
-            if (type.IsGenericType
-                && type.GetGenericTypeDefinition() == interfaceOrBaseType)
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == interfaceOrBaseType)
             {
                 yield return type;
             }

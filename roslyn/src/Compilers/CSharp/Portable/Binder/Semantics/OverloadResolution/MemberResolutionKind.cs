@@ -71,7 +71,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         BadNonTrailingNamedArgument,
 
         /// <summary>
-        /// The candidate member was rejected because it is not supported by the language or cannot be used 
+        /// The candidate member was rejected because it is not supported by the language or cannot be used
         /// given the current set of assembly references.
         /// </summary>
         UseSiteError,

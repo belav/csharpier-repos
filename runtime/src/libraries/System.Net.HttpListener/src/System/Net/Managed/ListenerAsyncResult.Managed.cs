@@ -67,7 +67,10 @@ namespace System.Net
             }
             _exception = exc;
             if (_inGet && (exc is ObjectDisposedException))
-                _exception = new HttpListenerException((int)HttpStatusCode.InternalServerError, SR.net_listener_close);
+                _exception = new HttpListenerException(
+                    (int)HttpStatusCode.InternalServerError,
+                    SR.net_listener_close
+                );
             lock (_locker)
             {
                 _completed = true;
@@ -79,6 +82,7 @@ namespace System.Net
         }
 
         private static readonly WaitCallback s_invokeCB = InvokeCallback;
+
         private static void InvokeCallback(object? o)
         {
             ListenerAsyncResult ares = (ListenerAsyncResult)o!;
@@ -91,9 +95,7 @@ namespace System.Net
             {
                 ares._cb!(ares);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         internal void Complete(HttpListenerContext context)
@@ -115,7 +117,9 @@ namespace System.Net
                 bool authFailure = false;
                 try
                 {
-                    context.AuthenticationSchemes = context._listener!.SelectAuthenticationScheme(context);
+                    context.AuthenticationSchemes = context._listener!.SelectAuthenticationScheme(
+                        context
+                    );
                 }
                 catch (OutOfMemoryException oom)
                 {
@@ -128,9 +132,13 @@ namespace System.Net
                     context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 }
 
-                if (context.AuthenticationSchemes != AuthenticationSchemes.None &&
-                    (context.AuthenticationSchemes & AuthenticationSchemes.Anonymous) != AuthenticationSchemes.Anonymous &&
-                    (context.AuthenticationSchemes & AuthenticationSchemes.Basic) != AuthenticationSchemes.Basic)
+                if (
+                    context.AuthenticationSchemes != AuthenticationSchemes.None
+                    && (context.AuthenticationSchemes & AuthenticationSchemes.Anonymous)
+                        != AuthenticationSchemes.Anonymous
+                    && (context.AuthenticationSchemes & AuthenticationSchemes.Basic)
+                        != AuthenticationSchemes.Basic
+                )
                 {
                     authFailure = true;
                     context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
@@ -139,16 +147,27 @@ namespace System.Net
                 {
                     HttpStatusCode errorCode = HttpStatusCode.Unauthorized;
                     string? authHeader = context.Request.Headers["Authorization"];
-                    if (authHeader == null ||
-                        !HttpListenerContext.IsBasicHeader(authHeader) ||
-                        authHeader.Length < AuthenticationTypes.Basic.Length + 2 ||
-                        !HttpListenerContext.TryParseBasicAuth(authHeader.Substring(AuthenticationTypes.Basic.Length + 1), out errorCode, out _, out _))
+                    if (
+                        authHeader == null
+                        || !HttpListenerContext.IsBasicHeader(authHeader)
+                        || authHeader.Length < AuthenticationTypes.Basic.Length + 2
+                        || !HttpListenerContext.TryParseBasicAuth(
+                            authHeader.Substring(AuthenticationTypes.Basic.Length + 1),
+                            out errorCode,
+                            out _,
+                            out _
+                        )
+                    )
                     {
                         authFailure = true;
                         context.Response.StatusCode = (int)errorCode;
                         if (errorCode == HttpStatusCode.Unauthorized)
                         {
-                            context.Response.Headers["WWW-Authenticate"] = context.AuthenticationSchemes + " realm=\"" + context._listener!.Realm + "\"";
+                            context.Response.Headers["WWW-Authenticate"] =
+                                context.AuthenticationSchemes
+                                + " realm=\""
+                                + context._listener!.Realm
+                                + "\"";
                         }
                     }
                 }
@@ -167,7 +186,12 @@ namespace System.Net
                     for (int i = 0; next._forward != null; i++)
                     {
                         if (i > 20)
-                            Complete(new HttpListenerException((int)HttpStatusCode.Unauthorized, SR.net_listener_auth_errors));
+                            Complete(
+                                new HttpListenerException(
+                                    (int)HttpStatusCode.Unauthorized,
+                                    SR.net_listener_auth_errors
+                                )
+                            );
                         next = next._forward;
                     }
                 }

@@ -24,7 +24,11 @@ namespace Microsoft.DiaSymReader
         private readonly string _symWriterModuleName;
         private bool _disposed;
 
-        internal SymUnmanagedWriterImpl(ComMemoryStream pdbStream, ISymUnmanagedWriter5 symWriter, string symWriterModuleName)
+        internal SymUnmanagedWriterImpl(
+            ComMemoryStream pdbStream,
+            ISymUnmanagedWriter5 symWriter,
+            string symWriterModuleName
+        )
         {
             Debug.Assert(pdbStream != null);
             Debug.Assert(symWriter != null);
@@ -36,14 +40,21 @@ namespace Microsoft.DiaSymReader
             _symWriterModuleName = symWriterModuleName;
         }
 
-        private ISymUnmanagedWriter5 GetSymWriter()
-            => _symWriter ?? throw (_disposed ? new ObjectDisposedException(nameof(SymUnmanagedWriterImpl)) : new InvalidOperationException());
+        private ISymUnmanagedWriter5 GetSymWriter() =>
+            _symWriter
+            ?? throw (
+                _disposed
+                    ? new ObjectDisposedException(nameof(SymUnmanagedWriterImpl))
+                    : new InvalidOperationException()
+            );
 
-        private ISymUnmanagedWriter8 GetSymWriter8()
-            => GetSymWriter() is ISymUnmanagedWriter8 symWriter8 ? symWriter8 : throw PdbWritingException(new NotSupportedException());
+        private ISymUnmanagedWriter8 GetSymWriter8() =>
+            GetSymWriter() is ISymUnmanagedWriter8 symWriter8
+                ? symWriter8
+                : throw PdbWritingException(new NotSupportedException());
 
-        private Exception PdbWritingException(Exception inner)
-            => new SymUnmanagedWriterException(inner, _symWriterModuleName);
+        private Exception PdbWritingException(Exception inner) =>
+            new SymUnmanagedWriterException(inner, _symWriterModuleName);
 
         /// <summary>
         /// Writes the content to the given stream. The writer is disposed and can't be used for further writing.
@@ -112,10 +123,10 @@ namespace Microsoft.DiaSymReader
             }
             finally
             {
-                // We leave releasing SymWriter and document writer COM objects the to GC -- 
+                // We leave releasing SymWriter and document writer COM objects the to GC --
                 // we write to an in-memory stream hence no files are being locked.
                 // We need to keep these alive until the symWriter is closed because the
-                // symWriter seems to have a un-ref-counted reference to them.  
+                // symWriter seems to have a un-ref-counted reference to them.
                 _documentWriters.Clear();
             }
         }
@@ -131,7 +142,6 @@ namespace Microsoft.DiaSymReader
         public override int DocumentTableCapacity
         {
             get => _documentWriters.Capacity;
-
             set
             {
                 if (value > _documentWriters.Count)
@@ -141,7 +151,15 @@ namespace Microsoft.DiaSymReader
             }
         }
 
-        public override int DefineDocument(string name, Guid language, Guid vendor, Guid type, Guid algorithmId, ReadOnlySpan<byte> checksum, ReadOnlySpan<byte> source)
+        public override int DefineDocument(
+            string name,
+            Guid language,
+            Guid vendor,
+            Guid type,
+            Guid algorithmId,
+            ReadOnlySpan<byte> checksum,
+            ReadOnlySpan<byte> source
+        )
         {
             if (name == null)
             {
@@ -203,20 +221,39 @@ namespace Microsoft.DiaSymReader
             return index;
         }
 
-        public override void DefineSequencePoints(int documentIndex, int count, int[] offsets, int[] startLines, int[] startColumns, int[] endLines, int[] endColumns)
+        public override void DefineSequencePoints(
+            int documentIndex,
+            int count,
+            int[] offsets,
+            int[] startLines,
+            int[] startColumns,
+            int[] endLines,
+            int[] endColumns
+        )
         {
             if (documentIndex < 0 || documentIndex >= _documentWriters.Count)
             {
                 throw new ArgumentOutOfRangeException(nameof(documentIndex));
             }
 
-            if (offsets == null) throw new ArgumentNullException(nameof(offsets));
-            if (startLines == null) throw new ArgumentNullException(nameof(startLines));
-            if (startColumns == null) throw new ArgumentNullException(nameof(startColumns));
-            if (endLines == null) throw new ArgumentNullException(nameof(endLines));
-            if (endColumns == null) throw new ArgumentNullException(nameof(endColumns));
+            if (offsets == null)
+                throw new ArgumentNullException(nameof(offsets));
+            if (startLines == null)
+                throw new ArgumentNullException(nameof(startLines));
+            if (startColumns == null)
+                throw new ArgumentNullException(nameof(startColumns));
+            if (endLines == null)
+                throw new ArgumentNullException(nameof(endLines));
+            if (endColumns == null)
+                throw new ArgumentNullException(nameof(endColumns));
 
-            if (count < 0 || count > startLines.Length || count > startColumns.Length || count > endLines.Length || count > endColumns.Length)
+            if (
+                count < 0
+                || count > startLines.Length
+                || count > startColumns.Length
+                || count > endLines.Length
+                || count > endColumns.Length
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(count));
             }
@@ -232,7 +269,8 @@ namespace Microsoft.DiaSymReader
                     startLines,
                     startColumns,
                     endLines,
-                    endColumns);
+                    endColumns
+                );
             }
             catch (Exception ex)
             {
@@ -258,7 +296,6 @@ namespace Microsoft.DiaSymReader
         {
             var symWriter = GetSymWriter();
             try
-
             {
                 symWriter.CloseMethod();
             }
@@ -296,14 +333,29 @@ namespace Microsoft.DiaSymReader
             }
         }
 
-        public override void DefineLocalVariable(int index, string name, int attributes, int localSignatureToken)
+        public override void DefineLocalVariable(
+            int index,
+            string name,
+            int attributes,
+            int localSignatureToken
+        )
         {
             var symWriter = GetSymWriter();
 
             try
             {
                 const uint ADDR_IL_OFFSET = 1;
-                symWriter.DefineLocalVariable2(name, attributes, localSignatureToken, ADDR_IL_OFFSET, index, 0, 0, 0, 0);
+                symWriter.DefineLocalVariable2(
+                    name,
+                    attributes,
+                    localSignatureToken,
+                    ADDR_IL_OFFSET,
+                    index,
+                    0,
+                    0,
+                    0,
+                    0
+                );
             }
             catch (Exception ex)
             {
@@ -311,7 +363,11 @@ namespace Microsoft.DiaSymReader
             }
         }
 
-        public override bool DefineLocalConstant(string name, object value, int constantSignatureToken)
+        public override bool DefineLocalConstant(
+            string name,
+            object value,
+            int constantSignatureToken
+        )
         {
             var symWriter = GetSymWriter();
 
@@ -329,7 +385,11 @@ namespace Microsoft.DiaSymReader
                     // http://blogs.msdn.com/b/ericlippert/archive/2003/09/16/eric-s-complete-guide-to-vt-date.aspx
                     try
                     {
-                        symWriter.DefineConstant2(name, new VariantStructure(dateTime), constantSignatureToken);
+                        symWriter.DefineConstant2(
+                            name,
+                            new VariantStructure(dateTime),
+                            constantSignatureToken
+                        );
                     }
                     catch (Exception ex)
                     {
@@ -344,7 +404,12 @@ namespace Microsoft.DiaSymReader
                         // ISymUnmanagedWriter2.DefineConstant2 throws an ArgumentException
                         // if you pass in null - Dev10 appears to use 0 instead.
                         // (See EMITTER::VariantFromConstVal)
-                        DefineLocalConstantImpl(symWriter, name, value ?? s_zeroInt32, constantSignatureToken);
+                        DefineLocalConstantImpl(
+                            symWriter,
+                            name,
+                            value ?? s_zeroInt32,
+                            constantSignatureToken
+                        );
                     }
                     catch (Exception ex)
                     {
@@ -355,7 +420,12 @@ namespace Microsoft.DiaSymReader
             }
         }
 
-        private unsafe void DefineLocalConstantImpl(ISymUnmanagedWriter5 symWriter, string name, object value, int constantSignatureToken)
+        private unsafe void DefineLocalConstantImpl(
+            ISymUnmanagedWriter5 symWriter,
+            string name,
+            object value,
+            int constantSignatureToken
+        )
         {
 #if NET6_0_OR_GREATER
             Debug.Assert(OperatingSystem.IsWindows());
@@ -367,7 +437,12 @@ namespace Microsoft.DiaSymReader
             symWriter.DefineConstant2(name, variant, constantSignatureToken);
         }
 
-        private bool DefineLocalStringConstant(ISymUnmanagedWriter5 symWriter, string name, string value, int constantSignatureToken)
+        private bool DefineLocalStringConstant(
+            ISymUnmanagedWriter5 symWriter,
+            string name,
+            string value,
+            int constantSignatureToken
+        )
         {
             Debug.Assert(value != null);
 
@@ -405,7 +480,7 @@ namespace Microsoft.DiaSymReader
             catch (ArgumentException)
             {
                 // writing the constant value into the PDB failed because the string value was most probably too long.
-                // We will report a warning for this issue and continue writing the PDB. 
+                // We will report a warning for this issue and continue writing the PDB.
                 // The effect on the debug experience is that the symbol for the constant will not be shown in the local
                 // window of the debugger. Nor will the user be able to bind to it in expressions in the EE.
 
@@ -476,17 +551,22 @@ namespace Microsoft.DiaSymReader
             int kickoffMethodToken,
             int catchHandlerOffset,
             ReadOnlySpan<int> yieldOffsets,
-            ReadOnlySpan<int> resumeOffsets)
+            ReadOnlySpan<int> resumeOffsets
+        )
         {
-            if (yieldOffsets == null) throw new ArgumentNullException(nameof(yieldOffsets));
-            if (resumeOffsets == null) throw new ArgumentNullException(nameof(resumeOffsets));
+            if (yieldOffsets == null)
+                throw new ArgumentNullException(nameof(yieldOffsets));
+            if (resumeOffsets == null)
+                throw new ArgumentNullException(nameof(resumeOffsets));
 
             if (yieldOffsets.Length != resumeOffsets.Length)
             {
                 throw new ArgumentOutOfRangeException(nameof(yieldOffsets));
             }
 
-            if (GetSymWriter() is ISymUnmanagedAsyncMethodPropertiesWriter asyncMethodPropertyWriter)
+            if (
+                GetSymWriter() is ISymUnmanagedAsyncMethodPropertiesWriter asyncMethodPropertyWriter
+            )
             {
                 int count = yieldOffsets.Length;
 
@@ -506,7 +586,12 @@ namespace Microsoft.DiaSymReader
                             fixed (int* resumePtr = resumeOffsets)
                             fixed (int* methodsPtr = methods)
                             {
-                                asyncMethodPropertyWriter.DefineAsyncStepInfo(count, yieldPtr, resumePtr, methodsPtr);
+                                asyncMethodPropertyWriter.DefineAsyncStepInfo(
+                                    count,
+                                    yieldPtr,
+                                    resumePtr,
+                                    methodsPtr
+                                );
                             }
                         }
                     }
@@ -656,7 +741,14 @@ namespace Microsoft.DiaSymReader
             }
         }
 
-        public override void MapTokenToSourceSpan(int token, int documentIndex, int startLine, int startColumn, int endLine, int endColumn)
+        public override void MapTokenToSourceSpan(
+            int token,
+            int documentIndex,
+            int startLine,
+            int startColumn,
+            int endLine,
+            int endColumn
+        )
         {
             if (documentIndex < 0 || documentIndex >= _documentWriters.Count)
             {
@@ -673,7 +765,8 @@ namespace Microsoft.DiaSymReader
                     startLine,
                     startColumn,
                     endLine,
-                    endColumn);
+                    endColumn
+                );
             }
             catch (Exception ex)
             {
@@ -701,9 +794,9 @@ namespace Microsoft.DiaSymReader
 
             // See symwrite.cpp - the data byte[] doesn't depend on the content of metadata tables or IL.
             // The writer only sets two values of the ImageDebugDirectory struct.
-            // 
+            //
             //   IMAGE_DEBUG_DIRECTORY *pIDD
-            // 
+            //
             //   if ( pIDD == NULL ) return E_INVALIDARG;
             //   memset( pIDD, 0, sizeof( *pIDD ) );
             //   pIDD->Type = IMAGE_DEBUG_TYPE_CODEVIEW;
@@ -735,7 +828,7 @@ namespace Microsoft.DiaSymReader
             }
 
             // Data has the following structure:
-            // struct RSDSI                     
+            // struct RSDSI
             // {
             //     DWORD dwSig;                 // "RSDS"
             //     GUID guidSig;                // GUID
@@ -748,12 +841,18 @@ namespace Microsoft.DiaSymReader
             guid = new Guid(guidBytes);
 
             // Retrieve the timestamp the PDB writer generates when creating a new PDB stream.
-            // Note that ImageDebugDirectory.TimeDateStamp is not set by GetDebugInfo, 
+            // Note that ImageDebugDirectory.TimeDateStamp is not set by GetDebugInfo,
             // we need to go through IPdbWriter interface to get it.
             ((IPdbWriter)symWriter).GetSignatureAge(out stamp, out age);
         }
 
-        public override void AddCompilerInfo(ushort major, ushort minor, ushort build, ushort revision, string name)
+        public override void AddCompilerInfo(
+            ushort major,
+            ushort minor,
+            ushort build,
+            ushort revision,
+            string name
+        )
         {
             if (name == null)
             {

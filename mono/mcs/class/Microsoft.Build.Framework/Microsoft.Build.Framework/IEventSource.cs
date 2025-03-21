@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -25,25 +25,23 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 namespace Microsoft.Build.Framework
 {
-	public interface IEventSource
-	{
-		event AnyEventHandler AnyEventRaised;
-		event BuildFinishedEventHandler BuildFinished;
-		event BuildStartedEventHandler BuildStarted;
-		event CustomBuildEventHandler CustomEventRaised;
-		event BuildErrorEventHandler ErrorRaised;
-		event BuildMessageEventHandler MessageRaised;
-		event ProjectFinishedEventHandler ProjectFinished;
-		event ProjectStartedEventHandler ProjectStarted;
-		event BuildStatusEventHandler StatusEventRaised;
-		event TargetFinishedEventHandler TargetFinished;
-		event TargetStartedEventHandler TargetStarted;
-		event TaskFinishedEventHandler TaskFinished;
-		event TaskStartedEventHandler TaskStarted;
-		event BuildWarningEventHandler WarningRaised;
-	}
+    public interface IEventSource
+    {
+        event AnyEventHandler AnyEventRaised;
+        event BuildFinishedEventHandler BuildFinished;
+        event BuildStartedEventHandler BuildStarted;
+        event CustomBuildEventHandler CustomEventRaised;
+        event BuildErrorEventHandler ErrorRaised;
+        event BuildMessageEventHandler MessageRaised;
+        event ProjectFinishedEventHandler ProjectFinished;
+        event ProjectStartedEventHandler ProjectStarted;
+        event BuildStatusEventHandler StatusEventRaised;
+        event TargetFinishedEventHandler TargetFinished;
+        event TargetStartedEventHandler TargetStarted;
+        event TaskFinishedEventHandler TaskFinished;
+        event TaskStartedEventHandler TaskStarted;
+        event BuildWarningEventHandler WarningRaised;
+    }
 }
-

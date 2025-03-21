@@ -25,7 +25,10 @@ namespace System.Runtime
         ValueDictionaryView writeOnlyView;
 
         // Used for the save pipeline.
-        public PersistencePipeline(IEnumerable<IPersistencePipelineModule> modules, Dictionary<XName, InstanceValue> initialValues)
+        public PersistencePipeline(
+            IEnumerable<IPersistencePipelineModule> modules,
+            Dictionary<XName, InstanceValue> initialValues
+        )
         {
             Fx.Assert(modules != null, "Null modules collection provided to persistence pipeline.");
 
@@ -48,17 +51,15 @@ namespace System.Runtime
 
         public ReadOnlyDictionaryInternal<XName, InstanceValue> Values
         {
-            get
-            {
-                return this.readOnlyView;
-            }
+            get { return this.readOnlyView; }
         }
 
         public bool IsSaveTransactionRequired
         {
             get
             {
-                return this.modules.FirstOrDefault(value => value.IsSaveTransactionRequired) != null;
+                return this.modules.FirstOrDefault(value => value.IsSaveTransactionRequired)
+                    != null;
             }
         }
 
@@ -66,13 +67,17 @@ namespace System.Runtime
         {
             get
             {
-                return this.modules.FirstOrDefault(value => value.IsLoadTransactionRequired) != null;
+                return this.modules.FirstOrDefault(value => value.IsLoadTransactionRequired)
+                    != null;
             }
         }
 
         public void Collect()
         {
-            Fx.AssertAndThrow(this.expectedStage == Stage.Collect, "Collect called at the wrong time.");
+            Fx.AssertAndThrow(
+                this.expectedStage == Stage.Collect,
+                "Collect called at the wrong time."
+            );
             this.expectedStage = Stage.None;
 
             foreach (IPersistencePipelineModule module in modules)
@@ -91,7 +96,12 @@ namespace System.Runtime
                         }
                         catch (ArgumentException exception)
                         {
-                            throw Fx.Exception.AsError(new InvalidOperationException(SRCore.NameCollisionOnCollect(value.Key, module.GetType().Name), exception));
+                            throw Fx.Exception.AsError(
+                                new InvalidOperationException(
+                                    SRCore.NameCollisionOnCollect(value.Key, module.GetType().Name),
+                                    exception
+                                )
+                            );
                         }
                     }
                 }
@@ -101,11 +111,22 @@ namespace System.Runtime
                     {
                         try
                         {
-                            this.values.Add(value.Key, new InstanceValue(value.Value, InstanceValueOptions.Optional | InstanceValueOptions.WriteOnly));
+                            this.values.Add(
+                                value.Key,
+                                new InstanceValue(
+                                    value.Value,
+                                    InstanceValueOptions.Optional | InstanceValueOptions.WriteOnly
+                                )
+                            );
                         }
                         catch (ArgumentException exception)
                         {
-                            throw Fx.Exception.AsError(new InvalidOperationException(SRCore.NameCollisionOnCollect(value.Key, module.GetType().Name), exception));
+                            throw Fx.Exception.AsError(
+                                new InvalidOperationException(
+                                    SRCore.NameCollisionOnCollect(value.Key, module.GetType().Name),
+                                    exception
+                                )
+                            );
                         }
                     }
                 }
@@ -119,34 +140,65 @@ namespace System.Runtime
             Fx.AssertAndThrow(this.expectedStage == Stage.Map, "Map called at the wrong time.");
             this.expectedStage = Stage.None;
 
-            List<Tuple<IPersistencePipelineModule, IDictionary<XName, object>>> pendingValues = null;
+            List<Tuple<IPersistencePipelineModule, IDictionary<XName, object>>> pendingValues =
+                null;
 
             foreach (IPersistencePipelineModule module in modules)
             {
-                IDictionary<XName, object> mappedValues = module.MapValues(this.readWriteView, this.writeOnlyView);
+                IDictionary<XName, object> mappedValues = module.MapValues(
+                    this.readWriteView,
+                    this.writeOnlyView
+                );
                 if (mappedValues != null)
                 {
                     if (pendingValues == null)
                     {
-                        pendingValues = new List<Tuple<IPersistencePipelineModule, IDictionary<XName, object>>>();
+                        pendingValues =
+                            new List<
+                                Tuple<IPersistencePipelineModule, IDictionary<XName, object>>
+                            >();
                     }
-                    pendingValues.Add(new Tuple<IPersistencePipelineModule, IDictionary<XName, object>>(module, mappedValues));
+                    pendingValues.Add(
+                        new Tuple<IPersistencePipelineModule, IDictionary<XName, object>>(
+                            module,
+                            mappedValues
+                        )
+                    );
                 }
             }
 
             if (pendingValues != null)
             {
-                foreach (Tuple<IPersistencePipelineModule, IDictionary<XName, object>> writeOnlyValues in pendingValues)
+                foreach (
+                    Tuple<
+                        IPersistencePipelineModule,
+                        IDictionary<XName, object>
+                    > writeOnlyValues in pendingValues
+                )
                 {
                     foreach (KeyValuePair<XName, object> value in writeOnlyValues.Item2)
                     {
                         try
                         {
-                            this.values.Add(value.Key, new InstanceValue(value.Value, InstanceValueOptions.Optional | InstanceValueOptions.WriteOnly));
+                            this.values.Add(
+                                value.Key,
+                                new InstanceValue(
+                                    value.Value,
+                                    InstanceValueOptions.Optional | InstanceValueOptions.WriteOnly
+                                )
+                            );
                         }
                         catch (ArgumentException exception)
                         {
-                            throw Fx.Exception.AsError(new InvalidOperationException(SRCore.NameCollisionOnMap(value.Key, writeOnlyValues.Item1.GetType().Name), exception));
+                            throw Fx.Exception.AsError(
+                                new InvalidOperationException(
+                                    SRCore.NameCollisionOnMap(
+                                        value.Key,
+                                        writeOnlyValues.Item1.GetType().Name
+                                    ),
+                                    exception
+                                )
+                            );
                         }
                     }
                 }
@@ -172,11 +224,16 @@ namespace System.Runtime
 
         public void SetLoadedValues(IDictionary<XName, InstanceValue> values)
         {
-            Fx.AssertAndThrow(this.expectedStage == Stage.Load, "SetLoadedValues called at the wrong time.");
+            Fx.AssertAndThrow(
+                this.expectedStage == Stage.Load,
+                "SetLoadedValues called at the wrong time."
+            );
             Fx.Assert(values != null, "Null values collection provided to SetLoadedValues.");
 
             this.values = values;
-            this.readOnlyView = values as ReadOnlyDictionaryInternal<XName, InstanceValue> ?? new ReadOnlyDictionaryInternal<XName, InstanceValue>(values);
+            this.readOnlyView =
+                values as ReadOnlyDictionaryInternal<XName, InstanceValue>
+                ?? new ReadOnlyDictionaryInternal<XName, InstanceValue>(values);
             this.readWriteView = new ValueDictionaryView(this.values, false);
         }
 
@@ -197,7 +254,10 @@ namespace System.Runtime
 
         public void Publish()
         {
-            Fx.AssertAndThrow(this.expectedStage == Stage.Publish || this.expectedStage == Stage.Load, "Publish called at the wrong time.");
+            Fx.AssertAndThrow(
+                this.expectedStage == Stage.Publish || this.expectedStage == Stage.Load,
+                "Publish called at the wrong time."
+            );
             this.expectedStage = Stage.None;
 
             foreach (IPersistencePipelineModule module in modules)
@@ -220,7 +280,12 @@ namespace System.Runtime
                     {
                         throw;
                     }
-                    throw Fx.Exception.AsError(new CallbackException(SRCore.PersistencePipelineAbortThrew(module.GetType().Name), exception));
+                    throw Fx.Exception.AsError(
+                        new CallbackException(
+                            SRCore.PersistencePipelineAbortThrew(module.GetType().Name),
+                            exception
+                        )
+                    );
                 }
             }
         }
@@ -255,7 +320,10 @@ namespace System.Runtime
                 {
                     if (this.keys == null)
                     {
-                        this.keys = new List<XName>(this.basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly).Select(value => value.Key));
+                        this.keys = new List<XName>(
+                            this.basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly)
+                                .Select(value => value.Key)
+                        );
                     }
                     return this.keys;
                 }
@@ -267,7 +335,10 @@ namespace System.Runtime
                 {
                     if (this.values == null)
                     {
-                        this.values = new List<object>(this.basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly).Select(value => value.Value.Value));
+                        this.values = new List<object>(
+                            this.basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly)
+                                .Select(value => value.Value.Value)
+                        );
                     }
                     return this.values;
                 }
@@ -284,27 +355,17 @@ namespace System.Runtime
                     }
                     throw Fx.Exception.AsError(new KeyNotFoundException());
                 }
-
-                set
-                {
-                    throw Fx.Exception.AsError(CreateReadOnlyException());
-                }
+                set { throw Fx.Exception.AsError(CreateReadOnlyException()); }
             }
 
             public int Count
             {
-                get
-                {
-                    return Keys.Count;
-                }
+                get { return Keys.Count; }
             }
 
             public bool IsReadOnly
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public void Add(XName key, object value)
@@ -326,7 +387,10 @@ namespace System.Runtime
             public bool TryGetValue(XName key, out object value)
             {
                 InstanceValue realValue;
-                if (!this.basis.TryGetValue(key, out realValue) || realValue.IsWriteOnly() != this.writeOnly)
+                if (
+                    !this.basis.TryGetValue(key, out realValue)
+                    || realValue.IsWriteOnly() != this.writeOnly
+                )
                 {
                     value = null;
                     return false;
@@ -371,7 +435,10 @@ namespace System.Runtime
 
             public IEnumerator<KeyValuePair<XName, object>> GetEnumerator()
             {
-                return this.basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly).Select(value => new KeyValuePair<XName, object>(value.Key, value.Value.Value)).GetEnumerator();
+                return this
+                    .basis.Where(value => value.Value.IsWriteOnly() == this.writeOnly)
+                    .Select(value => new KeyValuePair<XName, object>(value.Key, value.Value.Value))
+                    .GetEnumerator();
             }
 
             IEnumerator IEnumerable.GetEnumerator()
@@ -399,12 +466,20 @@ namespace System.Runtime
             int remainingModules;
             Exception exception;
 
-            public IOAsyncResult(PersistencePipeline pipeline, bool isLoad, TimeSpan timeout, AsyncCallback callback, object state)
+            public IOAsyncResult(
+                PersistencePipeline pipeline,
+                bool isLoad,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.pipeline = pipeline;
                 this.isLoad = isLoad;
-                this.pendingModules = this.pipeline.modules.Where(value => value.IsIOParticipant).ToArray();
+                this.pendingModules = this
+                    .pipeline.modules.Where(value => value.IsIOParticipant)
+                    .ToArray();
                 this.remainingModules = this.pendingModules.Length;
 
                 bool completeSelf = false;
@@ -424,11 +499,22 @@ namespace System.Runtime
                         {
                             if (this.isLoad)
                             {
-                                result = module.BeginOnLoad(this.pipeline.readWriteView, timeout, Fx.ThunkCallback(new AsyncCallback(OnIOComplete)), i);
+                                result = module.BeginOnLoad(
+                                    this.pipeline.readWriteView,
+                                    timeout,
+                                    Fx.ThunkCallback(new AsyncCallback(OnIOComplete)),
+                                    i
+                                );
                             }
                             else
                             {
-                                result = module.BeginOnSave(this.pipeline.readWriteView, this.pipeline.writeOnlyView, timeout, Fx.ThunkCallback(new AsyncCallback(OnIOComplete)), i);
+                                result = module.BeginOnSave(
+                                    this.pipeline.readWriteView,
+                                    this.pipeline.writeOnlyView,
+                                    timeout,
+                                    Fx.ThunkCallback(new AsyncCallback(OnIOComplete)),
+                                    i
+                                );
                             }
                         }
                         catch (Exception exception)
@@ -552,7 +638,12 @@ namespace System.Runtime
                             {
                                 throw;
                             }
-                            throw Fx.Exception.AsError(new CallbackException(SRCore.PersistencePipelineAbortThrew(module.GetType().Name), exception));
+                            throw Fx.Exception.AsError(
+                                new CallbackException(
+                                    SRCore.PersistencePipelineAbortThrew(module.GetType().Name),
+                                    exception
+                                )
+                            );
                         }
                     }
                 }

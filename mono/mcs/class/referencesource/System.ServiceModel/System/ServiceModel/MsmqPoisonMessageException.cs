@@ -15,9 +15,16 @@ namespace System.ServiceModel
         long messageLookupId = 0;
 
         public MsmqPoisonMessageException() { }
-        public MsmqPoisonMessageException(string message) : base(message) { }
-        public MsmqPoisonMessageException(string message, Exception innerException) : base(message, innerException) { }
-        public MsmqPoisonMessageException(long messageLookupId) : this(messageLookupId, null) { }
+
+        public MsmqPoisonMessageException(string message)
+            : base(message) { }
+
+        public MsmqPoisonMessageException(string message, Exception innerException)
+            : base(message, innerException) { }
+
+        public MsmqPoisonMessageException(long messageLookupId)
+            : this(messageLookupId, null) { }
+
         public MsmqPoisonMessageException(long messageLookupId, Exception innerException)
             : base(SR.GetString(SR.MsmqPoisonMessage), innerException)
         {
@@ -36,8 +43,10 @@ namespace System.ServiceModel
         }
 
 #pragma warning disable 688 // This is a Level1 assembly: a Level2 [SecurityCrital] on public members are turned into [SecuritySafeCritical] + LinkDemand
-        [Fx.Tag.SecurityNote(Critical = "Overrides the base.GetObjectData which is critical, as well as calling this method.",
-            Safe = "Replicates the LinkDemand.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Overrides the base.GetObjectData which is critical, as well as calling this method.",
+            Safe = "Replicates the LinkDemand."
+        )]
         [SecurityCritical]
         [SecurityPermissionAttribute(SecurityAction.LinkDemand, SerializationFormatter = true)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)

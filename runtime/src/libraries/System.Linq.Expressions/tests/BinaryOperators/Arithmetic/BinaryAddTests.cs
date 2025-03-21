@@ -122,7 +122,18 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckFloatAddTest(bool useInterpreter)
         {
-            float[] array = new float[] { 0, 1, -1, float.MinValue, float.MaxValue, float.Epsilon, float.NegativeInfinity, float.PositiveInfinity, float.NaN };
+            float[] array = new float[]
+            {
+                0,
+                1,
+                -1,
+                float.MinValue,
+                float.MaxValue,
+                float.Epsilon,
+                float.NegativeInfinity,
+                float.PositiveInfinity,
+                float.NaN,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -135,7 +146,18 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckDoubleAddTest(bool useInterpreter)
         {
-            double[] array = new double[] { 0, 1, -1, double.MinValue, double.MaxValue, double.Epsilon, double.NegativeInfinity, double.PositiveInfinity, double.NaN };
+            double[] array = new double[]
+            {
+                0,
+                1,
+                -1,
+                double.MinValue,
+                double.MaxValue,
+                double.Epsilon,
+                double.NegativeInfinity,
+                double.PositiveInfinity,
+                double.NaN,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -148,7 +170,14 @@ namespace System.Linq.Expressions.Tests
         [Theory, ClassData(typeof(CompilationTypes))]
         public static void CheckDecimalAddTest(bool useInterpreter)
         {
-            decimal[] array = new decimal[] { decimal.Zero, decimal.One, decimal.MinusOne, decimal.MinValue, decimal.MaxValue };
+            decimal[] array = new decimal[]
+            {
+                decimal.Zero,
+                decimal.One,
+                decimal.MinusOne,
+                decimal.MinValue,
+                decimal.MaxValue,
+            };
             for (int i = 0; i < array.Length; i++)
             {
                 for (int j = 0; j < array.Length; j++)
@@ -191,12 +220,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortAdd(ushort a, ushort b, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(ushort)),
-                        Expression.Constant(b, typeof(ushort))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(ushort)),
+                    Expression.Constant(b, typeof(ushort))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<ushort> f = e.Compile(useInterpreter);
 
@@ -205,12 +235,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUShortAddOvf(ushort a, ushort b, bool useInterpreter)
         {
-            Expression<Func<ushort>> e =
-                Expression.Lambda<Func<ushort>>(
-                    Expression.AddChecked(
-                        Expression.Constant(a, typeof(ushort)),
-                        Expression.Constant(b, typeof(ushort))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ushort>> e = Expression.Lambda<Func<ushort>>(
+                Expression.AddChecked(
+                    Expression.Constant(a, typeof(ushort)),
+                    Expression.Constant(b, typeof(ushort))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<ushort> f = e.Compile(useInterpreter);
 
@@ -219,17 +250,17 @@ namespace System.Linq.Expressions.Tests
                 Assert.Throws<OverflowException>(() => f());
             else
                 Assert.Equal(expected, f());
-
         }
 
         private static void VerifyShortAdd(short a, short b, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(short)),
-                        Expression.Constant(b, typeof(short))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(short)),
+                    Expression.Constant(b, typeof(short))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<short> f = e.Compile(useInterpreter);
 
@@ -238,12 +269,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyShortAddOvf(short a, short b, bool useInterpreter)
         {
-            Expression<Func<short>> e =
-                Expression.Lambda<Func<short>>(
-                    Expression.AddChecked(
-                        Expression.Constant(a, typeof(short)),
-                        Expression.Constant(b, typeof(short))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<short>> e = Expression.Lambda<Func<short>>(
+                Expression.AddChecked(
+                    Expression.Constant(a, typeof(short)),
+                    Expression.Constant(b, typeof(short))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<short> f = e.Compile(useInterpreter);
 
@@ -256,12 +288,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntAdd(uint a, uint b, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(uint)),
-                        Expression.Constant(b, typeof(uint))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(uint)),
+                    Expression.Constant(b, typeof(uint))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<uint> f = e.Compile(useInterpreter);
 
@@ -270,12 +303,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyUIntAddOvf(uint a, uint b, bool useInterpreter)
         {
-            Expression<Func<uint>> e =
-                Expression.Lambda<Func<uint>>(
-                    Expression.AddChecked(
-                        Expression.Constant(a, typeof(uint)),
-                        Expression.Constant(b, typeof(uint))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<uint>> e = Expression.Lambda<Func<uint>>(
+                Expression.AddChecked(
+                    Expression.Constant(a, typeof(uint)),
+                    Expression.Constant(b, typeof(uint))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<uint> f = e.Compile(useInterpreter);
 
@@ -288,12 +322,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntAdd(int a, int b, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(int)),
-                        Expression.Constant(b, typeof(int))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(int)),
+                    Expression.Constant(b, typeof(int))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<int> f = e.Compile(useInterpreter);
 
@@ -302,12 +337,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyIntAddOvf(int a, int b, bool useInterpreter)
         {
-            Expression<Func<int>> e =
-                Expression.Lambda<Func<int>>(
-                    Expression.AddChecked(
-                        Expression.Constant(a, typeof(int)),
-                        Expression.Constant(b, typeof(int))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<int>> e = Expression.Lambda<Func<int>>(
+                Expression.AddChecked(
+                    Expression.Constant(a, typeof(int)),
+                    Expression.Constant(b, typeof(int))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<int> f = e.Compile(useInterpreter);
 
@@ -320,12 +356,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongAdd(ulong a, ulong b, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(ulong)),
-                        Expression.Constant(b, typeof(ulong))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(ulong)),
+                    Expression.Constant(b, typeof(ulong))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<ulong> f = e.Compile(useInterpreter);
 
@@ -334,12 +371,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyULongAddOvf(ulong a, ulong b, bool useInterpreter)
         {
-            Expression<Func<ulong>> e =
-                Expression.Lambda<Func<ulong>>(
-                    Expression.AddChecked(
-                        Expression.Constant(a, typeof(ulong)),
-                        Expression.Constant(b, typeof(ulong))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                Expression.AddChecked(
+                    Expression.Constant(a, typeof(ulong)),
+                    Expression.Constant(b, typeof(ulong))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<ulong> f = e.Compile(useInterpreter);
 
@@ -359,12 +397,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongAdd(long a, long b, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(long)),
-                        Expression.Constant(b, typeof(long))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(long)),
+                    Expression.Constant(b, typeof(long))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<long> f = e.Compile(useInterpreter);
 
@@ -373,12 +412,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyLongAddOvf(long a, long b, bool useInterpreter)
         {
-            Expression<Func<long>> e =
-                Expression.Lambda<Func<long>>(
-                    Expression.AddChecked(
-                        Expression.Constant(a, typeof(long)),
-                        Expression.Constant(b, typeof(long))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<long>> e = Expression.Lambda<Func<long>>(
+                Expression.AddChecked(
+                    Expression.Constant(a, typeof(long)),
+                    Expression.Constant(b, typeof(long))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<long> f = e.Compile(useInterpreter);
 
@@ -398,12 +438,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyFloatAdd(float a, float b, bool useInterpreter)
         {
-            Expression<Func<float>> e =
-                Expression.Lambda<Func<float>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(float)),
-                        Expression.Constant(b, typeof(float))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<float>> e = Expression.Lambda<Func<float>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(float)),
+                    Expression.Constant(b, typeof(float))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<float> f = e.Compile(useInterpreter);
 
@@ -423,12 +464,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDoubleAdd(double a, double b, bool useInterpreter)
         {
-            Expression<Func<double>> e =
-                Expression.Lambda<Func<double>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(double)),
-                        Expression.Constant(b, typeof(double))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<double>> e = Expression.Lambda<Func<double>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(double)),
+                    Expression.Constant(b, typeof(double))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<double> f = e.Compile(useInterpreter);
 
@@ -448,12 +490,13 @@ namespace System.Linq.Expressions.Tests
 
         private static void VerifyDecimalAdd(decimal a, decimal b, bool useInterpreter)
         {
-            Expression<Func<decimal>> e =
-                Expression.Lambda<Func<decimal>>(
-                    Expression.Add(
-                        Expression.Constant(a, typeof(decimal)),
-                        Expression.Constant(b, typeof(decimal))),
-                    Enumerable.Empty<ParameterExpression>());
+            Expression<Func<decimal>> e = Expression.Lambda<Func<decimal>>(
+                Expression.Add(
+                    Expression.Constant(a, typeof(decimal)),
+                    Expression.Constant(b, typeof(decimal))
+                ),
+                Enumerable.Empty<ParameterExpression>()
+            );
 
             Func<decimal> f = e.Compile(useInterpreter);
 
@@ -501,25 +544,37 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void ThrowsOnLeftNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.Add(null, Expression.Constant("")));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "left",
+                () => Expression.Add(null, Expression.Constant(""))
+            );
         }
 
         [Fact]
         public static void ThrowsOnRightNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.Add(Expression.Constant(""), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "right",
+                () => Expression.Add(Expression.Constant(""), null)
+            );
         }
 
         [Fact]
         public static void CheckedThrowsOnLeftNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.AddChecked(null, Expression.Constant("")));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "left",
+                () => Expression.AddChecked(null, Expression.Constant(""))
+            );
         }
 
         [Fact]
         public static void CheckedThrowsOnRightNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.AddChecked(Expression.Constant(""), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "right",
+                () => Expression.AddChecked(Expression.Constant(""), null)
+            );
         }
 
         private static class Unreadable<T>
@@ -534,37 +589,55 @@ namespace System.Linq.Expressions.Tests
         public static void ThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("left", () => Expression.Add(value, Expression.Constant(1)));
+            AssertExtensions.Throws<ArgumentException>(
+                "left",
+                () => Expression.Add(value, Expression.Constant(1))
+            );
         }
 
         [Fact]
         public static void ThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("right", () => Expression.Add(Expression.Constant(1), value));
+            AssertExtensions.Throws<ArgumentException>(
+                "right",
+                () => Expression.Add(Expression.Constant(1), value)
+            );
         }
 
         [Fact]
         public static void CheckedThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("left", () => Expression.AddChecked(value, Expression.Constant(1)));
+            AssertExtensions.Throws<ArgumentException>(
+                "left",
+                () => Expression.AddChecked(value, Expression.Constant(1))
+            );
         }
 
         [Fact]
         public static void CheckedThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<int>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("right", () => Expression.Add(Expression.Constant(1), value));
+            AssertExtensions.Throws<ArgumentException>(
+                "right",
+                () => Expression.Add(Expression.Constant(1), value)
+            );
         }
 
         [Fact]
         public static void ToStringTest()
         {
-            BinaryExpression e1 = Expression.Add(Expression.Parameter(typeof(int), "a"), Expression.Parameter(typeof(int), "b"));
+            BinaryExpression e1 = Expression.Add(
+                Expression.Parameter(typeof(int), "a"),
+                Expression.Parameter(typeof(int), "b")
+            );
             Assert.Equal("(a + b)", e1.ToString());
 
-            BinaryExpression e2 = Expression.AddChecked(Expression.Parameter(typeof(int), "a"), Expression.Parameter(typeof(int), "b"));
+            BinaryExpression e2 = Expression.AddChecked(
+                Expression.Parameter(typeof(int), "a"),
+                Expression.Parameter(typeof(int), "b")
+            );
             Assert.Equal("(a + b)", e2.ToString());
         }
     }

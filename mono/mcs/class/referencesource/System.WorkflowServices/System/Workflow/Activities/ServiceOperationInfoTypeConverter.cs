@@ -10,9 +10,7 @@ namespace System.Workflow.Activities
 
     class ServiceOperationInfoTypeConverter : TypeConverter
     {
-        public ServiceOperationInfoTypeConverter()
-        {
-        }
+        public ServiceOperationInfoTypeConverter() { }
 
         public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
         {
@@ -29,8 +27,12 @@ namespace System.Workflow.Activities
             return base.CanConvertTo(context, destinationType);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture,
-            object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(string))
             {
@@ -38,15 +40,20 @@ namespace System.Workflow.Activities
                 if (serviceOperationInfo != null)
                 {
                     string contractName = serviceOperationInfo.GetContractFullName(null);
-                    if (string.IsNullOrEmpty(contractName) || string.IsNullOrEmpty(serviceOperationInfo.Name))
+                    if (
+                        string.IsNullOrEmpty(contractName)
+                        || string.IsNullOrEmpty(serviceOperationInfo.Name)
+                    )
                     {
                         return string.Empty;
                     }
 
-                    return string.Format(CultureInfo.InvariantCulture,
+                    return string.Format(
+                        CultureInfo.InvariantCulture,
                         "{0}.{1}",
                         contractName,
-                        serviceOperationInfo.Name);
+                        serviceOperationInfo.Name
+                    );
                 }
             }
             return base.ConvertTo(context, culture, value, destinationType);

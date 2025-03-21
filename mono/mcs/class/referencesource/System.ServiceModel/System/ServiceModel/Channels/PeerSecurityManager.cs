@@ -31,6 +31,7 @@ namespace System.ServiceModel.Channels
         volatile byte[] authenticatorHash;
 
         object thisLock;
+
         //public EventHandler OnNeighborOpened;
         public EventHandler OnNeighborAuthenticated;
         string meshId = String.Empty;
@@ -54,44 +55,26 @@ namespace System.ServiceModel.Channels
 
         public PeerAuthenticationMode AuthenticationMode
         {
-            get
-            {
-                return authenticationMode;
-            }
+            get { return authenticationMode; }
         }
 
         public string Password
         {
-            get
-            {
-                return password;
-            }
+            get { return password; }
         }
         public X509Certificate2 SelfCert
         {
-            get
-            {
-                return credManager.Certificate;
-            }
+            get { return credManager.Certificate; }
         }
         public bool MessageAuthentication
         {
-            get
-            {
-                return this.enableSigning;
-            }
+            get { return this.enableSigning; }
         }
 
         internal string MeshId
         {
-            get
-            {
-                return this.meshId;
-            }
-            set
-            {
-                this.meshId = value;
-            }
+            get { return this.meshId; }
+            set { this.meshId = value; }
         }
 
         internal SelfSignedCertificate GetCertificate()
@@ -101,7 +84,10 @@ namespace System.ServiceModel.Channels
                 lock (ThisLock)
                 {
                     if (ssc == null)
-                        ssc = SelfSignedCertificate.Create("CN=" + Guid.NewGuid().ToString(), this.Password);
+                        ssc = SelfSignedCertificate.Create(
+                            "CN=" + Guid.NewGuid().ToString(),
+                            this.Password
+                        );
                 }
             }
             return ssc;
@@ -112,33 +98,53 @@ namespace System.ServiceModel.Channels
             get { return thisLock; }
         }
 
-        static PeerSecurityCredentialsManager GetCredentialsManager(PeerAuthenticationMode mode, bool signing, BindingContext context)
+        static PeerSecurityCredentialsManager GetCredentialsManager(
+            PeerAuthenticationMode mode,
+            bool signing,
+            BindingContext context
+        )
         {
             if (mode == PeerAuthenticationMode.None && !signing)
                 return null;
-            ClientCredentials clientCredentials = context.BindingParameters.Find<ClientCredentials>();
+            ClientCredentials clientCredentials =
+                context.BindingParameters.Find<ClientCredentials>();
             if (clientCredentials != null)
             {
                 return new PeerSecurityCredentialsManager(clientCredentials.Peer, mode, signing);
             }
-            ServiceCredentials serviceCredentials = context.BindingParameters.Find<ServiceCredentials>();
+            ServiceCredentials serviceCredentials =
+                context.BindingParameters.Find<ServiceCredentials>();
             if (serviceCredentials != null)
             {
                 return new PeerSecurityCredentialsManager(serviceCredentials.Peer, mode, signing);
             }
-            SecurityCredentialsManager credman = context.BindingParameters.Find<SecurityCredentialsManager>();
+            SecurityCredentialsManager credman =
+                context.BindingParameters.Find<SecurityCredentialsManager>();
             if (credman == null)
             {
-                PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.Credentials);
+                PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                    PeerPropertyNames.Credentials
+                );
             }
-            return new PeerSecurityCredentialsManager(credman.CreateSecurityTokenManager(), mode, signing);
+            return new PeerSecurityCredentialsManager(
+                credman.CreateSecurityTokenManager(),
+                mode,
+                signing
+            );
         }
 
-        static void Convert(PeerSecuritySettings security, out PeerAuthenticationMode authMode, out bool signing)
+        static void Convert(
+            PeerSecuritySettings security,
+            out PeerAuthenticationMode authMode,
+            out bool signing
+        )
         {
             authMode = PeerAuthenticationMode.None;
             signing = false;
-            if (security.Mode == SecurityMode.Transport || security.Mode == SecurityMode.TransportWithMessageCredential)
+            if (
+                security.Mode == SecurityMode.Transport
+                || security.Mode == SecurityMode.TransportWithMessageCredential
+            )
             {
                 switch (security.Transport.CredentialType)
                 {
@@ -150,22 +156,33 @@ namespace System.ServiceModel.Channels
                         break;
                 }
             }
-            if (security.Mode == SecurityMode.Message || security.Mode == SecurityMode.TransportWithMessageCredential)
+            if (
+                security.Mode == SecurityMode.Message
+                || security.Mode == SecurityMode.TransportWithMessageCredential
+            )
             {
                 signing = true;
             }
         }
 
-        static public PeerSecurityManager Create(PeerSecuritySettings security, BindingContext context, XmlDictionaryReaderQuotas readerQuotas)
+        public static PeerSecurityManager Create(
+            PeerSecuritySettings security,
+            BindingContext context,
+            XmlDictionaryReaderQuotas readerQuotas
+        )
         {
             PeerAuthenticationMode authMode = PeerAuthenticationMode.None;
             bool signing = false;
             Convert(security, out authMode, out signing);
             return Create(authMode, signing, context, readerQuotas);
-
         }
 
-        static public PeerSecurityManager Create(PeerAuthenticationMode authenticationMode, bool signMessages, BindingContext context, XmlDictionaryReaderQuotas readerQuotas)
+        public static PeerSecurityManager Create(
+            PeerAuthenticationMode authenticationMode,
+            bool signMessages,
+            BindingContext context,
+            XmlDictionaryReaderQuotas readerQuotas
+        )
         {
             if (authenticationMode == PeerAuthenticationMode.None && !signMessages)
                 return CreateDummy();
@@ -187,21 +204,36 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            ChannelProtectionRequirements reqs = context.BindingParameters.Find<ChannelProtectionRequirements>();
-            PeerSecurityCredentialsManager credman = GetCredentialsManager(authenticationMode, signMessages, context);
+            ChannelProtectionRequirements reqs =
+                context.BindingParameters.Find<ChannelProtectionRequirements>();
+            PeerSecurityCredentialsManager credman = GetCredentialsManager(
+                authenticationMode,
+                signMessages,
+                context
+            );
             if (credman.Credential != null)
             {
                 //for compatibility with existing code:
                 ValidateCredentialSettings(authenticationMode, signMessages, credman.Credential);
             }
-            PeerSecurityManager manager = Create(authenticationMode, signMessages, credman, reqs, readerQuotas);
+            PeerSecurityManager manager = Create(
+                authenticationMode,
+                signMessages,
+                credman,
+                reqs,
+                readerQuotas
+            );
             credman.Parent = manager;
             manager.ApplyAuditBehaviorSettings(context);
 
             return manager;
         }
 
-        static void ValidateCredentialSettings(PeerAuthenticationMode authenticationMode, bool signMessages, PeerCredential credential)
+        static void ValidateCredentialSettings(
+            PeerAuthenticationMode authenticationMode,
+            bool signMessages,
+            PeerCredential credential
+        )
         {
             X509CertificateValidator validator;
             if (authenticationMode == PeerAuthenticationMode.None && !signMessages)
@@ -211,35 +243,49 @@ namespace System.ServiceModel.Channels
                 case PeerAuthenticationMode.Password:
                     {
                         if (String.IsNullOrEmpty(credential.MeshPassword))
-                            PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.Password);
+                            PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                                PeerPropertyNames.Password
+                            );
                     }
                     break;
                 case PeerAuthenticationMode.MutualCertificate:
                     {
                         if (credential.Certificate == null)
                         {
-                            PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.Certificate);
+                            PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                                PeerPropertyNames.Certificate
+                            );
                         }
-                        if (!credential.PeerAuthentication.TryGetCertificateValidator(out validator))
+                        if (
+                            !credential.PeerAuthentication.TryGetCertificateValidator(out validator)
+                        )
                         {
-                            PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.PeerAuthentication);
+                            PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                                PeerPropertyNames.PeerAuthentication
+                            );
                         }
-
                     }
                     break;
             }
             if (signMessages)
             {
-                if (!credential.MessageSenderAuthentication.TryGetCertificateValidator(out validator))
+                if (
+                    !credential.MessageSenderAuthentication.TryGetCertificateValidator(
+                        out validator
+                    )
+                )
                 {
-                    PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.MessageSenderAuthentication);
+                    PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                        PeerPropertyNames.MessageSenderAuthentication
+                    );
                 }
             }
         }
 
         void ApplyAuditBehaviorSettings(BindingContext context)
         {
-            ServiceSecurityAuditBehavior auditBehavior = context.BindingParameters.Find<ServiceSecurityAuditBehavior>();
+            ServiceSecurityAuditBehavior auditBehavior =
+                context.BindingParameters.Find<ServiceSecurityAuditBehavior>();
             if (auditBehavior != null)
             {
                 this.auditBehavior = auditBehavior.Clone();
@@ -259,11 +305,20 @@ namespace System.ServiceModel.Channels
 
         internal static PeerSecurityManager CreateDummy()
         {
-            PeerSecurityManager manager = new PeerSecurityManager(PeerAuthenticationMode.None, false);
+            PeerSecurityManager manager = new PeerSecurityManager(
+                PeerAuthenticationMode.None,
+                false
+            );
             return manager;
         }
 
-        static public PeerSecurityManager Create(PeerAuthenticationMode authenticationMode, bool messageAuthentication, PeerSecurityCredentialsManager credman, ChannelProtectionRequirements reqs, XmlDictionaryReaderQuotas readerQuotas)
+        public static PeerSecurityManager Create(
+            PeerAuthenticationMode authenticationMode,
+            bool messageAuthentication,
+            PeerSecurityCredentialsManager credman,
+            ChannelProtectionRequirements reqs,
+            XmlDictionaryReaderQuotas readerQuotas
+        )
         {
             PeerSecurityManager manager = null;
             X509CertificateValidator connectionValidator = null;
@@ -273,7 +328,9 @@ namespace System.ServiceModel.Channels
             if (null == credential && credman == null)
             {
                 if (authenticationMode != PeerAuthenticationMode.None || messageAuthentication)
-                    PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.Credentials);
+                    PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                        PeerPropertyNames.Credentials
+                    );
                 //create one that doesnt have any credentials in it.
                 return CreateDummy();
             }
@@ -299,7 +356,9 @@ namespace System.ServiceModel.Channels
                         manager.password = credential.MeshPassword;
                         if (String.IsNullOrEmpty(manager.credManager.Password))
                         {
-                            PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.Password);
+                            PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                                PeerPropertyNames.Password
+                            );
                         }
                         connectionValidator = X509CertificateValidator.None;
                     }
@@ -308,11 +367,19 @@ namespace System.ServiceModel.Channels
                     {
                         if (manager.credManager.Certificate == null)
                         {
-                            PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.Certificate);
+                            PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                                PeerPropertyNames.Certificate
+                            );
                         }
-                        if (!credential.PeerAuthentication.TryGetCertificateValidator(out connectionValidator))
+                        if (
+                            !credential.PeerAuthentication.TryGetCertificateValidator(
+                                out connectionValidator
+                            )
+                        )
                         {
-                            PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.PeerAuthentication);
+                            PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                                PeerPropertyNames.PeerAuthentication
+                            );
                         }
                     }
                     break;
@@ -321,14 +388,22 @@ namespace System.ServiceModel.Channels
             {
                 if (credential.MessageSenderAuthentication != null)
                 {
-                    if (!credential.MessageSenderAuthentication.TryGetCertificateValidator(out messageValidator))
+                    if (
+                        !credential.MessageSenderAuthentication.TryGetCertificateValidator(
+                            out messageValidator
+                        )
+                    )
                     {
-                        PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.MessageSenderAuthentication);
+                        PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                            PeerPropertyNames.MessageSenderAuthentication
+                        );
                     }
                 }
                 else
                 {
-                    PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.MessageSenderAuthentication);
+                    PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                        PeerPropertyNames.MessageSenderAuthentication
+                    );
                 }
             }
             return manager;
@@ -338,10 +413,11 @@ namespace System.ServiceModel.Channels
         {
             //following are the headers that we add and want signed.
             MessagePartSpecification partSpec = new MessagePartSpecification(
-                                new XmlQualifiedName(PeerStrings.Via, PeerStrings.Namespace),
-                                new XmlQualifiedName(PeerOperationNames.Flood, PeerStrings.Namespace),
-                                new XmlQualifiedName(PeerOperationNames.PeerTo, PeerStrings.Namespace),
-                                new XmlQualifiedName(PeerStrings.MessageId, PeerStrings.Namespace));
+                new XmlQualifiedName(PeerStrings.Via, PeerStrings.Namespace),
+                new XmlQualifiedName(PeerOperationNames.Flood, PeerStrings.Namespace),
+                new XmlQualifiedName(PeerOperationNames.PeerTo, PeerStrings.Namespace),
+                new XmlQualifiedName(PeerStrings.MessageId, PeerStrings.Namespace)
+            );
             foreach (string action in spec.Actions)
             {
                 spec.AddParts(partSpec, action);
@@ -376,7 +452,8 @@ namespace System.ServiceModel.Channels
                     X509Certificate2 cert = credManager.Certificate;
                     if (cert != null)
                     {
-                        SecurityBindingElement securityBindingElement = SecurityBindingElement.CreateCertificateSignatureBindingElement();
+                        SecurityBindingElement securityBindingElement =
+                            SecurityBindingElement.CreateCertificateSignatureBindingElement();
                         securityBindingElement.ReaderQuotas = this.readerQuotas;
                         BindingParameterCollection bpc = new BindingParameterCollection();
                         if (protection == null)
@@ -393,18 +470,35 @@ namespace System.ServiceModel.Channels
                         bpc.Add(protectionRequirements);
                         bpc.Add(this.auditBehavior);
                         bpc.Add(credManager);
-                        BindingContext context = new BindingContext(new CustomBinding(securityBindingElement), bpc);
-                        outgoingProtocolFactory = securityBindingElement.CreateSecurityProtocolFactory<IOutputChannel>(context, credManager, false, null);
+                        BindingContext context = new BindingContext(
+                            new CustomBinding(securityBindingElement),
+                            bpc
+                        );
+                        outgoingProtocolFactory =
+                            securityBindingElement.CreateSecurityProtocolFactory<IOutputChannel>(
+                                context,
+                                credManager,
+                                false,
+                                null
+                            );
                     }
                     else
                     {
                         outgoingProtocolFactory = new PeerDoNothingSecurityProtocolFactory();
                     }
                     SecurityTokenResolver resolver;
-                    X509SecurityTokenAuthenticator auth = tokenManager.CreateSecurityTokenAuthenticator(PeerSecurityCredentialsManager.PeerClientSecurityTokenManager.CreateRequirement(SecurityTokenTypes.X509Certificate, true), out resolver) as X509SecurityTokenAuthenticator;
+                    X509SecurityTokenAuthenticator auth =
+                        tokenManager.CreateSecurityTokenAuthenticator(
+                            PeerSecurityCredentialsManager.PeerClientSecurityTokenManager.CreateRequirement(
+                                SecurityTokenTypes.X509Certificate,
+                                true
+                            ),
+                            out resolver
+                        ) as X509SecurityTokenAuthenticator;
                     if (auth != null)
                     {
-                        SecurityBindingElement securityBindingElement = SecurityBindingElement.CreateCertificateSignatureBindingElement();
+                        SecurityBindingElement securityBindingElement =
+                            SecurityBindingElement.CreateCertificateSignatureBindingElement();
                         securityBindingElement.ReaderQuotas = this.readerQuotas;
                         BindingParameterCollection bpc = new BindingParameterCollection();
                         if (protection == null)
@@ -421,15 +515,27 @@ namespace System.ServiceModel.Channels
                         bpc.Add(protectionRequirements);
                         bpc.Add(this.auditBehavior);
                         bpc.Add(credManager);
-                        BindingContext context = new BindingContext(new CustomBinding(securityBindingElement), bpc);
-                        incomingProtocolFactory = securityBindingElement.CreateSecurityProtocolFactory<IOutputChannel>(context, credManager, true, null);
+                        BindingContext context = new BindingContext(
+                            new CustomBinding(securityBindingElement),
+                            bpc
+                        );
+                        incomingProtocolFactory =
+                            securityBindingElement.CreateSecurityProtocolFactory<IOutputChannel>(
+                                context,
+                                credManager,
+                                true,
+                                null
+                            );
                     }
                     else
                     {
                         incomingProtocolFactory = new PeerDoNothingSecurityProtocolFactory();
                     }
                 }
-                DuplexSecurityProtocolFactory tempFactory = new DuplexSecurityProtocolFactory(outgoingProtocolFactory, incomingProtocolFactory);
+                DuplexSecurityProtocolFactory tempFactory = new DuplexSecurityProtocolFactory(
+                    outgoingProtocolFactory,
+                    incomingProtocolFactory
+                );
                 tempFactory.Open(true, timeoutHelper.RemainingTime());
                 securityProtocolFactory = tempFactory;
             }
@@ -443,31 +549,65 @@ namespace System.ServiceModel.Channels
             }
             if (typeof(TChannel) == typeof(IOutputChannel))
             {
-                if (enableSigning && securityProtocolFactory.ForwardProtocolFactory is PeerDoNothingSecurityProtocolFactory)
-                    PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.MessageSenderAuthentication);
+                if (
+                    enableSigning
+                    && securityProtocolFactory.ForwardProtocolFactory
+                        is PeerDoNothingSecurityProtocolFactory
+                )
+                    PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                        PeerPropertyNames.MessageSenderAuthentication
+                    );
                 return securityProtocolFactory.ForwardProtocolFactory;
             }
             else if (typeof(TChannel) == typeof(IInputChannel))
             {
-                if (enableSigning && securityProtocolFactory.ReverseProtocolFactory is PeerDoNothingSecurityProtocolFactory)
-                    PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.MessageSenderAuthentication);
+                if (
+                    enableSigning
+                    && securityProtocolFactory.ReverseProtocolFactory
+                        is PeerDoNothingSecurityProtocolFactory
+                )
+                    PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                        PeerPropertyNames.MessageSenderAuthentication
+                    );
                 return securityProtocolFactory.ReverseProtocolFactory;
             }
             else
             {
-                if (enableSigning && ((securityProtocolFactory.ReverseProtocolFactory is PeerDoNothingSecurityProtocolFactory)
-                                        || (securityProtocolFactory.ForwardProtocolFactory is PeerDoNothingSecurityProtocolFactory)))
-                    PeerExceptionHelper.ThrowArgument_InsufficientCredentials(PeerPropertyNames.MessageSenderAuthentication);
+                if (
+                    enableSigning
+                    && (
+                        (
+                            securityProtocolFactory.ReverseProtocolFactory
+                            is PeerDoNothingSecurityProtocolFactory
+                        )
+                        || (
+                            securityProtocolFactory.ForwardProtocolFactory
+                            is PeerDoNothingSecurityProtocolFactory
+                        )
+                    )
+                )
+                    PeerExceptionHelper.ThrowArgument_InsufficientCredentials(
+                        PeerPropertyNames.MessageSenderAuthentication
+                    );
                 return securityProtocolFactory;
             }
         }
 
-        public SecurityProtocol CreateSecurityProtocol<TChannel>(EndpointAddress target, TimeSpan timespan)
+        public SecurityProtocol CreateSecurityProtocol<TChannel>(
+            EndpointAddress target,
+            TimeSpan timespan
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timespan);
             SecurityProtocolFactory factory = GetProtocolFactory<TChannel>();
             Fx.Assert(factory != null, "SecurityProtocolFactory is NULL!");
-            SecurityProtocol instance = factory.CreateSecurityProtocol(target, null, /*listenerSecurityState*/null, /*isReturnLegSecurityRequired*/false, timeoutHelper.RemainingTime());
+            SecurityProtocol instance = factory.CreateSecurityProtocol(
+                target,
+                null, /*listenerSecurityState*/
+                null, /*isReturnLegSecurityRequired*/
+                false,
+                timeoutHelper.RemainingTime()
+            );
             if (instance != null)
                 instance.Open(timeoutHelper.RemainingTime());
             return instance;
@@ -489,7 +629,12 @@ namespace System.ServiceModel.Channels
                     this.credManager.CheckIfCompatible(that.credManager);
                 else
                 {
-                    Fx.Assert(typeof(PeerSecurityCredentialsManager.PeerClientSecurityTokenManager).IsAssignableFrom(tokenManager.GetType()), "");
+                    Fx.Assert(
+                        typeof(PeerSecurityCredentialsManager.PeerClientSecurityTokenManager).IsAssignableFrom(
+                            tokenManager.GetType()
+                        ),
+                        ""
+                    );
                     mismatch = PeerBindingPropertyNames.Credentials;
                 }
             }
@@ -512,13 +657,15 @@ namespace System.ServiceModel.Channels
                 {
                     if (authenticatorHash == null)
                     {
-                        authenticatorHash = PeerSecurityHelpers.ComputeHash(credManager.Certificate, credManager.Password);
+                        authenticatorHash = PeerSecurityHelpers.ComputeHash(
+                            credManager.Certificate,
+                            credManager.Password
+                        );
                     }
                 }
             }
             return authenticatorHash;
         }
-
 
         public bool Authenticate(ServiceSecurityContext context, byte[] message)
         {
@@ -553,7 +700,9 @@ namespace System.ServiceModel.Channels
             for (int i = 0; i < context.AuthorizationContext.ClaimSets.Count; ++i)
             {
                 ClaimSet claimSet = context.AuthorizationContext.ClaimSets[i];
-                IEnumerator<Claim> claims = claimSet.FindClaims(ClaimTypes.Rsa, null).GetEnumerator();
+                IEnumerator<Claim> claims = claimSet
+                    .FindClaims(ClaimTypes.Rsa, null)
+                    .GetEnumerator();
                 if (claims.MoveNext())
                 {
                     result = claims.Current;
@@ -613,7 +762,12 @@ namespace System.ServiceModel.Channels
                 {
                     throw Fx.AssertAndThrow("extension already exists!");
                 }
-                PeerChannelAuthenticatorExtension extension = new PeerChannelAuthenticatorExtension(this, handler, args, this.MeshId);
+                PeerChannelAuthenticatorExtension extension = new PeerChannelAuthenticatorExtension(
+                    this,
+                    handler,
+                    args,
+                    this.MeshId
+                );
                 neighbor.Extensions.Add(extension);
                 if (neighbor.IsInitiator)
                     extension.InitiateHandShake();
@@ -632,11 +786,14 @@ namespace System.ServiceModel.Channels
                 Abort(neighbor);
                 return null;
             }
-            PeerChannelAuthenticatorExtension extension = neighbor.Extensions.Find<PeerChannelAuthenticatorExtension>();
+            PeerChannelAuthenticatorExtension extension =
+                neighbor.Extensions.Find<PeerChannelAuthenticatorExtension>();
             Claim claim = FindClaim(ServiceSecurityContext.Current);
             if (!(extension != null && claim != null))
             {
-                throw Fx.AssertAndThrow("No suitable claim found in the context to do security negotiation!");
+                throw Fx.AssertAndThrow(
+                    "No suitable claim found in the context to do security negotiation!"
+                );
             }
             return extension.ProcessRst(request, claim);
         }
@@ -647,7 +804,10 @@ namespace System.ServiceModel.Channels
         }
     }
 
-    class PeerSecurityCredentialsManager : SecurityCredentialsManager, IEndpointBehavior, IServiceBehavior
+    class PeerSecurityCredentialsManager
+        : SecurityCredentialsManager,
+            IEndpointBehavior,
+            IServiceBehavior
     {
         SecurityTokenManager manager;
         PeerCredential credential;
@@ -656,7 +816,11 @@ namespace System.ServiceModel.Channels
         SelfSignedCertificate ssl;
         PeerSecurityManager parent;
 
-        public PeerSecurityCredentialsManager(SecurityTokenManager manager, PeerAuthenticationMode mode, bool messageAuth)
+        public PeerSecurityCredentialsManager(
+            SecurityTokenManager manager,
+            PeerAuthenticationMode mode,
+            bool messageAuth
+        )
             : base()
         {
             this.manager = manager;
@@ -664,7 +828,11 @@ namespace System.ServiceModel.Channels
             this.messageAuth = messageAuth;
         }
 
-        public PeerSecurityCredentialsManager(PeerCredential credential, PeerAuthenticationMode mode, bool messageAuth)
+        public PeerSecurityCredentialsManager(
+            PeerCredential credential,
+            PeerAuthenticationMode mode,
+            bool messageAuth
+        )
             : base()
         {
             this.credential = credential;
@@ -674,14 +842,8 @@ namespace System.ServiceModel.Channels
 
         public PeerSecurityManager Parent
         {
-            get
-            {
-                return this.parent;
-            }
-            set
-            {
-                parent = value;
-            }
+            get { return this.parent; }
+            set { parent = value; }
         }
 
         public override SecurityTokenManager CreateSecurityTokenManager()
@@ -689,10 +851,16 @@ namespace System.ServiceModel.Channels
             if (manager != null)
                 return new PeerClientSecurityTokenManager(this.parent, manager, mode, messageAuth);
             else
-                return new PeerClientSecurityTokenManager(this.parent, credential, mode, messageAuth);
+                return new PeerClientSecurityTokenManager(
+                    this.parent,
+                    credential,
+                    mode,
+                    messageAuth
+                );
         }
 
-        public PeerSecurityCredentialsManager() : base() { }
+        public PeerSecurityCredentialsManager()
+            : base() { }
 
         public PeerSecurityCredentialsManager CloneForTransport()
         {
@@ -706,12 +874,10 @@ namespace System.ServiceModel.Channels
 
             return cloner;
         }
+
         internal PeerCredential Credential
         {
-            get
-            {
-                return this.credential;
-            }
+            get { return this.credential; }
         }
         internal string Password
         {
@@ -719,11 +885,14 @@ namespace System.ServiceModel.Channels
             {
                 if (this.credential != null)
                     return credential.MeshPassword;
-                ServiceModelSecurityTokenRequirement req = PeerClientSecurityTokenManager.CreateRequirement(SecurityTokenTypes.UserName);
-                UserNameSecurityTokenProvider tokenProvider = this.manager.CreateSecurityTokenProvider(req) as UserNameSecurityTokenProvider;
+                ServiceModelSecurityTokenRequirement req =
+                    PeerClientSecurityTokenManager.CreateRequirement(SecurityTokenTypes.UserName);
+                UserNameSecurityTokenProvider tokenProvider =
+                    this.manager.CreateSecurityTokenProvider(req) as UserNameSecurityTokenProvider;
                 if (tokenProvider == null)
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TokenProvider");
-                UserNameSecurityToken token = tokenProvider.GetToken(ServiceDefaults.SendTimeout) as UserNameSecurityToken;
+                UserNameSecurityToken token =
+                    tokenProvider.GetToken(ServiceDefaults.SendTimeout) as UserNameSecurityToken;
                 if (token == null || String.IsNullOrEmpty(token.Password))
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("password");
                 return token.Password;
@@ -746,11 +915,18 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    ServiceModelSecurityTokenRequirement req = PeerClientSecurityTokenManager.CreateRequirement(SecurityTokenTypes.X509Certificate);
-                    X509SecurityTokenProvider tokenProvider = this.manager.CreateSecurityTokenProvider(req) as X509SecurityTokenProvider;
+                    ServiceModelSecurityTokenRequirement req =
+                        PeerClientSecurityTokenManager.CreateRequirement(
+                            SecurityTokenTypes.X509Certificate
+                        );
+                    X509SecurityTokenProvider tokenProvider =
+                        this.manager.CreateSecurityTokenProvider(req) as X509SecurityTokenProvider;
                     if (tokenProvider == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TokenProvider");
-                    X509SecurityToken token = tokenProvider.GetToken(ServiceDefaults.SendTimeout) as X509SecurityToken;
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "TokenProvider"
+                        );
+                    X509SecurityToken token =
+                        tokenProvider.GetToken(ServiceDefaults.SendTimeout) as X509SecurityToken;
                     if (token == null)
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("token");
                     result = token.Certificate;
@@ -763,29 +939,39 @@ namespace System.ServiceModel.Channels
                 return result;
             }
         }
-        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint)
-        {
-        }
 
-        void IEndpointBehavior.AddBindingParameters(ServiceEndpoint serviceEndpoint, BindingParameterCollection bindingParameters)
+        void IEndpointBehavior.Validate(ServiceEndpoint serviceEndpoint) { }
+
+        void IEndpointBehavior.AddBindingParameters(
+            ServiceEndpoint serviceEndpoint,
+            BindingParameterCollection bindingParameters
+        )
         {
             if (bindingParameters != null)
                 bindingParameters.Add(this);
         }
 
-        void IEndpointBehavior.ApplyDispatchBehavior(ServiceEndpoint serviceEndpoint, EndpointDispatcher endpointDispatcher)
-        {
-        }
+        void IEndpointBehavior.ApplyDispatchBehavior(
+            ServiceEndpoint serviceEndpoint,
+            EndpointDispatcher endpointDispatcher
+        ) { }
 
-        void IEndpointBehavior.ApplyClientBehavior(ServiceEndpoint serviceEndpoint, ClientRuntime behavior)
-        {
-        }
+        void IEndpointBehavior.ApplyClientBehavior(
+            ServiceEndpoint serviceEndpoint,
+            ClientRuntime behavior
+        ) { }
 
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
-        {
-        }
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        )
         {
             if (parameters == null)
             {
@@ -794,9 +980,10 @@ namespace System.ServiceModel.Channels
             parameters.Add(this);
         }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
-        {
-        }
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
 
         public override bool Equals(object other)
         {
@@ -816,16 +1003,22 @@ namespace System.ServiceModel.Channels
         public void CheckIfCompatible(PeerSecurityCredentialsManager that)
         {
             if (that == null)
-                PeerExceptionHelper.ThrowInvalidOperation_PeerConflictingPeerNodeSettings(PeerBindingPropertyNames.Credentials);
+                PeerExceptionHelper.ThrowInvalidOperation_PeerConflictingPeerNodeSettings(
+                    PeerBindingPropertyNames.Credentials
+                );
             if (this.mode == PeerAuthenticationMode.None)
                 return;
             if (this.mode == PeerAuthenticationMode.Password)
             {
                 if (this.Password != that.Password)
-                    PeerExceptionHelper.ThrowInvalidOperation_PeerConflictingPeerNodeSettings(PeerBindingPropertyNames.Password);
+                    PeerExceptionHelper.ThrowInvalidOperation_PeerConflictingPeerNodeSettings(
+                        PeerBindingPropertyNames.Password
+                    );
             }
             if (!this.Certificate.Equals(that.Certificate))
-                PeerExceptionHelper.ThrowInvalidOperation_PeerConflictingPeerNodeSettings(PeerBindingPropertyNames.Certificate);
+                PeerExceptionHelper.ThrowInvalidOperation_PeerConflictingPeerNodeSettings(
+                    PeerBindingPropertyNames.Certificate
+                );
         }
 
         public override int GetHashCode()
@@ -842,7 +1035,12 @@ namespace System.ServiceModel.Channels
             SelfSignedCertificate ssc;
             PeerSecurityManager parent;
 
-            public PeerClientSecurityTokenManager(PeerSecurityManager parent, PeerCredential credential, PeerAuthenticationMode mode, bool messageAuth)
+            public PeerClientSecurityTokenManager(
+                PeerSecurityManager parent,
+                PeerCredential credential,
+                PeerAuthenticationMode mode,
+                bool messageAuth
+            )
             {
                 this.credential = credential;
                 this.mode = mode;
@@ -850,7 +1048,12 @@ namespace System.ServiceModel.Channels
                 this.parent = parent;
             }
 
-            public PeerClientSecurityTokenManager(PeerSecurityManager parent, SecurityTokenManager manager, PeerAuthenticationMode mode, bool messageAuth)
+            public PeerClientSecurityTokenManager(
+                PeerSecurityManager parent,
+                SecurityTokenManager manager,
+                PeerAuthenticationMode mode,
+                bool messageAuth
+            )
             {
                 this.delegateManager = manager;
                 this.mode = mode;
@@ -863,15 +1066,21 @@ namespace System.ServiceModel.Channels
                 return CreateRequirement(tokenType, false);
             }
 
-            internal static ServiceModelSecurityTokenRequirement CreateRequirement(string tokenType, bool forMessageValidation)
+            internal static ServiceModelSecurityTokenRequirement CreateRequirement(
+                string tokenType,
+                bool forMessageValidation
+            )
             {
-                InitiatorServiceModelSecurityTokenRequirement requirement = new InitiatorServiceModelSecurityTokenRequirement();
+                InitiatorServiceModelSecurityTokenRequirement requirement =
+                    new InitiatorServiceModelSecurityTokenRequirement();
                 requirement.TokenType = tokenType;
                 requirement.TransportScheme = PeerStrings.Scheme;
                 if (forMessageValidation)
-                    requirement.Properties[SecurityTokenRequirement.PeerAuthenticationMode] = SecurityMode.Message;
+                    requirement.Properties[SecurityTokenRequirement.PeerAuthenticationMode] =
+                        SecurityMode.Message;
                 else
-                    requirement.Properties[SecurityTokenRequirement.PeerAuthenticationMode] = SecurityMode.Transport;
+                    requirement.Properties[SecurityTokenRequirement.PeerAuthenticationMode] =
+                        SecurityMode.Transport;
 
                 return requirement;
             }
@@ -880,16 +1089,30 @@ namespace System.ServiceModel.Channels
             {
                 if (delegateManager != null)
                 {
-                    ServiceModelSecurityTokenRequirement requirement = CreateRequirement(SecurityTokenTypes.UserName);
-                    UserNameSecurityTokenProvider tokenProvider = delegateManager.CreateSecurityTokenProvider(requirement) as UserNameSecurityTokenProvider;
+                    ServiceModelSecurityTokenRequirement requirement = CreateRequirement(
+                        SecurityTokenTypes.UserName
+                    );
+                    UserNameSecurityTokenProvider tokenProvider =
+                        delegateManager.CreateSecurityTokenProvider(requirement)
+                        as UserNameSecurityTokenProvider;
                     if (tokenProvider == null)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SecurityTokenManagerCannotCreateProviderForRequirement, requirement)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.SecurityTokenManagerCannotCreateProviderForRequirement,
+                                    requirement
+                                )
+                            )
+                        );
                     return tokenProvider;
                 }
                 else
                     return new UserNameSecurityTokenProvider(string.Empty, credential.MeshPassword);
             }
-            public override SecurityTokenSerializer CreateSecurityTokenSerializer(SecurityTokenVersion version)
+
+            public override SecurityTokenSerializer CreateSecurityTokenSerializer(
+                SecurityTokenVersion version
+            )
             {
                 if (delegateManager != null)
                     return delegateManager.CreateSecurityTokenSerializer(version);
@@ -898,18 +1121,36 @@ namespace System.ServiceModel.Channels
                     MessageSecurityTokenVersion wsVersion = version as MessageSecurityTokenVersion;
                     if (wsVersion != null)
                     {
-                        return new WSSecurityTokenSerializer(wsVersion.SecurityVersion, wsVersion.TrustVersion, wsVersion.SecureConversationVersion, wsVersion.EmitBspRequiredAttributes, null, null, null);
+                        return new WSSecurityTokenSerializer(
+                            wsVersion.SecurityVersion,
+                            wsVersion.TrustVersion,
+                            wsVersion.SecureConversationVersion,
+                            wsVersion.EmitBspRequiredAttributes,
+                            null,
+                            null,
+                            null
+                        );
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SecurityTokenManagerCannotCreateSerializerForVersion, version)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException(
+                                SR.GetString(
+                                    SR.SecurityTokenManagerCannotCreateSerializerForVersion,
+                                    version
+                                )
+                            )
+                        );
                     }
                 }
             }
 
-            public override SecurityTokenProvider CreateSecurityTokenProvider(SecurityTokenRequirement tokenRequirement)
+            public override SecurityTokenProvider CreateSecurityTokenProvider(
+                SecurityTokenRequirement tokenRequirement
+            )
             {
-                ServiceModelSecurityTokenRequirement requirement = tokenRequirement as ServiceModelSecurityTokenRequirement;
+                ServiceModelSecurityTokenRequirement requirement =
+                    tokenRequirement as ServiceModelSecurityTokenRequirement;
                 if (requirement != null)
                 {
                     if (IsX509TokenRequirement(requirement))
@@ -919,26 +1160,36 @@ namespace System.ServiceModel.Channels
                             SecurityTokenProvider result = null;
                             if (this.ssc != null)
                             {
-                                result = new X509SecurityTokenProvider(this.ssc.GetX509Certificate());
+                                result = new X509SecurityTokenProvider(
+                                    this.ssc.GetX509Certificate()
+                                );
                             }
                             else
                             {
                                 if (this.delegateManager != null)
                                 {
-                                    requirement.Properties[SecurityTokenRequirement.PeerAuthenticationMode] = SecurityMode.Transport;
+                                    requirement.Properties[
+                                        SecurityTokenRequirement.PeerAuthenticationMode
+                                    ] = SecurityMode.Transport;
                                     requirement.TransportScheme = PeerStrings.Scheme;
-                                    result = delegateManager.CreateSecurityTokenProvider(tokenRequirement);
+                                    result = delegateManager.CreateSecurityTokenProvider(
+                                        tokenRequirement
+                                    );
                                 }
                                 else
                                 {
                                     if (this.credential.Certificate != null)
-                                        result = new X509SecurityTokenProvider(this.credential.Certificate);
+                                        result = new X509SecurityTokenProvider(
+                                            this.credential.Certificate
+                                        );
                                 }
                             }
                             if (result == null && mode == PeerAuthenticationMode.Password)
                             {
                                 this.ssc = parent.GetCertificate();
-                                result = new X509SecurityTokenProvider(this.ssc.GetX509Certificate());
+                                result = new X509SecurityTokenProvider(
+                                    this.ssc.GetX509Certificate()
+                                );
                             }
 
                             return result;
@@ -949,12 +1200,25 @@ namespace System.ServiceModel.Channels
                             if (this.delegateManager != null)
                             {
                                 requirement.TransportScheme = PeerStrings.Scheme;
-                                requirement.Properties[SecurityTokenRequirement.PeerAuthenticationMode] = SecurityMode.Message;
-                                return delegateManager.CreateSecurityTokenProvider(tokenRequirement);
+                                requirement.Properties[
+                                    SecurityTokenRequirement.PeerAuthenticationMode
+                                ] = SecurityMode.Message;
+                                return delegateManager.CreateSecurityTokenProvider(
+                                    tokenRequirement
+                                );
                             }
-                            if (!this.credential.MessageSenderAuthentication.TryGetCertificateValidator(out validator))
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("TokenType");
-                            return new PeerX509TokenProvider(validator, this.credential.Certificate);
+                            if (
+                                !this.credential.MessageSenderAuthentication.TryGetCertificateValidator(
+                                    out validator
+                                )
+                            )
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                                    "TokenType"
+                                );
+                            return new PeerX509TokenProvider(
+                                validator,
+                                this.credential.Certificate
+                            );
                         }
                     }
                     else if (IsPasswordTokenRequirement(requirement))
@@ -963,56 +1227,84 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("TokenType");
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                            "TokenType"
+                        );
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokenRequirement");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "tokenRequirement"
+                    );
                 }
-
             }
 
             bool IsPasswordTokenRequirement(ServiceModelSecurityTokenRequirement requirement)
             {
-                return ((requirement != null) && (requirement.TokenType == SecurityTokenTypes.UserName));
+                return (
+                    (requirement != null) && (requirement.TokenType == SecurityTokenTypes.UserName)
+                );
             }
 
             bool IsX509TokenRequirement(ServiceModelSecurityTokenRequirement requirement)
             {
-                return (requirement != null && requirement.TokenType == SecurityTokenTypes.X509Certificate);
+                return (
+                    requirement != null
+                    && requirement.TokenType == SecurityTokenTypes.X509Certificate
+                );
             }
 
             bool IsForConnectionValidator(ServiceModelSecurityTokenRequirement requirement)
             {
-                return (requirement.TransportScheme == "net.tcp" && requirement.SecurityBindingElement == null && requirement.MessageSecurityVersion == null);
+                return (
+                    requirement.TransportScheme == "net.tcp"
+                    && requirement.SecurityBindingElement == null
+                    && requirement.MessageSecurityVersion == null
+                );
             }
 
-            public override SecurityTokenAuthenticator CreateSecurityTokenAuthenticator(SecurityTokenRequirement tokenRequirement, out SecurityTokenResolver outOfBandTokenResolver)
+            public override SecurityTokenAuthenticator CreateSecurityTokenAuthenticator(
+                SecurityTokenRequirement tokenRequirement,
+                out SecurityTokenResolver outOfBandTokenResolver
+            )
             {
-                ServiceModelSecurityTokenRequirement requirement = tokenRequirement as ServiceModelSecurityTokenRequirement;
+                ServiceModelSecurityTokenRequirement requirement =
+                    tokenRequirement as ServiceModelSecurityTokenRequirement;
                 outOfBandTokenResolver = null;
                 if (requirement != null)
                 {
                     if (IsX509TokenRequirement(requirement))
                     {
-                        if (mode == PeerAuthenticationMode.Password && IsForConnectionValidator(requirement))
+                        if (
+                            mode == PeerAuthenticationMode.Password
+                            && IsForConnectionValidator(requirement)
+                        )
                         {
-                            return new X509SecurityTokenAuthenticator(X509CertificateValidator.None);
+                            return new X509SecurityTokenAuthenticator(
+                                X509CertificateValidator.None
+                            );
                         }
                         if (delegateManager != null)
                         {
                             if (IsForConnectionValidator(requirement))
                             {
                                 requirement.TransportScheme = PeerStrings.Scheme;
-                                requirement.Properties[SecurityTokenRequirement.PeerAuthenticationMode] = SecurityMode.Transport;
+                                requirement.Properties[
+                                    SecurityTokenRequirement.PeerAuthenticationMode
+                                ] = SecurityMode.Transport;
                             }
                             else
                             {
                                 requirement.TransportScheme = PeerStrings.Scheme;
-                                requirement.Properties[SecurityTokenRequirement.PeerAuthenticationMode] = SecurityMode.Message;
+                                requirement.Properties[
+                                    SecurityTokenRequirement.PeerAuthenticationMode
+                                ] = SecurityMode.Message;
                             }
-                            return delegateManager.CreateSecurityTokenAuthenticator(tokenRequirement, out outOfBandTokenResolver);
+                            return delegateManager.CreateSecurityTokenAuthenticator(
+                                tokenRequirement,
+                                out outOfBandTokenResolver
+                            );
                         }
                         else
                         {
@@ -1021,29 +1313,54 @@ namespace System.ServiceModel.Channels
                             {
                                 if (this.mode == PeerAuthenticationMode.MutualCertificate)
                                 {
-                                    if (!this.credential.PeerAuthentication.TryGetCertificateValidator(out validator))
-                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SecurityTokenManagerCannotCreateProviderForRequirement, requirement)));
+                                    if (
+                                        !this.credential.PeerAuthentication.TryGetCertificateValidator(
+                                            out validator
+                                        )
+                                    )
+                                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                            new NotSupportedException(
+                                                SR.GetString(
+                                                    SR.SecurityTokenManagerCannotCreateProviderForRequirement,
+                                                    requirement
+                                                )
+                                            )
+                                        );
                                 }
                                 else
                                     validator = X509CertificateValidator.None;
                             }
                             else
                             {
-                                if (!this.credential.MessageSenderAuthentication.TryGetCertificateValidator(out validator))
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR.GetString(SR.SecurityTokenManagerCannotCreateProviderForRequirement, requirement)));
-
+                                if (
+                                    !this.credential.MessageSenderAuthentication.TryGetCertificateValidator(
+                                        out validator
+                                    )
+                                )
+                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                        new NotSupportedException(
+                                            SR.GetString(
+                                                SR.SecurityTokenManagerCannotCreateProviderForRequirement,
+                                                requirement
+                                            )
+                                        )
+                                    );
                             }
                             return new X509SecurityTokenAuthenticator(validator);
                         }
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("tokenRequirement");
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "tokenRequirement"
+                        );
                     }
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("tokenRequirement");
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                        "tokenRequirement"
+                    );
                 }
             }
 
@@ -1054,7 +1371,10 @@ namespace System.ServiceModel.Channels
                     return false;
                 if (this.credential != null)
                 {
-                    if (that.credential == null || !this.credential.Equals(that.credential, this.mode, this.messageAuth))
+                    if (
+                        that.credential == null
+                        || !this.credential.Equals(that.credential, this.mode, this.messageAuth)
+                    )
                         return false;
                     return true;
                 }
@@ -1081,7 +1401,6 @@ namespace System.ServiceModel.Channels
                 else
                     return 0;
             }
-
         }
     }
 }

@@ -2,7 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlAttribute))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlAttributeCollection))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Xml.XmlAttributeCollection)
+)]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlCDataSection))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlCharacterData))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlComment))]
@@ -15,10 +17,18 @@
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlNamedNodeMap))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlNode))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlNodeChangedAction))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlNodeChangedEventArgs))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlNodeChangedEventHandler))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Xml.XmlNodeChangedEventArgs)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Xml.XmlNodeChangedEventHandler)
+)]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlNodeList))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlProcessingInstruction))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlSignificantWhitespace))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Xml.XmlProcessingInstruction)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.Xml.XmlSignificantWhitespace)
+)]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlText))]
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.Xml.XmlWhitespace))]

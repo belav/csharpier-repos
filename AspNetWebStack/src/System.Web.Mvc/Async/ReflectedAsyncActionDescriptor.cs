@@ -17,12 +17,27 @@ namespace System.Web.Mvc.Async
         private readonly Lazy<string> _uniqueId;
         private ParameterDescriptor[] _parametersCache;
 
-        public ReflectedAsyncActionDescriptor(MethodInfo asyncMethodInfo, MethodInfo completedMethodInfo, string actionName, ControllerDescriptor controllerDescriptor)
-            : this(asyncMethodInfo, completedMethodInfo, actionName, controllerDescriptor, true /* validateMethods */)
-        {
-        }
+        public ReflectedAsyncActionDescriptor(
+            MethodInfo asyncMethodInfo,
+            MethodInfo completedMethodInfo,
+            string actionName,
+            ControllerDescriptor controllerDescriptor
+        )
+            : this(
+                asyncMethodInfo,
+                completedMethodInfo,
+                actionName,
+                controllerDescriptor,
+                true /* validateMethods */
+            ) { }
 
-        internal ReflectedAsyncActionDescriptor(MethodInfo asyncMethodInfo, MethodInfo completedMethodInfo, string actionName, ControllerDescriptor controllerDescriptor, bool validateMethods)
+        internal ReflectedAsyncActionDescriptor(
+            MethodInfo asyncMethodInfo,
+            MethodInfo completedMethodInfo,
+            string actionName,
+            ControllerDescriptor controllerDescriptor,
+            bool validateMethods
+        )
         {
             if (asyncMethodInfo == null)
             {
@@ -87,7 +102,12 @@ namespace System.Web.Mvc.Async
             get { return _uniqueId.Value; }
         }
 
-        public override IAsyncResult BeginExecute(ControllerContext controllerContext, IDictionary<string, object> parameters, AsyncCallback callback, object state)
+        public override IAsyncResult BeginExecute(
+            ControllerContext controllerContext,
+            IDictionary<string, object> parameters,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (controllerContext == null)
             {
@@ -100,12 +120,20 @@ namespace System.Web.Mvc.Async
 
             AsyncManager asyncManager = GetAsyncManager(controllerContext.Controller);
 
-            BeginInvokeDelegate beginDelegate = delegate(AsyncCallback asyncCallback, object asyncState)
+            BeginInvokeDelegate beginDelegate = delegate(
+                AsyncCallback asyncCallback,
+                object asyncState
+            )
             {
                 // call the XxxAsync() method
                 ParameterInfo[] parameterInfos = AsyncMethodInfo.GetParameters();
-                var rawParameterValues = from parameterInfo in parameterInfos
-                                         select ExtractParameterFromDictionary(parameterInfo, parameters, AsyncMethodInfo);
+                var rawParameterValues =
+                    from parameterInfo in parameterInfos
+                    select ExtractParameterFromDictionary(
+                        parameterInfo,
+                        parameters,
+                        AsyncMethodInfo
+                    );
                 object[] parametersArray = rawParameterValues.ToArray();
 
                 TriggerListener listener = new TriggerListener();
@@ -120,7 +148,15 @@ namespace System.Web.Mvc.Async
                 asyncManager.OutstandingOperations.Increment();
 
                 // to simplify the logic, force the rest of the pipeline to execute in an asynchronous callback
-                listener.SetContinuation(() => ThreadPool.QueueUserWorkItem(_ => asyncResult.MarkCompleted(false /* completedSynchronously */, asyncCallback)));
+                listener.SetContinuation(() =>
+                    ThreadPool.QueueUserWorkItem(_ =>
+                        asyncResult.MarkCompleted(
+                            false /* completedSynchronously */
+                            ,
+                            asyncCallback
+                        )
+                    )
+                );
 
                 // the inner operation might complete synchronously, so all setup work has to be done before this point
                 ActionMethodDispatcher dispatcher = DispatcherCache.GetDispatcher(AsyncMethodInfo);
@@ -136,21 +172,38 @@ namespace System.Web.Mvc.Async
             {
                 // call the XxxCompleted() method
                 ParameterInfo[] completionParametersInfos = CompletedMethodInfo.GetParameters();
-                var rawCompletionParameterValues = from parameterInfo in completionParametersInfos
-                                                   select ExtractParameterOrDefaultFromDictionary(parameterInfo, asyncManager.Parameters);
+                var rawCompletionParameterValues =
+                    from parameterInfo in completionParametersInfos
+                    select ExtractParameterOrDefaultFromDictionary(
+                        parameterInfo,
+                        asyncManager.Parameters
+                    );
                 object[] completionParametersArray = rawCompletionParameterValues.ToArray();
 
-                ActionMethodDispatcher dispatcher = DispatcherCache.GetDispatcher(CompletedMethodInfo);
-                object actionReturnValue = dispatcher.Execute(controllerContext.Controller, completionParametersArray);
+                ActionMethodDispatcher dispatcher = DispatcherCache.GetDispatcher(
+                    CompletedMethodInfo
+                );
+                object actionReturnValue = dispatcher.Execute(
+                    controllerContext.Controller,
+                    completionParametersArray
+                );
                 return actionReturnValue;
             };
 
-            return AsyncResultWrapper.Begin(callback, state, beginDelegate, endDelegate, _executeTag, asyncManager.Timeout);
+            return AsyncResultWrapper.Begin(
+                callback,
+                state,
+                beginDelegate,
+                endDelegate,
+                _executeTag,
+                asyncManager.Timeout
+            );
         }
 
         private string CreateUniqueId()
         {
-            return base.UniqueId + DescriptorUtil.CreateUniqueId(AsyncMethodInfo, CompletedMethodInfo);
+            return base.UniqueId
+                + DescriptorUtil.CreateUniqueId(AsyncMethodInfo, CompletedMethodInfo);
         }
 
         public override object EndExecute(IAsyncResult asyncResult)
@@ -165,7 +218,11 @@ namespace System.Web.Mvc.Async
 
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
-            return ActionDescriptorHelper.GetCustomAttributes(AsyncMethodInfo, attributeType, inherit);
+            return ActionDescriptorHelper.GetCustomAttributes(
+                AsyncMethodInfo,
+                attributeType,
+                inherit
+            );
         }
 
         public override IEnumerable<FilterAttribute> GetFilterAttributes(bool useCache)
@@ -180,7 +237,11 @@ namespace System.Web.Mvc.Async
 
         public override ParameterDescriptor[] GetParameters()
         {
-            return ActionDescriptorHelper.GetParameters(this, AsyncMethodInfo, ref _parametersCache);
+            return ActionDescriptorHelper.GetParameters(
+                this,
+                AsyncMethodInfo,
+                ref _parametersCache
+            );
         }
 
         public override ICollection<ActionSelector> GetSelectors()

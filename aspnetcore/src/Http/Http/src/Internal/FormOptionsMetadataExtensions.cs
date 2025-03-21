@@ -9,17 +9,24 @@ internal static class FormOptionsMetadataExtensions
 {
     public static void MergeWith(
         this IFormOptionsMetadata formOptionsMetadata,
-        ref MutableFormOptionsMetadata otherFormOptionsMetadata)
+        ref MutableFormOptionsMetadata otherFormOptionsMetadata
+    )
     {
         otherFormOptionsMetadata.BufferBody ??= formOptionsMetadata.BufferBody;
-        otherFormOptionsMetadata.MemoryBufferThreshold ??= formOptionsMetadata.MemoryBufferThreshold;
-        otherFormOptionsMetadata.BufferBodyLengthLimit ??= formOptionsMetadata.BufferBodyLengthLimit;
+        otherFormOptionsMetadata.MemoryBufferThreshold ??=
+            formOptionsMetadata.MemoryBufferThreshold;
+        otherFormOptionsMetadata.BufferBodyLengthLimit ??=
+            formOptionsMetadata.BufferBodyLengthLimit;
         otherFormOptionsMetadata.ValueCountLimit ??= formOptionsMetadata.ValueCountLimit;
         otherFormOptionsMetadata.KeyLengthLimit ??= formOptionsMetadata.KeyLengthLimit;
         otherFormOptionsMetadata.ValueLengthLimit ??= formOptionsMetadata.ValueLengthLimit;
-        otherFormOptionsMetadata.MultipartBoundaryLengthLimit ??= formOptionsMetadata.MultipartBoundaryLengthLimit;
-        otherFormOptionsMetadata.MultipartHeadersCountLimit ??= formOptionsMetadata.MultipartHeadersCountLimit;
-        otherFormOptionsMetadata.MultipartHeadersLengthLimit ??= formOptionsMetadata.MultipartHeadersLengthLimit;
-        otherFormOptionsMetadata.MultipartBodyLengthLimit ??= formOptionsMetadata.MultipartBodyLengthLimit;
+        otherFormOptionsMetadata.MultipartBoundaryLengthLimit ??=
+            formOptionsMetadata.MultipartBoundaryLengthLimit;
+        otherFormOptionsMetadata.MultipartHeadersCountLimit ??=
+            formOptionsMetadata.MultipartHeadersCountLimit;
+        otherFormOptionsMetadata.MultipartHeadersLengthLimit ??=
+            formOptionsMetadata.MultipartHeadersLengthLimit;
+        otherFormOptionsMetadata.MultipartBodyLengthLimit ??=
+            formOptionsMetadata.MultipartBodyLengthLimit;
     }
 }

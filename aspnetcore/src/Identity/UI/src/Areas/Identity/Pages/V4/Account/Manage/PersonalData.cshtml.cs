@@ -21,14 +21,13 @@ public abstract class PersonalDataModel : PageModel
     public virtual Task<IActionResult> OnGet() => throw new NotImplementedException();
 }
 
-internal sealed class PersonalDataModel<TUser> : PersonalDataModel where TUser : class
+internal sealed class PersonalDataModel<TUser> : PersonalDataModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
     private readonly ILogger<PersonalDataModel> _logger;
 
-    public PersonalDataModel(
-        UserManager<TUser> userManager,
-        ILogger<PersonalDataModel> logger)
+    public PersonalDataModel(UserManager<TUser> userManager, ILogger<PersonalDataModel> logger)
     {
         _userManager = userManager;
         _logger = logger;

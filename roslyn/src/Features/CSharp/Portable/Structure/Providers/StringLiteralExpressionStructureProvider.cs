@@ -10,41 +10,52 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.CSharp.Structure
 {
-    internal sealed class StringLiteralExpressionStructureProvider : AbstractSyntaxNodeStructureProvider<LiteralExpressionSyntax>
+    internal sealed class StringLiteralExpressionStructureProvider
+        : AbstractSyntaxNodeStructureProvider<LiteralExpressionSyntax>
     {
         protected override void CollectBlockSpans(
             SyntaxToken previousToken,
             LiteralExpressionSyntax node,
             ref TemporaryArray<BlockSpan> spans,
             BlockStructureOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            if (node.IsKind(SyntaxKind.StringLiteralExpression) &&
-                !node.ContainsDiagnostics &&
-                CouldBeMultiLine())
+            if (
+                node.IsKind(SyntaxKind.StringLiteralExpression)
+                && !node.ContainsDiagnostics
+                && CouldBeMultiLine()
+            )
             {
-                spans.Add(new BlockSpan(
-                    isCollapsible: true,
-                    textSpan: node.Span,
-                    hintSpan: node.Span,
-                    type: BlockTypes.Expression,
-                    autoCollapse: true,
-                    isDefaultCollapsed: false));
+                spans.Add(
+                    new BlockSpan(
+                        isCollapsible: true,
+                        textSpan: node.Span,
+                        hintSpan: node.Span,
+                        type: BlockTypes.Expression,
+                        autoCollapse: true,
+                        isDefaultCollapsed: false
+                    )
+                );
             }
 
             return;
 
             bool CouldBeMultiLine()
             {
-                if (node.Token.Kind() is SyntaxKind.MultiLineRawStringLiteralToken or SyntaxKind.Utf8MultiLineRawStringLiteralToken)
+                if (
+                    node.Token.Kind()
+                    is SyntaxKind.MultiLineRawStringLiteralToken
+                        or SyntaxKind.Utf8MultiLineRawStringLiteralToken
+                )
                     return true;
 
                 if (node.Token.IsVerbatimStringLiteral())
                 {
                     var span = node.Span;
                     var sourceText = node.SyntaxTree.GetText(cancellationToken);
-                    return sourceText.Lines.GetLineFromPosition(span.Start).LineNumber !=
-                           sourceText.Lines.GetLineFromPosition(span.End).LineNumber;
+                    return sourceText.Lines.GetLineFromPosition(span.Start).LineNumber
+                        != sourceText.Lines.GetLineFromPosition(span.End).LineNumber;
                 }
 
                 return false;

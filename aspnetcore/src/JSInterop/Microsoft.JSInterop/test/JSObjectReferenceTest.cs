@@ -47,8 +47,12 @@ public class JSObjectReferenceTest
         _ = jsObject.DisposeAsync();
 
         // Assert
-        await Assert.ThrowsAsync<ObjectDisposedException>(async () => await jsObject.InvokeAsync<object>("test", "arg1", "arg2"));
-        await Assert.ThrowsAsync<ObjectDisposedException>(async () => await jsObject.InvokeAsync<object>("test", CancellationToken.None, "arg1", "arg2"));
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await jsObject.InvokeAsync<object>("test", "arg1", "arg2")
+        );
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            await jsObject.InvokeAsync<object>("test", CancellationToken.None, "arg1", "arg2")
+        );
     }
 
     [Fact]
@@ -62,40 +66,58 @@ public class JSObjectReferenceTest
         _ = jsObject.DisposeAsync();
 
         // Assert
-        Assert.Throws<ObjectDisposedException>(() => jsObject.Invoke<object>("test", "arg1", "arg2"));
+        Assert.Throws<ObjectDisposedException>(() => jsObject.Invoke<object>("test", "arg1", "arg2")
+        );
     }
 
     class TestJSRuntime : JSRuntime
     {
         public int BeginInvokeJSInvocationCount { get; private set; }
 
-        protected override void BeginInvokeJS(long taskId, string identifier, string? argsJson, JSCallResultType resultType, long targetInstanceId)
+        protected override void BeginInvokeJS(
+            long taskId,
+            string identifier,
+            string? argsJson,
+            JSCallResultType resultType,
+            long targetInstanceId
+        )
         {
             BeginInvokeJSInvocationCount++;
         }
 
-        protected internal override void EndInvokeDotNet(DotNetInvocationInfo invocationInfo, in DotNetInvocationResult invocationResult)
-        {
-        }
+        protected internal override void EndInvokeDotNet(
+            DotNetInvocationInfo invocationInfo,
+            in DotNetInvocationResult invocationResult
+        ) { }
     }
 
     class TestJSInProcessRuntime : JSInProcessRuntime
     {
         public int InvokeJSInvocationCount { get; private set; }
 
-        protected override void BeginInvokeJS(long taskId, string identifier, string? argsJson, JSCallResultType resultType, long targetInstanceId)
-        {
-        }
+        protected override void BeginInvokeJS(
+            long taskId,
+            string identifier,
+            string? argsJson,
+            JSCallResultType resultType,
+            long targetInstanceId
+        ) { }
 
-        protected override string? InvokeJS(string identifier, string? argsJson, JSCallResultType resultType, long targetInstanceId)
+        protected override string? InvokeJS(
+            string identifier,
+            string? argsJson,
+            JSCallResultType resultType,
+            long targetInstanceId
+        )
         {
             InvokeJSInvocationCount++;
 
             return null;
         }
 
-        protected internal override void EndInvokeDotNet(DotNetInvocationInfo invocationInfo, in DotNetInvocationResult invocationResult)
-        {
-        }
+        protected internal override void EndInvokeDotNet(
+            DotNetInvocationInfo invocationInfo,
+            in DotNetInvocationResult invocationResult
+        ) { }
     }
 }

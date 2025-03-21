@@ -24,14 +24,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void RegionInIsPattern01()
         {
             var dataFlowAnalysisResults = CompileAndAnalyzeDataFlowExpression(
-@"class Program
+                @"class Program
 {
     public static void Main(string[] args)
     {
         object o = args;
         if (/*<bind>*/o is int i && i > 10/*</bind>*/) {}
     }
-}");
+}"
+            );
             Assert.Equal("i", GetSymbolNamesJoined(dataFlowAnalysisResults.VariablesDeclared));
             Assert.Equal("o", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsIn));
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsOut));
@@ -50,14 +51,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void RegionInIsPattern02()
         {
             var dataFlowAnalysisResults = CompileAndAnalyzeDataFlowExpression(
-@"class Program
+                @"class Program
 {
     public static void Main(string[] args)
     {
         object o = args;
         if (/*<bind>*/o is int i/*</bind>*/ && i > 10) {}
     }
-}");
+}"
+            );
             Assert.Equal("i", GetSymbolNamesJoined(dataFlowAnalysisResults.VariablesDeclared));
             Assert.Equal("o", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsIn));
             Assert.Equal("i", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsOut));
@@ -76,14 +78,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void RegionInIsPattern03()
         {
             var dataFlowAnalysisResults = CompileAndAnalyzeDataFlowExpression(
-@"class Program
+                @"class Program
 {
     public static void Main(string[] args)
     {
         object o = args;
         if (o is int i && /*<bind>*/i > 10/*</bind>*/) {}
     }
-}");
+}"
+            );
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.VariablesDeclared));
             Assert.Equal("i", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsIn));
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsOut));
@@ -91,7 +94,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("i", GetSymbolNamesJoined(dataFlowAnalysisResults.ReadInside));
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.WrittenInside));
             Assert.Equal("args, o", GetSymbolNamesJoined(dataFlowAnalysisResults.ReadOutside));
-            Assert.Equal("args, o, i", GetSymbolNamesJoined(dataFlowAnalysisResults.WrittenOutside));
+            Assert.Equal(
+                "args, o, i",
+                GetSymbolNamesJoined(dataFlowAnalysisResults.WrittenOutside)
+            );
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.Captured));
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.CapturedInside));
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.CapturedOutside));
@@ -102,14 +108,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void RegionInIsPattern04()
         {
             var dataFlowAnalysisResults = CompileAndAnalyzeDataFlowExpression(
-@"class Program
+                @"class Program
 {
     public static void Main(string[] args)
     {
         int o = args.Length;
         if (/*<bind>*/o is int i/*</bind>*/ && i > 10) {}
     }
-}");
+}"
+            );
             Assert.Equal("i", GetSymbolNamesJoined(dataFlowAnalysisResults.VariablesDeclared));
             Assert.Equal("o", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsIn));
             Assert.Equal("i", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsOut));
@@ -128,13 +135,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void RegionInIsPattern05()
         {
             var dataFlowAnalysisResults = CompileAndAnalyzeDataFlowExpression(
-@"class Program
+                @"class Program
 {
     public static void Main(string[] args)
     {
         if (/*<bind>*/args is [] i/*</bind>*/) {}
     }
-}");
+}"
+            );
             Assert.Equal("i", GetSymbolNamesJoined(dataFlowAnalysisResults.VariablesDeclared));
             Assert.Equal("args", GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsIn));
             Assert.Null(GetSymbolNamesJoined(dataFlowAnalysisResults.DataFlowsOut));

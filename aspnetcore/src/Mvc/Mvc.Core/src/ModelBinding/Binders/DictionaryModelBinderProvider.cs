@@ -21,26 +21,38 @@ public class DictionaryModelBinderProvider : IModelBinderProvider
         ArgumentNullException.ThrowIfNull(context);
 
         var modelType = context.Metadata.ModelType;
-        var dictionaryType = ClosedGenericMatcher.ExtractGenericInterface(modelType, typeof(IDictionary<,>));
+        var dictionaryType = ClosedGenericMatcher.ExtractGenericInterface(
+            modelType,
+            typeof(IDictionary<,>)
+        );
         if (dictionaryType != null)
         {
-            var binderType = typeof(DictionaryModelBinder<,>).MakeGenericType(dictionaryType.GenericTypeArguments);
+            var binderType = typeof(DictionaryModelBinder<,>).MakeGenericType(
+                dictionaryType.GenericTypeArguments
+            );
 
             var keyType = dictionaryType.GenericTypeArguments[0];
-            var keyBinder = context.CreateBinder(context.MetadataProvider.GetMetadataForType(keyType));
+            var keyBinder = context.CreateBinder(
+                context.MetadataProvider.GetMetadataForType(keyType)
+            );
 
             var valueType = dictionaryType.GenericTypeArguments[1];
-            var valueBinder = context.CreateBinder(context.MetadataProvider.GetMetadataForType(valueType));
+            var valueBinder = context.CreateBinder(
+                context.MetadataProvider.GetMetadataForType(valueType)
+            );
 
             var loggerFactory = context.Services.GetRequiredService<ILoggerFactory>();
             var mvcOptions = context.Services.GetRequiredService<IOptions<MvcOptions>>().Value;
-            return (IModelBinder)Activator.CreateInstance(
-                binderType,
-                keyBinder,
-                valueBinder,
-                loggerFactory,
-                true /* allowValidatingTopLevelNodes */,
-                mvcOptions)!;
+            return (IModelBinder)
+                Activator.CreateInstance(
+                    binderType,
+                    keyBinder,
+                    valueBinder,
+                    loggerFactory,
+                    true /* allowValidatingTopLevelNodes */
+                    ,
+                    mvcOptions
+                )!;
         }
 
         return null;

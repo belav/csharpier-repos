@@ -38,7 +38,10 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void GetCustomAttributesTest()
         {
-            object[] attributes = _customAssembly.GetCustomAttributes(typeof(TestAssemblyAttribute), true);
+            object[] attributes = _customAssembly.GetCustomAttributes(
+                typeof(TestAssemblyAttribute),
+                true
+            );
             Assert.Single(attributes);
             Assert.IsType<TestAssemblyAttribute>(attributes[0]);
         }
@@ -46,10 +49,17 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void GetCustomAttributesDataTest()
         {
-            IList<CustomAttributeData> customAttributesData = _customAssembly.GetCustomAttributesData();
+            IList<CustomAttributeData> customAttributesData =
+                _customAssembly.GetCustomAttributesData();
             Assert.NotEmpty(customAttributesData);
-            Assert.All(customAttributesData,
-                cad => Assert.Equal(ProjectionConstants.ProjectingCustomAttributeData, cad.GetType().FullName));
+            Assert.All(
+                customAttributesData,
+                cad =>
+                    Assert.Equal(
+                        ProjectionConstants.ProjectingCustomAttributeData,
+                        cad.GetType().FullName
+                    )
+            );
         }
 
         [Fact]
@@ -66,8 +76,10 @@ namespace System.Reflection.Context.Tests
         {
             Type[] exportedTypes = _customAssembly.GetExportedTypes();
             Assert.NotEmpty(exportedTypes);
-            Assert.All(exportedTypes,
-                (et) => Assert.Equal(ProjectionConstants.CustomType, et.GetType().FullName));
+            Assert.All(
+                exportedTypes,
+                (et) => Assert.Equal(ProjectionConstants.CustomType, et.GetType().FullName)
+            );
         }
 
         [Fact]
@@ -76,19 +88,31 @@ namespace System.Reflection.Context.Tests
             Module[] loadedModules = _customAssembly.GetLoadedModules(true);
             Assert.Single(loadedModules);
             if (PlatformDetection.HasAssemblyFiles)
-                Assert.Equal(typeof(CustomAssemblyTests).Assembly.GetName().Name + ".dll", loadedModules[0].Name);
-            Assert.All(loadedModules,
-                (mod) => Assert.Equal(ProjectionConstants.CustomModule, mod.GetType().FullName));
+                Assert.Equal(
+                    typeof(CustomAssemblyTests).Assembly.GetName().Name + ".dll",
+                    loadedModules[0].Name
+                );
+            Assert.All(
+                loadedModules,
+                (mod) => Assert.Equal(ProjectionConstants.CustomModule, mod.GetType().FullName)
+            );
         }
 
         [Fact]
         public void GetManifestResourceInfoTest()
         {
-            IEnumerable<ManifestResourceInfo> manifestResourceInfos = _customAssembly.GetManifestResourceNames()
+            IEnumerable<ManifestResourceInfo> manifestResourceInfos = _customAssembly
+                .GetManifestResourceNames()
                 .Select(mrn => _customAssembly.GetManifestResourceInfo(mrn));
             Assert.NotEmpty(manifestResourceInfos);
-            Assert.All(manifestResourceInfos,
-                (mri) => Assert.Equal(ProjectionConstants.ProjectingManifestResourceInfo, mri.GetType().FullName));
+            Assert.All(
+                manifestResourceInfos,
+                (mri) =>
+                    Assert.Equal(
+                        ProjectionConstants.ProjectingManifestResourceInfo,
+                        mri.GetType().FullName
+                    )
+            );
         }
 
         [Fact]
@@ -97,9 +121,15 @@ namespace System.Reflection.Context.Tests
             Module[] modules = _customAssembly.GetModules(true);
             Assert.Single(modules);
             if (PlatformDetection.HasAssemblyFiles)
-                Assert.Equal(typeof(CustomAssemblyTests).Assembly.GetName().Name + ".dll", modules[0].Name);
-            Assert.All(modules,
-                (module) => Assert.Equal(ProjectionConstants.CustomModule, module.GetType().FullName));
+                Assert.Equal(
+                    typeof(CustomAssemblyTests).Assembly.GetName().Name + ".dll",
+                    modules[0].Name
+                );
+            Assert.All(
+                modules,
+                (module) =>
+                    Assert.Equal(ProjectionConstants.CustomModule, module.GetType().FullName)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.HasAssemblyFiles))]
@@ -114,17 +144,32 @@ namespace System.Reflection.Context.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/69919", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/69919",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         public void GetSatelliteAssemblyTest()
         {
-            Assert.Throws<FileNotFoundException>(() => _customAssembly.GetSatelliteAssembly(CultureInfo.InvariantCulture));
-            Assert.Throws<FileNotFoundException>(() => _customAssembly.GetSatelliteAssembly(CultureInfo.InvariantCulture, Version.Parse("1.0.0.0")));
+            Assert.Throws<FileNotFoundException>(() =>
+                _customAssembly.GetSatelliteAssembly(CultureInfo.InvariantCulture)
+            );
+            Assert.Throws<FileNotFoundException>(() =>
+                _customAssembly.GetSatelliteAssembly(
+                    CultureInfo.InvariantCulture,
+                    Version.Parse("1.0.0.0")
+                )
+            );
         }
 
         [Fact]
         public void GetTypeTest()
         {
-            Type type = _customAssembly.GetType(typeof(TestObject).FullName, throwOnError: false, ignoreCase: false);
+            Type type = _customAssembly.GetType(
+                typeof(TestObject).FullName,
+                throwOnError: false,
+                ignoreCase: false
+            );
             Assert.NotNull(type);
             Assert.Equal(ProjectionConstants.CustomType, type.GetType().FullName);
         }
@@ -134,8 +179,10 @@ namespace System.Reflection.Context.Tests
         {
             Type[] types = _customAssembly.GetTypes();
             Assert.NotEmpty(types);
-            Assert.All(types,
-                (type) => Assert.Equal(ProjectionConstants.CustomType, type.GetType().FullName));
+            Assert.All(
+                types,
+                (type) => Assert.Equal(ProjectionConstants.CustomType, type.GetType().FullName)
+            );
         }
 
         [Fact]

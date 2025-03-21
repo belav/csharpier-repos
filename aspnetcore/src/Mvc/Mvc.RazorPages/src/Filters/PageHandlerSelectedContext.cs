@@ -22,7 +22,8 @@ public class PageHandlerSelectedContext : FilterContext
     public PageHandlerSelectedContext(
         PageContext pageContext,
         IList<IFilterMetadata> filters,
-        object handlerInstance)
+        object handlerInstance
+    )
         : base(pageContext, filters)
     {
         ArgumentNullException.ThrowIfNull(handlerInstance);

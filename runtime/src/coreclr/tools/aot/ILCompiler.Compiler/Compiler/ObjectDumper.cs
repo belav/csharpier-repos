@@ -2,9 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using ILCompiler.DependencyAnalysis;
-
 using ObjectData = ILCompiler.DependencyAnalysis.ObjectNode.ObjectData;
 
 namespace ILCompiler
@@ -13,8 +11,18 @@ namespace ILCompiler
     {
         internal abstract void Begin();
         internal abstract void End();
-        void IObjectDumper.DumpObjectNode(NodeFactory factory, ObjectNode node, ObjectData objectData) => DumpObjectNode(factory, node, objectData);
-        protected abstract void DumpObjectNode(NodeFactory factory, ObjectNode node, ObjectData objectData);
+
+        void IObjectDumper.DumpObjectNode(
+            NodeFactory factory,
+            ObjectNode node,
+            ObjectData objectData
+        ) => DumpObjectNode(factory, node, objectData);
+
+        protected abstract void DumpObjectNode(
+            NodeFactory factory,
+            ObjectNode node,
+            ObjectData objectData
+        );
 
         protected static string GetObjectNodeName(ObjectNode node)
         {
@@ -53,16 +61,22 @@ namespace ILCompiler
 
             public ComposedObjectDumper(ObjectDumper[] dumpers) => _dumpers = dumpers;
 
-            protected override void DumpObjectNode(NodeFactory factory, ObjectNode node, ObjectData objectData)
+            protected override void DumpObjectNode(
+                NodeFactory factory,
+                ObjectNode node,
+                ObjectData objectData
+            )
             {
                 foreach (var d in _dumpers)
                     d.DumpObjectNode(factory, node, objectData);
             }
+
             internal override void Begin()
             {
                 foreach (var d in _dumpers)
                     d.Begin();
             }
+
             internal override void End()
             {
                 foreach (var d in _dumpers)

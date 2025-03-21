@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,7 +28,6 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.CodeDom;
 using System.CodeDom.Compiler;
@@ -37,28 +36,40 @@ using System.IO;
 using System.Reflection;
 using System.Web.UI;
 
-namespace System.Web.Compilation {
-	[BuildProviderAppliesTo (BuildProviderAppliesTo.Web)]
-	sealed class UserControlBuildProvider : TemplateBuildProvider {
-		public UserControlBuildProvider ()
-		{
-		}
+namespace System.Web.Compilation
+{
+    [BuildProviderAppliesTo(BuildProviderAppliesTo.Web)]
+    sealed class UserControlBuildProvider : TemplateBuildProvider
+    {
+        public UserControlBuildProvider() { }
 
-		protected override BaseCompiler CreateCompiler (TemplateParser parser)
-		{
-			return new UserControlCompiler (parser as UserControlParser);
-		}
+        protected override BaseCompiler CreateCompiler(TemplateParser parser)
+        {
+            return new UserControlCompiler(parser as UserControlParser);
+        }
 
-		protected override TemplateParser CreateParser (VirtualPath virtualPath, string physicalPath, HttpContext context)
-		{	
-			return CreateParser (virtualPath, physicalPath, OpenReader (virtualPath.Original), context);
-		}
-		
-		protected override TemplateParser CreateParser (VirtualPath virtualPath, string physicalPath, TextReader reader, HttpContext context)
-		{
-			return new UserControlParser (virtualPath, physicalPath, reader, context);
-		}
-	}
+        protected override TemplateParser CreateParser(
+            VirtualPath virtualPath,
+            string physicalPath,
+            HttpContext context
+        )
+        {
+            return CreateParser(
+                virtualPath,
+                physicalPath,
+                OpenReader(virtualPath.Original),
+                context
+            );
+        }
+
+        protected override TemplateParser CreateParser(
+            VirtualPath virtualPath,
+            string physicalPath,
+            TextReader reader,
+            HttpContext context
+        )
+        {
+            return new UserControlParser(virtualPath, physicalPath, reader, context);
+        }
+    }
 }
-
-

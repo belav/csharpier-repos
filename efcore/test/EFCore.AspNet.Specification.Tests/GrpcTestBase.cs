@@ -16,8 +16,8 @@ public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
 
     protected TFixture Fixture { get; }
 
-    protected List<EntityTypeMapping> ExpectedMappings
-        => new()
+    protected List<EntityTypeMapping> ExpectedMappings =>
+        new()
         {
             new EntityTypeMapping
             {
@@ -30,7 +30,7 @@ public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
                     "Property: PostTag (Dictionary<string, object>).PostsInTagDataPostId (no field, int) Indexer Required PK FK AfterSave:Throw",
                     "Property: PostTag (Dictionary<string, object>).TagsInPostDataTagId (no field, int) Indexer Required PK FK Index AfterSave:Throw",
                 },
-                Indexes = { "{'TagsInPostDataTagId'} ", },
+                Indexes = { "{'TagsInPostDataTagId'} " },
                 FKs =
                 {
                     "ForeignKey: PostTag (Dictionary<string, object>) {'PostsInTagDataPostId'} -> Post {'PostId'} Required Cascade",
@@ -62,9 +62,15 @@ public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
                     "Property: Post.PostStat (postStat_, PostStatus) Required",
                     "Property: Post.Title (title_, string)",
                 },
-                Indexes = { "{'AuthorId'} ", },
-                FKs = { "ForeignKey: Post {'AuthorId'} -> Author {'AuthorId'} Required Cascade ToPrincipal: PostAuthor", },
-                Navigations = { "Navigation: Post.PostAuthor (postAuthor_, Author) ToPrincipal Author", },
+                Indexes = { "{'AuthorId'} " },
+                FKs =
+                {
+                    "ForeignKey: Post {'AuthorId'} -> Author {'AuthorId'} Required Cascade ToPrincipal: PostAuthor",
+                },
+                Navigations =
+                {
+                    "Navigation: Post.PostAuthor (postAuthor_, Author) ToPrincipal Author",
+                },
                 SkipNavigations =
                 {
                     "SkipNavigation: Post.TagsInPostData (tagsInPostData_, RepeatedField<Tag>) CollectionTag Inverse: PostsInTagData",
@@ -92,7 +98,10 @@ public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = Fixture.CreateContext();
 
-        var entityTypeMappings = context.Model.GetEntityTypes().Select(e => new EntityTypeMapping(e)).ToList();
+        var entityTypeMappings = context
+            .Model.GetEntityTypes()
+            .Select(e => new EntityTypeMapping(e))
+            .ToList();
         EntityTypeMapping.AssertEqual(ExpectedMappings, entityTypeMappings);
     }
 
@@ -101,13 +110,23 @@ public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
     {
         using var context = Fixture.CreateContext();
 
-        var post = context.Set<Post>().Include(e => e.PostAuthor).Include(e => e.TagsInPostData).Single();
+        var post = context
+            .Set<Post>()
+            .Include(e => e.PostAuthor)
+            .Include(e => e.TagsInPostData)
+            .Single();
 
         Assert.Equal("Arthur's post", post.Title);
-        Assert.Equal(new DateTime(2021, 9, 3, 12, 10, 0, DateTimeKind.Utc), post.DateCreated.ToDateTime());
+        Assert.Equal(
+            new DateTime(2021, 9, 3, 12, 10, 0, DateTimeKind.Utc),
+            post.DateCreated.ToDateTime()
+        );
         Assert.Equal(PostStatus.Published, post.PostStat);
         Assert.Equal("Arthur", post.PostAuthor.Name);
-        Assert.Equal(new DateTime(1973, 9, 3, 12, 10, 0, DateTimeKind.Utc), post.PostAuthor.DateCreated.ToDateTime());
+        Assert.Equal(
+            new DateTime(1973, 9, 3, 12, 10, 0, DateTimeKind.Utc),
+            post.PostAuthor.DateCreated.ToDateTime()
+        );
 
         Assert.Equal(2, post.TagsInPostData.Count);
         Assert.Contains("Puppies", post.TagsInPostData.Select(e => e.Name).ToList());
@@ -119,39 +138,52 @@ public abstract class GrpcTestBase<TFixture> : IClassFixture<TFixture>
     public class GrpcContext : PoolableDbContext
     {
         public GrpcContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var timeStampConverter = new ValueConverter<Timestamp, DateTime>(
                 v => v.ToDateTime(),
-                v => new DateTime(v.Ticks, DateTimeKind.Utc).ToTimestamp());
+                v => new DateTime(v.Ticks, DateTimeKind.Utc).ToTimestamp()
+            );
 
-            modelBuilder.Entity<Author>().Property(e => e.DateCreated).HasConversion(timeStampConverter);
-            modelBuilder.Entity<Post>().Property(e => e.DateCreated).HasConversion(timeStampConverter);
+            modelBuilder
+                .Entity<Author>()
+                .Property(e => e.DateCreated)
+                .HasConversion(timeStampConverter);
+            modelBuilder
+                .Entity<Post>()
+                .Property(e => e.DateCreated)
+                .HasConversion(timeStampConverter);
             modelBuilder.Entity<Tag>();
         }
     }
 
     public abstract class GrpcFixtureBase : SharedStoreFixtureBase<GrpcContext>
     {
-        protected override string StoreName
-            => "GrpcTest";
+        protected override string StoreName => "GrpcTest";
 
         protected override void Seed(GrpcContext context)
         {
             var post = new Post
             {
-                DateCreated = Timestamp.FromDateTime(new DateTime(2021, 9, 3, 12, 10, 0, DateTimeKind.Utc)),
+                DateCreated = Timestamp.FromDateTime(
+                    new DateTime(2021, 9, 3, 12, 10, 0, DateTimeKind.Utc)
+                ),
                 Title = "Arthur's post",
                 PostAuthor = new Author
                 {
-                    DateCreated = Timestamp.FromDateTime(new DateTime(1973, 9, 3, 12, 10, 0, DateTimeKind.Utc)), Name = "Arthur"
+                    DateCreated = Timestamp.FromDateTime(
+                        new DateTime(1973, 9, 3, 12, 10, 0, DateTimeKind.Utc)
+                    ),
+                    Name = "Arthur",
                 },
                 PostStat = PostStatus.Published,
-                TagsInPostData = { new Tag { Name = "Kittens" }, new Tag { Name = "Puppies" } }
+                TagsInPostData =
+                {
+                    new Tag { Name = "Kittens" },
+                    new Tag { Name = "Puppies" },
+                },
             };
 
             context.Add(post);

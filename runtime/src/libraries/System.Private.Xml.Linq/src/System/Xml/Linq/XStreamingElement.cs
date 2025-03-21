@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.IO;
-
 using CultureInfo = System.Globalization.CultureInfo;
 
 namespace System.Xml.Linq
@@ -55,10 +54,7 @@ namespace System.Xml.Linq
         /// </summary>
         public XName Name
         {
-            get
-            {
-                return name;
-            }
+            get { return name; }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
@@ -78,7 +74,8 @@ namespace System.Xml.Linq
                 if (list == null)
                 {
                     list = new List<object>();
-                    if (this.content != null) list.Add(this.content);
+                    if (this.content != null)
+                        list.Add(this.content);
                     this.content = list;
                 }
                 list.Add(content);
@@ -229,8 +226,10 @@ namespace System.Xml.Linq
             {
                 XmlWriterSettings ws = new XmlWriterSettings();
                 ws.OmitXmlDeclaration = true;
-                if ((o & SaveOptions.DisableFormatting) == 0) ws.Indent = true;
-                if ((o & SaveOptions.OmitDuplicateNamespaces) != 0) ws.NamespaceHandling |= NamespaceHandling.OmitDuplicates;
+                if ((o & SaveOptions.DisableFormatting) == 0)
+                    ws.Indent = true;
+                if ((o & SaveOptions.OmitDuplicateNamespaces) != 0)
+                    ws.NamespaceHandling |= NamespaceHandling.OmitDuplicates;
                 using (XmlWriter w = XmlWriter.Create(sw, ws))
                 {
                     WriteTo(w);

@@ -17,8 +17,8 @@ public static class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
     where TAnalyzer : DiagnosticAnalyzer, new()
     where TCodeFix : CodeFixProvider, new()
 {
-    public static DiagnosticResult Diagnostic(string diagnosticId)
-        => CSharpAnalyzerVerifier<TAnalyzer, XUnitVerifier>.Diagnostic(diagnosticId);
+    public static DiagnosticResult Diagnostic(string diagnosticId) =>
+        CSharpAnalyzerVerifier<TAnalyzer, XUnitVerifier>.Diagnostic(diagnosticId);
 
     public static Task VerifyAnalyzerAsync(string source, params DiagnosticResult[] expected)
     {
@@ -39,17 +39,22 @@ public static class CSharpCodeFixVerifier<TAnalyzer, TCodeFix>
         protected override async Task<Project> CreateProjectImplAsync(
             EvaluatedProjectState primaryProject,
             ImmutableArray<EvaluatedProjectState> additionalProjects,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var metadataReferences
-                = DependencyContext.Load(GetType().Assembly)
-                    .CompileLibraries
-                    .SelectMany(c => c.ResolveReferencePaths())
-                    .Select(path => MetadataReference.CreateFromFile(path))
-                    .Cast<MetadataReference>()
-                    .ToList();
+            var metadataReferences = DependencyContext
+                .Load(GetType().Assembly)
+                .CompileLibraries.SelectMany(c => c.ResolveReferencePaths())
+                .Select(path => MetadataReference.CreateFromFile(path))
+                .Cast<MetadataReference>()
+                .ToList();
 
-            var project = await base.CreateProjectImplAsync(primaryProject, additionalProjects, cancellationToken).ConfigureAwait(false);
+            var project = await base.CreateProjectImplAsync(
+                    primaryProject,
+                    additionalProjects,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return project.WithMetadataReferences(metadataReferences);
         }
     }

@@ -15,9 +15,18 @@ public class SqlServerDateOnlyMethodTranslator : IMethodCallTranslator
 {
     private readonly Dictionary<MethodInfo, string> _methodInfoDatePartMapping = new()
     {
-        { typeof(DateOnly).GetRuntimeMethod(nameof(DateOnly.AddYears), new[] { typeof(int) })!, "year" },
-        { typeof(DateOnly).GetRuntimeMethod(nameof(DateOnly.AddMonths), new[] { typeof(int) })!, "month" },
-        { typeof(DateOnly).GetRuntimeMethod(nameof(DateOnly.AddDays), new[] { typeof(int) })!, "day" }
+        {
+            typeof(DateOnly).GetRuntimeMethod(nameof(DateOnly.AddYears), new[] { typeof(int) })!,
+            "year"
+        },
+        {
+            typeof(DateOnly).GetRuntimeMethod(nameof(DateOnly.AddMonths), new[] { typeof(int) })!,
+            "month"
+        },
+        {
+            typeof(DateOnly).GetRuntimeMethod(nameof(DateOnly.AddDays), new[] { typeof(int) })!,
+            "day"
+        },
     };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
@@ -43,25 +52,33 @@ public class SqlServerDateOnlyMethodTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (_methodInfoDatePartMapping.TryGetValue(method, out var datePart)
-            && instance != null)
+        if (_methodInfoDatePartMapping.TryGetValue(method, out var datePart) && instance != null)
         {
             instance = _sqlExpressionFactory.ApplyDefaultTypeMapping(instance);
 
             return _sqlExpressionFactory.Function(
                 "DATEADD",
-                new[] { _sqlExpressionFactory.Fragment(datePart), _sqlExpressionFactory.Convert(arguments[0], typeof(int)), instance },
+                new[]
+                {
+                    _sqlExpressionFactory.Fragment(datePart),
+                    _sqlExpressionFactory.Convert(arguments[0], typeof(int)),
+                    instance,
+                },
                 nullable: true,
                 argumentsPropagateNullability: new[] { false, true, true },
                 instance.Type,
-                instance.TypeMapping);
+                instance.TypeMapping
+            );
         }
 
-        if (method.DeclaringType == typeof(DateOnly)
+        if (
+            method.DeclaringType == typeof(DateOnly)
             && method.Name == nameof(DateOnly.FromDateTime)
-            && arguments.Count == 1)
+            && arguments.Count == 1
+        )
         {
             return _sqlExpressionFactory.Convert(arguments[0], typeof(DateOnly));
         }

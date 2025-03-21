@@ -1,9 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// A nonlocal exit and a catchret in a funclet where the destination label is also in the same funclet 
+// A nonlocal exit and a catchret in a funclet where the destination label is also in the same funclet
 // cause confusion when we're building FG for the funclet (114611)
-
 
 using System;
 using Xunit;
@@ -26,8 +25,9 @@ namespace hello_catchretnonlocalexitinfunclet_leaves_cs
             // Create and initialize test log object
             testLog = new TestUtil.TestLog(expectedOut);
         }
+
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();
@@ -43,11 +43,13 @@ namespace hello_catchretnonlocalexitinfunclet_leaves_cs
             {
                 try
                 {
-                    if (i != 0) goto incatch;
+                    if (i != 0)
+                        goto incatch;
                 }
                 catch
                 {
-                    if (i != 0) goto incatch;
+                    if (i != 0)
+                        goto incatch;
                     Console.WriteLine("end inner catch");
                 }
                 Console.WriteLine("unreached");
@@ -60,8 +62,6 @@ namespace hello_catchretnonlocalexitinfunclet_leaves_cs
             testLog.StopRecording();
 
             return testLog.VerifyOutput();
-
         }
     }
 }
-

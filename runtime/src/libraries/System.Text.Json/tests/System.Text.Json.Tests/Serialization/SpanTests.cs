@@ -12,7 +12,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ParseNullTypeFail()
         {
-            Assert.Throws<ArgumentNullException>(() => JsonSerializer.Deserialize(new ReadOnlySpan<byte>(), (Type)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Deserialize(new ReadOnlySpan<byte>(), (Type)null)
+            );
         }
 
         [Theory]
@@ -31,20 +33,20 @@ namespace System.Text.Json.Serialization.Tests
         {
             MemoryStream stream = new MemoryStream(data);
             var options = new JsonSerializerOptions { IncludeFields = true };
-            object obj = JsonSerializer.DeserializeAsync(
-                stream,
-                classType,
-                options).Result;
+            object obj = JsonSerializer.DeserializeAsync(stream, classType, options).Result;
 
             Assert.IsAssignableFrom<ITestClass>(obj);
             ((ITestClass)obj).Verify();
 
             // Try again with a smaller initial buffer size to ensure we handle incomplete data
             stream = new MemoryStream(data);
-            obj = JsonSerializer.DeserializeAsync(
-                stream,
-                classType,
-                new JsonSerializerOptions { DefaultBufferSize = 5, IncludeFields = true }).Result;
+            obj = JsonSerializer
+                .DeserializeAsync(
+                    stream,
+                    classType,
+                    new JsonSerializerOptions { DefaultBufferSize = 5, IncludeFields = true }
+                )
+                .Result;
 
             Assert.IsAssignableFrom<ITestClass>(obj);
             ((ITestClass)obj).Verify();
@@ -53,7 +55,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ReadGenericApi()
         {
-            SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(SimpleTestClass.s_data);
+            SimpleTestClass obj = JsonSerializer.Deserialize<SimpleTestClass>(
+                SimpleTestClass.s_data
+            );
             obj.Verify();
         }
 
@@ -70,7 +74,9 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ToStringNullTypeFail()
         {
-            Assert.Throws<ArgumentNullException>(() => JsonSerializer.Serialize(new object(), (Type)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Serialize(new object(), (Type)null)
+            );
         }
 
         [Fact]
@@ -85,7 +91,9 @@ namespace System.Text.Json.Serialization.Tests
             byte[] encodedNull = Encoding.UTF8.GetBytes(@"null");
 
             {
-                Assert.Throws<ArgumentNullException>(() => JsonSerializer.SerializeToUtf8Bytes(null, null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    JsonSerializer.SerializeToUtf8Bytes(null, null)
+                );
             }
 
             {
@@ -96,10 +104,7 @@ namespace System.Text.Json.Serialization.Tests
 
         public static IEnumerable<object[]> ReadSuccessCases
         {
-            get
-            {
-                return TestData.ReadSuccessCases;
-            }
+            get { return TestData.ReadSuccessCases; }
         }
     }
 }

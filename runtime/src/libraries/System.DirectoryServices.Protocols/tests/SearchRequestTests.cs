@@ -29,13 +29,31 @@ namespace System.DirectoryServices.Protocols.Tests
         [Theory]
         [InlineData(null, null, SearchScope.Subtree, null)]
         [InlineData("", "", SearchScope.OneLevel, new string[0])]
-        [InlineData("DistinguishedName", "LdapFilter", SearchScope.Base, new string[] { "attribute" })]
+        [InlineData(
+            "DistinguishedName",
+            "LdapFilter",
+            SearchScope.Base,
+            new string[] { "attribute" }
+        )]
         [InlineData("DistinguishedName", "LdapFilter", SearchScope.OneLevel, new string[] { null })]
-        public void Ctor_DistinguishedName_LdapFilter_SearchScope_AttributeList(string distinguishedName, string ldapFilter, SearchScope searchScope, string[] attributeList)
+        public void Ctor_DistinguishedName_LdapFilter_SearchScope_AttributeList(
+            string distinguishedName,
+            string ldapFilter,
+            SearchScope searchScope,
+            string[] attributeList
+        )
         {
-            var request = new SearchRequest(distinguishedName, ldapFilter, searchScope, attributeList);
+            var request = new SearchRequest(
+                distinguishedName,
+                ldapFilter,
+                searchScope,
+                attributeList
+            );
             Assert.Equal(DereferenceAlias.Never, request.Aliases);
-            Assert.Equal(attributeList ?? Enumerable.Empty<string>(), request.Attributes.Cast<string>());
+            Assert.Equal(
+                attributeList ?? Enumerable.Empty<string>(),
+                request.Attributes.Cast<string>()
+            );
             Assert.Empty(request.Controls);
             Assert.Equal(distinguishedName, request.DistinguishedName);
             Assert.Equal(ldapFilter, request.Filter);
@@ -50,7 +68,10 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData(SearchScope.Subtree + 1)]
         public void Ctor_InvalidScope_ThrowsInvalidEnumArgumentException(SearchScope searchScope)
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => new SearchRequest("DistinguishedName", "LdapFilter", searchScope));
+            AssertExtensions.Throws<InvalidEnumArgumentException>(
+                "value",
+                () => new SearchRequest("DistinguishedName", "LdapFilter", searchScope)
+            );
         }
 
         [Fact]
@@ -90,9 +111,11 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Aliases_SetInvalid_ThrowsInvalidEnumArgumentException(DereferenceAlias aliases)
         {
             var request = new SearchRequest();
-            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => request.Aliases = aliases);
+            AssertExtensions.Throws<InvalidEnumArgumentException>(
+                "value",
+                () => request.Aliases = aliases
+            );
         }
-
 
         [Fact]
         public void SizeLimit_SetValid_GetReturnsExpected()
@@ -121,7 +144,10 @@ namespace System.DirectoryServices.Protocols.Tests
         public void TimeLimit_SetInvalid_ThrowsArgumentException(long totalSeconds)
         {
             var request = new SearchRequest();
-            AssertExtensions.Throws<ArgumentException>("value", () => request.TimeLimit = TimeSpan.FromSeconds(totalSeconds));
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => request.TimeLimit = TimeSpan.FromSeconds(totalSeconds)
+            );
         }
 
         [Fact]

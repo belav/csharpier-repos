@@ -18,36 +18,62 @@ namespace System.Formats.Tar.Tests
         protected void TestConstructionConversion(
             TarEntryType originalEntryType,
             TarEntryFormat firstFormat,
-            TarEntryFormat formatToConvert)
+            TarEntryFormat formatToConvert
+        )
         {
             DateTimeOffset now = DateTimeOffset.UtcNow;
 
             using MemoryStream dataStream = new MemoryStream();
 
-            TarEntryType actualEntryType = GetTarEntryTypeForTarEntryFormat(originalEntryType, firstFormat);
+            TarEntryType actualEntryType = GetTarEntryTypeForTarEntryFormat(
+                originalEntryType,
+                firstFormat
+            );
 
             TarEntry firstEntry = GetFirstEntry(dataStream, actualEntryType, firstFormat);
-            TarEntry otherEntry = ConvertAndVerifyEntry(firstEntry, originalEntryType, formatToConvert, now);
+            TarEntry otherEntry = ConvertAndVerifyEntry(
+                firstEntry,
+                originalEntryType,
+                formatToConvert,
+                now
+            );
         }
 
         protected void TestConstructionConversionBackAndForth(
             TarEntryType originalEntryType,
             TarEntryFormat firstAndLastFormat,
-            TarEntryFormat formatToConvert)
+            TarEntryFormat formatToConvert
+        )
         {
             DateTimeOffset now = DateTimeOffset.UtcNow;
 
             using MemoryStream dataStream = new MemoryStream();
 
-            TarEntryType firstAndLastEntryType = GetTarEntryTypeForTarEntryFormat(originalEntryType, firstAndLastFormat);
+            TarEntryType firstAndLastEntryType = GetTarEntryTypeForTarEntryFormat(
+                originalEntryType,
+                firstAndLastFormat
+            );
 
-            TarEntry firstEntry = GetFirstEntry(dataStream, firstAndLastEntryType, firstAndLastFormat);
-            TarEntry otherEntry = ConvertAndVerifyEntry(firstEntry, originalEntryType, formatToConvert, now); // First conversion
+            TarEntry firstEntry = GetFirstEntry(
+                dataStream,
+                firstAndLastEntryType,
+                firstAndLastFormat
+            );
+            TarEntry otherEntry = ConvertAndVerifyEntry(
+                firstEntry,
+                originalEntryType,
+                formatToConvert,
+                now
+            ); // First conversion
             DateTimeOffset secondNow = DateTimeOffset.UtcNow;
             ConvertAndVerifyEntry(otherEntry, firstAndLastEntryType, firstAndLastFormat, secondNow); // Convert back to original format
         }
 
-        private TarEntry GetFirstEntry(MemoryStream dataStream, TarEntryType entryType, TarEntryFormat format)
+        private TarEntry GetFirstEntry(
+            MemoryStream dataStream,
+            TarEntryType entryType,
+            TarEntryFormat format
+        )
         {
             TarEntry firstEntry = InvokeTarEntryCreationConstructor(format, entryType, "file.txt");
 
@@ -67,8 +93,14 @@ namespace System.Formats.Tar.Tests
             else if (entryType is TarEntryType.BlockDevice or TarEntryType.CharacterDevice)
             {
                 PosixTarEntry posixTarEntry = firstEntry as PosixTarEntry;
-                posixTarEntry.DeviceMajor = entryType is TarEntryType.BlockDevice ? TestBlockDeviceMajor : TestCharacterDeviceMajor;
-                posixTarEntry.DeviceMinor = entryType is TarEntryType.BlockDevice ? TestBlockDeviceMinor : TestCharacterDeviceMinor;
+                posixTarEntry.DeviceMajor =
+                    entryType is TarEntryType.BlockDevice
+                        ? TestBlockDeviceMajor
+                        : TestCharacterDeviceMajor;
+                posixTarEntry.DeviceMinor =
+                    entryType is TarEntryType.BlockDevice
+                        ? TestBlockDeviceMinor
+                        : TestCharacterDeviceMinor;
             }
 
             if (format is TarEntryFormat.Pax)
@@ -76,8 +108,14 @@ namespace System.Formats.Tar.Tests
                 PaxTarEntry paxEntry = firstEntry as PaxTarEntry;
                 Assert.Contains("atime", paxEntry.ExtendedAttributes);
                 Assert.Contains("ctime", paxEntry.ExtendedAttributes);
-                Assert.Equal(firstEntry.ModificationTime, GetDateTimeOffsetFromTimestampString(paxEntry.ExtendedAttributes, "atime"));
-                Assert.Equal(firstEntry.ModificationTime, GetDateTimeOffsetFromTimestampString(paxEntry.ExtendedAttributes, "ctime"));
+                Assert.Equal(
+                    firstEntry.ModificationTime,
+                    GetDateTimeOffsetFromTimestampString(paxEntry.ExtendedAttributes, "atime")
+                );
+                Assert.Equal(
+                    firstEntry.ModificationTime,
+                    GetDateTimeOffsetFromTimestampString(paxEntry.ExtendedAttributes, "ctime")
+                );
             }
             else if (format is TarEntryFormat.Gnu)
             {
@@ -89,14 +127,25 @@ namespace System.Formats.Tar.Tests
             return firstEntry;
         }
 
-        private TarEntry ConvertAndVerifyEntry(TarEntry originalEntry, TarEntryType entryType, TarEntryFormat formatToConvert, DateTimeOffset initialNow)
+        private TarEntry ConvertAndVerifyEntry(
+            TarEntry originalEntry,
+            TarEntryType entryType,
+            TarEntryFormat formatToConvert,
+            DateTimeOffset initialNow
+        )
         {
-            TarEntry convertedEntry = InvokeTarEntryConversionConstructor(formatToConvert, originalEntry);
+            TarEntry convertedEntry = InvokeTarEntryConversionConstructor(
+                formatToConvert,
+                originalEntry
+            );
 
             CheckConversionType(convertedEntry, formatToConvert);
             Assert.Equal(formatToConvert, convertedEntry.Format);
 
-            TarEntryType convertedEntryType = GetTarEntryTypeForTarEntryFormat(entryType, formatToConvert);
+            TarEntryType convertedEntryType = GetTarEntryTypeForTarEntryFormat(
+                entryType,
+                formatToConvert
+            );
             Assert.Equal(convertedEntryType, convertedEntry.EntryType);
 
             Assert.Equal(originalEntry.Gid, convertedEntry.Gid);
@@ -112,7 +161,9 @@ namespace System.Formats.Tar.Tests
             {
                 Assert.Equal(originalEntry.LinkName, convertedEntry.LinkName);
             }
-            else if (originalEntry.EntryType is TarEntryType.BlockDevice or TarEntryType.CharacterDevice)
+            else if (
+                originalEntry.EntryType is TarEntryType.BlockDevice or TarEntryType.CharacterDevice
+            )
             {
                 PosixTarEntry originalPosixTarEntry = originalEntry as PosixTarEntry;
                 PosixTarEntry convertedPosixTarEntry = convertedEntry as PosixTarEntry;
@@ -123,11 +174,21 @@ namespace System.Formats.Tar.Tests
             if (formatToConvert is TarEntryFormat.Pax)
             {
                 PaxTarEntry paxEntry = convertedEntry as PaxTarEntry;
-                DateTimeOffset actualAccessTime = GetDateTimeOffsetFromTimestampString(paxEntry.ExtendedAttributes, PaxEaATime);
-                DateTimeOffset actualChangeTime = GetDateTimeOffsetFromTimestampString(paxEntry.ExtendedAttributes, PaxEaCTime);
+                DateTimeOffset actualAccessTime = GetDateTimeOffsetFromTimestampString(
+                    paxEntry.ExtendedAttributes,
+                    PaxEaATime
+                );
+                DateTimeOffset actualChangeTime = GetDateTimeOffsetFromTimestampString(
+                    paxEntry.ExtendedAttributes,
+                    PaxEaCTime
+                );
                 if (originalEntry.Format is TarEntryFormat.Pax or TarEntryFormat.Gnu)
                 {
-                    GetExpectedTimestampsFromOriginalPaxOrGnu(originalEntry, out DateTimeOffset expectedATime, out DateTimeOffset expectedCTime);
+                    GetExpectedTimestampsFromOriginalPaxOrGnu(
+                        originalEntry,
+                        out DateTimeOffset expectedATime,
+                        out DateTimeOffset expectedCTime
+                    );
                     Assert.Equal(expectedATime, actualAccessTime);
                     Assert.Equal(expectedCTime, actualChangeTime);
                 }
@@ -143,7 +204,11 @@ namespace System.Formats.Tar.Tests
                 GnuTarEntry gnuEntry = convertedEntry as GnuTarEntry;
                 if (originalEntry.Format is TarEntryFormat.Pax or TarEntryFormat.Gnu)
                 {
-                    GetExpectedTimestampsFromOriginalPaxOrGnu(originalEntry, out DateTimeOffset expectedATime, out DateTimeOffset expectedCTime);
+                    GetExpectedTimestampsFromOriginalPaxOrGnu(
+                        originalEntry,
+                        out DateTimeOffset expectedATime,
+                        out DateTimeOffset expectedCTime
+                    );
                     AssertExtensions.GreaterThanOrEqualTo(gnuEntry.AccessTime, expectedATime);
                     AssertExtensions.GreaterThanOrEqualTo(gnuEntry.ChangeTime, expectedCTime);
                 }
@@ -157,7 +222,11 @@ namespace System.Formats.Tar.Tests
             return convertedEntry;
         }
 
-        private void GetExpectedTimestampsFromOriginalPaxOrGnu(TarEntry originalEntry, out DateTimeOffset expectedATime, out DateTimeOffset expectedCTime)
+        private void GetExpectedTimestampsFromOriginalPaxOrGnu(
+            TarEntry originalEntry,
+            out DateTimeOffset expectedATime,
+            out DateTimeOffset expectedCTime
+        )
         {
             Assert.True(originalEntry.Format is TarEntryFormat.Gnu or TarEntryFormat.Pax);
             if (originalEntry.Format is TarEntryFormat.Pax)
@@ -165,8 +234,14 @@ namespace System.Formats.Tar.Tests
                 PaxTarEntry originalPaxEntry = originalEntry as PaxTarEntry;
                 Assert.Contains("atime", originalPaxEntry.ExtendedAttributes);
                 Assert.Contains("ctime", originalPaxEntry.ExtendedAttributes);
-                expectedATime = GetDateTimeOffsetFromTimestampString(originalPaxEntry.ExtendedAttributes, "atime");
-                expectedCTime = GetDateTimeOffsetFromTimestampString(originalPaxEntry.ExtendedAttributes, "ctime");
+                expectedATime = GetDateTimeOffsetFromTimestampString(
+                    originalPaxEntry.ExtendedAttributes,
+                    "atime"
+                );
+                expectedCTime = GetDateTimeOffsetFromTimestampString(
+                    originalPaxEntry.ExtendedAttributes,
+                    "ctime"
+                );
             }
             else
             {
@@ -174,17 +249,19 @@ namespace System.Formats.Tar.Tests
                 expectedATime = originalGnuEntry.AccessTime;
                 expectedCTime = originalGnuEntry.ChangeTime;
             }
-
         }
 
-        protected TarEntry InvokeTarEntryConversionConstructor(TarEntryFormat targetFormat, TarEntry other)
-            => targetFormat switch
+        protected TarEntry InvokeTarEntryConversionConstructor(
+            TarEntryFormat targetFormat,
+            TarEntry other
+        ) =>
+            targetFormat switch
             {
                 TarEntryFormat.V7 => new V7TarEntry(other),
                 TarEntryFormat.Ustar => new UstarTarEntry(other),
                 TarEntryFormat.Pax => new PaxTarEntry(other),
                 TarEntryFormat.Gnu => new GnuTarEntry(other),
-                _ => throw new InvalidDataException($"Unexpected format: {targetFormat}")
+                _ => throw new InvalidDataException($"Unexpected format: {targetFormat}"),
             };
     }
 }

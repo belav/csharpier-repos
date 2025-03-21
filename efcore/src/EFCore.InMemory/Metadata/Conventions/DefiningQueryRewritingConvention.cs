@@ -20,21 +20,23 @@ public class DefiningQueryRewritingConvention : QueryFilterRewritingConvention
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public DefiningQueryRewritingConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <inheritdoc />
     public override void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
         foreach (var entityType in modelBuilder.Metadata.GetEntityTypes())
         {
             var definingQuery = entityType.GetInMemoryQuery();
             if (definingQuery != null)
             {
-                entityType.SetInMemoryQuery((LambdaExpression)DbSetAccessRewriter.Rewrite(modelBuilder.Metadata, definingQuery));
+                entityType.SetInMemoryQuery(
+                    (LambdaExpression)
+                        DbSetAccessRewriter.Rewrite(modelBuilder.Metadata, definingQuery)
+                );
             }
         }
     }

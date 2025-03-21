@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 using System;
@@ -22,7 +22,10 @@ namespace System.Security.Policy
         internal AppDomainEvidenceFactory(AppDomain target)
         {
             Contract.Assert(target != null);
-            Contract.Assert(target == AppDomain.CurrentDomain, "AppDomainEvidenceFactory should not be used across domains.");
+            Contract.Assert(
+                target == AppDomain.CurrentDomain,
+                "AppDomainEvidenceFactory should not be used across domains."
+            );
 
             m_targetDomain = target;
         }
@@ -53,7 +56,10 @@ namespace System.Security.Policy
             // For v1.x compatibility, the default AppDomain has the same evidence as the entry point
             // assembly.  Since other AppDomains inherit their evidence from the default AppDomain by
             // default, they also use the entry point assembly.
-            BCLDebug.Assert(m_targetDomain == AppDomain.CurrentDomain, "AppDomainEvidenceFactory should not be used across domains.");
+            BCLDebug.Assert(
+                m_targetDomain == AppDomain.CurrentDomain,
+                "AppDomainEvidenceFactory should not be used across domains."
+            );
 
             if (m_targetDomain.IsDefaultAppDomain())
             {

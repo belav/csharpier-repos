@@ -20,16 +20,17 @@ internal static class AngularCliMiddleware
     private const string LogCategoryName = "Microsoft.AspNetCore.SpaServices";
     private static readonly TimeSpan RegexMatchTimeout = TimeSpan.FromSeconds(5); // This is a development-time only feature, so a very long timeout is fine
 
-    public static void Attach(
-        ISpaBuilder spaBuilder,
-        string scriptName)
+    public static void Attach(ISpaBuilder spaBuilder, string scriptName)
     {
         var pkgManagerCommand = spaBuilder.Options.PackageManagerCommand;
         var sourcePath = spaBuilder.Options.SourcePath;
         var devServerPort = spaBuilder.Options.DevServerPort;
         if (string.IsNullOrEmpty(sourcePath))
         {
-            throw new ArgumentException("Property 'SourcePath' cannot be null or empty", nameof(spaBuilder));
+            throw new ArgumentException(
+                "Property 'SourcePath' cannot be null or empty",
+                nameof(spaBuilder)
+            );
         }
 
         if (string.IsNullOrEmpty(scriptName))
@@ -39,25 +40,48 @@ internal static class AngularCliMiddleware
 
         // Start Angular CLI and attach to middleware pipeline
         var appBuilder = spaBuilder.ApplicationBuilder;
-        var applicationStoppingToken = appBuilder.ApplicationServices.GetRequiredService<IHostApplicationLifetime>().ApplicationStopping;
+        var applicationStoppingToken = appBuilder
+            .ApplicationServices.GetRequiredService<IHostApplicationLifetime>()
+            .ApplicationStopping;
         var logger = LoggerFinder.GetOrCreateLogger(appBuilder, LogCategoryName);
-        var diagnosticSource = appBuilder.ApplicationServices.GetRequiredService<DiagnosticSource>();
-        var angularCliServerInfoTask = StartAngularCliServerAsync(sourcePath, scriptName, pkgManagerCommand, devServerPort, logger, diagnosticSource, applicationStoppingToken);
+        var diagnosticSource =
+            appBuilder.ApplicationServices.GetRequiredService<DiagnosticSource>();
+        var angularCliServerInfoTask = StartAngularCliServerAsync(
+            sourcePath,
+            scriptName,
+            pkgManagerCommand,
+            devServerPort,
+            logger,
+            diagnosticSource,
+            applicationStoppingToken
+        );
 
-        SpaProxyingExtensions.UseProxyToSpaDevelopmentServer(spaBuilder, () =>
-        {
-            // On each request, we create a separate startup task with its own timeout. That way, even if
-            // the first request times out, subsequent requests could still work.
-            var timeout = spaBuilder.Options.StartupTimeout;
-            return angularCliServerInfoTask.WithTimeout(timeout,
-                $"The Angular CLI process did not start listening for requests " +
-                $"within the timeout period of {timeout.TotalSeconds} seconds. " +
-                $"Check the log output for error information.");
-        });
+        SpaProxyingExtensions.UseProxyToSpaDevelopmentServer(
+            spaBuilder,
+            () =>
+            {
+                // On each request, we create a separate startup task with its own timeout. That way, even if
+                // the first request times out, subsequent requests could still work.
+                var timeout = spaBuilder.Options.StartupTimeout;
+                return angularCliServerInfoTask.WithTimeout(
+                    timeout,
+                    $"The Angular CLI process did not start listening for requests "
+                        + $"within the timeout period of {timeout.TotalSeconds} seconds. "
+                        + $"Check the log output for error information."
+                );
+            }
+        );
     }
 
     private static async Task<Uri> StartAngularCliServerAsync(
-        string sourcePath, string scriptName, string pkgManagerCommand, int portNumber, ILogger logger, DiagnosticSource diagnosticSource, CancellationToken applicationStoppingToken)
+        string sourcePath,
+        string scriptName,
+        string pkgManagerCommand,
+        int portNumber,
+        ILogger logger,
+        DiagnosticSource diagnosticSource,
+        CancellationToken applicationStoppingToken
+    )
     {
         if (portNumber == default(int))
         {
@@ -69,7 +93,14 @@ internal static class AngularCliMiddleware
         }
 
         var scriptRunner = new NodeScriptRunner(
-            sourcePath, scriptName, $"--port {portNumber}", null, pkgManagerCommand, diagnosticSource, applicationStoppingToken);
+            sourcePath,
+            scriptName,
+            $"--port {portNumber}",
+            null,
+            pkgManagerCommand,
+            diagnosticSource,
+            applicationStoppingToken
+        );
         scriptRunner.AttachToLogger(logger);
 
         Match openBrowserLine;
@@ -78,14 +109,21 @@ internal static class AngularCliMiddleware
             try
             {
                 openBrowserLine = await scriptRunner.StdOut.WaitForMatch(
-                    new Regex("open your browser on (http\\S+)", RegexOptions.None, RegexMatchTimeout));
+                    new Regex(
+                        "open your browser on (http\\S+)",
+                        RegexOptions.None,
+                        RegexMatchTimeout
+                    )
+                );
             }
             catch (EndOfStreamException ex)
             {
                 throw new InvalidOperationException(
-                    $"The {pkgManagerCommand} script '{scriptName}' exited without indicating that the " +
-                    $"Angular CLI was listening for requests. The error output was: " +
-                    $"{stdErrReader.ReadAsString()}", ex);
+                    $"The {pkgManagerCommand} script '{scriptName}' exited without indicating that the "
+                        + $"Angular CLI was listening for requests. The error output was: "
+                        + $"{stdErrReader.ReadAsString()}",
+                    ex
+                );
             }
         }
 
@@ -113,10 +151,13 @@ internal static class AngularCliMiddleware
                 try
                 {
                     // If we get any HTTP response, the CLI server is ready
-                    using var cancellationTokenSource = new CancellationTokenSource(timeoutMilliseconds);
+                    using var cancellationTokenSource = new CancellationTokenSource(
+                        timeoutMilliseconds
+                    );
                     await client.SendAsync(
                         new HttpRequestMessage(HttpMethod.Head, cliServerUri),
-                        cancellationTokenSource.Token);
+                        cancellationTokenSource.Token
+                    );
                     return;
                 }
                 catch (Exception)

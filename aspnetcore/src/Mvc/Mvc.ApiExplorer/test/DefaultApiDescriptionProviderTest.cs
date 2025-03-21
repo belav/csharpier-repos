@@ -93,7 +93,10 @@ public class DefaultApiDescriptionProviderTest
     {
         // Arrange
         var action = CreateActionDescriptor();
-        action.EndpointMetadata = new List<object>() { new EndpointGroupNameAttribute("Customers") };
+        action.EndpointMetadata = new List<object>()
+        {
+            new EndpointGroupNameAttribute("Customers"),
+        };
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -108,7 +111,10 @@ public class DefaultApiDescriptionProviderTest
     {
         // Arrange
         var action = CreateActionDescriptor();
-        action.EndpointMetadata = new List<object>() { new EndpointGroupNameAttribute("Customers") };
+        action.EndpointMetadata = new List<object>()
+        {
+            new EndpointGroupNameAttribute("Customers"),
+        };
         action.GetProperty<ApiDescriptionActionData>().GroupName = "NotUsedCustomers";
 
         // Act
@@ -139,10 +145,10 @@ public class DefaultApiDescriptionProviderTest
         // Arrange
         var action = CreateActionDescriptor();
         action.ActionConstraints = new List<IActionConstraintMetadata>()
-            {
-                new HttpMethodActionConstraint(new string[] { "PUT", "POST" }),
-                new HttpMethodActionConstraint(new string[] { "GET" }),
-            };
+        {
+            new HttpMethodActionConstraint(new string[] { "PUT", "POST" }),
+            new HttpMethodActionConstraint(new string[] { "GET" }),
+        };
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -169,7 +175,8 @@ public class DefaultApiDescriptionProviderTest
         string template,
         bool isOptional,
         Type constraintType,
-        object defaultValue)
+        object defaultValue
+    )
     {
         // Arrange
         var action = CreateActionDescriptor();
@@ -215,7 +222,8 @@ public class DefaultApiDescriptionProviderTest
         string template,
         bool isOptional,
         Type constraintType,
-        object defaultValue)
+        object defaultValue
+    )
     {
         // Arrange
         var action = CreateActionDescriptor(nameof(FromRouting));
@@ -254,10 +262,7 @@ public class DefaultApiDescriptionProviderTest
         var action = CreateActionDescriptor(nameof(FromModelBinding));
         action.AttributeRouteInfo = new AttributeRouteInfo { Template = "api/products" };
 
-        action.Parameters[0].BindingInfo = new BindingInfo()
-        {
-            BindingSource = BindingSource.Path
-        };
+        action.Parameters[0].BindingInfo = new BindingInfo() { BindingSource = BindingSource.Path };
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -277,16 +282,15 @@ public class DefaultApiDescriptionProviderTest
     [InlineData("api/products/{*id}")]
     [InlineData("api/products/{*id:int}")]
     [InlineData("api/products/{*id:int=5}")]
-    public void GetApiDescription_WithInferredBindingSource_IncludesPathParametersWhenPresentInRoute(string template)
+    public void GetApiDescription_WithInferredBindingSource_IncludesPathParametersWhenPresentInRoute(
+        string template
+    )
     {
         // Arrange
         var action = CreateActionDescriptor(nameof(FromModelBinding));
         action.AttributeRouteInfo = new AttributeRouteInfo { Template = template };
 
-        action.Parameters[0].BindingInfo = new BindingInfo()
-        {
-            BindingSource = BindingSource.Path
-        };
+        action.Parameters[0].BindingInfo = new BindingInfo() { BindingSource = BindingSource.Path };
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -322,13 +326,19 @@ public class DefaultApiDescriptionProviderTest
     public void GetApiDescription_ParameterDescription_DoesNotIncludeRouteInfo(
         string template,
         string methodName,
-        string source)
+        string source
+    )
     {
         // Arrange
         var action = CreateActionDescriptor(methodName);
         action.AttributeRouteInfo = new AttributeRouteInfo { Template = template };
 
-        var expected = new BindingSource(source, displayName: null, isGreedy: false, isFromRequest: false);
+        var expected = new BindingSource(
+            source,
+            displayName: null,
+            isGreedy: false,
+            isFromRequest: false
+        );
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -353,13 +363,19 @@ public class DefaultApiDescriptionProviderTest
     public void GetApiDescription_ParameterDescription_IncludesRouteInfo(
         string template,
         string methodName,
-        string source)
+        string source
+    )
     {
         // Arrange
         var action = CreateActionDescriptor(methodName);
         action.AttributeRouteInfo = new AttributeRouteInfo { Template = template };
 
-        var expected = new BindingSource(source, displayName: null, isGreedy: false, isFromRequest: false);
+        var expected = new BindingSource(
+            source,
+            displayName: null,
+            isGreedy: false,
+            isFromRequest: false
+        );
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -378,7 +394,8 @@ public class DefaultApiDescriptionProviderTest
     [InlineData("api/products/{id=5}", true)]
     public void GetApiDescription_ParameterFromPathAndDescriptor_IsOptionalIfRouteParameterIsOptional(
         string template,
-        bool expectedOptional)
+        bool expectedOptional
+    )
     {
         // Arrange
         var action = CreateActionDescriptor(nameof(FromRouting));
@@ -401,15 +418,15 @@ public class DefaultApiDescriptionProviderTest
     [InlineData("api/Products/{*id}", "api/Products/{id}")]
     [InlineData("api/Products/{*id:int}", "api/Products/{id}")]
     [InlineData("api/Products/{id1}-{id2:int}", "api/Products/{id1}-{id2}")]
-    [InlineData("api/{id1}/{id2?}/{id3:int}/{id4:int?}/{*id5:int}", "api/{id1}/{id2}/{id3}/{id4}/{id5}")]
+    [InlineData(
+        "api/{id1}/{id2?}/{id3:int}/{id4:int?}/{*id5:int}",
+        "api/{id1}/{id2}/{id3}/{id4}/{id5}"
+    )]
     public void GetApiDescription_PopulatesRelativePath(string template, string relativePath)
     {
         // Arrange
         var action = CreateActionDescriptor();
-        action.AttributeRouteInfo = new AttributeRouteInfo
-        {
-            Template = template
-        };
+        action.AttributeRouteInfo = new AttributeRouteInfo { Template = template };
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -426,7 +443,7 @@ public class DefaultApiDescriptionProviderTest
         var action = CreateActionDescriptor();
         action.AttributeRouteInfo = new AttributeRouteInfo
         {
-            Template = "api/Products/{id1}-{id2:int}"
+            Template = "api/Products/{id1}-{id2:int}",
         };
 
         // Act
@@ -450,7 +467,7 @@ public class DefaultApiDescriptionProviderTest
         var action = CreateActionDescriptor();
         action.AttributeRouteInfo = new AttributeRouteInfo
         {
-            Template = "api/Products/{id1}-{id2}/{id3:int}/{id4:int?}/{*id5:int}"
+            Template = "api/Products/{id1}-{id2}/{id3:int}/{id4:int?}/{*id5:int}",
         };
 
         // Act
@@ -473,7 +490,7 @@ public class DefaultApiDescriptionProviderTest
         var action = CreateActionDescriptor();
         action.AttributeRouteInfo = new AttributeRouteInfo
         {
-            Template = "api/Products/UpdateProduct/{productId}"
+            Template = "api/Products/UpdateProduct/{productId}",
         };
         var routeOptions = new RouteOptions { LowercaseUrls = true };
 
@@ -522,11 +539,16 @@ public class DefaultApiDescriptionProviderTest
     [Theory]
     [InlineData(nameof(ReturnsResultOfProductWithEndpointMetadata))]
     [InlineData(nameof(ReturnsTaskOfResultOfProductWithEndpointMetadata))]
-    public void GetApiDescription_PopulatesResponseType_ForResultOfT_WithEndpointMetadata(string methodName)
+    public void GetApiDescription_PopulatesResponseType_ForResultOfT_WithEndpointMetadata(
+        string methodName
+    )
     {
         // Arrange
         var action = CreateActionDescriptor(methodName);
-        action.EndpointMetadata = new List<object>() { new ProducesResponseTypeMetadata(200, typeof(Product)) };
+        action.EndpointMetadata = new List<object>()
+        {
+            new ProducesResponseTypeMetadata(200, typeof(Product)),
+        };
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -541,13 +563,22 @@ public class DefaultApiDescriptionProviderTest
     [Theory]
     [InlineData(nameof(ReturnsResultOfProductWithEndpointMetadata))]
     [InlineData(nameof(ReturnsTaskOfResultOfProductWithEndpointMetadata))]
-    public void GetApiDescription_PopulatesResponseType_ForResultOfT_WithEndpointMetadata_PreferProducesAttribute(string methodName)
+    public void GetApiDescription_PopulatesResponseType_ForResultOfT_WithEndpointMetadata_PreferProducesAttribute(
+        string methodName
+    )
     {
         // Arrange
         var action = CreateActionDescriptor(methodName);
-        action.EndpointMetadata = new List<object>() { new ProducesResponseTypeMetadata(200, typeof(Product)) };
-        action.FilterDescriptors = new List<FilterDescriptor>{
-            new FilterDescriptor(new ProducesResponseTypeAttribute(typeof(Customer), 200), FilterScope.Action)
+        action.EndpointMetadata = new List<object>()
+        {
+            new ProducesResponseTypeMetadata(200, typeof(Product)),
+        };
+        action.FilterDescriptors = new List<FilterDescriptor>
+        {
+            new FilterDescriptor(
+                new ProducesResponseTypeAttribute(typeof(Customer), 200),
+                FilterScope.Action
+            ),
         };
 
         // Act
@@ -563,7 +594,9 @@ public class DefaultApiDescriptionProviderTest
     [Theory]
     [InlineData(nameof(ReturnsActionResultOfSequenceOfProducts))]
     [InlineData(nameof(ReturnsTaskOfActionResultOfSequenceOfProducts))]
-    public void GetApiDescription_PopulatesResponseType_ForActionResultOfSequenceOfT(string methodName)
+    public void GetApiDescription_PopulatesResponseType_ForActionResultOfSequenceOfT(
+        string methodName
+    )
     {
         // Arrange
         var action = CreateActionDescriptor(methodName);
@@ -638,44 +671,48 @@ public class DefaultApiDescriptionProviderTest
         get
         {
             var filterDescriptors = new List<FilterDescriptor>()
-                {
-                    new FilterDescriptor(
-                        new ProducesAttribute("text/json", "application/json") { Type = typeof(Customer) },
-                        FilterScope.Action),
-                    new FilterDescriptor(
-                        new ProducesResponseTypeAttribute(304),
-                        FilterScope.Action),
-                    new FilterDescriptor(
-                        new ProducesResponseTypeAttribute(typeof(BadData), 400),
-                        FilterScope.Action),
-                    new FilterDescriptor(
-                        new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
-                        FilterScope.Action),
-                };
+            {
+                new FilterDescriptor(
+                    new ProducesAttribute("text/json", "application/json")
+                    {
+                        Type = typeof(Customer),
+                    },
+                    FilterScope.Action
+                ),
+                new FilterDescriptor(new ProducesResponseTypeAttribute(304), FilterScope.Action),
+                new FilterDescriptor(
+                    new ProducesResponseTypeAttribute(typeof(BadData), 400),
+                    FilterScope.Action
+                ),
+                new FilterDescriptor(
+                    new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
+                    FilterScope.Action
+                ),
+            };
 
             return new TheoryData<Type, string, List<FilterDescriptor>>
+            {
                 {
-                    {
-                        typeof(DefaultApiDescriptionProviderTest),
-                        nameof(DefaultApiDescriptionProviderTest.ReturnsTaskOfActionResult),
-                        filterDescriptors
-                    },
-                    {
-                        typeof(DefaultApiDescriptionProviderTest),
-                        nameof(DefaultApiDescriptionProviderTest.ReturnsValueTaskOfActionResult),
-                        filterDescriptors
-                    },
-                    {
-                        typeof(DefaultApiDescriptionProviderTest),
-                        nameof(DefaultApiDescriptionProviderTest.ReturnsActionResult),
-                        filterDescriptors
-                    },
-                    {
-                        typeof(DerivedProducesController),
-                        nameof(DerivedProducesController.ReturnsActionResult),
-                        filterDescriptors
-                    }
-                };
+                    typeof(DefaultApiDescriptionProviderTest),
+                    nameof(DefaultApiDescriptionProviderTest.ReturnsTaskOfActionResult),
+                    filterDescriptors
+                },
+                {
+                    typeof(DefaultApiDescriptionProviderTest),
+                    nameof(DefaultApiDescriptionProviderTest.ReturnsValueTaskOfActionResult),
+                    filterDescriptors
+                },
+                {
+                    typeof(DefaultApiDescriptionProviderTest),
+                    nameof(DefaultApiDescriptionProviderTest.ReturnsActionResult),
+                    filterDescriptors
+                },
+                {
+                    typeof(DerivedProducesController),
+                    nameof(DerivedProducesController.ReturnsActionResult),
+                    filterDescriptors
+                },
+            };
         }
     }
 
@@ -684,7 +721,8 @@ public class DefaultApiDescriptionProviderTest
     public void GetApiDescription_ReturnsActionResultWithProduces_And_ProducesContentType(
         Type controllerType,
         string methodName,
-        List<FilterDescriptor> filterDescriptors)
+        List<FilterDescriptor> filterDescriptors
+    )
     {
         // Arrange
         var action = CreateActionDescriptor(methodName, controllerType);
@@ -727,65 +765,71 @@ public class DefaultApiDescriptionProviderTest
                 Assert.Equal(typeof(ErrorDetails), responseType.Type);
                 Assert.NotNull(responseType.ModelMetadata);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
-    public static TheoryData<Type, string, List<FilterDescriptor>> ReturnsVoidOrTaskWithProducesContentTypeData
+    public static TheoryData<
+        Type,
+        string,
+        List<FilterDescriptor>
+    > ReturnsVoidOrTaskWithProducesContentTypeData
     {
         get
         {
             var filterDescriptors = new List<FilterDescriptor>()
-                {
-                    // Since action is returning Void or Task, it does not make sense to provide a value for the
-                    // 'Type' property to ProducesAttribute. But the same action could return other types of data
-                    // based on runtime conditions.
-                    new FilterDescriptor(
-                        new ProducesAttribute("text/json", "application/json"),
-                        FilterScope.Action),
-                    new FilterDescriptor(
-                        new ProducesResponseTypeAttribute(200),
-                        FilterScope.Action),
-                    new FilterDescriptor(
-                        new ProducesResponseTypeAttribute(typeof(BadData), 400),
-                        FilterScope.Action),
-                    new FilterDescriptor(
-                        new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
-                        FilterScope.Action)
-                };
+            {
+                // Since action is returning Void or Task, it does not make sense to provide a value for the
+                // 'Type' property to ProducesAttribute. But the same action could return other types of data
+                // based on runtime conditions.
+                new FilterDescriptor(
+                    new ProducesAttribute("text/json", "application/json"),
+                    FilterScope.Action
+                ),
+                new FilterDescriptor(new ProducesResponseTypeAttribute(200), FilterScope.Action),
+                new FilterDescriptor(
+                    new ProducesResponseTypeAttribute(typeof(BadData), 400),
+                    FilterScope.Action
+                ),
+                new FilterDescriptor(
+                    new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
+                    FilterScope.Action
+                ),
+            };
 
             return new TheoryData<Type, string, List<FilterDescriptor>>
+            {
                 {
-                    {
-                        typeof(DefaultApiDescriptionProviderTest),
-                        nameof(DefaultApiDescriptionProviderTest.ReturnsVoid),
-                        filterDescriptors
-                    },
-                    {
-                        typeof(DefaultApiDescriptionProviderTest),
-                        nameof(DefaultApiDescriptionProviderTest.ReturnsTask),
-                        filterDescriptors
-                    },
-                    {
-                        typeof(DefaultApiDescriptionProviderTest),
-                        nameof(DefaultApiDescriptionProviderTest.ReturnsValueTask),
-                        filterDescriptors
-                    },
-                    {
-                        typeof(DerivedProducesController),
-                        nameof(DerivedProducesController.ReturnsVoid),
-                        filterDescriptors
-                    },
-                    {
-                        typeof(DerivedProducesController),
-                        nameof(DerivedProducesController.ReturnsTask),
-                        filterDescriptors
-                    },
-                    {
-                        typeof(DerivedProducesController),
-                        nameof(DerivedProducesController.ReturnsValueTask),
-                        filterDescriptors
-                    },
-                };
+                    typeof(DefaultApiDescriptionProviderTest),
+                    nameof(DefaultApiDescriptionProviderTest.ReturnsVoid),
+                    filterDescriptors
+                },
+                {
+                    typeof(DefaultApiDescriptionProviderTest),
+                    nameof(DefaultApiDescriptionProviderTest.ReturnsTask),
+                    filterDescriptors
+                },
+                {
+                    typeof(DefaultApiDescriptionProviderTest),
+                    nameof(DefaultApiDescriptionProviderTest.ReturnsValueTask),
+                    filterDescriptors
+                },
+                {
+                    typeof(DerivedProducesController),
+                    nameof(DerivedProducesController.ReturnsVoid),
+                    filterDescriptors
+                },
+                {
+                    typeof(DerivedProducesController),
+                    nameof(DerivedProducesController.ReturnsTask),
+                    filterDescriptors
+                },
+                {
+                    typeof(DerivedProducesController),
+                    nameof(DerivedProducesController.ReturnsValueTask),
+                    filterDescriptors
+                },
+            };
         }
     }
 
@@ -794,7 +838,8 @@ public class DefaultApiDescriptionProviderTest
     public void GetApiDescription_ReturnsVoidWithProducesContentType(
         Type controllerType,
         string methodName,
-        List<FilterDescriptor> filterDescriptors)
+        List<FilterDescriptor> filterDescriptors
+    )
     {
         // Arrange
         var action = CreateActionDescriptor(methodName, controllerType);
@@ -830,38 +875,37 @@ public class DefaultApiDescriptionProviderTest
                 Assert.Equal(500, responseType.StatusCode);
                 Assert.NotNull(responseType.ModelMetadata);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Theory]
     [InlineData(nameof(ReturnsActionResultOfProduct))]
     [InlineData(nameof(ReturnsTaskOfActionResultOfProduct))]
-    public void GetApiDescription_ReturnsActionResultOfTWithProducesContentType(
-        string methodName)
+    public void GetApiDescription_ReturnsActionResultOfTWithProducesContentType(string methodName)
     {
         // Arrange
         var action = CreateActionDescriptor(methodName);
         action.FilterDescriptors = new List<FilterDescriptor>()
-            {
-                // Since action is returning Void or Task, it does not make sense to provide a value for the
-                // 'Type' property to ProducesAttribute. But the same action could return other types of data
-                // based on runtime conditions.
-                new FilterDescriptor(
-                    new ProducesAttribute("text/json", "application/json"),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(200),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(202),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(typeof(BadData), 400),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
-                    FilterScope.Action)
-            };
+        {
+            // Since action is returning Void or Task, it does not make sense to provide a value for the
+            // 'Type' property to ProducesAttribute. But the same action could return other types of data
+            // based on runtime conditions.
+            new FilterDescriptor(
+                new ProducesAttribute("text/json", "application/json"),
+                FilterScope.Action
+            ),
+            new FilterDescriptor(new ProducesResponseTypeAttribute(200), FilterScope.Action),
+            new FilterDescriptor(new ProducesResponseTypeAttribute(202), FilterScope.Action),
+            new FilterDescriptor(
+                new ProducesResponseTypeAttribute(typeof(BadData), 400),
+                FilterScope.Action
+            ),
+            new FilterDescriptor(
+                new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
+                FilterScope.Action
+            ),
+        };
         var expectedMediaTypes = new[] { "application/json", "text/json" };
 
         // Act
@@ -900,38 +944,39 @@ public class DefaultApiDescriptionProviderTest
                 Assert.Equal(500, responseType.StatusCode);
                 Assert.NotNull(responseType.ModelMetadata);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Theory]
     [InlineData(nameof(ReturnsActionResultOfProduct))]
     [InlineData(nameof(ReturnsTaskOfActionResultOfProduct))]
     public void GetApiDescription_ReturnsActionResultOfTWithProducesContentType_ForStatusCode201(
-        string methodName)
+        string methodName
+    )
     {
         // Arrange
         var action = CreateActionDescriptor(methodName);
         action.FilterDescriptors = new List<FilterDescriptor>()
-            {
-                // Since action is returning Void or Task, it does not make sense to provide a value for the
-                // 'Type' property to ProducesAttribute. But the same action could return other types of data
-                // based on runtime conditions.
-                new FilterDescriptor(
-                    new ProducesAttribute("text/json", "application/json"),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(201),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(204),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(typeof(BadData), 400),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
-                    FilterScope.Action)
-            };
+        {
+            // Since action is returning Void or Task, it does not make sense to provide a value for the
+            // 'Type' property to ProducesAttribute. But the same action could return other types of data
+            // based on runtime conditions.
+            new FilterDescriptor(
+                new ProducesAttribute("text/json", "application/json"),
+                FilterScope.Action
+            ),
+            new FilterDescriptor(new ProducesResponseTypeAttribute(201), FilterScope.Action),
+            new FilterDescriptor(new ProducesResponseTypeAttribute(204), FilterScope.Action),
+            new FilterDescriptor(
+                new ProducesResponseTypeAttribute(typeof(BadData), 400),
+                FilterScope.Action
+            ),
+            new FilterDescriptor(
+                new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
+                FilterScope.Action
+            ),
+        };
         var expectedMediaTypes = new[] { "application/json", "text/json" };
 
         // Act
@@ -970,38 +1015,39 @@ public class DefaultApiDescriptionProviderTest
                 Assert.Equal(500, responseType.StatusCode);
                 Assert.NotNull(responseType.ModelMetadata);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Theory]
     [InlineData(nameof(ReturnsActionResultOfSequenceOfProducts))]
     [InlineData(nameof(ReturnsTaskOfActionResultOfSequenceOfProducts))]
     public void GetApiDescription_ReturnsActionResultOfSequenceOfTWithProducesContentType(
-        string methodName)
+        string methodName
+    )
     {
         // Arrange
         var action = CreateActionDescriptor(methodName);
         action.FilterDescriptors = new List<FilterDescriptor>()
-            {
-                // Since action is returning Void or Task, it does not make sense to provide a value for the
-                // 'Type' property to ProducesAttribute. But the same action could return other types of data
-                // based on runtime conditions.
-                new FilterDescriptor(
-                    new ProducesAttribute("text/json", "application/json"),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(200),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(201),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(typeof(BadData), 400),
-                    FilterScope.Action),
-                new FilterDescriptor(
-                    new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
-                    FilterScope.Action)
-            };
+        {
+            // Since action is returning Void or Task, it does not make sense to provide a value for the
+            // 'Type' property to ProducesAttribute. But the same action could return other types of data
+            // based on runtime conditions.
+            new FilterDescriptor(
+                new ProducesAttribute("text/json", "application/json"),
+                FilterScope.Action
+            ),
+            new FilterDescriptor(new ProducesResponseTypeAttribute(200), FilterScope.Action),
+            new FilterDescriptor(new ProducesResponseTypeAttribute(201), FilterScope.Action),
+            new FilterDescriptor(
+                new ProducesResponseTypeAttribute(typeof(BadData), 400),
+                FilterScope.Action
+            ),
+            new FilterDescriptor(
+                new ProducesResponseTypeAttribute(typeof(ErrorDetails), 500),
+                FilterScope.Action
+            ),
+        };
         var expectedMediaTypes = new[] { "application/json", "text/json" };
 
         // Act
@@ -1040,7 +1086,8 @@ public class DefaultApiDescriptionProviderTest
                 Assert.Equal(500, responseType.StatusCode);
                 Assert.NotNull(responseType.ModelMetadata);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Theory]
@@ -1073,9 +1120,9 @@ public class DefaultApiDescriptionProviderTest
         var action = CreateActionDescriptor(methodName);
         var filter = new ProducesResponseTypeAttribute(typeof(void), statusCode: 204);
         action.FilterDescriptors = new List<FilterDescriptor>
-            {
-                new FilterDescriptor(filter, FilterScope.Action)
-            };
+        {
+            new FilterDescriptor(filter, FilterScope.Action),
+        };
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -1105,15 +1152,12 @@ public class DefaultApiDescriptionProviderTest
     {
         // Arrange
         var action = CreateActionDescriptor(methodName);
-        var filter = new ContentTypeAttribute("text/*")
-        {
-            Type = typeof(Order)
-        };
+        var filter = new ContentTypeAttribute("text/*") { Type = typeof(Order) };
 
         action.FilterDescriptors = new List<FilterDescriptor>
-            {
-                new FilterDescriptor(filter, FilterScope.Action)
-            };
+        {
+            new FilterDescriptor(filter, FilterScope.Action),
+        };
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -1136,7 +1180,13 @@ public class DefaultApiDescriptionProviderTest
     {
         // Arrange
         var action = CreateActionDescriptor(nameof(ReturnsProduct));
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -1154,9 +1204,9 @@ public class DefaultApiDescriptionProviderTest
         var action = CreateActionDescriptor(nameof(ReturnsProduct));
         var expectedMediaTypes = new[] { "text/json", "text/xml" };
         action.FilterDescriptors = new List<FilterDescriptor>
-            {
-                new FilterDescriptor(new ContentTypeAttribute("text/*"), FilterScope.Action)
-            };
+        {
+            new FilterDescriptor(new ContentTypeAttribute("text/*"), FilterScope.Action),
+        };
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -1172,15 +1222,12 @@ public class DefaultApiDescriptionProviderTest
     {
         // Arrange
         var action = CreateActionDescriptor(nameof(ReturnsObject));
-        var filter = new ContentTypeAttribute("text/*")
-        {
-            Type = typeof(Order)
-        };
+        var filter = new ContentTypeAttribute("text/*") { Type = typeof(Order) };
 
         action.FilterDescriptors = new List<FilterDescriptor>
-            {
-                new FilterDescriptor(filter, FilterScope.Action)
-            };
+        {
+            new FilterDescriptor(filter, FilterScope.Action),
+        };
 
         var formatters = CreateOutputFormatters();
 
@@ -1199,7 +1246,10 @@ public class DefaultApiDescriptionProviderTest
         Assert.Equal(typeof(Order), responseType.Type);
         Assert.NotNull(responseType.ModelMetadata);
         var apiResponseFormat = Assert.Single(
-            responseType.ApiResponseFormats.Where(responseFormat => responseFormat.MediaType == "text/json"));
+            responseType.ApiResponseFormats.Where(responseFormat =>
+                responseFormat.MediaType == "text/json"
+            )
+        );
         Assert.Same(formatters[0], apiResponseFormat.Formatter);
     }
 
@@ -1233,7 +1283,8 @@ public class DefaultApiDescriptionProviderTest
             f => Assert.Equal("application/json", f.MediaType.ToString()),
             f => Assert.Equal("application/xml", f.MediaType.ToString()),
             f => Assert.Equal("text/json", f.MediaType.ToString()),
-            f => Assert.Equal("text/xml", f.MediaType.ToString()));
+            f => Assert.Equal("text/xml", f.MediaType.ToString())
+        );
     }
 
     [Fact]
@@ -1243,9 +1294,9 @@ public class DefaultApiDescriptionProviderTest
         var action = CreateActionDescriptor(nameof(AcceptsProduct_Body));
 
         action.FilterDescriptors = new List<FilterDescriptor>
-            {
-                new FilterDescriptor(new ContentTypeAttribute("text/*"), FilterScope.Action)
-            };
+        {
+            new FilterDescriptor(new ContentTypeAttribute("text/*"), FilterScope.Action),
+        };
 
         // Act
         var descriptions = GetApiDescriptions(action);
@@ -1255,7 +1306,8 @@ public class DefaultApiDescriptionProviderTest
         Assert.Collection(
             description.SupportedRequestFormats.OrderBy(f => f.MediaType.ToString()),
             f => Assert.Equal("text/json", f.MediaType.ToString()),
-            f => Assert.Equal("text/xml", f.MediaType.ToString()));
+            f => Assert.Equal("text/xml", f.MediaType.ToString())
+        );
     }
 
     [Fact]
@@ -1273,7 +1325,8 @@ public class DefaultApiDescriptionProviderTest
         Assert.Collection(
             description.SupportedRequestFormats.OrderBy(f => f.MediaType.ToString()),
             f => Assert.Equal("application/xml", f.MediaType.ToString()),
-            f => Assert.Equal("text/xml", f.MediaType.ToString()));
+            f => Assert.Equal("text/xml", f.MediaType.ToString())
+        );
     }
 
     [Fact]
@@ -1283,9 +1336,9 @@ public class DefaultApiDescriptionProviderTest
         var action = CreateActionDescriptor(nameof(AcceptsProduct_Body));
 
         action.FilterDescriptors = new List<FilterDescriptor>
-            {
-                new FilterDescriptor(new ContentTypeAttribute("text/*"), FilterScope.Action)
-            };
+        {
+            new FilterDescriptor(new ContentTypeAttribute("text/*"), FilterScope.Action),
+        };
 
         var formatters = CreateInputFormatters();
 
@@ -1775,11 +1828,17 @@ public class DefaultApiDescriptionProviderTest
         Assert.Same(BindingSource.ModelBinding, quantity.Source);
         Assert.Equal(typeof(int), quantity.Type);
 
-        var productId = Assert.Single(description.ParameterDescriptions, p => p.Name == "Product.Id");
+        var productId = Assert.Single(
+            description.ParameterDescriptions,
+            p => p.Name == "Product.Id"
+        );
         Assert.Same(BindingSource.ModelBinding, productId.Source);
         Assert.Equal(typeof(int), productId.Type);
 
-        var price = Assert.Single(description.ParameterDescriptions, p => p.Name == "Product.Price");
+        var price = Assert.Single(
+            description.ParameterDescriptions,
+            p => p.Name == "Product.Price"
+        );
         Assert.Same(BindingSource.Query, price.Source);
         Assert.Equal(typeof(decimal), price.Type);
     }
@@ -1807,11 +1866,17 @@ public class DefaultApiDescriptionProviderTest
         Assert.Same(BindingSource.Query, quantity.Source);
         Assert.Equal(typeof(int), quantity.Type);
 
-        var productId = Assert.Single(description.ParameterDescriptions, p => p.Name == "Product.Id");
+        var productId = Assert.Single(
+            description.ParameterDescriptions,
+            p => p.Name == "Product.Id"
+        );
         Assert.Same(BindingSource.Query, productId.Source);
         Assert.Equal(typeof(int), productId.Type);
 
-        var productPrice = Assert.Single(description.ParameterDescriptions, p => p.Name == "Product.Price");
+        var productPrice = Assert.Single(
+            description.ParameterDescriptions,
+            p => p.Name == "Product.Price"
+        );
         Assert.Same(BindingSource.Query, productPrice.Source);
         Assert.Equal(typeof(decimal), productPrice.Type);
     }
@@ -1834,11 +1899,17 @@ public class DefaultApiDescriptionProviderTest
 
         foreach (var parentName in parentNames)
         {
-            var id = Assert.Single(description.ParameterDescriptions, p => p.Name == $"{parentName}.Child.Id");
+            var id = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == $"{parentName}.Child.Id"
+            );
             Assert.Same(BindingSource.Query, id.Source);
             Assert.Equal(typeof(int), id.Type);
 
-            var name = Assert.Single(description.ParameterDescriptions, p => p.Name == $"{parentName}.Child.Name");
+            var name = Assert.Single(
+                description.ParameterDescriptions,
+                p => p.Name == $"{parentName}.Child.Name"
+            );
             Assert.Same(BindingSource.Query, name.Source);
             Assert.Equal(typeof(string), name.Type);
         }
@@ -1865,11 +1936,17 @@ public class DefaultApiDescriptionProviderTest
         {
             foreach (var parentName in parentNames)
             {
-                var id = Assert.Single(description.ParameterDescriptions, p => p.Name == $"{groupName}.{parentName}.Child.Id");
+                var id = Assert.Single(
+                    description.ParameterDescriptions,
+                    p => p.Name == $"{groupName}.{parentName}.Child.Id"
+                );
                 Assert.Same(BindingSource.Query, id.Source);
                 Assert.Equal(typeof(int), id.Type);
 
-                var name = Assert.Single(description.ParameterDescriptions, p => p.Name == $"{groupName}.{parentName}.Child.Name");
+                var name = Assert.Single(
+                    description.ParameterDescriptions,
+                    p => p.Name == $"{groupName}.{parentName}.Child.Name"
+                );
                 Assert.Same(BindingSource.Query, name.Source);
                 Assert.Equal(typeof(string), name.Type);
             }
@@ -2017,7 +2094,7 @@ public class DefaultApiDescriptionProviderTest
     public void ProcessIsRequired_SetsTrue_ForFromBodyParameters()
     {
         // Arrange
-        var description = new ApiParameterDescription { Source = BindingSource.Body, };
+        var description = new ApiParameterDescription { Source = BindingSource.Body };
         var context = GetApiParameterContext(description);
 
         // Act
@@ -2031,11 +2108,14 @@ public class DefaultApiDescriptionProviderTest
     public void ProcessIsRequired_SetsFalse_IfAllowEmptyInputInBodyModelBinding_IsSetInMvcOptions()
     {
         // Arrange
-        var description = new ApiParameterDescription { Source = BindingSource.Body, };
+        var description = new ApiParameterDescription { Source = BindingSource.Body };
         var context = GetApiParameterContext(description);
 
         // Act
-        DefaultApiDescriptionProvider.ProcessIsRequired(context, new MvcOptions { AllowEmptyInputInBodyModelBinding = true });
+        DefaultApiDescriptionProvider.ProcessIsRequired(
+            context,
+            new MvcOptions { AllowEmptyInputInBodyModelBinding = true }
+        );
 
         // Assert
         Assert.False(description.IsRequired);
@@ -2048,10 +2128,7 @@ public class DefaultApiDescriptionProviderTest
         var description = new ApiParameterDescription
         {
             Source = BindingSource.Body,
-            BindingInfo = new BindingInfo
-            {
-                EmptyBodyBehavior = EmptyBodyBehavior.Allow,
-            }
+            BindingInfo = new BindingInfo { EmptyBodyBehavior = EmptyBodyBehavior.Allow },
         };
         var context = GetApiParameterContext(description);
 
@@ -2066,16 +2143,16 @@ public class DefaultApiDescriptionProviderTest
     public void ProcessIsRequired_SetsTrue_ForParameterDescriptorsWithBindRequired()
     {
         // Arrange
-        var description = new ApiParameterDescription
-        {
-            Source = BindingSource.Query,
-        };
+        var description = new ApiParameterDescription { Source = BindingSource.Query };
         var context = GetApiParameterContext(description);
         var modelMetadataProvider = new TestModelMetadataProvider();
         modelMetadataProvider
             .ForProperty<Person>(nameof(Person.Name))
             .BindingDetails(d => d.IsBindingRequired = true);
-        description.ModelMetadata = modelMetadataProvider.GetMetadataForProperty(typeof(Person), nameof(Person.Name));
+        description.ModelMetadata = modelMetadataProvider.GetMetadataForProperty(
+            typeof(Person),
+            nameof(Person.Name)
+        );
 
         // Act
         DefaultApiDescriptionProvider.ProcessIsRequired(context, new MvcOptions());
@@ -2126,7 +2203,10 @@ public class DefaultApiDescriptionProviderTest
         modelMetadataProvider
             .ForProperty<Person>(nameof(Person.Name))
             .ValidationDetails(d => d.IsRequired = true);
-        description.ModelMetadata = modelMetadataProvider.GetMetadataForProperty(typeof(Person), nameof(Person.Name));
+        description.ModelMetadata = modelMetadataProvider.GetMetadataForProperty(
+            typeof(Person),
+            nameof(Person.Name)
+        );
 
         // Act
         DefaultApiDescriptionProvider.ProcessIsRequired(context, new MvcOptions());
@@ -2139,7 +2219,11 @@ public class DefaultApiDescriptionProviderTest
     public void ProcessDefaultValue_SetsDefaultRouteValue()
     {
         // Arrange
-        var methodInfo = GetType().GetMethod(nameof(ParameterDefaultValue), BindingFlags.Instance | BindingFlags.NonPublic);
+        var methodInfo = GetType()
+            .GetMethod(
+                nameof(ParameterDefaultValue),
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
         var parameterInfo = methodInfo.GetParameters()[0];
 
         var defaultValue = new object();
@@ -2165,7 +2249,11 @@ public class DefaultApiDescriptionProviderTest
     public void ProcessDefaultValue_SetsDefaultValue_FromParameterInfo()
     {
         // Arrange
-        var methodInfo = GetType().GetMethod(nameof(ParameterDefaultValue), BindingFlags.Instance | BindingFlags.NonPublic);
+        var methodInfo = GetType()
+            .GetMethod(
+                nameof(ParameterDefaultValue),
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
         var parameterInfo = methodInfo.GetParameters()[0];
         var description = new ApiParameterDescription
         {
@@ -2188,7 +2276,8 @@ public class DefaultApiDescriptionProviderTest
     public void ProcessDefaultValue_DoesNotSpecifyDefaultValueForValueTypes_WhenNoValueIsSpecified()
     {
         // Arrange
-        var methodInfo = GetType().GetMethod(nameof(AcceptsId_Query), BindingFlags.Instance | BindingFlags.NonPublic);
+        var methodInfo = GetType()
+            .GetMethod(nameof(AcceptsId_Query), BindingFlags.Instance | BindingFlags.NonPublic);
         var parameterInfo = methodInfo.GetParameters()[0];
         var description = new ApiParameterDescription
         {
@@ -2209,7 +2298,11 @@ public class DefaultApiDescriptionProviderTest
 
     private static ApiParameterContext GetApiParameterContext(ApiParameterDescription description)
     {
-        var context = new ApiParameterContext(new EmptyModelMetadataProvider(), new ControllerActionDescriptor(), new TemplatePart[0]);
+        var context = new ApiParameterContext(
+            new EmptyModelMetadataProvider(),
+            new ControllerActionDescriptor(),
+            new TemplatePart[0]
+        );
         context.Results.Add(description);
         return context;
     }
@@ -2218,7 +2311,8 @@ public class DefaultApiDescriptionProviderTest
         ActionDescriptor action,
         List<MockInputFormatter> inputFormatters = null,
         List<MockOutputFormatter> outputFormatters = null,
-        RouteOptions routeOptions = null)
+        RouteOptions routeOptions = null
+    )
     {
         var context = new ApiDescriptionProviderContext(new ActionDescriptor[] { action });
 
@@ -2236,8 +2330,7 @@ public class DefaultApiDescriptionProviderTest
         var optionsAccessor = Options.Create(options);
 
         var constraintResolver = new Mock<IInlineConstraintResolver>();
-        constraintResolver.Setup(c => c.ResolveConstraint("int"))
-            .Returns(new IntRouteConstraint());
+        constraintResolver.Setup(c => c.ResolveConstraint("int")).Returns(new IntRouteConstraint());
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
 
@@ -2246,7 +2339,8 @@ public class DefaultApiDescriptionProviderTest
             constraintResolver.Object,
             modelMetadataProvider,
             new ActionResultTypeMapper(),
-            Options.Create(routeOptions ?? new RouteOptions()));
+            Options.Create(routeOptions ?? new RouteOptions())
+        );
 
         provider.OnProvidersExecuting(context);
         provider.OnProvidersExecuted(context);
@@ -2258,10 +2352,10 @@ public class DefaultApiDescriptionProviderTest
     {
         // Include some default formatters that look reasonable, some tests will override this.
         var formatters = new List<MockInputFormatter>()
-            {
-                new MockInputFormatter(),
-                new MockInputFormatter(),
-            };
+        {
+            new MockInputFormatter(),
+            new MockInputFormatter(),
+        };
 
         formatters[0].SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/json"));
         formatters[0].SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/json"));
@@ -2276,10 +2370,10 @@ public class DefaultApiDescriptionProviderTest
     {
         // Include some default formatters that look reasonable, some tests will override this.
         var formatters = new List<MockOutputFormatter>()
-            {
-                new MockOutputFormatter(),
-                new MockOutputFormatter(),
-            };
+        {
+            new MockOutputFormatter(),
+            new MockOutputFormatter(),
+        };
 
         formatters[0].SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("application/json"));
         formatters[0].SupportedMediaTypes.Add(MediaTypeHeaderValue.Parse("text/json"));
@@ -2290,7 +2384,10 @@ public class DefaultApiDescriptionProviderTest
         return formatters;
     }
 
-    private ControllerActionDescriptor CreateActionDescriptor(string methodName = null, Type controllerType = null)
+    private ControllerActionDescriptor CreateActionDescriptor(
+        string methodName = null,
+        Type controllerType = null
+    )
     {
         var action = new ControllerActionDescriptor();
         action.SetProperty(new ApiDescriptionActionData());
@@ -2299,42 +2396,53 @@ public class DefaultApiDescriptionProviderTest
         {
             action.MethodInfo = controllerType.GetMethod(
                 methodName ?? "ReturnsObject",
-                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+            );
 
             action.ControllerTypeInfo = controllerType.GetTypeInfo();
             action.BoundProperties = new List<ParameterDescriptor>();
 
             foreach (var property in controllerType.GetProperties())
             {
-                var bindingInfo = BindingInfo.GetBindingInfo(property.GetCustomAttributes().OfType<object>());
+                var bindingInfo = BindingInfo.GetBindingInfo(
+                    property.GetCustomAttributes().OfType<object>()
+                );
                 if (bindingInfo != null)
                 {
-                    action.BoundProperties.Add(new ParameterDescriptor()
-                    {
-                        BindingInfo = bindingInfo,
-                        Name = property.Name,
-                        ParameterType = property.PropertyType,
-                    });
+                    action.BoundProperties.Add(
+                        new ParameterDescriptor()
+                        {
+                            BindingInfo = bindingInfo,
+                            Name = property.Name,
+                            ParameterType = property.PropertyType,
+                        }
+                    );
                 }
             }
         }
         else
         {
-            action.MethodInfo = GetType().GetMethod(
-                methodName ?? "ReturnsObject",
-                BindingFlags.Instance | BindingFlags.NonPublic);
+            action.MethodInfo = GetType()
+                .GetMethod(
+                    methodName ?? "ReturnsObject",
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                );
         }
 
         action.Parameters = new List<ParameterDescriptor>();
         foreach (var parameter in action.MethodInfo.GetParameters())
         {
-            action.Parameters.Add(new ControllerParameterDescriptor()
-            {
-                Name = parameter.Name,
-                ParameterType = parameter.ParameterType,
-                BindingInfo = BindingInfo.GetBindingInfo(parameter.GetCustomAttributes().OfType<object>()),
-                ParameterInfo = parameter
-            });
+            action.Parameters.Add(
+                new ControllerParameterDescriptor()
+                {
+                    Name = parameter.Name,
+                    ParameterType = parameter.ParameterType,
+                    BindingInfo = BindingInfo.GetBindingInfo(
+                        parameter.GetCustomAttributes().OfType<object>()
+                    ),
+                    ParameterInfo = parameter,
+                }
+            );
         }
 
         return action;
@@ -2342,8 +2450,8 @@ public class DefaultApiDescriptionProviderTest
 
     private IEnumerable<string> GetSortedMediaTypes(ApiResponseType apiResponseType)
     {
-        return apiResponseType.ApiResponseFormats
-            .OrderBy(responseType => responseType.MediaType)
+        return apiResponseType
+            .ApiResponseFormats.OrderBy(responseType => responseType.MediaType)
             .Select(responseType => responseType.MediaType);
     }
 
@@ -2352,9 +2460,7 @@ public class DefaultApiDescriptionProviderTest
         return null;
     }
 
-    private void ReturnsVoid()
-    {
-    }
+    private void ReturnsVoid() { }
 
     private IActionResult ReturnsActionResult()
     {
@@ -2422,160 +2528,98 @@ public class DefaultApiDescriptionProviderTest
     }
 
     private ActionResult<Product> ReturnsActionResultOfProduct() => null;
+
     private Http.HttpResults.Ok<Product> ReturnsResultOfProductWithEndpointMetadata() => null;
 
     private ActionResult<IEnumerable<Product>> ReturnsActionResultOfSequenceOfProducts() => null;
 
     private Task<ActionResult<Product>> ReturnsTaskOfActionResultOfProduct() => null;
-    private Task<Http.HttpResults.Ok<Product>> ReturnsTaskOfResultOfProductWithEndpointMetadata() => null;
 
-    private Task<ActionResult<IEnumerable<Product>>> ReturnsTaskOfActionResultOfSequenceOfProducts() => null;
+    private Task<Http.HttpResults.Ok<Product>> ReturnsTaskOfResultOfProductWithEndpointMetadata() =>
+        null;
 
-    private void AcceptsProduct(Product product)
-    {
-    }
+    private Task<
+        ActionResult<IEnumerable<Product>>
+    > ReturnsTaskOfActionResultOfSequenceOfProducts() => null;
 
-    private void RequiredParameter([BindRequired, Required] string name)
-    {
-    }
+    private void AcceptsProduct(Product product) { }
 
-    private void AcceptsProduct_Body([FromBody] Product product)
-    {
-    }
+    private void RequiredParameter([BindRequired, Required] string name) { }
 
-    private void AcceptsProduct_Form([FromForm] Product product)
-    {
-    }
+    private void AcceptsProduct_Body([FromBody] Product product) { }
 
-    private void AcceptsFormFile([FromFormFile] IFormFile formFile)
-    {
-    }
+    private void AcceptsProduct_Form([FromForm] Product product) { }
+
+    private void AcceptsFormFile([FromFormFile] IFormFile formFile) { }
 
     // This will show up as source = model binding
-    private void AcceptsProduct_Default([ModelBinder] Product product)
-    {
-    }
+    private void AcceptsProduct_Default([ModelBinder] Product product) { }
 
     // This will show up as source = unknown
-    private void AcceptsProduct_Custom([ModelBinder<BodyModelBinder>] Product product)
-    {
-    }
+    private void AcceptsProduct_Custom([ModelBinder<BodyModelBinder>] Product product) { }
 
-    private void AcceptsId_Route([FromRoute] int id)
-    {
-    }
+    private void AcceptsId_Route([FromRoute] int id) { }
 
-    private void AcceptsId_Query([FromQuery] int id)
-    {
-    }
+    private void AcceptsId_Query([FromQuery] int id) { }
 
-    private void AcceptsId_Header([FromHeader] int id)
-    {
-    }
+    private void AcceptsId_Header([FromHeader] int id) { }
 
-    private void AcceptsFormatters_Services([FromServices] ITestService tempDataProvider, [FromKeyedServices("foo")] ITestService keyedTempDataProvider)
-    {
-    }
+    private void AcceptsFormatters_Services(
+        [FromServices] ITestService tempDataProvider,
+        [FromKeyedServices("foo")] ITestService keyedTempDataProvider
+    ) { }
 
-    private void AcceptsProductChangeDTO(ProductChangeDTO dto)
-    {
-    }
+    private void AcceptsProductChangeDTO(ProductChangeDTO dto) { }
 
-    private void AcceptsProductChangeDTO_Query([FromQuery] ProductChangeDTO dto)
-    {
-    }
+    private void AcceptsProductChangeDTO_Query([FromQuery] ProductChangeDTO dto) { }
 
-    private void AcceptsManager([ModelBinder] Manager dto)
-    {
-    }
+    private void AcceptsManager([ModelBinder] Manager dto) { }
 
-    private void AcceptsEmployee([FromQuery(Name = "employee")] Employee dto)
-    {
-    }
+    private void AcceptsEmployee([FromQuery(Name = "employee")] Employee dto) { }
 
-    private void AcceptsTryParsablePrimitiveType([FromQuery] Guid id)
-    {
-    }
+    private void AcceptsTryParsablePrimitiveType([FromQuery] Guid id) { }
 
-    private void AcceptsTryParsableEmployee([FromQuery] TryParsableEmployee employee)
-    {
-    }
+    private void AcceptsTryParsableEmployee([FromQuery] TryParsableEmployee employee) { }
 
-    private void AcceptsConvertibleEmployee([FromQuery] ConvertibleEmployee employee)
-    {
-    }
+    private void AcceptsConvertibleEmployee([FromQuery] ConvertibleEmployee employee) { }
 
 #nullable enable
 
-    private void AcceptsNullableTryParsableEmployee([FromQuery] TryParsableEmployee? employee)
-    {
-    }
+    private void AcceptsNullableTryParsableEmployee([FromQuery] TryParsableEmployee? employee) { }
 
-    private void AcceptsTryParsableNullablePrimitiveType([FromQuery] Guid? id)
-    {
-    }
+    private void AcceptsTryParsableNullablePrimitiveType([FromQuery] Guid? id) { }
 
-    private void AcceptsNullableConvertibleEmployee([FromQuery] ConvertibleEmployee? employee)
-    {
-    }
+    private void AcceptsNullableConvertibleEmployee([FromQuery] ConvertibleEmployee? employee) { }
 
 #nullable restore
 
-    private void AcceptsOrderDTO(OrderDTO dto)
-    {
-    }
+    private void AcceptsOrderDTO(OrderDTO dto) { }
 
-    private void AcceptsOrderDTO_Query([FromQuery] OrderDTO dto)
-    {
-    }
+    private void AcceptsOrderDTO_Query([FromQuery] OrderDTO dto) { }
 
-    private void AcceptsCycle(Cycle1 c)
-    {
-    }
+    private void AcceptsCycle(Cycle1 c) { }
 
-    private void AcceptsHasCollection(HasCollection c)
-    {
-    }
+    private void AcceptsHasCollection(HasCollection c) { }
 
-    private void AcceptsHasCollection_Complex(HasCollection_Complex c)
-    {
-    }
+    private void AcceptsHasCollection_Complex(HasCollection_Complex c) { }
 
-    private void AcceptsRedundantMetadata([FromQuery] RedundantMetadata r)
-    {
-    }
+    private void AcceptsRedundantMetadata([FromQuery] RedundantMetadata r) { }
 
-    private void AcceptsPerson([FromForm] Person person)
-    {
-    }
+    private void AcceptsPerson([FromForm] Person person) { }
 
-    private void FromRouting([FromRoute] int id)
-    {
-    }
+    private void FromRouting([FromRoute] int id) { }
 
-    private void FromModelBinding(int id)
-    {
-    }
+    private void FromModelBinding(int id) { }
 
-    private void FromCustom([ModelBinder<BodyModelBinder>] int id)
-    {
-    }
+    private void FromCustom([ModelBinder<BodyModelBinder>] int id) { }
 
-    private void FromHeader([FromHeader] int id)
-    {
-    }
+    private void FromHeader([FromHeader] int id) { }
 
-    private void FromBody([FromBody] int id)
-    {
-    }
+    private void FromBody([FromBody] int id) { }
 
-    private void AcceptsMultipleProperties([FromQuery] MultipleProperties model)
-    {
-    }
+    private void AcceptsMultipleProperties([FromQuery] MultipleProperties model) { }
 
-    private void AcceptsMultiplePropertiesNested([FromQuery] MultiplePropertiesContainer model)
-    {
-    }
+    private void AcceptsMultiplePropertiesNested([FromQuery] MultiplePropertiesContainer model) { }
 
     private void ParameterDefaultValue(int value = 10) { }
 
@@ -2598,22 +2642,14 @@ public class DefaultApiDescriptionProviderTest
 
         public string NotBound { get; set; }
 
-        public void FromQueryName([FromQuery] string name)
-        {
-        }
+        public void FromQueryName([FromQuery] string name) { }
     }
 
-    public class Customer
-    {
-    }
+    public class Customer { }
 
-    public class BadData
-    {
-    }
+    public class BadData { }
 
-    public class ErrorDetails
-    {
-    }
+    public class ErrorDetails { }
 
     public class BaseProducesController : ControllerBase
     {
@@ -2632,14 +2668,10 @@ public class DefaultApiDescriptionProviderTest
             return default;
         }
 
-        public void ReturnsVoid()
-        {
-        }
+        public void ReturnsVoid() { }
     }
 
-    public class DerivedProducesController : BaseProducesController
-    {
-    }
+    public class DerivedProducesController : BaseProducesController { }
 
     private class Employee
     {
@@ -2666,7 +2698,11 @@ public class DefaultApiDescriptionProviderTest
             throw new FormatException($"{nameof(s)} is not in the correct format");
         }
 
-        public static bool TryParse([NotNullWhen(true)] string s, IFormatProvider provider, [MaybeNullWhen(false)] out TryParsableEmployee result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string s,
+            IFormatProvider provider,
+            [MaybeNullWhen(false)] out TryParsableEmployee result
+        )
         {
             result = new() { Name = s };
             return true;
@@ -2808,7 +2844,8 @@ public class DefaultApiDescriptionProviderTest
 
         public override Task<InputFormatterResult> ReadRequestBodyAsync(
             InputFormatterContext context,
-            Encoding effectiveEncoding)
+            Encoding effectiveEncoding
+        )
         {
             throw new NotImplementedException();
         }
@@ -2856,11 +2893,11 @@ public class DefaultApiDescriptionProviderTest
         }
     }
 
-    private class ContentTypeAttribute :
-        Attribute,
-        IFilterMetadata,
-        IApiResponseMetadataProvider,
-        IApiRequestMetadataProvider
+    private class ContentTypeAttribute
+        : Attribute,
+            IFilterMetadata,
+            IApiResponseMetadataProvider,
+            IApiRequestMetadataProvider
     {
         public ContentTypeAttribute(string mediaType)
         {
@@ -2884,9 +2921,7 @@ public class DefaultApiDescriptionProviderTest
         }
     }
 
-    private interface ITestService
-    {
-    }
+    private interface ITestService { }
 
     private class FromFormFileAttribute : Attribute, IBindingSourceMetadata
     {
@@ -2909,7 +2944,11 @@ public class DefaultApiDescriptionProviderTest
             return sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             if (value is string input)
             {

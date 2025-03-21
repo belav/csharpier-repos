@@ -29,7 +29,9 @@ namespace System.Web.Mvc.Routing
             // Scan for errant single { and } and convert double {{ to { and double }} to }
 
             // First we eliminate all escaped braces and then check if any other braces are remaining
-            string newLiteral = segmentLiteral.Replace("{{", String.Empty).Replace("}}", String.Empty);
+            string newLiteral = segmentLiteral
+                .Replace("{{", String.Empty)
+                .Replace("}}", String.Empty);
             if (newLiteral.Contains("{") || newLiteral.Contains("}"))
             {
                 return null;
@@ -50,8 +52,10 @@ namespace System.Web.Mvc.Routing
                     // If there are no more open braces, stop
                     return -1;
                 }
-                if ((startIndex + 1 == segment.Length) ||
-                    ((startIndex + 1 < segment.Length) && (segment[startIndex + 1] != '{')))
+                if (
+                    (startIndex + 1 == segment.Length)
+                    || ((startIndex + 1 < segment.Length) && (segment[startIndex + 1] != '{'))
+                )
                 {
                     // If we found an open brace that is followed by a non-open brace, it's
                     // a parameter delimiter.
@@ -92,9 +96,9 @@ namespace System.Web.Mvc.Routing
 
         internal static bool IsInvalidRouteTemplate(string routeTemplate)
         {
-            return routeTemplate.StartsWith("~", StringComparison.Ordinal) ||
-                   routeTemplate.StartsWith("/", StringComparison.Ordinal) ||
-                   (routeTemplate.IndexOf('?') != -1);
+            return routeTemplate.StartsWith("~", StringComparison.Ordinal)
+                || routeTemplate.StartsWith("/", StringComparison.Ordinal)
+                || (routeTemplate.IndexOf('?') != -1);
         }
 
         public static TParsedRoute Parse(string routeTemplate)
@@ -118,13 +122,19 @@ namespace System.Web.Mvc.Routing
 
             List<PathSegment> pathSegments = SplitUriToPathSegments(uriParts);
 
-            Contract.Assert(uriParts.Count == pathSegments.Count, "The number of string segments should be the same as the number of path segments");
+            Contract.Assert(
+                uriParts.Count == pathSegments.Count,
+                "The number of string segments should be the same as the number of path segments"
+            );
 
             return new TParsedRoute(pathSegments);
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly",
-            Justification = "The exceptions are just constructed here, but they are thrown from a method that does have those parameter names.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2208:InstantiateArgumentExceptionsCorrectly",
+            Justification = "The exceptions are just constructed here, but they are thrown from a method that does have those parameter names."
+        )]
         private static List<PathSubsegment> ParseUriSegment(string segment, out Exception exception)
         {
             int startIndex = 0;
@@ -140,7 +150,11 @@ namespace System.Web.Mvc.Routing
                     string lastLiteralPart = GetLiteral(segment.Substring(startIndex));
                     if (lastLiteralPart == null)
                     {
-                        exception = Error.Argument("routeTemplate", ErrorResources.Route_MismatchedParameter, segment);
+                        exception = Error.Argument(
+                            "routeTemplate",
+                            ErrorResources.Route_MismatchedParameter,
+                            segment
+                        );
                         return null;
                     }
 
@@ -154,14 +168,24 @@ namespace System.Web.Mvc.Routing
                 int nextParameterEnd = segment.IndexOf('}', nextParameterStart + 1);
                 if (nextParameterEnd == -1)
                 {
-                    exception = Error.Argument("routeTemplate", ErrorResources.Route_MismatchedParameter, segment);
+                    exception = Error.Argument(
+                        "routeTemplate",
+                        ErrorResources.Route_MismatchedParameter,
+                        segment
+                    );
                     return null;
                 }
 
-                string literalPart = GetLiteral(segment.Substring(startIndex, nextParameterStart - startIndex));
+                string literalPart = GetLiteral(
+                    segment.Substring(startIndex, nextParameterStart - startIndex)
+                );
                 if (literalPart == null)
                 {
-                    exception = Error.Argument("routeTemplate", ErrorResources.Route_MismatchedParameter, segment);
+                    exception = Error.Argument(
+                        "routeTemplate",
+                        ErrorResources.Route_MismatchedParameter,
+                        segment
+                    );
                     return null;
                 }
 
@@ -170,7 +194,10 @@ namespace System.Web.Mvc.Routing
                     pathSubsegments.Add(new PathLiteralSubsegment(literalPart));
                 }
 
-                string parameterName = segment.Substring(nextParameterStart + 1, nextParameterEnd - nextParameterStart - 1);
+                string parameterName = segment.Substring(
+                    nextParameterStart + 1,
+                    nextParameterEnd - nextParameterStart - 1
+                );
                 pathSubsegments.Add(new PathParameterSubsegment(parameterName));
 
                 startIndex = nextParameterEnd + 1;
@@ -195,7 +222,10 @@ namespace System.Web.Mvc.Routing
                 {
                     Exception exception;
                     List<PathSubsegment> subsegments = ParseUriSegment(pathSegment, out exception);
-                    Contract.Assert(exception == null, "This only gets called after the path has been validated, so there should never be an exception here");
+                    Contract.Assert(
+                        exception == null,
+                        "This only gets called after the path has been validated, so there should never be an exception here"
+                    );
                     pathSegments.Add(new PathContentSegment(subsegments));
                 }
             }
@@ -234,7 +264,10 @@ namespace System.Web.Mvc.Routing
                     parts.Add(nextPart);
                 }
 
-                Contract.Assert(uri[indexOfNextSeparator] == '/', "The separator char itself should always be a '/'.");
+                Contract.Assert(
+                    uri[indexOfNextSeparator] == '/',
+                    "The separator char itself should always be a '/'."
+                );
                 parts.Add("/");
                 currentIndex = indexOfNextSeparator + 1;
             }
@@ -242,14 +275,26 @@ namespace System.Web.Mvc.Routing
             return parts;
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1800:DoNotCastUnnecessarily", Justification = "Not changing original algorithm")]
-        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly",
-            Justification = "The exceptions are just constructed here, but they are thrown from a method that does have those parameter names.")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1800:DoNotCastUnnecessarily",
+            Justification = "Not changing original algorithm"
+        )]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2208:InstantiateArgumentExceptionsCorrectly",
+            Justification = "The exceptions are just constructed here, but they are thrown from a method that does have those parameter names."
+        )]
         private static Exception ValidateUriParts(List<string> pathSegments)
         {
-            Contract.Assert(pathSegments != null, "The value should always come from SplitUri(), and that function should never return null.");
+            Contract.Assert(
+                pathSegments != null,
+                "The value should always come from SplitUri(), and that function should never return null."
+            );
 
-            HashSet<string> usedParameterNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            HashSet<string> usedParameterNames = new HashSet<string>(
+                StringComparer.OrdinalIgnoreCase
+            );
             bool? isPreviousPartSeparator = null;
 
             bool foundCatchAllParameter = false;
@@ -260,7 +305,11 @@ namespace System.Web.Mvc.Routing
                 {
                     // If we ever start an iteration of the loop and we've already found a
                     // catchall parameter then we have an invalid URI format.
-                    return Error.Argument("routeTemplate", ErrorResources.Route_CatchAllMustBeLast, "routeTemplate");
+                    return Error.Argument(
+                        "routeTemplate",
+                        ErrorResources.Route_CatchAllMustBeLast,
+                        "routeTemplate"
+                    );
                 }
 
                 bool isCurrentPartSeparator;
@@ -277,10 +326,16 @@ namespace System.Web.Mvc.Routing
                     // If both the previous part and the current part are separators, it's invalid
                     if (isCurrentPartSeparator && isPreviousPartSeparator.Value)
                     {
-                        return Error.Argument("routeTemplate", ErrorResources.Route_CannotHaveConsecutiveSeparators);
+                        return Error.Argument(
+                            "routeTemplate",
+                            ErrorResources.Route_CannotHaveConsecutiveSeparators
+                        );
                     }
 
-                    Contract.Assert(isCurrentPartSeparator != isPreviousPartSeparator.Value, "This assert should only happen if both the current and previous parts are non-separators. This should never happen because consecutive non-separators are always parsed as a single part.");
+                    Contract.Assert(
+                        isCurrentPartSeparator != isPreviousPartSeparator.Value,
+                        "This assert should only happen if both the current and previous parts are non-separators. This should never happen because consecutive non-separators are always parsed as a single part."
+                    );
                     isPreviousPartSeparator = isCurrentPartSeparator;
                 }
 
@@ -300,15 +355,24 @@ namespace System.Web.Mvc.Routing
                         return exception;
                     }
 
-                    foundCatchAllParameter = subsegments.Any<PathSubsegment>(seg => (seg is PathParameterSubsegment) && ((PathParameterSubsegment)seg).IsCatchAll);
+                    foundCatchAllParameter = subsegments.Any<PathSubsegment>(seg =>
+                        (seg is PathParameterSubsegment)
+                        && ((PathParameterSubsegment)seg).IsCatchAll
+                    );
                 }
             }
             return null;
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2208:InstantiateArgumentExceptionsCorrectly",
-            Justification = "The exceptions are just constructed here, but they are thrown from a method that does have those parameter names.")]
-        private static Exception ValidateUriSegment(List<PathSubsegment> pathSubsegments, HashSet<string> usedParameterNames)
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2208:InstantiateArgumentExceptionsCorrectly",
+            Justification = "The exceptions are just constructed here, but they are thrown from a method that does have those parameter names."
+        )]
+        private static Exception ValidateUriSegment(
+            List<PathSubsegment> pathSubsegments,
+            HashSet<string> usedParameterNames
+        )
         {
             bool segmentContainsCatchAll = false;
 
@@ -320,7 +384,10 @@ namespace System.Web.Mvc.Routing
                 {
                     if (previousSegmentType == subsegment.GetType())
                     {
-                        return Error.Argument("routeTemplate", ErrorResources.Route_CannotHaveConsecutiveParameters);
+                        return Error.Argument(
+                            "routeTemplate",
+                            ErrorResources.Route_CannotHaveConsecutiveParameters
+                        );
                     }
                 }
                 previousSegmentType = subsegment.GetType();
@@ -332,7 +399,8 @@ namespace System.Web.Mvc.Routing
                 }
                 else
                 {
-                    PathParameterSubsegment parameterSubsegment = subsegment as PathParameterSubsegment;
+                    PathParameterSubsegment parameterSubsegment =
+                        subsegment as PathParameterSubsegment;
                     if (parameterSubsegment != null)
                     {
                         string parameterName = parameterSubsegment.ParameterName;
@@ -345,12 +413,20 @@ namespace System.Web.Mvc.Routing
                         // Check for valid characters in the parameter name
                         if (!IsValidParameterName(parameterName))
                         {
-                            return Error.Argument("routeTemplate", ErrorResources.Route_InvalidParameterName, parameterName);
+                            return Error.Argument(
+                                "routeTemplate",
+                                ErrorResources.Route_InvalidParameterName,
+                                parameterName
+                            );
                         }
 
                         if (usedParameterNames.Contains(parameterName))
                         {
-                            return Error.Argument("routeTemplate", ErrorResources.Route_RepeatedParameter, parameterName);
+                            return Error.Argument(
+                                "routeTemplate",
+                                ErrorResources.Route_RepeatedParameter,
+                                parameterName
+                            );
                         }
                         else
                         {
@@ -366,7 +442,10 @@ namespace System.Web.Mvc.Routing
 
             if (segmentContainsCatchAll && (pathSubsegments.Count != 1))
             {
-                return Error.Argument("routeTemplate", ErrorResources.Route_CannotHaveCatchAllInMultiSegment);
+                return Error.Argument(
+                    "routeTemplate",
+                    ErrorResources.Route_CannotHaveCatchAllInMultiSegment
+                );
             }
 
             return null;

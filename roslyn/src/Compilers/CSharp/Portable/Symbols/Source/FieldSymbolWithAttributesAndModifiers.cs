@@ -16,7 +16,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
-    internal abstract class FieldSymbolWithAttributesAndModifiers : FieldSymbol, IAttributeTargetSymbol
+    internal abstract class FieldSymbolWithAttributesAndModifiers
+        : FieldSymbol,
+            IAttributeTargetSymbol
     {
         private CustomAttributesBag<CSharpAttributeData> _lazyCustomAttributesBag;
         protected SymbolCompletionState state;
@@ -30,35 +32,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         protected abstract IAttributeTargetSymbol AttributeOwner { get; }
 
-        IAttributeTargetSymbol IAttributeTargetSymbol.AttributesOwner
-            => this.AttributeOwner;
+        IAttributeTargetSymbol IAttributeTargetSymbol.AttributesOwner => this.AttributeOwner;
 
-        AttributeLocation IAttributeTargetSymbol.DefaultAttributeLocation
-            => AttributeLocation.Field;
+        AttributeLocation IAttributeTargetSymbol.DefaultAttributeLocation =>
+            AttributeLocation.Field;
 
-        AttributeLocation IAttributeTargetSymbol.AllowedAttributeLocations
-            => AttributeLocation.Field;
+        AttributeLocation IAttributeTargetSymbol.AllowedAttributeLocations =>
+            AttributeLocation.Field;
 
-        internal sealed override bool HasComplete(CompletionPart part)
-            => state.HasComplete(part);
+        internal sealed override bool HasComplete(CompletionPart part) => state.HasComplete(part);
 
-        public sealed override bool IsStatic
-            => (Modifiers & DeclarationModifiers.Static) != 0;
+        public sealed override bool IsStatic => (Modifiers & DeclarationModifiers.Static) != 0;
 
-        public sealed override bool IsReadOnly
-            => (Modifiers & DeclarationModifiers.ReadOnly) != 0;
+        public sealed override bool IsReadOnly => (Modifiers & DeclarationModifiers.ReadOnly) != 0;
 
-        public sealed override Accessibility DeclaredAccessibility
-            => ModifierUtils.EffectiveAccessibility(Modifiers);
+        public sealed override Accessibility DeclaredAccessibility =>
+            ModifierUtils.EffectiveAccessibility(Modifiers);
 
-        public sealed override bool IsConst
-            => (Modifiers & DeclarationModifiers.Const) != 0;
+        public sealed override bool IsConst => (Modifiers & DeclarationModifiers.Const) != 0;
 
-        public sealed override bool IsVolatile
-            => (Modifiers & DeclarationModifiers.Volatile) != 0;
+        public sealed override bool IsVolatile => (Modifiers & DeclarationModifiers.Volatile) != 0;
 
-        public sealed override bool IsFixedSizeBuffer
-            => (Modifiers & DeclarationModifiers.Fixed) != 0;
+        public sealed override bool IsFixedSizeBuffer =>
+            (Modifiers & DeclarationModifiers.Fixed) != 0;
 
         /// <summary>
         /// Gets the attributes applied on this symbol.
@@ -68,8 +64,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// NOTE: This method should always be kept as a sealed override.
         /// If you want to override attribute binding logic for a sub-class, then override <see cref="GetAttributesBag"/> method.
         /// </remarks>
-        public sealed override ImmutableArray<CSharpAttributeData> GetAttributes()
-            => this.GetAttributesBag().Attributes;
+        public sealed override ImmutableArray<CSharpAttributeData> GetAttributes() =>
+            this.GetAttributesBag().Attributes;
 
         /// <summary>
         /// Returns a bag of applied custom attributes and data decoded from well-known attributes.
@@ -86,7 +82,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return bag;
             }
 
-            if (LoadAndValidateAttributes(OneOrMany.Create(this.AttributeDeclarationSyntaxList), ref _lazyCustomAttributesBag))
+            if (
+                LoadAndValidateAttributes(
+                    OneOrMany.Create(this.AttributeDeclarationSyntaxList),
+                    ref _lazyCustomAttributesBag
+                )
+            )
             {
                 var completed = state.NotePartComplete(CompletionPart.Attributes);
                 Debug.Assert(completed);
@@ -114,17 +115,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
 #nullable enable
-        internal sealed override (CSharpAttributeData?, BoundAttribute?) EarlyDecodeWellKnownAttribute(ref EarlyDecodeWellKnownAttributeArguments<EarlyWellKnownAttributeBinder, NamedTypeSymbol, AttributeSyntax, AttributeLocation> arguments)
+        internal sealed override (
+            CSharpAttributeData?,
+            BoundAttribute?
+        ) EarlyDecodeWellKnownAttribute(
+            ref EarlyDecodeWellKnownAttributeArguments<
+                EarlyWellKnownAttributeBinder,
+                NamedTypeSymbol,
+                AttributeSyntax,
+                AttributeLocation
+            > arguments
+        )
         {
             CSharpAttributeData? attributeData;
             BoundAttribute? boundAttribute;
             ObsoleteAttributeData? obsoleteData;
 
-            if (EarlyDecodeDeprecatedOrExperimentalOrObsoleteAttribute(ref arguments, out attributeData, out boundAttribute, out obsoleteData))
+            if (
+                EarlyDecodeDeprecatedOrExperimentalOrObsoleteAttribute(
+                    ref arguments,
+                    out attributeData,
+                    out boundAttribute,
+                    out obsoleteData
+                )
+            )
             {
                 if (obsoleteData != null)
                 {
-                    arguments.GetOrCreateData<CommonFieldEarlyWellKnownAttributeData>().ObsoleteAttributeData = obsoleteData;
+                    arguments
+                        .GetOrCreateData<CommonFieldEarlyWellKnownAttributeData>()
+                        .ObsoleteAttributeData = obsoleteData;
                 }
 
                 return (attributeData, boundAttribute);
@@ -132,6 +152,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             return base.EarlyDecodeWellKnownAttribute(ref arguments);
         }
+
 #nullable disable
 
         /// <summary>
@@ -149,9 +170,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
 
                 var lazyCustomAttributesBag = _lazyCustomAttributesBag;
-                if (lazyCustomAttributesBag != null && lazyCustomAttributesBag.IsEarlyDecodedWellKnownAttributeDataComputed)
+                if (
+                    lazyCustomAttributesBag != null
+                    && lazyCustomAttributesBag.IsEarlyDecodedWellKnownAttributeDataComputed
+                )
                 {
-                    var data = (CommonFieldEarlyWellKnownAttributeData)lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
+                    var data = (CommonFieldEarlyWellKnownAttributeData)
+                        lazyCustomAttributesBag.EarlyDecodedWellKnownAttributeData;
                     return data != null ? data.ObsoleteAttributeData : null;
                 }
 
@@ -159,7 +184,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        protected override void DecodeWellKnownAttributeImpl(ref DecodeWellKnownAttributeArguments<AttributeSyntax, CSharpAttributeData, AttributeLocation> arguments)
+        protected override void DecodeWellKnownAttributeImpl(
+            ref DecodeWellKnownAttributeArguments<
+                AttributeSyntax,
+                CSharpAttributeData,
+                AttributeLocation
+            > arguments
+        )
         {
             Debug.Assert((object)arguments.AttributeSyntaxOpt != null);
             var diagnostics = (BindingDiagnosticBag)arguments.Diagnostics;
@@ -170,50 +201,70 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (attribute.IsTargetAttribute(AttributeDescription.SpecialNameAttribute))
             {
-                arguments.GetOrCreateData<FieldWellKnownAttributeData>().HasSpecialNameAttribute = true;
+                arguments.GetOrCreateData<FieldWellKnownAttributeData>().HasSpecialNameAttribute =
+                    true;
             }
             else if (attribute.IsTargetAttribute(AttributeDescription.NonSerializedAttribute))
             {
-                arguments.GetOrCreateData<FieldWellKnownAttributeData>().HasNonSerializedAttribute = true;
+                arguments.GetOrCreateData<FieldWellKnownAttributeData>().HasNonSerializedAttribute =
+                    true;
             }
             else if (attribute.IsTargetAttribute(AttributeDescription.FieldOffsetAttribute))
             {
                 if (this.IsStatic || this.IsConst)
                 {
                     // CS0637: The FieldOffset attribute is not allowed on static or const fields
-                    diagnostics.Add(ErrorCode.ERR_StructOffsetOnBadField, arguments.AttributeSyntaxOpt.Name.Location);
+                    diagnostics.Add(
+                        ErrorCode.ERR_StructOffsetOnBadField,
+                        arguments.AttributeSyntaxOpt.Name.Location
+                    );
                 }
                 else
                 {
-                    int offset = attribute.CommonConstructorArguments[0].DecodeValue<int>(SpecialType.System_Int32);
+                    int offset = attribute
+                        .CommonConstructorArguments[0]
+                        .DecodeValue<int>(SpecialType.System_Int32);
                     if (offset < 0)
                     {
                         // Dev10 reports CS0647: "Error emitting attribute ..."
-                        diagnostics.Add(ErrorCode.ERR_InvalidAttributeArgument, attribute.GetAttributeArgumentLocation(0), arguments.AttributeSyntaxOpt.GetErrorDisplayName());
+                        diagnostics.Add(
+                            ErrorCode.ERR_InvalidAttributeArgument,
+                            attribute.GetAttributeArgumentLocation(0),
+                            arguments.AttributeSyntaxOpt.GetErrorDisplayName()
+                        );
                         offset = 0;
                     }
 
                     // Set field offset even if the attribute specifies an invalid value, so that
                     // post-validation knows that the attribute is applied and reports better errors.
-                    arguments.GetOrCreateData<FieldWellKnownAttributeData>().SetFieldOffset(offset);
+                    arguments
+                        .GetOrCreateData<FieldWellKnownAttributeData>()
+                        .SetFieldOffset(offset);
                 }
             }
             else if (attribute.IsTargetAttribute(AttributeDescription.MarshalAsAttribute))
             {
-                MarshalAsAttributeDecoder<FieldWellKnownAttributeData, AttributeSyntax, CSharpAttributeData, AttributeLocation>.Decode(ref arguments, AttributeTargets.Field, MessageProvider.Instance);
+                MarshalAsAttributeDecoder<
+                    FieldWellKnownAttributeData,
+                    AttributeSyntax,
+                    CSharpAttributeData,
+                    AttributeLocation
+                >.Decode(ref arguments, AttributeTargets.Field, MessageProvider.Instance);
             }
-            else if (ReportExplicitUseOfReservedAttributes(in arguments,
-                ReservedAttributes.DynamicAttribute
-                | ReservedAttributes.IsReadOnlyAttribute
-                | ReservedAttributes.RequiresLocationAttribute
-                | ReservedAttributes.IsUnmanagedAttribute
-                | ReservedAttributes.IsByRefLikeAttribute
-                | ReservedAttributes.TupleElementNamesAttribute
-                | ReservedAttributes.NullableAttribute
-                | ReservedAttributes.NativeIntegerAttribute
-                | ReservedAttributes.RequiredMemberAttribute))
-            {
-            }
+            else if (
+                ReportExplicitUseOfReservedAttributes(
+                    in arguments,
+                    ReservedAttributes.DynamicAttribute
+                        | ReservedAttributes.IsReadOnlyAttribute
+                        | ReservedAttributes.RequiresLocationAttribute
+                        | ReservedAttributes.IsUnmanagedAttribute
+                        | ReservedAttributes.IsByRefLikeAttribute
+                        | ReservedAttributes.TupleElementNamesAttribute
+                        | ReservedAttributes.NullableAttribute
+                        | ReservedAttributes.NativeIntegerAttribute
+                        | ReservedAttributes.RequiredMemberAttribute
+                )
+            ) { }
             else if (attribute.IsTargetAttribute(AttributeDescription.DateTimeConstantAttribute))
             {
                 VerifyConstantValueMatches(attribute.DecodeDateTimeConstantValue(), ref arguments);
@@ -224,15 +275,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
             else if (attribute.IsTargetAttribute(AttributeDescription.AllowNullAttribute))
             {
-                arguments.GetOrCreateData<FieldWellKnownAttributeData>().HasAllowNullAttribute = true;
+                arguments.GetOrCreateData<FieldWellKnownAttributeData>().HasAllowNullAttribute =
+                    true;
             }
             else if (attribute.IsTargetAttribute(AttributeDescription.DisallowNullAttribute))
             {
-                arguments.GetOrCreateData<FieldWellKnownAttributeData>().HasDisallowNullAttribute = true;
+                arguments.GetOrCreateData<FieldWellKnownAttributeData>().HasDisallowNullAttribute =
+                    true;
             }
             else if (attribute.IsTargetAttribute(AttributeDescription.MaybeNullAttribute))
             {
-                arguments.GetOrCreateData<FieldWellKnownAttributeData>().HasMaybeNullAttribute = true;
+                arguments.GetOrCreateData<FieldWellKnownAttributeData>().HasMaybeNullAttribute =
+                    true;
             }
             else if (attribute.IsTargetAttribute(AttributeDescription.NotNullAttribute))
             {
@@ -240,18 +294,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        public override FlowAnalysisAnnotations FlowAnalysisAnnotations
-            => DecodeFlowAnalysisAttributes(GetDecodedWellKnownAttributeData());
+        public override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
+            DecodeFlowAnalysisAttributes(GetDecodedWellKnownAttributeData());
 
-        private static FlowAnalysisAnnotations DecodeFlowAnalysisAttributes(FieldWellKnownAttributeData attributeData)
+        private static FlowAnalysisAnnotations DecodeFlowAnalysisAttributes(
+            FieldWellKnownAttributeData attributeData
+        )
         {
             var annotations = FlowAnalysisAnnotations.None;
             if (attributeData != null)
             {
-                if (attributeData.HasAllowNullAttribute) annotations |= FlowAnalysisAnnotations.AllowNull;
-                if (attributeData.HasDisallowNullAttribute) annotations |= FlowAnalysisAnnotations.DisallowNull;
-                if (attributeData.HasMaybeNullAttribute) annotations |= FlowAnalysisAnnotations.MaybeNull;
-                if (attributeData.HasNotNullAttribute) annotations |= FlowAnalysisAnnotations.NotNull;
+                if (attributeData.HasAllowNullAttribute)
+                    annotations |= FlowAnalysisAnnotations.AllowNull;
+                if (attributeData.HasDisallowNullAttribute)
+                    annotations |= FlowAnalysisAnnotations.DisallowNull;
+                if (attributeData.HasMaybeNullAttribute)
+                    annotations |= FlowAnalysisAnnotations.MaybeNull;
+                if (attributeData.HasNotNullAttribute)
+                    annotations |= FlowAnalysisAnnotations.NotNull;
             }
             return annotations;
         }
@@ -261,7 +321,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// (DateTimeConstantAttribute or DecimalConstantAttribute).
         /// If not, report ERR_FieldHasMultipleDistinctConstantValues.
         /// </summary>
-        private void VerifyConstantValueMatches(ConstantValue attrValue, ref DecodeWellKnownAttributeArguments<AttributeSyntax, CSharpAttributeData, AttributeLocation> arguments)
+        private void VerifyConstantValueMatches(
+            ConstantValue attrValue,
+            ref DecodeWellKnownAttributeArguments<
+                AttributeSyntax,
+                CSharpAttributeData,
+                AttributeLocation
+            > arguments
+        )
         {
             if (!attrValue.IsBad)
             {
@@ -273,16 +340,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     if (this.Type.SpecialType == SpecialType.System_Decimal)
                     {
-                        constValue = this.GetConstantValue(ConstantFieldsInProgress.Empty, earlyDecodingWellKnownAttributes: false);
+                        constValue = this.GetConstantValue(
+                            ConstantFieldsInProgress.Empty,
+                            earlyDecodingWellKnownAttributes: false
+                        );
 
-                        if ((object)constValue != null && !constValue.IsBad && constValue != attrValue)
+                        if (
+                            (object)constValue != null
+                            && !constValue.IsBad
+                            && constValue != attrValue
+                        )
                         {
-                            diagnostics.Add(ErrorCode.ERR_FieldHasMultipleDistinctConstantValues, arguments.AttributeSyntaxOpt.Location);
+                            diagnostics.Add(
+                                ErrorCode.ERR_FieldHasMultipleDistinctConstantValues,
+                                arguments.AttributeSyntaxOpt.Location
+                            );
                         }
                     }
                     else
                     {
-                        diagnostics.Add(ErrorCode.ERR_FieldHasMultipleDistinctConstantValues, arguments.AttributeSyntaxOpt.Location);
+                        diagnostics.Add(
+                            ErrorCode.ERR_FieldHasMultipleDistinctConstantValues,
+                            arguments.AttributeSyntaxOpt.Location
+                        );
                     }
 
                     if (data.ConstValue == CodeAnalysis.ConstantValue.Unset)
@@ -298,7 +378,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     {
                         if (constValue != attrValue)
                         {
-                            diagnostics.Add(ErrorCode.ERR_FieldHasMultipleDistinctConstantValues, arguments.AttributeSyntaxOpt.Location);
+                            diagnostics.Add(
+                                ErrorCode.ERR_FieldHasMultipleDistinctConstantValues,
+                                arguments.AttributeSyntaxOpt.Location
+                            );
                         }
                     }
                     else
@@ -309,7 +392,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal override void PostDecodeWellKnownAttributes(ImmutableArray<CSharpAttributeData> boundAttributes, ImmutableArray<AttributeSyntax> allAttributeSyntaxNodes, BindingDiagnosticBag diagnostics, AttributeLocation symbolPart, WellKnownAttributeData decodedData)
+        internal override void PostDecodeWellKnownAttributes(
+            ImmutableArray<CSharpAttributeData> boundAttributes,
+            ImmutableArray<AttributeSyntax> allAttributeSyntaxNodes,
+            BindingDiagnosticBag diagnostics,
+            AttributeLocation symbolPart,
+            WellKnownAttributeData decodedData
+        )
         {
             Debug.Assert(!boundAttributes.IsDefault);
             Debug.Assert(!allAttributeSyntaxNodes.IsDefault);
@@ -328,8 +417,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     Debug.Assert(boundAttributes.Any());
 
                     // error CS0636: The FieldOffset attribute can only be placed on members of types marked with the StructLayout(LayoutKind.Explicit)
-                    int i = boundAttributes.IndexOfAttribute(AttributeDescription.FieldOffsetAttribute);
-                    diagnostics.Add(ErrorCode.ERR_StructOffsetOnBadStruct, allAttributeSyntaxNodes[i].Name.Location);
+                    int i = boundAttributes.IndexOfAttribute(
+                        AttributeDescription.FieldOffsetAttribute
+                    );
+                    diagnostics.Add(
+                        ErrorCode.ERR_StructOffsetOnBadStruct,
+                        allAttributeSyntaxNodes[i].Name.Location
+                    );
                 }
             }
             else if (!this.IsStatic && !this.IsConst)
@@ -337,11 +431,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (this.ContainingType.Layout.Kind == LayoutKind.Explicit)
                 {
                     // error CS0625: '<field>': instance field types marked with StructLayout(LayoutKind.Explicit) must have a FieldOffset attribute
-                    diagnostics.Add(ErrorCode.ERR_MissingStructOffset, this.ErrorLocation, this.AttributeOwner);
+                    diagnostics.Add(
+                        ErrorCode.ERR_MissingStructOffset,
+                        this.ErrorLocation,
+                        this.AttributeOwner
+                    );
                 }
             }
 
-            base.PostDecodeWellKnownAttributes(boundAttributes, allAttributeSyntaxNodes, diagnostics, symbolPart, decodedData);
+            base.PostDecodeWellKnownAttributes(
+                boundAttributes,
+                allAttributeSyntaxNodes,
+                diagnostics,
+                symbolPart,
+                decodedData
+            );
         }
 
         internal sealed override bool HasSpecialName
@@ -385,13 +489,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             if (this.RefKind == RefKind.RefReadOnly)
             {
-                AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeIsReadOnlyAttribute(this));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    moduleBuilder.SynthesizeIsReadOnlyAttribute(this)
+                );
             }
 
             var compilation = this.DeclaringCompilation;
@@ -399,24 +509,38 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (type.Type.ContainsDynamic())
             {
-                AddSynthesizedAttribute(ref attributes,
-                    compilation.SynthesizeDynamicAttribute(type.Type, type.CustomModifiers.Length));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    compilation.SynthesizeDynamicAttribute(type.Type, type.CustomModifiers.Length)
+                );
             }
 
             if (compilation.ShouldEmitNativeIntegerAttributes(type.Type))
             {
-                AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeNativeIntegerAttribute(this, type.Type));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    moduleBuilder.SynthesizeNativeIntegerAttribute(this, type.Type)
+                );
             }
 
             if (type.Type.ContainsTupleNames())
             {
-                AddSynthesizedAttribute(ref attributes,
-                    compilation.SynthesizeTupleNamesAttribute(type.Type));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    compilation.SynthesizeTupleNamesAttribute(type.Type)
+                );
             }
 
             if (compilation.ShouldEmitNullableAttributes(this))
             {
-                AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeNullableAttributeIfNecessary(this, ContainingType.GetNullableContextValue(), type));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    moduleBuilder.SynthesizeNullableAttributeIfNecessary(
+                        this,
+                        ContainingType.GetNullableContextValue(),
+                        type
+                    )
+                );
             }
         }
     }

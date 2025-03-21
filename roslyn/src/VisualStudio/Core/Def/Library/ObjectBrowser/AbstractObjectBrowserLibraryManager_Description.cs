@@ -10,7 +10,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.ObjectB
 {
     internal abstract partial class AbstractObjectBrowserLibraryManager
     {
-        internal bool TryFillDescription(ObjectListItem listItem, IVsObjectBrowserDescription3 description, _VSOBJDESCOPTIONS options)
+        internal bool TryFillDescription(
+            ObjectListItem listItem,
+            IVsObjectBrowserDescription3 description,
+            _VSOBJDESCOPTIONS options
+        )
         {
             var project = GetProject(listItem);
             if (project == null)

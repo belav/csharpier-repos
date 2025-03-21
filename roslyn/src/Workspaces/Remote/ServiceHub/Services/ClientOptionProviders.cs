@@ -21,46 +21,82 @@ namespace Microsoft.CodeAnalysis.Remote;
 
 internal sealed class RemoteOptionsProviderCache<TOptions>
 {
-    private readonly Func<RemoteServiceCallbackId, string, CancellationToken, ValueTask<TOptions>> _callback;
+    private readonly Func<
+        RemoteServiceCallbackId,
+        string,
+        CancellationToken,
+        ValueTask<TOptions>
+    > _callback;
     private readonly RemoteServiceCallbackId _callbackId;
 
-    private ImmutableDictionary<string, AsyncLazy<TOptions>> _cache = ImmutableDictionary<string, AsyncLazy<TOptions>>.Empty;
+    private ImmutableDictionary<string, AsyncLazy<TOptions>> _cache = ImmutableDictionary<
+        string,
+        AsyncLazy<TOptions>
+    >.Empty;
 
-    public RemoteOptionsProviderCache(Func<RemoteServiceCallbackId, string, CancellationToken, ValueTask<TOptions>> callback, RemoteServiceCallbackId callbackId)
+    public RemoteOptionsProviderCache(
+        Func<RemoteServiceCallbackId, string, CancellationToken, ValueTask<TOptions>> callback,
+        RemoteServiceCallbackId callbackId
+    )
     {
         _callback = callback;
         _callbackId = callbackId;
     }
 
-    public async ValueTask<TOptions> GetOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
+    public async ValueTask<TOptions> GetOptionsAsync(
+        LanguageServices languageServices,
+        CancellationToken cancellationToken
+    )
     {
-        var lazyOptions = ImmutableInterlocked.GetOrAdd(ref _cache, languageServices.Language, _ => AsyncLazy.Create(GetRemoteOptionsAsync));
+        var lazyOptions = ImmutableInterlocked.GetOrAdd(
+            ref _cache,
+            languageServices.Language,
+            _ => AsyncLazy.Create(GetRemoteOptionsAsync)
+        );
         return await lazyOptions.GetValueAsync(cancellationToken).ConfigureAwait(false);
 
-        Task<TOptions> GetRemoteOptionsAsync(CancellationToken cancellationToken)
-            => _callback(_callbackId, languageServices.Language, cancellationToken).AsTask();
+        Task<TOptions> GetRemoteOptionsAsync(CancellationToken cancellationToken) =>
+            _callback(_callbackId, languageServices.Language, cancellationToken).AsTask();
     }
 }
 
-internal sealed class ClientCleanCodeGenerationOptionsProvider : AbstractCleanCodeGenerationOptionsProvider
+internal sealed class ClientCleanCodeGenerationOptionsProvider
+    : AbstractCleanCodeGenerationOptionsProvider
 {
     private readonly RemoteOptionsProviderCache<CleanCodeGenerationOptions> _cache;
 
-    public ClientCleanCodeGenerationOptionsProvider(Func<RemoteServiceCallbackId, string, CancellationToken, ValueTask<CleanCodeGenerationOptions>> callback, RemoteServiceCallbackId callbackId)
-        => _cache = new RemoteOptionsProviderCache<CleanCodeGenerationOptions>(callback, callbackId);
+    public ClientCleanCodeGenerationOptionsProvider(
+        Func<
+            RemoteServiceCallbackId,
+            string,
+            CancellationToken,
+            ValueTask<CleanCodeGenerationOptions>
+        > callback,
+        RemoteServiceCallbackId callbackId
+    ) => _cache = new RemoteOptionsProviderCache<CleanCodeGenerationOptions>(callback, callbackId);
 
-    public override ValueTask<CleanCodeGenerationOptions> GetCleanCodeGenerationOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-        => _cache.GetOptionsAsync(languageServices, cancellationToken);
+    public override ValueTask<CleanCodeGenerationOptions> GetCleanCodeGenerationOptionsAsync(
+        LanguageServices languageServices,
+        CancellationToken cancellationToken
+    ) => _cache.GetOptionsAsync(languageServices, cancellationToken);
 }
 
 internal sealed class ClientCodeCleanupOptionsProvider : AbstractCodeCleanupOptionsProvider
 {
     private readonly RemoteOptionsProviderCache<CodeCleanupOptions> _cache;
 
-    public ClientCodeCleanupOptionsProvider(Func<RemoteServiceCallbackId, string, CancellationToken, ValueTask<CodeCleanupOptions>> callback, RemoteServiceCallbackId callbackId)
-        => _cache = new RemoteOptionsProviderCache<CodeCleanupOptions>(callback, callbackId);
+    public ClientCodeCleanupOptionsProvider(
+        Func<
+            RemoteServiceCallbackId,
+            string,
+            CancellationToken,
+            ValueTask<CodeCleanupOptions>
+        > callback,
+        RemoteServiceCallbackId callbackId
+    ) => _cache = new RemoteOptionsProviderCache<CodeCleanupOptions>(callback, callbackId);
 
-    public override ValueTask<CodeCleanupOptions> GetCodeCleanupOptionsAsync(LanguageServices languageServices, CancellationToken cancellationToken)
-        => _cache.GetOptionsAsync(languageServices, cancellationToken);
+    public override ValueTask<CodeCleanupOptions> GetCodeCleanupOptionsAsync(
+        LanguageServices languageServices,
+        CancellationToken cancellationToken
+    ) => _cache.GetOptionsAsync(languageServices, cancellationToken);
 }
-

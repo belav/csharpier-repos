@@ -26,11 +26,16 @@ namespace System.Text.Json.Serialization
         public override bool CanConvert(Type typeToConvert) => typeToConvert == typeof(TEnum);
 
         /// <inheritdoc />
-        public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
+        public override JsonConverter? CreateConverter(
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (typeToConvert != typeof(TEnum))
             {
-                ThrowHelper.ThrowArgumentOutOfRangeException_JsonConverterFactory_TypeNotSupported(typeToConvert);
+                ThrowHelper.ThrowArgumentOutOfRangeException_JsonConverterFactory_TypeNotSupported(
+                    typeToConvert
+                );
             }
 
             return new EnumConverter<TEnum>(EnumConverterOptions.AllowNumbers, options);

@@ -19,9 +19,7 @@ public partial class SignOutResult : ActionResult, IResult
     /// Initializes a new instance of <see cref="SignOutResult"/> with the default sign out scheme.
     /// </summary>
     public SignOutResult()
-        : this(Array.Empty<string>())
-    {
-    }
+        : this(Array.Empty<string>()) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the default sign out scheme.
@@ -29,9 +27,7 @@ public partial class SignOutResult : ActionResult, IResult
     /// </summary>
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
     public SignOutResult(AuthenticationProperties properties)
-        : this(Array.Empty<string>(), properties)
-    {
-    }
+        : this(Array.Empty<string>(), properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the
@@ -39,9 +35,7 @@ public partial class SignOutResult : ActionResult, IResult
     /// </summary>
     /// <param name="authenticationScheme">The authentication scheme to use when signing out the user.</param>
     public SignOutResult(string authenticationScheme)
-        : this(new[] { authenticationScheme })
-    {
-    }
+        : this(new[] { authenticationScheme }) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the
@@ -49,9 +43,7 @@ public partial class SignOutResult : ActionResult, IResult
     /// </summary>
     /// <param name="authenticationSchemes">The authentication schemes to use when signing out the user.</param>
     public SignOutResult(IList<string> authenticationSchemes)
-        : this(authenticationSchemes, properties: null)
-    {
-    }
+        : this(authenticationSchemes, properties: null) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the
@@ -60,9 +52,7 @@ public partial class SignOutResult : ActionResult, IResult
     /// <param name="authenticationScheme">The authentication scheme to use when signing out the user.</param>
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
     public SignOutResult(string authenticationScheme, AuthenticationProperties? properties)
-        : this(new[] { authenticationScheme }, properties)
-    {
-    }
+        : this(new[] { authenticationScheme }, properties) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="SignOutResult"/> with the
@@ -72,7 +62,8 @@ public partial class SignOutResult : ActionResult, IResult
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
     public SignOutResult(IList<string> authenticationSchemes, AuthenticationProperties? properties)
     {
-        AuthenticationSchemes = authenticationSchemes ?? throw new ArgumentNullException(nameof(authenticationSchemes));
+        AuthenticationSchemes =
+            authenticationSchemes ?? throw new ArgumentNullException(nameof(authenticationSchemes));
         Properties = properties;
     }
 
@@ -106,8 +97,10 @@ public partial class SignOutResult : ActionResult, IResult
         {
             throw new InvalidOperationException(
                 Resources.FormatPropertyOfTypeCannotBeNull(
-                    /* property: */ nameof(AuthenticationSchemes),
-                    /* type: */ nameof(SignOutResult)));
+                    /* property: */nameof(AuthenticationSchemes),
+                    /* type: */nameof(SignOutResult)
+                )
+            );
         }
 
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
@@ -129,7 +122,10 @@ public partial class SignOutResult : ActionResult, IResult
 
     private static partial class Log
     {
-        public static void SignOutResultExecuting(ILogger logger, IList<string> authenticationSchemes)
+        public static void SignOutResultExecuting(
+            ILogger logger,
+            IList<string> authenticationSchemes
+        )
         {
             if (logger.IsEnabled(LogLevel.Information))
             {
@@ -137,7 +133,13 @@ public partial class SignOutResult : ActionResult, IResult
             }
         }
 
-        [LoggerMessage(1, LogLevel.Information, $"Executing {nameof(SignOutResult)} with authentication schemes ({{Schemes}}).", EventName = "SignOutResultExecuting", SkipEnabledCheck = true)]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            $"Executing {nameof(SignOutResult)} with authentication schemes ({{Schemes}}).",
+            EventName = "SignOutResultExecuting",
+            SkipEnabledCheck = true
+        )]
         private static partial void SignOutResultExecuting(ILogger logger, string[] schemes);
     }
 }

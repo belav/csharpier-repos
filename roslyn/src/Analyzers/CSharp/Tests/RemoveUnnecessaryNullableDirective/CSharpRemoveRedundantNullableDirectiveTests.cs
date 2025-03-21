@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpRemoveRedundantNullableDirectiveDiagnosticAnalyzer,
-        CSharpRemoveUnnecessaryNullableDirectiveCodeFixProvider>;
+        CSharpRemoveUnnecessaryNullableDirectiveCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsRemoveUnnecessaryNullableDirective)]
     public class CSharpRemoveRedundantNullableDirectiveTests
@@ -28,7 +29,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
         [InlineData(NullableContextOptions.Annotations, NullableContextOptions.Enable)]
         [InlineData(NullableContextOptions.Warnings, NullableContextOptions.Annotations)]
         [InlineData(NullableContextOptions.Warnings, NullableContextOptions.Enable)]
-        public async Task TestRedundantEnableDiffersFromCompilation(NullableContextOptions compilationContext, NullableContextOptions codeContext)
+        public async Task TestRedundantEnableDiffersFromCompilation(
+            NullableContextOptions compilationContext,
+            NullableContextOptions codeContext
+        )
         {
             await VerifyCodeFixAsync(
                 compilationContext,
@@ -44,7 +48,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -53,7 +58,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
         [InlineData(NullableContextOptions.Enable, NullableContextOptions.Annotations)]
         [InlineData(NullableContextOptions.Enable, NullableContextOptions.Warnings)]
         [InlineData(NullableContextOptions.Enable, NullableContextOptions.Enable)]
-        public async Task TestRedundantEnableMatchesCompilation(NullableContextOptions compilationContext, NullableContextOptions codeContext)
+        public async Task TestRedundantEnableMatchesCompilation(
+            NullableContextOptions compilationContext,
+            NullableContextOptions codeContext
+        )
         {
             await VerifyCodeFixAsync(
                 compilationContext,
@@ -68,7 +76,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -79,7 +88,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
         [InlineData(NullableContextOptions.Enable, NullableContextOptions.Annotations)]
         [InlineData(NullableContextOptions.Enable, NullableContextOptions.Warnings)]
         [InlineData(NullableContextOptions.Enable, NullableContextOptions.Enable)]
-        public async Task TestRedundantDisableDiffersFromCompilation(NullableContextOptions compilationContext, NullableContextOptions codeContext)
+        public async Task TestRedundantDisableDiffersFromCompilation(
+            NullableContextOptions compilationContext,
+            NullableContextOptions codeContext
+        )
         {
             await VerifyCodeFixAsync(
                 compilationContext,
@@ -95,7 +107,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
@@ -104,7 +117,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
         [InlineData(NullableContextOptions.Disable, NullableContextOptions.Enable)]
         [InlineData(NullableContextOptions.Annotations, NullableContextOptions.Warnings)]
         [InlineData(NullableContextOptions.Warnings, NullableContextOptions.Annotations)]
-        public async Task TestRedundantDisableMatchesCompilation(NullableContextOptions compilationContext, NullableContextOptions codeContext)
+        public async Task TestRedundantDisableMatchesCompilation(
+            NullableContextOptions compilationContext,
+            NullableContextOptions codeContext
+        )
         {
             await VerifyCodeFixAsync(
                 compilationContext,
@@ -119,12 +135,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestRedundantRestoreDiffersFromPriorContext(NullableContextOptions compilationContext)
+        public async Task TestRedundantRestoreDiffersFromPriorContext(
+            NullableContextOptions compilationContext
+        )
         {
             var enable = compilationContext != NullableContextOptions.Enable;
             await VerifyCodeFixAsync(
@@ -143,12 +162,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task TestRedundantRestoreMatchesCompilation(NullableContextOptions compilationContext)
+        public async Task TestRedundantRestoreMatchesCompilation(
+            NullableContextOptions compilationContext
+        )
         {
             await VerifyCodeFixAsync(
                 compilationContext,
@@ -162,7 +184,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -186,7 +209,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 class Program
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -216,7 +240,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         private static string GetDisableDirectiveContext(NullableContextOptions options)
@@ -241,7 +266,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
             };
         }
 
-        private static async Task VerifyCodeFixAsync(NullableContextOptions compilationNullableContextOptions, string source, string fixedSource)
+        private static async Task VerifyCodeFixAsync(
+            NullableContextOptions compilationNullableContextOptions,
+            string source,
+            string fixedSource
+        )
         {
             await new VerifyCS.Test
             {
@@ -251,10 +280,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Analyzers.UnitTests.RemoveUnnecessaryNul
                 {
                     (solution, projectId) =>
                     {
-                        var compilationOptions = (CSharpCompilationOptions?)solution.GetRequiredProject(projectId).CompilationOptions;
+                        var compilationOptions = (CSharpCompilationOptions?)
+                            solution.GetRequiredProject(projectId).CompilationOptions;
                         Contract.ThrowIfNull(compilationOptions);
 
-                        return solution.WithProjectCompilationOptions(projectId, compilationOptions.WithNullableContextOptions(compilationNullableContextOptions));
+                        return solution.WithProjectCompilationOptions(
+                            projectId,
+                            compilationOptions.WithNullableContextOptions(
+                                compilationNullableContextOptions
+                            )
+                        );
                     },
                 },
             }.RunAsync();

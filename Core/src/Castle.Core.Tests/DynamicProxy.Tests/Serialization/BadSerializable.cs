@@ -16,16 +16,16 @@
 
 namespace Castle.DynamicProxy.Tests.Serialization
 {
-	using System;
-	using System.Runtime.Serialization;
+    using System;
+    using System.Runtime.Serialization;
 
-	[Serializable]
-	public abstract class BadSerializable
-	{
-		public int Value { get; set; }
+    [Serializable]
+    public abstract class BadSerializable
+    {
+        public int Value { get; set; }
 
-		public abstract void GetObjectData(SerializationInfo info, StreamingContext context);
-	}
+        public abstract void GetObjectData(SerializationInfo info, StreamingContext context);
+    }
 }
 
 #endif

@@ -33,14 +33,17 @@ using Roslyn.Utilities;
 namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 {
     [Export(typeof(IStreamingFindUsagesPresenter)), Shared]
-    internal partial class StreamingFindUsagesPresenter :
-        ForegroundThreadAffinitizedObject, IStreamingFindUsagesPresenter
+    internal partial class StreamingFindUsagesPresenter
+        : ForegroundThreadAffinitizedObject,
+            IStreamingFindUsagesPresenter
     {
-        public const string RoslynFindUsagesTableDataSourceIdentifier =
-            nameof(RoslynFindUsagesTableDataSourceIdentifier);
+        public const string RoslynFindUsagesTableDataSourceIdentifier = nameof(
+            RoslynFindUsagesTableDataSourceIdentifier
+        );
 
-        public const string RoslynFindUsagesTableDataSourceSourceTypeIdentifier =
-            nameof(RoslynFindUsagesTableDataSourceSourceTypeIdentifier);
+        public const string RoslynFindUsagesTableDataSourceSourceTypeIdentifier = nameof(
+            RoslynFindUsagesTableDataSourceSourceTypeIdentifier
+        );
 
         private readonly IServiceProvider _serviceProvider;
 
@@ -72,37 +75,44 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             IEditorFormatMapService formatMapService,
             IClassificationFormatMapService classificationFormatMapService,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
-            [ImportMany] IEnumerable<Lazy<ITableColumnDefinition, NameMetadata>> columns)
-            : this(workspace,
-                   threadingContext,
-                   serviceProvider,
-                   globalOptions,
-                   typeMap,
-                   formatMapService,
-                   classificationFormatMapService,
-                   GetCustomColumns(columns),
-                   asynchronousOperationListenerProvider)
-        {
-        }
+            [ImportMany] IEnumerable<Lazy<ITableColumnDefinition, NameMetadata>> columns
+        )
+            : this(
+                workspace,
+                threadingContext,
+                serviceProvider,
+                globalOptions,
+                typeMap,
+                formatMapService,
+                classificationFormatMapService,
+                GetCustomColumns(columns),
+                asynchronousOperationListenerProvider
+            ) { }
 
         // Test only
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0034:Exported parts should have [ImportingConstructor]", Justification = "Used incorrectly by tests")]
-        public StreamingFindUsagesPresenter(
-            Workspace workspace,
-            ExportProvider exportProvider)
-            : this(workspace,
-                  exportProvider.GetExportedValue<IThreadingContext>(),
-                  exportProvider.GetExportedValue<Shell.SVsServiceProvider>(),
-                  exportProvider.GetExportedValue<IGlobalOptionService>(),
-                  exportProvider.GetExportedValue<ClassificationTypeMap>(),
-                  exportProvider.GetExportedValue<IEditorFormatMapService>(),
-                  exportProvider.GetExportedValue<IClassificationFormatMapService>(),
-                  exportProvider.GetExportedValues<ITableColumnDefinition>(),
-                  exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>())
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0034:Exported parts should have [ImportingConstructor]",
+            Justification = "Used incorrectly by tests"
+        )]
+        public StreamingFindUsagesPresenter(Workspace workspace, ExportProvider exportProvider)
+            : this(
+                workspace,
+                exportProvider.GetExportedValue<IThreadingContext>(),
+                exportProvider.GetExportedValue<Shell.SVsServiceProvider>(),
+                exportProvider.GetExportedValue<IGlobalOptionService>(),
+                exportProvider.GetExportedValue<ClassificationTypeMap>(),
+                exportProvider.GetExportedValue<IEditorFormatMapService>(),
+                exportProvider.GetExportedValue<IClassificationFormatMapService>(),
+                exportProvider.GetExportedValues<ITableColumnDefinition>(),
+                exportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>()
+            ) { }
 
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0034:Exported parts should have [ImportingConstructor]", Justification = "Used incorrectly by tests")]
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0034:Exported parts should have [ImportingConstructor]",
+            Justification = "Used incorrectly by tests"
+        )]
         private StreamingFindUsagesPresenter(
             Workspace workspace,
             IThreadingContext threadingContext,
@@ -112,7 +122,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             IEditorFormatMapService formatMapService,
             IClassificationFormatMapService classificationFormatMapService,
             IEnumerable<ITableColumnDefinition> columns,
-            IAsynchronousOperationListenerProvider asyncListenerProvider)
+            IAsynchronousOperationListenerProvider asyncListenerProvider
+        )
             : base(threadingContext, assertIsForeground: false)
         {
             _workspace = workspace;
@@ -121,12 +132,16 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             TypeMap = typeMap;
             FormatMapService = formatMapService;
             _asyncListener = asyncListenerProvider.GetListener(FeatureAttribute.FindReferences);
-            ClassificationFormatMap = classificationFormatMapService.GetClassificationFormatMap("tooltip");
+            ClassificationFormatMap = classificationFormatMapService.GetClassificationFormatMap(
+                "tooltip"
+            );
 
             _customColumns = columns.ToImmutableArray();
         }
 
-        private static IEnumerable<ITableColumnDefinition> GetCustomColumns(IEnumerable<Lazy<ITableColumnDefinition, NameMetadata>> columns)
+        private static IEnumerable<ITableColumnDefinition> GetCustomColumns(
+            IEnumerable<Lazy<ITableColumnDefinition, NameMetadata>> columns
+        )
         {
             foreach (var column in columns)
             {
@@ -162,17 +177,37 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
         /// <param name="title"></param>
         /// <param name="supportsReferences"></param>
         /// <returns></returns>
-        public (FindUsagesContext context, CancellationToken cancellationToken) StartSearch(string title, bool supportsReferences)
-            => StartSearchWithCustomColumns(title, supportsReferences, includeContainingTypeAndMemberColumns: false, includeKindColumn: false);
+        public (FindUsagesContext context, CancellationToken cancellationToken) StartSearch(
+            string title,
+            bool supportsReferences
+        ) =>
+            StartSearchWithCustomColumns(
+                title,
+                supportsReferences,
+                includeContainingTypeAndMemberColumns: false,
+                includeKindColumn: false
+            );
 
         /// <summary>
         /// Start a search that may include Containing Type, Containing Member, or Kind information about the reference
         /// </summary>
-        public (FindUsagesContext context, CancellationToken cancellationToken) StartSearchWithCustomColumns(
-            string title, bool supportsReferences, bool includeContainingTypeAndMemberColumns, bool includeKindColumn)
+        public (
+            FindUsagesContext context,
+            CancellationToken cancellationToken
+        ) StartSearchWithCustomColumns(
+            string title,
+            bool supportsReferences,
+            bool includeContainingTypeAndMemberColumns,
+            bool includeKindColumn
+        )
         {
             this.AssertIsForeground();
-            var context = StartSearchWorker(title, supportsReferences, includeContainingTypeAndMemberColumns, includeKindColumn);
+            var context = StartSearchWorker(
+                title,
+                supportsReferences,
+                includeContainingTypeAndMemberColumns,
+                includeKindColumn
+            );
 
             // Keep track of this context object as long as it is being displayed in the UI.
             // That way we can Clear it out if requested by a client.  When the context is
@@ -183,11 +218,16 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
         }
 
         private AbstractTableDataSourceFindUsagesContext StartSearchWorker(
-            string title, bool supportsReferences, bool includeContainingTypeAndMemberColumns, bool includeKindColumn)
+            string title,
+            bool supportsReferences,
+            bool includeContainingTypeAndMemberColumns,
+            bool includeKindColumn
+        )
         {
             this.AssertIsForeground();
 
-            var vsFindAllReferencesService = (IFindAllReferencesService)_serviceProvider.GetService(typeof(SVsFindAllReferences));
+            var vsFindAllReferencesService = (IFindAllReferencesService)
+                _serviceProvider.GetService(typeof(SVsFindAllReferences));
 
             // Get the appropriate window for FAR results to go into.
             var window = vsFindAllReferencesService.StartSearch(title);
@@ -199,22 +239,37 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             // We need this because we disable the Definition column when we're not showing references
             // (i.e. GoToImplementation/GoToDef).  However, we want to restore the user's choice if they
             // then do another FindAllReferences.
-            var desiredGroupingPriority = _globalOptions.GetOption(FindUsagesPresentationOptionsStorage.DefinitionGroupingPriority);
+            var desiredGroupingPriority = _globalOptions.GetOption(
+                FindUsagesPresentationOptionsStorage.DefinitionGroupingPriority
+            );
             if (desiredGroupingPriority < 0)
             {
                 StoreCurrentGroupingPriority(window);
             }
 
             return supportsReferences
-                ? StartSearchWithReferences(window, desiredGroupingPriority, includeContainingTypeAndMemberColumns, includeKindColumn)
-                : StartSearchWithoutReferences(window, includeContainingTypeAndMemberColumns, includeKindColumn);
+                ? StartSearchWithReferences(
+                    window,
+                    desiredGroupingPriority,
+                    includeContainingTypeAndMemberColumns,
+                    includeKindColumn
+                )
+                : StartSearchWithoutReferences(
+                    window,
+                    includeContainingTypeAndMemberColumns,
+                    includeKindColumn
+                );
         }
 
         private AbstractTableDataSourceFindUsagesContext StartSearchWithReferences(
-            IFindAllReferencesWindow window, int desiredGroupingPriority, bool includeContainingTypeAndMemberColumns, bool includeKindColumn)
+            IFindAllReferencesWindow window,
+            int desiredGroupingPriority,
+            bool includeContainingTypeAndMemberColumns,
+            bool includeKindColumn
+        )
         {
             // Ensure that the window's definition-grouping reflects what the user wants.
-            // i.e. we may have disabled this column for a previous GoToImplementation call. 
+            // i.e. we may have disabled this column for a previous GoToImplementation call.
             // We want to still show the column as long as the user has not disabled it themselves.
             var definitionColumn = window.GetDefinitionColumn();
             if (definitionColumn.GroupingPriority != desiredGroupingPriority)
@@ -227,23 +282,43 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             tableControl.GroupingsChanged += (s, e) => StoreCurrentGroupingPriority(window);
 
             return new WithReferencesFindUsagesContext(
-                this, window, _customColumns, _globalOptions, includeContainingTypeAndMemberColumns, includeKindColumn, this.ThreadingContext);
+                this,
+                window,
+                _customColumns,
+                _globalOptions,
+                includeContainingTypeAndMemberColumns,
+                includeKindColumn,
+                this.ThreadingContext
+            );
         }
 
         private AbstractTableDataSourceFindUsagesContext StartSearchWithoutReferences(
-            IFindAllReferencesWindow window, bool includeContainingTypeAndMemberColumns, bool includeKindColumn)
+            IFindAllReferencesWindow window,
+            bool includeContainingTypeAndMemberColumns,
+            bool includeKindColumn
+        )
         {
             // If we're not showing references, then disable grouping by definition, as that will
-            // just lead to a poor experience.  i.e. we'll have the definition entry buckets, 
+            // just lead to a poor experience.  i.e. we'll have the definition entry buckets,
             // with the same items showing underneath them.
             SetDefinitionGroupingPriority(window, 0);
             return new WithoutReferencesFindUsagesContext(
-                this, window, _customColumns, _globalOptions, includeContainingTypeAndMemberColumns, includeKindColumn, this.ThreadingContext);
+                this,
+                window,
+                _customColumns,
+                _globalOptions,
+                includeContainingTypeAndMemberColumns,
+                includeKindColumn,
+                this.ThreadingContext
+            );
         }
 
         private void StoreCurrentGroupingPriority(IFindAllReferencesWindow window)
         {
-            _globalOptions.SetGlobalOption(FindUsagesPresentationOptionsStorage.DefinitionGroupingPriority, window.GetDefinitionColumn().GroupingPriority);
+            _globalOptions.SetGlobalOption(
+                FindUsagesPresentationOptionsStorage.DefinitionGroupingPriority,
+                window.GetDefinitionColumn().GroupingPriority
+            );
         }
 
         private void SetDefinitionGroupingPriority(IFindAllReferencesWindow window, int priority)
@@ -258,13 +333,16 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 var columnState2 = columnState as ColumnState2;
                 if (columnState2?.Name == StandardTableColumnDefinitions2.Definition)
                 {
-                    newColumns.Add(new ColumnState2(
-                        columnState2.Name,
-                        isVisible: false,
-                        width: columnState2.Width,
-                        sortPriority: columnState2.SortPriority,
-                        descendingSort: columnState2.DescendingSort,
-                        groupingPriority: priority));
+                    newColumns.Add(
+                        new ColumnState2(
+                            columnState2.Name,
+                            isVisible: false,
+                            width: columnState2.Width,
+                            sortPriority: columnState2.SortPriority,
+                            descendingSort: columnState2.DescendingSort,
+                            groupingPriority: priority
+                        )
+                    );
                 }
                 else
                 {
@@ -275,11 +353,13 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             tableControl.SetColumnStates(newColumns);
         }
 
-        protected static (Guid, string projectName, string? projectFlavor) GetGuidAndProjectInfo(Document document)
+        protected static (Guid, string projectName, string? projectFlavor) GetGuidAndProjectInfo(
+            Document document
+        )
         {
-            // The FAR system needs to know the guid for the project that a def/reference is 
+            // The FAR system needs to know the guid for the project that a def/reference is
             // from (to support features like filtering).  Normally that would mean we could
-            // only support this from a VisualStudioWorkspace.  However, we want till work 
+            // only support this from a VisualStudioWorkspace.  However, we want till work
             // in cases like Any-Code (which does not use a VSWorkspace).  So we are tolerant
             // when we have another type of workspace.  This means we will show results, but
             // certain features (like filtering) may not work in that context.
@@ -314,11 +394,20 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             // https://devdiv.visualstudio.com/DevDiv/_git/VS?path=/src/env/ErrorList/Pkg/Guids.cs&version=GBmain&line=24
             var guid = new Guid("a80febb4-e7e0-4147-b476-21aaf2453969");
 
-            if (_serviceProvider.GetService(typeof(SVsUIShell)) is not IVsUIShell uiShell ||
-                uiShell.FindToolWindow((uint)__VSFINDTOOLWIN.FTW_fFindFirst, ref guid, out var windowFrame) != VSConstants.S_OK ||
-                windowFrame == null ||
-                windowFrame.GetProperty((int)__VSFPROPID7.VSFPROPID_InfoBarHost, out var infoBarHostObj) != VSConstants.S_OK ||
-                infoBarHostObj is not IVsInfoBarHost infoBarHost)
+            if (
+                _serviceProvider.GetService(typeof(SVsUIShell)) is not IVsUIShell uiShell
+                || uiShell.FindToolWindow(
+                    (uint)__VSFINDTOOLWIN.FTW_fFindFirst,
+                    ref guid,
+                    out var windowFrame
+                ) != VSConstants.S_OK
+                || windowFrame == null
+                || windowFrame.GetProperty(
+                    (int)__VSFPROPID7.VSFPROPID_InfoBarHost,
+                    out var infoBarHostObj
+                ) != VSConstants.S_OK
+                || infoBarHostObj is not IVsInfoBarHost infoBarHost
+            )
             {
                 return null;
             }
@@ -326,22 +415,33 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             return infoBarHost;
         }
 
-        private async Task ReportInformationalMessageAsync(string message, CancellationToken cancellationToken)
+        private async Task ReportInformationalMessageAsync(
+            string message,
+            CancellationToken cancellationToken
+        )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
             RemoveExistingInfoBar();
 
-            if (_serviceProvider.GetService(typeof(SVsInfoBarUIFactory)) is not IVsInfoBarUIFactory factory)
+            if (
+                _serviceProvider.GetService(typeof(SVsInfoBarUIFactory))
+                is not IVsInfoBarUIFactory factory
+            )
                 return;
 
             var infoBarHost = GetInfoBarHost();
             if (infoBarHost == null)
                 return;
 
-            _infoBar = factory.CreateInfoBar(new InfoBarModel(
-                message,
-                KnownMonikers.StatusInformation,
-                isCloseButtonVisible: false));
+            _infoBar = factory.CreateInfoBar(
+                new InfoBarModel(
+                    message,
+                    KnownMonikers.StatusInformation,
+                    isCloseButtonVisible: false
+                )
+            );
 
             infoBarHost.AddInfoBar(_infoBar);
         }

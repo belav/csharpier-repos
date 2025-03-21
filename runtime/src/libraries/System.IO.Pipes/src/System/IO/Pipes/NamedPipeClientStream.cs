@@ -27,33 +27,74 @@ namespace System.IO.Pipes
 
         // Creates a named pipe client using default server (same machine, or "."), and PipeDirection.InOut
         public NamedPipeClientStream(string pipeName)
-            : this(".", pipeName, PipeDirection.InOut, PipeOptions.None, TokenImpersonationLevel.None, HandleInheritability.None)
-        {
-        }
+            : this(
+                ".",
+                pipeName,
+                PipeDirection.InOut,
+                PipeOptions.None,
+                TokenImpersonationLevel.None,
+                HandleInheritability.None
+            ) { }
 
         public NamedPipeClientStream(string serverName, string pipeName)
-            : this(serverName, pipeName, PipeDirection.InOut, PipeOptions.None, TokenImpersonationLevel.None, HandleInheritability.None)
-        {
-        }
+            : this(
+                serverName,
+                pipeName,
+                PipeDirection.InOut,
+                PipeOptions.None,
+                TokenImpersonationLevel.None,
+                HandleInheritability.None
+            ) { }
 
         public NamedPipeClientStream(string serverName, string pipeName, PipeDirection direction)
-            : this(serverName, pipeName, direction, PipeOptions.None, TokenImpersonationLevel.None, HandleInheritability.None)
-        {
-        }
+            : this(
+                serverName,
+                pipeName,
+                direction,
+                PipeOptions.None,
+                TokenImpersonationLevel.None,
+                HandleInheritability.None
+            ) { }
 
-        public NamedPipeClientStream(string serverName, string pipeName, PipeDirection direction, PipeOptions options)
-            : this(serverName, pipeName, direction, options, TokenImpersonationLevel.None, HandleInheritability.None)
-        {
-        }
+        public NamedPipeClientStream(
+            string serverName,
+            string pipeName,
+            PipeDirection direction,
+            PipeOptions options
+        )
+            : this(
+                serverName,
+                pipeName,
+                direction,
+                options,
+                TokenImpersonationLevel.None,
+                HandleInheritability.None
+            ) { }
 
-        public NamedPipeClientStream(string serverName, string pipeName, PipeDirection direction,
-            PipeOptions options, TokenImpersonationLevel impersonationLevel)
-            : this(serverName, pipeName, direction, options, impersonationLevel, HandleInheritability.None)
-        {
-        }
+        public NamedPipeClientStream(
+            string serverName,
+            string pipeName,
+            PipeDirection direction,
+            PipeOptions options,
+            TokenImpersonationLevel impersonationLevel
+        )
+            : this(
+                serverName,
+                pipeName,
+                direction,
+                options,
+                impersonationLevel,
+                HandleInheritability.None
+            ) { }
 
-        public NamedPipeClientStream(string serverName, string pipeName, PipeDirection direction,
-            PipeOptions options, TokenImpersonationLevel impersonationLevel, HandleInheritability inheritability)
+        public NamedPipeClientStream(
+            string serverName,
+            string pipeName,
+            PipeDirection direction,
+            PipeOptions options,
+            TokenImpersonationLevel impersonationLevel,
+            HandleInheritability inheritability
+        )
             : base(direction, 0)
         {
             ArgumentException.ThrowIfNullOrEmpty(pipeName);
@@ -62,17 +103,41 @@ namespace System.IO.Pipes
             {
                 throw new ArgumentException(SR.Argument_EmptyServerName);
             }
-            if ((options & ~(PipeOptions.WriteThrough | PipeOptions.Asynchronous | PipeOptions.CurrentUserOnly)) != 0)
+            if (
+                (
+                    options
+                    & ~(
+                        PipeOptions.WriteThrough
+                        | PipeOptions.Asynchronous
+                        | PipeOptions.CurrentUserOnly
+                    )
+                ) != 0
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(options), SR.ArgumentOutOfRange_OptionsInvalid);
+                throw new ArgumentOutOfRangeException(
+                    nameof(options),
+                    SR.ArgumentOutOfRange_OptionsInvalid
+                );
             }
-            if (impersonationLevel < TokenImpersonationLevel.None || impersonationLevel > TokenImpersonationLevel.Delegation)
+            if (
+                impersonationLevel < TokenImpersonationLevel.None
+                || impersonationLevel > TokenImpersonationLevel.Delegation
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(impersonationLevel), SR.ArgumentOutOfRange_ImpersonationInvalid);
+                throw new ArgumentOutOfRangeException(
+                    nameof(impersonationLevel),
+                    SR.ArgumentOutOfRange_ImpersonationInvalid
+                );
             }
-            if (inheritability < HandleInheritability.None || inheritability > HandleInheritability.Inheritable)
+            if (
+                inheritability < HandleInheritability.None
+                || inheritability > HandleInheritability.Inheritable
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(inheritability), SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable);
+                throw new ArgumentOutOfRangeException(
+                    nameof(inheritability),
+                    SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable
+                );
             }
             if ((options & PipeOptions.CurrentUserOnly) != 0)
             {
@@ -87,7 +152,12 @@ namespace System.IO.Pipes
         }
 
         // Create a NamedPipeClientStream from an existing server pipe handle.
-        public NamedPipeClientStream(PipeDirection direction, bool isAsync, bool isConnected, SafePipeHandle safePipeHandle)
+        public NamedPipeClientStream(
+            PipeDirection direction,
+            bool isAsync,
+            bool isConnected,
+            SafePipeHandle safePipeHandle
+        )
             : base(direction, 0)
         {
             ArgumentNullException.ThrowIfNull(safePipeHandle);
@@ -126,7 +196,11 @@ namespace System.IO.Pipes
 
         public void Connect(TimeSpan timeout) => Connect(ToTimeoutMilliseconds(timeout));
 
-        private void ConnectInternal(int timeout, CancellationToken cancellationToken, int startTime)
+        private void ConnectInternal(
+            int timeout,
+            CancellationToken cancellationToken,
+            int startTime
+        )
         {
             // This is the main connection loop. It will loop until the timeout expires.
             int elapsed = 0;
@@ -136,7 +210,8 @@ namespace System.IO.Pipes
                 cancellationToken.ThrowIfCancellationRequested();
 
                 // Determine how long we should wait in this connection attempt
-                int waitTime = timeout == Timeout.Infinite ? CancellationCheckInterval : timeout - elapsed;
+                int waitTime =
+                    timeout == Timeout.Infinite ? CancellationCheckInterval : timeout - elapsed;
                 if (cancellationToken.CanBeCanceled && waitTime > CancellationCheckInterval)
                 {
                     waitTime = CancellationCheckInterval;
@@ -153,8 +228,10 @@ namespace System.IO.Pipes
                 // and open on Unix will fail if the file isn't yet available.  Rather than just immediately
                 // looping around again, do slightly smarter busy waiting.
                 sw.SpinOnce();
-            }
-            while (timeout == Timeout.Infinite || (elapsed = unchecked(Environment.TickCount - startTime)) < timeout);
+            } while (
+                timeout == Timeout.Infinite
+                || (elapsed = unchecked(Environment.TickCount - startTime)) < timeout
+            );
 
             throw new TimeoutException();
         }
@@ -189,11 +266,27 @@ namespace System.IO.Pipes
 
             int startTime = Environment.TickCount; // We need to measure time here, not in the lambda
 
-            return Task.Factory.StartNew(static state =>
-            {
-                var tuple = ((NamedPipeClientStream stream, int timeout, CancellationToken cancellationToken, int startTime))state!;
-                tuple.stream.ConnectInternal(tuple.timeout, tuple.cancellationToken, tuple.startTime);
-            }, (this, timeout, cancellationToken, startTime), cancellationToken, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            return Task.Factory.StartNew(
+                static state =>
+                {
+                    var tuple = ((
+                        NamedPipeClientStream stream,
+                        int timeout,
+                        CancellationToken cancellationToken,
+                        int startTime
+                    ))
+                        state!;
+                    tuple.stream.ConnectInternal(
+                        tuple.timeout,
+                        tuple.cancellationToken,
+                        tuple.startTime
+                    );
+                },
+                (this, timeout, cancellationToken, startTime),
+                cancellationToken,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
         }
 
         public Task ConnectAsync(TimeSpan timeout, CancellationToken cancellationToken = default) =>
@@ -203,7 +296,11 @@ namespace System.IO.Pipes
         {
             long totalMilliseconds = (long)timeout.TotalMilliseconds;
             ArgumentOutOfRangeException.ThrowIfLessThan(totalMilliseconds, -1, nameof(timeout));
-            ArgumentOutOfRangeException.ThrowIfGreaterThan(totalMilliseconds, int.MaxValue, nameof(timeout));
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(
+                totalMilliseconds,
+                int.MaxValue,
+                nameof(timeout)
+            );
             return (int)totalMilliseconds;
         }
 

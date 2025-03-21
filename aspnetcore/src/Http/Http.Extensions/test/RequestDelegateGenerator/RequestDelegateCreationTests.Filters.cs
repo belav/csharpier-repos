@@ -59,10 +59,9 @@ app.MapGet("/", (HttpContext httpContext, string name) =>
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "TestName"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "TestName" }
+        );
 
         // Act
         await endpoint.RequestDelegate(httpContext);
@@ -100,10 +99,14 @@ app.MapGet("/", (HttpContext httpContext, string name) =>
         await endpoint.RequestDelegate(httpContext);
 
         // Assert
-        await VerifyResponseJsonBodyAsync<ProblemDetails>(httpContext, (problemDetails) =>
-        {
-            Assert.Equal("New response", problemDetails.Detail);
-        }, StatusCodes.Status400BadRequest);
+        await VerifyResponseJsonBodyAsync<ProblemDetails>(
+            httpContext,
+            (problemDetails) =>
+            {
+                Assert.Equal("New response", problemDetails.Detail);
+            },
+            StatusCodes.Status400BadRequest
+        );
     }
 
     [Fact]
@@ -138,11 +141,9 @@ app.MapGet("/", (string name, int age) =>
         var endpoint = GetEndpointFromCompilation(compilation);
         var httpContext = CreateHttpContext();
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "TestName",
-            ["age"] = "25"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "TestName", ["age"] = "25" }
+        );
 
         // Act
         await endpoint.RequestDelegate(httpContext);
@@ -180,10 +181,9 @@ app.MapGet("/", (string name) =>
         var endpoint = GetEndpointFromCompilation(compilation);
         var httpContext = CreateHttpContext();
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "TestName"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "TestName" }
+        );
 
         // Act
         await endpoint.RequestDelegate(httpContext);
@@ -233,7 +233,9 @@ app.MapGet("/", (IFormFileCollection formFiles) =>
 
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         // Act
         httpContext.Features.Set<IEndpointFeature>(new EndpointFeature { Endpoint = endpoint });
@@ -264,7 +266,9 @@ app.MapPost("/", PrintTodo)
 """;
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
-        var httpContext = CreateHttpContextWithBody(new Todo { Name = "Write tests", IsComplete = true });
+        var httpContext = CreateHttpContextWithBody(
+            new Todo { Name = "Write tests", IsComplete = true }
+        );
 
         // Act
         await endpoint.RequestDelegate(httpContext);
@@ -296,10 +300,9 @@ app.MapPost("/", (string name) =>
         var endpoint = GetEndpointFromCompilation(compilation);
         var httpContext = CreateHttpContext();
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "TestName"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "TestName" }
+        );
 
         // Act
         await endpoint.RequestDelegate(httpContext);
@@ -337,10 +340,9 @@ app.MapPost("/", (string name) =>
         var endpoint = GetEndpointFromCompilation(compilation);
         var httpContext = CreateHttpContext();
 
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>
-        {
-            ["name"] = "TestName"
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues> { ["name"] = "TestName" }
+        );
 
         // Act
         await endpoint.RequestDelegate(httpContext);
@@ -378,7 +380,7 @@ async Task<object> TestAction()
             {
                 new object[] { taskOfTMethod },
                 new object[] { taskOfTWithYieldMethod },
-                new object[] { taskOfObjectWithYieldMethod }
+                new object[] { taskOfObjectWithYieldMethod },
             };
         }
     }
@@ -435,7 +437,7 @@ async ValueTask<object> TestAction()
             {
                 new object[] { taskOfTMethod },
                 new object[] { taskOfTWithYieldMethod },
-                new object[] { taskOfObjectWithYieldMethod }
+                new object[] { taskOfObjectWithYieldMethod },
             };
         }
     }
@@ -501,7 +503,7 @@ async Task TestAction()
                 new object[] { valueTaskMethod },
                 new object[] { taskMethod },
                 new object[] { valueTaskWithYieldMethod },
-                new object[] { taskWithYieldMethod}
+                new object[] { taskWithYieldMethod },
             };
         }
     }
@@ -550,7 +552,10 @@ app.MapGet("/", TestAction)
         // Act
         await endpoint.RequestDelegate(httpContext);
 
-        await VerifyResponseBodyAsync(httpContext, "Filtered: Microsoft.AspNetCore.Http.HttpResults.EmptyHttpResult");
+        await VerifyResponseBodyAsync(
+            httpContext,
+            "Filtered: Microsoft.AspNetCore.Http.HttpResults.EmptyHttpResult"
+        );
     }
 
     public static object[][] TasksOfTypesMethods
@@ -592,7 +597,7 @@ async Task<TodoStruct> TestAction()
                 new object[] { valueTaskOfStructMethod },
                 new object[] { valueTaskOfStructWithYieldMethod },
                 new object[] { taskOfStructMethod },
-                new object[] { taskOfStructWithYieldMethod }
+                new object[] { taskOfStructWithYieldMethod },
             };
         }
     }
@@ -618,10 +623,13 @@ app.MapGet("/", TestAction)
         await endpoint.RequestDelegate(httpContext);
 
         // Assert
-        await VerifyResponseJsonBodyAsync<TodoStruct>(httpContext, (todo) =>
-        {
-            Assert.Equal("Test todo", todo.Name);
-        });
+        await VerifyResponseJsonBodyAsync<TodoStruct>(
+            httpContext,
+            (todo) =>
+            {
+                Assert.Equal("Test todo", todo.Name);
+            }
+        );
     }
 
     private class EndpointFeature : IEndpointFeature

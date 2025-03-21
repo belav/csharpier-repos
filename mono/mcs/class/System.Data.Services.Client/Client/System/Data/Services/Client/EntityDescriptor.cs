@@ -1,14 +1,13 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Client
 {
@@ -52,24 +51,59 @@ namespace System.Data.Services.Client
 
         #endregion
 
-        internal EntityDescriptor(String identity, Uri selfLink, Uri editLink, object entity, EntityDescriptor parentEntity, string parentProperty, string entitySetName, string etag, EntityStates state)
+        internal EntityDescriptor(
+            String identity,
+            Uri selfLink,
+            Uri editLink,
+            object entity,
+            EntityDescriptor parentEntity,
+            string parentProperty,
+            string entitySetName,
+            string etag,
+            EntityStates state
+        )
             : base(state)
         {
             Debug.Assert(entity != null, "entity is null");
-            Debug.Assert((parentEntity == null && parentProperty == null) || (parentEntity != null && parentProperty != null), "When parentEntity is specified, must also specify parentProperyName");
+            Debug.Assert(
+                (parentEntity == null && parentProperty == null)
+                    || (parentEntity != null && parentProperty != null),
+                "When parentEntity is specified, must also specify parentProperyName"
+            );
 
 #if DEBUG
             if (state == EntityStates.Added)
             {
-                Debug.Assert(identity == null && selfLink == null && editLink == null && etag == null, "For objects in added state, identity, self-link, edit-link and etag must be null");
-                Debug.Assert((!String.IsNullOrEmpty(entitySetName) && parentEntity == null && String.IsNullOrEmpty(parentProperty)) ||
-                             (String.IsNullOrEmpty(entitySetName) && parentEntity != null && !String.IsNullOrEmpty(parentProperty)),
-                             "For entities in added state, entity set name or the insert path must be specified");
+                Debug.Assert(
+                    identity == null && selfLink == null && editLink == null && etag == null,
+                    "For objects in added state, identity, self-link, edit-link and etag must be null"
+                );
+                Debug.Assert(
+                    (
+                        !String.IsNullOrEmpty(entitySetName)
+                        && parentEntity == null
+                        && String.IsNullOrEmpty(parentProperty)
+                    )
+                        || (
+                            String.IsNullOrEmpty(entitySetName)
+                            && parentEntity != null
+                            && !String.IsNullOrEmpty(parentProperty)
+                        ),
+                    "For entities in added state, entity set name or the insert path must be specified"
+                );
             }
             else
             {
-                Debug.Assert(identity != null, "For objects in non-added state, identity must never be null");
-                Debug.Assert(String.IsNullOrEmpty(entitySetName) && String.IsNullOrEmpty(parentProperty) && parentEntity == null, "For non-added entities, the entity set name and the insert path must be null");
+                Debug.Assert(
+                    identity != null,
+                    "For objects in non-added state, identity must never be null"
+                );
+                Debug.Assert(
+                    String.IsNullOrEmpty(entitySetName)
+                        && String.IsNullOrEmpty(parentProperty)
+                        && parentEntity == null,
+                    "For non-added entities, the entity set name and the insert path must be null"
+                );
             }
 #endif
 
@@ -88,11 +122,7 @@ namespace System.Data.Services.Client
 
         public String Identity
         {
-            get
-            {
-                return this.identity; 
-            }
-
+            get { return this.identity; }
             internal set
             {
                 Util.CheckArgumentNotEmpty(value, "Identity");
@@ -117,11 +147,7 @@ namespace System.Data.Services.Client
 
         public Uri ReadStreamUri
         {
-            get
-            {
-                return this.readStreamLink;
-            }
-
+            get { return this.readStreamLink; }
             internal set
             {
                 this.readStreamLink = value;
@@ -134,11 +160,7 @@ namespace System.Data.Services.Client
 
         public Uri EditStreamUri
         {
-            get
-            {
-                return this.editMediaLink;
-            }
-
+            get { return this.editMediaLink; }
             internal set
             {
                 this.editMediaLink = value;
@@ -162,15 +184,11 @@ namespace System.Data.Services.Client
 
         public string StreamETag
         {
-            get 
-            { 
-                return this.streamETag; 
-            }
-
-            internal set 
+            get { return this.streamETag; }
+            internal set
             {
                 Debug.Assert(this.mediaLinkEntry == true, "this.mediaLinkEntry == true");
-                this.streamETag = value; 
+                this.streamETag = value;
             }
         }
 
@@ -193,7 +211,7 @@ namespace System.Data.Services.Client
         #endregion
 
         #region Internal Properties
-        
+
         internal object ParentEntity
         {
             get { return this.parentDescriptor != null ? this.parentDescriptor.entity : null; }
@@ -211,11 +229,7 @@ namespace System.Data.Services.Client
 
         internal DataServiceContext.DataServiceSaveStream SaveStream
         {
-            get
-            {
-                return this.saveStream;
-            }
-
+            get { return this.saveStream; }
             set
             {
                 this.saveStream = value;
@@ -228,18 +242,19 @@ namespace System.Data.Services.Client
 
         internal StreamStates StreamState
         {
-            get
-            {
-                return this.streamState;
-            }
-
+            get { return this.streamState; }
             set
             {
                 this.streamState = value;
-                Debug.Assert(this.streamState == StreamStates.NoStream || this.mediaLinkEntry, "this.streamState == StreamStates.NoStream || this.mediaLinkEntry");
                 Debug.Assert(
-                    (this.saveStream == null && this.streamState == StreamStates.NoStream) || (this.saveStream != null && this.streamState != StreamStates.NoStream),
-                    "(this.saveStream == null && this.streamState == StreamStates.NoStream) || (this.saveStream != null && this.streamState != StreamStates.NoStream)");
+                    this.streamState == StreamStates.NoStream || this.mediaLinkEntry,
+                    "this.streamState == StreamStates.NoStream || this.mediaLinkEntry"
+                );
+                Debug.Assert(
+                    (this.saveStream == null && this.streamState == StreamStates.NoStream)
+                        || (this.saveStream != null && this.streamState != StreamStates.NoStream),
+                    "(this.saveStream == null && this.streamState == StreamStates.NoStream) || (this.saveStream != null && this.streamState != StreamStates.NoStream)"
+                );
             }
         }
 
@@ -247,7 +262,7 @@ namespace System.Data.Services.Client
         {
             get { return this.mediaLinkEntry; }
         }
-        
+
         internal override bool IsModified
         {
             get
@@ -262,7 +277,7 @@ namespace System.Data.Services.Client
                 }
             }
         }
-        
+
         #endregion
 
         #region Internal Methods
@@ -274,12 +289,25 @@ namespace System.Data.Services.Client
                 if (this.parentDescriptor.Identity == null)
                 {
                     return Util.CreateUri(
-                        Util.CreateUri(baseUriWithSlash, new Uri("$" + this.parentDescriptor.ChangeOrder.ToString(CultureInfo.InvariantCulture), UriKind.Relative)),
-                        Util.CreateUri(this.parentProperty, UriKind.Relative));
+                        Util.CreateUri(
+                            baseUriWithSlash,
+                            new Uri(
+                                "$"
+                                    + this.parentDescriptor.ChangeOrder.ToString(
+                                        CultureInfo.InvariantCulture
+                                    ),
+                                UriKind.Relative
+                            )
+                        ),
+                        Util.CreateUri(this.parentProperty, UriKind.Relative)
+                    );
                 }
                 else
                 {
-                    return Util.CreateUri(Util.CreateUri(baseUriWithSlash, this.parentDescriptor.GetLink(queryLink)), this.GetLink(queryLink));
+                    return Util.CreateUri(
+                        Util.CreateUri(baseUriWithSlash, this.parentDescriptor.GetLink(queryLink)),
+                        this.GetLink(queryLink)
+                    );
                 }
             }
             else
@@ -296,9 +324,16 @@ namespace System.Data.Services.Client
         internal LinkDescriptor GetRelatedEnd()
         {
             Debug.Assert(this.IsDeepInsert, "For related end, this must be a deep insert");
-            Debug.Assert(this.Identity == null, "If the identity is set, it means that the edit link no longer has the property name");
+            Debug.Assert(
+                this.Identity == null,
+                "If the identity is set, it means that the edit link no longer has the property name"
+            );
 
-            return new LinkDescriptor(this.parentDescriptor.entity, this.parentProperty, this.entity);
+            return new LinkDescriptor(
+                this.parentDescriptor.entity,
+                this.parentProperty,
+                this.entity
+            );
         }
 
         internal void CloseSaveStream()
@@ -313,12 +348,16 @@ namespace System.Data.Services.Client
 
         internal Uri GetMediaResourceUri(Uri serviceBaseUri)
         {
-            return this.ReadStreamUri == null ? null : Util.CreateUri(serviceBaseUri, this.ReadStreamUri);
+            return this.ReadStreamUri == null
+                ? null
+                : Util.CreateUri(serviceBaseUri, this.ReadStreamUri);
         }
 
         internal Uri GetEditMediaResourceUri(Uri serviceBaseUri)
         {
-            return this.EditStreamUri == null ? null : Util.CreateUri(serviceBaseUri, this.EditStreamUri);
+            return this.EditStreamUri == null
+                ? null
+                : Util.CreateUri(serviceBaseUri, this.EditStreamUri);
         }
 
         private Uri GetLink(bool queryLink)

@@ -24,7 +24,8 @@ internal sealed class RootComponentOperation
 
 internal sealed class WebRootComponentDescriptor(
     Type componentType,
-    WebRootComponentParameters parameters)
+    WebRootComponentParameters parameters
+)
 {
     public Type ComponentType { get; } = componentType;
 

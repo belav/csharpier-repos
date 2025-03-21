@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,26 +32,28 @@ using System.Linq;
 using System.Text;
 using Mono.Cecil;
 
-namespace Mono.CodeContracts.Rewrite.Ast {
-	class ExprCall : Expr {
+namespace Mono.CodeContracts.Rewrite.Ast
+{
+    class ExprCall : Expr
+    {
+        public ExprCall(MethodInfo methodInfo, MethodReference method, IEnumerable<Expr> parameters)
+            : base(methodInfo)
+        {
+            this.Method = method;
+            this.Parameters = parameters;
+        }
 
-		public ExprCall (MethodInfo methodInfo, MethodReference method, IEnumerable<Expr> parameters)
-			: base (methodInfo)
-		{
-			this.Method = method;
-			this.Parameters = parameters;
-		}
+        public MethodReference Method { get; private set; }
+        public IEnumerable<Expr> Parameters { get; private set; }
 
-		public MethodReference Method { get; private set; }
-		public IEnumerable<Expr> Parameters { get; private set; }
+        public override ExprType ExprType
+        {
+            get { return ExprType.Call; }
+        }
 
-		public override ExprType ExprType {
-			get { return ExprType.Call; }
-		}
-
-		public override TypeReference ReturnType {
-			get { return this.Method.ReturnType; }
-		}
-
-	}
+        public override TypeReference ReturnType
+        {
+            get { return this.Method.ReturnType; }
+        }
+    }
 }

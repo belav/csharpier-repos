@@ -2,9 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-using Xunit;
-
 using Test.Cryptography;
+using Xunit;
 
 namespace System.Security.Cryptography.Pkcs.Tests
 {
@@ -30,20 +29,28 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             AsnEncodedData a = new AsnEncodedData(new byte[3]);
             object ign;
-            AssertExtensions.Throws<ArgumentException, ArgumentNullException>("asnEncodedData", "asnEncodedData.Oid", () => ign = new Pkcs9AttributeObject(a));
+            AssertExtensions.Throws<ArgumentException, ArgumentNullException>(
+                "asnEncodedData",
+                "asnEncodedData.Oid",
+                () => ign = new Pkcs9AttributeObject(a)
+            );
         }
 
         [Fact]
         public static void InputDateTimeAsWindowsFileTimeBefore1601()
         {
             DateTime dt = new DateTime(1600, 12, 31, 11, 59, 59, DateTimeKind.Utc);
-            AssertExtensions.Throws<CryptographicException, ArgumentOutOfRangeException>(() => new Pkcs9SigningTime(dt));
+            AssertExtensions.Throws<CryptographicException, ArgumentOutOfRangeException>(() =>
+                new Pkcs9SigningTime(dt)
+            );
         }
 
         [Fact]
         public static void Pkcs9SigningTime_DateTimeMinValue()
         {
-            AssertExtensions.Throws<CryptographicException, ArgumentOutOfRangeException>(() => new Pkcs9SigningTime(DateTime.MinValue));
+            AssertExtensions.Throws<CryptographicException, ArgumentOutOfRangeException>(() =>
+                new Pkcs9SigningTime(DateTime.MinValue)
+            );
         }
 
         [Fact]
@@ -91,7 +98,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void InputDateTimeAsX509TimeBetween1950And2049_Utc()
         {
-            var exception = Record.Exception(() => {
+            var exception = Record.Exception(() =>
+            {
                 DateTime dt = new DateTime(1950, 1, 1, 00, 00, 00, DateTimeKind.Utc);
                 Pkcs9SigningTime st = new Pkcs9SigningTime(dt);
                 dt = new DateTime(2049, 12, 31, 23, 59, 59, DateTimeKind.Utc);
@@ -117,7 +125,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             AsnEncodedData a = new AsnEncodedData(oid, new byte[3]);
             object ign;
-            AssertExtensions.Throws<ArgumentException, ArgumentNullException>("asnEncodedData", "oid.Value", () => ign = new Pkcs9AttributeObject(a));
+            AssertExtensions.Throws<ArgumentException, ArgumentNullException>(
+                "asnEncodedData",
+                "oid.Value",
+                () => ign = new Pkcs9AttributeObject(a)
+            );
         }
 
         [Fact]
@@ -127,7 +139,11 @@ namespace System.Security.Cryptography.Pkcs.Tests
 
             AsnEncodedData a = new AsnEncodedData(oid, new byte[3]);
             object ign;
-            AssertExtensions.Throws<ArgumentException>("asnEncodedData", "oid.Value", () => ign = new Pkcs9AttributeObject(a));
+            AssertExtensions.Throws<ArgumentException>(
+                "asnEncodedData",
+                "oid.Value",
+                () => ign = new Pkcs9AttributeObject(a)
+            );
         }
 
         [Fact]
@@ -142,7 +158,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         {
             // Pkcs9AttributeObject.CopyFrom(AsnEncodedData) refuses to accept any AsnEncodedData that isn't a Pkcs9AttributeObject-derived class.
             Pkcs9AttributeObject p = new Pkcs9AttributeObject();
-            byte[] rawData = "041e4d00790020004400650073006300720069007000740069006f006e000000".HexToByteArray();
+            byte[] rawData =
+                "041e4d00790020004400650073006300720069007000740069006f006e000000".HexToByteArray();
             AsnEncodedData a = new AsnEncodedData(Oids.DocumentName, rawData);
             AssertExtensions.Throws<ArgumentException>(null, () => p.CopyFrom(a));
         }
@@ -168,7 +185,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void DocumentDescriptionFromRawData()
         {
-            byte[] rawData = "041e4d00790020004400650073006300720069007000740069006f006e000000".HexToByteArray();
+            byte[] rawData =
+                "041e4d00790020004400650073006300720069007000740069006f006e000000".HexToByteArray();
             Pkcs9DocumentDescription p = new Pkcs9DocumentDescription(rawData);
             Assert.Equal(rawData, p.RawData);
             string cookedData = p.DocumentDescription;
@@ -180,7 +198,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void DocumentDescriptionMissingTerminator()
         {
-            byte[] rawData = "041e4d00790020004400650073006300720069007000740069006f006e002100".HexToByteArray();
+            byte[] rawData =
+                "041e4d00790020004400650073006300720069007000740069006f006e002100".HexToByteArray();
             Pkcs9DocumentDescription p = new Pkcs9DocumentDescription(rawData);
             Assert.Equal(rawData, p.RawData);
             string cookedData = p.DocumentDescription;
@@ -192,7 +211,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void DocumentDescriptionEmbeddedTerminator()
         {
-            byte[] rawData = "041e4d00790020004400650073006300720000007000740069006f006e000000".HexToByteArray();
+            byte[] rawData =
+                "041e4d00790020004400650073006300720000007000740069006f006e000000".HexToByteArray();
             Pkcs9DocumentDescription p = new Pkcs9DocumentDescription(rawData);
             Assert.Equal(rawData, p.RawData);
             string cookedData = p.DocumentDescription;
@@ -217,7 +237,9 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void DocumentDescriptionNullValue()
         {
             object ignore;
-            Assert.Throws<ArgumentNullException>(() => ignore = new Pkcs9DocumentDescription((string)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                ignore = new Pkcs9DocumentDescription((string)null)
+            );
         }
 
         [Fact]
@@ -290,7 +312,8 @@ namespace System.Security.Cryptography.Pkcs.Tests
         public static void DocumentNamenNullValue()
         {
             object ignore;
-            Assert.Throws<ArgumentNullException>(() => ignore = new Pkcs9DocumentName((string)null));
+            Assert.Throws<ArgumentNullException>(() => ignore = new Pkcs9DocumentName((string)null)
+            );
         }
 
         [Fact]
@@ -398,7 +421,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             string contentType = "1.3.8473.23.4773.23";
             byte[] encodedContentType = "06072bc21917a52517".HexToByteArray();
             Pkcs9ContentType p = new Pkcs9ContentType();
-            Pkcs9AttributeObject pkcs9AttributeObject = new Pkcs9AttributeObject(p.Oid, encodedContentType);
+            Pkcs9AttributeObject pkcs9AttributeObject = new Pkcs9AttributeObject(
+                p.Oid,
+                encodedContentType
+            );
             p.CopyFrom(pkcs9AttributeObject);
 
             string cookedData = p.ContentType.Value;
@@ -423,10 +449,18 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void ContentTypeBadData()
         {
-            Assert.ThrowsAny<CryptographicException>(() => CreatePkcs9ContentTypeAndExtractContentType(new byte[0]));  // Too short
-            Assert.ThrowsAny<CryptographicException>(() => CreatePkcs9ContentTypeAndExtractContentType(new byte[1]));  // Too short
-            Assert.ThrowsAny<CryptographicException>(() => CreatePkcs9ContentTypeAndExtractContentType(new byte[2]));  // Does not start with ASN_TAG_OBJID.
-            Assert.ThrowsAny<CryptographicException>(() => CreatePkcs9ContentTypeAndExtractContentType(new byte[] { ASN_TAG_OBJID, 1 }));  // Bad length byte.
+            Assert.ThrowsAny<CryptographicException>(() =>
+                CreatePkcs9ContentTypeAndExtractContentType(new byte[0])
+            ); // Too short
+            Assert.ThrowsAny<CryptographicException>(() =>
+                CreatePkcs9ContentTypeAndExtractContentType(new byte[1])
+            ); // Too short
+            Assert.ThrowsAny<CryptographicException>(() =>
+                CreatePkcs9ContentTypeAndExtractContentType(new byte[2])
+            ); // Does not start with ASN_TAG_OBJID.
+            Assert.ThrowsAny<CryptographicException>(() =>
+                CreatePkcs9ContentTypeAndExtractContentType(new byte[] { ASN_TAG_OBJID, 1 })
+            ); // Bad length byte.
         }
 
         [Fact]
@@ -458,7 +492,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             byte[] encodedMessageDigest = encodedMessageDigestList.ToArray();
 
             Pkcs9MessageDigest p = new Pkcs9MessageDigest();
-            Pkcs9AttributeObject pAttribute = new Pkcs9AttributeObject(s_OidMessageDigest, encodedMessageDigest);
+            Pkcs9AttributeObject pAttribute = new Pkcs9AttributeObject(
+                s_OidMessageDigest,
+                encodedMessageDigest
+            );
             p.CopyFrom(pAttribute);
             Assert.Equal<byte>(encodedMessageDigest, p.RawData);
             Assert.Equal<byte>(messageDigest, p.MessageDigest);
@@ -474,7 +511,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
         private static Pkcs9ContentType CreatePkcs9ContentType(byte[] rawData)
         {
             Pkcs9ContentType pkcs9ContentType = new Pkcs9ContentType();
-            Pkcs9AttributeObject pkcs9AttributeObject = new Pkcs9AttributeObject(pkcs9ContentType.Oid, rawData);
+            Pkcs9AttributeObject pkcs9AttributeObject = new Pkcs9AttributeObject(
+                pkcs9ContentType.Oid,
+                rawData
+            );
             pkcs9ContentType.CopyFrom(pkcs9AttributeObject);
             return pkcs9ContentType;
         }

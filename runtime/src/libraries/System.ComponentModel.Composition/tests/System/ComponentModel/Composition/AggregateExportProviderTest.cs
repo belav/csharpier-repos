@@ -38,7 +38,9 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Constructor2_EmptyArrayAsProvidersArgument_ShouldSetProvidersPropertyToEmpty()
         {
-            var provider = new AggregateExportProvider((IEnumerable<ExportProvider>)new ExportProvider[0]);
+            var provider = new AggregateExportProvider(
+                (IEnumerable<ExportProvider>)new ExportProvider[0]
+            );
 
             Assert.Empty(provider.Providers);
         }

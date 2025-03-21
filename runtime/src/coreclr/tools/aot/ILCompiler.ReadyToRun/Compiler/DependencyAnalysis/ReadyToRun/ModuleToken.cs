@@ -2,13 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
-
+using Internal.CorConstants;
 using Internal.JitInterface;
 using Internal.TypeSystem.Ecma;
-using Internal.CorConstants;
 
 namespace ILCompiler.DependencyAnalysis.ReadyToRun
 {
@@ -25,6 +23,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
             Module = module;
             Token = token;
         }
+
         public ModuleToken(IEcmaModule module, EntityHandle entityHandle)
         {
             Module = module;
@@ -55,8 +54,7 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
         public override bool Equals(object obj)
         {
-            return obj is ModuleToken moduleToken &&
-                Equals(moduleToken);
+            return obj is ModuleToken moduleToken && Equals(moduleToken);
         }
 
         public bool Equals(ModuleToken moduleToken)

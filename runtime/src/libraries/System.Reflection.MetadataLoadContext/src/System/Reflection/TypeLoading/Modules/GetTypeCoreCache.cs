@@ -18,14 +18,24 @@ namespace System.Reflection.TypeLoading
             _container = new Container(this);
         }
 
-        public bool TryGet(ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name, int hashCode, [NotNullWhen(true)] out RoDefinitionType? type)
+        public bool TryGet(
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name,
+            int hashCode,
+            [NotNullWhen(true)] out RoDefinitionType? type
+        )
         {
             return _container.TryGetValue(ns, name, hashCode, out type);
         }
 
-        public RoDefinitionType GetOrAdd(ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name, int hashCode, RoDefinitionType type)
+        public RoDefinitionType GetOrAdd(
+            ReadOnlySpan<byte> ns,
+            ReadOnlySpan<byte> name,
+            int hashCode,
+            RoDefinitionType type
+        )
         {
-            if ( _container.TryGetValue(ns, name, hashCode, out RoDefinitionType? prior))
+            if (_container.TryGetValue(ns, name, hashCode, out RoDefinitionType? prior))
                 return prior;
 
             Monitor.Enter(_lock);
@@ -68,7 +78,12 @@ namespace System.Reflection.TypeLoading
                 _owner = owner;
             }
 
-            private Container(GetTypeCoreCache owner, int[] buckets, Entry[] entries, int nextFreeEntry)
+            private Container(
+                GetTypeCoreCache owner,
+                int[] buckets,
+                Entry[] entries,
+                int nextFreeEntry
+            )
             {
                 _buckets = buckets;
                 _entries = entries;
@@ -76,7 +91,12 @@ namespace System.Reflection.TypeLoading
                 _owner = owner;
             }
 
-            public bool TryGetValue(ReadOnlySpan<byte> ns, ReadOnlySpan<byte> name, int hashCode, [NotNullWhen(true)] out RoDefinitionType? value)
+            public bool TryGetValue(
+                ReadOnlySpan<byte> ns,
+                ReadOnlySpan<byte> name,
+                int hashCode,
+                [NotNullWhen(true)] out RoDefinitionType? value
+            )
             {
                 // Lock acquistion NOT required.
 
@@ -143,7 +163,10 @@ namespace System.Reflection.TypeLoading
                     {
                         newEntries[newNextFreeEntry]._value = _entries[entry]._value;
                         newEntries[newNextFreeEntry]._hashCode = _entries[entry]._hashCode;
-                        int newBucket = ComputeBucket(newEntries[newNextFreeEntry]._hashCode, newSize);
+                        int newBucket = ComputeBucket(
+                            newEntries[newNextFreeEntry]._hashCode,
+                            newSize
+                        );
                         newEntries[newNextFreeEntry]._next = newBuckets[newBucket];
                         newBuckets[newBucket] = newNextFreeEntry;
                         newNextFreeEntry++;
@@ -179,14 +202,17 @@ namespace System.Reflection.TypeLoading
                 for (int bucket = 0; bucket < _buckets.Length; bucket++)
                 {
                     int walk1 = _buckets[bucket];
-                    int walk2 = _buckets[bucket];  // walk2 advances two elements at a time - if walk1 ever meets walk2, we've detected a cycle.
+                    int walk2 = _buckets[bucket]; // walk2 advances two elements at a time - if walk1 ever meets walk2, we've detected a cycle.
                     while (walk1 != -1)
                     {
                         numEntriesEncountered++;
                         Debug.Assert(walk1 >= 0 && walk1 < _nextFreeEntry);
                         Debug.Assert(walk2 >= -1 && walk2 < _nextFreeEntry);
 
-                        int storedBucket = ComputeBucket(_entries[walk1]._hashCode, _buckets.Length);
+                        int storedBucket = ComputeBucket(
+                            _entries[walk1]._hashCode,
+                            _buckets.Length
+                        );
                         Debug.Assert(storedBucket == bucket);
                         walk1 = _entries[walk1]._next;
                         if (walk2 != -1)

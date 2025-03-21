@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,69 +34,69 @@ using System.Xml;
 
 namespace System.IdentityModel.Policy
 {
-	public abstract class AuthorizationContext :
-		IAuthorizationComponent
-	{
-		[MonoTODO]
-		public static AuthorizationContext 
-			CreateDefaultAuthorizationContext (IList<IAuthorizationPolicy> authorizationPolicies)
-		{
-			if (authorizationPolicies == null)
-				throw new ArgumentNullException ("authorizationPolicies");
+    public abstract class AuthorizationContext : IAuthorizationComponent
+    {
+        [MonoTODO]
+        public static AuthorizationContext CreateDefaultAuthorizationContext(
+            IList<IAuthorizationPolicy> authorizationPolicies
+        )
+        {
+            if (authorizationPolicies == null)
+                throw new ArgumentNullException("authorizationPolicies");
 
-			string id = new UniqueId ().ToString ();
-			DefaultEvaluationContext ctx =
-				new DefaultEvaluationContext ();
-			foreach (IAuthorizationPolicy a in authorizationPolicies) {
-				object o = null;
-				a.Evaluate (ctx, ref o);
-			}
+            string id = new UniqueId().ToString();
+            DefaultEvaluationContext ctx = new DefaultEvaluationContext();
+            foreach (IAuthorizationPolicy a in authorizationPolicies)
+            {
+                object o = null;
+                a.Evaluate(ctx, ref o);
+            }
 
-			return new DefaultAuthorizationContext (id, ctx);
-		}
+            return new DefaultAuthorizationContext(id, ctx);
+        }
 
-		protected AuthorizationContext ()
-		{
-		}
+        protected AuthorizationContext() { }
 
-		public abstract DateTime ExpirationTime { get; }
+        public abstract DateTime ExpirationTime { get; }
 
-		public abstract string Id { get; }
+        public abstract string Id { get; }
 
-		public abstract ReadOnlyCollection<ClaimSet> ClaimSets { get; }
+        public abstract ReadOnlyCollection<ClaimSet> ClaimSets { get; }
 
-		public abstract IDictionary<string,object> Properties { get; }
+        public abstract IDictionary<string, object> Properties { get; }
 
-		// default implementation: this class will be used for 
-		// CreateDefaultAuthorizationContext().
-		class DefaultAuthorizationContext : AuthorizationContext
-		{
-			DefaultEvaluationContext ctx;
-			string id;
+        // default implementation: this class will be used for
+        // CreateDefaultAuthorizationContext().
+        class DefaultAuthorizationContext : AuthorizationContext
+        {
+            DefaultEvaluationContext ctx;
+            string id;
 
-			public DefaultAuthorizationContext (
-				string id, DefaultEvaluationContext context)
-			{
-				this.id = id;
-				this.ctx = context;
-			}
+            public DefaultAuthorizationContext(string id, DefaultEvaluationContext context)
+            {
+                this.id = id;
+                this.ctx = context;
+            }
 
-			public override DateTime ExpirationTime {
-				get { return ctx.ExpirationTime; }
-			}
+            public override DateTime ExpirationTime
+            {
+                get { return ctx.ExpirationTime; }
+            }
 
-			public override string Id {
-				get { return id; }
-			}
+            public override string Id
+            {
+                get { return id; }
+            }
 
-			public override ReadOnlyCollection<ClaimSet> ClaimSets {
-				get { return ctx.ClaimSets; }
-			}
+            public override ReadOnlyCollection<ClaimSet> ClaimSets
+            {
+                get { return ctx.ClaimSets; }
+            }
 
-			public override IDictionary<string,object> Properties {
-				get { return ctx.Properties; }
-			}
-		}
-
-	}
+            public override IDictionary<string, object> Properties
+            {
+                get { return ctx.Properties; }
+            }
+        }
+    }
 }

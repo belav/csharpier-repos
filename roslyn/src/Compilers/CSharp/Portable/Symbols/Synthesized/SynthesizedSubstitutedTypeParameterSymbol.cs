@@ -16,13 +16,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class SynthesizedSubstitutedTypeParameterSymbol : SubstitutedTypeParameterSymbol
     {
-        public SynthesizedSubstitutedTypeParameterSymbol(Symbol owner, TypeMap map, TypeParameterSymbol substitutedFrom, int ordinal)
+        public SynthesizedSubstitutedTypeParameterSymbol(
+            Symbol owner,
+            TypeMap map,
+            TypeParameterSymbol substitutedFrom,
+            int ordinal
+        )
             : base(owner, map, substitutedFrom, ordinal)
         {
-            Debug.Assert(this.TypeParameterKind == (ContainingSymbol is MethodSymbol ? TypeParameterKind.Method :
-                                                   (ContainingSymbol is NamedTypeSymbol ? TypeParameterKind.Type :
-                                                   TypeParameterKind.Cref)),
-                         $"Container is {ContainingSymbol?.Kind}, TypeParameterKind is {this.TypeParameterKind}");
+            Debug.Assert(
+                this.TypeParameterKind
+                    == (
+                        ContainingSymbol is MethodSymbol
+                            ? TypeParameterKind.Method
+                            : (
+                                ContainingSymbol is NamedTypeSymbol
+                                    ? TypeParameterKind.Type
+                                    : TypeParameterKind.Cref
+                            )
+                    ),
+                $"Container is {ContainingSymbol?.Kind}, TypeParameterKind is {this.TypeParameterKind}"
+            );
         }
 
         public override bool IsImplicitlyDeclared
@@ -30,21 +44,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return true; }
         }
 
-        public override TypeParameterKind TypeParameterKind => ContainingSymbol is MethodSymbol ? TypeParameterKind.Method : TypeParameterKind.Type;
+        public override TypeParameterKind TypeParameterKind =>
+            ContainingSymbol is MethodSymbol ? TypeParameterKind.Method : TypeParameterKind.Type;
 
-        internal override void AddSynthesizedAttributes(PEModuleBuilder moduleBuilder, ref ArrayBuilder<SynthesizedAttributeData> attributes)
+        internal override void AddSynthesizedAttributes(
+            PEModuleBuilder moduleBuilder,
+            ref ArrayBuilder<SynthesizedAttributeData> attributes
+        )
         {
             base.AddSynthesizedAttributes(moduleBuilder, ref attributes);
 
             if (this.HasUnmanagedTypeConstraint)
             {
-                AddSynthesizedAttribute(ref attributes, moduleBuilder.SynthesizeIsUnmanagedAttribute(this));
+                AddSynthesizedAttribute(
+                    ref attributes,
+                    moduleBuilder.SynthesizeIsUnmanagedAttribute(this)
+                );
             }
         }
 
         public override ImmutableArray<CSharpAttributeData> GetAttributes()
         {
-            if (ContainingSymbol is SynthesizedMethodBaseSymbol { InheritsBaseMethodAttributes: true })
+            if (
+                ContainingSymbol is SynthesizedMethodBaseSymbol
+                {
+                    InheritsBaseMethodAttributes: true
+                }
+            )
             {
                 return _underlyingTypeParameter.GetAttributes();
             }

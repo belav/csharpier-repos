@@ -29,14 +29,16 @@ public abstract class DownloadPersonalDataModel : PageModel
     public virtual Task<IActionResult> OnPostAsync() => throw new NotImplementedException();
 }
 
-internal sealed class DownloadPersonalDataModel<TUser> : DownloadPersonalDataModel where TUser : class
+internal sealed class DownloadPersonalDataModel<TUser> : DownloadPersonalDataModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
     private readonly ILogger<DownloadPersonalDataModel> _logger;
 
     public DownloadPersonalDataModel(
         UserManager<TUser> userManager,
-        ILogger<DownloadPersonalDataModel> logger)
+        ILogger<DownloadPersonalDataModel> logger
+    )
     {
         _userManager = userManager;
         _logger = logger;
@@ -55,12 +57,16 @@ internal sealed class DownloadPersonalDataModel<TUser> : DownloadPersonalDataMod
             return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
         }
 
-        _logger.LogInformation(LoggerEventIds.PersonalDataRequested, "User asked for their personal data.");
+        _logger.LogInformation(
+            LoggerEventIds.PersonalDataRequested,
+            "User asked for their personal data."
+        );
 
         // Only include personal data for download
         var personalData = new Dictionary<string, string?>();
-        var personalDataProps = typeof(TUser).GetProperties().Where(
-                        prop => Attribute.IsDefined(prop, typeof(PersonalDataAttribute)));
+        var personalDataProps = typeof(TUser)
+            .GetProperties()
+            .Where(prop => Attribute.IsDefined(prop, typeof(PersonalDataAttribute)));
         foreach (var p in personalDataProps)
         {
             personalData.Add(p.Name, p.GetValue(user)?.ToString() ?? "null");
@@ -75,6 +81,9 @@ internal sealed class DownloadPersonalDataModel<TUser> : DownloadPersonalDataMod
         personalData.Add($"Authenticator Key", await _userManager.GetAuthenticatorKeyAsync(user));
 
         Response.Headers.Add("Content-Disposition", "attachment; filename=PersonalData.json");
-        return new FileContentResult(JsonSerializer.SerializeToUtf8Bytes(personalData), "application/json");
+        return new FileContentResult(
+            JsonSerializer.SerializeToUtf8Bytes(personalData),
+            "application/json"
+        );
     }
 }

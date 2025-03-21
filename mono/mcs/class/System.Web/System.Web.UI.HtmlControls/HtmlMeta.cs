@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,101 +26,114 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
 using System.Security.Permissions;
-using System.Web.UI.WebControls;
 using System.Web.Configuration;
+using System.Web.UI.WebControls;
 
 namespace System.Web.UI.HtmlControls
 {
-	[ControlBuilder (typeof (HtmlEmptyTagControlBuilder))]
-	public class HtmlMeta: HtmlControl
-	{
-		public HtmlMeta () : base ("meta")
-		{
-		}
+    [ControlBuilder(typeof(HtmlEmptyTagControlBuilder))]
+    public class HtmlMeta : HtmlControl
+    {
+        public HtmlMeta()
+            : base("meta") { }
 
-		[DefaultValue ("")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public virtual string Content {
-			get {
-				string s = Attributes["content"];
-				if (s == null)
-					return String.Empty;
-				return s;
-			}
-			set {
-				if (value == null)
-					Attributes.Remove ("content");
-				else
-					Attributes["content"] = value;
-			}
-		}
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual string Content
+        {
+            get
+            {
+                string s = Attributes["content"];
+                if (s == null)
+                    return String.Empty;
+                return s;
+            }
+            set
+            {
+                if (value == null)
+                    Attributes.Remove("content");
+                else
+                    Attributes["content"] = value;
+            }
+        }
 
-		[DefaultValue ("")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public virtual string HttpEquiv {
-			get {
-				string s = Attributes["http-equiv"];
-				if (s == null)
-					return String.Empty;
-				return s;
-			}
-			set {
-				if (value == null)
-					Attributes.Remove ("http-equiv");
-				else
-					Attributes["http-equiv"] = value;
-			}
-		}
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual string HttpEquiv
+        {
+            get
+            {
+                string s = Attributes["http-equiv"];
+                if (s == null)
+                    return String.Empty;
+                return s;
+            }
+            set
+            {
+                if (value == null)
+                    Attributes.Remove("http-equiv");
+                else
+                    Attributes["http-equiv"] = value;
+            }
+        }
 
-		[DefaultValue ("")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public virtual string Name {
-			get {
-				string s = Attributes["name"];
-				if (s == null)
-					return String.Empty;
-				return s;
-			}
-			set {
-				if (value == null)
-					Attributes.Remove ("name");
-				else
-					Attributes["name"] = value;
-			}
-		}
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual string Name
+        {
+            get
+            {
+                string s = Attributes["name"];
+                if (s == null)
+                    return String.Empty;
+                return s;
+            }
+            set
+            {
+                if (value == null)
+                    Attributes.Remove("name");
+                else
+                    Attributes["name"] = value;
+            }
+        }
 
-		[DefaultValue ("")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		public virtual string Scheme {
-			get {
-				string s = Attributes["scheme"];
-				if (s == null)
-					return String.Empty;
-				return s;
-			}
-			set {
-				if (value == null)
-					Attributes.Remove ("scheme");
-				else
-					Attributes["scheme"] = value;
-			}
-		}
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        public virtual string Scheme
+        {
+            get
+            {
+                string s = Attributes["scheme"];
+                if (s == null)
+                    return String.Empty;
+                return s;
+            }
+            set
+            {
+                if (value == null)
+                    Attributes.Remove("scheme");
+                else
+                    Attributes["scheme"] = value;
+            }
+        }
 
-		protected internal override void Render (HtmlTextWriter writer)
-		{
-			XhtmlConformanceSection xhtml = WebConfigurationManager.GetSection ("system.web/xhtmlConformance") as XhtmlConformanceSection;
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            XhtmlConformanceSection xhtml =
+                WebConfigurationManager.GetSection("system.web/xhtmlConformance")
+                as XhtmlConformanceSection;
 
-			if (xhtml != null && xhtml.Mode == XhtmlConformanceMode.Legacy)
-				base.Render (writer);
-			else {
-				writer.WriteBeginTag (TagName);
-				RenderAttributes (writer);
-				writer.Write ("/>");
-			}
-		}
-	}
+            if (xhtml != null && xhtml.Mode == XhtmlConformanceMode.Legacy)
+                base.Render(writer);
+            else
+            {
+                writer.WriteBeginTag(TagName);
+                RenderAttributes(writer);
+                writer.Write("/>");
+            }
+        }
+    }
 }
-

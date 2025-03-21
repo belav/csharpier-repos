@@ -18,7 +18,7 @@ namespace System.ServiceModel.ComIntegration
         ISOLATIONLEVEL_READCOMMITTED = 0x1000,
         ISOLATIONLEVEL_REPEATABLEREAD = 0x10000,
         ISOLATIONLEVEL_SERIALIZABLE = 0x100000,
-        ISOLATIONLEVEL_ISOLATED = 0x100000
+        ISOLATIONLEVEL_ISOLATED = 0x100000,
     }
 
     [SuppressUnmanagedCodeSecurity]
@@ -35,12 +35,12 @@ namespace System.ServiceModel.ComIntegration
 
         void CreateVoter(
             [MarshalAs(UnmanagedType.Interface)] ITransactionVoterNotifyAsync2 voterNotification,
-            IntPtr voterBallot);
+            IntPtr voterBallot
+        );
         DtcIsolationLevel GetIsolationLevel();
         Guid GetIdentifier();
         bool IsReusable();
     }
-
 
     [SuppressUnmanagedCodeSecurity]
     [ComImport]
@@ -48,12 +48,8 @@ namespace System.ServiceModel.ComIntegration
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     internal interface ITransactionVoterBallotAsync2
     {
-        void VoteRequestDone(
-            int hr,
-            int reason
-            );
+        void VoteRequestDone(int hr, int reason);
     }
-
 
     [SuppressUnmanagedCodeSecurity]
     [ComImport]
@@ -61,23 +57,19 @@ namespace System.ServiceModel.ComIntegration
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     internal interface ITransactionOutcomeEvents
     {
-        void Committed([MarshalAs(UnmanagedType.Bool)] bool retaining,
-           int newUow,
-           int hr);
+        void Committed([MarshalAs(UnmanagedType.Bool)] bool retaining, int newUow, int hr);
 
-        void Aborted(int reason,
+        void Aborted(
+            int reason,
             [MarshalAs(UnmanagedType.Bool)] bool retaining,
             int newUow,
-            int hr);
+            int hr
+        );
 
-        void HeuristicDecision(
-            int decision,
-            int reason,
-            int hr);
+        void HeuristicDecision(int decision, int reason, int hr);
 
         void InDoubt();
     }
-
 
     [SuppressUnmanagedCodeSecurity]
     [ComImport]
@@ -85,24 +77,18 @@ namespace System.ServiceModel.ComIntegration
     [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
     internal interface ITransactionVoterNotifyAsync2
     {
-        void Committed(
-            [MarshalAs(UnmanagedType.Bool)] bool retaining,
-            int newUow,
-            int hr);
+        void Committed([MarshalAs(UnmanagedType.Bool)] bool retaining, int newUow, int hr);
 
         void Aborted(
             int reason,
             [MarshalAs(UnmanagedType.Bool)] bool retaining,
             int newUow,
-            int hr);
+            int hr
+        );
 
-        void HeuristicDecision(
-            int decision,
-            int reason,
-            int hr);
+        void HeuristicDecision(int decision, int reason, int hr);
 
         void InDoubt();
-
 
         void VoteRequest();
     }

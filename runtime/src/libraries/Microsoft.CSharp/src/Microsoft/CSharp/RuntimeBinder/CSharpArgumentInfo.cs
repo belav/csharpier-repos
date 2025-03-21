@@ -14,7 +14,10 @@ namespace Microsoft.CSharp.RuntimeBinder
     public sealed class CSharpArgumentInfo
     {
         // Create a singleton static instance.
-        internal static readonly CSharpArgumentInfo None = new CSharpArgumentInfo(CSharpArgumentInfoFlags.None, null);
+        internal static readonly CSharpArgumentInfo None = new CSharpArgumentInfo(
+            CSharpArgumentInfoFlags.None,
+            null
+        );
 
         /// <summary>
         /// The flags for the argument.
@@ -43,13 +46,15 @@ namespace Microsoft.CSharp.RuntimeBinder
         }
 
         // Accessor helpers.
-        internal bool UseCompileTimeType => (Flags & CSharpArgumentInfoFlags.UseCompileTimeType) != 0;
+        internal bool UseCompileTimeType =>
+            (Flags & CSharpArgumentInfoFlags.UseCompileTimeType) != 0;
 
         internal bool LiteralConstant => (Flags & CSharpArgumentInfoFlags.Constant) != 0;
 
         internal bool NamedArgument => (Flags & CSharpArgumentInfoFlags.NamedArgument) != 0;
 
-        internal bool IsByRefOrOut => (Flags & (CSharpArgumentInfoFlags.IsRef | CSharpArgumentInfoFlags.IsOut)) != 0;
+        internal bool IsByRefOrOut =>
+            (Flags & (CSharpArgumentInfoFlags.IsRef | CSharpArgumentInfoFlags.IsOut)) != 0;
 
         internal bool IsOut => (Flags & CSharpArgumentInfoFlags.IsOut) != 0;
 

@@ -8,13 +8,13 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Text;
 using System.Collections.Generic;
+using System.Data.Common.Utils;
+using System.Diagnostics;
+using System.Globalization;
+using System.Text;
 using md = System.Data.Metadata.Edm;
 using mp = System.Data.Mapping;
-using System.Globalization;
-using System.Diagnostics;
-using System.Data.Common.Utils;
 
 // A ColumnMap is a data structure that maps columns from the C space to
 // the corresponding columns from one or more underlying readers.
@@ -75,8 +75,8 @@ namespace System.Data.Query.InternalTrees
         private string m_name; // name of the column
 
         /// <summary>
-        /// Default Column Name; should not be set until CodeGen once we're done 
-        /// with all our transformations that might give us a good name, but put 
+        /// Default Column Name; should not be set until CodeGen once we're done
+        /// with all our transformations that might give us a good name, but put
         /// here for ease of finding it.
         /// </summary>
         internal const string DefaultColumnName = "Value";
@@ -89,32 +89,35 @@ namespace System.Data.Query.InternalTrees
         internal ColumnMap(md.TypeUsage type, string name)
         {
             Debug.Assert(type != null, "Unspecified type");
-            m_type = type; 
+            m_type = type;
             m_name = name;
         }
 
         /// <summary>
         /// Get the column's datatype
         /// </summary>
-        internal md.TypeUsage Type { get { return m_type; } }
+        internal md.TypeUsage Type
+        {
+            get { return m_type; }
+        }
 
         /// <summary>
         /// Get the column name
         /// </summary>
-        internal string Name 
+        internal string Name
         {
             get { return m_name; }
-            set 
+            set
             {
                 Debug.Assert(!String.IsNullOrEmpty(value), "invalid name?");
-                m_name = value; 
-            } 
+                m_name = value;
+            }
         }
 
         /// <summary>
         /// Returns whether the column already has a name;
         /// </summary>
-        internal bool IsNamed 
+        internal bool IsNamed
         {
             get { return m_name != null; }
         }
@@ -138,29 +141,30 @@ namespace System.Data.Query.InternalTrees
         /// <param name="arg"></param>
         /// <returns></returns>
         [DebuggerNonUserCode]
-        internal abstract TResultType Accept<TResultType, TArgType>(ColumnMapVisitorWithResults<TResultType, TArgType> visitor, TArgType arg);
+        internal abstract TResultType Accept<TResultType, TArgType>(
+            ColumnMapVisitorWithResults<TResultType, TArgType> visitor,
+            TArgType arg
+        );
     }
 
     /// <summary>
-    /// Base class for simple column maps; can be either a VarRefColumnMap or 
+    /// Base class for simple column maps; can be either a VarRefColumnMap or
     /// ScalarColumnMap; the former is used pretty much throughout the PlanCompiler,
     /// while the latter will only be used once we generate the final Plan.
     /// </summary>
     internal abstract class SimpleColumnMap : ColumnMap
-    { 
+    {
         /// <summary>
         /// Basic constructor
         /// </summary>
         /// <param name="type">datatype for this column</param>
         /// <param name="name">column name</param>
         internal SimpleColumnMap(md.TypeUsage type, string name)
-            : base(type, name)
-        {
-        }
+            : base(type, name) { }
     }
 
     /// <summary>
-    /// Column map for a scalar column - maps 1-1 with a column from a 
+    /// Column map for a scalar column - maps 1-1 with a column from a
     /// row of the underlying reader
     /// </summary>
     internal class ScalarColumnMap : SimpleColumnMap
@@ -187,11 +191,18 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// The command (reader, really) to get this column value from
         /// </summary>
-        internal int CommandId { get { return m_commandId; } }
+        internal int CommandId
+        {
+            get { return m_commandId; }
+        }
+
         /// <summary>
         /// Column position within the reader of the command
         /// </summary>
-        internal int ColumnPos { get { return m_columnPos; } }
+        internal int ColumnPos
+        {
+            get { return m_columnPos; }
+        }
 
         /// <summary>
         /// Visitor Design Pattern
@@ -213,7 +224,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="visitor"></param>
         /// <param name="arg"></param>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType, TArgType>(ColumnMapVisitorWithResults<TResultType, TArgType> visitor, TArgType arg)
+        internal override TResultType Accept<TResultType, TArgType>(
+            ColumnMapVisitorWithResults<TResultType, TArgType> visitor,
+            TArgType arg
+        )
         {
             return visitor.Visit(this, arg);
         }
@@ -224,7 +238,12 @@ namespace System.Data.Query.InternalTrees
         /// <returns></returns>
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture, "S({0},{1})", this.CommandId, this.ColumnPos);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "S({0},{1})",
+                this.CommandId,
+                this.ColumnPos
+            );
         }
     }
 
@@ -253,12 +272,18 @@ namespace System.Data.Query.InternalTrees
         /// Get the null sentinel column, if any.  Virtual so only derived column map
         /// types that can have NullSentinel have to provide storage, etc.
         /// </summary>
-        virtual internal SimpleColumnMap NullSentinel { get { return null; } }
+        virtual internal SimpleColumnMap NullSentinel
+        {
+            get { return null; }
+        }
 
         /// <summary>
         /// Get the list of properties that constitute this structured type
         /// </summary>
-        internal ColumnMap[] Properties { get { return m_properties; } }
+        internal ColumnMap[] Properties
+        {
+            get { return m_properties; }
+        }
 
         /// <summary>
         /// Debugging support
@@ -292,7 +317,12 @@ namespace System.Data.Query.InternalTrees
         /// <param name="type">Datatype of this column</param>
         /// <param name="name">column name</param>
         /// <param name="properties">List of ColumnMaps - one for each property</param>
-        internal RecordColumnMap(md.TypeUsage type, string name, ColumnMap[] properties, SimpleColumnMap nullSentinel)
+        internal RecordColumnMap(
+            md.TypeUsage type,
+            string name,
+            ColumnMap[] properties,
+            SimpleColumnMap nullSentinel
+        )
             : base(type, name, properties)
         {
             m_nullSentinel = nullSentinel;
@@ -301,7 +331,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Get the type Nullability column
         /// </summary>
-        internal override SimpleColumnMap NullSentinel { get { return m_nullSentinel; } }
+        internal override SimpleColumnMap NullSentinel
+        {
+            get { return m_nullSentinel; }
+        }
 
         /// <summary>
         /// Visitor Design Pattern
@@ -323,7 +356,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="visitor"></param>
         /// <param name="arg"></param>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType, TArgType>(ColumnMapVisitorWithResults<TResultType, TArgType> visitor, TArgType arg)
+        internal override TResultType Accept<TResultType, TArgType>(
+            ColumnMapVisitorWithResults<TResultType, TArgType> visitor,
+            TArgType arg
+        )
         {
             return visitor.Visit(this, arg);
         }
@@ -362,11 +398,13 @@ namespace System.Data.Query.InternalTrees
         /// <param name="typeDiscriminator">column map for type discriminator column</param>
         /// <param name="baseTypeColumns">base list of fields common to all types</param>
         /// <param name="typeChoices">map from type discriminator value->columnMap</param>
-        internal SimplePolymorphicColumnMap(md.TypeUsage type, 
-            string name, 
+        internal SimplePolymorphicColumnMap(
+            md.TypeUsage type,
+            string name,
             ColumnMap[] baseTypeColumns,
-            SimpleColumnMap typeDiscriminator, 
-            Dictionary<object, TypedColumnMap> typeChoices)
+            SimpleColumnMap typeDiscriminator,
+            Dictionary<object, TypedColumnMap> typeChoices
+        )
             : base(type, name, baseTypeColumns)
         {
             Debug.Assert(typeDiscriminator != null, "Must specify a type discriminator column");
@@ -378,7 +416,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Get the type discriminator column
         /// </summary>
-        internal SimpleColumnMap TypeDiscriminator { get { return m_typeDiscriminator; } }
+        internal SimpleColumnMap TypeDiscriminator
+        {
+            get { return m_typeDiscriminator; }
+        }
 
         /// <summary>
         /// Get the type mapping
@@ -408,7 +449,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="visitor"></param>
         /// <param name="arg"></param>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType, TArgType>(ColumnMapVisitorWithResults<TResultType, TArgType> visitor, TArgType arg)
+        internal override TResultType Accept<TResultType, TArgType>(
+            ColumnMapVisitorWithResults<TResultType, TArgType> visitor,
+            TArgType arg
+        )
         {
             return visitor.Visit(this, arg);
         }
@@ -422,10 +466,20 @@ namespace System.Data.Query.InternalTrees
             StringBuilder sb = new StringBuilder();
             string separator = String.Empty;
 
-            sb.AppendFormat(CultureInfo.InvariantCulture, "P{{TypeId={0}, ", this.TypeDiscriminator);
+            sb.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "P{{TypeId={0}, ",
+                this.TypeDiscriminator
+            );
             foreach (KeyValuePair<object, TypedColumnMap> kv in this.TypeChoices)
             {
-                sb.AppendFormat(CultureInfo.InvariantCulture, "{0}({1},{2})", separator, kv.Key, kv.Value);
+                sb.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    "{0}({1},{2})",
+                    separator,
+                    kv.Key,
+                    kv.Value
+                );
                 separator = ",";
             }
             sb.Append("}");
@@ -445,12 +499,14 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Internal constructor
         /// </summary>
-        internal MultipleDiscriminatorPolymorphicColumnMap(md.TypeUsage type,
+        internal MultipleDiscriminatorPolymorphicColumnMap(
+            md.TypeUsage type,
             string name,
             ColumnMap[] baseTypeColumns,
             SimpleColumnMap[] typeDiscriminators,
             Dictionary<md.EntityType, TypedColumnMap> typeChoices,
-            Func<object[], md.EntityType> discriminate)
+            Func<object[], md.EntityType> discriminate
+        )
             : base(type, name, baseTypeColumns)
         {
             Debug.Assert(typeDiscriminators != null, "Must specify type discriminator columns");
@@ -465,7 +521,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Get the type discriminator column
         /// </summary>
-        internal SimpleColumnMap[] TypeDiscriminators { get { return m_typeDiscriminators; } }
+        internal SimpleColumnMap[] TypeDiscriminators
+        {
+            get { return m_typeDiscriminators; }
+        }
 
         /// <summary>
         /// Get the type mapping
@@ -496,7 +555,10 @@ namespace System.Data.Query.InternalTrees
         /// Visitor Design Pattern
         /// </summary>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType, TArgType>(ColumnMapVisitorWithResults<TResultType, TArgType> visitor, TArgType arg)
+        internal override TResultType Accept<TResultType, TArgType>(
+            ColumnMapVisitorWithResults<TResultType, TArgType> visitor,
+            TArgType arg
+        )
         {
             return visitor.Visit(this, arg);
         }
@@ -509,10 +571,20 @@ namespace System.Data.Query.InternalTrees
             StringBuilder sb = new StringBuilder();
             string separator = String.Empty;
 
-            sb.AppendFormat(CultureInfo.InvariantCulture, "P{{TypeId=<{0}>, ", StringUtil.ToCommaSeparatedString(this.TypeDiscriminators));
+            sb.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "P{{TypeId=<{0}>, ",
+                StringUtil.ToCommaSeparatedString(this.TypeDiscriminators)
+            );
             foreach (var kv in this.TypeChoices)
             {
-                sb.AppendFormat(CultureInfo.InvariantCulture, "{0}(<{1}>,{2})", separator, kv.Key, kv.Value);
+                sb.AppendFormat(
+                    CultureInfo.InvariantCulture,
+                    "{0}(<{1}>,{2})",
+                    separator,
+                    kv.Key,
+                    kv.Value
+                );
                 separator = ",";
             }
             sb.Append("}");
@@ -526,14 +598,19 @@ namespace System.Data.Query.InternalTrees
     internal class ComplexTypeColumnMap : TypedColumnMap
     {
         private SimpleColumnMap m_nullSentinel;
-        
+
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="type">column Datatype</param>
         /// <param name="name">column name</param>
         /// <param name="properties">list of properties</param>
-        internal ComplexTypeColumnMap(md.TypeUsage type, string name, ColumnMap[] properties, SimpleColumnMap nullSentinel)
+        internal ComplexTypeColumnMap(
+            md.TypeUsage type,
+            string name,
+            ColumnMap[] properties,
+            SimpleColumnMap nullSentinel
+        )
             : base(type, name, properties)
         {
             m_nullSentinel = nullSentinel;
@@ -542,7 +619,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Get the type Nullability column
         /// </summary>
-        internal override SimpleColumnMap NullSentinel { get { return m_nullSentinel; } }
+        internal override SimpleColumnMap NullSentinel
+        {
+            get { return m_nullSentinel; }
+        }
 
         /// <summary>
         /// Visitor Design Pattern
@@ -564,7 +644,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="visitor"></param>
         /// <param name="arg"></param>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType, TArgType>(ColumnMapVisitorWithResults<TResultType, TArgType> visitor, TArgType arg)
+        internal override TResultType Accept<TResultType, TArgType>(
+            ColumnMapVisitorWithResults<TResultType, TArgType> visitor,
+            TArgType arg
+        )
         {
             return visitor.Visit(this, arg);
         }
@@ -578,7 +661,6 @@ namespace System.Data.Query.InternalTrees
             string str = String.Format(CultureInfo.InvariantCulture, "C{0}", base.ToString());
             return str;
         }
-
     }
 
     /// <summary>
@@ -595,7 +677,12 @@ namespace System.Data.Query.InternalTrees
         /// <param name="name">column name</param>
         /// <param name="entityIdentity">entity identity information</param>
         /// <param name="properties">list of properties</param>
-        internal EntityColumnMap(md.TypeUsage type, string name, ColumnMap[] properties, EntityIdentity entityIdentity)
+        internal EntityColumnMap(
+            md.TypeUsage type,
+            string name,
+            ColumnMap[] properties,
+            EntityIdentity entityIdentity
+        )
             : base(type, name, properties)
         {
             Debug.Assert(entityIdentity != null, "Must specify an entity identity");
@@ -605,7 +692,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Get the entity identity information
         /// </summary>
-        internal EntityIdentity EntityIdentity { get { return m_entityIdentity; } }
+        internal EntityIdentity EntityIdentity
+        {
+            get { return m_entityIdentity; }
+        }
 
         /// <summary>
         /// Visitor Design Pattern
@@ -627,7 +717,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="visitor"></param>
         /// <param name="arg"></param>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType, TArgType>(ColumnMapVisitorWithResults<TResultType, TArgType> visitor, TArgType arg)
+        internal override TResultType Accept<TResultType, TArgType>(
+            ColumnMapVisitorWithResults<TResultType, TArgType> visitor,
+            TArgType arg
+        )
         {
             return visitor.Visit(this, arg);
         }
@@ -646,7 +739,7 @@ namespace System.Data.Query.InternalTrees
     /// <summary>
     /// A column map that represents a ref column.
     /// </summary>
-    internal class RefColumnMap: ColumnMap
+    internal class RefColumnMap : ColumnMap
     {
         private EntityIdentity m_entityIdentity;
 
@@ -656,8 +749,7 @@ namespace System.Data.Query.InternalTrees
         /// <param name="type">column datatype</param>
         /// <param name="name">column name</param>
         /// <param name="entityIdentity">identity information for this entity</param>
-        internal RefColumnMap(md.TypeUsage type, string name,
-            EntityIdentity entityIdentity)
+        internal RefColumnMap(md.TypeUsage type, string name, EntityIdentity entityIdentity)
             : base(type, name)
         {
             Debug.Assert(entityIdentity != null, "Must specify entity identity information");
@@ -667,7 +759,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Get the entity identity information for this ref
         /// </summary>
-        internal EntityIdentity EntityIdentity { get { return m_entityIdentity; } }
+        internal EntityIdentity EntityIdentity
+        {
+            get { return m_entityIdentity; }
+        }
 
         /// <summary>
         /// Visitor Design Pattern
@@ -680,7 +775,7 @@ namespace System.Data.Query.InternalTrees
         {
             visitor.Visit(this, arg);
         }
-        
+
         /// <summary>
         /// Visitor Design Pattern
         /// </summary>
@@ -689,7 +784,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="visitor"></param>
         /// <param name="arg"></param>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType, TArgType>(ColumnMapVisitorWithResults<TResultType, TArgType> visitor, TArgType arg)
+        internal override TResultType Accept<TResultType, TArgType>(
+            ColumnMapVisitorWithResults<TResultType, TArgType> visitor,
+            TArgType arg
+        )
         {
             return visitor.Visit(this, arg);
         }
@@ -701,7 +799,7 @@ namespace System.Data.Query.InternalTrees
     /// Represents a column map for a collection column.
     /// The "element" represents the element of the collection - usually a Structured
     /// type, but occasionally a collection/simple type as well.
-    /// The "ForeignKeys" property is optional (but usually necessary) to determine the 
+    /// The "ForeignKeys" property is optional (but usually necessary) to determine the
     /// elements of the collection.
     /// </summary>
     internal abstract class CollectionColumnMap : ColumnMap
@@ -718,7 +816,13 @@ namespace System.Data.Query.InternalTrees
         /// <param name="elementMap">column map for collection element</param>
         /// <param name="keys">List of keys</param>
         /// <param name="foreignKeys">List of foreign keys</param>
-        internal CollectionColumnMap(md.TypeUsage type, string name, ColumnMap elementMap, SimpleColumnMap[] keys, SimpleColumnMap[] foreignKeys)
+        internal CollectionColumnMap(
+            md.TypeUsage type,
+            string name,
+            ColumnMap elementMap,
+            SimpleColumnMap[] keys,
+            SimpleColumnMap[] foreignKeys
+        )
             : base(type, name)
         {
             Debug.Assert(elementMap != null, "Must specify column map for element");
@@ -731,9 +835,9 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Get the list of columns that may comprise the foreign key
         /// </summary>
-        internal SimpleColumnMap[] ForeignKeys 
-        { 
-            get { return m_foreignKeys; } 
+        internal SimpleColumnMap[] ForeignKeys
+        {
+            get { return m_foreignKeys; }
         }
 
         /// <summary>
@@ -766,10 +870,13 @@ namespace System.Data.Query.InternalTrees
         /// <param name="elementMap">column map for the element of the collection</param>
         /// <param name="keys">list of key columns</param>
         /// <param name="foreignKeys">list of foreign key columns</param>
-        internal SimpleCollectionColumnMap(md.TypeUsage type, string name,
+        internal SimpleCollectionColumnMap(
+            md.TypeUsage type,
+            string name,
             ColumnMap elementMap,
             SimpleColumnMap[] keys,
-            SimpleColumnMap[] foreignKeys)
+            SimpleColumnMap[] foreignKeys
+        )
             : base(type, name, elementMap, keys, foreignKeys) { }
 
         /// <summary>
@@ -792,7 +899,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="visitor"></param>
         /// <param name="arg"></param>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType, TArgType>(ColumnMapVisitorWithResults<TResultType, TArgType> visitor, TArgType arg)
+        internal override TResultType Accept<TResultType, TArgType>(
+            ColumnMapVisitorWithResults<TResultType, TArgType> visitor,
+            TArgType arg
+        )
         {
             return visitor.Visit(this, arg);
         }
@@ -819,15 +929,21 @@ namespace System.Data.Query.InternalTrees
         /// <param name="foreignKeys">Foreign keys for the collection</param>
         /// <param name="discriminator">Discriminator column map</param>
         /// <param name="discriminatorValue">Discriminator value</param>
-        internal DiscriminatedCollectionColumnMap(md.TypeUsage type, string name,
+        internal DiscriminatedCollectionColumnMap(
+            md.TypeUsage type,
+            string name,
             ColumnMap elementMap,
             SimpleColumnMap[] keys,
             SimpleColumnMap[] foreignKeys,
-            SimpleColumnMap discriminator, 
-            object discriminatorValue)
+            SimpleColumnMap discriminator,
+            object discriminatorValue
+        )
             : base(type, name, elementMap, keys, foreignKeys)
         {
-            Debug.Assert(discriminator != null, "Must specify a column map for the collection discriminator");
+            Debug.Assert(
+                discriminator != null,
+                "Must specify a column map for the collection discriminator"
+            );
             Debug.Assert(discriminatorValue != null, "Must specify a discriminator value");
             m_discriminator = discriminator;
             m_discriminatorValue = discriminatorValue;
@@ -836,12 +952,18 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Get the column that describes the discriminator
         /// </summary>
-        internal SimpleColumnMap Discriminator { get { return m_discriminator; } }
+        internal SimpleColumnMap Discriminator
+        {
+            get { return m_discriminator; }
+        }
 
         /// <summary>
         /// Get the discriminator value
         /// </summary>
-        internal object DiscriminatorValue { get { return m_discriminatorValue; } }
+        internal object DiscriminatorValue
+        {
+            get { return m_discriminatorValue; }
+        }
 
         /// <summary>
         /// Visitor Design Pattern
@@ -863,7 +985,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="visitor"></param>
         /// <param name="arg"></param>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType, TArgType>(ColumnMapVisitorWithResults<TResultType, TArgType> visitor, TArgType arg)
+        internal override TResultType Accept<TResultType, TArgType>(
+            ColumnMapVisitorWithResults<TResultType, TArgType> visitor,
+            TArgType arg
+        )
         {
             return visitor.Visit(this, arg);
         }
@@ -874,7 +999,11 @@ namespace System.Data.Query.InternalTrees
         /// <returns></returns>
         public override string ToString()
         {
-            string str = String.Format(CultureInfo.InvariantCulture, "M{{{0}}}", this.Element.ToString());
+            string str = String.Format(
+                CultureInfo.InvariantCulture,
+                "M{{{0}}}",
+                this.Element.ToString()
+            );
             return str;
         }
     }
@@ -905,7 +1034,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Get the key columns
         /// </summary>
-        internal SimpleColumnMap[] Keys { get { return m_keys; } }
+        internal SimpleColumnMap[] Keys
+        {
+            get { return m_keys; }
+        }
     }
 
     /// <summary>
@@ -935,7 +1067,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// The entityset containing the entity
         /// </summary>
-        internal md.EntitySet EntitySet { get { return m_entitySet; } }
+        internal md.EntitySet EntitySet
+        {
+            get { return m_entitySet; }
+        }
 
         /// <summary>
         /// Debugging support
@@ -969,7 +1104,7 @@ namespace System.Data.Query.InternalTrees
     /// </summary>
     internal class DiscriminatedEntityIdentity : EntityIdentity
     {
-        private SimpleColumnMap m_entitySetColumn;  // (optional) column map representing the entity set
+        private SimpleColumnMap m_entitySetColumn; // (optional) column map representing the entity set
         private md.EntitySet[] m_entitySetMap; // optional dictionary that maps values to entitysets
 
         /// <summary>
@@ -978,11 +1113,17 @@ namespace System.Data.Query.InternalTrees
         /// <param name="entitySetColumn">column map representing the entityset</param>
         /// <param name="entitySetMap">Map from value -> the appropriate entityset</param>
         /// <param name="keyColumns">list of key columns</param>
-        internal DiscriminatedEntityIdentity(SimpleColumnMap entitySetColumn, md.EntitySet[] entitySetMap,
-            SimpleColumnMap[] keyColumns)
+        internal DiscriminatedEntityIdentity(
+            SimpleColumnMap entitySetColumn,
+            md.EntitySet[] entitySetMap,
+            SimpleColumnMap[] keyColumns
+        )
             : base(keyColumns)
         {
-            Debug.Assert(entitySetColumn != null, "Must specify a column map to identify the entity set");
+            Debug.Assert(
+                entitySetColumn != null,
+                "Must specify a column map to identify the entity set"
+            );
             Debug.Assert(entitySetMap != null, "Must specify a dictionary to look up entitysets");
             m_entitySetColumn = entitySetColumn;
             m_entitySetMap = entitySetMap;
@@ -991,7 +1132,10 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Get the column map representing the entityset
         /// </summary>
-        internal SimpleColumnMap EntitySetColumnMap { get { return m_entitySetColumn; } }
+        internal SimpleColumnMap EntitySetColumnMap
+        {
+            get { return m_entitySetColumn; }
+        }
 
         /// <summary>
         /// Return the entityset map
@@ -1053,9 +1197,7 @@ namespace System.Data.Query.InternalTrees
         }
 
         internal VarRefColumnMap(InternalTrees.Var v)
-            : this(v.Type, null, v)
-        {
-        }
+            : this(v.Type, null, v) { }
 
         /// <summary>
         /// Visitor Design Pattern
@@ -1077,7 +1219,10 @@ namespace System.Data.Query.InternalTrees
         /// <param name="visitor"></param>
         /// <param name="arg"></param>
         [DebuggerNonUserCode]
-        internal override TResultType Accept<TResultType, TArgType>(ColumnMapVisitorWithResults<TResultType, TArgType> visitor, TArgType arg)
+        internal override TResultType Accept<TResultType, TArgType>(
+            ColumnMapVisitorWithResults<TResultType, TArgType> visitor,
+            TArgType arg
+        )
         {
             return visitor.Visit(this, arg);
         }
@@ -1088,7 +1233,9 @@ namespace System.Data.Query.InternalTrees
         /// <returns></returns>
         public override string ToString()
         {
-            return this.IsNamed ? this.Name : String.Format(CultureInfo.InvariantCulture, "{0}", m_var.Id);
+            return this.IsNamed
+                ? this.Name
+                : String.Format(CultureInfo.InvariantCulture, "{0}", m_var.Id);
         }
         #endregion
 

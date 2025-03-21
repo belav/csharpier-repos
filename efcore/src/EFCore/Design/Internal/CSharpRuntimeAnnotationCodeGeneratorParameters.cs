@@ -30,7 +30,8 @@ public sealed record CSharpRuntimeAnnotationCodeGeneratorParameters
         IndentedStringBuilder methodBuilder,
         ISet<string> namespaces,
         ISet<string> scopeVariables,
-        bool nullable)
+        bool nullable
+    )
     {
         TargetName = targetName;
         ClassName = className;

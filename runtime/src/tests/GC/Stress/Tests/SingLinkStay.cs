@@ -1,9 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
-
 
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
@@ -65,7 +63,6 @@ namespace SingLink
             }
         }
 
-
         public bool runTest(int iRep, int iObj)
         {
             for (int i = 0; i < 20; i++)
@@ -76,7 +73,6 @@ namespace SingLink
             return true;
         }
 
-
         public void SetLink(int iRep, int iObj)
         {
             Mv_Sing = new SingLink[iRep];
@@ -85,7 +81,6 @@ namespace SingLink
                 Mv_Sing[i] = new SingLink(iObj);
             }
         }
-
 
         public void MakeLeak(int iRep)
         {

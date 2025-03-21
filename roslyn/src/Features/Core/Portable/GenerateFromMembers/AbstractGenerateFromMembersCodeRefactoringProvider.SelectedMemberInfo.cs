@@ -7,12 +7,14 @@ using Microsoft.CodeAnalysis.CodeRefactorings;
 
 namespace Microsoft.CodeAnalysis.GenerateFromMembers
 {
-    internal abstract partial class AbstractGenerateFromMembersCodeRefactoringProvider : CodeRefactoringProvider
+    internal abstract partial class AbstractGenerateFromMembersCodeRefactoringProvider
+        : CodeRefactoringProvider
     {
         protected class SelectedMemberInfo(
             INamedTypeSymbol containingType,
             ImmutableArray<SyntaxNode> selectedDeclarations,
-            ImmutableArray<ISymbol> selectedMembers)
+            ImmutableArray<ISymbol> selectedMembers
+        )
         {
             public readonly INamedTypeSymbol ContainingType = containingType;
             public readonly ImmutableArray<SyntaxNode> SelectedDeclarations = selectedDeclarations;

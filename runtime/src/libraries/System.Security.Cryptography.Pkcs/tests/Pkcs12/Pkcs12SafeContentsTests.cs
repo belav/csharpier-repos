@@ -16,7 +16,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         private static readonly PbeParameters s_pbeParameters = new PbeParameters(
             PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
             HashAlgorithmName.SHA1,
-            2048);
+            2048
+        );
 
         [Fact]
         public static void StartsInReadWriteNoConfidentialityMode()
@@ -40,7 +41,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "safeBag",
-                () => contents.AddSafeBag(null));
+                () => contents.AddSafeBag(null)
+            );
         }
 
         [Fact]
@@ -67,7 +69,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "certificate",
-                () => contents.AddCertificate(null));
+                () => contents.AddCertificate(null)
+            );
         }
 
         [Fact]
@@ -93,7 +96,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "key",
-                () => contents.AddKeyUnencrypted(null));
+                () => contents.AddKeyUnencrypted(null)
+            );
         }
 
         [Fact]
@@ -121,7 +125,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "safeContents",
-                () => contents.AddNestedContents(null));
+                () => contents.AddNestedContents(null)
+            );
         }
 
         [Fact]
@@ -131,8 +136,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             Pkcs12SafeContents innerContents = new Pkcs12SafeContents();
 
-            Assert.Throws<InvalidOperationException>(
-                () => outerContents.AddNestedContents(innerContents));
+            Assert.Throws<InvalidOperationException>(() =>
+                outerContents.AddNestedContents(innerContents)
+            );
         }
 
         [Fact]
@@ -154,7 +160,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             AssertExtensions.Throws<ArgumentException>(
                 "safeContents",
-                () => newContents.AddNestedContents(info.AuthenticatedSafe[0]));
+                () => newContents.AddNestedContents(info.AuthenticatedSafe[0])
+            );
         }
 
         [Theory]
@@ -171,11 +178,13 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "key",
-                () => contents.AddShroudedKey(null, ReadOnlySpan<byte>.Empty, s_pbeParameters));
+                () => contents.AddShroudedKey(null, ReadOnlySpan<byte>.Empty, s_pbeParameters)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "key",
-                () => contents.AddShroudedKey(null, Array.Empty<byte>(), s_pbeParameters));
+                () => contents.AddShroudedKey(null, Array.Empty<byte>(), s_pbeParameters)
+            );
         }
 
         [Theory]
@@ -192,7 +201,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "key",
-                () => contents.AddShroudedKey(null, ReadOnlySpan<char>.Empty, s_pbeParameters));
+                () => contents.AddShroudedKey(null, ReadOnlySpan<char>.Empty, s_pbeParameters)
+            );
         }
 
         [Fact]
@@ -202,8 +212,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             using (RSA rsa = RSA.Create())
             {
-                Assert.Throws<InvalidOperationException>(
-                    () => contents.AddShroudedKey(rsa, ReadOnlySpan<byte>.Empty, s_pbeParameters));
+                Assert.Throws<InvalidOperationException>(() =>
+                    contents.AddShroudedKey(rsa, ReadOnlySpan<byte>.Empty, s_pbeParameters)
+                );
             }
         }
 
@@ -214,8 +225,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             using (RSA rsa = RSA.Create())
             {
-                Assert.Throws<InvalidOperationException>(
-                    () => contents.AddShroudedKey(rsa, ReadOnlySpan<char>.Empty, s_pbeParameters));
+                Assert.Throws<InvalidOperationException>(() =>
+                    contents.AddShroudedKey(rsa, ReadOnlySpan<char>.Empty, s_pbeParameters)
+                );
             }
         }
 
@@ -243,9 +255,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12Info info = Pkcs12Info.Decode(pfxData, out _, skipCopy: true);
             Pkcs12SafeContents firstContents = info.AuthenticatedSafe[0];
 
-            Assert.Equal(
-                Pkcs12ConfidentialityMode.Password,
-                firstContents.ConfidentialityMode);
+            Assert.Equal(Pkcs12ConfidentialityMode.Password, firstContents.ConfidentialityMode);
 
             // This password experimentally encounters a PKCS7 padding verification error.
             Assert.ThrowsAny<CryptographicException>(() => firstContents.Decrypt("000"));
@@ -262,9 +272,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12Info info = Pkcs12Info.Decode(pfxData, out _, skipCopy: true);
             Pkcs12SafeContents firstContents = info.AuthenticatedSafe[0];
 
-            Assert.Equal(
-                Pkcs12ConfidentialityMode.Password,
-                firstContents.ConfidentialityMode);
+            Assert.Equal(Pkcs12ConfidentialityMode.Password, firstContents.ConfidentialityMode);
 
             Assert.Throws<InvalidOperationException>(() => firstContents.GetBags());
         }
@@ -280,7 +288,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             ref byte upper = ref bigBuf[2];
             ref byte lower = ref bigBuf[3];
 
-            foreach (int size in new[] { 1024, 2048, 4096, 8192, 5184, 16 * 1024})
+            foreach (int size in new[] { 1024, 2048, 4096, 8192, 5184, 16 * 1024 })
             {
                 lower = (byte)size;
                 upper = (byte)(size >> 8);

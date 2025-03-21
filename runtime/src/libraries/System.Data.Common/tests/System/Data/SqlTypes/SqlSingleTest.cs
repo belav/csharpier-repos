@@ -25,9 +25,9 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Xunit;
-using System.Xml;
 using System.Data.SqlTypes;
+using System.Xml;
+using Xunit;
 
 namespace System.Data.Tests.SqlTypes
 {
@@ -85,12 +85,13 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal(15E+18f, SqlSingle.Add(test1, test0).Value);
             Assert.Equal(1.5E+19f, SqlSingle.Add(test1, test2).Value);
 
-            Assert.Throws<OverflowException>(() => SqlSingle.Add(SqlSingle.MaxValue, SqlSingle.MaxValue));
+            Assert.Throws<OverflowException>(() =>
+                SqlSingle.Add(SqlSingle.MaxValue, SqlSingle.MaxValue)
+            );
 
             // Divide()
             Assert.Equal(3, SqlSingle.Divide(test1, test4));
             Assert.Equal(-1.3E-23f, SqlSingle.Divide(test2, test3).Value);
-
 
             Assert.Throws<DivideByZeroException>(() => SqlSingle.Divide(test1, test0));
 
@@ -103,7 +104,9 @@ namespace System.Data.Tests.SqlTypes
             // Subtract()
             Assert.Equal((float)(-5E+30), SqlSingle.Subtract(test1, test3).Value);
 
-            Assert.Throws<OverflowException>(() => SqlSingle.Subtract(SqlSingle.MinValue, SqlSingle.MaxValue));
+            Assert.Throws<OverflowException>(() =>
+                SqlSingle.Subtract(SqlSingle.MinValue, SqlSingle.MaxValue)
+            );
         }
 
         [Fact]
@@ -267,7 +270,6 @@ namespace System.Data.Tests.SqlTypes
             Assert.Equal(0, test0.ToSqlMoney().Value);
 
             Assert.Throws<OverflowException>(() => test2.ToSqlMoney());
-
 
             // ToSqlString ()
             Assert.Equal(250.ToString(), test1.ToSqlString().Value);
@@ -450,6 +452,7 @@ namespace System.Data.Tests.SqlTypes
             float testSingle64 = 64;
             Assert.Equal(64, ((SqlSingle)testSingle64).Value);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {

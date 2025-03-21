@@ -21,14 +21,16 @@ public class MvcApplicationBuilderExtensionsTest
             .Returns(Mock.Of<IServiceProvider>());
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () => applicationBuilderMock.Object.UseMvc(rb => { }));
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            applicationBuilderMock.Object.UseMvc(rb => { })
+        );
 
         Assert.Equal(
-            "Unable to find the required services. Please add all the required services by calling " +
-            "'IServiceCollection.AddMvc' inside the call to 'ConfigureServices(...)' " +
-            "in the application startup code.",
-            exception.Message);
+            "Unable to find the required services. Please add all the required services by calling "
+                + "'IServiceCollection.AddMvc' inside the call to 'ConfigureServices(...)' "
+                + "in the application startup code.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -45,13 +47,11 @@ public class MvcApplicationBuilderExtensionsTest
         // Act
         appBuilder.UseMvc(routes =>
         {
-            routes.MapRoute(
-                name: "default",
-                template: "{controller=Home}/{action=Index}/{id?}");
+            routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
         });
 
-        var endpointDataSource = appBuilder.ApplicationServices
-            .GetRequiredService<EndpointDataSource>();
+        var endpointDataSource =
+            appBuilder.ApplicationServices.GetRequiredService<EndpointDataSource>();
 
         Assert.Empty(endpointDataSource.Endpoints);
     }
@@ -74,14 +74,15 @@ public class MvcApplicationBuilderExtensionsTest
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}"
+                );
             });
         });
 
         var expected =
-            "Endpoint Routing does not support 'IApplicationBuilder.UseMvc(...)'. To use " +
-            "'IApplicationBuilder.UseMvc' set 'MvcOptions.EnableEndpointRouting = false' inside " +
-            "'ConfigureServices(...).";
+            "Endpoint Routing does not support 'IApplicationBuilder.UseMvc(...)'. To use "
+            + "'IApplicationBuilder.UseMvc' set 'MvcOptions.EnableEndpointRouting = false' inside "
+            + "'ConfigureServices(...).";
         Assert.Equal(expected, ex.Message);
     }
 }

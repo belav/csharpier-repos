@@ -84,6 +84,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Workspace_ApplyChanges = 62,
         Workspace_TryGetDocument = 63,
         Workspace_TryGetDocumentFromInProgressSolution = 64,
+
         // obsolete: Workspace_Solution_LinkedFileDiffMergingSession = 65,
         // obsolete: Workspace_Solution_LinkedFileDiffMergingSession_LinkedFileGroup = 66,
         Workspace_Solution_Info = 67,
@@ -111,6 +112,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Formatting_ContextInitialization = 85,
         Formatting_Format = 86,
         Formatting_ApplyResultToBuffer = 87,
+
         // obsolete: Formatting_IterateNodes = 88,
         // obsolete: Formatting_CollectIndentBlock = 89,
         // obsolete: Formatting_CollectSuppressOperation = 90,
@@ -286,6 +288,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         DiagnosticAnalyzerService_Analyzers = 230,
         DiagnosticAnalyzerDriver_AnalyzerCrash = 231,
         DiagnosticAnalyzerDriver_AnalyzerTypeCount = 232,
+
         // obsolete: PersistedSemanticVersion_Info = 233,
         StorageDatabase_Exceptions = 234,
         WorkCoordinator_ShutdownTimeout = 235,
@@ -328,6 +331,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         VisualBasic_Interactive_Window = 268,
 
         NonFatalWatson = 269,
+
         // GlobalOperationRegistration = 270, No longer fired.
         CommandHandler_FindAllReference = 271,
 
@@ -364,6 +368,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         CodeAnalysisService_GetDesignerAttributesAsync = 294,
 
         ServiceHubRemoteHostClient_CreateAsync = 295,
+
         // obsolete: PinnedRemotableDataScope_GetRemotableData = 296,
 
         RemoteHost_Connect = 297,
@@ -375,6 +380,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         // obsolete: RemoteHostClientService_Restarted = 302,
 
         RemoteHostService_SynchronizePrimaryWorkspaceAsync = 303,
+
         // obsolete: RemoteHostService_SynchronizeGlobalAssetsAsync = 304,
 
         AssetStorage_CleanAssets = 305,
@@ -411,15 +417,18 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         Extension_InfoBar = 327,
         FxCopAnalyzersInstall = 328,
         AssetStorage_ForceGC = 329,
+
         // obsolete: RemoteHost_Bitness = 330,
         Intellisense_Completion = 331,
         MetadataOnlyImage_EmitFailure = 332,
         LiveTableDataSource_OnDiagnosticsUpdated = 333,
         Experiment_KeybindingsReset = 334,
         Diagnostics_GeneratePerformaceReport = 335,
+
         // obsolete: Diagnostics_BadAnalyzer = 336,
         CodeAnalysisService_ReportAnalyzerPerformance = 337,
         PerformanceTrackerService_AddSnapshot = 338,
+
         // obsolete: AbstractProject_SetIntelliSenseBuild = 339,
         // obsolete: AbstractProject_Created = 340,
         // obsolete: AbstractProject_PushedToWorkspace = 341,
@@ -430,6 +439,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
 
         SymbolFinder_Solution_Pattern_FindSourceDeclarationsAsync = 346,
         SymbolFinder_Project_Pattern_FindSourceDeclarationsAsync = 347,
+
         // obsolete: Intellisense_Completion_Commit = 348,
 
         CodeCleanupInfobar_BarDisplayed = 349,
@@ -463,6 +473,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         RemoteHostService_IsExperimentEnabledAsync = 373,
         PartialLoad_FullyLoaded = 374,
         Liveshare_UnknownCodeAction = 375,
+
         // obsolete: Liveshare_LexicalClassifications = 376,
         // obsolete: Liveshare_SyntacticClassifications = 377,
         // obsolete: Liveshare_SyntacticTagger = 378,
@@ -494,6 +505,7 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         DependentTypeFinder_FindAndCacheImplementingTypesAsync = 432,
 
         RemoteSemanticClassificationCacheService_ExceptionInCacheRead = 440,
+
         // obsolete: FeatureNotAvailable = 441,
 
         LSPCompletion_MissingLSPCompletionTriggerKind = 450,
@@ -557,14 +569,17 @@ namespace Microsoft.CodeAnalysis.Internal.Log
         ApplyChangesOperation_WorkspaceVersionMatch_ApplicationSucceeded = 580,
         ApplyChangesOperation_WorkspaceVersionMatch_ApplicationFailed = 581,
         ApplyChangesOperation_WorkspaceVersionMismatch_ApplicationSucceeded = 582,
-        ApplyChangesOperation_WorkspaceVersionMismatch_ApplicationFailed_IncompatibleSolutionChange = 583,
-        ApplyChangesOperation_WorkspaceVersionMismatch_ApplicationFailed_IncompatibleProjectChange = 584,
+        ApplyChangesOperation_WorkspaceVersionMismatch_ApplicationFailed_IncompatibleSolutionChange =
+            583,
+        ApplyChangesOperation_WorkspaceVersionMismatch_ApplicationFailed_IncompatibleProjectChange =
+            584,
         ApplyChangesOperation_WorkspaceVersionMismatch_ApplicationFailed_NoChangedDocument = 585,
         ApplyChangesOperation_WorkspaceVersionMismatch_ApplicationFailed_NoTextChange = 586,
         ApplyChangesOperation_WorkspaceVersionMismatch_ApplicationFailed_DocumentRemoved = 587,
         ApplyChangesOperation_WorkspaceVersionMismatch_ApplicationFailed_TextChangeConflict = 588,
 
         Completion_SemanticSnippets = 589,
+
         // please leave the range up through 600 free in case we need to add more items to learn more about ApplyChangesOperation results.
 
         SpellCheckFixer_CouldNotFindDocument = 600,

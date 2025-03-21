@@ -7,7 +7,7 @@ namespace System.ServiceModel.Diagnostics
 
     public enum PerformanceCounterScope
     {
-        Off = 0,     // +
+        Off = 0, // +
         ServiceOnly = 1,
         All = 2,
         Default = 3, // *
@@ -17,8 +17,7 @@ namespace System.ServiceModel.Diagnostics
     {
         internal static bool IsDefined(PerformanceCounterScope value)
         {
-            return
-                value == PerformanceCounterScope.Off
+            return value == PerformanceCounterScope.Off
                 || value == PerformanceCounterScope.Default
                 || value == PerformanceCounterScope.ServiceOnly
                 || value == PerformanceCounterScope.All;
@@ -28,8 +27,13 @@ namespace System.ServiceModel.Diagnostics
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value,
-                    typeof(PerformanceCounterScope)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(PerformanceCounterScope)
+                    )
+                );
             }
         }
     }

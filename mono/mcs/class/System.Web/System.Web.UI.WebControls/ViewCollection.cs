@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,39 +28,36 @@
 // Copyright (C) 2004 Novell, Inc (http://www.novell.com)
 //
 
-
 using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Web;
 using System.Web.UI;
-using System.ComponentModel;
 
 namespace System.Web.UI.WebControls
 {
-	public class ViewCollection: ControlCollection
-	{
-		public ViewCollection (Control owner)
-			: base (owner)
-		{
-		}
-		
-		public override void Add (Control v)
-		{
-			if (!(v is View))
-				throw new ArgumentException ("The parameter is not a View control");
-			base.Add (v);
-		}
-		
-		public override void AddAt (int index, Control v)
-		{
-			if (!(v is View))
-				throw new ArgumentException ("The parameter is not a View control");
-			base.AddAt (index, v);
-		}
-		
-		public new View this [int i] {
-			get { return (View) base [i]; }
-		}
-	}
-}
+    public class ViewCollection : ControlCollection
+    {
+        public ViewCollection(Control owner)
+            : base(owner) { }
 
+        public override void Add(Control v)
+        {
+            if (!(v is View))
+                throw new ArgumentException("The parameter is not a View control");
+            base.Add(v);
+        }
+
+        public override void AddAt(int index, Control v)
+        {
+            if (!(v is View))
+                throw new ArgumentException("The parameter is not a View control");
+            base.AddAt(index, v);
+        }
+
+        public new View this[int i]
+        {
+            get { return (View)base[i]; }
+        }
+    }
+}

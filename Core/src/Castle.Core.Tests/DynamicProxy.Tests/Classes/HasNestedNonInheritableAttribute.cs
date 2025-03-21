@@ -14,32 +14,23 @@
 
 namespace Castle.DynamicProxy.Tests.Classes
 {
-	[Nested.NonInheritable]
-	public class HasNestedNonInheritableAttribute
-	{
-		[Nested.NonInheritable]
-		public virtual void OnMethod()
-		{
-		}
+    [Nested.NonInheritable]
+    public class HasNestedNonInheritableAttribute
+    {
+        [Nested.NonInheritable]
+        public virtual void OnMethod() { }
 
-		[Nested.NonInheritable]
-		public virtual string OnProperty
-		{
-			get; set;
-		}
+        [Nested.NonInheritable]
+        public virtual string OnProperty { get; set; }
 
-		[return: Nested.NonInheritable]
-		public virtual int OnReturn()
-		{
-			return 1;
-		}
+        [return: Nested.NonInheritable]
+        public virtual int OnReturn()
+        {
+            return 1;
+        }
 
-		public virtual void OnParameter([Nested.NonInheritable] int arg)
-		{
-		}
+        public virtual void OnParameter([Nested.NonInheritable] int arg) { }
 
-		public virtual void OnGenericArgument<[Nested.NonInheritable] T>()
-		{
-		}
-	}
+        public virtual void OnGenericArgument<[Nested.NonInheritable] T>() { }
+    }
 }

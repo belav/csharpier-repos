@@ -26,7 +26,12 @@ namespace HFATest
             return check;
         }
 
-        private static void DisplayResult(string testName, double actual, double expected, bool result)
+        private static void DisplayResult(
+            string testName,
+            double actual,
+            double expected,
+            bool result
+        )
         {
             System.Console.Write("[" + testName + "]\t");
             if (result)
@@ -35,7 +40,11 @@ namespace HFATest
             }
             else
             {
-                System.Console.WriteLine("FAILED => expected = {0}, actual = {1}", expected, actual);
+                System.Console.WriteLine(
+                    "FAILED => expected = {0}, actual = {1}",
+                    expected,
+                    actual
+                );
             }
         }
     }

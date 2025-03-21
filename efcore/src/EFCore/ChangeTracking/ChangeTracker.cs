@@ -33,18 +33,17 @@ public class ChangeTracker : IResettableService
         IStateManager stateManager,
         IChangeDetector changeDetector,
         IModel model,
-        IEntityEntryGraphIterator graphIterator)
+        IEntityEntryGraphIterator graphIterator
+    )
     {
         Context = context;
 
-        _defaultQueryTrackingBehavior
-            = context
+        _defaultQueryTrackingBehavior =
+            context
                 .GetService<IDbContextOptions>()
-                .Extensions
-                .OfType<CoreOptionsExtension>()
+                .Extensions.OfType<CoreOptionsExtension>()
                 .FirstOrDefault()
-                ?.QueryTrackingBehavior
-            ?? QueryTrackingBehavior.TrackAll;
+                ?.QueryTrackingBehavior ?? QueryTrackingBehavior.TrackAll;
 
         _queryTrackingBehavior = _defaultQueryTrackingBehavior;
 
@@ -210,8 +209,8 @@ public class ChangeTracker : IResettableService
     {
         TryDetectChanges();
 
-        return StateManager.Entries
-            .Where(e => e.Entity is TEntity)
+        return StateManager
+            .Entries.Where(e => e.Entity is TEntity)
             .Select(e => new EntityEntry<TEntity>(e));
     }
 
@@ -275,8 +274,7 @@ public class ChangeTracker : IResettableService
     ///     represent the current state of the database. This method is typically called by <see cref="DbContext.SaveChanges()" />
     ///     after changes have been successfully saved to the database.
     /// </summary>
-    public virtual void AcceptAllChanges()
-        => StateManager.AcceptAllChanges();
+    public virtual void AcceptAllChanges() => StateManager.AcceptAllChanges();
 
     /// <summary>
     ///     Begins tracking an entity and any entities that are reachable by traversing its navigation properties.
@@ -306,10 +304,8 @@ public class ChangeTracker : IResettableService
     ///     An action to configure the change tracking information for each entity. For the entity to begin being tracked,
     ///     the <see cref="EntityEntry.State" /> must be set.
     /// </param>
-    public virtual void TrackGraph(
-        object rootEntity,
-        Action<EntityEntryGraphNode> callback)
-        => TrackGraph(
+    public virtual void TrackGraph(object rootEntity, Action<EntityEntryGraphNode> callback) =>
+        TrackGraph(
             rootEntity,
             callback,
             n =>
@@ -322,7 +318,8 @@ public class ChangeTracker : IResettableService
                 n.NodeState!(n);
 
                 return n.Entry.State != EntityState.Detached;
-            });
+            }
+        );
 
     /// <summary>
     ///     Begins tracking an entity and any entities that are reachable by traversing its navigation properties.
@@ -361,7 +358,8 @@ public class ChangeTracker : IResettableService
     public virtual void TrackGraph<TState>(
         object rootEntity,
         TState state,
-        Func<EntityEntryGraphNode<TState>, bool> callback)
+        Func<EntityEntryGraphNode<TState>, bool> callback
+    )
     {
         Check.NotNull(rootEntity, nameof(rootEntity));
         Check.NotNull(callback, nameof(callback));
@@ -374,7 +372,8 @@ public class ChangeTracker : IResettableService
 
             GraphIterator.TraverseGraph(
                 new EntityEntryGraphNode<TState>(rootEntry, state, null, null),
-                callback);
+                callback
+            );
 
             rootEntry.StateManager.CompleteAttachGraph();
         }
@@ -608,8 +607,7 @@ public class ChangeTracker : IResettableService
     ///         See <see href="https://aka.ms/efcore-docs-change-tracking">EF Core change tracking</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    public virtual void Clear()
-        => StateManager.Clear(resetting: false);
+    public virtual void Clear() => StateManager.Clear(resetting: false);
 
     /// <summary>
     ///     <para>
@@ -623,10 +621,11 @@ public class ChangeTracker : IResettableService
     ///         See <see href="https://aka.ms/efcore-docs-change-tracking">EF Core change tracking</see> for more information and examples.
     ///     </para>
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => this.ToDebugString(ChangeTrackerDebugStringOptions.ShortDefault),
-            () => this.ToDebugString());
+            () => this.ToDebugString()
+        );
 
     #region Hidden System.Object members
 
@@ -635,8 +634,7 @@ public class ChangeTracker : IResettableService
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -644,16 +642,14 @@ public class ChangeTracker : IResettableService
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

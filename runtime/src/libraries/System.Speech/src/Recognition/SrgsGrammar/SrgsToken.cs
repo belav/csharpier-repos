@@ -27,10 +27,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         #region public Properties
         public string Text
         {
-            get
-            {
-                return _text;
-            }
+            get { return _text; }
             set
             {
                 Helpers.ThrowIfEmptyOrNull(value, nameof(value));
@@ -46,10 +43,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         }
         public string Pronunciation
         {
-            get
-            {
-                return _pronunciation;
-            }
+            get { return _pronunciation; }
             set
             {
                 Helpers.ThrowIfEmptyOrNull(value, nameof(value));
@@ -58,10 +52,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         }
         public string Display
         {
-            get
-            {
-                return _display;
-            }
+            get { return _display; }
             set
             {
                 Helpers.ThrowIfEmptyOrNull(value, nameof(value));
@@ -85,7 +76,12 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             if (_pronunciation != null)
             {
-                writer.WriteAttributeString("sapi", "pron", XmlParser.sapiNamespace, _pronunciation);
+                writer.WriteAttributeString(
+                    "sapi",
+                    "pron",
+                    XmlParser.sapiNamespace,
+                    _pronunciation
+                );
             }
 
             // If an empty string is provided, skip the WriteString
@@ -107,7 +103,11 @@ namespace System.Speech.Recognition.SrgsGrammar
             // Validate the pronunciation if any
             if (_pronunciation != null)
             {
-                for (int iCurPron = 0, iDeliminator = 0; iCurPron < _pronunciation.Length; iCurPron = iDeliminator + 1)
+                for (
+                    int iCurPron = 0, iDeliminator = 0;
+                    iCurPron < _pronunciation.Length;
+                    iCurPron = iDeliminator + 1
+                )
                 {
                     // Find semi-colon delimiter and replace with null
                     iDeliminator = _pronunciation.IndexOf(';', iCurPron);
@@ -116,13 +116,19 @@ namespace System.Speech.Recognition.SrgsGrammar
                         iDeliminator = _pronunciation.Length;
                     }
 
-                    string subPronunciation = _pronunciation.Substring(iCurPron, iDeliminator - iCurPron);
+                    string subPronunciation = _pronunciation.Substring(
+                        iCurPron,
+                        iDeliminator - iCurPron
+                    );
 
                     // Convert the pronunciation, will throw if error
                     switch (grammar.PhoneticAlphabet)
                     {
                         case AlphabetType.Sapi:
-                            PhonemeConverter.ConvertPronToId(subPronunciation, grammar.Culture.LCID);
+                            PhonemeConverter.ConvertPronToId(
+                                subPronunciation,
+                                grammar.Culture.LCID
+                            );
                             break;
 
                         case AlphabetType.Ups:

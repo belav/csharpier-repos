@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -25,7 +25,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
-
 
 using System;
 using System.IO;
@@ -58,7 +57,7 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// </summary>
         /// <param name="header"></param>
         /// <param name="requestStream"></param>
-        public void Write(ITransportHeaders header, Stream requestStream) 
+        public void Write(ITransportHeaders header, Stream requestStream)
         {
             Stream bs = socket.GetStream();
 
@@ -69,13 +68,13 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             bs.Write(bytes, 0, bytes.Length);
             m.WriteTo(bs);
 
-            try 
+            try
             {
                 bytes = BitConverter.GetBytes((int)requestStream.Length);
                 bs.Write(bytes, 0, bytes.Length);
                 IpcChannelHelper.Copy(requestStream, bs);
             }
-            catch 
+            catch
             {
                 bs.Write(bytes, 0, bytes.Length);
             }
@@ -97,15 +96,15 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             socket.Receive(bytes, 0, bytes.Length);
             length = BitConverter.ToInt32(bytes, 0);
 
-            if (length != int.MaxValue && length > 0) 
+            if (length != int.MaxValue && length > 0)
             {
                 bytes = new byte[length];
                 socket.Receive(bytes, 0, (int)length);
 
                 MemoryStream m = new MemoryStream(bytes);
-                headers = (ITransportHeaders) formatter.Deserialize(m);
+                headers = (ITransportHeaders)formatter.Deserialize(m);
             }
-            else 
+            else
             {
                 headers = new TransportHeaders();
             }
@@ -113,13 +112,13 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
             bytes = BitConverter.GetBytes(int.MaxValue);
             socket.Receive(bytes, 0, bytes.Length);
             length = BitConverter.ToInt32(bytes, 0);
-            if (length != int.MaxValue && length > 0) 
+            if (length != int.MaxValue && length > 0)
             {
                 bytes = new byte[length];
                 socket.Receive(bytes, 0, (int)length);
                 responseStream = new MemoryStream(bytes);
             }
-            else 
+            else
             {
                 responseStream = new MemoryStream(new byte[0]);
             }
@@ -128,10 +127,9 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
         /// <summary>
         /// Closes the unterlying named pipe socket.
         /// </summary>
-        public void Close() 
+        public void Close()
         {
             socket.Close();
         }
     }
 }
-

@@ -12,21 +12,19 @@ namespace System.ServiceModel
     using System.ServiceModel.Configuration;
     using System.ServiceModel.Security;
 
-    [TypeForwardedFrom("System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.WorkflowServices, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class WSHttpContextBinding : WSHttpBinding
     {
         ProtectionLevel contextProtectionLevel = ContextBindingElement.DefaultProtectionLevel;
         bool contextManagementEnabled = ContextBindingElement.DefaultContextManagementEnabled;
 
         public WSHttpContextBinding()
-            : base()
-        {
-        }
+            : base() { }
 
         public WSHttpContextBinding(SecurityMode securityMode)
-            : base(securityMode)
-        {
-        }
+            : base(securityMode) { }
 
         public WSHttpContextBinding(string configName)
             : base()
@@ -40,50 +38,38 @@ namespace System.ServiceModel
         }
 
         public WSHttpContextBinding(SecurityMode securityMode, bool reliableSessionEnabled)
-            : base(securityMode, reliableSessionEnabled)
-        {
-        }
+            : base(securityMode, reliableSessionEnabled) { }
 
         WSHttpContextBinding(WSHttpBinding wsHttpBinding)
         {
-            WSHttpContextBindingPropertyTransferHelper helper = new WSHttpContextBindingPropertyTransferHelper();
+            WSHttpContextBindingPropertyTransferHelper helper =
+                new WSHttpContextBindingPropertyTransferHelper();
             helper.InitializeFrom(wsHttpBinding);
             helper.SetBindingElementType(typeof(WSHttpContextBinding));
             helper.ApplyConfiguration(this);
         }
 
         [DefaultValue(null)]
-        public Uri ClientCallbackAddress
-        {
-            get;
-            set;
-        }
+        public Uri ClientCallbackAddress { get; set; }
 
         [DefaultValue(ContextBindingElement.DefaultContextManagementEnabled)]
         public bool ContextManagementEnabled
         {
-            get
-            {
-                return this.contextManagementEnabled;
-            }
-            set
-            {
-                this.contextManagementEnabled = value;
-            }
+            get { return this.contextManagementEnabled; }
+            set { this.contextManagementEnabled = value; }
         }
 
         [DefaultValue(ContextBindingElement.DefaultProtectionLevel)]
         public ProtectionLevel ContextProtectionLevel
         {
-            get
-            {
-                return this.contextProtectionLevel;
-            }
+            get { return this.contextProtectionLevel; }
             set
             {
                 if (!ProtectionLevelHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.contextProtectionLevel = value;
             }
@@ -98,8 +84,8 @@ namespace System.ServiceModel
                 try
                 {
                     // Passing AllowCookies=false to HttpTransportBinding means we don't want transport layer to manage
-                    // cookie containers. We are going to do this at the context channel level, because we need channel 
-                    // level isolation as opposed to channel factory level isolation. 
+                    // cookie containers. We are going to do this at the context channel level, because we need channel
+                    // level isolation as opposed to channel factory level isolation.
 
                     this.AllowCookies = false;
                     result = base.CreateBindingElements();
@@ -108,18 +94,37 @@ namespace System.ServiceModel
                 {
                     this.AllowCookies = true;
                 }
-                result.Insert(0, new ContextBindingElement(this.ContextProtectionLevel, ContextExchangeMechanism.HttpCookie, this.ClientCallbackAddress, this.ContextManagementEnabled));
+                result.Insert(
+                    0,
+                    new ContextBindingElement(
+                        this.ContextProtectionLevel,
+                        ContextExchangeMechanism.HttpCookie,
+                        this.ClientCallbackAddress,
+                        this.ContextManagementEnabled
+                    )
+                );
             }
             else
             {
                 result = base.CreateBindingElements();
-                result.Insert(0, new ContextBindingElement(this.ContextProtectionLevel, ContextExchangeMechanism.ContextSoapHeader, this.ClientCallbackAddress, this.ContextManagementEnabled));
+                result.Insert(
+                    0,
+                    new ContextBindingElement(
+                        this.ContextProtectionLevel,
+                        ContextExchangeMechanism.ContextSoapHeader,
+                        this.ClientCallbackAddress,
+                        this.ContextManagementEnabled
+                    )
+                );
             }
 
             return result;
         }
 
-        internal static new bool TryCreate(BindingElementCollection bindingElements, out Binding binding)
+        internal static new bool TryCreate(
+            BindingElementCollection bindingElements,
+            out Binding binding
+        )
         {
             if (bindingElements == null)
             {
@@ -128,21 +133,33 @@ namespace System.ServiceModel
 
             binding = null;
 
-            ContextBindingElement contextBindingElement = bindingElements.Find<ContextBindingElement>();
+            ContextBindingElement contextBindingElement =
+                bindingElements.Find<ContextBindingElement>();
             if (contextBindingElement != null)
             {
-                BindingElementCollection bindingElementsWithoutContext = new BindingElementCollection(bindingElements);
+                BindingElementCollection bindingElementsWithoutContext =
+                    new BindingElementCollection(bindingElements);
                 bindingElementsWithoutContext.Remove<ContextBindingElement>();
                 Binding wsHttpBinding;
                 if (WSHttpBinding.TryCreate(bindingElementsWithoutContext, out wsHttpBinding))
                 {
                     bool allowCookies = ((WSHttpBinding)wsHttpBinding).AllowCookies;
-                    if (allowCookies && contextBindingElement.ContextExchangeMechanism == ContextExchangeMechanism.HttpCookie
-                        || !allowCookies && contextBindingElement.ContextExchangeMechanism == ContextExchangeMechanism.ContextSoapHeader)
+                    if (
+                        allowCookies
+                            && contextBindingElement.ContextExchangeMechanism
+                                == ContextExchangeMechanism.HttpCookie
+                        || !allowCookies
+                            && contextBindingElement.ContextExchangeMechanism
+                                == ContextExchangeMechanism.ContextSoapHeader
+                    )
                     {
-                        WSHttpContextBinding contextBinding = new WSHttpContextBinding((WSHttpBinding)wsHttpBinding);
-                        contextBinding.ContextProtectionLevel = contextBindingElement.ProtectionLevel;
-                        contextBinding.ContextManagementEnabled = contextBindingElement.ContextManagementEnabled;
+                        WSHttpContextBinding contextBinding = new WSHttpContextBinding(
+                            (WSHttpBinding)wsHttpBinding
+                        );
+                        contextBinding.ContextProtectionLevel =
+                            contextBindingElement.ProtectionLevel;
+                        contextBinding.ContextManagementEnabled =
+                            contextBindingElement.ContextManagementEnabled;
                         binding = contextBinding;
                     }
                 }
@@ -153,7 +170,8 @@ namespace System.ServiceModel
 
         void ApplyConfiguration(string configurationName)
         {
-            WSHttpContextBindingCollectionElement section = WSHttpContextBindingCollectionElement.GetBindingCollectionElement();
+            WSHttpContextBindingCollectionElement section =
+                WSHttpContextBindingCollectionElement.GetBindingCollectionElement();
             WSHttpContextBindingElement element = section.Bindings[configurationName];
             element.ApplyConfiguration(this);
         }
@@ -164,10 +182,7 @@ namespace System.ServiceModel
 
             protected override Type BindingElementType
             {
-                get
-                {
-                    return this.bindingElementType;
-                }
+                get { return this.bindingElementType; }
             }
 
             public void SetBindingElementType(Type bindingElementType)

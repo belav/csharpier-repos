@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,50 +31,51 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
+    public sealed class ISAPIRuntime : MarshalByRefObject, IISAPIRuntime, IRegisteredObject
+    {
+        [AspNetHostingPermission(
+            SecurityAction.Demand,
+            Level = AspNetHostingPermissionLevel.Minimal
+        )]
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public ISAPIRuntime() { }
 
-        public sealed class ISAPIRuntime : MarshalByRefObject, IISAPIRuntime, IRegisteredObject {
-
-		[AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Minimal)]
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-                public ISAPIRuntime ()
-		{
-		}
-		
-                public void DoGCCollect ()
-		{
-			// Do nothing.
-		}
-		
-		[MonoTODO ("Not implemented")]
-                public int ProcessRequest (IntPtr ecb, int iWRType)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO ("Not implemented")]
-                public void StartProcessing ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO ("Not implemented")]
-		[SecurityPermission (SecurityAction.Demand, UnmanagedCode = true)]
-                public void StopProcessing ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		[MonoTODO ("Not implemented")]
-		public override object InitializeLifetimeService ()
-		{
-			throw new NotImplementedException ();
-		}
-
-		[MonoTODO ("Not implemented")]
-		void IRegisteredObject.Stop (bool immediate)
-		{
-			throw new NotImplementedException ();
-		}
+        public void DoGCCollect()
+        {
+            // Do nothing.
         }
+
+        [MonoTODO("Not implemented")]
+        public int ProcessRequest(IntPtr ecb, int iWRType)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO("Not implemented")]
+        public void StartProcessing()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO("Not implemented")]
+        [SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
+        public void StopProcessing()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO("Not implemented")]
+        public override object InitializeLifetimeService()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO("Not implemented")]
+        void IRegisteredObject.Stop(bool immediate)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

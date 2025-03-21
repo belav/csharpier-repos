@@ -17,7 +17,8 @@ public class FlushPointTest : IClassFixture<MvcTestFixture<RazorWebSite.Startup>
     [Fact]
     public async Task FlushPointsAreExecutedForPagesWithLayouts()
     {
-        var expected = @"<title>Page With Layout</title>
+        var expected =
+            @"<title>Page With Layout</title>
 
 RenderBody content
 
@@ -40,7 +41,9 @@ RenderBody content
         var expected = new string('a', 1024 * 1024);
 
         // Act
-        var document = await Client.GetHtmlDocumentAsync("http://localhost/FlushPoint/FlushFollowedByLargeContent");
+        var document = await Client.GetHtmlDocumentAsync(
+            "http://localhost/FlushPoint/FlushFollowedByLargeContent"
+        );
 
         // Assert
         var largeContent = document.RequiredQuerySelector("#large-content");
@@ -53,7 +56,9 @@ RenderBody content
         var expected = new string('a', 1024 * 1024);
 
         // Act
-        var document = await Client.GetHtmlDocumentAsync("http://localhost/FlushPoint/FlushInvokedInComponent");
+        var document = await Client.GetHtmlDocumentAsync(
+            "http://localhost/FlushPoint/FlushInvokedInComponent"
+        );
 
         // Assert
         var largeContent = document.RequiredQuerySelector("#large-content");
@@ -63,15 +68,16 @@ RenderBody content
     [Fact]
     public async Task FlushPointsAreExecutedForPagesWithoutLayouts()
     {
-        var expected = @"Initial content
+        var expected =
+            @"Initial content
 
 Secondary content
 
 Inside partial
 
-After flush inside partial<form action=""/FlushPoint/PageWithoutLayout"" method=""post"">" +
-            @"<input id=""Name1"" name=""Name1"" type=""text"" value="""" />" +
-            @"<input id=""Name2"" name=""Name2"" type=""text"" value="""" /></form>";
+After flush inside partial<form action=""/FlushPoint/PageWithoutLayout"" method=""post"">"
+            + @"<input id=""Name1"" name=""Name1"" type=""text"" value="""" />"
+            + @"<input id=""Name2"" name=""Name2"" type=""text"" value="""" /></form>";
 
         // Act
         var body = await Client.GetStringAsync("http://localhost/FlushPoint/PageWithoutLayout");
@@ -83,9 +89,13 @@ After flush inside partial<form action=""/FlushPoint/PageWithoutLayout"" method=
     [Theory]
     [InlineData("PageWithPartialsAndViewComponents", "FlushAsync invoked inside RenderSection")]
     [InlineData("PageWithRenderSection", "FlushAsync invoked inside RenderSectionAsync")]
-    public async Task FlushPointsAreExecutedForPagesWithComponentsPartialsAndSections(string action, string title)
+    public async Task FlushPointsAreExecutedForPagesWithComponentsPartialsAndSections(
+        string action,
+        string title
+    )
     {
-        var expected = $@"<title>{ title }</title>
+        var expected =
+            $@"<title>{title}</title>
 RenderBody content
 
 
@@ -110,7 +120,8 @@ More content from layout
     public async Task FlushPointsNestedLayout()
     {
         // Arrange
-        var expected = @"Inside Nested Layout
+        var expected =
+            @"Inside Nested Layout
 <title>Nested Page With Layout</title>
 
 

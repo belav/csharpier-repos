@@ -6,8 +6,6 @@ namespace InterfaceMain
     public interface Program
     {
         [Fact]
-        public static void TestEntryPoint()
-        {
-        }
+        public static void TestEntryPoint() { }
     }
 }

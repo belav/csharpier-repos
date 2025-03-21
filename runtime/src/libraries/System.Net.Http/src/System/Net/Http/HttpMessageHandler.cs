@@ -13,18 +13,32 @@ namespace System.Net.Http
     {
         protected HttpMessageHandler()
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
         }
 
         // We cannot add abstract member to a public class in order to not to break already established contract of this class.
         // So we add virtual method, override it everywhere internally and provide proper implementation.
         // Unfortunately we cannot force everyone to implement so in such case we throw NSE.
-        protected internal virtual HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected internal virtual HttpResponseMessage Send(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
-            throw new NotSupportedException(SR.Format(SR.net_http_missing_sync_implementation, GetType(), nameof(HttpMessageHandler), nameof(Send)));
+            throw new NotSupportedException(
+                SR.Format(
+                    SR.net_http_missing_sync_implementation,
+                    GetType(),
+                    nameof(HttpMessageHandler),
+                    nameof(Send)
+                )
+            );
         }
 
-        protected internal abstract Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken);
+        protected internal abstract Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        );
 
         #region IDisposable Members
 

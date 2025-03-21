@@ -23,7 +23,7 @@ public static class HttpContextServerVariableExtensions
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(variableName);
-        
+
         var feature = context.Features.Get<IServerVariablesFeature>();
 
         if (feature == null)

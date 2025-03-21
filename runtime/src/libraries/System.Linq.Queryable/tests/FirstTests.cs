@@ -40,7 +40,9 @@ namespace System.Linq.Tests
         public void ManyElementsPredicateFalseForAll()
         {
             int[] source = { 9, 5, 1, 3, 17, 21 };
-            Assert.Throws<InvalidOperationException>(() => source.AsQueryable().First(i => i % 2 == 0));
+            Assert.Throws<InvalidOperationException>(() =>
+                source.AsQueryable().First(i => i % 2 == 0)
+            );
         }
 
         [Fact]
@@ -53,20 +55,29 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).First());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).First()
+            );
         }
 
         [Fact]
         public void NullSourcePredicateUsed()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).First(i => i != 2));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).First(i => i != 2)
+            );
         }
 
         [Fact]
         public void NullPredicate()
         {
             Expression<Func<int, bool>> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => Enumerable.Range(0, 3).AsQueryable().First(predicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => Enumerable.Range(0, 3).AsQueryable().First(predicate)
+            );
         }
 
         [Fact]

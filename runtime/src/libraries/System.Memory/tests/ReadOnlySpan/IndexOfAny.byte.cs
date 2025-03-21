@@ -28,7 +28,12 @@ namespace System.SpanTests
         [InlineData("/localhost:5000/PATH/%2FPATH2/?key=value HTTP/1.1", " %?", '%', 21)]
         [InlineData("/localhost:5000/PATH/PATH2/?key=value HTTP/1.1", " %?", '?', 27)]
         [InlineData("/localhost:5000/PATH/PATH2/ HTTP/1.1", " %?", ' ', 27)]
-        public static void IndexOfAnyStrings_Byte(string raw, string search, char expectResult, int expectIndex)
+        public static void IndexOfAnyStrings_Byte(
+            string raw,
+            string search,
+            char expectResult,
+            int expectIndex
+        )
         {
             byte[] buffers = Encoding.UTF8.GetBytes(raw);
             ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(buffers);
@@ -46,7 +51,10 @@ namespace System.SpanTests
             }
             else if (searchFor.Length == 3)
             {
-                Assert.Equal(index, span.IndexOfAny((byte)searchFor[0], (byte)searchFor[1], (byte)searchFor[2]));
+                Assert.Equal(
+                    index,
+                    span.IndexOfAny((byte)searchFor[0], (byte)searchFor[1], (byte)searchFor[2])
+                );
             }
 
             byte found = span[index];
@@ -266,7 +274,10 @@ namespace System.SpanTests
                     byte target2 = a[targetIndex + 2];
 
                     Assert.Equal(targetIndex + 2, span.IndexOfAny(target0, target1, target2));
-                    Assert.Equal(targetIndex + 2, span.IndexOfAny(new[] { target0, target1, target2 }));
+                    Assert.Equal(
+                        targetIndex + 2,
+                        span.IndexOfAny(new[] { target0, target1, target2 })
+                    );
                 }
             }
         }
@@ -359,7 +370,9 @@ namespace System.SpanTests
                 byte[] a = new byte[length];
                 ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(a);
 
-                ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(new byte[] { default, 99, 98, 0 });
+                ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(
+                    new byte[] { default, 99, 98, 0 }
+                );
 
                 for (int i = 0; i < length; i++)
                 {
@@ -383,21 +396,33 @@ namespace System.SpanTests
 
                 for (int targetIndex = 0; targetIndex < length; targetIndex++)
                 {
-                    ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(new byte[] { a[targetIndex], 0, 0, 0 });
+                    ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(
+                        new byte[] { a[targetIndex], 0, 0, 0 }
+                    );
                     int idx = span.IndexOfAny(values);
                     Assert.Equal(targetIndex, idx);
                 }
 
                 for (int targetIndex = 0; targetIndex < length - 3; targetIndex++)
                 {
-                    ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(new byte[] { a[targetIndex], a[targetIndex + 1], a[targetIndex + 2], a[targetIndex + 3] });
+                    ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(
+                        new byte[]
+                        {
+                            a[targetIndex],
+                            a[targetIndex + 1],
+                            a[targetIndex + 2],
+                            a[targetIndex + 3],
+                        }
+                    );
                     int idx = span.IndexOfAny(values);
                     Assert.Equal(targetIndex, idx);
                 }
 
                 for (int targetIndex = 0; targetIndex < length - 3; targetIndex++)
                 {
-                    ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(new byte[] { 0, 0, 0, a[targetIndex + 3] });
+                    ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(
+                        new byte[] { 0, 0, 0, a[targetIndex + 3] }
+                    );
                     int idx = span.IndexOfAny(values);
                     Assert.Equal(targetIndex + 3, idx);
                 }
@@ -497,7 +522,9 @@ namespace System.SpanTests
                 a[length - 5] = 200;
 
                 ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(a);
-                ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(new byte[] { 200, 200, 200, 200, 200, 200, 200, 200, 200 });
+                ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(
+                    new byte[] { 200, 200, 200, 200, 200, 200, 200, 200, 200 }
+                );
                 int idx = span.IndexOfAny(values);
                 Assert.Equal(length - 5, idx);
             }
@@ -512,7 +539,9 @@ namespace System.SpanTests
                 a[0] = 99;
                 a[length + 1] = 98;
                 ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(a, 1, length - 1);
-                ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(new byte[] { 99, 98, 99, 98, 99, 98 });
+                ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(
+                    new byte[] { 99, 98, 99, 98, 99, 98 }
+                );
                 int index = span.IndexOfAny(values);
                 Assert.Equal(-1, index);
             }
@@ -523,7 +552,9 @@ namespace System.SpanTests
                 a[0] = 99;
                 a[length + 1] = 99;
                 ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(a, 1, length - 1);
-                ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(new byte[] { 99, 99, 99, 99, 99, 99 });
+                ReadOnlySpan<byte> values = new ReadOnlySpan<byte>(
+                    new byte[] { 99, 99, 99, 99, 99, 99 }
+                );
                 int index = span.IndexOfAny(values);
                 Assert.Equal(-1, index);
             }

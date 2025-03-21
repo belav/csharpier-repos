@@ -9,10 +9,10 @@ class Program
 
     public static int Main()
     {
-        if (typeof (Program).GetMethod ("printf").CallingConvention != CallingConventions.VarArgs)
+        if (typeof(Program).GetMethod("printf").CallingConvention != CallingConventions.VarArgs)
             return 1;
-        
-        Console.WriteLine ("OK");
+
+        Console.WriteLine("OK");
         return 0;
     }
 }

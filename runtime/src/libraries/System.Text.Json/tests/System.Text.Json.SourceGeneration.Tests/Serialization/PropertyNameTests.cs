@@ -10,9 +10,7 @@ namespace System.Text.Json.SourceGeneration.Tests
     public sealed partial class PropertyNameTests_Metadata : PropertyNameTests
     {
         public PropertyNameTests_Metadata()
-            : base(new StringSerializerWrapper(PropertyNameTestsContext_Metadata.Default))
-        {
-        }
+            : base(new StringSerializerWrapper(PropertyNameTestsContext_Metadata.Default)) { }
 
         [JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Metadata)]
         [JsonSerializable(typeof(Dictionary<string, OverridePropertyNameDesignTime_TestClass>))]
@@ -29,17 +27,13 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(OverridePropertyNameDesignTime_TestClass))]
         [JsonSerializable(typeof(SimpleTestClass))]
         [JsonSerializable(typeof(ClassWithIgnoredCaseInsensitiveConflict))]
-        internal sealed partial class PropertyNameTestsContext_Metadata : JsonSerializerContext
-        {
-        }
+        internal sealed partial class PropertyNameTestsContext_Metadata : JsonSerializerContext { }
     }
 
     public sealed partial class PropertyNameTests_Default : PropertyNameTests
     {
         public PropertyNameTests_Default()
-            : base(new StringSerializerWrapper(PropertyNameTestsContext_Default.Default))
-        {
-        }
+            : base(new StringSerializerWrapper(PropertyNameTestsContext_Default.Default)) { }
 
         [JsonSerializable(typeof(Dictionary<string, OverridePropertyNameDesignTime_TestClass>))]
         [JsonSerializable(typeof(Dictionary<string, int>))]
@@ -55,8 +49,6 @@ namespace System.Text.Json.SourceGeneration.Tests
         [JsonSerializable(typeof(OverridePropertyNameDesignTime_TestClass))]
         [JsonSerializable(typeof(SimpleTestClass))]
         [JsonSerializable(typeof(ClassWithIgnoredCaseInsensitiveConflict))]
-        internal sealed partial class PropertyNameTestsContext_Default : JsonSerializerContext
-        {
-        }
+        internal sealed partial class PropertyNameTestsContext_Default : JsonSerializerContext { }
     }
 }

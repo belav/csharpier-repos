@@ -4,14 +4,16 @@
 
 namespace System.ServiceModel.Syndication
 {
-    using System.Collections.ObjectModel;
-    using System.Runtime.Serialization;
-    using System.Xml.Serialization;
     using System.Collections.Generic;
-    using System.Xml;
+    using System.Collections.ObjectModel;
     using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
+    using System.Xml;
+    using System.Xml.Serialization;
 
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public class ServiceDocument : IExtensibleSyndicationObject
     {
         Uri baseUri;
@@ -19,9 +21,8 @@ namespace System.ServiceModel.Syndication
         string language;
         Collection<Workspace> workspaces;
 
-        public ServiceDocument() : this(null)
-        {
-        }
+        public ServiceDocument()
+            : this(null) { }
 
         public ServiceDocument(IEnumerable<Workspace> workspaces)
         {
@@ -75,11 +76,12 @@ namespace System.ServiceModel.Syndication
         }
 
         public static TServiceDocument Load<TServiceDocument>(XmlReader reader)
-            where TServiceDocument : ServiceDocument, new ()
+            where TServiceDocument : ServiceDocument, new()
         {
-            AtomPub10ServiceDocumentFormatter<TServiceDocument> formatter = new AtomPub10ServiceDocumentFormatter<TServiceDocument>();
+            AtomPub10ServiceDocumentFormatter<TServiceDocument> formatter =
+                new AtomPub10ServiceDocumentFormatter<TServiceDocument>();
             formatter.ReadFrom(reader);
-            return (TServiceDocument)(object) formatter.Document;
+            return (TServiceDocument)(object)formatter.Document;
         }
 
         public ServiceDocumentFormatter GetFormatter()
@@ -97,7 +99,12 @@ namespace System.ServiceModel.Syndication
             return new Workspace();
         }
 
-        protected internal virtual bool TryParseAttribute(string name, string ns, string value, string version)
+        protected internal virtual bool TryParseAttribute(
+            string name,
+            string ns,
+            string value,
+            string version
+        )
         {
             return false;
         }
@@ -117,7 +124,10 @@ namespace System.ServiceModel.Syndication
             this.extensions.WriteElementExtensions(writer);
         }
 
-        internal void LoadElementExtensions(XmlReader readerOverUnparsedExtensions, int maxExtensionSize)
+        internal void LoadElementExtensions(
+            XmlReader readerOverUnparsedExtensions,
+            int maxExtensionSize
+        )
         {
             this.extensions.LoadElementExtensions(readerOverUnparsedExtensions, maxExtensionSize);
         }

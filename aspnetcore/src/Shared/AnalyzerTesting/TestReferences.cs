@@ -13,7 +13,8 @@ public static class TestReferences
 {
     public static readonly ReferenceAssemblies EmptyReferenceAssemblies = new("some-tfm");
 
-    public static ImmutableArray<MetadataReference> MetadataReferences { get; } = GetMetadataReferences();
+    public static ImmutableArray<MetadataReference> MetadataReferences { get; } =
+        GetMetadataReferences();
 
     private static ImmutableArray<MetadataReference> GetMetadataReferences()
     {
@@ -21,9 +22,17 @@ public static class TestReferences
 
         var references = ImmutableArray.CreateBuilder<MetadataReference>();
 
-        foreach (var defaultCompileLibrary in DependencyContext.Load(typeof(TestReferences).Assembly).CompileLibraries)
+        foreach (
+            var defaultCompileLibrary in DependencyContext
+                .Load(typeof(TestReferences).Assembly)
+                .CompileLibraries
+        )
         {
-            foreach (var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(new AppBaseCompilationAssemblyResolver()))
+            foreach (
+                var resolveReferencePath in defaultCompileLibrary.ResolveReferencePaths(
+                    new AppBaseCompilationAssemblyResolver()
+                )
+            )
             {
                 TryAdd(resolveReferencePath);
             }
@@ -43,10 +52,12 @@ public static class TestReferences
         {
             var name = Path.GetFileNameWithoutExtension(assemblyPath);
 
-            if (!name.StartsWith("Microsoft.Extensions", StringComparison.Ordinal) &&
-                !name.StartsWith("Microsoft.AspNetCore", StringComparison.Ordinal) &&
-                !name.StartsWith("System", StringComparison.Ordinal) &&
-                !name.StartsWith("netstandard", StringComparison.Ordinal))
+            if (
+                !name.StartsWith("Microsoft.Extensions", StringComparison.Ordinal)
+                && !name.StartsWith("Microsoft.AspNetCore", StringComparison.Ordinal)
+                && !name.StartsWith("System", StringComparison.Ordinal)
+                && !name.StartsWith("netstandard", StringComparison.Ordinal)
+            )
             {
                 return;
             }

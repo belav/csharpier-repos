@@ -1,14 +1,13 @@
 ﻿//Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Client
 {
@@ -24,10 +23,12 @@ namespace System.Data.Services.Client
 
         private bool authorNamePresent;
 
-        internal EpmSyndicationContentSerializer(EpmTargetTree tree, object element, XmlWriter target)
-            : base(tree, true, element, target)
-        {
-        }
+        internal EpmSyndicationContentSerializer(
+            EpmTargetTree tree,
+            object element,
+            XmlWriter target
+        )
+            : base(tree, true, element, target) { }
 
         public void Dispose()
         {
@@ -35,7 +36,10 @@ namespace System.Data.Services.Client
             this.CreateUpdated();
         }
 
-        protected override void Serialize(EpmTargetPathSegment targetSegment, EpmSerializationKind kind)
+        protected override void Serialize(
+            EpmTargetPathSegment targetSegment,
+            EpmSerializationKind kind
+        )
         {
             if (targetSegment.HasContent)
             {
@@ -70,18 +74,28 @@ namespace System.Data.Services.Client
                         break;
                 }
 
-                Action<String, bool, bool> textSyndicationWriter = (c, nonTextPossible, atomDateConstruct) =>
+                Action<String, bool, bool> textSyndicationWriter = (
+                    c,
+                    nonTextPossible,
+                    atomDateConstruct
+                ) =>
                 {
                     this.Target.WriteStartElement(c, XmlConstants.AtomNamespace);
                     if (nonTextPossible)
                     {
-                        this.Target.WriteAttributeString(XmlConstants.AtomTypeAttributeName, String.Empty, contentType);
+                        this.Target.WriteAttributeString(
+                            XmlConstants.AtomTypeAttributeName,
+                            String.Empty,
+                            contentType
+                        );
                     }
 
-                    String textPropertyValue = 
-                        propertyValue != null   ? ClientConvert.ToString(propertyValue, atomDateConstruct) :
-                        atomDateConstruct       ? ClientConvert.ToString(DateTime.MinValue, atomDateConstruct) : 
-                        String.Empty;
+                    String textPropertyValue =
+                        propertyValue != null
+                            ? ClientConvert.ToString(propertyValue, atomDateConstruct)
+                        : atomDateConstruct
+                            ? ClientConvert.ToString(DateTime.MinValue, atomDateConstruct)
+                        : String.Empty;
 
                     contentWriter(textPropertyValue);
                     this.Target.WriteEndElement();
@@ -119,7 +133,10 @@ namespace System.Data.Services.Client
                         textSyndicationWriter(XmlConstants.AtomTitleElementName, true, false);
                         break;
                     default:
-                        Debug.Assert(false, "Unhandled SyndicationItemProperty enum value - should never get here.");
+                        Debug.Assert(
+                            false,
+                            "Unhandled SyndicationItemProperty enum value - should never get here."
+                        );
                         break;
                 }
             }
@@ -133,7 +150,10 @@ namespace System.Data.Services.Client
                 }
                 else if (targetSegment.SegmentName == XmlConstants.AtomContributorElementName)
                 {
-                    this.Target.WriteStartElement(XmlConstants.AtomContributorElementName, XmlConstants.AtomNamespace);
+                    this.Target.WriteStartElement(
+                        XmlConstants.AtomContributorElementName,
+                        XmlConstants.AtomNamespace
+                    );
                     base.Serialize(targetSegment, kind);
                     this.Target.WriteEndElement();
                 }
@@ -150,13 +170,23 @@ namespace System.Data.Services.Client
             {
                 if (createNull)
                 {
-                    this.Target.WriteStartElement(XmlConstants.AtomAuthorElementName, XmlConstants.AtomNamespace);
-                    this.Target.WriteElementString(XmlConstants.AtomNameElementName, XmlConstants.AtomNamespace, String.Empty);
+                    this.Target.WriteStartElement(
+                        XmlConstants.AtomAuthorElementName,
+                        XmlConstants.AtomNamespace
+                    );
+                    this.Target.WriteElementString(
+                        XmlConstants.AtomNameElementName,
+                        XmlConstants.AtomNamespace,
+                        String.Empty
+                    );
                     this.Target.WriteEndElement();
                 }
                 else
                 {
-                    this.Target.WriteStartElement(XmlConstants.AtomAuthorElementName, XmlConstants.AtomNamespace);
+                    this.Target.WriteStartElement(
+                        XmlConstants.AtomAuthorElementName,
+                        XmlConstants.AtomNamespace
+                    );
                 }
 
                 this.authorInfoPresent = true;
@@ -165,13 +195,20 @@ namespace System.Data.Services.Client
 
         private void FinishAuthor()
         {
-            Debug.Assert(this.authorInfoPresent == true, "Must have already written the start element for author");
+            Debug.Assert(
+                this.authorInfoPresent == true,
+                "Must have already written the start element for author"
+            );
             if (this.authorNamePresent == false)
             {
-                this.Target.WriteElementString(XmlConstants.AtomNameElementName, XmlConstants.AtomNamespace, String.Empty);
+                this.Target.WriteElementString(
+                    XmlConstants.AtomNameElementName,
+                    XmlConstants.AtomNamespace,
+                    String.Empty
+                );
                 this.authorNamePresent = true;
             }
- 
+
             this.Target.WriteEndElement();
         }
 
@@ -179,7 +216,11 @@ namespace System.Data.Services.Client
         {
             if (!this.updatedPresent)
             {
-                this.Target.WriteElementString(XmlConstants.AtomUpdatedElementName, XmlConstants.AtomNamespace, XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.RoundtripKind));
+                this.Target.WriteElementString(
+                    XmlConstants.AtomUpdatedElementName,
+                    XmlConstants.AtomNamespace,
+                    XmlConvert.ToString(DateTime.UtcNow, XmlDateTimeSerializationMode.RoundtripKind)
+                );
             }
         }
     }

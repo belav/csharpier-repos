@@ -16,7 +16,9 @@ namespace System.Reflection.Emit.Tests
         [InlineData(GenericParameterAttributes.ReferenceTypeConstraint)]
         [InlineData(GenericParameterAttributes.SpecialConstraintMask)]
         [InlineData(GenericParameterAttributes.VarianceMask)]
-        public void SetGenericParameterAttributes(GenericParameterAttributes genericParameterAttributes)
+        public void SetGenericParameterAttributes(
+            GenericParameterAttributes genericParameterAttributes
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             string[] typeParamNames = new string[] { "TFirst" };

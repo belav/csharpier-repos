@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,83 +27,79 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Configuration {
-	[TestFixture]
-	public class LongValidatorTest
-	{
-		[Test]
-		public void CanValidate ()
-		{
-			LongValidator v = new LongValidator (1L, 1L);
+namespace MonoTests.System.Configuration
+{
+    [TestFixture]
+    public class LongValidatorTest
+    {
+        [Test]
+        public void CanValidate()
+        {
+            LongValidator v = new LongValidator(1L, 1L);
 
-			Assert.IsFalse (v.CanValidate (typeof (TimeSpan)), "A1");
-			Assert.IsFalse (v.CanValidate (typeof (int)), "A2");
-			Assert.IsTrue (v.CanValidate (typeof (long)), "A3");
-		}
+            Assert.IsFalse(v.CanValidate(typeof(TimeSpan)), "A1");
+            Assert.IsFalse(v.CanValidate(typeof(int)), "A2");
+            Assert.IsTrue(v.CanValidate(typeof(long)), "A3");
+        }
 
-		[Test]
-		public void Validate_inRange ()
-		{
-			LongValidator v = new LongValidator (5000L, 10000L);
-			v.Validate (7000L);
-		}
+        [Test]
+        public void Validate_inRange()
+        {
+            LongValidator v = new LongValidator(5000L, 10000L);
+            v.Validate(7000L);
+        }
 
-		[Test]
-		public void Validate_Inclusive ()
-		{
-			LongValidator v = new LongValidator (5000L, 10000L, false);
-			v.Validate (5000L);
-			v.Validate (10000L);
-		}
+        [Test]
+        public void Validate_Inclusive()
+        {
+            LongValidator v = new LongValidator(5000L, 10000L, false);
+            v.Validate(5000L);
+            v.Validate(10000L);
+        }
 
-		[Test]
-		public void Validate_Exclusive ()
-		{
-			LongValidator v = new LongValidator (5000L, 10000L, true);
-			v.Validate (1000L);
-			v.Validate (15000L);
-		}
+        [Test]
+        public void Validate_Exclusive()
+        {
+            LongValidator v = new LongValidator(5000L, 10000L, true);
+            v.Validate(1000L);
+            v.Validate(15000L);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Validate_Exclusive_fail1 ()
-		{
-			LongValidator v = new LongValidator (5000L, 10000L, true);
-			v.Validate (5000L);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Validate_Exclusive_fail1()
+        {
+            LongValidator v = new LongValidator(5000L, 10000L, true);
+            v.Validate(5000L);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Validate_Exclusive_fail2 ()
-		{
-			LongValidator v = new LongValidator (5000L, 10000L, true);
-			v.Validate (10000L);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Validate_Exclusive_fail2()
+        {
+            LongValidator v = new LongValidator(5000L, 10000L, true);
+            v.Validate(10000L);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Validate_Exclusive_fail3 ()
-		{
-			LongValidator v = new LongValidator (5000L, 10000L, true);
-			v.Validate (7000L);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Validate_Exclusive_fail3()
+        {
+            LongValidator v = new LongValidator(5000L, 10000L, true);
+            v.Validate(7000L);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Validate_Resolution ()
-		{
-			LongValidator v = new LongValidator (20000L,
-							     50000L,
-							     false,
-							     3000L);
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Validate_Resolution()
+        {
+            LongValidator v = new LongValidator(20000L, 50000L, false, 3000L);
 
-			v.Validate (40000L);
-		}
-	}
+            v.Validate(40000L);
+        }
+    }
 }
-

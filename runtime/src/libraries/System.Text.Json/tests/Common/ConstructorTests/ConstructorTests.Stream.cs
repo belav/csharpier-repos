@@ -11,7 +11,10 @@ namespace System.Text.Json.Serialization.Tests
     public abstract partial class ConstructorTests
     {
         [Fact]
-        [SkipOnCoreClr("https://github.com/dotnet/runtime/issues/45464", ~RuntimeConfiguration.Release)]
+        [SkipOnCoreClr(
+            "https://github.com/dotnet/runtime/issues/45464",
+            ~RuntimeConfiguration.Release
+        )]
         public async Task ReadSimpleObjectAsync()
         {
             if (StreamingSerializer is null)
@@ -25,7 +28,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
-                        DefaultBufferSize = 1
+                        DefaultBufferSize = 1,
                     };
 
                     var obj = await StreamingSerializer.DeserializeWrapper<T>(stream, options);
@@ -38,28 +41,75 @@ namespace System.Text.Json.Serialization.Tests
             Task[] tasks = new Task[16];
 
             // Simple models can be deserialized.
-            tasks[0] = Task.Run(async () => await RunTestAsync<Parameterized_IndexViewModel_Immutable>(Parameterized_IndexViewModel_Immutable.s_data));
+            tasks[0] = Task.Run(async () =>
+                await RunTestAsync<Parameterized_IndexViewModel_Immutable>(
+                    Parameterized_IndexViewModel_Immutable.s_data
+                )
+            );
             // Complex models can be deserialized.
-            tasks[1] = Task.Run(async () => await RunTestAsync<ObjWCtorMixedParams>(ObjWCtorMixedParams.s_data));
-            tasks[2] = Task.Run(async () => await RunTestAsync<Parameterized_Class_With_ComplexTuple>(Parameterized_Class_With_ComplexTuple.s_data));
+            tasks[1] = Task.Run(async () =>
+                await RunTestAsync<ObjWCtorMixedParams>(ObjWCtorMixedParams.s_data)
+            );
+            tasks[2] = Task.Run(async () =>
+                await RunTestAsync<Parameterized_Class_With_ComplexTuple>(
+                    Parameterized_Class_With_ComplexTuple.s_data
+                )
+            );
             // JSON that doesn't bind to ctor args are matched with properties or ignored (as appropriate).
             tasks[3] = Task.Run(async () => await RunTestAsync<Person_Class>(Person_Class.s_data));
-            tasks[4] = Task.Run(async () => await RunTestAsync<Person_Struct>(Person_Struct.s_data));
+            tasks[4] = Task.Run(async () => await RunTestAsync<Person_Struct>(Person_Struct.s_data)
+            );
             // JSON that doesn't bind to ctor args or properties are sent to ext data if avaiable.
-            tasks[5] = Task.Run(async () => await RunTestAsync<Parameterized_Person>(Parameterized_Person.s_data));
-            tasks[6] = Task.Run(async () => await RunTestAsync<Parameterized_Person_ObjExtData>(Parameterized_Person_ObjExtData.s_data));
+            tasks[5] = Task.Run(async () =>
+                await RunTestAsync<Parameterized_Person>(Parameterized_Person.s_data)
+            );
+            tasks[6] = Task.Run(async () =>
+                await RunTestAsync<Parameterized_Person_ObjExtData>(
+                    Parameterized_Person_ObjExtData.s_data
+                )
+            );
             // Up to 64 ctor args are supported.
-            tasks[7] = Task.Run(async () => await RunTestAsync<Class_With_Ctor_With_64_Params>(Class_With_Ctor_With_64_Params.Data));
+            tasks[7] = Task.Run(async () =>
+                await RunTestAsync<Class_With_Ctor_With_64_Params>(
+                    Class_With_Ctor_With_64_Params.Data
+                )
+            );
             // Arg deserialization honors attributes on matching property.
-            tasks[8] = Task.Run(async () => await RunTestAsync<Point_MembersHave_JsonPropertyName>(Point_MembersHave_JsonPropertyName.s_data));
-            tasks[9] = Task.Run(async () => await RunTestAsync<Point_MembersHave_JsonConverter>(Point_MembersHave_JsonConverter.s_data));
-            tasks[10] = Task.Run(async () => await RunTestAsync<Point_MembersHave_JsonIgnore>(Point_MembersHave_JsonIgnore.s_data));
-            tasks[11] = Task.Run(async () => await RunTestAsync<Point_MembersHave_JsonInclude>(Point_MembersHave_JsonInclude.s_data));
-            tasks[12] = Task.Run(async () => await RunTestAsync<ClassWithFiveArgs_MembersHave_JsonNumberHandlingAttributes>(ClassWithFiveArgs_MembersHave_JsonNumberHandlingAttributes.s_data));
+            tasks[8] = Task.Run(async () =>
+                await RunTestAsync<Point_MembersHave_JsonPropertyName>(
+                    Point_MembersHave_JsonPropertyName.s_data
+                )
+            );
+            tasks[9] = Task.Run(async () =>
+                await RunTestAsync<Point_MembersHave_JsonConverter>(
+                    Point_MembersHave_JsonConverter.s_data
+                )
+            );
+            tasks[10] = Task.Run(async () =>
+                await RunTestAsync<Point_MembersHave_JsonIgnore>(
+                    Point_MembersHave_JsonIgnore.s_data
+                )
+            );
+            tasks[11] = Task.Run(async () =>
+                await RunTestAsync<Point_MembersHave_JsonInclude>(
+                    Point_MembersHave_JsonInclude.s_data
+                )
+            );
+            tasks[12] = Task.Run(async () =>
+                await RunTestAsync<ClassWithFiveArgs_MembersHave_JsonNumberHandlingAttributes>(
+                    ClassWithFiveArgs_MembersHave_JsonNumberHandlingAttributes.s_data
+                )
+            );
             // Complex JSON as last argument works
-            tasks[13] = Task.Run(async () => await RunTestAsync<Point_With_Array>(Point_With_Array.s_data));
-            tasks[14] = Task.Run(async () => await RunTestAsync<Point_With_Dictionary>(Point_With_Dictionary.s_data));
-            tasks[15] = Task.Run(async () => await RunTestAsync<Point_With_Object>(Point_With_Object.s_data));
+            tasks[13] = Task.Run(async () =>
+                await RunTestAsync<Point_With_Array>(Point_With_Array.s_data)
+            );
+            tasks[14] = Task.Run(async () =>
+                await RunTestAsync<Point_With_Dictionary>(Point_With_Dictionary.s_data)
+            );
+            tasks[15] = Task.Run(async () =>
+                await RunTestAsync<Point_With_Object>(Point_With_Object.s_data)
+            );
 
             await Task.WhenAll(tasks);
         }
@@ -93,26 +143,65 @@ namespace System.Text.Json.Serialization.Tests
             Task[] tasks = new Task[14];
 
             // Simple models can be deserialized.
-            tasks[0] = Task.Run(async () => await RunTestAsync<Parameterized_IndexViewModel_Immutable>(Parameterized_IndexViewModel_Immutable.s_json));
+            tasks[0] = Task.Run(async () =>
+                await RunTestAsync<Parameterized_IndexViewModel_Immutable>(
+                    Parameterized_IndexViewModel_Immutable.s_json
+                )
+            );
             // Complex models can be deserialized.
-            tasks[1] = Task.Run(async () => await RunTestAsync<ObjWCtorMixedParams>(ObjWCtorMixedParams.s_json));
-            tasks[2] = Task.Run(async () => await RunTestAsync<Parameterized_Class_With_ComplexTuple>(Parameterized_Class_With_ComplexTuple.s_json));
+            tasks[1] = Task.Run(async () =>
+                await RunTestAsync<ObjWCtorMixedParams>(ObjWCtorMixedParams.s_json)
+            );
+            tasks[2] = Task.Run(async () =>
+                await RunTestAsync<Parameterized_Class_With_ComplexTuple>(
+                    Parameterized_Class_With_ComplexTuple.s_json
+                )
+            );
             // JSON that doesn't bind to ctor args are matched with properties or ignored (as appropriate).
             tasks[3] = Task.Run(async () => await RunTestAsync<Person_Class>(Person_Class.s_json));
-            tasks[4] = Task.Run(async () => await RunTestAsync<Person_Struct>(Person_Struct.s_json));
+            tasks[4] = Task.Run(async () => await RunTestAsync<Person_Struct>(Person_Struct.s_json)
+            );
             // JSON that doesn't bind to ctor args or properties are sent to ext data if avaiable.
-            tasks[5] = Task.Run(async () => await RunTestAsync<Parameterized_Person>(Parameterized_Person.s_json));
-            tasks[6] = Task.Run(async () => await RunTestAsync<Parameterized_Person_ObjExtData>(Parameterized_Person_ObjExtData.s_json));
+            tasks[5] = Task.Run(async () =>
+                await RunTestAsync<Parameterized_Person>(Parameterized_Person.s_json)
+            );
+            tasks[6] = Task.Run(async () =>
+                await RunTestAsync<Parameterized_Person_ObjExtData>(
+                    Parameterized_Person_ObjExtData.s_json
+                )
+            );
             // Up to 64 ctor args are supported.
-            tasks[7] = Task.Run(async () => await RunTestAsync<Class_With_Ctor_With_64_Params>(Encoding.UTF8.GetString(Class_With_Ctor_With_64_Params.Data)));
+            tasks[7] = Task.Run(async () =>
+                await RunTestAsync<Class_With_Ctor_With_64_Params>(
+                    Encoding.UTF8.GetString(Class_With_Ctor_With_64_Params.Data)
+                )
+            );
             // Arg8deserialization honors attributes on matching property.
-            tasks[8] = Task.Run(async () => await RunTestAsync<Point_MembersHave_JsonPropertyName>(Point_MembersHave_JsonPropertyName.s_json));
-            tasks[9] = Task.Run(async () => await RunTestAsync<Point_MembersHave_JsonConverter>(Point_MembersHave_JsonConverter.s_json));
-            tasks[10] = Task.Run(async () => await RunTestAsync<Point_MembersHave_JsonIgnore>(Point_MembersHave_JsonIgnore.s_json));
+            tasks[8] = Task.Run(async () =>
+                await RunTestAsync<Point_MembersHave_JsonPropertyName>(
+                    Point_MembersHave_JsonPropertyName.s_json
+                )
+            );
+            tasks[9] = Task.Run(async () =>
+                await RunTestAsync<Point_MembersHave_JsonConverter>(
+                    Point_MembersHave_JsonConverter.s_json
+                )
+            );
+            tasks[10] = Task.Run(async () =>
+                await RunTestAsync<Point_MembersHave_JsonIgnore>(
+                    Point_MembersHave_JsonIgnore.s_json
+                )
+            );
             // Complex JSON as last argument works
-            tasks[11] = Task.Run(async () => await RunTestAsync<Point_With_Array>(Point_With_Array.s_json));
-            tasks[12] = Task.Run(async () => await RunTestAsync<Point_With_Dictionary>(Point_With_Dictionary.s_json));
-            tasks[13] = Task.Run(async () => await RunTestAsync<Point_With_Object>(Point_With_Object.s_json));
+            tasks[11] = Task.Run(async () =>
+                await RunTestAsync<Point_With_Array>(Point_With_Array.s_json)
+            );
+            tasks[12] = Task.Run(async () =>
+                await RunTestAsync<Point_With_Dictionary>(Point_With_Dictionary.s_json)
+            );
+            tasks[13] = Task.Run(async () =>
+                await RunTestAsync<Point_With_Object>(Point_With_Object.s_json)
+            );
 
             await Task.WhenAll(tasks);
         }
@@ -143,7 +232,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
-                        DefaultBufferSize = 1
+                        DefaultBufferSize = 1,
                     };
 
                     value = await StreamingSerializer.DeserializeWrapper<T>(stream, options);
@@ -153,7 +242,7 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
-                        DefaultBufferSize = 1
+                        DefaultBufferSize = 1,
                     };
 
                     value = await StreamingSerializer.DeserializeWrapper<T>(stream, options);
@@ -219,7 +308,8 @@ namespace System.Text.Json.Serialization.Tests
                 return Encoding.UTF8.GetBytes(sb.ToString());
             }
 
-            const string value = "ul4Oolt4VgbNm5Y1qPX911wxhyHFEQmmWBcIBR6BfUaNuIn3YOJ8vqtqz2WAh924rEILMzlh6JUhQDcmH00SI6Kv4iGTHQfGXxqWul4Oolt4VgbNm5Y1qPX911wxhyHFEQmmWBcIBR6";
+            const string value =
+                "ul4Oolt4VgbNm5Y1qPX911wxhyHFEQmmWBcIBR6BfUaNuIn3YOJ8vqtqz2WAh924rEILMzlh6JUhQDcmH00SI6Kv4iGTHQfGXxqWul4Oolt4VgbNm5Y1qPX911wxhyHFEQmmWBcIBR6";
 
             for (int i = 0; i < 20; i++)
             {
@@ -227,10 +317,14 @@ namespace System.Text.Json.Serialization.Tests
                 {
                     JsonSerializerOptions options = new JsonSerializerOptions
                     {
-                        DefaultBufferSize = 1
+                        DefaultBufferSize = 1,
                     };
 
-                    ClassWithStrings obj = await StreamingSerializer.DeserializeWrapper<ClassWithStrings>(stream, options);
+                    ClassWithStrings obj =
+                        await StreamingSerializer.DeserializeWrapper<ClassWithStrings>(
+                            stream,
+                            options
+                        );
                     obj.Verify(value);
                 }
             }
@@ -244,12 +338,16 @@ namespace System.Text.Json.Serialization.Tests
 
             [JsonIgnore]
             public string AValue { get; }
+
             [JsonIgnore]
             public string EValue { get; }
+
             [JsonIgnore]
             public string IValue { get; }
+
             [JsonIgnore]
             public string MValue { get; }
+
             [JsonIgnore]
             public string QValue { get; }
 
@@ -292,7 +390,8 @@ namespace System.Text.Json.Serialization.Tests
                 string mValue,
                 string oValue,
                 string qValue,
-                string sValue)
+                string sValue
+            )
             {
                 AValue = aValue;
                 CValue = cValue;

@@ -5,14 +5,11 @@ using System.Speech.Internal.SrgsParser;
 
 namespace System.Speech.Internal.GrammarBuilding
 {
-
     internal sealed class GrammarBuilderWildcard : GrammarBuilderBase
     {
         #region Constructors
 
-        internal GrammarBuilderWildcard()
-        {
-        }
+        internal GrammarBuilderWildcard() { }
 
         #endregion
 
@@ -22,6 +19,7 @@ namespace System.Speech.Internal.GrammarBuilding
             GrammarBuilderWildcard refObj = obj as GrammarBuilderWildcard;
             return refObj != null;
         }
+
         public override int GetHashCode()
         {
             return base.GetHashCode();
@@ -36,7 +34,12 @@ namespace System.Speech.Internal.GrammarBuilding
             return new GrammarBuilderWildcard();
         }
 
-        internal override IElement CreateElement(IElementFactory elementFactory, IElement parent, IRule rule, IdentifierCollection ruleIds)
+        internal override IElement CreateElement(
+            IElementFactory elementFactory,
+            IElement parent,
+            IRule rule,
+            IdentifierCollection ruleIds
+        )
         {
             // Return a ruleref to Garbage
             IRuleRef ruleRef = elementFactory.Garbage;
@@ -52,10 +55,7 @@ namespace System.Speech.Internal.GrammarBuilding
 
         internal override string DebugSummary
         {
-            get
-            {
-                return "*";
-            }
+            get { return "*"; }
         }
 
         #endregion

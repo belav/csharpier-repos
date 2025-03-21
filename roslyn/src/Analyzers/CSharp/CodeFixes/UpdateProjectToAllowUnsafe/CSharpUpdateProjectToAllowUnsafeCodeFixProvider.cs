@@ -12,16 +12,24 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UpdateProjectToAllowUnsafe
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UpdateProjectToAllowUnsafe), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.UpdateProjectToAllowUnsafe
+        ),
+        Shared
+    ]
     internal class CSharpUpdateProjectToAllowUnsafeCodeFixProvider : CodeFixProvider
     {
         private const string CS0227 = nameof(CS0227); // error CS0227: Unsafe code may only appear if compiling with /unsafe
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpUpdateProjectToAllowUnsafeCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpUpdateProjectToAllowUnsafeCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(CS0227);
@@ -35,8 +43,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UpdateProjectToAllowUnsafe
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            context.RegisterCodeFix(ProjectOptionsChangeAction.Create(CSharpCodeFixesResources.Allow_unsafe_code_in_this_project,
-                _ => Task.FromResult(AllowUnsafeOnProject(context.Document.Project))), context.Diagnostics);
+            context.RegisterCodeFix(
+                ProjectOptionsChangeAction.Create(
+                    CSharpCodeFixesResources.Allow_unsafe_code_in_this_project,
+                    _ => Task.FromResult(AllowUnsafeOnProject(context.Document.Project))
+                ),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
@@ -44,7 +57,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UpdateProjectToAllowUnsafe
         {
             var compilationOptions = (CSharpCompilationOptions?)project.CompilationOptions;
             Contract.ThrowIfNull(compilationOptions);
-            return project.Solution.WithProjectCompilationOptions(project.Id, compilationOptions.WithAllowUnsafe(true));
+            return project.Solution.WithProjectCompilationOptions(
+                project.Id,
+                compilationOptions.WithAllowUnsafe(true)
+            );
         }
     }
 }

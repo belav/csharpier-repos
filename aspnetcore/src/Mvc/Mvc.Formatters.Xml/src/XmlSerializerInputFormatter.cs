@@ -18,8 +18,10 @@ namespace Microsoft.AspNetCore.Mvc.Formatters;
 public class XmlSerializerInputFormatter : TextInputFormatter, IInputFormatterExceptionPolicy
 {
     private const int DefaultMemoryThreshold = 1024 * 30;
-    private readonly ConcurrentDictionary<Type, object> _serializerCache = new ConcurrentDictionary<Type, object>();
-    private readonly XmlDictionaryReaderQuotas _readerQuotas = FormattingUtilities.GetDefaultXmlReaderQuotas();
+    private readonly ConcurrentDictionary<Type, object> _serializerCache =
+        new ConcurrentDictionary<Type, object>();
+    private readonly XmlDictionaryReaderQuotas _readerQuotas =
+        FormattingUtilities.GetDefaultXmlReaderQuotas();
     private readonly MvcOptions _options;
 
     /// <summary>
@@ -38,9 +40,9 @@ public class XmlSerializerInputFormatter : TextInputFormatter, IInputFormatterEx
         SupportedMediaTypes.Add(MediaTypeHeaderValues.ApplicationAnyXmlSyntax);
 
         WrapperProviderFactories = new List<IWrapperProviderFactory>
-            {
-                new SerializableErrorWrapperProviderFactory(),
-            };
+        {
+            new SerializableErrorWrapperProviderFactory(),
+        };
     }
 
     /// <summary>
@@ -80,7 +82,8 @@ public class XmlSerializerInputFormatter : TextInputFormatter, IInputFormatterEx
     /// <inheritdoc />
     public override async Task<InputFormatterResult> ReadRequestBodyAsync(
         InputFormatterContext context,
-        Encoding encoding)
+        Encoding encoding
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(encoding);
@@ -142,19 +145,33 @@ public class XmlSerializerInputFormatter : TextInputFormatter, IInputFormatterEx
         }
         // XmlSerializer wraps actual exceptions (like FormatException or XmlException) into an InvalidOperationException
         // https://github.com/dotnet/corefx/blob/master/src/System.Private.Xml/src/System/Xml/Serialization/XmlSerializer.cs#L652
-        catch (InvalidOperationException exception) when (exception.InnerException != null &&
-            exception.InnerException.InnerException == null &&
-            string.Equals("Microsoft.GeneratedCode", exception.InnerException.Source, StringComparison.InvariantCulture))
+        catch (InvalidOperationException exception)
+            when (exception.InnerException != null
+                && exception.InnerException.InnerException == null
+                && string.Equals(
+                    "Microsoft.GeneratedCode",
+                    exception.InnerException.Source,
+                    StringComparison.InvariantCulture
+                )
+            )
         {
             // Know this was an XML parsing error because the inner Exception was thrown in the (generated)
             // assembly the XmlSerializer uses for parsing. The problem did not arise lower in the stack i.e. it's
             // not (for example) an out-of-memory condition.
-            throw new InputFormatterException(Resources.ErrorDeserializingInputData, exception.InnerException);
+            throw new InputFormatterException(
+                Resources.ErrorDeserializingInputData,
+                exception.InnerException
+            );
         }
-        catch (InvalidOperationException exception) when (exception.InnerException is FormatException ||
-            exception.InnerException is XmlException)
+        catch (InvalidOperationException exception)
+            when (exception.InnerException is FormatException
+                || exception.InnerException is XmlException
+            )
         {
-            throw new InputFormatterException(Resources.ErrorDeserializingInputData, exception.InnerException);
+            throw new InputFormatterException(
+                Resources.ErrorDeserializingInputData,
+                exception.InnerException
+            );
         }
         finally
         {
@@ -183,7 +200,8 @@ public class XmlSerializerInputFormatter : TextInputFormatter, IInputFormatterEx
         ArgumentNullException.ThrowIfNull(declaredType);
 
         var wrapperProvider = WrapperProviderFactories.GetWrapperProvider(
-                                                new WrapperProviderContext(declaredType, isSerialization: false));
+            new WrapperProviderContext(declaredType, isSerialization: false)
+        );
 
         return wrapperProvider?.WrappingType ?? declaredType;
     }
@@ -211,7 +229,12 @@ public class XmlSerializerInputFormatter : TextInputFormatter, IInputFormatterEx
         ArgumentNullException.ThrowIfNull(readStream);
         ArgumentNullException.ThrowIfNull(encoding);
 
-        return XmlDictionaryReader.CreateTextReader(readStream, encoding, _readerQuotas, onClose: null);
+        return XmlDictionaryReader.CreateTextReader(
+            readStream,
+            encoding,
+            _readerQuotas,
+            onClose: null
+        );
     }
 
     /// <summary>

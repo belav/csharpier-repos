@@ -9,8 +9,9 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddDbContext<MyContext>(
-            options => options.UseSqlite($"Data Source = DatabaseErrorPageSample.db"));
+        services.AddDbContext<MyContext>(options =>
+            options.UseSqlite($"Data Source = DatabaseErrorPageSample.db")
+        );
     }
 
     public void Configure(IApplicationBuilder app)
@@ -31,10 +32,7 @@ public class Startup
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                .UseKestrel()
-                .UseIISIntegration()
-                .UseStartup<Startup>();
+                webHostBuilder.UseKestrel().UseIISIntegration().UseStartup<Startup>();
             })
             .Build();
 
@@ -45,9 +43,7 @@ public class Startup
 public class MyContext : DbContext
 {
     public MyContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+        : base(options) { }
 
     public DbSet<Blog> Blog { get; set; }
 }
@@ -57,4 +53,3 @@ public class Blog
     public int BlogId { get; set; }
     public string Url { get; set; }
 }
-

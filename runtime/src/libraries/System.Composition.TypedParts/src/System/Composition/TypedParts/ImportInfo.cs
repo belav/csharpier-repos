@@ -16,8 +16,14 @@ namespace System.Composition.TypedParts
             _allowDefault = allowDefault;
         }
 
-        public bool AllowDefault { get { return _allowDefault; } }
+        public bool AllowDefault
+        {
+            get { return _allowDefault; }
+        }
 
-        public CompositionContract Contract { get { return _exportKey; } }
+        public CompositionContract Contract
+        {
+            get { return _exportKey; }
+        }
     }
 }

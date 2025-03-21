@@ -24,10 +24,19 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
 {
     protected override string DefaultScheme => MicrosoftAccountDefaults.AuthenticationScheme;
     protected override Type HandlerType => typeof(MicrosoftAccountHandler);
-    protected override bool SupportsSignIn { get => false; }
-    protected override bool SupportsSignOut { get => false; }
+    protected override bool SupportsSignIn
+    {
+        get => false;
+    }
+    protected override bool SupportsSignOut
+    {
+        get => false;
+    }
 
-    protected override void RegisterAuth(AuthenticationBuilder services, Action<MicrosoftAccountOptions> configure)
+    protected override void RegisterAuth(
+        AuthenticationBuilder services,
+        Action<MicrosoftAccountOptions> configure
+    )
     {
         services.AddMicrosoftAccount(o =>
         {
@@ -56,7 +65,7 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
                 {
                     context.Response.Redirect(context.RedirectUri + "&custom=test");
                     return Task.FromResult(0);
-                }
+                },
             };
         });
         using var server = host.GetTestServer();
@@ -176,7 +185,9 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
             o.Scope.Add("bar");
         });
         using var server = host.GetTestServer();
-        var transaction = await server.SendAsync("http://example.com/challengeWithOtherScopeWithBaseAuthenticationProperties");
+        var transaction = await server.SendAsync(
+            "http://example.com/challengeWithOtherScopeWithBaseAuthenticationProperties"
+        );
         var res = transaction.Response;
         Assert.Equal(HttpStatusCode.Redirect, res.StatusCode);
         Assert.Contains("scope=baz%20qux", res.Headers.Location.Query);
@@ -185,7 +196,11 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
     [Fact]
     public async Task AuthenticatedEventCanGetRefreshToken()
     {
-        var stateFormat = new PropertiesDataFormat(new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector("MsftTest"));
+        var stateFormat = new PropertiesDataFormat(
+            new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
+                "MsftTest"
+            )
+        );
         using var host = await CreateHost(o =>
         {
             o.ClientId = "Test Client Id";
@@ -195,39 +210,64 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
             {
                 Sender = req =>
                 {
-                    if (req.RequestUri.AbsoluteUri == "https://login.microsoftonline.com/common/oauth2/v2.0/token")
+                    if (
+                        req.RequestUri.AbsoluteUri
+                        == "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                    )
                     {
-                        return ReturnJsonResponse(new
-                        {
-                            access_token = "Test Access Token",
-                            expire_in = 3600,
-                            token_type = "Bearer",
-                            refresh_token = "Test Refresh Token"
-                        });
+                        return ReturnJsonResponse(
+                            new
+                            {
+                                access_token = "Test Access Token",
+                                expire_in = 3600,
+                                token_type = "Bearer",
+                                refresh_token = "Test Refresh Token",
+                            }
+                        );
                     }
-                    else if (req.RequestUri.GetComponents(UriComponents.SchemeAndServer | UriComponents.Path, UriFormat.UriEscaped) == "https://graph.microsoft.com/v1.0/me")
+                    else if (
+                        req.RequestUri.GetComponents(
+                            UriComponents.SchemeAndServer | UriComponents.Path,
+                            UriFormat.UriEscaped
+                        ) == "https://graph.microsoft.com/v1.0/me"
+                    )
                     {
-                        return ReturnJsonResponse(new
-                        {
-                            id = "Test User ID",
-                            displayName = "Test Name",
-                            givenName = "Test Given Name",
-                            surname = "Test Family Name",
-                            mail = "Test email"
-                        });
+                        return ReturnJsonResponse(
+                            new
+                            {
+                                id = "Test User ID",
+                                displayName = "Test Name",
+                                givenName = "Test Given Name",
+                                surname = "Test Family Name",
+                                mail = "Test email",
+                            }
+                        );
                     }
 
                     return null;
-                }
+                },
             };
             o.Events = new OAuthEvents
             {
                 OnCreatingTicket = context =>
                 {
                     var refreshToken = context.RefreshToken;
-                    context.Principal.AddIdentity(new ClaimsIdentity(new Claim[] { new Claim("RefreshToken", refreshToken, ClaimValueTypes.String, "Microsoft") }, "Microsoft"));
+                    context.Principal.AddIdentity(
+                        new ClaimsIdentity(
+                            new Claim[]
+                            {
+                                new Claim(
+                                    "RefreshToken",
+                                    refreshToken,
+                                    ClaimValueTypes.String,
+                                    "Microsoft"
+                                ),
+                            },
+                            "Microsoft"
+                        )
+                    );
                     return Task.FromResult<object>(null);
-                }
+                },
             };
         });
         var properties = new AuthenticationProperties();
@@ -238,13 +278,18 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
         var state = stateFormat.Protect(properties);
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync(
-            "https://example.com/signin-microsoft?code=TestCode&state=" + UrlEncoder.Default.Encode(state),
-            $".AspNetCore.Correlation.{correlationValue}=N");
+            "https://example.com/signin-microsoft?code=TestCode&state="
+                + UrlEncoder.Default.Encode(state),
+            $".AspNetCore.Correlation.{correlationValue}=N"
+        );
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
         Assert.Equal("/me", transaction.Response.Headers.GetValues("Location").First());
         Assert.Equal(2, transaction.SetCookie.Count);
         Assert.Contains($".AspNetCore.Correlation.{correlationValue}", transaction.SetCookie[0]);
-        Assert.Contains(".AspNetCore." + TestExtensions.CookieAuthenticationScheme, transaction.SetCookie[1]);
+        Assert.Contains(
+            ".AspNetCore." + TestExtensions.CookieAuthenticationScheme,
+            transaction.SetCookie[1]
+        );
 
         var authCookie = transaction.AuthenticationCookieValue;
         transaction = await server.SendAsync("https://example.com/me", authCookie);
@@ -255,7 +300,11 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
     [Fact]
     public async Task ChallengeWillUseAuthenticationPropertiesParametersAsQueryArguments()
     {
-        var stateFormat = new PropertiesDataFormat(new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector("MicrosoftTest"));
+        var stateFormat = new PropertiesDataFormat(
+            new EphemeralDataProtectionProvider(NullLoggerFactory.Instance).CreateProtector(
+                "MicrosoftTest"
+            )
+        );
         using var host = await CreateHost(o =>
         {
             o.ClientId = "Test Id";
@@ -294,46 +343,64 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
             {
                 Sender = req =>
                 {
-                    if (req.RequestUri.AbsoluteUri == "https://login.microsoftonline.com/common/oauth2/v2.0/token")
+                    if (
+                        req.RequestUri.AbsoluteUri
+                        == "https://login.microsoftonline.com/common/oauth2/v2.0/token"
+                    )
                     {
                         var body = req.Content.ReadAsStringAsync().Result;
                         var form = new FormReader(body);
                         var entries = form.ReadForm();
                         Assert.Equal("Test Client Id", entries["client_id"]);
-                        Assert.Equal("https://example.com/signin-microsoft", entries["redirect_uri"]);
+                        Assert.Equal(
+                            "https://example.com/signin-microsoft",
+                            entries["redirect_uri"]
+                        );
                         Assert.Equal("Test Client Secret", entries["client_secret"]);
                         Assert.Equal("TestCode", entries["code"]);
                         Assert.Equal("authorization_code", entries["grant_type"]);
                         Assert.False(string.IsNullOrEmpty(entries["code_verifier"]));
 
-                        return ReturnJsonResponse(new
-                        {
-                            access_token = "Test Access Token",
-                            expire_in = 3600,
-                            token_type = "Bearer",
-                        });
+                        return ReturnJsonResponse(
+                            new
+                            {
+                                access_token = "Test Access Token",
+                                expire_in = 3600,
+                                token_type = "Bearer",
+                            }
+                        );
                     }
-                    else if (req.RequestUri.GetComponents(UriComponents.SchemeAndServer | UriComponents.Path, UriFormat.UriEscaped) == "https://graph.microsoft.com/v1.0/me")
+                    else if (
+                        req.RequestUri.GetComponents(
+                            UriComponents.SchemeAndServer | UriComponents.Path,
+                            UriFormat.UriEscaped
+                        ) == "https://graph.microsoft.com/v1.0/me"
+                    )
                     {
-                        return ReturnJsonResponse(new
-                        {
-                            id = "Test User ID",
-                            displayName = "Test Name",
-                            givenName = "Test Given Name",
-                            surname = "Test Family Name",
-                            mail = "Test email"
-                        });
+                        return ReturnJsonResponse(
+                            new
+                            {
+                                id = "Test User ID",
+                                displayName = "Test Name",
+                                givenName = "Test Given Name",
+                                surname = "Test Family Name",
+                                mail = "Test email",
+                            }
+                        );
                     }
 
                     return null;
-                }
+                },
             };
         });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/challenge");
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
         var locationUri = transaction.Response.Headers.Location;
-        Assert.StartsWith("https://login.microsoftonline.com/common/oauth2/v2.0/authorize", locationUri.AbsoluteUri);
+        Assert.StartsWith(
+            "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+            locationUri.AbsoluteUri
+        );
 
         var queryParams = QueryHelpers.ParseQuery(locationUri.Query);
         Assert.False(string.IsNullOrEmpty(queryParams["code_challenge"]));
@@ -344,80 +411,106 @@ public class MicrosoftAccountTests : RemoteAuthenticationTests<MicrosoftAccountO
 
         transaction = await server.SendAsync(
             "https://example.com/signin-microsoft?code=TestCode&state=" + queryParams["state"],
-            nonceCookie);
+            nonceCookie
+        );
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
         Assert.Equal("/me", transaction.Response.Headers.GetValues("Location").First());
         Assert.Equal(2, transaction.SetCookie.Count);
         Assert.StartsWith(".AspNetCore.Correlation.", transaction.SetCookie[0]);
-        Assert.StartsWith(".AspNetCore." + TestExtensions.CookieAuthenticationScheme, transaction.SetCookie[1]);
+        Assert.StartsWith(
+            ".AspNetCore." + TestExtensions.CookieAuthenticationScheme,
+            transaction.SetCookie[1]
+        );
     }
 
     private static async Task<IHost> CreateHost(Action<MicrosoftAccountOptions> configureOptions)
     {
         var host = new HostBuilder()
             .ConfigureWebHost(builder =>
-                builder.UseTestServer()
+                builder
+                    .UseTestServer()
                     .Configure(app =>
                     {
                         app.UseAuthentication();
-                        app.Use(async (context, next) =>
-                        {
-                            var req = context.Request;
-                            var res = context.Response;
-                            if (req.Path == new PathString("/challenge"))
+                        app.Use(
+                            async (context, next) =>
                             {
-                                await context.ChallengeAsync("Microsoft", new MicrosoftChallengeProperties
+                                var req = context.Request;
+                                var res = context.Response;
+                                if (req.Path == new PathString("/challenge"))
                                 {
-                                    Prompt = "select_account",
-                                    LoginHint = "username",
-                                    DomainHint = "consumers",
+                                    await context.ChallengeAsync(
+                                        "Microsoft",
+                                        new MicrosoftChallengeProperties
+                                        {
+                                            Prompt = "select_account",
+                                            LoginHint = "username",
+                                            DomainHint = "consumers",
 #pragma warning disable CS0618 // Type or member is obsolete
-                                    ResponseMode = "query",
+                                            ResponseMode = "query",
 #pragma warning restore CS0618 // Type or member is obsolete
-                                    RedirectUri = "/me"
-                                });
+                                            RedirectUri = "/me",
+                                        }
+                                    );
+                                }
+                                else if (req.Path == new PathString("/challengeWithOtherScope"))
+                                {
+                                    var properties = new OAuthChallengeProperties();
+                                    properties.SetScope("baz", "qux");
+                                    await context.ChallengeAsync("Microsoft", properties);
+                                }
+                                else if (
+                                    req.Path
+                                    == new PathString(
+                                        "/challengeWithOtherScopeWithBaseAuthenticationProperties"
+                                    )
+                                )
+                                {
+                                    var properties = new AuthenticationProperties();
+                                    properties.SetParameter(
+                                        OAuthChallengeProperties.ScopeKey,
+                                        new string[] { "baz", "qux" }
+                                    );
+                                    await context.ChallengeAsync("Microsoft", properties);
+                                }
+                                else if (req.Path == new PathString("/me"))
+                                {
+                                    await res.DescribeAsync(context.User);
+                                }
+                                else if (req.Path == new PathString("/signIn"))
+                                {
+                                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                        context.SignInAsync("Microsoft", new ClaimsPrincipal())
+                                    );
+                                }
+                                else if (req.Path == new PathString("/signOut"))
+                                {
+                                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                        context.SignOutAsync("Microsoft")
+                                    );
+                                }
+                                else if (req.Path == new PathString("/forbid"))
+                                {
+                                    await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                                        context.ForbidAsync("Microsoft")
+                                    );
+                                }
+                                else
+                                {
+                                    await next(context);
+                                }
                             }
-                            else if (req.Path == new PathString("/challengeWithOtherScope"))
-                            {
-                                var properties = new OAuthChallengeProperties();
-                                properties.SetScope("baz", "qux");
-                                await context.ChallengeAsync("Microsoft", properties);
-                            }
-                            else if (req.Path == new PathString("/challengeWithOtherScopeWithBaseAuthenticationProperties"))
-                            {
-                                var properties = new AuthenticationProperties();
-                                properties.SetParameter(OAuthChallengeProperties.ScopeKey, new string[] { "baz", "qux" });
-                                await context.ChallengeAsync("Microsoft", properties);
-                            }
-                            else if (req.Path == new PathString("/me"))
-                            {
-                                await res.DescribeAsync(context.User);
-                            }
-                            else if (req.Path == new PathString("/signIn"))
-                            {
-                                await Assert.ThrowsAsync<InvalidOperationException>(() => context.SignInAsync("Microsoft", new ClaimsPrincipal()));
-                            }
-                            else if (req.Path == new PathString("/signOut"))
-                            {
-                                await Assert.ThrowsAsync<InvalidOperationException>(() => context.SignOutAsync("Microsoft"));
-                            }
-                            else if (req.Path == new PathString("/forbid"))
-                            {
-                                await Assert.ThrowsAsync<InvalidOperationException>(() => context.ForbidAsync("Microsoft"));
-                            }
-                            else
-                            {
-                                await next(context);
-                            }
-                        });
+                        );
                     })
                     .ConfigureServices(services =>
                     {
-                        services.AddAuthentication(TestExtensions.CookieAuthenticationScheme)
+                        services
+                            .AddAuthentication(TestExtensions.CookieAuthenticationScheme)
                             .AddCookie(TestExtensions.CookieAuthenticationScheme, o => { })
                             .AddMicrosoftAccount(configureOptions);
-                    }))
-                .Build();
+                    })
+            )
+            .Build();
         await host.StartAsync();
         return host;
     }

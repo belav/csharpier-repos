@@ -9,8 +9,10 @@ namespace System.ComponentModel.DataAnnotations
     /// <summary>
     ///     Used for specifying a range constraint
     /// </summary>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
-        AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public class RangeAttribute : ValidationAttribute
     {
         /// <summary>
@@ -48,11 +50,14 @@ namespace System.ComponentModel.DataAnnotations
         /// <param name="type">The type of the range parameters. Must implement IComparable.</param>
         /// <param name="minimum">The minimum allowable value.</param>
         /// <param name="maximum">The maximum allowable value.</param>
-        [RequiresUnreferencedCode("Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All.")]
+        [RequiresUnreferencedCode(
+            "Generic TypeConverters may require the generic types to be annotated. For example, NullableConverter requires the underlying type to be DynamicallyAccessedMembers All."
+        )]
         public RangeAttribute(
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type type,
             string minimum,
-            string maximum)
+            string maximum
+        )
             : base(populateErrorMessageResourceAccessor: false)
         {
             OperandType = type;
@@ -105,16 +110,24 @@ namespace System.ComponentModel.DataAnnotations
 
         private Func<object, object?>? Conversion { get; set; }
 
-        private void Initialize(IComparable minimum, IComparable maximum, Func<object, object?> conversion)
+        private void Initialize(
+            IComparable minimum,
+            IComparable maximum,
+            Func<object, object?> conversion
+        )
         {
             int cmp = minimum.CompareTo(maximum);
             if (cmp > 0)
             {
-                throw new InvalidOperationException(SR.Format(SR.RangeAttribute_MinGreaterThanMax, maximum, minimum));
+                throw new InvalidOperationException(
+                    SR.Format(SR.RangeAttribute_MinGreaterThanMax, maximum, minimum)
+                );
             }
             else if (cmp == 0 && (MinimumIsExclusive || MaximumIsExclusive))
             {
-                throw new InvalidOperationException(SR.RangeAttribute_CannotUseExclusiveBoundsWhenTheyAreEqual);
+                throw new InvalidOperationException(
+                    SR.RangeAttribute_CannotUseExclusiveBoundsWhenTheyAreEqual
+                );
             }
 
             Minimum = minimum;
@@ -160,9 +173,16 @@ namespace System.ComponentModel.DataAnnotations
 
             var min = (IComparable)Minimum;
             var max = (IComparable)Maximum;
-            return
-                (MinimumIsExclusive ? min.CompareTo(convertedValue) < 0 : min.CompareTo(convertedValue) <= 0) &&
-                (MaximumIsExclusive ? max.CompareTo(convertedValue) > 0 : max.CompareTo(convertedValue) >= 0);
+            return (
+                    MinimumIsExclusive
+                        ? min.CompareTo(convertedValue) < 0
+                        : min.CompareTo(convertedValue) <= 0
+                )
+                && (
+                    MaximumIsExclusive
+                        ? max.CompareTo(convertedValue) > 0
+                        : max.CompareTo(convertedValue) >= 0
+                );
         }
 
         /// <summary>
@@ -176,7 +196,13 @@ namespace System.ComponentModel.DataAnnotations
         {
             SetupConversion();
 
-            return string.Format(CultureInfo.CurrentCulture, ErrorMessageString, name, Minimum, Maximum);
+            return string.Format(
+                CultureInfo.CurrentCulture,
+                ErrorMessageString,
+                name,
+                Minimum,
+                Maximum
+            );
         }
 
         /// <summary>
@@ -203,46 +229,67 @@ namespace System.ComponentModel.DataAnnotations
 
                 if (operandType == typeof(int))
                 {
-                    Initialize((int)minimum, (int)maximum, v => Convert.ToInt32(v, CultureInfo.InvariantCulture));
+                    Initialize(
+                        (int)minimum,
+                        (int)maximum,
+                        v => Convert.ToInt32(v, CultureInfo.InvariantCulture)
+                    );
                 }
                 else if (operandType == typeof(double))
                 {
-                    Initialize((double)minimum, (double)maximum,
-                        v => Convert.ToDouble(v, CultureInfo.InvariantCulture));
+                    Initialize(
+                        (double)minimum,
+                        (double)maximum,
+                        v => Convert.ToDouble(v, CultureInfo.InvariantCulture)
+                    );
                 }
                 else
                 {
                     Type type = OperandType;
                     if (type == null)
                     {
-                        throw new InvalidOperationException(SR.RangeAttribute_Must_Set_Operand_Type);
+                        throw new InvalidOperationException(
+                            SR.RangeAttribute_Must_Set_Operand_Type
+                        );
                     }
                     Type comparableType = typeof(IComparable);
                     if (!comparableType.IsAssignableFrom(type))
                     {
-                        throw new InvalidOperationException(SR.Format(SR.RangeAttribute_ArbitraryTypeNotIComparable,
-                                                            type.FullName,
-                                                            comparableType.FullName));
+                        throw new InvalidOperationException(
+                            SR.Format(
+                                SR.RangeAttribute_ArbitraryTypeNotIComparable,
+                                type.FullName,
+                                comparableType.FullName
+                            )
+                        );
                     }
 
                     TypeConverter converter = GetOperandTypeConverter();
-                    IComparable min = (IComparable)(ParseLimitsInInvariantCulture
-                        ? converter.ConvertFromInvariantString((string)minimum)!
-                        : converter.ConvertFromString((string)minimum))!;
-                    IComparable max = (IComparable)(ParseLimitsInInvariantCulture
-                        ? converter.ConvertFromInvariantString((string)maximum)!
-                        : converter.ConvertFromString((string)maximum))!;
+                    IComparable min = (IComparable)
+                        (
+                            ParseLimitsInInvariantCulture
+                                ? converter.ConvertFromInvariantString((string)minimum)!
+                                : converter.ConvertFromString((string)minimum)
+                        )!;
+                    IComparable max = (IComparable)
+                        (
+                            ParseLimitsInInvariantCulture
+                                ? converter.ConvertFromInvariantString((string)maximum)!
+                                : converter.ConvertFromString((string)maximum)
+                        )!;
 
                     Func<object, object?> conversion;
                     if (ConvertValueInInvariantCulture)
                     {
-                        conversion = value => value.GetType() == type
-                            ? value
-                            : converter.ConvertFrom(null, CultureInfo.InvariantCulture, value);
+                        conversion = value =>
+                            value.GetType() == type
+                                ? value
+                                : converter.ConvertFrom(null, CultureInfo.InvariantCulture, value);
                     }
                     else
                     {
-                        conversion = value => value.GetType() == type ? value : converter.ConvertFrom(value);
+                        conversion = value =>
+                            value.GetType() == type ? value : converter.ConvertFrom(value);
                     }
 
                     Initialize(min, max, conversion);
@@ -250,10 +297,12 @@ namespace System.ComponentModel.DataAnnotations
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The ctor that allows this code to be called is marked with RequiresUnreferencedCode.")]
-        private TypeConverter GetOperandTypeConverter() =>
-            TypeDescriptor.GetConverter(OperandType);
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The ctor that allows this code to be called is marked with RequiresUnreferencedCode."
+        )]
+        private TypeConverter GetOperandTypeConverter() => TypeDescriptor.GetConverter(OperandType);
 
         private string GetValidationErrorMessage()
         {

@@ -9,8 +9,11 @@ namespace System.Activities.Hosting
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
 
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldHaveCorrectSuffix,
-        Justification = "Approved name")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.IdentifiersShouldHaveCorrectSuffix,
+        Justification = "Approved name"
+    )]
     public sealed class SymbolResolver : IDictionary<string, object>
     {
         Dictionary<string, ExternalLocationReference> symbols;
@@ -57,7 +60,6 @@ namespace System.Activities.Hosting
                 // We don't need to do any existence checks since we want the dictionary exception to bubble up
                 return this.symbols[key].Value;
             }
-
             set
             {
                 // We don't need to check key for null since we want the exception to bubble up from the inner dictionary
@@ -79,7 +81,10 @@ namespace System.Activities.Hosting
             }
 
             // We don't need to check key for null since we want the exception to bubble up from the inner dictionary
-            this.symbols.Add(key, new ExternalLocationReference(key, type, TypeHelper.GetDefaultValueForType(type)));
+            this.symbols.Add(
+                key,
+                new ExternalLocationReference(key, type, TypeHelper.GetDefaultValueForType(type))
+            );
         }
 
         public void Add(string key, object value, Type type)
@@ -147,7 +152,11 @@ namespace System.Activities.Hosting
 
             if (arrayIndex < 0)
             {
-                throw FxTrace.Exception.ArgumentOutOfRange("arrayIndex", arrayIndex, SR.CopyToIndexOutOfRange);
+                throw FxTrace.Exception.ArgumentOutOfRange(
+                    "arrayIndex",
+                    arrayIndex,
+                    SR.CopyToIndexOutOfRange
+                );
             }
 
             if (array.Rank > 1)
@@ -177,7 +186,9 @@ namespace System.Activities.Hosting
             }
         }
 
-        internal IEnumerable<KeyValuePair<string, LocationReference>> GetLocationReferenceEnumerator()
+        internal IEnumerable<
+            KeyValuePair<string, LocationReference>
+        > GetLocationReferenceEnumerator()
         {
             foreach (KeyValuePair<string, ExternalLocationReference> pair in this.symbols)
             {
@@ -275,7 +286,9 @@ namespace System.Activities.Hosting
                 }
             }
 
-            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.SymbolResolverDoesNotHaveSymbol(name, type)));
+            throw FxTrace.Exception.AsError(
+                new InvalidOperationException(SR.SymbolResolverDoesNotHaveSymbol(name, type))
+            );
         }
 
         public LocationReferenceEnvironment AsLocationReferenceEnvironment()
@@ -294,10 +307,7 @@ namespace System.Activities.Hosting
 
             public override Activity Root
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
 
             public override bool IsVisible(LocationReference locationReference)
@@ -346,34 +356,22 @@ namespace System.Activities.Hosting
 
             public object Value
             {
-                get
-                {
-                    return this.location.Value;
-                }
+                get { return this.location.Value; }
             }
 
             public Location Location
             {
-                get
-                {
-                    return this.location;
-                }
+                get { return this.location; }
             }
 
             protected override string NameCore
             {
-                get
-                {
-                    return this.name;
-                }
+                get { return this.name; }
             }
 
             protected override Type TypeCore
             {
-                get
-                {
-                    return this.type;
-                }
+                get { return this.type; }
             }
 
             public override Location GetLocation(ActivityContext context)
@@ -382,7 +380,11 @@ namespace System.Activities.Hosting
 
                 if (resolver == null)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CanNotFindSymbolResolverInWorkflowInstanceExtensions));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR.CanNotFindSymbolResolverInWorkflowInstanceExtensions
+                        )
+                    );
                 }
 
                 return resolver.GetLocation(this.Name, this.Type);
@@ -401,21 +403,17 @@ namespace System.Activities.Hosting
 
                 public override Type LocationType
                 {
-                    get
-                    {
-                        return this.type;
-                    }
+                    get { return this.type; }
                 }
 
                 protected override object ValueCore
                 {
-                    get
-                    {
-                        return this.value;
-                    }
+                    get { return this.value; }
                     set
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ExternalLocationsGetOnly));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(SR.ExternalLocationsGetOnly)
+                        );
                     }
                 }
             }

@@ -40,35 +40,54 @@ namespace System.Net.Test.Common
 
         public override void Flush() => _innerStream.Flush();
 
-        public override Task FlushAsync(CancellationToken cancellationToken) => _innerStream.FlushAsync(cancellationToken);
+        public override Task FlushAsync(CancellationToken cancellationToken) =>
+            _innerStream.FlushAsync(cancellationToken);
 
-        public override long Seek(long offset, SeekOrigin origin) => _innerStream.Seek(offset, origin);
+        public override long Seek(long offset, SeekOrigin origin) =>
+            _innerStream.Seek(offset, origin);
 
-        public override int Read(byte[] buffer, int offset, int count) => Read(new Span<byte>(buffer, offset, count));
+        public override int Read(byte[] buffer, int offset, int count) =>
+            Read(new Span<byte>(buffer, offset, count));
+
         public override int Read(Span<byte> buffer)
         {
             if (buffer.Length > 0)
             {
-                int readLength = RandomNumberGenerator.GetInt32(1, Math.Min(buffer.Length + 1, _maxChunkSize));
+                int readLength = RandomNumberGenerator.GetInt32(
+                    1,
+                    Math.Min(buffer.Length + 1, _maxChunkSize)
+                );
                 buffer = buffer.Slice(0, readLength);
             }
 
             return _innerStream.Read(buffer);
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) => ReadAsync(new Memory<byte>(buffer, offset, count)).AsTask();
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => ReadAsync(new Memory<byte>(buffer, offset, count)).AsTask();
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (buffer.Length > 0)
             {
-                int readLength = RandomNumberGenerator.GetInt32(1, Math.Min(buffer.Length + 1, _maxChunkSize));
+                int readLength = RandomNumberGenerator.GetInt32(
+                    1,
+                    Math.Min(buffer.Length + 1, _maxChunkSize)
+                );
                 buffer = buffer.Slice(0, readLength);
             }
             return _innerStream.ReadAsync(buffer, cancellationToken);
         }
 
-        public override void Write(byte[] buffer, int offset, int count) => Write(new ReadOnlySpan<byte>(buffer, offset, count));
+        public override void Write(byte[] buffer, int offset, int count) =>
+            Write(new ReadOnlySpan<byte>(buffer, offset, count));
 
         public override void Write(ReadOnlySpan<byte> buffer)
         {
@@ -80,8 +99,17 @@ namespace System.Net.Test.Common
             }
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken) => WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count)).AsTask();
-        public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        ) => WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count)).AsTask();
+
+        public override async ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             while (buffer.Length > 0)
             {

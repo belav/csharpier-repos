@@ -4,12 +4,12 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Microsoft.CodeAnalysis.CSharp.Symbols.Metadata.PE;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
-using System.Linq;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
@@ -19,13 +19,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         [Fact]
         public void Test1()
         {
-            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(mrefs: new[]
-            {
-                TestReferences.SymbolsTests.Fields.CSFields.dll,
-                TestReferences.SymbolsTests.Fields.VBFields.dll,
-                TestMetadata.Net40.mscorlib
-            },
-            options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.Internal));
+            var assemblies = MetadataTestHelpers.GetSymbolsForReferences(
+                mrefs: new[]
+                {
+                    TestReferences.SymbolsTests.Fields.CSFields.dll,
+                    TestReferences.SymbolsTests.Fields.VBFields.dll,
+                    TestMetadata.Net40.mscorlib,
+                },
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
+            );
 
             var module1 = assemblies[0].Modules[0];
             var module2 = assemblies[1].Modules[0];
@@ -103,7 +107,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
             CustomModifier mod = f6.TypeWithAnnotations.CustomModifiers[0];
 
             Assert.False(mod.IsOptional);
-            Assert.Equal("System.Runtime.CompilerServices.IsVolatile", mod.Modifier.ToTestDisplayString());
+            Assert.Equal(
+                "System.Runtime.CompilerServices.IsVolatile",
+                mod.Modifier.ToTestDisplayString()
+            );
 
             Assert.Equal(SymbolKind.NamedType, csFields.GetMembers("FFF").Single().Kind);
             Assert.Equal(SymbolKind.Field, csFields.GetMembers("Fff").Single().Kind);
@@ -111,10 +118,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
         }
 
         [Fact]
-        [WorkItem(193333, "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?_a=edit&id=193333")]
+        [WorkItem(
+            193333,
+            "https://devdiv.visualstudio.com/DefaultCollection/DevDiv/_workitems?_a=edit&id=193333"
+        )]
         public void EnumWithPrivateValueField()
         {
-            var il = @"
+            var il =
+                @"
 .class public auto ansi sealed TestEnum
        extends [mscorlib]System.Enum
 {
@@ -124,7 +135,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.Metadata.PE
 } // end of class TestEnum
 ";
 
-            var text = @"
+            var text =
+                @"
 class Program
 {
     static void Main()
@@ -136,9 +148,16 @@ class Program
     }
 }
 ";
-            var compilation = CreateCompilationWithILAndMscorlib40(text, il, options: TestOptions.DebugExe);
-            CompileAndVerify(compilation, expectedOutput: @"Value1
-Value2");
+            var compilation = CreateCompilationWithILAndMscorlib40(
+                text,
+                il,
+                options: TestOptions.DebugExe
+            );
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"Value1
+Value2"
+            );
         }
     }
 }

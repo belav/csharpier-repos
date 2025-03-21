@@ -7,9 +7,7 @@ namespace System.Web.Http.ModelBinding
     public class ModelError
     {
         public ModelError(Exception exception)
-            : this(exception, errorMessage: null)
-        {
-        }
+            : this(exception, errorMessage: null) { }
 
         public ModelError(Exception exception, string errorMessage)
             : this(errorMessage)

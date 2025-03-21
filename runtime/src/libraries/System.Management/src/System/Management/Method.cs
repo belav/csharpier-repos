@@ -111,7 +111,6 @@ namespace System.Management
             qualifiers = null;
         }
 
-
         //This private function is used to refresh the information from the Wmi object before returning the requested data
         private void RefreshMethodInfo()
         {
@@ -119,7 +118,12 @@ namespace System.Management
 
             try
             {
-                status = parent.wbemObject.GetMethod_(methodName, 0, out wmiInParams, out wmiOutParams);
+                status = parent.wbemObject.GetMethod_(
+                    methodName,
+                    0,
+                    out wmiInParams,
+                    out wmiOutParams
+                );
             }
             catch (COMException e)
             {
@@ -134,7 +138,6 @@ namespace System.Management
                 Marshal.ThrowExceptionForHR(status, WmiNetUtilsHelper.GetErrorInfo_f());
             }
         }
-
 
         /// <summary>
         ///    <para>Gets or sets the name of the method.</para>
@@ -218,7 +221,7 @@ namespace System.Management
                 if (status < 0)
                 {
                     if (status == (int)tag_WBEMSTATUS.WBEM_E_INVALID_OBJECT)
-                        className = string.Empty;   // Interpret as an unspecified property - return ""
+                        className = string.Empty; // Interpret as an unspecified property - return ""
                     else if ((status & 0xfffff000) == 0x80041000)
                         ManagementException.ThrowWithExtendedInfo((ManagementStatus)status);
                     else
@@ -240,7 +243,11 @@ namespace System.Management
         ///    qualifiers for this method.
         /// </value>
         /// <seealso cref='System.Management.QualifierData'/>
-        public QualifierDataCollection Qualifiers => qualifiers ??= new QualifierDataCollection(parent, methodName, QualifierType.MethodQualifier);
-
-    }//MethodData
+        public QualifierDataCollection Qualifiers =>
+            qualifiers ??= new QualifierDataCollection(
+                parent,
+                methodName,
+                QualifierType.MethodQualifier
+            );
+    } //MethodData
 }

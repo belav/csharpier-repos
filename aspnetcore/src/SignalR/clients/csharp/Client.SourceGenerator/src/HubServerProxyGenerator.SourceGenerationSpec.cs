@@ -38,8 +38,11 @@ internal partial class HubServerProxyGenerator
         public string? SupportHint;
         public StreamSpec Stream;
         public string? InnerReturnTypeName;
-        public bool IsReturnTypeValueTask => FullyQualifiedReturnTypeName
-            .StartsWith("System.Threading.Tasks.ValueTask", StringComparison.Ordinal);
+        public bool IsReturnTypeValueTask =>
+            FullyQualifiedReturnTypeName.StartsWith(
+                "System.Threading.Tasks.ValueTask",
+                StringComparison.Ordinal
+            );
     }
 
     [Flags]
@@ -49,13 +52,13 @@ internal partial class HubServerProxyGenerator
         ClientToServer = 1,
         ServerToClient = 2,
         AsyncEnumerable = 4,
-        Bidirectional = ClientToServer | ServerToClient
+        Bidirectional = ClientToServer | ServerToClient,
     }
 
     public enum SupportClassification
     {
         Supported,
-        UnsupportedReturnType
+        UnsupportedReturnType,
     }
 
     public sealed class ArgumentSpec

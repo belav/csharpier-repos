@@ -8,18 +8,21 @@ using System.Web.Mvc.Routing;
 namespace System.Web.Mvc
 {
     /// <summary>
-    /// Place on a controller or action to expose it directly via a route. 
+    /// Place on a controller or action to expose it directly via a route.
     /// When placed on a controller, it applies to actions that do not have any <see cref="RouteAttribute"/>s on them.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class, Inherited = false, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Method | AttributeTargets.Class,
+        Inherited = false,
+        AllowMultiple = true
+    )]
     public sealed class RouteAttribute : Attribute, IDirectRouteFactory, IRouteInfoProvider
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteAttribute" /> class.
         /// </summary>
-        public RouteAttribute() : this(String.Empty)
-        {
-        }
+        public RouteAttribute()
+            : this(String.Empty) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RouteAttribute" /> class.
@@ -39,7 +42,7 @@ namespace System.Web.Mvc
 
         /// <inheritdoc />
         public int Order { get; set; }
-        
+
         /// <inheritdoc />
         public string Template { get; private set; }
 

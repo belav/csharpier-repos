@@ -16,7 +16,7 @@ public class RedundantBranchUnsigned2
         Test_Span1(arr1, 0);
         Test_Span1(arr1, 1);
         Test_Span1(arr1, 2);
-        if (!arr1.SequenceEqual(new[] {42, 42}))
+        if (!arr1.SequenceEqual(new[] { 42, 42 }))
             throw new Exception("Test_Span1 failed");
 
         int[] arr2 = new int[2];
@@ -39,7 +39,8 @@ public class RedundantBranchUnsigned2
         Test_Array(arr3, -1);
     }
 
-    private static void Throws<T>(Action action) where T : Exception
+    private static void Throws<T>(Action action)
+        where T : Exception
     {
         try
         {

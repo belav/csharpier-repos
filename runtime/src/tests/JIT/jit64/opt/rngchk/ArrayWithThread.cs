@@ -2,25 +2,26 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Threading;
 using System.Runtime.CompilerServices;
+using System.Threading;
 using Xunit;
 
 namespace ArrayWithThread
 {
     public delegate void RngTest(ref int a);
+
     public class Class1
     {
         public static int val = 0;
         public static AutoResetEvent myResetEvent1 = new AutoResetEvent(false);
         public static ManualResetEvent myResetEvent2 = new ManualResetEvent(false);
+
         [Fact]
         public static int TestEntryPoint()
         {
             int retVal = 100;
             int testNum = 0;
-            RngTest[] Tests ={  new RngTest(Test.Test1),
-                        new RngTest(Test.Test2)};
+            RngTest[] Tests = { new RngTest(Test.Test1), new RngTest(Test.Test2) };
             foreach (RngTest test in Tests)
             {
                 testNum++;
@@ -59,6 +60,7 @@ namespace ArrayWithThread
             }
             return bResult;
         }
+
         private static void ThreadFunc()
         {
             myResetEvent1.WaitOne();
@@ -67,6 +69,7 @@ namespace ArrayWithThread
             return;
         }
     }
+
     internal class Test
     {
         [MethodImplAttribute(MethodImplOptions.NoInlining)]

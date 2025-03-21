@@ -15,19 +15,31 @@ namespace System.Threading.Tasks.Tests
         {
             // Verify that a task can only be disposed after it has completed
             var endTask = new ManualResetEvent(false);
-            var task = new Task(() => { endTask.WaitOne(); });
+            var task = new Task(() =>
+            {
+                endTask.WaitOne();
+            });
             Assert.Throws<InvalidOperationException>(() => task.Dispose());
             task.Start();
             Assert.Throws<InvalidOperationException>(() => task.Dispose());
             endTask.Set();
             task.Wait();
             task.Dispose();
-            Assert.Throws<ObjectDisposedException>(() => { var wh = ((IAsyncResult)task).AsyncWaitHandle; });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                var wh = ((IAsyncResult)task).AsyncWaitHandle;
+            });
 
             // A task may also be disposed after it is canceled
             endTask.Reset();
             var cts = new CancellationTokenSource();
-            task = new Task(() => { endTask.WaitOne(); }, cts.Token);
+            task = new Task(
+                () =>
+                {
+                    endTask.WaitOne();
+                },
+                cts.Token
+            );
             cts.Cancel();
             task.Dispose();
         }
@@ -38,12 +50,11 @@ namespace System.Threading.Tasks.Tests
             // Verify that a task can be disposed by a continuation
             var endTask = new ManualResetEvent(false);
             var task = new Task(() => { });
-            var task2 =
-                task.ContinueWith(completedTask =>
-                {
-                    completedTask.Dispose();
-                    endTask.WaitOne();
-                });
+            var task2 = task.ContinueWith(completedTask =>
+            {
+                completedTask.Dispose();
+                endTask.WaitOne();
+            });
             task.Start();
             endTask.Set();
             ((IAsyncResult)task2).AsyncWaitHandle.WaitOne();

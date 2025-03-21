@@ -32,12 +32,22 @@ namespace System.Net.Tests
 
         [Theory]
         [InlineData("Accept: Test", new string[] { "Test" })]
-        [InlineData("Accept: Test, Test2,Test3 ,  Test4", new string[] { "Test", "Test2", "Test3 ", " Test4" })]
+        [InlineData(
+            "Accept: Test, Test2,Test3 ,  Test4",
+            new string[] { "Test", "Test2", "Test3 ", " Test4" }
+        )]
         [InlineData("Accept: ", new string[] { "" })]
         [InlineData("Unknown-Header: ", null)]
-        public async Task AcceptTypes_GetProperty_ReturnsExpected(string acceptString, string[] expected)
+        public async Task AcceptTypes_GetProperty_ReturnsExpected(
+            string acceptString,
+            string[] expected
+        )
         {
-            HttpListenerRequest request = await GetRequest("POST", "", new string[] { acceptString });
+            HttpListenerRequest request = await GetRequest(
+                "POST",
+                "",
+                new string[] { acceptString }
+            );
             Assert.Equal(request.AcceptTypes, request.AcceptTypes);
             if (expected != null)
             {
@@ -49,23 +59,67 @@ namespace System.Net.Tests
         public static IEnumerable<object[]> ContentEncoding_TestData()
         {
             // User-Agent and x-up-devcap-post-charset.
-            yield return new object[] { "User-Agent: UPTest\r\nx-up-devcap-post-charset:unicode", Encoding.Unicode };
-            yield return new object[] { "User-Agent: UPTest\r\nx-up-devcap-post-charset: unicode", Encoding.Unicode };
-            yield return new object[] { "User-Agent: UPTest\r\nx-up-devcap-post-charset:" + Encoding.Unicode.CodePage, Encoding.Default };
-            yield return new object[] { "User-Agent: UPTest\r\nx-up-devcap-post-charset:NoSuchEncoding", Encoding.Default };
-            yield return new object[] { "User-Agent: UPTest\r\nx-up-devcap-post-charset:", Encoding.Default };
+            yield return new object[]
+            {
+                "User-Agent: UPTest\r\nx-up-devcap-post-charset:unicode",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "User-Agent: UPTest\r\nx-up-devcap-post-charset: unicode",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "User-Agent: UPTest\r\nx-up-devcap-post-charset:" + Encoding.Unicode.CodePage,
+                Encoding.Default,
+            };
+            yield return new object[]
+            {
+                "User-Agent: UPTest\r\nx-up-devcap-post-charset:NoSuchEncoding",
+                Encoding.Default,
+            };
+            yield return new object[]
+            {
+                "User-Agent: UPTest\r\nx-up-devcap-post-charset:",
+                Encoding.Default,
+            };
             yield return new object[] { "User-Agent: UPTest", Encoding.Default };
             yield return new object[] { "User-Agent: Test", Encoding.Default };
 
             // Prefers x-up-devcap-post-charset to Content-Type
-            yield return new object[] { "User-Agent: UPTest\r\nx-up-devcap-post-charset:unicode\r\nContent-Type:application/json;charset=utf-8", Encoding.Unicode };
+            yield return new object[]
+            {
+                "User-Agent: UPTest\r\nx-up-devcap-post-charset:unicode\r\nContent-Type:application/json;charset=utf-8",
+                Encoding.Unicode,
+            };
 
             // Content-Type
-            yield return new object[] { "Content-Type:application/json;charset=unicode", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application.json,charset=unicode", Encoding.Unicode };
-            yield return new object[] { "content-type:application/json;CHARSET=UNICODE", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application/json  ;  charset         =   unicode", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application.json;charset=\"unicode\"", Encoding.Unicode };
+            yield return new object[]
+            {
+                "Content-Type:application/json;charset=unicode",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application.json,charset=unicode",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "content-type:application/json;CHARSET=UNICODE",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json  ;  charset         =   unicode",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application.json;charset=\"unicode\"",
+                Encoding.Unicode,
+            };
             yield return new object[] { "Content-Type:charset;charset=unicode", Encoding.Unicode };
             yield return new object[] { "Content-Type:;charset=unicode", Encoding.Unicode };
             yield return new object[] { "Content-Type:charset=unicode", Encoding.Default };
@@ -75,28 +129,108 @@ namespace System.Net.Tests
             yield return new object[] { "Content-Type:application/json", Encoding.Default };
             yield return new object[] { "Content-Type:application/json;", Encoding.Default };
             yield return new object[] { "Content-Type:application.json;charset", Encoding.Default };
-            yield return new object[] { "Content-Type:application.json;charset  ", Encoding.Default };
-            yield return new object[] { "Content-Type:application.json;charset;", Encoding.Default };
-            yield return new object[] { "Content-Type:application.json;charset=", Encoding.Default };
-            yield return new object[] { "Content-Type:application.json;charset=\"", Encoding.Default };
-            yield return new object[] { "Content-Type:application.json;charset=,", Encoding.Default };
-            yield return new object[] { "Content-Type:application.json;charset=\"unicode", Encoding.Default };
-            yield return new object[] { "Content-Type:application/json;charset=NoSuchEncoding", Encoding.Default };
+            yield return new object[]
+            {
+                "Content-Type:application.json;charset  ",
+                Encoding.Default,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application.json;charset;",
+                Encoding.Default,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application.json;charset=",
+                Encoding.Default,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application.json;charset=\"",
+                Encoding.Default,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application.json;charset=,",
+                Encoding.Default,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application.json;charset=\"unicode",
+                Encoding.Default,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json;charset=NoSuchEncoding",
+                Encoding.Default,
+            };
 
-            yield return new object[] { "Content-Type:application/json;charset=unicode   ; boundary=something", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application/json;charset=unicode ; ; boundary=something", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application/json;boundary=something; charset=unicode", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application/json;boundary=something;charset=unicode   ", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application/json;boundary=something;charset=unicode   ;", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application/json;boundary=something; charset=unicode ;", Encoding.Unicode };
+            yield return new object[]
+            {
+                "Content-Type:application/json;charset=unicode   ; boundary=something",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json;charset=unicode ; ; boundary=something",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json;boundary=something; charset=unicode",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json;boundary=something;charset=unicode   ",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json;boundary=something;charset=unicode   ;",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json;boundary=something; charset=unicode ;",
+                Encoding.Unicode,
+            };
 
-            yield return new object[] { "Content-Type:application.json;charset=\"unicode\";", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application.json; charset=\"unicode;\"", Encoding.Default };
-            yield return new object[] { "Content-Type:application/json;charset=\"unicode\" ; boundary=something", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application/json; charset=\"unicode;\";boundary=something", Encoding.Default };
-            yield return new object[] { "Content-Type:application/json;charset=\" unicode \"; boundary=something", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application/json; charset=\"unicode ;\"; boundary=something", Encoding.Default };
-            yield return new object[] { "Content-Type:application/json;charset=\" unicode ;\"; boundary=something", Encoding.Default };
+            yield return new object[]
+            {
+                "Content-Type:application.json;charset=\"unicode\";",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application.json; charset=\"unicode;\"",
+                Encoding.Default,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json;charset=\"unicode\" ; boundary=something",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json; charset=\"unicode;\";boundary=something",
+                Encoding.Default,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json;charset=\" unicode \"; boundary=something",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json; charset=\"unicode ;\"; boundary=something",
+                Encoding.Default,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json;charset=\" unicode ;\"; boundary=something",
+                Encoding.Default,
+            };
 
             yield return new object[] { "Unknown-Header: Test", Encoding.Default };
 
@@ -104,14 +238,29 @@ namespace System.Net.Tests
             // "charset=unicode;" will be parsed as "unicode;" for charSet parameter. Then the following GetEncoding(charSet)
             // will fail with ArgumentException. In this case, Encoding.Default will be chosen for ContentEncoding,
             // even if client explicitly specifies the Unicode encoding in the header.
-            yield return new object[] { "Content-Type:application/json;charset=unicode; boundary=something", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application/json;boundary=something; charset=unicode;", Encoding.Unicode };
-            yield return new object[] { "Content-Type:application/json;boundary=something; charset=unicode;   ", Encoding.Unicode };
+            yield return new object[]
+            {
+                "Content-Type:application/json;charset=unicode; boundary=something",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json;boundary=something; charset=unicode;",
+                Encoding.Unicode,
+            };
+            yield return new object[]
+            {
+                "Content-Type:application/json;boundary=something; charset=unicode;   ",
+                Encoding.Unicode,
+            };
         }
 
         [Theory]
         [MemberData(nameof(ContentEncoding_TestData))]
-        public async Task ContentEncoding_GetProperty_ReturnsExpected(string header, Encoding expected)
+        public async Task ContentEncoding_GetProperty_ReturnsExpected(
+            string header,
+            Encoding expected
+        )
         {
             HttpListenerRequest request = await GetRequest("POST", "", new string[] { header });
             Assert.Equal(expected, request.ContentEncoding);
@@ -120,7 +269,16 @@ namespace System.Net.Tests
         [Fact]
         public async Task ContentEncoding_NoBody_ReturnsDefault()
         {
-            HttpListenerRequest request = await GetRequest("POST", "", new string[] { "Content-Length: 0", "Content-Type:application/json;charset=unicode" }, content: null);
+            HttpListenerRequest request = await GetRequest(
+                "POST",
+                "",
+                new string[]
+                {
+                    "Content-Length: 0",
+                    "Content-Type:application/json;charset=unicode",
+                },
+                content: null
+            );
             Assert.Equal(Encoding.Default, request.ContentEncoding);
         }
 
@@ -136,9 +294,19 @@ namespace System.Net.Tests
         [InlineData("PUT", "Transfer-Encoding: chunked", -1, true)]
         [InlineData("PUT", "Content-Length: 10\nTransfer-Encoding: chunked", -1, true)]
         [InlineData("PUT", "Transfer-Encoding: chunked\nContent-Length: 10", -1, true)]
-        public async Task ContentLength_GetProperty_ReturnsExpected(string method, string contentLengthString, long expected, bool hasEntityBody)
+        public async Task ContentLength_GetProperty_ReturnsExpected(
+            string method,
+            string contentLengthString,
+            long expected,
+            bool hasEntityBody
+        )
         {
-            HttpListenerRequest request = await GetRequest(method, "", contentLengthString.Split('\n'), content: "\r\n");
+            HttpListenerRequest request = await GetRequest(
+                method,
+                "",
+                contentLengthString.Split('\n'),
+                content: "\r\n"
+            );
             Assert.Equal(expected, request.ContentLength64);
             Assert.Equal(hasEntityBody, request.HasEntityBody);
         }
@@ -146,7 +314,12 @@ namespace System.Net.Tests
         [Fact]
         public async Task ContentLength_SetInHeadersAfterAccessingProperty_DoesNothing()
         {
-            HttpListenerRequest request = await GetRequest("POST", null, new string[] { "Content-Length: 1" }, content: "\r\n");
+            HttpListenerRequest request = await GetRequest(
+                "POST",
+                null,
+                new string[] { "Content-Length: 1" },
+                content: "\r\n"
+            );
 
             Assert.Equal("1", request.Headers["Content-Length"]);
             Assert.Equal(1, request.ContentLength64);
@@ -166,7 +339,11 @@ namespace System.Net.Tests
         [InlineData("Unknown-Header: ", null)]
         public async Task Referer_GetProperty_ReturnsExpected(string refererString, string expected)
         {
-            HttpListenerRequest request = await GetRequest("POST", "", new string[] { refererString });
+            HttpListenerRequest request = await GetRequest(
+                "POST",
+                "",
+                new string[] { refererString }
+            );
             Assert.Equal(expected, request.UrlReferrer?.ToString());
         }
 
@@ -175,9 +352,16 @@ namespace System.Net.Tests
         [InlineData("user-agent: Test", "Test")]
         [InlineData("User-Agent: ", "")]
         [InlineData("Unknown-Header: Test", null)]
-        public async Task UserAgent_GetProperty_ReturnsExpected(string userAgentString, string expected)
+        public async Task UserAgent_GetProperty_ReturnsExpected(
+            string userAgentString,
+            string expected
+        )
         {
-            HttpListenerRequest request = await GetRequest("POST", "", new string[] { userAgentString });
+            HttpListenerRequest request = await GetRequest(
+                "POST",
+                "",
+                new string[] { userAgentString }
+            );
             Assert.Equal(expected, request.UserAgent);
         }
 
@@ -227,28 +411,51 @@ namespace System.Net.Tests
         [InlineData("Connection: Upgrade\r\nUpgrade: Test2", false)]
         [InlineData("Connection: Upgrade\r\nUpgrade: websocket", true)]
         [InlineData("Unknown-Header: Test", false)]
-        public async Task IsWebSocketRequest_GetProperty_ReturnsExpected(string webSocketString, bool expected)
+        public async Task IsWebSocketRequest_GetProperty_ReturnsExpected(
+            string webSocketString,
+            bool expected
+        )
         {
             if (PlatformDetection.IsWindows7)
             {
                 return;
             }
 
-            HttpListenerRequest request = await GetRequest("POST", "", new string[] { webSocketString });
+            HttpListenerRequest request = await GetRequest(
+                "POST",
+                "",
+                new string[] { webSocketString }
+            );
             Assert.Equal(expected, request.IsWebSocketRequest);
         }
 
         [Theory]
-        [InlineData("Accept-Language: Lang1,Lang2,Lang3", new string[] { "Lang1", "Lang2", "Lang3" })]
-        [InlineData("Accept-Language: Lang1, Lang2, Lang3", new string[] { "Lang1", "Lang2", "Lang3" })]
+        [InlineData(
+            "Accept-Language: Lang1,Lang2,Lang3",
+            new string[] { "Lang1", "Lang2", "Lang3" }
+        )]
+        [InlineData(
+            "Accept-Language: Lang1, Lang2, Lang3",
+            new string[] { "Lang1", "Lang2", "Lang3" }
+        )]
         [InlineData("Accept-Language: Lang1,,Lang3", new string[] { "Lang1", "", "Lang3" })]
-        [InlineData("Accept-Language: Lang1,  Lang2  ,  Lang3  ", new string[] { "Lang1", " Lang2  ", " Lang3" })]
+        [InlineData(
+            "Accept-Language: Lang1,  Lang2  ,  Lang3  ",
+            new string[] { "Lang1", " Lang2  ", " Lang3" }
+        )]
         [InlineData("Accept-Language:", new string[] { "" })]
         [InlineData("Accept-Language: ", new string[] { "" })]
         [InlineData("Unknown-Header: Test", null)]
-        public async Task UserLanguages_GetProperty_ReturnsExpected(string userLanguageString, string[] expected)
+        public async Task UserLanguages_GetProperty_ReturnsExpected(
+            string userLanguageString,
+            string[] expected
+        )
         {
-            HttpListenerRequest request = await GetRequest("POST", "", new string[] { userLanguageString });
+            HttpListenerRequest request = await GetRequest(
+                "POST",
+                "",
+                new string[] { userLanguageString }
+            );
             Assert.Equal(request.UserLanguages, request.UserLanguages);
             if (expected != null)
             {
@@ -283,7 +490,10 @@ namespace System.Net.Tests
         public async Task EndGetClientCertificate_NullAsyncResult_ThrowsArgumentException()
         {
             HttpListenerRequest request = await GetRequest("POST", null, null);
-            AssertExtensions.Throws<ArgumentNullException>("asyncResult", () => request.EndGetClientCertificate(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "asyncResult",
+                () => request.EndGetClientCertificate(null)
+            );
         }
 
         [Fact]
@@ -293,10 +503,19 @@ namespace System.Net.Tests
             using (var requestTests = new HttpListenerRequestTests())
             {
                 HttpListenerRequest request2 = await requestTests.GetRequest("POST", null, null);
-                IAsyncResult beginGetClientCertificateResult1 = request1.BeginGetClientCertificate(null, null);
+                IAsyncResult beginGetClientCertificateResult1 = request1.BeginGetClientCertificate(
+                    null,
+                    null
+                );
 
-                AssertExtensions.Throws<ArgumentException>("asyncResult", () => request2.EndGetClientCertificate(new CustomAsyncResult()));
-                AssertExtensions.Throws<ArgumentException>("asyncResult", () => request2.EndGetClientCertificate(beginGetClientCertificateResult1));
+                AssertExtensions.Throws<ArgumentException>(
+                    "asyncResult",
+                    () => request2.EndGetClientCertificate(new CustomAsyncResult())
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "asyncResult",
+                    () => request2.EndGetClientCertificate(beginGetClientCertificateResult1)
+                );
             }
         }
 
@@ -304,10 +523,15 @@ namespace System.Net.Tests
         public async Task EndGetClientCertificate_AlreadyCalled_ThrowsInvalidOperationException()
         {
             HttpListenerRequest request = await GetRequest("POST", null, null);
-            IAsyncResult beginGetClientCertificateResult = request.BeginGetClientCertificate(null, null);
+            IAsyncResult beginGetClientCertificateResult = request.BeginGetClientCertificate(
+                null,
+                null
+            );
             request.EndGetClientCertificate(beginGetClientCertificateResult);
 
-            Assert.Throws<InvalidOperationException>(() => request.EndGetClientCertificate(beginGetClientCertificateResult));
+            Assert.Throws<InvalidOperationException>(() =>
+                request.EndGetClientCertificate(beginGetClientCertificateResult)
+            );
         }
 
         [Fact]
@@ -322,59 +546,59 @@ namespace System.Net.Tests
 
         [Theory]
         [InlineData(ChannelBindingKind.Unique)]
-        public async Task TransportContext_GetChannelBindingInvalid_ThrowsNotSupportedException(ChannelBindingKind kind)
+        public async Task TransportContext_GetChannelBindingInvalid_ThrowsNotSupportedException(
+            ChannelBindingKind kind
+        )
         {
             HttpListenerRequest request = await GetRequest("POST", null, null);
-            Assert.Throws<NotSupportedException>(() => request.TransportContext.GetChannelBinding(kind));
+            Assert.Throws<NotSupportedException>(() =>
+                request.TransportContext.GetChannelBinding(kind)
+            );
         }
 
         public static IEnumerable<object[]> QueryString_TestData()
         {
             yield return new object[]
             {
-                "?query", new NameValueCollection
-                {
-                    { null, "query" }
-                }
+                "?query",
+                new NameValueCollection { { null, "query" } },
             };
 
             yield return new object[]
             {
-                "?name=value", new NameValueCollection
-                {
-                    { "name", "value" }
-                }
+                "?name=value",
+                new NameValueCollection { { "name", "value" } },
             };
 
             yield return new object[]
             {
-                "?name=value=value2", new NameValueCollection
-                {
-                    { "name", "value=value2" }
-                }
+                "?name=value=value2",
+                new NameValueCollection { { "name", "value=value2" } },
             };
 
             yield return new object[]
             {
-                "?name1=value1&name2=value2&name1=value3&name3=value&name3=value", new NameValueCollection
+                "?name1=value1&name2=value2&name1=value3&name3=value&name3=value",
+                new NameValueCollection
                 {
                     { "name1", "value1" },
                     { "name1", "value3" },
                     { "name2", "value2" },
                     { "name3", "value" },
-                    { "name3", "value" }
-                }
+                    { "name3", "value" },
+                },
             };
 
             yield return new object[]
             {
-                "?name1=+&name2=\u1234&\u0100=value&name3=\u00FF", new NameValueCollection
+                "?name1=+&name2=\u1234&\u0100=value&name3=\u00FF",
+                new NameValueCollection
                 {
                     { "name1", " " },
                     { "name2", "\u00E1\u0088\u00B4" },
                     { "\u00C4\u0080", "value" },
-                    { "name3", "\u00C3\u00BF" }
-                }
+                    { "name3", "\u00C3\u00BF" },
+                },
             };
 
             yield return new object[] { "", new NameValueCollection() };
@@ -382,35 +606,34 @@ namespace System.Net.Tests
 
             yield return new object[]
             {
-                "?name=", new NameValueCollection()
-                {
-                    { "name", "" }
-                }
+                "?name=",
+                new NameValueCollection() { { "name", "" } },
             };
 
             yield return new object[]
             {
-                "?&", new NameValueCollection()
-                {
-                    { null, "" },
-                    { null, "" }
-                }
+                "?&",
+                new NameValueCollection() { { null, "" }, { null, "" } },
             };
 
             yield return new object[]
             {
-                "?&&", new NameValueCollection()
+                "?&&",
+                new NameValueCollection()
                 {
                     { null, "" },
                     { null, "" },
-                    { null, "" }
-                }
+                    { null, "" },
+                },
             };
         }
 
         [Theory]
         [MemberData(nameof(QueryString_TestData))]
-        public async Task QueryString_GetProperty_ReturnsExpected(string query, NameValueCollection expected)
+        public async Task QueryString_GetProperty_ReturnsExpected(
+            string query,
+            NameValueCollection expected
+        )
         {
             HttpListenerRequest request = await GetRequest("POST", query, null);
             NameValueCollection queryString = request.QueryString;
@@ -448,15 +671,28 @@ namespace System.Net.Tests
         [InlineData("1.1", new string[] { "Connection: " }, true)]
         [InlineData("1.1", new string[] { "Keep-Alive: true" }, true)]
         [InlineData("1.1", new string[] { "Proxy-Connection: ", "Connection: close" }, false)]
-        [InlineData("1.1", new string[] { "Proxy-Connection: ", "Connection: close", "Keep-Alive: true" }, false)]
+        [InlineData(
+            "1.1",
+            new string[] { "Proxy-Connection: ", "Connection: close", "Keep-Alive: true" },
+            false
+        )]
         [InlineData("1.1", new string[] { "Connection: close", "Keep-Alive: true" }, false)]
         [InlineData("1.1", new string[] { "UnknownHeader: random" }, true)]
         [InlineData("1.0", new string[] { "Keep-Alive: true" }, true)]
         [InlineData("1.0", new string[] { "Keep-Alive: " }, false)]
         [InlineData("1.0", new string[] { "UnknownHeader: random" }, false)]
-        public async Task KeepAlive_GetProperty_ReturnsExpected(string httpVersion, string[] headers, bool expected)
+        public async Task KeepAlive_GetProperty_ReturnsExpected(
+            string httpVersion,
+            string[] headers,
+            bool expected
+        )
         {
-            HttpListenerRequest request = await GetRequest("POST", "", headers, httpVersion: httpVersion);
+            HttpListenerRequest request = await GetRequest(
+                "POST",
+                "",
+                headers,
+                httpVersion: httpVersion
+            );
             Assert.Equal(request.KeepAlive, request.KeepAlive);
             Assert.Equal(expected, request.KeepAlive);
         }
@@ -476,7 +712,12 @@ namespace System.Net.Tests
         {
             var version = new Version(httpVersion);
 
-            HttpListenerRequest request = await GetRequest("POST", "", new string[0], httpVersion: httpVersion);
+            HttpListenerRequest request = await GetRequest(
+                "POST",
+                "",
+                new string[0],
+                httpVersion: httpVersion
+            );
             Assert.Equal(version, request.ProtocolVersion);
         }
 
@@ -484,62 +725,59 @@ namespace System.Net.Tests
         {
             yield return new object[]
             {
-                "cookie: name=value", new CookieCollection
-                {
-                    new Cookie("name", "value")
-                }
+                "cookie: name=value",
+                new CookieCollection { new Cookie("name", "value") },
             };
 
             // Not added if the cookie already exists.
             yield return new object[]
             {
-                "cookie: name=value,name=value", new CookieCollection
-                {
-                    new Cookie("name", "value")
-                }
+                "cookie: name=value,name=value",
+                new CookieCollection { new Cookie("name", "value") },
             };
 
             yield return new object[]
             {
-                "cookie: name=value,name=value2", new CookieCollection
-                {
-                    new Cookie("name", "value2")
-                }
+                "cookie: name=value,name=value2",
+                new CookieCollection { new Cookie("name", "value2") },
             };
 
             yield return new object[]
             {
-                "cookie: name=value,name=value;$port=\"200\"", new CookieCollection
-                {
-                    new Cookie("name", "value") { Port = "\"200\"" }
-                }
+                "cookie: name=value,name=value;$port=\"200\"",
+                new CookieCollection { new Cookie("name", "value") { Port = "\"200\"" } },
             };
 
             // Cookie with a greater variant (e.g. Rfc2109) is preferred over a lower variant (e.g. Plain).
             yield return new object[]
             {
-                "cookie: name=value;$port=\"200\",name=value", new CookieCollection
-                {
-                    new Cookie("name", "value") { Port = "\"200\"" }
-                }
+                "cookie: name=value;$port=\"200\",name=value",
+                new CookieCollection { new Cookie("name", "value") { Port = "\"200\"" } },
             };
 
             yield return new object[]
             {
-                "cookie: name1=value1,name2=value2;name3=value3", new CookieCollection
+                "cookie: name1=value1,name2=value2;name3=value3",
+                new CookieCollection
                 {
                     new Cookie("name1", "value1"),
                     new Cookie("name2", "value2"),
-                    new Cookie("name3", "value3")
-                }
+                    new Cookie("name3", "value3"),
+                },
             };
 
             yield return new object[]
             {
-                "cookie: name=value;$port=\"80\";$Path=path;$Domain=domain", new CookieCollection
+                "cookie: name=value;$port=\"80\";$Path=path;$Domain=domain",
+                new CookieCollection
                 {
-                    new Cookie("name", "value") { Port = "\"80\"", Path = "path", Domain = "domain" }
-                }
+                    new Cookie("name", "value")
+                    {
+                        Port = "\"80\"",
+                        Path = "path",
+                        Domain = "domain",
+                    },
+                },
             };
 
             yield return new object[] { "cookie: =value", new CookieCollection() };
@@ -550,11 +788,12 @@ namespace System.Net.Tests
 
             yield return new object[]
             {
-                "cookie:name=value; domain=.domain.com", new CookieCollection
+                "cookie:name=value; domain=.domain.com",
+                new CookieCollection
                 {
                     new Cookie("name", "value"),
-                    new Cookie("domain", ".domain.com")
-                }
+                    new Cookie("domain", ".domain.com"),
+                },
             };
             yield return new object[]
             {
@@ -562,8 +801,8 @@ namespace System.Net.Tests
                 new CookieCollection
                 {
                     new Cookie("name", "value"),
-                    new Cookie("expires", "invaliddate")
-                }
+                    new Cookie("expires", "invaliddate"),
+                },
             };
 
             yield return new object[] { "cookie: ", new CookieCollection() };
@@ -572,7 +811,10 @@ namespace System.Net.Tests
 
         [Theory]
         [MemberData(nameof(Cookies_TestData))]
-        public async Task Cookies_GetProperty_ReturnsExpected(string cookieString, CookieCollection expected)
+        public async Task Cookies_GetProperty_ReturnsExpected(
+            string cookieString,
+            CookieCollection expected
+        )
         {
             HttpListenerRequest request = await GetRequest("POST", null, new[] { cookieString });
 
@@ -589,13 +831,24 @@ namespace System.Net.Tests
 
         public static IEnumerable<object[]> Headers_TestData()
         {
-            yield return new object[] { new string[] { "name:value" }, new WebHeaderCollection() { { "name", "value" } } };
-            yield return new object[] { new string[] { "name:val?ue" }, new WebHeaderCollection() { { "name", "val?ue" } } };
+            yield return new object[]
+            {
+                new string[] { "name:value" },
+                new WebHeaderCollection() { { "name", "value" } },
+            };
+            yield return new object[]
+            {
+                new string[] { "name:val?ue" },
+                new WebHeaderCollection() { { "name", "val?ue" } },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Headers_TestData))]
-        public async Task Headers_Get_ReturnsExpected(string[] headers, WebHeaderCollection expected)
+        public async Task Headers_Get_ReturnsExpected(
+            string[] headers,
+            WebHeaderCollection expected
+        )
         {
             HttpListenerRequest request = await GetRequest("POST", null, headers);
             foreach (string name in expected)
@@ -605,9 +858,17 @@ namespace System.Net.Tests
             }
         }
 
-        private async Task<HttpListenerRequest> GetRequest(string requestType, string query, string[] headers, string content = "Text\r\n", string httpVersion = "1.1")
+        private async Task<HttpListenerRequest> GetRequest(
+            string requestType,
+            string query,
+            string[] headers,
+            string content = "Text\r\n",
+            string httpVersion = "1.1"
+        )
         {
-            Client.Send(Factory.GetContent(httpVersion, requestType, query, content, headers, true));
+            Client.Send(
+                Factory.GetContent(httpVersion, requestType, query, content, headers, true)
+            );
 
             HttpListener listener = Factory.GetListener();
             return (await listener.GetContextAsync()).Request;

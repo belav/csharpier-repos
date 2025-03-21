@@ -21,7 +21,9 @@ namespace ABIStress
         {
             static void Usage()
             {
-                Console.WriteLine("Usage: [--verbose] [--caller-index <number>] [--num-calls <number>] [--tailcalls] [--pinvokes] [--instantiatingstubs] [--unboxingstubs] [--sharedgenericunboxingstubs] [--max-params <number>] [--no-ctrlc-summary]");
+                Console.WriteLine(
+                    "Usage: [--verbose] [--caller-index <number>] [--num-calls <number>] [--tailcalls] [--pinvokes] [--instantiatingstubs] [--unboxingstubs] [--sharedgenericunboxingstubs] [--max-params <number>] [--no-ctrlc-summary]"
+                );
                 Console.WriteLine("Either --caller-index or --num-calls must be specified.");
                 Console.WriteLine("Example: --num-calls 100");
                 Console.WriteLine("  Stress first 100 of all kinds");
@@ -113,7 +115,9 @@ namespace ABIStress
                     {
                         Console.Write("{0} callers done", i + 1);
                         if (Config.StressModes.HasFlag(StressModes.TailCalls))
-                            Console.Write($" ({tcel.NumSuccessfulTailCalls} successful tailcalls tested)");
+                            Console.Write(
+                                $" ({tcel.NumSuccessfulTailCalls} successful tailcalls tested)"
+                            );
                         Console.WriteLine();
                     }
                 }
@@ -128,8 +132,16 @@ namespace ABIStress
                     {
                         int numRejected = tcel.FailureReasons.Values.Sum();
                         Console.WriteLine("{0} rejected tailcalls. Breakdown:", numRejected);
-                        foreach (var (reason, count) in tcel.FailureReasons.OrderByDescending(kvp => kvp.Value))
-                            Console.WriteLine("[{0:00.00}%]: {1}", count / (double)numRejected * 100, reason);
+                        foreach (
+                            var (reason, count) in tcel.FailureReasons.OrderByDescending(kvp =>
+                                kvp.Value
+                            )
+                        )
+                            Console.WriteLine(
+                                "[{0:00.00}%]: {1}",
+                                count / (double)numRejected * 100,
+                                reason
+                            );
                     }
                 }
             }
@@ -147,20 +159,68 @@ namespace ABIStress
                 result &= DoPInvokes(index);
             if (Config.StressModes.HasFlag(StressModes.UnboxingStubs))
             {
-                result &= DoStubCall(index, staticMethod: false, onValueType: true, typeGenericShape: GenericShape.NotGeneric, methodGenericShape: GenericShape.NotGeneric);
-                result &= DoStubCall(index, staticMethod: false, onValueType: true, typeGenericShape: GenericShape.NotGeneric, methodGenericShape: GenericShape.GenericOverReferenceType);
+                result &= DoStubCall(
+                    index,
+                    staticMethod: false,
+                    onValueType: true,
+                    typeGenericShape: GenericShape.NotGeneric,
+                    methodGenericShape: GenericShape.NotGeneric
+                );
+                result &= DoStubCall(
+                    index,
+                    staticMethod: false,
+                    onValueType: true,
+                    typeGenericShape: GenericShape.NotGeneric,
+                    methodGenericShape: GenericShape.GenericOverReferenceType
+                );
             }
             if (Config.StressModes.HasFlag(StressModes.SharedGenericUnboxingStubs))
             {
-                result &= DoStubCall(index, staticMethod: false, onValueType: true, typeGenericShape: GenericShape.GenericOverReferenceType, methodGenericShape: GenericShape.NotGeneric);
+                result &= DoStubCall(
+                    index,
+                    staticMethod: false,
+                    onValueType: true,
+                    typeGenericShape: GenericShape.GenericOverReferenceType,
+                    methodGenericShape: GenericShape.NotGeneric
+                );
             }
             if (Config.StressModes.HasFlag(StressModes.InstantiatingStubs))
             {
-                result &= DoStubCall(index, staticMethod: false, onValueType: false, typeGenericShape: GenericShape.NotGeneric, methodGenericShape: GenericShape.GenericOverReferenceType);
-                result &= DoStubCall(index, staticMethod: true, onValueType: false, typeGenericShape: GenericShape.GenericOverReferenceType, methodGenericShape: GenericShape.NotGeneric);
-                result &= DoStubCall(index, staticMethod: true, onValueType: true, typeGenericShape: GenericShape.GenericOverReferenceType, methodGenericShape: GenericShape.NotGeneric);
-                result &= DoStubCall(index, staticMethod: true, onValueType: false, typeGenericShape: GenericShape.GenericOverValueType, methodGenericShape: GenericShape.GenericOverReferenceType);
-                result &= DoStubCall(index, staticMethod: true, onValueType: false, typeGenericShape: GenericShape.GenericOverReferenceType, methodGenericShape: GenericShape.GenericOverValueType);
+                result &= DoStubCall(
+                    index,
+                    staticMethod: false,
+                    onValueType: false,
+                    typeGenericShape: GenericShape.NotGeneric,
+                    methodGenericShape: GenericShape.GenericOverReferenceType
+                );
+                result &= DoStubCall(
+                    index,
+                    staticMethod: true,
+                    onValueType: false,
+                    typeGenericShape: GenericShape.GenericOverReferenceType,
+                    methodGenericShape: GenericShape.NotGeneric
+                );
+                result &= DoStubCall(
+                    index,
+                    staticMethod: true,
+                    onValueType: true,
+                    typeGenericShape: GenericShape.GenericOverReferenceType,
+                    methodGenericShape: GenericShape.NotGeneric
+                );
+                result &= DoStubCall(
+                    index,
+                    staticMethod: true,
+                    onValueType: false,
+                    typeGenericShape: GenericShape.GenericOverValueType,
+                    methodGenericShape: GenericShape.GenericOverReferenceType
+                );
+                result &= DoStubCall(
+                    index,
+                    staticMethod: true,
+                    onValueType: false,
+                    typeGenericShape: GenericShape.GenericOverReferenceType,
+                    methodGenericShape: GenericShape.GenericOverValueType
+                );
             }
             return result;
         }
@@ -173,8 +233,10 @@ namespace ABIStress
             return tc;
         }
 
-        private static int GetSeed(string name)
-            => Fnv1a(BitConverter.GetBytes(Config.Seed).Concat(Encoding.UTF8.GetBytes(name)).ToArray());
+        private static int GetSeed(string name) =>
+            Fnv1a(
+                BitConverter.GetBytes(Config.Seed).Concat(Encoding.UTF8.GetBytes(name)).ToArray()
+            );
 
         private static int Fnv1a(byte[] data)
         {
@@ -182,7 +244,7 @@ namespace ABIStress
             foreach (byte b in data)
             {
                 hash ^= b;
-                hash *= 16777619; 
+                hash *= 16777619;
             }
 
             return (int)hash;
@@ -197,7 +259,11 @@ namespace ABIStress
             return pms;
         }
 
-        private static List<Value> GenCallerToCalleeArgs(List<TypeEx> callerParameters, List<TypeEx> calleeParameters, Random rand)
+        private static List<Value> GenCallerToCalleeArgs(
+            List<TypeEx> callerParameters,
+            List<TypeEx> calleeParameters,
+            Random rand
+        )
         {
             List<Value> args = new List<Value>(calleeParameters.Count);
             List<Value> candidates = new List<Value>();
@@ -216,14 +282,23 @@ namespace ABIStress
                 else
                 {
                     // No candidates to forward, so just create a new value here dynamically.
-                    args.Add(new ConstantValue(targetTy, Gen.GenConstant(targetTy.Type, targetTy.Fields, rand)));
+                    args.Add(
+                        new ConstantValue(
+                            targetTy,
+                            Gen.GenConstant(targetTy.Type, targetTy.Fields, rand)
+                        )
+                    );
                 }
             }
 
             return args;
         }
 
-        private static void CollectCandidateArgs(Type targetTy, List<TypeEx> pms, List<Value> candidates)
+        private static void CollectCandidateArgs(
+            Type targetTy,
+            List<TypeEx> pms,
+            List<Value> candidates
+        )
         {
             for (int i = 0; i < pms.Count; i++)
             {
@@ -248,11 +323,16 @@ namespace ABIStress
         }
 
         private static (object callerResult, object calleeResult) InvokeCallerCallee(
-            DynamicMethod caller, List<TypeEx> callerParameters,
-            DynamicMethod callee, List<Value> passedArgs,
-            Random rand)
+            DynamicMethod caller,
+            List<TypeEx> callerParameters,
+            DynamicMethod callee,
+            List<Value> passedArgs,
+            Random rand
+        )
         {
-            object[] outerArgs = callerParameters.Select(p => Gen.GenConstant(p.Type, p.Fields, rand)).ToArray();
+            object[] outerArgs = callerParameters
+                .Select(p => Gen.GenConstant(p.Type, p.Fields, rand))
+                .ToArray();
             object[] innerArgs = passedArgs.Select(v => v.Get(outerArgs)).ToArray();
 
             if (Config.Verbose)
@@ -291,9 +371,18 @@ namespace ABIStress
             Console.WriteLine(mi.ToString().Replace(ns + ".", ""));
         }
 
-        private static readonly MethodInfo s_writeString = typeof(Console).GetMethod("Write", new[] { typeof(string) });
-        private static readonly MethodInfo s_writeLineString = typeof(Console).GetMethod("WriteLine", new[] { typeof(string) });
-        private static readonly MethodInfo s_dumpValue = typeof(Program).GetMethod("DumpValue", BindingFlags.NonPublic | BindingFlags.Static);
+        private static readonly MethodInfo s_writeString = typeof(Console).GetMethod(
+            "Write",
+            new[] { typeof(string) }
+        );
+        private static readonly MethodInfo s_writeLineString = typeof(Console).GetMethod(
+            "WriteLine",
+            new[] { typeof(string) }
+        );
+        private static readonly MethodInfo s_dumpValue = typeof(Program).GetMethod(
+            "DumpValue",
+            BindingFlags.NonPublic | BindingFlags.Static
+        );
 
         private static void DumpObject(object o)
         {
@@ -338,45 +427,93 @@ namespace ABIStress
             }
         }
 
-        private static readonly TypeEx[] s_allTypes =
-            new[]
-            {
-                typeof(byte), typeof(short), typeof(int), typeof(long),
-                typeof(float), typeof(double),
-                typeof(Vector<int>), typeof(Vector128<int>), typeof(Vector256<int>),
-                typeof(Int128),
-                typeof(S1P), typeof(S2P), typeof(S2U), typeof(S3U),
-                typeof(S4P), typeof(S4U), typeof(S5U), typeof(S6U),
-                typeof(S7U), typeof(S8P), typeof(S8U), typeof(S9U),
-                typeof(S10U), typeof(S11U), typeof(S12U), typeof(S13U),
-                typeof(S14U), typeof(S15U), typeof(S16U), typeof(S17U),
-                typeof(S31U), typeof(S32U),
-                typeof(Hfa1), typeof(Hfa2),
-                typeof(I128_1), typeof(I128_2),
-            }.Select(t => new TypeEx(t)).ToArray();
+        private static readonly TypeEx[] s_allTypes = new[]
+        {
+            typeof(byte),
+            typeof(short),
+            typeof(int),
+            typeof(long),
+            typeof(float),
+            typeof(double),
+            typeof(Vector<int>),
+            typeof(Vector128<int>),
+            typeof(Vector256<int>),
+            typeof(Int128),
+            typeof(S1P),
+            typeof(S2P),
+            typeof(S2U),
+            typeof(S3U),
+            typeof(S4P),
+            typeof(S4U),
+            typeof(S5U),
+            typeof(S6U),
+            typeof(S7U),
+            typeof(S8P),
+            typeof(S8U),
+            typeof(S9U),
+            typeof(S10U),
+            typeof(S11U),
+            typeof(S12U),
+            typeof(S13U),
+            typeof(S14U),
+            typeof(S15U),
+            typeof(S16U),
+            typeof(S17U),
+            typeof(S31U),
+            typeof(S32U),
+            typeof(Hfa1),
+            typeof(Hfa2),
+            typeof(I128_1),
+            typeof(I128_2),
+        }
+            .Select(t => new TypeEx(t))
+            .ToArray();
 
         private static readonly IAbi s_abi = SelectAbi();
 
         public static IAbi Abi => s_abi;
 
-        private static readonly TypeEx[] s_tailCalleeCandidateArgTypes =
-            s_abi.TailCalleeCandidateArgTypes.Select(t => new TypeEx(t)).ToArray();
+        private static readonly TypeEx[] s_tailCalleeCandidateArgTypes = s_abi
+            .TailCalleeCandidateArgTypes.Select(t => new TypeEx(t))
+            .ToArray();
 
         // We cannot marshal generic types so we cannot just use all types for pinvokees.
         // This can be relaxed once https://github.com/dotnet/coreclr/pull/23899 is merged.
-        private static readonly TypeEx[] s_pinvokeeCandidateArgTypes =
-            new[]
-            {
-                typeof(byte), typeof(short), typeof(int), typeof(long),
-                typeof(float), typeof(double),
-                typeof(S1P), typeof(S2P), typeof(S2U), typeof(S3U),
-                typeof(S4P), typeof(S4U), typeof(S5U), typeof(S6U),
-                typeof(S7U), typeof(S8P), typeof(S8U), typeof(S9U),
-                typeof(S10U), typeof(S11U), typeof(S12U), typeof(S13U),
-                typeof(S14U), typeof(S15U), typeof(S16U), typeof(S17U),
-                typeof(S31U), typeof(S32U),
-                typeof(Hfa1), typeof(Hfa2),
-            }.Select(t => new TypeEx(t)).ToArray();
+        private static readonly TypeEx[] s_pinvokeeCandidateArgTypes = new[]
+        {
+            typeof(byte),
+            typeof(short),
+            typeof(int),
+            typeof(long),
+            typeof(float),
+            typeof(double),
+            typeof(S1P),
+            typeof(S2P),
+            typeof(S2U),
+            typeof(S3U),
+            typeof(S4P),
+            typeof(S4U),
+            typeof(S5U),
+            typeof(S6U),
+            typeof(S7U),
+            typeof(S8P),
+            typeof(S8U),
+            typeof(S9U),
+            typeof(S10U),
+            typeof(S11U),
+            typeof(S12U),
+            typeof(S13U),
+            typeof(S14U),
+            typeof(S15U),
+            typeof(S16U),
+            typeof(S17U),
+            typeof(S31U),
+            typeof(S32U),
+            typeof(Hfa1),
+            typeof(Hfa2),
+        }
+            .Select(t => new TypeEx(t))
+            .ToArray();
 
         private static IAbi SelectAbi()
         {
@@ -414,7 +551,9 @@ namespace ABIStress
                 return new SysVAbi();
             }
 
-            throw new NotSupportedException($"Platform {Environment.OSVersion.Platform} is not supported");
+            throw new NotSupportedException(
+                $"Platform {Environment.OSVersion.Platform} is not supported"
+            );
         }
     }
 }

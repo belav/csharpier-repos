@@ -7,5 +7,5 @@ internal enum HttpConnectionStopStatus
 {
     NormalClosure,
     Timeout,
-    AppShutdown
+    AppShutdown,
 }

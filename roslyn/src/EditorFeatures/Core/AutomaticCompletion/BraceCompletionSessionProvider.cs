@@ -38,35 +38,62 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
         IThreadingContext threadingContext,
         ITextBufferUndoManagerProvider undoManager,
         IEditorOperationsFactoryService editorOperationsFactoryService,
-        EditorOptionsService editorOptionsService) : IBraceCompletionSessionProvider
+        EditorOptionsService editorOptionsService
+    ) : IBraceCompletionSessionProvider
     {
         private readonly IThreadingContext _threadingContext = threadingContext;
         private readonly ITextBufferUndoManagerProvider _undoManager = undoManager;
-        private readonly IEditorOperationsFactoryService _editorOperationsFactoryService = editorOperationsFactoryService;
+        private readonly IEditorOperationsFactoryService _editorOperationsFactoryService =
+            editorOperationsFactoryService;
         private readonly EditorOptionsService _editorOptionsService = editorOptionsService;
 
-        public bool TryCreateSession(ITextView textView, SnapshotPoint openingPoint, char openingBrace, char closingBrace, out IBraceCompletionSession session)
+        public bool TryCreateSession(
+            ITextView textView,
+            SnapshotPoint openingPoint,
+            char openingBrace,
+            char closingBrace,
+            out IBraceCompletionSession session
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
             var textSnapshot = openingPoint.Snapshot;
             var document = textSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document != null)
             {
-                var editorSessionFactory = document.GetLanguageService<IBraceCompletionServiceFactory>();
+                var editorSessionFactory =
+                    document.GetLanguageService<IBraceCompletionServiceFactory>();
                 if (editorSessionFactory != null)
                 {
                     // Brace completion is (currently) not cancellable.
                     var cancellationToken = CancellationToken.None;
 
-                    var parsedDocument = ParsedDocument.CreateSynchronously(document, cancellationToken);
-                    var editorSession = editorSessionFactory.TryGetService(parsedDocument, openingPoint, openingBrace, cancellationToken);
+                    var parsedDocument = ParsedDocument.CreateSynchronously(
+                        document,
+                        cancellationToken
+                    );
+                    var editorSession = editorSessionFactory.TryGetService(
+                        parsedDocument,
+                        openingPoint,
+                        openingBrace,
+                        cancellationToken
+                    );
                     if (editorSession != null)
                     {
-                        var undoHistory = _undoManager.GetTextBufferUndoManager(textView.TextBuffer).TextBufferUndoHistory;
+                        var undoHistory = _undoManager
+                            .GetTextBufferUndoManager(textView.TextBuffer)
+                            .TextBufferUndoHistory;
                         session = new BraceCompletionSession(
-                            textView, openingPoint.Snapshot.TextBuffer, openingPoint, openingBrace, closingBrace,
-                            undoHistory, _editorOperationsFactoryService, _editorOptionsService,
-                            editorSession, _threadingContext);
+                            textView,
+                            openingPoint.Snapshot.TextBuffer,
+                            openingPoint,
+                            openingBrace,
+                            closingBrace,
+                            undoHistory,
+                            _editorOperationsFactoryService,
+                            _editorOptionsService,
+                            editorSession,
+                            _threadingContext
+                        );
                         return true;
                     }
                 }

@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 // Bug: OSR bug causing bad GC pointers
 // a GC root becomes an interior pointer when added.
 public class Repro

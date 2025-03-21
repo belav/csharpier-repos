@@ -22,9 +22,13 @@ public class FileProviderRazorProjectItem : RazorProjectItem
     /// <param name="basePath">The base path.</param>
     /// <param name="filePath">The file path.</param>
     /// <param name="root">The root.</param>
-    public FileProviderRazorProjectItem(IFileInfo fileInfo, string basePath, string filePath, string root) : this(fileInfo, basePath, filePath, root, fileKind: null)
-    {
-    }
+    public FileProviderRazorProjectItem(
+        IFileInfo fileInfo,
+        string basePath,
+        string filePath,
+        string root
+    )
+        : this(fileInfo, basePath, filePath, root, fileKind: null) { }
 
     /// <summary>
     /// Intializes a new instance of a <see cref="FileProviderRazorProjectItem"/>.
@@ -34,7 +38,13 @@ public class FileProviderRazorProjectItem : RazorProjectItem
     /// <param name="filePath">The file path.</param>
     /// <param name="root">The root.</param>
     /// <param name="fileKind">The kind of file.</param>
-    public FileProviderRazorProjectItem(IFileInfo fileInfo, string basePath, string filePath, string root, string? fileKind)
+    public FileProviderRazorProjectItem(
+        IFileInfo fileInfo,
+        string basePath,
+        string filePath,
+        string root,
+        string? fileKind
+    )
     {
         FileInfo = fileInfo;
         BasePath = basePath;
@@ -74,11 +84,16 @@ public class FileProviderRazorProjectItem : RazorProjectItem
 
                 if (Exists)
                 {
-                    if (_root != null &&
-                        !string.IsNullOrEmpty(PhysicalPath) &&
-                        PhysicalPath.StartsWith(_root, StringComparison.OrdinalIgnoreCase) &&
-                        PhysicalPath.Length > _root.Length &&
-                        (PhysicalPath[_root.Length] == Path.DirectorySeparatorChar || PhysicalPath[_root.Length] == Path.AltDirectorySeparatorChar))
+                    if (
+                        _root != null
+                        && !string.IsNullOrEmpty(PhysicalPath)
+                        && PhysicalPath.StartsWith(_root, StringComparison.OrdinalIgnoreCase)
+                        && PhysicalPath.Length > _root.Length
+                        && (
+                            PhysicalPath[_root.Length] == Path.DirectorySeparatorChar
+                            || PhysicalPath[_root.Length] == Path.AltDirectorySeparatorChar
+                        )
+                    )
                     {
                         _relativePhysicalPath = PhysicalPath.Substring(_root.Length + 1); // Include leading separator
                     }

@@ -13,7 +13,12 @@ namespace System.Text.Json.Nodes
     {
         private readonly JsonTypeInfo<TValue> _jsonTypeInfo;
 
-        public JsonValueCustomized(TValue value, JsonTypeInfo<TValue> jsonTypeInfo, JsonNodeOptions? options = null) : base(value, options)
+        public JsonValueCustomized(
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo,
+            JsonNodeOptions? options = null
+        )
+            : base(value, options)
         {
             Debug.Assert(jsonTypeInfo.IsConfigured);
             _jsonTypeInfo = jsonTypeInfo;

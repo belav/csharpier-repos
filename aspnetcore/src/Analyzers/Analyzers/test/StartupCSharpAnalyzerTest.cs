@@ -11,7 +11,10 @@ namespace Microsoft.AspNetCore.Analyzers;
 
 internal sealed class StartupCSharpAnalyzerTest : CSharpAnalyzerTest<StartupAnalyzer, XUnitVerifier>
 {
-    public StartupCSharpAnalyzerTest(StartupAnalyzer analyzer, ImmutableArray<MetadataReference> metadataReferences)
+    public StartupCSharpAnalyzerTest(
+        StartupAnalyzer analyzer,
+        ImmutableArray<MetadataReference> metadataReferences
+    )
     {
         StartupAnalyzer = analyzer;
         TestState.OutputKind = OutputKind.WindowsApplication;
@@ -20,5 +23,6 @@ internal sealed class StartupCSharpAnalyzerTest : CSharpAnalyzerTest<StartupAnal
 
     public StartupAnalyzer StartupAnalyzer { get; }
 
-    protected override IEnumerable<DiagnosticAnalyzer> GetDiagnosticAnalyzers() => new[] { StartupAnalyzer };
+    protected override IEnumerable<DiagnosticAnalyzer> GetDiagnosticAnalyzers() =>
+        new[] { StartupAnalyzer };
 }

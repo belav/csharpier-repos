@@ -17,13 +17,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Formatting
     internal class FormattingResult : AbstractFormattingResult
     {
         internal FormattingResult(TreeData treeInfo, TokenStream tokenStream, TextSpan spanToFormat)
-            : base(treeInfo, tokenStream, spanToFormat)
-        {
-        }
+            : base(treeInfo, tokenStream, spanToFormat) { }
 
-        protected override SyntaxNode Rewriter(Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> changeMap, CancellationToken cancellationToken)
+        protected override SyntaxNode Rewriter(
+            Dictionary<ValueTuple<SyntaxToken, SyntaxToken>, TriviaData> changeMap,
+            CancellationToken cancellationToken
+        )
         {
-            var rewriter = new TriviaRewriter(this.TreeInfo.Root, new TextSpanIntervalTree(this.FormattedSpan), changeMap, cancellationToken);
+            var rewriter = new TriviaRewriter(
+                this.TreeInfo.Root,
+                new TextSpanIntervalTree(this.FormattedSpan),
+                changeMap,
+                cancellationToken
+            );
             return rewriter.Transform();
         }
     }

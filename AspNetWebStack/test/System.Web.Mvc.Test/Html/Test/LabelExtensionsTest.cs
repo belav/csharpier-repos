@@ -20,7 +20,13 @@ namespace System.Web.Mvc.Html.Test
         public LabelExtensionsTest()
         {
             metadataProvider = new Mock<ModelMetadataProvider>();
-            metadata = new Mock<ModelMetadata>(metadataProvider.Object, null, null, typeof(object), null);
+            metadata = new Mock<ModelMetadata>(
+                metadataProvider.Object,
+                null,
+                null,
+                typeof(object),
+                null
+            );
             viewData = new ViewDataDictionary();
 
             viewContext = new Mock<ViewContext>();
@@ -31,11 +37,20 @@ namespace System.Web.Mvc.Html.Test
 
             html = new HtmlHelper<object>(viewContext.Object, viewDataContainer.Object);
 
-            metadataProvider.Setup(p => p.GetMetadataForProperties(It.IsAny<object>(), It.IsAny<Type>()))
+            metadataProvider
+                .Setup(p => p.GetMetadataForProperties(It.IsAny<object>(), It.IsAny<Type>()))
                 .Returns(new ModelMetadata[0]);
-            metadataProvider.Setup(p => p.GetMetadataForProperty(It.IsAny<Func<object>>(), It.IsAny<Type>(), It.IsAny<string>()))
+            metadataProvider
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        It.IsAny<Type>(),
+                        It.IsAny<string>()
+                    )
+                )
                 .Returns(metadata.Object);
-            metadataProvider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+            metadataProvider
+                .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
                 .Returns(metadata.Object);
         }
 
@@ -45,9 +60,7 @@ namespace System.Web.Mvc.Html.Test
         public void LabelNullExpressionThrows()
         {
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => html.Label(null),
-                "expression");
+            Assert.ThrowsArgumentNull(() => html.Label(null), "expression");
         }
 
         [Fact]
@@ -57,7 +70,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString result = html.Label("PropertyName", null, null, metadataProvider.Object);
 
             // Assert
-            Assert.Equal(@"<label for=""PropertyName"">PropertyName</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label for=""PropertyName"">PropertyName</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -68,7 +84,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString result = html.Label("PropertyName", null, null, metadataProvider.Object);
 
             // Assert
-            Assert.Equal(@"<label for=""PropertyName"">PropertyName</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label for=""PropertyName"">PropertyName</label>",
+                result.ToHtmlString()
+            );
         }
 
         class Model
@@ -81,9 +100,19 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             Model model = new Model { PropertyName = "propertyValue" };
-            HtmlHelper<Model> html = new HtmlHelper<Model>(viewContext.Object, viewDataContainer.Object);
+            HtmlHelper<Model> html = new HtmlHelper<Model>(
+                viewContext.Object,
+                viewDataContainer.Object
+            );
             viewData.Model = model;
-            metadataProvider.Setup(p => p.GetMetadataForProperty(It.IsAny<Func<object>>(), typeof(Model), "PropertyName"))
+            metadataProvider
+                .Setup(p =>
+                    p.GetMetadataForProperty(
+                        It.IsAny<Func<object>>(),
+                        typeof(Model),
+                        "PropertyName"
+                    )
+                )
                 .Returns(metadata.Object)
                 .Verifiable();
 
@@ -104,19 +133,34 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString result = html.Label("PropertyName", null, null, metadataProvider.Object);
 
             // Assert
-            Assert.Equal(@"<label for=""Prefix_PropertyName"">PropertyName</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label for=""Prefix_PropertyName"">PropertyName</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
         public void LabelUsesLabelTextBeforeMetadata()
         {
             // Arrange
-            metadata = new Mock<ModelMetadata>(metadataProvider.Object, null, null, typeof(object), "Custom property name from metadata");
-            metadataProvider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+            metadata = new Mock<ModelMetadata>(
+                metadataProvider.Object,
+                null,
+                null,
+                typeof(object),
+                "Custom property name from metadata"
+            );
+            metadataProvider
+                .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
                 .Returns(metadata.Object);
 
             //Act
-            MvcHtmlString result = html.Label("PropertyName", "Label Text", null, metadataProvider.Object);
+            MvcHtmlString result = html.Label(
+                "PropertyName",
+                "Label Text",
+                null,
+                metadataProvider.Object
+            );
 
             // Assert
             Assert.Equal(@"<label for=""PropertyName"">Label Text</label>", result.ToHtmlString());
@@ -127,11 +171,18 @@ namespace System.Web.Mvc.Html.Test
         public void Label_HtmlEncodes_LabelText(string text, string expectedText)
         {
             // Arrange & Act
-            var result =
-                html.Label("PropertyName", text, htmlAttributes: null, metadataProvider: metadataProvider.Object);
+            var result = html.Label(
+                "PropertyName",
+                text,
+                htmlAttributes: null,
+                metadataProvider: metadataProvider.Object
+            );
 
             // Assert
-            Assert.Equal(@"<label for=""PropertyName"">" + expectedText + "</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label for=""PropertyName"">" + expectedText + "</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -144,22 +195,35 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString result = html.Label("PropertyName", null, null, metadataProvider.Object);
 
             // Assert
-            Assert.Equal(@"<label for=""PropertyName"">Custom display name from metadata</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label for=""PropertyName"">Custom display name from metadata</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
         public void LabelUsesMetadataForPropertyNameWhenDisplayNameIsNull()
         {
             // Arrange
-            metadata = new Mock<ModelMetadata>(metadataProvider.Object, null, null, typeof(object), "Custom property name from metadata");
-            metadataProvider.Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
+            metadata = new Mock<ModelMetadata>(
+                metadataProvider.Object,
+                null,
+                null,
+                typeof(object),
+                "Custom property name from metadata"
+            );
+            metadataProvider
+                .Setup(p => p.GetMetadataForType(It.IsAny<Func<object>>(), It.IsAny<Type>()))
                 .Returns(metadata.Object);
 
             // Act
             MvcHtmlString result = html.Label("PropertyName", null, null, metadataProvider.Object);
 
             // Assert
-            Assert.Equal(@"<label for=""PropertyName"">Custom property name from metadata</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label for=""PropertyName"">Custom property name from metadata</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -179,7 +243,12 @@ namespace System.Web.Mvc.Html.Test
         public void LabelWithAnonymousValues()
         {
             // Act
-            MvcHtmlString result = html.Label("PropertyName", null, new { @for = "attrFor" }, metadataProvider.Object);
+            MvcHtmlString result = html.Label(
+                "PropertyName",
+                null,
+                new { @for = "attrFor" },
+                metadataProvider.Object
+            );
 
             // Assert
             Assert.Equal(@"<label for=""attrFor"">PropertyName</label>", result.ToHtmlString());
@@ -189,7 +258,12 @@ namespace System.Web.Mvc.Html.Test
         public void LabelWithAnonymousValuesAndLabelText()
         {
             // Act
-            MvcHtmlString result = html.Label("PropertyName", "Label Text", new { @for = "attrFor" }, metadataProvider.Object);
+            MvcHtmlString result = html.Label(
+                "PropertyName",
+                "Label Text",
+                new { @for = "attrFor" },
+                metadataProvider.Object
+            );
 
             // Assert
             Assert.Equal(@"<label for=""attrFor"">Label Text</label>", result.ToHtmlString());
@@ -197,15 +271,24 @@ namespace System.Web.Mvc.Html.Test
 
         [Theory]
         [PropertyData("AttributeEncodedData_NoHtmlEncode", PropertyType = typeof(EncodedDataSets))]
-        public void LabelWithAnonymousValues_AttributeEncodes_AddedHtmlAttributes(string text, string expectedText)
+        public void LabelWithAnonymousValues_AttributeEncodes_AddedHtmlAttributes(
+            string text,
+            string expectedText
+        )
         {
             // Arrange & Act
-            var result = html.Label("PropertyName", "text", new { attribute = text }, metadataProvider.Object);
+            var result = html.Label(
+                "PropertyName",
+                "text",
+                new { attribute = text },
+                metadataProvider.Object
+            );
 
             // Assert
             Assert.Equal(
                 @"<label attribute=""" + expectedText + @""" for=""PropertyName"">text</label>",
-                result.ToHtmlString());
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -215,14 +298,22 @@ namespace System.Web.Mvc.Html.Test
             Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
             {
                 { "foo", "bar" },
-                { "quux", "baz" }
+                { "quux", "baz" },
             };
 
             // Act
-            MvcHtmlString result = html.Label("PropertyName", null, htmlAttributes, metadataProvider.Object);
+            MvcHtmlString result = html.Label(
+                "PropertyName",
+                null,
+                htmlAttributes,
+                metadataProvider.Object
+            );
 
             // Assert
-            Assert.Equal(@"<label foo=""bar"" for=""PropertyName"" quux=""baz"">PropertyName</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label foo=""bar"" for=""PropertyName"" quux=""baz"">PropertyName</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -232,14 +323,22 @@ namespace System.Web.Mvc.Html.Test
             Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
             {
                 { "foo", "bar" },
-                { "quux", "baz" }
+                { "quux", "baz" },
             };
 
             // Act
-            MvcHtmlString result = html.Label("PropertyName", "Label Text", htmlAttributes, metadataProvider.Object);
+            MvcHtmlString result = html.Label(
+                "PropertyName",
+                "Label Text",
+                htmlAttributes,
+                metadataProvider.Object
+            );
 
             // Assert
-            Assert.Equal(@"<label foo=""bar"" for=""PropertyName"" quux=""baz"">Label Text</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label foo=""bar"" for=""PropertyName"" quux=""baz"">Label Text</label>",
+                result.ToHtmlString()
+            );
         }
 
         // LabelFor tests
@@ -250,7 +349,8 @@ namespace System.Web.Mvc.Html.Test
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => html.LabelFor((Expression<Func<Object, Object>>)null),
-                "expression");
+                "expression"
+            );
         }
 
         [Fact]
@@ -258,8 +358,15 @@ namespace System.Web.Mvc.Html.Test
         {
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
-                () => html.LabelFor(model => new { foo = "Bar" }, null, null, metadataProvider.Object),
-                "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions.");
+                () =>
+                    html.LabelFor(
+                        model => new { foo = "Bar" },
+                        null,
+                        null,
+                        metadataProvider.Object
+                    ),
+                "Templates can be used only with field access, property access, single-dimension array index, or single-parameter custom indexer expressions."
+            );
         }
 
         [Fact]
@@ -269,7 +376,12 @@ namespace System.Web.Mvc.Html.Test
             string unknownKey = "this is a dummy parameter value";
 
             // Act
-            MvcHtmlString result = html.LabelFor(model => unknownKey, null, null, metadataProvider.Object);
+            MvcHtmlString result = html.LabelFor(
+                model => unknownKey,
+                null,
+                null,
+                metadataProvider.Object
+            );
 
             // Assert
             Assert.Equal(@"<label for=""unknownKey"">unknownKey</label>", result.ToHtmlString());
@@ -283,10 +395,18 @@ namespace System.Web.Mvc.Html.Test
             string unknownKey = "this is a dummy parameter value";
 
             // Act
-            MvcHtmlString result = html.LabelFor(model => unknownKey, null, null, metadataProvider.Object);
+            MvcHtmlString result = html.LabelFor(
+                model => unknownKey,
+                null,
+                null,
+                metadataProvider.Object
+            );
 
             // Assert
-            Assert.Equal(@"<label for=""Prefix_unknownKey"">unknownKey</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label for=""Prefix_unknownKey"">unknownKey</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -297,7 +417,12 @@ namespace System.Web.Mvc.Html.Test
             string unknownKey = "this is a dummy parameter value";
 
             //Act
-            MvcHtmlString result = html.LabelFor(model => unknownKey, "Label Text", null, metadataProvider.Object);
+            MvcHtmlString result = html.LabelFor(
+                model => unknownKey,
+                "Label Text",
+                null,
+                metadataProvider.Object
+            );
 
             // Assert
             Assert.Equal(@"<label for=""unknownKey"">Label Text</label>", result.ToHtmlString());
@@ -311,11 +436,18 @@ namespace System.Web.Mvc.Html.Test
             var dummy = "this is a dummy parameter value";
 
             // Arrange & Act
-            var result =
-                html.LabelFor(m => dummy, text, htmlAttributes: null, metadataProvider: metadataProvider.Object);
+            var result = html.LabelFor(
+                m => dummy,
+                text,
+                htmlAttributes: null,
+                metadataProvider: metadataProvider.Object
+            );
 
             // Assert
-            Assert.Equal(@"<label for=""dummy"">" + expectedText + "</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label for=""dummy"">" + expectedText + "</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -326,10 +458,18 @@ namespace System.Web.Mvc.Html.Test
             string unknownKey = "this is a dummy parameter value";
 
             // Act
-            MvcHtmlString result = html.LabelFor(model => unknownKey, null, null, metadataProvider.Object);
+            MvcHtmlString result = html.LabelFor(
+                model => unknownKey,
+                null,
+                null,
+                metadataProvider.Object
+            );
 
             // Assert
-            Assert.Equal(@"<label for=""unknownKey"">Custom display name from metadata</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label for=""unknownKey"">Custom display name from metadata</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -340,7 +480,12 @@ namespace System.Web.Mvc.Html.Test
             string unknownKey = "this is a dummy parameter value";
 
             // Act
-            MvcHtmlString result = html.LabelFor(model => unknownKey, null, null, metadataProvider.Object);
+            MvcHtmlString result = html.LabelFor(
+                model => unknownKey,
+                null,
+                null,
+                metadataProvider.Object
+            );
 
             // Assert
             Assert.Equal(String.Empty, result.ToHtmlString());
@@ -353,7 +498,12 @@ namespace System.Web.Mvc.Html.Test
             string unknownKey = "this is a dummy parameter value";
 
             // Act
-            MvcHtmlString result = html.LabelFor(model => unknownKey, null, new { @for = "attrFor" }, metadataProvider.Object);
+            MvcHtmlString result = html.LabelFor(
+                model => unknownKey,
+                null,
+                new { @for = "attrFor" },
+                metadataProvider.Object
+            );
 
             // Assert
             Assert.Equal(@"<label for=""attrFor"">unknownKey</label>", result.ToHtmlString());
@@ -361,19 +511,27 @@ namespace System.Web.Mvc.Html.Test
 
         [Theory]
         [PropertyData("AttributeEncodedData_NoHtmlEncode", PropertyType = typeof(EncodedDataSets))]
-        public void LabeForlWithAnonymousValues_AttributeEncodes_AddedHtmlAttributes(string text, string expectedText)
+        public void LabeForlWithAnonymousValues_AttributeEncodes_AddedHtmlAttributes(
+            string text,
+            string expectedText
+        )
         {
             // Arrange
             var dummy = "this is a dummy parameter value";
 
             // Act
-            var result =
-                html.LabelFor(m => dummy, "text", new { attribute = text }, metadataProvider.Object);
+            var result = html.LabelFor(
+                m => dummy,
+                "text",
+                new { attribute = text },
+                metadataProvider.Object
+            );
 
             // Assert
             Assert.Equal(
                 @"<label attribute=""" + expectedText + @""" for=""dummy"">text</label>",
-                result.ToHtmlString());
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -383,7 +541,12 @@ namespace System.Web.Mvc.Html.Test
             string unknownKey = "this is a dummy parameter value";
 
             // Act
-            MvcHtmlString result = html.LabelFor(model => unknownKey, "Label Text", new { @for = "attrFor" }, metadataProvider.Object);
+            MvcHtmlString result = html.LabelFor(
+                model => unknownKey,
+                "Label Text",
+                new { @for = "attrFor" },
+                metadataProvider.Object
+            );
 
             // Assert
             Assert.Equal(@"<label for=""attrFor"">Label Text</label>", result.ToHtmlString());
@@ -398,14 +561,22 @@ namespace System.Web.Mvc.Html.Test
             Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
             {
                 { "foo", "bar" },
-                { "quux", "baz" }
+                { "quux", "baz" },
             };
 
             // Act
-            MvcHtmlString result = html.LabelFor(model => unknownKey, null, htmlAttributes, metadataProvider.Object);
+            MvcHtmlString result = html.LabelFor(
+                model => unknownKey,
+                null,
+                htmlAttributes,
+                metadataProvider.Object
+            );
 
             // Assert
-            Assert.Equal(@"<label foo=""bar"" for=""unknownKey"" quux=""baz"">unknownKey</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label foo=""bar"" for=""unknownKey"" quux=""baz"">unknownKey</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -417,24 +588,40 @@ namespace System.Web.Mvc.Html.Test
             Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
             {
                 { "foo", "bar" },
-                { "quux", "baz" }
+                { "quux", "baz" },
             };
 
             // Act
-            MvcHtmlString result = html.LabelFor(model => unknownKey, "Label Text", htmlAttributes, metadataProvider.Object);
+            MvcHtmlString result = html.LabelFor(
+                model => unknownKey,
+                "Label Text",
+                htmlAttributes,
+                metadataProvider.Object
+            );
 
             // Assert
-            Assert.Equal(@"<label foo=""bar"" for=""unknownKey"" quux=""baz"">Label Text</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label foo=""bar"" for=""unknownKey"" quux=""baz"">Label Text</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
         public void LabelForWithNestedClass()
         { // Dev10 Bug #936323
             // Arrange
-            HtmlHelper<NestedProduct> html = new HtmlHelper<NestedProduct>(viewContext.Object, viewDataContainer.Object);
+            HtmlHelper<NestedProduct> html = new HtmlHelper<NestedProduct>(
+                viewContext.Object,
+                viewDataContainer.Object
+            );
 
             // Act
-            MvcHtmlString result = html.LabelFor(nested => nested.product.Id, null, null, metadataProvider.Object);
+            MvcHtmlString result = html.LabelFor(
+                nested => nested.product.Id,
+                null,
+                null,
+                metadataProvider.Object
+            );
 
             //Assert
             Assert.Equal(@"<label for=""product_Id"">Id</label>", result.ToHtmlString());
@@ -444,10 +631,18 @@ namespace System.Web.Mvc.Html.Test
         public void LabelForWithArrayExpression()
         { // Dev10 Bug #905780
             // Arrange
-            HtmlHelper<Cart> html = new HtmlHelper<Cart>(viewContext.Object, viewDataContainer.Object);
+            HtmlHelper<Cart> html = new HtmlHelper<Cart>(
+                viewContext.Object,
+                viewDataContainer.Object
+            );
 
             // Act
-            MvcHtmlString result = html.LabelFor(cart => cart.Products[0].Id, null, null, metadataProvider.Object);
+            MvcHtmlString result = html.LabelFor(
+                cart => cart.Products[0].Id,
+                null,
+                null,
+                metadataProvider.Object
+            );
 
             // Assert
             Assert.Equal(@"<label for=""Products_0__Id"">Id</label>", result.ToHtmlString());
@@ -497,7 +692,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString result = html.LabelForModel();
 
             // Assert
-            Assert.Equal(@"<label for=""Prefix"">Custom display name from metadata</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label for=""Prefix"">Custom display name from metadata</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -512,7 +710,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString result = html.LabelForModel(new { @for = "attrFor" });
 
             // Assert
-            Assert.Equal(@"<label for=""attrFor"">Custom display name from metadata</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label for=""attrFor"">Custom display name from metadata</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -541,14 +742,17 @@ namespace System.Web.Mvc.Html.Test
             Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
             {
                 { "foo", "bar" },
-                { "quux", "baz" }
+                { "quux", "baz" },
             };
 
             // Act
             MvcHtmlString result = html.LabelForModel(htmlAttributes);
 
             // Assert
-            Assert.Equal(@"<label foo=""bar"" for=""Prefix"" quux=""baz"">Custom display name from metadata</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label foo=""bar"" for=""Prefix"" quux=""baz"">Custom display name from metadata</label>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -562,14 +766,17 @@ namespace System.Web.Mvc.Html.Test
             Dictionary<string, object> htmlAttributes = new Dictionary<string, object>
             {
                 { "foo", "bar" },
-                { "quux", "baz" }
+                { "quux", "baz" },
             };
 
             // Act
             MvcHtmlString result = html.LabelForModel("Label Text", htmlAttributes);
 
             // Assert
-            Assert.Equal(@"<label foo=""bar"" for=""Prefix"" quux=""baz"">Label Text</label>", result.ToHtmlString());
+            Assert.Equal(
+                @"<label foo=""bar"" for=""Prefix"" quux=""baz"">Label Text</label>",
+                result.ToHtmlString()
+            );
         }
     }
 }

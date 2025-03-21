@@ -14,10 +14,19 @@ namespace Microsoft.CodeAnalysis.LanguageService
 {
     internal interface ISyntaxFactsService : ISyntaxFacts, ILanguageService
     {
-        bool IsInNonUserCode(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken);
+        bool IsInNonUserCode(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        );
 
         // Violation.  This is feature level code.
-        Task<ImmutableArray<SyntaxNode>> GetSelectedFieldsAndPropertiesAsync(SyntaxTree syntaxTree, TextSpan textSpan, bool allowPartialSelection, CancellationToken cancellationToken);
+        Task<ImmutableArray<SyntaxNode>> GetSelectedFieldsAndPropertiesAsync(
+            SyntaxTree syntaxTree,
+            TextSpan textSpan,
+            bool allowPartialSelection,
+            CancellationToken cancellationToken
+        );
 
         // Walks the tree, starting from contextNode, looking for the first construct
         // with a missing close brace.  If found, the close brace will be added and the
@@ -25,7 +34,11 @@ namespace Microsoft.CodeAnalysis.LanguageService
         // be returned.
         // Violation.  This is feature level code.
         void AddFirstMissingCloseBrace<TContextNode>(
-            SyntaxNode root, TContextNode contextNode,
-            out SyntaxNode newRoot, out TContextNode newContextNode) where TContextNode : SyntaxNode;
+            SyntaxNode root,
+            TContextNode contextNode,
+            out SyntaxNode newRoot,
+            out TContextNode newContextNode
+        )
+            where TContextNode : SyntaxNode;
     }
 }

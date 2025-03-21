@@ -21,7 +21,7 @@ namespace System.Data.Query.InternalTrees
     internal abstract class Rule
     {
         /// <summary>
-        /// The "callback" function for each rule. 
+        /// The "callback" function for each rule.
         /// Every callback function must return true if the subtree has
         /// been modified (or a new subtree has been returned); and must return false
         /// otherwise. If the root of the subtree has not changed, but some internal details
@@ -32,7 +32,11 @@ namespace System.Data.Query.InternalTrees
         /// <param name="subTree">the subtree to operate on</param>
         /// <param name="newSubTree">possibly transformed subtree</param>
         /// <returns>transformation status - true, if there was some change; false otherwise</returns>
-        internal delegate bool ProcessNodeDelegate(RuleProcessingContext context, Node subTree, out Node newSubTree);
+        internal delegate bool ProcessNodeDelegate(
+            RuleProcessingContext context,
+            Node subTree,
+            out Node newSubTree
+        );
 
         #region private state
         private ProcessNodeDelegate m_nodeDelegate;
@@ -76,7 +80,11 @@ namespace System.Data.Query.InternalTrees
         /// <param name="node">The node (subtree) to process</param>
         /// <param name="newNode">the (possibly) modified subtree</param>
         /// <returns>true, if the subtree was modified</returns>
-        internal bool Apply(RuleProcessingContext ruleProcessingContext, Node node, out Node newNode)
+        internal bool Apply(
+            RuleProcessingContext ruleProcessingContext,
+            Node node,
+            out Node newNode
+        )
         {
             // invoke the real callback
             return m_nodeDelegate(ruleProcessingContext, node, out newNode);
@@ -119,9 +127,7 @@ namespace System.Data.Query.InternalTrees
         /// <param name="opType">The OpType we're interested in</param>
         /// <param name="processDelegate">The callback to invoke when we see such an Op</param>
         internal SimpleRule(OpType opType, ProcessNodeDelegate processDelegate)
-            : base(opType, processDelegate)
-        {
-        }
+            : base(opType, processDelegate) { }
         #endregion
 
         #region overriden methods
@@ -136,7 +142,7 @@ namespace System.Data.Query.InternalTrees
     /// A PatternMatchRule allows for a pattern to be specified to identify interesting
     /// subtrees, rather than just an OpType
     /// </summary>
-    internal sealed class PatternMatchRule: Rule
+    internal sealed class PatternMatchRule : Rule
     {
         #region private state
         private Node m_pattern;

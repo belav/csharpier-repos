@@ -10,15 +10,15 @@ namespace Microsoft.AspNetCore.Mvc;
 /// A filter that specifies the <see cref="System.Type"/> for all HTTP status codes that are not covered by <see cref="ProducesResponseTypeAttribute"/>.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public sealed class ProducesDefaultResponseTypeAttribute : Attribute, IApiDefaultResponseMetadataProvider
+public sealed class ProducesDefaultResponseTypeAttribute
+    : Attribute,
+        IApiDefaultResponseMetadataProvider
 {
     /// <summary>
     /// Initializes an instance of <see cref="ProducesResponseTypeAttribute"/>.
     /// </summary>
     public ProducesDefaultResponseTypeAttribute()
-        : this(typeof(void))
-    {
-    }
+        : this(typeof(void)) { }
 
     /// <summary>
     /// Initializes an instance of <see cref="ProducesResponseTypeAttribute"/>.

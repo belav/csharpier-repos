@@ -15,12 +15,14 @@ public partial class Paginator : IDisposable
     /// <summary>
     /// Specifies the associated <see cref="PaginationState"/>. This parameter is required.
     /// </summary>
-    [Parameter, EditorRequired] public PaginationState State { get; set; } = default!;
+    [Parameter, EditorRequired]
+    public PaginationState State { get; set; } = default!;
 
     /// <summary>
     /// Optionally supplies a template for rendering the page count summary.
     /// </summary>
-    [Parameter] public RenderFragment? SummaryTemplate { get; set; }
+    [Parameter]
+    public RenderFragment? SummaryTemplate { get; set; }
 
     /// <summary>
     /// Constructs an instance of <see cref="Paginator" />.
@@ -32,21 +34,22 @@ public partial class Paginator : IDisposable
     }
 
     private Task GoFirstAsync() => GoToPageAsync(0);
+
     private Task GoPreviousAsync() => GoToPageAsync(State.CurrentPageIndex - 1);
+
     private Task GoNextAsync() => GoToPageAsync(State.CurrentPageIndex + 1);
+
     private Task GoLastAsync() => GoToPageAsync(State.LastPageIndex.GetValueOrDefault(0));
 
     private bool CanGoBack => State.CurrentPageIndex > 0;
     private bool CanGoForwards => State.CurrentPageIndex < State.LastPageIndex;
 
-    private Task GoToPageAsync(int pageIndex)
-        => State.SetCurrentPageIndexAsync(pageIndex);
+    private Task GoToPageAsync(int pageIndex) => State.SetCurrentPageIndexAsync(pageIndex);
 
     /// <inheritdoc />
-    protected override void OnParametersSet()
-        => _totalItemCountChanged.SubscribeOrMove(State.TotalItemCountChangedSubscribable);
+    protected override void OnParametersSet() =>
+        _totalItemCountChanged.SubscribeOrMove(State.TotalItemCountChangedSubscribable);
 
     /// <inheritdoc />
-    public void Dispose()
-        => _totalItemCountChanged.Dispose();
+    public void Dispose() => _totalItemCountChanged.Dispose();
 }

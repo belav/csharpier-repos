@@ -18,7 +18,8 @@ using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestExceptio
 /// </summary>
 /// <typeparam name="TRequestHandler">This API supports framework infrastructure and is not intended to be used
 /// directly from application code.</typeparam>
-public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TRequestHandler : IHttpHeadersHandler, IHttpRequestLineHandler
+public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler>
+    where TRequestHandler : IHttpHeadersHandler, IHttpRequestLineHandler
 {
     private readonly bool _showErrorDetails;
     private readonly bool _disableHttp1LineFeedTerminators;
@@ -27,17 +28,21 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
     /// This API supports framework infrastructure and is not intended to be used
     /// directly from application code.
     /// </summary>
-    public HttpParser() : this(showErrorDetails: true)
-    {
-    }
+    public HttpParser()
+        : this(showErrorDetails: true) { }
 
     /// <summary>
     /// This API supports framework infrastructure and is not intended to be used
     /// directly from application code.
     /// </summary>
-    public HttpParser(bool showErrorDetails) : this(showErrorDetails, AppContext.TryGetSwitch(KestrelServerOptions.DisableHttp1LineFeedTerminatorsSwitchKey, out var disabled) && disabled)
-    {
-    }
+    public HttpParser(bool showErrorDetails)
+        : this(
+            showErrorDetails,
+            AppContext.TryGetSwitch(
+                KestrelServerOptions.DisableHttp1LineFeedTerminatorsSwitchKey,
+                out var disabled
+            ) && disabled
+        ) { }
 
     internal HttpParser(bool showErrorDetails, bool disableHttp1LineFeedTerminators)
     {
@@ -61,7 +66,9 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
     /// </summary>
     public bool ParseRequestLine(TRequestHandler handler, ref SequenceReader<byte> reader)
     {
-        if (reader.TryReadTo(out ReadOnlySpan<byte> requestLine, ByteLF, advancePastDelimiter: true))
+        if (
+            reader.TryReadTo(out ReadOnlySpan<byte> requestLine, ByteLF, advancePastDelimiter: true)
+        )
         {
             ParseRequestLine(handler, requestLine);
             return true;
@@ -105,7 +112,9 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
         offset++;
 
         // Find end of path and if path is encoded
-        var index = requestLine.Slice(offset).IndexOfAny(ByteSpace, ByteQuestionMark, BytePercentage);
+        var index = requestLine
+            .Slice(offset)
+            .IndexOfAny(ByteSpace, ByteQuestionMark, BytePercentage);
         if (index >= 0)
         {
             if (requestLine[offset + index] == BytePercentage)
@@ -120,7 +129,11 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
             ch = requestLine[offset];
         }
 
-        var path = new TargetOffsetPathLength(targetStart, length: offset - targetStart, pathEncoded);
+        var path = new TargetOffsetPathLength(
+            targetStart,
+            length: offset - targetStart,
+            pathEncoded
+        );
 
         // Query string
         if (ch == ByteQuestionMark)
@@ -140,8 +153,7 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
         // Consume space
         offset++;
 
-        while ((uint)offset < (uint)requestLine.Length
-            && requestLine[offset] == ByteSpace)
+        while ((uint)offset < (uint)requestLine.Length && requestLine[offset] == ByteSpace)
         {
             // It's invalid to have multiple spaces between the url resource and version
             // but some clients do it. Skip them.
@@ -173,7 +185,10 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
 
         // We need to reinterpret from ReadOnlySpan into Span to allow path mutation for
         // in-place normalization and decoding to transform into a canonical path
-        var startLine = MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(requestLine), queryEnd);
+        var startLine = MemoryMarshal.CreateSpan(
+            ref MemoryMarshal.GetReference(requestLine),
+            queryEnd
+        );
         handler.OnStartLine(versionAndMethod, path, startLine);
     }
 
@@ -215,7 +230,10 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
                         span = span.Slice(0, crIndex);
                         foundCrlf = true;
                     }
-                    else if ((hasDataAfterCr = reader.TryPeek(out byte lfMaybe)) && lfMaybe == ByteLF)
+                    else if (
+                        (hasDataAfterCr = reader.TryPeek(out byte lfMaybe))
+                        && lfMaybe == ByteLF
+                    )
                     {
                         // CR/LF but split between spans
                         span = span.Slice(0, span.Length - 1);
@@ -233,7 +251,9 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
                         else if (crIndex == 0)
                         {
                             // CR followed by something other than LF
-                            KestrelBadHttpRequestException.Throw(RequestRejectionReason.InvalidRequestHeadersNoCRLF);
+                            KestrelBadHttpRequestException.Throw(
+                                RequestRejectionReason.InvalidRequestHeadersNoCRLF
+                            );
                         }
                         else
                         {
@@ -413,7 +433,10 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
         }
 
         byte[]? array = null;
-        Span<byte> headerSpan = headerLength <= 256 ? stackalloc byte[256] : array = ArrayPool<byte>.Shared.Rent(headerLength);
+        Span<byte> headerSpan =
+            headerLength <= 256
+                ? stackalloc byte[256]
+                : array = ArrayPool<byte>.Shared.Rent(headerLength);
 
         header.CopyTo(headerSpan);
         headerSpan = headerSpan.Slice(0, headerLength);
@@ -433,7 +456,13 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
         }
 
         // Last chance to bail if the terminator size is not valid or the header doesn't parse.
-        if (terminatorSize == -1 || !TryTakeSingleHeader(handler, headerSpan.Slice(0, headerSpan.Length - terminatorSize)))
+        if (
+            terminatorSize == -1
+            || !TryTakeSingleHeader(
+                handler,
+                headerSpan.Slice(0, headerSpan.Length - terminatorSize)
+            )
+        )
         {
             RejectRequestHeader(headerSpan);
         }
@@ -534,7 +563,10 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
 
         // Range end is exclusive, so add 1 to valueEnd
         valueEnd++;
-        handler.OnHeader(name: headerLine.Slice(0, nameEnd), value: headerLine[valueStart..valueEnd]);
+        handler.OnHeader(
+            name: headerLine.Slice(0, nameEnd),
+            value: headerLine[valueStart..valueEnd]
+        );
 
         return true;
     }
@@ -559,32 +591,42 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
         // Make sure we can check at least for the existence of a TLS handshake - we check the first byte
         // See https://serializethoughts.com/2014/07/27/dissecting-tls-client-hello-message/
 
-        return (requestLine.Length >= MinTlsRequestSize && requestLine[0] == SslRecordTypeHandshake);
+        return (
+            requestLine.Length >= MinTlsRequestSize && requestLine[0] == SslRecordTypeHandshake
+        );
     }
 
     [StackTraceHidden]
     private void RejectRequestLine(ReadOnlySpan<byte> requestLine)
     {
         throw GetInvalidRequestException(
-            IsTlsHandshake(requestLine) ?
-            RequestRejectionReason.TlsOverHttpError :
-            RequestRejectionReason.InvalidRequestLine,
-            requestLine);
+            IsTlsHandshake(requestLine)
+                ? RequestRejectionReason.TlsOverHttpError
+                : RequestRejectionReason.InvalidRequestLine,
+            requestLine
+        );
     }
 
     [StackTraceHidden]
-    private void RejectRequestHeader(ReadOnlySpan<byte> headerLine)
-        => throw GetInvalidRequestException(RequestRejectionReason.InvalidRequestHeader, headerLine);
+    private void RejectRequestHeader(ReadOnlySpan<byte> headerLine) =>
+        throw GetInvalidRequestException(RequestRejectionReason.InvalidRequestHeader, headerLine);
 
     [StackTraceHidden]
-    private void RejectUnknownVersion(ReadOnlySpan<byte> version)
-        => throw GetInvalidRequestException(RequestRejectionReason.UnrecognizedHTTPVersion, version[..^1]);
+    private void RejectUnknownVersion(ReadOnlySpan<byte> version) =>
+        throw GetInvalidRequestException(
+            RequestRejectionReason.UnrecognizedHTTPVersion,
+            version[..^1]
+        );
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private BadHttpRequestException GetInvalidRequestException(RequestRejectionReason reason, ReadOnlySpan<byte> headerLine)
-        => KestrelBadHttpRequestException.GetException(
+    private BadHttpRequestException GetInvalidRequestException(
+        RequestRejectionReason reason,
+        ReadOnlySpan<byte> headerLine
+    ) =>
+        KestrelBadHttpRequestException.GetException(
             reason,
             _showErrorDetails
                 ? headerLine.GetAsciiStringEscaped(Constants.MaxExceptionDetailSize)
-                : string.Empty);
+                : string.Empty
+        );
 }

@@ -28,7 +28,8 @@ public class AuthorizationHandlerContext
     public AuthorizationHandlerContext(
         IEnumerable<IAuthorizationRequirement> requirements,
         ClaimsPrincipal user,
-        object? resource)
+        object? resource
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(requirements);
 
@@ -56,28 +57,32 @@ public class AuthorizationHandlerContext
     /// <summary>
     /// Gets the requirements that have not yet been marked as succeeded.
     /// </summary>
-    public virtual IEnumerable<IAuthorizationRequirement> PendingRequirements { get { return _pendingRequirements; } }
+    public virtual IEnumerable<IAuthorizationRequirement> PendingRequirements
+    {
+        get { return _pendingRequirements; }
+    }
 
     /// <summary>
     /// Gets the reasons why authorization has failed.
     /// </summary>
-    public virtual IEnumerable<AuthorizationFailureReason> FailureReasons
-        => (IEnumerable<AuthorizationFailureReason>?)_failedReasons ?? Array.Empty<AuthorizationFailureReason>();
+    public virtual IEnumerable<AuthorizationFailureReason> FailureReasons =>
+        (IEnumerable<AuthorizationFailureReason>?)_failedReasons
+        ?? Array.Empty<AuthorizationFailureReason>();
 
     /// <summary>
     /// Flag indicating whether the current authorization processing has failed due to Fail being called.
     /// </summary>
-    public virtual bool HasFailed { get { return _failCalled; } }
+    public virtual bool HasFailed
+    {
+        get { return _failCalled; }
+    }
 
     /// <summary>
     /// Flag indicating whether the current authorization processing has succeeded.
     /// </summary>
     public virtual bool HasSucceeded
     {
-        get
-        {
-            return !_failCalled && _succeedCalled && !PendingRequirements.Any();
-        }
+        get { return !_failCalled && _succeedCalled && !PendingRequirements.Any(); }
     }
 
     /// <summary>

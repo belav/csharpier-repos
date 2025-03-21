@@ -10,7 +10,7 @@ namespace System.IdentityModel.Metadata
 
     /// <summary>
     /// This class represents the displayable claim object. Usually, the display tag
-    /// and the description are localized. And claimType identifies different claim 
+    /// and the description are localized. And claimType identifies different claim
     /// types. The display value is the string representation of the claim.Resource.
     /// </summary>
     public class DisplayClaim
@@ -18,11 +18,11 @@ namespace System.IdentityModel.Metadata
         static Dictionary<string, string> claimDescriptionMap = PopulateClaimDescriptionMap();
         static Dictionary<string, string> claimTagMap = PopulateClaimTagMap();
 
-        string claimType;           // required, should map to claim.ClaimType
-        string displayTag;          // should map to claim's friendly name, sometime called display name
-        string displayValue;        // should map to claim.Resource
-        string description;         // should map to claim's decription
-        bool optional;              // The Optional attribute
+        string claimType; // required, should map to claim.ClaimType
+        string displayTag; // should map to claim's friendly name, sometime called display name
+        string displayValue; // should map to claim.Resource
+        string description; // should map to claim's decription
+        bool optional; // The Optional attribute
 
         static Dictionary<string, string> PopulateClaimTagMap()
         {
@@ -108,9 +108,7 @@ namespace System.IdentityModel.Metadata
         /// </summary>
         /// <param name="claimType">The unique uri identifier of a claim type</param>
         public DisplayClaim(string claimType)
-            : this(claimType, null, null, null)
-        {
-        }
+            : this(claimType, null, null, null) { }
 
         /// <summary>
         /// Instantiates a DisplayClaim object. Use this constructor if the actual value of the claim is unknown.
@@ -119,9 +117,7 @@ namespace System.IdentityModel.Metadata
         /// <param name="displayTag">friendly name sometime called display name, e.g. Email address</param>
         /// <param name="description">the description of this claim, e.g. If a person possess this email address</param>
         public DisplayClaim(string claimType, string displayTag, string description)
-            : this(claimType, displayTag, description, null)
-        {
-        }
+            : this(claimType, displayTag, description, null) { }
 
         /// <summary>
         /// Instantiates a DisplayClaim object. Use this constructor if the actual value of the claim is known.
@@ -130,10 +126,13 @@ namespace System.IdentityModel.Metadata
         /// <param name="displayTag">friendly name sometime called display name, e.g. Email address</param>
         /// <param name="description">the description of this claim, e.g. If a person possess this email address</param>
         /// <param name="displayValue">claim.Resource, e.g. joe@fabrikam.com</param>
-        public DisplayClaim(string claimType, string displayTag, string description, string displayValue)
-            : this(claimType, displayTag, description, displayValue, true)
-        {
-        }
+        public DisplayClaim(
+            string claimType,
+            string displayTag,
+            string description,
+            string displayValue
+        )
+            : this(claimType, displayTag, description, displayValue, true) { }
 
         /// <summary>
         /// Instantiates a DisplayClaim object. Use this constructor if the actual value of the claim is known.
@@ -144,7 +143,13 @@ namespace System.IdentityModel.Metadata
         /// <param name="displayValue">claim.Resource, e.g. joe@fabrikam.com</param>
         /// <param name="optional">If the claim is optional.</param>
         /// <exception cref="ArgumentNullException">If the claim type is empty or null.</exception>
-        public DisplayClaim(string claimType, string displayTag, string description, string displayValue, bool optional)
+        public DisplayClaim(
+            string claimType,
+            string displayTag,
+            string description,
+            string displayValue,
+            bool optional
+        )
         {
             if (string.IsNullOrEmpty(claimType))
             {
@@ -159,7 +164,7 @@ namespace System.IdentityModel.Metadata
         }
 
         /// <summary>
-        /// This required attribute provides the unique identifier (URI) 
+        /// This required attribute provides the unique identifier (URI)
         /// of the individual claim returned in the security token
         /// </summary>
         public string ClaimType
@@ -168,7 +173,7 @@ namespace System.IdentityModel.Metadata
         }
 
         /// <summary>
-        /// This optional element provides a friendly name for the claim 
+        /// This optional element provides a friendly name for the claim
         /// returned in the security token
         /// </summary>
         public string DisplayTag
@@ -178,7 +183,7 @@ namespace System.IdentityModel.Metadata
         }
 
         /// <summary>
-        /// This optional element provides one or more 
+        /// This optional element provides one or more
         /// displayable values for the claim returned in the security token
         /// </summary>
         public string DisplayValue
@@ -188,7 +193,7 @@ namespace System.IdentityModel.Metadata
         }
 
         /// <summary>
-        /// This optional element provides a description of the semantics 
+        /// This optional element provides a description of the semantics
         /// for the claim returned in the security token.
         /// </summary>
         public string Description
@@ -209,10 +214,6 @@ namespace System.IdentityModel.Metadata
         /// <summary>
         /// Gets or sets whether the optional attribute will be serialized. The default value is false.
         /// </summary>
-        public bool WriteOptionalAttribute
-        {
-            get;
-            set;
-        }
+        public bool WriteOptionalAttribute { get; set; }
     }
 }

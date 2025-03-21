@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Metadata;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Routing.Matching;
 using Microsoft.AspNetCore.Routing.TestObjects;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -34,10 +34,20 @@ public class EndpointRoutingMiddlewareFormOptionsTest
         var formOptionsMetadata = new FormOptionsMetadata(bufferBody: false, valueCountLimit: 54);
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
-            {
-                c.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(formOptionsMetadata), "myapp"));
-            }));
+            matcherFactory: new TestMatcherFactory(
+                isHandled: true,
+                setEndpointCallback: c =>
+                {
+                    c.SetEndpoint(
+                        new Endpoint(
+                            c => Task.CompletedTask,
+                            new EndpointMetadataCollection(formOptionsMetadata),
+                            "myapp"
+                        )
+                    );
+                }
+            )
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -68,10 +78,24 @@ public class EndpointRoutingMiddlewareFormOptionsTest
         var formOptionsMetadata3 = new FormOptionsMetadata(bufferBody: true);
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
-            {
-                c.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(formOptionsMetadata1, formOptionsMetadata2, formOptionsMetadata3), "myapp"));
-            }));
+            matcherFactory: new TestMatcherFactory(
+                isHandled: true,
+                setEndpointCallback: c =>
+                {
+                    c.SetEndpoint(
+                        new Endpoint(
+                            c => Task.CompletedTask,
+                            new EndpointMetadataCollection(
+                                formOptionsMetadata1,
+                                formOptionsMetadata2,
+                                formOptionsMetadata3
+                            ),
+                            "myapp"
+                        )
+                    );
+                }
+            )
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -93,23 +117,35 @@ public class EndpointRoutingMiddlewareFormOptionsTest
         var sink = new TestSink(TestSink.EnableWithTypeName<EndpointRoutingMiddleware>);
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
         var logger = new Logger<EndpointRoutingMiddleware>(loggerFactory);
-        var serviceProvider = new ServiceCollection().Configure<FormOptions>(options =>
-        {
-            options.BufferBody = true;
-            options.ValueLengthLimit = 45;
-        }).BuildServiceProvider();
+        var serviceProvider = new ServiceCollection()
+            .Configure<FormOptions>(options =>
+            {
+                options.BufferBody = true;
+                options.ValueLengthLimit = 45;
+            })
+            .BuildServiceProvider();
         var httpContextFactory = new DefaultHttpContextFactory(serviceProvider);
-        var httpContext = httpContextFactory.Create( new DefaultHttpContext().Features);
+        var httpContext = httpContextFactory.Create(new DefaultHttpContext().Features);
         httpContext.Request.ContentType = "application/x-www-form-urlencoded";
         httpContext.Request.Body = new MemoryStream("foo=bar"u8.ToArray());
 
         var formOptionsMetadata = new FormOptionsMetadata(bufferBody: false, valueCountLimit: 54);
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
-            {
-                c.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(formOptionsMetadata), "myapp"));
-            }));
+            matcherFactory: new TestMatcherFactory(
+                isHandled: true,
+                setEndpointCallback: c =>
+                {
+                    c.SetEndpoint(
+                        new Endpoint(
+                            c => Task.CompletedTask,
+                            new EndpointMetadataCollection(formOptionsMetadata),
+                            "myapp"
+                        )
+                    );
+                }
+            )
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -136,15 +172,29 @@ public class EndpointRoutingMiddlewareFormOptionsTest
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("foo=bar"));
 
         var endpointMetadata = new FormOptionsMetadata(bufferBody: true, valueCountLimit: 70);
-        var endpoint = new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(endpointMetadata), "myapp");
+        var endpoint = new Endpoint(
+            c => Task.CompletedTask,
+            new EndpointMetadataCollection(endpointMetadata),
+            "myapp"
+        );
 
         var formOptionsMetadata = new FormOptionsMetadata(bufferBody: false, valueCountLimit: 54);
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
-            {
-                c.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(formOptionsMetadata), "myapp"));
-            }));
+            matcherFactory: new TestMatcherFactory(
+                isHandled: true,
+                setEndpointCallback: c =>
+                {
+                    c.SetEndpoint(
+                        new Endpoint(
+                            c => Task.CompletedTask,
+                            new EndpointMetadataCollection(formOptionsMetadata),
+                            "myapp"
+                        )
+                    );
+                }
+            )
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -168,15 +218,29 @@ public class EndpointRoutingMiddlewareFormOptionsTest
         var logger = new Logger<EndpointRoutingMiddleware>(loggerFactory);
         var httpContext = new DefaultHttpContext();
         var endpointMetadata = new FormOptionsMetadata(bufferBody: true, valueCountLimit: 70);
-        var endpoint = new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(endpointMetadata), "myapp");
+        var endpoint = new Endpoint(
+            c => Task.CompletedTask,
+            new EndpointMetadataCollection(endpointMetadata),
+            "myapp"
+        );
 
         var formOptionsMetadata = new FormOptionsMetadata(bufferBody: false, valueCountLimit: 54);
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
-            {
-                c.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(formOptionsMetadata), "myapp"));
-            }));
+            matcherFactory: new TestMatcherFactory(
+                isHandled: true,
+                setEndpointCallback: c =>
+                {
+                    c.SetEndpoint(
+                        new Endpoint(
+                            c => Task.CompletedTask,
+                            new EndpointMetadataCollection(formOptionsMetadata),
+                            "myapp"
+                        )
+                    );
+                }
+            )
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -193,9 +257,10 @@ public class EndpointRoutingMiddlewareFormOptionsTest
             RequestServices = new TestServiceProvider(),
             Request =
             {
-                ContentType = "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq",
+                ContentType =
+                    "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq",
                 Method = "POST",
-            }
+            },
         };
 
         return httpContext;
@@ -205,7 +270,8 @@ public class EndpointRoutingMiddlewareFormOptionsTest
         ILogger<EndpointRoutingMiddleware> logger = null,
         MatcherFactory matcherFactory = null,
         DiagnosticListener listener = null,
-        RequestDelegate next = null)
+        RequestDelegate next = null
+    )
     {
         next ??= c => Task.CompletedTask;
         logger ??= new Logger<EndpointRoutingMiddleware>(NullLoggerFactory.Instance);
@@ -221,7 +287,8 @@ public class EndpointRoutingMiddlewareFormOptionsTest
             listener,
             Options.Create(new RouteOptions()),
             metrics,
-            next);
+            next
+        );
 
         return middleware;
     }

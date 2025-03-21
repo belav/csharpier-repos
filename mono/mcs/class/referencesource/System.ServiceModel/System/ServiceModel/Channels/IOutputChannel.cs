@@ -14,7 +14,12 @@ namespace System.ServiceModel.Channels
         void Send(Message message);
         void Send(Message message, TimeSpan timeout);
         IAsyncResult BeginSend(Message message, AsyncCallback callback, object state);
-        IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         void EndSend(IAsyncResult result);
     }
 }

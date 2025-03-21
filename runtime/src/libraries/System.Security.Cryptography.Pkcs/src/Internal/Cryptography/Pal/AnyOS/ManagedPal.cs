@@ -17,17 +17,26 @@ namespace Internal.Cryptography.Pal.AnyOS
     {
         public override void AddCertsFromStoreForDecryption(X509Certificate2Collection certs)
         {
-            certs.AddRange(PkcsHelpers.GetStoreCertificates(StoreName.My, StoreLocation.CurrentUser, openExistingOnly: false));
+            certs.AddRange(
+                PkcsHelpers.GetStoreCertificates(
+                    StoreName.My,
+                    StoreLocation.CurrentUser,
+                    openExistingOnly: false
+                )
+            );
 
             try
             {
                 // This store exists on macOS, but not Linux
                 certs.AddRange(
-                    PkcsHelpers.GetStoreCertificates(StoreName.My, StoreLocation.LocalMachine, openExistingOnly: false));
+                    PkcsHelpers.GetStoreCertificates(
+                        StoreName.My,
+                        StoreLocation.LocalMachine,
+                        openExistingOnly: false
+                    )
+                );
             }
-            catch (CryptographicException)
-            {
-            }
+            catch (CryptographicException) { }
         }
 
         public override byte[] GetSubjectKeyIdentifier(X509Certificate2 certificate)
@@ -35,11 +44,12 @@ namespace Internal.Cryptography.Pal.AnyOS
             Debug.Assert(certificate != null);
 
             X509Extension extension =
-                certificate.Extensions[Oids.SubjectKeyIdentifier] ??
-                new X509SubjectKeyIdentifierExtension( // Construct the value from the public key info.
+                certificate.Extensions[Oids.SubjectKeyIdentifier]
+                ?? new X509SubjectKeyIdentifierExtension( // Construct the value from the public key info.
                     certificate.PublicKey,
                     X509SubjectKeyIdentifierHashAlgorithm.CapiSha1,
-                    false);
+                    false
+                );
 
             try
             {
@@ -64,17 +74,20 @@ namespace Internal.Cryptography.Pal.AnyOS
             }
         }
 
-        public override T? GetPrivateKeyForSigning<T>(X509Certificate2 certificate, bool silent) where T : class
+        public override T? GetPrivateKeyForSigning<T>(X509Certificate2 certificate, bool silent)
+            where T : class
         {
             return GetPrivateKey<T>(certificate);
         }
 
-        public override T? GetPrivateKeyForDecryption<T>(X509Certificate2 certificate, bool silent) where T : class
+        public override T? GetPrivateKeyForDecryption<T>(X509Certificate2 certificate, bool silent)
+            where T : class
         {
             return GetPrivateKey<T>(certificate);
         }
 
-        private static T? GetPrivateKey<T>(X509Certificate2 certificate) where T : AsymmetricAlgorithm
+        private static T? GetPrivateKey<T>(X509Certificate2 certificate)
+            where T : AsymmetricAlgorithm
         {
             if (typeof(T) == typeof(RSA))
                 return (T?)(object?)certificate.GetRSAPrivateKey();
@@ -89,7 +102,9 @@ namespace Internal.Cryptography.Pal.AnyOS
             return null;
         }
 
-        private static SymmetricAlgorithm OpenAlgorithm(AlgorithmIdentifierAsn contentEncryptionAlgorithm)
+        private static SymmetricAlgorithm OpenAlgorithm(
+            AlgorithmIdentifierAsn contentEncryptionAlgorithm
+        )
         {
             SymmetricAlgorithm alg = OpenAlgorithm(contentEncryptionAlgorithm.Algorithm);
 
@@ -103,7 +118,8 @@ namespace Internal.Cryptography.Pal.AnyOS
 
                 Rc2CbcParameters rc2Params = Rc2CbcParameters.Decode(
                     contentEncryptionAlgorithm.Parameters.Value,
-                    AsnEncodingRules.BER);
+                    AsnEncodingRules.BER
+                );
 
                 alg.KeySize = rc2Params.GetEffectiveKeyBits();
                 alg.IV = rc2Params.Iv.ToArray();
@@ -118,7 +134,10 @@ namespace Internal.Cryptography.Pal.AnyOS
 
                 try
                 {
-                    AsnReader reader = new AsnReader(contentEncryptionAlgorithm.Parameters.Value, AsnEncodingRules.BER);
+                    AsnReader reader = new AsnReader(
+                        contentEncryptionAlgorithm.Parameters.Value,
+                        AsnEncodingRules.BER
+                    );
                     alg.IV = reader.ReadOctetString();
 
                     if (alg.IV.Length != alg.BlockSize / 8)
@@ -165,7 +184,9 @@ namespace Internal.Cryptography.Pal.AnyOS
                 case Oids.Rc2Cbc:
                     if (!Helpers.IsRC2Supported)
                     {
-                        throw new PlatformNotSupportedException(SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(RC2)));
+                        throw new PlatformNotSupportedException(
+                            SR.Format(SR.Cryptography_AlgorithmNotSupported, nameof(RC2))
+                        );
                     }
 #pragma warning disable CA5351
                     alg = RC2.Create();
@@ -194,7 +215,10 @@ namespace Internal.Cryptography.Pal.AnyOS
                     alg.KeySize = 256;
                     break;
                 default:
-                    throw new CryptographicException(SR.Cryptography_Cms_UnknownAlgorithm, algorithmIdentifier);
+                    throw new CryptographicException(
+                        SR.Cryptography_Cms_UnknownAlgorithm,
+                        algorithmIdentifier
+                    );
             }
 
             // These are the defaults, but they're restated here for clarity.

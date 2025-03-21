@@ -1,11 +1,11 @@
 // Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,72 +16,70 @@
 
 namespace Castle.DynamicProxy.Tests.BugsReported
 {
-	using System;
-	using System.IO;
-	using System.Reflection;
-	using System.Runtime.Serialization;
-	using System.Runtime.Serialization.Formatters.Binary;
+    using System;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using Castle.DynamicProxy.Tests;
+    using NUnit.Framework;
 
-	using Castle.DynamicProxy.Tests;
+    [TestFixture]
+    public class DynProxy159 : BasePEVerifyTestCase
+    {
+        // this test will only fail the first time it is run in a given VM
 
-	using NUnit.Framework;
+        private void FakeSerialize(object o)
+        {
+            using (var ms = new MemoryStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(ms, o);
+            }
+        }
 
-	[TestFixture]
-	public class DynProxy159 : BasePEVerifyTestCase
-	{
-		// this test will only fail the first time it is run in a given VM
+        [Test]
+        public void ShouldNotChangeOrderOfSerializeableMembers()
+        {
+            var fromSystem = FormatterServices.GetSerializableMembers(typeof(MySerialClass));
+            var beforeProxySerialization = new MemberInfo[fromSystem.Length];
+            Array.Copy(fromSystem, beforeProxySerialization, fromSystem.Length);
+            fromSystem = null;
 
-		private void FakeSerialize(object o)
-		{
-			using (var ms = new MemoryStream())
-			{
-				var formatter = new BinaryFormatter();
-				formatter.Serialize(ms, o);
-			}
-		}
+            FakeSerialize(generator.CreateClassProxy(typeof(MySerialClass)));
 
-		[Test]
-		public void ShouldNotChangeOrderOfSerializeableMembers()
-		{
-			var fromSystem = FormatterServices.GetSerializableMembers(typeof(MySerialClass));
-			var beforeProxySerialization = new MemberInfo[fromSystem.Length];
-			Array.Copy(fromSystem, beforeProxySerialization, fromSystem.Length);
-			fromSystem = null;
+            fromSystem = FormatterServices.GetSerializableMembers(typeof(MySerialClass));
 
-			FakeSerialize(generator.CreateClassProxy(typeof(MySerialClass)));
+            CollectionAssert.AreEquivalent(beforeProxySerialization, fromSystem);
+        }
 
-			fromSystem = FormatterServices.GetSerializableMembers(typeof(MySerialClass));
+        [Test]
+        public void ShouldSerializedMixofProxiedAndUnproxiedInstances()
+        {
+            var o = new[]
+            {
+                new MySerialClass(),
+                (MySerialClass)generator.CreateClassProxy(typeof(MySerialClass)),
+                new MySerialClass(),
+            };
 
-			CollectionAssert.AreEquivalent(beforeProxySerialization, fromSystem);
-		}
+            o[2].yyy = 3.1415;
+            o[2].zzz = 100;
 
-		[Test]
-		public void ShouldSerializedMixofProxiedAndUnproxiedInstances()
-		{
-			var o = new[]
-			{
-				new MySerialClass(),
-				(MySerialClass)generator.CreateClassProxy(typeof(MySerialClass)),
-				new MySerialClass(),
-			};
+            FakeSerialize(o);
 
-			o[2].yyy = 3.1415;
-			o[2].zzz = 100;
+            Assert.AreEqual(3.1415, o[2].yyy);
+            Assert.AreEqual(100, o[2].zzz);
+        }
+    }
 
-			FakeSerialize(o);
-
-			Assert.AreEqual(3.1415, o[2].yyy);
-			Assert.AreEqual(100, o[2].zzz);
-		}
-	}
-
-	[Serializable]
-	public class MySerialClass
-	{
-		public string xxx { get; set; }
-		public double? yyy { get; set; }
-		public int? zzz { get; set; }
-	}
+    [Serializable]
+    public class MySerialClass
+    {
+        public string xxx { get; set; }
+        public double? yyy { get; set; }
+        public int? zzz { get; set; }
+    }
 }
 
 #endif

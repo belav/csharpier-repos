@@ -25,15 +25,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Xml;
+using Newtonsoft.Json.Utilities;
 #if HAVE_BIG_INTEGER
 using System.Numerics;
 #endif
-using System.Text;
-using System.IO;
-using System.Xml;
-using Newtonsoft.Json.Utilities;
-using System.Diagnostics;
 
 namespace Newtonsoft.Json
 {
@@ -111,7 +111,9 @@ namespace Newtonsoft.Json
             {
                 if (value != '"' && value != '\'')
                 {
-                    throw new ArgumentException(@"Invalid JavaScript string quote character. Valid quote characters are ' and "".");
+                    throw new ArgumentException(
+                        @"Invalid JavaScript string quote character. Valid quote characters are ' and ""."
+                    );
                 }
 
                 _quoteChar = value;
@@ -326,11 +328,19 @@ namespace Newtonsoft.Json
             int newLineLen = SetIndentChars();
 
             MiscellaneousUtils.Assert(_indentChars != null);
-            _writer.Write(_indentChars, 0, newLineLen + Math.Min(currentIndentCount, IndentCharBufferSize));
+            _writer.Write(
+                _indentChars,
+                0,
+                newLineLen + Math.Min(currentIndentCount, IndentCharBufferSize)
+            );
 
             while ((currentIndentCount -= IndentCharBufferSize) > 0)
             {
-                _writer.Write(_indentChars, newLineLen, Math.Min(currentIndentCount, IndentCharBufferSize));
+                _writer.Write(
+                    _indentChars,
+                    newLineLen,
+                    Math.Min(currentIndentCount, IndentCharBufferSize)
+                );
             }
         }
 
@@ -339,7 +349,8 @@ namespace Newtonsoft.Json
             // Set _indentChars to be a newline followed by IndentCharBufferSize indent characters.
             string writerNewLine = _writer.NewLine;
             int newLineLen = writerNewLine.Length;
-            bool match = _indentChars != null && _indentChars.Length == IndentCharBufferSize + newLineLen;
+            bool match =
+                _indentChars != null && _indentChars.Length == IndentCharBufferSize + newLineLen;
             if (match)
             {
                 for (int i = 0; i != newLineLen; ++i)
@@ -356,7 +367,9 @@ namespace Newtonsoft.Json
             {
                 // If we're here, either _indentChars hasn't been set yet, or _writer.NewLine
                 // has been changed, or _indentChar has been changed.
-                _indentChars = (writerNewLine + new string(_indentChar, IndentCharBufferSize)).ToCharArray();
+                _indentChars = (
+                    writerNewLine + new string(_indentChar, IndentCharBufferSize)
+                ).ToCharArray();
             }
 
             return newLineLen;
@@ -454,7 +467,16 @@ namespace Newtonsoft.Json
         private void WriteEscapedString(string value, bool quote)
         {
             EnsureWriteBuffer();
-            JavaScriptUtils.WriteEscapedJavaScriptString(_writer, value, _quoteChar, quote, _charEscapeFlags!, StringEscapeHandling, _arrayPool, ref _writeBuffer);
+            JavaScriptUtils.WriteEscapedJavaScriptString(
+                _writer,
+                value,
+                _quoteChar,
+                quote,
+                _charEscapeFlags!,
+                StringEscapeHandling,
+                _arrayPool,
+                ref _writeBuffer
+            );
         }
 
         /// <summary>
@@ -506,7 +528,10 @@ namespace Newtonsoft.Json
         public override void WriteValue(float value)
         {
             InternalWriteValue(JsonToken.Float);
-            WriteValueInternal(JsonConvert.ToString(value, FloatFormatHandling, QuoteChar, false), JsonToken.Float);
+            WriteValueInternal(
+                JsonConvert.ToString(value, FloatFormatHandling, QuoteChar, false),
+                JsonToken.Float
+            );
         }
 
         /// <summary>
@@ -522,7 +547,15 @@ namespace Newtonsoft.Json
             else
             {
                 InternalWriteValue(JsonToken.Float);
-                WriteValueInternal(JsonConvert.ToString(value.GetValueOrDefault(), FloatFormatHandling, QuoteChar, true), JsonToken.Float);
+                WriteValueInternal(
+                    JsonConvert.ToString(
+                        value.GetValueOrDefault(),
+                        FloatFormatHandling,
+                        QuoteChar,
+                        true
+                    ),
+                    JsonToken.Float
+                );
             }
         }
 
@@ -533,7 +566,10 @@ namespace Newtonsoft.Json
         public override void WriteValue(double value)
         {
             InternalWriteValue(JsonToken.Float);
-            WriteValueInternal(JsonConvert.ToString(value, FloatFormatHandling, QuoteChar, false), JsonToken.Float);
+            WriteValueInternal(
+                JsonConvert.ToString(value, FloatFormatHandling, QuoteChar, false),
+                JsonToken.Float
+            );
         }
 
         /// <summary>
@@ -549,7 +585,15 @@ namespace Newtonsoft.Json
             else
             {
                 InternalWriteValue(JsonToken.Float);
-                WriteValueInternal(JsonConvert.ToString(value.GetValueOrDefault(), FloatFormatHandling, QuoteChar, true), JsonToken.Float);
+                WriteValueInternal(
+                    JsonConvert.ToString(
+                        value.GetValueOrDefault(),
+                        FloatFormatHandling,
+                        QuoteChar,
+                        true
+                    ),
+                    JsonToken.Float
+                );
             }
         }
 
@@ -656,7 +700,14 @@ namespace Newtonsoft.Json
 
             int pos = 0;
             _writeBuffer[pos++] = _quoteChar;
-            pos = DateTimeUtils.WriteDateTimeString(_writeBuffer, pos, value, null, value.Kind, DateFormatHandling);
+            pos = DateTimeUtils.WriteDateTimeString(
+                _writeBuffer,
+                pos,
+                value,
+                null,
+                value.Kind,
+                DateFormatHandling
+            );
             _writeBuffer[pos++] = _quoteChar;
             return pos;
         }
@@ -712,7 +763,16 @@ namespace Newtonsoft.Json
 
             int pos = 0;
             _writeBuffer[pos++] = _quoteChar;
-            pos = DateTimeUtils.WriteDateTimeString(_writeBuffer, pos, (DateFormatHandling == DateFormatHandling.IsoDateFormat) ? value.DateTime : value.UtcDateTime, value.Offset, DateTimeKind.Local, DateFormatHandling);
+            pos = DateTimeUtils.WriteDateTimeString(
+                _writeBuffer,
+                pos,
+                (DateFormatHandling == DateFormatHandling.IsoDateFormat)
+                    ? value.DateTime
+                    : value.UtcDateTime,
+                value.Offset,
+                DateTimeKind.Local,
+                DateFormatHandling
+            );
             _writeBuffer[pos++] = _quoteChar;
             return pos;
         }
@@ -778,7 +838,7 @@ namespace Newtonsoft.Json
         #endregion
 
         /// <summary>
-        /// Writes a comment <c>/*...*/</c> containing the specified text. 
+        /// Writes a comment <c>/*...*/</c> containing the specified text.
         /// </summary>
         /// <param name="text">Text to place inside the comment.</param>
         public override void WriteComment(string? text)

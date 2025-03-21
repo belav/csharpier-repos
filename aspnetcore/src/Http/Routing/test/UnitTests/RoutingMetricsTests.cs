@@ -6,10 +6,10 @@ using System.Diagnostics.Metrics;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Routing.Matching;
 using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.AspNetCore.Routing.TestObjects;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Diagnostics.Metrics.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -24,18 +24,30 @@ public class RoutingMetricsTests
     public async Task Match_Success()
     {
         // Arrange
-        var routeEndpointBuilder = new RouteEndpointBuilder(c => Task.CompletedTask, RoutePatternFactory.Parse("/{hi}"), order: 0);
+        var routeEndpointBuilder = new RouteEndpointBuilder(
+            c => Task.CompletedTask,
+            RoutePatternFactory.Parse("/{hi}"),
+            order: 0
+        );
         var meterFactory = new TestMeterFactory();
         var middleware = CreateMiddleware(
-            matcherFactory: new TestMatcherFactory(true, c =>
-            {
-                c.SetEndpoint(routeEndpointBuilder.Build());
-            }),
-            meterFactory: meterFactory);
+            matcherFactory: new TestMatcherFactory(
+                true,
+                c =>
+                {
+                    c.SetEndpoint(routeEndpointBuilder.Build());
+                }
+            ),
+            meterFactory: meterFactory
+        );
         var httpContext = CreateHttpContext();
         var meter = meterFactory.Meters.Single();
 
-        using var routingMatchAttemptsCollector = new MetricCollector<long>(meterFactory, RoutingMetrics.MeterName, "aspnetcore.routing.match_attempts");
+        using var routingMatchAttemptsCollector = new MetricCollector<long>(
+            meterFactory,
+            RoutingMetrics.MeterName,
+            "aspnetcore.routing.match_attempts"
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -44,8 +56,10 @@ public class RoutingMetricsTests
         Assert.Equal(RoutingMetrics.MeterName, meter.Name);
         Assert.Null(meter.Version);
 
-        Assert.Collection(routingMatchAttemptsCollector.GetMeasurementSnapshot(),
-            m => AssertSuccess(m, "/{hi}", fallback: false));
+        Assert.Collection(
+            routingMatchAttemptsCollector.GetMeasurementSnapshot(),
+            m => AssertSuccess(m, "/{hi}", fallback: false)
+        );
     }
 
     [Theory]
@@ -54,22 +68,34 @@ public class RoutingMetricsTests
     public async Task Match_SuccessFallback_SetTagIfPresent(bool hasFallbackMetadata)
     {
         // Arrange
-        var routeEndpointBuilder = new RouteEndpointBuilder(c => Task.CompletedTask, RoutePatternFactory.Parse("/{hi}"), order: 0);
+        var routeEndpointBuilder = new RouteEndpointBuilder(
+            c => Task.CompletedTask,
+            RoutePatternFactory.Parse("/{hi}"),
+            order: 0
+        );
         if (hasFallbackMetadata)
         {
             routeEndpointBuilder.Metadata.Add(FallbackMetadata.Instance);
         }
         var meterFactory = new TestMeterFactory();
         var middleware = CreateMiddleware(
-            matcherFactory: new TestMatcherFactory(true, c =>
-            {
-                c.SetEndpoint(routeEndpointBuilder.Build());
-            }),
-            meterFactory: meterFactory);
+            matcherFactory: new TestMatcherFactory(
+                true,
+                c =>
+                {
+                    c.SetEndpoint(routeEndpointBuilder.Build());
+                }
+            ),
+            meterFactory: meterFactory
+        );
         var httpContext = CreateHttpContext();
         var meter = meterFactory.Meters.Single();
 
-        using var routingMatchAttemptsCollector = new MetricCollector<long>(meterFactory, RoutingMetrics.MeterName, "aspnetcore.routing.match_attempts");
+        using var routingMatchAttemptsCollector = new MetricCollector<long>(
+            meterFactory,
+            RoutingMetrics.MeterName,
+            "aspnetcore.routing.match_attempts"
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -78,8 +104,10 @@ public class RoutingMetricsTests
         Assert.Equal(RoutingMetrics.MeterName, meter.Name);
         Assert.Null(meter.Version);
 
-        Assert.Collection(routingMatchAttemptsCollector.GetMeasurementSnapshot(),
-            m => AssertSuccess(m, "/{hi}", fallback: hasFallbackMetadata));
+        Assert.Collection(
+            routingMatchAttemptsCollector.GetMeasurementSnapshot(),
+            m => AssertSuccess(m, "/{hi}", fallback: hasFallbackMetadata)
+        );
     }
 
     [Fact]
@@ -88,15 +116,29 @@ public class RoutingMetricsTests
         // Arrange
         var meterFactory = new TestMeterFactory();
         var middleware = CreateMiddleware(
-            matcherFactory: new TestMatcherFactory(true, c =>
-            {
-                c.SetEndpoint(new Endpoint(c => Task.CompletedTask, EndpointMetadataCollection.Empty, "Test name"));
-            }),
-            meterFactory: meterFactory);
+            matcherFactory: new TestMatcherFactory(
+                true,
+                c =>
+                {
+                    c.SetEndpoint(
+                        new Endpoint(
+                            c => Task.CompletedTask,
+                            EndpointMetadataCollection.Empty,
+                            "Test name"
+                        )
+                    );
+                }
+            ),
+            meterFactory: meterFactory
+        );
         var httpContext = CreateHttpContext();
         var meter = meterFactory.Meters.Single();
 
-        using var routingMatchAttemptsCollector = new MetricCollector<long>(meterFactory, RoutingMetrics.MeterName, "aspnetcore.routing.match_attempts");
+        using var routingMatchAttemptsCollector = new MetricCollector<long>(
+            meterFactory,
+            RoutingMetrics.MeterName,
+            "aspnetcore.routing.match_attempts"
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -105,8 +147,10 @@ public class RoutingMetricsTests
         Assert.Equal(RoutingMetrics.MeterName, meter.Name);
         Assert.Null(meter.Version);
 
-        Assert.Collection(routingMatchAttemptsCollector.GetMeasurementSnapshot(),
-            m => AssertSuccess(m, "(missing)", fallback: false));
+        Assert.Collection(
+            routingMatchAttemptsCollector.GetMeasurementSnapshot(),
+            m => AssertSuccess(m, "(missing)", fallback: false)
+        );
     }
 
     [Fact]
@@ -116,11 +160,16 @@ public class RoutingMetricsTests
         var meterFactory = new TestMeterFactory();
         var middleware = CreateMiddleware(
             matcherFactory: new TestMatcherFactory(false),
-            meterFactory: meterFactory);
+            meterFactory: meterFactory
+        );
         var httpContext = CreateHttpContext();
         var meter = meterFactory.Meters.Single();
 
-        using var routingMatchAttemptsCollector = new MetricCollector<long>(meterFactory, RoutingMetrics.MeterName, "aspnetcore.routing.match_attempts");
+        using var routingMatchAttemptsCollector = new MetricCollector<long>(
+            meterFactory,
+            RoutingMetrics.MeterName,
+            "aspnetcore.routing.match_attempts"
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -129,8 +178,10 @@ public class RoutingMetricsTests
         Assert.Equal(RoutingMetrics.MeterName, meter.Name);
         Assert.Null(meter.Version);
 
-        Assert.Collection(routingMatchAttemptsCollector.GetMeasurementSnapshot(),
-            m => AssertFailure(m));
+        Assert.Collection(
+            routingMatchAttemptsCollector.GetMeasurementSnapshot(),
+            m => AssertFailure(m)
+        );
     }
 
     private void AssertFailure(CollectedMeasurement<long> measurement)
@@ -152,7 +203,8 @@ public class RoutingMetricsTests
         MatcherFactory matcherFactory = null,
         DiagnosticListener listener = null,
         IMeterFactory meterFactory = null,
-        RequestDelegate next = null)
+        RequestDelegate next = null
+    )
     {
         next ??= c => Task.CompletedTask;
         logger ??= new Logger<EndpointRoutingMiddleware>(NullLoggerFactory.Instance);
@@ -168,17 +220,15 @@ public class RoutingMetricsTests
             listener,
             Options.Create(new RouteOptions()),
             metrics,
-            next);
+            next
+        );
 
         return middleware;
     }
 
     private HttpContext CreateHttpContext()
     {
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new TestServiceProvider()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = new TestServiceProvider() };
 
         return httpContext;
     }

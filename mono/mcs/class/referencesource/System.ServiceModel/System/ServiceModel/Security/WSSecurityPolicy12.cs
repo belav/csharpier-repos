@@ -9,15 +9,16 @@ namespace System.ServiceModel.Security
     using System.Collections.ObjectModel;
     using System.Net;
     using System.Runtime;
-    using System.ServiceModel.Description;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
     using System.ServiceModel.Security.Tokens;
     using System.Text;
     using System.Xml;
 
     class WSSecurityPolicy12 : WSSecurityPolicy
     {
-        public const string WsspNamespace = @"http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702";
+        public const string WsspNamespace =
+            @"http://docs.oasis-open.org/ws-sx/ws-securitypolicy/200702";
 
         public const string SignedEncryptedSupportingTokensName = "SignedEncryptedSupportingTokens";
         public const string RequireImpliedDerivedKeysName = "RequireImpliedDerivedKeys";
@@ -30,53 +31,83 @@ namespace System.ServiceModel.Security
 
         public override bool IsSecurityVersionSupported(MessageSecurityVersion version)
         {
-            return version == MessageSecurityVersion.WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10 ||
-                version == MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12 ||
-                version == MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
+            return version
+                    == MessageSecurityVersion.WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10
+                || version
+                    == MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12
+                || version
+                    == MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
         }
 
-        public override MessageSecurityVersion GetSupportedMessageSecurityVersion(SecurityVersion version)
+        public override MessageSecurityVersion GetSupportedMessageSecurityVersion(
+            SecurityVersion version
+        )
         {
-            return (version == SecurityVersion.WSSecurity10) ? MessageSecurityVersion.WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10 : MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
+            return (version == SecurityVersion.WSSecurity10)
+                ? MessageSecurityVersion.WSSecurity10WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10
+                : MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12BasicSecurityProfile10;
         }
 
         public override TrustDriver TrustDriver
         {
             get
             {
-                return new WSTrustDec2005.DriverDec2005(new SecurityStandardsManager(MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12, WSSecurityTokenSerializer.DefaultInstance));
+                return new WSTrustDec2005.DriverDec2005(
+                    new SecurityStandardsManager(
+                        MessageSecurityVersion.WSSecurity11WSTrust13WSSecureConversation13WSSecurityPolicy12,
+                        WSSecurityTokenSerializer.DefaultInstance
+                    )
+                );
             }
         }
 
-        public override XmlElement CreateWsspHttpsTokenAssertion(MetadataExporter exporter, HttpsTransportBindingElement httpsBinding)
+        public override XmlElement CreateWsspHttpsTokenAssertion(
+            MetadataExporter exporter,
+            HttpsTransportBindingElement httpsBinding
+        )
         {
             Fx.Assert(httpsBinding != null, "httpsBinding must not be null.");
-            Fx.Assert(httpsBinding.AuthenticationScheme.IsSingleton(), "authenticationScheme must be a singleton value for security-mode TransportWithMessageCredential.");
+            Fx.Assert(
+                httpsBinding.AuthenticationScheme.IsSingleton(),
+                "authenticationScheme must be a singleton value for security-mode TransportWithMessageCredential."
+            );
 
             XmlElement result = CreateWsspAssertion(WSSecurityPolicy.HttpsTokenName);
-            if (httpsBinding.RequireClientCertificate ||
-                httpsBinding.AuthenticationScheme == AuthenticationSchemes.Basic ||
-                httpsBinding.AuthenticationScheme == AuthenticationSchemes.Digest)
+            if (
+                httpsBinding.RequireClientCertificate
+                || httpsBinding.AuthenticationScheme == AuthenticationSchemes.Basic
+                || httpsBinding.AuthenticationScheme == AuthenticationSchemes.Digest
+            )
             {
                 XmlElement policy = CreateWspPolicyWrapper(exporter);
                 if (httpsBinding.RequireClientCertificate)
                 {
-                    policy.AppendChild(CreateWsspAssertion(WSSecurityPolicy.RequireClientCertificateName));
+                    policy.AppendChild(
+                        CreateWsspAssertion(WSSecurityPolicy.RequireClientCertificateName)
+                    );
                 }
                 if (httpsBinding.AuthenticationScheme == AuthenticationSchemes.Basic)
                 {
-                    policy.AppendChild(CreateWsspAssertion(WSSecurityPolicy.HttpBasicAuthenticationName));
+                    policy.AppendChild(
+                        CreateWsspAssertion(WSSecurityPolicy.HttpBasicAuthenticationName)
+                    );
                 }
                 else if (httpsBinding.AuthenticationScheme == AuthenticationSchemes.Digest)
                 {
-                    policy.AppendChild(CreateWsspAssertion(WSSecurityPolicy.HttpDigestAuthenticationName));
+                    policy.AppendChild(
+                        CreateWsspAssertion(WSSecurityPolicy.HttpDigestAuthenticationName)
+                    );
                 }
                 result.AppendChild(policy);
             }
             return result;
         }
 
-        public override bool TryImportWsspHttpsTokenAssertion(MetadataImporter importer, ICollection<XmlElement> assertions, HttpsTransportBindingElement httpsBinding)
+        public override bool TryImportWsspHttpsTokenAssertion(
+            MetadataImporter importer,
+            ICollection<XmlElement> assertions,
+            HttpsTransportBindingElement httpsBinding
+        )
         {
             if (assertions == null)
             {
@@ -91,7 +122,14 @@ namespace System.ServiceModel.Security
                 XmlElement policyElement = null;
                 foreach (XmlNode node in assertion.ChildNodes)
                 {
-                    if (node is XmlElement && node.LocalName == WSSecurityPolicy.PolicyName && (node.NamespaceURI == WSSecurityPolicy.WspNamespace || node.NamespaceURI == WSSecurityPolicy.Wsp15Namespace))
+                    if (
+                        node is XmlElement
+                        && node.LocalName == WSSecurityPolicy.PolicyName
+                        && (
+                            node.NamespaceURI == WSSecurityPolicy.WspNamespace
+                            || node.NamespaceURI == WSSecurityPolicy.Wsp15Namespace
+                        )
+                    )
                     {
                         policyElement = (XmlElement)node;
                         break;
@@ -112,7 +150,9 @@ namespace System.ServiceModel.Security
                             {
                                 httpsBinding.AuthenticationScheme = AuthenticationSchemes.Basic;
                             }
-                            else if (node.LocalName == WSSecurityPolicy.HttpDigestAuthenticationName)
+                            else if (
+                                node.LocalName == WSSecurityPolicy.HttpDigestAuthenticationName
+                            )
                             {
                                 httpsBinding.AuthenticationScheme = AuthenticationSchemes.Digest;
                             }
@@ -128,34 +168,66 @@ namespace System.ServiceModel.Security
             return result;
         }
 
-        public override Collection<XmlElement> CreateWsspSupportingTokensAssertion(MetadataExporter exporter, Collection<SecurityTokenParameters> signed, Collection<SecurityTokenParameters> signedEncrypted, Collection<SecurityTokenParameters> endorsing, Collection<SecurityTokenParameters> signedEndorsing, Collection<SecurityTokenParameters> optionalSigned, Collection<SecurityTokenParameters> optionalSignedEncrypted, Collection<SecurityTokenParameters> optionalEndorsing, Collection<SecurityTokenParameters> optionalSignedEndorsing, AddressingVersion addressingVersion)
+        public override Collection<XmlElement> CreateWsspSupportingTokensAssertion(
+            MetadataExporter exporter,
+            Collection<SecurityTokenParameters> signed,
+            Collection<SecurityTokenParameters> signedEncrypted,
+            Collection<SecurityTokenParameters> endorsing,
+            Collection<SecurityTokenParameters> signedEndorsing,
+            Collection<SecurityTokenParameters> optionalSigned,
+            Collection<SecurityTokenParameters> optionalSignedEncrypted,
+            Collection<SecurityTokenParameters> optionalEndorsing,
+            Collection<SecurityTokenParameters> optionalSignedEndorsing,
+            AddressingVersion addressingVersion
+        )
         {
             Collection<XmlElement> supportingTokenAssertions = new Collection<XmlElement>();
 
             // Signed Supporting Tokens
-            XmlElement supportingTokenAssertion = CreateWsspSignedSupportingTokensAssertion(exporter, signed, optionalSigned);
+            XmlElement supportingTokenAssertion = CreateWsspSignedSupportingTokensAssertion(
+                exporter,
+                signed,
+                optionalSigned
+            );
             if (supportingTokenAssertion != null)
                 supportingTokenAssertions.Add(supportingTokenAssertion);
 
             // Signed Encrypted Supporting Tokens
-            supportingTokenAssertion = CreateWsspSignedEncryptedSupportingTokensAssertion(exporter, signedEncrypted, optionalSignedEncrypted);
+            supportingTokenAssertion = CreateWsspSignedEncryptedSupportingTokensAssertion(
+                exporter,
+                signedEncrypted,
+                optionalSignedEncrypted
+            );
             if (supportingTokenAssertion != null)
                 supportingTokenAssertions.Add(supportingTokenAssertion);
 
             // Endorsing Supporting Tokens.
-            supportingTokenAssertion = CreateWsspEndorsingSupportingTokensAssertion(exporter, endorsing, optionalEndorsing, addressingVersion);
+            supportingTokenAssertion = CreateWsspEndorsingSupportingTokensAssertion(
+                exporter,
+                endorsing,
+                optionalEndorsing,
+                addressingVersion
+            );
             if (supportingTokenAssertion != null)
                 supportingTokenAssertions.Add(supportingTokenAssertion);
 
             // Signed Endorsing Supporting Tokens.
-            supportingTokenAssertion = CreateWsspSignedEndorsingSupportingTokensAssertion(exporter, signedEndorsing, optionalSignedEndorsing, addressingVersion);
+            supportingTokenAssertion = CreateWsspSignedEndorsingSupportingTokensAssertion(
+                exporter,
+                signedEndorsing,
+                optionalSignedEndorsing,
+                addressingVersion
+            );
             if (supportingTokenAssertion != null)
                 supportingTokenAssertions.Add(supportingTokenAssertion);
 
             return supportingTokenAssertions;
         }
 
-        public override XmlElement CreateWsspSpnegoContextTokenAssertion(MetadataExporter exporter, SspiSecurityTokenParameters parameters)
+        public override XmlElement CreateWsspSpnegoContextTokenAssertion(
+            MetadataExporter exporter,
+            SspiSecurityTokenParameters parameters
+        )
         {
             XmlElement result = CreateWsspAssertion(SpnegoContextTokenName);
             SetIncludeTokenValue(result, parameters.InclusionMode);
@@ -167,11 +239,15 @@ namespace System.ServiceModel.Security
                     CreateWsspMustNotSendCancelAssertion(false),
                     CreateWsspMustNotSendAmendAssertion(),
                     CreateWsspMustNotSendRenewAssertion()
-            ));
+                )
+            );
             return result;
         }
 
-        public override XmlElement CreateMsspSslContextTokenAssertion(MetadataExporter exporter, SslSecurityTokenParameters parameters)
+        public override XmlElement CreateMsspSslContextTokenAssertion(
+            MetadataExporter exporter,
+            SslSecurityTokenParameters parameters
+        )
         {
             XmlElement result = CreateMsspAssertion(SslContextTokenName);
             SetIncludeTokenValue(result, parameters.InclusionMode);
@@ -181,14 +257,20 @@ namespace System.ServiceModel.Security
                     CreateWsspRequireDerivedKeysAssertion(parameters.RequireDerivedKeys),
                     // Always emit <sp:MustNotSendCancel/> for spnego and sslnego
                     CreateWsspMustNotSendCancelAssertion(false),
-                    CreateMsspRequireClientCertificateAssertion(parameters.RequireClientCertificate),
+                    CreateMsspRequireClientCertificateAssertion(
+                        parameters.RequireClientCertificate
+                    ),
                     CreateWsspMustNotSendAmendAssertion(),
                     CreateWsspMustNotSendRenewAssertion()
-            ));
+                )
+            );
             return result;
         }
 
-        public override XmlElement CreateWsspSecureConversationTokenAssertion(MetadataExporter exporter, SecureConversationSecurityTokenParameters parameters)
+        public override XmlElement CreateWsspSecureConversationTokenAssertion(
+            MetadataExporter exporter,
+            SecureConversationSecurityTokenParameters parameters
+        )
         {
             XmlElement result = CreateWsspAssertion(SecureConversationTokenName);
             SetIncludeTokenValue(result, parameters.InclusionMode);
@@ -197,10 +279,16 @@ namespace System.ServiceModel.Security
                     exporter,
                     CreateWsspRequireDerivedKeysAssertion(parameters.RequireDerivedKeys),
                     CreateWsspMustNotSendCancelAssertion(parameters.RequireCancellation),
-                    CreateWsspBootstrapPolicyAssertion(exporter, parameters.BootstrapSecurityBindingElement),
+                    CreateWsspBootstrapPolicyAssertion(
+                        exporter,
+                        parameters.BootstrapSecurityBindingElement
+                    ),
                     CreateWsspMustNotSendAmendAssertion(),
-                    (!parameters.RequireCancellation || !parameters.CanRenewSession) ? CreateWsspMustNotSendRenewAssertion() : null
-            ));
+                    (!parameters.RequireCancellation || !parameters.CanRenewSession)
+                        ? CreateWsspMustNotSendRenewAssertion()
+                        : null
+                )
+            );
             return result;
         }
 
@@ -216,15 +304,21 @@ namespace System.ServiceModel.Security
             return result;
         }
 
-        public override bool TryImportWsspSpnegoContextTokenAssertion(MetadataImporter importer, XmlElement assertion, out SecurityTokenParameters parameters)
+        public override bool TryImportWsspSpnegoContextTokenAssertion(
+            MetadataImporter importer,
+            XmlElement assertion,
+            out SecurityTokenParameters parameters
+        )
         {
             parameters = null;
 
             SecurityTokenInclusionMode inclusionMode;
             Collection<Collection<XmlElement>> alternatives;
 
-            if (IsWsspAssertion(assertion, SpnegoContextTokenName)
-                && TryGetIncludeTokenValue(assertion, out inclusionMode))
+            if (
+                IsWsspAssertion(assertion, SpnegoContextTokenName)
+                && TryGetIncludeTokenValue(assertion, out inclusionMode)
+            )
             {
                 if (TryGetNestedPolicyAlternatives(importer, assertion, out alternatives))
                 {
@@ -234,13 +328,21 @@ namespace System.ServiceModel.Security
                         parameters = sspi;
                         bool requireCancellation;
                         bool canRenewSession;
-                        if (TryImportWsspRequireDerivedKeysAssertion(alternative, sspi)
-                            && TryImportWsspMustNotSendCancelAssertion(alternative, out requireCancellation)
+                        if (
+                            TryImportWsspRequireDerivedKeysAssertion(alternative, sspi)
+                            && TryImportWsspMustNotSendCancelAssertion(
+                                alternative,
+                                out requireCancellation
+                            )
                             && TryImportWsspMustNotSendAmendAssertion(alternative)
-                            // We do not support Renew for spnego and sslnego. Read the 
+                            // We do not support Renew for spnego and sslnego. Read the
                             // assertion if present and ignore it.
-                            && TryImportWsspMustNotSendRenewAssertion(alternative, out canRenewSession)
-                            && alternative.Count == 0)
+                            && TryImportWsspMustNotSendRenewAssertion(
+                                alternative,
+                                out canRenewSession
+                            )
+                            && alternative.Count == 0
+                        )
                         {
                             // Client always set this to true to match the standardbinding.
                             // This setting on client has no effect for spnego and sslnego.
@@ -265,15 +367,21 @@ namespace System.ServiceModel.Security
             return parameters != null;
         }
 
-        public override bool TryImportMsspSslContextTokenAssertion(MetadataImporter importer, XmlElement assertion, out SecurityTokenParameters parameters)
+        public override bool TryImportMsspSslContextTokenAssertion(
+            MetadataImporter importer,
+            XmlElement assertion,
+            out SecurityTokenParameters parameters
+        )
         {
             parameters = null;
 
             SecurityTokenInclusionMode inclusionMode;
             Collection<Collection<XmlElement>> alternatives;
 
-            if (IsMsspAssertion(assertion, SslContextTokenName)
-                && TryGetIncludeTokenValue(assertion, out inclusionMode))
+            if (
+                IsMsspAssertion(assertion, SslContextTokenName)
+                && TryGetIncludeTokenValue(assertion, out inclusionMode)
+            )
             {
                 if (TryGetNestedPolicyAlternatives(importer, assertion, out alternatives))
                 {
@@ -283,14 +391,22 @@ namespace System.ServiceModel.Security
                         parameters = ssl;
                         bool requireCancellation;
                         bool canRenewSession;
-                        if (TryImportWsspRequireDerivedKeysAssertion(alternative, ssl)
-                            && TryImportWsspMustNotSendCancelAssertion(alternative, out requireCancellation)
+                        if (
+                            TryImportWsspRequireDerivedKeysAssertion(alternative, ssl)
+                            && TryImportWsspMustNotSendCancelAssertion(
+                                alternative,
+                                out requireCancellation
+                            )
                             && TryImportWsspMustNotSendAmendAssertion(alternative)
-                            // We do not support Renew for spnego and sslnego. Read the 
+                            // We do not support Renew for spnego and sslnego. Read the
                             // assertion if present and ignore it.
-                            && TryImportWsspMustNotSendRenewAssertion(alternative, out canRenewSession)
+                            && TryImportWsspMustNotSendRenewAssertion(
+                                alternative,
+                                out canRenewSession
+                            )
                             && TryImportMsspRequireClientCertificateAssertion(alternative, ssl)
-                            && alternative.Count == 0)
+                            && alternative.Count == 0
+                        )
                         {
                             // Client always set this to true to match the standardbinding.
                             // This setting on client has no effect for spnego and sslnego.
@@ -315,30 +431,45 @@ namespace System.ServiceModel.Security
             return parameters != null;
         }
 
-        public override bool TryImportWsspSecureConversationTokenAssertion(MetadataImporter importer, XmlElement assertion, out SecurityTokenParameters parameters)
+        public override bool TryImportWsspSecureConversationTokenAssertion(
+            MetadataImporter importer,
+            XmlElement assertion,
+            out SecurityTokenParameters parameters
+        )
         {
             parameters = null;
 
             SecurityTokenInclusionMode inclusionMode;
             Collection<Collection<XmlElement>> alternatives;
 
-            if (IsWsspAssertion(assertion, SecureConversationTokenName)
-                && TryGetIncludeTokenValue(assertion, out inclusionMode))
+            if (
+                IsWsspAssertion(assertion, SecureConversationTokenName)
+                && TryGetIncludeTokenValue(assertion, out inclusionMode)
+            )
             {
                 if (TryGetNestedPolicyAlternatives(importer, assertion, out alternatives))
                 {
                     foreach (Collection<XmlElement> alternative in alternatives)
                     {
-                        SecureConversationSecurityTokenParameters sc = new SecureConversationSecurityTokenParameters();
+                        SecureConversationSecurityTokenParameters sc =
+                            new SecureConversationSecurityTokenParameters();
                         parameters = sc;
                         bool requireCancellation;
                         bool canRenewSession;
-                        if (TryImportWsspRequireDerivedKeysAssertion(alternative, sc)
-                            && TryImportWsspMustNotSendCancelAssertion(alternative, out requireCancellation)
+                        if (
+                            TryImportWsspRequireDerivedKeysAssertion(alternative, sc)
+                            && TryImportWsspMustNotSendCancelAssertion(
+                                alternative,
+                                out requireCancellation
+                            )
                             && TryImportWsspMustNotSendAmendAssertion(alternative)
-                            && TryImportWsspMustNotSendRenewAssertion(alternative, out canRenewSession)
+                            && TryImportWsspMustNotSendRenewAssertion(
+                                alternative,
+                                out canRenewSession
+                            )
                             && TryImportWsspBootstrapPolicyAssertion(importer, alternative, sc)
-                            && alternative.Count == 0)
+                            && alternative.Count == 0
+                        )
                         {
                             sc.RequireCancellation = requireCancellation;
                             sc.CanRenewSession = canRenewSession;
@@ -362,24 +493,35 @@ namespace System.ServiceModel.Security
             return parameters != null;
         }
 
-        public virtual bool TryImportWsspMustNotSendAmendAssertion(ICollection<XmlElement> assertions)
+        public virtual bool TryImportWsspMustNotSendAmendAssertion(
+            ICollection<XmlElement> assertions
+        )
         {
             TryImportWsspAssertion(assertions, MustNotSendAmendName);
             return true;
         }
 
-        public virtual bool TryImportWsspMustNotSendRenewAssertion(ICollection<XmlElement> assertions, out bool canRenewSession)
+        public virtual bool TryImportWsspMustNotSendRenewAssertion(
+            ICollection<XmlElement> assertions,
+            out bool canRenewSession
+        )
         {
             canRenewSession = !TryImportWsspAssertion(assertions, MustNotSendRenewName);
             return true;
         }
 
-        XmlElement CreateWsspSignedSupportingTokensAssertion(MetadataExporter exporter, Collection<SecurityTokenParameters> signed, Collection<SecurityTokenParameters> optionalSigned)
+        XmlElement CreateWsspSignedSupportingTokensAssertion(
+            MetadataExporter exporter,
+            Collection<SecurityTokenParameters> signed,
+            Collection<SecurityTokenParameters> optionalSigned
+        )
         {
             XmlElement result;
 
-            if ((signed == null || signed.Count == 0)
-                && (optionalSigned == null || optionalSigned.Count == 0))
+            if (
+                (signed == null || signed.Count == 0)
+                && (optionalSigned == null || optionalSigned.Count == 0)
+            )
             {
                 result = null;
             }
@@ -409,12 +551,18 @@ namespace System.ServiceModel.Security
             return result;
         }
 
-        XmlElement CreateWsspSignedEncryptedSupportingTokensAssertion(MetadataExporter exporter, Collection<SecurityTokenParameters> signedEncrypted, Collection<SecurityTokenParameters> optionalSignedEncrypted)
+        XmlElement CreateWsspSignedEncryptedSupportingTokensAssertion(
+            MetadataExporter exporter,
+            Collection<SecurityTokenParameters> signedEncrypted,
+            Collection<SecurityTokenParameters> optionalSignedEncrypted
+        )
         {
             XmlElement result;
 
-            if ((signedEncrypted == null || signedEncrypted.Count == 0)
-                && (optionalSignedEncrypted == null || optionalSignedEncrypted.Count == 0))
+            if (
+                (signedEncrypted == null || signedEncrypted.Count == 0)
+                && (optionalSignedEncrypted == null || optionalSignedEncrypted.Count == 0)
+            )
             {
                 result = null;
             }
@@ -444,62 +592,109 @@ namespace System.ServiceModel.Security
             return result;
         }
 
-        public override bool TryImportWsspSupportingTokensAssertion(MetadataImporter importer, PolicyConversionContext policyContext, ICollection<XmlElement> assertions, Collection<SecurityTokenParameters> signed, Collection<SecurityTokenParameters> signedEncrypted, Collection<SecurityTokenParameters> endorsing, Collection<SecurityTokenParameters> signedEndorsing, Collection<SecurityTokenParameters> optionalSigned, Collection<SecurityTokenParameters> optionalSignedEncrypted, Collection<SecurityTokenParameters> optionalEndorsing, Collection<SecurityTokenParameters> optionalSignedEndorsing)
+        public override bool TryImportWsspSupportingTokensAssertion(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext,
+            ICollection<XmlElement> assertions,
+            Collection<SecurityTokenParameters> signed,
+            Collection<SecurityTokenParameters> signedEncrypted,
+            Collection<SecurityTokenParameters> endorsing,
+            Collection<SecurityTokenParameters> signedEndorsing,
+            Collection<SecurityTokenParameters> optionalSigned,
+            Collection<SecurityTokenParameters> optionalSignedEncrypted,
+            Collection<SecurityTokenParameters> optionalEndorsing,
+            Collection<SecurityTokenParameters> optionalSignedEndorsing
+        )
         {
             XmlElement assertion;
 
-            if (!TryImportWsspSignedSupportingTokensAssertion(
-                importer,
-                policyContext,
-                assertions,
-                signed,
-                optionalSigned,
-                out assertion)
-                && assertion != null)
+            if (
+                !TryImportWsspSignedSupportingTokensAssertion(
+                    importer,
+                    policyContext,
+                    assertions,
+                    signed,
+                    optionalSigned,
+                    out assertion
+                )
+                && assertion != null
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                    )
+                );
             }
 
-            if (!TryImportWsspSignedEncryptedSupportingTokensAssertion(
-                importer,
-                policyContext,
-                assertions,
-                signedEncrypted,
-                optionalSignedEncrypted,
-                out assertion)
-                && assertion != null)
+            if (
+                !TryImportWsspSignedEncryptedSupportingTokensAssertion(
+                    importer,
+                    policyContext,
+                    assertions,
+                    signedEncrypted,
+                    optionalSignedEncrypted,
+                    out assertion
+                )
+                && assertion != null
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                    )
+                );
             }
 
-            if (!TryImportWsspEndorsingSupportingTokensAssertion(
-                importer,
-                policyContext,
-                assertions,
-                endorsing,
-                optionalEndorsing,
-                out assertion)
-                && assertion != null)
+            if (
+                !TryImportWsspEndorsingSupportingTokensAssertion(
+                    importer,
+                    policyContext,
+                    assertions,
+                    endorsing,
+                    optionalEndorsing,
+                    out assertion
+                )
+                && assertion != null
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                    )
+                );
             }
 
-            if (!TryImportWsspSignedEndorsingSupportingTokensAssertion(
-                importer,
-                policyContext,
-                assertions,
-                signedEndorsing,
-                optionalSignedEndorsing,
-                out assertion)
-                && assertion != null)
+            if (
+                !TryImportWsspSignedEndorsingSupportingTokensAssertion(
+                    importer,
+                    policyContext,
+                    assertions,
+                    signedEndorsing,
+                    optionalSignedEndorsing,
+                    out assertion
+                )
+                && assertion != null
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                    )
+                );
             }
 
             return true;
         }
 
-        bool TryImportWsspSignedSupportingTokensAssertion(MetadataImporter importer, PolicyConversionContext policyContext, ICollection<XmlElement> assertions, Collection<SecurityTokenParameters> signed, Collection<SecurityTokenParameters> optionalSigned, out XmlElement assertion)
+        bool TryImportWsspSignedSupportingTokensAssertion(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext,
+            ICollection<XmlElement> assertions,
+            Collection<SecurityTokenParameters> signed,
+            Collection<SecurityTokenParameters> optionalSigned,
+            out XmlElement assertion
+        )
         {
             if (signed == null)
             {
@@ -514,14 +709,25 @@ namespace System.ServiceModel.Security
 
             Collection<Collection<XmlElement>> alternatives;
 
-            if (TryImportWsspAssertion(assertions, SignedSupportingTokensName, out assertion)
-                && TryGetNestedPolicyAlternatives(importer, assertion, out alternatives))
+            if (
+                TryImportWsspAssertion(assertions, SignedSupportingTokensName, out assertion)
+                && TryGetNestedPolicyAlternatives(importer, assertion, out alternatives)
+            )
             {
                 foreach (Collection<XmlElement> alternative in alternatives)
                 {
                     SecurityTokenParameters parameters;
                     bool isOptional;
-                    while (alternative.Count > 0 && TryImportTokenAssertion(importer, policyContext, alternative, out parameters, out isOptional))
+                    while (
+                        alternative.Count > 0
+                        && TryImportTokenAssertion(
+                            importer,
+                            policyContext,
+                            alternative,
+                            out parameters,
+                            out isOptional
+                        )
+                    )
                     {
                         if (isOptional)
                         {
@@ -547,7 +753,14 @@ namespace System.ServiceModel.Security
             return result;
         }
 
-        bool TryImportWsspSignedEncryptedSupportingTokensAssertion(MetadataImporter importer, PolicyConversionContext policyContext, ICollection<XmlElement> assertions, Collection<SecurityTokenParameters> signedEncrypted, Collection<SecurityTokenParameters> optionalSignedEncrypted, out XmlElement assertion)
+        bool TryImportWsspSignedEncryptedSupportingTokensAssertion(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext,
+            ICollection<XmlElement> assertions,
+            Collection<SecurityTokenParameters> signedEncrypted,
+            Collection<SecurityTokenParameters> optionalSignedEncrypted,
+            out XmlElement assertion
+        )
         {
             if (signedEncrypted == null)
             {
@@ -555,21 +768,37 @@ namespace System.ServiceModel.Security
             }
             if (optionalSignedEncrypted == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("optionalSignedEncrypted");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "optionalSignedEncrypted"
+                );
             }
 
             bool result = true;
 
             Collection<Collection<XmlElement>> alternatives;
 
-            if (TryImportWsspAssertion(assertions, SignedEncryptedSupportingTokensName, out assertion)
-                && TryGetNestedPolicyAlternatives(importer, assertion, out alternatives))
+            if (
+                TryImportWsspAssertion(
+                    assertions,
+                    SignedEncryptedSupportingTokensName,
+                    out assertion
+                ) && TryGetNestedPolicyAlternatives(importer, assertion, out alternatives)
+            )
             {
                 foreach (Collection<XmlElement> alternative in alternatives)
                 {
                     SecurityTokenParameters parameters;
                     bool isOptional;
-                    while (alternative.Count > 0 && TryImportTokenAssertion(importer, policyContext, alternative, out parameters, out isOptional))
+                    while (
+                        alternative.Count > 0
+                        && TryImportTokenAssertion(
+                            importer,
+                            policyContext,
+                            alternative,
+                            out parameters,
+                            out isOptional
+                        )
+                    )
                     {
                         if (isOptional)
                         {
@@ -595,52 +824,93 @@ namespace System.ServiceModel.Security
             return result;
         }
 
-        public override bool TryImportWsspRequireDerivedKeysAssertion(ICollection<XmlElement> assertions, SecurityTokenParameters parameters)
+        public override bool TryImportWsspRequireDerivedKeysAssertion(
+            ICollection<XmlElement> assertions,
+            SecurityTokenParameters parameters
+        )
         {
-            parameters.RequireDerivedKeys = TryImportWsspAssertion(assertions, WSSecurityPolicy.RequireDerivedKeysName);
+            parameters.RequireDerivedKeys = TryImportWsspAssertion(
+                assertions,
+                WSSecurityPolicy.RequireDerivedKeysName
+            );
 
             if (!parameters.RequireDerivedKeys)
             {
-                parameters.RequireDerivedKeys = TryImportWsspAssertion(assertions, WSSecurityPolicy12.RequireExplicitDerivedKeysName);
+                parameters.RequireDerivedKeys = TryImportWsspAssertion(
+                    assertions,
+                    WSSecurityPolicy12.RequireExplicitDerivedKeysName
+                );
             }
 
             if (!parameters.RequireDerivedKeys)
             {
                 XmlElement assertion = null;
-                if (TryImportWsspAssertion(assertions, WSSecurityPolicy12.RequireImpliedDerivedKeysName, out assertion))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)));
+                if (
+                    TryImportWsspAssertion(
+                        assertions,
+                        WSSecurityPolicy12.RequireImpliedDerivedKeysName,
+                        out assertion
+                    )
+                )
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.UnsupportedSecurityPolicyAssertion, assertion.OuterXml)
+                        )
+                    );
             }
 
             return true;
         }
 
-        public override XmlElement CreateWsspTrustAssertion(MetadataExporter exporter, SecurityKeyEntropyMode keyEntropyMode)
+        public override XmlElement CreateWsspTrustAssertion(
+            MetadataExporter exporter,
+            SecurityKeyEntropyMode keyEntropyMode
+        )
         {
             return CreateWsspTrustAssertion(Trust13Name, exporter, keyEntropyMode);
         }
 
-        public override bool TryImportWsspTrustAssertion(MetadataImporter importer, ICollection<XmlElement> assertions, SecurityBindingElement binding, out XmlElement assertion)
+        public override bool TryImportWsspTrustAssertion(
+            MetadataImporter importer,
+            ICollection<XmlElement> assertions,
+            SecurityBindingElement binding,
+            out XmlElement assertion
+        )
         {
-            return TryImportWsspTrustAssertion(Trust13Name, importer, assertions, binding, out assertion);
+            return TryImportWsspTrustAssertion(
+                Trust13Name,
+                importer,
+                assertions,
+                binding,
+                out assertion
+            );
         }
 
-        public override XmlElement CreateWsspRsaTokenAssertion(RsaSecurityTokenParameters parameters)
+        public override XmlElement CreateWsspRsaTokenAssertion(
+            RsaSecurityTokenParameters parameters
+        )
         {
             XmlElement result = CreateWsspAssertion(KeyValueTokenName);
             SetIncludeTokenValue(result, parameters.InclusionMode);
             return result;
         }
 
-        public override bool TryImportWsspRsaTokenAssertion(MetadataImporter importer, XmlElement assertion, out SecurityTokenParameters parameters)
+        public override bool TryImportWsspRsaTokenAssertion(
+            MetadataImporter importer,
+            XmlElement assertion,
+            out SecurityTokenParameters parameters
+        )
         {
             parameters = null;
 
             SecurityTokenInclusionMode inclusionMode;
             Collection<Collection<XmlElement>> alternatives;
 
-            if (IsWsspAssertion(assertion, KeyValueTokenName)
+            if (
+                IsWsspAssertion(assertion, KeyValueTokenName)
                 && TryGetIncludeTokenValue(assertion, out inclusionMode)
-                && TryGetNestedPolicyAlternatives(importer, assertion, out alternatives) == false)
+                && TryGetNestedPolicyAlternatives(importer, assertion, out alternatives) == false
+            )
             {
                 parameters = new RsaSecurityTokenParameters();
                 parameters.InclusionMode = inclusionMode;

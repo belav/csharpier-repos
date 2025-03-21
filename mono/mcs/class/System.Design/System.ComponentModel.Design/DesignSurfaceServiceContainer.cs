@@ -1,7 +1,7 @@
 //
 // System.ComponentModel.Design.DesignSurfaceServiceContainer
 //
-// Authors:	 
+// Authors:
 //	  Ivan N. Zlatev (contact i-nz.net)
 //
 // (C) 2006 Ivan N. Zlatev
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,53 +27,53 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Collections;
 using System.ComponentModel;
 
 namespace System.ComponentModel.Design
 {
-	
-	// Implements a ServiceContainer, which allows specific sets of services
-	// to be non-replacable for users of the IServiceContainer .
-	// 
-	internal sealed class DesignSurfaceServiceContainer : ServiceContainer
-	{
+    // Implements a ServiceContainer, which allows specific sets of services
+    // to be non-replacable for users of the IServiceContainer .
+    //
+    internal sealed class DesignSurfaceServiceContainer : ServiceContainer
+    {
+        private Hashtable _nonRemoveableServices;
 
-		private Hashtable _nonRemoveableServices;
-		
-		public DesignSurfaceServiceContainer () : this (null)
-		{
-		}
+        public DesignSurfaceServiceContainer()
+            : this(null) { }
 
-		public DesignSurfaceServiceContainer (IServiceProvider parentProvider) : base (parentProvider)
-		{
-		}
-		
-		internal void AddNonReplaceableService (Type serviceType, object instance)
-		{
-			if (_nonRemoveableServices == null)
-				_nonRemoveableServices = new Hashtable ();
+        public DesignSurfaceServiceContainer(IServiceProvider parentProvider)
+            : base(parentProvider) { }
 
-			_nonRemoveableServices[serviceType] = serviceType;
-			base.AddService (serviceType, instance);
-		}
+        internal void AddNonReplaceableService(Type serviceType, object instance)
+        {
+            if (_nonRemoveableServices == null)
+                _nonRemoveableServices = new Hashtable();
 
-			
-		internal void RemoveNonReplaceableService (Type serviceType, object instance)
-		{
-			if (_nonRemoveableServices != null) 
-				_nonRemoveableServices.Remove (serviceType);
-			base.RemoveService (serviceType);
-		}
-		
-		public override void RemoveService (Type serviceType, bool promote)
-		{
-			if (serviceType != null && _nonRemoveableServices != null && _nonRemoveableServices.ContainsKey (serviceType))
-				throw new InvalidOperationException ("Cannot remove non-replaceable service: " + serviceType.AssemblyQualifiedName);
+            _nonRemoveableServices[serviceType] = serviceType;
+            base.AddService(serviceType, instance);
+        }
 
-			base.RemoveService (serviceType, promote);				
-		}
-	}
+        internal void RemoveNonReplaceableService(Type serviceType, object instance)
+        {
+            if (_nonRemoveableServices != null)
+                _nonRemoveableServices.Remove(serviceType);
+            base.RemoveService(serviceType);
+        }
+
+        public override void RemoveService(Type serviceType, bool promote)
+        {
+            if (
+                serviceType != null
+                && _nonRemoveableServices != null
+                && _nonRemoveableServices.ContainsKey(serviceType)
+            )
+                throw new InvalidOperationException(
+                    "Cannot remove non-replaceable service: " + serviceType.AssemblyQualifiedName
+                );
+
+            base.RemoveService(serviceType, promote);
+        }
+    }
 }

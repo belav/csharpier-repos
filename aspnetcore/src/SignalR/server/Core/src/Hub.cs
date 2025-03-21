@@ -87,9 +87,7 @@ public abstract class Hub : IDisposable
     /// </summary>
     /// <param name="disposing"><c>true</c> if this method is being invoked by the <see cref="Dispose()"/> method,
     /// otherwise <c>false</c>.</param>
-    protected virtual void Dispose(bool disposing)
-    {
-    }
+    protected virtual void Dispose(bool disposing) { }
 
     /// <inheritdoc />
     public void Dispose()

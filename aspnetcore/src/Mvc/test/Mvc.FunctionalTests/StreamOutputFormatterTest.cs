@@ -20,7 +20,10 @@ public class StreamOutputFormatterTest : IClassFixture<MvcTestFixture<FormatterW
     [InlineData("MemoryStreamWithContentTypeFromProduces", "text/plain")]
     [InlineData("MemoryStreamWithContentTypeFromProducesWithMultipleValues", "text/html")]
     [InlineData("MemoryStreamOverridesProducesContentTypeWithResponseContentType", "text/plain")]
-    public async Task StreamOutputFormatter_ReturnsAppropriateContentAndContentType(string actionName, string contentType)
+    public async Task StreamOutputFormatter_ReturnsAppropriateContentAndContentType(
+        string actionName,
+        string contentType
+    )
     {
         // Arrange & Act
         var response = await Client.GetAsync("http://localhost/Stream/" + actionName);

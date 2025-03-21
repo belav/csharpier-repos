@@ -13,7 +13,11 @@ public class PathStringTests
     public void CtorThrows_IfPathDoesNotHaveLeadingSlash()
     {
         // Act and Assert
-        ExceptionAssert.ThrowsArgument(() => new PathString("hello"), "value", "The path in 'value' must start with '/'.");
+        ExceptionAssert.ThrowsArgument(
+            () => new PathString("hello"),
+            "value",
+            "The path in 'value' must start with '/'."
+        );
     }
 
     [Fact]
@@ -77,7 +81,11 @@ public class PathStringTests
     [InlineData("/", "/test", "/test")]
     [InlineData("/myapp/", "/test/bar", "/myapp/test/bar")]
     [InlineData("/myapp/", "/test/bar/", "/myapp/test/bar/")]
-    public void AddPathString_HandlesLeadingAndTrailingSlashes(string appString, string concatString, string expected)
+    public void AddPathString_HandlesLeadingAndTrailingSlashes(
+        string appString,
+        string concatString,
+        string expected
+    )
     {
         // Arrange
         var appPath = new PathString(appString);
@@ -116,7 +124,11 @@ public class PathStringTests
     [InlineData("/TEST/PATH", "/test", true)]
     [InlineData("/TEST/path", "/test/pa", false)]
     [InlineData("/test/PATH/path/TEST", "/TEST/path/PATH", true)]
-    public void StartsWithSegments_DoesACaseInsensitiveMatch(string sourcePath, string testPath, bool expectedResult)
+    public void StartsWithSegments_DoesACaseInsensitiveMatch(
+        string sourcePath,
+        string testPath,
+        bool expectedResult
+    )
     {
         var source = new PathString(sourcePath);
         var test = new PathString(testPath);
@@ -132,7 +144,11 @@ public class PathStringTests
     [InlineData("/TEST/PATH", "/test", true)]
     [InlineData("/TEST/path", "/test/pa", false)]
     [InlineData("/test/PATH/path/TEST", "/TEST/path/PATH", true)]
-    public void StartsWithSegmentsWithRemainder_DoesACaseInsensitiveMatch(string sourcePath, string testPath, bool expectedResult)
+    public void StartsWithSegmentsWithRemainder_DoesACaseInsensitiveMatch(
+        string sourcePath,
+        string testPath,
+        bool expectedResult
+    )
     {
         var source = new PathString(sourcePath);
         var test = new PathString(testPath);
@@ -151,9 +167,19 @@ public class PathStringTests
     [InlineData("/TEST/PATH", "/test", StringComparison.Ordinal, false)]
     [InlineData("/TEST/path", "/test/pa", StringComparison.OrdinalIgnoreCase, false)]
     [InlineData("/TEST/path", "/test/pa", StringComparison.Ordinal, false)]
-    [InlineData("/test/PATH/path/TEST", "/TEST/path/PATH", StringComparison.OrdinalIgnoreCase, true)]
+    [InlineData(
+        "/test/PATH/path/TEST",
+        "/TEST/path/PATH",
+        StringComparison.OrdinalIgnoreCase,
+        true
+    )]
     [InlineData("/test/PATH/path/TEST", "/TEST/path/PATH", StringComparison.Ordinal, false)]
-    public void StartsWithSegments_DoesMatchUsingSpecifiedComparison(string sourcePath, string testPath, StringComparison comparison, bool expectedResult)
+    public void StartsWithSegments_DoesMatchUsingSpecifiedComparison(
+        string sourcePath,
+        string testPath,
+        StringComparison comparison,
+        bool expectedResult
+    )
     {
         var source = new PathString(sourcePath);
         var test = new PathString(testPath);
@@ -172,9 +198,19 @@ public class PathStringTests
     [InlineData("/TEST/PATH", "/test", StringComparison.Ordinal, false)]
     [InlineData("/TEST/path", "/test/pa", StringComparison.OrdinalIgnoreCase, false)]
     [InlineData("/TEST/path", "/test/pa", StringComparison.Ordinal, false)]
-    [InlineData("/test/PATH/path/TEST", "/TEST/path/PATH", StringComparison.OrdinalIgnoreCase, true)]
+    [InlineData(
+        "/test/PATH/path/TEST",
+        "/TEST/path/PATH",
+        StringComparison.OrdinalIgnoreCase,
+        true
+    )]
     [InlineData("/test/PATH/path/TEST", "/TEST/path/PATH", StringComparison.Ordinal, false)]
-    public void StartsWithSegmentsWithRemainder_DoesMatchUsingSpecifiedComparison(string sourcePath, string testPath, StringComparison comparison, bool expectedResult)
+    public void StartsWithSegmentsWithRemainder_DoesMatchUsingSpecifiedComparison(
+        string sourcePath,
+        string testPath,
+        StringComparison comparison,
+        bool expectedResult
+    )
     {
         var source = new PathString(sourcePath);
         var test = new PathString(testPath);
@@ -261,8 +297,10 @@ public class PathStringTests
 
     [Theory]
     [InlineData("/a%20b", "/a b")]
-    [InlineData("/thisMustBeAVeryLongPath/SoLongThatItCouldActuallyBeLargerToTheStackAllocThresholdValue/PathsShorterToThisAllocateLessOnHeapByUsingStackAllocation/api/a%20b",
-        "/thisMustBeAVeryLongPath/SoLongThatItCouldActuallyBeLargerToTheStackAllocThresholdValue/PathsShorterToThisAllocateLessOnHeapByUsingStackAllocation/api/a b")]
+    [InlineData(
+        "/thisMustBeAVeryLongPath/SoLongThatItCouldActuallyBeLargerToTheStackAllocThresholdValue/PathsShorterToThisAllocateLessOnHeapByUsingStackAllocation/api/a%20b",
+        "/thisMustBeAVeryLongPath/SoLongThatItCouldActuallyBeLargerToTheStackAllocThresholdValue/PathsShorterToThisAllocateLessOnHeapByUsingStackAllocation/api/a b"
+    )]
     public void StringFromUriComponentUnescapes(string input, string expected)
     {
         var sut = PathString.FromUriComponent(input);
@@ -271,8 +309,10 @@ public class PathStringTests
 
     [Theory]
     [InlineData("/a%20b", "/a b")]
-    [InlineData("/thisMustBeAVeryLongPath/SoLongThatItCouldActuallyBeLargerToTheStackAllocThresholdValue/PathsShorterToThisAllocateLessOnHeapByUsingStackAllocation/api/a%20b",
-"/thisMustBeAVeryLongPath/SoLongThatItCouldActuallyBeLargerToTheStackAllocThresholdValue/PathsShorterToThisAllocateLessOnHeapByUsingStackAllocation/api/a b")]
+    [InlineData(
+        "/thisMustBeAVeryLongPath/SoLongThatItCouldActuallyBeLargerToTheStackAllocThresholdValue/PathsShorterToThisAllocateLessOnHeapByUsingStackAllocation/api/a%20b",
+        "/thisMustBeAVeryLongPath/SoLongThatItCouldActuallyBeLargerToTheStackAllocThresholdValue/PathsShorterToThisAllocateLessOnHeapByUsingStackAllocation/api/a b"
+    )]
     public void UriFromUriComponentUnescapes(string input, string expected)
     {
         var uri = new Uri($"https://localhost:5001{input}");

@@ -98,7 +98,8 @@ public class FormOptions
     /// Form sections that exceed this limit will throw an <see cref="InvalidDataException"/> when parsed.
     /// Defaults to 16,384 bytes, which is approximately 16KB.
     /// </summary>
-    public int MultipartHeadersLengthLimit { get; set; } = MultipartReader.DefaultHeadersLengthLimit;
+    public int MultipartHeadersLengthLimit { get; set; } =
+        MultipartReader.DefaultHeadersLengthLimit;
 
     /// <summary>
     /// A limit for the length of each multipart body. Forms sections that exceed this limit will throw an

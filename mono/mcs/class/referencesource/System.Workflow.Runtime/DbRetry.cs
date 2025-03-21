@@ -15,9 +15,7 @@ namespace System.Workflow.Runtime
         private int _retrySleep = _defaultRetrySleep;
         private bool _enableRetries = false;
 
-        protected DbRetry()
-        {
-        }
+        protected DbRetry() { }
 
         internal DbRetry(bool enableRetries)
         {

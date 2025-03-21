@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Builder;
 /// </summary>
 public static class RequestTimeoutsIEndpointConventionBuilderExtensions
 {
-    private static readonly DisableRequestTimeoutAttribute _disableRequestTimeoutAttribute = new DisableRequestTimeoutAttribute();
+    private static readonly DisableRequestTimeoutAttribute _disableRequestTimeoutAttribute =
+        new DisableRequestTimeoutAttribute();
 
     /// <summary>
     /// Specifies a timeout for the endpoint(s).
@@ -18,12 +19,12 @@ public static class RequestTimeoutsIEndpointConventionBuilderExtensions
     /// <param name="builder">The endpoint convention builder.</param>
     /// <param name="timeout">The timeout to apply for the endpoint(s).</param>
     /// <returns>The original convention builder parameter.</returns>
-    public static IEndpointConventionBuilder WithRequestTimeout(this IEndpointConventionBuilder builder, TimeSpan timeout)
+    public static IEndpointConventionBuilder WithRequestTimeout(
+        this IEndpointConventionBuilder builder,
+        TimeSpan timeout
+    )
     {
-        return builder.WithRequestTimeout(new RequestTimeoutPolicy
-        {
-            Timeout = timeout
-        });
+        return builder.WithRequestTimeout(new RequestTimeoutPolicy { Timeout = timeout });
     }
 
     /// <summary>
@@ -32,7 +33,10 @@ public static class RequestTimeoutsIEndpointConventionBuilderExtensions
     /// <param name="builder">The endpoint convention builder.</param>
     /// <param name="policyName">The name (case-insensitive) of the policy to apply for the endpoint(s).</param>
     /// <returns>The original convention builder parameter.</returns>
-    public static IEndpointConventionBuilder WithRequestTimeout(this IEndpointConventionBuilder builder, string policyName)
+    public static IEndpointConventionBuilder WithRequestTimeout(
+        this IEndpointConventionBuilder builder,
+        string policyName
+    )
     {
         builder.Add(b => b.Metadata.Add(new RequestTimeoutAttribute(policyName)));
         return builder;
@@ -44,7 +48,10 @@ public static class RequestTimeoutsIEndpointConventionBuilderExtensions
     /// <param name="builder">The endpoint convention builder.</param>
     /// <param name="policy">The request timeout policy.</param>
     /// <returns>The original convention builder parameter.</returns>
-    public static IEndpointConventionBuilder WithRequestTimeout(this IEndpointConventionBuilder builder, RequestTimeoutPolicy policy)
+    public static IEndpointConventionBuilder WithRequestTimeout(
+        this IEndpointConventionBuilder builder,
+        RequestTimeoutPolicy policy
+    )
     {
         builder.Add(b => b.Metadata.Add(policy));
         return builder;
@@ -56,7 +63,9 @@ public static class RequestTimeoutsIEndpointConventionBuilderExtensions
     /// <param name="builder">The endpoint convention builder.</param>
     /// <returns>The original convention builder parameter.</returns>
     /// <remarks>Will skip both the default timeout, and any endpoint-specific timeout that apply to the endpoint(s).</remarks>
-    public static IEndpointConventionBuilder DisableRequestTimeout(this IEndpointConventionBuilder builder)
+    public static IEndpointConventionBuilder DisableRequestTimeout(
+        this IEndpointConventionBuilder builder
+    )
     {
         builder.Add(b => b.Metadata.Add(_disableRequestTimeoutAttribute));
         return builder;

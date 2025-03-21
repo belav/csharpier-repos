@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,22 +28,40 @@ using System.Collections.ObjectModel;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
-using System.ServiceModel.Dispatcher;
 using System.ServiceModel.Discovery;
+using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery.VersionApril2005
 {
-	[ServiceContract (Name = "DiscoveryProxy", Namespace = MessageContractsApril2005.NS)]
-	internal interface IDiscoveryProxyContractApril2005
-	{
-		[OperationContract (Name = "ProbeApril2005", Action = MessageContractsApril2005.ProbeAction, AsyncPattern = true, ReplyAction = MessageContractsApril2005.ProbeMatchAction)]
-		IAsyncResult BeginFind (MessageContractsApril2005.FindRequest message, AsyncCallback callback, object state);
+    [ServiceContract(Name = "DiscoveryProxy", Namespace = MessageContractsApril2005.NS)]
+    internal interface IDiscoveryProxyContractApril2005
+    {
+        [OperationContract(
+            Name = "ProbeApril2005",
+            Action = MessageContractsApril2005.ProbeAction,
+            AsyncPattern = true,
+            ReplyAction = MessageContractsApril2005.ProbeMatchAction
+        )]
+        IAsyncResult BeginFind(
+            MessageContractsApril2005.FindRequest message,
+            AsyncCallback callback,
+            object state
+        );
 
-		MessageContractsApril2005.FindResponse EndFind (IAsyncResult result);
+        MessageContractsApril2005.FindResponse EndFind(IAsyncResult result);
 
-		[OperationContract (Name = "ResolveApril2005", Action = MessageContractsApril2005.ResolveAction, AsyncPattern = true, ReplyAction = MessageContractsApril2005.ResolveMatchAction)]
-		IAsyncResult BeginResolve (MessageContractsApril2005.ResolveRequest message, AsyncCallback callback, object state);
+        [OperationContract(
+            Name = "ResolveApril2005",
+            Action = MessageContractsApril2005.ResolveAction,
+            AsyncPattern = true,
+            ReplyAction = MessageContractsApril2005.ResolveMatchAction
+        )]
+        IAsyncResult BeginResolve(
+            MessageContractsApril2005.ResolveRequest message,
+            AsyncCallback callback,
+            object state
+        );
 
-		MessageContractsApril2005.ResolveResponse EndResolve (IAsyncResult result);
-	}
+        MessageContractsApril2005.ResolveResponse EndResolve(IAsyncResult result);
+    }
 }

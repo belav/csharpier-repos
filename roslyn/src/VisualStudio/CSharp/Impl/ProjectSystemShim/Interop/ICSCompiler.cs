@@ -33,7 +33,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
 
         void Compile(ICSCompileProgress progress);
 
-        void BuildForEnc(ICSCompileProgress progress, ICSEncProjectServices encService, [MarshalAs(UnmanagedType.IUnknown)] object pe);
+        void BuildForEnc(
+            ICSCompileProgress progress,
+            ICSEncProjectServices encService,
+            [MarshalAs(UnmanagedType.IUnknown)] object pe
+        );
 
         [return: MarshalAs(UnmanagedType.LPWStr)]
         string GetOutputFileName();

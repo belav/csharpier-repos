@@ -10,6 +10,11 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool PFXExportCertStore(SafeCertStoreHandle hStore, ref DATA_BLOB pPFX, SafePasswordHandle szPassword, PFXExportFlags dwFlags);
+        internal static partial bool PFXExportCertStore(
+            SafeCertStoreHandle hStore,
+            ref DATA_BLOB pPFX,
+            SafePasswordHandle szPassword,
+            PFXExportFlags dwFlags
+        );
     }
 }

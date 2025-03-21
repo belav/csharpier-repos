@@ -6,7 +6,6 @@
 //------------------------------------------------------------------------------
 using System;
 using System.Runtime.InteropServices;
-
 #if ES_BUILD_STANDALONE
 using Environment = Microsoft.Diagnostics.Tracing.Internal.Environment;
 #endif
@@ -30,28 +29,30 @@ namespace System.Diagnostics.Tracing
         # region private
         [FieldOffset(0)]
         private int m_traceloggingId;
+
         [FieldOffset(0)]
         private ushort m_id;
+
         [FieldOffset(2)]
         private byte m_version;
+
         [FieldOffset(3)]
         private byte m_channel;
+
         [FieldOffset(4)]
         private byte m_level;
+
         [FieldOffset(5)]
         private byte m_opcode;
+
         [FieldOffset(6)]
         private ushort m_task;
+
         [FieldOffset(8)]
         private long m_keywords;
         #endregion
 
-        public EventDescriptor(
-                int traceloggingId,
-                byte level,
-                byte opcode,
-                long keywords
-                )
+        public EventDescriptor(int traceloggingId, byte level, byte opcode, long keywords)
         {
             this.m_id = 0;
             this.m_version = 0;
@@ -64,23 +65,33 @@ namespace System.Diagnostics.Tracing
         }
 
         public EventDescriptor(
-                int id,
-                byte version,
-                byte channel,
-                byte level,
-                byte opcode,
-                int task,
-                long keywords
-                )
+            int id,
+            byte version,
+            byte channel,
+            byte level,
+            byte opcode,
+            int task,
+            long keywords
+        )
         {
             if (id < 0)
             {
-                throw new ArgumentOutOfRangeException("id", Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "id",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             }
 
             if (id > ushort.MaxValue)
             {
-                throw new ArgumentOutOfRangeException("id", Environment.GetResourceString("ArgumentOutOfRange_NeedValidId", 1, ushort.MaxValue));
+                throw new ArgumentOutOfRangeException(
+                    "id",
+                    Environment.GetResourceString(
+                        "ArgumentOutOfRange_NeedValidId",
+                        1,
+                        ushort.MaxValue
+                    )
+                );
             }
 
             m_traceloggingId = 0;
@@ -93,63 +104,54 @@ namespace System.Diagnostics.Tracing
 
             if (task < 0)
             {
-                throw new ArgumentOutOfRangeException("task", Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum"));
+                throw new ArgumentOutOfRangeException(
+                    "task",
+                    Environment.GetResourceString("ArgumentOutOfRange_NeedNonNegNum")
+                );
             }
 
             if (task > ushort.MaxValue)
             {
-                throw new ArgumentOutOfRangeException("task", Environment.GetResourceString("ArgumentOutOfRange_NeedValidId", 1, ushort.MaxValue));
+                throw new ArgumentOutOfRangeException(
+                    "task",
+                    Environment.GetResourceString(
+                        "ArgumentOutOfRange_NeedValidId",
+                        1,
+                        ushort.MaxValue
+                    )
+                );
             }
 
             m_task = (ushort)task;
         }
 
-        public int EventId { 
-            get {
-                return m_id;
-            }
+        public int EventId
+        {
+            get { return m_id; }
         }
         public byte Version
         {
-            get
-            {
-                return m_version;
-            }
+            get { return m_version; }
         }
         public byte Channel
         {
-            get
-            {
-                return m_channel;
-            }
+            get { return m_channel; }
         }
         public byte Level
         {
-            get
-            {
-                return m_level;
-            }
+            get { return m_level; }
         }
         public byte Opcode
         {
-            get
-            {
-                return m_opcode;
-            }
+            get { return m_opcode; }
         }
         public int Task
         {
-            get
-            {
-                return m_task;
-            }
+            get { return m_task; }
         }
         public long Keywords
         {
-            get
-            {
-                return m_keywords;
-            }
+            get { return m_keywords; }
         }
 
         public override bool Equals(object obj)
@@ -157,23 +159,25 @@ namespace System.Diagnostics.Tracing
             if (!(obj is EventDescriptor))
                 return false;
 
-            return Equals((EventDescriptor) obj);
+            return Equals((EventDescriptor)obj);
         }
 
         public override int GetHashCode()
         {
-            return m_id ^ m_version ^ m_channel ^ m_level ^ m_opcode ^ m_task ^ (int)m_keywords; 
+            return m_id ^ m_version ^ m_channel ^ m_level ^ m_opcode ^ m_task ^ (int)m_keywords;
         }
 
         public bool Equals(EventDescriptor other)
         {
-            if ((m_id != other.m_id) ||
-                (m_version != other.m_version) ||
-                (m_channel != other.m_channel) ||
-                (m_level != other.m_level) ||
-                (m_opcode != other.m_opcode) ||
-                (m_task != other.m_task) ||
-                (m_keywords != other.m_keywords))
+            if (
+                (m_id != other.m_id)
+                || (m_version != other.m_version)
+                || (m_channel != other.m_channel)
+                || (m_level != other.m_level)
+                || (m_opcode != other.m_opcode)
+                || (m_task != other.m_task)
+                || (m_keywords != other.m_keywords)
+            )
             {
                 return false;
             }
@@ -188,6 +192,6 @@ namespace System.Diagnostics.Tracing
         public static bool operator !=(EventDescriptor event1, EventDescriptor event2)
         {
             return !event1.Equals(event2);
-        }    
+        }
     }
 }

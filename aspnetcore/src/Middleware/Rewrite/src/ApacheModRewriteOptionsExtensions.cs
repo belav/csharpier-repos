@@ -17,7 +17,11 @@ public static class ApacheModRewriteOptionsExtensions
     /// <param name="options">The <see cref="RewriteOptions"/></param>
     /// <param name="fileProvider">The <see cref="IFileProvider"/> </param>
     /// <param name="filePath">The path to the file containing mod_rewrite rules.</param>
-    public static RewriteOptions AddApacheModRewrite(this RewriteOptions options, IFileProvider fileProvider, string filePath)
+    public static RewriteOptions AddApacheModRewrite(
+        this RewriteOptions options,
+        IFileProvider fileProvider,
+        string filePath
+    )
     {
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(fileProvider);

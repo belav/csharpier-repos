@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -10,12 +9,10 @@ using System.Runtime;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
-
 using Internal.NativeFormat;
 using Internal.Runtime.Augments;
 using Internal.Runtime.CompilerServices;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime.TypeLoader
@@ -38,7 +35,6 @@ namespace Internal.Runtime.TypeLoader
             public int NumGenericArgs;
             public IntPtr GenericArgsArray;
         }
-
 
         #region String conversions
         private static unsafe string GetStringFromMemoryInNativeFormat(IntPtr pointerToDataStream)
@@ -69,17 +65,23 @@ namespace Internal.Runtime.TypeLoader
                 foreach (byte b in utf8Bytes)
                     stringEncoder.WriteByte(b);
 
-                IntPtr allocatedNativeFormatString = MemoryHelpers.AllocateMemory(stringEncoder.Size);
+                IntPtr allocatedNativeFormatString = MemoryHelpers.AllocateMemory(
+                    stringEncoder.Size
+                );
                 unsafe
                 {
-                    stringEncoder.Save((byte*)allocatedNativeFormatString.ToPointer(), stringEncoder.Size);
+                    stringEncoder.Save(
+                        (byte*)allocatedNativeFormatString.ToPointer(),
+                        stringEncoder.Size
+                    );
                 }
                 _nativeFormatStrings.Add(str, allocatedNativeFormatString);
                 return allocatedNativeFormatString;
             }
         }
 
-        private LowLevelDictionary<string, IntPtr> _nativeFormatStrings = new LowLevelDictionary<string, IntPtr>();
+        private LowLevelDictionary<string, IntPtr> _nativeFormatStrings =
+            new LowLevelDictionary<string, IntPtr>();
         #endregion
 
 
@@ -108,10 +110,14 @@ namespace Internal.Runtime.TypeLoader
 
             public bool Equals(RuntimeFieldHandleKey other)
             {
-                return other._declaringType.Equals(_declaringType) && other._fieldName == _fieldName;
+                return other._declaringType.Equals(_declaringType)
+                    && other._fieldName == _fieldName;
             }
 
-            public override int GetHashCode() { return _hashcode; }
+            public override int GetHashCode()
+            {
+                return _hashcode;
+            }
         }
 
         private struct RuntimeMethodHandleKey : IEquatable<RuntimeMethodHandleKey>
@@ -122,7 +128,12 @@ namespace Internal.Runtime.TypeLoader
             private RuntimeTypeHandle[] _genericArgs;
             private int _hashcode;
 
-            public RuntimeMethodHandleKey(RuntimeTypeHandle declaringType, string methodName, RuntimeSignature signature, RuntimeTypeHandle[] genericArgs)
+            public RuntimeMethodHandleKey(
+                RuntimeTypeHandle declaringType,
+                string methodName,
+                RuntimeSignature signature,
+                RuntimeTypeHandle[] genericArgs
+            )
             {
                 // genericArgs will be null if this is a (typical or not) method definition
                 // genericArgs are non-null only for instantiated generic methods.
@@ -136,7 +147,10 @@ namespace Internal.Runtime.TypeLoader
                 _hashcode = methodNameHashCode ^ signature.GetHashCode();
 
                 if (genericArgs != null)
-                    _hashcode ^= TypeHashingAlgorithms.ComputeGenericInstanceHashCode(declaringType.GetHashCode(), genericArgs);
+                    _hashcode ^= TypeHashingAlgorithms.ComputeGenericInstanceHashCode(
+                        declaringType.GetHashCode(),
+                        genericArgs
+                    );
                 else
                     _hashcode ^= declaringType.GetHashCode();
             }
@@ -152,7 +166,11 @@ namespace Internal.Runtime.TypeLoader
 
             public bool Equals(RuntimeMethodHandleKey other)
             {
-                if (!_declaringType.Equals(other._declaringType) || _methodName != other._methodName || !_signature.Equals(other._signature))
+                if (
+                    !_declaringType.Equals(other._declaringType)
+                    || _methodName != other._methodName
+                    || !_signature.Equals(other._signature)
+                )
                     return false;
 
                 if ((_genericArgs == null) != (other._genericArgs == null))
@@ -161,7 +179,7 @@ namespace Internal.Runtime.TypeLoader
                 if (_genericArgs != null)
                 {
                     if (_genericArgs.Length != other._genericArgs.Length)
-                       return false;
+                        return false;
 
                     for (int i = 0; i < _genericArgs.Length; i++)
                         if (!_genericArgs[i].Equals(other._genericArgs[i]))
@@ -171,37 +189,57 @@ namespace Internal.Runtime.TypeLoader
                 return true;
             }
 
-            public override int GetHashCode() { return _hashcode; }
+            public override int GetHashCode()
+            {
+                return _hashcode;
+            }
         }
 
-        private LowLevelDictionary<RuntimeFieldHandleKey, RuntimeFieldHandle> _runtimeFieldHandles = new LowLevelDictionary<RuntimeFieldHandleKey, RuntimeFieldHandle>();
-        private LowLevelDictionary<RuntimeMethodHandleKey, RuntimeMethodHandle> _runtimeMethodHandles = new LowLevelDictionary<RuntimeMethodHandleKey, RuntimeMethodHandle>();
+        private LowLevelDictionary<RuntimeFieldHandleKey, RuntimeFieldHandle> _runtimeFieldHandles =
+            new LowLevelDictionary<RuntimeFieldHandleKey, RuntimeFieldHandle>();
+        private LowLevelDictionary<
+            RuntimeMethodHandleKey,
+            RuntimeMethodHandle
+        > _runtimeMethodHandles =
+            new LowLevelDictionary<RuntimeMethodHandleKey, RuntimeMethodHandle>();
         #endregion
 
 
         #region Field Ldtoken Functions
-        public RuntimeFieldHandle GetRuntimeFieldHandleForComponents(RuntimeTypeHandle declaringTypeHandle, string fieldName)
+        public RuntimeFieldHandle GetRuntimeFieldHandleForComponents(
+            RuntimeTypeHandle declaringTypeHandle,
+            string fieldName
+        )
         {
             IntPtr nameAsIntPtr = GetNativeFormatStringForString(fieldName);
             return GetRuntimeFieldHandleForComponents(declaringTypeHandle, nameAsIntPtr);
         }
 
-        public unsafe RuntimeFieldHandle GetRuntimeFieldHandleForComponents(RuntimeTypeHandle declaringTypeHandle, IntPtr fieldName)
+        public unsafe RuntimeFieldHandle GetRuntimeFieldHandleForComponents(
+            RuntimeTypeHandle declaringTypeHandle,
+            IntPtr fieldName
+        )
         {
             string fieldNameStr = GetStringFromMemoryInNativeFormat(fieldName);
 
-            RuntimeFieldHandleKey key = new RuntimeFieldHandleKey(declaringTypeHandle, fieldNameStr);
+            RuntimeFieldHandleKey key = new RuntimeFieldHandleKey(
+                declaringTypeHandle,
+                fieldNameStr
+            );
             RuntimeFieldHandle runtimeFieldHandle = default(RuntimeFieldHandle);
 
             lock (_runtimeFieldHandles)
             {
                 if (!_runtimeFieldHandles.TryGetValue(key, out runtimeFieldHandle))
                 {
-                    IntPtr runtimeFieldHandleValue = MemoryHelpers.AllocateMemory(sizeof(DynamicFieldHandleInfo));
+                    IntPtr runtimeFieldHandleValue = MemoryHelpers.AllocateMemory(
+                        sizeof(DynamicFieldHandleInfo)
+                    );
                     if (runtimeFieldHandleValue == IntPtr.Zero)
                         throw new OutOfMemoryException();
 
-                    DynamicFieldHandleInfo* fieldData = (DynamicFieldHandleInfo*)runtimeFieldHandleValue.ToPointer();
+                    DynamicFieldHandleInfo* fieldData = (DynamicFieldHandleInfo*)
+                        runtimeFieldHandleValue.ToPointer();
                     fieldData->DeclaringType = *(IntPtr*)&declaringTypeHandle;
                     fieldData->FieldName = fieldName;
 
@@ -216,14 +254,30 @@ namespace Internal.Runtime.TypeLoader
             }
         }
 
-        public bool TryGetRuntimeFieldHandleComponents(RuntimeFieldHandle runtimeFieldHandle, out RuntimeTypeHandle declaringTypeHandle, out string fieldName)
+        public bool TryGetRuntimeFieldHandleComponents(
+            RuntimeFieldHandle runtimeFieldHandle,
+            out RuntimeTypeHandle declaringTypeHandle,
+            out string fieldName
+        )
         {
-            return runtimeFieldHandle.IsDynamic() ?
-                TryGetDynamicRuntimeFieldHandleComponents(runtimeFieldHandle, out declaringTypeHandle, out fieldName) :
-                TryGetStaticRuntimeFieldHandleComponents(runtimeFieldHandle, out declaringTypeHandle, out fieldName);
+            return runtimeFieldHandle.IsDynamic()
+                ? TryGetDynamicRuntimeFieldHandleComponents(
+                    runtimeFieldHandle,
+                    out declaringTypeHandle,
+                    out fieldName
+                )
+                : TryGetStaticRuntimeFieldHandleComponents(
+                    runtimeFieldHandle,
+                    out declaringTypeHandle,
+                    out fieldName
+                );
         }
 
-        private unsafe bool TryGetDynamicRuntimeFieldHandleComponents(RuntimeFieldHandle runtimeFieldHandle, out RuntimeTypeHandle declaringTypeHandle, out string fieldName)
+        private unsafe bool TryGetDynamicRuntimeFieldHandleComponents(
+            RuntimeFieldHandle runtimeFieldHandle,
+            out RuntimeTypeHandle declaringTypeHandle,
+            out string fieldName
+        )
         {
             IntPtr runtimeFieldHandleValue = *(IntPtr*)&runtimeFieldHandle;
 
@@ -231,7 +285,8 @@ namespace Internal.Runtime.TypeLoader
             Debug.Assert((runtimeFieldHandleValue.ToInt64() & 0x1) == 0x1);
             runtimeFieldHandleValue--;
 
-            DynamicFieldHandleInfo* fieldData = (DynamicFieldHandleInfo*)runtimeFieldHandleValue.ToPointer();
+            DynamicFieldHandleInfo* fieldData = (DynamicFieldHandleInfo*)
+                runtimeFieldHandleValue.ToPointer();
             declaringTypeHandle = *(RuntimeTypeHandle*)&(fieldData->DeclaringType);
 
             // FieldName points to the field name in NativeLayout format, so we parse it using a NativeParser
@@ -241,7 +296,11 @@ namespace Internal.Runtime.TypeLoader
             return true;
         }
 
-        private unsafe bool TryGetStaticRuntimeFieldHandleComponents(RuntimeFieldHandle runtimeFieldHandle, out RuntimeTypeHandle declaringTypeHandle, out string fieldName)
+        private unsafe bool TryGetStaticRuntimeFieldHandleComponents(
+            RuntimeFieldHandle runtimeFieldHandle,
+            out RuntimeTypeHandle declaringTypeHandle,
+            out string fieldName
+        )
         {
             fieldName = null;
             declaringTypeHandle = default(RuntimeTypeHandle);
@@ -259,10 +318,19 @@ namespace Internal.Runtime.TypeLoader
 
             signature = RuntimeSignature.CreateFromNativeLayoutSignature(
                 new TypeManagerHandle(*(IntPtr*)nativeLayoutInfoSignatureData[0]),
-                (uint)nativeLayoutInfoSignatureData[1].ToInt32());
+                (uint)nativeLayoutInfoSignatureData[1].ToInt32()
+            );
 
             RuntimeSignature remainingSignature;
-            if (!GetTypeFromSignatureAndContext(signature, null, null, out declaringTypeHandle, out remainingSignature))
+            if (
+                !GetTypeFromSignatureAndContext(
+                    signature,
+                    null,
+                    null,
+                    out declaringTypeHandle,
+                    out remainingSignature
+                )
+            )
                 return false;
 
             // GetTypeFromSignatureAndContext parses the type from the signature and returns a pointer to the next
@@ -282,11 +350,22 @@ namespace Internal.Runtime.TypeLoader
         /// is constructed from a metadata token, the methodName should be IntPtr.Zero, as it already encodes the method
         /// name.
         /// </summary>
-        public unsafe RuntimeMethodHandle GetRuntimeMethodHandleForComponents(RuntimeTypeHandle declaringTypeHandle, IntPtr methodName, RuntimeSignature methodSignature, RuntimeTypeHandle[] genericMethodArgs)
+        public unsafe RuntimeMethodHandle GetRuntimeMethodHandleForComponents(
+            RuntimeTypeHandle declaringTypeHandle,
+            IntPtr methodName,
+            RuntimeSignature methodSignature,
+            RuntimeTypeHandle[] genericMethodArgs
+        )
         {
-            string methodNameStr = methodName == IntPtr.Zero ? null : GetStringFromMemoryInNativeFormat(methodName);
+            string methodNameStr =
+                methodName == IntPtr.Zero ? null : GetStringFromMemoryInNativeFormat(methodName);
 
-            RuntimeMethodHandleKey key = new RuntimeMethodHandleKey(declaringTypeHandle, methodNameStr, methodSignature, genericMethodArgs);
+            RuntimeMethodHandleKey key = new RuntimeMethodHandleKey(
+                declaringTypeHandle,
+                methodNameStr,
+                methodSignature,
+                genericMethodArgs
+            );
             RuntimeMethodHandle runtimeMethodHandle = default(RuntimeMethodHandle);
 
             lock (_runtimeMethodHandles)
@@ -294,14 +373,23 @@ namespace Internal.Runtime.TypeLoader
                 if (!_runtimeMethodHandles.TryGetValue(key, out runtimeMethodHandle))
                 {
                     int sizeToAllocate = sizeof(DynamicMethodHandleInfo);
-                    int numGenericMethodArgs = genericMethodArgs == null ? 0 : genericMethodArgs.Length;
+                    int numGenericMethodArgs =
+                        genericMethodArgs == null ? 0 : genericMethodArgs.Length;
                     // Use checked arithmetics to ensure there aren't any overflows/truncations
-                    sizeToAllocate = checked(sizeToAllocate + (numGenericMethodArgs > 0 ? sizeof(IntPtr) * (numGenericMethodArgs - 1) : 0));
+                    sizeToAllocate = checked(
+                        sizeToAllocate
+                        + (
+                            numGenericMethodArgs > 0
+                                ? sizeof(IntPtr) * (numGenericMethodArgs - 1)
+                                : 0
+                        )
+                    );
                     IntPtr runtimeMethodHandleValue = MemoryHelpers.AllocateMemory(sizeToAllocate);
                     if (runtimeMethodHandleValue == IntPtr.Zero)
                         throw new OutOfMemoryException();
 
-                    DynamicMethodHandleInfo* methodData = (DynamicMethodHandleInfo*)runtimeMethodHandleValue.ToPointer();
+                    DynamicMethodHandleInfo* methodData = (DynamicMethodHandleInfo*)
+                        runtimeMethodHandleValue.ToPointer();
                     methodData->DeclaringType = *(IntPtr*)&declaringTypeHandle;
                     methodData->MethodName = methodName;
                     methodData->MethodSignature = methodSignature;
@@ -315,7 +403,7 @@ namespace Internal.Runtime.TypeLoader
 
                     // Special flag in the handle value to indicate it was dynamically allocated, and doesn't point into the InvokeMap blob
                     runtimeMethodHandleValue++;
-                    runtimeMethodHandle = * (RuntimeMethodHandle*)&runtimeMethodHandleValue;
+                    runtimeMethodHandle = *(RuntimeMethodHandle*)&runtimeMethodHandleValue;
 
                     _runtimeMethodHandles.Add(key, runtimeMethodHandle);
                 }
@@ -323,27 +411,61 @@ namespace Internal.Runtime.TypeLoader
                 return runtimeMethodHandle;
             }
         }
-        public RuntimeMethodHandle GetRuntimeMethodHandleForComponents(RuntimeTypeHandle declaringTypeHandle, string methodName, RuntimeSignature methodSignature, RuntimeTypeHandle[] genericMethodArgs)
+
+        public RuntimeMethodHandle GetRuntimeMethodHandleForComponents(
+            RuntimeTypeHandle declaringTypeHandle,
+            string methodName,
+            RuntimeSignature methodSignature,
+            RuntimeTypeHandle[] genericMethodArgs
+        )
         {
             IntPtr nameAsIntPtr = GetNativeFormatStringForString(methodName);
-            return GetRuntimeMethodHandleForComponents(declaringTypeHandle, nameAsIntPtr, methodSignature, genericMethodArgs);
+            return GetRuntimeMethodHandleForComponents(
+                declaringTypeHandle,
+                nameAsIntPtr,
+                methodSignature,
+                genericMethodArgs
+            );
         }
 
-        public MethodDesc GetMethodDescForRuntimeMethodHandle(TypeSystemContext context, RuntimeMethodHandle runtimeMethodHandle)
+        public MethodDesc GetMethodDescForRuntimeMethodHandle(
+            TypeSystemContext context,
+            RuntimeMethodHandle runtimeMethodHandle
+        )
         {
-            return runtimeMethodHandle.IsDynamic() ?
-                GetMethodDescForDynamicRuntimeMethodHandle(context, runtimeMethodHandle) :
-                GetMethodDescForStaticRuntimeMethodHandle(context, runtimeMethodHandle);
+            return runtimeMethodHandle.IsDynamic()
+                ? GetMethodDescForDynamicRuntimeMethodHandle(context, runtimeMethodHandle)
+                : GetMethodDescForStaticRuntimeMethodHandle(context, runtimeMethodHandle);
         }
 
-        public bool TryGetRuntimeMethodHandleComponents(RuntimeMethodHandle runtimeMethodHandle, out RuntimeTypeHandle declaringTypeHandle, out MethodNameAndSignature nameAndSignature, out RuntimeTypeHandle[] genericMethodArgs)
+        public bool TryGetRuntimeMethodHandleComponents(
+            RuntimeMethodHandle runtimeMethodHandle,
+            out RuntimeTypeHandle declaringTypeHandle,
+            out MethodNameAndSignature nameAndSignature,
+            out RuntimeTypeHandle[] genericMethodArgs
+        )
         {
-            return runtimeMethodHandle.IsDynamic() ?
-                TryGetDynamicRuntimeMethodHandleComponents(runtimeMethodHandle, out declaringTypeHandle, out nameAndSignature, out genericMethodArgs) :
-                TryGetStaticRuntimeMethodHandleComponents(runtimeMethodHandle, out declaringTypeHandle, out nameAndSignature, out genericMethodArgs);
+            return runtimeMethodHandle.IsDynamic()
+                ? TryGetDynamicRuntimeMethodHandleComponents(
+                    runtimeMethodHandle,
+                    out declaringTypeHandle,
+                    out nameAndSignature,
+                    out genericMethodArgs
+                )
+                : TryGetStaticRuntimeMethodHandleComponents(
+                    runtimeMethodHandle,
+                    out declaringTypeHandle,
+                    out nameAndSignature,
+                    out genericMethodArgs
+                );
         }
 
-        private unsafe bool TryGetDynamicRuntimeMethodHandleComponents(RuntimeMethodHandle runtimeMethodHandle, out RuntimeTypeHandle declaringTypeHandle, out MethodNameAndSignature nameAndSignature, out RuntimeTypeHandle[] genericMethodArgs)
+        private unsafe bool TryGetDynamicRuntimeMethodHandleComponents(
+            RuntimeMethodHandle runtimeMethodHandle,
+            out RuntimeTypeHandle declaringTypeHandle,
+            out MethodNameAndSignature nameAndSignature,
+            out RuntimeTypeHandle[] genericMethodArgs
+        )
         {
             IntPtr runtimeMethodHandleValue = *(IntPtr*)&runtimeMethodHandle;
             Debug.Assert((runtimeMethodHandleValue.ToInt64() & 0x1) == 0x1);
@@ -351,7 +473,8 @@ namespace Internal.Runtime.TypeLoader
             // Special flag in the handle value to indicate it was dynamically allocated, and doesn't point into the InvokeMap blob
             runtimeMethodHandleValue--;
 
-            DynamicMethodHandleInfo* methodData = (DynamicMethodHandleInfo*)runtimeMethodHandleValue.ToPointer();
+            DynamicMethodHandleInfo* methodData = (DynamicMethodHandleInfo*)
+                runtimeMethodHandleValue.ToPointer();
             declaringTypeHandle = *(RuntimeTypeHandle*)&(methodData->DeclaringType);
             genericMethodArgs = null;
 
@@ -377,7 +500,9 @@ namespace Internal.Runtime.TypeLoader
             {
                 ModuleInfo moduleInfo = methodData->MethodSignature.GetModuleInfo();
                 var metadataReader = ((NativeFormatModuleInfo)moduleInfo).MetadataReader;
-                var methodHandle = methodData->MethodSignature.Token.AsHandle().ToMethodHandle(metadataReader);
+                var methodHandle = methodData
+                    ->MethodSignature.Token.AsHandle()
+                    .ToMethodHandle(metadataReader);
                 var method = methodHandle.GetMethod(metadataReader);
                 var name = metadataReader.GetConstantStringValue(method.Name).Value;
                 nameAndSignature = new MethodNameAndSignature(name, methodData->MethodSignature);
@@ -385,10 +510,18 @@ namespace Internal.Runtime.TypeLoader
 
             return true;
         }
-        public MethodDesc GetMethodDescForDynamicRuntimeMethodHandle(TypeSystemContext context, RuntimeMethodHandle runtimeMethodHandle)
+
+        public MethodDesc GetMethodDescForDynamicRuntimeMethodHandle(
+            TypeSystemContext context,
+            RuntimeMethodHandle runtimeMethodHandle
+        )
         {
-            bool success = TryGetDynamicRuntimeMethodHandleComponents(runtimeMethodHandle, out RuntimeTypeHandle declaringTypeHandle,
-                out MethodNameAndSignature nameAndSignature, out RuntimeTypeHandle[] genericMethodArgs);
+            bool success = TryGetDynamicRuntimeMethodHandleComponents(
+                runtimeMethodHandle,
+                out RuntimeTypeHandle declaringTypeHandle,
+                out MethodNameAndSignature nameAndSignature,
+                out RuntimeTypeHandle[] genericMethodArgs
+            );
             Debug.Assert(success);
 
             DefType type = (DefType)context.ResolveRuntimeTypeHandle(declaringTypeHandle);
@@ -396,13 +529,31 @@ namespace Internal.Runtime.TypeLoader
             if (genericMethodArgs != null)
             {
                 Instantiation methodInst = context.ResolveRuntimeTypeHandles(genericMethodArgs);
-                return context.ResolveGenericMethodInstantiation(unboxingStub: false, type, nameAndSignature, methodInst, default, default);
+                return context.ResolveGenericMethodInstantiation(
+                    unboxingStub: false,
+                    type,
+                    nameAndSignature,
+                    methodInst,
+                    default,
+                    default
+                );
             }
 
-            return context.ResolveRuntimeMethod(unboxingStub: false, type, nameAndSignature, default, default);
+            return context.ResolveRuntimeMethod(
+                unboxingStub: false,
+                type,
+                nameAndSignature,
+                default,
+                default
+            );
         }
 
-        private unsafe bool TryGetStaticRuntimeMethodHandleComponents(RuntimeMethodHandle runtimeMethodHandle, out RuntimeTypeHandle declaringTypeHandle, out MethodNameAndSignature nameAndSignature, out RuntimeTypeHandle[] genericMethodArgs)
+        private unsafe bool TryGetStaticRuntimeMethodHandleComponents(
+            RuntimeMethodHandle runtimeMethodHandle,
+            out RuntimeTypeHandle declaringTypeHandle,
+            out MethodNameAndSignature nameAndSignature,
+            out RuntimeTypeHandle[] genericMethodArgs
+        )
         {
             declaringTypeHandle = default(RuntimeTypeHandle);
             nameAndSignature = null;
@@ -410,7 +561,10 @@ namespace Internal.Runtime.TypeLoader
 
             TypeSystemContext context = TypeSystemContextFactory.Create();
 
-            MethodDesc parsedMethod = GetMethodDescForStaticRuntimeMethodHandle(context, runtimeMethodHandle);
+            MethodDesc parsedMethod = GetMethodDescForStaticRuntimeMethodHandle(
+                context,
+                runtimeMethodHandle
+            );
 
             if (!EnsureTypeHandleForType(parsedMethod.OwningType))
                 return false;
@@ -433,7 +587,10 @@ namespace Internal.Runtime.TypeLoader
             return true;
         }
 
-        public unsafe MethodDesc GetMethodDescForStaticRuntimeMethodHandle(TypeSystemContext context, RuntimeMethodHandle runtimeMethodHandle)
+        public unsafe MethodDesc GetMethodDescForStaticRuntimeMethodHandle(
+            TypeSystemContext context,
+            RuntimeMethodHandle runtimeMethodHandle
+        )
         {
             // Make sure it's not a dynamically allocated RuntimeMethodHandle before we attempt to use it to parse native layout data
             Debug.Assert(((*(IntPtr*)&runtimeMethodHandle).ToInt64() & 0x1) == 0);
@@ -448,10 +605,17 @@ namespace Internal.Runtime.TypeLoader
 
             signature = RuntimeSignature.CreateFromNativeLayoutSignature(
                 new TypeManagerHandle(*(IntPtr*)nativeLayoutInfoSignatureData[0]),
-                (uint)nativeLayoutInfoSignatureData[1].ToInt32());
+                (uint)nativeLayoutInfoSignatureData[1].ToInt32()
+            );
 
             RuntimeSignature remainingSignature;
-            return GetMethodFromSignatureAndContext(context, signature, null, null, out remainingSignature);
+            return GetMethodFromSignatureAndContext(
+                context,
+                signature,
+                null,
+                null,
+                out remainingSignature
+            );
         }
         #endregion
     }

@@ -4,21 +4,26 @@
 
 namespace System.ServiceModel.Diagnostics
 {
-    using System.Runtime;
     using System.Diagnostics;
+    using System.Runtime;
 
     abstract class TraceAsyncResult : AsyncResult
     {
-        static Action<AsyncCallback, IAsyncResult> waitResultCallback = new Action<AsyncCallback, IAsyncResult>(DoCallback);
+        static Action<AsyncCallback, IAsyncResult> waitResultCallback = new Action<
+            AsyncCallback,
+            IAsyncResult
+        >(DoCallback);
 
-        protected TraceAsyncResult(AsyncCallback callback, object state) :
-            base(callback, state)
+        protected TraceAsyncResult(AsyncCallback callback, object state)
+            : base(callback, state)
         {
             if (TraceUtility.MessageFlowTracingOnly)
             {
-                this.CallbackActivity = ServiceModelActivity.CreateLightWeightAsyncActivity(Trace.CorrelationManager.ActivityId);
+                this.CallbackActivity = ServiceModelActivity.CreateLightWeightAsyncActivity(
+                    Trace.CorrelationManager.ActivityId
+                );
                 base.VirtualCallback = waitResultCallback;
-            } 
+            }
             else if (DiagnosticUtility.ShouldUseActivity)
             {
                 this.CallbackActivity = ServiceModelActivity.Current;
@@ -29,18 +34,17 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        public ServiceModelActivity CallbackActivity
-        {
-            get;
-            private set;
-        }
+        public ServiceModelActivity CallbackActivity { get; private set; }
 
         static void DoCallback(AsyncCallback callback, IAsyncResult result)
         {
             if (result is TraceAsyncResult)
             {
                 TraceAsyncResult thisPtr = result as TraceAsyncResult;
-                Fx.Assert(thisPtr.CallbackActivity != null, "this shouldn't be hooked up if we don't have a CallbackActivity");
+                Fx.Assert(
+                    thisPtr.CallbackActivity != null,
+                    "this shouldn't be hooked up if we don't have a CallbackActivity"
+                );
 
                 if (TraceUtility.MessageFlowTracingOnly)
                 {

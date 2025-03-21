@@ -7,7 +7,8 @@ namespace System.DirectoryServices.Protocols
 {
     internal sealed class SafeBerHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeBerHandle() : base(true)
+        public SafeBerHandle()
+            : base(true)
         {
             SetHandle(Interop.Ldap.ber_alloc(1));
             if (handle == IntPtr.Zero)
@@ -16,7 +17,8 @@ namespace System.DirectoryServices.Protocols
             }
         }
 
-        internal SafeBerHandle(BerVal value) : base(true)
+        internal SafeBerHandle(BerVal value)
+            : base(true)
         {
             SetHandle(Interop.Ldap.ber_init(value));
             if (handle == IntPtr.Zero)
@@ -36,7 +38,8 @@ namespace System.DirectoryServices.Protocols
     {
         internal bool _needDispose;
 
-        public ConnectionHandle() : base(true)
+        public ConnectionHandle()
+            : base(true)
         {
             SetHandle(Interop.Ldap.ldap_init(null, 389));
 
@@ -55,7 +58,8 @@ namespace System.DirectoryServices.Protocols
             }
         }
 
-        internal ConnectionHandle(IntPtr value, bool disposeHandle) : base(true)
+        internal ConnectionHandle(IntPtr value, bool disposeHandle)
+            : base(true)
         {
             _needDispose = disposeHandle;
             if (value == IntPtr.Zero)
@@ -76,6 +80,7 @@ namespace System.DirectoryServices.Protocols
                 SetHandle(value);
             }
         }
+
         protected override bool ReleaseHandle()
         {
             if (handle != IntPtr.Zero)

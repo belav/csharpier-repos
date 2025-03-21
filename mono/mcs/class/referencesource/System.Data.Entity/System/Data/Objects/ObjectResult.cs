@@ -12,17 +12,18 @@ namespace System.Data.Objects
     using System;
     using System.Collections;
     using System.ComponentModel;
-    
+
     /// <summary>
     /// This class implements IEnumerable and IDisposable. Instance of this class
     /// is returned from ObjectQuery.Execute method.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1710:IdentifiersShouldHaveCorrectSuffix")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1710:IdentifiersShouldHaveCorrectSuffix"
+    )]
     public abstract class ObjectResult : IEnumerable, IDisposable, IListSource
     {
-        internal ObjectResult()
-        {
-        }
+        internal ObjectResult() { }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
@@ -57,10 +58,7 @@ namespace System.Data.Objects
             return this.GetIListSourceListInternal();
         }
 
-        public abstract Type ElementType
-        {
-            get;
-        }
+        public abstract Type ElementType { get; }
 
         public abstract void Dispose();
 
@@ -68,7 +66,7 @@ namespace System.Data.Objects
         ///   Get the next result set of a stored procedure.
         /// </summary>
         /// <returns>
-        ///   An ObjectResult that enumerates the values of the next result set.   null, if there are no more, or if the 
+        ///   An ObjectResult that enumerates the values of the next result set.   null, if there are no more, or if the
         ///   the ObjectResult is not the result of a stored procedure call.
         /// </returns>
         public ObjectResult<TElement> GetNextResult<TElement>()

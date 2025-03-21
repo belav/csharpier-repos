@@ -75,7 +75,10 @@ internal sealed class RenderTreeFrameArrayBuilder : ArrayBuilder<RenderTreeFrame
         };
     }
 
-    public void AppendComponent(int sequence, [DynamicallyAccessedMembers(Component)] Type componentType)
+    public void AppendComponent(
+        int sequence,
+        [DynamicallyAccessedMembers(Component)] Type componentType
+    )
     {
         if (_itemsInUse == _items.Length)
         {
@@ -90,7 +93,10 @@ internal sealed class RenderTreeFrameArrayBuilder : ArrayBuilder<RenderTreeFrame
         };
     }
 
-    public void AppendElementReferenceCapture(int sequence, Action<ElementReference> elementReferenceCaptureAction)
+    public void AppendElementReferenceCapture(
+        int sequence,
+        Action<ElementReference> elementReferenceCaptureAction
+    )
     {
         if (_itemsInUse == _items.Length)
         {
@@ -105,7 +111,11 @@ internal sealed class RenderTreeFrameArrayBuilder : ArrayBuilder<RenderTreeFrame
         };
     }
 
-    public void AppendComponentReferenceCapture(int sequence, Action<object> componentReferenceCaptureAction, int parentFrameIndexValue)
+    public void AppendComponentReferenceCapture(
+        int sequence,
+        Action<object> componentReferenceCaptureAction,
+        int parentFrameIndexValue
+    )
     {
         if (_itemsInUse == _items.Length)
         {

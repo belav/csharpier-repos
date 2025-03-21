@@ -22,9 +22,7 @@ public class UniqueJsonKeyClaimAction : JsonKeyClaimAction
     /// <param name="valueType">The value to use for Claim.ValueType when creating a Claim.</param>
     /// <param name="jsonKey">The top level key to look for in the json user data.</param>
     public UniqueJsonKeyClaimAction(string claimType, string valueType, string jsonKey)
-        : base(claimType, valueType, jsonKey)
-    {
-    }
+        : base(claimType, valueType, jsonKey) { }
 
     /// <inheritdoc />
     public override void Run(JsonElement userData, ClaimsIdentity identity, string issuer)
@@ -36,7 +34,9 @@ public class UniqueJsonKeyClaimAction : JsonKeyClaimAction
             return;
         }
 
-        var claim = identity.FindFirst(c => string.Equals(c.Type, ClaimType, StringComparison.OrdinalIgnoreCase));
+        var claim = identity.FindFirst(c =>
+            string.Equals(c.Type, ClaimType, StringComparison.OrdinalIgnoreCase)
+        );
         if (claim != null && string.Equals(claim.Value, value, StringComparison.Ordinal))
         {
             // Duplicate
@@ -46,8 +46,10 @@ public class UniqueJsonKeyClaimAction : JsonKeyClaimAction
         claim = identity.FindFirst(c =>
         {
             // If this claimType is mapped by the JwtSeurityTokenHandler, then this property will be set
-            return c.Properties.TryGetValue(JwtSecurityTokenHandler.ShortClaimTypeProperty, out var shortType)
-            && string.Equals(shortType, ClaimType, StringComparison.OrdinalIgnoreCase);
+            return c.Properties.TryGetValue(
+                    JwtSecurityTokenHandler.ShortClaimTypeProperty,
+                    out var shortType
+                ) && string.Equals(shortType, ClaimType, StringComparison.OrdinalIgnoreCase);
         });
         if (claim != null && string.Equals(claim.Value, value, StringComparison.Ordinal))
         {

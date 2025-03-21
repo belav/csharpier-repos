@@ -50,7 +50,8 @@ public sealed record RelationalParameterBasedSqlProcessorDependencies
     public RelationalParameterBasedSqlProcessorDependencies(
         ISqlExpressionFactory sqlExpressionFactory,
         IRelationalTypeMappingSource typeMappingSource,
-        IParameterNameGeneratorFactory parameterNameGeneratorFactory)
+        IParameterNameGeneratorFactory parameterNameGeneratorFactory
+    )
     {
         SqlExpressionFactory = sqlExpressionFactory;
         TypeMappingSource = typeMappingSource;

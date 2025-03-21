@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class AsyncMethodHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(AsyncAwaitHighlighter);
+        internal override Type GetHighlighterType() => typeof(AsyncAwaitHighlighter);
 
         [Fact]
         public async Task TestExample1_1()
@@ -46,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         result = await lambda();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -77,7 +77,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         result = [|await|] lambda();
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

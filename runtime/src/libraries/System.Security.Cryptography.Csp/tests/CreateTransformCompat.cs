@@ -41,8 +41,12 @@ namespace System.Security.Cryptography.Csp.Tests
                     // badSize is in bytes, BlockSize is in bits.
                     // So badSize is 8 times as big as it should be.
                     int badSize = alg.BlockSize;
-                    Assert.Throws<ArgumentException>(() => alg.CreateEncryptor(key, new byte[badSize]));
-                    Assert.Throws<ArgumentException>(() => alg.CreateDecryptor(key, new byte[badSize]));
+                    Assert.Throws<ArgumentException>(() =>
+                        alg.CreateEncryptor(key, new byte[badSize])
+                    );
+                    Assert.Throws<ArgumentException>(() =>
+                        alg.CreateDecryptor(key, new byte[badSize])
+                    );
 
                     return;
                 }
@@ -68,7 +72,11 @@ namespace System.Security.Cryptography.Csp.Tests
 
                     Assert.Equal(correctEncrypted, encrypted);
 
-                    byte[] decrypted1 = badIvDec.TransformFinalBlock(correctEncrypted, 0, correctEncrypted.Length);
+                    byte[] decrypted1 = badIvDec.TransformFinalBlock(
+                        correctEncrypted,
+                        0,
+                        correctEncrypted.Length
+                    );
 
                     Assert.Equal(data, decrypted1);
                 }

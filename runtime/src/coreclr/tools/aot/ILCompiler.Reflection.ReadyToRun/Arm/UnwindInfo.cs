@@ -36,8 +36,13 @@ namespace ILCompiler.Reflection.ReadyToRun.Arm
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"        Epilog Start Offset: 0x{EpilogStartOffset:X5} Actual offset = 0x{EpilogStartOffset * 2:X5} Offset from main function begin = 0x{EpilogStartOffsetFromMainFunctionBegin:X6}");
-            sb.AppendLine($"        Condition: {Condition} (0x{Condition:X})" + ((Condition == 0xE) ? " (always)" : ""));
+            sb.AppendLine(
+                $"        Epilog Start Offset: 0x{EpilogStartOffset:X5} Actual offset = 0x{EpilogStartOffset * 2:X5} Offset from main function begin = 0x{EpilogStartOffsetFromMainFunctionBegin:X6}"
+            );
+            sb.AppendLine(
+                $"        Condition: {Condition} (0x{Condition:X})"
+                    + ((Condition == 0xE) ? " (always)" : "")
+            );
             sb.Append($"        Epilog Start Index: {EpilogStartIndex} (0x{EpilogStartIndex:X})");
             return sb.ToString();
         }

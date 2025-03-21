@@ -8,20 +8,28 @@ namespace System.Net.Mail
 {
     internal sealed class SmtpLoginAuthenticationModule : ISmtpAuthenticationModule
     {
-        private readonly Dictionary<object, NetworkCredential> _sessions = new Dictionary<object, NetworkCredential>();
+        private readonly Dictionary<object, NetworkCredential> _sessions =
+            new Dictionary<object, NetworkCredential>();
 
-        internal SmtpLoginAuthenticationModule()
-        {
-        }
+        internal SmtpLoginAuthenticationModule() { }
 
-        public Authorization? Authenticate(string? challenge, NetworkCredential? credential, object sessionCookie, string? spn, ChannelBinding? channelBindingToken)
+        public Authorization? Authenticate(
+            string? challenge,
+            NetworkCredential? credential,
+            object sessionCookie,
+            string? spn,
+            ChannelBinding? channelBindingToken
+        )
         {
             lock (_sessions)
             {
                 NetworkCredential? cachedCredential;
                 if (!_sessions.TryGetValue(sessionCookie, out cachedCredential))
                 {
-                    if (credential == null || ReferenceEquals(credential, CredentialCache.DefaultNetworkCredentials))
+                    if (
+                        credential == null
+                        || ReferenceEquals(credential, CredentialCache.DefaultNetworkCredentials)
+                    )
                     {
                         return null;
                     }
@@ -36,23 +44,28 @@ namespace System.Net.Mail
                         userName = domain + "\\" + userName;
                     }
 
-                    return new Authorization(Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(userName)), false);
+                    return new Authorization(
+                        Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(userName)),
+                        false
+                    );
                 }
                 else
                 {
                     _sessions.Remove(sessionCookie);
 
-                    return new Authorization(Convert.ToBase64String(System.Text.Encoding.UTF8.GetBytes(cachedCredential.Password)), true);
+                    return new Authorization(
+                        Convert.ToBase64String(
+                            System.Text.Encoding.UTF8.GetBytes(cachedCredential.Password)
+                        ),
+                        true
+                    );
                 }
             }
         }
 
         public string AuthenticationType
         {
-            get
-            {
-                return "login";
-            }
+            get { return "login"; }
         }
 
         public void CloseContext(object sessionCookie)

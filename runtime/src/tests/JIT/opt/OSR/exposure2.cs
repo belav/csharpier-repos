@@ -11,9 +11,7 @@ using Xunit;
 public class Exposure2
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    static void Bar()
-    {
-    }
+    static void Bar() { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     static bool Foo(int n)
@@ -32,7 +30,13 @@ public class Exposure2
 
         int eabc = 1234 * 3 + 4;
         int edef = 25 * 3 + 4;
-        Console.WriteLine("abc = {0} (expected {1}), def = {2} (expected {3})", abc, eabc, def, edef);
+        Console.WriteLine(
+            "abc = {0} (expected {1}), def = {2} (expected {3})",
+            abc,
+            eabc,
+            def,
+            edef
+        );
         return (abc == eabc && def == edef);
     }
 

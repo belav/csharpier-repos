@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,13 +32,13 @@
 using System.IO;
 using System.Runtime.Remoting.Messaging;
 
-namespace System.Runtime.Remoting.Channels {
+namespace System.Runtime.Remoting.Channels
+{
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public interface IServerResponseChannelSinkStack
+    {
+        void AsyncProcessResponse(IMessage msg, ITransportHeaders headers, Stream stream);
 
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface IServerResponseChannelSinkStack
-	{
-		void AsyncProcessResponse (IMessage msg, ITransportHeaders headers, Stream stream);
-
-		Stream GetResponseStream (IMessage msg, ITransportHeaders headers);
-	}
+        Stream GetResponseStream(IMessage msg, ITransportHeaders headers);
+    }
 }

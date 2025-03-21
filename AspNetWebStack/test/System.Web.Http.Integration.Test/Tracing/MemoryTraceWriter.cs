@@ -8,7 +8,7 @@ namespace System.Web.Http.Tracing
 {
     /// <summary>
     /// This <see cref="ITraceWriter"/> unconditionally responds that
-    /// all categories and levels are enabled.  
+    /// all categories and levels are enabled.
     /// All attempts to trace call back the caller for trace information
     /// and the information is kept in memory for later use.
     /// <para>
@@ -20,7 +20,12 @@ namespace System.Web.Http.Tracing
     {
         private List<TraceRecord> _records = new List<TraceRecord>();
 
-        public void Trace(HttpRequestMessage request, string category, TraceLevel level, Action<TraceRecord> traceAction)
+        public void Trace(
+            HttpRequestMessage request,
+            string category,
+            TraceLevel level,
+            Action<TraceRecord> traceAction
+        )
         {
             TraceRecord record = new TraceRecord(request, category, level);
             traceAction(record);
@@ -32,12 +37,16 @@ namespace System.Web.Http.Tracing
             _records.Clear();
         }
 
-        public bool DidReceiveTraceRequests { get { return _records.Count != 0; } }
-
-        public void Finish()
+        public bool DidReceiveTraceRequests
         {
+            get { return _records.Count != 0; }
         }
 
-        public IList<TraceRecord> Records { get { return _records; } }
+        public void Finish() { }
+
+        public IList<TraceRecord> Records
+        {
+            get { return _records; }
+        }
     }
 }

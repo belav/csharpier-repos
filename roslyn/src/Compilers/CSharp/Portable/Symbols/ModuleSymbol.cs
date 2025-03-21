@@ -38,18 +38,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public override AssemblySymbol ContainingAssembly
         {
-            get
-            {
-                return (AssemblySymbol)ContainingSymbol;
-            }
+            get { return (AssemblySymbol)ContainingSymbol; }
         }
 
         internal sealed override ModuleSymbol ContainingModule
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <summary>
@@ -57,13 +51,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override SymbolKind Kind
         {
-            get
-            {
-                return SymbolKind.NetModule;
-            }
+            get { return SymbolKind.NetModule; }
         }
 
-        internal override TResult Accept<TArgument, TResult>(CSharpSymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        internal override TResult Accept<TArgument, TResult>(
+            CSharpSymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitModule(this, argument);
         }
@@ -79,14 +73,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // Only the compiler can create ModuleSymbols.
-        internal ModuleSymbol()
-        {
-        }
+        internal ModuleSymbol() { }
 
         /// <summary>
         /// Module's ordinal within containing assembly's Modules array.
         /// 0 - for a source module, etc.
-        /// -1 - for a module that doesn't have containing assembly, or has it, but is not part of Modules array. 
+        /// -1 - for a module that doesn't have containing assembly, or has it, but is not part of Modules array.
         /// </summary>
         internal abstract int Ordinal { get; }
 
@@ -103,20 +95,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <summary>
         /// Does this symbol represent a missing module.
         /// </summary>
-        internal abstract bool IsMissing
-        {
-            get;
-        }
+        internal abstract bool IsMissing { get; }
 
         /// <summary>
         /// Returns 'NotApplicable'
         /// </summary>
         public sealed override Accessibility DeclaredAccessibility
         {
-            get
-            {
-                return Accessibility.NotApplicable;
-            }
+            get { return Accessibility.NotApplicable; }
         }
 
         /// <summary>
@@ -124,10 +110,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsStatic
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -135,10 +118,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsVirtual
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -146,10 +126,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsOverride
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -157,10 +134,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -168,10 +142,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsSealed
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <summary>
@@ -179,63 +150,51 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// </summary>
         public sealed override bool IsExtern
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
         {
-            get
-            {
-                return ImmutableArray<SyntaxReference>.Empty;
-            }
+            get { return ImmutableArray<SyntaxReference>.Empty; }
         }
 
         /// <summary>
         /// Returns an array of assembly identities for assemblies referenced by this module.
-        /// Items at the same position from ReferencedAssemblies and from ReferencedAssemblySymbols 
+        /// Items at the same position from ReferencedAssemblies and from ReferencedAssemblySymbols
         /// correspond to each other.
         /// </summary>
         public ImmutableArray<AssemblyIdentity> ReferencedAssemblies
         {
-            get
-            {
-                return GetReferencedAssemblies();
-            }
+            get { return GetReferencedAssemblies(); }
         }
 
         /// <summary>
         /// Returns an array of assembly identities for assemblies referenced by this module.
-        /// Items at the same position from GetReferencedAssemblies and from GetReferencedAssemblySymbols 
+        /// Items at the same position from GetReferencedAssemblies and from GetReferencedAssemblySymbols
         /// should correspond to each other.
-        /// 
+        ///
         /// The array and its content is provided by ReferenceManager and must not be modified.
         /// </summary>
         /// <returns></returns>
         internal abstract ImmutableArray<AssemblyIdentity> GetReferencedAssemblies(); // TODO: Remove this method and make ReferencedAssemblies property abstract instead.
 
         /// <summary>
-        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced 
-        /// by this module. Items at the same position from ReferencedAssemblies and 
+        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced
+        /// by this module. Items at the same position from ReferencedAssemblies and
         /// from ReferencedAssemblySymbols correspond to each other.
         /// </summary>
         public ImmutableArray<AssemblySymbol> ReferencedAssemblySymbols
         {
-            get
-            {
-                return GetReferencedAssemblySymbols();
-            }
+            get { return GetReferencedAssemblySymbols(); }
         }
 
         /// <summary>
-        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced 
-        /// by this module. Items at the same position from GetReferencedAssemblies and 
-        /// from GetReferencedAssemblySymbols should correspond to each other. If reference is 
+        /// Returns an array of AssemblySymbol objects corresponding to assemblies referenced
+        /// by this module. Items at the same position from GetReferencedAssemblies and
+        /// from GetReferencedAssemblySymbols should correspond to each other. If reference is
         /// not resolved by compiler, GetReferencedAssemblySymbols returns MissingAssemblySymbol in the
         /// corresponding item.
-        /// 
+        ///
         /// The array and its content is provided by ReferenceManager and must not be modified.
         /// </summary>
         internal abstract ImmutableArray<AssemblySymbol> GetReferencedAssemblySymbols(); // TODO: Remove this method and make ReferencedAssemblySymbols property abstract instead.
@@ -260,33 +219,39 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         /// <summary>
-        /// A helper method for ReferenceManager to set assembly identities for assemblies 
+        /// A helper method for ReferenceManager to set assembly identities for assemblies
         /// referenced by this module and corresponding AssemblySymbols.
         /// </summary>
         /// <param name="moduleReferences">A description of the assemblies referenced by this module.</param>
         /// <param name="originatingSourceAssemblyDebugOnly">
         /// Source assembly that triggered creation of this module symbol.
         /// For debug purposes only, this assembly symbol should not be persisted within
-        /// this module symbol because the module can be shared across multiple source 
+        /// this module symbol because the module can be shared across multiple source
         /// assemblies. This method will only be called for the first one.
         /// </param>
-        internal abstract void SetReferences(ModuleReferences<AssemblySymbol> moduleReferences, SourceAssemblySymbol originatingSourceAssemblyDebugOnly = null);
+        internal abstract void SetReferences(
+            ModuleReferences<AssemblySymbol> moduleReferences,
+            SourceAssemblySymbol originatingSourceAssemblyDebugOnly = null
+        );
 
         /// <summary>
         /// True if this module has any unified references.
         /// </summary>
         internal abstract bool HasUnifiedReferences { get; }
 
-        /// <summary> 
-        /// Returns a unification use-site error (if any) for a symbol contained in this module 
+        /// <summary>
+        /// Returns a unification use-site error (if any) for a symbol contained in this module
         /// that is referring to a specified <paramref name="dependentType"/>.
-        /// </summary> 
-        /// <remarks> 
-        /// If an assembly referenced by this module isn't exactly matching any reference given to compilation 
-        /// the Assembly Manager might decide to use another reference if it matches except for version 
-        /// (it unifies the version with the existing reference).  
+        /// </summary>
+        /// <remarks>
+        /// If an assembly referenced by this module isn't exactly matching any reference given to compilation
+        /// the Assembly Manager might decide to use another reference if it matches except for version
+        /// (it unifies the version with the existing reference).
         /// </remarks>
-        internal abstract bool GetUnificationUseSiteDiagnostic(ref DiagnosticInfo result, TypeSymbol dependentType);
+        internal abstract bool GetUnificationUseSiteDiagnostic(
+            ref DiagnosticInfo result,
+            TypeSymbol dependentType
+        );
 
 #nullable enable
         /// <summary>
@@ -300,7 +265,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Symbol for the type, or null if the type isn't found.
         /// </returns>
         /// <remarks></remarks>
-        internal abstract NamedTypeSymbol? LookupTopLevelMetadataType(ref MetadataTypeName emittedName);
+        internal abstract NamedTypeSymbol? LookupTopLevelMetadataType(
+            ref MetadataTypeName emittedName
+        );
+
 #nullable disable
 
         internal abstract ICollection<string> TypeNames { get; }
@@ -341,7 +309,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (namespaceSymbol.NamespaceKind == NamespaceKind.Module)
             {
-                var moduleNs = (namespaceSymbol as PublicModel.NamespaceSymbol)?.UnderlyingNamespaceSymbol;
+                var moduleNs = (
+                    namespaceSymbol as PublicModel.NamespaceSymbol
+                )?.UnderlyingNamespaceSymbol;
                 if ((object)moduleNs != null && moduleNs.ContainingModule == this)
                 {
                     // this is already the correct module namespace
@@ -349,7 +319,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            if (namespaceSymbol.IsGlobalNamespace || (object)namespaceSymbol.ContainingNamespace == null)
+            if (
+                namespaceSymbol.IsGlobalNamespace
+                || (object)namespaceSymbol.ContainingNamespace == null
+            )
             {
                 return this.GlobalNamespace;
             }
@@ -374,13 +347,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 throw new ArgumentNullException(nameof(namespaceSymbol));
             }
 
-            if (namespaceSymbol.Extent.Kind == NamespaceKind.Module && namespaceSymbol.ContainingModule == this)
+            if (
+                namespaceSymbol.Extent.Kind == NamespaceKind.Module
+                && namespaceSymbol.ContainingModule == this
+            )
             {
                 // this is already the correct module namespace
                 return namespaceSymbol;
             }
 
-            if (namespaceSymbol.IsGlobalNamespace || (object)namespaceSymbol.ContainingNamespace == null)
+            if (
+                namespaceSymbol.IsGlobalNamespace
+                || (object)namespaceSymbol.ContainingNamespace == null
+            )
             {
                 return this.GlobalNamespace;
             }
@@ -399,7 +378,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         /// <summary>
         /// If this symbol represents a metadata module returns the underlying <see cref="ModuleMetadata"/>.
-        /// 
+        ///
         /// Otherwise, this returns <see langword="null"/>.
         /// </summary>
         public abstract ModuleMetadata GetMetadata();

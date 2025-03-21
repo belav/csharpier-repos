@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class MetadataMemberTests : CSharpTestBase
     {
-        private const string VTableGapClassIL = @"
+        private const string VTableGapClassIL =
+            @"
 .class public auto ansi beforefieldinit Class
        extends [mscorlib]System.Object
 {
@@ -87,7 +88,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
   } // end of property Class::BothAccessorsAreGaps
 } // end of class Class
 ";
-        private const string VTableGapInterfaceIL = @"
+        private const string VTableGapInterfaceIL =
+            @"
 .class interface public abstract auto ansi Interface
 {
   .method public hidebysig newslot specialname rtspecialname abstract virtual 
@@ -171,7 +173,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.True(ctor.ReturnsVoid);
             Assert.False(ctor.IsVararg);
             // Bug - 2067
-            Assert.Equal("System.StringComparer." + WellKnownMemberNames.InstanceConstructorName + "()", ctor.ToTestDisplayString());
+            Assert.Equal(
+                "System.StringComparer." + WellKnownMemberNames.InstanceConstructorName + "()",
+                ctor.ToTestDisplayString()
+            );
             Assert.Equal(0, ctor.TypeParameters.Length);
             Assert.Equal("Void", ctor.ReturnType.Name);
 
@@ -219,7 +224,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.False(member1.ReturnsVoid);
             Assert.False(member1.IsVararg);
 
-            var fullName = "System.Boolean Microsoft.Runtime.Hosting.StrongNameHelpers.StrongNameSignatureGeneration(System.String pwzFilePath, System.String pwzKeyContainer, System.Byte[] bKeyBlob, System.Int32 cbKeyBlob, ref System.IntPtr ppbSignatureBlob, out System.Int32 pcbSignatureBlob)";
+            var fullName =
+                "System.Boolean Microsoft.Runtime.Hosting.StrongNameHelpers.StrongNameSignatureGeneration(System.String pwzFilePath, System.String pwzKeyContainer, System.Byte[] bKeyBlob, System.Int32 cbKeyBlob, ref System.IntPtr ppbSignatureBlob, out System.Int32 pcbSignatureBlob)";
             Assert.Equal(fullName, member1.ToTestDisplayString());
             Assert.Equal(0, member1.TypeArgumentsWithAnnotations.Length);
             Assert.Equal(0, member1.TypeParameters.Length);
@@ -242,7 +248,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal("mscorlib", mscorNS.Name);
             Assert.Equal(SymbolKind.Assembly, mscorNS.Kind);
             var ns1 = mscorNS.GlobalNamespace.GetMembers("Microsoft").Single() as NamespaceSymbol;
-            var ns2 = (ns1.GetMembers("Runtime").Single() as NamespaceSymbol).GetMembers("Hosting").Single() as NamespaceSymbol;
+            var ns2 =
+                (ns1.GetMembers("Runtime").Single() as NamespaceSymbol)
+                    .GetMembers("Hosting")
+                    .Single() as NamespaceSymbol;
 
             var class1 = ns2.GetTypeMembers("StrongNameHelpers").First() as NamedTypeSymbol;
             var members = class1.GetMembers("StrongNameSignatureGeneration");
@@ -297,7 +306,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var mscorlib = compilation.ExternalReferences[0];
             var mscorNS = compilation.GetReferencedAssemblySymbol(mscorlib);
-            var ns1 = (mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol).GetMembers("Collections").Single() as NamespaceSymbol;
+            var ns1 =
+                (mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol)
+                    .GetMembers("Collections")
+                    .Single() as NamespaceSymbol;
             var ns2 = ns1.GetMembers("Generic").Single() as NamespaceSymbol;
 
             var type1 = ns2.GetTypeMembers("IDictionary").First() as NamedTypeSymbol;
@@ -317,8 +329,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.False(member2.IsSealed);
             Assert.False(member2.IsVirtual);
             Assert.False(member2.IsOverride);
-            //Assert.True(member1.IsOverloads); 
-            //Assert.True(member2.IsOverloads); 
+            //Assert.True(member1.IsOverloads);
+            //Assert.True(member2.IsOverloads);
             Assert.False(member1.IsGenericMethod);
             // Not Impl
             //Assert.False(member1.IsExtensionMethod);
@@ -329,7 +341,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Equal(0, member2.TypeParameters.Length);
             Assert.Equal(2, member1.Parameters.Length);
             Assert.Equal("Boolean", member2.ReturnType.Name);
-            Assert.Equal("System.Boolean System.Collections.Generic.IDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value)", member2.ToTestDisplayString());
+            Assert.Equal(
+                "System.Boolean System.Collections.Generic.IDictionary<TKey, TValue>.TryGetValue(TKey key, out TValue value)",
+                member2.ToTestDisplayString()
+            );
 
             Assert.Empty(compilation.GetDeclarationDiagnostics());
         }
@@ -342,7 +357,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var mscorlib = compilation.ExternalReferences[0];
             var mscorNS = compilation.GetReferencedAssemblySymbol(mscorlib);
-            var ns1 = (mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol).GetMembers("Collections").Single() as NamespaceSymbol;
+            var ns1 =
+                (mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol)
+                    .GetMembers("Collections")
+                    .Single() as NamespaceSymbol;
             var ns2 = ns1.GetMembers("Generic").Single() as NamespaceSymbol;
 
             var type1 = ns2.GetTypeMembers("IDictionary").First() as NamedTypeSymbol;
@@ -381,7 +399,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void MetadataMethodStaticAndInstanceCtor()
         {
-            var text = @"
+            var text =
+                @"
 class C
 {
     C() { }
@@ -398,7 +417,8 @@ class C
         [ClrOnlyFact]
         public void ImportDecimalConstantAttribute()
         {
-            const string ilSource = @"
+            const string ilSource =
+                @"
 .class public C extends [mscorlib]System.Object
 {
   .field public static initonly valuetype [mscorlib]System.Decimal MyDecimalTen
@@ -409,7 +429,8 @@ class C
                                                                                                   uint32) = ( 01 00 00 00 00 00 00 00 00 00 00 00 0A 00 00 00
                                                                                                               00 00 ) 
 } // end of class C";
-            const string cSharpSource = @"
+            const string cSharpSource =
+                @"
 class B {
   static void Main() {
     var x = C.MyDecimalTen;
@@ -423,7 +444,8 @@ class B {
         [Fact]
         public void TypeAndNamespaceWithSameNameButDifferentArities()
         {
-            var il = @"
+            var il =
+                @"
 .class interface public abstract auto ansi A.B.C
 {
 }
@@ -447,7 +469,8 @@ class B {
         [Fact]
         public void TypeAndNamespaceWithSameNameAndArity()
         {
-            var il = @"
+            var il =
+                @"
 .class interface public abstract auto ansi A.B.C
 {
 }
@@ -479,7 +502,10 @@ class B {
             comp.VerifyDiagnostics();
 
             var type = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("Class");
-            AssertEx.None(type.GetMembersUnordered(), symbol => symbol.Name.StartsWith("_VtblGap", StringComparison.Ordinal));
+            AssertEx.None(
+                type.GetMembersUnordered(),
+                symbol => symbol.Name.StartsWith("_VtblGap", StringComparison.Ordinal)
+            );
 
             // Dropped entirely.
             Assert.Equal(0, type.GetMembers("_VtblGap1_1").Length);
@@ -504,7 +530,8 @@ class B {
         [Fact]
         public void CallVTableGap()
         {
-            var csharp = @"
+            var csharp =
+                @"
 class Test
 {
     static void Main()
@@ -530,26 +557,33 @@ class Test
             comp.VerifyDiagnostics(
                 // (8,11): error CS1061: 'Class' does not contain a definition for '_VtblGap1_1' and no extension method '_VtblGap1_1' accepting a first argument of type 'Class' could be found (are you missing a using directive or an assembly reference?)
                 //         c._VtblGap1_1();
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "_VtblGap1_1").WithArguments("Class", "_VtblGap1_1"),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "_VtblGap1_1")
+                    .WithArguments("Class", "_VtblGap1_1"),
                 // (12,15): error CS1061: 'Class' does not contain a definition for 'BothAccessorsAreGaps' and no extension method 'BothAccessorsAreGaps' accepting a first argument of type 'Class' could be found (are you missing a using directive or an assembly reference?)
                 //         x = c.BothAccessorsAreGaps;
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "BothAccessorsAreGaps").WithArguments("Class", "BothAccessorsAreGaps"),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "BothAccessorsAreGaps")
+                    .WithArguments("Class", "BothAccessorsAreGaps"),
                 // (13,11): error CS1061: 'Class' does not contain a definition for 'BothAccessorsAreGaps' and no extension method 'BothAccessorsAreGaps' accepting a first argument of type 'Class' could be found (are you missing a using directive or an assembly reference?)
                 //         c.BothAccessorsAreGaps = x;
-                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "BothAccessorsAreGaps").WithArguments("Class", "BothAccessorsAreGaps"),
+                Diagnostic(ErrorCode.ERR_NoSuchMemberOrExtension, "BothAccessorsAreGaps")
+                    .WithArguments("Class", "BothAccessorsAreGaps"),
                 // (15,13): error CS0154: The property or indexer 'Class.GetterIsGap' cannot be used in this context because it lacks the get accessor
                 //         x = c.GetterIsGap;
-                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "c.GetterIsGap").WithArguments("Class.GetterIsGap"),
+                Diagnostic(ErrorCode.ERR_PropertyLacksGet, "c.GetterIsGap")
+                    .WithArguments("Class.GetterIsGap"),
                 // (19,9): error CS0200: Property or indexer 'Class.SetterIsGap' cannot be assigned to -- it is read only
                 //         c.SetterIsGap = x;
-                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "c.SetterIsGap").WithArguments("Class.SetterIsGap"));
+                Diagnostic(ErrorCode.ERR_AssgReadonlyProp, "c.SetterIsGap")
+                    .WithArguments("Class.SetterIsGap")
+            );
         }
 
         [WorkItem(546951, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546951")]
         [Fact]
         public void ImplementVTableGap()
         {
-            var csharp = @"
+            var csharp =
+                @"
 class Empty : Interface
 {
 }
@@ -575,29 +609,36 @@ class Explicit : Interface
             comp.VerifyDiagnostics(
                 // (2,7): error CS0535: 'Empty' does not implement interface member 'Interface.SetterIsGap'
                 // class Empty : Interface
-                Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "Interface").WithArguments("Empty", "Interface.SetterIsGap"),
+                Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "Interface")
+                    .WithArguments("Empty", "Interface.SetterIsGap"),
                 // (2,7): error CS0535: 'Empty' does not implement interface member 'Interface.GetterIsGap'
                 // class Empty : Interface
-                Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "Interface").WithArguments("Empty", "Interface.GetterIsGap"),
+                Diagnostic(ErrorCode.ERR_UnimplementedInterfaceMember, "Interface")
+                    .WithArguments("Empty", "Interface.GetterIsGap"),
                 // (17,33): error CS0550: 'Explicit.Interface.GetterIsGap.get' adds an accessor not found in interface member 'Interface.GetterIsGap'
                 //     int Interface.GetterIsGap { get; set; }
-                Diagnostic(ErrorCode.ERR_ExplicitPropertyAddingAccessor, "get").WithArguments("Explicit.Interface.GetterIsGap.get", "Interface.GetterIsGap"),
+                Diagnostic(ErrorCode.ERR_ExplicitPropertyAddingAccessor, "get")
+                    .WithArguments("Explicit.Interface.GetterIsGap.get", "Interface.GetterIsGap"),
                 // (18,38): error CS0550: 'Explicit.Interface.SetterIsGap.set' adds an accessor not found in interface member 'Interface.SetterIsGap'
                 //     int Interface.SetterIsGap { get; set; }
-                Diagnostic(ErrorCode.ERR_ExplicitPropertyAddingAccessor, "set").WithArguments("Explicit.Interface.SetterIsGap.set", "Interface.SetterIsGap"),
+                Diagnostic(ErrorCode.ERR_ExplicitPropertyAddingAccessor, "set")
+                    .WithArguments("Explicit.Interface.SetterIsGap.set", "Interface.SetterIsGap"),
                 // (19,19): error CS0539: 'Explicit.BothAccessorsAreGaps' in explicit interface declaration is not a member of interface
                 //     int Interface.BothAccessorsAreGaps { get; set; }
-                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "BothAccessorsAreGaps").WithArguments("Explicit.BothAccessorsAreGaps"),
+                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "BothAccessorsAreGaps")
+                    .WithArguments("Explicit.BothAccessorsAreGaps"),
                 // (16,20): error CS0539: 'Explicit._VtblGap1_1()' in explicit interface declaration is not a member of interface
                 //     void Interface._VtblGap1_1() { }
-                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "_VtblGap1_1").WithArguments("Explicit._VtblGap1_1()"));
+                Diagnostic(ErrorCode.ERR_InterfaceMemberNotFound, "_VtblGap1_1")
+                    .WithArguments("Explicit._VtblGap1_1()")
+            );
         }
 
         [Fact, WorkItem(1094411, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/1094411")]
         public void Bug1094411_01()
         {
             var source1 =
-@"
+                @"
 class Test
 {
     public int F;
@@ -637,7 +678,7 @@ class Test
         public void Bug1094411_02()
         {
             var source1 =
-@"
+                @"
 class Test
 {
     public int F;
@@ -681,7 +722,9 @@ class Test
             var expectedDiagnostics = new[]
             {
                 // error CS7088: Invalid 'MetadataImportOptions' value: '255'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue).WithArguments("MetadataImportOptions", "255").WithLocation(1, 1)
+                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                    .WithArguments("MetadataImportOptions", "255")
+                    .WithLocation(1, 1),
             };
 
             var options = TestOptions.DebugDll;
@@ -704,19 +747,34 @@ class Test
             var commonOptions = (CompilationOptions)options;
 
             commonOptions = commonOptions.WithMetadataImportOptions(MetadataImportOptions.Internal);
-            Assert.Equal(MetadataImportOptions.Internal, ((CSharpCompilationOptions)commonOptions).MetadataImportOptions);
+            Assert.Equal(
+                MetadataImportOptions.Internal,
+                ((CSharpCompilationOptions)commonOptions).MetadataImportOptions
+            );
             ((CSharpCompilationOptions)commonOptions).VerifyErrors();
             commonOptions = commonOptions.WithMetadataImportOptions(MetadataImportOptions.All);
-            Assert.Equal(MetadataImportOptions.All, ((CSharpCompilationOptions)commonOptions).MetadataImportOptions);
+            Assert.Equal(
+                MetadataImportOptions.All,
+                ((CSharpCompilationOptions)commonOptions).MetadataImportOptions
+            );
             ((CSharpCompilationOptions)commonOptions).VerifyErrors();
             commonOptions = commonOptions.WithMetadataImportOptions(MetadataImportOptions.Public);
-            Assert.Equal(MetadataImportOptions.Public, ((CSharpCompilationOptions)commonOptions).MetadataImportOptions);
+            Assert.Equal(
+                MetadataImportOptions.Public,
+                ((CSharpCompilationOptions)commonOptions).MetadataImportOptions
+            );
             ((CSharpCompilationOptions)commonOptions).VerifyErrors();
-            commonOptions = commonOptions.WithMetadataImportOptions((MetadataImportOptions)byte.MaxValue);
-            Assert.Equal((MetadataImportOptions)byte.MaxValue, ((CSharpCompilationOptions)commonOptions).MetadataImportOptions);
+            commonOptions = commonOptions.WithMetadataImportOptions(
+                (MetadataImportOptions)byte.MaxValue
+            );
+            Assert.Equal(
+                (MetadataImportOptions)byte.MaxValue,
+                ((CSharpCompilationOptions)commonOptions).MetadataImportOptions
+            );
             ((CSharpCompilationOptions)commonOptions).VerifyErrors(expectedDiagnostics);
 
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public int P1 {get; set;}
@@ -727,28 +785,38 @@ public class C
             var compilation0 = CreateCompilation(source);
 
             options = TestOptions.DebugDll;
-            var compilation = CreateCompilation("", options: options, references: new[] { compilation0.EmitToImageReference() });
+            var compilation = CreateCompilation(
+                "",
+                options: options,
+                references: new[] { compilation0.EmitToImageReference() }
+            );
             var c = compilation.GetTypeByMetadataName("C");
             Assert.NotEmpty(c.GetMembers("P1"));
             Assert.Empty(c.GetMembers("P2"));
             Assert.Empty(c.GetMembers("P3"));
             CompileAndVerify(compilation);
 
-            compilation = compilation.WithOptions(options.WithMetadataImportOptions(MetadataImportOptions.Internal));
+            compilation = compilation.WithOptions(
+                options.WithMetadataImportOptions(MetadataImportOptions.Internal)
+            );
             c = compilation.GetTypeByMetadataName("C");
             Assert.NotEmpty(c.GetMembers("P1"));
             Assert.NotEmpty(c.GetMembers("P2"));
             Assert.Empty(c.GetMembers("P3"));
             CompileAndVerify(compilation);
 
-            compilation = compilation.WithOptions(options.WithMetadataImportOptions(MetadataImportOptions.All));
+            compilation = compilation.WithOptions(
+                options.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
             c = compilation.GetTypeByMetadataName("C");
             Assert.NotEmpty(c.GetMembers("P1"));
             Assert.NotEmpty(c.GetMembers("P2"));
             Assert.NotEmpty(c.GetMembers("P3"));
             CompileAndVerify(compilation);
 
-            compilation = compilation.WithOptions(options.WithMetadataImportOptions((MetadataImportOptions)byte.MaxValue));
+            compilation = compilation.WithOptions(
+                options.WithMetadataImportOptions((MetadataImportOptions)byte.MaxValue)
+            );
             c = compilation.GetTypeByMetadataName("C");
             Assert.NotEmpty(c.GetMembers("P1"));
             Assert.NotEmpty(c.GetMembers("P2"));
@@ -763,10 +831,14 @@ public class C
             var expectedDiagnostics = new[]
             {
                 // error CS7088: Invalid 'MetadataImportOptions' value: '255'.
-                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue).WithArguments("MetadataImportOptions", "255").WithLocation(1, 1)
+                Diagnostic(ErrorCode.ERR_BadCompilationOptionValue)
+                    .WithArguments("MetadataImportOptions", "255")
+                    .WithLocation(1, 1),
             };
 
-            var options = TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.Internal);
+            var options = TestOptions.DebugDll.WithMetadataImportOptions(
+                MetadataImportOptions.Internal
+            );
             Assert.Equal(MetadataImportOptions.Internal, options.MetadataImportOptions);
             options.VerifyErrors();
             options = TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All);
@@ -775,11 +847,14 @@ public class C
             options = TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.Public);
             Assert.Equal(MetadataImportOptions.Public, options.MetadataImportOptions);
             options.VerifyErrors();
-            options = TestOptions.DebugDll.WithMetadataImportOptions((MetadataImportOptions)byte.MaxValue);
+            options = TestOptions.DebugDll.WithMetadataImportOptions(
+                (MetadataImportOptions)byte.MaxValue
+            );
             Assert.Equal((MetadataImportOptions)byte.MaxValue, options.MetadataImportOptions);
             options.VerifyErrors(expectedDiagnostics);
 
-            var source = @"
+            var source =
+                @"
 public class C
 {
     public int P1 {get; set;}
@@ -789,21 +864,31 @@ public class C
 ";
             var compilation0 = CreateCompilation(source);
 
-            var compilation = CreateCompilation("", options: TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.Internal), references: new[] { compilation0.EmitToImageReference() });
+            var compilation = CreateCompilation(
+                "",
+                options: TestOptions.DebugDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                ),
+                references: new[] { compilation0.EmitToImageReference() }
+            );
             var c = compilation.GetTypeByMetadataName("C");
             Assert.NotEmpty(c.GetMembers("P1"));
             Assert.NotEmpty(c.GetMembers("P2"));
             Assert.Empty(c.GetMembers("P3"));
             CompileAndVerify(compilation);
 
-            compilation = compilation.WithOptions(TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All));
+            compilation = compilation.WithOptions(
+                TestOptions.DebugDll.WithMetadataImportOptions(MetadataImportOptions.All)
+            );
             c = compilation.GetTypeByMetadataName("C");
             Assert.NotEmpty(c.GetMembers("P1"));
             Assert.NotEmpty(c.GetMembers("P2"));
             Assert.NotEmpty(c.GetMembers("P3"));
             CompileAndVerify(compilation);
 
-            compilation = compilation.WithOptions(TestOptions.DebugDll.WithMetadataImportOptions((MetadataImportOptions)byte.MaxValue));
+            compilation = compilation.WithOptions(
+                TestOptions.DebugDll.WithMetadataImportOptions((MetadataImportOptions)byte.MaxValue)
+            );
             c = compilation.GetTypeByMetadataName("C");
             Assert.NotEmpty(c.GetMembers("P1"));
             Assert.NotEmpty(c.GetMembers("P2"));

@@ -14,9 +14,24 @@ namespace System.Globalization.Tests
             {
                 for (int j = 0; j < 7; j++)
                 {
-                    yield return new object[] { new TaiwanCalendar().MinSupportedDateTime, (CalendarWeekRule)i, (DayOfWeek)j };
-                    yield return new object[] { new TaiwanCalendar().MaxSupportedDateTime, (CalendarWeekRule)i, (DayOfWeek)j };
-                    yield return new object[] { TaiwanCalendarUtilities.RandomDateTime(), (CalendarWeekRule)i, (DayOfWeek)j };
+                    yield return new object[]
+                    {
+                        new TaiwanCalendar().MinSupportedDateTime,
+                        (CalendarWeekRule)i,
+                        (DayOfWeek)j,
+                    };
+                    yield return new object[]
+                    {
+                        new TaiwanCalendar().MaxSupportedDateTime,
+                        (CalendarWeekRule)i,
+                        (DayOfWeek)j,
+                    };
+                    yield return new object[]
+                    {
+                        TaiwanCalendarUtilities.RandomDateTime(),
+                        (CalendarWeekRule)i,
+                        (DayOfWeek)j,
+                    };
                 }
             }
         }
@@ -48,11 +63,21 @@ namespace System.Globalization.Tests
             DateTime time = new DateTime(TaiwanCalendarUtilities.RandomYear(), 12, 31);
 
             int expected = 53;
-            if (new DateTime(time.Year, 1, 1).DayOfWeek == DayOfWeek.Saturday && DateTime.IsLeapYear(time.Year))
+            if (
+                new DateTime(time.Year, 1, 1).DayOfWeek == DayOfWeek.Saturday
+                && DateTime.IsLeapYear(time.Year)
+            )
             {
                 expected = 54;
             }
-            Assert.Equal(expected, new TaiwanCalendar().GetWeekOfYear(time, CalendarWeekRule.FirstDay, DayOfWeek.Sunday));
+            Assert.Equal(
+                expected,
+                new TaiwanCalendar().GetWeekOfYear(
+                    time,
+                    CalendarWeekRule.FirstDay,
+                    DayOfWeek.Sunday
+                )
+            );
         }
 
         internal int GetWeekOfYearFirstDay(DateTime time, int firstDayOfWeek)
@@ -68,7 +93,12 @@ namespace System.Globalization.Tests
             return (dayOfYear + offset) / 7 + 1;
         }
 
-        private int GetWeekOfYearFullDays(DateTime time, CalendarWeekRule rule, int firstDayOfWeek, int fullDays)
+        private int GetWeekOfYearFullDays(
+            DateTime time,
+            CalendarWeekRule rule,
+            int firstDayOfWeek,
+            int fullDays
+        )
         {
             GregorianCalendar gregorianCalendar = new GregorianCalendar();
             // Make the day of year to be 0-based, so that 1/1 is day 0.
@@ -118,7 +148,12 @@ namespace System.Globalization.Tests
 
             // Otherwise, the specified time falls on the week of previous year.
             // Call this method again by passing the last day of previous year.
-            return GetWeekOfYearFullDays(time.AddDays(-(dayOfYear + 1)), rule, firstDayOfWeek, fullDays);
+            return GetWeekOfYearFullDays(
+                time.AddDays(-(dayOfYear + 1)),
+                rule,
+                firstDayOfWeek,
+                fullDays
+            );
         }
     }
 }

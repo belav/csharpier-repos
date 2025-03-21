@@ -38,13 +38,18 @@ namespace System.Globalization.Tests
         public void Calendar_SetInvalidValue_ThrowsArgumentOutOfRangeException()
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => format.Calendar = new ThaiBuddhistCalendar());
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => format.Calendar = new ThaiBuddhistCalendar()
+            );
         }
 
         [Fact]
         public void Calendar_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.Calendar = new GregorianCalendar());
+            Assert.Throws<InvalidOperationException>(() =>
+                DateTimeFormatInfo.InvariantInfo.Calendar = new GregorianCalendar()
+            );
         }
     }
 }

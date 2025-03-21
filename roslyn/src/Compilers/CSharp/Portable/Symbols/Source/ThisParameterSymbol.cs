@@ -14,9 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private readonly MethodSymbol? _containingMethod;
         private readonly TypeSymbol _containingType;
 
-        internal ThisParameterSymbol(MethodSymbol forMethod) : this(forMethod, forMethod.ContainingType)
-        {
-        }
+        internal ThisParameterSymbol(MethodSymbol forMethod)
+            : this(forMethod, forMethod.ContainingType) { }
 
         internal ThisParameterSymbol(MethodSymbol? forMethod, TypeSymbol containingType)
         {
@@ -29,8 +28,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override bool IsDiscard => false;
 
-        public override TypeWithAnnotations TypeWithAnnotations
-            => TypeWithAnnotations.Create(_containingType, NullableAnnotation.NotAnnotated);
+        public override TypeWithAnnotations TypeWithAnnotations =>
+            TypeWithAnnotations.Create(_containingType, NullableAnnotation.NotAnnotated);
 
         public override RefKind RefKind
         {
@@ -57,7 +56,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override ImmutableArray<Location> Locations
         {
-            get { return _containingMethod is not null ? _containingMethod.Locations : ImmutableArray<Location>.Empty; }
+            get
+            {
+                return _containingMethod is not null
+                    ? _containingMethod.Locations
+                    : ImmutableArray<Location>.Empty;
+            }
         }
 
         public override ImmutableArray<SyntaxReference> DeclaringSyntaxReferences
@@ -162,7 +166,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return null; }
         }
 
-        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes => ImmutableArray<int>.Empty;
+        internal override ImmutableArray<int> InterpolatedStringHandlerArgumentIndexes =>
+            ImmutableArray<int>.Empty;
 
         internal override bool HasInterpolatedStringHandlerArgumentError => false;
 
@@ -171,8 +176,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get
             {
                 var scope = _containingType.IsStructType() ? ScopedKind.ScopedRef : ScopedKind.None;
-                if (scope != ScopedKind.None &&
-                    HasUnscopedRefAttribute)
+                if (scope != ScopedKind.None && HasUnscopedRefAttribute)
                 {
                     return ScopedKind.None;
                 }
@@ -180,10 +184,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        internal override bool HasUnscopedRefAttribute
-            => _containingMethod.HasUnscopedRefAttributeOnMethodOrProperty();
+        internal override bool HasUnscopedRefAttribute =>
+            _containingMethod.HasUnscopedRefAttributeOnMethodOrProperty();
 
-        internal sealed override bool UseUpdatedEscapeRules
-            => _containingMethod?.UseUpdatedEscapeRules ?? _containingType.ContainingModule.UseUpdatedEscapeRules;
+        internal sealed override bool UseUpdatedEscapeRules =>
+            _containingMethod?.UseUpdatedEscapeRules
+            ?? _containingType.ContainingModule.UseUpdatedEscapeRules;
     }
 }

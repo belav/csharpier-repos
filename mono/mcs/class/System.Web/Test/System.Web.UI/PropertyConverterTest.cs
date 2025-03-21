@@ -6,10 +6,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,167 +26,184 @@
 // Copyright (C) 2005 Novell, Inc (http://www.novell.com)
 //
 
-
 using System;
+using System.ComponentModel;
+using System.Globalization;
+using System.Reflection;
 using System.Web;
 using System.Web.UI;
-using System.Reflection;
-using System.Globalization;
-using System.ComponentModel;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI {
+namespace MonoTests.System.Web.UI
+{
+    enum TestEnum
+    {
+        Default,
+        Normal,
+        LowerCase,
+        UpperCase,
+    }
 
-	enum TestEnum {
-		Default,
-		Normal,
-		LowerCase,
-		UpperCase,
-	}
+    [Flags]
+    enum TestFlags
+    {
+        A,
+        B,
+        C,
+    }
 
-	[Flags]
-	enum TestFlags {
-		A,
-		B,
-		C
-	}
+    [TestFixture]
+    public class PropertyConverterTest
+    {
+        [Test]
+        public void EnumFromString()
+        {
+            object e = TestEnum.Default;
 
-	[TestFixture]
-	public class PropertyConverterTest {
+            e = PropertyConverter.EnumFromString(typeof(TestEnum), "Normal");
+            Assert.AreEqual(TestEnum.Normal, e, "Normal");
 
-		[Test]
-		public void EnumFromString ()
-		{
-			object e = TestEnum.Default;
+            e = PropertyConverter.EnumFromString(typeof(TestEnum), "lowercase");
+            Assert.AreEqual(TestEnum.LowerCase, e, "Lower Case");
 
-			e = PropertyConverter.EnumFromString (typeof (TestEnum), "Normal");
-			Assert.AreEqual (TestEnum.Normal, e, "Normal");
+            e = PropertyConverter.EnumFromString(typeof(TestEnum), "UPPERCASE");
+            Assert.AreEqual(TestEnum.UpperCase, e, "Upper Case");
 
-			e = PropertyConverter.EnumFromString (typeof (TestEnum), "lowercase");
-			Assert.AreEqual (TestEnum.LowerCase, e, "Lower Case");
+            e = PropertyConverter.EnumFromString(typeof(TestEnum), "DoesntExist");
+            Assert.AreEqual(null, e, "Doesn't Exist");
 
-			e = PropertyConverter.EnumFromString (typeof (TestEnum), "UPPERCASE");
-			Assert.AreEqual (TestEnum.UpperCase, e, "Upper Case");
+            e = PropertyConverter.EnumFromString(typeof(TestEnum), "TestEnum.Normal");
+            Assert.AreEqual(null, e, "Full Name");
+        }
 
-			e = PropertyConverter.EnumFromString (typeof (TestEnum), "DoesntExist");
-			Assert.AreEqual (null, e, "Doesn't Exist");
+        [Test]
+        public void TestFromStringFlags()
+        {
+            object e = TestEnum.Default;
 
-			e = PropertyConverter.EnumFromString (typeof (TestEnum), "TestEnum.Normal");
-			Assert.AreEqual (null, e, "Full Name");
-		}
+            e = PropertyConverter.EnumFromString(typeof(TestFlags), "A");
+            Assert.AreEqual(e, TestFlags.A, "Normal");
 
-		[Test]
-		public void TestFromStringFlags ()
-		{
-			object e = TestEnum.Default;
+            e = PropertyConverter.EnumFromString(typeof(TestFlags), "A, B");
+            Assert.AreEqual(e, TestFlags.A | TestFlags.B, "Multiple");
 
-			e = PropertyConverter.EnumFromString (typeof (TestFlags), "A");
-			Assert.AreEqual (e, TestFlags.A, "Normal");
+            e = PropertyConverter.EnumFromString(typeof(TestFlags), "foo");
+            Assert.AreEqual(e, null, "Bad");
+        }
 
-			e = PropertyConverter.EnumFromString (typeof (TestFlags), "A, B");
-			Assert.AreEqual (e, TestFlags.A | TestFlags.B, "Multiple");
+        [Test]
+        public void EnumToString()
+        {
+            Assert.AreEqual(
+                PropertyConverter.EnumToString(typeof(TestEnum), 1),
+                "Normal",
+                "Normal"
+            );
+            Assert.AreEqual(PropertyConverter.EnumToString(typeof(TestEnum), 25), "25", "Decimal");
+        }
 
-			e = PropertyConverter.EnumFromString (typeof (TestFlags), "foo");
-			Assert.AreEqual (e, null, "Bad");
-		}
+        [Test]
+        public void EnumToStringFlags()
+        {
+            Assert.AreEqual(PropertyConverter.EnumToString(typeof(TestFlags), 0), "A", "A");
+            Assert.AreEqual(
+                PropertyConverter.EnumToString(typeof(TestFlags), 3),
+                "B, C",
+                "Multiple"
+            );
+        }
 
-		[Test]
-		public void EnumToString ()
-		{
-			Assert.AreEqual (PropertyConverter.EnumToString (typeof (TestEnum), 1),
-					"Normal", "Normal");
-			Assert.AreEqual (PropertyConverter.EnumToString (typeof (TestEnum), 25),
-					"25", "Decimal");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void EnumToStringWrongBaseType()
+        {
+            PropertyConverter.EnumToString(typeof(TestEnum), "foo");
+        }
 
-		[Test]
-		public void EnumToStringFlags ()
-		{
-			Assert.AreEqual (PropertyConverter.EnumToString (typeof (TestFlags), 0),
-					"A", "A");
-			Assert.AreEqual (PropertyConverter.EnumToString (typeof (TestFlags), 3),
-					"B, C", "Multiple");
-		}
+        public void TestObjectFromString()
+        {
+            Assert.AreEqual(
+                PropertyConverter.ObjectFromString(typeof(string), null, "value"),
+                "value",
+                "String Type"
+            );
+            MemberInfo mi = this.GetType().GetProperty("AllowedConverterProperty");
+            Assert.AreEqual(
+                PropertyConverter.ObjectFromString(typeof(int), mi, "ConverterValue"),
+                "ConverterValue",
+                "Converter Value"
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void EnumToStringWrongBaseType ()
-		{
-			PropertyConverter.EnumToString (typeof (TestEnum), "foo");
-		}
+        [Test]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void TestObjectFromStringNullRef()
+        {
+            PropertyConverter.ObjectFromString(
+                typeof(int), // can't be string
+                null,
+                "foobar"
+            );
+        }
 
-		public void TestObjectFromString ()
-		{
-			Assert.AreEqual (PropertyConverter.ObjectFromString (
-						 typeof (string), null, "value"),
-					"value", "String Type");      
-			MemberInfo mi = this.GetType ().GetProperty ("AllowedConverterProperty");
-			Assert.AreEqual (PropertyConverter.ObjectFromString (
-						 typeof (int), mi, "ConverterValue"),
-					"ConverterValue", "Converter Value");
-		}
+        [Test]
+        [ExpectedException(typeof(HttpException))]
+        public void TestObjectFromStringCantConvert()
+        {
+            MemberInfo mi = this.GetType().GetProperty("NotAllowedConverterProperty");
+            PropertyConverter.ObjectFromString(
+                typeof(int), // can't be string
+                mi,
+                "foobar"
+            );
+        }
 
-		[Test]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void TestObjectFromStringNullRef ()
-		{
-			PropertyConverter.ObjectFromString (typeof (int), // can't be string
-					null, "foobar");
-		}
+        [TypeConverter(typeof(AllowedMagicTypeConverter))]
+        public string AllowedConverterProperty
+        {
+            get { return "AllowedConverterProperty"; }
+        }
 
-		[Test]
-		[ExpectedException (typeof (HttpException))]
-		public void TestObjectFromStringCantConvert ()
-		{
-			MemberInfo mi = this.GetType ().GetProperty ("NotAllowedConverterProperty");
-			PropertyConverter.ObjectFromString (typeof (int), // can't be string
-					mi, "foobar");
-		}
+        [TypeConverter(typeof(NotAllowedMagicTypeConverter))]
+        public string NotAllowedConverterProperty
+        {
+            get { return "NotAllowedConverterProperty"; }
+        }
 
-		[TypeConverter (typeof (AllowedMagicTypeConverter))]
-		public string AllowedConverterProperty {
-			get { return "AllowedConverterProperty"; }
-		}
+        public class AllowedMagicTypeConverter : MagicTypeConverter
+        {
+            public AllowedMagicTypeConverter()
+                : base(true) { }
+        }
 
-		[TypeConverter (typeof (NotAllowedMagicTypeConverter))]
-		public string NotAllowedConverterProperty {
-			get { return "NotAllowedConverterProperty"; }
-		}
+        public class NotAllowedMagicTypeConverter : MagicTypeConverter
+        {
+            public NotAllowedMagicTypeConverter()
+                : base(false) { }
+        }
 
-		public class AllowedMagicTypeConverter : MagicTypeConverter {
+        public abstract class MagicTypeConverter : TypeConverter
+        {
+            private bool allow;
 
-			public AllowedMagicTypeConverter () : base (true)
-			{
-			}
-		}
+            public MagicTypeConverter(bool allow)
+            {
+                this.allow = allow;
+            }
 
-		public class NotAllowedMagicTypeConverter : MagicTypeConverter {
+            public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+            {
+                return allow;
+            }
 
-			public NotAllowedMagicTypeConverter () : base (false)
-			{
-			}
-		}
-
-		public abstract class MagicTypeConverter : TypeConverter {
-
-			private bool allow;
-
-			public MagicTypeConverter (bool allow)
-			{
-				this.allow = allow;
-			}
-
-			public override bool CanConvertFrom (ITypeDescriptorContext context, Type sourceType)
-			{
-				return allow;
-			}
-
-			public override object ConvertFrom (ITypeDescriptorContext context,
-					CultureInfo culture, object value)
-			{
-				return "ConverterValue";
-			}
-		}
-	}
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
+            {
+                return "ConverterValue";
+            }
+        }
+    }
 }

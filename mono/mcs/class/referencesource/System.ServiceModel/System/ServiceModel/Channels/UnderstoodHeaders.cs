@@ -3,13 +3,13 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.Xml;
-    using System.ServiceModel;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.Xml;
 
     public sealed class UnderstoodHeaders : IEnumerable<MessageHeaderInfo>
     {

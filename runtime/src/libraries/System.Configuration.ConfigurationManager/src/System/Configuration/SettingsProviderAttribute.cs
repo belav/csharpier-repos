@@ -35,10 +35,7 @@ namespace System.Configuration
         /// </summary>
         public string ProviderTypeName
         {
-            get
-            {
-                return _providerTypeName;
-            }
+            get { return _providerTypeName; }
         }
     }
 }

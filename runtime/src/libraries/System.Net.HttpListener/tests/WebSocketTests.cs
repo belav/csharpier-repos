@@ -39,12 +39,17 @@ namespace System.Net.Tests
             Task<HttpListenerContext> serverContextTask = _listener.GetContextAsync();
             using (ClientWebSocket clientWebSocket = new ClientWebSocket())
             {
-                Task clientConnectTask = clientWebSocket.ConnectAsync(uriBuilder.Uri, CancellationToken.None);
+                Task clientConnectTask = clientWebSocket.ConnectAsync(
+                    uriBuilder.Uri,
+                    CancellationToken.None
+                );
 
                 Assert.Equal(WebSocketState.Connecting, clientWebSocket.State);
 
                 HttpListenerContext listenerContext = await serverContextTask;
-                HttpListenerWebSocketContext wsContext = await listenerContext.AcceptWebSocketAsync(null);
+                HttpListenerWebSocketContext wsContext = await listenerContext.AcceptWebSocketAsync(
+                    null
+                );
 
                 await clientConnectTask;
 
@@ -58,10 +63,17 @@ namespace System.Net.Tests
                 byte[] receiveBuffer = Encoding.UTF8.GetBytes(expected);
 
                 // Send binary data from server.
-                await wsContext.WebSocket.SendAsync(new ArraySegment<byte>(receiveBuffer), WebSocketMessageType.Binary, true, CancellationToken.None);
+                await wsContext.WebSocket.SendAsync(
+                    new ArraySegment<byte>(receiveBuffer),
+                    WebSocketMessageType.Binary,
+                    true,
+                    CancellationToken.None
+                );
 
                 // Receive binary data in client.
-                ArraySegment<byte> getBuffer = new ArraySegment<byte>(new byte[receiveBuffer.Length]);
+                ArraySegment<byte> getBuffer = new ArraySegment<byte>(
+                    new byte[receiveBuffer.Length]
+                );
                 await clientWebSocket.ReceiveAsync(getBuffer, CancellationToken.None);
 
                 Assert.Equal(expected, Encoding.UTF8.GetString(getBuffer.Array));

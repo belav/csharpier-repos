@@ -12,9 +12,10 @@ namespace Microsoft.Extensions.Caching.StackExchangeRedis;
 
 public class TimeExpirationTests
 {
-    private const string SkipReason = "TODO: Disabled due to CI failure. " +
-        "These tests require Redis server to be started on the machine. Make sure to change the value of" +
-        "\"RedisTestConfig.RedisPort\" accordingly.";
+    private const string SkipReason =
+        "TODO: Disabled due to CI failure. "
+        + "These tests require Redis server to be started on the machine. Make sure to change the value of"
+        + "\"RedisTestConfig.RedisPort\" accordingly.";
 
     [Fact(Skip = SkipReason)]
     public void AbsoluteExpirationInThePastThrows()
@@ -27,11 +28,16 @@ public class TimeExpirationTests
         ExceptionAssert.ThrowsArgumentOutOfRange(
             () =>
             {
-                cache.Set(key, value, new DistributedCacheEntryOptions().SetAbsoluteExpiration(expected));
+                cache.Set(
+                    key,
+                    value,
+                    new DistributedCacheEntryOptions().SetAbsoluteExpiration(expected)
+                );
             },
             nameof(DistributedCacheEntryOptions.AbsoluteExpiration),
             "The absolute expiration value must be in the future.",
-            expected);
+            expected
+        );
     }
 
     [Fact(Skip = SkipReason)]
@@ -41,7 +47,11 @@ public class TimeExpirationTests
         var key = "myKey";
         var value = new byte[1];
 
-        cache.Set(key, value, new DistributedCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(1)));
+        cache.Set(
+            key,
+            value,
+            new DistributedCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(1))
+        );
 
         byte[] result = cache.Get(key);
         Assert.Equal(value, result);
@@ -62,7 +72,11 @@ public class TimeExpirationTests
         var key = "myKey";
         var value = new byte[1];
 
-        cache.Set(key, value, new DistributedCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(0.25)));
+        cache.Set(
+            key,
+            value,
+            new DistributedCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(0.25))
+        );
 
         var result = cache.Get(key);
         Assert.Null(result);
@@ -75,13 +89,21 @@ public class TimeExpirationTests
         var key = "myKey";
         var value = new byte[1];
 
-        ExceptionAssert.ThrowsArgumentOutOfRange(() =>
-        {
-            cache.Set(key, value, new DistributedCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(-1)));
-        },
-        nameof(DistributedCacheEntryOptions.AbsoluteExpirationRelativeToNow),
-        "The relative expiration value must be positive.",
-        TimeSpan.FromMinutes(-1));
+        ExceptionAssert.ThrowsArgumentOutOfRange(
+            () =>
+            {
+                cache.Set(
+                    key,
+                    value,
+                    new DistributedCacheEntryOptions().SetAbsoluteExpiration(
+                        TimeSpan.FromMinutes(-1)
+                    )
+                );
+            },
+            nameof(DistributedCacheEntryOptions.AbsoluteExpirationRelativeToNow),
+            "The relative expiration value must be positive.",
+            TimeSpan.FromMinutes(-1)
+        );
     }
 
     [Fact(Skip = SkipReason)]
@@ -94,11 +116,16 @@ public class TimeExpirationTests
         ExceptionAssert.ThrowsArgumentOutOfRange(
             () =>
             {
-                cache.Set(key, value, new DistributedCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.Zero));
+                cache.Set(
+                    key,
+                    value,
+                    new DistributedCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.Zero)
+                );
             },
             nameof(DistributedCacheEntryOptions.AbsoluteExpirationRelativeToNow),
             "The relative expiration value must be positive.",
-            TimeSpan.Zero);
+            TimeSpan.Zero
+        );
     }
 
     [Fact(Skip = SkipReason)]
@@ -108,7 +135,11 @@ public class TimeExpirationTests
         var key = "myKey";
         var value = new byte[1];
 
-        cache.Set(key, value, new DistributedCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(1)));
+        cache.Set(
+            key,
+            value,
+            new DistributedCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(1))
+        );
 
         var result = cache.Get(key);
         Assert.Equal(value, result);
@@ -128,7 +159,11 @@ public class TimeExpirationTests
         var key = "myKey";
         var value = new byte[1];
 
-        cache.Set(key, value, new DistributedCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(0.25)));
+        cache.Set(
+            key,
+            value,
+            new DistributedCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromSeconds(0.25))
+        );
 
         var result = cache.Get(key);
         Assert.Null(result);
@@ -141,10 +176,21 @@ public class TimeExpirationTests
         var key = "myKey";
         var value = new byte[1];
 
-        ExceptionAssert.ThrowsArgumentOutOfRange(() =>
-        {
-            cache.Set(key, value, new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(-1)));
-        }, nameof(DistributedCacheEntryOptions.SlidingExpiration), "The sliding expiration value must be positive.", TimeSpan.FromMinutes(-1));
+        ExceptionAssert.ThrowsArgumentOutOfRange(
+            () =>
+            {
+                cache.Set(
+                    key,
+                    value,
+                    new DistributedCacheEntryOptions().SetSlidingExpiration(
+                        TimeSpan.FromMinutes(-1)
+                    )
+                );
+            },
+            nameof(DistributedCacheEntryOptions.SlidingExpiration),
+            "The sliding expiration value must be positive.",
+            TimeSpan.FromMinutes(-1)
+        );
     }
 
     [Fact(Skip = SkipReason)]
@@ -157,11 +203,16 @@ public class TimeExpirationTests
         ExceptionAssert.ThrowsArgumentOutOfRange(
             () =>
             {
-                cache.Set(key, value, new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.Zero));
+                cache.Set(
+                    key,
+                    value,
+                    new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.Zero)
+                );
             },
             nameof(DistributedCacheEntryOptions.SlidingExpiration),
             "The sliding expiration value must be positive.",
-            TimeSpan.Zero);
+            TimeSpan.Zero
+        );
     }
 
     [Fact(Skip = SkipReason)]
@@ -171,7 +222,11 @@ public class TimeExpirationTests
         var key = "myKey";
         var value = new byte[1];
 
-        cache.Set(key, value, new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(1)));
+        cache.Set(
+            key,
+            value,
+            new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(1))
+        );
 
         var result = cache.Get(key);
         Assert.Equal(value, result);
@@ -189,7 +244,11 @@ public class TimeExpirationTests
         var key = "myKey";
         var value = new byte[1];
 
-        cache.Set(key, value, new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(0.25)));
+        cache.Set(
+            key,
+            value,
+            new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(0.25))
+        );
 
         var result = cache.Get(key);
         Assert.Null(result);
@@ -202,7 +261,11 @@ public class TimeExpirationTests
         var key = "myKey";
         var value = new byte[1];
 
-        cache.Set(key, value, new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(1)));
+        cache.Set(
+            key,
+            value,
+            new DistributedCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromSeconds(1))
+        );
 
         var result = cache.Get(key);
         Assert.Equal(value, result);
@@ -227,9 +290,13 @@ public class TimeExpirationTests
         var key = "myKey";
         var value = new byte[1];
 
-        cache.Set(key, value, new DistributedCacheEntryOptions()
-            .SetSlidingExpiration(TimeSpan.FromSeconds(1))
-            .SetAbsoluteExpiration(TimeSpan.FromSeconds(3)));
+        cache.Set(
+            key,
+            value,
+            new DistributedCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromSeconds(1))
+                .SetAbsoluteExpiration(TimeSpan.FromSeconds(3))
+        );
 
         var result = cache.Get(key);
         Assert.Equal(value, result);

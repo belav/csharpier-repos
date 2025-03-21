@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -15,20 +15,20 @@
 ===========================================================*/
 namespace System.Runtime.Serialization
 {
-
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.Reflection;
     using System.Runtime.Remoting;
+    using System.Security;
 #if FEATURE_REMOTING
     using System.Runtime.Remoting.Proxies;
 #endif
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
-    using System.Security;
+
 #if FEATURE_CORECLR
     using System.Runtime.CompilerServices;
-#endif 
+#endif
 
     [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class SerializationInfo
@@ -36,8 +36,8 @@ namespace System.Runtime.Serialization
         private const int defaultSize = 4;
         private const string s_mscorlibAssemblySimpleName = "mscorlib";
         private const string s_mscorlibFileName = s_mscorlibAssemblySimpleName + ".dll";
-        
-        // Even though we have a dictionary, we're still keeping all the arrays around for back-compat. 
+
+        // Even though we have a dictionary, we're still keeping all the arrays around for back-compat.
         // Otherwise we may run into potentially breaking behaviors like GetEnumerator() not returning entries in the same order they were added.
         internal String[] m_members;
         internal Object[] m_data;
@@ -53,15 +53,18 @@ namespace System.Runtime.Serialization
 #if FEATURE_SERIALIZATION
         private bool requireSameTokenInPartialTrust;
 #endif
+
         [CLSCompliant(false)]
         public SerializationInfo(Type type, IFormatterConverter converter)
 #if FEATURE_SERIALIZATION
-            : this(type, converter, false)
-        {
-        }
+            : this(type, converter, false) { }
 
         [CLSCompliant(false)]
-        public SerializationInfo(Type type, IFormatterConverter converter, bool requireSameTokenInPartialTrust)
+        public SerializationInfo(
+            Type type,
+            IFormatterConverter converter,
+            bool requireSameTokenInPartialTrust
+        )
 #endif
         {
             if ((object)type == null)
@@ -95,10 +98,7 @@ namespace System.Runtime.Serialization
 
         public String FullTypeName
         {
-            get
-            {
-                return m_fullTypeName;
-            }
+            get { return m_fullTypeName; }
             set
             {
                 if (null == value)
@@ -106,7 +106,7 @@ namespace System.Runtime.Serialization
                     throw new ArgumentNullException("value");
                 }
                 Contract.EndContractBlock();
-           
+
                 m_fullTypeName = value;
                 isFullTypeNameSetExplicit = true;
             }
@@ -114,10 +114,7 @@ namespace System.Runtime.Serialization
 
         public String AssemblyName
         {
-            get
-            {
-                return m_assemName;
-            }
+            get { return m_assemName; }
 #if FEATURE_SERIALIZATION
             [SecuritySafeCritical]
 #endif
@@ -138,6 +135,7 @@ namespace System.Runtime.Serialization
                 isAssemblyNameSetExplicit = true;
             }
         }
+
 #if FEATURE_SERIALIZATION
         [SecuritySafeCritical]
 #endif
@@ -151,7 +149,10 @@ namespace System.Runtime.Serialization
 #if FEATURE_SERIALIZATION
             if (this.requireSameTokenInPartialTrust)
             {
-                DemandForUnsafeAssemblyNameAssignments(this.ObjectType.Assembly.FullName, type.Assembly.FullName);
+                DemandForUnsafeAssemblyNameAssignments(
+                    this.ObjectType.Assembly.FullName,
+                    type.Assembly.FullName
+                );
             }
 #endif
             if (!Object.ReferenceEquals(objectType, type))
@@ -175,7 +176,8 @@ namespace System.Runtime.Serialization
             {
                 for (int i = 0; i < a.Length; i++)
                 {
-                    if (a[i] != b[i]) return false;
+                    if (a[i] != b[i])
+                        return false;
                 }
 
                 return true;
@@ -183,7 +185,10 @@ namespace System.Runtime.Serialization
         }
 
         [SecuritySafeCritical]
-        internal static void DemandForUnsafeAssemblyNameAssignments(string originalAssemblyName, string newAssemblyName)
+        internal static void DemandForUnsafeAssemblyNameAssignments(
+            string originalAssemblyName,
+            string newAssemblyName
+        )
         {
             if (!IsAssemblyNameAssignmentSafe(originalAssemblyName, newAssemblyName))
             {
@@ -193,7 +198,10 @@ namespace System.Runtime.Serialization
             }
         }
 
-        internal static bool IsAssemblyNameAssignmentSafe(string originalAssemblyName, string newAssemblyName)
+        internal static bool IsAssemblyNameAssignmentSafe(
+            string originalAssemblyName,
+            string newAssemblyName
+        )
         {
             if (originalAssemblyName == newAssemblyName)
             {
@@ -205,8 +213,18 @@ namespace System.Runtime.Serialization
 
             // mscorlib will get loaded by the runtime regardless of its string casing or its public key token,
             // so setting the assembly name to mscorlib must always be protected by a demand
-            if (string.Equals(newAssembly.Name, s_mscorlibAssemblySimpleName, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(newAssembly.Name, s_mscorlibFileName, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    newAssembly.Name,
+                    s_mscorlibAssemblySimpleName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+                || string.Equals(
+                    newAssembly.Name,
+                    s_mscorlibFileName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return false;
             }
@@ -216,34 +234,22 @@ namespace System.Runtime.Serialization
 
         public int MemberCount
         {
-            get
-            {
-                return m_currMember;
-            }
+            get { return m_currMember; }
         }
 
         public Type ObjectType
         {
-            get
-            {
-                return objectType;
-            }
+            get { return objectType; }
         }
 
         public bool IsFullTypeNameSetExplicit
         {
-            get
-            {
-                return isFullTypeNameSetExplicit;
-            }
+            get { return isFullTypeNameSetExplicit; }
         }
 
         public bool IsAssemblyNameSetExplicit
         {
-            get
-            {
-                return isAssemblyNameSetExplicit;
-            }
+            get { return isAssemblyNameSetExplicit; }
         }
 
         public SerializationInfoEnumerator GetEnumerator()
@@ -254,7 +260,10 @@ namespace System.Runtime.Serialization
         private void ExpandArrays()
         {
             int newSize;
-            Contract.Assert(m_members.Length == m_currMember, "[SerializationInfo.ExpandArrays]m_members.Length == m_currMember");
+            Contract.Assert(
+                m_members.Length == m_currMember,
+                "[SerializationInfo.ExpandArrays]m_members.Length == m_currMember"
+            );
 
             newSize = (m_currMember * 2);
 
@@ -326,7 +335,6 @@ namespace System.Runtime.Serialization
             AddValue(name, (Object)value, typeof(char));
         }
 
-
         [CLSCompliant(false)]
         public void AddValue(String name, sbyte value)
         {
@@ -395,8 +403,15 @@ namespace System.Runtime.Serialization
         {
             if (m_nameToIndex.ContainsKey(name))
             {
-                BCLDebug.Trace("SER", "[SerializationInfo.AddValue]Tried to add ", name, " twice to the SI.");
-                throw new SerializationException(Environment.GetResourceString("Serialization_SameNameTwice"));
+                BCLDebug.Trace(
+                    "SER",
+                    "[SerializationInfo.AddValue]Tried to add ",
+                    name,
+                    " twice to the SI."
+                );
+                throw new SerializationException(
+                    Environment.GetResourceString("Serialization_SameNameTwice")
+                );
             }
             m_nameToIndex.Add(name, m_currMember);
 
@@ -419,8 +434,8 @@ namespace System.Runtime.Serialization
 
         /*=================================UpdateValue==================================
         **Action: Finds the value if it exists in the current data.  If it does, we replace
-        **        the values, if not, we append it to the end.  This is useful to the 
-        **        ObjectManager when it's performing fixups, but shouldn't be used by 
+        **        the values, if not, we append it to the end.  This is useful to the
+        **        ObjectManager when it's performing fixups, but shouldn't be used by
         **        clients.  Exposing out this functionality would allow children to overwrite
         **        their parent's values.
         **Returns: void
@@ -445,7 +460,6 @@ namespace System.Runtime.Serialization
                 m_data[index] = value;
                 m_types[index] = type;
             }
-
         }
 
         private int FindElement(String name)
@@ -455,7 +469,13 @@ namespace System.Runtime.Serialization
                 throw new ArgumentNullException("name");
             }
             Contract.EndContractBlock();
-            BCLDebug.Trace("SER", "[SerializationInfo.FindElement]Looking for ", name, " CurrMember is: ", m_currMember);
+            BCLDebug.Trace(
+                "SER",
+                "[SerializationInfo.FindElement]Looking for ",
+                name,
+                " CurrMember is: ",
+                m_currMember
+            );
             int index;
             if (m_nameToIndex.TryGetValue(name, out index))
             {
@@ -471,7 +491,7 @@ namespace System.Runtime.Serialization
         **Returns: The value of the element at the position associated with name.
         **Arguments: name -- the name of the element to find.
         **           foundType -- the type of the element associated with the given name.
-        **Exceptions: None.  FindElement does null checking and throws for elements not 
+        **Exceptions: None.  FindElement does null checking and throws for elements not
         **            found.
         ==============================================================================*/
         private Object GetElement(String name, out Type foundType)
@@ -479,19 +499,30 @@ namespace System.Runtime.Serialization
             int index = FindElement(name);
             if (index == -1)
             {
-                throw new SerializationException(Environment.GetResourceString("Serialization_NotFound", name));
+                throw new SerializationException(
+                    Environment.GetResourceString("Serialization_NotFound", name)
+                );
             }
 
-            Contract.Assert(index < m_data.Length, "[SerializationInfo.GetElement]index<m_data.Length");
-            Contract.Assert(index < m_types.Length, "[SerializationInfo.GetElement]index<m_types.Length");
+            Contract.Assert(
+                index < m_data.Length,
+                "[SerializationInfo.GetElement]index<m_data.Length"
+            );
+            Contract.Assert(
+                index < m_types.Length,
+                "[SerializationInfo.GetElement]index<m_types.Length"
+            );
 
             foundType = m_types[index];
-            Contract.Assert((object)foundType != null, "[SerializationInfo.GetElement]foundType!=null");
+            Contract.Assert(
+                (object)foundType != null,
+                "[SerializationInfo.GetElement]foundType!=null"
+            );
             return m_data[index];
         }
 
         [System.Runtime.InteropServices.ComVisible(true)]
-        // 
+        //
         private Object GetElementNoThrow(String name, out Type foundType)
         {
             int index = FindElement(name);
@@ -501,23 +532,31 @@ namespace System.Runtime.Serialization
                 return null;
             }
 
-            Contract.Assert(index < m_data.Length, "[SerializationInfo.GetElement]index<m_data.Length");
-            Contract.Assert(index < m_types.Length, "[SerializationInfo.GetElement]index<m_types.Length");
+            Contract.Assert(
+                index < m_data.Length,
+                "[SerializationInfo.GetElement]index<m_data.Length"
+            );
+            Contract.Assert(
+                index < m_types.Length,
+                "[SerializationInfo.GetElement]index<m_types.Length"
+            );
 
             foundType = m_types[index];
-            Contract.Assert((object)foundType != null, "[SerializationInfo.GetElement]foundType!=null");
+            Contract.Assert(
+                (object)foundType != null,
+                "[SerializationInfo.GetElement]foundType!=null"
+            );
             return m_data[index];
         }
 
         //
-        // The user should call one of these getters to get the data back in the 
-        // form requested.  
+        // The user should call one of these getters to get the data back in the
+        // form requested.
         //
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         public Object GetValue(String name, Type type)
         {
-
             if ((object)type == null)
             {
                 throw new ArgumentNullException("type");
@@ -526,7 +565,9 @@ namespace System.Runtime.Serialization
 
             RuntimeType rt = type as RuntimeType;
             if (rt == null)
-                throw new ArgumentException(Environment.GetResourceString("Argument_MustBeRuntimeType"));
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_MustBeRuntimeType")
+                );
 
             Type foundType;
             Object value;
@@ -541,26 +582,33 @@ namespace System.Runtime.Serialization
             }
             else
 #endif
-                if (Object.ReferenceEquals(foundType, type) || type.IsAssignableFrom(foundType) || value == null)
-                {
-                    return value;
-                }
+            if (
+                Object.ReferenceEquals(foundType, type)
+                || type.IsAssignableFrom(foundType)
+                || value == null
+            )
+            {
+                return value;
+            }
 
             Contract.Assert(m_converter != null, "[SerializationInfo.GetValue]m_converter!=null");
 
             return m_converter.Convert(value, type);
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [System.Runtime.InteropServices.ComVisible(true)]
-        // 
+        //
         internal Object GetValueNoThrow(String name, Type type)
         {
             Type foundType;
             Object value;
 
             Contract.Assert((object)type != null, "[SerializationInfo.GetValue]type ==null");
-            Contract.Assert(type is RuntimeType, "[SerializationInfo.GetValue]type is not a runtime type");
+            Contract.Assert(
+                type is RuntimeType,
+                "[SerializationInfo.GetValue]type is not a runtime type"
+            );
 
             value = GetElementNoThrow(name, out foundType);
             if (value == null)
@@ -574,10 +622,14 @@ namespace System.Runtime.Serialization
             }
             else
 #endif
-                if (Object.ReferenceEquals(foundType, type) || type.IsAssignableFrom(foundType) || value == null)
-                {
-                    return value;
-                }
+            if (
+                Object.ReferenceEquals(foundType, type)
+                || type.IsAssignableFrom(foundType)
+                || value == null
+            )
+            {
+                return value;
+            }
 
             Contract.Assert(m_converter != null, "[SerializationInfo.GetValue]m_converter!=null");
 
@@ -731,7 +783,6 @@ namespace System.Runtime.Serialization
             return m_converter.ToSingle(value);
         }
 
-
         public double GetDouble(String name)
         {
             Type foundType;
@@ -786,20 +837,12 @@ namespace System.Runtime.Serialization
 
         internal string[] MemberNames
         {
-            get
-            {
-                return m_members;
-            }
-
+            get { return m_members; }
         }
 
         internal object[] MemberValues
         {
-            get
-            {
-                return m_data;
-            }
+            get { return m_data; }
         }
-
     }
 }

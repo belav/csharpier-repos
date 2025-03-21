@@ -9,13 +9,15 @@ namespace System.Formats.Cbor.Tests
     {
         public static Arbitrary<CborPropertyTestContext> PropertyTestInput()
         {
-            Arbitrary<NonEmptyArray<CborDocument>> documentArb = Arb.Default.NonEmptyArray<CborDocument>();
+            Arbitrary<NonEmptyArray<CborDocument>> documentArb =
+                Arb.Default.NonEmptyArray<CborDocument>();
             Arbitrary<bool> convertArb = Arb.Default.Bool();
             Gen<CborConformanceMode> conformanceModes = Gen.Elements(
                 CborConformanceMode.Lax,
                 CborConformanceMode.Strict,
                 CborConformanceMode.Canonical,
-                CborConformanceMode.Ctap2Canonical);
+                CborConformanceMode.Ctap2Canonical
+            );
 
             Gen<CborPropertyTestContext> inputGen =
                 from docs in documentArb.Generator
@@ -25,11 +27,21 @@ namespace System.Formats.Cbor.Tests
 
             IEnumerable<CborPropertyTestContext> Shrinker(CborPropertyTestContext input)
             {
-                var nonEmptyArrayInput = NonEmptyArray<CborDocument>.NewNonEmptyArray(input.RootDocuments);
+                var nonEmptyArrayInput = NonEmptyArray<CborDocument>.NewNonEmptyArray(
+                    input.RootDocuments
+                );
 
-                foreach (NonEmptyArray<CborDocument> shrunkDoc in documentArb.Shrinker(nonEmptyArrayInput))
+                foreach (
+                    NonEmptyArray<CborDocument> shrunkDoc in documentArb.Shrinker(
+                        nonEmptyArrayInput
+                    )
+                )
                 {
-                    yield return CborPropertyTestContextHelper.create(input.ConformanceMode, input.ConvertIndefiniteLengthItems, input.RootDocuments);
+                    yield return CborPropertyTestContextHelper.create(
+                        input.ConformanceMode,
+                        input.ConvertIndefiniteLengthItems,
+                        input.RootDocuments
+                    );
                 }
             }
 
@@ -38,11 +50,16 @@ namespace System.Formats.Cbor.Tests
 
         // Do not generate null strings and byte arrays
         public static Arbitrary<string> String() => Arb.Default.String().Filter(s => s is not null);
-        public static Arbitrary<byte[]> ByteArray() => Arb.Default.Array<byte>().Filter(s => s is not null);
+
+        public static Arbitrary<byte[]> ByteArray() =>
+            Arb.Default.Array<byte>().Filter(s => s is not null);
 
         // forgo NaN value generation in order to simplify equality checks
-        public static Arbitrary<float> Single() => Arb.Default.Float32().Filter(s => !float.IsNaN(s));
-        public static Arbitrary<double> Double() => Arb.Default.Float().Filter(s => !double.IsNaN(s));
+        public static Arbitrary<float> Single() =>
+            Arb.Default.Float32().Filter(s => !float.IsNaN(s));
+
+        public static Arbitrary<double> Double() =>
+            Arb.Default.Float().Filter(s => !double.IsNaN(s));
 
         // FsCheck has no built-in System.Half generator, define one here
         public static Arbitrary<Half> Half()

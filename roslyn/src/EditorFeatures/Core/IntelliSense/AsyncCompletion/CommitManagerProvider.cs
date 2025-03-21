@@ -23,21 +23,31 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         IThreadingContext threadingContext,
         RecentItemsManager recentItemsManager,
         IGlobalOptionService globalOptions,
-        [Import(AllowDefault = true)] ILanguageServerSnippetExpander? languageServerSnippetExpander) : IAsyncCompletionCommitManagerProvider
+        [Import(AllowDefault = true)] ILanguageServerSnippetExpander? languageServerSnippetExpander
+    ) : IAsyncCompletionCommitManagerProvider
     {
         private readonly IThreadingContext _threadingContext = threadingContext;
         private readonly RecentItemsManager _recentItemsManager = recentItemsManager;
         private readonly IGlobalOptionService _globalOptions = globalOptions;
-        private readonly ILanguageServerSnippetExpander? _languageServerSnippetExpander = languageServerSnippetExpander;
+        private readonly ILanguageServerSnippetExpander? _languageServerSnippetExpander =
+            languageServerSnippetExpander;
 
-        IAsyncCompletionCommitManager? IAsyncCompletionCommitManagerProvider.GetOrCreate(ITextView textView)
+        IAsyncCompletionCommitManager? IAsyncCompletionCommitManagerProvider.GetOrCreate(
+            ITextView textView
+        )
         {
             if (textView.IsInLspEditorContext())
             {
                 return null;
             }
 
-            return new CommitManager(textView, _recentItemsManager, _globalOptions, _threadingContext, _languageServerSnippetExpander);
+            return new CommitManager(
+                textView,
+                _recentItemsManager,
+                _globalOptions,
+                _threadingContext,
+                _languageServerSnippetExpander
+            );
         }
     }
 }

@@ -65,7 +65,6 @@ namespace System.Xml
     // MB32(x:x>=0x80)   => byte(0x80 | (x & 0x7F)) MB32(x >> 7)
     // MB32(x:x<0x80)    => byte(x)
 
-
     // In order to help differentiate text from binary (where someone mixes up format and implementation) we overlay binary
     // nodes that are illegal to start a document with text characters that are legal to start a document.  Specifically these values are:
     // ' ' = 32
@@ -206,7 +205,7 @@ namespace System.Xml
 
         // MinorVersion = MaxElement + 1, // Reserved (Not supported)
 
-        MinText = 0x80, // Must be even 
+        MinText = 0x80, // Must be even
         ZeroText = MinText,
         OneText = MinText + 1 * 2,
         FalseText = MinText + 2 * 2,
@@ -270,6 +269,6 @@ namespace System.Xml
         UnicodeChars16TextWithEndElement = UnicodeChars16Text + 1,
         UnicodeChars32TextWithEndElement = UnicodeChars32Text + 1,
         QNameDictionaryTextWithEndElement = QNameDictionaryText + 1,
-        MaxText = QNameDictionaryTextWithEndElement
+        MaxText = QNameDictionaryTextWithEndElement,
     }
 }

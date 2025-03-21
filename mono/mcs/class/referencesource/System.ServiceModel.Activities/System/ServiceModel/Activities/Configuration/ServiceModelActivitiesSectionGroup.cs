@@ -11,7 +11,11 @@ namespace System.ServiceModel.Activities.Configuration
     {
         public WorkflowHostingOptionsSection WorkflowHostingOptionsSection
         {
-            get { return (WorkflowHostingOptionsSection)this.Sections[ConfigurationStrings.WorkflowHostingOptionsSectionName]; }
+            get
+            {
+                return (WorkflowHostingOptionsSection)
+                    this.Sections[ConfigurationStrings.WorkflowHostingOptionsSectionName];
+            }
         }
 
         public static ServiceModelActivitiesSectionGroup GetSectionGroup(Configuration config)
@@ -21,7 +25,8 @@ namespace System.ServiceModel.Activities.Configuration
                 throw FxTrace.Exception.ArgumentNull("config");
             }
 
-            return (ServiceModelActivitiesSectionGroup)config.SectionGroups[ConfigurationStrings.SectionGroupName];
+            return (ServiceModelActivitiesSectionGroup)
+                config.SectionGroups[ConfigurationStrings.SectionGroupName];
         }
     }
 }

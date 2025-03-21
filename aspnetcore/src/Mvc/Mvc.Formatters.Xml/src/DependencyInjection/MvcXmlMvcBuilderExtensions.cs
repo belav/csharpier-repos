@@ -20,7 +20,8 @@ public static class MvcXmlMvcBuilderExtensions
     /// <param name="setupAction">The <see cref="MvcXmlOptions"/> which need to be configured.</param>
     public static IMvcBuilder AddXmlOptions(
         this IMvcBuilder builder,
-        Action<MvcXmlOptions> setupAction)
+        Action<MvcXmlOptions> setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(setupAction);
@@ -50,7 +51,8 @@ public static class MvcXmlMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddXmlDataContractSerializerFormatters(
         this IMvcBuilder builder,
-        Action<MvcXmlOptions> setupAction)
+        Action<MvcXmlOptions> setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(setupAction);
@@ -81,7 +83,8 @@ public static class MvcXmlMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddXmlSerializerFormatters(
         this IMvcBuilder builder,
-        Action<MvcXmlOptions> setupAction)
+        Action<MvcXmlOptions> setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
@@ -94,13 +97,21 @@ public static class MvcXmlMvcBuilderExtensions
     internal static void AddXmlDataContractSerializerFormatterServices(IServiceCollection services)
     {
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, XmlDataContractSerializerMvcOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<MvcOptions>,
+                XmlDataContractSerializerMvcOptionsSetup
+            >()
+        );
     }
 
     // Internal for testing.
     internal static void AddXmlSerializerFormatterServices(IServiceCollection services)
     {
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<MvcOptions>, XmlSerializerMvcOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<MvcOptions>,
+                XmlSerializerMvcOptionsSetup
+            >()
+        );
     }
 }

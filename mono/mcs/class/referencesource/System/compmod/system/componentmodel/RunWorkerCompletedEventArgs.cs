@@ -4,7 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel 
+namespace System.ComponentModel
 {
     using System.Security.Permissions;
 
@@ -13,14 +13,12 @@ namespace System.ComponentModel
     {
         private object result;
 
-        public RunWorkerCompletedEventArgs(object result, 
-                                           Exception error,
-                                           bool cancelled)
+        public RunWorkerCompletedEventArgs(object result, Exception error, bool cancelled)
             : base(error, cancelled, null)
         {
             this.result = result;
         }
-        
+
         public object Result
         {
             get
@@ -29,16 +27,12 @@ namespace System.ComponentModel
                 return result;
             }
         }
-        
+
         // Hide from editor, since never used.
-        [ Browsable(false), EditorBrowsable(EditorBrowsableState.Never) ]
+        [Browsable(false), EditorBrowsable(EditorBrowsableState.Never)]
         public new object UserState
         {
-            get
-            {
-                return base.UserState;
-            }
+            get { return base.UserState; }
         }
     }
 }
-

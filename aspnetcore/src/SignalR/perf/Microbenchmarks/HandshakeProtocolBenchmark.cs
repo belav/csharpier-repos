@@ -27,18 +27,37 @@ public class HandshakeProtocolBenchmark
     [GlobalSetup]
     public void GlobalSetup()
     {
-        _requestMessage1 = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("{\"protocol\":\"dummy\",\"version\":1}\u001e"));
-        _requestMessage2 = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("{\"protocol\":\"\",\"version\":10}\u001e"));
-        _requestMessage3 = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("{\"protocol\":\"\",\"version\":10,\"unknown\":null}\u001e"));
+        _requestMessage1 = new ReadOnlySequence<byte>(
+            Encoding.UTF8.GetBytes("{\"protocol\":\"dummy\",\"version\":1}\u001e")
+        );
+        _requestMessage2 = new ReadOnlySequence<byte>(
+            Encoding.UTF8.GetBytes("{\"protocol\":\"\",\"version\":10}\u001e")
+        );
+        _requestMessage3 = new ReadOnlySequence<byte>(
+            Encoding.UTF8.GetBytes("{\"protocol\":\"\",\"version\":10,\"unknown\":null}\u001e")
+        );
         _requestMessage4 = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("42"));
-        _requestMessage5 = ReadOnlySequenceFactory.CreateSegments(Encoding.UTF8.GetBytes("{\"protocol\":\"dummy\",\"ver"), Encoding.UTF8.GetBytes("sion\":1}\u001e"));
+        _requestMessage5 = ReadOnlySequenceFactory.CreateSegments(
+            Encoding.UTF8.GetBytes("{\"protocol\":\"dummy\",\"ver"),
+            Encoding.UTF8.GetBytes("sion\":1}\u001e")
+        );
 
-        _responseMessage1 = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("{\"error\":\"dummy\"}\u001e"));
-        _responseMessage2 = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("{\"error\":\"\"}\u001e"));
+        _responseMessage1 = new ReadOnlySequence<byte>(
+            Encoding.UTF8.GetBytes("{\"error\":\"dummy\"}\u001e")
+        );
+        _responseMessage2 = new ReadOnlySequence<byte>(
+            Encoding.UTF8.GetBytes("{\"error\":\"\"}\u001e")
+        );
         _responseMessage3 = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("{}\u001e"));
-        _responseMessage4 = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("{\"unknown\":null}\u001e"));
-        _responseMessage5 = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("{\"error\":\"\",\"minorVersion\":34}\u001e"));
-        _responseMessage6 = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes("{\"error\":\"flump flump flump\",\"minorVersion\":112}\u001e"));
+        _responseMessage4 = new ReadOnlySequence<byte>(
+            Encoding.UTF8.GetBytes("{\"unknown\":null}\u001e")
+        );
+        _responseMessage5 = new ReadOnlySequence<byte>(
+            Encoding.UTF8.GetBytes("{\"error\":\"\",\"minorVersion\":34}\u001e")
+        );
+        _responseMessage6 = new ReadOnlySequence<byte>(
+            Encoding.UTF8.GetBytes("{\"error\":\"flump flump flump\",\"minorVersion\":112}\u001e")
+        );
     }
 
     [Benchmark]
@@ -62,7 +81,10 @@ public class HandshakeProtocolBenchmark
         var memoryBufferWriter = MemoryBufferWriter.Get();
         try
         {
-            HandshakeProtocol.WriteResponseMessage(HandshakeResponseMessage.Empty, memoryBufferWriter);
+            HandshakeProtocol.WriteResponseMessage(
+                HandshakeResponseMessage.Empty,
+                memoryBufferWriter
+            );
             result = memoryBufferWriter.ToArray();
         }
         finally
@@ -77,7 +99,10 @@ public class HandshakeProtocolBenchmark
         var memoryBufferWriter = MemoryBufferWriter.Get();
         try
         {
-            HandshakeProtocol.WriteRequestMessage(new HandshakeRequestMessage("json", 1), memoryBufferWriter);
+            HandshakeProtocol.WriteRequestMessage(
+                new HandshakeRequestMessage("json", 1),
+                memoryBufferWriter
+            );
         }
         finally
         {

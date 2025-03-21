@@ -13,9 +13,21 @@ namespace System.Net.Http
     /// overlap with the current extend of the selected resource. The current extend of the resource
     /// is indicated in the ContentRange property.
     /// </summary>
-    [SuppressMessage("Microsoft.Usage", "CA2237:MarkISerializableTypesWithSerializable", Justification = "Exception is not intended to be serialized.")]
-    [SuppressMessage("Microsoft.Usage", "CA2240:ImplementISerializableCorrectly", Justification = "Exception is not intended to be serialized.")]
-    [SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors", Justification = "The ContentRange is a required parameter.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2237:MarkISerializableTypesWithSerializable",
+        Justification = "Exception is not intended to be serialized."
+    )]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2240:ImplementISerializableCorrectly",
+        Justification = "Exception is not intended to be serialized."
+    )]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1032:ImplementStandardExceptionConstructors",
+        Justification = "The ContentRange is a required parameter."
+    )]
     public class InvalidByteRangeException : Exception
     {
         public InvalidByteRangeException(ContentRangeHeaderValue contentRange)
@@ -29,14 +41,22 @@ namespace System.Net.Http
             Initialize(contentRange);
         }
 
-        public InvalidByteRangeException(ContentRangeHeaderValue contentRange, string message, Exception innerException)
+        public InvalidByteRangeException(
+            ContentRangeHeaderValue contentRange,
+            string message,
+            Exception innerException
+        )
             : base(message, innerException)
         {
             Initialize(contentRange);
         }
 
 #if !NETSTANDARD1_3 // Exception is not serializable in netstandard1.3.
-        public InvalidByteRangeException(ContentRangeHeaderValue contentRange, SerializationInfo info, StreamingContext context)
+        public InvalidByteRangeException(
+            ContentRangeHeaderValue contentRange,
+            SerializationInfo info,
+            StreamingContext context
+        )
             : base(info, context)
         {
             Initialize(contentRange);

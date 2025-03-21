@@ -21,5 +21,5 @@ public enum TagMode
     /// <summary>
     /// Only a start tag.
     /// </summary>
-    StartTagOnly
+    StartTagOnly,
 }

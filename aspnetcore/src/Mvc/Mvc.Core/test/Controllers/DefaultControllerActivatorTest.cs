@@ -22,19 +22,15 @@ public class DefaultControllerActivatorTest
         var activator = new DefaultControllerActivator(new TypeActivatorCache());
         var serviceProvider = new Mock<IServiceProvider>(MockBehavior.Strict);
 
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = serviceProvider.Object
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = serviceProvider.Object };
 
         var context = new ControllerContext(
             new ActionContext(
                 httpContext,
                 new RouteData(),
-                new ControllerActionDescriptor
-                {
-                    ControllerTypeInfo = type.GetTypeInfo()
-                }));
+                new ControllerActionDescriptor { ControllerTypeInfo = type.GetTypeInfo() }
+            )
+        );
 
         // Act
         var instance = activator.Create(context);
@@ -118,14 +114,12 @@ public class DefaultControllerActivatorTest
         var activator = new DefaultControllerActivator(new TypeActivatorCache());
         var serviceProvider = new Mock<IServiceProvider>(MockBehavior.Strict);
         var testService = new TestService();
-        serviceProvider.Setup(s => s.GetService(typeof(TestService)))
-                       .Returns(testService)
-                       .Verifiable();
+        serviceProvider
+            .Setup(s => s.GetService(typeof(TestService)))
+            .Returns(testService)
+            .Verifiable();
 
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = serviceProvider.Object
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = serviceProvider.Object };
 
         var context = new ControllerContext(
             new ActionContext(
@@ -133,8 +127,11 @@ public class DefaultControllerActivatorTest
                 new RouteData(),
                 new ControllerActionDescriptor
                 {
-                    ControllerTypeInfo = typeof(TypeDerivingFromControllerWithServices).GetTypeInfo()
-                }));
+                    ControllerTypeInfo =
+                        typeof(TypeDerivingFromControllerWithServices).GetTypeInfo(),
+                }
+            )
+        );
 
         // Act
         var instance = activator.Create(context);
@@ -145,13 +142,9 @@ public class DefaultControllerActivatorTest
         serviceProvider.Verify();
     }
 
-    public class Controller
-    {
-    }
+    public class Controller { }
 
-    private class TypeDerivingFromController : Controller
-    {
-    }
+    private class TypeDerivingFromController : Controller { }
 
     private class TypeDerivingFromControllerWithServices : Controller
     {
@@ -167,25 +160,23 @@ public class DefaultControllerActivatorTest
     {
         var metadataProvider = new EmptyModelMetadataProvider();
         var services = new Mock<IServiceProvider>();
-        services
-            .Setup(s => s.GetService(typeof(IUrlHelper)))
-            .Returns(Mock.Of<IUrlHelper>());
-        services
-            .Setup(s => s.GetService(typeof(IModelMetadataProvider)))
-            .Returns(metadataProvider);
+        services.Setup(s => s.GetService(typeof(IUrlHelper))).Returns(Mock.Of<IUrlHelper>());
+        services.Setup(s => s.GetService(typeof(IModelMetadataProvider))).Returns(metadataProvider);
         services
             .Setup(s => s.GetService(typeof(IObjectModelValidator)))
-            .Returns(new DefaultObjectValidator(metadataProvider, new List<IModelValidatorProvider>(), new MvcOptions()));
+            .Returns(
+                new DefaultObjectValidator(
+                    metadataProvider,
+                    new List<IModelValidatorProvider>(),
+                    new MvcOptions()
+                )
+            );
         return services.Object;
     }
 
-    private class PocoType
-    {
-    }
+    private class PocoType { }
 
-    private class TestService
-    {
-    }
+    private class TestService { }
 
     private class MyController : IDisposable
     {
@@ -201,9 +192,7 @@ public class DefaultControllerActivatorTest
     {
         public bool Disposed { get; set; }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public ValueTask DisposeAsync()
         {

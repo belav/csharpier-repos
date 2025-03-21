@@ -20,9 +20,7 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Initializes an instance of <see cref="Saml2ProxyRestriction"/>.
         /// </summary>
-        public Saml2ProxyRestriction()
-        {
-        }
+        public Saml2ProxyRestriction() { }
 
         /// <summary>
         /// Gets the set of audiences to whom the asserting party permits
@@ -35,23 +33,21 @@ namespace System.IdentityModel.Tokens
 
         /// <summary>
         /// Gets or sets the maximum number of indirections that the asserting party
-        /// permits to exist between this assertion and an assertion which has 
+        /// permits to exist between this assertion and an assertion which has
         /// ultimately been issued on the basis of it.
         /// </summary>
         public int? Count
         {
-            get
-            { 
-                return this.count; 
-            }
-
+            get { return this.count; }
             set
             {
                 if (null != value)
                 {
                     if (value.Value < 0)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.ID0002)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("value", SR.GetString(SR.ID0002))
+                        );
                     }
                 }
 

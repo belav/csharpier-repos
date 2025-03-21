@@ -7,17 +7,9 @@ using Xunit;
 
 interface IGen<T>
 {
-    T Property
-    {
-        get;
-        set;
-    }
+    T Property { get; set; }
 
-    T this[int i]
-    {
-        get;
-        set;
-    }
+    T this[int i] { get; set; }
 
     T Method(T t);
 
@@ -56,7 +48,6 @@ class GenInt : IGen<int>
     {
         return t;
     }
-
 }
 
 class GenString : IGen<string>
@@ -91,7 +82,6 @@ class GenString : IGen<string>
     {
         return t;
     }
-
 }
 
 public class Test_interface_class02
@@ -166,6 +156,5 @@ public class Test_interface_class02
         }
 
         return ret;
-
     }
 }

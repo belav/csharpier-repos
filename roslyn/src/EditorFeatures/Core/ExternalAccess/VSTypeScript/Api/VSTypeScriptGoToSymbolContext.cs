@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     {
         internal DefinitionItem? DefinitionItem;
 
-        internal VSTypeScriptGoToSymbolContext(Document document, int position, CancellationToken cancellationToken)
+        internal VSTypeScriptGoToSymbolContext(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             Document = document;
             Position = position;

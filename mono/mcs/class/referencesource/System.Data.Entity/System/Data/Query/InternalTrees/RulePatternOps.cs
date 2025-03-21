@@ -15,7 +15,7 @@ using System.Globalization;
 namespace System.Data.Query.InternalTrees
 {
     /// <summary>
-    /// LeafOp - matches any subtree 
+    /// LeafOp - matches any subtree
     /// </summary>
     internal sealed class LeafOp : RulePatternOp
     {
@@ -28,13 +28,17 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// 0 children
         /// </summary>
-        internal override int Arity { get { return 0; } }
+        internal override int Arity
+        {
+            get { return 0; }
+        }
 
         #region constructors
         /// <summary>
         /// Niladic constructor
         /// </summary>
-        private LeafOp() : base(OpType.Leaf) { }
+        private LeafOp()
+            : base(OpType.Leaf) { }
         #endregion
     }
 }

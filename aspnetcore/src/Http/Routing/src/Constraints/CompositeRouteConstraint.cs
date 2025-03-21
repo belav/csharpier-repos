@@ -41,10 +41,10 @@ internal class CompositeRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);
@@ -70,7 +70,10 @@ internal class CompositeRouteConstraint : IRouteConstraint
     {
         foreach (var constraint in Constraints)
         {
-            if (constraint is IParameterLiteralNodeMatchingPolicy literalConstraint && !literalConstraint.MatchesLiteral(parameterName, literal))
+            if (
+                constraint is IParameterLiteralNodeMatchingPolicy literalConstraint
+                && !literalConstraint.MatchesLiteral(parameterName, literal)
+            )
             {
                 return false;
             }

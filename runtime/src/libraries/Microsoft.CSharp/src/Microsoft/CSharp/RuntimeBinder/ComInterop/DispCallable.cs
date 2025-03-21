@@ -38,7 +38,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
 
         public override bool Equals(object obj)
         {
-            return obj is DispCallable other && other.DispatchComObject == DispatchComObject && other.DispId == DispId;
+            return obj is DispCallable other
+                && other.DispatchComObject == DispatchComObject
+                && other.DispId == DispId;
         }
 
         public override int GetHashCode()

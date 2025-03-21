@@ -11,7 +11,7 @@ namespace System.ConfigurationTests
         private readonly SettingsContext _testContext = new SettingsContext
         {
             ["GroupName"] = "GroupNameFoo",
-            ["SettingsKey"] = "SettingsKeyFoo"
+            ["SettingsKey"] = "SettingsKeyFoo",
         };
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/29429")]
@@ -19,12 +19,16 @@ namespace System.ConfigurationTests
         public void GetPropertyValues_NotStoredProperty_ValueEqualsNull()
         {
             var property = new SettingsProperty("PropertyName");
-            property.Attributes.Add(typeof(UserScopedSettingAttribute), new UserScopedSettingAttribute());
+            property.Attributes.Add(
+                typeof(UserScopedSettingAttribute),
+                new UserScopedSettingAttribute()
+            );
             var properties = new SettingsPropertyCollection();
             properties.Add(property);
             var localFileSettingsProvider = new LocalFileSettingsProvider();
 
-            SettingsPropertyValueCollection propertyValues = localFileSettingsProvider.GetPropertyValues(_testContext, properties);
+            SettingsPropertyValueCollection propertyValues =
+                localFileSettingsProvider.GetPropertyValues(_testContext, properties);
 
             Assert.Equal(1, propertyValues.Count);
             Assert.Null(propertyValues["PropertyName"].PropertyValue);
@@ -35,14 +39,21 @@ namespace System.ConfigurationTests
         public void GetPropertyValues_NotStoredConnectionStringProperty_ValueEqualsEmptyString()
         {
             var property = new SettingsProperty("PropertyName");
-            property.PropertyType = typeof (string);
-            property.Attributes.Add(typeof(ApplicationScopedSettingAttribute), new ApplicationScopedSettingAttribute());
-            property.Attributes.Add(typeof(SpecialSettingAttribute), new SpecialSettingAttribute(SpecialSetting.ConnectionString));
+            property.PropertyType = typeof(string);
+            property.Attributes.Add(
+                typeof(ApplicationScopedSettingAttribute),
+                new ApplicationScopedSettingAttribute()
+            );
+            property.Attributes.Add(
+                typeof(SpecialSettingAttribute),
+                new SpecialSettingAttribute(SpecialSetting.ConnectionString)
+            );
             var properties = new SettingsPropertyCollection();
             properties.Add(property);
             var localFileSettingsProvider = new LocalFileSettingsProvider();
 
-            SettingsPropertyValueCollection propertyValues = localFileSettingsProvider.GetPropertyValues(_testContext, properties);
+            SettingsPropertyValueCollection propertyValues =
+                localFileSettingsProvider.GetPropertyValues(_testContext, properties);
 
             Assert.Equal(1, propertyValues.Count);
             Assert.Equal(string.Empty, propertyValues["PropertyName"].PropertyValue);

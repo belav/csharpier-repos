@@ -29,7 +29,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new AreaRegistrationContext("", new RouteCollection()); }, "areaName");
+                delegate
+                {
+                    new AreaRegistrationContext("", new RouteCollection());
+                },
+                "areaName"
+            );
         }
 
         [Fact]
@@ -37,7 +42,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNullOrEmpty(
-                delegate { new AreaRegistrationContext(null, new RouteCollection()); }, "areaName");
+                delegate
+                {
+                    new AreaRegistrationContext(null, new RouteCollection());
+                },
+                "areaName"
+            );
         }
 
         [Fact]
@@ -45,7 +55,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new AreaRegistrationContext("the_area", null); }, "routes");
+                delegate
+                {
+                    new AreaRegistrationContext("the_area", null);
+                },
+                "routes"
+            );
         }
 
         [Fact]
@@ -128,7 +143,10 @@ namespace System.Web.Mvc.Test
             Assert.Equal((object)true, route.DataTokens["UseNamespaceFallback"]);
         }
 
-        private static void ReplaceCollectionContents(ICollection<string> collectionToReplace, IEnumerable<string> newContents)
+        private static void ReplaceCollectionContents(
+            ICollection<string> collectionToReplace,
+            IEnumerable<string> newContents
+        )
         {
             collectionToReplace.Clear();
             foreach (string item in newContents)

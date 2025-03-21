@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using R2RTest;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -11,6 +10,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+using R2RTest;
 
 /// <summary>
 /// A set of helper to manipulate paths into a canonicalized form to ensure user-provided paths
@@ -29,14 +29,21 @@ static class PathExtensions
     /// </summary>
     const int DirectoryDeletionBackoffMilliseconds = 500;
 
-    internal static string AppendOSExeSuffix(this string path) => (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? path + ".exe" : path);
+    internal static string AppendOSExeSuffix(this string path) =>
+        (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? path + ".exe" : path);
 
-    internal static string AppendOSDllSuffix(this string path) => path +
-        (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".dll" : RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? ".dylib" : ".so");
+    internal static string AppendOSDllSuffix(this string path) =>
+        path
+        + (
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? ".dll"
+            : RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ? ".dylib"
+            : ".so"
+        );
 
     internal static string ToAbsolutePath(this string argValue) => Path.GetFullPath(argValue);
 
-    internal static string ToAbsoluteDirectoryPath(this string argValue) => argValue.ToAbsolutePath().StripTrailingDirectorySeparators();
+    internal static string ToAbsoluteDirectoryPath(this string argValue) =>
+        argValue.ToAbsolutePath().StripTrailingDirectorySeparators();
 
     internal static string StripTrailingDirectorySeparators(this string str)
     {
@@ -59,7 +66,8 @@ static class PathExtensions
     }
 
     // TODO: this assumes we're running tests from the root
-    internal static string DotNetAppPath => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dotnet" : "Tools/dotnetcli/dotnet";
+    internal static string DotNetAppPath =>
+        RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dotnet" : "Tools/dotnetcli/dotnet";
 
     internal static void RecreateDirectory(this string path)
     {
@@ -161,10 +169,10 @@ static class PathExtensions
 
     private static async Task<bool> DeleteSubtree(this string folder)
     {
-        Task<bool>[] subtasks = new []
+        Task<bool>[] subtasks = new[]
         {
             DeleteSubtreesAsync(Directory.GetDirectories(folder)),
-            DeleteFiles(Directory.GetFiles(folder))
+            DeleteFiles(Directory.GetFiles(folder)),
         };
 
         await Task<bool>.WhenAll(subtasks);
@@ -186,7 +194,11 @@ static class PathExtensions
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine("Folder deletion failure, maybe transient ({0} msecs): '{1}'", folderDeletion.ElapsedMilliseconds, folder);
+                    Console.WriteLine(
+                        "Folder deletion failure, maybe transient ({0} msecs): '{1}'",
+                        folderDeletion.ElapsedMilliseconds,
+                        folder
+                    );
                 }
 
                 if (!Directory.Exists(folder))
@@ -234,16 +246,30 @@ static class PathExtensions
         }
     }
 
-    public static string[] LocateOutputFolders(string folder, string coreRootFolder, IEnumerable<CompilerRunner> runners, bool recursive)
+    public static string[] LocateOutputFolders(
+        string folder,
+        string coreRootFolder,
+        IEnumerable<CompilerRunner> runners,
+        bool recursive
+    )
     {
         ConcurrentBag<string> directories = new ConcurrentBag<string>();
         LocateOutputFoldersAsync(folder, coreRootFolder, runners, recursive, directories).Wait();
         return directories.ToArray();
     }
 
-    private static async Task LocateOutputFoldersAsync(string folder, string coreRootFolder, IEnumerable<CompilerRunner> runners, bool recursive, ConcurrentBag<string> directories)
+    private static async Task LocateOutputFoldersAsync(
+        string folder,
+        string coreRootFolder,
+        IEnumerable<CompilerRunner> runners,
+        bool recursive,
+        ConcurrentBag<string> directories
+    )
     {
-        if (coreRootFolder == null || !StringComparer.OrdinalIgnoreCase.Equals(folder, coreRootFolder))
+        if (
+            coreRootFolder == null
+            || !StringComparer.OrdinalIgnoreCase.Equals(folder, coreRootFolder)
+        )
         {
             List<Task> subfolderTasks = new List<Task>();
             foreach (string dir in Directory.EnumerateDirectories(folder))
@@ -260,14 +286,29 @@ static class PathExtensions
                 }
                 else if (recursive)
                 {
-                    subfolderTasks.Add(Task.Run(() => LocateOutputFoldersAsync(dir, coreRootFolder, runners, recursive, directories)));
+                    subfolderTasks.Add(
+                        Task.Run(() =>
+                            LocateOutputFoldersAsync(
+                                dir,
+                                coreRootFolder,
+                                runners,
+                                recursive,
+                                directories
+                            )
+                        )
+                    );
                 }
             }
             await Task.WhenAll(subfolderTasks);
         }
     }
 
-    public static bool DeleteOutputFolders(string folder, string coreRootFolder, IEnumerable<CompilerRunner> runners, bool recursive)
+    public static bool DeleteOutputFolders(
+        string folder,
+        string coreRootFolder,
+        IEnumerable<CompilerRunner> runners,
+        bool recursive
+    )
     {
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
@@ -278,15 +319,26 @@ static class PathExtensions
 
         if (DeleteSubtrees(outputFolders))
         {
-            Console.WriteLine("Successfully deleted {0} output folders in {1} msecs", outputFolders.Length, stopwatch.ElapsedMilliseconds);
+            Console.WriteLine(
+                "Successfully deleted {0} output folders in {1} msecs",
+                outputFolders.Length,
+                stopwatch.ElapsedMilliseconds
+            );
             return true;
         }
         else
         {
-            Console.Error.WriteLine("Failed deleting {0} output folders in {1} msecs", outputFolders.Length, stopwatch.ElapsedMilliseconds);
+            Console.Error.WriteLine(
+                "Failed deleting {0} output folders in {1} msecs",
+                outputFolders.Length,
+                stopwatch.ElapsedMilliseconds
+            );
             return false;
         }
     }
 
-    public static StringComparer OSPathCaseComparer => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
+    public static StringComparer OSPathCaseComparer =>
+        RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            ? StringComparer.OrdinalIgnoreCase
+            : StringComparer.Ordinal;
 }

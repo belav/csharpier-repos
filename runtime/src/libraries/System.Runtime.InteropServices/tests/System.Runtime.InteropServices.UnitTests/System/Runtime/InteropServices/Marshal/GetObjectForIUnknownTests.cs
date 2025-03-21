@@ -25,16 +25,28 @@ namespace System.Runtime.InteropServices.Tests
 
             yield return new object[] { new int[] { 10 } };
             yield return new object[] { new int[][] { new int[] { 10 } } };
-            yield return new object[] { new int[,] { { 10 } } };
+            yield return new object[]
+            {
+                new int[,]
+                {
+                    { 10 },
+                },
+            };
 
-            MethodInfo method = typeof(GetObjectForIUnknownTests).GetMethod(nameof(NonGenericMethod), BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo method = typeof(GetObjectForIUnknownTests).GetMethod(
+                nameof(NonGenericMethod),
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             Delegate d = method.CreateDelegate(typeof(NonGenericDelegate));
             yield return new object[] { d };
 
             yield return new object[] { new KeyValuePair<string, int>("key", 10) };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltInComEnabled)
+        )]
         [MemberData(nameof(GetObjectForIUnknown_Valid_TestData))]
         public void GetObjectForIUnknown_ValidPointer_ReturnsExpected(object o)
         {
@@ -54,18 +66,28 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void GetObjectForIUnknown_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetObjectForIUnknown(IntPtr.Zero));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.GetObjectForIUnknown(IntPtr.Zero)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public void GetObjectForIUnknown_NullPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("pUnk", () => Marshal.GetObjectForIUnknown(IntPtr.Zero));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pUnk",
+                () => Marshal.GetObjectForIUnknown(IntPtr.Zero)
+            );
         }
 
         private static void NonGenericMethod(int i) { }
+
         public delegate void NonGenericDelegate(int i);
 
-        public enum Int32Enum : int { Value1, Value2 }
+        public enum Int32Enum : int
+        {
+            Value1,
+            Value2,
+        }
     }
 }

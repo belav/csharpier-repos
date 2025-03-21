@@ -53,30 +53,31 @@ namespace System.IdentityModel
     // #define ASC_REQ_HTTP                    0x10000000
 
     [Flags]
-    internal enum SspiContextFlags 
+    internal enum SspiContextFlags
     {
-        Zero            = 0,
-        Delegate        = 0x00000001,
-        MutualAuth      = 0x00000002,
-        ReplayDetect    = 0x00000004,
-        SequenceDetect  = 0x00000008,
+        Zero = 0,
+        Delegate = 0x00000001,
+        MutualAuth = 0x00000002,
+        ReplayDetect = 0x00000004,
+        SequenceDetect = 0x00000008,
         Confidentiality = 0x00000010,
-        UseSessionKey   = 0x00000020,
-        AllocateMemory  = 0x00000100,
-        InitStream      = 0x00008000,
-        AcceptStream    = 0x00010000,
+        UseSessionKey = 0x00000020,
+        AllocateMemory = 0x00000100,
+        InitStream = 0x00008000,
+        AcceptStream = 0x00010000,
+
         // Client applications requiring extended error messages specify the
         // ISC_REQ_EXTENDED_ERROR flag when calling the InitializeSecurityContext
         // Server applications requiring extended error messages set
         // the ASC_REQ_EXTENDED_ERROR flag when calling AcceptSecurityContext.
-        InitExtendedError    = 0x00004000,
-        AcceptExtendedError  = 0x00008000,
-        InitIdentify                = 0x00020000, // ISC_REQ_IDENTIFY
-        AcceptIdentify              = 0x00080000, // ASC_REQ_IDENTIFY
-        InitManualCredValidation    = 0x00080000, // ISC_REQ_MANUAL_CRED_VALIDATION
-        InitAnonymous               = 0x00040000, // ISC_REQ_NULL_SESSION
-        AcceptAnonymous             = 0x00100000,    // ASC_REQ_ALLOW_NULL_SESSION
-        ChannelBindingProxyBindings               = 0x04000000,   // ASC_REQ_PROXY_BINDINGS
-        ChannelBindingAllowMissingBindings        = 0x10000000    // ASC_REQ_ALLOW_MISSING_BINDINGS
+        InitExtendedError = 0x00004000,
+        AcceptExtendedError = 0x00008000,
+        InitIdentify = 0x00020000, // ISC_REQ_IDENTIFY
+        AcceptIdentify = 0x00080000, // ASC_REQ_IDENTIFY
+        InitManualCredValidation = 0x00080000, // ISC_REQ_MANUAL_CRED_VALIDATION
+        InitAnonymous = 0x00040000, // ISC_REQ_NULL_SESSION
+        AcceptAnonymous = 0x00100000, // ASC_REQ_ALLOW_NULL_SESSION
+        ChannelBindingProxyBindings = 0x04000000, // ASC_REQ_PROXY_BINDINGS
+        ChannelBindingAllowMissingBindings = 0x10000000, // ASC_REQ_ALLOW_MISSING_BINDINGS
     }
 }

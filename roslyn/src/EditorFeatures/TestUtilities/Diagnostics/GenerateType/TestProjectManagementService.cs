@@ -19,17 +19,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics.GenerateType
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestProjectManagementService()
-        {
-        }
+        public TestProjectManagementService() { }
 
-        public IList<string> GetFolders(ProjectId projectId, Workspace workspace)
-            => null;
+        public IList<string> GetFolders(ProjectId projectId, Workspace workspace) => null;
 
-        public string GetDefaultNamespace(Project project, Workspace workspace)
-            => _defaultNamespace;
+        public string GetDefaultNamespace(Project project, Workspace workspace) =>
+            _defaultNamespace;
 
-        public void SetDefaultNamespace(string defaultNamespace)
-            => _defaultNamespace = defaultNamespace;
+        public void SetDefaultNamespace(string defaultNamespace) =>
+            _defaultNamespace = defaultNamespace;
     }
 }

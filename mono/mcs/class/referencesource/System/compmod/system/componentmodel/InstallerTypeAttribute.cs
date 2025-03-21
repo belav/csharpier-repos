@@ -1,16 +1,22 @@
 //------------------------------------------------------------------------------
 // <copyright file="InstallerTypeAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
 
 // SECREVIEW: Remove this attribute once bug#411889 is fixed.
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2113:SecureLateBindingMethods", Scope="member", Target="System.ComponentModel.InstallerTypeAttribute.get_InstallerType():System.Type")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage(
+    "Microsoft.Security",
+    "CA2113:SecureLateBindingMethods",
+    Scope = "member",
+    Target = "System.ComponentModel.InstallerTypeAttribute.get_InstallerType():System.Type"
+)]
 
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System.Diagnostics;
     using System.Security.Permissions;
 
@@ -19,20 +25,23 @@ namespace System.ComponentModel {
     ///       to use for a type to install components.</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.Class)]
-    public class InstallerTypeAttribute : Attribute {
+    public class InstallerTypeAttribute : Attribute
+    {
         string _typeName;
 
         /// <devdoc>
         /// <para>Initializes a new instance of the System.Windows.Forms.ComponentModel.InstallerTypeAttribute class.</para>
         /// </devdoc>
-        public InstallerTypeAttribute(Type installerType) {
+        public InstallerTypeAttribute(Type installerType)
+        {
             _typeName = installerType.AssemblyQualifiedName;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public InstallerTypeAttribute(string typeName) {
+        public InstallerTypeAttribute(string typeName)
+        {
             _typeName = typeName;
         }
 
@@ -40,14 +49,15 @@ namespace System.ComponentModel {
         ///    <para> Gets the
         ///       type of installer associated with this attribute.</para>
         /// </devdoc>
-        public virtual Type InstallerType {
-            get {
-                return Type.GetType(_typeName);
-            }
+        public virtual Type InstallerType
+        {
+            get { return Type.GetType(_typeName); }
         }
 
-        public override bool Equals(object obj) {
-            if (obj == this) {
+        public override bool Equals(object obj)
+        {
+            if (obj == this)
+            {
                 return true;
             }
 
@@ -56,7 +66,8 @@ namespace System.ComponentModel {
             return (other != null) && other._typeName == _typeName;
         }
 
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return base.GetHashCode();
         }
     }

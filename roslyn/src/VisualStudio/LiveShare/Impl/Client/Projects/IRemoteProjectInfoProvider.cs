@@ -13,6 +13,8 @@ namespace Microsoft.VisualStudio.LanguageServices.LiveShare.Client.Projects
 {
     internal interface IRemoteProjectInfoProvider
     {
-        Task<ImmutableArray<ProjectInfo>> GetRemoteProjectInfosAsync(CancellationToken cancellationToken);
+        Task<ImmutableArray<ProjectInfo>> GetRemoteProjectInfosAsync(
+            CancellationToken cancellationToken
+        );
     }
 }

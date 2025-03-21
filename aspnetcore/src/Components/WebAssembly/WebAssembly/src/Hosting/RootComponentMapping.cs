@@ -17,7 +17,10 @@ public readonly struct RootComponentMapping
     /// </summary>
     /// <param name="componentType">The component type. Must implement <see cref="IComponent"/>.</param>
     /// <param name="selector">The DOM element selector or component registration id for the component.</param>
-    public RootComponentMapping([DynamicallyAccessedMembers(Component)] Type componentType, string selector)
+    public RootComponentMapping(
+        [DynamicallyAccessedMembers(Component)] Type componentType,
+        string selector
+    )
     {
         ArgumentNullException.ThrowIfNull(componentType);
 
@@ -25,7 +28,8 @@ public readonly struct RootComponentMapping
         {
             throw new ArgumentException(
                 $"The type '{componentType.Name}' must implement {nameof(IComponent)} to be used as a root component.",
-                nameof(componentType));
+                nameof(componentType)
+            );
         }
 
         ArgumentNullException.ThrowIfNull(selector);
@@ -42,7 +46,12 @@ public readonly struct RootComponentMapping
     /// <param name="componentType">The component type. Must implement <see cref="IComponent"/>.</param>
     /// <param name="selector">The DOM element selector or registration id for the component.</param>
     /// <param name="parameters">The parameters to pass to the component.</param>
-    public RootComponentMapping([DynamicallyAccessedMembers(Component)] Type componentType, string selector, ParameterView parameters) : this(componentType, selector)
+    public RootComponentMapping(
+        [DynamicallyAccessedMembers(Component)] Type componentType,
+        string selector,
+        ParameterView parameters
+    )
+        : this(componentType, selector)
     {
         Parameters = parameters;
     }

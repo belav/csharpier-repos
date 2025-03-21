@@ -10,14 +10,14 @@ namespace CoreXml.Test.XLinq
 {
     public partial class XNodeReaderFunctionalTests : TestModule
     {
-
         public partial class XNodeReaderTests : XLinqTestCase
         {
             //[TestCase(Name = "ReadToNextSibling", Desc = "ReadToNextSibling")]
             public partial class TCReadToNextSibling : BridgeHelpers
             {
                 #region XMLSTR
-                private string _xmlStr = @"<?xml version='1.0'?>
+                private string _xmlStr =
+                    @"<?xml version='1.0'?>
 													<root><!--Comment-->
 														<elem>
 															<child1 att='1'>
@@ -97,14 +97,19 @@ namespace CoreXml.Test.XLinq
 
                             if (DataReader.HasAttributes)
                             {
-                                TestLog.Compare(DataReader.GetAttribute("att"), "1", "Not the expected attribute");
+                                TestLog.Compare(
+                                    DataReader.GetAttribute("att"),
+                                    "1",
+                                    "Not the expected attribute"
+                                );
                             }
                             else
                             {
                                 TestLog.WriteLine("Positioned on wrong element");
                                 throw new TestException(TestResult.Failed, "");
                             }
-                            while (DataReader.Read()) ;
+                            while (DataReader.Read())
+                                ;
                             DataReader.Dispose();
                             return;
 
@@ -124,7 +129,8 @@ namespace CoreXml.Test.XLinq
                                 TestLog.WriteLine("Positioned on wrong element");
                                 throw new TestException(TestResult.Failed, "");
                             }
-                            while (DataReader.Read()) ;
+                            while (DataReader.Read())
+                                ;
                             DataReader.Dispose();
                             return;
 
@@ -146,7 +152,8 @@ namespace CoreXml.Test.XLinq
                                 throw new TestException(TestResult.Failed, "");
                             }
 
-                            while (DataReader.Read()) ;
+                            while (DataReader.Read())
+                                ;
                             DataReader.Dispose();
                             return;
                         default:
@@ -172,14 +179,27 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(new StringReader(mnw.GetNodes()));
                     PositionOnElement(DataReader, "ELEMENT_1");
 
-                    TestLog.Compare(DataReader.ReadToDescendant("a"), true, "Couldn't go to Descendant");
+                    TestLog.Compare(
+                        DataReader.ReadToDescendant("a"),
+                        true,
+                        "Couldn't go to Descendant"
+                    );
                     int depth = DataReader.Depth;
-                    TestLog.Compare(DataReader.ReadToNextSibling("b"), true, "Couldn't go to NextSibling");
+                    TestLog.Compare(
+                        DataReader.ReadToNextSibling("b"),
+                        true,
+                        "Couldn't go to NextSibling"
+                    );
 
                     TestLog.Compare(DataReader.Depth, depth, "Depth is not correct");
-                    TestLog.Compare(DataReader.NodeType, XmlNodeType.Element, "Nodetype is not correct");
+                    TestLog.Compare(
+                        DataReader.NodeType,
+                        XmlNodeType.Element,
+                        "Nodetype is not correct"
+                    );
 
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Dispose();
                 }
 
@@ -203,7 +223,8 @@ namespace CoreXml.Test.XLinq
                             DataReader.ReadToNextSibling("a");
                             TestLog.Compare(DataReader.GetAttribute("att"), "3", "Wrong node");
 
-                            while (DataReader.Read()) ;
+                            while (DataReader.Read())
+                                ;
                             DataReader.Dispose();
 
                             return;
@@ -214,7 +235,8 @@ namespace CoreXml.Test.XLinq
                             DataReader.ReadToNextSibling("a", "a");
                             TestLog.Compare(DataReader.GetAttribute("att"), "3", "Wrong node");
 
-                            while (DataReader.Read()) ;
+                            while (DataReader.Read())
+                                ;
                             DataReader.Dispose();
 
                             return;
@@ -225,7 +247,8 @@ namespace CoreXml.Test.XLinq
                             DataReader.ReadToNextSibling("a:a");
                             TestLog.Compare(DataReader.GetAttribute("att"), "3", "Wrong node");
 
-                            while (DataReader.Read()) ;
+                            while (DataReader.Read())
+                                ;
                             DataReader.Dispose();
 
                             return;
@@ -242,11 +265,16 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, "elem");
                     int depth = DataReader.Depth;
 
-                    TestLog.Compare(DataReader.ReadToNextSibling("abc"), false, "Reader returned true for an invalid name");
+                    TestLog.Compare(
+                        DataReader.ReadToNextSibling("abc"),
+                        false,
+                        "Reader returned true for an invalid name"
+                    );
                     TestLog.Compare(DataReader.NodeType, XmlNodeType.EndElement, "Wrong node type");
                     TestLog.Compare(DataReader.Depth, depth - 1, "Wrong Depth");
 
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Dispose();
                 }
 
@@ -256,15 +284,28 @@ namespace CoreXml.Test.XLinq
                     XmlReader DataReader = GetReader(new StringReader(_xmlStr));
                     PositionOnElement(DataReader, "child3");
 
-                    TestLog.Compare(DataReader.ReadToNextSibling("child1"), false, "Reader returned true for an invalid name");
+                    TestLog.Compare(
+                        DataReader.ReadToNextSibling("child1"),
+                        false,
+                        "Reader returned true for an invalid name"
+                    );
                     TestLog.Compare(DataReader.NodeType, XmlNodeType.EndElement, "Wrong node type");
 
                     PositionOnElement(DataReader, "child3");
 
-                    TestLog.Compare(DataReader.ReadToNextSibling("child2", "child2"), false, "Reader returned true for an invalid name,ns");
-                    TestLog.Compare(DataReader.NodeType, XmlNodeType.EndElement, "Wrong node type for name,ns");
+                    TestLog.Compare(
+                        DataReader.ReadToNextSibling("child2", "child2"),
+                        false,
+                        "Reader returned true for an invalid name,ns"
+                    );
+                    TestLog.Compare(
+                        DataReader.NodeType,
+                        XmlNodeType.EndElement,
+                        "Wrong node type for name,ns"
+                    );
 
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Dispose();
                 }
 
@@ -275,10 +316,19 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, "root");
 
                     TestLog.Compare(DataReader.ReadToDescendant("elem"), true, "Cant find elem");
-                    TestLog.Compare(DataReader.ReadToNextSibling("elem", "elem"), true, "Cant find elem,elem");
-                    TestLog.Compare(DataReader.ReadToNextSibling("e:elem"), true, "Cant find e:elem");
+                    TestLog.Compare(
+                        DataReader.ReadToNextSibling("elem", "elem"),
+                        true,
+                        "Cant find elem,elem"
+                    );
+                    TestLog.Compare(
+                        DataReader.ReadToNextSibling("e:elem"),
+                        true,
+                        "Cant find e:elem"
+                    );
 
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Dispose();
                 }
 
@@ -291,7 +341,11 @@ namespace CoreXml.Test.XLinq
                     {
                         if (DataReader.NodeType != XmlNodeType.Element)
                         {
-                            TestLog.Compare(DataReader.ReadToNextSibling("abc"), false, "Fails on node");
+                            TestLog.Compare(
+                                DataReader.ReadToNextSibling("abc"),
+                                false,
+                                "Fails on node"
+                            );
                         }
                         else
                         {
@@ -299,7 +353,11 @@ namespace CoreXml.Test.XLinq
                             {
                                 while (DataReader.MoveToNextAttribute())
                                 {
-                                    TestLog.Compare(DataReader.ReadToNextSibling("abc"), false, "Fails on attribute node");
+                                    TestLog.Compare(
+                                        DataReader.ReadToNextSibling("abc"),
+                                        false,
+                                        "Fails on attribute node"
+                                    );
                                 }
                             }
                         }
@@ -317,33 +375,35 @@ namespace CoreXml.Test.XLinq
                     {
                         DataReader.ReadToNextSibling(null);
                     }
-                    catch (ArgumentNullException)
-                    {
-                    }
+                    catch (ArgumentNullException) { }
 
                     try
                     {
                         DataReader.ReadToNextSibling("e", null);
                     }
-                    catch (ArgumentNullException)
-                    {
-                    }
+                    catch (ArgumentNullException) { }
 
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Dispose();
                 }
 
                 //[Variation("Different names, same uri works correctly", Priority = 2)]
                 public void v17()
                 {
-                    XmlReader DataReader = GetReader(new StringReader("<root><child1 xmlns='foo'/>blah<child1 xmlns='bar'>blah</child1></root>"));
+                    XmlReader DataReader = GetReader(
+                        new StringReader(
+                            "<root><child1 xmlns='foo'/>blah<child1 xmlns='bar'>blah</child1></root>"
+                        )
+                    );
                     DataReader.Read();
 
                     DataReader.ReadToDescendant("child1", "foo");
                     DataReader.ReadToNextSibling("child1", "bar");
                     TestLog.Compare(DataReader.IsEmptyElement, false, "Not on the correct node");
 
-                    while (DataReader.Read()) ;
+                    while (DataReader.Read())
+                        ;
                     DataReader.Dispose();
                 }
             }

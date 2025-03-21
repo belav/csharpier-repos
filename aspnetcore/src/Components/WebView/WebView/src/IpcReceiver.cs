@@ -43,28 +43,52 @@ internal sealed class IpcReceiver
             // For any other message, you have to have a page attached already
             if (pageContext == null)
             {
-                throw new InvalidOperationException("Cannot receive IPC messages when no page is attached");
+                throw new InvalidOperationException(
+                    "Cannot receive IPC messages when no page is attached"
+                );
             }
 
             switch (messageType)
             {
                 case IpcCommon.IncomingMessageType.BeginInvokeDotNet:
-                    BeginInvokeDotNet(pageContext, args[0].GetString(), args[1].GetString(), args[2].GetString(), args[3].GetInt64(), args[4].GetString());
+                    BeginInvokeDotNet(
+                        pageContext,
+                        args[0].GetString(),
+                        args[1].GetString(),
+                        args[2].GetString(),
+                        args[3].GetInt64(),
+                        args[4].GetString()
+                    );
                     break;
                 case IpcCommon.IncomingMessageType.EndInvokeJS:
                     EndInvokeJS(pageContext, args[2].GetString());
                     break;
                 case IpcCommon.IncomingMessageType.ReceiveByteArrayFromJS:
-                    ReceiveByteArrayFromJS(pageContext, args[0].GetInt32(), args[1].GetBytesFromBase64());
+                    ReceiveByteArrayFromJS(
+                        pageContext,
+                        args[0].GetInt32(),
+                        args[1].GetBytesFromBase64()
+                    );
                     break;
                 case IpcCommon.IncomingMessageType.OnRenderCompleted:
                     OnRenderCompleted(pageContext, args[0].GetInt64(), args[1].GetString());
                     break;
                 case IpcCommon.IncomingMessageType.OnLocationChanged:
-                    OnLocationChanged(pageContext, args[0].GetString(), args[1].GetString(), args[2].GetBoolean());
+                    OnLocationChanged(
+                        pageContext,
+                        args[0].GetString(),
+                        args[1].GetString(),
+                        args[2].GetBoolean()
+                    );
                     break;
                 case IpcCommon.IncomingMessageType.OnLocationChanging:
-                    OnLocationChanging(pageContext, args[0].GetInt32(), args[1].GetString(), args[2].GetString(), args[3].GetBoolean());
+                    OnLocationChanging(
+                        pageContext,
+                        args[0].GetInt32(),
+                        args[1].GetString(),
+                        args[2].GetString(),
+                        args[3].GetBoolean()
+                    );
                     break;
                 default:
                     throw new InvalidOperationException($"Unknown message type '{messageType}'.");
@@ -72,12 +96,20 @@ internal sealed class IpcReceiver
         }
     }
 
-    private static void BeginInvokeDotNet(PageContext pageContext, string callId, string assemblyName, string methodIdentifier, long dotNetObjectId, string argsJson)
+    private static void BeginInvokeDotNet(
+        PageContext pageContext,
+        string callId,
+        string assemblyName,
+        string methodIdentifier,
+        long dotNetObjectId,
+        string argsJson
+    )
     {
         DotNetDispatcher.BeginInvokeDotNet(
             pageContext.JSRuntime,
             new DotNetInvocationInfo(assemblyName, methodIdentifier, dotNetObjectId, callId),
-            argsJson);
+            argsJson
+        );
     }
 
     private static void EndInvokeJS(PageContext pageContext, string argumentsOrError)
@@ -90,7 +122,11 @@ internal sealed class IpcReceiver
         DotNetDispatcher.ReceiveByteArray(pageContext.JSRuntime, id, data);
     }
 
-    private static void OnRenderCompleted(PageContext pageContext, long batchId, string errorMessageOrNull)
+    private static void OnRenderCompleted(
+        PageContext pageContext,
+        long batchId,
+        string errorMessageOrNull
+    )
     {
         if (errorMessageOrNull != null)
         {
@@ -100,12 +136,23 @@ internal sealed class IpcReceiver
         pageContext.Renderer.NotifyRenderCompleted(batchId);
     }
 
-    private static void OnLocationChanged(PageContext pageContext, string uri, string? state, bool intercepted)
+    private static void OnLocationChanged(
+        PageContext pageContext,
+        string uri,
+        string? state,
+        bool intercepted
+    )
     {
         pageContext.NavigationManager.LocationUpdated(uri, state, intercepted);
     }
 
-    private static void OnLocationChanging(PageContext pageContext, int callId, string uri, string? state, bool intercepted)
+    private static void OnLocationChanging(
+        PageContext pageContext,
+        int callId,
+        string uri,
+        string? state,
+        bool intercepted
+    )
     {
         pageContext.NavigationManager.HandleLocationChanging(callId, uri, state, intercepted);
     }

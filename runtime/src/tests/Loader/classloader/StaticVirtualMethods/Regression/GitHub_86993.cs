@@ -19,7 +19,7 @@ public sealed class Program
     {
         static int IModulusOperators<TSelf, TSelf, int>.operator %(TSelf left, TSelf right) => 0;
     }
-    
+
     public readonly record struct Int32Value(int Value) : IValue<Int32Value, int>;
 
     [Fact]
@@ -27,7 +27,11 @@ public sealed class Program
     {
         const string ExpectedValue = "Int32Value { Value = 1 }";
         string actualValue = new Int32Value(1).ToString();
-        Console.WriteLine("Actual value = '{0}', expected value = '{1}'", actualValue, ExpectedValue);
+        Console.WriteLine(
+            "Actual value = '{0}', expected value = '{1}'",
+            actualValue,
+            ExpectedValue
+        );
         return actualValue == ExpectedValue ? 100 : 101;
     }
 }

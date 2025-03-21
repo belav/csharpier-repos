@@ -18,17 +18,19 @@ namespace System.Data.Entity.Design.AspNet
     /// <summary>
     /// A place to put common methods used by our build providers
     /// </summary>
-    /// 
+    ///
     internal class BuildProviderUtils
     {
         /// <summary>
         /// Default constructor
         /// </summary>
-        private BuildProviderUtils()
-        {
-        }
+        private BuildProviderUtils() { }
 
-        internal static void AddArtifactReference(AssemblyBuilder assemblyBuilder, BuildProvider prov, string virtualPath)
+        internal static void AddArtifactReference(
+            AssemblyBuilder assemblyBuilder,
+            BuildProvider prov,
+            string virtualPath
+        )
         {
             // add the artifact as a resource to the DLL
             using (Stream input = VirtualPathProvider.OpenFile(virtualPath))
@@ -56,7 +58,10 @@ namespace System.Data.Entity.Design.AspNet
         internal static string GetResourceNameForVirtualPath(string virtualPath)
         {
             string name = VirtualPathUtility.ToAppRelative(virtualPath);
-            Debug.Assert(name.StartsWith("~/", StringComparison.OrdinalIgnoreCase), "Expected app-relative path to start with ~/");
+            Debug.Assert(
+                name.StartsWith("~/", StringComparison.OrdinalIgnoreCase),
+                "Expected app-relative path to start with ~/"
+            );
             if (name.StartsWith("~/", StringComparison.OrdinalIgnoreCase))
             {
                 name = name.Substring(2);
@@ -64,10 +69,12 @@ namespace System.Data.Entity.Design.AspNet
 
             name = name.Replace("/", ".");
 
-            Debug.Assert(name.StartsWith(".", StringComparison.OrdinalIgnoreCase) == false, "resource name unexpectedly starts with .");
+            Debug.Assert(
+                name.StartsWith(".", StringComparison.OrdinalIgnoreCase) == false,
+                "resource name unexpectedly starts with ."
+            );
 
             return name;
         }
-
     }
 }

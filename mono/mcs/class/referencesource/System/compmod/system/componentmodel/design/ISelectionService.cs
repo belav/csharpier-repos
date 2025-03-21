@@ -1,16 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="ISelectionService.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
-    using System.Diagnostics;
+namespace System.ComponentModel.Design
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
+    using System.Diagnostics;
     using Microsoft.Win32;
 
     /// <devdoc>
@@ -19,15 +20,15 @@ namespace System.ComponentModel.Design {
     ///    </para>
     /// </devdoc>
     [System.Runtime.InteropServices.ComVisible(true)]
-    public interface ISelectionService {
-
+    public interface ISelectionService
+    {
         /// <devdoc>
         ///    <para>
         ///       Gets the object that is currently the primary selection.
         ///    </para>
         /// </devdoc>
         object PrimarySelection { get; }
-        
+
         /// <devdoc>
         ///    <para>
         ///       Gets the count of selected objects.
@@ -52,7 +53,6 @@ namespace System.ComponentModel.Design {
         /// <devdoc>
         ///    <para>Gets a value indicating whether the component is currently selected.</para>
         /// </devdoc>
-
         bool GetComponentSelected(object component);
 
         /// <devdoc>
@@ -77,4 +77,3 @@ namespace System.ComponentModel.Design {
         void SetSelectedComponents(ICollection components, SelectionTypes selectionType);
     }
 }
-

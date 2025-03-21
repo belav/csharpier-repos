@@ -65,8 +65,7 @@ namespace MonoTests.Common
         }
 
         public PokerMemoryCache(string name, NameValueCollection config = null)
-            : base(name, config)
-        { }
+            : base(name, config) { }
 
         public override CacheItem AddOrGetExisting(CacheItem item, CacheItemPolicy policy)
         {
@@ -74,15 +73,29 @@ namespace MonoTests.Common
             return base.AddOrGetExisting(item, policy);
         }
 
-        public override object AddOrGetExisting(string key, object value, CacheItemPolicy policy, string regionName = null)
+        public override object AddOrGetExisting(
+            string key,
+            object value,
+            CacheItemPolicy policy,
+            string regionName = null
+        )
         {
-            Calls.Add("AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)");
+            Calls.Add(
+                "AddOrGetExisting (string key, object value, CacheItemPolicy policy, string regionName = null)"
+            );
             return base.AddOrGetExisting(key, value, policy, regionName);
         }
 
-        public override object AddOrGetExisting(string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)
+        public override object AddOrGetExisting(
+            string key,
+            object value,
+            DateTimeOffset absoluteExpiration,
+            string regionName = null
+        )
         {
-            Calls.Add("AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)");
+            Calls.Add(
+                "AddOrGetExisting (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)"
+            );
             return base.AddOrGetExisting(key, value, absoluteExpiration, regionName);
         }
 
@@ -110,9 +123,14 @@ namespace MonoTests.Common
             return base.Contains(key, regionName);
         }
 
-        public override CacheEntryChangeMonitor CreateCacheEntryChangeMonitor(IEnumerable<string> keys, string regionName = null)
+        public override CacheEntryChangeMonitor CreateCacheEntryChangeMonitor(
+            IEnumerable<string> keys,
+            string regionName = null
+        )
         {
-            Calls.Add("CreateCacheEntryChangeMonitor (IEnumerable<string> keys, string regionName = null)");
+            Calls.Add(
+                "CreateCacheEntryChangeMonitor (IEnumerable<string> keys, string regionName = null)"
+            );
             return base.CreateCacheEntryChangeMonitor(keys, regionName);
         }
 
@@ -127,15 +145,25 @@ namespace MonoTests.Common
             return GetEnumerator();
         }
 
-        public override IDictionary<string, object> GetValues(IEnumerable<string> keys, string regionName = null)
+        public override IDictionary<string, object> GetValues(
+            IEnumerable<string> keys,
+            string regionName = null
+        )
         {
-            Calls.Add("IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)");
+            Calls.Add(
+                "IDictionary<string, object> GetValues (IEnumerable<string> keys, string regionName = null)"
+            );
             return base.GetValues(keys, regionName);
         }
 
-        public override IDictionary<string, object> GetValues(string regionName, params string[] keys)
+        public override IDictionary<string, object> GetValues(
+            string regionName,
+            params string[] keys
+        )
         {
-            Calls.Add("IDictionary<string, object> GetValues (string regionName, params string [] keys)");
+            Calls.Add(
+                "IDictionary<string, object> GetValues (string regionName, params string [] keys)"
+            );
             return base.GetValues(regionName, keys);
         }
 
@@ -145,15 +173,29 @@ namespace MonoTests.Common
             base.Set(item, policy);
         }
 
-        public override void Set(string key, object value, CacheItemPolicy policy, string regionName = null)
+        public override void Set(
+            string key,
+            object value,
+            CacheItemPolicy policy,
+            string regionName = null
+        )
         {
-            Calls.Add("Set (string key, object value, CacheItemPolicy policy, string regionName = null)");
+            Calls.Add(
+                "Set (string key, object value, CacheItemPolicy policy, string regionName = null)"
+            );
             base.Set(key, value, policy, regionName);
         }
 
-        public override void Set(string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)
+        public override void Set(
+            string key,
+            object value,
+            DateTimeOffset absoluteExpiration,
+            string regionName = null
+        )
         {
-            Calls.Add("Set (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)");
+            Calls.Add(
+                "Set (string key, object value, DateTimeOffset absoluteExpiration, string regionName = null)"
+            );
             base.Set(key, value, absoluteExpiration, regionName);
         }
     }

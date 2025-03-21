@@ -40,7 +40,7 @@ namespace Roslyn.Utilities
 
         /// <summary>
         /// Find a <see cref="Type"/> instance by first probing the contract name and then the name as it
-        /// would exist in mscorlib.  This helps satisfy both the CoreCLR and Desktop scenarios. 
+        /// would exist in mscorlib.  This helps satisfy both the CoreCLR and Desktop scenarios.
         /// </summary>
         public static Type? GetTypeFromEither(string contractName, string desktopName)
         {
@@ -54,7 +54,11 @@ namespace Roslyn.Utilities
             return type;
         }
 
-        public static Type? GetTypeFromEither([NotNull] ref Type? lazyType, string contractName, string desktopName)
+        public static Type? GetTypeFromEither(
+            [NotNull] ref Type? lazyType,
+            string contractName,
+            string desktopName
+        )
         {
             if (lazyType == null)
             {
@@ -94,12 +98,19 @@ namespace Roslyn.Utilities
             return null;
         }
 
-        internal static MethodInfo? GetDeclaredMethod(this TypeInfo typeInfo, string name, params Type[] paramTypes)
+        internal static MethodInfo? GetDeclaredMethod(
+            this TypeInfo typeInfo,
+            string name,
+            params Type[] paramTypes
+        )
         {
             return FindItem(typeInfo.GetDeclaredMethods(name), paramTypes);
         }
 
-        internal static ConstructorInfo? GetDeclaredConstructor(this TypeInfo typeInfo, params Type[] paramTypes)
+        internal static ConstructorInfo? GetDeclaredConstructor(
+            this TypeInfo typeInfo,
+            params Type[] paramTypes
+        )
         {
             return FindItem(typeInfo.DeclaredConstructors, paramTypes);
         }
@@ -115,7 +126,10 @@ namespace Roslyn.Utilities
             return (T)methodInfo.CreateDelegate(typeof(T));
         }
 
-        public static T? InvokeConstructor<T>(this ConstructorInfo? constructorInfo, params object?[] args)
+        public static T? InvokeConstructor<T>(
+            this ConstructorInfo? constructorInfo,
+            params object?[] args
+        )
         {
             if (constructorInfo == null)
             {
@@ -135,7 +149,10 @@ namespace Roslyn.Utilities
             }
         }
 
-        public static object? InvokeConstructor(this ConstructorInfo constructorInfo, params object?[] args)
+        public static object? InvokeConstructor(
+            this ConstructorInfo constructorInfo,
+            params object?[] args
+        )
         {
             return constructorInfo.InvokeConstructor<object?>(args);
         }

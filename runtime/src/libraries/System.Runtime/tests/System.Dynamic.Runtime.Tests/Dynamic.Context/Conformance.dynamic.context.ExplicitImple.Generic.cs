@@ -32,7 +32,9 @@ namespace Dynamic.Tests
             Assert.Equal(2, d.Foo());
             var x = Helpers.Cast<GenericInterfaceWithNonGenericMember<int>>(d);
 
-            Assert.Throws<InvalidCastException>(() => Helpers.Cast<GenericInterfaceWithNonGenericMember<double>>(d));
+            Assert.Throws<InvalidCastException>(() =>
+                Helpers.Cast<GenericInterfaceWithNonGenericMember<double>>(d)
+            );
         }
 
         [Fact]
@@ -43,7 +45,9 @@ namespace Dynamic.Tests
 
             var x = Helpers.Cast<GenericInterfaceWithGenericMember1<int>>(d);
 
-            Assert.Throws<InvalidCastException>(() => Helpers.Cast<GenericInterfaceWithGenericMember1<double>>(d));
+            Assert.Throws<InvalidCastException>(() =>
+                Helpers.Cast<GenericInterfaceWithGenericMember1<double>>(d)
+            );
         }
 
         [Fact]
@@ -54,7 +58,9 @@ namespace Dynamic.Tests
 
             var x = Helpers.Cast<GenericInterfaceWithGenericMember2<int>>(d);
 
-            Assert.Throws<InvalidCastException>(() => Helpers.Cast<GenericInterfaceWithGenericMember2<double>>(d));
+            Assert.Throws<InvalidCastException>(() =>
+                Helpers.Cast<GenericInterfaceWithGenericMember2<double>>(d)
+            );
         }
 
         [Fact]
@@ -73,10 +79,13 @@ namespace Dynamic.Tests
             dynamic d = new ExplicitlyImplementedGenericInInterface<SubClass>();
             Assert.Throws<RuntimeBinderException>(() => d.Foo());
 
-            Assert.Throws<InvalidCastException>(() => Helpers.Cast<GenericInInterface<BaseClass>>(d));
+            Assert.Throws<InvalidCastException>(() => Helpers.Cast<GenericInInterface<BaseClass>>(d)
+            );
 
             var y = Helpers.Cast<GenericInInterface<SubClass>>(d);
-            Assert.Throws<InvalidCastException>(() => ((GenericInInterface<BaseClass>)d).Foo(new BaseClass()));
+            Assert.Throws<InvalidCastException>(() =>
+                ((GenericInInterface<BaseClass>)d).Foo(new BaseClass())
+            );
         }
 
         [Fact]
@@ -85,7 +94,8 @@ namespace Dynamic.Tests
             dynamic d = new ExplicitlyImplementedGenericOutInterface<BaseClass>();
             Assert.Throws<RuntimeBinderException>(() => d.Foo());
 
-            Assert.Throws<InvalidCastException>(() => Helpers.Cast<GenericOutInterface<SubClass>>(d));
+            Assert.Throws<InvalidCastException>(() => Helpers.Cast<GenericOutInterface<SubClass>>(d)
+            );
 
             var y = Helpers.Cast<GenericOutInterface<BaseClass>>(d);
 
@@ -112,13 +122,16 @@ namespace Dynamic.Tests
     public class ExplicitlyImplementedInterface1 : InterfaceWithGenericMember
     {
         int InterfaceWithGenericMember.Foo<T>() => 0;
+
         public int Bar() => 1;
     }
 
     public class ExplicitlyImplementedInterface2 : InterfaceWithGenericMember
     {
         int InterfaceWithGenericMember.Foo<T>() => 0;
+
         public int Foo() => 2;
+
         public int Bar() => 1;
     }
 
@@ -131,7 +144,9 @@ namespace Dynamic.Tests
     public class ExplicitlyImplementedGenericInterface : GenericInterfaceWithNonGenericMember<int>
     {
         int GenericInterfaceWithNonGenericMember<int>.Foo() => 0;
+
         public int Foo() => 2;
+
         public int Bar() => 1;
     }
 
@@ -141,9 +156,11 @@ namespace Dynamic.Tests
         int Bar();
     }
 
-    public class ExplicitlyImplementedGenericInterfaceWithGenericMember1 : GenericInterfaceWithGenericMember1<int>
+    public class ExplicitlyImplementedGenericInterfaceWithGenericMember1
+        : GenericInterfaceWithGenericMember1<int>
     {
         int GenericInterfaceWithGenericMember1<int>.Foo(int i) => 0;
+
         public int Bar() => 1;
     }
 
@@ -153,13 +170,16 @@ namespace Dynamic.Tests
         int Bar();
     }
 
-    public class ExplicitlyImplementedGenericInterfaceWithGenericMember2 : GenericInterfaceWithGenericMember2<int>
+    public class ExplicitlyImplementedGenericInterfaceWithGenericMember2
+        : GenericInterfaceWithGenericMember2<int>
     {
         int GenericInterfaceWithGenericMember2<int>.Foo<U>() => 0;
+
         public int Bar() => 1;
     }
 
     public class BaseClass { }
+
     public class SubClass : BaseClass { }
 
     public interface GenericInInterface<in T>
@@ -177,7 +197,8 @@ namespace Dynamic.Tests
         T Foo();
     }
 
-    public class ExplicitlyImplementedGenericOutInterface<T> : GenericOutInterface<T> where T : new()
+    public class ExplicitlyImplementedGenericOutInterface<T> : GenericOutInterface<T>
+        where T : new()
     {
         T GenericOutInterface<T>.Foo() => new T();
     }

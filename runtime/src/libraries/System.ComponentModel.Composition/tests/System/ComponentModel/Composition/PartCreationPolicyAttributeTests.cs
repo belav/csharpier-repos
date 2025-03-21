@@ -22,8 +22,7 @@ namespace System.ComponentModel.Composition
 
         [Fact]
         public void Constructor_OutOfRangeValueAsCreationPolicyArgument_ShouldSetCreationPolicy()
-        {   // Attributes should not throw exceptions
-
+        { // Attributes should not throw exceptions
             var expectations = Expectations.GetInvalidEnumValues<CreationPolicy>();
 
             foreach (var e in expectations)

@@ -12,25 +12,34 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class ReturnKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public ReturnKeywordRecommender()
-            : base(SyntaxKind.ReturnKeyword)
+            : base(SyntaxKind.ReturnKeyword) { }
+
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
+            return context.IsStatementContext
+                || context.IsRegularTopLevelStatementsContext()
+                || context.TargetToken.IsAfterYieldKeyword()
+                || IsAttributeContext(context, cancellationToken);
         }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        private static bool IsAttributeContext(
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return
-                context.IsStatementContext ||
-                context.IsRegularTopLevelStatementsContext() ||
-                context.TargetToken.IsAfterYieldKeyword() ||
-                IsAttributeContext(context, cancellationToken);
-        }
-
-        private static bool IsAttributeContext(CSharpSyntaxContext context, CancellationToken cancellationToken)
-        {
-            return
-                context.IsMemberAttributeContext(SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations, cancellationToken) ||
-                (context.SyntaxTree.IsScript() && context.IsTypeAttributeContext(cancellationToken)) ||
-                context.IsStatementAttributeContext();
+            return context.IsMemberAttributeContext(
+                    SyntaxKindSet.ClassInterfaceStructRecordTypeDeclarations,
+                    cancellationToken
+                )
+                || (
+                    context.SyntaxTree.IsScript()
+                    && context.IsTypeAttributeContext(cancellationToken)
+                )
+                || context.IsStatementAttributeContext();
         }
     }
 }

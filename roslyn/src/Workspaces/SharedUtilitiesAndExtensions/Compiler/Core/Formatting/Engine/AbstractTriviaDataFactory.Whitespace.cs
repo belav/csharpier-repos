@@ -21,13 +21,30 @@ namespace Microsoft.CodeAnalysis.Formatting
         {
             private readonly bool _elastic;
 
-            public Whitespace(SyntaxFormattingOptions options, int space, bool elastic, string language)
-                : this(options, lineBreaks: 0, indentation: space, elastic: elastic, language: language)
+            public Whitespace(
+                SyntaxFormattingOptions options,
+                int space,
+                bool elastic,
+                string language
+            )
+                : this(
+                    options,
+                    lineBreaks: 0,
+                    indentation: space,
+                    elastic: elastic,
+                    language: language
+                )
             {
                 Contract.ThrowIfFalse(space >= 0);
             }
 
-            public Whitespace(SyntaxFormattingOptions options, int lineBreaks, int indentation, bool elastic, string language)
+            public Whitespace(
+                SyntaxFormattingOptions options,
+                int lineBreaks,
+                int indentation,
+                bool elastic,
+                string language
+            )
                 : base(options, language)
             {
                 _elastic = elastic;
@@ -44,17 +61,34 @@ namespace Microsoft.CodeAnalysis.Formatting
 
             public override bool ContainsChanges => false;
 
-            public override TriviaData WithSpace(int space, FormattingContext context, ChainedFormattingRules formattingRules)
+            public override TriviaData WithSpace(
+                int space,
+                FormattingContext context,
+                ChainedFormattingRules formattingRules
+            )
             {
                 if (this.LineBreaks == 0 && this.Spaces == space)
                 {
                     return this;
                 }
 
-                return new ModifiedWhitespace(this.Options, this, /*lineBreak*/0, space, elastic: false, language: this.Language);
+                return new ModifiedWhitespace(
+                    this.Options,
+                    this, /*lineBreak*/
+                    0,
+                    space,
+                    elastic: false,
+                    language: this.Language
+                );
             }
 
-            public override TriviaData WithLine(int line, int indentation, FormattingContext context, ChainedFormattingRules formattingRules, CancellationToken cancellationToken)
+            public override TriviaData WithLine(
+                int line,
+                int indentation,
+                FormattingContext context,
+                ChainedFormattingRules formattingRules,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfFalse(line > 0);
 
@@ -63,18 +97,36 @@ namespace Microsoft.CodeAnalysis.Formatting
                     return this;
                 }
 
-                return new ModifiedWhitespace(this.Options, this, line, indentation, elastic: false, language: this.Language);
+                return new ModifiedWhitespace(
+                    this.Options,
+                    this,
+                    line,
+                    indentation,
+                    elastic: false,
+                    language: this.Language
+                );
             }
 
             public override TriviaData WithIndentation(
-                int indentation, FormattingContext context, ChainedFormattingRules formattingRules, CancellationToken cancellationToken)
+                int indentation,
+                FormattingContext context,
+                ChainedFormattingRules formattingRules,
+                CancellationToken cancellationToken
+            )
             {
                 if (this.Spaces == indentation)
                 {
                     return this;
                 }
 
-                return new ModifiedWhitespace(this.Options, this, this.LineBreaks, indentation, elastic: false, language: this.Language);
+                return new ModifiedWhitespace(
+                    this.Options,
+                    this,
+                    this.LineBreaks,
+                    indentation,
+                    elastic: false,
+                    language: this.Language
+                );
             }
 
             public override void Format(
@@ -82,13 +134,14 @@ namespace Microsoft.CodeAnalysis.Formatting
                 ChainedFormattingRules formattingRules,
                 Action<int, TokenStream, TriviaData> formattingResultApplier,
                 CancellationToken cancellationToken,
-                int tokenPairIndex = TokenPairIndexNotNeeded)
+                int tokenPairIndex = TokenPairIndexNotNeeded
+            )
             {
                 // nothing changed, nothing to format
             }
 
-            public override IEnumerable<TextChange> GetTextChanges(TextSpan span)
-                => throw new NotImplementedException();
+            public override IEnumerable<TextChange> GetTextChanges(TextSpan span) =>
+                throw new NotImplementedException();
         }
     }
 }

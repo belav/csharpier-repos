@@ -34,11 +34,13 @@ public class ExcludeBindingMetadataProviderIntegrationTest
 
         var testContext = ModelBindingTestHelper.GetTestContext(request =>
         {
-            request.Form = new FormCollection(new Dictionary<string, StringValues>
-            {
+            request.Form = new FormCollection(
+                new Dictionary<string, StringValues>
+                {
                     { "name", new[] { "Fred" } },
                     { "type", new[] { "SomeType" } },
-            });
+                }
+            );
         });
 
         // Act
@@ -79,20 +81,27 @@ public class ExcludeBindingMetadataProviderIntegrationTest
             }
         }
 
-        var metadataProvider = TestModelMetadataProvider.CreateProvider(options.ModelMetadataDetailsProviders);
+        var metadataProvider = TestModelMetadataProvider.CreateProvider(
+            options.ModelMetadataDetailsProviders
+        );
         var testContext = ModelBindingTestHelper.GetTestContext(
             request =>
             {
-                request.Form = new FormCollection(new Dictionary<string, StringValues>
-                {
+                request.Form = new FormCollection(
+                    new Dictionary<string, StringValues>
+                    {
                         { "name", new[] { "Fred" } },
                         { "type", new[] { "SomeType" } },
-                });
+                    }
+                );
             },
             metadataProvider: metadataProvider,
-            mvcOptions: options);
+            mvcOptions: options
+        );
 
-        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext.HttpContext.RequestServices);
+        var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
+            testContext.HttpContext.RequestServices
+        );
         var parameter = new ParameterDescriptor()
         {
             Name = "Parameter1",

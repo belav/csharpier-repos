@@ -11,7 +11,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     internal class TestOptionSet : OptionSet
     {
-        public static new readonly TestOptionSet Empty = new(ImmutableDictionary<OptionKey, object?>.Empty);
+        public static new readonly TestOptionSet Empty = new(
+            ImmutableDictionary<OptionKey, object?>.Empty
+        );
 
         private readonly ImmutableDictionary<OptionKey, object?> _values;
 
@@ -21,10 +23,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             _values = values;
         }
 
-        internal override object? GetInternalOptionValue(OptionKey optionKey)
-            => _values.TryGetValue(optionKey, out var value) ? value : optionKey.Option.DefaultValue;
+        internal override object? GetInternalOptionValue(OptionKey optionKey) =>
+            _values.TryGetValue(optionKey, out var value) ? value : optionKey.Option.DefaultValue;
 
-        internal override OptionSet WithChangedOptionInternal(OptionKey optionKey, object? internalValue)
+        internal override OptionSet WithChangedOptionInternal(
+            OptionKey optionKey,
+            object? internalValue
+        )
         {
             Debug.Assert(IsInternalOptionValue(internalValue));
             return new TestOptionSet(_values.SetItem(optionKey, internalValue));

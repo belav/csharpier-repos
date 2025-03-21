@@ -15,8 +15,10 @@ namespace System.Net
         private const int ErrorEventId = 2;
 
         [NonEvent]
-        public static void Error(Exception exception, [CallerMemberName] string? memberName = null) =>
-            Log.ErrorMessage(memberName ?? "(?)", exception.ToString());
+        public static void Error(
+            Exception exception,
+            [CallerMemberName] string? memberName = null
+        ) => Log.ErrorMessage(memberName ?? "(?)", exception.ToString());
 
         [Event(ErrorEventId, Level = EventLevel.Error)]
         private void ErrorMessage(string memberName, string message)

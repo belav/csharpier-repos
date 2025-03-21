@@ -23,14 +23,15 @@ namespace System.Net.Sockets.Tests
             _output = output;
         }
 
-        public static object[][] DualModeSuccessInputs = {
+        public static object[][] DualModeSuccessInputs =
+        {
             new object[] { SocketType.Stream, ProtocolType.Tcp },
             new object[] { SocketType.Dgram, ProtocolType.Udp },
         };
 
-        public static object[][] DualModeFailureInputs = {
+        public static object[][] DualModeFailureInputs =
+        {
             new object[] { SocketType.Dgram, ProtocolType.Tcp },
-
             new object[] { SocketType.Rdm, ProtocolType.Tcp },
             new object[] { SocketType.Seqpacket, ProtocolType.Tcp },
             new object[] { SocketType.Unknown, ProtocolType.Tcp },
@@ -47,9 +48,7 @@ namespace System.Net.Sockets.Tests
         [Theory, MemberData(nameof(DualModeSuccessInputs))]
         public void DualMode_Success(SocketType socketType, ProtocolType protocolType)
         {
-            using (new Socket(socketType, protocolType))
-            {
-            }
+            using (new Socket(socketType, protocolType)) { }
         }
 
         [OuterLoop]
@@ -59,7 +58,8 @@ namespace System.Net.Sockets.Tests
             Assert.Throws<SocketException>(() => new Socket(socketType, protocolType));
         }
 
-        public static object[][] CtorSuccessInputs = {
+        public static object[][] CtorSuccessInputs =
+        {
             new object[] { AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp },
             new object[] { AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp },
             new object[] { AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp },
@@ -68,14 +68,17 @@ namespace System.Net.Sockets.Tests
 
         [OuterLoop]
         [Theory, MemberData(nameof(CtorSuccessInputs))]
-        public void Ctor_Success(AddressFamily addressFamily, SocketType socketType, ProtocolType protocolType)
+        public void Ctor_Success(
+            AddressFamily addressFamily,
+            SocketType socketType,
+            ProtocolType protocolType
+        )
         {
-            using (new Socket(addressFamily, socketType, protocolType))
-            {
-            }
+            using (new Socket(addressFamily, socketType, protocolType)) { }
         }
 
-        public static object[][] CtorFailureInputs = {
+        public static object[][] CtorFailureInputs =
+        {
             new object[] { AddressFamily.Unknown, SocketType.Stream, ProtocolType.Tcp },
             new object[] { AddressFamily.Unknown, SocketType.Dgram, ProtocolType.Udp },
             new object[] { AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Tcp },
@@ -90,9 +93,14 @@ namespace System.Net.Sockets.Tests
 
         [OuterLoop]
         [Theory, MemberData(nameof(CtorFailureInputs))]
-        public void Ctor_Failure(AddressFamily addressFamily, SocketType socketType, ProtocolType protocolType)
+        public void Ctor_Failure(
+            AddressFamily addressFamily,
+            SocketType socketType,
+            ProtocolType protocolType
+        )
         {
-            Assert.Throws<SocketException>(() => new Socket(addressFamily, socketType, protocolType));
+            Assert.Throws<SocketException>(() => new Socket(addressFamily, socketType, protocolType)
+            );
         }
 
         [PlatformSpecific(TestPlatforms.AnyUnix)]
@@ -103,11 +111,12 @@ namespace System.Net.Sockets.Tests
         [InlineData(AddressFamily.InterNetworkV6, ProtocolType.Udp)]
         [InlineData(AddressFamily.InterNetworkV6, ProtocolType.IcmpV6)]
         [ConditionalTheory(nameof(SupportsRawSockets))]
-        public void Ctor_Raw_Supported_Success(AddressFamily addressFamily, ProtocolType protocolType)
+        public void Ctor_Raw_Supported_Success(
+            AddressFamily addressFamily,
+            ProtocolType protocolType
+        )
         {
-            using (new Socket(addressFamily, SocketType.Raw, protocolType))
-            {
-            }
+            using (new Socket(addressFamily, SocketType.Raw, protocolType)) { }
         }
 
         [PlatformSpecific(TestPlatforms.AnyUnix)]
@@ -118,10 +127,18 @@ namespace System.Net.Sockets.Tests
         [InlineData(AddressFamily.InterNetworkV6, ProtocolType.Udp)]
         [InlineData(AddressFamily.InterNetworkV6, ProtocolType.IcmpV6)]
         [ConditionalTheory(nameof(NotSupportsRawSockets))]
-        public void Ctor_Raw_NotSupported_ExpectedError(AddressFamily addressFamily, ProtocolType protocolType)
+        public void Ctor_Raw_NotSupported_ExpectedError(
+            AddressFamily addressFamily,
+            ProtocolType protocolType
+        )
         {
-            SocketException e = Assert.Throws<SocketException>(() => new Socket(addressFamily, SocketType.Raw, protocolType));
-            Assert.Contains(e.SocketErrorCode, new[] { SocketError.AccessDenied, SocketError.ProtocolNotSupported });
+            SocketException e = Assert.Throws<SocketException>(() =>
+                new Socket(addressFamily, SocketType.Raw, protocolType)
+            );
+            Assert.Contains(
+                e.SocketErrorCode,
+                new[] { SocketError.AccessDenied, SocketError.ProtocolNotSupported }
+            );
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -131,87 +148,147 @@ namespace System.Net.Sockets.Tests
         [InlineData(false, 1)]
         [InlineData(true, 2)] // Begin/EndAccept
         [InlineData(false, 2)]
-        public void CtorAndAccept_SocketNotKeptAliveViaInheritance(bool validateClientOuter, int acceptApiOuter)
+        public void CtorAndAccept_SocketNotKeptAliveViaInheritance(
+            bool validateClientOuter,
+            int acceptApiOuter
+        )
         {
             // 300 ms should be long enough to connect if the socket is actually present & listening.
             const int ConnectionTimeoutMs = 300;
 
             // Run the test in another process so as to not have trouble with other tests
             // launching child processes that might impact inheritance.
-            RemoteExecutor.Invoke((validateClientString, acceptApiString) =>
-            {
-                bool validateClient = bool.Parse(validateClientString);
-                int acceptApi = int.Parse(acceptApiString);
-
-                // Create a listening server.
-                using (var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
-                {
-                    listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
-                    listener.Listen();
-                    EndPoint ep = listener.LocalEndPoint;
-
-                    // Create a client and connect to that listener.
-                    using (var client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            RemoteExecutor
+                .Invoke(
+                    (validateClientString, acceptApiString) =>
                     {
-                        client.Connect(ep);
+                        bool validateClient = bool.Parse(validateClientString);
+                        int acceptApi = int.Parse(acceptApiString);
 
-                        // Accept the connection using one of multiple accept mechanisms.
-                        Socket server =
-                            acceptApi == 0 ? listener.Accept() :
-                            acceptApi == 1 ? listener.AcceptAsync().GetAwaiter().GetResult() :
-                            acceptApi == 2 ? Task.Factory.FromAsync(listener.BeginAccept, listener.EndAccept, null).GetAwaiter().GetResult() :
-                            throw new Exception($"Unexpected {nameof(acceptApi)}: {acceptApi}");
-
-                        // Get streams for the client and server, and create a pipe that we'll use
-                        // to communicate with a child process.
-                        using (var serverStream = new NetworkStream(server, ownsSocket: true))
-                        using (var clientStream = new NetworkStream(client, ownsSocket: true))
-                        using (var serverPipe = new AnonymousPipeServerStream(PipeDirection.Out, HandleInheritability.Inheritable))
+                        // Create a listening server.
+                        using (
+                            var listener = new Socket(
+                                AddressFamily.InterNetwork,
+                                SocketType.Stream,
+                                ProtocolType.Tcp
+                            )
+                        )
                         {
-                            // Create a child process that blocks waiting to receive a signal on the anonymous pipe.
-                            // The whole purpose of the child is to test whether handles are inherited, so we
-                            // keep the child process alive until we're done validating that handles close as expected.
-                            using (RemoteExecutor.Invoke(clientPipeHandle =>
-                                   {
-                                       using (var clientPipe = new AnonymousPipeClientStream(PipeDirection.In, clientPipeHandle))
-                                       {
-                                           Assert.Equal(42, clientPipe.ReadByte());
-                                       }
-                                   }, serverPipe.GetClientHandleAsString()))
+                            listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
+                            listener.Listen();
+                            EndPoint ep = listener.LocalEndPoint;
+
+                            // Create a client and connect to that listener.
+                            using (
+                                var client = new Socket(
+                                    AddressFamily.InterNetwork,
+                                    SocketType.Stream,
+                                    ProtocolType.Tcp
+                                )
+                            )
                             {
-                                if (validateClient) // Validate that the child isn't keeping alive the "new Socket" for the client
-                                {
-                                    // Send data from the server to client, then validate the client gets EOF when the server closes.
-                                    serverStream.WriteByte(84);
-                                    Assert.Equal(84, clientStream.ReadByte());
-                                    serverStream.Close();
-                                    Assert.Equal(-1, clientStream.ReadByte());
-                                }
-                                else // Validate that the child isn't keeping alive the "listener.Accept" for the server
-                                {
-                                    // Send data from the client to server, then validate the server gets EOF when the client closes.
-                                    clientStream.WriteByte(84);
-                                    Assert.Equal(84, serverStream.ReadByte());
-                                    clientStream.Close();
-                                    Assert.Equal(-1, serverStream.ReadByte());
-                                }
+                                client.Connect(ep);
 
-                                // And validate that we after closing the listening socket, we're not able to connect.
-                                listener.Dispose();
-                                using (var tmpClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                                // Accept the connection using one of multiple accept mechanisms.
+                                Socket server =
+                                    acceptApi == 0 ? listener.Accept()
+                                    : acceptApi == 1
+                                        ? listener.AcceptAsync().GetAwaiter().GetResult()
+                                    : acceptApi == 2
+                                        ? Task
+                                            .Factory.FromAsync(
+                                                listener.BeginAccept,
+                                                listener.EndAccept,
+                                                null
+                                            )
+                                            .GetAwaiter()
+                                            .GetResult()
+                                    : throw new Exception(
+                                        $"Unexpected {nameof(acceptApi)}: {acceptApi}"
+                                    );
+
+                                // Get streams for the client and server, and create a pipe that we'll use
+                                // to communicate with a child process.
+                                using (
+                                    var serverStream = new NetworkStream(server, ownsSocket: true)
+                                )
+                                using (
+                                    var clientStream = new NetworkStream(client, ownsSocket: true)
+                                )
+                                using (
+                                    var serverPipe = new AnonymousPipeServerStream(
+                                        PipeDirection.Out,
+                                        HandleInheritability.Inheritable
+                                    )
+                                )
                                 {
-                                    bool connected = tmpClient.TryConnect(ep, ConnectionTimeoutMs);
+                                    // Create a child process that blocks waiting to receive a signal on the anonymous pipe.
+                                    // The whole purpose of the child is to test whether handles are inherited, so we
+                                    // keep the child process alive until we're done validating that handles close as expected.
+                                    using (
+                                        RemoteExecutor.Invoke(
+                                            clientPipeHandle =>
+                                            {
+                                                using (
+                                                    var clientPipe = new AnonymousPipeClientStream(
+                                                        PipeDirection.In,
+                                                        clientPipeHandle
+                                                    )
+                                                )
+                                                {
+                                                    Assert.Equal(42, clientPipe.ReadByte());
+                                                }
+                                            },
+                                            serverPipe.GetClientHandleAsString()
+                                        )
+                                    )
+                                    {
+                                        if (validateClient) // Validate that the child isn't keeping alive the "new Socket" for the client
+                                        {
+                                            // Send data from the server to client, then validate the client gets EOF when the server closes.
+                                            serverStream.WriteByte(84);
+                                            Assert.Equal(84, clientStream.ReadByte());
+                                            serverStream.Close();
+                                            Assert.Equal(-1, clientStream.ReadByte());
+                                        }
+                                        else // Validate that the child isn't keeping alive the "listener.Accept" for the server
+                                        {
+                                            // Send data from the client to server, then validate the server gets EOF when the client closes.
+                                            clientStream.WriteByte(84);
+                                            Assert.Equal(84, serverStream.ReadByte());
+                                            clientStream.Close();
+                                            Assert.Equal(-1, serverStream.ReadByte());
+                                        }
 
-                                    // Let the child process terminate.
-                                    serverPipe.WriteByte(42);
+                                        // And validate that we after closing the listening socket, we're not able to connect.
+                                        listener.Dispose();
+                                        using (
+                                            var tmpClient = new Socket(
+                                                AddressFamily.InterNetwork,
+                                                SocketType.Stream,
+                                                ProtocolType.Tcp
+                                            )
+                                        )
+                                        {
+                                            bool connected = tmpClient.TryConnect(
+                                                ep,
+                                                ConnectionTimeoutMs
+                                            );
 
-                                    Assert.False(connected);
+                                            // Let the child process terminate.
+                                            serverPipe.WriteByte(42);
+
+                                            Assert.False(connected);
+                                        }
+                                    }
                                 }
                             }
                         }
-                    }
-                }
-            }, validateClientOuter.ToString(), acceptApiOuter.ToString()).Dispose();
+                    },
+                    validateClientOuter.ToString(),
+                    acceptApiOuter.ToString()
+                )
+                .Dispose();
         }
 
         [Theory]
@@ -235,9 +312,11 @@ namespace System.Net.Sockets.Tests
             {
                 s = new Socket(addressFamily, SocketType.Raw, ProtocolType.Raw);
             }
-            catch (SocketException e) when (e.SocketErrorCode == SocketError.AccessDenied ||
-                                            e.SocketErrorCode == SocketError.ProtocolNotSupported ||
-                                            e.SocketErrorCode == SocketError.AddressFamilyNotSupported)
+            catch (SocketException e)
+                when (e.SocketErrorCode == SocketError.AccessDenied
+                    || e.SocketErrorCode == SocketError.ProtocolNotSupported
+                    || e.SocketErrorCode == SocketError.AddressFamilyNotSupported
+                )
             {
                 // Ignore. We may not have privilege or protocol modules are not loaded.
                 return;
@@ -249,7 +328,10 @@ namespace System.Net.Sockets.Tests
         public void Ctor_SafeHandle_Invalid_ThrowsException()
         {
             AssertExtensions.Throws<ArgumentNullException>("handle", () => new Socket(null));
-            AssertExtensions.Throws<ArgumentException>("handle", () => new Socket(new SafeSocketHandle((IntPtr)(-1), false)));
+            AssertExtensions.Throws<ArgumentException>(
+                "handle",
+                () => new Socket(new SafeSocketHandle((IntPtr)(-1), false))
+            );
         }
 
         [Theory]
@@ -274,11 +356,18 @@ namespace System.Net.Sockets.Tests
         [InlineData(AddressFamily.InterNetworkV6, SocketType.Raw, ProtocolType.Unspecified)]
         [InlineData(AddressFamily.Packet, SocketType.Raw, ProtocolType.Raw)]
         [InlineData(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/52124", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
-        public void Ctor_SafeHandle_BasicPropertiesPropagate_Success(AddressFamily addressFamily, SocketType socketType, ProtocolType protocolType)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/52124",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
+        public void Ctor_SafeHandle_BasicPropertiesPropagate_Success(
+            AddressFamily addressFamily,
+            SocketType socketType,
+            ProtocolType protocolType
+        )
         {
-            bool isRawPacket = (addressFamily == AddressFamily.Packet) &&
-                               (socketType == SocketType.Raw);
+            bool isRawPacket =
+                (addressFamily == AddressFamily.Packet) && (socketType == SocketType.Raw);
             if (isRawPacket)
             {
                 // protocol is the IEEE 802.3 protocol number in network byte order.
@@ -291,10 +380,11 @@ namespace System.Net.Sockets.Tests
             {
                 tmpOrig = new Socket(addressFamily, socketType, protocolType);
             }
-            catch (SocketException e) when (
-                e.SocketErrorCode == SocketError.AccessDenied ||
-                e.SocketErrorCode == SocketError.ProtocolNotSupported ||
-                e.SocketErrorCode == SocketError.AddressFamilyNotSupported)
+            catch (SocketException e)
+                when (e.SocketErrorCode == SocketError.AccessDenied
+                    || e.SocketErrorCode == SocketError.ProtocolNotSupported
+                    || e.SocketErrorCode == SocketError.AddressFamilyNotSupported
+                )
             {
                 // We can't test this combination on this platform.
                 return;
@@ -363,13 +453,22 @@ namespace System.Net.Sockets.Tests
             if (orig.AddressFamily == copy.AddressFamily)
             {
                 AssertEqualOrSameException(() => orig.DontFragment, () => copy.DontFragment);
-                AssertEqualOrSameException(() => orig.MulticastLoopback, () => copy.MulticastLoopback);
+                AssertEqualOrSameException(
+                    () => orig.MulticastLoopback,
+                    () => copy.MulticastLoopback
+                );
                 AssertEqualOrSameException(() => orig.Ttl, () => copy.Ttl);
             }
 
             AssertEqualOrSameException(() => orig.EnableBroadcast, () => copy.EnableBroadcast);
-            AssertEqualOrSameException(() => orig.LingerState.Enabled, () => copy.LingerState.Enabled);
-            AssertEqualOrSameException(() => orig.LingerState.LingerTime, () => copy.LingerState.LingerTime);
+            AssertEqualOrSameException(
+                () => orig.LingerState.Enabled,
+                () => copy.LingerState.Enabled
+            );
+            AssertEqualOrSameException(
+                () => orig.LingerState.LingerTime,
+                () => copy.LingerState.LingerTime
+            );
             AssertEqualOrSameException(() => orig.NoDelay, () => copy.NoDelay);
 
             Assert.Equal(orig.Available, copy.Available);
@@ -387,12 +486,26 @@ namespace System.Net.Sockets.Tests
         [Theory]
         [InlineData(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp)]
         [InlineData(AddressFamily.InterNetworkV6, SocketType.Stream, ProtocolType.Tcp)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/52124", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
-        public async Task Ctor_SafeHandle_Tcp_SendReceive_Success(AddressFamily addressFamily, SocketType socketType, ProtocolType protocolType)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/52124",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
+        public async Task Ctor_SafeHandle_Tcp_SendReceive_Success(
+            AddressFamily addressFamily,
+            SocketType socketType,
+            ProtocolType protocolType
+        )
         {
             using var orig = new Socket(addressFamily, socketType, protocolType);
             using var listener = new Socket(addressFamily, socketType, protocolType);
-            listener.Bind(new IPEndPoint(addressFamily == AddressFamily.InterNetwork ? IPAddress.Loopback : IPAddress.IPv6Loopback, 0));
+            listener.Bind(
+                new IPEndPoint(
+                    addressFamily == AddressFamily.InterNetwork
+                        ? IPAddress.Loopback
+                        : IPAddress.IPv6Loopback,
+                    0
+                )
+            );
             listener.Listen(1);
             await orig.ConnectAsync(listener.LocalEndPoint);
             using var server = await listener.AcceptAsync();
@@ -419,7 +532,10 @@ namespace System.Net.Sockets.Tests
             Assert.Equal(orig.IsBound, client.IsBound);
             Assert.Equal(orig.LingerState.Enabled, client.LingerState.Enabled);
             Assert.Equal(orig.LingerState.LingerTime, client.LingerState.LingerTime);
-            AssertEqualOrSameException(() => orig.MulticastLoopback, () => client.MulticastLoopback);
+            AssertEqualOrSameException(
+                () => orig.MulticastLoopback,
+                () => client.MulticastLoopback
+            );
             Assert.Equal(orig.NoDelay, client.NoDelay);
             Assert.Equal(orig.ReceiveBufferSize, client.ReceiveBufferSize);
             Assert.Equal(orig.ReceiveTimeout, client.ReceiveTimeout);
@@ -446,41 +562,61 @@ namespace System.Net.Sockets.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/52124", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/52124",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public async Task Ctor_SafeHandle_Listening_Success(bool shareSafeHandle)
         {
             await Task.Run(async () =>
-            {
-                using var listener = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
-                listener.Listen();
-
-                using var listenerCopy = new Socket(shareSafeHandle ? listener.SafeHandle : new SafeSocketHandle(listener.Handle, ownsHandle: false));
-                Assert.False(listenerCopy.Connected);
-                // This will throw if _isListening is set internally. (before reaching any real code)
-                Assert.Throws<InvalidOperationException>(() => listenerCopy.Connect(new IPEndPoint(IPAddress.Loopback, 0)));
-
-                Assert.Equal(listener.AddressFamily, listenerCopy.AddressFamily);
-                Assert.Equal(listener.Handle, listenerCopy.Handle);
-                Assert.Equal(listener.IsBound, listenerCopy.IsBound);
-                Assert.Equal(listener.LocalEndPoint, listenerCopy.LocalEndPoint);
-                Assert.Equal(listener.ProtocolType, listenerCopy.ProtocolType);
-                Assert.Equal(listener.SocketType, listenerCopy.SocketType);
-
-                foreach (Socket listenerSocket in new[] { listener, listenerCopy })
                 {
-                    using (var client1 = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                    using var listener = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    );
+                    listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
+                    listener.Listen();
+
+                    using var listenerCopy = new Socket(
+                        shareSafeHandle
+                            ? listener.SafeHandle
+                            : new SafeSocketHandle(listener.Handle, ownsHandle: false)
+                    );
+                    Assert.False(listenerCopy.Connected);
+                    // This will throw if _isListening is set internally. (before reaching any real code)
+                    Assert.Throws<InvalidOperationException>(() =>
+                        listenerCopy.Connect(new IPEndPoint(IPAddress.Loopback, 0))
+                    );
+
+                    Assert.Equal(listener.AddressFamily, listenerCopy.AddressFamily);
+                    Assert.Equal(listener.Handle, listenerCopy.Handle);
+                    Assert.Equal(listener.IsBound, listenerCopy.IsBound);
+                    Assert.Equal(listener.LocalEndPoint, listenerCopy.LocalEndPoint);
+                    Assert.Equal(listener.ProtocolType, listenerCopy.ProtocolType);
+                    Assert.Equal(listener.SocketType, listenerCopy.SocketType);
+
+                    foreach (Socket listenerSocket in new[] { listener, listenerCopy })
                     {
-                        Task connect1 = client1.ConnectAsync(listenerSocket.LocalEndPoint);
-                        using (Socket server1 = listenerSocket.Accept())
+                        using (
+                            var client1 = new Socket(
+                                AddressFamily.InterNetwork,
+                                SocketType.Stream,
+                                ProtocolType.Tcp
+                            )
+                        )
                         {
-                            await connect1;
-                            server1.Send(new byte[] { 42 });
-                            Assert.Equal(1, client1.Receive(new byte[1]));
+                            Task connect1 = client1.ConnectAsync(listenerSocket.LocalEndPoint);
+                            using (Socket server1 = listenerSocket.Accept())
+                            {
+                                await connect1;
+                                server1.Send(new byte[] { 42 });
+                                Assert.Equal(1, client1.Receive(new byte[1]));
+                            }
                         }
                     }
-                }
-            }).WaitAsync(TestSettings.PassingTestTimeout);
+                })
+                .WaitAsync(TestSettings.PassingTestTimeout);
         }
 
         [DllImport("libc")]
@@ -508,16 +644,14 @@ namespace System.Net.Sockets.Tests
 
             public override AddressFamily AddressFamily
             {
-                get
-                {
-                    return AddressFamily.Unknown;
-                }
+                get { return AddressFamily.Unknown; }
             }
 
             public class NlSocketAddress : SocketAddress
             {
                 // We need to create base from something known.
-                public unsafe NlSocketAddress(int pid) : base(AddressFamily.Packet)
+                public unsafe NlSocketAddress(int pid)
+                    : base(AddressFamily.Packet)
                 {
                     sockaddr_nl addr = default;
 
@@ -543,16 +677,17 @@ namespace System.Net.Sockets.Tests
         [StructLayout(LayoutKind.Sequential)]
         internal struct @nlmsghdr
         {
-            internal int nlmsg_len;       /* Length of message including header */
-            internal ushort nlmsg_type;   /* Type of message content */
-            internal ushort nlmsg_flags;  /* Additional flags */
-            internal int nlmsg_seq;       /* Sequence number */
-            internal uint nlmsg_pid;      /* Sender port ID */
+            internal int nlmsg_len; /* Length of message including header */
+            internal ushort nlmsg_type; /* Type of message content */
+            internal ushort nlmsg_flags; /* Additional flags */
+            internal int nlmsg_seq; /* Sequence number */
+            internal uint nlmsg_pid; /* Sender port ID */
         };
 
         [StructLayout(LayoutKind.Sequential)]
-        private struct @nlmsgerr {
-            internal int     error;
+        private struct @nlmsgerr
+        {
+            internal int error;
             internal nlmsghdr msg;
         }
 
@@ -589,7 +724,7 @@ namespace System.Net.Sockets.Tests
             const int RTM_NEWROUTE = 24;
             const int RTM_GETROUTE = 26;
             const int NLM_F_REQUEST = 1;
-            const int NLM_F_DUMP  = 0x300;
+            const int NLM_F_DUMP = 0x300;
             const int NLMSG_ERROR = 2;
             const int SEQ = 42;
 
@@ -603,7 +738,7 @@ namespace System.Net.Sockets.Tests
 
                 nl_request req = default;
                 req.nlh.nlmsg_pid = (uint)Environment.ProcessId;
-                req.nlh.nlmsg_type = RTM_GETROUTE;  /* We wish to get routes */
+                req.nlh.nlmsg_type = RTM_GETROUTE; /* We wish to get routes */
                 req.nlh.nlmsg_flags = NLM_F_REQUEST | NLM_F_DUMP;
                 req.nlh.nlmsg_len = sizeof(nl_request);
                 req.nlh.nlmsg_seq = SEQ;
@@ -623,7 +758,10 @@ namespace System.Net.Sockets.Tests
 
                 if (nlh.nlmsg_type == NLMSG_ERROR)
                 {
-                    MemoryMarshal.TryRead<nlmsgerr>(response.AsSpan(sizeof(nlmsghdr)), out nlmsgerr err);
+                    MemoryMarshal.TryRead<nlmsgerr>(
+                        response.AsSpan(sizeof(nlmsghdr)),
+                        out nlmsgerr err
+                    );
                     _output.WriteLine("Netlink request failed with {0}", err.error);
                 }
 
@@ -631,15 +769,14 @@ namespace System.Net.Sockets.Tests
             }
         }
 
-
         [DllImport("libc")]
-        private static unsafe extern int socketpair(int domain, int type, int protocol, int* ptr);
+        private static extern unsafe int socketpair(int domain, int type, int protocol, int* ptr);
 
         [DllImport("libc")]
         private static extern int close(int fd);
 
         [DllImport("libc", SetLastError = true)]
-        private static unsafe extern int pipe2(int* pipefd, int flags);
+        private static extern unsafe int pipe2(int* pipefd, int flags);
 
         private static unsafe (int, int) pipe2(int flags = 0)
         {
@@ -659,7 +796,10 @@ namespace System.Net.Sockets.Tests
 
         [Fact]
         [PlatformSpecific(TestPlatforms.AnyUnix)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/52124", TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/52124",
+            TestPlatforms.iOS | TestPlatforms.tvOS | TestPlatforms.MacCatalyst
+        )]
         public unsafe void Ctor_SafeHandle_SocketPair_Success()
         {
             // This is platform dependent but it seems like this is same on all supported platforms.
@@ -698,10 +838,17 @@ namespace System.Net.Sockets.Tests
         [InlineData(true)]
         public void Ctor_Dispose_HandleClosedIfOwnsHandle(bool ownsHandle)
         {
-            Socket original = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
+            Socket original = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Dgram,
+                ProtocolType.Udp
+            );
             IntPtr handleValue = original.Handle;
 
-            SafeSocketHandle handleClone = new SafeSocketHandle(handleValue, ownsHandle: ownsHandle);
+            SafeSocketHandle handleClone = new SafeSocketHandle(
+                handleValue,
+                ownsHandle: ownsHandle
+            );
             Socket socketClone = new Socket(handleClone);
             socketClone.Dispose();
 
@@ -719,14 +866,30 @@ namespace System.Net.Sockets.Tests
 
         private static void AssertEqualOrSameException<T>(Func<T> expected, Func<T> actual)
         {
-            T r1 = default, r2 = default;
-            Exception e1 = null, e2 = null;
+            T r1 = default,
+                r2 = default;
+            Exception e1 = null,
+                e2 = null;
 
-            try { r1 = expected(); }
-            catch (Exception e) { e1 = e; };
+            try
+            {
+                r1 = expected();
+            }
+            catch (Exception e)
+            {
+                e1 = e;
+            }
+            ;
 
-            try { r2 = actual(); }
-            catch (Exception e) { e2 = e; };
+            try
+            {
+                r2 = actual();
+            }
+            catch (Exception e)
+            {
+                e2 = e;
+            }
+            ;
 
             Assert.Equal(e1 is null, e2 is null);
             if (e1 is null)

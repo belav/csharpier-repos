@@ -1,69 +1,77 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Text;
-    using System.Drawing;
-    using System.Resources;
-    using System.Reflection;
-    using System.Diagnostics;
     using System.Collections;
-    using System.Drawing.Text;
-    using System.Globalization;
-    using System.Windows.Forms;
-    using System.Drawing.Design;
-    using System.ComponentModel;
-    using System.Drawing.Drawing2D;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.ComponentModel.Design;
     using System.Collections.Specialized;
-    using System.Runtime.InteropServices;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using Microsoft.Win32;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Design;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Text;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Resources;
+    using System.Runtime.InteropServices;
+    using System.Text;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
     using System.Workflow.ComponentModel.Compiler;
     using System.Workflow.ComponentModel.Serialization;
-    using System.Windows.Forms.Design;
+    using System.Xml;
+    using Microsoft.Win32;
 
     //
 
-
-
     #region WorkflowTheme Enums
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum ThemeType
     {
         Default = 0,
         System = 1,
-        UserDefined = 2
+        UserDefined = 2,
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum DesignerGeometry
     {
         Rectangle = 0,
-        RoundedRectangle = 1
+        RoundedRectangle = 1,
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum TextQuality
     {
         Aliased = 0,
         AntiAliased = 1,
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum DesignerSize
     {
-        //Please note that this enum is used to access array and hence we need to 
+        //Please note that this enum is used to access array and hence we need to
         //change all the arrays before changing this enum
         Small = 0,
         Medium = 1,
-        Large = 2
+        Large = 2,
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum DesignerContentAlignment
     {
         Left = 1,
@@ -79,10 +87,12 @@ namespace System.Workflow.ComponentModel.Design
         BottomLeft = Left + Bottom,
         BottomCenter = Center + Bottom,
         BottomRight = Right + Bottom,
-        Fill = 32
+        Fill = 32,
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum LineAnchor
     {
         None = 0,
@@ -95,20 +105,24 @@ namespace System.Workflow.ComponentModel.Design
         Rectangle = 7,
         RectangleAnchor = 8,
         RoundedRectangle = 9,
-        RoundedRectangleAnchor = 10
+        RoundedRectangleAnchor = 10,
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum AmbientProperty
     {
         DesignerSize = 0,
-        OperatingSystemSetting = 1
+        OperatingSystemSetting = 1,
     }
     #endregion
 
     #region Class ActivityDesignerThemeAttribute
     [AttributeUsage(AttributeTargets.Class)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ActivityDesignerThemeAttribute : Attribute
     {
         private Type designerThemeType = null;
@@ -121,36 +135,29 @@ namespace System.Workflow.ComponentModel.Design
 
         public Type DesignerThemeType
         {
-            get
-            {
-                return this.designerThemeType;
-            }
+            get { return this.designerThemeType; }
         }
 
         public string Xml
         {
-            get
-            {
-                return this.xml;
-            }
-
-            set
-            {
-                this.xml = value;
-            }
+            get { return this.xml; }
+            set { this.xml = value; }
         }
     }
     #endregion
 
     #region Class WorkflowTheme
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class WorkflowTheme : IDisposable
     {
         #region Static Members
         private static readonly string WorkflowThemesSubKey = "Themes";
         private const string ThemeTypeKey = "ThemeType";
         private const string ThemePathKey = "ThemeFilePath";
-        private const string ThemeResourceNS = "System.Workflow.ComponentModel.Design.ActivityDesignerThemes.";
+        private const string ThemeResourceNS =
+            "System.Workflow.ComponentModel.Design.ActivityDesignerThemes.";
         internal const string DefaultThemeFileExtension = "*.wtm";
         internal static string DefaultNamespace = typeof(WorkflowTheme).Namespace.Replace(".", "_");
         private static IUIService uiService = null; //cached session-wide ui service (for getting environment font)
@@ -207,10 +214,7 @@ namespace System.Workflow.ComponentModel.Design
         #region Static Properties and Methods
         internal static IUIService UIService
         {
-            get
-            {
-                return WorkflowTheme.uiService;
-            }
+            get { return WorkflowTheme.uiService; }
             set
             {
                 WorkflowTheme.uiService = value;
@@ -224,7 +228,8 @@ namespace System.Workflow.ComponentModel.Design
             if (WorkflowTheme.defaultFont == null)
             {
                 if (WorkflowTheme.UIService != null)
-                    WorkflowTheme.defaultFont = WorkflowTheme.UIService.Styles["DialogFont"] as Font;
+                    WorkflowTheme.defaultFont =
+                        WorkflowTheme.UIService.Styles["DialogFont"] as Font;
 
                 if (WorkflowTheme.defaultFont == null)
                     WorkflowTheme.defaultFont = Control.DefaultFont;
@@ -235,10 +240,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public static string RegistryKeyPath
         {
-            get
-            {
-                return DesignerHelpers.DesignerPerUserRegistryKey + "\\" + WorkflowThemesSubKey;
-            }
+            get { return DesignerHelpers.DesignerPerUserRegistryKey + "\\" + WorkflowThemesSubKey; }
         }
 
         public static WorkflowTheme CurrentTheme
@@ -253,7 +255,6 @@ namespace System.Workflow.ComponentModel.Design
 
                 return WorkflowTheme.currentTheme;
             }
-
             set
             {
                 if (WorkflowTheme.currentTheme == value)
@@ -283,11 +284,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public static bool EnableChangeNotification
         {
-            get
-            {
-                return WorkflowTheme.enableChangeNotification;
-            }
-
+            get { return WorkflowTheme.enableChangeNotification; }
             set
             {
                 if (WorkflowTheme.enableChangeNotification == value)
@@ -310,12 +307,13 @@ namespace System.Workflow.ComponentModel.Design
                         path = new Uri(Assembly.GetExecutingAssembly().CodeBase).AbsolutePath;
                     }
 
-                    path = Path.Combine(path, "Windows Workflow Foundation" + Path.DirectorySeparatorChar + "Themes");
+                    path = Path.Combine(
+                        path,
+                        "Windows Workflow Foundation" + Path.DirectorySeparatorChar + "Themes"
+                    );
                     path += Path.DirectorySeparatorChar;
                 }
-                catch
-                {
-                }
+                catch { }
 
                 Debug.Assert(path != null && path.Length > 0);
                 return path;
@@ -328,7 +326,12 @@ namespace System.Workflow.ComponentModel.Design
             string tempThemePath = Path.Combine(path, DR.GetString(DR.MyFavoriteTheme) + ".wtm");
             for (int i = 1; File.Exists(tempThemePath); i++)
             {
-                tempThemePath = Path.Combine(path, DR.GetString(DR.MyFavoriteTheme) + i.ToString(CultureInfo.InvariantCulture) + ".wtm");
+                tempThemePath = Path.Combine(
+                    path,
+                    DR.GetString(DR.MyFavoriteTheme)
+                        + i.ToString(CultureInfo.InvariantCulture)
+                        + ".wtm"
+                );
             }
             return tempThemePath;
         }
@@ -345,16 +348,23 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     object registryValue = themeKey.GetValue(WorkflowTheme.ThemeTypeKey);
                     if (registryValue is string)
-                        themeType = (ThemeType)Enum.Parse(typeof(ThemeType), (string)registryValue, true);
+                        themeType = (ThemeType)
+                            Enum.Parse(typeof(ThemeType), (string)registryValue, true);
 
                     if (themeType == ThemeType.UserDefined)
                     {
                         registryValue = themeKey.GetValue(WorkflowTheme.ThemePathKey);
-                        string themePath = (registryValue is string) ? (string)registryValue : String.Empty;
+                        string themePath =
+                            (registryValue is string) ? (string)registryValue : String.Empty;
                         if (File.Exists(themePath))
                         {
                             string extension = Path.GetExtension(themePath);
-                            if (extension.Equals(WorkflowTheme.DefaultThemeFileExtension.Replace("*", ""), StringComparison.Ordinal))
+                            if (
+                                extension.Equals(
+                                    WorkflowTheme.DefaultThemeFileExtension.Replace("*", ""),
+                                    StringComparison.Ordinal
+                                )
+                            )
                                 loadedTheme = WorkflowTheme.Load(themePath);
                         }
                     }
@@ -386,9 +396,15 @@ namespace System.Workflow.ComponentModel.Design
             {
                 try
                 {
-                    themeKey.SetValue(WorkflowTheme.ThemeTypeKey, WorkflowTheme.CurrentTheme.themeType);
+                    themeKey.SetValue(
+                        WorkflowTheme.ThemeTypeKey,
+                        WorkflowTheme.CurrentTheme.themeType
+                    );
                     if (WorkflowTheme.CurrentTheme.themeType == ThemeType.UserDefined)
-                        themeKey.SetValue(WorkflowTheme.ThemePathKey, WorkflowTheme.CurrentTheme.FilePath);
+                        themeKey.SetValue(
+                            WorkflowTheme.ThemePathKey,
+                            WorkflowTheme.CurrentTheme.FilePath
+                        );
                     else
                         themeKey.SetValue(WorkflowTheme.ThemePathKey, String.Empty);
                 }
@@ -438,9 +454,24 @@ namespace System.Workflow.ComponentModel.Design
             get
             {
                 //DO NOT CHANGE THE ORDER OF THE THEMES ADDED BELOW
-                Dictionary<ThemeType, string[]> standardThemes = new Dictionary<ThemeType, string[]>();
-                standardThemes.Add(ThemeType.Default, new string[] { DR.GetString(DR.DefaultTheme), DR.GetString(DR.DefaultThemeDescription) });
-                standardThemes.Add(ThemeType.System, new string[] { DR.GetString(DR.OSTheme), DR.GetString(DR.SystemThemeDescription) });
+                Dictionary<ThemeType, string[]> standardThemes =
+                    new Dictionary<ThemeType, string[]>();
+                standardThemes.Add(
+                    ThemeType.Default,
+                    new string[]
+                    {
+                        DR.GetString(DR.DefaultTheme),
+                        DR.GetString(DR.DefaultThemeDescription),
+                    }
+                );
+                standardThemes.Add(
+                    ThemeType.System,
+                    new string[]
+                    {
+                        DR.GetString(DR.OSTheme),
+                        DR.GetString(DR.SystemThemeDescription),
+                    }
+                );
                 return standardThemes;
             }
         }
@@ -460,7 +491,10 @@ namespace System.Workflow.ComponentModel.Design
                 return WorkflowTheme.Load(serializationManager, themeFilePath);
         }
 
-        public static WorkflowTheme Load(IDesignerSerializationManager serializationManager, string themeFilePath)
+        public static WorkflowTheme Load(
+            IDesignerSerializationManager serializationManager,
+            string themeFilePath
+        )
         {
             if (serializationManager == null)
                 throw new ArgumentNullException("serializationManager");
@@ -469,13 +503,16 @@ namespace System.Workflow.ComponentModel.Design
             if (themeFilePath != null && File.Exists(themeFilePath))
             {
                 XmlReader xmlReader = XmlReader.Create(themeFilePath);
-                ThemeSerializationProvider themeSerializationProvider = new ThemeSerializationProvider();
+                ThemeSerializationProvider themeSerializationProvider =
+                    new ThemeSerializationProvider();
 
                 try
                 {
                     serializationManager.AddSerializationProvider(themeSerializationProvider);
                     WorkflowMarkupSerializer xomlSerializer = new WorkflowMarkupSerializer();
-                    theme = xomlSerializer.Deserialize(serializationManager, xmlReader) as WorkflowTheme;
+                    theme =
+                        xomlSerializer.Deserialize(serializationManager, xmlReader)
+                        as WorkflowTheme;
                 }
                 finally
                 {
@@ -498,9 +535,11 @@ namespace System.Workflow.ComponentModel.Design
             DesignerSerializationManager dsManager = new DesignerSerializationManager();
             using (dsManager.CreateSession())
             {
-                WorkflowMarkupSerializationManager serializationManager = new WorkflowMarkupSerializationManager(dsManager);
+                WorkflowMarkupSerializationManager serializationManager =
+                    new WorkflowMarkupSerializationManager(dsManager);
                 XmlWriter streamWriter = null;
-                ThemeSerializationProvider themeSerializationProvider = new ThemeSerializationProvider();
+                ThemeSerializationProvider themeSerializationProvider =
+                    new ThemeSerializationProvider();
 
                 try
                 {
@@ -533,24 +572,34 @@ namespace System.Workflow.ComponentModel.Design
             DesignerSerializationManager serializationManager = new DesignerSerializationManager();
             using (serializationManager.CreateSession())
             {
-                ThemeSerializationProvider themeSerializationProvider = new ThemeSerializationProvider();
-                StringWriter stringWriter = new StringWriter(new StringBuilder(), CultureInfo.InvariantCulture);
+                ThemeSerializationProvider themeSerializationProvider =
+                    new ThemeSerializationProvider();
+                StringWriter stringWriter = new StringWriter(
+                    new StringBuilder(),
+                    CultureInfo.InvariantCulture
+                );
                 StringReader stringReader = null;
 
                 try
                 {
-                    ((IDesignerSerializationManager)serializationManager).AddSerializationProvider(themeSerializationProvider);
+                    ((IDesignerSerializationManager)serializationManager).AddSerializationProvider(
+                        themeSerializationProvider
+                    );
                     WorkflowMarkupSerializer xomlSerializer = new WorkflowMarkupSerializer();
                     using (XmlWriter xmlWriter = Helpers.CreateXmlWriter(stringWriter))
                         xomlSerializer.Serialize(serializationManager, xmlWriter, this);
 
                     stringReader = new StringReader(stringWriter.ToString());
                     using (XmlReader xmlReader = XmlReader.Create(stringReader))
-                        theme = xomlSerializer.Deserialize(serializationManager, xmlReader) as WorkflowTheme;
+                        theme =
+                            xomlSerializer.Deserialize(serializationManager, xmlReader)
+                            as WorkflowTheme;
                 }
                 finally
                 {
-                    ((IDesignerSerializationManager)serializationManager).RemoveSerializationProvider(themeSerializationProvider);
+                    (
+                        (IDesignerSerializationManager)serializationManager
+                    ).RemoveSerializationProvider(themeSerializationProvider);
                     stringReader.Close();
                     stringWriter.Close();
                 }
@@ -572,11 +621,7 @@ namespace System.Workflow.ComponentModel.Design
         #region Public Properties and Methods
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
-
+            get { return this.name; }
             set
             {
                 if (ReadOnly)
@@ -588,11 +633,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public string Version
         {
-            get
-            {
-                return this.version;
-            }
-
+            get { return this.version; }
             set
             {
                 if (ReadOnly)
@@ -604,11 +645,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public string Description
         {
-            get
-            {
-                return this.description;
-            }
-
+            get { return this.description; }
             set
             {
                 if (ReadOnly)
@@ -622,11 +659,7 @@ namespace System.Workflow.ComponentModel.Design
         [Browsable(false)]
         public string FilePath
         {
-            get
-            {
-                return this.filePath;
-            }
-
+            get { return this.filePath; }
             set
             {
                 if (ReadOnly)
@@ -646,11 +679,10 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     try
                     {
-                        directory = Path.GetDirectoryName(this.filePath) + Path.DirectorySeparatorChar;
+                        directory =
+                            Path.GetDirectoryName(this.filePath) + Path.DirectorySeparatorChar;
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
 
                 return directory;
@@ -660,19 +692,13 @@ namespace System.Workflow.ComponentModel.Design
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         public IList DesignerThemes
         {
-            get
-            {
-                return this.designerThemes;
-            }
+            get { return this.designerThemes; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public AmbientTheme AmbientTheme
         {
-            get
-            {
-                return GetTheme(typeof(WorkflowView)) as AmbientTheme;
-            }
+            get { return GetTheme(typeof(WorkflowView)) as AmbientTheme; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -687,31 +713,53 @@ namespace System.Workflow.ComponentModel.Design
         internal DesignerTheme GetTheme(Type designerType)
         {
             bool wasReadOnly = ReadOnly;
-            DesignerTheme designerTheme = (this.designerThemes.Contains(designerType.FullName)) ? this.designerThemes[designerType.FullName] : null;
+            DesignerTheme designerTheme =
+                (this.designerThemes.Contains(designerType.FullName))
+                    ? this.designerThemes[designerType.FullName]
+                    : null;
 
             try
             {
                 ReadOnly = false;
 
-                if (designerTheme == null || (designerTheme.DesignerType != null && !designerType.Equals(designerTheme.DesignerType)))
+                if (
+                    designerTheme == null
+                    || (
+                        designerTheme.DesignerType != null
+                        && !designerType.Equals(designerTheme.DesignerType)
+                    )
+                )
                 {
                     //This means that the two types are not equal and hence we need to replace the theme
                     bool replaceTheme = (designerTheme != null);
 
-                    AttributeCollection attributeCollection = TypeDescriptor.GetAttributes(designerType);
-                    ActivityDesignerThemeAttribute themeAttrib = attributeCollection[typeof(ActivityDesignerThemeAttribute)] as ActivityDesignerThemeAttribute;
+                    AttributeCollection attributeCollection = TypeDescriptor.GetAttributes(
+                        designerType
+                    );
+                    ActivityDesignerThemeAttribute themeAttrib =
+                        attributeCollection[typeof(ActivityDesignerThemeAttribute)]
+                        as ActivityDesignerThemeAttribute;
                     if (themeAttrib == null)
-                        throw new InvalidOperationException(DR.GetString(DR.Error_ThemeAttributeMissing, designerType.FullName));
+                        throw new InvalidOperationException(
+                            DR.GetString(DR.Error_ThemeAttributeMissing, designerType.FullName)
+                        );
 
                     if (themeAttrib.DesignerThemeType == null)
-                        throw new InvalidOperationException(DR.GetString(DR.Error_ThemeTypeMissing, designerType.FullName));
+                        throw new InvalidOperationException(
+                            DR.GetString(DR.Error_ThemeTypeMissing, designerType.FullName)
+                        );
 
                     if (themeAttrib.Xml.Length > 0)
                     {
                         //First check if the theme initializer is obtained from resource as a manifest
-                        Stream stream = designerType.Assembly.GetManifestResourceStream(designerType, themeAttrib.Xml);
+                        Stream stream = designerType.Assembly.GetManifestResourceStream(
+                            designerType,
+                            themeAttrib.Xml
+                        );
                         if (stream == null)
-                            stream = designerType.Assembly.GetManifestResourceStream(WorkflowTheme.ThemeResourceNS + themeAttrib.Xml);
+                            stream = designerType.Assembly.GetManifestResourceStream(
+                                WorkflowTheme.ThemeResourceNS + themeAttrib.Xml
+                            );
 
                         //Check if the theme initializer is obtained from file
                         XmlReader textReader = (stream != null) ? XmlReader.Create(stream) : null;
@@ -720,21 +768,48 @@ namespace System.Workflow.ComponentModel.Design
 
                         if (textReader != null)
                         {
-                            DesignerSerializationManager serializationManager = new DesignerSerializationManager();
+                            DesignerSerializationManager serializationManager =
+                                new DesignerSerializationManager();
                             using (serializationManager.CreateSession())
                             {
-                                ThemeSerializationProvider themeSerializationProvider = new ThemeSerializationProvider();
+                                ThemeSerializationProvider themeSerializationProvider =
+                                    new ThemeSerializationProvider();
 
                                 try
                                 {
-                                    ((IDesignerSerializationManager)serializationManager).AddSerializationProvider(themeSerializationProvider);
-                                    ((IDesignerSerializationManager)serializationManager).Context.Push(this);
-                                    WorkflowMarkupSerializer xomlSerializer = new WorkflowMarkupSerializer();
-                                    designerTheme = xomlSerializer.Deserialize(serializationManager, textReader) as DesignerTheme;
+                                    (
+                                        (IDesignerSerializationManager)serializationManager
+                                    ).AddSerializationProvider(themeSerializationProvider);
+                                    (
+                                        (IDesignerSerializationManager)serializationManager
+                                    ).Context.Push(this);
+                                    WorkflowMarkupSerializer xomlSerializer =
+                                        new WorkflowMarkupSerializer();
+                                    designerTheme =
+                                        xomlSerializer.Deserialize(serializationManager, textReader)
+                                        as DesignerTheme;
 
-                                    if (designerTheme != null && !themeAttrib.DesignerThemeType.IsAssignableFrom(designerTheme.GetType()))
+                                    if (
+                                        designerTheme != null
+                                        && !themeAttrib.DesignerThemeType.IsAssignableFrom(
+                                            designerTheme.GetType()
+                                        )
+                                    )
                                     {
-                                        ((IDesignerSerializationManager)serializationManager).ReportError(new WorkflowMarkupSerializationException(DR.GetString(DR.ThemeTypesMismatch, new object[] { themeAttrib.DesignerThemeType.FullName, designerTheme.GetType().FullName })));
+                                        (
+                                            (IDesignerSerializationManager)serializationManager
+                                        ).ReportError(
+                                            new WorkflowMarkupSerializationException(
+                                                DR.GetString(
+                                                    DR.ThemeTypesMismatch,
+                                                    new object[]
+                                                    {
+                                                        themeAttrib.DesignerThemeType.FullName,
+                                                        designerTheme.GetType().FullName,
+                                                    }
+                                                )
+                                            )
+                                        );
                                         designerTheme = null;
                                     }
 
@@ -748,9 +823,11 @@ namespace System.Workflow.ComponentModel.Design
                                 }
                                 finally
                                 {
-                                    //In some cases the type resolution throws an exception when we try to create a illegal theme type, 
+                                    //In some cases the type resolution throws an exception when we try to create a illegal theme type,
                                     //this is the reason we need to catch it and proceed further
-                                    ((IDesignerSerializationManager)serializationManager).RemoveSerializationProvider(themeSerializationProvider);
+                                    (
+                                        (IDesignerSerializationManager)serializationManager
+                                    ).RemoveSerializationProvider(themeSerializationProvider);
                                     textReader.Close();
                                 }
                             }
@@ -761,7 +838,11 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         try
                         {
-                            designerTheme = Activator.CreateInstance(themeAttrib.DesignerThemeType, new object[] { this }) as DesignerTheme;
+                            designerTheme =
+                                Activator.CreateInstance(
+                                    themeAttrib.DesignerThemeType,
+                                    new object[] { this }
+                                ) as DesignerTheme;
                         }
                         catch
                         {
@@ -804,24 +885,14 @@ namespace System.Workflow.ComponentModel.Design
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public ThemeType Type
         {
-            get
-            {
-                return this.themeType;
-            }
+            get { return this.themeType; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public bool ReadOnly
         {
-            get
-            {
-                return this.readOnly;
-            }
-
-            set
-            {
-                this.readOnly = value;
-            }
+            get { return this.readOnly; }
+            set { this.readOnly = value; }
         }
         #endregion
 
@@ -841,7 +912,9 @@ namespace System.Workflow.ComponentModel.Design
     #region Class DesignerTheme
     [DesignerSerializer(typeof(ThemeSerializer), typeof(WorkflowMarkupSerializer))]
     [TypeConverter(typeof(ThemeTypeConverter))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class DesignerTheme : IDisposable, IPropertyValueProvider
     {
         #region Members and Initialization
@@ -865,13 +938,9 @@ namespace System.Workflow.ComponentModel.Design
             GC.SuppressFinalize(this);
         }
 
-        public virtual void Initialize()
-        {
-        }
+        public virtual void Initialize() { }
 
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
         #endregion
 
         #region Properties and Methods
@@ -879,21 +948,14 @@ namespace System.Workflow.ComponentModel.Design
         [Browsable(false)]
         protected WorkflowTheme ContainingTheme
         {
-            get
-            {
-                return this.workflowTheme;
-            }
+            get { return this.workflowTheme; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         public virtual Type DesignerType
         {
-            get
-            {
-                return this.designerType;
-            }
-
+            get { return this.designerType; }
             set
             {
                 if (ReadOnly)
@@ -906,11 +968,7 @@ namespace System.Workflow.ComponentModel.Design
         [Browsable(false)]
         public virtual string ApplyTo
         {
-            get
-            {
-                return this.designerTypeName;
-            }
-
+            get { return this.designerTypeName; }
             set
             {
                 if (ReadOnly)
@@ -920,9 +978,7 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        public virtual void OnAmbientPropertyChanged(AmbientProperty ambientProperty)
-        {
-        }
+        public virtual void OnAmbientPropertyChanged(AmbientProperty ambientProperty) { }
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -960,26 +1016,43 @@ namespace System.Workflow.ComponentModel.Design
         #region Class ThemeSerializer
         private class ThemeSerializer : WorkflowMarkupSerializer
         {
-            protected override object CreateInstance(WorkflowMarkupSerializationManager serializationManager, Type type)
+            protected override object CreateInstance(
+                WorkflowMarkupSerializationManager serializationManager,
+                Type type
+            )
             {
                 if (typeof(DesignerTheme).IsAssignableFrom(type))
-                    return Activator.CreateInstance(type, new object[] { serializationManager.Context[typeof(WorkflowTheme)] });
+                    return Activator.CreateInstance(
+                        type,
+                        new object[] { serializationManager.Context[typeof(WorkflowTheme)] }
+                    );
                 else
                     return base.CreateInstance(serializationManager, type);
             }
         }
         #endregion
-
     }
     #endregion
 
     #region Class ActivityDesignerTheme
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityDesignerTheme : DesignerTheme
     {
         #region Constants
-        private static readonly Size[] DesignerSizes = new Size[] { new Size(90, 40), new Size(130, 41), new Size(110, 50) };
-        private static readonly Size[] ImageSizes = new Size[] { new Size(16, 16), new Size(16, 16), new Size(24, 24) };
+        private static readonly Size[] DesignerSizes = new Size[]
+        {
+            new Size(90, 40),
+            new Size(130, 41),
+            new Size(110, 50),
+        };
+        private static readonly Size[] ImageSizes = new Size[]
+        {
+            new Size(16, 16),
+            new Size(16, 16),
+            new Size(24, 24),
+        };
         #endregion
 
         #region Members and Initialization
@@ -1001,9 +1074,7 @@ namespace System.Workflow.ComponentModel.Design
         private Rectangle backgroundBrushRect;
 
         public ActivityDesignerTheme(WorkflowTheme theme)
-            : base(theme)
-        {
-        }
+            : base(theme) { }
 
         protected override void Dispose(bool disposing)
         {
@@ -1061,22 +1132,34 @@ namespace System.Workflow.ComponentModel.Design
         [Editor(typeof(ImageBrowserEditor), typeof(UITypeEditor))]
         public virtual string DesignerImagePath
         {
-            get
-            {
-                return this.designerImagePath;
-            }
-
+            get { return this.designerImagePath; }
             set
             {
                 if (ReadOnly)
                     throw new InvalidOperationException(DR.GetString(DR.ThemePropertyReadOnly));
 
-                if (value != null && value.Length > 0 && value.Contains(Path.DirectorySeparatorChar.ToString()) && Path.IsPathRooted(value))
+                if (
+                    value != null
+                    && value.Length > 0
+                    && value.Contains(Path.DirectorySeparatorChar.ToString())
+                    && Path.IsPathRooted(value)
+                )
                 {
-                    value = DesignerHelpers.GetRelativePath(ContainingTheme.ContainingFileDirectory, value);
+                    value = DesignerHelpers.GetRelativePath(
+                        ContainingTheme.ContainingFileDirectory,
+                        value
+                    );
 
-                    if (!DesignerHelpers.IsValidImageResource(this, ContainingTheme.ContainingFileDirectory, value))
-                        throw new InvalidOperationException(DR.GetString(DR.Error_InvalidImageResource));
+                    if (
+                        !DesignerHelpers.IsValidImageResource(
+                            this,
+                            ContainingTheme.ContainingFileDirectory,
+                            value
+                        )
+                    )
+                        throw new InvalidOperationException(
+                            DR.GetString(DR.Error_InvalidImageResource)
+                        );
                 }
 
                 this.designerImagePath = value;
@@ -1095,11 +1178,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public virtual Color ForeColor
         {
-            get
-            {
-                return this.foreColor;
-            }
-
+            get { return this.foreColor; }
             set
             {
                 if (ReadOnly)
@@ -1128,11 +1207,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public virtual Color BorderColor
         {
-            get
-            {
-                return this.borderColor;
-            }
-
+            get { return this.borderColor; }
             set
             {
                 if (ReadOnly)
@@ -1153,11 +1228,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(FilteredEnumConverter))]
         public virtual DashStyle BorderStyle
         {
-            get
-            {
-                return this.borderStyle;
-            }
-
+            get { return this.borderStyle; }
             set
             {
                 if (ReadOnly)
@@ -1182,11 +1253,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public virtual Color BackColorStart
         {
-            get
-            {
-                return this.backColorStart;
-            }
-
+            get { return this.backColorStart; }
             set
             {
                 if (ReadOnly)
@@ -1208,11 +1275,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public virtual Color BackColorEnd
         {
-            get
-            {
-                return this.backColorEnd;
-            }
-
+            get { return this.backColorEnd; }
             set
             {
                 if (ReadOnly)
@@ -1232,11 +1295,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("BackgroundCategory", DR.ResourceSet)]
         public virtual LinearGradientMode BackgroundStyle
         {
-            get
-            {
-                return this.backgroundStyle;
-            }
-
+            get { return this.backgroundStyle; }
             set
             {
                 if (ReadOnly)
@@ -1305,7 +1364,12 @@ namespace System.Workflow.ComponentModel.Design
                 if (this.backColorStart == this.backColorEnd)
                     this.backgroundBrush = new SolidBrush(this.backColorStart);
                 else
-                    this.backgroundBrush = new LinearGradientBrush(this.backgroundBrushRect, this.backColorStart, this.backColorEnd, this.backgroundStyle);
+                    this.backgroundBrush = new LinearGradientBrush(
+                        this.backgroundBrushRect,
+                        this.backColorStart,
+                        this.backColorEnd,
+                        this.backgroundStyle
+                    );
             }
             return this.backgroundBrush;
         }
@@ -1316,7 +1380,9 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                return ActivityDesignerTheme.DesignerSizes[(int)ContainingTheme.AmbientTheme.DesignerSize];
+                return ActivityDesignerTheme.DesignerSizes[
+                    (int)ContainingTheme.AmbientTheme.DesignerSize
+                ];
             }
         }
 
@@ -1340,7 +1406,11 @@ namespace System.Workflow.ComponentModel.Design
             get
             {
                 if (this.designerImage == null && this.designerImagePath.Length > 0)
-                    this.designerImage = DesignerHelpers.GetImageFromPath(this, ContainingTheme.ContainingFileDirectory, this.designerImagePath);
+                    this.designerImage = DesignerHelpers.GetImageFromPath(
+                        this,
+                        ContainingTheme.ContainingFileDirectory,
+                        this.designerImagePath
+                    );
                 return this.designerImage;
             }
         }
@@ -1351,7 +1421,9 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                return ActivityDesignerTheme.ImageSizes[(int)ContainingTheme.AmbientTheme.DesignerSize];
+                return ActivityDesignerTheme.ImageSizes[
+                    (int)ContainingTheme.AmbientTheme.DesignerSize
+                ];
             }
         }
 
@@ -1359,30 +1431,21 @@ namespace System.Workflow.ComponentModel.Design
         [Browsable(false)]
         public Font Font
         {
-            get
-            {
-                return ContainingTheme.AmbientTheme.Font;
-            }
+            get { return ContainingTheme.AmbientTheme.Font; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         public Font BoldFont
         {
-            get
-            {
-                return ContainingTheme.AmbientTheme.BoldFont;
-            }
+            get { return ContainingTheme.AmbientTheme.BoldFont; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         public int BorderWidth
         {
-            get
-            {
-                return ContainingTheme.AmbientTheme.BorderWidth;
-            }
+            get { return ContainingTheme.AmbientTheme.BorderWidth; }
         }
 
         public override void OnAmbientPropertyChanged(AmbientProperty ambientProperty)
@@ -1411,8 +1474,21 @@ namespace System.Workflow.ComponentModel.Design
         internal override ICollection GetPropertyValues(ITypeDescriptorContext context)
         {
             object[] values = new object[] { };
-            if (string.Equals(context.PropertyDescriptor.Name, "BorderStyle", StringComparison.Ordinal))
-                values = new object[] { DashStyle.Solid, DashStyle.Dash, DashStyle.DashDot, DashStyle.DashDotDot, DashStyle.Dot };
+            if (
+                string.Equals(
+                    context.PropertyDescriptor.Name,
+                    "BorderStyle",
+                    StringComparison.Ordinal
+                )
+            )
+                values = new object[]
+                {
+                    DashStyle.Solid,
+                    DashStyle.Dash,
+                    DashStyle.DashDot,
+                    DashStyle.DashDotDot,
+                    DashStyle.Dot,
+                };
 
             return values;
         }
@@ -1421,15 +1497,30 @@ namespace System.Workflow.ComponentModel.Design
     #endregion
 
     #region Class CompositeDesignerTheme
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class CompositeDesignerTheme : ActivityDesignerTheme
     {
         #region Static Members
         internal static readonly Pen ExpandButtonForegoundPen = new Pen(Color.Black, 1);
-        internal static readonly Pen ExpandButtonBorderPen = new Pen(Color.FromArgb(123, 154, 181), 1);
+        internal static readonly Pen ExpandButtonBorderPen = new Pen(
+            Color.FromArgb(123, 154, 181),
+            1
+        );
 
-        private static readonly Size[] ExpandButtonSizes = new Size[] { new Size(8, 8), new Size(8, 8), new Size(12, 12) };
-        private static readonly Size[] ConnectorSizes = new Size[] { new Size(15, 30), new Size(15, 19), new Size(25, 50) };
+        private static readonly Size[] ExpandButtonSizes = new Size[]
+        {
+            new Size(8, 8),
+            new Size(8, 8),
+            new Size(12, 12),
+        };
+        private static readonly Size[] ConnectorSizes = new Size[]
+        {
+            new Size(15, 30),
+            new Size(15, 19),
+            new Size(25, 50),
+        };
         #endregion
 
         #region Members and Constructor
@@ -1446,9 +1537,7 @@ namespace System.Workflow.ComponentModel.Design
         private Image watermarkImage;
 
         public CompositeDesignerTheme(WorkflowTheme theme)
-            : base(theme)
-        {
-        }
+            : base(theme) { }
 
         protected override void Dispose(bool disposing)
         {
@@ -1489,22 +1578,33 @@ namespace System.Workflow.ComponentModel.Design
         [Editor(typeof(ImageBrowserEditor), typeof(UITypeEditor))]
         public virtual string WatermarkImagePath
         {
-            get
-            {
-                return this.watermarkImagePath;
-            }
-
+            get { return this.watermarkImagePath; }
             set
             {
                 if (ReadOnly)
                     throw new InvalidOperationException(DR.GetString(DR.ThemePropertyReadOnly));
 
-                if (!String.IsNullOrEmpty(value) && value.Contains(Path.DirectorySeparatorChar.ToString()) && Path.IsPathRooted(value))
+                if (
+                    !String.IsNullOrEmpty(value)
+                    && value.Contains(Path.DirectorySeparatorChar.ToString())
+                    && Path.IsPathRooted(value)
+                )
                 {
-                    value = DesignerHelpers.GetRelativePath(ContainingTheme.ContainingFileDirectory, value);
+                    value = DesignerHelpers.GetRelativePath(
+                        ContainingTheme.ContainingFileDirectory,
+                        value
+                    );
 
-                    if (!DesignerHelpers.IsValidImageResource(this, ContainingTheme.ContainingFileDirectory, value))
-                        throw new InvalidOperationException(DR.GetString(DR.Error_InvalidImageResource));
+                    if (
+                        !DesignerHelpers.IsValidImageResource(
+                            this,
+                            ContainingTheme.ContainingFileDirectory,
+                            value
+                        )
+                    )
+                        throw new InvalidOperationException(
+                            DR.GetString(DR.Error_InvalidImageResource)
+                        );
                 }
 
                 this.watermarkImagePath = value;
@@ -1522,11 +1622,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("BackgroundCategory", DR.ResourceSet)]
         public virtual DesignerContentAlignment WatermarkAlignment
         {
-            get
-            {
-                return this.watermarkAlignment;
-            }
-
+            get { return this.watermarkAlignment; }
             set
             {
                 if (ReadOnly)
@@ -1542,11 +1638,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("BackgroundCategory", DR.ResourceSet)]
         public virtual bool ShowDropShadow
         {
-            get
-            {
-                return this.dropShadow;
-            }
-
+            get { return this.dropShadow; }
             set
             {
                 if (ReadOnly)
@@ -1562,11 +1654,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("ForegroundCategory", DR.ResourceSet)]
         public virtual LineAnchor ConnectorStartCap
         {
-            get
-            {
-                return this.startCap;
-            }
-
+            get { return this.startCap; }
             set
             {
                 if (ReadOnly)
@@ -1582,11 +1670,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("ForegroundCategory", DR.ResourceSet)]
         public virtual LineAnchor ConnectorEndCap
         {
-            get
-            {
-                return this.endCap;
-            }
-
+            get { return this.endCap; }
             set
             {
                 if (ReadOnly)
@@ -1604,14 +1688,21 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                if (DesignerType != null && typeof(FreeformActivityDesigner).IsAssignableFrom(DesignerType))
+                if (
+                    DesignerType != null
+                    && typeof(FreeformActivityDesigner).IsAssignableFrom(DesignerType)
+                )
                 {
-                    int connectorSize = CompositeDesignerTheme.ConnectorSizes[(int)ContainingTheme.AmbientTheme.DesignerSize].Height;
+                    int connectorSize = CompositeDesignerTheme
+                        .ConnectorSizes[(int)ContainingTheme.AmbientTheme.DesignerSize]
+                        .Height;
                     return new Size(connectorSize, connectorSize);
                 }
                 else
                 {
-                    return CompositeDesignerTheme.ConnectorSizes[(int)ContainingTheme.AmbientTheme.DesignerSize];
+                    return CompositeDesignerTheme.ConnectorSizes[
+                        (int)ContainingTheme.AmbientTheme.DesignerSize
+                    ];
                 }
             }
         }
@@ -1622,7 +1713,9 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                return CompositeDesignerTheme.ExpandButtonSizes[(int)ContainingTheme.AmbientTheme.DesignerSize];
+                return CompositeDesignerTheme.ExpandButtonSizes[
+                    (int)ContainingTheme.AmbientTheme.DesignerSize
+                ];
             }
         }
 
@@ -1633,7 +1726,12 @@ namespace System.Workflow.ComponentModel.Design
                 if (this.expandButtonBackBrush != null)
                     this.expandButtonBackBrush.Dispose();
                 this.expandButtonRectangle = rectangle;
-                this.expandButtonBackBrush = new LinearGradientBrush(this.expandButtonRectangle, Color.White, Color.FromArgb(173, 170, 156), LinearGradientMode.ForwardDiagonal);
+                this.expandButtonBackBrush = new LinearGradientBrush(
+                    this.expandButtonRectangle,
+                    Color.White,
+                    Color.FromArgb(173, 170, 156),
+                    LinearGradientMode.ForwardDiagonal
+                );
             }
             return this.expandButtonBackBrush;
         }
@@ -1645,7 +1743,11 @@ namespace System.Workflow.ComponentModel.Design
             get
             {
                 if (this.watermarkImage == null && this.watermarkImagePath.Length > 0)
-                    this.watermarkImage = DesignerHelpers.GetImageFromPath(this, ContainingTheme.ContainingFileDirectory, this.watermarkImagePath);
+                    this.watermarkImage = DesignerHelpers.GetImageFromPath(
+                        this,
+                        ContainingTheme.ContainingFileDirectory,
+                        this.watermarkImagePath
+                    );
                 return this.watermarkImage;
             }
         }
@@ -1669,7 +1771,9 @@ namespace System.Workflow.ComponentModel.Design
     #endregion
 
     #region Class ActivityPreviewDesignerTheme
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class ActivityPreviewDesignerTheme : CompositeDesignerTheme
     {
         #region Static Members
@@ -1677,13 +1781,29 @@ namespace System.Workflow.ComponentModel.Design
         internal static readonly Bitmap LeftScrollImageUp = DR.GetImage(DR.MoveLeftUp) as Bitmap;
         internal static readonly Bitmap RightScrollImage = DR.GetImage(DR.MoveRight) as Bitmap;
         internal static readonly Bitmap RightScrollImageUp = DR.GetImage(DR.MoveRightUp) as Bitmap;
-        internal static readonly Bitmap PreviewButtonImage = DR.GetImage(DR.PreviewModeIcon) as Bitmap;
+        internal static readonly Bitmap PreviewButtonImage =
+            DR.GetImage(DR.PreviewModeIcon) as Bitmap;
         internal static readonly Bitmap EditButtonImage = DR.GetImage(DR.EditModeIcon) as Bitmap;
         internal static readonly Bitmap PreviewImage = DR.GetImage(DR.PreviewIndicator) as Bitmap;
 
-        private static readonly Size[] ItemSizes = new Size[] { new Size(20, 20), new Size(20, 20), new Size(30, 30) };
-        private static readonly Size[] PreviewButtonSizes = new Size[] { new Size(16, 16), new Size(16, 16), new Size(20, 20) };
-        private static readonly Size[] PreviewWindowSizes = new Size[] { new Size(172, 120), new Size(172, 120), new Size(212, 160) };
+        private static readonly Size[] ItemSizes = new Size[]
+        {
+            new Size(20, 20),
+            new Size(20, 20),
+            new Size(30, 30),
+        };
+        private static readonly Size[] PreviewButtonSizes = new Size[]
+        {
+            new Size(16, 16),
+            new Size(16, 16),
+            new Size(20, 20),
+        };
+        private static readonly Size[] PreviewWindowSizes = new Size[]
+        {
+            new Size(172, 120),
+            new Size(172, 120),
+            new Size(212, 160),
+        };
         private const int DefaultItemCount = 5;
         #endregion
 
@@ -1698,9 +1818,7 @@ namespace System.Workflow.ComponentModel.Design
         private Pen previewBorderPen;
 
         public ActivityPreviewDesignerTheme(WorkflowTheme theme)
-            : base(theme)
-        {
-        }
+            : base(theme) { }
 
         protected override void Dispose(bool disposing)
         {
@@ -1747,11 +1865,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public Color PreviewForeColor
         {
-            get
-            {
-                return this.previewForeColor;
-            }
-
+            get { return this.previewForeColor; }
             set
             {
                 if (ReadOnly)
@@ -1773,11 +1887,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public Color PreviewBackColor
         {
-            get
-            {
-                return this.previewBackColor;
-            }
-
+            get { return this.previewBackColor; }
             set
             {
                 if (ReadOnly)
@@ -1799,11 +1909,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public Color PreviewBorderColor
         {
-            get
-            {
-                return this.previewBorderColor;
-            }
-
+            get { return this.previewBorderColor; }
             set
             {
                 if (ReadOnly)
@@ -1826,7 +1932,9 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                return ActivityPreviewDesignerTheme.ItemSizes[(int)ContainingTheme.AmbientTheme.DesignerSize];
+                return ActivityPreviewDesignerTheme.ItemSizes[
+                    (int)ContainingTheme.AmbientTheme.DesignerSize
+                ];
             }
         }
 
@@ -1834,10 +1942,7 @@ namespace System.Workflow.ComponentModel.Design
         [Browsable(false)]
         internal int PreviewItemCount
         {
-            get
-            {
-                return ActivityPreviewDesignerTheme.DefaultItemCount;
-            }
+            get { return ActivityPreviewDesignerTheme.DefaultItemCount; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -1846,7 +1951,9 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                return ActivityPreviewDesignerTheme.PreviewWindowSizes[(int)ContainingTheme.AmbientTheme.DesignerSize];
+                return ActivityPreviewDesignerTheme.PreviewWindowSizes[
+                    (int)ContainingTheme.AmbientTheme.DesignerSize
+                ];
             }
         }
 
@@ -1856,7 +1963,9 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                return ActivityPreviewDesignerTheme.PreviewButtonSizes[(int)ContainingTheme.AmbientTheme.DesignerSize];
+                return ActivityPreviewDesignerTheme.PreviewButtonSizes[
+                    (int)ContainingTheme.AmbientTheme.DesignerSize
+                ];
             }
         }
 
@@ -1918,7 +2027,9 @@ namespace System.Workflow.ComponentModel.Design
     #endregion
 
     #region Class AmbientTheme
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class AmbientTheme : DesignerTheme
     {
         #region Constants which wont change
@@ -1936,9 +2047,15 @@ namespace System.Workflow.ComponentModel.Design
         internal static readonly Pen SmartTagBorderPen = new Pen(Color.Black, 1);
         internal static readonly Pen MagnifierPen = new Pen(Color.Black, 2);
         internal static readonly Pen WorkflowBorderPen = new Pen(Color.FromArgb(127, 157, 185), 1);
-        internal static readonly Brush WorkspaceBackgroundBrush = new SolidBrush(Color.FromArgb(234, 234, 236));
-        internal static readonly Brush FadeBrush = new SolidBrush(Color.FromArgb(120, 255, 255, 255));
-        internal static readonly Brush DisabledBrush = new SolidBrush(Color.FromArgb(40, Color.Gray));
+        internal static readonly Brush WorkspaceBackgroundBrush = new SolidBrush(
+            Color.FromArgb(234, 234, 236)
+        );
+        internal static readonly Brush FadeBrush = new SolidBrush(
+            Color.FromArgb(120, 255, 255, 255)
+        );
+        internal static readonly Brush DisabledBrush = new SolidBrush(
+            Color.FromArgb(40, Color.Gray)
+        );
         internal static readonly Brush PageShadowBrush = new SolidBrush(Color.FromArgb(75, 75, 75));
 
         internal const float ScrollIndicatorTransparency = 0.7f;
@@ -1953,13 +2070,48 @@ namespace System.Workflow.ComponentModel.Design
         internal const int MaxShadowDepth = 8;
 
         private static float[] fontSizes = null;
-        private static readonly Size[] GridSizes = new Size[] { new Size(30, 30), new Size(40, 40), new Size(60, 60) };
-        private static readonly Size[] MarginSizes = new Size[] { new Size(2, 2), new Size(4, 4), new Size(6, 6) };
-        private static readonly Size[] SelectionSizes = new Size[] { new Size(2, 2), new Size(4, 4), new Size(6, 6) };
-        private static readonly Size[] GlyphSizes = new Size[] { new Size(10, 10), new Size(14, 14), new Size(18, 18) };
-        private static readonly Size[] ScrollIndicatorSizes = new Size[] { new Size(24, 24), new Size(32, 32), new Size(40, 40) };
-        private static readonly Size[] DropIndicatorSizes = new Size[] { new Size(8, 8), new Size(12, 12), new Size(16, 16) };
-        private static readonly Size[] MagnifierSizes = new Size[] { new Size(50, 50), new Size(100, 100), new Size(150, 150) };
+        private static readonly Size[] GridSizes = new Size[]
+        {
+            new Size(30, 30),
+            new Size(40, 40),
+            new Size(60, 60),
+        };
+        private static readonly Size[] MarginSizes = new Size[]
+        {
+            new Size(2, 2),
+            new Size(4, 4),
+            new Size(6, 6),
+        };
+        private static readonly Size[] SelectionSizes = new Size[]
+        {
+            new Size(2, 2),
+            new Size(4, 4),
+            new Size(6, 6),
+        };
+        private static readonly Size[] GlyphSizes = new Size[]
+        {
+            new Size(10, 10),
+            new Size(14, 14),
+            new Size(18, 18),
+        };
+        private static readonly Size[] ScrollIndicatorSizes = new Size[]
+        {
+            new Size(24, 24),
+            new Size(32, 32),
+            new Size(40, 40),
+        };
+        private static readonly Size[] DropIndicatorSizes = new Size[]
+        {
+            new Size(8, 8),
+            new Size(12, 12),
+            new Size(16, 16),
+        };
+        private static readonly Size[] MagnifierSizes = new Size[]
+        {
+            new Size(50, 50),
+            new Size(100, 100),
+            new Size(150, 150),
+        };
         private static readonly int[] BorderWidths = new int[] { 1, 1, 3 };
 
         private const int DefaultShadowDepth = 6;
@@ -1970,7 +2122,12 @@ namespace System.Workflow.ComponentModel.Design
             get
             {
                 if (fontSizes == null)
-                    fontSizes = new float[] { WorkflowTheme.GetDefaultFont().SizeInPoints - 2.0f, WorkflowTheme.GetDefaultFont().SizeInPoints, WorkflowTheme.GetDefaultFont().SizeInPoints + 2.0f };
+                    fontSizes = new float[]
+                    {
+                        WorkflowTheme.GetDefaultFont().SizeInPoints - 2.0f,
+                        WorkflowTheme.GetDefaultFont().SizeInPoints,
+                        WorkflowTheme.GetDefaultFont().SizeInPoints + 2.0f,
+                    };
                 return fontSizes;
             }
         }
@@ -2031,9 +2188,7 @@ namespace System.Workflow.ComponentModel.Design
         #endregion
 
         public AmbientTheme(WorkflowTheme theme)
-            : base(theme)
-        {
-        }
+            : base(theme) { }
 
         protected override void Dispose(bool disposing)
         {
@@ -2171,22 +2326,25 @@ namespace System.Workflow.ComponentModel.Design
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public virtual bool UseOperatingSystemSettings
         {
-            get
-            {
-                return this.useOperatingSystemSettings;
-            }
-
+            get { return this.useOperatingSystemSettings; }
             internal set
             {
                 this.useOperatingSystemSettings = value;
                 if (this.useOperatingSystemSettings)
                 {
-                    SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(OnOperatingSystemSettingsChanged);
-                    OnOperatingSystemSettingsChanged(this, new UserPreferenceChangedEventArgs(UserPreferenceCategory.Color));
+                    SystemEvents.UserPreferenceChanged += new UserPreferenceChangedEventHandler(
+                        OnOperatingSystemSettingsChanged
+                    );
+                    OnOperatingSystemSettingsChanged(
+                        this,
+                        new UserPreferenceChangedEventArgs(UserPreferenceCategory.Color)
+                    );
                 }
                 else
                 {
-                    SystemEvents.UserPreferenceChanged -= new UserPreferenceChangedEventHandler(OnOperatingSystemSettingsChanged);
+                    SystemEvents.UserPreferenceChanged -= new UserPreferenceChangedEventHandler(
+                        OnOperatingSystemSettingsChanged
+                    );
                 }
             }
         }
@@ -2197,11 +2355,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(FontFamilyConverter))]
         public virtual string FontName
         {
-            get
-            {
-                return this.fontName;
-            }
-
+            get { return this.fontName; }
             set
             {
                 if (ReadOnly)
@@ -2242,11 +2396,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("WorkflowAppearanceCategory", DR.ResourceSet)]
         public virtual TextQuality TextQuality
         {
-            get
-            {
-                return this.textQuality;
-            }
-
+            get { return this.textQuality; }
             set
             {
                 if (ReadOnly)
@@ -2262,11 +2412,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("WorkflowAppearanceCategory", DR.ResourceSet)]
         public virtual bool ShowConfigErrors
         {
-            get
-            {
-                return this.showConfigErrors;
-            }
-
+            get { return this.showConfigErrors; }
             set
             {
                 if (ReadOnly)
@@ -2282,11 +2428,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("WorkflowAppearanceCategory", DR.ResourceSet)]
         public virtual bool DrawGrayscale
         {
-            get
-            {
-                return this.drawGrayscale;
-            }
-
+            get { return this.drawGrayscale; }
             set
             {
                 if (ReadOnly)
@@ -2305,11 +2447,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public virtual Color DropIndicatorColor
         {
-            get
-            {
-                return this.dropIndicatorColor;
-            }
-
+            get { return this.dropIndicatorColor; }
             set
             {
                 if (ReadOnly)
@@ -2338,11 +2476,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public virtual Color SelectionForeColor
         {
-            get
-            {
-                return this.selectionForeColor;
-            }
-
+            get { return this.selectionForeColor; }
             set
             {
                 if (ReadOnly)
@@ -2371,11 +2505,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public virtual Color SelectionPatternColor
         {
-            get
-            {
-                return this.selectionPatternColor;
-            }
-
+            get { return this.selectionPatternColor; }
             set
             {
                 if (ReadOnly)
@@ -2398,11 +2528,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public virtual Color ForeColor
         {
-            get
-            {
-                return this.foreColor;
-            }
-
+            get { return this.foreColor; }
             set
             {
                 if (ReadOnly)
@@ -2431,11 +2557,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public virtual Color CommentIndicatorColor
         {
-            get
-            {
-                return this.commentIndicatorColor;
-            }
-
+            get { return this.commentIndicatorColor; }
             set
             {
                 if (ReadOnly)
@@ -2464,11 +2586,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public virtual Color ReadonlyIndicatorColor
         {
-            get
-            {
-                return this.readonlyIndicatorColor;
-            }
-
+            get { return this.readonlyIndicatorColor; }
             set
             {
                 if (ReadOnly)
@@ -2493,11 +2611,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public virtual Color BackColor
         {
-            get
-            {
-                return this.backColor;
-            }
-
+            get { return this.backColor; }
             set
             {
                 if (ReadOnly)
@@ -2519,11 +2633,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("WorkflowAppearanceCategory", DR.ResourceSet)]
         public virtual bool DrawShadow
         {
-            get
-            {
-                return this.drawShadow;
-            }
-
+            get { return this.drawShadow; }
             set
             {
                 if (ReadOnly)
@@ -2533,29 +2643,39 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-
         [DispId(15)]
         [SRDescription("WorkflowWatermarkDesc", DR.ResourceSet)]
         [SRCategory("BackgroundCategory", DR.ResourceSet)]
         [Editor(typeof(ImageBrowserEditor), typeof(UITypeEditor))]
         public virtual string WatermarkImagePath
         {
-            get
-            {
-                return this.watermarkImagePath;
-            }
-
+            get { return this.watermarkImagePath; }
             set
             {
                 if (ReadOnly)
                     throw new InvalidOperationException(DR.GetString(DR.ThemePropertyReadOnly));
 
-                if (!String.IsNullOrEmpty(value) && value.Contains(Path.DirectorySeparatorChar.ToString()) && Path.IsPathRooted(value))
+                if (
+                    !String.IsNullOrEmpty(value)
+                    && value.Contains(Path.DirectorySeparatorChar.ToString())
+                    && Path.IsPathRooted(value)
+                )
                 {
-                    value = DesignerHelpers.GetRelativePath(ContainingTheme.ContainingFileDirectory, value);
+                    value = DesignerHelpers.GetRelativePath(
+                        ContainingTheme.ContainingFileDirectory,
+                        value
+                    );
 
-                    if (!DesignerHelpers.IsValidImageResource(this, ContainingTheme.ContainingFileDirectory, value))
-                        throw new InvalidOperationException(DR.GetString(DR.Error_InvalidImageResource));
+                    if (
+                        !DesignerHelpers.IsValidImageResource(
+                            this,
+                            ContainingTheme.ContainingFileDirectory,
+                            value
+                        )
+                    )
+                        throw new InvalidOperationException(
+                            DR.GetString(DR.Error_InvalidImageResource)
+                        );
                 }
 
                 this.watermarkImagePath = value;
@@ -2573,11 +2693,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("BackgroundCategory", DR.ResourceSet)]
         public virtual DesignerContentAlignment WatermarkAlignment
         {
-            get
-            {
-                return this.watermarkAlignment;
-            }
-
+            get { return this.watermarkAlignment; }
             set
             {
                 if (ReadOnly)
@@ -2593,11 +2709,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("BackgroundCategory", DR.ResourceSet)]
         public virtual bool ShowGrid
         {
-            get
-            {
-                return this.showGrid;
-            }
-
+            get { return this.showGrid; }
             set
             {
                 if (ReadOnly)
@@ -2613,11 +2725,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("BackgroundCategory", DR.ResourceSet)]
         public virtual DashStyle GridStyle
         {
-            get
-            {
-                return this.gridStyle;
-            }
-
+            get { return this.gridStyle; }
             set
             {
                 if (ReadOnly)
@@ -2646,11 +2754,7 @@ namespace System.Workflow.ComponentModel.Design
         [TypeConverter(typeof(ColorPickerConverter))]
         public virtual Color GridColor
         {
-            get
-            {
-                return this.gridColor;
-            }
-
+            get { return this.gridColor; }
             set
             {
                 if (ReadOnly)
@@ -2698,11 +2802,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("ActivityAppearanceCategory", DR.ResourceSet)]
         public virtual DesignerSize DesignerSize
         {
-            get
-            {
-                return this.designerStyle;
-            }
-
+            get { return this.designerStyle; }
             set
             {
                 if (ReadOnly)
@@ -2719,11 +2819,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("ActivityAppearanceCategory", DR.ResourceSet)]
         public virtual bool DrawRounded
         {
-            get
-            {
-                return this.drawRounded;
-            }
-
+            get { return this.drawRounded; }
             set
             {
                 if (ReadOnly)
@@ -2739,11 +2835,7 @@ namespace System.Workflow.ComponentModel.Design
         [SRCategory("ActivityAppearanceCategory", DR.ResourceSet)]
         public virtual bool ShowDesignerBorder
         {
-            get
-            {
-                return this.showDesignerBorder;
-            }
-
+            get { return this.showDesignerBorder; }
             set
             {
                 if (ReadOnly)
@@ -2759,80 +2851,56 @@ namespace System.Workflow.ComponentModel.Design
         [Browsable(false)]
         public virtual Size Margin
         {
-            get
-            {
-                return AmbientTheme.MarginSizes[(int)this.designerStyle];
-            }
+            get { return AmbientTheme.MarginSizes[(int)this.designerStyle]; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         public virtual Size SelectionSize
         {
-            get
-            {
-                return AmbientTheme.SelectionSizes[(int)this.designerStyle];
-            }
+            get { return AmbientTheme.SelectionSizes[(int)this.designerStyle]; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         public virtual Size GlyphSize
         {
-            get
-            {
-                return AmbientTheme.GlyphSizes[(int)this.designerStyle];
-            }
+            get { return AmbientTheme.GlyphSizes[(int)this.designerStyle]; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         internal Size ScrollIndicatorSize
         {
-            get
-            {
-                return AmbientTheme.ScrollIndicatorSizes[(int)this.designerStyle];
-            }
+            get { return AmbientTheme.ScrollIndicatorSizes[(int)this.designerStyle]; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         internal Size DropIndicatorSize
         {
-            get
-            {
-                return AmbientTheme.DropIndicatorSizes[(int)this.designerStyle];
-            }
+            get { return AmbientTheme.DropIndicatorSizes[(int)this.designerStyle]; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         internal Size MagnifierSize
         {
-            get
-            {
-                return AmbientTheme.MagnifierSizes[(int)this.designerStyle];
-            }
+            get { return AmbientTheme.MagnifierSizes[(int)this.designerStyle]; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         internal int ShadowDepth
         {
-            get
-            {
-                return ((this.drawShadow) ? AmbientTheme.DefaultShadowDepth : 0);
-            }
+            get { return ((this.drawShadow) ? AmbientTheme.DefaultShadowDepth : 0); }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         [Browsable(false)]
         public virtual Size GridSize
         {
-            get
-            {
-                return AmbientTheme.GridSizes[(int)this.designerStyle];
-            }
+            get { return AmbientTheme.GridSizes[(int)this.designerStyle]; }
         }
 
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
@@ -2880,7 +2948,12 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (this.minorGridPen == null)
                 {
-                    Color minorGridColor = Color.FromArgb(this.gridColor.A, Math.Min(this.gridColor.R + 32, 255), Math.Min(this.gridColor.G + 32, 255), Math.Min(this.gridColor.B + 32, 255));
+                    Color minorGridColor = Color.FromArgb(
+                        this.gridColor.A,
+                        Math.Min(this.gridColor.R + 32, 255),
+                        Math.Min(this.gridColor.G + 32, 255),
+                        Math.Min(this.gridColor.B + 32, 255)
+                    );
                     this.minorGridPen = new Pen(minorGridColor, 1);
                     this.minorGridPen.DashStyle = DashStyle.Dot;
                 }
@@ -2896,7 +2969,12 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (this.minorGridBrush == null)
                 {
-                    Color minorGridColor = Color.FromArgb(this.gridColor.A, Math.Min(this.gridColor.R + 32, 255), Math.Min(this.gridColor.G + 32, 255), Math.Min(this.gridColor.B + 32, 255));
+                    Color minorGridColor = Color.FromArgb(
+                        this.gridColor.A,
+                        Math.Min(this.gridColor.R + 32, 255),
+                        Math.Min(this.gridColor.G + 32, 255),
+                        Math.Min(this.gridColor.B + 32, 255)
+                    );
                     this.minorGridBrush = new SolidBrush(minorGridColor);
                 }
                 return this.minorGridBrush;
@@ -3001,7 +3079,9 @@ namespace System.Workflow.ComponentModel.Design
             get
             {
                 if (this.commentIndicatorBrush == null)
-                    this.commentIndicatorBrush = new SolidBrush(Color.FromArgb(40, this.commentIndicatorColor));
+                    this.commentIndicatorBrush = new SolidBrush(
+                        Color.FromArgb(40, this.commentIndicatorColor)
+                    );
                 return this.commentIndicatorBrush;
             }
         }
@@ -3013,7 +3093,9 @@ namespace System.Workflow.ComponentModel.Design
             get
             {
                 if (this.readonlyIndicatorBrush == null)
-                    this.readonlyIndicatorBrush = new SolidBrush(Color.FromArgb(20, this.readonlyIndicatorColor));
+                    this.readonlyIndicatorBrush = new SolidBrush(
+                        Color.FromArgb(20, this.readonlyIndicatorColor)
+                    );
                 return this.readonlyIndicatorBrush;
             }
         }
@@ -3049,7 +3131,11 @@ namespace System.Workflow.ComponentModel.Design
             get
             {
                 if (this.watermarkImage == null && this.watermarkImagePath.Length > 0)
-                    this.watermarkImage = DesignerHelpers.GetImageFromPath(this, ContainingTheme.ContainingFileDirectory, this.watermarkImagePath);
+                    this.watermarkImage = DesignerHelpers.GetImageFromPath(
+                        this,
+                        ContainingTheme.ContainingFileDirectory,
+                        this.watermarkImagePath
+                    );
                 return this.watermarkImage;
             }
         }
@@ -3137,7 +3223,7 @@ namespace System.Workflow.ComponentModel.Design
 
             if (ambientProperty == AmbientProperty.DesignerSize)
             {
-                //We set the same properties again so that the pens and brushes are reset to 
+                //We set the same properties again so that the pens and brushes are reset to
                 //consider the new designer style for creation
                 DropIndicatorColor = this.dropIndicatorColor;
                 FontName = this.fontName;
@@ -3161,9 +3247,15 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        private void OnOperatingSystemSettingsChanged(object sender, UserPreferenceChangedEventArgs e)
+        private void OnOperatingSystemSettingsChanged(
+            object sender,
+            UserPreferenceChangedEventArgs e
+        )
         {
-            if (e.Category == UserPreferenceCategory.Color || e.Category == UserPreferenceCategory.VisualStyle)
+            if (
+                e.Category == UserPreferenceCategory.Color
+                || e.Category == UserPreferenceCategory.VisualStyle
+            )
             {
                 ContainingTheme.AmbientPropertyChanged(AmbientProperty.OperatingSystemSetting);
                 WorkflowTheme.FireThemeChange();
@@ -3188,7 +3280,13 @@ namespace System.Workflow.ComponentModel.Design
         internal override ICollection GetPropertyValues(ITypeDescriptorContext context)
         {
             object[] values = new object[] { };
-            if (string.Equals(context.PropertyDescriptor.Name, "GridStyle", StringComparison.Ordinal))
+            if (
+                string.Equals(
+                    context.PropertyDescriptor.Name,
+                    "GridStyle",
+                    StringComparison.Ordinal
+                )
+            )
                 values = new object[] { DashStyle.Solid, DashStyle.Dash, DashStyle.Dot };
             return values;
         }
@@ -3201,7 +3299,12 @@ namespace System.Workflow.ComponentModel.Design
     #region Class ThemeTypeDescriptor
     internal sealed class ThemeTypeConverter : ExpandableObjectConverter
     {
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(string) && context.PropertyDescriptor != null)
                 return String.Empty;
@@ -3209,9 +3312,17 @@ namespace System.Workflow.ComponentModel.Design
                 return base.ConvertTo(context, culture, value, destinationType);
         }
 
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext context, object value, Attribute[] attributes)
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext context,
+            object value,
+            Attribute[] attributes
+        )
         {
-            PropertyDescriptorCollection srcProperties = base.GetProperties(context, value, attributes);
+            PropertyDescriptorCollection srcProperties = base.GetProperties(
+                context,
+                value,
+                attributes
+            );
             return srcProperties.Sort(new PropertyDescriptorSorter());
         }
 
@@ -3222,8 +3333,10 @@ namespace System.Workflow.ComponentModel.Design
             {
                 PropertyDescriptor property1 = obj1 as PropertyDescriptor;
                 PropertyDescriptor property2 = obj2 as PropertyDescriptor;
-                DispIdAttribute prop1DispID = property1.Attributes[typeof(DispIdAttribute)] as DispIdAttribute;
-                DispIdAttribute prop2DispID = property2.Attributes[typeof(DispIdAttribute)] as DispIdAttribute;
+                DispIdAttribute prop1DispID =
+                    property1.Attributes[typeof(DispIdAttribute)] as DispIdAttribute;
+                DispIdAttribute prop2DispID =
+                    property2.Attributes[typeof(DispIdAttribute)] as DispIdAttribute;
 
                 if (prop1DispID == null)
                     return 1;
@@ -3255,7 +3368,11 @@ namespace System.Workflow.ComponentModel.Design
             return (sourceType == typeof(string));
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             return Enum.Parse(context.PropertyDescriptor.PropertyType, (string)value);
         }
@@ -3290,7 +3407,11 @@ namespace System.Workflow.ComponentModel.Design
             return UITypeEditorEditStyle.Modal;
         }
 
-        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
+        public override object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            object value
+        )
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
             fileDialog.AddExtension = true;
@@ -3333,7 +3454,11 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
+        public override object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            object value
+        )
         {
             ColorDialog colorDialog = new ColorDialog();
             colorDialog.AllowFullOpen = true;
@@ -3356,7 +3481,12 @@ namespace System.Workflow.ComponentModel.Design
     internal sealed class ThemeSerializationProvider : WorkflowMarkupSerializationProvider
     {
         #region IDesignerSerializationProvider Members
-        public override object GetSerializer(IDesignerSerializationManager manager, object currentSerializer, Type objectType, Type serializerType)
+        public override object GetSerializer(
+            IDesignerSerializationManager manager,
+            object currentSerializer,
+            Type objectType,
+            Type serializerType
+        )
         {
             if (serializerType.IsAssignableFrom(typeof(WorkflowMarkupSerializer)))
             {

@@ -9,7 +9,8 @@ using Microsoft.AspNetCore.InternalTesting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class XmlSerializerInputFormatterTests : IClassFixture<MvcTestFixture<XmlFormattersWebSite.Startup>>
+public class XmlSerializerInputFormatterTests
+    : IClassFixture<MvcTestFixture<XmlFormattersWebSite.Startup>>
 {
     public XmlSerializerInputFormatterTests(MvcTestFixture<XmlFormattersWebSite.Startup> fixture)
     {
@@ -23,9 +24,11 @@ public class XmlSerializerInputFormatterTests : IClassFixture<MvcTestFixture<Xml
     {
         // Arrange
         var sampleInputInt = 10;
-        var input = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" +
-            "<DummyClass><SampleInt>"
-            + sampleInputInt.ToString(CultureInfo.InvariantCulture) + "</SampleInt></DummyClass>";
+        var input =
+            "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
+            + "<DummyClass><SampleInt>"
+            + sampleInputInt.ToString(CultureInfo.InvariantCulture)
+            + "</SampleInt></DummyClass>";
         var content = new StringContent(input, Encoding.UTF8, "application/xml-xmlser");
 
         // Act
@@ -33,7 +36,10 @@ public class XmlSerializerInputFormatterTests : IClassFixture<MvcTestFixture<Xml
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal(sampleInputInt.ToString(CultureInfo.InvariantCulture), await response.Content.ReadAsStringAsync());
+        Assert.Equal(
+            sampleInputInt.ToString(CultureInfo.InvariantCulture),
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
     [ConditionalFact]

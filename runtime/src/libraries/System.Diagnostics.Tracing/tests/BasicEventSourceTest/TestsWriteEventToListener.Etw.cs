@@ -38,7 +38,20 @@ namespace BasicEventSourceTests
 
                     actid = Guid.NewGuid();
                     Guid guid = Guid.NewGuid();
-                    log.EventWithXferManyTypeArgs(actid, 0, 0, 0, 'a', 0, 0, 0, 0, (float)10.0, (double)11.0, guid);
+                    log.EventWithXferManyTypeArgs(
+                        actid,
+                        0,
+                        0,
+                        0,
+                        'a',
+                        0,
+                        0,
+                        0,
+                        0,
+                        (float)10.0,
+                        (double)11.0,
+                        guid
+                    );
                     Assert.Equal(29, LoudListener.LastEvent.EventId);
                     Assert.Equal(actid, LoudListener.LastEvent.RelatedActivityId);
                     Assert.Equal(11, LoudListener.LastEvent.Payload.Count);
@@ -55,20 +68,34 @@ namespace BasicEventSourceTests
                     Assert.Equal(guid, (Guid)LoudListener.LastEvent.Payload[10]);
 
                     actid = Guid.NewGuid();
-                    log.EventWithXferWeirdArgs(actid, IntPtr.Zero, true, MyLongEnum.LongVal1 /*, 9999999999999999999999999999m*/);
+                    log.EventWithXferWeirdArgs(
+                        actid,
+                        IntPtr.Zero,
+                        true,
+                        MyLongEnum.LongVal1 /*, 9999999999999999999999999999m*/
+                    );
                     Assert.Equal(31, LoudListener.LastEvent.EventId);
                     Assert.Equal(actid, LoudListener.LastEvent.RelatedActivityId);
-                    Assert.Equal(3 /*4*/, LoudListener.LastEvent.Payload.Count);
+                    Assert.Equal(
+                        3 /*4*/
+                        ,
+                        LoudListener.LastEvent.Payload.Count
+                    );
                     Assert.Equal(IntPtr.Zero, (IntPtr)LoudListener.LastEvent.Payload[0]);
                     Assert.True((bool)LoudListener.LastEvent.Payload[1]);
-                    Assert.Equal(MyLongEnum.LongVal1, (MyLongEnum)LoudListener.LastEvent.Payload[2]);
+                    Assert.Equal(
+                        MyLongEnum.LongVal1,
+                        (MyLongEnum)LoudListener.LastEvent.Payload[2]
+                    );
                     // Assert.Equal(9999999999999999999999999999m, (decimal)LoudListener.LastEvent.Payload[3]);
                 }
             }
             TestUtilities.CheckNoEventSourcesRunning("Stop");
         }
 
-        static partial void Test_WriteEvent_ArgsBasicTypes_Etw_Validate_DateTime(EventSourceTest log)
+        static partial void Test_WriteEvent_ArgsBasicTypes_Etw_Validate_DateTime(
+            EventSourceTest log
+        )
         {
             DateTime now = DateTime.Now;
             log.EventDateTime(now);
@@ -81,28 +108,49 @@ namespace BasicEventSourceTests
         {
             Guid guid = Guid.NewGuid();
 
-            log.EventWithManyTypeArgs("Hello", 0, 0, 0, 'a', 0, 0, 0, 0, (float) 10.0, (double) 11.0, guid);
+            log.EventWithManyTypeArgs(
+                "Hello",
+                0,
+                0,
+                0,
+                'a',
+                0,
+                0,
+                0,
+                0,
+                (float)10.0,
+                (double)11.0,
+                guid
+            );
             Assert.Equal(25, LoudListener.LastEvent.EventId);
             Assert.Equal(12, LoudListener.LastEvent.Payload.Count);
-            Assert.Equal("Hello", (string) LoudListener.LastEvent.Payload[0]);
-            Assert.Equal(0, (long) LoudListener.LastEvent.Payload[1]);
-            Assert.Equal((uint) 0, (uint) LoudListener.LastEvent.Payload[2]);
-            Assert.Equal((ulong) 0, (ulong) LoudListener.LastEvent.Payload[3]);
-            Assert.Equal('a', (char) LoudListener.LastEvent.Payload[4]);
-            Assert.Equal((byte) 0, (byte) LoudListener.LastEvent.Payload[5]);
-            Assert.Equal((sbyte) 0, (sbyte) LoudListener.LastEvent.Payload[6]);
-            Assert.Equal((short) 0, (short) LoudListener.LastEvent.Payload[7]);
-            Assert.Equal((ushort) 0, (ushort) LoudListener.LastEvent.Payload[8]);
-            Assert.Equal((float) 10.0, (float) LoudListener.LastEvent.Payload[9]);
-            Assert.Equal((double) 11.0, (double) LoudListener.LastEvent.Payload[10]);
-            Assert.Equal(guid, (Guid) LoudListener.LastEvent.Payload[11]);
+            Assert.Equal("Hello", (string)LoudListener.LastEvent.Payload[0]);
+            Assert.Equal(0, (long)LoudListener.LastEvent.Payload[1]);
+            Assert.Equal((uint)0, (uint)LoudListener.LastEvent.Payload[2]);
+            Assert.Equal((ulong)0, (ulong)LoudListener.LastEvent.Payload[3]);
+            Assert.Equal('a', (char)LoudListener.LastEvent.Payload[4]);
+            Assert.Equal((byte)0, (byte)LoudListener.LastEvent.Payload[5]);
+            Assert.Equal((sbyte)0, (sbyte)LoudListener.LastEvent.Payload[6]);
+            Assert.Equal((short)0, (short)LoudListener.LastEvent.Payload[7]);
+            Assert.Equal((ushort)0, (ushort)LoudListener.LastEvent.Payload[8]);
+            Assert.Equal((float)10.0, (float)LoudListener.LastEvent.Payload[9]);
+            Assert.Equal((double)11.0, (double)LoudListener.LastEvent.Payload[10]);
+            Assert.Equal(guid, (Guid)LoudListener.LastEvent.Payload[11]);
 
-            log.EventWithWeirdArgs(IntPtr.Zero, true, MyLongEnum.LongVal1 /*, 9999999999999999999999999999m*/);
+            log.EventWithWeirdArgs(
+                IntPtr.Zero,
+                true,
+                MyLongEnum.LongVal1 /*, 9999999999999999999999999999m*/
+            );
             Assert.Equal(30, LoudListener.LastEvent.EventId);
-            Assert.Equal(3 /*4*/, LoudListener.LastEvent.Payload.Count);
-            Assert.Equal(IntPtr.Zero, (IntPtr) LoudListener.LastEvent.Payload[0]);
-            Assert.True((bool) LoudListener.LastEvent.Payload[1]);
-            Assert.Equal(MyLongEnum.LongVal1, (MyLongEnum) LoudListener.LastEvent.Payload[2]);
+            Assert.Equal(
+                3 /*4*/
+                ,
+                LoudListener.LastEvent.Payload.Count
+            );
+            Assert.Equal(IntPtr.Zero, (IntPtr)LoudListener.LastEvent.Payload[0]);
+            Assert.True((bool)LoudListener.LastEvent.Payload[1]);
+            Assert.Equal(MyLongEnum.LongVal1, (MyLongEnum)LoudListener.LastEvent.Payload[2]);
             // Assert.Equal(9999999999999999999999999999m, (decimal)LoudListener.LastEvent.Payload[3]);
         }
     }

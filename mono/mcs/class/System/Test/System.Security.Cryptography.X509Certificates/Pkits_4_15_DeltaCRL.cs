@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,23 +27,21 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.Security.Cryptography.X509Certificates;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography.X509Certificates {
+namespace MonoTests.System.Security.Cryptography.X509Certificates
+{
+    /*
+     * See PkitsTest.cs for more details
+     */
 
-	/*
-	 * See PkitsTest.cs for more details
-	 */
+    [TestFixture]
+    [Category("PKITS")]
+    public class Pkits_4_15_DeltaCRL : PkitsTest
+    {
 
-	[TestFixture]
-	[Category ("PKITS")]
-	public class Pkits_4_15_DeltaCRL : PkitsTest {
-
-		// TODO - incomplete
-	}
+        // TODO - incomplete
+    }
 }
-

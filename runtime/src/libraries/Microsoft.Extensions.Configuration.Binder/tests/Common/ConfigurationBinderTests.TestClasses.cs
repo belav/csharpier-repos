@@ -14,9 +14,9 @@ using Xunit;
 
 namespace Microsoft.Extensions
 #if BUILDING_SOURCE_GENERATOR_TESTS
-    .SourceGeneration
+.SourceGeneration
 #endif
-    .Configuration.Binder.Tests
+.Configuration.Binder.Tests
 {
     public partial class ConfigurationBinderTests
     {
@@ -24,14 +24,8 @@ namespace Microsoft.Extensions
         {
             public override string Virtual
             {
-                get
-                {
-                    return base.Virtual;
-                }
-                set
-                {
-                    base.Virtual = "Derived:" + value;
-                }
+                get { return base.Virtual; }
+                set { base.Virtual = "Derived:" + value; }
             }
         }
 
@@ -71,8 +65,11 @@ namespace Microsoft.Extensions
 
         public record struct RecordStructTypeOptions(string Color, int Length);
 
-        public record RecordOptionsWithNesting(int Number, RecordOptionsWithNesting.RecordNestedOptions Nested1,
-            RecordOptionsWithNesting.RecordNestedOptions Nested2 = null!)
+        public record RecordOptionsWithNesting(
+            int Number,
+            RecordOptionsWithNesting.RecordNestedOptions Nested1,
+            RecordOptionsWithNesting.RecordNestedOptions Nested2 = null!
+        )
         {
             public record RecordNestedOptions(string ValueA, int ValueB);
         }
@@ -100,7 +97,11 @@ namespace Microsoft.Extensions
             public string Name { get; }
             public string Address { get; }
 
-            public ClassWhereParametersMatchPropertiesAndFields(string name, string address, int age)
+            public ClassWhereParametersMatchPropertiesAndFields(
+                string name,
+                string address,
+                int age
+            )
             {
                 Name = name;
                 Address = address;
@@ -110,7 +111,11 @@ namespace Microsoft.Extensions
             public int GetAge() => Age;
         }
 
-        public record RecordWhereParametersHaveDefaultValue(string Name, string Address, int Age = 42);
+        public record RecordWhereParametersHaveDefaultValue(
+            string Name,
+            string Address,
+            int Age = 42
+        );
 
         public class ClassWhereParametersHaveDefaultValue
         {
@@ -129,9 +134,22 @@ namespace Microsoft.Extensions
             public StringComparison? NSC { get; }
             public char? NC { get; }
 
-            public ClassWhereParametersHaveDefaultValue(string? name = "John Doe", string address = "1 Microsoft Way",
-                int age = 42, float f = 42.0f, double d = 3.14159, decimal m = 3.1415926535897932384626433M, StringComparison sc = StringComparison.Ordinal, char c = 'q',
-                int? nage = 42, float? nf = 42.0f, double? nd = 3.14159, decimal? nm = 3.1415926535897932384626433M, StringComparison? nsc = StringComparison.Ordinal, char? nc = 'q')
+            public ClassWhereParametersHaveDefaultValue(
+                string? name = "John Doe",
+                string address = "1 Microsoft Way",
+                int age = 42,
+                float f = 42.0f,
+                double d = 3.14159,
+                decimal m = 3.1415926535897932384626433M,
+                StringComparison sc = StringComparison.Ordinal,
+                char c = 'q',
+                int? nage = 42,
+                float? nf = 42.0f,
+                double? nd = 3.14159,
+                decimal? nm = 3.1415926535897932384626433M,
+                StringComparison? nsc = StringComparison.Ordinal,
+                char? nc = 'q'
+            )
             {
                 Name = name;
                 Address = address;
@@ -156,13 +174,19 @@ namespace Microsoft.Extensions
             public int Length { get; } = length;
         }
 
-        public class ClassWithPrimaryCtorDefaultValues(string color = "blue", int length = 15, decimal height = 5.946238490567943927384M, EditorBrowsableState eb = EditorBrowsableState.Never)
+        public class ClassWithPrimaryCtorDefaultValues(
+            string color = "blue",
+            int length = 15,
+            decimal height = 5.946238490567943927384M,
+            EditorBrowsableState eb = EditorBrowsableState.Never
+        )
         {
             public string Color { get; } = color;
             public int Length { get; } = length;
             public decimal Height { get; } = height;
-            public EditorBrowsableState EB { get;} = eb;
+            public EditorBrowsableState EB { get; } = eb;
         }
+
         public record RecordTypeOptions(string Color, int Length);
 
         public record Line(string Color, int Length, int Thickness);
@@ -220,7 +244,12 @@ namespace Microsoft.Extensions
 
         public class ImmutableClassWithOneParameterizedConstructor
         {
-            public ImmutableClassWithOneParameterizedConstructor(string string1, int int1, string string2, int int2)
+            public ImmutableClassWithOneParameterizedConstructor(
+                string string1,
+                int int1,
+                string string2,
+                int int2
+            )
             {
                 String1 = string1;
                 Int1 = int1;
@@ -236,7 +265,12 @@ namespace Microsoft.Extensions
 
         public class ImmutableClassWithOneParameterizedConstructorButWithInParameter
         {
-            public ImmutableClassWithOneParameterizedConstructorButWithInParameter(in string string1, int int1, string string2, int int2)
+            public ImmutableClassWithOneParameterizedConstructorButWithInParameter(
+                in string string1,
+                int int1,
+                string string2,
+                int int2
+            )
             {
                 String1 = string1;
                 Int1 = int1;
@@ -252,7 +286,12 @@ namespace Microsoft.Extensions
 
         public class ImmutableClassWithOneParameterizedConstructorButWithRefParameter
         {
-            public ImmutableClassWithOneParameterizedConstructorButWithRefParameter(string string1, ref int int1, string string2, int int2)
+            public ImmutableClassWithOneParameterizedConstructorButWithRefParameter(
+                string string1,
+                ref int int1,
+                string string2,
+                int int2
+            )
             {
                 String1 = string1;
                 Int1 = int1;
@@ -268,8 +307,12 @@ namespace Microsoft.Extensions
 
         public class ImmutableClassWithOneParameterizedConstructorButWithOutParameter
         {
-            public ImmutableClassWithOneParameterizedConstructorButWithOutParameter(string string1, int int1,
-                string string2, out decimal int2)
+            public ImmutableClassWithOneParameterizedConstructorButWithOutParameter(
+                string string1,
+                int int1,
+                string string2,
+                out decimal int2
+            )
             {
                 String1 = string1;
                 Int1 = int1;
@@ -291,14 +334,23 @@ namespace Microsoft.Extensions
                 Int1 = int1;
             }
 
-            public ImmutableClassWithMultipleParameterizedConstructors(string string1, int int1, string string2)
+            public ImmutableClassWithMultipleParameterizedConstructors(
+                string string1,
+                int int1,
+                string string2
+            )
             {
                 String1 = string1;
                 Int1 = int1;
                 String2 = string2;
             }
 
-            public ImmutableClassWithMultipleParameterizedConstructors(string string1, int int1, string string2, int int2)
+            public ImmutableClassWithMultipleParameterizedConstructors(
+                string string1,
+                int int1,
+                string string2,
+                int int2
+            )
             {
                 String1 = string1;
                 Int1 = int1;
@@ -376,19 +428,21 @@ namespace Microsoft.Extensions
             public void WithFlagUnset_NoExceptionIsThrownWhenFailingToParseEnumsInAnArrayAndValidItemsArePreserved()
             {
                 var dic = new Dictionary<string, string>
-                            {
-                                {"Section:Enums:0", "Option1"},
-                                {"Section:Enums:1", "Option3"}, // invalid - ignored
-                                {"Section:Enums:2", "Option4"}, // invalid - ignored
-                                {"Section:Enums:3", "Option2"},
-                            };
+                {
+                    { "Section:Enums:0", "Option1" },
+                    { "Section:Enums:1", "Option3" }, // invalid - ignored
+                    { "Section:Enums:2", "Option4" }, // invalid - ignored
+                    { "Section:Enums:3", "Option2" },
+                };
 
                 var configurationBuilder = new ConfigurationBuilder();
                 configurationBuilder.AddInMemoryCollection(dic);
                 var config = configurationBuilder.Build();
                 var configSection = config.GetSection("Section");
 
-                var model = configSection.Get<MyModelContainingArray>(o => o.ErrorOnUnknownConfiguration = false);
+                var model = configSection.Get<MyModelContainingArray>(o =>
+                    o.ErrorOnUnknownConfiguration = false
+                );
 
                 Assert.Equal(2, model.Enums.Length);
                 Assert.Equal(TestSettingsEnum.Option1, model.Enums[0]);
@@ -399,12 +453,12 @@ namespace Microsoft.Extensions
             public void WithFlagUnset_NoExceptionIsThrownWhenFailingToParseEnumsInADictionaryAndValidItemsArePreserved()
             {
                 var dic = new Dictionary<string, string>
-                            {
-                                {"Section:Enums:First", "Option1"},
-                                {"Section:Enums:Second", "Option3"}, // invalid - ignored
-                                {"Section:Enums:Third", "Option4"}, // invalid - ignored
-                                {"Section:Enums:Fourth", "Option2"},
-                            };
+                {
+                    { "Section:Enums:First", "Option1" },
+                    { "Section:Enums:Second", "Option3" }, // invalid - ignored
+                    { "Section:Enums:Third", "Option4" }, // invalid - ignored
+                    { "Section:Enums:Fourth", "Option2" },
+                };
 
                 var configurationBuilder = new ConfigurationBuilder();
                 configurationBuilder.AddInMemoryCollection(dic);
@@ -412,7 +466,8 @@ namespace Microsoft.Extensions
                 var configSection = config.GetSection("Section");
 
                 var model = configSection.Get<MyModelContainingADictionary>(o =>
-                    o.ErrorOnUnknownConfiguration = false);
+                    o.ErrorOnUnknownConfiguration = false
+                );
 
                 Assert.Equal(2, model.Enums.Count);
                 Assert.Equal(TestSettingsEnum.Option1, model.Enums["First"]);
@@ -423,47 +478,60 @@ namespace Microsoft.Extensions
             public void WithFlagSet_AnExceptionIsThrownWhenFailingToParseEnumsInAnArray()
             {
                 var dic = new Dictionary<string, string>
-                            {
-                                {"Section:Enums:0", "Option1"},
-                                {"Section:Enums:1", "Option3"}, // invalid - exception thrown
-                                {"Section:Enums:2", "Option1"},
-                            };
+                {
+                    { "Section:Enums:0", "Option1" },
+                    { "Section:Enums:1", "Option3" }, // invalid - exception thrown
+                    { "Section:Enums:2", "Option1" },
+                };
 
                 var configurationBuilder = new ConfigurationBuilder();
                 configurationBuilder.AddInMemoryCollection(dic);
                 var config = configurationBuilder.Build();
                 var configSection = config.GetSection("Section");
 
-                var exception = Assert.Throws<InvalidOperationException>(
-                    () => configSection.Get<MyModelContainingArray>(o => o.ErrorOnUnknownConfiguration = true));
+                var exception = Assert.Throws<InvalidOperationException>(() =>
+                    configSection.Get<MyModelContainingArray>(o =>
+                        o.ErrorOnUnknownConfiguration = true
+                    )
+                );
 
                 Assert.Equal(
-                    SR.Format(SR.Error_GeneralErrorWhenBinding, nameof(BinderOptions.ErrorOnUnknownConfiguration)),
-                    exception.Message);
+                    SR.Format(
+                        SR.Error_GeneralErrorWhenBinding,
+                        nameof(BinderOptions.ErrorOnUnknownConfiguration)
+                    ),
+                    exception.Message
+                );
             }
 
             [ConditionalFact(typeof(TestHelpers), nameof(TestHelpers.NotSourceGenMode))] // Ensure exception messages are in sync
             public void WithFlagSet_AnExceptionIsThrownWhenFailingToParseEnumsInADictionary()
             {
                 var dic = new Dictionary<string, string>
-                            {
-                                {"Section:Enums:First", "Option1"},
-                                {"Section:Enums:Second", "Option3"}, // invalid - exception thrown
-                                {"Section:Enums:Third", "Option1"},
-                            };
+                {
+                    { "Section:Enums:First", "Option1" },
+                    { "Section:Enums:Second", "Option3" }, // invalid - exception thrown
+                    { "Section:Enums:Third", "Option1" },
+                };
 
                 var configurationBuilder = new ConfigurationBuilder();
                 configurationBuilder.AddInMemoryCollection(dic);
                 var config = configurationBuilder.Build();
                 var configSection = config.GetSection("Section");
 
-                var exception = Assert.Throws<InvalidOperationException>(
-                    () => configSection.Get<MyModelContainingADictionary>(o =>
-                        o.ErrorOnUnknownConfiguration = true));
+                var exception = Assert.Throws<InvalidOperationException>(() =>
+                    configSection.Get<MyModelContainingADictionary>(o =>
+                        o.ErrorOnUnknownConfiguration = true
+                    )
+                );
 
                 Assert.Equal(
-                    SR.Format(SR.Error_GeneralErrorWhenBinding, nameof(BinderOptions.ErrorOnUnknownConfiguration)),
-                    exception.Message);
+                    SR.Format(
+                        SR.Error_GeneralErrorWhenBinding,
+                        nameof(BinderOptions.ErrorOnUnknownConfiguration)
+                    ),
+                    exception.Message
+                );
             }
         }
 
@@ -493,7 +561,8 @@ namespace Microsoft.Extensions
             public int HttpStatusCode { get; set; } = 0;
 
             // ParsedBlacklist initialized using the setter of Blacklist.
-            public ICollection<string> ParsedBlacklist { get; private set; } = new HashSet<string>();
+            public ICollection<string> ParsedBlacklist { get; private set; } =
+                new HashSet<string>();
 
             // This does not have a match in the configuration, however the setter should be called during the binding:
             public int OtherCode
@@ -528,15 +597,11 @@ namespace Microsoft.Extensions
             }
         }
 
-        public interface ISomeInterface
-        {
-        }
+        public interface ISomeInterface { }
 
         public class ClassWithoutPublicConstructor
         {
-            private ClassWithoutPublicConstructor()
-            {
-            }
+            private ClassWithoutPublicConstructor() { }
         }
 
         public class ThrowsWhenActivated
@@ -579,7 +644,8 @@ namespace Microsoft.Extensions
         {
             public string StringThrows => throw new InvalidOperationException(nameof(StringThrows));
 
-            public IEnumerable<int> EnumerableThrows => throw new InvalidOperationException(nameof(EnumerableThrows));
+            public IEnumerable<int> EnumerableThrows =>
+                throw new InvalidOperationException(nameof(EnumerableThrows));
 
             public string Safe { get; set; }
         }
@@ -669,7 +735,11 @@ namespace Microsoft.Extensions
 
         public class ClassOverridingVirtualProperty : BaseClassWithVirtualProperty
         {
-            public override string[] Test { get => base.Test; set => base.Test = value; }
+            public override string[] Test
+            {
+                get => base.Test;
+                set => base.Test = value;
+            }
 
             public override string? TestGetSetOverridden { get; set; }
             public override string? TestGetOverridden => base.TestGetOverridden;
@@ -787,11 +857,16 @@ namespace Microsoft.Extensions
 
             private sealed class GeolocationTypeConverter : TypeConverter
             {
-                public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType) =>
-                    throw new NotImplementedException();
+                public override bool CanConvertFrom(
+                    ITypeDescriptorContext? context,
+                    Type sourceType
+                ) => throw new NotImplementedException();
 
-                public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value) =>
-                    throw new NotImplementedException();
+                public override object? ConvertFrom(
+                    ITypeDescriptorContext? context,
+                    CultureInfo? culture,
+                    object value
+                ) => throw new NotImplementedException();
             }
         }
 
@@ -811,7 +886,8 @@ namespace Microsoft.Extensions
             public JsonWriterOptions WriterOptions { get; set; }
         }
 
-        public record RemoteAuthenticationOptions<TRemoteAuthenticationProviderOptions> where TRemoteAuthenticationProviderOptions : new()
+        public record RemoteAuthenticationOptions<TRemoteAuthenticationProviderOptions>
+            where TRemoteAuthenticationProviderOptions : new()
         {
             public TRemoteAuthenticationProviderOptions GenericProp { get; } = new();
             public OidcProviderOptions NonGenericProp { get; } = new();
@@ -873,7 +949,7 @@ namespace Microsoft.Extensions
         {
             public int Value2 { get; set; }
         }
-        
+
         internal class ClassWithAbstractProp
         {
             public AbstractBase AbstractProp { get; set; }
@@ -883,14 +959,16 @@ namespace Microsoft.Extensions
         {
             public AbstractBase AbstractProp { get; }
 
-            public ClassWithAbstractCtorParam(AbstractBase abstractProp) => AbstractProp = abstractProp;
+            public ClassWithAbstractCtorParam(AbstractBase abstractProp) =>
+                AbstractProp = abstractProp;
         }
 
         internal class ClassWithOptionalAbstractCtorParam
         {
             public AbstractBase AbstractProp { get; }
 
-            public ClassWithOptionalAbstractCtorParam(AbstractBase? abstractProp = null) => AbstractProp = abstractProp;
+            public ClassWithOptionalAbstractCtorParam(AbstractBase? abstractProp = null) =>
+                AbstractProp = abstractProp;
         }
 
         internal class ClassWith_DirectlyAssignable_CtorParams
@@ -899,8 +977,11 @@ namespace Microsoft.Extensions
             public object MyObject { get; }
             public string MyString { get; }
 
-            public ClassWith_DirectlyAssignable_CtorParams(IConfigurationSection mySection, object myObject, string myString) =>
-                (MySection, MyObject, MyString) = (mySection, myObject, myString);
+            public ClassWith_DirectlyAssignable_CtorParams(
+                IConfigurationSection mySection,
+                object myObject,
+                string myString
+            ) => (MySection, MyObject, MyString) = (mySection, myObject, myString);
         }
 
         public class SharedChildInstance_Class
@@ -929,6 +1010,5 @@ namespace Microsoft.Extensions
             public string A { get; set; }
             public string B { get; set; }
         }
-
     }
 }

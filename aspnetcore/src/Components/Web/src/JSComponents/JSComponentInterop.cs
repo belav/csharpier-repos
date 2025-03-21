@@ -23,7 +23,8 @@ public class JSComponentInterop
 {
     private const string JSFunctionPropertyName = "invoke";
 
-    private static readonly ConcurrentDictionary<Type, ParameterTypeCache> ParameterTypeCaches = new();
+    private static readonly ConcurrentDictionary<Type, ParameterTypeCache> ParameterTypeCaches =
+        new();
 
     static JSComponentInterop()
     {
@@ -38,8 +39,8 @@ public class JSComponentInterop
 
     internal JSComponentConfigurationStore Configuration { get; }
 
-    private WebRenderer Renderer => _renderer
-        ?? throw new InvalidOperationException("This instance is not initialized.");
+    private WebRenderer Renderer =>
+        _renderer ?? throw new InvalidOperationException("This instance is not initialized.");
 
     /// <summary>
     /// Constructs an instance of <see cref="JSComponentInterop" />. This is only intended
@@ -67,7 +68,9 @@ public class JSComponentInterop
     {
         if (!Configuration.TryGetComponentType(identifier, out var componentType))
         {
-            throw new ArgumentException($"There is no registered JS component with identifier '{identifier}'.");
+            throw new ArgumentException(
+                $"There is no registered JS component with identifier '{identifier}'."
+            );
         }
 
         return Renderer.AddRootComponent(componentType, domElementSelector);
@@ -76,15 +79,25 @@ public class JSComponentInterop
     /// <summary>
     /// For framework use only.
     /// </summary>
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-        Justification = "OpenComponent already has the right set of attributes")]
-    protected internal void SetRootComponentParameters(int componentId, int parameterCount, JsonElement parametersJson, JsonSerializerOptions jsonOptions)
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "OpenComponent already has the right set of attributes"
+    )]
+    protected internal void SetRootComponentParameters(
+        int componentId,
+        int parameterCount,
+        JsonElement parametersJson,
+        JsonSerializerOptions jsonOptions
+    )
     {
         // In case the client misreports the number of parameters, impose bounds so we know the amount
         // of work done is limited to a fixed, low amount.
         if (parameterCount < 0 || parameterCount > MaxParameters)
         {
-            throw new ArgumentOutOfRangeException($"{nameof(parameterCount)} must be between 0 and {MaxParameters}.");
+            throw new ArgumentOutOfRangeException(
+                $"{nameof(parameterCount)} must be between 0 and {MaxParameters}."
+            );
         }
 
         var componentType = Renderer.GetRootComponentType(componentId);
@@ -104,13 +117,26 @@ public class JSComponentInterop
                     ParameterKind.Value => JsonSerializer.Deserialize(
                         parameterJsonValue,
                         parameterInfo.Type,
-                        jsonOptions),
-                    ParameterKind.EventCallbackWithNoParameters => CreateEventCallbackWithNoParameters(
-                        JsonSerializer.Deserialize<IJSObjectReference>(parameterJsonValue, jsonOptions)),
-                    ParameterKind.EventCallbackWithSingleParameter => CreateEventCallbackWithSingleParameter(
-                        parameterInfo.Type,
-                        JsonSerializer.Deserialize<IJSObjectReference>(parameterJsonValue, jsonOptions)),
-                    var x => throw new InvalidOperationException($"Invalid {nameof(ParameterKind)} '{x}'.")
+                        jsonOptions
+                    ),
+                    ParameterKind.EventCallbackWithNoParameters =>
+                        CreateEventCallbackWithNoParameters(
+                            JsonSerializer.Deserialize<IJSObjectReference>(
+                                parameterJsonValue,
+                                jsonOptions
+                            )
+                        ),
+                    ParameterKind.EventCallbackWithSingleParameter =>
+                        CreateEventCallbackWithSingleParameter(
+                            parameterInfo.Type,
+                            JsonSerializer.Deserialize<IJSObjectReference>(
+                                parameterJsonValue,
+                                jsonOptions
+                            )
+                        ),
+                    var x => throw new InvalidOperationException(
+                        $"Invalid {nameof(ParameterKind)} '{x}'."
+                    ),
                 };
             }
             else
@@ -134,7 +160,9 @@ public class JSComponentInterop
                         parameterValue = null;
                         break;
                     default:
-                        throw new ArgumentException($"There is no declared parameter named '{parameterName}', so the supplied object cannot be deserialized.");
+                        throw new ArgumentException(
+                            $"There is no declared parameter named '{parameterName}', so the supplied object cannot be deserialized."
+                        );
                 }
             }
 
@@ -152,41 +180,61 @@ public class JSComponentInterop
     /// <summary>
     /// For framework use only.
     /// </summary>
-    protected internal virtual void RemoveRootComponent(int componentId)
-        => Renderer.RemoveRootComponent(componentId);
+    protected internal virtual void RemoveRootComponent(int componentId) =>
+        Renderer.RemoveRootComponent(componentId);
 
-    internal static ParameterTypeCache GetComponentParameters(Type componentType)
-        => ParameterTypeCaches.GetOrAdd(componentType, static type => new ParameterTypeCache(type));
+    internal static ParameterTypeCache GetComponentParameters(Type componentType) =>
+        ParameterTypeCaches.GetOrAdd(componentType, static type => new ParameterTypeCache(type));
 
-    internal static bool IsEventCallbackType(Type type)
-        => GetParameterKind(type)
+    internal static bool IsEventCallbackType(Type type) =>
+        GetParameterKind(type)
             is ParameterKind.EventCallbackWithNoParameters
-            or ParameterKind.EventCallbackWithSingleParameter;
+                or ParameterKind.EventCallbackWithSingleParameter;
 
-    private static ParameterKind GetParameterKind(Type type)
-        => type switch
+    private static ParameterKind GetParameterKind(Type type) =>
+        type switch
         {
             var x when x == typeof(EventCallback) => ParameterKind.EventCallbackWithNoParameters,
-            var x when x.IsGenericType && x.GetGenericTypeDefinition() == typeof(EventCallback<>) => ParameterKind.EventCallbackWithSingleParameter,
+            var x when x.IsGenericType && x.GetGenericTypeDefinition() == typeof(EventCallback<>) =>
+                ParameterKind.EventCallbackWithSingleParameter,
             _ => ParameterKind.Value,
         };
 
-    private static EventCallback CreateEventCallbackWithNoParameters(IJSObjectReference? jsObjectReference)
+    private static EventCallback CreateEventCallbackWithNoParameters(
+        IJSObjectReference? jsObjectReference
+    )
     {
-        var callback = jsObjectReference is null ? null : new Func<Task>(
-            () => jsObjectReference.InvokeVoidAsync(JSFunctionPropertyName).AsTask());
+        var callback = jsObjectReference is null
+            ? null
+            : new Func<Task>(() =>
+                jsObjectReference.InvokeVoidAsync(JSFunctionPropertyName).AsTask()
+            );
         return new(null, callback);
     }
 
-    [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = "EventCallback and EventCallback<TValue> constructors are referenced statically and will be preserved.")]
-    private static object CreateEventCallbackWithSingleParameter(Type eventCallbackType, IJSObjectReference? jsObjectReference)
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2067",
+        Justification = "EventCallback and EventCallback<TValue> constructors are referenced statically and will be preserved."
+    )]
+    private static object CreateEventCallbackWithSingleParameter(
+        Type eventCallbackType,
+        IJSObjectReference? jsObjectReference
+    )
     {
-        var callback = jsObjectReference is null ? null : new Func<object, Task>(
-            value => jsObjectReference.InvokeVoidAsync(JSFunctionPropertyName, value).AsTask());
+        var callback = jsObjectReference is null
+            ? null
+            : new Func<object, Task>(value =>
+                jsObjectReference.InvokeVoidAsync(JSFunctionPropertyName, value).AsTask()
+            );
         return Activator.CreateInstance(eventCallbackType, null, callback)!;
     }
 
-    private static bool TryGetComponentParameterInfo(Type componentType, string parameterName, out ParameterInfo parameterInfo)
+    private static bool TryGetComponentParameterInfo(
+        Type componentType,
+        string parameterName,
+        out ParameterInfo parameterInfo
+    )
     {
         var cacheForComponent = GetComponentParameters(componentType);
         return cacheForComponent.ParameterInfoByName.TryGetValue(parameterName, out parameterInfo);
@@ -196,11 +244,17 @@ public class JSComponentInterop
     {
         public readonly Dictionary<string, ParameterInfo> ParameterInfoByName;
 
-        [UnconditionalSuppressMessage("Trimming", "IL2067", Justification = "OpenComponent already has the right set of attributes")]
+        [UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2067",
+            Justification = "OpenComponent already has the right set of attributes"
+        )]
         public ParameterTypeCache(Type componentType)
         {
             ParameterInfoByName = new(StringComparer.OrdinalIgnoreCase);
-            var candidateProperties = ComponentProperties.GetCandidateBindableProperties(componentType);
+            var candidateProperties = ComponentProperties.GetCandidateBindableProperties(
+                componentType
+            );
             foreach (var propertyInfo in candidateProperties)
             {
                 if (propertyInfo.IsDefined(typeof(ParameterAttribute)))
@@ -215,7 +269,7 @@ public class JSComponentInterop
     {
         Value,
         EventCallbackWithNoParameters,
-        EventCallbackWithSingleParameter
+        EventCallbackWithSingleParameter,
     }
 
     internal readonly struct ParameterInfo

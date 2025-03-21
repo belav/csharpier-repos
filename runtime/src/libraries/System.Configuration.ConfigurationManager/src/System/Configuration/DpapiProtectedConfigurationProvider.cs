@@ -17,8 +17,10 @@ namespace System.Configuration
 
         public override XmlNode Decrypt(XmlNode encryptedNode)
         {
-            if (encryptedNode.NodeType != XmlNodeType.Element ||
-                encryptedNode.Name != "EncryptedData")
+            if (
+                encryptedNode.NodeType != XmlNodeType.Element
+                || encryptedNode.Name != "EncryptedData"
+            )
             {
                 throw new ConfigurationErrorsException(SR.DPAPI_bad_data);
             }
@@ -67,7 +69,10 @@ namespace System.Configuration
             byte[] encryptedData = ProtectedData.Protect(
                 userData: inputData,
                 optionalEntropy: entropyData,
-                scope: UseMachineProtection ? DataProtectionScope.LocalMachine : DataProtectionScope.CurrentUser);
+                scope: UseMachineProtection
+                    ? DataProtectionScope.LocalMachine
+                    : DataProtectionScope.CurrentUser
+            );
 
             return Convert.ToBase64String(encryptedData);
         }
@@ -83,21 +88,33 @@ namespace System.Configuration
             byte[] decryptedData = ProtectedData.Unprotect(
                 encryptedData: inputData,
                 optionalEntropy: entropyData,
-                scope: UseMachineProtection ? DataProtectionScope.LocalMachine : DataProtectionScope.CurrentUser);
+                scope: UseMachineProtection
+                    ? DataProtectionScope.LocalMachine
+                    : DataProtectionScope.CurrentUser
+            );
 
             return Encoding.Unicode.GetString(decryptedData);
         }
 
-        public bool UseMachineProtection { get { return _useMachineProtection; } }
+        public bool UseMachineProtection
+        {
+            get { return _useMachineProtection; }
+        }
 
         public override void Initialize(string name, NameValueCollection configurationValues)
         {
             base.Initialize(name, configurationValues);
-            _useMachineProtection = GetBooleanValue(configurationValues, "useMachineProtection", true);
+            _useMachineProtection = GetBooleanValue(
+                configurationValues,
+                "useMachineProtection",
+                true
+            );
             _keyEntropy = configurationValues["keyEntropy"];
             configurationValues.Remove("keyEntropy");
             if (configurationValues.Count > 0)
-                throw new ConfigurationErrorsException(SR.Format(SR.Unrecognized_initialization_value, configurationValues.GetKey(0)));
+                throw new ConfigurationErrorsException(
+                    SR.Format(SR.Unrecognized_initialization_value, configurationValues.GetKey(0))
+                );
         }
 
         private static XmlNode TraverseToChild(XmlNode node, string name, bool onlyChild)
@@ -120,7 +137,11 @@ namespace System.Configuration
             return (s != null) ? Encoding.Unicode.GetBytes(s) : Array.Empty<byte>();
         }
 
-        private static bool GetBooleanValue(NameValueCollection configurationValues, string valueName, bool defaultValue)
+        private static bool GetBooleanValue(
+            NameValueCollection configurationValues,
+            string valueName,
+            bool defaultValue
+        )
         {
             string s = configurationValues[valueName];
             if (s == null)
@@ -130,7 +151,9 @@ namespace System.Configuration
                 return true;
             if (s == "false")
                 return false;
-            throw new ConfigurationErrorsException(SR.Format(SR.Config_invalid_boolean_attribute, valueName));
+            throw new ConfigurationErrorsException(
+                SR.Format(SR.Config_invalid_boolean_attribute, valueName)
+            );
         }
     }
 }

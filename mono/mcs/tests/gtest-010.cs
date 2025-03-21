@@ -5,34 +5,30 @@ using System;
 
 interface I
 {
-	void Hello ();
+    void Hello();
 }
 
 class J
 {
-	public void Foo ()
-	{
-		Console.WriteLine ("Foo!");
-	}
+    public void Foo()
+    {
+        Console.WriteLine("Foo!");
+    }
 }
 
 class Stack<T>
-	where T : J, I
+    where T : J, I
 {
-	public void Test (T t)
-	{
-		t.Hello ();
-		t.Foo ();
-	}
+    public void Test(T t)
+    {
+        t.Hello();
+        t.Foo();
+    }
 }
 
-class Test
-{
-}
+class Test { }
 
 class X
 {
-	public static void Main()
-	{
-	}
+    public static void Main() { }
 }

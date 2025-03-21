@@ -59,7 +59,11 @@ internal sealed class EndpointComparer : IComparer<Endpoint>, IEqualityComparer<
         {
             if (routeEndpointY != null)
             {
-                return string.Compare(routeEndpointX.RoutePattern.RawText, routeEndpointY.RoutePattern.RawText, StringComparison.OrdinalIgnoreCase);
+                return string.Compare(
+                    routeEndpointX.RoutePattern.RawText,
+                    routeEndpointY.RoutePattern.RawText,
+                    StringComparison.OrdinalIgnoreCase
+                );
             }
 
             return 1;
@@ -143,8 +147,9 @@ internal sealed class EndpointComparer : IComparer<Endpoint>, IEqualityComparer<
             {
                 if (routeEndpointY != null)
                 {
-                    return routeEndpointX.RoutePattern.InboundPrecedence
-                        .CompareTo(routeEndpointY.RoutePattern.InboundPrecedence);
+                    return routeEndpointX.RoutePattern.InboundPrecedence.CompareTo(
+                        routeEndpointY.RoutePattern.InboundPrecedence
+                    );
                 }
 
                 return 1;

@@ -7,7 +7,8 @@ using Xunit;
 
 namespace System.Collections.Generic.Tests
 {
-    public abstract class LargeArrayBuilderTests<T, TGenerator> where TGenerator : IGenerator<T>, new()
+    public abstract class LargeArrayBuilderTests<T, TGenerator>
+        where TGenerator : IGenerator<T>, new()
     {
         private static readonly TGenerator s_generator = new TGenerator();
 
@@ -115,7 +116,9 @@ namespace System.Collections.Generic.Tests
         {
             var data = new TheoryData<IEnumerable<T>, int>();
 
-            IEnumerable<IEnumerable<T>> enumerables = EnumerableData().Select(array => array[0]).Cast<IEnumerable<T>>();
+            IEnumerable<IEnumerable<T>> enumerables = EnumerableData()
+                .Select(array => array[0])
+                .Cast<IEnumerable<T>>();
 
             foreach (IEnumerable<T> enumerable in enumerables)
             {
@@ -130,7 +133,9 @@ namespace System.Collections.Generic.Tests
         {
             var data = new TheoryData<IEnumerable<T>, int, int>();
 
-            IEnumerable<IEnumerable<T>> enumerables = EnumerableData().Select(array => array[0]).Cast<IEnumerable<T>>();
+            IEnumerable<IEnumerable<T>> enumerables = EnumerableData()
+                .Select(array => array[0])
+                .Cast<IEnumerable<T>>();
 
             foreach (IEnumerable<T> enumerable in enumerables)
             {
@@ -164,7 +169,8 @@ namespace System.Collections.Generic.Tests
         }
     }
 
-    public class LargeArrayBuilderTestsInt32 : LargeArrayBuilderTests<int, LargeArrayBuilderTestsInt32.Generator>
+    public class LargeArrayBuilderTestsInt32
+        : LargeArrayBuilderTests<int, LargeArrayBuilderTestsInt32.Generator>
     {
         public sealed class Generator : IGenerator<int>
         {
@@ -172,7 +178,8 @@ namespace System.Collections.Generic.Tests
         }
     }
 
-    public class LargeArrayBuilderTestsString : LargeArrayBuilderTests<string, LargeArrayBuilderTestsString.Generator>
+    public class LargeArrayBuilderTestsString
+        : LargeArrayBuilderTests<string, LargeArrayBuilderTestsString.Generator>
     {
         public sealed class Generator : IGenerator<string>
         {

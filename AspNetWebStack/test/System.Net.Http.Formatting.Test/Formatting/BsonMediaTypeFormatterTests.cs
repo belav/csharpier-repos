@@ -19,8 +19,11 @@ namespace System.Net.Http.Formatting
         // Exclude IEnumerable<T> and IQueryable<T> to avoid attempts to round trip values that are known to cause
         // trouble in deserialization e.g. base IEnumerable<T>.  BSON reader won't know how to construct such types.
         private const TestDataVariations RoundTripVariations =
-            (TestDataVariations.All | TestDataVariations.WithNull | TestDataVariations.AsClassMember) &
-            ~(TestDataVariations.AsIEnumerable | TestDataVariations.AsIQueryable);
+            (
+                TestDataVariations.All
+                | TestDataVariations.WithNull
+                | TestDataVariations.AsClassMember
+            ) & ~(TestDataVariations.AsIEnumerable | TestDataVariations.AsIQueryable);
 
         /// <summary>
         /// Provide test data for round trip tests.  Avoid types BSON does not support.
@@ -59,17 +62,18 @@ namespace System.Net.Http.Formatting
             get
             {
                 return CommonUnitTestDataSets.ValueAndRefTypeTestDataCollection.Except(
-                    new TestData[] {
+                    new TestData[]
+                    {
                         CommonUnitTestDataSets.Uints,
                         CommonUnitTestDataSets.Ulongs,
                         CommonUnitTestDataSets.DateTimeOffsets,
                         CommonUnitTestDataSets.DateTimes,
                         CommonUnitTestDataSets.Decimals,
                         CommonUnitTestDataSets.ISerializableTypes,
-                    });
+                    }
+                );
             }
         }
-
 
         public override IEnumerable<MediaTypeHeaderValue> ExpectedSupportedMediaTypes
         {
@@ -88,20 +92,36 @@ namespace System.Net.Http.Formatting
                 return new byte[17]
                 {
                     // Little-endian length
-                    17, 0, 0, 0,
+                    17,
+                    0,
+                    0,
+                    0,
                     // Opcode indicating a 32bit integer
                     0x10,
                     // Field name as a C string
-                    (byte)'N', (byte)'u', (byte)'m', (byte)'b', (byte)'e', (byte)'r', 0,
+                    (byte)'N',
+                    (byte)'u',
+                    (byte)'m',
+                    (byte)'b',
+                    (byte)'e',
+                    (byte)'r',
+                    0,
                     // Little-endian value
-                    42, 0, 0, 0,
+                    42,
+                    0,
+                    0,
+                    0,
                     // BSON document terminator
                     0,
                 };
             }
         }
 
-        public override Task ReadFromStreamAsync_UsesCorrectCharacterEncoding(string content, string encoding, bool isDefaultEncoding)
+        public override Task ReadFromStreamAsync_UsesCorrectCharacterEncoding(
+            string content,
+            string encoding,
+            bool isDefaultEncoding
+        )
         {
             // Arrange
             BsonMediaTypeFormatter formatter = new BsonMediaTypeFormatter();
@@ -118,10 +138,19 @@ namespace System.Net.Http.Formatting
             }
 
             // Further Arrange, Act & Assert
-            return ReadContentUsingCorrectCharacterEncodingHelperAsync(formatter, content, sourceData, mediaType);
+            return ReadContentUsingCorrectCharacterEncodingHelperAsync(
+                formatter,
+                content,
+                sourceData,
+                mediaType
+            );
         }
 
-        public override Task WriteToStreamAsync_UsesCorrectCharacterEncoding(string content, string encoding, bool isDefaultEncoding)
+        public override Task WriteToStreamAsync_UsesCorrectCharacterEncoding(
+            string content,
+            string encoding,
+            bool isDefaultEncoding
+        )
         {
             // Arrange
             GC.KeepAlive(isDefaultEncoding); // Mark parameter as used. See xUnit1026, [Theory] method doesn't use all parameters.
@@ -140,7 +169,12 @@ namespace System.Net.Http.Formatting
             }
 
             // Further Arrange, Act & Assert
-            return WriteContentUsingCorrectCharacterEncodingHelperAsync(formatter, content, expectedData, mediaType);
+            return WriteContentUsingCorrectCharacterEncodingHelperAsync(
+                formatter,
+                content,
+                expectedData,
+                mediaType
+            );
         }
 
         [Fact]
@@ -155,7 +189,9 @@ namespace System.Net.Http.Formatting
             // Replace serializable settings and switch one property's value
             JsonSerializerSettings oldSettings = formatter.SerializerSettings;
             formatter.SerializerSettings = formatter.CreateDefaultSerializerSettings();
-            formatter.SerializerSettings.CheckAdditionalContent = !formatter.SerializerSettings.CheckAdditionalContent;
+            formatter.SerializerSettings.CheckAdditionalContent = !formatter
+                .SerializerSettings
+                .CheckAdditionalContent;
 
             // Act
             TestBsonMediaTypeFormatter derivedFormatter = new TestBsonMediaTypeFormatter(formatter);
@@ -163,9 +199,15 @@ namespace System.Net.Http.Formatting
             // Assert
             Assert.Equal(formatter.MaxDepth, derivedFormatter.MaxDepth);
             Assert.NotSame(oldSettings, formatter.SerializerSettings);
-            Assert.NotEqual(oldSettings.CheckAdditionalContent, formatter.SerializerSettings.CheckAdditionalContent);
+            Assert.NotEqual(
+                oldSettings.CheckAdditionalContent,
+                formatter.SerializerSettings.CheckAdditionalContent
+            );
             Assert.Same(formatter.SerializerSettings, derivedFormatter.SerializerSettings);
-            Assert.Same(formatter.SerializerSettings.ContractResolver, derivedFormatter.SerializerSettings.ContractResolver);
+            Assert.Same(
+                formatter.SerializerSettings.ContractResolver,
+                derivedFormatter.SerializerSettings.ContractResolver
+            );
         }
 
         [Fact]
@@ -180,11 +222,15 @@ namespace System.Net.Http.Formatting
                 illegalLowerValue: 0,
                 maxLegalValue: null,
                 illegalUpperValue: null,
-                roundTripTestValue: 256);
+                roundTripTestValue: 256
+            );
         }
 
         [Theory]
-        [TestDataSet(typeof(CommonUnitTestDataSets), "RepresentativeValueAndRefTypeTestDataCollection")]
+        [TestDataSet(
+            typeof(CommonUnitTestDataSets),
+            "RepresentativeValueAndRefTypeTestDataCollection"
+        )]
         public void CanReadType_ReturnsExpectedValues(Type variationType, object testData)
         {
             // Arrange
@@ -196,7 +242,10 @@ namespace System.Net.Http.Formatting
         }
 
         [Theory]
-        [TestDataSet(typeof(CommonUnitTestDataSets), "RepresentativeValueAndRefTypeTestDataCollection")]
+        [TestDataSet(
+            typeof(CommonUnitTestDataSets),
+            "RepresentativeValueAndRefTypeTestDataCollection"
+        )]
         public void CanWriteType_ReturnsExpectedValues(Type variationType, object testData)
         {
             // Arrange
@@ -220,8 +269,18 @@ namespace System.Net.Http.Formatting
             HttpContent content = new StringContent(String.Empty);
 
             // Act & Assert
-            Func<Task> action = () => formatter.WriteToStreamAsync(typeof(SampleType), new SampleType(), memoryStream, content, transportContext: null);
-            await Assert.ThrowsAsync<Exception>(action, "Throwing exception directly, since it needs to get caught by a catch all");
+            Func<Task> action = () =>
+                formatter.WriteToStreamAsync(
+                    typeof(SampleType),
+                    new SampleType(),
+                    memoryStream,
+                    content,
+                    transportContext: null
+                );
+            await Assert.ThrowsAsync<Exception>(
+                action,
+                "Throwing exception directly, since it needs to get caught by a catch all"
+            );
 
             Assert.False(formatter.WasCreateJsonReaderCalled);
             Assert.True(formatter.WasCreateJsonWriterCalled);
@@ -240,8 +299,18 @@ namespace System.Net.Http.Formatting
             HttpContent content = new StringContent(String.Empty);
 
             // Act & Assert
-            Func<Task> action = () => formatter.WriteToStreamAsync(typeof(SampleType), new SampleType(), memoryStream, content, transportContext: null);
-            await Assert.ThrowsAsync<InvalidOperationException>(action, "The 'CreateJsonWriter' method returned null. It must return a JSON writer instance.");
+            Func<Task> action = () =>
+                formatter.WriteToStreamAsync(
+                    typeof(SampleType),
+                    new SampleType(),
+                    memoryStream,
+                    content,
+                    transportContext: null
+                );
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                action,
+                "The 'CreateJsonWriter' method returned null. It must return a JSON writer instance."
+            );
 
             Assert.False(formatter.WasCreateJsonReaderCalled);
             Assert.True(formatter.WasCreateJsonWriterCalled);
@@ -262,8 +331,16 @@ namespace System.Net.Http.Formatting
             // Act & Assert
             // Note error message is not quite correct: BSON supports byte, ushort, and smaller uint / ulong values.
             await Assert.ThrowsAsync<JsonWriterException>(
-                () => formatter.WriteToStreamAsync(variationType, testData, stream, content, transportContext: null),
-                expectedMessage);
+                () =>
+                    formatter.WriteToStreamAsync(
+                        variationType,
+                        testData,
+                        stream,
+                        content,
+                        transportContext: null
+                    ),
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -281,8 +358,12 @@ namespace System.Net.Http.Formatting
             HttpContent content = new StringContent("foo");
 
             // Act & Assert
-            Func<Task> action = () => formatter.ReadFromStreamAsync(typeof(SampleType), memoryStream, content, null);
-            await Assert.ThrowsAsync<Exception>(action, "Throwing exception directly, since it needs to get caught by a catch all");
+            Func<Task> action = () =>
+                formatter.ReadFromStreamAsync(typeof(SampleType), memoryStream, content, null);
+            await Assert.ThrowsAsync<Exception>(
+                action,
+                "Throwing exception directly, since it needs to get caught by a catch all"
+            );
 
             Assert.True(formatter.WasCreateJsonReaderCalled);
             Assert.False(formatter.WasCreateJsonWriterCalled);
@@ -303,8 +384,12 @@ namespace System.Net.Http.Formatting
             HttpContent content = new StringContent("foo");
 
             // Act & Assert
-            Func<Task> action = () => formatter.ReadFromStreamAsync(typeof(SampleType), memoryStream, content, null);
-            await Assert.ThrowsAsync<InvalidOperationException>(action, "The 'CreateJsonReader' method returned null. It must return a JSON reader instance.");
+            Func<Task> action = () =>
+                formatter.ReadFromStreamAsync(typeof(SampleType), memoryStream, content, null);
+            await Assert.ThrowsAsync<InvalidOperationException>(
+                action,
+                "The 'CreateJsonReader' method returned null. It must return a JSON reader instance."
+            );
 
             Assert.True(formatter.WasCreateJsonReaderCalled);
             Assert.False(formatter.WasCreateJsonWriterCalled);
@@ -321,7 +406,13 @@ namespace System.Net.Http.Formatting
             HttpContentHeaders contentHeaders = content.Headers;
             MemoryStream stream = new MemoryStream();
 
-            await formatter.WriteToStreamAsync(variationType, testData, stream, content, transportContext: null);
+            await formatter.WriteToStreamAsync(
+                variationType,
+                testData,
+                stream,
+                content,
+                transportContext: null
+            );
 
             contentHeaders.ContentLength = stream.Length;
             stream.Flush();
@@ -335,7 +426,7 @@ namespace System.Net.Http.Formatting
 #else
                 "Could not convert to decimal: 7.92281625142643E+28. Path 'Value'."
 #endif
-                );
+            );
         }
 
         [Theory]
@@ -349,33 +440,63 @@ namespace System.Net.Http.Formatting
             HttpContent content = new StringContent(String.Empty);
 
             // Act & Assert
-            await Assert.Task.SucceedsAsync(formatter.WriteToStreamAsync(type, null, memoryStream, content, transportContext: null));
+            await Assert.Task.SucceedsAsync(
+                formatter.WriteToStreamAsync(
+                    type,
+                    null,
+                    memoryStream,
+                    content,
+                    transportContext: null
+                )
+            );
             memoryStream.Position = 0;
             string serializedString = new StreamReader(memoryStream).ReadToEnd();
             Assert.Empty(serializedString);
         }
 
         [Theory]
-        [TestDataSet(typeof(BsonMediaTypeFormatterTests), "ValueAndRefTypeTestDataCollection", RoundTripVariations)]
-        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync(Type variationType, object testData)
+        [TestDataSet(
+            typeof(BsonMediaTypeFormatterTests),
+            "ValueAndRefTypeTestDataCollection",
+            RoundTripVariations
+        )]
+        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync(
+            Type variationType,
+            object testData
+        )
         {
             // Arrange
             BsonMediaTypeFormatter formatter = new BsonMediaTypeFormatter();
 
             // Arrange & Act & Assert
-            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(formatter, variationType, testData);
+            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(
+                formatter,
+                variationType,
+                testData
+            );
             Assert.Equal(testData, readObj);
         }
 
         [Theory]
-        [TestDataSet(typeof(JsonMediaTypeFormatterTests), "BunchOfJsonObjectsTestDataCollection", RoundTripVariations)]
-        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_PerhapsJObject(Type variationType, object testData)
+        [TestDataSet(
+            typeof(JsonMediaTypeFormatterTests),
+            "BunchOfJsonObjectsTestDataCollection",
+            RoundTripVariations
+        )]
+        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_PerhapsJObject(
+            Type variationType,
+            object testData
+        )
         {
             // Arrange
             BsonMediaTypeFormatter formatter = new BsonMediaTypeFormatter();
 
             // Arrange & Act & Assert
-            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(formatter, variationType, testData);
+            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(
+                formatter,
+                variationType,
+                testData
+            );
 
             JObject readJObject = readObj as JObject;
             if (readJObject != null)
@@ -394,14 +515,25 @@ namespace System.Net.Http.Formatting
 
         // Test alternate null value
         [Theory]
-        [TestDataSet(typeof(JsonMediaTypeFormatterTests), "DBNullAsObjectTestDataCollection", TestDataVariations.AllSingleInstances)]
-        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull(Type variationType, object testData)
+        [TestDataSet(
+            typeof(JsonMediaTypeFormatterTests),
+            "DBNullAsObjectTestDataCollection",
+            TestDataVariations.AllSingleInstances
+        )]
+        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull(
+            Type variationType,
+            object testData
+        )
         {
             // Arrange
             TestBsonMediaTypeFormatter formatter = new TestBsonMediaTypeFormatter();
 
             // Arrange & Act & Assert
-            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(formatter, variationType, testData);
+            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(
+                formatter,
+                variationType,
+                testData
+            );
 
             // DBNull.Value can be read back as null object.
             Assert.Null(readObj);
@@ -409,17 +541,30 @@ namespace System.Net.Http.Formatting
 
 #if !NETCOREAPP2_1 // DBNull not serializable on .NET Core 2.1 except at top level (using BsonMediaTypeformatter special case).
         [Theory]
-        [TestDataSet(typeof(JsonMediaTypeFormatterTests), "DBNullAsObjectTestDataCollection", TestDataVariations.AsDictionary)]
-        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull_Dictionary(Type variationType, object testData)
+        [TestDataSet(
+            typeof(JsonMediaTypeFormatterTests),
+            "DBNullAsObjectTestDataCollection",
+            TestDataVariations.AsDictionary
+        )]
+        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull_Dictionary(
+            Type variationType,
+            object testData
+        )
         {
             // Guard
-            IDictionary<string, object> expectedDictionary = Assert.IsType<Dictionary<string, object>>(testData);
+            IDictionary<string, object> expectedDictionary = Assert.IsType<
+                Dictionary<string, object>
+            >(testData);
 
             // Arrange
             TestBsonMediaTypeFormatter formatter = new TestBsonMediaTypeFormatter();
 
             // Arrange & Act & Assert
-            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(formatter, variationType, testData);
+            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(
+                formatter,
+                variationType,
+                testData
+            );
 
             // DBNull.Value can be read back as null object. Reach into collections.
             Assert.Equal(testData.GetType(), readObj.GetType());
@@ -435,9 +580,15 @@ namespace System.Net.Http.Formatting
         }
 
         [Theory]
-        [TestDataSet(typeof(JsonMediaTypeFormatterTests), "DBNullAsObjectTestDataCollection",
-            TestDataVariations.AsArray | TestDataVariations.AsList)]
-        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull_Enumerable(Type variationType, object testData)
+        [TestDataSet(
+            typeof(JsonMediaTypeFormatterTests),
+            "DBNullAsObjectTestDataCollection",
+            TestDataVariations.AsArray | TestDataVariations.AsList
+        )]
+        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull_Enumerable(
+            Type variationType,
+            object testData
+        )
         {
             // Guard
             Assert.True((testData as IEnumerable<object>) != null);
@@ -447,7 +598,11 @@ namespace System.Net.Http.Formatting
             IEnumerable<object> expectedEnumerable = (IEnumerable<object>)testData;
 
             // Arrange & Act & Assert
-            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(formatter, variationType, testData);
+            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(
+                formatter,
+                variationType,
+                testData
+            );
 
             // DBNull.Value can be read back as null object. Reach into collections.
             Assert.Equal(testData.GetType(), readObj.GetType());
@@ -462,8 +617,15 @@ namespace System.Net.Http.Formatting
         }
 
         [Theory]
-        [TestDataSet(typeof(JsonMediaTypeFormatterTests), "DBNullAsObjectTestDataCollection", TestDataVariations.AsClassMember)]
-        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull_Holder(Type variationType, object testData)
+        [TestDataSet(
+            typeof(JsonMediaTypeFormatterTests),
+            "DBNullAsObjectTestDataCollection",
+            TestDataVariations.AsClassMember
+        )]
+        public async Task ReadFromStreamAsync_RoundTripsWriteToStreamAsync_DBNullAsNull_Holder(
+            Type variationType,
+            object testData
+        )
         {
             // Guard
             Assert.IsType<TestDataHolder<object>>(testData);
@@ -472,7 +634,11 @@ namespace System.Net.Http.Formatting
             TestBsonMediaTypeFormatter formatter = new TestBsonMediaTypeFormatter();
 
             // Arrange & Act & Assert
-            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(formatter, variationType, testData);
+            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(
+                formatter,
+                variationType,
+                testData
+            );
 
             // DBNull.Value can be read back as null object. Reach into objects.
             Assert.Equal(testData.GetType(), readObj.GetType());
@@ -491,7 +657,11 @@ namespace System.Net.Http.Formatting
             object testData = DBNull.Value;
 
             // Arrange & Act & Assert
-            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(formatter, variationType, testData);
+            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(
+                formatter,
+                variationType,
+                testData
+            );
 
             // Null on wire can be read as null of any nullable type
             Assert.Null(readObj);
@@ -506,7 +676,11 @@ namespace System.Net.Http.Formatting
             object testData = DBNull.Value;
 
             // Act & Assert
-            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(formatter, variationType, testData);
+            object readObj = await ReadFromStreamAsync_RoundTripsWriteToStreamAsync_Helper(
+                formatter,
+                variationType,
+                testData
+            );
 
             // Only BSON case where DBNull.Value round-trips
             Assert.Equal(testData, readObj);
@@ -514,20 +688,22 @@ namespace System.Net.Http.Formatting
 
         private class TestBsonMediaTypeFormatter : BsonMediaTypeFormatter
         {
-            public TestBsonMediaTypeFormatter() : base()
-            {
-            }
+            public TestBsonMediaTypeFormatter()
+                : base() { }
 
-            public TestBsonMediaTypeFormatter(TestBsonMediaTypeFormatter formatter) : base(formatter)
-            {
-            }
+            public TestBsonMediaTypeFormatter(TestBsonMediaTypeFormatter formatter)
+                : base(formatter) { }
 
             public bool ReturnNullOncreate { get; set; }
             public bool ThrowExceptionOnCreate { get; set; }
             public bool WasCreateJsonReaderCalled { get; private set; }
             public bool WasCreateJsonWriterCalled { get; private set; }
 
-            public override JsonReader CreateJsonReader(Type type, Stream readStream, Encoding effectiveEncoding)
+            public override JsonReader CreateJsonReader(
+                Type type,
+                Stream readStream,
+                Encoding effectiveEncoding
+            )
             {
                 WasCreateJsonReaderCalled = true;
                 if (ReturnNullOncreate)
@@ -537,13 +713,19 @@ namespace System.Net.Http.Formatting
 
                 if (ThrowExceptionOnCreate)
                 {
-                    throw new Exception("Throwing exception directly, since it needs to get caught by a catch all");
+                    throw new Exception(
+                        "Throwing exception directly, since it needs to get caught by a catch all"
+                    );
                 }
 
                 return base.CreateJsonReader(type, readStream, effectiveEncoding);
             }
 
-            public override JsonWriter CreateJsonWriter(Type type, Stream writeStream, Encoding effectiveEncoding)
+            public override JsonWriter CreateJsonWriter(
+                Type type,
+                Stream writeStream,
+                Encoding effectiveEncoding
+            )
             {
                 WasCreateJsonWriterCalled = true;
                 if (ReturnNullOncreate)
@@ -553,7 +735,9 @@ namespace System.Net.Http.Formatting
 
                 if (ThrowExceptionOnCreate)
                 {
-                    throw new Exception("Throwing exception directly, since it needs to get caught by a catch all");
+                    throw new Exception(
+                        "Throwing exception directly, since it needs to get caught by a catch all"
+                    );
                 }
 
                 return base.CreateJsonWriter(type, writeStream, effectiveEncoding);

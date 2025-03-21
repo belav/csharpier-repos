@@ -6,20 +6,14 @@ namespace System.Activities.Validation
 {
     using System;
     using System.Collections.Generic;
-    using System.Runtime;   
+    using System.Runtime;
 
     public sealed class GetWorkflowTree : CodeActivity<IEnumerable<Activity>>
     {
         public GetWorkflowTree()
-            : base()
-        {
-        }
+            : base() { }
 
-        public InArgument<ValidationContext> ValidationContext
-        {
-            get;
-            set;
-        }
+        public InArgument<ValidationContext> ValidationContext { get; set; }
 
         protected override IEnumerable<Activity> Execute(CodeActivityContext context)
         {

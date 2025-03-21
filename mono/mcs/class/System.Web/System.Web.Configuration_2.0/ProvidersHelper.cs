@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,9 +27,9 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Collections;
+using System.Collections.Specialized;
 using System.Configuration;
 using System.Configuration.Provider;
 using System.Data.Common;
@@ -38,56 +38,72 @@ using System.IO;
 using System.Reflection;
 using System.Web;
 using System.Web.Compilation;
-using System.Collections.Specialized;
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
+    public static class ProvidersHelper
+    {
+        public static ProviderBase InstantiateProvider(
+            ProviderSettings providerSettings,
+            Type providerType
+        )
+        {
+            Type settingsType = HttpApplication.LoadType(providerSettings.Type);
+            if (settingsType == null)
+                throw new ConfigurationErrorsException(
+                    String.Format("Could not find type: {0}", providerSettings.Type)
+                );
+            if (!providerType.IsAssignableFrom(settingsType))
+                throw new ConfigurationErrorsException(
+                    String.Format(
+                        "Provider '{0}' must subclass from '{1}'",
+                        providerSettings.Name,
+                        providerType
+                    )
+                );
 
-	public static class ProvidersHelper
-	{
-		public static ProviderBase InstantiateProvider (ProviderSettings providerSettings, Type providerType)
-		{
-			Type settingsType = HttpApplication.LoadType (providerSettings.Type);
-			if (settingsType == null)
-				throw new ConfigurationErrorsException (String.Format ("Could not find type: {0}",
-										       providerSettings.Type));
-			if (!providerType.IsAssignableFrom (settingsType))
-				throw new ConfigurationErrorsException (String.Format ("Provider '{0}' must subclass from '{1}'",
-										       providerSettings.Name, providerType));
+            ProviderBase provider = Activator.CreateInstance(settingsType) as ProviderBase;
 
-			ProviderBase provider = Activator.CreateInstance (settingsType) as ProviderBase;
+            NameValueCollection col = new NameValueCollection(providerSettings.Parameters);
+            provider.Initialize(providerSettings.Name, col);
 
-			NameValueCollection col = new NameValueCollection (providerSettings.Parameters);
-			provider.Initialize (providerSettings.Name, col);
+            return provider;
+        }
 
-			return provider;
-		}
+        public static void InstantiateProviders(
+            ProviderSettingsCollection configProviders,
+            ProviderCollection providers,
+            Type providerType
+        )
+        {
+            if (!typeof(ProviderBase).IsAssignableFrom(providerType))
+                throw new ConfigurationErrorsException(
+                    String.Format("type '{0}' must subclass from ProviderBase", providerType)
+                );
 
-		public static void InstantiateProviders (ProviderSettingsCollection configProviders, ProviderCollection providers, Type providerType)
-		{
-			if (!typeof (ProviderBase).IsAssignableFrom (providerType))
-				throw new ConfigurationErrorsException (String.Format ("type '{0}' must subclass from ProviderBase", providerType));
+            foreach (ProviderSettings settings in configProviders)
+                providers.Add(InstantiateProvider(settings, providerType));
+        }
 
-			foreach (ProviderSettings settings in configProviders)
-				providers.Add (InstantiateProvider (settings, providerType));
-		}
+        internal static DbProviderFactory GetDbProviderFactory(string providerName)
+        {
+            DbProviderFactory f = null;
 
-		internal static DbProviderFactory GetDbProviderFactory (string providerName)
-		{
-			DbProviderFactory f = null;
+            if (providerName != null && providerName != "")
+            {
+                try
+                {
+                    f = DbProviderFactories.GetFactory(providerName);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e); /* nada */
+                }
+                if (f != null)
+                    return f;
+            }
 
-			if (providerName != null && providerName != "") {
-				try {
-					f = DbProviderFactories.GetFactory(providerName);
-				}
-				catch (Exception e) { Console.WriteLine (e); /* nada */ }
-				if (f != null)
-					return f;
-			}
-
-			return SqlClientFactory.Instance;
-		}
-	}
-
+            return SqlClientFactory.Instance;
+        }
+    }
 }
-
-

@@ -28,7 +28,17 @@ namespace System.Tests
 
                     // Wait for the read to be satisfied
                     Assert.Equal(1, await readTask);
-                }, new RemoteInvokeOptions { StartInfo = new ProcessStartInfo() { RedirectStandardInput = true, RedirectStandardOutput = true, RedirectStandardError = true } });
+                },
+                new RemoteInvokeOptions
+                {
+                    StartInfo = new ProcessStartInfo()
+                    {
+                        RedirectStandardInput = true,
+                        RedirectStandardOutput = true,
+                        RedirectStandardError = true,
+                    },
+                }
+            );
 
             // Wait for child to write to its stdout
             Assert.Equal("ready", child.Process.StandardOutput.ReadLine());

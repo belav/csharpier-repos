@@ -32,13 +32,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             IThreadingContext threadingContext,
             ITextUndoHistoryRegistry undoHistoryRegistry,
             SVsServiceProvider serviceProvider,
-            Lazy<VisualStudioWorkspace> workspace)
+            Lazy<VisualStudioWorkspace> workspace
+        )
         {
-            _singleton = new GlobalUndoService(threadingContext, undoHistoryRegistry, serviceProvider, workspace);
+            _singleton = new GlobalUndoService(
+                threadingContext,
+                undoHistoryRegistry,
+                serviceProvider,
+                workspace
+            );
         }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => _singleton;
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            _singleton;
 
         private class GlobalUndoService : IGlobalUndoService
         {
@@ -48,11 +54,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             private readonly Lazy<VisualStudioWorkspace> _lazyVSWorkspace;
             internal int ActiveTransactions;
 
-            public GlobalUndoService(IThreadingContext threadingContext, ITextUndoHistoryRegistry undoHistoryRegistry, SVsServiceProvider serviceProvider, Lazy<VisualStudioWorkspace> lazyVSWorkspace)
+            public GlobalUndoService(
+                IThreadingContext threadingContext,
+                ITextUndoHistoryRegistry undoHistoryRegistry,
+                SVsServiceProvider serviceProvider,
+                Lazy<VisualStudioWorkspace> lazyVSWorkspace
+            )
             {
                 _threadingContext = threadingContext;
                 _undoHistoryRegistry = undoHistoryRegistry;
-                _undoManager = (IVsLinkedUndoTransactionManager)serviceProvider.GetService(typeof(SVsLinkedUndoTransactionManager));
+                _undoManager = (IVsLinkedUndoTransactionManager)
+                    serviceProvider.GetService(typeof(SVsLinkedUndoTransactionManager));
                 _lazyVSWorkspace = lazyVSWorkspace;
             }
 
@@ -62,20 +74,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 return _lazyVSWorkspace.Value == workspace;
             }
 
-            public IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(Workspace workspace, string description)
+            public IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(
+                Workspace workspace,
+                string description
+            )
             {
                 if (!CanUndo(workspace))
                 {
-                    throw new ArgumentException(ServicesVSResources.given_workspace_doesn_t_support_undo);
+                    throw new ArgumentException(
+                        ServicesVSResources.given_workspace_doesn_t_support_undo
+                    );
                 }
 
-                var transaction = new WorkspaceUndoTransaction(_threadingContext, _undoHistoryRegistry, _undoManager, workspace, description, this);
+                var transaction = new WorkspaceUndoTransaction(
+                    _threadingContext,
+                    _undoHistoryRegistry,
+                    _undoManager,
+                    workspace,
+                    description,
+                    this
+                );
                 ActiveTransactions++;
                 return transaction;
             }
 
-            public bool IsGlobalTransactionOpen(Workspace workspace)
-                => ActiveTransactions > 0;
+            public bool IsGlobalTransactionOpen(Workspace workspace) => ActiveTransactions > 0;
         }
     }
 }

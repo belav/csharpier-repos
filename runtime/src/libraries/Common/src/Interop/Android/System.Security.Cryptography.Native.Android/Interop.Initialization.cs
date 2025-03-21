@@ -48,7 +48,10 @@ internal static partial class Interop
             // No-op that exists to provide a hook for other static constructors.
         }
 
-        [LibraryImport(Libraries.AndroidCryptoNative, EntryPoint = "CryptoNative_EnsureOpenSslInitialized")]
+        [LibraryImport(
+            Libraries.AndroidCryptoNative,
+            EntryPoint = "CryptoNative_EnsureOpenSslInitialized"
+        )]
         private static partial int EnsureOpenSslInitialized();
     }
 }

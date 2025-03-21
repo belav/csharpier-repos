@@ -6,19 +6,19 @@ namespace Microsoft.Build.Tasks.Xaml
 {
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.IO;
-    using System.Xaml;
-    using System.Xaml.Schema;
-    using System.Xml;
     using System.Reflection;
     using System.Runtime;
     using System.Runtime.Remoting.Lifetime;
-    using System.Globalization;
+    using System.Xaml;
+    using System.Xaml.Schema;
+    using System.Xml;
+    using Microsoft.Build.Framework;
     using Microsoft.Build.Utilities;
     using XamlBuildTask;
-    using Microsoft.Build.Framework;
 
-    internal class CompilationPass2TaskInternal : MarshalByRefObject 
+    internal class CompilationPass2TaskInternal : MarshalByRefObject
     {
         IList<string> applicationMarkup;
         IList<ITaskItem> references;
@@ -27,7 +27,7 @@ namespace Microsoft.Build.Tasks.Xaml
         IList<string> generatedCodeFiles;
         XamlBuildTypeInspectionExtensionContext buildContextForExtensions;
         IDictionary<string, ITaskItem> applicationMarkupWithTypeName;
-        
+
         // Set the lease lifetime according to the environment variable with the name defined by RemotingLeaseLifetimeInMinutesEnvironmentVariableName
         public override object InitializeLifetimeService()
         {
@@ -46,26 +46,18 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 return this.applicationMarkup;
             }
-            set
-            {
-                this.applicationMarkup = value;
-            }
+            set { this.applicationMarkup = value; }
         }
 
-        public string AssemblyName
-        { get; set; }
+        public string AssemblyName { get; set; }
 
-        public TaskLoggingHelper BuildLogger
-        { get; set; }
+        public TaskLoggingHelper BuildLogger { get; set; }
 
-        public string LocalAssemblyReference
-        { get; set; }
+        public string LocalAssemblyReference { get; set; }
 
-        public string RootNamespace
-        { get; set; }
+        public string RootNamespace { get; set; }
 
-        public string MSBuildProjectDirectory
-        { get; set; }
+        public string MSBuildProjectDirectory { get; set; }
 
         public IList<LogData> LogData
         {
@@ -89,12 +81,9 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 return this.references;
             }
-            set
-            {
-                this.references = value;
-            }
+            set { this.references = value; }
         }
-        
+
         public IList<string> SourceCodeFiles
         {
             get
@@ -105,10 +94,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 return this.sourceCodeFiles;
             }
-            set
-            {
-                this.sourceCodeFiles = value;
-            }
+            set { this.sourceCodeFiles = value; }
         }
 
         public IList<string> GeneratedCodeFiles
@@ -133,29 +119,22 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
                 return applicationMarkupWithTypeName;
             }
-            set
-            {
-                this.applicationMarkupWithTypeName = value;
-            }
+            set { this.applicationMarkupWithTypeName = value; }
         }
 
-        public string OutputPath
-        { get; set; }
+        public string OutputPath { get; set; }
 
-        public string Language
-        { get; set; }
+        public string Language { get; set; }
 
-        public bool IsInProcessXamlMarkupCompile
-        { get; set; }
+        public bool IsInProcessXamlMarkupCompile { get; set; }
 
-        public IList<Tuple<string, string, string>> XamlBuildTaskTypeInspectionExtensionNames
-        { get; set; }
+        public IList<
+            Tuple<string, string, string>
+        > XamlBuildTaskTypeInspectionExtensionNames { get; set; }
 
-        public IList<Tuple<AssemblyName, Assembly>> ReferencedAssemblies
-        { get; set; }
+        public IList<Tuple<AssemblyName, Assembly>> ReferencedAssemblies { get; set; }
 
-        public bool SupportExtensions
-        { get; set; }
+        public bool SupportExtensions { get; set; }
 
         public XamlBuildTypeInspectionExtensionContext BuildContextForExtensions
         {
@@ -163,7 +142,8 @@ namespace Microsoft.Build.Tasks.Xaml
             {
                 if (this.buildContextForExtensions == null)
                 {
-                    XamlBuildTypeInspectionExtensionContext local = new XamlBuildTypeInspectionExtensionContext();              
+                    XamlBuildTypeInspectionExtensionContext local =
+                        new XamlBuildTypeInspectionExtensionContext();
                     local.AssemblyName = this.AssemblyName;
                     local.IsInProcessXamlMarkupCompile = this.IsInProcessXamlMarkupCompile;
                     local.Language = this.Language;
@@ -185,11 +165,17 @@ namespace Microsoft.Build.Tasks.Xaml
         {
             try
             {
-                if ((!this.SupportExtensions) && ((this.ApplicationMarkup == null) || this.ApplicationMarkup.Count == 0))
+                if (
+                    (!this.SupportExtensions)
+                    && ((this.ApplicationMarkup == null) || this.ApplicationMarkup.Count == 0)
+                )
                 {
                     return true;
                 }
-                else if (this.ApplicationMarkupWithTypeName == null || this.ApplicationMarkupWithTypeName.Count == 0)
+                else if (
+                    this.ApplicationMarkupWithTypeName == null
+                    || this.ApplicationMarkupWithTypeName.Count == 0
+                )
                 {
                     return true;
                 }
@@ -210,13 +196,25 @@ namespace Microsoft.Build.Tasks.Xaml
                     }
                     catch (FileNotFoundException e)
                     {
-                        XamlBuildTaskServices.LogException(this.BuildLogger, e.Message, e.FileName, 0, 0);
+                        XamlBuildTaskServices.LogException(
+                            this.BuildLogger,
+                            e.Message,
+                            e.FileName,
+                            0,
+                            0
+                        );
                         return false;
                     }
                 }
 
-                AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(XamlBuildTaskServices.ReflectionOnlyAssemblyResolve);
-                XamlNsReplacingContext wxsc = new XamlNsReplacingContext(loadedAssemblyList, localAssembly.GetName().Name, this.AssemblyName);
+                AppDomain.CurrentDomain.ReflectionOnlyAssemblyResolve += new ResolveEventHandler(
+                    XamlBuildTaskServices.ReflectionOnlyAssemblyResolve
+                );
+                XamlNsReplacingContext wxsc = new XamlNsReplacingContext(
+                    loadedAssemblyList,
+                    localAssembly.GetName().Name,
+                    this.AssemblyName
+                );
 
                 bool foundValidationErrors = false;
                 if (!this.SupportExtensions)
@@ -236,7 +234,13 @@ namespace Microsoft.Build.Tasks.Xaml
                             {
                                 throw;
                             }
-                            XamlBuildTaskServices.LogException(this.BuildLogger, e.Message, app, 0, 0);
+                            XamlBuildTaskServices.LogException(
+                                this.BuildLogger,
+                                e.Message,
+                                app,
+                                0,
+                                0
+                            );
                             return false;
                         }
                     }
@@ -259,7 +263,13 @@ namespace Microsoft.Build.Tasks.Xaml
                             {
                                 throw;
                             }
-                            XamlBuildTaskServices.LogException(this.BuildLogger, e.Message, inputMarkupFile, 0, 0);
+                            XamlBuildTaskServices.LogException(
+                                this.BuildLogger,
+                                e.Message,
+                                inputMarkupFile,
+                                0,
+                                0
+                            );
                             return false;
                         }
                     }
@@ -288,15 +298,35 @@ namespace Microsoft.Build.Tasks.Xaml
             }
         }
 
-        bool ProcessMarkupItem(string markupItem, XamlNsReplacingContext wxsc, Assembly localAssembly)
+        bool ProcessMarkupItem(
+            string markupItem,
+            XamlNsReplacingContext wxsc,
+            Assembly localAssembly
+        )
         {
-            XamlXmlReaderSettings settings = new XamlXmlReaderSettings() { LocalAssembly = localAssembly, ProvideLineInfo = true, AllowProtectedMembersOnRoot = true };
+            XamlXmlReaderSettings settings = new XamlXmlReaderSettings()
+            {
+                LocalAssembly = localAssembly,
+                ProvideLineInfo = true,
+                AllowProtectedMembersOnRoot = true,
+            };
             using (StreamReader streamReader = new StreamReader(markupItem))
             {
                 var xamlReader = new XamlXmlReader(XmlReader.Create(streamReader), wxsc, settings);
-                ClassValidator validator = new ClassValidator(markupItem, localAssembly, this.RootNamespace);
+                ClassValidator validator = new ClassValidator(
+                    markupItem,
+                    localAssembly,
+                    this.RootNamespace
+                );
                 IList<LogData> validationErrors = null;
-                if (validator.ValidateXaml(xamlReader, false, this.AssemblyName, out validationErrors))
+                if (
+                    validator.ValidateXaml(
+                        xamlReader,
+                        false,
+                        this.AssemblyName,
+                        out validationErrors
+                    )
+                )
                 {
                     return true;
                 }
@@ -310,38 +340,60 @@ namespace Microsoft.Build.Tasks.Xaml
                 }
             }
         }
-               
+
         bool ExecuteExtensions()
         {
-            ResolveAssemblyHelper resolveAssemblyHelper = new ResolveAssemblyHelper(XamlBuildTaskServices.GetReferences(this.References));
-            AppDomain.CurrentDomain.AssemblyResolve += resolveAssemblyHelper.ResolveLocalProjectReferences;
+            ResolveAssemblyHelper resolveAssemblyHelper = new ResolveAssemblyHelper(
+                XamlBuildTaskServices.GetReferences(this.References)
+            );
+            AppDomain.CurrentDomain.AssemblyResolve +=
+                resolveAssemblyHelper.ResolveLocalProjectReferences;
 
             bool extensionExecutedSuccessfully = true;
             try
-            {                
+            {
                 IEnumerable<IXamlBuildTypeInspectionExtension> extensions =
                     XamlBuildTaskServices.GetXamlBuildTaskExtensions<IXamlBuildTypeInspectionExtension>(
-                    this.XamlBuildTaskTypeInspectionExtensionNames,
-                    this.BuildLogger,
-                    this.MSBuildProjectDirectory);                
+                        this.XamlBuildTaskTypeInspectionExtensionNames,
+                        this.BuildLogger,
+                        this.MSBuildProjectDirectory
+                    );
 
                 foreach (IXamlBuildTypeInspectionExtension extension in extensions)
                 {
                     try
                     {
-                        extensionExecutedSuccessfully &= extension.Execute(this.BuildContextForExtensions);
+                        extensionExecutedSuccessfully &= extension.Execute(
+                            this.BuildContextForExtensions
+                        );
                     }
                     catch (FileNotFoundException e)
                     {
-                        throw FxTrace.Exception.AsError(new LoggableException(SR.ExceptionThrownInExtension(extension.ToString(), e.GetType().ToString(), SR.AssemblyNotFound(ResolveAssemblyHelper.FileNotFound))));
+                        throw FxTrace.Exception.AsError(
+                            new LoggableException(
+                                SR.ExceptionThrownInExtension(
+                                    extension.ToString(),
+                                    e.GetType().ToString(),
+                                    SR.AssemblyNotFound(ResolveAssemblyHelper.FileNotFound)
+                                )
+                            )
+                        );
                     }
                     catch (Exception e)
                     {
                         if (Fx.IsFatal(e))
                         {
                             throw;
-                        } 
-                        throw FxTrace.Exception.AsError(new LoggableException(SR.ExceptionThrownInExtension(extension.ToString(), e.GetType().ToString(), e.Message)));
+                        }
+                        throw FxTrace.Exception.AsError(
+                            new LoggableException(
+                                SR.ExceptionThrownInExtension(
+                                    extension.ToString(),
+                                    e.GetType().ToString(),
+                                    e.Message
+                                )
+                            )
+                        );
                     }
                 }
                 if (!this.BuildLogger.HasLoggedErrors && extensionExecutedSuccessfully)
@@ -354,7 +406,8 @@ namespace Microsoft.Build.Tasks.Xaml
             }
             finally
             {
-                AppDomain.CurrentDomain.AssemblyResolve -= resolveAssemblyHelper.ResolveLocalProjectReferences;
+                AppDomain.CurrentDomain.AssemblyResolve -=
+                    resolveAssemblyHelper.ResolveLocalProjectReferences;
             }
             return extensionExecutedSuccessfully;
         }

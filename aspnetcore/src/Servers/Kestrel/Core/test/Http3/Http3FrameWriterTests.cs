@@ -20,15 +20,17 @@ public class Http3FrameWriterTests
     public Http3FrameWriterTests()
     {
         var memoryBlock = new Mock<IMemoryOwner<byte>>();
-        memoryBlock.Setup(block => block.Memory).Returns(() =>
-        {
-            var blockArray = new byte[4096];
-            for (int i = 0; i < 4096; i++)
+        memoryBlock
+            .Setup(block => block.Memory)
+            .Returns(() =>
             {
-                blockArray[i] = 0xff;
-            }
-            return new Memory<byte>(blockArray);
-        });
+                var blockArray = new byte[4096];
+                for (int i = 0; i < 4096; i++)
+                {
+                    blockArray[i] = 0xff;
+                }
+                return new Memory<byte>(blockArray);
+            });
 
         var dirtyMemoryPool = new Mock<MemoryPool<byte>>();
         dirtyMemoryPool.Setup(pool => pool.Rent(It.IsAny<int>())).Returns(memoryBlock.Object);
@@ -38,7 +40,9 @@ public class Http3FrameWriterTests
     [Fact]
     public async Task WriteSettings_NoSettingsWrittenWithProtocolDefault()
     {
-        var pipe = new Pipe(new PipeOptions(_dirtyMemoryPool, PipeScheduler.Inline, PipeScheduler.Inline));
+        var pipe = new Pipe(
+            new PipeOptions(_dirtyMemoryPool, PipeScheduler.Inline, PipeScheduler.Inline)
+        );
         var frameWriter = CreateFrameWriter(pipe);
 
         var settings = new Http3PeerSettings();
@@ -52,7 +56,9 @@ public class Http3FrameWriterTests
     [Fact]
     public async Task WriteSettings_OneSettingsWrittenWithKestrelDefaults()
     {
-        var pipe = new Pipe(new PipeOptions(_dirtyMemoryPool, PipeScheduler.Inline, PipeScheduler.Inline));
+        var pipe = new Pipe(
+            new PipeOptions(_dirtyMemoryPool, PipeScheduler.Inline, PipeScheduler.Inline)
+        );
         var frameWriter = CreateFrameWriter(pipe);
 
         var kestrelLimits = new KestrelServerLimits();
@@ -71,7 +77,9 @@ public class Http3FrameWriterTests
     [Fact]
     public async Task WriteSettings_TwoSettingsWritten()
     {
-        var pipe = new Pipe(new PipeOptions(_dirtyMemoryPool, PipeScheduler.Inline, PipeScheduler.Inline));
+        var pipe = new Pipe(
+            new PipeOptions(_dirtyMemoryPool, PipeScheduler.Inline, PipeScheduler.Inline)
+        );
         var frameWriter = CreateFrameWriter(pipe);
 
         var settings = new Http3PeerSettings();
@@ -83,12 +91,24 @@ public class Http3FrameWriterTests
         // variable length ints make it so the results isn't know without knowing the values
         var payload = await pipe.Reader.ReadForLengthAsync(10);
 
-        Assert.Equal(new byte[] { 0x04, 0x08, 0x01, 0x44, 0xD2, 0x06, 0x80, 0x08, 0xAA, 0x52 }, payload.ToArray());
+        Assert.Equal(
+            new byte[] { 0x04, 0x08, 0x01, 0x44, 0xD2, 0x06, 0x80, 0x08, 0xAA, 0x52 },
+            payload.ToArray()
+        );
     }
 
     private Http3FrameWriter CreateFrameWriter(Pipe pipe)
     {
-        var frameWriter = new Http3FrameWriter(null, null, null, _dirtyMemoryPool, null, Mock.Of<IStreamIdFeature>(), new Http3PeerSettings(), null);
+        var frameWriter = new Http3FrameWriter(
+            null,
+            null,
+            null,
+            _dirtyMemoryPool,
+            null,
+            Mock.Of<IStreamIdFeature>(),
+            new Http3PeerSettings(),
+            null
+        );
         frameWriter.Reset(pipe.Writer, null);
 
         return frameWriter;

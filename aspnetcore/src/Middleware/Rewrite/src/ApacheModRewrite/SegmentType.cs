@@ -8,5 +8,5 @@ internal enum SegmentType
     Literal,
     ServerParameter,
     ConditionParameter,
-    RuleParameter
+    RuleParameter,
 }

@@ -32,26 +32,22 @@ namespace System.Linq.Parallel
         //
 
         internal UnaryQueryOperator(IEnumerable<TInput> child)
-            : this(QueryOperator<TInput>.AsQueryOperator(child))
-        {
-        }
+            : this(QueryOperator<TInput>.AsQueryOperator(child)) { }
 
         internal UnaryQueryOperator(IEnumerable<TInput> child, bool outputOrdered)
-            : this(QueryOperator<TInput>.AsQueryOperator(child), outputOrdered)
-        {
-        }
+            : this(QueryOperator<TInput>.AsQueryOperator(child), outputOrdered) { }
 
         private UnaryQueryOperator(QueryOperator<TInput> child)
-            : this(child, child.OutputOrdered, child.SpecifiedQuerySettings)
-        {
-        }
+            : this(child, child.OutputOrdered, child.SpecifiedQuerySettings) { }
 
         internal UnaryQueryOperator(QueryOperator<TInput> child, bool outputOrdered)
-            : this(child, outputOrdered, child.SpecifiedQuerySettings)
-        {
-        }
+            : this(child, outputOrdered, child.SpecifiedQuerySettings) { }
 
-        private UnaryQueryOperator(QueryOperator<TInput> child, bool outputOrdered, QuerySettings settings)
+        private UnaryQueryOperator(
+            QueryOperator<TInput> child,
+            bool outputOrdered,
+            QuerySettings settings
+        )
             : base(outputOrdered, settings)
         {
             _child = child;
@@ -81,9 +77,11 @@ namespace System.Linq.Parallel
         //
 
         internal abstract void WrapPartitionedStream<TKey>(
-            PartitionedStream<TInput, TKey> inputStream, IPartitionedStreamRecipient<TOutput> recipient,
-            bool preferStriping, QuerySettings settings);
-
+            PartitionedStream<TInput, TKey> inputStream,
+            IPartitionedStreamRecipient<TOutput> recipient,
+            bool preferStriping,
+            QuerySettings settings
+        );
 
         //---------------------------------------------------------------------------------------
         // Implementation of QueryResults for an unary operator. The results will not be indexable
@@ -97,7 +95,12 @@ namespace System.Linq.Parallel
             private QuerySettings _settings; // Settings collected from the query
             private readonly bool _preferStriping; // If the results are indexable, should we use striping when partitioning them
 
-            internal UnaryQueryOperatorResults(QueryResults<TInput> childQueryResults, UnaryQueryOperator<TInput, TOutput> op, QuerySettings settings, bool preferStriping)
+            internal UnaryQueryOperatorResults(
+                QueryResults<TInput> childQueryResults,
+                UnaryQueryOperator<TInput, TOutput> op,
+                QuerySettings settings,
+                bool preferStriping
+            )
             {
                 _childQueryResults = childQueryResults;
                 _op = op;
@@ -105,29 +108,47 @@ namespace System.Linq.Parallel
                 _preferStriping = preferStriping;
             }
 
-            internal override void GivePartitionedStream(IPartitionedStreamRecipient<TOutput> recipient)
+            internal override void GivePartitionedStream(
+                IPartitionedStreamRecipient<TOutput> recipient
+            )
             {
                 Debug.Assert(IsIndexible == (_op.OrdinalIndexState == OrdinalIndexState.Indexable));
 
-                Debug.Assert(_settings.ExecutionMode != null && _settings.DegreeOfParallelism != null);
-                if (_settings.ExecutionMode.Value == ParallelExecutionMode.Default && _op.LimitsParallelism)
+                Debug.Assert(
+                    _settings.ExecutionMode != null && _settings.DegreeOfParallelism != null
+                );
+                if (
+                    _settings.ExecutionMode.Value == ParallelExecutionMode.Default
+                    && _op.LimitsParallelism
+                )
                 {
                     // We need to run the query sequentially, up to and including this operator
-                    IEnumerable<TOutput> opSequential = _op.AsSequentialQuery(_settings.CancellationState.ExternalCancellationToken);
+                    IEnumerable<TOutput> opSequential = _op.AsSequentialQuery(
+                        _settings.CancellationState.ExternalCancellationToken
+                    );
                     PartitionedStream<TOutput, int> result = ExchangeUtilities.PartitionDataSource(
-                        opSequential, _settings.DegreeOfParallelism.Value, _preferStriping);
+                        opSequential,
+                        _settings.DegreeOfParallelism.Value,
+                        _preferStriping
+                    );
                     recipient.Receive<int>(result);
                 }
                 else if (IsIndexible)
                 {
                     // The output of this operator is indexable. Pass the partitioned output into the IPartitionedStreamRecipient.
-                    PartitionedStream<TOutput, int> result = ExchangeUtilities.PartitionDataSource(this, _settings.DegreeOfParallelism.Value, _preferStriping);
+                    PartitionedStream<TOutput, int> result = ExchangeUtilities.PartitionDataSource(
+                        this,
+                        _settings.DegreeOfParallelism.Value,
+                        _preferStriping
+                    );
                     recipient.Receive<int>(result);
                 }
                 else
                 {
                     // The common case: get partitions from the child and wrap each partition.
-                    _childQueryResults.GivePartitionedStream(new ChildResultsRecipient(recipient, _op, _preferStriping, _settings));
+                    _childQueryResults.GivePartitionedStream(
+                        new ChildResultsRecipient(recipient, _op, _preferStriping, _settings)
+                    );
                 }
             }
 
@@ -146,7 +167,11 @@ namespace System.Linq.Parallel
                 private QuerySettings _settings;
 
                 internal ChildResultsRecipient(
-                    IPartitionedStreamRecipient<TOutput> outputRecipient, UnaryQueryOperator<TInput, TOutput> op, bool preferStriping, QuerySettings settings)
+                    IPartitionedStreamRecipient<TOutput> outputRecipient,
+                    UnaryQueryOperator<TInput, TOutput> op,
+                    bool preferStriping,
+                    QuerySettings settings
+                )
                 {
                     _outputRecipient = outputRecipient;
                     _op = op;
@@ -158,7 +183,12 @@ namespace System.Linq.Parallel
                 {
                     // Call WrapPartitionedStream on our operator, which will wrap the input
                     // partitioned stream, and pass the result along to _outputRecipient.
-                    _op.WrapPartitionedStream(inputStream, _outputRecipient, _preferStriping, _settings);
+                    _op.WrapPartitionedStream(
+                        inputStream,
+                        _outputRecipient,
+                        _preferStriping,
+                        _settings
+                    );
                 }
             }
         }

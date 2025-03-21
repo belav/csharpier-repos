@@ -24,19 +24,23 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public IActionResult ActionWithProducesResponseType_StatusCodeInConstructor() => null;
 
         [ProducesResponseType(typeof(Person), 202)]
-        public IActionResult ActionWithProducesResponseType_StatusCodeAndTypeInConstructor() => null;
+        public IActionResult ActionWithProducesResponseType_StatusCodeAndTypeInConstructor() =>
+            null;
 
         [ProducesResponseType(200, StatusCode = 203)]
-        public IActionResult ActionWithProducesResponseType_StatusCodeInConstructorAndProperty() => null;
+        public IActionResult ActionWithProducesResponseType_StatusCodeInConstructorAndProperty() =>
+            null;
 
         [ProducesResponseType(typeof(object), 200, Type = typeof(Person), StatusCode = 201)]
-        public IActionResult ActionWithProducesResponseType_StatusCodeAndTypeInConstructorAndProperty() => null;
+        public IActionResult ActionWithProducesResponseType_StatusCodeAndTypeInConstructorAndProperty() =>
+            null;
 
         [CustomResponseType(Type = typeof(Person), StatusCode = 204)]
         public IActionResult ActionWithCustomApiResponseMetadataProvider() => null;
 
         [Produces201ResponseType]
-        public IActionResult ActionWithCustomProducesResponseTypeAttributeWithoutArguments() => null;
+        public IActionResult ActionWithCustomProducesResponseTypeAttributeWithoutArguments() =>
+            null;
 
         [Produces201ResponseType(201)]
         public IActionResult ActionWithCustomProducesResponseTypeAttributeWithArguments() => null;
@@ -45,11 +49,13 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         public IActionResult ActionWithProducesResponseTypeWithIncorrectStatusCodeType() => null;
 
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Find))]
-        public IActionResult GetResponseMetadata_ReturnsValuesFromApiConventionMethodAttribute() => null;
+        public IActionResult GetResponseMetadata_ReturnsValuesFromApiConventionMethodAttribute() =>
+            null;
 
         [ProducesResponseType(204)]
         [ApiConventionMethod(typeof(DefaultApiConventions), nameof(DefaultApiConventions.Find))]
-        public IActionResult GetResponseMetadata_WithProducesResponseTypeAndApiConventionMethod() => null;
+        public IActionResult GetResponseMetadata_WithProducesResponseTypeAndApiConventionMethod() =>
+            null;
     }
 
     public class Person { }
@@ -60,16 +66,16 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         public int StatusCode { get; set; }
 
-        public void SetContentTypes(MediaTypeCollection contentTypes)
-        {
-        }
+        public void SetContentTypes(MediaTypeCollection contentTypes) { }
     }
 
     public class Produces201ResponseTypeAttribute : ProducesResponseTypeAttribute
     {
-        public Produces201ResponseTypeAttribute() : base(201) { }
+        public Produces201ResponseTypeAttribute()
+            : base(201) { }
 
-        public Produces201ResponseTypeAttribute(int statusCode) : base(statusCode) { }
+        public Produces201ResponseTypeAttribute(int statusCode)
+            : base(statusCode) { }
     }
 
     public class CustomInvalidProducesResponseTypeAttribute : ProducesResponseTypeAttribute
@@ -77,9 +83,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         private string _statusCode;
 
         public CustomInvalidProducesResponseTypeAttribute()
-            : base(0)
-        {
-        }
+            : base(0) { }
 
         public new string StatusCode
         {
@@ -99,11 +103,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     }
 
     [ApiConventionType(typeof(DefaultApiConventions))]
-    public class GetDeclaredResponseMetadata_ApiConventionTypeAttributeOnBaseTypeBase
-    {
-    }
+    public class GetDeclaredResponseMetadata_ApiConventionTypeAttributeOnBaseTypeBase { }
 
-    public class GetDeclaredResponseMetadata_ApiConventionTypeAttributeOnBaseType : GetDeclaredResponseMetadata_ApiConventionTypeAttributeOnBaseTypeBase
+    public class GetDeclaredResponseMetadata_ApiConventionTypeAttributeOnBaseType
+        : GetDeclaredResponseMetadata_ApiConventionTypeAttributeOnBaseTypeBase
     {
         public IActionResult Post(object model) => null;
     }

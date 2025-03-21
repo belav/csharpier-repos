@@ -17,7 +17,7 @@ namespace Microsoft.Internal
         public enum TestEnum
         {
             First = 1,
-            Second = 2
+            Second = 2,
         }
 
         public static class DelegateTestClass
@@ -30,7 +30,11 @@ namespace Microsoft.Internal
 
         private Func<T> CreateValueGenerator<T>(T value)
         {
-            DynamicMethod methodBuilder = new DynamicMethod(TestServices.GenerateRandomString(), typeof(T), Type.EmptyTypes);
+            DynamicMethod methodBuilder = new DynamicMethod(
+                TestServices.GenerateRandomString(),
+                typeof(T),
+                Type.EmptyTypes
+            );
             // Generate the method body that simply returns the dictionary
             ILGenerator ilGenerator = methodBuilder.GetILGenerator();
             GenerationServices.LoadValue(ilGenerator, value);
@@ -47,7 +51,9 @@ namespace Microsoft.Internal
 
         private void TestSuccessfulDictionaryGeneration(IDictionary<string, object> dictionary)
         {
-            Func<IDictionary<string, object>> result = this.CreateValueGenerator<IDictionary<string, object>>(dictionary);
+            Func<IDictionary<string, object>> result = this.CreateValueGenerator<
+                IDictionary<string, object>
+            >(dictionary);
             IDictionary<string, object> generatedDictionary = result.Invoke();
             Assert.Equal(dictionary, generatedDictionary);
         }

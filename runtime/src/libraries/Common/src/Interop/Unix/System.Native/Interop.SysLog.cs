@@ -10,14 +10,14 @@ internal static partial class Interop
         internal enum SysLogPriority : int
         {
             // Priorities
-            LOG_EMERG       = 0,        /* system is unusable */
-            LOG_ALERT       = 1,        /* action must be taken immediately */
-            LOG_CRIT        = 2,        /* critical conditions */
-            LOG_ERR         = 3,        /* error conditions */
-            LOG_WARNING     = 4,        /* warning conditions */
-            LOG_NOTICE      = 5,        /* normal but significant condition */
-            LOG_INFO        = 6,        /* informational */
-            LOG_DEBUG       = 7,        /* debug-level messages */
+            LOG_EMERG = 0, /* system is unusable */
+            LOG_ALERT = 1, /* action must be taken immediately */
+            LOG_CRIT = 2, /* critical conditions */
+            LOG_ERR = 3, /* error conditions */
+            LOG_WARNING = 4, /* warning conditions */
+            LOG_NOTICE = 5, /* normal but significant condition */
+            LOG_INFO = 6, /* informational */
+            LOG_DEBUG = 7, /* debug-level messages */
         }
 
         /// <summary>
@@ -29,7 +29,11 @@ internal static partial class Interop
         /// </param>
         /// <param name="message">The message to put in the log entry</param>
         /// <param name="arg1">Like printf, the argument is passed to the variadic part of the C++ function to wildcards in the message</param>
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SysLog", StringMarshalling = StringMarshalling.Utf8)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_SysLog",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
         internal static partial void SysLog(SysLogPriority priority, string message, string arg1);
     }
 }

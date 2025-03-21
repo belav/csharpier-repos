@@ -9,6 +9,9 @@ namespace Microsoft.Win32
     partial class Registry
     {
         [Obsolete("Use PerformanceData instead")]
-        public static readonly RegistryKey DynData = RegistryKey.OpenBaseKey(RegistryHive.DynData, RegistryView.Default);
+        public static readonly RegistryKey DynData = RegistryKey.OpenBaseKey(
+            RegistryHive.DynData,
+            RegistryView.Default
+        );
     }
 }

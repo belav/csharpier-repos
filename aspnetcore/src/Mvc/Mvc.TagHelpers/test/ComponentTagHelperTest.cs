@@ -36,8 +36,11 @@ public class ComponentTagHelperTest
         await tagHelper.ProcessAsync(context, output);
 
         // Assert
-        var prerenderer = viewContext.HttpContext.RequestServices.GetRequiredService<IComponentPrerenderer>();
-        var content = await prerenderer.Dispatcher.InvokeAsync(() => HtmlContentUtilities.HtmlContentToString(output.Content));
+        var prerenderer =
+            viewContext.HttpContext.RequestServices.GetRequiredService<IComponentPrerenderer>();
+        var content = await prerenderer.Dispatcher.InvokeAsync(() =>
+            HtmlContentUtilities.HtmlContentToString(output.Content)
+        );
         Assert.Equal("Hello from the component", content);
         Assert.Null(output.TagName);
     }
@@ -46,16 +49,18 @@ public class ComponentTagHelperTest
     public async Task ProcessAsync_WithoutSpecifyingRenderMode_ThrowsError()
     {
         // Arrange
-        var tagHelper = new ComponentTagHelper
-        {
-            ViewContext = GetViewContext(),
-        };
+        var tagHelper = new ComponentTagHelper { ViewContext = GetViewContext() };
         var context = GetTagHelperContext();
         var output = GetTagHelperOutput();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => tagHelper.ProcessAsync(context, output));
-        Assert.Equal("A value for the 'render-mode' attribute must be supplied to the 'component' tag helper.", ex.Message);
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            tagHelper.ProcessAsync(context, output)
+        );
+        Assert.Equal(
+            "A value for the 'render-mode' attribute must be supplied to the 'component' tag helper.",
+            ex.Message
+        );
     }
 
     private static TagHelperContext GetTagHelperContext()
@@ -64,7 +69,8 @@ public class ComponentTagHelperTest
             "component",
             new TagHelperAttributeList(),
             new Dictionary<object, object>(),
-            Guid.NewGuid().ToString("N"));
+            Guid.NewGuid().ToString("N")
+        );
     }
 
     private static TagHelperOutput GetTagHelperOutput()
@@ -72,7 +78,8 @@ public class ComponentTagHelperTest
         return new TagHelperOutput(
             "component",
             new TagHelperAttributeList(),
-            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent()));
+            (_, __) => Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
     }
 
     private ViewContext GetViewContext()
@@ -85,8 +92,11 @@ public class ComponentTagHelperTest
             RequestServices = new ServiceCollection()
                 .AddScoped<IComponentPrerenderer, EndpointHtmlRenderer>()
                 .AddScoped<ServerComponentSerializer>()
-                .AddScoped(_ => Mock.Of<IDataProtectionProvider>(
-                    x => x.CreateProtector(It.IsAny<string>()) == Mock.Of<IDataProtector>()))
+                .AddScoped(_ =>
+                    Mock.Of<IDataProtectionProvider>(x =>
+                        x.CreateProtector(It.IsAny<string>()) == Mock.Of<IDataProtector>()
+                    )
+                )
                 .AddLogging()
                 .AddScoped<ComponentStatePersistenceManager>()
                 .AddScoped(_ => navManager.Object)

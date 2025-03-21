@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,6 +11,7 @@ namespace Test
     public struct AA
     {
         public static bool m_bFwd1;
+
         public void Method1()
         {
             if (m_bFwd1)
@@ -27,6 +29,7 @@ namespace Test
                 } while (m_bFwd1);
             }
         }
+
         [Fact]
         public static void TestEntryPoint()
         {

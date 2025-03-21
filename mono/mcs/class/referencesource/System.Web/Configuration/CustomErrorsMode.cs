@@ -4,11 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
-    public enum CustomErrorsMode {
+namespace System.Web.Configuration
+{
+    public enum CustomErrorsMode
+    {
         RemoteOnly = 0,
         On = 1,
-        Off = 2
+        Off = 2,
     }
 }

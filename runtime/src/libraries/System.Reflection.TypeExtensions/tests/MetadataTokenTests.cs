@@ -12,17 +12,25 @@ namespace System.Reflection.Tests
         public void GetMetadataToken_ArraysAndTheirMembers_DoNotHaveMetadataTokens()
         {
             Assert.False(typeof(byte[]).GetTypeInfo().HasMetadataToken());
-            Assert.Throws<InvalidOperationException>(() => typeof(byte[]).GetTypeInfo().GetMetadataToken());
+            Assert.Throws<InvalidOperationException>(() =>
+                typeof(byte[]).GetTypeInfo().GetMetadataToken()
+            );
 
             Assert.False(typeof(byte[]).GetMethods()[0].HasMetadataToken());
-            Assert.Throws<InvalidOperationException>(() => typeof(byte[]).GetTypeInfo().GetMetadataToken());
+            Assert.Throws<InvalidOperationException>(() =>
+                typeof(byte[]).GetTypeInfo().GetMetadataToken()
+            );
         }
 
         private class Test<T> { }
 
         public int Field;
         public int Property { get; set; }
-        public event EventHandler Event { add { } remove { } }
+        public event EventHandler Event
+        {
+            add { }
+            remove { }
+        }
 
         public static readonly object[][] MembersWithExpectedTableIndex = new object[][]
         {
@@ -31,7 +39,7 @@ namespace System.Reflection.Tests
             new object[] { typeof(MetadataTokenTests).GetProperties()[0], 0x17 },
             new object[] { typeof(MetadataTokenTests).GetEvents()[0], 0x14 },
             new object[] { typeof(MetadataTokenTests).GetFields()[0], 0x04 },
-            new object[] { typeof(Test<>).GetGenericArguments()[0].GetTypeInfo(), 0x2A }
+            new object[] { typeof(Test<>).GetGenericArguments()[0].GetTypeInfo(), 0x2A },
         };
 
         [ActiveIssue("https://github.com/mono/mono/issues/15194", TestRuntimes.Mono)]
@@ -48,7 +56,10 @@ namespace System.Reflection.Tests
         [ConditionalFact(nameof(GetMetadataTokenSupported), nameof(IsReflectionEmitSupported))]
         public static void ReflectionEmitType_HasMetadataToken()
         {
-            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("dynamic"), AssemblyBuilderAccess.Run);
+            AssemblyBuilder assembly = AssemblyBuilder.DefineDynamicAssembly(
+                new AssemblyName("dynamic"),
+                AssemblyBuilderAccess.Run
+            );
             ModuleBuilder module = assembly.DefineDynamicModule("dynamic.dll");
             TypeBuilder type = module.DefineType("T");
             MethodInfo method = type.DefineMethod("M", MethodAttributes.Public);
@@ -62,6 +73,7 @@ namespace System.Reflection.Tests
         public static bool IsReflectionEmitSupported => PlatformDetection.IsReflectionEmitSupported;
 
         private static int TableIndex(int token) => token >> 24;
+
         private static int RowIndex(int token) => token & 0x00FFFFFF;
     }
 }

@@ -61,7 +61,7 @@ namespace System.Web.Http.ModelBinding.Binders
                 if (SuppressPrefixCheck)
                 {
                     // If we're suppressing a prefix check, then we don't need any further info from the ActionContext
-                    // to know that we're using this binder. 
+                    // to know that we're using this binder.
                     return _modelBinderFactory();
                 }
                 else
@@ -72,7 +72,7 @@ namespace System.Web.Http.ModelBinding.Binders
             return null;
         }
 
-        // Helper binder to do the prefix check before invoking into the user's binder. 
+        // Helper binder to do the prefix check before invoking into the user's binder.
         private class SimpleModelBinder : IModelBinder
         {
             private readonly SimpleModelBinderProvider _parent;
@@ -82,9 +82,12 @@ namespace System.Web.Http.ModelBinding.Binders
                 _parent = parent;
             }
 
-            public bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext)
+            public bool BindModel(
+                HttpActionContext actionContext,
+                ModelBindingContext bindingContext
+            )
             {
-                Contract.Assert(!_parent.SuppressPrefixCheck); // wouldn't have even created this binder 
+                Contract.Assert(!_parent.SuppressPrefixCheck); // wouldn't have even created this binder
                 if (bindingContext.ValueProvider.ContainsPrefix(bindingContext.ModelName))
                 {
                     IModelBinder binder = _parent._modelBinderFactory();

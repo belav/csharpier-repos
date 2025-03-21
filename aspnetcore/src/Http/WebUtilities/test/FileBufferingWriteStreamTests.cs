@@ -9,7 +9,11 @@ namespace Microsoft.AspNetCore.WebUtilities;
 
 public class FileBufferingWriteStreamTests : IDisposable
 {
-    private readonly string TempDirectory = Path.Combine(Path.GetTempPath(), "FileBufferingWriteTests", Path.GetRandomFileName());
+    private readonly string TempDirectory = Path.Combine(
+        Path.GetTempPath(),
+        "FileBufferingWriteTests",
+        Path.GetRandomFileName()
+    );
 
     public FileBufferingWriteStreamTests()
     {
@@ -20,7 +24,9 @@ public class FileBufferingWriteStreamTests : IDisposable
     public void Write_BuffersContentToMemory()
     {
         // Arrange
-        using var bufferingStream = new FileBufferingWriteStream(tempFileDirectoryAccessor: () => TempDirectory);
+        using var bufferingStream = new FileBufferingWriteStream(tempFileDirectoryAccessor: () =>
+            TempDirectory
+        );
         var input = Encoding.UTF8.GetBytes("Hello world");
 
         // Act
@@ -41,8 +47,11 @@ public class FileBufferingWriteStreamTests : IDisposable
     public void Write_BeforeMemoryThresholdIsReached_WritesToMemory()
     {
         // Arrange
-        var input = new byte[] { 1, 2, };
-        using var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, tempFileDirectoryAccessor: () => TempDirectory);
+        var input = new byte[] { 1, 2 };
+        using var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
 
         // Act
         bufferingStream.Write(input, 0, 2);
@@ -65,8 +74,11 @@ public class FileBufferingWriteStreamTests : IDisposable
     public void Write_BuffersContentToDisk_WhenMemoryThresholdIsReached()
     {
         // Arrange
-        var input = new byte[] { 1, 2, 3, };
-        using var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, tempFileDirectoryAccessor: () => TempDirectory);
+        var input = new byte[] { 1, 2, 3 };
+        using var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
         bufferingStream.Write(input, 0, 2);
 
         // Act
@@ -89,8 +101,11 @@ public class FileBufferingWriteStreamTests : IDisposable
     public void Write_BuffersContentToDisk_WhenWriteWillOverflowMemoryThreshold()
     {
         // Arrange
-        var input = new byte[] { 1, 2, 3, };
-        using var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, tempFileDirectoryAccessor: () => TempDirectory);
+        var input = new byte[] { 1, 2, 3 };
+        using var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
 
         // Act
         bufferingStream.Write(input, 0, input.Length);
@@ -113,7 +128,10 @@ public class FileBufferingWriteStreamTests : IDisposable
     {
         // Arrange
         var input = new byte[] { 1, 2, 3, 4, 5, 6, 7 };
-        using var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 4, tempFileDirectoryAccessor: () => TempDirectory);
+        using var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 4,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
 
         // Act
         bufferingStream.Write(input, 0, 5);
@@ -126,7 +144,7 @@ public class FileBufferingWriteStreamTests : IDisposable
         // File should have been created.
         Assert.NotNull(fileStream);
         var fileBytes = ReadFileContent(fileStream!);
-        Assert.Equal(new byte[] { 1, 2, 3, 4, 5, }, fileBytes);
+        Assert.Equal(new byte[] { 1, 2, 3, 4, 5 }, fileBytes);
 
         Assert.Equal(new byte[] { 6, 7 }, ReadBufferedContent(pageBuffer));
     }
@@ -135,7 +153,9 @@ public class FileBufferingWriteStreamTests : IDisposable
     public async Task WriteAsync_BuffersContentToMemory()
     {
         // Arrange
-        using var bufferingStream = new FileBufferingWriteStream(tempFileDirectoryAccessor: () => TempDirectory);
+        using var bufferingStream = new FileBufferingWriteStream(tempFileDirectoryAccessor: () =>
+            TempDirectory
+        );
         var input = Encoding.UTF8.GetBytes("Hello world");
 
         // Act
@@ -154,8 +174,11 @@ public class FileBufferingWriteStreamTests : IDisposable
     public async Task WriteAsync_BeforeMemoryThresholdIsReached_WritesToMemory()
     {
         // Arrange
-        var input = new byte[] { 1, 2, };
-        using var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, tempFileDirectoryAccessor: () => TempDirectory);
+        var input = new byte[] { 1, 2 };
+        using var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
 
         // Act
         await bufferingStream.WriteAsync(input, 0, 2);
@@ -176,8 +199,11 @@ public class FileBufferingWriteStreamTests : IDisposable
     public async Task WriteAsync_BuffersContentToDisk_WhenMemoryThresholdIsReached()
     {
         // Arrange
-        var input = new byte[] { 1, 2, 3, };
-        using var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, tempFileDirectoryAccessor: () => TempDirectory);
+        var input = new byte[] { 1, 2, 3 };
+        using var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
         bufferingStream.Write(input, 0, 2);
 
         // Act
@@ -200,8 +226,11 @@ public class FileBufferingWriteStreamTests : IDisposable
     public async Task WriteAsync_BuffersContentToDisk_WhenWriteWillOverflowMemoryThreshold()
     {
         // Arrange
-        var input = new byte[] { 1, 2, 3, };
-        using var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, tempFileDirectoryAccessor: () => TempDirectory);
+        var input = new byte[] { 1, 2, 3 };
+        using var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
 
         // Act
         await bufferingStream.WriteAsync(input, 0, input.Length);
@@ -224,7 +253,10 @@ public class FileBufferingWriteStreamTests : IDisposable
     {
         // Arrange
         var input = new byte[] { 1, 2, 3, 4, 5, 6, 7 };
-        using var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 4, tempFileDirectoryAccessor: () => TempDirectory);
+        using var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 4,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
 
         // Act
         await bufferingStream.WriteAsync(input, 0, 5);
@@ -240,7 +272,7 @@ public class FileBufferingWriteStreamTests : IDisposable
 
         Assert.Equal(input.Length, bufferingStream.Length);
 
-        Assert.Equal(new byte[] { 1, 2, 3, 4, 5, }, fileBytes);
+        Assert.Equal(new byte[] { 1, 2, 3, 4, 5 }, fileBytes);
         Assert.Equal(new byte[] { 6, 7 }, ReadBufferedContent(pageBuffer));
     }
 
@@ -249,10 +281,16 @@ public class FileBufferingWriteStreamTests : IDisposable
     {
         // Arrange
         var input = new byte[20];
-        var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, bufferLimit: 10, tempFileDirectoryAccessor: () => TempDirectory);
+        var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            bufferLimit: 10,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
 
         // Act
-        var exception = Assert.Throws<IOException>(() => bufferingStream.Write(input, 0, input.Length));
+        var exception = Assert.Throws<IOException>(() =>
+            bufferingStream.Write(input, 0, input.Length)
+        );
         Assert.Equal("Buffer limit exceeded.", exception.Message);
 
         Assert.True(bufferingStream.Disposed);
@@ -263,11 +301,17 @@ public class FileBufferingWriteStreamTests : IDisposable
     {
         // Arrange
         var input = new byte[6];
-        var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, bufferLimit: 10, tempFileDirectoryAccessor: () => TempDirectory);
+        var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            bufferLimit: 10,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
 
         // Act
         bufferingStream.Write(input, 0, input.Length);
-        var exception = Assert.Throws<IOException>(() => bufferingStream.Write(input, 0, input.Length));
+        var exception = Assert.Throws<IOException>(() =>
+            bufferingStream.Write(input, 0, input.Length)
+        );
         Assert.Equal("Buffer limit exceeded.", exception.Message);
 
         // Verify we return the buffer.
@@ -279,7 +323,11 @@ public class FileBufferingWriteStreamTests : IDisposable
     {
         // Arrange
         var input = new byte[5];
-        using var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, bufferLimit: 10, tempFileDirectoryAccessor: () => TempDirectory);
+        using var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            bufferLimit: 10,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
 
         // Act
         bufferingStream.Write(input, 0, input.Length);
@@ -293,10 +341,16 @@ public class FileBufferingWriteStreamTests : IDisposable
     {
         // Arrange
         var input = new byte[20];
-        var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, bufferLimit: 10, tempFileDirectoryAccessor: () => TempDirectory);
+        var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            bufferLimit: 10,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
 
         // Act
-        var exception = await Assert.ThrowsAsync<IOException>(() => bufferingStream.WriteAsync(input, 0, input.Length));
+        var exception = await Assert.ThrowsAsync<IOException>(() =>
+            bufferingStream.WriteAsync(input, 0, input.Length)
+        );
         Assert.Equal("Buffer limit exceeded.", exception.Message);
 
         Assert.True(bufferingStream.Disposed);
@@ -307,11 +361,17 @@ public class FileBufferingWriteStreamTests : IDisposable
     {
         // Arrange
         var input = new byte[6];
-        var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, bufferLimit: 10, tempFileDirectoryAccessor: () => TempDirectory);
+        var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            bufferLimit: 10,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
 
         // Act
         await bufferingStream.WriteAsync(input, 0, input.Length);
-        var exception = await Assert.ThrowsAsync<IOException>(() => bufferingStream.WriteAsync(input, 0, input.Length));
+        var exception = await Assert.ThrowsAsync<IOException>(() =>
+            bufferingStream.WriteAsync(input, 0, input.Length)
+        );
         Assert.Equal("Buffer limit exceeded.", exception.Message);
 
         // Verify we return the buffer.
@@ -323,7 +383,11 @@ public class FileBufferingWriteStreamTests : IDisposable
     {
         // Arrange
         var input = new byte[5];
-        using var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, bufferLimit: 10, tempFileDirectoryAccessor: () => TempDirectory);
+        using var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            bufferLimit: 10,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
 
         // Act
         await bufferingStream.WriteAsync(input, 0, input.Length);
@@ -337,7 +401,9 @@ public class FileBufferingWriteStreamTests : IDisposable
     {
         // Arrange
         var input = new byte[] { 1, 2, 3, 4, 5 };
-        using var bufferingStream = new FileBufferingWriteStream(tempFileDirectoryAccessor: () => TempDirectory);
+        using var bufferingStream = new FileBufferingWriteStream(tempFileDirectoryAccessor: () =>
+            TempDirectory
+        );
         bufferingStream.Write(input, 0, input.Length);
         var memoryStream = new MemoryStream();
 
@@ -354,7 +420,10 @@ public class FileBufferingWriteStreamTests : IDisposable
     {
         // Arrange
         var input = Enumerable.Repeat((byte)0xca, 30).ToArray();
-        using var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 21, tempFileDirectoryAccessor: () => TempDirectory);
+        using var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 21,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
         bufferingStream.Write(input, 0, input.Length);
         var memoryStream = new MemoryStream();
 
@@ -367,12 +436,18 @@ public class FileBufferingWriteStreamTests : IDisposable
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.Windows, SkipReason = "UnixFileMode is not supported on Windows.")]
+    [OSSkipCondition(
+        OperatingSystems.Windows,
+        SkipReason = "UnixFileMode is not supported on Windows."
+    )]
     public void Write_BufferingContentToDisk_CreatesFileWithUserOnlyUnixFileMode()
     {
         // Arrange
-        var input = new byte[] { 1, 2, 3, };
-        using var bufferingStream = new FileBufferingWriteStream(memoryThreshold: 2, tempFileDirectoryAccessor: () => TempDirectory);
+        var input = new byte[] { 1, 2, 3 };
+        using var bufferingStream = new FileBufferingWriteStream(
+            memoryThreshold: 2,
+            tempFileDirectoryAccessor: () => TempDirectory
+        );
         bufferingStream.Write(input, 0, 2);
 
         // Act
@@ -380,7 +455,10 @@ public class FileBufferingWriteStreamTests : IDisposable
 
         // Assert
         Assert.NotNull(bufferingStream.FileStream);
-        Assert.Equal(UnixFileMode.UserRead | UnixFileMode.UserWrite, File.GetUnixFileMode(bufferingStream.FileStream.SafeFileHandle));
+        Assert.Equal(
+            UnixFileMode.UserRead | UnixFileMode.UserWrite,
+            File.GetUnixFileMode(bufferingStream.FileStream.SafeFileHandle)
+        );
     }
 
     public void Dispose()
@@ -389,14 +467,17 @@ public class FileBufferingWriteStreamTests : IDisposable
         {
             Directory.Delete(TempDirectory, recursive: true);
         }
-        catch
-        {
-        }
+        catch { }
     }
 
     private static byte[] ReadFileContent(FileStream fileStream)
     {
-        var fs = new FileStream(fileStream.Name, FileMode.Open, FileAccess.Read, FileShare.Delete | FileShare.ReadWrite);
+        var fs = new FileStream(
+            fileStream.Name,
+            FileMode.Open,
+            FileAccess.Read,
+            FileShare.Delete | FileShare.ReadWrite
+        );
         using var memoryStream = new MemoryStream();
         fs.CopyTo(memoryStream);
 

@@ -20,7 +20,9 @@ namespace SharedTypes.ComInterfaces
     internal partial class IBoolImpl : IBool
     {
         bool _data;
+
         public bool Get() => _data;
+
         public void Set(bool value) => _data = value;
     }
 }

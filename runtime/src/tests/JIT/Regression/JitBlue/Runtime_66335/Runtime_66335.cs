@@ -30,10 +30,11 @@ public class Runtime_66335
         public sbyte F2;
         public sbyte F4;
         public ulong F5;
-        public S0(sbyte f2) : this()
+
+        public S0(sbyte f2)
+            : this()
         {
             F2 = f2;
         }
     }
 }
-

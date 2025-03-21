@@ -14,8 +14,7 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void PopNewWriter(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopOctetString());
+            Assert.Throws<InvalidOperationException>(() => writer.PopOctetString());
         }
 
         [Theory]
@@ -25,8 +24,9 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void PopNewWriter_CustomTag(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            );
         }
 
         [Theory]
@@ -39,8 +39,7 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.PushOctetString();
             writer.PopOctetString();
 
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopOctetString());
+            Assert.Throws<InvalidOperationException>(() => writer.PopOctetString());
         }
 
         [Theory]
@@ -53,8 +52,9 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.PushOctetString();
             writer.PopOctetString();
 
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            );
         }
 
         [Theory]
@@ -66,8 +66,7 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.PushOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true));
 
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopOctetString());
+            Assert.Throws<InvalidOperationException>(() => writer.PopOctetString());
         }
 
         [Theory]
@@ -79,8 +78,9 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.PushOctetString();
 
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
+            Assert.Throws<InvalidOperationException>(() =>
+                writer.PopOctetString(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            );
         }
 
         [Theory]
@@ -158,13 +158,18 @@ namespace System.Formats.Asn1.Tests.Writer
 
             string expectedHex =
                 // Tag
-                "89" +
+                "89"
+                +
                 // Length
-                "8203E8" +
+                "8203E8"
+                +
                 // First written content
-                "048201F0" + zeroHex496Bytes +
+                "048201F0"
+                + zeroHex496Bytes
+                +
                 // Second written content
-                "8A8201F0" + zeroHex496Bytes;
+                "8A8201F0"
+                + zeroHex496Bytes;
 
             Verify(writer, expectedHex);
         }
@@ -194,19 +199,28 @@ namespace System.Formats.Asn1.Tests.Writer
                 // Tag
                 expectedHex =
                     // Tag
-                    "E9" +
+                    "E9"
+                    +
                     // Indefinite length
-                    "80" +
+                    "80"
+                    +
                     // Definite octet string
-                    "04" +
+                    "04"
+                    +
                     // 1000 bytes
-                    "8203E8" +
+                    "8203E8"
+                    +
                     // First written content
-                    "048201F0" + zeroHex496Bytes +
+                    "048201F0"
+                    + zeroHex496Bytes
+                    +
                     // Second written content tag, length, and first 498 payload bytes
-                    "4A8201F1" + zeroHex496Bytes +
+                    "4A8201F1"
+                    + zeroHex496Bytes
+                    +
                     // Second definite octet string, 1 byte, { 0x00 } payload
-                    "040100" +
+                    "040100"
+                    +
                     // End indefinite length
                     "0000";
             }
@@ -214,13 +228,19 @@ namespace System.Formats.Asn1.Tests.Writer
             {
                 expectedHex =
                     // Tag
-                    "C9" +
+                    "C9"
+                    +
                     // Length
-                    "8203E9" +
+                    "8203E9"
+                    +
                     // First written content
-                    "048201F0" + zeroHex496Bytes +
+                    "048201F0"
+                    + zeroHex496Bytes
+                    +
                     // Second written content
-                    "4A8201F1" + zeroHex496Bytes + "00";
+                    "4A8201F1"
+                    + zeroHex496Bytes
+                    + "00";
             }
 
             Verify(writer, expectedHex);

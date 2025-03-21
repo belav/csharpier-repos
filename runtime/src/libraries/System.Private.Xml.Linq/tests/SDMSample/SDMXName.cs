@@ -29,7 +29,10 @@ namespace XDocumentTests.SDMSample
             Assert.Throws<ArgumentNullException>(() => XName.Get(null));
             Assert.Throws<ArgumentNullException>(() => XName.Get(null, "foo"));
             Assert.Throws<ArgumentException>(() => XName.Get(string.Empty, "foo"));
-            AssertExtensions.Throws<ArgumentException>("expandedName", () => XName.Get(string.Empty));
+            AssertExtensions.Throws<ArgumentException>(
+                "expandedName",
+                () => XName.Get(string.Empty)
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => XName.Get("{}"));
             AssertExtensions.Throws<ArgumentException>(null, () => XName.Get("{foo}"));
         }

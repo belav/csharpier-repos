@@ -47,8 +47,7 @@ public sealed class NonRetryingExecutionStrategy : IExecutionStrategy
     ///     See <see href="https://aka.ms/efcore-docs-connection-resiliency">Connection resiliency and database retries</see>
     ///     for more information and examples.
     /// </remarks>
-    public bool RetriesOnFailure
-        => false;
+    public bool RetriesOnFailure => false;
 
     /// <summary>
     ///     Executes the specified operation and returns the result.
@@ -71,8 +70,8 @@ public sealed class NonRetryingExecutionStrategy : IExecutionStrategy
     public TResult Execute<TState, TResult>(
         TState state,
         Func<DbContext, TState, TResult> operation,
-        Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded)
-        => operation(Dependencies.CurrentContext.Context, state);
+        Func<DbContext, TState, ExecutionResult<TResult>>? verifySucceeded
+    ) => operation(Dependencies.CurrentContext.Context, state);
 
     /// <summary>
     ///     Executes the specified asynchronous operation and returns the result.
@@ -104,8 +103,7 @@ public sealed class NonRetryingExecutionStrategy : IExecutionStrategy
     public Task<TResult> ExecuteAsync<TState, TResult>(
         TState state,
         Func<DbContext, TState, CancellationToken, Task<TResult>> operation,
-        Func<DbContext, TState,
-            CancellationToken, Task<ExecutionResult<TResult>>>? verifySucceeded,
-        CancellationToken cancellationToken = default)
-        => operation(Dependencies.CurrentContext.Context, state, cancellationToken);
+        Func<DbContext, TState, CancellationToken, Task<ExecutionResult<TResult>>>? verifySucceeded,
+        CancellationToken cancellationToken = default
+    ) => operation(Dependencies.CurrentContext.Context, state, cancellationToken);
 }

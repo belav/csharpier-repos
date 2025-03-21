@@ -24,7 +24,12 @@ namespace System.IO.Tests
                 *currentByte = 0;
                 currentByte++;
             }
-            _stream = new UnmanagedMemoryStream(bytes, memorySizeInBytes, memorySizeInBytes, access);
+            _stream = new UnmanagedMemoryStream(
+                bytes,
+                memorySizeInBytes,
+                memorySizeInBytes,
+                access
+            );
         }
 
         public unsafe UmsManager(FileAccess access, byte[] seedData)
@@ -36,15 +41,17 @@ namespace System.IO.Tests
             {
                 Buffer.MemoryCopy(source, destination, memorySizeInBytes, memorySizeInBytes);
             }
-            _stream = new UnmanagedMemoryStream(destination, memorySizeInBytes, memorySizeInBytes, access);
+            _stream = new UnmanagedMemoryStream(
+                destination,
+                memorySizeInBytes,
+                memorySizeInBytes,
+                access
+            );
         }
 
         public UnmanagedMemoryStream Stream
         {
-            get
-            {
-                return _stream;
-            }
+            get { return _stream; }
         }
 
         public byte[] ToArray()

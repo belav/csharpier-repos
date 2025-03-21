@@ -6,11 +6,11 @@ namespace System.Activities.Core.Presentation.Factories
 {
     using System.Activities;
     using System.Activities.Presentation;
-    using System.Windows;
     using System.Activities.Statements;
+    using System.Windows;
 
     /// <summary>
-    /// The type that is added to the toolbox, which defines the factory method 
+    /// The type that is added to the toolbox, which defines the factory method
     /// that creates an instance of StateMachine Activity with an initial State.
     /// </summary>
     public sealed class StateMachineWithInitialStateFactory : IActivityTemplateFactory
@@ -24,13 +24,9 @@ namespace System.Activities.Core.Presentation.Factories
         {
             State state = new State()
             {
-                DisplayName = StateContainerEditor.DefaultStateDisplayName + "1"
+                DisplayName = StateContainerEditor.DefaultStateDisplayName + "1",
             };
-            return new StateMachine()
-            {
-                States = { state },
-                InitialState = state
-            };
+            return new StateMachine() { States = { state }, InitialState = state };
         }
     }
 }

@@ -16,31 +16,46 @@ namespace System.Runtime.DurableInstancing
         const string InstanceKeyName = "instancePersistenceInstanceKey";
 
         public InstanceKeyCollisionException()
-            : this(SRCore.KeyCollisionDefault, null)
-        {
-        }
+            : this(SRCore.KeyCollisionDefault, null) { }
 
         public InstanceKeyCollisionException(string message)
-            : this(message, null)
-        {
-        }
+            : this(message, null) { }
 
         public InstanceKeyCollisionException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
-        public InstanceKeyCollisionException(XName commandName, Guid instanceId, InstanceKey instanceKey, Guid conflictingInstanceId)
-            : this(commandName, instanceId, instanceKey, conflictingInstanceId, null)
-        {
-        }
+        public InstanceKeyCollisionException(
+            XName commandName,
+            Guid instanceId,
+            InstanceKey instanceKey,
+            Guid conflictingInstanceId
+        )
+            : this(commandName, instanceId, instanceKey, conflictingInstanceId, null) { }
 
-        public InstanceKeyCollisionException(XName commandName, Guid instanceId, InstanceKey instanceKey, Guid conflictingInstanceId, Exception innerException)
-            : this(commandName, instanceId, instanceKey, conflictingInstanceId, ToMessage(instanceId, instanceKey, conflictingInstanceId), innerException)
-        {
-        }
+        public InstanceKeyCollisionException(
+            XName commandName,
+            Guid instanceId,
+            InstanceKey instanceKey,
+            Guid conflictingInstanceId,
+            Exception innerException
+        )
+            : this(
+                commandName,
+                instanceId,
+                instanceKey,
+                conflictingInstanceId,
+                ToMessage(instanceId, instanceKey, conflictingInstanceId),
+                innerException
+            ) { }
 
-        public InstanceKeyCollisionException(XName commandName, Guid instanceId, InstanceKey instanceKey, Guid conflictingInstanceId, string message, Exception innerException)
+        public InstanceKeyCollisionException(
+            XName commandName,
+            Guid instanceId,
+            InstanceKey instanceKey,
+            Guid conflictingInstanceId,
+            string message,
+            Exception innerException
+        )
             : base(commandName, instanceId, message, innerException)
         {
             ConflictingInstanceId = conflictingInstanceId;
@@ -62,22 +77,37 @@ namespace System.Runtime.DurableInstancing
 
         [Fx.Tag.SecurityNote(Critical = "Overrides critical inherited method")]
         [SecurityCritical]
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureGetObjectDataOverrides,
-            Justification = "Method is SecurityCritical")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.SecureGetObjectDataOverrides,
+            Justification = "Method is SecurityCritical"
+        )]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             base.GetObjectData(info, context);
             info.AddValue(ConflictingInstanceIdName, ConflictingInstanceId, typeof(Guid));
-            info.AddValue(InstanceKeyName, (InstanceKey != null && InstanceKey.IsValid) ? InstanceKey.Value : Guid.Empty, typeof(Guid));
+            info.AddValue(
+                InstanceKeyName,
+                (InstanceKey != null && InstanceKey.IsValid) ? InstanceKey.Value : Guid.Empty,
+                typeof(Guid)
+            );
         }
 
-        static string ToMessage(Guid instanceId, InstanceKey instanceKey, Guid conflictingInstanceId)
+        static string ToMessage(
+            Guid instanceId,
+            InstanceKey instanceKey,
+            Guid conflictingInstanceId
+        )
         {
             if (instanceKey != null && instanceKey.IsValid)
             {
                 if (instanceId != Guid.Empty && conflictingInstanceId != Guid.Empty)
                 {
-                    return SRCore.KeyCollisionSpecific(instanceId, instanceKey.Value, conflictingInstanceId);
+                    return SRCore.KeyCollisionSpecific(
+                        instanceId,
+                        instanceKey.Value,
+                        conflictingInstanceId
+                    );
                 }
                 return SRCore.KeyCollisionSpecificKeyOnly(instanceKey.Value);
             }

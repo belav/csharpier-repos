@@ -26,7 +26,12 @@ internal sealed class MetadataDebugSummary
 
     internal CodeViewDebugDirectoryData? CodeViewData { get; private init; }
 
-    private MetadataDebugSummary(MetadataReader? pdbMetadataReader, bool isPortableCodeView, PdbChecksum[] pdbChecksums, CodeViewDebugDirectoryData? codeViewData)
+    private MetadataDebugSummary(
+        MetadataReader? pdbMetadataReader,
+        bool isPortableCodeView,
+        PdbChecksum[] pdbChecksums,
+        CodeViewDebugDirectoryData? codeViewData
+    )
     {
         PdbMetadataReader = pdbMetadataReader;
         IsPortableCodeView = isPortableCodeView;
@@ -34,7 +39,14 @@ internal sealed class MetadataDebugSummary
         CodeViewData = codeViewData;
     }
 
-    internal static MetadataDebugSummary Create(MonoProxy monoProxy, SessionId sessionId, string name, IDebugMetadataProvider provider, byte[]? pdb, CancellationToken token)
+    internal static MetadataDebugSummary Create(
+        MonoProxy monoProxy,
+        SessionId sessionId,
+        string name,
+        IDebugMetadataProvider provider,
+        byte[]? pdb,
+        CancellationToken token
+    )
     {
         var entries = provider.ReadDebugDirectory();
         CodeViewDebugDirectoryData? codeViewData = null;
@@ -52,7 +64,9 @@ internal sealed class MetadataDebugSummary
                     break;
                 case DebugDirectoryEntryType.PdbChecksum:
                     var checksum = provider.ReadPdbChecksumDebugDirectoryData(entry);
-                    pdbChecksums.Add(new PdbChecksum(checksum.AlgorithmName, checksum.Checksum.ToArray()));
+                    pdbChecksums.Add(
+                        new PdbChecksum(checksum.AlgorithmName, checksum.Checksum.ToArray())
+                    );
                     break;
                 case DebugDirectoryEntryType.EmbeddedPortablePdb:
                     embeddedPdbEntry = entry;
@@ -69,21 +83,34 @@ internal sealed class MetadataDebugSummary
             try
             {
                 // MetadataReaderProvider.FromPortablePdbStream takes ownership of the stream
-                pdbMetadataReader = MetadataReaderProvider.FromPortablePdbStream(pdbStream).GetMetadataReader();
+                pdbMetadataReader = MetadataReaderProvider
+                    .FromPortablePdbStream(pdbStream)
+                    .GetMetadataReader();
             }
             catch (BadImageFormatException)
             {
-                monoProxy.SendLog(sessionId, $"Warning: Unable to read debug information of: {name} (use DebugType=Portable/Embedded)", token);
+                monoProxy.SendLog(
+                    sessionId,
+                    $"Warning: Unable to read debug information of: {name} (use DebugType=Portable/Embedded)",
+                    token
+                );
             }
         }
         else
         {
             if (embeddedPdbEntry != null && embeddedPdbEntry.Value.DataSize != 0)
             {
-                pdbMetadataReader = provider.ReadEmbeddedPortablePdbDebugDirectoryData(embeddedPdbEntry.Value).GetMetadataReader();
+                pdbMetadataReader = provider
+                    .ReadEmbeddedPortablePdbDebugDirectoryData(embeddedPdbEntry.Value)
+                    .GetMetadataReader();
             }
         }
 
-        return new MetadataDebugSummary(pdbMetadataReader, isPortableCodeView, pdbChecksums.ToArray(), codeViewData);
+        return new MetadataDebugSummary(
+            pdbMetadataReader,
+            isPortableCodeView,
+            pdbChecksums.ToArray(),
+            codeViewData
+        );
     }
 }

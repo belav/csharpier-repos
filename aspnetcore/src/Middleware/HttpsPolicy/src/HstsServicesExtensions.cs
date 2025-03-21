@@ -17,7 +17,10 @@ public static class HstsServicesExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
     /// <param name="configureOptions">A delegate to configure the <see cref="HstsOptions"/>.</param>
     /// <returns></returns>
-    public static IServiceCollection AddHsts(this IServiceCollection services, Action<HstsOptions> configureOptions)
+    public static IServiceCollection AddHsts(
+        this IServiceCollection services,
+        Action<HstsOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configureOptions);

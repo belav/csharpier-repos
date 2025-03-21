@@ -5,17 +5,17 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading;
+using Microsoft.CodeAnalysis.Collections;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using System.Collections.Generic;
-using Microsoft.CodeAnalysis.Collections;
 
 namespace Microsoft.CodeAnalysis.CSharp.Symbols
 {
@@ -27,7 +27,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private ImmutableArray<NamedTypeSymbol> _lazyInterfaces;
 
         /// <summary>
-        /// Gets the BaseType of this type. If the base type could not be determined, then 
+        /// Gets the BaseType of this type. If the base type could not be determined, then
         /// an instance of ErrorType is returned. If this kind of type does not have a base type
         /// (for example, interfaces), null is returned. Also the special class System.Object
         /// always has a BaseType of null.
@@ -40,15 +40,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     // force resolution of bases in containing type
                     // to make base resolution errors more deterministic
-                    if ((object)ContainingType != null &&
-                        TypeKind is not (TypeKind.Enum or TypeKind.Delegate or TypeKind.Submission))
+                    if (
+                        (object)ContainingType != null
+                        && TypeKind
+                            is not (TypeKind.Enum or TypeKind.Delegate or TypeKind.Submission)
+                    )
                     {
                         var tmp = ContainingType.BaseTypeNoUseSiteDiagnostics;
                     }
 
                     var diagnostics = BindingDiagnosticBag.GetInstance();
                     var acyclicBase = this.MakeAcyclicBaseType(diagnostics);
-                    if (ReferenceEquals(Interlocked.CompareExchange(ref _lazyBaseType, acyclicBase, ErrorTypeSymbol.UnknownResultType), ErrorTypeSymbol.UnknownResultType))
+                    if (
+                        ReferenceEquals(
+                            Interlocked.CompareExchange(
+                                ref _lazyBaseType,
+                                acyclicBase,
+                                ErrorTypeSymbol.UnknownResultType
+                            ),
+                            ErrorTypeSymbol.UnknownResultType
+                        )
+                    )
                     {
                         AddDeclarationDiagnostics(diagnostics);
                     }
@@ -63,18 +75,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// Gets the set of interfaces that this type directly implements. This set does not include
         /// interfaces that are base interfaces of directly implemented interfaces.
         /// </summary>
-        internal sealed override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(ConsList<TypeSymbol> basesBeingResolved)
+        internal sealed override ImmutableArray<NamedTypeSymbol> InterfacesNoUseSiteDiagnostics(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             if (_lazyInterfaces.IsDefault)
             {
-                if (basesBeingResolved != null && basesBeingResolved.ContainsReference(this.OriginalDefinition))
+                if (
+                    basesBeingResolved != null
+                    && basesBeingResolved.ContainsReference(this.OriginalDefinition)
+                )
                 {
                     return ImmutableArray<NamedTypeSymbol>.Empty;
                 }
 
                 var diagnostics = BindingDiagnosticBag.GetInstance();
                 var acyclicInterfaces = MakeAcyclicInterfaces(basesBeingResolved, diagnostics);
-                if (ImmutableInterlocked.InterlockedCompareExchange(ref _lazyInterfaces, acyclicInterfaces, default(ImmutableArray<NamedTypeSymbol>)).IsDefault)
+                if (
+                    ImmutableInterlocked
+                        .InterlockedCompareExchange(
+                            ref _lazyInterfaces,
+                            acyclicInterfaces,
+                            default(ImmutableArray<NamedTypeSymbol>)
+                        )
+                        .IsDefault
+                )
                 {
                     AddDeclarationDiagnostics(diagnostics);
                 }
@@ -100,13 +125,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             if (!baseContainsErrorTypes)
             {
                 baseLocation = FindBaseRefSyntax(localBase);
-                Debug.Assert(!this.IsClassType() || localBase.IsObjectType() || baseLocation != null);
+                Debug.Assert(
+                    !this.IsClassType() || localBase.IsObjectType() || baseLocation != null
+                );
             }
 
             // you need to know all bases before you can ask this question... (asking this causes a cycle)
-            if (this.IsGenericType && !baseContainsErrorTypes && this.DeclaringCompilation.IsAttributeType(localBase))
+            if (
+                this.IsGenericType
+                && !baseContainsErrorTypes
+                && this.DeclaringCompilation.IsAttributeType(localBase)
+            )
             {
-                MessageID.IDS_FeatureGenericAttributes.CheckFeatureAvailability(diagnostics, this.DeclaringCompilation, baseLocation);
+                MessageID.IDS_FeatureGenericAttributes.CheckFeatureAvailability(
+                    diagnostics,
+                    this.DeclaringCompilation,
+                    baseLocation
+                );
             }
 
             // Check constraints on the first declaration with explicit bases.
@@ -117,22 +152,36 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 var conversions = corLibrary.TypeConversions;
                 var location = singleDeclaration.NameLocation;
 
-                localBase.CheckAllConstraints(DeclaringCompilation, conversions, location, diagnostics);
+                localBase.CheckAllConstraints(
+                    DeclaringCompilation,
+                    conversions,
+                    location,
+                    diagnostics
+                );
             }
 
             // Records can only inherit from other records or object
             if (this.IsClassType() && !localBase.IsObjectType() && !baseContainsErrorTypes)
             {
-                var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(diagnostics, ContainingAssembly);
+                var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
+                    diagnostics,
+                    ContainingAssembly
+                );
 
                 if (declaration.Kind == DeclarationKind.Record)
                 {
-                    if (SynthesizedRecordClone.FindValidCloneMethod(localBase, ref useSiteInfo) is null)
+                    if (
+                        SynthesizedRecordClone.FindValidCloneMethod(localBase, ref useSiteInfo)
+                        is null
+                    )
                     {
                         diagnostics.Add(ErrorCode.ERR_BadRecordBase, baseLocation);
                     }
                 }
-                else if (SynthesizedRecordClone.FindValidCloneMethod(localBase, ref useSiteInfo) is object)
+                else if (
+                    SynthesizedRecordClone.FindValidCloneMethod(localBase, ref useSiteInfo)
+                    is object
+                )
                 {
                     diagnostics.Add(ErrorCode.ERR_BadInheritanceFromRecord, baseLocation);
                 }
@@ -169,7 +218,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                     foreach (var @interface in set)
                     {
-                        @interface.CheckAllConstraints(DeclaringCompilation, conversions, location, diagnostics);
+                        @interface.CheckAllConstraints(
+                            DeclaringCompilation,
+                            conversions,
+                            location,
+                            diagnostics
+                        );
                     }
 
                     if (set.Count > 1)
@@ -183,23 +237,60 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             }
 
                             // InterfacesAndTheirBaseInterfacesNoUseSiteDiagnostics populates the set with interfaces that match by CLR signature.
-                            Debug.Assert(!other.Equals(@interface, TypeCompareKind.ConsiderEverything));
-                            Debug.Assert(other.Equals(@interface, TypeCompareKind.CLRSignatureCompareOptions));
+                            Debug.Assert(
+                                !other.Equals(@interface, TypeCompareKind.ConsiderEverything)
+                            );
+                            Debug.Assert(
+                                other.Equals(@interface, TypeCompareKind.CLRSignatureCompareOptions)
+                            );
 
-                            if (other.Equals(@interface, TypeCompareKind.IgnoreNullableModifiersForReferenceTypes))
+                            if (
+                                other.Equals(
+                                    @interface,
+                                    TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                                )
+                            )
                             {
-                                if (!other.Equals(@interface, TypeCompareKind.ObliviousNullableModifierMatchesAny))
+                                if (
+                                    !other.Equals(
+                                        @interface,
+                                        TypeCompareKind.ObliviousNullableModifierMatchesAny
+                                    )
+                                )
                                 {
-                                    diagnostics.Add(ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList, location, @interface, this);
+                                    diagnostics.Add(
+                                        ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                                        location,
+                                        @interface,
+                                        this
+                                    );
                                 }
                             }
-                            else if (other.Equals(@interface, TypeCompareKind.IgnoreTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes))
+                            else if (
+                                other.Equals(
+                                    @interface,
+                                    TypeCompareKind.IgnoreTupleNames
+                                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                                )
+                            )
                             {
-                                diagnostics.Add(ErrorCode.ERR_DuplicateInterfaceWithTupleNamesInBaseList, location, @interface, other, this);
+                                diagnostics.Add(
+                                    ErrorCode.ERR_DuplicateInterfaceWithTupleNamesInBaseList,
+                                    location,
+                                    @interface,
+                                    other,
+                                    this
+                                );
                             }
                             else
                             {
-                                diagnostics.Add(ErrorCode.ERR_DuplicateInterfaceWithDifferencesInBaseList, location, @interface, other, this);
+                                diagnostics.Add(
+                                    ErrorCode.ERR_DuplicateInterfaceWithDifferencesInBaseList,
+                                    location,
+                                    @interface,
+                                    other,
+                                    this
+                                );
                             }
                         }
                     }
@@ -218,12 +309,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     var baseBinder = this.DeclaringCompilation.GetBinder(bases);
                     // Wrap base binder in a location-specific binder that will avoid generic constraint checks.
-                    baseBinder = baseBinder.WithAdditionalFlagsAndContainingMemberOrLambda(BinderFlags.SuppressConstraintChecks, this);
+                    baseBinder = baseBinder.WithAdditionalFlagsAndContainingMemberOrLambda(
+                        BinderFlags.SuppressConstraintChecks,
+                        this
+                    );
 
                     foreach (var baseTypeSyntax in bases.Types)
                     {
                         var b = baseTypeSyntax.Type;
-                        var curBaseSym = baseBinder.BindType(b, BindingDiagnosticBag.Discarded).Type;
+                        var curBaseSym = baseBinder
+                            .BindType(b, BindingDiagnosticBag.Discarded)
+                            .Type;
 
                         if (baseSym.Equals(curBaseSym))
                         {
@@ -252,12 +348,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return null;
         }
 
-        internal Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>> GetDeclaredBases(ConsList<TypeSymbol> basesBeingResolved)
+        internal Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>> GetDeclaredBases(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             if (ReferenceEquals(_lazyDeclaredBases, null))
             {
                 var diagnostics = BindingDiagnosticBag.GetInstance();
-                if (Interlocked.CompareExchange(ref _lazyDeclaredBases, MakeDeclaredBases(basesBeingResolved, diagnostics), null) == null)
+                if (
+                    Interlocked.CompareExchange(
+                        ref _lazyDeclaredBases,
+                        MakeDeclaredBases(basesBeingResolved, diagnostics),
+                        null
+                    ) == null
+                )
                 {
                     AddDeclarationDiagnostics(diagnostics);
                 }
@@ -267,38 +371,59 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return _lazyDeclaredBases;
         }
 
-        internal override NamedTypeSymbol GetDeclaredBaseType(ConsList<TypeSymbol> basesBeingResolved)
+        internal override NamedTypeSymbol GetDeclaredBaseType(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             return GetDeclaredBases(basesBeingResolved).Item1;
         }
 
-        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(ConsList<TypeSymbol> basesBeingResolved)
+        internal override ImmutableArray<NamedTypeSymbol> GetDeclaredInterfaces(
+            ConsList<TypeSymbol> basesBeingResolved
+        )
         {
             return GetDeclaredBases(basesBeingResolved).Item2;
         }
 
-        private Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>> MakeDeclaredBases(ConsList<TypeSymbol> basesBeingResolved, BindingDiagnosticBag diagnostics)
+        private Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>> MakeDeclaredBases(
+            ConsList<TypeSymbol> basesBeingResolved,
+            BindingDiagnosticBag diagnostics
+        )
         {
             if (this.TypeKind == TypeKind.Enum)
             {
                 // Handled by GetEnumUnderlyingType().
-                return new Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>>(null, ImmutableArray<NamedTypeSymbol>.Empty);
+                return new Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>>(
+                    null,
+                    ImmutableArray<NamedTypeSymbol>.Empty
+                );
             }
 
             var reportedPartialConflict = false;
-            Debug.Assert(basesBeingResolved == null || !basesBeingResolved.ContainsReference(this.OriginalDefinition));
+            Debug.Assert(
+                basesBeingResolved == null
+                    || !basesBeingResolved.ContainsReference(this.OriginalDefinition)
+            );
             var newBasesBeingResolved = basesBeingResolved.Prepend(this.OriginalDefinition);
             var baseInterfaces = ArrayBuilder<NamedTypeSymbol>.GetInstance();
 
             NamedTypeSymbol baseType = null;
             SourceLocation baseTypeLocation = null;
 
-            var interfaceLocations = SpecializedSymbolCollections.GetPooledSymbolDictionaryInstance<NamedTypeSymbol, SourceLocation>();
+            var interfaceLocations = SpecializedSymbolCollections.GetPooledSymbolDictionaryInstance<
+                NamedTypeSymbol,
+                SourceLocation
+            >();
 
             foreach (var decl in this.declaration.Declarations)
             {
-                Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>> one = MakeOneDeclaredBases(newBasesBeingResolved, decl, diagnostics);
-                if ((object)one == null) continue;
+                Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>> one = MakeOneDeclaredBases(
+                    newBasesBeingResolved,
+                    decl,
+                    diagnostics
+                );
+                if ((object)one == null)
+                    continue;
 
                 var partBase = one.Item1;
                 var partInterfaces = one.Item2;
@@ -316,10 +441,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         baseType = partBase;
                         baseTypeLocation = decl.NameLocation;
                     }
-                    else if ((object)partBase != null && !TypeSymbol.Equals(partBase, baseType, TypeCompareKind.ConsiderEverything) && partBase.TypeKind != TypeKind.Error)
+                    else if (
+                        (object)partBase != null
+                        && !TypeSymbol.Equals(
+                            partBase,
+                            baseType,
+                            TypeCompareKind.ConsiderEverything
+                        )
+                        && partBase.TypeKind != TypeKind.Error
+                    )
                     {
                         // the parts do not agree
-                        if (partBase.Equals(baseType, TypeCompareKind.ObliviousNullableModifierMatchesAny))
+                        if (
+                            partBase.Equals(
+                                baseType,
+                                TypeCompareKind.ObliviousNullableModifierMatchesAny
+                            )
+                        )
                         {
                             if (containsOnlyOblivious(baseType))
                             {
@@ -338,19 +476,33 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                         void reportBaseType()
                         {
-                            var info = diagnostics.Add(ErrorCode.ERR_PartialMultipleBases, GetFirstLocation(), this);
-                            baseType = new ExtendedErrorTypeSymbol(baseType, LookupResultKind.Ambiguous, info);
+                            var info = diagnostics.Add(
+                                ErrorCode.ERR_PartialMultipleBases,
+                                GetFirstLocation(),
+                                this
+                            );
+                            baseType = new ExtendedErrorTypeSymbol(
+                                baseType,
+                                LookupResultKind.Ambiguous,
+                                info
+                            );
                             baseTypeLocation = decl.NameLocation;
                             reportedPartialConflict = true;
                         }
 
                         static bool containsOnlyOblivious(TypeSymbol type)
                         {
-                            return TypeWithAnnotations.Create(type).VisitType(
-                                type: null,
-                                static (type, arg, flag) => !type.Type.IsValueType && !type.NullableAnnotation.IsOblivious(),
-                                typePredicate: null,
-                                arg: (object)null) is null;
+                            return TypeWithAnnotations
+                                .Create(type)
+                                .VisitType(
+                                    type: null,
+                                    static (type, arg, flag) =>
+                                        !type.Type.IsValueType
+                                        && !type.NullableAnnotation.IsOblivious(),
+                                    typePredicate: null,
+                                    arg: (object)null
+                                )
+                                is null;
                         }
                     }
                 }
@@ -365,11 +517,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
             }
 
-            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(diagnostics, ContainingAssembly);
+            CompoundUseSiteInfo<AssemblySymbol> useSiteInfo =
+                new CompoundUseSiteInfo<AssemblySymbol>(diagnostics, ContainingAssembly);
 
             if (declaration.Kind is DeclarationKind.Record or DeclarationKind.RecordStruct)
             {
-                var type = DeclaringCompilation.GetWellKnownType(WellKnownType.System_IEquatable_T).Construct(this);
+                var type = DeclaringCompilation
+                    .GetWellKnownType(WellKnownType.System_IEquatable_T)
+                    .Construct(this);
                 if (baseInterfaces.IndexOf(type, SymbolEqualityComparer.AllIgnoreOptions) < 0)
                 {
                     baseInterfaces.Add(type);
@@ -383,13 +538,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 if (baseType.IsStatic)
                 {
                     // '{1}': cannot derive from static class '{0}'
-                    diagnostics.Add(ErrorCode.ERR_StaticBaseClass, baseTypeLocation, baseType, this);
+                    diagnostics.Add(
+                        ErrorCode.ERR_StaticBaseClass,
+                        baseTypeLocation,
+                        baseType,
+                        this
+                    );
                 }
 
                 if (!this.IsNoMoreVisibleThan(baseType, ref useSiteInfo))
                 {
                     // Inconsistent accessibility: base class '{1}' is less accessible than class '{0}'
-                    diagnostics.Add(ErrorCode.ERR_BadVisBaseClass, baseTypeLocation, this, baseType);
+                    diagnostics.Add(
+                        ErrorCode.ERR_BadVisBaseClass,
+                        baseTypeLocation,
+                        this,
+                        baseType
+                    );
                 }
 
                 if (baseType.HasFileLocalTypes() && !this.HasFileLocalTypes())
@@ -406,7 +571,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     if (!i.IsAtLeastAsVisibleAs(this, ref useSiteInfo))
                     {
                         // Inconsistent accessibility: base interface '{1}' is less accessible than interface '{0}'
-                        diagnostics.Add(ErrorCode.ERR_BadVisBaseInterface, interfaceLocations[i], this, i);
+                        diagnostics.Add(
+                            ErrorCode.ERR_BadVisBaseInterface,
+                            interfaceLocations[i],
+                            this,
+                            i
+                        );
                     }
 
                     if (i.HasFileLocalTypes() && !this.HasFileLocalTypes())
@@ -420,7 +590,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             diagnostics.Add(GetFirstLocation(), useSiteInfo);
 
-            return new Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>>(baseType, baseInterfacesRO);
+            return new Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>>(
+                baseType,
+                baseInterfacesRO
+            );
         }
 
         private static BaseListSyntax GetBaseListOpt(SingleTypeDeclaration decl)
@@ -435,7 +608,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         }
 
         // process the base list for one part of a partial class, or for the only part of any other type declaration.
-        private Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>> MakeOneDeclaredBases(ConsList<TypeSymbol> newBasesBeingResolved, SingleTypeDeclaration decl, BindingDiagnosticBag diagnostics)
+        private Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>> MakeOneDeclaredBases(
+            ConsList<TypeSymbol> newBasesBeingResolved,
+            SingleTypeDeclaration decl,
+            BindingDiagnosticBag diagnostics
+        )
         {
             BaseListSyntax bases = GetBaseListOpt(decl);
             if (bases == null)
@@ -450,14 +627,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             // Wrap base binder in a location-specific binder that will avoid generic constraint checks
             // (to avoid cycles if the constraint types are not bound yet). Instead, constraint checks
             // are handled by the caller.
-            baseBinder = baseBinder.WithAdditionalFlagsAndContainingMemberOrLambda(BinderFlags.SuppressConstraintChecks, this);
+            baseBinder = baseBinder.WithAdditionalFlagsAndContainingMemberOrLambda(
+                BinderFlags.SuppressConstraintChecks,
+                this
+            );
 
             int i = -1;
             foreach (var baseTypeSyntax in bases.Types)
             {
                 i++;
                 var typeSyntax = baseTypeSyntax.Type;
-                if (typeSyntax.Kind() != SyntaxKind.PredefinedType && !SyntaxFacts.IsName(typeSyntax.Kind()))
+                if (
+                    typeSyntax.Kind() != SyntaxKind.PredefinedType
+                    && !SyntaxFacts.IsName(typeSyntax.Kind())
+                )
                 {
                     diagnostics.Add(ErrorCode.ERR_BadBaseType, typeSyntax.GetLocation());
                 }
@@ -468,18 +651,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 if (i == 0 && TypeKind == TypeKind.Class) // allow class in the first position
                 {
-                    baseType = baseBinder.BindType(typeSyntax, diagnostics, newBasesBeingResolved).Type;
+                    baseType = baseBinder
+                        .BindType(typeSyntax, diagnostics, newBasesBeingResolved)
+                        .Type;
 
                     SpecialType baseSpecialType = baseType.SpecialType;
                     if (IsRestrictedBaseType(baseSpecialType))
                     {
                         // check for one of the specific exceptions required for compiling mscorlib
-                        if (this.SpecialType == SpecialType.System_Enum && baseSpecialType == SpecialType.System_ValueType ||
-                            this.SpecialType == SpecialType.System_MulticastDelegate && baseSpecialType == SpecialType.System_Delegate)
+                        if (
+                            this.SpecialType == SpecialType.System_Enum
+                                && baseSpecialType == SpecialType.System_ValueType
+                            || this.SpecialType == SpecialType.System_MulticastDelegate
+                                && baseSpecialType == SpecialType.System_Delegate
+                        )
                         {
                             // allowed
                         }
-                        else if (baseSpecialType == SpecialType.System_Array && this.ContainingAssembly.CorLibrary == this.ContainingAssembly)
+                        else if (
+                            baseSpecialType == SpecialType.System_Array
+                            && this.ContainingAssembly.CorLibrary == this.ContainingAssembly
+                        )
                         {
                             // Specific exception for System.ArrayContracts, which is only built when CONTRACTS_FULL is defined.
                             // (See InheritanceResolver::CheckForBaseClassErrors).
@@ -487,14 +679,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         else
                         {
                             // '{0}' cannot derive from special class '{1}'
-                            diagnostics.Add(ErrorCode.ERR_DeriveFromEnumOrValueType, location, this, baseType);
+                            diagnostics.Add(
+                                ErrorCode.ERR_DeriveFromEnumOrValueType,
+                                location,
+                                this,
+                                baseType
+                            );
                             continue;
                         }
                     }
 
                     if (baseType.IsSealed && !this.IsStatic) // Give precedence to ERR_StaticDerivedFromNonObject
                     {
-                        diagnostics.Add(ErrorCode.ERR_CantDeriveFromSealedType, location, this, baseType);
+                        diagnostics.Add(
+                            ErrorCode.ERR_CantDeriveFromSealedType,
+                            location,
+                            this,
+                            baseType
+                        );
                         continue;
                     }
 
@@ -517,19 +719,31 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         }
                     }
 
-                    if ((baseType.TypeKind == TypeKind.Class ||
-                         baseType.TypeKind == TypeKind.Delegate ||
-                         baseType.TypeKind == TypeKind.Struct ||
-                         baseTypeIsErrorWithoutInterfaceGuess) &&
-                        ((object)localBase == null))
+                    if (
+                        (
+                            baseType.TypeKind == TypeKind.Class
+                            || baseType.TypeKind == TypeKind.Delegate
+                            || baseType.TypeKind == TypeKind.Struct
+                            || baseTypeIsErrorWithoutInterfaceGuess
+                        ) && ((object)localBase == null)
+                    )
                     {
                         localBase = (NamedTypeSymbol)baseType;
                         Debug.Assert((object)localBase != null);
                         if (this.IsStatic && localBase.SpecialType != SpecialType.System_Object)
                         {
                             // Static class '{0}' cannot derive from type '{1}'. Static classes must derive from object.
-                            var info = diagnostics.Add(ErrorCode.ERR_StaticDerivedFromNonObject, location, this, localBase);
-                            localBase = new ExtendedErrorTypeSymbol(localBase, LookupResultKind.NotReferencable, info);
+                            var info = diagnostics.Add(
+                                ErrorCode.ERR_StaticDerivedFromNonObject,
+                                location,
+                                this,
+                                localBase
+                            );
+                            localBase = new ExtendedErrorTypeSymbol(
+                                localBase,
+                                LookupResultKind.NotReferencable,
+                                info
+                            );
                         }
                         checkPrimaryConstructorBaseType(baseTypeSyntax, localBase);
                         continue;
@@ -537,7 +751,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 }
                 else
                 {
-                    baseType = baseBinder.BindType(typeSyntax, diagnostics, newBasesBeingResolved).Type;
+                    baseType = baseBinder
+                        .BindType(typeSyntax, diagnostics, newBasesBeingResolved)
+                        .Type;
                 }
 
                 if (i == 0)
@@ -552,12 +768,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         {
                             if (t.Equals(baseType, TypeCompareKind.ConsiderEverything))
                             {
-                                diagnostics.Add(ErrorCode.ERR_DuplicateInterfaceInBaseList, location, baseType);
+                                diagnostics.Add(
+                                    ErrorCode.ERR_DuplicateInterfaceInBaseList,
+                                    location,
+                                    baseType
+                                );
                             }
-                            else if (t.Equals(baseType, TypeCompareKind.ObliviousNullableModifierMatchesAny))
+                            else if (
+                                t.Equals(
+                                    baseType,
+                                    TypeCompareKind.ObliviousNullableModifierMatchesAny
+                                )
+                            )
                             {
                                 // duplicates with ?/! differences are reported later, we report local differences between oblivious and ?/! here
-                                diagnostics.Add(ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList, location, baseType, this);
+                                diagnostics.Add(
+                                    ErrorCode.WRN_DuplicateInterfaceWithNullabilityMismatchInBaseList,
+                                    location,
+                                    baseType,
+                                    this
+                                );
                             }
                         }
 
@@ -575,7 +805,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                         if (baseType.ContainsDynamic())
                         {
-                            diagnostics.Add(ErrorCode.ERR_DeriveFromConstructedDynamic, location, this, baseType);
+                            diagnostics.Add(
+                                ErrorCode.ERR_DeriveFromConstructedDynamic,
+                                location,
+                                this,
+                                baseType
+                            );
                         }
 
                         localInterfaces.Add((NamedTypeSymbol)baseType);
@@ -587,12 +822,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             if ((object)localBase == null)
                             {
                                 localBase = (NamedTypeSymbol)baseType;
-                                diagnostics.Add(ErrorCode.ERR_BaseClassMustBeFirst, location, baseType);
+                                diagnostics.Add(
+                                    ErrorCode.ERR_BaseClassMustBeFirst,
+                                    location,
+                                    baseType
+                                );
                                 continue;
                             }
                             else
                             {
-                                diagnostics.Add(ErrorCode.ERR_NoMultipleInheritance, location, this, localBase, baseType);
+                                diagnostics.Add(
+                                    ErrorCode.ERR_NoMultipleInheritance,
+                                    location,
+                                    this,
+                                    localBase,
+                                    baseType
+                                );
                                 continue;
                             }
                         }
@@ -615,25 +860,45 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         throw ExceptionUtilities.UnexpectedValue(baseType.TypeKind);
 
                     default:
-                        diagnostics.Add(ErrorCode.ERR_NonInterfaceInInterfaceList, location, baseType);
+                        diagnostics.Add(
+                            ErrorCode.ERR_NonInterfaceInInterfaceList,
+                            location,
+                            baseType
+                        );
                         continue;
                 }
             }
 
-            if (this.SpecialType == SpecialType.System_Object && ((object)localBase != null || localInterfaces.Count != 0))
+            if (
+                this.SpecialType == SpecialType.System_Object
+                && ((object)localBase != null || localInterfaces.Count != 0)
+            )
             {
                 var name = GetName(bases.Parent);
                 diagnostics.Add(ErrorCode.ERR_ObjectCantHaveBases, new SourceLocation(name));
             }
 
-            return new Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>>(localBase, localInterfaces.ToImmutableAndFree());
+            return new Tuple<NamedTypeSymbol, ImmutableArray<NamedTypeSymbol>>(
+                localBase,
+                localInterfaces.ToImmutableAndFree()
+            );
 
             void checkPrimaryConstructorBaseType(BaseTypeSyntax baseTypeSyntax, TypeSymbol baseType)
             {
-                if (baseTypeSyntax is PrimaryConstructorBaseTypeSyntax primaryConstructorBaseType &&
-                    (TypeKind != TypeKind.Class || baseType.TypeKind == TypeKind.Interface || ((TypeDeclarationSyntax)decl.SyntaxReference.GetSyntax()).ParameterList is null))
+                if (
+                    baseTypeSyntax is PrimaryConstructorBaseTypeSyntax primaryConstructorBaseType
+                    && (
+                        TypeKind != TypeKind.Class
+                        || baseType.TypeKind == TypeKind.Interface
+                        || ((TypeDeclarationSyntax)decl.SyntaxReference.GetSyntax()).ParameterList
+                            is null
+                    )
+                )
                 {
-                    diagnostics.Add(ErrorCode.ERR_UnexpectedArgumentList, primaryConstructorBaseType.ArgumentList.Location);
+                    diagnostics.Add(
+                        ErrorCode.ERR_UnexpectedArgumentList,
+                        primaryConstructorBaseType.ArgumentList.Location
+                    );
                 }
             }
         }
@@ -656,28 +921,46 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return false;
         }
 
-        private ImmutableArray<NamedTypeSymbol> MakeAcyclicInterfaces(ConsList<TypeSymbol> basesBeingResolved, BindingDiagnosticBag diagnostics)
+        private ImmutableArray<NamedTypeSymbol> MakeAcyclicInterfaces(
+            ConsList<TypeSymbol> basesBeingResolved,
+            BindingDiagnosticBag diagnostics
+        )
         {
             var typeKind = this.TypeKind;
 
             if (typeKind == TypeKind.Enum)
             {
-                Debug.Assert(GetDeclaredInterfaces(basesBeingResolved: null).IsEmpty, "Computation skipped for enums");
+                Debug.Assert(
+                    GetDeclaredInterfaces(basesBeingResolved: null).IsEmpty,
+                    "Computation skipped for enums"
+                );
                 return ImmutableArray<NamedTypeSymbol>.Empty;
             }
 
             var declaredInterfaces = GetDeclaredInterfaces(basesBeingResolved: basesBeingResolved);
             bool isInterface = (typeKind == TypeKind.Interface);
 
-            ArrayBuilder<NamedTypeSymbol> result = isInterface ? ArrayBuilder<NamedTypeSymbol>.GetInstance() : null;
+            ArrayBuilder<NamedTypeSymbol> result = isInterface
+                ? ArrayBuilder<NamedTypeSymbol>.GetInstance()
+                : null;
             foreach (var t in declaredInterfaces)
             {
                 if (isInterface)
                 {
                     if (BaseTypeAnalysis.TypeDependsOn(depends: t, on: this))
                     {
-                        result.Add(new ExtendedErrorTypeSymbol(t, LookupResultKind.NotReferencable,
-                            diagnostics.Add(ErrorCode.ERR_CycleInInterfaceInheritance, GetFirstLocation(), this, t)));
+                        result.Add(
+                            new ExtendedErrorTypeSymbol(
+                                t,
+                                LookupResultKind.NotReferencable,
+                                diagnostics.Add(
+                                    ErrorCode.ERR_CycleInInterfaceInheritance,
+                                    GetFirstLocation(),
+                                    this,
+                                    t
+                                )
+                            )
+                        );
                         continue;
                     }
                     else
@@ -686,7 +969,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                     }
                 }
 
-                var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(diagnostics, ContainingAssembly);
+                var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
+                    diagnostics,
+                    ContainingAssembly
+                );
 
                 if (t.DeclaringCompilation != this.DeclaringCompilation)
                 {
@@ -714,7 +1000,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol declaredBase;
             if (typeKind == TypeKind.Enum)
             {
-                Debug.Assert((object)GetDeclaredBaseType(basesBeingResolved: null) == null, "Computation skipped for enums");
+                Debug.Assert(
+                    (object)GetDeclaredBaseType(basesBeingResolved: null) == null,
+                    "Computation skipped for enums"
+                );
                 declaredBase = compilation.GetSpecialType(SpecialType.System_Enum);
             }
             else
@@ -744,7 +1033,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                         return null;
 
                     case TypeKind.Delegate:
-                        declaredBase = compilation.GetSpecialType(SpecialType.System_MulticastDelegate);
+                        declaredBase = compilation.GetSpecialType(
+                            SpecialType.System_MulticastDelegate
+                        );
                         break;
 
                     default:
@@ -754,13 +1045,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
             if (BaseTypeAnalysis.TypeDependsOn(declaredBase, this))
             {
-                return new ExtendedErrorTypeSymbol(declaredBase, LookupResultKind.NotReferencable,
-                    diagnostics.Add(ErrorCode.ERR_CircularBase, GetFirstLocation(), declaredBase, this));
+                return new ExtendedErrorTypeSymbol(
+                    declaredBase,
+                    LookupResultKind.NotReferencable,
+                    diagnostics.Add(
+                        ErrorCode.ERR_CircularBase,
+                        GetFirstLocation(),
+                        declaredBase,
+                        this
+                    )
+                );
             }
 
             this.SetKnownToHaveNoDeclaredBaseCycles();
 
-            var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(diagnostics, ContainingAssembly);
+            var useSiteInfo = new CompoundUseSiteInfo<AssemblySymbol>(
+                diagnostics,
+                ContainingAssembly
+            );
             NamedTypeSymbol current = declaredBase;
 
             do
@@ -772,10 +1074,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                 current.AddUseSiteInfo(ref useSiteInfo);
                 current = current.BaseTypeNoUseSiteDiagnostics;
-            }
-            while ((object)current != null);
+            } while ((object)current != null);
 
-            diagnostics.Add(useSiteInfo.Diagnostics.IsNullOrEmpty() ? Location.None : (FindBaseRefSyntax(declaredBase) ?? GetFirstLocation()), useSiteInfo);
+            diagnostics.Add(
+                useSiteInfo.Diagnostics.IsNullOrEmpty()
+                    ? Location.None
+                    : (FindBaseRefSyntax(declaredBase) ?? GetFirstLocation()),
+                useSiteInfo
+            );
 
             return declaredBase;
         }

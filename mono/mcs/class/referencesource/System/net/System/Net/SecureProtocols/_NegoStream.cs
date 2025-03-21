@@ -18,32 +18,35 @@ Revision History:
 
 --*/
 
-namespace System.Net.Security {
+namespace System.Net.Security
+{
     using System;
     using System.IO;
     using System.Security;
-    using System.Security.Principal;
     using System.Security.Permissions;
+    using System.Security.Principal;
     using System.Threading;
 
     //
     // This is a wrapping stream that does data encryption/decryption based on a successfully authenticated SSPI context.
     //
-    public partial class NegotiateStream: AuthenticatedStream
+    public partial class NegotiateStream : AuthenticatedStream
     {
         private static AsyncCallback _WriteCallback = new AsyncCallback(WriteCallback);
-        private static AsyncProtocolCallback _ReadCallback  = new AsyncProtocolCallback(ReadCallback);
+        private static AsyncProtocolCallback _ReadCallback = new AsyncProtocolCallback(
+            ReadCallback
+        );
 
-        private int         _NestedWrite;
-        private int         _NestedRead;
-        private byte[]      _ReadHeader;
+        private int _NestedWrite;
+        private int _NestedRead;
+        private byte[] _ReadHeader;
 
         // never updated directly, special properties are used
-        private byte[]      _InternalBuffer;
-        private int         _InternalOffset;
-        private int         _InternalBufferCount;
+        private byte[] _InternalBuffer;
+        private int _InternalOffset;
+        private int _InternalBufferCount;
 
-        FixedSizeReader     _FrameReader;
+        FixedSizeReader _FrameReader;
 
         //
         // Private implemenation
@@ -57,24 +60,24 @@ namespace System.Net.Security {
 
         //
         //
-        private byte[] InternalBuffer {
-            get {
-                return _InternalBuffer;
-            }
+        private byte[] InternalBuffer
+        {
+            get { return _InternalBuffer; }
         }
+
         //
         //
-        private int InternalOffset {
-            get {
-                return _InternalOffset;
-            }
+        private int InternalOffset
+        {
+            get { return _InternalOffset; }
         }
+
         //
-        private int InternalBufferCount {
-            get {
-                return _InternalBufferCount;
-            }
+        private int InternalBufferCount
+        {
+            get { return _InternalBufferCount; }
         }
+
         //
         //
         private void DecrementInternalBufferCount(int decrCount)
@@ -82,6 +85,7 @@ namespace System.Net.Security {
             _InternalOffset += decrCount;
             _InternalBufferCount -= decrCount;
         }
+
         //
         //
         private void EnsureInternalBufferSize(int bytes)
@@ -93,12 +97,14 @@ namespace System.Net.Security {
                 _InternalBuffer = new byte[bytes];
             }
         }
+
         //
         private void AdjustInternalBufferOffsetSize(int bytes, int offset)
         {
             _InternalBufferCount = bytes;
             _InternalOffset = offset;
         }
+
         //
         // Validates user parameteres for all Read/Write methods
         //
@@ -113,21 +119,35 @@ namespace System.Net.Security {
             if (count < 0)
                 throw new ArgumentOutOfRangeException("count");
 
-            if (count > buffer.Length-offset)
-                throw new ArgumentOutOfRangeException("count", SR.GetString(SR.net_offset_plus_count));
+            if (count > buffer.Length - offset)
+                throw new ArgumentOutOfRangeException(
+                    "count",
+                    SR.GetString(SR.net_offset_plus_count)
+                );
         }
+
         //
         // Combined sync/async write method. For sync requet asyncRequest==null
         //
-        private void ProcessWrite(byte[] buffer, int offset, int count, AsyncProtocolRequest asyncRequest)
+        private void ProcessWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncProtocolRequest asyncRequest
+        )
         {
             ValidateParameters(buffer, offset, count);
 
             if (Interlocked.Exchange(ref _NestedWrite, 1) == 1)
             {
-                throw new NotSupportedException(SR.GetString(SR.net_io_invalidnestedcall, (asyncRequest != null? "BeginWrite":"Write"), "write"));
+                throw new NotSupportedException(
+                    SR.GetString(
+                        SR.net_io_invalidnestedcall,
+                        (asyncRequest != null ? "BeginWrite" : "Write"),
+                        "write"
+                    )
+                );
             }
-
 
             bool failed = false;
             try
@@ -137,7 +157,8 @@ namespace System.Net.Security {
             catch (Exception e)
             {
                 failed = true;
-                if (e is IOException) {
+                if (e is IOException)
+                {
                     throw;
                 }
                 throw new IOException(SR.GetString(SR.net_io_write), e);
@@ -150,14 +171,20 @@ namespace System.Net.Security {
                 }
             }
         }
+
         //
         //
         //
-        private void StartWriting(byte[] buffer, int offset, int count, AsyncProtocolRequest asyncRequest)
+        private void StartWriting(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncProtocolRequest asyncRequest
+        )
         {
             // We loop to this method from the callback
             // If the last chunk was just completed from async callback (count < 0), we complete user request
-            if (count >= 0 )
+            if (count >= 0)
             {
                 byte[] outBuffer = null;
                 do
@@ -165,50 +192,80 @@ namespace System.Net.Security {
                     int chunkBytes = Math.Min(count, NegoState.c_MaxWriteDataSize);
                     int encryptedBytes;
 
-                    try {
-                        encryptedBytes = _NegoState.EncryptData(buffer, offset, chunkBytes, ref outBuffer);
+                    try
+                    {
+                        encryptedBytes = _NegoState.EncryptData(
+                            buffer,
+                            offset,
+                            chunkBytes,
+                            ref outBuffer
+                        );
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         throw new IOException(SR.GetString(SR.net_io_encrypt), e);
                     }
 
                     if (asyncRequest != null)
                     {
                         // prepare for the next request
-                        asyncRequest.SetNextRequest(buffer, offset+chunkBytes, count-chunkBytes, null);
-                        IAsyncResult ar = InnerStream.BeginWrite(outBuffer, 0, encryptedBytes, _WriteCallback, asyncRequest);
+                        asyncRequest.SetNextRequest(
+                            buffer,
+                            offset + chunkBytes,
+                            count - chunkBytes,
+                            null
+                        );
+                        IAsyncResult ar = InnerStream.BeginWrite(
+                            outBuffer,
+                            0,
+                            encryptedBytes,
+                            _WriteCallback,
+                            asyncRequest
+                        );
                         if (!ar.CompletedSynchronously)
                         {
                             return;
                         }
                         InnerStream.EndWrite(ar);
-
                     }
                     else
                     {
                         InnerStream.Write(outBuffer, 0, encryptedBytes);
                     }
                     offset += chunkBytes;
-                    count  -= chunkBytes;
+                    count -= chunkBytes;
                 } while (count != 0);
             }
 
-            if (asyncRequest != null) {
+            if (asyncRequest != null)
+            {
                 asyncRequest.CompleteUser();
             }
         }
+
         //
         // Combined sync/async read method. For sync requet asyncRequest==null
         // There is a little overheader because we need to pass buffer/offset/count used only in sync.
         // Still the benefit is that we have a common sync/async code path.
         //
-        private int ProcessRead(byte[] buffer, int offset, int count, AsyncProtocolRequest asyncRequest)
+        private int ProcessRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncProtocolRequest asyncRequest
+        )
         {
             ValidateParameters(buffer, offset, count);
 
             if (Interlocked.Exchange(ref _NestedRead, 1) == 1)
             {
-                throw new NotSupportedException(SR.GetString(SR.net_io_invalidnestedcall, (asyncRequest!=null? "BeginRead":"Read"), "read"));
+                throw new NotSupportedException(
+                    SR.GetString(
+                        SR.net_io_invalidnestedcall,
+                        (asyncRequest != null ? "BeginRead" : "Read"),
+                        "read"
+                    )
+                );
             }
 
             bool failed = false;
@@ -216,14 +273,15 @@ namespace System.Net.Security {
             {
                 if (InternalBufferCount != 0)
                 {
-                    int copyBytes = InternalBufferCount > count? count:InternalBufferCount;
+                    int copyBytes = InternalBufferCount > count ? count : InternalBufferCount;
                     if (copyBytes != 0)
                     {
                         Buffer.BlockCopy(InternalBuffer, InternalOffset, buffer, offset, copyBytes);
                         DecrementInternalBufferCount(copyBytes);
                     }
-                    if (asyncRequest != null) {
-                        asyncRequest.CompleteUser((object) copyBytes);
+                    if (asyncRequest != null)
+                    {
+                        asyncRequest.CompleteUser((object)copyBytes);
                     }
                     return copyBytes;
                 }
@@ -233,7 +291,8 @@ namespace System.Net.Security {
             catch (Exception e)
             {
                 failed = true;
-                if (e is IOException) {
+                if (e is IOException)
+                {
                     throw;
                 }
                 throw new IOException(SR.GetString(SR.net_io_read), e);
@@ -247,14 +306,21 @@ namespace System.Net.Security {
                 }
             }
         }
+
         //
         // To avoid recursion when decrypted 0 bytes this method will loop until decryption resulted at least in 1 byte.
         //
-        private int StartReading(byte[] buffer, int offset, int count, AsyncProtocolRequest asyncRequest)
+        private int StartReading(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncProtocolRequest asyncRequest
+        )
         {
             int result;
             // When we read -1 bytes means we have decrypted 0 bytes, need looping.
-            while ((result = StartFrameHeader(buffer, offset, count, asyncRequest)) == -1) {
+            while ((result = StartFrameHeader(buffer, offset, count, asyncRequest)) == -1)
+            {
                 ;
             }
             return result;
@@ -263,7 +329,12 @@ namespace System.Net.Security {
         //
         // Need read frame size first
         //
-        private int StartFrameHeader(byte[] buffer, int offset, int count, AsyncProtocolRequest asyncRequest)
+        private int StartFrameHeader(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncProtocolRequest asyncRequest
+        )
         {
             int readBytes = 0;
             if (asyncRequest != null)
@@ -282,10 +353,17 @@ namespace System.Net.Security {
             }
             return StartFrameBody(readBytes, buffer, offset, count, asyncRequest);
         }
+
         //
         //
         //
-        private int StartFrameBody(int readBytes, byte[] buffer, int offset, int count, AsyncProtocolRequest asyncRequest)
+        private int StartFrameBody(
+            int readBytes,
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncProtocolRequest asyncRequest
+        )
         {
             if (readBytes == 0)
             {
@@ -296,13 +374,17 @@ namespace System.Net.Security {
                 }
                 return 0;
             }
-            GlobalLog.Assert(readBytes == _ReadHeader.Length, "NegoStream::ProcessHeader()|Frame size must be 4 but received {0} bytes.", readBytes);
+            GlobalLog.Assert(
+                readBytes == _ReadHeader.Length,
+                "NegoStream::ProcessHeader()|Frame size must be 4 but received {0} bytes.",
+                readBytes
+            );
 
             //rpelace readBytes with the body size recovered from the header content
-            readBytes =  _ReadHeader[3];
-            readBytes = (readBytes<<8) | _ReadHeader[2];
-            readBytes = (readBytes<<8) | _ReadHeader[1];
-            readBytes = (readBytes<<8) | _ReadHeader[0];
+            readBytes = _ReadHeader[3];
+            readBytes = (readBytes << 8) | _ReadHeader[2];
+            readBytes = (readBytes << 8) | _ReadHeader[1];
+            readBytes = (readBytes << 8) | _ReadHeader[0];
 
             //
             // The body carries 4 bytes for trailer size slot plus trailer, hence <=4 frame size is always an error.
@@ -336,10 +418,17 @@ namespace System.Net.Security {
             }
             return ProcessFrameBody(readBytes, buffer, offset, count, asyncRequest);
         }
+
         //
         //
         //
-        private int ProcessFrameBody(int readBytes, byte[] buffer, int offset, int count, AsyncProtocolRequest asyncRequest)
+        private int ProcessFrameBody(
+            int readBytes,
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncProtocolRequest asyncRequest
+        )
         {
             if (readBytes == 0)
             {
@@ -377,6 +466,7 @@ namespace System.Net.Security {
 
             return readBytes;
         }
+
         //
         //
         //
@@ -386,28 +476,40 @@ namespace System.Net.Security {
             {
                 return;
             }
-            GlobalLog.Assert(transportResult.AsyncState is AsyncProtocolRequest , "NegotiateSteam::WriteCallback|State type is wrong, expected AsyncProtocolRequest.");
+            GlobalLog.Assert(
+                transportResult.AsyncState is AsyncProtocolRequest,
+                "NegotiateSteam::WriteCallback|State type is wrong, expected AsyncProtocolRequest."
+            );
 
-            AsyncProtocolRequest asyncRequest = (AsyncProtocolRequest) transportResult.AsyncState;
+            AsyncProtocolRequest asyncRequest = (AsyncProtocolRequest)transportResult.AsyncState;
 
-            try {
+            try
+            {
                 NegotiateStream negoStream = (NegotiateStream)asyncRequest.AsyncObject;
                 negoStream.InnerStream.EndWrite(transportResult);
-                if (asyncRequest.Count == 0) {
+                if (asyncRequest.Count == 0)
+                {
                     // this was the last chunk
                     asyncRequest.Count = -1;
                 }
-                negoStream.StartWriting(asyncRequest.Buffer, asyncRequest.Offset, asyncRequest.Count, asyncRequest);
-
+                negoStream.StartWriting(
+                    asyncRequest.Buffer,
+                    asyncRequest.Offset,
+                    asyncRequest.Count,
+                    asyncRequest
+                );
             }
-            catch (Exception e) {
-                if (asyncRequest.IsUserCompleted) {
+            catch (Exception e)
+            {
+                if (asyncRequest.IsUserCompleted)
+                {
                     // This will throw on a worker thread.
                     throw;
                 }
                 asyncRequest.CompleteWithError(e);
             }
         }
+
         //
         //
         private static void ReadCallback(AsyncProtocolRequest asyncRequest)
@@ -416,27 +518,47 @@ namespace System.Net.Security {
             try
             {
                 NegotiateStream negoStream = (NegotiateStream)asyncRequest.AsyncObject;
-                BufferAsyncResult bufferResult = (BufferAsyncResult) asyncRequest.UserAsyncResult;
+                BufferAsyncResult bufferResult = (BufferAsyncResult)asyncRequest.UserAsyncResult;
 
                 // This is not a hack, just optimization to avoid an additional callback.
                 //
-                if ((object) asyncRequest.Buffer == (object)negoStream._ReadHeader)
+                if ((object)asyncRequest.Buffer == (object)negoStream._ReadHeader)
                 {
-                    negoStream.StartFrameBody(asyncRequest.Result, bufferResult.Buffer, bufferResult.Offset, bufferResult.Count, asyncRequest);
+                    negoStream.StartFrameBody(
+                        asyncRequest.Result,
+                        bufferResult.Buffer,
+                        bufferResult.Offset,
+                        bufferResult.Count,
+                        asyncRequest
+                    );
                 }
                 else
                 {
-                    if (-1 == negoStream.ProcessFrameBody(asyncRequest.Result, bufferResult.Buffer, bufferResult.Offset, bufferResult.Count, asyncRequest))
+                    if (
+                        -1
+                        == negoStream.ProcessFrameBody(
+                            asyncRequest.Result,
+                            bufferResult.Buffer,
+                            bufferResult.Offset,
+                            bufferResult.Count,
+                            asyncRequest
+                        )
+                    )
                     {
                         // in case we decrypted 0 bytes start another reading.
-                        negoStream.StartReading(bufferResult.Buffer, bufferResult.Offset, bufferResult.Count, asyncRequest);
-
+                        negoStream.StartReading(
+                            bufferResult.Buffer,
+                            bufferResult.Offset,
+                            bufferResult.Count,
+                            asyncRequest
+                        );
                     }
                 }
             }
             catch (Exception e)
             {
-                if (asyncRequest.IsUserCompleted) {
+                if (asyncRequest.IsUserCompleted)
+                {
                     // This will throw on a worker thread.
                     throw;
                 }

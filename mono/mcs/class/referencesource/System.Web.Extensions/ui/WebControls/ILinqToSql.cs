@@ -4,11 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
+namespace System.Web.UI.WebControls
+{
     using System.Data.Linq;
 
-    internal interface ILinqToSql {
-
+    internal interface ILinqToSql
+    {
         void Add(ITable table, object row);
 
         void Attach(ITable table, object row);
@@ -20,7 +21,5 @@ namespace System.Web.UI.WebControls {
         void Remove(ITable table, object row);
 
         void SubmitChanges(DataContext dataContext);
-
     }
-
 }

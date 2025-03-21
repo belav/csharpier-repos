@@ -29,7 +29,12 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                string config = (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)!;
+                string config = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        de,
+                        PropertyManager.ConfigurationNamingContext
+                    )!;
                 string subnetdn = "CN=Subnets,CN=Sites," + config;
                 de = DirectoryEntryManager.GetDirectoryEntry(context, subnetdn);
             }
@@ -40,22 +45,32 @@ namespace System.DirectoryServices.ActiveDirectory
             catch (ActiveDirectoryObjectNotFoundException)
             {
                 // this is the case where the context is a config set and we could not find an ADAM instance in that config set
-                throw new ActiveDirectoryOperationException(SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name));
+                throw new ActiveDirectoryOperationException(
+                    SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name)
+                );
             }
 
             try
             {
-                ADSearcher adSearcher = new ADSearcher(de,
-                                                      "(&(objectClass=subnet)(objectCategory=subnet)(name=" + Utils.GetEscapedFilterValue(subnetName) + "))",
-                                                      ActiveDirectorySite.s_distinguishedName,
-                                                      SearchScope.OneLevel,
-                                                      false, /* don't need paged search */
-                                                      false /* don't need to cache result */);
+                ADSearcher adSearcher = new ADSearcher(
+                    de,
+                    "(&(objectClass=subnet)(objectCategory=subnet)(name="
+                        + Utils.GetEscapedFilterValue(subnetName)
+                        + "))",
+                    ActiveDirectorySite.s_distinguishedName,
+                    SearchScope.OneLevel,
+                    false, /* don't need paged search */
+                    false /* don't need to cache result */
+                );
                 SearchResult? srchResult = adSearcher.FindOne();
                 if (srchResult == null)
                 {
                     // no such subnet object
-                    Exception e = new ActiveDirectoryObjectNotFoundException(SR.DSNotFound, typeof(ActiveDirectorySubnet), subnetName);
+                    Exception e = new ActiveDirectoryObjectNotFoundException(
+                        SR.DSNotFound,
+                        typeof(ActiveDirectorySubnet),
+                        subnetName
+                    );
                     throw e;
                 }
                 else
@@ -65,7 +80,8 @@ namespace System.DirectoryServices.ActiveDirectory
                     // try to get the site that this subnet lives in
                     if (connectionEntry.Properties.Contains("siteObject"))
                     {
-                        NativeComInterfaces.IAdsPathname pathCracker = (NativeComInterfaces.IAdsPathname)new NativeComInterfaces.Pathname();
+                        NativeComInterfaces.IAdsPathname pathCracker =
+                            (NativeComInterfaces.IAdsPathname)new NativeComInterfaces.Pathname();
                         // need to turn off the escaping for name
                         pathCracker.EscapedMode = NativeComInterfaces.ADS_ESCAPEDMODE_OFF_EX;
 
@@ -93,7 +109,11 @@ namespace System.DirectoryServices.ActiveDirectory
                 if (e.ErrorCode == unchecked((int)0x80072030))
                 {
                     // object is not found since we cannot even find the container in which to search
-                    throw new ActiveDirectoryObjectNotFoundException(SR.DSNotFound, typeof(ActiveDirectorySubnet), subnetName);
+                    throw new ActiveDirectoryObjectNotFoundException(
+                        SR.DSNotFound,
+                        typeof(ActiveDirectorySubnet),
+                        subnetName
+                    );
                 }
                 else
                 {
@@ -122,7 +142,12 @@ namespace System.DirectoryServices.ActiveDirectory
             try
             {
                 de = DirectoryEntryManager.GetDirectoryEntry(context, WellKnownDN.RootDSE);
-                string config = (string)PropertyManager.GetPropertyValue(context, de, PropertyManager.ConfigurationNamingContext)!;
+                string config = (string)
+                    PropertyManager.GetPropertyValue(
+                        context,
+                        de,
+                        PropertyManager.ConfigurationNamingContext
+                    )!;
                 string subnetn = "CN=Subnets,CN=Sites," + config;
                 // bind to the subnet container
                 de = DirectoryEntryManager.GetDirectoryEntry(context, subnetn);
@@ -138,7 +163,9 @@ namespace System.DirectoryServices.ActiveDirectory
             catch (ActiveDirectoryObjectNotFoundException)
             {
                 // this is the case where the context is a config set and we could not find an ADAM instance in that config set
-                throw new ActiveDirectoryOperationException(SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name));
+                throw new ActiveDirectoryOperationException(
+                    SR.Format(SR.ADAMInstanceNotFoundInConfigSet, context.Name)
+                );
             }
             finally
             {
@@ -146,7 +173,8 @@ namespace System.DirectoryServices.ActiveDirectory
             }
         }
 
-        public ActiveDirectorySubnet(DirectoryContext context, string subnetName, string siteName) : this(context, subnetName)
+        public ActiveDirectorySubnet(DirectoryContext context, string subnetName, string siteName)
+            : this(context, subnetName)
         {
             if (siteName == null)
                 throw new ArgumentNullException(nameof(siteName));
@@ -165,7 +193,12 @@ namespace System.DirectoryServices.ActiveDirectory
             }
         }
 
-        internal ActiveDirectorySubnet(DirectoryContext context, string subnetName, string? siteName, bool existing)
+        internal ActiveDirectorySubnet(
+            DirectoryContext context,
+            string subnetName,
+            string? siteName,
+            bool existing
+        )
         {
             Debug.Assert(existing);
 
@@ -180,7 +213,10 @@ namespace System.DirectoryServices.ActiveDirectory
                 }
                 catch (ActiveDirectoryObjectNotFoundException)
                 {
-                    throw new ArgumentException(SR.Format(SR.SiteNotExist, siteName), nameof(siteName));
+                    throw new ArgumentException(
+                        SR.Format(SR.SiteNotExist, siteName),
+                        nameof(siteName)
+                    );
                 }
             }
 
@@ -286,14 +322,18 @@ namespace System.DirectoryServices.ActiveDirectory
                     else
                     {
                         // user configures this subnet object to a particular site
-                        cachedEntry.Properties["siteObject"].Value = _site.cachedEntry.Properties["distinguishedName"][0];
+                        cachedEntry.Properties["siteObject"].Value = _site.cachedEntry.Properties[
+                            "distinguishedName"
+                        ][0];
                     }
                     cachedEntry.CommitChanges();
                 }
                 else
                 {
                     if (Site != null)
-                        cachedEntry.Properties["siteObject"].Add(_site!.cachedEntry.Properties["distinguishedName"][0]);
+                        cachedEntry
+                            .Properties["siteObject"]
+                            .Add(_site!.cachedEntry.Properties["distinguishedName"][0]);
 
                     cachedEntry.CommitChanges();
 

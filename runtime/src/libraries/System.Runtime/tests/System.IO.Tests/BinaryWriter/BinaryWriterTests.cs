@@ -73,7 +73,11 @@ namespace System.IO.Tests
             get
             {
                 yield return new object[] { Encoding.UTF8, "This is UTF8\u00FF" };
-                yield return new object[] { Encoding.BigEndianUnicode, "This is BigEndianUnicode\u00FF" };
+                yield return new object[]
+                {
+                    Encoding.BigEndianUnicode,
+                    "This is BigEndianUnicode\u00FF",
+                };
                 yield return new object[] { Encoding.Unicode, "This is Unicode\u00FF" };
             }
         }
@@ -82,7 +86,8 @@ namespace System.IO.Tests
         public void BinaryWriter_EncodingCtorAndWriteTests_Negative()
         {
             // [] Check for ArgumentNullException on null stream
-            Assert.Throws<ArgumentNullException>(() => new BinaryReader((Stream)null, Encoding.UTF8));
+            Assert.Throws<ArgumentNullException>(() => new BinaryReader((Stream)null, Encoding.UTF8)
+            );
 
             // [] Check for ArgumentNullException on null encoding
             Assert.Throws<ArgumentNullException>(() => new BinaryReader(CreateStream(), null));
@@ -91,7 +96,19 @@ namespace System.IO.Tests
         [Fact]
         public void BinaryWriter_SeekTests()
         {
-            int[] iArrLargeValues = new int[] { 10000, 100000, int.MaxValue / 200, int.MaxValue / 1000, short.MaxValue, int.MaxValue, int.MaxValue - 1, int.MaxValue / 2, int.MaxValue / 10, int.MaxValue / 100 };
+            int[] iArrLargeValues = new int[]
+            {
+                10000,
+                100000,
+                int.MaxValue / 200,
+                int.MaxValue / 1000,
+                short.MaxValue,
+                int.MaxValue,
+                int.MaxValue - 1,
+                int.MaxValue / 2,
+                int.MaxValue / 10,
+                int.MaxValue / 100,
+            };
 
             BinaryWriter dw2 = null;
             MemoryStream mstr = null;
@@ -200,7 +217,6 @@ namespace System.IO.Tests
 
             Assert.Equal(14, mstr.Position);
 
-
             dw2.Dispose();
             mstr.Dispose();
 
@@ -208,7 +224,7 @@ namespace System.IO.Tests
             mstr = new MemoryStream();
             dw2 = new BinaryWriter(mstr);
             dw2.Write("0123456789".ToCharArray());
-            lReturn = dw2.Seek(11, SeekOrigin.Begin);  //This won't throw any exception now.
+            lReturn = dw2.Seek(11, SeekOrigin.Begin); //This won't throw any exception now.
 
             Assert.Equal(11, mstr.Position);
 
@@ -260,10 +276,13 @@ namespace System.IO.Tests
             {
                 writer.Write("012345789".ToCharArray());
 
-                AssertExtensions.Throws<ArgumentException>(null, () =>
-                {
-                    writer.Seek(3, ~SeekOrigin.Begin);
-                });
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () =>
+                    {
+                        writer.Seek(3, ~SeekOrigin.Begin);
+                    }
+                );
             }
         }
 
@@ -359,7 +378,8 @@ namespace System.IO.Tests
             Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write((byte)4));
             Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write(new byte[] { 1, 2 }));
             Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write('a'));
-            Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write(new char[] { 'a', 'b' }));
+            Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write(new char[] { 'a', 'b' })
+            );
             Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write(5.3));
             Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write((Half)5.3));
             Assert.Throws<ObjectDisposedException>(() => binaryWriter.Write((short)3));
@@ -377,9 +397,7 @@ namespace System.IO.Tests
         private class BinaryWriterOutStream : BinaryWriter
         {
             public BinaryWriterOutStream(Stream output)
-                : base(output)
-            {
-            }
+                : base(output) { }
 
             public Stream GetOutStream => OutStream;
         }

@@ -14,7 +14,8 @@ namespace System.Security.Cryptography.Xml
         private readonly bool _includeComments;
         private bool _isInNodeSet;
 
-        public CanonicalXmlDocument(bool defaultNodeSetInclusionState, bool includeComments) : base()
+        public CanonicalXmlDocument(bool defaultNodeSetInclusionState, bool includeComments)
+            : base()
         {
             PreserveWhitespace = true;
             _includeComments = includeComments;
@@ -27,14 +28,23 @@ namespace System.Security.Cryptography.Xml
             set { _isInNodeSet = value; }
         }
 
-        public void Write(StringBuilder strBuilder, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void Write(
+            StringBuilder strBuilder,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             docPos = DocPosition.BeforeRootElement;
             foreach (XmlNode childNode in ChildNodes)
             {
                 if (childNode.NodeType == XmlNodeType.Element)
                 {
-                    CanonicalizationDispatcher.Write(childNode, strBuilder, DocPosition.InRootElement, anc);
+                    CanonicalizationDispatcher.Write(
+                        childNode,
+                        strBuilder,
+                        DocPosition.InRootElement,
+                        anc
+                    );
                     docPos = DocPosition.AfterRootElement;
                 }
                 else
@@ -44,14 +54,23 @@ namespace System.Security.Cryptography.Xml
             }
         }
 
-        public void WriteHash(HashAlgorithm hash, DocPosition docPos, AncestralNamespaceContextManager anc)
+        public void WriteHash(
+            HashAlgorithm hash,
+            DocPosition docPos,
+            AncestralNamespaceContextManager anc
+        )
         {
             docPos = DocPosition.BeforeRootElement;
             foreach (XmlNode childNode in ChildNodes)
             {
                 if (childNode.NodeType == XmlNodeType.Element)
                 {
-                    CanonicalizationDispatcher.WriteHash(childNode, hash, DocPosition.InRootElement, anc);
+                    CanonicalizationDispatcher.WriteHash(
+                        childNode,
+                        hash,
+                        DocPosition.InRootElement,
+                        anc
+                    );
                     docPos = DocPosition.AfterRootElement;
                 }
                 else
@@ -61,19 +80,49 @@ namespace System.Security.Cryptography.Xml
             }
         }
 
-        public override XmlElement CreateElement(string? prefix, string localName, string? namespaceURI)
+        public override XmlElement CreateElement(
+            string? prefix,
+            string localName,
+            string? namespaceURI
+        )
         {
-            return new CanonicalXmlElement(prefix, localName, namespaceURI, this, _defaultNodeSetInclusionState);
+            return new CanonicalXmlElement(
+                prefix,
+                localName,
+                namespaceURI,
+                this,
+                _defaultNodeSetInclusionState
+            );
         }
 
-        public override XmlAttribute CreateAttribute(string? prefix, string localName, string? namespaceURI)
+        public override XmlAttribute CreateAttribute(
+            string? prefix,
+            string localName,
+            string? namespaceURI
+        )
         {
-            return new CanonicalXmlAttribute(prefix, localName, namespaceURI, this, _defaultNodeSetInclusionState);
+            return new CanonicalXmlAttribute(
+                prefix,
+                localName,
+                namespaceURI,
+                this,
+                _defaultNodeSetInclusionState
+            );
         }
 
-        protected override XmlAttribute CreateDefaultAttribute(string? prefix, string localName, string? namespaceURI)
+        protected override XmlAttribute CreateDefaultAttribute(
+            string? prefix,
+            string localName,
+            string? namespaceURI
+        )
         {
-            return new CanonicalXmlAttribute(prefix, localName, namespaceURI, this, _defaultNodeSetInclusionState);
+            return new CanonicalXmlAttribute(
+                prefix,
+                localName,
+                namespaceURI,
+                this,
+                _defaultNodeSetInclusionState
+            );
         }
 
         public override XmlText CreateTextNode(string? text)
@@ -91,14 +140,27 @@ namespace System.Security.Cryptography.Xml
             return new CanonicalXmlSignificantWhitespace(text, this, _defaultNodeSetInclusionState);
         }
 
-        public override XmlProcessingInstruction CreateProcessingInstruction(string target, string? data)
+        public override XmlProcessingInstruction CreateProcessingInstruction(
+            string target,
+            string? data
+        )
         {
-            return new CanonicalXmlProcessingInstruction(target, data!, this, _defaultNodeSetInclusionState);
+            return new CanonicalXmlProcessingInstruction(
+                target,
+                data!,
+                this,
+                _defaultNodeSetInclusionState
+            );
         }
 
         public override XmlComment CreateComment(string? data)
         {
-            return new CanonicalXmlComment(data, this, _defaultNodeSetInclusionState, _includeComments);
+            return new CanonicalXmlComment(
+                data,
+                this,
+                _defaultNodeSetInclusionState,
+                _includeComments
+            );
         }
 
         public override XmlEntityReference CreateEntityReference(string name)

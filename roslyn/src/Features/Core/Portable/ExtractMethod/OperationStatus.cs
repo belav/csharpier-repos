@@ -41,11 +41,9 @@ internal partial class OperationStatus
         return new OperationStatus(newSucceeded, reasons);
     }
 
-    public OperationStatus MakeFail()
-        => new(succeeded: false, Reasons);
+    public OperationStatus MakeFail() => new(succeeded: false, Reasons);
 
-    public OperationStatus<T> With<T>(T data)
-        => Create(this, data);
+    public OperationStatus<T> With<T>(T data) => Create(this, data);
 
     public bool Succeeded { get; }
     public ImmutableArray<string> Reasons { get; }

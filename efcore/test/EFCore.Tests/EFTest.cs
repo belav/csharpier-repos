@@ -6,10 +6,13 @@ namespace Microsoft.EntityFrameworkCore;
 public class EFTest
 {
     [ConditionalFact]
-    public void Property_throws_when_invoked_outside_of_query()
-        => Assert.Equal(
+    public void Property_throws_when_invoked_outside_of_query() =>
+        Assert.Equal(
             CoreStrings.PropertyMethodInvoked,
-            Assert.Throws<InvalidOperationException>(() => EF.Property<object>(new object(), "")).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => EF.Property<object>(new object(), ""))
+                .Message
+        );
 
     [ConditionalFact]
     public void CompiledQuery_throws_when_used_with_different_models()
@@ -17,16 +20,23 @@ public class EFTest
         using var context1 = new SwitchContext();
         using var context2 = new SwitchContext();
 
-        var query = EF.CompileQuery((SwitchContext c, Bar p1) => c.Foos.Where(e => e.Bars.Contains(p1)));
+        var query = EF.CompileQuery(
+            (SwitchContext c, Bar p1) => c.Foos.Where(e => e.Bars.Contains(p1))
+        );
 
         _ = query(context1, new Bar()).ToList();
         _ = query(context1, new Bar()).ToList();
 
         Assert.Equal(
-            CoreStrings.CompiledQueryDifferentModel("(c, p1) => c.Foos .Where(e => e.Bars.Contains(p1))"),
-            Assert.Throws<InvalidOperationException>(
-                    () => query(context2, new Bar()).ToList())
-                .Message.Replace("\r", "").Replace("\n", ""), ignoreWhiteSpaceDifferences: true);
+            CoreStrings.CompiledQueryDifferentModel(
+                "(c, p1) => c.Foos .Where(e => e.Bars.Contains(p1))"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => query(context2, new Bar()).ToList())
+                .Message.Replace("\r", "")
+                .Replace("\n", ""),
+            ignoreWhiteSpaceDifferences: true
+        );
 
         _ = query(context1, new Bar()).ToList();
     }
@@ -44,8 +54,12 @@ public class EFTest
 
         Assert.Equal(
             CoreStrings.CompiledQueryDifferentModel("c => c.Foos"),
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => query(context2).ToListAsync())).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    query(context2).ToListAsync()
+                )
+            ).Message
+        );
 
         _ = await query(context1).ToListAsync();
     }
@@ -63,11 +77,10 @@ public class EFTest
 
     private class SwitchContext : DbContext
     {
-        public DbSet<Foo> Foos
-            => Set<Foo>();
+        public DbSet<Foo> Foos => Set<Foo>();
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInMemoryDatabase(nameof(SwitchContext))
                 .ReplaceService<IModelCacheKeyFactory, DegenerateCacheKeyFactory>();
     }
@@ -76,7 +89,6 @@ public class EFTest
     {
         private static int _value;
 
-        public object Create(DbContext context, bool designTime)
-            => _value++;
+        public object Create(DbContext context, bool designTime) => _value++;
     }
 }

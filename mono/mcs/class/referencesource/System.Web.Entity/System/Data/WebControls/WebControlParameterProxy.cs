@@ -8,12 +8,12 @@
 //---------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web.UI.WebControls;
-using System.Diagnostics;
-using System.Data;
-using System.Globalization;
 
 namespace System.Web.UI.WebControls
 {
@@ -23,7 +23,11 @@ namespace System.Web.UI.WebControls
         EntityDataSource _entityDataSource;
         Parameter _parameter; // Can be null, that's why this class doesn't subclass Parameter
 
-        internal WebControlParameterProxy(string propertyName, ParameterCollection parameterCollection, EntityDataSource entityDataSource)
+        internal WebControlParameterProxy(
+            string propertyName,
+            ParameterCollection parameterCollection,
+            EntityDataSource entityDataSource
+        )
         {
             Debug.Assert(null != entityDataSource);
             Debug.Assert(!String.IsNullOrEmpty(propertyName));
@@ -33,7 +37,12 @@ namespace System.Web.UI.WebControls
             _entityDataSource = entityDataSource;
             VerifyUniqueType(_parameter);
         }
-        internal WebControlParameterProxy(Parameter parameter, ParameterCollection parameterCollection, EntityDataSource entityDataSource)
+
+        internal WebControlParameterProxy(
+            Parameter parameter,
+            ParameterCollection parameterCollection,
+            EntityDataSource entityDataSource
+        )
         {
             Debug.Assert(null != entityDataSource);
             _parameter = parameter;
@@ -41,9 +50,10 @@ namespace System.Web.UI.WebControls
             _entityDataSource = entityDataSource;
             VerifyUniqueType(_parameter);
         }
+
         internal string Name
         {
-            get 
+            get
             {
                 if (null != _parameter)
                 {
@@ -54,11 +64,7 @@ namespace System.Web.UI.WebControls
         }
         internal bool HasValue
         {
-            get 
-            { 
-                return null != _parameter && 
-                    null != Value; 
-            }
+            get { return null != _parameter && null != Value; }
         }
         internal bool ConvertEmptyStringToNull
         {
@@ -97,7 +103,10 @@ namespace System.Web.UI.WebControls
         {
             get
             {
-                Debug.Assert(this.TypeCode != TypeCode.Empty || this.DbType != DbType.Object, "Need to have TypeCode or DbType to get a ClrType");
+                Debug.Assert(
+                    this.TypeCode != TypeCode.Empty || this.DbType != DbType.Object,
+                    "Need to have TypeCode or DbType to get a ClrType"
+                );
                 if (this.TypeCode != TypeCode.Empty)
                 {
                     return EntityDataSourceUtil.ConvertTypeCodeToType(this.TypeCode);
@@ -108,33 +117,44 @@ namespace System.Web.UI.WebControls
 
         internal object Value
         {
-            get 
+            get
             {
                 if (_parameter != null)
                 {
-                    object paramValue = EntityDataSourceUtil.GetParameterValue(_parameter.Name, _collection, _entityDataSource);
+                    object paramValue = EntityDataSourceUtil.GetParameterValue(
+                        _parameter.Name,
+                        _collection,
+                        _entityDataSource
+                    );
 
                     if (paramValue != null)
                     {
                         if (this.DbType == DbType.DateTimeOffset)
                         {
-                            object value = (paramValue is DateTimeOffset)
-                                ? paramValue
-                                : DateTimeOffset.Parse(this.Value.ToString(), CultureInfo.CurrentCulture);
+                            object value =
+                                (paramValue is DateTimeOffset)
+                                    ? paramValue
+                                    : DateTimeOffset.Parse(
+                                        this.Value.ToString(),
+                                        CultureInfo.CurrentCulture
+                                    );
                             return value;
                         }
                         else if (this.DbType == DbType.Time)
                         {
-                            object value = (paramValue is TimeSpan)
-                                ? paramValue
-                                : TimeSpan.Parse(paramValue.ToString(), CultureInfo.CurrentCulture);
+                            object value =
+                                (paramValue is TimeSpan)
+                                    ? paramValue
+                                    : TimeSpan.Parse(
+                                        paramValue.ToString(),
+                                        CultureInfo.CurrentCulture
+                                    );
                             return value;
                         }
                         else if (this.DbType == DbType.Guid)
                         {
-                            object value = (paramValue is Guid)
-                                ? paramValue
-                                : new Guid(paramValue.ToString());
+                            object value =
+                                (paramValue is Guid) ? paramValue : new Guid(paramValue.ToString());
                             return value;
                         }
                     }
@@ -148,17 +168,27 @@ namespace System.Web.UI.WebControls
 
         private static void VerifyUniqueType(Parameter parameter)
         {
-            if (parameter != null && parameter.Type == TypeCode.Empty && parameter.DbType == DbType.Object)
+            if (
+                parameter != null
+                && parameter.Type == TypeCode.Empty
+                && parameter.DbType == DbType.Object
+            )
             {
-                throw new InvalidOperationException(Strings.WebControlParameterProxy_TypeDbTypeMutuallyExclusive);
+                throw new InvalidOperationException(
+                    Strings.WebControlParameterProxy_TypeDbTypeMutuallyExclusive
+                );
             }
 
-            if (parameter != null && parameter.DbType != DbType.Object && parameter.Type != TypeCode.Empty)
+            if (
+                parameter != null
+                && parameter.DbType != DbType.Object
+                && parameter.Type != TypeCode.Empty
+            )
             {
-                throw new InvalidOperationException(Strings.WebControlParameterProxy_TypeDbTypeMutuallyExclusive);
+                throw new InvalidOperationException(
+                    Strings.WebControlParameterProxy_TypeDbTypeMutuallyExclusive
+                );
             }
         }
-
     }
-
 }

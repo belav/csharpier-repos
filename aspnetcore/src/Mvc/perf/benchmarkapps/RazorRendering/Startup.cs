@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using System.IO;
+using Microsoft.Extensions.DependencyInjection;
 
 public class Startup
 {
@@ -38,7 +38,17 @@ public class Startup
 
         foreach (var i in Enumerable.Range(0, 100))
         {
-            dataA.Add(new DataA(i, new HtmlString(i.ToString()), new HtmlString(i.ToString()), i.ToString(), i, i, 60f / i));
+            dataA.Add(
+                new DataA(
+                    i,
+                    new HtmlString(i.ToString()),
+                    new HtmlString(i.ToString()),
+                    i.ToString(),
+                    i,
+                    i,
+                    60f / i
+                )
+            );
         }
 
         return dataA;
@@ -60,8 +70,7 @@ public class Startup
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }

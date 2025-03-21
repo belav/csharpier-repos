@@ -10,11 +10,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Xml;
 using System.Xml.Schema;
-using Discovery = System.Web.Services.Discovery;
 using Description = System.Web.Services.Description;
+using Discovery = System.Web.Services.Discovery;
 using MetadataSection = System.ServiceModel.Description.MetadataSection;
 using XmlSerialization = System.Xml.Serialization;
-
 #if WEB_EXTENSIONS_CODE
 using System.Web.Resources;
 using System.Diagnostics.CodeAnalysis;
@@ -39,7 +38,6 @@ namespace Microsoft.VSDesigner.WCFModel
     public class MetadataFile : ExternalFile
 #endif
     {
-
         // Default File Name
         public const string DEFAULT_FILE_NAME = "service";
 
@@ -71,7 +69,6 @@ namespace Microsoft.VSDesigner.WCFModel
             m_ID = Guid.NewGuid().ToString();
             m_BinaryContent = new byte[] { };
         }
-
 
         /// <summary>
         /// Constructor
@@ -124,10 +121,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         public byte[] BinaryContent
         {
-            get
-            {
-                return m_BinaryContent;
-            }
+            get { return m_BinaryContent; }
         }
 
         /// <summary>
@@ -146,7 +140,6 @@ namespace Microsoft.VSDesigner.WCFModel
                 return m_CachedMetadata;
             }
         }
-
 
         /// <summary>
         /// Retrieves the file content
@@ -170,14 +163,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute("MetadataType")]
         public MetadataType FileType
         {
-            get
-            {
-                return m_MetadataType;
-            }
-            set
-            {
-                m_MetadataType = value;
-            }
+            get { return m_MetadataType; }
+            set { m_MetadataType = value; }
         }
 
         /// <summary>
@@ -188,14 +175,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string ID
         {
-            get
-            {
-                return m_ID;
-            }
-            set
-            {
-                m_ID = value;
-            }
+            get { return m_ID; }
+            set { m_ID = value; }
         }
 
         /// <summary>
@@ -206,14 +187,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public bool Ignore
         {
-            get
-            {
-                return m_Ignore;
-            }
-            set
-            {
-                m_Ignore = value;
-            }
+            get { return m_Ignore; }
+            set { m_Ignore = value; }
         }
 
         /// <summary>
@@ -224,10 +199,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlIgnore()]
         public bool IgnoreSpecified
         {
-            get
-            {
-                return m_Ignore;
-            }
+            get { return m_Ignore; }
             set
             {
                 if (!value)
@@ -245,14 +217,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public bool IsMergeResult
         {
-            get
-            {
-                return m_IsMergeResult;
-            }
-            set
-            {
-                m_IsMergeResult = value;
-            }
+            get { return m_IsMergeResult; }
+            set { m_IsMergeResult = value; }
         }
 
         /// <summary>
@@ -263,10 +229,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlIgnore()]
         public bool IsMergeResultSpecified
         {
-            get
-            {
-                return m_IsMergeResult;
-            }
+            get { return m_IsMergeResult; }
             set
             {
                 if (!value)
@@ -283,10 +246,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         public Discovery.DiscoveryDocument MetadataDiscoveryDocument
         {
-            get
-            {
-                return CachedMetadata.MetadataDiscoveryDocument;
-            }
+            get { return CachedMetadata.MetadataDiscoveryDocument; }
         }
 
         /// <summary>
@@ -297,10 +257,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlIgnore()]
         public Exception MetadataFormatError
         {
-            get
-            {
-                return CachedMetadata.MetadataFormatError;
-            }
+            get { return CachedMetadata.MetadataFormatError; }
         }
 
         /// <summary>
@@ -310,10 +267,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         public Description.ServiceDescription MetadataServiceDescription
         {
-            get
-            {
-                return CachedMetadata.MetadataServiceDescription;
-            }
+            get { return CachedMetadata.MetadataServiceDescription; }
         }
 
         /// <summary>
@@ -323,10 +277,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         public XmlSchema MetadataXmlSchema
         {
-            get
-            {
-                return CachedMetadata.MetadataXmlSchema;
-            }
+            get { return CachedMetadata.MetadataXmlSchema; }
         }
 
         /// <summary>
@@ -336,10 +287,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         public XmlDocument MetadataXmlDocument
         {
-            get
-            {
-                return CachedMetadata.MetadataXmlDocument;
-            }
+            get { return CachedMetadata.MetadataXmlDocument; }
         }
 
         /// <summary>
@@ -350,10 +298,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public int SourceId
         {
-            get
-            {
-                return m_SourceId;
-            }
+            get { return m_SourceId; }
             set
             {
                 if (value < 0)
@@ -373,10 +318,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlIgnore()]
         public bool SourceIdSpecified
         {
-            get
-            {
-                return m_SourceId != SOURCE_ID_NOT_SPECIFIED;
-            }
+            get { return m_SourceId != SOURCE_ID_NOT_SPECIFIED; }
             set
             {
                 if (!value)
@@ -394,14 +336,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string SourceUrl
         {
-            get
-            {
-                return m_SourceUrl;
-            }
-            set
-            {
-                m_SourceUrl = value;
-            }
+            get { return m_SourceUrl; }
+            set { m_SourceUrl = value; }
         }
 
         /// <summary>
@@ -411,10 +347,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         public string TargetNamespace
         {
-            get
-            {
-                return CachedMetadata.TargetNamespace;
-            }
+            get { return CachedMetadata.TargetNamespace; }
         }
 
         /// <summary>
@@ -427,24 +360,52 @@ namespace Microsoft.VSDesigner.WCFModel
         {
             try
             {
-                if (reader.IsStartElement(XmlStrings.WSDL.Elements.Root, XmlStrings.WSDL.NamespaceUri))
+                if (
+                    reader.IsStartElement(
+                        XmlStrings.WSDL.Elements.Root,
+                        XmlStrings.WSDL.NamespaceUri
+                    )
+                )
                 {
                     return MetadataType.Wsdl;
                 }
-                else if (reader.IsStartElement(XmlStrings.XmlSchema.Elements.Root, XmlStrings.XmlSchema.NamespaceUri))
+                else if (
+                    reader.IsStartElement(
+                        XmlStrings.XmlSchema.Elements.Root,
+                        XmlStrings.XmlSchema.NamespaceUri
+                    )
+                )
                 {
                     return MetadataType.Schema;
                 }
-                else if (reader.IsStartElement(XmlStrings.WSPolicy.Elements.Policy, XmlStrings.WSPolicy.NamespaceUri)
-                         || reader.IsStartElement(XmlStrings.WSPolicy.Elements.Policy, XmlStrings.WSPolicy.NamespaceUri15))
+                else if (
+                    reader.IsStartElement(
+                        XmlStrings.WSPolicy.Elements.Policy,
+                        XmlStrings.WSPolicy.NamespaceUri
+                    )
+                    || reader.IsStartElement(
+                        XmlStrings.WSPolicy.Elements.Policy,
+                        XmlStrings.WSPolicy.NamespaceUri15
+                    )
+                )
                 {
                     return MetadataType.Policy;
                 }
-                else if (reader.IsStartElement(XmlStrings.DISCO.Elements.Root, XmlStrings.DISCO.NamespaceUri))
+                else if (
+                    reader.IsStartElement(
+                        XmlStrings.DISCO.Elements.Root,
+                        XmlStrings.DISCO.NamespaceUri
+                    )
+                )
                 {
                     return MetadataType.Disco;
                 }
-                else if (reader.IsStartElement(XmlStrings.DataServices.Elements.Root, XmlStrings.DataServices.NamespaceUri))
+                else if (
+                    reader.IsStartElement(
+                        XmlStrings.DataServices.Elements.Root,
+                        XmlStrings.DataServices.NamespaceUri
+                    )
+                )
                 {
                     return MetadataType.Edmx;
                 }
@@ -505,7 +466,10 @@ namespace Microsoft.VSDesigner.WCFModel
                     }
 
                     string defaultExtension = "." + GetDefaultExtension();
-                    if (ns.Length > defaultExtension.Length && ns.EndsWith(defaultExtension, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        ns.Length > defaultExtension.Length
+                        && ns.EndsWith(defaultExtension, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         ns = ns.Substring(0, ns.Length - defaultExtension.Length);
                     }
@@ -552,7 +516,11 @@ namespace Microsoft.VSDesigner.WCFModel
         /// </summary>
         /// <param name="contentReader"></param>
         /// <remarks></remarks>
-        [SuppressMessage("Microsoft.Security.Xml", "CA3054:DoNotAllowDtdOnXmlTextReader", Justification = "Legacy code that trusts our developer-controlled input.")]
+        [SuppressMessage(
+            "Microsoft.Security.Xml",
+            "CA3054:DoNotAllowDtdOnXmlTextReader",
+            Justification = "Legacy code that trusts our developer-controlled input."
+        )]
         private void LoadContentFromTextReader(TextReader contentReader)
         {
             if (contentReader == null)
@@ -595,18 +563,26 @@ namespace Microsoft.VSDesigner.WCFModel
         }
 
         /// <summary>
-        /// Load schema/wsdl model from binary content.  -- Parse the metadata content 
+        /// Load schema/wsdl model from binary content.  -- Parse the metadata content
         /// </summary>
         /// <return></return>
         /// <remarks></remarks>
-        [SuppressMessage("Microsoft.Security.Xml", "CA3054:DoNotAllowDtdOnXmlTextReader", Justification = "Legacy code that trusts our developer-controlled input.")]
+        [SuppressMessage(
+            "Microsoft.Security.Xml",
+            "CA3054:DoNotAllowDtdOnXmlTextReader",
+            Justification = "Legacy code that trusts our developer-controlled input."
+        )]
         private MetadataContent LoadMetadataContent(MetadataType fileType)
         {
             if (ErrorInLoading != null)
             {
                 return new MetadataContent(ErrorInLoading);
             }
-            using (XmlTextReader xmlReader = new XmlTextReader(new StreamReader(new MemoryStream(m_BinaryContent))))
+            using (
+                XmlTextReader xmlReader = new XmlTextReader(
+                    new StreamReader(new MemoryStream(m_BinaryContent))
+                )
+            )
             {
                 return LoadMetadataContent(fileType, xmlReader);
             }
@@ -626,11 +602,16 @@ namespace Microsoft.VSDesigner.WCFModel
                 switch (fileType)
                 {
                     case MetadataType.Disco:
-                        cachedMetadata = new MetadataContent(Discovery.DiscoveryDocument.Read(xmlReader));
+                        cachedMetadata = new MetadataContent(
+                            Discovery.DiscoveryDocument.Read(xmlReader)
+                        );
                         break;
                     case MetadataType.Wsdl:
-                        cachedMetadata = new MetadataContent(Description.ServiceDescription.Read(xmlReader));
-                        cachedMetadata.MetadataServiceDescription.RetrievalUrl = GetMetadataSourceUrl();
+                        cachedMetadata = new MetadataContent(
+                            Description.ServiceDescription.Read(xmlReader)
+                        );
+                        cachedMetadata.MetadataServiceDescription.RetrievalUrl =
+                            GetMetadataSourceUrl();
                         break;
                     case MetadataType.Schema:
                         cachedMetadata = new MetadataContent(XmlSchema.Read(xmlReader, null));
@@ -640,7 +621,11 @@ namespace Microsoft.VSDesigner.WCFModel
                         // For unknown types, we don't do nothing...
                         break;
                     default:
-                        Debug.Assert(fileType == MetadataType.Xml || fileType == MetadataType.Policy || fileType == MetadataType.Edmx);
+                        Debug.Assert(
+                            fileType == MetadataType.Xml
+                                || fileType == MetadataType.Policy
+                                || fileType == MetadataType.Edmx
+                        );
                         XmlDocument tempDoc = new XmlDocument();
                         tempDoc.Load(xmlReader);
                         cachedMetadata = new MetadataContent(tempDoc);
@@ -677,13 +662,16 @@ namespace Microsoft.VSDesigner.WCFModel
                 case MetadataType.Disco:
                     if (metadata.MetadataServiceDescription != null)
                     {
-                        metadataSection = MetadataSection.CreateFromServiceDescription(metadata.MetadataServiceDescription);
+                        metadataSection = MetadataSection.CreateFromServiceDescription(
+                            metadata.MetadataServiceDescription
+                        );
                     }
                     break;
                 case MetadataType.Wsdl:
                     // We need to make a copy of the WSDL object model since the act of importing it actuall
                     // modifies it, and we don't want the cached instance to be polluted...
-                    System.Web.Services.Description.ServiceDescription description = metadata.MetadataServiceDescription;
+                    System.Web.Services.Description.ServiceDescription description =
+                        metadata.MetadataServiceDescription;
                     if (description != null)
                     {
                         metadataSection = MetadataSection.CreateFromServiceDescription(description);
@@ -692,20 +680,29 @@ namespace Microsoft.VSDesigner.WCFModel
                 case MetadataType.Schema:
                     if (metadata.MetadataXmlSchema != null)
                     {
-                        metadataSection = MetadataSection.CreateFromSchema(metadata.MetadataXmlSchema);
+                        metadataSection = MetadataSection.CreateFromSchema(
+                            metadata.MetadataXmlSchema
+                        );
                     }
                     break;
                 case MetadataFile.MetadataType.Policy:
                     if (metadata.MetadataXmlDocument != null)
                     {
-                        metadataSection = MetadataSection.CreateFromPolicy(metadata.MetadataXmlDocument.DocumentElement, null);
+                        metadataSection = MetadataSection.CreateFromPolicy(
+                            metadata.MetadataXmlDocument.DocumentElement,
+                            null
+                        );
                     }
                     break;
                 case MetadataFile.MetadataType.Xml:
                 case MetadataFile.MetadataType.Edmx:
                     if (metadata.MetadataXmlDocument != null)
                     {
-                        metadataSection = new MetadataSection(null, null, metadata.MetadataXmlDocument.DocumentElement);
+                        metadataSection = new MetadataSection(
+                            null,
+                            null,
+                            metadata.MetadataXmlDocument.DocumentElement
+                        );
                     }
                     break;
                 default:
@@ -739,16 +736,22 @@ namespace Microsoft.VSDesigner.WCFModel
         {
             [XmlSerialization.XmlEnum(Name = "Unknown")]
             Unknown = 0,
+
             [XmlSerialization.XmlEnum(Name = "Disco")]
             Disco = 1,
+
             [XmlSerialization.XmlEnum(Name = "Wsdl")]
             Wsdl = 2,
+
             [XmlSerialization.XmlEnum(Name = "Schema")]
             Schema = 3,
+
             [XmlSerialization.XmlEnum(Name = "Policy")]
             Policy = 4,
+
             [XmlSerialization.XmlEnum(Name = "Xml")]
             Xml = 5,
+
             [XmlSerialization.XmlEnum(Name = "Edmx")]
             Edmx = 6,
         }
@@ -759,7 +762,6 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         private class MetadataContent
         {
-
             private Discovery.DiscoveryDocument m_MetadataDiscoveryDocument;
             private Description.ServiceDescription m_MetadataServiceDescription;
             private XmlSchema m_MetadataXmlSchema;
@@ -810,23 +812,17 @@ namespace Microsoft.VSDesigner.WCFModel
             /// <remarks></remarks>
             public Discovery.DiscoveryDocument MetadataDiscoveryDocument
             {
-                get
-                {
-                    return m_MetadataDiscoveryDocument;
-                }
+                get { return m_MetadataDiscoveryDocument; }
             }
 
             /// <summary>
-            /// Error message if 
+            /// Error message if
             /// </summary>
             /// <value></value>
             /// <remarks></remarks>
             public Exception MetadataFormatError
             {
-                get
-                {
-                    return m_MetadataFormatError;
-                }
+                get { return m_MetadataFormatError; }
             }
 
             /// <summary>
@@ -836,10 +832,7 @@ namespace Microsoft.VSDesigner.WCFModel
             /// <remarks></remarks>
             public Description.ServiceDescription MetadataServiceDescription
             {
-                get
-                {
-                    return m_MetadataServiceDescription;
-                }
+                get { return m_MetadataServiceDescription; }
             }
 
             /// <summary>
@@ -849,10 +842,7 @@ namespace Microsoft.VSDesigner.WCFModel
             /// <remarks></remarks>
             public XmlSchema MetadataXmlSchema
             {
-                get
-                {
-                    return m_MetadataXmlSchema;
-                }
+                get { return m_MetadataXmlSchema; }
             }
 
             /// <summary>
@@ -862,10 +852,7 @@ namespace Microsoft.VSDesigner.WCFModel
             /// <remarks></remarks>
             public XmlDocument MetadataXmlDocument
             {
-                get
-                {
-                    return m_MetadataXmlDocument;
-                }
+                get { return m_MetadataXmlDocument; }
             }
 
             /// <summary>
@@ -875,13 +862,8 @@ namespace Microsoft.VSDesigner.WCFModel
             /// <remarks></remarks>
             public string TargetNamespace
             {
-                get
-                {
-                    return m_TargetNamespace;
-                }
+                get { return m_TargetNamespace; }
             }
-
         }
     }
-
 }

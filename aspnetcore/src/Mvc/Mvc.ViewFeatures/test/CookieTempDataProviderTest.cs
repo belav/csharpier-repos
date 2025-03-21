@@ -19,9 +19,9 @@ public class CookieTempDataProviderTest
 {
     private static readonly byte[] Bytes = Encoding.UTF8.GetBytes("test value");
     private static readonly IDictionary<string, object> Dictionary = new Dictionary<string, object>
-        {
-            { "key", "value" },
-        };
+    {
+        { "key", "value" },
+    };
 
     [Fact]
     public void SaveTempData_UsesCookieName_FromOptions()
@@ -30,15 +30,17 @@ public class CookieTempDataProviderTest
         var expectedCookieName = "TestCookieName";
 
         var expectedDataInCookie = WebEncoders.Base64UrlEncode(Bytes);
-        var tempDataProvider = GetProvider(dataProtector: null, options: new CookieTempDataProviderOptions()
-        {
-            Cookie = { Name = expectedCookieName }
-        });
+        var tempDataProvider = GetProvider(
+            dataProtector: null,
+            options: new CookieTempDataProviderOptions() { Cookie = { Name = expectedCookieName } }
+        );
 
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = "/";
-        httpContext.Features.Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
+        httpContext.Features.Set<IResponseCookiesFeature>(
+            new FakeResponseCookiesFeature(responseCookies)
+        );
 
         // Act
         tempDataProvider.SaveTempData(httpContext, Dictionary);
@@ -69,9 +71,7 @@ public class CookieTempDataProviderTest
     {
         // Arrange
         var dataProtector = new Mock<IDataProtector>(MockBehavior.Strict);
-        dataProtector
-            .Setup(d => d.Unprotect(It.IsAny<byte[]>()))
-            .Throws(new Exception());
+        dataProtector.Setup(d => d.Unprotect(It.IsAny<byte[]>())).Throws(new Exception());
 
         var tempDataProvider = GetProvider(dataProtector.Object);
 
@@ -79,7 +79,8 @@ public class CookieTempDataProviderTest
         var base64AndUrlEncodedDataInCookie = WebEncoders.Base64UrlEncode(expectedDataToUnprotect);
 
         var context = new DefaultHttpContext();
-        context.Request.Headers.Cookie = $"{CookieTempDataProvider.CookieName}={base64AndUrlEncodedDataInCookie}";
+        context.Request.Headers.Cookie =
+            $"{CookieTempDataProvider.CookieName}={base64AndUrlEncodedDataInCookie}";
 
         // Act
         var tempDataDictionary = tempDataProvider.LoadTempData(context);
@@ -87,7 +88,9 @@ public class CookieTempDataProviderTest
         // Assert
         Assert.Empty(tempDataDictionary);
 
-        var setCookieHeader = SetCookieHeaderValue.Parse(context.Response.Headers["Set-Cookie"].ToString());
+        var setCookieHeader = SetCookieHeaderValue.Parse(
+            context.Response.Headers["Set-Cookie"].ToString()
+        );
         Assert.Equal(CookieTempDataProvider.CookieName, setCookieHeader.Name.ToString());
         Assert.Equal(string.Empty, setCookieHeader.Value.ToString());
     }
@@ -101,7 +104,8 @@ public class CookieTempDataProviderTest
         var dataProtector = new PassThroughDataProtector();
         var tempDataProvider = GetProvider(dataProtector);
         var httpContext = new DefaultHttpContext();
-        httpContext.Request.Headers.Cookie = $"{CookieTempDataProvider.CookieName}={base64AndUrlEncodedDataInCookie}";
+        httpContext.Request.Headers.Cookie =
+            $"{CookieTempDataProvider.CookieName}={base64AndUrlEncodedDataInCookie}";
 
         // Act
         var actualValues = tempDataProvider.LoadTempData(httpContext);
@@ -124,7 +128,9 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = "/";
-        httpContext.Features.Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
+        httpContext.Features.Set<IResponseCookiesFeature>(
+            new FakeResponseCookiesFeature(responseCookies)
+        );
 
         // Act
         tempDataProvider.SaveTempData(httpContext, Dictionary);
@@ -147,7 +153,8 @@ public class CookieTempDataProviderTest
     public void SaveTempData_HonorsCookieSecurePolicy_OnOptions(
         bool isRequestSecure,
         CookieSecurePolicy cookieSecurePolicy,
-        bool expectedSecureFlag)
+        bool expectedSecureFlag
+    )
     {
         // Arrange
         var expectedDataToProtect = Bytes;
@@ -159,7 +166,9 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = "/";
-        httpContext.Features.Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
+        httpContext.Features.Set<IResponseCookiesFeature>(
+            new FakeResponseCookiesFeature(responseCookies)
+        );
         httpContext.Request.IsHttps = isRequestSecure;
 
         // Act
@@ -185,7 +194,8 @@ public class CookieTempDataProviderTest
     [InlineData("/vdir1", "/vdir1")]
     public void SaveTempData_DefaultProviderOptions_SetsCookie_WithAppropriateCookieOptions(
         string pathBase,
-        string expectedCookiePath)
+        string expectedCookiePath
+    )
     {
         // Arrange
         var expectedDataToProtect = Bytes;
@@ -195,7 +205,9 @@ public class CookieTempDataProviderTest
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = pathBase;
-        httpContext.Features.Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
+        httpContext.Features.Set<IResponseCookiesFeature>(
+            new FakeResponseCookiesFeature(responseCookies)
+        );
 
         // Act
         tempDataProvider.SaveTempData(httpContext, Dictionary);
@@ -225,7 +237,8 @@ public class CookieTempDataProviderTest
         string optionsPath,
         string optionsDomain,
         string expectedCookiePath,
-        string expectedDomain)
+        string expectedDomain
+    )
     {
         // Arrange
         var expectedDataToProtect = Bytes;
@@ -235,16 +248,15 @@ public class CookieTempDataProviderTest
             dataProtector,
             new CookieTempDataProviderOptions
             {
-                Cookie =
-                {
-                        Path = optionsPath,
-                        Domain = optionsDomain
-                }
-            });
+                Cookie = { Path = optionsPath, Domain = optionsDomain },
+            }
+        );
         var responseCookies = new MockResponseCookieCollection();
         var httpContext = new DefaultHttpContext();
         httpContext.Request.PathBase = requestPathBase;
-        httpContext.Features.Set<IResponseCookiesFeature>(new FakeResponseCookiesFeature(responseCookies));
+        httpContext.Features.Set<IResponseCookiesFeature>(
+            new FakeResponseCookiesFeature(responseCookies)
+        );
 
         // Act
         tempDataProvider.SaveTempData(httpContext, Dictionary);
@@ -295,10 +307,7 @@ public class CookieTempDataProviderTest
     {
         // Arrange
         var testProvider = GetProvider();
-        var input = new Dictionary<string, object>
-            {
-                { "string", "value" }
-            };
+        var input = new Dictionary<string, object> { { "string", "value" } };
         var context = GetHttpContext();
 
         // Act
@@ -338,14 +347,14 @@ public class CookieTempDataProviderTest
 
     private class MockResponseCookieCollection : IResponseCookies, IEnumerable<CookieInfo>
     {
-        private readonly Dictionary<string, CookieInfo> _cookies = new Dictionary<string, CookieInfo>(StringComparer.OrdinalIgnoreCase);
+        private readonly Dictionary<string, CookieInfo> _cookies = new Dictionary<
+            string,
+            CookieInfo
+        >(StringComparer.OrdinalIgnoreCase);
 
         public int Count
         {
-            get
-            {
-                return _cookies.Count;
-            }
+            get { return _cookies.Count; }
         }
 
         public CookieInfo this[string key] => _cookies[key];
@@ -356,7 +365,7 @@ public class CookieTempDataProviderTest
             {
                 Key = key,
                 Value = value,
-                Options = options
+                Options = options,
             };
         }
 
@@ -386,7 +395,10 @@ public class CookieTempDataProviderTest
         }
     }
 
-    private CookieTempDataProvider GetProvider(IDataProtector dataProtector = null, CookieTempDataProviderOptions options = null)
+    private CookieTempDataProvider GetProvider(
+        IDataProtector dataProtector = null,
+        CookieTempDataProviderOptions options = null
+    )
     {
         if (dataProtector == null)
         {
@@ -404,7 +416,8 @@ public class CookieTempDataProviderTest
             new PassThroughDataProtectionProvider(dataProtector),
             NullLoggerFactory.Instance,
             testOptions.Object,
-            new TestTempDataSerializer());
+            new TestTempDataSerializer()
+        );
     }
 
     private class PassThroughDataProtectionProvider : IDataProtectionProvider

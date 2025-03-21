@@ -30,12 +30,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.FSharp.Editor
             IList<FSharpNavigationBarItem> childItems = null,
             int indent = 0,
             bool bolded = false,
-            bool grayed = false)
+            bool grayed = false
+        )
         {
             this.Text = text;
             this.Glyph = glyph;
             this.Spans = spans;
-            this.ChildItems = childItems ?? SpecializedCollections.EmptyList<FSharpNavigationBarItem>();
+            this.ChildItems =
+                childItems ?? SpecializedCollections.EmptyList<FSharpNavigationBarItem>();
             this.Indent = indent;
             this.Bolded = bolded;
             this.Grayed = grayed;

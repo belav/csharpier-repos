@@ -15,9 +15,13 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
     public abstract class PartialParsingTestBase<TLanguage>
         where TLanguage : RazorCodeLanguage, new()
     {
-        private const string TestLinePragmaFileName = "C:\\This\\Path\\Is\\Just\\For\\Line\\Pragmas.cshtml";
+        private const string TestLinePragmaFileName =
+            "C:\\This\\Path\\Is\\Just\\For\\Line\\Pragmas.cshtml";
 
-        protected static void RunFullReparseTest(TextChange change, PartialParseResult additionalFlags = (PartialParseResult)0)
+        protected static void RunFullReparseTest(
+            TextChange change,
+            PartialParseResult additionalFlags = (PartialParseResult)0
+        )
         {
             // Arrange
             using (TestParserManager manager = CreateParserManager())
@@ -33,7 +37,11 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             }
         }
 
-        protected static void RunPartialParseTest(TextChange change, Block newTreeRoot, PartialParseResult additionalFlags = (PartialParseResult)0)
+        protected static void RunPartialParseTest(
+            TextChange change,
+            Block newTreeRoot,
+            PartialParseResult additionalFlags = (PartialParseResult)0
+        )
         {
             // Arrange
             using (TestParserManager manager = CreateParserManager())
@@ -61,8 +69,16 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
         {
             return new RazorEngineHost(new TLanguage())
             {
-                GeneratedClassContext = new GeneratedClassContext("Execute", "Write", "WriteLiteral", "WriteTo", "WriteLiteralTo", "Template", "DefineSection"),
-                DesignTimeMode = true
+                GeneratedClassContext = new GeneratedClassContext(
+                    "Execute",
+                    "Write",
+                    "WriteLiteral",
+                    "WriteTo",
+                    "WriteLiteralTo",
+                    "Template",
+                    "DefineSection"
+                ),
+                DesignTimeMode = true,
             };
         }
 
@@ -72,7 +88,10 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
             string after = "@" + keyword;
             StringTextBuffer changed = new StringTextBuffer(after);
             StringTextBuffer old = new StringTextBuffer(before);
-            RunFullReparseTest(new TextChange(keyword.Length, 0, old, 1, changed), additionalFlags: PartialParseResult.SpanContextChanged);
+            RunFullReparseTest(
+                new TextChange(keyword.Length, 0, old, 1, changed),
+                additionalFlags: PartialParseResult.SpanContextChanged
+            );
         }
 
         protected class TestParserManager : IDisposable
@@ -95,7 +114,15 @@ namespace System.Web.Razor.Test.Parser.PartialParsing
 
             public void InitializeWithDocument(ITextBuffer startDocument)
             {
-                CheckForStructureChangesAndWait(new TextChange(0, 0, new StringTextBuffer(String.Empty), startDocument.Length, startDocument));
+                CheckForStructureChangesAndWait(
+                    new TextChange(
+                        0,
+                        0,
+                        new StringTextBuffer(String.Empty),
+                        startDocument.Length,
+                        startDocument
+                    )
+                );
             }
 
             public PartialParseResult CheckForStructureChangesAndWait(TextChange change)

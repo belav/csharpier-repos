@@ -16,7 +16,7 @@ public class CustomNamingStrategyTests
         // Arrange
         var contractResolver = new DefaultContractResolver
         {
-            NamingStrategy = new TestNamingStrategy()
+            NamingStrategy = new TestNamingStrategy(),
         };
 
         dynamic targetObject = new DynamicTestObject();
@@ -40,7 +40,7 @@ public class CustomNamingStrategyTests
         // Arrange
         var contractResolver = new DefaultContractResolver
         {
-            NamingStrategy = new TestNamingStrategy()
+            NamingStrategy = new TestNamingStrategy(),
         };
 
         dynamic targetObject = new DynamicTestObject();
@@ -64,7 +64,7 @@ public class CustomNamingStrategyTests
         // Arrange
         var contractResolver = new DefaultContractResolver
         {
-            NamingStrategy = new TestNamingStrategy()
+            NamingStrategy = new TestNamingStrategy(),
         };
 
         dynamic targetObject = new ExpandoObject();
@@ -91,13 +91,10 @@ public class CustomNamingStrategyTests
         // Arrange
         var contractResolver = new DefaultContractResolver
         {
-            NamingStrategy = new TestNamingStrategy()
+            NamingStrategy = new TestNamingStrategy(),
         };
 
-        var targetObject = new Dictionary<string, int>()
-            {
-                { "customTest", 1},
-            };
+        var targetObject = new Dictionary<string, int>() { { "customTest", 1 } };
 
         var patchDocument = new JsonPatchDocument();
         patchDocument.Remove("Test");
@@ -118,7 +115,7 @@ public class CustomNamingStrategyTests
         // Arrange
         var contractResolver = new DefaultContractResolver
         {
-            NamingStrategy = new TestNamingStrategy()
+            NamingStrategy = new TestNamingStrategy(),
         };
 
         dynamic targetObject = new ExpandoObject();

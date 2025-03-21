@@ -23,7 +23,9 @@ internal sealed class UrlRewriteRuleBuilder
     {
         if (_initialMatch == null || _action == null)
         {
-            throw new InvalidOperationException("Cannot create UrlRewriteRule without action and match");
+            throw new InvalidOperationException(
+                "Cannot create UrlRewriteRule without action and match"
+            );
         }
 
         return new IISUrlRewriteRule(Name, _initialMatch, _conditions, _action, Global);
@@ -38,24 +40,39 @@ internal sealed class UrlRewriteRuleBuilder
         _action = action;
     }
 
-    public void AddUrlMatch(string input, bool ignoreCase = true, bool negate = false, PatternSyntax patternSyntax = PatternSyntax.ECMAScript)
+    public void AddUrlMatch(
+        string input,
+        bool ignoreCase = true,
+        bool negate = false,
+        PatternSyntax patternSyntax = PatternSyntax.ECMAScript
+    )
     {
         switch (patternSyntax)
         {
             case PatternSyntax.ECMAScript:
+            {
+                if (ignoreCase)
                 {
-                    if (ignoreCase)
-                    {
-                        var regex = new Regex(input, RegexOptions.CultureInvariant | RegexOptions.Compiled | RegexOptions.IgnoreCase, _regexTimeout);
-                        _initialMatch = new RegexMatch(regex, negate);
-                    }
-                    else
-                    {
-                        var regex = new Regex(input, RegexOptions.CultureInvariant | RegexOptions.Compiled, _regexTimeout);
-                        _initialMatch = new RegexMatch(regex, negate);
-                    }
-                    break;
+                    var regex = new Regex(
+                        input,
+                        RegexOptions.CultureInvariant
+                            | RegexOptions.Compiled
+                            | RegexOptions.IgnoreCase,
+                        _regexTimeout
+                    );
+                    _initialMatch = new RegexMatch(regex, negate);
                 }
+                else
+                {
+                    var regex = new Regex(
+                        input,
+                        RegexOptions.CultureInvariant | RegexOptions.Compiled,
+                        _regexTimeout
+                    );
+                    _initialMatch = new RegexMatch(regex, negate);
+                }
+                break;
+            }
             case PatternSyntax.Wildcard:
                 throw new NotSupportedException("Wildcard syntax is not supported");
             case PatternSyntax.ExactMatch:
@@ -73,7 +90,9 @@ internal sealed class UrlRewriteRuleBuilder
     {
         if (_conditions == null)
         {
-            throw new InvalidOperationException($"You must first configure condition behavior by calling {nameof(ConfigureConditionBehavior)}");
+            throw new InvalidOperationException(
+                $"You must first configure condition behavior by calling {nameof(ConfigureConditionBehavior)}"
+            );
         }
         ArgumentNullException.ThrowIfNull(condition);
         _conditions.Add(condition);
@@ -83,7 +102,9 @@ internal sealed class UrlRewriteRuleBuilder
     {
         if (_conditions == null)
         {
-            throw new InvalidOperationException($"You must first configure condition behavior by calling {nameof(ConfigureConditionBehavior)}");
+            throw new InvalidOperationException(
+                $"You must first configure condition behavior by calling {nameof(ConfigureConditionBehavior)}"
+            );
         }
         _conditions.AddConditions(conditions);
     }

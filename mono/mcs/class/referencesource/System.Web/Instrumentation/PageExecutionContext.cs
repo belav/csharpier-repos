@@ -1,10 +1,12 @@
 ﻿using System.IO;
 
-namespace System.Web.Instrumentation {
+namespace System.Web.Instrumentation
+{
     /// <summary>
     /// Contains information about the current position with page execution
     /// </summary>
-    public class PageExecutionContext {
+    public class PageExecutionContext
+    {
         /// <summary>
         /// A flag indicating if the block contains literal content which should be deeply scanned for selection mapping purposes
         /// </summary>

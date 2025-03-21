@@ -8,21 +8,22 @@ using Microsoft.Extensions.Logging;
 namespace Microsoft.CodeAnalysis.Tools
 {
     internal record FormatOptions(
-            string WorkspaceFilePath,
-            WorkspaceType WorkspaceType,
-            bool NoRestore,
-            LogLevel LogLevel,
-            FixCategory FixCategory,
-            DiagnosticSeverity CodeStyleSeverity,
-            DiagnosticSeverity AnalyzerSeverity,
-            ImmutableHashSet<string> Diagnostics,
-            ImmutableHashSet<string> ExcludeDiagnostics,
-            bool SaveFormattedFiles,
-            bool ChangesAreErrors,
-            SourceFileMatcher FileMatcher,
-            string? ReportPath,
-            string? BinaryLogPath,
-            bool IncludeGeneratedFiles)
+        string WorkspaceFilePath,
+        WorkspaceType WorkspaceType,
+        bool NoRestore,
+        LogLevel LogLevel,
+        FixCategory FixCategory,
+        DiagnosticSeverity CodeStyleSeverity,
+        DiagnosticSeverity AnalyzerSeverity,
+        ImmutableHashSet<string> Diagnostics,
+        ImmutableHashSet<string> ExcludeDiagnostics,
+        bool SaveFormattedFiles,
+        bool ChangesAreErrors,
+        SourceFileMatcher FileMatcher,
+        string? ReportPath,
+        string? BinaryLogPath,
+        bool IncludeGeneratedFiles
+    )
     {
         public static FormatOptions Instance = new(
             WorkspaceFilePath: null!, // must be supplied
@@ -36,9 +37,13 @@ namespace Microsoft.CodeAnalysis.Tools
             ExcludeDiagnostics: ImmutableHashSet<string>.Empty,
             SaveFormattedFiles: true,
             ChangesAreErrors: false,
-            FileMatcher: SourceFileMatcher.CreateMatcher(Array.Empty<string>(), Array.Empty<string>()),
+            FileMatcher: SourceFileMatcher.CreateMatcher(
+                Array.Empty<string>(),
+                Array.Empty<string>()
+            ),
             ReportPath: null,
             BinaryLogPath: null,
-            IncludeGeneratedFiles: false);
+            IncludeGeneratedFiles: false
+        );
     }
 }

@@ -13,38 +13,34 @@ namespace System.Activities.DurableInstancing
     public sealed class LoadWorkflowCommand : InstancePersistenceCommand
     {
         public LoadWorkflowCommand()
-            : base(InstancePersistence.ActivitiesCommandNamespace.GetName("LoadWorkflow"))
-        {
-        }
+            : base(InstancePersistence.ActivitiesCommandNamespace.GetName("LoadWorkflow")) { }
 
         public bool AcceptUninitializedInstance { get; set; }
 
         protected internal override bool IsTransactionEnlistmentOptional
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected internal override bool AutomaticallyAcquiringLock
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected internal override void Validate(InstanceView view)
         {
             if (!view.IsBoundToInstance)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.InstanceRequired));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SRCore.InstanceRequired)
+                );
             }
 
             if (!view.IsBoundToInstanceOwner)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SRCore.OwnerRequired));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SRCore.OwnerRequired)
+                );
             }
         }
     }

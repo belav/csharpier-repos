@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.IO;
+using Microsoft.Win32.SafeHandles;
 using Xunit;
 
 namespace System.IO.Tests
@@ -13,12 +13,30 @@ namespace System.IO.Tests
         [Fact]
         public void IsAsyncConstructorArg()
         {
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 4096, true))
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    4096,
+                    true
+                )
+            )
             {
                 Assert.True(fs.IsAsync);
             }
 
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 4096, false))
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    4096,
+                    false
+                )
+            )
             {
                 Assert.False(fs.IsAsync);
             }
@@ -27,12 +45,30 @@ namespace System.IO.Tests
         [Fact]
         public void FileOptionsAsynchronousConstructorArg()
         {
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 4096, FileOptions.Asynchronous))
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    4096,
+                    FileOptions.Asynchronous
+                )
+            )
             {
                 Assert.True(fs.IsAsync);
             }
 
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 4096, FileOptions.None))
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    4096,
+                    FileOptions.None
+                )
+            )
             {
                 Assert.False(fs.IsAsync);
             }
@@ -41,13 +77,31 @@ namespace System.IO.Tests
         [Fact]
         public void AsyncDiscoveredFromHandle()
         {
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 4096, true))
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    4096,
+                    true
+                )
+            )
             using (FileStream fsh = new FileStream(fs.SafeFileHandle, FileAccess.ReadWrite))
             {
                 Assert.True(fsh.IsAsync);
             }
 
-            using (FileStream fs = new FileStream(GetTestFilePath(), FileMode.Create, FileAccess.ReadWrite, FileShare.Read, 4096, false))
+            using (
+                FileStream fs = new FileStream(
+                    GetTestFilePath(),
+                    FileMode.Create,
+                    FileAccess.ReadWrite,
+                    FileShare.Read,
+                    4096,
+                    false
+                )
+            )
             using (FileStream fsh = new FileStream(fs.SafeFileHandle, FileAccess.ReadWrite))
             {
                 Assert.False(fsh.IsAsync);

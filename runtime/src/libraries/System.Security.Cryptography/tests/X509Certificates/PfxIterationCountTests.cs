@@ -23,17 +23,31 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         internal abstract X509Certificate Import(string fileName, SecureString password);
 
         [ConditionalTheory]
-        [MemberData(nameof(GetCertsWith_IterationCountNotExceedingDefaultLimit_AndNullOrEmptyPassword_MemberData))]
-        public void Import_IterationCounLimitNotExceeded_Succeeds(string name, bool usesPbes2, byte[] blob, long iterationCount, bool usesRC2)
+        [MemberData(
+            nameof(
+                GetCertsWith_IterationCountNotExceedingDefaultLimit_AndNullOrEmptyPassword_MemberData
+            )
+        )]
+        public void Import_IterationCounLimitNotExceeded_Succeeds(
+            string name,
+            bool usesPbes2,
+            byte[] blob,
+            long iterationCount,
+            bool usesRC2
+        )
         {
             if (usesPbes2 && !PfxTests.Pkcs12PBES2Supported)
             {
-                throw new SkipTestException(name + " uses PBES2, which is not supported on this version.");
+                throw new SkipTestException(
+                    name + " uses PBES2, which is not supported on this version."
+                );
             }
 
             if (usesRC2 && !PlatformSupport.IsRC2Supported)
             {
-                throw new SkipTestException(name + " uses RC2, which is not supported on this platform.");
+                throw new SkipTestException(
+                    name + " uses RC2, which is not supported on this platform."
+                );
             }
 
             if (PfxTests.IsPkcs12IterationCountAllowed(iterationCount, PfxTests.DefaultIterations))
@@ -45,19 +59,30 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         [ConditionalTheory]
         [MemberData(nameof(GetCertsWith_IterationCountExceedingDefaultLimit_MemberData))]
-        public void Import_IterationCountLimitExceeded_Throws(string name, string password, bool usesPbes2, byte[] blob, long iterationCount, bool usesRC2)
+        public void Import_IterationCountLimitExceeded_Throws(
+            string name,
+            string password,
+            bool usesPbes2,
+            byte[] blob,
+            long iterationCount,
+            bool usesRC2
+        )
         {
             _ = password;
             _ = iterationCount;
 
             if (usesPbes2 && !PfxTests.Pkcs12PBES2Supported)
             {
-                throw new SkipTestException(name + " uses PBES2, which is not supported on this version.");
+                throw new SkipTestException(
+                    name + " uses PBES2, which is not supported on this version."
+                );
             }
 
             if (usesRC2 && !PlatformSupport.IsRC2Supported)
             {
-                throw new SkipTestException(name + " uses RC2, which is not supported on this platform.");
+                throw new SkipTestException(
+                    name + " uses RC2, which is not supported on this platform."
+                );
             }
 
             CryptographicException ce = Assert.Throws<CryptographicException>(() => Import(blob));
@@ -66,18 +91,29 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         [ConditionalTheory]
         [MemberData(nameof(GetCertsWith_IterationCountExceedingDefaultLimit_MemberData))]
-        public void ImportWithPasswordOrFileName_IterationCountLimitExceeded(string name, string password, bool usesPbes2, byte[] blob, long iterationCount, bool usesRC2)
+        public void ImportWithPasswordOrFileName_IterationCountLimitExceeded(
+            string name,
+            string password,
+            bool usesPbes2,
+            byte[] blob,
+            long iterationCount,
+            bool usesRC2
+        )
         {
             _ = iterationCount;
 
             if (usesPbes2 && !PfxTests.Pkcs12PBES2Supported)
             {
-                throw new SkipTestException(name + " uses PBES2, which is not supported on this version.");
+                throw new SkipTestException(
+                    name + " uses PBES2, which is not supported on this version."
+                );
             }
 
             if (usesRC2 && !PlatformSupport.IsRC2Supported)
             {
-                throw new SkipTestException(name + " uses RC2, which is not supported on this platform.");
+                throw new SkipTestException(
+                    name + " uses RC2, which is not supported on this platform."
+                );
             }
 
             using (TempFileHolder tempFile = new TempFileHolder(blob))
@@ -87,13 +123,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 {
                     // Specifying password or importing from file will still give us error because cert is beyond Windows limit.
                     // But we will get the CryptoThrowHelper+WindowsCryptographicException.
-                    VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() => Import(blob, password));
-                    VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() => Import(blob, PfxTests.GetSecureString(password)));
+                    VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() =>
+                        Import(blob, password)
+                    );
+                    VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() =>
+                        Import(blob, PfxTests.GetSecureString(password))
+                    );
 
                     // Using a file will do as above as well.
                     VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() => Import(fileName));
-                    VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() => Import(fileName, password));
-                    VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() => Import(fileName, PfxTests.GetSecureString(password)));
+                    VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() =>
+                        Import(fileName, password)
+                    );
+                    VerifyThrowsCryptoExButDoesNotThrowPfxWithoutPassword(() =>
+                        Import(fileName, PfxTests.GetSecureString(password))
+                    );
                 }
                 else
                 {
@@ -115,19 +159,31 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         [ConditionalTheory]
         [MemberData(nameof(GetCertsWith_NonNullOrEmptyPassword_MemberData))]
-        public void Import_NonNullOrEmptyPasswordExpected_Throws(string name, string password, bool usesPbes2, byte[] blob, long iterationCount, bool usesRC2)
+        public void Import_NonNullOrEmptyPasswordExpected_Throws(
+            string name,
+            string password,
+            bool usesPbes2,
+            byte[] blob,
+            long iterationCount,
+            bool usesRC2
+        )
         {
             if (usesPbes2 && !PfxTests.Pkcs12PBES2Supported)
             {
-                throw new SkipTestException(name + " uses PBES2, which is not supported on this version.");
+                throw new SkipTestException(
+                    name + " uses PBES2, which is not supported on this version."
+                );
             }
 
             if (usesRC2 && !PlatformSupport.IsRC2Supported)
             {
-                throw new SkipTestException(name + " uses RC2, which is not supported on this platform.");
+                throw new SkipTestException(
+                    name + " uses RC2, which is not supported on this platform."
+                );
             }
 
-            CryptographicException ce = Assert.ThrowsAny<CryptographicException>(() => Import(blob));
+            CryptographicException ce = Assert.ThrowsAny<CryptographicException>(() => Import(blob)
+            );
 
             if (PfxTests.IsPkcs12IterationCountAllowed(iterationCount, PfxTests.DefaultIterations))
             {
@@ -169,30 +225,115 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         private static List<PfxInfo> GetCertificates()
         {
             List<PfxInfo> certificates = new List<PfxInfo>();
-            certificates.Add(new PfxInfo(
-                nameof(TestData.Pkcs12NoPassword2048RoundsHex), null, 2048 * 3, true, TestData.Pkcs12NoPassword2048RoundsHex));
-            certificates.Add(new PfxInfo(
-                nameof(TestData.Pkcs12OpenSslOneCertDefaultEmptyPassword), "", 2048 * 3, true, TestData.Pkcs12OpenSslOneCertDefaultEmptyPassword));
-            certificates.Add(new PfxInfo(
-                nameof(TestData.Pkcs12OpenSslOneCertDefaultNoMac), null, 2048, true, TestData.Pkcs12OpenSslOneCertDefaultNoMac));
-            certificates.Add(new PfxInfo(
-                nameof(TestData.Pkcs12NoPasswordRandomCounts), null, 938, true, TestData.Pkcs12NoPasswordRandomCounts));
-            certificates.Add(new PfxInfo(
-                nameof(TestData.Pkcs12WindowsDotnetExportEmptyPassword), "", 6000, false, TestData.Pkcs12WindowsDotnetExportEmptyPassword));
-            certificates.Add(new PfxInfo(
-                nameof(TestData.Pkcs12MacosKeychainCreated), null, 4097, false, TestData.Pkcs12MacosKeychainCreated, usesRC2: true));
-            certificates.Add(new PfxInfo(
-                nameof(TestData.Pkcs12BuilderSaltWithMacNullPassword), null, 120000, true, TestData.Pkcs12BuilderSaltWithMacNullPassword));
-            certificates.Add(new PfxInfo(
-                nameof(TestData.Pkcs12Builder3DESCBCWithNullPassword), null, 30000, false, TestData.Pkcs12Builder3DESCBCWithNullPassword));
-            certificates.Add(new PfxInfo(
-                nameof(TestData.Pkcs12Builder3DESCBCWithEmptyPassword), "", 30000, false, TestData.Pkcs12Builder3DESCBCWithEmptyPassword));
-            certificates.Add(new PfxInfo(
-                nameof(TestData.Pkcs12WindowsWithCertPrivacyPasswordIsOne), "1", 4000, false, TestData.Pkcs12WindowsWithCertPrivacyPasswordIsOne));
-            certificates.Add(new PfxInfo(
-                nameof(TestData.Pkcs12WindowsWithoutCertPrivacyPasswordIsOne), "1", 4000, false, TestData.Pkcs12WindowsWithoutCertPrivacyPasswordIsOne));
-            certificates.Add(new PfxInfo(
-                nameof(TestData.Pkcs12NoPassword600KPlusOneRoundsHex), null, 600_001 * 3, true, TestData.Pkcs12NoPassword600KPlusOneRoundsHex));
+            certificates.Add(
+                new PfxInfo(
+                    nameof(TestData.Pkcs12NoPassword2048RoundsHex),
+                    null,
+                    2048 * 3,
+                    true,
+                    TestData.Pkcs12NoPassword2048RoundsHex
+                )
+            );
+            certificates.Add(
+                new PfxInfo(
+                    nameof(TestData.Pkcs12OpenSslOneCertDefaultEmptyPassword),
+                    "",
+                    2048 * 3,
+                    true,
+                    TestData.Pkcs12OpenSslOneCertDefaultEmptyPassword
+                )
+            );
+            certificates.Add(
+                new PfxInfo(
+                    nameof(TestData.Pkcs12OpenSslOneCertDefaultNoMac),
+                    null,
+                    2048,
+                    true,
+                    TestData.Pkcs12OpenSslOneCertDefaultNoMac
+                )
+            );
+            certificates.Add(
+                new PfxInfo(
+                    nameof(TestData.Pkcs12NoPasswordRandomCounts),
+                    null,
+                    938,
+                    true,
+                    TestData.Pkcs12NoPasswordRandomCounts
+                )
+            );
+            certificates.Add(
+                new PfxInfo(
+                    nameof(TestData.Pkcs12WindowsDotnetExportEmptyPassword),
+                    "",
+                    6000,
+                    false,
+                    TestData.Pkcs12WindowsDotnetExportEmptyPassword
+                )
+            );
+            certificates.Add(
+                new PfxInfo(
+                    nameof(TestData.Pkcs12MacosKeychainCreated),
+                    null,
+                    4097,
+                    false,
+                    TestData.Pkcs12MacosKeychainCreated,
+                    usesRC2: true
+                )
+            );
+            certificates.Add(
+                new PfxInfo(
+                    nameof(TestData.Pkcs12BuilderSaltWithMacNullPassword),
+                    null,
+                    120000,
+                    true,
+                    TestData.Pkcs12BuilderSaltWithMacNullPassword
+                )
+            );
+            certificates.Add(
+                new PfxInfo(
+                    nameof(TestData.Pkcs12Builder3DESCBCWithNullPassword),
+                    null,
+                    30000,
+                    false,
+                    TestData.Pkcs12Builder3DESCBCWithNullPassword
+                )
+            );
+            certificates.Add(
+                new PfxInfo(
+                    nameof(TestData.Pkcs12Builder3DESCBCWithEmptyPassword),
+                    "",
+                    30000,
+                    false,
+                    TestData.Pkcs12Builder3DESCBCWithEmptyPassword
+                )
+            );
+            certificates.Add(
+                new PfxInfo(
+                    nameof(TestData.Pkcs12WindowsWithCertPrivacyPasswordIsOne),
+                    "1",
+                    4000,
+                    false,
+                    TestData.Pkcs12WindowsWithCertPrivacyPasswordIsOne
+                )
+            );
+            certificates.Add(
+                new PfxInfo(
+                    nameof(TestData.Pkcs12WindowsWithoutCertPrivacyPasswordIsOne),
+                    "1",
+                    4000,
+                    false,
+                    TestData.Pkcs12WindowsWithoutCertPrivacyPasswordIsOne
+                )
+            );
+            certificates.Add(
+                new PfxInfo(
+                    nameof(TestData.Pkcs12NoPassword600KPlusOneRoundsHex),
+                    null,
+                    600_001 * 3,
+                    true,
+                    TestData.Pkcs12NoPassword600KPlusOneRoundsHex
+                )
+            );
 
             return certificates;
         }
@@ -203,7 +344,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 if (p.IterationCount <= DefaultIterationLimit && string.IsNullOrEmpty(p.Password))
                 {
-                    yield return new object[] { p.Name, p.UsesPbes2, p.Blob, p.IterationCount, p.UsesRC2 };
+                    yield return new object[]
+                    {
+                        p.Name,
+                        p.UsesPbes2,
+                        p.Blob,
+                        p.IterationCount,
+                        p.UsesRC2,
+                    };
                 }
             }
         }
@@ -214,7 +362,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 if (p.IterationCount > DefaultIterationLimit)
                 {
-                    yield return new object[] { p.Name, p.Password, p.UsesPbes2, p.Blob, p.IterationCount, p.UsesRC2 };
+                    yield return new object[]
+                    {
+                        p.Name,
+                        p.Password,
+                        p.UsesPbes2,
+                        p.Blob,
+                        p.IterationCount,
+                        p.UsesRC2,
+                    };
                 }
             }
         }
@@ -225,7 +381,15 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             {
                 if (!string.IsNullOrEmpty(p.Password))
                 {
-                    yield return new object[] { p.Name, p.Password, p.UsesPbes2, p.Blob, p.IterationCount, p.UsesRC2 };
+                    yield return new object[]
+                    {
+                        p.Name,
+                        p.Password,
+                        p.UsesPbes2,
+                        p.Blob,
+                        p.IterationCount,
+                        p.UsesRC2,
+                    };
                 }
             }
         }
@@ -240,7 +404,14 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         internal byte[] Blob { get; set; }
         internal bool UsesRC2 { get; set; }
 
-        internal PfxInfo(string name, string password, long iterationCount, bool usesPbes2, byte[] blob, bool usesRC2 = false)
+        internal PfxInfo(
+            string name,
+            string password,
+            long iterationCount,
+            bool usesPbes2,
+            byte[] blob,
+            bool usesRC2 = false
+        )
         {
             Name = name;
             Password = password;

@@ -50,15 +50,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return value - 1;
             }
 
-            ulong INumericTC<ulong>.FromConstantValue(ConstantValue constantValue) => constantValue.IsBad ? 0UL : constantValue.UInt64Value;
+            ulong INumericTC<ulong>.FromConstantValue(ConstantValue constantValue) =>
+                constantValue.IsBad ? 0UL : constantValue.UInt64Value;
 
-            ConstantValue INumericTC<ulong>.ToConstantValue(ulong value) => ConstantValue.Create(value);
+            ConstantValue INumericTC<ulong>.ToConstantValue(ulong value) =>
+                ConstantValue.Create(value);
 
             string INumericTC<ulong>.ToString(ulong value) => value.ToString();
 
             ulong INumericTC<ulong>.Random(Random random)
             {
-                return ((ulong)random.Next() << 35) ^ ((ulong)random.Next() << 10) ^ (ulong)random.Next();
+                return ((ulong)random.Next() << 35)
+                    ^ ((ulong)random.Next() << 10)
+                    ^ (ulong)random.Next();
             }
         }
     }

@@ -1,5 +1,5 @@
 //
-// VersioningHelperCas.cs - CAS unit tests for 
+// VersioningHelperCas.cs - CAS unit tests for
 //	System.Runtime.Versioning.VersioningHelper
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,51 +27,60 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Reflection;
 using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
-
-using NUnit.Framework;
 using MonoTests.System.Runtime.Versioning;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Runtime.Versioning {
+namespace MonoCasTests.System.Runtime.Versioning
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class VersioningHelperCas
+    {
+        [SetUp]
+        public virtual void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class VersioningHelperCas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTest()
+        {
+            VersioningHelperTest unit = new VersioningHelperTest();
+            unit.Name_Null();
+            unit.Type_Null();
+            unit.MakeVersionSafeName();
+            unit.ConvertTo_AppDomain();
+            unit.ConvertTo_Process();
+            unit.ConvertTo_AppDomain_Process();
+        }
 
-		[SetUp]
-		public virtual void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTest ()
-		{
-			VersioningHelperTest unit = new VersioningHelperTest ();
-			unit.Name_Null ();
-			unit.Type_Null ();
-			unit.MakeVersionSafeName ();
-			unit.ConvertTo_AppDomain ();
-			unit.ConvertTo_Process ();
-			unit.ConvertTo_AppDomain_Process ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[3] { typeof (string), typeof (ResourceScope), typeof (ResourceScope) };
-			MethodInfo mi = typeof (VersioningHelper).GetMethod ("MakeVersionSafeName", types);
-			Assert.IsNotNull (mi, "MakeVersionSafeName(string,ResourceScope,ResourceScope)");
-			Assert.AreEqual (String.Empty, mi.Invoke (null, new object[3] { null, ResourceScope.AppDomain, ResourceScope.AppDomain }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            Type[] types = new Type[3]
+            {
+                typeof(string),
+                typeof(ResourceScope),
+                typeof(ResourceScope),
+            };
+            MethodInfo mi = typeof(VersioningHelper).GetMethod("MakeVersionSafeName", types);
+            Assert.IsNotNull(mi, "MakeVersionSafeName(string,ResourceScope,ResourceScope)");
+            Assert.AreEqual(
+                String.Empty,
+                mi.Invoke(
+                    null,
+                    new object[3] { null, ResourceScope.AppDomain, ResourceScope.AppDomain }
+                ),
+                "invoke"
+            );
+        }
+    }
 }
-

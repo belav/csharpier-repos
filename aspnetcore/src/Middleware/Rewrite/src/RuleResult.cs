@@ -12,12 +12,14 @@ public enum RuleResult
     /// Default value, continue applying rules.
     /// </summary>
     ContinueRules,
+
     ///<summary>
     /// The rule ended the request by providing a response.
     /// </summary>
     EndResponse,
+
     /// <summary>
     /// Stop applying rules and send context to the next middleware
     /// </summary>
-    SkipRemainingRules
+    SkipRemainingRules,
 }

@@ -12,8 +12,13 @@ namespace System.Linq.Parallel.Tests
 
         public static void AlreadyCanceled(Action<ParallelQuery<int>> query)
         {
-            ParallelQuery<int> s = Enumerables<int>.ThrowOnEnumeration(new ShouldNotBeInvokedException(), 2).AsParallel().WithCancellation(new CancellationToken(canceled: true));
-            OperationCanceledException oce = Assert.Throws<OperationCanceledException>(() => query(s));
+            ParallelQuery<int> s = Enumerables<int>
+                .ThrowOnEnumeration(new ShouldNotBeInvokedException(), 2)
+                .AsParallel()
+                .WithCancellation(new CancellationToken(canceled: true));
+            OperationCanceledException oce = Assert.Throws<OperationCanceledException>(() =>
+                query(s)
+            );
         }
 
         public static void EventuallyCanceled(Action<ParallelQuery<int>, Action> query)
@@ -28,8 +33,12 @@ namespace System.Linq.Parallel.Tests
                 }
             };
 
-            ParallelQuery<int> s = ParallelEnumerable.Range(0, EventualCancellationSize).WithCancellation(source.Token);
-            OperationCanceledException oce = Assert.Throws<OperationCanceledException>(() => query(s, cancel));
+            ParallelQuery<int> s = ParallelEnumerable
+                .Range(0, EventualCancellationSize)
+                .WithCancellation(source.Token);
+            OperationCanceledException oce = Assert.Throws<OperationCanceledException>(() =>
+                query(s, cancel)
+            );
             Assert.Equal(source.Token, oce.CancellationToken);
         }
 
@@ -48,8 +57,12 @@ namespace System.Linq.Parallel.Tests
                 }
             };
 
-            ParallelQuery<int> s = ParallelEnumerable.Range(0, EventualCancellationSize).WithCancellation(source.Token);
-            OperationCanceledException oce = Wrapped<OperationCanceledException>(() => query(s, cancel));
+            ParallelQuery<int> s = ParallelEnumerable
+                .Range(0, EventualCancellationSize)
+                .WithCancellation(source.Token);
+            OperationCanceledException oce = Wrapped<OperationCanceledException>(() =>
+                query(s, cancel)
+            );
             Assert.NotEqual(source.Token, oce.CancellationToken);
         }
 
@@ -65,12 +78,17 @@ namespace System.Linq.Parallel.Tests
                 }
             };
 
-            ParallelQuery<int> s = ParallelEnumerable.Range(0, EventualCancellationSize).WithCancellation(source.Token);
-            OperationCanceledException oce = Wrapped<OperationCanceledException>(() => query(s, cancel));
+            ParallelQuery<int> s = ParallelEnumerable
+                .Range(0, EventualCancellationSize)
+                .WithCancellation(source.Token);
+            OperationCanceledException oce = Wrapped<OperationCanceledException>(() =>
+                query(s, cancel)
+            );
             Assert.Equal(source.Token, oce.CancellationToken);
         }
 
-        public static T Wrapped<T>(Action action) where T : Exception
+        public static T Wrapped<T>(Action action)
+            where T : Exception
         {
             AggregateException ae = Assert.Throws<AggregateException>(action);
             Assert.All(ae.InnerExceptions, e => Assert.IsType<T>(e));

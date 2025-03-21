@@ -71,8 +71,9 @@ namespace System.Security.Cryptography.Tests
                 // The first call succeeds, but moves the cancellation source to canceled,
                 // and the second call then fails with an OperationCanceledException, canceling the
                 // whole operation.
-                await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                    () => hash.ComputeHashAsync(stream, cancellationSource.Token));
+                await Assert.ThrowsAnyAsync<OperationCanceledException>(() =>
+                    hash.ComputeHashAsync(stream, cancellationSource.Token)
+                );
 
                 Assert.True(cancellationSource.IsCancellationRequested);
             }
@@ -87,12 +88,11 @@ namespace System.Security.Cryptography.Tests
             {
                 hash.Dispose();
 
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        // Not returning or awaiting the Task, it never got created.
-                        hash.ComputeHashAsync(stream);
-                    });
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    // Not returning or awaiting the Task, it never got created.
+                    hash.ComputeHashAsync(stream);
+                });
 
                 // If SelfCancelingStream.Read (or ReadAsync) was called it will trip cancellation,
                 // so use that as a signal for whether or not the stream was ever read from.
@@ -111,7 +111,8 @@ namespace System.Security.Cryptography.Tests
                     {
                         // Not returning or awaiting the Task, it never got created.
                         hash.ComputeHashAsync(null);
-                    });
+                    }
+                );
             }
         }
 
@@ -119,13 +120,14 @@ namespace System.Security.Cryptography.Tests
         {
             private long _sum;
 
-            public SummingTestHashAlgorithm() => HashSizeValue = sizeof(long)*8;
+            public SummingTestHashAlgorithm() => HashSizeValue = sizeof(long) * 8;
 
             public override void Initialize() => _sum = 0;
 
             protected override void HashCore(byte[] array, int ibStart, int cbSize)
             {
-                for (int i = ibStart; i < ibStart + cbSize; i++) _sum += array[i];
+                for (int i = ibStart; i < ibStart + cbSize; i++)
+                    _sum += array[i];
             }
 
             protected override byte[] HashFinal() => BitConverter.GetBytes(_sum);

@@ -36,7 +36,10 @@ namespace System.Formats.Tar.Tests
 
         [Fact]
         public void Read_Archive_FolderSymbolicLink_Folder_Subfolder_File() =>
-            Read_Archive_FolderSymbolicLink_Folder_Subfolder_File_Internal(TarEntryFormat.Pax, TestTarFormat.pax_gea);
+            Read_Archive_FolderSymbolicLink_Folder_Subfolder_File_Internal(
+                TarEntryFormat.Pax,
+                TestTarFormat.pax_gea
+            );
 
         [Fact]
         public void Read_Archive_Many_Small_Files() =>
@@ -44,7 +47,10 @@ namespace System.Formats.Tar.Tests
 
         [Fact]
         public void Read_Archive_LongPath_Splitable_Under255() =>
-            Read_Archive_LongPath_Splitable_Under255_Internal(TarEntryFormat.Pax, TestTarFormat.pax_gea);
+            Read_Archive_LongPath_Splitable_Under255_Internal(
+                TarEntryFormat.Pax,
+                TestTarFormat.pax_gea
+            );
 
         [Fact]
         public void Read_Archive_SpecialFiles() =>
@@ -56,7 +62,10 @@ namespace System.Formats.Tar.Tests
 
         [Fact]
         public void Read_Archive_LongFileName_Over100_Under255() =>
-            Read_Archive_LongFileName_Over100_Under255_Internal(TarEntryFormat.Pax, TestTarFormat.pax_gea);
+            Read_Archive_LongFileName_Over100_Under255_Internal(
+                TarEntryFormat.Pax,
+                TestTarFormat.pax_gea
+            );
 
         [Fact]
         public void Read_Archive_LongPath_Over255() =>
@@ -70,7 +79,9 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, leaveOpen: true))
             {
-                PaxGlobalExtendedAttributesTarEntry gea = new PaxGlobalExtendedAttributesTarEntry(new Dictionary<string, string>());
+                PaxGlobalExtendedAttributesTarEntry gea = new PaxGlobalExtendedAttributesTarEntry(
+                    new Dictionary<string, string>()
+                );
                 writer.WriteEntry(gea);
             }
 
@@ -79,7 +90,9 @@ namespace System.Formats.Tar.Tests
             using (TarReader reader = new TarReader(archiveStream, leaveOpen: false))
             {
                 TarEntry entry = reader.GetNextEntry();
-                Assert.Throws<InvalidOperationException>(() => entry.ExtractToFile(Path.Join(root.Path, "file"), overwrite: true));
+                Assert.Throws<InvalidOperationException>(() =>
+                    entry.ExtractToFile(Path.Join(root.Path, "file"), overwrite: true)
+                );
             }
         }
 
@@ -90,15 +103,23 @@ namespace System.Formats.Tar.Tests
             var stream = new MemoryStream();
             using (var writer = new TarWriter(stream, leaveOpen: true))
             {
-                writer.WriteEntry(new PaxGlobalExtendedAttributesTarEntry(new Dictionary<string, string>() { { key, value } }));
+                writer.WriteEntry(
+                    new PaxGlobalExtendedAttributesTarEntry(
+                        new Dictionary<string, string>() { { key, value } }
+                    )
+                );
             }
 
             stream.Position = 0;
             using (var reader = new TarReader(stream))
             {
-                PaxGlobalExtendedAttributesTarEntry entry = Assert.IsType<PaxGlobalExtendedAttributesTarEntry>(reader.GetNextEntry());
+                PaxGlobalExtendedAttributesTarEntry entry =
+                    Assert.IsType<PaxGlobalExtendedAttributesTarEntry>(reader.GetNextEntry());
                 Assert.Equal(1, entry.GlobalExtendedAttributes.Count);
-                Assert.Equal(KeyValuePair.Create(key, value), entry.GlobalExtendedAttributes.First());
+                Assert.Equal(
+                    KeyValuePair.Create(key, value),
+                    entry.GlobalExtendedAttributes.First()
+                );
                 Assert.Null(reader.GetNextEntry());
             }
         }

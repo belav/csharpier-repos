@@ -26,7 +26,10 @@ namespace System.Reflection.Emit
 
         public MethodImportAttributes Flags => _flags;
 
-        internal static DllImportData CreateDllImportData(CustomAttributeInfo attr, out bool preserveSig)
+        internal static DllImportData CreateDllImportData(
+            CustomAttributeInfo attr,
+            out bool preserveSig
+        )
         {
             string? moduleName = (string?)attr._ctorArgs[0];
             if (string.IsNullOrEmpty(moduleName))
@@ -49,11 +52,15 @@ namespace System.Reflection.Emit
                     case "CallingConvention":
                         importAttributes |= (CallingConvention)value switch
                         {
-                            CallingConvention.Cdecl => MethodImportAttributes.CallingConventionCDecl,
-                            CallingConvention.FastCall => MethodImportAttributes.CallingConventionFastCall,
-                            CallingConvention.StdCall => MethodImportAttributes.CallingConventionStdCall,
-                            CallingConvention.ThisCall => MethodImportAttributes.CallingConventionThisCall,
-                            _ => MethodImportAttributes.CallingConventionWinApi // Roslyn defaults with this
+                            CallingConvention.Cdecl =>
+                                MethodImportAttributes.CallingConventionCDecl,
+                            CallingConvention.FastCall =>
+                                MethodImportAttributes.CallingConventionFastCall,
+                            CallingConvention.StdCall =>
+                                MethodImportAttributes.CallingConventionStdCall,
+                            CallingConvention.ThisCall =>
+                                MethodImportAttributes.CallingConventionThisCall,
+                            _ => MethodImportAttributes.CallingConventionWinApi, // Roslyn defaults with this
                         };
                         break;
                     case "CharSet":
@@ -62,7 +69,7 @@ namespace System.Reflection.Emit
                             CharSet.Ansi => MethodImportAttributes.CharSetAnsi,
                             CharSet.Auto => MethodImportAttributes.CharSetAuto,
                             CharSet.Unicode => MethodImportAttributes.CharSetUnicode,
-                            _ => MethodImportAttributes.CharSetAuto
+                            _ => MethodImportAttributes.CharSetAuto,
                         };
                         break;
                     case "EntryPoint":
@@ -110,10 +117,10 @@ namespace System.Reflection.Emit
     internal sealed class MarshallingData
     {
         private UnmanagedType _marshalType;
-        private int _marshalArrayElementType;      // safe array: VarEnum; array: UnmanagedType
-        private int _marshalArrayElementCount;     // number of elements in an array, length of a string, or Unspecified
-        private int _marshalParameterIndex;        // index of parameter that specifies array size (short) or IID (int), or Unspecified
-        private object? _marshalTypeNameOrSymbol;  // custom marshaller: string or Type; safe array: element type
+        private int _marshalArrayElementType; // safe array: VarEnum; array: UnmanagedType
+        private int _marshalArrayElementCount; // number of elements in an array, length of a string, or Unspecified
+        private int _marshalParameterIndex; // index of parameter that specifies array size (short) or IID (int), or Unspecified
+        private object? _marshalTypeNameOrSymbol; // custom marshaller: string or Type; safe array: element type
         private string? _marshalCookie;
 
         internal const int Invalid = -1;
@@ -124,7 +131,8 @@ namespace System.Reflection.Emit
         // The logic imported from https://github.com/dotnet/roslyn/blob/main/src/Compilers/Core/Portable/PEWriter/MetadataWriter.cs#L3543
         internal BlobBuilder SerializeMarshallingData()
         {
-            BlobBuilder writer = new BlobBuilder(); ;
+            BlobBuilder writer = new BlobBuilder();
+            ;
             writer.WriteCompressedInteger((int)_marshalType);
             switch (_marshalType)
             {
@@ -218,15 +226,23 @@ namespace System.Reflection.Emit
 
         internal void SetMarshalAsComInterface(UnmanagedType unmanagedType, int? parameterIndex)
         {
-            Debug.Assert(parameterIndex == null || parameterIndex >= 0 && parameterIndex <= MaxMarshalInteger);
+            Debug.Assert(
+                parameterIndex == null || parameterIndex >= 0 && parameterIndex <= MaxMarshalInteger
+            );
 
             _marshalType = unmanagedType;
             _marshalParameterIndex = parameterIndex ?? Invalid;
         }
 
-        internal void SetMarshalAsArray(UnmanagedType? elementType, int? elementCount, short? parameterIndex)
+        internal void SetMarshalAsArray(
+            UnmanagedType? elementType,
+            int? elementCount,
+            short? parameterIndex
+        )
         {
-            Debug.Assert(elementCount == null || elementCount >= 0 && elementCount <= MaxMarshalInteger);
+            Debug.Assert(
+                elementCount == null || elementCount >= 0 && elementCount <= MaxMarshalInteger
+            );
             Debug.Assert(parameterIndex == null || parameterIndex >= 0);
 
             _marshalType = UnmanagedType.LPArray;
@@ -237,8 +253,12 @@ namespace System.Reflection.Emit
 
         internal void SetMarshalAsFixedArray(UnmanagedType? elementType, int? elementCount)
         {
-            Debug.Assert(elementCount == null || elementCount >= 0 && elementCount <= MaxMarshalInteger);
-            Debug.Assert(elementType == null || elementType >= 0 && (int)elementType <= MaxMarshalInteger);
+            Debug.Assert(
+                elementCount == null || elementCount >= 0 && elementCount <= MaxMarshalInteger
+            );
+            Debug.Assert(
+                elementType == null || elementType >= 0 && (int)elementType <= MaxMarshalInteger
+            );
 
             _marshalType = UnmanagedType.ByValArray;
             _marshalArrayElementType = (int)(elementType ?? InvalidUnmanagedType);
@@ -247,7 +267,9 @@ namespace System.Reflection.Emit
 
         internal void SetMarshalAsSafeArray(VarEnum? elementType, Type? type)
         {
-            Debug.Assert(elementType == null || elementType >= 0 && (int)elementType <= MaxMarshalInteger);
+            Debug.Assert(
+                elementType == null || elementType >= 0 && (int)elementType <= MaxMarshalInteger
+            );
 
             _marshalType = UnmanagedType.SafeArray;
             _marshalArrayElementType = (int)(elementType ?? InvalidVariantType);
@@ -269,9 +291,16 @@ namespace System.Reflection.Emit
         }
 
         // The logic imported from https://github.com/dotnet/roslyn/blob/main/src/Compilers/Core/Portable/Symbols/Attributes/MarshalAsAttributeDecoder.cs
-        internal static MarshallingData CreateMarshallingData(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute, bool isField)
+        internal static MarshallingData CreateMarshallingData(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute,
+            bool isField
+        )
         {
-            CustomAttributeInfo attributeInfo = CustomAttributeInfo.DecodeCustomAttribute(con, binaryAttribute);
+            CustomAttributeInfo attributeInfo = CustomAttributeInfo.DecodeCustomAttribute(
+                con,
+                binaryAttribute
+            );
             MarshallingData info = new();
             UnmanagedType unmanagedType;
 
@@ -287,32 +316,69 @@ namespace System.Reflection.Emit
             switch (unmanagedType)
             {
                 case UnmanagedType.CustomMarshaler:
-                    DecodeMarshalAsCustom(attributeInfo._namedParamNames, attributeInfo._namedParamValues, info);
+                    DecodeMarshalAsCustom(
+                        attributeInfo._namedParamNames,
+                        attributeInfo._namedParamValues,
+                        info
+                    );
                     break;
                 case UnmanagedType.Interface:
                 case UnmanagedType.IDispatch:
                 case UnmanagedType.IUnknown:
-                    DecodeMarshalAsComInterface(attributeInfo._namedParamNames, attributeInfo._namedParamValues, unmanagedType, info);
+                    DecodeMarshalAsComInterface(
+                        attributeInfo._namedParamNames,
+                        attributeInfo._namedParamValues,
+                        unmanagedType,
+                        info
+                    );
                     break;
                 case UnmanagedType.LPArray:
-                    DecodeMarshalAsArray(attributeInfo._namedParamNames, attributeInfo._namedParamValues, isFixed: false, info);
+                    DecodeMarshalAsArray(
+                        attributeInfo._namedParamNames,
+                        attributeInfo._namedParamValues,
+                        isFixed: false,
+                        info
+                    );
                     break;
                 case UnmanagedType.ByValArray:
                     if (!isField)
                     {
-                        throw new NotSupportedException(SR.Format(SR.NotSupported_UnmanagedTypeOnlyForFields, nameof(UnmanagedType.ByValArray)));
+                        throw new NotSupportedException(
+                            SR.Format(
+                                SR.NotSupported_UnmanagedTypeOnlyForFields,
+                                nameof(UnmanagedType.ByValArray)
+                            )
+                        );
                     }
-                    DecodeMarshalAsArray(attributeInfo._namedParamNames, attributeInfo._namedParamValues, isFixed: true, info);
+                    DecodeMarshalAsArray(
+                        attributeInfo._namedParamNames,
+                        attributeInfo._namedParamValues,
+                        isFixed: true,
+                        info
+                    );
                     break;
                 case UnmanagedType.SafeArray:
-                    DecodeMarshalAsSafeArray(attributeInfo._namedParamNames, attributeInfo._namedParamValues, info);
+                    DecodeMarshalAsSafeArray(
+                        attributeInfo._namedParamNames,
+                        attributeInfo._namedParamValues,
+                        info
+                    );
                     break;
                 case UnmanagedType.ByValTStr:
                     if (!isField)
                     {
-                        throw new NotSupportedException(SR.Format(SR.NotSupported_UnmanagedTypeOnlyForFields, nameof(UnmanagedType.ByValArray)));
+                        throw new NotSupportedException(
+                            SR.Format(
+                                SR.NotSupported_UnmanagedTypeOnlyForFields,
+                                nameof(UnmanagedType.ByValArray)
+                            )
+                        );
                     }
-                    DecodeMarshalAsFixedString(attributeInfo._namedParamNames, attributeInfo._namedParamValues, info);
+                    DecodeMarshalAsFixedString(
+                        attributeInfo._namedParamNames,
+                        attributeInfo._namedParamValues,
+                        info
+                    );
                     break;
 #pragma warning disable CS0618 // Type or member is obsolete
                 case UnmanagedType.VBByRefStr:
@@ -323,7 +389,10 @@ namespace System.Reflection.Emit
                 default:
                     if ((int)unmanagedType < 0 || (int)unmanagedType > MaxMarshalInteger)
                     {
-                        throw new ArgumentException(SR.Argument_InvalidArgumentForAttribute, nameof(con));
+                        throw new ArgumentException(
+                            SR.Argument_InvalidArgumentForAttribute,
+                            nameof(con)
+                        );
                     }
                     else
                     {
@@ -336,7 +405,11 @@ namespace System.Reflection.Emit
             return info;
         }
 
-        private static void DecodeMarshalAsFixedString(string[] paramNames, object?[] values, MarshallingData info)
+        private static void DecodeMarshalAsFixedString(
+            string[] paramNames,
+            object?[] values,
+            MarshallingData info
+        )
         {
             int elementCount = -1;
 
@@ -349,21 +422,35 @@ namespace System.Reflection.Emit
                         break;
                     case "ArraySubType":
                     case "SizeParamIndex":
-                        throw new ArgumentException(SR.Format(SR.Argument_InvalidParameterForUnmanagedType, paramNames[i], "ByValTStr"), "binaryAttribute");
-                        // other parameters ignored with no error
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Argument_InvalidParameterForUnmanagedType,
+                                paramNames[i],
+                                "ByValTStr"
+                            ),
+                            "binaryAttribute"
+                        );
+                    // other parameters ignored with no error
                 }
             }
 
             if (elementCount < 0)
             {
                 // SizeConst must be specified:
-                throw new ArgumentException(SR.Argument_SizeConstMustBeSpecified, "binaryAttribute");
+                throw new ArgumentException(
+                    SR.Argument_SizeConstMustBeSpecified,
+                    "binaryAttribute"
+                );
             }
 
             info.SetMarshalAsFixedString(elementCount);
         }
 
-        private static void DecodeMarshalAsSafeArray(string[] paramNames, object?[] values, MarshallingData info)
+        private static void DecodeMarshalAsSafeArray(
+            string[] paramNames,
+            object?[] values,
+            MarshallingData info
+        )
         {
             VarEnum? elementTypeVariant = null;
             Type? elementType = null;
@@ -383,8 +470,15 @@ namespace System.Reflection.Emit
                     case "ArraySubType":
                     case "SizeConst":
                     case "SizeParamIndex":
-                        throw new ArgumentException(SR.Format(SR.Argument_InvalidParameterForUnmanagedType, paramNames[i], "SafeArray"), "binaryAttribute");
-                        // other parameters ignored with no error
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Argument_InvalidParameterForUnmanagedType,
+                                paramNames[i],
+                                "SafeArray"
+                            ),
+                            "binaryAttribute"
+                        );
+                    // other parameters ignored with no error
                 }
             }
 
@@ -399,7 +493,14 @@ namespace System.Reflection.Emit
                 default:
                     if (elementTypeVariant != null && symbolIndex >= 0)
                     {
-                        throw new ArgumentException(SR.Format(SR.Argument_InvalidParameterForUnmanagedType, elementType, "SafeArray"), "binaryAttribute");
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Argument_InvalidParameterForUnmanagedType,
+                                elementType,
+                                "SafeArray"
+                            ),
+                            "binaryAttribute"
+                        );
                     }
                     else
                     {
@@ -412,7 +513,12 @@ namespace System.Reflection.Emit
             info.SetMarshalAsSafeArray(elementTypeVariant, elementType);
         }
 
-        private static void DecodeMarshalAsArray(string[] paramNames, object?[] values, bool isFixed, MarshallingData info)
+        private static void DecodeMarshalAsArray(
+            string[] paramNames,
+            object?[] values,
+            bool isFixed,
+            MarshallingData info
+        )
         {
             UnmanagedType? elementType = null;
             int? elementCount = isFixed ? 1 : null;
@@ -436,9 +542,15 @@ namespace System.Reflection.Emit
                         parameterIndex = (short?)values[i];
                         break;
                     case "SafeArraySubType":
-                        throw new ArgumentException(SR.Format(SR.Argument_InvalidParameterForUnmanagedType,
-                            paramNames[i], isFixed ? "ByValArray" : "LPArray"), "binaryAttribute");
-                        // other parameters ignored with no error
+                        throw new ArgumentException(
+                            SR.Format(
+                                SR.Argument_InvalidParameterForUnmanagedType,
+                                paramNames[i],
+                                isFixed ? "ByValArray" : "LPArray"
+                            ),
+                            "binaryAttribute"
+                        );
+                    // other parameters ignored with no error
                 }
             }
 
@@ -452,7 +564,12 @@ namespace System.Reflection.Emit
             }
         }
 
-        private static void DecodeMarshalAsComInterface(string[] paramNames, object?[] values, UnmanagedType unmanagedType, MarshallingData info)
+        private static void DecodeMarshalAsComInterface(
+            string[] paramNames,
+            object?[] values,
+            UnmanagedType unmanagedType,
+            MarshallingData info
+        )
         {
             int? parameterIndex = null;
             for (int i = 0; i < paramNames.Length; i++)
@@ -467,7 +584,11 @@ namespace System.Reflection.Emit
             info.SetMarshalAsComInterface(unmanagedType, parameterIndex);
         }
 
-        private static void DecodeMarshalAsCustom(string[] paramNames, object?[] values, MarshallingData info)
+        private static void DecodeMarshalAsCustom(
+            string[] paramNames,
+            object?[] values,
+            MarshallingData info
+        )
         {
             string? cookie = null;
             Type? type = null;
@@ -485,7 +606,7 @@ namespace System.Reflection.Emit
                     case "MarshalCookie":
                         cookie = (string?)values[i];
                         break;
-                        // other parameters ignored with no error
+                    // other parameters ignored with no error
                 }
             }
 

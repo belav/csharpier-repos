@@ -28,9 +28,13 @@ public class NewtonsoftJsonHubProtocolTests : JsonHubProtocolTestsBase
         {
             PayloadSerializerSettings = new JsonSerializerSettings()
             {
-                NullValueHandling = ignoreNullValues ? NullValueHandling.Ignore : NullValueHandling.Include,
-                ContractResolver = useCamelCase ? new CamelCasePropertyNamesContractResolver() : new DefaultContractResolver()
-            }
+                NullValueHandling = ignoreNullValues
+                    ? NullValueHandling.Ignore
+                    : NullValueHandling.Include,
+                ContractResolver = useCamelCase
+                    ? new CamelCasePropertyNamesContractResolver()
+                    : new DefaultContractResolver(),
+            },
         };
 
         return new NewtonsoftJsonHubProtocol(Options.Create(protocolOptions));
@@ -40,16 +44,24 @@ public class NewtonsoftJsonHubProtocolTests : JsonHubProtocolTestsBase
     [InlineData("", "Unexpected end when reading JSON.")]
     [InlineData("42", "Unexpected JSON Token Type 'Integer'. Expected a JSON Object.")]
     [InlineData("{\"type\":\"foo\"}", "Expected 'type' to be of type Integer.")]
-    [InlineData("{\"type\":3,\"invocationId\":\"42\",\"result\":true", "Unexpected end when reading JSON.")]
+    [InlineData(
+        "{\"type\":3,\"invocationId\":\"42\",\"result\":true",
+        "Unexpected end when reading JSON."
+    )]
     [InlineData("{\"type\":8,\"sequenceId\":true}", "Expected 'sequenceId' to be of type Integer.")]
-    [InlineData("{\"type\":9,\"sequenceId\":\"value\"}", "Expected 'sequenceId' to be of type Integer.")]
+    [InlineData(
+        "{\"type\":9,\"sequenceId\":\"value\"}",
+        "Expected 'sequenceId' to be of type Integer."
+    )]
     public void CustomInvalidMessages(string input, string expectedMessage)
     {
         input = Frame(input);
 
         var binder = new TestBinder(Array.Empty<Type>(), typeof(object));
         var data = new ReadOnlySequence<byte>(Encoding.UTF8.GetBytes(input));
-        var ex = Assert.Throws<InvalidDataException>(() => JsonHubProtocol.TryParseMessage(ref data, binder, out var _));
+        var ex = Assert.Throws<InvalidDataException>(() =>
+            JsonHubProtocol.TryParseMessage(ref data, binder, out var _)
+        );
         Assert.Equal(expectedMessage, ex.Message);
     }
 
@@ -93,17 +105,51 @@ public class NewtonsoftJsonHubProtocolTests : JsonHubProtocolTestsBase
         Assert.Equal(testData.Message, message, TestHubMessageEqualityComparer.Instance);
     }
 
-    public static IDictionary<string, JsonProtocolTestData> CustomProtocolTestData => new[]
-    {
-            new JsonProtocolTestData("InvocationMessage_HasFloatArgument", new InvocationMessage(null, "Target", new object[] { 1, "Foo", 2.0f }), true, true, "{\"type\":1,\"target\":\"Target\",\"arguments\":[1,\"Foo\",2.0]}"),
-            new JsonProtocolTestData("InvocationMessage_HasHeaders", AddHeaders(TestHeaders, new InvocationMessage("123", "Target", new object[] { 1, "Foo", 2.0f })), true, true, "{\"type\":1," + SerializedHeaders + ",\"invocationId\":\"123\",\"target\":\"Target\",\"arguments\":[1,\"Foo\",2.0]}"),
-
-            new JsonProtocolTestData("StreamItemMessage_HasFloatItem", new StreamItemMessage("123", 2.0f), true, true, "{\"type\":2,\"invocationId\":\"123\",\"item\":2.0}"),
-
-            new JsonProtocolTestData("CompletionMessage_HasFloatResult", CompletionMessage.WithResult("123", 2.0f), true, true, "{\"type\":3,\"invocationId\":\"123\",\"result\":2.0}"),
-
-            new JsonProtocolTestData("StreamInvocationMessage_HasFloatArgument", new StreamInvocationMessage("123", "Target", new object[] { 1, "Foo", 2.0f }), true, true, "{\"type\":4,\"invocationId\":\"123\",\"target\":\"Target\",\"arguments\":[1,\"Foo\",2.0]}"),
+    public static IDictionary<string, JsonProtocolTestData> CustomProtocolTestData =>
+        new[]
+        {
+            new JsonProtocolTestData(
+                "InvocationMessage_HasFloatArgument",
+                new InvocationMessage(null, "Target", new object[] { 1, "Foo", 2.0f }),
+                true,
+                true,
+                "{\"type\":1,\"target\":\"Target\",\"arguments\":[1,\"Foo\",2.0]}"
+            ),
+            new JsonProtocolTestData(
+                "InvocationMessage_HasHeaders",
+                AddHeaders(
+                    TestHeaders,
+                    new InvocationMessage("123", "Target", new object[] { 1, "Foo", 2.0f })
+                ),
+                true,
+                true,
+                "{\"type\":1,"
+                    + SerializedHeaders
+                    + ",\"invocationId\":\"123\",\"target\":\"Target\",\"arguments\":[1,\"Foo\",2.0]}"
+            ),
+            new JsonProtocolTestData(
+                "StreamItemMessage_HasFloatItem",
+                new StreamItemMessage("123", 2.0f),
+                true,
+                true,
+                "{\"type\":2,\"invocationId\":\"123\",\"item\":2.0}"
+            ),
+            new JsonProtocolTestData(
+                "CompletionMessage_HasFloatResult",
+                CompletionMessage.WithResult("123", 2.0f),
+                true,
+                true,
+                "{\"type\":3,\"invocationId\":\"123\",\"result\":2.0}"
+            ),
+            new JsonProtocolTestData(
+                "StreamInvocationMessage_HasFloatArgument",
+                new StreamInvocationMessage("123", "Target", new object[] { 1, "Foo", 2.0f }),
+                true,
+                true,
+                "{\"type\":4,\"invocationId\":\"123\",\"target\":\"Target\",\"arguments\":[1,\"Foo\",2.0]}"
+            ),
         }.ToDictionary(t => t.Name);
 
-    public static IEnumerable<object[]> CustomProtocolTestDataNames => CustomProtocolTestData.Keys.Select(name => new object[] { name });
+    public static IEnumerable<object[]> CustomProtocolTestDataNames =>
+        CustomProtocolTestData.Keys.Select(name => new object[] { name });
 }

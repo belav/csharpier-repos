@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseCompoundAssignmentDiagnosticAnalyzer,
-        CSharpUseCompoundAssignmentCodeFixProvider>;
+        CSharpUseCompoundAssignmentCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseCompoundAssignment)]
     public class UseCompoundAssignmentTests
@@ -23,7 +24,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         [Fact]
         public async Task TestAddExpression()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -31,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a + 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -39,13 +42,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestSubtractExpression()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -53,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a - 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -61,13 +67,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a -= 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestMultiplyExpression()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -75,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a * 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -83,13 +92,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a *= 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestDivideExpression()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -97,7 +108,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a / 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -105,13 +117,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a /= 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestModuloExpression()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -119,7 +133,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a % 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -127,13 +142,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a %= 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestBitwiseAndExpression()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -141,7 +158,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a & 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -149,13 +167,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a &= 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestExclusiveOrExpression()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -163,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a ^ 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -171,13 +192,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a ^= 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestBitwiseOrExpression()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -185,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a | 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -193,13 +217,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a |= 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestLeftShiftExpression()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -207,7 +233,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a << 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -215,13 +242,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a <<= 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestRightShiftExpression()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -229,7 +258,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a >> 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -237,7 +267,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a >>= 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -263,7 +294,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                     """,
-                LanguageVersion = LanguageVersion.CSharp8
+                LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
 
@@ -284,7 +315,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp7_3
+                LanguageVersion = LanguageVersion.CSharp7_3,
             }.RunAsync();
         }
 
@@ -306,14 +337,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp8
+                LanguageVersion = LanguageVersion.CSharp8,
             }.RunAsync();
         }
 
         [Fact]
         public async Task TestField()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     int a;
@@ -323,7 +355,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a + 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     int a;
@@ -333,13 +366,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFieldWithThis()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     int a;
@@ -349,7 +384,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         this.a [|=|] this.a + 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     int a;
@@ -359,13 +395,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         this.a += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestTriviaInsensitive()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     int a;
@@ -375,7 +413,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         this  .  /*trivia*/ a [|=|] this /*comment*/ .a + 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     int a;
@@ -385,13 +424,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         this  .  /*trivia*/ a += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestStaticFieldThroughType()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     static int a;
@@ -401,7 +442,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         C.a [|=|] C.a + 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     static int a;
@@ -411,13 +453,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         C.a += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestStaticFieldThroughNamespaceAndType()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 namespace NS
                 {
                     public class C
@@ -430,7 +474,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 namespace NS
                 {
                     public class C
@@ -443,13 +488,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestParenthesized()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     int a;
@@ -459,7 +506,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         (a) [|=|] (a) + 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     int a;
@@ -469,13 +517,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         (a) += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestThroughBase()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     public int a;
@@ -488,7 +538,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         base.a [|=|] base.a + 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     public int a;
@@ -501,13 +552,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         base.a += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestMultiAccess()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     public int a;
@@ -522,7 +575,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         this.c.a [|=|] this.c.a + 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     public int a;
@@ -537,13 +591,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         this.c.a += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestOnTopLevelProp1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     int a { get; set; }
@@ -553,7 +609,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a + 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     int a { get; set; }
@@ -563,13 +620,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestOnTopLevelProp2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     int a { get; set; }
@@ -579,7 +638,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         this.a [|=|] this.a + 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     int a { get; set; }
@@ -589,13 +649,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         this.a += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestOnTopLevelProp3()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     int a { get; set; }
@@ -605,7 +667,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         (this.a) [|=|] (this.a) + 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     int a { get; set; }
@@ -615,7 +678,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         (this.a) += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -761,7 +825,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35870")]
         public async Task TestRightExpressionOnNextLine()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -770,7 +835,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                             10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -778,13 +844,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35870")]
         public async Task TestRightExpressionSeparatedWithSeveralLines()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -794,7 +862,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                             10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -802,13 +871,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestTrivia()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -817,7 +888,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a + 10; // after
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -826,13 +898,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a += 10; // after
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestTrivia2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -840,7 +914,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a /*mid1*/ [|=|] /*mid2*/ a + 10;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -848,13 +923,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a /*mid1*/ += /*mid2*/ 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a, int b)
@@ -863,7 +940,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         b [|=|] b - a;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a, int b)
@@ -872,13 +950,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         b -= a;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNestedAssignment()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a, int b)
@@ -886,7 +966,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         b = (a [|=|] a + 10);
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a, int b)
@@ -894,7 +975,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         b = (a += 10);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/33382")]
@@ -960,14 +1042,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                 TestCode = code,
                 FixedCode = code,
                 LanguageVersion = LanguageVersion.CSharp9,
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net60
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net60,
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38137")]
         public async Task TestParenthesizedExpression()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -975,7 +1058,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] (a + 10);
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -983,13 +1067,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a += 10;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38054")]
         public async Task TestIncrement()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -997,7 +1083,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a + 1;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -1005,13 +1092,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a++;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38054")]
         public async Task TestDecrement()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -1019,7 +1108,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a - 1;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -1027,13 +1117,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a--;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38054")]
         public async Task TestMinusIncrement()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int a)
@@ -1041,7 +1133,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a + (-1);
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int a)
@@ -1049,13 +1142,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a--;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38054")]
         public async Task TestIncrementDouble()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(double a)
@@ -1063,7 +1158,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a + 1.0;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(double a)
@@ -1071,13 +1167,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a++;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38054")]
         public async Task TestIncrementNotOnString()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(string a)
@@ -1085,7 +1183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a + "1";
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(string a)
@@ -1093,13 +1192,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a += "1";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38054")]
         public async Task TestIncrementChar()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(char a)
@@ -1107,7 +1208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] {|CS0266:a + 1|};
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(char a)
@@ -1115,13 +1217,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a++;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38054")]
         public async Task TestIncrementEnum()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public enum E {}
                 public class C
                 {
@@ -1130,7 +1234,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a + 1;
                     }
                 }
-                """, """
+                """,
+                """
                 public enum E {}
                 public class C
                 {
@@ -1139,13 +1244,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a++;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38054")]
         public async Task TestIncrementDecimal()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(decimal a)
@@ -1153,7 +1260,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a [|=|] a + 1.0m;
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(decimal a)
@@ -1161,7 +1269,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         a++;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/38054")]
@@ -1192,7 +1301,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                     """,
-                CompilerDiagnostics = CompilerDiagnostics.None
+                CompilerDiagnostics = CompilerDiagnostics.None,
             }.RunAsync();
         }
 
@@ -1224,14 +1333,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                     """,
-                CompilerDiagnostics = CompilerDiagnostics.None
+                CompilerDiagnostics = CompilerDiagnostics.None,
             }.RunAsync();
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38054")]
         public async Task TestIncrementLoopVariable()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M()
@@ -1241,7 +1351,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M()
@@ -1251,13 +1362,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/53969")]
         public async Task TestIncrementInExpressionContext()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 public class C
                 {
                     void M(int i)
@@ -1265,7 +1378,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         M(i [|=|] i + 1);
                     }
                 }
-                """, """
+                """,
+                """
                 public class C
                 {
                     void M(int i)
@@ -1273,7 +1387,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         M(++i);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/53969")]
@@ -1285,7 +1400,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             var before = expressionContext.Replace("$$", "i [|=|] i + 1");
             var after = expressionContext.Replace("$$", "++i");
-            await VerifyCS.VerifyCodeFixAsync($$"""
+            await VerifyCS.VerifyCodeFixAsync(
+                $$"""
                 public class C
                 {
                     void M(int i)
@@ -1293,7 +1409,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         {{before}}
                     }
                 }
-                """, $$"""
+                """,
+                $$"""
                 public class C
                 {
                     void M(int i)
@@ -1301,7 +1418,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         {{after}}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/53969")]
@@ -1312,7 +1430,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
         {
             var before = expressionContext.Replace("$$", "i [|=|] i + 1");
             var after = expressionContext.Replace("$$", "++i");
-            await VerifyCS.VerifyCodeFixAsync($$"""
+            await VerifyCS.VerifyCodeFixAsync(
+                $$"""
                 public class C
                 {
                     int M(int i)
@@ -1320,7 +1439,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         {{before}}
                     }
                 }
-                """, $$"""
+                """,
+                $$"""
                 public class C
                 {
                     int M(int i)
@@ -1328,22 +1448,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         {{after}}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/53969")]
-        [InlineData(
-            "/* Before */ i [|=|] i + 1; /* After */",
-            "/* Before */ i++; /* After */")]
+        [InlineData("/* Before */ i [|=|] i + 1; /* After */", "/* Before */ i++; /* After */")]
         [InlineData(
             "M( /* Before */ i [|=|] i + 1 /* After */ );",
-            "M( /* Before */ ++i /* After */ );")]
+            "M( /* Before */ ++i /* After */ );"
+        )]
         [InlineData(
             "M( /* Before */ i [|=|] i - 1 /* After */ );",
-            "M( /* Before */ --i /* After */ );")]
+            "M( /* Before */ --i /* After */ );"
+        )]
         public async Task TestTriviaPreserved(string before, string after)
         {
-            await VerifyCS.VerifyCodeFixAsync($$"""
+            await VerifyCS.VerifyCodeFixAsync(
+                $$"""
                 public class C
                 {
                     void M(int i)
@@ -1351,7 +1473,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         {{before}}
                     }
                 }
-                """, $$"""
+                """,
+                $$"""
                 public class C
                 {
                     void M(int i)
@@ -1359,13 +1482,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         {{after}}
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70651")]
         public async Task TestIncrementWithUserDefinedOperators_IncrementOperatorNotDefined()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     int data;
@@ -1386,34 +1511,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         c [|=|] c + 1;
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int data;
-                
+
                     public C(int data)
                     {
                         this.data = data;
                     }
-                
+
                     public static C operator +(C left, int right)
                     {
                         return new C(left.data + right);
                     }
-                
+
                     void M()
                     {
                         var c = new C(0);
                         c += 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70651")]
         public async Task TestIncrementWithUserDefinedOperators_IncrementOperatorDefined()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     int data;
@@ -1439,16 +1567,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         c [|=|] c + 1;
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int data;
-                
+
                     public C(int data)
                     {
                         this.data = data;
                     }
-                
+
                     public static C operator +(C left, int right)
                     {
                         return new C(left.data + right);
@@ -1465,13 +1594,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         c++;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70651")]
         public async Task TestDecrementWithUserDefinedOperators_DecrementOperatorNotDefined()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     int data;
@@ -1492,34 +1623,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         c [|=|] c - 1;
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int data;
-                
+
                     public C(int data)
                     {
                         this.data = data;
                     }
-                
+
                     public static C operator -(C left, int right)
                     {
                         return new C(left.data - right);
                     }
-                
+
                     void M()
                     {
                         var c = new C(0);
                         c -= 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/70651")]
         public async Task TestDecrementWithUserDefinedOperators_DecrementOperatorDefined()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     int data;
@@ -1545,16 +1679,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         c [|=|] c - 1;
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     int data;
-                
+
                     public C(int data)
                     {
                         this.data = data;
                     }
-                
+
                     public static C operator -(C left, int right)
                     {
                         return new C(left.data - right);
@@ -1571,7 +1706,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseCompoundAssignment
                         c--;
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

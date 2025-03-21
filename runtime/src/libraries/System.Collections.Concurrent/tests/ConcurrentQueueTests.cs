@@ -11,12 +11,24 @@ namespace System.Collections.Concurrent.Tests
 {
     public class ConcurrentQueueTests : ProducerConsumerCollectionTests
     {
-        protected override IProducerConsumerCollection<T> CreateProducerConsumerCollection<T>() => new ConcurrentQueue<T>();
-        protected override IProducerConsumerCollection<int> CreateProducerConsumerCollection(IEnumerable<int> collection) => new ConcurrentQueue<int>(collection);
-        protected override bool IsEmpty(IProducerConsumerCollection<int> pcc) => ((ConcurrentQueue<int>)pcc).IsEmpty;
-        protected override bool TryPeek<T>(IProducerConsumerCollection<T> pcc, out T result) => ((ConcurrentQueue<T>)pcc).TryPeek(out result);
+        protected override IProducerConsumerCollection<T> CreateProducerConsumerCollection<T>() =>
+            new ConcurrentQueue<T>();
+
+        protected override IProducerConsumerCollection<int> CreateProducerConsumerCollection(
+            IEnumerable<int> collection
+        ) => new ConcurrentQueue<int>(collection);
+
+        protected override bool IsEmpty(IProducerConsumerCollection<int> pcc) =>
+            ((ConcurrentQueue<int>)pcc).IsEmpty;
+
+        protected override bool TryPeek<T>(IProducerConsumerCollection<T> pcc, out T result) =>
+            ((ConcurrentQueue<T>)pcc).TryPeek(out result);
+
         protected override bool ResetImplemented => false;
-        protected override IProducerConsumerCollection<int> CreateOracle(IEnumerable<int> collection) => new QueueOracle(collection);
+
+        protected override IProducerConsumerCollection<int> CreateOracle(
+            IEnumerable<int> collection
+        ) => new QueueOracle(collection);
 
         protected override string CopyToNoLengthParamName => null;
 
@@ -38,7 +50,8 @@ namespace System.Collections.Concurrent.Tests
                     {
                         Assert.Equal(lastReceived + 1, item);
                         lastReceived = item;
-                        if (item == items) break;
+                        if (item == items)
+                            break;
                     }
                     else
                     {
@@ -50,7 +63,8 @@ namespace System.Collections.Concurrent.Tests
             // Producer queues the expected number of items
             Task producer = Task.Run(() =>
             {
-                for (int i = 1; i <= items; i++) q.Enqueue(i);
+                for (int i = 1; i <= items; i++)
+                    q.Enqueue(i);
             });
 
             Task.WaitAll(producer, consumer);
@@ -76,7 +90,8 @@ namespace System.Collections.Concurrent.Tests
                         Assert.True(q.TryDequeue(out item));
                         Assert.Equal(lastReceived + 1, item);
                         lastReceived = item;
-                        if (item == items) break;
+                        if (item == items)
+                            break;
                     }
                 }
             });
@@ -84,17 +99,25 @@ namespace System.Collections.Concurrent.Tests
             // Producer queues the expected number of items
             Task producer = Task.Run(() =>
             {
-                for (int i = 1; i <= items; i++) q.Enqueue(i);
+                for (int i = 1; i <= items; i++)
+                    q.Enqueue(i);
             });
 
             Task.WaitAll(producer, consumer);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(1, 4, 1024)]
         [InlineData(4, 1, 1024)]
         [InlineData(3, 3, 1024)]
-        public void MultipleProducerConsumer_AllItemsTransferred(int producers, int consumers, int itemsPerProducer)
+        public void MultipleProducerConsumer_AllItemsTransferred(
+            int producers,
+            int consumers,
+            int itemsPerProducer
+        )
         {
             var cq = new ConcurrentQueue<int>();
             var tasks = new List<Task>();
@@ -105,29 +128,43 @@ namespace System.Collections.Concurrent.Tests
 
             for (int i = 0; i < consumers; i++)
             {
-                tasks.Add(Task.Factory.StartNew(() =>
-                {
-                    while (Volatile.Read(ref remainingItems) > 0)
-                    {
-                        int item;
-                        if (cq.TryDequeue(out item))
+                tasks.Add(
+                    Task.Factory.StartNew(
+                        () =>
                         {
-                            Interlocked.Add(ref sum, item);
-                            Interlocked.Decrement(ref remainingItems);
-                        }
-                    }
-                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default));
+                            while (Volatile.Read(ref remainingItems) > 0)
+                            {
+                                int item;
+                                if (cq.TryDequeue(out item))
+                                {
+                                    Interlocked.Add(ref sum, item);
+                                    Interlocked.Decrement(ref remainingItems);
+                                }
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
+                );
             }
 
             for (int i = 0; i < producers; i++)
             {
-                tasks.Add(Task.Factory.StartNew(() =>
-                {
-                    for (int item = 1; item <= itemsPerProducer; item++)
-                    {
-                        cq.Enqueue(item);
-                    }
-                }, CancellationToken.None, TaskCreationOptions.LongRunning, TaskScheduler.Default));
+                tasks.Add(
+                    Task.Factory.StartNew(
+                        () =>
+                        {
+                            for (int item = 1; item <= itemsPerProducer; item++)
+                            {
+                                cq.Enqueue(item);
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    )
+                );
             }
 
             Task.WaitAll(tasks.ToArray());
@@ -219,24 +256,28 @@ namespace System.Collections.Concurrent.Tests
 
             // Separated out into another method to ensure that even in debug
             // the JIT doesn't force anything to be kept alive for longer than we need.
-            var queue = ((Func<ConcurrentQueue<Finalizable>>)(() =>
-            {
-                var q = new ConcurrentQueue<Finalizable>();
+            var queue = (
+                (Func<ConcurrentQueue<Finalizable>>)(
+                    () =>
+                    {
+                        var q = new ConcurrentQueue<Finalizable>();
 
-                for (int i = 0; i < iterations; i++)
-                {
-                    mres[i] = new ManualResetEventSlim();
-                    q.Enqueue(new Finalizable(mres[i]));
-                }
+                        for (int i = 0; i < iterations; i++)
+                        {
+                            mres[i] = new ManualResetEventSlim();
+                            q.Enqueue(new Finalizable(mres[i]));
+                        }
 
-                for (int i = 0; i < iterations; i++)
-                {
-                    Finalizable temp;
-                    Assert.True(q.TryDequeue(out temp));
-                }
+                        for (int i = 0; i < iterations; i++)
+                        {
+                            Finalizable temp;
+                            Assert.True(q.TryDequeue(out temp));
+                        }
 
-                return q;
-            }))();
+                        return q;
+                    }
+                )
+            )();
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -259,17 +300,21 @@ namespace System.Collections.Concurrent.Tests
             }
 
             int dequeues = 0;
-            Parallel.For(0, Environment.ProcessorCount, i =>
-            {
-                while (!cq.IsEmpty)
+            Parallel.For(
+                0,
+                Environment.ProcessorCount,
+                i =>
                 {
-                    int item;
-                    if (cq.TryDequeue(out item))
+                    while (!cq.IsEmpty)
                     {
-                        Interlocked.Increment(ref dequeues);
+                        int item;
+                        if (cq.TryDequeue(out item))
+                        {
+                            Interlocked.Increment(ref dequeues);
+                        }
                     }
                 }
-            });
+            );
 
             Assert.Equal(0, cq.Count);
             Assert.True(cq.IsEmpty);
@@ -283,14 +328,18 @@ namespace System.Collections.Concurrent.Tests
             const int ItemsPerThread = 1000;
             int threads = Environment.ProcessorCount;
 
-            Parallel.For(0, threads, i =>
-            {
-                for (int item = 0; item < ItemsPerThread; item++)
+            Parallel.For(
+                0,
+                threads,
+                i =>
                 {
-                    cq.Enqueue(item + (i * ItemsPerThread));
-                    cq.GetEnumerator().Dispose();
+                    for (int item = 0; item < ItemsPerThread; item++)
+                    {
+                        cq.Enqueue(item + (i * ItemsPerThread));
+                        cq.GetEnumerator().Dispose();
+                    }
                 }
-            });
+            );
 
             Assert.Equal(ItemsPerThread * threads, cq.Count);
             Assert.Equal(Enumerable.Range(0, ItemsPerThread * threads), cq.OrderBy(i => i));
@@ -347,56 +396,66 @@ namespace System.Collections.Concurrent.Tests
                 using (IEnumerator<int> afterClear = q.GetEnumerator())
                 {
                     int count = 0;
-                    while (beforeClear.MoveNext()) count++;
+                    while (beforeClear.MoveNext())
+                        count++;
                     Assert.Equal(ExpectedCount, count);
 
                     count = 0;
-                    while (afterClear.MoveNext()) count++;
+                    while (afterClear.MoveNext())
+                        count++;
                     Assert.Equal(0, count);
                 }
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(1, 10)]
         [InlineData(3, 100)]
         [InlineData(8, 1000)]
         public void Concurrent_Clear_NoExceptions(int threadsCount, int itemsPerThread)
         {
             var q = new ConcurrentQueue<int>();
-            Task.WaitAll((from i in Enumerable.Range(0, threadsCount) select Task.Run(() =>
-            {
-                var random = new Random();
-                for (int j = 0; j < itemsPerThread; j++)
-                {
-                    switch (random.Next(7))
+            Task.WaitAll(
+                (
+                    from i in Enumerable.Range(0, threadsCount)
+                    select Task.Run(() =>
                     {
-                        case 0:
-                            int c = q.Count;
-                            break;
-                        case 1:
-                            bool e = q.IsEmpty;
-                            break;
-                        case 2:
-                            q.Enqueue(random.Next(int.MaxValue));
-                            break;
-                        case 3:
-                            q.ToArray();
-                            break;
-                        case 4:
-                            int d;
-                            q.TryDequeue(out d);
-                            break;
-                        case 5:
-                            int p;
-                            q.TryPeek(out p);
-                            break;
-                        case 6:
-                            q.Clear();
-                            break;
-                    }
-                }
-            })).ToArray());
+                        var random = new Random();
+                        for (int j = 0; j < itemsPerThread; j++)
+                        {
+                            switch (random.Next(7))
+                            {
+                                case 0:
+                                    int c = q.Count;
+                                    break;
+                                case 1:
+                                    bool e = q.IsEmpty;
+                                    break;
+                                case 2:
+                                    q.Enqueue(random.Next(int.MaxValue));
+                                    break;
+                                case 3:
+                                    q.ToArray();
+                                    break;
+                                case 4:
+                                    int d;
+                                    q.TryDequeue(out d);
+                                    break;
+                                case 5:
+                                    int p;
+                                    q.TryPeek(out p);
+                                    break;
+                                case 6:
+                                    q.Clear();
+                                    break;
+                            }
+                        }
+                    })
+                ).ToArray()
+            );
         }
 
         /// <summary>Sets an event when finalized.</summary>
@@ -404,23 +463,45 @@ namespace System.Collections.Concurrent.Tests
         {
             private ManualResetEventSlim _mres;
 
-            public Finalizable(ManualResetEventSlim mres) { _mres = mres; }
+            public Finalizable(ManualResetEventSlim mres)
+            {
+                _mres = mres;
+            }
 
-            ~Finalizable() { _mres.Set(); }
+            ~Finalizable()
+            {
+                _mres.Set();
+            }
         }
 
         protected sealed class QueueOracle : IProducerConsumerCollection<int>
         {
             private readonly Queue<int> _queue;
-            public QueueOracle(IEnumerable<int> collection) { _queue = new Queue<int>(collection); }
+
+            public QueueOracle(IEnumerable<int> collection)
+            {
+                _queue = new Queue<int>(collection);
+            }
+
             public int Count => _queue.Count;
             public bool IsSynchronized => false;
             public object SyncRoot => null;
-            public void CopyTo(Array array, int index) => ((ICollection)_queue).CopyTo(array, index);
+
+            public void CopyTo(Array array, int index) =>
+                ((ICollection)_queue).CopyTo(array, index);
+
             public void CopyTo(int[] array, int index) => _queue.CopyTo(array, index);
+
             public IEnumerator<int> GetEnumerator() => _queue.GetEnumerator();
+
             public int[] ToArray() => _queue.ToArray();
-            public bool TryAdd(int item) { _queue.Enqueue(item); return true; }
+
+            public bool TryAdd(int item)
+            {
+                _queue.Enqueue(item);
+                return true;
+            }
+
             public bool TryTake(out int item)
             {
                 if (_queue.Count > 0)
@@ -434,6 +515,7 @@ namespace System.Collections.Concurrent.Tests
                     return false;
                 }
             }
+
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }

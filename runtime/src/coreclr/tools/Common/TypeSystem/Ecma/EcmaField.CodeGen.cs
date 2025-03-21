@@ -9,7 +9,10 @@ namespace Internal.TypeSystem.Ecma
         {
             get
             {
-                return (GetFieldFlags(FieldFlags.AttributeMetadataCache | FieldFlags.Intrinsic) & FieldFlags.Intrinsic) != 0;
+                return (
+                        GetFieldFlags(FieldFlags.AttributeMetadataCache | FieldFlags.Intrinsic)
+                        & FieldFlags.Intrinsic
+                    ) != 0;
             }
         }
     }

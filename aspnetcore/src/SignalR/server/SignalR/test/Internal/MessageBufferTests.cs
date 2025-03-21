@@ -4,9 +4,9 @@
 using System.IO.Pipelines;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.SignalR.Internal;
 using Microsoft.AspNetCore.SignalR.Protocol;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Time.Testing;
 
@@ -21,7 +21,12 @@ public class MessageBufferTests
         var connection = new TestConnectionContext();
         var pipes = DuplexPipe.CreateConnectionPair(new PipeOptions(), new PipeOptions());
         connection.Transport = pipes.Transport;
-        using var messageBuffer = new MessageBuffer(connection, protocol, bufferLimit: 1, NullLogger.Instance);
+        using var messageBuffer = new MessageBuffer(
+            connection,
+            protocol,
+            bufferLimit: 1,
+            NullLogger.Instance
+        );
 
         for (var i = 0; i < 100; i++)
         {
@@ -30,7 +35,7 @@ public class MessageBufferTests
 
         var count = 0;
         while (count < 100)
-        { 
+        {
             var res = await pipes.Application.Input.ReadAsync().DefaultTimeout();
 
             var buffer = res.Buffer;
@@ -47,13 +52,27 @@ public class MessageBufferTests
     {
         var protocol = new JsonHubProtocol();
         var connection = new TestConnectionContext();
-        var pipes = DuplexPipe.CreateConnectionPair(new PipeOptions(), new PipeOptions(pauseWriterThreshold: 200000, resumeWriterThreshold: 100000));
+        var pipes = DuplexPipe.CreateConnectionPair(
+            new PipeOptions(),
+            new PipeOptions(pauseWriterThreshold: 200000, resumeWriterThreshold: 100000)
+        );
         connection.Transport = pipes.Transport;
-        using var messageBuffer = new MessageBuffer(connection, protocol, bufferLimit: 100_000, NullLogger.Instance);
+        using var messageBuffer = new MessageBuffer(
+            connection,
+            protocol,
+            bufferLimit: 100_000,
+            NullLogger.Instance
+        );
 
-        await messageBuffer.WriteAsync(new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[100000] })), default);
+        await messageBuffer.WriteAsync(
+            new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[100000] })),
+            default
+        );
 
-        var writeTask = messageBuffer.WriteAsync(new SerializedHubMessage(new StreamItemMessage("id", null)), default);
+        var writeTask = messageBuffer.WriteAsync(
+            new SerializedHubMessage(new StreamItemMessage("id", null)),
+            default
+        );
         Assert.False(writeTask.IsCompleted);
 
         var res = await pipes.Application.Input.ReadAsync();
@@ -87,12 +106,23 @@ public class MessageBufferTests
         var pipeOptions = new PipeOptions(pauseWriterThreshold: 100, resumeWriterThreshold: 50);
         var pipes = DuplexPipe.CreateConnectionPair(new PipeOptions(), pipeOptions);
         connection.Transport = pipes.Transport;
-        using var messageBuffer = new MessageBuffer(connection, protocol, bufferLimit: 100_000, NullLogger.Instance);
+        using var messageBuffer = new MessageBuffer(
+            connection,
+            protocol,
+            bufferLimit: 100_000,
+            NullLogger.Instance
+        );
 
-        await messageBuffer.WriteAsync(new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[40] })), default);
+        await messageBuffer.WriteAsync(
+            new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[40] })),
+            default
+        );
 
         // Write will hit pipe backpressure
-        var writeTask = messageBuffer.WriteAsync(new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[40] })), default);
+        var writeTask = messageBuffer.WriteAsync(
+            new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[40] })),
+            default
+        );
         Assert.False(writeTask.IsCompleted);
 
         DuplexPipe.UpdateConnectionPair(ref pipes, connection, pipeOptions);
@@ -127,7 +157,12 @@ public class MessageBufferTests
         var connection = new TestConnectionContext();
         var pipes = DuplexPipe.CreateConnectionPair(new PipeOptions(), new PipeOptions());
         connection.Transport = pipes.Transport;
-        using var messageBuffer = new MessageBuffer(connection, protocol, bufferLimit: 1000, NullLogger.Instance);
+        using var messageBuffer = new MessageBuffer(
+            connection,
+            protocol,
+            bufferLimit: 1000,
+            NullLogger.Instance
+        );
 
         await messageBuffer.WriteAsync(new StreamItemMessage("id", null), default);
 
@@ -176,7 +211,12 @@ public class MessageBufferTests
         var connection = new TestConnectionContext();
         var pipes = DuplexPipe.CreateConnectionPair(new PipeOptions(), new PipeOptions());
         connection.Transport = pipes.Transport;
-        using var messageBuffer = new MessageBuffer(connection, protocol, bufferLimit: 1000, NullLogger.Instance);
+        using var messageBuffer = new MessageBuffer(
+            connection,
+            protocol,
+            bufferLimit: 1000,
+            NullLogger.Instance
+        );
 
         await messageBuffer.WriteAsync(new StreamItemMessage("id", null), default);
 
@@ -220,7 +260,12 @@ public class MessageBufferTests
         var connection = new TestConnectionContext();
         var pipes = DuplexPipe.CreateConnectionPair(new PipeOptions(), new PipeOptions());
         connection.Transport = pipes.Transport;
-        using var messageBuffer = new MessageBuffer(connection, protocol, bufferLimit: 1000, NullLogger.Instance);
+        using var messageBuffer = new MessageBuffer(
+            connection,
+            protocol,
+            bufferLimit: 1000,
+            NullLogger.Instance
+        );
 
         DuplexPipe.UpdateConnectionPair(ref pipes, connection);
         await messageBuffer.ResendAsync(pipes.Transport.Output);
@@ -234,7 +279,9 @@ public class MessageBufferTests
 
         pipes.Application.Input.AdvanceTo(buffer.Start);
 
-        Assert.Throws<InvalidOperationException>(() => messageBuffer.ShouldProcessMessage(new SequenceMessage(2)));
+        Assert.Throws<InvalidOperationException>(() =>
+            messageBuffer.ShouldProcessMessage(new SequenceMessage(2))
+        );
     }
 
     [Fact]
@@ -244,11 +291,18 @@ public class MessageBufferTests
         var connection = new TestConnectionContext();
         var pipes = DuplexPipe.CreateConnectionPair(new PipeOptions(), new PipeOptions());
         connection.Transport = pipes.Transport;
-        using var messageBuffer = new MessageBuffer(connection, protocol, bufferLimit: 100_000, NullLogger.Instance);
+        using var messageBuffer = new MessageBuffer(
+            connection,
+            protocol,
+            bufferLimit: 100_000,
+            NullLogger.Instance
+        );
 
         for (var i = 0; i < 1000; i++)
         {
-            await messageBuffer.WriteAsync(new StreamItemMessage("1", null), default).DefaultTimeout();
+            await messageBuffer
+                .WriteAsync(new StreamItemMessage("1", null), default)
+                .DefaultTimeout();
         }
 
         var ackNum = Random.Shared.Next(0, 1000);
@@ -287,11 +341,22 @@ public class MessageBufferTests
         var connection = new TestConnectionContext();
         var pipes = DuplexPipe.CreateConnectionPair(new PipeOptions(), new PipeOptions());
         connection.Transport = pipes.Transport;
-        using var messageBuffer = new MessageBuffer(connection, protocol, bufferLimit: 1, NullLogger.Instance);
+        using var messageBuffer = new MessageBuffer(
+            connection,
+            protocol,
+            bufferLimit: 1,
+            NullLogger.Instance
+        );
 
-        await messageBuffer.WriteAsync(new SerializedHubMessage(new InvocationMessage("t", new object[] { 1 })), default);
+        await messageBuffer.WriteAsync(
+            new SerializedHubMessage(new InvocationMessage("t", new object[] { 1 })),
+            default
+        );
 
-        var writeTask = messageBuffer.WriteAsync(new SerializedHubMessage(new StreamItemMessage("id", null)), default);
+        var writeTask = messageBuffer.WriteAsync(
+            new SerializedHubMessage(new StreamItemMessage("id", null)),
+            default
+        );
         Assert.False(writeTask.IsCompleted);
 
         var res = await pipes.Application.Input.ReadAsync();
@@ -324,7 +389,12 @@ public class MessageBufferTests
         var connection = new TestConnectionContext();
         var pipes = DuplexPipe.CreateConnectionPair(new PipeOptions(), new PipeOptions());
         connection.Transport = pipes.Transport;
-        using var messageBuffer = new MessageBuffer(connection, protocol, bufferLimit: 100_000, NullLogger.Instance);
+        using var messageBuffer = new MessageBuffer(
+            connection,
+            protocol,
+            bufferLimit: 100_000,
+            NullLogger.Instance
+        );
 
         await messageBuffer.WriteAsync(new StreamItemMessage("1", null), default);
 
@@ -367,7 +437,13 @@ public class MessageBufferTests
         var pipes = DuplexPipe.CreateConnectionPair(new PipeOptions(), new PipeOptions());
         connection.Transport = pipes.Transport;
         var timeProvider = new FakeTimeProvider();
-        using var messageBuffer = new MessageBuffer(connection, protocol, bufferLimit: 100_000, NullLogger.Instance, timeProvider);
+        using var messageBuffer = new MessageBuffer(
+            connection,
+            protocol,
+            bufferLimit: 100_000,
+            NullLogger.Instance,
+            timeProvider
+        );
 
         // Simulate receiving messages
         Assert.True(messageBuffer.ShouldProcessMessage(new StreamItemMessage("1", null)));
@@ -404,15 +480,37 @@ public class MessageBufferTests
         var pipeOptions = new PipeOptions(pauseWriterThreshold: 250, resumeWriterThreshold: 120);
         var pipes = DuplexPipe.CreateConnectionPair(new PipeOptions(), pipeOptions);
         connection.Transport = pipes.Transport;
-        using var messageBuffer = new MessageBuffer(connection, protocol, bufferLimit: 100_000, NullLogger.Instance);
+        using var messageBuffer = new MessageBuffer(
+            connection,
+            protocol,
+            bufferLimit: 100_000,
+            NullLogger.Instance
+        );
 
-        await messageBuffer.WriteAsync(new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[10] })), default);
-        await messageBuffer.WriteAsync(new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[100] })), default).DefaultTimeout();
-        var writeTask = messageBuffer.WriteAsync(new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[100] })), default);
+        await messageBuffer.WriteAsync(
+            new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[10] })),
+            default
+        );
+        await messageBuffer
+            .WriteAsync(
+                new SerializedHubMessage(
+                    new InvocationMessage("t", new object[] { new byte[100] })
+                ),
+                default
+            )
+            .DefaultTimeout();
+        var writeTask = messageBuffer.WriteAsync(
+            new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[100] })),
+            default
+        );
 
         // simulate reconnect
         // Smaller PipeOptions on reconnect to force the Resend loop to pause on sending the 2nd message
-        DuplexPipe.UpdateConnectionPair(ref pipes, connection, new PipeOptions(pauseWriterThreshold: 100, resumeWriterThreshold: 50));
+        DuplexPipe.UpdateConnectionPair(
+            ref pipes,
+            connection,
+            new PipeOptions(pauseWriterThreshold: 100, resumeWriterThreshold: 50)
+        );
         var resendTask = messageBuffer.ResendAsync(pipes.Transport.Output);
 
         Assert.True(messageBuffer.ShouldProcessMessage(new SequenceMessage(1)));
@@ -447,10 +545,26 @@ public class MessageBufferTests
         var pipes = DuplexPipe.CreateConnectionPair(new PipeOptions(), pipeOptions);
         connection.Transport = pipes.Transport;
         var timeProvider = new FakeTimeProvider();
-        using var messageBuffer = new MessageBuffer(connection, protocol, bufferLimit: 100_000, NullLogger.Instance, timeProvider);
+        using var messageBuffer = new MessageBuffer(
+            connection,
+            protocol,
+            bufferLimit: 100_000,
+            NullLogger.Instance,
+            timeProvider
+        );
 
-        await messageBuffer.WriteAsync(new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[10] })), default);
-        var writeTask = messageBuffer.WriteAsync(new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[100] })), default).DefaultTimeout();
+        await messageBuffer.WriteAsync(
+            new SerializedHubMessage(new InvocationMessage("t", new object[] { new byte[10] })),
+            default
+        );
+        var writeTask = messageBuffer
+            .WriteAsync(
+                new SerializedHubMessage(
+                    new InvocationMessage("t", new object[] { new byte[100] })
+                ),
+                default
+            )
+            .DefaultTimeout();
 
         // simulate reconnect
         DuplexPipe.UpdateConnectionPair(ref pipes, connection, pipeOptions);
@@ -515,7 +629,10 @@ internal sealed class DuplexPipe : IDuplexPipe
 
     public PipeWriter Output { get; }
 
-    public static DuplexPipePair CreateConnectionPair(PipeOptions inputOptions, PipeOptions outputOptions)
+    public static DuplexPipePair CreateConnectionPair(
+        PipeOptions inputOptions,
+        PipeOptions outputOptions
+    )
     {
         var input = new Pipe(inputOptions);
         var output = new Pipe(outputOptions);
@@ -539,13 +656,20 @@ internal sealed class DuplexPipe : IDuplexPipe
         }
     }
 
-    public static void UpdateConnectionPair(ref DuplexPipePair duplexPipePair, ConnectionContext connection, PipeOptions pipeOptions = null)
+    public static void UpdateConnectionPair(
+        ref DuplexPipePair duplexPipePair,
+        ConnectionContext connection,
+        PipeOptions pipeOptions = null
+    )
     {
         var input = new Pipe(pipeOptions ?? new PipeOptions());
 
         // Add new pipe for reading from and writing to transport from app code
         var transportToApplication = new DuplexPipe(duplexPipePair.Transport.Input, input.Writer);
-        var applicationToTransport = new DuplexPipe(input.Reader, duplexPipePair.Application.Output);
+        var applicationToTransport = new DuplexPipe(
+            input.Reader,
+            duplexPipePair.Application.Output
+        );
 
         duplexPipePair.Application = applicationToTransport;
         duplexPipePair.Transport = transportToApplication;
@@ -558,10 +682,7 @@ internal sealed class TestBinder : IInvocationBinder
 {
     public IReadOnlyList<Type> GetParameterTypes(string methodName)
     {
-        var list = new List<Type>
-        {
-            typeof(object)
-        };
+        var list = new List<Type> { typeof(object) };
         return list;
     }
 

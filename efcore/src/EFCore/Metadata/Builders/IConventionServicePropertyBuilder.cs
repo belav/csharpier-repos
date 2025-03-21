@@ -15,7 +15,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public interface IConventionServicePropertyBuilder : IConventionPropertyBaseBuilder<IConventionServicePropertyBuilder>
+public interface IConventionServicePropertyBuilder
+    : IConventionPropertyBaseBuilder<IConventionServicePropertyBuilder>
 {
     /// <summary>
     ///     Gets the service property being configured.
@@ -33,7 +34,8 @@ public interface IConventionServicePropertyBuilder : IConventionPropertyBaseBuil
     /// </returns>
     IConventionServicePropertyBuilder? HasParameterBinding(
         ServiceParameterBinding? parameterBinding,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="ServiceParameterBinding" /> can be set for this property.
@@ -42,5 +44,8 @@ public interface IConventionServicePropertyBuilder : IConventionPropertyBaseBuil
     /// <param name="parameterBinding">The parameter binding.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the <see cref="ServiceParameterBinding" /> can be set for this property.</returns>
-    bool CanSetParameterBinding(ServiceParameterBinding? parameterBinding, bool fromDataAnnotation = false);
+    bool CanSetParameterBinding(
+        ServiceParameterBinding? parameterBinding,
+        bool fromDataAnnotation = false
+    );
 }

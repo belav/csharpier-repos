@@ -22,13 +22,12 @@ public unsafe class Runtime_77636
         return 101;
     }
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int Problem(StructWithIndex* s)
     {
         return *(int*)((nint)(int*)&s->Value | (-1 & ~1));
     }
-    
+
     struct StructWithIndex
     {
         public int Index;

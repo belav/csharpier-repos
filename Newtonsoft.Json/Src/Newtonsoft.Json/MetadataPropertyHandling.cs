@@ -47,6 +47,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Do not try to read metadata properties.
         /// </summary>
-        Ignore = 2
+        Ignore = 2,
     }
 }

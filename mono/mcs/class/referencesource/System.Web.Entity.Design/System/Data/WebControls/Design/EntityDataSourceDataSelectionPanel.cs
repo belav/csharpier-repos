@@ -8,9 +8,9 @@
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Web.UI.Design.WebControls.Util;
 using System.Diagnostics;
 using System.Drawing;
+using System.Web.UI.Design.WebControls.Util;
 using System.Windows.Forms;
 
 namespace System.Web.UI.Design.WebControls
@@ -38,11 +38,11 @@ namespace System.Web.UI.Design.WebControls
         private void InitializeSizes()
         {
             int top = 0;
-            
+
             _entitySetLabel.Location = new Point(9, top + 8);
             _entitySetLabel.Size = new Size(80, 13);
             top = _entitySetLabel.Bottom;
-            
+
             _entitySetComboBox.Location = new Point(12, top + 3);
             _entitySetComboBox.Size = new Size(502, 21);
             top = _entitySetComboBox.Bottom;
@@ -61,8 +61,8 @@ namespace System.Web.UI.Design.WebControls
 
             _selectAdvancedTextBox.Location = new Point(12, top + 3);
             _selectAdvancedTextBox.Multiline = true; // set this here so the size will be set properly
-            _selectAdvancedTextBox.Size = new Size(502, 137);            
-             // don't need to set top here because the next control has the same location and size
+            _selectAdvancedTextBox.Size = new Size(502, 137);
+            // don't need to set top here because the next control has the same location and size
 
             _selectSimpleCheckedListBox.Location = _selectAdvancedTextBox.Location;
             _selectSimpleCheckedListBox.Size = _selectAdvancedTextBox.Size;
@@ -111,7 +111,7 @@ namespace System.Web.UI.Design.WebControls
             _selectSimpleCheckedListBox.TabIndex = tabIndex += 10;
             _selectAdvancedTextBox.TabIndex = tabIndex += 10;
             _insertUpdateDeletePanel.TabIndex = tabIndex += 10;
-            _enableInsertCheckBox.TabIndex = tabIndex += 10;            
+            _enableInsertCheckBox.TabIndex = tabIndex += 10;
             _enableUpdateCheckBox.TabIndex = tabIndex += 10;
             _enableDeleteCheckBox.TabIndex = tabIndex += 10;
         }
@@ -119,18 +119,25 @@ namespace System.Web.UI.Design.WebControls
         private void InitializeUI()
         {
             _entitySetLabel.Text = Strings.Wizard_DataSelectionPanel_EntitySetName;
-            _entitySetComboBox.AccessibleName = Strings.Wizard_DataSelectionPanel_EntitySetNameAccessibleName;
+            _entitySetComboBox.AccessibleName =
+                Strings.Wizard_DataSelectionPanel_EntitySetNameAccessibleName;
             _entityTypeFilterLabel.Text = Strings.Wizard_DataSelectionPanel_EntityTypeFilter;
-            _entityTypeFilterComboBox.AccessibleName = Strings.Wizard_DataSelectionPanel_EntityTypeFilterAccessibleName;
+            _entityTypeFilterComboBox.AccessibleName =
+                Strings.Wizard_DataSelectionPanel_EntityTypeFilterAccessibleName;
             _selectLabel.Text = Strings.Wizard_DataSelectionPanel_Select;
-            _selectSimpleCheckedListBox.AccessibleName = Strings.Wizard_DataSelectionPanel_SelectAccessibleName;
-            _selectAdvancedTextBox.AccessibleName = Strings.Wizard_DataSelectionPanel_SelectAccessibleName;
+            _selectSimpleCheckedListBox.AccessibleName =
+                Strings.Wizard_DataSelectionPanel_SelectAccessibleName;
+            _selectAdvancedTextBox.AccessibleName =
+                Strings.Wizard_DataSelectionPanel_SelectAccessibleName;
             _enableInsertCheckBox.Text = Strings.Wizard_DataSelectionPanel_Insert;
-            _enableInsertCheckBox.AccessibleName = Strings.Wizard_DataSelectionPanel_InsertAccessibleName;
+            _enableInsertCheckBox.AccessibleName =
+                Strings.Wizard_DataSelectionPanel_InsertAccessibleName;
             _enableDeleteCheckBox.Text = Strings.Wizard_DataSelectionPanel_Delete;
-            _enableDeleteCheckBox.AccessibleName = Strings.Wizard_DataSelectionPanel_DeleteAccessibleName;
+            _enableDeleteCheckBox.AccessibleName =
+                Strings.Wizard_DataSelectionPanel_DeleteAccessibleName;
             _enableUpdateCheckBox.Text = Strings.Wizard_DataSelectionPanel_Update;
-            _enableUpdateCheckBox.AccessibleName = Strings.Wizard_DataSelectionPanel_UpdateAccessibleName;
+            _enableUpdateCheckBox.AccessibleName =
+                Strings.Wizard_DataSelectionPanel_UpdateAccessibleName;
             this.Caption = Strings.Wizard_DataSelectionPanel_Caption;
             this.AccessibleName = Strings.Wizard_DataSelectionPanel_Caption;
         }
@@ -163,12 +170,14 @@ namespace System.Web.UI.Design.WebControls
                 // this property has no effect on the wizard, so don't need to update it
             }
         }
-        
+
         private void OnEntitySetComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (!_ignoreEvents)
             {
-                _dataSelection.SelectEntitySetName(_entitySetComboBox.SelectedItem as EntityDataSourceEntitySetNameItem);
+                _dataSelection.SelectEntitySetName(
+                    _entitySetComboBox.SelectedItem as EntityDataSourceEntitySetNameItem
+                );
                 _dataSelection.UpdateWizardState();
             }
         }
@@ -177,7 +186,9 @@ namespace System.Web.UI.Design.WebControls
         {
             if (!_ignoreEvents)
             {
-                _dataSelection.SelectEntityTypeFilter(_entityTypeFilterComboBox.SelectedItem as EntityDataSourceEntityTypeFilterItem);
+                _dataSelection.SelectEntityTypeFilter(
+                    _entityTypeFilterComboBox.SelectedItem as EntityDataSourceEntityTypeFilterItem
+                );
                 _dataSelection.UpdateWizardState();
             }
         }
@@ -217,7 +228,7 @@ namespace System.Web.UI.Design.WebControls
                             _selectSimpleCheckedListBox.SetItemChecked(checkedIndex, false);
                         }
                         _ignoreEvents = false;
-                        _dataSelection.ClearAllSelectedProperties();                        
+                        _dataSelection.ClearAllSelectedProperties();
                     }
 
                     // Add the current index to the list of selected properties in temporary state storage
@@ -226,7 +237,7 @@ namespace System.Web.UI.Design.WebControls
                 else
                 {
                     // Remove the current index from the list of selected properties in temporary state storage.
-                    _dataSelection.DeselectEntityProperty(e.Index);                    
+                    _dataSelection.DeselectEntityProperty(e.Index);
                 }
 
                 _dataSelection.UpdateInsertUpdateDeleteState();
@@ -234,7 +245,7 @@ namespace System.Web.UI.Design.WebControls
                 // If there are no longer any properties checked at this point, the Finish button will be disabled
                 _dataSelection.UpdateWizardState();
             }
-        }        
+        }
         #endregion
 
         #region Wizard State Management
@@ -251,7 +262,11 @@ namespace System.Web.UI.Design.WebControls
 
 
         #region Methods for setting control values
-        public void SetEnableInsertUpdateDelete(bool enableInsert, bool enableUpdate, bool enableDelete)
+        public void SetEnableInsertUpdateDelete(
+            bool enableInsert,
+            bool enableUpdate,
+            bool enableDelete
+        )
         {
             _ignoreEvents = true;
             _enableInsertCheckBox.Checked = enableInsert;
@@ -277,10 +292,19 @@ namespace System.Web.UI.Design.WebControls
 
         // Populates the CheckedListBox with the specified entityTypeProperties and checks all of the indexes specified in selectedEntityTypeProperties
         // Expects that 'Select All (Entity Value)' is in the list of properties already
-        public void SetEntityTypeProperties(List<string> entityTypeProperties, List<int> selectedEntityTypeProperties)
+        public void SetEntityTypeProperties(
+            List<string> entityTypeProperties,
+            List<int> selectedEntityTypeProperties
+        )
         {
-            Debug.Assert(entityTypeProperties != null && entityTypeProperties.Count > 0, "unexpected null or empty entityTypeProperties");
-            Debug.Assert(selectedEntityTypeProperties != null && selectedEntityTypeProperties.Count > 0, "unexpected null or empty selectedEntityTypeProperties");
+            Debug.Assert(
+                entityTypeProperties != null && entityTypeProperties.Count > 0,
+                "unexpected null or empty entityTypeProperties"
+            );
+            Debug.Assert(
+                selectedEntityTypeProperties != null && selectedEntityTypeProperties.Count > 0,
+                "unexpected null or empty selectedEntityTypeProperties"
+            );
 
             _ignoreEvents = true;
             // remove any items currently in the list and replace them with the current list and selected properties
@@ -299,20 +323,27 @@ namespace System.Web.UI.Design.WebControls
             _ignoreEvents = false;
         }
 
-        public void SetEntityTypeFilters(List<EntityDataSourceEntityTypeFilterItem> entityTypeFilters)
+        public void SetEntityTypeFilters(
+            List<EntityDataSourceEntityTypeFilterItem> entityTypeFilters
+        )
         {
             _ignoreEvents = true;
-            _entityTypeFilterComboBox.Items.Clear();            
+            _entityTypeFilterComboBox.Items.Clear();
             _entityTypeFilterComboBox.Items.AddRange(entityTypeFilters.ToArray());
             _ignoreEvents = false;
         }
 
-        public void SetSelectedEntityTypeFilter(EntityDataSourceEntityTypeFilterItem selectedEntityTypeFilter)
+        public void SetSelectedEntityTypeFilter(
+            EntityDataSourceEntityTypeFilterItem selectedEntityTypeFilter
+        )
         {
-            Debug.Assert(selectedEntityTypeFilter != null, "cannot select null from EntityTypeFilter combobox");
+            Debug.Assert(
+                selectedEntityTypeFilter != null,
+                "cannot select null from EntityTypeFilter combobox"
+            );
 
             _ignoreEvents = true;
-            _entityTypeFilterComboBox.SelectedItem = selectedEntityTypeFilter;            
+            _entityTypeFilterComboBox.SelectedItem = selectedEntityTypeFilter;
             _ignoreEvents = false;
         }
 

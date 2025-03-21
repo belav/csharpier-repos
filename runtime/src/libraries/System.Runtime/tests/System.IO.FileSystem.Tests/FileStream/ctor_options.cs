@@ -15,64 +15,103 @@ namespace System.IO.Tests
     {
         protected override string GetExpectedParamName(string paramName) => "value";
 
-        protected override FileStream CreateFileStream(string path, FileMode mode)
-            => new FileStream(path,
-                    new FileStreamOptions
-                    {
-                        Mode = mode,
-                        Access = mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite
-                    });
+        protected override FileStream CreateFileStream(string path, FileMode mode) =>
+            new FileStream(
+                path,
+                new FileStreamOptions
+                {
+                    Mode = mode,
+                    Access = mode == FileMode.Append ? FileAccess.Write : FileAccess.ReadWrite,
+                }
+            );
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access)
-            => new FileStream(path,
-                    new FileStreamOptions
-                    {
-                        Mode = mode,
-                        Access = access
-                    });
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access
+        ) => new FileStream(path, new FileStreamOptions { Mode = mode, Access = access });
 
-        protected override FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options)
-            => new FileStream(path,
-                    new FileStreamOptions
-                    {
-                        Mode = mode,
-                        Access = access,
-                        Share = share,
-                        BufferSize = bufferSize,
-                        Options = options
-                    });
+        protected override FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options
+        ) =>
+            new FileStream(
+                path,
+                new FileStreamOptions
+                {
+                    Mode = mode,
+                    Access = access,
+                    Share = share,
+                    BufferSize = bufferSize,
+                    Options = options,
+                }
+            );
 
-        protected virtual FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options, long preallocationSize)
-            => new FileStream(path,
-                    new FileStreamOptions
-                    {
-                        Mode = mode,
-                        Access = access,
-                        Share = share,
-                        BufferSize = bufferSize,
-                        Options = options,
-                        PreallocationSize = preallocationSize
-                    });
+        protected virtual FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options,
+            long preallocationSize
+        ) =>
+            new FileStream(
+                path,
+                new FileStreamOptions
+                {
+                    Mode = mode,
+                    Access = access,
+                    Share = share,
+                    BufferSize = bufferSize,
+                    Options = options,
+                    PreallocationSize = preallocationSize,
+                }
+            );
 
-        protected virtual FileStream CreateFileStream(string path, FileMode mode, FileAccess access, FileShare share, int bufferSize, FileOptions options, long preallocationSize, UnixFileMode unixFileMode)
-            => new FileStream(path,
-                    new FileStreamOptions
-                    {
-                        Mode = mode,
-                        Access = access,
-                        Share = share,
-                        BufferSize = bufferSize,
-                        Options = options,
-                        PreallocationSize = preallocationSize,
-                        UnixCreateMode = unixFileMode
-                    });
+        protected virtual FileStream CreateFileStream(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            int bufferSize,
+            FileOptions options,
+            long preallocationSize,
+            UnixFileMode unixFileMode
+        ) =>
+            new FileStream(
+                path,
+                new FileStreamOptions
+                {
+                    Mode = mode,
+                    Access = access,
+                    Share = share,
+                    BufferSize = bufferSize,
+                    Options = options,
+                    PreallocationSize = preallocationSize,
+                    UnixCreateMode = unixFileMode,
+                }
+            );
 
         [Fact]
         public virtual void NegativePreallocationSizeThrows()
         {
             string filePath = GetTestFilePath();
-            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(
-                () => CreateFileStream(filePath, FileMode.CreateNew, FileAccess.Write, FileShare.None, bufferSize: 1, FileOptions.None, preallocationSize: -1));
+            ArgumentOutOfRangeException ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+                CreateFileStream(
+                    filePath,
+                    FileMode.CreateNew,
+                    FileAccess.Write,
+                    FileShare.None,
+                    bufferSize: 1,
+                    FileOptions.None,
+                    preallocationSize: -1
+                )
+            );
         }
 
         [Theory]
@@ -82,8 +121,17 @@ namespace System.IO.Tests
         [InlineData(FileMode.Truncate)]
         public void PreallocationSizeThrowsForFileModesThatOpenExistingFiles(FileMode mode)
         {
-            Assert.Throws<ArgumentException>(
-                () => CreateFileStream(GetTestFilePath(), mode, FileAccess.Write, FileShare.None, bufferSize: 1, FileOptions.None, preallocationSize: 20));
+            Assert.Throws<ArgumentException>(() =>
+                CreateFileStream(
+                    GetTestFilePath(),
+                    mode,
+                    FileAccess.Write,
+                    FileShare.None,
+                    bufferSize: 1,
+                    FileOptions.None,
+                    preallocationSize: 20
+                )
+            );
         }
 
         [Theory]
@@ -91,8 +139,17 @@ namespace System.IO.Tests
         [InlineData(FileMode.CreateNew)]
         public void PreallocationSizeThrowsForReadOnlyAccess(FileMode mode)
         {
-            Assert.Throws<ArgumentException>(
-                () => CreateFileStream(GetTestFilePath(), mode, FileAccess.Read, FileShare.None, bufferSize: 1, FileOptions.None, preallocationSize: 20));
+            Assert.Throws<ArgumentException>(() =>
+                CreateFileStream(
+                    GetTestFilePath(),
+                    mode,
+                    FileAccess.Read,
+                    FileShare.None,
+                    bufferSize: 1,
+                    FileOptions.None,
+                    preallocationSize: 20
+                )
+            );
         }
 
         [Theory]
@@ -114,7 +171,17 @@ namespace System.IO.Tests
                 File.WriteAllText(filename, "");
             }
 
-            using (FileStream fs = CreateFileStream(filename, mode, FileAccess.Write, FileShare.None, bufferSize: 1, FileOptions.None, preallocationSize: 0))
+            using (
+                FileStream fs = CreateFileStream(
+                    filename,
+                    mode,
+                    FileAccess.Write,
+                    FileShare.None,
+                    bufferSize: 1,
+                    FileOptions.None,
+                    preallocationSize: 0
+                )
+            )
             {
                 Assert.Equal(0, fs.Length);
                 if (IsGetAllocatedSizeImplemented)
@@ -134,7 +201,17 @@ namespace System.IO.Tests
         {
             const long preallocationSize = 123;
 
-            using (var fs = CreateFileStream(GetTestFilePath(), mode, access, FileShare.None, bufferSize: 1, FileOptions.None, preallocationSize))
+            using (
+                var fs = CreateFileStream(
+                    GetTestFilePath(),
+                    mode,
+                    access,
+                    FileShare.None,
+                    bufferSize: 1,
+                    FileOptions.None,
+                    preallocationSize
+                )
+            )
             {
                 Assert.Equal(0, fs.Length);
                 if (IsGetAllocatedSizeImplemented)
@@ -168,7 +245,15 @@ namespace System.IO.Tests
             try
             {
                 // not using Assert.Throws because in the event of failure, we want to dispose, so the next test isn't affected
-                using FileStream fs = CreateFileStream(filePath, mode, FileAccess.Write, FileShare.None, bufferSize: 1, FileOptions.None, tooMuch);
+                using FileStream fs = CreateFileStream(
+                    filePath,
+                    mode,
+                    FileAccess.Write,
+                    FileShare.None,
+                    bufferSize: 1,
+                    FileOptions.None,
+                    tooMuch
+                );
                 Assert.Fail($"Expected to throw IOException, {fs.Length}");
             }
             catch (IOException ex)

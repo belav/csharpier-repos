@@ -32,7 +32,8 @@ internal sealed class PinnedBlockMemoryPool : MemoryPool<byte>
     /// Thread-safe collection of blocks which are currently in the pool. A slab will pre-allocate all of the block tracking objects
     /// and add them to this collection. When memory is requested it is taken from here first, and when it is returned it is re-added.
     /// </summary>
-    private readonly ConcurrentQueue<MemoryPoolBlock> _blocks = new ConcurrentQueue<MemoryPoolBlock>();
+    private readonly ConcurrentQueue<MemoryPoolBlock> _blocks =
+        new ConcurrentQueue<MemoryPoolBlock>();
 
     /// <summary>
     /// This is part of implementing the IDisposable pattern.
@@ -50,12 +51,16 @@ internal sealed class PinnedBlockMemoryPool : MemoryPool<byte>
     {
         if (size > _blockSize)
         {
-            MemoryPoolThrowHelper.ThrowArgumentOutOfRangeException_BufferRequestTooLarge(_blockSize);
+            MemoryPoolThrowHelper.ThrowArgumentOutOfRangeException_BufferRequestTooLarge(
+                _blockSize
+            );
         }
 
         if (_isDisposed)
         {
-            MemoryPoolThrowHelper.ThrowObjectDisposedException(MemoryPoolThrowHelper.ExceptionArgument.MemoryPool);
+            MemoryPoolThrowHelper.ThrowObjectDisposedException(
+                MemoryPoolThrowHelper.ExceptionArgument.MemoryPool
+            );
         }
 
         if (_blocks.TryDequeue(out var block))
@@ -77,9 +82,12 @@ internal sealed class PinnedBlockMemoryPool : MemoryPool<byte>
     internal void Return(MemoryPoolBlock block)
     {
 #if BLOCK_LEASE_TRACKING
-            Debug.Assert(block.Pool == this, "Returned block was not leased from this pool");
-            Debug.Assert(block.IsLeased, $"Block being returned to pool twice: {block.Leaser}{Environment.NewLine}");
-            block.IsLeased = false;
+        Debug.Assert(block.Pool == this, "Returned block was not leased from this pool");
+        Debug.Assert(
+            block.IsLeased,
+            $"Block being returned to pool twice: {block.Leaser}{Environment.NewLine}"
+        );
+        block.IsLeased = false;
 #endif
 
         if (!_isDisposed)
@@ -102,10 +110,7 @@ internal sealed class PinnedBlockMemoryPool : MemoryPool<byte>
             if (disposing)
             {
                 // Discard blocks in pool
-                while (_blocks.TryDequeue(out _))
-                {
-
-                }
+                while (_blocks.TryDequeue(out _)) { }
             }
         }
     }

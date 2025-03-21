@@ -2,20 +2,19 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Xml;
-using System.Xml.Schema;
+using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Security.Permissions;
-using System.Globalization;
-
+using System.Text;
 //using System.Workflow.Activities;
 using System.Workflow.ComponentModel;
 using System.Workflow.Runtime;
 using System.Workflow.Runtime.Hosting;
+using System.Xml;
+using System.Xml.Schema;
 using Hosting = System.Workflow.Runtime.Hosting;
 
 namespace System.Workflow.Runtime.Tracking
@@ -24,7 +23,9 @@ namespace System.Workflow.Runtime.Tracking
     /// Events for workflow instances.
     /// </summary>
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum TrackingWorkflowEvent
     {
         Created = 0,
@@ -39,6 +40,6 @@ namespace System.Workflow.Runtime.Tracking
         Terminated = 9,
         Aborted = 10,
         Changed = 11,
-        Started = 12
+        Started = 12,
     }
 }

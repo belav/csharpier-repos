@@ -10,35 +10,64 @@ using Microsoft.VisualStudio.Text.Editor.Commanding.Commands;
 
 namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
-    internal abstract partial class AbstractRenameCommandHandler :
-        ICommandHandler<LineStartCommandArgs>, ICommandHandler<LineEndCommandArgs>,
-        ICommandHandler<LineStartExtendCommandArgs>, ICommandHandler<LineEndExtendCommandArgs>
+    internal abstract partial class AbstractRenameCommandHandler
+        : ICommandHandler<LineStartCommandArgs>,
+            ICommandHandler<LineEndCommandArgs>,
+            ICommandHandler<LineStartExtendCommandArgs>,
+            ICommandHandler<LineEndExtendCommandArgs>
     {
-        public CommandState GetCommandState(LineStartCommandArgs args)
-            => GetCommandState();
+        public CommandState GetCommandState(LineStartCommandArgs args) => GetCommandState();
 
-        public CommandState GetCommandState(LineEndCommandArgs args)
-            => GetCommandState();
+        public CommandState GetCommandState(LineEndCommandArgs args) => GetCommandState();
 
-        public CommandState GetCommandState(LineStartExtendCommandArgs args)
-            => GetCommandState();
+        public CommandState GetCommandState(LineStartExtendCommandArgs args) => GetCommandState();
 
-        public CommandState GetCommandState(LineEndExtendCommandArgs args)
-            => GetCommandState();
+        public CommandState GetCommandState(LineEndExtendCommandArgs args) => GetCommandState();
 
-        public bool ExecuteCommand(LineStartCommandArgs args, CommandExecutionContext context)
-            => HandleLineStartOrLineEndCommand(args.SubjectBuffer, args.TextView, lineStart: true, extendSelection: false);
+        public bool ExecuteCommand(LineStartCommandArgs args, CommandExecutionContext context) =>
+            HandleLineStartOrLineEndCommand(
+                args.SubjectBuffer,
+                args.TextView,
+                lineStart: true,
+                extendSelection: false
+            );
 
-        public bool ExecuteCommand(LineEndCommandArgs args, CommandExecutionContext context)
-            => HandleLineStartOrLineEndCommand(args.SubjectBuffer, args.TextView, lineStart: false, extendSelection: false);
+        public bool ExecuteCommand(LineEndCommandArgs args, CommandExecutionContext context) =>
+            HandleLineStartOrLineEndCommand(
+                args.SubjectBuffer,
+                args.TextView,
+                lineStart: false,
+                extendSelection: false
+            );
 
-        public bool ExecuteCommand(LineStartExtendCommandArgs args, CommandExecutionContext context)
-            => HandleLineStartOrLineEndCommand(args.SubjectBuffer, args.TextView, lineStart: true, extendSelection: true);
+        public bool ExecuteCommand(
+            LineStartExtendCommandArgs args,
+            CommandExecutionContext context
+        ) =>
+            HandleLineStartOrLineEndCommand(
+                args.SubjectBuffer,
+                args.TextView,
+                lineStart: true,
+                extendSelection: true
+            );
 
-        public bool ExecuteCommand(LineEndExtendCommandArgs args, CommandExecutionContext context)
-            => HandleLineStartOrLineEndCommand(args.SubjectBuffer, args.TextView, lineStart: false, extendSelection: true);
+        public bool ExecuteCommand(
+            LineEndExtendCommandArgs args,
+            CommandExecutionContext context
+        ) =>
+            HandleLineStartOrLineEndCommand(
+                args.SubjectBuffer,
+                args.TextView,
+                lineStart: false,
+                extendSelection: true
+            );
 
-        private bool HandleLineStartOrLineEndCommand(ITextBuffer subjectBuffer, ITextView view, bool lineStart, bool extendSelection)
+        private bool HandleLineStartOrLineEndCommand(
+            ITextBuffer subjectBuffer,
+            ITextView view,
+            bool lineStart,
+            bool extendSelection
+        )
         {
             if (_renameService.ActiveSession == null)
             {
@@ -48,7 +77,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             var caretPoint = view.GetCaretPoint(subjectBuffer);
             if (caretPoint.HasValue)
             {
-                if (_renameService.ActiveSession.TryGetContainingEditableSpan(caretPoint.Value, out var span))
+                if (
+                    _renameService.ActiveSession.TryGetContainingEditableSpan(
+                        caretPoint.Value,
+                        out var span
+                    )
+                )
                 {
                     var newPoint = lineStart ? span.Start : span.End;
                     if (newPoint == caretPoint.Value && (view.Selection.IsEmpty || extendSelection))
@@ -63,7 +97,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                         newPoint,
                         PointTrackingMode.Negative,
                         lineStart ? PositionAffinity.Successor : PositionAffinity.Predecessor,
-                        view.TextBuffer);
+                        view.TextBuffer
+                    );
 
                     if (!newPointInView.HasValue)
                     {
@@ -72,7 +107,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
                     if (extendSelection)
                     {
-                        view.Selection.Select(view.Selection.AnchorPoint, new VirtualSnapshotPoint(newPointInView.Value));
+                        view.Selection.Select(
+                            view.Selection.AnchorPoint,
+                            new VirtualSnapshotPoint(newPointInView.Value)
+                        );
                     }
                     else
                     {

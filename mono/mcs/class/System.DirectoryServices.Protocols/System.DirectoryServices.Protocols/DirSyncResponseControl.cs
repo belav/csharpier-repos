@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,19 +32,19 @@ using System;
 
 namespace System.DirectoryServices.Protocols
 {
-	[MonoTODO]
-	public class DirSyncResponseControl : DirectoryControl
-	{
-		internal DirSyncResponseControl (byte [] cookie, bool moreData, int resultSize)
-			: base (null, null, false, false)
-		{
-			Cookie = cookie;
-			MoreData = moreData;
-			ResultSize = resultSize;
-		}
+    [MonoTODO]
+    public class DirSyncResponseControl : DirectoryControl
+    {
+        internal DirSyncResponseControl(byte[] cookie, bool moreData, int resultSize)
+            : base(null, null, false, false)
+        {
+            Cookie = cookie;
+            MoreData = moreData;
+            ResultSize = resultSize;
+        }
 
-		public byte [] Cookie { get; private set; }
-		public bool MoreData { get; private set; }
-		public int ResultSize { get; private set; }
-	}
+        public byte[] Cookie { get; private set; }
+        public bool MoreData { get; private set; }
+        public int ResultSize { get; private set; }
+    }
 }

@@ -16,19 +16,43 @@ namespace Roslyn.Test.Utilities
     public class WpfTheoryTestCase : XunitTheoryTestCase
     {
         [EditorBrowsable(EditorBrowsableState.Never)]
-        [Obsolete("Called by the de-serializer; should only be called by deriving classes for de-serialization purposes")]
-        public WpfTheoryTestCase()
-        {
-        }
+        [Obsolete(
+            "Called by the de-serializer; should only be called by deriving classes for de-serialization purposes"
+        )]
+        public WpfTheoryTestCase() { }
 
-        public WpfTheoryTestCase(IMessageSink diagnosticMessageSink, TestMethodDisplay defaultMethodDisplay, TestMethodDisplayOptions defaultMethodDisplayOptions, ITestMethod testMethod)
-            : base(diagnosticMessageSink, defaultMethodDisplay, defaultMethodDisplayOptions, testMethod)
-        {
-        }
+        public WpfTheoryTestCase(
+            IMessageSink diagnosticMessageSink,
+            TestMethodDisplay defaultMethodDisplay,
+            TestMethodDisplayOptions defaultMethodDisplayOptions,
+            ITestMethod testMethod
+        )
+            : base(
+                diagnosticMessageSink,
+                defaultMethodDisplay,
+                defaultMethodDisplayOptions,
+                testMethod
+            ) { }
 
-        public override Task<RunSummary> RunAsync(IMessageSink diagnosticMessageSink, IMessageBus messageBus, object[] constructorArguments, ExceptionAggregator aggregator, CancellationTokenSource cancellationTokenSource)
+        public override Task<RunSummary> RunAsync(
+            IMessageSink diagnosticMessageSink,
+            IMessageBus messageBus,
+            object[] constructorArguments,
+            ExceptionAggregator aggregator,
+            CancellationTokenSource cancellationTokenSource
+        )
         {
-            var runner = new WpfTheoryTestCaseRunner(WpfTestSharedData.Instance, this, DisplayName, SkipReason, constructorArguments, diagnosticMessageSink, messageBus, aggregator, cancellationTokenSource);
+            var runner = new WpfTheoryTestCaseRunner(
+                WpfTestSharedData.Instance,
+                this,
+                DisplayName,
+                SkipReason,
+                constructorArguments,
+                diagnosticMessageSink,
+                messageBus,
+                aggregator,
+                cancellationTokenSource
+            );
             return runner.RunAsync();
         }
     }

@@ -16,7 +16,11 @@ namespace Microsoft.CodeAnalysis.Interactive
         {
             private readonly MetadataShadowCopyProvider _provider;
 
-            public ShadowCopyReference(MetadataShadowCopyProvider provider, string originalPath, MetadataReferenceProperties properties)
+            public ShadowCopyReference(
+                MetadataShadowCopyProvider provider,
+                string originalPath,
+                MetadataReferenceProperties properties
+            )
                 : base(properties, originalPath)
             {
                 _provider = provider;
@@ -33,7 +37,9 @@ namespace Microsoft.CodeAnalysis.Interactive
                 return _provider.GetMetadata(FilePath, Properties.Kind);
             }
 
-            protected override PortableExecutableReference WithPropertiesImpl(MetadataReferenceProperties properties)
+            protected override PortableExecutableReference WithPropertiesImpl(
+                MetadataReferenceProperties properties
+            )
             {
                 return new ShadowCopyReference(_provider, FilePath!, properties);
             }

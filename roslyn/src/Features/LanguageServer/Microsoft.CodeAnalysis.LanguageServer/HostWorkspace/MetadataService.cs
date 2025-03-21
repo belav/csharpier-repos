@@ -13,13 +13,13 @@ internal sealed class MetadataServiceFactory : IWorkspaceServiceFactory
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public MetadataServiceFactory()
-    {
-    }
+    public MetadataServiceFactory() { }
 
     public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
     {
-        return new MetadataService(workspaceServices.GetRequiredService<IDocumentationProviderService>());
+        return new MetadataService(
+            workspaceServices.GetRequiredService<IDocumentationProviderService>()
+        );
     }
 
     internal sealed class MetadataService : IMetadataService
@@ -31,14 +31,21 @@ internal sealed class MetadataServiceFactory : IWorkspaceServiceFactory
             _documentationProviderService = documentationProviderService;
         }
 
-        public PortableExecutableReference GetReference(string resolvedPath, MetadataReferenceProperties properties)
+        public PortableExecutableReference GetReference(
+            string resolvedPath,
+            MetadataReferenceProperties properties
+        )
         {
             // HACK: right now the FileWatchedPortableExecutableReferenceFactory in Roslyn presumes that each time it calls IMetadataService
             // it gets a unique instance back; the default MetadataService at the workspace layer has a cache to encourage sharing, but that
             // breaks the assumption.
             try
             {
-                return MetadataReference.CreateFromFile(resolvedPath, properties, _documentationProviderService.GetDocumentationProvider(resolvedPath));
+                return MetadataReference.CreateFromFile(
+                    resolvedPath,
+                    properties,
+                    _documentationProviderService.GetDocumentationProvider(resolvedPath)
+                );
             }
             catch (IOException ex)
             {
@@ -50,7 +57,12 @@ internal sealed class MetadataServiceFactory : IWorkspaceServiceFactory
         {
             private readonly IOException _ex;
 
-            public ThrowingExecutableReference(string resolvedPath, MetadataReferenceProperties properties, IOException ex) : base(properties, resolvedPath)
+            public ThrowingExecutableReference(
+                string resolvedPath,
+                MetadataReferenceProperties properties,
+                IOException ex
+            )
+                : base(properties, resolvedPath)
             {
                 _ex = ex;
             }
@@ -65,7 +77,9 @@ internal sealed class MetadataServiceFactory : IWorkspaceServiceFactory
                 throw _ex;
             }
 
-            protected override PortableExecutableReference WithPropertiesImpl(MetadataReferenceProperties properties)
+            protected override PortableExecutableReference WithPropertiesImpl(
+                MetadataReferenceProperties properties
+            )
             {
                 return new ThrowingExecutableReference(FilePath!, properties, _ex);
             }

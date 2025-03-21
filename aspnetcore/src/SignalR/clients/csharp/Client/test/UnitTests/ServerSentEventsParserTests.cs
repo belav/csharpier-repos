@@ -34,7 +34,12 @@ public class ServerSentEventsParserTests
         var readableBuffer = new ReadOnlySequence<byte>(buffer);
         var parser = new ServerSentEventsMessageParser();
 
-        var parseResult = parser.ParseMessage(readableBuffer, out var consumed, out var examined, out var message);
+        var parseResult = parser.ParseMessage(
+            readableBuffer,
+            out var consumed,
+            out var examined,
+            out var message
+        );
         Assert.Equal(ServerSentEventsMessageParser.ParseResult.Completed, parseResult);
         Assert.Equal(consumed, examined);
 
@@ -43,24 +48,47 @@ public class ServerSentEventsParserTests
     }
 
     [Theory]
-    [InlineData("data: T\n", "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'")]
+    [InlineData(
+        "data: T\n",
+        "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'"
+    )]
     [InlineData("data: T\r\ndata: Hello, World\r\r\n\n", "There was an error in the frame format")]
-    [InlineData("data: T\r\ndata: Hello, World\n\n", "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'")]
+    [InlineData(
+        "data: T\r\ndata: Hello, World\n\n",
+        "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'"
+    )]
     [InlineData("data: T\r\nfoo: Hello, World\r\n\r\n", "Expected the message prefix 'data: '")]
     [InlineData("foo: T\r\ndata: Hello, World\r\n\r\n", "Expected the message prefix 'data: '")]
     [InlineData("food: T\r\ndata: Hello, World\r\n\r\n", "Expected the message prefix 'data: '")]
     [InlineData("data: T\r\ndata: Hello, World\r\n\n", "There was an error in the frame format")]
-    [InlineData("data: T\r\ndata: Hello\n, World\r\n\r\n", "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'")]
+    [InlineData(
+        "data: T\r\ndata: Hello\n, World\r\n\r\n",
+        "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'"
+    )]
     [InlineData("data: Hello, World\r\n\r\\", "Expected a \\r\\n frame ending")]
-    [InlineData("data: Major\r\ndata:  Key\rndata:  Alert\r\n\r\\", "Expected a \\r\\n frame ending")]
-    [InlineData("data: Major\r\ndata:  Key\r\ndata:  Alert\r\n\r\\", "Expected a \\r\\n frame ending")]
+    [InlineData(
+        "data: Major\r\ndata:  Key\rndata:  Alert\r\n\r\\",
+        "Expected a \\r\\n frame ending"
+    )]
+    [InlineData(
+        "data: Major\r\ndata:  Key\r\ndata:  Alert\r\n\r\\",
+        "Expected a \\r\\n frame ending"
+    )]
     public void ParseSSEMessageFailureCases(string encodedMessage, string expectedExceptionMessage)
     {
         var buffer = Encoding.UTF8.GetBytes(encodedMessage);
         var readableBuffer = new ReadOnlySequence<byte>(buffer);
         var parser = new ServerSentEventsMessageParser();
 
-        var ex = Assert.Throws<FormatException>(() => { parser.ParseMessage(readableBuffer, out var consumed, out var examined, out var message); });
+        var ex = Assert.Throws<FormatException>(() =>
+        {
+            parser.ParseMessage(
+                readableBuffer,
+                out var consumed,
+                out var examined,
+                out var message
+            );
+        });
         Assert.Equal(expectedExceptionMessage, ex.Message);
     }
 
@@ -88,7 +116,12 @@ public class ServerSentEventsParserTests
         var readableBuffer = new ReadOnlySequence<byte>(buffer);
         var parser = new ServerSentEventsMessageParser();
 
-        var parseResult = parser.ParseMessage(readableBuffer, out var consumed, out var examined, out var message);
+        var parseResult = parser.ParseMessage(
+            readableBuffer,
+            out var consumed,
+            out var examined,
+            out var message
+        );
 
         Assert.Equal(ServerSentEventsMessageParser.ParseResult.Incomplete, parseResult);
     }
@@ -105,13 +138,17 @@ public class ServerSentEventsParserTests
     [InlineData(new[] { ":", "comment", "\r\n", "d", "ata: Hello, World\r\n\r\n" }, "Hello, World")]
     [InlineData(new[] { ":comment", "\r\n", "data: Hello, World", "\r\n\r\n" }, "Hello, World")]
     [InlineData(new[] { "data: Hello, World\r\n", ":comment\r\n", "\r\n" }, "Hello, World")]
-    public async Task ParseMessageAcrossMultipleReadsSuccess(string[] messageParts, string expectedMessage)
+    public async Task ParseMessageAcrossMultipleReadsSuccess(
+        string[] messageParts,
+        string expectedMessage
+    )
     {
         var parser = new ServerSentEventsMessageParser();
         var pipe = new Pipe();
 
         byte[] message = null;
-        SequencePosition consumed = default, examined = default;
+        SequencePosition consumed = default,
+            examined = default;
 
         for (var i = 0; i < messageParts.Length; i++)
         {
@@ -119,7 +156,12 @@ public class ServerSentEventsParserTests
             await pipe.Writer.WriteAsync(Encoding.UTF8.GetBytes(messagePart));
             var result = await pipe.Reader.ReadAsync();
 
-            var parseResult = parser.ParseMessage(result.Buffer, out consumed, out examined, out message);
+            var parseResult = parser.ParseMessage(
+                result.Buffer,
+                out consumed,
+                out examined,
+                out message
+            );
             pipe.Reader.AdvanceTo(consumed, examined);
 
             // parse result should be complete only after we parsed the last message part
@@ -138,17 +180,53 @@ public class ServerSentEventsParserTests
     }
 
     [Theory]
-    [InlineData("data: T", "\n", "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'")]
-    [InlineData("data: T\r\n", "data: Hello, World\r\r\n\n", "There was an error in the frame format")]
-    [InlineData("data: T\r\n", "data: Hello, World\n\n", "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'")]
+    [InlineData(
+        "data: T",
+        "\n",
+        "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'"
+    )]
+    [InlineData(
+        "data: T\r\n",
+        "data: Hello, World\r\r\n\n",
+        "There was an error in the frame format"
+    )]
+    [InlineData(
+        "data: T\r\n",
+        "data: Hello, World\n\n",
+        "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'"
+    )]
     [InlineData("data: T\r\nf", "oo: Hello, World\r\n\r\n", "Expected the message prefix 'data: '")]
     [InlineData("foo", ": T\r\ndata: Hello, World\r\n\r\n", "Expected the message prefix 'data: '")]
-    [InlineData("food:", " T\r\ndata: Hello, World\r\n\r\n", "Expected the message prefix 'data: '")]
-    [InlineData("data: T\r\ndata: Hello, W", "orld\r\n\n", "There was an error in the frame format")]
-    [InlineData("data: T\r\nda", "ta: Hello\n, World\r\n\r\n", "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'")]
-    [InlineData("data: ", "T\r\ndata: Major\r\ndata:  Key\r\ndata:  Alert\r\n\r\\", "Expected a \\r\\n frame ending")]
-    [InlineData("data: B\r\ndata: SGVs", "bG8sIFdvcmxk\r\n\n\n", "There was an error in the frame format")]
-    public async Task ParseMessageAcrossMultipleReadsFailure(string encodedMessagePart1, string encodedMessagePart2, string expectedMessage)
+    [InlineData(
+        "food:",
+        " T\r\ndata: Hello, World\r\n\r\n",
+        "Expected the message prefix 'data: '"
+    )]
+    [InlineData(
+        "data: T\r\ndata: Hello, W",
+        "orld\r\n\n",
+        "There was an error in the frame format"
+    )]
+    [InlineData(
+        "data: T\r\nda",
+        "ta: Hello\n, World\r\n\r\n",
+        "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'"
+    )]
+    [InlineData(
+        "data: ",
+        "T\r\ndata: Major\r\ndata:  Key\r\ndata:  Alert\r\n\r\\",
+        "Expected a \\r\\n frame ending"
+    )]
+    [InlineData(
+        "data: B\r\ndata: SGVs",
+        "bG8sIFdvcmxk\r\n\n\n",
+        "There was an error in the frame format"
+    )]
+    public async Task ParseMessageAcrossMultipleReadsFailure(
+        string encodedMessagePart1,
+        string encodedMessagePart2,
+        string expectedMessage
+    )
     {
         var pipe = new Pipe();
 
@@ -158,7 +236,12 @@ public class ServerSentEventsParserTests
         var result = await pipe.Reader.ReadAsync();
         var parser = new ServerSentEventsMessageParser();
 
-        var parseResult = parser.ParseMessage(result.Buffer, out var consumed, out var examined, out var buffer);
+        var parseResult = parser.ParseMessage(
+            result.Buffer,
+            out var consumed,
+            out var examined,
+            out var buffer
+        );
         Assert.Equal(ServerSentEventsMessageParser.ParseResult.Incomplete, parseResult);
 
         pipe.Reader.AdvanceTo(consumed, examined);
@@ -167,7 +250,9 @@ public class ServerSentEventsParserTests
         await pipe.Writer.WriteAsync(Encoding.UTF8.GetBytes(encodedMessagePart2));
         result = await pipe.Reader.ReadAsync();
 
-        var ex = Assert.Throws<FormatException>(() => parser.ParseMessage(result.Buffer, out consumed, out examined, out buffer));
+        var ex = Assert.Throws<FormatException>(() =>
+            parser.ParseMessage(result.Buffer, out consumed, out examined, out buffer)
+        );
         Assert.Equal(expectedMessage, ex.Message);
     }
 
@@ -183,7 +268,12 @@ public class ServerSentEventsParserTests
         var result = await pipe.Reader.ReadAsync();
         var parser = new ServerSentEventsMessageParser();
 
-        var parseResult = parser.ParseMessage(result.Buffer, out var consumed, out var examined, out var message);
+        var parseResult = parser.ParseMessage(
+            result.Buffer,
+            out var consumed,
+            out var examined,
+            out var message
+        );
         Assert.Equal(ServerSentEventsMessageParser.ParseResult.Completed, parseResult);
         Assert.Equal("foo", Encoding.UTF8.GetString(message));
         Assert.Equal(consumed, result.Buffer.GetPosition(message1.Length));
@@ -203,8 +293,16 @@ public class ServerSentEventsParserTests
     {
         get
         {
-            yield return new object[] { "data: Shaolin\r\ndata:  Fantastic\r\n\r\n", "Shaolin" + Environment.NewLine + " Fantastic" };
-            yield return new object[] { "data: The\r\ndata: Get\r\ndata: Down\r\n\r\n", "The" + Environment.NewLine + "Get" + Environment.NewLine + "Down" };
+            yield return new object[]
+            {
+                "data: Shaolin\r\ndata:  Fantastic\r\n\r\n",
+                "Shaolin" + Environment.NewLine + " Fantastic",
+            };
+            yield return new object[]
+            {
+                "data: The\r\ndata: Get\r\ndata: Down\r\n\r\n",
+                "The" + Environment.NewLine + "Get" + Environment.NewLine + "Down",
+            };
         }
     }
 
@@ -216,7 +314,12 @@ public class ServerSentEventsParserTests
         var readableBuffer = new ReadOnlySequence<byte>(buffer);
         var parser = new ServerSentEventsMessageParser();
 
-        var parseResult = parser.ParseMessage(readableBuffer, out var consumed, out var examined, out var message);
+        var parseResult = parser.ParseMessage(
+            readableBuffer,
+            out var consumed,
+            out var examined,
+            out var message
+        );
         Assert.Equal(ServerSentEventsMessageParser.ParseResult.Completed, parseResult);
         Assert.Equal(consumed, examined);
 

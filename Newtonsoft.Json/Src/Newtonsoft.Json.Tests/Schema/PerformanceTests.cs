@@ -47,7 +47,8 @@ namespace Newtonsoft.Json.Tests.Schema
         [Test]
         public void ReaderPerformance()
         {
-            string json = @"[
+            string json =
+                @"[
     {
         ""id"": 2,
         ""name"": ""An ice sculpture"",
@@ -79,7 +80,8 @@ namespace Newtonsoft.Json.Tests.Schema
     }
 ]";
 
-            JsonSchema schema = JsonSchema.Parse(@"{
+            JsonSchema schema = JsonSchema.Parse(
+                @"{
     ""$schema"": ""http://json-schema.org/draft-04/schema#"",
     ""title"": ""Product set"",
     ""type"": ""array"",
@@ -128,7 +130,8 @@ namespace Newtonsoft.Json.Tests.Schema
             }
         }
     }
-}");
+}"
+            );
 
             using (var tester = new PerformanceTester("Reader"))
             {
@@ -138,9 +141,7 @@ namespace Newtonsoft.Json.Tests.Schema
                     JsonValidatingReader validatingReader = new JsonValidatingReader(reader);
                     validatingReader.Schema = schema;
 
-                    while (validatingReader.Read())
-                    {
-                    }
+                    while (validatingReader.Read()) { }
                 }
             }
         }
@@ -152,9 +153,7 @@ namespace Newtonsoft.Json.Tests.Schema
         private readonly Action<TimeSpan> _callback;
 
         public PerformanceTester(string description)
-            : this(ts => Console.WriteLine(description + ": " + ts.TotalSeconds))
-        {
-        }
+            : this(ts => Console.WriteLine(description + ": " + ts.TotalSeconds)) { }
 
         public PerformanceTester(Action<TimeSpan> callback)
         {

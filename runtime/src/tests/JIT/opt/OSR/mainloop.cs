@@ -9,14 +9,14 @@ using Xunit;
 
 public class MainLoop
 {
-   [Fact]
-   public static int TestEntryPoint()
-   {
-       long result = 0;
-       for (int i = 0; i < 1_000_000; i++)
-       {
-           result += (long)i;
-       }
-       return result == 499999500000 ? 100 : -1;
-   }  
+    [Fact]
+    public static int TestEntryPoint()
+    {
+        long result = 0;
+        for (int i = 0; i < 1_000_000; i++)
+        {
+            result += (long)i;
+        }
+        return result == 499999500000 ? 100 : -1;
+    }
 }

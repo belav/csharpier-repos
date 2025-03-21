@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis
         //
         // The reason is that x86 ABI requires that structs must be returned in
         // a return buffer even if they can fit in a register like this one.
-        // Also since struct contains a reference, the write to the buffer is done with a checked GC barrier 
+        // Also since struct contains a reference, the write to the buffer is done with a checked GC barrier
         // as JIT does not know if the write goes to a stack or a heap location.
         // Assigning to Value directly easily avoids all this redundancy.
 

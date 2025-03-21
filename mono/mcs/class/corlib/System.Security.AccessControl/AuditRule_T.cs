@@ -9,10 +9,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -21,48 +21,52 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Security.Principal;
 
 namespace System.Security.AccessControl
 {
-	public class AuditRule<T> : AuditRule where T : struct
-	{
-		public AuditRule (string identity, T rights, AuditFlags flags)
-			: this (new NTAccount (identity), rights, flags)
-		{
+    public class AuditRule<T> : AuditRule
+        where T : struct
+    {
+        public AuditRule(string identity, T rights, AuditFlags flags)
+            : this(new NTAccount(identity), rights, flags) { }
 
-		}
+        public AuditRule(IdentityReference identity, T rights, AuditFlags flags)
+            : this(identity, rights, InheritanceFlags.None, PropagationFlags.None, flags) { }
 
-		public AuditRule (IdentityReference identity, T rights, AuditFlags flags)
-			: this (identity, rights, InheritanceFlags.None, PropagationFlags.None, flags)
-		{
+        public AuditRule(
+            string identity,
+            T rights,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
+            : this(new NTAccount(identity), rights, inheritanceFlags, propagationFlags, flags) { }
 
-		}
+        public AuditRule(
+            IdentityReference identity,
+            T rights,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
+            : this(identity, (int)(object)rights, false, inheritanceFlags, propagationFlags, flags)
+        { }
 
-		public AuditRule (string identity, T rights, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
-			: this (new NTAccount (identity), rights, inheritanceFlags, propagationFlags, flags)
-		{
+        internal AuditRule(
+            IdentityReference identity,
+            int rights,
+            bool isInherited,
+            InheritanceFlags inheritanceFlags,
+            PropagationFlags propagationFlags,
+            AuditFlags flags
+        )
+            : base(identity, rights, isInherited, inheritanceFlags, propagationFlags, flags) { }
 
-		}
-
-		public AuditRule (IdentityReference identity, T rights, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
-			: this (identity, (int)(object)rights, false, inheritanceFlags, propagationFlags, flags)
-		{
-
-		}
-
-		internal AuditRule (IdentityReference identity, int rights, bool isInherited, InheritanceFlags inheritanceFlags, PropagationFlags propagationFlags, AuditFlags flags)
-			: base (identity, rights, isInherited, inheritanceFlags, propagationFlags, flags)
-		{
-
-		}
-
-		public T Rights {
-			get { return (T)(object)AccessMask; }
-		}
-	}
+        public T Rights
+        {
+            get { return (T)(object)AccessMask; }
+        }
+    }
 }
-
-

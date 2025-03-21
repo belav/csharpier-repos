@@ -56,7 +56,10 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new CodeTypeReferenceExpression((Type)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new CodeTypeReferenceExpression((Type)null)
+            );
         }
 
         [Theory]
@@ -65,7 +68,10 @@ namespace System.CodeDom.Tests
         {
             var typeReference = new CodeTypeReferenceExpression();
             typeReference.Type = value;
-            Assert.Equal((value ?? new CodeTypeReference("")).BaseType, typeReference.Type.BaseType);
+            Assert.Equal(
+                (value ?? new CodeTypeReference("")).BaseType,
+                typeReference.Type.BaseType
+            );
         }
     }
 }

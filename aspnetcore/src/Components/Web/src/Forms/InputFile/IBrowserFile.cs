@@ -53,5 +53,8 @@ public interface IBrowserFile
     /// </param>
     /// <param name="cancellationToken">A cancellation token to signal the cancellation of streaming file data.</param>
     /// <exception cref="IOException">Thrown if the file's length exceeds the <paramref name="maxAllowedSize"/> value.</exception>
-    Stream OpenReadStream(long maxAllowedSize = 500 * 1024, CancellationToken cancellationToken = default);
+    Stream OpenReadStream(
+        long maxAllowedSize = 500 * 1024,
+        CancellationToken cancellationToken = default
+    );
 }

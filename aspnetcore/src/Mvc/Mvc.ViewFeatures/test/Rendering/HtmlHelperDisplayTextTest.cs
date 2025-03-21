@@ -43,12 +43,17 @@ public class HtmlHelperDisplayTextTest
     {
         // Arrange
         var provider = new TestModelMetadataProvider();
-        provider.ForType<OverriddenToStringModel>().DisplayDetails(dd =>
-        {
-            dd.NullDisplayText = "Null display Text";
-        });
+        provider
+            .ForType<OverriddenToStringModel>()
+            .DisplayDetails(dd =>
+            {
+                dd.NullDisplayText = "Null display Text";
+            });
 
-        var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(model: null, provider: provider);
+        var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
+            model: null,
+            provider: provider
+        );
 
         // Act
         var result = helper.DisplayText(expression: string.Empty);
@@ -62,12 +67,17 @@ public class HtmlHelperDisplayTextTest
     {
         // Arrange
         var provider = new TestModelMetadataProvider();
-        provider.ForType<OverriddenToStringModel>().DisplayDetails(dd =>
-        {
-            dd.NullDisplayText = "Null display Text";
-        });
+        provider
+            .ForType<OverriddenToStringModel>()
+            .DisplayDetails(dd =>
+            {
+                dd.NullDisplayText = "Null display Text";
+            });
 
-        var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(model: null, provider: provider);
+        var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
+            model: null,
+            provider: provider
+        );
 
         // Act
         var result = helper.DisplayTextFor(m => m);
@@ -85,7 +95,7 @@ public class HtmlHelperDisplayTextTest
 
         // Act
         var result = helper.DisplayText(expression: string.Empty);
-        var nullResult = helper.DisplayText(expression: null);    // null is another alias for current model
+        var nullResult = helper.DisplayText(expression: null); // null is another alias for current model
 
         // Assert
         Assert.Equal("Model value", result);
@@ -130,12 +140,17 @@ public class HtmlHelperDisplayTextTest
         };
 
         var provider = new TestModelMetadataProvider();
-        provider.ForType<OverriddenToStringModel>().DisplayDetails(dd =>
-        {
-            dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
-        });
+        provider
+            .ForType<OverriddenToStringModel>()
+            .DisplayDetails(dd =>
+            {
+                dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
+            });
 
-        var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(model: model, provider: provider);
+        var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
+            model: model,
+            provider: provider
+        );
 
         // Act
         var result = helper.DisplayText(expression: string.Empty);
@@ -154,12 +169,17 @@ public class HtmlHelperDisplayTextTest
         };
 
         var provider = new TestModelMetadataProvider();
-        provider.ForType<OverriddenToStringModel>().DisplayDetails(dd =>
-        {
-            dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
-        });
+        provider
+            .ForType<OverriddenToStringModel>()
+            .DisplayDetails(dd =>
+            {
+                dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
+            });
 
-        var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(model: model, provider: provider);
+        var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
+            model: model,
+            provider: provider
+        );
 
         // Act
         var result = helper.DisplayTextFor(m => m);
@@ -179,12 +199,17 @@ public class HtmlHelperDisplayTextTest
         };
 
         var provider = new TestModelMetadataProvider();
-        provider.ForType<OverriddenToStringModel>().DisplayDetails(dd =>
-        {
-            dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
-        });
+        provider
+            .ForType<OverriddenToStringModel>()
+            .DisplayDetails(dd =>
+            {
+                dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
+            });
 
-        var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(model: model, provider: provider);
+        var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
+            model: model,
+            provider: provider
+        );
 
         // Act
         var result = helper.DisplayText("Name");
@@ -197,10 +222,7 @@ public class HtmlHelperDisplayTextTest
     public void DisplayTextFor_ReturnsPropertyValue_IfPropertyExpression()
     {
         // Arrange
-        var model = new OverriddenToStringModel("ignored text")
-        {
-            Name = "Property value",
-        };
+        var model = new OverriddenToStringModel("ignored text") { Name = "Property value" };
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
 
         // Act
@@ -214,10 +236,7 @@ public class HtmlHelperDisplayTextTest
     public void DisplayText_ReturnsViewDataEntry()
     {
         // Arrange
-        var model = new OverriddenToStringModel("Model value")
-        {
-            Name = "Property value",
-        };
+        var model = new OverriddenToStringModel("Model value") { Name = "Property value" };
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
         helper.ViewData["Name"] = "View data dictionary value";
 
@@ -232,10 +251,7 @@ public class HtmlHelperDisplayTextTest
     public void DisplayTextFor_IgnoresViewDataEntry()
     {
         // Arrange
-        var model = new OverriddenToStringModel("Model value")
-        {
-            Name = "Property value",
-        };
+        var model = new OverriddenToStringModel("Model value") { Name = "Property value" };
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
         helper.ViewData["Name"] = "View data dictionary value";
 
@@ -250,10 +266,7 @@ public class HtmlHelperDisplayTextTest
     public void DisplayText_IgnoresModelStateEntry_ReturnsViewDataEntry()
     {
         // Arrange
-        var model = new OverriddenToStringModel("Model value")
-        {
-            Name = "Property value",
-        };
+        var model = new OverriddenToStringModel("Model value") { Name = "Property value" };
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
         var viewData = helper.ViewData;
         viewData["FieldPrefix.Name"] = "View data dictionary value";
@@ -262,7 +275,8 @@ public class HtmlHelperDisplayTextTest
         viewData.ModelState.SetModelValue(
             "FieldPrefix.Name",
             "Attempted name value",
-            "Attempted name value");
+            "Attempted name value"
+        );
 
         // Act
         var result = helper.DisplayText("Name");
@@ -275,10 +289,7 @@ public class HtmlHelperDisplayTextTest
     public void DisplayTextFor_IgnoresModelStateEntry()
     {
         // Arrange
-        var model = new OverriddenToStringModel("Model value")
-        {
-            Name = "Property value",
-        };
+        var model = new OverriddenToStringModel("Model value") { Name = "Property value" };
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
         var viewData = helper.ViewData;
         viewData["Name"] = "View data dictionary value";
@@ -287,7 +298,8 @@ public class HtmlHelperDisplayTextTest
         viewData.ModelState.SetModelValue(
             "FieldPrefix.Name",
             "Attempted name value",
-            "Attempted name value");
+            "Attempted name value"
+        );
 
         // Act
         var result = helper.DisplayTextFor(m => m.Name);
@@ -316,11 +328,16 @@ public class HtmlHelperDisplayTextTest
     public void DisplayTextFor_EnumDisplayAttribute_WhenPresentOnProperty()
     {
         // Arrange
-        var model = new EnumWithDisplayAttributeContainer { EnumValue = EnumWithDisplayAttribute.Value1 };
+        var model = new EnumWithDisplayAttributeContainer
+        {
+            EnumValue = EnumWithDisplayAttribute.Value1,
+        };
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(model);
 
         // Act
-        var result = helper.DisplayText(expression: nameof(EnumWithDisplayAttributeContainer.EnumValue));
+        var result = helper.DisplayText(
+            expression: nameof(EnumWithDisplayAttributeContainer.EnumValue)
+        );
         var forResult = helper.DisplayTextFor(m => m.EnumValue);
 
         // Assert
@@ -367,12 +384,12 @@ public class HtmlHelperDisplayTextTest
     private enum EnumWithDisplayAttribute
     {
         [Display(Name = "Value One")]
-        Value1
+        Value1,
     }
 
     private enum EnumWithoutDisplayAttribute
     {
-        Value1
+        Value1,
     }
 
     private class EnumWithDisplayAttributeContainer

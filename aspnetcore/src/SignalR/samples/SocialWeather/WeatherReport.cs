@@ -6,7 +6,15 @@ using Newtonsoft.Json.Converters;
 
 namespace SocialWeather;
 
-public enum Weather { Sunny, MostlySunny, PartlySunny, PartlyCloudy, MostlyCloudy, Cloudy }
+public enum Weather
+{
+    Sunny,
+    MostlySunny,
+    PartlySunny,
+    PartlyCloudy,
+    MostlyCloudy,
+    Cloudy,
+}
 
 public class WeatherReport
 {

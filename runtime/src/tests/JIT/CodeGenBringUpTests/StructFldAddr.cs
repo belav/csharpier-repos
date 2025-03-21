@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
@@ -43,7 +42,9 @@ public class BringUpTest_StructFldAddr
         rp.a = a;
         rp.b = b;
         int y = StructFldAddr(rp);
-        if (y == 5) return Pass;
-        else return Fail;
+        if (y == 5)
+            return Pass;
+        else
+            return Fail;
     }
 }

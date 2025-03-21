@@ -3,7 +3,6 @@
 
 using System;
 using System.Diagnostics;
-
 using Internal.Cryptography.Pal.Windows;
 
 namespace Internal.Cryptography

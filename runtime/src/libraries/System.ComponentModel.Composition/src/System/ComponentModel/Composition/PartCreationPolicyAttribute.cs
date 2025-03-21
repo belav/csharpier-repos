@@ -9,8 +9,12 @@ namespace System.ComponentModel.Composition
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     public sealed class PartCreationPolicyAttribute : Attribute
     {
-        internal static PartCreationPolicyAttribute Default = new PartCreationPolicyAttribute(CreationPolicy.Any);
-        internal static PartCreationPolicyAttribute Shared = new PartCreationPolicyAttribute(CreationPolicy.Shared);
+        internal static PartCreationPolicyAttribute Default = new PartCreationPolicyAttribute(
+            CreationPolicy.Any
+        );
+        internal static PartCreationPolicyAttribute Shared = new PartCreationPolicyAttribute(
+            CreationPolicy.Shared
+        );
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="PartCreationPolicyAttribute"/> class.

@@ -301,7 +301,11 @@ namespace System.Data.Tests
         {
             DataColumn parentColumn = _dataSet.Tables["ParentTable"].Columns["id"];
             DataColumn childColumn = _dataSet.Tables["ChildTable"].Columns["ParentID"];
-            DataRelation relation = new DataRelation("ParentChild_Relation1", parentColumn, childColumn);
+            DataRelation relation = new DataRelation(
+                "ParentChild_Relation1",
+                parentColumn,
+                childColumn
+            );
             _dataSet.Tables["ChildTable"].ParentRelations.Add(relation);
 
             DataColumn[] parentColumn1 = new DataColumn[2];
@@ -313,7 +317,11 @@ namespace System.Data.Tests
             childColumn1[0] = _dataSet.Tables["SecondChildTable"].Columns["ParentID"];
             childColumn1[1] = _dataSet.Tables["SecondChildTable"].Columns["DepartmentID"];
 
-            DataRelation secondRelation = new DataRelation("ParentChild_Relation2", parentColumn1, childColumn1);
+            DataRelation secondRelation = new DataRelation(
+                "ParentChild_Relation2",
+                parentColumn1,
+                childColumn1
+            );
             _dataSet.Tables["SecondChildTable"].ParentRelations.Add(secondRelation);
         }
 
@@ -588,7 +596,9 @@ namespace System.Data.Tests
                 // Should throw an exception if the Xml
                 // File has no schema and target table
                 // too does not define any schema
-                InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => table.ReadXml(stream));
+                InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                    table.ReadXml(stream)
+                );
                 Assert.Null(ex.InnerException);
                 Assert.NotNull(ex.Message);
             }
@@ -630,7 +640,7 @@ namespace System.Data.Tests
             _dataSet.Tables.Add(table);
 
             //Read the Xml and the Schema into a table which already belongs to a DataSet
-            //and the table name does not match with the table ion the source XML 
+            //and the table name does not match with the table ion the source XML
             ArgumentException ex = Assert.Throws<ArgumentException>(() => table.ReadXml(_tempFile));
             // DataTable 'Table1' does not match to any
             // DataTable in source
@@ -778,7 +788,6 @@ namespace System.Data.Tests
             Assert.Equal(0, table.ParentRelations.Count);
             Assert.Equal(0, table.ChildRelations.Count);
 
-
             //Check properties of each column
             //First Column
             DataColumn col = table.Columns[0];
@@ -870,7 +879,10 @@ namespace System.Data.Tests
             Assert.Equal(3, row["ParentID"]);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void XmlTest8()
         {
             MakeParentTable1();
@@ -910,7 +922,10 @@ namespace System.Data.Tests
             Assert.Equal("3", row["DepartmentID"]);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void XmlTest9()
         {
             MakeParentTable1();
@@ -1181,7 +1196,6 @@ namespace System.Data.Tests
 
                 reader.Read();
                 VerifyDiffGramElement2(reader);
-
 
                 reader.Read();
                 Assert.Equal(XmlNodeType.Text, reader.NodeType);
@@ -1496,7 +1510,8 @@ namespace System.Data.Tests
                 DataTable table = new DataTable("Table1");
                 table.Columns.Add(new DataColumn("id", typeof(int)));
 
-                ArgumentException ex = Assert.Throws<ArgumentException>(() => table.ReadXml(stream));
+                ArgumentException ex = Assert.Throws<ArgumentException>(() => table.ReadXml(stream)
+                );
                 // DataTable 'Table1' does not match to
                 // any DataTable in source
                 Assert.Equal(typeof(ArgumentException), ex.GetType());
@@ -1671,7 +1686,8 @@ namespace System.Data.Tests
                 table.Columns.Add(new DataColumn("id", Type.GetType("System.Int32")));
                 ds.Tables.Add(table);
 
-                ArgumentException ex = Assert.Throws<ArgumentException>(() => table.ReadXml(stream));
+                ArgumentException ex = Assert.Throws<ArgumentException>(() => table.ReadXml(stream)
+                );
                 // DataTable 'Table1' does not match to
                 // any DataTable in sources
                 Assert.Null(ex.InnerException);
@@ -1681,7 +1697,6 @@ namespace System.Data.Tests
                 // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
                 Assert.Matches(@"[\p{Pi}\p{Po}]" + "Table1" + @"[\p{Pf}\p{Po}]", ex.Message);
                 Assert.Null(ex.ParamName);
-
             }
         }
 
@@ -1745,7 +1760,9 @@ namespace System.Data.Tests
             {
                 DataTable table = new DataTable();
 
-                InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => table.ReadXml(stream));
+                InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                    table.ReadXml(stream)
+                );
                 Assert.Null(ex.InnerException);
                 Assert.NotNull(ex.Message);
             }
@@ -2034,7 +2051,11 @@ namespace System.Data.Tests
             ds.Tables.Add(child1);
             ds.Tables.Add(child2);
 
-            DataRelation relation = new DataRelation("Relation1", parent.Columns[0], child1.Columns[0]);
+            DataRelation relation = new DataRelation(
+                "Relation1",
+                parent.Columns[0],
+                child1.Columns[0]
+            );
             parent.ChildRelations.Add(relation);
 
             relation = new DataRelation("Relation2", child1.Columns[2], child2.Columns[0]);

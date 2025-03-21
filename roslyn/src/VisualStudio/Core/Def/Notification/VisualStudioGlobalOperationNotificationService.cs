@@ -11,14 +11,14 @@ using Microsoft.CodeAnalysis.Shared.TestHooks;
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Notification
 {
     [Export(typeof(IGlobalOperationNotificationService)), Shared]
-    internal partial class VisualStudioGlobalOperationNotificationService : AbstractGlobalOperationNotificationService
+    internal partial class VisualStudioGlobalOperationNotificationService
+        : AbstractGlobalOperationNotificationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioGlobalOperationNotificationService(
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(listenerProvider)
-        {
-        }
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(listenerProvider) { }
     }
 }

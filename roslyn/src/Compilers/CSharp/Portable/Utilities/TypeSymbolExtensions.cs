@@ -29,51 +29,59 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             switch (type.Kind)
             {
                 case SymbolKind.ArrayType:
-                    {
-                        var array = (ArrayTypeSymbol)type;
-                        return customModifierCountForTypeWithAnnotations(array.ElementTypeWithAnnotations);
-                    }
+                {
+                    var array = (ArrayTypeSymbol)type;
+                    return customModifierCountForTypeWithAnnotations(
+                        array.ElementTypeWithAnnotations
+                    );
+                }
                 case SymbolKind.PointerType:
-                    {
-                        var pointer = (PointerTypeSymbol)type;
-                        return customModifierCountForTypeWithAnnotations(pointer.PointedAtTypeWithAnnotations);
-                    }
+                {
+                    var pointer = (PointerTypeSymbol)type;
+                    return customModifierCountForTypeWithAnnotations(
+                        pointer.PointedAtTypeWithAnnotations
+                    );
+                }
                 case SymbolKind.FunctionPointerType:
-                    {
-                        return ((FunctionPointerTypeSymbol)type).Signature.CustomModifierCount();
-                    }
+                {
+                    return ((FunctionPointerTypeSymbol)type).Signature.CustomModifierCount();
+                }
                 case SymbolKind.ErrorType:
                 case SymbolKind.NamedType:
+                {
+                    bool isDefinition = type.IsDefinition;
+
+                    if (!isDefinition)
                     {
-                        bool isDefinition = type.IsDefinition;
+                        var namedType = (NamedTypeSymbol)type;
+                        int count = 0;
 
-                        if (!isDefinition)
+                        while ((object)namedType != null)
                         {
-                            var namedType = (NamedTypeSymbol)type;
-                            int count = 0;
+                            ImmutableArray<TypeWithAnnotations> typeArgs =
+                                namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics;
 
-                            while ((object)namedType != null)
+                            foreach (TypeWithAnnotations typeArg in typeArgs)
                             {
-                                ImmutableArray<TypeWithAnnotations> typeArgs = namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics;
-
-                                foreach (TypeWithAnnotations typeArg in typeArgs)
-                                {
-                                    count += customModifierCountForTypeWithAnnotations(typeArg);
-                                }
-
-                                namedType = namedType.ContainingType;
+                                count += customModifierCountForTypeWithAnnotations(typeArg);
                             }
 
-                            return count;
+                            namedType = namedType.ContainingType;
                         }
-                        break;
+
+                        return count;
                     }
+                    break;
+                }
             }
 
             return 0;
 
-            static int customModifierCountForTypeWithAnnotations(TypeWithAnnotations typeWithAnnotations)
-                => typeWithAnnotations.CustomModifiers.Length + typeWithAnnotations.Type.CustomModifierCount();
+            static int customModifierCountForTypeWithAnnotations(
+                TypeWithAnnotations typeWithAnnotations
+            ) =>
+                typeWithAnnotations.CustomModifiers.Length
+                + typeWithAnnotations.Type.CustomModifierCount();
         }
 
         /// <summary>
@@ -84,7 +92,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// A much less efficient implementation would be CustomModifierCount() == 0.
         /// CONSIDER: Could share a backing method with CustomModifierCount.
         /// </remarks>
-        public static bool HasCustomModifiers(this TypeSymbol type, bool flagNonDefaultArraySizesOrLowerBounds)
+        public static bool HasCustomModifiers(
+            this TypeSymbol type,
+            bool flagNonDefaultArraySizesOrLowerBounds
+        )
         {
             if ((object)type == null)
             {
@@ -95,67 +106,100 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             switch (type.Kind)
             {
                 case SymbolKind.ArrayType:
-                    {
-                        var array = (ArrayTypeSymbol)type;
-                        TypeWithAnnotations elementType = array.ElementTypeWithAnnotations;
-                        return checkTypeWithAnnotations(elementType, flagNonDefaultArraySizesOrLowerBounds)
-                               || (flagNonDefaultArraySizesOrLowerBounds && !array.HasDefaultSizesAndLowerBounds);
-                    }
+                {
+                    var array = (ArrayTypeSymbol)type;
+                    TypeWithAnnotations elementType = array.ElementTypeWithAnnotations;
+                    return checkTypeWithAnnotations(
+                            elementType,
+                            flagNonDefaultArraySizesOrLowerBounds
+                        )
+                        || (
+                            flagNonDefaultArraySizesOrLowerBounds
+                            && !array.HasDefaultSizesAndLowerBounds
+                        );
+                }
                 case SymbolKind.PointerType:
-                    {
-                        var pointer = (PointerTypeSymbol)type;
-                        TypeWithAnnotations pointedAtType = pointer.PointedAtTypeWithAnnotations;
-                        return checkTypeWithAnnotations(pointedAtType, flagNonDefaultArraySizesOrLowerBounds);
-                    }
+                {
+                    var pointer = (PointerTypeSymbol)type;
+                    TypeWithAnnotations pointedAtType = pointer.PointedAtTypeWithAnnotations;
+                    return checkTypeWithAnnotations(
+                        pointedAtType,
+                        flagNonDefaultArraySizesOrLowerBounds
+                    );
+                }
                 case SymbolKind.FunctionPointerType:
+                {
+                    var funcPtr = (FunctionPointerTypeSymbol)type;
+                    if (
+                        !funcPtr.Signature.RefCustomModifiers.IsEmpty
+                        || checkTypeWithAnnotations(
+                            funcPtr.Signature.ReturnTypeWithAnnotations,
+                            flagNonDefaultArraySizesOrLowerBounds
+                        )
+                    )
                     {
-                        var funcPtr = (FunctionPointerTypeSymbol)type;
-                        if (!funcPtr.Signature.RefCustomModifiers.IsEmpty || checkTypeWithAnnotations(funcPtr.Signature.ReturnTypeWithAnnotations, flagNonDefaultArraySizesOrLowerBounds))
+                        return true;
+                    }
+
+                    foreach (var param in funcPtr.Signature.Parameters)
+                    {
+                        if (
+                            !param.RefCustomModifiers.IsEmpty
+                            || checkTypeWithAnnotations(
+                                param.TypeWithAnnotations,
+                                flagNonDefaultArraySizesOrLowerBounds
+                            )
+                        )
                         {
                             return true;
                         }
-
-                        foreach (var param in funcPtr.Signature.Parameters)
-                        {
-                            if (!param.RefCustomModifiers.IsEmpty || checkTypeWithAnnotations(param.TypeWithAnnotations, flagNonDefaultArraySizesOrLowerBounds))
-                            {
-                                return true;
-                            }
-                        }
-
-                        return false;
                     }
+
+                    return false;
+                }
                 case SymbolKind.ErrorType:
                 case SymbolKind.NamedType:
+                {
+                    bool isDefinition = type.IsDefinition;
+
+                    if (!isDefinition)
                     {
-                        bool isDefinition = type.IsDefinition;
-
-                        if (!isDefinition)
+                        var namedType = (NamedTypeSymbol)type;
+                        while ((object)namedType != null)
                         {
-                            var namedType = (NamedTypeSymbol)type;
-                            while ((object)namedType != null)
+                            ImmutableArray<TypeWithAnnotations> typeArgs =
+                                namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics;
+
+                            foreach (TypeWithAnnotations typeArg in typeArgs)
                             {
-                                ImmutableArray<TypeWithAnnotations> typeArgs = namedType.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics;
-
-                                foreach (TypeWithAnnotations typeArg in typeArgs)
+                                if (
+                                    checkTypeWithAnnotations(
+                                        typeArg,
+                                        flagNonDefaultArraySizesOrLowerBounds
+                                    )
+                                )
                                 {
-                                    if (checkTypeWithAnnotations(typeArg, flagNonDefaultArraySizesOrLowerBounds))
-                                    {
-                                        return true;
-                                    }
+                                    return true;
                                 }
-
-                                namedType = namedType.ContainingType;
                             }
+
+                            namedType = namedType.ContainingType;
                         }
-                        break;
                     }
+                    break;
+                }
             }
 
             return false;
 
-            static bool checkTypeWithAnnotations(TypeWithAnnotations typeWithAnnotations, bool flagNonDefaultArraySizesOrLowerBounds)
-                => typeWithAnnotations.CustomModifiers.Any() || typeWithAnnotations.Type.HasCustomModifiers(flagNonDefaultArraySizesOrLowerBounds);
+            static bool checkTypeWithAnnotations(
+                TypeWithAnnotations typeWithAnnotations,
+                bool flagNonDefaultArraySizesOrLowerBounds
+            ) =>
+                typeWithAnnotations.CustomModifiers.Any()
+                || typeWithAnnotations.Type.HasCustomModifiers(
+                    flagNonDefaultArraySizesOrLowerBounds
+                );
         }
 
         /// <summary>
@@ -176,7 +220,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         /// <param name="compilation"></param>
         /// <param name="visited"></param>
         /// <returns></returns>
-        internal static TypeSymbol GetNextBaseTypeNoUseSiteDiagnostics(this TypeSymbol type, ConsList<TypeSymbol> basesBeingResolved, CSharpCompilation compilation, ref PooledHashSet<NamedTypeSymbol> visited)
+        internal static TypeSymbol GetNextBaseTypeNoUseSiteDiagnostics(
+            this TypeSymbol type,
+            ConsList<TypeSymbol> basesBeingResolved,
+            CSharpCompilation compilation,
+            ref PooledHashSet<NamedTypeSymbol> visited
+        )
         {
             switch (type.TypeKind)
             {
@@ -187,7 +236,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 case TypeKind.Struct:
                 case TypeKind.Error:
                 case TypeKind.Interface:
-                    return GetNextDeclaredBase((NamedTypeSymbol)type, basesBeingResolved, compilation, ref visited);
+                    return GetNextDeclaredBase(
+                        (NamedTypeSymbol)type,
+                        basesBeingResolved,
+                        compilation,
+                        ref visited
+                    );
 
                 case TypeKind.Dynamic:
                 case TypeKind.Enum:
@@ -206,12 +260,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        private static TypeSymbol GetNextDeclaredBase(NamedTypeSymbol type, ConsList<TypeSymbol> basesBeingResolved, CSharpCompilation compilation, ref PooledHashSet<NamedTypeSymbol> visited)
+        private static TypeSymbol GetNextDeclaredBase(
+            NamedTypeSymbol type,
+            ConsList<TypeSymbol> basesBeingResolved,
+            CSharpCompilation compilation,
+            ref PooledHashSet<NamedTypeSymbol> visited
+        )
         {
             // We shouldn't have visited this type earlier.
             Debug.Assert(visited == null || !visited.Contains(type.OriginalDefinition));
 
-            if (basesBeingResolved != null && basesBeingResolved.ContainsReference(type.OriginalDefinition))
+            if (
+                basesBeingResolved != null
+                && basesBeingResolved.ContainsReference(type.OriginalDefinition)
+            )
             {
                 return null;
             }
@@ -251,7 +313,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return nextType;
         }
 
-        private static void SetKnownToHaveNoDeclaredBaseCycles(ref PooledHashSet<NamedTypeSymbol> visited)
+        private static void SetKnownToHaveNoDeclaredBaseCycles(
+            ref PooledHashSet<NamedTypeSymbol> visited
+        )
         {
             if (visited != null)
             {
@@ -265,7 +329,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
         }
 
-        private static NamedTypeSymbol GetDefaultBaseOrNull(NamedTypeSymbol type, CSharpCompilation compilation)
+        private static NamedTypeSymbol GetDefaultBaseOrNull(
+            NamedTypeSymbol type,
+            CSharpCompilation compilation
+        )
         {
             if (compilation == null)
             {

@@ -28,8 +28,16 @@ namespace System.Web.Http.WebHost
     /// <summary>
     /// An <see cref="HttpTaskAsyncHandler"/> that uses an <see cref="HttpServer"/> to process ASP.NET requests asynchronously.
     /// </summary>
-    [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "This class is a coordinator, so this coupling is expected.")]
-    [SuppressMessage("Microsoft.Design", "CA1001:Implement IDisposable", Justification = "HttpMessageInvoker doesn’t have any resources of its own to dispose.")]
+    [SuppressMessage(
+        "Microsoft.Maintainability",
+        "CA1506:AvoidExcessiveClassCoupling",
+        Justification = "This class is a coordinator, so this coupling is expected."
+    )]
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1001:Implement IDisposable",
+        Justification = "HttpMessageInvoker doesn’t have any resources of its own to dispose."
+    )]
     public class HttpControllerHandler : HttpTaskAsyncHandler
     {
         // See Microsoft.Owin.Host.SystemWeb.
@@ -37,28 +45,39 @@ namespace System.Web.Http.WebHost
 
         internal static readonly string OwinEnvironmentKey = "MS_OwinEnvironment";
 
-        private static readonly Lazy<Action<HttpContextBase>> _suppressRedirectAction =
-            new Lazy<Action<HttpContextBase>>(
-                () =>
-                {
-                    // If the behavior is explicitly disabled, do nothing
-                    if (!SuppressFormsAuthRedirectHelper.GetEnabled(WebConfigurationManager.AppSettings))
-                    {
-                        return httpContext => { };
-                    }
+        private static readonly Lazy<Action<HttpContextBase>> _suppressRedirectAction = new Lazy<
+            Action<HttpContextBase>
+        >(() =>
+        {
+            // If the behavior is explicitly disabled, do nothing
+            if (!SuppressFormsAuthRedirectHelper.GetEnabled(WebConfigurationManager.AppSettings))
+            {
+                return httpContext => { };
+            }
 
-                    return httpContext => httpContext.Response.SuppressFormsAuthenticationRedirect = true;
-                });
+            return httpContext => httpContext.Response.SuppressFormsAuthenticationRedirect = true;
+        });
 
         private static readonly Lazy<IHostBufferPolicySelector> _bufferPolicySelector =
-            new Lazy<IHostBufferPolicySelector>(() => GlobalConfiguration.Configuration.Services.GetHostBufferPolicySelector());
+            new Lazy<IHostBufferPolicySelector>(() =>
+                GlobalConfiguration.Configuration.Services.GetHostBufferPolicySelector()
+            );
 
-        private static readonly Lazy<IExceptionHandler> _exceptionHandler = new Lazy<IExceptionHandler>(() =>
-            ExceptionServices.GetHandler(GlobalConfiguration.Configuration));
-        private static readonly Lazy<IExceptionLogger> _exceptionLogger = new Lazy<IExceptionLogger>(() =>
-            ExceptionServices.GetLogger(GlobalConfiguration.Configuration));
+        private static readonly Lazy<IExceptionHandler> _exceptionHandler =
+            new Lazy<IExceptionHandler>(() =>
+                ExceptionServices.GetHandler(GlobalConfiguration.Configuration)
+            );
+        private static readonly Lazy<IExceptionLogger> _exceptionLogger =
+            new Lazy<IExceptionLogger>(() =>
+                ExceptionServices.GetLogger(GlobalConfiguration.Configuration)
+            );
 
-        private static readonly Func<HttpRequestMessage, X509Certificate2> _retrieveClientCertificate = new Func<HttpRequestMessage, X509Certificate2>(RetrieveClientCertificate);
+        private static readonly Func<
+            HttpRequestMessage,
+            X509Certificate2
+        > _retrieveClientCertificate = new Func<HttpRequestMessage, X509Certificate2>(
+            RetrieveClientCertificate
+        );
 
         private readonly IHttpRouteData _routeData;
         private readonly HttpMessageInvoker _server;
@@ -68,9 +87,7 @@ namespace System.Web.Http.WebHost
         /// </summary>
         /// <param name="routeData">The route data.</param>
         public HttpControllerHandler(RouteData routeData)
-            : this(routeData, GlobalConfiguration.DefaultServer)
-        {
-        }
+            : this(routeData, GlobalConfiguration.DefaultServer) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpControllerHandler"/> class.
@@ -99,18 +116,26 @@ namespace System.Web.Http.WebHost
 
         internal async Task ProcessRequestAsyncCore(HttpContextBase contextBase)
         {
-            HttpRequestMessage request = contextBase.GetHttpRequestMessage() ?? ConvertRequest(contextBase);
+            HttpRequestMessage request =
+                contextBase.GetHttpRequestMessage() ?? ConvertRequest(contextBase);
 
             // Add route data
             request.SetRouteData(_routeData);
-            CancellationToken cancellationToken = contextBase.Response.GetClientDisconnectedTokenWhenFixed();
+            CancellationToken cancellationToken =
+                contextBase.Response.GetClientDisconnectedTokenWhenFixed();
             HttpResponseMessage response = null;
 
             try
             {
                 response = await _server.SendAsync(request, cancellationToken);
-                await CopyResponseAsync(contextBase, request, response, _exceptionLogger.Value, _exceptionHandler.Value,
-                    cancellationToken);
+                await CopyResponseAsync(
+                    contextBase,
+                    request,
+                    response,
+                    _exceptionLogger.Value,
+                    _exceptionHandler.Value,
+                    cancellationToken
+                );
             }
             catch (OperationCanceledException)
             {
@@ -146,7 +171,11 @@ namespace System.Web.Http.WebHost
             }
         }
 
-        private static void AddHeaderToHttpRequestMessage(HttpRequestMessage httpRequestMessage, string headerName, string[] headerValues)
+        private static void AddHeaderToHttpRequestMessage(
+            HttpRequestMessage httpRequestMessage,
+            string headerName,
+            string[] headerValues
+        )
         {
             Contract.Assert(httpRequestMessage != null);
             Contract.Assert(headerName != null);
@@ -154,13 +183,21 @@ namespace System.Web.Http.WebHost
 
             if (!httpRequestMessage.Headers.TryAddWithoutValidation(headerName, headerValues))
             {
-                httpRequestMessage.Content.Headers.TryAddWithoutValidation(headerName, headerValues);
+                httpRequestMessage.Content.Headers.TryAddWithoutValidation(
+                    headerName,
+                    headerValues
+                );
             }
         }
 
-        internal static async Task CopyResponseAsync(HttpContextBase httpContextBase, HttpRequestMessage request,
-            HttpResponseMessage response, IExceptionLogger exceptionLogger, IExceptionHandler exceptionHandler,
-            CancellationToken cancellationToken)
+        internal static async Task CopyResponseAsync(
+            HttpContextBase httpContextBase,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            IExceptionLogger exceptionLogger,
+            IExceptionHandler exceptionHandler,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(httpContextBase != null);
             Contract.Assert(request != null);
@@ -172,8 +209,15 @@ namespace System.Web.Http.WebHost
                 return;
             }
 
-            if (!await CopyResponseStatusAndHeadersAsync(httpContextBase, request, response, exceptionLogger,
-                cancellationToken))
+            if (
+                !await CopyResponseStatusAndHeadersAsync(
+                    httpContextBase,
+                    request,
+                    response,
+                    exceptionLogger,
+                    cancellationToken
+                )
+            )
             {
                 return;
             }
@@ -196,7 +240,14 @@ namespace System.Web.Http.WebHost
             // The response-writing task will not fault -- it handles errors internally.
             if (response.Content != null)
             {
-                await WriteResponseContentAsync(httpContextBase, request, response, exceptionLogger, exceptionHandler, cancellationToken);
+                await WriteResponseContentAsync(
+                    httpContextBase,
+                    request,
+                    response,
+                    exceptionLogger,
+                    exceptionHandler,
+                    cancellationToken
+                );
             }
         }
 
@@ -205,8 +256,15 @@ namespace System.Web.Http.WebHost
             return ConvertRequest(httpContextBase, _bufferPolicySelector.Value);
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller becomes owner")]
-        internal static HttpRequestMessage ConvertRequest(HttpContextBase httpContextBase, IHostBufferPolicySelector policySelector)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller becomes owner"
+        )]
+        internal static HttpRequestMessage ConvertRequest(
+            HttpContextBase httpContextBase,
+            IHostBufferPolicySelector policySelector
+        )
         {
             Contract.Assert(httpContextBase != null);
 
@@ -216,7 +274,10 @@ namespace System.Web.Http.WebHost
             HttpRequestMessage request = new HttpRequestMessage(method, uri);
 
             // Choose a buffered or bufferless input stream based on user's policy
-            bool bufferInput = policySelector == null ? true : policySelector.UseBufferedInputStream(httpContextBase);
+            bool bufferInput =
+                policySelector == null
+                    ? true
+                    : policySelector.UseBufferedInputStream(httpContextBase);
             request.Content = GetStreamContent(requestBase, bufferInput);
 
             foreach (string headerName in requestBase.Headers)
@@ -228,33 +289,56 @@ namespace System.Web.Http.WebHost
             // Add context to enable route lookup later on
             request.SetHttpContext(httpContextBase);
 
-            HttpRequestContext requestContext = new WebHostHttpRequestContext(httpContextBase, requestBase, request);
+            HttpRequestContext requestContext = new WebHostHttpRequestContext(
+                httpContextBase,
+                requestBase,
+                request
+            );
             request.SetRequestContext(requestContext);
 
             IDictionary httpContextItems = httpContextBase.Items;
 
             // Add the OWIN environment, when available (such as when using the OWIN integrated pipeline HTTP module).
-            if (httpContextItems != null && httpContextItems.Contains(OwinEnvironmentHttpContextKey))
+            if (
+                httpContextItems != null
+                && httpContextItems.Contains(OwinEnvironmentHttpContextKey)
+            )
             {
-                request.Properties.Add(OwinEnvironmentKey, httpContextItems[OwinEnvironmentHttpContextKey]);
+                request.Properties.Add(
+                    OwinEnvironmentKey,
+                    httpContextItems[OwinEnvironmentHttpContextKey]
+                );
             }
 
             // The following three properties are set for backwards compatibility only. The request context controls
             // the behavior for all cases except when accessing the property directly by key.
 
             // Add the retrieve client certificate delegate to the property bag to enable lookup later on
-            request.Properties.Add(HttpPropertyKeys.RetrieveClientCertificateDelegateKey, _retrieveClientCertificate);
+            request.Properties.Add(
+                HttpPropertyKeys.RetrieveClientCertificateDelegateKey,
+                _retrieveClientCertificate
+            );
 
             // Add information about whether the request is local or not
-            request.Properties.Add(HttpPropertyKeys.IsLocalKey, new Lazy<bool>(() => requestBase.IsLocal));
+            request.Properties.Add(
+                HttpPropertyKeys.IsLocalKey,
+                new Lazy<bool>(() => requestBase.IsLocal)
+            );
 
             // Add information about whether custom errors are enabled for this request or not
-            request.Properties.Add(HttpPropertyKeys.IncludeErrorDetailKey, new Lazy<bool>(() => !httpContextBase.IsCustomErrorEnabled));
+            request.Properties.Add(
+                HttpPropertyKeys.IncludeErrorDetailKey,
+                new Lazy<bool>(() => !httpContextBase.IsCustomErrorEnabled)
+            );
 
             return request;
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Caller becomes owner")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Caller becomes owner"
+        )]
         private static HttpContent GetStreamContent(HttpRequestBase requestBase, bool bufferInput)
         {
             if (bufferInput)
@@ -284,10 +368,16 @@ namespace System.Web.Http.WebHost
                     }
                     else
                     {
-                        Contract.Assert(requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Bufferless);
-                        throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                                                                          SRResources.RequestBodyAlreadyReadInMode,
-                                                                          ReadEntityBodyMode.Bufferless));
+                        Contract.Assert(
+                            requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Bufferless
+                        );
+                        throw new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                SRResources.RequestBodyAlreadyReadInMode,
+                                ReadEntityBodyMode.Bufferless
+                            )
+                        );
                     }
                 });
             }
@@ -303,7 +393,9 @@ namespace System.Web.Http.WebHost
                     {
                         // The user intended that the request be read in a bufferless manner, but we are starting with a buffered stream.
                         // To maintain compatibility with legacy behavior, we'll throw in this case.
-                        throw new InvalidOperationException(SRResources.RequestStreamCannotBeReadBufferless);
+                        throw new InvalidOperationException(
+                            SRResources.RequestStreamCannotBeReadBufferless
+                        );
                     }
                     else if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Bufferless)
                     {
@@ -316,8 +408,16 @@ namespace System.Web.Http.WebHost
                     }
                     else
                     {
-                        Contract.Assert(requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Buffered);
-                        throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, SRResources.RequestBodyAlreadyReadInMode, ReadEntityBodyMode.Buffered));
+                        Contract.Assert(
+                            requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Buffered
+                        );
+                        throw new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                SRResources.RequestBodyAlreadyReadInMode,
+                                ReadEntityBodyMode.Buffered
+                            )
+                        );
                     }
                 });
             }
@@ -328,7 +428,9 @@ namespace System.Web.Http.WebHost
         /// setting <see cref="P:System.Web.HttpResponseBase.SuppressFormsAuthenticationRedirect" /> to <c>true</c> if available.
         /// </summary>
         /// <param name="httpContextBase">The HTTP context base.</param>
-        internal static void EnsureSuppressFormsAuthenticationRedirect(HttpContextBase httpContextBase)
+        internal static void EnsureSuppressFormsAuthenticationRedirect(
+            HttpContextBase httpContextBase
+        )
         {
             Contract.Assert(httpContextBase != null);
 
@@ -339,10 +441,20 @@ namespace System.Web.Http.WebHost
             }
         }
 
-        [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "unused", Justification = "unused variable necessary to call getter")]
-        private static Task WriteResponseContentAsync(HttpContextBase httpContextBase, HttpRequestMessage request,
-            HttpResponseMessage response, IExceptionLogger exceptionLogger, IExceptionHandler exceptionHandler,
-            CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1804:RemoveUnusedLocals",
+            MessageId = "unused",
+            Justification = "unused variable necessary to call getter"
+        )]
+        private static Task WriteResponseContentAsync(
+            HttpContextBase httpContextBase,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            IExceptionLogger exceptionLogger,
+            IExceptionHandler exceptionHandler,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(httpContextBase != null);
             Contract.Assert(response != null);
@@ -358,14 +470,35 @@ namespace System.Web.Http.WebHost
             bool isBuffered = httpResponseBase.BufferOutput;
 
             return isBuffered
-                    ? WriteBufferedResponseContentAsync(httpContextBase, request, response, exceptionLogger, exceptionHandler, cancellationToken)
-                    : WriteStreamedResponseContentAsync(httpContextBase, request, response, exceptionLogger, cancellationToken);
+                ? WriteBufferedResponseContentAsync(
+                    httpContextBase,
+                    request,
+                    response,
+                    exceptionLogger,
+                    exceptionHandler,
+                    cancellationToken
+                )
+                : WriteStreamedResponseContentAsync(
+                    httpContextBase,
+                    request,
+                    response,
+                    exceptionLogger,
+                    cancellationToken
+                );
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "All exceptions caught here become error responses")]
-        internal static async Task WriteStreamedResponseContentAsync(HttpContextBase httpContextBase,
-            HttpRequestMessage request, HttpResponseMessage response, IExceptionLogger exceptionLogger,
-            CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "All exceptions caught here become error responses"
+        )]
+        internal static async Task WriteStreamedResponseContentAsync(
+            HttpContextBase httpContextBase,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            IExceptionLogger exceptionLogger,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(httpContextBase != null);
             Contract.Assert(httpContextBase.Response != null);
@@ -394,8 +527,14 @@ namespace System.Web.Http.WebHost
 
             Contract.Assert(exception != null);
 
-            ExceptionContextCatchBlock catchBlock = WebHostExceptionCatchBlocks.HttpControllerHandlerStreamContent;
-            ExceptionContext exceptionContext = new ExceptionContext(exception, catchBlock, request, response);
+            ExceptionContextCatchBlock catchBlock =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerStreamContent;
+            ExceptionContext exceptionContext = new ExceptionContext(
+                exception,
+                catchBlock,
+                request,
+                response
+            );
             await exceptionLogger.LogAsync(exceptionContext, cancellationToken);
 
             // Streamed content may have been written and cannot be recalled.
@@ -403,11 +542,24 @@ namespace System.Web.Http.WebHost
             httpContextBase.Request.Abort();
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "continuation task owned by caller")]
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "All exceptions caught here become error responses")]
-        internal static async Task WriteBufferedResponseContentAsync(HttpContextBase httpContextBase,
-            HttpRequestMessage request, HttpResponseMessage response, IExceptionLogger exceptionLogger,
-            IExceptionHandler exceptionHandler, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "continuation task owned by caller"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "All exceptions caught here become error responses"
+        )]
+        internal static async Task WriteBufferedResponseContentAsync(
+            HttpContextBase httpContextBase,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            IExceptionLogger exceptionLogger,
+            IExceptionHandler exceptionHandler,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(httpContextBase != null);
             Contract.Assert(httpContextBase.Response != null);
@@ -449,21 +601,46 @@ namespace System.Web.Http.WebHost
             // but before other continuations the caller appends to this task.
             // The error response writing task handles errors internally and will not show as faulted, except for
             // custom error handlers that choose to propagate these exceptions.
-            ExceptionContextCatchBlock catchBlock = WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent;
+            ExceptionContextCatchBlock catchBlock =
+                WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent;
 
-            if (!await CopyErrorResponseAsync(catchBlock, httpContextBase, request, response,
-                exceptionInfo.SourceException, exceptionLogger, exceptionHandler, cancellationToken))
+            if (
+                !await CopyErrorResponseAsync(
+                    catchBlock,
+                    httpContextBase,
+                    request,
+                    response,
+                    exceptionInfo.SourceException,
+                    exceptionLogger,
+                    exceptionHandler,
+                    cancellationToken
+                )
+            )
             {
                 exceptionInfo.Throw();
             }
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "All exceptions caught here become error responses")]
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "errorResponse gets disposed in the async continuation")]
-        internal static async Task<bool> CopyErrorResponseAsync(ExceptionContextCatchBlock catchBlock,
-            HttpContextBase httpContextBase, HttpRequestMessage request, HttpResponseMessage response,
-            Exception exception, IExceptionLogger exceptionLogger, IExceptionHandler exceptionHandler,
-            CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "All exceptions caught here become error responses"
+        )]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "errorResponse gets disposed in the async continuation"
+        )]
+        internal static async Task<bool> CopyErrorResponseAsync(
+            ExceptionContextCatchBlock catchBlock,
+            HttpContextBase httpContextBase,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            Exception exception,
+            IExceptionLogger exceptionLogger,
+            IExceptionHandler exceptionHandler,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(httpContextBase != null);
             Contract.Assert(httpContextBase.Response != null);
@@ -487,12 +664,19 @@ namespace System.Web.Http.WebHost
             }
             else
             {
-                ExceptionContext exceptionContext = new ExceptionContext(exception, catchBlock, request)
+                ExceptionContext exceptionContext = new ExceptionContext(
+                    exception,
+                    catchBlock,
+                    request
+                )
                 {
-                    Response = response
+                    Response = response,
                 };
                 await exceptionLogger.LogAsync(exceptionContext, cancellationToken);
-                errorResponse = await exceptionHandler.HandleAsync(exceptionContext, cancellationToken);
+                errorResponse = await exceptionHandler.HandleAsync(
+                    exceptionContext,
+                    cancellationToken
+                );
 
                 if (errorResponse == null)
                 {
@@ -501,8 +685,15 @@ namespace System.Web.Http.WebHost
             }
 
             Contract.Assert(errorResponse != null);
-            if (!await CopyResponseStatusAndHeadersAsync(httpContextBase, request, errorResponse, exceptionLogger,
-                cancellationToken))
+            if (
+                !await CopyResponseStatusAndHeadersAsync(
+                    httpContextBase,
+                    request,
+                    errorResponse,
+                    exceptionLogger,
+                    cancellationToken
+                )
+            )
             {
                 // Don't rethrow the original exception unless explicitly requested to do so. In this case, the
                 // exception handler indicated it wanted to handle the exception; it simply failed create a stable
@@ -522,14 +713,23 @@ namespace System.Web.Http.WebHost
 
             CopyHeaders(errorResponse.Content.Headers, httpContextBase);
 
-            await WriteErrorResponseContentAsync(httpResponseBase, request, errorResponse, cancellationToken,
-                exceptionLogger);
+            await WriteErrorResponseContentAsync(
+                httpResponseBase,
+                request,
+                errorResponse,
+                cancellationToken,
+                exceptionLogger
+            );
             return true;
         }
 
-        private static async Task WriteErrorResponseContentAsync(HttpResponseBase httpResponseBase,
-            HttpRequestMessage request, HttpResponseMessage errorResponse, CancellationToken cancellationToken,
-            IExceptionLogger exceptionLogger)
+        private static async Task WriteErrorResponseContentAsync(
+            HttpResponseBase httpResponseBase,
+            HttpRequestMessage request,
+            HttpResponseMessage errorResponse,
+            CancellationToken cancellationToken,
+            IExceptionLogger exceptionLogger
+        )
         {
             HttpRequestMessage ignoreUnused = request;
 
@@ -556,8 +756,12 @@ namespace System.Web.Http.WebHost
 
                 Contract.Assert(exception != null);
 
-                ExceptionContext exceptionContext = new ExceptionContext(exception,
-                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError, request, errorResponse);
+                ExceptionContext exceptionContext = new ExceptionContext(
+                    exception,
+                    WebHostExceptionCatchBlocks.HttpControllerHandlerBufferError,
+                    request,
+                    errorResponse
+                );
                 await exceptionLogger.LogAsync(exceptionContext, cancellationToken);
 
                 // Failure writing the error response.  Likely cause is a formatter
@@ -572,9 +776,13 @@ namespace System.Web.Http.WebHost
             }
         }
 
-        private static async Task<bool> CopyResponseStatusAndHeadersAsync(HttpContextBase httpContextBase,
-            HttpRequestMessage request, HttpResponseMessage response, IExceptionLogger exceptionLogger,
-            CancellationToken cancellationToken)
+        private static async Task<bool> CopyResponseStatusAndHeadersAsync(
+            HttpContextBase httpContextBase,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            IExceptionLogger exceptionLogger,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(httpContextBase != null);
             HttpResponseBase httpResponseBase = httpContextBase.Response;
@@ -583,7 +791,15 @@ namespace System.Web.Http.WebHost
             httpResponseBase.TrySkipIisCustomErrors = true;
             EnsureSuppressFormsAuthenticationRedirect(httpContextBase);
 
-            if (!await PrepareHeadersAsync(httpResponseBase, request, response, exceptionLogger, cancellationToken))
+            if (
+                !await PrepareHeadersAsync(
+                    httpResponseBase,
+                    request,
+                    response,
+                    exceptionLogger,
+                    cancellationToken
+                )
+            )
             {
                 return false;
             }
@@ -593,16 +809,27 @@ namespace System.Web.Http.WebHost
         }
 
         // Prepares Content-Length and Transfer-Encoding headers.
-        [SuppressMessage("Microsoft.Performance", "CA1804:RemoveUnusedLocals", MessageId = "unused", Justification = "unused variable necessary to call getter")]
-        internal static async Task<bool> PrepareHeadersAsync(HttpResponseBase responseBase, HttpRequestMessage request,
-            HttpResponseMessage response, IExceptionLogger exceptionLogger, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1804:RemoveUnusedLocals",
+            MessageId = "unused",
+            Justification = "unused variable necessary to call getter"
+        )]
+        internal static async Task<bool> PrepareHeadersAsync(
+            HttpResponseBase responseBase,
+            HttpRequestMessage request,
+            HttpResponseMessage response,
+            IExceptionLogger exceptionLogger,
+            CancellationToken cancellationToken
+        )
         {
             Contract.Assert(response != null);
             HttpResponseHeaders responseHeaders = response.Headers;
             Contract.Assert(responseHeaders != null);
             HttpContent content = response.Content;
             bool isTransferEncodingChunked = responseHeaders.TransferEncodingChunked == true;
-            HttpHeaderValueCollection<TransferCodingHeaderValue> transferEncoding = responseHeaders.TransferEncoding;
+            HttpHeaderValueCollection<TransferCodingHeaderValue> transferEncoding =
+                responseHeaders.TransferEncoding;
 
             if (content != null)
             {
@@ -635,8 +862,12 @@ namespace System.Web.Http.WebHost
 
                     if (exception != null)
                     {
-                        ExceptionContext exceptionContext = new ExceptionContext(exception,
-                            WebHostExceptionCatchBlocks.HttpControllerHandlerComputeContentLength, request, response);
+                        ExceptionContext exceptionContext = new ExceptionContext(
+                            exception,
+                            WebHostExceptionCatchBlocks.HttpControllerHandlerComputeContentLength,
+                            request,
+                            response
+                        );
                         await exceptionLogger.LogAsync(exceptionContext, cancellationToken);
 
                         SetEmptyErrorResponse(responseBase);
@@ -645,8 +876,10 @@ namespace System.Web.Http.WebHost
                 }
 
                 // Select output buffering based on the user-controlled buffering policy
-                bool isBuffered = _bufferPolicySelector.Value != null ?
-                    _bufferPolicySelector.Value.UseBufferedOutputStream(response) : true;
+                bool isBuffered =
+                    _bufferPolicySelector.Value != null
+                        ? _bufferPolicySelector.Value.UseBufferedOutputStream(response)
+                        : true;
                 responseBase.BufferOutput = isBuffered;
             }
 
@@ -696,9 +929,14 @@ namespace System.Web.Http.WebHost
             HttpContextBase httpContextBase = request.GetHttpContext();
             if (httpContextBase != null)
             {
-                if (httpContextBase.Request.ClientCertificate.Certificate != null && httpContextBase.Request.ClientCertificate.Certificate.Length > 0)
+                if (
+                    httpContextBase.Request.ClientCertificate.Certificate != null
+                    && httpContextBase.Request.ClientCertificate.Certificate.Length > 0
+                )
                 {
-                    result = new X509Certificate2(httpContextBase.Request.ClientCertificate.Certificate);
+                    result = new X509Certificate2(
+                        httpContextBase.Request.ClientCertificate.Certificate
+                    );
                 }
             }
 
@@ -708,9 +946,7 @@ namespace System.Web.Http.WebHost
         private class DelegatingStreamContent : StreamContent
         {
             public DelegatingStreamContent(Stream stream)
-                : base(stream)
-            {
-            }
+                : base(stream) { }
 
             public Task WriteToStreamAsync(Stream stream, TransportContext context)
             {

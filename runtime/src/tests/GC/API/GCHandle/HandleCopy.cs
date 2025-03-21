@@ -1,7 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-// Tests Copy of GCHandleType.Weak .. the object with GCHandleType Weak 
+// Tests Copy of GCHandleType.Weak .. the object with GCHandleType Weak
 // will be collected. The handle and it's copy remain allocated even after the object is collected.
 // Also tests the target of the handle.
 
@@ -25,7 +25,8 @@ public class Test_HandleCopy
     public class CreateObj
     {
         public Dummy obj;
-        public GCHandle handle, copy;
+        public GCHandle handle,
+            copy;
 
         public CreateObj()
         {
@@ -41,7 +42,7 @@ public class Test_HandleCopy
         public void DestroyObj()
         {
             obj = null;
-        }    
+        }
 
         public bool RunTest()
         {

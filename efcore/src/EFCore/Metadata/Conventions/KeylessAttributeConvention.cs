@@ -16,9 +16,7 @@ public class KeylessAttributeConvention : TypeAttributeConventionBase<KeylessAtt
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
     public KeylessAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     Called after an entity type is added to the model if it has an attribute.
@@ -29,6 +27,6 @@ public class KeylessAttributeConvention : TypeAttributeConventionBase<KeylessAtt
     protected override void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
         KeylessAttribute attribute,
-        IConventionContext<IConventionEntityTypeBuilder> context)
-        => entityTypeBuilder.HasNoKey(fromDataAnnotation: true);
+        IConventionContext<IConventionEntityTypeBuilder> context
+    ) => entityTypeBuilder.HasNoKey(fromDataAnnotation: true);
 }

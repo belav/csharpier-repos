@@ -12,15 +12,15 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
-public class ProtectedBrowserStorageUsageTest : ServerTestBase<ToggleExecutionModeServerFixture<BasicTestApp.Program>>
+public class ProtectedBrowserStorageUsageTest
+    : ServerTestBase<ToggleExecutionModeServerFixture<BasicTestApp.Program>>
 {
     public ProtectedBrowserStorageUsageTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<BasicTestApp.Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture.WithServerExecution(), output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture.WithServerExecution(), output) { }
 
     public override async Task InitializeAsync()
     {
@@ -122,9 +122,9 @@ public class ProtectedBrowserStorageUsageTest : ServerTestBase<ToggleExecutionMo
     /// </remarks>
     private void OpenNewSession()
     {
-        var modifierKey = RuntimeInformation.IsOSPlatform(OSPlatform.OSX) ?
-            Keys.Command :
-            Keys.Control;
+        var modifierKey = RuntimeInformation.IsOSPlatform(OSPlatform.OSX)
+            ? Keys.Command
+            : Keys.Control;
 
         var newTabLink = Browser.Exists(By.Id("new-tab"));
         var action = new Actions(Browser);

@@ -13,24 +13,43 @@ namespace Microsoft.AspNetCore.SignalR.Internal;
 // Handles cancellation, cleanup, and completion, so any bugs or improvements can be made in a single place
 internal sealed class ClientResultsManager : IInvocationBinder
 {
-    private readonly ConcurrentDictionary<string, (Type Type, string ConnectionId, object Tcs, Action<object, CompletionMessage> Complete)> _pendingInvocations = new();
+    private readonly ConcurrentDictionary<
+        string,
+        (Type Type, string ConnectionId, object Tcs, Action<object, CompletionMessage> Complete)
+    > _pendingInvocations = new();
 
-    public Task<T> AddInvocation<T>(string connectionId, string invocationId, CancellationToken cancellationToken)
+    public Task<T> AddInvocation<T>(
+        string connectionId,
+        string invocationId,
+        CancellationToken cancellationToken
+    )
     {
-        var tcs = new TaskCompletionSourceWithCancellation<T>(this, connectionId, invocationId, cancellationToken);
-        var result = _pendingInvocations.TryAdd(invocationId, (typeof(T), connectionId, tcs, static (state, completionMessage) =>
-        {
-            var tcs = (TaskCompletionSourceWithCancellation<T>)state;
-            if (completionMessage.HasResult)
-            {
-                tcs.SetResult((T)completionMessage.Result!);
-            }
-            else
-            {
-                tcs.SetException(new HubException(completionMessage.Error));
-            }
-        }
-        ));
+        var tcs = new TaskCompletionSourceWithCancellation<T>(
+            this,
+            connectionId,
+            invocationId,
+            cancellationToken
+        );
+        var result = _pendingInvocations.TryAdd(
+            invocationId,
+            (
+                typeof(T),
+                connectionId,
+                tcs,
+                static (state, completionMessage) =>
+                {
+                    var tcs = (TaskCompletionSourceWithCancellation<T>)state;
+                    if (completionMessage.HasResult)
+                    {
+                        tcs.SetResult((T)completionMessage.Result!);
+                    }
+                    else
+                    {
+                        tcs.SetException(new HubException(completionMessage.Error));
+                    }
+                }
+            )
+        );
         Debug.Assert(result);
 
         tcs.RegisterCancellation();
@@ -38,14 +57,28 @@ internal sealed class ClientResultsManager : IInvocationBinder
         return tcs.Task;
     }
 
-    public void AddInvocation(string invocationId, (Type Type, string ConnectionId, object Tcs, Action<object, CompletionMessage> Complete) invocationInfo)
+    public void AddInvocation(
+        string invocationId,
+        (
+            Type Type,
+            string ConnectionId,
+            object Tcs,
+            Action<object, CompletionMessage> Complete
+        ) invocationInfo
+    )
     {
         var result = _pendingInvocations.TryAdd(invocationId, invocationInfo);
         Debug.Assert(result);
         // Should have a 50% chance of happening once every 2.71 quintillion invocations (see UUID in Wikipedia)
         if (!result)
         {
-            invocationInfo.Complete(invocationInfo.Tcs, CompletionMessage.WithError(invocationId, "ID collision occurred when using client results. This is likely a bug in SignalR."));
+            invocationInfo.Complete(
+                invocationInfo.Tcs,
+                CompletionMessage.WithError(
+                    invocationId,
+                    "ID collision occurred when using client results. This is likely a bug in SignalR."
+                )
+            );
         }
     }
 
@@ -55,7 +88,9 @@ internal sealed class ClientResultsManager : IInvocationBinder
         {
             if (item.ConnectionId != connectionId)
             {
-                throw new InvalidOperationException($"Connection ID '{connectionId}' is not valid for invocation ID '{message.InvocationId}'.");
+                throw new InvalidOperationException(
+                    $"Connection ID '{connectionId}' is not valid for invocation ID '{message.InvocationId}'."
+                );
             }
 
             // if false the connection disconnected right after the above TryGetValue
@@ -72,7 +107,12 @@ internal sealed class ClientResultsManager : IInvocationBinder
         }
     }
 
-    public (Type Type, string ConnectionId, object Tcs, Action<object, CompletionMessage> Completion)? RemoveInvocation(string invocationId)
+    public (
+        Type Type,
+        string ConnectionId,
+        object Tcs,
+        Action<object, CompletionMessage> Completion
+    )? RemoveInvocation(string invocationId)
     {
         _pendingInvocations.TryRemove(invocationId, out var item);
         return item;
@@ -95,7 +135,9 @@ internal sealed class ClientResultsManager : IInvocationBinder
         {
             return type;
         }
-        throw new InvalidOperationException($"Invocation ID '{invocationId}' is not associated with a pending client result.");
+        throw new InvalidOperationException(
+            $"Invocation ID '{invocationId}' is not associated with a pending client result."
+        );
     }
 
     // Unused, here to honor the IInvocationBinder interface but should never be called
@@ -121,8 +163,12 @@ internal sealed class ClientResultsManager : IInvocationBinder
 
         private CancellationTokenRegistration _tokenRegistration;
 
-        public TaskCompletionSourceWithCancellation(ClientResultsManager clientResultsManager, string connectionId, string invocationId,
-            CancellationToken cancellationToken)
+        public TaskCompletionSourceWithCancellation(
+            ClientResultsManager clientResultsManager,
+            string connectionId,
+            string invocationId,
+            CancellationToken cancellationToken
+        )
             : base(TaskCreationOptions.RunContinuationsAsynchronously)
         {
             _clientResultsManager = clientResultsManager;
@@ -137,11 +183,14 @@ internal sealed class ClientResultsManager : IInvocationBinder
         {
             if (_token.CanBeCanceled)
             {
-                _tokenRegistration = _token.UnsafeRegister(static o =>
-                {
-                    var tcs = (TaskCompletionSourceWithCancellation<T>)o!;
-                    tcs.SetCanceled();
-                }, this);
+                _tokenRegistration = _token.UnsafeRegister(
+                    static o =>
+                    {
+                        var tcs = (TaskCompletionSourceWithCancellation<T>)o!;
+                        tcs.SetCanceled();
+                    },
+                    this
+                );
             }
         }
 
@@ -149,7 +198,10 @@ internal sealed class ClientResultsManager : IInvocationBinder
         {
             // TODO: RedisHubLifetimeManager will want to notify the other server (if there is one) about the cancellation
             // so it can clean up state and potentially forward that info to the connection
-            _clientResultsManager.TryCompleteResult(_connectionId, CompletionMessage.WithError(_invocationId, "Invocation canceled by the server."));
+            _clientResultsManager.TryCompleteResult(
+                _connectionId,
+                CompletionMessage.WithError(_invocationId, "Invocation canceled by the server.")
+            );
         }
 
         public new void SetResult(T result)
@@ -166,28 +218,36 @@ internal sealed class ClientResultsManager : IInvocationBinder
 
 #pragma warning disable IDE0060 // Remove unused parameter
         // Just making sure we don't accidentally call one of these without knowing
-        public static new void SetCanceled(CancellationToken cancellationToken) => Debug.Assert(false);
-        public static new void SetException(IEnumerable<Exception> exceptions) => Debug.Assert(false);
+        public static new void SetCanceled(CancellationToken cancellationToken) =>
+            Debug.Assert(false);
+
+        public static new void SetException(IEnumerable<Exception> exceptions) =>
+            Debug.Assert(false);
+
         public static new bool TrySetCanceled()
         {
             Debug.Assert(false);
             return false;
         }
+
         public static new bool TrySetCanceled(CancellationToken cancellationToken)
         {
             Debug.Assert(false);
             return false;
         }
+
         public static new bool TrySetException(IEnumerable<Exception> exceptions)
         {
             Debug.Assert(false);
             return false;
         }
+
         public static new bool TrySetException(Exception exception)
         {
             Debug.Assert(false);
             return false;
         }
+
         public static new bool TrySetResult(T result)
         {
             Debug.Assert(false);

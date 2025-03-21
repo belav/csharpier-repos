@@ -1,29 +1,29 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //  IMembershipCondition.cs
-// 
+//
 // <OWNER>ShawnFa</OWNER>
 //
 //  Interface that all MembershipConditions must implement
 //
 
-namespace System.Security.Policy {
-    
+namespace System.Security.Policy
+{
     using System;
-[System.Runtime.InteropServices.ComVisible(true)]
+
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface IMembershipCondition : ISecurityEncodable, ISecurityPolicyEncodable
     {
-        bool Check( Evidence evidence );
-    
+        bool Check(Evidence evidence);
+
         IMembershipCondition Copy();
-        
+
         String ToString();
 
-        bool Equals( Object obj );
-        
+        bool Equals(Object obj);
     }
 
     /// <summary>

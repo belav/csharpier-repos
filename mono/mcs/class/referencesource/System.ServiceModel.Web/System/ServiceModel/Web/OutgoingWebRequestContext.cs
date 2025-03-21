@@ -14,6 +14,7 @@ namespace System.ServiceModel.Web
     public class OutgoingWebRequestContext
     {
         OperationContext operationContext;
+
         internal OutgoingWebRequestContext(OperationContext operationContext)
         {
             Fx.Assert(operationContext != null, "operationContext is null");
@@ -28,8 +29,19 @@ namespace System.ServiceModel.Web
 
         public long ContentLength
         {
-            get { return long.Parse(this.MessageProperty.Headers[HttpRequestHeader.ContentLength], CultureInfo.InvariantCulture); }
-            set { this.MessageProperty.Headers[HttpRequestHeader.ContentLength] = value.ToString(CultureInfo.InvariantCulture); }
+            get
+            {
+                return long.Parse(
+                    this.MessageProperty.Headers[HttpRequestHeader.ContentLength],
+                    CultureInfo.InvariantCulture
+                );
+            }
+            set
+            {
+                this.MessageProperty.Headers[HttpRequestHeader.ContentLength] = value.ToString(
+                    CultureInfo.InvariantCulture
+                );
+            }
         }
 
         public string ContentType
@@ -89,11 +101,19 @@ namespace System.ServiceModel.Web
         {
             get
             {
-                if (!operationContext.OutgoingMessageProperties.ContainsKey(HttpRequestMessageProperty.Name))
+                if (
+                    !operationContext.OutgoingMessageProperties.ContainsKey(
+                        HttpRequestMessageProperty.Name
+                    )
+                )
                 {
-                    operationContext.OutgoingMessageProperties.Add(HttpRequestMessageProperty.Name, new HttpRequestMessageProperty());
+                    operationContext.OutgoingMessageProperties.Add(
+                        HttpRequestMessageProperty.Name,
+                        new HttpRequestMessageProperty()
+                    );
                 }
-                return operationContext.OutgoingMessageProperties[HttpRequestMessageProperty.Name] as HttpRequestMessageProperty;
+                return operationContext.OutgoingMessageProperties[HttpRequestMessageProperty.Name]
+                    as HttpRequestMessageProperty;
             }
         }
     }

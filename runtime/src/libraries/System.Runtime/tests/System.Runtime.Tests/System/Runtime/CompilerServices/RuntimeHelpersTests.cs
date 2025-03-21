@@ -38,6 +38,7 @@ namespace System.Runtime.CompilerServices.Tests
         {
             public int i1;
             public int i2;
+
             public override bool Equals(object obj)
             {
                 if (!(obj is TestStruct))
@@ -88,7 +89,8 @@ namespace System.Runtime.CompilerServices.Tests
         {
             static HasCctor()
             {
-                HasCctorReceiver.S = "Hello" + (Guid.NewGuid().ToString().Substring(string.Empty.Length, 0));  // Make sure the preinitialization optimization doesn't eat this.
+                HasCctorReceiver.S =
+                    "Hello" + (Guid.NewGuid().ToString().Substring(string.Empty.Length, 0)); // Make sure the preinitialization optimization doesn't eat this.
             }
         }
 
@@ -103,40 +105,56 @@ namespace System.Runtime.CompilerServices.Tests
             foreach (MethodInfo m in typeof(RuntimeHelpersTests).GetMethods())
                 RuntimeHelpers.PrepareMethod(m.MethodHandle);
 
-            Assert.Throws<ArgumentException>(() => RuntimeHelpers.PrepareMethod(default(RuntimeMethodHandle)));
+            Assert.Throws<ArgumentException>(() =>
+                RuntimeHelpers.PrepareMethod(default(RuntimeMethodHandle))
+            );
 
             if (RuntimeFeature.IsDynamicCodeSupported)
             {
-                Assert.ThrowsAny<ArgumentException>(() => RuntimeHelpers.PrepareMethod(typeof(IList).GetMethod("Add").MethodHandle));
+                Assert.ThrowsAny<ArgumentException>(() =>
+                    RuntimeHelpers.PrepareMethod(typeof(IList).GetMethod("Add").MethodHandle)
+                );
             }
         }
 
         [Fact]
         public static void PrepareGenericMethod()
         {
-            Assert.Throws<ArgumentException>(() => RuntimeHelpers.PrepareMethod(default(RuntimeMethodHandle), null));
+            Assert.Throws<ArgumentException>(() =>
+                RuntimeHelpers.PrepareMethod(default(RuntimeMethodHandle), null)
+            );
 
             //
             // Type instantiations
             //
 
             // Generic definition with instantiation is valid
-            RuntimeHelpers.PrepareMethod(typeof(List<>).GetMethod("Add").MethodHandle,
-                new RuntimeTypeHandle[] { typeof(TestStruct).TypeHandle });
+            RuntimeHelpers.PrepareMethod(
+                typeof(List<>).GetMethod("Add").MethodHandle,
+                new RuntimeTypeHandle[] { typeof(TestStruct).TypeHandle }
+            );
 
             // Instantiated method without instantiation is valid
-            RuntimeHelpers.PrepareMethod(typeof(List<int>).GetMethod("Add").MethodHandle,
-                null);
+            RuntimeHelpers.PrepareMethod(typeof(List<int>).GetMethod("Add").MethodHandle, null);
 
             if (RuntimeFeature.IsDynamicCodeSupported)
             {
                 // Generic definition without instantiation is invalid
-                Assert.Throws<ArgumentException>(() => RuntimeHelpers.PrepareMethod(typeof(List<>).GetMethod("Add").MethodHandle,
-                    null));
+                Assert.Throws<ArgumentException>(() =>
+                    RuntimeHelpers.PrepareMethod(typeof(List<>).GetMethod("Add").MethodHandle, null)
+                );
 
                 // Wrong instantiation
-                Assert.Throws<ArgumentException>(() => RuntimeHelpers.PrepareMethod(typeof(List<>).GetMethod("Add").MethodHandle,
-                    new RuntimeTypeHandle[] { typeof(TestStruct).TypeHandle, typeof(TestStruct).TypeHandle }));
+                Assert.Throws<ArgumentException>(() =>
+                    RuntimeHelpers.PrepareMethod(
+                        typeof(List<>).GetMethod("Add").MethodHandle,
+                        new RuntimeTypeHandle[]
+                        {
+                            typeof(TestStruct).TypeHandle,
+                            typeof(TestStruct).TypeHandle,
+                        }
+                    )
+                );
             }
 
             //
@@ -144,23 +162,41 @@ namespace System.Runtime.CompilerServices.Tests
             //
 
             // Generic definition with instantiation is valid
-            RuntimeHelpers.PrepareMethod(typeof(Array).GetMethod("Resize").MethodHandle,
-                new RuntimeTypeHandle[] { typeof(TestStruct).TypeHandle });
+            RuntimeHelpers.PrepareMethod(
+                typeof(Array).GetMethod("Resize").MethodHandle,
+                new RuntimeTypeHandle[] { typeof(TestStruct).TypeHandle }
+            );
 
             // Instantiated method without instantiation is valid
-            RuntimeHelpers.PrepareMethod(typeof(Array).GetMethod("Resize")
-                    .MakeGenericMethod(new Type[] { typeof(TestStruct) }).MethodHandle,
-                null);
+            RuntimeHelpers.PrepareMethod(
+                typeof(Array)
+                    .GetMethod("Resize")
+                    .MakeGenericMethod(new Type[] { typeof(TestStruct) })
+                    .MethodHandle,
+                null
+            );
 
             if (RuntimeFeature.IsDynamicCodeSupported)
             {
                 // Generic definition without instantiation is invalid
-                Assert.Throws<ArgumentException>(() => RuntimeHelpers.PrepareMethod(typeof(Array).GetMethod("Resize").MethodHandle,
-                    null));
+                Assert.Throws<ArgumentException>(() =>
+                    RuntimeHelpers.PrepareMethod(
+                        typeof(Array).GetMethod("Resize").MethodHandle,
+                        null
+                    )
+                );
 
                 // Wrong instantiation
-                Assert.Throws<ArgumentException>(() => RuntimeHelpers.PrepareMethod(typeof(Array).GetMethod("Resize").MethodHandle,
-                    new RuntimeTypeHandle[] { typeof(TestStruct).TypeHandle, typeof(TestStruct).TypeHandle }));
+                Assert.Throws<ArgumentException>(() =>
+                    RuntimeHelpers.PrepareMethod(
+                        typeof(Array).GetMethod("Resize").MethodHandle,
+                        new RuntimeTypeHandle[]
+                        {
+                            typeof(TestStruct).TypeHandle,
+                            typeof(TestStruct).TypeHandle,
+                        }
+                    )
+                );
             }
         }
 
@@ -192,7 +228,9 @@ namespace System.Runtime.CompilerServices.Tests
             // returns true.
             if (!RuntimeHelpers.TryEnsureSufficientExecutionStack())
             {
-                Assert.Throws<InsufficientExecutionStackException>(() => RuntimeHelpers.EnsureSufficientExecutionStack());
+                Assert.Throws<InsufficientExecutionStackException>(() =>
+                    RuntimeHelpers.EnsureSufficientExecutionStack()
+                );
                 return;
             }
             else if (depth < 2048)
@@ -209,7 +247,11 @@ namespace System.Runtime.CompilerServices.Tests
 
             if (PlatformDetection.IsNonZeroLowerBoundArraySupported)
             {
-                yield return new[] { Array.CreateInstance(typeof(int), new[] { 1 }, new[] { 1 }).GetType(), typeof(ArgumentException) }; // variable-length type (non-szarray)
+                yield return new[]
+                {
+                    Array.CreateInstance(typeof(int), new[] { 1 }, new[] { 1 }).GetType(),
+                    typeof(ArgumentException),
+                }; // variable-length type (non-szarray)
             }
 
             yield return new[] { typeof(Array), typeof(MemberAccessException) }; // abstract type
@@ -220,7 +262,13 @@ namespace System.Runtime.CompilerServices.Tests
             yield return new[] { typeof(IDisposable), typeof(MemberAccessException) }; // interface type
 
             yield return new[] { typeof(List<>), typeof(MemberAccessException) }; // open generic type
-            yield return new[] { typeof(List<>).GetGenericArguments()[0], PlatformDetection.IsMonoRuntime ? typeof(MemberAccessException) : typeof(ArgumentException) }; // 'T' placeholder typedesc
+            yield return new[]
+            {
+                typeof(List<>).GetGenericArguments()[0],
+                PlatformDetection.IsMonoRuntime
+                    ? typeof(MemberAccessException)
+                    : typeof(ArgumentException),
+            }; // 'T' placeholder typedesc
 
             yield return new[] { typeof(Delegate), typeof(MemberAccessException) }; // abstract type
 
@@ -229,7 +277,7 @@ namespace System.Runtime.CompilerServices.Tests
             yield return new[] { typeof(int).MakeByRefType(), typeof(ArgumentException) }; // byref
 
             yield return new[] { FunctionPointerType(), typeof(ArgumentException) }; // function pointer
-            static unsafe Type FunctionPointerType() => typeof(delegate*<void>);
+            static unsafe Type FunctionPointerType() => typeof(delegate* <void>);
 
             yield return new[] { typeof(ReadOnlySpan<int>), typeof(NotSupportedException) }; // byref-like type
             yield return new[] { typeof(ArgIterator), typeof(NotSupportedException) }; // byref-like type
@@ -237,10 +285,17 @@ namespace System.Runtime.CompilerServices.Tests
             Type canonType = typeof(object).Assembly.GetType("System.__Canon", throwOnError: false);
             if (canonType != null)
             {
-                yield return new[] { typeof(List<>).MakeGenericType(canonType), typeof(NotSupportedException) }; // shared by generic instantiations
+                yield return new[]
+                {
+                    typeof(List<>).MakeGenericType(canonType),
+                    typeof(NotSupportedException),
+                }; // shared by generic instantiations
             }
 
-            Type comObjType = typeof(object).Assembly.GetType("System.__ComObject", throwOnError: false);
+            Type comObjType = typeof(object).Assembly.GetType(
+                "System.__ComObject",
+                throwOnError: false
+            );
             if (comObjType != null)
             {
                 yield return new[] { comObjType, typeof(NotSupportedException) }; // COM type
@@ -256,9 +311,7 @@ namespace System.Runtime.CompilerServices.Tests
         [ClassInterface((short)0x0000)]
         [Guid("674B6698-EE92-11D0-AD71-00C04FD8FDFF")]
         [ComImport]
-        internal class WbemContext
-        {
-        }
+        internal class WbemContext { }
 
         internal class ClassWithBeforeFieldInitCctor
         {
@@ -284,7 +337,11 @@ namespace System.Runtime.CompilerServices.Tests
             }
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/69919", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/69919",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         [Fact]
         public static void GetUninitializedObject_DoesNotRunBeforeFieldInitCctors()
         {
@@ -305,16 +362,28 @@ namespace System.Runtime.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(GetUninitializedObject_NegativeTestCases))]
-        public static void GetUninitializedObject_InvalidArguments_ThrowsException(Type typeToInstantiate, Type expectedExceptionType)
+        public static void GetUninitializedObject_InvalidArguments_ThrowsException(
+            Type typeToInstantiate,
+            Type expectedExceptionType
+        )
         {
-            Assert.Throws(expectedExceptionType, () => RuntimeHelpers.GetUninitializedObject(typeToInstantiate));
+            Assert.Throws(
+                expectedExceptionType,
+                () => RuntimeHelpers.GetUninitializedObject(typeToInstantiate)
+            );
         }
 
         [Fact]
         public static void GetUninitializedObject_DoesNotRunConstructor()
         {
             Assert.Equal(42, new ObjectWithDefaultCtor().Value);
-            Assert.Equal(0, ((ObjectWithDefaultCtor)RuntimeHelpers.GetUninitializedObject(typeof(ObjectWithDefaultCtor))).Value);
+            Assert.Equal(
+                0,
+                (
+                    (ObjectWithDefaultCtor)
+                        RuntimeHelpers.GetUninitializedObject(typeof(ObjectWithDefaultCtor))
+                ).Value
+            );
         }
 
         [Fact]
@@ -355,21 +424,30 @@ namespace System.Runtime.CompilerServices.Tests
             Assert.Equal(a, RuntimeHelpers.GetSubArray(a, range));
 
             range = new Range(Index.FromStart(1), Index.FromEnd(5));
-            Assert.Equal(new int [] { 2, 3, 4, 5}, RuntimeHelpers.GetSubArray(a, range));
+            Assert.Equal(new int[] { 2, 3, 4, 5 }, RuntimeHelpers.GetSubArray(a, range));
 
             range = new Range(Index.FromStart(0), Index.FromStart(a.Length + 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { int [] array = RuntimeHelpers.GetSubArray(a, range); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                int[] array = RuntimeHelpers.GetSubArray(a, range);
+            });
         }
 
         [Fact]
         public static void ArrayGetSubArrayCoVarianceTest()
         {
             object[] arr = new string[10];
-            object[] slice = RuntimeHelpers.GetSubArray<object>(arr, new Range(Index.FromStart(1), Index.FromEnd(2)));
+            object[] slice = RuntimeHelpers.GetSubArray<object>(
+                arr,
+                new Range(Index.FromStart(1), Index.FromEnd(2))
+            );
             Assert.IsType<string[]>(slice);
 
             uint[] arr2 = (uint[])(object)new int[10];
-            uint[] slice2 = RuntimeHelpers.GetSubArray<uint>(arr2, new Range(Index.FromStart(1), Index.FromEnd(2)));
+            uint[] slice2 = RuntimeHelpers.GetSubArray<uint>(
+                arr2,
+                new Range(Index.FromStart(1), Index.FromEnd(2))
+            );
             Assert.IsType<int[]>(slice2);
         }
 
@@ -377,15 +455,24 @@ namespace System.Runtime.CompilerServices.Tests
         [SkipOnMono("Not presently implemented on Mono")]
         public static void AllocateTypeAssociatedMemoryInvalidArguments()
         {
-            Assert.Throws<ArgumentException>(() => { RuntimeHelpers.AllocateTypeAssociatedMemory(null, 10); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(RuntimeHelpersTests), -1); });
+            Assert.Throws<ArgumentException>(() =>
+            {
+                RuntimeHelpers.AllocateTypeAssociatedMemory(null, 10);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(RuntimeHelpersTests), -1);
+            });
         }
 
         [Fact]
         [SkipOnMono("Not presently implemented on Mono")]
         public static unsafe void AllocateTypeAssociatedMemoryValidArguments()
         {
-            IntPtr memory = RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(RuntimeHelpersTests), 32);
+            IntPtr memory = RuntimeHelpers.AllocateTypeAssociatedMemory(
+                typeof(RuntimeHelpersTests),
+                32
+            );
             Assert.NotEqual(memory, IntPtr.Zero);
             // Validate that the memory is zeroed out
             Assert.True(new Span<byte>((void*)memory, 32).SequenceEqual(new byte[32]));
@@ -394,13 +481,17 @@ namespace System.Runtime.CompilerServices.Tests
         [StructLayoutAttribute(LayoutKind.Sequential)]
         private struct StructWithoutReferences
         {
-            public int a, b, c;
+            public int a,
+                b,
+                c;
         }
 
         [StructLayoutAttribute(LayoutKind.Sequential)]
         private struct StructWithReferences
         {
-            public int a, b, c;
+            public int a,
+                b,
+                c;
             public object d;
         }
 

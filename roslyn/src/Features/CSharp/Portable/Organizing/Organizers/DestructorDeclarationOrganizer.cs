@@ -14,25 +14,27 @@ using Microsoft.CodeAnalysis.Organizing.Organizers;
 namespace Microsoft.CodeAnalysis.CSharp.Organizing.Organizers
 {
     [ExportSyntaxNodeOrganizer(LanguageNames.CSharp), Shared]
-    internal class DestructorDeclarationOrganizer : AbstractSyntaxNodeOrganizer<DestructorDeclarationSyntax>
+    internal class DestructorDeclarationOrganizer
+        : AbstractSyntaxNodeOrganizer<DestructorDeclarationSyntax>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DestructorDeclarationOrganizer()
-        {
-        }
+        public DestructorDeclarationOrganizer() { }
 
         protected override DestructorDeclarationSyntax Organize(
             DestructorDeclarationSyntax syntax,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return syntax.Update(syntax.AttributeLists,
+            return syntax.Update(
+                syntax.AttributeLists,
                 ModifiersOrganizer.Organize(syntax.Modifiers),
                 syntax.TildeToken,
                 syntax.Identifier,
                 syntax.ParameterList,
                 syntax.Body,
-                syntax.SemicolonToken);
+                syntax.SemicolonToken
+            );
         }
     }
 }

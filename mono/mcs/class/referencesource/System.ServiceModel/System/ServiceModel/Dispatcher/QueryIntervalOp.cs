@@ -13,7 +13,7 @@ namespace System.ServiceModel.Dispatcher
     internal enum IntervalOp : byte
     {
         LessThan,
-        LessThanEquals
+        LessThanEquals,
     }
 
     internal class Interval
@@ -59,7 +59,12 @@ namespace System.ServiceModel.Dispatcher
         }
 
 #if NO
-        internal Interval(double lowerBound, IntervalOp lowerOp, double upperBound, IntervalOp upperOp)
+        internal Interval(
+            double lowerBound,
+            IntervalOp lowerOp,
+            double upperBound,
+            IntervalOp upperOp
+        )
         {
             Fx.Assert(lowerBound <= upperBound, "");
 
@@ -77,60 +82,59 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 #endif
+
         internal QueryBranch Branch
         {
-            get
-            {
-                return this.branch;
-            }
-            set
-            {
-                this.branch = value;
-            }
+            get { return this.branch; }
+            set { this.branch = value; }
         }
 
         internal double LowerBound
         {
-            get
-            {
-                return this.lowerBound;
-            }
+            get { return this.lowerBound; }
         }
 
         internal IntervalOp LowerOp
         {
-            get
-            {
-                return this.lowerOp;
-            }
+            get { return this.lowerOp; }
         }
 
         internal double UpperBound
         {
-            get
-            {
-                return this.upperBound;
-            }
+            get { return this.upperBound; }
         }
 
         internal IntervalOp UpperOp
         {
-            get
-            {
-                return this.upperOp;
-            }
+            get { return this.upperOp; }
         }
 
 #if NO
         internal bool Equals(Interval interval)
         {
             Fx.Assert(null != interval, "");
-            return this.Equals(interval.lowerBound, interval.lowerOp, interval.upperBound, interval.upperOp);
+            return this.Equals(
+                interval.lowerBound,
+                interval.lowerOp,
+                interval.upperBound,
+                interval.upperOp
+            );
         }
 #endif
-        internal bool Equals(double lowerBound, IntervalOp lowerOp, double upperBound, IntervalOp upperOp)
+
+        internal bool Equals(
+            double lowerBound,
+            IntervalOp lowerOp,
+            double upperBound,
+            IntervalOp upperOp
+        )
         {
-            return (this.lowerBound == lowerBound && this.lowerOp == lowerOp && this.upperBound == upperBound && this.upperOp == upperOp);
+            return (
+                this.lowerBound == lowerBound
+                && this.lowerOp == lowerOp
+                && this.upperBound == upperBound
+                && this.upperOp == upperOp
+            );
         }
 
         internal bool HasMatchingEndPoint(double endpoint)
@@ -147,24 +151,16 @@ namespace System.ServiceModel.Dispatcher
     internal class IntervalCollection : ArrayList
     {
         internal IntervalCollection()
-            : base(1)
-        {
-        }
+            : base(1) { }
 
         internal bool HasIntervals
         {
-            get
-            {
-                return (this.Count > 0);
-            }
+            get { return (this.Count > 0); }
         }
 
         internal new Interval this[int index]
         {
-            get
-            {
-                return (Interval)base[index];
-            }
+            get { return (Interval)base[index]; }
         }
 
         internal int Add(Interval interval)
@@ -223,7 +219,12 @@ namespace System.ServiceModel.Dispatcher
             return -1;
         }
 
-        internal int IndexOf(double lowerBound, IntervalOp lowerOp, double upperBound, IntervalOp upperOp)
+        internal int IndexOf(
+            double lowerBound,
+            IntervalOp lowerOp,
+            double upperBound,
+            IntervalOp upperOp
+        )
         {
             int count = this.Count;
             for (int i = 0; i < count; ++i)
@@ -267,74 +268,41 @@ namespace System.ServiceModel.Dispatcher
 
         internal IntervalCollection EqSlot
         {
-            get
-            {
-                return this.eqSlot;
-            }
+            get { return this.eqSlot; }
         }
 
         internal IntervalCollection GtSlot
         {
-            get
-            {
-                return this.gtSlot;
-            }
+            get { return this.gtSlot; }
         }
 
         internal IntervalBoundary Left
         {
-            get
-            {
-                return this.left;
-            }
-            set
-            {
-                this.left = value;
-            }
+            get { return this.left; }
+            set { this.left = value; }
         }
 
         internal IntervalCollection LtSlot
         {
-            get
-            {
-                return this.ltSlot;
-            }
+            get { return this.ltSlot; }
         }
 
         internal IntervalBoundary Parent
         {
-            get
-            {
-                return this.parent;
-            }
-            set
-            {
-                this.parent = value;
-            }
+            get { return this.parent; }
+            set { this.parent = value; }
         }
 
         internal IntervalBoundary Right
         {
-            get
-            {
-                return this.right;
-            }
-            set
-            {
-                this.right = value;
-            }
+            get { return this.right; }
+            set { this.right = value; }
         }
 
         internal double Value
         {
-            get
-            {
-                return this.val;
-            }
-            set
-            {
-                this.val = value;
-            }
+            get { return this.val; }
+            set { this.val = value; }
         }
 
         internal void AddToEqSlot(Interval interval)
@@ -383,15 +351,48 @@ namespace System.ServiceModel.Dispatcher
 
             return this.right;
         }
+
 #if NO
-        internal Interval GetInterval(double lowerBound, IntervalOp lowerOp, double upperBound, IntervalOp upperOp)
+        internal Interval GetInterval(
+            double lowerBound,
+            IntervalOp lowerOp,
+            double upperBound,
+            IntervalOp upperOp
+        )
         {
             Interval interval;
             if (
-                null != (interval = this.GetIntervalFromSlot(this.eqSlot, lowerBound, lowerOp, upperBound, upperOp))
-                || null != (interval = this.GetIntervalFromSlot(this.ltSlot, lowerBound, lowerOp, upperBound, upperOp))
-                || null != (interval = this.GetIntervalFromSlot(this.gtSlot, lowerBound, lowerOp, upperBound, upperOp))
-                )
+                null
+                    != (
+                        interval = this.GetIntervalFromSlot(
+                            this.eqSlot,
+                            lowerBound,
+                            lowerOp,
+                            upperBound,
+                            upperOp
+                        )
+                    )
+                || null
+                    != (
+                        interval = this.GetIntervalFromSlot(
+                            this.ltSlot,
+                            lowerBound,
+                            lowerOp,
+                            upperBound,
+                            upperOp
+                        )
+                    )
+                || null
+                    != (
+                        interval = this.GetIntervalFromSlot(
+                            this.gtSlot,
+                            lowerBound,
+                            lowerOp,
+                            upperBound,
+                            upperOp
+                        )
+                    )
+            )
             {
                 return interval;
             }
@@ -406,7 +407,7 @@ namespace System.ServiceModel.Dispatcher
                 null != (interval = this.GetIntervalFromSlot(this.eqSlot, data))
                 || null != (interval = this.GetIntervalFromSlot(this.ltSlot, data))
                 || null != (interval = this.GetIntervalFromSlot(this.gtSlot, data))
-                )
+            )
             {
                 return interval;
             }
@@ -424,16 +425,26 @@ namespace System.ServiceModel.Dispatcher
             return null;
         }
 
-        Interval GetIntervalFromSlot(IntervalCollection slot, double lowerBound, IntervalOp lowerOp, double upperBound, IntervalOp upperOp)
+        Interval GetIntervalFromSlot(
+            IntervalCollection slot,
+            double lowerBound,
+            IntervalOp lowerOp,
+            double upperBound,
+            IntervalOp upperOp
+        )
         {
             int index;
-            if (null != slot && -1 != (index = slot.IndexOf(lowerBound, lowerOp, upperBound, upperOp)))
+            if (
+                null != slot
+                && -1 != (index = slot.IndexOf(lowerBound, lowerOp, upperBound, upperOp))
+            )
             {
                 return slot[index];
             }
             return null;
         }
 #endif
+
         internal void RemoveFromEqSlot(Interval interval)
         {
             Fx.Assert(null != interval, "");
@@ -511,10 +522,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal IntervalCollection Slot
         {
-            get
-            {
-                return this.slot;
-            }
+            get { return this.slot; }
         }
 
         internal bool MoveNext()
@@ -553,16 +561,11 @@ namespace System.ServiceModel.Dispatcher
         IntervalCollection intervals;
         IntervalBoundary root;
 
-        internal IntervalTree()
-        {
-        }
+        internal IntervalTree() { }
 
         internal int Count
         {
-            get
-            {
-                return (null != this.intervals) ? this.intervals.Count : 0;
-            }
+            get { return (null != this.intervals) ? this.intervals.Count : 0; }
         }
 
         internal IntervalCollection Intervals
@@ -580,18 +583,12 @@ namespace System.ServiceModel.Dispatcher
 #if NO
         internal bool IsEmpty
         {
-            get
-            {
-                return (this.root == null);
-            }
+            get { return (this.root == null); }
         }
 #endif
         internal IntervalBoundary Root
         {
-            get
-            {
-                return this.root;
-            }
+            get { return this.root; }
         }
 
         internal void Add(Interval interval)
@@ -610,7 +607,12 @@ namespace System.ServiceModel.Dispatcher
         }
 
 #if NO
-        internal bool Contains(double lowerBound, IntervalOp lowerOp, double upperBound, IntervalOp upperOp)
+        internal bool Contains(
+            double lowerBound,
+            IntervalOp lowerOp,
+            double upperBound,
+            IntervalOp upperOp
+        )
         {
             if (null != this.intervals)
             {
@@ -620,6 +622,7 @@ namespace System.ServiceModel.Dispatcher
             return false;
         }
 #endif
+
         void EditLeft(Interval interval, bool add)
         {
             if (add)
@@ -819,15 +822,27 @@ namespace System.ServiceModel.Dispatcher
 
         internal Interval FindInterval(Interval interval)
         {
-            return this.FindInterval(interval.LowerBound, interval.LowerOp, interval.UpperBound, interval.UpperOp);
+            return this.FindInterval(
+                interval.LowerBound,
+                interval.LowerOp,
+                interval.UpperBound,
+                interval.UpperOp
+            );
         }
 
-        internal Interval FindInterval(double lowerBound, IntervalOp lowerOp, double upperBound, IntervalOp upperOp)
+        internal Interval FindInterval(
+            double lowerBound,
+            IntervalOp lowerOp,
+            double upperBound,
+            IntervalOp upperOp
+        )
         {
             if (null != this.intervals)
             {
                 int index;
-                if (-1 != (index = this.intervals.IndexOf(lowerBound, lowerOp, upperBound, upperOp)))
+                if (
+                    -1 != (index = this.intervals.IndexOf(lowerBound, lowerOp, upperBound, upperOp))
+                )
                 {
                     return this.intervals[index];
                 }
@@ -847,7 +862,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 this.RemoveBoundary(this.FindBoundaryNode(intervalRemoved.LowerBound));
             }
-            if (intervalRemoved.LowerBound != intervalRemoved.UpperBound && -1 == (index = this.intervals.IndexOf(intervalRemoved.UpperBound)))
+            if (
+                intervalRemoved.LowerBound != intervalRemoved.UpperBound
+                && -1 == (index = this.intervals.IndexOf(intervalRemoved.UpperBound))
+            )
             {
                 this.RemoveBoundary(this.FindBoundaryNode(intervalRemoved.UpperBound));
             }
@@ -961,9 +979,7 @@ namespace System.ServiceModel.Dispatcher
         RelationOperator op;
 
         internal NumberRelationOpcode(double literal, RelationOperator op)
-            : this(OpcodeID.NumberRelation, literal, op)
-        {
-        }
+            : this(OpcodeID.NumberRelation, literal, op) { }
 
         protected NumberRelationOpcode(OpcodeID id, double literal, RelationOperator op)
             : base(id)
@@ -971,32 +987,25 @@ namespace System.ServiceModel.Dispatcher
             this.literal = literal;
             this.op = op;
         }
+
 #if NO
         internal override ValueDataType DataType
         {
-            get
-            {
-                return ValueDataType.Double;
-            }
+            get { return ValueDataType.Double; }
         }
 #endif
 
         internal override object Literal
         {
-            get
-            {
-                return this.literal;
-            }
+            get { return this.literal; }
         }
 #if NO
         internal RelationOperator Op
         {
-            get
-            {
-                return this.op;
-            }
+            get { return this.op; }
         }
 #endif
+
         internal override bool Equals(Opcode opcode)
         {
             if (base.Equals(opcode))
@@ -1031,9 +1040,7 @@ namespace System.ServiceModel.Dispatcher
         Interval interval;
 
         internal NumberIntervalOpcode(double literal, RelationOperator op)
-            : base(OpcodeID.NumberInterval, literal, op)
-        {
-        }
+            : base(OpcodeID.NumberInterval, literal, op) { }
 
         internal override object Literal
         {
@@ -1077,10 +1084,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal override int Count
         {
-            get
-            {
-                return this.intervalTree.Count;
-            }
+            get { return this.intervalTree.Count; }
         }
 
         internal override QueryBranch this[object key]
@@ -1116,12 +1120,14 @@ namespace System.ServiceModel.Dispatcher
         {
             return this.intervalTree.Intervals.GetEnumerator();
         }
-        
 #endif
 
         void Match(int valIndex, double point, QueryBranchResultSet results)
         {
-            IntervalTreeTraverser traverser = new IntervalTreeTraverser(point, this.intervalTree.Root);
+            IntervalTreeTraverser traverser = new IntervalTreeTraverser(
+                point,
+                this.intervalTree.Root
+            );
             while (traverser.MoveNext())
             {
                 IntervalCollection matches = traverser.Slot;
@@ -1166,9 +1172,7 @@ namespace System.ServiceModel.Dispatcher
     internal class NumberIntervalBranchOpcode : QueryConditionalBranchOpcode
     {
         internal NumberIntervalBranchOpcode()
-            : base(OpcodeID.NumberIntervalBranch, new IntervalBranchIndex())
-        {
-        }
+            : base(OpcodeID.NumberIntervalBranch, new IntervalBranchIndex()) { }
 
         internal override LiteralRelationOpcode ValidateOpcode(Opcode opcode)
         {
@@ -1180,6 +1184,5 @@ namespace System.ServiceModel.Dispatcher
 
             return null;
         }
-
     }
 }

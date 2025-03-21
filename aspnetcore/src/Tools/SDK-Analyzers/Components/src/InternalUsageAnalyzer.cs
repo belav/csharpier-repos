@@ -25,7 +25,11 @@ internal sealed class InternalUsageAnalyzer
     /// The <see cref="DiagnosticDescriptor" /> used to create errors. The error message should expect a single parameter
     /// used for the display name of the member.
     /// </param>
-    public InternalUsageAnalyzer(Func<ISymbol, bool> isInInternalNamespace, Func<ISymbol, bool> hasInternalAttribute, DiagnosticDescriptor descriptor)
+    public InternalUsageAnalyzer(
+        Func<ISymbol, bool> isInInternalNamespace,
+        Func<ISymbol, bool> hasInternalAttribute,
+        DiagnosticDescriptor descriptor
+    )
     {
         _isInternalNamespace = isInInternalNamespace ?? new Func<ISymbol, bool>((_) => false);
         _hasInternalAttribute = hasInternalAttribute ?? new Func<ISymbol, bool>((_) => false);
@@ -44,7 +48,8 @@ internal sealed class InternalUsageAnalyzer
             OperationKind.FieldReference,
             OperationKind.MethodReference,
             OperationKind.PropertyReference,
-            OperationKind.EventReference);
+            OperationKind.EventReference
+        );
 
         // Analyze declarations that use our internal types in API surface.
         context.RegisterSymbolAction(
@@ -53,7 +58,8 @@ internal sealed class InternalUsageAnalyzer
             SymbolKind.Field,
             SymbolKind.Method,
             SymbolKind.Property,
-            SymbolKind.Event);
+            SymbolKind.Event
+        );
     }
 
     private void AnalyzeOperation(OperationAnalysisContext context)
@@ -66,7 +72,9 @@ internal sealed class InternalUsageAnalyzer
             IMethodReferenceOperation method => method.Member,
             IPropertyReferenceOperation property => property.Member,
             IEventReferenceOperation @event => @event.Member,
-            _ => throw new InvalidOperationException("Unexpected operation kind: " + context.Operation.Kind),
+            _ => throw new InvalidOperationException(
+                "Unexpected operation kind: " + context.Operation.Kind
+            ),
         };
 
         VisitOperationSymbol(context, symbol);
@@ -126,7 +134,13 @@ internal sealed class InternalUsageAnalyzer
     // Similar logic here to VisitDeclarationSymbol, keep these in sync.
     private void VisitOperationSymbol(OperationAnalysisContext context, ISymbol symbol)
     {
-        if (symbol == null || SymbolEqualityComparer.Default.Equals(symbol.ContainingAssembly, context.Compilation.Assembly))
+        if (
+            symbol == null
+            || SymbolEqualityComparer.Default.Equals(
+                symbol.ContainingAssembly,
+                context.Compilation.Assembly
+            )
+        )
         {
             // The type is being referenced within the same assembly. This is valid use of an "internal" type
             return;
@@ -134,28 +148,46 @@ internal sealed class InternalUsageAnalyzer
 
         if (HasInternalAttribute(symbol))
         {
-            context.ReportDiagnostic(Diagnostic.Create(
-                _descriptor,
-                context.Operation.Syntax.GetLocation(),
-                symbol.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)));
+            context.ReportDiagnostic(
+                Diagnostic.Create(
+                    _descriptor,
+                    context.Operation.Syntax.GetLocation(),
+                    symbol.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)
+                )
+            );
             return;
         }
 
         var containingType = symbol.ContainingType;
         if (IsInInternalNamespace(containingType) || HasInternalAttribute(containingType))
         {
-            context.ReportDiagnostic(Diagnostic.Create(
-                _descriptor,
-                context.Operation.Syntax.GetLocation(),
-                containingType.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)));
+            context.ReportDiagnostic(
+                Diagnostic.Create(
+                    _descriptor,
+                    context.Operation.Syntax.GetLocation(),
+                    containingType.ToDisplayString(
+                        SymbolDisplayFormat.CSharpShortErrorMessageFormat
+                    )
+                )
+            );
             return;
         }
     }
 
     // Similar logic here to VisitOperationSymbol, keep these in sync.
-    private void VisitDeclarationSymbol(SymbolAnalysisContext context, ISymbol symbol, ISymbol symbolForDiagnostic)
+    private void VisitDeclarationSymbol(
+        SymbolAnalysisContext context,
+        ISymbol symbol,
+        ISymbol symbolForDiagnostic
+    )
     {
-        if (symbol == null || SymbolEqualityComparer.Default.Equals(symbol.ContainingAssembly, context.Compilation.Assembly))
+        if (
+            symbol == null
+            || SymbolEqualityComparer.Default.Equals(
+                symbol.ContainingAssembly,
+                context.Compilation.Assembly
+            )
+        )
         {
             // This is part of the compilation, avoid this analyzer when building from source.
             return;
@@ -163,20 +195,34 @@ internal sealed class InternalUsageAnalyzer
 
         if (HasInternalAttribute(symbol))
         {
-            context.ReportDiagnostic(Diagnostic.Create(
-                _descriptor,
-                symbolForDiagnostic.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation() ?? Location.None,
-                symbol.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)));
+            context.ReportDiagnostic(
+                Diagnostic.Create(
+                    _descriptor,
+                    symbolForDiagnostic
+                        .DeclaringSyntaxReferences.FirstOrDefault()
+                        ?.GetSyntax()
+                        .GetLocation() ?? Location.None,
+                    symbol.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)
+                )
+            );
             return;
         }
 
         var containingType = symbol as INamedTypeSymbol ?? symbol.ContainingType;
         if (IsInInternalNamespace(containingType) || HasInternalAttribute(containingType))
         {
-            context.ReportDiagnostic(Diagnostic.Create(
-                _descriptor,
-                symbolForDiagnostic.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax().GetLocation() ?? Location.None,
-                containingType.ToDisplayString(SymbolDisplayFormat.CSharpShortErrorMessageFormat)));
+            context.ReportDiagnostic(
+                Diagnostic.Create(
+                    _descriptor,
+                    symbolForDiagnostic
+                        .DeclaringSyntaxReferences.FirstOrDefault()
+                        ?.GetSyntax()
+                        .GetLocation() ?? Location.None,
+                    containingType.ToDisplayString(
+                        SymbolDisplayFormat.CSharpShortErrorMessageFormat
+                    )
+                )
+            );
             return;
         }
     }

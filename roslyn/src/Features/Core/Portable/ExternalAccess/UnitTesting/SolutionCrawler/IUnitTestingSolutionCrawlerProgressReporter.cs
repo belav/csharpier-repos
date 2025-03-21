@@ -18,19 +18,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
         /// <summary>
         /// Raised when solution crawler progress changed
-        /// 
-        /// Notifications for this event are serialized to preserve order. 
+        ///
+        /// Notifications for this event are serialized to preserve order.
         /// However, individual event notifications may occur on any thread.
         /// </summary>
         event EventHandler<UnitTestingProgressData> ProgressChanged;
     }
 
-    internal readonly struct UnitTestingProgressData(UnitTestingProgressStatus type, int? pendingItemCount)
+    internal readonly struct UnitTestingProgressData(
+        UnitTestingProgressStatus type,
+        int? pendingItemCount
+    )
     {
         public UnitTestingProgressStatus Status { get; } = type;
 
         /// <summary>
-        /// number of pending work item in the queue. 
+        /// number of pending work item in the queue.
         /// null means N/A for the associated <see cref="Status"/>
         /// </summary>
         public int? PendingItemCount { get; } = pendingItemCount;
@@ -42,6 +45,6 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
         Paused,
         PendingItemCountUpdated,
         Evaluating,
-        Stopped
+        Stopped,
     }
 }

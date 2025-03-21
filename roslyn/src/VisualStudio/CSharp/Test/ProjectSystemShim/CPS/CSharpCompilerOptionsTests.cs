@@ -28,7 +28,11 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         public async Task DocumentationModeSetToDiagnoseIfProducingDocFile_CPS()
         {
             using var environment = new TestEnvironment();
-            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test", commandLineArguments: @"/doc:DocFile.xml");
+            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(
+                environment,
+                "Test",
+                commandLineArguments: @"/doc:DocFile.xml"
+            );
             var parseOptions = environment.Workspace.CurrentSolution.Projects.Single().ParseOptions;
             Assert.Equal(DocumentationMode.Diagnose, parseOptions.DocumentationMode);
         }
@@ -37,7 +41,11 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         public async Task DocumentationModeSetToParseIfNotProducingDocFile_CPS()
         {
             using var environment = new TestEnvironment();
-            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test", commandLineArguments: @"/doc:");
+            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(
+                environment,
+                "Test",
+                commandLineArguments: @"/doc:"
+            );
             var parseOptions = environment.Workspace.CurrentSolution.Projects.Single().ParseOptions;
             Assert.Equal(DocumentationMode.Parse, parseOptions.DocumentationMode);
         }
@@ -46,9 +54,16 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         public async Task ProjectSettingsOptionAddAndRemove_CPS()
         {
             using var environment = new TestEnvironment();
-            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test", commandLineArguments: @"/warnaserror:CS1111");
+            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(
+                environment,
+                "Test",
+                commandLineArguments: @"/warnaserror:CS1111"
+            );
             var options = environment.GetUpdatedCompilationOptionOfSingleProject();
-            Assert.Equal(expected: ReportDiagnostic.Error, actual: options.SpecificDiagnosticOptions["CS1111"]);
+            Assert.Equal(
+                expected: ReportDiagnostic.Error,
+                actual: options.SpecificDiagnosticOptions["CS1111"]
+            );
 
             project.SetOptions(ImmutableArray.Create(@"/warnaserror"));
             options = environment.GetUpdatedCompilationOptionOfSingleProject();
@@ -62,7 +77,11 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             var initialBinPath = initialObjPath;
 
             using var environment = new TestEnvironment();
-            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test", commandLineArguments: $"/out:{initialObjPath}");
+            using var project = await CSharpHelpers.CreateCSharpCPSProjectAsync(
+                environment,
+                "Test",
+                commandLineArguments: $"/out:{initialObjPath}"
+            );
             Assert.Equal(initialObjPath, project.CompilationOutputAssemblyFilePath);
             Assert.Equal(initialBinPath, project.BinOutputPath);
 
@@ -102,8 +121,16 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         public async Task InvalidProjectOutputBinPaths_CPS()
         {
             using var environment = new TestEnvironment();
-            await Assert.ThrowsAsync<InvalidProjectDataException>(() => CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test2", binOutputPath: ""));
-            await Assert.ThrowsAsync<InvalidProjectDataException>(() => CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test3", binOutputPath: "Test.dll"));
+            await Assert.ThrowsAsync<InvalidProjectDataException>(() =>
+                CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test2", binOutputPath: "")
+            );
+            await Assert.ThrowsAsync<InvalidProjectDataException>(() =>
+                CSharpHelpers.CreateCSharpCPSProjectAsync(
+                    environment,
+                    "Test3",
+                    binOutputPath: "Test.dll"
+                )
+            );
         }
 
         [WpfFact]
@@ -112,7 +139,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
             var initialGuid = Guid.NewGuid();
 
             using var environment = new TestEnvironment();
-            using IWorkspaceProjectContext projectContext = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test", initialGuid);
+            using IWorkspaceProjectContext projectContext =
+                await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test", initialGuid);
             Assert.Equal(initialGuid, projectContext.Guid);
 
             var newGuid = Guid.NewGuid();
@@ -124,7 +152,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         public async Task ProjectLastDesignTimeBuildSucceededSetter_CPS()
         {
             using var environment = new TestEnvironment();
-            using IWorkspaceProjectContext projectContext = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test");
+            using IWorkspaceProjectContext projectContext =
+                await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test");
             Assert.True(projectContext.LastDesignTimeBuildSucceeded);
 
             projectContext.LastDesignTimeBuildSucceeded = false;
@@ -135,7 +164,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         public async Task ProjectDisplayNameSetter_CPS()
         {
             using var environment = new TestEnvironment();
-            using IWorkspaceProjectContext project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test");
+            using IWorkspaceProjectContext project =
+                await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test");
             Assert.Equal("Test", project.DisplayName);
             var initialProjectFilePath = project.ProjectFilePath;
 
@@ -150,7 +180,8 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         public async Task ProjectFilePathSetter_CPS()
         {
             using var environment = new TestEnvironment();
-            using IWorkspaceProjectContext project = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test");
+            using IWorkspaceProjectContext project =
+                await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test");
             var initialProjectDisplayName = project.DisplayName;
             var initialProjectFilePath = project.ProjectFilePath;
             var newFilePath = Temp.CreateFile().Path;
@@ -172,14 +203,23 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.CPS
         public async Task ChecksumAlgorithm_CPS()
         {
             using var environment = new TestEnvironment();
-            using var cpsProject = await CSharpHelpers.CreateCSharpCPSProjectAsync(environment, "Test");
+            using var cpsProject = await CSharpHelpers.CreateCSharpCPSProjectAsync(
+                environment,
+                "Test"
+            );
 
-            Assert.Equal(SourceHashAlgorithms.Default, environment.Workspace.CurrentSolution.Projects.Single().State.ChecksumAlgorithm);
+            Assert.Equal(
+                SourceHashAlgorithms.Default,
+                environment.Workspace.CurrentSolution.Projects.Single().State.ChecksumAlgorithm
+            );
 
             cpsProject.SetOptions(ImmutableArray.Create("/checksumalgorithm:SHA1"));
 
             var project = environment.Workspace.CurrentSolution.Projects.Single();
-            Assert.Equal(SourceHashAlgorithm.Sha1, environment.Workspace.CurrentSolution.Projects.Single().State.ChecksumAlgorithm);
+            Assert.Equal(
+                SourceHashAlgorithm.Sha1,
+                environment.Workspace.CurrentSolution.Projects.Single().State.ChecksumAlgorithm
+            );
         }
     }
 }

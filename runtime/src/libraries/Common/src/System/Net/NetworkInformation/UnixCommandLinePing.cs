@@ -10,13 +10,26 @@ namespace System.Net.NetworkInformation
     internal static class UnixCommandLinePing
     {
         // Ubuntu has ping under /bin, OSX under /sbin, ArchLinux under /usr/bin, Android under /system/bin, NixOS under /run/current-system/sw/bin.
-        private static readonly string[] s_binFolders = { "/bin", "/sbin", "/usr/bin", "/system/bin", "/run/current-system/sw/bin" };
+        private static readonly string[] s_binFolders =
+        {
+            "/bin",
+            "/sbin",
+            "/usr/bin",
+            "/system/bin",
+            "/run/current-system/sw/bin",
+        };
         private const string s_ipv4PingFile = "ping";
         private const string s_ipv6PingFile = "ping6";
 
-        private static readonly string? s_discoveredPing4UtilityPath = GetPingUtilityPath(ipv4: true);
-        private static readonly string? s_discoveredPing6UtilityPath = GetPingUtilityPath(ipv4: false);
-        private static readonly Lazy<bool> s_isBusybox = new Lazy<bool>(() => IsBusyboxPing(s_discoveredPing4UtilityPath));
+        private static readonly string? s_discoveredPing4UtilityPath = GetPingUtilityPath(
+            ipv4: true
+        );
+        private static readonly string? s_discoveredPing6UtilityPath = GetPingUtilityPath(
+            ipv4: false
+        );
+        private static readonly Lazy<bool> s_isBusybox = new Lazy<bool>(() =>
+            IsBusyboxPing(s_discoveredPing4UtilityPath)
+        );
 
         // We don't want to pick up an arbitrary or malicious ping
         // command, so that's why we do the path probing ourselves.
@@ -40,7 +53,10 @@ namespace System.Net.NetworkInformation
         {
             if (pingBinary != null)
             {
-                System.IO.FileSystemInfo? linkInfo = File.ResolveLinkTarget(pingBinary, returnFinalTarget: true);
+                System.IO.FileSystemInfo? linkInfo = File.ResolveLinkTarget(
+                    pingBinary,
+                    returnFinalTarget: true
+                );
                 if (linkInfo?.Name.EndsWith("busybox", StringComparison.Ordinal) == true)
                 {
                     return true;
@@ -54,18 +70,24 @@ namespace System.Net.NetworkInformation
         {
             Default,
             Do,
-            Dont
+            Dont,
         };
 
         /// <summary>
         /// The location of the IPv4 ping utility on the current machine.
         /// </summary>
-        public static string? Ping4UtilityPath { get { return s_discoveredPing4UtilityPath; } }
+        public static string? Ping4UtilityPath
+        {
+            get { return s_discoveredPing4UtilityPath; }
+        }
 
         /// <summary>
         /// The location of the IPv6 ping utility on the current machine.
         /// </summary>
-        public static string? Ping6UtilityPath { get { return s_discoveredPing6UtilityPath; } }
+        public static string? Ping6UtilityPath
+        {
+            get { return s_discoveredPing6UtilityPath; }
+        }
 
         /// <summary>
         /// Constructs command line arguments appropriate for the ping or ping6 utility.
@@ -77,7 +99,14 @@ namespace System.Net.NetworkInformation
         /// <param name="ttl">The time to live.</param>
         /// <param name="fragmentOption">Fragmentation options.</param>
         /// <returns>The constructed command line arguments, which can be passed to ping or ping6.</returns>
-        public static string ConstructCommandLine(int packetSize, int timeout, string address, bool ipv4, int ttl = 0, PingFragmentOptions fragmentOption = PingFragmentOptions.Default)
+        public static string ConstructCommandLine(
+            int packetSize,
+            int timeout,
+            string address,
+            bool ipv4,
+            int ttl = 0,
+            PingFragmentOptions fragmentOption = PingFragmentOptions.Default
+        )
         {
             var sb = new StringBuilder();
             sb.Append("-c 1"); // Just send a single ping ("count = 1")
@@ -126,7 +155,7 @@ namespace System.Net.NetworkInformation
             }
             sb.Append(timeout);
 
-        skipped_timeout:
+            skipped_timeout:
 
             // The command-line flags for "Do-not-fragment" and "TTL" are not standard.
             // In fact, they are different even between ping and ping6 on the same machine.
@@ -140,7 +169,10 @@ namespace System.Net.NetworkInformation
                 {
                     // OSX and FreeBSD use -h to set hop limit for IPv6 and -m ttl for IPv4
                     // Syntax changed in FreeBSD 13.0 and options are not common for both address families
-                    if (ipv4 || (OperatingSystem.IsFreeBSD() && Environment.OSVersion.Version.Major > 12))
+                    if (
+                        ipv4
+                        || (OperatingSystem.IsFreeBSD() && Environment.OSVersion.Version.Major > 12)
+                    )
                     {
                         sb.Append(" -m ");
                     }
@@ -163,17 +195,21 @@ namespace System.Net.NetworkInformation
                 if (OperatingSystem.IsFreeBSD() || OperatingSystem.IsMacOS())
                 {
                     // The bit is off by default on OSX & FreeBSD
-                    if (fragmentOption == PingFragmentOptions.Dont) {
+                    if (fragmentOption == PingFragmentOptions.Dont)
+                    {
                         sb.Append(" -D ");
                     }
                 }
-                else if (!s_isBusybox.Value)  // busybox implementation does not support fragmentation option.
+                else if (!s_isBusybox.Value) // busybox implementation does not support fragmentation option.
                 {
                     // Linux has three state option with default to use PMTU.
                     // When explicit option is used we set it explicitly to one or the other.
-                    if (fragmentOption == PingFragmentOptions.Do) {
+                    if (fragmentOption == PingFragmentOptions.Do)
+                    {
                         sb.Append(" -M do ");
-                    } else {
+                    }
+                    else
+                    {
                         sb.Append(" -M dont ");
                     }
                 }

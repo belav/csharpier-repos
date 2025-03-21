@@ -12,7 +12,9 @@ namespace System.Drawing
     /// Represents an ordered pair of x and y coordinates that define a point in a two-dimensional plane.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+    )]
     public struct PointF : IEquatable<PointF>
     {
         /// <summary>
@@ -105,7 +107,8 @@ namespace System.Drawing
         /// <see cref='System.Drawing.PointF.X'/> and <see cref='System.Drawing.PointF.Y'/> properties of the two
         /// <see cref='System.Drawing.PointF'/> objects are equal.
         /// </summary>
-        public static bool operator ==(PointF left, PointF right) => left.X == right.X && left.Y == right.Y;
+        public static bool operator ==(PointF left, PointF right) =>
+            left.X == right.X && left.Y == right.Y;
 
         /// <summary>
         /// Compares two <see cref='System.Drawing.PointF'/> objects. The result specifies whether the values of the
@@ -117,28 +120,34 @@ namespace System.Drawing
         /// <summary>
         /// Translates a <see cref='System.Drawing.PointF'/> by a given <see cref='System.Drawing.Size'/> .
         /// </summary>
-        public static PointF Add(PointF pt, Size sz) => new PointF(pt.X + sz.Width, pt.Y + sz.Height);
+        public static PointF Add(PointF pt, Size sz) =>
+            new PointF(pt.X + sz.Width, pt.Y + sz.Height);
 
         /// <summary>
         /// Translates a <see cref='System.Drawing.PointF'/> by the negative of a given <see cref='System.Drawing.Size'/> .
         /// </summary>
-        public static PointF Subtract(PointF pt, Size sz) => new PointF(pt.X - sz.Width, pt.Y - sz.Height);
+        public static PointF Subtract(PointF pt, Size sz) =>
+            new PointF(pt.X - sz.Width, pt.Y - sz.Height);
 
         /// <summary>
         /// Translates a <see cref='System.Drawing.PointF'/> by a given <see cref='System.Drawing.SizeF'/> .
         /// </summary>
-        public static PointF Add(PointF pt, SizeF sz) => new PointF(pt.X + sz.Width, pt.Y + sz.Height);
+        public static PointF Add(PointF pt, SizeF sz) =>
+            new PointF(pt.X + sz.Width, pt.Y + sz.Height);
 
         /// <summary>
         /// Translates a <see cref='System.Drawing.PointF'/> by the negative of a given <see cref='System.Drawing.SizeF'/> .
         /// </summary>
-        public static PointF Subtract(PointF pt, SizeF sz) => new PointF(pt.X - sz.Width, pt.Y - sz.Height);
+        public static PointF Subtract(PointF pt, SizeF sz) =>
+            new PointF(pt.X - sz.Width, pt.Y - sz.Height);
 
-        public override readonly bool Equals([NotNullWhen(true)] object? obj) => obj is PointF && Equals((PointF)obj);
+        public override readonly bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is PointF && Equals((PointF)obj);
 
         public readonly bool Equals(PointF other) => this == other;
 
-        public override readonly int GetHashCode() => HashCode.Combine(X.GetHashCode(), Y.GetHashCode());
+        public override readonly int GetHashCode() =>
+            HashCode.Combine(X.GetHashCode(), Y.GetHashCode());
 
         public override readonly string ToString() => $"{{X={x}, Y={y}}}";
     }

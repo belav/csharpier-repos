@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,35 +26,35 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("9c18bb4e-1dd1-11b2-bf91-9cc82c275823")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIDocCharset
+    {
+        #region nsIDocCharset
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getCharset(ref IntPtr ret);
 
-	[Guid ("9c18bb4e-1dd1-11b2-bf91-9cc82c275823")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIDocCharset {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int setCharset([MarshalAs(UnmanagedType.LPStr)] string value);
 
-#region nsIDocCharset
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getCharset ( ref IntPtr ret);
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int setCharset ([MarshalAs (UnmanagedType.LPStr)]  string value);
-
-#endregion
-	}
-
-
-	internal class nsDocCharset {
-		public static nsIDocCharset GetProxy (Mono.WebBrowser.IWebBrowser control, nsIDocCharset obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIDocCharset).GUID, obj);
-			return o as nsIDocCharset;
-		}
-	}
+    internal class nsDocCharset
+    {
+        public static nsIDocCharset GetProxy(Mono.WebBrowser.IWebBrowser control, nsIDocCharset obj)
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIDocCharset).GUID, obj);
+            return o as nsIDocCharset;
+        }
+    }
 }

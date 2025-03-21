@@ -11,7 +11,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 {
     public static class ObjectExtensions
     {
-        public static PropertyType GetPropertyValue<PropertyType>(this object instance, string propertyName)
+        public static PropertyType GetPropertyValue<PropertyType>(
+            this object instance,
+            string propertyName
+        )
         {
             return (PropertyType)GetPropertyValue(instance, propertyName);
         }
@@ -19,10 +22,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public static object GetPropertyValue(this object instance, string propertyName)
         {
             var type = instance.GetType();
-            var propertyInfo = type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            var propertyInfo = type.GetProperty(
+                propertyName,
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+            );
             if (propertyInfo == null)
             {
-                throw new ArgumentException("Property " + propertyName + " was not found on type " + type.ToString());
+                throw new ArgumentException(
+                    "Property " + propertyName + " was not found on type " + type.ToString()
+                );
             }
 
             var result = propertyInfo.GetValue(instance, null);
@@ -35,7 +43,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             FieldInfo fieldInfo = null;
             while (type != null)
             {
-                fieldInfo = type.GetField(fieldName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+                fieldInfo = type.GetField(
+                    fieldName,
+                    BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                );
                 if (fieldInfo != null)
                 {
                     break;
@@ -46,7 +57,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             if (fieldInfo == null)
             {
-                throw new FieldAccessException("Field " + fieldName + " was not found on type " + type.ToString());
+                throw new FieldAccessException(
+                    "Field " + fieldName + " was not found on type " + type.ToString()
+                );
             }
 
             var result = fieldInfo.GetValue(instance);

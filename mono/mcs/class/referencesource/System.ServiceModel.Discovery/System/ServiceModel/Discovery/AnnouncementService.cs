@@ -5,39 +5,43 @@
 namespace System.ServiceModel.Discovery
 {
     using System;
-    using System.Xml;
     using System.Runtime;
     using System.ServiceModel.Discovery.Version11;
     using System.ServiceModel.Discovery.VersionApril2005;
     using System.ServiceModel.Discovery.VersionCD1;
+    using System.Xml;
 
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
-    public class AnnouncementService : 
-        IAnnouncementContractApril2005, 
-        IAnnouncementContract11,
-        IAnnouncementContractCD1,
-        IAnnouncementServiceImplementation
+    [ServiceBehavior(
+        InstanceContextMode = InstanceContextMode.Single,
+        ConcurrencyMode = ConcurrencyMode.Multiple
+    )]
+    public class AnnouncementService
+        : IAnnouncementContractApril2005,
+            IAnnouncementContract11,
+            IAnnouncementContractCD1,
+            IAnnouncementServiceImplementation
     {
         DuplicateDetector<UniqueId> duplicateDetector;
 
         public AnnouncementService()
-            : this(DiscoveryDefaults.DuplicateMessageHistoryLength)
-        {
-        }
+            : this(DiscoveryDefaults.DuplicateMessageHistoryLength) { }
 
         public AnnouncementService(int duplicateMessageHistoryLength)
         {
             if (duplicateMessageHistoryLength < 0)
             {
                 throw FxTrace.Exception.ArgumentOutOfRange(
-                    "duplicateMessageHistoryLength", 
-                    duplicateMessageHistoryLength, 
-                    SR.DiscoveryNegativeDuplicateMessageHistoryLength);
+                    "duplicateMessageHistoryLength",
+                    duplicateMessageHistoryLength,
+                    SR.DiscoveryNegativeDuplicateMessageHistoryLength
+                );
             }
 
             if (duplicateMessageHistoryLength > 0)
             {
-                this.duplicateDetector = new DuplicateDetector<UniqueId>(duplicateMessageHistoryLength);
+                this.duplicateDetector = new DuplicateDetector<UniqueId>(
+                    duplicateMessageHistoryLength
+                );
             }
         }
 
@@ -46,10 +50,16 @@ namespace System.ServiceModel.Discovery
 
         void IAnnouncementContractApril2005.HelloOperation(HelloMessageApril2005 message)
         {
-            Fx.Assert("The sync method IAnnouncementContractApril2005.HelloOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IAnnouncementContractApril2005.HelloOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IAnnouncementContractApril2005.BeginHelloOperation(HelloMessageApril2005 message, AsyncCallback callback, object state)
+        IAsyncResult IAnnouncementContractApril2005.BeginHelloOperation(
+            HelloMessageApril2005 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new HelloOperationApril2005AsyncResult(this, message, callback, state);
         }
@@ -61,10 +71,16 @@ namespace System.ServiceModel.Discovery
 
         void IAnnouncementContractApril2005.ByeOperation(ByeMessageApril2005 message)
         {
-            Fx.Assert("The sync method IAnnouncementContractApril2005.ByeOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IAnnouncementContractApril2005.ByeOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IAnnouncementContractApril2005.BeginByeOperation(ByeMessageApril2005 message, AsyncCallback callback, object state)
+        IAsyncResult IAnnouncementContractApril2005.BeginByeOperation(
+            ByeMessageApril2005 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ByeOperationApril2005AsyncResult(this, message, callback, state);
         }
@@ -76,10 +92,16 @@ namespace System.ServiceModel.Discovery
 
         void IAnnouncementContract11.HelloOperation(HelloMessage11 message)
         {
-            Fx.Assert("The sync method IAnnouncementContract11.HelloOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IAnnouncementContract11.HelloOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IAnnouncementContract11.BeginHelloOperation(HelloMessage11 message, AsyncCallback callback, object state)
+        IAsyncResult IAnnouncementContract11.BeginHelloOperation(
+            HelloMessage11 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new HelloOperation11AsyncResult(this, message, callback, state);
         }
@@ -91,10 +113,16 @@ namespace System.ServiceModel.Discovery
 
         void IAnnouncementContract11.ByeOperation(ByeMessage11 message)
         {
-            Fx.Assert("The sync method IAnnouncementContract11.ByeOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IAnnouncementContract11.ByeOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IAnnouncementContract11.BeginByeOperation(ByeMessage11 message, AsyncCallback callback, object state)
+        IAsyncResult IAnnouncementContract11.BeginByeOperation(
+            ByeMessage11 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ByeOperation11AsyncResult(this, message, callback, state);
         }
@@ -106,10 +134,16 @@ namespace System.ServiceModel.Discovery
 
         void IAnnouncementContractCD1.HelloOperation(HelloMessageCD1 message)
         {
-            Fx.Assert("The sync method IAnnouncementContractCD1.HelloOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IAnnouncementContractCD1.HelloOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IAnnouncementContractCD1.BeginHelloOperation(HelloMessageCD1 message, AsyncCallback callback, object state)
+        IAsyncResult IAnnouncementContractCD1.BeginHelloOperation(
+            HelloMessageCD1 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new HelloOperationCD1AsyncResult(this, message, callback, state);
         }
@@ -121,10 +155,16 @@ namespace System.ServiceModel.Discovery
 
         void IAnnouncementContractCD1.ByeOperation(ByeMessageCD1 message)
         {
-            Fx.Assert("The sync method IAnnouncementContractCD1.ByeOperation must not get invoked. It is marked with PreferAsyncInvocation flag.");
+            Fx.Assert(
+                "The sync method IAnnouncementContractCD1.ByeOperation must not get invoked. It is marked with PreferAsyncInvocation flag."
+            );
         }
 
-        IAsyncResult IAnnouncementContractCD1.BeginByeOperation(ByeMessageCD1 message, AsyncCallback callback, object state)
+        IAsyncResult IAnnouncementContractCD1.BeginByeOperation(
+            ByeMessageCD1 message,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new ByeOperationCD1AsyncResult(this, message, callback, state);
         }
@@ -136,16 +176,23 @@ namespace System.ServiceModel.Discovery
 
         bool IAnnouncementServiceImplementation.IsDuplicate(UniqueId messageId)
         {
-            return (this.duplicateDetector != null) && (!this.duplicateDetector.AddIfNotDuplicate(messageId));
+            return (this.duplicateDetector != null)
+                && (!this.duplicateDetector.AddIfNotDuplicate(messageId));
         }
 
         IAsyncResult IAnnouncementServiceImplementation.OnBeginOnlineAnnouncement(
             DiscoveryMessageSequence messageSequence,
             EndpointDiscoveryMetadata endpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
-            return this.OnBeginOnlineAnnouncement(messageSequence, endpointDiscoveryMetadata, callback, state);
+            return this.OnBeginOnlineAnnouncement(
+                messageSequence,
+                endpointDiscoveryMetadata,
+                callback,
+                state
+            );
         }
 
         void IAnnouncementServiceImplementation.OnEndOnlineAnnouncement(IAsyncResult result)
@@ -157,9 +204,15 @@ namespace System.ServiceModel.Discovery
             DiscoveryMessageSequence messageSequence,
             EndpointDiscoveryMetadata endpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
-            return this.OnBeginOfflineAnnouncement(messageSequence, endpointDiscoveryMetadata, callback, state);
+            return this.OnBeginOfflineAnnouncement(
+                messageSequence,
+                endpointDiscoveryMetadata,
+                callback,
+                state
+            );
         }
 
         void IAnnouncementServiceImplementation.OnEndOfflineAnnouncement(IAsyncResult result)
@@ -171,13 +224,17 @@ namespace System.ServiceModel.Discovery
             DiscoveryMessageSequence messageSequence,
             EndpointDiscoveryMetadata endpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
             EventHandler<AnnouncementEventArgs> handler = this.OnlineAnnouncementReceived;
 
             if (handler != null)
             {
-                handler(this, new AnnouncementEventArgs(messageSequence, endpointDiscoveryMetadata));
+                handler(
+                    this,
+                    new AnnouncementEventArgs(messageSequence, endpointDiscoveryMetadata)
+                );
             }
             return new CompletedAsyncResult(callback, state);
         }
@@ -191,14 +248,17 @@ namespace System.ServiceModel.Discovery
             DiscoveryMessageSequence messageSequence,
             EndpointDiscoveryMetadata endpointDiscoveryMetadata,
             AsyncCallback callback,
-            object state)
+            object state
+        )
         {
-
             EventHandler<AnnouncementEventArgs> handler = this.OfflineAnnouncementReceived;
 
             if (handler != null)
             {
-                handler(this, new AnnouncementEventArgs(messageSequence, endpointDiscoveryMetadata));
+                handler(
+                    this,
+                    new AnnouncementEventArgs(messageSequence, endpointDiscoveryMetadata)
+                );
             }
             return new CompletedAsyncResult(callback, state);
         }

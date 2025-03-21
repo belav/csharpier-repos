@@ -30,14 +30,8 @@ namespace System.ComponentModel.Tests
         [MemberData(nameof(Container_Get_TestData))]
         public void Container_GetWithSite_ReturnsExpected(Container result)
         {
-            var site = new MockSite
-            {
-                Container = result
-            };
-            var component = new Component
-            {
-                Site = site
-            };
+            var site = new MockSite { Container = result };
+            var component = new Component { Site = site };
             Assert.Same(result, component.Container);
         }
 
@@ -54,14 +48,8 @@ namespace System.ComponentModel.Tests
         [InlineData(false)]
         public void DesignMode_GetWithSite_ReturnsExpected(bool result)
         {
-            var site = new MockSite
-            {
-                DesignMode = result
-            };
-            var component = new SubComponent
-            {
-                Site = site
-            };
+            var site = new MockSite { DesignMode = result };
+            var component = new SubComponent { Site = site };
             Assert.Equal(result, component.DesignMode);
         }
 
@@ -83,10 +71,7 @@ namespace System.ComponentModel.Tests
         [MemberData(nameof(Site_Set_TestData))]
         public void Site_Set_GetReturnsExpected(ISite value)
         {
-            var component = new Component
-            {
-                Site = value
-            };
+            var component = new Component { Site = value };
             Assert.Same(value, component.Site);
 
             // Set same.
@@ -108,14 +93,8 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Dispose_NullSiteContainer_Success()
         {
-            var site = new MockSite
-            {
-                Container = null
-            };
-            var component = new SubComponent
-            {
-                Site = site
-            };
+            var site = new MockSite { Container = null };
+            var component = new SubComponent { Site = site };
             component.Dispose();
             Assert.Same(site, component.Site);
 
@@ -126,14 +105,8 @@ namespace System.ComponentModel.Tests
         [Fact]
         public void Dispose_NonNullSiteContainer_RemovesComponentFromContainer()
         {
-            var site = new MockSite
-            {
-                Container = new Container()
-            };
-            var component = new SubComponent
-            {
-                Site = site
-            };
+            var site = new MockSite { Container = new Container() };
+            var component = new SubComponent { Site = site };
 
             component.Dispose();
             Assert.Null(component.Site);
@@ -181,7 +154,10 @@ namespace System.ComponentModel.Tests
         [Theory]
         [InlineData(true, 1)]
         [InlineData(false, 0)]
-        public void Dispose_InvokeBoolWithDisposed_CallsHandlerIfDisposing(bool disposing, int expectedCallCount)
+        public void Dispose_InvokeBoolWithDisposed_CallsHandlerIfDisposing(
+            bool disposing,
+            int expectedCallCount
+        )
         {
             var component = new SubComponent();
             int callCount = 0;
@@ -218,14 +194,20 @@ namespace System.ComponentModel.Tests
             Assert.Equal(0, callCount);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsInvokingFinalizersSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsInvokingFinalizersSupported)
+        )]
         public void Finalize_Invoke_DoesNotCallDisposedEvent()
         {
             var component = new SubComponent();
             int callCount = 0;
             component.Disposed += (sender, e) => callCount++;
 
-            MethodInfo method = typeof(Component).GetMethod("Finalize", BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo method = typeof(Component).GetMethod(
+                "Finalize",
+                BindingFlags.NonPublic | BindingFlags.Instance
+            );
             Assert.NotNull(method);
             method.Invoke(component, null);
             Assert.Equal(0, callCount);
@@ -247,26 +229,36 @@ namespace System.ComponentModel.Tests
         [InlineData(typeof(int), typeof(bool))]
         public void GetService_InvokeWithSite_ReturnsExpected(Type serviceType, Type result)
         {
-            var site = new MockSite
-            {
-                ServiceType = result
-            };
-            var component = new SubComponent
-            {
-                Site = site
-            };
+            var site = new MockSite { ServiceType = result };
+            var component = new SubComponent { Site = site };
             Assert.Same(result, component.GetService(serviceType));
         }
 
         public static IEnumerable<object[]> ToString_TestData()
         {
             yield return new object[] { new Component(), "System.ComponentModel.Component" };
-            yield return new object[] { new Component { Site = new MockSite { Name = "name" } }, "name [System.ComponentModel.Component]" };
-            yield return new object[] { new Component { Site = new MockSite { Name = string.Empty } }, " [System.ComponentModel.Component]" };
-            yield return new object[] { new Component { Site = new MockSite { Name = null } }, " [System.ComponentModel.Component]" };
+            yield return new object[]
+            {
+                new Component { Site = new MockSite { Name = "name" } },
+                "name [System.ComponentModel.Component]",
+            };
+            yield return new object[]
+            {
+                new Component { Site = new MockSite { Name = string.Empty } },
+                " [System.ComponentModel.Component]",
+            };
+            yield return new object[]
+            {
+                new Component { Site = new MockSite { Name = null } },
+                " [System.ComponentModel.Component]",
+            };
 
             // ToString uses the private _site field instead of the Site property.
-            yield return new object[] { new DifferentSiteComponent { Site = new MockSite { Name = "Name2" } }, "System.ComponentModel.Tests.ComponentTests+DifferentSiteComponent" };
+            yield return new object[]
+            {
+                new DifferentSiteComponent { Site = new MockSite { Name = "Name2" } },
+                "System.ComponentModel.Tests.ComponentTests+DifferentSiteComponent",
+            };
         }
 
         [Theory]
@@ -301,7 +293,13 @@ namespace System.ComponentModel.Tests
 
             public override ISite Site
             {
-                get => new MockSite { Container = new Container(), DesignMode = true, Name = "Name1" };
+                get =>
+                    new MockSite
+                    {
+                        Container = new Container(),
+                        DesignMode = true,
+                        Name = "Name1",
+                    };
                 set { }
             }
         }

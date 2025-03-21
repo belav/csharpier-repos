@@ -7,11 +7,11 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
 
     [ConfigurationCollection(typeof(X509ScopedServiceCertificateElement))]
-    public sealed class X509ScopedServiceCertificateElementCollection : ServiceModelConfigurationElementCollection<X509ScopedServiceCertificateElement>
+    public sealed class X509ScopedServiceCertificateElementCollection
+        : ServiceModelConfigurationElementCollection<X509ScopedServiceCertificateElement>
     {
         public X509ScopedServiceCertificateElementCollection()
-            : base()
-        { }
+            : base() { }
 
         protected override object GetElementKey(ConfigurationElement element)
         {
@@ -19,7 +19,8 @@ namespace System.ServiceModel.Configuration
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
-            X509ScopedServiceCertificateElement scopedCertificateElement = (X509ScopedServiceCertificateElement)element;
+            X509ScopedServiceCertificateElement scopedCertificateElement =
+                (X509ScopedServiceCertificateElement)element;
             return scopedCertificateElement.TargetUri;
         }
     }

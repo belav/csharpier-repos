@@ -23,7 +23,8 @@ public class ViewFeaturesAnalyzerContext
 
     public INamedTypeSymbol HtmlHelperPartialExtensionsType { get; }
 
-    private INamedTypeSymbol GetType(string name) => Context.Compilation.GetTypeByMetadataName(name);
+    private INamedTypeSymbol GetType(string name) =>
+        Context.Compilation.GetTypeByMetadataName(name);
 
     public bool IsHtmlHelperExtensionMethod(IMethodSymbol method)
     {
@@ -32,7 +33,12 @@ public class ViewFeaturesAnalyzerContext
             return false;
         }
 
-        if (!SymbolEqualityComparer.Default.Equals(method.ContainingType, HtmlHelperPartialExtensionsType))
+        if (
+            !SymbolEqualityComparer.Default.Equals(
+                method.ContainingType,
+                HtmlHelperPartialExtensionsType
+            )
+        )
         {
             return false;
         }

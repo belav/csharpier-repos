@@ -14,9 +14,19 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 {
     public static class IlasmUtilities
     {
-        public static DisposableFile CreateTempAssembly(string declarations, bool prependDefaultHeader = true)
+        public static DisposableFile CreateTempAssembly(
+            string declarations,
+            bool prependDefaultHeader = true
+        )
         {
-            IlasmTempAssembly(declarations, prependDefaultHeader, includePdb: false, autoInherit: true, assemblyPath: out var assemblyPath, pdbPath: out var pdbPath);
+            IlasmTempAssembly(
+                declarations,
+                prependDefaultHeader,
+                includePdb: false,
+                autoInherit: true,
+                assemblyPath: out var assemblyPath,
+                pdbPath: out var pdbPath
+            );
             Assert.NotNull(assemblyPath);
             Assert.Null(pdbPath);
             return new DisposableFile(assemblyPath);
@@ -26,15 +36,18 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         {
             if (ExecutionConditionUtil.IsWindowsDesktop)
             {
-                // The desktop ilasm is still necessary because a number of our tests depend on being able to 
+                // The desktop ilasm is still necessary because a number of our tests depend on being able to
                 // emit PDB files for net modules. That feature is not available on coreclr ilasm.
                 return Path.Combine(
                     Path.GetDirectoryName(RuntimeUtilities.GetAssemblyLocation(typeof(object))),
-                    "ilasm.exe");
+                    "ilasm.exe"
+                );
             }
 
             var ilasmExeName = PlatformInformation.IsWindows ? "ilasm.exe" : "ilasm";
-            var directory = Path.GetDirectoryName(RuntimeUtilities.GetAssemblyLocation(typeof(RuntimeUtilities)));
+            var directory = Path.GetDirectoryName(
+                RuntimeUtilities.GetAssemblyLocation(typeof(RuntimeUtilities))
+            );
             string ridName;
             if (ExecutionConditionUtil.IsWindows)
             {
@@ -50,7 +63,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             }
             else
             {
-                throw new PlatformNotSupportedException("Runtime platform not supported for testing");
+                throw new PlatformNotSupportedException(
+                    "Runtime platform not supported for testing"
+                );
             }
 
             return Path.Combine(directory, "runtimes", ridName, "native", ilasmExeName);
@@ -58,7 +73,14 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         private static readonly string IlasmPath = GetIlasmPath();
 
-        public static void IlasmTempAssembly(string declarations, bool appendDefaultHeader, bool includePdb, bool autoInherit, out string assemblyPath, out string pdbPath)
+        public static void IlasmTempAssembly(
+            string declarations,
+            bool appendDefaultHeader,
+            bool includePdb,
+            bool autoInherit,
+            out string assemblyPath,
+            out string pdbPath
+        )
         {
             if (declarations == null)
                 throw new ArgumentNullException(nameof(declarations));
@@ -69,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
                 assemblyPath = Path.Combine(
                     TempRoot.Root,
-                    Path.ChangeExtension(Path.GetFileName(sourceFile.Path), "dll"));
+                    Path.ChangeExtension(Path.GetFileName(sourceFile.Path), "dll")
+                );
 
                 string completeIL;
                 if (appendDefaultHeader)
@@ -79,7 +102,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                     const string corLibKey = "B7 7A 5C 56 19 34 E0 89";
 
                     completeIL =
-$@".assembly '{sourceFileName}' {{}} 
+                        $@".assembly '{sourceFileName}' {{}} 
 
 .assembly extern {corLibName} 
 {{
@@ -96,7 +119,8 @@ $@".assembly '{sourceFileName}' {{}}
 
                 sourceFile.WriteAllText(completeIL);
 
-                var arguments = $"\"{sourceFile.Path}\" -DLL {(autoInherit ? "" : "-noautoinherit")} -out=\"{assemblyPath}\"";
+                var arguments =
+                    $"\"{sourceFile.Path}\" -DLL {(autoInherit ? "" : "-noautoinherit")} -out=\"{assemblyPath}\"";
 
                 if (includePdb && !MonoHelpers.IsRunningOnMono())
                 {
@@ -113,10 +137,15 @@ $@".assembly '{sourceFileName}' {{}}
                 if (result.ContainsErrors)
                 {
                     throw new ArgumentException(
-                        "The provided IL cannot be compiled." + Environment.NewLine +
-                        IlasmPath + " " + arguments + Environment.NewLine +
-                        result,
-                        nameof(declarations));
+                        "The provided IL cannot be compiled."
+                            + Environment.NewLine
+                            + IlasmPath
+                            + " "
+                            + arguments
+                            + Environment.NewLine
+                            + result,
+                        nameof(declarations)
+                    );
                 }
             }
         }

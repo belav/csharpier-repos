@@ -26,7 +26,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     {
                         throw new Exception(SR.Diagnostic_InternalExceptionMessage);
                     }
-                    return ReflectionExtensions.CreateReflectionProperty((MethodInfo)accessors[0], (MethodInfo)accessors[1]);
+                    return ReflectionExtensions.CreateReflectionProperty(
+                        (MethodInfo)accessors[0],
+                        (MethodInfo)accessors[1]
+                    );
 
                 case MemberTypes.NestedType:
                 case MemberTypes.TypeInfo:
@@ -53,7 +56,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     throw new Exception(SR.Diagnostic_InternalExceptionMessage);
                 }
 
-                MemberInfo[] accessors = new MemberInfo[] { property.GetGetMethod(true)!, property.GetSetMethod(true)! };
+                MemberInfo[] accessors = new MemberInfo[]
+                {
+                    property.GetGetMethod(true)!,
+                    property.GetSetMethod(true)!,
+                };
                 return new LazyMemberInfo(MemberTypes.Property, accessors);
             }
             else
@@ -62,14 +69,20 @@ namespace System.ComponentModel.Composition.ReflectionModel
             }
         }
 
-        public static ReflectionWritableMember ToReflectionWriteableMember(this LazyMemberInfo lazyMember)
+        public static ReflectionWritableMember ToReflectionWriteableMember(
+            this LazyMemberInfo lazyMember
+        )
         {
-            if ((lazyMember.MemberType != MemberTypes.Field) && (lazyMember.MemberType != MemberTypes.Property))
+            if (
+                (lazyMember.MemberType != MemberTypes.Field)
+                && (lazyMember.MemberType != MemberTypes.Property)
+            )
             {
                 throw new Exception(SR.Diagnostic_InternalExceptionMessage);
             }
 
-            ReflectionWritableMember? reflectionMember = lazyMember.ToReflectionMember() as ReflectionWritableMember;
+            ReflectionWritableMember? reflectionMember =
+                lazyMember.ToReflectionMember() as ReflectionWritableMember;
             if (reflectionMember == null)
             {
                 throw new Exception(SR.Diagnostic_InternalExceptionMessage);
@@ -82,10 +95,16 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             ArgumentNullException.ThrowIfNull(property);
 
-            return CreateReflectionProperty(property.GetGetMethod(true)!, property.GetSetMethod(true)!);
+            return CreateReflectionProperty(
+                property.GetGetMethod(true)!,
+                property.GetSetMethod(true)!
+            );
         }
 
-        public static ReflectionProperty CreateReflectionProperty(MethodInfo getMethod, MethodInfo setMethod)
+        public static ReflectionProperty CreateReflectionProperty(
+            MethodInfo getMethod,
+            MethodInfo setMethod
+        )
         {
             if (getMethod == null && setMethod == null)
             {

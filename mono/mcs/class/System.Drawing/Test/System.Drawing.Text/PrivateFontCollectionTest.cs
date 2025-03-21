@@ -27,58 +27,65 @@
 //
 
 using System;
-using System.IO;
 using System.Drawing;
 using System.Drawing.Text;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing.Text {
+namespace MonoTests.System.Drawing.Text
+{
+    [TestFixture]
+    public class PrivateFontCollectionTest
+    {
+        [Test]
+        public void Constructor()
+        {
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            Assert.IsNotNull(pfc.Families);
+        }
 
-	[TestFixture]
-	public class PrivateFontCollectionTest {
+        [Test]
+        public void AddFontFile_Null()
+        {
+            Assert.Throws<ArgumentNullException>(() => new PrivateFontCollection().AddFontFile(null)
+            );
+        }
 
-		[Test]
-		public void Constructor ()
-		{
-			PrivateFontCollection pfc = new PrivateFontCollection ();
-			Assert.IsNotNull (pfc.Families);
-		}
+        [Test]
+        public void AddFontFile_Empty()
+        {
+            // badly formetted filename
+            Assert.Throws<ArgumentException>(() =>
+                new PrivateFontCollection().AddFontFile(String.Empty)
+            );
+        }
 
-		[Test]
-		public void AddFontFile_Null ()
-		{
-			Assert.Throws<ArgumentNullException> (() => new PrivateFontCollection ().AddFontFile (null));
-		}
+        [Test]
+        [Category("NotWorking")] // it seems fontconfig doesn't validate on add...
+        public void AddFontFile_NotAFontFile()
+        {
+            string file = Path.GetTempFileName();
+            Assert.IsTrue(File.Exists(file), "Exists");
+            // even if the file exists....
+            Assert.Throws<FileNotFoundException>(() => new PrivateFontCollection().AddFontFile(file)
+            );
+        }
 
-		[Test]
-		public void AddFontFile_Empty ()
-		{
-			// badly formetted filename
-			Assert.Throws<ArgumentException> (() => new PrivateFontCollection ().AddFontFile (String.Empty));
-		}
+        // tests for AddMemoryFont are available in the CAS unit tests
 
-		[Test]
-		[Category ("NotWorking")] // it seems fontconfig doesn't validate on add...
-		public void AddFontFile_NotAFontFile ()
-		{
-			string file = Path.GetTempFileName ();
-			Assert.IsTrue (File.Exists (file), "Exists");
-			// even if the file exists....
-			Assert.Throws<FileNotFoundException> (() => new PrivateFontCollection ().AddFontFile (file));
-		}
-
-		// tests for AddMemoryFont are available in the CAS unit tests
-
-		[Test]
-		public void Dispose_Family ()
-		{
-			PrivateFontCollection pfc = new PrivateFontCollection ();
-			pfc.Dispose ();
-			Assert.Throws<ArgumentException> (() => { var x = pfc.Families; });
-			// no it's not a ObjectDisposedException
-		}
-	}
+        [Test]
+        public void Dispose_Family()
+        {
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            pfc.Dispose();
+            Assert.Throws<ArgumentException>(() =>
+            {
+                var x = pfc.Families;
+            });
+            // no it's not a ObjectDisposedException
+        }
+    }
 }

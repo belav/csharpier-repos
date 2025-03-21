@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace System.Xml
 {
-    [Obsolete(Obsoletions.XmlSecureResolverMessage, DiagnosticId = Obsoletions.XmlSecureResolverDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.XmlSecureResolverMessage,
+        DiagnosticId = Obsoletions.XmlSecureResolverDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
     public class XmlSecureResolver : XmlResolver
     {
         public XmlSecureResolver(XmlResolver resolver, string? securityUrl)
@@ -17,17 +21,25 @@ namespace System.Xml
 
         public override ICredentials Credentials
         {
-            set { /* no-op */ }
+            set
+            { /* no-op */
+            }
         }
 
         // Forward to ThrowingResolver to get its exception message
-        public override object? GetEntity(Uri absoluteUri, string? role, Type? ofObjectToReturn) => XmlResolver.ThrowingResolver.GetEntity(absoluteUri, role, ofObjectToReturn);
+        public override object? GetEntity(Uri absoluteUri, string? role, Type? ofObjectToReturn) =>
+            XmlResolver.ThrowingResolver.GetEntity(absoluteUri, role, ofObjectToReturn);
 
         // Forward to ThrowingResolver to get its exception message
-        public override Task<object> GetEntityAsync(Uri absoluteUri, string? role, Type? ofObjectToReturn) => XmlResolver.ThrowingResolver.GetEntityAsync(absoluteUri, role, ofObjectToReturn);
+        public override Task<object> GetEntityAsync(
+            Uri absoluteUri,
+            string? role,
+            Type? ofObjectToReturn
+        ) => XmlResolver.ThrowingResolver.GetEntityAsync(absoluteUri, role, ofObjectToReturn);
 
         // An earlier implementation of this type overrode this method, so we'll continue to do so
         // to preserve binary compatibility.
-        public override Uri ResolveUri(Uri? baseUri, string? relativeUri) => base.ResolveUri(baseUri, relativeUri);
+        public override Uri ResolveUri(Uri? baseUri, string? relativeUri) =>
+            base.ResolveUri(baseUri, relativeUri);
     }
 }

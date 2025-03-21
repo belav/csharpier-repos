@@ -19,7 +19,8 @@ namespace System.CommandLine
         /// <param name="completionsDelegate">The delegate to be called when calculating completions.</param>
         public static void Add(
             this List<Func<CompletionContext, IEnumerable<CompletionItem>>> completionSources,
-            Func<CompletionContext, IEnumerable<string>> completionsDelegate)
+            Func<CompletionContext, IEnumerable<string>> completionsDelegate
+        )
         {
             if (completionSources is null)
             {
@@ -31,7 +32,9 @@ namespace System.CommandLine
                 throw new ArgumentNullException(nameof(completionsDelegate));
             }
 
-            completionSources.Add(context => completionsDelegate(context).Select(value => new CompletionItem(value)));
+            completionSources.Add(context =>
+                completionsDelegate(context).Select(value => new CompletionItem(value))
+            );
         }
 
         /// <summary>
@@ -41,7 +44,8 @@ namespace System.CommandLine
         /// <param name="completions">A list of strings to be suggested for command line completions.</param>
         public static void Add(
             this List<Func<CompletionContext, IEnumerable<CompletionItem>>> completionSources,
-            params string[] completions)
+            params string[] completions
+        )
         {
             if (completionSources is null)
             {
@@ -53,7 +57,9 @@ namespace System.CommandLine
                 throw new ArgumentNullException(nameof(completions));
             }
 
-            completionSources.Add(context => completions.Select(value => new CompletionItem(value)));
+            completionSources.Add(context =>
+                completions.Select(value => new CompletionItem(value))
+            );
         }
     }
 }

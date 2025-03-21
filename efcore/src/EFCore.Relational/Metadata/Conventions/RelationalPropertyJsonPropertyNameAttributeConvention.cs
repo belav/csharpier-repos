@@ -11,7 +11,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class RelationalPropertyJsonPropertyNameAttributeConvention : PropertyAttributeConventionBase<JsonPropertyNameAttribute>
+public class RelationalPropertyJsonPropertyNameAttributeConvention
+    : PropertyAttributeConventionBase<JsonPropertyNameAttribute>
 {
     /// <summary>
     ///     Creates a new instance of <see cref="RelationalPropertyJsonPropertyNameAttributeConvention" />.
@@ -20,7 +21,8 @@ public class RelationalPropertyJsonPropertyNameAttributeConvention : PropertyAtt
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public RelationalPropertyJsonPropertyNameAttributeConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
         : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
@@ -36,7 +38,8 @@ public class RelationalPropertyJsonPropertyNameAttributeConvention : PropertyAtt
         IConventionPropertyBuilder propertyBuilder,
         JsonPropertyNameAttribute attribute,
         MemberInfo clrMember,
-        IConventionContext context)
+        IConventionContext context
+    )
     {
         if (!string.IsNullOrWhiteSpace(attribute.Name))
         {

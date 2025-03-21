@@ -55,8 +55,9 @@ namespace System.Xml.RwFactoryWriterTests
                     f = new CWriterFactory();
                     break;
                 default:
-                    throw new
-                            CTestFailedException("Invalid XmlDriverScenario passed in : " + factoryToInvoke);
+                    throw new CTestFailedException(
+                        "Invalid XmlDriverScenario passed in : " + factoryToInvoke
+                    );
             }
             CFactory.TestState testResult = f.TestVariation(param);
             if (testResult == CFactory.TestState.Pass)
@@ -67,7 +68,6 @@ namespace System.Xml.RwFactoryWriterTests
             return TEST_FAIL;
         }
     }
-
 
     /// <summary>
     /// Defines the basic functionality for any Factory
@@ -100,11 +100,11 @@ namespace System.Xml.RwFactoryWriterTests
             Initial, //At Start.
             PreTest, //After PreTest is called and finished successfully.
             CreateSuccess, //After Create method is called.
-            Consume,    //Before starting to use the object.
+            Consume, //Before starting to use the object.
             Skip, //The case is skipped.
-            Error,        // In case of an error. Should throw CTestFailedException anyways.
-            Pass,    // Test() is successful.
-            Complete //After Successful PostTest.
+            Error, // In case of an error. Should throw CTestFailedException anyways.
+            Pass, // Test() is successful.
+            Complete, //After Successful PostTest.
         };
 
         protected TestState pstate = TestState.Initial;
@@ -133,7 +133,6 @@ namespace System.Xml.RwFactoryWriterTests
             string root = TestFilePath;
             if (isHttp)
                 root = TestHttpPath;
-
 
             if (root.EndsWith(@"\"))
             {
@@ -201,6 +200,7 @@ namespace System.Xml.RwFactoryWriterTests
         {
             CError.WriteLineIgnore(str);
         }
+
         /// <summary>
         /// This method will be called by ExecuteVariation and it will
         /// orchestrate the state.
@@ -334,7 +334,6 @@ namespace System.Xml.RwFactoryWriterTests
     /// <summary>
     /// CustomReader which wraps Factory created reader.
     /// </summary>
-
     public class CustomReader : XmlReader
     {
         private XmlReader _tr = null;
@@ -388,31 +387,78 @@ namespace System.Xml.RwFactoryWriterTests
             _tr = ReaderHelper.Create(stream, settings, (string)null);
         }
 
-        public override int Depth { get { return _tr.Depth; } }
-        public override string Value { get { return _tr.Value; } }
-        public override bool MoveToElement() { return _tr.MoveToElement(); }
-        public override string LocalName { get { return _tr.LocalName; } }
-        public override XmlNodeType NodeType { get { return _tr.NodeType; } }
-        public override bool MoveToNextAttribute() { return _tr.MoveToNextAttribute(); }
-        public override bool MoveToFirstAttribute() { return _tr.MoveToFirstAttribute(); }
-        public override string LookupNamespace(string prefix) { return _tr.LookupNamespace(prefix); }
+        public override int Depth
+        {
+            get { return _tr.Depth; }
+        }
+        public override string Value
+        {
+            get { return _tr.Value; }
+        }
+
+        public override bool MoveToElement()
+        {
+            return _tr.MoveToElement();
+        }
+
+        public override string LocalName
+        {
+            get { return _tr.LocalName; }
+        }
+        public override XmlNodeType NodeType
+        {
+            get { return _tr.NodeType; }
+        }
+
+        public override bool MoveToNextAttribute()
+        {
+            return _tr.MoveToNextAttribute();
+        }
+
+        public override bool MoveToFirstAttribute()
+        {
+            return _tr.MoveToFirstAttribute();
+        }
+
+        public override string LookupNamespace(string prefix)
+        {
+            return _tr.LookupNamespace(prefix);
+        }
 
         public new void Dispose()
         {
             _tr.Dispose();
         }
 
-        public override bool EOF { get { return _tr.EOF; } }
+        public override bool EOF
+        {
+            get { return _tr.EOF; }
+        }
 
-        public override bool HasValue { get { return _tr.HasValue; } }
+        public override bool HasValue
+        {
+            get { return _tr.HasValue; }
+        }
 
-        public override string NamespaceURI { get { return _tr.NamespaceURI; } }
+        public override string NamespaceURI
+        {
+            get { return _tr.NamespaceURI; }
+        }
 
-        public override bool Read() { return _tr.Read(); }
+        public override bool Read()
+        {
+            return _tr.Read();
+        }
 
-        public override XmlNameTable NameTable { get { return _tr.NameTable; } }
+        public override XmlNameTable NameTable
+        {
+            get { return _tr.NameTable; }
+        }
 
-        public override bool CanResolveEntity { get { return _tr.CanResolveEntity; } }
+        public override bool CanResolveEntity
+        {
+            get { return _tr.CanResolveEntity; }
+        }
 
         public override void ResolveEntity()
         {
@@ -434,11 +480,20 @@ namespace System.Xml.RwFactoryWriterTests
             return _tr.GetAttribute(i);
         }
 
-        public override string BaseURI { get { return _tr.BaseURI; } }
+        public override string BaseURI
+        {
+            get { return _tr.BaseURI; }
+        }
 
-        public override bool ReadAttributeValue() { return _tr.ReadAttributeValue(); }
+        public override bool ReadAttributeValue()
+        {
+            return _tr.ReadAttributeValue();
+        }
 
-        public override string Prefix { get { return _tr.Prefix; } }
+        public override string Prefix
+        {
+            get { return _tr.Prefix; }
+        }
 
         public override bool MoveToAttribute(string name, string ns)
         {
@@ -450,10 +505,22 @@ namespace System.Xml.RwFactoryWriterTests
             return _tr.MoveToAttribute(name);
         }
 
-        public override int AttributeCount { get { return _tr.AttributeCount; } }
-        public override bool IsEmptyElement { get { return _tr.IsEmptyElement; } }
-        public override ReadState ReadState { get { return _tr.ReadState; } }
-        public override XmlReaderSettings Settings { get { return _tr.Settings; } }
+        public override int AttributeCount
+        {
+            get { return _tr.AttributeCount; }
+        }
+        public override bool IsEmptyElement
+        {
+            get { return _tr.IsEmptyElement; }
+        }
+        public override ReadState ReadState
+        {
+            get { return _tr.ReadState; }
+        }
+        public override XmlReaderSettings Settings
+        {
+            get { return _tr.Settings; }
+        }
     }
     #endregion
 }

@@ -9,10 +9,16 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Authentication.Tests;
 
-public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions>, IAuthenticationSignInHandler
+public class TestAuthHandler
+    : AuthenticationHandler<AuthenticationSchemeOptions>,
+        IAuthenticationSignInHandler
 {
-    public TestAuthHandler(IOptionsMonitor<AuthenticationSchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder) : base(options, logger, encoder)
-    { }
+    public TestAuthHandler(
+        IOptionsMonitor<AuthenticationSchemeOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder
+    )
+        : base(options, logger, encoder) { }
 
     public int SignInCount { get; set; }
     public int SignOutCount { get; set; }
@@ -37,9 +43,15 @@ public class TestAuthHandler : AuthenticationHandler<AuthenticationSchemeOptions
         AuthenticateCount++;
         var principal = new ClaimsPrincipal();
         var id = new ClaimsIdentity();
-        id.AddClaim(new Claim(ClaimTypes.NameIdentifier, Scheme.Name, ClaimValueTypes.String, Scheme.Name));
+        id.AddClaim(
+            new Claim(ClaimTypes.NameIdentifier, Scheme.Name, ClaimValueTypes.String, Scheme.Name)
+        );
         principal.AddIdentity(id);
-        return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)));
+        return Task.FromResult(
+            AuthenticateResult.Success(
+                new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)
+            )
+        );
     }
 
     public Task SignInAsync(ClaimsPrincipal user, AuthenticationProperties properties)
@@ -69,9 +81,15 @@ public class TestHandler : IAuthenticationSignInHandler
         AuthenticateCount++;
         var principal = new ClaimsPrincipal();
         var id = new ClaimsIdentity();
-        id.AddClaim(new Claim(ClaimTypes.NameIdentifier, Scheme.Name, ClaimValueTypes.String, Scheme.Name));
+        id.AddClaim(
+            new Claim(ClaimTypes.NameIdentifier, Scheme.Name, ClaimValueTypes.String, Scheme.Name)
+        );
         principal.AddIdentity(id);
-        return Task.FromResult(AuthenticateResult.Success(new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)));
+        return Task.FromResult(
+            AuthenticateResult.Success(
+                new AuthenticationTicket(principal, new AuthenticationProperties(), Scheme.Name)
+            )
+        );
     }
 
     public Task ChallengeAsync(AuthenticationProperties properties)
@@ -105,10 +123,6 @@ public class TestHandler : IAuthenticationSignInHandler
     }
 }
 
-public class TestHandler2 : TestHandler
-{
-}
+public class TestHandler2 : TestHandler { }
 
-public class TestHandler3 : TestHandler
-{
-}
+public class TestHandler3 : TestHandler { }

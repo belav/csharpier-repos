@@ -13,7 +13,9 @@ namespace System.ServiceModel.Channels
     {
         static RedirectionType cache = new RedirectionType(InternalRedirectionType.Cache);
         static RedirectionType resource = new RedirectionType(InternalRedirectionType.Resource);
-        static RedirectionType useIntermediary = new RedirectionType(InternalRedirectionType.UseIntermediary);
+        static RedirectionType useIntermediary = new RedirectionType(
+            InternalRedirectionType.UseIntermediary
+        );
         InternalRedirectionType internalType;
         string toString;
         Nullable<int> hashCode = null;
@@ -61,10 +63,20 @@ namespace System.ServiceModel.Channels
             UseIntermediary,
             Resource,
         }
-        public static RedirectionType Cache { get { return cache; } }
 
-        public static RedirectionType Resource { get { return resource; } }
-        public static RedirectionType UseIntermediary { get { return useIntermediary; } }
+        public static RedirectionType Cache
+        {
+            get { return cache; }
+        }
+
+        public static RedirectionType Resource
+        {
+            get { return resource; }
+        }
+        public static RedirectionType UseIntermediary
+        {
+            get { return useIntermediary; }
+        }
         public string Namespace { get; private set; }
 
         public string Value { get; private set; }
@@ -103,8 +115,12 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    result = RedirectionUtility.IsNamespaceAndValueMatch(left.Value,
-                        left.Namespace, right.Value, right.Namespace);
+                    result = RedirectionUtility.IsNamespaceAndValueMatch(
+                        left.Value,
+                        left.Namespace,
+                        right.Value,
+                        right.Namespace
+                    );
                 }
             }
 
@@ -119,8 +135,10 @@ namespace System.ServiceModel.Channels
             }
             else if (type.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("type",
-                    SR.GetString(SR.ParameterCannotBeEmpty));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "type",
+                    SR.GetString(SR.ParameterCannotBeEmpty)
+                );
             }
 
             return new RedirectionType(type, ns);
@@ -154,31 +172,56 @@ namespace System.ServiceModel.Channels
             {
                 if (this.Namespace != null)
                 {
-                    this.toString = SR.GetString(SR.RedirectionInfoStringFormatWithNamespace, this.Value, this.Namespace);
+                    this.toString = SR.GetString(
+                        SR.RedirectionInfoStringFormatWithNamespace,
+                        this.Value,
+                        this.Namespace
+                    );
                 }
                 else
                 {
-                    this.toString = SR.GetString(SR.RedirectionInfoStringFormatNoNamespace, this.Value);
+                    this.toString = SR.GetString(
+                        SR.RedirectionInfoStringFormatNoNamespace,
+                        this.Value
+                    );
                 }
             }
             return this.toString;
         }
 
         //When Create(...) is used, we delay finding the enum value
-        //until the enum value is needed, avoiding the string comparisons if possible 
+        //until the enum value is needed, avoiding the string comparisons if possible
         void DetectType()
         {
             if (RedirectionUtility.IsNamespaceMatch(this.Namespace, RedirectionConstants.Namespace))
             {
-                if (string.Equals(this.Value, RedirectionConstants.Type.Cache, StringComparison.Ordinal))
+                if (
+                    string.Equals(
+                        this.Value,
+                        RedirectionConstants.Type.Cache,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     this.internalType = InternalRedirectionType.Cache;
                 }
-                else if (string.Equals(this.Value, RedirectionConstants.Type.Resource, StringComparison.Ordinal))
+                else if (
+                    string.Equals(
+                        this.Value,
+                        RedirectionConstants.Type.Resource,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     this.internalType = InternalRedirectionType.Resource;
                 }
-                else if (string.Equals(this.Value, RedirectionConstants.Type.UseIntermediary, StringComparison.Ordinal))
+                else if (
+                    string.Equals(
+                        this.Value,
+                        RedirectionConstants.Type.UseIntermediary,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     this.internalType = InternalRedirectionType.UseIntermediary;
                 }
@@ -192,7 +235,10 @@ namespace System.ServiceModel.Channels
                 this.internalType = InternalRedirectionType.Custom;
             }
 
-            Fx.Assert(this.internalType != InternalRedirectionType.Unknown, "Failed to correctly detect internal redirection type");
+            Fx.Assert(
+                this.internalType != InternalRedirectionType.Unknown,
+                "Failed to correctly detect internal redirection type"
+            );
         }
     }
 }

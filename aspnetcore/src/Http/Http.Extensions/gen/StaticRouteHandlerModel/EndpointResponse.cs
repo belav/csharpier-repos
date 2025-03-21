@@ -33,13 +33,29 @@ internal class EndpointResponse
         IsIResult = GetIsIResult();
         IsSerializable = GetIsSerializable();
         ContentType = GetContentType();
-        IsEndpointMetadataProvider = ImplementsIEndpointMetadataProvider(ResponseType, wellKnownTypes);
+        IsEndpointMetadataProvider = ImplementsIEndpointMetadataProvider(
+            ResponseType,
+            wellKnownTypes
+        );
     }
 
-    private static bool ImplementsIEndpointMetadataProvider(ITypeSymbol? responseType, WellKnownTypes wellKnownTypes)
-        => responseType == null ? false : responseType.Implements(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_Metadata_IEndpointMetadataProvider));
+    private static bool ImplementsIEndpointMetadataProvider(
+        ITypeSymbol? responseType,
+        WellKnownTypes wellKnownTypes
+    ) =>
+        responseType == null
+            ? false
+            : responseType.Implements(
+                wellKnownTypes.Get(
+                    WellKnownType.Microsoft_AspNetCore_Http_Metadata_IEndpointMetadataProvider
+                )
+            );
 
-    private ITypeSymbol? UnwrapResponseType(IMethodSymbol method, out bool isAwaitable, out bool awaitableIsVoid)
+    private ITypeSymbol? UnwrapResponseType(
+        IMethodSymbol method,
+        out bool isAwaitable,
+        out bool awaitableIsVoid
+    )
     {
         isAwaitable = false;
         awaitableIsVoid = false;
@@ -48,16 +64,20 @@ internal class EndpointResponse
         var taskOfT = WellKnownTypes.Get(WellKnownType.System_Threading_Tasks_Task_T);
         var valueTask = WellKnownTypes.Get(WellKnownType.System_Threading_Tasks_ValueTask);
         var valueTaskOfT = WellKnownTypes.Get(WellKnownType.System_Threading_Tasks_ValueTask_T);
-        if (returnType.OriginalDefinition.Equals(taskOfT, SymbolEqualityComparer.Default) ||
-            returnType.OriginalDefinition.Equals(valueTaskOfT, SymbolEqualityComparer.Default))
+        if (
+            returnType.OriginalDefinition.Equals(taskOfT, SymbolEqualityComparer.Default)
+            || returnType.OriginalDefinition.Equals(valueTaskOfT, SymbolEqualityComparer.Default)
+        )
         {
             isAwaitable = true;
             awaitableIsVoid = false;
             return ((INamedTypeSymbol)returnType).TypeArguments[0];
         }
 
-        if (returnType.OriginalDefinition.Equals(task, SymbolEqualityComparer.Default) ||
-            returnType.OriginalDefinition.Equals(valueTask, SymbolEqualityComparer.Default))
+        if (
+            returnType.OriginalDefinition.Equals(task, SymbolEqualityComparer.Default)
+            || returnType.OriginalDefinition.Equals(valueTask, SymbolEqualityComparer.Default)
+        )
         {
             isAwaitable = true;
             awaitableIsVoid = true;
@@ -68,17 +88,17 @@ internal class EndpointResponse
     }
 
     private bool GetIsSerializable() =>
-        !IsIResult &&
-        !HasNoResponse &&
-        ResponseType != null &&
-        ResponseType.SpecialType != SpecialType.System_String &&
-        ResponseType.SpecialType != SpecialType.System_Object;
+        !IsIResult
+        && !HasNoResponse
+        && ResponseType != null
+        && ResponseType.SpecialType != SpecialType.System_String
+        && ResponseType.SpecialType != SpecialType.System_Object;
 
     private bool GetIsIResult()
     {
         var resultType = WellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Http_IResult);
-        return WellKnownTypes.Implements(ResponseType, resultType) ||
-            SymbolEqualityComparer.Default.Equals(ResponseType, resultType);
+        return WellKnownTypes.Implements(ResponseType, resultType)
+            || SymbolEqualityComparer.Default.Equals(ResponseType, resultType);
     }
 
     private string? GetContentType()
@@ -93,20 +113,39 @@ internal class EndpointResponse
             return null;
         }
 
-        return ResponseType!.SpecialType is SpecialType.System_String ? "text/plain; charset=utf-8" : "application/json";
+        return ResponseType!.SpecialType is SpecialType.System_String
+            ? "text/plain; charset=utf-8"
+            : "application/json";
     }
 
     public override bool Equals(object obj)
     {
-        return obj is EndpointResponse otherEndpointResponse &&
-            SymbolEqualityComparer.Default.Equals(otherEndpointResponse.ResponseType, ResponseType) &&
-            otherEndpointResponse.WrappedResponseType.Equals(WrappedResponseType, StringComparison.Ordinal) &&
-            otherEndpointResponse.IsAwaitable == IsAwaitable &&
-            otherEndpointResponse.HasNoResponse == HasNoResponse &&
-            otherEndpointResponse.IsIResult == IsIResult &&
-            string.Equals(otherEndpointResponse.ContentType, ContentType, StringComparison.OrdinalIgnoreCase);
+        return obj is EndpointResponse otherEndpointResponse
+            && SymbolEqualityComparer.Default.Equals(
+                otherEndpointResponse.ResponseType,
+                ResponseType
+            )
+            && otherEndpointResponse.WrappedResponseType.Equals(
+                WrappedResponseType,
+                StringComparison.Ordinal
+            )
+            && otherEndpointResponse.IsAwaitable == IsAwaitable
+            && otherEndpointResponse.HasNoResponse == HasNoResponse
+            && otherEndpointResponse.IsIResult == IsIResult
+            && string.Equals(
+                otherEndpointResponse.ContentType,
+                ContentType,
+                StringComparison.OrdinalIgnoreCase
+            );
     }
 
     public override int GetHashCode() =>
-        HashCode.Combine(SymbolEqualityComparer.Default.GetHashCode(ResponseType), WrappedResponseType, IsAwaitable, HasNoResponse, IsIResult, ContentType);
+        HashCode.Combine(
+            SymbolEqualityComparer.Default.GetHashCode(ResponseType),
+            WrappedResponseType,
+            IsAwaitable,
+            HasNoResponse,
+            IsIResult,
+            ContentType
+        );
 }

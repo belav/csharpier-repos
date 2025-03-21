@@ -8,10 +8,30 @@ namespace System.Diagnostics
     internal sealed class TraceSection : ConfigurationElement
     {
         private static readonly ConfigurationPropertyCollection s_properties = new();
-        private static readonly ConfigurationProperty s_propListeners = new("listeners", typeof(ListenerElementsCollection), null, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty s_propAutoFlush = new("autoflush", typeof(bool), false, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty s_propIndentSize = new("indentsize", typeof(int), 4, ConfigurationPropertyOptions.None);
-        private static readonly ConfigurationProperty s_propUseGlobalLock = new("useGlobalLock", typeof(bool), true, ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty s_propListeners = new(
+            "listeners",
+            typeof(ListenerElementsCollection),
+            null,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty s_propAutoFlush = new(
+            "autoflush",
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty s_propIndentSize = new(
+            "indentsize",
+            typeof(int),
+            4,
+            ConfigurationPropertyOptions.None
+        );
+        private static readonly ConfigurationProperty s_propUseGlobalLock = new(
+            "useGlobalLock",
+            typeof(bool),
+            true,
+            ConfigurationPropertyOptions.None
+        );
 
         static TraceSection()
         {
@@ -28,7 +48,8 @@ namespace System.Diagnostics
         public int IndentSize => (int)this[s_propIndentSize];
 
         [ConfigurationProperty("listeners")]
-        public ListenerElementsCollection Listeners => (ListenerElementsCollection)this[s_propListeners];
+        public ListenerElementsCollection Listeners =>
+            (ListenerElementsCollection)this[s_propListeners];
 
         [ConfigurationProperty("useGlobalLock", DefaultValue = true)]
         public bool UseGlobalLock => (bool)this[s_propUseGlobalLock];

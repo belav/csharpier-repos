@@ -24,47 +24,59 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         /// in a search for <c>A.X</c> because they both end in <c>X</c>.
         /// </summary>
         Task<ImmutableArray<string>> DetermineGlobalAliasesAsync(
-            ISymbol symbol, Project project, CancellationToken cancellationToken);
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Called by the find references search engine when a new symbol definition is found.
         /// Implementations can then choose to request more symbols be searched for.  For example, an
         /// implementation could choose for the find references search engine to cascade to
         /// constructors when searching for standard types.
-        /// 
+        ///
         /// Implementations of this method must be thread-safe.
         /// </summary>
         ValueTask<ImmutableArray<ISymbol>> DetermineCascadedSymbolsAsync(
-            ISymbol symbol, Solution solution, FindReferencesSearchOptions options, CancellationToken cancellationToken);
+            ISymbol symbol,
+            Solution solution,
+            FindReferencesSearchOptions options,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Called by the find references search engine to determine which documents in the supplied
         /// project need to be searched for references.  Only projects returned by
         /// DetermineProjectsToSearch will be passed to this method.
-        /// 
+        ///
         /// Implementations should endeavor to keep the list of returned documents as small as
         /// possible to keep search time down to a minimum.  Returning the entire list of documents
         /// in a project is not recommended (unless, of course, there is reasonable reason to
         /// believe there are references in every document).
-        /// 
+        ///
         /// Implementations of this method must be thread-safe.
         /// </summary>
         Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
-            ISymbol symbol, HashSet<string>? globalAliases,
-            Project project, IImmutableSet<Document>? documents,
-            FindReferencesSearchOptions options, CancellationToken cancellationToken);
+            ISymbol symbol,
+            HashSet<string>? globalAliases,
+            Project project,
+            IImmutableSet<Document>? documents,
+            FindReferencesSearchOptions options,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Called by the find references search engine to determine the set of reference locations
         /// in the provided document.  Only documents returned by DetermineDocumentsToSearch will be
-        /// passed to this method. 
-        /// 
+        /// passed to this method.
+        ///
         /// Implementations of this method must be thread-safe.
         /// </summary>
         ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
             ISymbol symbol,
             FindReferencesDocumentState state,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

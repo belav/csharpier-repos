@@ -13,18 +13,18 @@ using Microsoft.CodeAnalysis.Operations;
 namespace Microsoft.CodeAnalysis.CSharp.Analyzers.ForEachCast
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class CSharpForEachCastDiagnosticAnalyzer : AbstractForEachCastDiagnosticAnalyzer<
-        SyntaxKind,
-        CommonForEachStatementSyntax>
+    internal sealed class CSharpForEachCastDiagnosticAnalyzer
+        : AbstractForEachCastDiagnosticAnalyzer<SyntaxKind, CommonForEachStatementSyntax>
     {
-        protected override ISyntaxFacts SyntaxFacts
-            => CSharpSyntaxFacts.Instance;
+        protected override ISyntaxFacts SyntaxFacts => CSharpSyntaxFacts.Instance;
 
-        protected override ImmutableArray<SyntaxKind> GetSyntaxKinds()
-            => ImmutableArray.Create(SyntaxKind.ForEachStatement, SyntaxKind.ForEachVariableStatement);
+        protected override ImmutableArray<SyntaxKind> GetSyntaxKinds() =>
+            ImmutableArray.Create(SyntaxKind.ForEachStatement, SyntaxKind.ForEachVariableStatement);
 
-        protected override (CommonConversion conversion, ITypeSymbol? collectionElementType) GetForEachInfo(
-            SemanticModel semanticModel, CommonForEachStatementSyntax node)
+        protected override (
+            CommonConversion conversion,
+            ITypeSymbol? collectionElementType
+        ) GetForEachInfo(SemanticModel semanticModel, CommonForEachStatementSyntax node)
         {
             var info = semanticModel.GetForEachStatementInfo(node);
             return (info.ElementConversion.ToCommonConversion(), info.ElementType);

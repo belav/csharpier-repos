@@ -23,40 +23,74 @@ namespace System.Reflection
         public abstract bool CanWrite { get; }
 
         public MethodInfo[] GetAccessors() => GetAccessors(nonPublic: false);
+
         public abstract MethodInfo[] GetAccessors(bool nonPublic);
 
         public virtual MethodInfo? GetMethod => GetGetMethod(nonPublic: true);
+
         public MethodInfo? GetGetMethod() => GetGetMethod(nonPublic: false);
+
         public abstract MethodInfo? GetGetMethod(bool nonPublic);
 
         public virtual MethodInfo? SetMethod => GetSetMethod(nonPublic: true);
+
         public MethodInfo? GetSetMethod() => GetSetMethod(nonPublic: false);
+
         public abstract MethodInfo? GetSetMethod(bool nonPublic);
 
         public virtual Type GetModifiedPropertyType() => throw new NotSupportedException();
+
         public virtual Type[] GetOptionalCustomModifiers() => Type.EmptyTypes;
+
         public virtual Type[] GetRequiredCustomModifiers() => Type.EmptyTypes;
 
         [DebuggerHidden]
         [DebuggerStepThrough]
         public object? GetValue(object? obj) => GetValue(obj, index: null);
+
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public virtual object? GetValue(object? obj, object?[]? index) => GetValue(obj, BindingFlags.Default, binder: null, index: index, culture: null);
-        public abstract object? GetValue(object? obj, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture);
+        public virtual object? GetValue(object? obj, object?[]? index) =>
+            GetValue(obj, BindingFlags.Default, binder: null, index: index, culture: null);
 
-        public virtual object? GetConstantValue() { throw NotImplemented.ByDesign; }
-        public virtual object? GetRawConstantValue() { throw NotImplemented.ByDesign; }
+        public abstract object? GetValue(
+            object? obj,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        );
+
+        public virtual object? GetConstantValue()
+        {
+            throw NotImplemented.ByDesign;
+        }
+
+        public virtual object? GetRawConstantValue()
+        {
+            throw NotImplemented.ByDesign;
+        }
 
         [DebuggerHidden]
         [DebuggerStepThrough]
         public void SetValue(object? obj, object? value) => SetValue(obj, value, index: null);
+
         [DebuggerHidden]
         [DebuggerStepThrough]
-        public virtual void SetValue(object? obj, object? value, object?[]? index) => SetValue(obj, value, BindingFlags.Default, binder: null, index: index, culture: null);
-        public abstract void SetValue(object? obj, object? value, BindingFlags invokeAttr, Binder? binder, object?[]? index, CultureInfo? culture);
+        public virtual void SetValue(object? obj, object? value, object?[]? index) =>
+            SetValue(obj, value, BindingFlags.Default, binder: null, index: index, culture: null);
+
+        public abstract void SetValue(
+            object? obj,
+            object? value,
+            BindingFlags invokeAttr,
+            Binder? binder,
+            object?[]? index,
+            CultureInfo? culture
+        );
 
         public override bool Equals(object? obj) => base.Equals(obj);
+
         public override int GetHashCode() => base.GetHashCode();
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]

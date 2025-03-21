@@ -25,7 +25,11 @@ public class FormMappingScopeTest
     public void SuppliesMappingContext()
     {
         FormMappingContext capturedContext = null;
-        RenderFragment<FormMappingContext> contents = (ctx) => b => { capturedContext = ctx; };
+        RenderFragment<FormMappingContext> contents = (ctx) =>
+            b =>
+            {
+                capturedContext = ctx;
+            };
 
         var testComponent = new TestComponent(builder =>
         {
@@ -48,14 +52,19 @@ public class FormMappingScopeTest
     public void CanNestToOverride()
     {
         FormMappingContext capturedContext = null;
-        RenderFragment<FormMappingContext> contents = (ctx) => b => { capturedContext = ctx; };
-        RenderFragment<FormMappingContext> nested = (ctx) => b =>
-        {
-            b.OpenComponent<FormMappingScope>(0);
-            b.AddAttribute(1, nameof(FormMappingScope.Name), "child-context");
-            b.AddAttribute(2, nameof(FormMappingScope.ChildContent), contents);
-            b.CloseComponent();
-        };
+        RenderFragment<FormMappingContext> contents = (ctx) =>
+            b =>
+            {
+                capturedContext = ctx;
+            };
+        RenderFragment<FormMappingContext> nested = (ctx) =>
+            b =>
+            {
+                b.OpenComponent<FormMappingScope>(0);
+                b.AddAttribute(1, nameof(FormMappingScope.Name), "child-context");
+                b.AddAttribute(2, nameof(FormMappingScope.ChildContent), contents);
+                b.CloseComponent();
+            };
 
         var testComponent = new TestComponent(builder =>
         {
@@ -88,8 +97,13 @@ public class FormMappingScopeTest
         var id = _renderer.AssignRootComponentId(testComponent);
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() => _renderer.RenderRootComponent(id));
-        Assert.Equal($"The FormMappingScope component requires a nonempty Name parameter value.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            _renderer.RenderRootComponent(id)
+        );
+        Assert.Equal(
+            $"The FormMappingScope component requires a nonempty Name parameter value.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -103,15 +117,24 @@ public class FormMappingScopeTest
         var id = _renderer.AssignRootComponentId(testComponent);
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(() => _renderer.RenderRootComponent(id));
-        Assert.Equal($"The FormMappingScope component requires a nonempty Name parameter value.", exception.Message);
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+            _renderer.RenderRootComponent(id)
+        );
+        Assert.Equal(
+            $"The FormMappingScope component requires a nonempty Name parameter value.",
+            exception.Message
+        );
     }
 
     [Fact]
     public void ThrowsIfNameChanges()
     {
         FormMappingContext capturedContext = null;
-        RenderFragment<FormMappingContext> contents = (ctx) => b => { capturedContext = ctx; };
+        RenderFragment<FormMappingContext> contents = (ctx) =>
+            b =>
+            {
+                capturedContext = ctx;
+            };
         var contextName = "parent-context";
 
         var testComponent = new TestComponent(builder =>
@@ -128,7 +151,10 @@ public class FormMappingScopeTest
         contextName = "changed";
         var exception = Assert.Throws<InvalidOperationException>(testComponent.TriggerRender);
 
-        Assert.Equal("FormMappingScope 'Name' can't change after initialization.", exception.Message);
+        Assert.Equal(
+            "FormMappingScope 'Name' can't change after initialization.",
+            exception.Message
+        );
     }
 
     class TestComponent : AutoRenderComponent
@@ -140,13 +166,14 @@ public class FormMappingScopeTest
             _renderFragment = renderFragment;
         }
 
-        protected override void BuildRenderTree(RenderTreeBuilder builder)
-            => _renderFragment(builder);
+        protected override void BuildRenderTree(RenderTreeBuilder builder) =>
+            _renderFragment(builder);
     }
 
     private class TestFormValueMapper : IFormValueMapper
     {
         public bool CanMap(Type valueType, string mappingScopeName, string formName) => false;
+
         public void Map(FormValueMappingContext context) { }
     }
 }

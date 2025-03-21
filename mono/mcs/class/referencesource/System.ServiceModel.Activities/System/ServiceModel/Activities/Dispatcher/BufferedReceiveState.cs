@@ -6,6 +6,6 @@ namespace System.ServiceModel.Activities.Dispatcher
     enum BufferedReceiveState
     {
         WaitingOnInstance,
-        WaitingOnBookmark
+        WaitingOnBookmark,
     }
 }

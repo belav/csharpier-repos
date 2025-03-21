@@ -39,9 +39,14 @@ namespace System.Reflection.Emit.Tests
             ModuleBuilder module = Helpers.DynamicModule();
             foreach (int size in new int[] { 1, 2, 0x003f0000 - 1 })
             {
-                FieldBuilder field = module.DefineUninitializedData(size.ToString(), size, attributes);
+                FieldBuilder field = module.DefineUninitializedData(
+                    size.ToString(),
+                    size,
+                    attributes
+                );
 
-                int expectedAttributes = ((int)attributes | (int)FieldAttributes.Static) & ~ReservedMaskFieldAttribute;
+                int expectedAttributes =
+                    ((int)attributes | (int)FieldAttributes.Static) & ~ReservedMaskFieldAttribute;
                 Assert.Equal(size.ToString(), field.Name);
                 Assert.Equal((FieldAttributes)expectedAttributes, field.Attributes);
             }
@@ -49,39 +54,58 @@ namespace System.Reflection.Emit.Tests
 
         [Theory]
         [MemberData(nameof(Attributes_TestData))]
-        public void DefineUninitializedData_EmptyName_ThrowsArgumentException(FieldAttributes attributes)
+        public void DefineUninitializedData_EmptyName_ThrowsArgumentException(
+            FieldAttributes attributes
+        )
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentException>("name", () => module.DefineUninitializedData("", 1, attributes));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => module.DefineUninitializedData("", 1, attributes)
+            );
         }
 
         [Theory]
         [MemberData(nameof(Attributes_TestData))]
-        public void DefineUninitializedData_InvalidSize_ThrowsArgumentException(FieldAttributes attributes)
+        public void DefineUninitializedData_InvalidSize_ThrowsArgumentException(
+            FieldAttributes attributes
+        )
         {
             ModuleBuilder module = Helpers.DynamicModule();
             foreach (int size in new int[] { -1, 0, 0x003f0000, 0x003f0000 + 1 })
             {
-                AssertExtensions.Throws<ArgumentException>(null, () => module.DefineUninitializedData("TestField", size, attributes));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => module.DefineUninitializedData("TestField", size, attributes)
+                );
             }
         }
 
         [Theory]
         [MemberData(nameof(Attributes_TestData))]
-        public void DefineUninitializedData_NullName_ThrowsArgumentNullException(FieldAttributes attributes)
+        public void DefineUninitializedData_NullName_ThrowsArgumentNullException(
+            FieldAttributes attributes
+        )
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            AssertExtensions.Throws<ArgumentNullException>("name", () => module.DefineUninitializedData(null, 1, attributes));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => module.DefineUninitializedData(null, 1, attributes)
+            );
         }
 
         [Theory]
         [MemberData(nameof(Attributes_TestData))]
-        public void DefineUninitializedData_CreateGlobalFunctionsAlreadyCalled_ThrowsInvalidOperationException(FieldAttributes attributes)
+        public void DefineUninitializedData_CreateGlobalFunctionsAlreadyCalled_ThrowsInvalidOperationException(
+            FieldAttributes attributes
+        )
         {
             ModuleBuilder module = Helpers.DynamicModule();
             module.CreateGlobalFunctions();
 
-            Assert.Throws<InvalidOperationException>(() => module.DefineUninitializedData("TestField", 1, attributes));
+            Assert.Throws<InvalidOperationException>(() =>
+                module.DefineUninitializedData("TestField", 1, attributes)
+            );
         }
     }
 }

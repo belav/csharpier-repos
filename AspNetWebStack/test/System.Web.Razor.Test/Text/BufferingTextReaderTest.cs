@@ -54,46 +54,43 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void EndingLookaheadReturnsReaderToPreviousLocation()
         {
-            RunLookaheadTest("abcdefg", "abcb",
-                             Read,
-                             Lookahead(
-                                 Read,
-                                 Read),
-                             Read);
+            RunLookaheadTest("abcdefg", "abcb", Read, Lookahead(Read, Read), Read);
         }
 
         [Fact]
         public void MultipleLookaheadsCanBePerformed()
         {
-            RunLookaheadTest("abcdefg", "abcbcdc",
-                             Read,
-                             Lookahead(
-                                 Read,
-                                 Read),
-                             Read,
-                             Lookahead(
-                                 Read,
-                                 Read),
-                             Read);
+            RunLookaheadTest(
+                "abcdefg",
+                "abcbcdc",
+                Read,
+                Lookahead(Read, Read),
+                Read,
+                Lookahead(Read, Read),
+                Read
+            );
         }
 
         [Fact]
         public void LookaheadsCanBeNested()
         {
-            RunLookaheadTest("abcdefg", "abcdefebc",
-                             Read, // Appended: "a" Reader: "bcdefg"
-                             Lookahead( // Reader: "bcdefg"
-                                 Read, // Appended: "b" Reader: "cdefg";
-                                 Read, // Appended: "c" Reader: "defg";
-                                 Read, // Appended: "d" Reader: "efg";
-                                 Lookahead( // Reader: "efg"
-                                     Read, // Appended: "e" Reader: "fg";
-                                     Read // Appended: "f" Reader: "g";
-                                     ), // Reader: "efg"
-                                 Read // Appended: "e" Reader: "fg";
-                                 ), // Reader: "bcdefg"
-                             Read, // Appended: "b" Reader: "cdefg";
-                             Read); // Appended: "c" Reader: "defg";
+            RunLookaheadTest(
+                "abcdefg",
+                "abcdefebc",
+                Read, // Appended: "a" Reader: "bcdefg"
+                Lookahead( // Reader: "bcdefg"
+                    Read, // Appended: "b" Reader: "cdefg";
+                    Read, // Appended: "c" Reader: "defg";
+                    Read, // Appended: "d" Reader: "efg";
+                    Lookahead( // Reader: "efg"
+                        Read, // Appended: "e" Reader: "fg";
+                        Read // Appended: "f" Reader: "g";
+                    ), // Reader: "efg"
+                    Read // Appended: "e" Reader: "fg";
+                ), // Reader: "bcdefg"
+                Read, // Appended: "b" Reader: "cdefg";
+                Read
+            ); // Appended: "c" Reader: "defg";
         }
 
         [Fact]
@@ -141,11 +138,7 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void OnceBufferingBeginsReadsCanContinuePastEndOfBuffer()
         {
-            RunLookaheadTest("abcdefg", "abcbcdefg",
-                             Read,
-                             Lookahead(Read(2)),
-                             Read(2),
-                             ReadToEnd);
+            RunLookaheadTest("abcdefg", "abcbcdefg", Read, Lookahead(Read(2)), Read(2), ReadToEnd);
         }
 
         [Fact]
@@ -169,7 +162,9 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void ReadBlockSupportsLookahead()
         {
-            RunBufferReadTest((reader, buffer, index, count) => reader.ReadBlock(buffer, index, count));
+            RunBufferReadTest(
+                (reader, buffer, index, count) => reader.ReadBlock(buffer, index, count)
+            );
         }
 
         [Fact]
@@ -199,12 +194,7 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void CancelBacktrackStopsNextEndLookaheadFromBacktracking()
         {
-            RunLookaheadTest("abcdefg", "abcdefg",
-                             Lookahead(
-                                 Read(2),
-                                 CancelBacktrack
-                                 ),
-                             ReadToEnd);
+            RunLookaheadTest("abcdefg", "abcdefg", Lookahead(Read(2), CancelBacktrack), ReadToEnd);
         }
 
         [Fact]
@@ -216,16 +206,12 @@ namespace System.Web.Razor.Test.Text
         [Fact]
         public void CancelBacktrackOnlyCancelsBacktrackingForInnermostNestedLookahead()
         {
-            RunLookaheadTest("abcdefg", "abcdabcdefg",
-                             Lookahead(
-                                 Read(2),
-                                 Lookahead(
-                                     Read,
-                                     CancelBacktrack
-                                     ),
-                                 Read
-                                 ),
-                             ReadToEnd);
+            RunLookaheadTest(
+                "abcdefg",
+                "abcdabcdefg",
+                Lookahead(Read(2), Lookahead(Read, CancelBacktrack), Read),
+                ReadToEnd
+            );
         }
 
         [Fact]

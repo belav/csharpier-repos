@@ -16,7 +16,8 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
     public async Task AcceptAsync_AfterUnbind_ReturnNull()
     {
         // Arrange
-        await using var connectionListener = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
+        await using var connectionListener =
+            await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
 
         // Act
         await connectionListener.UnbindAsync().DefaultTimeout();
@@ -37,7 +38,8 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
             return pool;
         }
 
-        private class TestObjectPool<T> : ObjectPool<T>, ITestObjectPool where T : class
+        private class TestObjectPool<T> : ObjectPool<T>, ITestObjectPool
+            where T : class
         {
             private readonly IPooledObjectPolicy<T> _policy;
 
@@ -82,23 +84,33 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
     {
         // Arrange
         var testObjectPoolProvider = new TestObjectPoolProvider();
-        var options = new NamedPipeTransportOptions
-        {
-            ListenerQueueCount = 2
-        };
-        await using var connectionListener = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory, options: options, objectPoolProvider: testObjectPoolProvider);
+        var options = new NamedPipeTransportOptions { ListenerQueueCount = 2 };
+        await using var connectionListener =
+            await NamedPipeTestHelpers.CreateConnectionListenerFactory(
+                LoggerFactory,
+                options: options,
+                objectPoolProvider: testObjectPoolProvider
+            );
         var pool = Assert.Single(testObjectPoolProvider.Pools);
         Assert.Equal(options.ListenerQueueCount, pool.GetCount);
 
         // Stream 1
         var acceptTask1 = connectionListener.AcceptAsync();
-        await using var clientStream1 = NamedPipeTestHelpers.CreateClientStream(connectionListener.EndPoint);
+        await using var clientStream1 = NamedPipeTestHelpers.CreateClientStream(
+            connectionListener.EndPoint
+        );
         await clientStream1.ConnectAsync();
 
         var serverConnection1 = await acceptTask1.DefaultTimeout();
-        Assert.False(serverConnection1.ConnectionClosed.IsCancellationRequested, "Connection 1 should be open");
+        Assert.False(
+            serverConnection1.ConnectionClosed.IsCancellationRequested,
+            "Connection 1 should be open"
+        );
         await serverConnection1.DisposeAsync().AsTask().DefaultTimeout();
-        Assert.True(serverConnection1.ConnectionClosed.IsCancellationRequested, "Connection 1 should be closed");
+        Assert.True(
+            serverConnection1.ConnectionClosed.IsCancellationRequested,
+            "Connection 1 should be closed"
+        );
 
         Assert.Equal(options.ListenerQueueCount + 1, pool.GetCount);
         Assert.Equal(1, pool.ReturnSuccessCount);
@@ -106,13 +118,21 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
 
         // Stream 2
         var acceptTask2 = connectionListener.AcceptAsync();
-        await using var clientStream2 = NamedPipeTestHelpers.CreateClientStream(connectionListener.EndPoint);
+        await using var clientStream2 = NamedPipeTestHelpers.CreateClientStream(
+            connectionListener.EndPoint
+        );
         await clientStream2.ConnectAsync();
 
         var serverConnection2 = await acceptTask2.DefaultTimeout();
-        Assert.False(serverConnection2.ConnectionClosed.IsCancellationRequested, "Connection 2 should be open");
+        Assert.False(
+            serverConnection2.ConnectionClosed.IsCancellationRequested,
+            "Connection 2 should be open"
+        );
         await serverConnection2.DisposeAsync().AsTask().DefaultTimeout();
-        Assert.True(serverConnection2.ConnectionClosed.IsCancellationRequested, "Connection 2 should be closed");
+        Assert.True(
+            serverConnection2.ConnectionClosed.IsCancellationRequested,
+            "Connection 2 should be closed"
+        );
 
         Assert.Equal(options.ListenerQueueCount + 2, pool.GetCount);
         Assert.Equal(2, pool.ReturnSuccessCount);
@@ -123,7 +143,8 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
     public async Task AcceptAsync_UnbindAfterCall_CleanExit()
     {
         // Arrange
-        await using var connectionListener = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
+        await using var connectionListener =
+            await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
 
         // Act
         var acceptTask = connectionListener.AcceptAsync();
@@ -140,7 +161,9 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
     [InlineData(1)]
     [InlineData(4)]
     [InlineData(16)]
-    public async Task AcceptAsync_ParallelConnections_ClientConnectionsSuccessfullyAccepted(int listenerQueueCount)
+    public async Task AcceptAsync_ParallelConnections_ClientConnectionsSuccessfullyAccepted(
+        int listenerQueueCount
+    )
     {
         // Arrange
         const int ParallelCount = 10;
@@ -150,7 +173,11 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
         var currentCallCount = 0;
         var options = new NamedPipeTransportOptions();
         options.ListenerQueueCount = listenerQueueCount;
-        await using var connectionListener = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory, options: options);
+        await using var connectionListener =
+            await NamedPipeTestHelpers.CreateConnectionListenerFactory(
+                LoggerFactory,
+                options: options
+            );
 
         // Act
         var serverTask = Task.Run(async () =>
@@ -171,30 +198,34 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
         var parallelTasks = new List<Task>();
         for (var i = 0; i < ParallelCount; i++)
         {
-            parallelTasks.Add(Task.Run(async () =>
-            {
-                var clientStreamCount = 0;
-                while (clientStreamCount < ParallelCallCount)
+            parallelTasks.Add(
+                Task.Run(async () =>
                 {
-                    try
+                    var clientStreamCount = 0;
+                    while (clientStreamCount < ParallelCallCount)
                     {
-                        var clientStream = NamedPipeTestHelpers.CreateClientStream(connectionListener.EndPoint);
-                        await clientStream.ConnectAsync(cts.Token);
+                        try
+                        {
+                            var clientStream = NamedPipeTestHelpers.CreateClientStream(
+                                connectionListener.EndPoint
+                            );
+                            await clientStream.ConnectAsync(cts.Token);
 
-                        await clientStream.WriteAsync(new byte[1], cts.Token);
-                        await clientStream.DisposeAsync();
-                        clientStreamCount++;
+                            await clientStream.WriteAsync(new byte[1], cts.Token);
+                            await clientStream.DisposeAsync();
+                            clientStreamCount++;
+                        }
+                        catch (IOException ex)
+                        {
+                            Logger.LogInformation(ex, "Client exception.");
+                        }
+                        catch (OperationCanceledException)
+                        {
+                            break;
+                        }
                     }
-                    catch (IOException ex)
-                    {
-                        Logger.LogInformation(ex, "Client exception.");
-                    }
-                    catch (OperationCanceledException)
-                    {
-                        break;
-                    }
-                }
-            }));
+                })
+            );
         }
 
         await serverTask.DefaultTimeout();
@@ -204,12 +235,19 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX, SkipReason = "Non-OS implementations use UDS with an unlimited accept limit.")]
+    [OSSkipCondition(
+        OperatingSystems.Linux | OperatingSystems.MacOSX,
+        SkipReason = "Non-OS implementations use UDS with an unlimited accept limit."
+    )]
     public async Task AcceptAsync_HitBacklogLimit_ClientConnectionsSuccessfullyAccepted()
     {
         // Arrange
         var options = new NamedPipeTransportOptions();
-        await using var connectionListener = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory, options: options);
+        await using var connectionListener =
+            await NamedPipeTestHelpers.CreateConnectionListenerFactory(
+                LoggerFactory,
+                options: options
+            );
 
         // Act
         var clients = new List<ClientStreamContext>();
@@ -237,7 +275,10 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
             }
         }
 
-        Assert.True(connectBlocked, "Connect should be blocked before reaching the end of the connect loop.");
+        Assert.True(
+            connectBlocked,
+            "Connect should be blocked before reaching the end of the connect loop."
+        );
 
         for (var i = 0; i < clients.Count; i++)
         {
@@ -250,7 +291,10 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
 
             Logger.LogInformation($"Asserting client {i} is connected to the server.");
             Assert.True(client.ClientStream.IsConnected, "IsConnected should be true.");
-            Assert.True(client.ConnectTask.IsCompletedSuccessfully, "ConnectTask should be completed.");
+            Assert.True(
+                client.ConnectTask.IsCompletedSuccessfully,
+                "ConnectTask should be completed."
+            );
         }
     }
 
@@ -263,7 +307,8 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
     public async Task AcceptAsync_DisposeAfterCall_CleanExit()
     {
         // Arrange
-        await using var connectionListener = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
+        await using var connectionListener =
+            await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
 
         // Act
         var acceptTask = connectionListener.AcceptAsync();
@@ -280,23 +325,32 @@ public class NamedPipeConnectionListenerTests : TestApplicationErrorLoggerLogged
     public async Task BindAsync_ListenersSharePort_ThrowAddressInUse()
     {
         // Arrange
-        await using var connectionListener1 = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
+        await using var connectionListener1 =
+            await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
         var pipeName = ((NamedPipeEndPoint)connectionListener1.EndPoint).PipeName;
 
         // Act & Assert
-        await Assert.ThrowsAsync<AddressInUseException>(() => NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory, pipeName: pipeName));
+        await Assert.ThrowsAsync<AddressInUseException>(() =>
+            NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory, pipeName: pipeName)
+        );
     }
 
     [ConditionalFact]
     public async Task BindAsync_ListenersSharePort_DisposeFirstListener_Success()
     {
         // Arrange
-        var connectionListener1 = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
+        var connectionListener1 = await NamedPipeTestHelpers.CreateConnectionListenerFactory(
+            LoggerFactory
+        );
         var pipeName = ((NamedPipeEndPoint)connectionListener1.EndPoint).PipeName;
         await connectionListener1.DisposeAsync();
 
         // Act & Assert
-        await using var connectionListener2 = await NamedPipeTestHelpers.CreateConnectionListenerFactory(LoggerFactory, pipeName: pipeName);
+        await using var connectionListener2 =
+            await NamedPipeTestHelpers.CreateConnectionListenerFactory(
+                LoggerFactory,
+                pipeName: pipeName
+            );
         Assert.Equal(connectionListener1.EndPoint, connectionListener2.EndPoint);
     }
 }

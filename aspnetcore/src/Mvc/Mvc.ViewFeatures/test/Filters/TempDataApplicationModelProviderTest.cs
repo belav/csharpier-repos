@@ -34,12 +34,15 @@ public class TempDataApplicationModelProviderTest
         // Arrange
         var type = typeof(TestController_PrivateSet);
         var provider = CreateProvider();
-        var expected = $"The '{type.FullName}.Test' property with TempDataAttribute is invalid. A property using TempDataAttribute must have a public getter and setter.";
+        var expected =
+            $"The '{type.FullName}.Test' property with TempDataAttribute is invalid. A property using TempDataAttribute must have a public getter and setter.";
 
         var context = GetContext(type);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => provider.OnProvidersExecuting(context));
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            provider.OnProvidersExecuting(context)
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -48,15 +51,18 @@ public class TempDataApplicationModelProviderTest
     {
         // Arrange
         var type = typeof(TestController_InvalidProperties);
-        var expected = $"TempData serializer '{typeof(DefaultTempDataSerializer)}' cannot serialize property '{type}.ModelState' of type '{typeof(ModelStateDictionary)}'." +
-            Environment.NewLine +
-            $"TempData serializer '{typeof(DefaultTempDataSerializer)}' cannot serialize property '{type}.TimeZone' of type '{typeof(TimeZoneInfo)}'.";
+        var expected =
+            $"TempData serializer '{typeof(DefaultTempDataSerializer)}' cannot serialize property '{type}.ModelState' of type '{typeof(ModelStateDictionary)}'."
+            + Environment.NewLine
+            + $"TempData serializer '{typeof(DefaultTempDataSerializer)}' cannot serialize property '{type}.TimeZone' of type '{typeof(TimeZoneInfo)}'.";
         var provider = CreateProvider();
 
         var context = GetContext(type);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => provider.OnProvidersExecuting(context));
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            provider.OnProvidersExecuting(context)
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -73,7 +79,9 @@ public class TempDataApplicationModelProviderTest
         // Act
         provider.OnProvidersExecuting(context);
         var controller = context.Result.Controllers.SingleOrDefault();
-        var filter = Assert.IsType<ControllerSaveTempDataPropertyFilterFactory>(Assert.Single(controller.Filters));
+        var filter = Assert.IsType<ControllerSaveTempDataPropertyFilterFactory>(
+            Assert.Single(controller.Filters)
+        );
 
         // Assert
         Assert.NotNull(filter);
@@ -86,7 +94,9 @@ public class TempDataApplicationModelProviderTest
     public void OnProvidersExecuting_SetsKeyPrefixToEmptyString()
     {
         // Arrange
-        var expected = typeof(TestController_OneTempDataProperty).GetProperty(nameof(TestController_OneTempDataProperty.Test2));
+        var expected = typeof(TestController_OneTempDataProperty).GetProperty(
+            nameof(TestController_OneTempDataProperty.Test2)
+        );
         var type = typeof(TestController_OneTempDataProperty);
         var provider = CreateProvider();
         var context = GetContext(type);
@@ -94,7 +104,9 @@ public class TempDataApplicationModelProviderTest
         // Act
         provider.OnProvidersExecuting(context);
         var controller = context.Result.Controllers.SingleOrDefault();
-        var filter = Assert.IsType<ControllerSaveTempDataPropertyFilterFactory>(Assert.Single(controller.Filters));
+        var filter = Assert.IsType<ControllerSaveTempDataPropertyFilterFactory>(
+            Assert.Single(controller.Filters)
+        );
 
         // Assert
         Assert.NotNull(filter);
@@ -113,7 +125,8 @@ public class TempDataApplicationModelProviderTest
     {
         var defaultProvider = new DefaultApplicationModelProvider(
             Options.Create(new MvcOptions()),
-            new EmptyModelMetadataProvider());
+            new EmptyModelMetadataProvider()
+        );
 
         var context = new ApplicationModelProviderContext(new[] { type.GetTypeInfo() });
         defaultProvider.OnProvidersExecuting(context);

@@ -17,7 +17,8 @@ public class Runtime_69032
         for (int i = 0; i < n; i++)
         {
             cwt.Add(i.ToString(), i.ToString());
-            if (i % 1000 == 0) GC.Collect();
+            if (i % 1000 == 0)
+                GC.Collect();
         }
         return n;
     }

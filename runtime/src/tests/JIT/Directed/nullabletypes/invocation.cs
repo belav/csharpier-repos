@@ -5,51 +5,68 @@
 //  A nullable type with a value returns the GetHashCode() from the underlying struct
 //</Description>
 
-
 using System;
-
 
 interface BaseInter
 {
     int Foo();
 }
-interface GenInter<T> 
+
+interface GenInter<T>
 {
     int Foo();
 }
 
-struct Struct 
+struct Struct
 {
-    public int Foo() { return 0x0001; }
+    public int Foo()
+    {
+        return 0x0001;
+    }
 }
 
-struct ImplStruct : BaseInter 
+struct ImplStruct : BaseInter
 {
-    public int Foo() { return 0x0010; }
+    public int Foo()
+    {
+        return 0x0010;
+    }
 }
 
-struct OpenGenImplStruct<T> : GenInter<T> 
+struct OpenGenImplStruct<T> : GenInter<T>
 {
-    public int Foo() { return 0x0100; }
+    public int Foo()
+    {
+        return 0x0100;
+    }
 }
 
 struct CloseGenImplStruct : GenInter<int>
 {
-    public int Foo() { return 0x1000; }
+    public int Foo()
+    {
+        return 0x1000;
+    }
 }
 
 struct CloseGenImplGenAndImplStruct<T> : BaseInter, GenInter<int>
 {
-    public int Foo() { return 0x1001; }
-    int BaseInter.Foo() { return 0x0110; }
-}
+    public int Foo()
+    {
+        return 0x1001;
+    }
 
+    int BaseInter.Foo()
+    {
+        return 0x0110;
+    }
+}
 
 class Foo { }
 
 class NullableTests
 {
-    static Struct?  s = default(Struct);
+    static Struct? s = default(Struct);
     static ImplStruct? imps = default(ImplStruct);
     static OpenGenImplStruct<int>? ogis = default(OpenGenImplStruct<int>);
     static CloseGenImplStruct? cgis = default(CloseGenImplStruct);
@@ -78,7 +95,9 @@ class NullableTests
 
         Test_nullabletypes.Eval(cgiis.Value.Foo() == 0x1001);
         Test_nullabletypes.Eval(((CloseGenImplGenAndImplStruct<int>)(object)cgiis).Foo() == 0x1001);
-        Test_nullabletypes.Eval(((CloseGenImplGenAndImplStruct<int>)(ValueType)cgiis).Foo() == 0x1001);
+        Test_nullabletypes.Eval(
+            ((CloseGenImplGenAndImplStruct<int>)(ValueType)cgiis).Foo() == 0x1001
+        );
         Test_nullabletypes.Eval(((GenInter<int>)cgiis).Foo() == 0x1001);
         Test_nullabletypes.Eval(((BaseInter)cgiis).Foo() == 0x0110);
     }

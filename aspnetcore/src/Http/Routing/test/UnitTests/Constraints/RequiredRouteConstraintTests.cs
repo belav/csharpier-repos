@@ -23,7 +23,8 @@ public class RequiredRouteConstraintTests
             Mock.Of<IRouter>(),
             "area",
             new RouteValueDictionary(new { controller = "Home", action = "Index" }),
-            direction);
+            direction
+        );
 
         // Assert
         Assert.False(result);
@@ -42,8 +43,16 @@ public class RequiredRouteConstraintTests
             new DefaultHttpContext(),
             Mock.Of<IRouter>(),
             "area",
-            new RouteValueDictionary(new { controller = "Home", action = "Index", area = (string)null }),
-            direction);
+            new RouteValueDictionary(
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    area = (string)null,
+                }
+            ),
+            direction
+        );
 
         // Assert
         Assert.False(result);
@@ -62,8 +71,16 @@ public class RequiredRouteConstraintTests
             new DefaultHttpContext(),
             Mock.Of<IRouter>(),
             "area",
-            new RouteValueDictionary(new { controller = "Home", action = "Index", area = string.Empty }),
-            direction);
+            new RouteValueDictionary(
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    area = string.Empty,
+                }
+            ),
+            direction
+        );
 
         // Assert
         Assert.False(result);
@@ -82,8 +99,16 @@ public class RequiredRouteConstraintTests
             new DefaultHttpContext(),
             Mock.Of<IRouter>(),
             "area",
-            new RouteValueDictionary(new { controller = "Home", action = "Index", area = "Store" }),
-            direction);
+            new RouteValueDictionary(
+                new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    area = "Store",
+                }
+            ),
+            direction
+        );
 
         // Assert
         Assert.True(result);

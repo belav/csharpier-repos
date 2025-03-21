@@ -18,10 +18,14 @@ public class RequestSizeLimitFilterTest
         // Arrange
         var requestSizeLimitResourceFilter = new RequestSizeLimitFilter(NullLoggerFactory.Instance);
         requestSizeLimitResourceFilter.Bytes = 12345;
-        var authorizationFilterContext = CreateAuthorizationFilterContext(new IFilterMetadata[] { requestSizeLimitResourceFilter });
+        var authorizationFilterContext = CreateAuthorizationFilterContext(
+            new IFilterMetadata[] { requestSizeLimitResourceFilter }
+        );
 
         var httpMaxRequestBodySize = new TestHttpMaxRequestBodySizeFeature();
-        authorizationFilterContext.HttpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(httpMaxRequestBodySize);
+        authorizationFilterContext.HttpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(
+            httpMaxRequestBodySize
+        );
 
         // Act
         requestSizeLimitResourceFilter.OnAuthorization(authorizationFilterContext);
@@ -36,13 +40,22 @@ public class RequestSizeLimitFilterTest
         // Arrange
         var requestSizeLimitResourceFilter = new RequestSizeLimitFilter(NullLoggerFactory.Instance);
         requestSizeLimitResourceFilter.Bytes = 12345;
-        var requestSizeLimitResourceFilterFinal = new RequestSizeLimitFilter(NullLoggerFactory.Instance);
+        var requestSizeLimitResourceFilterFinal = new RequestSizeLimitFilter(
+            NullLoggerFactory.Instance
+        );
         requestSizeLimitResourceFilterFinal.Bytes = 0;
         var authorizationFilterContext = CreateAuthorizationFilterContext(
-            new IFilterMetadata[] { requestSizeLimitResourceFilter, requestSizeLimitResourceFilterFinal });
+            new IFilterMetadata[]
+            {
+                requestSizeLimitResourceFilter,
+                requestSizeLimitResourceFilterFinal,
+            }
+        );
 
         var httpMaxRequestBodySize = new TestHttpMaxRequestBodySizeFeature();
-        authorizationFilterContext.HttpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(httpMaxRequestBodySize);
+        authorizationFilterContext.HttpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(
+            httpMaxRequestBodySize
+        );
 
         // Act
         requestSizeLimitResourceFilter.OnAuthorization(authorizationFilterContext);
@@ -62,15 +75,19 @@ public class RequestSizeLimitFilterTest
 
         var requestSizeLimitResourceFilter = new RequestSizeLimitFilter(loggerFactory);
         requestSizeLimitResourceFilter.Bytes = 12345;
-        var authorizationFilterContext = CreateAuthorizationFilterContext(new IFilterMetadata[] { requestSizeLimitResourceFilter });
+        var authorizationFilterContext = CreateAuthorizationFilterContext(
+            new IFilterMetadata[] { requestSizeLimitResourceFilter }
+        );
 
         // Act
         requestSizeLimitResourceFilter.OnAuthorization(authorizationFilterContext);
 
         // Assert
         var write = Assert.Single(sink.Writes);
-        Assert.Equal($"A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.",
-            write.State.ToString());
+        Assert.Equal(
+            $"A request body size limit could not be applied. This server does not support the IHttpRequestBodySizeFeature.",
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -82,18 +99,25 @@ public class RequestSizeLimitFilterTest
 
         var requestSizeLimitResourceFilter = new RequestSizeLimitFilter(loggerFactory);
         requestSizeLimitResourceFilter.Bytes = 12345;
-        var authorizationFilterContext = CreateAuthorizationFilterContext(new IFilterMetadata[] { requestSizeLimitResourceFilter });
+        var authorizationFilterContext = CreateAuthorizationFilterContext(
+            new IFilterMetadata[] { requestSizeLimitResourceFilter }
+        );
 
         var httpMaxRequestBodySize = new TestHttpMaxRequestBodySizeFeature();
         httpMaxRequestBodySize.IsReadOnly = true;
-        authorizationFilterContext.HttpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(httpMaxRequestBodySize);
+        authorizationFilterContext.HttpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(
+            httpMaxRequestBodySize
+        );
 
         // Act
         requestSizeLimitResourceFilter.OnAuthorization(authorizationFilterContext);
 
         // Assert
         var write = Assert.Single(sink.Writes);
-        Assert.Equal($"A request body size limit could not be applied. The IHttpRequestBodySizeFeature for the server is read-only.", write.State.ToString());
+        Assert.Equal(
+            $"A request body size limit could not be applied. The IHttpRequestBodySizeFeature for the server is read-only.",
+            write.State.ToString()
+        );
     }
 
     [Fact]
@@ -105,20 +129,29 @@ public class RequestSizeLimitFilterTest
 
         var requestSizeLimitResourceFilter = new RequestSizeLimitFilter(loggerFactory);
         requestSizeLimitResourceFilter.Bytes = 12345;
-        var authorizationFilterContext = CreateAuthorizationFilterContext(new IFilterMetadata[] { requestSizeLimitResourceFilter });
+        var authorizationFilterContext = CreateAuthorizationFilterContext(
+            new IFilterMetadata[] { requestSizeLimitResourceFilter }
+        );
 
         var httpMaxRequestBodySize = new TestHttpMaxRequestBodySizeFeature();
-        authorizationFilterContext.HttpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(httpMaxRequestBodySize);
+        authorizationFilterContext.HttpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(
+            httpMaxRequestBodySize
+        );
 
         // Act
         requestSizeLimitResourceFilter.OnAuthorization(authorizationFilterContext);
 
         // Assert
         var write = Assert.Single(sink.Writes);
-        Assert.Equal($"The maximum request body size has been set to 12345.", write.State.ToString());
+        Assert.Equal(
+            $"The maximum request body size has been set to 12345.",
+            write.State.ToString()
+        );
     }
 
-    private static AuthorizationFilterContext CreateAuthorizationFilterContext(IFilterMetadata[] filters)
+    private static AuthorizationFilterContext CreateAuthorizationFilterContext(
+        IFilterMetadata[] filters
+    )
     {
         return new AuthorizationFilterContext(CreateActionContext(), filters);
     }
@@ -136,10 +169,7 @@ public class RequestSizeLimitFilterTest
 
         public long? MaxRequestBodySize
         {
-            get
-            {
-                return _maxRequestBodySize;
-            }
+            get { return _maxRequestBodySize; }
             set
             {
                 _maxRequestBodySize = value;

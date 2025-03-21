@@ -15,7 +15,7 @@ namespace System.Resources
 {
     public partial class ResourceReader
     {
-        private readonly bool _permitDeserialization;  // can deserialize BinaryFormatted resources
+        private readonly bool _permitDeserialization; // can deserialize BinaryFormatted resources
         private object? _binaryFormatter; // binary formatter instance to use for deserializing
 
         // statics used to dynamically call into BinaryFormatter
@@ -29,7 +29,11 @@ namespace System.Resources
         // passing in the stream to read from and the RuntimeResourceSet's
         // internal hash table (hash table of names with file offsets
         // and values, coupled to this ResourceReader).
-        internal ResourceReader(Stream stream, Dictionary<string, ResourceLocator> resCache, bool permitDeserialization)
+        internal ResourceReader(
+            Stream stream,
+            Dictionary<string, ResourceLocator> resCache,
+            bool permitDeserialization
+        )
         {
             Debug.Assert(stream != null, "Need a stream!");
             Debug.Assert(stream.CanRead, "Stream should be readable!");
@@ -57,14 +61,20 @@ namespace System.Resources
                 throw new NotSupportedException(SR.NotSupported_ResourceObjectSerialization);
             }
 
-            [UnconditionalSuppressMessage("AotAnalysis", "IL3050:RequiresDynamicCode",
-                Justification = "InitializeBinaryFormatter will get trimmed out when AllowCustomResourceTypes is set to false. " +
-                "When set to true, we will already throw a warning for this feature switch, so we suppress this one in order for" +
-                "the user to only get one error.")]
-            [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                Justification = "InitializeBinaryFormatter will get trimmed out when AllowCustomResourceTypes is set to false. " +
-                "When set to true, we will already throw a warning for this feature switch, so we suppress this one in order for" +
-                "the user to only get one error.")]
+            [UnconditionalSuppressMessage(
+                "AotAnalysis",
+                "IL3050:RequiresDynamicCode",
+                Justification = "InitializeBinaryFormatter will get trimmed out when AllowCustomResourceTypes is set to false. "
+                    + "When set to true, we will already throw a warning for this feature switch, so we suppress this one in order for"
+                    + "the user to only get one error."
+            )]
+            [UnconditionalSuppressMessage(
+                "ReflectionAnalysis",
+                "IL2026:RequiresUnreferencedCode",
+                Justification = "InitializeBinaryFormatter will get trimmed out when AllowCustomResourceTypes is set to false. "
+                    + "When set to true, we will already throw a warning for this feature switch, so we suppress this one in order for"
+                    + "the user to only get one error."
+            )]
             bool InitializeBinaryFormatterLocal() => InitializeBinaryFormatter();
 
             if (Volatile.Read(ref _binaryFormatter) is null)
@@ -85,27 +95,49 @@ namespace System.Resources
 
             // guard against corrupted resources
             if (graph.GetType() != type)
-                throw new BadImageFormatException(SR.Format(SR.BadImageFormat_ResType_SerBlobMismatch, type.FullName, graph.GetType().FullName));
+                throw new BadImageFormatException(
+                    SR.Format(
+                        SR.BadImageFormat_ResType_SerBlobMismatch,
+                        type.FullName,
+                        graph.GetType().FullName
+                    )
+                );
 
             return graph;
         }
 
         // Issue https://github.com/dotnet/runtime/issues/39290 tracks finding an alternative to BinaryFormatter
-        [RequiresDynamicCode("The native code for this instantiation might not be available at runtime.")]
-        [RequiresUnreferencedCode("The CustomResourceTypesSupport feature switch has been enabled for this app which is being trimmed. " +
-            "Custom readers as well as custom objects on the resources file are not observable by the trimmer and so required assemblies, types and members may be removed.")]
+        [RequiresDynamicCode(
+            "The native code for this instantiation might not be available at runtime."
+        )]
+        [RequiresUnreferencedCode(
+            "The CustomResourceTypesSupport feature switch has been enabled for this app which is being trimmed. "
+                + "Custom readers as well as custom objects on the resources file are not observable by the trimmer and so required assemblies, types and members may be removed."
+        )]
         private bool InitializeBinaryFormatter()
         {
             // If BinaryFormatter support is disabled for the app, the trimmer will replace this entire
             // method body with "return false;", skipping all reflection code below.
 
-            if (Volatile.Read(ref s_binaryFormatterType) is null || Volatile.Read(ref s_deserializeMethod) is null)
+            if (
+                Volatile.Read(ref s_binaryFormatterType) is null
+                || Volatile.Read(ref s_deserializeMethod) is null
+            )
             {
-                Type binaryFormatterType = Type.GetType("System.Runtime.Serialization.Formatters.Binary.BinaryFormatter, System.Runtime.Serialization.Formatters", throwOnError: true)!;
-                MethodInfo? binaryFormatterDeserialize = binaryFormatterType.GetMethod("Deserialize", new[] { typeof(Stream) });
+                Type binaryFormatterType = Type.GetType(
+                    "System.Runtime.Serialization.Formatters.Binary.BinaryFormatter, System.Runtime.Serialization.Formatters",
+                    throwOnError: true
+                )!;
+                MethodInfo? binaryFormatterDeserialize = binaryFormatterType.GetMethod(
+                    "Deserialize",
+                    new[] { typeof(Stream) }
+                );
                 Func<object?, Stream, object>? deserializeMethod = (Func<object?, Stream, object>?)
                     typeof(ResourceReader)
-                        .GetMethod(nameof(CreateUntypedDelegate), BindingFlags.NonPublic | BindingFlags.Static)
+                        .GetMethod(
+                            nameof(CreateUntypedDelegate),
+                            BindingFlags.NonPublic | BindingFlags.Static
+                        )
                         ?.MakeGenericMethod(binaryFormatterType)
                         .Invoke(null, new[] { binaryFormatterDeserialize });
 
@@ -121,9 +153,13 @@ namespace System.Resources
         // generic method that we specialize at runtime once we've loaded the BinaryFormatter type
         // permits creating an unbound delegate so that we can avoid reflection after the initial
         // lightup code completes.
-        private static Func<object, Stream, object> CreateUntypedDelegate<TInstance>(MethodInfo method)
+        private static Func<object, Stream, object> CreateUntypedDelegate<TInstance>(
+            MethodInfo method
+        )
         {
-            Func<TInstance, Stream, object> typedDelegate = (Func<TInstance, Stream, object>)Delegate.CreateDelegate(typeof(Func<TInstance, Stream, object>), null, method);
+            Func<TInstance, Stream, object> typedDelegate =
+                (Func<TInstance, Stream, object>)
+                    Delegate.CreateDelegate(typeof(Func<TInstance, Stream, object>), null, method);
 
             return (obj, stream) => typedDelegate((TInstance)obj, stream);
         }
@@ -133,7 +169,11 @@ namespace System.Resources
             return ResourceManager.IsDefaultType(readerType, ResourceManager.ResReaderTypeName);
         }
 
-        public void GetResourceData(string resourceName, out string resourceType, out byte[] resourceData)
+        public void GetResourceData(
+            string resourceName,
+            out string resourceType,
+            out byte[] resourceData
+        )
         {
             ArgumentNullException.ThrowIfNull(resourceName);
 
@@ -161,29 +201,45 @@ namespace System.Resources
                     int numBytesToSkip = _store.Read7BitEncodedInt();
                     if (numBytesToSkip < 0)
                     {
-                        throw new FormatException(SR.Format(SR.BadImageFormat_ResourcesNameInvalidOffset, numBytesToSkip));
+                        throw new FormatException(
+                            SR.Format(SR.BadImageFormat_ResourcesNameInvalidOffset, numBytesToSkip)
+                        );
                     }
                     _store.BaseStream.Position += numBytesToSkip;
 
                     int dPos = _store.ReadInt32();
                     if (dPos < 0 || dPos >= _store.BaseStream.Length - _dataSectionOffset)
                     {
-                        throw new FormatException(SR.Format(SR.BadImageFormat_ResourcesDataInvalidOffset, dPos));
+                        throw new FormatException(
+                            SR.Format(SR.BadImageFormat_ResourcesDataInvalidOffset, dPos)
+                        );
                     }
                     sortedDataPositions[i] = dPos;
                 }
                 Array.Sort(sortedDataPositions);
 
                 int index = Array.BinarySearch(sortedDataPositions, dataPos);
-                Debug.Assert(index >= 0 && index < _numResources, "Couldn't find data position within sorted data positions array!");
-                long nextData = (index < _numResources - 1) ? sortedDataPositions[index + 1] + _dataSectionOffset : _store.BaseStream.Length;
+                Debug.Assert(
+                    index >= 0 && index < _numResources,
+                    "Couldn't find data position within sorted data positions array!"
+                );
+                long nextData =
+                    (index < _numResources - 1)
+                        ? sortedDataPositions[index + 1] + _dataSectionOffset
+                        : _store.BaseStream.Length;
                 int len = (int)(nextData - (dataPos + _dataSectionOffset));
-                Debug.Assert(len >= 0 && len <= (int)_store.BaseStream.Length - dataPos + _dataSectionOffset, "Length was negative or outside the bounds of the file!");
+                Debug.Assert(
+                    len >= 0 && len <= (int)_store.BaseStream.Length - dataPos + _dataSectionOffset,
+                    "Length was negative or outside the bounds of the file!"
+                );
 
                 // Read type code then byte[]
                 _store.BaseStream.Position = _dataSectionOffset + dataPos;
                 ResourceTypeCode typeCode = (ResourceTypeCode)_store.Read7BitEncodedInt();
-                if (typeCode < 0 || typeCode >= ResourceTypeCode.StartOfUserTypes + _typeTable.Length)
+                if (
+                    typeCode < 0
+                    || typeCode >= ResourceTypeCode.StartOfUserTypes + _typeTable.Length
+                )
                 {
                     throw new BadImageFormatException(SR.BadImageFormat_InvalidType);
                 }

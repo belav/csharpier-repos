@@ -17,32 +17,40 @@ public class SqlServerFullTextSearchFunctionsTranslator : IMethodCallTranslator
     private const string FreeTextFunctionName = "FREETEXT";
     private const string ContainsFunctionName = "CONTAINS";
 
-    private static readonly MethodInfo FreeTextMethodInfo
-        = typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
-            nameof(SqlServerDbFunctionsExtensions.FreeText), new[] { typeof(DbFunctions), typeof(object), typeof(string) })!;
-
-    private static readonly MethodInfo FreeTextMethodInfoWithLanguage
-        = typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+    private static readonly MethodInfo FreeTextMethodInfo =
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
             nameof(SqlServerDbFunctionsExtensions.FreeText),
-            new[] { typeof(DbFunctions), typeof(object), typeof(string), typeof(int) })!;
+            new[] { typeof(DbFunctions), typeof(object), typeof(string) }
+        )!;
 
-    private static readonly MethodInfo ContainsMethodInfo
-        = typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
-            nameof(SqlServerDbFunctionsExtensions.Contains), new[] { typeof(DbFunctions), typeof(object), typeof(string) })!;
+    private static readonly MethodInfo FreeTextMethodInfoWithLanguage =
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.FreeText),
+            new[] { typeof(DbFunctions), typeof(object), typeof(string), typeof(int) }
+        )!;
 
-    private static readonly MethodInfo ContainsMethodInfoWithLanguage
-        = typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+    private static readonly MethodInfo ContainsMethodInfo =
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
             nameof(SqlServerDbFunctionsExtensions.Contains),
-            new[] { typeof(DbFunctions), typeof(object), typeof(string), typeof(int) })!;
+            new[] { typeof(DbFunctions), typeof(object), typeof(string) }
+        )!;
 
-    private static readonly IDictionary<MethodInfo, string> FunctionMapping
-        = new Dictionary<MethodInfo, string>
-        {
-            { FreeTextMethodInfo, FreeTextFunctionName },
-            { FreeTextMethodInfoWithLanguage, FreeTextFunctionName },
-            { ContainsMethodInfo, ContainsFunctionName },
-            { ContainsMethodInfoWithLanguage, ContainsFunctionName }
-        };
+    private static readonly MethodInfo ContainsMethodInfoWithLanguage =
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.Contains),
+            new[] { typeof(DbFunctions), typeof(object), typeof(string), typeof(int) }
+        )!;
+
+    private static readonly IDictionary<MethodInfo, string> FunctionMapping = new Dictionary<
+        MethodInfo,
+        string
+    >
+    {
+        { FreeTextMethodInfo, FreeTextFunctionName },
+        { FreeTextMethodInfoWithLanguage, FreeTextFunctionName },
+        { ContainsMethodInfo, ContainsFunctionName },
+        { ContainsMethodInfoWithLanguage, ContainsFunctionName },
+    };
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -67,7 +75,8 @@ public class SqlServerFullTextSearchFunctionsTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (FunctionMapping.TryGetValue(method, out var functionName))
         {
@@ -84,7 +93,10 @@ public class SqlServerFullTextSearchFunctionsTranslator : IMethodCallTranslator
             if (arguments.Count == 4)
             {
                 functionArguments.Add(
-                    _sqlExpressionFactory.Fragment($"LANGUAGE {((SqlConstantExpression)arguments[3]).Value}"));
+                    _sqlExpressionFactory.Fragment(
+                        $"LANGUAGE {((SqlConstantExpression)arguments[3]).Value}"
+                    )
+                );
             }
 
             return _sqlExpressionFactory.Function(
@@ -93,7 +105,8 @@ public class SqlServerFullTextSearchFunctionsTranslator : IMethodCallTranslator
                 nullable: true,
                 // TODO: don't propagate for now
                 argumentsPropagateNullability: functionArguments.Select(_ => false).ToList(),
-                typeof(bool));
+                typeof(bool)
+            );
         }
 
         return null;

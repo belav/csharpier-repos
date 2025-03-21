@@ -72,7 +72,10 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     /// <param name="propertyName">The name of the corresponding property.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The added parameter.</returns>
-    IConventionStoredProcedureParameter? AddParameter(string propertyName, bool fromDataAnnotation = false);
+    IConventionStoredProcedureParameter? AddParameter(
+        string propertyName,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the original value parameter corresponding to the given property.
@@ -89,7 +92,10 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     /// <param name="propertyName">The name of the corresponding property.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The added parameter.</returns>
-    IConventionStoredProcedureParameter? AddOriginalValueParameter(string propertyName, bool fromDataAnnotation = false);
+    IConventionStoredProcedureParameter? AddOriginalValueParameter(
+        string propertyName,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the rows affected parameter.
@@ -124,7 +130,10 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     /// <param name="propertyName">The name of the corresponding property.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The added column.</returns>
-    IConventionStoredProcedureResultColumn? AddResultColumn(string propertyName, bool fromDataAnnotation = false);
+    IConventionStoredProcedureResultColumn? AddResultColumn(
+        string propertyName,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the rows affected result column.
@@ -137,7 +146,9 @@ public interface IConventionStoredProcedure : IReadOnlyStoredProcedure, IConvent
     /// </summary>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
     /// <returns>The added column.</returns>
-    IConventionStoredProcedureResultColumn? AddRowsAffectedResultColumn(bool fromDataAnnotation = false);
+    IConventionStoredProcedureResultColumn? AddRowsAffectedResultColumn(
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures whether this stored procedure returns the number of rows affected.

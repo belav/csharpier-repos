@@ -6,7 +6,11 @@ namespace System.Runtime.Serialization
 {
     using System;
 
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Module, Inherited = false, AllowMultiple = true)]
+    [AttributeUsage(
+        AttributeTargets.Assembly | AttributeTargets.Module,
+        Inherited = false,
+        AllowMultiple = true
+    )]
     public sealed class ContractNamespaceAttribute : Attribute
     {
         string clrNamespace;
@@ -29,4 +33,3 @@ namespace System.Runtime.Serialization
         }
     }
 }
-

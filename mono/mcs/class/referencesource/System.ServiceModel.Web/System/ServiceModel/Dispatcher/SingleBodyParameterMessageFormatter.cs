@@ -5,16 +5,18 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
-    using System.Xml;
-    using System.Runtime.Serialization;
-    using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
     using System.ServiceModel.Web;
+    using System.Xml;
+    using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
 
-    abstract class SingleBodyParameterMessageFormatter : IDispatchMessageFormatter, IClientMessageFormatter
+    abstract class SingleBodyParameterMessageFormatter
+        : IDispatchMessageFormatter,
+            IClientMessageFormatter
     {
         string contractName;
         string contractNs;
@@ -22,7 +24,11 @@ namespace System.ServiceModel.Dispatcher
         string operationName;
         string serializerType;
 
-        protected SingleBodyParameterMessageFormatter(OperationDescription operation, bool isRequestFormatter, string serializerType)
+        protected SingleBodyParameterMessageFormatter(
+            OperationDescription operation,
+            bool isRequestFormatter,
+            string serializerType
+        )
         {
             if (operation == null)
             {
@@ -50,29 +56,68 @@ namespace System.ServiceModel.Dispatcher
             get { return this.operationName; }
         }
 
-        public static IClientMessageFormatter CreateXmlAndJsonClientFormatter(OperationDescription operation, Type type, bool isRequestFormatter, UnwrappedTypesXmlSerializerManager xmlSerializerManager)
+        public static IClientMessageFormatter CreateXmlAndJsonClientFormatter(
+            OperationDescription operation,
+            Type type,
+            bool isRequestFormatter,
+            UnwrappedTypesXmlSerializerManager xmlSerializerManager
+        )
         {
-            IClientMessageFormatter xmlFormatter = CreateClientFormatter(operation, type, isRequestFormatter, false, xmlSerializerManager);
+            IClientMessageFormatter xmlFormatter = CreateClientFormatter(
+                operation,
+                type,
+                isRequestFormatter,
+                false,
+                xmlSerializerManager
+            );
             if (!WebHttpBehavior.SupportsJsonFormat(operation))
             {
                 return xmlFormatter;
             }
-            IClientMessageFormatter jsonFormatter = CreateClientFormatter(operation, type, isRequestFormatter, true, xmlSerializerManager);
-            Dictionary<WebContentFormat, IClientMessageFormatter> map = new Dictionary<WebContentFormat, IClientMessageFormatter>();
+            IClientMessageFormatter jsonFormatter = CreateClientFormatter(
+                operation,
+                type,
+                isRequestFormatter,
+                true,
+                xmlSerializerManager
+            );
+            Dictionary<WebContentFormat, IClientMessageFormatter> map =
+                new Dictionary<WebContentFormat, IClientMessageFormatter>();
             map.Add(WebContentFormat.Xml, xmlFormatter);
             map.Add(WebContentFormat.Json, jsonFormatter);
             return new DemultiplexingClientMessageFormatter(map, xmlFormatter);
         }
 
-        public static IDispatchMessageFormatter CreateXmlAndJsonDispatchFormatter(OperationDescription operation, Type type, bool isRequestFormatter, UnwrappedTypesXmlSerializerManager xmlSerializerManager, string callbackParameterName)
+        public static IDispatchMessageFormatter CreateXmlAndJsonDispatchFormatter(
+            OperationDescription operation,
+            Type type,
+            bool isRequestFormatter,
+            UnwrappedTypesXmlSerializerManager xmlSerializerManager,
+            string callbackParameterName
+        )
         {
-            IDispatchMessageFormatter xmlFormatter = CreateDispatchFormatter(operation, type, isRequestFormatter, false, xmlSerializerManager, null);
+            IDispatchMessageFormatter xmlFormatter = CreateDispatchFormatter(
+                operation,
+                type,
+                isRequestFormatter,
+                false,
+                xmlSerializerManager,
+                null
+            );
             if (!WebHttpBehavior.SupportsJsonFormat(operation))
             {
                 return xmlFormatter;
             }
-            IDispatchMessageFormatter jsonFormatter = CreateDispatchFormatter(operation, type, isRequestFormatter, true, xmlSerializerManager, callbackParameterName);
-            Dictionary<WebContentFormat, IDispatchMessageFormatter> map = new Dictionary<WebContentFormat, IDispatchMessageFormatter>();
+            IDispatchMessageFormatter jsonFormatter = CreateDispatchFormatter(
+                operation,
+                type,
+                isRequestFormatter,
+                true,
+                xmlSerializerManager,
+                callbackParameterName
+            );
+            Dictionary<WebContentFormat, IDispatchMessageFormatter> map =
+                new Dictionary<WebContentFormat, IDispatchMessageFormatter>();
             map.Add(WebContentFormat.Xml, xmlFormatter);
             map.Add(WebContentFormat.Json, jsonFormatter);
             return new DemultiplexingDispatchMessageFormatter(map, xmlFormatter);
@@ -82,7 +127,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (isRequestFormatter)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.FormatterCannotBeUsedForReplyMessages)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.FormatterCannotBeUsedForReplyMessages)
+                    )
+                );
             }
             return ReadObject(message);
         }
@@ -91,19 +140,35 @@ namespace System.ServiceModel.Dispatcher
         {
             if (!isRequestFormatter)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.FormatterCannotBeUsedForRequestMessages)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.FormatterCannotBeUsedForRequestMessages)
+                    )
+                );
             }
 
             parameters[0] = ReadObject(message);
         }
 
-        public Message SerializeReply(MessageVersion messageVersion, object[] parameters, object result)
+        public Message SerializeReply(
+            MessageVersion messageVersion,
+            object[] parameters,
+            object result
+        )
         {
             if (isRequestFormatter)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.FormatterCannotBeUsedForReplyMessages)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.FormatterCannotBeUsedForReplyMessages)
+                    )
+                );
             }
-            Message message = Message.CreateMessage(messageVersion, (string)null, CreateBodyWriter(result));
+            Message message = Message.CreateMessage(
+                messageVersion,
+                (string)null,
+                CreateBodyWriter(result)
+            );
             if (result == null)
             {
                 SuppressReplyEntityBody(message);
@@ -116,9 +181,17 @@ namespace System.ServiceModel.Dispatcher
         {
             if (!isRequestFormatter)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.FormatterCannotBeUsedForRequestMessages)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.FormatterCannotBeUsedForRequestMessages)
+                    )
+                );
             }
-            Message message = Message.CreateMessage(messageVersion, (string)null, CreateBodyWriter(parameters[0]));
+            Message message = Message.CreateMessage(
+                messageVersion,
+                (string)null,
+                CreateBodyWriter(parameters[0])
+            );
             if (parameters[0] == null)
             {
                 SuppressRequestEntityBody(message);
@@ -127,7 +200,13 @@ namespace System.ServiceModel.Dispatcher
             return message;
         }
 
-        internal static IClientMessageFormatter CreateClientFormatter(OperationDescription operation, Type type, bool isRequestFormatter, bool useJson, UnwrappedTypesXmlSerializerManager xmlSerializerManager)
+        internal static IClientMessageFormatter CreateClientFormatter(
+            OperationDescription operation,
+            Type type,
+            bool isRequestFormatter,
+            bool useJson,
+            UnwrappedTypesXmlSerializerManager xmlSerializerManager
+        )
         {
             if (type == null)
             {
@@ -139,11 +218,23 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                return CreateXmlFormatter(operation, type, isRequestFormatter, xmlSerializerManager);
+                return CreateXmlFormatter(
+                    operation,
+                    type,
+                    isRequestFormatter,
+                    xmlSerializerManager
+                );
             }
         }
 
-        internal static IDispatchMessageFormatter CreateDispatchFormatter(OperationDescription operation, Type type, bool isRequestFormatter, bool useJson, UnwrappedTypesXmlSerializerManager xmlSerializerManager, string callbackParameterName)
+        internal static IDispatchMessageFormatter CreateDispatchFormatter(
+            OperationDescription operation,
+            Type type,
+            bool isRequestFormatter,
+            bool useJson,
+            UnwrappedTypesXmlSerializerManager xmlSerializerManager,
+            string callbackParameterName
+        )
         {
             if (type == null)
             {
@@ -155,7 +246,12 @@ namespace System.ServiceModel.Dispatcher
             }
             else
             {
-                return CreateXmlFormatter(operation, type, isRequestFormatter, xmlSerializerManager);
+                return CreateXmlFormatter(
+                    operation,
+                    type,
+                    isRequestFormatter,
+                    xmlSerializerManager
+                );
             }
         }
 
@@ -209,17 +305,13 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        protected virtual void AttachMessageProperties(Message message, bool isRequest)
-        {
-        }
+        protected virtual void AttachMessageProperties(Message message, bool isRequest) { }
 
         protected abstract XmlObjectSerializer[] GetInputSerializers();
 
         protected abstract XmlObjectSerializer GetOutputSerializer(Type type);
 
-        protected virtual void ValidateMessageFormatProperty(Message message)
-        {
-        }
+        protected virtual void ValidateMessageFormatProperty(Message message) { }
 
         protected Type GetTypeForSerializer(Type type, Type parameterType, IList<Type> knownTypes)
         {
@@ -240,29 +332,75 @@ namespace System.ServiceModel.Dispatcher
             return parameterType;
         }
 
-        public static SingleBodyParameterMessageFormatter CreateXmlFormatter(OperationDescription operation, Type type, bool isRequestFormatter, UnwrappedTypesXmlSerializerManager xmlSerializerManager)
+        public static SingleBodyParameterMessageFormatter CreateXmlFormatter(
+            OperationDescription operation,
+            Type type,
+            bool isRequestFormatter,
+            UnwrappedTypesXmlSerializerManager xmlSerializerManager
+        )
         {
-            DataContractSerializerOperationBehavior dcsob = operation.Behaviors.Find<DataContractSerializerOperationBehavior>();
+            DataContractSerializerOperationBehavior dcsob =
+                operation.Behaviors.Find<DataContractSerializerOperationBehavior>();
             if (dcsob != null)
             {
-                return new SingleBodyParameterDataContractMessageFormatter(operation, type, isRequestFormatter, false, dcsob);
+                return new SingleBodyParameterDataContractMessageFormatter(
+                    operation,
+                    type,
+                    isRequestFormatter,
+                    false,
+                    dcsob
+                );
             }
-            XmlSerializerOperationBehavior xsob = operation.Behaviors.Find<XmlSerializerOperationBehavior>();
+            XmlSerializerOperationBehavior xsob =
+                operation.Behaviors.Find<XmlSerializerOperationBehavior>();
             if (xsob != null)
             {
-                return new SingleBodyParameterXmlSerializerMessageFormatter(operation, type, isRequestFormatter, xsob, xmlSerializerManager);
+                return new SingleBodyParameterXmlSerializerMessageFormatter(
+                    operation,
+                    type,
+                    isRequestFormatter,
+                    xsob,
+                    xmlSerializerManager
+                );
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.GetString(SR2.OnlyDataContractAndXmlSerializerTypesInUnWrappedMode, operation.Name)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(
+                    SR2.GetString(
+                        SR2.OnlyDataContractAndXmlSerializerTypesInUnWrappedMode,
+                        operation.Name
+                    )
+                )
+            );
         }
 
-        public static SingleBodyParameterMessageFormatter CreateJsonFormatter(OperationDescription operation, Type type, bool isRequestFormatter)
+        public static SingleBodyParameterMessageFormatter CreateJsonFormatter(
+            OperationDescription operation,
+            Type type,
+            bool isRequestFormatter
+        )
         {
-            DataContractSerializerOperationBehavior dcsob = operation.Behaviors.Find<DataContractSerializerOperationBehavior>();
+            DataContractSerializerOperationBehavior dcsob =
+                operation.Behaviors.Find<DataContractSerializerOperationBehavior>();
             if (dcsob == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR2.GetString(SR2.JsonFormatRequiresDataContract, operation.Name, operation.DeclaringContract.Name, operation.DeclaringContract.Namespace)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR2.GetString(
+                            SR2.JsonFormatRequiresDataContract,
+                            operation.Name,
+                            operation.DeclaringContract.Name,
+                            operation.DeclaringContract.Namespace
+                        )
+                    )
+                );
             }
-            return new SingleBodyParameterDataContractMessageFormatter(operation, type, isRequestFormatter, true, dcsob);
+            return new SingleBodyParameterDataContractMessageFormatter(
+                operation,
+                type,
+                isRequestFormatter,
+                true,
+                dcsob
+            );
         }
 
         BodyWriter CreateBodyWriter(object body)
@@ -273,7 +411,18 @@ namespace System.ServiceModel.Dispatcher
                 serializer = GetOutputSerializer(body.GetType());
                 if (serializer == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.GetString(SR2.CannotSerializeType, body.GetType(), this.operationName, this.contractName, this.contractNs, this.serializerType)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException(
+                            SR2.GetString(
+                                SR2.CannotSerializeType,
+                                body.GetType(),
+                                this.operationName,
+                                this.contractName,
+                                this.contractNs,
+                                this.serializerType
+                            )
+                        )
+                    );
                 }
             }
             else
@@ -301,7 +450,19 @@ namespace System.ServiceModel.Dispatcher
                     }
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SerializationException(SR2.GetString(SR2.CannotDeserializeBody, reader.LocalName, reader.NamespaceURI, operationName, contractName, contractNs, this.serializerType)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new SerializationException(
+                    SR2.GetString(
+                        SR2.CannotDeserializeBody,
+                        reader.LocalName,
+                        reader.NamespaceURI,
+                        operationName,
+                        contractName,
+                        contractNs,
+                        this.serializerType
+                    )
+                )
+            );
         }
 
         class NullMessageFormatter : IDispatchMessageFormatter, IClientMessageFormatter
@@ -320,17 +481,25 @@ namespace System.ServiceModel.Dispatcher
                 return null;
             }
 
-            public void DeserializeRequest(Message message, object[] parameters)
-            {
-            }
+            public void DeserializeRequest(Message message, object[] parameters) { }
 
-            public Message SerializeReply(MessageVersion messageVersion, object[] parameters, object result)
+            public Message SerializeReply(
+                MessageVersion messageVersion,
+                object[] parameters,
+                object result
+            )
             {
                 Message reply = Message.CreateMessage(messageVersion, (string)null);
                 SuppressReplyEntityBody(reply);
-                if (useJson && WebHttpBehavior.TrySetupJavascriptCallback(callbackParameterName) != null)
+                if (
+                    useJson
+                    && WebHttpBehavior.TrySetupJavascriptCallback(callbackParameterName) != null
+                )
                 {
-                    reply.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.JsonProperty);
+                    reply.Properties.Add(
+                        WebBodyFormatMessageProperty.Name,
+                        WebBodyFormatMessageProperty.JsonProperty
+                    );
                 }
                 return reply;
             }
@@ -369,4 +538,3 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 }
-

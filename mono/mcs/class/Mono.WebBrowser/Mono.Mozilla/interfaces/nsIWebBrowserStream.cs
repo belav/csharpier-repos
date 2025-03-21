@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,43 +26,45 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("86d02f0e-219b-4cfc-9c88-bd98d2cce0b8")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIWebBrowserStream
+    {
+        #region nsIWebBrowserStream
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int openStream(
+            [MarshalAs(UnmanagedType.Interface)] nsIURI aBaseURI,
+            /*ACString*/HandleRef aContentType
+        );
 
-	[Guid ("86d02f0e-219b-4cfc-9c88-bd98d2cce0b8")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIWebBrowserStream {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int appendToStream(IntPtr aData, uint aLen);
 
-#region nsIWebBrowserStream
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int openStream (
-				[MarshalAs (UnmanagedType.Interface)]   nsIURI aBaseURI,
-				   /*ACString*/ HandleRef aContentType);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int closeStream();
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int appendToStream (
-				IntPtr aData,
-				   uint aLen);
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int closeStream ();
-
-#endregion
-	}
-
-
-	internal class nsWebBrowserStream {
-		public static nsIWebBrowserStream GetProxy (Mono.WebBrowser.IWebBrowser control, nsIWebBrowserStream obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIWebBrowserStream).GUID, obj);
-			return o as nsIWebBrowserStream;
-		}
-	}
+    internal class nsWebBrowserStream
+    {
+        public static nsIWebBrowserStream GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIWebBrowserStream obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIWebBrowserStream).GUID, obj);
+            return o as nsIWebBrowserStream;
+        }
+    }
 }

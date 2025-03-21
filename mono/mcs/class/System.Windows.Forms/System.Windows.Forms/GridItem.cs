@@ -26,88 +26,62 @@
 // NOT COMPLETE
 
 using System;
-using System.Drawing;
 using System.ComponentModel;
+using System.Drawing;
 
 namespace System.Windows.Forms
 {
-	public abstract class GridItem
-	{
-		#region	Fields
-		private bool expanded;
-		private object tag;
-		#endregion Fields
+    public abstract class GridItem
+    {
+        #region	Fields
+        private bool expanded;
+        private object tag;
+        #endregion Fields
 
-		#region	Constructors
-		protected GridItem() 
-		{
-			expanded = false;
-		}
-		#endregion	// Constructors
+        #region	Constructors
+        protected GridItem()
+        {
+            expanded = false;
+        }
+        #endregion	// Constructors
 
-		#region Public Instance Properties
-		public virtual bool Expandable
-		{
-			get {
-				return GridItems.Count > 1;
-			}
-		}
+        #region Public Instance Properties
+        public virtual bool Expandable
+        {
+            get { return GridItems.Count > 1; }
+        }
 
-		public virtual bool Expanded
-		{
-			get {
-				return expanded;
-			}
+        public virtual bool Expanded
+        {
+            get { return expanded; }
+            set { expanded = value; }
+        }
 
-			set {
-				expanded = value;
-			}
-		}
+        public abstract GridItemCollection GridItems { get; }
 
-		public abstract GridItemCollection GridItems
-		{
-			get;
-		}
+        public abstract GridItemType GridItemType { get; }
 
-		public abstract GridItemType GridItemType
-		{
-			get;
-		}
+        public abstract string Label { get; }
 
-		public abstract string Label
-		{
-			get;
-		}
+        public abstract GridItem Parent { get; }
 
+        public abstract PropertyDescriptor PropertyDescriptor { get; }
 
-		public abstract GridItem Parent
-		{
-			get;
-		}
+        [Localizable(false)]
+        [Bindable(true)]
+        [DefaultValue(null)]
+        [TypeConverter(typeof(StringConverter))]
+        public Object Tag
+        {
+            get { return this.tag; }
+            set { this.tag = value; }
+        }
 
+        public abstract object Value { get; }
+        #endregion
 
-		public abstract PropertyDescriptor PropertyDescriptor
-		{
-			get;
-		}
-
-		[Localizable (false)]
-		[Bindable (true)]
-		[DefaultValue (null)]
-		[TypeConverter (typeof (StringConverter))]
-		public Object Tag {
-			get { return this.tag; }
-			set { this.tag = value; }
-		}
-
-		public abstract object Value
-		{
-			get;
-		}
-		#endregion
-
-		#region Public Instance Methods
-		public abstract bool Select ();
-		#endregion	// Public Instance Methods
-	}
+        #region Public Instance Methods
+        public abstract bool Select();
+        #endregion	// Public Instance Methods
+    }
 }

@@ -10,40 +10,37 @@
  * Copyright (c) 2000 Microsoft Corporation
  */
 
-namespace System.Web.UI.HtmlControls {
-
+namespace System.Web.UI.HtmlControls
+{
     using System;
     using System.Collections;
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.Globalization;
+    using System.Security.Permissions;
     using System.Web;
     using System.Web.UI;
-    using System.Security.Permissions;
 
-
-/// <devdoc>
-///    <para>
-///       The <see langword='HtmlInputFile'/> class defines the
-///       methods, properties, and events for the <see langword='HtmlInputFile'/> control. This class allows
-///       programmatic access to the HTML &lt;input type= file&gt; element on the server.
-///       It provides access to the stream, as well as a useful SaveAs functionality
-///       provided by the <see cref='System.Web.UI.HtmlControls.HtmlInputFile.PostedFile'/>
-///       property.
-///    </para>
-///    <note type="caution">
-///       This class only works if the
-///       HtmlForm.Enctype property is set to "multipart/form-data".
-///       Also, it does not maintain its
-///       state across multiple round trips between browser and server. If the user sets
-///       this value after a round trip, the value is lost.
-///    </note>
-/// </devdoc>
-    [
-    ValidationProperty("Value")
-    ]
-    public class HtmlInputFile : HtmlInputControl, IPostBackDataHandler {
-
+    /// <devdoc>
+    ///    <para>
+    ///       The <see langword='HtmlInputFile'/> class defines the
+    ///       methods, properties, and events for the <see langword='HtmlInputFile'/> control. This class allows
+    ///       programmatic access to the HTML &lt;input type= file&gt; element on the server.
+    ///       It provides access to the stream, as well as a useful SaveAs functionality
+    ///       provided by the <see cref='System.Web.UI.HtmlControls.HtmlInputFile.PostedFile'/>
+    ///       property.
+    ///    </para>
+    ///    <note type="caution">
+    ///       This class only works if the
+    ///       HtmlForm.Enctype property is set to "multipart/form-data".
+    ///       Also, it does not maintain its
+    ///       state across multiple round trips between browser and server. If the user sets
+    ///       this value after a round trip, the value is lost.
+    ///    </note>
+    /// </devdoc>
+    [ValidationProperty("Value")]
+    public class HtmlInputFile : HtmlInputControl, IPostBackDataHandler
+    {
         /*
          * Creates an intrinsic Html INPUT type=file control.
          */
@@ -51,8 +48,8 @@ namespace System.Web.UI.HtmlControls {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.HtmlControls.HtmlInputFile'/> class.</para>
         /// </devdoc>
-        public HtmlInputFile() : base("file") {
-        }
+        public HtmlInputFile()
+            : base("file") { }
 
         /*
          * Accept type property.
@@ -68,18 +65,18 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public string Accept {
-            get {
+        public string Accept
+        {
+            get
+            {
                 string s = Attributes["accept"];
-                return((s != null) ? s : String.Empty);
+                return ((s != null) ? s : String.Empty);
             }
-            set {
-                Attributes["accept"] = MapStringAttributeToString(value);
-            }
+            set { Attributes["accept"] = MapStringAttributeToString(value); }
         }
 
         /*
@@ -94,18 +91,18 @@ namespace System.Web.UI.HtmlControls {
         ///    </para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Behavior"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public int MaxLength {
-            get {
+        public int MaxLength
+        {
+            get
+            {
                 string s = Attributes["maxlength"];
-                return((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
+                return ((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
             }
-            set {
-                Attributes["maxlength"] = MapIntegerAttributeToString(value);
-            }
+            set { Attributes["maxlength"] = MapIntegerAttributeToString(value); }
         }
 
         /*
@@ -116,12 +113,13 @@ namespace System.Web.UI.HtmlControls {
         ///    <para>Gets access to the uploaded file specified by a client.</para>
         /// </devdoc>
         [
-        WebCategory("Default"),
-        DefaultValue(""),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Default"),
+            DefaultValue(""),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public HttpPostedFile PostedFile {
-            get { return Context.Request.Files[RenderedNameAttribute];}
+        public HttpPostedFile PostedFile
+        {
+            get { return Context.Request.Files[RenderedNameAttribute]; }
         }
 
         /*
@@ -134,42 +132,46 @@ namespace System.Web.UI.HtmlControls {
         ///       control is used on a page.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(-1),
-        DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
+            WebCategory("Appearance"),
+            DefaultValue(-1),
+            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)
         ]
-        public int Size {
-            get {
+        public int Size
+        {
+            get
+            {
                 string s = Attributes["size"];
-                return((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
+                return ((s != null) ? Int32.Parse(s, CultureInfo.InvariantCulture) : -1);
             }
-            set {
-                Attributes["size"] = MapIntegerAttributeToString(value);
-            }
+            set { Attributes["size"] = MapIntegerAttributeToString(value); }
         }
 
         // ASURT 122262 : The value property isn't submitted back to us when the a page
         // containing this control postsback, so required field validators are broken
         // (value would contain the empty string).  To fix this, we return the filename.
 
-        [
-        Browsable(false)
-        ]
-        public override string Value {
-            get {
+        [Browsable(false)]
+        public override string Value
+        {
+            get
+            {
                 HttpPostedFile postedFile = PostedFile;
-                if (postedFile != null) {
+                if (postedFile != null)
+                {
                     return postedFile.FileName;
                 }
 
                 return String.Empty;
             }
-            set {
+            set
+            {
                 // Throw here because setting the value on this tag has no effect on the
                 // rendering behavior and since we're always returning the posted file's
                 // filename, we don't want to get into a situation where the user
                 // sets a value and does not get back that value.
-                throw new NotSupportedException(SR.GetString(SR.Value_Set_Not_Supported, this.GetType().Name));
+                throw new NotSupportedException(
+                    SR.GetString(SR.Value_Set_Not_Supported, this.GetType().Name)
+                );
             }
         }
 
@@ -178,12 +180,16 @@ namespace System.Web.UI.HtmlControls {
          */
 
         /// <internalonly/>
-        bool IPostBackDataHandler.LoadPostData(string postDataKey, NameValueCollection postCollection) {
+        bool IPostBackDataHandler.LoadPostData(
+            string postDataKey,
+            NameValueCollection postCollection
+        )
+        {
             return LoadPostData(postDataKey, postCollection);
         }
 
-
-        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection) {
+        protected virtual bool LoadPostData(string postDataKey, NameValueCollection postCollection)
+        {
             return false;
         }
 
@@ -194,25 +200,25 @@ namespace System.Web.UI.HtmlControls {
          */
 
         /// <internalonly/>
-        void IPostBackDataHandler.RaisePostDataChangedEvent() {
+        void IPostBackDataHandler.RaisePostDataChangedEvent()
+        {
             RaisePostDataChangedEvent();
         }
 
-
-        protected virtual void RaisePostDataChangedEvent() {
-        }
-
+        protected virtual void RaisePostDataChangedEvent() { }
 
         /// <devdoc>
         /// <para>Raises the <see langword='PreRender'/> event. This method uses event arguments
         ///    to pass the event data to the control.</para>
         /// </devdoc>
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
             // ASURT 35328: use multipart encoding if no encoding is currently specified
             HtmlForm form = Page.Form;
-            if (form != null && form.Enctype.Length == 0) {
+            if (form != null && form.Enctype.Length == 0)
+            {
                 form.Enctype = "multipart/form-data";
             }
         }

@@ -24,11 +24,17 @@ namespace System.CodeDom.Tests
 
             CodeExpression expression1 = new CodePrimitiveExpression("Value1");
             constructor.BaseConstructorArgs.Add(expression1);
-            Assert.Equal(new CodeExpression[] { expression1 }, constructor.BaseConstructorArgs.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1 },
+                constructor.BaseConstructorArgs.Cast<CodeExpression>()
+            );
 
             CodeExpression expression2 = new CodePrimitiveExpression("Value2");
             constructor.BaseConstructorArgs.Add(expression2);
-            Assert.Equal(new CodeExpression[] { expression1, expression2 }, constructor.BaseConstructorArgs.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1, expression2 },
+                constructor.BaseConstructorArgs.Cast<CodeExpression>()
+            );
         }
 
         [Fact]
@@ -38,11 +44,17 @@ namespace System.CodeDom.Tests
 
             CodeExpression expression1 = new CodePrimitiveExpression("Value1");
             constructor.ChainedConstructorArgs.Add(expression1);
-            Assert.Equal(new CodeExpression[] { expression1 }, constructor.ChainedConstructorArgs.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1 },
+                constructor.ChainedConstructorArgs.Cast<CodeExpression>()
+            );
 
             CodeExpression expression2 = new CodePrimitiveExpression("Value2");
             constructor.ChainedConstructorArgs.Add(expression2);
-            Assert.Equal(new CodeExpression[] { expression1, expression2 }, constructor.ChainedConstructorArgs.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1, expression2 },
+                constructor.ChainedConstructorArgs.Cast<CodeExpression>()
+            );
         }
     }
 }

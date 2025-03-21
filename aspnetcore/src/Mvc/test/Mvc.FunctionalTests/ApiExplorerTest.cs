@@ -4,9 +4,9 @@
 using System.Net;
 using System.Net.Http;
 using ApiExplorerWebSite;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.InternalTesting;
 using Newtonsoft.Json;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
@@ -24,7 +24,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_IsVisible_EnabledWithConvention()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerVisibilityEnabledByConvention");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerVisibilityEnabledByConvention"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -37,7 +39,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_IsVisible_DisabledWithConvention()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerVisibilityDisabledByConvention");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerVisibilityDisabledByConvention"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -50,7 +54,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_IsVisible_DisabledWithAttribute()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerVisibilitySetExplicitly/Disabled");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerVisibilitySetExplicitly/Disabled"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -63,7 +69,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_IsVisible_EnabledWithAttribute()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerVisibilitySetExplicitly/Enabled");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerVisibilitySetExplicitly/Enabled"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -90,7 +98,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_GroupName_SetByAttributeOnController()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerNameSetExplicitly/SetOnController");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerNameSetExplicitly/SetOnController"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -104,7 +114,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_GroupName_SetByAttributeOnAction()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerNameSetExplicitly/SetOnAction");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerNameSetExplicitly/SetOnAction"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -118,7 +130,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_GroupName_SetByEndpointMetadataOnController()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerApiController/ActionWithIdParameter");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerApiController/ActionWithIdParameter"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -132,7 +146,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_GroupName_SetByEndpointMetadataOnAction()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerApiController/ActionWithSomeParameters");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerApiController/ActionWithSomeParameters"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -146,7 +162,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_RouteTemplate_DisplaysFixedRoute()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerRouteAndPathParametersInformation");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerRouteAndPathParametersInformation"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -160,7 +178,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_RouteTemplate_DisplaysRouteWithParameters()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerRouteAndPathParametersInformation/5");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerRouteAndPathParametersInformation/5"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -190,7 +210,10 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
 
         // Assert
         var description = Assert.Single(result);
-        Assert.Equal("ApiExplorerRouteAndPathParametersInformation/Constraint/{integer}", description.RelativePath);
+        Assert.Equal(
+            "ApiExplorerRouteAndPathParametersInformation/Constraint/{integer}",
+            description.RelativePath
+        );
 
         var parameter = Assert.Single(description.ParameterDescriptions);
         Assert.Equal("integer", parameter.Name);
@@ -213,7 +236,10 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
 
         // Assert
         var description = Assert.Single(result);
-        Assert.Equal("ApiExplorerRouteAndPathParametersInformation/CatchAll/{parameter}", description.RelativePath);
+        Assert.Equal(
+            "ApiExplorerRouteAndPathParametersInformation/CatchAll/{parameter}",
+            description.RelativePath
+        );
 
         var parameter = Assert.Single(description.ParameterDescriptions);
         Assert.Equal("parameter", parameter.Name);
@@ -225,7 +251,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_RouteTemplate_StripsCatchAllsWithConstraintsFromThePath()
     {
         // Arrange
-        var url = "http://localhost/ApiExplorerRouteAndPathParametersInformation/CatchAllAndConstraint/5";
+        var url =
+            "http://localhost/ApiExplorerRouteAndPathParametersInformation/CatchAllAndConstraint/5";
 
         // Act
         var response = await Client.GetAsync(url);
@@ -237,7 +264,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         var description = Assert.Single(result);
         Assert.Equal(
             "ApiExplorerRouteAndPathParametersInformation/CatchAllAndConstraint/{integer}",
-            description.RelativePath);
+            description.RelativePath
+        );
 
         var parameter = Assert.Single(description.ParameterDescriptions);
         Assert.Equal("integer", parameter.Name);
@@ -250,10 +278,12 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_RouteTemplateStripsMultipleConstraints_OnTheSamePathSegment()
     {
         // Arrange
-        var url = "http://localhost/ApiExplorerRouteAndPathParametersInformation/"
+        var url =
+            "http://localhost/ApiExplorerRouteAndPathParametersInformation/"
             + "MultipleParametersInSegment/12-01-1987";
 
-        var expectedRelativePath = "ApiExplorerRouteAndPathParametersInformation/"
+        var expectedRelativePath =
+            "ApiExplorerRouteAndPathParametersInformation/"
             + "MultipleParametersInSegment/{month}-{day}-{year}";
 
         // Act
@@ -286,10 +316,12 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_RouteTemplateStripsMultipleConstraints_InMultipleSegments()
     {
         // Arrange
-        var url = "http://localhost/ApiExplorerRouteAndPathParametersInformation/"
+        var url =
+            "http://localhost/ApiExplorerRouteAndPathParametersInformation/"
             + "MultipleParametersInMultipleSegments/12/01/1987";
 
-        var expectedRelativePath = "ApiExplorerRouteAndPathParametersInformation/"
+        var expectedRelativePath =
+            "ApiExplorerRouteAndPathParametersInformation/"
             + "MultipleParametersInMultipleSegments/{month}/{day}/{year}";
 
         // Act
@@ -322,9 +354,11 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_DescribeParameters_FromAllSources()
     {
         // Arrange
-        var url = "http://localhost/ApiExplorerRouteAndPathParametersInformation/MultipleTypesOfParameters/1/2/3";
+        var url =
+            "http://localhost/ApiExplorerRouteAndPathParametersInformation/MultipleTypesOfParameters/1/2/3";
 
-        var expectedRelativePath = "ApiExplorerRouteAndPathParametersInformation/"
+        var expectedRelativePath =
+            "ApiExplorerRouteAndPathParametersInformation/"
             + "MultipleTypesOfParameters/{path}/{pathAndQuery}/{pathAndFromBody}";
 
         // Act
@@ -340,11 +374,20 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         var path = Assert.Single(description.ParameterDescriptions, p => p.Name == "path");
         Assert.Equal("Path", path.Source);
 
-        var pathAndQuery = Assert.Single(description.ParameterDescriptions, p => p.Name == "pathAndQuery");
+        var pathAndQuery = Assert.Single(
+            description.ParameterDescriptions,
+            p => p.Name == "pathAndQuery"
+        );
         Assert.Equal("Path", pathAndQuery.Source);
 
-        Assert.Single(description.ParameterDescriptions, p => p.Name == "pathAndFromBody" && p.Source == "Body");
-        Assert.Single(description.ParameterDescriptions, p => p.Name == "pathAndFromBody" && p.Source == "Path");
+        Assert.Single(
+            description.ParameterDescriptions,
+            p => p.Name == "pathAndFromBody" && p.Source == "Body"
+        );
+        Assert.Single(
+            description.ParameterDescriptions,
+            p => p.Name == "pathAndFromBody" && p.Source == "Path"
+        );
     }
 
     [Fact]
@@ -352,14 +395,18 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     {
         // Arrange & Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerRouteAndPathParametersInformation/Optional/");
+            "http://localhost/ApiExplorerRouteAndPathParametersInformation/Optional/"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
 
         // Assert
         var description = Assert.Single(result);
-        Assert.Equal("ApiExplorerRouteAndPathParametersInformation/Optional/{id}", description.RelativePath);
+        Assert.Equal(
+            "ApiExplorerRouteAndPathParametersInformation/Optional/{id}",
+            description.RelativePath
+        );
 
         var id = Assert.Single(description.ParameterDescriptions, p => p.Name == "id");
         Assert.True(id.RouteInfo.IsOptional);
@@ -402,7 +449,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         // Arrange
         var request = new HttpRequestMessage(
             new HttpMethod("PUT"),
-            "http://localhost/ApiExplorerHttpMethod/Single");
+            "http://localhost/ApiExplorerHttpMethod/Single"
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -425,7 +473,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         // Arrange
         var request = new HttpRequestMessage(
             new HttpMethod("POST"),
-            "http://localhost/ApiExplorerHttpMethod/Single");
+            "http://localhost/ApiExplorerHttpMethod/Single"
+        );
 
         // Act
         var response = await Client.SendAsync(request);
@@ -443,11 +492,14 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     [Theory]
     [InlineData("GetVoidWithExplicitResponseTypeStatusCode")]
     [InlineData("GetTaskWithExplicitResponseTypeStatusCode")]
-    public async Task ApiExplorer_ResponseType_VoidWithResponseTypeAttributeStatusCode(string action)
+    public async Task ApiExplorer_ResponseType_VoidWithResponseTypeAttributeStatusCode(
+        string action
+    )
     {
         // Arrange & Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeWithAttribute/" + action);
+            "http://localhost/ApiExplorerResponseTypeWithAttribute/" + action
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -467,7 +519,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     {
         // Arrange & Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeWithoutAttribute/" + action);
+            "http://localhost/ApiExplorerResponseTypeWithoutAttribute/" + action
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -491,7 +544,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     {
         // Arrange & Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeWithoutAttribute/" + action);
+            "http://localhost/ApiExplorerResponseTypeWithoutAttribute/" + action
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -511,11 +565,18 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     {
         // Arrange & Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeWithoutAttribute/" + action);
+            "http://localhost/ApiExplorerResponseTypeWithoutAttribute/" + action
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Assert
         var description = Assert.Single(result);
@@ -530,11 +591,18 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     {
         // Arrange
         var type = "ApiExplorerWebSite.Customer";
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeWithAttribute/GetVoid");
+            "http://localhost/ApiExplorerResponseTypeWithAttribute/GetVoid"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -552,11 +620,18 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     {
         // Arrange
         var type = "ApiExplorerWebSite.Customer";
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeWithAttribute/GetProduct");
+            "http://localhost/ApiExplorerResponseTypeWithAttribute/GetProduct"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -577,7 +652,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     {
         // Arrange & Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeWithAttribute/" + action);
+            "http://localhost/ApiExplorerResponseTypeWithAttribute/" + action
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -597,11 +673,18 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         // Arrange
         var type1 = typeof(ApiExplorerWebSite.Product).FullName;
         var type2 = typeof(SerializableError).FullName;
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeWithAttribute/CreateProductWithDefaultResponseContentTypes");
+            "http://localhost/ApiExplorerResponseTypeWithAttribute/CreateProductWithDefaultResponseContentTypes"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -614,13 +697,21 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(201, responseType.StatusCode);
         Assert.Equal(
             expectedMediaTypes,
-            responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType).OrderBy(o => o).ToArray());
+            responseType
+                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .OrderBy(o => o)
+                .ToArray()
+        );
         responseType = description.SupportedResponseTypes[1];
         Assert.Equal(type2, responseType.ResponseType);
         Assert.Equal(400, responseType.StatusCode);
         Assert.Equal(
             expectedMediaTypes,
-            responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType).OrderBy(o => o).ToArray());
+            responseType
+                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .OrderBy(o => o)
+                .ToArray()
+        );
     }
 
     [Fact]
@@ -633,7 +724,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
 
         // Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeWithAttribute/CreateProductWithLimitedResponseContentTypes");
+            "http://localhost/ApiExplorerResponseTypeWithAttribute/CreateProductWithLimitedResponseContentTypes"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -646,13 +738,19 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(201, responseType.StatusCode);
         Assert.Equal(
             expectedMediaTypes,
-            responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType).ToArray());
+            responseType
+                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .ToArray()
+        );
         responseType = description.SupportedResponseTypes[1];
         Assert.Equal(type2, responseType.ResponseType);
         Assert.Equal(400, responseType.StatusCode);
         Assert.Equal(
             expectedMediaTypes,
-            responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType).ToArray());
+            responseType
+                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .ToArray()
+        );
     }
 
     [Fact]
@@ -661,11 +759,18 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         // Arrange
         var type1 = typeof(ApiExplorerWebSite.Product).FullName;
         var type2 = typeof(SerializableError).FullName;
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeWithAttribute/UpdateProductWithDefaultResponseContentTypes");
+            "http://localhost/ApiExplorerResponseTypeWithAttribute/UpdateProductWithDefaultResponseContentTypes"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -678,13 +783,21 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(200, responseType.StatusCode);
         Assert.Equal(
             expectedMediaTypes,
-            responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType).OrderBy(o => o).ToArray());
+            responseType
+                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .OrderBy(o => o)
+                .ToArray()
+        );
         responseType = description.SupportedResponseTypes[1];
         Assert.Equal(type2, responseType.ResponseType);
         Assert.Equal(400, responseType.StatusCode);
         Assert.Equal(
             expectedMediaTypes,
-            responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType).OrderBy(o => o).ToArray());
+            responseType
+                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .OrderBy(o => o)
+                .ToArray()
+        );
     }
 
     [Fact]
@@ -697,7 +810,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
 
         // Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeWithAttribute/UpdateProductWithLimitedResponseContentTypes");
+            "http://localhost/ApiExplorerResponseTypeWithAttribute/UpdateProductWithLimitedResponseContentTypes"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -710,14 +824,21 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(200, responseType.StatusCode);
         Assert.Equal(
             expectedMediaTypes,
-            responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType).ToArray());
+            responseType
+                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .ToArray()
+        );
         responseType = description.SupportedResponseTypes[1];
         Assert.Equal(type2, responseType.ResponseType);
         Assert.Equal(400, responseType.StatusCode);
         Assert.Equal(
             expectedMediaTypes,
-            responseType.ResponseFormats.Select(responseFormat => responseFormat.MediaType).ToArray());
+            responseType
+                .ResponseFormats.Select(responseFormat => responseFormat.MediaType)
+                .ToArray()
+        );
     }
+
     [Fact]
     public async Task ApiExplorer_ResponseType_InheritingFromController()
     {
@@ -727,7 +848,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
 
         // Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeOverrideOnAction/Controller");
+            "http://localhost/ApiExplorerResponseTypeOverrideOnAction/Controller"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -750,7 +872,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(500, responseType.StatusCode);
                 var responseFormat = Assert.Single(responseType.ResponseFormats);
                 Assert.Equal("application/json", responseFormat.MediaType);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -760,11 +883,18 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         var type = "ApiExplorerWebSite.Customer";
         // type overriding the one specified on the controller
         var errorType = "ApiExplorerWebSite.ErrorInfoOverride";
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeOverrideOnAction/Action");
+            "http://localhost/ApiExplorerResponseTypeOverrideOnAction/Action"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -785,7 +915,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(errorType, responseType.ResponseType);
                 Assert.Equal(500, responseType.StatusCode);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Fact]
@@ -799,7 +930,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
 
         // Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseTypeOverrideOnAction/Action2");
+            "http://localhost/ApiExplorerResponseTypeOverrideOnAction/Action2"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -820,7 +952,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(errorType, responseType.ResponseType);
                 Assert.Equal(500, responseType.StatusCode);
                 Assert.Equal(new[] { "application/json" }, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [ConditionalFact]
@@ -829,7 +962,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_ResponseContentType_Unset()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerResponseContentType/Unset");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerResponseContentType/Unset"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -841,13 +976,25 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(4, responseType.ResponseFormats.Count);
 
         var textXml = Assert.Single(responseType.ResponseFormats, f => f.MediaType == "text/xml");
-        Assert.Equal(typeof(XmlDataContractSerializerOutputFormatter).FullName, textXml.FormatterType);
-        var applicationXml = Assert.Single(responseType.ResponseFormats, f => f.MediaType == "application/xml");
-        Assert.Equal(typeof(XmlDataContractSerializerOutputFormatter).FullName, applicationXml.FormatterType);
+        Assert.Equal(
+            typeof(XmlDataContractSerializerOutputFormatter).FullName,
+            textXml.FormatterType
+        );
+        var applicationXml = Assert.Single(
+            responseType.ResponseFormats,
+            f => f.MediaType == "application/xml"
+        );
+        Assert.Equal(
+            typeof(XmlDataContractSerializerOutputFormatter).FullName,
+            applicationXml.FormatterType
+        );
 
         var textJson = Assert.Single(responseType.ResponseFormats, f => f.MediaType == "text/json");
         Assert.Equal(typeof(NewtonsoftJsonOutputFormatter).FullName, textJson.FormatterType);
-        var applicationJson = Assert.Single(responseType.ResponseFormats, f => f.MediaType == "application/json");
+        var applicationJson = Assert.Single(
+            responseType.ResponseFormats,
+            f => f.MediaType == "application/json"
+        );
         Assert.Equal(typeof(NewtonsoftJsonOutputFormatter).FullName, applicationJson.FormatterType);
     }
 
@@ -855,7 +1002,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_ResponseContentType_Specific()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerResponseContentType/Specific");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerResponseContentType/Specific"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -868,7 +1017,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
 
         var applicationJson = Assert.Single(
             responseType.ResponseFormats,
-            format => format.MediaType == "application/json");
+            format => format.MediaType == "application/json"
+        );
         Assert.Equal(typeof(NewtonsoftJsonOutputFormatter).FullName, applicationJson.FormatterType);
 
         var textJson = Assert.Single(responseType.ResponseFormats, f => f.MediaType == "text/json");
@@ -879,7 +1029,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_ResponseContentType_WildcardMatch()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerResponseContentType/WildcardMatch");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerResponseContentType/WildcardMatch"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -897,8 +1049,12 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
             responseFormat =>
             {
                 Assert.Equal("application/hal+json", responseFormat.MediaType);
-                Assert.Equal(typeof(NewtonsoftJsonOutputFormatter).FullName, responseFormat.FormatterType);
-            });
+                Assert.Equal(
+                    typeof(NewtonsoftJsonOutputFormatter).FullName,
+                    responseFormat.FormatterType
+                );
+            }
+        );
     }
 
     [Fact]
@@ -908,7 +1064,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         var expectedMediaTypes = new[] { "application/custom", "text/hal+bson" };
 
         // Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerResponseContentType/NoMatch");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerResponseContentType/NoMatch"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -930,11 +1088,13 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_ResponseContentType_OverrideOnAction(
         string action,
         string contentType,
-        Type formatterType)
+        Type formatterType
+    )
     {
         // Arrange & Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerResponseContentTypeOverrideOnAction/" + action);
+            "http://localhost/ApiExplorerResponseContentTypeOverrideOnAction/" + action
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -952,7 +1112,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_Parameters_SimpleTypes_Default()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerParameters/SimpleParameters");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerParameters/SimpleParameters"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -977,7 +1139,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     {
         // Arrange & Act
         var response = await Client.GetAsync(
-            "http://localhost/ApiExplorerParameters/SimpleParametersWithBinderMetadata");
+            "http://localhost/ApiExplorerParameters/SimpleParametersWithBinderMetadata"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -1025,7 +1188,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_Parameters_SimpleTypes_SimpleModel_FromBody()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApiExplorerParameters/SimpleModelFromBody/5");
+        var response = await Client.GetAsync(
+            "http://localhost/ApiExplorerParameters/SimpleModelFromBody/5"
+        );
 
         var body = await response.Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
@@ -1080,7 +1245,10 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         Assert.Equal(BindingSource.Form.Id, productName.Source);
         Assert.Equal(typeof(string).FullName, productName.Type);
 
-        var shippingInstructions = Assert.Single(parameters, p => p.Name == "Comments.ShippingInstructions");
+        var shippingInstructions = Assert.Single(
+            parameters,
+            p => p.Name == "Comments.ShippingInstructions"
+        );
         Assert.Equal(BindingSource.Query.Id, shippingInstructions.Source);
         Assert.Equal(typeof(string).FullName, shippingInstructions.Type);
 
@@ -1118,7 +1286,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
             {
                 Assert.Equal("searchDay", parameter.Name);
                 Assert.Equal(nameof(DayOfWeek.Wednesday), parameter.DefaultValue);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -1155,7 +1324,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
             {
                 Assert.Equal("Name", parameter.Name);
                 Assert.False(parameter.IsRequired);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -1196,20 +1366,27 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     public async Task ApiExplorer_DoesNotListActionsSuppressedForPathMatching()
     {
         // Act
-        var body = await Client.GetStringAsync("ApiExplorerInboundOutbound/SuppressedForLinkGeneration");
+        var body = await Client.GetStringAsync(
+            "ApiExplorerInboundOutbound/SuppressedForLinkGeneration"
+        );
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
 
         // Assert
         var description = Assert.Single(result);
         Assert.Empty(description.ParameterDescriptions);
-        Assert.Equal("ApiExplorerInboundOutbound/SuppressedForLinkGeneration", description.RelativePath);
+        Assert.Equal(
+            "ApiExplorerInboundOutbound/SuppressedForLinkGeneration",
+            description.RelativePath
+        );
     }
 
     [Fact]
     public async Task ApiBehavior_AddsMultipartFormDataConsumesConstraint_ForActionsWithFormFileParameters()
     {
         // Act
-        var body = await Client.GetStringAsync("ApiExplorerApiController/ActionWithFormFileCollectionParameter");
+        var body = await Client.GetStringAsync(
+            "ApiExplorerApiController/ActionWithFormFileCollectionParameter"
+        );
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
 
         // Assert
@@ -1225,7 +1402,9 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         var expectedMediaTypes = new[] { "application/pdf" };
 
         // Act
-        var body = await Client.GetStringAsync("ApiExplorerApiController/ProducesWithUnsupportedContentType");
+        var body = await Client.GetStringAsync(
+            "ApiExplorerApiController/ProducesWithUnsupportedContentType"
+        );
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(body);
 
         // Assert
@@ -1237,23 +1416,33 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(typeof(Stream).FullName, responseType.ResponseType);
                 Assert.Equal(200, responseType.StatusCode);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Fact]
-    public Task ApiConvention_ForGetMethod_ReturningModel() => ApiConvention_ForGetMethod("GetProduct");
+    public Task ApiConvention_ForGetMethod_ReturningModel() =>
+        ApiConvention_ForGetMethod("GetProduct");
 
     [Fact]
-    public Task ApiConvention_ForGetMethod_ReturningTaskOfActionResultOfModel() => ApiConvention_ForGetMethod("GetTaskOfActionResultOfProduct");
+    public Task ApiConvention_ForGetMethod_ReturningTaskOfActionResultOfModel() =>
+        ApiConvention_ForGetMethod("GetTaskOfActionResultOfProduct");
 
     private async Task ApiConvention_ForGetMethod(string action)
     {
         // Arrange
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Act
         var response = await Client.GetStringAsync(
-            $"ApiExplorerResponseTypeWithApiConventionController/{action}");
+            $"ApiExplorerResponseTypeWithApiConventionController/{action}"
+        );
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(response);
 
         // Assert
@@ -1276,18 +1465,26 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(typeof(ProblemDetails).FullName, responseType.ResponseType);
                 Assert.Equal(404, responseType.StatusCode);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Fact]
     public async Task ApiConvention_ForGetMethodThatDoesNotMatchConvention()
     {
         // Arrange
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Act
         var response = await Client.GetStringAsync(
-            $"ApiExplorerResponseTypeWithApiConventionController/GetProducts");
+            $"ApiExplorerResponseTypeWithApiConventionController/GetProducts"
+        );
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(response);
 
         // Assert
@@ -1299,9 +1496,12 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
             {
                 Assert.Equal(typeof(IEnumerable<Product>).FullName, responseType.ResponseType);
                 Assert.Equal(200, responseType.StatusCode);
-                var actualMediaTypes = responseType.ResponseFormats.Select(r => r.MediaType).OrderBy(r => r);
+                var actualMediaTypes = responseType
+                    .ResponseFormats.Select(r => r.MediaType)
+                    .OrderBy(r => r);
                 Assert.Equal(expectedMediaTypes, actualMediaTypes);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -1313,7 +1513,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
         // Act
         var response = await Client.PostAsync(
             $"ApiExplorerResponseTypeWithApiConventionController/PostWithConventions",
-            new StringContent(string.Empty));
+            new StringContent(string.Empty)
+        );
         var responseBody = await response.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(responseBody);
 
@@ -1332,19 +1533,27 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(typeof(ProblemDetails).FullName, responseType.ResponseType);
                 Assert.Equal(403, responseType.StatusCode);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Fact]
     public async Task ApiConvention_ForPostMethodThatMatchesConvention()
     {
         // Arrange
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Act
         var response = await Client.PostAsync(
             $"ApiExplorerResponseTypeWithApiConventionController/PostTaskOfProduct",
-            new StringContent(string.Empty));
+            new StringContent(string.Empty)
+        );
         var responseBody = await response.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(responseBody);
 
@@ -1367,19 +1576,21 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(typeof(ProblemDetails).FullName, responseType.ResponseType);
                 Assert.Equal(400, responseType.StatusCode);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Fact]
     public async Task ApiConvention_ForPostActionWithProducesAttribute()
     {
         // Arrange
-        var expectedMediaTypes = new[] { "application/json", "text/json", };
+        var expectedMediaTypes = new[] { "application/json", "text/json" };
 
         // Act
         var response = await Client.PostAsync(
             $"ApiExplorerResponseTypeWithApiConventionController/PostWithProduces",
-            new StringContent(string.Empty));
+            new StringContent(string.Empty)
+        );
         var responseBody = await response.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(responseBody);
 
@@ -1402,19 +1613,27 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(typeof(ProblemDetails).FullName, responseType.ResponseType);
                 Assert.Equal(400, responseType.StatusCode);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Fact]
     public async Task ApiConvention_ForPutActionThatMatchesConvention()
     {
         // Arrange
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Act
         var response = await Client.PutAsync(
             $"ApiExplorerResponseTypeWithApiConventionController/Put",
-            new StringContent(string.Empty));
+            new StringContent(string.Empty)
+        );
         var responseBody = await response.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(responseBody);
 
@@ -1443,18 +1662,26 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(typeof(ProblemDetails).FullName, responseType.ResponseType);
                 Assert.Equal(404, responseType.StatusCode);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Fact]
     public async Task ApiConvention_ForDeleteActionThatMatchesConvention()
     {
         // Arrange
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Act
         var response = await Client.DeleteAsync(
-            $"ApiExplorerResponseTypeWithApiConventionController/DeleteProduct");
+            $"ApiExplorerResponseTypeWithApiConventionController/DeleteProduct"
+        );
         var responseBody = await response.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(responseBody);
 
@@ -1483,19 +1710,27 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(typeof(ProblemDetails).FullName, responseType.ResponseType);
                 Assert.Equal(404, responseType.StatusCode);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Fact]
     public async Task ApiConvention_ForActionWithApiConventionMethod()
     {
         // Arrange
-        var expectedMediaTypes = new[] { "application/json", "application/xml", "text/json", "text/xml" };
+        var expectedMediaTypes = new[]
+        {
+            "application/json",
+            "application/xml",
+            "text/json",
+            "text/xml",
+        };
 
         // Act
         var response = await Client.PostAsync(
             "ApiExplorerResponseTypeWithApiConventionController/PostItem",
-            new StringContent(string.Empty));
+            new StringContent(string.Empty)
+        );
         var responseBody = await response.EnsureSuccessStatusCode().Content.ReadAsStringAsync();
         var result = JsonConvert.DeserializeObject<List<ApiExplorerData>>(responseBody);
 
@@ -1514,7 +1749,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(typeof(ProblemDetails).FullName, responseType.ResponseType);
                 Assert.Equal(409, responseType.StatusCode);
                 Assert.Equal(expectedMediaTypes, GetSortedMediaTypes(responseType));
-            });
+            }
+        );
     }
 
     [Theory]
@@ -1537,13 +1773,14 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
                 Assert.Equal(type.FullName, responseType.ResponseType);
                 Assert.Equal(401, responseType.StatusCode);
                 Assert.False(responseType.IsDefaultResponse);
-            });
+            }
+        );
     }
 
     private IEnumerable<string> GetSortedMediaTypes(ApiExplorerResponseType apiResponseType)
     {
-        return apiResponseType.ResponseFormats
-            .OrderBy(format => format.MediaType)
+        return apiResponseType
+            .ResponseFormats.OrderBy(format => format.MediaType)
             .Select(format => format.MediaType);
     }
 
@@ -1554,13 +1791,16 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
 
         public string HttpMethod { get; set; }
 
-        public List<ApiExplorerParameterData> ParameterDescriptions { get; } = new List<ApiExplorerParameterData>();
+        public List<ApiExplorerParameterData> ParameterDescriptions { get; } =
+            new List<ApiExplorerParameterData>();
 
         public string RelativePath { get; set; }
 
-        public List<ApiExplorerResponseType> SupportedResponseTypes { get; } = new List<ApiExplorerResponseType>();
+        public List<ApiExplorerResponseType> SupportedResponseTypes { get; } =
+            new List<ApiExplorerResponseType>();
 
-        public List<ApiExplorerRequestFormat> SupportedRequestFormats { get; } = new List<ApiExplorerRequestFormat>();
+        public List<ApiExplorerRequestFormat> SupportedRequestFormats { get; } =
+            new List<ApiExplorerRequestFormat>();
     }
 
     // Used to serialize data between client and server
@@ -1592,8 +1832,8 @@ public class ApiExplorerTest : IClassFixture<MvcTestFixture<ApiExplorerWebSite.S
     // Used to serialize data between client and server
     private class ApiExplorerResponseType
     {
-        public IList<ApiExplorerResponseFormat> ResponseFormats { get; }
-            = new List<ApiExplorerResponseFormat>();
+        public IList<ApiExplorerResponseFormat> ResponseFormats { get; } =
+            new List<ApiExplorerResponseFormat>();
 
         public string ResponseType { get; set; }
 

@@ -41,41 +41,61 @@ public class InjectRequestHandler
         var bitness = new JObject();
         if (string.IsNullOrEmpty(rid))
         {
-            bitness.Add(new JProperty($"x64/{aspnetcoreV2Name}", new JObject(
-                new JProperty("rid", "win-x64"),
-                new JProperty("assetType", "native")
-            )));
-            bitness.Add(new JProperty($"x86/{aspnetcoreV2Name}", new JObject(
-                new JProperty("rid", "win-x86"),
-                new JProperty("assetType", "native")
-            )));
+            bitness.Add(
+                new JProperty(
+                    $"x64/{aspnetcoreV2Name}",
+                    new JObject(
+                        new JProperty("rid", "win-x64"),
+                        new JProperty("assetType", "native")
+                    )
+                )
+            );
+            bitness.Add(
+                new JProperty(
+                    $"x86/{aspnetcoreV2Name}",
+                    new JObject(
+                        new JProperty("rid", "win-x86"),
+                        new JProperty("assetType", "native")
+                    )
+                )
+            );
         }
         else
         {
-            bitness.Add(new JProperty(aspnetcoreV2Name, new JObject(
-                new JProperty("rid", rid),
-                new JProperty("assetType", "native")
-            )));
+            bitness.Add(
+                new JProperty(
+                    aspnetcoreV2Name,
+                    new JObject(new JProperty("rid", rid), new JProperty("assetType", "native"))
+                )
+            );
             var outputFolder = Path.GetDirectoryName(depsFile);
             var bitnessString = rid.Substring(rid.Length - 3, 3);
-            File.Copy(Path.Combine(outputFolder, bitnessString, aspnetcoreV2Name), Path.Combine(outputFolder, aspnetcoreV2Name), overwrite: true);
+            File.Copy(
+                Path.Combine(outputFolder, bitnessString, aspnetcoreV2Name),
+                Path.Combine(outputFolder, aspnetcoreV2Name),
+                overwrite: true
+            );
         }
 
-        targetLibrary =
-            new JProperty(libraryName, new JObject(
-                new JProperty("runtimeTargets", bitness)));
+        targetLibrary = new JProperty(
+            libraryName,
+            new JObject(new JProperty("runtimeTargets", bitness))
+        );
 
         target.AddFirst(targetLibrary);
 
         var library = libraries.Properties().FirstOrDefault(p => p.Name == libraryName);
         library?.Remove();
-        library =
-             new JProperty(libraryName, new JObject(
-                 new JProperty("type", "package"),
-                 new JProperty("serviceable", true),
-                 new JProperty("sha512", ""),
-                 new JProperty("path", libraryName),
-                 new JProperty("hashPath", "")));
+        library = new JProperty(
+            libraryName,
+            new JObject(
+                new JProperty("type", "package"),
+                new JProperty("serviceable", true),
+                new JProperty("sha512", ""),
+                new JProperty("path", libraryName),
+                new JProperty("hashPath", "")
+            )
+        );
         libraries.AddFirst(library);
 
         using (var file = File.CreateText(depsFile))

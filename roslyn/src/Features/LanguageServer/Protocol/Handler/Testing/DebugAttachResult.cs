@@ -7,7 +7,4 @@ using System.Runtime.Serialization;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Testing;
 
 [DataContract]
-internal record DebugAttachResult(
-    [property: DataMember(Name = "didAttach")] bool DidAttach
-);
-
+internal record DebugAttachResult([property: DataMember(Name = "didAttach")] bool DidAttach);

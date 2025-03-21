@@ -19,18 +19,54 @@ public class RouteCollectionTest
     [InlineData(@"Home/Index/23", "/Home/Index/23", false, false)]
     [InlineData(@"Home/Index/23", "/home/index/23/", true, true)]
     [InlineData(@"Home/Index/23", "/Home/Index/23/", false, true)]
-    [InlineData(@"Home/Index/23?Param1=ABC&Param2=Xyz", "/Home/Index/23/?Param1=ABC&Param2=Xyz", false, true)]
-    [InlineData(@"Home/Index/23?Param1=ABC&Param2=Xyz", "/Home/Index/23?Param1=ABC&Param2=Xyz", false, false)]
-    [InlineData(@"Home/Index/23?Param1=ABC&Param2=Xyz", "/home/index/23/?Param1=ABC&Param2=Xyz", true, true)]
-    [InlineData(@"Home/Index/23#Param1=ABC&Param2=Xyz", "/Home/Index/23/#Param1=ABC&Param2=Xyz", false, true)]
-    [InlineData(@"Home/Index/23#Param1=ABC&Param2=Xyz", "/home/index/23#Param1=ABC&Param2=Xyz", true, false)]
-    [InlineData(@"Home/Index/23/?Param1=ABC&Param2=Xyz", "/home/index/23/?Param1=ABC&Param2=Xyz", true, true)]
-    [InlineData(@"Home/Index/23/#Param1=ABC&Param2=Xyz", "/home/index/23/#Param1=ABC&Param2=Xyz", true, false)]
+    [InlineData(
+        @"Home/Index/23?Param1=ABC&Param2=Xyz",
+        "/Home/Index/23/?Param1=ABC&Param2=Xyz",
+        false,
+        true
+    )]
+    [InlineData(
+        @"Home/Index/23?Param1=ABC&Param2=Xyz",
+        "/Home/Index/23?Param1=ABC&Param2=Xyz",
+        false,
+        false
+    )]
+    [InlineData(
+        @"Home/Index/23?Param1=ABC&Param2=Xyz",
+        "/home/index/23/?Param1=ABC&Param2=Xyz",
+        true,
+        true
+    )]
+    [InlineData(
+        @"Home/Index/23#Param1=ABC&Param2=Xyz",
+        "/Home/Index/23/#Param1=ABC&Param2=Xyz",
+        false,
+        true
+    )]
+    [InlineData(
+        @"Home/Index/23#Param1=ABC&Param2=Xyz",
+        "/home/index/23#Param1=ABC&Param2=Xyz",
+        true,
+        false
+    )]
+    [InlineData(
+        @"Home/Index/23/?Param1=ABC&Param2=Xyz",
+        "/home/index/23/?Param1=ABC&Param2=Xyz",
+        true,
+        true
+    )]
+    [InlineData(
+        @"Home/Index/23/#Param1=ABC&Param2=Xyz",
+        "/home/index/23/#Param1=ABC&Param2=Xyz",
+        true,
+        false
+    )]
     public void GetVirtualPath_CanLowerCaseUrls_And_AppendTrailingSlash_BasedOnOptions(
         string returnUrl,
         string expectedUrl,
         bool lowercaseUrls,
-        bool appendTrailingSlash)
+        bool appendTrailingSlash
+    )
     {
         // Arrange
         var target = new Mock<IRouter>(MockBehavior.Strict);
@@ -43,7 +79,9 @@ public class RouteCollectionTest
         var virtualPathContext = CreateVirtualPathContext(
             options: GetRouteOptions(
                 lowerCaseUrls: lowercaseUrls,
-                appendTrailingSlash: appendTrailingSlash));
+                appendTrailingSlash: appendTrailingSlash
+            )
+        );
 
         // Act
         var pathData = routeCollection.GetVirtualPath(virtualPathContext);
@@ -61,7 +99,8 @@ public class RouteCollectionTest
     public void GetVirtualPath_DoesntLowerCaseUrls_Invariant(
         string returnUrl,
         string lowercaseUrl,
-        bool lowercaseUrls)
+        bool lowercaseUrls
+    )
     {
         // Arrange
         var target = new Mock<IRouter>(MockBehavior.Strict);
@@ -83,19 +122,69 @@ public class RouteCollectionTest
     }
 
     [Theory]
-    [InlineData(@"Home/Index/23?Param1=ABC&Param2=Xyz", "/Home/Index/23?Param1=ABC&Param2=Xyz", false, true, false)]
-    [InlineData(@"Home/Index/23?Param1=ABC&Param2=Xyz", "/Home/Index/23?Param1=ABC&Param2=Xyz", false, false, false)]
-    [InlineData(@"Home/Index/23?Param1=ABC&Param2=Xyz", "/home/index/23/?param1=abc&param2=xyz", true, true, true)]
-    [InlineData(@"Home/Index/23#Param1=ABC&Param2=Xyz", "/Home/Index/23/#Param1=ABC&Param2=Xyz", false, true, true)]
-    [InlineData(@"Home/Index/23#Param1=ABC&Param2=Xyz", "/home/index/23#Param1=ABC&Param2=Xyz", true, false, false)]
-    [InlineData(@"Home/Index/23/?Param1=ABC&Param2=Xyz", "/home/index/23/?param1=abc&param2=xyz", true, true, true)]
-    [InlineData(@"Home/Index/23/#Param1=ABC&Param2=Xyz", "/home/index/23/#Param1=ABC&Param2=Xyz", true, false, true)]
-    [InlineData(@"Home/Index/23/#Param1=ABC&Param2=Xyz", "/home/index/23/#param1=abc&param2=xyz", true, true, true)]
+    [InlineData(
+        @"Home/Index/23?Param1=ABC&Param2=Xyz",
+        "/Home/Index/23?Param1=ABC&Param2=Xyz",
+        false,
+        true,
+        false
+    )]
+    [InlineData(
+        @"Home/Index/23?Param1=ABC&Param2=Xyz",
+        "/Home/Index/23?Param1=ABC&Param2=Xyz",
+        false,
+        false,
+        false
+    )]
+    [InlineData(
+        @"Home/Index/23?Param1=ABC&Param2=Xyz",
+        "/home/index/23/?param1=abc&param2=xyz",
+        true,
+        true,
+        true
+    )]
+    [InlineData(
+        @"Home/Index/23#Param1=ABC&Param2=Xyz",
+        "/Home/Index/23/#Param1=ABC&Param2=Xyz",
+        false,
+        true,
+        true
+    )]
+    [InlineData(
+        @"Home/Index/23#Param1=ABC&Param2=Xyz",
+        "/home/index/23#Param1=ABC&Param2=Xyz",
+        true,
+        false,
+        false
+    )]
+    [InlineData(
+        @"Home/Index/23/?Param1=ABC&Param2=Xyz",
+        "/home/index/23/?param1=abc&param2=xyz",
+        true,
+        true,
+        true
+    )]
+    [InlineData(
+        @"Home/Index/23/#Param1=ABC&Param2=Xyz",
+        "/home/index/23/#Param1=ABC&Param2=Xyz",
+        true,
+        false,
+        true
+    )]
+    [InlineData(
+        @"Home/Index/23/#Param1=ABC&Param2=Xyz",
+        "/home/index/23/#param1=abc&param2=xyz",
+        true,
+        true,
+        true
+    )]
     public void GetVirtualPath_CanLowerCaseUrls_QueryStrings_BasedOnOptions(
         string returnUrl,
         string expectedUrl,
         bool lowercaseUrls,
-        bool lowercaseQueryStrings, bool appendTrailingSlash)
+        bool lowercaseQueryStrings,
+        bool appendTrailingSlash
+    )
     {
         // Arrange
         var target = new Mock<IRouter>(MockBehavior.Strict);
@@ -109,7 +198,9 @@ public class RouteCollectionTest
             options: GetRouteOptions(
                 lowerCaseUrls: lowercaseUrls,
                 lowercaseQueryStrings: lowercaseQueryStrings,
-                appendTrailingSlash: appendTrailingSlash));
+                appendTrailingSlash: appendTrailingSlash
+            )
+        );
 
         // Act
         var pathData = routeCollection.GetVirtualPath(virtualPathContext);
@@ -132,7 +223,8 @@ public class RouteCollectionTest
         var pathContext = CreateVirtualPathContext(
             pathContextValues,
             GetRouteOptions(),
-            routerName);
+            routerName
+        );
 
         var route = CreateTemplateRoute("{controller}", routerName, dataTokens);
         var routeCollection = new RouteCollection();
@@ -239,10 +331,13 @@ public class RouteCollectionTest
     public void NamedRouteTests_GetNamedRoute_ReturnsValue(bool lowercaseUrls, string expectedUrl)
     {
         // Arrange
-        var routeCollection = GetNestedRouteCollection(new string[] { "Route1", "Route2", "RouteName", "Route3" });
+        var routeCollection = GetNestedRouteCollection(
+            new string[] { "Route1", "Route2", "RouteName", "Route3" }
+        );
         var virtualPathContext = CreateVirtualPathContext(
             routeName: "RouteName",
-            options: GetRouteOptions(lowercaseUrls));
+            options: GetRouteOptions(lowercaseUrls)
+        );
 
         // Act
         var pathData = routeCollection.GetVirtualPath(virtualPathContext);
@@ -258,7 +353,9 @@ public class RouteCollectionTest
     public void NamedRouteTests_GetNamedRoute_RouteNotFound()
     {
         // Arrange
-        var routeCollection = GetNestedRouteCollection(new string[] { "Route1", "Route2", "Route3" });
+        var routeCollection = GetNestedRouteCollection(
+            new string[] { "Route1", "Route2", "Route3" }
+        );
         var virtualPathContext = CreateVirtualPathContext("NonExistantRoute");
 
         // Act
@@ -272,11 +369,16 @@ public class RouteCollectionTest
     public void NamedRouteTests_GetNamedRoute_AmbiguousRoutesInCollection_DoesNotThrowForUnambiguousRoute()
     {
         // Arrange
-        var routeCollection = GetNestedRouteCollection(new string[] { "Route1", "Route2", "Route3", "Route4" });
+        var routeCollection = GetNestedRouteCollection(
+            new string[] { "Route1", "Route2", "Route3", "Route4" }
+        );
 
         // Add Duplicate route.
         routeCollection.Add(CreateNamedRoute("Route3"));
-        var virtualPathContext = CreateVirtualPathContext(routeName: "Route1", options: GetRouteOptions(true));
+        var virtualPathContext = CreateVirtualPathContext(
+            routeName: "Route1",
+            options: GetRouteOptions(true)
+        );
 
         // Act
         var pathData = routeCollection.GetVirtualPath(virtualPathContext);
@@ -293,17 +395,25 @@ public class RouteCollectionTest
     {
         // Arrange
         var ambiguousRoute = "ambiguousRoute";
-        var routeCollection = GetNestedRouteCollection(new string[] { "Route1", "Route2", ambiguousRoute, "Route4" });
+        var routeCollection = GetNestedRouteCollection(
+            new string[] { "Route1", "Route2", ambiguousRoute, "Route4" }
+        );
 
         // Add Duplicate route.
         routeCollection.Add(CreateNamedRoute(ambiguousRoute));
-        var virtualPathContext = CreateVirtualPathContext(routeName: ambiguousRoute, options: GetRouteOptions());
+        var virtualPathContext = CreateVirtualPathContext(
+            routeName: ambiguousRoute,
+            options: GetRouteOptions()
+        );
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => routeCollection.GetVirtualPath(virtualPathContext));
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            routeCollection.GetVirtualPath(virtualPathContext)
+        );
         Assert.Equal(
             "The supplied route name 'ambiguousRoute' is ambiguous and matched more than one route.",
-            ex.Message);
+            ex.Message
+        );
     }
 
     [Fact]
@@ -322,8 +432,13 @@ public class RouteCollectionTest
         var virtualPathContext = CreateVirtualPathContext("Ambiguous");
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => routeCollection.GetVirtualPath(virtualPathContext));
-        Assert.Equal("The supplied route name 'Ambiguous' is ambiguous and matched more than one route.", ex.Message);
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            routeCollection.GetVirtualPath(virtualPathContext)
+        );
+        Assert.Equal(
+            "The supplied route name 'Ambiguous' is ambiguous and matched more than one route.",
+            ex.Message
+        );
     }
 
     // "Integration" tests for RouteCollection
@@ -332,43 +447,57 @@ public class RouteCollectionTest
     {
         get
         {
-            yield return new object[] {
-                    "{controller}/{action}",
-                    new RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } },
-                    "/home/index",
-                    true };
+            yield return new object[]
+            {
+                "{controller}/{action}",
+                new RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } },
+                "/home/index",
+                true,
+            };
 
-            yield return new object[] {
-                    "{controller}/{action}/",
-                    new RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } },
-                    "/Home/Index",
-                    false };
+            yield return new object[]
+            {
+                "{controller}/{action}/",
+                new RouteValueDictionary { { "controller", "Home" }, { "action", "Index" } },
+                "/Home/Index",
+                false,
+            };
 
-            yield return new object[] {
-                    "api/{action}/",
-                    new RouteValueDictionary { { "action", "Create" } },
-                    "/api/create",
-                    true };
+            yield return new object[]
+            {
+                "api/{action}/",
+                new RouteValueDictionary { { "action", "Create" } },
+                "/api/create",
+                true,
+            };
 
-            yield return new object[] {
-                    "api/{action}/{id}",
-                    new RouteValueDictionary {
-                        { "action", "Create" },
-                        { "id", "23" },
-                        { "Param1", "Value1" },
-                        { "Param2", "Value2" } },
-                    "/api/create/23?Param1=Value1&Param2=Value2",
-                    true };
+            yield return new object[]
+            {
+                "api/{action}/{id}",
+                new RouteValueDictionary
+                {
+                    { "action", "Create" },
+                    { "id", "23" },
+                    { "Param1", "Value1" },
+                    { "Param2", "Value2" },
+                },
+                "/api/create/23?Param1=Value1&Param2=Value2",
+                true,
+            };
 
-            yield return new object[] {
-                    "api/{action}/{id}",
-                    new RouteValueDictionary {
-                        { "action", "Create" },
-                        { "id", "23" },
-                        { "Param1", "Value1" },
-                        { "Param2", "Value2" } },
-                    "/api/Create/23?Param1=Value1&Param2=Value2",
-                    false };
+            yield return new object[]
+            {
+                "api/{action}/{id}",
+                new RouteValueDictionary
+                {
+                    { "action", "Create" },
+                    { "id", "23" },
+                    { "Param1", "Value1" },
+                    { "Param2", "Value2" },
+                },
+                "/api/Create/23?Param1=Value1&Param2=Value2",
+                false,
+            };
         }
     }
 
@@ -378,7 +507,8 @@ public class RouteCollectionTest
         string template,
         RouteValueDictionary values,
         string expectedUrl,
-        bool lowercaseUrls)
+        bool lowercaseUrls
+    )
     {
         // Arrange
         var routeCollection = new RouteCollection();
@@ -401,27 +531,31 @@ public class RouteCollectionTest
         {
             // Here 'area' segment doesn't have a value but the later segments have values. This is an invalid
             // route match and the url generation should look into the next available route in the collection.
-            yield return new object[] {
-                    new Route[]
-                    {
-                        CreateTemplateRoute("{area?}/{controller=Home}/{action=Index}/{id?}", "1"),
-                        CreateTemplateRoute("{controller=Home}/{action=Index}/{id?}", "2")
-                    },
-                    new RouteValueDictionary(new { controller = "Test", action = "Index" }),
-                    "/Test",
-                    "2" };
+            yield return new object[]
+            {
+                new Route[]
+                {
+                    CreateTemplateRoute("{area?}/{controller=Home}/{action=Index}/{id?}", "1"),
+                    CreateTemplateRoute("{controller=Home}/{action=Index}/{id?}", "2"),
+                },
+                new RouteValueDictionary(new { controller = "Test", action = "Index" }),
+                "/Test",
+                "2",
+            };
 
             // Here the segment 'a' is valid but 'b' is not as it would be empty. This would be an invalid route match, but
             // the route value of 'a' should still be present to be evaluated for the next available route.
-            yield return new object[] {
-                    new[]
-                    {
-                        CreateTemplateRoute("{a}/{b?}/{c}", "1"),
-                        CreateTemplateRoute("{a=Home}/{b=Index}", "2")
-                    },
-                    new RouteValueDictionary(new { a = "Test", c = "Foo" }),
-                    "/Test?c=Foo",
-                    "2" };
+            yield return new object[]
+            {
+                new[]
+                {
+                    CreateTemplateRoute("{a}/{b?}/{c}", "1"),
+                    CreateTemplateRoute("{a=Home}/{b=Index}", "2"),
+                },
+                new RouteValueDictionary(new { a = "Test", c = "Foo" }),
+                "/Test?c=Foo",
+                "2",
+            };
         }
     }
 
@@ -431,7 +565,8 @@ public class RouteCollectionTest
         Route[] routes,
         RouteValueDictionary routeValues,
         string expectedUrl,
-        string expectedRouteToMatch)
+        string expectedRouteToMatch
+    )
     {
         // Arrange
         var routeCollection = new RouteCollection();
@@ -483,11 +618,19 @@ public class RouteCollectionTest
         {
             yield return new object[] { null, null };
             yield return new object[] { new RouteValueDictionary(), null };
-            yield return new object[] { new RouteValueDictionary() { { "tokenKey", "tokenValue" } }, null };
+            yield return new object[]
+            {
+                new RouteValueDictionary() { { "tokenKey", "tokenValue" } },
+                null,
+            };
 
             yield return new object[] { null, "routerA" };
             yield return new object[] { new RouteValueDictionary(), "routerA" };
-            yield return new object[] { new RouteValueDictionary() { { "tokenKey", "tokenValue" } }, "routerA" };
+            yield return new object[]
+            {
+                new RouteValueDictionary() { { "tokenKey", "tokenValue" } },
+                "routerA",
+            };
         }
     }
 
@@ -532,7 +675,11 @@ public class RouteCollectionTest
         return routeCollection;
     }
 
-    private static INamedRouter CreateNamedRoute(string name, bool accept = false, string matchValue = null)
+    private static INamedRouter CreateNamedRoute(
+        string name,
+        bool accept = false,
+        string matchValue = null
+    )
     {
         if (matchValue == null)
         {
@@ -543,12 +690,11 @@ public class RouteCollectionTest
         target
             .Setup(e => e.GetVirtualPath(It.IsAny<VirtualPathContext>()))
             .Returns<VirtualPathContext>(c =>
-                c.RouteName == name ? new VirtualPathData(target.Object, matchValue) : null)
+                c.RouteName == name ? new VirtualPathData(target.Object, matchValue) : null
+            )
             .Verifiable();
 
-        target
-            .SetupGet(e => e.Name)
-            .Returns(name);
+        target.SetupGet(e => e.Name).Returns(name);
 
         target
             .Setup(e => e.RouteAsync(It.IsAny<RouteContext>()))
@@ -563,7 +709,8 @@ public class RouteCollectionTest
         string template,
         string routerName = null,
         RouteValueDictionary dataTokens = null,
-        IInlineConstraintResolver constraintResolver = null)
+        IInlineConstraintResolver constraintResolver = null
+    )
     {
         var target = new Mock<IRouter>(MockBehavior.Strict);
         target
@@ -582,13 +729,15 @@ public class RouteCollectionTest
             defaults: null,
             constraints: null,
             dataTokens: dataTokens,
-            inlineConstraintResolver: constraintResolver);
+            inlineConstraintResolver: constraintResolver
+        );
     }
 
     private static VirtualPathContext CreateVirtualPathContext(
         string routeName = null,
         ILoggerFactory loggerFactory = null,
-        Action<RouteOptions> options = null)
+        Action<RouteOptions> options = null
+    )
     {
         if (loggerFactory == null)
         {
@@ -615,7 +764,8 @@ public class RouteCollectionTest
     private static VirtualPathContext CreateVirtualPathContext(
         RouteValueDictionary values,
         Action<RouteOptions> options = null,
-        string routeName = null)
+        string routeName = null
+    )
     {
         var services = new ServiceCollection();
         services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
@@ -626,22 +776,21 @@ public class RouteCollectionTest
             services.Configure<RouteOptions>(options);
         }
 
-        var context = new DefaultHttpContext
-        {
-            RequestServices = services.BuildServiceProvider(),
-        };
+        var context = new DefaultHttpContext { RequestServices = services.BuildServiceProvider() };
 
         return new VirtualPathContext(
             context,
             ambientValues: null,
             values: values,
-            routeName: routeName);
+            routeName: routeName
+        );
     }
 
     private static RouteContext CreateRouteContext(
         string requestPath,
         ILoggerFactory loggerFactory = null,
-        RouteOptions options = null)
+        RouteOptions options = null
+    )
     {
         if (loggerFactory == null)
         {
@@ -660,9 +809,11 @@ public class RouteCollectionTest
         optionsAccessor.SetupGet(o => o.Value).Returns(options);
 
         var context = new Mock<HttpContext>(MockBehavior.Strict);
-        context.Setup(m => m.RequestServices.GetService(typeof(ILoggerFactory)))
+        context
+            .Setup(m => m.RequestServices.GetService(typeof(ILoggerFactory)))
             .Returns(loggerFactory);
-        context.Setup(m => m.RequestServices.GetService(typeof(IOptions<RouteOptions>)))
+        context
+            .Setup(m => m.RequestServices.GetService(typeof(IOptions<RouteOptions>)))
             .Returns(optionsAccessor.Object);
         context.SetupGet(c => c.Request).Returns(request.Object);
 
@@ -672,7 +823,8 @@ public class RouteCollectionTest
     private static Mock<IRouter> CreateRoute(
         bool accept = true,
         bool match = false,
-        string matchValue = "value")
+        string matchValue = "value"
+    )
     {
         var target = new Mock<IRouter>(MockBehavior.Strict);
         target
@@ -692,7 +844,8 @@ public class RouteCollectionTest
     private static Action<RouteOptions> GetRouteOptions(
         bool lowerCaseUrls = false,
         bool appendTrailingSlash = false,
-        bool lowercaseQueryStrings = false)
+        bool lowercaseQueryStrings = false
+    )
     {
         return (options) =>
         {

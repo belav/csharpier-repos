@@ -16,7 +16,13 @@ namespace System.Web.Helpers.Test
         [Fact]
         public void HelperResultConstructorNullTest()
         {
-            Assert.ThrowsArgumentNull(() => { var helper = new HelperResult(null); }, "action");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    var helper = new HelperResult(null);
+                },
+                "action"
+            );
         }
 
         [Fact]

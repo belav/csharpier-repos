@@ -25,11 +25,12 @@ namespace System.Reflection.Emit
         // Constructs a RuntimeEventBuilder.
         //
         internal RuntimeEventBuilder(
-            RuntimeModuleBuilder mod,               // the module containing this EventBuilder
-            string name,                            // Event name
-            EventAttributes attr,                   // event attribute such as Public, Private, and Protected defined above
-            RuntimeTypeBuilder type,                // containing type
-            int evToken)
+            RuntimeModuleBuilder mod, // the module containing this EventBuilder
+            string name, // Event name
+            EventAttributes attr, // event attribute such as Public, Private, and Protected defined above
+            RuntimeTypeBuilder type, // containing type
+            int evToken
+        )
         {
             m_name = name;
             m_module = mod;
@@ -45,7 +46,10 @@ namespace System.Reflection.Emit
             return m_evToken;
         }
 
-        private void SetMethodSemantics(MethodBuilder mdBuilder, MethodSemanticsAttributes semantics)
+        private void SetMethodSemantics(
+            MethodBuilder mdBuilder,
+            MethodSemanticsAttributes semantics
+        )
         {
             ArgumentNullException.ThrowIfNull(mdBuilder);
 
@@ -55,7 +59,8 @@ namespace System.Reflection.Emit
                 new QCallModule(ref module),
                 m_evToken,
                 semantics,
-                mdBuilder.MetadataToken);
+                mdBuilder.MetadataToken
+            );
         }
 
         protected override void SetAddOnMethodCore(MethodBuilder mdBuilder)
@@ -80,7 +85,10 @@ namespace System.Reflection.Emit
 
         // Use this function if client decides to form the custom attribute blob themselves
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             m_type.ThrowIfCreated();
 
@@ -88,11 +96,12 @@ namespace System.Reflection.Emit
                 m_module,
                 m_evToken,
                 m_module.GetMethodMetadataToken(con),
-                binaryAttribute);
+                binaryAttribute
+            );
         }
 
-        private readonly string m_name;         // The name of the event
-        private readonly int m_evToken;      // The token of this event
+        private readonly string m_name; // The name of the event
+        private readonly int m_evToken; // The token of this event
         private readonly RuntimeModuleBuilder m_module;
         private readonly EventAttributes m_attributes;
         private readonly RuntimeTypeBuilder m_type;

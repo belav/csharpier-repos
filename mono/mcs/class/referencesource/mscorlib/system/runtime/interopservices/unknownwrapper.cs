@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*=============================================================================
 **
@@ -13,12 +13,12 @@
 **
 =============================================================================*/
 
-namespace System.Runtime.InteropServices {
-   
+namespace System.Runtime.InteropServices
+{
     using System;
 
     [Serializable]
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public sealed class UnknownWrapper
     {
         public UnknownWrapper(Object obj)
@@ -26,12 +26,9 @@ namespace System.Runtime.InteropServices {
             m_WrappedObject = obj;
         }
 
-        public Object WrappedObject 
+        public Object WrappedObject
         {
-            get 
-            {
-                return m_WrappedObject;
-            }
+            get { return m_WrappedObject; }
         }
 
         private Object m_WrappedObject;

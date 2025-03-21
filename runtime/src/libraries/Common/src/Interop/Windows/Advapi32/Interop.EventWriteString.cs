@@ -12,6 +12,7 @@ internal static partial class Interop
             long registrationHandle,
             byte level,
             long keyword,
-            [MarshalAs(UnmanagedType.LPStr)] string msg);
+            [MarshalAs(UnmanagedType.LPStr)] string msg
+        );
     }
 }

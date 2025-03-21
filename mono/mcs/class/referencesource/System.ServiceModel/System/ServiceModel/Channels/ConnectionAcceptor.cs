@@ -6,14 +6,17 @@ namespace System.ServiceModel.Channels
 {
     using System.Diagnostics;
     using System.Runtime;
+    using System.Runtime.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Diagnostics.Application;
     using System.ServiceModel.Dispatcher;
     using System.Threading;
-    using System.Runtime.Diagnostics;
-    using System.ServiceModel.Diagnostics.Application;
 
-    delegate void ConnectionAvailableCallback(IConnection connection, Action connectionDequeuedCallback);
+    delegate void ConnectionAvailableCallback(
+        IConnection connection,
+        Action connectionDequeuedCallback
+    );
     delegate void ErrorCallback(Exception exception);
 
     class ConnectionAcceptor : IDisposable
@@ -30,20 +33,34 @@ namespace System.ServiceModel.Channels
         ConnectionAvailableCallback callback;
         ErrorCallback errorCallback;
 
-        public ConnectionAcceptor(IConnectionListener listener, int maxAccepts, int maxPendingConnections,
-            ConnectionAvailableCallback callback)
+        public ConnectionAcceptor(
+            IConnectionListener listener,
+            int maxAccepts,
+            int maxPendingConnections,
+            ConnectionAvailableCallback callback
+        )
             : this(listener, maxAccepts, maxPendingConnections, callback, null)
         {
             // empty
         }
 
-        public ConnectionAcceptor(IConnectionListener listener, int maxAccepts, int maxPendingConnections,
-            ConnectionAvailableCallback callback, ErrorCallback errorCallback)
+        public ConnectionAcceptor(
+            IConnectionListener listener,
+            int maxAccepts,
+            int maxPendingConnections,
+            ConnectionAvailableCallback callback,
+            ErrorCallback errorCallback
+        )
         {
             if (maxAccepts <= 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("maxAccepts", maxAccepts,
-                    SR.GetString(SR.ValueMustBePositive)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "maxAccepts",
+                        maxAccepts,
+                        SR.GetString(SR.ValueMustBePositive)
+                    )
+                );
             }
 
             Fx.Assert(maxPendingConnections > 0, "maxPendingConnections must be positive");
@@ -54,7 +71,9 @@ namespace System.ServiceModel.Channels
             this.callback = callback;
             this.errorCallback = errorCallback;
             this.onConnectionDequeued = new Action(OnConnectionDequeued);
-            this.acceptCompletedCallback = Fx.ThunkCallback(new AsyncCallback(AcceptCompletedCallback));
+            this.acceptCompletedCallback = Fx.ThunkCallback(
+                new AsyncCallback(AcceptCompletedCallback)
+            );
             this.scheduleAcceptCallback = new Action<object>(ScheduleAcceptCallback);
         }
 
@@ -94,7 +113,10 @@ namespace System.ServiceModel.Channels
                         }
                         catch (CommunicationException exception)
                         {
-                            DiagnosticUtility.TraceHandledException(exception, TraceEventType.Information);
+                            DiagnosticUtility.TraceHandledException(
+                                exception,
+                                TraceEventType.Information
+                            );
                         }
                         catch (Exception exception)
                         {
@@ -107,7 +129,10 @@ namespace System.ServiceModel.Channels
                                 // Since we're under a call to StartAccepting(), just throw the exception up the stack.
                                 throw;
                             }
-                            if ((errorCallback == null) && !ExceptionHandler.HandleTransportExceptionHelper(exception))
+                            if (
+                                (errorCallback == null)
+                                && !ExceptionHandler.HandleTransportExceptionHelper(exception)
+                            )
                             {
                                 throw;
                             }
@@ -175,15 +200,25 @@ namespace System.ServiceModel.Channels
                             {
                                 if (TD.MaxPendingConnectionsExceededIsEnabled())
                                 {
-                                    TD.MaxPendingConnectionsExceeded(SR.GetString(SR.TraceCodeMaxPendingConnectionsReached));
+                                    TD.MaxPendingConnectionsExceeded(
+                                        SR.GetString(SR.TraceCodeMaxPendingConnectionsReached)
+                                    );
                                 }
                                 if (DiagnosticUtility.ShouldTraceWarning)
                                 {
-                                    TraceUtility.TraceEvent(TraceEventType.Warning,
-                                        TraceCode.MaxPendingConnectionsReached, SR.GetString(SR.TraceCodeMaxPendingConnectionsReached),
-                                        new StringTraceRecord("MaxPendingConnections", maxPendingConnections.ToString(System.Globalization.CultureInfo.InvariantCulture)),
+                                    TraceUtility.TraceEvent(
+                                        TraceEventType.Warning,
+                                        TraceCode.MaxPendingConnectionsReached,
+                                        SR.GetString(SR.TraceCodeMaxPendingConnectionsReached),
+                                        new StringTraceRecord(
+                                            "MaxPendingConnections",
+                                            maxPendingConnections.ToString(
+                                                System.Globalization.CultureInfo.InvariantCulture
+                                            )
+                                        ),
                                         this,
-                                        null);
+                                        null
+                                    );
                                 }
                             }
                             else if (TD.PendingConnectionsRatioIsEnabled())
@@ -207,7 +242,10 @@ namespace System.ServiceModel.Channels
                     {
                         throw;
                     }
-                    if ((errorCallback == null) && !ExceptionHandler.HandleTransportExceptionHelper(exception))
+                    if (
+                        (errorCallback == null)
+                        && !ExceptionHandler.HandleTransportExceptionHelper(exception)
+                    )
                     {
                         throw;
                     }

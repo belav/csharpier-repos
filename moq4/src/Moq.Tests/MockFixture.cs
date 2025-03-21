@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 using System.Text;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -121,7 +120,9 @@ namespace Moq.Tests
         [Theory]
         [InlineData(DefaultValue.Custom)]
         [InlineData((DefaultValue)(-1))]
-        public void DefaultValue_cannot_be_set_to_anything_other_than_Empty_or_Mock(DefaultValue defaultValue)
+        public void DefaultValue_cannot_be_set_to_anything_other_than_Empty_or_Mock(
+            DefaultValue defaultValue
+        )
         {
             var mock = new Mock<object>();
 
@@ -166,7 +167,10 @@ namespace Moq.Tests
         public void DefaultValueProvider_when_custom_provider_then_DefaultValue_is_Custom()
         {
             var mock = new Mock<object>();
-            var customDefaultValueProvider = new Mock<DefaultValueProvider>() { CallBase = true }.Object;
+            var customDefaultValueProvider = new Mock<DefaultValueProvider>()
+            {
+                CallBase = true,
+            }.Object;
 
             mock.DefaultValueProvider = customDefaultValueProvider;
 
@@ -178,7 +182,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IComparable>();
 
-            Assert.Throws<ArgumentNullException>(() => mock.Setup((Expression<Action<IComparable>>)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                mock.Setup((Expression<Action<IComparable>>)null)
+            );
         }
 
         [Fact]
@@ -186,7 +192,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IComparable>();
 
-            Assert.Throws<ArgumentNullException>(() => mock.Setup((Expression<Func<IComparable, string>>)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                mock.Setup((Expression<Func<IComparable, string>>)null)
+            );
         }
 
         [Fact]
@@ -479,7 +487,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<ClassWithNoDefaultConstructor>(
                 () => new ClassWithNoDefaultConstructor("Hello", 26),
-                MockBehavior.Default);
+                MockBehavior.Default
+            );
 
             Assert.Equal("Hello", mock.Object.StringValue);
             Assert.Equal(26, mock.Object.IntValue);
@@ -491,7 +500,8 @@ namespace Moq.Tests
             var stringValue = new StringBuilder("Hello");
             var mock = new Mock<ClassWithNoDefaultConstructor>(
                 () => new ClassWithNoDefaultConstructor(stringValue.ToString(), 26),
-                MockBehavior.Default);
+                MockBehavior.Default
+            );
 
             Assert.Equal("Hello", mock.Object.StringValue);
             Assert.Equal(26, mock.Object.IntValue);
@@ -501,8 +511,13 @@ namespace Moq.Tests
         public void ConstructsObjectsWithCtorLambda_MemberAccess()
         {
             var mock = new Mock<ClassWithNoDefaultConstructor>(
-                () => new ClassWithNoDefaultConstructor(new FooOverrideEquals { Name = "Hello" }.Name, 26),
-                MockBehavior.Default);
+                () =>
+                    new ClassWithNoDefaultConstructor(
+                        new FooOverrideEquals { Name = "Hello" }.Name,
+                        26
+                    ),
+                MockBehavior.Default
+            );
 
             Assert.Equal("Hello", mock.Object.StringValue);
             Assert.Equal(26, mock.Object.IntValue);
@@ -513,7 +528,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<ClassWithNoDefaultConstructor>(
                 () => new ClassWithNoDefaultConstructor(new[] { "Hello" }[0], 26),
-                MockBehavior.Default);
+                MockBehavior.Default
+            );
 
             Assert.Equal("Hello", mock.Object.StringValue);
             Assert.Equal(26, mock.Object.IntValue);
@@ -524,7 +540,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<FooOverrideEquals>(
                 () => new FooOverrideEquals(),
-                MockBehavior.Default);
+                MockBehavior.Default
+            );
 
             Assert.Null(mock.Object.Name);
         }
@@ -537,9 +554,7 @@ namespace Moq.Tests
                 Console.WriteLine(new Mock<ClassWithNoDefaultConstructor>(25, true).Object);
                 Assert.Fail("Should have thrown an exception since constructor does not exist.");
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
 
         [Fact]
@@ -610,8 +625,7 @@ namespace Moq.Tests
 
             int? value = 0;
 
-            mock.SetupSet(foo => foo.Value = It.IsAny<int?>())
-                .Callback<int?>(i => value = i);
+            mock.SetupSet(foo => foo.Value = It.IsAny<int?>()).Callback<int?>(i => value = i);
 
             mock.Object.Value = 5;
 
@@ -718,8 +732,7 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            mock.SetupSet(foo => foo.Count = It.IsAny<int>())
-                .Throws<ArgumentOutOfRangeException>();
+            mock.SetupSet(foo => foo.Count = It.IsAny<int>()).Throws<ArgumentOutOfRangeException>();
             Assert.Throws<ArgumentOutOfRangeException>(() => mock.Object.Count = 5);
 
             mock.SetupSet(foo => foo.Count = It.IsInRange(1, 5, Range.Inclusive))
@@ -837,7 +850,10 @@ namespace Moq.Tests
             var mock = new Mock<IFoo>(MockBehavior.Strict);
             mock.SetupSet(m => m.Value = null);
 
-            Assert.Throws<MockException>(() => { mock.Object.Value = 5; });
+            Assert.Throws<MockException>(() =>
+            {
+                mock.Object.Value = 5;
+            });
 
             var ex = Assert.Throws<MockException>(() => mock.VerifyAll());
             Assert.True(ex.IsVerificationError);
@@ -854,7 +870,10 @@ namespace Moq.Tests
             var mock = new Mock<IFoo>(MockBehavior.Strict);
             mock.SetupSet(m => m.Value = 5);
 
-            Assert.Throws<MockException>(() => { mock.Object.Value = 6; });
+            Assert.Throws<MockException>(() =>
+            {
+                mock.Object.Value = 6;
+            });
         }
 
         [Fact]
@@ -864,9 +883,7 @@ namespace Moq.Tests
 
             bool called = false;
 
-            mock.SetupGet(x => x.Value)
-                .Callback(() => called = true)
-                .Returns(25);
+            mock.SetupGet(x => x.Value).Callback(() => called = true).Returns(25);
 
             Assert.Equal(25, mock.Object.Value);
             Assert.True(called);
@@ -918,10 +935,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            mock.SetupGet(foo => foo[0])
-                .Returns(1);
-            mock.SetupGet(foo => foo[1])
-                .Returns(2);
+            mock.SetupGet(foo => foo[0]).Returns(1);
+            mock.SetupGet(foo => foo[1]).Returns(2);
 
             Assert.Equal(1, mock.Object[0]);
             Assert.Equal(2, mock.Object[1]);
@@ -932,10 +947,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            mock.SetupGet(foo => foo.Value)
-                .Returns(1);
-            mock.Setup(foo => foo.Value)
-                .Returns(2);
+            mock.SetupGet(foo => foo.Value).Returns(1);
+            mock.Setup(foo => foo.Value).Returns(2);
 
             Assert.Equal(2, mock.Object.Value);
         }
@@ -994,7 +1007,9 @@ namespace Moq.Tests
             string argument = "foo";
 
             var target = new Mock<IParams>();
-            target.Setup(x => x.ExecuteArray(new string[] { argument, It.IsAny<string>() })).Returns(expected);
+            target
+                .Setup(x => x.ExecuteArray(new string[] { argument, It.IsAny<string>() }))
+                .Returns(expected);
 
             string ret = target.Object.ExecuteArray(new string[] { argument, "baz" });
             Assert.Null(ret);
@@ -1067,7 +1082,8 @@ namespace Moq.Tests
 
         public class Foo
         {
-            public Foo() : this(new Bar()) { }
+            public Foo()
+                : this(new Bar()) { }
 
             public Foo(IBar bar)
             {
@@ -1087,17 +1103,20 @@ namespace Moq.Tests
             string Value { get; set; }
         }
 
-        interface IDo { void Do(); }
+        interface IDo
+        {
+            void Do();
+        }
 
         public class Doer : IDo
         {
-            public void Do()
-            {
-            }
+            public void Do() { }
         }
 
         public sealed class FooSealed { }
+
         class FooService : IFooService { }
+
         interface IFooService { }
 
         public class FooWithPrivateSetter
@@ -1125,9 +1144,7 @@ namespace Moq.Tests
                 this.IntValue = intValue;
             }
 
-            public FooWithConstructors()
-            {
-            }
+            public FooWithConstructors() { }
 
             public override string ToString()
             {
@@ -1144,8 +1161,7 @@ namespace Moq.Tests
 
             public override bool Equals(object obj)
             {
-                return (obj is FooOverrideEquals) &&
-                    ((FooOverrideEquals)obj).Name == this.Name;
+                return (obj is FooOverrideEquals) && ((FooOverrideEquals)obj).Name == this.Name;
             }
 
             public override int GetHashCode()
@@ -1225,9 +1241,7 @@ namespace Moq.Tests
             new INewBar Bar { get; set; }
         }
 
-        public interface INewBar : IBar
-        {
-        }
+        public interface INewBar : IBar { }
 
         // Note that this test requires that there be no [assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
         // or similar defined in this test assembly. If some other test requires that internals be made
@@ -1266,6 +1280,7 @@ namespace Moq.Tests
             public class ClassWithAccessibleAndInaccessibleMethod
             {
                 public virtual void Public() => throw new InvalidOperationException("Public");
+
                 internal virtual void Internal() => throw new InvalidOperationException("Internal");
             }
         }
@@ -1303,9 +1318,7 @@ namespace Moq.Tests
         [Serializable]
         public class BadSerializable : ISerializable
         {
-            public void GetObjectData(SerializationInfo info, StreamingContext context)
-            {
-            }
+            public void GetObjectData(SerializationInfo info, StreamingContext context) { }
         }
 
         public interface IHaveBadSerializableProperty
@@ -1318,7 +1331,10 @@ namespace Moq.Tests
         [Fact]
         public void Accessing_property_of_bad_serializable_type_throws()
         {
-            var mock = new Mock<IHaveBadSerializableProperty>() { DefaultValue = DefaultValue.Mock };
+            var mock = new Mock<IHaveBadSerializableProperty>()
+            {
+                DefaultValue = DefaultValue.Mock,
+            };
 
             Assert.ThrowsAny<Exception>(() => mock.Object.BadSerializable);
         }
@@ -1326,7 +1342,10 @@ namespace Moq.Tests
         [Fact]
         public void Accessing_property_of_bad_serializable_type_after_SetupAllProperties_throws()
         {
-            var mock = new Mock<IHaveBadSerializableProperty>() { DefaultValue = DefaultValue.Mock };
+            var mock = new Mock<IHaveBadSerializableProperty>()
+            {
+                DefaultValue = DefaultValue.Mock,
+            };
             mock.SetupAllProperties();
 
             Assert.ThrowsAny<Exception>(() => mock.Object.BadSerializable);

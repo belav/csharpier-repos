@@ -16,7 +16,12 @@ internal sealed class ResponseCookiesWrapper : IResponseCookies, ITrackingConsen
     private bool? _isConsentNeeded;
     private bool? _hasConsent;
 
-    public ResponseCookiesWrapper(HttpContext context, CookiePolicyOptions options, IResponseCookiesFeature feature, ILogger logger)
+    public ResponseCookiesWrapper(
+        HttpContext context,
+        CookiePolicyOptions options,
+        IResponseCookiesFeature feature,
+        ILogger logger
+    )
     {
         Context = context;
         Feature = feature;
@@ -38,8 +43,10 @@ internal sealed class ResponseCookiesWrapper : IResponseCookies, ITrackingConsen
         {
             if (!_isConsentNeeded.HasValue)
             {
-                _isConsentNeeded = Options.CheckConsentNeeded == null ? false
-                    : Options.CheckConsentNeeded(Context);
+                _isConsentNeeded =
+                    Options.CheckConsentNeeded == null
+                        ? false
+                        : Options.CheckConsentNeeded(Context);
                 _logger.NeedsConsent(_isConsentNeeded.Value);
             }
 
@@ -54,7 +61,11 @@ internal sealed class ResponseCookiesWrapper : IResponseCookies, ITrackingConsen
             if (!_hasConsent.HasValue)
             {
                 var cookie = Context.Request.Cookies[Options.ConsentCookie.Name!];
-                _hasConsent = string.Equals(cookie, Options.ConsentCookieValue, StringComparison.Ordinal);
+                _hasConsent = string.Equals(
+                    cookie,
+                    Options.ConsentCookieValue,
+                    StringComparison.Ordinal
+                );
                 _logger.HasConsent(_hasConsent.Value);
             }
 
@@ -98,7 +109,9 @@ internal sealed class ResponseCookiesWrapper : IResponseCookies, ITrackingConsen
         Debug.Assert(key != null);
         ApplyAppendPolicy(ref key, ref value, options);
 
-        return options.CreateCookieHeader(Uri.EscapeDataString(key), Uri.EscapeDataString(value)).ToString();
+        return options
+            .CreateCookieHeader(Uri.EscapeDataString(key), Uri.EscapeDataString(value))
+            .ToString();
     }
 
     private bool CheckPolicyRequired()
@@ -135,7 +148,10 @@ internal sealed class ResponseCookiesWrapper : IResponseCookies, ITrackingConsen
         }
     }
 
-    public void Append(ReadOnlySpan<KeyValuePair<string, string>> keyValuePairs, CookieOptions options)
+    public void Append(
+        ReadOnlySpan<KeyValuePair<string, string>> keyValuePairs,
+        CookieOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(options);
 
@@ -267,7 +283,9 @@ internal sealed class ResponseCookiesWrapper : IResponseCookies, ITrackingConsen
             case HttpOnlyPolicy.None:
                 break;
             default:
-                throw new InvalidOperationException($"Unrecognized {nameof(HttpOnlyPolicy)} value {Options.HttpOnly.ToString()}");
+                throw new InvalidOperationException(
+                    $"Unrecognized {nameof(HttpOnlyPolicy)} value {Options.HttpOnly.ToString()}"
+                );
         }
     }
 }

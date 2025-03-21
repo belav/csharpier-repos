@@ -11,16 +11,16 @@ internal static partial class Interop
 
         internal enum RlimitResources : int
         {
-            RLIMIT_CPU      = 0,        // CPU limit in seconds
-            RLIMIT_FSIZE    = 1,        // Largest file that can be created, in bytes
-            RLIMIT_DATA     = 2,        // Maximum size of data segment, in bytes
-            RLIMIT_STACK    = 3,        // Maximum size of stack segment, in bytes
-            RLIMIT_CORE     = 4,        // Largest core file that can be created, in bytes
-            RLIMIT_AS       = 5,        // Address space limit
-            RLIMIT_RSS      = 6,        // Largest resident set size, in bytes
-            RLIMIT_MEMLOCK  = 7,        // Locked-in-memory address space
-            RLIMIT_NPROC    = 8,        // Number of processes
-            RLIMIT_NOFILE   = 9,        // Number of open files
+            RLIMIT_CPU = 0, // CPU limit in seconds
+            RLIMIT_FSIZE = 1, // Largest file that can be created, in bytes
+            RLIMIT_DATA = 2, // Maximum size of data segment, in bytes
+            RLIMIT_STACK = 3, // Maximum size of stack segment, in bytes
+            RLIMIT_CORE = 4, // Largest core file that can be created, in bytes
+            RLIMIT_AS = 5, // Address space limit
+            RLIMIT_RSS = 6, // Largest resident set size, in bytes
+            RLIMIT_MEMLOCK = 7, // Locked-in-memory address space
+            RLIMIT_NPROC = 8, // Number of processes
+            RLIMIT_NOFILE = 9, // Number of open files
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -30,10 +30,18 @@ internal static partial class Interop
             internal ulong MaximumLimit;
         }
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_GetRLimit", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_GetRLimit",
+            SetLastError = true
+        )]
         internal static partial int GetRLimit(RlimitResources resourceType, out RLimit limits);
 
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SetRLimit", SetLastError = true)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_SetRLimit",
+            SetLastError = true
+        )]
         internal static partial int SetRLimit(RlimitResources resourceType, ref RLimit limits);
     }
 }

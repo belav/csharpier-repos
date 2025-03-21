@@ -66,8 +66,7 @@ namespace ILCompiler.DependencyAnalysis.X64
 
         public void EmitLEA(Register reg, ref AddrMode addrMode)
         {
-            Debug.Assert(addrMode.Size != AddrModeSize.Int8 &&
-                addrMode.Size != AddrModeSize.Int16);
+            Debug.Assert(addrMode.Size != AddrModeSize.Int8 && addrMode.Size != AddrModeSize.Int16);
             EmitIndirInstruction(0x8D, reg, ref addrMode);
         }
 
@@ -75,7 +74,11 @@ namespace ILCompiler.DependencyAnalysis.X64
         {
             if (addrMode.Size == AddrModeSize.Int16)
                 Builder.EmitByte(0x66);
-            EmitIndirInstruction((byte)((addrMode.Size != AddrModeSize.Int8) ? 0x83 : 0x80), 0x7, ref addrMode);
+            EmitIndirInstruction(
+                (byte)((addrMode.Size != AddrModeSize.Int8) ? 0x83 : 0x80),
+                0x7,
+                ref addrMode
+            );
             Builder.EmitByte((byte)immediate);
         }
 
@@ -83,7 +86,11 @@ namespace ILCompiler.DependencyAnalysis.X64
         {
             if (addrMode.Size == AddrModeSize.Int16)
                 Builder.EmitByte(0x66);
-            EmitIndirInstruction((byte)((addrMode.Size != AddrModeSize.Int8) ? 0x83 : 0x80), (byte)0, ref addrMode);
+            EmitIndirInstruction(
+                (byte)((addrMode.Size != AddrModeSize.Int8) ? 0x83 : 0x80),
+                (byte)0,
+                ref addrMode
+            );
             Builder.EmitByte((byte)immediate);
         }
 
@@ -99,7 +106,6 @@ namespace ILCompiler.DependencyAnalysis.X64
             {
                 Builder.EmitByte(0xE9);
                 Builder.EmitReloc(symbol, RelocType.IMAGE_REL_BASED_REL32);
-
             }
         }
 
@@ -190,7 +196,13 @@ namespace ILCompiler.DependencyAnalysis.X64
 
         public void EmitCompareToZero(Register reg)
         {
-            AddrMode rexAddrMode = new AddrMode(Register.RegDirect | reg, null, 0, 0, AddrModeSize.Int64);
+            AddrMode rexAddrMode = new AddrMode(
+                Register.RegDirect | reg,
+                null,
+                0,
+                0,
+                AddrModeSize.Int64
+            );
             EmitIndirInstructionSize(0x84, reg, ref rexAddrMode);
         }
 
@@ -270,8 +282,8 @@ namespace ILCompiler.DependencyAnalysis.X64
                     //                    emitSibByte = (addrMode.m_indexReg != MDIL_REG_NO_INDEX);
                     //#endif
 
-                    modRM &= 0x38;    // set Mod bits to 00 and clear out base reg
-                    offsetSize = 4;   // this forces 32-bit displacement
+                    modRM &= 0x38; // set Mod bits to 00 and clear out base reg
+                    offsetSize = 4; // this forces 32-bit displacement
 
                     if (emitSibByte)
                     {
@@ -302,7 +314,13 @@ namespace ILCompiler.DependencyAnalysis.X64
 
                     int indexRegAsInt = (int)(addrMode.IndexReg ?? Register.RSP);
 
-                    Builder.EmitByte((byte)((addrMode.Scale << 6) + ((indexRegAsInt & 0x07) << 3) + ((int)sibByteBaseRegister & 0x07)));
+                    Builder.EmitByte(
+                        (byte)(
+                            (addrMode.Scale << 6)
+                            + ((indexRegAsInt & 0x07) << 3)
+                            + ((int)sibByteBaseRegister & 0x07)
+                        )
+                    );
                 }
                 EmitImmediate(addrMode.Offset, offsetSize);
             }
@@ -346,14 +364,21 @@ namespace ILCompiler.DependencyAnalysis.X64
             }
 
             // Is the index register one of the new ones?
-            if (addrMode.IndexReg.HasValue && addrMode.IndexReg.Value >= Register.R8 && addrMode.IndexReg.Value <= Register.R15)
+            if (
+                addrMode.IndexReg.HasValue
+                && addrMode.IndexReg.Value >= Register.R8
+                && addrMode.IndexReg.Value <= Register.R15
+            )
             {
                 rexPrefix |= 0x42; // REX.X - extension of the SIB index field
             }
 
             // Is the base register one of the new ones?
-            if (addrMode.BaseReg >= Register.R8 && addrMode.BaseReg <= Register.R15
-               || addrMode.BaseReg >= (int)Register.R8 + Register.RegDirect && addrMode.BaseReg <= (int)Register.R15 + Register.RegDirect)
+            if (
+                addrMode.BaseReg >= Register.R8 && addrMode.BaseReg <= Register.R15
+                || addrMode.BaseReg >= (int)Register.R8 + Register.RegDirect
+                    && addrMode.BaseReg <= (int)Register.R15 + Register.RegDirect
+            )
             {
                 rexPrefix |= 0x41; // REX.WB (Wide, extended Base)
             }
@@ -396,7 +421,11 @@ namespace ILCompiler.DependencyAnalysis.X64
             Debug.Assert(addrMode.Size != 0);
             if (addrMode.Size == AddrModeSize.Int16)
                 Builder.EmitByte(0x66);
-            EmitIndirInstruction(opcode + ((addrMode.Size != AddrModeSize.Int8) ? 1 : 0), dstReg, ref addrMode);
+            EmitIndirInstruction(
+                opcode + ((addrMode.Size != AddrModeSize.Int8) ? 1 : 0),
+                dstReg,
+                ref addrMode
+            );
         }
     }
 }

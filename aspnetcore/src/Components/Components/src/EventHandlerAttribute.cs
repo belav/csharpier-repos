@@ -14,9 +14,8 @@ public sealed class EventHandlerAttribute : Attribute
     /// </summary>
     /// <param name="attributeName"></param>
     /// <param name="eventArgsType"></param>
-    public EventHandlerAttribute(string attributeName, Type eventArgsType) : this(attributeName, eventArgsType, false, false)
-    {
-    }
+    public EventHandlerAttribute(string attributeName, Type eventArgsType)
+        : this(attributeName, eventArgsType, false, false) { }
 
     /// <summary>
     /// Constructs an instance of <see cref="EventHandlerAttribute"/>.
@@ -25,7 +24,12 @@ public sealed class EventHandlerAttribute : Attribute
     /// <param name="eventArgsType"></param>
     /// <param name="enableStopPropagation"></param>
     /// <param name="enablePreventDefault"></param>
-    public EventHandlerAttribute(string attributeName, Type eventArgsType, bool enableStopPropagation, bool enablePreventDefault)
+    public EventHandlerAttribute(
+        string attributeName,
+        Type eventArgsType,
+        bool enableStopPropagation,
+        bool enablePreventDefault
+    )
     {
         ArgumentNullException.ThrowIfNull(attributeName);
         ArgumentNullException.ThrowIfNull(eventArgsType);

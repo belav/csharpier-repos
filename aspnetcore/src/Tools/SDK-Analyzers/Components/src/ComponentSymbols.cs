@@ -15,28 +15,36 @@ internal sealed class ComponentSymbols
             throw new ArgumentNullException(nameof(compilation));
         }
 
-        var parameterAttribute = compilation.GetTypeByMetadataName(ComponentsApi.ParameterAttribute.MetadataName);
+        var parameterAttribute = compilation.GetTypeByMetadataName(
+            ComponentsApi.ParameterAttribute.MetadataName
+        );
         if (parameterAttribute == null)
         {
             symbols = null;
             return false;
         }
 
-        var cascadingParameterAttribute = compilation.GetTypeByMetadataName(ComponentsApi.CascadingParameterAttribute.MetadataName);
+        var cascadingParameterAttribute = compilation.GetTypeByMetadataName(
+            ComponentsApi.CascadingParameterAttribute.MetadataName
+        );
         if (cascadingParameterAttribute == null)
         {
             symbols = null;
             return false;
         }
 
-        var icomponentType = compilation.GetTypeByMetadataName(ComponentsApi.IComponent.MetadataName);
+        var icomponentType = compilation.GetTypeByMetadataName(
+            ComponentsApi.IComponent.MetadataName
+        );
         if (icomponentType == null)
         {
             symbols = null;
             return false;
         }
 
-        var dictionary = compilation.GetTypeByMetadataName("System.Collections.Generic.Dictionary`2");
+        var dictionary = compilation.GetTypeByMetadataName(
+            "System.Collections.Generic.Dictionary`2"
+        );
         var @string = compilation.GetSpecialType(SpecialType.System_String);
         var @object = compilation.GetSpecialType(SpecialType.System_Object);
         if (dictionary == null || @string == null || @object == null)
@@ -51,7 +59,8 @@ internal sealed class ComponentSymbols
             parameterAttribute,
             cascadingParameterAttribute,
             parameterCaptureUnmatchedValuesRuntimeType,
-            icomponentType);
+            icomponentType
+        );
         return true;
     }
 
@@ -59,7 +68,8 @@ internal sealed class ComponentSymbols
         INamedTypeSymbol parameterAttribute,
         INamedTypeSymbol cascadingParameterAttribute,
         INamedTypeSymbol parameterCaptureUnmatchedValuesRuntimeType,
-        INamedTypeSymbol icomponentType)
+        INamedTypeSymbol icomponentType
+    )
     {
         ParameterAttribute = parameterAttribute;
         CascadingParameterAttribute = cascadingParameterAttribute;

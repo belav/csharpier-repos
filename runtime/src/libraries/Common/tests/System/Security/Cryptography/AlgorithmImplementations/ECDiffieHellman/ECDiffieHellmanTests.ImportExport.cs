@@ -16,8 +16,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         internal static bool ECDsa224Available =>
             ECDiffieHellmanFactory.IsCurveValid(new Oid(ECDSA_P224_OID_VALUE));
 
-        internal static bool CanDeriveNewPublicKey { get; }
-            = EcDiffieHellman.Tests.ECDiffieHellmanFactory.CanDeriveNewPublicKey;
+        internal static bool CanDeriveNewPublicKey { get; } =
+            EcDiffieHellman.Tests.ECDiffieHellmanFactory.CanDeriveNewPublicKey;
 
         [Theory, MemberData(nameof(TestCurvesFull))]
         public static void TestNamedCurves(CurveDef curveDef)
@@ -92,7 +92,11 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 ECParameters ecdh1ExplicitParameters = ecdh1Named.ExportExplicitParameters(true);
 
                 using (ECDiffieHellman ecdh1Explicit = ECDiffieHellmanFactory.Create())
-                using (ECDiffieHellman ecdh2 = ECDiffieHellmanFactory.Create(ecdh1ExplicitParameters.Curve))
+                using (
+                    ECDiffieHellman ecdh2 = ECDiffieHellmanFactory.Create(
+                        ecdh1ExplicitParameters.Curve
+                    )
+                )
                 {
                     ecdh1Explicit.ImportParameters(ecdh1ExplicitParameters);
 
@@ -102,18 +106,45 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                     {
                         HashAlgorithmName hash = HashAlgorithmName.SHA256;
 
-                        byte[] ech1Named_ecdh1Named = ecdh1Named.DeriveKeyFromHash(ecdh1NamedPub, hash);
-                        byte[] ech1Named_ecdh1Named2 = ecdh1Named.DeriveKeyFromHash(ecdh1NamedPub, hash);
-                        byte[] ech1Named_ecdh1Explicit = ecdh1Named.DeriveKeyFromHash(ecdh1ExplicitPub, hash);
-                        byte[] ech1Named_ecdh2Explicit = ecdh1Named.DeriveKeyFromHash(ecdh2Pub, hash);
+                        byte[] ech1Named_ecdh1Named = ecdh1Named.DeriveKeyFromHash(
+                            ecdh1NamedPub,
+                            hash
+                        );
+                        byte[] ech1Named_ecdh1Named2 = ecdh1Named.DeriveKeyFromHash(
+                            ecdh1NamedPub,
+                            hash
+                        );
+                        byte[] ech1Named_ecdh1Explicit = ecdh1Named.DeriveKeyFromHash(
+                            ecdh1ExplicitPub,
+                            hash
+                        );
+                        byte[] ech1Named_ecdh2Explicit = ecdh1Named.DeriveKeyFromHash(
+                            ecdh2Pub,
+                            hash
+                        );
 
-                        byte[] ecdh1Explicit_ecdh1Named = ecdh1Explicit.DeriveKeyFromHash(ecdh1NamedPub, hash);
-                        byte[] ecdh1Explicit_ecdh1Explicit = ecdh1Explicit.DeriveKeyFromHash(ecdh1ExplicitPub, hash);
-                        byte[] ecdh1Explicit_ecdh1Explicit2 = ecdh1Explicit.DeriveKeyFromHash(ecdh1ExplicitPub, hash);
-                        byte[] ecdh1Explicit_ecdh2Explicit = ecdh1Explicit.DeriveKeyFromHash(ecdh2Pub, hash);
+                        byte[] ecdh1Explicit_ecdh1Named = ecdh1Explicit.DeriveKeyFromHash(
+                            ecdh1NamedPub,
+                            hash
+                        );
+                        byte[] ecdh1Explicit_ecdh1Explicit = ecdh1Explicit.DeriveKeyFromHash(
+                            ecdh1ExplicitPub,
+                            hash
+                        );
+                        byte[] ecdh1Explicit_ecdh1Explicit2 = ecdh1Explicit.DeriveKeyFromHash(
+                            ecdh1ExplicitPub,
+                            hash
+                        );
+                        byte[] ecdh1Explicit_ecdh2Explicit = ecdh1Explicit.DeriveKeyFromHash(
+                            ecdh2Pub,
+                            hash
+                        );
 
                         byte[] ecdh2_ecdh1Named = ecdh2.DeriveKeyFromHash(ecdh1NamedPub, hash);
-                        byte[] ecdh2_ecdh1Explicit = ecdh2.DeriveKeyFromHash(ecdh1ExplicitPub, hash);
+                        byte[] ecdh2_ecdh1Explicit = ecdh2.DeriveKeyFromHash(
+                            ecdh1ExplicitPub,
+                            hash
+                        );
                         byte[] ecdh2_ecdh2Explicit = ecdh2.DeriveKeyFromHash(ecdh2Pub, hash);
                         byte[] ecdh2_ecdh2Explicit2 = ecdh2.DeriveKeyFromHash(ecdh2Pub, hash);
 
@@ -133,11 +164,17 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         [Fact]
         public static void TestNamedCurveNegative()
         {
-            Assert.Throws<PlatformNotSupportedException>(
-                () => ECDiffieHellmanFactory.Create(ECCurve.CreateFromFriendlyName("Invalid")).ExportExplicitParameters(false));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                ECDiffieHellmanFactory
+                    .Create(ECCurve.CreateFromFriendlyName("Invalid"))
+                    .ExportExplicitParameters(false)
+            );
 
-            Assert.Throws<PlatformNotSupportedException>(
-                () => ECDiffieHellmanFactory.Create(ECCurve.CreateFromValue("Invalid")).ExportExplicitParameters(false));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                ECDiffieHellmanFactory
+                    .Create(ECCurve.CreateFromValue("Invalid"))
+                    .ExportExplicitParameters(false)
+            );
         }
 
         [Fact]
@@ -165,7 +202,6 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             {
                 return;
             }
-
             unchecked
             {
                 using (ECDiffieHellman ec = ECDiffieHellmanFactory.Create())
@@ -175,38 +211,65 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                     ec.ImportParameters(p);
 
                     ECParameters temp = p;
-                    temp.Q.X = null; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.X = new byte[] { }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.X = new byte[1] { 0x10 }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.X = (byte[])p.Q.X.Clone(); --temp.Q.X[0]; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.X = null;
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.X = new byte[] { };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.X = new byte[1] { 0x10 };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.X = (byte[])p.Q.X.Clone();
+                    --temp.Q.X[0];
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
 
                     temp = p;
-                    temp.Q.Y = null; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.Y = new byte[] { }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.Y = new byte[1] { 0x10 }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.Y = (byte[])p.Q.Y.Clone(); --temp.Q.Y[0]; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.Y = null;
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.Y = new byte[] { };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.Y = new byte[1] { 0x10 };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.Y = (byte[])p.Q.Y.Clone();
+                    --temp.Q.Y[0];
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
 
                     temp = p;
-                    temp.Curve.A = null; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.A = new byte[] { }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.A = new byte[1] { 0x10 }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.A = (byte[])p.Curve.A.Clone(); --temp.Curve.A[0]; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.A = null;
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.A = new byte[] { };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.A = new byte[1] { 0x10 };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.A = (byte[])p.Curve.A.Clone();
+                    --temp.Curve.A[0];
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
 
                     temp = p;
-                    temp.Curve.B = null; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.B = new byte[] { }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.B = new byte[1] { 0x10 }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.B = (byte[])p.Curve.B.Clone(); --temp.Curve.B[0]; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.B = null;
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.B = new byte[] { };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.B = new byte[1] { 0x10 };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.B = (byte[])p.Curve.B.Clone();
+                    --temp.Curve.B[0];
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
 
                     temp = p;
-                    temp.Curve.Order = null; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.Order = new byte[] { }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.Order = null;
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.Order = new byte[] { };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
 
                     temp = p;
-                    temp.Curve.Prime = null; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.Prime = new byte[] { }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.Prime = new byte[1] { 0x10 }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Curve.Prime = (byte[])p.Curve.Prime.Clone(); --temp.Curve.Prime[0]; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.Prime = null;
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.Prime = new byte[] { };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.Prime = new byte[1] { 0x10 };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Curve.Prime = (byte[])p.Curve.Prime.Clone();
+                    --temp.Curve.Prime[0];
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
                 }
             }
         }
@@ -235,7 +298,9 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows/* "parameters.Curve.Hash doesn't round trip on Unix." */)]
+        [PlatformSpecific(
+            TestPlatforms.Windows /* "parameters.Curve.Hash doesn't round trip on Unix." */
+        )]
         public static void ImportExplicitWithHashButNoSeed()
         {
             if (!ECDiffieHellmanFactory.ExplicitCurvesSupported)
@@ -265,7 +330,6 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             {
                 return;
             }
-
             unchecked
             {
                 using (ECDiffieHellman ec = ECDiffieHellmanFactory.Create())
@@ -277,18 +341,31 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                     ec.ImportParameters(p);
 
                     ECParameters temp = p;
-                    temp.Q.X = null; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.X = new byte[] { }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.X = new byte[1] { 0x10 }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.X = (byte[])p.Q.X.Clone(); temp.Q.X[0]--; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.X = null;
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.X = new byte[] { };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.X = new byte[1] { 0x10 };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.X = (byte[])p.Q.X.Clone();
+                    temp.Q.X[0]--;
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
 
                     temp = p;
-                    temp.Q.Y = null; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.Y = new byte[] { }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.Y = new byte[1] { 0x10 }; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
-                    temp.Q.Y = (byte[])p.Q.Y.Clone(); temp.Q.Y[0]--; Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.Y = null;
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.Y = new byte[] { };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.Y = new byte[1] { 0x10 };
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
+                    temp.Q.Y = (byte[])p.Q.Y.Clone();
+                    temp.Q.Y[0]--;
+                    Assert.ThrowsAny<CryptographicException>(() => ec.ImportParameters(temp));
 
-                    temp = p; temp.Curve = ECCurve.CreateFromOid(new Oid("Invalid", "Invalid")); Assert.ThrowsAny<PlatformNotSupportedException>(() => ec.ImportParameters(temp));
+                    temp = p;
+                    temp.Curve = ECCurve.CreateFromOid(new Oid("Invalid", "Invalid"));
+                    Assert.ThrowsAny<PlatformNotSupportedException>(() => ec.ImportParameters(temp)
+                    );
                 }
             }
         }
@@ -328,18 +405,17 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             {
                 ECParameters param = EccTestData.GetNistP256ExplicitTestData();
 
-                Assert.Throws<PlatformNotSupportedException>(
-                    () =>
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                {
+                    try
                     {
-                        try
-                        {
-                            ecdh.ImportParameters(param);
-                        }
-                        catch (CryptographicException e)
-                        {
-                            throw new PlatformNotSupportedException("Converting exception", e);
-                        }
-                    });
+                        ecdh.ImportParameters(param);
+                    }
+                    catch (CryptographicException e)
+                    {
+                        throw new PlatformNotSupportedException("Converting exception", e);
+                    }
+                });
             }
         }
 
@@ -367,10 +443,13 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 Curve = ECCurve.NamedCurves.nistP521,
                 Q =
                 {
-                    X = "00d45615ed5d37fde699610a62cd43ba76bedd8f85ed31005fe00d6450fbbd101291abd96d4945a8b57bc73b3fe9f4671105309ec9b6879d0551d930dac8ba45d255".HexToByteArray(),
-                    Y = "01425332844e592b440c0027972ad1526431c06732df19cd46a242172d4dd67c2c8c99dfc22e49949a56cf90c6473635ce82f25b33682fb19bc33bd910ed8ce3a7fa".HexToByteArray(),
+                    X =
+                        "00d45615ed5d37fde699610a62cd43ba76bedd8f85ed31005fe00d6450fbbd101291abd96d4945a8b57bc73b3fe9f4671105309ec9b6879d0551d930dac8ba45d255".HexToByteArray(),
+                    Y =
+                        "01425332844e592b440c0027972ad1526431c06732df19cd46a242172d4dd67c2c8c99dfc22e49949a56cf90c6473635ce82f25b33682fb19bc33bd910ed8ce3a7fa".HexToByteArray(),
                 },
-                D = "00816f19c1fb10ef94d4a1d81c156ec3d1de08b66761f03f06ee4bb9dcebbbfe1eaa1ed49a6a990838d8ed318c14d74cc872f95d05d07ad50f621ceb620cd905cfb8".HexToByteArray(),
+                D =
+                    "00816f19c1fb10ef94d4a1d81c156ec3d1de08b66761f03f06ee4bb9dcebbbfe1eaa1ed49a6a990838d8ed318c14d74cc872f95d05d07ad50f621ceb620cd905cfb8".HexToByteArray(),
             };
 
             using (ECDiffieHellman iut = ECDiffieHellmanFactory.Create())
@@ -383,12 +462,16 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
 
                 if (ECDiffieHellmanFactory.ExplicitCurvesSupported)
                 {
-                    Assert.ThrowsAny<CryptographicException>(() => cavs.ExportExplicitParameters(true));
+                    Assert.ThrowsAny<CryptographicException>(() =>
+                        cavs.ExportExplicitParameters(true)
+                    );
                 }
 
                 using (ECDiffieHellmanPublicKey iutPublic = iut.PublicKey)
                 {
-                    Assert.ThrowsAny<CryptographicException>(() => cavs.DeriveKeyFromHash(iutPublic, HashAlgorithmName.SHA256));
+                    Assert.ThrowsAny<CryptographicException>(() =>
+                        cavs.DeriveKeyFromHash(iutPublic, HashAlgorithmName.SHA256)
+                    );
                 }
             }
         }
@@ -396,14 +479,17 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         [ConditionalFact(nameof(CanDeriveNewPublicKey))]
         public static void ImportFromPrivateOnlyKey()
         {
-            byte[] expectedX = "00d45615ed5d37fde699610a62cd43ba76bedd8f85ed31005fe00d6450fbbd101291abd96d4945a8b57bc73b3fe9f4671105309ec9b6879d0551d930dac8ba45d255".HexToByteArray();
-            byte[] expectedY = "01425332844e592b440c0027972ad1526431c06732df19cd46a242172d4dd67c2c8c99dfc22e49949a56cf90c6473635ce82f25b33682fb19bc33bd910ed8ce3a7fa".HexToByteArray();
+            byte[] expectedX =
+                "00d45615ed5d37fde699610a62cd43ba76bedd8f85ed31005fe00d6450fbbd101291abd96d4945a8b57bc73b3fe9f4671105309ec9b6879d0551d930dac8ba45d255".HexToByteArray();
+            byte[] expectedY =
+                "01425332844e592b440c0027972ad1526431c06732df19cd46a242172d4dd67c2c8c99dfc22e49949a56cf90c6473635ce82f25b33682fb19bc33bd910ed8ce3a7fa".HexToByteArray();
 
             ECParameters limitedPrivateParameters = new ECParameters
             {
                 Curve = ECCurve.NamedCurves.nistP521,
                 Q = default,
-                D = "00816f19c1fb10ef94d4a1d81c156ec3d1de08b66761f03f06ee4bb9dcebbbfe1eaa1ed49a6a990838d8ed318c14d74cc872f95d05d07ad50f621ceb620cd905cfb8".HexToByteArray(),
+                D =
+                    "00816f19c1fb10ef94d4a1d81c156ec3d1de08b66761f03f06ee4bb9dcebbbfe1eaa1ed49a6a990838d8ed318c14d74cc872f95d05d07ad50f621ceb620cd905cfb8".HexToByteArray(),
             };
 
             using (ECDiffieHellman ecdh = ECDiffieHellmanFactory.Create())
@@ -421,7 +507,9 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
         [MemberData(nameof(NamedCurves))]
         public static void OidPresentOnCurveMiscased(ECCurve curve)
         {
-            ECCurve miscasedCurve = ECCurve.CreateFromFriendlyName(InvertStringCase(curve.Oid.FriendlyName));
+            ECCurve miscasedCurve = ECCurve.CreateFromFriendlyName(
+                InvertStringCase(curve.Oid.FriendlyName)
+            );
             Assert.NotEqual(miscasedCurve.Oid.FriendlyName, curve.Oid.FriendlyName);
             Assert.Equal(miscasedCurve.Oid.FriendlyName, curve.Oid.FriendlyName, ignoreCase: true);
 
@@ -461,14 +549,19 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             }
         }
 
-        private static void VerifyNamedCurve(ECParameters parameters, ECDiffieHellman ec, int keySize, bool includePrivate)
+        private static void VerifyNamedCurve(
+            ECParameters parameters,
+            ECDiffieHellman ec,
+            int keySize,
+            bool includePrivate
+        )
         {
             parameters.Validate();
             Assert.True(parameters.Curve.IsNamed);
             Assert.Equal(keySize, ec.KeySize);
             Assert.True(
-                includePrivate && parameters.D.Length > 0 ||
-                !includePrivate && parameters.D == null);
+                includePrivate && parameters.D.Length > 0 || !includePrivate && parameters.D == null
+            );
 
             if (includePrivate)
                 ec.Exercise();
@@ -479,16 +572,20 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             AssertEqual(parameters, paramSecondExport);
         }
 
-        private static void VerifyExplicitCurve(ECParameters parameters, ECDiffieHellman ec, CurveDef curveDef)
+        private static void VerifyExplicitCurve(
+            ECParameters parameters,
+            ECDiffieHellman ec,
+            CurveDef curveDef
+        )
         {
             Assert.True(parameters.Curve.IsExplicit);
             ECCurve curve = parameters.Curve;
 
-
             Assert.True(curveDef.IsCurveTypeEqual(curve.CurveType));
             Assert.True(
-                curveDef.IncludePrivate && parameters.D.Length > 0 ||
-                !curveDef.IncludePrivate && parameters.D == null);
+                curveDef.IncludePrivate && parameters.D.Length > 0
+                    || !curveDef.IncludePrivate && parameters.D == null
+            );
             Assert.Equal(curveDef.KeySize, ec.KeySize);
 
             Assert.Equal(curve.A.Length, parameters.Q.X.Length);

@@ -12,10 +12,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,44 +35,49 @@ using System.Xml.Schema;
 
 namespace System.ServiceModel.Description
 {
-	public class XmlSerializerMessageContractImporter
-		: IWsdlImportExtension
-	{
-		MessageContractImporterInternal impl = new XmlSerializerMessageContractImporterInternal ();
-		bool enabled = true;
+    public class XmlSerializerMessageContractImporter : IWsdlImportExtension
+    {
+        MessageContractImporterInternal impl = new XmlSerializerMessageContractImporterInternal();
+        bool enabled = true;
 
-		public bool Enabled {
-			get { return enabled; }
-			set { enabled = value; }
-		}
+        public bool Enabled
+        {
+            get { return enabled; }
+            set { enabled = value; }
+        }
 
-		void IWsdlImportExtension.BeforeImport (
-			ServiceDescriptionCollection wsdlDocuments,
-			XmlSchemaSet xmlSchemas,
-			ICollection<XmlElement> policy)
-		{
-			if (!Enabled)
-				return;
+        void IWsdlImportExtension.BeforeImport(
+            ServiceDescriptionCollection wsdlDocuments,
+            XmlSchemaSet xmlSchemas,
+            ICollection<XmlElement> policy
+        )
+        {
+            if (!Enabled)
+                return;
 
-			impl.BeforeImport (wsdlDocuments, xmlSchemas, policy);
-		}
+            impl.BeforeImport(wsdlDocuments, xmlSchemas, policy);
+        }
 
-		void IWsdlImportExtension.ImportContract (WsdlImporter importer,
-			WsdlContractConversionContext context)
-		{
-			if (!Enabled)
-				return;
+        void IWsdlImportExtension.ImportContract(
+            WsdlImporter importer,
+            WsdlContractConversionContext context
+        )
+        {
+            if (!Enabled)
+                return;
 
-			impl.ImportContract (importer, context);
-		}
+            impl.ImportContract(importer, context);
+        }
 
-		void IWsdlImportExtension.ImportEndpoint (WsdlImporter importer,
-			WsdlEndpointConversionContext context)
-		{
-			if (!Enabled)
-				return;
+        void IWsdlImportExtension.ImportEndpoint(
+            WsdlImporter importer,
+            WsdlEndpointConversionContext context
+        )
+        {
+            if (!Enabled)
+                return;
 
-			impl.ImportEndpoint (importer, context);
-		}
-	}
+            impl.ImportEndpoint(importer, context);
+        }
+    }
 }

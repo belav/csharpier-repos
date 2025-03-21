@@ -31,32 +31,29 @@ public class HomeController : Controller
     [HttpPost]
     public DummyClass GetDerivedDummyClass(int sampleInput)
     {
-        return new DerivedDummyClass
-        {
-            SampleInt = sampleInput,
-            SampleIntInDerived = 50
-        };
+        return new DerivedDummyClass { SampleInt = sampleInput, SampleIntInDerived = 50 };
     }
 
     [HttpPost]
-    public IActionResult DefaultBody([FromBody] DummyClass dummy)
-        => ModelState.IsValid ? Ok() : ValidationProblem();
+    public IActionResult DefaultBody([FromBody] DummyClass dummy) =>
+        ModelState.IsValid ? Ok() : ValidationProblem();
 
     [HttpPost]
-    public IActionResult OptionalBody([FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] DummyClass dummy)
-        => ModelState.IsValid ? Ok() : ValidationProblem();
+    public IActionResult OptionalBody(
+        [FromBody(EmptyBodyBehavior = EmptyBodyBehavior.Allow)] DummyClass dummy
+    ) => ModelState.IsValid ? Ok() : ValidationProblem();
 
     [HttpPost]
-    public IActionResult DefaultValueBody([FromBody] DummyClass dummy = null)
-        => ModelState.IsValid ? Ok() : ValidationProblem();
+    public IActionResult DefaultValueBody([FromBody] DummyClass dummy = null) =>
+        ModelState.IsValid ? Ok() : ValidationProblem();
 
 #nullable enable
     [HttpPost]
-    public IActionResult NonNullableBody([FromBody] DummyClass dummy)
-        => ModelState.IsValid ? Ok() : ValidationProblem();
+    public IActionResult NonNullableBody([FromBody] DummyClass dummy) =>
+        ModelState.IsValid ? Ok() : ValidationProblem();
 
     [HttpPost]
-    public IActionResult NullableBody([FromBody] DummyClass? dummy)
-        => ModelState.IsValid ? Ok() : ValidationProblem();
+    public IActionResult NullableBody([FromBody] DummyClass? dummy) =>
+        ModelState.IsValid ? Ok() : ValidationProblem();
 #nullable restore
 }

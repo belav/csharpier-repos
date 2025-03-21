@@ -55,9 +55,9 @@
 //
 //---------------------------------------------------------------------------
 using System;
+using System.Collections;
 using System.IO;
 using System.Text;
-using System.Collections;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Exceptions;
 using RabbitMQ.Util;
@@ -82,8 +82,9 @@ namespace RabbitMQ.Client.Impl
             uint byteCount = reader.ReadUInt32();
             if (byteCount > int.MaxValue)
             {
-                throw new SyntaxError("Long string too long; " +
-                                      "byte length=" + byteCount + ", max=" + int.MaxValue);
+                throw new SyntaxError(
+                    "Long string too long; " + "byte length=" + byteCount + ", max=" + int.MaxValue
+                );
             }
             return reader.ReadBytes((int)byteCount);
         }
@@ -107,14 +108,17 @@ namespace RabbitMQ.Client.Impl
         {
             if (scale > 28)
             {
-                throw new SyntaxError("Unrepresentable AMQP decimal table field: " +
-                                      "scale=" + scale);
+                throw new SyntaxError(
+                    "Unrepresentable AMQP decimal table field: " + "scale=" + scale
+                );
             }
-            return new decimal((int)(unsignedMantissa & 0x7FFFFFFF),
-                               0,
-                               0,
-                               ((unsignedMantissa & 0x80000000) == 0) ? false : true,
-                               scale);
+            return new decimal(
+                (int)(unsignedMantissa & 0x7FFFFFFF),
+                0,
+                0,
+                ((unsignedMantissa & 0x80000000) == 0) ? false : true,
+                scale
+            );
         }
 
         public static decimal ReadDecimal(NetworkBinaryReader reader)
@@ -141,7 +145,7 @@ namespace RabbitMQ.Client.Impl
             {
                 string key = ReadShortstr(reader);
                 object value = ReadFieldValue(reader);
-                
+
                 if (!table.ContainsKey(key))
                 {
                     table[key] = value;
@@ -170,58 +174,57 @@ namespace RabbitMQ.Client.Impl
             object value = null;
             byte discriminator = reader.ReadByte();
             switch ((char)discriminator)
-                {
-                  case 'S':
-                      value = ReadLongstr(reader);
-                      break;
-                  case 'I':
-                      value = reader.ReadInt32();
-                      break;
-                  case 'D':
-                      value = ReadDecimal(reader);
-                      break;
-                  case 'T':
-                      value = ReadTimestamp(reader);
-                      break;
-                  case 'F':
-                      value = ReadTable(reader);
-                      break;
+            {
+                case 'S':
+                    value = ReadLongstr(reader);
+                    break;
+                case 'I':
+                    value = reader.ReadInt32();
+                    break;
+                case 'D':
+                    value = ReadDecimal(reader);
+                    break;
+                case 'T':
+                    value = ReadTimestamp(reader);
+                    break;
+                case 'F':
+                    value = ReadTable(reader);
+                    break;
 
-                  case 'A':
-                      value = ReadArray(reader);
-                      break;
-                  case 'b':
-                      value = ReadOctet(reader);
-                      break;
-                  case 'd':
-                      value = reader.ReadDouble();
-                      break;
-                  case 'f':
-                      value = reader.ReadSingle();
-                      break;
-                  case 'l':
-                      value = reader.ReadInt64();
-                      break;
-                  case 's':
-                      value = reader.ReadInt16();
-                      break;
-                  case 't':
-                      value = (ReadOctet(reader) != 0);
-                      break;
-                  case 'x':
-                      value = new BinaryTableValue(ReadLongstr(reader));
-                      break;
-                  case 'V':
-                      value = null;
-                      break;
+                case 'A':
+                    value = ReadArray(reader);
+                    break;
+                case 'b':
+                    value = ReadOctet(reader);
+                    break;
+                case 'd':
+                    value = reader.ReadDouble();
+                    break;
+                case 'f':
+                    value = reader.ReadSingle();
+                    break;
+                case 'l':
+                    value = reader.ReadInt64();
+                    break;
+                case 's':
+                    value = reader.ReadInt16();
+                    break;
+                case 't':
+                    value = (ReadOctet(reader) != 0);
+                    break;
+                case 'x':
+                    value = new BinaryTableValue(ReadLongstr(reader));
+                    break;
+                case 'V':
+                    value = null;
+                    break;
 
-                  default:
-                      throw new SyntaxError("Unrecognised type in table: " +
-                                            (char) discriminator);
-                }
+                default:
+                    throw new SyntaxError("Unrecognised type in table: " + (char)discriminator);
+            }
             return value;
         }
-      
+
         public static AmqpTimestamp ReadTimestamp(NetworkBinaryReader reader)
         {
             ulong stamp = ReadLonglong(reader);
@@ -241,8 +244,9 @@ namespace RabbitMQ.Client.Impl
             int len = bytes.Length;
             if (len > 255)
             {
-                throw new WireFormattingException("Short string too long; " +
-                                                  "UTF-8 encoded length=" + len + ", max=255");
+                throw new WireFormattingException(
+                    "Short string too long; " + "UTF-8 encoded length=" + len + ", max=255"
+                );
             }
             writer.Write((byte)len);
             writer.Write(bytes);
@@ -281,15 +285,21 @@ namespace RabbitMQ.Client.Impl
             // only take 31 bits worth of it, since the sign bit needs to
             // fit in there too.
             int[] bitRepresentation = decimal.GetBits(value);
-            if (bitRepresentation[1] != 0 ||    // mantissa extends into middle word
-                bitRepresentation[2] != 0 ||    // mantissa extends into top word
-                bitRepresentation[0] < 0)       // mantissa extends beyond 31 bits
+            if (
+                bitRepresentation[1] != 0
+                || // mantissa extends into middle word
+                bitRepresentation[2] != 0
+                || // mantissa extends into top word
+                bitRepresentation[0] < 0
+            ) // mantissa extends beyond 31 bits
             {
                 throw new WireFormattingException("Decimal overflow in AMQP encoding", value);
             }
             scale = (byte)((((uint)bitRepresentation[3]) >> 16) & 0xFF);
-            mantissa = (int)((((uint)bitRepresentation[3]) & 0x80000000) |
-                              (((uint)bitRepresentation[0]) & 0x7FFFFFFF));
+            mantissa = (int)(
+                (((uint)bitRepresentation[3]) & 0x80000000)
+                | (((uint)bitRepresentation[0]) & 0x7FFFFFFF)
+            );
         }
 
         public static void WriteDecimal(NetworkBinaryWriter writer, decimal value)
@@ -444,11 +454,10 @@ namespace RabbitMQ.Client.Impl
             }
             else
             {
-                throw new WireFormattingException("Value cannot appear as table value",
-                                                  value);
+                throw new WireFormattingException("Value cannot appear as table value", value);
             }
         }
-        
+
         public static void WriteTimestamp(NetworkBinaryWriter writer, AmqpTimestamp val)
         {
             // 0-9 is afaict silent on the signedness of the timestamp.

@@ -16,7 +16,9 @@ namespace Microsoft.Web.WebPages.OAuth
             var provider = Membership.Provider as ExtendedMembershipProvider;
             if (provider == null)
             {
-                throw new InvalidOperationException(OAuthResources.Security_NoExtendedMembershipProvider);
+                throw new InvalidOperationException(
+                    OAuthResources.Security_NoExtendedMembershipProvider
+                );
             }
             return provider;
         }
@@ -26,7 +28,7 @@ namespace Microsoft.Web.WebPages.OAuth
             ExtendedMembershipProvider provider = VerifyProvider();
 
             int userId = provider.GetUserIdFromOAuth(openAuthProvider, openAuthId);
-            if (userId == -1) 
+            if (userId == -1)
             {
                 return null;
             }

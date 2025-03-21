@@ -9,11 +9,9 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class EndToEndTracingElement : ConfigurationElement
     {
-        // These three constructors are used by the configuration system. 
+        // These three constructors are used by the configuration system.
         public EndToEndTracingElement()
-            : base()
-        {
-        }
+            : base() { }
 
         [ConfigurationProperty(ConfigurationStrings.PropagateActivity, DefaultValue = false)]
         public bool PropagateActivity
@@ -37,6 +35,3 @@ namespace System.ServiceModel.Configuration
         }
     }
 }
-
-
-

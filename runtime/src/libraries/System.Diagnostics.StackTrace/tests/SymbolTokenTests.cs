@@ -38,7 +38,11 @@ namespace System.Diagnostics.SymbolStore.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Other_ReturnsExpected(SymbolToken symbolToken, object other, bool expected)
+        public void Equals_Other_ReturnsExpected(
+            SymbolToken symbolToken,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, symbolToken.Equals(other));
             if (other is SymbolToken otherSymbolToken)

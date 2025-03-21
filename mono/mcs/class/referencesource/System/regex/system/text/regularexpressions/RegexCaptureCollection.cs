@@ -7,8 +7,8 @@
 // The CaptureCollection lists the captured Capture numbers
 // contained in a compiled Regex.
 
-namespace System.Text.RegularExpressions {
-
+namespace System.Text.RegularExpressions
+{
     using System.Collections;
 
     /*
@@ -23,9 +23,10 @@ namespace System.Text.RegularExpressions {
     ///    </para>
     /// </devdoc>
 #if !SILVERLIGHT
-    [ Serializable() ]
+    [Serializable()]
 #endif
-    public class CaptureCollection : ICollection {
+    public class CaptureCollection : ICollection
+    {
         internal Group _group;
         internal int _capcount;
         internal Capture[] _captures;
@@ -33,7 +34,8 @@ namespace System.Text.RegularExpressions {
         /*
          * Nonpublic constructor
          */
-        internal CaptureCollection(Group group) {
+        internal CaptureCollection(Group group)
+        {
             _group = group;
             _capcount = _group._capcount;
         }
@@ -44,10 +46,9 @@ namespace System.Text.RegularExpressions {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public Object SyncRoot {
-            get {
-                return _group;
-            }
+        public Object SyncRoot
+        {
+            get { return _group; }
         }
 
         /*
@@ -56,10 +57,9 @@ namespace System.Text.RegularExpressions {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsSynchronized {
-            get {
-                return false;
-            }
+        public bool IsSynchronized
+        {
+            get { return false; }
         }
 
         /*
@@ -68,10 +68,9 @@ namespace System.Text.RegularExpressions {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsReadOnly {
-            get {
-                return true;
-            }
+        public bool IsReadOnly
+        {
+            get { return true; }
         }
 
         /*
@@ -82,10 +81,9 @@ namespace System.Text.RegularExpressions {
         ///       Returns the number of captures.
         ///    </para>
         /// </devdoc>
-        public int Count {
-            get {
-                return _capcount;
-            }
+        public int Count
+        {
+            get { return _capcount; }
         }
 
         /*
@@ -98,9 +96,7 @@ namespace System.Text.RegularExpressions {
         /// </devdoc>
         public Capture this[int i]
         {
-            get {
-                return GetCapture(i);
-            }
+            get { return GetCapture(i); }
         }
 
         /*
@@ -112,11 +108,13 @@ namespace System.Text.RegularExpressions {
         ///       beginning at the given index.
         ///    </para>
         /// </devdoc>
-        public void CopyTo(Array array, int arrayIndex) {
+        public void CopyTo(Array array, int arrayIndex)
+        {
             if (array == null)
                 throw new ArgumentNullException("array");
 
-            for (int i = arrayIndex, j = 0; j < Count; i++, j++) {
+            for (int i = arrayIndex, j = 0; j < Count; i++, j++)
+            {
                 array.SetValue(this[j], i);
             }
         }
@@ -129,14 +127,16 @@ namespace System.Text.RegularExpressions {
         ///       Provides an enumerator in the same order as Item[].
         ///    </para>
         /// </devdoc>
-        public IEnumerator GetEnumerator() {
+        public IEnumerator GetEnumerator()
+        {
             return new CaptureEnumerator(this);
         }
 
         /*
          * Nonpublic code to return set of captures for the group
          */
-        internal Capture GetCapture(int i) {
+        internal Capture GetCapture(int i)
+        {
             if (i == _capcount - 1 && i >= 0)
                 return _group;
 
@@ -144,10 +144,16 @@ namespace System.Text.RegularExpressions {
                 throw new ArgumentOutOfRangeException("i");
 
             // first time a capture is accessed, compute them all
-            if (_captures == null) {
+            if (_captures == null)
+            {
                 _captures = new Capture[_capcount];
-                for (int j = 0; j < _capcount - 1; j++) {
-                    _captures[j] = new Capture(_group._text, _group._caps[j * 2], _group._caps[j * 2 + 1]);
+                for (int j = 0; j < _capcount - 1; j++)
+                {
+                    _captures[j] = new Capture(
+                        _group._text,
+                        _group._caps[j * 2],
+                        _group._caps[j * 2 + 1]
+                    );
                 }
             }
 
@@ -155,22 +161,23 @@ namespace System.Text.RegularExpressions {
         }
     }
 
-
     /*
      * This non-public enumerator lists all the captures
      * Should it be public?
      */
 #if !SILVERLIGHT
-    [ Serializable() ]
+    [Serializable()]
 #endif
-    internal class CaptureEnumerator : IEnumerator {
+    internal class CaptureEnumerator : IEnumerator
+    {
         internal CaptureCollection _rcc;
         internal int _curindex;
 
         /*
          * Nonpublic constructor
          */
-        internal CaptureEnumerator(CaptureCollection rcc) {
+        internal CaptureEnumerator(CaptureCollection rcc)
+        {
             _curindex = -1;
             _rcc = rcc;
         }
@@ -178,7 +185,8 @@ namespace System.Text.RegularExpressions {
         /*
          * As required by IEnumerator
          */
-        public bool MoveNext() {
+        public bool MoveNext()
+        {
             int size = _rcc.Count;
 
             if (_curindex >= size)
@@ -186,21 +194,24 @@ namespace System.Text.RegularExpressions {
 
             _curindex++;
 
-            return(_curindex < size);
+            return (_curindex < size);
         }
 
         /*
          * As required by IEnumerator
          */
-        public Object Current {
-            get { return Capture;}
+        public Object Current
+        {
+            get { return Capture; }
         }
 
         /*
          * Returns the current capture
          */
-        public Capture Capture {
-            get {
+        public Capture Capture
+        {
+            get
+            {
                 if (_curindex < 0 || _curindex >= _rcc.Count)
                     throw new InvalidOperationException(SR.GetString(SR.EnumNotStarted));
 
@@ -211,9 +222,9 @@ namespace System.Text.RegularExpressions {
         /*
          * Reset to before the first item
          */
-        public void Reset() {
+        public void Reset()
+        {
             _curindex = -1;
         }
     }
-
 }

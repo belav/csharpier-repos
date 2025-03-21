@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage;
 
 internal class EnableAuthenticator : DefaultUIPage
 {
-    public const string AuthenticatorKey = nameof(EnableAuthenticator) + "." + nameof(AuthenticatorKey);
+    public const string AuthenticatorKey =
+        nameof(EnableAuthenticator) + "." + nameof(AuthenticatorKey);
 
     private readonly IHtmlElement _codeElement;
     private readonly IHtmlFormElement _sendCodeForm;
@@ -17,7 +18,8 @@ internal class EnableAuthenticator : DefaultUIPage
     public EnableAuthenticator(
         HttpClient client,
         IHtmlDocument enableAuthenticator,
-        DefaultUIContext context)
+        DefaultUIContext context
+    )
         : base(client, enableAuthenticator, context)
     {
         Assert.True(Context.UserAuthenticated);
@@ -31,10 +33,10 @@ internal class EnableAuthenticator : DefaultUIPage
         Context.AuthenticatorKey = authenticatorKey;
         var verificationCode = ComputeCode(authenticatorKey);
 
-        var sendCodeResponse = await Client.SendAsync(_sendCodeForm, new Dictionary<string, string>
-        {
-            ["Input_Code"] = verificationCode
-        });
+        var sendCodeResponse = await Client.SendAsync(
+            _sendCodeForm,
+            new Dictionary<string, string> { ["Input_Code"] = verificationCode }
+        );
 
         var goToShowRecoveryCodes = ResponseAssert.IsRedirect(sendCodeResponse);
         var showRecoveryCodesResponse = await Client.GetAsync(goToShowRecoveryCodes);
@@ -48,7 +50,11 @@ internal class EnableAuthenticator : DefaultUIPage
         var keyBytes = Base32.FromBase32(key);
         var unixTimestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
         var timestep = Convert.ToInt64(unixTimestamp / 30);
-        var topt = Rfc6238AuthenticationService.ComputeTotp(keyBytes, (ulong)timestep, modifierBytes: null);
+        var topt = Rfc6238AuthenticationService.ComputeTotp(
+            keyBytes,
+            (ulong)timestep,
+            modifierBytes: null
+        );
         return topt.ToString("D6", CultureInfo.InvariantCulture);
     }
 }

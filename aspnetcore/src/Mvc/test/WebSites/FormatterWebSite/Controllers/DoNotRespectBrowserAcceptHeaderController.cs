@@ -10,22 +10,14 @@ public class DoNotRespectBrowserAcceptHeaderController : Controller
     [HttpGet]
     public Employee EmployeeInfo()
     {
-        return new Employee()
-        {
-            Id = 10,
-            Name = "John"
-        };
+        return new Employee() { Id = 10, Name = "John" };
     }
 
     [HttpGet]
     [Produces("application/xml")]
     public Employee EmployeeInfoWithProduces()
     {
-        return new Employee()
-        {
-            Id = 20,
-            Name = "Mike"
-        };
+        return new Employee() { Id = 20, Name = "Mike" };
     }
 
     [HttpPost]

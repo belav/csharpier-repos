@@ -29,7 +29,12 @@ namespace Microsoft.Interop
         /// <param name="locations">A provider of locations for diagnostics on <see cref="TypePositionInfo"/>s.</param>
         /// <param name="resourceManager">A resource manager to resolve resource string parameters to diagnostics.</param>
         /// <param name="resourceSource">The type that represents the resource source.</param>
-        public GeneratorDiagnosticsBag(IDiagnosticDescriptorProvider descriptorProvider, ISignatureDiagnosticLocations locations, ResourceManager resourceManager, Type resourceSource)
+        public GeneratorDiagnosticsBag(
+            IDiagnosticDescriptorProvider descriptorProvider,
+            ISignatureDiagnosticLocations locations,
+            ResourceManager resourceManager,
+            Type resourceSource
+        )
         {
             _descriptorProvider = descriptorProvider;
             _locations = locations;
@@ -55,9 +60,16 @@ namespace Microsoft.Interop
         public void ReportConfigurationNotSupported(
             AttributeData attributeData,
             string configurationName,
-            string unsupportedValue)
+            string unsupportedValue
+        )
         {
-            ReportDiagnostic(attributeData.CreateDiagnosticInfo(_descriptorProvider.ConfigurationValueNotSupported, unsupportedValue, configurationName));
+            ReportDiagnostic(
+                attributeData.CreateDiagnosticInfo(
+                    _descriptorProvider.ConfigurationValueNotSupported,
+                    unsupportedValue,
+                    configurationName
+                )
+            );
         }
 
         /// <summary>
@@ -67,9 +79,15 @@ namespace Microsoft.Interop
         /// <param name="configurationName">Name of the configuration</param>
         public void ReportConfigurationNotSupported(
             AttributeData attributeData,
-            string configurationName)
+            string configurationName
+        )
         {
-            ReportDiagnostic(attributeData.CreateDiagnosticInfo(_descriptorProvider.ConfigurationNotSupported, configurationName));
+            ReportDiagnostic(
+                attributeData.CreateDiagnosticInfo(
+                    _descriptorProvider.ConfigurationNotSupported,
+                    configurationName
+                )
+            );
         }
 
         /// <summary>
@@ -81,9 +99,20 @@ namespace Microsoft.Interop
         public void ReportInvalidMarshallingAttributeInfo(
             AttributeData attributeData,
             string reasonResourceName,
-            params string[] reasonArgs)
+            params string[] reasonArgs
+        )
         {
-            ReportDiagnostic(attributeData.CreateDiagnosticInfo(_descriptorProvider.InvalidMarshallingAttributeInfo, new LocalizableResourceString(reasonResourceName, _resourceManager, _resourceSource, reasonArgs)));
+            ReportDiagnostic(
+                attributeData.CreateDiagnosticInfo(
+                    _descriptorProvider.InvalidMarshallingAttributeInfo,
+                    new LocalizableResourceString(
+                        reasonResourceName,
+                        _resourceManager,
+                        _resourceSource,
+                        reasonArgs
+                    )
+                )
+            );
         }
 
         /// <summary>
@@ -127,7 +156,9 @@ namespace Microsoft.Interop
         /// <summary>
         /// The diagnostic can be resolved by adding the System.Runtime.CompilerServices.DisableRuntimeMarshallingAttribute to the assembly
         /// </summary>
-        public const string AddDisableRuntimeMarshallingAttribute = nameof(AddDisableRuntimeMarshallingAttribute);
+        public const string AddDisableRuntimeMarshallingAttribute = nameof(
+            AddDisableRuntimeMarshallingAttribute
+        );
 
         /// <summary>
         /// The diagnostic can be resolved by adding the System.Runtime.InteropServices.MarshalAsAttribute to the element with one of the UnmanagedType values

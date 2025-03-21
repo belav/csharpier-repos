@@ -16,10 +16,9 @@ namespace System.Web.Http.Cors
         [Fact]
         public void GetCorsPolicyProvider_NullRequest_Throws()
         {
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
-            Assert.ThrowsArgumentNull(() =>
-                providerFactory.GetCorsPolicyProvider(null),
-                "request");
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
+            Assert.ThrowsArgumentNull(() => providerFactory.GetCorsPolicyProvider(null), "request");
         }
 
         [Theory]
@@ -27,15 +26,27 @@ namespace System.Web.Http.Cors
         [InlineData("Post", "", typeof(DisableCorsAttribute))]
         [InlineData("get", "", typeof(EnableCorsAttribute))]
         [InlineData("GET", "/3", typeof(DisableCorsAttribute))]
-        public void GetCorsPolicyProvider_Preflight_ReturnsExpectedPolicyProvider(string httpMethod, string path, Type expectedProviderType)
+        public void GetCorsPolicyProvider_Preflight_ReturnsExpectedPolicyProvider(
+            string httpMethod,
+            string path,
+            Type expectedProviderType
+        )
         {
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Options, "http://localhost/sample" + path);
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Options,
+                "http://localhost/sample" + path
+            );
             request.Headers.Add("Origin", "http://localhost");
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, httpMethod);
             HttpConfiguration config = new HttpConfiguration();
             request.SetConfiguration(config);
-            IHttpRoute route = config.Routes.MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            IHttpRoute route = config.Routes.MapHttpRoute(
+                "default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             request.SetRouteData(route.GetRouteData("/", request));
 
             ICorsPolicyProvider provider = providerFactory.GetCorsPolicyProvider(request);
@@ -47,19 +58,28 @@ namespace System.Web.Http.Cors
         [Fact]
         public void GetCorsPolicyProvider_Preflight_ReturnsCompleteControllerContext()
         {
-           // Arrange
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Options, "http://localhost/sample");
+            // Arrange
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Options,
+                "http://localhost/sample"
+            );
             request.Headers.Add("Origin", "http://localhost");
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "POST");
             HttpConfiguration config = new HttpConfiguration();
             HttpControllerContext controllerContext = null;
             var actionSelector = new Mock<IHttpActionSelector>();
-            actionSelector.Setup(s => s.SelectAction(It.IsAny<HttpControllerContext>()))
-                          .Callback<HttpControllerContext>(context => controllerContext = context);
+            actionSelector
+                .Setup(s => s.SelectAction(It.IsAny<HttpControllerContext>()))
+                .Callback<HttpControllerContext>(context => controllerContext = context);
             config.Services.Replace(typeof(IHttpActionSelector), actionSelector.Object);
             request.SetConfiguration(config);
-            IHttpRoute route = config.Routes.MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            IHttpRoute route = config.Routes.MapHttpRoute(
+                "default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             request.SetRouteData(route.GetRouteData("/", request));
 
             ICorsPolicyProvider provider = providerFactory.GetCorsPolicyProvider(request);
@@ -77,22 +97,31 @@ namespace System.Web.Http.Cors
         public void GetCorsPolicyProvider_Preflight_DisposesControllerAfterActionSelection()
         {
             // Arrange
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Options, "http://localhost/sample");
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Options,
+                "http://localhost/sample"
+            );
             request.Headers.Add("Origin", "http://localhost");
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "POST");
             HttpConfiguration config = new HttpConfiguration();
             HttpControllerContext controllerContext = null;
             var actionSelector = new Mock<IHttpActionSelector>();
-            actionSelector.Setup(s => s.SelectAction(It.IsAny<HttpControllerContext>()))
-                          .Callback<HttpControllerContext>(context =>
-                          {
-                              Assert.False(((SampleController)context.Controller).Disposed);
-                              controllerContext = context;
-                          });
+            actionSelector
+                .Setup(s => s.SelectAction(It.IsAny<HttpControllerContext>()))
+                .Callback<HttpControllerContext>(context =>
+                {
+                    Assert.False(((SampleController)context.Controller).Disposed);
+                    controllerContext = context;
+                });
             config.Services.Replace(typeof(IHttpActionSelector), actionSelector.Object);
             request.SetConfiguration(config);
-            IHttpRoute route = config.Routes.MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            IHttpRoute route = config.Routes.MapHttpRoute(
+                "default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             request.SetRouteData(route.GetRouteData("/", request));
 
             ICorsPolicyProvider provider = providerFactory.GetCorsPolicyProvider(request);
@@ -104,28 +133,41 @@ namespace System.Web.Http.Cors
         [Fact]
         public void GetCorsPolicyProvider_Preflight_NoHttpConfiguration_Throws()
         {
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
 
             // No HttpConfiguration set on the request.
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Options, "http://localhost/sample");
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Options,
+                "http://localhost/sample"
+            );
             request.Headers.Add("Origin", "http://localhost");
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "GET");
             HttpConfiguration config = new HttpConfiguration();
-            IHttpRoute route = config.Routes.MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            IHttpRoute route = config.Routes.MapHttpRoute(
+                "default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             request.SetRouteData(route.GetRouteData("/", request));
 
-            Assert.Throws<InvalidOperationException>(() =>
-                providerFactory.GetCorsPolicyProvider(request),
-                "The request does not have an associated configuration object.");
+            Assert.Throws<InvalidOperationException>(
+                () => providerFactory.GetCorsPolicyProvider(request),
+                "The request does not have an associated configuration object."
+            );
         }
 
         [Fact]
         public void GetCorsPolicyProvider_Preflight_NoRouteData_ReturnsNull()
         {
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
 
             // No RouteData set on the request.
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Options, "http://localhost/sample");
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Options,
+                "http://localhost/sample"
+            );
             request.Headers.Add("Origin", "http://localhost");
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "GET");
             HttpConfiguration config = new HttpConfiguration();
@@ -139,15 +181,23 @@ namespace System.Web.Http.Cors
         [Fact]
         public void GetCorsPolicyProvider_Preflight_ReturnsDefaultPolicyProvider_WhenActionSelectionFails()
         {
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
             ICorsPolicyProvider mockProvider = new Mock<ICorsPolicyProvider>().Object;
             providerFactory.DefaultPolicyProvider = mockProvider;
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Options, "http://localhost/sample");
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Options,
+                "http://localhost/sample"
+            );
             request.Headers.Add("Origin", "http://localhost");
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "RandomMethod");
             HttpConfiguration config = new HttpConfiguration();
             request.SetConfiguration(config);
-            IHttpRoute route = config.Routes.MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            IHttpRoute route = config.Routes.MapHttpRoute(
+                "default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             request.SetRouteData(route.GetRouteData("/", request));
 
             ICorsPolicyProvider provider = providerFactory.GetCorsPolicyProvider(request);
@@ -159,32 +209,41 @@ namespace System.Web.Http.Cors
         [Fact]
         public void GetCorsPolicyProvider_Preflight_Throws_WhenNoDefaultPolicyProviderAndActionSelectionFails()
         {
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Options, "http://localhost/sample");
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Options,
+                "http://localhost/sample"
+            );
             request.Headers.Add("Origin", "http://localhost");
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "RandomMethod");
             HttpConfiguration config = new HttpConfiguration();
             request.SetConfiguration(config);
-            IHttpRoute route = config.Routes.MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            IHttpRoute route = config.Routes.MapHttpRoute(
+                "default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
             request.SetRouteData(route.GetRouteData("/", request));
 
             Assert.True(request.GetCorsRequestContext().IsPreflight);
             Assert.Throws<HttpResponseException>(() =>
-                providerFactory.GetCorsPolicyProvider(request));
+                providerFactory.GetCorsPolicyProvider(request)
+            );
         }
 
         [Fact]
         public void GetCorsPolicyProvider_ReturnsDefaultPolicyProvider()
         {
             ICorsPolicyProvider mockProvider = new Mock<ICorsPolicyProvider>().Object;
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
             providerFactory.DefaultPolicyProvider = mockProvider;
             HttpRequestMessage request = new HttpRequestMessage();
             Func<string> action = new DefaultController().Get;
-            request.SetActionDescriptor(new ReflectedHttpActionDescriptor
-            {
-                MethodInfo = action.Method
-            });
+            request.SetActionDescriptor(
+                new ReflectedHttpActionDescriptor { MethodInfo = action.Method }
+            );
             request.Headers.Add("Origin", "http://example.com");
 
             ICorsPolicyProvider policyProvider = providerFactory.GetCorsPolicyProvider(request);
@@ -195,19 +254,22 @@ namespace System.Web.Http.Cors
         [Fact]
         public void GetCorsPolicyProvider_ReturnsPolicyProvider_OnController()
         {
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
             HttpRequestMessage request = new HttpRequestMessage();
             Func<string> action = new SampleController().Get;
             HttpControllerDescriptor controllerDescriptor = new HttpControllerDescriptor
             {
                 ControllerName = "Sample",
-                ControllerType = typeof(SampleController)
+                ControllerType = typeof(SampleController),
             };
-            request.SetActionDescriptor(new ReflectedHttpActionDescriptor
-            {
-                MethodInfo = action.Method,
-                ControllerDescriptor = controllerDescriptor
-            });
+            request.SetActionDescriptor(
+                new ReflectedHttpActionDescriptor
+                {
+                    MethodInfo = action.Method,
+                    ControllerDescriptor = controllerDescriptor,
+                }
+            );
             request.Headers.Add("Origin", "http://example.com");
 
             ICorsPolicyProvider policyProvider = providerFactory.GetCorsPolicyProvider(request);
@@ -219,13 +281,13 @@ namespace System.Web.Http.Cors
         [Fact]
         public void GetCorsPolicyProvider_ReturnsPolicyProvider_OnAction()
         {
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
             HttpRequestMessage request = new HttpRequestMessage();
             Func<string> action = new SampleController().Post;
-            request.SetActionDescriptor(new ReflectedHttpActionDescriptor
-            {
-                MethodInfo = action.Method
-            });
+            request.SetActionDescriptor(
+                new ReflectedHttpActionDescriptor { MethodInfo = action.Method }
+            );
             request.Headers.Add("Origin", "http://example.com");
 
             ICorsPolicyProvider policyProvider = providerFactory.GetCorsPolicyProvider(request);
@@ -237,13 +299,21 @@ namespace System.Web.Http.Cors
         [Fact]
         public void GetCorsPolicyProvider_Preflight_ReturnsPolicyProviderUsingPerControllerConfiguration()
         {
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Options, "http://localhost/percontrollerconfig");
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Options,
+                "http://localhost/percontrollerconfig"
+            );
             request.Headers.Add("Origin", "http://localhost");
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "httpmethod");
             HttpConfiguration config = new HttpConfiguration();
             request.SetConfiguration(config);
-            config.Routes.MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
+            config.Routes.MapHttpRoute(
+                "default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
 
             ICorsPolicyProvider provider = providerFactory.GetCorsPolicyProvider(request);
 
@@ -256,14 +326,34 @@ namespace System.Web.Http.Cors
         [Fact]
         public void GetCorsPolicyProvider_Preflight_DoesNotUseRouteDataOnTheRequest()
         {
-            AttributeBasedPolicyProviderFactory providerFactory = new AttributeBasedPolicyProviderFactory();
-            HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Options, "http://localhost/sample");
+            AttributeBasedPolicyProviderFactory providerFactory =
+                new AttributeBasedPolicyProviderFactory();
+            HttpRequestMessage request = new HttpRequestMessage(
+                HttpMethod.Options,
+                "http://localhost/sample"
+            );
             request.Headers.Add("Origin", "http://localhost");
             request.Headers.Add(CorsConstants.AccessControlRequestMethod, "Put");
             HttpConfiguration config = new HttpConfiguration();
             request.SetConfiguration(config);
-            var route = config.Routes.MapHttpRoute("default", "{controller}/{id}", new { id = RouteParameter.Optional });
-            request.SetRouteData(new HttpRouteData(route, new HttpRouteValueDictionary(new { action = "Options", controller = "sample", id = 2 })));
+            var route = config.Routes.MapHttpRoute(
+                "default",
+                "{controller}/{id}",
+                new { id = RouteParameter.Optional }
+            );
+            request.SetRouteData(
+                new HttpRouteData(
+                    route,
+                    new HttpRouteValueDictionary(
+                        new
+                        {
+                            action = "Options",
+                            controller = "sample",
+                            id = 2,
+                        }
+                    )
+                )
+            );
 
             ICorsPolicyProvider provider = providerFactory.GetCorsPolicyProvider(request);
 

@@ -34,31 +34,59 @@ namespace System.Linq.Tests
             long seed = 2;
             long expected = -475;
 
-            Assert.Equal(expected, source.AsQueryable().Aggregate(seed, (x, y) => x * y, x => x + 5.0));
+            Assert.Equal(
+                expected,
+                source.AsQueryable().Aggregate(seed, (x, y) => x * y, x => x + 5.0)
+            );
         }
 
         [Fact]
         public void NullSource()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).Aggregate((x, y) => x + y));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).Aggregate(0, (x, y) => x + y));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<int>)null).Aggregate(0, (x, y) => x + y, i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).Aggregate((x, y) => x + y)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).Aggregate(0, (x, y) => x + y)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<int>)null).Aggregate(0, (x, y) => x + y, i => i)
+            );
         }
 
         [Fact]
         public void NullFunc()
         {
             Expression<Func<int, int, int>> func = null;
-            AssertExtensions.Throws<ArgumentNullException>("func", () => Enumerable.Range(0, 3).AsQueryable().Aggregate(func));
-            AssertExtensions.Throws<ArgumentNullException>("func", () => Enumerable.Range(0, 3).AsQueryable().Aggregate(0, func));
-            AssertExtensions.Throws<ArgumentNullException>("func", () => Enumerable.Range(0, 3).AsQueryable().Aggregate(0, func, i => i));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "func",
+                () => Enumerable.Range(0, 3).AsQueryable().Aggregate(func)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "func",
+                () => Enumerable.Range(0, 3).AsQueryable().Aggregate(0, func)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "func",
+                () => Enumerable.Range(0, 3).AsQueryable().Aggregate(0, func, i => i)
+            );
         }
 
         [Fact]
         public void NullResultSelector()
         {
             Expression<Func<int, int>> resultSelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => Enumerable.Range(0, 3).AsQueryable().Aggregate(0, (x, y) => x + y, resultSelector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () =>
+                    Enumerable
+                        .Range(0, 3)
+                        .AsQueryable()
+                        .Aggregate(0, (x, y) => x + y, resultSelector)
+            );
         }
 
         [Fact]
@@ -78,7 +106,9 @@ namespace System.Linq.Tests
         [Fact]
         public void Aggregate3()
         {
-            var val = new[] { 0, 2, 1 }.AsQueryable().Aggregate(0L, (n1, n2) => n1 + n2, n => n.ToString());
+            var val = new[] { 0, 2, 1 }
+                .AsQueryable()
+                .Aggregate(0L, (n1, n2) => n1 + n2, n => n.ToString());
             Assert.Equal("3", val);
         }
     }

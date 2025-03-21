@@ -12,7 +12,10 @@ namespace System.ComponentModel.DataAnnotations
     ///     Recognition of valid Base64 is delegated to the <see cref="Convert"/> class,
     ///     using the <see cref="Convert.TryFromBase64String(string, Span{byte}, out int)"/> method.
     /// </remarks>
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public class Base64StringAttribute : ValidationAttribute
     {
         /// <summary>

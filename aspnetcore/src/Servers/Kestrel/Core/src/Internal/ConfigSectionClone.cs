@@ -16,7 +16,10 @@ internal sealed class ConfigSectionClone
 
         // GetChildren() should return an empty IEnumerable instead of null, but we guard against it since it's a public interface.
         var children = configSection.GetChildren() ?? Enumerable.Empty<IConfigurationSection>();
-        Children = children.ToDictionary(child => child.Key, child => new ConfigSectionClone(child));
+        Children = children.ToDictionary(
+            child => child.Key,
+            child => new ConfigSectionClone(child)
+        );
     }
 
     public string? Value { get; }
@@ -53,6 +56,8 @@ internal sealed class ConfigSectionClone
 
     public override int GetHashCode() => HashCode.Combine(Value, Children.Count);
 
-    public static bool operator ==(ConfigSectionClone lhs, ConfigSectionClone rhs) => lhs is null ? rhs is null : lhs.Equals(rhs);
+    public static bool operator ==(ConfigSectionClone lhs, ConfigSectionClone rhs) =>
+        lhs is null ? rhs is null : lhs.Equals(rhs);
+
     public static bool operator !=(ConfigSectionClone lhs, ConfigSectionClone rhs) => !(lhs == rhs);
 }

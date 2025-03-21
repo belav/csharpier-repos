@@ -5,8 +5,8 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Intrinsics.X86;
 using System.Runtime.Intrinsics;
+using System.Runtime.Intrinsics.X86;
 using Xunit;
 
 namespace IntelHardwareIntrinsicTest._Sse41
@@ -31,7 +31,9 @@ namespace IntelHardwareIntrinsicTest._Sse41
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Sse41 LoadAlignedVector128NonTemporal failed on int:");
+                            Console.WriteLine(
+                                "Sse41 LoadAlignedVector128NonTemporal failed on int:"
+                            );
                             for (var n = 0; n < 4; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -55,7 +57,9 @@ namespace IntelHardwareIntrinsicTest._Sse41
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Sse41 LoadAlignedVector128NonTemporal failed on long:");
+                            Console.WriteLine(
+                                "Sse41 LoadAlignedVector128NonTemporal failed on long:"
+                            );
                             for (var n = 0; n < 2; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -79,7 +83,9 @@ namespace IntelHardwareIntrinsicTest._Sse41
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Sse41 LoadAlignedVector128NonTemporal failed on uint:");
+                            Console.WriteLine(
+                                "Sse41 LoadAlignedVector128NonTemporal failed on uint:"
+                            );
                             for (var n = 0; n < 4; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -103,7 +109,9 @@ namespace IntelHardwareIntrinsicTest._Sse41
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Sse41 LoadAlignedVector128NonTemporal failed on ulong:");
+                            Console.WriteLine(
+                                "Sse41 LoadAlignedVector128NonTemporal failed on ulong:"
+                            );
                             for (var n = 0; n < 2; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -127,7 +135,9 @@ namespace IntelHardwareIntrinsicTest._Sse41
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Sse41 LoadAlignedVector128NonTemporal failed on short:");
+                            Console.WriteLine(
+                                "Sse41 LoadAlignedVector128NonTemporal failed on short:"
+                            );
                             for (var n = 0; n < 8; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -151,7 +161,9 @@ namespace IntelHardwareIntrinsicTest._Sse41
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Sse41 LoadAlignedVector128NonTemporal failed on ushort:");
+                            Console.WriteLine(
+                                "Sse41 LoadAlignedVector128NonTemporal failed on ushort:"
+                            );
                             for (var n = 0; n < 8; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -175,7 +187,9 @@ namespace IntelHardwareIntrinsicTest._Sse41
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Sse41 LoadAlignedVector128NonTemporal failed on sbyte:");
+                            Console.WriteLine(
+                                "Sse41 LoadAlignedVector128NonTemporal failed on sbyte:"
+                            );
                             for (var n = 0; n < 16; n++)
                             {
                                 Console.Write(outArray[n] + ", ");
@@ -199,7 +213,9 @@ namespace IntelHardwareIntrinsicTest._Sse41
                     {
                         if (inArray[i] != outArray[i])
                         {
-                            Console.WriteLine("Sse41 LoadAlignedVector128NonTemporal failed on byte:");
+                            Console.WriteLine(
+                                "Sse41 LoadAlignedVector128NonTemporal failed on byte:"
+                            );
                             for (var n = 0; n < 16; n++)
                             {
                                 Console.Write(outArray[n] + ", ");

@@ -19,10 +19,17 @@ public class CreateMatcherRegexConstraintBenchmark : EndpointRoutingBenchmarkBas
         for (var i = 0; i < Endpoints.Length; i++)
         {
             Endpoints[i] = RegexSame
-                ? CreateEndpoint("/plaintext" + i + "/{param:regex(^\\d{{7}}|(SI[[PG]]|JPA|DEM)\\d{{4}})}")
-                : CreateEndpoint("/plaintext" + i + "/{param:regex(^" + i + "\\d{{7}}|(SI[[PG]]|JPA|DEM)\\d{{4}})}");
+                ? CreateEndpoint(
+                    "/plaintext" + i + "/{param:regex(^\\d{{7}}|(SI[[PG]]|JPA|DEM)\\d{{4}})}"
+                )
+                : CreateEndpoint(
+                    "/plaintext"
+                        + i
+                        + "/{param:regex(^"
+                        + i
+                        + "\\d{{7}}|(SI[[PG]]|JPA|DEM)\\d{{4}})}"
+                );
         }
-
     }
 
     [Benchmark]

@@ -50,7 +50,6 @@ namespace System.IdentityModel.Metadata
             // SPSSODescriptor
             public const string AuthenticationRequestsSigned = "AuthnRequestsSigned";
             public const string WantAssertionsSigned = "WantAssertionsSigned";
-
         }
 
         public static class Elements
@@ -88,7 +87,7 @@ namespace System.IdentityModel.Metadata
             // IDPSSODescriptor
             public const string SingleSignOnService = "SingleSignOnService";
 
-            // SPSSODescriptor   
+            // SPSSODescriptor
             public const string AssertionConsumerService = "AssertionConsumerService";
         }
 

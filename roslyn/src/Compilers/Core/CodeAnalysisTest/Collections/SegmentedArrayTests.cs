@@ -62,7 +62,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             Assert.Throws<NullReferenceException>(() => data.Clone());
             Assert.Throws<NullReferenceException>(() => data.CopyTo(Array.Empty<IntPtr>(), 0));
-            Assert.Throws<NullReferenceException>(() => ((ICollection<IntPtr>)data).CopyTo(Array.Empty<IntPtr>(), 0));
+            Assert.Throws<NullReferenceException>(() =>
+                ((ICollection<IntPtr>)data).CopyTo(Array.Empty<IntPtr>(), 0)
+            );
 
             var enumerator1 = data.GetEnumerator();
             Assert.Throws<NullReferenceException>(() => enumerator1.MoveNext());
@@ -74,18 +76,24 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Throws<NullReferenceException>(() => enumerator1.MoveNext());
 
             Assert.Throws<NotSupportedException>(() => ((IList)data).Add(IntPtr.Zero));
-            Assert.Throws<NotSupportedException>(() => ((ICollection<IntPtr>)data).Add(IntPtr.Zero));
+            Assert.Throws<NotSupportedException>(() => ((ICollection<IntPtr>)data).Add(IntPtr.Zero)
+            );
             Assert.Throws<NotSupportedException>(() => ((ICollection<IntPtr>)data).Clear());
             Assert.Throws<NotSupportedException>(() => ((IList)data).Insert(0, IntPtr.Zero));
-            Assert.Throws<NotSupportedException>(() => ((IList<IntPtr>)data).Insert(0, IntPtr.Zero));
+            Assert.Throws<NotSupportedException>(() => ((IList<IntPtr>)data).Insert(0, IntPtr.Zero)
+            );
             Assert.Throws<NotSupportedException>(() => ((IList)data).Remove(IntPtr.Zero));
-            Assert.Throws<NotSupportedException>(() => ((ICollection<IntPtr>)data).Remove(IntPtr.Zero));
+            Assert.Throws<NotSupportedException>(() =>
+                ((ICollection<IntPtr>)data).Remove(IntPtr.Zero)
+            );
             Assert.Throws<NotSupportedException>(() => ((IList)data).RemoveAt(0));
             Assert.Throws<NotSupportedException>(() => ((IList<IntPtr>)data).RemoveAt(0));
 
             Assert.Throws<NullReferenceException>(() => ((IList)data).Clear());
             Assert.Throws<NullReferenceException>(() => ((IList)data).Contains(IntPtr.Zero));
-            Assert.Throws<NullReferenceException>(() => ((ICollection<IntPtr>)data).Contains(IntPtr.Zero));
+            Assert.Throws<NullReferenceException>(() =>
+                ((ICollection<IntPtr>)data).Contains(IntPtr.Zero)
+            );
             Assert.Throws<NullReferenceException>(() => ((IList)data).IndexOf(IntPtr.Zero));
             Assert.Throws<NullReferenceException>(() => ((IList<IntPtr>)data).IndexOf(IntPtr.Zero));
         }
@@ -93,7 +101,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void TestConstructor1()
         {
-            Assert.Throws<ArgumentOutOfRangeException>("length", () => new SegmentedArray<byte>(-1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "length",
+                () => new SegmentedArray<byte>(-1)
+            );
 
             Assert.Empty(new SegmentedArray<byte>(0));
             Assert.Same(Array.Empty<byte[]>(), new SegmentedArray<byte>(0).GetTestAccessor().Items);
@@ -213,7 +224,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void CopyOverlappingEndOfSegment()
         {
             var array = new int[2 * SegmentedArray<int>.TestAccessor.SegmentSize];
-            var segmented = new SegmentedArray<int>(2 * SegmentedArray<int>.TestAccessor.SegmentSize);
+            var segmented = new SegmentedArray<int>(
+                2 * SegmentedArray<int>.TestAccessor.SegmentSize
+            );
             initialize(array, segmented);
             Assert.Equal(array, segmented);
 

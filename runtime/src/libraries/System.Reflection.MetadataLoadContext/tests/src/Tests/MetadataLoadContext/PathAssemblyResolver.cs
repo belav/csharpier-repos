@@ -30,7 +30,9 @@ namespace System.Reflection.Tests
         [Fact]
         public static void PathAssemblyResolverEmptyFile()
         {
-            Assert.Throws<ArgumentException>(() => new PathAssemblyResolver(new string[] { Path.DirectorySeparatorChar.ToString() }));
+            Assert.Throws<ArgumentException>(() =>
+                new PathAssemblyResolver(new string[] { Path.DirectorySeparatorChar.ToString() })
+            );
         }
 
         [Fact]
@@ -44,7 +46,8 @@ namespace System.Reflection.Tests
         public static void PathAssemblyResolverWithNoPath()
         {
             var resolver = new PathAssemblyResolver(new string[] { });
-            Assert.Throws<FileNotFoundException>(() => new MetadataLoadContext(resolver, "mscorlib"));
+            Assert.Throws<FileNotFoundException>(() => new MetadataLoadContext(resolver, "mscorlib")
+            );
         }
 
         [Fact]
@@ -60,14 +63,26 @@ namespace System.Reflection.Tests
             string coreAssemblyPath = TestUtils.GetPathToCoreAssembly();
 
             // Obtain this test class
-            string thisAssemblyPath = AssemblyPathHelper.GetAssemblyLocation(typeof(MetadataLoadContextTests).Assembly);
-            var resolver = new PathAssemblyResolver(new string[] { coreAssemblyPath, thisAssemblyPath });
-            using (MetadataLoadContext lc = new MetadataLoadContext(resolver, TestUtils.GetNameOfCoreAssembly()))
+            string thisAssemblyPath = AssemblyPathHelper.GetAssemblyLocation(
+                typeof(MetadataLoadContextTests).Assembly
+            );
+            var resolver = new PathAssemblyResolver(
+                new string[] { coreAssemblyPath, thisAssemblyPath }
+            );
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    resolver,
+                    TestUtils.GetNameOfCoreAssembly()
+                )
+            )
             {
                 AssemblyName thisAssemblyName = typeof(MetadataLoadContextTests).Assembly.GetName();
                 Assembly assembly = lc.LoadFromAssemblyName(thisAssemblyName);
 
-                Type t = assembly.GetType(typeof(MetadataLoadContextTests).FullName, throwOnError: true);
+                Type t = assembly.GetType(
+                    typeof(MetadataLoadContextTests).FullName,
+                    throwOnError: true
+                );
                 Assert.Equal(t.FullName, typeof(MetadataLoadContextTests).FullName);
                 Assert.Equal(t.Assembly.Location, thisAssemblyPath);
             }
@@ -77,26 +92,47 @@ namespace System.Reflection.Tests
         public static void ResolveToAssemblyNameCombinations()
         {
             using (TempDirectory dir = new TempDirectory())
-            using (TempFile core = new TempFile(Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName), TestData.s_PhonyCoreAssemblyImage))
-            using (TempFile tf1 = new TempFile(Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleSignedVersioned100Image))
+            using (
+                TempFile core = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName),
+                    TestData.s_PhonyCoreAssemblyImage
+                )
+            )
+            using (
+                TempFile tf1 = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleSignedVersioned100Image
+                )
+            )
             {
                 var resolver = new PathAssemblyResolver(new string[] { core.Path, tf1.Path });
 
-                using (MetadataLoadContext lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblySimpleName))
+                using (
+                    MetadataLoadContext lc = new MetadataLoadContext(
+                        resolver,
+                        TestData.s_PhonyCoreAssemblySimpleName
+                    )
+                )
                 {
                     Assert.Equal(1, lc.GetAssemblies().Count());
 
-                    Assembly assembly = lc.LoadFromAssemblyName(TestData.s_SimpleVersionedShortName);
+                    Assembly assembly = lc.LoadFromAssemblyName(
+                        TestData.s_SimpleVersionedShortName
+                    );
                     Assert.NotNull(assembly);
 
                     // Name
 
                     {
-                        Assembly assemblyAgain = lc.LoadFromAssemblyName(TestData.s_SimpleVersionedShortName.ToUpper());
+                        Assembly assemblyAgain = lc.LoadFromAssemblyName(
+                            TestData.s_SimpleVersionedShortName.ToUpper()
+                        );
                         Assert.NotNull(assemblyAgain);
                     }
 
-                    AssemblyName assemblyName = new AssemblyName(TestData.s_SimpleVersionedShortName);
+                    AssemblyName assemblyName = new AssemblyName(
+                        TestData.s_SimpleVersionedShortName
+                    );
 
                     // Version
 
@@ -149,7 +185,8 @@ namespace System.Reflection.Tests
                     // PublicKeyToken
 
                     assemblyName.SetPublicKeyToken(new byte[] { 1 });
-                    Assert.Throws<FileNotFoundException>(() => lc.LoadFromAssemblyName(assemblyName));
+                    Assert.Throws<FileNotFoundException>(() => lc.LoadFromAssemblyName(assemblyName)
+                    );
 
                     {
                         assemblyName.SetPublicKeyToken(null);
@@ -180,18 +217,39 @@ namespace System.Reflection.Tests
         {
             using (TempDirectory dir = new TempDirectory())
             using (TempDirectory dir2 = new TempDirectory())
-            using (TempFile core = new TempFile(Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName), TestData.s_PhonyCoreAssemblyImage))
-            using (TempFile tf1 = new TempFile(Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleSignedVersioned100Image))
-            using (TempFile tf2 = new TempFile(Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleSignedVersioned100Image))
+            using (
+                TempFile core = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName),
+                    TestData.s_PhonyCoreAssemblyImage
+                )
+            )
+            using (
+                TempFile tf1 = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleSignedVersioned100Image
+                )
+            )
+            using (
+                TempFile tf2 = new TempFile(
+                    Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleSignedVersioned100Image
+                )
+            )
             {
-                var resolver = new PathAssemblyResolver(new string[] { core.Path, tf1.Path, tf2.Path });
+                var resolver = new PathAssemblyResolver(
+                    new string[] { core.Path, tf1.Path, tf2.Path }
+                );
 
-                using (var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName))
+                using (
+                    var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName)
+                )
                 {
                     Assert.Equal(1, lc.GetAssemblies().Count());
 
                     Assembly a1 = lc.LoadFromAssemblyName(TestData.s_SimpleVersionedShortName);
-                    Assembly a2 = lc.LoadFromAssemblyName(TestData.s_SimpleSignedVersioned100FullName);
+                    Assembly a2 = lc.LoadFromAssemblyName(
+                        TestData.s_SimpleSignedVersioned100FullName
+                    );
                     Assert.Same(a1, a2);
                     Assert.Equal(2, lc.GetAssemblies().Count());
                 }
@@ -203,20 +261,43 @@ namespace System.Reflection.Tests
         {
             using (TempDirectory dir = new TempDirectory())
             using (TempDirectory dir2 = new TempDirectory())
-            using (TempFile core = new TempFile(Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName), TestData.s_PhonyCoreAssemblyImage))
-            using (TempFile tf1 = new TempFile(Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleSignedVersioned100Image))
-            using (TempFile tf2 = new TempFile(Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleSignedVersioned200Image))
+            using (
+                TempFile core = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName),
+                    TestData.s_PhonyCoreAssemblyImage
+                )
+            )
+            using (
+                TempFile tf1 = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleSignedVersioned100Image
+                )
+            )
+            using (
+                TempFile tf2 = new TempFile(
+                    Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleSignedVersioned200Image
+                )
+            )
             {
-                var resolver = new PathAssemblyResolver(new string[] { core.Path, tf1.Path, tf2.Path });
+                var resolver = new PathAssemblyResolver(
+                    new string[] { core.Path, tf1.Path, tf2.Path }
+                );
 
-                using (var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName))
+                using (
+                    var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName)
+                )
                 {
                     Assert.Equal(1, lc.GetAssemblies().Count());
 
                     // Using simple name will find first assembly that matches.
                     Assembly a1 = lc.LoadFromAssemblyName(TestData.s_SimpleVersionedShortName);
-                    Assembly a2 = lc.LoadFromAssemblyName(TestData.s_SimpleSignedVersioned100FullName);
-                    Assembly a3 = lc.LoadFromAssemblyName(TestData.s_SimpleSignedVersioned200FullName);
+                    Assembly a2 = lc.LoadFromAssemblyName(
+                        TestData.s_SimpleSignedVersioned100FullName
+                    );
+                    Assembly a3 = lc.LoadFromAssemblyName(
+                        TestData.s_SimpleSignedVersioned200FullName
+                    );
                     Assert.True(object.ReferenceEquals(a1, a2) || object.ReferenceEquals(a1, a3));
 
                     Assert.Equal(3, lc.GetAssemblies().Count());
@@ -229,15 +310,36 @@ namespace System.Reflection.Tests
         {
             using (TempDirectory dir = new TempDirectory())
             using (TempDirectory dir2 = new TempDirectory())
-            using (TempFile core = new TempFile(Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName), TestData.s_PhonyCoreAssemblyImage))
-            using (TempFile tf1 = new TempFile(Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleUnsignedVersioned100Image))
-            using (TempFile tf2 = new TempFile(Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleUnsignedVersioned100Image))
+            using (
+                TempFile core = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName),
+                    TestData.s_PhonyCoreAssemblyImage
+                )
+            )
+            using (
+                TempFile tf1 = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleUnsignedVersioned100Image
+                )
+            )
+            using (
+                TempFile tf2 = new TempFile(
+                    Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleUnsignedVersioned100Image
+                )
+            )
             {
-                var resolver = new PathAssemblyResolver(new string[] { core.Path, tf1.Path, tf2.Path });
-                using (var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName))
+                var resolver = new PathAssemblyResolver(
+                    new string[] { core.Path, tf1.Path, tf2.Path }
+                );
+                using (
+                    var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName)
+                )
                 {
                     Assembly a1 = lc.LoadFromAssemblyName(TestData.s_SimpleVersionedShortName);
-                    Assembly a2 = lc.LoadFromAssemblyName(TestData.s_SimpleUnsignedVersioned100FullName);
+                    Assembly a2 = lc.LoadFromAssemblyName(
+                        TestData.s_SimpleUnsignedVersioned100FullName
+                    );
                     Assert.Same(a1, a2);
                 }
             }
@@ -248,12 +350,31 @@ namespace System.Reflection.Tests
         {
             using (TempDirectory dir = new TempDirectory())
             using (TempDirectory dir2 = new TempDirectory())
-            using (TempFile core = new TempFile(Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName), TestData.s_PhonyCoreAssemblyImage))
-            using (TempFile tf1 = new TempFile(Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleUnsignedVersioned100Image))
-            using (TempFile tf2 = new TempFile(Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleUnsignedVersioned100EnImage))
+            using (
+                TempFile core = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName),
+                    TestData.s_PhonyCoreAssemblyImage
+                )
+            )
+            using (
+                TempFile tf1 = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleUnsignedVersioned100Image
+                )
+            )
+            using (
+                TempFile tf2 = new TempFile(
+                    Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleUnsignedVersioned100EnImage
+                )
+            )
             {
-                var resolver = new PathAssemblyResolver(new string[] { core.Path, tf1.Path, tf2.Path });
-                using (var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName))
+                var resolver = new PathAssemblyResolver(
+                    new string[] { core.Path, tf1.Path, tf2.Path }
+                );
+                using (
+                    var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName)
+                )
                 {
                     Assert.Equal(1, lc.GetAssemblies().Count());
 
@@ -261,7 +382,9 @@ namespace System.Reflection.Tests
                     Assert.Equal(3, lc.GetAssemblies().Count());
                     Assert.Equal("", a1.GetName().CultureName);
 
-                    Assembly a2 = lc.LoadFromAssemblyName(TestData.s_SimpleUnsignedVersioned100EnFullName);
+                    Assembly a2 = lc.LoadFromAssemblyName(
+                        TestData.s_SimpleUnsignedVersioned100EnFullName
+                    );
                     Assert.Same(a1, a2);
                 }
             }
@@ -272,26 +395,59 @@ namespace System.Reflection.Tests
         {
             using (TempDirectory dir = new TempDirectory())
             using (TempDirectory dir2 = new TempDirectory())
-            using (TempFile core = new TempFile(Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName), TestData.s_PhonyCoreAssemblyImage))
-            using (TempFile tf1 = new TempFile(Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleUnsignedVersioned100Image))
-            using (TempFile tf2 = new TempFile(Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleUnsignedVersioned200Image))
+            using (
+                TempFile core = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName),
+                    TestData.s_PhonyCoreAssemblyImage
+                )
+            )
+            using (
+                TempFile tf1 = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleUnsignedVersioned100Image
+                )
+            )
+            using (
+                TempFile tf2 = new TempFile(
+                    Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleUnsignedVersioned200Image
+                )
+            )
             {
                 // tf1 first, then tf2.
                 {
-                    var resolver = new PathAssemblyResolver(new string[] { core.Path, tf1.Path, tf2.Path });
-                    using (var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName))
+                    var resolver = new PathAssemblyResolver(
+                        new string[] { core.Path, tf1.Path, tf2.Path }
+                    );
+                    using (
+                        var lc = new MetadataLoadContext(
+                            resolver,
+                            TestData.s_PhonyCoreAssemblyFullName
+                        )
+                    )
                     {
-                        Assembly a1 = lc.LoadFromAssemblyName(TestData.s_SimpleUnsignedVersioned100FullName);
+                        Assembly a1 = lc.LoadFromAssemblyName(
+                            TestData.s_SimpleUnsignedVersioned100FullName
+                        );
                         Assert.Equal("2.0.0.0", a1.GetName().Version.ToString());
                     }
                 }
 
                 // Reverse the order.
                 {
-                    var resolver = new PathAssemblyResolver(new string[] { core.Path, tf2.Path, tf1.Path });
-                    using (var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName))
+                    var resolver = new PathAssemblyResolver(
+                        new string[] { core.Path, tf2.Path, tf1.Path }
+                    );
+                    using (
+                        var lc = new MetadataLoadContext(
+                            resolver,
+                            TestData.s_PhonyCoreAssemblyFullName
+                        )
+                    )
                     {
-                        Assembly a1 = lc.LoadFromAssemblyName(TestData.s_SimpleUnsignedVersioned100FullName);
+                        Assembly a1 = lc.LoadFromAssemblyName(
+                            TestData.s_SimpleUnsignedVersioned100FullName
+                        );
                         Assert.Equal("2.0.0.0", a1.GetName().Version.ToString());
                     }
                 }
@@ -303,19 +459,42 @@ namespace System.Reflection.Tests
         {
             using (TempDirectory dir = new TempDirectory())
             using (TempDirectory dir2 = new TempDirectory())
-            using (TempFile core = new TempFile(Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName), TestData.s_PhonyCoreAssemblyImage))
-            using (TempFile tf1 = new TempFile(Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleSignedVersioned100Image))
-            using (TempFile tf2 = new TempFile(Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName), TestData.s_SimpleUnsignedVersioned100Image))
+            using (
+                TempFile core = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_PhonyCoreAssemblySimpleName),
+                    TestData.s_PhonyCoreAssemblyImage
+                )
+            )
+            using (
+                TempFile tf1 = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleSignedVersioned100Image
+                )
+            )
+            using (
+                TempFile tf2 = new TempFile(
+                    Path.Combine(dir2.Path, TestData.s_SimpleVersionedShortName),
+                    TestData.s_SimpleUnsignedVersioned100Image
+                )
+            )
             {
-                var resolver = new PathAssemblyResolver(new string[] { core.Path, tf1.Path, tf2.Path });
+                var resolver = new PathAssemblyResolver(
+                    new string[] { core.Path, tf1.Path, tf2.Path }
+                );
 
-                using (var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName))
+                using (
+                    var lc = new MetadataLoadContext(resolver, TestData.s_PhonyCoreAssemblyFullName)
+                )
                 {
                     Assert.Equal(1, lc.GetAssemblies().Count());
 
                     // These are treated as different since one contains a PublicKeyToken and one does not.
-                    Assembly a1 = lc.LoadFromAssemblyName(TestData.s_SimpleUnsignedVersioned100FullName);
-                    Assembly a2 = lc.LoadFromAssemblyName(TestData.s_SimpleSignedVersioned100FullName);
+                    Assembly a1 = lc.LoadFromAssemblyName(
+                        TestData.s_SimpleUnsignedVersioned100FullName
+                    );
+                    Assembly a2 = lc.LoadFromAssemblyName(
+                        TestData.s_SimpleSignedVersioned100FullName
+                    );
                     Assert.NotSame(a1, a2);
 
                     Assert.Equal(3, lc.GetAssemblies().Count());
@@ -334,20 +513,29 @@ namespace System.Reflection.Tests
             string mscorLibPath = Path.Combine(coreDirectory, "mscorlib.dll");
 
             using (TempDirectory dir = new TempDirectory())
-            using (TempFile relocatableAsmFile = new TempFile(Path.Combine(dir.Path, TestData.s_RetargetableAssemblySimpleName), TestData.s_RetargetableImage))
+            using (
+                TempFile relocatableAsmFile = new TempFile(
+                    Path.Combine(dir.Path, TestData.s_RetargetableAssemblySimpleName),
+                    TestData.s_RetargetableImage
+                )
+            )
             {
-                var resolver = new PathAssemblyResolver(new string[] { coreAssemblyPath, mscorLibPath, relocatableAsmFile.Path });
+                var resolver = new PathAssemblyResolver(
+                    new string[] { coreAssemblyPath, mscorLibPath, relocatableAsmFile.Path }
+                );
 
                 using (MetadataLoadContext lc = new MetadataLoadContext(resolver, coreAssemblyName))
                 {
-                    Assembly retargetableAssembly = lc.LoadFromAssemblyName(TestData.s_RetargetableAssemblySimpleName);
+                    Assembly retargetableAssembly = lc.LoadFromAssemblyName(
+                        TestData.s_RetargetableAssemblySimpleName
+                    );
                     Assert.NotNull(retargetableAssembly);
 
                     // The assembly only contains a reference to an older, retargetable mscorlib.
                     AssemblyName[] assemblyNames = retargetableAssembly.GetReferencedAssemblies();
                     AssemblyName retargetableAssemblyName = assemblyNames[0];
                     Assert.Equal(AssemblyNameFlags.Retargetable, retargetableAssemblyName.Flags);
-                    Assert.Equal(new Version(2,0,5,0), retargetableAssemblyName.Version);
+                    Assert.Equal(new Version(2, 0, 5, 0), retargetableAssemblyName.Version);
 
                     // Trigger PathAssemblyResolver.Resolve for the older mscorlib.
                     Type myType = retargetableAssembly.GetType("Relocate.MyClass");

@@ -121,7 +121,6 @@ public class ExpressionEqualityComparerTest
 
     private class Indexable
     {
-        public int this[int index]
-            => 0;
+        public int this[int index] => 0;
     }
 }

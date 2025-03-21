@@ -15,7 +15,16 @@ public class ViewBufferTextWriterTest
     public void Write_WritesDataTypes()
     {
         // Arrange
-        var expected = new object[] { "True", "3", "18446744073709551615", "Hello world", "3.14", "2.718", "m" };
+        var expected = new object[]
+        {
+            "True",
+            "3",
+            "18446744073709551615",
+            "Hello world",
+            "3.14",
+            "2.718",
+            "m",
+        };
         var buffer = new ViewBuffer(new TestViewBufferScope(), "some-name", pageSize: 4);
         var writer = new ViewBufferTextWriter(buffer, Encoding.UTF8);
 
@@ -37,7 +46,16 @@ public class ViewBufferTextWriterTest
     public async Task Write_WritesDataTypes_AfterFlush()
     {
         // Arrange
-        var expected = new object[] { "True", "3", "18446744073709551615", "Hello world", "3.14", "2.718", "m" };
+        var expected = new object[]
+        {
+            "True",
+            "3",
+            "18446744073709551615",
+            "Hello world",
+            "3.14",
+            "2.718",
+            "m",
+        };
         var buffer = new ViewBuffer(new TestViewBufferScope(), "some-name", pageSize: 4);
         var writer = new ViewBufferTextWriter(buffer, Encoding.UTF8);
 
@@ -84,7 +102,12 @@ public class ViewBufferTextWriterTest
         var expected = new List<object> { "False", newLine, "1.1", newLine, "3", newLine };
         var inner = new Mock<TextWriter>();
         var buffer = new ViewBuffer(new TestViewBufferScope(), "some-name", pageSize: 4);
-        var writer = new ViewBufferTextWriter(buffer, Encoding.UTF8, new HtmlTestEncoder(), inner.Object);
+        var writer = new ViewBufferTextWriter(
+            buffer,
+            Encoding.UTF8,
+            new HtmlTestEncoder(),
+            inner.Object
+        );
 
         // Act
         writer.Flush();

@@ -17,10 +17,19 @@ namespace System.Collections.Frozen
         private readonly bool _ignoreCase;
 
         private LengthBucketsFrozenDictionary(
-            string[] keys, TValue[] values, int[] lengthBuckets, int minLength, IEqualityComparer<string> comparer)
+            string[] keys,
+            TValue[] values,
+            int[] lengthBuckets,
+            int minLength,
+            IEqualityComparer<string> comparer
+        )
             : base(comparer)
         {
-            Debug.Assert(comparer == EqualityComparer<string>.Default || comparer == StringComparer.Ordinal || comparer == StringComparer.OrdinalIgnoreCase);
+            Debug.Assert(
+                comparer == EqualityComparer<string>.Default
+                    || comparer == StringComparer.Ordinal
+                    || comparer == StringComparer.OrdinalIgnoreCase
+            );
 
             _keys = keys;
             _values = values;
@@ -30,17 +39,33 @@ namespace System.Collections.Frozen
         }
 
         internal static LengthBucketsFrozenDictionary<TValue>? CreateLengthBucketsFrozenDictionaryIfAppropriate(
-            string[] keys, TValue[] values, IEqualityComparer<string> comparer, int minLength, int maxLength)
+            string[] keys,
+            TValue[] values,
+            IEqualityComparer<string> comparer,
+            int minLength,
+            int maxLength
+        )
         {
             Debug.Assert(keys.Length != 0 && keys.Length == values.Length);
 
-            int[]? lengthBuckets = LengthBuckets.CreateLengthBucketsArrayIfAppropriate(keys, comparer, minLength, maxLength);
+            int[]? lengthBuckets = LengthBuckets.CreateLengthBucketsArrayIfAppropriate(
+                keys,
+                comparer,
+                minLength,
+                maxLength
+            );
             if (lengthBuckets is null)
             {
                 return null;
             }
 
-            return new LengthBucketsFrozenDictionary<TValue>(keys, values, lengthBuckets, minLength, comparer);
+            return new LengthBucketsFrozenDictionary<TValue>(
+                keys,
+                values,
+                lengthBuckets,
+                minLength,
+                comparer
+            );
         }
 
         /// <inheritdoc />

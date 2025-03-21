@@ -14,13 +14,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Diagnostics
     [Export(typeof(IDiagnosticUpdateSourceRegistrationService))]
     [Shared]
     [PartNotDiscoverable]
-    internal class MockDiagnosticUpdateSourceRegistrationService : IDiagnosticUpdateSourceRegistrationService
+    internal class MockDiagnosticUpdateSourceRegistrationService
+        : IDiagnosticUpdateSourceRegistrationService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MockDiagnosticUpdateSourceRegistrationService()
-        {
-        }
+        public MockDiagnosticUpdateSourceRegistrationService() { }
 
         public void Register(IDiagnosticUpdateSource source)
         {

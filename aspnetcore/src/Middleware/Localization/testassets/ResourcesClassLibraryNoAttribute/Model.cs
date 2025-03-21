@@ -3,6 +3,4 @@
 
 namespace ResourcesClassLibraryNoAttribute;
 
-public class Model
-{
-}
+public class Model { }

@@ -11,7 +11,7 @@ public class Test
         Console.WriteLine("");
         Console.WriteLine($"Hello World! Got {args.Length} args");
         foreach (string arg in args)
-            Console.WriteLine ($"arg: {arg}");
+            Console.WriteLine($"arg: {arg}");
         Console.WriteLine("");
         return 0;
     }

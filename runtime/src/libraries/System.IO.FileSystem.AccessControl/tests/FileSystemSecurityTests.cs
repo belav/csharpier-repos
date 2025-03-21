@@ -21,21 +21,35 @@ namespace System.IO
         public void AddAccessRule_InvalidFileSystemAccessRule()
         {
             var fileSecurity = new FileSecurity();
-            AssertExtensions.Throws<ArgumentNullException>("rule", () => fileSecurity.AddAccessRule(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "rule",
+                () => fileSecurity.AddAccessRule(null)
+            );
         }
 
         [Fact]
         public void AddAccessRule_Succeeds()
         {
-            var accessRule = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.AppendData, AccessControlType.Allow);
+            var accessRule = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.AppendData,
+                AccessControlType.Allow
+            );
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAccessRule(accessRule);
-            AuthorizationRuleCollection rules =
-                fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(1, rules.Count);
             var actualAddedRule = (FileSystemAccessRule)rules[0];
-            Assert.Equal(new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(typeof(NTAccount)), actualAddedRule.IdentityReference);
+            Assert.Equal(
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
+                    typeof(NTAccount)
+                ),
+                actualAddedRule.IdentityReference
+            );
             Assert.Equal(accessRule.FileSystemRights, actualAddedRule.FileSystemRights);
             Assert.Equal(accessRule.AccessControlType, actualAddedRule.AccessControlType);
         }
@@ -44,23 +58,35 @@ namespace System.IO
         public void SetAccessRule_InvalidFileSystemAccessRule()
         {
             var fileSecurity = new FileSecurity();
-            AssertExtensions.Throws<ArgumentNullException>("rule", () => fileSecurity.SetAccessRule(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "rule",
+                () => fileSecurity.SetAccessRule(null)
+            );
         }
 
         [Fact]
         public void SetAccessRule_Succeeds()
         {
-            var accessRuleRead = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.Read, AccessControlType.Allow);
+            var accessRuleRead = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Read,
+                AccessControlType.Allow
+            );
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAccessRule(accessRuleRead);
-            var accessRuleWrite = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.Write, AccessControlType.Allow);
+            var accessRuleWrite = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Write,
+                AccessControlType.Allow
+            );
             //Changing the value of file system rights from "read" to "write".
             fileSecurity.SetAccessRule(accessRuleWrite);
 
-            AuthorizationRuleCollection rules =
-                fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
 
             Assert.Equal(1, rules.Count);
             var existingAccessRule = (FileSystemAccessRule)rules[0];
@@ -70,21 +96,35 @@ namespace System.IO
         [Fact]
         public void SetAccessRule_IgnoreExistingRule_Succeeds()
         {
-            var accessRuleRead = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.Read, AccessControlType.Allow);
+            var accessRuleRead = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Read,
+                AccessControlType.Allow
+            );
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAccessRule(accessRuleRead);
 
-            var newAccessRule = new FileSystemAccessRule(Helpers.s_NetworkServiceNTAccount,
-                FileSystemRights.Write, AccessControlType.Allow);
+            var newAccessRule = new FileSystemAccessRule(
+                Helpers.s_NetworkServiceNTAccount,
+                FileSystemRights.Write,
+                AccessControlType.Allow
+            );
             fileSecurity.SetAccessRule(newAccessRule);
 
-            AuthorizationRuleCollection rules =
-                fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
 
             Assert.Equal(2, rules.Count);
             var existingAccessRule = (FileSystemAccessRule)rules[0];
-            Assert.Equal(new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(typeof(NTAccount)), existingAccessRule.IdentityReference);
+            Assert.Equal(
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
+                    typeof(NTAccount)
+                ),
+                existingAccessRule.IdentityReference
+            );
             existingAccessRule = (FileSystemAccessRule)rules[1];
             Assert.Equal(Helpers.s_NetworkServiceNTAccount, existingAccessRule.IdentityReference);
         }
@@ -93,28 +133,47 @@ namespace System.IO
         public void ResetAccessRule_InvalidFileSystemAccessRule()
         {
             var fileSecurity = new FileSecurity();
-            AssertExtensions.Throws<ArgumentNullException>("rule", () => fileSecurity.ResetAccessRule(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "rule",
+                () => fileSecurity.ResetAccessRule(null)
+            );
         }
 
         [Fact]
         public void ResetSetAccessRule_Succeeds()
         {
-            var accessRuleRead = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.Read, AccessControlType.Allow);
-            var accessRuleAppendData = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.AppendData, AccessControlType.Deny);
-            var accessRuleWrite = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.Write, AccessControlType.Allow);
+            var accessRuleRead = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Read,
+                AccessControlType.Allow
+            );
+            var accessRuleAppendData = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.AppendData,
+                AccessControlType.Deny
+            );
+            var accessRuleWrite = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Write,
+                AccessControlType.Allow
+            );
 
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAccessRule(accessRuleRead);
             fileSecurity.AddAccessRule(accessRuleAppendData);
-            AuthorizationRuleCollection rules =
-                fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(2, rules.Count);
             //Resetting the access rules.
             fileSecurity.ResetAccessRule(accessRuleWrite);
-            rules = fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(1, rules.Count);
             var existingAccessRule = (FileSystemAccessRule)rules[0];
             Assert.Equal(accessRuleWrite.FileSystemRights, existingAccessRule.FileSystemRights);
@@ -125,58 +184,100 @@ namespace System.IO
         public void RemoveAccessRule_InvalidFileSystemAccessRule()
         {
             var fileSecurity = new FileSecurity();
-            AssertExtensions.Throws<ArgumentNullException>("rule", () => fileSecurity.RemoveAccessRule(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "rule",
+                () => fileSecurity.RemoveAccessRule(null)
+            );
         }
 
         [Fact]
         public void RemoveAccessRule_Succeeds()
         {
-            var accessRule = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
+            var accessRule = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
                 FileSystemRights.Read | FileSystemRights.Write,
-                AccessControlType.Allow);
+                AccessControlType.Allow
+            );
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAccessRule(accessRule);
-            AuthorizationRuleCollection rules =
-               fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(1, rules.Count);
             //Removing the "write" access right.
-            Assert.True(fileSecurity.RemoveAccessRule(new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                 FileSystemRights.Write,
-                AccessControlType.Allow)));
-            rules = fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            Assert.True(
+                fileSecurity.RemoveAccessRule(
+                    new FileSystemAccessRule(
+                        Helpers.s_LocalSystemNTAccount,
+                        FileSystemRights.Write,
+                        AccessControlType.Allow
+                    )
+                )
+            );
+            rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(1, rules.Count);
             var remainingRule = (FileSystemAccessRule)rules[0];
-            Assert.Equal(FileSystemRights.Read | FileSystemRights.Synchronize, remainingRule.FileSystemRights);
+            Assert.Equal(
+                FileSystemRights.Read | FileSystemRights.Synchronize,
+                remainingRule.FileSystemRights
+            );
         }
 
         [Fact]
         public void RemoveAccessRule_IdenticalRule_Succeeds()
         {
-            var accessRule = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
+            var accessRule = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
                 FileSystemRights.Read | FileSystemRights.Write,
-                AccessControlType.Allow);
+                AccessControlType.Allow
+            );
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAccessRule(accessRule);
-            Assert.True(fileSecurity.RemoveAccessRule(new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                 FileSystemRights.Read | FileSystemRights.Write,
-                AccessControlType.Allow)));
-            var rules = fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            Assert.True(
+                fileSecurity.RemoveAccessRule(
+                    new FileSystemAccessRule(
+                        Helpers.s_LocalSystemNTAccount,
+                        FileSystemRights.Read | FileSystemRights.Write,
+                        AccessControlType.Allow
+                    )
+                )
+            );
+            var rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(0, rules.Count);
         }
 
         [Fact]
         public void RemoveAccessRule_NoMatchableRules_Succeeds()
         {
-            var accessRuleAppendData = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount, FileSystemRights.AppendData,
-                AccessControlType.Allow);
-            var accessRuleWrite = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.Write, AccessControlType.Deny);
+            var accessRuleAppendData = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.AppendData,
+                AccessControlType.Allow
+            );
+            var accessRuleWrite = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Write,
+                AccessControlType.Deny
+            );
 
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAccessRule(accessRuleAppendData);
             Assert.True(fileSecurity.RemoveAccessRule(accessRuleWrite));
-            AuthorizationRuleCollection rules =
-                fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(1, rules.Count);
             var remainingRule = (FileSystemAccessRule)rules[0];
             Assert.Equal(Helpers.s_LocalSystemNTAccount, accessRuleAppendData.IdentityReference);
@@ -188,41 +289,64 @@ namespace System.IO
         public void RemoveAccessRuleSpecific_Invalid_FileSystemAccessRule()
         {
             var fileSecurity = new FileSecurity();
-            AssertExtensions.Throws<ArgumentNullException>("rule", () => fileSecurity.RemoveAccessRuleSpecific(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "rule",
+                () => fileSecurity.RemoveAccessRuleSpecific(null)
+            );
         }
 
         [Fact]
         public void RemoveAccessRuleSpecific_NoMatchingRules_Succeeds()
         {
-            var accessRuleReadWrite = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
+            var accessRuleReadWrite = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
                 FileSystemRights.Read | FileSystemRights.Write,
-                AccessControlType.Allow);
-            var accessRuleWrite = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.Write, AccessControlType.Allow);
+                AccessControlType.Allow
+            );
+            var accessRuleWrite = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Write,
+                AccessControlType.Allow
+            );
 
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAccessRule(accessRuleReadWrite);
             fileSecurity.RemoveAccessRuleSpecific(accessRuleWrite);
-            AuthorizationRuleCollection rules =
-                fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(1, rules.Count);
             var remainingRule = (FileSystemAccessRule)rules[0];
-            Assert.Equal(FileSystemRights.Write | FileSystemRights.Read | FileSystemRights.Synchronize,
-                remainingRule.FileSystemRights);
+            Assert.Equal(
+                FileSystemRights.Write | FileSystemRights.Read | FileSystemRights.Synchronize,
+                remainingRule.FileSystemRights
+            );
         }
 
         [Fact]
         public void RemoveAccessRuleSpecific_Succeeds()
         {
-            var accessRule = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount, FileSystemRights.AppendData
-                | FileSystemRights.Write, AccessControlType.Allow);
+            var accessRule = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.AppendData | FileSystemRights.Write,
+                AccessControlType.Allow
+            );
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAccessRule(accessRule);
-            AuthorizationRuleCollection rules =
-               fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(1, rules.Count);
             fileSecurity.RemoveAccessRuleSpecific(accessRule);
-            rules = fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(0, rules.Count);
         }
 
@@ -230,22 +354,40 @@ namespace System.IO
         public void RemoveAccessRuleAll_InvalidFileSystemAccessRule()
         {
             var fileSecurity = new FileSecurity();
-            AssertExtensions.Throws<ArgumentNullException>("rule", () => fileSecurity.RemoveAccessRuleAll(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "rule",
+                () => fileSecurity.RemoveAccessRuleAll(null)
+            );
         }
 
         [Fact]
         public void RemoveAccessRuleAll_Succeeds()
         {
-            var accessRuleAppendData = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount, FileSystemRights.AppendData,
-                AccessControlType.Allow);
-            var accessRuleRead = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.Read, AccessControlType.Allow);
-            var accessRuleWrite = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.Write, AccessControlType.Allow);
-            var accessRuleReadPermissionDeny = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount,
-              FileSystemRights.ReadPermissions, AccessControlType.Deny);
-            var accessRuleReadNetworkService = new FileSystemAccessRule(Helpers.s_NetworkServiceNTAccount,
-                FileSystemRights.Read, AccessControlType.Allow);
+            var accessRuleAppendData = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.AppendData,
+                AccessControlType.Allow
+            );
+            var accessRuleRead = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Read,
+                AccessControlType.Allow
+            );
+            var accessRuleWrite = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Write,
+                AccessControlType.Allow
+            );
+            var accessRuleReadPermissionDeny = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.ReadPermissions,
+                AccessControlType.Deny
+            );
+            var accessRuleReadNetworkService = new FileSystemAccessRule(
+                Helpers.s_NetworkServiceNTAccount,
+                FileSystemRights.Read,
+                AccessControlType.Allow
+            );
 
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAccessRule(accessRuleAppendData);
@@ -254,12 +396,20 @@ namespace System.IO
             fileSecurity.AddAccessRule(accessRuleReadNetworkService);
             //Removing all the access rules of the "System" user with the access control type "allow".
             fileSecurity.RemoveAccessRuleAll(accessRuleWrite);
-            AuthorizationRuleCollection rules =
-                fileSecurity.GetAccessRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection rules = fileSecurity.GetAccessRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
 
             Assert.Equal(2, rules.Count);
             var existingAccessRule = (FileSystemAccessRule)rules[0];
-            Assert.Equal(new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(typeof(NTAccount)), existingAccessRule.IdentityReference);
+            Assert.Equal(
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
+                    typeof(NTAccount)
+                ),
+                existingAccessRule.IdentityReference
+            );
             Assert.Equal(AccessControlType.Deny, existingAccessRule.AccessControlType);
             Assert.Equal(FileSystemRights.ReadPermissions, existingAccessRule.FileSystemRights);
             existingAccessRule = (FileSystemAccessRule)rules[1];
@@ -270,8 +420,11 @@ namespace System.IO
         [Fact]
         public void AccessRuleType_Returns_Valid_Object()
         {
-            var accessRule = new FileSystemAccessRule(Helpers.s_LocalSystemNTAccount, FileSystemRights.AppendData,
-             AccessControlType.Allow);
+            var accessRule = new FileSystemAccessRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.AppendData,
+                AccessControlType.Allow
+            );
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAccessRule(accessRule);
             Type accessRuleType = fileSecurity.AccessRuleType;
@@ -281,12 +434,18 @@ namespace System.IO
         [Fact]
         public void AddAuditRule_Succeeds()
         {
-            var auditRule = new FileSystemAuditRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.AppendData, AuditFlags.Success);
+            var auditRule = new FileSystemAuditRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.AppendData,
+                AuditFlags.Success
+            );
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAuditRule(auditRule);
-            AuthorizationRuleCollection auditRules =
-                fileSecurity.GetAuditRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection auditRules = fileSecurity.GetAuditRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(1, auditRules.Count);
             var actualAddedRule = (FileSystemAuditRule)auditRules[0];
             Assert.Equal(Helpers.s_LocalSystemNTAccount, actualAddedRule.IdentityReference);
@@ -297,22 +456,40 @@ namespace System.IO
         [Fact]
         public void SetAuditRule_Succeeds()
         {
-            var auditRuleAppendData = new FileSystemAuditRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.AppendData, AuditFlags.Success);
-            var auditRuleNetworkService = new FileSystemAuditRule(Helpers.s_NetworkServiceNTAccount,
-                FileSystemRights.CreateFiles, AuditFlags.Failure);
-            var auditRuleDelete = new FileSystemAuditRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.Delete, AuditFlags.Success);
+            var auditRuleAppendData = new FileSystemAuditRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.AppendData,
+                AuditFlags.Success
+            );
+            var auditRuleNetworkService = new FileSystemAuditRule(
+                Helpers.s_NetworkServiceNTAccount,
+                FileSystemRights.CreateFiles,
+                AuditFlags.Failure
+            );
+            var auditRuleDelete = new FileSystemAuditRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Delete,
+                AuditFlags.Success
+            );
 
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAuditRule(auditRuleNetworkService);
             fileSecurity.AddAuditRule(auditRuleAppendData);
             fileSecurity.SetAuditRule(auditRuleDelete);
-            var auditRules = fileSecurity.GetAuditRules(true, true, typeof(System.Security.Principal.NTAccount));
+            var auditRules = fileSecurity.GetAuditRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
 
             Assert.Equal(2, auditRules.Count);
             var firstAuditRule = (FileSystemAuditRule)auditRules[0];
-            Assert.Equal(new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(typeof(NTAccount)), firstAuditRule.IdentityReference);
+            Assert.Equal(
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
+                    typeof(NTAccount)
+                ),
+                firstAuditRule.IdentityReference
+            );
             Assert.Equal(AuditFlags.Success, firstAuditRule.AuditFlags);
             Assert.Equal(FileSystemRights.Delete, firstAuditRule.FileSystemRights);
             var secondAuditRule = (FileSystemAuditRule)auditRules[1];
@@ -324,39 +501,69 @@ namespace System.IO
         [Fact]
         public void RemoveAuditRule_Succeeds()
         {
-            var auditRule = new FileSystemAuditRule(Helpers.s_LocalSystemNTAccount,
+            var auditRule = new FileSystemAuditRule(
+                Helpers.s_LocalSystemNTAccount,
                 FileSystemRights.Read | FileSystemRights.Write,
-                AuditFlags.Failure);
+                AuditFlags.Failure
+            );
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAuditRule(auditRule);
-            AuthorizationRuleCollection rules =
-               fileSecurity.GetAuditRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection rules = fileSecurity.GetAuditRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(1, rules.Count);
-            Assert.True(fileSecurity.RemoveAuditRule(new FileSystemAuditRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.Write, AuditFlags.Failure)));
+            Assert.True(
+                fileSecurity.RemoveAuditRule(
+                    new FileSystemAuditRule(
+                        Helpers.s_LocalSystemNTAccount,
+                        FileSystemRights.Write,
+                        AuditFlags.Failure
+                    )
+                )
+            );
 
-            rules = fileSecurity.GetAuditRules(true, true, typeof(System.Security.Principal.NTAccount));
+            rules = fileSecurity.GetAuditRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(1, rules.Count);
             var existingRule = (FileSystemAuditRule)rules[0];
             Assert.Equal(FileSystemRights.Read, existingRule.FileSystemRights);
             Assert.Equal(AuditFlags.Failure, existingRule.AuditFlags);
-            Assert.Equal(new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(typeof(NTAccount)), existingRule.IdentityReference);
+            Assert.Equal(
+                new SecurityIdentifier(WellKnownSidType.LocalSystemSid, null).Translate(
+                    typeof(NTAccount)
+                ),
+                existingRule.IdentityReference
+            );
         }
 
         [Fact]
         public void RemoveAuditRuleSpecific_Succeeds()
         {
-            var auditRuleReadWrite = new FileSystemAuditRule(Helpers.s_LocalSystemNTAccount,
-               FileSystemRights.Write | FileSystemRights.Read, AuditFlags.Success);
-            var auditRuleNetworkService = new FileSystemAuditRule(Helpers.s_NetworkServiceNTAccount,
-                FileSystemRights.Read, AuditFlags.Failure);
+            var auditRuleReadWrite = new FileSystemAuditRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Write | FileSystemRights.Read,
+                AuditFlags.Success
+            );
+            var auditRuleNetworkService = new FileSystemAuditRule(
+                Helpers.s_NetworkServiceNTAccount,
+                FileSystemRights.Read,
+                AuditFlags.Failure
+            );
 
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAuditRule(auditRuleReadWrite);
             fileSecurity.AddAuditRule(auditRuleNetworkService);
             fileSecurity.RemoveAuditRuleSpecific(auditRuleReadWrite);
-            AuthorizationRuleCollection rules =
-              fileSecurity.GetAuditRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection rules = fileSecurity.GetAuditRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(1, rules.Count);
             var existingAuditRule = (FileSystemAuditRule)rules[0];
             Assert.Equal(Helpers.s_NetworkServiceNTAccount, existingAuditRule.IdentityReference);
@@ -367,35 +574,61 @@ namespace System.IO
         [Fact]
         public void RemoveAuditRuleSpecific_NoMatchingRules_Succeeds()
         {
-            var auditRuleReadWrite = new FileSystemAuditRule(Helpers.s_LocalSystemNTAccount,
-              FileSystemRights.Write | FileSystemRights.Read, AuditFlags.Success);
+            var auditRuleReadWrite = new FileSystemAuditRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Write | FileSystemRights.Read,
+                AuditFlags.Success
+            );
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAuditRule(auditRuleReadWrite);
-            fileSecurity.RemoveAuditRuleSpecific(new FileSystemAuditRule(Helpers.s_LocalSystemNTAccount,
-              FileSystemRights.Write, AuditFlags.Success));
-            AuthorizationRuleCollection rules =
-              fileSecurity.GetAuditRules(true, true, typeof(System.Security.Principal.NTAccount));
+            fileSecurity.RemoveAuditRuleSpecific(
+                new FileSystemAuditRule(
+                    Helpers.s_LocalSystemNTAccount,
+                    FileSystemRights.Write,
+                    AuditFlags.Success
+                )
+            );
+            AuthorizationRuleCollection rules = fileSecurity.GetAuditRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
             Assert.Equal(1, rules.Count);
             var existingRule = (FileSystemAuditRule)rules[0];
-            Assert.Equal(FileSystemRights.Write | FileSystemRights.Read, existingRule.FileSystemRights);
+            Assert.Equal(
+                FileSystemRights.Write | FileSystemRights.Read,
+                existingRule.FileSystemRights
+            );
         }
 
         [Fact]
         public void RemoveAuditRuleAll_Succeeds()
         {
-            var auditRuleAppend = new FileSystemAuditRule(Helpers.s_LocalSystemNTAccount, FileSystemRights.AppendData,
-                AuditFlags.Success);
-            var auditRuleWrite = new FileSystemAuditRule(Helpers.s_LocalSystemNTAccount,
-                FileSystemRights.Write, AuditFlags.Success);
-            var auditRuleNetworkService = new FileSystemAuditRule(Helpers.s_NetworkServiceNTAccount,
-                FileSystemRights.Read, AuditFlags.Failure);
+            var auditRuleAppend = new FileSystemAuditRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.AppendData,
+                AuditFlags.Success
+            );
+            var auditRuleWrite = new FileSystemAuditRule(
+                Helpers.s_LocalSystemNTAccount,
+                FileSystemRights.Write,
+                AuditFlags.Success
+            );
+            var auditRuleNetworkService = new FileSystemAuditRule(
+                Helpers.s_NetworkServiceNTAccount,
+                FileSystemRights.Read,
+                AuditFlags.Failure
+            );
 
             var fileSecurity = new FileSecurity();
             fileSecurity.AddAuditRule(auditRuleAppend);
             fileSecurity.AddAuditRule(auditRuleNetworkService);
             fileSecurity.RemoveAuditRuleAll(auditRuleWrite);
-            AuthorizationRuleCollection rules =
-                fileSecurity.GetAuditRules(true, true, typeof(System.Security.Principal.NTAccount));
+            AuthorizationRuleCollection rules = fileSecurity.GetAuditRules(
+                true,
+                true,
+                typeof(System.Security.Principal.NTAccount)
+            );
 
             Assert.Equal(1, rules.Count);
             var existingAuditRule = (FileSystemAuditRule)rules[0];
@@ -425,7 +658,6 @@ namespace System.IO
             {
                 new DirectorySecurity(longDir, AccessControlSections.Owner);
             });
-            
         }
 
         [Fact]

@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void CoalesceOperation_01()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? input, int alternative, int result)
@@ -35,8 +36,9 @@ class C
             var tree = compilation.SyntaxTrees.Single();
             var node = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Single();
 
-            compilation.VerifyOperationTree(node, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node,
+                expectedOperationTree: @"
 ICoalesceOperation (OperationKind.Coalesce, Type: System.Int32) (Syntax: 'input ?? alternative')
   Expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'input')
@@ -44,9 +46,11 @@ ICoalesceOperation (OperationKind.Coalesce, Type: System.Int32) (Syntax: 'input 
     (Identity)
   WhenNull: 
     IParameterReferenceOperation: alternative (OperationKind.ParameterReference, Type: System.Int32) (Syntax: 'alternative')
-");
+"
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -130,7 +134,8 @@ Block[B6] - Exit
         [Fact]
         public void CoalesceOperation_02()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? input, long alternative, long result)
@@ -146,8 +151,9 @@ class C
             var tree = compilation.SyntaxTrees.Single();
             var node = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Single();
 
-            compilation.VerifyOperationTree(node, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node,
+                expectedOperationTree: @"
 ICoalesceOperation (OperationKind.Coalesce, Type: System.Int64) (Syntax: 'input ?? alternative')
   Expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'input')
@@ -155,9 +161,11 @@ ICoalesceOperation (OperationKind.Coalesce, Type: System.Int64) (Syntax: 'input 
     (ImplicitNumeric)
   WhenNull: 
     IParameterReferenceOperation: alternative (OperationKind.ParameterReference, Type: System.Int64) (Syntax: 'alternative')
-");
+"
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -245,7 +253,8 @@ Block[B6] - Exit
         [Fact]
         public void CoalesceOperation_03()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? input, long? alternative, long? result)
@@ -261,8 +270,9 @@ class C
             var tree = compilation.SyntaxTrees.Single();
             var node = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Single();
 
-            compilation.VerifyOperationTree(node, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node,
+                expectedOperationTree: @"
 ICoalesceOperation (OperationKind.Coalesce, Type: System.Int64?) (Syntax: 'input ?? alternative')
   Expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'input')
@@ -270,9 +280,11 @@ ICoalesceOperation (OperationKind.Coalesce, Type: System.Int64?) (Syntax: 'input
     (ImplicitNullable)
   WhenNull: 
     IParameterReferenceOperation: alternative (OperationKind.ParameterReference, Type: System.Int64?) (Syntax: 'alternative')
-");
+"
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -360,7 +372,8 @@ Block[B6] - Exit
         [Fact]
         public void CoalesceOperation_04()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(string input, object alternative, object result)
@@ -376,8 +389,9 @@ class C
             var tree = compilation.SyntaxTrees.Single();
             var node = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Single();
 
-            compilation.VerifyOperationTree(node, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node,
+                expectedOperationTree: @"
 ICoalesceOperation (OperationKind.Coalesce, Type: System.Object) (Syntax: 'input ?? alternative')
   Expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.String) (Syntax: 'input')
@@ -385,9 +399,11 @@ ICoalesceOperation (OperationKind.Coalesce, Type: System.Object) (Syntax: 'input
     (ImplicitReference)
   WhenNull: 
     IParameterReferenceOperation: alternative (OperationKind.ParameterReference, Type: System.Object) (Syntax: 'alternative')
-");
+"
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -472,7 +488,8 @@ Block[B6] - Exit
         [Fact]
         public void CoalesceOperation_05()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? input, System.DateTime alternative, object result)
@@ -486,14 +503,17 @@ class C
             compilation.VerifyDiagnostics(
                 // (6,18): error CS0019: Operator '??' cannot be applied to operands of type 'int?' and 'DateTime'
                 //         result = input ?? alternative;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "input ?? alternative").WithArguments("??", "int?", "System.DateTime").WithLocation(6, 18)
-                );
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "input ?? alternative")
+                    .WithArguments("??", "int?", "System.DateTime")
+                    .WithLocation(6, 18)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var node = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Single();
 
-            compilation.VerifyOperationTree(node, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node,
+                expectedOperationTree: @"
 ICoalesceOperation (OperationKind.Coalesce, Type: ?, IsInvalid) (Syntax: 'input ?? alternative')
   Expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Int32?, IsInvalid) (Syntax: 'input')
@@ -501,9 +521,11 @@ ICoalesceOperation (OperationKind.Coalesce, Type: ?, IsInvalid) (Syntax: 'input 
     (NoConversion)
   WhenNull: 
     IParameterReferenceOperation: alternative (OperationKind.ParameterReference, Type: System.DateTime, IsInvalid) (Syntax: 'alternative')
-");
+"
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -590,7 +612,8 @@ Block[B6] - Exit
         [Fact, WorkItem(60059, "https://github.com/dotnet/roslyn/issues/60059")]
         public void CoalesceOperation_06()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? input, dynamic alternative, dynamic result)
@@ -598,15 +621,20 @@ class C
         result = input ?? alternative;
     }/*</bind>*/
 }";
-            var compilation = CreateCompilation(source, references: new[] { CSharpRef }, targetFramework: TargetFramework.Mscorlib40AndSystemCore);
+            var compilation = CreateCompilation(
+                source,
+                references: new[] { CSharpRef },
+                targetFramework: TargetFramework.Mscorlib40AndSystemCore
+            );
 
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var node = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Single();
 
-            compilation.VerifyOperationTree(node, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node,
+                expectedOperationTree: @"
 ICoalesceOperation (OperationKind.Coalesce, Type: dynamic) (Syntax: 'input ?? alternative')
   Expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'input')
@@ -614,9 +642,11 @@ ICoalesceOperation (OperationKind.Coalesce, Type: dynamic) (Syntax: 'input ?? al
     (Boxing)
   WhenNull: 
     IParameterReferenceOperation: alternative (OperationKind.ParameterReference, Type: dynamic) (Syntax: 'alternative')
-");
+"
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -704,7 +734,8 @@ Block[B6] - Exit
         [Fact]
         public void CoalesceOperation_07()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(dynamic alternative, dynamic result)
@@ -713,15 +744,20 @@ class C
     }/*</bind>*/
 }";
 
-            var compilation = CreateCompilation(source, references: new[] { CSharpRef }, targetFramework: TargetFramework.Mscorlib40AndSystemCore);
+            var compilation = CreateCompilation(
+                source,
+                references: new[] { CSharpRef },
+                targetFramework: TargetFramework.Mscorlib40AndSystemCore
+            );
 
             compilation.VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
             var node = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Single();
 
-            compilation.VerifyOperationTree(node, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node,
+                expectedOperationTree: @"
 ICoalesceOperation (OperationKind.Coalesce, Type: dynamic) (Syntax: 'null ?? alternative')
   Expression: 
     ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
@@ -729,9 +765,11 @@ ICoalesceOperation (OperationKind.Coalesce, Type: dynamic) (Syntax: 'null ?? alt
     (ImplicitReference)
   WhenNull: 
     IParameterReferenceOperation: alternative (OperationKind.ParameterReference, Type: dynamic) (Syntax: 'alternative')
-");
+"
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -816,7 +854,8 @@ Block[B6] - Exit
         [Fact]
         public void CoalesceOperation_08()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int alternative, int result)
@@ -830,14 +869,17 @@ class C
             compilation.VerifyDiagnostics(
                 // (6,18): error CS0019: Operator '??' cannot be applied to operands of type '<null>' and 'int'
                 //         result = null ?? alternative;
-                Diagnostic(ErrorCode.ERR_BadBinaryOps, "null ?? alternative").WithArguments("??", "<null>", "int").WithLocation(6, 18)
-                );
+                Diagnostic(ErrorCode.ERR_BadBinaryOps, "null ?? alternative")
+                    .WithArguments("??", "<null>", "int")
+                    .WithLocation(6, 18)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var node = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Single();
 
-            compilation.VerifyOperationTree(node, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node,
+                expectedOperationTree: @"
 ICoalesceOperation (OperationKind.Coalesce, Type: ?, IsInvalid) (Syntax: 'null ?? alternative')
   Expression: 
     ILiteralOperation (OperationKind.Literal, Type: null, Constant: null, IsInvalid) (Syntax: 'null')
@@ -845,9 +887,11 @@ ICoalesceOperation (OperationKind.Coalesce, Type: ?, IsInvalid) (Syntax: 'null ?
     (NoConversion)
   WhenNull: 
     IParameterReferenceOperation: alternative (OperationKind.ParameterReference, Type: System.Int32, IsInvalid) (Syntax: 'alternative')
-");
+"
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -934,7 +978,8 @@ Block[B6] - Exit
         [Fact]
         public void CoalesceOperation_09()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? alternative, int? result)
@@ -950,8 +995,9 @@ class C
             var tree = compilation.SyntaxTrees.Single();
             var node = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Single();
 
-            compilation.VerifyOperationTree(node, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node,
+                expectedOperationTree: @"
 ICoalesceOperation (OperationKind.Coalesce, Type: System.Int32?) (Syntax: 'null ?? alternative')
   Expression: 
     ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
@@ -959,9 +1005,11 @@ ICoalesceOperation (OperationKind.Coalesce, Type: System.Int32?) (Syntax: 'null 
     (NullLiteral)
   WhenNull: 
     IParameterReferenceOperation: alternative (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'alternative')
-");
+"
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1036,7 +1084,8 @@ Block[B6] - Exit
         [Fact]
         public void CoalesceOperation_10()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? input, byte? alternative, int? result)
@@ -1052,8 +1101,9 @@ class C
             var tree = compilation.SyntaxTrees.Single();
             var node = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Single();
 
-            compilation.VerifyOperationTree(node, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node,
+                expectedOperationTree: @"
 ICoalesceOperation (OperationKind.Coalesce, Type: System.Int32?) (Syntax: 'input ?? alternative')
   Expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'input')
@@ -1064,9 +1114,11 @@ ICoalesceOperation (OperationKind.Coalesce, Type: System.Int32?) (Syntax: 'input
       Conversion: CommonConversion (Exists: True, IsIdentity: False, IsNumeric: False, IsReference: False, IsUserDefined: False) (MethodSymbol: null)
       Operand: 
         IParameterReferenceOperation: alternative (OperationKind.ParameterReference, Type: System.Byte?) (Syntax: 'alternative')
-");
+"
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1151,7 +1203,8 @@ Block[B6] - Exit
         [Fact]
         public void CoalesceOperation_11()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? input, int? alternative, int? result)
@@ -1167,8 +1220,9 @@ class C
             var tree = compilation.SyntaxTrees.Single();
             var node = tree.GetRoot().DescendantNodes().OfType<BinaryExpressionSyntax>().Single();
 
-            compilation.VerifyOperationTree(node, expectedOperationTree:
-@"
+            compilation.VerifyOperationTree(
+                node,
+                expectedOperationTree: @"
 ICoalesceOperation (OperationKind.Coalesce, Type: System.Int32?) (Syntax: 'input ?? alternative')
   Expression: 
     IParameterReferenceOperation: input (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'input')
@@ -1176,9 +1230,11 @@ ICoalesceOperation (OperationKind.Coalesce, Type: System.Int32?) (Syntax: 'input
     (Identity)
   WhenNull: 
     IParameterReferenceOperation: alternative (OperationKind.ParameterReference, Type: System.Int32?) (Syntax: 'alternative')
-");
+"
+            );
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1259,7 +1315,8 @@ Block[B6] - Exit
         [Fact]
         public void CoalesceOperation_12()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void F(int? input1, int? alternative1, int? input2, int? alternative2, int? result)
@@ -1272,7 +1329,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1413,7 +1471,8 @@ Block[B11] - Exit
         [Fact]
         public void CoalesceOperation_13()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     const string input = ""a"";
@@ -1428,7 +1487,8 @@ class C
 
             compilation.VerifyDiagnostics();
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1515,7 +1575,8 @@ Block[B6] - Exit
         [Fact]
         public void CoalesceOperation_14()
         {
-            string source = @"
+            string source =
+                @"
 class P
 {
     void M1(int? i, int j, int result)
@@ -1527,7 +1588,8 @@ class P
             var compilation = CreateCompilationWithMscorlib45(source);
             compilation.MakeMemberMissing(SpecialMember.System_Nullable_T_GetValueOrDefault);
 
-            string expectedGraph = @"
+            string expectedGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1605,7 +1667,11 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(compilation, expectedGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                compilation,
+                expectedGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

@@ -124,6 +124,7 @@ namespace System.Threading.Tasks
         {
             /// <summary>The wrapped Task.</summary>
             internal readonly Task _task;
+
             /// <summary>Callback to invoke when the wrapped task completes.</summary>
             private readonly AsyncCallback? _callback;
 
@@ -151,9 +152,10 @@ namespace System.Threading.Tasks
                     // order to avoid running synchronously if the task has already completed by the time we get here but still run
                     // synchronously as part of the task's completion if the task completes after (the more common case).
                     _callback = callback;
-                    _task.ConfigureAwait(continueOnCapturedContext: false)
-                         .GetAwaiter()
-                         .OnCompleted(() => _callback.Invoke(this));
+                    _task
+                        .ConfigureAwait(continueOnCapturedContext: false)
+                        .GetAwaiter()
+                        .OnCompleted(() => _callback.Invoke(this));
                 }
             }
 

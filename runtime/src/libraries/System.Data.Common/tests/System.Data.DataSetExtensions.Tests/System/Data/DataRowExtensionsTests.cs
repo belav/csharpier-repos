@@ -10,7 +10,10 @@ namespace System.Data.Tests
         [Fact]
         public void Field_String_NullRowThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>("row", () => DataRowExtensions.Field<int>(null, "foo"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "row",
+                () => DataRowExtensions.Field<int>(null, "foo")
+            );
         }
 
         [Fact]
@@ -18,14 +21,20 @@ namespace System.Data.Tests
         {
             DataTable table = new DataTable("test");
             DataRow row = table.NewRow();
-            AssertExtensions.Throws<ArgumentNullException>("name", () => DataRowExtensions.Field<int>(row, columnName: null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => DataRowExtensions.Field<int>(row, columnName: null)
+            );
         }
 
         [Fact]
         public void Field_Column_NullRowThrows()
         {
             DataColumn column = new DataColumn();
-            AssertExtensions.Throws<ArgumentNullException>("row", () => DataRowExtensions.Field<int>(null, column));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "row",
+                () => DataRowExtensions.Field<int>(null, column)
+            );
         }
 
         [Fact]
@@ -33,13 +42,19 @@ namespace System.Data.Tests
         {
             DataTable table = new DataTable("test");
             DataRow row = table.NewRow();
-            AssertExtensions.Throws<ArgumentNullException>("column", () => DataRowExtensions.Field<int>(row, column: null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "column",
+                () => DataRowExtensions.Field<int>(row, column: null)
+            );
         }
 
         [Fact]
         public void Field_Index_NullRowThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>("row", () => DataRowExtensions.Field<int>(null, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "row",
+                () => DataRowExtensions.Field<int>(null, 0)
+            );
         }
 
         [Fact]
@@ -47,13 +62,23 @@ namespace System.Data.Tests
         {
             DataTable table = new DataTable("test");
             DataRow row = table.NewRow();
-            Assert.Throws<IndexOutOfRangeException>(() => DataRowExtensions.Field<int>(row, columnIndex: -1));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                DataRowExtensions.Field<int>(row, columnIndex: -1)
+            );
         }
 
         [Fact]
         public void Field_IndexVersion_NullRowThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>("row", () => DataRowExtensions.Field<int>(null, columnIndex: 0, version: DataRowVersion.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "row",
+                () =>
+                    DataRowExtensions.Field<int>(
+                        null,
+                        columnIndex: 0,
+                        version: DataRowVersion.Default
+                    )
+            );
         }
 
         [Fact]
@@ -61,13 +86,23 @@ namespace System.Data.Tests
         {
             DataTable table = new DataTable("test");
             DataRow row = table.NewRow();
-            Assert.Throws<IndexOutOfRangeException>(() => DataRowExtensions.Field<int>(row, columnIndex: -1, version: DataRowVersion.Default));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                DataRowExtensions.Field<int>(row, columnIndex: -1, version: DataRowVersion.Default)
+            );
         }
 
         [Fact]
         public void Field_NameVersion_NullRowThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>("row", () => DataRowExtensions.Field<int>(null, columnName: "foo", version: DataRowVersion.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "row",
+                () =>
+                    DataRowExtensions.Field<int>(
+                        null,
+                        columnName: "foo",
+                        version: DataRowVersion.Default
+                    )
+            );
         }
 
         [Fact]
@@ -75,14 +110,30 @@ namespace System.Data.Tests
         {
             DataTable table = new DataTable("test");
             DataRow row = table.NewRow();
-            AssertExtensions.Throws<ArgumentNullException>("name", () => DataRowExtensions.Field<int>(row, columnName: null, version: DataRowVersion.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () =>
+                    DataRowExtensions.Field<int>(
+                        row,
+                        columnName: null,
+                        version: DataRowVersion.Default
+                    )
+            );
         }
 
         [Fact]
         public void Field_ColumnVersion_NullRowThrows()
         {
             DataColumn column = new DataColumn();
-            AssertExtensions.Throws<ArgumentNullException>("row", () => DataRowExtensions.Field<int>(null, column: column, version: DataRowVersion.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "row",
+                () =>
+                    DataRowExtensions.Field<int>(
+                        null,
+                        column: column,
+                        version: DataRowVersion.Default
+                    )
+            );
         }
 
         [Fact]
@@ -90,7 +141,11 @@ namespace System.Data.Tests
         {
             DataTable table = new DataTable("test");
             DataRow row = table.NewRow();
-            AssertExtensions.Throws<ArgumentNullException>("column", () => DataRowExtensions.Field<int>(row, column: null, version: DataRowVersion.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "column",
+                () =>
+                    DataRowExtensions.Field<int>(row, column: null, version: DataRowVersion.Default)
+            );
         }
 
         [Fact]
@@ -119,13 +174,16 @@ namespace System.Data.Tests
 
         enum SomeEnum
         {
-            Foo
+            Foo,
         }
 
         [Fact]
         public void SetField_IndexValue_NullRowThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>("row", () => DataRowExtensions.SetField(null, columnIndex: 0, value: 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "row",
+                () => DataRowExtensions.SetField(null, columnIndex: 0, value: 0)
+            );
         }
 
         [Fact]
@@ -133,7 +191,9 @@ namespace System.Data.Tests
         {
             DataTable table = new DataTable("test");
             DataRow row = table.NewRow();
-            Assert.Throws<IndexOutOfRangeException>(() => DataRowExtensions.SetField(row, columnIndex: -1, value: 0));
+            Assert.Throws<IndexOutOfRangeException>(() =>
+                DataRowExtensions.SetField(row, columnIndex: -1, value: 0)
+            );
         }
 
         [Fact]
@@ -150,7 +210,10 @@ namespace System.Data.Tests
         [Fact]
         public void SetField_NameValue_NullRowThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>("row", () => DataRowExtensions.SetField(null, columnName: "foo", value: 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "row",
+                () => DataRowExtensions.SetField(null, columnName: "foo", value: 0)
+            );
         }
 
         [Fact]
@@ -158,7 +221,10 @@ namespace System.Data.Tests
         {
             DataTable table = new DataTable("test");
             DataRow row = table.NewRow();
-            AssertExtensions.Throws<ArgumentNullException>("name", () => DataRowExtensions.SetField(row, columnName: null, value: 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => DataRowExtensions.SetField(row, columnName: null, value: 0)
+            );
         }
 
         [Fact]
@@ -176,7 +242,10 @@ namespace System.Data.Tests
         public void SetField_ColumnValue_NullRowThrows()
         {
             DataColumn column = new DataColumn();
-            AssertExtensions.Throws<ArgumentNullException>("row", () => DataRowExtensions.SetField(null, column: column, value: 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "row",
+                () => DataRowExtensions.SetField(null, column: column, value: 0)
+            );
         }
 
         [Fact]
@@ -184,7 +253,10 @@ namespace System.Data.Tests
         {
             DataTable table = new DataTable("test");
             DataRow row = table.NewRow();
-            AssertExtensions.Throws<ArgumentNullException>("column", () => DataRowExtensions.SetField(row, column: null, value: 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "column",
+                () => DataRowExtensions.SetField(row, column: null, value: 0)
+            );
         }
 
         [Fact]

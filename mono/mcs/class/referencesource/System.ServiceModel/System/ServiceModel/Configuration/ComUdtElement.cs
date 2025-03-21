@@ -14,16 +14,19 @@ namespace System.ServiceModel.Configuration
     public sealed partial class ComUdtElement : ConfigurationElement
     {
         public ComUdtElement()
-            : base()
-        {
-        }
+            : base() { }
+
         public ComUdtElement(string typeDefID)
             : this()
         {
             this.TypeDefID = typeDefID;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.Name, DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.Name,
+            DefaultValue = "",
+            Options = ConfigurationPropertyOptions.None
+        )]
         [StringValidator(MinLength = 0)]
         public string Name
         {
@@ -39,7 +42,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TypeLibID, Options = ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TypeLibID,
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string TypeLibID
         {
@@ -55,7 +61,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TypeLibVersion, Options = ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TypeLibVersion,
+            Options = ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string TypeLibVersion
         {
@@ -71,7 +80,10 @@ namespace System.ServiceModel.Configuration
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.TypeDefID, Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.TypeDefID,
+            Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string TypeDefID
         {
@@ -86,7 +98,5 @@ namespace System.ServiceModel.Configuration
                 base[ConfigurationStrings.TypeDefID] = value;
             }
         }
-
     }
-
 }

@@ -33,13 +33,16 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
         IPdbFileLocatorService pdbFileLocatorService,
         IPdbSourceDocumentLoaderService pdbSourceDocumentLoaderService,
         IImplementationAssemblyLookupService implementationAssemblyLookupService,
-        [Import(AllowDefault = true)] IPdbSourceDocumentLogger? logger) : IMetadataAsSourceFileProvider
+        [Import(AllowDefault = true)] IPdbSourceDocumentLogger? logger
+    ) : IMetadataAsSourceFileProvider
     {
         internal const string ProviderName = "PdbSource";
 
         private readonly IPdbFileLocatorService _pdbFileLocatorService = pdbFileLocatorService;
-        private readonly IPdbSourceDocumentLoaderService _pdbSourceDocumentLoaderService = pdbSourceDocumentLoaderService;
-        private readonly IImplementationAssemblyLookupService _implementationAssemblyLookupService = implementationAssemblyLookupService;
+        private readonly IPdbSourceDocumentLoaderService _pdbSourceDocumentLoaderService =
+            pdbSourceDocumentLoaderService;
+        private readonly IImplementationAssemblyLookupService _implementationAssemblyLookupService =
+            implementationAssemblyLookupService;
         private readonly IPdbSourceDocumentLogger? _logger = logger;
 
         /// <summary>
@@ -61,7 +64,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
         /// generally run concurrently.  However, to be safe, we make this a concurrent dictionary to be safe to that
         /// potentially happening.
         /// </summary>
-        private readonly ConcurrentDictionary<string, SourceDocumentInfo> _fileToDocumentInfoMap = new();
+        private readonly ConcurrentDictionary<string, SourceDocumentInfo> _fileToDocumentInfoMap =
+            new();
 
         public async Task<MetadataAsSourceFile?> GetGeneratedFileAsync(
             MetadataAsSourceWorkspace metadataWorkspace,
@@ -72,7 +76,8 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             MetadataAsSourceOptions options,
             string tempPath,
             TelemetryMessage? telemetryMessage,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Check if the user wants to look for PDB source documents at all
             if (!options.NavigateToSourceLinkAndEmbeddedSources)
@@ -91,12 +96,17 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             _logger?.Clear();
             _logger?.Log(FeaturesResources.Navigating_to_symbol_0_from_1, symbol, assemblyName);
 
-            var compilation = await sourceProject.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await sourceProject
+                .GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             // The purpose of the logging is to help library authors, so we don't log things like this where something
             // else has gone wrong, so even though if this check fails we won't be able to show the source, it's not something
             // the user or a library author can control, so no log message.
-            if (compilation.GetMetadataReference(symbol.ContainingAssembly) is not PortableExecutableReference { FilePath: not null and var dllPath })
+            if (
+                compilation.GetMetadataReference(symbol.ContainingAssembly)
+                is not PortableExecutableReference { FilePath: not null and var dllPath }
+            )
                 return null;
 
             telemetryMessage.SetDll(Path.GetFileName(dllPath));
@@ -105,51 +115,84 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 
             // There is no way to go from parameter metadata to its containing method or type, so we need use the symbol API first to
             // get the method it belongs to.
-            var symbolToFind = symbol is IParameterSymbol parameterSymbol ? parameterSymbol.ContainingSymbol : symbol;
+            var symbolToFind = symbol is IParameterSymbol parameterSymbol
+                ? parameterSymbol.ContainingSymbol
+                : symbol;
             var handle = MetadataTokens.EntityHandle(symbolToFind.MetadataToken);
 
             // If this is a reference assembly then we won't have the right information available, so try to find
             // a better DLL, or bail out
-            var isReferenceAssembly = MetadataAsSourceHelpers.IsReferenceAssembly(symbol.ContainingAssembly);
+            var isReferenceAssembly = MetadataAsSourceHelpers.IsReferenceAssembly(
+                symbol.ContainingAssembly
+            );
             if (isReferenceAssembly)
             {
                 telemetryMessage.SetReferenceAssembly("yes");
-                if (_implementationAssemblyLookupService.TryFindImplementationAssemblyPath(dllPath, out dllPath))
+                if (
+                    _implementationAssemblyLookupService.TryFindImplementationAssemblyPath(
+                        dllPath,
+                        out dllPath
+                    )
+                )
                 {
                     _logger?.Log(FeaturesResources.Symbol_found_in_assembly_path_0, dllPath);
 
                     // If the original assembly was a reference assembly, we can't trust that the implementation assembly
                     // we found actually contains the types, so we need to find it, following any type forwards.
 
-                    dllPath = _implementationAssemblyLookupService.FollowTypeForwards(symbolToFind, dllPath, _logger);
+                    dllPath = _implementationAssemblyLookupService.FollowTypeForwards(
+                        symbolToFind,
+                        dllPath,
+                        _logger
+                    );
                     if (dllPath is null)
                     {
-                        _logger?.Log(FeaturesResources.Could_not_find_implementation_of_symbol_0, symbolToFind.MetadataName);
+                        _logger?.Log(
+                            FeaturesResources.Could_not_find_implementation_of_symbol_0,
+                            symbolToFind.MetadataName
+                        );
                         return null;
                     }
 
                     // Now that we have the right DLL, we need to look up the symbol in this DLL, because the one
                     // we have is from the reference assembly. To do this we create an empty compilation,
                     // add our DLL as a reference, and use SymbolKey to map the type across.
-                    var documentationProvider = sourceWorkspace.Services.GetRequiredService<IDocumentationProviderService>();
-                    var dllReference = IOUtilities.PerformIO(() => MetadataReference.CreateFromFile(dllPath, documentation: documentationProvider.GetDocumentationProvider(dllPath)));
+                    var documentationProvider =
+                        sourceWorkspace.Services.GetRequiredService<IDocumentationProviderService>();
+                    var dllReference = IOUtilities.PerformIO(() =>
+                        MetadataReference.CreateFromFile(
+                            dllPath,
+                            documentation: documentationProvider.GetDocumentationProvider(dllPath)
+                        )
+                    );
                     if (dllReference is null)
                     {
-                        _logger?.Log(FeaturesResources.Could_not_find_implementation_of_symbol_0, symbolToFind.MetadataName);
+                        _logger?.Log(
+                            FeaturesResources.Could_not_find_implementation_of_symbol_0,
+                            symbolToFind.MetadataName
+                        );
                         return null;
                     }
 
-                    var compilationFactory = sourceProject.Services.GetRequiredService<ICompilationFactoryService>();
+                    var compilationFactory =
+                        sourceProject.Services.GetRequiredService<ICompilationFactoryService>();
                     var tmpCompilation = compilationFactory
                         .CreateCompilation("tmp", compilationFactory.GetDefaultCompilationOptions())
                         .AddReferences(dllReference);
 
                     var key = SymbolKey.Create(symbolToFind, cancellationToken);
-                    var resolution = key.Resolve(tmpCompilation, ignoreAssemblyKey: true, cancellationToken);
+                    var resolution = key.Resolve(
+                        tmpCompilation,
+                        ignoreAssemblyKey: true,
+                        cancellationToken
+                    );
                     var newSymbol = resolution.Symbol;
                     if (newSymbol is null)
                     {
-                        _logger?.Log(FeaturesResources.Could_not_find_implementation_of_symbol_0, symbolToFind.MetadataName);
+                        _logger?.Log(
+                            FeaturesResources.Could_not_find_implementation_of_symbol_0,
+                            symbolToFind.MetadataName
+                        );
                         return null;
                     }
 
@@ -167,7 +210,16 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             ImmutableDictionary<string, string> pdbCompilationOptions;
             ImmutableArray<SourceDocument> sourceDocuments;
             // We know we have a DLL, call and see if we can find metadata readers for it, and for the PDB (whereever it may be)
-            using (var documentDebugInfoReader = await _pdbFileLocatorService.GetDocumentDebugInfoReaderAsync(dllPath, options.AlwaysUseDefaultSymbolServers, telemetryMessage, cancellationToken).ConfigureAwait(false))
+            using (
+                var documentDebugInfoReader = await _pdbFileLocatorService
+                    .GetDocumentDebugInfoReaderAsync(
+                        dllPath,
+                        options.AlwaysUseDefaultSymbolServers,
+                        telemetryMessage,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            )
             {
                 if (documentDebugInfoReader is null)
                     return null;
@@ -187,11 +239,21 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             }
 
             Encoding? defaultEncoding = null;
-            if (pdbCompilationOptions.TryGetValue(Cci.CompilationOptionNames.DefaultEncoding, out var encodingString))
+            if (
+                pdbCompilationOptions.TryGetValue(
+                    Cci.CompilationOptionNames.DefaultEncoding,
+                    out var encodingString
+                )
+            )
             {
                 defaultEncoding = Encoding.GetEncoding(encodingString);
             }
-            else if (pdbCompilationOptions.TryGetValue(Cci.CompilationOptionNames.FallbackEncoding, out var fallbackEncodingString))
+            else if (
+                pdbCompilationOptions.TryGetValue(
+                    Cci.CompilationOptionNames.FallbackEncoding,
+                    out var fallbackEncodingString
+                )
+            )
             {
                 defaultEncoding = Encoding.GetEncoding(fallbackEncodingString);
             }
@@ -203,7 +265,14 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                 var projectChecksumAlgorithm = sourceDocuments[0].ChecksumAlgorithm;
 
                 // Get the project info now, so we can dispose the documentDebugInfoReader sooner
-                var projectInfo = CreateProjectInfo(metadataWorkspace, sourceProject, pdbCompilationOptions, assemblyName, assemblyVersion, projectChecksumAlgorithm);
+                var projectInfo = CreateProjectInfo(
+                    metadataWorkspace,
+                    sourceProject,
+                    pdbCompilationOptions,
+                    assemblyName,
+                    assemblyVersion,
+                    projectChecksumAlgorithm
+                );
 
                 if (projectInfo is null)
                     return null;
@@ -231,7 +300,18 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             // we can't provide any results, so there is no point adding a project to the workspace etc.
             var useExtendedTimeout = _sourceLinkEnabledProjects.Contains(projectId);
             var encoding = defaultEncoding ?? Encoding.UTF8;
-            var sourceFileInfoTasks = sourceDocuments.Select(sd => _pdbSourceDocumentLoaderService.LoadSourceDocumentAsync(tempFilePath, sd, encoding, telemetryMessage, useExtendedTimeout, cancellationToken)).ToArray();
+            var sourceFileInfoTasks = sourceDocuments
+                .Select(sd =>
+                    _pdbSourceDocumentLoaderService.LoadSourceDocumentAsync(
+                        tempFilePath,
+                        sd,
+                        encoding,
+                        telemetryMessage,
+                        useExtendedTimeout,
+                        cancellationToken
+                    )
+                )
+                .ToArray();
             var sourceFileInfos = await Task.WhenAll(sourceFileInfoTasks).ConfigureAwait(false);
             if (sourceFileInfos is null || sourceFileInfos.Where(t => t is null).Any())
                 return null;
@@ -239,7 +319,13 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             var symbolId = SymbolKey.Create(symbol, cancellationToken);
             var navigateProject = metadataWorkspace.CurrentSolution.GetRequiredProject(projectId);
 
-            var documentInfos = CreateDocumentInfos(sourceFileInfos, encoding, navigateProject.Id, sourceWorkspace, sourceProject);
+            var documentInfos = CreateDocumentInfos(
+                sourceFileInfos,
+                encoding,
+                navigateProject.Id,
+                sourceWorkspace,
+                sourceProject
+            );
             if (documentInfos.Length > 0)
             {
                 metadataWorkspace.OnDocumentsAdded(documentInfos);
@@ -250,39 +336,72 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             // to the document passed in, which we just use the first document for.
             // TODO: Support results from multiple source files: https://github.com/dotnet/roslyn/issues/55834
             var firstDocumentFilePath = sourceFileInfos[0]!.FilePath;
-            var firstDocument = navigateProject.Documents.First(d => d.FilePath?.Equals(firstDocumentFilePath, StringComparison.OrdinalIgnoreCase) ?? false);
-            var navigateLocation = await MetadataAsSourceHelpers.GetLocationInGeneratedSourceAsync(symbolId, firstDocument, cancellationToken).ConfigureAwait(false);
+            var firstDocument = navigateProject.Documents.First(d =>
+                d.FilePath?.Equals(firstDocumentFilePath, StringComparison.OrdinalIgnoreCase)
+                ?? false
+            );
+            var navigateLocation = await MetadataAsSourceHelpers
+                .GetLocationInGeneratedSourceAsync(symbolId, firstDocument, cancellationToken)
+                .ConfigureAwait(false);
 
             // In the case of partial classes, finding the location in the generated source may return a location in a different document, so we
             // have to make sure to look it up again.
             var navigateDocument = navigateProject.GetDocument(navigateLocation.SourceTree);
             Contract.ThrowIfNull(navigateDocument);
-            var sourceDescription = sourceFileInfos.FirstOrDefault(sfi => sfi!.FilePath?.Equals(navigateDocument.FilePath, StringComparison.OrdinalIgnoreCase) ?? false)?.SourceDescription ?? FeaturesResources.from_metadata;
+            var sourceDescription =
+                sourceFileInfos
+                    .FirstOrDefault(sfi =>
+                        sfi!.FilePath?.Equals(
+                            navigateDocument.FilePath,
+                            StringComparison.OrdinalIgnoreCase
+                        ) ?? false
+                    )
+                    ?.SourceDescription ?? FeaturesResources.from_metadata;
 
-            var documentName = string.Format(
-                "{0} [{1}]",
-                navigateDocument.Name,
-                sourceDescription);
+            var documentName = string.Format("{0} [{1}]", navigateDocument.Name, sourceDescription);
             var documentTooltip = navigateDocument.FilePath + Environment.NewLine + dllPath;
 
-            return new MetadataAsSourceFile(navigateDocument.FilePath, navigateLocation, documentName, documentTooltip);
+            return new MetadataAsSourceFile(
+                navigateDocument.FilePath,
+                navigateLocation,
+                documentName,
+                documentTooltip
+            );
         }
 
-        private ProjectInfo? CreateProjectInfo(Workspace workspace, Project project, ImmutableDictionary<string, string> pdbCompilationOptions, string assemblyName, string assemblyVersion, SourceHashAlgorithm checksumAlgorithm)
+        private ProjectInfo? CreateProjectInfo(
+            Workspace workspace,
+            Project project,
+            ImmutableDictionary<string, string> pdbCompilationOptions,
+            string assemblyName,
+            string assemblyVersion,
+            SourceHashAlgorithm checksumAlgorithm
+        )
         {
             // First we need the language name in order to get the services
             // TODO: Find language another way for non portable PDBs: https://github.com/dotnet/roslyn/issues/55834
-            if (!pdbCompilationOptions.TryGetValue(Cci.CompilationOptionNames.Language, out var languageName) || languageName is null)
+            if (
+                !pdbCompilationOptions.TryGetValue(
+                    Cci.CompilationOptionNames.Language,
+                    out var languageName
+                ) || languageName is null
+            )
             {
-                _logger?.Log(FeaturesResources.Source_code_language_information_was_not_found_in_PDB);
+                _logger?.Log(
+                    FeaturesResources.Source_code_language_information_was_not_found_in_PDB
+                );
                 return null;
             }
 
             var languageServices = workspace.Services.GetLanguageServices(languageName);
 
             // TODO: Use compiler API when available: https://github.com/dotnet/roslyn/issues/57356
-            var compilationOptions = languageServices.GetRequiredService<ICompilationFactoryService>().TryParsePdbCompilationOptions(pdbCompilationOptions);
-            var parseOptions = languageServices.GetRequiredService<ISyntaxTreeFactoryService>().TryParsePdbParseOptions(pdbCompilationOptions);
+            var compilationOptions = languageServices
+                .GetRequiredService<ICompilationFactoryService>()
+                .TryParsePdbCompilationOptions(pdbCompilationOptions);
+            var parseOptions = languageServices
+                .GetRequiredService<ISyntaxTreeFactoryService>()
+                .TryParsePdbParseOptions(pdbCompilationOptions);
 
             var projectId = ProjectId.CreateNewId();
             return ProjectInfo.Create(
@@ -293,14 +412,21 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                     assemblyName: assemblyName,
                     language: languageName,
                     compilationOutputFilePaths: default,
-                    checksumAlgorithm: checksumAlgorithm),
+                    checksumAlgorithm: checksumAlgorithm
+                ),
                 compilationOptions: compilationOptions,
                 parseOptions: parseOptions,
-                metadataReferences: project.MetadataReferences.ToImmutableArray()); // TODO: Read references from PDB info: https://github.com/dotnet/roslyn/issues/55834
+                metadataReferences: project.MetadataReferences.ToImmutableArray()
+            ); // TODO: Read references from PDB info: https://github.com/dotnet/roslyn/issues/55834
         }
 
         private ImmutableArray<DocumentInfo> CreateDocumentInfos(
-            SourceFileInfo?[] sourceFileInfos, Encoding encoding, ProjectId projectId, Workspace sourceWorkspace, Project sourceProject)
+            SourceFileInfo?[] sourceFileInfos,
+            Encoding encoding,
+            ProjectId projectId,
+            Workspace sourceWorkspace,
+            Project sourceProject
+        )
         {
             using var _ = ArrayBuilder<DocumentInfo>.GetInstance(out var documents);
 
@@ -319,13 +445,17 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 
                 var documentId = DocumentId.CreateNewId(projectId);
 
-                documents.Add(DocumentInfo.Create(
-                    documentId,
-                    name: Path.GetFileName(info.FilePath),
-                    loader: info.Loader,
-                    filePath: info.FilePath,
-                    isGenerated: true)
-                    .WithDesignTimeOnly(true));
+                documents.Add(
+                    DocumentInfo
+                        .Create(
+                            documentId,
+                            name: Path.GetFileName(info.FilePath),
+                            loader: info.Loader,
+                            filePath: info.FilePath,
+                            isGenerated: true
+                        )
+                        .WithDesignTimeOnly(true)
+                );
 
                 // If we successfully got something from SourceLink for this project then its nice to wait a bit longer
                 // if the user performs subsequent navigation
@@ -335,7 +465,13 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
                 }
 
                 // In order to open documents in VS we need to understand the link from temp file to document and its encoding etc.
-                _fileToDocumentInfoMap[info.FilePath] = new(documentId, encoding, info.ChecksumAlgorithm, sourceProject.Id, sourceWorkspace);
+                _fileToDocumentInfoMap[info.FilePath] = new(
+                    documentId,
+                    encoding,
+                    info.ChecksumAlgorithm,
+                    sourceProject.Id,
+                    sourceWorkspace
+                );
             }
 
             return documents.ToImmutable();
@@ -344,17 +480,28 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
         private static void AssertIsMainThread(MetadataAsSourceWorkspace workspace)
         {
             Contract.ThrowIfNull(workspace);
-            var threadingService = workspace.Services.GetRequiredService<IWorkspaceThreadingServiceProvider>().Service;
+            var threadingService = workspace
+                .Services.GetRequiredService<IWorkspaceThreadingServiceProvider>()
+                .Service;
             Contract.ThrowIfFalse(threadingService.IsOnMainThread);
         }
 
-        public bool ShouldCollapseOnOpen(MetadataAsSourceWorkspace workspace, string filePath, BlockStructureOptions blockStructureOptions)
+        public bool ShouldCollapseOnOpen(
+            MetadataAsSourceWorkspace workspace,
+            string filePath,
+            BlockStructureOptions blockStructureOptions
+        )
         {
             AssertIsMainThread(workspace);
-            return _fileToDocumentInfoMap.TryGetValue(filePath, out _) && blockStructureOptions.CollapseMetadataImplementationsWhenFirstOpened;
+            return _fileToDocumentInfoMap.TryGetValue(filePath, out _)
+                && blockStructureOptions.CollapseMetadataImplementationsWhenFirstOpened;
         }
 
-        public bool TryAddDocumentToWorkspace(MetadataAsSourceWorkspace workspace, string filePath, SourceTextContainer sourceTextContainer)
+        public bool TryAddDocumentToWorkspace(
+            MetadataAsSourceWorkspace workspace,
+            string filePath,
+            SourceTextContainer sourceTextContainer
+        )
         {
             AssertIsMainThread(workspace);
 
@@ -367,13 +514,23 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
             return false;
         }
 
-        public bool TryRemoveDocumentFromWorkspace(MetadataAsSourceWorkspace workspace, string filePath)
+        public bool TryRemoveDocumentFromWorkspace(
+            MetadataAsSourceWorkspace workspace,
+            string filePath
+        )
         {
             AssertIsMainThread(workspace);
 
             if (_fileToDocumentInfoMap.TryGetValue(filePath, out var info))
             {
-                workspace.OnDocumentClosed(info.DocumentId, new WorkspaceFileTextLoader(workspace.Services.SolutionServices, filePath, info.Encoding));
+                workspace.OnDocumentClosed(
+                    info.DocumentId,
+                    new WorkspaceFileTextLoader(
+                        workspace.Services.SolutionServices,
+                        filePath,
+                        info.Encoding
+                    )
+                );
                 return true;
             }
 
@@ -382,8 +539,10 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
 
         public Project? MapDocument(Document document)
         {
-            if (document.FilePath is not null &&
-                _fileToDocumentInfoMap.TryGetValue(document.FilePath, out var info))
+            if (
+                document.FilePath is not null
+                && _fileToDocumentInfoMap.TryGetValue(document.FilePath, out var info)
+            )
             {
                 // We always want to do symbol look ups in the context of the source project, not in
                 // our temporary project. This is so that source symbols in our source project don't
@@ -420,7 +579,19 @@ namespace Microsoft.CodeAnalysis.PdbSourceDocument
         }
     }
 
-    internal sealed record SourceDocument(string FilePath, SourceHashAlgorithm ChecksumAlgorithm, ImmutableArray<byte> Checksum, byte[]? EmbeddedTextBytes, string? SourceLinkUrl);
+    internal sealed record SourceDocument(
+        string FilePath,
+        SourceHashAlgorithm ChecksumAlgorithm,
+        ImmutableArray<byte> Checksum,
+        byte[]? EmbeddedTextBytes,
+        string? SourceLinkUrl
+    );
 
-    internal record struct SourceDocumentInfo(DocumentId DocumentId, Encoding Encoding, SourceHashAlgorithm ChecksumAlgorithm, ProjectId SourceProjectId, Workspace SourceWorkspace);
+    internal record struct SourceDocumentInfo(
+        DocumentId DocumentId,
+        Encoding Encoding,
+        SourceHashAlgorithm ChecksumAlgorithm,
+        ProjectId SourceProjectId,
+        Workspace SourceWorkspace
+    );
 }

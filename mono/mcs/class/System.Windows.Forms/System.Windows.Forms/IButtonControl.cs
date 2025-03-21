@@ -25,16 +25,14 @@
 //
 //
 
-
 // COMPLETE
 
-namespace System.Windows.Forms 
+namespace System.Windows.Forms
 {
-
-	public interface IButtonControl 
-	{
-		DialogResult DialogResult {get; set;}
-		void NotifyDefault (bool value);		
-		void PerformClick ();		
-	}
+    public interface IButtonControl
+    {
+        DialogResult DialogResult { get; set; }
+        void NotifyDefault(bool value);
+        void PerformClick();
+    }
 }

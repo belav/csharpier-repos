@@ -17,6 +17,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers.DeclarationName
             Document document,
             CSharpSyntaxContext context,
             NameDeclarationInfo nameInfo,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

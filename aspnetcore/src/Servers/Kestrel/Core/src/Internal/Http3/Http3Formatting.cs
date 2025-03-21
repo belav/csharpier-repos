@@ -18,7 +18,7 @@ internal static class Http3Formatting
             Http3FrameType.PushPromise => "PUSH_PROMISE",
             Http3FrameType.GoAway => "GOAWAY",
             Http3FrameType.MaxPushId => "MAX_PUSH_ID",
-            _ => type.ToString()
+            _ => type.ToString(),
         };
     }
 
@@ -42,7 +42,7 @@ internal static class Http3Formatting
             Http3ErrorCode.RequestIncomplete => "H3_REQUEST_INCOMPLETE",
             Http3ErrorCode.ConnectError => "H3_CONNECT_ERROR",
             Http3ErrorCode.VersionFallback => "H3_VERSION_FALLBACK",
-            _ => errorCode.ToString()
+            _ => errorCode.ToString(),
         };
     }
 }

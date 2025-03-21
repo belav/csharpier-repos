@@ -8,7 +8,10 @@ internal sealed class ResponseBodyWriterStream : Stream
     private readonly ResponseBodyPipeWriter _responseWriter;
     private readonly Func<bool> _allowSynchronousIO;
 
-    public ResponseBodyWriterStream(ResponseBodyPipeWriter responseWriter, Func<bool> allowSynchronousIO)
+    public ResponseBodyWriterStream(
+        ResponseBodyPipeWriter responseWriter,
+        Func<bool> allowSynchronousIO
+    )
     {
         _responseWriter = responseWriter;
         _allowSynchronousIO = allowSynchronousIO;
@@ -22,7 +25,11 @@ internal sealed class ResponseBodyWriterStream : Stream
 
     public override long Length => throw new NotSupportedException();
 
-    public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+    public override long Position
+    {
+        get => throw new NotSupportedException();
+        set => throw new NotSupportedException();
+    }
 
     public override int Read(byte[] buffer, int offset, int count)
     {
@@ -43,7 +50,9 @@ internal sealed class ResponseBodyWriterStream : Stream
     {
         if (!_allowSynchronousIO())
         {
-            throw new InvalidOperationException("Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true.");
+            throw new InvalidOperationException(
+                "Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true."
+            );
         }
 
         FlushAsync().GetAwaiter().GetResult();
@@ -58,19 +67,32 @@ internal sealed class ResponseBodyWriterStream : Stream
     {
         if (!_allowSynchronousIO())
         {
-            throw new InvalidOperationException("Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true.");
+            throw new InvalidOperationException(
+                "Synchronous operations are disallowed. Call WriteAsync or set AllowSynchronousIO to true."
+            );
         }
 
         // The Pipe Write method requires calling FlushAsync to notify the reader. Call WriteAsync instead.
         WriteAsync(buffer, offset, count).GetAwaiter().GetResult();
     }
 
-    public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override async Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
-        await _responseWriter.WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken);
+        await _responseWriter.WriteAsync(
+            new ReadOnlyMemory<byte>(buffer, offset, count),
+            cancellationToken
+        );
     }
 
-    public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+    public override async ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         await _responseWriter.WriteAsync(buffer, cancellationToken);
     }

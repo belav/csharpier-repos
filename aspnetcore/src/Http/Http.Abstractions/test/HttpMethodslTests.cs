@@ -11,17 +11,17 @@ public class HttpMethodslTests
     public void CanonicalizedValue_Success()
     {
         var testCases = new List<(string[] methods, string expectedMethod)>
-            {
-                (new string[] { "GET", "Get", "get" }, HttpMethods.Get),
-                (new string[] { "POST", "Post", "post" }, HttpMethods.Post),
-                (new string[] { "PUT", "Put", "put" }, HttpMethods.Put),
-                (new string[] { "DELETE", "Delete", "delete" }, HttpMethods.Delete),
-                (new string[] { "HEAD", "Head", "head" }, HttpMethods.Head),
-                (new string[] { "CONNECT", "Connect", "connect" }, HttpMethods.Connect),
-                (new string[] { "OPTIONS", "Options", "options" }, HttpMethods.Options),
-                (new string[] { "PATCH", "Patch", "patch" }, HttpMethods.Patch),
-                (new string[] { "TRACE", "Trace", "trace" }, HttpMethods.Trace)
-            };
+        {
+            (new string[] { "GET", "Get", "get" }, HttpMethods.Get),
+            (new string[] { "POST", "Post", "post" }, HttpMethods.Post),
+            (new string[] { "PUT", "Put", "put" }, HttpMethods.Put),
+            (new string[] { "DELETE", "Delete", "delete" }, HttpMethods.Delete),
+            (new string[] { "HEAD", "Head", "head" }, HttpMethods.Head),
+            (new string[] { "CONNECT", "Connect", "connect" }, HttpMethods.Connect),
+            (new string[] { "OPTIONS", "Options", "options" }, HttpMethods.Options),
+            (new string[] { "PATCH", "Patch", "patch" }, HttpMethods.Patch),
+            (new string[] { "TRACE", "Trace", "trace" }, HttpMethods.Trace),
+        };
 
         for (int i = 0; i < testCases.Count; i++)
         {

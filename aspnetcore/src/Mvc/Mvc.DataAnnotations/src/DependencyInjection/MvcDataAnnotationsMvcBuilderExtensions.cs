@@ -31,13 +31,15 @@ public static class MvcDataAnnotationsMvcBuilderExtensions
     /// <returns>The <see cref="IMvcBuilder"/>.</returns>
     public static IMvcBuilder AddDataAnnotationsLocalization(
         this IMvcBuilder builder,
-        Action<MvcDataAnnotationsLocalizationOptions>? setupAction)
+        Action<MvcDataAnnotationsLocalizationOptions>? setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
 
         DataAnnotationsLocalizationServices.AddDataAnnotationsLocalizationServices(
             builder.Services,
-            setupAction);
+            setupAction
+        );
 
         return builder;
     }

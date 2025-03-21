@@ -1,9 +1,9 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace System.Net.WebSockets
 {
@@ -25,19 +25,13 @@ namespace System.Net.WebSockets
         private int _disposed;
 
         public WebSocketStream(WebSocket socket)
-            : this(socket, FileAccess.ReadWrite, ownsSocket: false)
-        {
-        }
+            : this(socket, FileAccess.ReadWrite, ownsSocket: false) { }
 
         public WebSocketStream(WebSocket socket, bool ownsSocket)
-            : this(socket, FileAccess.ReadWrite, ownsSocket)
-        {
-        }
+            : this(socket, FileAccess.ReadWrite, ownsSocket) { }
 
         public WebSocketStream(WebSocket socket, FileAccess access)
-            : this(socket, access, ownsSocket: false)
-        {
-        }
+            : this(socket, access, ownsSocket: false) { }
 
         public WebSocketStream(WebSocket socket, FileAccess access, bool ownsSocket)
         {
@@ -87,7 +81,8 @@ namespace System.Net.WebSockets
         public override bool CanSeek => false;
         public override bool CanWrite => _writeable;
         public override bool CanTimeout => true;
-        public override long Length => throw new NotSupportedException("This stream does not support seek operations.");
+        public override long Length =>
+            throw new NotSupportedException("This stream does not support seek operations.");
 
         public override long Position
         {
@@ -151,16 +146,25 @@ namespace System.Net.WebSockets
                 _writeable = false;
                 if (_ownsSocket)
                 {
-                    if (_streamSocket != null && (_streamSocket.State == WebSocketState.Open || _streamSocket.State == WebSocketState.Connecting || _streamSocket.State == WebSocketState.None))
+                    if (
+                        _streamSocket != null
+                        && (
+                            _streamSocket.State == WebSocketState.Open
+                            || _streamSocket.State == WebSocketState.Connecting
+                            || _streamSocket.State == WebSocketState.None
+                        )
+                    )
                     {
                         try
                         {
-                            var task = _streamSocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "closing remoteLoop", CancellationToken.None);
+                            var task = _streamSocket.CloseAsync(
+                                WebSocketCloseStatus.NormalClosure,
+                                "closing remoteLoop",
+                                CancellationToken.None
+                            );
                             Task.WaitAll(task);
                         }
-                        catch (Exception)
-                        {
-                        }
+                        catch (Exception) { }
                         finally
                         {
                             _streamSocket.Dispose();
@@ -174,7 +178,12 @@ namespace System.Net.WebSockets
 
         ~WebSocketStream() => Dispose(false);
 
-        public async override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             ThrowIfDisposed();
@@ -185,7 +194,10 @@ namespace System.Net.WebSockets
 
             try
             {
-                var res = await _streamSocket.ReceiveAsync(new Memory<byte>(buffer, offset, count), cancellationToken);
+                var res = await _streamSocket.ReceiveAsync(
+                    new Memory<byte>(buffer, offset, count),
+                    cancellationToken
+                );
                 return res.Count;
             }
             catch (Exception exception) when (!(exception is OutOfMemoryException))
@@ -194,7 +206,10 @@ namespace System.Net.WebSockets
             }
         }
 
-        public async override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+        public override async ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             bool canRead = CanRead; // Prevent race with Dispose.
             ThrowIfDisposed();
@@ -205,8 +220,7 @@ namespace System.Net.WebSockets
 
             try
             {
-                var res = await _streamSocket.ReceiveAsync(buffer,
-                    cancellationToken);
+                var res = await _streamSocket.ReceiveAsync(buffer, cancellationToken);
                 return res.Count;
             }
             catch (Exception exception) when (!(exception is OutOfMemoryException))
@@ -215,7 +229,12 @@ namespace System.Net.WebSockets
             }
         }
 
-        public async override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             ThrowIfDisposed();
@@ -226,7 +245,12 @@ namespace System.Net.WebSockets
 
             try
             {
-                await _streamSocket.SendAsync(new ReadOnlyMemory<byte>(buffer, offset, count), WebSocketMessageType.Binary, true, cancellationToken);
+                await _streamSocket.SendAsync(
+                    new ReadOnlyMemory<byte>(buffer, offset, count),
+                    WebSocketMessageType.Binary,
+                    true,
+                    cancellationToken
+                );
             }
             catch (Exception exception) when (!(exception is OutOfMemoryException))
             {
@@ -234,7 +258,10 @@ namespace System.Net.WebSockets
             }
         }
 
-        public async override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+        public override async ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             bool canWrite = CanWrite; // Prevent race with Dispose.
             ThrowIfDisposed();
@@ -245,7 +272,12 @@ namespace System.Net.WebSockets
 
             try
             {
-                await _streamSocket.SendAsync(buffer, WebSocketMessageType.Binary, true, cancellationToken);
+                await _streamSocket.SendAsync(
+                    buffer,
+                    WebSocketMessageType.Binary,
+                    true,
+                    cancellationToken
+                );
             }
             catch (Exception exception) when (!(exception is OutOfMemoryException))
             {
@@ -253,9 +285,7 @@ namespace System.Net.WebSockets
             }
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
@@ -272,7 +302,10 @@ namespace System.Net.WebSockets
             ObjectDisposedException.ThrowIf(_disposed != 0, this);
         }
 
-        private static IOException WrapException(string resourceFormatString, Exception innerException)
+        private static IOException WrapException(
+            string resourceFormatString,
+            Exception innerException
+        )
         {
             return new IOException(resourceFormatString, innerException);
         }

@@ -15,8 +15,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         {
             private readonly Dictionary<string, ImmutableArray<SyntaxToken>> _dictionary;
 
-            internal LocalDeclarationMap(Dictionary<string, ImmutableArray<SyntaxToken>> dictionary)
-                => _dictionary = dictionary;
+            internal LocalDeclarationMap(
+                Dictionary<string, ImmutableArray<SyntaxToken>> dictionary
+            ) => _dictionary = dictionary;
 
             public ImmutableArray<SyntaxToken> this[string identifier]
             {

@@ -14,16 +14,44 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
 {
     internal abstract class AbstractTypeSnippetProvider : AbstractSnippetProvider
     {
-        protected abstract void GetTypeDeclarationIdentifier(SyntaxNode node, out SyntaxToken identifier);
-        protected abstract Task<SyntaxNode> GenerateTypeDeclarationAsync(Document document, int position, CancellationToken cancellationToken);
-        protected abstract Task<TextChange?> GetAccessibilityModifiersChangeAsync(Document document, int position, CancellationToken cancellationToken);
+        protected abstract void GetTypeDeclarationIdentifier(
+            SyntaxNode node,
+            out SyntaxToken identifier
+        );
+        protected abstract Task<SyntaxNode> GenerateTypeDeclarationAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
+        protected abstract Task<TextChange?> GetAccessibilityModifiersChangeAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
 
-        protected override async Task<ImmutableArray<TextChange>> GenerateSnippetTextChangesAsync(Document document, int position, CancellationToken cancellationToken)
+        protected override async Task<ImmutableArray<TextChange>> GenerateSnippetTextChangesAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var typeDeclaration = await GenerateTypeDeclarationAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var typeDeclaration = await GenerateTypeDeclarationAsync(
+                    document,
+                    position,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var mainChange = new TextChange(TextSpan.FromBounds(position, position), typeDeclaration.NormalizeWhitespace().ToFullString());
-            var accessibilityModifiersChange = await GetAccessibilityModifiersChangeAsync(document, position, cancellationToken).ConfigureAwait(false);
+            var mainChange = new TextChange(
+                TextSpan.FromBounds(position, position),
+                typeDeclaration.NormalizeWhitespace().ToFullString()
+            );
+            var accessibilityModifiersChange = await GetAccessibilityModifiersChangeAsync(
+                    document,
+                    position,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (accessibilityModifiersChange.HasValue)
             {
@@ -33,7 +61,11 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
             return ImmutableArray.Create(mainChange);
         }
 
-        protected override ImmutableArray<SnippetPlaceholder> GetPlaceHolderLocationsList(SyntaxNode node, ISyntaxFacts syntaxFacts, CancellationToken cancellationToken)
+        protected override ImmutableArray<SnippetPlaceholder> GetPlaceHolderLocationsList(
+            SyntaxNode node,
+            ISyntaxFacts syntaxFacts,
+            CancellationToken cancellationToken
+        )
         {
             using var _ = ArrayBuilder<SnippetPlaceholder>.GetInstance(out var arrayBuilder);
             GetTypeDeclarationIdentifier(node, out var identifier);
@@ -42,11 +74,21 @@ namespace Microsoft.CodeAnalysis.Snippets.SnippetProviders
             return arrayBuilder.ToImmutableArray();
         }
 
-        protected static async Task<bool> AreAccessibilityModifiersRequiredAsync(Document document, CancellationToken cancellationToken)
+        protected static async Task<bool> AreAccessibilityModifiersRequiredAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var options = await document.GetAnalyzerConfigOptionsAsync(cancellationToken).ConfigureAwait(false);
-            var accessibilityModifiersRequired = options.GetEditorConfigOptionValue(CodeStyleOptions2.AccessibilityModifiersRequired, AccessibilityModifiersRequired.Never);
-            return accessibilityModifiersRequired is AccessibilityModifiersRequired.ForNonInterfaceMembers or AccessibilityModifiersRequired.Always;
+            var options = await document
+                .GetAnalyzerConfigOptionsAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var accessibilityModifiersRequired = options.GetEditorConfigOptionValue(
+                CodeStyleOptions2.AccessibilityModifiersRequired,
+                AccessibilityModifiersRequired.Never
+            );
+            return accessibilityModifiersRequired
+                is AccessibilityModifiersRequired.ForNonInterfaceMembers
+                    or AccessibilityModifiersRequired.Always;
         }
     }
 }

@@ -23,33 +23,38 @@ namespace System.Threading
                 // The number of worker threads to keep alive after they are created. Set to -1 to keep all created worker
                 // threads alive. When the ThreadTimeoutMs config value is also set, for worker threads the timeout applies to
                 // worker threads that are in excess of the number configured for ThreadsToKeepAlive.
-                short threadsToKeepAlive =
-                    AppContextConfigHelper.GetInt16Config(
-                        "System.Threading.ThreadPool.ThreadsToKeepAlive",
-                        "DOTNET_ThreadPool_ThreadsToKeepAlive",
-                        DefaultThreadsToKeepAlive);
+                short threadsToKeepAlive = AppContextConfigHelper.GetInt16Config(
+                    "System.Threading.ThreadPool.ThreadsToKeepAlive",
+                    "DOTNET_ThreadPool_ThreadsToKeepAlive",
+                    DefaultThreadsToKeepAlive
+                );
                 return threadsToKeepAlive >= -1 ? threadsToKeepAlive : DefaultThreadsToKeepAlive;
             }
 
             /// <summary>
             /// Semaphore for controlling how many threads are currently working.
             /// </summary>
-            private static readonly LowLevelLifoSemaphore s_semaphore =
-                new LowLevelLifoSemaphore(
-                    0,
-                    MaxPossibleThreadCount,
-                    AppContextConfigHelper.GetInt32Config(
-                        "System.Threading.ThreadPool.UnfairSemaphoreSpinLimit",
-                        SemaphoreSpinCountDefault,
-                        false),
-                    onWait: () =>
+            private static readonly LowLevelLifoSemaphore s_semaphore = new LowLevelLifoSemaphore(
+                0,
+                MaxPossibleThreadCount,
+                AppContextConfigHelper.GetInt32Config(
+                    "System.Threading.ThreadPool.UnfairSemaphoreSpinLimit",
+                    SemaphoreSpinCountDefault,
+                    false
+                ),
+                onWait: () =>
+                {
+                    if (NativeRuntimeEventSource.Log.IsEnabled())
                     {
-                        if (NativeRuntimeEventSource.Log.IsEnabled())
-                        {
-                            NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadWait(
-                                (uint)ThreadPoolInstance._separated.counts.VolatileRead().NumExistingThreads);
-                        }
-                    });
+                        NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadWait(
+                            (uint)
+                                ThreadPoolInstance
+                                    ._separated.counts.VolatileRead()
+                                    .NumExistingThreads
+                        );
+                    }
+                }
+            );
 
             private static readonly ThreadStart s_workerThreadStart = WorkerThreadStart;
 
@@ -62,7 +67,8 @@ namespace System.Threading
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
                     NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadStart(
-                        (uint)threadPoolInstance._separated.counts.VolatileRead().NumExistingThreads);
+                        (uint)threadPoolInstance._separated.counts.VolatileRead().NumExistingThreads
+                    );
                 }
 
                 LowLevelLock threadAdjustmentLock = threadPoolInstance._threadAdjustmentLock;
@@ -81,8 +87,11 @@ namespace System.Threading
                         int count = threadPoolInstance._numThreadsBeingKeptAlive;
                         while (count < ThreadsToKeepAlive)
                         {
-                            int countBeforeUpdate =
-                                Interlocked.CompareExchange(ref threadPoolInstance._numThreadsBeingKeptAlive, count + 1, count);
+                            int countBeforeUpdate = Interlocked.CompareExchange(
+                                ref threadPoolInstance._numThreadsBeingKeptAlive,
+                                count + 1,
+                                count
+                            );
                             if (countBeforeUpdate == count)
                             {
                                 timeoutMs = Timeout.Infinite;

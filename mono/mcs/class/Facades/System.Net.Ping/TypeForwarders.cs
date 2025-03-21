@@ -20,8 +20,18 @@
 // THE SOFTWARE.
 //
 
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.NetworkInformation.IPStatus))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.NetworkInformation.Ping))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.NetworkInformation.PingException))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.NetworkInformation.PingOptions))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.NetworkInformation.PingReply))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.NetworkInformation.IPStatus)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.NetworkInformation.Ping)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.NetworkInformation.PingException)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.NetworkInformation.PingOptions)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.NetworkInformation.PingReply)
+)]

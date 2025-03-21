@@ -3,7 +3,6 @@
 
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
-
 using Microsoft.AspNetCore.Authentication.Certificate;
 
 namespace Microsoft.Extensions.DependencyInjection;
@@ -23,8 +22,8 @@ public static class CertificateAuthenticationAppBuilderExtensions
     /// </summary>
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <returns>The <see cref="AuthenticationBuilder"/>.</returns>
-    public static AuthenticationBuilder AddCertificate(this AuthenticationBuilder builder)
-        => builder.AddCertificate(CertificateAuthenticationDefaults.AuthenticationScheme);
+    public static AuthenticationBuilder AddCertificate(this AuthenticationBuilder builder) =>
+        builder.AddCertificate(CertificateAuthenticationDefaults.AuthenticationScheme);
 
     /// <summary>
     /// Adds certificate authentication.
@@ -37,8 +36,10 @@ public static class CertificateAuthenticationAppBuilderExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="authenticationScheme">The authentication scheme.</param>
     /// <returns>The <see cref="AuthenticationBuilder"/>.</returns>
-    public static AuthenticationBuilder AddCertificate(this AuthenticationBuilder builder, string authenticationScheme)
-        => builder.AddCertificate(authenticationScheme, configureOptions: null);
+    public static AuthenticationBuilder AddCertificate(
+        this AuthenticationBuilder builder,
+        string authenticationScheme
+    ) => builder.AddCertificate(authenticationScheme, configureOptions: null);
 
     /// <summary>
     /// Adds certificate authentication.
@@ -51,8 +52,14 @@ public static class CertificateAuthenticationAppBuilderExtensions
     /// <param name="builder">The <see cref="AuthenticationBuilder"/>.</param>
     /// <param name="configureOptions">A delegate to configure <see cref="CertificateAuthenticationOptions"/>.</param>
     /// <returns>The <see cref="AuthenticationBuilder"/>.</returns>
-    public static AuthenticationBuilder AddCertificate(this AuthenticationBuilder builder, Action<CertificateAuthenticationOptions>? configureOptions)
-        => builder.AddCertificate(CertificateAuthenticationDefaults.AuthenticationScheme, configureOptions);
+    public static AuthenticationBuilder AddCertificate(
+        this AuthenticationBuilder builder,
+        Action<CertificateAuthenticationOptions>? configureOptions
+    ) =>
+        builder.AddCertificate(
+            CertificateAuthenticationDefaults.AuthenticationScheme,
+            configureOptions
+        );
 
     /// <summary>
     /// Adds certificate authentication.
@@ -69,8 +76,12 @@ public static class CertificateAuthenticationAppBuilderExtensions
     public static AuthenticationBuilder AddCertificate(
         this AuthenticationBuilder builder,
         string authenticationScheme,
-        Action<CertificateAuthenticationOptions>? configureOptions)
-        => builder.AddScheme<CertificateAuthenticationOptions, CertificateAuthenticationHandler>(authenticationScheme, configureOptions);
+        Action<CertificateAuthenticationOptions>? configureOptions
+    ) =>
+        builder.AddScheme<CertificateAuthenticationOptions, CertificateAuthenticationHandler>(
+            authenticationScheme,
+            configureOptions
+        );
 
     /// <summary>
     /// Adds certificate authentication.
@@ -85,7 +96,8 @@ public static class CertificateAuthenticationAppBuilderExtensions
     /// <returns>The <see cref="AuthenticationBuilder"/>.</returns>
     public static AuthenticationBuilder AddCertificateCache(
         this AuthenticationBuilder builder,
-        Action<CertificateValidationCacheOptions>? configureOptions = null)
+        Action<CertificateValidationCacheOptions>? configureOptions = null
+    )
     {
         builder.Services.AddSingleton<ICertificateValidationCache, CertificateValidationCache>();
         if (configureOptions != null)

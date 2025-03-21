@@ -14,7 +14,11 @@ internal sealed class RuleMatchSegment : PatternSegment
         _index = index;
     }
 
-    public override string? Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override string? Evaluate(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         Debug.Assert(ruleBackReferences != null);
         return ruleBackReferences[_index];

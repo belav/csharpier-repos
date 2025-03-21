@@ -91,10 +91,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Interop
         /// </summary>
         public TObject Object
         {
-            get
-            {
-                return _managedObject;
-            }
+            get { return _managedObject; }
         }
 
         public ComHandle<TNewHandle, TNewObject> Cast<TNewHandle, TNewObject>()

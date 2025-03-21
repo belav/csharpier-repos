@@ -12,5 +12,6 @@ public sealed class SkipIfHostableWebCoreNotAvailableAttribute : Attribute, ITes
 {
     public bool IsMet { get; } = File.Exists(TestServer.HostableWebCoreLocation);
 
-    public string SkipReason { get; } = $"Hostable Web Core not available, {TestServer.HostableWebCoreLocation} not found.";
+    public string SkipReason { get; } =
+        $"Hostable Web Core not available, {TestServer.HostableWebCoreLocation} not found.";
 }

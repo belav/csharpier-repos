@@ -46,9 +46,10 @@ namespace System.Data.Objects.ELinq
 
         private Funcletizer(
             Mode mode,
-            ObjectContext rootContext, 
-            ParameterExpression rootContextParameter, 
-            ReadOnlyCollection<ParameterExpression> compiledQueryParameters)
+            ObjectContext rootContext,
+            ParameterExpression rootContextParameter,
+            ReadOnlyCollection<ParameterExpression> compiledQueryParameters
+        )
         {
             _mode = mode;
             _rootContext = rootContext;
@@ -63,13 +64,19 @@ namespace System.Data.Objects.ELinq
         internal static Funcletizer CreateCompiledQueryEvaluationFuncletizer(
             ObjectContext rootContext,
             ParameterExpression rootContextParameter,
-            ReadOnlyCollection<ParameterExpression> compiledQueryParameters)
+            ReadOnlyCollection<ParameterExpression> compiledQueryParameters
+        )
         {
             EntityUtil.CheckArgumentNull(rootContext, "rootContext");
             EntityUtil.CheckArgumentNull(rootContextParameter, "rootContextParameter");
             EntityUtil.CheckArgumentNull(compiledQueryParameters, "compiledQueryParameters");
 
-            return new Funcletizer(Mode.CompiledQueryEvaluation, rootContext, rootContextParameter, compiledQueryParameters);
+            return new Funcletizer(
+                Mode.CompiledQueryEvaluation,
+                rootContext,
+                rootContextParameter,
+                compiledQueryParameters
+            );
         }
 
         internal static Funcletizer CreateCompiledQueryLockdownFuncletizer()
@@ -101,7 +108,10 @@ namespace System.Data.Objects.ELinq
 
         internal bool IsCompiledQuery
         {
-            get { return _mode == Mode.CompiledQueryEvaluation || _mode == Mode.CompiledQueryLockdown; }
+            get
+            {
+                return _mode == Mode.CompiledQueryEvaluation || _mode == Mode.CompiledQueryLockdown;
+            }
         }
 
         /// <summary>
@@ -144,10 +154,14 @@ namespace System.Data.Objects.ELinq
             }
 
             // Now rewrite given nomination functions
-            FuncletizingVisitor visitor = new FuncletizingVisitor(this, isClientConstant, isClientVariable);
+            FuncletizingVisitor visitor = new FuncletizingVisitor(
+                this,
+                isClientConstant,
+                isClientVariable
+            );
             Expression result = visitor.Visit(expression);
             recompileRequired = visitor.GetRecompileRequiredFunction();
-            
+
             return result;
         }
 
@@ -160,8 +174,10 @@ namespace System.Data.Objects.ELinq
             if (null != _rootContextExpression)
             {
                 return EntityExpressionVisitor.Visit(
-                    expression, (exp, baseVisit) =>
-                    exp == _rootContextParameter ? _rootContextExpression : baseVisit(exp));
+                    expression,
+                    (exp, baseVisit) =>
+                        exp == _rootContextParameter ? _rootContextExpression : baseVisit(exp)
+                );
             }
             else
             {
@@ -170,38 +186,41 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Returns a function indicating whether the given expression and all of its children satisfy the 
+        /// Returns a function indicating whether the given expression and all of its children satisfy the
         /// 'localCriterion'.
         /// </summary>
-        private static Func<Expression, bool> Nominate(Expression expression, Func<Expression, bool> localCriterion)
+        private static Func<Expression, bool> Nominate(
+            Expression expression,
+            Func<Expression, bool> localCriterion
+        )
         {
             EntityUtil.CheckArgumentNull(localCriterion, "localCriterion");
             HashSet<Expression> candidates = new HashSet<Expression>();
             bool cannotBeNominated = false;
             Func<Expression, Func<Expression, Expression>, Expression> visit = (exp, baseVisit) =>
+            {
+                if (exp != null)
                 {
-                    if (exp != null)
+                    bool saveCannotBeNominated = cannotBeNominated;
+                    cannotBeNominated = false;
+                    baseVisit(exp);
+                    if (!cannotBeNominated)
                     {
-                        bool saveCannotBeNominated = cannotBeNominated;
-                        cannotBeNominated = false;
-                        baseVisit(exp);
-                        if (!cannotBeNominated)
+                        // everyone below me can be nominated, so
+                        // see if this one can be also
+                        if (localCriterion(exp))
                         {
-                            // everyone below me can be nominated, so
-                            // see if this one can be also
-                            if (localCriterion(exp))
-                            {
-                                candidates.Add(exp);
-                            }
-                            else
-                            {
-                                cannotBeNominated = true;
-                            }
+                            candidates.Add(exp);
                         }
-                        cannotBeNominated |= saveCannotBeNominated;
+                        else
+                        {
+                            cannotBeNominated = true;
+                        }
                     }
-                    return exp;
-                };
+                    cannotBeNominated |= saveCannotBeNominated;
+                }
+                return exp;
+            };
             EntityExpressionVisitor.Visit(expression, visit);
             return candidates.Contains;
         }
@@ -214,25 +233,32 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Determines whether the node may be evaluated locally and whether 
+        /// Determines whether the node may be evaluated locally and whether
         /// it is a constant. Assumes that all children are also client expressions.
         /// </summary>
         private bool IsImmutable(Expression expression)
         {
-            if (null == expression) { return false; }
+            if (null == expression)
+            {
+                return false;
+            }
             switch (expression.NodeType)
             {
                 case ExpressionType.New:
+                {
+                    // support construction of primitive types
+                    PrimitiveType primitiveType;
+                    if (
+                        !ClrProviderManifest.Instance.TryGetPrimitiveType(
+                            TypeSystem.GetNonNullableType(expression.Type),
+                            out primitiveType
+                        )
+                    )
                     {
-                        // support construction of primitive types
-                        PrimitiveType primitiveType;
-                        if (!ClrProviderManifest.Instance.TryGetPrimitiveType(TypeSystem.GetNonNullableType(expression.Type),
-                            out primitiveType))
-                        {
-                            return false;
-                        }
-                        return true;
+                        return false;
                     }
+                    return true;
+                }
                 case ExpressionType.Constant:
                     return true;
                 case ExpressionType.NewArrayInit:
@@ -246,19 +272,27 @@ namespace System.Data.Objects.ELinq
         }
 
         /// <summary>
-        /// Determines whether the node may be evaluated locally and whether 
+        /// Determines whether the node may be evaluated locally and whether
         /// it is a variable. Assumes that all children are also variable client expressions.
         /// </summary>
         private bool IsClosureExpression(Expression expression)
         {
-            if (null == expression) { return false; }
-            if (IsImmutable(expression)) { return true; }
+            if (null == expression)
+            {
+                return false;
+            }
+            if (IsImmutable(expression))
+            {
+                return true;
+            }
             if (ExpressionType.MemberAccess == expression.NodeType)
             {
                 MemberExpression member = (MemberExpression)expression;
                 if (member.Member.MemberType == MemberTypes.Property)
                 {
-                    return ExpressionConverter.CanFuncletizePropertyInfo((PropertyInfo)member.Member);
+                    return ExpressionConverter.CanFuncletizePropertyInfo(
+                        (PropertyInfo)member.Member
+                    );
                 }
                 return true;
             }
@@ -271,8 +305,14 @@ namespace System.Data.Objects.ELinq
         /// </summary>
         private bool IsCompiledQueryParameterVariable(Expression expression)
         {
-            if (null == expression) { return false; }
-            if (IsClosureExpression(expression)) { return true; }
+            if (null == expression)
+            {
+                return false;
+            }
+            if (IsClosureExpression(expression))
+            {
+                return true;
+            }
             if (ExpressionType.Parameter == expression.NodeType)
             {
                 ParameterExpression parameter = (ParameterExpression)expression;
@@ -289,10 +329,13 @@ namespace System.Data.Objects.ELinq
         {
             EntityUtil.CheckArgumentNull(type, "type");
 
-            if (_rootContext.Perspective.TryGetTypeByName(TypeSystem.GetNonNullableType(type).FullName,
-                false, // bIgnoreCase
-                out typeUsage) &&
-                (TypeSemantics.IsScalarType(typeUsage)))
+            if (
+                _rootContext.Perspective.TryGetTypeByName(
+                    TypeSystem.GetNonNullableType(type).FullName,
+                    false, // bIgnoreCase
+                    out typeUsage
+                ) && (TypeSemantics.IsScalarType(typeUsage))
+            )
             {
                 return true;
             }
@@ -307,11 +350,14 @@ namespace System.Data.Objects.ELinq
         internal string GenerateParameterName()
         {
             // To avoid collisions with user parameters (the full set is not
-            // known at this time) we plug together an 'unlikely' prefix and 
+            // known at this time) we plug together an 'unlikely' prefix and
             // a number.
-            return String.Format(CultureInfo.InvariantCulture, "{0}{1}",
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "{0}{1}",
                 s_parameterPrefix,
-                _parameterNumber++);
+                _parameterNumber++
+            );
         }
 
         /// <summary>
@@ -328,12 +374,13 @@ namespace System.Data.Objects.ELinq
             internal FuncletizingVisitor(
                 Funcletizer funcletizer,
                 Func<Expression, bool> isClientConstant,
-                Func<Expression, bool> isClientVariable)
+                Func<Expression, bool> isClientVariable
+            )
             {
                 EntityUtil.CheckArgumentNull(funcletizer, "funcletizer");
                 EntityUtil.CheckArgumentNull(isClientConstant, "isClientConstant");
                 EntityUtil.CheckArgumentNull(isClientVariable, "isClientVariable");
-            
+
                 _funcletizer = funcletizer;
                 _isClientConstant = isClientConstant;
                 _isClientVariable = isClientVariable;
@@ -347,7 +394,8 @@ namespace System.Data.Objects.ELinq
             {
                 // assign list to local variable to avoid including the entire Funcletizer
                 // class in the closure environment
-                ReadOnlyCollection<Func<bool>> recompileRequiredDelegates = _recompileRequiredDelegates.AsReadOnly();
+                ReadOnlyCollection<Func<bool>> recompileRequiredDelegates =
+                    _recompileRequiredDelegates.AsReadOnly();
                 return () => recompileRequiredDelegates.Any(d => d());
             }
 
@@ -370,10 +418,22 @@ namespace System.Data.Objects.ELinq
                         else if (_isClientVariable(exp))
                         {
                             TypeUsage queryParameterType;
-                            if (_funcletizer.TryGetTypeUsageForTerminal(exp.Type, out queryParameterType))
+                            if (
+                                _funcletizer.TryGetTypeUsageForTerminal(
+                                    exp.Type,
+                                    out queryParameterType
+                                )
+                            )
                             {
-                                DbParameterReferenceExpression parameterReference = queryParameterType.Parameter(_funcletizer.GenerateParameterName());
-                                return new QueryParameterExpression(parameterReference, exp, _funcletizer._compiledQueryParameters);
+                                DbParameterReferenceExpression parameterReference =
+                                    queryParameterType.Parameter(
+                                        _funcletizer.GenerateParameterName()
+                                    );
+                                return new QueryParameterExpression(
+                                    parameterReference,
+                                    exp,
+                                    _funcletizer._compiledQueryParameters
+                                );
                             }
                             else if (_funcletizer.IsCompiledQuery)
                             {
@@ -394,7 +454,9 @@ namespace System.Data.Objects.ELinq
                 return base.Visit(exp);
             }
 
-            private static NotSupportedException InvalidCompiledQueryParameterException(Expression expression)
+            private static NotSupportedException InvalidCompiledQueryParameterException(
+                Expression expression
+            )
             {
                 ParameterExpression parameterExp;
                 if (expression.NodeType == ExpressionType.Parameter)
@@ -406,35 +468,52 @@ namespace System.Data.Objects.ELinq
                     // If this is a simple query parameter (involving a single delegate parameter) report the
                     // type of that parameter. Otherwise, report the type of the part of the parameter.
                     HashSet<ParameterExpression> parameters = new HashSet<ParameterExpression>();
-                    EntityExpressionVisitor.Visit(expression, (exp, baseVisit) =>
-                    {
-                        if (null != exp && exp.NodeType == ExpressionType.Parameter)
+                    EntityExpressionVisitor.Visit(
+                        expression,
+                        (exp, baseVisit) =>
                         {
-                            parameters.Add((ParameterExpression)exp);
+                            if (null != exp && exp.NodeType == ExpressionType.Parameter)
+                            {
+                                parameters.Add((ParameterExpression)exp);
+                            }
+                            return baseVisit(exp);
                         }
-                        return baseVisit(exp);
-                    });
+                    );
 
                     if (parameters.Count != 1)
                     {
-                        return EntityUtil.NotSupported(Strings.CompiledELinq_UnsupportedParameterTypes(expression.Type.FullName));
+                        return EntityUtil.NotSupported(
+                            Strings.CompiledELinq_UnsupportedParameterTypes(
+                                expression.Type.FullName
+                            )
+                        );
                     }
-                    
+
                     parameterExp = parameters.Single();
                 }
 
                 if (parameterExp.Type.Equals(expression.Type))
                 {
                     // If the expression type is the same as the parameter type, indicate that the parameter type is not valid.
-                    return EntityUtil.NotSupported(Strings.CompiledELinq_UnsupportedNamedParameterType(parameterExp.Name, parameterExp.Type.FullName));                    
+                    return EntityUtil.NotSupported(
+                        Strings.CompiledELinq_UnsupportedNamedParameterType(
+                            parameterExp.Name,
+                            parameterExp.Type.FullName
+                        )
+                    );
                 }
                 else
                 {
                     // Otherwise, indicate that using the specified parameter to produce a value of the expression's type is not supported in compiled query
-                    return EntityUtil.NotSupported(Strings.CompiledELinq_UnsupportedNamedParameterUseAsType(parameterExp.Name, expression.Type.FullName));
+                    return EntityUtil.NotSupported(
+                        Strings.CompiledELinq_UnsupportedNamedParameterUseAsType(
+                            parameterExp.Name,
+                            expression.Type.FullName
+                        )
+                    );
                 }
             }
-        
+
             /// <summary>
             /// Compiles a delegate returning the value of the given expression.
             /// </summary>
@@ -465,13 +544,15 @@ namespace System.Data.Objects.ELinq
                     if (expression.NodeType == ExpressionType.Convert)
                     {
                         var ue = (UnaryExpression)expression;
-                        // The ObjectSet instance is wrapped inside Convert UnaryExpression in 
-                        // ElinqQueryState.GetExpression(). The block below identifies such an 
-                        // expression, makes sure the object query it contains is immutable and 
+                        // The ObjectSet instance is wrapped inside Convert UnaryExpression in
+                        // ElinqQueryState.GetExpression(). The block below identifies such an
+                        // expression, makes sure the object query it contains is immutable and
                         // extracts the reference to the object query.
-                        if (!recompileOnChange
+                        if (
+                            !recompileOnChange
                             && ue.Operand.NodeType == ExpressionType.Constant
-                            && typeof(IQueryable).IsAssignableFrom(ue.Operand.Type))
+                            && typeof(IQueryable).IsAssignableFrom(ue.Operand.Type)
+                        )
                         {
                             value = ((ConstantExpression)ue.Operand).Value;
                             fastPath = true;
@@ -500,9 +581,10 @@ namespace System.Data.Objects.ELinq
                     else
                     {
                         // everything else is just a constant...
-                        result = expression.NodeType == ExpressionType.Constant
-                            ? expression
-                            : Expression.Constant(value, expression.Type);
+                        result =
+                            expression.NodeType == ExpressionType.Constant
+                                ? expression
+                                : Expression.Constant(value, expression.Type);
                     }
                 }
 
@@ -522,25 +604,30 @@ namespace System.Data.Objects.ELinq
                 if (null != originalQuery)
                 {
                     // For inline queries, we need to check merge options as well (it's mutable)
-                    MergeOption? originalMergeOption = originalQuery.QueryState.UserSpecifiedMergeOption;
+                    MergeOption? originalMergeOption = originalQuery
+                        .QueryState
+                        .UserSpecifiedMergeOption;
                     if (null == getValue)
                     {
-                        _recompileRequiredDelegates.Add(() => originalQuery.QueryState.UserSpecifiedMergeOption != originalMergeOption);
+                        _recompileRequiredDelegates.Add(() =>
+                            originalQuery.QueryState.UserSpecifiedMergeOption != originalMergeOption
+                        );
                     }
                     else
                     {
                         _recompileRequiredDelegates.Add(() =>
                         {
                             ObjectQuery currentQuery = getValue() as ObjectQuery;
-                            return !object.ReferenceEquals(originalQuery, currentQuery) ||
-                                currentQuery.QueryState.UserSpecifiedMergeOption != originalMergeOption;
+                            return !object.ReferenceEquals(originalQuery, currentQuery)
+                                || currentQuery.QueryState.UserSpecifiedMergeOption
+                                    != originalMergeOption;
                         });
-
                     }
                 }
                 else if (null != getValue)
                 {
-                    _recompileRequiredDelegates.Add(() => !object.ReferenceEquals(value, getValue()));
+                    _recompileRequiredDelegates.Add(() => !object.ReferenceEquals(value, getValue())
+                    );
                 }
             }
 
@@ -560,9 +647,16 @@ namespace System.Data.Objects.ELinq
                 }
                 else
                 {
-                    if (!object.ReferenceEquals(_funcletizer._rootContext, inlineQuery.QueryState.ObjectContext))
+                    if (
+                        !object.ReferenceEquals(
+                            _funcletizer._rootContext,
+                            inlineQuery.QueryState.ObjectContext
+                        )
+                    )
                     {
-                        throw EntityUtil.NotSupported(System.Data.Entity.Strings.ELinq_UnsupportedDifferentContexts);
+                        throw EntityUtil.NotSupported(
+                            System.Data.Entity.Strings.ELinq_UnsupportedDifferentContexts
+                        );
                     }
 
                     queryExpression = inlineQuery.GetExpression();
@@ -606,11 +700,13 @@ namespace System.Data.Objects.ELinq
         internal QueryParameterExpression(
             DbParameterReferenceExpression parameterReference,
             Expression funcletizedExpression,
-            IEnumerable<ParameterExpression> compiledQueryParameters)
+            IEnumerable<ParameterExpression> compiledQueryParameters
+        )
         {
             EntityUtil.CheckArgumentNull(parameterReference, "parameterReference");
             EntityUtil.CheckArgumentNull(funcletizedExpression, "funcletizedExpression");
-            _compiledQueryParameters = compiledQueryParameters ?? Enumerable.Empty<ParameterExpression>();
+            _compiledQueryParameters =
+                compiledQueryParameters ?? Enumerable.Empty<ParameterExpression>();
             _parameterReference = parameterReference;
             _type = funcletizedExpression.Type;
             _funcletizedExpression = funcletizedExpression;
@@ -640,10 +736,15 @@ namespace System.Data.Objects.ELinq
                 if (_cachedDelegate == null)
                 {
                     // Get the Func<> type for the property evaluator
-                    Type delegateType = TypeSystem.GetDelegateType(_compiledQueryParameters.Select(p => p.Type), _type);
+                    Type delegateType = TypeSystem.GetDelegateType(
+                        _compiledQueryParameters.Select(p => p.Type),
+                        _type
+                    );
 
                     // Now compile delegate for the funcletized expression
-                    _cachedDelegate = Expression.Lambda(delegateType, _funcletizedExpression, _compiledQueryParameters).Compile();
+                    _cachedDelegate = Expression
+                        .Lambda(delegateType, _funcletizedExpression, _compiledQueryParameters)
+                        .Compile();
                 }
                 return _cachedDelegate.DynamicInvoke(arguments);
             }
@@ -661,8 +762,15 @@ namespace System.Data.Objects.ELinq
         /// <returns></returns>
         internal QueryParameterExpression EscapeParameterForLike(Func<string, string> method)
         {
-            Expression wrappedExpression = Expression.Invoke(Expression.Constant(method), this._funcletizedExpression);
-            return new QueryParameterExpression(this._parameterReference, wrappedExpression, this._compiledQueryParameters);
+            Expression wrappedExpression = Expression.Invoke(
+                Expression.Constant(method),
+                this._funcletizedExpression
+            );
+            return new QueryParameterExpression(
+                this._parameterReference,
+                wrappedExpression,
+                this._compiledQueryParameters
+            );
         }
 
         /// <summary>
@@ -683,7 +791,10 @@ namespace System.Data.Objects.ELinq
             get { return EntityExpressionVisitor.CustomExpression; }
         }
 
-        private bool TryEvaluatePath(Expression expression, out ConstantExpression constantExpression)
+        private bool TryEvaluatePath(
+            Expression expression,
+            out ConstantExpression constantExpression
+        )
         {
             MemberExpression me = expression as MemberExpression;
             constantExpression = null;
@@ -700,7 +811,13 @@ namespace System.Data.Objects.ELinq
                 if (ce != null)
                 {
                     object memberVal;
-                    if (!TryGetFieldOrPropertyValue(me, ((ConstantExpression)me.Expression).Value, out memberVal))
+                    if (
+                        !TryGetFieldOrPropertyValue(
+                            me,
+                            ((ConstantExpression)me.Expression).Value,
+                            out memberVal
+                        )
+                    )
                     {
                         return false;
                     }
@@ -721,7 +838,11 @@ namespace System.Data.Objects.ELinq
             return false;
         }
 
-        private bool TryGetFieldOrPropertyValue(MemberExpression me, object instance, out object memberValue)
+        private bool TryGetFieldOrPropertyValue(
+            MemberExpression me,
+            object instance,
+            out object memberValue
+        )
         {
             bool result = false;
             memberValue = null;

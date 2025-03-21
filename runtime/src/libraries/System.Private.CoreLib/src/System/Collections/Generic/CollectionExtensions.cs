@@ -8,10 +8,16 @@ namespace System.Collections.Generic
 {
     public static class CollectionExtensions
     {
-        public static TValue? GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key) =>
-            dictionary.GetValueOrDefault(key, default!);
+        public static TValue? GetValueOrDefault<TKey, TValue>(
+            this IReadOnlyDictionary<TKey, TValue> dictionary,
+            TKey key
+        ) => dictionary.GetValueOrDefault(key, default!);
 
-        public static TValue GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
+        public static TValue GetValueOrDefault<TKey, TValue>(
+            this IReadOnlyDictionary<TKey, TValue> dictionary,
+            TKey key,
+            TValue defaultValue
+        )
         {
             if (dictionary is null)
             {
@@ -21,7 +27,11 @@ namespace System.Collections.Generic
             return dictionary.TryGetValue(key, out TValue? value) ? value : defaultValue;
         }
 
-        public static bool TryAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
+        public static bool TryAdd<TKey, TValue>(
+            this IDictionary<TKey, TValue> dictionary,
+            TKey key,
+            TValue value
+        )
         {
             if (dictionary is null)
             {
@@ -37,7 +47,11 @@ namespace System.Collections.Generic
             return false;
         }
 
-        public static bool Remove<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, [MaybeNullWhen(false)] out TValue value)
+        public static bool Remove<TKey, TValue>(
+            this IDictionary<TKey, TValue> dictionary,
+            TKey key,
+            [MaybeNullWhen(false)] out TValue value
+        )
         {
             if (dictionary is null)
             {
@@ -74,8 +88,10 @@ namespace System.Collections.Generic
         /// <param name="dictionary">The dictionary to wrap.</param>
         /// <returns>An object that acts as a read-only wrapper around the current <see cref="IDictionary{TKey, TValue}"/>.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="dictionary"/> is null.</exception>
-        public static ReadOnlyDictionary<TKey, TValue> AsReadOnly<TKey, TValue>(this IDictionary<TKey, TValue> dictionary) where TKey : notnull =>
-            new ReadOnlyDictionary<TKey, TValue>(dictionary);
+        public static ReadOnlyDictionary<TKey, TValue> AsReadOnly<TKey, TValue>(
+            this IDictionary<TKey, TValue> dictionary
+        )
+            where TKey : notnull => new ReadOnlyDictionary<TKey, TValue>(dictionary);
 
         /// <summary>Adds the elements of the specified span to the end of the <see cref="List{T}"/>.</summary>
         /// <typeparam name="T">The type of elements in the list.</typeparam>
@@ -133,7 +149,13 @@ namespace System.Collections.Generic
                 // to copy in the new data.
                 if (index < list._size)
                 {
-                    Array.Copy(list._items, index, list._items, index + source.Length, list._size - index);
+                    Array.Copy(
+                        list._items,
+                        index,
+                        list._items,
+                        index + source.Length,
+                        list._size - index
+                    );
                 }
 
                 // Copy the source span into the list.

@@ -33,11 +33,15 @@ namespace System.Threading.Tasks.Sources.Tests
 
             Assert.Throws<InvalidOperationException>(() => mrvts.GetResult(0));
             Assert.Throws<InvalidOperationException>(() => mrvts.GetStatus(0));
-            Assert.Throws<InvalidOperationException>(() => mrvts.OnCompleted(_ => { }, new object(), 0, ValueTaskSourceOnCompletedFlags.None));
+            Assert.Throws<InvalidOperationException>(() =>
+                mrvts.OnCompleted(_ => { }, new object(), 0, ValueTaskSourceOnCompletedFlags.None)
+            );
 
             Assert.Throws<InvalidOperationException>(() => mrvts.GetResult(2));
             Assert.Throws<InvalidOperationException>(() => mrvts.GetStatus(2));
-            Assert.Throws<InvalidOperationException>(() => mrvts.OnCompleted(_ => { }, new object(), 2, ValueTaskSourceOnCompletedFlags.None));
+            Assert.Throws<InvalidOperationException>(() =>
+                mrvts.OnCompleted(_ => { }, new object(), 2, ValueTaskSourceOnCompletedFlags.None)
+            );
         }
 
         [Fact]
@@ -76,7 +80,12 @@ namespace System.Threading.Tasks.Sources.Tests
             Assert.Equal(42, mrvts.GetResult(2));
 
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            mrvts.OnCompleted(s => ((TaskCompletionSource)s).SetResult(), tcs, 2, ValueTaskSourceOnCompletedFlags.None);
+            mrvts.OnCompleted(
+                s => ((TaskCompletionSource)s).SetResult(),
+                tcs,
+                2,
+                ValueTaskSourceOnCompletedFlags.None
+            );
             await tcs.Task;
 
             Assert.Equal(2, mrvts.Version);
@@ -93,8 +102,15 @@ namespace System.Threading.Tasks.Sources.Tests
             Assert.Equal(ValueTaskSourceStatus.Pending, mrvts.GetStatus(2));
             Assert.Throws<InvalidOperationException>(() => mrvts.GetResult(2));
 
-            var onCompletedRan = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            mrvts.OnCompleted(s => ((TaskCompletionSource)s).SetResult(), onCompletedRan, 2, ValueTaskSourceOnCompletedFlags.None);
+            var onCompletedRan = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            mrvts.OnCompleted(
+                s => ((TaskCompletionSource)s).SetResult(),
+                onCompletedRan,
+                2,
+                ValueTaskSourceOnCompletedFlags.None
+            );
 
             Assert.False(onCompletedRan.Task.IsCompleted);
             await Task.Delay(1);
@@ -124,7 +140,12 @@ namespace System.Threading.Tasks.Sources.Tests
             Assert.Same(e, Assert.Throws<FormatException>(() => mrvts.GetResult(2)));
 
             var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            mrvts.OnCompleted(s => ((TaskCompletionSource)s).SetResult(), tcs, 2, ValueTaskSourceOnCompletedFlags.None);
+            mrvts.OnCompleted(
+                s => ((TaskCompletionSource)s).SetResult(),
+                tcs,
+                2,
+                ValueTaskSourceOnCompletedFlags.None
+            );
             await tcs.Task;
 
             Assert.Equal(2, mrvts.Version);
@@ -141,8 +162,15 @@ namespace System.Threading.Tasks.Sources.Tests
             Assert.Equal(ValueTaskSourceStatus.Pending, mrvts.GetStatus(2));
             Assert.Throws<InvalidOperationException>(() => mrvts.GetResult(2));
 
-            var onCompletedRan = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            mrvts.OnCompleted(s => ((TaskCompletionSource)s).SetResult(), onCompletedRan, 2, ValueTaskSourceOnCompletedFlags.None);
+            var onCompletedRan = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            mrvts.OnCompleted(
+                s => ((TaskCompletionSource)s).SetResult(),
+                onCompletedRan,
+                2,
+                ValueTaskSourceOnCompletedFlags.None
+            );
 
             Assert.False(onCompletedRan.Task.IsCompleted);
             await Task.Delay(1);
@@ -184,10 +212,17 @@ namespace System.Threading.Tasks.Sources.Tests
             var al = new AsyncLocal<int>();
             al.Value = 42;
             mrvts.OnCompleted(
-                _ => { Assert.Equal(flowContext ? 42 : 0, al.Value); tcs.SetResult(); },
+                _ =>
+                {
+                    Assert.Equal(flowContext ? 42 : 0, al.Value);
+                    tcs.SetResult();
+                },
                 null,
                 0,
-                flowContext ? ValueTaskSourceOnCompletedFlags.FlowExecutionContext : ValueTaskSourceOnCompletedFlags.None);
+                flowContext
+                    ? ValueTaskSourceOnCompletedFlags.FlowExecutionContext
+                    : ValueTaskSourceOnCompletedFlags.None
+            );
 
             await tcs.Task;
         }
@@ -205,10 +240,17 @@ namespace System.Threading.Tasks.Sources.Tests
             var al = new AsyncLocal<int>();
             al.Value = 42;
             mrvts.OnCompleted(
-                _ => { Assert.Equal(flowContext ? 42 : 0, al.Value); tcs.SetResult(); },
+                _ =>
+                {
+                    Assert.Equal(flowContext ? 42 : 0, al.Value);
+                    tcs.SetResult();
+                },
                 null,
                 0,
-                flowContext ? ValueTaskSourceOnCompletedFlags.FlowExecutionContext : ValueTaskSourceOnCompletedFlags.None);
+                flowContext
+                    ? ValueTaskSourceOnCompletedFlags.FlowExecutionContext
+                    : ValueTaskSourceOnCompletedFlags.None
+            );
 
             mrvts.SetResult(1);
 
@@ -219,7 +261,10 @@ namespace System.Threading.Tasks.Sources.Tests
         public void OnCompleted_NullDelegate_Throws()
         {
             var mrvts = new ManualResetValueTaskSource<int>();
-            AssertExtensions.Throws<ArgumentNullException>("continuation", () => mrvts.OnCompleted(null, new object(), 0, ValueTaskSourceOnCompletedFlags.None));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "continuation",
+                () => mrvts.OnCompleted(null, new object(), 0, ValueTaskSourceOnCompletedFlags.None)
+            );
         }
 
         [Fact]
@@ -227,25 +272,39 @@ namespace System.Threading.Tasks.Sources.Tests
         {
             var mrvts = new ManualResetValueTaskSource<int>();
             mrvts.OnCompleted(_ => { }, null, 0, ValueTaskSourceOnCompletedFlags.None);
-            Assert.Throws<InvalidOperationException>(() => mrvts.OnCompleted(_ => { }, null, 0, ValueTaskSourceOnCompletedFlags.None));
+            Assert.Throws<InvalidOperationException>(() =>
+                mrvts.OnCompleted(_ => { }, null, 0, ValueTaskSourceOnCompletedFlags.None)
+            );
         }
 
         [Fact]
         public void OnCompleted_UnknownFlagsIgnored()
         {
             var mrvts = new ManualResetValueTaskSource<int>();
-            mrvts.OnCompleted(_ => { }, new object(), 0, (ValueTaskSourceOnCompletedFlags)int.MaxValue);
+            mrvts.OnCompleted(
+                _ => { },
+                new object(),
+                0,
+                (ValueTaskSourceOnCompletedFlags)int.MaxValue
+            );
         }
 
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task OnCompleted_ContinuationAlwaysInvokedAsynchronously(bool runContinuationsAsynchronously)
+        public async Task OnCompleted_ContinuationAlwaysInvokedAsynchronously(
+            bool runContinuationsAsynchronously
+        )
         {
-            var mrvts = new ManualResetValueTaskSource<int>() { RunContinuationsAsynchronously = runContinuationsAsynchronously };
+            var mrvts = new ManualResetValueTaskSource<int>()
+            {
+                RunContinuationsAsynchronously = runContinuationsAsynchronously,
+            };
             for (short i = 0; i < 10; i++)
             {
-                var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                var tcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
 
                 var tl = new ThreadLocal<int> { Value = 42 };
                 mrvts.SetResult(42);
@@ -257,7 +316,8 @@ namespace System.Threading.Tasks.Sources.Tests
                     },
                     null,
                     i,
-                    ValueTaskSourceOnCompletedFlags.None);
+                    ValueTaskSourceOnCompletedFlags.None
+                );
                 mrvts.Reset();
 
                 tl.Value = 0;
@@ -269,12 +329,19 @@ namespace System.Threading.Tasks.Sources.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task SetResult_RunContinuationsAsynchronously_ContinuationInvokedAccordingly(bool runContinuationsAsynchronously)
+        public async Task SetResult_RunContinuationsAsynchronously_ContinuationInvokedAccordingly(
+            bool runContinuationsAsynchronously
+        )
         {
-            var mrvts = new ManualResetValueTaskSource<int>() { RunContinuationsAsynchronously = runContinuationsAsynchronously };
+            var mrvts = new ManualResetValueTaskSource<int>()
+            {
+                RunContinuationsAsynchronously = runContinuationsAsynchronously,
+            };
             for (short i = 0; i < 10; i++)
             {
-                var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+                var tcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
 
                 var tl = new ThreadLocal<int> { Value = 42 };
                 mrvts.OnCompleted(
@@ -285,7 +352,8 @@ namespace System.Threading.Tasks.Sources.Tests
                     },
                     null,
                     i,
-                    ValueTaskSourceOnCompletedFlags.None);
+                    ValueTaskSourceOnCompletedFlags.None
+                );
                 mrvts.SetResult(42);
                 mrvts.Reset();
 
@@ -305,11 +373,17 @@ namespace System.Threading.Tasks.Sources.Tests
         [InlineData(true, true, false)]
         [InlineData(true, true, true)]
         public async Task SynchronizationContext_CaptureIfRequested(
-            bool runContinuationsAsynchronously, bool captureSyncCtx, bool setBeforeOnCompleted)
+            bool runContinuationsAsynchronously,
+            bool captureSyncCtx,
+            bool setBeforeOnCompleted
+        )
         {
             await Task.Run(async () => // escape xunit sync ctx
             {
-                var mrvts = new ManualResetValueTaskSource<int>() { RunContinuationsAsynchronously = runContinuationsAsynchronously };
+                var mrvts = new ManualResetValueTaskSource<int>()
+                {
+                    RunContinuationsAsynchronously = runContinuationsAsynchronously,
+                };
 
                 if (setBeforeOnCompleted)
                 {
@@ -324,7 +398,10 @@ namespace System.Threading.Tasks.Sources.Tests
                     _ => tcs.SetResult(),
                     null,
                     0,
-                    captureSyncCtx ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext : ValueTaskSourceOnCompletedFlags.None);
+                    captureSyncCtx
+                        ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                        : ValueTaskSourceOnCompletedFlags.None
+                );
                 SynchronizationContext.SetSynchronizationContext(null);
 
                 if (!setBeforeOnCompleted)
@@ -347,11 +424,17 @@ namespace System.Threading.Tasks.Sources.Tests
         [InlineData(true, true, false)]
         [InlineData(true, true, true)]
         public async Task TaskScheduler_CaptureIfRequested(
-            bool runContinuationsAsynchronously, bool captureTaskScheduler, bool setBeforeOnCompleted)
+            bool runContinuationsAsynchronously,
+            bool captureTaskScheduler,
+            bool setBeforeOnCompleted
+        )
         {
             await Task.Run(async () => // escape xunit sync ctx
             {
-                var mrvts = new ManualResetValueTaskSource<int>() { RunContinuationsAsynchronously = runContinuationsAsynchronously };
+                var mrvts = new ManualResetValueTaskSource<int>()
+                {
+                    RunContinuationsAsynchronously = runContinuationsAsynchronously,
+                };
 
                 if (setBeforeOnCompleted)
                 {
@@ -361,14 +444,22 @@ namespace System.Threading.Tasks.Sources.Tests
                 var tcs = new TaskCompletionSource();
                 var ts = new TrackingTaskScheduler();
                 Assert.Equal(0, ts.QueueTasks);
-                await Task.Factory.StartNew(() =>
-                {
-                    mrvts.OnCompleted(
-                        _ => tcs.SetResult(),
-                        null,
-                        0,
-                        captureTaskScheduler ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext : ValueTaskSourceOnCompletedFlags.None);
-                }, CancellationToken.None, TaskCreationOptions.None, ts);
+                await Task.Factory.StartNew(
+                    () =>
+                    {
+                        mrvts.OnCompleted(
+                            _ => tcs.SetResult(),
+                            null,
+                            0,
+                            captureTaskScheduler
+                                ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                                : ValueTaskSourceOnCompletedFlags.None
+                        );
+                    },
+                    CancellationToken.None,
+                    TaskCreationOptions.None,
+                    ts
+                );
 
                 if (!setBeforeOnCompleted)
                 {
@@ -401,7 +492,9 @@ namespace System.Threading.Tasks.Sources.Tests
                 ThreadPool.QueueUserWorkItem(_ => TryExecuteTask(task));
             }
 
-            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) => false;
+            protected override bool TryExecuteTaskInline(Task task, bool taskWasPreviouslyQueued) =>
+                false;
+
             protected override IEnumerable<Task> GetScheduledTasks() => null;
         }
 
@@ -412,9 +505,9 @@ namespace System.Threading.Tasks.Sources.Tests
         [InlineData(true, true)]
         public async Task AsyncEnumerable_Success(bool awaitForeach, bool asyncIterator)
         {
-            IAsyncEnumerable<int> enumerable = asyncIterator ?
-                CountCompilerAsync(20) :
-                CountManualAsync(20);
+            IAsyncEnumerable<int> enumerable = asyncIterator
+                ? CountCompilerAsync(20)
+                : CountManualAsync(20);
 
             if (awaitForeach)
             {
@@ -456,11 +549,11 @@ namespace System.Threading.Tasks.Sources.Tests
         internal static IAsyncEnumerable<int> CountManualAsync(int items) =>
             new CountAsyncEnumerable(items);
 
-        private sealed class CountAsyncEnumerable :
-            IAsyncEnumerable<int>,  // used as the enumerable itself
-            IAsyncEnumerator<int>,  // used as the enumerator returned from first call to enumerable's GetAsyncEnumerator
-            IValueTaskSource<bool>, // used as the backing store behind the ValueTask<bool> returned from each MoveNextAsync
-            IAsyncStateMachine // uses existing builder's support for ExecutionContext, optimized awaits, etc.
+        private sealed class CountAsyncEnumerable
+            : IAsyncEnumerable<int>, // used as the enumerable itself
+                IAsyncEnumerator<int>, // used as the enumerator returned from first call to enumerable's GetAsyncEnumerator
+                IValueTaskSource<bool>, // used as the backing store behind the ValueTask<bool> returned from each MoveNextAsync
+                IAsyncStateMachine // uses existing builder's support for ExecutionContext, optimized awaits, etc.
         {
             // This implementation will generally incur only two allocations of overhead
             // for the entire enumeration:
@@ -477,8 +570,10 @@ namespace System.Threading.Tasks.Sources.Tests
 
             /// <summary>Current state of the state machine.</summary>
             private int _state = StateCtor;
+
             /// <summary>All of the logic for managing the IValueTaskSource implementation</summary>
             private ManualResetValueTaskSourceCore<bool> _vts; // mutable struct; do not make this readonly
+
             /// <summary>Builder used for efficiently waiting and appropriately managing ExecutionContext.</summary>
             private AsyncIteratorMethodBuilder _builder = AsyncIteratorMethodBuilder.Create(); // mutable struct; do not make this readonly
 
@@ -494,11 +589,14 @@ namespace System.Threading.Tasks.Sources.Tests
                 _local_items = _param_items = items;
             }
 
-            public IAsyncEnumerator<int> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+            public IAsyncEnumerator<int> GetAsyncEnumerator(
+                CancellationToken cancellationToken = default
+            )
             {
-                CountAsyncEnumerable cae = Interlocked.CompareExchange(ref _state, StateStart, StateCtor) == StateCtor ?
-                    this :
-                    new CountAsyncEnumerable(_param_items) { _state = StateStart };
+                CountAsyncEnumerable cae =
+                    Interlocked.CompareExchange(ref _state, StateStart, StateCtor) == StateCtor
+                        ? this
+                        : new CountAsyncEnumerable(_param_items) { _state = StateStart };
                 cae._cancellationToken = cancellationToken;
                 return cae;
             }
@@ -582,12 +680,20 @@ namespace System.Threading.Tasks.Sources.Tests
                     return;
                 }
             }
+
             void IAsyncStateMachine.SetStateMachine(IAsyncStateMachine stateMachine) { }
 
             bool IValueTaskSource<bool>.GetResult(short token) => _vts.GetResult(token);
-            ValueTaskSourceStatus IValueTaskSource<bool>.GetStatus(short token) => _vts.GetStatus(token);
-            void IValueTaskSource<bool>.OnCompleted(Action<object> continuation, object state, short token, ValueTaskSourceOnCompletedFlags flags) =>
-                _vts.OnCompleted(continuation, state, token, flags);
+
+            ValueTaskSourceStatus IValueTaskSource<bool>.GetStatus(short token) =>
+                _vts.GetStatus(token);
+
+            void IValueTaskSource<bool>.OnCompleted(
+                Action<object> continuation,
+                object state,
+                short token,
+                ValueTaskSourceOnCompletedFlags flags
+            ) => _vts.OnCompleted(continuation, state, token, flags);
         }
     }
 }

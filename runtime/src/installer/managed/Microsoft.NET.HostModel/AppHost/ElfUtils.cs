@@ -24,11 +24,10 @@ namespace Microsoft.NET.HostModel.AppHost
 
             byte[] eIdent = reader.ReadBytes(4);
 
-            return
-                eIdent[0] == ElfMagic[0] &&
-                eIdent[1] == ElfMagic[1] &&
-                eIdent[2] == ElfMagic[2] &&
-                eIdent[3] == ElfMagic[3];
+            return eIdent[0] == ElfMagic[0]
+                && eIdent[1] == ElfMagic[1]
+                && eIdent[2] == ElfMagic[2]
+                && eIdent[3] == ElfMagic[3];
         }
     }
 }

@@ -14,9 +14,7 @@ namespace System.Data.Common
         private double[] _values = default!; // Late-initialized
 
         internal DoubleStorage(DataColumn column)
-        : base(column, typeof(double), defaultValue, StorageType.Double)
-        {
-        }
+            : base(column, typeof(double), defaultValue, StorageType.Double) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -31,7 +29,10 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { sum += _values[record]; }
+                            checked
+                            {
+                                sum += _values[record];
+                            }
                             hasData = true;
                         }
                         if (hasData)
@@ -47,14 +48,20 @@ namespace System.Data.Common
                         {
                             if (IsNull(record))
                                 continue;
-                            checked { meanSum += _values[record]; }
+                            checked
+                            {
+                                meanSum += _values[record];
+                            }
                             meanCount++;
                             hasData = true;
                         }
                         if (hasData)
                         {
                             double mean;
-                            checked { mean = meanSum / meanCount; }
+                            checked
+                            {
+                                mean = meanSum / meanCount;
+                            }
                             return mean;
                         }
                         return _nullValue;
@@ -254,7 +261,12 @@ namespace System.Data.Common
             return new double[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             double[] typedStore = (double[])store;
             typedStore[storeIndex] = _values[record];

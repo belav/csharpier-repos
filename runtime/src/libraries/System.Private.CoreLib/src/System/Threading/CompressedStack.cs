@@ -8,11 +8,13 @@ namespace System.Threading
 {
     public sealed class CompressedStack : ISerializable
     {
-        private CompressedStack()
-        {
-        }
+        private CompressedStack() { }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -34,7 +36,11 @@ namespace System.Threading
             return new CompressedStack();
         }
 
-        public static void Run(CompressedStack compressedStack, ContextCallback callback, object? state)
+        public static void Run(
+            CompressedStack compressedStack,
+            ContextCallback callback,
+            object? state
+        )
         {
             ArgumentNullException.ThrowIfNull(compressedStack);
 

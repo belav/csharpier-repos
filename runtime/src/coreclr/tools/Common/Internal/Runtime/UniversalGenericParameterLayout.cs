@@ -10,7 +10,7 @@ namespace Internal.Runtime
         private enum HasVarsInvestigationLevel
         {
             Parameter,
-            NotParameter
+            NotParameter,
         }
 
         /// <summary>
@@ -45,10 +45,16 @@ namespace Internal.Runtime
         /// </summary>
         public static bool IsLayoutDependentOnGenericInstantiation(TypeDesc type)
         {
-            return IsLayoutDependentOnGenericInstantiation(type, HasVarsInvestigationLevel.Parameter);
+            return IsLayoutDependentOnGenericInstantiation(
+                type,
+                HasVarsInvestigationLevel.Parameter
+            );
         }
 
-        private static bool IsLayoutDependentOnGenericInstantiation(TypeDesc type, HasVarsInvestigationLevel investigationLevel)
+        private static bool IsLayoutDependentOnGenericInstantiation(
+            TypeDesc type,
+            HasVarsInvestigationLevel investigationLevel
+        )
         {
             if (type.IsSignatureVariable)
             {
@@ -58,11 +64,17 @@ namespace Internal.Runtime
             {
                 foreach (TypeDesc valueTypeInstantiationParam in type.Instantiation)
                 {
-                    if (IsLayoutDependentOnGenericInstantiation(valueTypeInstantiationParam, HasVarsInvestigationLevel.NotParameter))
+                    if (
+                        IsLayoutDependentOnGenericInstantiation(
+                            valueTypeInstantiationParam,
+                            HasVarsInvestigationLevel.NotParameter
+                        )
+                    )
                     {
                         if (investigationLevel == HasVarsInvestigationLevel.Parameter)
                         {
-                            DefType universalCanonForm = (DefType)type.ConvertToCanonForm(CanonicalFormKind.Universal);
+                            DefType universalCanonForm = (DefType)
+                                type.ConvertToCanonForm(CanonicalFormKind.Universal);
                             return universalCanonForm.InstanceFieldSize.IsIndeterminate;
                         }
                         else
@@ -80,14 +92,26 @@ namespace Internal.Runtime
             }
         }
 
-        public static bool MethodSignatureHasVarsNeedingCallingConventionConverter(TypeSystem.MethodSignature methodSignature)
+        public static bool MethodSignatureHasVarsNeedingCallingConventionConverter(
+            TypeSystem.MethodSignature methodSignature
+        )
         {
-            if (IsLayoutDependentOnGenericInstantiation(methodSignature.ReturnType, HasVarsInvestigationLevel.Parameter))
+            if (
+                IsLayoutDependentOnGenericInstantiation(
+                    methodSignature.ReturnType,
+                    HasVarsInvestigationLevel.Parameter
+                )
+            )
                 return true;
 
             for (int i = 0; i < methodSignature.Length; i++)
             {
-                if (IsLayoutDependentOnGenericInstantiation(methodSignature[i], HasVarsInvestigationLevel.Parameter))
+                if (
+                    IsLayoutDependentOnGenericInstantiation(
+                        methodSignature[i],
+                        HasVarsInvestigationLevel.Parameter
+                    )
+                )
                     return true;
             }
 
@@ -96,10 +120,16 @@ namespace Internal.Runtime
 
         public static bool VTableMethodRequiresCallingConventionConverter(MethodDesc method)
         {
-            if (!MethodSignatureHasVarsNeedingCallingConventionConverter(method.GetTypicalMethodDefinition().Signature))
+            if (
+                !MethodSignatureHasVarsNeedingCallingConventionConverter(
+                    method.GetTypicalMethodDefinition().Signature
+                )
+            )
                 return false;
 
-            MethodDesc slotDecl = MetadataVirtualMethodAlgorithm.FindSlotDefiningMethodForVirtualMethod(method).GetCanonMethodTarget(CanonicalFormKind.Specific);
+            MethodDesc slotDecl = MetadataVirtualMethodAlgorithm
+                .FindSlotDefiningMethodForVirtualMethod(method)
+                .GetCanonMethodTarget(CanonicalFormKind.Specific);
             return slotDecl.IsCanonicalMethod(CanonicalFormKind.Universal);
         }
     }

@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Net.Sockets {
+namespace System.Net.Sockets
+{
     using System;
     using System.Diagnostics;
     using System.Net;
@@ -23,12 +24,12 @@ namespace System.Net.Sockets {
         //
         // internal class members
         //
-        private SafeOverlappedFree m_UnmanagedBlob;  // Handle for global memory.
-        private AutoResetEvent  m_OverlappedEvent;
-        private int             m_CleanupCount;
-        private bool            m_DisableOverlapped;
-        private bool            m_UseOverlappedIO;
-        private GCHandle []     m_GCHandles;
+        private SafeOverlappedFree m_UnmanagedBlob; // Handle for global memory.
+        private AutoResetEvent m_OverlappedEvent;
+        private int m_CleanupCount;
+        private bool m_DisableOverlapped;
+        private bool m_UseOverlappedIO;
+        private GCHandle[] m_GCHandles;
         private OverlappedCache m_Cache;
 
         //
@@ -39,15 +40,22 @@ namespace System.Net.Sockets {
 #else
         private
 #endif
-        unsafe static readonly   IOCompletionCallback s_IOCallback = new IOCompletionCallback(CompletionPortCallback);
+        unsafe static readonly IOCompletionCallback s_IOCallback = new IOCompletionCallback(
+            CompletionPortCallback
+        );
 
         //
         // Constructor. We take in the socket that's creating us, the caller's
         // state object, and callback. We save the socket and state, and allocate
         // an event for the WaitHandle.
         //
-        internal BaseOverlappedAsyncResult(Socket socket, Object asyncState, AsyncCallback asyncCallback)
-        : base(socket, asyncState, asyncCallback) {
+        internal BaseOverlappedAsyncResult(
+            Socket socket,
+            Object asyncState,
+            AsyncCallback asyncCallback
+        )
+            : base(socket, asyncState, asyncCallback)
+        {
             //
             // BeginAccept() allocates and returns an AcceptOverlappedAsyncResult that will call
             // this constructor.
@@ -62,7 +70,8 @@ namespace System.Net.Sockets {
                 //
                 m_CleanupCount = 1;
             }
-            else {
+            else
+            {
                 //
                 // since the binding between the event handle and the callback
                 // has already happened there is a race condition and so the
@@ -76,18 +85,17 @@ namespace System.Net.Sockets {
         // Constructor. We take in the socket that's creating us, and turn off Async
         // We save the socket and state.
         internal BaseOverlappedAsyncResult(Socket socket)
-        : base(socket, null, null) {
+            : base(socket, null, null)
+        {
             m_CleanupCount = 1;
             m_DisableOverlapped = true;
         }
-
 
         //PostCompletion returns the result object to be set before the user's callback is invoked.
         internal virtual object PostCompletion(int numBytes)
         {
             return numBytes;
         }
-
 
         //
         // SetUnmanagedStructures -
@@ -131,7 +139,10 @@ namespace System.Net.Sockets {
                             {
                                 objectsToPinArray = null;
                             }
-                            if (objectsToPinArray != null && objectsToPinArray.Length == m_Cache.PinnedObjectsArray.Length)
+                            if (
+                                objectsToPinArray != null
+                                && objectsToPinArray.Length == m_Cache.PinnedObjectsArray.Length
+                            )
                             {
                                 useCache = true;
                                 for (int i = 0; i < objectsToPinArray.Length; i++)
@@ -149,19 +160,27 @@ namespace System.Net.Sockets {
 
                 if (!useCache && m_Cache != null)
                 {
-                    GlobalLog.Print("BaseOverlappedAsyncResult#" + ValidationHelper.HashString(this) + "::SetUnmanagedStructures() Cache miss - freeing cache.");
+                    GlobalLog.Print(
+                        "BaseOverlappedAsyncResult#"
+                            + ValidationHelper.HashString(this)
+                            + "::SetUnmanagedStructures() Cache miss - freeing cache."
+                    );
                     m_Cache.Free();
                     m_Cache = null;
                 }
 
-                Socket s = (Socket) AsyncObject;
+                Socket s = (Socket)AsyncObject;
                 if (m_UseOverlappedIO)
                 {
                     //
                     // we're using overlapped IO, allocate an overlapped structure
                     // consider using a static growing pool of allocated unmanaged memory.
                     //
-                    GlobalLog.Assert(m_UnmanagedBlob == null, "BaseOverlappedAsyncResult#{0}::SetUnmanagedStructures()|Unmanaged blob already allocated. (Called twice?)", ValidationHelper.HashString(this));
+                    GlobalLog.Assert(
+                        m_UnmanagedBlob == null,
+                        "BaseOverlappedAsyncResult#{0}::SetUnmanagedStructures()|Unmanaged blob already allocated. (Called twice?)",
+                        ValidationHelper.HashString(this)
+                    );
                     m_UnmanagedBlob = SafeOverlappedFree.Alloc(s.SafeHandle);
 
                     PinUnmanagedObjects(objectsToPin);
@@ -176,7 +195,11 @@ namespace System.Net.Sockets {
                     // fill in the overlapped structure with the event handle.
                     //
 
-                    Marshal.WriteIntPtr( m_UnmanagedBlob.DangerousGetHandle(), Win32.OverlappedhEventOffset, m_OverlappedEvent.SafeWaitHandle.DangerousGetHandle() );
+                    Marshal.WriteIntPtr(
+                        m_UnmanagedBlob.DangerousGetHandle(),
+                        Win32.OverlappedhEventOffset,
+                        m_OverlappedEvent.SafeWaitHandle.DangerousGetHandle()
+                    );
                 }
                 else
                 {
@@ -187,19 +210,36 @@ namespace System.Net.Sockets {
 
                     if (m_Cache == null)
                     {
-                        GlobalLog.Print("BaseOverlappedAsyncResult#" + ValidationHelper.HashString(this) + "::EnableCompletionPort() Creating new overlapped cache.");
+                        GlobalLog.Print(
+                            "BaseOverlappedAsyncResult#"
+                                + ValidationHelper.HashString(this)
+                                + "::EnableCompletionPort() Creating new overlapped cache."
+                        );
                         if (objectsToPinArray != null)
                         {
-                            m_Cache = new OverlappedCache(new Overlapped(), objectsToPinArray, s_IOCallback);
+                            m_Cache = new OverlappedCache(
+                                new Overlapped(),
+                                objectsToPinArray,
+                                s_IOCallback
+                            );
                         }
                         else
                         {
-                            m_Cache = new OverlappedCache(new Overlapped(), objectsToPin, s_IOCallback, triedCastingToArray);
+                            m_Cache = new OverlappedCache(
+                                new Overlapped(),
+                                objectsToPin,
+                                s_IOCallback,
+                                triedCastingToArray
+                            );
                         }
                     }
                     else
                     {
-                        GlobalLog.Print("BaseOverlappedAsyncResult#" + ValidationHelper.HashString(this) + "::EnableCompletionPort() Using cached overlapped.");
+                        GlobalLog.Print(
+                            "BaseOverlappedAsyncResult#"
+                                + ValidationHelper.HashString(this)
+                                + "::EnableCompletionPort() Using cached overlapped."
+                        );
                     }
 
                     m_Cache.Overlapped.AsyncResult = this;
@@ -208,7 +248,14 @@ namespace System.Net.Sockets {
                     m_InitialNativeOverlapped = m_Cache.NativeOverlapped;
 #endif
 
-                    GlobalLog.Print("BaseOverlappedAsyncResult#" + ValidationHelper.HashString(this) + "::EnableCompletionPort() overlapped:" + ValidationHelper.HashString(m_Cache.Overlapped) + " NativeOverlapped = " + m_Cache.NativeOverlapped.DangerousGetHandle().ToString("x"));
+                    GlobalLog.Print(
+                        "BaseOverlappedAsyncResult#"
+                            + ValidationHelper.HashString(this)
+                            + "::EnableCompletionPort() overlapped:"
+                            + ValidationHelper.HashString(m_Cache.Overlapped)
+                            + " NativeOverlapped = "
+                            + m_Cache.NativeOverlapped.DangerousGetHandle().ToString("x")
+                    );
                 }
             }
         }
@@ -225,10 +272,17 @@ namespace System.Net.Sockets {
         protected void SetupCache(ref OverlappedCache overlappedCache)
         {
 #if !NO_OVERLAPPED_CACHE
-            GlobalLog.Assert(m_Cache == null, "BaseOverlappedAsyncResult#{0}::SetUnmanagedStructures()|Cache already set up. (Called twice?)", ValidationHelper.HashString(this));
+            GlobalLog.Assert(
+                m_Cache == null,
+                "BaseOverlappedAsyncResult#{0}::SetUnmanagedStructures()|Cache already set up. (Called twice?)",
+                ValidationHelper.HashString(this)
+            );
             if (!m_UseOverlappedIO && !m_DisableOverlapped)
             {
-                m_Cache = overlappedCache == null ? null : Interlocked.Exchange<OverlappedCache>(ref overlappedCache, null);
+                m_Cache =
+                    overlappedCache == null
+                        ? null
+                        : Interlocked.Exchange<OverlappedCache>(ref overlappedCache, null);
 
                 // Need to hold on to the unmanaged structures until the cache is extracted.
                 m_CleanupCount++;
@@ -251,10 +305,12 @@ namespace System.Net.Sockets {
             {
                 if (objectsToPin.GetType() == typeof(object[]))
                 {
-                    object [] objectsArray = (object []) objectsToPin;
+                    object[] objectsArray = (object[])objectsToPin;
                     m_GCHandles = new GCHandle[objectsArray.Length];
-                    for (int i=0; i<objectsArray.Length; i++) {
-                        if (objectsArray[i] != null) {
+                    for (int i = 0; i < objectsArray.Length; i++)
+                    {
+                        if (objectsArray[i] != null)
+                        {
                             m_GCHandles[i] = GCHandle.Alloc(objectsArray[i], GCHandleType.Pinned);
                         }
                     }
@@ -274,7 +330,10 @@ namespace System.Net.Sockets {
             {
                 // Have to be super careful.  Socket isn't synchronized, so if a user calls End() twice, we don't want to
                 // copy out this cache twice which could result in posting an IO with a deleted NativeOverlapped.
-                OverlappedCache cache = m_Cache == null ? null : Interlocked.Exchange<OverlappedCache>(ref m_Cache, null);
+                OverlappedCache cache =
+                    m_Cache == null
+                        ? null
+                        : Interlocked.Exchange<OverlappedCache>(ref m_Cache, null);
                 if (cache != null)
                 {
                     // If overlappedCache is null, just slap it in there.  There's a chance for a conflict,
@@ -286,7 +345,10 @@ namespace System.Net.Sockets {
                     }
                     else
                     {
-                        OverlappedCache oldCache = Interlocked.Exchange<OverlappedCache>(ref overlappedCache, cache);
+                        OverlappedCache oldCache = Interlocked.Exchange<OverlappedCache>(
+                            ref overlappedCache,
+                            cache
+                        );
                         if (oldCache != null)
                         {
                             oldCache.Free();
@@ -299,141 +361,207 @@ namespace System.Net.Sockets {
 #endif
         }
 
-        private unsafe static void CompletionPortCallback(uint errorCode, uint numBytes, NativeOverlapped* nativeOverlapped) {
+        private static unsafe void CompletionPortCallback(
+            uint errorCode,
+            uint numBytes,
+            NativeOverlapped* nativeOverlapped
+        )
+        {
 #if DEBUG
             GlobalLog.SetThreadSource(ThreadKinds.CompletionPort);
-            using (GlobalLog.SetThreadKind(ThreadKinds.System)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.System))
+            {
 #if TRAVE
-            try
-            {
+                try
+                {
 #endif
 #endif
-            //
-            // Create an Overlapped object out of the native pointer we're provided with.
-            // (this will NOT free the unmanaged memory in the native overlapped structure)
-            //
-            Overlapped callbackOverlapped = Overlapped.Unpack(nativeOverlapped);
-            BaseOverlappedAsyncResult asyncResult = (BaseOverlappedAsyncResult)callbackOverlapped.AsyncResult;
-            Debug.Assert((IntPtr)nativeOverlapped == asyncResult.m_Cache.NativeOverlapped.DangerousGetHandle(), "Handle mismatch");
+                    //
+                    // Create an Overlapped object out of the native pointer we're provided with.
+                    // (this will NOT free the unmanaged memory in the native overlapped structure)
+                    //
+                    Overlapped callbackOverlapped = Overlapped.Unpack(nativeOverlapped);
+                    BaseOverlappedAsyncResult asyncResult = (BaseOverlappedAsyncResult)
+                        callbackOverlapped.AsyncResult;
+                    Debug.Assert(
+                        (IntPtr)nativeOverlapped
+                            == asyncResult.m_Cache.NativeOverlapped.DangerousGetHandle(),
+                        "Handle mismatch"
+                    );
 
-            // The AsyncResult must be cleared before the callback is called (i.e. before ExtractCache is called).
-            // Not doing so leads to a leak where the pinned cached OverlappedData continues to point to the async result object,
-            // which points to the Socket (as well as user data), which points to the OverlappedCache, preventing the OverlappedCache
-            // finalizer from freeing the pinned OverlappedData.
-            callbackOverlapped.AsyncResult = null;
+                    // The AsyncResult must be cleared before the callback is called (i.e. before ExtractCache is called).
+                    // Not doing so leads to a leak where the pinned cached OverlappedData continues to point to the async result object,
+                    // which points to the Socket (as well as user data), which points to the OverlappedCache, preventing the OverlappedCache
+                    // finalizer from freeing the pinned OverlappedData.
+                    callbackOverlapped.AsyncResult = null;
 
-            object returnObject = null;
+                    object returnObject = null;
 
-            GlobalLog.Assert(!asyncResult.InternalPeekCompleted, "BaseOverlappedAsyncResult#{0}::CompletionPortCallback()|asyncResult.IsCompleted", ValidationHelper.HashString(asyncResult));
+                    GlobalLog.Assert(
+                        !asyncResult.InternalPeekCompleted,
+                        "BaseOverlappedAsyncResult#{0}::CompletionPortCallback()|asyncResult.IsCompleted",
+                        ValidationHelper.HashString(asyncResult)
+                    );
 
-            GlobalLog.Print("BaseOverlappedAsyncResult#" + ValidationHelper.HashString(asyncResult) + "::CompletionPortCallback" +
-                             " errorCode:" + errorCode.ToString() +
-                             " numBytes:" + numBytes.ToString() +
-                             " pOverlapped:" + ((int)nativeOverlapped).ToString());
+                    GlobalLog.Print(
+                        "BaseOverlappedAsyncResult#"
+                            + ValidationHelper.HashString(asyncResult)
+                            + "::CompletionPortCallback"
+                            + " errorCode:"
+                            + errorCode.ToString()
+                            + " numBytes:"
+                            + numBytes.ToString()
+                            + " pOverlapped:"
+                            + ((int)nativeOverlapped).ToString()
+                    );
 
-            //
-            // complete the IO and invoke the user's callback
-            //
-            SocketError socketError = (SocketError)errorCode;
+                    //
+                    // complete the IO and invoke the user's callback
+                    //
+                    SocketError socketError = (SocketError)errorCode;
 
-            if (socketError != SocketError.Success && socketError != SocketError.OperationAborted)
-            {
-                // There are cases where passed errorCode does not reflect the details of the underlined socket error.
-                // "So as of today, the key is the difference between WSAECONNRESET and ConnectionAborted,
-                //  .e.g remote party or network causing the connection reset or something on the local host (e.g. closesocket
-                // or receiving data after shutdown (SD_RECV)).  With Winsock/TCP stack rewrite in longhorn, there may
-                // be other differences as well."
-
-                Socket socket = asyncResult.AsyncObject as Socket;
-                if (socket == null) {
-                    socketError = SocketError.NotSocket;
-                }
-                else if (socket.CleanedUp) {
-                    socketError = SocketError.OperationAborted;
-                }
-                else {
-                    try {
-                        //
-                        // The Async IO completed with a failure.
-                        // here we need to call WSAGetOverlappedResult() just so Marshal.GetLastWin32Error() will return the correct error.
-                        //
-                        SocketFlags ignore;
-                        bool success = UnsafeNclNativeMethods.OSSOCK.WSAGetOverlappedResult(
-                                socket.SafeHandle,
-                                asyncResult.m_Cache.NativeOverlapped,
-                                out numBytes,
-                                false,
-                                out ignore);
-                        if (!success)
-                        {
-                            socketError = (SocketError)Marshal.GetLastWin32Error();
-                            GlobalLog.Assert(socketError != 0, "BaseOverlappedAsyncResult#{0}::CompletionPortCallback()|socketError:0 numBytes:{1}", ValidationHelper.HashString(asyncResult), numBytes);
-                        }
-
-                        GlobalLog.Assert(!success, "BaseOverlappedAsyncResult#{0}::CompletionPortCallback()|Unexpectedly succeeded. errorCode:{1} numBytes:{2}", ValidationHelper.HashString(asyncResult), errorCode, numBytes);
-                    }
-                    // CleanedUp check above does not always work since this code is subject to race conditions
-                    catch (ObjectDisposedException)
+                    if (
+                        socketError != SocketError.Success
+                        && socketError != SocketError.OperationAborted
+                    )
                     {
-                        socketError = SocketError.OperationAborted;
+                        // There are cases where passed errorCode does not reflect the details of the underlined socket error.
+                        // "So as of today, the key is the difference between WSAECONNRESET and ConnectionAborted,
+                        //  .e.g remote party or network causing the connection reset or something on the local host (e.g. closesocket
+                        // or receiving data after shutdown (SD_RECV)).  With Winsock/TCP stack rewrite in longhorn, there may
+                        // be other differences as well."
+
+                        Socket socket = asyncResult.AsyncObject as Socket;
+                        if (socket == null)
+                        {
+                            socketError = SocketError.NotSocket;
+                        }
+                        else if (socket.CleanedUp)
+                        {
+                            socketError = SocketError.OperationAborted;
+                        }
+                        else
+                        {
+                            try
+                            {
+                                //
+                                // The Async IO completed with a failure.
+                                // here we need to call WSAGetOverlappedResult() just so Marshal.GetLastWin32Error() will return the correct error.
+                                //
+                                SocketFlags ignore;
+                                bool success = UnsafeNclNativeMethods.OSSOCK.WSAGetOverlappedResult(
+                                    socket.SafeHandle,
+                                    asyncResult.m_Cache.NativeOverlapped,
+                                    out numBytes,
+                                    false,
+                                    out ignore
+                                );
+                                if (!success)
+                                {
+                                    socketError = (SocketError)Marshal.GetLastWin32Error();
+                                    GlobalLog.Assert(
+                                        socketError != 0,
+                                        "BaseOverlappedAsyncResult#{0}::CompletionPortCallback()|socketError:0 numBytes:{1}",
+                                        ValidationHelper.HashString(asyncResult),
+                                        numBytes
+                                    );
+                                }
+
+                                GlobalLog.Assert(
+                                    !success,
+                                    "BaseOverlappedAsyncResult#{0}::CompletionPortCallback()|Unexpectedly succeeded. errorCode:{1} numBytes:{2}",
+                                    ValidationHelper.HashString(asyncResult),
+                                    errorCode,
+                                    numBytes
+                                );
+                            }
+                            // CleanedUp check above does not always work since this code is subject to race conditions
+                            catch (ObjectDisposedException)
+                            {
+                                socketError = SocketError.OperationAborted;
+                            }
+                        }
                     }
-                }
-            }
-            asyncResult.ErrorCode = (int)socketError;
-            returnObject = asyncResult.PostCompletion((int)numBytes);
-            asyncResult.ReleaseUnmanagedStructures();
-            asyncResult.InvokeCallback(returnObject);
+                    asyncResult.ErrorCode = (int)socketError;
+                    returnObject = asyncResult.PostCompletion((int)numBytes);
+                    asyncResult.ReleaseUnmanagedStructures();
+                    asyncResult.InvokeCallback(returnObject);
 #if DEBUG
 #if TRAVE
-            }
-            catch(Exception exception)
-            {
-                if (!NclUtilities.IsFatal(exception)){
-                    GlobalLog.Assert("BaseOverlappedAsyncResult::CompletionPortCallback", "Exception in completion callback type:" + exception.GetType().ToString() + " message:" + exception.Message);
                 }
-                throw;
-            }
+                catch (Exception exception)
+                {
+                    if (!NclUtilities.IsFatal(exception))
+                    {
+                        GlobalLog.Assert(
+                            "BaseOverlappedAsyncResult::CompletionPortCallback",
+                            "Exception in completion callback type:"
+                                + exception.GetType().ToString()
+                                + " message:"
+                                + exception.Message
+                        );
+                    }
+                    throw;
+                }
 #endif
             }
 #endif
         }
-
 
         //
         // The overlapped function called (either by the thread pool or the socket)
         // when IO completes. (only called on Win9x)
         //
-        private void OverlappedCallback(object stateObject, bool Signaled) {
+        private void OverlappedCallback(object stateObject, bool Signaled)
+        {
 #if DEBUG
             // GlobalLog.SetThreadSource(ThreadKinds.Worker);  Because of change 1077887, need logic to determine thread type here.
-            using (GlobalLog.SetThreadKind(ThreadKinds.System)) {
+            using (GlobalLog.SetThreadKind(ThreadKinds.System))
+            {
 #endif
-            BaseOverlappedAsyncResult asyncResult = (BaseOverlappedAsyncResult)stateObject;
+                BaseOverlappedAsyncResult asyncResult = (BaseOverlappedAsyncResult)stateObject;
 
-            GlobalLog.Assert(!asyncResult.InternalPeekCompleted, "AcceptOverlappedAsyncResult#{0}::OverlappedCallback()|asyncResult.IsCompleted", ValidationHelper.HashString(asyncResult));
-            //
-            // the IO completed asynchronously, see if there was a failure the Internal
-            // field in the Overlapped structure will be non zero. to optimize the non
-            // error case, we look at it without calling WSAGetOverlappedResult().
-            //
-            uint errorCode = (uint)Marshal.ReadInt32(IntPtrHelper.Add(asyncResult.m_UnmanagedBlob.DangerousGetHandle(),
-                                                                      Win32.OverlappedInternalOffset));
-            uint numBytes = errorCode!=0 ? unchecked((uint)-1) : (uint)Marshal.ReadInt32(IntPtrHelper.Add(asyncResult.m_UnmanagedBlob.DangerousGetHandle(),
-                                                                                                          Win32.OverlappedInternalHighOffset));
-            //
-            // this will release the unmanaged pin handles and unmanaged overlapped ptr
-            //
-            asyncResult.ErrorCode = (int)errorCode;
-            object returnObject = asyncResult.PostCompletion((int)numBytes);
-            asyncResult.ReleaseUnmanagedStructures();
-            asyncResult.InvokeCallback(returnObject);
+                GlobalLog.Assert(
+                    !asyncResult.InternalPeekCompleted,
+                    "AcceptOverlappedAsyncResult#{0}::OverlappedCallback()|asyncResult.IsCompleted",
+                    ValidationHelper.HashString(asyncResult)
+                );
+                //
+                // the IO completed asynchronously, see if there was a failure the Internal
+                // field in the Overlapped structure will be non zero. to optimize the non
+                // error case, we look at it without calling WSAGetOverlappedResult().
+                //
+                uint errorCode = (uint)
+                    Marshal.ReadInt32(
+                        IntPtrHelper.Add(
+                            asyncResult.m_UnmanagedBlob.DangerousGetHandle(),
+                            Win32.OverlappedInternalOffset
+                        )
+                    );
+                uint numBytes =
+                    errorCode != 0
+                        ? unchecked((uint)-1)
+                        : (uint)
+                            Marshal.ReadInt32(
+                                IntPtrHelper.Add(
+                                    asyncResult.m_UnmanagedBlob.DangerousGetHandle(),
+                                    Win32.OverlappedInternalHighOffset
+                                )
+                            );
+                //
+                // this will release the unmanaged pin handles and unmanaged overlapped ptr
+                //
+                asyncResult.ErrorCode = (int)errorCode;
+                object returnObject = asyncResult.PostCompletion((int)numBytes);
+                asyncResult.ReleaseUnmanagedStructures();
+                asyncResult.InvokeCallback(returnObject);
 #if DEBUG
             }
 #endif
         }
 
 #if DEBUG
-        private SocketError m_SavedErrorCode = unchecked((SocketError) 0xDEADBEEF);
+        private SocketError m_SavedErrorCode = unchecked((SocketError)0xDEADBEEF);
         private SafeNativeOverlapped m_InitialNativeOverlapped;
         private SafeNativeOverlapped m_IntermediateNativeOverlapped;
 #endif
@@ -463,38 +591,43 @@ namespace System.Net.Sockets {
                 // we're using overlapped IO under Win9x (or NT with registry setting overriding
                 // completion port usage)
                 //
-                switch (errorCode) {
+                switch (errorCode)
+                {
+                    case 0:
+                    case SocketError.IOPending:
 
-                case 0:
-                case SocketError.IOPending:
+                        //
+                        // the Async IO call was pended:
+                        // Queue our event to the thread pool.
+                        //
+                        GlobalLog.Assert(
+                            m_UnmanagedBlob != null,
+                            "BaseOverlappedAsyncResult#{0}::CheckAsyncCallOverlappedResult()|Unmanaged blob isn't allocated.",
+                            ValidationHelper.HashString(this)
+                        );
+                        ThreadPool.UnsafeRegisterWaitForSingleObject(
+                            m_OverlappedEvent,
+                            new WaitOrTimerCallback(OverlappedCallback),
+                            this,
+                            -1,
+                            true
+                        );
 
-                    //
-                    // the Async IO call was pended:
-                    // Queue our event to the thread pool.
-                    //
-                    GlobalLog.Assert(m_UnmanagedBlob != null, "BaseOverlappedAsyncResult#{0}::CheckAsyncCallOverlappedResult()|Unmanaged blob isn't allocated.", ValidationHelper.HashString(this));
-                    ThreadPool.UnsafeRegisterWaitForSingleObject(
-                                                          m_OverlappedEvent,
-                                                          new WaitOrTimerCallback(OverlappedCallback),
-                                                          this,
-                                                          -1,
-                                                          true );
+                        //
+                        // we're done, completion will be asynchronous
+                        // in the callback. return
+                        //
+                        return SocketError.Success;
 
-                    //
-                    // we're done, completion will be asynchronous
-                    // in the callback. return
-                    //
-                    return SocketError.Success;
-
-                default:
-                    //
-                    // the Async IO call failed:
-                    // set the number of bytes transferred to -1 (error)
-                    //
-                    ErrorCode = (int)errorCode;
-                    Result = -1;
-                    ReleaseUnmanagedStructures();
-                    break;
+                    default:
+                        //
+                        // the Async IO call failed:
+                        // set the number of bytes transferred to -1 (error)
+                        //
+                        ErrorCode = (int)errorCode;
+                        Result = -1;
+                        ReleaseUnmanagedStructures();
+                        break;
                 }
             }
             else
@@ -514,41 +647,42 @@ namespace System.Net.Sockets {
                 //
                 ReleaseUnmanagedStructures();
 
-                switch (errorCode) {
-                //
-                // ignore cases in which a completion packet will be queued:
-                // we'll deal with this IO in the callback
-                //
-                case 0:
-                case SocketError.IOPending:
+                switch (errorCode)
+                {
                     //
-                    // ignore, do nothing
+                    // ignore cases in which a completion packet will be queued:
+                    // we'll deal with this IO in the callback
                     //
-                    return SocketError.Success;
+                    case 0:
+                    case SocketError.IOPending:
+                        //
+                        // ignore, do nothing
+                        //
+                        return SocketError.Success;
 
                     //
                     // in the remaining cases a completion packet will NOT be queued:
                     // we'll have to call the callback explicitly signaling an error
                     //
-                default:
-                    //
-                    // call the callback with error code
-                    //
-                    ErrorCode = (int)errorCode;
-                    Result = -1;
+                    default:
+                        //
+                        // call the callback with error code
+                        //
+                        ErrorCode = (int)errorCode;
+                        Result = -1;
 
-                    // The AsyncResult must be cleared since the callback isn't going to be called.
-                    // Not doing so leads to a leak where the pinned cached OverlappedData continues to point to the async result object,
-                    // which points to the Socket (as well as user data) and to the OverlappedCache, preventing the OverlappedCache
-                    // finalizer from freeing the pinned OverlappedData.
-                    if (m_Cache != null)
-                    {
-                        // Could be null only if SetUnmanagedStructures weren't called.
-                        m_Cache.Overlapped.AsyncResult = null;
-                    }
+                        // The AsyncResult must be cleared since the callback isn't going to be called.
+                        // Not doing so leads to a leak where the pinned cached OverlappedData continues to point to the async result object,
+                        // which points to the Socket (as well as user data) and to the OverlappedCache, preventing the OverlappedCache
+                        // finalizer from freeing the pinned OverlappedData.
+                        if (m_Cache != null)
+                        {
+                            // Could be null only if SetUnmanagedStructures weren't called.
+                            m_Cache.Overlapped.AsyncResult = null;
+                        }
 
-                    ReleaseUnmanagedStructures();  // Additional release for the completion that won't happen.
-                    break;
+                        ReleaseUnmanagedStructures(); // Additional release for the completion that won't happen.
+                        break;
                 }
             }
             return errorCode;
@@ -558,8 +692,10 @@ namespace System.Net.Sockets {
         // The following property returns the Win32 unsafe pointer to
         // whichever Overlapped structure we're using for IO.
         //
-        internal SafeHandle OverlappedHandle {
-            get {
+        internal SafeHandle OverlappedHandle
+        {
+            get
+            {
                 if (m_UseOverlappedIO)
                 {
                     //
@@ -567,9 +703,12 @@ namespace System.Net.Sockets {
                     // and we use a win32 event for IO completion
                     // return the native pointer to unmanaged memory
                     //
-                    return (m_UnmanagedBlob == null || m_UnmanagedBlob.IsInvalid)? SafeOverlappedFree.Zero : m_UnmanagedBlob;
+                    return (m_UnmanagedBlob == null || m_UnmanagedBlob.IsInvalid)
+                        ? SafeOverlappedFree.Zero
+                        : m_UnmanagedBlob;
                 }
-                else {
+                else
+                {
                     //
                     // on WinNT we need to use (due to the current implementation)
                     // an Overlapped object in order to bind the socket to the
@@ -580,9 +719,10 @@ namespace System.Net.Sockets {
             }
         } // OverlappedHandle
 
-
-        private void ReleaseUnmanagedStructures() {
-            if (Interlocked.Decrement(ref m_CleanupCount) == 0) {
+        private void ReleaseUnmanagedStructures()
+        {
+            if (Interlocked.Decrement(ref m_CleanupCount) == 0)
+            {
                 ForceReleaseUnmanagedStructures();
             }
         }
@@ -609,7 +749,8 @@ namespace System.Net.Sockets {
             ReleaseGCHandles();
             GC.SuppressFinalize(this);
 
-            if (m_UnmanagedBlob != null && !m_UnmanagedBlob.IsInvalid) {
+            if (m_UnmanagedBlob != null && !m_UnmanagedBlob.IsInvalid)
+            {
                 m_UnmanagedBlob.Close(true);
                 m_UnmanagedBlob = null;
             }
@@ -652,7 +793,11 @@ namespace System.Net.Sockets {
         internal object m_PinnedObjects;
         internal object[] m_PinnedObjectsArray;
 
-        internal OverlappedCache(Overlapped overlapped, object[] pinnedObjectsArray, IOCompletionCallback callback)
+        internal OverlappedCache(
+            Overlapped overlapped,
+            object[] pinnedObjectsArray,
+            IOCompletionCallback callback
+        )
         {
             m_Overlapped = overlapped;
             m_PinnedObjects = pinnedObjectsArray;
@@ -660,11 +805,18 @@ namespace System.Net.Sockets {
 
             unsafe
             {
-                m_NativeOverlapped = new SafeNativeOverlapped(overlapped.UnsafePack(callback, pinnedObjectsArray));
+                m_NativeOverlapped = new SafeNativeOverlapped(
+                    overlapped.UnsafePack(callback, pinnedObjectsArray)
+                );
             }
         }
 
-        internal OverlappedCache(Overlapped overlapped, object pinnedObjects, IOCompletionCallback callback, bool alreadyTriedCast)
+        internal OverlappedCache(
+            Overlapped overlapped,
+            object pinnedObjects,
+            IOCompletionCallback callback,
+            bool alreadyTriedCast
+        )
         {
             m_Overlapped = overlapped;
             m_PinnedObjects = pinnedObjects;
@@ -672,32 +824,25 @@ namespace System.Net.Sockets {
 
             unsafe
             {
-                m_NativeOverlapped = new SafeNativeOverlapped(overlapped.UnsafePack(callback, pinnedObjects));
+                m_NativeOverlapped = new SafeNativeOverlapped(
+                    overlapped.UnsafePack(callback, pinnedObjects)
+                );
             }
         }
 
         internal Overlapped Overlapped
         {
-            get
-            {
-                return m_Overlapped;
-            }
+            get { return m_Overlapped; }
         }
 
         internal SafeNativeOverlapped NativeOverlapped
         {
-            get
-            {
-                return m_NativeOverlapped;
-            }
+            get { return m_NativeOverlapped; }
         }
 
         internal object PinnedObjects
         {
-            get
-            {
-                return m_PinnedObjects;
-            }
+            get { return m_PinnedObjects; }
         }
 
         internal object[] PinnedObjectsArray
@@ -745,7 +890,10 @@ namespace System.Net.Sockets {
 
         internal static void InterlockedFree(ref OverlappedCache overlappedCache)
         {
-            OverlappedCache cache = overlappedCache == null ? null : Interlocked.Exchange<OverlappedCache>(ref overlappedCache, null);
+            OverlappedCache cache =
+                overlappedCache == null
+                    ? null
+                    : Interlocked.Exchange<OverlappedCache>(ref overlappedCache, null);
             if (cache != null)
             {
                 cache.Free();

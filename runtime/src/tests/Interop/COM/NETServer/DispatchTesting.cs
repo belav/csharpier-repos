@@ -4,15 +4,15 @@
 using System;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Runtime.InteropServices;
+using System.Text;
 using Server.Contract;
 
 [ComVisible(true)]
 [Guid(Server.Contract.Guids.DispatchTesting)]
 public class DispatchTesting : Server.Contract.IDispatchTesting
 {
-    public void DoubleNumeric_ReturnByRef (
+    public void DoubleNumeric_ReturnByRef(
         byte b1,
         ref byte b2,
         short s1,
@@ -26,7 +26,8 @@ public class DispatchTesting : Server.Contract.IDispatchTesting
         long l1,
         ref long l2,
         ulong ul1,
-        ref ulong ul2)
+        ref ulong ul2
+    )
     {
         b2 = (byte)(b1 * 2);
         s2 = (short)(s1 * 2);
@@ -43,6 +44,7 @@ public class DispatchTesting : Server.Contract.IDispatchTesting
         b = sum;
         return sum;
     }
+
     public double Add_Double_ReturnAndUpdateByRef(double a, ref double b)
     {
         double sum = a + b;
@@ -54,11 +56,11 @@ public class DispatchTesting : Server.Contract.IDispatchTesting
     {
         switch (excep)
         {
-        case IDispatchTesting_Exception.Disp:
-            throw new Exception();
-        case IDispatchTesting_Exception.HResult:
-        case IDispatchTesting_Exception.Int:
-            throw new System.ComponentModel.Win32Exception(errorCode);
+            case IDispatchTesting_Exception.Disp:
+                throw new Exception();
+            case IDispatchTesting_Exception.HResult:
+            case IDispatchTesting_Exception.Int:
+                throw new System.ComponentModel.Win32Exception(errorCode);
         }
     }
 
@@ -83,7 +85,9 @@ public class DispatchTesting : Server.Contract.IDispatchTesting
         return Enumerable.Range(0, 10).ToList().GetEnumerator();
     }
 
-    [DispId(/*DISPID_NEWENUM*/-4)]
+    [DispId( /*DISPID_NEWENUM*/
+        -4
+    )]
     public System.Collections.IEnumerator GetEnumerator()
     {
         return Enumerable.Range(0, 10).ToList().GetEnumerator();

@@ -7,22 +7,22 @@ namespace System.ServiceModel.Activation
     using System.CodeDom;
     using System.CodeDom.Compiler;
     using System.Collections;
-    using System.Collections.Specialized;
     using System.Collections.Generic;
+    using System.Collections.Specialized;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.IO;
     using System.Reflection;
+    using System.Runtime;
+    using System.Runtime.Diagnostics;
+    using System.Security;
+    using System.ServiceModel.Activation.Diagnostics;
     using System.Text.RegularExpressions;
     using System.Web;
-    using System.Web.Hosting;
     using System.Web.Compilation;
+    using System.Web.Hosting;
     using System.Web.RegularExpressions;
-    using System.ServiceModel.Activation.Diagnostics;
-    using System.Security;
-    using System.Runtime.Diagnostics;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime;
 
     /// <summary>
     /// This class will parse the .svc file and maintains a list of useful information that the build
@@ -48,7 +48,7 @@ namespace System.ServiceModel.Activation
         // regular exression for the directive
         readonly static SimpleDirectiveRegex directiveRegex;
 
-        // the build provider we will work with 
+        // the build provider we will work with
         ServiceBuildProvider buildProvider;
 
         // text for the file
@@ -80,7 +80,7 @@ namespace System.ServiceModel.Activation
         // of them and we maintain a Dictionary for it.
         HybridDictionary linkedAssemblies;
 
-        // the set of assemblies that the build system is 
+        // the set of assemblies that the build system is
         // telling us we will be linked with. There is no unique
         // requirement for them.
         ICollection referencedAssemblies;
@@ -94,7 +94,11 @@ namespace System.ServiceModel.Activation
         // virtual path for the file that we are parsing
         string virtualPath;
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods, Justification = "Users cannot pass arbitrary data to this code.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.AptcaMethodsShouldOnlyCallAptcaMethods,
+            Justification = "Users cannot pass arbitrary data to this code."
+        )]
         static ServiceParser()
         {
             directiveRegex = new SimpleDirectiveRegex();
@@ -102,15 +106,21 @@ namespace System.ServiceModel.Activation
 
         /// <summary>
         /// The Contructor needs the path to the file that it will parse and a reference to
-        /// the build provider that we are using. This is necessary because there are things that 
+        /// the build provider that we are using. This is necessary because there are things that
         /// need to be set on the build provider directly as we are parsing...
         /// </summary>
         internal ServiceParser(string virtualPath, ServiceBuildProvider buildProvider)
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.WebHostCompilation, SR.TraceCodeWebHostCompilation,
-                    new StringTraceRecord("VirtualPath", virtualPath), this, (Exception)null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.WebHostCompilation,
+                    SR.TraceCodeWebHostCompilation,
+                    new StringTraceRecord("VirtualPath", virtualPath),
+                    this,
+                    (Exception)null
+                );
             }
 
             this.virtualPath = virtualPath;
@@ -140,7 +150,8 @@ namespace System.ServiceModel.Activation
 
             // the list of valid attributes for ComPlus for Service Directive
             IDictionary<string, string> attributeTable = new Dictionary<string, string>(
-                StringComparer.OrdinalIgnoreCase);
+                StringComparer.OrdinalIgnoreCase
+            );
 
             if (!string.IsNullOrEmpty(parser.factoryAttributeValue))
                 attributeTable.Add(FactoryAttributeName, parser.factoryAttributeValue);
@@ -153,16 +164,12 @@ namespace System.ServiceModel.Activation
 
         /// <summary>
         /// </summary>
-
         // various getters for private objects that the build
         // provider will need
         //
         internal CompilerType CompilerType
         {
-            get
-            {
-                return compilerType;
-            }
+            get { return compilerType; }
         }
 
         internal ICollection AssemblyDependencies
@@ -193,10 +200,7 @@ namespace System.ServiceModel.Activation
 
         internal bool HasInlineCode
         {
-            get
-            {
-                return (sourceString != null);
-            }
+            get { return (sourceString != null); }
         }
 
         /// <summary>
@@ -253,7 +257,13 @@ namespace System.ServiceModel.Activation
 
         Exception CreateParseException(string message, Exception innerException, string sourceCode)
         {
-            return new HttpParseException(message, innerException, this.virtualPath, sourceCode, this.lineNumber);
+            return new HttpParseException(
+                message,
+                innerException,
+                this.virtualPath,
+                sourceCode,
+                this.lineNumber
+            );
         }
 
         /// <summary>
@@ -329,11 +339,16 @@ namespace System.ServiceModel.Activation
                     builder.Append(assembly.FullName);
                 }
             }
-            // use application relative virtualpath instead of the absolute path 
+            // use application relative virtualpath instead of the absolute path
             // so that the compliedcustomstring is applicationame independent
-            return string.Concat(VirtualPathUtility.ToAppRelative(virtualPath), Delimiter,
-                typeToPreserveName, Delimiter,
-                serviceAttributeValue, builder.ToString());
+            return string.Concat(
+                VirtualPathUtility.ToAppRelative(virtualPath),
+                Delimiter,
+                typeToPreserveName,
+                Delimiter,
+                serviceAttributeValue,
+                builder.ToString()
+            );
         }
 
         void AddSourceDependency(string fileName)
@@ -370,7 +385,13 @@ namespace System.ServiceModel.Activation
 
         internal IDictionary GetLinePragmasTable()
         {
-            LinePragmaCodeInfo info = new LinePragmaCodeInfo(this.lineNumber, this.startColumn, 1, -1, false);
+            LinePragmaCodeInfo info = new LinePragmaCodeInfo(
+                this.lineNumber,
+                this.startColumn,
+                1,
+                -1,
+                false
+            );
             IDictionary dictionary = new Hashtable();
             dictionary[this.lineNumber] = info;
             return dictionary;
@@ -390,12 +411,18 @@ namespace System.ServiceModel.Activation
                 // Check for ending bracket first, MB 45013.
                 if (this.serviceText.IndexOf('>') == -1)
                 {
-                    throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderDirectiveEndBracketMissing(ServiceParser.DefaultDirectiveName)));
+                    throw FxTrace.Exception.AsError(
+                        new HttpException(
+                            SR.Hosting_BuildProviderDirectiveEndBracketMissing(
+                                ServiceParser.DefaultDirectiveName
+                            )
+                        )
+                    );
                 }
 
                 // First, parse all the <%@ ... %> directives
                 //
-                for (;;)
+                for (; ; )
                 {
                     match = directiveRegex.Match(this.serviceText, textPos);
 
@@ -404,7 +431,11 @@ namespace System.ServiceModel.Activation
                     if (!match.Success)
                         break;
 
-                    lineNumber += ServiceParserUtilities.LineCount(this.serviceText, textPos, match.Index);
+                    lineNumber += ServiceParserUtilities.LineCount(
+                        this.serviceText,
+                        textPos,
+                        match.Index
+                    );
                     textPos = match.Index;
 
                     // Get all the directives into a bag
@@ -415,7 +446,11 @@ namespace System.ServiceModel.Activation
                     // Understand the directive
                     //
                     ProcessDirective(directiveName, directive);
-                    lineNumber += ServiceParserUtilities.LineCount(this.serviceText, textPos, match.Index + match.Length);
+                    lineNumber += ServiceParserUtilities.LineCount(
+                        this.serviceText,
+                        textPos,
+                        match.Index + match.Length
+                    );
                     textPos = match.Index + match.Length;
 
                     // Fixup line and column numbers to have meaninglful errors
@@ -426,7 +461,13 @@ namespace System.ServiceModel.Activation
 
                 if (!foundMainDirective)
                 {
-                    throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderDirectiveMissing(ServiceParser.DefaultDirectiveName)));
+                    throw FxTrace.Exception.AsError(
+                        new HttpException(
+                            SR.Hosting_BuildProviderDirectiveMissing(
+                                ServiceParser.DefaultDirectiveName
+                            )
+                        )
+                    );
                 }
 
                 // skip the directives chunk
@@ -446,7 +487,8 @@ namespace System.ServiceModel.Activation
                 //
                 Exception parseException = CreateParseException(e, this.serviceText);
                 throw FxTrace.Exception.AsError(
-                    new HttpCompileException(parseException.Message, parseException));
+                    new HttpCompileException(parseException.Message, parseException)
+                );
             }
         }
 
@@ -465,7 +507,7 @@ namespace System.ServiceModel.Activation
             CaptureCollection attrvalues = match.Groups["attrval"].Captures;
             CaptureCollection equalsign = match.Groups["equal"].Captures;
 
-            // Iterate through all of them and add then to 
+            // Iterate through all of them and add then to
             // the dictionary of attributes
             //
             for (int i = 0; i < attrnames.Count; i++)
@@ -499,7 +541,11 @@ namespace System.ServiceModel.Activation
                     }
                     catch (ArgumentException)
                     {
-                        throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderDuplicateAttribute(attribName)));
+                        throw FxTrace.Exception.AsError(
+                            new HttpException(
+                                SR.Hosting_BuildProviderDuplicateAttribute(attribName)
+                            )
+                        );
                     }
                 }
             }
@@ -509,7 +555,11 @@ namespace System.ServiceModel.Activation
         /// <summary>
         /// This method understands the compilation parameters if any ...
         /// </summary>
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands, Justification = "This method doesn't allow callers to access sensitive information, operations, or resources that can be used in a destructive manner.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.DoNotIndirectlyExposeMethodsWithLinkDemands,
+            Justification = "This method doesn't allow callers to access sensitive information, operations, or resources that can be used in a destructive manner."
+        )]
         void ProcessCompilationParams(IDictionary directive, CompilerParameters compilParams)
         {
             bool debug = false;
@@ -519,20 +569,28 @@ namespace System.ServiceModel.Activation
             }
 
             int warningLevel = 0;
-            if (ServiceParserUtilities.GetAndRemoveNonNegativeIntegerAttribute(directive, "warninglevel", ref warningLevel))
+            if (
+                ServiceParserUtilities.GetAndRemoveNonNegativeIntegerAttribute(
+                    directive,
+                    "warninglevel",
+                    ref warningLevel
+                )
+            )
             {
                 compilParams.WarningLevel = warningLevel;
                 if (warningLevel > 0)
                     compilParams.TreatWarningsAsErrors = true;
             }
 
-            string compilerOptions = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(directive, "compileroptions");
+            string compilerOptions = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(
+                directive,
+                "compileroptions"
+            );
             if (compilerOptions != null)
             {
                 compilParams.CompilerOptions = compilerOptions;
             }
         }
-
 
         /// <summary>
         /// Processes a directive block
@@ -543,18 +601,32 @@ namespace System.ServiceModel.Activation
             //
             if (directiveName.Length == 0)
             {
-                throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderDirectiveNameMissing));
+                throw FxTrace.Exception.AsError(
+                    new HttpException(SR.Hosting_BuildProviderDirectiveNameMissing)
+                );
             }
 
             // Check for the main directive
             //
-            if (string.Compare(directiveName, ServiceParser.DefaultDirectiveName, StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                string.Compare(
+                    directiveName,
+                    ServiceParser.DefaultDirectiveName,
+                    StringComparison.OrdinalIgnoreCase
+                ) == 0
+            )
             {
                 // Make sure the main directive was not already specified
                 //
                 if (foundMainDirective)
                 {
-                    throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderDuplicateDirective(ServiceParser.DefaultDirectiveName)));
+                    throw FxTrace.Exception.AsError(
+                        new HttpException(
+                            SR.Hosting_BuildProviderDuplicateDirective(
+                                ServiceParser.DefaultDirectiveName
+                            )
+                        )
+                    );
                 }
 
                 foundMainDirective = true;
@@ -563,78 +635,121 @@ namespace System.ServiceModel.Activation
                 //
                 directive.Remove("codebehind");
 
-                string language = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(directive, "language");
+                string language = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(
+                    directive,
+                    "language"
+                );
 
                 // Get the compiler for the specified language (if any)
                 // or get the one from config
                 //
                 if (language != null)
                 {
-                    compilerType = buildProvider.GetDefaultCompilerTypeForLanguageInternal(language);
+                    compilerType = buildProvider.GetDefaultCompilerTypeForLanguageInternal(
+                        language
+                    );
                 }
                 else
                 {
                     compilerType = buildProvider.GetDefaultCompilerTypeInternal();
                 }
 
-
                 if (directive.Contains(FactoryAttributeName))
                 {
-                    factoryAttributeValue = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(directive, FactoryAttributeName);
-                    serviceAttributeValue = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(directive, ServiceAttributeName);
+                    factoryAttributeValue = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(
+                        directive,
+                        FactoryAttributeName
+                    );
+                    serviceAttributeValue = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(
+                        directive,
+                        ServiceAttributeName
+                    );
                 }
                 else if (directive.Contains(ServiceAttributeName))
                 {
-                    serviceAttributeValue = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(directive, ServiceAttributeName);
+                    serviceAttributeValue = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(
+                        directive,
+                        ServiceAttributeName
+                    );
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderMainAttributeMissing));
+                    throw FxTrace.Exception.AsError(
+                        new HttpException(SR.Hosting_BuildProviderMainAttributeMissing)
+                    );
                 }
                 // parse the parameters that are related to the compiler
                 //
                 ProcessCompilationParams(directive, compilerType.CompilerParameters);
             }
-            else if (string.Compare(directiveName, "assembly", StringComparison.OrdinalIgnoreCase) == 0)
+            else if (
+                string.Compare(directiveName, "assembly", StringComparison.OrdinalIgnoreCase) == 0
+            )
             {
                 if (directive.Contains("name") && directive.Contains("src"))
                 {
-                    throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderMutualExclusiveAttributes("src", "name")));
+                    throw FxTrace.Exception.AsError(
+                        new HttpException(
+                            SR.Hosting_BuildProviderMutualExclusiveAttributes("src", "name")
+                        )
+                    );
                 }
                 else if (directive.Contains("name"))
                 {
-                    string assemblyName = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(directive, "name");
+                    string assemblyName = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(
+                        directive,
+                        "name"
+                    );
                     if (assemblyName != null)
                     {
                         AddAssemblyDependency(assemblyName);
                     }
                     else
-                        throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderAttributeEmpty("name")));
+                        throw FxTrace.Exception.AsError(
+                            new HttpException(SR.Hosting_BuildProviderAttributeEmpty("name"))
+                        );
                 }
                 else if (directive.Contains("src"))
                 {
-                    string srcPath = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(directive, "src");
+                    string srcPath = ServiceParserUtilities.GetAndRemoveNonEmptyAttribute(
+                        directive,
+                        "src"
+                    );
                     if (srcPath != null)
                     {
                         ImportSourceFile(srcPath);
                     }
                     else
-                        throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderAttributeEmpty("src")));
+                        throw FxTrace.Exception.AsError(
+                            new HttpException(SR.Hosting_BuildProviderAttributeEmpty("src"))
+                        );
                 }
                 else
                 { // if (!directive.Contains("name") && !directive.Contains("src"))
-                    throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderRequiredAttributesMissing("src", "name")));
+                    throw FxTrace.Exception.AsError(
+                        new HttpException(
+                            SR.Hosting_BuildProviderRequiredAttributesMissing("src", "name")
+                        )
+                    );
                 }
             }
             else
             {
-                throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderUnknownDirective(directiveName)));
+                throw FxTrace.Exception.AsError(
+                    new HttpException(SR.Hosting_BuildProviderUnknownDirective(directiveName))
+                );
             }
 
-            // check if there are any directives that you did not process 
+            // check if there are any directives that you did not process
             //
             if (directive.Count > 0)
-                throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderUnknownAttribute(ServiceParserUtilities.FirstDictionaryKey(directive))));
+                throw FxTrace.Exception.AsError(
+                    new HttpException(
+                        SR.Hosting_BuildProviderUnknownAttribute(
+                            ServiceParserUtilities.FirstDictionaryKey(directive)
+                        )
+                    )
+                );
         }
 
         void ImportSourceFile(string path)
@@ -685,19 +800,26 @@ namespace System.ServiceModel.Activation
                 {
                     Exception parseException = CreateParseException(e, this.sourceString);
                     throw FxTrace.Exception.AsError(
-                        new HttpCompileException(parseException.Message, parseException));
+                        new HttpCompileException(parseException.Message, parseException)
+                    );
                 }
                 catch (TargetInvocationException e)
                 {
                     Exception parseException = CreateParseException(e, this.sourceString);
                     throw FxTrace.Exception.AsError(
-                        new HttpCompileException(parseException.Message, parseException));
+                        new HttpCompileException(parseException.Message, parseException)
+                    );
                 }
                 catch (TypeLoadException e)
                 {
-                    Exception parseException = CreateParseException(SR.Hosting_BuildProviderCouldNotCreateType(typeName), e, this.sourceString);
+                    Exception parseException = CreateParseException(
+                        SR.Hosting_BuildProviderCouldNotCreateType(typeName),
+                        e,
+                        this.sourceString
+                    );
                     throw FxTrace.Exception.AsError(
-                        new HttpCompileException(parseException.Message, parseException));
+                        new HttpCompileException(parseException.Message, parseException)
+                    );
                 }
 
                 return type;
@@ -705,32 +827,47 @@ namespace System.ServiceModel.Activation
 
             try
             {
-                type = ServiceParserUtilities.GetTypeFromAssemblies(referencedAssemblies, typeName, false /*ignoreCase*/);
+                type = ServiceParserUtilities.GetTypeFromAssemblies(
+                    referencedAssemblies,
+                    typeName,
+                    false /*ignoreCase*/
+                );
                 if (type != null)
                     return type;
 
-                type = ServiceParserUtilities.GetTypeFromAssemblies(AssemblyDependencies, typeName, false /*ignoreCase*/);
+                type = ServiceParserUtilities.GetTypeFromAssemblies(
+                    AssemblyDependencies,
+                    typeName,
+                    false /*ignoreCase*/
+                );
                 if (type != null)
                     return type;
             }
             catch (HttpException e)
             {
-                Exception parseException = CreateParseException(SR.Hosting_BuildProviderCouldNotCreateType(typeName), e, this.sourceString);
+                Exception parseException = CreateParseException(
+                    SR.Hosting_BuildProviderCouldNotCreateType(typeName),
+                    e,
+                    this.sourceString
+                );
                 throw FxTrace.Exception.AsError(
-                        new HttpCompileException(parseException.Message, parseException));
+                    new HttpCompileException(parseException.Message, parseException)
+                );
             }
 
-            Exception exception = CreateParseException(SR.Hosting_BuildProviderCouldNotCreateType(typeName), this.sourceString);
-            throw FxTrace.Exception.AsError(
-                        new HttpCompileException(exception.Message, exception));
+            Exception exception = CreateParseException(
+                SR.Hosting_BuildProviderCouldNotCreateType(typeName),
+                this.sourceString
+            );
+            throw FxTrace.Exception.AsError(new HttpCompileException(exception.Message, exception));
         }
 
         /// <summary>
-        /// This class contains static methods that are necessary to manipulate the 
+        /// This class contains static methods that are necessary to manipulate the
         /// structures that contain the directives. The logic assumes that the parser will
         /// create a dictionary that contains all the directives and we can pull certain directives as
         /// necessary while processing/compiling the page. The directives are strings.
-        /// 
+        ///
         /// </summary>
         static class ServiceParserUtilities
         {
@@ -748,7 +885,7 @@ namespace System.ServiceModel.Activation
             }
 
             /// <summary>
-            /// Get a string value from a dictionary, and remove 
+            /// Get a string value from a dictionary, and remove
             /// it from the dictionary of attributes if it exists.
             /// </summary>
             /// <remarks>Returns null if the value was not there ...</remarks>
@@ -773,7 +910,11 @@ namespace System.ServiceModel.Activation
             /// However, don't complain about null, which simply means the value is not
             /// in the dictionary.
             /// </summary>
-            internal static string GetAndRemoveNonEmptyAttribute(IDictionary directives, string key, bool required)
+            internal static string GetAndRemoveNonEmptyAttribute(
+                IDictionary directives,
+                string key,
+                bool required
+            )
             {
                 string val = ServiceParserUtilities.GetAndRemove(directives, key);
 
@@ -781,7 +922,9 @@ namespace System.ServiceModel.Activation
                 {
                     if (required)
                     {
-                        throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderAttributeMissing(key)));
+                        throw FxTrace.Exception.AsError(
+                            new HttpException(SR.Hosting_BuildProviderAttributeMissing(key))
+                        );
                     }
                     return null;
                 }
@@ -789,10 +932,13 @@ namespace System.ServiceModel.Activation
                 return val;
             }
 
-
             internal static string GetAndRemoveNonEmptyAttribute(IDictionary directives, string key)
             {
-                return GetAndRemoveNonEmptyAttribute(directives, key, false /*required*/);
+                return GetAndRemoveNonEmptyAttribute(
+                    directives,
+                    key,
+                    false /*required*/
+                );
             }
 
             /// <summary>
@@ -803,7 +949,11 @@ namespace System.ServiceModel.Activation
             /// The value is returned through a REF param (unchanged if null)
             /// </summary>
             /// <returns>True if attrib exists, false otherwise</returns>
-            internal static bool GetAndRemoveBooleanAttribute(IDictionary directives, string key, ref bool val)
+            internal static bool GetAndRemoveBooleanAttribute(
+                IDictionary directives,
+                string key,
+                ref bool val
+            )
             {
                 string s = ServiceParserUtilities.GetAndRemove(directives, key);
 
@@ -816,7 +966,11 @@ namespace System.ServiceModel.Activation
                 }
                 catch (FormatException)
                 {
-                    throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderInvalidValueForBooleanAttribute(s, key)));
+                    throw FxTrace.Exception.AsError(
+                        new HttpException(
+                            SR.Hosting_BuildProviderInvalidValueForBooleanAttribute(s, key)
+                        )
+                    );
                 }
 
                 return true;
@@ -830,7 +984,11 @@ namespace System.ServiceModel.Activation
             /// The value is returned through a REF param (unchanged if null)
             /// </summary>
             /// <returns>True if attrib exists, false otherwise</returns>
-            internal static bool GetAndRemoveNonNegativeIntegerAttribute(IDictionary directives, string key, ref int val)
+            internal static bool GetAndRemoveNonNegativeIntegerAttribute(
+                IDictionary directives,
+                string key,
+                ref int val
+            )
             {
                 string s = ServiceParserUtilities.GetAndRemove(directives, key);
 
@@ -856,14 +1014,28 @@ namespace System.ServiceModel.Activation
                 }
                 catch (FormatException)
                 {
-                    throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderInvalidValueForNonNegativeIntegerAttribute(value, name)));
+                    throw FxTrace.Exception.AsError(
+                        new HttpException(
+                            SR.Hosting_BuildProviderInvalidValueForNonNegativeIntegerAttribute(
+                                value,
+                                name
+                            )
+                        )
+                    );
                 }
 
                 // Make sure it's not negative
                 //
                 if (ret < 0)
                 {
-                    throw FxTrace.Exception.AsError(new HttpException(SR.Hosting_BuildProviderInvalidValueForNonNegativeIntegerAttribute(value, name)));
+                    throw FxTrace.Exception.AsError(
+                        new HttpException(
+                            SR.Hosting_BuildProviderInvalidValueForNonNegativeIntegerAttribute(
+                                value,
+                                name
+                            )
+                        )
+                    );
                 }
 
                 return ret;
@@ -875,9 +1047,9 @@ namespace System.ServiceModel.Activation
             }
 
             /// <summary>
-            /// This method takes the code that will be compiled as a string and it 
+            /// This method takes the code that will be compiled as a string and it
             /// will count how many lines exist between the given offset and the final
-            /// offset. 
+            /// offset.
             /// </summary>
             /// <param name="text">The text that contains the source code</param>
             /// <param name="offset">Starting offset for lookup</param>
@@ -889,7 +1061,10 @@ namespace System.ServiceModel.Activation
 
                 while (offset < newoffset)
                 {
-                    if (text[offset] == '\r' || (text[offset] == '\n' && (offset == 0 || text[offset - 1] != '\r')))
+                    if (
+                        text[offset] == '\r'
+                        || (text[offset] == '\n' && (offset == 0 || text[offset - 1] != '\r'))
+                    )
                         linecount++;
 
                     offset++;
@@ -908,14 +1083,18 @@ namespace System.ServiceModel.Activation
             }
 
             /// <summary>
-            /// Loops through a list of assemblies that are already collected by the parser/provider and 
+            /// Loops through a list of assemblies that are already collected by the parser/provider and
             /// looks for the specified type.
             /// </summary>
             /// <param name="assemblies">The collection of assemblies</param>
             /// <param name="typeName">The type name</param>
             /// <param name="ignoreCase">Case sensitivity knob</param>
             /// <returns></returns>
-            internal static Type GetTypeFromAssemblies(ICollection assemblies, string typeName, bool ignoreCase)
+            internal static Type GetTypeFromAssemblies(
+                ICollection assemblies,
+                string typeName,
+                bool ignoreCase
+            )
             {
                 if (assemblies == null)
                     return null;
@@ -924,7 +1103,12 @@ namespace System.ServiceModel.Activation
 
                 foreach (Assembly assembly in assemblies)
                 {
-                    Type t = assembly.GetType(typeName, false /*throwOnError*/, ignoreCase);
+                    Type t = assembly.GetType(
+                        typeName,
+                        false /*throwOnError*/
+                        ,
+                        ignoreCase
+                    );
 
                     if (t == null)
                         continue;
@@ -933,8 +1117,15 @@ namespace System.ServiceModel.Activation
                     //
                     if (type != null && t != type)
                     {
-                        throw FxTrace.Exception.AsError(new HttpException(
-                            SR.Hosting_BuildProviderAmbiguousType(typeName, type.Assembly.FullName, t.Assembly.FullName)));
+                        throw FxTrace.Exception.AsError(
+                            new HttpException(
+                                SR.Hosting_BuildProviderAmbiguousType(
+                                    typeName,
+                                    type.Assembly.FullName,
+                                    t.Assembly.FullName
+                                )
+                            )
+                        );
                     }
 
                     // Keep track of it

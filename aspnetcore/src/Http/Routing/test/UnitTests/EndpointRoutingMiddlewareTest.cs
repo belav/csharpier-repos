@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Metadata;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Routing.Matching;
 using Microsoft.AspNetCore.Routing.TestObjects;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -42,7 +42,9 @@ public class EndpointRoutingMiddlewareTest
     {
         // Arrange
         var httpContext = CreateHttpContext();
-        httpContext.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(), "myapp"));
+        httpContext.SetEndpoint(
+            new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(), "myapp")
+        );
 
         var middleware = CreateMiddleware();
 
@@ -66,13 +68,15 @@ public class EndpointRoutingMiddlewareTest
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
         var listener = new DiagnosticListener("TestListener");
 
-        using var subscription = listener.Subscribe(new DelegateObserver(pair =>
-        {
-            eventFired = true;
+        using var subscription = listener.Subscribe(
+            new DelegateObserver(pair =>
+            {
+                eventFired = true;
 
-            Assert.Equal("Microsoft.AspNetCore.Routing.EndpointMatched", pair.Key);
-            Assert.IsAssignableFrom<HttpContext>(pair.Value);
-        }));
+                Assert.Equal("Microsoft.AspNetCore.Routing.EndpointMatched", pair.Key);
+                Assert.IsAssignableFrom<HttpContext>(pair.Value);
+            })
+        );
 
         var httpContext = CreateHttpContext();
 
@@ -149,12 +153,18 @@ public class EndpointRoutingMiddlewareTest
         var middleware = CreateMiddleware(matcherFactory: matcherFactory.Object);
 
         // Act
-        await Assert.ThrowsAsync<InvalidTimeZoneException>(async () => await middleware.Invoke(httpContext));
-        await Assert.ThrowsAsync<InvalidTimeZoneException>(async () => await middleware.Invoke(httpContext));
+        await Assert.ThrowsAsync<InvalidTimeZoneException>(async () =>
+            await middleware.Invoke(httpContext)
+        );
+        await Assert.ThrowsAsync<InvalidTimeZoneException>(async () =>
+            await middleware.Invoke(httpContext)
+        );
 
         // Assert
-        matcherFactory
-            .Verify(f => f.CreateMatcher(It.IsAny<EndpointDataSource>()), Times.Exactly(2));
+        matcherFactory.Verify(
+            f => f.CreateMatcher(It.IsAny<EndpointDataSource>()),
+            Times.Exactly(2)
+        );
     }
 
     [Fact]
@@ -169,7 +179,8 @@ public class EndpointRoutingMiddlewareTest
             {
                 // should not be reached
                 throw new Exception();
-            });
+            }
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -191,7 +202,8 @@ public class EndpointRoutingMiddlewareTest
             {
                 // should not be reached
                 throw new Exception();
-            });
+            }
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -208,18 +220,27 @@ public class EndpointRoutingMiddlewareTest
     [InlineData(null, false, true)]
     [InlineData(null, true, false)]
     [Theory]
-    public async Task ThrowIfSecurityMetadataPresent(int? statusCode, bool hasAuthMetadata, bool hasCorsMetadata)
+    public async Task ThrowIfSecurityMetadataPresent(
+        int? statusCode,
+        bool hasAuthMetadata,
+        bool hasCorsMetadata
+    )
     {
         // Arrange
         var httpContext = CreateHttpContext();
 
         var middleware = CreateMiddleware(
-            matcherFactory: new ShortCircuitMatcherFactory(statusCode, hasAuthMetadata, hasCorsMetadata),
+            matcherFactory: new ShortCircuitMatcherFactory(
+                statusCode,
+                hasAuthMetadata,
+                hasCorsMetadata
+            ),
             next: context =>
             {
                 // should not be reached
                 throw new Exception();
-            });
+            }
+        );
 
         // Act
         await Assert.ThrowsAsync<InvalidOperationException>(() => middleware.Invoke(httpContext));
@@ -245,10 +266,20 @@ public class EndpointRoutingMiddlewareTest
 
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
-            {
-                c.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(metadata), "myapp"));
-            }));
+            matcherFactory: new TestMatcherFactory(
+                isHandled: true,
+                setEndpointCallback: c =>
+                {
+                    c.SetEndpoint(
+                        new Endpoint(
+                            c => Task.CompletedTask,
+                            new EndpointMetadataCollection(metadata),
+                            "myapp"
+                        )
+                    );
+                }
+            )
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -275,23 +306,41 @@ public class EndpointRoutingMiddlewareTest
 
         var httpContext = CreateHttpContext();
         var expectedRequestSizeLimit = 50;
-        var maxRequestBodySizeFeature = new FakeHttpMaxRequestBodySizeFeature(expectedRequestSizeLimit, true);
+        var maxRequestBodySizeFeature = new FakeHttpMaxRequestBodySizeFeature(
+            expectedRequestSizeLimit,
+            true
+        );
         httpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(maxRequestBodySizeFeature);
 
         var metadata = new List<object> { new RequestSizeLimitMetadata(100) };
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
-            {
-                c.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(metadata), "myapp"));
-            }));
+            matcherFactory: new TestMatcherFactory(
+                isHandled: true,
+                setEndpointCallback: c =>
+                {
+                    c.SetEndpoint(
+                        new Endpoint(
+                            c => Task.CompletedTask,
+                            new EndpointMetadataCollection(metadata),
+                            "myapp"
+                        )
+                    );
+                }
+            )
+        );
 
         // Act
         await middleware.Invoke(httpContext);
 
         // Assert
-        var write = Assert.Single(sink.Writes.Where(w => w.EventId.Name == "RequestSizeFeatureIsReadOnly"));
-        Assert.Equal($"A request body size limit could not be applied. The {nameof(IHttpMaxRequestBodySizeFeature)} for the server is read-only.", write.Message);
+        var write = Assert.Single(
+            sink.Writes.Where(w => w.EventId.Name == "RequestSizeFeatureIsReadOnly")
+        );
+        Assert.Equal(
+            $"A request body size limit could not be applied. The {nameof(IHttpMaxRequestBodySizeFeature)} for the server is read-only.",
+            write.Message
+        );
 
         var actualRequestSizeLimit = maxRequestBodySizeFeature.MaxRequestBodySize;
         Assert.Equal(expectedRequestSizeLimit, actualRequestSizeLimit);
@@ -310,17 +359,32 @@ public class EndpointRoutingMiddlewareTest
         var metadata = new List<object> { new RequestSizeLimitMetadata(100) };
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
-            {
-                c.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(metadata), "myapp"));
-            }));
+            matcherFactory: new TestMatcherFactory(
+                isHandled: true,
+                setEndpointCallback: c =>
+                {
+                    c.SetEndpoint(
+                        new Endpoint(
+                            c => Task.CompletedTask,
+                            new EndpointMetadataCollection(metadata),
+                            "myapp"
+                        )
+                    );
+                }
+            )
+        );
 
         // Act
         await middleware.Invoke(httpContext);
 
         // Assert
-        var write = Assert.Single(sink.Writes.Where(w => w.EventId.Name == "RequestSizeFeatureNotFound"));
-        Assert.Equal($"A request body size limit could not be applied. This server does not support the {nameof(IHttpMaxRequestBodySizeFeature)}.", write.Message);
+        var write = Assert.Single(
+            sink.Writes.Where(w => w.EventId.Name == "RequestSizeFeatureNotFound")
+        );
+        Assert.Equal(
+            $"A request body size limit could not be applied. This server does not support the {nameof(IHttpMaxRequestBodySizeFeature)}.",
+            write.Message
+        );
     }
 
     [Fact]
@@ -333,28 +397,48 @@ public class EndpointRoutingMiddlewareTest
 
         var httpContext = CreateHttpContext();
         var expectedRequestSizeLimit = 50;
-        var maxRequestBodySizeFeature = new FakeHttpMaxRequestBodySizeFeature(expectedRequestSizeLimit, true);
+        var maxRequestBodySizeFeature = new FakeHttpMaxRequestBodySizeFeature(
+            expectedRequestSizeLimit,
+            true
+        );
         httpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(maxRequestBodySizeFeature);
 
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
-            {
-                c.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(), "myapp"));
-            }));
+            matcherFactory: new TestMatcherFactory(
+                isHandled: true,
+                setEndpointCallback: c =>
+                {
+                    c.SetEndpoint(
+                        new Endpoint(
+                            c => Task.CompletedTask,
+                            new EndpointMetadataCollection(),
+                            "myapp"
+                        )
+                    );
+                }
+            )
+        );
 
         // Act
         await middleware.Invoke(httpContext);
 
         // Assert
-        var write = Assert.Single(sink.Writes.Where(w => w.EventId.Name == "RequestSizeLimitMetadataNotFound"));
-        Assert.Equal($"The endpoint does not specify the {nameof(IRequestSizeLimitMetadata)}.", write.Message);
+        var write = Assert.Single(
+            sink.Writes.Where(w => w.EventId.Name == "RequestSizeLimitMetadataNotFound")
+        );
+        Assert.Equal(
+            $"The endpoint does not specify the {nameof(IRequestSizeLimitMetadata)}.",
+            write.Message
+        );
     }
 
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task Endpoint_HasBodySizeFeature_SetUsingSizeLimitMetadata(bool isRequestSizeLimitDisabled)
+    public async Task Endpoint_HasBodySizeFeature_SetUsingSizeLimitMetadata(
+        bool isRequestSizeLimitDisabled
+    )
     {
         // Arrange
         var sink = new TestSink(TestSink.EnableWithTypeName<EndpointRoutingMiddleware>);
@@ -363,16 +447,29 @@ public class EndpointRoutingMiddlewareTest
 
         var httpContext = CreateHttpContext();
         long? expectedRequestSizeLimit = isRequestSizeLimitDisabled ? null : 500L;
-        var maxRequestBodySizeFeature = new FakeHttpMaxRequestBodySizeFeature(expectedRequestSizeLimit, false);
+        var maxRequestBodySizeFeature = new FakeHttpMaxRequestBodySizeFeature(
+            expectedRequestSizeLimit,
+            false
+        );
         httpContext.Features.Set<IHttpMaxRequestBodySizeFeature>(maxRequestBodySizeFeature);
         var metadata = new RequestSizeLimitMetadata(expectedRequestSizeLimit);
 
         var middleware = CreateMiddleware(
             logger: logger,
-            matcherFactory: new TestMatcherFactory(isHandled: true, setEndpointCallback: c =>
-            {
-                c.SetEndpoint(new Endpoint(c => Task.CompletedTask, new EndpointMetadataCollection(metadata), "myapp"));
-            }));
+            matcherFactory: new TestMatcherFactory(
+                isHandled: true,
+                setEndpointCallback: c =>
+                {
+                    c.SetEndpoint(
+                        new Endpoint(
+                            c => Task.CompletedTask,
+                            new EndpointMetadataCollection(metadata),
+                            "myapp"
+                        )
+                    );
+                }
+            )
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -381,13 +478,20 @@ public class EndpointRoutingMiddlewareTest
 
         if (isRequestSizeLimitDisabled)
         {
-            var write = Assert.Single(sink.Writes.Where(w => w.EventId.Name == "MaxRequestBodySizeDisabled"));
+            var write = Assert.Single(
+                sink.Writes.Where(w => w.EventId.Name == "MaxRequestBodySizeDisabled")
+            );
             Assert.Equal("The maximum request body size has been disabled.", write.Message);
         }
         else
         {
-            var write = Assert.Single(sink.Writes.Where(w => w.EventId.Name == "MaxRequestBodySizeSet"));
-            Assert.Equal($"The maximum request body size has been set to {expectedRequestSizeLimit}.", write.Message);
+            var write = Assert.Single(
+                sink.Writes.Where(w => w.EventId.Name == "MaxRequestBodySizeSet")
+            );
+            Assert.Equal(
+                $"The maximum request body size has been set to {expectedRequestSizeLimit}.",
+                write.Message
+            );
         }
 
         var actualRequestSizeLimit = maxRequestBodySizeFeature.MaxRequestBodySize;
@@ -426,7 +530,6 @@ public class EndpointRoutingMiddlewareTest
 
     private class RequestSizeLimitMetadata(long? maxRequestBodySize) : IRequestSizeLimitMetadata
     {
-
         public long? MaxRequestBodySize => maxRequestBodySize;
     }
 
@@ -434,7 +537,8 @@ public class EndpointRoutingMiddlewareTest
     {
         public FakeHttpMaxRequestBodySizeFeature(
             long? maxRequestBodySize = null,
-            bool isReadOnly = false)
+            bool isReadOnly = false
+        )
         {
             MaxRequestBodySize = maxRequestBodySize;
             IsReadOnly = isReadOnly;
@@ -453,10 +557,7 @@ public class EndpointRoutingMiddlewareTest
 
     private HttpContext CreateHttpContext()
     {
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new TestServiceProvider()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = new TestServiceProvider() };
 
         return httpContext;
     }
@@ -465,7 +566,8 @@ public class EndpointRoutingMiddlewareTest
         ILogger<EndpointRoutingMiddleware> logger = null,
         MatcherFactory matcherFactory = null,
         DiagnosticListener listener = null,
-        RequestDelegate next = null)
+        RequestDelegate next = null
+    )
     {
         next ??= c => Task.CompletedTask;
         logger ??= new Logger<EndpointRoutingMiddleware>(NullLoggerFactory.Instance);
@@ -481,7 +583,8 @@ public class EndpointRoutingMiddlewareTest
             listener,
             Options.Create(new RouteOptions()),
             metrics,
-            next);
+            next
+        );
 
         return middleware;
     }
@@ -494,15 +597,10 @@ public class EndpointRoutingMiddlewareTest
         {
             _onNext = onNext;
         }
-        public void OnCompleted()
-        {
 
-        }
+        public void OnCompleted() { }
 
-        public void OnError(Exception error)
-        {
-
-        }
+        public void OnError(Exception error) { }
 
         public void OnNext(KeyValuePair<string, object> value)
         {

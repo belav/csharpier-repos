@@ -37,24 +37,28 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
         [MemberNotNullWhen(true, nameof(_initialized))]
         public StackTraceExplorerRoot? Root { get; private set; }
 
-        public StackTraceExplorerToolWindow() : base(null)
+        public StackTraceExplorerToolWindow()
+            : base(null)
         {
             Caption = ServicesVSResources.Stack_Trace_Explorer;
-            var dockPanel = new DockPanel
-            {
-                LastChildFill = true
-            };
+            var dockPanel = new DockPanel { LastChildFill = true };
 
-            dockPanel.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, (s, e) =>
-            {
-                Root?.ViewModel.DoPasteAsync(default).FileAndForget("StackTraceExplorerPaste");
-            }));
+            dockPanel.CommandBindings.Add(
+                new CommandBinding(
+                    ApplicationCommands.Paste,
+                    (s, e) =>
+                    {
+                        Root?.ViewModel.DoPasteAsync(default)
+                            .FileAndForget("StackTraceExplorerPaste");
+                    }
+                )
+            );
 
             Content = dockPanel;
         }
 
         /// <summary>
-        /// Checks the contents of the clipboard for a valid stack trace and 
+        /// Checks the contents of the clipboard for a valid stack trace and
         /// opens stack trace explorer if anything parses correctly
         /// </summary>
         public async Task<bool> ShouldShowOnActivatedAsync(CancellationToken cancellationToken)
@@ -75,10 +79,14 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 return false;
             }
 
-            var result = await StackTraceAnalyzer.AnalyzeAsync(text, cancellationToken).ConfigureAwait(false);
+            var result = await StackTraceAnalyzer
+                .AnalyzeAsync(text, cancellationToken)
+                .ConfigureAwait(false);
             if (result.ParsedFrames.Any(static frame => FrameTriggersActivate(frame)))
             {
-                await Root.ViewModel.AddNewTabAsync(result, text, cancellationToken).ConfigureAwait(false);
+                await Root
+                    .ViewModel.AddNewTabAsync(result, text, cancellationToken)
+                    .ConfigureAwait(false);
                 return true;
             }
 
@@ -106,12 +114,14 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 return false;
             }
 
-            // If the stack frame starts with "at" we consider it a well formed stack frame and 
-            // want to automatically open the window. This helps avoids some false positive cases 
+            // If the stack frame starts with "at" we consider it a well formed stack frame and
+            // want to automatically open the window. This helps avoids some false positive cases
             // where the window shows on code that parses as a stack frame but may not be. The explorer
-            // should still handle those cases if explicitly pasted in, but can lead to false positives 
+            // should still handle those cases if explicitly pasted in, but can lead to false positives
             // when automatically opening.
-            return firstNodeOrToken.Token.LeadingTrivia.Any(static t => t.Kind == StackFrameKind.AtTrivia);
+            return firstNodeOrToken.Token.LeadingTrivia.Any(static t =>
+                t.Kind == StackFrameKind.AtTrivia
+            );
         }
 
         public void InitializeIfNeeded(RoslynPackage roslynPackage)
@@ -122,16 +132,21 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
 
             var workspace = roslynPackage.ComponentModel.GetService<VisualStudioWorkspace>();
-            var formatMapService = roslynPackage.ComponentModel.GetService<IClassificationFormatMapService>();
-            var formatMap = formatMapService.GetClassificationFormatMap(StandardContentTypeNames.Text);
+            var formatMapService =
+                roslynPackage.ComponentModel.GetService<IClassificationFormatMapService>();
+            var formatMap = formatMapService.GetClassificationFormatMap(
+                StandardContentTypeNames.Text
+            );
             var typeMap = roslynPackage.ComponentModel.GetService<ClassificationTypeMap>();
             var threadingContext = roslynPackage.ComponentModel.GetService<IThreadingContext>();
             var themingService = roslynPackage.ComponentModel.GetService<IWpfThemeService>();
 
-            Root = new StackTraceExplorerRoot(new StackTraceExplorerRootViewModel(threadingContext, workspace, formatMap, typeMap))
+            Root = new StackTraceExplorerRoot(
+                new StackTraceExplorerRootViewModel(threadingContext, workspace, formatMap, typeMap)
+            )
             {
                 HorizontalAlignment = HorizontalAlignment.Stretch,
-                VerticalAlignment = VerticalAlignment.Stretch
+                VerticalAlignment = VerticalAlignment.Stretch,
             };
 
             var contentRoot = (DockPanel)Content;
@@ -144,12 +159,9 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
                 var relativePoint = e.GetPosition(contentRoot);
                 var screenPosition = contentRoot.PointToScreen(relativePoint);
 
-                var points = new[] {
-                    new POINTS()
-                    {
-                        x = (short)screenPosition.X,
-                        y = (short)screenPosition.Y
-                    }
+                var points = new[]
+                {
+                    new POINTS() { x = (short)screenPosition.X, y = (short)screenPosition.Y },
                 };
 
                 var refCommandId = new Guid(Guids.StackTraceExplorerCommandIdString);
@@ -169,7 +181,13 @@ namespace Microsoft.VisualStudio.LanguageServices.StackTraceExplorer
             }
         }
 
-        int IOleCommandTarget.Exec(ref Guid pguidCmdGroup, uint nCmdID, uint nCmdexecopt, IntPtr pvaIn, IntPtr pvaOut)
+        int IOleCommandTarget.Exec(
+            ref Guid pguidCmdGroup,
+            uint nCmdID,
+            uint nCmdexecopt,
+            IntPtr pvaIn,
+            IntPtr pvaOut
+        )
         {
             if (pguidCmdGroup == GUID_VSStandardCommandSet97)
             {

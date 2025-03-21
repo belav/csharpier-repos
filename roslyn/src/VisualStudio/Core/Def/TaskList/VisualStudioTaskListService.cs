@@ -43,12 +43,18 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
 
         public event EventHandler<TaskListUpdatedArgs>? TaskListUpdated;
 
-        private readonly ConcurrentDictionary<DocumentId, ImmutableArray<TaskListItem>> _documentToTaskListItems = new();
+        private readonly ConcurrentDictionary<
+            DocumentId,
+            ImmutableArray<TaskListItem>
+        > _documentToTaskListItems = new();
 
         /// <summary>
         /// Queue where we enqueue the information we get from OOP to process in batch in the future.
         /// </summary>
-        private readonly AsyncBatchingWorkQueue<(DocumentId documentId, ImmutableArray<TaskListItem> items)> _workQueue;
+        private readonly AsyncBatchingWorkQueue<(
+            DocumentId documentId,
+            ImmutableArray<TaskListItem> items
+        )> _workQueue;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -59,7 +65,8 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
             ITableManagerProvider tableManagerProvider,
             SVsServiceProvider asyncServiceProvider,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
-            [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners)
+            [ImportMany] IEnumerable<Lazy<IEventListener, EventListenerMetadata>> eventListeners
+        )
         {
             _threadingContext = threadingContext;
             _workspace = workspace;
@@ -67,11 +74,15 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
             _tableManagerProvider = tableManagerProvider;
             _asyncServiceProvider = (IAsyncServiceProvider)asyncServiceProvider;
 
-            _workQueue = new AsyncBatchingWorkQueue<(DocumentId documentId, ImmutableArray<TaskListItem> items)>(
+            _workQueue = new AsyncBatchingWorkQueue<(
+                DocumentId documentId,
+                ImmutableArray<TaskListItem> items
+            )>(
                 TimeSpan.FromSeconds(1),
                 ProcessTaskListItemsAsync,
                 asynchronousOperationListenerProvider.GetListener(FeatureAttribute.TaskList),
-                threadingContext.DisposalToken);
+                threadingContext.DisposalToken
+            );
         }
 
         public void Start(VisualStudioWorkspace workspace)
@@ -88,8 +99,11 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
             {
                 // Don't bother doing anything until the workspace has actually loaded.  We don't want to add to any
                 // startup costs by doing work too early.
-                var workspaceStatus = workspace.Services.GetRequiredService<IWorkspaceStatusService>();
-                await workspaceStatus.WaitUntilFullyLoadedAsync(_threadingContext.DisposalToken).ConfigureAwait(false);
+                var workspaceStatus =
+                    workspace.Services.GetRequiredService<IWorkspaceStatusService>();
+                await workspaceStatus
+                    .WaitUntilFullyLoadedAsync(_threadingContext.DisposalToken)
+                    .ConfigureAwait(false);
 
                 // Wait until the task list is actually visible so that we don't perform pointless work analyzing files
                 // when the user would not even see the results.  When we actually do register the analyzer (in
@@ -98,7 +112,12 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
                 await WaitUntilTaskListActivatedAsync().ConfigureAwait(false);
 
                 // Now that we've started, create the actual VS todo list and have them hookup to us.
-                _ = new VisualStudioTaskListTable(workspace, _threadingContext, _tableManagerProvider, this);
+                _ = new VisualStudioTaskListTable(
+                    workspace,
+                    _threadingContext,
+                    _tableManagerProvider,
+                    this
+                );
 
                 // Now that we've hooked everything up, kick off the work to actually start computing and reporting items.
                 RegisterIncrementalAnalyzerAndStartComputingTaskListItems();
@@ -118,7 +137,9 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
         {
             var cancellationToken = _threadingContext.DisposalToken;
             await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-            var taskList = await _asyncServiceProvider.GetServiceAsync<SVsTaskList, ITaskList>(_threadingContext.JoinableTaskFactory).ConfigureAwait(true);
+            var taskList = await _asyncServiceProvider
+                .GetServiceAsync<SVsTaskList, ITaskList>(_threadingContext.JoinableTaskFactory)
+                .ConfigureAwait(true);
 
             var control = taskList.TableControl.Control;
 
@@ -134,7 +155,10 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
 
             return;
 
-            void Control_IsVisibleChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+            void Control_IsVisibleChanged(
+                object sender,
+                System.Windows.DependencyPropertyChangedEventArgs e
+            )
             {
                 if (control.IsVisible)
                 {
@@ -144,8 +168,12 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
             }
         }
 
-        public ImmutableArray<TaskListItem> GetTaskListItems(Workspace workspace, DocumentId documentId, CancellationToken cancellationToken)
-            => _documentToTaskListItems.TryGetValue(documentId, out var values)
+        public ImmutableArray<TaskListItem> GetTaskListItems(
+            Workspace workspace,
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        ) =>
+            _documentToTaskListItems.TryGetValue(documentId, out var values)
                 ? values
                 : ImmutableArray<TaskListItem>.Empty;
 
@@ -161,7 +189,8 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
                 return;
 
             var services = _workspace.Services.SolutionServices;
-            var registrationService = services.GetRequiredService<ISolutionCrawlerRegistrationService>();
+            var registrationService =
+                services.GetRequiredService<ISolutionCrawlerRegistrationService>();
             var analyzerProvider = new TaskListIncrementalAnalyzerProvider(_globalOptions, this);
 
             registrationService.AddAnalyzerProvider(
@@ -169,20 +198,27 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
                 new IncrementalAnalyzerProviderMetadata(
                     nameof(TaskListIncrementalAnalyzerProvider),
                     highPriorityForActiveFile: false,
-                    workspaceKinds: WorkspaceKind.Host));
+                    workspaceKinds: WorkspaceKind.Host
+                )
+            );
         }
 
         /// <summary>
         /// Callback from the OOP service back into us.
         /// </summary>
-        public ValueTask ReportTaskListItemsAsync(DocumentId documentId, ImmutableArray<TaskListItem> items, CancellationToken cancellationToken)
+        public ValueTask ReportTaskListItemsAsync(
+            DocumentId documentId,
+            ImmutableArray<TaskListItem> items,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
                 _workQueue.AddWork((documentId, items));
                 return ValueTaskFactory.CompletedTask;
             }
-            catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+            catch (Exception e)
+                when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
             {
                 // report NFW before returning back to the remote process
                 throw ExceptionUtilities.Unreachable();
@@ -190,16 +226,27 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
         }
 
         private ValueTask ProcessTaskListItemsAsync(
-            ImmutableSegmentedList<(DocumentId documentId, ImmutableArray<TaskListItem> items)> docAndCommentsArray, CancellationToken cancellationToken)
+            ImmutableSegmentedList<(
+                DocumentId documentId,
+                ImmutableArray<TaskListItem> items
+            )> docAndCommentsArray,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            using var _1 = ArrayBuilder<(DocumentId documentId, ImmutableArray<TaskListItem> items)>.GetInstance(out var filteredArray);
+            using var _1 = ArrayBuilder<(
+                DocumentId documentId,
+                ImmutableArray<TaskListItem> items
+            )>.GetInstance(out var filteredArray);
             AddFilteredItems(docAndCommentsArray, filteredArray);
 
             foreach (var (documentId, newItems) in filteredArray)
             {
-                var oldComments = _documentToTaskListItems.TryGetValue(documentId, out var oldBoxedInfos)
+                var oldComments = _documentToTaskListItems.TryGetValue(
+                    documentId,
+                    out var oldBoxedInfos
+                )
                     ? oldBoxedInfos
                     : ImmutableArray<TaskListItem>.Empty;
 
@@ -218,15 +265,27 @@ namespace Microsoft.VisualStudio.LanguageServices.TaskList
                 // our old ones, then notify them of the change.
                 var taskListUpdated = this.TaskListUpdated;
                 if (TaskListUpdated != null && !oldComments.SequenceEqual(newItems))
-                    TaskListUpdated?.Invoke(this, new TaskListUpdatedArgs(documentId, _workspace.CurrentSolution, documentId, newItems));
+                    TaskListUpdated?.Invoke(
+                        this,
+                        new TaskListUpdatedArgs(
+                            documentId,
+                            _workspace.CurrentSolution,
+                            documentId,
+                            newItems
+                        )
+                    );
             }
 
             return ValueTaskFactory.CompletedTask;
         }
 
         private static void AddFilteredItems(
-            ImmutableSegmentedList<(DocumentId documentId, ImmutableArray<TaskListItem> items)> array,
-            ArrayBuilder<(DocumentId documentId, ImmutableArray<TaskListItem> items)> filteredArray)
+            ImmutableSegmentedList<(
+                DocumentId documentId,
+                ImmutableArray<TaskListItem> items
+            )> array,
+            ArrayBuilder<(DocumentId documentId, ImmutableArray<TaskListItem> items)> filteredArray
+        )
         {
             using var _ = PooledHashSet<DocumentId>.GetInstance(out var seenDocumentIds);
 

@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-
 using Microsoft.DotNet.XUnitExtensions;
 using Xunit;
 
@@ -45,15 +44,27 @@ namespace System.Collections.Tests
         }
 
         protected override int Count(IEnumerable<T> enumerable) => ((Queue<T>)enumerable).Count;
-        protected override void Add(IEnumerable<T> enumerable, T value) => ((Queue<T>)enumerable).Enqueue(value);
+
+        protected override void Add(IEnumerable<T> enumerable, T value) =>
+            ((Queue<T>)enumerable).Enqueue(value);
+
         protected override void Clear(IEnumerable<T> enumerable) => ((Queue<T>)enumerable).Clear();
-        protected override bool Contains(IEnumerable<T> enumerable, T value) => ((Queue<T>)enumerable).Contains(value);
-        protected override void CopyTo(IEnumerable<T> enumerable, T[] array, int index) => ((Queue<T>)enumerable).CopyTo(array, index);
-        protected override bool Remove(IEnumerable<T> enumerable) => ((Queue<T>)enumerable).TryDequeue(out _);
+
+        protected override bool Contains(IEnumerable<T> enumerable, T value) =>
+            ((Queue<T>)enumerable).Contains(value);
+
+        protected override void CopyTo(IEnumerable<T> enumerable, T[] array, int index) =>
+            ((Queue<T>)enumerable).CopyTo(array, index);
+
+        protected override bool Remove(IEnumerable<T> enumerable) =>
+            ((Queue<T>)enumerable).TryDequeue(out _);
+
         protected override bool Enumerator_Empty_UsesSingletonInstance => true;
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
-        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException => false;
-        protected override Type IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType => typeof(ArgumentOutOfRangeException);
+        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException =>
+            false;
+        protected override Type IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
 
         #endregion
 
@@ -61,11 +72,23 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void Queue_Generic_Constructor_IEnumerable(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void Queue_Generic_Constructor_IEnumerable(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             _ = setLength;
             _ = numberOfMatchingElements;
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, null, enumerableLength, 0, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                null,
+                enumerableLength,
+                0,
+                numberOfDuplicateElements
+            );
             Queue<T> queue = new Queue<T>(enumerable);
             Assert.Equal(enumerable, queue);
         }
@@ -93,8 +116,14 @@ namespace System.Collections.Tests
         [Fact]
         public void Queue_Generic_Constructor_int_Negative_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => new Queue<T>(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => new Queue<T>(int.MinValue));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new Queue<T>(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new Queue<T>(int.MinValue)
+            );
         }
 
         [Theory]
@@ -219,7 +248,8 @@ namespace System.Collections.Tests
         {
             Queue<T> queue = GenericQueueFactory(size);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(() => queue.TrimExcess(newCapacity));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(() => queue.TrimExcess(newCapacity)
+            );
         }
 
         [Fact]
@@ -411,7 +441,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void Queue_Generic_EnsureCapacity_RequestingLargerCapacity_DoesInvalidateEnumeration(int count)
+        public void Queue_Generic_EnsureCapacity_RequestingLargerCapacity_DoesInvalidateEnumeration(
+            int count
+        )
         {
             Queue<T> queue = GenericQueueFactory(count);
             IEnumerator<T> copiedEnumerator = new List<T>(queue).GetEnumerator();
@@ -433,7 +465,10 @@ namespace System.Collections.Tests
         public void Queue_Generic_EnsureCapacity_NegativeCapacityRequested_Throws()
         {
             var queue = GenericQueueFactory();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => queue.EnsureCapacity(-1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => queue.EnsureCapacity(-1)
+            );
         }
 
         public static IEnumerable<object[]> Queue_Generic_EnsureCapacity_LargeCapacityRequested_Throws_MemberData()
@@ -445,15 +480,21 @@ namespace System.Collections.Tests
         [Theory]
         [MemberData(nameof(Queue_Generic_EnsureCapacity_LargeCapacityRequested_Throws_MemberData))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/51411", TestRuntimes.Mono)]
-        public void Queue_Generic_EnsureCapacity_LargeCapacityRequested_Throws(int requestedCapacity)
+        public void Queue_Generic_EnsureCapacity_LargeCapacityRequested_Throws(
+            int requestedCapacity
+        )
         {
             var queue = GenericQueueFactory();
-            AssertExtensions.Throws<OutOfMemoryException>(() => queue.EnsureCapacity(requestedCapacity));
+            AssertExtensions.Throws<OutOfMemoryException>(() =>
+                queue.EnsureCapacity(requestedCapacity)
+            );
         }
 
         [Theory]
         [InlineData(5)]
-        public void Queue_Generic_EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCurrent_CapacityUnchanged(int currentCapacity)
+        public void Queue_Generic_EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCurrent_CapacityUnchanged(
+            int currentCapacity
+        )
         {
             var queue = new Queue<T>(currentCapacity);
 
@@ -465,7 +506,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void Queue_Generic_EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCount_CapacityUnchanged(int count)
+        public void Queue_Generic_EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCount_CapacityUnchanged(
+            int count
+        )
         {
             Queue<T> queue = GenericQueueFactory(count);
 
@@ -490,7 +533,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void Queue_Generic_EnsureCapacity_RequestingLargerCapacity_DoesNotImpactQueueContent(int count)
+        public void Queue_Generic_EnsureCapacity_RequestingLargerCapacity_DoesNotImpactQueueContent(
+            int count
+        )
         {
             Queue<T> queue = GenericQueueFactory(count);
             var copiedList = new List<T>(queue);

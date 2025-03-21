@@ -58,16 +58,14 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
         public override int GetHashCode()
         {
-            return Hash.Combine(ClosureOrdinal,
-                   Hash.Combine(SyntaxOffset, LambdaId.GetHashCode()));
+            return Hash.Combine(ClosureOrdinal, Hash.Combine(SyntaxOffset, LambdaId.GetHashCode()));
         }
 
         internal string GetDebuggerDisplay()
         {
-            return
-                ClosureOrdinal == StaticClosureOrdinal ? $"({LambdaId} @{SyntaxOffset}, static)" :
-                ClosureOrdinal == ThisOnlyClosureOrdinal ? $"(#{LambdaId} @{SyntaxOffset}, this)" :
-                $"({LambdaId} @{SyntaxOffset} in {ClosureOrdinal})";
+            return ClosureOrdinal == StaticClosureOrdinal ? $"({LambdaId} @{SyntaxOffset}, static)"
+                : ClosureOrdinal == ThisOnlyClosureOrdinal ? $"(#{LambdaId} @{SyntaxOffset}, this)"
+                : $"({LambdaId} @{SyntaxOffset} in {ClosureOrdinal})";
         }
     }
 }

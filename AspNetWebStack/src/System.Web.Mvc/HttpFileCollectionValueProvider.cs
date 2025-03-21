@@ -7,16 +7,18 @@ using System.Linq;
 
 namespace System.Web.Mvc
 {
-    public sealed class HttpFileCollectionValueProvider : DictionaryValueProvider<HttpPostedFileBase[]>
+    public sealed class HttpFileCollectionValueProvider
+        : DictionaryValueProvider<HttpPostedFileBase[]>
     {
-        private static readonly Dictionary<string, HttpPostedFileBase[]> _emptyDictionary = new Dictionary<string, HttpPostedFileBase[]>();
+        private static readonly Dictionary<string, HttpPostedFileBase[]> _emptyDictionary =
+            new Dictionary<string, HttpPostedFileBase[]>();
 
         public HttpFileCollectionValueProvider(ControllerContext controllerContext)
-            : base(GetHttpPostedFileDictionary(controllerContext), CultureInfo.InvariantCulture)
-        {
-        }
+            : base(GetHttpPostedFileDictionary(controllerContext), CultureInfo.InvariantCulture) { }
 
-        private static Dictionary<string, HttpPostedFileBase[]> GetHttpPostedFileDictionary(ControllerContext controllerContext)
+        private static Dictionary<string, HttpPostedFileBase[]> GetHttpPostedFileDictionary(
+            ControllerContext controllerContext
+        )
         {
             HttpFileCollectionBase files = controllerContext.HttpContext.Request.Files;
 
@@ -27,21 +29,32 @@ namespace System.Web.Mvc
             }
 
             // build up the 1:many file mapping
-            List<KeyValuePair<string, HttpPostedFileBase>> mapping = new List<KeyValuePair<string, HttpPostedFileBase>>();
+            List<KeyValuePair<string, HttpPostedFileBase>> mapping =
+                new List<KeyValuePair<string, HttpPostedFileBase>>();
             string[] allKeys = files.AllKeys;
             for (int i = 0; i < files.Count; i++)
             {
                 string key = allKeys[i];
                 if (key != null)
                 {
-                    HttpPostedFileBase file = HttpPostedFileBaseModelBinder.ChooseFileOrNull(files[i]);
+                    HttpPostedFileBase file = HttpPostedFileBaseModelBinder.ChooseFileOrNull(
+                        files[i]
+                    );
                     mapping.Add(new KeyValuePair<string, HttpPostedFileBase>(key, file));
                 }
             }
 
             // turn the mapping into a 1:many dictionary
-            var grouped = mapping.GroupBy(el => el.Key, el => el.Value, StringComparer.OrdinalIgnoreCase);
-            return grouped.ToDictionary(g => g.Key, g => g.ToArray(), StringComparer.OrdinalIgnoreCase);
+            var grouped = mapping.GroupBy(
+                el => el.Key,
+                el => el.Value,
+                StringComparer.OrdinalIgnoreCase
+            );
+            return grouped.ToDictionary(
+                g => g.Key,
+                g => g.ToArray(),
+                StringComparer.OrdinalIgnoreCase
+            );
         }
     }
 }

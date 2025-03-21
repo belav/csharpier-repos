@@ -52,7 +52,10 @@ namespace System.Xml.XmlReaderTests
 
         private static string GetNonExistentFileName()
         {
-            return Enumerable.Range(0, k_getUniqueFileNameAttempts).Select(x => Path.GetRandomFileName()).First(fileName => !File.Exists(fileName));
+            return Enumerable
+                .Range(0, k_getUniqueFileNameAttempts)
+                .Select(x => Path.GetRandomFileName())
+                .First(fileName => !File.Exists(fileName));
         }
 
         [Fact]
@@ -70,13 +73,15 @@ namespace System.Xml.XmlReaderTests
             // when an invalid path is specified on different platforms. We try to catch all the types
             // that can be thrown here to verify that more exception types are not introduced inadvertently.
             Exception e = Assert.ThrowsAny<Exception>(() => XmlReader.Create(path));
-            Assert.True(e is ArgumentException
-                || e is AggregateException
-                || e is FileNotFoundException
-                || e is FormatException
-                || e is UnauthorizedAccessException
-                || e is IOException
-                || e is XmlException);
+            Assert.True(
+                e is ArgumentException
+                    || e is AggregateException
+                    || e is FileNotFoundException
+                    || e is FormatException
+                    || e is UnauthorizedAccessException
+                    || e is IOException
+                    || e is XmlException
+            );
         }
 
         [Fact]

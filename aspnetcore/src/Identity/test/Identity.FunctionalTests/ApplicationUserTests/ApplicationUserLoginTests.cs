@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.IdentityUserTests;
 
 public class ApplicationUserLoginTests : LoginTests<ApplicationUserStartup, ApplicationDbContext>
 {
-    public ApplicationUserLoginTests(ServerFactory<ApplicationUserStartup, ApplicationDbContext> serverFactory) : base(serverFactory)
-    {
-    }
+    public ApplicationUserLoginTests(
+        ServerFactory<ApplicationUserStartup, ApplicationDbContext> serverFactory
+    )
+        : base(serverFactory) { }
 }

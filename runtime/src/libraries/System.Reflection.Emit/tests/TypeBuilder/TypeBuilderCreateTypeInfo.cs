@@ -61,7 +61,10 @@ namespace System.Reflection.Emit.Tests
         [InlineData(TypeAttributes.NestedPrivate, typeof(ArgumentException))]
         [InlineData(TypeAttributes.NestedPublic, typeof(ArgumentException))]
         [InlineData(TypeAttributes.RTSpecialName, typeof(ArgumentException))]
-        public void CreateType_InvalidTypeAttributes_Throws(TypeAttributes attributes, Type exceptionType)
+        public void CreateType_InvalidTypeAttributes_Throws(
+            TypeAttributes attributes,
+            Type exceptionType
+        )
         {
             Assert.Throws(exceptionType, () => Helpers.DynamicType(attributes));
         }

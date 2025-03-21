@@ -26,7 +26,10 @@ namespace System.Net.Primitives.Functional.Tests
         [InlineData(0x100000000)]
         public static void Ctor_InvalidAddress_ThrowsArgumentOutOfRangeException(long address)
         {
-            Assert.Throws<ArgumentOutOfRangeException>("newAddress", () => new IPEndPoint(address, 500));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "newAddress",
+                () => new IPEndPoint(address, 500)
+            );
         }
 
         public static IEnumerable<object[]> Ctor_IPAddress_Int_TestData()
@@ -58,7 +61,10 @@ namespace System.Net.Primitives.Functional.Tests
         public static void Ctor_InvalidPort_ThrowsArgumentOutOfRangeException(int port)
         {
             Assert.Throws<ArgumentOutOfRangeException>("port", () => new IPEndPoint(1, port));
-            Assert.Throws<ArgumentOutOfRangeException>("port", () => new IPEndPoint(new IPAddress(1), port));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "port",
+                () => new IPEndPoint(new IPAddress(1), port)
+            );
         }
 
         [Fact]
@@ -79,10 +85,7 @@ namespace System.Net.Primitives.Functional.Tests
         [InlineData(IPEndPoint.MaxPort)]
         public static void Port_Set_GetReturnsExpected(int value)
         {
-            var endPoint = new IPEndPoint(1, 500)
-            {
-                Port = value
-            };
+            var endPoint = new IPEndPoint(1, 500) { Port = value };
             Assert.Equal(value, endPoint.Port);
 
             // Set same.
@@ -110,10 +113,7 @@ namespace System.Net.Primitives.Functional.Tests
         [MemberData(nameof(Address_Set_TestData))]
         public static void Address_Set_GetReturnsExpected(IPAddress value)
         {
-            var endPoint = new IPEndPoint(1, 500)
-            {
-                Address = value
-            };
+            var endPoint = new IPEndPoint(1, 500) { Address = value };
             Assert.Same(value, endPoint.Address);
             Assert.Equal(value.AddressFamily, endPoint.AddressFamily);
 
@@ -131,9 +131,21 @@ namespace System.Net.Primitives.Functional.Tests
 
         public static IEnumerable<object[]> ToString_TestData()
         {
-            yield return new object[] { new IPEndPoint(IPAddress.HostToNetworkOrder(0x02000000), 500), "2.0.0.0:500" };
-            yield return new object[] { new IPEndPoint(IPAddress.Parse("192.169.0.9"), 500), "192.169.0.9:500" };
-            yield return new object[] { new IPEndPoint(IPAddress.Parse("0:0:0:0:0:0:0:1"), 500), "[::1]:500" };
+            yield return new object[]
+            {
+                new IPEndPoint(IPAddress.HostToNetworkOrder(0x02000000), 500),
+                "2.0.0.0:500",
+            };
+            yield return new object[]
+            {
+                new IPEndPoint(IPAddress.Parse("192.169.0.9"), 500),
+                "192.169.0.9:500",
+            };
+            yield return new object[]
+            {
+                new IPEndPoint(IPAddress.Parse("0:0:0:0:0:0:0:1"), 500),
+                "[::1]:500",
+            };
         }
 
         [Theory]
@@ -146,7 +158,10 @@ namespace System.Net.Primitives.Functional.Tests
         [Fact]
         public static void Create_DifferentAF_Success()
         {
-            SocketAddress sa = new SocketAddress(AddressFamily.InterNetwork, SocketAddress.GetMaximumAddressSize(AddressFamily.InterNetworkV6));
+            SocketAddress sa = new SocketAddress(
+                AddressFamily.InterNetwork,
+                SocketAddress.GetMaximumAddressSize(AddressFamily.InterNetworkV6)
+            );
             var ep = new IPEndPoint(IPAddress.IPv6Any, 0);
             Assert.NotNull(ep.Create(sa));
 
@@ -172,7 +187,9 @@ namespace System.Net.Primitives.Functional.Tests
             Assert.Equal(address.AddressFamily, serializedAddress.Family);
             Assert.Equal(expectedSize, serializedAddress.Size);
 
-            IPEndPoint createdEndPoint = Assert.IsType<IPEndPoint>(endPoint.Create(serializedAddress));
+            IPEndPoint createdEndPoint = Assert.IsType<IPEndPoint>(
+                endPoint.Create(serializedAddress)
+            );
             Assert.NotSame(endPoint, createdEndPoint);
             Assert.Equal(endPoint, createdEndPoint);
         }
@@ -187,7 +204,11 @@ namespace System.Net.Primitives.Functional.Tests
 
         [Theory]
         [MemberData(nameof(Create_DefaultAddress_TestData))]
-        public static void Create_DefaultAddress_Success(IPAddress address, int size, IPAddress expectedAddress)
+        public static void Create_DefaultAddress_Success(
+            IPAddress address,
+            int size,
+            IPAddress expectedAddress
+        )
         {
             var endPoint = new IPEndPoint(address, 500);
             var socketAddress = new SocketAddress(address.AddressFamily, size);
@@ -208,15 +229,29 @@ namespace System.Net.Primitives.Functional.Tests
 
         public static IEnumerable<object[]> Create_InvalidAddressFamily_TestData()
         {
-            yield return new object[] { new IPEndPoint(2, 500), new SocketAddress(Sockets.AddressFamily.Unknown) };
-            yield return new object[] { new IPEndPoint(IPAddress.Parse("0:0:0:0:0:0:0:1"), 500), new SocketAddress(Sockets.AddressFamily.InterNetwork) };
+            yield return new object[]
+            {
+                new IPEndPoint(2, 500),
+                new SocketAddress(Sockets.AddressFamily.Unknown),
+            };
+            yield return new object[]
+            {
+                new IPEndPoint(IPAddress.Parse("0:0:0:0:0:0:0:1"), 500),
+                new SocketAddress(Sockets.AddressFamily.InterNetwork),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Create_InvalidAddressFamily_TestData))]
-        public static void Create_InvalidAddressFamily_ThrowsArgumentException(IPEndPoint endPoint, SocketAddress socketAddress)
+        public static void Create_InvalidAddressFamily_ThrowsArgumentException(
+            IPEndPoint endPoint,
+            SocketAddress socketAddress
+        )
         {
-            AssertExtensions.Throws<ArgumentException>("socketAddress", () => endPoint.Create(socketAddress));
+            AssertExtensions.Throws<ArgumentException>(
+                "socketAddress",
+                () => endPoint.Create(socketAddress)
+            );
         }
 
         public static IEnumerable<object[]> Create_InvalidSize_TestData()
@@ -235,7 +270,10 @@ namespace System.Net.Primitives.Functional.Tests
         {
             var endPoint = new IPEndPoint(address, 500);
             var socketAddress = new SocketAddress(Sockets.AddressFamily.InterNetwork, size);
-            AssertExtensions.Throws<ArgumentException>("socketAddress", () => endPoint.Create(socketAddress));
+            AssertExtensions.Throws<ArgumentException>(
+                "socketAddress",
+                () => endPoint.Create(socketAddress)
+            );
         }
 
         public static IEnumerable<object[]> Equals_TestData()
@@ -252,7 +290,11 @@ namespace System.Net.Primitives.Functional.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public static void Equals_Invoke_ReturnsExpected(IPEndPoint endPoint, object obj, bool expected)
+        public static void Equals_Invoke_ReturnsExpected(
+            IPEndPoint endPoint,
+            object obj,
+            bool expected
+        )
         {
             Assert.Equal(expected, endPoint.Equals(obj));
             if (obj is IPEndPoint)

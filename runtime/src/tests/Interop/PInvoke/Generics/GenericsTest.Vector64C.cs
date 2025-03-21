@@ -9,19 +9,46 @@ using Xunit;
 unsafe partial class GenericsNative
 {
     [DllImport(nameof(GenericsNative))]
-    public static extern Vector64<char> GetVector64C([MarshalAs(UnmanagedType.U2)]char e00, [MarshalAs(UnmanagedType.U2)]char e01, [MarshalAs(UnmanagedType.U2)]char e02, [MarshalAs(UnmanagedType.U2)]char e03);
+    public static extern Vector64<char> GetVector64C(
+        [MarshalAs(UnmanagedType.U2)] char e00,
+        [MarshalAs(UnmanagedType.U2)] char e01,
+        [MarshalAs(UnmanagedType.U2)] char e02,
+        [MarshalAs(UnmanagedType.U2)] char e03
+    );
 
     [DllImport(nameof(GenericsNative))]
-    public static extern void GetVector64COut([MarshalAs(UnmanagedType.U2)]char e00, [MarshalAs(UnmanagedType.U2)]char e01, [MarshalAs(UnmanagedType.U2)]char e02, [MarshalAs(UnmanagedType.U2)]char e03, Vector64<char>* value);
+    public static extern void GetVector64COut(
+        [MarshalAs(UnmanagedType.U2)] char e00,
+        [MarshalAs(UnmanagedType.U2)] char e01,
+        [MarshalAs(UnmanagedType.U2)] char e02,
+        [MarshalAs(UnmanagedType.U2)] char e03,
+        Vector64<char>* value
+    );
 
     [DllImport(nameof(GenericsNative))]
-    public static extern void GetVector64COut([MarshalAs(UnmanagedType.U2)]char e00, [MarshalAs(UnmanagedType.U2)]char e01, [MarshalAs(UnmanagedType.U2)]char e02, [MarshalAs(UnmanagedType.U2)]char e03, out Vector64<char> value);
+    public static extern void GetVector64COut(
+        [MarshalAs(UnmanagedType.U2)] char e00,
+        [MarshalAs(UnmanagedType.U2)] char e01,
+        [MarshalAs(UnmanagedType.U2)] char e02,
+        [MarshalAs(UnmanagedType.U2)] char e03,
+        out Vector64<char> value
+    );
 
     [DllImport(nameof(GenericsNative))]
-    public static extern Vector64<char>* GetVector64CPtr([MarshalAs(UnmanagedType.U2)]char e00, [MarshalAs(UnmanagedType.U2)]char e01, [MarshalAs(UnmanagedType.U2)]char e02, [MarshalAs(UnmanagedType.U2)]char e03);
+    public static extern Vector64<char>* GetVector64CPtr(
+        [MarshalAs(UnmanagedType.U2)] char e00,
+        [MarshalAs(UnmanagedType.U2)] char e01,
+        [MarshalAs(UnmanagedType.U2)] char e02,
+        [MarshalAs(UnmanagedType.U2)] char e03
+    );
 
     [DllImport(nameof(GenericsNative), EntryPoint = "GetVector64CPtr")]
-    public static extern ref readonly Vector64<char> GetVector64CRef([MarshalAs(UnmanagedType.U2)]char e00, [MarshalAs(UnmanagedType.U2)]char e01, [MarshalAs(UnmanagedType.U2)]char e02, [MarshalAs(UnmanagedType.U2)]char e03);
+    public static extern ref readonly Vector64<char> GetVector64CRef(
+        [MarshalAs(UnmanagedType.U2)] char e00,
+        [MarshalAs(UnmanagedType.U2)] char e01,
+        [MarshalAs(UnmanagedType.U2)] char e02,
+        [MarshalAs(UnmanagedType.U2)] char e03
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern Vector64<char> AddVector64C(Vector64<char> lhs, Vector64<char> rhs);
@@ -30,7 +57,10 @@ unsafe partial class GenericsNative
     public static extern Vector64<char> AddVector64Cs(Vector64<char>* pValues, int count);
 
     [DllImport(nameof(GenericsNative))]
-    public static extern Vector64<char> AddVector64Cs([MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Vector64<char>[] pValues, int count);
+    public static extern Vector64<char> AddVector64Cs(
+        [MarshalAs(UnmanagedType.LPArray, SizeParamIndex = 1)] Vector64<char>[] pValues,
+        int count
+    );
 
     [DllImport(nameof(GenericsNative))]
     public static extern Vector64<char> AddVector64Cs(in Vector64<char> pValues, int count);
@@ -40,7 +70,9 @@ unsafe partial class GenericsTest
 {
     private static void TestVector64C()
     {
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetVector64C('0', '1', '2', '3'));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVector64C('0', '1', '2', '3')
+        );
 
         Vector64<char> value2;
         GenericsNative.GetVector64COut('0', '1', '2', '3', &value2);
@@ -50,7 +82,9 @@ unsafe partial class GenericsTest
         Assert.Equal(tValue2.GetElement(2), (short)'2');
         Assert.Equal(tValue2.GetElement(3), (short)'3');
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetVector64COut('0', '1', '2', '3', out Vector64<char> value3));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVector64COut('0', '1', '2', '3', out Vector64<char> value3)
+        );
 
         Vector64<char>* value4 = GenericsNative.GetVector64CPtr('0', '1', '2', '3');
         Vector64<short>* tValue4 = (Vector64<short>*)value4;
@@ -59,11 +93,15 @@ unsafe partial class GenericsTest
         Assert.Equal(tValue4->GetElement(2), (short)'2');
         Assert.Equal(tValue4->GetElement(3), (short)'3');
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.GetVector64CRef('0', '1', '2', '3'));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.GetVector64CRef('0', '1', '2', '3')
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddVector64C(default, default));
+        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddVector64C(default, default)
+        );
 
-        Vector64<char>[] values = new Vector64<char>[] {
+        Vector64<char>[] values = new Vector64<char>[]
+        {
             default,
             value2,
             default,
@@ -71,15 +109,20 @@ unsafe partial class GenericsTest
             default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(() => {
+        Assert.Throws<MarshalDirectiveException>(() =>
+        {
             fixed (Vector64<char>* pValues = &values[0])
             {
                 GenericsNative.AddVector64Cs(pValues, values.Length);
             }
         });
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddVector64Cs(values, values.Length));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector64Cs(values, values.Length)
+        );
 
-        Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddVector64Cs(in values[0], values.Length));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            GenericsNative.AddVector64Cs(in values[0], values.Length)
+        );
     }
 }

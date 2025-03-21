@@ -9,7 +9,9 @@ namespace System.Text.Json.Serialization
     /// </summary>
     internal abstract class JsonObjectConverter<T> : JsonResumableConverter<T>
     {
-        private protected sealed override ConverterStrategy GetDefaultConverterStrategy() => ConverterStrategy.Object;
+        private protected sealed override ConverterStrategy GetDefaultConverterStrategy() =>
+            ConverterStrategy.Object;
+
         internal override bool CanPopulate => true;
         internal sealed override Type? ElementType => null;
     }

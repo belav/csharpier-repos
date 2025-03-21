@@ -3,9 +3,9 @@
 
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Net.Http.Headers;
 using Moq;
 
@@ -53,16 +53,27 @@ public class Http2WebSocketTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/chat"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "server.example.com"),
             new KeyValuePair<string, string>(HeaderNames.WebSocketSubProtocols, "chat, superchat"),
-            new KeyValuePair<string, string>(HeaderNames.SecWebSocketExtensions, "permessage-deflate"),
+            new KeyValuePair<string, string>(
+                HeaderNames.SecWebSocketExtensions,
+                "permessage-deflate"
+            ),
             new KeyValuePair<string, string>(HeaderNames.SecWebSocketVersion, "13"),
             new KeyValuePair<string, string>(HeaderNames.Origin, "http://www.example.com"),
         };
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
-            withFlags: (byte)(Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM),
-            withStreamId: 1);
+            withFlags: (byte)(
+                Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM
+            ),
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
 
@@ -78,7 +89,8 @@ public class Http2WebSocketTests : Http2TestBase
     {
         await InitializeConnectionAsync(async context =>
         {
-            var requestBodyDetectionFeature = context.Features.Get<IHttpRequestBodyDetectionFeature>();
+            var requestBodyDetectionFeature =
+                context.Features.Get<IHttpRequestBodyDetectionFeature>();
             Assert.False(requestBodyDetectionFeature.CanHaveBody);
 
             var connectFeature = context.Features.Get<IHttpExtendedConnectFeature>();
@@ -119,17 +131,22 @@ public class Http2WebSocketTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/chat"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "server.example.com"),
             new KeyValuePair<string, string>(HeaderNames.WebSocketSubProtocols, "chat, superchat"),
-            new KeyValuePair<string, string>(HeaderNames.SecWebSocketExtensions, "permessage-deflate"),
+            new KeyValuePair<string, string>(
+                HeaderNames.SecWebSocketExtensions,
+                "permessage-deflate"
+            ),
             new KeyValuePair<string, string>(HeaderNames.SecWebSocketVersion, "13"),
             new KeyValuePair<string, string>(HeaderNames.Origin, "http://www.example.com"),
         };
         await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS, headers);
         await SendDataAsync(1, Array.Empty<byte>(), endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         _hpackDecoder.Decode(headersFrame.PayloadSequence, endHeaders: false, handler: this);
 
@@ -137,16 +154,20 @@ public class Http2WebSocketTests : Http2TestBase
         Assert.Contains("date", _decodedHeaders.Keys, StringComparer.OrdinalIgnoreCase);
         Assert.Equal("200", _decodedHeaders[InternalHeaderNames.Status]);
 
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 1,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
         Assert.Equal(0x01, dataFrame.Payload.Span[0]);
 
-        dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -182,14 +203,18 @@ public class Http2WebSocketTests : Http2TestBase
         var originalHandler = _connection._streamLifetimeHandler;
         var tcs = new TaskCompletionSource();
         var streamLifetimeHandler = new Mock<IHttp2StreamLifetimeHandler>();
-        streamLifetimeHandler.Setup(o => o.OnStreamCompleted(It.IsAny<Http2Stream>())).Callback((Http2Stream stream) =>
-        {
-            // Add stream to Http2Connection._completedStreams.
-            originalHandler.OnStreamCompleted(stream);
+        streamLifetimeHandler
+            .Setup(o => o.OnStreamCompleted(It.IsAny<Http2Stream>()))
+            .Callback(
+                (Http2Stream stream) =>
+                {
+                    // Add stream to Http2Connection._completedStreams.
+                    originalHandler.OnStreamCompleted(stream);
 
-            // Unblock test code that will call TriggerTick and return the stream to the pool
-            tcs.TrySetResult();
-        });
+                    // Unblock test code that will call TriggerTick and return the stream to the pool
+                    tcs.TrySetResult();
+                }
+            );
         _connection._streamLifetimeHandler = streamLifetimeHandler.Object;
 
         // HEADERS + END_HEADERS
@@ -210,17 +235,22 @@ public class Http2WebSocketTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/chat"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "server.example.com"),
             new KeyValuePair<string, string>(HeaderNames.WebSocketSubProtocols, "chat, superchat"),
-            new KeyValuePair<string, string>(HeaderNames.SecWebSocketExtensions, "permessage-deflate"),
+            new KeyValuePair<string, string>(
+                HeaderNames.SecWebSocketExtensions,
+                "permessage-deflate"
+            ),
             new KeyValuePair<string, string>(HeaderNames.SecWebSocketVersion, "13"),
             new KeyValuePair<string, string>(HeaderNames.Origin, "http://www.example.com"),
         };
         await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS, headers);
         await SendDataAsync(1, Array.Empty<byte>(), endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         _hpackDecoder.Decode(headersFrame.PayloadSequence, endHeaders: false, handler: this);
 
@@ -228,19 +258,23 @@ public class Http2WebSocketTests : Http2TestBase
         Assert.Contains("date", _decodedHeaders.Keys, StringComparer.OrdinalIgnoreCase);
         Assert.Equal("201", _decodedHeaders[InternalHeaderNames.Status]);
 
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 1,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
         Assert.Equal(0x01, dataFrame.Payload.Span[0]);
 
         appDelegateTcs.TrySetResult();
         await tcs.Task.DefaultTimeout();
 
-        dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         // TriggerTick will trigger the stream to be returned to the pool so we can assert it
         TriggerTick();
@@ -252,10 +286,12 @@ public class Http2WebSocketTests : Http2TestBase
         await SendHeadersAsync(3, Http2HeadersFrameFlags.END_HEADERS, headers);
         await SendDataAsync(3, Array.Empty<byte>(), endStream: true);
 
-        headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 2,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 3);
+            withStreamId: 3
+        );
 
         _decodedHeaders.Clear();
         _hpackDecoder.Decode(headersFrame.PayloadSequence, endHeaders: false, handler: this);
@@ -264,16 +300,20 @@ public class Http2WebSocketTests : Http2TestBase
         Assert.Contains("date", _decodedHeaders.Keys, StringComparer.OrdinalIgnoreCase);
         Assert.Equal("201", _decodedHeaders[InternalHeaderNames.Status]);
 
-        dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 1,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 3);
+            withStreamId: 3
+        );
         Assert.Equal(0x01, dataFrame.Payload.Span[0]);
 
-        dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 3);
+            withStreamId: 3
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 3, ignoreNonGoAwayFrames: false);
     }
@@ -281,7 +321,10 @@ public class Http2WebSocketTests : Http2TestBase
     [Theory]
     [InlineData(":path", "/")]
     [InlineData(":scheme", "http")]
-    public async Task HEADERS_Received_ExtendedCONNECTMethod_WithoutSchemeOrPath_Reset(string headerName, string value)
+    public async Task HEADERS_Received_ExtendedCONNECTMethod_WithoutSchemeOrPath_Reset(
+        string headerName,
+        string value
+    )
     {
         await InitializeConnectionAsync(_noopApplication);
 
@@ -290,11 +333,19 @@ public class Http2WebSocketTests : Http2TestBase
         {
             new KeyValuePair<string, string>(InternalHeaderNames.Method, "CONNECT"),
             new KeyValuePair<string, string>(InternalHeaderNames.Protocol, "WebSocket"),
-            new KeyValuePair<string, string>(headerName, value)
+            new KeyValuePair<string, string>(headerName, value),
         };
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.ConnectRequestsWithProtocolRequireSchemeAndPath);
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.ConnectRequestsWithProtocolRequireSchemeAndPath
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -310,11 +361,19 @@ public class Http2WebSocketTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/"),
             new KeyValuePair<string, string>(InternalHeaderNames.Scheme, "http"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "example.com"),
-            new KeyValuePair<string, string>(InternalHeaderNames.Protocol, "WebSocket")
+            new KeyValuePair<string, string>(InternalHeaderNames.Protocol, "WebSocket"),
         };
-        await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM, headers);
+        await SendHeadersAsync(
+            1,
+            Http2HeadersFrameFlags.END_HEADERS | Http2HeadersFrameFlags.END_STREAM,
+            headers
+        );
 
-        await WaitForStreamErrorAsync(expectedStreamId: 1, Http2ErrorCode.PROTOCOL_ERROR, CoreStrings.ProtocolRequiresConnect);
+        await WaitForStreamErrorAsync(
+            expectedStreamId: 1,
+            Http2ErrorCode.PROTOCOL_ERROR,
+            CoreStrings.ProtocolRequiresConnect
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -343,7 +402,10 @@ public class Http2WebSocketTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/chat"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "server.example.com"),
             new KeyValuePair<string, string>(HeaderNames.WebSocketSubProtocols, "chat, superchat"),
-            new KeyValuePair<string, string>(HeaderNames.SecWebSocketExtensions, "permessage-deflate"),
+            new KeyValuePair<string, string>(
+                HeaderNames.SecWebSocketExtensions,
+                "permessage-deflate"
+            ),
             new KeyValuePair<string, string>(HeaderNames.SecWebSocketVersion, "13"),
             new KeyValuePair<string, string>(HeaderNames.Origin, "http://www.example.com"),
         };
@@ -356,10 +418,12 @@ public class Http2WebSocketTests : Http2TestBase
 
         await SendDataAsync(1, Array.Empty<byte>(), endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         _hpackDecoder.Decode(headersFrame.PayloadSequence, endHeaders: false, handler: this);
 
@@ -367,16 +431,20 @@ public class Http2WebSocketTests : Http2TestBase
         Assert.Contains("date", _decodedHeaders.Keys, StringComparer.OrdinalIgnoreCase);
         Assert.Equal("200", _decodedHeaders[InternalHeaderNames.Status]);
 
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 1,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
         Assert.Equal(0x01, dataFrame.Payload.Span[0]);
 
-        dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -400,7 +468,10 @@ public class Http2WebSocketTests : Http2TestBase
             Assert.True(maxRequestBodySizeFeature.IsReadOnly);
             using var memoryStream = new MemoryStream();
             await stream.CopyToAsync(memoryStream);
-            Assert.Equal(_serviceContext.ServerOptions.Limits.MaxRequestBodySize + 1, memoryStream.Length);
+            Assert.Equal(
+                _serviceContext.ServerOptions.Limits.MaxRequestBodySize + 1,
+                memoryStream.Length
+            );
             await stream.WriteAsync(new byte[] { 0x01 });
         });
 
@@ -412,7 +483,10 @@ public class Http2WebSocketTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/chat"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "server.example.com"),
             new KeyValuePair<string, string>(HeaderNames.WebSocketSubProtocols, "chat, superchat"),
-            new KeyValuePair<string, string>(HeaderNames.SecWebSocketExtensions, "permessage-deflate"),
+            new KeyValuePair<string, string>(
+                HeaderNames.SecWebSocketExtensions,
+                "permessage-deflate"
+            ),
             new KeyValuePair<string, string>(HeaderNames.SecWebSocketVersion, "13"),
             new KeyValuePair<string, string>(HeaderNames.Origin, "http://www.example.com"),
         };
@@ -420,10 +494,12 @@ public class Http2WebSocketTests : Http2TestBase
 
         await SendDataAsync(1, new byte[(int)limits.MaxRequestBodySize + 1], endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         _hpackDecoder.Decode(headersFrame.PayloadSequence, endHeaders: false, handler: this);
 
@@ -431,16 +507,20 @@ public class Http2WebSocketTests : Http2TestBase
         Assert.Contains("date", _decodedHeaders.Keys, StringComparer.OrdinalIgnoreCase);
         Assert.Equal("200", _decodedHeaders[InternalHeaderNames.Status]);
 
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 1,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
         Assert.Equal(0x01, dataFrame.Payload.Span[0]);
 
-        dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -453,18 +533,26 @@ public class Http2WebSocketTests : Http2TestBase
             var connectFeature = context.Features.Get<IHttpExtendedConnectFeature>();
             // We could throw, but no-oping is adequate.
             Assert.Equal(0, await context.Request.Body.ReadAsync(new byte[1]));
-            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.Body.WriteAsync(new byte[1] { 0x00 }).AsTask());
+            var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                context.Response.Body.WriteAsync(new byte[1] { 0x00 }).AsTask()
+            );
             Assert.Equal(CoreStrings.FormatConnectResponseCanNotHaveBody(200), ex.Message);
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.BodyWriter.WriteAsync(new byte[1] { 0x00 }).AsTask());
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                context.Response.BodyWriter.WriteAsync(new byte[1] { 0x00 }).AsTask()
+            );
             Assert.Equal(CoreStrings.FormatConnectResponseCanNotHaveBody(200), ex.Message);
 
             var stream = await connectFeature.AcceptAsync();
 
             // The body streams still shouldn't work after Accept
             Assert.Equal(0, await context.Request.Body.ReadAsync(new byte[1]));
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.Body.WriteAsync(new byte[1] { 0x00 }).AsTask());
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                context.Response.Body.WriteAsync(new byte[1] { 0x00 }).AsTask()
+            );
             Assert.Equal(CoreStrings.FormatConnectResponseCanNotHaveBody(200), ex.Message);
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(() => context.Response.BodyWriter.WriteAsync(new byte[1] { 0x00 }).AsTask());
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                context.Response.BodyWriter.WriteAsync(new byte[1] { 0x00 }).AsTask()
+            );
             Assert.Equal(CoreStrings.FormatConnectResponseCanNotHaveBody(200), ex.Message);
 
             // The connect stream should work
@@ -480,7 +568,10 @@ public class Http2WebSocketTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/chat"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "server.example.com"),
             new KeyValuePair<string, string>(HeaderNames.WebSocketSubProtocols, "chat, superchat"),
-            new KeyValuePair<string, string>(HeaderNames.SecWebSocketExtensions, "permessage-deflate"),
+            new KeyValuePair<string, string>(
+                HeaderNames.SecWebSocketExtensions,
+                "permessage-deflate"
+            ),
             new KeyValuePair<string, string>(HeaderNames.SecWebSocketVersion, "13"),
             new KeyValuePair<string, string>(HeaderNames.Origin, "http://www.example.com"),
         };
@@ -488,10 +579,12 @@ public class Http2WebSocketTests : Http2TestBase
 
         await SendDataAsync(1, new byte[10241], endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 32,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         _hpackDecoder.Decode(headersFrame.PayloadSequence, endHeaders: false, handler: this);
 
@@ -499,16 +592,20 @@ public class Http2WebSocketTests : Http2TestBase
         Assert.Contains("date", _decodedHeaders.Keys, StringComparer.OrdinalIgnoreCase);
         Assert.Equal("200", _decodedHeaders[InternalHeaderNames.Status]);
 
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 1,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
         Assert.Equal(0x01, dataFrame.Payload.Span[0]);
 
-        dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -535,7 +632,10 @@ public class Http2WebSocketTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/chat"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "server.example.com"),
             new KeyValuePair<string, string>(HeaderNames.WebSocketSubProtocols, "chat, superchat"),
-            new KeyValuePair<string, string>(HeaderNames.SecWebSocketExtensions, "permessage-deflate"),
+            new KeyValuePair<string, string>(
+                HeaderNames.SecWebSocketExtensions,
+                "permessage-deflate"
+            ),
             new KeyValuePair<string, string>(HeaderNames.SecWebSocketVersion, "13"),
             new KeyValuePair<string, string>(HeaderNames.Origin, "http://www.example.com"),
         };
@@ -543,10 +643,12 @@ public class Http2WebSocketTests : Http2TestBase
 
         await SendDataAsync(1, new byte[10241], endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 40,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         _hpackDecoder.Decode(headersFrame.PayloadSequence, endHeaders: false, handler: this);
 
@@ -555,22 +657,28 @@ public class Http2WebSocketTests : Http2TestBase
         Assert.Equal("418", _decodedHeaders[InternalHeaderNames.Status]);
         Assert.Equal("2", _decodedHeaders[HeaderNames.ContentLength]);
 
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 1,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
         Assert.Equal(0x01, dataFrame.Payload.Span[0]);
 
-        dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 1,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
         Assert.Equal(0x02, dataFrame.Payload.Span[0]);
 
-        dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 1, ignoreNonGoAwayFrames: false);
     }
@@ -601,7 +709,9 @@ public class Http2WebSocketTests : Http2TestBase
             {
                 if (connectFeature.Protocol != null)
                 {
-                    throw new Exception("ConnectProtocol should be null here. The fact that it is not indicates that we are not resetting properly between requests.");
+                    throw new Exception(
+                        "ConnectProtocol should be null here. The fact that it is not indicates that we are not resetting properly between requests."
+                    );
                 }
 
                 // We've done the test. Now just return the normal echo server behavior.
@@ -612,17 +722,21 @@ public class Http2WebSocketTests : Http2TestBase
         var originalHandler = _connection._streamLifetimeHandler;
         var tcs = new TaskCompletionSource();
         var streamLifetimeHandler = new Mock<IHttp2StreamLifetimeHandler>();
-        streamLifetimeHandler.Setup(o => o.OnStreamCompleted(It.IsAny<Http2Stream>())).Callback((Http2Stream stream) =>
-        {
-            // Add stream to Http2Connection._completedStreams.
-            originalHandler.OnStreamCompleted(stream);
+        streamLifetimeHandler
+            .Setup(o => o.OnStreamCompleted(It.IsAny<Http2Stream>()))
+            .Callback(
+                (Http2Stream stream) =>
+                {
+                    // Add stream to Http2Connection._completedStreams.
+                    originalHandler.OnStreamCompleted(stream);
 
-            if (requestCount == 1)
-            {
-                // Unblock test code that will call TriggerTick and return the stream to the pool
-                tcs.TrySetResult();
-            }
-        });
+                    if (requestCount == 1)
+                    {
+                        // Unblock test code that will call TriggerTick and return the stream to the pool
+                        tcs.TrySetResult();
+                    }
+                }
+            );
         _connection._streamLifetimeHandler = streamLifetimeHandler.Object;
 
         // HEADERS + END_HEADERS
@@ -643,7 +757,10 @@ public class Http2WebSocketTests : Http2TestBase
             new KeyValuePair<string, string>(InternalHeaderNames.Path, "/chat"),
             new KeyValuePair<string, string>(InternalHeaderNames.Authority, "server.example.com"),
             new KeyValuePair<string, string>(HeaderNames.WebSocketSubProtocols, "chat, superchat"),
-            new KeyValuePair<string, string>(HeaderNames.SecWebSocketExtensions, "permessage-deflate"),
+            new KeyValuePair<string, string>(
+                HeaderNames.SecWebSocketExtensions,
+                "permessage-deflate"
+            ),
             new KeyValuePair<string, string>(HeaderNames.SecWebSocketVersion, "13"),
             new KeyValuePair<string, string>(HeaderNames.Origin, "http://www.example.com"),
         };
@@ -651,24 +768,30 @@ public class Http2WebSocketTests : Http2TestBase
         await SendHeadersAsync(1, Http2HeadersFrameFlags.END_HEADERS, headers);
         await SendDataAsync(1, Array.Empty<byte>(), endStream: true);
 
-        var headersFrame = await ExpectAsync(Http2FrameType.HEADERS,
+        var headersFrame = await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 36,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
-        var dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        var dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 1,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 1);
+            withStreamId: 1
+        );
         Assert.Equal(0x01, dataFrame.Payload.Span[0]);
 
         appDelegateTcs.TrySetResult();
         await tcs.Task.DefaultTimeout();
 
-        dataFrame = await ExpectAsync(Http2FrameType.DATA,
+        dataFrame = await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 1);
+            withStreamId: 1
+        );
 
         // TriggerTick will trigger the stream to be returned to the pool so we can assert it
         TriggerTick();
@@ -690,18 +813,24 @@ public class Http2WebSocketTests : Http2TestBase
         await SendDataAsync(3, _helloBytes, endStream: true);
 
         // If the echo server doesn't give us the expected responses, the test has failed.
-        await ExpectAsync(Http2FrameType.HEADERS,
+        await ExpectAsync(
+            Http2FrameType.HEADERS,
             withLength: 2,
             withFlags: (byte)Http2HeadersFrameFlags.END_HEADERS,
-            withStreamId: 3);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 3
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 5,
             withFlags: (byte)Http2DataFrameFlags.NONE,
-            withStreamId: 3);
-        await ExpectAsync(Http2FrameType.DATA,
+            withStreamId: 3
+        );
+        await ExpectAsync(
+            Http2FrameType.DATA,
             withLength: 0,
             withFlags: (byte)Http2DataFrameFlags.END_STREAM,
-            withStreamId: 3);
+            withStreamId: 3
+        );
 
         await StopConnectionAsync(expectedLastStreamId: 3, ignoreNonGoAwayFrames: false);
     }

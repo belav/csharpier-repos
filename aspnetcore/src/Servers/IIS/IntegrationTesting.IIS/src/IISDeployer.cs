@@ -6,8 +6,8 @@ using System.Globalization;
 using System.ServiceProcess;
 using System.Text;
 using System.Xml.Linq;
-using Microsoft.AspNetCore.Server.IntegrationTesting.Common;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.IntegrationTesting.Common;
 using Microsoft.Extensions.Logging;
 using Microsoft.Web.Administration;
 
@@ -36,14 +36,10 @@ public class IISDeployer : IISDeployerBase
     protected override string ApplicationHostConfigPath => _applicationHostConfig;
 
     public IISDeployer(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-        : base(new IISDeploymentParameters(deploymentParameters), loggerFactory)
-    {
-    }
+        : base(new IISDeploymentParameters(deploymentParameters), loggerFactory) { }
 
     public IISDeployer(IISDeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-        : base(deploymentParameters, loggerFactory)
-    {
-    }
+        : base(deploymentParameters, loggerFactory) { }
 
     public override void Dispose()
     {
@@ -86,16 +82,25 @@ public class IISDeployer : IISDeployerBase
             // For now, only support using published output
             DeploymentParameters.PublishApplicationBeforeDeployment = true;
             // Move ASPNETCORE_DETAILEDERRORS to web config env variables
-            if (IISDeploymentParameters.EnvironmentVariables.ContainsKey(DetailedErrorsEnvironmentVariable))
+            if (
+                IISDeploymentParameters.EnvironmentVariables.ContainsKey(
+                    DetailedErrorsEnvironmentVariable
+                )
+            )
             {
-                IISDeploymentParameters.WebConfigBasedEnvironmentVariables[DetailedErrorsEnvironmentVariable] =
-                    IISDeploymentParameters.EnvironmentVariables[DetailedErrorsEnvironmentVariable];
+                IISDeploymentParameters.WebConfigBasedEnvironmentVariables[
+                    DetailedErrorsEnvironmentVariable
+                ] = IISDeploymentParameters.EnvironmentVariables[DetailedErrorsEnvironmentVariable];
 
-                IISDeploymentParameters.EnvironmentVariables.Remove(DetailedErrorsEnvironmentVariable);
+                IISDeploymentParameters.EnvironmentVariables.Remove(
+                    DetailedErrorsEnvironmentVariable
+                );
             }
             // Do not override settings set on parameters
-            if (!IISDeploymentParameters.HandlerSettings.ContainsKey("debugLevel") &&
-                !IISDeploymentParameters.HandlerSettings.ContainsKey("debugFile"))
+            if (
+                !IISDeploymentParameters.HandlerSettings.ContainsKey("debugLevel")
+                && !IISDeploymentParameters.HandlerSettings.ContainsKey("debugFile")
+            )
             {
                 _debugLogFile = Path.GetTempFileName();
                 IISDeploymentParameters.HandlerSettings["debugLevel"] = "file";
@@ -107,22 +112,31 @@ public class IISDeployer : IISDeployerBase
 
             RunWebConfigActions(contentRoot);
 
-            var uri = TestUriHelper.BuildTestUri(ServerType.IIS, DeploymentParameters.ApplicationBaseUriHint);
+            var uri = TestUriHelper.BuildTestUri(
+                ServerType.IIS,
+                DeploymentParameters.ApplicationBaseUriHint
+            );
             StartIIS(uri, contentRoot);
 
-            IISDeploymentParameters.ServerConfigLocation = Path.Combine(@"C:\inetpub\temp\apppools", _appPoolName, $"{_appPoolName}.config");
+            IISDeploymentParameters.ServerConfigLocation = Path.Combine(
+                @"C:\inetpub\temp\apppools",
+                _appPoolName,
+                $"{_appPoolName}.config"
+            );
 
             // Warm up time for IIS setup.
             Logger.LogInformation("Successfully finished IIS application directory setup.");
-            return Task.FromResult<DeploymentResult>(new IISDeploymentResult(
-                LoggerFactory,
-                IISDeploymentParameters,
-                applicationBaseUri: uri.ToString(),
-                contentRoot: contentRoot,
-                hostShutdownToken: _hostShutdownToken.Token,
-                hostProcess: HostProcess,
-                appPoolName: _appPoolName
-            ));
+            return Task.FromResult<DeploymentResult>(
+                new IISDeploymentResult(
+                    LoggerFactory,
+                    IISDeploymentParameters,
+                    applicationBaseUri: uri.ToString(),
+                    contentRoot: contentRoot,
+                    hostShutdownToken: _hostShutdownToken.Token,
+                    hostProcess: HostProcess,
+                    appPoolName: _appPoolName
+                )
+            );
         }
     }
 
@@ -130,7 +144,8 @@ public class IISDeployer : IISDeployerBase
     {
         yield return WebConfigHelpers.AddOrModifyAspNetCoreSection(
             key: "hostingModel",
-            value: DeploymentParameters.HostingModel.ToString());
+            value: DeploymentParameters.HostingModel.ToString()
+        );
 
         yield return (element, _) =>
         {
@@ -140,15 +155,23 @@ public class IISDeployer : IISDeployerBase
                 .GetOrAdd("aspNetCore");
 
             // Expand path to dotnet because IIS process would not inherit PATH variable
-            if (aspNetCore.Attribute("processPath")?.Value.StartsWith("dotnet", StringComparison.Ordinal) == true)
+            if (
+                aspNetCore
+                    .Attribute("processPath")
+                    ?.Value.StartsWith("dotnet", StringComparison.Ordinal) == true
+            )
             {
-                aspNetCore.SetAttributeValue("processPath", DotNetCommands.GetDotNetExecutable(DeploymentParameters.RuntimeArchitecture));
+                aspNetCore.SetAttributeValue(
+                    "processPath",
+                    DotNetCommands.GetDotNetExecutable(DeploymentParameters.RuntimeArchitecture)
+                );
             }
         };
 
         yield return WebConfigHelpers.AddOrModifyHandlerSection(
             key: "modules",
-            value: AspNetCoreModuleV2ModuleName);
+            value: AspNetCoreModuleV2ModuleName
+        );
 
         foreach (var action in base.GetWebConfigActions())
         {
@@ -167,7 +190,12 @@ public class IISDeployer : IISDeployerBase
                 debugLogLocations.Add(debugFile);
             }
 
-            if (DeploymentParameters.EnvironmentVariables.TryGetValue("ASPNETCORE_MODULE_DEBUG_FILE", out debugFile))
+            if (
+                DeploymentParameters.EnvironmentVariables.TryGetValue(
+                    "ASPNETCORE_MODULE_DEBUG_FILE",
+                    out debugFile
+                )
+            )
             {
                 debugLogLocations.Add(debugFile);
             }
@@ -182,7 +210,10 @@ public class IISDeployer : IISDeployerBase
                     continue;
                 }
 
-                var file = Path.Combine(DeploymentParameters.PublishedApplicationRootPath, debugLogLocation);
+                var file = Path.Combine(
+                    DeploymentParameters.PublishedApplicationRootPath,
+                    debugLogLocation
+                );
                 if (File.Exists(file))
                 {
                     var lines = File.ReadAllLines(file);
@@ -231,8 +262,10 @@ public class IISDeployer : IISDeployerBase
         ServiceController serviceController = new ServiceController("w3svc");
         Logger.LogInformation("W3SVC status " + serviceController.Status);
 
-        if (serviceController.Status != ServiceControllerStatus.Running &&
-            serviceController.Status != ServiceControllerStatus.StartPending)
+        if (
+            serviceController.Status != ServiceControllerStatus.Running
+            && serviceController.Status != ServiceControllerStatus.StartPending
+        )
         {
             Logger.LogInformation("Starting W3SVC");
 
@@ -248,7 +281,9 @@ public class IISDeployer : IISDeployerBase
             if (site == null)
             {
                 PreserveConfigFiles("nositetostart");
-                throw new InvalidOperationException($"Can't find site for: {contentRoot} to start.");
+                throw new InvalidOperationException(
+                    $"Can't find site for: {contentRoot} to start."
+                );
             }
 
             var appPool = serverManager.ApplicationPools.Single();
@@ -308,7 +343,9 @@ public class IISDeployer : IISDeployerBase
         _configPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("D"));
         _applicationHostConfig = Path.Combine(_configPath, "applicationHost.config");
         Directory.CreateDirectory(_configPath);
-        var config = XDocument.Parse(DeploymentParameters.ServerConfigTemplateContent ?? File.ReadAllText("IIS.config"));
+        var config = XDocument.Parse(
+            DeploymentParameters.ServerConfigTemplateContent ?? File.ReadAllText("IIS.config")
+        );
 
         ConfigureAppHostConfig(config.Root, contentRoot, port);
 
@@ -317,7 +354,9 @@ public class IISDeployer : IISDeployerBase
         RetryServerManagerAction(serverManager =>
         {
             var redirectionConfiguration = serverManager.GetRedirectionConfiguration();
-            var redirectionSection = redirectionConfiguration.GetSection("configurationRedirection");
+            var redirectionSection = redirectionConfiguration.GetSection(
+                "configurationRedirection"
+            );
 
             if ((bool)redirectionSection.Attributes["enabled"].Value)
             {
@@ -359,8 +398,7 @@ public class IISDeployer : IISDeployerBase
 
         if (DeploymentParameters.EnvironmentVariables.Any())
         {
-            var environmentVariables = pool
-                .GetOrAdd("environmentVariables");
+            var environmentVariables = pool.GetOrAdd("environmentVariables");
 
             foreach (var tuple in DeploymentParameters.EnvironmentVariables)
             {
@@ -368,7 +406,6 @@ public class IISDeployer : IISDeployerBase
                     .GetOrAdd("add", "name", tuple.Key)
                     .SetAttributeValue("value", tuple.Value);
             }
-
         }
 
         if (DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x86)
@@ -398,7 +435,10 @@ public class IISDeployer : IISDeployerBase
                 // Stop all app pools
                 foreach (var appPool in serverManager.ApplicationPools)
                 {
-                    if (appPool.State != ObjectState.Stopped && appPool.State != ObjectState.Stopping)
+                    if (
+                        appPool.State != ObjectState.Stopped
+                        && appPool.State != ObjectState.Stopping
+                    )
                     {
                         var state = appPool.Stop();
                         Logger.LogInformation($"Stopping pool, state: {state}");
@@ -418,10 +458,13 @@ public class IISDeployer : IISDeployerBase
                 {
                     foreach (var appPool in serverManager.ApplicationPools)
                     {
-                        if (appPool.WorkerProcesses != null &&
-                            appPool.WorkerProcesses.Any(wp =>
-                                wp.State == WorkerProcessState.Running ||
-                                wp.State == WorkerProcessState.Stopping))
+                        if (
+                            appPool.WorkerProcesses != null
+                            && appPool.WorkerProcesses.Any(wp =>
+                                wp.State == WorkerProcessState.Running
+                                || wp.State == WorkerProcessState.Stopping
+                            )
+                        )
                         {
                             throw new InvalidOperationException("WorkerProcess not stopped yet");
                         }
@@ -453,7 +496,9 @@ public class IISDeployer : IISDeployerBase
             RetryServerManagerAction(serverManager =>
             {
                 var redirectionConfiguration = serverManager.GetRedirectionConfiguration();
-                var redirectionSection = redirectionConfiguration.GetSection("configurationRedirection");
+                var redirectionSection = redirectionConfiguration.GetSection(
+                    "configurationRedirection"
+                );
 
                 redirectionSection.Attributes["enabled"].Value = false;
 
@@ -502,15 +547,30 @@ public class IISDeployer : IISDeployerBase
         // Try to upload the applicationHost config on helix to help debug
         PreserveConfigFiles("serverManagerRetryFailed");
 
-        throw new AggregateException($"Operation did not succeed after {retryCount} retries, serverManagerConfig: {DumpServerManagerConfig()}", exceptions.ToArray());
+        throw new AggregateException(
+            $"Operation did not succeed after {retryCount} retries, serverManagerConfig: {DumpServerManagerConfig()}",
+            exceptions.ToArray()
+        );
     }
 
     private void PreserveConfigFiles(string fileNamePrefix)
     {
-        HelixHelper.PreserveFile(Path.Combine(DeploymentParameters.PublishedApplicationRootPath, "web.config"), fileNamePrefix + ".web.config");
-        HelixHelper.PreserveFile(Path.Combine(_configPath, "applicationHost.config"), fileNamePrefix + ".applicationHost.config");
-        HelixHelper.PreserveFile(Path.Combine(Environment.SystemDirectory, @"inetsrv\config\ApplicationHost.config"), fileNamePrefix + ".inetsrv.applicationHost.config");
-        HelixHelper.PreserveFile(Path.Combine(Environment.SystemDirectory, @"inetsrv\config\redirection.config"), fileNamePrefix + ".inetsrv.redirection.config");
+        HelixHelper.PreserveFile(
+            Path.Combine(DeploymentParameters.PublishedApplicationRootPath, "web.config"),
+            fileNamePrefix + ".web.config"
+        );
+        HelixHelper.PreserveFile(
+            Path.Combine(_configPath, "applicationHost.config"),
+            fileNamePrefix + ".applicationHost.config"
+        );
+        HelixHelper.PreserveFile(
+            Path.Combine(Environment.SystemDirectory, @"inetsrv\config\ApplicationHost.config"),
+            fileNamePrefix + ".inetsrv.applicationHost.config"
+        );
+        HelixHelper.PreserveFile(
+            Path.Combine(Environment.SystemDirectory, @"inetsrv\config\redirection.config"),
+            fileNamePrefix + ".inetsrv.redirection.config"
+        );
         var tmpFile = Path.GetRandomFileName();
         File.WriteAllText(tmpFile, DumpServerManagerConfig());
         HelixHelper.PreserveFile(tmpFile, fileNamePrefix + ".serverManager.dump.txt");
@@ -523,11 +583,17 @@ public class IISDeployer : IISDeployerBase
         {
             foreach (var site in serverManager.Sites)
             {
-                configDump.AppendLine(CultureInfo.InvariantCulture, $"Site Name:{site.Name} Id:{site.Id} State:{site.State}");
+                configDump.AppendLine(
+                    CultureInfo.InvariantCulture,
+                    $"Site Name:{site.Name} Id:{site.Id} State:{site.State}"
+                );
             }
             foreach (var appPool in serverManager.ApplicationPools)
             {
-                configDump.AppendLine(CultureInfo.InvariantCulture, $"AppPool Name:{appPool.Name} Id:{appPool.ProcessModel} State:{appPool.State}");
+                configDump.AppendLine(
+                    CultureInfo.InvariantCulture,
+                    $"AppPool Name:{appPool.Name} Id:{appPool.ProcessModel} State:{appPool.State}"
+                );
             }
         }
         return configDump.ToString();

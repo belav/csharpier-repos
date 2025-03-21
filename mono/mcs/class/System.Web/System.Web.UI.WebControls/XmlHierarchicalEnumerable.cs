@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,32 +33,33 @@ using System.Collections.Specialized;
 using System.Text;
 using System.Xml;
 
-namespace System.Web.UI.WebControls {
-	internal class XmlHierarchicalEnumerable : IHierarchicalEnumerable {
-		internal XmlHierarchicalEnumerable (XmlNodeList nodeList)
-		{
-			this.nodeList = nodeList;
-		}
-		
-		IEnumerator IEnumerable.GetEnumerator ()
-		{
-			ArrayList ret = new ArrayList (nodeList.Count);
-			
-			foreach (XmlNode node in nodeList) {
-				if (node.NodeType == XmlNodeType.Element)
-					ret.Add (new XmlHierarchyData (node));
-			}
-			
-			return ret.GetEnumerator ();
-		}
-		
-		IHierarchyData IHierarchicalEnumerable.GetHierarchyData (object enumeratedItem)
-		{
-			return (IHierarchyData) enumeratedItem;
-		}
-		
-		XmlNodeList nodeList;
-	
-	}
-}
+namespace System.Web.UI.WebControls
+{
+    internal class XmlHierarchicalEnumerable : IHierarchicalEnumerable
+    {
+        internal XmlHierarchicalEnumerable(XmlNodeList nodeList)
+        {
+            this.nodeList = nodeList;
+        }
 
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            ArrayList ret = new ArrayList(nodeList.Count);
+
+            foreach (XmlNode node in nodeList)
+            {
+                if (node.NodeType == XmlNodeType.Element)
+                    ret.Add(new XmlHierarchyData(node));
+            }
+
+            return ret.GetEnumerator();
+        }
+
+        IHierarchyData IHierarchicalEnumerable.GetHierarchyData(object enumeratedItem)
+        {
+            return (IHierarchyData)enumeratedItem;
+        }
+
+        XmlNodeList nodeList;
+    }
+}

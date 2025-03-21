@@ -12,22 +12,21 @@ namespace System.Activities.XamlIntegration
     using System.Xml.Serialization;
 
     // Exposes a DC-serializable type as IXmlSerializable so it can be serialized to XAML using x:XData
-    internal class NetDataContractXmlSerializable<T> : IXmlSerializable where T : class
+    internal class NetDataContractXmlSerializable<T> : IXmlSerializable
+        where T : class
     {
         public NetDataContractXmlSerializable(T value = null)
         {
             this.Value = value;
         }
 
-        public T Value
-        {
-            get;
-            private set;
-        }
+        public T Value { get; private set; }
 
         public XmlSchema GetSchema()
         {
-            throw FxTrace.Exception.AsError(new NotSupportedException(SR.CannotGenerateSchemaForXmlSerializable(typeof(T).Name)));
+            throw FxTrace.Exception.AsError(
+                new NotSupportedException(SR.CannotGenerateSchemaForXmlSerializable(typeof(T).Name))
+            );
         }
 
         public void ReadXml(XmlReader reader)
@@ -48,7 +47,7 @@ namespace System.Activities.XamlIntegration
         private NetDataContractSerializer CreateSerializer()
         {
             NetDataContractSerializer result = new NetDataContractSerializer();
- 
+
             // The version-tolerant fallback of Simple is closer to the semantics of XAML
             result.AssemblyFormat = FormatterAssemblyStyle.Simple;
             return result;

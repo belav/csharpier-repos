@@ -34,7 +34,9 @@ namespace System.Text.Json.Nodes.Tests
         public static void FromElement_WrongNodeTypeThrows(string json)
         {
             using (JsonDocument document = JsonDocument.Parse(json))
-            Assert.Throws<InvalidOperationException>(() => JsonArray.Create(document.RootElement));
+                Assert.Throws<InvalidOperationException>(() =>
+                    JsonArray.Create(document.RootElement)
+                );
         }
 
         [Fact]
@@ -74,7 +76,7 @@ namespace System.Text.Json.Nodes.Tests
 
             var options = new JsonSerializerOptions
             {
-                NumberHandling = Serialization.JsonNumberHandling.WriteAsString
+                NumberHandling = Serialization.JsonNumberHandling.WriteAsString,
             };
 
             // With options.
@@ -287,8 +289,10 @@ namespace System.Text.Json.Nodes.Tests
             };
 
             var strangeWordsJsonArray = new JsonArray();
-            strangeWords.Where(word => word.Length < 10).
-                ToList().ForEach(str => strangeWordsJsonArray.Add(JsonValue.Create(str)));
+            strangeWords
+                .Where(word => word.Length < 10)
+                .ToList()
+                .ForEach(str => strangeWordsJsonArray.Add(JsonValue.Create(str)));
 
             Assert.Equal(2, strangeWordsJsonArray.Count);
 
@@ -310,26 +314,26 @@ namespace System.Text.Json.Nodes.Tests
                     new JsonArray
                     {
                         new JsonArray { 0, 0, 0 },
-                        new JsonArray { 0, 0, 1 }
+                        new JsonArray { 0, 0, 1 },
                     },
                     new JsonArray
                     {
                         new JsonArray { 0, 1, 0 },
-                        new JsonArray { 0, 1, 1 }
-                    }
+                        new JsonArray { 0, 1, 1 },
+                    },
                 },
                 new JsonArray
                 {
                     new JsonArray
                     {
                         new JsonArray { 1, 0, 0 },
-                        new JsonArray { 1, 0, 1 }
+                        new JsonArray { 1, 0, 1 },
                     },
                     new JsonArray
                     {
                         new JsonArray { 1, 1, 0 },
-                        new JsonArray { 1, 1, 1 }
-                    }
+                        new JsonArray { 1, 1, 1 },
+                    },
                 },
             };
 
@@ -382,9 +386,18 @@ namespace System.Text.Json.Nodes.Tests
         {
             var issues = new JsonObject
             {
-                { "features", new JsonArray { "new functionality 1", "new functionality 2" } },
-                { "bugs", new JsonArray { "bug 123", "bug 4566", "bug 821" } },
-                { "tests", new JsonArray { "code coverage" } },
+                {
+                    "features",
+                    new JsonArray { "new functionality 1", "new functionality 2" }
+                },
+                {
+                    "bugs",
+                    new JsonArray { "bug 123", "bug 4566", "bug 821" }
+                },
+                {
+                    "tests",
+                    new JsonArray { "code coverage" }
+                },
             };
 
             issues["bugs"].AsArray().Add("bug 12356");
@@ -480,22 +493,22 @@ namespace System.Text.Json.Nodes.Tests
         {
             string arrayText = "[\"elem0\",\"elem1\"]";
             JsonArray node = Assert.IsType<JsonArray>(JsonNode.Parse(arrayText));
-            Parallel.For(0, 128, i =>
-            {
-                Assert.Equal("elem0", (string)node[0]);
-                Assert.Equal("elem1", (string)node[1]);
-            });
+            Parallel.For(
+                0,
+                128,
+                i =>
+                {
+                    Assert.Equal("elem0", (string)node[0]);
+                    Assert.Equal("elem1", (string)node[1]);
+                }
+            );
         }
 
         [Fact]
         public static void DeepClone()
         {
             var nestedArray = new JsonArray("elem0", "elem1");
-            var nestedJsonObj = new JsonObject()
-            {
-                { "Nine", 9 },
-                { "Name", "def"}
-            };
+            var nestedJsonObj = new JsonObject() { { "Nine", 9 }, { "Name", "def" } };
 
             var array = new JsonArray();
             array.Add(10);
@@ -654,7 +667,11 @@ namespace System.Text.Json.Nodes.Tests
         {
             var student1 = new Student();
             var student2 = new Student();
-            JsonArray jsonArray = new JsonArray(JsonValue.Create(student1), null, JsonValue.Create(student2));
+            JsonArray jsonArray = new JsonArray(
+                JsonValue.Create(student1),
+                null,
+                JsonValue.Create(student2)
+            );
 
             IEnumerable<Student> values = jsonArray.GetValues<Student>();
 

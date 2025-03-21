@@ -18,7 +18,11 @@ public class HttpLoggingEndpointConventionBuilderTests
         var responseBodyLogLimit = 94;
 
         // Act
-        testConventionBuilder.WithHttpLogging(loggingFields, requestBodyLogLimit, responseBodyLogLimit);
+        testConventionBuilder.WithHttpLogging(
+            loggingFields,
+            requestBodyLogLimit,
+            responseBodyLogLimit
+        );
 
         // Assert
         var httpLogingAttribute = Assert.Single(testConventionBuilder.Conventions);
@@ -42,11 +46,13 @@ public class HttpLoggingEndpointConventionBuilderTests
 
         // Act & Assert
         var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            testConventionBuilder.WithHttpLogging(HttpLoggingFields.None, requestBodyLogLimit: -1));
+            testConventionBuilder.WithHttpLogging(HttpLoggingFields.None, requestBodyLogLimit: -1)
+        );
         Assert.Equal("requestBodyLogLimit", ex.ParamName);
 
         ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
-            testConventionBuilder.WithHttpLogging(HttpLoggingFields.None, responseBodyLogLimit: -1));
+            testConventionBuilder.WithHttpLogging(HttpLoggingFields.None, responseBodyLogLimit: -1)
+        );
         Assert.Equal("responseBodyLogLimit", ex.ParamName);
     }
 }
@@ -61,7 +67,8 @@ internal class TestEndpointBuilder : EndpointBuilder
 
 internal class TestEndpointConventionBuilder : IEndpointConventionBuilder
 {
-    public IList<Action<EndpointBuilder>> Conventions { get; } = new List<Action<EndpointBuilder>>();
+    public IList<Action<EndpointBuilder>> Conventions { get; } =
+        new List<Action<EndpointBuilder>>();
 
     public void Add(Action<EndpointBuilder> convention)
     {

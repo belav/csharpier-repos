@@ -13,8 +13,8 @@ internal static class ActionAttributeRouteModel
     {
         // Loop through all attribute routes defined on the controller.
         // These perform a cross-product with all of the action-level attribute routes.
-        var controllerSelectors = actionModel.Controller.Selectors
-            .Where(sm => sm.AttributeRouteModel != null)
+        var controllerSelectors = actionModel
+            .Controller.Selectors.Where(sm => sm.AttributeRouteModel != null)
             .ToList();
 
         // We also include metadata and action constraints from the controller
@@ -68,7 +68,8 @@ internal static class ActionAttributeRouteModel
 
                 selector.AttributeRouteModel = AttributeRouteModel.CombineAttributeRouteModel(
                     left: null,
-                    right: actionRouteModel);
+                    right: actionRouteModel
+                );
 
                 AddActionConstraints(selector, additionalSelector?.ActionConstraints);
                 AddEndpointMetadata(selector, additionalSelector?.EndpointMetadata);
@@ -86,7 +87,8 @@ internal static class ActionAttributeRouteModel
 
                     selector.AttributeRouteModel = AttributeRouteModel.CombineAttributeRouteModel(
                         controllerSelector.AttributeRouteModel,
-                        actionRouteModel);
+                        actionRouteModel
+                    );
 
                     AddActionConstraints(selector, controllerSelector.ActionConstraints);
                     AddEndpointMetadata(selector, controllerSelector.EndpointMetadata);
@@ -105,7 +107,8 @@ internal static class ActionAttributeRouteModel
 
                 selector.AttributeRouteModel = AttributeRouteModel.CombineAttributeRouteModel(
                     left: null,
-                    right: actionRouteModel);
+                    right: actionRouteModel
+                );
 
                 AddActionConstraints(selector, additionalSelector?.ActionConstraints);
                 AddEndpointMetadata(selector, additionalSelector?.EndpointMetadata);
@@ -115,7 +118,10 @@ internal static class ActionAttributeRouteModel
         }
     }
 
-    private static void AddActionConstraints(SelectorModel selector, IList<IActionConstraintMetadata>? actionConstraints)
+    private static void AddActionConstraints(
+        SelectorModel selector,
+        IList<IActionConstraintMetadata>? actionConstraints
+    )
     {
         if (actionConstraints != null)
         {
@@ -126,7 +132,10 @@ internal static class ActionAttributeRouteModel
         }
     }
 
-    private static void AddEndpointMetadata(SelectorModel selector, IList<object>? controllerMetadata)
+    private static void AddEndpointMetadata(
+        SelectorModel selector,
+        IList<object>? controllerMetadata
+    )
     {
         if (controllerMetadata != null)
         {
@@ -140,10 +149,14 @@ internal static class ActionAttributeRouteModel
         }
     }
 
-    public static IEnumerable<(AttributeRouteModel? route, SelectorModel actionSelector, SelectorModel? controllerSelector)> GetAttributeRoutes(ActionModel actionModel)
+    public static IEnumerable<(
+        AttributeRouteModel? route,
+        SelectorModel actionSelector,
+        SelectorModel? controllerSelector
+    )> GetAttributeRoutes(ActionModel actionModel)
     {
-        var controllerAttributeRoutes = actionModel.Controller.Selectors
-            .Where(sm => sm.AttributeRouteModel != null)
+        var controllerAttributeRoutes = actionModel
+            .Controller.Selectors.Where(sm => sm.AttributeRouteModel != null)
             .Select(sm => sm.AttributeRouteModel)
             .ToList();
 
@@ -158,7 +171,8 @@ internal static class ActionAttributeRouteModel
             {
                 var route = AttributeRouteModel.CombineAttributeRouteModel(
                     left: null,
-                    right: actionRouteModel);
+                    right: actionRouteModel
+                );
 
                 yield return (route, actionSelectorModel, null);
             }
@@ -171,7 +185,8 @@ internal static class ActionAttributeRouteModel
 
                     var route = AttributeRouteModel.CombineAttributeRouteModel(
                         controllerSelector.AttributeRouteModel,
-                        actionRouteModel);
+                        actionRouteModel
+                    );
 
                     yield return (route, actionSelectorModel, controllerSelector);
                 }
@@ -180,7 +195,8 @@ internal static class ActionAttributeRouteModel
             {
                 var route = AttributeRouteModel.CombineAttributeRouteModel(
                     left: null,
-                    right: actionRouteModel);
+                    right: actionRouteModel
+                );
 
                 yield return (route, actionSelectorModel, null);
             }

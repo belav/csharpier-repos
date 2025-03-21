@@ -1,15 +1,16 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
-namespace System.Runtime {
+namespace System.Runtime
+{
     using System;
+    using System.Diagnostics.Contracts;
     using System.Runtime.CompilerServices;
     using System.Runtime.ConstrainedExecution;
     using System.Security.Permissions;
-    using System.Diagnostics.Contracts;
 
     // These settings are the same format as in clr\src\vm\gcpriv.h
     // make sure you change that file if you change this file!
@@ -18,72 +19,72 @@ namespace System.Runtime {
     public enum GCLargeObjectHeapCompactionMode
     {
         Default = 1,
-        CompactOnce = 2
+        CompactOnce = 2,
     }
 
     [Serializable]
     public enum GCLatencyMode
     {
-        Batch = 0, 
+        Batch = 0,
         Interactive = 1,
         LowLatency = 2,
         SustainedLowLatency = 3,
-        NoGCRegion = 4
+        NoGCRegion = 4,
     }
 
-    public static class GCSettings 
+    public static class GCSettings
     {
         enum SetLatencyModeStatus
         {
             Succeeded = 0,
-            NoGCInProgress = 1 // NoGCRegion is in progress, can't change pause mode.
+            NoGCInProgress = 1, // NoGCRegion is in progress, can't change pause mode.
         };
 
         public static GCLatencyMode LatencyMode
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+            [System.Security.SecuritySafeCritical] // auto-generated
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            get 
-            {
-                return (GCLatencyMode)(GC.GetGCLatencyMode());
-            }
-
+            get { return (GCLatencyMode)(GC.GetGCLatencyMode()); }
             // We don't want to allow this API when hosted.
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             [HostProtection(MayLeakOnAbort = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            set 
+            set
             {
                 if ((value < GCLatencyMode.Batch) || (value > GCLatencyMode.SustainedLowLatency))
                 {
-                    throw new ArgumentOutOfRangeException(Environment.GetResourceString("ArgumentOutOfRange_Enum"));
+                    throw new ArgumentOutOfRangeException(
+                        Environment.GetResourceString("ArgumentOutOfRange_Enum")
+                    );
                 }
                 Contract.EndContractBlock();
 
                 if (GC.SetGCLatencyMode((int)value) == (int)SetLatencyModeStatus.NoGCInProgress)
-                    throw new InvalidOperationException("The NoGCRegion mode is in progress. End it and then set a different mode.");
+                    throw new InvalidOperationException(
+                        "The NoGCRegion mode is in progress. End it and then set a different mode."
+                    );
             }
         }
 
         public static GCLargeObjectHeapCompactionMode LargeObjectHeapCompactionMode
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
+            [System.Security.SecuritySafeCritical] // auto-generated
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            get 
-            {
-                return (GCLargeObjectHeapCompactionMode)(GC.GetLOHCompactionMode());
-            }
-
+            get { return (GCLargeObjectHeapCompactionMode)(GC.GetLOHCompactionMode()); }
             // We don't want to allow this API when hosted.
-            [System.Security.SecurityCritical]  // auto-generated_required
+            [System.Security.SecurityCritical] // auto-generated_required
             [HostProtection(MayLeakOnAbort = true)]
             [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-            set 
+            set
             {
-                if ((value < GCLargeObjectHeapCompactionMode.Default) || 
-                    (value > GCLargeObjectHeapCompactionMode.CompactOnce))
+                if (
+                    (value < GCLargeObjectHeapCompactionMode.Default)
+                    || (value > GCLargeObjectHeapCompactionMode.CompactOnce)
+                )
                 {
-                    throw new ArgumentOutOfRangeException(Environment.GetResourceString("ArgumentOutOfRange_Enum"));
+                    throw new ArgumentOutOfRangeException(
+                        Environment.GetResourceString("ArgumentOutOfRange_Enum")
+                    );
                 }
                 Contract.EndContractBlock();
 
@@ -91,12 +92,10 @@ namespace System.Runtime {
             }
         }
 
-        public static bool IsServerGC 
+        public static bool IsServerGC
         {
-            [System.Security.SecuritySafeCritical]  // auto-generated
-            get {
-                return GC.IsServerGC();
-            }
-        }            
+            [System.Security.SecuritySafeCritical] // auto-generated
+            get { return GC.IsServerGC(); }
+        }
     }
 }

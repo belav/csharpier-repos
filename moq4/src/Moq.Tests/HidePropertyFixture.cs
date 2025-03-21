@@ -17,9 +17,7 @@ namespace Moq.Tests
             public new virtual int Prop { get; }
         }
 
-        public class C : B
-        {
-        }
+        public class C : B { }
 
         [Fact]
         public void SetupsDerivedProperty()

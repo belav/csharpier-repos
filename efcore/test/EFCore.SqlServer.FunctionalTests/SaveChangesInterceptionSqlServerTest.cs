@@ -8,9 +8,7 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInterceptionTestBase
 {
     protected SaveChangesInterceptionSqlServerTestBase(InterceptionSqlServerFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(false, false, false)]
@@ -21,7 +19,11 @@ public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInte
     [InlineData(true, false, true)]
     [InlineData(false, true, true)]
     [InlineData(true, true, true)]
-    public virtual async Task Intercept_concurrency_with_relational_specific_data(bool async, bool inject, bool noAcceptChanges)
+    public virtual async Task Intercept_concurrency_with_relational_specific_data(
+        bool async,
+        bool inject,
+        bool noAcceptChanges
+    )
     {
         var saveChangesInterceptor = new RelationalConcurrencySaveChangesInterceptor();
         var commandInterceptor = new TestCommandInterceptor();
@@ -80,7 +82,10 @@ public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInte
         public Guid CommandId { get; set; }
         public Guid ConnectionId { get; set; }
 
-        public override InterceptionResult ThrowingConcurrencyException(ConcurrencyExceptionEventData eventData, InterceptionResult result)
+        public override InterceptionResult ThrowingConcurrencyException(
+            ConcurrencyExceptionEventData eventData,
+            InterceptionResult result
+        )
         {
             RecordEventData((RelationalConcurrencyExceptionEventData)eventData);
 
@@ -90,7 +95,8 @@ public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInte
         public override ValueTask<InterceptionResult> ThrowingConcurrencyExceptionAsync(
             ConcurrencyExceptionEventData eventData,
             InterceptionResult result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             RecordEventData((RelationalConcurrencyExceptionEventData)eventData);
 
@@ -122,7 +128,8 @@ public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInte
         public virtual DbDataReader ReaderExecuted(
             DbCommand command,
             CommandExecutedEventData eventData,
-            DbDataReader result)
+            DbDataReader result
+        )
         {
             RecordEventData(command, eventData, result);
 
@@ -133,14 +140,19 @@ public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInte
             DbCommand command,
             CommandExecutedEventData eventData,
             DbDataReader result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             RecordEventData(command, eventData, result);
 
             return ValueTask.FromResult(result);
         }
 
-        private void RecordEventData(DbCommand command, CommandExecutedEventData eventData, DbDataReader result)
+        private void RecordEventData(
+            DbCommand command,
+            CommandExecutedEventData eventData,
+            DbDataReader result
+        )
         {
             DataReader = result;
             Command = command;
@@ -152,37 +164,38 @@ public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInte
 
     public abstract class InterceptionSqlServerFixtureBase : InterceptionFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<IInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkSqlServer(), injectedInterceptors);
+            IEnumerable<IInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkSqlServer(),
+                injectedInterceptors
+            );
 
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)
         {
-            new SqlServerDbContextOptionsBuilder(base.AddOptions(builder))
-                .ExecutionStrategy(d => new SqlServerExecutionStrategy(d));
+            new SqlServerDbContextOptionsBuilder(base.AddOptions(builder)).ExecutionStrategy(
+                d => new SqlServerExecutionStrategy(d)
+            );
             return builder;
         }
     }
 
     public class SaveChangesInterceptionSqlServerTest
-        : SaveChangesInterceptionSqlServerTestBase, IClassFixture<SaveChangesInterceptionSqlServerTest.InterceptionSqlServerFixture>
+        : SaveChangesInterceptionSqlServerTestBase,
+            IClassFixture<SaveChangesInterceptionSqlServerTest.InterceptionSqlServerFixture>
     {
         public SaveChangesInterceptionSqlServerTest(InterceptionSqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {
-            protected override string StoreName
-                => "SaveChangesInterception";
+            protected override string StoreName => "SaveChangesInterception";
 
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => false;
+            protected override bool ShouldSubscribeToDiagnosticListener => false;
         }
     }
 
@@ -190,18 +203,16 @@ public abstract class SaveChangesInterceptionSqlServerTestBase : SaveChangesInte
         : SaveChangesInterceptionSqlServerTestBase,
             IClassFixture<SaveChangesInterceptionWithDiagnosticsSqlServerTest.InterceptionSqlServerFixture>
     {
-        public SaveChangesInterceptionWithDiagnosticsSqlServerTest(InterceptionSqlServerFixture fixture)
-            : base(fixture)
-        {
-        }
+        public SaveChangesInterceptionWithDiagnosticsSqlServerTest(
+            InterceptionSqlServerFixture fixture
+        )
+            : base(fixture) { }
 
         public class InterceptionSqlServerFixture : InterceptionSqlServerFixtureBase
         {
-            protected override string StoreName
-                => "SaveChangesInterceptionWithDiagnostics";
+            protected override string StoreName => "SaveChangesInterceptionWithDiagnostics";
 
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => true;
+            protected override bool ShouldSubscribeToDiagnosticListener => true;
         }
     }
 }

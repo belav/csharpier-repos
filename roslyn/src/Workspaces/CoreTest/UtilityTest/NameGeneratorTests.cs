@@ -49,24 +49,50 @@ public class NameGeneratorTests
     [InlineData("Test", new[] { "test", "test", "Test1" }, "Test2")]
     [InlineData("Test", new[] { "test", "test1", "test2" }, "Test3")]
     [InlineData("Test", new[] { "test", "test1", "test3" }, "Test2")]
-    public void EnsureUniquenessCaseInsensitive(string baseName, string[] reservedNames, string expectedResult)
+    public void EnsureUniquenessCaseInsensitive(
+        string baseName,
+        string[] reservedNames,
+        string expectedResult
+    )
     {
-        var result = NameGenerator.EnsureUniqueness(baseName, reservedNames, isCaseSensitive: false);
+        var result = NameGenerator.EnsureUniqueness(
+            baseName,
+            reservedNames,
+            isCaseSensitive: false
+        );
         Assert.Equal(expectedResult, result);
     }
 
     [Theory]
-    [InlineData(new[] { "test", "Test", "test", "Test" }, new[] { "test1", "Test1", "test2", "Test2" })]
+    [InlineData(
+        new[] { "test", "Test", "test", "Test" },
+        new[] { "test1", "Test1", "test2", "Test2" }
+    )]
     public void EnsureUniquenessInPlaceCaseSensitive(string[] names, string[] expectedResult)
     {
-        VerifyEnsureUniquenessInPlace(names, isFixed: null, canUse: null, isCaseSensitive: true, expectedResult);
+        VerifyEnsureUniquenessInPlace(
+            names,
+            isFixed: null,
+            canUse: null,
+            isCaseSensitive: true,
+            expectedResult
+        );
     }
 
     [Theory]
-    [InlineData(new[] { "test", "Test", "test", "Test" }, new[] { "test1", "Test2", "test3", "Test4" })]
+    [InlineData(
+        new[] { "test", "Test", "test", "Test" },
+        new[] { "test1", "Test2", "test3", "Test4" }
+    )]
     public void EnsureUniquenessInPlaceNotCaseSensitive(string[] names, string[] expectedResult)
     {
-        VerifyEnsureUniquenessInPlace(names, isFixed: null, canUse: null, isCaseSensitive: false, expectedResult);
+        VerifyEnsureUniquenessInPlace(
+            names,
+            isFixed: null,
+            canUse: null,
+            isCaseSensitive: false,
+            expectedResult
+        );
     }
 
     [Theory]
@@ -75,26 +101,53 @@ public class NameGeneratorTests
     {
         var isFixed = Enumerable.Repeat(true, names.Length).ToArray();
 
-        VerifyEnsureUniquenessInPlace(names, isFixed, canUse: null, isCaseSensitive: true, expectedResult);
+        VerifyEnsureUniquenessInPlace(
+            names,
+            isFixed,
+            canUse: null,
+            isCaseSensitive: true,
+            expectedResult
+        );
     }
 
     [Theory]
     [InlineData(new[] { "test", "test", "test" }, new[] { "test1", "test2", "test3" })]
     public void EnsureUniquenessInPlaceNoneFixed(string[] names, string[] expectedResult)
     {
-        VerifyEnsureUniquenessInPlace(names, isFixed: null, canUse: null, isCaseSensitive: true, expectedResult);
+        VerifyEnsureUniquenessInPlace(
+            names,
+            isFixed: null,
+            canUse: null,
+            isCaseSensitive: true,
+            expectedResult
+        );
     }
 
     [Theory]
     [InlineData(new[] { "test", "test", "test" }, new[] { "test10", "test11", "test12" })]
-    public void EnsureUniquenessInPlaceCanUseNotIncludingFirst10(string[] names, string[] expectedResult)
+    public void EnsureUniquenessInPlaceCanUseNotIncludingFirst10(
+        string[] names,
+        string[] expectedResult
+    )
     {
         Func<string, bool> canUse = (s) => s.Length > 5;
 
-        VerifyEnsureUniquenessInPlace(names, isFixed: null, canUse, isCaseSensitive: true, expectedResult);
+        VerifyEnsureUniquenessInPlace(
+            names,
+            isFixed: null,
+            canUse,
+            isCaseSensitive: true,
+            expectedResult
+        );
     }
 
-    private static void VerifyEnsureUniquenessInPlace(string[] names, bool[]? isFixed, Func<string, bool>? canUse, bool isCaseSensitive, string[] expectedResult)
+    private static void VerifyEnsureUniquenessInPlace(
+        string[] names,
+        bool[]? isFixed,
+        Func<string, bool>? canUse,
+        bool isCaseSensitive,
+        string[] expectedResult
+    )
     {
         var namesBuilder = new ArrayBuilder<string>();
         namesBuilder.AddRange(names);
@@ -102,7 +155,12 @@ public class NameGeneratorTests
         var isFixedBuilder = new ArrayBuilder<bool>();
         isFixedBuilder.AddRange(isFixed ?? Enumerable.Repeat(false, names.Length));
 
-        NameGenerator.EnsureUniquenessInPlace(namesBuilder, isFixedBuilder, canUse, isCaseSensitive);
+        NameGenerator.EnsureUniquenessInPlace(
+            namesBuilder,
+            isFixedBuilder,
+            canUse,
+            isCaseSensitive
+        );
 
         Assert.True(Enumerable.SequenceEqual(expectedResult, namesBuilder));
     }

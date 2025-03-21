@@ -11,7 +11,7 @@ namespace System.Diagnostics.Tracing
         private enum MetadataTag
         {
             Opcode = 1,
-            ParameterPayload = 2
+            ParameterPayload = 2,
         }
 
         public static EventPipeMetadataGenerator Instance = new EventPipeMetadataGenerator();
@@ -24,8 +24,12 @@ namespace System.Diagnostics.Tracing
             EventParameterInfo[] eventParams = new EventParameterInfo[parameters.Length];
             for (int i = 0; i < parameters.Length; i++)
             {
-                EventParameterInfo.GetTypeInfoFromType(parameters[i].ParameterType, out TraceLoggingTypeInfo? paramTypeInfo);
-                eventParams[i].SetInfo(parameters[i].Name!, parameters[i].ParameterType, paramTypeInfo);
+                EventParameterInfo.GetTypeInfoFromType(
+                    parameters[i].ParameterType,
+                    out TraceLoggingTypeInfo? paramTypeInfo
+                );
+                eventParams[i]
+                    .SetInfo(parameters[i].Name!, parameters[i].ParameterType, paramTypeInfo);
             }
 
             return GenerateMetadata(
@@ -35,7 +39,8 @@ namespace System.Diagnostics.Tracing
                 eventMetadata.Descriptor.Level,
                 eventMetadata.Descriptor.Version,
                 (EventOpcode)eventMetadata.Descriptor.Opcode,
-                eventParams);
+                eventParams
+            );
         }
 
         public byte[]? GenerateEventMetadata(
@@ -45,7 +50,8 @@ namespace System.Diagnostics.Tracing
             EventLevel level,
             uint version,
             EventOpcode opcode,
-            TraceLoggingEventTypes eventTypes)
+            TraceLoggingEventTypes eventTypes
+        )
         {
             TraceLoggingTypeInfo[] typeInfos = eventTypes.typeInfos;
             string[]? paramNames = eventTypes.paramNames;
@@ -60,7 +66,15 @@ namespace System.Diagnostics.Tracing
                 eventParams[i].SetInfo(paramName, typeInfos[i].DataType, typeInfos[i]);
             }
 
-            return GenerateMetadata(eventId, eventName, (long)keywords, (uint)level, version, opcode, eventParams);
+            return GenerateMetadata(
+                eventId,
+                eventName,
+                (long)keywords,
+                (uint)level,
+                version,
+                opcode,
+                eventParams
+            );
         }
 
         internal unsafe byte[]? GenerateMetadata(
@@ -70,7 +84,8 @@ namespace System.Diagnostics.Tracing
             uint level,
             uint version,
             EventOpcode opcode,
-            EventParameterInfo[] parameters)
+            EventParameterInfo[] parameters
+        )
         {
             byte[]? metadata = null;
             bool hasV2ParameterTypes = false;
@@ -89,7 +104,9 @@ namespace System.Diagnostics.Tracing
                 // Check for an empty payload.
                 // Write<T> calls with no arguments by convention have a parameter of
                 // type NullTypeInfo which is serialized as nothing.
-                if ((parameters.Length == 1) && (parameters[0].ParameterType == typeof(EmptyStruct)))
+                if (
+                    (parameters.Length == 1) && (parameters[0].ParameterType == typeof(EmptyStruct))
+                )
                 {
                     parameters = Array.Empty<EventParameterInfo>();
                 }
@@ -108,7 +125,6 @@ namespace System.Diagnostics.Tracing
 
                     v1MetadataLength += (uint)pMetadataLength;
                 }
-
 
                 if (hasV2ParameterTypes)
                 {
@@ -150,7 +166,13 @@ namespace System.Diagnostics.Tracing
                     WriteToBuffer(pMetadata, totalMetadataLength, ref offset, (uint)eventId);
                     fixed (char* pEventName = eventName)
                     {
-                        WriteToBuffer(pMetadata, totalMetadataLength, ref offset, (byte*)pEventName, ((uint)eventName.Length + 1) * 2);
+                        WriteToBuffer(
+                            pMetadata,
+                            totalMetadataLength,
+                            ref offset,
+                            (byte*)pEventName,
+                            ((uint)eventName.Length + 1) * 2
+                        );
                     }
                     WriteToBuffer(pMetadata, totalMetadataLength, ref offset, keywords);
                     WriteToBuffer(pMetadata, totalMetadataLength, ref offset, version);
@@ -164,13 +186,32 @@ namespace System.Diagnostics.Tracing
                     else
                     {
                         // Without unsupported V1 types we can write all the params now.
-                        WriteToBuffer(pMetadata, totalMetadataLength, ref offset, (uint)parameters.Length);
+                        WriteToBuffer(
+                            pMetadata,
+                            totalMetadataLength,
+                            ref offset,
+                            (uint)parameters.Length
+                        );
                         foreach (var parameter in parameters)
                         {
-                            if (!parameter.GenerateMetadata(pMetadata, ref offset, totalMetadataLength))
+                            if (
+                                !parameter.GenerateMetadata(
+                                    pMetadata,
+                                    ref offset,
+                                    totalMetadataLength
+                                )
+                            )
                             {
                                 // If we fail to generate metadata for any parameter, we should return the "default" metadata without any parameters
-                                return GenerateMetadata(eventId, eventName, keywords, level, version, opcode, Array.Empty<EventParameterInfo>());
+                                return GenerateMetadata(
+                                    eventId,
+                                    eventName,
+                                    keywords,
+                                    level,
+                                    version,
+                                    opcode,
+                                    Array.Empty<EventParameterInfo>()
+                                );
                             }
                         }
                     }
@@ -181,7 +222,12 @@ namespace System.Diagnostics.Tracing
                     {
                         // Size of opcode
                         WriteToBuffer(pMetadata, totalMetadataLength, ref offset, 1);
-                        WriteToBuffer(pMetadata, totalMetadataLength, ref offset, (byte)MetadataTag.Opcode);
+                        WriteToBuffer(
+                            pMetadata,
+                            totalMetadataLength,
+                            ref offset,
+                            (byte)MetadataTag.Opcode
+                        );
                         WriteToBuffer(pMetadata, totalMetadataLength, ref offset, (byte)opcode);
                     }
 
@@ -191,16 +237,40 @@ namespace System.Diagnostics.Tracing
                         // Starting with the size of the V2 payload
                         WriteToBuffer(pMetadata, totalMetadataLength, ref offset, v2MetadataLength);
                         // Now the tag to identify it as a V2 parameter payload
-                        WriteToBuffer(pMetadata, totalMetadataLength, ref offset, (byte)MetadataTag.ParameterPayload);
+                        WriteToBuffer(
+                            pMetadata,
+                            totalMetadataLength,
+                            ref offset,
+                            (byte)MetadataTag.ParameterPayload
+                        );
                         // Then the count of parameters
-                        WriteToBuffer(pMetadata, totalMetadataLength, ref offset, (uint)parameters.Length);
+                        WriteToBuffer(
+                            pMetadata,
+                            totalMetadataLength,
+                            ref offset,
+                            (uint)parameters.Length
+                        );
                         // Finally the parameters themselves
                         foreach (var parameter in parameters)
                         {
-                            if (!parameter.GenerateMetadataV2(pMetadata, ref offset, totalMetadataLength))
+                            if (
+                                !parameter.GenerateMetadataV2(
+                                    pMetadata,
+                                    ref offset,
+                                    totalMetadataLength
+                                )
+                            )
                             {
                                 // If we fail to generate metadata for any parameter, we should return the "default" metadata without any parameters
-                                return GenerateMetadata(eventId, eventName, keywords, level, version, opcode, Array.Empty<EventParameterInfo>());
+                                return GenerateMetadata(
+                                    eventId,
+                                    eventName,
+                                    keywords,
+                                    level,
+                                    version,
+                                    opcode,
+                                    Array.Empty<EventParameterInfo>()
+                                );
                             }
                         }
                     }
@@ -221,7 +291,13 @@ namespace System.Diagnostics.Tracing
 
         // Copy src to buffer and modify the offset.
         // Note: We know the buffer size ahead of time to make sure no buffer overflow.
-        internal static unsafe void WriteToBuffer(byte* buffer, uint bufferLength, ref uint offset, byte* src, uint srcLength)
+        internal static unsafe void WriteToBuffer(
+            byte* buffer,
+            uint bufferLength,
+            ref uint offset,
+            byte* src,
+            uint srcLength
+        )
         {
             Debug.Assert(bufferLength >= (offset + srcLength));
             for (int i = 0; i < srcLength; i++)
@@ -231,7 +307,13 @@ namespace System.Diagnostics.Tracing
             offset += srcLength;
         }
 
-        internal static unsafe void WriteToBuffer<T>(byte* buffer, uint bufferLength, ref uint offset, T value) where T : unmanaged
+        internal static unsafe void WriteToBuffer<T>(
+            byte* buffer,
+            uint bufferLength,
+            ref uint offset,
+            T value
+        )
+            where T : unmanaged
         {
             Debug.Assert(bufferLength >= (offset + sizeof(T)));
             *(T*)(buffer + offset) = value;
@@ -262,7 +344,12 @@ namespace System.Diagnostics.Tracing
                 //     Number of properties         : 4 bytes
                 //     Property description 0...N
                 //     Nested struct property name  : NULL-terminated string.
-                EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (uint)TypeCode.Object);
+                EventPipeMetadataGenerator.WriteToBuffer(
+                    pMetadataBlob,
+                    blobSize,
+                    ref offset,
+                    (uint)TypeCode.Object
+                );
 
                 if (!(TypeInfo is InvokeTypeInfo invokeTypeInfo))
                 {
@@ -274,7 +361,12 @@ namespace System.Diagnostics.Tracing
                 if (properties != null)
                 {
                     // Write the count of serializable properties.
-                    EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (uint)properties.Length);
+                    EventPipeMetadataGenerator.WriteToBuffer(
+                        pMetadataBlob,
+                        blobSize,
+                        ref offset,
+                        (uint)properties.Length
+                    );
 
                     foreach (PropertyAnalysis prop in properties)
                     {
@@ -287,7 +379,12 @@ namespace System.Diagnostics.Tracing
                 else
                 {
                     // This struct has zero serializable properties so we just write the property count.
-                    EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (uint)0);
+                    EventPipeMetadataGenerator.WriteToBuffer(
+                        pMetadataBlob,
+                        blobSize,
+                        ref offset,
+                        (uint)0
+                    );
                 }
 
                 // Top-level structs don't have a property name, but for simplicity we write a NULL-char to represent the name.
@@ -296,18 +393,34 @@ namespace System.Diagnostics.Tracing
             else
             {
                 // Write parameter type.
-                EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (uint)typeCode);
+                EventPipeMetadataGenerator.WriteToBuffer(
+                    pMetadataBlob,
+                    blobSize,
+                    ref offset,
+                    (uint)typeCode
+                );
 
                 // Write parameter name.
                 fixed (char* pParameterName = ParameterName)
                 {
-                    EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (byte*)pParameterName, ((uint)ParameterName.Length + 1) * 2);
+                    EventPipeMetadataGenerator.WriteToBuffer(
+                        pMetadataBlob,
+                        blobSize,
+                        ref offset,
+                        (byte*)pParameterName,
+                        ((uint)ParameterName.Length + 1) * 2
+                    );
                 }
             }
             return true;
         }
 
-        private static unsafe bool GenerateMetadataForProperty(PropertyAnalysis property, byte* pMetadataBlob, ref uint offset, uint blobSize)
+        private static unsafe bool GenerateMetadataForProperty(
+            PropertyAnalysis property,
+            byte* pMetadataBlob,
+            ref uint offset,
+            uint blobSize
+        )
         {
             Debug.Assert(property != null);
             Debug.Assert(pMetadataBlob != null);
@@ -320,14 +433,24 @@ namespace System.Diagnostics.Tracing
                 //     Number of properties         : 4 bytes
                 //     Property description 0...N
                 //     Nested struct property name  : NULL-terminated string.
-                EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (uint)TypeCode.Object);
+                EventPipeMetadataGenerator.WriteToBuffer(
+                    pMetadataBlob,
+                    blobSize,
+                    ref offset,
+                    (uint)TypeCode.Object
+                );
 
                 // Get the set of properties to be serialized.
                 PropertyAnalysis[]? properties = invokeTypeInfo.properties;
                 if (properties != null)
                 {
                     // Write the count of serializable properties.
-                    EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (uint)properties.Length);
+                    EventPipeMetadataGenerator.WriteToBuffer(
+                        pMetadataBlob,
+                        blobSize,
+                        ref offset,
+                        (uint)properties.Length
+                    );
 
                     foreach (PropertyAnalysis prop in properties)
                     {
@@ -340,13 +463,24 @@ namespace System.Diagnostics.Tracing
                 else
                 {
                     // This struct has zero serializable properties so we just write the property count.
-                    EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (uint)0);
+                    EventPipeMetadataGenerator.WriteToBuffer(
+                        pMetadataBlob,
+                        blobSize,
+                        ref offset,
+                        (uint)0
+                    );
                 }
 
                 // Write the property name.
                 fixed (char* pPropertyName = property.name)
                 {
-                    EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (byte*)pPropertyName, ((uint)property.name.Length + 1) * 2);
+                    EventPipeMetadataGenerator.WriteToBuffer(
+                        pMetadataBlob,
+                        blobSize,
+                        ref offset,
+                        (byte*)pPropertyName,
+                        ((uint)property.name.Length + 1) * 2
+                    );
                 }
             }
             else
@@ -363,12 +497,23 @@ namespace System.Diagnostics.Tracing
                 }
 
                 // Write the type code.
-                EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (uint)typeCode);
+                EventPipeMetadataGenerator.WriteToBuffer(
+                    pMetadataBlob,
+                    blobSize,
+                    ref offset,
+                    (uint)typeCode
+                );
 
                 // Write the property name.
                 fixed (char* pPropertyName = property.name)
                 {
-                    EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (byte*)pPropertyName, ((uint)property.name.Length + 1) * 2);
+                    EventPipeMetadataGenerator.WriteToBuffer(
+                        pMetadataBlob,
+                        blobSize,
+                        ref offset,
+                        (byte*)pPropertyName,
+                        ((uint)property.name.Length + 1) * 2
+                    );
                 }
             }
             return true;
@@ -378,10 +523,22 @@ namespace System.Diagnostics.Tracing
         {
             if (TypeInfo == null)
                 return false;
-            return GenerateMetadataForNamedTypeV2(ParameterName, TypeInfo, pMetadataBlob, ref offset, blobSize);
+            return GenerateMetadataForNamedTypeV2(
+                ParameterName,
+                TypeInfo,
+                pMetadataBlob,
+                ref offset,
+                blobSize
+            );
         }
 
-        private static unsafe bool GenerateMetadataForNamedTypeV2(string name, TraceLoggingTypeInfo typeInfo, byte* pMetadataBlob, ref uint offset, uint blobSize)
+        private static unsafe bool GenerateMetadataForNamedTypeV2(
+            string name,
+            TraceLoggingTypeInfo typeInfo,
+            byte* pMetadataBlob,
+            ref uint offset,
+            uint blobSize
+        )
         {
             Debug.Assert(pMetadataBlob != null);
 
@@ -393,15 +550,26 @@ namespace System.Diagnostics.Tracing
             EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, length);
 
             // Write the property name.
-            fixed (char *pPropertyName = name)
+            fixed (char* pPropertyName = name)
             {
-                EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (byte *)pPropertyName, ((uint)name.Length + 1) * 2);
+                EventPipeMetadataGenerator.WriteToBuffer(
+                    pMetadataBlob,
+                    blobSize,
+                    ref offset,
+                    (byte*)pPropertyName,
+                    ((uint)name.Length + 1) * 2
+                );
             }
 
             return GenerateMetadataForTypeV2(typeInfo, pMetadataBlob, ref offset, blobSize);
         }
 
-        private static unsafe bool GenerateMetadataForTypeV2(TraceLoggingTypeInfo? typeInfo, byte* pMetadataBlob, ref uint offset, uint blobSize)
+        private static unsafe bool GenerateMetadataForTypeV2(
+            TraceLoggingTypeInfo? typeInfo,
+            byte* pMetadataBlob,
+            ref uint offset,
+            uint blobSize
+        )
         {
             Debug.Assert(typeInfo != null);
             Debug.Assert(pMetadataBlob != null);
@@ -413,18 +581,36 @@ namespace System.Diagnostics.Tracing
                 //     TypeCode.Object              : 4 bytes
                 //     Number of properties         : 4 bytes
                 //     Property description 0...N
-                EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (uint)TypeCode.Object);
+                EventPipeMetadataGenerator.WriteToBuffer(
+                    pMetadataBlob,
+                    blobSize,
+                    ref offset,
+                    (uint)TypeCode.Object
+                );
 
                 // Get the set of properties to be serialized.
                 PropertyAnalysis[]? properties = invokeTypeInfo.properties;
                 if (properties != null)
                 {
                     // Write the count of serializable properties.
-                    EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (uint)properties.Length);
+                    EventPipeMetadataGenerator.WriteToBuffer(
+                        pMetadataBlob,
+                        blobSize,
+                        ref offset,
+                        (uint)properties.Length
+                    );
 
                     foreach (PropertyAnalysis prop in properties)
                     {
-                        if (!GenerateMetadataForNamedTypeV2(prop.name, prop.typeInfo, pMetadataBlob, ref offset, blobSize))
+                        if (
+                            !GenerateMetadataForNamedTypeV2(
+                                prop.name,
+                                prop.typeInfo,
+                                pMetadataBlob,
+                                ref offset,
+                                blobSize
+                            )
+                        )
                         {
                             return false;
                         }
@@ -433,7 +619,12 @@ namespace System.Diagnostics.Tracing
                 else
                 {
                     // This struct has zero serializable properties so we just write the property count.
-                    EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (uint)0);
+                    EventPipeMetadataGenerator.WriteToBuffer(
+                        pMetadataBlob,
+                        blobSize,
+                        ref offset,
+                        (uint)0
+                    );
                 }
             }
             else if (typeInfo is EnumerableTypeInfo enumerableTypeInfo)
@@ -441,8 +632,18 @@ namespace System.Diagnostics.Tracing
                 // Each enumerable is serialized as:
                 //     TypeCode.Array               : 4 bytes
                 //     ElementType                  : N bytes
-                EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, EventPipeTypeCodeArray);
-                GenerateMetadataForTypeV2(enumerableTypeInfo.ElementInfo, pMetadataBlob, ref offset, blobSize);
+                EventPipeMetadataGenerator.WriteToBuffer(
+                    pMetadataBlob,
+                    blobSize,
+                    ref offset,
+                    EventPipeTypeCodeArray
+                );
+                GenerateMetadataForTypeV2(
+                    enumerableTypeInfo.ElementInfo,
+                    pMetadataBlob,
+                    ref offset,
+                    blobSize
+                );
             }
             else if (typeInfo is ScalarArrayTypeInfo arrayTypeInfo)
             {
@@ -455,12 +656,22 @@ namespace System.Diagnostics.Tracing
                 }
 
                 TraceLoggingTypeInfo? elementTypeInfo;
-                if (!GetTypeInfoFromType(arrayTypeInfo.DataType.GetElementType(), out elementTypeInfo))
+                if (
+                    !GetTypeInfoFromType(
+                        arrayTypeInfo.DataType.GetElementType(),
+                        out elementTypeInfo
+                    )
+                )
                 {
                     return false;
                 }
 
-                EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, EventPipeTypeCodeArray);
+                EventPipeMetadataGenerator.WriteToBuffer(
+                    pMetadataBlob,
+                    blobSize,
+                    ref offset,
+                    EventPipeTypeCodeArray
+                );
                 GenerateMetadataForTypeV2(elementTypeInfo, pMetadataBlob, ref offset, blobSize);
             }
             else
@@ -476,7 +687,12 @@ namespace System.Diagnostics.Tracing
                 }
 
                 // Write the type code.
-                EventPipeMetadataGenerator.WriteToBuffer(pMetadataBlob, blobSize, ref offset, (uint)typeCode);
+                EventPipeMetadataGenerator.WriteToBuffer(
+                    pMetadataBlob,
+                    blobSize,
+                    ref offset,
+                    (uint)typeCode
+                );
             }
             return true;
         }
@@ -582,8 +798,9 @@ namespace System.Diagnostics.Tracing
                 //     Number of properties : 4 bytes
                 //     Property description 0...N
                 //     Nested struct property name  : NULL-terminated string.
-                size += sizeof(uint)  // TypeCode
-                     + sizeof(uint); // Property count
+                size +=
+                    sizeof(uint) // TypeCode
+                    + sizeof(uint); // Property count
 
                 // Get the set of properties to be serialized.
                 PropertyAnalysis[]? properties = typeInfo.properties;
@@ -622,8 +839,9 @@ namespace System.Diagnostics.Tracing
                 //     Number of properties : 4 bytes
                 //     Property description 0...N
                 //     Nested struct property name  : NULL-terminated string.
-                ret += sizeof(uint)  // TypeCode
-                     + sizeof(uint); // Property count
+                ret +=
+                    sizeof(uint) // TypeCode
+                    + sizeof(uint); // Property count
 
                 // Get the set of properties to be serialized.
                 PropertyAnalysis[]? properties = invokeTypeInfo.properties;
@@ -673,7 +891,10 @@ namespace System.Diagnostics.Tracing
             return GetMetadataLengthForNamedTypeV2(ParameterName, TypeInfo, out size);
         }
 
-        private static bool GetMetadataLengthForTypeV2(TraceLoggingTypeInfo? typeInfo, out uint size)
+        private static bool GetMetadataLengthForTypeV2(
+            TraceLoggingTypeInfo? typeInfo,
+            out uint size
+        )
         {
             size = 0;
             if (typeInfo == null)
@@ -687,8 +908,9 @@ namespace System.Diagnostics.Tracing
                 //     TypeCode.Object      : 4 bytes
                 //     Number of properties : 4 bytes
                 //     Property description 0...N
-                size += sizeof(uint)  // TypeCode
-                     + sizeof(uint); // Property count
+                size +=
+                    sizeof(uint) // TypeCode
+                    + sizeof(uint); // Property count
 
                 // Get the set of properties to be serialized.
                 PropertyAnalysis[]? properties = invokeTypeInfo.properties;
@@ -696,7 +918,13 @@ namespace System.Diagnostics.Tracing
                 {
                     foreach (PropertyAnalysis prop in properties)
                     {
-                        if (!GetMetadataLengthForNamedTypeV2(prop.name, prop.typeInfo, out uint typeSize))
+                        if (
+                            !GetMetadataLengthForNamedTypeV2(
+                                prop.name,
+                                prop.typeInfo,
+                                out uint typeSize
+                            )
+                        )
                         {
                             return false;
                         }
@@ -721,8 +949,13 @@ namespace System.Diagnostics.Tracing
             else if (typeInfo is ScalarArrayTypeInfo arrayTypeInfo)
             {
                 TraceLoggingTypeInfo? elementTypeInfo;
-                if (!arrayTypeInfo.DataType.HasElementType
-                    || !GetTypeInfoFromType(arrayTypeInfo.DataType.GetElementType(), out elementTypeInfo))
+                if (
+                    !arrayTypeInfo.DataType.HasElementType
+                    || !GetTypeInfoFromType(
+                        arrayTypeInfo.DataType.GetElementType(),
+                        out elementTypeInfo
+                    )
+                )
                 {
                     return false;
                 }
@@ -743,14 +976,17 @@ namespace System.Diagnostics.Tracing
             return true;
         }
 
-        private static bool GetMetadataLengthForNamedTypeV2(string name, TraceLoggingTypeInfo? typeInfo, out uint size)
+        private static bool GetMetadataLengthForNamedTypeV2(
+            string name,
+            TraceLoggingTypeInfo? typeInfo,
+            out uint size
+        )
         {
             // Named type is serialized
             //     SizeOfTypeDescription    : 4 bytes
             //     Name                     : NULL-terminated UTF16 string
             //     Type                     : N bytes
-            size = (uint)(sizeof(uint) +
-                   ((name.Length + 1) * 2));
+            size = (uint)(sizeof(uint) + ((name.Length + 1) * 2));
 
             if (!GetMetadataLengthForTypeV2(typeInfo, out uint typeSize))
             {

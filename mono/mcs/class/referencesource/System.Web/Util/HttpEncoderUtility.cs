@@ -10,20 +10,23 @@
  * Copyright (c) 2009 Microsoft Corporation
  */
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     using System;
     using System.Web;
 
-    internal static class HttpEncoderUtility {
-
-        public static int HexToInt(char h) {
-            return (h >= '0' && h <= '9') ? h - '0' :
-            (h >= 'a' && h <= 'f') ? h - 'a' + 10 :
-            (h >= 'A' && h <= 'F') ? h - 'A' + 10 :
-            -1;
+    internal static class HttpEncoderUtility
+    {
+        public static int HexToInt(char h)
+        {
+            return (h >= '0' && h <= '9') ? h - '0'
+                : (h >= 'a' && h <= 'f') ? h - 'a' + 10
+                : (h >= 'A' && h <= 'F') ? h - 'A' + 10
+                : -1;
         }
 
-        public static char IntToHex(int n) {
+        public static char IntToHex(int n)
+        {
             Debug.Assert(n < 0x10);
 
             if (n <= 9)
@@ -33,11 +36,13 @@ namespace System.Web.Util {
         }
 
         // Set of safe chars, from RFC 1738.4 minus '+'
-        public static bool IsUrlSafeChar(char ch) {
+        public static bool IsUrlSafeChar(char ch)
+        {
             if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || (ch >= '0' && ch <= '9'))
                 return true;
 
-            switch (ch) {
+            switch (ch)
+            {
                 case '-':
                 case '_':
                 case '.':
@@ -52,11 +57,11 @@ namespace System.Web.Util {
         }
 
         //  Helper to encode spaces only
-        internal static String UrlEncodeSpaces(string str) {
+        internal static String UrlEncodeSpaces(string str)
+        {
             if (str != null && str.IndexOf(' ') >= 0)
                 str = str.Replace(" ", "%20");
             return str;
         }
-
     }
 }

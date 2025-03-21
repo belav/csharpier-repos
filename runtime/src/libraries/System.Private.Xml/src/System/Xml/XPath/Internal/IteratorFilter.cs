@@ -25,9 +25,19 @@ namespace MS.Internal.Xml.XPath
             _position = it._position;
         }
 
-        public override XPathNodeIterator Clone() { return new IteratorFilter(this); }
-        public override XPathNavigator? Current { get { return _innerIterator.Current; } }
-        public override int CurrentPosition { get { return _position; } }
+        public override XPathNodeIterator Clone()
+        {
+            return new IteratorFilter(this);
+        }
+
+        public override XPathNavigator? Current
+        {
+            get { return _innerIterator.Current; }
+        }
+        public override int CurrentPosition
+        {
+            get { return _position; }
+        }
 
         public override bool MoveNext()
         {

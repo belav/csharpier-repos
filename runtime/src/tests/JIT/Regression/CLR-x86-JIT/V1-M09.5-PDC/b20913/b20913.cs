@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Bug
 {
     using System;

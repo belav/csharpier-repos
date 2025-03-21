@@ -25,11 +25,15 @@ namespace TestWindowsOsShimsApp
                 Console.WriteLine($"Detected true OS version: {osVersion.Major}.{osVersion.Minor}");
                 if (OsVersionIsNewerThan(osVersion))
                 {
-                    Console.WriteLine($"Reported OS version is newer or equal to the true OS version - no shims.");
+                    Console.WriteLine(
+                        $"Reported OS version is newer or equal to the true OS version - no shims."
+                    );
                 }
                 else
                 {
-                    Console.WriteLine($"Reported OS version is lower than the true OS version - shims in use.");
+                    Console.WriteLine(
+                        $"Reported OS version is lower than the true OS version - shims in use."
+                    );
                 }
             }
 #endif
@@ -39,12 +43,12 @@ namespace TestWindowsOsShimsApp
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct OSVERSIONINFOEX
         {
-
             internal uint dwOSVersionInfoSize;
             internal uint dwMajorVersion;
             internal uint dwMinorVersion;
             internal uint dwBuildNumber;
             internal uint dwPlatformId;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)] //
             internal string szCSDVersion;
             internal ushort wServicePackMajor;
@@ -63,7 +67,7 @@ namespace TestWindowsOsShimsApp
             VER_LESS = 4,
             VER_LESS_EQUAL = 5,
             VER_AND = 6,
-            VER_OR = 7
+            VER_OR = 7,
         }
 
         [Flags]
@@ -76,10 +80,10 @@ namespace TestWindowsOsShimsApp
             VER_SERVICEPACKMINOR = 0x0000010,
             VER_SERVICEPACKMAJOR = 0x0000020,
             VER_SUITENAME = 0x0000040,
-            VER_PRODUCT_TYPE = 0x0000080
+            VER_PRODUCT_TYPE = 0x0000080,
         }
 
-        [StructLayout(LayoutKind.Sequential, CharSet=CharSet.Unicode)]
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal unsafe struct RTL_OSVERSIONINFOEX
         {
             internal uint dwOSVersionInfoSize;
@@ -90,17 +94,25 @@ namespace TestWindowsOsShimsApp
             internal fixed char szCSDVersion[128];
         }
 
-        [DllImport("ntdll.dll", ExactSpelling=true)]
+        [DllImport("ntdll.dll", ExactSpelling = true)]
         private static extern int RtlGetVersion(ref RTL_OSVERSIONINFOEX lpVersionInformation);
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        private static extern bool VerifyVersionInfo(ref OSVERSIONINFOEX lpVersionInfo, TypeMask dwTypeMask, ulong dwlConditionMask);
+        private static extern bool VerifyVersionInfo(
+            ref OSVERSIONINFOEX lpVersionInfo,
+            TypeMask dwTypeMask,
+            ulong dwlConditionMask
+        );
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-        private static extern ulong VerSetConditionMask(ulong dwlConditionMask, TypeMask dwTypeBitMask, ConditionMask dwConditionMask);
+        private static extern ulong VerSetConditionMask(
+            ulong dwlConditionMask,
+            TypeMask dwTypeBitMask,
+            ConditionMask dwConditionMask
+        );
 
-        internal unsafe static int RtlGetVersionEx(out RTL_OSVERSIONINFOEX osvi)
+        internal static unsafe int RtlGetVersionEx(out RTL_OSVERSIONINFOEX osvi)
         {
             osvi = new RTL_OSVERSIONINFOEX();
             osvi.dwOSVersionInfoSize = (uint)sizeof(RTL_OSVERSIONINFOEX);
@@ -108,7 +120,7 @@ namespace TestWindowsOsShimsApp
         }
 
         internal static Version RtlGetVersion()
-        {            
+        {
             if (RtlGetVersionEx(out RTL_OSVERSIONINFOEX osvi) == 0)
             {
                 return new Version((int)osvi.dwMajorVersion, (int)osvi.dwMinorVersion);
@@ -121,19 +133,33 @@ namespace TestWindowsOsShimsApp
 
         internal static bool OsVersionIsNewerThan(Version osVersion)
         {
-            // check if newer than 
+            // check if newer than
             OSVERSIONINFOEX osv = new OSVERSIONINFOEX()
             {
                 dwOSVersionInfoSize = (uint)Marshal.SizeOf<OSVERSIONINFOEX>(),
                 dwMajorVersion = (uint)osVersion.Major,
-                dwMinorVersion = (uint)osVersion.Minor
+                dwMinorVersion = (uint)osVersion.Minor,
             };
 
             var conditionMask = 0uL;
-            conditionMask = VerSetConditionMask(conditionMask, TypeMask.VER_MAJORVERSION, ConditionMask.VER_GREATER_EQUAL);
-            conditionMask = VerSetConditionMask(conditionMask, TypeMask.VER_MINORVERSION, ConditionMask.VER_GREATER_EQUAL);
+            conditionMask = VerSetConditionMask(
+                conditionMask,
+                TypeMask.VER_MAJORVERSION,
+                ConditionMask.VER_GREATER_EQUAL
+            );
+            conditionMask = VerSetConditionMask(
+                conditionMask,
+                TypeMask.VER_MINORVERSION,
+                ConditionMask.VER_GREATER_EQUAL
+            );
 
-            if (VerifyVersionInfo(ref osv, TypeMask.VER_MAJORVERSION | TypeMask.VER_MINORVERSION, conditionMask))
+            if (
+                VerifyVersionInfo(
+                    ref osv,
+                    TypeMask.VER_MAJORVERSION | TypeMask.VER_MINORVERSION,
+                    conditionMask
+                )
+            )
             {
                 return true;
             }

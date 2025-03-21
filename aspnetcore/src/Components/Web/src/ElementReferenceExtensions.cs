@@ -15,7 +15,8 @@ public static class ElementReferenceExtensions
     /// </summary>
     /// <param name="elementReference">A reference to the element to focus.</param>
     /// <returns>The <see cref="ValueTask"/> representing the asynchronous focus operation.</returns>
-    public static ValueTask FocusAsync(this ElementReference elementReference) => elementReference.FocusAsync(preventScroll: false);
+    public static ValueTask FocusAsync(this ElementReference elementReference) =>
+        elementReference.FocusAsync(preventScroll: false);
 
     /// <summary>
     /// Gives focus to an element given its <see cref="ElementReference"/>.
@@ -45,7 +46,9 @@ public static class ElementReferenceExtensions
     {
         if (!(elementReference.Context is WebElementReferenceContext context))
         {
-            throw new InvalidOperationException("ElementReference has not been configured correctly.");
+            throw new InvalidOperationException(
+                "ElementReference has not been configured correctly."
+            );
         }
 
         return context.JSRuntime;

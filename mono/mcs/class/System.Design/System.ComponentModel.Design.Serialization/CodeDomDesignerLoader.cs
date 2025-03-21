@@ -1,7 +1,7 @@
 //
 // System.ComponentModel.Design.Serialization.CodeDomDesignerLoader
 //
-// Authors:	 
+// Authors:
 //	  Ivan N. Zlatev (contact i-nZ.net)
 //
 // (C) 2007 Ivan N. Zlatev
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,263 +27,306 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
+using System.CodeDom;
+using System.CodeDom.Compiler;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 
-using System.CodeDom;
-using System.CodeDom.Compiler;
-
 namespace System.ComponentModel.Design.Serialization
 {
-	public abstract class CodeDomDesignerLoader : BasicDesignerLoader, INameCreationService, IDesignerSerializationService
-	{
-		private CodeDomSerializer _rootSerializer;
+    public abstract class CodeDomDesignerLoader
+        : BasicDesignerLoader,
+            INameCreationService,
+            IDesignerSerializationService
+    {
+        private CodeDomSerializer _rootSerializer;
 
-		protected CodeDomDesignerLoader ()
-		{
-		}
+        protected CodeDomDesignerLoader() { }
 
-		protected override void Initialize ()
-		{
-			base.Initialize ();
-			base.LoaderHost.AddService (typeof (IDesignerSerializationService), this);
-			base.LoaderHost.AddService (typeof (INameCreationService), this);
-			base.LoaderHost.AddService (typeof (ComponentSerializationService), new 
-						    CodeDomComponentSerializationService (base.LoaderHost));
-			if (this.TypeResolutionService != null && 
-			    LoaderHost.GetService (typeof (ITypeResolutionService)) == null)
-				LoaderHost.AddService (typeof (ITypeResolutionService), this.TypeResolutionService);
-			IDesignerSerializationManager manager = base.LoaderHost.GetService (typeof (IDesignerSerializationManager)) as IDesignerSerializationManager;
-			if (manager != null)
-				manager.AddSerializationProvider (CodeDomSerializationProvider.Instance);
-		}
-		
-		protected override bool IsReloadNeeded ()
-		{
-			if (this.CodeDomProvider is ICodeDomDesignerReload)
-				return ((ICodeDomDesignerReload) CodeDomProvider).ShouldReloadDesigner (Parse ());
-			return base.IsReloadNeeded ();
-		}
+        protected override void Initialize()
+        {
+            base.Initialize();
+            base.LoaderHost.AddService(typeof(IDesignerSerializationService), this);
+            base.LoaderHost.AddService(typeof(INameCreationService), this);
+            base.LoaderHost.AddService(
+                typeof(ComponentSerializationService),
+                new CodeDomComponentSerializationService(base.LoaderHost)
+            );
+            if (
+                this.TypeResolutionService != null
+                && LoaderHost.GetService(typeof(ITypeResolutionService)) == null
+            )
+                LoaderHost.AddService(typeof(ITypeResolutionService), this.TypeResolutionService);
+            IDesignerSerializationManager manager =
+                base.LoaderHost.GetService(typeof(IDesignerSerializationManager))
+                as IDesignerSerializationManager;
+            if (manager != null)
+                manager.AddSerializationProvider(CodeDomSerializationProvider.Instance);
+        }
 
-		protected override void PerformLoad (IDesignerSerializationManager manager)
-		{
-			if (manager == null)
-				throw new ArgumentNullException ("manager");
+        protected override bool IsReloadNeeded()
+        {
+            if (this.CodeDomProvider is ICodeDomDesignerReload)
+                return ((ICodeDomDesignerReload)CodeDomProvider).ShouldReloadDesigner(Parse());
+            return base.IsReloadNeeded();
+        }
 
-			CodeCompileUnit document = this.Parse ();
-			if (document == null)
-				throw new NotSupportedException ("The language did not provide a code parser for this file");
+        protected override void PerformLoad(IDesignerSerializationManager manager)
+        {
+            if (manager == null)
+                throw new ArgumentNullException("manager");
 
-			string namespaceName = null;
-			CodeTypeDeclaration rootDocument = GetFirstCodeTypeDecl (document, out namespaceName);
-			if (rootDocument == null)
-				throw new InvalidOperationException ("Cannot find a declaration in a namespace to load.");
+            CodeCompileUnit document = this.Parse();
+            if (document == null)
+                throw new NotSupportedException(
+                    "The language did not provide a code parser for this file"
+                );
 
-			_rootSerializer = manager.GetSerializer (manager.GetType (rootDocument.BaseTypes[0].BaseType), 
-													 typeof (RootCodeDomSerializer)) as CodeDomSerializer;
-			if (_rootSerializer == null)
-				throw new InvalidOperationException ("Serialization not supported for this class");
+            string namespaceName = null;
+            CodeTypeDeclaration rootDocument = GetFirstCodeTypeDecl(document, out namespaceName);
+            if (rootDocument == null)
+                throw new InvalidOperationException(
+                    "Cannot find a declaration in a namespace to load."
+                );
 
-			_rootSerializer.Deserialize (manager, rootDocument);
+            _rootSerializer =
+                manager.GetSerializer(
+                    manager.GetType(rootDocument.BaseTypes[0].BaseType),
+                    typeof(RootCodeDomSerializer)
+                ) as CodeDomSerializer;
+            if (_rootSerializer == null)
+                throw new InvalidOperationException("Serialization not supported for this class");
 
-			base.SetBaseComponentClassName (namespaceName + "." + rootDocument.Name);
-		}
+            _rootSerializer.Deserialize(manager, rootDocument);
 
-		private CodeTypeDeclaration GetFirstCodeTypeDecl (CodeCompileUnit document, out string namespaceName)
-		{
-			namespaceName = null;
+            base.SetBaseComponentClassName(namespaceName + "." + rootDocument.Name);
+        }
 
-			foreach (CodeNamespace namesp in document.Namespaces) {
-				foreach (CodeTypeDeclaration declaration in namesp.Types) {
-					if (declaration.IsClass) {
-						namespaceName = namesp.Name;
-						return declaration;
-					}
-				}
-			}
-			return null;
-		}
-		
-		protected override void PerformFlush (IDesignerSerializationManager manager)
-		{
-			if (_rootSerializer != null) {
-				CodeTypeDeclaration typeDecl = (CodeTypeDeclaration) _rootSerializer.Serialize (manager, 
-																								base.LoaderHost.RootComponent);
-				this.Write (MergeTypeDeclWithCompileUnit (typeDecl, this.Parse ()));
-			}
-		}
+        private CodeTypeDeclaration GetFirstCodeTypeDecl(
+            CodeCompileUnit document,
+            out string namespaceName
+        )
+        {
+            namespaceName = null;
 
-		// Will either add the class or replace an existing class
-		// with the one from GenerateClass ()
-		//
-		private CodeCompileUnit MergeTypeDeclWithCompileUnit (CodeTypeDeclaration typeDecl, CodeCompileUnit unit)
-		{
-			CodeNamespace namespac = null;
-			int typeIndex = -1;
+            foreach (CodeNamespace namesp in document.Namespaces)
+            {
+                foreach (CodeTypeDeclaration declaration in namesp.Types)
+                {
+                    if (declaration.IsClass)
+                    {
+                        namespaceName = namesp.Name;
+                        return declaration;
+                    }
+                }
+            }
+            return null;
+        }
 
-			foreach (CodeNamespace namesp in unit.Namespaces) {
-				for (int i=0; i< namesp.Types.Count; i++) {
-					if (namesp.Types[i].IsClass) {
-						typeIndex = i;
-						namespac = namesp;
-					}
-				}
-			}
+        protected override void PerformFlush(IDesignerSerializationManager manager)
+        {
+            if (_rootSerializer != null)
+            {
+                CodeTypeDeclaration typeDecl = (CodeTypeDeclaration)
+                    _rootSerializer.Serialize(manager, base.LoaderHost.RootComponent);
+                this.Write(MergeTypeDeclWithCompileUnit(typeDecl, this.Parse()));
+            }
+        }
 
-			if (typeIndex != -1)
-				namespac.Types.RemoveAt (typeIndex);
+        // Will either add the class or replace an existing class
+        // with the one from GenerateClass ()
+        //
+        private CodeCompileUnit MergeTypeDeclWithCompileUnit(
+            CodeTypeDeclaration typeDecl,
+            CodeCompileUnit unit
+        )
+        {
+            CodeNamespace namespac = null;
+            int typeIndex = -1;
 
-			namespac.Types.Add (typeDecl);
+            foreach (CodeNamespace namesp in unit.Namespaces)
+            {
+                for (int i = 0; i < namesp.Types.Count; i++)
+                {
+                    if (namesp.Types[i].IsClass)
+                    {
+                        typeIndex = i;
+                        namespac = namesp;
+                    }
+                }
+            }
 
-			return unit;
-		}
+            if (typeIndex != -1)
+                namespac.Types.RemoveAt(typeIndex);
 
-		protected override void OnBeginLoad ()
-		{
-			base.OnBeginLoad ();
+            namespac.Types.Add(typeDecl);
 
-			IComponentChangeService service = base.GetService (typeof (IComponentChangeService)) as IComponentChangeService;
-			if (service != null)
-				service.ComponentRename += this.OnComponentRename_EventHandler;
-		}
-		
-		protected override void OnBeginUnload ()
-		{
-			base.OnBeginUnload ();
+            return unit;
+        }
 
-			IComponentChangeService service = base.GetService (typeof (IComponentChangeService)) as IComponentChangeService;
-			if (service != null)
-				service.ComponentRename -= this.OnComponentRename_EventHandler;
-		}
-		
-		protected override void OnEndLoad (bool successful, ICollection errors)
-		{
-			base.OnEndLoad (successful, errors);
-			// XXX: msdn says overriden
-		}
+        protected override void OnBeginLoad()
+        {
+            base.OnBeginLoad();
 
-		private void OnComponentRename_EventHandler (object sender, ComponentRenameEventArgs args)
-		{
-			this.OnComponentRename (args.Component, args.OldName, args.NewName);
-		}
+            IComponentChangeService service =
+                base.GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+            if (service != null)
+                service.ComponentRename += this.OnComponentRename_EventHandler;
+        }
 
-		// MSDN says that here one should raise ComponentRename event and that's nonsense.
-		//
-		protected virtual void OnComponentRename (object component, string oldName, string newName) 
-		{
-			// What shall we do with the drunken sailor,
-			// what shall we do with the drunken sailor early in the morning?
-		}
+        protected override void OnBeginUnload()
+        {
+            base.OnBeginUnload();
 
-		protected abstract CodeDomProvider CodeDomProvider { get; }
-		protected abstract ITypeResolutionService TypeResolutionService { get; }
-		protected abstract CodeCompileUnit Parse ();
-		protected abstract void Write (CodeCompileUnit unit);
+            IComponentChangeService service =
+                base.GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+            if (service != null)
+                service.ComponentRename -= this.OnComponentRename_EventHandler;
+        }
 
-		public override void Dispose ()
-		{
-			base.Dispose ();
-		}
+        protected override void OnEndLoad(bool successful, ICollection errors)
+        {
+            base.OnEndLoad(successful, errors);
+            // XXX: msdn says overriden
+        }
 
-#region INameCreationService implementation
+        private void OnComponentRename_EventHandler(object sender, ComponentRenameEventArgs args)
+        {
+            this.OnComponentRename(args.Component, args.OldName, args.NewName);
+        }
 
-		// very simplistic implementation to generate names like "button1", "someControl2", etc
-		//
-		string INameCreationService.CreateName (IContainer container, Type dataType)
-		{
-			if (dataType == null)
-				throw new ArgumentNullException ("dataType");
+        // MSDN says that here one should raise ComponentRename event and that's nonsense.
+        //
+        protected virtual void OnComponentRename(object component, string oldName, string newName)
+        {
+            // What shall we do with the drunken sailor,
+            // what shall we do with the drunken sailor early in the morning?
+        }
 
-			string name = dataType.Name;
-			char lower = Char.ToLower (name[0]);
-			name = name.Remove (0, 1);
-			name = name.Insert (0, Char.ToString (lower));
+        protected abstract CodeDomProvider CodeDomProvider { get; }
+        protected abstract ITypeResolutionService TypeResolutionService { get; }
+        protected abstract CodeCompileUnit Parse();
+        protected abstract void Write(CodeCompileUnit unit);
 
-			int uniqueId = 1;
-			bool unique = false;
+        public override void Dispose()
+        {
+            base.Dispose();
+        }
 
-			while (!unique) {
-				if (container != null && container.Components[name + uniqueId] != null) {
-					uniqueId++;
-				} else {
-					unique = true;
-					name = name + uniqueId;
-				}
-			}
+        #region INameCreationService implementation
 
-			if (this.CodeDomProvider != null)
-				name = CodeDomProvider.CreateValidIdentifier (name);
+        // very simplistic implementation to generate names like "button1", "someControl2", etc
+        //
+        string INameCreationService.CreateName(IContainer container, Type dataType)
+        {
+            if (dataType == null)
+                throw new ArgumentNullException("dataType");
 
-			return name;
-		}
+            string name = dataType.Name;
+            char lower = Char.ToLower(name[0]);
+            name = name.Remove(0, 1);
+            name = name.Insert(0, Char.ToString(lower));
 
-		bool INameCreationService.IsValidName (string name)
-		{
-			if (name == null)
-				throw new ArgumentNullException ("name");
+            int uniqueId = 1;
+            bool unique = false;
 
-			bool valid = true;
-			if (base.LoaderHost != null && base.LoaderHost.Container.Components[name] != null) {
-				valid = false;
-			} else {
-				if (this.CodeDomProvider != null) {
-					valid = CodeDomProvider.IsValidIdentifier (name);
-				} else {
-					if (name.Trim().Length == 0)
-						valid = false;
-					foreach (char c in name) {
-						if (!Char.IsLetterOrDigit (c)) {
-							valid = false;
-							break;
-						}
-					}
-				}
-			}
+            while (!unique)
+            {
+                if (container != null && container.Components[name + uniqueId] != null)
+                {
+                    uniqueId++;
+                }
+                else
+                {
+                    unique = true;
+                    name = name + uniqueId;
+                }
+            }
 
-			return valid;
-		}
+            if (this.CodeDomProvider != null)
+                name = CodeDomProvider.CreateValidIdentifier(name);
 
-		void INameCreationService.ValidateName (string name)
-		{
-			if (!((INameCreationService) this).IsValidName (name))
-				throw new ArgumentException ("Invalid name '" + name + "'");
-		}
-#endregion
+            return name;
+        }
+
+        bool INameCreationService.IsValidName(string name)
+        {
+            if (name == null)
+                throw new ArgumentNullException("name");
+
+            bool valid = true;
+            if (base.LoaderHost != null && base.LoaderHost.Container.Components[name] != null)
+            {
+                valid = false;
+            }
+            else
+            {
+                if (this.CodeDomProvider != null)
+                {
+                    valid = CodeDomProvider.IsValidIdentifier(name);
+                }
+                else
+                {
+                    if (name.Trim().Length == 0)
+                        valid = false;
+                    foreach (char c in name)
+                    {
+                        if (!Char.IsLetterOrDigit(c))
+                        {
+                            valid = false;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            return valid;
+        }
+
+        void INameCreationService.ValidateName(string name)
+        {
+            if (!((INameCreationService)this).IsValidName(name))
+                throw new ArgumentException("Invalid name '" + name + "'");
+        }
+        #endregion
 
 
-#region IDesignerSerializationService implementation
+        #region IDesignerSerializationService implementation
 
-		ICollection IDesignerSerializationService.Deserialize (object serializationData)
-		{
-			if (serializationData == null)
-				throw new ArgumentNullException ("serializationData");
+        ICollection IDesignerSerializationService.Deserialize(object serializationData)
+        {
+            if (serializationData == null)
+                throw new ArgumentNullException("serializationData");
 
-			ComponentSerializationService service = LoaderHost.GetService (typeof (ComponentSerializationService)) as ComponentSerializationService;
-			SerializationStore store = serializationData as SerializationStore;
-			if (service != null && serializationData != null)
-				return service.Deserialize (store, this.LoaderHost.Container);
-			return new object[0];
-		}
+            ComponentSerializationService service =
+                LoaderHost.GetService(typeof(ComponentSerializationService))
+                as ComponentSerializationService;
+            SerializationStore store = serializationData as SerializationStore;
+            if (service != null && serializationData != null)
+                return service.Deserialize(store, this.LoaderHost.Container);
+            return new object[0];
+        }
 
-		object IDesignerSerializationService.Serialize (ICollection objects)
-		{
-			if (objects == null)
-				throw new ArgumentNullException ("objects");
+        object IDesignerSerializationService.Serialize(ICollection objects)
+        {
+            if (objects == null)
+                throw new ArgumentNullException("objects");
 
-			ComponentSerializationService service = LoaderHost.GetService (typeof (ComponentSerializationService)) as ComponentSerializationService;
-			if (service != null) {
-				SerializationStore store = service.CreateStore ();
-				foreach (object o in objects)
-					service.Serialize (store, o);
-				store.Close ();
-				return store;
-			}
-			return null;
-		}
-#endregion
-	}
+            ComponentSerializationService service =
+                LoaderHost.GetService(typeof(ComponentSerializationService))
+                as ComponentSerializationService;
+            if (service != null)
+            {
+                SerializationStore store = service.CreateStore();
+                foreach (object o in objects)
+                    service.Serialize(store, o);
+                store.Close();
+                return store;
+            }
+            return null;
+        }
+        #endregion
+    }
 }
-

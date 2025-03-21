@@ -18,8 +18,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
             LspWorkspaceRegistrationService lspWorkspaceRegistrationService,
             IGlobalOptionService globalOptionService,
             LspWorkspaceManager lspWorkspaceManager,
-            IClientLanguageServerManager notificationManager)
-            : base(asynchronousOperationListenerProvider, lspWorkspaceRegistrationService, lspWorkspaceManager, notificationManager)
+            IClientLanguageServerManager notificationManager
+        )
+            : base(
+                asynchronousOperationListenerProvider,
+                lspWorkspaceRegistrationService,
+                lspWorkspaceManager,
+                notificationManager
+            )
         {
             _globalOptionService = globalOptionService;
             _globalOptionService.AddOptionChangedHandler(this, OnOptionChanged);
@@ -33,25 +39,32 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.InlayHint
 
         private void OnOptionChanged(object? sender, OptionChangedEventArgs e)
         {
-            if (e.Option.Equals(InlineHintsOptionsStorage.EnabledForParameters) ||
-                e.Option.Equals(InlineHintsOptionsStorage.ForIndexerParameters) ||
-                e.Option.Equals(InlineHintsOptionsStorage.ForLiteralParameters) ||
-                e.Option.Equals(InlineHintsOptionsStorage.ForOtherParameters) ||
-                e.Option.Equals(InlineHintsOptionsStorage.ForObjectCreationParameters) ||
-                e.Option.Equals(InlineHintsOptionsStorage.SuppressForParametersThatDifferOnlyBySuffix) ||
-                e.Option.Equals(InlineHintsOptionsStorage.SuppressForParametersThatMatchArgumentName) ||
-                e.Option.Equals(InlineHintsOptionsStorage.SuppressForParametersThatMatchMethodIntent) ||
-                e.Option.Equals(InlineHintsOptionsStorage.EnabledForTypes) ||
-                e.Option.Equals(InlineHintsOptionsStorage.ForImplicitVariableTypes) ||
-                e.Option.Equals(InlineHintsOptionsStorage.ForLambdaParameterTypes) ||
-                e.Option.Equals(InlineHintsOptionsStorage.ForImplicitObjectCreation))
+            if (
+                e.Option.Equals(InlineHintsOptionsStorage.EnabledForParameters)
+                || e.Option.Equals(InlineHintsOptionsStorage.ForIndexerParameters)
+                || e.Option.Equals(InlineHintsOptionsStorage.ForLiteralParameters)
+                || e.Option.Equals(InlineHintsOptionsStorage.ForOtherParameters)
+                || e.Option.Equals(InlineHintsOptionsStorage.ForObjectCreationParameters)
+                || e.Option.Equals(
+                    InlineHintsOptionsStorage.SuppressForParametersThatDifferOnlyBySuffix
+                )
+                || e.Option.Equals(
+                    InlineHintsOptionsStorage.SuppressForParametersThatMatchArgumentName
+                )
+                || e.Option.Equals(
+                    InlineHintsOptionsStorage.SuppressForParametersThatMatchMethodIntent
+                )
+                || e.Option.Equals(InlineHintsOptionsStorage.EnabledForTypes)
+                || e.Option.Equals(InlineHintsOptionsStorage.ForImplicitVariableTypes)
+                || e.Option.Equals(InlineHintsOptionsStorage.ForLambdaParameterTypes)
+                || e.Option.Equals(InlineHintsOptionsStorage.ForImplicitObjectCreation)
+            )
             {
                 EnqueueRefreshNotification(documentUri: null);
             }
         }
 
-        protected override string GetFeatureAttribute()
-            => FeatureAttribute.InlineHints;
+        protected override string GetFeatureAttribute() => FeatureAttribute.InlineHints;
 
         protected override bool? GetRefreshSupport(ClientCapabilities clientCapabilities)
         {

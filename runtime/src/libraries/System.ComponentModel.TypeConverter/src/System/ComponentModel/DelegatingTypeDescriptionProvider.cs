@@ -34,9 +34,11 @@ namespace System.ComponentModel
         /// </summary>
         public override object? CreateInstance(
             IServiceProvider? provider,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type objectType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+                Type objectType,
             Type[]? argTypes,
-            object?[]? args)
+            object?[]? args
+        )
         {
             return Provider.CreateInstance(provider, objectType, argTypes, args);
         }
@@ -64,7 +66,8 @@ namespace System.ComponentModel
         /// GetTypeDescriptor.GetComponentName.
         /// </summary>
         [RequiresUnreferencedCode("The Type of component cannot be statically discovered.")]
-        public override string? GetFullComponentName(object component) => Provider.GetFullComponentName(component);
+        public override string? GetFullComponentName(object component) =>
+            Provider.GetFullComponentName(component);
 
         /// <summary>
         /// This method returns an extended custom type descriptor for the given object.
@@ -98,8 +101,10 @@ namespace System.ComponentModel
         /// </summary>
         [return: DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
         public override Type GetReflectionType(
-            [DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)] Type objectType,
-            object? instance)
+            [DynamicallyAccessedMembers(TypeDescriptor.ReflectTypesDynamicallyAccessedMembers)]
+                Type objectType,
+            object? instance
+        )
         {
             return Provider.GetReflectionType(objectType, instance);
         }
@@ -114,7 +119,10 @@ namespace System.ComponentModel
         /// interested in providing type information for the object it should
         /// return null.
         /// </summary>
-        public override ICustomTypeDescriptor? GetTypeDescriptor([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType, object? instance)
+        public override ICustomTypeDescriptor? GetTypeDescriptor(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type objectType,
+            object? instance
+        )
         {
             return Provider.GetTypeDescriptor(objectType, instance);
         }

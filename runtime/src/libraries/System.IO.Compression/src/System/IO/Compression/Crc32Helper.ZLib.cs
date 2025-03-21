@@ -11,7 +11,12 @@ namespace System.IO.Compression
         // Calculate CRC based on the old CRC and the new bytes
         public static unsafe uint UpdateCrc32(uint crc32, byte[] buffer, int offset, int length)
         {
-            Debug.Assert((buffer != null) && (offset >= 0) && (length >= 0) && (offset <= buffer.Length - length));
+            Debug.Assert(
+                (buffer != null)
+                    && (offset >= 0)
+                    && (length >= 0)
+                    && (offset <= buffer.Length - length)
+            );
             fixed (byte* bufferPtr = &buffer[offset])
             {
                 return Interop.ZLib.crc32(crc32, bufferPtr, length);

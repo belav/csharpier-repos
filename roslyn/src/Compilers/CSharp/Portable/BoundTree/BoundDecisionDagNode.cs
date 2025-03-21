@@ -25,9 +25,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 case (BoundEvaluationDecisionDagNode n1, BoundEvaluationDecisionDagNode n2):
                     return n1.Evaluation.Equals(n2.Evaluation) && n1.Next == n2.Next;
                 case (BoundTestDecisionDagNode n1, BoundTestDecisionDagNode n2):
-                    return n1.Test.Equals(n2.Test) && n1.WhenTrue == n2.WhenTrue && n1.WhenFalse == n2.WhenFalse;
+                    return n1.Test.Equals(n2.Test)
+                        && n1.WhenTrue == n2.WhenTrue
+                        && n1.WhenFalse == n2.WhenFalse;
                 case (BoundWhenDecisionDagNode n1, BoundWhenDecisionDagNode n2):
-                    return n1.WhenExpression == n2.WhenExpression && n1.WhenTrue == n2.WhenTrue && n1.WhenFalse == n2.WhenFalse;
+                    return n1.WhenExpression == n2.WhenExpression
+                        && n1.WhenTrue == n2.WhenTrue
+                        && n1.WhenFalse == n2.WhenFalse;
                 case (BoundLeafDecisionDagNode n1, BoundLeafDecisionDagNode n2):
                     return n1.Label == n2.Label;
                 default:
@@ -40,11 +44,26 @@ namespace Microsoft.CodeAnalysis.CSharp
             switch (this)
             {
                 case BoundEvaluationDecisionDagNode n:
-                    return Hash.Combine(n.Evaluation.GetHashCode(), RuntimeHelpers.GetHashCode(n.Next));
+                    return Hash.Combine(
+                        n.Evaluation.GetHashCode(),
+                        RuntimeHelpers.GetHashCode(n.Next)
+                    );
                 case BoundTestDecisionDagNode n:
-                    return Hash.Combine(n.Test.GetHashCode(), Hash.Combine(RuntimeHelpers.GetHashCode(n.WhenFalse), RuntimeHelpers.GetHashCode(n.WhenTrue)));
+                    return Hash.Combine(
+                        n.Test.GetHashCode(),
+                        Hash.Combine(
+                            RuntimeHelpers.GetHashCode(n.WhenFalse),
+                            RuntimeHelpers.GetHashCode(n.WhenTrue)
+                        )
+                    );
                 case BoundWhenDecisionDagNode n:
-                    return Hash.Combine(RuntimeHelpers.GetHashCode(n.WhenExpression), Hash.Combine(RuntimeHelpers.GetHashCode(n.WhenFalse), RuntimeHelpers.GetHashCode(n.WhenTrue)));
+                    return Hash.Combine(
+                        RuntimeHelpers.GetHashCode(n.WhenExpression),
+                        Hash.Combine(
+                            RuntimeHelpers.GetHashCode(n.WhenFalse),
+                            RuntimeHelpers.GetHashCode(n.WhenTrue)
+                        )
+                    );
                 case BoundLeafDecisionDagNode n:
                     return RuntimeHelpers.GetHashCode(n.Label);
                 default:
@@ -57,10 +76,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public int Id
         {
-            get
-            {
-                return _id;
-            }
+            get { return _id; }
             internal set
             {
                 Debug.Assert(value >= 0, "Id must be non-negative but was set to " + value);
@@ -78,39 +94,39 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 case BoundTestDecisionDagNode node:
                     builder.Append($"{node.Test.GetDebuggerDisplay()} ");
-                    builder.Append(node.WhenTrue != null
-                        ? $"? [{node.WhenTrue.Id}] "
-                        : "? <unreachable> ");
+                    builder.Append(
+                        node.WhenTrue != null ? $"? [{node.WhenTrue.Id}] " : "? <unreachable> "
+                    );
 
-                    builder.Append(node.WhenFalse != null
-                        ? $": [{node.WhenFalse.Id}]"
-                        : ": <unreachable>");
+                    builder.Append(
+                        node.WhenFalse != null ? $": [{node.WhenFalse.Id}]" : ": <unreachable>"
+                    );
                     break;
                 case BoundEvaluationDecisionDagNode node:
                     builder.Append($"{node.Evaluation.GetDebuggerDisplay()}; ");
-                    builder.Append(node.Next != null
-                        ? $"[{node.Next.Id}]"
-                        : "<unreachable>");
+                    builder.Append(node.Next != null ? $"[{node.Next.Id}]" : "<unreachable>");
                     break;
                 case BoundWhenDecisionDagNode node:
                     builder.Append("when ");
-                    builder.Append(node.WhenExpression is { } when
-                        ? $"({when.Syntax}) "
-                        : "<true> ");
+                    builder.Append(
+                        node.WhenExpression is { } when ? $"({when.Syntax}) " : "<true> "
+                    );
 
-                    builder.Append(node.WhenTrue != null
-                        ? $"? [{node.WhenTrue.Id}] "
-                        : "? <unreachable> ");
+                    builder.Append(
+                        node.WhenTrue != null ? $"? [{node.WhenTrue.Id}] " : "? <unreachable> "
+                    );
 
-                    builder.Append(node.WhenFalse != null
-                        ? $": [{node.WhenFalse.Id}]"
-                        : ": <unreachable>");
+                    builder.Append(
+                        node.WhenFalse != null ? $": [{node.WhenFalse.Id}]" : ": <unreachable>"
+                    );
 
                     break;
                 case BoundLeafDecisionDagNode node:
-                    builder.Append(node.Label is GeneratedLabelSymbol generated
-                        ? $"leaf {generated.NameNoSequence} `{node.Syntax}`"
-                        : $"leaf `{node.Label.Name}`");
+                    builder.Append(
+                        node.Label is GeneratedLabelSymbol generated
+                            ? $"leaf {generated.NameNoSequence} `{node.Syntax}`"
+                            : $"leaf `{node.Label.Name}`"
+                    );
                     break;
                 default:
                     builder.Append(base.GetDebuggerDisplay());

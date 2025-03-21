@@ -17,7 +17,9 @@ namespace Microsoft.AspNetCore.Mvc.Formatters;
 /// <summary>
 /// A <see cref="TextInputFormatter"/> for JSON content.
 /// </summary>
-public partial class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFormatterExceptionPolicy
+public partial class NewtonsoftJsonInputFormatter
+    : TextInputFormatter,
+        IInputFormatterExceptionPolicy
 {
     private readonly IArrayPool<char> _charPool;
     private readonly ILogger _logger;
@@ -46,7 +48,8 @@ public partial class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFo
         ArrayPool<char> charPool,
         ObjectPoolProvider objectPoolProvider,
         MvcOptions options,
-        MvcNewtonsoftJsonOptions jsonOptions)
+        MvcNewtonsoftJsonOptions jsonOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(logger);
         ArgumentNullException.ThrowIfNull(serializerSettings);
@@ -93,7 +96,8 @@ public partial class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFo
     /// <inheritdoc />
     public override async Task<InputFormatterResult> ReadRequestBodyAsync(
         InputFormatterContext context,
-        Encoding encoding)
+        Encoding encoding
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(encoding);
@@ -189,7 +193,10 @@ public partial class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFo
             }
         }
 
-        if (exception is not null && exception is not (JsonException or OverflowException or FormatException))
+        if (
+            exception is not null
+            && exception is not (JsonException or OverflowException or FormatException)
+        )
         {
             // At this point we've already recorded all exceptions as an entry in the ModelStateDictionary.
             // We only need to rethrow an exception if we believe it needs to be handled by something further up
@@ -266,7 +273,9 @@ public partial class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFo
             // for missing required properties. We use the exception type to filter out these errors and keep the path used
             // for the ModelStateDictionary key as "b.c.d" instead of "b.c.d.c"
             // See https://github.com/dotnet/aspnetcore/issues/33451
-            var addMember = !string.IsNullOrEmpty(member) && eventArgs.ErrorContext.Error is JsonSerializationException;
+            var addMember =
+                !string.IsNullOrEmpty(member)
+                && eventArgs.ErrorContext.Error is JsonSerializationException;
 
             // There are still JsonSerilizationExceptions that set ErrorContext.Member but include it at the
             // end of ErrorContext.Path already. The following logic attempts to filter these out.
@@ -287,7 +296,8 @@ public partial class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFo
                     }
                     else
                     {
-                        addMember = !path.EndsWith($".{member}", StringComparison.Ordinal)
+                        addMember =
+                            !path.EndsWith($".{member}", StringComparison.Ordinal)
                             && !path.EndsWith($"['{member}']", StringComparison.Ordinal)
                             && !path.EndsWith($"[{member}]", StringComparison.Ordinal);
                     }
@@ -329,7 +339,9 @@ public partial class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFo
     {
         if (_jsonSerializerPool == null)
         {
-            _jsonSerializerPool = _objectPoolProvider.Create(new JsonSerializerObjectPolicy(SerializerSettings));
+            _jsonSerializerPool = _objectPoolProvider.Create(
+                new JsonSerializerObjectPolicy(SerializerSettings)
+            );
         }
 
         return _jsonSerializerPool.Get();
@@ -358,8 +370,8 @@ public partial class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFo
     /// This method works in tandem with <see cref="ReleaseJsonSerializer(JsonSerializer)"/> to
     /// manage the lifetimes of <see cref="JsonSerializer"/> instances.
     /// </remarks>
-    protected virtual void ReleaseJsonSerializer(JsonSerializer serializer)
-        => _jsonSerializerPool!.Return(serializer);
+    protected virtual void ReleaseJsonSerializer(JsonSerializer serializer) =>
+        _jsonSerializerPool!.Return(serializer);
 
     private static ModelMetadata GetPathMetadata(ModelMetadata metadata, string path)
     {
@@ -437,7 +449,12 @@ public partial class NewtonsoftJsonInputFormatter : TextInputFormatter, IInputFo
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "JSON input formatter threw an exception.", EventName = "JsonInputException")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "JSON input formatter threw an exception.",
+            EventName = "JsonInputException"
+        )]
         public static partial void JsonInputException(ILogger logger, Exception exception);
     }
 }

@@ -16,7 +16,9 @@ namespace System.ServiceModel.Configuration
     using System.Xml;
 
     [ConfigurationPermission(SecurityAction.InheritanceDemand, Unrestricted = true)]
-    public abstract class ServiceModelExtensionElement : ServiceModelConfigurationElement, IConfigurationContextProviderInternal
+    public abstract class ServiceModelExtensionElement
+        : ServiceModelConfigurationElement,
+            IConfigurationContextProviderInternal
     {
         [Fx.Tag.SecurityNote(Critical = "Stores information used in a security decision.")]
         [SecurityCritical]
@@ -29,18 +31,21 @@ namespace System.ServiceModel.Configuration
         Type thisType;
 
         protected ServiceModelExtensionElement()
-            : base()
-        {
-        }
+            : base() { }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical method UnsafeLookupCollection which elevates in order to load config.",
-            Safe = "Does not leak any config objects.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical method UnsafeLookupCollection which elevates in order to load config.",
+            Safe = "Does not leak any config objects."
+        )]
         [SecuritySafeCritical]
         internal bool CanAdd(string extensionCollectionName, ContextInformation evaluationContext)
         {
             bool retVal = false;
 
-            ExtensionElementCollection collection = ExtensionsSection.UnsafeLookupCollection(extensionCollectionName, evaluationContext);
+            ExtensionElementCollection collection = ExtensionsSection.UnsafeLookupCollection(
+                extensionCollectionName,
+                evaluationContext
+            );
             if (null != collection && collection.Count != 0)
             {
                 string thisAssemblyQualifiedName = ThisType.AssemblyQualifiedName;
@@ -48,7 +53,12 @@ namespace System.ServiceModel.Configuration
                 foreach (ExtensionElement extensionElement in collection)
                 {
                     string extensionTypeName = extensionElement.Type;
-                    if (extensionTypeName.Equals(thisAssemblyQualifiedName, StringComparison.Ordinal))
+                    if (
+                        extensionTypeName.Equals(
+                            thisAssemblyQualifiedName,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         retVal = true;
                         break;
@@ -67,10 +77,14 @@ namespace System.ServiceModel.Configuration
 
                 if (!retVal && DiagnosticUtility.ShouldTraceWarning)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Warning,
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
                         TraceCode.ConfiguredExtensionTypeNotFound,
                         SR.GetString(SR.TraceCodeConfiguredExtensionTypeNotFound),
-                        this.CreateCanAddRecord(extensionCollectionName), this, null);
+                        this.CreateCanAddRecord(extensionCollectionName),
+                        this,
+                        null
+                    );
                 }
             }
             else if (DiagnosticUtility.ShouldTraceWarning)
@@ -87,8 +101,14 @@ namespace System.ServiceModel.Configuration
                     traceCode = TraceCode.ExtensionCollectionDoesNotExist;
                     traceDescription = SR.GetString(SR.TraceCodeExtensionCollectionDoesNotExist);
                 }
-                TraceUtility.TraceEvent(TraceEventType.Warning,
-                    traceCode, traceDescription, this.CreateCanAddRecord(extensionCollectionName), this, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    traceCode,
+                    traceDescription,
+                    this.CreateCanAddRecord(extensionCollectionName),
+                    this,
+                    null
+                );
             }
 
             return retVal;
@@ -105,16 +125,20 @@ namespace System.ServiceModel.Configuration
 
                 return this.configurationElementName;
             }
-
             internal set
             {
                 if (!string.IsNullOrEmpty(this.configurationElementName))
                 {
-                    Fx.Assert(this.configurationElementName == value,
-                        string.Format(System.Globalization.CultureInfo.InvariantCulture,
+                    Fx.Assert(
+                        this.configurationElementName == value,
+                        string.Format(
+                            System.Globalization.CultureInfo.InvariantCulture,
                             "The configuration element name has already being set to '{0} and cannot be reset to '{1}'",
-                            this.configurationElementName, value));
-                    
+                            this.configurationElementName,
+                            value
+                        )
+                    );
+
                     return;
                 }
 
@@ -144,7 +168,9 @@ namespace System.ServiceModel.Configuration
         {
             if (this.IsReadOnly())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(SR.GetString(SR.ConfigReadOnly))
+                );
             }
             if (from == null)
             {
@@ -155,8 +181,11 @@ namespace System.ServiceModel.Configuration
         DictionaryTraceRecord CreateCanAddRecord(string extensionCollectionName)
         {
             Dictionary<string, string> values = new Dictionary<string, string>(2);
-            values["ElementType"] = System.Runtime.Diagnostics.DiagnosticTraceBase.XmlEncode(ThisType.AssemblyQualifiedName);
-            values["CollectionName"] = ConfigurationStrings.ExtensionsSectionPath + "/" + extensionCollectionName;
+            values["ElementType"] = System.Runtime.Diagnostics.DiagnosticTraceBase.XmlEncode(
+                ThisType.AssemblyQualifiedName
+            );
+            values["CollectionName"] =
+                ConfigurationStrings.ExtensionsSectionPath + "/" + extensionCollectionName;
             return new DictionaryTraceRecord(values);
         }
 
@@ -181,8 +210,10 @@ namespace System.ServiceModel.Configuration
             return this[property];
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls SecurityCritical methods UnsafeLookupCollection and UnsafeLookupAssociatedCollection which elevate in order to load config.",
-            Safe = "Does not leak any config objects.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls SecurityCritical methods UnsafeLookupCollection and UnsafeLookupAssociatedCollection which elevate in order to load config.",
+            Safe = "Does not leak any config objects."
+        )]
         [SecuritySafeCritical]
         string GetConfigurationElementName()
         {
@@ -200,35 +231,56 @@ namespace System.ServiceModel.Configuration
             {
                 if (DiagnosticUtility.ShouldTraceWarning)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Warning,
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Warning,
                         TraceCode.ExtensionCollectionNameNotFound,
                         SR.GetString(SR.TraceCodeExtensionCollectionNameNotFound),
                         this,
-                        (Exception)null);
+                        (Exception)null
+                    );
                 }
 
-                collection = ExtensionsSection.UnsafeLookupAssociatedCollection(ThisType, evaluationContext, out this.extensionCollectionName);
+                collection = ExtensionsSection.UnsafeLookupAssociatedCollection(
+                    ThisType,
+                    evaluationContext,
+                    out this.extensionCollectionName
+                );
             }
             else
             {
-                collection = ExtensionsSection.UnsafeLookupCollection(this.extensionCollectionName, evaluationContext);
+                collection = ExtensionsSection.UnsafeLookupCollection(
+                    this.extensionCollectionName,
+                    evaluationContext
+                );
             }
 
             if (null == collection)
             {
                 if (String.IsNullOrEmpty(this.extensionCollectionName))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigNoExtensionCollectionAssociatedWithType,
-                        extensionSectionType.AssemblyQualifiedName),
-                        this.ElementInformation.Source,
-                        this.ElementInformation.LineNumber));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigNoExtensionCollectionAssociatedWithType,
+                                extensionSectionType.AssemblyQualifiedName
+                            ),
+                            this.ElementInformation.Source,
+                            this.ElementInformation.LineNumber
+                        )
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigExtensionCollectionNotFound,
-                        this.extensionCollectionName),
-                        this.ElementInformation.Source,
-                        this.ElementInformation.LineNumber));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.ConfigExtensionCollectionNotFound,
+                                this.extensionCollectionName
+                            ),
+                            this.ElementInformation.Source,
+                            this.ElementInformation.LineNumber
+                        )
+                    );
                 }
             }
 
@@ -237,7 +289,12 @@ namespace System.ServiceModel.Configuration
                 ExtensionElement collectionElement = collection[i];
 
                 // Optimize for assembly qualified names.
-                if (collectionElement.Type.Equals(extensionSectionType.AssemblyQualifiedName, StringComparison.Ordinal))
+                if (
+                    collectionElement.Type.Equals(
+                        extensionSectionType.AssemblyQualifiedName,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     configurationElementName = collectionElement.Name;
                     break;
@@ -246,7 +303,10 @@ namespace System.ServiceModel.Configuration
                 // Check type directly for the case that the extension is registered with something less than
                 // an full assembly qualified name.
                 Type collectionElementType = Type.GetType(collectionElement.Type, false);
-                if (null != collectionElementType && extensionSectionType.Equals(collectionElementType))
+                if (
+                    null != collectionElementType
+                    && extensionSectionType.Equals(collectionElementType)
+                )
                 {
                     configurationElementName = collectionElement.Name;
                     break;
@@ -255,11 +315,17 @@ namespace System.ServiceModel.Configuration
 
             if (String.IsNullOrEmpty(configurationElementName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(SR.GetString(SR.ConfigExtensionTypeNotRegisteredInCollection,
-                    extensionSectionType.AssemblyQualifiedName,
-                    this.extensionCollectionName),
-                    this.ElementInformation.Source,
-                    this.ElementInformation.LineNumber));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ConfigurationErrorsException(
+                        SR.GetString(
+                            SR.ConfigExtensionTypeNotRegisteredInCollection,
+                            extensionSectionType.AssemblyQualifiedName,
+                            this.extensionCollectionName
+                        ),
+                        this.ElementInformation.Source,
+                        this.ElementInformation.LineNumber
+                    )
+                );
             }
 
             return configurationElementName;
@@ -320,8 +386,10 @@ namespace System.ServiceModel.Configuration
             return this.EvaluationContext;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses critical field contextHelper.",
-            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses critical field contextHelper.",
+            Miscellaneous = "RequiresReview -- the return value will be used for a security decision -- see comment in interface definition."
+        )]
         [SecurityCritical]
         ContextInformation IConfigurationContextProviderInternal.GetOriginalEvaluationContext()
         {

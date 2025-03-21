@@ -21,11 +21,17 @@ namespace System.DirectoryServices.AccountManagement
 
         // Returns true if this store has native support for search (and thus a wormhole).
         // Returns true for everything but SAM (both reg-SAM and MSAM).
-        internal override bool SupportsSearchNatively { get { return true; } }
+        internal override bool SupportsSearchNatively
+        {
+            get { return true; }
+        }
 
         // Returns a type indicating the type of object that would be returned as the wormhole for the specified
         // PrincipalSearcher.
-        internal override Type SearcherNativeType() { return typeof(DirectorySearcher); }
+        internal override Type SearcherNativeType()
+        {
+            return typeof(DirectorySearcher);
+        }
 
         private void BuildExtensionPropertyList(Hashtable propertyList, Type p)
         {
@@ -33,18 +39,26 @@ namespace System.DirectoryServices.AccountManagement
 
             foreach (System.Reflection.PropertyInfo pInfo in propertyInfoList)
             {
-                DirectoryPropertyAttribute[] pAttributeList = (DirectoryPropertyAttribute[])(pInfo.GetCustomAttributes(typeof(DirectoryPropertyAttribute), true));
+                DirectoryPropertyAttribute[] pAttributeList = (DirectoryPropertyAttribute[])(
+                    pInfo.GetCustomAttributes(typeof(DirectoryPropertyAttribute), true)
+                );
                 foreach (DirectoryPropertyAttribute pAttribute in pAttributeList)
                 {
                     if (!propertyList.Contains(pAttribute.SchemaAttributeName))
-                        propertyList.Add(pAttribute.SchemaAttributeName, pAttribute.SchemaAttributeName);
+                        propertyList.Add(
+                            pAttribute.SchemaAttributeName,
+                            pAttribute.SchemaAttributeName
+                        );
                 }
             }
         }
 
         protected void BuildPropertySet(Type p, StringCollection propertySet)
         {
-            if (TypeToLdapPropListMap[this.MappingTableIndex].TryGetValue(p, out StringCollection value))
+            if (
+                TypeToLdapPropListMap[this.MappingTableIndex]
+                    .TryGetValue(p, out StringCollection value)
+            )
             {
                 string[] props = new string[value.Count];
                 value.CopyTo(props, 0);
@@ -115,11 +129,15 @@ namespace System.DirectoryServices.AccountManagement
             // This is the first time we're being called on this principal.  Create a fresh searcher.
             if (ps.UnderlyingSearcher == null)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "PushFilterToNativeSearcher: creating fresh DirectorySearcher");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "ADStoreCtx",
+                    "PushFilterToNativeSearcher: creating fresh DirectorySearcher"
+                );
 
                 ps.UnderlyingSearcher = new DirectorySearcher(this.ctxBase);
                 ((DirectorySearcher)ps.UnderlyingSearcher).PageSize = ps.PageSize;
-                ((DirectorySearcher)ps.UnderlyingSearcher).ServerTimeLimit = new TimeSpan(0, 0, 30);  // 30 seconds
+                ((DirectorySearcher)ps.UnderlyingSearcher).ServerTimeLimit = new TimeSpan(0, 0, 30); // 30 seconds
             }
 
             DirectorySearcher ds = (DirectorySearcher)ps.UnderlyingSearcher;
@@ -130,7 +148,11 @@ namespace System.DirectoryServices.AccountManagement
 
             if (qbeFilter == null)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "PushFilterToNativeSearcher: no qbeFilter specified");
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "ADStoreCtx",
+                    "PushFilterToNativeSearcher: no qbeFilter specified"
+                );
 
                 // No filter specified.  Search for all principals (all users, computers, groups).
                 ldapFilter.Append("(|(objectClass=user)(objectClass=computer)(objectClass=group))");
@@ -147,21 +169,29 @@ namespace System.DirectoryServices.AccountManagement
                 //
                 QbeFilterDescription filters = BuildQbeFilterDescription(qbeFilter);
 
-                GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "PushFilterToNativeSearcher: using {0} filters", filters.FiltersToApply.Count);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Info,
+                    "ADStoreCtx",
+                    "PushFilterToNativeSearcher: using {0} filters",
+                    filters.FiltersToApply.Count
+                );
 
                 Hashtable filterTable = (Hashtable)s_filterPropertiesTable[this.MappingTableIndex];
 
                 foreach (FilterBase filter in filters.FiltersToApply)
                 {
-                    FilterPropertyTableEntry entry = (FilterPropertyTableEntry)filterTable[filter.GetType()];
+                    FilterPropertyTableEntry entry = (FilterPropertyTableEntry)
+                        filterTable[filter.GetType()];
 
                     if (entry == null)
                     {
                         // Must be a property we don't support
                         throw new InvalidOperationException(
-                                    SR.Format(
-                                        SR.StoreCtxUnsupportedPropertyForQuery,
-                                        PropertyNamesExternal.GetExternalForm(filter.PropertyName)));
+                            SR.Format(
+                                SR.StoreCtxUnsupportedPropertyForQuery,
+                                PropertyNamesExternal.GetExternalForm(filter.PropertyName)
+                            )
+                        );
                     }
 
                     ldapFilter.Append(entry.converter(filter, entry.suggestedADPropertyName));
@@ -179,7 +209,12 @@ namespace System.DirectoryServices.AccountManagement
             BuildPropertySet(qbeFilter.GetType(), ds.PropertiesToLoad);
 
             ds.Filter = ldapFilter.ToString();
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "PushFilterToNativeSearcher: using LDAP filter {0}", ds.Filter);
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ADStoreCtx",
+                "PushFilterToNativeSearcher: using LDAP filter {0}",
+                ds.Filter
+            );
 
             return ds;
         }
@@ -189,7 +224,7 @@ namespace System.DirectoryServices.AccountManagement
             string ldapFilter;
 
             if (principalType == typeof(UserPrincipal))
-                ldapFilter = "(&(objectCategory=user)(objectClass=user)";   // objCat because we don't want to match on computer accounts
+                ldapFilter = "(&(objectCategory=user)(objectClass=user)"; // objCat because we don't want to match on computer accounts
             else if (principalType == typeof(GroupPrincipal))
                 ldapFilter = "(&(objectClass=group)";
             else if (principalType == typeof(ComputerPrincipal))
@@ -203,8 +238,12 @@ namespace System.DirectoryServices.AccountManagement
                 string objClass = ExtensionHelper.ReadStructuralObjectClass(principalType);
                 if (null == objClass)
                 {
-                    Debug.Fail($"ADStoreCtx.GetObjectClassPortion: fell off end looking for {principalType}");
-                    throw new InvalidOperationException(SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForQuery, principalType));
+                    Debug.Fail(
+                        $"ADStoreCtx.GetObjectClassPortion: fell off end looking for {principalType}"
+                    );
+                    throw new InvalidOperationException(
+                        SR.Format(SR.StoreCtxUnsupportedPrincipalTypeForQuery, principalType)
+                    );
                 }
 
                 ldapFilter = $"(&(objectClass={objClass})";
@@ -263,45 +302,173 @@ namespace System.DirectoryServices.AccountManagement
         private static readonly object[,] s_filterPropertiesTableRaw =
         {
             // QbeType                                          AD property             Converter
-            {typeof(DescriptionFilter),                         "description",          new FilterConverterDelegate(StringConverter)},
-            {typeof(DisplayNameFilter),                         "displayName",          new FilterConverterDelegate(StringConverter)},
-            {typeof(IdentityClaimFilter),                       "",                     new FilterConverterDelegate(IdentityClaimConverter)},
-            {typeof(SamAccountNameFilter),       "sAMAccountName",          new FilterConverterDelegate(StringConverter)},
-            {typeof(DistinguishedNameFilter),                         "distinguishedName",          new FilterConverterDelegate(StringConverter)},
-            {typeof(GuidFilter),                         "objectGuid",          new FilterConverterDelegate(GuidConverter)},
-            {typeof(UserPrincipalNameFilter),                         "userPrincipalName",          new FilterConverterDelegate(StringConverter)},
-            {typeof(StructuralObjectClassFilter),                         "objectClass",          new FilterConverterDelegate(StringConverter)},
-            {typeof(NameFilter),                         "name",          new FilterConverterDelegate(StringConverter)},
-            {typeof(CertificateFilter),                         "",                     new FilterConverterDelegate(CertificateConverter)},
-            {typeof(AuthPrincEnabledFilter),                    "userAccountControl",   new FilterConverterDelegate(UserAccountControlConverter)},
-            {typeof(PermittedWorkstationFilter),                "userWorkstations",     new FilterConverterDelegate(CommaStringConverter)},
-            {typeof(PermittedLogonTimesFilter),                 "logonHours",           new FilterConverterDelegate(BinaryConverter)},
-            {typeof(ExpirationDateFilter),                      "accountExpires",       new FilterConverterDelegate(ExpirationDateConverter)},
-            {typeof(SmartcardLogonRequiredFilter),              "userAccountControl",   new FilterConverterDelegate(UserAccountControlConverter)},
-            {typeof(DelegationPermittedFilter),                 "userAccountControl",   new FilterConverterDelegate(UserAccountControlConverter)},
-            {typeof(HomeDirectoryFilter),                       "homeDirectory",        new FilterConverterDelegate(StringConverter)},
-            {typeof(HomeDriveFilter),                           "homeDrive",            new FilterConverterDelegate(StringConverter)},
-            {typeof(ScriptPathFilter),                          "scriptPath",           new FilterConverterDelegate(StringConverter)},
-            {typeof(PasswordNotRequiredFilter),                 "userAccountControl",   new FilterConverterDelegate(UserAccountControlConverter)},
-            {typeof(PasswordNeverExpiresFilter),                "userAccountControl",   new FilterConverterDelegate(UserAccountControlConverter)},
-            {typeof(CannotChangePasswordFilter),                "userAccountControl",   new FilterConverterDelegate(UserAccountControlConverter)},
-            {typeof(AllowReversiblePasswordEncryptionFilter),   "userAccountControl",   new FilterConverterDelegate(UserAccountControlConverter)},
-            {typeof(GivenNameFilter),                           "givenName",            new FilterConverterDelegate(StringConverter)},
-            {typeof(MiddleNameFilter),                          "middleName",           new FilterConverterDelegate(StringConverter)},
-            {typeof(SurnameFilter),                             "sn",                   new FilterConverterDelegate(StringConverter)},
-            {typeof(EmailAddressFilter),                        "mail",                 new FilterConverterDelegate(StringConverter)},
-            {typeof(VoiceTelephoneNumberFilter),                "telephoneNumber",      new FilterConverterDelegate(StringConverter)},
-            {typeof(EmployeeIDFilter),                          "employeeID",           new FilterConverterDelegate(StringConverter)},
-            {typeof(GroupIsSecurityGroupFilter),                        "groupType",            new FilterConverterDelegate(GroupTypeConverter)},
-            {typeof(GroupScopeFilter),                          "groupType",            new FilterConverterDelegate(GroupTypeConverter)},
-            {typeof(ServicePrincipalNameFilter),                "servicePrincipalName", new FilterConverterDelegate(StringConverter)},
-            {typeof(ExtensionCacheFilter),                null, new FilterConverterDelegate(ExtensionCacheConverter)},
-            {typeof(BadPasswordAttemptFilter),                "badPasswordTime", new FilterConverterDelegate(DefaultValutMatchingDateTimeConverter)},
-            {typeof(ExpiredAccountFilter),                "accountExpires", new FilterConverterDelegate(MatchingDateTimeConverter)},
-            {typeof(LastLogonTimeFilter),                "lastLogon", new FilterConverterDelegate(LastLogonConverter)},
-            {typeof(LockoutTimeFilter),                "lockoutTime", new FilterConverterDelegate(MatchingDateTimeConverter)},
-            {typeof(PasswordSetTimeFilter),                "pwdLastSet", new FilterConverterDelegate(DefaultValutMatchingDateTimeConverter)},
-            {typeof(BadLogonCountFilter),                "badPwdCount", new FilterConverterDelegate(MatchingIntConverter)}
+            {
+                typeof(DescriptionFilter),
+                "description",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(DisplayNameFilter),
+                "displayName",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(IdentityClaimFilter),
+                "",
+                new FilterConverterDelegate(IdentityClaimConverter),
+            },
+            {
+                typeof(SamAccountNameFilter),
+                "sAMAccountName",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(DistinguishedNameFilter),
+                "distinguishedName",
+                new FilterConverterDelegate(StringConverter),
+            },
+            { typeof(GuidFilter), "objectGuid", new FilterConverterDelegate(GuidConverter) },
+            {
+                typeof(UserPrincipalNameFilter),
+                "userPrincipalName",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(StructuralObjectClassFilter),
+                "objectClass",
+                new FilterConverterDelegate(StringConverter),
+            },
+            { typeof(NameFilter), "name", new FilterConverterDelegate(StringConverter) },
+            { typeof(CertificateFilter), "", new FilterConverterDelegate(CertificateConverter) },
+            {
+                typeof(AuthPrincEnabledFilter),
+                "userAccountControl",
+                new FilterConverterDelegate(UserAccountControlConverter),
+            },
+            {
+                typeof(PermittedWorkstationFilter),
+                "userWorkstations",
+                new FilterConverterDelegate(CommaStringConverter),
+            },
+            {
+                typeof(PermittedLogonTimesFilter),
+                "logonHours",
+                new FilterConverterDelegate(BinaryConverter),
+            },
+            {
+                typeof(ExpirationDateFilter),
+                "accountExpires",
+                new FilterConverterDelegate(ExpirationDateConverter),
+            },
+            {
+                typeof(SmartcardLogonRequiredFilter),
+                "userAccountControl",
+                new FilterConverterDelegate(UserAccountControlConverter),
+            },
+            {
+                typeof(DelegationPermittedFilter),
+                "userAccountControl",
+                new FilterConverterDelegate(UserAccountControlConverter),
+            },
+            {
+                typeof(HomeDirectoryFilter),
+                "homeDirectory",
+                new FilterConverterDelegate(StringConverter),
+            },
+            { typeof(HomeDriveFilter), "homeDrive", new FilterConverterDelegate(StringConverter) },
+            {
+                typeof(ScriptPathFilter),
+                "scriptPath",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(PasswordNotRequiredFilter),
+                "userAccountControl",
+                new FilterConverterDelegate(UserAccountControlConverter),
+            },
+            {
+                typeof(PasswordNeverExpiresFilter),
+                "userAccountControl",
+                new FilterConverterDelegate(UserAccountControlConverter),
+            },
+            {
+                typeof(CannotChangePasswordFilter),
+                "userAccountControl",
+                new FilterConverterDelegate(UserAccountControlConverter),
+            },
+            {
+                typeof(AllowReversiblePasswordEncryptionFilter),
+                "userAccountControl",
+                new FilterConverterDelegate(UserAccountControlConverter),
+            },
+            { typeof(GivenNameFilter), "givenName", new FilterConverterDelegate(StringConverter) },
+            {
+                typeof(MiddleNameFilter),
+                "middleName",
+                new FilterConverterDelegate(StringConverter),
+            },
+            { typeof(SurnameFilter), "sn", new FilterConverterDelegate(StringConverter) },
+            { typeof(EmailAddressFilter), "mail", new FilterConverterDelegate(StringConverter) },
+            {
+                typeof(VoiceTelephoneNumberFilter),
+                "telephoneNumber",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(EmployeeIDFilter),
+                "employeeID",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(GroupIsSecurityGroupFilter),
+                "groupType",
+                new FilterConverterDelegate(GroupTypeConverter),
+            },
+            {
+                typeof(GroupScopeFilter),
+                "groupType",
+                new FilterConverterDelegate(GroupTypeConverter),
+            },
+            {
+                typeof(ServicePrincipalNameFilter),
+                "servicePrincipalName",
+                new FilterConverterDelegate(StringConverter),
+            },
+            {
+                typeof(ExtensionCacheFilter),
+                null,
+                new FilterConverterDelegate(ExtensionCacheConverter),
+            },
+            {
+                typeof(BadPasswordAttemptFilter),
+                "badPasswordTime",
+                new FilterConverterDelegate(DefaultValutMatchingDateTimeConverter),
+            },
+            {
+                typeof(ExpiredAccountFilter),
+                "accountExpires",
+                new FilterConverterDelegate(MatchingDateTimeConverter),
+            },
+            {
+                typeof(LastLogonTimeFilter),
+                "lastLogon",
+                new FilterConverterDelegate(LastLogonConverter),
+            },
+            {
+                typeof(LockoutTimeFilter),
+                "lockoutTime",
+                new FilterConverterDelegate(MatchingDateTimeConverter),
+            },
+            {
+                typeof(PasswordSetTimeFilter),
+                "pwdLastSet",
+                new FilterConverterDelegate(DefaultValutMatchingDateTimeConverter),
+            },
+            {
+                typeof(BadLogonCountFilter),
+                "badPwdCount",
+                new FilterConverterDelegate(MatchingIntConverter),
+            },
         };
 
         private static Hashtable s_filterPropertiesTable;
@@ -317,27 +484,33 @@ namespace System.DirectoryServices.AccountManagement
         //
 
         // returns LDAP filter clause, e.g., "(description=foo*")
-        protected delegate string FilterConverterDelegate(FilterBase filter, string suggestedAdProperty);
+        protected delegate string FilterConverterDelegate(
+            FilterBase filter,
+            string suggestedAdProperty
+        );
 
         protected static string StringConverter(FilterBase filter, string suggestedAdProperty)
         {
-            return filter.Value != null ?
-                $"({suggestedAdProperty}={ADUtils.PAPIQueryToLdapQueryString((string)filter.Value)})" :
-                $"(!({suggestedAdProperty}=*))";
+            return filter.Value != null
+                ? $"({suggestedAdProperty}={ADUtils.PAPIQueryToLdapQueryString((string)filter.Value)})"
+                : $"(!({suggestedAdProperty}=*))";
         }
 
         protected static string AcctDisabledConverter(FilterBase filter, string suggestedAdProperty)
         {
             // Principal property is AccountEnabled  where TRUE = enabled FALSE = disabled.  In ADAM
             // this is stored as accountDisabled where TRUE = disabled and FALSE = enabled so here we need to revese the value.
-            return filter.Value != null ?
-                $"({suggestedAdProperty}={(!(bool)filter.Value ? "TRUE" : "FALSE")})" :
-                $"(!({suggestedAdProperty}=*))";
+            return filter.Value != null
+                ? $"({suggestedAdProperty}={(!(bool)filter.Value ? "TRUE" : "FALSE")})"
+                : $"(!({suggestedAdProperty}=*))";
         }
 
         // Use this function when searching for an attribute where the absence of the attribute = a default setting.
         // i.e.  ms-DS-UserPasswordNotRequired in ADAM where non existence equals false.
-        protected static string DefaultValueBoolConverter(FilterBase filter, string suggestedAdProperty)
+        protected static string DefaultValueBoolConverter(
+            FilterBase filter,
+            string suggestedAdProperty
+        )
         {
             Debug.Assert(NonPresentAttrDefaultStateMapping != null);
             Debug.Assert(NonPresentAttrDefaultStateMapping.ContainsKey(suggestedAdProperty));
@@ -358,12 +531,17 @@ namespace System.DirectoryServices.AccountManagement
 
         protected static string CommaStringConverter(FilterBase filter, string suggestedAdProperty)
         {
-            return filter.Value != null ?
-                $"({suggestedAdProperty}=*{ADUtils.PAPIQueryToLdapQueryString((string)filter.Value)}*)" :
-                $"(!({suggestedAdProperty}=*))";
+            return filter.Value != null
+                ? $"({suggestedAdProperty}=*{ADUtils.PAPIQueryToLdapQueryString((string)filter.Value)}*)"
+                : $"(!({suggestedAdProperty}=*))";
         }
 
-        protected static bool IdentityClaimToFilter(string identity, string identityFormat, ref string filter, bool throwOnFail)
+        protected static bool IdentityClaimToFilter(
+            string identity,
+            string identityFormat,
+            ref string filter,
+            bool throwOnFail
+        )
         {
             identity ??= "";
 
@@ -425,7 +603,10 @@ namespace System.DirectoryServices.AccountManagement
 
                 case UrnScheme.SidScheme:
 
-                    if (false == SecurityIdentityClaimConverterHelper(identity, false, sb, throwOnFail))
+                    if (
+                        false
+                        == SecurityIdentityClaimConverterHelper(identity, false, sb, throwOnFail)
+                    )
                     {
                         return false;
                     }
@@ -442,8 +623,11 @@ namespace System.DirectoryServices.AccountManagement
                         else
                             return false;
 
-                    string samAccountName = (index != -1) ? identity.Substring(index + 1) :    // +1 to skip the '/'
-                                                            identity;
+                    string samAccountName =
+                        (index != -1)
+                            ? identity.Substring(index + 1)
+                            : // +1 to skip the '/'
+                            identity;
 
                     sb.Append("(samAccountName=");
                     sb.Append(ADUtils.EscapeRFC2254SpecialChars(samAccountName));
@@ -473,7 +657,10 @@ namespace System.DirectoryServices.AccountManagement
             return true;
         }
 
-        protected static string IdentityClaimConverter(FilterBase filter, string suggestedAdProperty)
+        protected static string IdentityClaimConverter(
+            FilterBase filter,
+            string suggestedAdProperty
+        )
         {
             IdentityClaim ic = (IdentityClaim)filter.Value;
 
@@ -491,7 +678,12 @@ namespace System.DirectoryServices.AccountManagement
 
         // If useSidHistory == false, build a filter for objectSid.
         // If useSidHistory == true, build a filter for objectSid and sidHistory.
-        protected static unsafe bool SecurityIdentityClaimConverterHelper(string urnValue, bool useSidHistory, StringBuilder filter, bool throwOnFail)
+        protected static unsafe bool SecurityIdentityClaimConverterHelper(
+            string urnValue,
+            bool useSidHistory,
+            StringBuilder filter,
+            bool throwOnFail
+        )
         {
             // String is in SDDL format.  Translate it to ldap hex format
 
@@ -500,7 +692,9 @@ namespace System.DirectoryServices.AccountManagement
 
             try
             {
-                if (Interop.Advapi32.ConvertStringSidToSid(urnValue, out pSid) != Interop.BOOL.FALSE)
+                if (
+                    Interop.Advapi32.ConvertStringSidToSid(urnValue, out pSid) != Interop.BOOL.FALSE
+                )
                 {
                     // Now we convert the native SID to a byte[] SID
                     sidB = Utils.ConvertNativeSidToByteArray((IntPtr)pSid);
@@ -557,15 +751,25 @@ namespace System.DirectoryServices.AccountManagement
         protected static string CertificateConverter(FilterBase filter, string suggestedAdProperty)
         {
             System.Security.Cryptography.X509Certificates.X509Certificate2 certificate =
-                                    (System.Security.Cryptography.X509Certificates.X509Certificate2)filter.Value;
+                (System.Security.Cryptography.X509Certificates.X509Certificate2)filter.Value;
 
             byte[] rawCertificate = certificate.RawData;
 
             return $"(userCertificate={ADUtils.EscapeBinaryValue(rawCertificate)})";
         }
-        protected static string UserAccountControlConverter(FilterBase filter, string suggestedAdProperty)
+
+        protected static string UserAccountControlConverter(
+            FilterBase filter,
+            string suggestedAdProperty
+        )
         {
-            Debug.Assert(string.Equals(suggestedAdProperty, "userAccountControl", StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                string.Equals(
+                    suggestedAdProperty,
+                    "userAccountControl",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
 
             string result = "";
 
@@ -579,39 +783,39 @@ namespace System.DirectoryServices.AccountManagement
                     // UF_ACCOUNTDISABLE
                     // Note that the logic is inverted on this one.  We expose "Enabled",
                     // but AD stores it as "Disabled".
-                    result = value ?
-                        "(!(userAccountControl:1.2.840.113556.1.4.803:=2))" :
-                        "(userAccountControl:1.2.840.113556.1.4.803:=2)";
+                    result = value
+                        ? "(!(userAccountControl:1.2.840.113556.1.4.803:=2))"
+                        : "(userAccountControl:1.2.840.113556.1.4.803:=2)";
                     break;
 
                 case SmartcardLogonRequiredFilter.PropertyNameStatic:
                     // UF_SMARTCARD_REQUIRED
-                    result = value ?
-                        "(userAccountControl:1.2.840.113556.1.4.803:=262144)" :
-                        "(!(userAccountControl:1.2.840.113556.1.4.803:=262144))";
+                    result = value
+                        ? "(userAccountControl:1.2.840.113556.1.4.803:=262144)"
+                        : "(!(userAccountControl:1.2.840.113556.1.4.803:=262144))";
                     break;
 
                 case DelegationPermittedFilter.PropertyNameStatic:
                     // UF_NOT_DELEGATED
                     // Note that the logic is inverted on this one.  That's because we expose
                     // "delegation allowed", but AD represents it as the inverse, "delegation NOT allowed"
-                    result = value ?
-                        "(!(userAccountControl:1.2.840.113556.1.4.803:=1048576))" :
-                        "(userAccountControl:1.2.840.113556.1.4.803:=1048576)";
+                    result = value
+                        ? "(!(userAccountControl:1.2.840.113556.1.4.803:=1048576))"
+                        : "(userAccountControl:1.2.840.113556.1.4.803:=1048576)";
                     break;
 
                 case PasswordNotRequiredFilter.PropertyNameStatic:
                     // UF_PASSWD_NOTREQD
-                    result = value ?
-                        "(userAccountControl:1.2.840.113556.1.4.803:=32)" :
-                        "(!(userAccountControl:1.2.840.113556.1.4.803:=32))";
+                    result = value
+                        ? "(userAccountControl:1.2.840.113556.1.4.803:=32)"
+                        : "(!(userAccountControl:1.2.840.113556.1.4.803:=32))";
                     break;
 
                 case PasswordNeverExpiresFilter.PropertyNameStatic:
                     // UF_DONT_EXPIRE_PASSWD
-                    result = value ?
-                        "(userAccountControl:1.2.840.113556.1.4.803:=65536)" :
-                        "(!(userAccountControl:1.2.840.113556.1.4.803:=65536))";
+                    result = value
+                        ? "(userAccountControl:1.2.840.113556.1.4.803:=65536)"
+                        : "(!(userAccountControl:1.2.840.113556.1.4.803:=65536))";
                     break;
 
                 case CannotChangePasswordFilter.PropertyNameStatic:
@@ -619,19 +823,24 @@ namespace System.DirectoryServices.AccountManagement
                     // This bit doesn't work correctly in AD (AD models the "user can't change password"
                     // setting as special ACEs in the ntSecurityDescriptor).
                     throw new InvalidOperationException(
-                                            SR.Format(
-                                                    SR.StoreCtxUnsupportedPropertyForQuery,
-                                                    PropertyNamesExternal.GetExternalForm(filter.PropertyName)));
+                        SR.Format(
+                            SR.StoreCtxUnsupportedPropertyForQuery,
+                            PropertyNamesExternal.GetExternalForm(filter.PropertyName)
+                        )
+                    );
 
                 case AllowReversiblePasswordEncryptionFilter.PropertyNameStatic:
                     // UF_ENCRYPTED_TEXT_PASSWORD_ALLOWED
-                    result = value ?
-                        "(userAccountControl:1.2.840.113556.1.4.803:=128)" :
-                        "(!(userAccountControl:1.2.840.113556.1.4.803:=128))";
+                    result = value
+                        ? "(userAccountControl:1.2.840.113556.1.4.803:=128)"
+                        : "(!(userAccountControl:1.2.840.113556.1.4.803:=128))";
                     break;
 
                 default:
-                    Debug.Fail("ADStoreCtx.UserAccountControlConverter: fell off end looking for " + filter.PropertyName);
+                    Debug.Fail(
+                        "ADStoreCtx.UserAccountControlConverter: fell off end looking for "
+                            + filter.PropertyName
+                    );
                     break;
             }
 
@@ -640,26 +849,38 @@ namespace System.DirectoryServices.AccountManagement
 
         protected static string BinaryConverter(FilterBase filter, string suggestedAdProperty)
         {
-            return filter.Value != null ?
-                $"({suggestedAdProperty}={ADUtils.EscapeBinaryValue((byte[])filter.Value)})" :
-                $"(!({suggestedAdProperty}=*)))";
+            return filter.Value != null
+                ? $"({suggestedAdProperty}={ADUtils.EscapeBinaryValue((byte[])filter.Value)})"
+                : $"(!({suggestedAdProperty}=*)))";
         }
 
-        protected static string ExpirationDateConverter(FilterBase filter, string suggestedAdProperty)
+        protected static string ExpirationDateConverter(
+            FilterBase filter,
+            string suggestedAdProperty
+        )
         {
-            Debug.Assert(string.Equals(suggestedAdProperty, "accountExpires", StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                string.Equals(
+                    suggestedAdProperty,
+                    "accountExpires",
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
             Debug.Assert(filter is ExpirationDateFilter);
 
             Nullable<DateTime> date = (Nullable<DateTime>)filter.Value;
 
-            return !date.HasValue ?
-                "(|(accountExpires=9223372036854775807)(accountExpires=0))" : // Both values are used to represent "no expiration date set"
+            return !date.HasValue
+                ? "(|(accountExpires=9223372036854775807)(accountExpires=0))"
+                : // Both values are used to represent "no expiration date set"
                 $"(accountExpires={ADUtils.DateTimeToADString(date.Value)})";
         }
 
         protected static string GuidConverter(FilterBase filter, string suggestedAdProperty)
         {
-            Debug.Assert(string.Equals(suggestedAdProperty, "objectGuid", StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                string.Equals(suggestedAdProperty, "objectGuid", StringComparison.OrdinalIgnoreCase)
+            );
             Debug.Assert(filter is GuidFilter);
 
             Nullable<Guid> guid = (Nullable<Guid>)filter.Value;
@@ -685,10 +906,20 @@ namespace System.DirectoryServices.AccountManagement
 
             QbeMatchType qmt = (QbeMatchType)filter.Value;
 
-            return (ExtensionTypeConverter(suggestedAdProperty, qmt.Value.GetType(), qmt.Value, qmt.Match));
+            return (
+                ExtensionTypeConverter(
+                    suggestedAdProperty,
+                    qmt.Value.GetType(),
+                    qmt.Value,
+                    qmt.Match
+                )
+            );
         }
 
-        protected static string DefaultValutMatchingDateTimeConverter(FilterBase filter, string suggestedAdProperty)
+        protected static string DefaultValutMatchingDateTimeConverter(
+            FilterBase filter,
+            string suggestedAdProperty
+        )
         {
             Debug.Assert(filter.Value is QbeMatchType);
 
@@ -696,10 +927,21 @@ namespace System.DirectoryServices.AccountManagement
 
             Debug.Assert(qmt.Value is DateTime);
 
-            return (DateTimeFilterBuilder(suggestedAdProperty, (DateTime)qmt.Value, LdapConstants.defaultUtcTime, false, qmt.Match));
+            return (
+                DateTimeFilterBuilder(
+                    suggestedAdProperty,
+                    (DateTime)qmt.Value,
+                    LdapConstants.defaultUtcTime,
+                    false,
+                    qmt.Match
+                )
+            );
         }
 
-        protected static string MatchingDateTimeConverter(FilterBase filter, string suggestedAdProperty)
+        protected static string MatchingDateTimeConverter(
+            FilterBase filter,
+            string suggestedAdProperty
+        )
         {
             Debug.Assert(filter.Value is QbeMatchType);
 
@@ -707,7 +949,14 @@ namespace System.DirectoryServices.AccountManagement
 
             Debug.Assert(qmt.Value is DateTime);
 
-            return (ExtensionTypeConverter(suggestedAdProperty, qmt.Value.GetType(), qmt.Value, qmt.Match));
+            return (
+                ExtensionTypeConverter(
+                    suggestedAdProperty,
+                    qmt.Value.GetType(),
+                    qmt.Value,
+                    qmt.Match
+                )
+            );
         }
 
         protected static string LastLogonConverter(FilterBase filter, string suggestedAdProperty)
@@ -717,18 +966,34 @@ namespace System.DirectoryServices.AccountManagement
             QbeMatchType qmt = (QbeMatchType)filter.Value;
 
             Debug.Assert(qmt.Value is DateTime);
-            Debug.Assert((suggestedAdProperty == "lastLogon") || (suggestedAdProperty == "lastLogonTimestamp"));
+            Debug.Assert(
+                (suggestedAdProperty == "lastLogon")
+                    || (suggestedAdProperty == "lastLogonTimestamp")
+            );
 
-            return
-                "(|" +
-                DateTimeFilterBuilder("lastLogon", (DateTime)qmt.Value, LdapConstants.defaultUtcTime, false, qmt.Match) +
-                DateTimeFilterBuilder("lastLogonTimestamp", (DateTime)qmt.Value, LdapConstants.defaultUtcTime, true, qmt.Match) +
-                ")";
+            return "(|"
+                + DateTimeFilterBuilder(
+                    "lastLogon",
+                    (DateTime)qmt.Value,
+                    LdapConstants.defaultUtcTime,
+                    false,
+                    qmt.Match
+                )
+                + DateTimeFilterBuilder(
+                    "lastLogonTimestamp",
+                    (DateTime)qmt.Value,
+                    LdapConstants.defaultUtcTime,
+                    true,
+                    qmt.Match
+                )
+                + ")";
         }
 
         protected static string GroupTypeConverter(FilterBase filter, string suggestedAdProperty)
         {
-            Debug.Assert(string.Equals(suggestedAdProperty, "groupType", StringComparison.OrdinalIgnoreCase));
+            Debug.Assert(
+                string.Equals(suggestedAdProperty, "groupType", StringComparison.OrdinalIgnoreCase)
+            );
             Debug.Assert(filter is GroupIsSecurityGroupFilter || filter is GroupScopeFilter);
 
             // 1.2.840.113556.1.4.803 is like a bit-wise AND operator
@@ -766,12 +1031,21 @@ namespace System.DirectoryServices.AccountManagement
                     }
 
                 default:
-                    Debug.Fail("ADStoreCtx.GroupTypeConverter: fell off end looking for " + filter.PropertyName);
+                    Debug.Fail(
+                        "ADStoreCtx.GroupTypeConverter: fell off end looking for "
+                            + filter.PropertyName
+                    );
                     return "";
             }
         }
 
-        public static string DateTimeFilterBuilder(string attributeName, DateTime searchValue, DateTime defaultValue, bool requirePresence, MatchType mt)
+        public static string DateTimeFilterBuilder(
+            string attributeName,
+            DateTime searchValue,
+            DateTime defaultValue,
+            bool requirePresence,
+            MatchType mt
+        )
         {
             string ldapSearchValue = null;
             string ldapDefaultValue = null;
@@ -874,7 +1148,12 @@ namespace System.DirectoryServices.AccountManagement
             return (ldapFilter.ToString());
         }
 
-        public static string ExtensionTypeConverter(string attributeName, Type type, object value, MatchType mt)
+        public static string ExtensionTypeConverter(
+            string attributeName,
+            Type type,
+            object value,
+            MatchType mt
+        )
         {
             StringBuilder ldapFilter = new StringBuilder("(");
             string ldapValue;
@@ -891,8 +1170,14 @@ namespace System.DirectoryServices.AccountManagement
 
                 foreach (object o in collection)
                 {
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionTypeConverter collection filter type " + o.GetType().ToString());
-                    collectionFilter.Append(ExtensionTypeConverter(attributeName, o.GetType(), o, mt));
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "ADStoreCtx",
+                        "ExtensionTypeConverter collection filter type " + o.GetType().ToString()
+                    );
+                    collectionFilter.Append(
+                        ExtensionTypeConverter(attributeName, o.GetType(), o, mt)
+                    );
                 }
                 return collectionFilter.ToString();
             }
@@ -965,7 +1250,10 @@ namespace System.DirectoryServices.AccountManagement
             return ldapFilter.ToString();
         }
 
-        protected static string ExtensionCacheConverter(FilterBase filter, string suggestedAdProperty)
+        protected static string ExtensionCacheConverter(
+            FilterBase filter,
+            string suggestedAdProperty
+        )
         {
             GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheConverter ");
 
@@ -979,28 +1267,58 @@ namespace System.DirectoryServices.AccountManagement
                 {
                     Type type = kvp.Value.Type ?? kvp.Value.Value.GetType();
 
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheConverter filter type " + type.ToString());
-                    GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheConverter match type " + kvp.Value.MatchType.ToString());
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "ADStoreCtx",
+                        "ExtensionCacheConverter filter type " + type.ToString()
+                    );
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Info,
+                        "ADStoreCtx",
+                        "ExtensionCacheConverter match type " + kvp.Value.MatchType.ToString()
+                    );
 
                     if (kvp.Value.Value is ICollection)
                     {
-                        GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheConverter encountered collection.");
+                        GlobalDebug.WriteLineIf(
+                            GlobalDebug.Info,
+                            "ADStoreCtx",
+                            "ExtensionCacheConverter encountered collection."
+                        );
 
                         ICollection collection = (ICollection)kvp.Value.Value;
                         foreach (object o in collection)
                         {
-                            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheConverter collection filter type " + o.GetType().ToString());
-                            query.Append(ExtensionTypeConverter(kvp.Key, o.GetType(), o, kvp.Value.MatchType));
+                            GlobalDebug.WriteLineIf(
+                                GlobalDebug.Info,
+                                "ADStoreCtx",
+                                "ExtensionCacheConverter collection filter type "
+                                    + o.GetType().ToString()
+                            );
+                            query.Append(
+                                ExtensionTypeConverter(kvp.Key, o.GetType(), o, kvp.Value.MatchType)
+                            );
                         }
                     }
                     else
                     {
-                        query.Append(ExtensionTypeConverter(kvp.Key, type, kvp.Value.Value, kvp.Value.MatchType));
+                        query.Append(
+                            ExtensionTypeConverter(
+                                kvp.Key,
+                                type,
+                                kvp.Value.Value,
+                                kvp.Value.MatchType
+                            )
+                        );
                     }
                 }
             }
 
-            GlobalDebug.WriteLineIf(GlobalDebug.Info, "ADStoreCtx", "ExtensionCacheConverter complete built filter  " + query.ToString());
+            GlobalDebug.WriteLineIf(
+                GlobalDebug.Info,
+                "ADStoreCtx",
+                "ExtensionCacheConverter complete built filter  " + query.ToString()
+            );
             return query.ToString();
         }
 
@@ -1009,7 +1327,10 @@ namespace System.DirectoryServices.AccountManagement
         /// Adds the specified Property set to the TypeToPropListMap data structure.
         /// </summary>
         ///
-        private void AddPropertySetToTypePropListMap(Type principalType, StringCollection propertySet)
+        private void AddPropertySetToTypePropListMap(
+            Type principalType,
+            StringCollection propertySet
+        )
         {
             lock (TypeToLdapPropListMap)
             {

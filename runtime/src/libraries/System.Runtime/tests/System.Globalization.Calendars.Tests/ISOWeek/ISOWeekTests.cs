@@ -13,19 +13,77 @@ namespace System.Globalization
         // Years not listed have 52 weeks (364 days). Add 2000 for current years.
         private static readonly HashSet<int> s_yearsWith53Weeks = new HashSet<int>
         {
-            004, 009, 015, 020, 026,
-            032, 037, 043, 048, 054,
-            060, 065, 071, 076, 082,
-            088, 093, 099, 105, 111, 116, 122,
-            128, 133, 139, 144, 150,
-            156, 161, 167, 172, 178,
-            184, 189, 195, 201, 207, 212, 218,
-            224, 229, 235, 240, 246,
-            252, 257, 263, 268, 274,
-            280, 285, 291, 296, 303, 308, 314,
-            320, 325, 331, 336, 342,
-            348, 353, 359, 364, 370,
-            376, 381, 387, 392, 398
+            004,
+            009,
+            015,
+            020,
+            026,
+            032,
+            037,
+            043,
+            048,
+            054,
+            060,
+            065,
+            071,
+            076,
+            082,
+            088,
+            093,
+            099,
+            105,
+            111,
+            116,
+            122,
+            128,
+            133,
+            139,
+            144,
+            150,
+            156,
+            161,
+            167,
+            172,
+            178,
+            184,
+            189,
+            195,
+            201,
+            207,
+            212,
+            218,
+            224,
+            229,
+            235,
+            240,
+            246,
+            252,
+            257,
+            263,
+            268,
+            274,
+            280,
+            285,
+            291,
+            296,
+            303,
+            308,
+            314,
+            320,
+            325,
+            331,
+            336,
+            342,
+            348,
+            353,
+            359,
+            364,
+            370,
+            376,
+            381,
+            387,
+            392,
+            398,
         };
 
         // From https://en.wikipedia.org/wiki/ISO_week_date#Relation_with_the_Gregorian_calendar.
@@ -67,27 +125,27 @@ namespace System.Globalization
 
         public static IEnumerable<object[]> GetWeekOfYear_TestData()
         {
-            return s_dateData.Select(x => new object[] {x.Date, x.Week});
+            return s_dateData.Select(x => new object[] { x.Date, x.Week });
         }
 
         public static IEnumerable<object[]> GetYear_TestData()
         {
-            return s_dateData.Select(x => new object[] {x.Date, x.Year});
+            return s_dateData.Select(x => new object[] { x.Date, x.Year });
         }
 
         public static IEnumerable<object[]> ToDateTime_TestData()
         {
-            return s_dateData.Select(x => new object[] {x.Year, x.Week, x.DayOfWeek, x.Date});
+            return s_dateData.Select(x => new object[] { x.Year, x.Week, x.DayOfWeek, x.Date });
         }
 
         public static IEnumerable<object[]> GetYearStart_TestData()
         {
-            return s_yearData.Select(x => new object[] {x.Year, x.StartDate});
+            return s_yearData.Select(x => new object[] { x.Year, x.StartDate });
         }
 
         public static IEnumerable<object[]> GetYearEnd_TestData()
         {
-            return s_yearData.Select(x => new object[] {x.Year, x.EndDate});
+            return s_yearData.Select(x => new object[] { x.Year, x.EndDate });
         }
 
         [Theory, MemberData(nameof(GetWeekOfYear_TestData))]
@@ -113,7 +171,10 @@ namespace System.Globalization
         [InlineData(10000)]
         public static void ToDateTime_WithInvalidYear_Throws(int year)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(year), () => ISOWeek.ToDateTime(year, 1, DayOfWeek.Friday));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                nameof(year),
+                () => ISOWeek.ToDateTime(year, 1, DayOfWeek.Friday)
+            );
         }
 
         [Theory]
@@ -121,7 +182,10 @@ namespace System.Globalization
         [InlineData(54)]
         public static void ToDateTime_WithInvalidWeek_Throws(int week)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(week), () => ISOWeek.ToDateTime(2018, week, DayOfWeek.Friday));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                nameof(week),
+                () => ISOWeek.ToDateTime(2018, week, DayOfWeek.Friday)
+            );
         }
 
         [Theory]
@@ -129,7 +193,10 @@ namespace System.Globalization
         [InlineData(8)]
         public static void ToDateTime_WithInvalidDayOfWeek_Throws(int dayOfWeek)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(dayOfWeek), () => ISOWeek.ToDateTime(2018, 1, (DayOfWeek)dayOfWeek));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                nameof(dayOfWeek),
+                () => ISOWeek.ToDateTime(2018, 1, (DayOfWeek)dayOfWeek)
+            );
         }
 
         [Fact]
@@ -147,7 +214,10 @@ namespace System.Globalization
         [InlineData(10000)]
         public static void GetWeeksInYear_WithInvalidYear_Throws(int year)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(nameof(year), () => ISOWeek.GetWeeksInYear(year));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                nameof(year),
+                () => ISOWeek.GetWeeksInYear(year)
+            );
         }
 
         [Theory, MemberData(nameof(GetYearStart_TestData))]
@@ -165,7 +235,10 @@ namespace System.Globalization
         [Fact]
         public static void GetYearEnd_ForYear9999_Throws()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => ISOWeek.GetYearEnd(9999));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => ISOWeek.GetYearEnd(9999)
+            );
         }
 
         private struct DateData

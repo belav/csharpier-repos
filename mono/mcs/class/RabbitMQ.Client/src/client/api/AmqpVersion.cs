@@ -79,9 +79,16 @@ namespace RabbitMQ.Client
         private readonly int m_minor;
 
         ///<summary>The AMQP specification major version number</summary>
-        public int Major { get { return m_major; } }
+        public int Major
+        {
+            get { return m_major; }
+        }
+
         ///<summary>The AMQP specification minor version number</summary>
-        public int Minor { get { return m_minor; } }
+        public int Minor
+        {
+            get { return m_minor; }
+        }
 
         ///<summary>Construct an AmqpVersion from major and minor version numbers.</summary>
         ///<remarks>

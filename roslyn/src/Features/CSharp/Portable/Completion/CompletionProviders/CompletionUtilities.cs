@@ -17,17 +17,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
 {
     internal static class CompletionUtilities
     {
-        internal static TextSpan GetCompletionItemSpan(SourceText text, int position)
-            => CommonCompletionUtilities.GetWordSpan(text, position, IsCompletionItemStartCharacter, IsWordCharacter);
+        internal static TextSpan GetCompletionItemSpan(SourceText text, int position) =>
+            CommonCompletionUtilities.GetWordSpan(
+                text,
+                position,
+                IsCompletionItemStartCharacter,
+                IsWordCharacter
+            );
 
-        public static bool IsWordStartCharacter(char ch)
-            => SyntaxFacts.IsIdentifierStartCharacter(ch);
+        public static bool IsWordStartCharacter(char ch) =>
+            SyntaxFacts.IsIdentifierStartCharacter(ch);
 
-        public static bool IsWordCharacter(char ch)
-            => SyntaxFacts.IsIdentifierStartCharacter(ch) || SyntaxFacts.IsIdentifierPartCharacter(ch);
+        public static bool IsWordCharacter(char ch) =>
+            SyntaxFacts.IsIdentifierStartCharacter(ch) || SyntaxFacts.IsIdentifierPartCharacter(ch);
 
-        public static bool IsCompletionItemStartCharacter(char ch)
-            => ch == '@' || IsWordCharacter(ch);
+        public static bool IsCompletionItemStartCharacter(char ch) =>
+            ch == '@' || IsWordCharacter(ch);
 
         public static bool TreatAsDot(SyntaxToken token, int characterPosition)
         {
@@ -41,9 +46,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return false;
         }
 
-        public static SyntaxToken? GetDotTokenLeftOfPosition(SyntaxTree syntaxTree, int position, CancellationToken cancellationToken)
+        public static SyntaxToken? GetDotTokenLeftOfPosition(
+            SyntaxTree syntaxTree,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
-            var tokenOnLeft = syntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken, includeSkipped: true);
+            var tokenOnLeft = syntaxTree.FindTokenOnLeftOfPosition(
+                position,
+                cancellationToken,
+                includeSkipped: true
+            );
             var dotToken = tokenOnLeft.GetPreviousTokenIfTouchingWord(position);
 
             // Has to be a . or a .. token
@@ -57,7 +70,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return dotToken;
         }
 
-        internal static bool IsTriggerCharacter(SourceText text, int characterPosition, in CompletionOptions options)
+        internal static bool IsTriggerCharacter(
+            SourceText text,
+            int characterPosition,
+            in CompletionOptions options
+        )
         {
             var ch = text[characterPosition];
 
@@ -96,10 +113,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
         /// <summary>
         /// Tells if we are in positions like this: <c>#nullable $$</c> or <c>#pragma warning $$</c>
         /// </summary>
-        internal static bool IsCompilerDirectiveTriggerCharacter(SourceText text, int characterPosition)
+        internal static bool IsCompilerDirectiveTriggerCharacter(
+            SourceText text,
+            int characterPosition
+        )
         {
-            while (text[characterPosition] == ' ' ||
-                   char.IsLetter(text[characterPosition]))
+            while (text[characterPosition] == ' ' || char.IsLetter(text[characterPosition]))
             {
                 characterPosition--;
 
@@ -110,40 +129,66 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
             return text[characterPosition] == '#';
         }
 
-        internal static ImmutableHashSet<char> CommonTriggerCharacters { get; } = ImmutableHashSet.Create('.', '#', '>', ':');
+        internal static ImmutableHashSet<char> CommonTriggerCharacters { get; } =
+            ImmutableHashSet.Create('.', '#', '>', ':');
 
-        internal static ImmutableHashSet<char> CommonTriggerCharactersWithArgumentList { get; } = ImmutableHashSet.Create('.', '#', '>', ':', '(', '[', ' ');
+        internal static ImmutableHashSet<char> CommonTriggerCharactersWithArgumentList { get; } =
+            ImmutableHashSet.Create('.', '#', '>', ':', '(', '[', ' ');
 
-        internal static bool IsTriggerCharacterOrArgumentListCharacter(SourceText text, int characterPosition, in CompletionOptions options)
-            => IsTriggerCharacter(text, characterPosition, options) || IsArgumentListCharacter(text, characterPosition);
+        internal static bool IsTriggerCharacterOrArgumentListCharacter(
+            SourceText text,
+            int characterPosition,
+            in CompletionOptions options
+        ) =>
+            IsTriggerCharacter(text, characterPosition, options)
+            || IsArgumentListCharacter(text, characterPosition);
 
-        private static bool IsArgumentListCharacter(SourceText text, int characterPosition)
-            => IsArgumentListCharacter(text[characterPosition]);
+        private static bool IsArgumentListCharacter(SourceText text, int characterPosition) =>
+            IsArgumentListCharacter(text[characterPosition]);
 
-        internal static bool IsArgumentListCharacter(char ch)
-            => ch is '(' or '[' or ' ';
+        internal static bool IsArgumentListCharacter(char ch) => ch is '(' or '[' or ' ';
 
-        internal static bool IsTriggerAfterSpaceOrStartOfWordCharacter(SourceText text, int characterPosition, in CompletionOptions options)
+        internal static bool IsTriggerAfterSpaceOrStartOfWordCharacter(
+            SourceText text,
+            int characterPosition,
+            in CompletionOptions options
+        )
         {
             // Bring up on space or at the start of a word.
             var ch = text[characterPosition];
-            return SpaceTypedNotBeforeWord(ch, text, characterPosition) ||
-                (IsStartingNewWord(text, characterPosition) && options.TriggerOnTypingLetters);
+            return SpaceTypedNotBeforeWord(ch, text, characterPosition)
+                || (IsStartingNewWord(text, characterPosition) && options.TriggerOnTypingLetters);
         }
 
-        internal static ImmutableHashSet<char> SpaceTriggerCharacter => ImmutableHashSet.Create(' ');
+        internal static ImmutableHashSet<char> SpaceTriggerCharacter =>
+            ImmutableHashSet.Create(' ');
 
-        private static bool SpaceTypedNotBeforeWord(char ch, SourceText text, int characterPosition)
-            => ch == ' ' && (characterPosition == text.Length - 1 || !IsWordStartCharacter(text[characterPosition + 1]));
+        private static bool SpaceTypedNotBeforeWord(
+            char ch,
+            SourceText text,
+            int characterPosition
+        ) =>
+            ch == ' '
+            && (
+                characterPosition == text.Length - 1
+                || !IsWordStartCharacter(text[characterPosition + 1])
+            );
 
         public static bool IsStartingNewWord(SourceText text, int characterPosition)
         {
             return CommonCompletionUtilities.IsStartingNewWord(
-                text, characterPosition, IsWordStartCharacter, IsWordCharacter);
+                text,
+                characterPosition,
+                IsWordStartCharacter,
+                IsWordCharacter
+            );
         }
 
-        public static (string displayText, string suffix, string insertionText) GetDisplayAndSuffixAndInsertionText(
-            ISymbol symbol, SyntaxContext context)
+        public static (
+            string displayText,
+            string suffix,
+            string insertionText
+        ) GetDisplayAndSuffixAndInsertionText(ISymbol symbol, SyntaxContext context)
         {
             var insertionText = GetInsertionText(symbol, context);
             var suffix = symbol.GetArity() == 0 ? "" : "<>";
@@ -163,8 +208,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 }
             }
 
-            if (symbol.Kind == SymbolKind.Label &&
-                symbol.DeclaringSyntaxReferences[0].GetSyntax().Kind() == SyntaxKind.DefaultSwitchLabel)
+            if (
+                symbol.Kind == SymbolKind.Label
+                && symbol.DeclaringSyntaxReferences[0].GetSyntax().Kind()
+                    == SyntaxKind.DefaultSwitchLabel
+            )
             {
                 return symbol.Name;
             }

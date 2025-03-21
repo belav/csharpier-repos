@@ -19,39 +19,68 @@ public class ForeignKeyTest
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => entityType.AddForeignKey(new[] { principalProp }, key, entityType)).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    entityType.AddForeignKey(new[] { principalProp }, key, entityType)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => entityType.RemoveForeignKey(foreignKey)).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => entityType.RemoveForeignKey(foreignKey))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => foreignKey.IsRequired = false).Message);
+            Assert.Throws<InvalidOperationException>(() => foreignKey.IsRequired = false).Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => foreignKey.IsRequiredDependent = false).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => foreignKey.IsRequiredDependent = false)
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => foreignKey.IsOwnership = false).Message);
+            Assert.Throws<InvalidOperationException>(() => foreignKey.IsOwnership = false).Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => foreignKey.IsUnique = false).Message);
+            Assert.Throws<InvalidOperationException>(() => foreignKey.IsUnique = false).Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => foreignKey.SetDependentToPrincipal((string)null)).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    foreignKey.SetDependentToPrincipal((string)null)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => foreignKey.SetPrincipalToDependent((string)null)).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    foreignKey.SetPrincipalToDependent((string)null)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => foreignKey.SetProperties(new[] { principalProp }, key)).Message);
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    foreignKey.SetProperties(new[] { principalProp }, key)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -63,7 +92,10 @@ public class ForeignKeyTest
         entityType.SetPrimaryKey(principalProp);
 
         var foreignKey = entityType.AddForeignKey(
-            new[] { dependentProp }, entityType.FindPrimaryKey(), entityType);
+            new[] { dependentProp },
+            entityType.FindPrimaryKey(),
+            entityType
+        );
         foreignKey.SetIsUnique(true);
 
         Assert.Same(entityType, foreignKey.PrincipalEntityType);
@@ -90,9 +122,20 @@ public class ForeignKeyTest
         var principalKey = dependentEntityType.SetPrimaryKey(fk);
 
         Assert.Equal(
-            CoreStrings.ForeignKeyReferencedEntityKeyMismatch("{'Fk'}", "R (Dictionary<string, object>)"),
-            Assert.Throws<InvalidOperationException>(
-                () => dependentEntityType.AddForeignKey(new[] { fk }, principalKey, principalEntityType)).Message);
+            CoreStrings.ForeignKeyReferencedEntityKeyMismatch(
+                "{'Fk'}",
+                "R (Dictionary<string, object>)"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    dependentEntityType.AddForeignKey(
+                        new[] { fk },
+                        principalKey,
+                        principalEntityType
+                    )
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -110,11 +153,21 @@ public class ForeignKeyTest
 
         Assert.Equal(
             CoreStrings.ForeignKeyCountMismatch(
-                "{'P1', 'P2'}", "D (Dictionary<string, object>)", "{'Id'}", "P (Dictionary<string, object>)"),
-            Assert.Throws<InvalidOperationException>(
-                    () => dependentEntityType.AddForeignKey(
-                        new[] { dependentProperty1, dependentProperty2 }, principalEntityType.FindPrimaryKey(), principalEntityType))
-                .Message);
+                "{'P1', 'P2'}",
+                "D (Dictionary<string, object>)",
+                "{'Id'}",
+                "P (Dictionary<string, object>)"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    dependentEntityType.AddForeignKey(
+                        new[] { dependentProperty1, dependentProperty2 },
+                        principalEntityType.FindPrimaryKey(),
+                        principalEntityType
+                    )
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -128,17 +181,25 @@ public class ForeignKeyTest
 
         var property2 = principalEntityType.AddProperty("Id1", typeof(int));
         var property3 = principalEntityType.AddProperty("Id2", typeof(int));
-        principalEntityType.SetPrimaryKey(
-            new[] { property2, property3 });
+        principalEntityType.SetPrimaryKey(new[] { property2, property3 });
 
         Assert.Equal(
             CoreStrings.ForeignKeyTypeMismatch(
-                "{'P1' : int, 'P2' : string}", "D (Dictionary<string, object>)", "{'Id1' : int, 'Id2' : int}",
-                "P (Dictionary<string, object>)"),
-            Assert.Throws<InvalidOperationException>(
-                    () => dependentEntityType.AddForeignKey(
-                        new[] { dependentProperty1, dependentProperty2 }, principalEntityType.FindPrimaryKey(), principalEntityType))
-                .Message);
+                "{'P1' : int, 'P2' : string}",
+                "D (Dictionary<string, object>)",
+                "{'Id1' : int, 'Id2' : int}",
+                "P (Dictionary<string, object>)"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    dependentEntityType.AddForeignKey(
+                        new[] { dependentProperty1, dependentProperty2 },
+                        principalEntityType.FindPrimaryKey(),
+                        principalEntityType
+                    )
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -151,7 +212,11 @@ public class ForeignKeyTest
         entityType.SetPrimaryKey(keyProp);
         var principalKey = entityType.AddKey(principalProp);
 
-        var foreignKey = entityType.AddForeignKey(new[] { dependentProp }, principalKey, entityType);
+        var foreignKey = entityType.AddForeignKey(
+            new[] { dependentProp },
+            principalKey,
+            entityType
+        );
         foreignKey.IsUnique = false;
 
         Assert.Same(entityType, foreignKey.PrincipalEntityType);
@@ -169,7 +234,11 @@ public class ForeignKeyTest
         entityType.SetPrimaryKey(property);
         var dependentProp = entityType.AddProperty("P", typeof(int));
 
-        var foreignKey = entityType.AddForeignKey(new[] { dependentProp }, entityType.FindPrimaryKey(), entityType);
+        var foreignKey = entityType.AddForeignKey(
+            new[] { dependentProp },
+            entityType.FindPrimaryKey(),
+            entityType
+        );
 
         Assert.False(dependentProp.IsNullable);
         Assert.True(foreignKey.IsRequired);
@@ -184,7 +253,11 @@ public class ForeignKeyTest
         entityType.SetPrimaryKey(property);
         var dependentProp = entityType.AddProperty("P", typeof(int?));
 
-        var foreignKey = entityType.AddForeignKey(new[] { dependentProp }, entityType.FindPrimaryKey(), entityType);
+        var foreignKey = entityType.AddForeignKey(
+            new[] { dependentProp },
+            entityType.FindPrimaryKey(),
+            entityType
+        );
 
         Assert.True(dependentProp.IsNullable);
         Assert.False(foreignKey.IsRequired);
@@ -198,13 +271,16 @@ public class ForeignKeyTest
         var property = entityType.AddProperty("Id1", typeof(int));
         var property1 = entityType.AddProperty("Id2", typeof(string));
         property1.IsNullable = false;
-        entityType.SetPrimaryKey(
-            new[] { property, property1 });
+        entityType.SetPrimaryKey(new[] { property, property1 });
 
         var dependentProp1 = entityType.AddProperty("P1", typeof(int));
         var dependentProp2 = entityType.AddProperty("P2", typeof(string));
 
-        var foreignKey = entityType.AddForeignKey(new[] { dependentProp1, dependentProp2 }, entityType.FindPrimaryKey(), entityType);
+        var foreignKey = entityType.AddForeignKey(
+            new[] { dependentProp1, dependentProp2 },
+            entityType.FindPrimaryKey(),
+            entityType
+        );
 
         Assert.False(foreignKey.IsRequired);
 
@@ -220,13 +296,16 @@ public class ForeignKeyTest
         var property = entityType.AddProperty("Id1", typeof(int));
         var property3 = entityType.AddProperty("Id2", typeof(string));
         property3.IsNullable = false;
-        entityType.SetPrimaryKey(
-            new[] { property, property3 });
+        entityType.SetPrimaryKey(new[] { property, property3 });
 
         var dependentProp1 = entityType.AddProperty("P1", typeof(int));
         var dependentProp2 = entityType.AddProperty("P2", typeof(string));
 
-        var foreignKey = entityType.AddForeignKey(new[] { dependentProp1, dependentProp2 }, entityType.FindPrimaryKey(), entityType);
+        var foreignKey = entityType.AddForeignKey(
+            new[] { dependentProp1, dependentProp2 },
+            entityType.FindPrimaryKey(),
+            entityType
+        );
         foreignKey.IsRequired = true;
 
         Assert.True(foreignKey.IsRequired);
@@ -241,15 +320,18 @@ public class ForeignKeyTest
         var property = entityType.AddProperty("Id1", typeof(int));
         var property1 = entityType.AddProperty("Id2", typeof(string));
         property1.IsNullable = false;
-        entityType.SetPrimaryKey(
-            new[] { property, property1 });
+        entityType.SetPrimaryKey(new[] { property, property1 });
 
         var dependentProp1 = entityType.AddProperty("P1", typeof(int?));
         dependentProp1.IsNullable = false;
         var dependentProp2 = entityType.AddProperty("P2", typeof(string));
         dependentProp2.IsNullable = false;
 
-        var foreignKey = entityType.AddForeignKey(new[] { dependentProp1, dependentProp2 }, entityType.FindPrimaryKey(), entityType);
+        var foreignKey = entityType.AddForeignKey(
+            new[] { dependentProp1, dependentProp2 },
+            entityType.FindPrimaryKey(),
+            entityType
+        );
         foreignKey.IsRequired = false;
 
         Assert.False(foreignKey.IsRequired);
@@ -263,10 +345,11 @@ public class ForeignKeyTest
         var foreignKey = CreateOneToManyFK();
 
         Assert.Equal(
-            CoreStrings.NonUniqueRequiredDependentForeignKey(
-                "{'Id'}",
-                nameof(OneToManyDependent)),
-            Assert.Throws<InvalidOperationException>(() => foreignKey.IsRequiredDependent = true).Message);
+            CoreStrings.NonUniqueRequiredDependentForeignKey("{'Id'}", nameof(OneToManyDependent)),
+            Assert
+                .Throws<InvalidOperationException>(() => foreignKey.IsRequiredDependent = true)
+                .Message
+        );
     }
 
     private IMutableForeignKey CreateOneToManyFK()
@@ -320,12 +403,15 @@ public class ForeignKeyTest
 
     public abstract class NavigationBase
     {
-        public static readonly PropertyInfo IdProperty = typeof(NavigationBase).GetProperty(nameof(Id));
+        public static readonly PropertyInfo IdProperty = typeof(NavigationBase).GetProperty(
+            nameof(Id)
+        );
 
         public static readonly PropertyInfo OneToManyDependentsProperty =
             typeof(NavigationBase).GetProperty(nameof(OneToManyDependents));
 
-        public static readonly PropertyInfo OneToManyPrincipalProperty = typeof(NavigationBase).GetProperty(nameof(OneToManyPrincipal));
+        public static readonly PropertyInfo OneToManyPrincipalProperty =
+            typeof(NavigationBase).GetProperty(nameof(OneToManyPrincipal));
 
         public int Id { get; set; }
         public IEnumerable<OneToManyDependent> OneToManyDependents { get; set; }
@@ -337,20 +423,17 @@ public class ForeignKeyTest
         public IEnumerable<OneToManyDependent> Deception { get; set; }
     }
 
-    public class DerivedOneToManyPrincipal : OneToManyPrincipal
-    {
-    }
+    public class DerivedOneToManyPrincipal : OneToManyPrincipal { }
 
     public class OneToManyDependent : NavigationBase
     {
-        public static readonly PropertyInfo DeceptionProperty = typeof(OneToManyDependent).GetProperty(nameof(Deception));
+        public static readonly PropertyInfo DeceptionProperty =
+            typeof(OneToManyDependent).GetProperty(nameof(Deception));
 
         public OneToManyPrincipal Deception { get; set; }
     }
 
-    public class DerivedOneToManyDependent : OneToManyDependent
-    {
-    }
+    public class DerivedOneToManyDependent : OneToManyDependent { }
 
     [ConditionalFact]
     public void Throws_when_setting_navigation_to_principal_on_wrong_FK()
@@ -362,17 +445,22 @@ public class ForeignKeyTest
         var foreignKey2 = foreignKey1.DeclaringEntityType.AddForeignKey(
             new[] { newFkProp },
             foreignKey1.PrincipalEntityType.FindPrimaryKey(),
-            foreignKey1.PrincipalEntityType);
+            foreignKey1.PrincipalEntityType
+        );
 
         Assert.Equal(
             CoreStrings.NavigationForWrongForeignKey(
                 nameof(OneToManyDependent.Deception),
                 nameof(OneToManyDependent),
                 foreignKey2.Properties.Format(),
-                foreignKey1.Properties.Format()),
-            Assert.Throws<InvalidOperationException>(
-                ()
-                    => foreignKey2.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty)).Message);
+                foreignKey1.Properties.Format()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    foreignKey2.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -385,17 +473,22 @@ public class ForeignKeyTest
         var foreignKey2 = foreignKey1.DeclaringEntityType.AddForeignKey(
             new[] { newFkProp },
             foreignKey1.PrincipalEntityType.FindPrimaryKey(),
-            foreignKey1.PrincipalEntityType);
+            foreignKey1.PrincipalEntityType
+        );
 
         Assert.Equal(
             CoreStrings.NavigationForWrongForeignKey(
                 nameof(OneToManyDependent.Deception),
                 nameof(OneToManyDependent),
                 foreignKey2.Properties.Format(),
-                foreignKey1.Properties.Format()),
-            Assert.Throws<InvalidOperationException>(
-                ()
-                    => foreignKey2.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty)).Message);
+                foreignKey1.Properties.Format()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    foreignKey2.SetDependentToPrincipal(OneToManyDependent.DeceptionProperty)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -408,8 +501,10 @@ public class ForeignKeyTest
             CoreStrings.UnableToSetIsUnique(
                 "True",
                 nameof(OneToManyPrincipal.Deception),
-                nameof(OneToManyPrincipal)),
-            Assert.Throws<InvalidOperationException>(() => foreignKey.IsUnique = true).Message);
+                nameof(OneToManyPrincipal)
+            ),
+            Assert.Throws<InvalidOperationException>(() => foreignKey.IsUnique = true).Message
+        );
     }
 
     [ConditionalFact]
@@ -421,10 +516,9 @@ public class ForeignKeyTest
         foreignKey.IsRequiredDependent = true;
 
         Assert.Equal(
-            CoreStrings.NonUniqueRequiredDependentForeignKey(
-                "{'Id'}",
-                nameof(OneToManyDependent)),
-            Assert.Throws<InvalidOperationException>(() => foreignKey.IsUnique = false).Message);
+            CoreStrings.NonUniqueRequiredDependentForeignKey("{'Id'}", nameof(OneToManyDependent)),
+            Assert.Throws<InvalidOperationException>(() => foreignKey.IsUnique = false).Message
+        );
     }
 
     private IMutableForeignKey CreateSelfRefFK(bool useAltKey = false)
@@ -433,11 +527,13 @@ public class ForeignKeyTest
         var pk = entityType.SetPrimaryKey(entityType.AddProperty(SelfRef.IdProperty));
 
         var property = entityType.AddProperty("AltId", typeof(int));
-        var principalKey = useAltKey
-            ? entityType.AddKey(property)
-            : pk;
+        var principalKey = useAltKey ? entityType.AddKey(property) : pk;
 
-        var fk = entityType.AddForeignKey(new[] { pk.Properties.Single() }, principalKey, entityType);
+        var fk = entityType.AddForeignKey(
+            new[] { pk.Properties.Single() },
+            principalKey,
+            entityType
+        );
         fk.IsUnique = true;
         fk.SetDependentToPrincipal(SelfRef.SelfRefPrincipalProperty);
         fk.SetPrincipalToDependent(SelfRef.SelfRefDependentProperty);
@@ -447,9 +543,15 @@ public class ForeignKeyTest
     private class SelfRef
     {
         public static readonly PropertyInfo IdProperty = typeof(SelfRef).GetProperty("Id");
-        public static readonly PropertyInfo SelfRefIdProperty = typeof(SelfRef).GetProperty(nameof(SelfRefId));
-        public static readonly PropertyInfo SelfRefPrincipalProperty = typeof(SelfRef).GetProperty(nameof(SelfRefPrincipal));
-        public static readonly PropertyInfo SelfRefDependentProperty = typeof(SelfRef).GetProperty(nameof(SelfRefDependent));
+        public static readonly PropertyInfo SelfRefIdProperty = typeof(SelfRef).GetProperty(
+            nameof(SelfRefId)
+        );
+        public static readonly PropertyInfo SelfRefPrincipalProperty = typeof(SelfRef).GetProperty(
+            nameof(SelfRefPrincipal)
+        );
+        public static readonly PropertyInfo SelfRefDependentProperty = typeof(SelfRef).GetProperty(
+            nameof(SelfRefDependent)
+        );
 
         public int Id { get; set; }
         public SelfRef SelfRefPrincipal { get; set; }
@@ -547,7 +649,11 @@ public class ForeignKeyTest
         entityType.SetPrimaryKey(keyProp);
         var principalKey = entityType.AddKey(principalProp);
 
-        var foreignKey = entityType.AddForeignKey(new[] { dependentProp }, principalKey, entityType);
+        var foreignKey = entityType.AddForeignKey(
+            new[] { dependentProp },
+            principalKey,
+            entityType
+        );
 
         Assert.Equal(DeleteBehavior.ClientSetNull, foreignKey.DeleteBehavior);
 
@@ -578,7 +684,11 @@ public class ForeignKeyTest
         entityType.SetPrimaryKey(keyProp);
         var principalKey = entityType.AddKey(principalProp);
 
-        var foreignKey = entityType.AddForeignKey(new[] { dependentProp }, principalKey, entityType);
+        var foreignKey = entityType.AddForeignKey(
+            new[] { dependentProp },
+            principalKey,
+            entityType
+        );
         foreignKey.SetPrincipalToDependent("S");
 
         Assert.False(foreignKey.IsOwnership);
@@ -591,8 +701,14 @@ public class ForeignKeyTest
             CoreStrings.OwnershipToDependent(
                 "S",
                 "E (Dictionary<string, object>)",
-                "E (Dictionary<string, object>)"),
-            Assert.Throws<InvalidOperationException>(() => foreignKey.SetPrincipalToDependent((string)null)).Message);
+                "E (Dictionary<string, object>)"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    foreignKey.SetPrincipalToDependent((string)null)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -605,15 +721,21 @@ public class ForeignKeyTest
         entityType.SetPrimaryKey(keyProp);
         var principalKey = entityType.AddKey(principalProp);
 
-        var foreignKey = entityType.AddForeignKey(new[] { dependentProp }, principalKey, entityType);
+        var foreignKey = entityType.AddForeignKey(
+            new[] { dependentProp },
+            principalKey,
+            entityType
+        );
 
         Assert.False(foreignKey.IsOwnership);
 
         Assert.Equal(
             CoreStrings.NavigationlessOwnership(
                 "E (Dictionary<string, object>)",
-                "E (Dictionary<string, object>)"),
-            Assert.Throws<InvalidOperationException>(() => foreignKey.IsOwnership = true).Message);
+                "E (Dictionary<string, object>)"
+            ),
+            Assert.Throws<InvalidOperationException>(() => foreignKey.IsOwnership = true).Message
+        );
     }
 
     [ConditionalFact]
@@ -623,15 +745,39 @@ public class ForeignKeyTest
 
         Assert.Same(fk.PrincipalEntityType, fk.GetRelatedEntityType(fk.DeclaringEntityType));
         Assert.Same(fk.DeclaringEntityType, fk.GetRelatedEntityType(fk.PrincipalEntityType));
-        Assert.Equal(new[] { fk.PrincipalToDependent }, fk.FindNavigationsFrom(fk.PrincipalEntityType));
-        Assert.Equal(new[] { fk.DependentToPrincipal }, fk.FindNavigationsFrom(fk.DeclaringEntityType));
-        Assert.Equal(new[] { fk.DependentToPrincipal }, fk.FindNavigationsTo(fk.PrincipalEntityType));
-        Assert.Equal(new[] { fk.PrincipalToDependent }, fk.FindNavigationsTo(fk.DeclaringEntityType));
+        Assert.Equal(
+            new[] { fk.PrincipalToDependent },
+            fk.FindNavigationsFrom(fk.PrincipalEntityType)
+        );
+        Assert.Equal(
+            new[] { fk.DependentToPrincipal },
+            fk.FindNavigationsFrom(fk.DeclaringEntityType)
+        );
+        Assert.Equal(
+            new[] { fk.DependentToPrincipal },
+            fk.FindNavigationsTo(fk.PrincipalEntityType)
+        );
+        Assert.Equal(
+            new[] { fk.PrincipalToDependent },
+            fk.FindNavigationsTo(fk.DeclaringEntityType)
+        );
 
-        Assert.Equal(new[] { fk.PrincipalToDependent }, fk.FindNavigationsFromInHierarchy(fk.PrincipalEntityType));
-        Assert.Equal(new[] { fk.DependentToPrincipal }, fk.FindNavigationsFromInHierarchy(fk.DeclaringEntityType));
-        Assert.Equal(new[] { fk.DependentToPrincipal }, fk.FindNavigationsToInHierarchy(fk.PrincipalEntityType));
-        Assert.Equal(new[] { fk.PrincipalToDependent }, fk.FindNavigationsToInHierarchy(fk.DeclaringEntityType));
+        Assert.Equal(
+            new[] { fk.PrincipalToDependent },
+            fk.FindNavigationsFromInHierarchy(fk.PrincipalEntityType)
+        );
+        Assert.Equal(
+            new[] { fk.DependentToPrincipal },
+            fk.FindNavigationsFromInHierarchy(fk.DeclaringEntityType)
+        );
+        Assert.Equal(
+            new[] { fk.DependentToPrincipal },
+            fk.FindNavigationsToInHierarchy(fk.PrincipalEntityType)
+        );
+        Assert.Equal(
+            new[] { fk.PrincipalToDependent },
+            fk.FindNavigationsToInHierarchy(fk.DeclaringEntityType)
+        );
     }
 
     [ConditionalFact]
@@ -648,45 +794,117 @@ public class ForeignKeyTest
 
         Assert.Same(fk.PrincipalEntityType, fk.GetRelatedEntityType(fk.DeclaringEntityType));
         Assert.Same(fk.DeclaringEntityType, fk.GetRelatedEntityType(fk.PrincipalEntityType));
-        Assert.Same(fk.PrincipalToDependent, fk.FindNavigationsFrom(fk.PrincipalEntityType).SingleOrDefault());
-        Assert.Same(fk.DependentToPrincipal, fk.FindNavigationsFrom(fk.DeclaringEntityType).SingleOrDefault());
-        Assert.Same(fk.DependentToPrincipal, fk.FindNavigationsTo(fk.PrincipalEntityType).SingleOrDefault());
-        Assert.Same(fk.PrincipalToDependent, fk.FindNavigationsTo(fk.DeclaringEntityType).SingleOrDefault());
+        Assert.Same(
+            fk.PrincipalToDependent,
+            fk.FindNavigationsFrom(fk.PrincipalEntityType).SingleOrDefault()
+        );
+        Assert.Same(
+            fk.DependentToPrincipal,
+            fk.FindNavigationsFrom(fk.DeclaringEntityType).SingleOrDefault()
+        );
+        Assert.Same(
+            fk.DependentToPrincipal,
+            fk.FindNavigationsTo(fk.PrincipalEntityType).SingleOrDefault()
+        );
+        Assert.Same(
+            fk.PrincipalToDependent,
+            fk.FindNavigationsTo(fk.DeclaringEntityType).SingleOrDefault()
+        );
 
-        Assert.Same(fk.PrincipalToDependent, fk.FindNavigationsFromInHierarchy(fk.PrincipalEntityType).SingleOrDefault());
-        Assert.Same(fk.DependentToPrincipal, fk.FindNavigationsFromInHierarchy(fk.DeclaringEntityType).SingleOrDefault());
-        Assert.Same(fk.DependentToPrincipal, fk.FindNavigationsToInHierarchy(fk.PrincipalEntityType).SingleOrDefault());
-        Assert.Same(fk.PrincipalToDependent, fk.FindNavigationsToInHierarchy(fk.DeclaringEntityType).SingleOrDefault());
+        Assert.Same(
+            fk.PrincipalToDependent,
+            fk.FindNavigationsFromInHierarchy(fk.PrincipalEntityType).SingleOrDefault()
+        );
+        Assert.Same(
+            fk.DependentToPrincipal,
+            fk.FindNavigationsFromInHierarchy(fk.DeclaringEntityType).SingleOrDefault()
+        );
+        Assert.Same(
+            fk.DependentToPrincipal,
+            fk.FindNavigationsToInHierarchy(fk.PrincipalEntityType).SingleOrDefault()
+        );
+        Assert.Same(
+            fk.PrincipalToDependent,
+            fk.FindNavigationsToInHierarchy(fk.DeclaringEntityType).SingleOrDefault()
+        );
 
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationshipStrict(
-                derivedDependent.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.GetRelatedEntityType(derivedDependent)).Message);
+                derivedDependent.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => fk.GetRelatedEntityType(derivedDependent))
+                .Message
+        );
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationshipStrict(
-                derivedPrincipal.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.GetRelatedEntityType(derivedPrincipal)).Message);
+                derivedPrincipal.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => fk.GetRelatedEntityType(derivedPrincipal))
+                .Message
+        );
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationshipStrict(
-                derivedPrincipal.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.FindNavigationsFrom(derivedPrincipal)).Message);
+                derivedPrincipal.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => fk.FindNavigationsFrom(derivedPrincipal))
+                .Message
+        );
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationshipStrict(
-                derivedDependent.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.FindNavigationsFrom(derivedDependent)).Message);
+                derivedDependent.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => fk.FindNavigationsFrom(derivedDependent))
+                .Message
+        );
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationshipStrict(
-                derivedPrincipal.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.FindNavigationsTo(derivedPrincipal)).Message);
+                derivedPrincipal.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => fk.FindNavigationsTo(derivedPrincipal))
+                .Message
+        );
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationshipStrict(
-                derivedDependent.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.FindNavigationsTo(derivedDependent)).Message);
+                derivedDependent.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => fk.FindNavigationsTo(derivedDependent))
+                .Message
+        );
 
-        Assert.Equal(new[] { fk.PrincipalToDependent }.Where(n => n != null), fk.FindNavigationsFromInHierarchy(derivedPrincipal));
-        Assert.Equal(new[] { fk.DependentToPrincipal }.Where(n => n != null), fk.FindNavigationsFromInHierarchy(derivedDependent));
-        Assert.Equal(new[] { fk.DependentToPrincipal }.Where(n => n != null), fk.FindNavigationsToInHierarchy(derivedPrincipal));
-        Assert.Equal(new[] { fk.PrincipalToDependent }.Where(n => n != null), fk.FindNavigationsToInHierarchy(derivedDependent));
+        Assert.Equal(
+            new[] { fk.PrincipalToDependent }.Where(n => n != null),
+            fk.FindNavigationsFromInHierarchy(derivedPrincipal)
+        );
+        Assert.Equal(
+            new[] { fk.DependentToPrincipal }.Where(n => n != null),
+            fk.FindNavigationsFromInHierarchy(derivedDependent)
+        );
+        Assert.Equal(
+            new[] { fk.DependentToPrincipal }.Where(n => n != null),
+            fk.FindNavigationsToInHierarchy(derivedPrincipal)
+        );
+        Assert.Equal(
+            new[] { fk.PrincipalToDependent }.Where(n => n != null),
+            fk.FindNavigationsToInHierarchy(derivedDependent)
+        );
     }
 
     [ConditionalFact]
@@ -699,29 +917,37 @@ public class ForeignKeyTest
 
         Assert.Equal(
             new[] { fk.PrincipalToDependent, fk.DependentToPrincipal },
-            fk.FindNavigationsFrom(fk.PrincipalEntityType).ToArray());
+            fk.FindNavigationsFrom(fk.PrincipalEntityType).ToArray()
+        );
         Assert.Equal(
             new[] { fk.PrincipalToDependent, fk.DependentToPrincipal },
-            fk.FindNavigationsFrom(fk.DeclaringEntityType).ToArray());
+            fk.FindNavigationsFrom(fk.DeclaringEntityType).ToArray()
+        );
         Assert.Equal(
             new[] { fk.PrincipalToDependent, fk.DependentToPrincipal },
-            fk.FindNavigationsTo(fk.PrincipalEntityType).ToArray());
+            fk.FindNavigationsTo(fk.PrincipalEntityType).ToArray()
+        );
         Assert.Equal(
             new[] { fk.PrincipalToDependent, fk.DependentToPrincipal },
-            fk.FindNavigationsTo(fk.DeclaringEntityType).ToArray());
+            fk.FindNavigationsTo(fk.DeclaringEntityType).ToArray()
+        );
 
         Assert.Equal(
             new[] { fk.PrincipalToDependent, fk.DependentToPrincipal },
-            fk.FindNavigationsFromInHierarchy(fk.PrincipalEntityType).ToArray());
+            fk.FindNavigationsFromInHierarchy(fk.PrincipalEntityType).ToArray()
+        );
         Assert.Equal(
             new[] { fk.PrincipalToDependent, fk.DependentToPrincipal },
-            fk.FindNavigationsFromInHierarchy(fk.DeclaringEntityType).ToArray());
+            fk.FindNavigationsFromInHierarchy(fk.DeclaringEntityType).ToArray()
+        );
         Assert.Equal(
             new[] { fk.PrincipalToDependent, fk.DependentToPrincipal },
-            fk.FindNavigationsToInHierarchy(fk.PrincipalEntityType).ToArray());
+            fk.FindNavigationsToInHierarchy(fk.PrincipalEntityType).ToArray()
+        );
         Assert.Equal(
             new[] { fk.PrincipalToDependent, fk.DependentToPrincipal },
-            fk.FindNavigationsToInHierarchy(fk.DeclaringEntityType).ToArray());
+            fk.FindNavigationsToInHierarchy(fk.DeclaringEntityType).ToArray()
+        );
     }
 
     [ConditionalFact]
@@ -731,23 +957,39 @@ public class ForeignKeyTest
 
         Assert.Same(fk.PrincipalEntityType, fk.GetRelatedEntityType(fk.DeclaringEntityType));
         Assert.Same(fk.DeclaringEntityType, fk.GetRelatedEntityType(fk.PrincipalEntityType));
-        Assert.Same(fk.PrincipalToDependent, fk.FindNavigationsFrom(fk.PrincipalEntityType).SingleOrDefault());
-        Assert.Same(fk.DependentToPrincipal, fk.FindNavigationsFrom(fk.DeclaringEntityType).SingleOrDefault());
-        Assert.Same(fk.DependentToPrincipal, fk.FindNavigationsTo(fk.PrincipalEntityType).SingleOrDefault());
-        Assert.Same(fk.PrincipalToDependent, fk.FindNavigationsTo(fk.DeclaringEntityType).SingleOrDefault());
+        Assert.Same(
+            fk.PrincipalToDependent,
+            fk.FindNavigationsFrom(fk.PrincipalEntityType).SingleOrDefault()
+        );
+        Assert.Same(
+            fk.DependentToPrincipal,
+            fk.FindNavigationsFrom(fk.DeclaringEntityType).SingleOrDefault()
+        );
+        Assert.Same(
+            fk.DependentToPrincipal,
+            fk.FindNavigationsTo(fk.PrincipalEntityType).SingleOrDefault()
+        );
+        Assert.Same(
+            fk.PrincipalToDependent,
+            fk.FindNavigationsTo(fk.DeclaringEntityType).SingleOrDefault()
+        );
 
         Assert.Equal(
             new[] { fk.PrincipalToDependent, fk.DependentToPrincipal }.Where(n => n != null),
-            fk.FindNavigationsFromInHierarchy(fk.PrincipalEntityType));
+            fk.FindNavigationsFromInHierarchy(fk.PrincipalEntityType)
+        );
         Assert.Equal(
             new[] { fk.PrincipalToDependent, fk.DependentToPrincipal }.Where(n => n != null),
-            fk.FindNavigationsFromInHierarchy(fk.DeclaringEntityType));
+            fk.FindNavigationsFromInHierarchy(fk.DeclaringEntityType)
+        );
         Assert.Equal(
             new[] { fk.PrincipalToDependent, fk.DependentToPrincipal }.Where(n => n != null),
-            fk.FindNavigationsToInHierarchy(fk.PrincipalEntityType));
+            fk.FindNavigationsToInHierarchy(fk.PrincipalEntityType)
+        );
         Assert.Equal(
             new[] { fk.PrincipalToDependent, fk.DependentToPrincipal }.Where(n => n != null),
-            fk.FindNavigationsToInHierarchy(fk.DeclaringEntityType));
+            fk.FindNavigationsToInHierarchy(fk.DeclaringEntityType)
+        );
     }
 
     [ConditionalFact]
@@ -758,50 +1000,117 @@ public class ForeignKeyTest
 
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationshipStrict(
-                unrelatedType.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.GetRelatedEntityType(unrelatedType)).Message);
+                unrelatedType.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => fk.GetRelatedEntityType(unrelatedType))
+                .Message
+        );
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationshipStrict(
-                unrelatedType.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.GetRelatedEntityType(unrelatedType)).Message);
+                unrelatedType.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => fk.GetRelatedEntityType(unrelatedType))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationshipStrict(
-                unrelatedType.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.FindNavigationsFrom(unrelatedType)).Message);
+                unrelatedType.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => fk.FindNavigationsFrom(unrelatedType))
+                .Message
+        );
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationshipStrict(
-                unrelatedType.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.FindNavigationsFrom(unrelatedType)).Message);
+                unrelatedType.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => fk.FindNavigationsFrom(unrelatedType))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationshipStrict(
-                unrelatedType.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.FindNavigationsTo(unrelatedType)).Message);
+                unrelatedType.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => fk.FindNavigationsTo(unrelatedType))
+                .Message
+        );
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationshipStrict(
-                unrelatedType.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.FindNavigationsTo(unrelatedType)).Message);
+                unrelatedType.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() => fk.FindNavigationsTo(unrelatedType))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationship(
-                unrelatedType.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.FindNavigationsFromInHierarchy(unrelatedType)).Message);
+                unrelatedType.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    fk.FindNavigationsFromInHierarchy(unrelatedType)
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationship(
-                unrelatedType.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.FindNavigationsFromInHierarchy(unrelatedType)).Message);
+                unrelatedType.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    fk.FindNavigationsFromInHierarchy(unrelatedType)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationship(
-                unrelatedType.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.FindNavigationsToInHierarchy(unrelatedType)).Message);
+                unrelatedType.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    fk.FindNavigationsToInHierarchy(unrelatedType)
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.EntityTypeNotInRelationship(
-                unrelatedType.DisplayName(), fk.DeclaringEntityType.DisplayName(), fk.PrincipalEntityType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => fk.FindNavigationsToInHierarchy(unrelatedType)).Message);
+                unrelatedType.DisplayName(),
+                fk.DeclaringEntityType.DisplayName(),
+                fk.PrincipalEntityType.DisplayName()
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    fk.FindNavigationsToInHierarchy(unrelatedType)
+                )
+                .Message
+        );
     }
 
-    private static IMutableModel CreateModel()
-        => new Model();
+    private static IMutableModel CreateModel() => new Model();
 }

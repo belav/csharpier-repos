@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.ProcessInfo
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,89 +29,116 @@
 
 using System.Security.Permissions;
 
-namespace System.Web {
+namespace System.Web
+{
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class ProcessInfo
+    {
+        #region Fields
 
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class ProcessInfo {
+        TimeSpan age;
+        int peakMemoryUsed;
+        int processID;
+        int requestCount;
+        ProcessShutdownReason shutdownReason;
+        DateTime startTime;
+        ProcessStatus status;
 
-		#region Fields
+        #endregion
 
-		TimeSpan age;
-		int peakMemoryUsed;
-		int processID;
-		int requestCount;
-		ProcessShutdownReason shutdownReason;
-		DateTime startTime;
-		ProcessStatus status;
+        #region Constructors
 
-		#endregion
+        public ProcessInfo() { }
 
-		#region Constructors
+        public ProcessInfo(
+            DateTime startTime,
+            TimeSpan age,
+            int processID,
+            int requestCount,
+            ProcessStatus status,
+            ProcessShutdownReason shutdownReason,
+            int peakMemoryUsed
+        )
+        {
+            this.age = age;
+            this.peakMemoryUsed = peakMemoryUsed;
+            this.processID = processID;
+            this.requestCount = requestCount;
+            this.shutdownReason = shutdownReason;
+            this.startTime = startTime;
+            this.status = status;
+        }
 
-		public ProcessInfo ()
-		{
-		}
+        #endregion
 
-		public ProcessInfo (DateTime startTime, TimeSpan age, int processID, int requestCount, ProcessStatus status, ProcessShutdownReason shutdownReason, int peakMemoryUsed)
-		{
-			this.age = age;
-			this.peakMemoryUsed = peakMemoryUsed;
-			this.processID = processID;
-			this.requestCount = requestCount;
-			this.shutdownReason = shutdownReason;
-			this.startTime = startTime;
-			this.status = status;
-		}
+        #region Properties
 
-		#endregion
+        public TimeSpan Age
+        {
+            get { return age; }
+        }
 
-		#region Properties
+        public int PeakMemoryUsed
+        {
+            get { return peakMemoryUsed; }
+        }
 
-		public TimeSpan Age {
-			get { return age; }
-		}
+        public int ProcessID
+        {
+            get { return processID; }
+        }
 
-		public int PeakMemoryUsed {
-			get { return peakMemoryUsed; }
-		}
+        public int RequestCount
+        {
+            get { return requestCount; }
+        }
 
-		public int ProcessID {
-			get { return processID; }
-		}
+        public ProcessShutdownReason ShutdownReason
+        {
+            get { return shutdownReason; }
+        }
 
-		public int RequestCount {
-			get { return requestCount; }
-		}
+        public DateTime StartTime
+        {
+            get { return startTime; }
+        }
 
-		public ProcessShutdownReason ShutdownReason {
-			get { return shutdownReason; }
-		}
+        public ProcessStatus Status
+        {
+            get { return status; }
+        }
 
-		public DateTime StartTime {
-			get { return startTime; }
-		}
+        #endregion // Properties
 
-		public ProcessStatus Status {
-			get { return status; }
-		}
+        #region Methods
 
-		#endregion // Properties
+        public void SetAll(
+            DateTime startTime,
+            TimeSpan age,
+            int processID,
+            int requestCount,
+            ProcessStatus status,
+            ProcessShutdownReason shutdownReason,
+            int peakMemoryUsed
+        )
+        {
+            this.age = age;
+            this.peakMemoryUsed = peakMemoryUsed;
+            this.processID = processID;
+            this.requestCount = requestCount;
+            this.shutdownReason = shutdownReason;
+            this.startTime = startTime;
+            this.status = status;
+        }
 
-		#region Methods
-
-		public void SetAll (DateTime startTime, TimeSpan age, int processID, int requestCount, ProcessStatus status, ProcessShutdownReason shutdownReason, int peakMemoryUsed)
-		{
-			this.age = age;
-			this.peakMemoryUsed = peakMemoryUsed;
-			this.processID = processID;
-			this.requestCount = requestCount;
-			this.shutdownReason = shutdownReason;
-			this.startTime = startTime;
-			this.status = status;
-		}
-
-		#endregion // Methods
-	}
+        #endregion // Methods
+    }
 }

@@ -11,7 +11,8 @@ namespace System.Xml.Xsl.XsltOld
 {
     internal sealed class WithParamAction : VariableAction
     {
-        internal WithParamAction() : base(VariableType.WithParameter) { }
+        internal WithParamAction()
+            : base(VariableType.WithParameter) { }
 
         internal override void Compile(Compiler compiler)
         {

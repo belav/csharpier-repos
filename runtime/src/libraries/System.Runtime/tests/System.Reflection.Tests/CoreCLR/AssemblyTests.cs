@@ -19,13 +19,19 @@ namespace System.Reflection.Tests
 
             // Check that location is not relative
             Assert.True(Path.IsPathRooted(actualDir));
-            Assert.Equal("System.Reflection.CoreCLR.Tests.dll", Path.GetFileName(location), StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                "System.Reflection.CoreCLR.Tests.dll",
+                Path.GetFileName(location),
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         [Fact]
         public void LoadFromStream_Location_IsEmpty()
         {
-            Assembly assembly = new TestStreamLoadContext().LoadFromAssemblyName(new AssemblyName("TinyAssembly"));
+            Assembly assembly = new TestStreamLoadContext().LoadFromAssemblyName(
+                new AssemblyName("TinyAssembly")
+            );
             Assert.Empty(assembly.Location);
         }
 
@@ -37,13 +43,16 @@ namespace System.Reflection.Tests
             Assert.Equal(42, entryPoint.Invoke(null, null));
         }
 
-        private static Assembly GetExecutingAssembly() => typeof(AssemblyTests).GetTypeInfo().Assembly;
+        private static Assembly GetExecutingAssembly() =>
+            typeof(AssemblyTests).GetTypeInfo().Assembly;
 
         private sealed class TestStreamLoadContext : AssemblyLoadContext
         {
             protected override Assembly Load(AssemblyName assemblyName)
             {
-                return LoadFromStream(GetExecutingAssembly().GetManifestResourceStream(assemblyName.Name + ".dll"));
+                return LoadFromStream(
+                    GetExecutingAssembly().GetManifestResourceStream(assemblyName.Name + ".dll")
+                );
             }
         }
     }

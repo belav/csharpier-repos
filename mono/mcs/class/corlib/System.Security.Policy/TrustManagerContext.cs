@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,65 +26,67 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Collections;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Policy {
+namespace System.Security.Policy
+{
+    [ComVisible(true)]
+    public class TrustManagerContext
+    {
+        private bool _ignorePersistedDecision;
+        private bool _noPrompt;
+        private bool _keepAlive;
+        private bool _persist;
+        private ApplicationIdentity _previousId;
+        private TrustManagerUIContext _ui;
 
-	[ComVisible (true)]
-	public class TrustManagerContext {
+        public TrustManagerContext()
+            : this(TrustManagerUIContext.Run) { }
 
-		private bool _ignorePersistedDecision;
-		private bool _noPrompt;
-		private bool _keepAlive;
-		private bool _persist;
-		private ApplicationIdentity _previousId;
-		private TrustManagerUIContext _ui;
+        public TrustManagerContext(TrustManagerUIContext uiContext)
+        {
+            _ignorePersistedDecision = false;
+            _noPrompt = false;
+            _keepAlive = false;
+            _persist = false;
+            _ui = uiContext;
+        }
 
-		public TrustManagerContext ()
-			: this (TrustManagerUIContext.Run)
-		{
-		}
+        public virtual bool IgnorePersistedDecision
+        {
+            get { return _ignorePersistedDecision; }
+            set { _ignorePersistedDecision = value; }
+        }
 
-		public TrustManagerContext (TrustManagerUIContext uiContext)
-		{
-			_ignorePersistedDecision = false;
-			_noPrompt = false;
-			_keepAlive = false;
-			_persist = false;
-			_ui = uiContext;
-		}
+        public virtual bool KeepAlive
+        {
+            get { return _keepAlive; }
+            set { _keepAlive = value; }
+        }
 
-		public virtual bool IgnorePersistedDecision {
-			get { return _ignorePersistedDecision; }
-			set { _ignorePersistedDecision = value; }
-		}
+        public virtual bool NoPrompt
+        {
+            get { return _noPrompt; }
+            set { _noPrompt = value; }
+        }
 
-		public virtual bool KeepAlive {
-			get { return _keepAlive; }
-			set { _keepAlive = value; }
-		}
+        public virtual bool Persist
+        {
+            get { return _persist; }
+            set { _persist = value; }
+        }
 
-		public virtual bool NoPrompt {
-			get { return _noPrompt; }
-			set { _noPrompt = value; }
-		}
+        public virtual ApplicationIdentity PreviousApplicationIdentity
+        {
+            get { return _previousId; }
+            set { _previousId = value; }
+        }
 
-		public virtual bool Persist {
-			get { return _persist; }
-			set { _persist = value; }
-		}
-
-		public virtual ApplicationIdentity PreviousApplicationIdentity {
-			get { return _previousId; }
-			set { _previousId = value; }
-		}
-
-		public virtual TrustManagerUIContext UIContext {
-			get { return _ui; }
-			set { _ui = value; }
-		}
-	}
+        public virtual TrustManagerUIContext UIContext
+        {
+            get { return _ui; }
+            set { _ui = value; }
+        }
+    }
 }
-

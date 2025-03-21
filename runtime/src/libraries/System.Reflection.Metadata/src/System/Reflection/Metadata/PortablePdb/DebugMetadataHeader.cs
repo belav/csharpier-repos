@@ -15,7 +15,11 @@ namespace System.Reflection.Metadata
         /// </summary>
         public int IdStartOffset { get; }
 
-        internal DebugMetadataHeader(ImmutableArray<byte> id, MethodDefinitionHandle entryPoint, int idStartOffset)
+        internal DebugMetadataHeader(
+            ImmutableArray<byte> id,
+            MethodDefinitionHandle entryPoint,
+            int idStartOffset
+        )
         {
             Id = id;
             EntryPoint = entryPoint;

@@ -17,24 +17,31 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy.Finders
 {
     internal class MethodCallFinder : AbstractCallFinder
     {
-        public MethodCallFinder(ISymbol symbol, ProjectId projectId, IAsynchronousOperationListener asyncListener, CallHierarchyProvider provider)
-            : base(symbol, projectId, asyncListener, provider)
-        {
-        }
+        public MethodCallFinder(
+            ISymbol symbol,
+            ProjectId projectId,
+            IAsynchronousOperationListener asyncListener,
+            CallHierarchyProvider provider
+        )
+            : base(symbol, projectId, asyncListener, provider) { }
 
         public override string DisplayName
         {
-            get
-            {
-                return string.Format(EditorFeaturesResources.Calls_To_0, SymbolName);
-            }
+            get { return string.Format(EditorFeaturesResources.Calls_To_0, SymbolName); }
         }
 
         public override string SearchCategory => CallHierarchyPredefinedSearchCategoryNames.Callers;
 
-        protected override async Task<IEnumerable<SymbolCallerInfo>> GetCallersAsync(ISymbol symbol, Project project, IImmutableSet<Document> documents, CancellationToken cancellationToken)
+        protected override async Task<IEnumerable<SymbolCallerInfo>> GetCallersAsync(
+            ISymbol symbol,
+            Project project,
+            IImmutableSet<Document> documents,
+            CancellationToken cancellationToken
+        )
         {
-            var callers = await SymbolFinder.FindCallersAsync(symbol, project.Solution, documents, cancellationToken).ConfigureAwait(false);
+            var callers = await SymbolFinder
+                .FindCallersAsync(symbol, project.Solution, documents, cancellationToken)
+                .ConfigureAwait(false);
             return callers.Where(c => c.IsDirect);
         }
     }

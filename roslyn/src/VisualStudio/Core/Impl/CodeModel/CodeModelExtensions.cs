@@ -16,10 +16,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypesAndNamespaces,
                 propertyStyle: SymbolDisplayPropertyStyle.NameOnly,
                 genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-                memberOptions: SymbolDisplayMemberOptions.IncludeExplicitInterface | SymbolDisplayMemberOptions.IncludeContainingType,
-                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers);
+                memberOptions: SymbolDisplayMemberOptions.IncludeExplicitInterface
+                    | SymbolDisplayMemberOptions.IncludeContainingType,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.EscapeKeywordIdentifiers
+            );
 
-        public static string GetEscapedFullName(this ISymbol symbol)
-            => symbol.ToDisplayString(s_fullNameWithEscapedKeywordsFormat);
+        public static string GetEscapedFullName(this ISymbol symbol) =>
+            symbol.ToDisplayString(s_fullNameWithEscapedKeywordsFormat);
     }
 }

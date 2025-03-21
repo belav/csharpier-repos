@@ -19,9 +19,25 @@ public class ThrowingWasUpgradedWriteOnlyStreamTests
         Assert.False(stream.CanRead);
         Assert.False(stream.CanSeek);
         Assert.False(stream.CanTimeout);
-        Assert.Equal(CoreStrings.ResponseStreamWasUpgraded, Assert.Throws<InvalidOperationException>(() => stream.Write(new byte[1], 0, 1)).Message);
-        Assert.Equal(CoreStrings.ResponseStreamWasUpgraded, (await Assert.ThrowsAsync<InvalidOperationException>(() => stream.WriteAsync(new byte[1], 0, 1))).Message);
-        Assert.Equal(CoreStrings.ResponseStreamWasUpgraded, Assert.Throws<InvalidOperationException>(() => stream.Flush()).Message);
-        Assert.Equal(CoreStrings.ResponseStreamWasUpgraded, (await Assert.ThrowsAsync<InvalidOperationException>(() => stream.FlushAsync())).Message);
+        Assert.Equal(
+            CoreStrings.ResponseStreamWasUpgraded,
+            Assert.Throws<InvalidOperationException>(() => stream.Write(new byte[1], 0, 1)).Message
+        );
+        Assert.Equal(
+            CoreStrings.ResponseStreamWasUpgraded,
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                    stream.WriteAsync(new byte[1], 0, 1)
+                )
+            ).Message
+        );
+        Assert.Equal(
+            CoreStrings.ResponseStreamWasUpgraded,
+            Assert.Throws<InvalidOperationException>(() => stream.Flush()).Message
+        );
+        Assert.Equal(
+            CoreStrings.ResponseStreamWasUpgraded,
+            (await Assert.ThrowsAsync<InvalidOperationException>(() => stream.FlushAsync())).Message
+        );
     }
 }

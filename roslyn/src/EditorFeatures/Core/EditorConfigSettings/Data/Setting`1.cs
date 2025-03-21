@@ -13,19 +13,18 @@ internal sealed class Setting<TOptionValue>(
     string description,
     OptionUpdater updater,
     SettingLocation location,
-    TOptionValue initialValue) : Setting(optionKey, description, updater, location)
+    TOptionValue initialValue
+) : Setting(optionKey, description, updater, location)
 {
     /// <summary>
     /// Stores the latest value of the option.
     /// </summary>
     private TOptionValue _value = initialValue;
 
-    public override Type Type
-        => typeof(TOptionValue);
+    public override Type Type => typeof(TOptionValue);
 
-    protected override object UpdateValue(object settingValue)
-        => _value = (TOptionValue)settingValue;
+    protected override object UpdateValue(object settingValue) =>
+        _value = (TOptionValue)settingValue;
 
-    public override object? GetValue()
-        => _value;
+    public override object? GetValue() => _value;
 }

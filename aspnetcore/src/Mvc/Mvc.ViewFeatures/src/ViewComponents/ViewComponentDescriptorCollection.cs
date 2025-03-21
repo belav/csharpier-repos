@@ -13,7 +13,10 @@ public class ViewComponentDescriptorCollection
     /// </summary>
     /// <param name="items">The result of view component discovery</param>
     /// <param name="version">The unique version of discovered view components.</param>
-    public ViewComponentDescriptorCollection(IEnumerable<ViewComponentDescriptor> items, int version)
+    public ViewComponentDescriptorCollection(
+        IEnumerable<ViewComponentDescriptor> items,
+        int version
+    )
     {
         ArgumentNullException.ThrowIfNull(items);
 

@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 namespace System.Reflection.Context.Tests
 {
     internal static class ProjectionConstants
@@ -18,8 +17,10 @@ namespace System.Reflection.Context.Tests
         public const string CustomParameter = RootCustom + ".CustomParameterInfo";
 
         private const string RootProjection = Root + ".Projection";
-        public const string ProjectingCustomAttributeData = RootProjection + ".ProjectingCustomAttributeData";
-        public const string ProjectingManifestResourceInfo = RootProjection + ".ProjectingManifestResourceInfo";
+        public const string ProjectingCustomAttributeData =
+            RootProjection + ".ProjectingCustomAttributeData";
+        public const string ProjectingManifestResourceInfo =
+            RootProjection + ".ProjectingManifestResourceInfo";
 
         private const string RootVirtual = Root + ".Virtual";
         public const string VirtualPropertyInfo = RootVirtual + ".VirtualPropertyInfo";

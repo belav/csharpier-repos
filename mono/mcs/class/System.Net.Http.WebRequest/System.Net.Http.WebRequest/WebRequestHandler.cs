@@ -24,84 +24,90 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Net.Cache;
 using System.Net.Security;
-using System.Security.Principal;
 using System.Security.Cryptography.X509Certificates;
-using System.Collections.Generic;
+using System.Security.Principal;
+using System.Threading;
 
 namespace System.Net.Http
 {
-	public class WebRequestHandler : HttpClientHandler
-	{
-		MonoWebRequestHandler handler;
+    public class WebRequestHandler : HttpClientHandler
+    {
+        MonoWebRequestHandler handler;
 
-		bool disposed;
+        bool disposed;
 
-		public WebRequestHandler ()
-			: this (new MonoWebRequestHandler ())
-		{
-		}
+        public WebRequestHandler()
+            : this(new MonoWebRequestHandler()) { }
 
-		WebRequestHandler (MonoWebRequestHandler handler)
-			: base (handler)
-		{
-			this.handler = handler;
-		}
+        WebRequestHandler(MonoWebRequestHandler handler)
+            : base(handler)
+        {
+            this.handler = handler;
+        }
 
-		public bool AllowPipelining {
-			get => handler.AllowPipelining;
-			set => handler.AllowPipelining = value;
-		}
+        public bool AllowPipelining
+        {
+            get => handler.AllowPipelining;
+            set => handler.AllowPipelining = value;
+        }
 
-		public RequestCachePolicy CachePolicy {
-			get => handler.CachePolicy;
-			set => handler.CachePolicy = value;
-		}
+        public RequestCachePolicy CachePolicy
+        {
+            get => handler.CachePolicy;
+            set => handler.CachePolicy = value;
+        }
 
-		public AuthenticationLevel AuthenticationLevel {
-			get => handler.AuthenticationLevel;
-			set => handler.AuthenticationLevel = value;
-		}
+        public AuthenticationLevel AuthenticationLevel
+        {
+            get => handler.AuthenticationLevel;
+            set => handler.AuthenticationLevel = value;
+        }
 
-		[MonoTODO]
-		public TimeSpan ContinueTimeout {
-			get => handler.ContinueTimeout;
-			set => handler.ContinueTimeout = value;
-		}
+        [MonoTODO]
+        public TimeSpan ContinueTimeout
+        {
+            get => handler.ContinueTimeout;
+            set => handler.ContinueTimeout = value;
+        }
 
-		public TokenImpersonationLevel ImpersonationLevel {
-			get => handler.ImpersonationLevel;
-			set => handler.ImpersonationLevel = value;
-		}
+        public TokenImpersonationLevel ImpersonationLevel
+        {
+            get => handler.ImpersonationLevel;
+            set => handler.ImpersonationLevel = value;
+        }
 
-		public int ReadWriteTimeout {
-			get => handler.ReadWriteTimeout;
-			set => handler.ReadWriteTimeout = value;
-		}
+        public int ReadWriteTimeout
+        {
+            get => handler.ReadWriteTimeout;
+            set => handler.ReadWriteTimeout = value;
+        }
 
-		public RemoteCertificateValidationCallback ServerCertificateValidationCallback {
-			get => handler.ServerCertificateValidationCallback;
-			set => handler.ServerCertificateValidationCallback = value;
-		}
+        public RemoteCertificateValidationCallback ServerCertificateValidationCallback
+        {
+            get => handler.ServerCertificateValidationCallback;
+            set => handler.ServerCertificateValidationCallback = value;
+        }
 
-		public bool UnsafeAuthenticatedConnectionSharing {
-			get => handler.UnsafeAuthenticatedConnectionSharing;
-			set => handler.UnsafeAuthenticatedConnectionSharing = value;
-		}
+        public bool UnsafeAuthenticatedConnectionSharing
+        {
+            get => handler.UnsafeAuthenticatedConnectionSharing;
+            set => handler.UnsafeAuthenticatedConnectionSharing = value;
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-			if (disposing && !disposed) {
-				Volatile.Write (ref disposed, true);
-				handler.Dispose ();
-				handler = null;
-			}
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && !disposed)
+            {
+                Volatile.Write(ref disposed, true);
+                handler.Dispose();
+                handler = null;
+            }
 
-			base.Dispose (disposing);
-		}
-	}
+            base.Dispose(disposing);
+        }
+    }
 }
-

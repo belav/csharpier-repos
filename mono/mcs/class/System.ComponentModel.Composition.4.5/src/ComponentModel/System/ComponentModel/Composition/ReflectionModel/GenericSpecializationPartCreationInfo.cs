@@ -3,16 +3,16 @@
 // -----------------------------------------------------------------------
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.Diagnostics.Contracts;
-using System.Threading;
-using System.ComponentModel.Composition.Hosting;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
@@ -32,7 +32,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
         private ConstructorInfo _constructor;
         private object _lock = new object();
 
-        public GenericSpecializationPartCreationInfo(IReflectionPartCreationInfo originalPartCreationInfo, ReflectionComposablePartDefinition originalPart, Type[] specialization)
+        public GenericSpecializationPartCreationInfo(
+            IReflectionPartCreationInfo originalPartCreationInfo,
+            ReflectionComposablePartDefinition originalPart,
+            Type[] specialization
+        )
         {
             Assumes.NotNull(originalPartCreationInfo);
             Assumes.NotNull(specialization);
@@ -44,20 +48,19 @@ namespace System.ComponentModel.Composition.ReflectionModel
             this._specializationIdentities = new string[this._specialization.Length];
             for (int i = 0; i < this._specialization.Length; i++)
             {
-                this._specializationIdentities[i] = AttributedModelServices.GetTypeIdentity(this._specialization[i]);
+                this._specializationIdentities[i] = AttributedModelServices.GetTypeIdentity(
+                    this._specialization[i]
+                );
             }
             this._lazyPartType = new Lazy<Type>(
                 () => this._originalPartCreationInfo.GetPartType().MakeGenericType(specialization),
-                LazyThreadSafetyMode.PublicationOnly);
-
+                LazyThreadSafetyMode.PublicationOnly
+            );
         }
 
         public ReflectionComposablePartDefinition OriginalPart
         {
-            get
-            {
-                return this._originalPart;
-            }
+            get { return this._originalPart; }
         }
 
         public Type GetPartType()
@@ -78,7 +81,12 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 ConstructorInfo result = null;
                 if (genericConstuctor != null)
                 {
-                    foreach (ConstructorInfo constructor in this.GetPartType().GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
+                    foreach (
+                        ConstructorInfo constructor in this.GetPartType()
+                            .GetConstructors(
+                                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                            )
+                    )
                     {
                         if (constructor.MetadataToken == genericConstuctor.MetadataToken)
                         {
@@ -103,7 +111,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public IDictionary<string, object> GetMetadata()
         {
-            var originalMetadata = new Dictionary<string, object>(this._originalPartCreationInfo.GetMetadata(), StringComparers.MetadataKeyNames);
+            var originalMetadata = new Dictionary<string, object>(
+                this._originalPartCreationInfo.GetMetadata(),
+                StringComparers.MetadataKeyNames
+            );
             originalMetadata.Remove(CompositionConstants.IsGenericPartMetadataName);
             originalMetadata.Remove(CompositionConstants.GenericPartArityMetadataName);
             originalMetadata.Remove(CompositionConstants.GenericParameterConstraintsMetadataName);
@@ -154,7 +165,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
             // Get all members that can be of interest and extract their MetadataTokens
             //
             Dictionary<LazyMemberInfo, MemberInfo[]> membersTable = this.BuildMembersTable(members);
-            Dictionary<Lazy<ParameterInfo>, ParameterInfo> parametersTable = this.BuildParametersTable(parameters);
+            Dictionary<Lazy<ParameterInfo>, ParameterInfo> parametersTable =
+                this.BuildParametersTable(parameters);
 
             lock (this._lock)
             {
@@ -171,12 +183,14 @@ namespace System.ComponentModel.Composition.ReflectionModel
             }
         }
 
-
-        private Dictionary<LazyMemberInfo, MemberInfo[]> BuildMembersTable(List<LazyMemberInfo> members)
+        private Dictionary<LazyMemberInfo, MemberInfo[]> BuildMembersTable(
+            List<LazyMemberInfo> members
+        )
         {
             Assumes.NotNull(members);
 
-            Dictionary<LazyMemberInfo, MemberInfo[]> membersTable = new Dictionary<LazyMemberInfo, MemberInfo[]>();
+            Dictionary<LazyMemberInfo, MemberInfo[]> membersTable =
+                new Dictionary<LazyMemberInfo, MemberInfo[]>();
             Dictionary<int, MemberInfo> specializedPartMembers = new Dictionary<int, MemberInfo>();
 
             Type closedGenericPartType = this.GetPartType();
@@ -203,7 +217,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 for (int i = 0; i < genericAccessors.Length; i++)
                 {
                     // GENTODO - error case? Very unlikely, but still?
-                    accessors[i] = (genericAccessors[i] != null) ? specializedPartMembers[genericAccessors[i].MetadataToken] : null;
+                    accessors[i] =
+                        (genericAccessors[i] != null)
+                            ? specializedPartMembers[genericAccessors[i].MetadataToken]
+                            : null;
                 }
 
                 membersTable[lazyMemberInfo] = accessors;
@@ -212,16 +229,21 @@ namespace System.ComponentModel.Composition.ReflectionModel
             return membersTable;
         }
 
-        private Dictionary<Lazy<ParameterInfo>, ParameterInfo> BuildParametersTable(List<Lazy<ParameterInfo>> parameters)
+        private Dictionary<Lazy<ParameterInfo>, ParameterInfo> BuildParametersTable(
+            List<Lazy<ParameterInfo>> parameters
+        )
         {
             if (parameters != null)
             {
-                Dictionary<Lazy<ParameterInfo>, ParameterInfo> parametersTable = new Dictionary<Lazy<ParameterInfo>, ParameterInfo>();
+                Dictionary<Lazy<ParameterInfo>, ParameterInfo> parametersTable =
+                    new Dictionary<Lazy<ParameterInfo>, ParameterInfo>();
                 // GENTODO - error case
                 ParameterInfo[] constructorParameters = this.GetConstructor().GetParameters();
                 foreach (var lazyParameter in parameters)
                 {
-                    parametersTable[lazyParameter] = constructorParameters[lazyParameter.Value.Position];
+                    parametersTable[lazyParameter] = constructorParameters[
+                        lazyParameter.Value.Position
+                    ];
                 }
                 return parametersTable;
             }
@@ -229,17 +251,19 @@ namespace System.ComponentModel.Composition.ReflectionModel
             {
                 return null;
             }
-
         }
 
-
-        private List<ImportDefinition> PopulateImports(List<LazyMemberInfo> members, List<Lazy<ParameterInfo>> parameters)
+        private List<ImportDefinition> PopulateImports(
+            List<LazyMemberInfo> members,
+            List<Lazy<ParameterInfo>> parameters
+        )
         {
             List<ImportDefinition> imports = new List<ImportDefinition>();
 
             foreach (ImportDefinition originalImport in this._originalPartCreationInfo.GetImports())
             {
-                ReflectionImportDefinition reflectionImport = originalImport as ReflectionImportDefinition;
+                ReflectionImportDefinition reflectionImport =
+                    originalImport as ReflectionImportDefinition;
                 if (reflectionImport == null)
                 {
                     // we always ignore these
@@ -252,13 +276,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
             return imports;
         }
 
-
-        private ImportDefinition TranslateImport(ReflectionImportDefinition reflectionImport, List<LazyMemberInfo> members, List<Lazy<ParameterInfo>> parameters)
+        private ImportDefinition TranslateImport(
+            ReflectionImportDefinition reflectionImport,
+            List<LazyMemberInfo> members,
+            List<Lazy<ParameterInfo>> parameters
+        )
         {
             bool isExportFactory = false;
             ContractBasedImportDefinition productImport = reflectionImport;
 
-            IPartCreatorImportDefinition exportFactoryImportDefinition = reflectionImport as IPartCreatorImportDefinition;
+            IPartCreatorImportDefinition exportFactoryImportDefinition =
+                reflectionImport as IPartCreatorImportDefinition;
             if (exportFactoryImportDefinition != null)
             {
                 productImport = exportFactoryImportDefinition.ProductImportDefinition;
@@ -268,13 +296,17 @@ namespace System.ComponentModel.Composition.ReflectionModel
             string contractName = this.Translate(productImport.ContractName);
             string requiredTypeIdentity = this.Translate(productImport.RequiredTypeIdentity);
             IDictionary<string, object> metadata = this.TranslateImportMetadata(productImport);
-            
-            ReflectionMemberImportDefinition memberImport = reflectionImport as ReflectionMemberImportDefinition;
+
+            ReflectionMemberImportDefinition memberImport =
+                reflectionImport as ReflectionMemberImportDefinition;
             ImportDefinition import = null;
             if (memberImport != null)
             {
                 LazyMemberInfo lazyMember = memberImport.ImportingLazyMember;
-                LazyMemberInfo importingMember = new LazyMemberInfo(lazyMember.MemberType, () => GetAccessors(lazyMember));
+                LazyMemberInfo importingMember = new LazyMemberInfo(
+                    lazyMember.MemberType,
+                    () => GetAccessors(lazyMember)
+                );
 
                 if (isExportFactory)
                 {
@@ -289,59 +321,68 @@ namespace System.ComponentModel.Composition.ReflectionModel
                             productImport.IsRecomposable,
                             false,
                             CreationPolicy.NonShared,
-                            metadata));
+                            metadata
+                        )
+                    );
                 }
                 else
                 {
                     import = new ReflectionMemberImportDefinition(
-                         importingMember,
-                         contractName,
-                         requiredTypeIdentity,
-                         productImport.RequiredMetadata,
-                         productImport.Cardinality,
-                         productImport.IsRecomposable,
-                         false,
-                         productImport.RequiredCreationPolicy,
-                         metadata,
-                         ((ICompositionElement)memberImport).Origin);
+                        importingMember,
+                        contractName,
+                        requiredTypeIdentity,
+                        productImport.RequiredMetadata,
+                        productImport.Cardinality,
+                        productImport.IsRecomposable,
+                        false,
+                        productImport.RequiredCreationPolicy,
+                        metadata,
+                        ((ICompositionElement)memberImport).Origin
+                    );
                 }
 
                 members.Add(lazyMember);
             }
             else
             {
-                ReflectionParameterImportDefinition parameterImport = reflectionImport as ReflectionParameterImportDefinition;
+                ReflectionParameterImportDefinition parameterImport =
+                    reflectionImport as ReflectionParameterImportDefinition;
                 Assumes.NotNull(parameterImport);
 
                 Lazy<ParameterInfo> lazyParameter = parameterImport.ImportingLazyParameter;
-                Lazy<ParameterInfo> parameter = new Lazy<ParameterInfo>(() => GetParameter(lazyParameter));
+                Lazy<ParameterInfo> parameter = new Lazy<ParameterInfo>(() =>
+                    GetParameter(lazyParameter)
+                );
 
                 if (isExportFactory)
                 {
                     import = new PartCreatorParameterImportDefinition(
-                            parameter,
-                            ((ICompositionElement)parameterImport).Origin,
-                            new ContractBasedImportDefinition(
-                                contractName,
-                                requiredTypeIdentity,
-                                productImport.RequiredMetadata,
-                                productImport.Cardinality,
-                                false,
-                                true,
-                                CreationPolicy.NonShared,
-                                metadata));
+                        parameter,
+                        ((ICompositionElement)parameterImport).Origin,
+                        new ContractBasedImportDefinition(
+                            contractName,
+                            requiredTypeIdentity,
+                            productImport.RequiredMetadata,
+                            productImport.Cardinality,
+                            false,
+                            true,
+                            CreationPolicy.NonShared,
+                            metadata
+                        )
+                    );
                 }
                 else
                 {
                     import = new ReflectionParameterImportDefinition(
-                         parameter,
-                         contractName,
-                         requiredTypeIdentity,
-                         productImport.RequiredMetadata,
-                         productImport.Cardinality,
-                         productImport.RequiredCreationPolicy,
-                         metadata,
-                         ((ICompositionElement)parameterImport).Origin);
+                        parameter,
+                        contractName,
+                        requiredTypeIdentity,
+                        productImport.RequiredMetadata,
+                        productImport.Cardinality,
+                        productImport.RequiredCreationPolicy,
+                        metadata,
+                        ((ICompositionElement)parameterImport).Origin
+                    );
                 }
 
                 parameters.Add(lazyParameter);
@@ -356,7 +397,8 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             foreach (ExportDefinition originalExport in this._originalPartCreationInfo.GetExports())
             {
-                ReflectionMemberExportDefinition reflectionExport = originalExport as ReflectionMemberExportDefinition;
+                ReflectionMemberExportDefinition reflectionExport =
+                    originalExport as ReflectionMemberExportDefinition;
                 if (reflectionExport == null)
                 {
                     // we always ignore these
@@ -369,24 +411,36 @@ namespace System.ComponentModel.Composition.ReflectionModel
             return exports;
         }
 
-        public ExportDefinition TranslateExpot(ReflectionMemberExportDefinition reflectionExport, List<LazyMemberInfo> members)
+        public ExportDefinition TranslateExpot(
+            ReflectionMemberExportDefinition reflectionExport,
+            List<LazyMemberInfo> members
+        )
         {
             ExportDefinition export = null;
             LazyMemberInfo lazyMember = reflectionExport.ExportingLazyMember;
             var capturedLazyMember = lazyMember;
             var capturedReflectionExport = reflectionExport;
 
-            string contractName = this.Translate(reflectionExport.ContractName, reflectionExport.Metadata.GetValue<int[]>(CompositionConstants.GenericExportParametersOrderMetadataName));
+            string contractName = this.Translate(
+                reflectionExport.ContractName,
+                reflectionExport.Metadata.GetValue<int[]>(
+                    CompositionConstants.GenericExportParametersOrderMetadataName
+                )
+            );
 
-            LazyMemberInfo exportingMember = new LazyMemberInfo(capturedLazyMember.MemberType, () => GetAccessors(capturedLazyMember));
-            Lazy<IDictionary<string, object>> lazyMetadata = new Lazy<IDictionary<string, object>>(() => this.TranslateExportMetadata(capturedReflectionExport));
-
-
+            LazyMemberInfo exportingMember = new LazyMemberInfo(
+                capturedLazyMember.MemberType,
+                () => GetAccessors(capturedLazyMember)
+            );
+            Lazy<IDictionary<string, object>> lazyMetadata = new Lazy<IDictionary<string, object>>(
+                () => this.TranslateExportMetadata(capturedReflectionExport)
+            );
 
             export = new ReflectionMemberExportDefinition(
                 exportingMember,
                 new LazyExportDefinition(contractName, lazyMetadata),
-                ((ICompositionElement)reflectionExport).Origin);
+                ((ICompositionElement)reflectionExport).Origin
+            );
 
             members.Add(capturedLazyMember);
 
@@ -397,8 +451,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
         {
             if (genericParametersOrder != null)
             {
-                string[] specializationIdentities = GenericServices.Reorder(this._specializationIdentities, genericParametersOrder);
-                return string.Format(CultureInfo.InvariantCulture, originalValue, specializationIdentities);
+                string[] specializationIdentities = GenericServices.Reorder(
+                    this._specializationIdentities,
+                    genericParametersOrder
+                );
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    originalValue,
+                    specializationIdentities
+                );
             }
             else
             {
@@ -408,19 +469,36 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         private string Translate(string originalValue)
         {
-            return string.Format(CultureInfo.InvariantCulture, originalValue, this._specializationIdentities);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                originalValue,
+                this._specializationIdentities
+            );
         }
 
-        private IDictionary<string, object> TranslateImportMetadata(ContractBasedImportDefinition originalImport)
+        private IDictionary<string, object> TranslateImportMetadata(
+            ContractBasedImportDefinition originalImport
+        )
         {
-            int[] importParametersOrder = originalImport.Metadata.GetValue<int[]>(CompositionConstants.GenericImportParametersOrderMetadataName);
+            int[] importParametersOrder = originalImport.Metadata.GetValue<int[]>(
+                CompositionConstants.GenericImportParametersOrderMetadataName
+            );
             if (importParametersOrder != null)
             {
-                Dictionary<string, object> metadata = new Dictionary<string, object>(originalImport.Metadata, StringComparers.MetadataKeyNames);
+                Dictionary<string, object> metadata = new Dictionary<string, object>(
+                    originalImport.Metadata,
+                    StringComparers.MetadataKeyNames
+                );
 
                 // Get the newly re-qualified name of the generic contract and the subset of applicable types from the specialization
-                metadata[CompositionConstants.GenericContractMetadataName] = GenericServices.GetGenericName(originalImport.ContractName, importParametersOrder, this._specialization.Length);
-                metadata[CompositionConstants.GenericParametersMetadataName] = GenericServices.Reorder(this._specialization, importParametersOrder);
+                metadata[CompositionConstants.GenericContractMetadataName] =
+                    GenericServices.GetGenericName(
+                        originalImport.ContractName,
+                        importParametersOrder,
+                        this._specialization.Length
+                    );
+                metadata[CompositionConstants.GenericParametersMetadataName] =
+                    GenericServices.Reorder(this._specialization, importParametersOrder);
                 metadata.Remove(CompositionConstants.GenericImportParametersOrderMetadataName);
 
                 return metadata.AsReadOnly();
@@ -431,14 +509,26 @@ namespace System.ComponentModel.Composition.ReflectionModel
             }
         }
 
-        private IDictionary<string, object> TranslateExportMetadata(ReflectionMemberExportDefinition originalExport)
+        private IDictionary<string, object> TranslateExportMetadata(
+            ReflectionMemberExportDefinition originalExport
+        )
         {
-            Dictionary<string, object> metadata = new Dictionary<string, object>(originalExport.Metadata, StringComparers.MetadataKeyNames);
+            Dictionary<string, object> metadata = new Dictionary<string, object>(
+                originalExport.Metadata,
+                StringComparers.MetadataKeyNames
+            );
 
-            string exportTypeIdentity = originalExport.Metadata.GetValue<string>(CompositionConstants.ExportTypeIdentityMetadataName);
+            string exportTypeIdentity = originalExport.Metadata.GetValue<string>(
+                CompositionConstants.ExportTypeIdentityMetadataName
+            );
             if (!string.IsNullOrEmpty(exportTypeIdentity))
             {
-                metadata[CompositionConstants.ExportTypeIdentityMetadataName] = this.Translate(exportTypeIdentity, originalExport.Metadata.GetValue<int[]>(CompositionConstants.GenericExportParametersOrderMetadataName));
+                metadata[CompositionConstants.ExportTypeIdentityMetadataName] = this.Translate(
+                    exportTypeIdentity,
+                    originalExport.Metadata.GetValue<int[]>(
+                        CompositionConstants.GenericExportParametersOrderMetadataName
+                    )
+                );
             }
             metadata.Remove(CompositionConstants.GenericExportParametersOrderMetadataName);
 
@@ -480,7 +570,6 @@ namespace System.ComponentModel.Composition.ReflectionModel
             return this._exports;
         }
 
-
         public IEnumerable<ImportDefinition> GetImports()
         {
             this.PopulateImportsAndExports();
@@ -504,14 +593,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public override bool Equals(object obj)
         {
-            GenericSpecializationPartCreationInfo that = obj as GenericSpecializationPartCreationInfo;
+            GenericSpecializationPartCreationInfo that =
+                obj as GenericSpecializationPartCreationInfo;
             if (that == null)
             {
                 return false;
             }
 
-            return (this._originalPartCreationInfo.Equals(that._originalPartCreationInfo)) &&
-                (this._specialization.IsArrayEqual(that._specialization));
+            return (this._originalPartCreationInfo.Equals(that._originalPartCreationInfo))
+                && (this._specialization.IsArrayEqual(that._specialization));
         }
 
         public override int GetHashCode()
@@ -519,17 +609,27 @@ namespace System.ComponentModel.Composition.ReflectionModel
             return this._originalPartCreationInfo.GetHashCode();
         }
 
-        public static bool CanSpecialize(IDictionary<string, object> partMetadata, Type[] specialization)
+        public static bool CanSpecialize(
+            IDictionary<string, object> partMetadata,
+            Type[] specialization
+        )
         {
-            int partArity = partMetadata.GetValue<int>(CompositionConstants.GenericPartArityMetadataName);
+            int partArity = partMetadata.GetValue<int>(
+                CompositionConstants.GenericPartArityMetadataName
+            );
 
             if (partArity != specialization.Length)
             {
                 return false;
             }
 
-            object[] genericParameterConstraints = partMetadata.GetValue<object[]>(CompositionConstants.GenericParameterConstraintsMetadataName);
-            GenericParameterAttributes[] genericParameterAttributes = partMetadata.GetValue<GenericParameterAttributes[]>(CompositionConstants.GenericParameterAttributesMetadataName);
+            object[] genericParameterConstraints = partMetadata.GetValue<object[]>(
+                CompositionConstants.GenericParameterConstraintsMetadataName
+            );
+            GenericParameterAttributes[] genericParameterAttributes =
+                partMetadata.GetValue<GenericParameterAttributes[]>(
+                    CompositionConstants.GenericParameterAttributesMetadataName
+                );
 
             // if no constraints and attributes been specifed, anything can be created
             if ((genericParameterConstraints == null) && (genericParameterAttributes == null))
@@ -537,22 +637,33 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 return true;
             }
 
-            if ((genericParameterConstraints != null) && (genericParameterConstraints.Length != partArity))
+            if (
+                (genericParameterConstraints != null)
+                && (genericParameterConstraints.Length != partArity)
+            )
             {
                 return false;
             }
 
-            if ((genericParameterAttributes != null) && (genericParameterAttributes.Length != partArity))
+            if (
+                (genericParameterAttributes != null)
+                && (genericParameterAttributes.Length != partArity)
+            )
             {
                 return false;
             }
 
             for (int i = 0; i < partArity; i++)
             {
-                if (!GenericServices.CanSpecialize(
-                    specialization[i],
-                    (genericParameterConstraints[i] as Type[]).CreateTypeSpecializations(specialization),
-                    genericParameterAttributes[i]))
+                if (
+                    !GenericServices.CanSpecialize(
+                        specialization[i],
+                        (genericParameterConstraints[i] as Type[]).CreateTypeSpecializations(
+                            specialization
+                        ),
+                        genericParameterAttributes[i]
+                    )
+                )
                 {
                     return false;
                 }

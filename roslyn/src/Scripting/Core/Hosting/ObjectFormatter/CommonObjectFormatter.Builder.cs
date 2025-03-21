@@ -45,14 +45,18 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
             public void AppendLine()
             {
-                // remove line length limit so that we can insert a new line even 
+                // remove line length limit so that we can insert a new line even
                 // if the previous one hit maxed out the line limit:
                 _currentLimit = _options.MaximumOutputLength;
 
                 Append(_options.NewLine);
 
                 // recalc limit for the next line:
-                _currentLimit = (int)Math.Min((long)_sb.Length + _options.MaximumLineLength, _options.MaximumOutputLength);
+                _currentLimit = (int)
+                    Math.Min(
+                        (long)_sb.Length + _options.MaximumLineLength,
+                        _options.MaximumOutputLength
+                    );
             }
 
             private void AppendEllipsis()

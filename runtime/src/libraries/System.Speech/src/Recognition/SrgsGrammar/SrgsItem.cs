@@ -21,6 +21,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             _elements = new SrgsElementList();
         }
+
         public SrgsItem(string text)
             : this()
         {
@@ -28,6 +29,7 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             _elements.Add(new SrgsText(text));
         }
+
         public SrgsItem(params SrgsElement[] elements)
             : this()
         {
@@ -37,16 +39,21 @@ namespace System.Speech.Recognition.SrgsGrammar
             {
                 if (elements[iElement] == null)
                 {
-                    throw new ArgumentNullException(nameof(elements), SR.Get(SRID.ParamsEntryNullIllegal));
+                    throw new ArgumentNullException(
+                        nameof(elements),
+                        SR.Get(SRID.ParamsEntryNullIllegal)
+                    );
                 }
                 _elements.Add(elements[iElement]);
             }
         }
+
         public SrgsItem(int repeatCount)
             : this()
         {
             SetRepeat(repeatCount);
         }
+
         public SrgsItem(int min, int max)
             : this()
         {
@@ -59,6 +66,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         {
             SetRepeat(min, max);
         }
+
         public SrgsItem(int min, int max, params SrgsElement[] elements)
             : this(elements)
         {
@@ -77,16 +85,23 @@ namespace System.Speech.Recognition.SrgsGrammar
             }
             _minRepeat = _maxRepeat = count;
         }
+
         public void SetRepeat(int minRepeat, int maxRepeat)
         {
             // Negative values are not allowed
             if (minRepeat < 0 || minRepeat > 255)
             {
-                throw new ArgumentOutOfRangeException(nameof(minRepeat), SR.Get(SRID.InvalidMinRepeat, minRepeat));
+                throw new ArgumentOutOfRangeException(
+                    nameof(minRepeat),
+                    SR.Get(SRID.InvalidMinRepeat, minRepeat)
+                );
             }
             if (maxRepeat != int.MaxValue && (maxRepeat < 0 || maxRepeat > 255))
             {
-                throw new ArgumentOutOfRangeException(nameof(maxRepeat), SR.Get(SRID.InvalidMinRepeat, maxRepeat));
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxRepeat),
+                    SR.Get(SRID.InvalidMinRepeat, maxRepeat)
+                );
             }
 
             // Max be greater or equal to min
@@ -97,6 +112,7 @@ namespace System.Speech.Recognition.SrgsGrammar
             _minRepeat = minRepeat;
             _maxRepeat = maxRepeat;
         }
+
         public void Add(SrgsElement element)
         {
             Helpers.ThrowIfNull(element, nameof(element));
@@ -109,55 +125,49 @@ namespace System.Speech.Recognition.SrgsGrammar
         #region Public Properties
         public Collection<SrgsElement> Elements
         {
-            get
-            {
-                return _elements;
-            }
+            get { return _elements; }
         }
+
         // The probability that this item will be repeated.
         public float RepeatProbability
         {
-            get
-            {
-                return _repeatProbability;
-            }
+            get { return _repeatProbability; }
             set
             {
                 if (value < 0.0f || value > 1.0f)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Get(SRID.InvalidRepeatProbability, value));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Get(SRID.InvalidRepeatProbability, value)
+                    );
                 }
 
                 _repeatProbability = value;
             }
         }
+
         // The minimum number of occurrences this item can/must be repeated.
         public int MinRepeat
         {
-            get
-            {
-                return _minRepeat == NotSet ? 1 : _minRepeat;
-            }
+            get { return _minRepeat == NotSet ? 1 : _minRepeat; }
         }
+
         // The maximum number of occurrences this item can/must be repeated.
         public int MaxRepeat
         {
-            get
-            {
-                return _maxRepeat == NotSet ? 1 : _maxRepeat;
-            }
+            get { return _maxRepeat == NotSet ? 1 : _maxRepeat; }
         }
         public float Weight
         {
-            get
-            {
-                return _weight;
-            }
+            get { return _weight; }
             set
             {
                 if (value <= 0.0f)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.Get(SRID.InvalidWeight, value));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.Get(SRID.InvalidWeight, value)
+                    );
                 }
 
                 _weight = value;
@@ -177,12 +187,18 @@ namespace System.Speech.Recognition.SrgsGrammar
             writer.WriteStartElement("item");
             if (!_weight.Equals(1.0f))
             {
-                writer.WriteAttributeString("weight", _weight.ToString("0.########", CultureInfo.InvariantCulture));
+                writer.WriteAttributeString(
+                    "weight",
+                    _weight.ToString("0.########", CultureInfo.InvariantCulture)
+                );
             }
 
             if (!_repeatProbability.Equals(0.5f))
             {
-                writer.WriteAttributeString("repeat-prob", _repeatProbability.ToString("0.########", CultureInfo.InvariantCulture));
+                writer.WriteAttributeString(
+                    "repeat-prob",
+                    _repeatProbability.ToString("0.########", CultureInfo.InvariantCulture)
+                );
             }
 
             if (_minRepeat == _maxRepeat)
@@ -190,19 +206,28 @@ namespace System.Speech.Recognition.SrgsGrammar
                 // could be because both value are NotSet of equal
                 if (_minRepeat != NotSet)
                 {
-                    writer.WriteAttributeString("repeat", string.Format(CultureInfo.InvariantCulture, "{0}", _minRepeat));
+                    writer.WriteAttributeString(
+                        "repeat",
+                        string.Format(CultureInfo.InvariantCulture, "{0}", _minRepeat)
+                    );
                 }
             }
             else if (_maxRepeat == int.MaxValue || _maxRepeat == NotSet)
             {
                 // MinValue Set but not Max Value
-                writer.WriteAttributeString("repeat", string.Format(CultureInfo.InvariantCulture, "{0}-", _minRepeat));
+                writer.WriteAttributeString(
+                    "repeat",
+                    string.Format(CultureInfo.InvariantCulture, "{0}-", _minRepeat)
+                );
             }
             else
             {
                 // Max Value Set and maybe MinValue
                 int minRepeat = _minRepeat == NotSet ? 1 : _minRepeat;
-                writer.WriteAttributeString("repeat", string.Format(CultureInfo.InvariantCulture, "{0}-{1}", minRepeat, _maxRepeat));
+                writer.WriteAttributeString(
+                    "repeat",
+                    string.Format(CultureInfo.InvariantCulture, "{0}-{1}", minRepeat, _maxRepeat)
+                );
             }
 
             // Write <item> body and footer.
@@ -252,7 +277,14 @@ namespace System.Speech.Recognition.SrgsGrammar
                     {
                         // Max Value Set and maybe MinValue
                         int minRepeat = _minRepeat == NotSet ? 1 : _minRepeat;
-                        sb.Append(string.Format(CultureInfo.InvariantCulture, "{0},{1}", minRepeat, _maxRepeat));
+                        sb.Append(
+                            string.Format(
+                                CultureInfo.InvariantCulture,
+                                "{0},{1}",
+                                minRepeat,
+                                _maxRepeat
+                            )
+                        );
                     }
                     sb.Append("] ");
                 }
@@ -333,43 +365,29 @@ namespace System.Speech.Recognition.SrgsGrammar
 
             public object Weight
             {
-                get
-                {
-                    return _weight;
-                }
+                get { return _weight; }
             }
 
             public object MinRepeat
             {
-                get
-                {
-                    return _minRepeat;
-                }
+                get { return _minRepeat; }
             }
 
             public object MaxRepeat
             {
-                get
-                {
-                    return _maxRepeat;
-                }
+                get { return _maxRepeat; }
             }
 
             public object RepeatProbability
             {
-                get
-                {
-                    return _repeatProbability;
-                }
+                get { return _repeatProbability; }
             }
 
             public object Count
             {
-                get
-                {
-                    return _elements.Count;
-                }
+                get { return _elements.Count; }
             }
+
             [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
             public SrgsElement[] AKeys
             {

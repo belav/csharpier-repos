@@ -31,22 +31,31 @@ internal sealed class DefaultControllerActivator : IControllerActivator
 
         if (controllerContext.ActionDescriptor == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(ControllerContext.ActionDescriptor),
-                nameof(ControllerContext)));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(ControllerContext.ActionDescriptor),
+                    nameof(ControllerContext)
+                )
+            );
         }
 
         var controllerTypeInfo = controllerContext.ActionDescriptor.ControllerTypeInfo;
 
         if (controllerTypeInfo == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(controllerContext.ActionDescriptor.ControllerTypeInfo),
-                nameof(ControllerContext.ActionDescriptor)));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(controllerContext.ActionDescriptor.ControllerTypeInfo),
+                    nameof(ControllerContext.ActionDescriptor)
+                )
+            );
         }
 
         var serviceProvider = controllerContext.HttpContext.RequestServices;
-        return _typeActivatorCache.CreateInstance<object>(serviceProvider, controllerTypeInfo.AsType());
+        return _typeActivatorCache.CreateInstance<object>(
+            serviceProvider,
+            controllerTypeInfo.AsType()
+        );
     }
 
     /// <inheritdoc />

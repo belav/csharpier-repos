@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Linq;
+using System.Net;
 using Xunit;
 
 namespace Tests.System.Net
@@ -122,7 +122,7 @@ namespace Tests.System.Net
         public void AddSeveralBytesRepeatedlyAndConsumeSeveralBytesRepeatedly_Success()
         {
             const int ByteCount = 7;
-            const int RepeatCount = 8 * 1024;       // enough to ensure we cross several block boundaries
+            const int RepeatCount = 8 * 1024; // enough to ensure we cross several block boundaries
 
             using MultiArrayBuffer buffer = new MultiArrayBuffer(0);
 
@@ -154,7 +154,7 @@ namespace Tests.System.Net
         public void AddSeveralBytesRepeatedlyAndConsumeSeveralBytesRepeatedly_UsingSlice_Success()
         {
             const int ByteCount = 7;
-            const int RepeatCount = 8 * 1024;       // enough to ensure we cross several block boundaries
+            const int RepeatCount = 8 * 1024; // enough to ensure we cross several block boundaries
 
             using MultiArrayBuffer buffer = new MultiArrayBuffer(0);
 
@@ -186,7 +186,7 @@ namespace Tests.System.Net
         public void AddSeveralBytesRepeatedlyAndConsumeSeveralBytesRepeatedly_UsingSliceWithLength_Success()
         {
             const int ByteCount = 7;
-            const int RepeatCount = 8 * 1024;       // enough to ensure we cross several block boundaries
+            const int RepeatCount = 8 * 1024; // enough to ensure we cross several block boundaries
 
             using MultiArrayBuffer buffer = new MultiArrayBuffer(0);
 
@@ -219,7 +219,7 @@ namespace Tests.System.Net
         {
             ReadOnlySpan<byte> source = new byte[] { 1, 2, 3, 4, 5, 6, 7 }.AsSpan();
 
-            const int RepeatCount = 8 * 1024;       // enough to ensure we cross several block boundaries
+            const int RepeatCount = 8 * 1024; // enough to ensure we cross several block boundaries
 
             using MultiArrayBuffer buffer = new MultiArrayBuffer(0);
 
@@ -246,7 +246,11 @@ namespace Tests.System.Net
         [Fact]
         public void CopyFromRepeatedlyAndCopyToRepeatedly_LargeCopies_Success()
         {
-            ReadOnlySpan<byte> source = Enumerable.Range(0, 64 * 1024 - 1).Select(x => (byte)x).ToArray().AsSpan();
+            ReadOnlySpan<byte> source = Enumerable
+                .Range(0, 64 * 1024 - 1)
+                .Select(x => (byte)x)
+                .ToArray()
+                .AsSpan();
 
             const int RepeatCount = 13;
 

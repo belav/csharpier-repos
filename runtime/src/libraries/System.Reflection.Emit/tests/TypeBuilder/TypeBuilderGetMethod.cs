@@ -13,9 +13,19 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
             type.DefineGenericParameters("T");
 
-            MethodBuilder genericMethod = type.DefineMethod("GM", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder genericMethod = type.DefineMethod(
+                "GM",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             GenericTypeParameterBuilder[] methodParams = genericMethod.DefineGenericParameters("U");
-            genericMethod.SetSignature(null, null, null, new Type[] { methodParams[0].AsType() }, null, null);
+            genericMethod.SetSignature(
+                null,
+                null,
+                null,
+                new Type[] { methodParams[0].AsType() },
+                null,
+                null
+            );
 
             MethodInfo createdGenericMethod = TypeBuilder.GetMethod(type.AsType(), genericMethod);
 
@@ -29,9 +39,19 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
             type.DefineGenericParameters("T");
 
-            MethodBuilder genericMethod = type.DefineMethod("GM", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder genericMethod = type.DefineMethod(
+                "GM",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             GenericTypeParameterBuilder[] methodParams = genericMethod.DefineGenericParameters("U");
-            genericMethod.SetSignature(null, null, null, new Type[] { methodParams[0].AsType() }, null, null);
+            genericMethod.SetSignature(
+                null,
+                null,
+                null,
+                new Type[] { methodParams[0].AsType() },
+                null,
+                null
+            );
 
             Type genericIntType = type.MakeGenericType(typeof(int));
             MethodInfo createdGenericMethod = TypeBuilder.GetMethod(genericIntType, genericMethod);
@@ -43,7 +63,14 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void GetMethod_TypeNotTypeBuilder_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => TypeBuilder.GetMethod(typeof(int), typeof(int).GetMethod("Parse", new Type[] { typeof(string) })));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () =>
+                    TypeBuilder.GetMethod(
+                        typeof(int),
+                        typeof(int).GetMethod("Parse", new Type[] { typeof(string) })
+                    )
+            );
         }
 
         [Fact]
@@ -52,35 +79,79 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
             type.DefineGenericParameters("T");
 
-            MethodBuilder genericMethod = type.DefineMethod("GM", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder genericMethod = type.DefineMethod(
+                "GM",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             GenericTypeParameterBuilder[] methodParams = genericMethod.DefineGenericParameters("U");
-            genericMethod.SetSignature(null, null, null, new Type[] { methodParams[0].AsType() }, null, null);
+            genericMethod.SetSignature(
+                null,
+                null,
+                null,
+                new Type[] { methodParams[0].AsType() },
+                null,
+                null
+            );
 
             Type genericIntType = type.MakeGenericType(typeof(int));
             MethodInfo createdGenericMethod = genericMethod.MakeGenericMethod(typeof(int));
-            AssertExtensions.Throws<ArgumentException>("method", () => TypeBuilder.GetMethod(genericIntType, createdGenericMethod));
+            AssertExtensions.Throws<ArgumentException>(
+                "method",
+                () => TypeBuilder.GetMethod(genericIntType, createdGenericMethod)
+            );
         }
 
         [Fact]
         public void GetMethod_MethodNotGenericTypeDefinition_ThrowsArgumentException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            TypeBuilder type1 = module.DefineType("Sample", TypeAttributes.Class | TypeAttributes.Public);
+            TypeBuilder type1 = module.DefineType(
+                "Sample",
+                TypeAttributes.Class | TypeAttributes.Public
+            );
             GenericTypeParameterBuilder[] typeParams = type1.DefineGenericParameters("T");
 
-            TypeBuilder myType2 = module.DefineType("Sample2", TypeAttributes.Class | TypeAttributes.Public);
+            TypeBuilder myType2 = module.DefineType(
+                "Sample2",
+                TypeAttributes.Class | TypeAttributes.Public
+            );
             myType2.DefineGenericParameters("T");
 
-            MethodBuilder genericMethod1 = type1.DefineMethod("GM", MethodAttributes.Public | MethodAttributes.Static);
-            GenericTypeParameterBuilder[] methodParams1 = genericMethod1.DefineGenericParameters("U");
-            genericMethod1.SetSignature(null, null, null, new Type[] { methodParams1[0].AsType() }, null, null);
+            MethodBuilder genericMethod1 = type1.DefineMethod(
+                "GM",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
+            GenericTypeParameterBuilder[] methodParams1 = genericMethod1.DefineGenericParameters(
+                "U"
+            );
+            genericMethod1.SetSignature(
+                null,
+                null,
+                null,
+                new Type[] { methodParams1[0].AsType() },
+                null,
+                null
+            );
 
-            MethodBuilder genMethod2 = myType2.DefineMethod("GM", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder genMethod2 = myType2.DefineMethod(
+                "GM",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             GenericTypeParameterBuilder[] methodParams2 = genMethod2.DefineGenericParameters("U");
-            genMethod2.SetSignature(null, null, null, new Type[] { methodParams1[0].AsType() }, null, null);
+            genMethod2.SetSignature(
+                null,
+                null,
+                null,
+                new Type[] { methodParams1[0].AsType() },
+                null,
+                null
+            );
 
             Type genericIntType = type1.MakeGenericType(typeof(int));
-            AssertExtensions.Throws<ArgumentException>("type", () => TypeBuilder.GetMethod(genericIntType, genMethod2));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => TypeBuilder.GetMethod(genericIntType, genMethod2)
+            );
         }
 
         [Fact]
@@ -88,11 +159,24 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
 
-            MethodBuilder genericMethod = type.DefineMethod("GM", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder genericMethod = type.DefineMethod(
+                "GM",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             GenericTypeParameterBuilder[] methodParams = genericMethod.DefineGenericParameters("U");
-            genericMethod.SetSignature(null, null, null, new Type[] { methodParams[0].AsType() }, null, null);
+            genericMethod.SetSignature(
+                null,
+                null,
+                null,
+                new Type[] { methodParams[0].AsType() },
+                null,
+                null
+            );
 
-            AssertExtensions.Throws<ArgumentException>("method", () => TypeBuilder.GetMethod(type.AsType(), genericMethod));
+            AssertExtensions.Throws<ArgumentException>(
+                "method",
+                () => TypeBuilder.GetMethod(type.AsType(), genericMethod)
+            );
         }
 
         [Fact]

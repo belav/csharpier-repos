@@ -45,7 +45,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             string referenceOwnerName = null,
             string namespaceName = null,
             string className = null,
-            string memberName = null)
+            string memberName = null
+        )
         {
             _factory = factory;
 
@@ -58,9 +59,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             _baseCanonicalNodes = CreateNodes(expandDottedNames: true);
             _basePresentationNodes = CreateNodes(expandDottedNames: false);
 
-            _symbolType = _basePresentationNodes.Length > 0
-                ? _basePresentationNodes[_basePresentationNodes.Length - 1].ListType
-                : 0;
+            _symbolType =
+                _basePresentationNodes.Length > 0
+                    ? _basePresentationNodes[_basePresentationNodes.Length - 1].ListType
+                    : 0;
         }
 
         private ImmutableArray<NavInfoNode> CreateNodes(bool expandDottedNames)
@@ -83,7 +85,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             return builder.ToImmutable();
         }
 
-        private static NavInfoNodeEnum CreateEnum(ref ImmutableArray<NavInfoNode> nodes, ImmutableArray<NavInfoNode> baseNodes, bool isCanonical, bool isObjectBrowser)
+        private static NavInfoNodeEnum CreateEnum(
+            ref ImmutableArray<NavInfoNode> nodes,
+            ImmutableArray<NavInfoNode> baseNodes,
+            bool isCanonical,
+            bool isObjectBrowser
+        )
         {
             if (nodes.IsDefault)
             {
@@ -93,7 +100,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
 
                 // In some cases, Class View presentation NavInfo objects will have extra nodes (LLT_PACKAGE & LLT_HIERARCHY) up front.
                 // When this NavInfo is consumed by Object Browser (for 'Browse to Definition'), we need to skip first two nodes
-                if (isObjectBrowser && !isCanonical && baseNodes is [_, { ListType: _LIB_LISTTYPE.LLT_HIERARCHY }, ..])
+                if (
+                    isObjectBrowser
+                    && !isCanonical
+                    && baseNodes is [_, { ListType: _LIB_LISTTYPE.LLT_HIERARCHY }, ..]
+                )
                 {
                     startIndex = 2;
                 }
@@ -116,15 +127,31 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
 
         public int EnumCanonicalNodes(out IVsEnumNavInfoNodes ppEnum)
         {
-            ppEnum = CreateEnum(ref _canonicalEnumNodes, _baseCanonicalNodes, isCanonical: true, isObjectBrowser: false);
+            ppEnum = CreateEnum(
+                ref _canonicalEnumNodes,
+                _baseCanonicalNodes,
+                isCanonical: true,
+                isObjectBrowser: false
+            );
             return VSConstants.S_OK;
         }
 
         public int EnumPresentationNodes(uint dwFlags, out IVsEnumNavInfoNodes ppEnum)
         {
-            ppEnum = dwFlags == (uint)_LIB_LISTFLAGS.LLF_NONE
-                ? CreateEnum(ref _objectBrowserEnumNodes, _basePresentationNodes, isCanonical: false, isObjectBrowser: true)
-                : CreateEnum(ref _classViewEnumNodes, _basePresentationNodes, isCanonical: false, isObjectBrowser: false);
+            ppEnum =
+                dwFlags == (uint)_LIB_LISTFLAGS.LLF_NONE
+                    ? CreateEnum(
+                        ref _objectBrowserEnumNodes,
+                        _basePresentationNodes,
+                        isCanonical: false,
+                        isObjectBrowser: true
+                    )
+                    : CreateEnum(
+                        ref _classViewEnumNodes,
+                        _basePresentationNodes,
+                        isCanonical: false,
+                        isObjectBrowser: false
+                    );
 
             return VSConstants.S_OK;
         }
@@ -135,8 +162,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library.VsNavIn
             return VSConstants.S_OK;
         }
 
-        public void GetPreferredLanguage(out uint pLanguage)
-            => pLanguage = (uint)_factory.LibraryService.PreferredLanguage;
+        public void GetPreferredLanguage(out uint pLanguage) =>
+            pLanguage = (uint)_factory.LibraryService.PreferredLanguage;
 
         public int GetSymbolType(out uint pdwType)
         {

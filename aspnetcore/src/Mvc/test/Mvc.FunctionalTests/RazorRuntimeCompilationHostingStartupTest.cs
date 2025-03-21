@@ -9,12 +9,25 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class RazorRuntimeCompilationHostingStartupTest : IClassFixture<MvcTestFixture<RazorBuildWebSite.StartupWithHostingStartup>>
+public class RazorRuntimeCompilationHostingStartupTest
+    : IClassFixture<MvcTestFixture<RazorBuildWebSite.StartupWithHostingStartup>>
 {
-    public RazorRuntimeCompilationHostingStartupTest(MvcTestFixture<RazorBuildWebSite.StartupWithHostingStartup> fixture)
+    public RazorRuntimeCompilationHostingStartupTest(
+        MvcTestFixture<RazorBuildWebSite.StartupWithHostingStartup> fixture
+    )
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(b => b.UseStartup<RazorBuildWebSite.StartupWithHostingStartup>());
-        factory = factory.WithWebHostBuilder(b => b.ConfigureTestServices(serviceCollection => serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(ConfigureRuntimeCompilationOptions)));
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(b =>
+                b.UseStartup<RazorBuildWebSite.StartupWithHostingStartup>()
+            );
+        factory = factory.WithWebHostBuilder(b =>
+            b.ConfigureTestServices(serviceCollection =>
+                serviceCollection.Configure<MvcRazorRuntimeCompilationOptions>(
+                    ConfigureRuntimeCompilationOptions
+                )
+            )
+        );
 
         Client = factory.CreateDefaultClient();
 
@@ -82,7 +95,10 @@ public class RazorRuntimeCompilationHostingStartupTest : IClassFixture<MvcTestFi
 
         // Act - 2
         await UpdateRazorPages();
-        await UpdateFile("/Pages/UpdateablePage.cshtml", "@page" + Environment.NewLine + "@GetType().Assembly");
+        await UpdateFile(
+            "/Pages/UpdateablePage.cshtml",
+            "@page" + Environment.NewLine + "@GetType().Assembly"
+        );
         body = await Client.GetStringAsync("/UpdateablePage");
 
         // Assert - 2
@@ -99,11 +115,9 @@ public class RazorRuntimeCompilationHostingStartupTest : IClassFixture<MvcTestFi
 
     private async Task UpdateFile(string path, string content)
     {
-        var updateContent = new FormUrlEncodedContent(new Dictionary<string, string>
-            {
-                { "path", path },
-                { "content", content },
-            });
+        var updateContent = new FormUrlEncodedContent(
+            new Dictionary<string, string> { { "path", path }, { "content", content } }
+        );
 
         var response = await Client.PostAsync($"/UpdateableViews/Update", updateContent);
         response.EnsureSuccessStatusCode();
@@ -111,7 +125,10 @@ public class RazorRuntimeCompilationHostingStartupTest : IClassFixture<MvcTestFi
 
     private async Task UpdateRazorPages()
     {
-        var response = await Client.PostAsync($"/UpdateableViews/UpdateRazorPages", new StringContent(string.Empty));
+        var response = await Client.PostAsync(
+            $"/UpdateableViews/UpdateRazorPages",
+            new StringContent(string.Empty)
+        );
         response.EnsureSuccessStatusCode();
     }
 }

@@ -23,11 +23,13 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 [method: ImportingConstructor]
 [method: Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
 internal sealed class VSTypeScriptNavigateToSearchService(
-    [Import(AllowDefault = true)] IVSTypeScriptNavigateToSearchService? searchService) : INavigateToSearchService
+    [Import(AllowDefault = true)] IVSTypeScriptNavigateToSearchService? searchService
+) : INavigateToSearchService
 {
     private readonly IVSTypeScriptNavigateToSearchService? _searchService = searchService;
 
-    public IImmutableSet<string> KindsProvided => _searchService?.KindsProvided ?? ImmutableHashSet<string>.Empty;
+    public IImmutableSet<string> KindsProvided =>
+        _searchService?.KindsProvided ?? ImmutableHashSet<string>.Empty;
 
     public bool CanFilter => _searchService?.CanFilter ?? false;
 
@@ -36,11 +38,14 @@ internal sealed class VSTypeScriptNavigateToSearchService(
         string searchPattern,
         IImmutableSet<string> kinds,
         Func<INavigateToSearchResult, Task> onResultFound,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         if (_searchService != null)
         {
-            var results = await _searchService.SearchDocumentAsync(document, searchPattern, kinds, cancellationToken).ConfigureAwait(false);
+            var results = await _searchService
+                .SearchDocumentAsync(document, searchPattern, kinds, cancellationToken)
+                .ConfigureAwait(false);
             foreach (var result in results)
                 await onResultFound(Convert(result)).ConfigureAwait(false);
         }
@@ -55,7 +60,8 @@ internal sealed class VSTypeScriptNavigateToSearchService(
         Document? activeDocument,
         Func<Project, INavigateToSearchResult, Task> onResultFound,
         Func<Task> onProjectCompleted,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         Contract.ThrowIfTrue(projects.IsEmpty);
         Contract.ThrowIfTrue(projects.Select(p => p.Language).Distinct().Count() != 1);
@@ -76,8 +82,15 @@ internal sealed class VSTypeScriptNavigateToSearchService(
             {
                 if (_searchService != null)
                 {
-                    var results = await _searchService.SearchProjectAsync(
-                        project, priorityDocuments.WhereAsArray(d => d.Project == project), searchPattern, kinds, cancellationToken).ConfigureAwait(false);
+                    var results = await _searchService
+                        .SearchProjectAsync(
+                            project,
+                            priorityDocuments.WhereAsArray(d => d.Project == project),
+                            searchPattern,
+                            kinds,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     foreach (var result in results)
                         await onResultFound(project, Convert(result)).ConfigureAwait(false);
                 }
@@ -87,10 +100,11 @@ internal sealed class VSTypeScriptNavigateToSearchService(
         }
     }
 
-    private static INavigateToSearchResult Convert(IVSTypeScriptNavigateToSearchResult result)
-        => new WrappedNavigateToSearchResult(result);
+    private static INavigateToSearchResult Convert(IVSTypeScriptNavigateToSearchResult result) =>
+        new WrappedNavigateToSearchResult(result);
 
-    private class WrappedNavigateToSearchResult(IVSTypeScriptNavigateToSearchResult result) : INavigateToSearchResult
+    private class WrappedNavigateToSearchResult(IVSTypeScriptNavigateToSearchResult result)
+        : INavigateToSearchResult
     {
         private readonly IVSTypeScriptNavigateToSearchResult _result = result;
 
@@ -98,19 +112,24 @@ internal sealed class VSTypeScriptNavigateToSearchService(
 
         public string Kind => _result.Kind;
 
-        public NavigateToMatchKind MatchKind
-            => _result.MatchKind switch
+        public NavigateToMatchKind MatchKind =>
+            _result.MatchKind switch
             {
                 VSTypeScriptNavigateToMatchKind.Exact => NavigateToMatchKind.Exact,
                 VSTypeScriptNavigateToMatchKind.Prefix => NavigateToMatchKind.Prefix,
                 VSTypeScriptNavigateToMatchKind.Substring => NavigateToMatchKind.Substring,
                 VSTypeScriptNavigateToMatchKind.Regular => NavigateToMatchKind.Regular,
                 VSTypeScriptNavigateToMatchKind.None => NavigateToMatchKind.None,
-                VSTypeScriptNavigateToMatchKind.CamelCaseExact => NavigateToMatchKind.CamelCaseExact,
-                VSTypeScriptNavigateToMatchKind.CamelCasePrefix => NavigateToMatchKind.CamelCasePrefix,
-                VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousPrefix => NavigateToMatchKind.CamelCaseNonContiguousPrefix,
-                VSTypeScriptNavigateToMatchKind.CamelCaseSubstring => NavigateToMatchKind.CamelCaseSubstring,
-                VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousSubstring => NavigateToMatchKind.CamelCaseNonContiguousSubstring,
+                VSTypeScriptNavigateToMatchKind.CamelCaseExact =>
+                    NavigateToMatchKind.CamelCaseExact,
+                VSTypeScriptNavigateToMatchKind.CamelCasePrefix =>
+                    NavigateToMatchKind.CamelCasePrefix,
+                VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousPrefix =>
+                    NavigateToMatchKind.CamelCaseNonContiguousPrefix,
+                VSTypeScriptNavigateToMatchKind.CamelCaseSubstring =>
+                    NavigateToMatchKind.CamelCaseSubstring,
+                VSTypeScriptNavigateToMatchKind.CamelCaseNonContiguousSubstring =>
+                    NavigateToMatchKind.CamelCaseNonContiguousSubstring,
                 VSTypeScriptNavigateToMatchKind.Fuzzy => NavigateToMatchKind.Fuzzy,
                 _ => throw ExceptionUtilities.UnexpectedValue(_result.MatchKind),
             };
@@ -125,8 +144,10 @@ internal sealed class VSTypeScriptNavigateToSearchService(
 
         public string Summary => _result.Summary;
 
-        public INavigableItem NavigableItem => new VSTypeScriptNavigableItemWrapper(_result.NavigableItem);
+        public INavigableItem NavigableItem =>
+            new VSTypeScriptNavigableItemWrapper(_result.NavigableItem);
 
-        public ImmutableArray<PatternMatch> Matches => NavigateToSearchResultHelpers.GetMatches(this);
+        public ImmutableArray<PatternMatch> Matches =>
+            NavigateToSearchResultHelpers.GetMatches(this);
     }
 }

@@ -40,9 +40,7 @@ internal sealed class KestrelEventSource : EventSource
 
     private readonly List<WeakReference<KestrelServerOptions>> _options = new();
 
-    private KestrelEventSource()
-    {
-    }
+    private KestrelEventSource() { }
 
     // NOTE
     // - The 'Start' and 'Stop' suffixes on the following event names have special meaning in EventSource. They
@@ -64,7 +62,8 @@ internal sealed class KestrelEventSource : EventSource
             ConnectionStart(
                 connection.ConnectionId,
                 connection.LocalEndPoint?.ToString(),
-                connection.RemoteEndPoint?.ToString());
+                connection.RemoteEndPoint?.ToString()
+            );
         }
     }
 
@@ -107,13 +106,25 @@ internal sealed class KestrelEventSource : EventSource
             // avoid allocating the trace identifier unless logging is enabled
             if (IsEnabled(EventLevel.Informational, EventKeywords.None))
             {
-                RequestStart(httpProtocol.ConnectionIdFeature, httpProtocol.TraceIdentifier, httpProtocol.HttpVersion, httpProtocol.Path!, httpProtocol.MethodText);
+                RequestStart(
+                    httpProtocol.ConnectionIdFeature,
+                    httpProtocol.TraceIdentifier,
+                    httpProtocol.HttpVersion,
+                    httpProtocol.Path!,
+                    httpProtocol.MethodText
+                );
             }
         }
     }
 
     [Event(3, Level = EventLevel.Informational)]
-    private void RequestStart(string connectionId, string requestId, string httpVersion, string path, string method)
+    private void RequestStart(
+        string connectionId,
+        string requestId,
+        string httpVersion,
+        string path,
+        string method
+    )
     {
         WriteEvent(3, connectionId, requestId, httpVersion, path, method);
     }
@@ -132,13 +143,25 @@ internal sealed class KestrelEventSource : EventSource
             // avoid allocating the trace identifier unless logging is enabled
             if (IsEnabled(EventLevel.Informational, EventKeywords.None))
             {
-                RequestStop(httpProtocol.ConnectionIdFeature, httpProtocol.TraceIdentifier, httpProtocol.HttpVersion, httpProtocol.Path!, httpProtocol.MethodText);
+                RequestStop(
+                    httpProtocol.ConnectionIdFeature,
+                    httpProtocol.TraceIdentifier,
+                    httpProtocol.HttpVersion,
+                    httpProtocol.Path!,
+                    httpProtocol.MethodText
+                );
             }
         }
     }
 
     [Event(4, Level = EventLevel.Informational)]
-    private void RequestStop(string connectionId, string requestId, string httpVersion, string path, string method)
+    private void RequestStop(
+        string connectionId,
+        string requestId,
+        string httpVersion,
+        string path,
+        string method
+    )
     {
         WriteEvent(4, connectionId, requestId, httpVersion, path, method);
     }
@@ -166,14 +189,20 @@ internal sealed class KestrelEventSource : EventSource
     }
 
     [NonEvent]
-    public void TlsHandshakeStart(BaseConnectionContext connectionContext, SslServerAuthenticationOptions sslOptions)
+    public void TlsHandshakeStart(
+        BaseConnectionContext connectionContext,
+        SslServerAuthenticationOptions sslOptions
+    )
     {
         Interlocked.Increment(ref _currentTlsHandshakes);
         Interlocked.Increment(ref _totalTlsHandshakes);
 
         if (IsEnabled(EventLevel.Informational, EventKeywords.None))
         {
-            TlsHandshakeStart(connectionContext.ConnectionId, sslOptions.EnabledSslProtocols.ToString());
+            TlsHandshakeStart(
+                connectionContext.ConnectionId,
+                sslOptions.EnabledSslProtocols.ToString()
+            );
         }
     }
 
@@ -185,24 +214,44 @@ internal sealed class KestrelEventSource : EventSource
     }
 
     [NonEvent]
-    public void TlsHandshakeStop(BaseConnectionContext connectionContext, TlsConnectionFeature? feature)
+    public void TlsHandshakeStop(
+        BaseConnectionContext connectionContext,
+        TlsConnectionFeature? feature
+    )
     {
         Interlocked.Decrement(ref _currentTlsHandshakes);
 
         if (IsEnabled(EventLevel.Informational, EventKeywords.None))
         {
             // TODO: Write this without a string allocation using WriteEventData
-            var applicationProtocol = feature == null ? string.Empty : Encoding.UTF8.GetString(feature.ApplicationProtocol.Span);
+            var applicationProtocol =
+                feature == null
+                    ? string.Empty
+                    : Encoding.UTF8.GetString(feature.ApplicationProtocol.Span);
             var sslProtocols = feature?.Protocol.ToString() ?? string.Empty;
             var hostName = feature?.HostName ?? string.Empty;
-            TlsHandshakeStop(connectionContext.ConnectionId, sslProtocols, applicationProtocol, hostName);
+            TlsHandshakeStop(
+                connectionContext.ConnectionId,
+                sslProtocols,
+                applicationProtocol,
+                hostName
+            );
         }
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     [Event(9, Level = EventLevel.Informational)]
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Parameters passed to WriteEvent are all primative values.")]
-    private void TlsHandshakeStop(string connectionId, string sslProtocols, string applicationProtocol, string hostName)
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "Parameters passed to WriteEvent are all primative values."
+    )]
+    private void TlsHandshakeStop(
+        string connectionId,
+        string sslProtocols,
+        string applicationProtocol,
+        string hostName
+    )
     {
         WriteEvent(9, connectionId, sslProtocols, applicationProtocol, hostName);
     }
@@ -305,56 +354,96 @@ internal sealed class KestrelEventSource : EventSource
             // This is the convention for initializing counters in the RuntimeEventSource (lazily on the first enable command).
             // They aren't disabled afterwards...
 
-            _connectionsPerSecondCounter ??= new IncrementingPollingCounter("connections-per-second", this, () => Volatile.Read(ref _totalConnections))
+            _connectionsPerSecondCounter ??= new IncrementingPollingCounter(
+                "connections-per-second",
+                this,
+                () => Volatile.Read(ref _totalConnections)
+            )
             {
                 DisplayName = "Connection Rate",
-                DisplayRateTimeScale = TimeSpan.FromSeconds(1)
+                DisplayRateTimeScale = TimeSpan.FromSeconds(1),
             };
 
-            _totalConnectionsCounter ??= new PollingCounter("total-connections", this, () => Volatile.Read(ref _totalConnections))
+            _totalConnectionsCounter ??= new PollingCounter(
+                "total-connections",
+                this,
+                () => Volatile.Read(ref _totalConnections)
+            )
             {
                 DisplayName = "Total Connections",
             };
 
-            _tlsHandshakesPerSecondCounter ??= new IncrementingPollingCounter("tls-handshakes-per-second", this, () => Volatile.Read(ref _totalTlsHandshakes))
+            _tlsHandshakesPerSecondCounter ??= new IncrementingPollingCounter(
+                "tls-handshakes-per-second",
+                this,
+                () => Volatile.Read(ref _totalTlsHandshakes)
+            )
             {
                 DisplayName = "TLS Handshake Rate",
-                DisplayRateTimeScale = TimeSpan.FromSeconds(1)
+                DisplayRateTimeScale = TimeSpan.FromSeconds(1),
             };
 
-            _totalTlsHandshakesCounter ??= new PollingCounter("total-tls-handshakes", this, () => Volatile.Read(ref _totalTlsHandshakes))
+            _totalTlsHandshakesCounter ??= new PollingCounter(
+                "total-tls-handshakes",
+                this,
+                () => Volatile.Read(ref _totalTlsHandshakes)
+            )
             {
                 DisplayName = "Total TLS Handshakes",
             };
 
-            _currentTlsHandshakesCounter ??= new PollingCounter("current-tls-handshakes", this, () => Volatile.Read(ref _currentTlsHandshakes))
+            _currentTlsHandshakesCounter ??= new PollingCounter(
+                "current-tls-handshakes",
+                this,
+                () => Volatile.Read(ref _currentTlsHandshakes)
+            )
             {
-                DisplayName = "Current TLS Handshakes"
+                DisplayName = "Current TLS Handshakes",
             };
 
-            _failedTlsHandshakesCounter ??= new PollingCounter("failed-tls-handshakes", this, () => Volatile.Read(ref _failedTlsHandshakes))
+            _failedTlsHandshakesCounter ??= new PollingCounter(
+                "failed-tls-handshakes",
+                this,
+                () => Volatile.Read(ref _failedTlsHandshakes)
+            )
             {
-                DisplayName = "Failed TLS Handshakes"
+                DisplayName = "Failed TLS Handshakes",
             };
 
-            _currentConnectionsCounter ??= new PollingCounter("current-connections", this, () => Volatile.Read(ref _currentConnections))
+            _currentConnectionsCounter ??= new PollingCounter(
+                "current-connections",
+                this,
+                () => Volatile.Read(ref _currentConnections)
+            )
             {
-                DisplayName = "Current Connections"
+                DisplayName = "Current Connections",
             };
 
-            _connectionQueueLengthCounter ??= new PollingCounter("connection-queue-length", this, () => Volatile.Read(ref _connectionQueueLength))
+            _connectionQueueLengthCounter ??= new PollingCounter(
+                "connection-queue-length",
+                this,
+                () => Volatile.Read(ref _connectionQueueLength)
+            )
             {
-                DisplayName = "Connection Queue Length"
+                DisplayName = "Connection Queue Length",
             };
 
-            _httpRequestQueueLengthCounter ??= new PollingCounter("request-queue-length", this, () => Volatile.Read(ref _httpRequestQueueLength))
+            _httpRequestQueueLengthCounter ??= new PollingCounter(
+                "request-queue-length",
+                this,
+                () => Volatile.Read(ref _httpRequestQueueLength)
+            )
             {
-                DisplayName = "Request Queue Length"
+                DisplayName = "Request Queue Length",
             };
 
-            _currrentUpgradedHttpRequestsCounter ??= new PollingCounter("current-upgraded-requests", this, () => Volatile.Read(ref _currentUpgradedHttpRequests))
+            _currrentUpgradedHttpRequestsCounter ??= new PollingCounter(
+                "current-upgraded-requests",
+                this,
+                () => Volatile.Read(ref _currentUpgradedHttpRequests)
+            )
             {
-                DisplayName = "Current Upgraded Requests (WebSockets)"
+                DisplayName = "Current Upgraded Requests (WebSockets)",
             };
 
             // Log the options here
@@ -379,8 +468,19 @@ internal sealed class KestrelEventSource : EventSource
 
     [NonEvent]
     [SkipLocalsInit]
-    [UnconditionalSuppressMessage("Trimming", "IL2026", Justification = "Parameters passed to WriteEvent are all primative values.")]
-    private unsafe void WriteEvent(int eventId, string? arg1, string? arg2, string? arg3, string? arg4, string? arg5)
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2026",
+        Justification = "Parameters passed to WriteEvent are all primative values."
+    )]
+    private unsafe void WriteEvent(
+        int eventId,
+        string? arg1,
+        string? arg2,
+        string? arg3,
+        string? arg4,
+        string? arg5
+    )
     {
         const int EventDataCount = 5;
 
@@ -401,27 +501,27 @@ internal sealed class KestrelEventSource : EventSource
             data[0] = new EventData
             {
                 DataPointer = (IntPtr)arg1Ptr,
-                Size = (arg1.Length + 1) * sizeof(char)
+                Size = (arg1.Length + 1) * sizeof(char),
             };
             data[1] = new EventData
             {
                 DataPointer = (IntPtr)arg2Ptr,
-                Size = (arg2.Length + 1) * sizeof(char)
+                Size = (arg2.Length + 1) * sizeof(char),
             };
             data[2] = new EventData
             {
                 DataPointer = (IntPtr)arg3Ptr,
-                Size = (arg3.Length + 1) * sizeof(char)
+                Size = (arg3.Length + 1) * sizeof(char),
             };
             data[3] = new EventData
             {
                 DataPointer = (IntPtr)arg4Ptr,
-                Size = (arg4.Length + 1) * sizeof(char)
+                Size = (arg4.Length + 1) * sizeof(char),
             };
             data[4] = new EventData
             {
                 DataPointer = (IntPtr)arg5Ptr,
-                Size = (arg5.Length + 1) * sizeof(char)
+                Size = (arg5.Length + 1) * sizeof(char),
             };
 
             WriteEventCore(eventId, EventDataCount, data);

@@ -14,7 +14,9 @@ namespace XPathTests.Common
             Stream s = typeof(FileHelper).Assembly.GetManifestResourceStream(xmlPath);
             if (s == null)
             {
-                throw new Exception($"Couldn't find resource: {xmlPath}. Available: {string.Join(Environment.NewLine, typeof(FileHelper).Assembly.GetManifestResourceNames())}");
+                throw new Exception(
+                    $"Couldn't find resource: {xmlPath}. Available: {string.Join(Environment.NewLine, typeof(FileHelper).Assembly.GetManifestResourceNames())}"
+                );
             }
             return s;
         }

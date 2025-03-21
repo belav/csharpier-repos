@@ -42,10 +42,7 @@ namespace System.Speech.Internal.SrgsParser
 
         public IElementFactory ElementFactory
         {
-            set
-            {
-                _parser = value;
-            }
+            set { _parser = value; }
         }
 
         #endregion
@@ -94,8 +91,17 @@ namespace System.Speech.Internal.SrgsParser
         private IRule ParseRule(IGrammar grammar, SrgsRule srgsRule)
         {
             string id = srgsRule.Id;
-            bool hasScript = srgsRule.OnInit != null || srgsRule.OnParse != null || srgsRule.OnError != null || srgsRule.OnRecognition != null;
-            IRule rule = grammar.CreateRule(id, srgsRule.Scope == SrgsRuleScope.Public ? RulePublic.True : RulePublic.False, srgsRule.Dynamic, hasScript);
+            bool hasScript =
+                srgsRule.OnInit != null
+                || srgsRule.OnParse != null
+                || srgsRule.OnError != null
+                || srgsRule.OnRecognition != null;
+            IRule rule = grammar.CreateRule(
+                id,
+                srgsRule.Scope == SrgsRuleScope.Public ? RulePublic.True : RulePublic.False,
+                srgsRule.Dynamic,
+                hasScript
+            );
 
             if (srgsRule.OnInit != null)
             {
@@ -114,7 +120,12 @@ namespace System.Speech.Internal.SrgsParser
 
             if (srgsRule.OnRecognition != null)
             {
-                rule.CreateScript(grammar, id, srgsRule.OnRecognition, RuleMethodScript.onRecognition);
+                rule.CreateScript(
+                    grammar,
+                    id,
+                    srgsRule.OnRecognition,
+                    RuleMethodScript.onRecognition
+                );
             }
 
             // Add the code to the backend
@@ -154,7 +165,12 @@ namespace System.Speech.Internal.SrgsParser
             }
             else
             {
-                ruleRef = _parser.CreateRuleRef(parent, srgsRuleRef.Uri, srgsRuleRef.SemanticKey, srgsRuleRef.Params);
+                ruleRef = _parser.CreateRuleRef(
+                    parent,
+                    srgsRuleRef.Uri,
+                    srgsRuleRef.SemanticKey,
+                    srgsRuleRef.Params
+                );
                 fSpecialRuleRef = false;
             }
 
@@ -188,7 +204,14 @@ namespace System.Speech.Internal.SrgsParser
         /// </summary>
         private IItem ParseItem(SrgsItem srgsItem, IElement parent, IRule rule)
         {
-            IItem item = _parser.CreateItem(parent, rule, srgsItem.MinRepeat, srgsItem.MaxRepeat, srgsItem.RepeatProbability, srgsItem.Weight);
+            IItem item = _parser.CreateItem(
+                parent,
+                rule,
+                srgsItem.MinRepeat,
+                srgsItem.MaxRepeat,
+                srgsItem.RepeatProbability,
+                srgsItem.Weight
+            );
 
             // Process child elements.
             foreach (SrgsElement srgsElement in GetSortedTagElements(srgsItem.Elements))
@@ -205,7 +228,13 @@ namespace System.Speech.Internal.SrgsParser
         /// </summary>
         private IToken ParseToken(SrgsToken srgsToken, IElement parent)
         {
-            return _parser.CreateToken(parent, srgsToken.Text, srgsToken.Pronunciation, srgsToken.Display, -1);
+            return _parser.CreateToken(
+                parent,
+                srgsToken.Text,
+                srgsToken.Pronunciation,
+                srgsToken.Display,
+                -1
+            );
         }
 
         /// <summary>
@@ -215,11 +244,24 @@ namespace System.Speech.Internal.SrgsParser
         /// Tokens may also be delimited by double quotes.  In these cases, the double
         /// quotes token must be surrounded by white space or string boundary.
         /// </summary>
-        private void ParseText(IElement parent, string sChars, string pronunciation, string display, float reqConfidence)
+        private void ParseText(
+            IElement parent,
+            string sChars,
+            string pronunciation,
+            string display,
+            float reqConfidence
+        )
         {
             System.Diagnostics.Debug.Assert((parent != null) && (!string.IsNullOrEmpty(sChars)));
 
-            XmlParser.ParseText(parent, sChars, pronunciation, display, reqConfidence, new CreateTokenCallback(_parser.CreateToken));
+            XmlParser.ParseText(
+                parent,
+                sChars,
+                pronunciation,
+                display,
+                reqConfidence,
+                new CreateTokenCallback(_parser.CreateToken)
+            );
         }
 
         /// <summary>
@@ -253,7 +295,10 @@ namespace System.Speech.Internal.SrgsParser
         /// <summary>
         /// Parse tag
         /// </summary>
-        private ISemanticTag ParseSemanticTag(SrgsSemanticInterpretationTag srgsTag, IElement parent)
+        private ISemanticTag ParseSemanticTag(
+            SrgsSemanticInterpretationTag srgsTag,
+            IElement parent
+        )
         {
             ISemanticTag tag = _parser.CreateSemanticTag(parent);
 

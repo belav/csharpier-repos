@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-using System.Runtime.CompilerServices;
 using System;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 public class SP1c
 {
-
     // Struct in reg (2 ints)
     struct S
     {
@@ -28,7 +27,7 @@ public class SP1c
         S s;
         s.i0 = i3;
         s.i1 = i2;
-        return Foo(i1, i0, i4, s);  // r0 <= r1; r1 <= r0; r2 <= inarg[0]; r3 <= r3; outarg[0] <= r2
+        return Foo(i1, i0, i4, s); // r0 <= r1; r1 <= r0; r2 <= inarg[0]; r3 <= r3; outarg[0] <= r2
     }
 
     [Fact]

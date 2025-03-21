@@ -25,18 +25,17 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public enum UpdateUnit {
-		Hours,
-		Days,
-		Weeks
-	}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public enum UpdateUnit
+    {
+        Hours,
+        Days,
+        Weeks,
+    }
 }
-

@@ -44,7 +44,12 @@ namespace System.Diagnostics.Tests
         }
 
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/50957", typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser), nameof(PlatformDetection.IsMonoAOT))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/50957",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBrowser),
+            nameof(PlatformDetection.IsMonoAOT)
+        )]
         [MemberData(nameof(HasMethod_TestData))]
         public void HasILOffset_Invoke_ReturnsExpected(StackFrame stackFrame, bool expected)
         {
@@ -58,7 +63,12 @@ namespace System.Diagnostics.Tests
         }
 
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/50957", typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser), nameof(PlatformDetection.IsMonoAOT))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/50957",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBrowser),
+            nameof(PlatformDetection.IsMonoAOT)
+        )]
         [MemberData(nameof(HasMethod_TestData))]
         public void HasMethod_Invoke_ReturnsExpected(StackFrame stackFrame, bool expected)
         {

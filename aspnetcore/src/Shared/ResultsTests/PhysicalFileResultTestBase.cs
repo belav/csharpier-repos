@@ -25,14 +25,19 @@ public abstract class PhysicalFileResultTestBase
         string contentType,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue entityTag = null,
-        bool enableRangeProcessing = false);
+        bool enableRangeProcessing = false
+    );
 
     [Theory]
     [InlineData(0L, 3L, 4L)]
     [InlineData(8L, 13L, 6L)]
     [InlineData(null, 5L, 5L)]
     [InlineData(8L, null, 26L)]
-    public async Task WriteFileAsync_WritesRangeRequested(long? start, long? end, long contentLength)
+    public async Task WriteFileAsync_WritesRangeRequested(
+        long? start,
+        long? end,
+        long contentLength
+    )
     {
         // Arrange
         var path = Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt"));
@@ -57,7 +62,10 @@ public abstract class PhysicalFileResultTestBase
         Assert.Equal(contentRange.ToString(), httpResponse.Headers.ContentRange);
         Assert.NotEmpty(httpResponse.Headers.LastModified);
         Assert.Equal(contentLength, httpResponse.ContentLength);
-        Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+        Assert.Equal(
+            Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")),
+            sendFile.Name
+        );
         Assert.Equal(startResult, sendFile.Offset);
         Assert.Equal((long?)contentLength, sendFile.Length);
     }
@@ -74,11 +82,19 @@ public abstract class PhysicalFileResultTestBase
         var requestHeaders = httpContext.Request.GetTypedHeaders();
         requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
         requestHeaders.Range = new RangeHeaderValue(0, 3);
-        requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"Etag\""));
+        requestHeaders.IfRange = new RangeConditionHeaderValue(
+            new EntityTagHeaderValue("\"Etag\"")
+        );
         httpContext.Request.Method = HttpMethods.Get;
 
         // Act
-        await ExecuteAsync(httpContext, path, "text/plain", entityTag: entityTag, enableRangeProcessing: true);
+        await ExecuteAsync(
+            httpContext,
+            path,
+            "text/plain",
+            entityTag: entityTag,
+            enableRangeProcessing: true
+        );
 
         // Assert
         var httpResponse = httpContext.Response;
@@ -89,7 +105,10 @@ public abstract class PhysicalFileResultTestBase
         Assert.NotEmpty(httpResponse.Headers.LastModified);
         Assert.Equal(entityTag.ToString(), httpResponse.Headers.ETag);
         Assert.Equal(4, httpResponse.ContentLength);
-        Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+        Assert.Equal(
+            Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")),
+            sendFile.Name
+        );
         Assert.Equal(0, sendFile.Offset);
         Assert.Equal(4, sendFile.Length);
     }
@@ -106,7 +125,9 @@ public abstract class PhysicalFileResultTestBase
         var requestHeaders = httpContext.Request.GetTypedHeaders();
         requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
         requestHeaders.Range = new RangeHeaderValue(0, 3);
-        requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"Etag\""));
+        requestHeaders.IfRange = new RangeConditionHeaderValue(
+            new EntityTagHeaderValue("\"Etag\"")
+        );
         httpContext.Request.Method = HttpMethods.Get;
 
         // Act
@@ -116,7 +137,10 @@ public abstract class PhysicalFileResultTestBase
         var httpResponse = httpContext.Response;
         Assert.Equal(StatusCodes.Status200OK, httpResponse.StatusCode);
         Assert.NotEmpty(httpResponse.Headers.LastModified);
-        Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+        Assert.Equal(
+            Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")),
+            sendFile.Name
+        );
         Assert.Equal(0, sendFile.Offset);
         Assert.Null(sendFile.Length);
     }
@@ -133,17 +157,28 @@ public abstract class PhysicalFileResultTestBase
         var requestHeaders = httpContext.Request.GetTypedHeaders();
         requestHeaders.IfModifiedSince = DateTimeOffset.MinValue;
         requestHeaders.Range = new RangeHeaderValue(0, 3);
-        requestHeaders.IfRange = new RangeConditionHeaderValue(new EntityTagHeaderValue("\"NotEtag\""));
+        requestHeaders.IfRange = new RangeConditionHeaderValue(
+            new EntityTagHeaderValue("\"NotEtag\"")
+        );
         httpContext.Request.Method = HttpMethods.Get;
 
         // Act
-        await ExecuteAsync(httpContext, path, "text/plain", entityTag: entityTag, enableRangeProcessing: true);
+        await ExecuteAsync(
+            httpContext,
+            path,
+            "text/plain",
+            entityTag: entityTag,
+            enableRangeProcessing: true
+        );
 
         // Assert
         var httpResponse = httpContext.Response;
         Assert.Equal(StatusCodes.Status200OK, httpResponse.StatusCode);
         Assert.NotEmpty(httpResponse.Headers.LastModified);
-        Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+        Assert.Equal(
+            Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")),
+            sendFile.Name
+        );
         Assert.Equal(0, sendFile.Offset);
         Assert.Null(sendFile.Length);
     }
@@ -172,7 +207,10 @@ public abstract class PhysicalFileResultTestBase
         Assert.Equal(StatusCodes.Status200OK, httpResponse.StatusCode);
         Assert.Empty(httpResponse.Headers.ContentRange);
         Assert.NotEmpty(httpResponse.Headers.LastModified);
-        Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+        Assert.Equal(
+            Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")),
+            sendFile.Name
+        );
         Assert.Equal(0, sendFile.Offset);
         Assert.Null(sendFile.Length);
     }
@@ -288,7 +326,11 @@ public abstract class PhysicalFileResultTestBase
     [InlineData(8L, 13L, 6L)]
     [InlineData(null, 3L, 3L)]
     [InlineData(8L, null, 26L)]
-    public async Task ExecuteResultAsync_CallsSendFileAsyncWithRequestedRange_IfIHttpSendFilePresent(long? start, long? end, long contentLength)
+    public async Task ExecuteResultAsync_CallsSendFileAsyncWithRequestedRange_IfIHttpSendFilePresent(
+        long? start,
+        long? end,
+        long contentLength
+    )
     {
         // Arrange
         var path = Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt"));
@@ -307,7 +349,10 @@ public abstract class PhysicalFileResultTestBase
         start ??= 34 - end;
         end = start + contentLength - 1;
         var httpResponse = httpContext.Response;
-        Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+        Assert.Equal(
+            Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile.txt")),
+            sendFile.Name
+        );
         Assert.Equal(start, sendFile.Offset);
         Assert.Equal(contentLength, sendFile.Length);
         Assert.Equal(CancellationToken.None, sendFile.Token);
@@ -324,7 +369,9 @@ public abstract class PhysicalFileResultTestBase
     {
         // Arrange
         var expectedContentType = "text/foo; charset=us-ascii";
-        var path = Path.GetFullPath(Path.Combine(".", "TestFiles", "FilePathResultTestFile_ASCII.txt"));
+        var path = Path.GetFullPath(
+            Path.Combine(".", "TestFiles", "FilePathResultTestFile_ASCII.txt")
+        );
         var sendFile = new TestSendFileFeature();
         var httpContext = GetHttpContext();
         httpContext.Features.Set<IHttpResponseBodyFeature>(sendFile);
@@ -334,7 +381,10 @@ public abstract class PhysicalFileResultTestBase
 
         // Assert
         Assert.Equal(expectedContentType, httpContext.Response.ContentType);
-        Assert.Equal(Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile_ASCII.txt")), sendFile.Name);
+        Assert.Equal(
+            Path.GetFullPath(Path.Combine("TestFiles", "FilePathResultTestFile_ASCII.txt")),
+            sendFile.Name
+        );
         Assert.Equal(0, sendFile.Offset);
         Assert.Null(sendFile.Length);
         Assert.Equal(CancellationToken.None, sendFile.Token);
@@ -354,7 +404,10 @@ public abstract class PhysicalFileResultTestBase
         await ExecuteAsync(httpContext, path, "text/plain");
 
         // Assert
-        Assert.Equal(Path.GetFullPath(Path.Combine(".", "TestFiles", "FilePathResultTestFile.txt")), sendFile.Name);
+        Assert.Equal(
+            Path.GetFullPath(Path.Combine(".", "TestFiles", "FilePathResultTestFile.txt")),
+            sendFile.Name
+        );
         Assert.Equal(0, sendFile.Offset);
         Assert.Null(sendFile.Length);
         Assert.Equal(CancellationToken.None, sendFile.Token);
@@ -380,8 +433,9 @@ public abstract class PhysicalFileResultTestBase
         var httpContext = GetHttpContext();
 
         // Act
-        var ex = await Assert.ThrowsAsync<NotSupportedException>(
-            () => ExecuteAsync(httpContext, path, "text/plain"));
+        var ex = await Assert.ThrowsAsync<NotSupportedException>(() =>
+            ExecuteAsync(httpContext, path, "text/plain")
+        );
 
         // Assert
         Assert.Equal(expectedMessage, ex.Message);
@@ -396,14 +450,17 @@ public abstract class PhysicalFileResultTestBase
     [InlineData(".\\SubFolder\\SubFolderTestFile.txt")]
     [InlineData("./SubFolder\\SubFolderTestFile.txt")]
     [InlineData(".\\SubFolder/SubFolderTestFile.txt")]
-    public void ExecuteAsync_ThrowsDirectoryNotFound_IfItCanNotFindTheDirectory_ForRootPaths(string path)
+    public void ExecuteAsync_ThrowsDirectoryNotFound_IfItCanNotFindTheDirectory_ForRootPaths(
+        string path
+    )
     {
         // Arrange
         var httpContext = GetHttpContext();
 
         // Act & Assert
-        Assert.ThrowsAsync<DirectoryNotFoundException>(
-            () => ExecuteAsync(httpContext, path, "text/plain"));
+        Assert.ThrowsAsync<DirectoryNotFoundException>(() =>
+            ExecuteAsync(httpContext, path, "text/plain")
+        );
     }
 
     [Theory]
@@ -415,8 +472,9 @@ public abstract class PhysicalFileResultTestBase
         var httpContext = GetHttpContext();
 
         // Act & Assert
-        Assert.ThrowsAsync<FileNotFoundException>(
-            () => ExecuteAsync(httpContext, path, "text/plain"));
+        Assert.ThrowsAsync<FileNotFoundException>(() =>
+            ExecuteAsync(httpContext, path, "text/plain")
+        );
     }
 
     private sealed class TestSendFileFeature : IHttpResponseBodyFeature
@@ -440,7 +498,12 @@ public abstract class PhysicalFileResultTestBase
             throw new NotImplementedException();
         }
 
-        public Task SendFileAsync(string path, long offset, long? length, CancellationToken cancellation)
+        public Task SendFileAsync(
+            string path,
+            long offset,
+            long? length,
+            CancellationToken cancellation
+        )
         {
             Name = path;
             Offset = offset;

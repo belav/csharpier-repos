@@ -11,8 +11,14 @@ namespace Microsoft.Win32.SystemEventsTests
 {
     public class InvokeOnEventsThreadTests : SystemEventsTest
     {
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/29941", TargetFrameworkMonikers.NetFramework)]
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/29941",
+            TargetFrameworkMonikers.NetFramework
+        )]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         public void InvokeOnEventsThreadRunsAsynchronously()
         {
             var invoked = new AutoResetEvent(false);
@@ -20,10 +26,14 @@ namespace Microsoft.Win32.SystemEventsTests
             Assert.True(invoked.WaitOne(PostMessageWait));
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoNorServerCore))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoNorServerCore)
+        )]
         public void InvokeOnEventsThreadRunsOnSameThreadAsOtherEvents()
         {
-            int expectedThreadId = -1, actualThreadId = -1;
+            int expectedThreadId = -1,
+                actualThreadId = -1;
             var invoked = new AutoResetEvent(false);
             EventHandler handler = (sender, args) =>
             {
@@ -37,11 +47,13 @@ namespace Microsoft.Win32.SystemEventsTests
                 SendMessage(User32.WM_REFLECT + User32.WM_TIMECHANGE, IntPtr.Zero, IntPtr.Zero);
                 Assert.NotEqual(-1, expectedThreadId);
 
-                SystemEvents.InvokeOnEventsThread(new Action(() =>
-                {
-                    actualThreadId = Environment.CurrentManagedThreadId;
-                    invoked.Set();
-                }));
+                SystemEvents.InvokeOnEventsThread(
+                    new Action(() =>
+                    {
+                        actualThreadId = Environment.CurrentManagedThreadId;
+                        invoked.Set();
+                    })
+                );
                 Assert.True(invoked.WaitOne(PostMessageWait));
                 Assert.Equal(expectedThreadId, actualThreadId);
             }
@@ -52,32 +64,45 @@ namespace Microsoft.Win32.SystemEventsTests
             }
         }
 
-        public static bool NotNanoNorServerCoreAndRemoteExecutorSupported => PlatformDetection.IsNotWindowsNanoNorServerCore && RemoteExecutor.IsSupported;
+        public static bool NotNanoNorServerCoreAndRemoteExecutorSupported =>
+            PlatformDetection.IsNotWindowsNanoNorServerCore && RemoteExecutor.IsSupported;
 
         [ConditionalFact(nameof(NotNanoNorServerCoreAndRemoteExecutorSupported))]
         [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34360", TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34360",
+            TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         public void RegisterFromSTAThreadThatGoesAway_MessageStillDelivered()
         {
-            RemoteExecutor.Invoke(() => // to ensure no one has registered for any events before
-            {
-                bool changing = false, changed = false;
-
-                // Register for the events on an STA thread that then immediately exits
-                var thread = new Thread(() =>
+            RemoteExecutor
+                .Invoke(() => // to ensure no one has registered for any events before
                 {
-                    SystemEvents.DisplaySettingsChanging += (o, e) => changing = true;
-                    SystemEvents.DisplaySettingsChanged += (o, e) => changed = true;
-                });
-                thread.SetApartmentState(ApartmentState.STA);
-                thread.Start();
-                thread.Join();
+                    bool changing = false,
+                        changed = false;
 
-                SendMessage(User32.WM_REFLECT + User32.WM_DISPLAYCHANGE, IntPtr.Zero, IntPtr.Zero);
+                    // Register for the events on an STA thread that then immediately exits
+                    var thread = new Thread(() =>
+                    {
+                        SystemEvents.DisplaySettingsChanging += (o, e) => changing = true;
+                        SystemEvents.DisplaySettingsChanged += (o, e) => changed = true;
+                    });
+                    thread.SetApartmentState(ApartmentState.STA);
+                    thread.Start();
+                    thread.Join();
 
-                Assert.True(changing);
-                Assert.True(changed);
-            }).Dispose();
+                    SendMessage(
+                        User32.WM_REFLECT + User32.WM_DISPLAYCHANGE,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    );
+
+                    Assert.True(changing);
+                    Assert.True(changed);
+                })
+                .Dispose();
         }
     }
 }

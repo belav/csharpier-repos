@@ -39,7 +39,7 @@ public class X
                     s += a[i];
                 }
             }
-            
+
             F(a);
         }
     }

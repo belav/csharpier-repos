@@ -28,15 +28,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public NullResultMetadataAsSourceFileProvider()
-        {
-        }
+        public NullResultMetadataAsSourceFileProvider() { }
 
-        public void CleanupGeneratedFiles(MetadataAsSourceWorkspace workspace)
-        {
-        }
+        public void CleanupGeneratedFiles(MetadataAsSourceWorkspace workspace) { }
 
-        public Task<MetadataAsSourceFile?> GetGeneratedFileAsync(MetadataAsSourceWorkspace metadataWorkspace, Workspace sourceWorkspace, Project sourceProject, ISymbol symbol, bool signaturesOnly, MetadataAsSourceOptions options, string tempPath, TelemetryMessage? telemetry, CancellationToken cancellationToken)
+        public Task<MetadataAsSourceFile?> GetGeneratedFileAsync(
+            MetadataAsSourceWorkspace metadataWorkspace,
+            Workspace sourceWorkspace,
+            Project sourceProject,
+            ISymbol symbol,
+            bool signaturesOnly,
+            MetadataAsSourceOptions options,
+            string tempPath,
+            TelemetryMessage? telemetry,
+            CancellationToken cancellationToken
+        )
         {
             return Task.FromResult<MetadataAsSourceFile?>(NullResult);
         }
@@ -46,17 +52,28 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             return null;
         }
 
-        public bool TryAddDocumentToWorkspace(MetadataAsSourceWorkspace workspace, string filePath, Text.SourceTextContainer sourceTextContainer)
+        public bool TryAddDocumentToWorkspace(
+            MetadataAsSourceWorkspace workspace,
+            string filePath,
+            Text.SourceTextContainer sourceTextContainer
+        )
         {
             return true;
         }
 
-        public bool TryRemoveDocumentFromWorkspace(MetadataAsSourceWorkspace workspace, string filePath)
+        public bool TryRemoveDocumentFromWorkspace(
+            MetadataAsSourceWorkspace workspace,
+            string filePath
+        )
         {
             return true;
         }
 
-        public bool ShouldCollapseOnOpen(MetadataAsSourceWorkspace workspace, string filePath, BlockStructureOptions options)
+        public bool ShouldCollapseOnOpen(
+            MetadataAsSourceWorkspace workspace,
+            string filePath,
+            BlockStructureOptions options
+        )
         {
             return true;
         }

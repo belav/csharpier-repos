@@ -4,7 +4,6 @@
 using System.Globalization;
 using System.Runtime.Serialization; // Just for SR
 
-
 namespace System.Text
 {
     internal readonly struct SurrogateChar
@@ -23,7 +22,13 @@ namespace System.Text
         public SurrogateChar(int ch)
         {
             if (ch < MinValue || ch > MaxValue)
-                throw new ArgumentException(SR.Format(SR.XmlInvalidSurrogate, ch.ToString("X", CultureInfo.InvariantCulture)), nameof(ch));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.XmlInvalidSurrogate,
+                        ch.ToString("X", CultureInfo.InvariantCulture)
+                    ),
+                    nameof(ch)
+                );
 
             const int mask = ((1 << 10) - 1);
 
@@ -34,24 +39,39 @@ namespace System.Text
         public SurrogateChar(char lowChar, char highChar)
         {
             if (lowChar < surLowMin || lowChar > surLowMax)
-                throw new ArgumentException(SR.Format(SR.XmlInvalidLowSurrogate, ((int)lowChar).ToString("X", CultureInfo.InvariantCulture)), nameof(lowChar));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.XmlInvalidLowSurrogate,
+                        ((int)lowChar).ToString("X", CultureInfo.InvariantCulture)
+                    ),
+                    nameof(lowChar)
+                );
 
             if (highChar < surHighMin || highChar > surHighMax)
-                throw new ArgumentException(SR.Format(SR.XmlInvalidHighSurrogate, ((int)highChar).ToString("X", CultureInfo.InvariantCulture)), nameof(highChar));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.XmlInvalidHighSurrogate,
+                        ((int)highChar).ToString("X", CultureInfo.InvariantCulture)
+                    ),
+                    nameof(highChar)
+                );
 
             _lowChar = lowChar;
             _highChar = highChar;
         }
 
-        public char LowChar { get { return _lowChar; } }
-        public char HighChar { get { return _highChar; } }
+        public char LowChar
+        {
+            get { return _lowChar; }
+        }
+        public char HighChar
+        {
+            get { return _highChar; }
+        }
 
         public int Char
         {
-            get
-            {
-                return (_lowChar - surLowMin) | ((_highChar - surHighMin) << 10) + MinValue;
-            }
+            get { return (_lowChar - surLowMin) | ((_highChar - surHighMin) << 10) + MinValue; }
         }
     }
 }

@@ -15,8 +15,11 @@ public class SqlServerIsNumericFunctionTranslator : IMethodCallTranslator
 {
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
-    private static readonly MethodInfo MethodInfo = typeof(SqlServerDbFunctionsExtensions)
-        .GetRuntimeMethod(nameof(SqlServerDbFunctionsExtensions.IsNumeric), new[] { typeof(DbFunctions), typeof(string) })!;
+    private static readonly MethodInfo MethodInfo =
+        typeof(SqlServerDbFunctionsExtensions).GetRuntimeMethod(
+            nameof(SqlServerDbFunctionsExtensions.IsNumeric),
+            new[] { typeof(DbFunctions), typeof(string) }
+        )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,15 +42,18 @@ public class SqlServerIsNumericFunctionTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
-        => MethodInfo.Equals(method)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    ) =>
+        MethodInfo.Equals(method)
             ? _sqlExpressionFactory.Equal(
                 _sqlExpressionFactory.Function(
                     "ISNUMERIC",
                     new[] { arguments[1] },
                     nullable: false,
                     argumentsPropagateNullability: new[] { false },
-                    typeof(int)),
-                _sqlExpressionFactory.Constant(1))
+                    typeof(int)
+                ),
+                _sqlExpressionFactory.Constant(1)
+            )
             : null;
 }

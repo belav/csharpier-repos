@@ -17,16 +17,30 @@ namespace Microsoft.Extensions.Logging.Console.Test
         [InlineData(1, "No Color", "No Color")]
         [InlineData(2, "\x1B[41mColored\x1B[49mNo Color", "No Color")]
         [InlineData(2, "\x1B[41m\x1B[1m\x1B[31mmColored\x1B[39m\x1B[49mNo Color", "No Color")]
-        public void Parse_CheckTimesWrittenToConsole(int numSegments, string message, string lastSegment)
+        public void Parse_CheckTimesWrittenToConsole(
+            int numSegments,
+            string message,
+            string lastSegment
+        )
         {
             // Arrange
             var segments = new List<ConsoleContext>();
-            Action<string, int, int, ConsoleColor?, ConsoleColor?> onParseWrite = (message, startIndex, length, bg, fg) => {
-                segments.Add(new ConsoleContext() {
-                    BackgroundColor = bg,
-                    ForegroundColor = fg,
-                    Message = message.AsSpan(startIndex, length).ToString()
-                });
+            Action<string, int, int, ConsoleColor?, ConsoleColor?> onParseWrite = (
+                message,
+                startIndex,
+                length,
+                bg,
+                fg
+            ) =>
+            {
+                segments.Add(
+                    new ConsoleContext()
+                    {
+                        BackgroundColor = bg,
+                        ForegroundColor = fg,
+                        Message = message.AsSpan(startIndex, length).ToString(),
+                    }
+                );
             };
             var parser = new AnsiParser(onParseWrite);
 
@@ -40,21 +54,35 @@ namespace Microsoft.Extensions.Logging.Console.Test
 
         [Theory]
         [MemberData(nameof(Colors))]
-        public void Parse_SetBackgroundForegroundAndMessageThenReset_Success(ConsoleColor background, ConsoleColor foreground)
+        public void Parse_SetBackgroundForegroundAndMessageThenReset_Success(
+            ConsoleColor background,
+            ConsoleColor foreground
+        )
         {
             // Arrange
-            var message = AnsiParser.GetBackgroundColorEscapeCode(background)
+            var message =
+                AnsiParser.GetBackgroundColorEscapeCode(background)
                 + AnsiParser.GetForegroundColorEscapeCode(foreground)
                 + "Request received"
                 + AnsiParser.DefaultForegroundColor //resets foreground color
                 + AnsiParser.DefaultBackgroundColor; //resets background color
             var segments = new List<ConsoleContext>();
-            Action<string, int, int, ConsoleColor?, ConsoleColor?> onParseWrite = (message, startIndex, length, bg, fg) => {
-                segments.Add(new ConsoleContext() {
-                    BackgroundColor = bg,
-                    ForegroundColor = fg,
-                    Message = message.AsSpan(startIndex, length).ToString()
-                });
+            Action<string, int, int, ConsoleColor?, ConsoleColor?> onParseWrite = (
+                message,
+                startIndex,
+                length,
+                bg,
+                fg
+            ) =>
+            {
+                segments.Add(
+                    new ConsoleContext()
+                    {
+                        BackgroundColor = bg,
+                        ForegroundColor = fg,
+                        Message = message.AsSpan(startIndex, length).ToString(),
+                    }
+                );
             };
             var parser = new AnsiParser(onParseWrite);
 
@@ -72,7 +100,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void Parse_MessageWithMultipleColors_ParsedIntoMultipleSegments()
         {
             // Arrange
-            var message = AnsiParser.GetBackgroundColorEscapeCode(ConsoleColor.DarkRed)
+            var message =
+                AnsiParser.GetBackgroundColorEscapeCode(ConsoleColor.DarkRed)
                 + AnsiParser.GetForegroundColorEscapeCode(ConsoleColor.Gray)
                 + "Message1"
                 + AnsiParser.DefaultForegroundColor
@@ -87,12 +116,22 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 + AnsiParser.DefaultForegroundColor
                 + AnsiParser.DefaultBackgroundColor;
             var segments = new List<ConsoleContext>();
-            Action<string, int, int, ConsoleColor?, ConsoleColor?> onParseWrite = (message, startIndex, length, bg, fg) => {
-                segments.Add(new ConsoleContext() {
-                    BackgroundColor = bg,
-                    ForegroundColor = fg,
-                    Message = message.AsSpan(startIndex, length).ToString()
-                });
+            Action<string, int, int, ConsoleColor?, ConsoleColor?> onParseWrite = (
+                message,
+                startIndex,
+                length,
+                bg,
+                fg
+            ) =>
+            {
+                segments.Add(
+                    new ConsoleContext()
+                    {
+                        BackgroundColor = bg,
+                        ForegroundColor = fg,
+                        Message = message.AsSpan(startIndex, length).ToString(),
+                    }
+                );
             };
             var parser = new AnsiParser(onParseWrite);
 
@@ -120,7 +159,8 @@ namespace Microsoft.Extensions.Logging.Console.Test
         public void Parse_RepeatedColorChange_PicksLastSet()
         {
             // Arrange
-            var message = AnsiParser.GetBackgroundColorEscapeCode(ConsoleColor.DarkRed)
+            var message =
+                AnsiParser.GetBackgroundColorEscapeCode(ConsoleColor.DarkRed)
                 + AnsiParser.GetBackgroundColorEscapeCode(ConsoleColor.DarkGreen)
                 + AnsiParser.GetBackgroundColorEscapeCode(ConsoleColor.DarkBlue)
                 + AnsiParser.GetForegroundColorEscapeCode(ConsoleColor.Gray)
@@ -130,12 +170,22 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 + AnsiParser.DefaultForegroundColor //resets foreground color
                 + AnsiParser.DefaultBackgroundColor; //resets background color
             var segments = new List<ConsoleContext>();
-            Action<string, int, int, ConsoleColor?, ConsoleColor?> onParseWrite = (message, startIndex, length, bg, fg) => {
-                segments.Add(new ConsoleContext() {
-                    BackgroundColor = bg,
-                    ForegroundColor = fg,
-                    Message = message.AsSpan(startIndex, length).ToString()
-                });
+            Action<string, int, int, ConsoleColor?, ConsoleColor?> onParseWrite = (
+                message,
+                startIndex,
+                length,
+                bg,
+                fg
+            ) =>
+            {
+                segments.Add(
+                    new ConsoleContext()
+                    {
+                        BackgroundColor = bg,
+                        ForegroundColor = fg,
+                        Message = message.AsSpan(startIndex, length).ToString(),
+                    }
+                );
             };
             var parser = new AnsiParser(onParseWrite);
 
@@ -178,17 +228,30 @@ namespace Microsoft.Extensions.Logging.Console.Test
         [InlineData("\x1BmMessage", "\x1BmMessage")]
         [InlineData("\x1B[77m\x1B m\x1B[40m", "\x1B m")]
         [InlineData("\x1B mMessage\x1Bxym", "\x1B mMessage\x1Bxym")]
-        public void Parse_ValidSupportedOrUnsupportedCodesInMessage_MessageParsedSuccessfully(string messageWithUnsupportedCode, params string[] output)
+        public void Parse_ValidSupportedOrUnsupportedCodesInMessage_MessageParsedSuccessfully(
+            string messageWithUnsupportedCode,
+            params string[] output
+        )
         {
             // Arrange
             var message = messageWithUnsupportedCode;
             var segments = new List<ConsoleContext>();
-            Action<string, int, int, ConsoleColor?, ConsoleColor?> onParseWrite = (message, startIndex, length, bg, fg) => {
-                segments.Add(new ConsoleContext() {
-                    BackgroundColor = bg,
-                    ForegroundColor = fg,
-                    Message = message.AsSpan(startIndex, length).ToString()
-                });
+            Action<string, int, int, ConsoleColor?, ConsoleColor?> onParseWrite = (
+                message,
+                startIndex,
+                length,
+                bg,
+                fg
+            ) =>
+            {
+                segments.Add(
+                    new ConsoleContext()
+                    {
+                        BackgroundColor = bg,
+                        ForegroundColor = fg,
+                        Message = message.AsSpan(startIndex, length).ToString(),
+                    }
+                );
             };
             var parser = new AnsiParser(onParseWrite);
 
@@ -249,14 +312,16 @@ namespace Microsoft.Extensions.Logging.Console.Test
 
         private static bool IsBackgroundColorNotSupported(ConsoleColor color)
         {
-            return AnsiParser.GetBackgroundColorEscapeCode(color).Equals(
-                AnsiParser.DefaultBackgroundColor, StringComparison.OrdinalIgnoreCase);
+            return AnsiParser
+                .GetBackgroundColorEscapeCode(color)
+                .Equals(AnsiParser.DefaultBackgroundColor, StringComparison.OrdinalIgnoreCase);
         }
 
         private static bool IsForegroundColorNotSupported(ConsoleColor color)
         {
-            return AnsiParser.GetForegroundColorEscapeCode(color).Equals(
-                AnsiParser.DefaultForegroundColor, StringComparison.OrdinalIgnoreCase);
+            return AnsiParser
+                .GetForegroundColorEscapeCode(color)
+                .Equals(AnsiParser.DefaultForegroundColor, StringComparison.OrdinalIgnoreCase);
         }
     }
 }

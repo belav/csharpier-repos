@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="_MultipleConnectAsync.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System.Threading;
@@ -38,10 +38,13 @@ namespace System.Net.Sockets
         {
             lock (lockObject)
             {
-                GlobalLog.Assert(endPoint.AddressFamily == AddressFamily.Unspecified ||
-                     endPoint.AddressFamily == AddressFamily.InterNetwork ||
-                     endPoint.AddressFamily == AddressFamily.InterNetworkV6,
-                     "MultipleConnectAsync.StartConnectAsync(): Unexpected endpoint address family - " + endPoint.AddressFamily.ToString());
+                GlobalLog.Assert(
+                    endPoint.AddressFamily == AddressFamily.Unspecified
+                        || endPoint.AddressFamily == AddressFamily.InterNetwork
+                        || endPoint.AddressFamily == AddressFamily.InterNetworkV6,
+                    "MultipleConnectAsync.StartConnectAsync(): Unexpected endpoint address family - "
+                        + endPoint.AddressFamily.ToString()
+                );
 
                 this.userArgs = args;
                 this.endPoint = endPoint;
@@ -54,11 +57,18 @@ namespace System.Net.Sockets
                     return false;
                 }
 
-                GlobalLog.Assert(state == State.NotStarted, "MultipleConnectAsync.StartConnectAsync(): Unexpected object state");
+                GlobalLog.Assert(
+                    state == State.NotStarted,
+                    "MultipleConnectAsync.StartConnectAsync(): Unexpected object state"
+                );
 
                 state = State.DnsQuery;
 
-                IAsyncResult result = Dns.BeginGetHostAddresses(endPoint.Host, new AsyncCallback(DnsCallback), null);
+                IAsyncResult result = Dns.BeginGetHostAddresses(
+                    endPoint.Host,
+                    new AsyncCallback(DnsCallback),
+                    null
+                );
                 if (result.CompletedSynchronously)
                 {
                     return DoDnsCallback(result, true);
@@ -95,12 +105,18 @@ namespace System.Net.Sockets
                     return true;
                 }
 
-                GlobalLog.Assert(state == State.DnsQuery, "MultipleConnectAsync.DoDnsCallback(): Unexpected object state");
+                GlobalLog.Assert(
+                    state == State.DnsQuery,
+                    "MultipleConnectAsync.DoDnsCallback(): Unexpected object state"
+                );
 
                 try
                 {
                     addressList = Dns.EndGetHostAddresses(result);
-                    GlobalLog.Assert(addressList != null, "MultipleConnectAsync.DoDnsCallback(): EndGetHostAddresses returned null!");
+                    GlobalLog.Assert(
+                        addressList != null,
+                        "MultipleConnectAsync.DoDnsCallback(): EndGetHostAddresses returned null!"
+                    );
                 }
                 catch (Exception e)
                 {
@@ -149,13 +165,16 @@ namespace System.Net.Sockets
                 if (state == State.Canceled)
                 {
                     // If Cancel was called before we got the lock, the Socket will be closed soon.  We need to report
-                    // OperationAborted (even though the connection actually completed), or the user will try to use a 
+                    // OperationAborted (even though the connection actually completed), or the user will try to use a
                     // closed Socket.
                     exception = new SocketException(SocketError.OperationAborted);
                 }
                 else
                 {
-                    GlobalLog.Assert(state == State.ConnectAttempt, "MultipleConnectAsync.InternalConnectCallback(): Unexpected object state");
+                    GlobalLog.Assert(
+                        state == State.ConnectAttempt,
+                        "MultipleConnectAsync.InternalConnectCallback(): Unexpected object state"
+                    );
 
                     if (args.SocketError == SocketError.Success)
                     {
@@ -186,7 +205,10 @@ namespace System.Net.Sockets
                         else
                         {
                             SocketException socketException = connectException as SocketException;
-                            if (socketException != null && socketException.SocketErrorCode == SocketError.NoData)
+                            if (
+                                socketException != null
+                                && socketException.SocketErrorCode == SocketError.NoData
+                            )
                             {
                                 // If the error is NoData, that means there are no more IPAddresses to attempt
                                 // a connection to.  Return the last error from an actual connection instead.
@@ -275,7 +297,11 @@ namespace System.Net.Sockets
         protected void Succeed()
         {
             OnSucceed();
-            userArgs.FinishWrapperConnectSuccess(internalArgs.ConnectSocket, internalArgs.BytesTransferred, internalArgs.SocketFlags);
+            userArgs.FinishWrapperConnectSuccess(
+                internalArgs.ConnectSocket,
+                internalArgs.BytesTransferred,
+                internalArgs.SocketFlags
+            );
             internalArgs.Dispose();
         }
 
@@ -413,15 +439,14 @@ namespace System.Net.Sockets
 
                 rval = addressList[nextAddress];
                 ++nextAddress;
-            }
-            while (!socket.CanTryAddressFamily(rval.AddressFamily));
+            } while (!socket.CanTryAddressFamily(rval.AddressFamily));
 
             return rval;
         }
 
         protected override void OnFail(bool abortive)
         {
-            // Close the socket if this is an abortive failure (CancelConnectAsync) 
+            // Close the socket if this is an abortive failure (CancelConnectAsync)
             // or if we created it internally
             if (abortive || !userSocket)
             {

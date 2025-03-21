@@ -5,7 +5,9 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Filters;
 
-internal sealed class ControllerViewDataAttributeFilter : IActionFilter, IViewDataValuesProviderFeature
+internal sealed class ControllerViewDataAttributeFilter
+    : IActionFilter,
+        IViewDataValuesProviderFeature
 {
     public ControllerViewDataAttributeFilter(IReadOnlyList<LifecycleProperty> properties)
     {
@@ -16,9 +18,7 @@ internal sealed class ControllerViewDataAttributeFilter : IActionFilter, IViewDa
 
     public IReadOnlyList<LifecycleProperty> Properties { get; }
 
-    public void OnActionExecuted(ActionExecutedContext context)
-    {
-    }
+    public void OnActionExecuted(ActionExecutedContext context) { }
 
     public void OnActionExecuting(ActionExecutingContext context)
     {

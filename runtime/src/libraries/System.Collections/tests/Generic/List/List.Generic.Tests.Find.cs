@@ -12,7 +12,10 @@ namespace System.Collections.Tests
     /// </summary>
     public abstract partial class List_Generic_Tests<T> : IList_Generic_Tests<T>
     {
-        private readonly Predicate<T> _equalsDefaultDelegate = (T item) => { return default(T) == null ? item == null : default(T).Equals(item); };
+        private readonly Predicate<T> _equalsDefaultDelegate = (T item) =>
+        {
+            return default(T) == null ? item == null : default(T).Equals(item);
+        };
         private readonly Predicate<T> _alwaysTrueDelegate = (T item) => true;
         private readonly Predicate<T> _alwaysFalseDelegate = (T item) => false;
 
@@ -44,7 +47,6 @@ namespace System.Collections.Tests
             List<T> beforeList = list.ToList();
             Predicate<T> predicate = _alwaysTrueDelegate;
 
-
             //[] Verify Null match
             Assert.Throws<ArgumentNullException>(() => list.FindLastIndex(0, null)); //"Err_858ahia Expected null match to throw ArgumentNullException"
 
@@ -52,7 +54,9 @@ namespace System.Collections.Tests
             index
             ******************************************************************************/
             //[] Verify index=Int32.MinValue
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(int.MinValue, predicate)); //"Err_948ahid Expected index=Int32.MinValue to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(int.MinValue, predicate)
+            ); //"Err_948ahid Expected index=Int32.MinValue to throw ArgumentOutOfRangeException"
 
             if (0 < list.Count)
             {
@@ -61,13 +65,19 @@ namespace System.Collections.Tests
             }
 
             //[] Verify index=list.Count + 1
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(list.Count + 1, predicate)); //"Err_488ajdi Expected index=list.Count + 1 to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count + 1, predicate)
+            ); //"Err_488ajdi Expected index=list.Count + 1 to throw ArgumentOutOfRangeException"
 
             //[] Verify index=list.Count
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(list.Count, predicate)); //"Err_9689ajis Expected index=list.Count to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count, predicate)
+            ); //"Err_9689ajis Expected index=list.Count to throw ArgumentOutOfRangeException"
 
             //[] Verify index=Int32.MaxValue
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(int.MaxValue, predicate)); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(int.MaxValue, predicate)
+            ); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
         }
 
         [Theory]
@@ -76,8 +86,10 @@ namespace System.Collections.Tests
         {
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
-            Predicate<T> predicate = delegate (T item) { return true; };
-
+            Predicate<T> predicate = delegate(T item)
+            {
+                return true;
+            };
 
             //[] Verify Null match
             Assert.Throws<ArgumentNullException>(() => list.FindIndex(0, 0, null)); //"Err_858ahia Expected null match to throw ArgumentNullException"
@@ -86,34 +98,48 @@ namespace System.Collections.Tests
             index
             ******************************************************************************/
             //[] Verify index=Int32.MinValue
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(int.MinValue, 0, predicate)); //"Err_948ahid Expected index=Int32.MinValue to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(int.MinValue, 0, predicate)
+            ); //"Err_948ahid Expected index=Int32.MinValue to throw ArgumentOutOfRangeException"
 
             //[] Verify index=-1
             Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(-1, 0, predicate)); //"Err_328ahuaw Expected index=-1 to throw ArgumentOutOfRangeException"
 
             //[] Verify index=list.Count + 1
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(list.Count + 1, 0, predicate)); //"Err_488ajdi Expected index=list.Count + 1 to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(list.Count + 1, 0, predicate)
+            ); //"Err_488ajdi Expected index=list.Count + 1 to throw ArgumentOutOfRangeException"
 
             //[] Verify index=list.Count
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(list.Count, 1, predicate)); //"Err_9689ajis Expected index=list.Count to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(list.Count, 1, predicate)
+            ); //"Err_9689ajis Expected index=list.Count to throw ArgumentOutOfRangeException"
 
             //[] Verify index=Int32.MaxValue
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(int.MaxValue, 0, predicate)); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(int.MaxValue, 0, predicate)
+            ); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
 
             /******************************************************************************
             count
             ******************************************************************************/
             //[] Verify count=Int32.MinValue
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(0, int.MinValue, predicate)); //Err_948ahid Expected count=Int32.MinValue to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(0, int.MinValue, predicate)
+            ); //Err_948ahid Expected count=Int32.MinValue to throw ArgumentOutOfRangeException"
 
             //[] Verify count=-1
             Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(0, -1, predicate)); //"Err_328ahuaw Expected count=-1 to throw ArgumentOutOfRangeException"
 
             //[] Verify count=list.Count + 1
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(0, list.Count + 1, predicate)); //"Err_488ajdi Expected count=list.Count + 1 to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(0, list.Count + 1, predicate)
+            ); //"Err_488ajdi Expected count=list.Count + 1 to throw ArgumentOutOfRangeException"
 
             //[] Verify count=Int32.MaxValue
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(0, int.MaxValue, predicate)); //"Err_238ajwisa Expected count=Int32.MaxValue to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(0, int.MaxValue, predicate)
+            ); //"Err_238ajwisa Expected count=Int32.MaxValue to throw ArgumentOutOfRangeException"
 
             /******************************************************************************
             index and count
@@ -121,10 +147,13 @@ namespace System.Collections.Tests
             if (0 < count)
             {
                 //[] Verify index=1 count=list.Length
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(1, count, predicate)); //"Err_018188avbiw Expected index=1 count=list.Length to throw ArgumentOutOfRangeException"
+                Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(1, count, predicate)
+                ); //"Err_018188avbiw Expected index=1 count=list.Length to throw ArgumentOutOfRangeException"
 
                 //[] Verify index=0 count=list.Length + 1
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(0, count + 1, predicate)); //"Err_6848ajiodxbz Expected index=0 count=list.Length + 1 to throw ArgumentOutOfRangeException"
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.FindIndex(0, count + 1, predicate)
+                ); //"Err_6848ajiodxbz Expected index=0 count=list.Length + 1 to throw ArgumentOutOfRangeException"
             }
         }
 
@@ -143,37 +172,55 @@ namespace System.Collections.Tests
             index
             ******************************************************************************/
             //[] Verify index=Int32.MinValue
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(int.MinValue, 0, predicate)); //Err_948ahid Expected index=Int32.MinValue to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(int.MinValue, 0, predicate)
+            ); //Err_948ahid Expected index=Int32.MinValue to throw ArgumentOutOfRangeException"
 
             if (0 < list.Count)
             {
                 //[] Verify index=-1
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(-1, 0, predicate)); //"Err_328ahuaw Expected index=-1 to throw ArgumentOutOfRangeException"
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.FindLastIndex(-1, 0, predicate)
+                ); //"Err_328ahuaw Expected index=-1 to throw ArgumentOutOfRangeException"
             }
 
             //[] Verify index=list.Count + 1
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(list.Count + 1, 0, predicate)); //"Err_488ajdi Expected index=list.Count + 1 to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count + 1, 0, predicate)
+            ); //"Err_488ajdi Expected index=list.Count + 1 to throw ArgumentOutOfRangeException"
 
             //[] Verify index=list.Count
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(list.Count, 1, predicate)); //"Err_9689ajis Expected index=list.Count to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count, 1, predicate)
+            ); //"Err_9689ajis Expected index=list.Count to throw ArgumentOutOfRangeException"
 
             //[] Verify index=Int32.MaxValue
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(int.MaxValue, 0, predicate)); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(int.MaxValue, 0, predicate)
+            ); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
 
             /******************************************************************************
             count
             ******************************************************************************/
             //[] Verify count=Int32.MinValue
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(list.Count - 1, int.MinValue, predicate)); //"Err_948ahid Expected count=Int32.MinValue to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count - 1, int.MinValue, predicate)
+            ); //"Err_948ahid Expected count=Int32.MinValue to throw ArgumentOutOfRangeException"
 
             //[] Verify count=-1
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(list.Count - 1, -1, predicate)); //"Err_328ahuaw Expected count=-1 to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count - 1, -1, predicate)
+            ); //"Err_328ahuaw Expected count=-1 to throw ArgumentOutOfRangeException"
 
             //[] Verify count=list.Count + 1
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(list.Count - 1, list.Count + 1, predicate)); //"Err_488ajdi Expected count=list.Count + 1 to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count - 1, list.Count + 1, predicate)
+            ); //"Err_488ajdi Expected count=list.Count + 1 to throw ArgumentOutOfRangeException"
 
             //[] Verify count=Int32.MaxValue
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(list.Count - 1, int.MaxValue, predicate)); //"Err_238ajwisa Expected count=Int32.MaxValue to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindLastIndex(list.Count - 1, int.MaxValue, predicate)
+            ); //"Err_238ajwisa Expected count=Int32.MaxValue to throw ArgumentOutOfRangeException"
 
             /******************************************************************************
             index and count
@@ -181,10 +228,14 @@ namespace System.Collections.Tests
             if (0 < count)
             {
                 //[] Verify index=1 count=list.Length
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(count - 2, count, predicate)); //"Err_018188avbiw Expected index=1 count=list.Length to throw ArgumentOutOfRangeException"
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.FindLastIndex(count - 2, count, predicate)
+                ); //"Err_018188avbiw Expected index=1 count=list.Length to throw ArgumentOutOfRangeException"
 
                 //[] Verify index=0 count=list.Length + 1
-                Assert.Throws<ArgumentOutOfRangeException>(() => list.FindLastIndex(count - 1, count + 1, predicate)); //"Err_6848ajiodxbz Expected index=0 count=list.Length + 1 to throw ArgumentOutOfRangeException"
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    list.FindLastIndex(count - 1, count + 1, predicate)
+                ); //"Err_6848ajiodxbz Expected index=0 count=list.Length + 1 to throw ArgumentOutOfRangeException"
             }
         }
 
@@ -194,7 +245,10 @@ namespace System.Collections.Tests
         {
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
-            Predicate<T> predicate = delegate (T item) { return true; };
+            Predicate<T> predicate = delegate(T item)
+            {
+                return true;
+            };
 
             //[] Verify Null match
             Assert.Throws<ArgumentNullException>(() => list.FindIndex(0, null)); //"Err_858ahia Expected null match to throw ArgumentNullException"
@@ -203,16 +257,20 @@ namespace System.Collections.Tests
             index
             ******************************************************************************/
             //[] Verify index=Int32.MinValue
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(int.MinValue, predicate)); //"Err_948ahid Expected index=Int32.MinValue to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(int.MinValue, predicate)
+            ); //"Err_948ahid Expected index=Int32.MinValue to throw ArgumentOutOfRangeException"
 
             //[] Verify index=-1
             Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(-1, predicate)); //"Err_328ahuaw Expected index=-1 to throw ArgumentOutOfRangeException"
 
             //[] Verify index=list.Count + 1
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(list.Count + 1, predicate)); //"Err_488ajdi Expected index=list.Count + 1 to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.FindIndex(list.Count + 1, predicate)
+            ); //"Err_488ajdi Expected index=list.Count + 1 to throw ArgumentOutOfRangeException"
 
             //[] Verify index=Int32.MaxValue
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(int.MaxValue, predicate)); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
+            Assert.Throws<ArgumentOutOfRangeException>(() => list.FindIndex(int.MaxValue, predicate)
+            ); //"Err_238ajwisa Expected index=Int32.MaxValue to throw ArgumentOutOfRangeException"
         }
 
         #region Find
@@ -225,7 +283,10 @@ namespace System.Collections.Tests
             List<T> beforeList = list.ToList();
             T expectedItem = default(T);
             T foundItem;
-            Predicate<T> EqualsDelegate = (T item) => { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = (T item) =>
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             //[] Verify Find returns the correct index
             for (int i = 0; i < count; ++i)
@@ -246,7 +307,12 @@ namespace System.Collections.Tests
 
             //[] Verify with default(T)
             list.Add(default(T));
-            foundItem = list.Find((T item) => { return item == null ? default(T) == null : item.Equals(default(T)); });
+            foundItem = list.Find(
+                (T item) =>
+                {
+                    return item == null ? default(T) == null : item.Equals(default(T));
+                }
+            );
             Assert.Equal(default(T), foundItem); //"Err_541848ajodi Verify with default(T) FAILED\n"
             list.RemoveAt(list.Count - 1);
         }
@@ -259,7 +325,10 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             T foundItem;
-            Predicate<T> EqualsDelegate = (T item) => { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = (T item) =>
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             if (0 < count)
             {
@@ -320,7 +389,10 @@ namespace System.Collections.Tests
             List<T> beforeList = list.ToList();
             T expectedItem = default(T);
             T foundItem;
-            Predicate<T> EqualsDelegate = (T item) => { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = (T item) =>
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             for (int i = 0; i < count; ++i)
                 list.Add(beforeList[i]);
@@ -345,7 +417,12 @@ namespace System.Collections.Tests
 
             //[] Verify with default(T)
             list.Add(default(T));
-            foundItem = list.FindLast((T item) => { return item == null ? default(T) == null : item.Equals(default(T)); });
+            foundItem = list.FindLast(
+                (T item) =>
+                {
+                    return item == null ? default(T) == null : item.Equals(default(T));
+                }
+            );
             Assert.Equal(default(T), foundItem); //"Err_541848ajodi Verify with default(T) FAILED\n"
             list.RemoveAt(list.Count - 1);
         }
@@ -358,7 +435,10 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             T foundItem;
-            Predicate<T> EqualsDelegate = (T item) => { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = (T item) =>
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             if (0 < count)
             {
@@ -380,7 +460,13 @@ namespace System.Collections.Tests
                 Assert.Equal(beforeList[1], foundItem); //"Err_4588ajdia Verify second item is duplicated FAILED\n"
 
                 //[] Verify with match that matches more then one item
-                foundItem = list.FindLast((T item) => { return item != null && (item.Equals(beforeList[0]) || item.Equals(beforeList[1])); });
+                foundItem = list.FindLast(
+                    (T item) =>
+                    {
+                        return item != null
+                            && (item.Equals(beforeList[0]) || item.Equals(beforeList[1]));
+                    }
+                );
                 Assert.Equal(beforeList[1], foundItem); //"Err_4489ajodoi Verify with match that matches more then one item FAILED\n"
             }
         }
@@ -397,7 +483,10 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             int index;
-            Predicate<T> EqualsDefaultDelegate = (T item) => { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDefaultDelegate = (T item) =>
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             for (int i = 0; i < count; ++i)
                 list.Add(beforeList[i]);
@@ -428,7 +517,10 @@ namespace System.Collections.Tests
             List<T> beforeList = list.ToList();
             T expectedItem = default(T);
             int index;
-            Predicate<T> EqualsDelegate = (T item) => { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = (T item) =>
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             if (0 < count)
             {
@@ -463,7 +555,10 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             int index;
-            Predicate<T> EqualsDelegate = delegate (T item) { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = delegate(T item)
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             //[] Verify FinIndex returns the correct index
             for (int i = 0; i < count; ++i)
@@ -475,15 +570,33 @@ namespace System.Collections.Tests
 
             //[] Verify FindIndex returns 0 if the match returns true on every item
             int expected = count == 0 ? -1 : 0;
-            index = list.FindIndex(0, delegate (T item) { return true; });
+            index = list.FindIndex(
+                0,
+                delegate(T item)
+                {
+                    return true;
+                }
+            );
             Assert.Equal(expected, index); //"Err_15198ajid Verify FindIndex returns 0 if the match returns true on every item "
 
             //[] Verify FindIndex returns -1 if the match returns false on every item
-            index = list.FindIndex(0, delegate (T item) { return false; });
+            index = list.FindIndex(
+                0,
+                delegate(T item)
+                {
+                    return false;
+                }
+            );
             Assert.Equal(-1, index); //"Err_305981ajodd Verify FindIndex returns -1 if the match returns false on every item"
 
             //[] Verify FindIndex returns -1 if the index == count
-            index = list.FindIndex(count, delegate (T item) { return true; });
+            index = list.FindIndex(
+                count,
+                delegate(T item)
+                {
+                    return true;
+                }
+            );
             Assert.Equal(-1, index); //"Err_4858ajodoa Verify FindIndex returns -1 if the index == count"
 
             if (0 < count)
@@ -516,7 +629,10 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             int index;
-            Predicate<T> EqualsDelegate = delegate (T item) { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = delegate(T item)
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             if (0 < count)
             {
@@ -561,27 +677,58 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             int index;
-            Predicate<T> EqualsDelegate = delegate (T item) { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = delegate(T item)
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             //[] Verify FinIndex returns the correct index
             for (int i = 0; i < count; ++i)
             {
                 expectedItem = beforeList[i];
-                index = list.FindIndex(0, count, delegate (T item) { return expectedItem == null ? item == null : expectedItem.Equals(item); });
+                index = list.FindIndex(
+                    0,
+                    count,
+                    delegate(T item)
+                    {
+                        return expectedItem == null ? item == null : expectedItem.Equals(item);
+                    }
+                );
                 Assert.Equal(i, index); //"Err_282308ahid Expected FindIndex to return the same."
             }
 
             //[] Verify FindIndex returns 0 if the match returns true on every item
-            index = list.FindIndex(0, count, delegate (T item) { return true; });
+            index = list.FindIndex(
+                0,
+                count,
+                delegate(T item)
+                {
+                    return true;
+                }
+            );
             int expected = count == 0 ? -1 : 0;
             Assert.Equal(expected, index); //"Err_15198ajid Verify FindIndex returns 0 if the match returns true on every item"
 
             //[] Verify FindIndex returns -1 if the match returns false on every item
-            index = list.FindIndex(0, count, delegate (T item) { return false; });
+            index = list.FindIndex(
+                0,
+                count,
+                delegate(T item)
+                {
+                    return false;
+                }
+            );
             Assert.Equal(-1, index); //"Err_305981ajodd Verify FindIndex returns -1 if the match returns false on every item"
 
             //[] Verify FindIndex returns -1 if the index == count
-            index = list.FindIndex(count, 0, delegate (T item) { return true; });
+            index = list.FindIndex(
+                count,
+                0,
+                delegate(T item)
+                {
+                    return true;
+                }
+            );
             Assert.Equal(-1, index); //"Err_4858ajodoa Verify FindIndex returns -1 if the index == count"
 
             if (0 < count)
@@ -639,7 +786,10 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             int index;
-            Predicate<T> EqualsDelegate = delegate (T item) { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = delegate(T item)
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             if (0 < count)
             {
@@ -684,8 +834,10 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             int index;
-            Predicate<T> EqualsDelegate = delegate (T item) { return expectedItem == null ? item == null : expectedItem.Equals(item); };
-
+            Predicate<T> EqualsDelegate = delegate(T item)
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             //[] Verify FinIndex returns the correct index
             for (int i = 0; i < count; ++i)
@@ -713,7 +865,10 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             int index;
-            Predicate<T> EqualsDelegate = delegate (T item) { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = delegate(T item)
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             if (0 < count)
             {
@@ -748,7 +903,10 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             int index;
-            Predicate<T> EqualsDelegate = (T item) => { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = (T item) =>
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             //[] Verify FinIndex returns the correct index
             for (int i = 0; i < count; ++i)
@@ -800,7 +958,10 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             int index;
-            Predicate<T> EqualsDelegate = (T item) => { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = (T item) =>
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             if (0 < count)
             {
@@ -845,7 +1006,10 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             int index;
-            Predicate<T> EqualsDelegate = (T item) => { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = (T item) =>
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             for (int i = 0; i < count; ++i)
                 list.Add(beforeList[i]);
@@ -926,7 +1090,10 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             int index;
-            Predicate<T> EqualsDelegate = (T item) => { return expectedItem == null ? item == null : expectedItem.Equals(item); };
+            Predicate<T> EqualsDelegate = (T item) =>
+            {
+                return expectedItem == null ? item == null : expectedItem.Equals(item);
+            };
 
             if (0 < count)
             {
@@ -960,7 +1127,8 @@ namespace System.Collections.Tests
             List<T> list = GenericListFactory(count);
             List<T> beforeList = list.ToList();
             T expectedItem = default(T);
-            Predicate<T> EqualsDelegate = (value) => expectedItem == null ? value == null : expectedItem.Equals(value);
+            Predicate<T> EqualsDelegate = (value) =>
+                expectedItem == null ? value == null : expectedItem.Equals(value);
 
             //[] Verify FindAll returns the correct List with one item
             for (int i = 0; i < count; ++i)
@@ -986,7 +1154,8 @@ namespace System.Collections.Tests
                 list.Add(list[i]);
             List<T> beforeList = list.ToList();
             T expectedItem = default(T);
-            Predicate<T> EqualsDelegate = (value) => expectedItem == null ? value == null : expectedItem.Equals(value);
+            Predicate<T> EqualsDelegate = (value) =>
+                expectedItem == null ? value == null : expectedItem.Equals(value);
             //[] Verify FindAll returns the correct List with one item
             for (int i = 0; i < count; ++i)
             {

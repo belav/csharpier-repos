@@ -13,7 +13,11 @@ namespace System.Tests
         public static void Ctor_Empty()
         {
             var exception = new ArgumentNullException();
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: E_POINTER, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: E_POINTER,
+                validateMessage: false
+            );
             Assert.Null(exception.ParamName);
         }
 
@@ -22,7 +26,11 @@ namespace System.Tests
         {
             string argumentName = "theNullArgument";
             var exception = new ArgumentNullException(argumentName);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: E_POINTER, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: E_POINTER,
+                validateMessage: false
+            );
             Assert.Contains(argumentName, exception.Message);
         }
 
@@ -32,7 +40,12 @@ namespace System.Tests
             string message = "the argument is null";
             var innerException = new Exception("Inner exception");
             var exception = new ArgumentNullException(message, innerException);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: E_POINTER, innerException: innerException, message: message);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: E_POINTER,
+                innerException: innerException,
+                message: message
+            );
             Assert.Null(exception.ParamName);
         }
 
@@ -42,7 +55,11 @@ namespace System.Tests
             string message = "the argument is null";
             string argumentName = "theNullArgument";
             var exception = new ArgumentNullException(argumentName, message);
-            ExceptionHelpers.ValidateExceptionProperties(exception, hResult: E_POINTER, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                exception,
+                hResult: E_POINTER,
+                validateMessage: false
+            );
             Assert.Equal(argumentName, exception.ParamName);
             Assert.Contains(message, exception.Message);
             Assert.Contains(argumentName, exception.Message);
@@ -68,18 +85,30 @@ namespace System.Tests
         [InlineData("name")]
         public static unsafe void ThrowIfNull_Null_ThrowsArgumentNullException(string paramName)
         {
-            AssertExtensions.Throws<ArgumentNullException>(paramName, () => ArgumentNullException.ThrowIfNull((object)null, paramName));
-            AssertExtensions.Throws<ArgumentNullException>(paramName, () => ArgumentNullException.ThrowIfNull((void*)null, paramName));
+            AssertExtensions.Throws<ArgumentNullException>(
+                paramName,
+                () => ArgumentNullException.ThrowIfNull((object)null, paramName)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                paramName,
+                () => ArgumentNullException.ThrowIfNull((void*)null, paramName)
+            );
         }
 
         [Fact]
         public static unsafe void ThrowIfNull_UsesArgumentExpression()
         {
             object someObject = null;
-            AssertExtensions.Throws<ArgumentNullException>(nameof(someObject), () => ArgumentNullException.ThrowIfNull(someObject));
+            AssertExtensions.Throws<ArgumentNullException>(
+                nameof(someObject),
+                () => ArgumentNullException.ThrowIfNull(someObject)
+            );
 
             byte* somePointer = null;
-            AssertExtensions.Throws<ArgumentNullException>(nameof(somePointer), () => ArgumentNullException.ThrowIfNull(somePointer));
+            AssertExtensions.Throws<ArgumentNullException>(
+                nameof(somePointer),
+                () => ArgumentNullException.ThrowIfNull(somePointer)
+            );
         }
     }
 }

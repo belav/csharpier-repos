@@ -20,7 +20,12 @@ namespace System.ServiceModel.Channels
         ManualResetEvent closedEvent;
         bool closed;
 
-        protected RequestChannel(ChannelManagerBase channelFactory, EndpointAddress to, Uri via, bool manualAddressing)
+        protected RequestChannel(
+            ChannelManagerBase channelFactory,
+            EndpointAddress to,
+            Uri via,
+            bool manualAddressing
+        )
             : base(channelFactory)
         {
             if (!manualAddressing)
@@ -38,26 +43,17 @@ namespace System.ServiceModel.Channels
 
         protected bool ManualAddressing
         {
-            get
-            {
-                return this.manualAddressing;
-            }
+            get { return this.manualAddressing; }
         }
 
         public EndpointAddress RemoteAddress
         {
-            get
-            {
-                return this.to;
-            }
+            get { return this.to; }
         }
 
         public Uri Via
         {
-            get
-            {
-                return this.via;
-            }
+            get { return this.via; }
         }
 
         protected void AbortPendingRequests()
@@ -73,10 +69,20 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        protected IAsyncResult BeginWaitForPendingRequests(TimeSpan timeout, AsyncCallback callback, object state)
+        protected IAsyncResult BeginWaitForPendingRequests(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             IRequestBase[] pendingRequests = SetupWaitForPendingRequests();
-            return new WaitForPendingRequestsAsyncResult(timeout, this, pendingRequests, callback, state);
+            return new WaitForPendingRequestsAsyncResult(
+                timeout,
+                this,
+                pendingRequests,
+                callback,
+                state
+            );
         }
 
         protected void EndWaitForPendingRequests(IAsyncResult result)
@@ -180,7 +186,7 @@ namespace System.ServiceModel.Channels
         {
             if (request != null)
             {
-                // Synchronization of OnReleaseRequest is the 
+                // Synchronization of OnReleaseRequest is the
                 // responsibility of the concrete implementation of request.
                 request.OnReleaseRequest();
             }
@@ -214,14 +220,24 @@ namespace System.ServiceModel.Channels
             return this.BeginRequest(message, this.DefaultSendTimeout, callback, state);
         }
 
-        public IAsyncResult BeginRequest(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginRequest(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (message == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("message");
 
             if (timeout < TimeSpan.Zero)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        timeout,
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
 
             ThrowIfDisposedOrNotOpen();
 
@@ -247,7 +263,11 @@ namespace System.ServiceModel.Channels
         }
 
         protected abstract IRequest CreateRequest(Message message);
-        protected abstract IAsyncRequest CreateAsyncRequest(Message message, AsyncCallback callback, object state);
+        protected abstract IAsyncRequest CreateAsyncRequest(
+            Message message,
+            AsyncCallback callback,
+            object state
+        );
 
         public Message EndRequest(IAsyncResult result)
         {
@@ -260,7 +280,10 @@ namespace System.ServiceModel.Channels
 
             if (asyncRequest == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("result", SR.GetString(SR.InvalidAsyncResult));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "result",
+                    SR.GetString(SR.InvalidAsyncResult)
+                );
             }
 
             try
@@ -269,8 +292,12 @@ namespace System.ServiceModel.Channels
 
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.RequestChannelReplyReceived,
-                        SR.GetString(SR.TraceCodeRequestChannelReplyReceived), reply);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.RequestChannelReplyReceived,
+                        SR.GetString(SR.TraceCodeRequestChannelReplyReceived),
+                        reply
+                    );
                 }
 
                 return reply;
@@ -295,7 +322,12 @@ namespace System.ServiceModel.Channels
 
             if (timeout < TimeSpan.Zero)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new ArgumentOutOfRangeException("timeout", timeout, SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    new ArgumentOutOfRangeException(
+                        "timeout",
+                        timeout,
+                        SR.GetString(SR.SFxTimeoutOutOfRange0)
+                    )
+                );
 
             ThrowIfDisposedOrNotOpen();
 
@@ -314,8 +346,13 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TimeoutException timeoutException)
                 {
-                    throw TraceUtility.ThrowHelperError(new TimeoutException(SR.GetString(SR.RequestChannelSendTimedOut, savedTimeout),
-                        timeoutException), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new TimeoutException(
+                            SR.GetString(SR.RequestChannelSendTimedOut, savedTimeout),
+                            timeoutException
+                        ),
+                        message
+                    );
                 }
 
                 savedTimeout = timeoutHelper.RemainingTime();
@@ -326,15 +363,23 @@ namespace System.ServiceModel.Channels
                 }
                 catch (TimeoutException timeoutException)
                 {
-                    throw TraceUtility.ThrowHelperError(new TimeoutException(SR.GetString(SR.RequestChannelWaitForReplyTimedOut, savedTimeout),
-                        timeoutException), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new TimeoutException(
+                            SR.GetString(SR.RequestChannelWaitForReplyTimedOut, savedTimeout),
+                            timeoutException
+                        ),
+                        message
+                    );
                 }
-
 
                 if (DiagnosticUtility.ShouldTraceInformation)
                 {
-                    TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.RequestChannelReplyReceived,
-                        SR.GetString(SR.TraceCodeRequestChannelReplyReceived), reply);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.RequestChannelReplyReceived,
+                        SR.GetString(SR.TraceCodeRequestChannelReplyReceived),
+                        reply
+                    );
                 }
 
                 return reply;
@@ -355,13 +400,21 @@ namespace System.ServiceModel.Channels
 
         class WaitForPendingRequestsAsyncResult : AsyncResult
         {
-            static WaitOrTimerCallback completeWaitCallBack = new WaitOrTimerCallback(OnCompleteWaitCallBack);
+            static WaitOrTimerCallback completeWaitCallBack = new WaitOrTimerCallback(
+                OnCompleteWaitCallBack
+            );
             IRequestBase[] pendingRequests;
             RequestChannel requestChannel;
             TimeSpan timeout;
             RegisteredWaitHandle waitHandle;
 
-            public WaitForPendingRequestsAsyncResult(TimeSpan timeout, RequestChannel requestChannel, IRequestBase[] pendingRequests, AsyncCallback callback, object state)
+            public WaitForPendingRequestsAsyncResult(
+                TimeSpan timeout,
+                RequestChannel requestChannel,
+                IRequestBase[] pendingRequests,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.requestChannel = requestChannel;
@@ -376,7 +429,13 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    this.waitHandle = ThreadPool.RegisterWaitForSingleObject(this.requestChannel.closedEvent, completeWaitCallBack, this, TimeoutHelper.ToMilliseconds(timeout), true);
+                    this.waitHandle = ThreadPool.RegisterWaitForSingleObject(
+                        this.requestChannel.closedEvent,
+                        completeWaitCallBack,
+                        this,
+                        TimeoutHelper.ToMilliseconds(timeout),
+                        true
+                    );
                 }
             }
 
@@ -405,7 +464,8 @@ namespace System.ServiceModel.Channels
 
             static void OnCompleteWaitCallBack(object state, bool timedOut)
             {
-                WaitForPendingRequestsAsyncResult thisPtr = (WaitForPendingRequestsAsyncResult)state;
+                WaitForPendingRequestsAsyncResult thisPtr =
+                    (WaitForPendingRequestsAsyncResult)state;
                 Exception completionException = null;
                 try
                 {

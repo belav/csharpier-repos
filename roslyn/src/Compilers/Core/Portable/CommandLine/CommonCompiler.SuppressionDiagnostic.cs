@@ -17,13 +17,15 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         private sealed class SuppressionDiagnostic : Diagnostic
         {
-            private static readonly DiagnosticDescriptor s_suppressionDiagnosticDescriptor = new DiagnosticDescriptor(
-                "SP0001",
-                CodeAnalysisResources.SuppressionDiagnosticDescriptorTitle,
-                CodeAnalysisResources.SuppressionDiagnosticDescriptorMessage,
-                "ProgrammaticSuppression",
-                DiagnosticSeverity.Info,
-                isEnabledByDefault: true);
+            private static readonly DiagnosticDescriptor s_suppressionDiagnosticDescriptor =
+                new DiagnosticDescriptor(
+                    "SP0001",
+                    CodeAnalysisResources.SuppressionDiagnosticDescriptorTitle,
+                    CodeAnalysisResources.SuppressionDiagnosticDescriptorMessage,
+                    "ProgrammaticSuppression",
+                    DiagnosticSeverity.Info,
+                    isEnabledByDefault: true
+                );
 
             private readonly Diagnostic _originalDiagnostic;
             private readonly string _suppressionId;
@@ -32,7 +34,8 @@ namespace Microsoft.CodeAnalysis
             public SuppressionDiagnostic(
                 Diagnostic originalDiagnostic,
                 string suppressionId,
-                LocalizableString suppressionJustification)
+                LocalizableString suppressionJustification
+            )
             {
                 Debug.Assert(originalDiagnostic != null);
                 Debug.Assert(originalDiagnostic.ProgrammaticSuppressionInfo != null);
@@ -51,21 +54,26 @@ namespace Microsoft.CodeAnalysis
             public override string GetMessage(IFormatProvider? formatProvider = null)
             {
                 // Diagnostic '{0}: {1}' was programmatically suppressed by a DiagnosticSuppressor with suppression ID '{2}' and justification '{3}'
-                var localizableMessageFormat = s_suppressionDiagnosticDescriptor.MessageFormat.ToString(formatProvider);
-                return string.Format(formatProvider,
+                var localizableMessageFormat =
+                    s_suppressionDiagnosticDescriptor.MessageFormat.ToString(formatProvider);
+                return string.Format(
+                    formatProvider,
                     localizableMessageFormat,
                     _originalDiagnostic.Id,
                     _originalDiagnostic.GetMessage(formatProvider),
                     _suppressionId,
-                    _suppressionJustification.ToString(formatProvider));
+                    _suppressionJustification.ToString(formatProvider)
+                );
             }
 
             public override DiagnosticSeverity Severity => DiagnosticSeverity.Info;
             public override bool IsSuppressed => false;
             public override int WarningLevel => GetDefaultWarningLevel(DiagnosticSeverity.Info);
             public override Location Location => _originalDiagnostic.Location;
-            public override IReadOnlyList<Location> AdditionalLocations => _originalDiagnostic.AdditionalLocations;
-            public override ImmutableDictionary<string, string?> Properties => ImmutableDictionary<string, string?>.Empty;
+            public override IReadOnlyList<Location> AdditionalLocations =>
+                _originalDiagnostic.AdditionalLocations;
+            public override ImmutableDictionary<string, string?> Properties =>
+                ImmutableDictionary<string, string?>.Empty;
 
             public override bool Equals(Diagnostic? obj)
             {
@@ -80,15 +88,20 @@ namespace Microsoft.CodeAnalysis
                     return false;
                 }
 
-                return Equals(_originalDiagnostic, other._originalDiagnostic) &&
-                    Equals(_suppressionId, other._suppressionId) &&
-                    Equals(_suppressionJustification, other._suppressionJustification);
+                return Equals(_originalDiagnostic, other._originalDiagnostic)
+                    && Equals(_suppressionId, other._suppressionId)
+                    && Equals(_suppressionJustification, other._suppressionJustification);
             }
 
             public override int GetHashCode()
             {
-                return Hash.Combine(_originalDiagnostic.GetHashCode(),
-                    Hash.Combine(_suppressionId.GetHashCode(), _suppressionJustification.GetHashCode()));
+                return Hash.Combine(
+                    _originalDiagnostic.GetHashCode(),
+                    Hash.Combine(
+                        _suppressionId.GetHashCode(),
+                        _suppressionJustification.GetHashCode()
+                    )
+                );
             }
 
             internal override Diagnostic WithLocation(Location location)

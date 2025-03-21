@@ -14,7 +14,12 @@ namespace System.IO.Compression
         /// the platform-correct file name.
         /// </summary>
         /// <remarks>This method ensures no validation on the paths. Invalid characters are allowed.</remarks>
-        internal static string ParseFileName(string path, ZipVersionMadeByPlatform madeByPlatform) =>
-            madeByPlatform == ZipVersionMadeByPlatform.Windows ? GetFileName_Windows(path) : GetFileName_Unix(path);
+        internal static string ParseFileName(
+            string path,
+            ZipVersionMadeByPlatform madeByPlatform
+        ) =>
+            madeByPlatform == ZipVersionMadeByPlatform.Windows
+                ? GetFileName_Windows(path)
+                : GetFileName_Unix(path);
     }
 }

@@ -2,17 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Microsoft.CodeAnalysis.Collections;
-using Microsoft.CodeAnalysis.Emit;
-using Microsoft.CodeAnalysis.PooledObjects;
-using Microsoft.CodeAnalysis.Symbols;
-using Roslyn.Utilities;
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Microsoft.CodeAnalysis.Collections;
+using Microsoft.CodeAnalysis.Emit;
+using Microsoft.CodeAnalysis.PooledObjects;
+using Microsoft.CodeAnalysis.Symbols;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CodeGen
 {
@@ -35,7 +35,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
         internal const string FilePropertyName = "File";
         internal const string HexPropertyName = "Hex";
 
-        public PermissionSetAttributeWithFileReference(Cci.ICustomAttribute sourceAttribute, string resolvedPermissionSetFilePath)
+        public PermissionSetAttributeWithFileReference(
+            Cci.ICustomAttribute sourceAttribute,
+            string resolvedPermissionSetFilePath
+        )
         {
             RoslynDebug.Assert(resolvedPermissionSetFilePath != null);
 
@@ -54,16 +57,19 @@ namespace Microsoft.CodeAnalysis.CodeGen
         /// <summary>
         /// A reference to the constructor that will be used to instantiate this custom attribute during execution (if the attribute is inspected via Reflection).
         /// </summary>
-        public Cci.IMethodReference Constructor(EmitContext context, bool reportDiagnostics)
-            => _sourceAttribute.Constructor(context, reportDiagnostics);
+        public Cci.IMethodReference Constructor(EmitContext context, bool reportDiagnostics) =>
+            _sourceAttribute.Constructor(context, reportDiagnostics);
 
         /// <summary>
         /// Zero or more named arguments that specify values for fields and properties of the attribute.
         /// </summary>
         public ImmutableArray<Cci.IMetadataNamedArgument> GetNamedArguments(EmitContext context)
         {
-            // Perform fixup 
-            Cci.ITypeReference stringType = context.Module.GetPlatformType(Cci.PlatformType.SystemString, context);
+            // Perform fixup
+            Cci.ITypeReference stringType = context.Module.GetPlatformType(
+                Cci.PlatformType.SystemString,
+                context
+            );
 
 #if DEBUG
             // Must have exactly 1 named argument.
@@ -73,7 +79,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
             // Named argument must be 'File' property of string type
             var fileArg = namedArgs.First();
             Debug.Assert(fileArg.ArgumentName == FilePropertyName);
-            Debug.Assert(context.Module.IsPlatformType(fileArg.Type, Cci.PlatformType.SystemString));
+            Debug.Assert(
+                context.Module.IsPlatformType(fileArg.Type, Cci.PlatformType.SystemString)
+            );
 
             // Named argument value must be a non-empty string
             Debug.Assert(fileArg.ArgumentValue is MetadataConstant);
@@ -82,8 +90,14 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             // PermissionSetAttribute type must have a writable public string type property member 'Hex'
             ISymbol iSymbol = _sourceAttribute.GetType(context).GetInternalSymbol()!.GetISymbol();
-            Debug.Assert(((INamedTypeSymbol)iSymbol).GetMembers(HexPropertyName).Any(
-                member => member.Kind == SymbolKind.Property && ((IPropertySymbol)member).Type.SpecialType == SpecialType.System_String));
+            Debug.Assert(
+                ((INamedTypeSymbol)iSymbol)
+                    .GetMembers(HexPropertyName)
+                    .Any(member =>
+                        member.Kind == SymbolKind.Property
+                        && ((IPropertySymbol)member).Type.SpecialType == SpecialType.System_String
+                    )
+            );
 #endif
 
             string hexFileContent;
@@ -109,7 +123,12 @@ namespace Microsoft.CodeAnalysis.CodeGen
             }
 
             // Synthesize a named attribute argument "Hex = hexFileContent".
-            return ImmutableArray.Create<Cci.IMetadataNamedArgument>(new HexPropertyMetadataNamedArgument(stringType, new MetadataConstant(stringType, hexFileContent)));
+            return ImmutableArray.Create<Cci.IMetadataNamedArgument>(
+                new HexPropertyMetadataNamedArgument(
+                    stringType,
+                    new MetadataConstant(stringType, hexFileContent)
+                )
+            );
         }
 
         // internal for testing purposes.
@@ -165,17 +184,32 @@ namespace Microsoft.CodeAnalysis.CodeGen
             private readonly Cci.ITypeReference _type;
             private readonly Cci.IMetadataExpression _value;
 
-            public HexPropertyMetadataNamedArgument(Cci.ITypeReference type, Cci.IMetadataExpression value)
+            public HexPropertyMetadataNamedArgument(
+                Cci.ITypeReference type,
+                Cci.IMetadataExpression value
+            )
             {
                 _type = type;
                 _value = value;
             }
 
-            public string ArgumentName { get { return HexPropertyName; } }
-            public Cci.IMetadataExpression ArgumentValue { get { return _value; } }
-            public bool IsField { get { return false; } }
+            public string ArgumentName
+            {
+                get { return HexPropertyName; }
+            }
+            public Cci.IMetadataExpression ArgumentValue
+            {
+                get { return _value; }
+            }
+            public bool IsField
+            {
+                get { return false; }
+            }
 
-            Cci.ITypeReference Cci.IMetadataExpression.Type { get { return _type; } }
+            Cci.ITypeReference Cci.IMetadataExpression.Type
+            {
+                get { return _type; }
+            }
 
             void Cci.IMetadataExpression.Dispatch(Cci.MetadataVisitor visitor)
             {

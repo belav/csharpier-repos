@@ -21,11 +21,18 @@ public static class SignalRDependencyInjectionExtensions
     /// <param name="signalrBuilder">The <see cref="ISignalRServerBuilder"/>.</param>
     /// <param name="configure">A callback to configure the hub options.</param>
     /// <returns>The same instance of the <see cref="ISignalRServerBuilder"/> for chaining.</returns>
-    public static ISignalRServerBuilder AddHubOptions<THub>(this ISignalRServerBuilder signalrBuilder, Action<HubOptions<THub>> configure) where THub : Hub
+    public static ISignalRServerBuilder AddHubOptions<THub>(
+        this ISignalRServerBuilder signalrBuilder,
+        Action<HubOptions<THub>> configure
+    )
+        where THub : Hub
     {
         ArgumentNullException.ThrowIfNull(signalrBuilder);
 
-        signalrBuilder.Services.AddSingleton<IConfigureOptions<HubOptions<THub>>, HubOptionsSetup<THub>>();
+        signalrBuilder.Services.AddSingleton<
+            IConfigureOptions<HubOptions<THub>>,
+            HubOptionsSetup<THub>
+        >();
         signalrBuilder.Services.Configure(configure);
         return signalrBuilder;
     }
@@ -35,7 +42,10 @@ public static class SignalRDependencyInjectionExtensions
     /// </summary>
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <returns>An <see cref="ISignalRServerBuilder"/> that can be used to further configure the SignalR services.</returns>
-    [RequiresUnreferencedCode("SignalR does not currently support trimming or native AOT.", Url = "https://aka.ms/aspnet/trimming")]
+    [RequiresUnreferencedCode(
+        "SignalR does not currently support trimming or native AOT.",
+        Url = "https://aka.ms/aspnet/trimming"
+    )]
     public static ISignalRServerBuilder AddSignalR(this IServiceCollection services)
     {
         ArgumentNullException.ThrowIfNull(services);
@@ -45,7 +55,9 @@ public static class SignalRDependencyInjectionExtensions
         // Disable the WebSocket keep alive since SignalR has it's own
         services.Configure<WebSocketOptions>(o => o.KeepAliveInterval = TimeSpan.Zero);
         services.TryAddSingleton<SignalRMarkerService>();
-        services.TryAddEnumerable(ServiceDescriptor.Singleton<IConfigureOptions<HubOptions>, HubOptionsSetup>());
+        services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<IConfigureOptions<HubOptions>, HubOptionsSetup>()
+        );
         return services.AddSignalRCore();
     }
 
@@ -55,8 +67,14 @@ public static class SignalRDependencyInjectionExtensions
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <param name="configure">An <see cref="Action{HubOptions}"/> to configure the provided <see cref="HubOptions"/>.</param>
     /// <returns>An <see cref="ISignalRServerBuilder"/> that can be used to further configure the SignalR services.</returns>
-    [RequiresUnreferencedCode("SignalR does not currently support trimming or native AOT.", Url = "https://aka.ms/aspnet/trimming")]
-    public static ISignalRServerBuilder AddSignalR(this IServiceCollection services, Action<HubOptions> configure)
+    [RequiresUnreferencedCode(
+        "SignalR does not currently support trimming or native AOT.",
+        Url = "https://aka.ms/aspnet/trimming"
+    )]
+    public static ISignalRServerBuilder AddSignalR(
+        this IServiceCollection services,
+        Action<HubOptions> configure
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
 

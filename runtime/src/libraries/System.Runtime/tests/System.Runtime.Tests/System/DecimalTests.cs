@@ -69,7 +69,11 @@ namespace System.Tests
             yield return new object[] { 2E28f, new int[] { 536870912, 2085225666, 1084202172, 0 } };
             yield return new object[] { 1.5f, new int[] { 15, 0, 0, 65536 } };
             yield return new object[] { 0f, new int[] { 0, 0, 0, 0 } };
-            yield return new object[] { float.Parse("-0.0", CultureInfo.InvariantCulture), new int[] { 0, 0, 0, 0 } };
+            yield return new object[]
+            {
+                float.Parse("-0.0", CultureInfo.InvariantCulture),
+                new int[] { 0, 0, 0, 0 },
+            };
 
             yield return new object[] { 1000000.1f, new int[] { 1000000, 0, 0, 0 } };
             yield return new object[] { 100000.1f, new int[] { 1000001, 0, 0, 65536 } };
@@ -84,8 +88,16 @@ namespace System.Tests
             yield return new object[] { 0.001f, new int[] { 1, 0, 0, 196608 } };
             yield return new object[] { 0.0001f, new int[] { 10, 0, 0, 327680 } };
             yield return new object[] { 0.00001f, new int[] { 10, 0, 0, 393216 } };
-            yield return new object[] { 0.0000000000000000000000000001f, new int[] { 1, 0, 0, 1835008 } };
-            yield return new object[] { 0.00000000000000000000000000001f, new int[] { 0, 0, 0, 0 } };
+            yield return new object[]
+            {
+                0.0000000000000000000000000001f,
+                new int[] { 1, 0, 0, 1835008 },
+            };
+            yield return new object[]
+            {
+                0.00000000000000000000000000001f,
+                new int[] { 0, 0, 0, 0 },
+            };
         }
 
         [Theory]
@@ -126,11 +138,23 @@ namespace System.Tests
             yield return new object[] { new int[] { 1, 1, 1, 0 }, expected };
             yield return new object[] { new int[] { 1, 0, 0, 0 }, decimal.One };
             yield return new object[] { new int[] { 1000, 0, 0, 0x30000 }, decimal.One };
-            yield return new object[] { new int[] { 1000, 0, 0, unchecked((int)0x80030000) }, -decimal.One };
+            yield return new object[]
+            {
+                new int[] { 1000, 0, 0, unchecked((int)0x80030000) },
+                -decimal.One,
+            };
             yield return new object[] { new int[] { 0, 0, 0, 0x1C0000 }, decimal.Zero };
-            yield return new object[] { new int[] { 1000, 0, 0, 0x1C0000 }, 0.0000000000000000000000001 };
+            yield return new object[]
+            {
+                new int[] { 1000, 0, 0, 0x1C0000 },
+                0.0000000000000000000000001,
+            };
             yield return new object[] { new int[] { 0, 0, 0, 0 }, decimal.Zero };
-            yield return new object[] { new int[] { 0, 0, 0, unchecked((int)0x80000000) }, decimal.Zero };
+            yield return new object[]
+            {
+                new int[] { 0, 0, 0, unchecked((int)0x80000000) },
+                decimal.Zero,
+            };
         }
 
         [Theory]
@@ -176,17 +200,33 @@ namespace System.Tests
 
         public static IEnumerable<object[]> Ctor_Double_TestData()
         {
-            yield return new object[] { 123456789.123456, new int[] { -2045800064, 28744, 0, 393216 } };
-            yield return new object[] { 2.0123456789123456, new int[] { -1829795549, 46853, 0, 917504 } };
+            yield return new object[]
+            {
+                123456789.123456,
+                new int[] { -2045800064, 28744, 0, 393216 },
+            };
+            yield return new object[]
+            {
+                2.0123456789123456,
+                new int[] { -1829795549, 46853, 0, 917504 },
+            };
             yield return new object[] { 2E-28, new int[] { 2, 0, 0, 1835008 } };
             yield return new object[] { 2E-29, new int[] { 0, 0, 0, 0 } };
             yield return new object[] { 2E28, new int[] { 536870912, 2085225666, 1084202172, 0 } };
             yield return new object[] { 1.5, new int[] { 15, 0, 0, 65536 } };
             yield return new object[] { 0, new int[] { 0, 0, 0, 0 } };
-            yield return new object[] { double.Parse("-0.0", CultureInfo.InvariantCulture), new int[] { 0, 0, 0, 0 } };
+            yield return new object[]
+            {
+                double.Parse("-0.0", CultureInfo.InvariantCulture),
+                new int[] { 0, 0, 0, 0 },
+            };
 
             yield return new object[] { 100000000000000.1, new int[] { 276447232, 23283, 0, 0 } };
-            yield return new object[] { 10000000000000.1, new int[] { 276447233, 23283, 0, 65536 } };
+            yield return new object[]
+            {
+                10000000000000.1,
+                new int[] { 276447233, 23283, 0, 65536 },
+            };
             yield return new object[] { 1000000000000.1, new int[] { 1316134913, 2328, 0, 65536 } };
             yield return new object[] { 100000000000.1, new int[] { -727379967, 232, 0, 65536 } };
             yield return new object[] { 10000000000.1, new int[] { 1215752193, 23, 0, 65536 } };
@@ -206,7 +246,11 @@ namespace System.Tests
             yield return new object[] { 0.001, new int[] { 1, 0, 0, 196608 } };
             yield return new object[] { 0.0001, new int[] { 1, 0, 0, 262144 } };
             yield return new object[] { 0.00001, new int[] { 1, 0, 0, 327680 } };
-            yield return new object[] { 0.0000000000000000000000000001, new int[] { 1, 0, 0, 1835008 } };
+            yield return new object[]
+            {
+                0.0000000000000000000000000001,
+                new int[] { 1, 0, 0, 1835008 },
+            };
             yield return new object[] { 0.00000000000000000000000000001, new int[] { 0, 0, 0, 0 } };
         }
 
@@ -247,7 +291,14 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Ctor_Int_Int_Int_Bool_Byte_TestData))]
-        public void Ctor_Int_Int_Int_Bool_Byte(int lo, int mid, int hi, bool isNegative, byte scale, decimal expected)
+        public void Ctor_Int_Int_Int_Bool_Byte(
+            int lo,
+            int mid,
+            int hi,
+            bool isNegative,
+            byte scale,
+            decimal expected
+        )
         {
             Assert.Equal(expected, new decimal(lo, mid, hi, isNegative, scale));
         }
@@ -255,7 +306,10 @@ namespace System.Tests
         [Fact]
         public void Ctor_LargeScale_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("scale", () => new Decimal(1, 2, 3, false, 29));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "scale",
+                () => new Decimal(1, 2, 3, false, 29)
+            );
         }
 
         public static IEnumerable<object[]> Scale_TestData()
@@ -268,7 +322,7 @@ namespace System.Tests
             yield return new object[] { 1.1m, 1 };
             yield return new object[] { 1.00m, 2 };
             yield return new object[] { 1.01m, 2 };
-            yield return new object[] { 1.0000000000000000000000000000m, 28};
+            yield return new object[] { 1.0000000000000000000000000000m, 28 };
         }
 
         [Theory]
@@ -296,13 +350,33 @@ namespace System.Tests
             yield return new object[] { 1m, -1m, 0m };
             yield return new object[] { 1m, 0, 1m };
             yield return new object[] { 79228162514264337593543950330m, 5m, decimal.MaxValue };
-            yield return new object[] { 79228162514264337593543950335m, -5m, 79228162514264337593543950330m };
-            yield return new object[] { -79228162514264337593543950330m, 5m, -79228162514264337593543950325m };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                -5m,
+                79228162514264337593543950330m,
+            };
+            yield return new object[]
+            {
+                -79228162514264337593543950330m,
+                5m,
+                -79228162514264337593543950325m,
+            };
             yield return new object[] { -79228162514264337593543950330m, -5m, decimal.MinValue };
             yield return new object[] { 1234.5678m, 0.00009m, 1234.56789m };
             yield return new object[] { -1234.5678m, 0.00009m, -1234.56771m };
-            yield return new object[] { 0.1111111111111111111111111111m, 0.1111111111111111111111111111m, 0.2222222222222222222222222222m };
-            yield return new object[] { 0.5555555555555555555555555555m, 0.5555555555555555555555555555m, 1.1111111111111111111111111110m };
+            yield return new object[]
+            {
+                0.1111111111111111111111111111m,
+                0.1111111111111111111111111111m,
+                0.2222222222222222222222222222m,
+            };
+            yield return new object[]
+            {
+                0.5555555555555555555555555555m,
+                0.5555555555555555555555555555m,
+                1.1111111111111111111111111110m,
+            };
 
             yield return new object[] { decimal.MinValue, decimal.Zero, decimal.MinValue };
             yield return new object[] { decimal.MaxValue, decimal.Zero, decimal.MaxValue };
@@ -422,9 +496,24 @@ namespace System.Tests
             yield return new object[] { -10m, -2m, 5m };
             yield return new object[] { 10m, -2m, -5m };
             yield return new object[] { -10m, 2m, -5m };
-            yield return new object[] { 0.9214206543486529434634231456m, decimal.MaxValue, decimal.Zero };
-            yield return new object[] { 38214206543486529434634231456m, 0.49214206543486529434634231456m, 77648730371625094566866001277m };
-            yield return new object[] { -78228162514264337593543950335m, decimal.MaxValue, -0.987378225516463811113412343m };
+            yield return new object[]
+            {
+                0.9214206543486529434634231456m,
+                decimal.MaxValue,
+                decimal.Zero,
+            };
+            yield return new object[]
+            {
+                38214206543486529434634231456m,
+                0.49214206543486529434634231456m,
+                77648730371625094566866001277m,
+            };
+            yield return new object[]
+            {
+                -78228162514264337593543950335m,
+                decimal.MaxValue,
+                -0.987378225516463811113412343m,
+            };
 
             yield return new object[] { decimal.MaxValue, decimal.MinusOne, decimal.MinValue };
             yield return new object[] { decimal.MinValue, decimal.MaxValue, decimal.MinusOne };
@@ -432,48 +521,258 @@ namespace System.Tests
             yield return new object[] { decimal.MinValue, decimal.MinValue, decimal.One };
 
             // Tests near MaxValue
-            yield return new object[] { 792281625142643375935439503.4m, 0.1m, 7922816251426433759354395034m };
-            yield return new object[] { 79228162514264337593543950.34m, 0.1m, 792281625142643375935439503.4m };
-            yield return new object[] { 7922816251426433759354395.034m, 0.1m, 79228162514264337593543950.34m };
-            yield return new object[] { 792281625142643375935439.5034m, 0.1m, 7922816251426433759354395.034m };
-            yield return new object[] { 79228162514264337593543950335m, 10m, 7922816251426433759354395033.5m };
-            yield return new object[] { 79228162514264337567774146561m, 10m, 7922816251426433756777414656.1m };
-            yield return new object[] { 79228162514264337567774146560m, 10m, 7922816251426433756777414656m };
-            yield return new object[] { 79228162514264337567774146559m, 10m, 7922816251426433756777414655.9m };
-            yield return new object[] { 79228162514264337593543950335m, 1.1m, 72025602285694852357767227577m };
-            yield return new object[] { 79228162514264337593543950335m, 1.01m, 78443725261647859003508861718m };
-            yield return new object[] { 79228162514264337593543950335m, 1.001m, 79149013500763574019524425909.091m };
-            yield return new object[] { 79228162514264337593543950335m, 1.0001m, 79220240490215316061937756559.344m };
-            yield return new object[] { 79228162514264337593543950335m, 1.00001m, 79227370240561931974224208092.919m };
-            yield return new object[] { 79228162514264337593543950335m, 1.000001m, 79228083286181051412492537842.462m };
-            yield return new object[] { 79228162514264337593543950335m, 1.0000001m, 79228154591448878448656105469.389m };
-            yield return new object[] { 79228162514264337593543950335m, 1.00000001m, 79228161721982720373716746597.833m };
-            yield return new object[] { 79228162514264337593543950335m, 1.000000001m, 79228162435036175158507775176.492m };
-            yield return new object[] { 79228162514264337593543950335m, 1.0000000001m, 79228162506341521342909798200.709m };
-            yield return new object[] { 79228162514264337593543950335m, 1.00000000001m, 79228162513472055968409229775.316m };
-            yield return new object[] { 79228162514264337593543950335m, 1.000000000001m, 79228162514185109431029765225.569m };
-            yield return new object[] { 79228162514264337593543950335m, 1.0000000000001m, 79228162514256414777292524693.522m };
-            yield return new object[] { 79228162514264337593543950335m, 1.00000000000001m, 79228162514263545311918807699.547m };
-            yield return new object[] { 79228162514264337593543950335m, 1.000000000000001m, 79228162514264258365381436070.742m };
-            yield return new object[] { 79228162514264337593543950335m, 1.0000000000000001m, 79228162514264329670727698908.567m };
-            yield return new object[] { 79228162514264337593543950335m, 1.00000000000000001m, 79228162514264336801262325192.357m };
-            yield return new object[] { 79228162514264337593543950335m, 1.000000000000000001m, 79228162514264337514315787820.736m };
-            yield return new object[] { 79228162514264337593543950335m, 1.0000000000000000001m, 79228162514264337585621134083.574m };
-            yield return new object[] { 79228162514264337593543950335m, 1.00000000000000000001m, 79228162514264337592751668709.857m };
-            yield return new object[] { 79228162514264337593543950335m, 1.000000000000000000001m, 79228162514264337593464722172.486m };
-            yield return new object[] { 79228162514264337593543950335m, 1.0000000000000000000001m, 79228162514264337593536027518.749m };
-            yield return new object[] { 79228162514264337593543950335m, 1.00000000000000000000001m, 79228162514264337593543158053.375m };
-            yield return new object[] { 79228162514264337593543950335m, 1.000000000000000000000001m, 79228162514264337593543871106.837m };
-            yield return new object[] { 79228162514264337593543950335m, 1.0000000000000000000000001m, 79228162514264337593543942412.184m };
-            yield return new object[] { 79228162514264337593543950335m, 1.00000000000000000000000001m, 79228162514264337593543949542.718m };
-            yield return new object[] { 79228162514264337593543950335m, 1.000000000000000000000000001m, 79228162514264337593543950255.772m };
-            yield return new object[] { 7922816251426433759354395033.5m, 0.9999999999999999999999999999m, 7922816251426433759354395034m };
-            yield return new object[] { 79228162514264337593543950335m, 10000000m, 7922816251426433759354.3950335m };
-            yield return new object[] { 7922816251426433759354395033.5m, 1.000001m, 7922808328618105141249253784.2m };
-            yield return new object[] { 7922816251426433759354395033.5m, 1.0000000000000000000000000001m, 7922816251426433759354395032.7m };
-            yield return new object[] { 7922816251426433759354395033.5m, 1.0000000000000000000000000002m, 7922816251426433759354395031.9m };
-            yield return new object[] { 7922816251426433759354395033.5m, 0.9999999999999999999999999999m, 7922816251426433759354395034m };
-            yield return new object[] { 79228162514264337593543950335m, 1.0000000000000000000000000001m, 79228162514264337593543950327m };
+            yield return new object[]
+            {
+                792281625142643375935439503.4m,
+                0.1m,
+                7922816251426433759354395034m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950.34m,
+                0.1m,
+                792281625142643375935439503.4m,
+            };
+            yield return new object[]
+            {
+                7922816251426433759354395.034m,
+                0.1m,
+                79228162514264337593543950.34m,
+            };
+            yield return new object[]
+            {
+                792281625142643375935439.5034m,
+                0.1m,
+                7922816251426433759354395.034m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                10m,
+                7922816251426433759354395033.5m,
+            };
+            yield return new object[]
+            {
+                79228162514264337567774146561m,
+                10m,
+                7922816251426433756777414656.1m,
+            };
+            yield return new object[]
+            {
+                79228162514264337567774146560m,
+                10m,
+                7922816251426433756777414656m,
+            };
+            yield return new object[]
+            {
+                79228162514264337567774146559m,
+                10m,
+                7922816251426433756777414655.9m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.1m,
+                72025602285694852357767227577m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.01m,
+                78443725261647859003508861718m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.001m,
+                79149013500763574019524425909.091m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.0001m,
+                79220240490215316061937756559.344m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.00001m,
+                79227370240561931974224208092.919m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.000001m,
+                79228083286181051412492537842.462m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.0000001m,
+                79228154591448878448656105469.389m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.00000001m,
+                79228161721982720373716746597.833m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.000000001m,
+                79228162435036175158507775176.492m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.0000000001m,
+                79228162506341521342909798200.709m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.00000000001m,
+                79228162513472055968409229775.316m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.000000000001m,
+                79228162514185109431029765225.569m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.0000000000001m,
+                79228162514256414777292524693.522m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.00000000000001m,
+                79228162514263545311918807699.547m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.000000000000001m,
+                79228162514264258365381436070.742m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.0000000000000001m,
+                79228162514264329670727698908.567m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.00000000000000001m,
+                79228162514264336801262325192.357m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.000000000000000001m,
+                79228162514264337514315787820.736m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.0000000000000000001m,
+                79228162514264337585621134083.574m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.00000000000000000001m,
+                79228162514264337592751668709.857m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.000000000000000000001m,
+                79228162514264337593464722172.486m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.0000000000000000000001m,
+                79228162514264337593536027518.749m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.00000000000000000000001m,
+                79228162514264337593543158053.375m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.000000000000000000000001m,
+                79228162514264337593543871106.837m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.0000000000000000000000001m,
+                79228162514264337593543942412.184m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.00000000000000000000000001m,
+                79228162514264337593543949542.718m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.000000000000000000000000001m,
+                79228162514264337593543950255.772m,
+            };
+            yield return new object[]
+            {
+                7922816251426433759354395033.5m,
+                0.9999999999999999999999999999m,
+                7922816251426433759354395034m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                10000000m,
+                7922816251426433759354.3950335m,
+            };
+            yield return new object[]
+            {
+                7922816251426433759354395033.5m,
+                1.000001m,
+                7922808328618105141249253784.2m,
+            };
+            yield return new object[]
+            {
+                7922816251426433759354395033.5m,
+                1.0000000000000000000000000001m,
+                7922816251426433759354395032.7m,
+            };
+            yield return new object[]
+            {
+                7922816251426433759354395033.5m,
+                1.0000000000000000000000000002m,
+                7922816251426433759354395031.9m,
+            };
+            yield return new object[]
+            {
+                7922816251426433759354395033.5m,
+                0.9999999999999999999999999999m,
+                7922816251426433759354395034m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.0000000000000000000000000001m,
+                79228162514264337593543950327m,
+            };
 
             decimal boundary7 = new decimal((int)429u, (int)2133437386u, 0, false, 0);
             decimal boundary71 = new decimal((int)429u, (int)2133437387u, 0, false, 0);
@@ -482,10 +781,30 @@ namespace System.Tests
             yield return new object[] { maxValueBy7, 1m, maxValueBy7 };
             yield return new object[] { maxValueBy7, 0.0000001m, decimal.MaxValue };
             yield return new object[] { boundary7, 1m, boundary7 };
-            yield return new object[] { boundary7, 0.000000100000000000000000001m, 91630438009337286849083695.62m };
-            yield return new object[] { boundary71, 0.000000100000000000000000001m, 91630438052286959809083695.62m };
-            yield return new object[] { 7922816251426433759354.3950335m, 1m, 7922816251426433759354.3950335m };
-            yield return new object[] { 7922816251426433759354.3950335m, 0.0000001m, 79228162514264337593543950335m };
+            yield return new object[]
+            {
+                boundary7,
+                0.000000100000000000000000001m,
+                91630438009337286849083695.62m,
+            };
+            yield return new object[]
+            {
+                boundary71,
+                0.000000100000000000000000001m,
+                91630438052286959809083695.62m,
+            };
+            yield return new object[]
+            {
+                7922816251426433759354.3950335m,
+                1m,
+                7922816251426433759354.3950335m,
+            };
+            yield return new object[]
+            {
+                7922816251426433759354.3950335m,
+                0.0000001m,
+                79228162514264337593543950335m,
+            };
         }
 
         [Theory]
@@ -510,10 +829,19 @@ namespace System.Tests
             Assert.Throws<DivideByZeroException>(() => d1 / d2);
             Assert.Throws<DivideByZeroException>(() => decimal.Divide(d1, d2));
         }
+
         public static IEnumerable<object[]> Divide_Overflows_TestData()
         {
-            yield return new object[] { 79228162514264337593543950335m, -0.9999999999999999999999999m };
-            yield return new object[] { 792281625142643.37593543950335m, -0.0000000000000079228162514264337593543950335m };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                -0.9999999999999999999999999m,
+            };
+            yield return new object[]
+            {
+                792281625142643.37593543950335m,
+                -0.0000000000000079228162514264337593543950335m,
+            };
             yield return new object[] { 79228162514264337593543950335m, 0.1m };
             yield return new object[] { 7922816251426433759354395034m, 0.1m };
             yield return new object[] { 79228162514264337593543950335m, 0.9m };
@@ -533,13 +861,37 @@ namespace System.Tests
             yield return new object[] { 79228162514264337593543950335m, 0.99999999999999999m };
             yield return new object[] { 79228162514264337593543950335m, 0.99999999999999999999m };
             yield return new object[] { 79228162514264337593543950335m, 0.9999999999999999999999m };
-            yield return new object[] { 79228162514264337593543950335m, 0.99999999999999999999999m };
-            yield return new object[] { 79228162514264337593543950335m, 0.999999999999999999999999m };
-            yield return new object[] { 79228162514264337593543950335m, 0.9999999999999999999999999m };
-            yield return new object[] { 79228162514264337593543950335m, 0.999999999999999999999999999m };
-            yield return new object[] { 79228162514264337593543950335m, 0.9999999999999999999999999999m };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                0.99999999999999999999999m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                0.999999999999999999999999m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                0.9999999999999999999999999m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                0.999999999999999999999999999m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                0.9999999999999999999999999999m,
+            };
             yield return new object[] { 79228162514264337593543950335m, -0.1m };
-            yield return new object[] { 79228162514264337593543950335m, -0.9999999999999999999999999m };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                -0.9999999999999999999999999m,
+            };
             yield return new object[] { decimal.MaxValue / 2m, 0.5m };
         }
 
@@ -628,19 +980,95 @@ namespace System.Tests
 
         public static IEnumerable<object[]> GetBits_TestData()
         {
-            yield return new object[] { 1M, new int[] { 0x00000001, 0x00000000, 0x00000000, 0x00000000 } };
-            yield return new object[] { 100000000000000M, new int[] { 0x107A4000, 0x00005AF3, 0x00000000, 0x00000000 } };
-            yield return new object[] { 100000000000000.00000000000000M, new int[] { 0x10000000, 0x3E250261, 0x204FCE5E, 0x000E0000 } };
-            yield return new object[] { 1.0000000000000000000000000000M, new int[] { 0x10000000, 0x3E250261, 0x204FCE5E, 0x001C0000 } };
-            yield return new object[] { 123456789M, new int[] { 0x075BCD15, 0x00000000, 0x00000000, 0x00000000 } };
-            yield return new object[] { 0.123456789M, new int[] { 0x075BCD15, 0x00000000, 0x00000000, 0x00090000 } };
-            yield return new object[] { 0.000000000123456789M, new int[] { 0x075BCD15, 0x00000000, 0x00000000, 0x00120000 } };
-            yield return new object[] { 0.000000000000000000123456789M, new int[] { 0x075BCD15, 0x00000000, 0x00000000, 0x001B0000 } };
-            yield return new object[] { 4294967295M, new int[] { unchecked((int)0xFFFFFFFF), 0x00000000, 0x00000000, 0x00000000 } };
-            yield return new object[] { 18446744073709551615M, new int[] { unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), 0x00000000, 0x00000000 } };
-            yield return new object[] { decimal.MaxValue, new int[] { unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), 0x00000000 } };
-            yield return new object[] { decimal.MinValue, new int[] { unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), unchecked((int)0x80000000) } };
-            yield return new object[] { -7.9228162514264337593543950335M, new int[] { unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), unchecked((int)0xFFFFFFFF), unchecked((int)0x801C0000) } };
+            yield return new object[]
+            {
+                1M,
+                new int[] { 0x00000001, 0x00000000, 0x00000000, 0x00000000 },
+            };
+            yield return new object[]
+            {
+                100000000000000M,
+                new int[] { 0x107A4000, 0x00005AF3, 0x00000000, 0x00000000 },
+            };
+            yield return new object[]
+            {
+                100000000000000.00000000000000M,
+                new int[] { 0x10000000, 0x3E250261, 0x204FCE5E, 0x000E0000 },
+            };
+            yield return new object[]
+            {
+                1.0000000000000000000000000000M,
+                new int[] { 0x10000000, 0x3E250261, 0x204FCE5E, 0x001C0000 },
+            };
+            yield return new object[]
+            {
+                123456789M,
+                new int[] { 0x075BCD15, 0x00000000, 0x00000000, 0x00000000 },
+            };
+            yield return new object[]
+            {
+                0.123456789M,
+                new int[] { 0x075BCD15, 0x00000000, 0x00000000, 0x00090000 },
+            };
+            yield return new object[]
+            {
+                0.000000000123456789M,
+                new int[] { 0x075BCD15, 0x00000000, 0x00000000, 0x00120000 },
+            };
+            yield return new object[]
+            {
+                0.000000000000000000123456789M,
+                new int[] { 0x075BCD15, 0x00000000, 0x00000000, 0x001B0000 },
+            };
+            yield return new object[]
+            {
+                4294967295M,
+                new int[] { unchecked((int)0xFFFFFFFF), 0x00000000, 0x00000000, 0x00000000 },
+            };
+            yield return new object[]
+            {
+                18446744073709551615M,
+                new int[]
+                {
+                    unchecked((int)0xFFFFFFFF),
+                    unchecked((int)0xFFFFFFFF),
+                    0x00000000,
+                    0x00000000,
+                },
+            };
+            yield return new object[]
+            {
+                decimal.MaxValue,
+                new int[]
+                {
+                    unchecked((int)0xFFFFFFFF),
+                    unchecked((int)0xFFFFFFFF),
+                    unchecked((int)0xFFFFFFFF),
+                    0x00000000,
+                },
+            };
+            yield return new object[]
+            {
+                decimal.MinValue,
+                new int[]
+                {
+                    unchecked((int)0xFFFFFFFF),
+                    unchecked((int)0xFFFFFFFF),
+                    unchecked((int)0xFFFFFFFF),
+                    unchecked((int)0x80000000),
+                },
+            };
+            yield return new object[]
+            {
+                -7.9228162514264337593543950335M,
+                new int[]
+                {
+                    unchecked((int)0xFFFFFFFF),
+                    unchecked((int)0xFFFFFFFF),
+                    unchecked((int)0xFFFFFFFF),
+                    unchecked((int)0x801C0000),
+                },
+            };
         }
 
         [Theory]
@@ -678,7 +1106,10 @@ namespace System.Tests
         [Fact]
         public static void GetBitsSpan_TooShort_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("destination", () => decimal.GetBits(123, new int[3]));
+            AssertExtensions.Throws<ArgumentException>(
+                "destination",
+                () => decimal.GetBits(123, new int[3])
+            );
         }
 
         [Theory]
@@ -715,18 +1146,68 @@ namespace System.Tests
         public static IEnumerable<object[]> Multiply_Valid_TestData()
         {
             yield return new object[] { decimal.One, decimal.One, decimal.One };
-            yield return new object[] { 7922816251426433759354395033.5m, new decimal(10), decimal.MaxValue };
-            yield return new object[] { 0.2352523523423422342354395033m, 56033525474612414574574757495m, 13182018677937129120135020796m };
-            yield return new object[] { 46161363632634613634.093453337m, 461613636.32634613634083453337m, 21308714924243214928823669051m };
-            yield return new object[] { 0.0000000000000345435353453563m, .0000000000000023525235234234m, 0.0000000000000000000000000001m };
+            yield return new object[]
+            {
+                7922816251426433759354395033.5m,
+                new decimal(10),
+                decimal.MaxValue,
+            };
+            yield return new object[]
+            {
+                0.2352523523423422342354395033m,
+                56033525474612414574574757495m,
+                13182018677937129120135020796m,
+            };
+            yield return new object[]
+            {
+                46161363632634613634.093453337m,
+                461613636.32634613634083453337m,
+                21308714924243214928823669051m,
+            };
+            yield return new object[]
+            {
+                0.0000000000000345435353453563m,
+                .0000000000000023525235234234m,
+                0.0000000000000000000000000001m,
+            };
 
             // Near decimal.MaxValue
-            yield return new object[] { 79228162514264337593543950335m, 0.9m, 71305346262837903834189555302m };
-            yield return new object[] { 79228162514264337593543950335m, 0.99m, 78435880889121694217608510832m };
-            yield return new object[] { 79228162514264337593543950335m, 0.9999999999999999999999999999m, 79228162514264337593543950327m };
-            yield return new object[] { -79228162514264337593543950335m, 0.9m, -71305346262837903834189555302m };
-            yield return new object[] { -79228162514264337593543950335m, 0.99m, -78435880889121694217608510832m };
-            yield return new object[] { -79228162514264337593543950335m, 0.9999999999999999999999999999m, -79228162514264337593543950327m };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                0.9m,
+                71305346262837903834189555302m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                0.99m,
+                78435880889121694217608510832m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                0.9999999999999999999999999999m,
+                79228162514264337593543950327m,
+            };
+            yield return new object[]
+            {
+                -79228162514264337593543950335m,
+                0.9m,
+                -71305346262837903834189555302m,
+            };
+            yield return new object[]
+            {
+                -79228162514264337593543950335m,
+                0.99m,
+                -78435880889121694217608510832m,
+            };
+            yield return new object[]
+            {
+                -79228162514264337593543950335m,
+                0.9999999999999999999999999999m,
+                -79228162514264337593543950327m,
+            };
         }
 
         [Theory]
@@ -763,11 +1244,31 @@ namespace System.Tests
             yield return new object[] { 79228162514264337593543950335m, 1.00000000000000000001m };
             yield return new object[] { 79228162514264337593543950335m, 1.000000000000000000001m };
             yield return new object[] { 79228162514264337593543950335m, 1.0000000000000000000001m };
-            yield return new object[] { 79228162514264337593543950335m, 1.00000000000000000000001m };
-            yield return new object[] { 79228162514264337593543950335m, 1.000000000000000000000001m };
-            yield return new object[] { 79228162514264337593543950335m, 1.0000000000000000000000001m };
-            yield return new object[] { 79228162514264337593543950335m, 1.00000000000000000000000001m };
-            yield return new object[] { 79228162514264337593543950335m, 1.000000000000000000000000001m };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.00000000000000000000001m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.000000000000000000000001m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.0000000000000000000000001m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.00000000000000000000000001m,
+            };
+            yield return new object[]
+            {
+                79228162514264337593543950335m,
+                1.000000000000000000000000001m,
+            };
             yield return new object[] { decimal.MaxValue / 2, 2m };
         }
 
@@ -821,34 +1322,117 @@ namespace System.Tests
             yield return new object[] { "  123  ", defaultStyle, null, 123m };
             yield return new object[] { (567.89m).ToString(), defaultStyle, null, 567.89m };
             yield return new object[] { (-567.89m).ToString(), defaultStyle, null, -567.89m };
-            yield return new object[] { "0.6666666666666666666666666666500000000000000000000000000000000000000000000000000000000000000", defaultStyle, invariantFormat, 0.6666666666666666666666666666m };
+            yield return new object[]
+            {
+                "0.6666666666666666666666666666500000000000000000000000000000000000000000000000000000000000000",
+                defaultStyle,
+                invariantFormat,
+                0.6666666666666666666666666666m,
+            };
 
-            yield return new object[] { emptyFormat.NumberDecimalSeparator + "234", defaultStyle, null, 0.234m };
-            yield return new object[] { "234" + emptyFormat.NumberDecimalSeparator, defaultStyle, null, 234.0m };
-            yield return new object[] { "7" + new string('0', 28) + emptyFormat.NumberDecimalSeparator, defaultStyle, null, 7E28m };
-            yield return new object[] { "07" + new string('0', 28) + emptyFormat.NumberDecimalSeparator, defaultStyle, null, 7E28m };
+            yield return new object[]
+            {
+                emptyFormat.NumberDecimalSeparator + "234",
+                defaultStyle,
+                null,
+                0.234m,
+            };
+            yield return new object[]
+            {
+                "234" + emptyFormat.NumberDecimalSeparator,
+                defaultStyle,
+                null,
+                234.0m,
+            };
+            yield return new object[]
+            {
+                "7" + new string('0', 28) + emptyFormat.NumberDecimalSeparator,
+                defaultStyle,
+                null,
+                7E28m,
+            };
+            yield return new object[]
+            {
+                "07" + new string('0', 28) + emptyFormat.NumberDecimalSeparator,
+                defaultStyle,
+                null,
+                7E28m,
+            };
 
-            yield return new object[] { "79228162514264337593543950335", defaultStyle, null, 79228162514264337593543950335m };
-            yield return new object[] { "-79228162514264337593543950335", defaultStyle, null, -79228162514264337593543950335m };
-            yield return new object[] { "79,228,162,514,264,337,593,543,950,335", NumberStyles.AllowThousands, customFormat3, 79228162514264337593543950335m };
+            yield return new object[]
+            {
+                "79228162514264337593543950335",
+                defaultStyle,
+                null,
+                79228162514264337593543950335m,
+            };
+            yield return new object[]
+            {
+                "-79228162514264337593543950335",
+                defaultStyle,
+                null,
+                -79228162514264337593543950335m,
+            };
+            yield return new object[]
+            {
+                "79,228,162,514,264,337,593,543,950,335",
+                NumberStyles.AllowThousands,
+                customFormat3,
+                79228162514264337593543950335m,
+            };
 
-            yield return new object[] { (123.1m).ToString(), NumberStyles.AllowDecimalPoint, null, 123.1m };
-            yield return new object[] { 1000.ToString("N0"), NumberStyles.AllowThousands, null, 1000m };
+            yield return new object[]
+            {
+                (123.1m).ToString(),
+                NumberStyles.AllowDecimalPoint,
+                null,
+                123.1m,
+            };
+            yield return new object[]
+            {
+                1000.ToString("N0"),
+                NumberStyles.AllowThousands,
+                null,
+                1000m,
+            };
 
             yield return new object[] { "123", NumberStyles.Any, emptyFormat, 123m };
-            yield return new object[] { (123.567m).ToString(), NumberStyles.Any, emptyFormat, 123.567m };
+            yield return new object[]
+            {
+                (123.567m).ToString(),
+                NumberStyles.Any,
+                emptyFormat,
+                123.567m,
+            };
             yield return new object[] { "123", NumberStyles.Float, emptyFormat, 123m };
             yield return new object[] { "$1000", NumberStyles.Currency, customFormat1, 1000m };
             yield return new object[] { "123.123", NumberStyles.Float, customFormat2, 123.123m };
-            yield return new object[] { "(123)", NumberStyles.AllowParentheses, customFormat2, -123m };
+            yield return new object[]
+            {
+                "(123)",
+                NumberStyles.AllowParentheses,
+                customFormat2,
+                -123m,
+            };
 
             // Number buffer limit ran out (string too long)
-            yield return new object[] { "1234567890123456789012345.678456", defaultStyle, customFormat4, 1234567890123456789012345.6785m };
+            yield return new object[]
+            {
+                "1234567890123456789012345.678456",
+                defaultStyle,
+                customFormat4,
+                1234567890123456789012345.6785m,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Parse_Valid_TestData))]
-        public static void Parse(string value, NumberStyles style, IFormatProvider provider, decimal expected)
+        public static void Parse(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            decimal expected
+        )
         {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
             decimal result;
@@ -875,7 +1459,9 @@ namespace System.Tests
             if (isDefaultProvider)
             {
                 // Use Parse(string, NumberStyles) or Parse(string, NumberStyles, IFormatProvider)
-                Assert.True(decimal.TryParse(value, style, NumberFormatInfo.CurrentInfo, out result));
+                Assert.True(
+                    decimal.TryParse(value, style, NumberFormatInfo.CurrentInfo, out result)
+                );
                 Assert.Equal(expected, result);
 
                 Assert.Equal(expected, decimal.Parse(value, style));
@@ -892,31 +1478,77 @@ namespace System.Tests
             customFormat.NumberDecimalSeparator = ".";
 
             yield return new object[] { null, defaultStyle, null, typeof(ArgumentNullException) };
-            yield return new object[] { "79228162514264337593543950336", defaultStyle, null, typeof(OverflowException) };
+            yield return new object[]
+            {
+                "79228162514264337593543950336",
+                defaultStyle,
+                null,
+                typeof(OverflowException),
+            };
             yield return new object[] { "", defaultStyle, null, typeof(FormatException) };
             yield return new object[] { " ", defaultStyle, null, typeof(FormatException) };
             yield return new object[] { "Garbage", defaultStyle, null, typeof(FormatException) };
 
             yield return new object[] { "ab", defaultStyle, null, typeof(FormatException) }; // Hex value
             yield return new object[] { "(123)", defaultStyle, null, typeof(FormatException) }; // Parentheses
-            yield return new object[] { 100.ToString("C0"), defaultStyle, null, typeof(FormatException) }; // Currency
+            yield return new object[]
+            {
+                100.ToString("C0"),
+                defaultStyle,
+                null,
+                typeof(FormatException),
+            }; // Currency
 
-            yield return new object[] { (123.456m).ToString(), NumberStyles.Integer, null, typeof(FormatException) }; // Decimal
-            yield return new object[] { "  " + (123.456m).ToString(), NumberStyles.None, null, typeof(FormatException) }; // Leading space
-            yield return new object[] { (123.456m).ToString() + "   ", NumberStyles.None, null, typeof(FormatException) }; // Leading space
+            yield return new object[]
+            {
+                (123.456m).ToString(),
+                NumberStyles.Integer,
+                null,
+                typeof(FormatException),
+            }; // Decimal
+            yield return new object[]
+            {
+                "  " + (123.456m).ToString(),
+                NumberStyles.None,
+                null,
+                typeof(FormatException),
+            }; // Leading space
+            yield return new object[]
+            {
+                (123.456m).ToString() + "   ",
+                NumberStyles.None,
+                null,
+                typeof(FormatException),
+            }; // Leading space
             yield return new object[] { "1E23", NumberStyles.None, null, typeof(FormatException) }; // Exponent
 
             yield return new object[] { "ab", NumberStyles.None, null, typeof(FormatException) }; // Hex value
-            yield return new object[] { "  123  ", NumberStyles.None, null, typeof(FormatException) }; // Trailing and leading whitespace
+            yield return new object[]
+            {
+                "  123  ",
+                NumberStyles.None,
+                null,
+                typeof(FormatException),
+            }; // Trailing and leading whitespace
         }
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void Parse_Invalid(string value, NumberStyles style, IFormatProvider provider, Type exceptionType)
+        public static void Parse_Invalid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            Type exceptionType
+        )
         {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
             decimal result;
-            if ((style & ~NumberStyles.Number) == 0 && style != NumberStyles.None && (style & NumberStyles.AllowLeadingWhite) == (style & NumberStyles.AllowTrailingWhite))
+            if (
+                (style & ~NumberStyles.Number) == 0
+                && style != NumberStyles.None
+                && (style & NumberStyles.AllowLeadingWhite)
+                    == (style & NumberStyles.AllowTrailingWhite)
+            )
             {
                 // Use Parse(string) or Parse(string, IFormatProvider)
                 if (isDefaultProvider)
@@ -939,11 +1571,16 @@ namespace System.Tests
             if (isDefaultProvider)
             {
                 // Use Parse(string, NumberStyles) or Parse(string, NumberStyles, IFormatProvider)
-                Assert.False(decimal.TryParse(value, style, NumberFormatInfo.CurrentInfo, out result));
+                Assert.False(
+                    decimal.TryParse(value, style, NumberFormatInfo.CurrentInfo, out result)
+                );
                 Assert.Equal(default(decimal), result);
 
                 Assert.Throws(exceptionType, () => decimal.Parse(value, style));
-                Assert.Throws(exceptionType, () => decimal.Parse(value, style, NumberFormatInfo.CurrentInfo));
+                Assert.Throws(
+                    exceptionType,
+                    () => decimal.Parse(value, style, NumberFormatInfo.CurrentInfo)
+                );
             }
         }
 
@@ -951,20 +1588,67 @@ namespace System.Tests
         {
             foreach (object[] inputs in Parse_Valid_TestData())
             {
-                yield return new object[] { inputs[0], 0, ((string)inputs[0]).Length, inputs[1], inputs[2], inputs[3] };
+                yield return new object[]
+                {
+                    inputs[0],
+                    0,
+                    ((string)inputs[0]).Length,
+                    inputs[1],
+                    inputs[2],
+                    inputs[3],
+                };
             }
 
             yield return new object[] { "-123", 1, 3, NumberStyles.Number, null, 123m };
             yield return new object[] { "-123", 0, 3, NumberStyles.Number, null, -12m };
-            yield return new object[] { 1000.ToString("N0"), 0, 4, NumberStyles.AllowThousands, null, 100m };
-            yield return new object[] { 1000.ToString("N0"), 2, 3, NumberStyles.AllowThousands, null, 0m };
-            yield return new object[] { "(123)", 1, 3, NumberStyles.AllowParentheses, new NumberFormatInfo() { NumberDecimalSeparator = "." }, 123m };
-            yield return new object[] { "1234567890123456789012345.678456", 1, 4, NumberStyles.Number, new NumberFormatInfo() { NumberDecimalSeparator = "." }, 2345m };
+            yield return new object[]
+            {
+                1000.ToString("N0"),
+                0,
+                4,
+                NumberStyles.AllowThousands,
+                null,
+                100m,
+            };
+            yield return new object[]
+            {
+                1000.ToString("N0"),
+                2,
+                3,
+                NumberStyles.AllowThousands,
+                null,
+                0m,
+            };
+            yield return new object[]
+            {
+                "(123)",
+                1,
+                3,
+                NumberStyles.AllowParentheses,
+                new NumberFormatInfo() { NumberDecimalSeparator = "." },
+                123m,
+            };
+            yield return new object[]
+            {
+                "1234567890123456789012345.678456",
+                1,
+                4,
+                NumberStyles.Number,
+                new NumberFormatInfo() { NumberDecimalSeparator = "." },
+                2345m,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Parse_ValidWithOffsetCount_TestData))]
-        public static void Parse_Span_Valid(string value, int offset, int count, NumberStyles style, IFormatProvider provider, decimal expected)
+        public static void Parse_Span_Valid(
+            string value,
+            int offset,
+            int count,
+            NumberStyles style,
+            IFormatProvider provider,
+            decimal expected
+        )
         {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
             decimal result;
@@ -979,7 +1663,10 @@ namespace System.Tests
                     Assert.Equal(expected, decimal.Parse(value.AsSpan(offset, count)));
                 }
 
-                Assert.Equal(expected, decimal.Parse(value.AsSpan(offset, count), provider: provider));
+                Assert.Equal(
+                    expected,
+                    decimal.Parse(value.AsSpan(offset, count), provider: provider)
+                );
             }
 
             Assert.Equal(expected, decimal.Parse(value.AsSpan(offset, count), style, provider));
@@ -990,7 +1677,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void Parse_Span_Invalid(string value, NumberStyles style, IFormatProvider provider, Type exceptionType)
+        public static void Parse_Span_Invalid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            Type exceptionType
+        )
         {
             if (value != null)
             {
@@ -1003,7 +1695,14 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_ValidWithOffsetCount_TestData))]
-        public static void Parse_Utf8Span_Valid(string value, int offset, int count, NumberStyles style, IFormatProvider provider, decimal expected)
+        public static void Parse_Utf8Span_Valid(
+            string value,
+            int offset,
+            int count,
+            NumberStyles style,
+            IFormatProvider provider,
+            decimal expected
+        )
         {
             bool isDefaultProvider = provider == null || provider == NumberFormatInfo.CurrentInfo;
 
@@ -1032,12 +1731,20 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void Parse_Utf8Span_Invalid(string value, NumberStyles style, IFormatProvider provider, Type exceptionType)
+        public static void Parse_Utf8Span_Invalid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            Type exceptionType
+        )
         {
             if (value != null)
             {
                 ReadOnlySpan<byte> valueUtf8 = Encoding.UTF8.GetBytes(value);
-                Assert.Throws(exceptionType, () => decimal.Parse(Encoding.UTF8.GetBytes(value), style, provider));
+                Assert.Throws(
+                    exceptionType,
+                    () => decimal.Parse(Encoding.UTF8.GetBytes(value), style, provider)
+                );
 
                 Assert.False(decimal.TryParse(valueUtf8, style, provider, out decimal result));
                 Assert.Equal(0, result);
@@ -1114,15 +1821,60 @@ namespace System.Tests
         {
             yield return new object[] { decimal.MaxValue, 0.1m, 0.0m };
             yield return new object[] { decimal.MaxValue, 7.081881059m, 3.702941036m };
-            yield return new object[] { decimal.MaxValue, 2004094637636.6280382536104438m, 1980741879937.1051521151154118m };
-            yield return new object[] { decimal.MaxValue, new decimal(0, 0, 1, false, 28), 0.0000000013968756053316206592m };
-            yield return new object[] { decimal.MaxValue, new decimal(0, 1, 0, false, 28), 0.0000000000000000004026531840m };
-            yield return new object[] { decimal.MaxValue, new decimal(1, 0, 0, false, 28), 0.0000000000000000000000000000m };
-            yield return new object[] { 5m, 0.0000000000000000000000000003m, 0.0000000000000000000000000002m };
-            yield return new object[] { 5.94499443m, 0.0000000000000000000000000007m, 0.0000000000000000000000000005m };
-            yield return new object[] { 1667m, 325.66574961026426932314500573m, 38.67125194867865338427497135m };
-            yield return new object[] { 1667m, 0.00000000013630700224712809m, 0.00000000002527942770321278m };
-            yield return new object[] { 60596869520933069.9m, 8063773.1275438997671m, 5700076.9722872002614m };
+            yield return new object[]
+            {
+                decimal.MaxValue,
+                2004094637636.6280382536104438m,
+                1980741879937.1051521151154118m,
+            };
+            yield return new object[]
+            {
+                decimal.MaxValue,
+                new decimal(0, 0, 1, false, 28),
+                0.0000000013968756053316206592m,
+            };
+            yield return new object[]
+            {
+                decimal.MaxValue,
+                new decimal(0, 1, 0, false, 28),
+                0.0000000000000000004026531840m,
+            };
+            yield return new object[]
+            {
+                decimal.MaxValue,
+                new decimal(1, 0, 0, false, 28),
+                0.0000000000000000000000000000m,
+            };
+            yield return new object[]
+            {
+                5m,
+                0.0000000000000000000000000003m,
+                0.0000000000000000000000000002m,
+            };
+            yield return new object[]
+            {
+                5.94499443m,
+                0.0000000000000000000000000007m,
+                0.0000000000000000000000000005m,
+            };
+            yield return new object[]
+            {
+                1667m,
+                325.66574961026426932314500573m,
+                38.67125194867865338427497135m,
+            };
+            yield return new object[]
+            {
+                1667m,
+                0.00000000013630700224712809m,
+                0.00000000002527942770321278m,
+            };
+            yield return new object[]
+            {
+                60596869520933069.9m,
+                8063773.1275438997671m,
+                5700076.9722872002614m,
+            };
         }
 
         [Theory]
@@ -1133,7 +1885,6 @@ namespace System.Tests
             Assert.Equal(expected, decimal.Remainder(d1, d2));
         }
 
-
         public static IEnumerable<object[]> Remainder_Invalid_TestData()
         {
             yield return new object[] { 5m, 0m };
@@ -1141,7 +1892,10 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Remainder_Invalid_TestData))]
-        public static void Remainder_ZeroDenominator_ThrowsDivideByZeroException(decimal d1, decimal d2)
+        public static void Remainder_ZeroDenominator_ThrowsDivideByZeroException(
+            decimal d1,
+            decimal d2
+        )
         {
             Assert.Throws<DivideByZeroException>(() => d1 % d2);
             Assert.Throws<DivideByZeroException>(() => decimal.Remainder(d1, d2));
@@ -1201,24 +1955,77 @@ namespace System.Tests
             yield return new object[] { 123.456789m, 4, MidpointRounding.ToEven, 123.4568m };
             yield return new object[] { 123.456789m, 4, MidpointRounding.AwayFromZero, 123.4568m };
             yield return new object[] { 123.456789m, 6, MidpointRounding.ToEven, 123.456789m };
-            yield return new object[] { 123.456789m, 6, MidpointRounding.AwayFromZero, 123.456789m };
+            yield return new object[]
+            {
+                123.456789m,
+                6,
+                MidpointRounding.AwayFromZero,
+                123.456789m,
+            };
             yield return new object[] { 123.456789m, 8, MidpointRounding.ToEven, 123.456789m };
-            yield return new object[] { 123.456789m, 8, MidpointRounding.AwayFromZero, 123.456789m };
+            yield return new object[]
+            {
+                123.456789m,
+                8,
+                MidpointRounding.AwayFromZero,
+                123.456789m,
+            };
             yield return new object[] { -123.456m, 0, MidpointRounding.ToEven, -123m };
             yield return new object[] { -123.456m, 0, MidpointRounding.AwayFromZero, -123m };
             yield return new object[] { -123.0000000m, 3, MidpointRounding.ToEven, -123.000m };
-            yield return new object[] { -123.0000000m, 3, MidpointRounding.AwayFromZero, -123.000m };
+            yield return new object[]
+            {
+                -123.0000000m,
+                3,
+                MidpointRounding.AwayFromZero,
+                -123.000m,
+            };
             yield return new object[] { -123.0000000m, 11, MidpointRounding.ToEven, -123.0000000m };
-            yield return new object[] { -123.0000000m, 11, MidpointRounding.AwayFromZero, -123.0000000m };
-            yield return new object[] { -9999999999.9999999999, 9, MidpointRounding.ToEven, -10000000000.000000000m };
-            yield return new object[] { -9999999999.9999999999, 9, MidpointRounding.AwayFromZero, -10000000000.000000000m };
-            yield return new object[] { -9999999999.9999999999, 10, MidpointRounding.ToEven, -9999999999.9999999999 };
-            yield return new object[] { -9999999999.9999999999, 10, MidpointRounding.AwayFromZero, -9999999999.9999999999 };
+            yield return new object[]
+            {
+                -123.0000000m,
+                11,
+                MidpointRounding.AwayFromZero,
+                -123.0000000m,
+            };
+            yield return new object[]
+            {
+                -9999999999.9999999999,
+                9,
+                MidpointRounding.ToEven,
+                -10000000000.000000000m,
+            };
+            yield return new object[]
+            {
+                -9999999999.9999999999,
+                9,
+                MidpointRounding.AwayFromZero,
+                -10000000000.000000000m,
+            };
+            yield return new object[]
+            {
+                -9999999999.9999999999,
+                10,
+                MidpointRounding.ToEven,
+                -9999999999.9999999999,
+            };
+            yield return new object[]
+            {
+                -9999999999.9999999999,
+                10,
+                MidpointRounding.AwayFromZero,
+                -9999999999.9999999999,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Round_Digit_Mid_Valid_TestData))]
-        public static void Round_DigitsMode_ReturnsExpected(decimal d, int digits, MidpointRounding mode, decimal expected)
+        public static void Round_DigitsMode_ReturnsExpected(
+            decimal d,
+            int digits,
+            MidpointRounding mode,
+            decimal expected
+        )
         {
             Assert.Equal(expected, decimal.Round(d, digits, mode));
         }
@@ -1251,7 +2058,11 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Round_Mid_Valid_TestData))]
-        public void Round_MidpointRounding_ReturnsExpected(decimal d, MidpointRounding mode, decimal expected)
+        public void Round_MidpointRounding_ReturnsExpected(
+            decimal d,
+            MidpointRounding mode,
+            decimal expected
+        )
         {
             Assert.Equal(expected, decimal.Round(d, mode));
         }
@@ -1261,8 +2072,14 @@ namespace System.Tests
         [InlineData(29)]
         public void Round_InvalidDecimals_ThrowsArgumentOutOfRangeException(int decimals)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("decimals", () => decimal.Round(1, decimals));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("decimals", () => decimal.Round(1, decimals, MidpointRounding.AwayFromZero));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "decimals",
+                () => decimal.Round(1, decimals)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "decimals",
+                () => decimal.Round(1, decimals, MidpointRounding.AwayFromZero)
+            );
         }
 
         public static IEnumerable<object[]> Subtract_Valid_TestData()
@@ -1276,14 +2093,39 @@ namespace System.Tests
             yield return new object[] { decimal.MaxValue, decimal.Zero, decimal.MaxValue };
             yield return new object[] { decimal.MinValue, decimal.Zero, decimal.MinValue };
             yield return new object[] { 79228162514264337593543950330m, -5, decimal.MaxValue };
-            yield return new object[] { 79228162514264337593543950330m, 5, 79228162514264337593543950325m };
+            yield return new object[]
+            {
+                79228162514264337593543950330m,
+                5,
+                79228162514264337593543950325m,
+            };
             yield return new object[] { -79228162514264337593543950330m, 5, decimal.MinValue };
-            yield return new object[] { -79228162514264337593543950330m, -5, -79228162514264337593543950325m };
+            yield return new object[]
+            {
+                -79228162514264337593543950330m,
+                -5,
+                -79228162514264337593543950325m,
+            };
             yield return new object[] { 1234.5678m, 0.00009m, 1234.56771m };
             yield return new object[] { -1234.5678m, 0.00009m, -1234.56789m };
-            yield return new object[] { 0.1111111111111111111111111111m, 0.1111111111111111111111111111m, 0 };
-            yield return new object[] { 0.2222222222222222222222222222m, 0.1111111111111111111111111111m, 0.1111111111111111111111111111m };
-            yield return new object[] { 1.1111111111111111111111111110m, 0.5555555555555555555555555555m, 0.5555555555555555555555555555m };
+            yield return new object[]
+            {
+                0.1111111111111111111111111111m,
+                0.1111111111111111111111111111m,
+                0,
+            };
+            yield return new object[]
+            {
+                0.2222222222222222222222222222m,
+                0.1111111111111111111111111111m,
+                0.1111111111111111111111111111m,
+            };
+            yield return new object[]
+            {
+                1.1111111111111111111111111110m,
+                0.5555555555555555555555555555m,
+                0.5555555555555555555555555555m,
+            };
         }
 
         [Theory]
@@ -1340,8 +2182,12 @@ namespace System.Tests
         [Fact]
         public void ToOACurrency_InvalidAsLong_ThrowsOverflowException()
         {
-            Assert.Throws<OverflowException>(() => decimal.ToOACurrency(new decimal(long.MaxValue) + 1));
-            Assert.Throws<OverflowException>(() => decimal.ToOACurrency(new decimal(long.MinValue) - 1));
+            Assert.Throws<OverflowException>(() =>
+                decimal.ToOACurrency(new decimal(long.MaxValue) + 1)
+            );
+            Assert.Throws<OverflowException>(() =>
+                decimal.ToOACurrency(new decimal(long.MinValue) - 1)
+            );
         }
 
         [Fact]
@@ -1528,13 +2374,31 @@ namespace System.Tests
         {
             foreach (NumberFormatInfo defaultFormat in new[] { null, NumberFormatInfo.CurrentInfo })
             {
-                yield return new object[] { decimal.MinValue, "G", defaultFormat, "-79228162514264337593543950335" };
+                yield return new object[]
+                {
+                    decimal.MinValue,
+                    "G",
+                    defaultFormat,
+                    "-79228162514264337593543950335",
+                };
                 yield return new object[] { (decimal)-4567, "G", defaultFormat, "-4567" };
-                yield return new object[] { (decimal)-4567.89101, "G", defaultFormat, "-4567.89101" };
+                yield return new object[]
+                {
+                    (decimal)-4567.89101,
+                    "G",
+                    defaultFormat,
+                    "-4567.89101",
+                };
                 yield return new object[] { (decimal)0, "G", defaultFormat, "0" };
                 yield return new object[] { (decimal)4567, "G", defaultFormat, "4567" };
                 yield return new object[] { (decimal)4567.89101, "G", defaultFormat, "4567.89101" };
-                yield return new object[] { decimal.MaxValue, "G", defaultFormat, "79228162514264337593543950335" };
+                yield return new object[]
+                {
+                    decimal.MaxValue,
+                    "G",
+                    defaultFormat,
+                    "79228162514264337593543950335",
+                };
 
                 yield return new object[] { decimal.MinusOne, "G", defaultFormat, "-1" };
                 yield return new object[] { decimal.Zero, "G", defaultFormat, "0" };
@@ -1543,15 +2407,44 @@ namespace System.Tests
                 yield return new object[] { (decimal)2468, "N", defaultFormat, "2,468.00" };
 
                 yield return new object[] { (decimal)2467, "[#-##-#]", defaultFormat, "[2-46-7]" };
-
             }
 
             NumberFormatInfo invariantFormat = NumberFormatInfo.InvariantInfo;
-            yield return new object[] { 32.5m, "C100", invariantFormat, "\u00A432.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { 32.5m, "P100", invariantFormat, "3,250.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %" };
-            yield return new object[] { 32.5m, "E100", invariantFormat, "3.2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001" };
-            yield return new object[] { 32.5m, "F100", invariantFormat, "32.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { 32.5m, "N100", invariantFormat, "32.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
+            yield return new object[]
+            {
+                32.5m,
+                "C100",
+                invariantFormat,
+                "\u00A432.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            };
+            yield return new object[]
+            {
+                32.5m,
+                "P100",
+                invariantFormat,
+                "3,250.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %",
+            };
+            yield return new object[]
+            {
+                32.5m,
+                "E100",
+                invariantFormat,
+                "3.2500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001",
+            };
+            yield return new object[]
+            {
+                32.5m,
+                "F100",
+                invariantFormat,
+                "32.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            };
+            yield return new object[]
+            {
+                32.5m,
+                "N100",
+                invariantFormat,
+                "32.5000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            };
 
             // Changing the negative pattern doesn't do anything without also passing in a format string
             var customFormat1 = new NumberFormatInfo();
@@ -1581,7 +2474,7 @@ namespace System.Tests
                 PercentSymbol = "@",
                 PercentGroupSeparator = ",",
                 PercentDecimalSeparator = ".",
-                PercentDecimalDigits = 5
+                PercentDecimalDigits = 5,
             };
             yield return new object[] { (decimal)123, "E", customFormat4, "1~230000E&002" };
             yield return new object[] { (decimal)123, "F", customFormat4, "123~00" };
@@ -1595,12 +2488,22 @@ namespace System.Tests
             {
                 foreach (object[] testdata in ToString_TestData())
                 {
-                    ToString((decimal)testdata[0], (string)testdata[1], (IFormatProvider)testdata[2], (string)testdata[3]);
+                    ToString(
+                        (decimal)testdata[0],
+                        (string)testdata[1],
+                        (IFormatProvider)testdata[2],
+                        (string)testdata[3]
+                    );
                 }
             }
         }
 
-        private static void ToString(decimal f, string format, IFormatProvider provider, string expected)
+        private static void ToString(
+            decimal f,
+            string format,
+            IFormatProvider provider,
+            string expected
+        )
         {
             bool isDefaultProvider = provider == null;
             if (string.IsNullOrEmpty(format) || format.ToUpperInvariant() == "G")
@@ -1616,11 +2519,23 @@ namespace System.Tests
             {
                 Assert.Equal(expected.Replace('e', 'E'), f.ToString(format.ToUpperInvariant())); // If format is upper case, then exponents are printed in upper case
                 Assert.Equal(expected.Replace('E', 'e'), f.ToString(format.ToLowerInvariant())); // If format is lower case, then exponents are printed in lower case
-                Assert.Equal(expected.Replace('e', 'E'), f.ToString(format.ToUpperInvariant(), null));
-                Assert.Equal(expected.Replace('E', 'e'), f.ToString(format.ToLowerInvariant(), null));
+                Assert.Equal(
+                    expected.Replace('e', 'E'),
+                    f.ToString(format.ToUpperInvariant(), null)
+                );
+                Assert.Equal(
+                    expected.Replace('E', 'e'),
+                    f.ToString(format.ToLowerInvariant(), null)
+                );
             }
-            Assert.Equal(expected.Replace('e', 'E'), f.ToString(format.ToUpperInvariant(), provider));
-            Assert.Equal(expected.Replace('E', 'e'), f.ToString(format.ToLowerInvariant(), provider));
+            Assert.Equal(
+                expected.Replace('e', 'E'),
+                f.ToString(format.ToUpperInvariant(), provider)
+            );
+            Assert.Equal(
+                expected.Replace('E', 'e'),
+                f.ToString(format.ToLowerInvariant(), provider)
+            );
         }
 
         [Fact]
@@ -1642,6 +2557,7 @@ namespace System.Tests
             string dString = d.ToString(CultureInfo.InvariantCulture);
             Assert.Equal(input, dString);
         }
+
         public static IEnumerable<object[]> Truncate_TestData()
         {
             yield return new object[] { 123m, 123m };
@@ -1708,7 +2624,11 @@ namespace System.Tests
                         int expected = b1.CompareTo(bigDecimals[j]);
                         int actual = d1.CompareTo(d2);
                         if (expected != actual)
-                            throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " CMP " + d2);
+                            throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                                expected,
+                                actual,
+                                d1 + " CMP " + d2
+                            );
                     }
                 }
             }
@@ -1736,7 +2656,11 @@ namespace System.Tests
                             try
                             {
                                 decimal actual = d1 + d2;
-                                throw Xunit.Sdk.EqualException.ForMismatchedValues(typeof(OverflowException), actual, d1 + " + " + d2);
+                                throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                                    typeof(OverflowException),
+                                    actual,
+                                    d1 + " + " + d2
+                                );
                             }
                             catch (OverflowException) { }
                         }
@@ -1744,8 +2668,16 @@ namespace System.Tests
                             unsafe
                             {
                                 decimal actual = d1 + d2;
-                                if (expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift) || expected.CompareTo(new BigDecimal(actual)) != 0)
-                                    throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " + " + d2);
+                                if (
+                                    expected.Scale
+                                        != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
+                                    || expected.CompareTo(new BigDecimal(actual)) != 0
+                                )
+                                    throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                                        expected,
+                                        actual,
+                                        d1 + " + " + d2
+                                    );
                             }
                     }
                 }
@@ -1774,7 +2706,11 @@ namespace System.Tests
                             try
                             {
                                 decimal actual = d1 * d2;
-                                throw Xunit.Sdk.EqualException.ForMismatchedValues(typeof(OverflowException), actual, d1 + " * " + d2);
+                                throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                                    typeof(OverflowException),
+                                    actual,
+                                    d1 + " * " + d2
+                                );
                             }
                             catch (OverflowException) { }
                         }
@@ -1782,8 +2718,16 @@ namespace System.Tests
                             unsafe
                             {
                                 decimal actual = d1 * d2;
-                                if (expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift) || expected.CompareTo(new BigDecimal(actual)) != 0)
-                                    throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " * " + d2);
+                                if (
+                                    expected.Scale
+                                        != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
+                                    || expected.CompareTo(new BigDecimal(actual)) != 0
+                                )
+                                    throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                                        expected,
+                                        actual,
+                                        d1 + " * " + d2
+                                    );
                             }
                     }
                 }
@@ -1814,7 +2758,11 @@ namespace System.Tests
                             try
                             {
                                 decimal actual = d1 / d2;
-                                throw Xunit.Sdk.EqualException.ForMismatchedValues(typeof(OverflowException), actual, d1 + " / " + d2);
+                                throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                                    typeof(OverflowException),
+                                    actual,
+                                    d1 + " / " + d2
+                                );
                             }
                             catch (OverflowException) { }
                         }
@@ -1822,8 +2770,16 @@ namespace System.Tests
                             unsafe
                             {
                                 decimal actual = d1 / d2;
-                                if (expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift) || expected.CompareTo(new BigDecimal(actual)) != 0)
-                                    throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " / " + d2);
+                                if (
+                                    expected.Scale
+                                        != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
+                                    || expected.CompareTo(new BigDecimal(actual)) != 0
+                                )
+                                    throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                                        expected,
+                                        actual,
+                                        d1 + " / " + d2
+                                    );
                             }
                     }
                 }
@@ -1851,13 +2807,25 @@ namespace System.Tests
                             decimal actual = d1 % d2;
                             unsafe
                             {
-                                if (expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift) || expected.CompareTo(new BigDecimal(actual)) != 0)
-                                    throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " % " + d2);
+                                if (
+                                    expected.Scale
+                                        != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
+                                    || expected.CompareTo(new BigDecimal(actual)) != 0
+                                )
+                                    throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                                        expected,
+                                        actual,
+                                        d1 + " % " + d2
+                                    );
                             }
                         }
                         catch (OverflowException actual)
                         {
-                            throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " % " + d2);
+                            throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                                expected,
+                                actual,
+                                d1 + " % " + d2
+                            );
                         }
                     }
                 }
@@ -1875,8 +2843,15 @@ namespace System.Tests
                 decimal actual = decimal.Floor(d1);
                 unsafe
                 {
-                    if (expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift) || expected.CompareTo(new BigDecimal(actual)) != 0)
-                        throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " Floor");
+                    if (
+                        expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
+                        || expected.CompareTo(new BigDecimal(actual)) != 0
+                    )
+                        throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                            expected,
+                            actual,
+                            d1 + " Floor"
+                        );
                 }
             }
         }
@@ -1892,8 +2867,15 @@ namespace System.Tests
                 decimal actual = decimal.Ceiling(d1);
                 unsafe
                 {
-                    if (expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift) || expected.CompareTo(new BigDecimal(actual)) != 0)
-                        throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " Ceiling");
+                    if (
+                        expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
+                        || expected.CompareTo(new BigDecimal(actual)) != 0
+                    )
+                        throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                            expected,
+                            actual,
+                            d1 + " Ceiling"
+                        );
                 }
             }
         }
@@ -1909,8 +2891,15 @@ namespace System.Tests
                 decimal actual = decimal.Truncate(d1);
                 unsafe
                 {
-                    if (expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift) || expected.CompareTo(new BigDecimal(actual)) != 0)
-                        throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " Truncate");
+                    if (
+                        expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
+                        || expected.CompareTo(new BigDecimal(actual)) != 0
+                    )
+                        throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                            expected,
+                            actual,
+                            d1 + " Truncate"
+                        );
                 }
             }
         }
@@ -1928,7 +2917,11 @@ namespace System.Tests
                     try
                     {
                         int actual = decimal.ToInt32(d1);
-                        throw Xunit.Sdk.EqualException.ForMismatchedValues(typeof(OverflowException), actual, d1 + " ToInt32");
+                        throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                            typeof(OverflowException),
+                            actual,
+                            d1 + " ToInt32"
+                        );
                     }
                     catch (OverflowException) { }
                 }
@@ -1936,7 +2929,11 @@ namespace System.Tests
                 {
                     int actual = decimal.ToInt32(d1);
                     if (expected != actual)
-                        throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " ToInt32");
+                        throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                            expected,
+                            actual,
+                            d1 + " ToInt32"
+                        );
                 }
             }
         }
@@ -1954,7 +2951,11 @@ namespace System.Tests
                     try
                     {
                         long actual = decimal.ToOACurrency(d1);
-                        throw Xunit.Sdk.EqualException.ForMismatchedValues(typeof(OverflowException), actual, d1 + " ToOACurrency");
+                        throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                            typeof(OverflowException),
+                            actual,
+                            d1 + " ToOACurrency"
+                        );
                     }
                     catch (OverflowException) { }
                 }
@@ -1962,7 +2963,11 @@ namespace System.Tests
                 {
                     long actual = decimal.ToOACurrency(d1);
                     if (expected != actual)
-                        throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " ToOACurrency");
+                        throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                            expected,
+                            actual,
+                            d1 + " ToOACurrency"
+                        );
                 }
             }
         }
@@ -1977,13 +2982,19 @@ namespace System.Tests
                 BigDecimal b1 = bigDecimals[i];
                 for (int j = 0; j <= 28; j++)
                 {
-
                     BigDecimal expected = b1.Round(j);
                     decimal actual = decimal.Round(d1, j);
                     unsafe
                     {
-                        if (expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift) || expected.CompareTo(new BigDecimal(actual)) != 0)
-                            throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " Round(" + j + ")");
+                        if (
+                            expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
+                            || expected.CompareTo(new BigDecimal(actual)) != 0
+                        )
+                            throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                                expected,
+                                actual,
+                                d1 + " Round(" + j + ")"
+                            );
                     }
                 }
             }
@@ -1999,13 +3010,19 @@ namespace System.Tests
                 BigDecimal b1 = bigDecimals[i];
                 for (int j = 0; j <= 28; j++)
                 {
-
                     BigDecimal expected = b1.RoundAwayFromZero(j);
                     decimal actual = decimal.Round(d1, j, MidpointRounding.AwayFromZero);
                     unsafe
                     {
-                        if (expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift) || expected.CompareTo(new BigDecimal(actual)) != 0)
-                            throw Xunit.Sdk.EqualException.ForMismatchedValues(expected, actual, d1 + " RoundAwayFromZero(" + j + ")");
+                        if (
+                            expected.Scale != (byte)(*(uint*)&actual >> BigDecimal.ScaleShift)
+                            || expected.CompareTo(new BigDecimal(actual)) != 0
+                        )
+                            throw Xunit.Sdk.EqualException.ForMismatchedValues(
+                                expected,
+                                actual,
+                                d1 + " RoundAwayFromZero(" + j + ")"
+                            );
                     }
                 }
             }
@@ -2018,7 +3035,10 @@ namespace System.Tests
             foreach (decimal d in GetRandomData(out _, hash: true))
             {
                 string value = d.ToString(CultureInfo.InvariantCulture);
-                string key = value[value.Length - 1] == '0' && value.Contains('.') ? value.AsSpan().TrimEnd('0').TrimEnd('.').ToString() : value;
+                string key =
+                    value[value.Length - 1] == '0' && value.Contains('.')
+                        ? value.AsSpan().TrimEnd('0').TrimEnd('.').ToString()
+                        : value;
                 int hash = d.GetHashCode();
                 if (!dict.TryGetValue(key, out var ex))
                 {
@@ -2026,7 +3046,9 @@ namespace System.Tests
                 }
                 else if (ex.hash != hash)
                 {
-                    throw new Xunit.Sdk.XunitException($"Decimal {key} has multiple hash codes: {ex.hash} ({ex.value}) and {hash} ({value})");
+                    throw new Xunit.Sdk.XunitException(
+                        $"Decimal {key} has multiple hash codes: {ex.hash} ({ex.value}) and {hash} ({value})"
+                    );
                 }
             }
         }
@@ -2034,40 +3056,57 @@ namespace System.Tests
         static decimal[] GetRandomData(out BigDecimal[] bigDecimals, bool hash = false)
         {
             // some static data to test the limits
-            var list = new List<decimal> { new decimal(0, 0, 0, true, 0), decimal.Zero, decimal.MinusOne, decimal.One, decimal.MinValue, decimal.MaxValue,
-                new decimal(1, 0, 0, true, 28), new decimal(1, 0, 0, false, 28),
-                new decimal(123877878, -16789245, 1086421879, true, 16), new decimal(527635459, -80701438, 1767087216, true, 24), new decimal(253511426, -909347550, -753557281, false, 12) };
+            var list = new List<decimal>
+            {
+                new decimal(0, 0, 0, true, 0),
+                decimal.Zero,
+                decimal.MinusOne,
+                decimal.One,
+                decimal.MinValue,
+                decimal.MaxValue,
+                new decimal(1, 0, 0, true, 28),
+                new decimal(1, 0, 0, false, 28),
+                new decimal(123877878, -16789245, 1086421879, true, 16),
+                new decimal(527635459, -80701438, 1767087216, true, 24),
+                new decimal(253511426, -909347550, -753557281, false, 12),
+            };
 
             // ~1000 different random decimals covering every scale and sign with ~20 different bitpatterns each
             var rnd = new Random(42);
             var unique = new HashSet<string>();
             for (byte scale = 0; scale <= 28; scale++)
-                for (int sign = 0; sign <= 1; sign++)
-                    for (int high = 0; high <= 96; high = IncBitLimits(high))
-                        for (int low = 0; low < high || (high | low) == 0; low = IncBitLimits(high))
-                        {
-                            var d = new decimal(GetDigits(low, high), GetDigits(low - 32, high - 32), GetDigits(low - 64, high - 64), sign != 0, scale);
-                            if (!unique.Add(d.ToString(CultureInfo.InvariantCulture)))
-                                continue; // skip duplicates
-                            list.Add(d);
+            for (int sign = 0; sign <= 1; sign++)
+            for (int high = 0; high <= 96; high = IncBitLimits(high))
+            for (int low = 0; low < high || (high | low) == 0; low = IncBitLimits(high))
+            {
+                var d = new decimal(
+                    GetDigits(low, high),
+                    GetDigits(low - 32, high - 32),
+                    GetDigits(low - 64, high - 64),
+                    sign != 0,
+                    scale
+                );
+                if (!unique.Add(d.ToString(CultureInfo.InvariantCulture)))
+                    continue; // skip duplicates
+                list.Add(d);
 
-                            if (hash)
-                            {
-                                // generate all possible variants of the number up-to max decimal scale
-                                for (byte lastScale = scale; lastScale < 28;)
-                                {
-                                    d *= 1.0m;
-                                    unsafe
-                                    {
-                                        byte curScale = (byte)(*(uint*)&d >> BigDecimal.ScaleShift);
-                                        if (curScale <= lastScale)
-                                            break;
-                                        lastScale = curScale;
-                                    }
-                                    list.Add(d);
-                                }
-                            }
+                if (hash)
+                {
+                    // generate all possible variants of the number up-to max decimal scale
+                    for (byte lastScale = scale; lastScale < 28; )
+                    {
+                        d *= 1.0m;
+                        unsafe
+                        {
+                            byte curScale = (byte)(*(uint*)&d >> BigDecimal.ScaleShift);
+                            if (curScale <= lastScale)
+                                break;
+                            lastScale = curScale;
                         }
+                        list.Add(d);
+                    }
+                }
+            }
             decimal[] decimalValues = list.ToArray();
             bigDecimals = hash ? null : Array.ConvertAll(decimalValues, d => new BigDecimal(d));
             return decimalValues;
@@ -2097,7 +3136,8 @@ namespace System.Tests
                 uint res = 0;
                 if (high <= 32)
                     res = 1u << (high - 1);
-                res |= (uint)Math.Ceiling((uint.MaxValue >> Math.Max(0, 32 - high)) * rnd.NextDouble());
+                res |= (uint)
+                    Math.Ceiling((uint.MaxValue >> Math.Max(0, 32 - high)) * rnd.NextDouble());
                 if (low > 0)
                     res = (res >> low) << low;
                 return (int)res;
@@ -2136,7 +3176,10 @@ namespace System.Tests
                 Scale = scale;
             }
 
-            static readonly BigInteger[] Pow10 = Enumerable.Range(0, 60).Select(i => BigInteger.Pow(10, i)).ToArray();
+            static readonly BigInteger[] Pow10 = Enumerable
+                .Range(0, 60)
+                .Select(i => BigInteger.Pow(10, i))
+                .ToArray();
 
             public int CompareTo(BigDecimal value)
             {
@@ -2152,7 +3195,8 @@ namespace System.Tests
             public BigDecimal Add(BigDecimal value, out bool overflow)
             {
                 int sd = Scale - value.Scale;
-                BigInteger a = Integer, b = value.Integer;
+                BigInteger a = Integer,
+                    b = value.Integer;
                 if (sd > 0)
                     b *= Pow10[sd];
                 else if (sd < 0)
@@ -2172,7 +3216,11 @@ namespace System.Tests
                 {
                     overflow = false;
                     // VarDecMul quirk: multipling by zero results in a scaled zero (e.g., 0.000) only if the intermediate scale is <=47 and both inputs fit in 32 bits!
-                    if (scale <= 47 && BigInteger.Abs(Integer) <= MaxInteger32 && BigInteger.Abs(value.Integer) <= MaxInteger32)
+                    if (
+                        scale <= 47
+                        && BigInteger.Abs(Integer) <= MaxInteger32
+                        && BigInteger.Abs(value.Integer) <= MaxInteger32
+                    )
                         scale = Math.Min(scale, 28);
                     else
                         scale = 0;
@@ -2181,7 +3229,13 @@ namespace System.Tests
                 {
                     overflow = ScaleResult(ref res, ref scale);
                     // VarDecMul quirk: rounding to zero results in a scaled zero (e.g., 0.000), except if the intermediate scale is >47 and both inputs fit in 32 bits!
-                    if (res.IsZero && scale == 28 && Scale + value.Scale > 47 && BigInteger.Abs(Integer) <= MaxInteger32 && BigInteger.Abs(value.Integer) <= MaxInteger32)
+                    if (
+                        res.IsZero
+                        && scale == 28
+                        && Scale + value.Scale > 47
+                        && BigInteger.Abs(Integer) <= MaxInteger32
+                        && BigInteger.Abs(value.Integer) <= MaxInteger32
+                    )
                         scale = 0;
                 }
                 return new BigDecimal(res, (byte)scale);
@@ -2247,7 +3301,8 @@ namespace System.Tests
                 }
 
                 int sd = Scale - den.Scale;
-                BigInteger a = Integer, b = den.Integer;
+                BigInteger a = Integer,
+                    b = den.Integer;
                 if (sd > 0)
                     b *= Pow10[sd];
                 else if (sd < 0)
@@ -2256,16 +3311,19 @@ namespace System.Tests
                 return new BigDecimal(a % b, Math.Max(Scale, den.Scale));
             }
 
-            public static BigDecimal operator -(BigDecimal value) => new BigDecimal(-value.Integer, value.Scale);
+            public static BigDecimal operator -(BigDecimal value) =>
+                new BigDecimal(-value.Integer, value.Scale);
 
-            static readonly BigInteger MaxInteger = (new BigInteger(ulong.MaxValue) << 32) | uint.MaxValue;
+            static readonly BigInteger MaxInteger =
+                (new BigInteger(ulong.MaxValue) << 32) | uint.MaxValue;
             static readonly BigInteger MaxInteger32 = uint.MaxValue;
             static readonly double Log2To10 = Math.Log(2) / Math.Log(10);
 
             /// <summary>
             /// Returns Log10 for the given number, offset by 96bits.
             /// </summary>
-            static int ScaleOverMaxInteger(BigInteger abs) => abs.IsZero ? -28 : (int)(((int)BigInteger.Log(abs, 2) - 95) * Log2To10);
+            static int ScaleOverMaxInteger(BigInteger abs) =>
+                abs.IsZero ? -28 : (int)(((int)BigInteger.Log(abs, 2) - 95) * Log2To10);
 
             /// <summary>
             /// See if we need to scale the result to fit it in 96 bits.
@@ -2327,6 +3385,7 @@ namespace System.Tests
             }
 
             public BigDecimal Floor() => FloorCeiling(Integer.Sign < 0);
+
             public BigDecimal Ceiling() => FloorCeiling(Integer.Sign > 0);
 
             BigDecimal FloorCeiling(bool up)
@@ -2339,7 +3398,8 @@ namespace System.Tests
                 return new BigDecimal(res, 0);
             }
 
-            public BigDecimal Truncate() => Scale == 0 ? this : new BigDecimal(Integer / Pow10[Scale], 0);
+            public BigDecimal Truncate() =>
+                Scale == 0 ? this : new BigDecimal(Integer / Pow10[Scale], 0);
 
             public int ToInt32(out bool expectedOverflow)
             {
@@ -2412,11 +3472,18 @@ namespace System.Tests
 
                     try
                     {
-                        NumberFormatTestHelper.TryFormatNumberTest(localI, localFormat, localProvider, localExpected);
+                        NumberFormatTestHelper.TryFormatNumberTest(
+                            localI,
+                            localFormat,
+                            localProvider,
+                            localExpected
+                        );
                     }
                     catch (Exception exc)
                     {
-                        throw new Exception($"Failed on `{localI}`, `{localFormat}`, `{localProvider}`, `{localExpected}`. {exc}");
+                        throw new Exception(
+                            $"Failed on `{localI}`, `{localFormat}`, `{localProvider}`, `{localExpected}`. {exc}"
+                        );
                     }
                 }
             }

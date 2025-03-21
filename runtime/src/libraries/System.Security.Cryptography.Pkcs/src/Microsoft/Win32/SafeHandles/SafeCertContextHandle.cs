@@ -4,17 +4,14 @@
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-
 using static Interop.Crypt32;
 
 namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeCertContextHandle : SafeHandle
     {
-        internal SafeCertContextHandle(IntPtr handle) :
-            base(handle, ownsHandle: true)
-        {
-        }
+        internal SafeCertContextHandle(IntPtr handle)
+            : base(handle, ownsHandle: true) { }
 
         internal unsafe CERT_CONTEXT* DangerousGetCertContext()
         {

@@ -18,11 +18,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 {
     internal static class DataTipInfoGetter
     {
-        internal static async Task<DebugDataTipInfo> GetInfoAsync(Document document, int position, CancellationToken cancellationToken)
+        internal static async Task<DebugDataTipInfo> GetInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
-                var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+                var root = await document
+                    .GetSyntaxRootAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 if (root == null)
                 {
                     return default;
@@ -43,7 +49,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                     // literal they're hovering over.
                     // Partial semantics should always be sufficient because the (unconverted) type
                     // of a literal can always easily be determined.
-                    var (_, semanticModel) = await document.GetFullOrPartialSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                    var (_, semanticModel) = await document
+                        .GetFullOrPartialSemanticModelAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     var type = semanticModel.GetTypeInfo(expression, cancellationToken).Type;
                     return type == null
                         ? default
@@ -61,7 +69,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
 
                     // NOTE: There may not be an ExpressionSyntax corresponding to the range we want.
                     // For example, for input a?.$$B?.C, we want span [|a?.B|]?.C.
-                    return new DebugDataTipInfo(TextSpan.FromBounds(curr.SpanStart, expression.Span.End), text: null);
+                    return new DebugDataTipInfo(
+                        TextSpan.FromBounds(curr.SpanStart, expression.Span.End),
+                        text: null
+                    );
                 }
 
                 // NOTE(cyrusn): This behavior is to mimic what we did in Dev10, I'm not sure if it's
@@ -76,7 +87,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Debugging
                 {
                     // If the user is hovering over 'var', then pass back the full type name that 'var'
                     // binds to.
-                    var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                    var semanticModel = await document
+                        .GetSemanticModelAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     var type = semanticModel.GetTypeInfo(typeSyntax, cancellationToken).Type;
                     if (type != null)
                     {

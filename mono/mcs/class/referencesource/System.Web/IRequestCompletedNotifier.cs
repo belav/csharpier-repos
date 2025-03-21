@@ -4,14 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web {
+namespace System.Web
+{
     using System;
 
     // Abstraction that allows test code to see if a request has been completed
 
-    internal interface IRequestCompletedNotifier {
-
+    internal interface IRequestCompletedNotifier
+    {
         bool IsRequestCompleted { get; }
-
     }
 }

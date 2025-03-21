@@ -26,14 +26,26 @@ namespace System.Text.Tests
         [InlineData(int.MaxValue, 1073741825)]
         public void GetMaxCharCount(int byteCount, int expected)
         {
-            Assert.Equal(expected, new UTF32Encoding(true, false, false).GetMaxCharCount(byteCount));
+            Assert.Equal(
+                expected,
+                new UTF32Encoding(true, false, false).GetMaxCharCount(byteCount)
+            );
             Assert.Equal(expected, new UTF32Encoding(true, true, false).GetMaxCharCount(byteCount));
             Assert.Equal(expected, new UTF32Encoding(true, false, true).GetMaxCharCount(byteCount));
             Assert.Equal(expected, new UTF32Encoding(true, true, true).GetMaxCharCount(byteCount));
             Assert.Equal(expected, new UTF32Encoding(false, true, true).GetMaxCharCount(byteCount));
-            Assert.Equal(expected, new UTF32Encoding(false, true, false).GetMaxCharCount(byteCount));
-            Assert.Equal(expected, new UTF32Encoding(false, false, true).GetMaxCharCount(byteCount));
-            Assert.Equal(expected, new UTF32Encoding(false, false, false).GetMaxCharCount(byteCount));
+            Assert.Equal(
+                expected,
+                new UTF32Encoding(false, true, false).GetMaxCharCount(byteCount)
+            );
+            Assert.Equal(
+                expected,
+                new UTF32Encoding(false, false, true).GetMaxCharCount(byteCount)
+            );
+            Assert.Equal(
+                expected,
+                new UTF32Encoding(false, false, false).GetMaxCharCount(byteCount)
+            );
         }
     }
 }

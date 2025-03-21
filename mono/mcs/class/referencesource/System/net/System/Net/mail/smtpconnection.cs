@@ -1,28 +1,28 @@
 namespace System.Net.Mail
 {
     using System;
-    using System.Net;
-    using System.Security.Cryptography.X509Certificates;
-    using System.IO;
-    using System.Threading;
-    using System.Globalization;
-    using System.Security.Principal;
-    using System.Security.Permissions;
-    using System.Security.Authentication.ExtendedProtection;
     using System.Diagnostics;
-
-
+    using System.Globalization;
+    using System.IO;
+    using System.Net;
+    using System.Security.Authentication.ExtendedProtection;
+    using System.Security.Cryptography.X509Certificates;
+    using System.Security.Permissions;
+    using System.Security.Principal;
+    using System.Threading;
 
     class SmtpConnection
     {
-
-        private static PooledStream CreateSmtpPooledStream(ConnectionPool pool)         {
+        private static PooledStream CreateSmtpPooledStream(ConnectionPool pool)
+        {
             return (PooledStream)new SmtpPooledStream(pool, TimeSpan.MaxValue, false);
         }
 
-
-        private static readonly CreateConnectionDelegate m_CreateConnectionCallback = new CreateConnectionDelegate(CreateSmtpPooledStream);
-        private static readonly ContextCallback s_AuthenticateCallback = new ContextCallback(AuthenticateCallback);
+        private static readonly CreateConnectionDelegate m_CreateConnectionCallback =
+            new CreateConnectionDelegate(CreateSmtpPooledStream);
+        private static readonly ContextCallback s_AuthenticateCallback = new ContextCallback(
+            AuthenticateCallback
+        );
 
         BufferBuilder bufferBuilder = new BufferBuilder();
         bool isConnected;
@@ -37,6 +37,7 @@ namespace System.Net.Mail
         // accounts for the '=' or ' ' character after AUTH
         const int sizeOfAuthString = 5;
         const int sizeOfAuthExtension = 4;
+
         // string comparisons for these MUST be case-insensitive
         const string authExtension = "auth";
         const string authLogin = "login";
@@ -57,7 +58,12 @@ namespace System.Net.Mail
         bool enableSsl;
         X509CertificateCollection clientCertificates;
 
-        internal SmtpConnection(SmtpTransport parent, SmtpClient client, ICredentialsByHost credentials, ISmtpAuthenticationModule[] authenticationModules)
+        internal SmtpConnection(
+            SmtpTransport parent,
+            SmtpClient client,
+            ICredentialsByHost credentials,
+            ISmtpAuthenticationModule[] authenticationModules
+        )
         {
             this.client = client;
             this.credentials = credentials;
@@ -68,26 +74,17 @@ namespace System.Net.Mail
 
         internal BufferBuilder BufferBuilder
         {
-            get
-            {
-                return bufferBuilder;
-            }
+            get { return bufferBuilder; }
         }
 
         internal bool IsConnected
         {
-            get
-            {
-                return isConnected;
-            }
+            get { return isConnected; }
         }
 
         internal bool IsStreamOpen
         {
-            get
-            {
-                return isStreamOpen;
-            }
+            get { return isStreamOpen; }
         }
 
         internal bool DSNEnabled
@@ -103,18 +100,12 @@ namespace System.Net.Mail
 
         internal SmtpReplyReaderFactory Reader
         {
-            get
-            {
-                return responseReader;
-            }
+            get { return responseReader; }
         }
 
         internal bool EnableSsl
         {
-            get
-            {
-                return enableSsl;
-            }
+            get { return enableSsl; }
             set
             {
 #if !FEATURE_PAL
@@ -127,58 +118,71 @@ namespace System.Net.Mail
 
         internal int Timeout
         {
-            get
-            {
-                return timeout;
-            }
-            set
-            {
-                timeout = value;
-            }
+            get { return timeout; }
+            set { timeout = value; }
         }
-
 
         internal X509CertificateCollection ClientCertificates
         {
-            get
-            {
-                return clientCertificates;
-            }
-            set
-            {
-                clientCertificates = value;
-            }
+            get { return clientCertificates; }
+            set { clientCertificates = value; }
         }
 
         internal bool ServerSupportsEai
         {
-            get 
-            { 
+            get
+            {
                 SmtpPooledStream smtpPooledStream = (SmtpPooledStream)pooledStream;
                 Debug.Assert(smtpPooledStream != null, "PooledStream not yet set");
-                return smtpPooledStream.serverSupportsEai; 
+                return smtpPooledStream.serverSupportsEai;
             }
         }
 
-        internal IAsyncResult BeginGetConnection(ServicePoint servicePoint, ContextAwareResult outerResult, AsyncCallback callback, object state)
+        internal IAsyncResult BeginGetConnection(
+            ServicePoint servicePoint,
+            ContextAwareResult outerResult,
+            AsyncCallback callback,
+            object state
+        )
         {
-            if (Logging.On) Logging.Associate(Logging.Web, this, servicePoint);
+            if (Logging.On)
+                Logging.Associate(Logging.Web, this, servicePoint);
             Debug.Assert(servicePoint != null, "servicePoint was null from SmtpTransport");
 
             if (EnableSsl && ClientCertificates != null && ClientCertificates.Count > 0)
-                connectionPool = ConnectionPoolManager.GetConnectionPool(servicePoint, ClientCertificates.GetHashCode().ToString(NumberFormatInfo.InvariantInfo), m_CreateConnectionCallback);
+                connectionPool = ConnectionPoolManager.GetConnectionPool(
+                    servicePoint,
+                    ClientCertificates.GetHashCode().ToString(NumberFormatInfo.InvariantInfo),
+                    m_CreateConnectionCallback
+                );
             else
-                connectionPool = ConnectionPoolManager.GetConnectionPool(servicePoint, "", m_CreateConnectionCallback);
+                connectionPool = ConnectionPoolManager.GetConnectionPool(
+                    servicePoint,
+                    "",
+                    m_CreateConnectionCallback
+                );
 
-            ConnectAndHandshakeAsyncResult result = new ConnectAndHandshakeAsyncResult(this, servicePoint.Host, servicePoint.Port, outerResult, callback, state);
+            ConnectAndHandshakeAsyncResult result = new ConnectAndHandshakeAsyncResult(
+                this,
+                servicePoint.Host,
+                servicePoint.Port,
+                outerResult,
+                callback,
+                state
+            );
             result.GetConnection(false);
             return result;
         }
 
-
         internal IAsyncResult BeginFlush(AsyncCallback callback, object state)
         {
-            return pooledStream.UnsafeBeginWrite(bufferBuilder.GetBuffer(), 0, bufferBuilder.Length, callback, state);
+            return pooledStream.UnsafeBeginWrite(
+                bufferBuilder.GetBuffer(),
+                0,
+                bufferBuilder.Length,
+                callback,
+                state
+            );
         }
 
         internal void EndFlush(IAsyncResult result)
@@ -195,17 +199,26 @@ namespace System.Net.Mail
 
         internal void ReleaseConnection()
         {
-            if (!isClosed) {
-                lock (this) {
-
-                    if (!isClosed && pooledStream != null) {
-                        
+            if (!isClosed)
+            {
+                lock (this)
+                {
+                    if (!isClosed && pooledStream != null)
+                    {
                         //free cbt buffer
-                        if (channelBindingToken != null){
+                        if (channelBindingToken != null)
+                        {
                             channelBindingToken.Close();
                         }
 
-                        GlobalLog.Print("SmtpConnectiont#" + ValidationHelper.HashString(this) + "::Close Transport#" + ValidationHelper.HashString(parent) + "putting back pooledStream#" + ValidationHelper.HashString(pooledStream));
+                        GlobalLog.Print(
+                            "SmtpConnectiont#"
+                                + ValidationHelper.HashString(this)
+                                + "::Close Transport#"
+                                + ValidationHelper.HashString(parent)
+                                + "putting back pooledStream#"
+                                + ValidationHelper.HashString(pooledStream)
+                        );
 
                         ((SmtpPooledStream)pooledStream).previouslyUsed = true;
                         connectionPool.PutConnection(pooledStream, pooledStream.Owner, Timeout);
@@ -218,23 +231,38 @@ namespace System.Net.Mail
 
         internal void Abort()
         {
-            if (!isClosed) {
-                lock (this) {
-                    if (!isClosed && pooledStream != null){
+            if (!isClosed)
+            {
+                lock (this)
+                {
+                    if (!isClosed && pooledStream != null)
+                    {
+                        GlobalLog.Print(
+                            "SmtpConnectiont#"
+                                + ValidationHelper.HashString(this)
+                                + "::Close Transport#"
+                                + ValidationHelper.HashString(parent)
+                                + "closing and putting back pooledStream#"
+                                + ValidationHelper.HashString(pooledStream)
+                        );
 
-                        GlobalLog.Print("SmtpConnectiont#" + ValidationHelper.HashString(this) + "::Close Transport#" + ValidationHelper.HashString(parent) + "closing and putting back pooledStream#" + ValidationHelper.HashString(pooledStream));
-                        
                         //free CBT buffer
-                        if (this.channelBindingToken != null){
+                        if (this.channelBindingToken != null)
+                        {
                             channelBindingToken.Close();
                         }
 
-                        // must destroy manually since sending a QUIT here might not be 
+                        // must destroy manually since sending a QUIT here might not be
                         // interpreted correctly by the server if it's in the middle of a
                         // DATA command or some similar situation.  This may send a RST
                         // but this is ok in this situation.  Do not reuse this connection
                         pooledStream.Close(0);
-                        connectionPool.PutConnection(pooledStream, pooledStream.Owner, Timeout, false);
+                        connectionPool.PutConnection(
+                            pooledStream,
+                            pooledStream.Owner,
+                            Timeout,
+                            false
+                        );
                     }
                     isClosed = true;
                 }
@@ -242,66 +270,130 @@ namespace System.Net.Mail
             isConnected = false;
         }
 
-        internal void ParseExtensions(string[] extensions) {
+        internal void ParseExtensions(string[] extensions)
+        {
             supportedAuth = SupportedAuth.None;
-            foreach (string extension in extensions) {
-                if (String.Compare(extension, 0, authExtension, 0, 
-                    sizeOfAuthExtension, StringComparison.OrdinalIgnoreCase) == 0)  {
-                    // remove the AUTH text including the following character 
+            foreach (string extension in extensions)
+            {
+                if (
+                    String.Compare(
+                        extension,
+                        0,
+                        authExtension,
+                        0,
+                        sizeOfAuthExtension,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
+                {
+                    // remove the AUTH text including the following character
                     // to ensure that split only gets the modules supported
-                    string[] authTypes = 
-                        extension.Remove(0, sizeOfAuthExtension).Split(new char[] { ' ', '=' },
-                        StringSplitOptions.RemoveEmptyEntries);
-                    foreach (string authType in authTypes) {
-                        if (String.Compare(authType, authLogin, StringComparison.OrdinalIgnoreCase) == 0) {
+                    string[] authTypes = extension
+                        .Remove(0, sizeOfAuthExtension)
+                        .Split(new char[] { ' ', '=' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string authType in authTypes)
+                    {
+                        if (
+                            String.Compare(authType, authLogin, StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
+                        {
                             supportedAuth |= SupportedAuth.Login;
                         }
 #if !FEATURE_PAL
-                        else if (String.Compare(authType, authNtlm, StringComparison.OrdinalIgnoreCase) == 0) {
+                        else if (
+                            String.Compare(authType, authNtlm, StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
+                        {
                             supportedAuth |= SupportedAuth.NTLM;
                         }
-                        else if (String.Compare(authType, authGssapi, StringComparison.OrdinalIgnoreCase) == 0) {
+                        else if (
+                            String.Compare(authType, authGssapi, StringComparison.OrdinalIgnoreCase)
+                            == 0
+                        )
+                        {
                             supportedAuth |= SupportedAuth.GSSAPI;
                         }
-                        else if (String.Compare(authType, authWDigest, StringComparison.OrdinalIgnoreCase) == 0) {
+                        else if (
+                            String.Compare(
+                                authType,
+                                authWDigest,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                        {
                             supportedAuth |= SupportedAuth.WDigest;
                         }
 #endif // FEATURE_PAL
                     }
                 }
-                else if (String.Compare(extension, 0, "dsn ", 0, 3, StringComparison.OrdinalIgnoreCase) == 0) {
+                else if (
+                    String.Compare(extension, 0, "dsn ", 0, 3, StringComparison.OrdinalIgnoreCase)
+                    == 0
+                )
+                {
                     ((SmtpPooledStream)pooledStream).dsnEnabled = true;
                 }
-                else if (String.Compare(extension, 0, "STARTTLS", 0, 8, StringComparison.OrdinalIgnoreCase) == 0) {
+                else if (
+                    String.Compare(
+                        extension,
+                        0,
+                        "STARTTLS",
+                        0,
+                        8,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
+                {
                     serverSupportsStartTls = true;
                 }
-                else if (String.Compare(extension, 0, "SMTPUTF8", 0, 8, StringComparison.OrdinalIgnoreCase) == 0) {
+                else if (
+                    String.Compare(
+                        extension,
+                        0,
+                        "SMTPUTF8",
+                        0,
+                        8,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
+                {
                     ((SmtpPooledStream)pooledStream).serverSupportsEai = true;
                 }
             }
         }
 
-        internal bool AuthSupported(ISmtpAuthenticationModule module){
-            if (module is SmtpLoginAuthenticationModule) {
-                if ((supportedAuth & SupportedAuth.Login) > 0) {
+        internal bool AuthSupported(ISmtpAuthenticationModule module)
+        {
+            if (module is SmtpLoginAuthenticationModule)
+            {
+                if ((supportedAuth & SupportedAuth.Login) > 0)
+                {
                     return true;
                 }
             }
 #if !FEATURE_PAL
-            else if (module is SmtpNegotiateAuthenticationModule) {
-                if ((supportedAuth & SupportedAuth.GSSAPI) > 0) {
+            else if (module is SmtpNegotiateAuthenticationModule)
+            {
+                if ((supportedAuth & SupportedAuth.GSSAPI) > 0)
+                {
                     sawNegotiate = true;
                     return true;
                 }
             }
-            else if (module is SmtpNtlmAuthenticationModule) {
+            else if (module is SmtpNtlmAuthenticationModule)
+            {
                 //don't try ntlm if negotiate has been tried
-                if ((!sawNegotiate && (supportedAuth & SupportedAuth.NTLM) > 0)) {
+                if ((!sawNegotiate && (supportedAuth & SupportedAuth.NTLM) > 0))
+                {
                     return true;
                 }
             }
-            else if (module is SmtpDigestAuthenticationModule) {
-                if ((supportedAuth & SupportedAuth.WDigest) > 0) {
+            else if (module is SmtpDigestAuthenticationModule)
+            {
+                if ((supportedAuth & SupportedAuth.WDigest) > 0)
+                {
                     return true;
                 }
             }
@@ -310,7 +402,6 @@ namespace System.Net.Mail
             return false;
         }
 
-
         internal void GetConnection(ServicePoint servicePoint)
         {
             if (isConnected)
@@ -318,22 +409,33 @@ namespace System.Net.Mail
                 throw new InvalidOperationException(SR.GetString(SR.SmtpAlreadyConnected));
             }
 
-            if (Logging.On) Logging.Associate(Logging.Web, this, servicePoint);
+            if (Logging.On)
+                Logging.Associate(Logging.Web, this, servicePoint);
             Debug.Assert(servicePoint != null, "servicePoint was null from SmtpTransport");
-            connectionPool = ConnectionPoolManager.GetConnectionPool(servicePoint, "", m_CreateConnectionCallback);
+            connectionPool = ConnectionPoolManager.GetConnectionPool(
+                servicePoint,
+                "",
+                m_CreateConnectionCallback
+            );
 
             PooledStream pooledStream = connectionPool.GetConnection((object)this, null, Timeout);
 
-            while (((SmtpPooledStream)pooledStream).creds != null && ((SmtpPooledStream)pooledStream).creds != credentials) {
-                // destroy this connection so that a new connection can be created 
-                // in order to use the proper credentials.  Do not just close the 
+            while (
+                ((SmtpPooledStream)pooledStream).creds != null
+                && ((SmtpPooledStream)pooledStream).creds != credentials
+            )
+            {
+                // destroy this connection so that a new connection can be created
+                // in order to use the proper credentials.  Do not just close the
                 // connection since it's in a state where a QUIT could be sent
                 connectionPool.PutConnection(pooledStream, pooledStream.Owner, Timeout, false);
                 pooledStream = connectionPool.GetConnection((object)this, null, Timeout);
             }
-            if (Logging.On) Logging.Associate(Logging.Web, this, pooledStream);
+            if (Logging.On)
+                Logging.Associate(Logging.Web, this, pooledStream);
 
-            lock (this) {
+            lock (this)
+            {
                 this.pooledStream = pooledStream;
             }
 
@@ -345,23 +447,24 @@ namespace System.Net.Mail
             pooledStream.UpdateLifetime();
 
             //if the stream was already used, then we've already done the handshake
-            if (((SmtpPooledStream)pooledStream).previouslyUsed == true) {
+            if (((SmtpPooledStream)pooledStream).previouslyUsed == true)
+            {
                 isConnected = true;
                 return;
             }
 
             LineInfo info = responseReader.GetNextReplyReader().ReadLine();
 
-            switch (info.StatusCode) 
+            switch (info.StatusCode)
             {
-                case SmtpStatusCode.ServiceReady: 
-                    {
-                        break;
-                    }
-                default: 
-                    {
-                        throw new SmtpException(info.StatusCode, info.Line, true);
-                    }
+                case SmtpStatusCode.ServiceReady:
+                {
+                    break;
+                }
+                default:
+                {
+                    throw new SmtpException(info.StatusCode, info.Line, true);
+                }
             }
 
             try
@@ -371,8 +474,11 @@ namespace System.Net.Mail
             }
             catch (SmtpException e)
             {
-                if ((e.StatusCode != SmtpStatusCode.CommandUnrecognized)
-                    && (e.StatusCode != SmtpStatusCode.CommandNotImplemented)) {
+                if (
+                    (e.StatusCode != SmtpStatusCode.CommandUnrecognized)
+                    && (e.StatusCode != SmtpStatusCode.CommandNotImplemented)
+                )
+                {
                     throw e;
                 }
 
@@ -383,18 +489,25 @@ namespace System.Net.Mail
 
 #if !FEATURE_PAL
             // Establish TLS
-            if (enableSsl) 
+            if (enableSsl)
             {
-                if (!serverSupportsStartTls) 
+                if (!serverSupportsStartTls)
                 {
                     // Either TLS is already established or server does not support TLS
-                    if (!(pooledStream.NetworkStream is TlsStream)) 
+                    if (!(pooledStream.NetworkStream is TlsStream))
                     {
                         throw new SmtpException(SR.GetString(SR.MailServerDoesNotSupportStartTls));
                     }
                 }
                 StartTlsCommand.Send(this);
-                TlsStream TlsStream = new TlsStream(servicePoint.Host, pooledStream.NetworkStream, clientCertificates, servicePoint, client, null);
+                TlsStream TlsStream = new TlsStream(
+                    servicePoint.Host,
+                    pooledStream.NetworkStream,
+                    clientCertificates,
+                    servicePoint,
+                    client,
+                    null
+                );
 
                 pooledStream.NetworkStream = TlsStream;
 
@@ -403,7 +516,7 @@ namespace System.Net.Mail
 
                 responseReader = new SmtpReplyReaderFactory(pooledStream.NetworkStream);
 
-                // According to RFC 3207: The client SHOULD send an EHLO command 
+                // According to RFC 3207: The client SHOULD send an EHLO command
                 // as the first command after a successful TLS negotiation.
                 extensions = EHelloCommand.Send(this, client.clientDomain);
                 ParseExtensions(extensions);
@@ -412,35 +525,53 @@ namespace System.Net.Mail
 
             //if no credentials were supplied, try anonymous
             //servers don't appear to anounce that they support anonymous login.
-            if (credentials != null) {
-
-                for (int i = 0; i < authenticationModules.Length; i++) 
+            if (credentials != null)
+            {
+                for (int i = 0; i < authenticationModules.Length; i++)
                 {
-
                     //only authenticate if the auth protocol is supported  - Microsoft
-                    if (!AuthSupported(authenticationModules[i])) {
+                    if (!AuthSupported(authenticationModules[i]))
+                    {
                         continue;
                     }
 
-                    NetworkCredential credential = credentials.GetCredential(servicePoint.Host, 
-                        servicePoint.Port, authenticationModules[i].AuthenticationType);
+                    NetworkCredential credential = credentials.GetCredential(
+                        servicePoint.Host,
+                        servicePoint.Port,
+                        authenticationModules[i].AuthenticationType
+                    );
                     if (credential == null)
                         continue;
 
-                    Authorization auth = SetContextAndTryAuthenticate(authenticationModules[i], credential, null);
+                    Authorization auth = SetContextAndTryAuthenticate(
+                        authenticationModules[i],
+                        credential,
+                        null
+                    );
 
-                    if (auth != null && auth.Message != null) 
+                    if (auth != null && auth.Message != null)
                     {
-                        info = AuthCommand.Send(this, authenticationModules[i].AuthenticationType, auth.Message);
+                        info = AuthCommand.Send(
+                            this,
+                            authenticationModules[i].AuthenticationType,
+                            auth.Message
+                        );
 
-                        if (info.StatusCode == SmtpStatusCode.CommandParameterNotImplemented) 
+                        if (info.StatusCode == SmtpStatusCode.CommandParameterNotImplemented)
                         {
                             continue;
                         }
 
-                        while ((int)info.StatusCode == 334) 
+                        while ((int)info.StatusCode == 334)
                         {
-                            auth = authenticationModules[i].Authenticate(info.Line, null, this, this.client.TargetName, this.channelBindingToken);
+                            auth = authenticationModules[i]
+                                .Authenticate(
+                                    info.Line,
+                                    null,
+                                    this,
+                                    this.client.TargetName,
+                                    this.channelBindingToken
+                                );
                             if (auth == null)
                             {
                                 throw new SmtpException(SR.GetString(SR.SmtpAuthenticationFailed));
@@ -464,15 +595,23 @@ namespace System.Net.Mail
         // We may need to impersonate in this method
         //
         [SecurityPermission(SecurityAction.Assert, Flags = SecurityPermissionFlag.ControlPrincipal)]
-        private Authorization SetContextAndTryAuthenticate(ISmtpAuthenticationModule module, NetworkCredential credential, ContextAwareResult context)
+        private Authorization SetContextAndTryAuthenticate(
+            ISmtpAuthenticationModule module,
+            NetworkCredential credential,
+            ContextAwareResult context
+        )
         {
 #if !FEATURE_PAL
             // We may need to restore user thread token here
             if (credential is SystemNetworkCredential)
             {
-                // 
+                //
 #if DEBUG
-                GlobalLog.Assert(context == null || context.IdentityRequested, "SmtpConnection#{0}::SetContextAndTryAuthenticate|Authentication required when it wasn't expected.  (Maybe Credentials was changed on another thread?)", ValidationHelper.HashString(this));
+                GlobalLog.Assert(
+                    context == null || context.IdentityRequested,
+                    "SmtpConnection#{0}::SetContextAndTryAuthenticate|Authentication required when it wasn't expected.  (Maybe Credentials was changed on another thread?)",
+                    ValidationHelper.HashString(this)
+                );
 #endif
 
                 WindowsIdentity w = context == null ? null : context.Identity;
@@ -483,7 +622,13 @@ namespace System.Net.Mail
                     {
                         using (ctx)
                         {
-                            return module.Authenticate(null, credential, this, this.client.TargetName, this.channelBindingToken);
+                            return module.Authenticate(
+                                null,
+                                credential,
+                                this,
+                                this.client.TargetName,
+                                this.channelBindingToken
+                            );
                         }
                     }
                     else
@@ -492,14 +637,26 @@ namespace System.Net.Mail
                         if (x != null)
                         {
                             AuthenticateCallbackContext authenticationContext =
-                                new AuthenticateCallbackContext(this, module, credential, this.client.TargetName, this.channelBindingToken);
+                                new AuthenticateCallbackContext(
+                                    this,
+                                    module,
+                                    credential,
+                                    this.client.TargetName,
+                                    this.channelBindingToken
+                                );
 
                             ExecutionContext.Run(x, s_AuthenticateCallback, authenticationContext);
                             return authenticationContext.result;
                         }
                         else
                         {
-                            return module.Authenticate(null, credential, this, this.client.TargetName, this.channelBindingToken);
+                            return module.Authenticate(
+                                null,
+                                credential,
+                                this,
+                                this.client.TargetName,
+                                this.channelBindingToken
+                            );
                         }
                     }
                 }
@@ -510,18 +667,36 @@ namespace System.Net.Mail
                 }
             }
 #endif // !FEATURE_PAL
-            return module.Authenticate(null, credential, this, this.client.TargetName, this.channelBindingToken);
+            return module.Authenticate(
+                null,
+                credential,
+                this,
+                this.client.TargetName,
+                this.channelBindingToken
+            );
         }
 
         private static void AuthenticateCallback(object state)
         {
             AuthenticateCallbackContext context = (AuthenticateCallbackContext)state;
-            context.result = context.module.Authenticate(null, context.credential, context.thisPtr, context.spn, context.token);
+            context.result = context.module.Authenticate(
+                null,
+                context.credential,
+                context.thisPtr,
+                context.spn,
+                context.token
+            );
         }
 
         private class AuthenticateCallbackContext
         {
-            internal AuthenticateCallbackContext(SmtpConnection thisPtr, ISmtpAuthenticationModule module, NetworkCredential credential, string spn, ChannelBinding Token)
+            internal AuthenticateCallbackContext(
+                SmtpConnection thisPtr,
+                ISmtpAuthenticationModule module,
+                NetworkCredential credential,
+                string spn,
+                ChannelBinding Token
+            )
             {
                 this.thisPtr = thisPtr;
                 this.module = module;
@@ -562,8 +737,8 @@ namespace System.Net.Mail
 
         class ConnectAndHandshakeAsyncResult : LazyAsyncResult
         {
-
-            private static readonly GeneralAsyncDelegate m_ConnectionCreatedCallback = new GeneralAsyncDelegate(ConnectionCreatedCallback);
+            private static readonly GeneralAsyncDelegate m_ConnectionCreatedCallback =
+                new GeneralAsyncDelegate(ConnectionCreatedCallback);
             string authResponse;
             SmtpConnection connection;
             int currentModule = -1;
@@ -572,14 +747,22 @@ namespace System.Net.Mail
             static AsyncCallback sendEHelloCallback = new AsyncCallback(SendEHelloCallback);
             static AsyncCallback sendHelloCallback = new AsyncCallback(SendHelloCallback);
             static AsyncCallback authenticateCallback = new AsyncCallback(AuthenticateCallback);
-            static AsyncCallback authenticateContinueCallback = new AsyncCallback(AuthenticateContinueCallback);
+            static AsyncCallback authenticateContinueCallback = new AsyncCallback(
+                AuthenticateContinueCallback
+            );
             string host;
 
             private readonly ContextAwareResult m_OuterResult;
 
-
-            internal ConnectAndHandshakeAsyncResult(SmtpConnection connection, string host, int port, ContextAwareResult outerResult, AsyncCallback callback, object state) :
-                base(null, state, callback)
+            internal ConnectAndHandshakeAsyncResult(
+                SmtpConnection connection,
+                string host,
+                int port,
+                ContextAwareResult outerResult,
+                AsyncCallback callback,
+                object state
+            )
+                : base(null, state, callback)
             {
                 this.connection = connection;
                 this.host = host;
@@ -588,40 +771,84 @@ namespace System.Net.Mail
                 m_OuterResult = outerResult;
             }
 
-
-            private static void ConnectionCreatedCallback(object request, object state) {
-                GlobalLog.Enter("ConnectAndHandshakeAsyncResult#" + ValidationHelper.HashString(request) + "::ConnectionCreatedCallback");
-                ConnectAndHandshakeAsyncResult ConnectAndHandshakeAsyncResult = (ConnectAndHandshakeAsyncResult)request;
-                if (state is Exception) {
+            private static void ConnectionCreatedCallback(object request, object state)
+            {
+                GlobalLog.Enter(
+                    "ConnectAndHandshakeAsyncResult#"
+                        + ValidationHelper.HashString(request)
+                        + "::ConnectionCreatedCallback"
+                );
+                ConnectAndHandshakeAsyncResult ConnectAndHandshakeAsyncResult =
+                    (ConnectAndHandshakeAsyncResult)request;
+                if (state is Exception)
+                {
                     ConnectAndHandshakeAsyncResult.InvokeCallback((Exception)state);
                     return;
                 }
                 SmtpPooledStream pooledStream = (SmtpPooledStream)(PooledStream)state;
 
-
                 try
                 {
-                    while (pooledStream.creds != null && pooledStream.creds != ConnectAndHandshakeAsyncResult.connection.credentials) {
-                        GlobalLog.Print("ConnectAndHandshakeAsyncResult#" + ValidationHelper.HashString(request) + "::Connect pooledStream has wrong creds " + ValidationHelper.HashString(pooledStream));
-                        ConnectAndHandshakeAsyncResult.connection.connectionPool.PutConnection(pooledStream,
-                            pooledStream.Owner, ConnectAndHandshakeAsyncResult.connection.Timeout, false);
-                        pooledStream = (SmtpPooledStream)ConnectAndHandshakeAsyncResult.connection.connectionPool.GetConnection((object)ConnectAndHandshakeAsyncResult, ConnectAndHandshakeAsyncResult.m_ConnectionCreatedCallback, ConnectAndHandshakeAsyncResult.connection.Timeout);
-                        if (pooledStream == null) {
-                            GlobalLog.Leave("ConnectAndHandshakeAsyncResult#" + ValidationHelper.HashString(request) + "::Connect returning asynchronously");
+                    while (
+                        pooledStream.creds != null
+                        && pooledStream.creds
+                            != ConnectAndHandshakeAsyncResult.connection.credentials
+                    )
+                    {
+                        GlobalLog.Print(
+                            "ConnectAndHandshakeAsyncResult#"
+                                + ValidationHelper.HashString(request)
+                                + "::Connect pooledStream has wrong creds "
+                                + ValidationHelper.HashString(pooledStream)
+                        );
+                        ConnectAndHandshakeAsyncResult.connection.connectionPool.PutConnection(
+                            pooledStream,
+                            pooledStream.Owner,
+                            ConnectAndHandshakeAsyncResult.connection.Timeout,
+                            false
+                        );
+                        pooledStream = (SmtpPooledStream)
+                            ConnectAndHandshakeAsyncResult.connection.connectionPool.GetConnection(
+                                (object)ConnectAndHandshakeAsyncResult,
+                                ConnectAndHandshakeAsyncResult.m_ConnectionCreatedCallback,
+                                ConnectAndHandshakeAsyncResult.connection.Timeout
+                            );
+                        if (pooledStream == null)
+                        {
+                            GlobalLog.Leave(
+                                "ConnectAndHandshakeAsyncResult#"
+                                    + ValidationHelper.HashString(request)
+                                    + "::Connect returning asynchronously"
+                            );
                             return;
                         }
                     }
-                    if (Logging.On) Logging.Associate(Logging.Web, ConnectAndHandshakeAsyncResult.connection, pooledStream);
+                    if (Logging.On)
+                        Logging.Associate(
+                            Logging.Web,
+                            ConnectAndHandshakeAsyncResult.connection,
+                            pooledStream
+                        );
                     pooledStream.Owner = ConnectAndHandshakeAsyncResult.connection; //needs to be updated for gc reasons
                     pooledStream.creds = ConnectAndHandshakeAsyncResult.connection.credentials;
 
-
-                    lock (ConnectAndHandshakeAsyncResult.connection) {
-
+                    lock (ConnectAndHandshakeAsyncResult.connection)
+                    {
                         //if we were cancelled while getting the connection, we should close and return
-                        if (ConnectAndHandshakeAsyncResult.connection.isClosed) {
-                            ConnectAndHandshakeAsyncResult.connection.connectionPool.PutConnection(pooledStream, pooledStream.Owner, ConnectAndHandshakeAsyncResult.connection.Timeout, false);
-                            GlobalLog.Print("ConnectAndHandshakeAsyncResult#" + ValidationHelper.HashString(request) + "::ConnectionCreatedCallback Connect was aborted " + ValidationHelper.HashString(pooledStream));
+                        if (ConnectAndHandshakeAsyncResult.connection.isClosed)
+                        {
+                            ConnectAndHandshakeAsyncResult.connection.connectionPool.PutConnection(
+                                pooledStream,
+                                pooledStream.Owner,
+                                ConnectAndHandshakeAsyncResult.connection.Timeout,
+                                false
+                            );
+                            GlobalLog.Print(
+                                "ConnectAndHandshakeAsyncResult#"
+                                    + ValidationHelper.HashString(request)
+                                    + "::ConnectionCreatedCallback Connect was aborted "
+                                    + ValidationHelper.HashString(pooledStream)
+                            );
                             ConnectAndHandshakeAsyncResult.InvokeCallback(null);
                             return;
                         }
@@ -634,48 +861,92 @@ namespace System.Net.Mail
                 {
                     ConnectAndHandshakeAsyncResult.InvokeCallback(e);
                 }
-                GlobalLog.Leave("ConnectAndHandshakeAsyncResult#" + ValidationHelper.HashString(request) + "::ConnectionCreatedCallback pooledStream#" + ValidationHelper.HashString(pooledStream));
+                GlobalLog.Leave(
+                    "ConnectAndHandshakeAsyncResult#"
+                        + ValidationHelper.HashString(request)
+                        + "::ConnectionCreatedCallback pooledStream#"
+                        + ValidationHelper.HashString(pooledStream)
+                );
             }
-
 
             internal static void End(IAsyncResult result)
             {
                 ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)result;
                 object connectResult = thisPtr.InternalWaitForCompletion();
-                if (connectResult is Exception){
+                if (connectResult is Exception)
+                {
                     throw (Exception)connectResult;
                 }
             }
 
             internal void GetConnection(bool synchronous)
             {
-
-                GlobalLog.Enter("ConnectAndHandshakeAsyncResult#" + ValidationHelper.HashString(this) + "::Connect: sync=" + (synchronous ? "true" : "false"));
+                GlobalLog.Enter(
+                    "ConnectAndHandshakeAsyncResult#"
+                        + ValidationHelper.HashString(this)
+                        + "::Connect: sync="
+                        + (synchronous ? "true" : "false")
+                );
                 if (connection.isConnected)
                 {
                     throw new InvalidOperationException(SR.GetString(SR.SmtpAlreadyConnected));
                 }
 
+                SmtpPooledStream pooledStream = (SmtpPooledStream)
+                    connection.connectionPool.GetConnection(
+                        (object)this,
+                        (synchronous ? null : m_ConnectionCreatedCallback),
+                        connection.Timeout
+                    );
+                GlobalLog.Print(
+                    "ConnectAndHandshakeAsyncResult#"
+                        + ValidationHelper.HashString(this)
+                        + "::Connect returned"
+                        + ValidationHelper.HashString(this)
+                );
 
-                SmtpPooledStream pooledStream = (SmtpPooledStream)connection.connectionPool.GetConnection((object)this, (synchronous ? null : m_ConnectionCreatedCallback), connection.Timeout);
-                GlobalLog.Print("ConnectAndHandshakeAsyncResult#" + ValidationHelper.HashString(this) + "::Connect returned" + ValidationHelper.HashString(this));
-
-                if (pooledStream != null) {
+                if (pooledStream != null)
+                {
                     try
                     {
-                        while (pooledStream.creds != null && pooledStream.creds != connection.credentials) {
-                            GlobalLog.Print("ConnectAndHandshakeAsyncResult#" + ValidationHelper.HashString(this) + "::Connect pooledStream has wrong creds " + ValidationHelper.HashString(pooledStream));
-                            connection.connectionPool.PutConnection(pooledStream, pooledStream.Owner, connection.Timeout, false);
-                            pooledStream = (SmtpPooledStream)connection.connectionPool.GetConnection((object)this, (synchronous ? null : m_ConnectionCreatedCallback), connection.Timeout);
-                            if (pooledStream == null) {
-                                GlobalLog.Leave("ConnectAndHandshakeAsyncResult#" + ValidationHelper.HashString(this) + "::Connect returning asynchronously");
+                        while (
+                            pooledStream.creds != null
+                            && pooledStream.creds != connection.credentials
+                        )
+                        {
+                            GlobalLog.Print(
+                                "ConnectAndHandshakeAsyncResult#"
+                                    + ValidationHelper.HashString(this)
+                                    + "::Connect pooledStream has wrong creds "
+                                    + ValidationHelper.HashString(pooledStream)
+                            );
+                            connection.connectionPool.PutConnection(
+                                pooledStream,
+                                pooledStream.Owner,
+                                connection.Timeout,
+                                false
+                            );
+                            pooledStream = (SmtpPooledStream)
+                                connection.connectionPool.GetConnection(
+                                    (object)this,
+                                    (synchronous ? null : m_ConnectionCreatedCallback),
+                                    connection.Timeout
+                                );
+                            if (pooledStream == null)
+                            {
+                                GlobalLog.Leave(
+                                    "ConnectAndHandshakeAsyncResult#"
+                                        + ValidationHelper.HashString(this)
+                                        + "::Connect returning asynchronously"
+                                );
                                 return;
                             }
                         }
                         pooledStream.creds = connection.credentials;
                         pooledStream.Owner = this.connection; //needs to be updated for gc reasons
 
-                        lock (connection) {
+                        lock (connection)
+                        {
                             connection.pooledStream = pooledStream;
                         }
                         Handshake();
@@ -685,26 +956,31 @@ namespace System.Net.Mail
                         InvokeCallback(e);
                     }
                 }
-                GlobalLog.Leave("ConnectAndHandshakeAsyncResult#" + ValidationHelper.HashString(this) + "::Connect pooledStream#" + ValidationHelper.HashString(pooledStream));
+                GlobalLog.Leave(
+                    "ConnectAndHandshakeAsyncResult#"
+                        + ValidationHelper.HashString(this)
+                        + "::Connect pooledStream#"
+                        + ValidationHelper.HashString(pooledStream)
+                );
             }
-
 
             void Handshake()
             {
-                connection.responseReader = new SmtpReplyReaderFactory(connection.pooledStream.NetworkStream);
-
+                connection.responseReader = new SmtpReplyReaderFactory(
+                    connection.pooledStream.NetworkStream
+                );
 
                 //if we've already used this stream, then we've already done the handshake
 
                 //set connectionlease
                 connection.pooledStream.UpdateLifetime();
 
-                if (((SmtpPooledStream)connection.pooledStream).previouslyUsed == true) {
+                if (((SmtpPooledStream)connection.pooledStream).previouslyUsed == true)
+                {
                     connection.isConnected = true;
                     InvokeCallback();
                     return;
                 }
-
 
                 SmtpReplyReader reader = connection.Reader.GetNextReplyReader();
                 IAsyncResult result = reader.BeginReadLine(handshakeCallback, this);
@@ -735,19 +1011,24 @@ namespace System.Net.Mail
                 }
             }
 
-            static void HandshakeCallback(IAsyncResult result)   //3
+            static void HandshakeCallback(IAsyncResult result) //3
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)result.AsyncState;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState;
                     try
                     {
                         try
                         {
-                            LineInfo info = thisPtr.connection.Reader.CurrentReader.EndReadLine(result);
+                            LineInfo info = thisPtr.connection.Reader.CurrentReader.EndReadLine(
+                                result
+                            );
                             if (info.StatusCode != SmtpStatusCode.ServiceReady)
                             {
-                                thisPtr.InvokeCallback(new SmtpException(info.StatusCode, info.Line, true));
+                                thisPtr.InvokeCallback(
+                                    new SmtpException(info.StatusCode, info.Line, true)
+                                );
                                 return;
                             }
                             if (!thisPtr.SendEHello())
@@ -770,9 +1051,14 @@ namespace System.Net.Mail
                 }
             }
 
-            bool SendEHello()//4
+            bool SendEHello() //4
             {
-                IAsyncResult result = EHelloCommand.BeginSend(connection, connection.client.clientDomain, sendEHelloCallback, this);
+                IAsyncResult result = EHelloCommand.BeginSend(
+                    connection,
+                    connection.client.clientDomain,
+                    sendEHelloCallback,
+                    this
+                );
                 if (result.CompletedSynchronously)
                 {
                     connection.extensions = EHelloCommand.EndSend(result);
@@ -786,14 +1072,17 @@ namespace System.Net.Mail
                         return true;
                     }
 
-                    if (connection.EnableSsl) {
+                    if (connection.EnableSsl)
+                    {
 #if !FEATURE_PAL
                         if (!connection.serverSupportsStartTls)
                         {
                             // Either TLS is already established or server does not support TLS
                             if (!(connection.pooledStream.NetworkStream is TlsStream))
                             {
-                                throw new SmtpException(SR.GetString(SR.MailServerDoesNotSupportStartTls));
+                                throw new SmtpException(
+                                    SR.GetString(SR.MailServerDoesNotSupportStartTls)
+                                );
                             }
                         }
 
@@ -802,7 +1091,8 @@ namespace System.Net.Mail
                         throw new NotSupportedException("ROTORTODO");
 #endif // !FEATURE_PAL
                     }
-                    else {
+                    else
+                    {
                         Authenticate();
                     }
                     return true;
@@ -810,11 +1100,12 @@ namespace System.Net.Mail
                 return false;
             }
 
-            static void SendEHelloCallback(IAsyncResult result)//5
+            static void SendEHelloCallback(IAsyncResult result) //5
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)result.AsyncState;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState;
                     try
                     {
                         try
@@ -831,28 +1122,33 @@ namespace System.Net.Mail
                                 return;
                             }
                         }
-
                         catch (SmtpException e)
                         {
-                            if ((e.StatusCode != SmtpStatusCode.CommandUnrecognized)
-                                && (e.StatusCode != SmtpStatusCode.CommandNotImplemented)){
+                            if (
+                                (e.StatusCode != SmtpStatusCode.CommandUnrecognized)
+                                && (e.StatusCode != SmtpStatusCode.CommandNotImplemented)
+                            )
+                            {
                                 throw e;
                             }
 
-                            if (!thisPtr.SendHello()) {
+                            if (!thisPtr.SendHello())
+                            {
                                 return;
                             }
                         }
 
-
-                        if (thisPtr.connection.EnableSsl) {
+                        if (thisPtr.connection.EnableSsl)
+                        {
 #if !FEATURE_PAL
                             if (!thisPtr.connection.serverSupportsStartTls)
                             {
                                 // Either TLS is already established or server does not support TLS
                                 if (!(thisPtr.connection.pooledStream.NetworkStream is TlsStream))
                                 {
-                                    throw new SmtpException(SR.GetString(SR.MailServerDoesNotSupportStartTls));
+                                    throw new SmtpException(
+                                        SR.GetString(SR.MailServerDoesNotSupportStartTls)
+                                    );
                                 }
                             }
 
@@ -861,7 +1157,8 @@ namespace System.Net.Mail
                             throw new NotSupportedException("ROTORTODO");
 #endif // !FEATURE_PAL
                         }
-                        else {
+                        else
+                        {
                             thisPtr.Authenticate();
                         }
                     }
@@ -872,9 +1169,14 @@ namespace System.Net.Mail
                 }
             }
 
-            bool SendHello()//6
+            bool SendHello() //6
             {
-                IAsyncResult result = HelloCommand.BeginSend(connection, connection.client.clientDomain, sendHelloCallback, this);
+                IAsyncResult result = HelloCommand.BeginSend(
+                    connection,
+                    connection.client.clientDomain,
+                    sendHelloCallback,
+                    this
+                );
                 //if ehello isn't supported, assume basic auth
                 if (result.CompletedSynchronously)
                 {
@@ -886,11 +1188,12 @@ namespace System.Net.Mail
                 return false;
             }
 
-            static void SendHelloCallback(IAsyncResult result)     //7
+            static void SendHelloCallback(IAsyncResult result) //7
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)result.AsyncState;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState;
                     try
                     {
                         HelloCommand.EndSend(result);
@@ -904,32 +1207,55 @@ namespace System.Net.Mail
             }
 
 #if !FEATURE_PAL
-            bool SendStartTls()//6
+            bool SendStartTls() //6
             {
-                IAsyncResult result = StartTlsCommand.BeginSend(connection, SendStartTlsCallback, this);
+                IAsyncResult result = StartTlsCommand.BeginSend(
+                    connection,
+                    SendStartTlsCallback,
+                    this
+                );
                 if (result.CompletedSynchronously)
                 {
                     StartTlsCommand.EndSend(result);
-                    TlsStream TlsStream = new TlsStream(connection.pooledStream.ServicePoint.Host, connection.pooledStream.NetworkStream, connection.ClientCertificates, connection.pooledStream.ServicePoint, connection.client, m_OuterResult.ContextCopy);
+                    TlsStream TlsStream = new TlsStream(
+                        connection.pooledStream.ServicePoint.Host,
+                        connection.pooledStream.NetworkStream,
+                        connection.ClientCertificates,
+                        connection.pooledStream.ServicePoint,
+                        connection.client,
+                        m_OuterResult.ContextCopy
+                    );
                     connection.pooledStream.NetworkStream = TlsStream;
-                    connection.responseReader = new SmtpReplyReaderFactory(connection.pooledStream.NetworkStream);
+                    connection.responseReader = new SmtpReplyReaderFactory(
+                        connection.pooledStream.NetworkStream
+                    );
                     SendEHello();
                     return true;
                 }
                 return false;
             }
 
-            static void SendStartTlsCallback(IAsyncResult result)     //7
+            static void SendStartTlsCallback(IAsyncResult result) //7
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)result.AsyncState;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState;
                     try
                     {
                         StartTlsCommand.EndSend(result);
-                        TlsStream TlsStream = new TlsStream(thisPtr.connection.pooledStream.ServicePoint.Host, thisPtr.connection.pooledStream.NetworkStream, thisPtr.connection.ClientCertificates, thisPtr.connection.pooledStream.ServicePoint, thisPtr.connection.client, thisPtr.m_OuterResult.ContextCopy);
+                        TlsStream TlsStream = new TlsStream(
+                            thisPtr.connection.pooledStream.ServicePoint.Host,
+                            thisPtr.connection.pooledStream.NetworkStream,
+                            thisPtr.connection.ClientCertificates,
+                            thisPtr.connection.pooledStream.ServicePoint,
+                            thisPtr.connection.client,
+                            thisPtr.m_OuterResult.ContextCopy
+                        );
                         thisPtr.connection.pooledStream.NetworkStream = TlsStream;
-                        thisPtr.connection.responseReader = new SmtpReplyReaderFactory(thisPtr.connection.pooledStream.NetworkStream);
+                        thisPtr.connection.responseReader = new SmtpReplyReaderFactory(
+                            thisPtr.connection.pooledStream.NetworkStream
+                        );
                         thisPtr.SendEHello();
                     }
                     catch (Exception e)
@@ -944,23 +1270,41 @@ namespace System.Net.Mail
             {
                 //if no credentials were supplied, try anonymous
                 //servers don't appear to anounce that they support anonymous login.
-                if (connection.credentials != null) {
+                if (connection.credentials != null)
+                {
                     while (++currentModule < connection.authenticationModules.Length)
                     {
                         //only authenticate if the auth protocol is supported
-                        ISmtpAuthenticationModule module = connection.authenticationModules[currentModule];
-                        if (!connection.AuthSupported(module)) {
+                        ISmtpAuthenticationModule module = connection.authenticationModules[
+                            currentModule
+                        ];
+                        if (!connection.AuthSupported(module))
+                        {
                             continue;
                         }
 
-                        NetworkCredential credential = connection.credentials.GetCredential(host, port, module.AuthenticationType);
+                        NetworkCredential credential = connection.credentials.GetCredential(
+                            host,
+                            port,
+                            module.AuthenticationType
+                        );
                         if (credential == null)
                             continue;
-                        Authorization auth = connection.SetContextAndTryAuthenticate(module, credential, m_OuterResult);
+                        Authorization auth = connection.SetContextAndTryAuthenticate(
+                            module,
+                            credential,
+                            m_OuterResult
+                        );
 
                         if (auth != null && auth.Message != null)
                         {
-                            IAsyncResult result = AuthCommand.BeginSend(connection, connection.authenticationModules[currentModule].AuthenticationType, auth.Message, authenticateCallback, this);
+                            IAsyncResult result = AuthCommand.BeginSend(
+                                connection,
+                                connection.authenticationModules[currentModule].AuthenticationType,
+                                auth.Message,
+                                authenticateCallback,
+                                this
+                            );
                             if (!result.CompletedSynchronously)
                             {
                                 return;
@@ -999,7 +1343,8 @@ namespace System.Net.Mail
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)result.AsyncState;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState;
                     try
                     {
                         LineInfo info = AuthCommand.EndSend(result);
@@ -1014,7 +1359,9 @@ namespace System.Net.Mail
                         }
                         else if ((int)info.StatusCode == 235)
                         {
-                            thisPtr.connection.authenticationModules[thisPtr.currentModule].CloseContext(thisPtr.connection);
+                            thisPtr
+                                .connection.authenticationModules[thisPtr.currentModule]
+                                .CloseContext(thisPtr.connection);
                             thisPtr.connection.isConnected = true;
                             thisPtr.InvokeCallback();
                             return;
@@ -1029,19 +1376,32 @@ namespace System.Net.Mail
                 }
             }
 
-            bool AuthenticateContinue()        //10
+            bool AuthenticateContinue() //10
             {
                 for (; ; )
                 {
                     // We don't need credential on the continued auth assuming they were captured on the first call.
                     // That should always work, otherwise what if a new credential has been returned?
-                    Authorization auth = connection.authenticationModules[currentModule].Authenticate(authResponse, null, connection, connection.client.TargetName, connection.channelBindingToken);
+                    Authorization auth = connection
+                        .authenticationModules[currentModule]
+                        .Authenticate(
+                            authResponse,
+                            null,
+                            connection,
+                            connection.client.TargetName,
+                            connection.channelBindingToken
+                        );
                     if (auth == null)
                     {
                         throw new SmtpException(SR.GetString(SR.SmtpAuthenticationFailed));
                     }
 
-                    IAsyncResult result = AuthCommand.BeginSend(connection, auth.Message, authenticateContinueCallback, this);
+                    IAsyncResult result = AuthCommand.BeginSend(
+                        connection,
+                        auth.Message,
+                        authenticateContinueCallback,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -1063,17 +1423,20 @@ namespace System.Net.Mail
                 }
             }
 
-            static void AuthenticateContinueCallback(IAsyncResult result)     //11
+            static void AuthenticateContinueCallback(IAsyncResult result) //11
             {
                 if (!result.CompletedSynchronously)
                 {
-                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)result.AsyncState;
+                    ConnectAndHandshakeAsyncResult thisPtr = (ConnectAndHandshakeAsyncResult)
+                        result.AsyncState;
                     try
                     {
                         LineInfo info = AuthCommand.EndSend(result);
                         if ((int)info.StatusCode == 235)
                         {
-                            thisPtr.connection.authenticationModules[thisPtr.currentModule].CloseContext(thisPtr.connection);
+                            thisPtr
+                                .connection.authenticationModules[thisPtr.currentModule]
+                                .CloseContext(thisPtr.connection);
                             thisPtr.connection.isConnected = true;
                             thisPtr.InvokeCallback();
                             return;
@@ -1094,7 +1457,6 @@ namespace System.Net.Mail
                     }
                 }
             }
-
         }
     }
 }

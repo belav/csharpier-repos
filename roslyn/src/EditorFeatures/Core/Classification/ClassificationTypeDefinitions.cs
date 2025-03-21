@@ -13,7 +13,7 @@ namespace Microsoft.CodeAnalysis.Classification
 {
     internal sealed class ClassificationTypeDefinitions
     {
-        #region Preprocessor Text 
+        #region Preprocessor Text
         [Export]
         [Name(ClassificationTypeNames.PreprocessorText)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
@@ -38,7 +38,7 @@ namespace Microsoft.CodeAnalysis.Classification
         #endregion
         #region Keyword - Control
         // Keyword - Control sets its BaseDefinitions to be Keyword so that
-        // in the absence of specific styling they will appear as keywords.  
+        // in the absence of specific styling they will appear as keywords.
         [Export]
         [Name(ClassificationTypeNames.ControlKeyword)]
         [BaseDefinition(PredefinedClassificationTypeNames.Keyword)]
@@ -63,37 +63,37 @@ namespace Microsoft.CodeAnalysis.Classification
         [BaseDefinition(ClassificationTypeNames.StructName)]
         internal readonly ClassificationTypeDefinition UserTypeRecordStructsTypeDefinition;
         #endregion
-        #region User Types - Delegates 
+        #region User Types - Delegates
         [Export]
         [Name(ClassificationTypeNames.DelegateName)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition UserTypeDelegatesTypeDefinition;
         #endregion
-        #region User Types - Enums 
+        #region User Types - Enums
         [Export]
         [Name(ClassificationTypeNames.EnumName)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition UserTypeEnumsTypeDefinition;
         #endregion
-        #region User Types - Interfaces 
+        #region User Types - Interfaces
         [Export]
         [Name(ClassificationTypeNames.InterfaceName)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition UserTypeInterfacesTypeDefinition;
         #endregion
-        #region User Types - Modules 
+        #region User Types - Modules
         [Export]
         [Name(ClassificationTypeNames.ModuleName)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition UserTypeModulesTypeDefinition;
         #endregion
-        #region User Types - Structures 
+        #region User Types - Structures
         [Export]
         [Name(ClassificationTypeNames.StructName)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition UserTypeStructuresTypeDefinition;
         #endregion
-        #region User Types - Type Parameters 
+        #region User Types - Type Parameters
         [Export]
         [Name(ClassificationTypeNames.TypeParameterName)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
@@ -105,6 +105,7 @@ namespace Microsoft.CodeAnalysis.Classification
         [Name(ClassificationTypeNames.TestCode)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition TestCodeTypeDefinition;
+
         [Export]
         [Name(ClassificationTypeNames.TestCodeMarkdown)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
@@ -112,7 +113,7 @@ namespace Microsoft.CodeAnalysis.Classification
         #endregion
 
         // User Members - * set their BaseDefinitions to be Identifier so that
-        // in the absence of specific styling they will appear as identifiers. 
+        // in the absence of specific styling they will appear as identifiers.
         // Extension Methods are an exception and their base definition is Method
         // since it is a more specific type of method.
         #region User Members - Fields
@@ -182,37 +183,37 @@ namespace Microsoft.CodeAnalysis.Classification
         internal readonly ClassificationTypeDefinition UserMembersLabelsTypeDefinition;
         #endregion
 
-        #region XML Doc Comments - Attribute Name 
+        #region XML Doc Comments - Attribute Name
         [Export]
         [Name(ClassificationTypeNames.XmlDocCommentAttributeName)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlDocCommentAttributeNameTypeDefinition;
         #endregion
-        #region XML Doc Comments - Attribute Quotes 
+        #region XML Doc Comments - Attribute Quotes
         [Export]
         [Name(ClassificationTypeNames.XmlDocCommentAttributeQuotes)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlDocCommentAttributeQuotesTypeDefinition;
         #endregion
-        #region XML Doc Comments - Attribute Value 
+        #region XML Doc Comments - Attribute Value
         [Export]
         [Name(ClassificationTypeNames.XmlDocCommentAttributeValue)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlDocCommentAttributeValueTypeDefinition;
         #endregion
-        #region XML Doc Comments - CData Section 
+        #region XML Doc Comments - CData Section
         [Export]
         [Name(ClassificationTypeNames.XmlDocCommentCDataSection)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlDocCommentCDataSectionTypeDefinition;
         #endregion
-        #region XML Doc Comments - Comment 
+        #region XML Doc Comments - Comment
         [Export]
         [Name(ClassificationTypeNames.XmlDocCommentComment)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlDocCommentCommentTypeDefinition;
         #endregion
-        #region XML Doc Comments - Delimiter 
+        #region XML Doc Comments - Delimiter
         [Export]
         [Name(ClassificationTypeNames.XmlDocCommentDelimiter)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
@@ -236,7 +237,7 @@ namespace Microsoft.CodeAnalysis.Classification
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlDocCommentProcessingInstructionTypeDefinition;
         #endregion
-        #region XML Doc Comments - Text 
+        #region XML Doc Comments - Text
         [Export]
         [Name(ClassificationTypeNames.XmlDocCommentText)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
@@ -349,67 +350,67 @@ namespace Microsoft.CodeAnalysis.Classification
 
         #endregion
 
-        #region VB XML Literals - Attribute Name 
+        #region VB XML Literals - Attribute Name
         [Export]
         [Name(ClassificationTypeNames.XmlLiteralAttributeName)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlLiteralAttributeNameTypeDefinition;
         #endregion
-        #region VB XML Literals - Attribute Quotes 
+        #region VB XML Literals - Attribute Quotes
         [Export]
         [Name(ClassificationTypeNames.XmlLiteralAttributeQuotes)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlLiteralAttributeQuotesTypeDefinition;
         #endregion
-        #region VB XML Literals - Attribute Value 
+        #region VB XML Literals - Attribute Value
         [Export]
         [Name(ClassificationTypeNames.XmlLiteralAttributeValue)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlLiteralAttributeValueTypeDefinition;
         #endregion
-        #region VB XML Literals - CData Section 
+        #region VB XML Literals - CData Section
         [Export]
         [Name(ClassificationTypeNames.XmlLiteralCDataSection)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlLiteralCDataSectionTypeDefinition;
         #endregion
-        #region VB XML Literals - Comment 
+        #region VB XML Literals - Comment
         [Export]
         [Name(ClassificationTypeNames.XmlLiteralComment)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlLiteralCommentTypeDefinition;
         #endregion
-        #region VB XML Literals - Delimiter 
+        #region VB XML Literals - Delimiter
         [Export]
         [Name(ClassificationTypeNames.XmlLiteralDelimiter)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlLiteralDelimiterTypeDefinition;
         #endregion
-        #region VB XML Literals - Embedded Expression 
+        #region VB XML Literals - Embedded Expression
         [Export]
         [Name(ClassificationTypeNames.XmlLiteralEmbeddedExpression)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlLiteralEmbeddedExpressionTypeDefinition;
         #endregion
-        #region VB XML Literals - Entity Reference 
+        #region VB XML Literals - Entity Reference
         [Export]
         [Name(ClassificationTypeNames.XmlLiteralEntityReference)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlLiteralEntityReferenceTypeDefinition;
         #endregion
-        #region VB XML Literals - Name 
+        #region VB XML Literals - Name
         [Export]
         [Name(ClassificationTypeNames.XmlLiteralName)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlLiteralNameTypeDefinition;
         #endregion
-        #region VB XML Literals - Processing Instruction 
+        #region VB XML Literals - Processing Instruction
         [Export]
         [Name(ClassificationTypeNames.XmlLiteralProcessingInstruction)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
         internal readonly ClassificationTypeDefinition XmlLiteralProcessingInstructionTypeDefinition;
         #endregion
-        #region VB XML Literals - Text 
+        #region VB XML Literals - Text
         [Export]
         [Name(ClassificationTypeNames.XmlLiteralText)]
         [BaseDefinition(PredefinedClassificationTypeNames.FormalLanguage)]
@@ -432,7 +433,7 @@ namespace Microsoft.CodeAnalysis.Classification
 
         #region Operator - Overloaded
         // Operator - Overloaded sets its BaseDefinitions to be Operator so that
-        // in the absence of specific styling they will appear as operators.  
+        // in the absence of specific styling they will appear as operators.
         [Export]
         [Name(ClassificationTypeNames.OperatorOverloaded)]
         [BaseDefinition(PredefinedClassificationTypeNames.Operator)]

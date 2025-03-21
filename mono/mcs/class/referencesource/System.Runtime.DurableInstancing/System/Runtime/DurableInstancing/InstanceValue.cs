@@ -12,12 +12,10 @@ namespace System.Runtime.DurableInstancing
     [DataContract]
     public sealed class InstanceValue
     {
-        readonly static InstanceValue deletedValue = new InstanceValue();
+        static readonly InstanceValue deletedValue = new InstanceValue();
 
         public InstanceValue(object value)
-            : this(value, InstanceValueOptions.None)
-        {
-        }
+            : this(value, InstanceValueOptions.None) { }
 
         public InstanceValue(object value, InstanceValueOptions options)
         {
@@ -36,46 +34,36 @@ namespace System.Runtime.DurableInstancing
 
         public bool IsDeletedValue
         {
-            get
-            {
-                return object.ReferenceEquals(this, InstanceValue.DeletedValue);
-            }
+            get { return object.ReferenceEquals(this, InstanceValue.DeletedValue); }
         }
 
         public static InstanceValue DeletedValue
         {
-            get
-            {
-                return InstanceValue.deletedValue;
-            }
+            get { return InstanceValue.deletedValue; }
         }
 
         [DataMember(Name = "Value", EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal object SerializedValue
         {
-            get
-            {
-                return this.Value;
-            }
-            set
-            {
-                this.Value = value;
-            }
+            get { return this.Value; }
+            set { this.Value = value; }
         }
 
         [DataMember(Name = "Options", EmitDefaultValue = false)]
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal InstanceValueOptions SerializedOptions
         {
-            get
-            {
-                return this.Options;
-            }
-            set
-            {
-                this.Options = value;
-            }
+            get { return this.Options; }
+            set { this.Options = value; }
         }
     }
 }

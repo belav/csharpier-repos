@@ -15,7 +15,13 @@ internal static partial class InternalCalls
     // See: https://github.com/mono/mono/blob/90574987940959fe386008a850982ea18236a533/sdks/wasm/src/driver.c#L318-L319
     [MethodImpl(MethodImplOptions.InternalCall)]
     [Obsolete]
-    public static extern TRes InvokeJS<T0, T1, T2, TRes>(out string exception, ref JSCallInfo callInfo, [AllowNull] T0 arg0, [AllowNull] T1 arg1, [AllowNull] T2 arg2);
+    public static extern TRes InvokeJS<T0, T1, T2, TRes>(
+        out string exception,
+        ref JSCallInfo callInfo,
+        [AllowNull] T0 arg0,
+        [AllowNull] T1 arg1,
+        [AllowNull] T2 arg2
+    );
 
     [JSImport("Blazor._internal.invokeJSJson", "blazor-internal")]
     public static partial string InvokeJSJson(
@@ -23,16 +29,12 @@ internal static partial class InternalCalls
         [JSMarshalAs<JSType.Number>] long targetInstanceId,
         int resultType,
         string argsJson,
-        [JSMarshalAs<JSType.Number>] long asyncHandle);
+        [JSMarshalAs<JSType.Number>] long asyncHandle
+    );
 
     [JSImport("Blazor._internal.endInvokeDotNetFromJS", "blazor-internal")]
-    public static partial void EndInvokeDotNetFromJS(
-        string? id,
-        bool success,
-        string jsonOrError);
+    public static partial void EndInvokeDotNetFromJS(string? id, bool success, string jsonOrError);
 
     [JSImport("Blazor._internal.receiveByteArray", "blazor-internal")]
-    public static partial void ReceiveByteArray(
-        int id,
-        byte[] data);
+    public static partial void ReceiveByteArray(int id, byte[] data);
 }

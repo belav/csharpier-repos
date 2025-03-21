@@ -36,27 +36,54 @@ namespace System.Net.Http
         public long ErrorCode { get; }
 
 #if !TARGET_BROWSER
-        internal static HttpProtocolException CreateHttp2StreamException(Http2ProtocolErrorCode protocolError)
+        internal static HttpProtocolException CreateHttp2StreamException(
+            Http2ProtocolErrorCode protocolError
+        )
         {
-            string message = SR.Format(SR.net_http_http2_stream_error, GetName(protocolError), ((int)protocolError).ToString("x"));
+            string message = SR.Format(
+                SR.net_http_http2_stream_error,
+                GetName(protocolError),
+                ((int)protocolError).ToString("x")
+            );
             return new HttpProtocolException((long)protocolError, message, null);
         }
 
-        internal static HttpProtocolException CreateHttp2ConnectionException(Http2ProtocolErrorCode protocolError, string? message = null)
+        internal static HttpProtocolException CreateHttp2ConnectionException(
+            Http2ProtocolErrorCode protocolError,
+            string? message = null
+        )
         {
-            message = SR.Format(message ?? SR.net_http_http2_connection_error, GetName(protocolError), ((int)protocolError).ToString("x"));
+            message = SR.Format(
+                message ?? SR.net_http_http2_connection_error,
+                GetName(protocolError),
+                ((int)protocolError).ToString("x")
+            );
             return new HttpProtocolException((long)protocolError, message, null);
         }
 
-        internal static HttpProtocolException CreateHttp3StreamException(Http3ErrorCode protocolError, QuicException innerException)
+        internal static HttpProtocolException CreateHttp3StreamException(
+            Http3ErrorCode protocolError,
+            QuicException innerException
+        )
         {
-            string message = SR.Format(SR.net_http_http3_stream_error, GetName(protocolError), ((int)protocolError).ToString("x"));
+            string message = SR.Format(
+                SR.net_http_http3_stream_error,
+                GetName(protocolError),
+                ((int)protocolError).ToString("x")
+            );
             return new HttpProtocolException((long)protocolError, message, innerException);
         }
 
-        internal static HttpProtocolException CreateHttp3ConnectionException(Http3ErrorCode protocolError, string? message = null)
+        internal static HttpProtocolException CreateHttp3ConnectionException(
+            Http3ErrorCode protocolError,
+            string? message = null
+        )
         {
-            message = SR.Format(message ?? SR.net_http_http3_connection_error, GetName(protocolError), ((int)protocolError).ToString("x"));
+            message = SR.Format(
+                message ?? SR.net_http_http3_connection_error,
+                GetName(protocolError),
+                ((int)protocolError).ToString("x")
+            );
             return new HttpProtocolException((long)protocolError, message, null);
         }
 
@@ -101,7 +128,7 @@ namespace System.Net.Http
                 Http3ErrorCode.RequestIncomplete => "H3_REQUEST_INCOMPLETE",
                 Http3ErrorCode.ConnectError => "H3_CONNECT_ERROR",
                 Http3ErrorCode.VersionFallback => "H3_VERSION_FALLBACK",
-                _ => "(unknown error)"
+                _ => "(unknown error)",
             };
 #endif
     }

@@ -14,8 +14,8 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// The dynamic operation factories below return this struct so that the caller
     /// have the option of separating the call-site initialization from its invocation.
-    /// 
-    /// Most callers just call <see cref="ToExpression"/> to get the combo but some (object and array initializers) 
+    ///
+    /// Most callers just call <see cref="ToExpression"/> to get the combo but some (object and array initializers)
     /// hoist all call-site initialization code and emit multiple invocations of the same site.
     /// </summary>
     internal readonly struct LoweredDynamicOperation
@@ -26,7 +26,13 @@ namespace Microsoft.CodeAnalysis.CSharp
         public readonly BoundExpression? SiteInitialization;
         public readonly BoundExpression SiteInvocation;
 
-        public LoweredDynamicOperation(SyntheticBoundNodeFactory? factory, BoundExpression? siteInitialization, BoundExpression siteInvocation, TypeSymbol resultType, ImmutableArray<LocalSymbol> temps)
+        public LoweredDynamicOperation(
+            SyntheticBoundNodeFactory? factory,
+            BoundExpression? siteInitialization,
+            BoundExpression siteInvocation,
+            TypeSymbol resultType,
+            ImmutableArray<LocalSymbol> temps
+        )
         {
             _factory = factory;
             _resultType = resultType;
@@ -39,7 +45,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression? loweredReceiver,
             ImmutableArray<BoundExpression> loweredArguments,
             BoundExpression? loweredRight,
-            TypeSymbol resultType)
+            TypeSymbol resultType
+        )
         {
             var children = ArrayBuilder<BoundExpression>.GetInstance();
             children.AddOptional(loweredReceiver);
@@ -49,18 +56,37 @@ namespace Microsoft.CodeAnalysis.CSharp
             return LoweredDynamicOperation.Bad(resultType, children.ToImmutableAndFree());
         }
 
-        public static LoweredDynamicOperation Bad(TypeSymbol resultType, ImmutableArray<BoundExpression> children)
+        public static LoweredDynamicOperation Bad(
+            TypeSymbol resultType,
+            ImmutableArray<BoundExpression> children
+        )
         {
             Debug.Assert(children.Length > 0);
-            var bad = new BoundBadExpression(children[0].Syntax, LookupResultKind.Empty, ImmutableArray<Symbol?>.Empty, children, resultType);
-            return new LoweredDynamicOperation(null, null, bad, resultType, default(ImmutableArray<LocalSymbol>));
+            var bad = new BoundBadExpression(
+                children[0].Syntax,
+                LookupResultKind.Empty,
+                ImmutableArray<Symbol?>.Empty,
+                children,
+                resultType
+            );
+            return new LoweredDynamicOperation(
+                null,
+                null,
+                bad,
+                resultType,
+                default(ImmutableArray<LocalSymbol>)
+            );
         }
 
         public BoundExpression ToExpression()
         {
             if (_factory == null)
             {
-                Debug.Assert(SiteInitialization == null && SiteInvocation is BoundBadExpression && _temps.IsDefaultOrEmpty);
+                Debug.Assert(
+                    SiteInitialization == null
+                        && SiteInvocation is BoundBadExpression
+                        && _temps.IsDefaultOrEmpty
+                );
                 return SiteInvocation;
             }
 
@@ -72,7 +98,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
             else
             {
-                return new BoundSequence(_factory.Syntax, _temps, ImmutableArray.Create(SiteInitialization), SiteInvocation, _resultType) { WasCompilerGenerated = true };
+                return new BoundSequence(
+                    _factory.Syntax,
+                    _temps,
+                    ImmutableArray.Create(SiteInitialization),
+                    SiteInvocation,
+                    _resultType
+                )
+                {
+                    WasCompilerGenerated = true,
+                };
             }
         }
     }

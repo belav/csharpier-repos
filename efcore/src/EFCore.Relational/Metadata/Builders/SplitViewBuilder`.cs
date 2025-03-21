@@ -8,7 +8,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///     and it is not designed to be directly constructed in your application code.
 /// </summary>
 /// <typeparam name="TEntity">The entity type being configured.</typeparam>
-public class SplitViewBuilder<TEntity> : SplitViewBuilder, IInfrastructure<EntityTypeBuilder<TEntity>>
+public class SplitViewBuilder<TEntity>
+    : SplitViewBuilder,
+        IInfrastructure<EntityTypeBuilder<TEntity>>
     where TEntity : class
 {
     /// <summary>
@@ -18,13 +20,14 @@ public class SplitViewBuilder<TEntity> : SplitViewBuilder, IInfrastructure<Entit
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public SplitViewBuilder(in StoreObjectIdentifier storeObject, EntityTypeBuilder<TEntity> entityTypeBuilder)
-        : base(storeObject, entityTypeBuilder)
-    {
-    }
+    public SplitViewBuilder(
+        in StoreObjectIdentifier storeObject,
+        EntityTypeBuilder<TEntity> entityTypeBuilder
+    )
+        : base(storeObject, entityTypeBuilder) { }
 
-    private EntityTypeBuilder<TEntity> EntityTypeBuilder
-        => (EntityTypeBuilder<TEntity>)((IInfrastructure<EntityTypeBuilder>)this).GetInfrastructure();
+    private EntityTypeBuilder<TEntity> EntityTypeBuilder =>
+        (EntityTypeBuilder<TEntity>)((IInfrastructure<EntityTypeBuilder>)this).GetInfrastructure();
 
     /// <summary>
     ///     Maps the property to a column on the current view and returns an object that can be used
@@ -34,8 +37,9 @@ public class SplitViewBuilder<TEntity> : SplitViewBuilder, IInfrastructure<Entit
     ///     A lambda expression representing the property to be configured (<c>blog => blog.Url</c>).
     /// </param>
     /// <returns>An object that can be used to configure the property.</returns>
-    public virtual ViewColumnBuilder<TProperty> Property<TProperty>(Expression<Func<TEntity, TProperty>> propertyExpression)
-        => new(MappingFragment.StoreObject, EntityTypeBuilder.Property(propertyExpression));
+    public virtual ViewColumnBuilder<TProperty> Property<TProperty>(
+        Expression<Func<TEntity, TProperty>> propertyExpression
+    ) => new(MappingFragment.StoreObject, EntityTypeBuilder.Property(propertyExpression));
 
     /// <summary>
     ///     Adds or updates an annotation on the view. If an annotation with the key specified in <paramref name="annotation" />
@@ -44,9 +48,9 @@ public class SplitViewBuilder<TEntity> : SplitViewBuilder, IInfrastructure<Entit
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual SplitViewBuilder<TEntity> HasAnnotation(string annotation, object? value)
-        => (SplitViewBuilder<TEntity>)base.HasAnnotation(annotation, value);
+    public new virtual SplitViewBuilder<TEntity> HasAnnotation(string annotation, object? value) =>
+        (SplitViewBuilder<TEntity>)base.HasAnnotation(annotation, value);
 
-    EntityTypeBuilder<TEntity> IInfrastructure<EntityTypeBuilder<TEntity>>.Instance
-        => EntityTypeBuilder;
+    EntityTypeBuilder<TEntity> IInfrastructure<EntityTypeBuilder<TEntity>>.Instance =>
+        EntityTypeBuilder;
 }

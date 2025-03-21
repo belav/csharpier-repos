@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,59 +33,67 @@
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Diagnostics {
+namespace System.Diagnostics
+{
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method
+            | AttributeTargets.Event,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    [Serializable]
+    public class PerformanceCounterPermissionAttribute : CodeAccessSecurityAttribute
+    {
+        private string categoryName;
+        private string machineName;
+        private PerformanceCounterPermissionAccess permissionAccess;
 
-	[AttributeUsage (AttributeTargets.Assembly |
-		AttributeTargets.Class |
-		AttributeTargets.Struct |
-		AttributeTargets.Constructor |
-		AttributeTargets.Method |
-		AttributeTargets.Event, AllowMultiple=true,
-		Inherited=false)]
-	[Serializable]
-	public class PerformanceCounterPermissionAttribute : CodeAccessSecurityAttribute {
+        public PerformanceCounterPermissionAttribute(SecurityAction action)
+            : base(action)
+        {
+            categoryName = ResourcePermissionBase.Any;
+            machineName = ResourcePermissionBase.Local;
+            permissionAccess = PerformanceCounterPermissionAccess.Write;
+        }
 
-		private string categoryName;
-		private string machineName;
-		private PerformanceCounterPermissionAccess permissionAccess;
+        public string CategoryName
+        {
+            get { return categoryName; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("CategoryName");
+                categoryName = value;
+            }
+        }
 
-		public PerformanceCounterPermissionAttribute (SecurityAction action) 
-			: base (action)
-		{
-			categoryName = ResourcePermissionBase.Any;
-			machineName = ResourcePermissionBase.Local;
-			permissionAccess = PerformanceCounterPermissionAccess.Write;
-		}
+        public string MachineName
+        {
+            get { return machineName; }
+            set
+            {
+                ResourcePermissionBase.ValidateMachineName(value);
+                machineName = value;
+            }
+        }
 
-		public string CategoryName {
-			get { return categoryName; }
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("CategoryName");
-				categoryName = value;
-			}
-		}
+        public PerformanceCounterPermissionAccess PermissionAccess
+        {
+            get { return permissionAccess; }
+            set { permissionAccess = value; }
+        }
 
-		public string MachineName {
-			get { return machineName; }
-			set {
-				ResourcePermissionBase.ValidateMachineName (value);
-				machineName = value;
-			}
-		}
-
-		public PerformanceCounterPermissionAccess PermissionAccess {
-			get { return permissionAccess; }
-			set { permissionAccess = value; }
-		}
-
-		public override IPermission CreatePermission ()
-		{
-			if (base.Unrestricted) {
-				return new PerformanceCounterPermission (PermissionState.Unrestricted); 
-			}
-			return new PerformanceCounterPermission (permissionAccess, machineName, categoryName); 
-		}
-	}
+        public override IPermission CreatePermission()
+        {
+            if (base.Unrestricted)
+            {
+                return new PerformanceCounterPermission(PermissionState.Unrestricted);
+            }
+            return new PerformanceCounterPermission(permissionAccess, machineName, categoryName);
+        }
+    }
 }
-

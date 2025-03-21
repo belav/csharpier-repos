@@ -9,10 +9,13 @@ namespace System.Web.Mvc.Test
 {
     public class DictionaryValueProviderTest
     {
-        private static readonly Dictionary<string, object> _backingStore = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
+        private static readonly Dictionary<string, object> _backingStore = new Dictionary<
+            string,
+            object
+        >(StringComparer.OrdinalIgnoreCase)
         {
             { "forty.two", 42 },
-            { "nineteen.eighty.four", new DateTime(1984, 1, 1) }
+            { "nineteen.eighty.four", new DateTime(1984, 1, 1) },
         };
 
         [Fact]
@@ -20,14 +23,22 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new DictionaryValueProvider<object>(null, CultureInfo.InvariantCulture); }, "dictionary");
+                delegate
+                {
+                    new DictionaryValueProvider<object>(null, CultureInfo.InvariantCulture);
+                },
+                "dictionary"
+            );
         }
 
         [Fact]
         public void ContainsPrefix()
         {
             // Arrange
-            DictionaryValueProvider<object> valueProvider = new DictionaryValueProvider<object>(_backingStore, null);
+            DictionaryValueProvider<object> valueProvider = new DictionaryValueProvider<object>(
+                _backingStore,
+                null
+            );
 
             // Act
             bool result = valueProvider.ContainsPrefix("forty");
@@ -40,7 +51,10 @@ namespace System.Web.Mvc.Test
         public void ContainsPrefix_DoesNotContainEmptyPrefixIfBackingStoreIsEmpty()
         {
             // Arrange
-            DictionaryValueProvider<object> valueProvider = new DictionaryValueProvider<object>(new Dictionary<string, object>(), null);
+            DictionaryValueProvider<object> valueProvider = new DictionaryValueProvider<object>(
+                new Dictionary<string, object>(),
+                null
+            );
 
             // Act
             bool result = valueProvider.ContainsPrefix("");
@@ -53,11 +67,19 @@ namespace System.Web.Mvc.Test
         public void ContainsPrefix_ThrowsIfPrefixIsNull()
         {
             // Arrange
-            DictionaryValueProvider<object> valueProvider = new DictionaryValueProvider<object>(_backingStore, null);
+            DictionaryValueProvider<object> valueProvider = new DictionaryValueProvider<object>(
+                _backingStore,
+                null
+            );
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { valueProvider.ContainsPrefix(null); }, "prefix");
+                delegate
+                {
+                    valueProvider.ContainsPrefix(null);
+                },
+                "prefix"
+            );
         }
 
         [Fact]
@@ -65,7 +87,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             CultureInfo culture = CultureInfo.GetCultureInfo("fr-FR");
-            DictionaryValueProvider<object> valueProvider = new DictionaryValueProvider<object>(_backingStore, culture);
+            DictionaryValueProvider<object> valueProvider = new DictionaryValueProvider<object>(
+                _backingStore,
+                culture
+            );
 
             // Act
             ValueProviderResult vpResult = valueProvider.GetValue("nineteen.eighty.four");
@@ -81,7 +106,10 @@ namespace System.Web.Mvc.Test
         public void GetValue_ReturnsNullIfKeyNotFound()
         {
             // Arrange
-            DictionaryValueProvider<object> valueProvider = new DictionaryValueProvider<object>(_backingStore, null);
+            DictionaryValueProvider<object> valueProvider = new DictionaryValueProvider<object>(
+                _backingStore,
+                null
+            );
 
             // Act
             ValueProviderResult vpResult = valueProvider.GetValue("nineteen.eighty");
@@ -94,11 +122,19 @@ namespace System.Web.Mvc.Test
         public void GetValue_ThrowsIfKeyIsNull()
         {
             // Arrange
-            DictionaryValueProvider<object> valueProvider = new DictionaryValueProvider<object>(_backingStore, null);
+            DictionaryValueProvider<object> valueProvider = new DictionaryValueProvider<object>(
+                _backingStore,
+                null
+            );
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { valueProvider.GetValue(null); }, "key");
+                delegate
+                {
+                    valueProvider.GetValue(null);
+                },
+                "key"
+            );
         }
     }
 }

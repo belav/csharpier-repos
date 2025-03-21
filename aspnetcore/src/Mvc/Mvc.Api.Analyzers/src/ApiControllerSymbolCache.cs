@@ -12,22 +12,42 @@ internal readonly struct ApiControllerSymbolCache
     {
         symbolCache = default;
 
-        if (!TryGetType(ApiSymbolNames.ApiConventionMethodAttribute, out var apiConventionMethodAttribute))
+        if (
+            !TryGetType(
+                ApiSymbolNames.ApiConventionMethodAttribute,
+                out var apiConventionMethodAttribute
+            )
+        )
         {
             return false;
         }
 
-        if (!TryGetType(ApiSymbolNames.ApiConventionNameMatchAttribute, out var apiConventionNameMatchAttribute))
+        if (
+            !TryGetType(
+                ApiSymbolNames.ApiConventionNameMatchAttribute,
+                out var apiConventionNameMatchAttribute
+            )
+        )
         {
             return false;
         }
 
-        if (!TryGetType(ApiSymbolNames.ApiConventionTypeAttribute, out var apiConventionTypeAttribute))
+        if (
+            !TryGetType(
+                ApiSymbolNames.ApiConventionTypeAttribute,
+                out var apiConventionTypeAttribute
+            )
+        )
         {
             return false;
         }
 
-        if (!TryGetType(ApiSymbolNames.ApiConventionTypeMatchAttribute, out var apiConventionTypeMatchAttribute))
+        if (
+            !TryGetType(
+                ApiSymbolNames.ApiConventionTypeMatchAttribute,
+                out var apiConventionTypeMatchAttribute
+            )
+        )
         {
             return false;
         }
@@ -37,7 +57,12 @@ internal readonly struct ApiControllerSymbolCache
             return false;
         }
 
-        if (!TryGetType(ApiSymbolNames.DefaultStatusCodeAttribute, out var defaultStatusCodeAttribute))
+        if (
+            !TryGetType(
+                ApiSymbolNames.DefaultStatusCodeAttribute,
+                out var defaultStatusCodeAttribute
+            )
+        )
         {
             return false;
         }
@@ -72,23 +97,41 @@ internal readonly struct ApiControllerSymbolCache
             return false;
         }
 
-        if (!TryGetType(ApiSymbolNames.ProducesDefaultResponseTypeAttribute, out var producesDefaultResponseTypeAttribute))
+        if (
+            !TryGetType(
+                ApiSymbolNames.ProducesDefaultResponseTypeAttribute,
+                out var producesDefaultResponseTypeAttribute
+            )
+        )
         {
             return false;
         }
 
-        if (!TryGetType(ApiSymbolNames.ProducesErrorResponseTypeAttribute, out var producesErrorResponseTypeAttribute))
+        if (
+            !TryGetType(
+                ApiSymbolNames.ProducesErrorResponseTypeAttribute,
+                out var producesErrorResponseTypeAttribute
+            )
+        )
         {
             return false;
         }
 
-        if (!TryGetType(ApiSymbolNames.ProducesResponseTypeAttribute, out var producesResponseTypeAttribute))
+        if (
+            !TryGetType(
+                ApiSymbolNames.ProducesResponseTypeAttribute,
+                out var producesResponseTypeAttribute
+            )
+        )
         {
             return false;
         }
 
-        var statusCodeActionResult = compilation.GetTypeByMetadataName(ApiSymbolNames.IStatusCodeActionResult);
-        var statusCodeActionResultStatusProperty = (IPropertySymbol?)statusCodeActionResult?.GetMembers("StatusCode")[0];
+        var statusCodeActionResult = compilation.GetTypeByMetadataName(
+            ApiSymbolNames.IStatusCodeActionResult
+        );
+        var statusCodeActionResultStatusProperty = (IPropertySymbol?)
+            statusCodeActionResult?.GetMembers("StatusCode")[0];
         if (statusCodeActionResultStatusProperty == null)
         {
             return false;
@@ -119,7 +162,8 @@ internal readonly struct ApiControllerSymbolCache
             problemDetails,
             producesDefaultResponseTypeAttribute,
             producesResponseTypeAttribute,
-            producesErrorResponseTypeAttribute);
+            producesErrorResponseTypeAttribute
+        );
 
         return true;
 
@@ -147,7 +191,8 @@ internal readonly struct ApiControllerSymbolCache
         INamedTypeSymbol problemDetails,
         INamedTypeSymbol producesDefaultResponseTypeAttribute,
         INamedTypeSymbol producesResponseTypeAttribute,
-        INamedTypeSymbol producesErrorResponseTypeAttribute)
+        INamedTypeSymbol producesErrorResponseTypeAttribute
+    )
     {
         ApiConventionMethodAttribute = apiConventionMethodAttribute;
         ApiConventionNameMatchAttribute = apiConventionNameMatchAttribute;

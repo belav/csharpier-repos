@@ -3,7 +3,6 @@
 //-----------------------------------------------------------------------------
 namespace System.ServiceModel.Security.Tokens
 {
-
     interface ISecurityContextSecurityTokenCacheProvider
     {
         ISecurityContextSecurityTokenCache TokenCache { get; }

@@ -6,20 +6,23 @@ namespace System.ServiceModel.Activation
 {
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Reflection;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.Security;
     using System.Security.Permissions;
     using System.ServiceModel;
-    using System.ServiceModel.Configuration;
     using System.ServiceModel.Activation.Diagnostics;
+    using System.ServiceModel.Configuration;
     using System.ServiceModel.Diagnostics.Application;
-    using System.Diagnostics.CodeAnalysis;    
 
     class HostedTransportConfigurationManager
     {
-        IDictionary<string, HostedTransportConfiguration> configurations = new Dictionary<string, HostedTransportConfiguration>(StringComparer.Ordinal);
+        IDictionary<string, HostedTransportConfiguration> configurations = new Dictionary<
+            string,
+            HostedTransportConfiguration
+        >(StringComparer.Ordinal);
 
         // Double-checked locking pattern requires volatile for read/write synchronization
         volatile bool initialized = false;
@@ -28,10 +31,15 @@ namespace System.ServiceModel.Activation
         // Double-checked locking pattern requires volatile for read/write synchronization
         static volatile HostedTransportConfigurationManager singleton;
         static object syncRoot = new object();
-  #pragma warning disable 436
-        const string WasHostingAssemblyName = "System.ServiceModel.WasHosting, Version=" + ThisAssembly.Version + ", Culture=neutral, PublicKeyToken=" + AssemblyRef.EcmaPublicKey;
-        const string MetabaseSettingsIis7FactoryTypeName = "System.ServiceModel.WasHosting.MetabaseSettingsIis7Factory, " + WasHostingAssemblyName;
-  #pragma warning restore 436
+#pragma warning disable 436
+        const string WasHostingAssemblyName =
+            "System.ServiceModel.WasHosting, Version="
+            + ThisAssembly.Version
+            + ", Culture=neutral, PublicKeyToken="
+            + AssemblyRef.EcmaPublicKey;
+        const string MetabaseSettingsIis7FactoryTypeName =
+            "System.ServiceModel.WasHosting.MetabaseSettingsIis7Factory, " + WasHostingAssemblyName;
+#pragma warning restore 436
         const string CreateMetabaseSettingsIis7MethodName = "CreateMetabaseSettings";
 
         HostedTransportConfigurationManager()
@@ -42,7 +50,6 @@ namespace System.ServiceModel.Activation
             }
             else
             {
-
                 metabaseSettings = CreateWasHostingMetabaseSettings();
             }
         }
@@ -52,28 +59,46 @@ namespace System.ServiceModel.Activation
             this.metabaseSettings = metabaseSettings;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls Critical methods CreateMetabaseSettings.",
-            Safe = "Ensures that only the correct, well-known method is called to construct the metabase settings. No other " +
-            "details are leaked, and no control flow or data is allowed in.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls Critical methods CreateMetabaseSettings.",
+            Safe = "Ensures that only the correct, well-known method is called to construct the metabase settings. No other "
+                + "details are leaked, and no control flow or data is allowed in."
+        )]
         [SecuritySafeCritical]
         static MetabaseSettingsIis CreateWasHostingMetabaseSettings()
         {
             Type type = Type.GetType(MetabaseSettingsIis7FactoryTypeName, false);
             if (type == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_MetabaseSettingsIis7TypeNotFound(MetabaseSettingsIis7FactoryTypeName, WasHostingAssemblyName)));
-            }                             
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.Hosting_MetabaseSettingsIis7TypeNotFound(
+                            MetabaseSettingsIis7FactoryTypeName,
+                            WasHostingAssemblyName
+                        )
+                    )
+                );
+            }
             return CreateMetabaseSettings(type);
         }
 
-        [SuppressMessage(FxCop.Category.Security, FxCop.Rule.SecureAsserts, Justification = "This is a private SecurityCritical method and its only caller passes in non-user data. Users cannot pass arbitrary data to this code.")]
-        [Fx.Tag.SecurityNote(Critical = "Asserts full trust in order to call a well-known internal static in WasHosting.dll." +
-            "Caller must ensure that 'type' argument refers to the trusted, well-known Type.")]
+        [SuppressMessage(
+            FxCop.Category.Security,
+            FxCop.Rule.SecureAsserts,
+            Justification = "This is a private SecurityCritical method and its only caller passes in non-user data. Users cannot pass arbitrary data to this code."
+        )]
+        [Fx.Tag.SecurityNote(
+            Critical = "Asserts full trust in order to call a well-known internal static in WasHosting.dll."
+                + "Caller must ensure that 'type' argument refers to the trusted, well-known Type."
+        )]
         [SecurityCritical]
         static MetabaseSettingsIis CreateMetabaseSettings(Type type)
         {
             object instance = null;
-            MethodInfo method = type.GetMethod(CreateMetabaseSettingsIis7MethodName, BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo method = type.GetMethod(
+                CreateMetabaseSettingsIis7MethodName,
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
 
             try
             {
@@ -88,13 +113,19 @@ namespace System.ServiceModel.Activation
 
             if (!(instance is MetabaseSettingsIis))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_BadMetabaseSettingsIis7Type(type.AssemblyQualifiedName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.Hosting_BadMetabaseSettingsIis7Type(type.AssemblyQualifiedName)
+                    )
+                );
             }
 
             return (MetabaseSettingsIis)instance;
         }
 
-        internal static void EnsureInitializedForSimpleApplicationHost(HostedHttpRequestAsyncResult result)
+        internal static void EnsureInitializedForSimpleApplicationHost(
+            HostedHttpRequestAsyncResult result
+        )
         {
             if (singleton != null)
             {
@@ -106,24 +137,20 @@ namespace System.ServiceModel.Activation
                 if (singleton != null)
                     return;
 
-                singleton = new HostedTransportConfigurationManager(new MetabaseSettingsCassini(result));
+                singleton = new HostedTransportConfigurationManager(
+                    new MetabaseSettingsCassini(result)
+                );
             }
         }
 
         internal static MetabaseSettings MetabaseSettings
         {
-            get
-            {
-                return HostedTransportConfigurationManager.Value.metabaseSettings;
-            }
+            get { return HostedTransportConfigurationManager.Value.metabaseSettings; }
         }
 
         object ThisLock
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         static HostedTransportConfigurationManager Value
@@ -168,8 +195,10 @@ namespace System.ServiceModel.Activation
                         foreach (string protocol in metabaseSettings.GetProtocols())
                         {
                             // special case HTTP, it's a legacy protocol
-                            if (string.CompareOrdinal(protocol, Uri.UriSchemeHttp) == 0 ||
-                                string.CompareOrdinal(protocol, Uri.UriSchemeHttps) == 0)
+                            if (
+                                string.CompareOrdinal(protocol, Uri.UriSchemeHttp) == 0
+                                || string.CompareOrdinal(protocol, Uri.UriSchemeHttps) == 0
+                            )
                             {
                                 HttpHostedTransportConfiguration httpConfiguration = null;
                                 if (string.CompareOrdinal(protocol, Uri.UriSchemeHttp) == 0)
@@ -187,11 +216,20 @@ namespace System.ServiceModel.Activation
                             {
                                 if (!Iis7Helper.IsIis7)
                                 {
-                                    throw Fx.AssertAndThrowFatal("HostedTransportConfigurationManager.EnsureInitialized() protocols other than http and https can only be configured in IIS7");
+                                    throw Fx.AssertAndThrowFatal(
+                                        "HostedTransportConfigurationManager.EnsureInitialized() protocols other than http and https can only be configured in IIS7"
+                                    );
                                 }
                                 if (AspNetPartialTrustHelpers.NeedPartialTrustInvoke)
                                 {
-                                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.PartialTrustNonHttpActivation(protocol, HostingEnvironmentWrapper.ApplicationVirtualPath)));
+                                    throw FxTrace.Exception.AsError(
+                                        new InvalidOperationException(
+                                            SR.PartialTrustNonHttpActivation(
+                                                protocol,
+                                                HostingEnvironmentWrapper.ApplicationVirtualPath
+                                            )
+                                        )
+                                    );
                                 }
                                 AddHostedTransportConfigurationIis7(protocol);
                             }
@@ -208,11 +246,19 @@ namespace System.ServiceModel.Activation
             HostedTransportConfiguration configuration = null;
             try
             {
-                ServiceHostingEnvironmentSection section = ServiceHostingEnvironmentSection.GetSection();
+                ServiceHostingEnvironmentSection section =
+                    ServiceHostingEnvironmentSection.GetSection();
                 if (section.TransportConfigurationTypes.ContainsKey(protocol))
                 {
-                    TransportConfigurationTypeElement element = section.TransportConfigurationTypes[protocol];
-                    Debug.Print("HostedTransportConfigurationManager.AddHostedTransportConfigurationIis7() found TransportConfigurationTypes for protocol: " + protocol + " name: " + element.TransportConfigurationType);
+                    TransportConfigurationTypeElement element = section.TransportConfigurationTypes[
+                        protocol
+                    ];
+                    Debug.Print(
+                        "HostedTransportConfigurationManager.AddHostedTransportConfigurationIis7() found TransportConfigurationTypes for protocol: "
+                            + protocol
+                            + " name: "
+                            + element.TransportConfigurationType
+                    );
 
                     Type type = Type.GetType(element.TransportConfigurationType);
                     configuration = Activator.CreateInstance(type) as HostedTransportConfiguration;
@@ -220,19 +266,29 @@ namespace System.ServiceModel.Activation
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_ProtocolNoConfiguration(protocol)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.Hosting_ProtocolNoConfiguration(protocol))
+                    );
                 }
             }
             catch (Exception exception)
             {
                 if (!Fx.IsFatal(exception))
                 {
-                    Debug.Print("HostedTransportConfigurationManager.AddHostedTransportConfigurationIis7() caught exception: " + exception);
+                    Debug.Print(
+                        "HostedTransportConfigurationManager.AddHostedTransportConfigurationIis7() caught exception: "
+                            + exception
+                    );
                     if (DiagnosticUtility.ShouldTraceError)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Error, TraceCode.WebHostProtocolMisconfigured, SR.TraceCodeWebHostProtocolMisconfigured,
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Error,
+                            TraceCode.WebHostProtocolMisconfigured,
+                            SR.TraceCodeWebHostProtocolMisconfigured,
                             new StringTraceRecord("Protocol", protocol),
-                            this, exception);
+                            this,
+                            exception
+                        );
                     }
                 }
                 throw;
@@ -266,7 +322,9 @@ namespace System.ServiceModel.Activation
             EnsureInitialized();
             if (!configurations.ContainsKey(scheme))
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.Hosting_NotSupportedProtocol(scheme)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.Hosting_NotSupportedProtocol(scheme))
+                );
             }
 
             return configurations[scheme];

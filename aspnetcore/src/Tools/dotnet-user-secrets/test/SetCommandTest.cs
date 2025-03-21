@@ -22,7 +22,8 @@ public class SetCommandTest
     [Fact]
     public void SetsFromPipedInput()
     {
-        var input = @"
+        var input =
+            @"
 {
    ""Key1"": ""str value"",
 ""Key2"": 1234,
@@ -31,7 +32,7 @@ public class SetCommandTest
         var testConsole = new TestConsole(_output)
         {
             IsInputRedirected = true,
-            In = new StringReader(input)
+            In = new StringReader(input),
         };
         var secretStore = new TestSecretsStore(_output);
         var command = new SetCommand.FromStdInStrategy();
@@ -47,7 +48,8 @@ public class SetCommandTest
     [Fact]
     public void ParsesNestedObjects()
     {
-        var input = @"
+        var input =
+            @"
                 {
                    ""Key1"": {
                        ""nested"" : ""value""
@@ -58,7 +60,7 @@ public class SetCommandTest
         var testConsole = new TestConsole(_output)
         {
             IsInputRedirected = true,
-            In = new StringReader(input)
+            In = new StringReader(input),
         };
         var secretStore = new TestSecretsStore(_output);
         var command = new SetCommand.FromStdInStrategy();
@@ -78,7 +80,7 @@ public class SetCommandTest
         var testConsole = new TestConsole(_output)
         {
             IsInputRedirected = true,
-            In = new StringReader("")
+            In = new StringReader(""),
         };
         var options = CommandLineOptions.Parse(new[] { "set", "key", "value" }, testConsole);
         Assert.IsType<SetCommand.ForOneValueStrategy>(options.Command);
@@ -87,9 +89,7 @@ public class SetCommandTest
     private class TestSecretsStore : SecretsStore
     {
         public TestSecretsStore(ITestOutputHelper output)
-            : base("xyz", new TestReporter(output))
-        {
-        }
+            : base("xyz", new TestReporter(output)) { }
 
         protected override IDictionary<string, string> Load(string userSecretsId)
         {

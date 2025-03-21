@@ -13,13 +13,14 @@ internal static partial class Interop
             DsRolePrimaryDomainInfoBasic = 1,
             DsRoleUpgradeStatus = 2,
             DsRoleOperationState = 3,
-            DsRolePrimaryDomainInfoBasicEx = 4
+            DsRolePrimaryDomainInfoBasicEx = 4,
         }
 
         [LibraryImport(Libraries.Dsrole, StringMarshalling = StringMarshalling.Utf16)]
         internal static partial int DsRoleGetPrimaryDomainInformation(
             [MarshalAs(UnmanagedType.LPTStr)] string lpServer,
             DSROLE_PRIMARY_DOMAIN_INFO_LEVEL InfoLevel,
-            out IntPtr Buffer);
+            out IntPtr Buffer
+        );
     }
 }

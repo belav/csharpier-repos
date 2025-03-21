@@ -11,9 +11,11 @@ namespace System.ServiceModel.Channels
     using System.Xml;
 
     public abstract class MsmqBindingElementBase
-        : TransportBindingElement, 
-        ITransactedBindingElement,
-        IWsdlExportExtension, IPolicyExportExtension, ITransportPolicyImport
+        : TransportBindingElement,
+            ITransactedBindingElement,
+            IWsdlExportExtension,
+            IPolicyExportExtension,
+            ITransportPolicyImport
     {
         Uri customDeadLetterQueue;
         DeadLetterQueue deadLetterQueue;
@@ -28,7 +30,7 @@ namespace System.ServiceModel.Channels
         bool useMsmqTracing;
         bool useSourceJournal;
         bool receiveContextEnabled;
-        
+
         internal MsmqBindingElementBase()
         {
             this.customDeadLetterQueue = MsmqDefaults.CustomDeadLetterQueue;
@@ -47,14 +49,17 @@ namespace System.ServiceModel.Channels
             this.ReceiveContextSettings = new MsmqReceiveContextSettings();
         }
 
-        internal MsmqBindingElementBase(MsmqBindingElementBase elementToBeCloned) : base(elementToBeCloned)
+        internal MsmqBindingElementBase(MsmqBindingElementBase elementToBeCloned)
+            : base(elementToBeCloned)
         {
             this.customDeadLetterQueue = elementToBeCloned.customDeadLetterQueue;
             this.deadLetterQueue = elementToBeCloned.deadLetterQueue;
             this.durable = elementToBeCloned.durable;
             this.exactlyOnce = elementToBeCloned.exactlyOnce;
             this.maxRetryCycles = elementToBeCloned.maxRetryCycles;
-            this.msmqTransportSecurity = new MsmqTransportSecurity(elementToBeCloned.MsmqTransportSecurity);
+            this.msmqTransportSecurity = new MsmqTransportSecurity(
+                elementToBeCloned.MsmqTransportSecurity
+            );
             this.receiveContextEnabled = elementToBeCloned.ReceiveContextEnabled;
             this.receiveErrorHandling = elementToBeCloned.receiveErrorHandling;
             this.receiveRetryCount = elementToBeCloned.receiveRetryCount;
@@ -62,21 +67,14 @@ namespace System.ServiceModel.Channels
             this.timeToLive = elementToBeCloned.timeToLive;
             this.useMsmqTracing = elementToBeCloned.useMsmqTracing;
             this.useSourceJournal = elementToBeCloned.useSourceJournal;
-            // 
-
+            //
 
             this.ReceiveContextSettings = elementToBeCloned.ReceiveContextSettings;
         }
 
-        internal IReceiveContextSettings ReceiveContextSettings
-        {
-            get; set;
-        }
+        internal IReceiveContextSettings ReceiveContextSettings { get; set; }
 
-        internal abstract MsmqUri.IAddressTranslator AddressTranslator
-        {
-            get;
-        }
+        internal abstract MsmqUri.IAddressTranslator AddressTranslator { get; }
 
         // applicable on: client
         public Uri CustomDeadLetterQueue
@@ -89,11 +87,13 @@ namespace System.ServiceModel.Channels
         public DeadLetterQueue DeadLetterQueue
         {
             get { return this.deadLetterQueue; }
-            set 
+            set
             {
-                if (! DeadLetterQueueHelper.IsDefined(value))
+                if (!DeadLetterQueueHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 this.deadLetterQueue = value;
@@ -109,10 +109,7 @@ namespace System.ServiceModel.Channels
 
         public bool TransactedReceiveEnabled
         {
-            get 
-            {
-                return this.exactlyOnce; 
-            }
+            get { return this.exactlyOnce; }
         }
 
         // applicable on: client, server
@@ -131,7 +128,12 @@ namespace System.ServiceModel.Channels
                 if (value < 0)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value", value, SR.GetString(SR.MsmqNonNegativeArgumentExpected)));
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.MsmqNonNegativeArgumentExpected)
+                        )
+                    );
                 }
 
                 this.receiveRetryCount = value;
@@ -147,7 +149,12 @@ namespace System.ServiceModel.Channels
                 if (value < 0)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value", value, SR.GetString(SR.MsmqNonNegativeArgumentExpected)));
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.MsmqNonNegativeArgumentExpected)
+                        )
+                    );
                 }
 
                 this.maxRetryCycles = value;
@@ -167,16 +174,18 @@ namespace System.ServiceModel.Channels
             get { return this.receiveContextEnabled; }
             set { this.receiveContextEnabled = value; }
         }
-        
+
         // applicable on: server
         public ReceiveErrorHandling ReceiveErrorHandling
         {
             get { return this.receiveErrorHandling; }
-            set 
+            set
             {
-                if (! ReceiveErrorHandlingHelper.IsDefined(value))
+                if (!ReceiveErrorHandlingHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
 
                 this.receiveErrorHandling = value;
@@ -191,14 +200,24 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.retryCycleDelay = value;
@@ -213,14 +232,24 @@ namespace System.ServiceModel.Channels
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.timeToLive = value;
@@ -238,25 +267,37 @@ namespace System.ServiceModel.Channels
             get { return this.useSourceJournal; }
             set { this.useSourceJournal = value; }
         }
-        
-        public TimeSpan ValidityDuration 
+
+        public TimeSpan ValidityDuration
         {
             get { return this.ReceiveContextSettings.ValidityDuration; }
             set
             {
                 if (value < TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRange0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRange0)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
-                ((MsmqReceiveContextSettings)this.ReceiveContextSettings).SetValidityDuration(value);
+                ((MsmqReceiveContextSettings)this.ReceiveContextSettings).SetValidityDuration(
+                    value
+                );
             }
         }
 
@@ -266,7 +307,7 @@ namespace System.ServiceModel.Channels
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
             }
-            if (typeof(T) == typeof(ISecurityCapabilities)) 
+            if (typeof(T) == typeof(ISecurityCapabilities))
             {
                 return null;
             }
@@ -298,10 +339,20 @@ namespace System.ServiceModel.Channels
 
         static bool FindAssertion(ICollection<XmlElement> assertions, string name)
         {
-            return (PolicyConversionContext.FindAssertion(assertions, name, TransportPolicyConstants.MsmqTransportNamespace, true) != null);
+            return (
+                PolicyConversionContext.FindAssertion(
+                    assertions,
+                    name,
+                    TransportPolicyConstants.MsmqTransportNamespace,
+                    true
+                ) != null
+            );
         }
 
-        void IPolicyExportExtension.ExportPolicy(MetadataExporter exporter, PolicyConversionContext context)
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (exporter == null)
             {
@@ -318,54 +369,80 @@ namespace System.ServiceModel.Channels
             ICollection<XmlElement> policyAssertions = context.GetBindingAssertions();
             if (!this.Durable)
             {
-                policyAssertions.Add(document.CreateElement(
-                                         TransportPolicyConstants.MsmqTransportPrefix,
-                                         TransportPolicyConstants.MsmqVolatile,
-                                         TransportPolicyConstants.MsmqTransportNamespace));
+                policyAssertions.Add(
+                    document.CreateElement(
+                        TransportPolicyConstants.MsmqTransportPrefix,
+                        TransportPolicyConstants.MsmqVolatile,
+                        TransportPolicyConstants.MsmqTransportNamespace
+                    )
+                );
             }
 
             if (!this.ExactlyOnce)
             {
-                policyAssertions.Add(document.CreateElement(
-                                         TransportPolicyConstants.MsmqTransportPrefix,
-                                         TransportPolicyConstants.MsmqBestEffort,
-                                         TransportPolicyConstants.MsmqTransportNamespace));
+                policyAssertions.Add(
+                    document.CreateElement(
+                        TransportPolicyConstants.MsmqTransportPrefix,
+                        TransportPolicyConstants.MsmqBestEffort,
+                        TransportPolicyConstants.MsmqTransportNamespace
+                    )
+                );
             }
 
             if (context.Contract.SessionMode == SessionMode.Required)
             {
-                policyAssertions.Add(document.CreateElement(
-                                         TransportPolicyConstants.MsmqTransportPrefix,
-                                         TransportPolicyConstants.MsmqSession,
-                                         TransportPolicyConstants.MsmqTransportNamespace));
+                policyAssertions.Add(
+                    document.CreateElement(
+                        TransportPolicyConstants.MsmqTransportPrefix,
+                        TransportPolicyConstants.MsmqSession,
+                        TransportPolicyConstants.MsmqTransportNamespace
+                    )
+                );
             }
 
             if (this.MsmqTransportSecurity.MsmqProtectionLevel != ProtectionLevel.None)
             {
-                policyAssertions.Add(document.CreateElement(
-                                         TransportPolicyConstants.MsmqTransportPrefix,
-                                         TransportPolicyConstants.MsmqAuthenticated,
-                                         TransportPolicyConstants.MsmqTransportNamespace));
-                if (this.MsmqTransportSecurity.MsmqAuthenticationMode == MsmqAuthenticationMode.WindowsDomain)
+                policyAssertions.Add(
+                    document.CreateElement(
+                        TransportPolicyConstants.MsmqTransportPrefix,
+                        TransportPolicyConstants.MsmqAuthenticated,
+                        TransportPolicyConstants.MsmqTransportNamespace
+                    )
+                );
+                if (
+                    this.MsmqTransportSecurity.MsmqAuthenticationMode
+                    == MsmqAuthenticationMode.WindowsDomain
+                )
                 {
-                    policyAssertions.Add(document.CreateElement(
-                                             TransportPolicyConstants.MsmqTransportPrefix,
-                                             TransportPolicyConstants.MsmqWindowsDomain,
-                                             TransportPolicyConstants.MsmqTransportNamespace));
+                    policyAssertions.Add(
+                        document.CreateElement(
+                            TransportPolicyConstants.MsmqTransportPrefix,
+                            TransportPolicyConstants.MsmqWindowsDomain,
+                            TransportPolicyConstants.MsmqTransportNamespace
+                        )
+                    );
                 }
             }
 
             bool createdNew;
-            MessageEncodingBindingElement encodingBindingElement = FindMessageEncodingBindingElement(context.BindingElements, out createdNew);
+            MessageEncodingBindingElement encodingBindingElement =
+                FindMessageEncodingBindingElement(context.BindingElements, out createdNew);
             if (createdNew && encodingBindingElement is IPolicyExportExtension)
             {
                 ((IPolicyExportExtension)encodingBindingElement).ExportPolicy(exporter, context);
             }
 
-            WsdlExporter.WSAddressingHelper.AddWSAddressingAssertion(exporter, context, encodingBindingElement.MessageVersion.Addressing);
+            WsdlExporter.WSAddressingHelper.AddWSAddressingAssertion(
+                exporter,
+                context,
+                encodingBindingElement.MessageVersion.Addressing
+            );
         }
 
-        void ITransportPolicyImport.ImportPolicy(MetadataImporter importer, PolicyConversionContext policyContext)
+        void ITransportPolicyImport.ImportPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext policyContext
+        )
         {
             ICollection<XmlElement> policyAssertions = policyContext.GetBindingAssertions();
             if (FindAssertion(policyAssertions, TransportPolicyConstants.MsmqVolatile))
@@ -387,9 +464,11 @@ namespace System.ServiceModel.Channels
             {
                 this.MsmqTransportSecurity.MsmqProtectionLevel = ProtectionLevel.Sign;
                 if (FindAssertion(policyAssertions, TransportPolicyConstants.MsmqWindowsDomain))
-                    this.MsmqTransportSecurity.MsmqAuthenticationMode = MsmqAuthenticationMode.WindowsDomain;
+                    this.MsmqTransportSecurity.MsmqAuthenticationMode =
+                        MsmqAuthenticationMode.WindowsDomain;
                 else
-                    this.MsmqTransportSecurity.MsmqAuthenticationMode = MsmqAuthenticationMode.Certificate;
+                    this.MsmqTransportSecurity.MsmqAuthenticationMode =
+                        MsmqAuthenticationMode.Certificate;
             }
             else
             {
@@ -398,29 +477,40 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        void IWsdlExportExtension.ExportContract(WsdlExporter exporter, WsdlContractConversionContext context) { }
+        void IWsdlExportExtension.ExportContract(
+            WsdlExporter exporter,
+            WsdlContractConversionContext context
+        ) { }
 
         internal virtual string WsdlTransportUri
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
-        void IWsdlExportExtension.ExportEndpoint(WsdlExporter exporter, WsdlEndpointConversionContext endpointContext)
+        void IWsdlExportExtension.ExportEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext endpointContext
+        )
         {
             bool createdNew;
-            MessageEncodingBindingElement encodingBindingElement = FindMessageEncodingBindingElement(endpointContext, out createdNew);
+            MessageEncodingBindingElement encodingBindingElement =
+                FindMessageEncodingBindingElement(endpointContext, out createdNew);
             TransportBindingElement.ExportWsdlEndpoint(
-                exporter, endpointContext, this.WsdlTransportUri, 
-                encodingBindingElement.MessageVersion.Addressing);
+                exporter,
+                endpointContext,
+                this.WsdlTransportUri,
+                encodingBindingElement.MessageVersion.Addressing
+            );
         }
 
-        MessageEncodingBindingElement FindMessageEncodingBindingElement(BindingElementCollection bindingElements, out bool createdNew)
+        MessageEncodingBindingElement FindMessageEncodingBindingElement(
+            BindingElementCollection bindingElements,
+            out bool createdNew
+        )
         {
             createdNew = false;
-            MessageEncodingBindingElement encodingBindingElement = bindingElements.Find<MessageEncodingBindingElement>();
+            MessageEncodingBindingElement encodingBindingElement =
+                bindingElements.Find<MessageEncodingBindingElement>();
             if (encodingBindingElement == null)
             {
                 createdNew = true;
@@ -429,17 +519,20 @@ namespace System.ServiceModel.Channels
             return encodingBindingElement;
         }
 
-        MessageEncodingBindingElement FindMessageEncodingBindingElement(WsdlEndpointConversionContext endpointContext, out bool createdNew)
+        MessageEncodingBindingElement FindMessageEncodingBindingElement(
+            WsdlEndpointConversionContext endpointContext,
+            out bool createdNew
+        )
         {
-            BindingElementCollection bindingElements = endpointContext.Endpoint.Binding.CreateBindingElements();
+            BindingElementCollection bindingElements =
+                endpointContext.Endpoint.Binding.CreateBindingElements();
             return FindMessageEncodingBindingElement(bindingElements, out createdNew);
         }
 
         class BindingDeliveryCapabilitiesHelper : IBindingDeliveryCapabilities
         {
-            internal BindingDeliveryCapabilitiesHelper()
-            {
-            }
+            internal BindingDeliveryCapabilitiesHelper() { }
+
             bool IBindingDeliveryCapabilities.AssuresOrderedDelivery
             {
                 get { return false; }
@@ -450,7 +543,5 @@ namespace System.ServiceModel.Channels
                 get { return true; }
             }
         }
- 
     }
 }
-    

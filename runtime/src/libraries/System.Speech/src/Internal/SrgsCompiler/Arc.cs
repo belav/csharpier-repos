@@ -18,9 +18,7 @@ namespace System.Speech.Internal.SrgsCompiler
     {
         #region Constructors
 
-        internal Arc()
-        {
-        }
+        internal Arc() { }
 
         internal Arc(Arc arc)
             : this()
@@ -53,12 +51,39 @@ namespace System.Speech.Internal.SrgsCompiler
             _iWord = wordId;
         }
 
-        internal Arc(string sWord, Rule ruleRef, StringBlob words, float flWeight, int confidence, Rule specialRule, MatchMode matchMode, ref bool fNeedWeightTable)
-            : this(sWord, ruleRef, words, flWeight, confidence, specialRule, s_serializeToken++, matchMode, ref fNeedWeightTable)
-        {
-        }
+        internal Arc(
+            string sWord,
+            Rule ruleRef,
+            StringBlob words,
+            float flWeight,
+            int confidence,
+            Rule specialRule,
+            MatchMode matchMode,
+            ref bool fNeedWeightTable
+        )
+            : this(
+                sWord,
+                ruleRef,
+                words,
+                flWeight,
+                confidence,
+                specialRule,
+                s_serializeToken++,
+                matchMode,
+                ref fNeedWeightTable
+            ) { }
 
-        private Arc(string sWord, Rule ruleRef, StringBlob words, float flWeight, int confidence, Rule specialRule, uint iSerialize, MatchMode matchMode, ref bool fNeedWeightTable)
+        private Arc(
+            string sWord,
+            Rule ruleRef,
+            StringBlob words,
+            float flWeight,
+            int confidence,
+            Rule specialRule,
+            uint iSerialize,
+            MatchMode matchMode,
+            ref bool fNeedWeightTable
+        )
             : this(0, flWeight, confidence, 0, matchMode, ref fNeedWeightTable)
         {
             _ruleRef = ruleRef;
@@ -68,7 +93,12 @@ namespace System.Speech.Internal.SrgsCompiler
             {
                 if (specialRule != null)
                 {
-                    _specialTransitionIndex = (specialRule == CfgGrammar.SPRULETRANS_WILDCARD) ? CfgGrammar.SPWILDCARDTRANSITION : (specialRule == CfgGrammar.SPRULETRANS_DICTATION) ? CfgGrammar.SPDICTATIONTRANSITION : CfgGrammar.SPTEXTBUFFERTRANSITION;
+                    _specialTransitionIndex =
+                        (specialRule == CfgGrammar.SPRULETRANS_WILDCARD)
+                            ? CfgGrammar.SPWILDCARDTRANSITION
+                        : (specialRule == CfgGrammar.SPRULETRANS_DICTATION)
+                            ? CfgGrammar.SPDICTATIONTRANSITION
+                        : CfgGrammar.SPTEXTBUFFERTRANSITION;
                 }
                 else
                 {
@@ -77,7 +107,14 @@ namespace System.Speech.Internal.SrgsCompiler
             }
         }
 
-        internal Arc(int iWord, float flWeight, int confidence, int ulSpecialTransitionIndex, MatchMode matchMode, ref bool fNeedWeightTable)
+        internal Arc(
+            int iWord,
+            float flWeight,
+            int confidence,
+            int ulSpecialTransitionIndex,
+            MatchMode matchMode,
+            ref bool fNeedWeightTable
+        )
             : this()
         {
             _confidence = confidence;
@@ -138,7 +175,15 @@ namespace System.Speech.Internal.SrgsCompiler
                 return arc1._iWord - arc2._iWord;
             else
             {
-                if (arc1._ruleRef != null || arc2._ruleRef != null || ((arc1._specialTransitionIndex - arc2._specialTransitionIndex) + (arc1._confidence - arc2._confidence) != 0))
+                if (
+                    arc1._ruleRef != null
+                    || arc2._ruleRef != null
+                    || (
+                        (arc1._specialTransitionIndex - arc2._specialTransitionIndex)
+                            + (arc1._confidence - arc2._confidence)
+                        != 0
+                    )
+                )
                 {
                     int diff = 0;
                     if (arc1._ruleRef != null || arc2._ruleRef != null)
@@ -153,7 +198,11 @@ namespace System.Speech.Internal.SrgsCompiler
                         }
                         else
                         {
-                            diff = string.Compare(arc1._ruleRef.Name, arc2._ruleRef.Name, StringComparison.CurrentCulture);
+                            diff = string.Compare(
+                                arc1._ruleRef.Name,
+                                arc2._ruleRef.Name,
+                                StringComparison.CurrentCulture
+                            );
                         }
                     }
 
@@ -221,7 +270,12 @@ namespace System.Speech.Internal.SrgsCompiler
             return _flWeight;
         }
 
-        internal static float SerializeExtraEpsilonWithTag(StreamMarshaler streamBuffer, Arc arc, bool isLast, uint arcIndex)
+        internal static float SerializeExtraEpsilonWithTag(
+            StreamMarshaler streamBuffer,
+            Arc arc,
+            bool isLast,
+            uint arcIndex
+        )
         {
             CfgArc A = new();
 
@@ -238,7 +292,11 @@ namespace System.Speech.Internal.SrgsCompiler
             return arc._flWeight;
         }
 
-        internal void SetArcIndexForTag(int iArc, uint iArcOffset, bool tagsCannotSpanOverMultipleArcs)
+        internal void SetArcIndexForTag(
+            int iArc,
+            uint iArcOffset,
+            bool tagsCannotSpanOverMultipleArcs
+        )
         {
             _startTags[iArc]._cfgTag.StartArcIndex = iArcOffset;
             _startTags[iArc]._cfgTag.ArcIndex = iArcOffset;
@@ -273,7 +331,8 @@ namespace System.Speech.Internal.SrgsCompiler
             }
 
             // Compare by arc Id
-            return (int)(arc1._start != null ? arc1._start.Id : 0) - (int)(arc2._start != null ? arc2._start.Id : 0);
+            return (int)(arc1._start != null ? arc1._start.Id : 0)
+                - (int)(arc2._start != null ? arc2._start.Id : 0);
         }
 
         /// <summary>
@@ -291,7 +350,8 @@ namespace System.Speech.Internal.SrgsCompiler
             }
 
             // Compare by arc Id
-            return (int)(arc1._end != null ? arc1._end.Id : 0) - (int)(arc2._end != null ? arc2._end.Id : 0);
+            return (int)(arc1._end != null ? arc1._end.Id : 0)
+                - (int)(arc2._end != null ? arc2._end.Id : 0);
         }
 
         /// <summary>
@@ -300,11 +360,19 @@ namespace System.Speech.Internal.SrgsCompiler
         internal static int CompareIdenticalTransitions(Arc arc1, Arc arc2)
         {
             // Same start arc
-            int diff = (int)(arc1._start != null ? arc1._start.Id : 0) - (int)(arc2._start != null ? arc2._start.Id : 0);
+            int diff =
+                (int)(arc1._start != null ? arc1._start.Id : 0)
+                - (int)(arc2._start != null ? arc2._start.Id : 0);
             if (diff == 0)
             {
                 // Same end arc
-                if ((diff = (int)(arc1._end != null ? arc1._end.Id : 0) - (int)(arc2._end != null ? arc2._end.Id : 0)) == 0)
+                if (
+                    (
+                        diff =
+                            (int)(arc1._end != null ? arc1._end.Id : 0)
+                            - (int)(arc2._end != null ? arc2._end.Id : 0)
+                    ) == 0
+                )
                 {
                     // Same tag
                     diff = arc1.SameTags(arc2) ? 0 : 1;
@@ -410,11 +478,21 @@ namespace System.Speech.Internal.SrgsCompiler
                     if (be != null)
                     {
                         int idTagName;
-                        newTag._cfgTag._nameOffset = be.Symbols.Add(tag._be.Symbols.FromOffset(tag._cfgTag._nameOffset), out idTagName);
+                        newTag._cfgTag._nameOffset = be.Symbols.Add(
+                            tag._be.Symbols.FromOffset(tag._cfgTag._nameOffset),
+                            out idTagName
+                        );
 #pragma warning disable 0618 // VarEnum is obsolete
-                        if (tag._cfgTag._valueOffset != 0 && tag._cfgTag.PropVariantType == System.Runtime.InteropServices.VarEnum.VT_EMPTY)
+                        if (
+                            tag._cfgTag._valueOffset != 0
+                            && tag._cfgTag.PropVariantType
+                                == System.Runtime.InteropServices.VarEnum.VT_EMPTY
+                        )
                         {
-                            newTag._cfgTag._valueOffset = be.Symbols.Add(tag._be.Symbols.FromOffset(tag._cfgTag._valueOffset), out idTagName);
+                            newTag._cfgTag._valueOffset = be.Symbols.Add(
+                                tag._be.Symbols.FromOffset(tag._cfgTag._valueOffset),
+                                out idTagName
+                            );
                         }
 #pragma warning restore 0618
                     }
@@ -439,7 +517,12 @@ namespace System.Speech.Internal.SrgsCompiler
             bool same = _startTags == null && arc._startTags == null;
 
             // Compare each tag if not null
-            if (!same && _startTags != null && arc._startTags != null && _startTags.Count == arc._startTags.Count)
+            if (
+                !same
+                && _startTags != null
+                && arc._startTags != null
+                && _startTags.Count == arc._startTags.Count
+            )
             {
                 same = true;
                 for (int i = 0; i < _startTags.Count; i++)
@@ -454,7 +537,12 @@ namespace System.Speech.Internal.SrgsCompiler
                 same = _endTags == null && arc._endTags == null;
 
                 // Compare each tag if not null
-                if (!same && _endTags != null && arc._endTags != null && _endTags.Count == arc._endTags.Count)
+                if (
+                    !same
+                    && _endTags != null
+                    && arc._endTags != null
+                    && _endTags.Count == arc._endTags.Count
+                )
                 {
                     same = true;
                     for (int i = 0; i < _endTags.Count; i++)
@@ -479,9 +567,11 @@ namespace System.Speech.Internal.SrgsCompiler
         {
             get
             {
-                return (_ruleRef == null) &&               // Not a ruleref
-                    (_specialTransitionIndex == 0) &&      // Not a special transition (wildcard, dictation, ...)
-                    (_iWord == 0);                    // Not a word
+                return (_ruleRef == null)
+                    && // Not a ruleref
+                    (_specialTransitionIndex == 0)
+                    && // Not a special transition (wildcard, dictation, ...)
+                    (_iWord == 0); // Not a word
             }
         }
 
@@ -502,7 +592,11 @@ namespace System.Speech.Internal.SrgsCompiler
 
         public override string ToString()
         {
-            return (_start != null ? "#" + _start.Id.ToString(CultureInfo.InvariantCulture) : "") + " <- " + DebuggerDisplayTags() + " -> " + (_end != null ? "#" + _end.Id.ToString(CultureInfo.InvariantCulture) : "");
+            return (_start != null ? "#" + _start.Id.ToString(CultureInfo.InvariantCulture) : "")
+                + " <- "
+                + DebuggerDisplayTags()
+                + " -> "
+                + (_end != null ? "#" + _end.Id.ToString(CultureInfo.InvariantCulture) : "");
         }
 
         internal string DebuggerDisplayTags()
@@ -537,14 +631,19 @@ namespace System.Speech.Internal.SrgsCompiler
             else
             {
                 sb.Append('\'');
-                sb.Append(_iWord == 0 ? new string(new char[] { (char)0x3b5 }) : _be != null ? _be.Words[_iWord] : _iWord.ToString(CultureInfo.InvariantCulture));
+                sb.Append(
+                    _iWord == 0 ? new string(new char[] { (char)0x3b5 })
+                    : _be != null ? _be.Words[_iWord]
+                    : _iWord.ToString(CultureInfo.InvariantCulture)
+                );
                 sb.Append('\'');
             }
 
             if (_startTags != null || _endTags != null)
             {
                 // Check if the tags are the same
-                bool same = _startTags != null && _endTags != null && _endTags.Count == _startTags.Count;
+                bool same =
+                    _startTags != null && _endTags != null && _endTags.Count == _startTags.Count;
 
                 // Compare each tag if not null
                 for (int i = 0; same && i < _endTags.Count; i++)
@@ -604,18 +703,12 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal int SemanticTagCount
         {
-            get
-            {
-                return _startTags == null ? 0 : _startTags.Count;
-            }
+            get { return _startTags == null ? 0 : _startTags.Count; }
         }
 
         internal State Start
         {
-            get
-            {
-                return _start;
-            }
+            get { return _start; }
             set
             {
                 if (value != _start)
@@ -629,10 +722,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal State End
         {
-            get
-            {
-                return _end;
-            }
+            get { return _end; }
             set
             {
                 // If no change, then do nothing
@@ -647,21 +737,18 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal int WordId
         {
-            get
-            {
-                return _iWord;
-            }
+            get { return _iWord; }
         }
 
         internal Rule RuleRef
         {
-            get
-            {
-                return _ruleRef;
-            }
+            get { return _ruleRef; }
             set
             {
-                if ((_start != null && !_start.OutArcs.IsEmpty) || (_end != null && !_end.InArcs.IsEmpty))
+                if (
+                    (_start != null && !_start.OutArcs.IsEmpty)
+                    || (_end != null && !_end.InArcs.IsEmpty)
+                )
                 {
                     throw new InvalidOperationException();
                 }
@@ -671,43 +758,25 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal float Weight
         {
-            get
-            {
-                return _flWeight;
-            }
-            set
-            {
-                _flWeight = value;
-            }
+            get { return _flWeight; }
+            set { _flWeight = value; }
         }
 
         internal int SpecialTransitionIndex
         {
-            get
-            {
-                return _specialTransitionIndex;
-            }
+            get { return _specialTransitionIndex; }
         }
 
 #if DEBUG
         internal bool CheckingForExitPath
         {
-            get
-            {
-                return _fCheckingForExitPath;
-            }
-            set
-            {
-                _fCheckingForExitPath = value;
-            }
+            get { return _fCheckingForExitPath; }
+            set { _fCheckingForExitPath = value; }
         }
 
         internal Backend Backend
         {
-            set
-            {
-                _be = value;
-            }
+            set { _be = value; }
         }
 #endif
         #endregion
@@ -738,13 +807,20 @@ namespace System.Speech.Internal.SrgsCompiler
             return sb.ToString();
         }
 
-        private static string GetSemanticValue(CfgSemanticTag tag, StringBlob symbols, out string value)
+        private static string GetSemanticValue(
+            CfgSemanticTag tag,
+            StringBlob symbols,
+            out string value
+        )
         {
 #pragma warning disable 0618 // VarEnum is obsolete
             switch (tag.PropVariantType)
             {
                 case VarEnum.VT_EMPTY:
-                    value = tag._valueOffset > 0 ? symbols.FromOffset(tag._valueOffset) : tag._valueOffset.ToString(CultureInfo.InvariantCulture);
+                    value =
+                        tag._valueOffset > 0
+                            ? symbols.FromOffset(tag._valueOffset)
+                            : tag._valueOffset.ToString(CultureInfo.InvariantCulture);
                     break;
 
                 case VarEnum.VT_I4:
@@ -766,7 +842,9 @@ namespace System.Speech.Internal.SrgsCompiler
             }
 #pragma warning restore 0618
 
-            return tag._nameOffset > 0 ? symbols.FromOffset(tag._nameOffset) : tag._nameOffset.ToString(CultureInfo.InvariantCulture);
+            return tag._nameOffset > 0
+                ? symbols.FromOffset(tag._nameOffset)
+                : tag._nameOffset.ToString(CultureInfo.InvariantCulture);
         }
 #endif
 
@@ -777,15 +855,15 @@ namespace System.Speech.Internal.SrgsCompiler
             int ret = 0;
 
             if (_ruleRef != null)
-                ret = 0x1000000 + _ruleRef._cfgRule._nameOffset;      // It's a rule - Place 2nd in list
+                ret = 0x1000000 + _ruleRef._cfgRule._nameOffset; // It's a rule - Place 2nd in list
 
             if (_iWord != 0)
-                ret += 0x2000000 + _iWord;// It's a word - Place last in list
+                ret += 0x2000000 + _iWord; // It's a word - Place last in list
 
             if (_specialTransitionIndex != 0)
                 ret += 0x3000000; // It's a special transition (dictation, text buffer, or wildcard)
 
-            return ret;                // It's an epsilon -- We're first
+            return ret; // It's an epsilon -- We're first
         }
 
         #endregion
@@ -838,7 +916,7 @@ namespace System.Speech.Internal.SrgsCompiler
     internal enum Direction
     {
         Right,
-        Left
+        Left,
     }
     #endregion
 }

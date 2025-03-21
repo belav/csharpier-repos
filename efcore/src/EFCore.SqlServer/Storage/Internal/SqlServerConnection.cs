@@ -17,7 +17,8 @@ public class SqlServerConnection : RelationalConnection, ISqlServerConnection
     // Compensate for slow SQL Server database creation
     private const int DefaultMasterConnectionCommandTimeout = 60;
 
-    private static readonly ConcurrentDictionary<string, bool> MultipleActiveResultSetsEnabledMap = new();
+    private static readonly ConcurrentDictionary<string, bool> MultipleActiveResultSetsEnabledMap =
+        new();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -26,9 +27,7 @@ public class SqlServerConnection : RelationalConnection, ISqlServerConnection
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public SqlServerConnection(RelationalConnectionDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+        : base(dependencies) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,8 +38,7 @@ public class SqlServerConnection : RelationalConnection, ISqlServerConnection
     protected override void OpenDbConnection(bool errorsExpected)
     {
         // Note: Not needed for the Async overload: see https://github.com/dotnet/SqlClient/issues/615
-        if (errorsExpected
-            && DbConnection is SqlConnection sqlConnection)
+        if (errorsExpected && DbConnection is SqlConnection sqlConnection)
         {
             sqlConnection.Open(SqlConnectionOverrides.OpenWithoutRetry);
         }
@@ -56,8 +54,8 @@ public class SqlServerConnection : RelationalConnection, ISqlServerConnection
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override DbConnection CreateDbConnection()
-        => new SqlConnection(GetValidatedConnectionString());
+    protected override DbConnection CreateDbConnection() =>
+        new SqlConnection(GetValidatedConnectionString());
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -67,13 +65,17 @@ public class SqlServerConnection : RelationalConnection, ISqlServerConnection
     /// </summary>
     public virtual ISqlServerConnection CreateMasterConnection()
     {
-        var connectionStringBuilder = new SqlConnectionStringBuilder(GetValidatedConnectionString()) { InitialCatalog = "master" };
+        var connectionStringBuilder = new SqlConnectionStringBuilder(GetValidatedConnectionString())
+        {
+            InitialCatalog = "master",
+        };
         connectionStringBuilder.Remove("AttachDBFilename");
 
         var contextOptions = new DbContextOptionsBuilder()
             .UseSqlServer(
                 connectionStringBuilder.ConnectionString,
-                b => b.CommandTimeout(CommandTimeout ?? DefaultMasterConnectionCommandTimeout))
+                b => b.CommandTimeout(CommandTimeout ?? DefaultMasterConnectionCommandTimeout)
+            )
             .Options;
 
         return new SqlServerConnection(Dependencies with { ContextOptions = contextOptions });
@@ -93,13 +95,14 @@ public class SqlServerConnection : RelationalConnection, ISqlServerConnection
 
             return connectionString != null
                 && MultipleActiveResultSetsEnabledMap.GetOrAdd(
-                    connectionString, cs => new SqlConnectionStringBuilder(cs).MultipleActiveResultSets);
+                    connectionString,
+                    cs => new SqlConnectionStringBuilder(cs).MultipleActiveResultSets
+                );
         }
     }
 
     /// <summary>
     ///     Indicates whether the store connection supports ambient transactions
     /// </summary>
-    protected override bool SupportsAmbientTransactions
-        => true;
+    protected override bool SupportsAmbientTransactions => true;
 }

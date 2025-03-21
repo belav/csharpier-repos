@@ -4,11 +4,11 @@
 
 using System;
 using System.Composition;
-using Microsoft.CodeAnalysis.Telemetry;
-using Microsoft.CodeAnalysis.Extensions;
 using Microsoft.CodeAnalysis.ErrorReporting;
+using Microsoft.CodeAnalysis.Extensions;
 using Microsoft.CodeAnalysis.ExternalAccess.LegacyCodeAnalysis.Api;
 using Microsoft.CodeAnalysis.Host.Mef;
+using Microsoft.CodeAnalysis.Telemetry;
 using Microsoft.VisualStudio.LanguageServices;
 using Microsoft.VisualStudio.LanguageServices.Implementation.Suppression;
 using Microsoft.VisualStudio.Shell.Interop;
@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.LegacyCodeAnalysis
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public LegacyCodeAnalysisVisualStudioSuppressionFixServiceAccessor(
             VisualStudioWorkspace workspace,
-            IVisualStudioSuppressionFixService implementation)
+            IVisualStudioSuppressionFixService implementation
+        )
         {
             _workspace = workspace;
             _implementation = implementation;
@@ -35,7 +36,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.LegacyCodeAnalysis
 
         public bool AddSuppressions(IVsHierarchy? projectHierarchy)
         {
-            var errorReportingService = _workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService =
+                _workspace.Services.GetRequiredService<IErrorReportingService>();
 
             try
             {
@@ -50,51 +52,82 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.LegacyCodeAnalysis
                     new InfoBarUI(
                         WorkspacesResources.Show_Stack_Trace,
                         InfoBarUI.UIKind.HyperLink,
-                        () => errorReportingService.ShowDetailedErrorInfo(ex), closeAfterAction: true));
+                        () => errorReportingService.ShowDetailedErrorInfo(ex),
+                        closeAfterAction: true
+                    )
+                );
                 return false;
             }
         }
 
-        public bool AddSuppressions(bool selectedErrorListEntriesOnly, bool suppressInSource, IVsHierarchy? projectHierarchy)
+        public bool AddSuppressions(
+            bool selectedErrorListEntriesOnly,
+            bool suppressInSource,
+            IVsHierarchy? projectHierarchy
+        )
         {
-            var errorReportingService = _workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService =
+                _workspace.Services.GetRequiredService<IErrorReportingService>();
 
             try
             {
-                return _implementation.AddSuppressions(selectedErrorListEntriesOnly, suppressInSource, projectHierarchy);
+                return _implementation.AddSuppressions(
+                    selectedErrorListEntriesOnly,
+                    suppressInSource,
+                    projectHierarchy
+                );
             }
             catch (Exception ex)
             {
                 errorReportingService.ShowGlobalErrorInfo(
-                    message: string.Format(ServicesVSResources.Error_updating_suppressions_0, ex.Message),
+                    message: string.Format(
+                        ServicesVSResources.Error_updating_suppressions_0,
+                        ex.Message
+                    ),
                     TelemetryFeatureName.LegacySuppressionFix,
                     ex,
                     new InfoBarUI(
                         WorkspacesResources.Show_Stack_Trace,
                         InfoBarUI.UIKind.HyperLink,
-                        () => errorReportingService.ShowDetailedErrorInfo(ex), closeAfterAction: true));
+                        () => errorReportingService.ShowDetailedErrorInfo(ex),
+                        closeAfterAction: true
+                    )
+                );
                 return false;
             }
         }
 
-        public bool RemoveSuppressions(bool selectedErrorListEntriesOnly, IVsHierarchy? projectHierarchy)
+        public bool RemoveSuppressions(
+            bool selectedErrorListEntriesOnly,
+            IVsHierarchy? projectHierarchy
+        )
         {
-            var errorReportingService = _workspace.Services.GetRequiredService<IErrorReportingService>();
+            var errorReportingService =
+                _workspace.Services.GetRequiredService<IErrorReportingService>();
 
             try
             {
-                return _implementation.RemoveSuppressions(selectedErrorListEntriesOnly, projectHierarchy);
+                return _implementation.RemoveSuppressions(
+                    selectedErrorListEntriesOnly,
+                    projectHierarchy
+                );
             }
             catch (Exception ex)
             {
                 errorReportingService.ShowGlobalErrorInfo(
-                    message: string.Format(ServicesVSResources.Error_updating_suppressions_0, ex.Message),
+                    message: string.Format(
+                        ServicesVSResources.Error_updating_suppressions_0,
+                        ex.Message
+                    ),
                     TelemetryFeatureName.LegacySuppressionFix,
                     ex,
                     new InfoBarUI(
                         WorkspacesResources.Show_Stack_Trace,
                         InfoBarUI.UIKind.HyperLink,
-                        () => errorReportingService.ShowDetailedErrorInfo(ex), closeAfterAction: true));
+                        () => errorReportingService.ShowDetailedErrorInfo(ex),
+                        closeAfterAction: true
+                    )
+                );
                 return false;
             }
         }

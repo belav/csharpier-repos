@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,114 +26,107 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("B2C7ED59-8634-4352-9E37-5484C8B6E4E1")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsISelection
+    {
+        #region nsISelection
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getAnchorNode([MarshalAs(UnmanagedType.Interface)] out nsIDOMNode ret);
 
-	[Guid ("B2C7ED59-8634-4352-9E37-5484C8B6E4E1")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsISelection {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getAnchorOffset(out int ret);
 
-#region nsISelection
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getAnchorNode ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getFocusNode([MarshalAs(UnmanagedType.Interface)] out nsIDOMNode ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getAnchorOffset ( out int ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getFocusOffset(out int ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getFocusNode ([MarshalAs (UnmanagedType.Interface)]  out nsIDOMNode ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getIsCollapsed(out bool ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getFocusOffset ( out int ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getRangeCount(out int ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getIsCollapsed ( out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getRangeAt(int index, [MarshalAs(UnmanagedType.Interface)] out nsIDOMRange ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getRangeCount ( out int ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int collapse([MarshalAs(UnmanagedType.Interface)] nsIDOMNode parentNode, int offset);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getRangeAt (
-				   int index,[MarshalAs (UnmanagedType.Interface)]  out nsIDOMRange ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int extend([MarshalAs(UnmanagedType.Interface)] nsIDOMNode parentNode, int offset);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int collapse (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode parentNode,
-				   int offset);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int collapseToStart();
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int extend (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode parentNode,
-				   int offset);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int collapseToEnd();
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int collapseToStart ();
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int containsNode(
+            [MarshalAs(UnmanagedType.Interface)] nsIDOMNode node,
+            bool entirelyContained,
+            out bool ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int collapseToEnd ();
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int selectAllChildren([MarshalAs(UnmanagedType.Interface)] nsIDOMNode parentNode);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int containsNode (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode node,
-				   bool entirelyContained, out bool ret);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int addRange([MarshalAs(UnmanagedType.Interface)] nsIDOMRange range);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int selectAllChildren (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMNode parentNode);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int removeRange([MarshalAs(UnmanagedType.Interface)] nsIDOMRange range);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int addRange (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMRange range);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int removeAllRanges();
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int removeRange (
-				[MarshalAs (UnmanagedType.Interface)]   nsIDOMRange range);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int deleteFromDocument();
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int removeAllRanges ();
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int selectionLanguageChange(bool langRTL);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int deleteFromDocument ();
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int toString([MarshalAs(UnmanagedType.LPWStr)] string ret);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int selectionLanguageChange (
-				   bool langRTL);
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int toString ([MarshalAs(UnmanagedType.LPWStr)]   string ret);
-
-#endregion
-	}
-
-
-	internal class nsSelection {
-		public static nsISelection GetProxy (Mono.WebBrowser.IWebBrowser control, nsISelection obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsISelection).GUID, obj);
-			return o as nsISelection;
-		}
-	}
+    internal class nsSelection
+    {
+        public static nsISelection GetProxy(Mono.WebBrowser.IWebBrowser control, nsISelection obj)
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsISelection).GUID, obj);
+            return o as nsISelection;
+        }
+    }
 }

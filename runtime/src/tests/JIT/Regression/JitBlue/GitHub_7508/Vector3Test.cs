@@ -9,25 +9,25 @@
 
 using System;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 namespace Test01
 {
     public struct SimpleVector3
     {
-        [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        public SimpleVector3( float x, float y, float z )
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public SimpleVector3(float x, float y, float z)
         {
             this.x = x;
             this.y = y;
             this.z = z;
         }
 
-        [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        public static SimpleVector3 operator +( SimpleVector3 a, SimpleVector3 b )
-            => new SimpleVector3( a.x + b.x, a.y + b.y, a.z + b.z );
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static SimpleVector3 operator +(SimpleVector3 a, SimpleVector3 b) =>
+            new SimpleVector3(a.x + b.x, a.y + b.y, a.z + b.z);
 
         public float X
         {
@@ -47,26 +47,28 @@ namespace Test01
             set { z = value; }
         }
 
-        float x, y, z;
+        float x,
+            y,
+            z;
     }
 
     public struct WrappedVector3
     {
-        [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        public WrappedVector3( float x, float y, float z )
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public WrappedVector3(float x, float y, float z)
         {
-            v = new System.Numerics.Vector3( x, y, z );
+            v = new System.Numerics.Vector3(x, y, z);
         }
 
-        [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        WrappedVector3( System.Numerics.Vector3 v )
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        WrappedVector3(System.Numerics.Vector3 v)
         {
             this.v = v;
         }
 
-        [MethodImpl( MethodImplOptions.AggressiveInlining )]
-        public static WrappedVector3 operator +( WrappedVector3 a, WrappedVector3 b )
-            => new WrappedVector3( a.v + b.v );
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static WrappedVector3 operator +(WrappedVector3 a, WrappedVector3 b) =>
+            new WrappedVector3(a.v + b.v);
 
         public float X
         {
@@ -79,7 +81,7 @@ namespace Test01
             get { return v.Y; }
             set { v.Y = value; }
         }
-                
+
         public float Z
         {
             get { return v.Z; }
@@ -94,21 +96,37 @@ namespace Test01
         public const int DefaultSeed = 20010415;
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
+                new Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
+            _ => DefaultSeed,
         };
 
         static Random random = new Random(Seed);
-        [MethodImpl( MethodImplOptions.NoInlining )]
-        static SimpleVector3 RandomSimpleVector3()
-            => new SimpleVector3( (float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble() );
+
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static WrappedVector3 RandomWrappedVector3()
-            => new WrappedVector3( (float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble() );
+        static SimpleVector3 RandomSimpleVector3() =>
+            new SimpleVector3(
+                (float)random.NextDouble(),
+                (float)random.NextDouble(),
+                (float)random.NextDouble()
+            );
+
         [MethodImpl(MethodImplOptions.NoInlining)]
-        static Vector3 RandomVector3()
-            => new Vector3( (float)random.NextDouble(), (float)random.NextDouble(), (float)random.NextDouble() );
+        static WrappedVector3 RandomWrappedVector3() =>
+            new WrappedVector3(
+                (float)random.NextDouble(),
+                (float)random.NextDouble(),
+                (float)random.NextDouble()
+            );
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        static Vector3 RandomVector3() =>
+            new Vector3(
+                (float)random.NextDouble(),
+                (float)random.NextDouble(),
+                (float)random.NextDouble()
+            );
 
         public static float TestSimple()
         {
@@ -118,6 +136,7 @@ namespace Test01
             Console.WriteLine("Simple Vector3: {0},{1},{2}", simpleC.X, simpleC.Y, simpleC.Z);
             return simpleC.X + simpleC.Y + simpleC.Z;
         }
+
         public static float TestWrapped()
         {
             var wrappedA = RandomWrappedVector3();
@@ -126,6 +145,7 @@ namespace Test01
             Console.WriteLine("Wrapped Vector3: {0},{1},{2}", wrappedC.X, wrappedC.Y, wrappedC.Z);
             return wrappedC.X + wrappedC.Y + wrappedC.Z;
         }
+
         public static float TestSIMD()
         {
             var a = RandomVector3();
@@ -134,6 +154,7 @@ namespace Test01
             Console.WriteLine("SIMD Vector3: {0},{1},{2}", c.X, c.Y, c.Z);
             return c.X + c.Y + c.Z;
         }
+
         [Fact]
         public static void TestEntryPoint()
         {
@@ -156,4 +177,3 @@ namespace Test01
         }
     }
 }
-

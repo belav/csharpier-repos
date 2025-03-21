@@ -20,7 +20,10 @@ namespace Microsoft.CodeAnalysis
     [DebuggerDisplay("{GetDebuggerDisplay(), nq}")]
     public class FileTextLoader : TextLoader
     {
-        private static readonly ConditionalWeakTable<Type, StrongBox<bool>> s_isObsoleteCreateTextOverriden = new();
+        private static readonly ConditionalWeakTable<
+            Type,
+            StrongBox<bool>
+        > s_isObsoleteCreateTextOverriden = new();
 
         /// <summary>
         /// Absolute path of the file.
@@ -28,9 +31,9 @@ namespace Microsoft.CodeAnalysis
         public string Path { get; }
 
         /// <summary>
-        /// Specifies an encoding to be used if the actual encoding of the file 
+        /// Specifies an encoding to be used if the actual encoding of the file
         /// can't be determined from the stream content (the stream doesn't start with Byte Order Mark).
-        /// If <c>null</c> auto-detect heuristics are used to determine the encoding. 
+        /// If <c>null</c> auto-detect heuristics are used to determine the encoding.
         /// Note that if the stream starts with Byte Order Mark the value of <see cref="DefaultEncoding"/> is ignored.
         /// </summary>
         public Encoding? DefaultEncoding { get; }
@@ -65,9 +68,16 @@ namespace Microsoft.CodeAnalysis
         internal override bool CanReloadText => !IsObsoleteCreateTextOverridden;
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        private bool IsObsoleteCreateTextOverridden
-            => s_isObsoleteCreateTextOverriden.GetValue(
-                GetType(), _ => new StrongBox<bool>(new Func<Stream, Workspace, SourceText>(CreateText).Method.DeclaringType != typeof(FileTextLoader))).Value;
+        private bool IsObsoleteCreateTextOverridden =>
+            s_isObsoleteCreateTextOverriden
+                .GetValue(
+                    GetType(),
+                    _ => new StrongBox<bool>(
+                        new Func<Stream, Workspace, SourceText>(CreateText).Method.DeclaringType
+                            != typeof(FileTextLoader)
+                    )
+                )
+                .Value;
 #pragma warning restore
 
         /// <summary>
@@ -75,34 +85,66 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="stream">Stream.</param>
         /// <param name="workspace">Obsolete. Null.</param>
-        protected virtual SourceText CreateText(Stream stream, Workspace? workspace)
-            => EncodedStringText.Create(stream, DefaultEncoding, checksumAlgorithm: SourceHashAlgorithms.Default);
+        protected virtual SourceText CreateText(Stream stream, Workspace? workspace) =>
+            EncodedStringText.Create(
+                stream,
+                DefaultEncoding,
+                checksumAlgorithm: SourceHashAlgorithms.Default
+            );
 
         /// <summary>
         /// Creates <see cref="SourceText"/> from <see cref="Stream"/>.
         /// </summary>
 #pragma warning disable CS0618 // Type or member is obsolete
-        private protected virtual SourceText CreateText(Stream stream, LoadTextOptions options, CancellationToken cancellationToken)
-            => IsObsoleteCreateTextOverridden
+        private protected virtual SourceText CreateText(
+            Stream stream,
+            LoadTextOptions options,
+            CancellationToken cancellationToken
+        ) =>
+            IsObsoleteCreateTextOverridden
                 ? CreateText(stream, workspace: null)
-                : EncodedStringText.Create(stream, DefaultEncoding, checksumAlgorithm: options.ChecksumAlgorithm);
+                : EncodedStringText.Create(
+                    stream,
+                    DefaultEncoding,
+                    checksumAlgorithm: options.ChecksumAlgorithm
+                );
 #pragma warning restore
 
-        [Obsolete("Use/override LoadTextAndVersionAsync(LoadTextOptions, CancellationToken)", false)]
-        public override Task<TextAndVersion> LoadTextAndVersionAsync(Workspace? workspace, DocumentId? documentId, CancellationToken cancellationToken)
-            => base.LoadTextAndVersionAsync(workspace, documentId, cancellationToken);
+        [Obsolete(
+            "Use/override LoadTextAndVersionAsync(LoadTextOptions, CancellationToken)",
+            false
+        )]
+        public override Task<TextAndVersion> LoadTextAndVersionAsync(
+            Workspace? workspace,
+            DocumentId? documentId,
+            CancellationToken cancellationToken
+        ) => base.LoadTextAndVersionAsync(workspace, documentId, cancellationToken);
 
-        private FileStream OpenFile(int bufferSize, bool useAsync)
-            => new(this.FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete, bufferSize, useAsync);
+        private FileStream OpenFile(int bufferSize, bool useAsync) =>
+            new(
+                this.FilePath,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.ReadWrite | FileShare.Delete,
+                bufferSize,
+                useAsync
+            );
 
         /// <summary>
         /// Load a text and a version of the document in the workspace.
         /// </summary>
         /// <exception cref="IOException"></exception>
         /// <exception cref="InvalidDataException"></exception>
-        public override async Task<TextAndVersion> LoadTextAndVersionAsync(LoadTextOptions options, CancellationToken cancellationToken)
+        public override async Task<TextAndVersion> LoadTextAndVersionAsync(
+            LoadTextOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            FileUtilities.GetFileLengthAndTimeStamp(Path, out var fileLength, out var prevLastWriteTime);
+            FileUtilities.GetFileLengthAndTimeStamp(
+                Path,
+                out var fileLength,
+                out var prevLastWriteTime
+            );
 
             ValidateFileLength(Path, fileLength);
 
@@ -173,18 +215,27 @@ namespace Microsoft.CodeAnalysis
             // corefx. We also open the file for reading with FileShare mode read/write/delete so that
             // we do not lock this file.
 
-            var textAndVersion = await FileUtilities.RethrowExceptionsAsIOExceptionAsync(
-                async static t =>
-                {
-                    using var stream = t.self.OpenFile(bufferSize: 1, useAsync: true);
-                    var version = VersionStamp.Create(t.prevLastWriteTime);
+            var textAndVersion = await FileUtilities
+                .RethrowExceptionsAsIOExceptionAsync(
+                    static async t =>
+                    {
+                        using var stream = t.self.OpenFile(bufferSize: 1, useAsync: true);
+                        var version = VersionStamp.Create(t.prevLastWriteTime);
 
-                    // we do this so that we asynchronously read from file. and this should allocate less for IDE case. 
-                    // but probably not for command line case where it doesn't use more sophisticated services.
-                    using var readStream = await SerializableBytes.CreateReadableStreamAsync(stream, cancellationToken: t.cancellationToken).ConfigureAwait(false);
-                    var text = t.self.CreateText(readStream, t.options, t.cancellationToken);
-                    return TextAndVersion.Create(text, version, t.self.Path);
-                }, (self: this, prevLastWriteTime, options, cancellationToken)).ConfigureAwait(false);
+                        // we do this so that we asynchronously read from file. and this should allocate less for IDE case.
+                        // but probably not for command line case where it doesn't use more sophisticated services.
+                        using var readStream = await SerializableBytes
+                            .CreateReadableStreamAsync(
+                                stream,
+                                cancellationToken: t.cancellationToken
+                            )
+                            .ConfigureAwait(false);
+                        var text = t.self.CreateText(readStream, t.options, t.cancellationToken);
+                        return TextAndVersion.Create(text, version, t.self.Path);
+                    },
+                    (self: this, prevLastWriteTime, options, cancellationToken)
+                )
+                .ConfigureAwait(false);
 
             return CheckForConcurrentFileWrites(prevLastWriteTime, textAndVersion);
         }
@@ -194,9 +245,16 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <exception cref="IOException"></exception>
         /// <exception cref="InvalidDataException"></exception>
-        internal override TextAndVersion LoadTextAndVersionSynchronously(LoadTextOptions options, CancellationToken cancellationToken)
+        internal override TextAndVersion LoadTextAndVersionSynchronously(
+            LoadTextOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            FileUtilities.GetFileLengthAndTimeStamp(Path, out var fileLength, out var prevLastWriteTime);
+            FileUtilities.GetFileLengthAndTimeStamp(
+                Path,
+                out var fileLength,
+                out var prevLastWriteTime
+            );
 
             ValidateFileLength(Path, fileLength);
 
@@ -208,12 +266,17 @@ namespace Microsoft.CodeAnalysis
                     var version = VersionStamp.Create(t.prevLastWriteTime);
                     var text = t.self.CreateText(stream, t.options, t.cancellationToken);
                     return TextAndVersion.Create(text, version, t.self.Path);
-                }, (self: this, prevLastWriteTime, options, cancellationToken));
+                },
+                (self: this, prevLastWriteTime, options, cancellationToken)
+            );
 
             return CheckForConcurrentFileWrites(prevLastWriteTime, textAndVersion);
         }
 
-        private TextAndVersion CheckForConcurrentFileWrites(DateTime prevLastWriteTime, TextAndVersion textAndVersion)
+        private TextAndVersion CheckForConcurrentFileWrites(
+            DateTime prevLastWriteTime,
+            TextAndVersion textAndVersion
+        )
         {
             // Check if the file was definitely modified and closed while we were reading. In this case, we know the
             // read we got was probably invalid, so throw an IOException which indicates to our caller that we should
@@ -222,35 +285,45 @@ namespace Microsoft.CodeAnalysis
             var newLastWriteTime = FileUtilities.GetFileTimeStamp(Path);
             if (!newLastWriteTime.Equals(prevLastWriteTime))
             {
-                var message = string.Format(WorkspacesResources.File_was_externally_modified_colon_0, Path);
+                var message = string.Format(
+                    WorkspacesResources.File_was_externally_modified_colon_0,
+                    Path
+                );
                 throw new IOException(message);
             }
 
             return textAndVersion;
         }
 
-        private string GetDebuggerDisplay()
-            => nameof(Path) + " = " + Path;
+        private string GetDebuggerDisplay() => nameof(Path) + " = " + Path;
 
         private void ValidateFileLength(string path, long fileLength)
         {
-            // Validate file length is under our threshold. 
+            // Validate file length is under our threshold.
             // Otherwise, rather than reading the content into the memory, we will throw
-            // InvalidDataException to caller of FileTextLoader.LoadText to deal with 
+            // InvalidDataException to caller of FileTextLoader.LoadText to deal with
             // the situation.
-            // 
+            //
             // check this (http://source.roslyn.io/#Microsoft.CodeAnalysis.Workspaces/Workspace/Solution/TextDocumentState.cs,132)
             // to see how workspace deal with exception from FileTextLoader. other consumer can handle the exception differently
             if (fileLength > MaxFileLength)
             {
                 // log max file length which will log to VS telemetry in VS host
-                Logger.Log(FunctionId.FileTextLoader_FileLengthThresholdExceeded, KeyValueLogMessage.Create(m =>
-                {
-                    m["FileLength"] = fileLength;
-                    m["Ext"] = PathUtilities.GetExtension(path);
-                }));
+                Logger.Log(
+                    FunctionId.FileTextLoader_FileLengthThresholdExceeded,
+                    KeyValueLogMessage.Create(m =>
+                    {
+                        m["FileLength"] = fileLength;
+                        m["Ext"] = PathUtilities.GetExtension(path);
+                    })
+                );
 
-                var message = string.Format(WorkspacesResources.File_0_size_of_1_exceeds_maximum_allowed_size_of_2, path, fileLength, MaxFileLength);
+                var message = string.Format(
+                    WorkspacesResources.File_0_size_of_1_exceeds_maximum_allowed_size_of_2,
+                    path,
+                    fileLength,
+                    MaxFileLength
+                );
                 throw new InvalidDataException(message);
             }
         }

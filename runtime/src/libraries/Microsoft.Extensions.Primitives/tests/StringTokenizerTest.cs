@@ -36,7 +36,7 @@ namespace Microsoft.Extensions.Primitives
         public void Tokenizer_ReturnsSequenceOfValues(string value, string[] expected)
         {
             // Arrange
-            var tokenizer = new StringTokenizer(value, new [] { ',' });
+            var tokenizer = new StringTokenizer(value, new[] { ',' });
 
             // Act
             var result = tokenizer.Select(t => t.Value).ToArray();

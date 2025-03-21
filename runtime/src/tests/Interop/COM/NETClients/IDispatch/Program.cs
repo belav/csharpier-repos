@@ -2,17 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 namespace NetClient
 {
     using System;
     using System.Globalization;
     using System.Reflection;
     using System.Runtime.InteropServices;
-
-    using TestLibrary;
-    using Xunit;
     using Server.Contract;
     using Server.Contract.Servers;
+    using TestLibrary;
+    using Xunit;
 
     public class Program
     {
@@ -36,15 +36,25 @@ namespace NetClient
             ulong ul2 = ul1;
 
             Console.WriteLine($"Calling {nameof(DispatchTesting.DoubleNumeric_ReturnByRef)} ...");
-            dispatchTesting.DoubleNumeric_ReturnByRef (
-                b1, ref b2,
-                s1, ref s2,
-                us1, ref us2,
-                i1, ref i2,
-                ui1, ref ui2,
-                l1, ref l2,
-                ul1, ref ul2);
-            Console.WriteLine($"Call to {nameof(DispatchTesting.DoubleNumeric_ReturnByRef)} complete");
+            dispatchTesting.DoubleNumeric_ReturnByRef(
+                b1,
+                ref b2,
+                s1,
+                ref s2,
+                us1,
+                ref us2,
+                i1,
+                ref i2,
+                ui1,
+                ref ui2,
+                l1,
+                ref l2,
+                ul1,
+                ref ul2
+            );
+            Console.WriteLine(
+                $"Call to {nameof(DispatchTesting.DoubleNumeric_ReturnByRef)} complete"
+            );
 
             Assert.Equal(b1 * 2, b2);
             Assert.Equal(s1 * 2, s2);
@@ -55,7 +65,7 @@ namespace NetClient
             Assert.Equal(ul1 * 2, ul2);
         }
 
-        static private bool EqualByBound(float expected, float actual)
+        private static bool EqualByBound(float expected, float actual)
         {
             float low = expected - 0.0001f;
             float high = expected + 0.0001f;
@@ -63,7 +73,7 @@ namespace NetClient
             return eps < float.Epsilon || (low < actual && actual < high);
         }
 
-        static private bool EqualByBound(double expected, double actual)
+        private static bool EqualByBound(double expected, double actual)
         {
             double low = expected - 0.00001;
             double high = expected + 0.00001;
@@ -79,11 +89,15 @@ namespace NetClient
             float b = .2f;
             float expected = a + b;
 
-            Console.WriteLine($"Calling {nameof(DispatchTesting.Add_Float_ReturnAndUpdateByRef)} ...");
+            Console.WriteLine(
+                $"Calling {nameof(DispatchTesting.Add_Float_ReturnAndUpdateByRef)} ..."
+            );
             float c = b;
-            float d = dispatchTesting.Add_Float_ReturnAndUpdateByRef (a, ref c);
+            float d = dispatchTesting.Add_Float_ReturnAndUpdateByRef(a, ref c);
 
-            Console.WriteLine($"Call to {nameof(DispatchTesting.Add_Float_ReturnAndUpdateByRef)} complete: {a} + {b} = {d}; {c} == {d}");
+            Console.WriteLine(
+                $"Call to {nameof(DispatchTesting.Add_Float_ReturnAndUpdateByRef)} complete: {a} + {b} = {d}; {c} == {d}"
+            );
             Assert.True(EqualByBound(expected, c));
             Assert.True(EqualByBound(expected, d));
         }
@@ -96,11 +110,15 @@ namespace NetClient
             double b = .2;
             double expected = a + b;
 
-            Console.WriteLine($"Calling {nameof(DispatchTesting.Add_Double_ReturnAndUpdateByRef)} ...");
+            Console.WriteLine(
+                $"Calling {nameof(DispatchTesting.Add_Double_ReturnAndUpdateByRef)} ..."
+            );
             double c = b;
-            double d = dispatchTesting.Add_Double_ReturnAndUpdateByRef (a, ref c);
+            double d = dispatchTesting.Add_Double_ReturnAndUpdateByRef(a, ref c);
 
-            Console.WriteLine($"Call to {nameof(DispatchTesting.Add_Double_ReturnAndUpdateByRef)} complete: {a} + {b} = {d}; {c} == {d}");
+            Console.WriteLine(
+                $"Call to {nameof(DispatchTesting.Add_Double_ReturnAndUpdateByRef)} complete: {a} + {b} = {d}; {c} == {d}"
+            );
             Assert.True(EqualByBound(expected, c));
             Assert.True(EqualByBound(expected, d));
         }
@@ -119,7 +137,9 @@ namespace NetClient
             string resultString = errorCode.ToString("x");
             try
             {
-                Console.WriteLine($"Calling {nameof(DispatchTesting.TriggerException)} with {nameof(IDispatchTesting_Exception.Disp)} {errorCode}...");
+                Console.WriteLine(
+                    $"Calling {nameof(DispatchTesting.TriggerException)} with {nameof(IDispatchTesting_Exception.Disp)} {errorCode}..."
+                );
                 dispatchTesting.TriggerException(IDispatchTesting_Exception.Disp, errorCode);
                 Assert.Fail("DISP exception not thrown properly");
             }
@@ -131,7 +151,9 @@ namespace NetClient
 
             try
             {
-                Console.WriteLine($"Calling {nameof(DispatchTesting.TriggerException)} with {nameof(IDispatchTesting_Exception.HResult)} {errorCode}...");
+                Console.WriteLine(
+                    $"Calling {nameof(DispatchTesting.TriggerException)} with {nameof(IDispatchTesting_Exception.HResult)} {errorCode}..."
+                );
                 dispatchTesting.TriggerException(IDispatchTesting_Exception.HResult, errorCode);
                 Assert.Fail("HRESULT exception not thrown properly");
             }
@@ -144,16 +166,28 @@ namespace NetClient
             // Calling methods through IDispatch::Invoke() (i.e., late-bound) doesn't
             // propagate the HRESULT when marked with PreserveSig. It is always 0.
             {
-                Console.WriteLine($"Calling {nameof(DispatchTesting.TriggerException)} (PreserveSig) with {nameof(IDispatchTesting_Exception.Int)} {errorCode}...");
+                Console.WriteLine(
+                    $"Calling {nameof(DispatchTesting.TriggerException)} (PreserveSig) with {nameof(IDispatchTesting_Exception.Int)} {errorCode}..."
+                );
                 var dispatchTesting2 = (IDispatchTestingPreserveSig1)dispatchTesting;
-                Assert.Equal(0, dispatchTesting2.TriggerException(IDispatchTesting_Exception.Int, errorCode));
+                Assert.Equal(
+                    0,
+                    dispatchTesting2.TriggerException(IDispatchTesting_Exception.Int, errorCode)
+                );
             }
 
             {
                 // Validate the HRESULT as a value type construct works for IDispatch.
-                Console.WriteLine($"Calling {nameof(DispatchTesting.TriggerException)} (PreserveSig, ValueType) with {nameof(IDispatchTesting_Exception.Int)} {errorCode}...");
+                Console.WriteLine(
+                    $"Calling {nameof(DispatchTesting.TriggerException)} (PreserveSig, ValueType) with {nameof(IDispatchTesting_Exception.Int)} {errorCode}..."
+                );
                 var dispatchTesting3 = (IDispatchTestingPreserveSig2)dispatchTesting;
-                Assert.Equal(0, dispatchTesting3.TriggerException(IDispatchTesting_Exception.Int, errorCode).Value);
+                Assert.Equal(
+                    0,
+                    dispatchTesting3
+                        .TriggerException(IDispatchTesting_Exception.Int, errorCode)
+                        .Value
+                );
             }
         }
 
@@ -162,7 +196,13 @@ namespace NetClient
             Console.WriteLine($"IDispatch with structs not supported...");
             var dispatchTesting = (DispatchTesting)new DispatchTestingClass();
 
-            var input = new HFA_4() { x = 1f, y = 2f, z = 3f, w = 4f };
+            var input = new HFA_4()
+            {
+                x = 1f,
+                y = 2f,
+                z = 3f,
+                w = 4f,
+            };
             Assert.Throws<NotSupportedException>(() => dispatchTesting.DoubleHVAValues(ref input));
         }
 
@@ -176,7 +216,7 @@ namespace NetClient
                 CultureInfo englishCulture = new CultureInfo("en-US", false);
                 CultureInfo.CurrentCulture = newCulture;
                 int lcid = dispatchTesting.PassThroughLCID();
-                Assert.Equal(englishCulture.LCID, lcid);  // CLR->Dispatch LCID marshalling is explicitly hardcoded to en-US instead of passing the current culture.
+                Assert.Equal(englishCulture.LCID, lcid); // CLR->Dispatch LCID marshalling is explicitly hardcoded to en-US instead of passing the current culture.
             }
             finally
             {
@@ -203,15 +243,17 @@ namespace NetClient
             enumeratorExplicit.Reset();
             AssertExtensions.CollectionEqual(expected, GetEnumerable(enumeratorExplicit));
 
-            System.Collections.Generic.IEnumerable<int> GetEnumerable(System.Collections.IEnumerator e)
+            System.Collections.Generic.IEnumerable<int> GetEnumerable(
+                System.Collections.IEnumerator e
+            )
             {
-               var list = new System.Collections.Generic.List<int>();
-               while (e.MoveNext())
-               {
-                   list.Add((int)e.Current);
-               }
+                var list = new System.Collections.Generic.List<int>();
+                while (e.MoveNext())
+                {
+                    list.Add((int)e.Current);
+                }
 
-               return list;
+                return list;
             }
         }
 

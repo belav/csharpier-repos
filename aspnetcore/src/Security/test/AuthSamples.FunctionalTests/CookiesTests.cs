@@ -12,8 +12,8 @@ namespace AuthSamples.FunctionalTests;
 
 public class CookiesTests : IClassFixture<WebApplicationFactory<Cookies.Startup>>
 {
-    public CookiesTests(WebApplicationFactory<Cookies.Startup> fixture)
-        => Client = fixture.CreateClient();
+    public CookiesTests(WebApplicationFactory<Cookies.Startup> fixture) =>
+        Client = fixture.CreateClient();
 
     public HttpClient Client { get; }
 
@@ -37,7 +37,10 @@ public class CookiesTests : IClassFixture<WebApplicationFactory<Cookies.Startup>
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal("http://localhost/account/login?ReturnUrl=%2FHome%2FMyClaims", response.RequestMessage.RequestUri.ToString());
+        Assert.Equal(
+            "http://localhost/account/login?ReturnUrl=%2FHome%2FMyClaims",
+            response.RequestMessage.RequestUri.ToString()
+        );
     }
 
     [Fact]
@@ -82,11 +85,14 @@ public class CookiesTests : IClassFixture<WebApplicationFactory<Cookies.Startup>
         var signIn = await TestAssert.IsHtmlDocumentAsync(goToSignIn);
 
         var form = TestAssert.HasForm(signIn);
-        await Client.SendAsync(form, new Dictionary<string, string>()
-        {
-            ["username"] = userName,
-            ["password"] = userName // this test doesn't care what the password is
-        });
+        await Client.SendAsync(
+            form,
+            new Dictionary<string, string>()
+            {
+                ["username"] = userName,
+                ["password"] = userName, // this test doesn't care what the password is
+            }
+        );
 
         Assert.Equal(HttpStatusCode.OK, signIn.StatusCode);
     }

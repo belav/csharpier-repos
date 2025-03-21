@@ -25,19 +25,13 @@ namespace System.Web.Http.Cors
             return "value";
         }
 
-        public void Delete()
-        {
-        }
+        public void Delete() { }
 
         [EnableCors("http://example.com", "*", "*")]
-        public void Head()
-        {
-        }
+        public void Head() { }
 
         [EnableCors("http://example.com, http://localhost", "*", "*")]
-        public void Put()
-        {
-        }
+        public void Put() { }
 
         protected override void Dispose(bool disposing)
         {

@@ -9,32 +9,38 @@ namespace System.Text.Json.Serialization.Tests
 {
     public class InvalidTypeTests_Span : InvalidTypeTests
     {
-        public InvalidTypeTests_Span() : base(JsonSerializerWrapper.SpanSerializer) { }
+        public InvalidTypeTests_Span()
+            : base(JsonSerializerWrapper.SpanSerializer) { }
     }
 
     public class InvalidTypeTests_String : InvalidTypeTests
     {
-        public InvalidTypeTests_String() : base(JsonSerializerWrapper.StringSerializer) { }
+        public InvalidTypeTests_String()
+            : base(JsonSerializerWrapper.StringSerializer) { }
     }
 
     public class InvalidTypeTests_AsyncStream : InvalidTypeTests
     {
-        public InvalidTypeTests_AsyncStream() : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
+        public InvalidTypeTests_AsyncStream()
+            : base(JsonSerializerWrapper.AsyncStreamSerializer) { }
     }
 
     public class InvalidTypeTests_AsyncStreamWithSmallBuffer : InvalidTypeTests
     {
-        public InvalidTypeTests_AsyncStreamWithSmallBuffer() : base(JsonSerializerWrapper.AsyncStreamSerializerWithSmallBuffer) { }
+        public InvalidTypeTests_AsyncStreamWithSmallBuffer()
+            : base(JsonSerializerWrapper.AsyncStreamSerializerWithSmallBuffer) { }
     }
 
     public class InvalidTypeTests_SyncStream : InvalidTypeTests
     {
-        public InvalidTypeTests_SyncStream() : base(JsonSerializerWrapper.SyncStreamSerializer) { }
+        public InvalidTypeTests_SyncStream()
+            : base(JsonSerializerWrapper.SyncStreamSerializer) { }
     }
 
     public class InvalidTypeTests_Writer : InvalidTypeTests
     {
-        public InvalidTypeTests_Writer() : base(JsonSerializerWrapper.ReaderWriterSerializer) { }
+        public InvalidTypeTests_Writer()
+            : base(JsonSerializerWrapper.ReaderWriterSerializer) { }
     }
 
     public abstract class InvalidTypeTests
@@ -52,15 +58,26 @@ namespace System.Text.Json.Serialization.Tests
         [MemberData(nameof(PointerTypes))]
         public void DeserializeInvalidType(Type type)
         {
-            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize("", type));
+            InvalidOperationException ex = Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize("", type)
+            );
             Assert.Contains(type.ToString(), ex.ToString());
         }
 
         [Theory]
         [MemberData(nameof(TypesWithInvalidMembers_WithMembers))]
-        public async Task TypeWithInvalidMember(Type classType, Type invalidMemberType, string invalidMemberName)
+        public async Task TypeWithInvalidMember(
+            Type classType,
+            Type invalidMemberType,
+            string invalidMemberName
+        )
         {
-            static void ValidateException(InvalidOperationException ex, Type classType, Type invalidMemberType, string invalidMemberName)
+            static void ValidateException(
+                InvalidOperationException ex,
+                Type classType,
+                Type invalidMemberType,
+                string invalidMemberName
+            )
             {
                 string exAsStr = ex.ToString();
                 Assert.Contains(invalidMemberType.ToString(), exAsStr);
@@ -69,13 +86,19 @@ namespace System.Text.Json.Serialization.Tests
             }
 
             object obj = Activator.CreateInstance(classType);
-            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(obj, classType));
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.SerializeWrapper(obj, classType)
+            );
             ValidateException(ex, classType, invalidMemberType, invalidMemberName);
 
-            ex = await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(null, classType));
+            ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.SerializeWrapper(null, classType)
+            );
             ValidateException(ex, classType, invalidMemberType, invalidMemberName);
 
-            ex = Assert.Throws<InvalidOperationException>(() => JsonSerializer.Deserialize("", classType));
+            ex = Assert.Throws<InvalidOperationException>(() =>
+                JsonSerializer.Deserialize("", classType)
+            );
             ValidateException(ex, classType, invalidMemberType, invalidMemberName);
         }
 
@@ -94,14 +117,17 @@ namespace System.Text.Json.Serialization.Tests
                 obj = Activator.CreateInstance(type.MakeGenericType(typeof(string), typeof(int)));
             }
 
-            await Assert.ThrowsAsync<ArgumentException>(() => Serializer.SerializeWrapper(obj, type));
+            await Assert.ThrowsAsync<ArgumentException>(() => Serializer.SerializeWrapper(obj, type)
+            );
         }
 
         [Theory]
         [MemberData(nameof(OpenGenericTypes))]
         public async Task SerializeInvalidTypes_NullValue(Type type)
         {
-            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(null, type));
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.SerializeWrapper(null, type)
+            );
             Assert.Contains(type.ToString(), ex.ToString());
         }
 
@@ -111,7 +137,9 @@ namespace System.Text.Json.Serialization.Tests
             Type openNullableType = typeof(Nullable<>);
             object obj = Activator.CreateInstance(openNullableType.MakeGenericType(typeof(int)));
 
-            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() => Serializer.SerializeWrapper(obj, openNullableType));
+            InvalidOperationException ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+                Serializer.SerializeWrapper(obj, openNullableType)
+            );
             Assert.Contains(openNullableType.ToString(), ex.ToString());
         }
 
@@ -126,8 +154,14 @@ namespace System.Text.Json.Serialization.Tests
             yield return new object[] { typeof(List<>).MakeGenericType(typeof(Test<>)) };
             yield return new object[] { typeof(Test<>).MakeGenericType(typeof(List<>)) };
             yield return new object[] { typeof(Dictionary<,>) };
-            yield return new object[] { typeof(Dictionary<,>).MakeGenericType(typeof(string), typeof(Nullable<>)) };
-            yield return new object[] { typeof(Dictionary<,>).MakeGenericType(typeof(Nullable<>), typeof(string)) };
+            yield return new object[]
+            {
+                typeof(Dictionary<,>).MakeGenericType(typeof(string), typeof(Nullable<>)),
+            };
+            yield return new object[]
+            {
+                typeof(Dictionary<,>).MakeGenericType(typeof(Nullable<>), typeof(string)),
+            };
         }
 
         public static IEnumerable<object[]> OpenGenericTypes_ToSerialize()
@@ -185,7 +219,9 @@ namespace System.Text.Json.Serialization.Tests
             string serialized = JsonSerializer.Serialize(obj);
             Assert.Equal(@"{""ArraySegment"":[1]}", serialized);
 
-            NotSupportedException ex = Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<ClassWithArraySegment>(serialized));
+            NotSupportedException ex = Assert.Throws<NotSupportedException>(() =>
+                JsonSerializer.Deserialize<ClassWithArraySegment>(serialized)
+            );
             Assert.Contains(typeof(ArraySegment<byte>).ToString(), ex.ToString());
         }
 

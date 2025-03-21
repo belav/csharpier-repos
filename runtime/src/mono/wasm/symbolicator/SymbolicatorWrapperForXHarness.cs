@@ -17,7 +17,12 @@ public class SymbolicatorWrapperForXHarness : WasmSymbolicatorBase
         if (!base.Init(symbolsMapFile, symbolPatternsFile, logger))
             return false;
 
-        _symbolicator = new WasmSymbolicator(SymbolsFile, SymbolsPatternFile, throwOnMissing: false, logger);
+        _symbolicator = new WasmSymbolicator(
+            SymbolsFile,
+            SymbolsPatternFile,
+            throwOnMissing: false,
+            logger
+        );
         if (!_symbolicator.CanSymbolicate)
         {
             _symbolicator = null;

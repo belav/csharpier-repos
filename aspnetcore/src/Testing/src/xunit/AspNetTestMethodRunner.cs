@@ -24,8 +24,19 @@ internal sealed class AspNetTestMethodRunner : XunitTestMethodRunner
         IMessageBus messageBus,
         ExceptionAggregator aggregator,
         CancellationTokenSource cancellationTokenSource,
-        object[] constructorArguments)
-        : base(testMethod, @class, method, testCases, diagnosticMessageSink, messageBus, aggregator, cancellationTokenSource, constructorArguments)
+        object[] constructorArguments
+    )
+        : base(
+            testMethod,
+            @class,
+            method,
+            testCases,
+            diagnosticMessageSink,
+            messageBus,
+            aggregator,
+            cancellationTokenSource,
+            constructorArguments
+        )
     {
         _diagnosticMessageSink = diagnosticMessageSink;
         _constructorArguments = constructorArguments;
@@ -46,7 +57,8 @@ internal sealed class AspNetTestMethodRunner : XunitTestMethodRunner
                 testCase.TestMethodArguments,
                 MessageBus,
                 new ExceptionAggregator(Aggregator),
-                CancellationTokenSource);
+                CancellationTokenSource
+            );
             return runner.RunAsync();
         }
 
@@ -63,7 +75,8 @@ internal sealed class AspNetTestMethodRunner : XunitTestMethodRunner
                 _diagnosticMessageSink,
                 MessageBus,
                 new ExceptionAggregator(Aggregator),
-                CancellationTokenSource);
+                CancellationTokenSource
+            );
             return runner.RunAsync();
         }
 

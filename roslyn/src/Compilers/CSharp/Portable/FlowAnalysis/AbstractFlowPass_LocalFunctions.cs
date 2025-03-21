@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected abstract TLocalFunctionState CreateLocalFunctionState(LocalFunctionSymbol symbol);
 
-        private SmallDictionary<LocalFunctionSymbol, TLocalFunctionState>? _localFuncVarUsages = null;
+        private SmallDictionary<LocalFunctionSymbol, TLocalFunctionState>? _localFuncVarUsages =
+            null;
 
         protected TLocalFunctionState GetOrCreateLocalFuncUsages(LocalFunctionSymbol localFunc)
         {
@@ -56,7 +57,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             return usages;
         }
 
-        public override BoundNode? VisitLocalFunctionStatement(BoundLocalFunctionStatement localFunc)
+        public override BoundNode? VisitLocalFunctionStatement(
+            BoundLocalFunctionStatement localFunc
+        )
         {
             if (localFunc.Symbol.IsExtern)
             {
@@ -83,7 +86,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 NonMonotonicState = ReachableBottomState();
             }
 
-            if (!localFunc.WasCompilerGenerated) EnterParameters(localFuncSymbol.Parameters);
+            if (!localFunc.WasCompilerGenerated)
+                EnterParameters(localFuncSymbol.Parameters);
 
             // State changes to captured variables are recorded, as calls to local functions
             // transition the state of captured variables if the variables have state changes
@@ -119,24 +123,25 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 // Pass the local function identifier as a location if the branch
                 // is null or compiler generated.
-                LeaveParameters(localFuncSymbol.Parameters,
-                  branch?.Syntax,
-                  branch?.WasCompilerGenerated == false ? null : location);
+                LeaveParameters(
+                    localFuncSymbol.Parameters,
+                    branch?.Syntax,
+                    branch?.WasCompilerGenerated == false ? null : location
+                );
 
                 Join(ref stateAtReturn, ref this.State);
             }
 
             // Record any changes to the state of captured variables
-            if (RecordStateChange(
-                    savedLocalFunctionState,
-                    localFunctionState,
-                    ref stateAtReturn) &&
-                localFunctionState.Visited)
+            if (
+                RecordStateChange(savedLocalFunctionState, localFunctionState, ref stateAtReturn)
+                && localFunctionState.Visited
+            )
             {
                 // If the sets have changed and we already used the results
                 // of this local function in another computation, the previous
                 // calculations may be invalid. We need to analyze until we
-                // reach a fixed-point. 
+                // reach a fixed-point.
                 stateChangedAfterUse = true;
                 localFunctionState.Visited = false;
             }
@@ -151,7 +156,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         private bool RecordStateChange(
             TLocalFunctionState savedState,
             TLocalFunctionState currentState,
-            ref TLocalState stateAtReturn)
+            ref TLocalState stateAtReturn
+        )
         {
             bool anyChanged = LocalFunctionEnd(savedState, currentState, ref stateAtReturn);
             anyChanged |= Join(ref currentState.StateFromTop, ref stateAtReturn);
@@ -173,7 +179,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// parameter holds the current state information for the local function being visited. To
         /// save state information across the analysis, return an instance of <typeparamref name="TLocalFunctionState"/>.
         /// </summary>
-        protected virtual TLocalFunctionState LocalFunctionStart(TLocalFunctionState state) => state;
+        protected virtual TLocalFunctionState LocalFunctionStart(TLocalFunctionState state) =>
+            state;
 
         /// <summary>
         /// Executed after visiting a local function body. The <paramref name="savedState"/> is the
@@ -184,7 +191,8 @@ namespace Microsoft.CodeAnalysis.CSharp
         protected virtual bool LocalFunctionEnd(
             TLocalFunctionState savedState,
             TLocalFunctionState currentState,
-            ref TLocalState stateAtReturn)
+            ref TLocalState stateAtReturn
+        )
         {
             return false;
         }

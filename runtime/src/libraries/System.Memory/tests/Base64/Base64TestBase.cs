@@ -24,65 +24,170 @@ namespace System.Buffers.Text.Tests
             // One will have 1 char, another will have 3
 
             // Line feed
-            yield return new object[] { GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(9), 1), utf8Bytes };
-            yield return new object[] { GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(9), 3), utf8Bytes };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(9), 1),
+                utf8Bytes,
+            };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(9), 3),
+                utf8Bytes,
+            };
 
             // Horizontal tab
-            yield return new object[] { GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(10), 1), utf8Bytes };
-            yield return new object[] { GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(10), 3), utf8Bytes };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(10), 1),
+                utf8Bytes,
+            };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(10), 3),
+                utf8Bytes,
+            };
 
             // Carriage return
-            yield return new object[] { GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(13), 1), utf8Bytes };
-            yield return new object[] { GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(13), 3), utf8Bytes };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(13), 1),
+                utf8Bytes,
+            };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(13), 3),
+                utf8Bytes,
+            };
 
             // Space
-            yield return new object[] { GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(32), 1), utf8Bytes };
-            yield return new object[] { GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(32), 3), utf8Bytes };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(32), 1),
+                utf8Bytes,
+            };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedInTheMiddle(Convert.ToChar(32), 3),
+                utf8Bytes,
+            };
 
-            string GetBase64StringWithPassedCharInsertedInTheMiddle(char charToInsert, int numberOfTimesToInsert) => $"{firstSegment}{new string(charToInsert, numberOfTimesToInsert)}{secondSegment}";
+            string GetBase64StringWithPassedCharInsertedInTheMiddle(
+                char charToInsert,
+                int numberOfTimesToInsert
+            ) => $"{firstSegment}{new string(charToInsert, numberOfTimesToInsert)}{secondSegment}";
 
             // Insert ignored chars at the start of the base 64 string
             // One will have 1 char, another will have 3
 
             // Line feed
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(9), 1), utf8Bytes };
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(9), 3), utf8Bytes };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(9), 1),
+                utf8Bytes,
+            };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(9), 3),
+                utf8Bytes,
+            };
 
             // Horizontal tab
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(10), 1), utf8Bytes };
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(10), 3), utf8Bytes };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(10), 1),
+                utf8Bytes,
+            };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(10), 3),
+                utf8Bytes,
+            };
 
             // Carriage return
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(13), 1), utf8Bytes };
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(13), 3), utf8Bytes };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(13), 1),
+                utf8Bytes,
+            };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(13), 3),
+                utf8Bytes,
+            };
 
             // Space
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(32), 1), utf8Bytes };
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(32), 3), utf8Bytes };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(32), 1),
+                utf8Bytes,
+            };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheStart(Convert.ToChar(32), 3),
+                utf8Bytes,
+            };
 
-            string GetBase64StringWithPassedCharInsertedAtTheStart(char charToInsert, int numberOfTimesToInsert) => $"{new string(charToInsert, numberOfTimesToInsert)}{firstSegment}{secondSegment}";
+            string GetBase64StringWithPassedCharInsertedAtTheStart(
+                char charToInsert,
+                int numberOfTimesToInsert
+            ) => $"{new string(charToInsert, numberOfTimesToInsert)}{firstSegment}{secondSegment}";
 
             // Insert ignored chars at the end of the base 64 string
             // One will have 1 char, another will have 3
             // Whitespace after end/padding is not included in consumed bytes
 
             // Line feed
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(9), 1), utf8Bytes };
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(9), 3), utf8Bytes };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(9), 1),
+                utf8Bytes,
+            };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(9), 3),
+                utf8Bytes,
+            };
 
             // Horizontal tab
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(10), 1), utf8Bytes };
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(10), 3), utf8Bytes };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(10), 1),
+                utf8Bytes,
+            };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(10), 3),
+                utf8Bytes,
+            };
 
             // Carriage return
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(13), 1), utf8Bytes };
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(13), 3), utf8Bytes };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(13), 1),
+                utf8Bytes,
+            };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(13), 3),
+                utf8Bytes,
+            };
 
             // Space
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(32), 1), utf8Bytes };
-            yield return new object[] { GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(32), 3), utf8Bytes };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(32), 1),
+                utf8Bytes,
+            };
+            yield return new object[]
+            {
+                GetBase64StringWithPassedCharInsertedAtTheEnd(Convert.ToChar(32), 3),
+                utf8Bytes,
+            };
 
-            string GetBase64StringWithPassedCharInsertedAtTheEnd(char charToInsert, int numberOfTimesToInsert) => $"{firstSegment}{secondSegment}{new string(charToInsert, numberOfTimesToInsert)}";
+            string GetBase64StringWithPassedCharInsertedAtTheEnd(
+                char charToInsert,
+                int numberOfTimesToInsert
+            ) => $"{firstSegment}{secondSegment}{new string(charToInsert, numberOfTimesToInsert)}";
         }
 
         public static IEnumerable<object[]> StringsOnlyWithCharsToBeIgnored()
@@ -105,7 +210,8 @@ namespace System.Buffers.Text.Tests
             yield return new object[] { GetRepeatedChar(Convert.ToChar(32), 1) };
             yield return new object[] { GetRepeatedChar(Convert.ToChar(32), 3) };
 
-            string GetRepeatedChar(char charToInsert, int numberOfTimesToInsert) => new string(charToInsert, numberOfTimesToInsert);
+            string GetRepeatedChar(char charToInsert, int numberOfTimesToInsert) =>
+                new string(charToInsert, numberOfTimesToInsert);
         }
     }
 }

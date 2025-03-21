@@ -35,14 +35,15 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>Exclusive maximum context (limit) is 64 because a context uses bit-shifting where each kind needs 3 bits.</summary>
         internal const int ContextLimit = 64;
 
-        internal static string DescribePrev(uint i) => i switch
-        {
-            BeginningEnd => @"\A",
-            Newline => @"\n",
-            NewLineS => @"\A\n",
-            WordLetter => @"\w",
-            _ => string.Empty,
-        };
+        internal static string DescribePrev(uint i) =>
+            i switch
+            {
+                BeginningEnd => @"\A",
+                Newline => @"\n",
+                NewLineS => @"\A\n",
+                WordLetter => @"\w",
+                _ => string.Empty,
+            };
 
         /// <summary>Returns whether the given value is in the range of valid character kinds.</summary>
         internal static bool IsValidCharKind(uint charKind) => charKind < CharKindCount;

@@ -11,7 +11,7 @@ public struct S<K>
     public K val;
 }
 
-public class X<K,V> 
+public class X<K, V>
 {
     public X(K k)
     {
@@ -23,7 +23,8 @@ public class X<K,V>
 
     public void Assert(bool b)
     {
-        if (!b) throw new Exception("bad!");
+        if (!b)
+            throw new Exception("bad!");
     }
 
     public int Test()

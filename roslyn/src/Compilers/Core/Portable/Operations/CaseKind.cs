@@ -37,7 +37,6 @@ namespace Microsoft.CodeAnalysis.Operations
         /// <summary>
         /// Indicates an <see cref="IPatternCaseClauseOperation" /> in C#.
         /// </summary>
-        Pattern = 0x5
+        Pattern = 0x5,
     }
 }
-

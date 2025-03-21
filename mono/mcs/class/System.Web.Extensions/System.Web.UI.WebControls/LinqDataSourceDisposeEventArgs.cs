@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,15 +35,21 @@ using System.Web.UI;
 
 namespace System.Web.UI.WebControls
 {
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	public class LinqDataSourceDisposeEventArgs : CancelEventArgs
-	{
-		public LinqDataSourceDisposeEventArgs (object instance)
-		{
-			ObjectInstance = instance;
-		}
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public class LinqDataSourceDisposeEventArgs : CancelEventArgs
+    {
+        public LinqDataSourceDisposeEventArgs(object instance)
+        {
+            ObjectInstance = instance;
+        }
 
-		public object ObjectInstance { get; private set; }
-	}
+        public object ObjectInstance { get; private set; }
+    }
 }

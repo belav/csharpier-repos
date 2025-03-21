@@ -18,7 +18,8 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
 
         public MetricsConfigureOptions(IConfiguration configuration)
         {
-            _configuration = configuration ?? throw new ArgumentNullException(nameof(configuration));
+            _configuration =
+                configuration ?? throw new ArgumentNullException(nameof(configuration));
         }
 
         public void Configure(MetricsOptions options) => LoadConfig(options);
@@ -27,17 +28,37 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
         {
             foreach (var configurationSection in _configuration.GetChildren())
             {
-                if (configurationSection.Key.Equals(EnabledMetricsKey, StringComparison.OrdinalIgnoreCase))
+                if (
+                    configurationSection.Key.Equals(
+                        EnabledMetricsKey,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     // Load listener defaults
-                    LoadMeterRules(options, configurationSection, MeterScope.Global | MeterScope.Local, null);
+                    LoadMeterRules(
+                        options,
+                        configurationSection,
+                        MeterScope.Global | MeterScope.Local,
+                        null
+                    );
                 }
-                else if (configurationSection.Key.Equals(EnabledGlobalMetricsKey, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    configurationSection.Key.Equals(
+                        EnabledGlobalMetricsKey,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     // Load global listener defaults
                     LoadMeterRules(options, configurationSection, MeterScope.Global, null);
                 }
-                else if (configurationSection.Key.Equals(EnabledLocalMetricsKey, StringComparison.OrdinalIgnoreCase))
+                else if (
+                    configurationSection.Key.Equals(
+                        EnabledLocalMetricsKey,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     // Load local listener defaults
                     LoadMeterRules(options, configurationSection, MeterScope.Local, null);
@@ -49,24 +70,48 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                     var enabledMetricsSection = configurationSection.GetSection(EnabledMetricsKey);
                     if (enabledMetricsSection != null)
                     {
-                        LoadMeterRules(options, enabledMetricsSection, MeterScope.Global | MeterScope.Local, listenerName);
+                        LoadMeterRules(
+                            options,
+                            enabledMetricsSection,
+                            MeterScope.Global | MeterScope.Local,
+                            listenerName
+                        );
                     }
-                    var enabledGlobalMetricsSection = configurationSection.GetSection(EnabledGlobalMetricsKey);
+                    var enabledGlobalMetricsSection = configurationSection.GetSection(
+                        EnabledGlobalMetricsKey
+                    );
                     if (enabledGlobalMetricsSection != null)
                     {
-                        LoadMeterRules(options, enabledGlobalMetricsSection, MeterScope.Global, listenerName);
+                        LoadMeterRules(
+                            options,
+                            enabledGlobalMetricsSection,
+                            MeterScope.Global,
+                            listenerName
+                        );
                     }
-                    var enabledLocalMetricsSection = configurationSection.GetSection(EnabledLocalMetricsKey);
+                    var enabledLocalMetricsSection = configurationSection.GetSection(
+                        EnabledLocalMetricsKey
+                    );
                     if (enabledLocalMetricsSection != null)
                     {
-                        LoadMeterRules(options, enabledLocalMetricsSection, MeterScope.Local, listenerName);
+                        LoadMeterRules(
+                            options,
+                            enabledLocalMetricsSection,
+                            MeterScope.Local,
+                            listenerName
+                        );
                     }
                 }
             }
         }
 
         // Internal for testing
-        internal static void LoadMeterRules(MetricsOptions options, IConfigurationSection configurationSection, MeterScope scopes, string? listenerName)
+        internal static void LoadMeterRules(
+            MetricsOptions options,
+            IConfigurationSection configurationSection,
+            MeterScope scopes,
+            string? listenerName
+        )
         {
             foreach (var meterSection in configurationSection.GetChildren())
             {
@@ -86,26 +131,53 @@ namespace Microsoft.Extensions.Diagnostics.Metrics.Configuration
                         meterName = null;
                     }
                     // Simple bool, enable/disable all instruments for this meter
-                    options.Rules.Add(new InstrumentRule(meterName, instrumentName: null, listenerName, scopes, meterEnabled));
+                    options.Rules.Add(
+                        new InstrumentRule(
+                            meterName,
+                            instrumentName: null,
+                            listenerName,
+                            scopes,
+                            meterEnabled
+                        )
+                    );
                 }
             }
         }
 
         // Internal for testing
-        internal static void LoadInstrumentRules(MetricsOptions options, IConfigurationSection meterSection, MeterScope scopes, string? listenerName)
+        internal static void LoadInstrumentRules(
+            MetricsOptions options,
+            IConfigurationSection meterSection,
+            MeterScope scopes,
+            string? listenerName
+        )
         {
             foreach (var instrumentPair in meterSection.AsEnumerable(makePathsRelative: true))
             {
                 if (bool.TryParse(instrumentPair.Value, out var instrumentEnabled))
                 {
                     var instrumentName = instrumentPair.Key;
-                    if (string.Equals(DefaultKey, instrumentName, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            DefaultKey,
+                            instrumentName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         // "Default" is a special key that applies to all instruments
                         instrumentName = null;
                     }
                     // Simple bool, enable/disable all instruments for this meter
-                    options.Rules.Add(new InstrumentRule(meterSection.Key, instrumentName, listenerName, scopes, instrumentEnabled));
+                    options.Rules.Add(
+                        new InstrumentRule(
+                            meterSection.Key,
+                            instrumentName,
+                            listenerName,
+                            scopes,
+                            instrumentEnabled
+                        )
+                    );
                 }
             }
         }

@@ -7,7 +7,6 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
-
 using Internal.Runtime.Augments;
 
 namespace System.Runtime
@@ -29,8 +28,10 @@ namespace System.Runtime
         private const int MaximumCacheSize = 128 * 1024;
 #endif // DEBUG
 
-        private static GenericCache<Key, Value> s_cache =
-            new GenericCache<Key, Value>(InitialCacheSize, MaximumCacheSize);
+        private static GenericCache<Key, Value> s_cache = new GenericCache<Key, Value>(
+            InitialCacheSize,
+            MaximumCacheSize
+        );
 
         private struct Key : IEquatable<Key>
         {
@@ -96,7 +97,13 @@ namespace System.Runtime
 
         public static unsafe IntPtr GVMLookupForSlot(object obj, RuntimeMethodHandle slot)
         {
-            if (TryGetFromCache((IntPtr)obj.GetMethodTable(), RuntimeMethodHandle.ToIntPtr(slot), out var v))
+            if (
+                TryGetFromCache(
+                    (IntPtr)obj.GetMethodTable(),
+                    RuntimeMethodHandle.ToIntPtr(slot),
+                    out var v
+                )
+            )
                 return v._result;
 
             return GVMLookupForSlotSlow(obj, slot);
@@ -104,9 +111,15 @@ namespace System.Runtime
 
         private static unsafe IntPtr GVMLookupForSlotSlow(object obj, RuntimeMethodHandle slot)
         {
-            Value v = CacheMiss((IntPtr)obj.GetMethodTable(), RuntimeMethodHandle.ToIntPtr(slot),
-                    (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult)
-                        => RuntimeAugments.TypeLoaderCallbacks.ResolveGenericVirtualMethodTarget(new RuntimeTypeHandle(new EETypePtr(context)), *(RuntimeMethodHandle*)&signature));
+            Value v = CacheMiss(
+                (IntPtr)obj.GetMethodTable(),
+                RuntimeMethodHandle.ToIntPtr(slot),
+                (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult) =>
+                    RuntimeAugments.TypeLoaderCallbacks.ResolveGenericVirtualMethodTarget(
+                        new RuntimeTypeHandle(new EETypePtr(context)),
+                        *(RuntimeMethodHandle*)&signature
+                    )
+            );
 
             return v._result;
         }
@@ -116,10 +129,21 @@ namespace System.Runtime
         {
             if (!TryGetFromCache((IntPtr)obj.GetMethodTable(), openResolver, out var v))
             {
-                v = CacheMiss((IntPtr)obj.GetMethodTable(), openResolver,
-                        (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult)
-                            => Internal.Runtime.CompilerServices.OpenMethodResolver.ResolveMethodWorker(signature, contextObject),
-                        obj);
+                v = CacheMiss(
+                    (IntPtr)obj.GetMethodTable(),
+                    openResolver,
+                    (
+                        IntPtr context,
+                        IntPtr signature,
+                        object contextObject,
+                        ref IntPtr auxResult
+                    ) =>
+                        Internal.Runtime.CompilerServices.OpenMethodResolver.ResolveMethodWorker(
+                            signature,
+                            contextObject
+                        ),
+                    obj
+                );
             }
 
             return v._result;
@@ -134,13 +158,24 @@ namespace System.Runtime
 
         private static Value CacheMiss(IntPtr ctx, IntPtr sig)
         {
-            return CacheMiss(ctx, sig,
+            return CacheMiss(
+                ctx,
+                sig,
                 (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult) =>
-                    RuntimeAugments.TypeLoaderCallbacks.GenericLookupFromContextAndSignature(context, signature, out auxResult)
-                );
+                    RuntimeAugments.TypeLoaderCallbacks.GenericLookupFromContextAndSignature(
+                        context,
+                        signature,
+                        out auxResult
+                    )
+            );
         }
 
-        private static unsafe Value CacheMiss(IntPtr context, IntPtr signature, RuntimeObjectFactory factory, object contextObject = null)
+        private static unsafe Value CacheMiss(
+            IntPtr context,
+            IntPtr signature,
+            RuntimeObjectFactory factory,
+            object contextObject = null
+        )
         {
             //
             // Call into the type loader to compute the target
@@ -156,44 +191,63 @@ namespace System.Runtime
         }
     }
 
-    internal delegate IntPtr RuntimeObjectFactory(IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult);
+    internal delegate IntPtr RuntimeObjectFactory(
+        IntPtr context,
+        IntPtr signature,
+        object contextObject,
+        ref IntPtr auxResult
+    );
 
     internal static unsafe class RawCalliHelper
     {
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Call(System.IntPtr pfn, ref byte data)
-            => ((delegate*<ref byte, void>)pfn)(ref data);
+        public static void Call(System.IntPtr pfn, ref byte data) =>
+            ((delegate* <ref byte, void>)pfn)(ref data);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Call<T>(System.IntPtr pfn, IntPtr arg)
-            => ((delegate*<IntPtr, T>)pfn)(arg);
+        public static T Call<T>(System.IntPtr pfn, IntPtr arg) => ((delegate* <IntPtr, T>)pfn)(arg);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Call(System.IntPtr pfn, object arg)
-            => ((delegate*<object, void>)pfn)(arg);
+        public static void Call(System.IntPtr pfn, object arg) =>
+            ((delegate* <object, void>)pfn)(arg);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Call<T>(System.IntPtr pfn, IntPtr arg1, IntPtr arg2)
-            => ((delegate*<IntPtr, IntPtr, T>)pfn)(arg1, arg2);
+        public static T Call<T>(System.IntPtr pfn, IntPtr arg1, IntPtr arg2) =>
+            ((delegate* <IntPtr, IntPtr, T>)pfn)(arg1, arg2);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Call<T>(System.IntPtr pfn, IntPtr arg1, IntPtr arg2, object arg3, out IntPtr arg4)
-            => ((delegate*<IntPtr, IntPtr, object, out IntPtr, T>)pfn)(arg1, arg2, arg3, out arg4);
+        public static T Call<T>(
+            System.IntPtr pfn,
+            IntPtr arg1,
+            IntPtr arg2,
+            object arg3,
+            out IntPtr arg4
+        ) => ((delegate* <IntPtr, IntPtr, object, out IntPtr, T>)pfn)(arg1, arg2, arg3, out arg4);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Call(System.IntPtr pfn, IntPtr arg1, object arg2)
-            => ((delegate*<IntPtr, object, void>)pfn)(arg1, arg2);
+        public static void Call(System.IntPtr pfn, IntPtr arg1, object arg2) =>
+            ((delegate* <IntPtr, object, void>)pfn)(arg1, arg2);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Call<T>(System.IntPtr pfn, object arg1, IntPtr arg2)
-            => ((delegate*<object, IntPtr, T>)pfn)(arg1, arg2);
+        public static T Call<T>(System.IntPtr pfn, object arg1, IntPtr arg2) =>
+            ((delegate* <object, IntPtr, T>)pfn)(arg1, arg2);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static T Call<T>(IntPtr pfn, string[] arg0)
-            => ((delegate*<string[], T>)pfn)(arg0);
+        public static T Call<T>(IntPtr pfn, string[] arg0) => ((delegate* <string[], T>)pfn)(arg0);
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ref byte Call(IntPtr pfn, void* arg1, ref byte arg2, ref byte arg3, void* arg4)
-            => ref ((delegate*<void*, ref byte, ref byte, void*, ref byte>)pfn)(arg1, ref arg2, ref arg3, arg4);
+        public static ref byte Call(
+            IntPtr pfn,
+            void* arg1,
+            ref byte arg2,
+            ref byte arg3,
+            void* arg4
+        ) =>
+            ref ((delegate* <void*, ref byte, ref byte, void*, ref byte>)pfn)(
+                arg1,
+                ref arg2,
+                ref arg3,
+                arg4
+            );
     }
 }

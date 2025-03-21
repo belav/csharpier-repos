@@ -50,7 +50,7 @@ namespace System.Web.Http
                 {
                     ActionContext.ControllerContext = new HttpControllerContext
                     {
-                        RequestContext = new RequestBackedHttpRequestContext()
+                        RequestContext = new RequestBackedHttpRequestContext(),
                     };
                 }
                 return ActionContext.ControllerContext;
@@ -87,20 +87,14 @@ namespace System.Web.Http
         /// <remarks>The setter is intended for unit testing purposes only.</remarks>
         public ModelStateDictionary ModelState
         {
-            get
-            {
-                return ActionContext.ModelState;
-            }
+            get { return ActionContext.ModelState; }
         }
 
         /// <summary>Gets or sets the HTTP request message.</summary>
         /// <remarks>The setter is intended for unit testing purposes only.</remarks>
         public HttpRequestMessage Request
         {
-            get
-            {
-                return ControllerContext.Request;
-            }
+            get { return ControllerContext.Request; }
             set
             {
                 if (value == null)
@@ -134,10 +128,7 @@ namespace System.Web.Http
         /// <remarks>The setter is intended for unit testing purposes only.</remarks>
         public HttpRequestContext RequestContext
         {
-            get
-            {
-                return ControllerContext.RequestContext;
-            }
+            get { return ControllerContext.RequestContext; }
             set
             {
                 if (value == null)
@@ -152,7 +143,11 @@ namespace System.Web.Http
                 {
                     HttpRequestContext contextOnRequest = request.GetRequestContext();
 
-                    if (contextOnRequest != null && contextOnRequest != oldContext && contextOnRequest != value)
+                    if (
+                        contextOnRequest != null
+                        && contextOnRequest != oldContext
+                        && contextOnRequest != value
+                    )
                     {
                         // Prevent unit testers from setting conflicting requests contexts.
                         throw new InvalidOperationException(SRResources.RequestContextConflict);
@@ -181,13 +176,24 @@ namespace System.Web.Http
             set { RequestContext.Principal = value; }
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling", Justification = "This method is a coordinator, so this coupling is expected.")]
-        public virtual Task<HttpResponseMessage> ExecuteAsync(HttpControllerContext controllerContext, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1506:AvoidExcessiveClassCoupling",
+            Justification = "This method is a coordinator, so this coupling is expected."
+        )]
+        public virtual Task<HttpResponseMessage> ExecuteAsync(
+            HttpControllerContext controllerContext,
+            CancellationToken cancellationToken
+        )
         {
             if (_initialized)
             {
                 // if user has registered a controller factory which produces the same controller instance, we should throw here
-                throw Error.InvalidOperation(SRResources.CannotSupportSingletonInstance, typeof(ApiController).Name, typeof(IHttpControllerActivator).Name);
+                throw Error.InvalidOperation(
+                    SRResources.CannotSupportSingletonInstance,
+                    typeof(ApiController).Name,
+                    typeof(IHttpControllerActivator).Name
+                );
             }
 
             Initialize(controllerContext);
@@ -202,7 +208,9 @@ namespace System.Web.Http
             HttpControllerDescriptor controllerDescriptor = controllerContext.ControllerDescriptor;
             ServicesContainer controllerServices = controllerDescriptor.Configuration.Services;
 
-            HttpActionDescriptor actionDescriptor = controllerServices.GetActionSelector().SelectAction(controllerContext);
+            HttpActionDescriptor actionDescriptor = controllerServices
+                .GetActionSelector()
+                .SelectAction(controllerContext);
             ActionContext.ActionDescriptor = actionDescriptor;
             if (Request != null)
             {
@@ -216,22 +224,38 @@ namespace System.Web.Http
             IAuthorizationFilter[] authorizationFilters = filterGrouping.AuthorizationFilters;
             IExceptionFilter[] exceptionFilters = filterGrouping.ExceptionFilters;
 
-            IHttpActionResult result = new ActionFilterResult(actionDescriptor.ActionBinding, ActionContext,
-                controllerServices, actionFilters);
+            IHttpActionResult result = new ActionFilterResult(
+                actionDescriptor.ActionBinding,
+                ActionContext,
+                controllerServices,
+                actionFilters
+            );
             if (authorizationFilters.Length > 0)
             {
                 result = new AuthorizationFilterResult(ActionContext, authorizationFilters, result);
             }
             if (authenticationFilters.Length > 0)
             {
-                result = new AuthenticationFilterResult(ActionContext, this, authenticationFilters, result);
+                result = new AuthenticationFilterResult(
+                    ActionContext,
+                    this,
+                    authenticationFilters,
+                    result
+                );
             }
             if (exceptionFilters.Length > 0)
             {
                 IExceptionLogger exceptionLogger = ExceptionServices.GetLogger(controllerServices);
-                IExceptionHandler exceptionHandler = ExceptionServices.GetHandler(controllerServices);
-                result = new ExceptionFilterResult(ActionContext, exceptionFilters, exceptionLogger, exceptionHandler,
-                    result);
+                IExceptionHandler exceptionHandler = ExceptionServices.GetHandler(
+                    controllerServices
+                );
+                result = new ExceptionFilterResult(
+                    ActionContext,
+                    exceptionFilters,
+                    exceptionLogger,
+                    exceptionHandler,
+                    result
+                );
             }
 
             return result.ExecuteAsync(cancellationToken);
@@ -260,16 +284,30 @@ namespace System.Web.Http
         {
             if (Configuration == null)
             {
-                throw Error.InvalidOperation(SRResources.TypePropertyMustNotBeNull, typeof(ApiController).Name, "Configuration");
+                throw Error.InvalidOperation(
+                    SRResources.TypePropertyMustNotBeNull,
+                    typeof(ApiController).Name,
+                    "Configuration"
+                );
             }
 
             IBodyModelValidator validator = Configuration.Services.GetBodyModelValidator();
             if (validator != null)
             {
-                ModelMetadataProvider metadataProvider = Configuration.Services.GetModelMetadataProvider();
-                Contract.Assert(metadataProvider != null, "GetModelMetadataProvider throws on null.");
+                ModelMetadataProvider metadataProvider =
+                    Configuration.Services.GetModelMetadataProvider();
+                Contract.Assert(
+                    metadataProvider != null,
+                    "GetModelMetadataProvider throws on null."
+                );
 
-                validator.Validate(entity, typeof(TEntity), metadataProvider, ActionContext, keyPrefix);
+                validator.Validate(
+                    entity,
+                    typeof(TEntity),
+                    metadataProvider,
+                    ActionContext,
+                    keyPrefix
+                );
             }
         }
 
@@ -295,7 +333,9 @@ namespace System.Web.Http
         /// </summary>
         /// <param name="modelState">The model state to include in the error.</param>
         /// <returns>An <see cref="InvalidModelStateResult"/> with the specified model state.</returns>
-        protected internal virtual InvalidModelStateResult BadRequest(ModelStateDictionary modelState)
+        protected internal virtual InvalidModelStateResult BadRequest(
+            ModelStateDictionary modelState
+        )
         {
             return new InvalidModelStateResult(modelState, this);
         }
@@ -312,7 +352,10 @@ namespace System.Web.Http
         /// <param name="statusCode">The HTTP status code for the response message.</param>
         /// <param name="value">The content value to negotiate and format in the entity body.</param>
         /// <returns>A <see cref="NegotiatedContentResult{T}"/> with the specified values.</returns>
-        protected internal virtual NegotiatedContentResult<T> Content<T>(HttpStatusCode statusCode, T value)
+        protected internal virtual NegotiatedContentResult<T> Content<T>(
+            HttpStatusCode statusCode,
+            T value
+        )
         {
             return new NegotiatedContentResult<T>(statusCode, value, this);
         }
@@ -323,8 +366,11 @@ namespace System.Web.Http
         /// <param name="value">The content value to format in the entity body.</param>
         /// <param name="formatter">The formatter to use to format the content.</param>
         /// <returns>A <see cref="FormattedContentResult{T}"/> with the specified values.</returns>
-        protected internal FormattedContentResult<T> Content<T>(HttpStatusCode statusCode, T value,
-            MediaTypeFormatter formatter)
+        protected internal FormattedContentResult<T> Content<T>(
+            HttpStatusCode statusCode,
+            T value,
+            MediaTypeFormatter formatter
+        )
         {
             return Content(statusCode, value, formatter, (MediaTypeHeaderValue)null);
         }
@@ -336,8 +382,12 @@ namespace System.Web.Http
         /// <param name="formatter">The formatter to use to format the content.</param>
         /// <param name="mediaType">The value for the Content-Type header.</param>
         /// <returns>A <see cref="FormattedContentResult{T}"/> with the specified values.</returns>
-        protected internal FormattedContentResult<T> Content<T>(HttpStatusCode statusCode, T value,
-            MediaTypeFormatter formatter, string mediaType)
+        protected internal FormattedContentResult<T> Content<T>(
+            HttpStatusCode statusCode,
+            T value,
+            MediaTypeFormatter formatter,
+            string mediaType
+        )
         {
             return Content(statusCode, value, formatter, new MediaTypeHeaderValue(mediaType));
         }
@@ -352,8 +402,12 @@ namespace System.Web.Http
         /// value.
         /// </param>
         /// <returns>A <see cref="FormattedContentResult{T}"/> with the specified values.</returns>
-        protected internal virtual FormattedContentResult<T> Content<T>(HttpStatusCode statusCode, T value,
-            MediaTypeFormatter formatter, MediaTypeHeaderValue mediaType)
+        protected internal virtual FormattedContentResult<T> Content<T>(
+            HttpStatusCode statusCode,
+            T value,
+            MediaTypeFormatter formatter,
+            MediaTypeHeaderValue mediaType
+        )
         {
             return new FormattedContentResult<T>(statusCode, value, formatter, mediaType, this);
         }
@@ -384,7 +438,10 @@ namespace System.Web.Http
         /// <param name="location">The location at which the content has been created.</param>
         /// <param name="content">The content value to negotiate and format in the entity body.</param>
         /// <returns>A <see cref="CreatedNegotiatedContentResult{T}"/> with the specified values.</returns>
-        protected internal virtual CreatedNegotiatedContentResult<T> Created<T>(Uri location, T content)
+        protected internal virtual CreatedNegotiatedContentResult<T> Created<T>(
+            Uri location,
+            T content
+        )
         {
             return new CreatedNegotiatedContentResult<T>(location, content, this);
         }
@@ -397,8 +454,11 @@ namespace System.Web.Http
         /// <param name="routeValues">The route data to use for generating the URL.</param>
         /// <param name="content">The content value to negotiate and format in the entity body.</param>
         /// <returns>A <see cref="CreatedAtRouteNegotiatedContentResult{T}"/> with the specified values.</returns>
-        protected internal CreatedAtRouteNegotiatedContentResult<T> CreatedAtRoute<T>(string routeName,
-            object routeValues, T content)
+        protected internal CreatedAtRouteNegotiatedContentResult<T> CreatedAtRoute<T>(
+            string routeName,
+            object routeValues,
+            T content
+        )
         {
             return CreatedAtRoute<T>(routeName, new HttpRouteValueDictionary(routeValues), content);
         }
@@ -411,10 +471,18 @@ namespace System.Web.Http
         /// <param name="routeValues">The route data to use for generating the URL.</param>
         /// <param name="content">The content value to negotiate and format in the entity body.</param>
         /// <returns>A <see cref="CreatedAtRouteNegotiatedContentResult{T}"/> with the specified values.</returns>
-        protected internal virtual CreatedAtRouteNegotiatedContentResult<T> CreatedAtRoute<T>(string routeName,
-            IDictionary<string, object> routeValues, T content)
+        protected internal virtual CreatedAtRouteNegotiatedContentResult<T> CreatedAtRoute<T>(
+            string routeName,
+            IDictionary<string, object> routeValues,
+            T content
+        )
         {
-            return new CreatedAtRouteNegotiatedContentResult<T>(routeName, routeValues, content, this);
+            return new CreatedAtRouteNegotiatedContentResult<T>(
+                routeName,
+                routeValues,
+                content,
+                this
+            );
         }
 
         /// <summary>Creates an <see cref="InternalServerErrorResult"/> (500 Internal Server Error).</summary>
@@ -448,10 +516,16 @@ namespace System.Web.Http
         /// <param name="content">The content value to serialize in the entity body.</param>
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <returns>A <see cref="JsonResult{T}"/> with the specified values.</returns>
-        protected internal JsonResult<T> Json<T>(T content, JsonSerializerSettings serializerSettings)
+        protected internal JsonResult<T> Json<T>(
+            T content,
+            JsonSerializerSettings serializerSettings
+        )
         {
-            return Json<T>(content, serializerSettings, new UTF8Encoding(encoderShouldEmitUTF8Identifier: false,
-                throwOnInvalidBytes: true));
+            return Json<T>(
+                content,
+                serializerSettings,
+                new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true)
+            );
         }
 
         /// <summary>Creates a <see cref="JsonResult{T}"/> (200 OK) with the specified values.</summary>
@@ -460,8 +534,11 @@ namespace System.Web.Http
         /// <param name="serializerSettings">The serializer settings.</param>
         /// <param name="encoding">The content encoding.</param>
         /// <returns>A <see cref="JsonResult{T}"/> with the specified values.</returns>
-        protected internal virtual JsonResult<T> Json<T>(T content, JsonSerializerSettings serializerSettings,
-            Encoding encoding)
+        protected internal virtual JsonResult<T> Json<T>(
+            T content,
+            JsonSerializerSettings serializerSettings,
+            Encoding encoding
+        )
         {
             return new JsonResult<T>(content, serializerSettings, encoding, this);
         }
@@ -516,7 +593,10 @@ namespace System.Web.Http
         /// <param name="routeName">The name of the route to use for generating the URL.</param>
         /// <param name="routeValues">The route data to use for generating the URL.</param>
         /// <returns>A <see cref="RedirectToRouteResult"/> with the specified values.</returns>
-        protected internal RedirectToRouteResult RedirectToRoute(string routeName, object routeValues)
+        protected internal RedirectToRouteResult RedirectToRoute(
+            string routeName,
+            object routeValues
+        )
         {
             return RedirectToRoute(routeName, new HttpRouteValueDictionary(routeValues));
         }
@@ -525,8 +605,10 @@ namespace System.Web.Http
         /// <param name="routeName">The name of the route to use for generating the URL.</param>
         /// <param name="routeValues">The route data to use for generating the URL.</param>
         /// <returns>A <see cref="RedirectToRouteResult"/> with the specified values.</returns>
-        protected internal virtual RedirectToRouteResult RedirectToRoute(string routeName,
-            IDictionary<string, object> routeValues)
+        protected internal virtual RedirectToRouteResult RedirectToRoute(
+            string routeName,
+            IDictionary<string, object> routeValues
+        )
         {
             return new RedirectToRouteResult(routeName, routeValues, this);
         }
@@ -534,7 +616,9 @@ namespace System.Web.Http
         /// <summary>Creates a <see cref="ResponseMessageResult"/> with the specified response.</summary>
         /// <param name="response">The HTTP response message.</param>
         /// <returns>A <see cref="ResponseMessageResult"/> for the specified response.</returns>
-        protected internal virtual ResponseMessageResult ResponseMessage(HttpResponseMessage response)
+        protected internal virtual ResponseMessageResult ResponseMessage(
+            HttpResponseMessage response
+        )
         {
             return new ResponseMessageResult(response);
         }
@@ -552,7 +636,9 @@ namespace System.Web.Http
         /// </summary>
         /// <param name="challenges">The WWW-Authenticate challenges.</param>
         /// <returns>An <see cref="UnauthorizedResult"/> with the specified values.</returns>
-        protected internal UnauthorizedResult Unauthorized(params AuthenticationHeaderValue[] challenges)
+        protected internal UnauthorizedResult Unauthorized(
+            params AuthenticationHeaderValue[] challenges
+        )
         {
             return Unauthorized((IEnumerable<AuthenticationHeaderValue>)challenges);
         }
@@ -562,7 +648,9 @@ namespace System.Web.Http
         /// </summary>
         /// <param name="challenges">The WWW-Authenticate challenges.</param>
         /// <returns>An <see cref="UnauthorizedResult"/> with the specified values.</returns>
-        protected internal virtual UnauthorizedResult Unauthorized(IEnumerable<AuthenticationHeaderValue> challenges)
+        protected internal virtual UnauthorizedResult Unauthorized(
+            IEnumerable<AuthenticationHeaderValue> challenges
+        )
         {
             return new UnauthorizedResult(challenges, this);
         }
@@ -586,9 +674,7 @@ namespace System.Web.Http
             GC.SuppressFinalize(this);
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         #endregion IDisposable
     }

@@ -20,9 +20,24 @@ namespace System.ComponentModel.Tests
 
         public static IEnumerable<object[]> Equals_TestData()
         {
-            yield return new object[] { MergablePropertyAttribute.Yes, MergablePropertyAttribute.Yes, true };
-            yield return new object[] { MergablePropertyAttribute.Yes, new MergablePropertyAttribute(true), true };
-            yield return new object[] { MergablePropertyAttribute.Yes, MergablePropertyAttribute.No, false };
+            yield return new object[]
+            {
+                MergablePropertyAttribute.Yes,
+                MergablePropertyAttribute.Yes,
+                true,
+            };
+            yield return new object[]
+            {
+                MergablePropertyAttribute.Yes,
+                new MergablePropertyAttribute(true),
+                true,
+            };
+            yield return new object[]
+            {
+                MergablePropertyAttribute.Yes,
+                MergablePropertyAttribute.No,
+                false,
+            };
 
             yield return new object[] { MergablePropertyAttribute.Yes, new object(), false };
             yield return new object[] { MergablePropertyAttribute.Yes, null, false };
@@ -30,7 +45,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(MergablePropertyAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            MergablePropertyAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is MergablePropertyAttribute)
@@ -48,7 +67,10 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(DefaultProperties_TestData))]
-        public void DefaultProperties_GetAllowMerge_ReturnsExpected(MergablePropertyAttribute attribute, bool expectedAllowMerge)
+        public void DefaultProperties_GetAllowMerge_ReturnsExpected(
+            MergablePropertyAttribute attribute,
+            bool expectedAllowMerge
+        )
         {
             Assert.Equal(expectedAllowMerge, attribute.AllowMerge);
             Assert.Equal(expectedAllowMerge, attribute.IsDefaultAttribute());

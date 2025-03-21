@@ -21,7 +21,9 @@ public static class ComponentEndpointRouteBuilderExtensions
     /// </summary>
     /// <param name="endpoints">The <see cref="IEndpointRouteBuilder"/>.</param>
     /// <returns>The <see cref="ComponentEndpointConventionBuilder"/>.</returns>
-    public static ComponentEndpointConventionBuilder MapBlazorHub(this IEndpointRouteBuilder endpoints)
+    public static ComponentEndpointConventionBuilder MapBlazorHub(
+        this IEndpointRouteBuilder endpoints
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
 
@@ -36,7 +38,8 @@ public static class ComponentEndpointRouteBuilderExtensions
     /// <returns>The <see cref="ComponentEndpointConventionBuilder"/>.</returns>
     public static ComponentEndpointConventionBuilder MapBlazorHub(
         this IEndpointRouteBuilder endpoints,
-        string path)
+        string path
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(path);
@@ -52,7 +55,8 @@ public static class ComponentEndpointRouteBuilderExtensions
     /// <returns>The <see cref="ComponentEndpointConventionBuilder"/>.</returns>
     public static ComponentEndpointConventionBuilder MapBlazorHub(
         this IEndpointRouteBuilder endpoints,
-        Action<HttpConnectionDispatcherOptions> configureOptions)
+        Action<HttpConnectionDispatcherOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(configureOptions);
@@ -70,7 +74,8 @@ public static class ComponentEndpointRouteBuilderExtensions
     public static ComponentEndpointConventionBuilder MapBlazorHub(
         this IEndpointRouteBuilder endpoints,
         string path,
-        Action<HttpConnectionDispatcherOptions> configureOptions)
+        Action<HttpConnectionDispatcherOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(path);
@@ -78,47 +83,68 @@ public static class ComponentEndpointRouteBuilderExtensions
 
         var hubEndpoint = endpoints.MapHub<ComponentHub>(path, configureOptions);
 
-        var disconnectEndpoint = endpoints.Map(
-            (path.EndsWith('/') ? path : path + "/") + "disconnect/",
-            endpoints.CreateApplicationBuilder().UseMiddleware<CircuitDisconnectMiddleware>().Build())
+        var disconnectEndpoint = endpoints
+            .Map(
+                (path.EndsWith('/') ? path : path + "/") + "disconnect/",
+                endpoints
+                    .CreateApplicationBuilder()
+                    .UseMiddleware<CircuitDisconnectMiddleware>()
+                    .Build()
+            )
             .WithDisplayName("Blazor disconnect");
 
-        var jsInitializersEndpoint = endpoints.Map(
-            (path.EndsWith('/') ? path : path + "/") + "initializers/",
-            endpoints.CreateApplicationBuilder().UseMiddleware<CircuitJavaScriptInitializationMiddleware>().Build())
+        var jsInitializersEndpoint = endpoints
+            .Map(
+                (path.EndsWith('/') ? path : path + "/") + "initializers/",
+                endpoints
+                    .CreateApplicationBuilder()
+                    .UseMiddleware<CircuitJavaScriptInitializationMiddleware>()
+                    .Build()
+            )
             .WithDisplayName("Blazor initializers");
 
         var blazorEndpoint = GetBlazorEndpoint(endpoints);
 
-        return new ComponentEndpointConventionBuilder(hubEndpoint, disconnectEndpoint, jsInitializersEndpoint, blazorEndpoint);
+        return new ComponentEndpointConventionBuilder(
+            hubEndpoint,
+            disconnectEndpoint,
+            jsInitializersEndpoint,
+            blazorEndpoint
+        );
     }
 
     private static IEndpointConventionBuilder GetBlazorEndpoint(IEndpointRouteBuilder endpoints)
     {
         var options = new StaticFileOptions
         {
-            FileProvider = new ManifestEmbeddedFileProvider(typeof(ComponentEndpointRouteBuilderExtensions).Assembly),
-            OnPrepareResponse = CacheHeaderSettings.SetCacheHeaders
+            FileProvider = new ManifestEmbeddedFileProvider(
+                typeof(ComponentEndpointRouteBuilderExtensions).Assembly
+            ),
+            OnPrepareResponse = CacheHeaderSettings.SetCacheHeaders,
         };
 
         var app = endpoints.CreateApplicationBuilder();
-        app.Use(next => context =>
-        {
-            // Set endpoint to null so the static files middleware will handle the request.
-            context.SetEndpoint(null);
+        app.Use(next =>
+            context =>
+            {
+                // Set endpoint to null so the static files middleware will handle the request.
+                context.SetEndpoint(null);
 
-            return next(context);
-        });
+                return next(context);
+            }
+        );
         app.UseStaticFiles(options);
 
-        var blazorEndpoint = endpoints.Map("/_framework/blazor.server.js", app.Build())
+        var blazorEndpoint = endpoints
+            .Map("/_framework/blazor.server.js", app.Build())
             .WithDisplayName("Blazor static files");
 
         blazorEndpoint.Add((builder) => ((RouteEndpointBuilder)builder).Order = int.MinValue);
-        
+
 #if DEBUG
         // We only need to serve the sourcemap when working on the framework, not in the distributed packages
-        endpoints.Map("/_framework/blazor.server.js.map", app.Build())
+        endpoints
+            .Map("/_framework/blazor.server.js.map", app.Build())
             .WithDisplayName("Blazor static files sourcemap")
             .Add((builder) => ((RouteEndpointBuilder)builder).Order = int.MinValue);
 #endif

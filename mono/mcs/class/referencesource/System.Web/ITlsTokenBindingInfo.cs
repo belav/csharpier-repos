@@ -4,7 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web {
+namespace System.Web
+{
     using System;
 
     // Represents token binding information for a request.
@@ -12,7 +13,8 @@ namespace System.Web {
     // attacker in the event an authenticated client's bearer tokens are
     // somehow exfiltrated from the client's machine.
     // More info: https://datatracker.ietf.org/doc/draft-popov-token-binding/
-    public interface ITlsTokenBindingInfo {
+    public interface ITlsTokenBindingInfo
+    {
         // Gets the 'provided' token binding identifier associated with
         // the request. This method could return null if the client did
         // not supply a 'provided' token binding or if the client did

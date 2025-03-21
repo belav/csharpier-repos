@@ -27,32 +27,33 @@ using System;
 
 namespace Mono.Btls.Interface
 {
-	public class BtlsX509Chain : BtlsObject
-	{
-		new internal MonoBtlsX509Chain Instance {
-			get { return (MonoBtlsX509Chain)base.Instance; }
-		}
+    public class BtlsX509Chain : BtlsObject
+    {
+        internal new MonoBtlsX509Chain Instance
+        {
+            get { return (MonoBtlsX509Chain)base.Instance; }
+        }
 
-		internal BtlsX509Chain (MonoBtlsX509Chain chain)
-			: base (chain)
-		{
-		}
+        internal BtlsX509Chain(MonoBtlsX509Chain chain)
+            : base(chain) { }
 
-		public int Count {
-			get { return Instance.Count; }
-		}
+        public int Count
+        {
+            get { return Instance.Count; }
+        }
 
-		public BtlsX509 this[int index] {
-			get {
-				var x509 = Instance.GetCertificate (index);
-				return new BtlsX509 (x509.Copy ());
-			}
-		}
+        public BtlsX509 this[int index]
+        {
+            get
+            {
+                var x509 = Instance.GetCertificate(index);
+                return new BtlsX509(x509.Copy());
+            }
+        }
 
-		public void Add (BtlsX509 x509)
-		{
-			Instance.AddCertificate (x509.Instance);
-		}
-	}
+        public void Add(BtlsX509 x509)
+        {
+            Instance.AddCertificate(x509.Instance);
+        }
+    }
 }
-

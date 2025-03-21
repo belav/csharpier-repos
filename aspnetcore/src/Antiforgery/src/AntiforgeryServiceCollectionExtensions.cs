@@ -26,14 +26,21 @@ public static class AntiforgeryServiceCollectionExtensions
 
         // Don't overwrite any options setups that a user may have added.
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IConfigureOptions<AntiforgeryOptions>, AntiforgeryOptionsSetup>());
+            ServiceDescriptor.Transient<
+                IConfigureOptions<AntiforgeryOptions>,
+                AntiforgeryOptionsSetup
+            >()
+        );
 
         services.TryAddSingleton<IAntiforgery, DefaultAntiforgery>();
         services.TryAddSingleton<IAntiforgeryTokenGenerator, DefaultAntiforgeryTokenGenerator>();
         services.TryAddSingleton<IAntiforgeryTokenSerializer, DefaultAntiforgeryTokenSerializer>();
         services.TryAddSingleton<IAntiforgeryTokenStore, DefaultAntiforgeryTokenStore>();
         services.TryAddSingleton<IClaimUidExtractor, DefaultClaimUidExtractor>();
-        services.TryAddSingleton<IAntiforgeryAdditionalDataProvider, DefaultAntiforgeryAdditionalDataProvider>();
+        services.TryAddSingleton<
+            IAntiforgeryAdditionalDataProvider,
+            DefaultAntiforgeryAdditionalDataProvider
+        >();
         services.TryAddSingleton<ObjectPoolProvider, DefaultObjectPoolProvider>();
 
         services.TryAddSingleton<ObjectPool<AntiforgerySerializationContext>>(serviceProvider =>
@@ -52,7 +59,10 @@ public static class AntiforgeryServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <param name="setupAction">An <see cref="Action{AntiforgeryOptions}"/> to configure the provided <see cref="AntiforgeryOptions"/>.</param>
     /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-    public static IServiceCollection AddAntiforgery(this IServiceCollection services, Action<AntiforgeryOptions> setupAction)
+    public static IServiceCollection AddAntiforgery(
+        this IServiceCollection services,
+        Action<AntiforgeryOptions> setupAction
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(setupAction);

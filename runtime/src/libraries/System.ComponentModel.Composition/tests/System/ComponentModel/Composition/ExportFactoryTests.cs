@@ -51,7 +51,8 @@ namespace Tests.Integration
             [ImportingConstructor]
             public ExportFactoryImporter(
                 ExportFactory<IId> idCreatorTCtor,
-                ExportFactory<IId, IIdTypeMetadata> idCreatorTMCtor)
+                ExportFactory<IId, IIdTypeMetadata> idCreatorTMCtor
+            )
             {
                 this._idCreatorTCtor = idCreatorTCtor;
                 this._idCreatorTMCtor = idCreatorTMCtor;
@@ -89,7 +90,7 @@ namespace Tests.Integration
                     VerifyExportFactory(this.IdCreatorTProperty),
                     VerifyExportFactory(this.IdCreatorTMProperty),
                     VerifyExportFactory(this.IdCreatorsTProperty[0]),
-                    VerifyExportFactory(this.IdCreatorsTMProperty[0])
+                    VerifyExportFactory(this.IdCreatorsTMProperty[0]),
                 };
 
                 Assert.Equal(1, this.IdCreatorsTProperty.Length);
@@ -110,7 +111,10 @@ namespace Tests.Integration
 
                 val1.Dispose();
 
-                Assert.True(val1.Value.Id < 0, "Disposal of the value should set the id to negative");
+                Assert.True(
+                    val1.Value.Id < 0,
+                    "Disposal of the value should set the id to negative"
+                );
 
                 return creator.CreateExport().Value.Id;
             }
@@ -120,7 +124,10 @@ namespace Tests.Integration
                 var val = VerifyExportFactory((ExportFactory<IId>)creator);
 
                 Assert.Equal("PositiveIncrement", creator.Metadata.IdType);
-                Assert.Equal(AttributedModelServices.GetTypeIdentity(typeof(ComposablePartDefinition)), creator.Metadata.ExportTypeIdentity);
+                Assert.Equal(
+                    AttributedModelServices.GetTypeIdentity(typeof(ComposablePartDefinition)),
+                    creator.Metadata.ExportTypeIdentity
+                );
 
                 return val;
             }
@@ -129,7 +136,10 @@ namespace Tests.Integration
         [Fact]
         public void ExportFactoryStandardImports_ShouldWorkProperly()
         {
-            var container = CreateWithAttributedCatalog(typeof(UniqueExport), typeof(ExportFactoryImporter));
+            var container = CreateWithAttributedCatalog(
+                typeof(UniqueExport),
+                typeof(ExportFactoryImporter)
+            );
             var partCreatorImporter = container.GetExportedValue<ExportFactoryImporter>();
 
             partCreatorImporter.AssertValid();
@@ -165,11 +175,11 @@ namespace Tests.Integration
 
             var fooFactory = container.GetExportedValue<SimpleExportFactoryImporter>();
 
-            Assert.Throws<ChangeRejectedException>(() =>
-                aggCat.Catalogs.Remove(typeCat));
+            Assert.Throws<ChangeRejectedException>(() => aggCat.Catalogs.Remove(typeCat));
 
             Assert.Throws<ChangeRejectedException>(() =>
-                aggCat.Catalogs.Add(new TypeCatalog(typeof(Foo))));
+                aggCat.Catalogs.Add(new TypeCatalog(typeof(Foo)))
+            );
         }
 
         [Export]
@@ -264,9 +274,7 @@ namespace Tests.Integration
 
         [Export(typeof(Foo))]
         [PartCreationPolicy(CreationPolicy.Shared)]
-        public class SharedFoo : Foo
-        {
-        }
+        public class SharedFoo : Foo { }
 
         [Fact]
         public void ExportFactory_ImportShouldNotImportSharedPart()
@@ -289,7 +297,10 @@ namespace Tests.Integration
             var container = CreateWithAttributedCatalog(typeof(Foo));
 
             var importDef = ReflectionModelServicesEx.CreateImportDefinition(
-                new LazyMemberInfo(MemberTypes.Field, () => new MemberInfo[] { typeof(ExportFactoryTests) }), // Give it a bogus member
+                new LazyMemberInfo(
+                    MemberTypes.Field,
+                    () => new MemberInfo[] { typeof(ExportFactoryTests) }
+                ), // Give it a bogus member
                 AttributedModelServices.GetContractName(typeof(Foo)),
                 AttributedModelServices.GetTypeIdentity(typeof(Foo)),
                 Enumerable.Empty<KeyValuePair<string, Type>>(),
@@ -297,7 +308,8 @@ namespace Tests.Integration
                 true,
                 CreationPolicy.Any,
                 true, // isExportFactory
-                null);
+                null
+            );
 
             var exports = container.GetExports(importDef);
 
@@ -333,9 +345,7 @@ namespace Tests.Integration
         }
 
         [Export]
-        public class SimpleExport
-        {
-        }
+        public class SimpleExport { }
 
         [Fact]
         public void ExportFactory_SimpleRejectionResurrection_ShouldWork()
@@ -364,10 +374,12 @@ namespace Tests.Integration
         [Export]
         class Tree : IDisposable
         {
-            private List<ExportLifetimeContext<Apple>> grownApples = new List<ExportLifetimeContext<Apple>>();
+            private List<ExportLifetimeContext<Apple>> grownApples =
+                new List<ExportLifetimeContext<Apple>>();
 
             [Import]
             private ExportFactory<Apple> AppleFactory { get; set; }
+
             internal Apple GrowApple()
             {
                 var apple = this.AppleFactory.CreateExport();
@@ -400,6 +412,5 @@ namespace Tests.Integration
             var apple = tree.GrowApple();
             container.Dispose();
         }
-
     }
 }

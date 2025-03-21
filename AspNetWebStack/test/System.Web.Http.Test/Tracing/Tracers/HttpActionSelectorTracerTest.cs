@@ -21,14 +21,25 @@ namespace System.Web.Http.Tracing.Tracers
         {
             _mockActionDescriptor = new Mock<HttpActionDescriptor>() { CallBase = true };
             _mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
-            _mockActionDescriptor.Setup(a => a.GetParameters()).Returns(new Collection<HttpParameterDescriptor>(new HttpParameterDescriptor[0]));
+            _mockActionDescriptor
+                .Setup(a => a.GetParameters())
+                .Returns(new Collection<HttpParameterDescriptor>(new HttpParameterDescriptor[0]));
 
-            _controllerDescriptor = new HttpControllerDescriptor(new HttpConfiguration(), "controller", typeof(ApiController));
+            _controllerDescriptor = new HttpControllerDescriptor(
+                new HttpConfiguration(),
+                "controller",
+                typeof(ApiController)
+            );
 
-            _controllerContext = ContextUtil.CreateControllerContext(request: new HttpRequestMessage());
+            _controllerContext = ContextUtil.CreateControllerContext(
+                request: new HttpRequestMessage()
+            );
             _controllerContext.ControllerDescriptor = _controllerDescriptor;
 
-            _actionContext = ContextUtil.CreateActionContext(_controllerContext, actionDescriptor: _mockActionDescriptor.Object);
+            _actionContext = ContextUtil.CreateActionContext(
+                _controllerContext,
+                actionDescriptor: _mockActionDescriptor.Object
+            );
         }
 
         [Fact]
@@ -37,20 +48,45 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             TestTraceWriter traceWriter = new TestTraceWriter();
             Mock<IHttpActionSelector> mockSelector = new Mock<IHttpActionSelector>();
-            mockSelector.Setup(s => s.SelectAction(_controllerContext)).Returns(_mockActionDescriptor.Object);
-            HttpActionSelectorTracer tracer = new HttpActionSelectorTracer(mockSelector.Object, traceWriter);
+            mockSelector
+                .Setup(s => s.SelectAction(_controllerContext))
+                .Returns(_mockActionDescriptor.Object);
+            HttpActionSelectorTracer tracer = new HttpActionSelectorTracer(
+                mockSelector.Object,
+                traceWriter
+            );
 
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(_actionContext.Request, TraceCategories.ActionCategory, TraceLevel.Info) { Kind = TraceKind.Begin },
-                new TraceRecord(_actionContext.Request, TraceCategories.ActionCategory, TraceLevel.Info) { Kind = TraceKind.End }
+                new TraceRecord(
+                    _actionContext.Request,
+                    TraceCategories.ActionCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.Begin,
+                },
+                new TraceRecord(
+                    _actionContext.Request,
+                    TraceCategories.ActionCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act
-            HttpActionDescriptor selectedActionDescriptor = ((IHttpActionSelector)tracer).SelectAction(_controllerContext);
+            HttpActionDescriptor selectedActionDescriptor = (
+                (IHttpActionSelector)tracer
+            ).SelectAction(_controllerContext);
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
             Assert.IsAssignableFrom<HttpActionDescriptorTracer>(selectedActionDescriptor);
         }
 
@@ -61,12 +97,23 @@ namespace System.Web.Http.Tracing.Tracers
             TestTraceWriter traceWriter = new TestTraceWriter();
             Mock<IHttpActionSelector> mockSelector = new Mock<IHttpActionSelector>();
 
-            HttpActionDescriptorTracer actionDescriptorTracer = new HttpActionDescriptorTracer(_controllerContext, _mockActionDescriptor.Object, traceWriter);
-            mockSelector.Setup(s => s.SelectAction(_controllerContext)).Returns(actionDescriptorTracer);
-            HttpActionSelectorTracer tracer = new HttpActionSelectorTracer(mockSelector.Object, traceWriter);
+            HttpActionDescriptorTracer actionDescriptorTracer = new HttpActionDescriptorTracer(
+                _controllerContext,
+                _mockActionDescriptor.Object,
+                traceWriter
+            );
+            mockSelector
+                .Setup(s => s.SelectAction(_controllerContext))
+                .Returns(actionDescriptorTracer);
+            HttpActionSelectorTracer tracer = new HttpActionSelectorTracer(
+                mockSelector.Object,
+                traceWriter
+            );
 
             // Act
-            HttpActionDescriptor selectedActionDescriptor = ((IHttpActionSelector)tracer).SelectAction(_controllerContext);
+            HttpActionDescriptor selectedActionDescriptor = (
+                (IHttpActionSelector)tracer
+            ).SelectAction(_controllerContext);
 
             // Assert
             Assert.Same(actionDescriptorTracer, selectedActionDescriptor);
@@ -80,19 +127,42 @@ namespace System.Web.Http.Tracing.Tracers
             Mock<IHttpActionSelector> mockSelector = new Mock<IHttpActionSelector>();
             InvalidOperationException exception = new InvalidOperationException();
             mockSelector.Setup(s => s.SelectAction(_controllerContext)).Throws(exception);
-            HttpActionSelectorTracer tracer = new HttpActionSelectorTracer(mockSelector.Object, traceWriter);
+            HttpActionSelectorTracer tracer = new HttpActionSelectorTracer(
+                mockSelector.Object,
+                traceWriter
+            );
 
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(_actionContext.Request, TraceCategories.ActionCategory, TraceLevel.Info) { Kind = TraceKind.Begin },
-                new TraceRecord(_actionContext.Request, TraceCategories.ActionCategory, TraceLevel.Error) { Kind = TraceKind.End }
+                new TraceRecord(
+                    _actionContext.Request,
+                    TraceCategories.ActionCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.Begin,
+                },
+                new TraceRecord(
+                    _actionContext.Request,
+                    TraceCategories.ActionCategory,
+                    TraceLevel.Error
+                )
+                {
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act
-            Exception thrown = Assert.Throws<InvalidOperationException>(() => ((IHttpActionSelector)tracer).SelectAction(_controllerContext));
+            Exception thrown = Assert.Throws<InvalidOperationException>(() =>
+                ((IHttpActionSelector)tracer).SelectAction(_controllerContext)
+            );
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
             Assert.Same(exception, thrown);
             Assert.Same(exception, traceWriter.Traces[1].Exception);
         }
@@ -102,7 +172,10 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             IHttpActionSelector expectedInner = new Mock<IHttpActionSelector>().Object;
-            HttpActionSelectorTracer productUnderTest = new HttpActionSelectorTracer(expectedInner, new TestTraceWriter());
+            HttpActionSelectorTracer productUnderTest = new HttpActionSelectorTracer(
+                expectedInner,
+                new TestTraceWriter()
+            );
 
             // Act
             IHttpActionSelector actualInner = productUnderTest.Inner;
@@ -116,10 +189,15 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             IHttpActionSelector expectedInner = new Mock<IHttpActionSelector>().Object;
-            HttpActionSelectorTracer productUnderTest = new HttpActionSelectorTracer(expectedInner, new TestTraceWriter());
+            HttpActionSelectorTracer productUnderTest = new HttpActionSelectorTracer(
+                expectedInner,
+                new TestTraceWriter()
+            );
 
             // Act
-            IHttpActionSelector actualInner = Decorator.GetInner(productUnderTest as IHttpActionSelector);
+            IHttpActionSelector actualInner = Decorator.GetInner(
+                productUnderTest as IHttpActionSelector
+            );
 
             // Assert
             Assert.Same(expectedInner, actualInner);

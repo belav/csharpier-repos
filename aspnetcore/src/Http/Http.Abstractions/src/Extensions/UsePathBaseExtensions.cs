@@ -30,7 +30,10 @@ public static class UsePathBaseExtensions
         }
 
         // Only use this path if there's a global router (in the 'WebApplication' case).
-        if (app.Properties.TryGetValue(RerouteHelper.GlobalRouteBuilderKey, out var routeBuilder) && routeBuilder is not null)
+        if (
+            app.Properties.TryGetValue(RerouteHelper.GlobalRouteBuilderKey, out var routeBuilder)
+            && routeBuilder is not null
+        )
         {
             return app.Use(next =>
             {

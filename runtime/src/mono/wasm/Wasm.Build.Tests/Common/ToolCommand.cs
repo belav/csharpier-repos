@@ -28,7 +28,7 @@ namespace Wasm.Build.Tests
 
         public string? WorkingDirectory { get; set; }
 
-        public ToolCommand(string command, ITestOutputHelper testOutput, string label="")
+        public ToolCommand(string command, ITestOutputHelper testOutput, string label = "")
         {
             _command = command;
             _testOutput = testOutput;
@@ -75,11 +75,13 @@ namespace Wasm.Build.Tests
             return Task.Run(async () => await ExecuteAsync(args)).Result;
         }
 
-        public async virtual Task<CommandResult> ExecuteAsync(params string[] args)
+        public virtual async Task<CommandResult> ExecuteAsync(params string[] args)
         {
             var resolvedCommand = _command;
             string fullArgs = GetFullArgs(args);
-            _testOutput.WriteLine($"[{_label}] Executing - {resolvedCommand} {fullArgs} {WorkingDirectoryInfo()}");
+            _testOutput.WriteLine(
+                $"[{_label}] Executing - {resolvedCommand} {fullArgs} {WorkingDirectoryInfo()}"
+            );
             return await ExecuteAsyncInternal(resolvedCommand, fullArgs);
         }
 
@@ -87,8 +89,11 @@ namespace Wasm.Build.Tests
         {
             var resolvedCommand = _command;
             string fullArgs = GetFullArgs(args);
-            _testOutput.WriteLine($"[{_label}] Executing (Captured Output) - {resolvedCommand} {fullArgs} - {WorkingDirectoryInfo()}");
-            return Task.Run(async () => await ExecuteAsyncInternal(resolvedCommand, fullArgs)).Result;
+            _testOutput.WriteLine(
+                $"[{_label}] Executing (Captured Output) - {resolvedCommand} {fullArgs} - {WorkingDirectoryInfo()}"
+            );
+            return Task.Run(async () => await ExecuteAsyncInternal(resolvedCommand, fullArgs)
+            ).Result;
         }
 
         public virtual void Dispose()
@@ -139,7 +144,8 @@ namespace Wasm.Build.Tests
             return new CommandResult(
                 CurrentProcess.StartInfo,
                 CurrentProcess.ExitCode,
-                string.Join(System.Environment.NewLine, output));
+                string.Join(System.Environment.NewLine, output)
+            );
         }
 
         private Process CreateProcess(string executable, string args)
@@ -151,7 +157,7 @@ namespace Wasm.Build.Tests
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
                 RedirectStandardInput = true,
-                UseShellExecute = false
+                UseShellExecute = false,
             };
 
             psi.Environment["DOTNET_MULTILEVEL_LOOKUP"] = "0";
@@ -161,10 +167,7 @@ namespace Wasm.Build.Tests
             psi.RemoveEnvironmentVariables("MSBuildSDKsPath");
             AddEnvironmentVariablesTo(psi);
             AddWorkingDirectoryTo(psi);
-            var process = new Process
-            {
-                StartInfo = psi
-            };
+            var process = new Process { StartInfo = psi };
 
             process.EnableRaisingEvents = true;
             return process;

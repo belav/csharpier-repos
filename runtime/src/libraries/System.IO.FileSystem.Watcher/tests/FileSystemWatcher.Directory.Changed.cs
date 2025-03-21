@@ -12,17 +12,28 @@ namespace System.IO.Tests
         [Fact]
         public void FileSystemWatcher_Directory_Changed_LastWrite()
         {
-            FileSystemWatcherTest.Execute(() =>
-            {
-                string dir = CreateTestDirectory(TestDirectory, "dir");
-                using (var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(dir)))
+            FileSystemWatcherTest.Execute(
+                () =>
                 {
-                    Action action = () => Directory.SetLastWriteTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
+                    string dir = CreateTestDirectory(TestDirectory, "dir");
+                    using (
+                        var watcher = new FileSystemWatcher(TestDirectory, Path.GetFileName(dir))
+                    )
+                    {
+                        Action action = () =>
+                            Directory.SetLastWriteTime(
+                                dir,
+                                DateTime.Now + TimeSpan.FromSeconds(10)
+                            );
 
-                    WatcherChangeTypes expected = WatcherChangeTypes.Changed;
-                    ExpectEvent(watcher, expected, action, expectedPath: dir);
-                }
-            }, maxAttempts: DefaultAttemptsForExpectedEvent, backoffFunc: (iteration) => RetryDelayMilliseconds, retryWhen: e => e is XunitException);
+                        WatcherChangeTypes expected = WatcherChangeTypes.Changed;
+                        ExpectEvent(watcher, expected, action, expectedPath: dir);
+                    }
+                },
+                maxAttempts: DefaultAttemptsForExpectedEvent,
+                backoffFunc: (iteration) => RetryDelayMilliseconds,
+                retryWhen: e => e is XunitException
+            );
         }
 
         [Fact]
@@ -31,7 +42,8 @@ namespace System.IO.Tests
             string dir = CreateTestDirectory(TestDirectory, "dir");
             using (var watcher = new FileSystemWatcher(dir, "*"))
             {
-                Action action = () => Directory.SetLastWriteTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    Directory.SetLastWriteTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 ExpectEvent(watcher, 0, action, expectedPath: dir);
             }
@@ -49,10 +61,13 @@ namespace System.IO.Tests
                 watcher.NotifyFilter = NotifyFilters.DirectoryName | NotifyFilters.Attributes;
 
                 var attributes = File.GetAttributes(nestedDir);
-                Action action = () => File.SetAttributes(nestedDir, attributes | FileAttributes.ReadOnly);
+                Action action = () =>
+                    File.SetAttributes(nestedDir, attributes | FileAttributes.ReadOnly);
                 Action cleanup = () => File.SetAttributes(nestedDir, attributes);
 
-                WatcherChangeTypes expected = includeSubdirectories ? WatcherChangeTypes.Changed : 0;
+                WatcherChangeTypes expected = includeSubdirectories
+                    ? WatcherChangeTypes.Changed
+                    : 0;
                 ExpectEvent(watcher, expected, action, cleanup, nestedDir);
             }
         }
@@ -68,7 +83,13 @@ namespace System.IO.Tests
                 // Setup the watcher
                 watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.Size;
                 watcher.IncludeSubdirectories = true;
-                Assert.True(MountHelper.CreateSymbolicLink(Path.Combine(dir, GetRandomLinkName()), tempDir, true));
+                Assert.True(
+                    MountHelper.CreateSymbolicLink(
+                        Path.Combine(dir, GetRandomLinkName()),
+                        tempDir,
+                        true
+                    )
+                );
 
                 Action action = () => File.AppendAllText(file, "longtext");
                 Action cleanup = () => File.AppendAllText(file, "short");
@@ -86,7 +107,8 @@ namespace System.IO.Tests
                 TestISynchronizeInvoke invoker = new TestISynchronizeInvoke();
                 watcher.SynchronizingObject = invoker;
 
-                Action action = () => Directory.SetLastWriteTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
+                Action action = () =>
+                    Directory.SetLastWriteTime(dir, DateTime.Now + TimeSpan.FromSeconds(10));
 
                 ExpectEvent(watcher, WatcherChangeTypes.Changed, action, expectedPath: dir);
                 Assert.True(invoker.BeginInvoke_Called);

@@ -21,26 +21,32 @@ public class StartupResponseCompression
         // NGinx's default min size is 20 bytes
         var helloWorldBody = "Hello World;" + new string('a', 20);
 
-        app.Map("/NoAppCompression", subApp =>
-        {
-            subApp.Run(context =>
+        app.Map(
+            "/NoAppCompression",
+            subApp =>
             {
-                context.Response.ContentType = "text/plain";
-                context.Response.ContentLength = helloWorldBody.Length;
-                return context.Response.WriteAsync(helloWorldBody);
-            });
-        });
+                subApp.Run(context =>
+                {
+                    context.Response.ContentType = "text/plain";
+                    context.Response.ContentLength = helloWorldBody.Length;
+                    return context.Response.WriteAsync(helloWorldBody);
+                });
+            }
+        );
 
-        app.Map("/AppCompression", subApp =>
-        {
-            subApp.UseResponseCompression();
-            subApp.Run(context =>
+        app.Map(
+            "/AppCompression",
+            subApp =>
             {
-                context.Response.ContentType = "text/plain";
-                context.Response.ContentLength = helloWorldBody.Length;
-                return context.Response.WriteAsync(helloWorldBody);
-            });
-        });
+                subApp.UseResponseCompression();
+                subApp.Run(context =>
+                {
+                    context.Response.ContentType = "text/plain";
+                    context.Response.ContentLength = helloWorldBody.Length;
+                    return context.Response.WriteAsync(helloWorldBody);
+                });
+            }
+        );
         app.Run(context =>
         {
             context.Response.ContentType = "text/plain";

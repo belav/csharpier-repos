@@ -9,7 +9,10 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 
 internal sealed partial class DisconnectListener
 {
-    private readonly ConcurrentDictionary<ulong, ConnectionCancellation> _connectionCancellationTokens = new();
+    private readonly ConcurrentDictionary<
+        ulong,
+        ConnectionCancellation
+    > _connectionCancellationTokens = new();
 
     private readonly RequestQueue _requestQueue;
     private readonly ILogger _logger;
@@ -61,32 +64,38 @@ internal sealed partial class DisconnectListener
         var boundHandle = _requestQueue.BoundHandle;
 
         // Making sure we don't capture the execution context
-        var nativeOverlapped = boundHandle.UnsafeAllocateNativeOverlapped((errorCode, numBytes, pOverlapped) =>
-        {
-            Log.DisconnectTriggered(_logger, connectionId);
-
-            // Free the overlapped
-            boundHandle.FreeNativeOverlapped(pOverlapped);
-
-            // Pull the token out of the list and Cancel it.
-            _connectionCancellationTokens.TryRemove(connectionId, out _);
-            try
+        var nativeOverlapped = boundHandle.UnsafeAllocateNativeOverlapped(
+            (errorCode, numBytes, pOverlapped) =>
             {
-                cts.Cancel();
-            }
-            catch (AggregateException exception)
-            {
-                Log.DisconnectHandlerError(_logger, exception);
-            }
-        },
-        null,
-        null);
+                Log.DisconnectTriggered(_logger, connectionId);
+
+                // Free the overlapped
+                boundHandle.FreeNativeOverlapped(pOverlapped);
+
+                // Pull the token out of the list and Cancel it.
+                _connectionCancellationTokens.TryRemove(connectionId, out _);
+                try
+                {
+                    cts.Cancel();
+                }
+                catch (AggregateException exception)
+                {
+                    Log.DisconnectHandlerError(_logger, exception);
+                }
+            },
+            null,
+            null
+        );
 
         uint statusCode;
         try
         {
-            statusCode = HttpApi.HttpWaitForDisconnectEx(requestQueueHandle: _requestQueue.Handle,
-                connectionId: connectionId, reserved: 0, overlapped: nativeOverlapped);
+            statusCode = HttpApi.HttpWaitForDisconnectEx(
+                requestQueueHandle: _requestQueue.Handle,
+                connectionId: connectionId,
+                reserved: 0,
+                overlapped: nativeOverlapped
+            );
         }
         catch (Win32Exception exception)
         {
@@ -94,8 +103,7 @@ internal sealed partial class DisconnectListener
             Log.CreateDisconnectTokenError(_logger, exception);
         }
 
-        if (statusCode != ErrorCodes.ERROR_IO_PENDING &&
-            statusCode != ErrorCodes.ERROR_SUCCESS)
+        if (statusCode != ErrorCodes.ERROR_IO_PENDING && statusCode != ErrorCodes.ERROR_SUCCESS)
         {
             // We got an unknown result, assume the connection has been closed.
             boundHandle.FreeNativeOverlapped(nativeOverlapped);
@@ -140,7 +148,12 @@ internal sealed partial class DisconnectListener
         {
             object syncObject = this;
 #pragma warning disable 420 // Disable warning about volatile by reference since EnsureInitialized does volatile operations
-            return LazyInitializer.EnsureInitialized(ref _cancellationToken, ref _initialized, ref syncObject, () => _parent.CreateDisconnectToken(connectionId));
+            return LazyInitializer.EnsureInitialized(
+                ref _cancellationToken,
+                ref _initialized,
+                ref syncObject,
+                () => _parent.CreateDisconnectToken(connectionId)
+            );
 #pragma warning restore 420
         }
     }

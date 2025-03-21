@@ -24,22 +24,23 @@ namespace Test
 
         public override string ToString()
         {
-            return
-                String.Format(
-                    "{0}, {1}, {2}, {3}",
-                    this.Field1,
-                    this.Field2,
-                    this.Field3,
-                    this.Field4
-                );
+            return String.Format(
+                "{0}, {1}, {2}, {3}",
+                this.Field1,
+                this.Field2,
+                this.Field3,
+                this.Field4
+            );
         }
 
         public static bool AreEqual(BasicStruct s1, BasicStruct s2)
         {
-            if ((s1.Field1 == s2.Field1) &&
-                (s1.Field2 == s2.Field2) &&
-                (s1.Field3 == s2.Field3) &&
-                (s1.Field4 == s2.Field4))
+            if (
+                (s1.Field1 == s2.Field1)
+                && (s1.Field2 == s2.Field2)
+                && (s1.Field3 == s2.Field3)
+                && (s1.Field4 == s2.Field4)
+            )
             {
                 return true;
             }
@@ -50,62 +51,92 @@ namespace Test
         }
     }
 
-
     public static class Support
     {
-        private static Exception SignalVerificationFailure(string kind, string value, string expected)
+        private static Exception SignalVerificationFailure(
+            string kind,
+            string value,
+            string expected
+        )
         {
-            throw
-                new Exception(
-                    String.Format(
-                        "FAILED: {0} verification failed.\r\n" +
-                        "    Observed value: {1}\r\n" +
-                        "    Expected value: {2}\r\n",
-
-                        kind,
-                        value,
-                        expected
-                    )
-                );
+            throw new Exception(
+                String.Format(
+                    "FAILED: {0} verification failed.\r\n"
+                        + "    Observed value: {1}\r\n"
+                        + "    Expected value: {2}\r\n",
+                    kind,
+                    value,
+                    expected
+                )
+            );
         }
 
         public static void VerifyInt(int value, int expected)
         {
-            if (value == expected) { return; }
+            if (value == expected)
+            {
+                return;
+            }
             throw Support.SignalVerificationFailure("Int", value.ToString(), expected.ToString());
         }
 
         public static void VerifyLong(long value, long expected)
         {
-            if (value == expected) { return; }
+            if (value == expected)
+            {
+                return;
+            }
             throw Support.SignalVerificationFailure("Long", value.ToString(), expected.ToString());
         }
 
         public static void VerifyFloat(float value, float expected)
         {
-            if (value == expected) { return; }
+            if (value == expected)
+            {
+                return;
+            }
             throw Support.SignalVerificationFailure("Float", value.ToString(), expected.ToString());
         }
 
         public static void VerifyDouble(double value, double expected)
         {
-            if (value == expected) { return; }
-            throw Support.SignalVerificationFailure("Double", value.ToString(), expected.ToString());
+            if (value == expected)
+            {
+                return;
+            }
+            throw Support.SignalVerificationFailure(
+                "Double",
+                value.ToString(),
+                expected.ToString()
+            );
         }
 
         public static void VerifyString(string value, string expected)
         {
-            if (value == expected) { return; }
-            throw Support.SignalVerificationFailure("String", value.ToString(), expected.ToString());
+            if (value == expected)
+            {
+                return;
+            }
+            throw Support.SignalVerificationFailure(
+                "String",
+                value.ToString(),
+                expected.ToString()
+            );
         }
 
         public static void VerifyStruct(BasicStruct value, BasicStruct expected)
         {
-            if (BasicStruct.AreEqual(value, expected)) { return; }
-            throw Support.SignalVerificationFailure("Struct", value.ToString(), expected.ToString());
+            if (BasicStruct.AreEqual(value, expected))
+            {
+                return;
+            }
+            throw Support.SignalVerificationFailure(
+                "Struct",
+                value.ToString(),
+                expected.ToString()
+            );
         }
     }
-
 
     public static partial class CallerSide
     {
@@ -132,7 +163,9 @@ namespace Test
         {
             if (CallerSide.s_lastExecutedCaller != expectedTag)
             {
-                throw new Exception("The exected caller was not recorded during the last operation.");
+                throw new Exception(
+                    "The exected caller was not recorded during the last operation."
+                );
             }
 
             return;
@@ -157,7 +190,6 @@ namespace Test
         }
     }
 
-
     public static class App
     {
         [Fact]
@@ -174,4 +206,3 @@ namespace Test
         }
     }
 }
-

@@ -13,7 +13,11 @@ namespace Internal.Cryptography.Pal.Windows
 {
     internal sealed class KeyAgreeRecipientInfoPalWindows : KeyAgreeRecipientInfoPal
     {
-        internal KeyAgreeRecipientInfoPalWindows(SafeHandle pCmsgCmsRecipientInfoMemory, int index, int subIndex)
+        internal KeyAgreeRecipientInfoPalWindows(
+            SafeHandle pCmsgCmsRecipientInfoMemory,
+            int index,
+            int subIndex
+        )
             : base()
         {
             _pCmsgCmsRecipientInfoMemory = pCmsgCmsRecipientInfoMemory;
@@ -28,10 +32,11 @@ namespace Internal.Cryptography.Pal.Windows
                 unsafe
                 {
                     return WithCmsgCmsRecipientInfo<int>(
-                        delegate (CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
+                        delegate(CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
                         {
                             return recipient->dwVersion;
-                        });
+                        }
+                    );
                 }
             }
         }
@@ -43,11 +48,13 @@ namespace Internal.Cryptography.Pal.Windows
                 unsafe
                 {
                     return WithCmsgCmsRecipientInfo<SubjectIdentifier>(
-                        delegate (CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
+                        delegate(CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
                         {
-                            CMSG_RECIPIENT_ENCRYPTED_KEY_INFO* pEncryptedKeyInfo = recipient->rgpRecipientEncryptedKeys[SubIndex];
+                            CMSG_RECIPIENT_ENCRYPTED_KEY_INFO* pEncryptedKeyInfo =
+                                recipient->rgpRecipientEncryptedKeys[SubIndex];
                             return pEncryptedKeyInfo->RecipientId.ToSubjectIdentifier();
-                        });
+                        }
+                    );
                 }
             }
         }
@@ -59,10 +66,11 @@ namespace Internal.Cryptography.Pal.Windows
                 unsafe
                 {
                     return WithCmsgCmsRecipientInfo<AlgorithmIdentifier>(
-                        delegate (CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
+                        delegate(CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
                         {
                             return recipient->KeyEncryptionAlgorithm.ToAlgorithmIdentifier();
-                        });
+                        }
+                    );
                 }
             }
         }
@@ -74,11 +82,13 @@ namespace Internal.Cryptography.Pal.Windows
                 unsafe
                 {
                     return WithCmsgCmsRecipientInfo<byte[]>(
-                        delegate (CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
+                        delegate(CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
                         {
-                            CMSG_RECIPIENT_ENCRYPTED_KEY_INFO* pEncryptedKeyInfo = recipient->rgpRecipientEncryptedKeys[SubIndex];
+                            CMSG_RECIPIENT_ENCRYPTED_KEY_INFO* pEncryptedKeyInfo =
+                                recipient->rgpRecipientEncryptedKeys[SubIndex];
                             return pEncryptedKeyInfo->EncryptedKey.ToByteArray();
-                        });
+                        }
+                    );
                 }
             }
         }
@@ -90,9 +100,10 @@ namespace Internal.Cryptography.Pal.Windows
                 unsafe
                 {
                     return WithCmsgCmsRecipientInfo<SubjectIdentifierOrKey>(
-                        delegate (CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
+                        delegate(CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
                         {
-                            CMsgKeyAgreeOriginatorChoice originatorChoice = recipient->dwOriginatorChoice;
+                            CMsgKeyAgreeOriginatorChoice originatorChoice =
+                                recipient->dwOriginatorChoice;
                             return originatorChoice switch
                             {
                                 CMsgKeyAgreeOriginatorChoice.CMSG_KEY_AGREE_ORIGINATOR_CERT =>
@@ -101,9 +112,15 @@ namespace Internal.Cryptography.Pal.Windows
                                 CMsgKeyAgreeOriginatorChoice.CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY =>
                                     recipient->OriginatorPublicKeyInfo.ToSubjectIdentifierOrKey(),
 
-                                _ => throw new CryptographicException(SR.Format(SR.Cryptography_Cms_Invalid_Originator_Identifier_Choice, originatorChoice)),
+                                _ => throw new CryptographicException(
+                                    SR.Format(
+                                        SR.Cryptography_Cms_Invalid_Originator_Identifier_Choice,
+                                        originatorChoice
+                                    )
+                                ),
                             };
-                        });
+                        }
+                    );
                 }
             }
         }
@@ -113,18 +130,24 @@ namespace Internal.Cryptography.Pal.Windows
             get
             {
                 if (RecipientIdentifier.Type != SubjectIdentifierType.SubjectKeyIdentifier)
-                    throw new InvalidOperationException(SR.Cryptography_Cms_Key_Agree_Date_Not_Available);
+                    throw new InvalidOperationException(
+                        SR.Cryptography_Cms_Key_Agree_Date_Not_Available
+                    );
 
                 unsafe
                 {
                     return WithCmsgCmsRecipientInfo<DateTime>(
-                        delegate (CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
+                        delegate(CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
                         {
-                            CMSG_RECIPIENT_ENCRYPTED_KEY_INFO* pEncryptedKeyInfo = recipient->rgpRecipientEncryptedKeys[SubIndex];
-                            long date = (((long)pEncryptedKeyInfo->Date.ftTimeHigh) << 32) | ((long)pEncryptedKeyInfo->Date.ftTimeLow);
+                            CMSG_RECIPIENT_ENCRYPTED_KEY_INFO* pEncryptedKeyInfo =
+                                recipient->rgpRecipientEncryptedKeys[SubIndex];
+                            long date =
+                                (((long)pEncryptedKeyInfo->Date.ftTimeHigh) << 32)
+                                | ((long)pEncryptedKeyInfo->Date.ftTimeLow);
                             DateTime dateTime = DateTime.FromFileTimeUtc(date);
                             return dateTime;
-                        });
+                        }
+                    );
                 }
             }
         }
@@ -134,25 +157,35 @@ namespace Internal.Cryptography.Pal.Windows
             get
             {
                 if (RecipientIdentifier.Type != SubjectIdentifierType.SubjectKeyIdentifier)
-                    throw new InvalidOperationException(SR.Cryptography_Cms_Key_Agree_Date_Not_Available);
+                    throw new InvalidOperationException(
+                        SR.Cryptography_Cms_Key_Agree_Date_Not_Available
+                    );
 
                 unsafe
                 {
                     return WithCmsgCmsRecipientInfo<CryptographicAttributeObject?>(
-                        delegate (CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
+                        delegate(CMSG_KEY_AGREE_RECIPIENT_INFO* recipient)
                         {
-                            CMSG_RECIPIENT_ENCRYPTED_KEY_INFO* pEncryptedKeyInfo = recipient->rgpRecipientEncryptedKeys[SubIndex];
-                            CRYPT_ATTRIBUTE_TYPE_VALUE* pCryptAttributeTypeValue = pEncryptedKeyInfo->pOtherAttr;
+                            CMSG_RECIPIENT_ENCRYPTED_KEY_INFO* pEncryptedKeyInfo =
+                                recipient->rgpRecipientEncryptedKeys[SubIndex];
+                            CRYPT_ATTRIBUTE_TYPE_VALUE* pCryptAttributeTypeValue =
+                                pEncryptedKeyInfo->pOtherAttr;
                             if (pCryptAttributeTypeValue == null)
                                 return null;
 
                             string oidValue = pCryptAttributeTypeValue->pszObjId.ToStringAnsi();
                             Oid oid = Oid.FromOidValue(oidValue, OidGroup.All);
                             byte[] rawData = pCryptAttributeTypeValue->Value.ToByteArray();
-                            Pkcs9AttributeObject pkcs9AttributeObject = new Pkcs9AttributeObject(oid, rawData);
-                            AsnEncodedDataCollection values = new AsnEncodedDataCollection(pkcs9AttributeObject);
+                            Pkcs9AttributeObject pkcs9AttributeObject = new Pkcs9AttributeObject(
+                                oid,
+                                rawData
+                            );
+                            AsnEncodedDataCollection values = new AsnEncodedDataCollection(
+                                pkcs9AttributeObject
+                            );
                             return new CryptographicAttributeObject(oid, values);
-                        });
+                        }
+                    );
                 }
             }
         }
@@ -166,7 +199,9 @@ namespace Internal.Cryptography.Pal.Windows
         {
             unsafe
             {
-                CMSG_CMS_RECIPIENT_INFO* pRecipientInfo = (CMSG_CMS_RECIPIENT_INFO*)(_pCmsgCmsRecipientInfoMemory.DangerousGetHandle());
+                CMSG_CMS_RECIPIENT_INFO* pRecipientInfo = (CMSG_CMS_RECIPIENT_INFO*)(
+                    _pCmsgCmsRecipientInfoMemory.DangerousGetHandle()
+                );
                 CMSG_KEY_AGREE_RECIPIENT_INFO* pKeyAgree = pRecipientInfo->KeyAgree;
                 T value = receiver(pKeyAgree);
                 GC.KeepAlive(_pCmsgCmsRecipientInfoMemory);

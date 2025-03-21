@@ -1,17 +1,17 @@
 //------------------------------------------------------------------------------
 // <copyright file="WeakHashtable.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
     using System.Collections;
     using System.Security.Permissions;
 
     /// <devdoc>
-    ///     This is a hashtable that stores object keys as weak references.  
+    ///     This is a hashtable that stores object keys as weak references.
     ///     It monitors memory usage and will periodically scavenge the
     ///     hash table to clean out dead references.
     /// </devdoc>
@@ -20,12 +20,11 @@ namespace System.ComponentModel {
     {
         private static IEqualityComparer _comparer = new WeakKeyComparer();
 
-        private long     _lastGlobalMem;
-        private int      _lastHashCount;
+        private long _lastGlobalMem;
+        private int _lastHashCount;
 
-        internal WeakHashtable() : base(_comparer)
-        {
-        }
+        internal WeakHashtable()
+            : base(_comparer) { }
 
         /// <devdoc>
         ///     Override of clear that performs a scavenge.
@@ -97,7 +96,7 @@ namespace System.ComponentModel {
                 // for dead references.
                 //
                 ArrayList cleanupList = null;
-                foreach(object o in Keys)
+                foreach (object o in Keys)
                 {
                     WeakReference wr = o as WeakReference;
                     if (wr != null && !wr.IsAlive)
@@ -113,13 +112,13 @@ namespace System.ComponentModel {
 
                 if (cleanupList != null)
                 {
-                    foreach(object o in cleanupList)
+                    foreach (object o in cleanupList)
                     {
                         Remove(o);
                     }
                 }
             }
-        
+
             _lastGlobalMem = globalMem;
             _lastHashCount = hashCount;
         }
@@ -161,7 +160,7 @@ namespace System.ComponentModel {
                 return false;
             }
 
-            int IEqualityComparer.GetHashCode (Object obj)
+            int IEqualityComparer.GetHashCode(Object obj)
             {
                 return obj.GetHashCode();
             }
@@ -178,7 +177,9 @@ namespace System.ComponentModel {
         private sealed class EqualityWeakReference : WeakReference
         {
             private int _hashCode;
-            internal EqualityWeakReference(object o) : base(o)
+
+            internal EqualityWeakReference(object o)
+                : base(o)
             {
                 _hashCode = o.GetHashCode();
             }
@@ -209,7 +210,6 @@ namespace System.ComponentModel {
             }
         }
 
-
         /* The folowing code has been removed to prevent FXCOP violation
            It is left here incase it needs to be resurected
         /// <devdoc>
@@ -224,4 +224,3 @@ namespace System.ComponentModel {
         */
     }
 }
-

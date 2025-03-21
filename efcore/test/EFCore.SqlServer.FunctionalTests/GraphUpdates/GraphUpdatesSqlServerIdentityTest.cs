@@ -3,20 +3,20 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class GraphUpdatesSqlServerIdentityTest : GraphUpdatesSqlServerTestBase<GraphUpdatesSqlServerIdentityTest.SqlServerFixture>
+public class GraphUpdatesSqlServerIdentityTest
+    : GraphUpdatesSqlServerTestBase<GraphUpdatesSqlServerIdentityTest.SqlServerFixture>
 {
     public GraphUpdatesSqlServerIdentityTest(SqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
     public class SqlServerFixture : GraphUpdatesSqlServerFixtureBase
     {
-        protected override string StoreName
-            => "GraphIdentityUpdatesTest";
+        protected override string StoreName => "GraphIdentityUpdatesTest";
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

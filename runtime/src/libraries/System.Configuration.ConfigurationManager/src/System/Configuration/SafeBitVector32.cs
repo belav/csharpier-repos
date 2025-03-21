@@ -28,11 +28,14 @@ namespace System.Configuration
                 {
                     int oldData = _data;
                     int newData;
-                    if (value) newData = oldData | bit;
-                    else newData = oldData & ~bit;
+                    if (value)
+                        newData = oldData | bit;
+                    else
+                        newData = oldData & ~bit;
 
                     int result = Interlocked.CompareExchange(ref _data, newData, oldData);
-                    if (result == oldData) break;
+                    if (result == oldData)
+                        break;
                 }
             }
         }

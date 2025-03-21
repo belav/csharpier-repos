@@ -10,9 +10,7 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 public class VersioningEndpointRoutingTests : VersioningTestsBase<VersioningWebSite.Startup>
 {
     public VersioningEndpointRoutingTests(MvcTestFixture<VersioningWebSite.Startup> fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [Fact]
     public override async Task HasEndpointMatch()
@@ -36,7 +34,10 @@ public class VersioningEndpointRoutingTests : VersioningTestsBase<VersioningWebS
     public override async Task VersionedApi_CanUseConstraintOrder_ToChangeSelectedAction()
     {
         // Arrange
-        var message = new HttpRequestMessage(HttpMethod.Delete, "http://localhost/" + "Customers/5?version=2");
+        var message = new HttpRequestMessage(
+            HttpMethod.Delete,
+            "http://localhost/" + "Customers/5?version=2"
+        );
 
         // Act
         var response = await Client.SendAsync(message);
@@ -55,7 +56,10 @@ public class VersioningEndpointRoutingTests : VersioningTestsBase<VersioningWebS
     public override async Task VersionedApi_ConstraintOrder_IsRespected()
     {
         // Arrange
-        var message = new HttpRequestMessage(HttpMethod.Post, "http://localhost/" + "Customers?version=2");
+        var message = new HttpRequestMessage(
+            HttpMethod.Post,
+            "http://localhost/" + "Customers?version=2"
+        );
 
         // Act
         var response = await Client.SendAsync(message);

@@ -17,11 +17,16 @@ using System.Runtime.CompilerServices;
 namespace System
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public abstract class ValueType
     {
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2075:UnrecognizedReflectionPattern",
-            Justification = "Trimmed fields don't make a difference for equality")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2075:UnrecognizedReflectionPattern",
+            Justification = "Trimmed fields don't make a difference for equality"
+        )]
         public override unsafe bool Equals([NotNullWhen(true)] object? obj)
         {
             if (null == obj)
@@ -41,10 +46,12 @@ namespace System
                 return SpanHelpers.SequenceEqual(
                     ref RuntimeHelpers.GetRawData(this),
                     ref RuntimeHelpers.GetRawData(obj),
-                    RuntimeHelpers.GetMethodTable(this)->GetNumInstanceFieldBytes());
+                    RuntimeHelpers.GetMethodTable(this)->GetNumInstanceFieldBytes()
+                );
             }
 
-            FieldInfo[] thisFields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            FieldInfo[] thisFields = GetType()
+                .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
             for (int i = 0; i < thisFields.Length; i++)
             {
@@ -56,8 +63,7 @@ namespace System
                     if (thatResult != null)
                         return false;
                 }
-                else
-                if (!thisResult.Equals(thatResult))
+                else if (!thisResult.Equals(thatResult))
                 {
                     return false;
                 }

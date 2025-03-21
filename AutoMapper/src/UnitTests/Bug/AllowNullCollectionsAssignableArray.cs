@@ -8,23 +8,22 @@ public class AllowNullCollectionsAssignableArray : AutoMapperSpecBase
     {
         public string[] ArrayOfItems { get; set; }
     }
+
     class Destination
     {
         public string[] ArrayOfItems { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.AllowNullCollections = false;
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.AllowNullCollections = false;
+            cfg.CreateMap<Source, Destination>();
+        });
 
     protected override void Because_of()
     {
-        _destination = new Destination
-        {
-            ArrayOfItems = new string[] { "Red Fish", "Blue Fish" },
-        };
+        _destination = new Destination { ArrayOfItems = new string[] { "Red Fish", "Blue Fish" } };
         Mapper.Map(new Source(), _destination);
     }
 

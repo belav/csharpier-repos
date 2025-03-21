@@ -1,37 +1,40 @@
 //------------------------------------------------------------------------------
 // <copyright file="FontInfo.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-using System.Web.UI;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Design;
 using System.Security.Permissions;
+using System.Web.UI;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * FontInfo class.
      * Encapsulates all of the Style font properties into a single class.
      */
     /// <include file='doc\FontInfo.uex' path='docs/doc[@for="FontInfo"]/*' />
-    [
-        TypeConverterAttribute(typeof(ExpandableObjectConverter))
-    ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [TypeConverterAttribute(typeof(ExpandableObjectConverter))]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class FontInfo
     {
-
         private Style _style;
 
-        // 
-
+        //
 
         internal FontInfo(Style style)
         {
@@ -50,14 +53,8 @@ namespace System.Web.UI.MobileControls
         ]
         public String Name
         {
-            get
-            {
-                return _style.FontName;
-            }
-            set
-            {
-                _style.FontName = value;
-            }
+            get { return _style.FontName; }
+            set { _style.FontName = value; }
         }
 
         /// <include file='doc\FontInfo.uex' path='docs/doc[@for="FontInfo.Bold"]/*' />
@@ -70,14 +67,8 @@ namespace System.Web.UI.MobileControls
         ]
         public BooleanOption Bold
         {
-            get
-            {
-                return _style.Bold;
-            }
-            set
-            {
-                _style.Bold = value;
-            }
+            get { return _style.Bold; }
+            set { _style.Bold = value; }
         }
 
         /// <include file='doc\FontInfo.uex' path='docs/doc[@for="FontInfo.Italic"]/*' />
@@ -90,14 +81,8 @@ namespace System.Web.UI.MobileControls
         ]
         public BooleanOption Italic
         {
-            get
-            {
-                return _style.Italic;
-            }
-            set
-            {
-                _style.Italic = value;
-            }
+            get { return _style.Italic; }
+            set { _style.Italic = value; }
         }
 
         /// <include file='doc\FontInfo.uex' path='docs/doc[@for="FontInfo.Size"]/*' />
@@ -110,14 +95,8 @@ namespace System.Web.UI.MobileControls
         ]
         public FontSize Size
         {
-            get
-            {
-                return _style.FontSize;
-            }
-            set
-            {
-                _style.FontSize = value;
-            }
+            get { return _style.FontSize; }
+            set { _style.FontSize = value; }
         }
 
         /// <include file='doc\FontInfo.uex' path='docs/doc[@for="FontInfo.ToString"]/*' />
@@ -125,7 +104,9 @@ namespace System.Web.UI.MobileControls
         /// </summary>
         public override String ToString()
         {
-            String size = (this.Size.Equals(FontSize.NotSet) ? null : Enum.GetName(typeof(FontSize), this.Size));
+            String size = (
+                this.Size.Equals(FontSize.NotSet) ? null : Enum.GetName(typeof(FontSize), this.Size)
+            );
             String s = this.Name;
 
             if (size != null)
@@ -134,7 +115,8 @@ namespace System.Web.UI.MobileControls
                 {
                     s += ", " + size;
                 }
-                else {
+                else
+                {
                     s = size;
                 }
             }

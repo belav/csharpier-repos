@@ -13,37 +13,44 @@ namespace System.Activities.Statements
     {
         public Rethrow()
         {
-            DelegateInArgument<Rethrow> element = new DelegateInArgument<Rethrow>() { Name = "constraintArg" };
-            DelegateInArgument<ValidationContext> validationContext = new DelegateInArgument<ValidationContext>() { Name = "validationContext" };
-            base.Constraints.Add(new Constraint<Rethrow>
+            DelegateInArgument<Rethrow> element = new DelegateInArgument<Rethrow>()
             {
-                Body = new ActivityAction<Rethrow, ValidationContext>
+                Name = "constraintArg",
+            };
+            DelegateInArgument<ValidationContext> validationContext =
+                new DelegateInArgument<ValidationContext>() { Name = "validationContext" };
+            base.Constraints.Add(
+                new Constraint<Rethrow>
                 {
-                    Argument1 = element,
-                    Argument2 = validationContext,
-                    Handler = new RethrowBuildConstraint
+                    Body = new ActivityAction<Rethrow, ValidationContext>
                     {
-                        ParentChain = new GetParentChain
+                        Argument1 = element,
+                        Argument2 = validationContext,
+                        Handler = new RethrowBuildConstraint
                         {
-                            ValidationContext = validationContext,
+                            ParentChain = new GetParentChain
+                            {
+                                ValidationContext = validationContext,
+                            },
+                            RethrowActivity = element,
                         },
-                        RethrowActivity = element
                     },
                 }
-            });
+            );
         }
 
-        protected override void CacheMetadata(NativeActivityMetadata metadata)
-        {
-        }
+        protected override void CacheMetadata(NativeActivityMetadata metadata) { }
 
         protected override void Execute(NativeActivityContext context)
         {
-            FaultContext faultContext = context.Properties.Find(TryCatch.FaultContextId) as FaultContext;
+            FaultContext faultContext =
+                context.Properties.Find(TryCatch.FaultContextId) as FaultContext;
 
             if (faultContext == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.FaultContextNotFound(this.DisplayName)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.FaultContextNotFound(this.DisplayName))
+                );
             }
 
             context.RethrowException(faultContext);
@@ -53,27 +60,29 @@ namespace System.Activities.Statements
         {
             [RequiredArgument]
             [DefaultValue(null)]
-            public InArgument<IEnumerable<Activity>> ParentChain
-            {
-                get;
-                set;
-            }
+            public InArgument<IEnumerable<Activity>> ParentChain { get; set; }
 
             [RequiredArgument]
             [DefaultValue(null)]
-            public InArgument<Rethrow> RethrowActivity
-            {
-                get;
-                set;
-            }
+            public InArgument<Rethrow> RethrowActivity { get; set; }
 
             protected override void CacheMetadata(NativeActivityMetadata metadata)
             {
-                RuntimeArgument parentChainArgument = new RuntimeArgument("ParentChain", typeof(IEnumerable<Activity>), ArgumentDirection.In, true);
+                RuntimeArgument parentChainArgument = new RuntimeArgument(
+                    "ParentChain",
+                    typeof(IEnumerable<Activity>),
+                    ArgumentDirection.In,
+                    true
+                );
                 metadata.Bind(this.ParentChain, parentChainArgument);
                 metadata.AddArgument(parentChainArgument);
 
-                RuntimeArgument rethrowActivityArgument = new RuntimeArgument("RethrowActivity", typeof(Rethrow), ArgumentDirection.In, true);
+                RuntimeArgument rethrowActivityArgument = new RuntimeArgument(
+                    "RethrowActivity",
+                    typeof(Rethrow),
+                    ArgumentDirection.In,
+                    true
+                );
                 metadata.Bind(this.RethrowActivity, rethrowActivityArgument);
                 metadata.AddArgument(rethrowActivityArgument);
             }
@@ -86,12 +95,12 @@ namespace System.Activities.Statements
                 bool privateRethrow = false;
 
                 // TryCatch with Rethrow is usually authored in the following way:
-                // 
+                //
                 // TryCatch
                 // {
                 //   Try = DoWork
                 //   Catch Handler = Sequence
-                //                   { 
+                //                   {
                 //                     ProcessException,
                 //                     Rethrow
                 //                   }
@@ -120,7 +129,15 @@ namespace System.Activities.Statements
                                 {
                                     if (privateRethrow)
                                     {
-                                        Constraint.AddValidationError(context, new ValidationError(SR.RethrowMustBeAPublicChild(rethrowActivity.DisplayName), rethrowActivity));
+                                        Constraint.AddValidationError(
+                                            context,
+                                            new ValidationError(
+                                                SR.RethrowMustBeAPublicChild(
+                                                    rethrowActivity.DisplayName
+                                                ),
+                                                rethrowActivity
+                                            )
+                                        );
                                     }
                                     return;
                                 }
@@ -131,9 +148,14 @@ namespace System.Activities.Statements
                     previousActivity = parent;
                 }
 
-                Constraint.AddValidationError(context, new ValidationError(SR.RethrowNotInATryCatch(rethrowActivity.DisplayName), rethrowActivity));
+                Constraint.AddValidationError(
+                    context,
+                    new ValidationError(
+                        SR.RethrowNotInATryCatch(rethrowActivity.DisplayName),
+                        rethrowActivity
+                    )
+                );
             }
         }
     }
 }
-

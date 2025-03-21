@@ -29,7 +29,7 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
         new object[] { "MyBindAsyncStruct", true },
         new object[] { "MyNullableBindAsyncStruct", false },
         new object[] { "MyBothBindAsyncStruct", true },
-        new object[] { "MySimpleBindAsyncRecord", false, },
+        new object[] { "MySimpleBindAsyncRecord", false },
         new object[] { "MySimpleBindAsyncStruct", true },
         new object[] { "BindAsyncFromImplicitStaticAbstractInterface", false },
         new object[] { "InheritBindAsync", false },
@@ -84,7 +84,10 @@ app.MapGet("/", (HttpContext httpContext, {{bindAsyncType}} myBindAsyncParam) =>
 
     [Theory]
     [MemberData(nameof(BindAsyncUriTypesAndOptionalitySupport))]
-    public async Task MapAction_BindAsync_Optional_NotProvided(string bindAsyncType, bool expectException)
+    public async Task MapAction_BindAsync_Optional_NotProvided(
+        string bindAsyncType,
+        bool expectException
+    )
     {
         var source = $$"""
 app.MapGet("/", (HttpContext httpContext, {{bindAsyncType}}? myBindAsyncParam) =>
@@ -100,7 +103,9 @@ app.MapGet("/", (HttpContext httpContext, {{bindAsyncType}}? myBindAsyncParam) =
         if (expectException)
         {
             // These types simply don't support optional parameters since they cannot return null.
-            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() => endpoint.RequestDelegate(httpContext));
+            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                endpoint.RequestDelegate(httpContext)
+            );
             Assert.Equal("The request is missing the required Referer header.", ex.Message);
         }
         else
@@ -114,7 +119,10 @@ app.MapGet("/", (HttpContext httpContext, {{bindAsyncType}}? myBindAsyncParam) =
 
     [Theory]
     [MemberData(nameof(BindAsyncUriTypesAndOptionalitySupport))]
-    public async Task MapAction_BindAsync_NonOptional_NotProvided(string bindAsyncType, bool expectException)
+    public async Task MapAction_BindAsync_NonOptional_NotProvided(
+        string bindAsyncType,
+        bool expectException
+    )
     {
         var source = $$"""
 app.MapGet("/", (HttpContext httpContext, {{bindAsyncType}} myBindAsyncParam) =>
@@ -129,7 +137,9 @@ app.MapGet("/", (HttpContext httpContext, {{bindAsyncType}} myBindAsyncParam) =>
 
         if (expectException)
         {
-            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() => endpoint.RequestDelegate(httpContext));
+            var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+                endpoint.RequestDelegate(httpContext)
+            );
             Assert.Equal("The request is missing the required Referer header.", ex.Message);
         }
         else
@@ -142,10 +152,16 @@ app.MapGet("/", (HttpContext httpContext, {{bindAsyncType}} myBindAsyncParam) =>
             var log = Assert.Single(TestSink.Writes);
             Assert.Equal(LogLevel.Debug, log.LogLevel);
             Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), log.EventId);
-            var parameters = bindAsyncType is "MySimpleBindAsyncRecord" || bindAsyncType is "InheritBindAsync" || bindAsyncType is "MyBindAsyncFromInterfaceRecord"
-                ? "(HttpContext)"
-                : "(HttpContext, ParameterInfo)";
-            Assert.Equal($@"Required parameter ""{bindAsyncType} myBindAsyncParam"" was not provided from {bindAsyncType}.BindAsync{parameters}.", log.Message);
+            var parameters =
+                bindAsyncType is "MySimpleBindAsyncRecord"
+                || bindAsyncType is "InheritBindAsync"
+                || bindAsyncType is "MyBindAsyncFromInterfaceRecord"
+                    ? "(HttpContext)"
+                    : "(HttpContext, ParameterInfo)";
+            Assert.Equal(
+                $@"Required parameter ""{bindAsyncType} myBindAsyncParam"" was not provided from {bindAsyncType}.BindAsync{parameters}.",
+                log.Message
+            );
         }
     }
 
@@ -158,9 +174,15 @@ app.MapGet("/", (HttpContext httpContext, {{bindAsyncType}} myBindAsyncParam) =>
         while (i < BindAsyncUriTypesAndOptionalitySupport.Length * 2)
         {
             var bindAsyncType = BindAsyncUriTypesAndOptionalitySupport[i / 2][0];
-            source.AppendLine(CultureInfo.InvariantCulture, $$"""app.MapGet("/{{i}}", (HttpContext httpContext, {{bindAsyncType}} myBindAsyncParam) => "Hello world! {{i}}");""");
+            source.AppendLine(
+                CultureInfo.InvariantCulture,
+                $$"""app.MapGet("/{{i}}", (HttpContext httpContext, {{bindAsyncType}} myBindAsyncParam) => "Hello world! {{i}}");"""
+            );
             i++;
-            source.AppendLine(CultureInfo.InvariantCulture, $$"""app.MapGet("/{{i}}", ({{bindAsyncType}}? myBindAsyncParam) => "Hello world! {{i}}");""");
+            source.AppendLine(
+                CultureInfo.InvariantCulture,
+                $$"""app.MapGet("/{{i}}", ({{bindAsyncType}}? myBindAsyncParam) => "Hello world! {{i}}");"""
+            );
             i++;
         }
 
@@ -194,17 +216,16 @@ app.MapGet("/", (HttpContext httpContext, MyBindAsyncTypeThatThrows myBindAsyncP
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers.Referer = "https://example.org";
 
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => endpoint.RequestDelegate(httpContext));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            endpoint.RequestDelegate(httpContext)
+        );
         Assert.Equal("BindAsync failed", ex.Message);
     }
 
     [Fact]
     public async Task BindAsyncWithBodyArgument()
     {
-        Todo originalTodo = new()
-        {
-            Name = "Write more tests!"
-        };
+        Todo originalTodo = new() { Name = "Write more tests!" };
 
         var httpContext = CreateHttpContext();
 
@@ -213,21 +234,26 @@ app.MapGet("/", (HttpContext httpContext, MyBindAsyncTypeThatThrows myBindAsyncP
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var jsonOptions = new JsonOptions();
         jsonOptions.SerializerOptions.Converters.Add(new TodoJsonConverter());
 
         var mock = new Mock<IServiceProvider>();
-        mock.Setup(m => m.GetService(It.IsAny<Type>())).Returns<Type>(t =>
-        {
-            if (t == typeof(IOptions<JsonOptions>))
+        mock.Setup(m => m.GetService(It.IsAny<Type>()))
+            .Returns<Type>(t =>
             {
-                return Options.Create(jsonOptions);
-            }
-            return null;
-        });
+                if (t == typeof(IOptions<JsonOptions>))
+                {
+                    return Options.Create(jsonOptions);
+                }
+                return null;
+            });
 
         httpContext.RequestServices = mock.Object;
         httpContext.Request.Headers.Referer = "https://example.org";
@@ -257,10 +283,7 @@ app.MapPost("/", (HttpContext context, MyBindAsyncRecord myBindAsyncParam, Todo 
     [Fact]
     public async Task BindAsyncRunsBeforeBodyBinding()
     {
-        Todo originalTodo = new()
-        {
-            Name = "Write more tests!"
-        };
+        Todo originalTodo = new() { Name = "Write more tests!" };
 
         var httpContext = CreateHttpContext();
 
@@ -269,21 +292,26 @@ app.MapPost("/", (HttpContext context, MyBindAsyncRecord myBindAsyncParam, Todo 
         httpContext.Request.Body = stream;
 
         httpContext.Request.Headers["Content-Type"] = "application/json";
-        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(CultureInfo.InvariantCulture);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Request.Headers["Content-Length"] = stream.Length.ToString(
+            CultureInfo.InvariantCulture
+        );
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var jsonOptions = new JsonOptions();
         jsonOptions.SerializerOptions.Converters.Add(new TodoJsonConverter());
 
         var mock = new Mock<IServiceProvider>();
-        mock.Setup(m => m.GetService(It.IsAny<Type>())).Returns<Type>(t =>
-        {
-            if (t == typeof(IOptions<JsonOptions>))
+        mock.Setup(m => m.GetService(It.IsAny<Type>()))
+            .Returns<Type>(t =>
             {
-                return Options.Create(jsonOptions);
-            }
-            return null;
-        });
+                if (t == typeof(IOptions<JsonOptions>))
+                {
+                    return Options.Create(jsonOptions);
+                }
+                return null;
+            });
 
         httpContext.RequestServices = mock.Object;
         httpContext.Request.Headers.Referer = "https://example.org";

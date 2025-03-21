@@ -20,7 +20,10 @@ namespace System.Composition.AttributeModel.Tests
         [Fact]
         public void Ctor_NullName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => new PartMetadataAttribute(null, "value"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => new PartMetadataAttribute(null, "value")
+            );
         }
     }
 }

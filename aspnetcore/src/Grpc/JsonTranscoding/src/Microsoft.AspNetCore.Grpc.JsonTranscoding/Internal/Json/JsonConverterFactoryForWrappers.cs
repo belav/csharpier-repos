@@ -35,15 +35,16 @@ internal sealed class JsonConverterFactoryForWrappers : JsonConverterFactory
         return ServiceDescriptorHelpers.IsWrapperType(descriptor);
     }
 
-    public override JsonConverter CreateConverter(
-        Type typeToConvert, JsonSerializerOptions options)
+    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        var converter = (JsonConverter)Activator.CreateInstance(
-            typeof(WrapperConverter<>).MakeGenericType(new Type[] { typeToConvert }),
-            BindingFlags.Instance | BindingFlags.Public,
-            binder: null,
-            args: new object[] { _context },
-            culture: null)!;
+        var converter = (JsonConverter)
+            Activator.CreateInstance(
+                typeof(WrapperConverter<>).MakeGenericType(new Type[] { typeToConvert }),
+                BindingFlags.Instance | BindingFlags.Public,
+                binder: null,
+                args: new object[] { _context },
+                culture: null
+            )!;
 
         return converter;
     }

@@ -19,7 +19,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     /// <summary>
     /// This is the base class of all code elements.
     /// </summary>
-    public abstract class AbstractCodeElement : AbstractCodeModelObject, ICodeElementContainer<AbstractCodeElement>, EnvDTE.CodeElement, EnvDTE80.CodeElement2
+    public abstract class AbstractCodeElement
+        : AbstractCodeModelObject,
+            ICodeElementContainer<AbstractCodeElement>,
+            EnvDTE.CodeElement,
+            EnvDTE80.CodeElement2
     {
         private readonly ComHandle<EnvDTE.FileCodeModel, FileCodeModel> _fileCodeModel;
         private readonly int? _nodeKind;
@@ -27,7 +31,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         internal AbstractCodeElement(
             CodeModelState state,
             FileCodeModel fileCodeModel,
-            int? nodeKind = null)
+            int? nodeKind = null
+        )
             : base(state)
         {
             Debug.Assert(fileCodeModel != null);
@@ -36,23 +41,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             _nodeKind = nodeKind;
         }
 
-        internal FileCodeModel FileCodeModel
-            => _fileCodeModel.Object;
+        internal FileCodeModel FileCodeModel => _fileCodeModel.Object;
 
-        protected SyntaxTree GetSyntaxTree()
-            => FileCodeModel.GetSyntaxTree();
+        protected SyntaxTree GetSyntaxTree() => FileCodeModel.GetSyntaxTree();
 
-        protected Document GetDocument()
-            => FileCodeModel.GetDocument();
+        protected Document GetDocument() => FileCodeModel.GetDocument();
 
-        protected SemanticModel GetSemanticModel()
-            => FileCodeModel.GetSemanticModel();
+        protected SemanticModel GetSemanticModel() => FileCodeModel.GetSemanticModel();
 
-        protected ProjectId GetProjectId()
-            => FileCodeModel.GetProjectId();
+        protected ProjectId GetProjectId() => FileCodeModel.GetProjectId();
 
-        internal IGlobalOptionService GlobalOptions
-            => FileCodeModel.GlobalOptions;
+        internal IGlobalOptionService GlobalOptions => FileCodeModel.GlobalOptions;
 
         internal bool IsValidNode()
         {
@@ -61,8 +60,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 return false;
             }
 
-            if (_nodeKind != null &&
-                _nodeKind.Value != node.RawKind)
+            if (_nodeKind != null && _nodeKind.Value != node.RawKind)
             {
                 return false;
             }
@@ -106,8 +104,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             return CodeModelService.GetName(node);
         }
 
-        protected virtual void SetName(string value)
-            => UpdateNode(FileCodeModel.UpdateName, value);
+        protected virtual void SetName(string value) => UpdateNode(FileCodeModel.UpdateName, value);
 
         public string Name
         {
@@ -131,19 +128,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public abstract EnvDTE.CodeElements Children { get; }
 
-        EnvDTE.CodeElements ICodeElementContainer<AbstractCodeElement>.GetCollection()
-            => Children;
+        EnvDTE.CodeElements ICodeElementContainer<AbstractCodeElement>.GetCollection() => Children;
 
-        protected virtual EnvDTE.CodeElements GetCollection()
-            => GetCollection<AbstractCodeElement>(Parent);
+        protected virtual EnvDTE.CodeElements GetCollection() =>
+            GetCollection<AbstractCodeElement>(Parent);
 
         public virtual EnvDTE.CodeElements Collection
         {
             get { return GetCollection(); }
         }
 
-        private LineFormattingOptions GetLineFormattingOptions()
-            => State.ThreadingContext.JoinableTaskFactory.Run(() => GetDocument().GetLineFormattingOptionsAsync(GlobalOptions, CancellationToken.None).AsTask());
+        private LineFormattingOptions GetLineFormattingOptions() =>
+            State.ThreadingContext.JoinableTaskFactory.Run(() =>
+                GetDocument()
+                    .GetLineFormattingOptionsAsync(GlobalOptions, CancellationToken.None)
+                    .AsTask()
+            );
 
         public EnvDTE.TextPoint StartPoint
         {
@@ -223,19 +223,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             get { throw new NotImplementedException(); }
         }
 
-        protected virtual object GetExtenderNames()
-            => throw Exceptions.ThrowENotImpl();
+        protected virtual object GetExtenderNames() => throw Exceptions.ThrowENotImpl();
 
         public object ExtenderNames
         {
             get { return GetExtenderNames(); }
         }
 
-        protected virtual object GetExtender(string name)
-            => throw Exceptions.ThrowENotImpl();
+        protected virtual object GetExtender(string name) => throw Exceptions.ThrowENotImpl();
 
-        public object get_Extender(string extenderName)
-            => GetExtender(extenderName);
+        public object get_Extender(string extenderName) => GetExtender(extenderName);
 
         public string ElementID
         {
@@ -249,7 +246,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 throw new ArgumentException();
             }
 
-            CodeModelService.Rename(LookupSymbol(), newName, this.Workspace, this.State.ProjectCodeModelFactory);
+            CodeModelService.Rename(
+                LookupSymbol(),
+                newName,
+                this.Workspace,
+                this.State.ProjectCodeModelFactory
+            );
         }
 
         protected virtual Document DeleteCore(Document document)
@@ -269,8 +271,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             });
         }
 
-        [SuppressMessage("Microsoft.StyleCop.CSharp.NamingRules", "SA1300:ElementMustBeginWithUpperCaseLetter", Justification = "Required by interface")]
-        public string get_Prototype(int flags)
-            => CodeModelService.GetPrototype(LookupNode(), LookupSymbol(), (PrototypeFlags)flags);
+        [SuppressMessage(
+            "Microsoft.StyleCop.CSharp.NamingRules",
+            "SA1300:ElementMustBeginWithUpperCaseLetter",
+            Justification = "Required by interface"
+        )]
+        public string get_Prototype(int flags) =>
+            CodeModelService.GetPrototype(LookupNode(), LookupSymbol(), (PrototypeFlags)flags);
     }
 }

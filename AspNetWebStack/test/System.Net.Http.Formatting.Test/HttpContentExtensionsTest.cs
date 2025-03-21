@@ -16,8 +16,12 @@ namespace System.Net.Http
 {
     public class HttpContentExtensionsTest
     {
-        private static readonly IEnumerable<MediaTypeFormatter> _emptyFormatterList = Enumerable.Empty<MediaTypeFormatter>();
-        private readonly Mock<MediaTypeFormatter> _formatterMock = new Mock<MediaTypeFormatter> { CallBase = true };
+        private static readonly IEnumerable<MediaTypeFormatter> _emptyFormatterList =
+            Enumerable.Empty<MediaTypeFormatter>();
+        private readonly Mock<MediaTypeFormatter> _formatterMock = new Mock<MediaTypeFormatter>
+        {
+            CallBase = true,
+        };
         private readonly MediaTypeHeaderValue _mediaType = new MediaTypeHeaderValue("foo/bar");
         private readonly MediaTypeFormatter[] _formatters;
 
@@ -30,37 +34,61 @@ namespace System.Net.Http
         [Fact]
         public void ReadAsAsync_WhenContentParameterIsNull_Throws()
         {
-            Assert.ThrowsArgumentNull(() => HttpContentExtensions.ReadAsAsync(null, typeof(string), _emptyFormatterList), "content");
+            Assert.ThrowsArgumentNull(
+                () => HttpContentExtensions.ReadAsAsync(null, typeof(string), _emptyFormatterList),
+                "content"
+            );
         }
 
         [Fact]
         public void ReadAsAsync_WhenTypeParameterIsNull_Throws()
         {
-            Assert.ThrowsArgumentNull(() => HttpContentExtensions.ReadAsAsync(new StringContent(""), null, _emptyFormatterList), "type");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    HttpContentExtensions.ReadAsAsync(
+                        new StringContent(""),
+                        null,
+                        _emptyFormatterList
+                    ),
+                "type"
+            );
         }
 
         [Fact]
         public void ReadAsAsync_WhenFormattersParameterIsNull_Throws()
         {
-            Assert.ThrowsArgumentNull(() => HttpContentExtensions.ReadAsAsync(new StringContent(""), typeof(string), null), "formatters");
+            Assert.ThrowsArgumentNull(
+                () =>
+                    HttpContentExtensions.ReadAsAsync(new StringContent(""), typeof(string), null),
+                "formatters"
+            );
         }
 
         [Fact]
         public void ReadAsAsyncOfT_WhenContentParameterIsNull_Throws()
         {
-            Assert.ThrowsArgumentNull(() => HttpContentExtensions.ReadAsAsync<string>(null, _emptyFormatterList), "content");
+            Assert.ThrowsArgumentNull(
+                () => HttpContentExtensions.ReadAsAsync<string>(null, _emptyFormatterList),
+                "content"
+            );
         }
 
         [Fact]
         public void ReadAsAsyncOfT_WhenFormattersParameterIsNull_Throws()
         {
-            Assert.ThrowsArgumentNull(() => HttpContentExtensions.ReadAsAsync<string>(new StringContent(""), null), "formatters");
+            Assert.ThrowsArgumentNull(
+                () => HttpContentExtensions.ReadAsAsync<string>(new StringContent(""), null),
+                "formatters"
+            );
         }
 
         [Fact]
         public async Task ReadAsAsyncOfT_WhenContentIsObjectContent_GoesThroughSerializationCycleToConvertTypes()
         {
-            var content = new ObjectContent<int[]>(new int[] { 10, 20, 30, 40 }, new JsonMediaTypeFormatter());
+            var content = new ObjectContent<int[]>(
+                new int[] { 10, 20, 30, 40 },
+                new JsonMediaTypeFormatter()
+            );
 
             byte[] result = await content.ReadAsAsync<byte[]>();
 
@@ -75,8 +103,10 @@ namespace System.Net.Http
             content.Headers.ContentType.CharSet = "utf-16";
             var formatters = new MediaTypeFormatter[] { new JsonMediaTypeFormatter() };
 
-            Assert.Throws<UnsupportedMediaTypeException>(() => content.ReadAsAsync<List<string>>(formatters),
-                "No MediaTypeFormatter is available to read an object of type 'List`1' from content with media type 'foo/bar'.");
+            Assert.Throws<UnsupportedMediaTypeException>(
+                () => content.ReadAsAsync<List<string>>(formatters),
+                "No MediaTypeFormatter is available to read an object of type 'List`1' from content with media type 'foo/bar'."
+            );
         }
 
         [Fact]
@@ -86,8 +116,10 @@ namespace System.Net.Http
             content.Headers.ContentType = null;
             var formatters = new MediaTypeFormatter[] { new JsonMediaTypeFormatter() };
 
-            Assert.Throws<UnsupportedMediaTypeException>(() => content.ReadAsAsync<List<string>>(formatters),
-                "No MediaTypeFormatter is available to read an object of type 'List`1' from content with media type 'application/octet-stream'.");
+            Assert.Throws<UnsupportedMediaTypeException>(
+                () => content.ReadAsAsync<List<string>>(formatters),
+                "No MediaTypeFormatter is available to read an object of type 'List`1' from content with media type 'application/octet-stream'."
+            );
         }
 
         [Fact]
@@ -97,8 +129,10 @@ namespace System.Net.Http
             content.Headers.ContentType = null;
             var formatters = new MediaTypeFormatter[] { new JsonMediaTypeFormatter() };
 
-            Assert.Throws<UnsupportedMediaTypeException>(() => content.ReadAsAsync<int>(formatters),
-                "No MediaTypeFormatter is available to read an object of type 'Int32' from content with media type 'application/octet-stream'.");
+            Assert.Throws<UnsupportedMediaTypeException>(
+                () => content.ReadAsAsync<int>(formatters),
+                "No MediaTypeFormatter is available to read an object of type 'Int32' from content with media type 'application/octet-stream'."
+            );
         }
 
         [Fact]
@@ -107,14 +141,24 @@ namespace System.Net.Http
             Stream contentStream = null;
             string value = "42";
             var contentMock = new Mock<TestableHttpContent> { CallBase = true };
-            contentMock.Setup(c => c.SerializeToStreamAsyncPublic(It.IsAny<Stream>(), It.IsAny<TransportContext>()))
+            contentMock
+                .Setup(c =>
+                    c.SerializeToStreamAsyncPublic(It.IsAny<Stream>(), It.IsAny<TransportContext>())
+                )
                 .Returns(TaskHelpers.Completed)
                 .Callback((Stream s, TransportContext _) => contentStream = s)
                 .Verifiable();
             HttpContent content = contentMock.Object;
             content.Headers.ContentType = _mediaType;
             _formatterMock
-                .Setup(f => f.ReadFromStreamAsync(typeof(string), It.IsAny<Stream>(), It.IsAny<HttpContent>(), It.IsAny<IFormatterLogger>()))
+                .Setup(f =>
+                    f.ReadFromStreamAsync(
+                        typeof(string),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+                )
                 .Returns(Task.FromResult<object>(value));
             _formatterMock.Setup(f => f.CanReadType(typeof(string))).Returns(true);
 
@@ -122,7 +166,10 @@ namespace System.Net.Http
 
             Assert.Same(value, resultValue);
             contentMock.Verify();
-            _formatterMock.Verify(f => f.ReadFromStreamAsync(typeof(string), contentStream, content, null), Times.Once());
+            _formatterMock.Verify(
+                f => f.ReadFromStreamAsync(typeof(string), contentStream, content, null),
+                Times.Once()
+            );
         }
 
         [Fact]
@@ -132,12 +179,28 @@ namespace System.Net.Http
             _formatterMock.Setup(f => f.CanReadType(typeof(string))).Returns(true);
             _formatterMock.Object.SupportedMediaTypes.Add(content.Headers.ContentType);
             _formatterMock
-                .Setup(f => f.ReadFromStreamAsync(It.IsAny<Type>(), It.IsAny<Stream>(), It.IsAny<HttpContent>(), It.IsAny<IFormatterLogger>()))
+                .Setup(f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+                )
                 .Returns(Task.FromResult<object>(result: null));
 
             await content.ReadAsAsync<string>(_formatters);
 
-            _formatterMock.Verify(f => f.ReadFromStreamAsync(typeof(string), It.IsAny<Stream>(), content, It.IsAny<IFormatterLogger>()), Times.Once());
+            _formatterMock.Verify(
+                f =>
+                    f.ReadFromStreamAsync(
+                        typeof(string),
+                        It.IsAny<Stream>(),
+                        content,
+                        It.IsAny<IFormatterLogger>()
+                    ),
+                Times.Once()
+            );
         }
 
         [Fact]
@@ -152,7 +215,16 @@ namespace System.Net.Http
             Assert.Same(value, await content.ReadAsAsync(typeof(object), _formatters));
             Assert.Same(value, await content.ReadAsAsync(typeof(TestClass), _formatters));
 
-            _formatterMock.Verify(f => f.ReadFromStreamAsync(It.IsAny<Type>(), It.IsAny<Stream>(), content, It.IsAny<IFormatterLogger>()), Times.Never());
+            _formatterMock.Verify(
+                f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        content,
+                        It.IsAny<IFormatterLogger>()
+                    ),
+                Times.Never()
+            );
         }
 
         [Fact]
@@ -170,7 +242,16 @@ namespace System.Net.Http
             Assert.Null(await content.ReadAsAsync(typeof(TestClass), _formatters));
             Assert.Null(await content.ReadAsAsync(typeof(Nullable<int>), _formatters));
 
-            _formatterMock.Verify(f => f.ReadFromStreamAsync(It.IsAny<Type>(), It.IsAny<Stream>(), content, It.IsAny<IFormatterLogger>()), Times.Exactly(6));
+            _formatterMock.Verify(
+                f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        content,
+                        It.IsAny<IFormatterLogger>()
+                    ),
+                Times.Exactly(6)
+            );
         }
 
         [Fact]
@@ -184,7 +265,16 @@ namespace System.Net.Http
             Assert.IsType<Int32>(await content.ReadAsAsync<Int32>(_formatters));
             Assert.IsType<Int32>(await content.ReadAsAsync(typeof(Int32), _formatters));
 
-            _formatterMock.Verify(f => f.ReadFromStreamAsync(It.IsAny<Type>(), It.IsAny<Stream>(), content, It.IsAny<IFormatterLogger>()), Times.Exactly(2));
+            _formatterMock.Verify(
+                f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        content,
+                        It.IsAny<IFormatterLogger>()
+                    ),
+                Times.Exactly(2)
+            );
         }
 
         [Fact]
@@ -196,11 +286,22 @@ namespace System.Net.Http
             var content = new ObjectContent<TestClass>(value, _formatterMock.Object, _mediaType);
             SetupUpRoundTripSerialization(type => new TestClass());
 
-            await Assert.ThrowsAsync<InvalidCastException>(() => content.ReadAsAsync<string>(_formatters));
+            await Assert.ThrowsAsync<InvalidCastException>(() =>
+                content.ReadAsAsync<string>(_formatters)
+            );
 
             Assert.IsNotType<string>(await content.ReadAsAsync(typeof(string), _formatters));
 
-            _formatterMock.Verify(f => f.ReadFromStreamAsync(It.IsAny<Type>(), It.IsAny<Stream>(), content, It.IsAny<IFormatterLogger>()), Times.Exactly(2));
+            _formatterMock.Verify(
+                f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        content,
+                        It.IsAny<IFormatterLogger>()
+                    ),
+                Times.Exactly(2)
+            );
         }
 
         [Fact]
@@ -211,17 +312,31 @@ namespace System.Net.Http
 
             _formatterMock.Setup(f => f.CanWriteType(It.IsAny<Type>())).Returns(true);
             _formatterMock.Setup(f => f.CanReadType(It.IsAny<Type>())).Returns(true);
-            _formatterMock.Setup(f => f.ReadFromStreamAsync(It.IsAny<Type>(), It.IsAny<Stream>(), It.IsAny<HttpContent>(), It.IsAny<IFormatterLogger>()))
-                .Returns<Type, Stream, HttpContent, IFormatterLogger>(async (type, stream, content, logger) =>
+            _formatterMock
+                .Setup(f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+                )
+                .Returns<Type, Stream, HttpContent, IFormatterLogger>(
+                    async (type, stream, content, logger) =>
                     {
-                        MultipartMemoryStreamProvider provider = await content.ReadAsMultipartAsync();
+                        MultipartMemoryStreamProvider provider =
+                            await content.ReadAsMultipartAsync();
                         HttpContent providerContent = Assert.Single(provider.Contents);
                         return await providerContent.ReadAsStringAsync();
-                    });
+                    }
+                );
             MediaTypeFormatter formatter = _formatterMock.Object;
             formatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("multipart/mixed"));
 
-            Assert.Equal("multipartContent", await mimeContent.ReadAsAsync<string>(new[] { formatter }));
+            Assert.Equal(
+                "multipartContent",
+                await mimeContent.ReadAsAsync<string>(new[] { formatter })
+            );
         }
 
         [Fact]
@@ -231,7 +346,9 @@ namespace System.Net.Http
             cts.Cancel();
             HttpContent content = new StringContent("42", Encoding.Default, "application/json");
 
-            await Assert.ThrowsAsync<OperationCanceledException>(() => content.ReadAsAsync(typeof(int), cts.Token));
+            await Assert.ThrowsAsync<OperationCanceledException>(() =>
+                content.ReadAsAsync(typeof(int), cts.Token)
+            );
         }
 
         [Fact]
@@ -246,7 +363,9 @@ namespace System.Net.Http
             formatter.Object.SupportedMediaTypes.Add(content.Headers.ContentType);
             formatter.Setup(f => f.CanReadType(typeof(int))).Returns(true);
             formatter
-                .Setup(f => f.ReadFromStreamAsync(typeof(int), It.IsAny<Stream>(), content, null, token))
+                .Setup(f =>
+                    f.ReadFromStreamAsync(typeof(int), It.IsAny<Stream>(), content, null, token)
+                )
                 .Returns(Task.FromResult<object>(42))
                 .Verifiable();
 
@@ -271,12 +390,25 @@ namespace System.Net.Http
             formatter.Object.SupportedMediaTypes.Add(content.Headers.ContentType);
             formatter.Setup(f => f.CanReadType(typeof(int))).Returns(true);
             formatter
-                .Setup(f => f.ReadFromStreamAsync(typeof(int), It.IsAny<Stream>(), content, formatterLogger, token))
+                .Setup(f =>
+                    f.ReadFromStreamAsync(
+                        typeof(int),
+                        It.IsAny<Stream>(),
+                        content,
+                        formatterLogger,
+                        token
+                    )
+                )
                 .Returns(Task.FromResult<object>(42))
                 .Verifiable();
 
             // Act
-            await content.ReadAsAsync(typeof(int), new[] { formatter.Object }, formatterLogger, token);
+            await content.ReadAsAsync(
+                typeof(int),
+                new[] { formatter.Object },
+                formatterLogger,
+                token
+            );
 
             // Assert
             formatter.Verify();
@@ -289,7 +421,9 @@ namespace System.Net.Http
             cts.Cancel();
             HttpContent content = new StringContent("42", Encoding.Default, "application/json");
 
-            return Assert.ThrowsAsync<OperationCanceledException>(() => content.ReadAsAsync<int>(cts.Token));
+            return Assert.ThrowsAsync<OperationCanceledException>(() =>
+                content.ReadAsAsync<int>(cts.Token)
+            );
         }
 
         [Fact]
@@ -304,7 +438,9 @@ namespace System.Net.Http
             formatter.Object.SupportedMediaTypes.Add(content.Headers.ContentType);
             formatter.Setup(f => f.CanReadType(typeof(int))).Returns(true);
             formatter
-                .Setup(f => f.ReadFromStreamAsync(typeof(int), It.IsAny<Stream>(), content, null, token))
+                .Setup(f =>
+                    f.ReadFromStreamAsync(typeof(int), It.IsAny<Stream>(), content, null, token)
+                )
                 .Returns(Task.FromResult<object>(42))
                 .Verifiable();
 
@@ -329,7 +465,15 @@ namespace System.Net.Http
             formatter.Object.SupportedMediaTypes.Add(content.Headers.ContentType);
             formatter.Setup(f => f.CanReadType(typeof(int))).Returns(true);
             formatter
-                .Setup(f => f.ReadFromStreamAsync(typeof(int), It.IsAny<Stream>(), content, formatterLogger, token))
+                .Setup(f =>
+                    f.ReadFromStreamAsync(
+                        typeof(int),
+                        It.IsAny<Stream>(),
+                        content,
+                        formatterLogger,
+                        token
+                    )
+                )
                 .Returns(Task.FromResult<object>(42))
                 .Verifiable();
 
@@ -343,10 +487,29 @@ namespace System.Net.Http
         private void SetupUpRoundTripSerialization(Func<Type, object> factory = null)
         {
             factory = factory ?? Activator.CreateInstance;
-            _formatterMock.Setup(f => f.WriteToStreamAsync(It.IsAny<Type>(), It.IsAny<object>(), It.IsAny<Stream>(), It.IsAny<HttpContent>(), It.IsAny<TransportContext>()))
+            _formatterMock
+                .Setup(f =>
+                    f.WriteToStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<object>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<TransportContext>()
+                    )
+                )
                 .Returns(TaskHelpers.Completed());
-            _formatterMock.Setup(f => f.ReadFromStreamAsync(It.IsAny<Type>(), It.IsAny<Stream>(), It.IsAny<HttpContent>(), It.IsAny<IFormatterLogger>()))
-                .Returns<Type, Stream, HttpContent, IFormatterLogger>((type, stream, content, logger) => Task.FromResult<object>(factory(type)));
+            _formatterMock
+                .Setup(f =>
+                    f.ReadFromStreamAsync(
+                        It.IsAny<Type>(),
+                        It.IsAny<Stream>(),
+                        It.IsAny<HttpContent>(),
+                        It.IsAny<IFormatterLogger>()
+                    )
+                )
+                .Returns<Type, Stream, HttpContent, IFormatterLogger>(
+                    (type, stream, content, logger) => Task.FromResult<object>(factory(type))
+                );
         }
 
         public class TestClass { }
@@ -368,7 +531,10 @@ namespace System.Net.Http
                 return SerializeToStreamAsyncPublic(stream, context);
             }
 
-            public abstract Task SerializeToStreamAsyncPublic(Stream stream, TransportContext context);
+            public abstract Task SerializeToStreamAsyncPublic(
+                Stream stream,
+                TransportContext context
+            );
 
             protected override bool TryComputeLength(out long length)
             {

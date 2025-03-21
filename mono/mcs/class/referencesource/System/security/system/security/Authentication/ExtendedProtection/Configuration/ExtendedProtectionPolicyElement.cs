@@ -24,31 +24,26 @@ namespace System.Security.Authentication.ExtendedProtection.Configuration
         }
 
         [ConfigurationProperty(ExtendedProtectionConfigurationStrings.PolicyEnforcement)]
-        public PolicyEnforcement PolicyEnforcement {
-            get {
-                return (PolicyEnforcement)this[this.policyEnforcement];
-            }
-            set {
-                this[this.policyEnforcement] = value;
-            }
+        public PolicyEnforcement PolicyEnforcement
+        {
+            get { return (PolicyEnforcement)this[this.policyEnforcement]; }
+            set { this[this.policyEnforcement] = value; }
         }
 
-        [ConfigurationProperty(ExtendedProtectionConfigurationStrings.ProtectionScenario, DefaultValue=ProtectionScenario.TransportSelected)]
-        public ProtectionScenario ProtectionScenario {
-            get {
-                return (ProtectionScenario)this[this.protectionScenario];
-            }
-            set {
-                this[this.protectionScenario] = value;
-            }
+        [ConfigurationProperty(
+            ExtendedProtectionConfigurationStrings.ProtectionScenario,
+            DefaultValue = ProtectionScenario.TransportSelected
+        )]
+        public ProtectionScenario ProtectionScenario
+        {
+            get { return (ProtectionScenario)this[this.protectionScenario]; }
+            set { this[this.protectionScenario] = value; }
         }
 
         [ConfigurationProperty(ExtendedProtectionConfigurationStrings.CustomServiceNames)]
         public ServiceNameElementCollection CustomServiceNames
         {
-            get {
-                return (ServiceNameElementCollection)this[this.customServiceNames];
-            }
+            get { return (ServiceNameElementCollection)this[this.customServiceNames]; }
         }
 
         public ExtendedProtectionPolicy BuildPolicy()
@@ -78,25 +73,28 @@ namespace System.Security.Authentication.ExtendedProtection.Configuration
 
         private static PolicyEnforcement DefaultPolicyEnforcement
         {
-            get
-            {
-                return PolicyEnforcement.Never;
-            }
+            get { return PolicyEnforcement.Never; }
         }
 
-        readonly ConfigurationProperty policyEnforcement =
-            new ConfigurationProperty(ExtendedProtectionConfigurationStrings.PolicyEnforcement,
-                typeof(PolicyEnforcement), DefaultPolicyEnforcement,
-                ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty policyEnforcement = new ConfigurationProperty(
+            ExtendedProtectionConfigurationStrings.PolicyEnforcement,
+            typeof(PolicyEnforcement),
+            DefaultPolicyEnforcement,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty protectionScenario =
-            new ConfigurationProperty(ExtendedProtectionConfigurationStrings.ProtectionScenario,
-                typeof(ProtectionScenario), ProtectionScenario.TransportSelected,
-                ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty protectionScenario = new ConfigurationProperty(
+            ExtendedProtectionConfigurationStrings.ProtectionScenario,
+            typeof(ProtectionScenario),
+            ProtectionScenario.TransportSelected,
+            ConfigurationPropertyOptions.None
+        );
 
-        readonly ConfigurationProperty customServiceNames =
-            new ConfigurationProperty(ExtendedProtectionConfigurationStrings.CustomServiceNames,
-                typeof(ServiceNameElementCollection), null,
-                ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty customServiceNames = new ConfigurationProperty(
+            ExtendedProtectionConfigurationStrings.CustomServiceNames,
+            typeof(ServiceNameElementCollection),
+            null,
+            ConfigurationPropertyOptions.None
+        );
     }
 }

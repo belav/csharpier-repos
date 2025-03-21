@@ -15,11 +15,18 @@ internal static class EndpointParameterExtensions
         // If we can't resolve a return type from the `BindAsync` method, then just use the handler return type.
         if (bindAsyncReturnType is null)
         {
-            return parameter.Source == EndpointParameterSource.BindAsync ? handlerParameterType.UnwrapTypeSymbol(unwrapNullable: true) : handlerParameterType;
+            return parameter.Source == EndpointParameterSource.BindAsync
+                ? handlerParameterType.UnwrapTypeSymbol(unwrapNullable: true)
+                : handlerParameterType;
         }
         // If the parameter defined in the route handler and the return type of the BindAsync method are the same,
         // then we can use the handler parameter type as the return type of the BindAsync method.
-        if (SymbolEqualityComparer.IncludeNullability.Equals(handlerParameterType, bindAsyncReturnType))
+        if (
+            SymbolEqualityComparer.IncludeNullability.Equals(
+                handlerParameterType,
+                bindAsyncReturnType
+            )
+        )
         {
             return handlerParameterType;
         }
@@ -41,7 +48,13 @@ internal static class EndpointParameterExtensions
             // {
             //    public static ValueTask<Struct<T?>> BindAsync(HttpContext context, ParameterInfo parameter) {}
             // }
-            if (handlerParameterType is INamedTypeSymbol { IsGenericType: true, OriginalDefinition: { SpecialType: not SpecialType.System_Nullable_T } })
+            if (
+                handlerParameterType is INamedTypeSymbol
+                {
+                    IsGenericType: true,
+                    OriginalDefinition: { SpecialType: not SpecialType.System_Nullable_T }
+                }
+            )
             {
                 return bindAsyncReturnType;
             }
@@ -51,9 +64,9 @@ internal static class EndpointParameterExtensions
         return bindAsyncReturnType;
     }
 
-    public static ITypeSymbol? GetBindAsyncReturnType(this EndpointParameter parameter)
-        => ((INamedTypeSymbol?)parameter.BindableMethodSymbol?.ReturnType)?.TypeArguments[0];
+    public static ITypeSymbol? GetBindAsyncReturnType(this EndpointParameter parameter) =>
+        ((INamedTypeSymbol?)parameter.BindableMethodSymbol?.ReturnType)?.TypeArguments[0];
 
-    public static bool IsNullableOfT(this ITypeSymbol? typeSymbol)
-        => typeSymbol?.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T;
+    public static bool IsNullableOfT(this ITypeSymbol? typeSymbol) =>
+        typeSymbol?.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T;
 }

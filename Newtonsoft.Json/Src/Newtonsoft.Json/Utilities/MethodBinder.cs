@@ -25,46 +25,63 @@
 
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 #if !HAVE_LINQ
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Reflection;
 
 namespace Newtonsoft.Json.Utilities
 {
 #if PORTABLE
     internal static class MethodBinder
     {
-        
         /// <summary>
         /// List of primitive types which can be widened.
         /// </summary>
         private static readonly Type[] PrimitiveTypes = new Type[]
         {
-            typeof(bool),  typeof(char),   typeof(sbyte), typeof(byte),
-            typeof(short), typeof(ushort), typeof(int),   typeof(uint),
-            typeof(long),  typeof(ulong),  typeof(float), typeof(double)
+            typeof(bool),
+            typeof(char),
+            typeof(sbyte),
+            typeof(byte),
+            typeof(short),
+            typeof(ushort),
+            typeof(int),
+            typeof(uint),
+            typeof(long),
+            typeof(ulong),
+            typeof(float),
+            typeof(double),
         };
 
         /// <summary>
         /// Widening masks for primitive types above.
         /// Index of the value in this array defines a type we're widening,
         /// while the bits in mask define types it can be widened to (including itself).
-        /// 
-        /// For example, value at index 0 defines a bool type, and it only has bit 0 set, 
+        ///
+        /// For example, value at index 0 defines a bool type, and it only has bit 0 set,
         /// i.e. bool values can be assigned only to bool.
         /// </summary>
         private static readonly int[] WideningMasks = new int[]
         {
-            0x0001,        0x0FE2,         0x0D54,        0x0FFA,
-            0x0D50,        0x0FE2,         0x0D40,        0x0F80,
-            0x0D00,        0x0E00,         0x0C00,        0x0800
+            0x0001,
+            0x0FE2,
+            0x0D54,
+            0x0FFA,
+            0x0D50,
+            0x0FE2,
+            0x0D40,
+            0x0F80,
+            0x0D00,
+            0x0E00,
+            0x0C00,
+            0x0800,
         };
 
         /// <summary>
-        /// Checks if value of primitive type <paramref name="from"/> can be  
+        /// Checks if value of primitive type <paramref name="from"/> can be
         /// assigned to parameter of primitive type <paramref name="to"/>.
         /// </summary>
         /// <param name="from">Source primitive type.</param>
@@ -103,13 +120,17 @@ namespace Newtonsoft.Json.Utilities
 
         /// <summary>
         /// Checks if a set of values with given <paramref name="types"/> can be used
-        /// to invoke a method with specified <paramref name="parameters"/>. 
+        /// to invoke a method with specified <paramref name="parameters"/>.
         /// </summary>
         /// <param name="parameters">Method parameters.</param>
         /// <param name="types">Argument types.</param>
         /// <param name="enableParamArray">Try to pack extra arguments into the last parameter when it is marked up with <see cref="ParamArrayAttribute"/>.</param>
         /// <returns><c>true</c> if method can be called with given arguments, <c>false</c> otherwise.</returns>
-        private static bool FilterParameters(ParameterInfo[] parameters, IList<Type> types, bool enableParamArray)
+        private static bool FilterParameters(
+            ParameterInfo[] parameters,
+            IList<Type> types,
+            bool enableParamArray
+        )
         {
             ValidationUtils.ArgumentNotNull(parameters, nameof(parameters));
             ValidationUtils.ArgumentNotNull(types, nameof(types));
@@ -131,7 +152,10 @@ namespace Newtonsoft.Json.Utilities
             if (enableParamArray)
             {
                 ParameterInfo lastParam = parameters[parameters.Length - 1];
-                if (lastParam.ParameterType.IsArray && lastParam.IsDefined(typeof(ParamArrayAttribute)))
+                if (
+                    lastParam.ParameterType.IsArray
+                    && lastParam.IsDefined(typeof(ParamArrayAttribute))
+                )
                 {
                     paramArrayType = lastParam.ParameterType.GetElementType();
                 }
@@ -145,7 +169,10 @@ namespace Newtonsoft.Json.Utilities
 
             for (int i = 0; i < types.Count; i++)
             {
-                Type paramType = (paramArrayType != null && i >= parameters.Length - 1) ? paramArrayType : parameters[i].ParameterType;
+                Type paramType =
+                    (paramArrayType != null && i >= parameters.Length - 1)
+                        ? paramArrayType
+                        : parameters[i].ParameterType;
 
                 if (paramType == types[i])
                 {
@@ -180,7 +207,7 @@ namespace Newtonsoft.Json.Utilities
         }
 
         /// <summary>
-        /// Compares two sets of parameters to determine 
+        /// Compares two sets of parameters to determine
         /// which one suits better for given argument types.
         /// </summary>
         private class ParametersMatchComparer : IComparer<ParameterInfo[]>
@@ -211,18 +238,25 @@ namespace Newtonsoft.Json.Utilities
                     return 1;
                 }
 
-                Type? paramArrayType1 = null, paramArrayType2 = null;
+                Type? paramArrayType1 = null,
+                    paramArrayType2 = null;
 
                 if (_enableParamArray)
                 {
                     ParameterInfo lastParam1 = parameters1[parameters1.Length - 1];
-                    if (lastParam1.ParameterType.IsArray && lastParam1.IsDefined(typeof(ParamArrayAttribute)))
+                    if (
+                        lastParam1.ParameterType.IsArray
+                        && lastParam1.IsDefined(typeof(ParamArrayAttribute))
+                    )
                     {
                         paramArrayType1 = lastParam1.ParameterType.GetElementType();
                     }
 
                     ParameterInfo lastParam2 = parameters2[parameters2.Length - 1];
-                    if (lastParam2.ParameterType.IsArray && lastParam2.IsDefined(typeof(ParamArrayAttribute)))
+                    if (
+                        lastParam2.ParameterType.IsArray
+                        && lastParam2.IsDefined(typeof(ParamArrayAttribute))
+                    )
                     {
                         paramArrayType2 = lastParam2.ParameterType.GetElementType();
                     }
@@ -240,8 +274,14 @@ namespace Newtonsoft.Json.Utilities
 
                 for (int i = 0; i < _types.Count; i++)
                 {
-                    Type type1 = (paramArrayType1 != null && i >= parameters1.Length - 1) ? paramArrayType1 : parameters1[i].ParameterType;
-                    Type type2 = (paramArrayType2 != null && i >= parameters2.Length - 1) ? paramArrayType2 : parameters2[i].ParameterType;
+                    Type type1 =
+                        (paramArrayType1 != null && i >= parameters1.Length - 1)
+                            ? paramArrayType1
+                            : parameters1[i].ParameterType;
+                    Type type2 =
+                        (paramArrayType2 != null && i >= parameters2.Length - 1)
+                            ? paramArrayType2
+                            : parameters2[i].ParameterType;
 
                     if (type1 == type2)
                     {
@@ -262,7 +302,7 @@ namespace Newtonsoft.Json.Utilities
                     int r = ChooseMorePreciseType(type1, type2);
                     if (r != 0)
                     {
-                        // winner decided 
+                        // winner decided
                         return r;
                     }
                 }
@@ -297,7 +337,8 @@ namespace Newtonsoft.Json.Utilities
                     }
                 }
 
-                bool c1FromC2, c2FromC1;
+                bool c1FromC2,
+                    c2FromC1;
 
                 if (type1.IsPrimitive() && type2.IsPrimitive())
                 {
@@ -317,7 +358,6 @@ namespace Newtonsoft.Json.Utilities
 
                 return c1FromC2 ? 1 : -1;
             }
-
         }
 
         /// <summary>
@@ -326,7 +366,11 @@ namespace Newtonsoft.Json.Utilities
         /// <param name="candidates">List of method candidates.</param>
         /// <param name="types">Argument types.</param>
         /// <returns>Best method overload, or <c>null</c> if none matched.</returns>
-        public static TMethod SelectMethod<TMethod>(IEnumerable<TMethod> candidates, IList<Type> types) where TMethod : MethodBase
+        public static TMethod SelectMethod<TMethod>(
+            IEnumerable<TMethod> candidates,
+            IList<Type> types
+        )
+            where TMethod : MethodBase
         {
             ValidationUtils.ArgumentNotNull(candidates, nameof(candidates));
             ValidationUtils.ArgumentNotNull(types, nameof(types));
@@ -337,10 +381,12 @@ namespace Newtonsoft.Json.Utilities
 
             return candidates
                 .Where(m => FilterParameters(m.GetParameters(), types, enableParamArray))
-                .OrderBy(m => m.GetParameters(), new ParametersMatchComparer(types, enableParamArray))
+                .OrderBy(
+                    m => m.GetParameters(),
+                    new ParametersMatchComparer(types, enableParamArray)
+                )
                 .FirstOrDefault();
         }
-
     }
 #endif
 }

@@ -10,7 +10,9 @@ namespace System.ComponentModel.Composition.Factories
 {
     partial class CatalogFactory
     {
-        public class MutableComposablePartCatalog : ComposablePartCatalog, INotifyComposablePartCatalogChanged
+        public class MutableComposablePartCatalog
+            : ComposablePartCatalog,
+                INotifyComposablePartCatalogChanged
         {
             private readonly HashSet<ComposablePartDefinition> _definitions;
 
@@ -36,10 +38,18 @@ namespace System.ComponentModel.Composition.Factories
 
             private void OnDefinitionsChanged(ComposablePartDefinition definition, bool added)
             {
-                ComposablePartDefinition[] addedDefinitions = added ? new ComposablePartDefinition[] { definition } : new ComposablePartDefinition[0];
-                ComposablePartDefinition[] removeDefinitions = added ? new ComposablePartDefinition[0] : new ComposablePartDefinition[] { definition };
+                ComposablePartDefinition[] addedDefinitions = added
+                    ? new ComposablePartDefinition[] { definition }
+                    : new ComposablePartDefinition[0];
+                ComposablePartDefinition[] removeDefinitions = added
+                    ? new ComposablePartDefinition[0]
+                    : new ComposablePartDefinition[] { definition };
 
-                var e = new ComposablePartCatalogChangeEventArgs(addedDefinitions, removeDefinitions, null);
+                var e = new ComposablePartCatalogChangeEventArgs(
+                    addedDefinitions,
+                    removeDefinitions,
+                    null
+                );
                 Changing(this, e);
 
                 if (added)

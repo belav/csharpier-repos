@@ -89,7 +89,11 @@ namespace System.Tests
             VerifyFromObject(Convert.ToByte, Convert.ToByte, testValues, expectedValues);
 
             object[] invalidValues = { new object(), DateTime.Now };
-            VerifyFromObjectThrows<InvalidCastException>(Convert.ToByte, Convert.ToByte, invalidValues);
+            VerifyFromObjectThrows<InvalidCastException>(
+                Convert.ToByte,
+                Convert.ToByte,
+                invalidValues
+            );
         }
 
         [Fact]
@@ -117,36 +121,77 @@ namespace System.Tests
         [Fact]
         public void FromString()
         {
-            string[] testValues = { Byte.MaxValue.ToString(), Byte.MinValue.ToString(), "0", "100", null };
+            string[] testValues =
+            {
+                Byte.MaxValue.ToString(),
+                Byte.MinValue.ToString(),
+                "0",
+                "100",
+                null,
+            };
             byte[] expectedValues = { byte.MaxValue, byte.MinValue, 0, 100, 0 };
             VerifyFromString(Convert.ToByte, Convert.ToByte, testValues, expectedValues);
 
             string[] overflowValues = { Int32.MinValue.ToString(), Int32.MaxValue.ToString() };
-            VerifyFromStringThrows<OverflowException>(Convert.ToByte, Convert.ToByte, overflowValues);
+            VerifyFromStringThrows<OverflowException>(
+                Convert.ToByte,
+                Convert.ToByte,
+                overflowValues
+            );
 
             string[] formatExceptionValues = { "abba" };
-            VerifyFromStringThrows<FormatException>(Convert.ToByte, Convert.ToByte, formatExceptionValues);
+            VerifyFromStringThrows<FormatException>(
+                Convert.ToByte,
+                Convert.ToByte,
+                formatExceptionValues
+            );
         }
 
         [Fact]
         public void FromStringWithBase()
         {
-            string[] testValues = { null, null, null, null, "10", "100", "1011", "ff", "0xff", "77", "11", "11111111" };
+            string[] testValues =
+            {
+                null,
+                null,
+                null,
+                null,
+                "10",
+                "100",
+                "1011",
+                "ff",
+                "0xff",
+                "77",
+                "11",
+                "11111111",
+            };
             int[] testBases = { 10, 2, 8, 16, 10, 10, 2, 16, 16, 8, 2, 2 };
             byte[] expectedValues = { 0, 0, 0, 0, 10, 100, 11, 255, 255, 63, 3, 255 };
             VerifyFromStringWithBase(Convert.ToByte, testValues, testBases, expectedValues);
 
             string[] overflowValues = { "256", "111111111", "ffffe", "7777777", "-1" };
             int[] overflowBases = { 10, 2, 16, 8, 10 };
-            VerifyFromStringWithBaseThrows<OverflowException>(Convert.ToByte, overflowValues, overflowBases);
+            VerifyFromStringWithBaseThrows<OverflowException>(
+                Convert.ToByte,
+                overflowValues,
+                overflowBases
+            );
 
             string[] formatExceptionValues = { "fffg", "0xxfff", "8", "112", "!56" };
             int[] formatExceptionBases = { 16, 16, 8, 2, 10 };
-            VerifyFromStringWithBaseThrows<FormatException>(Convert.ToByte, formatExceptionValues, formatExceptionBases);
+            VerifyFromStringWithBaseThrows<FormatException>(
+                Convert.ToByte,
+                formatExceptionValues,
+                formatExceptionBases
+            );
 
             string[] argumentExceptionValues = { null };
             int[] argumentExceptionBases = { 11 };
-            VerifyFromStringWithBaseThrows<ArgumentException>(Convert.ToByte, argumentExceptionValues, argumentExceptionBases);
+            VerifyFromStringWithBaseThrows<ArgumentException>(
+                Convert.ToByte,
+                argumentExceptionValues,
+                argumentExceptionBases
+            );
         }
 
         [Fact]

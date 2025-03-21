@@ -25,7 +25,8 @@ namespace System.Data.Common
         private static Task<bool>? _falseTask;
         internal static Task<bool> FalseTask => _falseTask ??= Task.FromResult(false);
 
-        internal const CompareOptions DefaultCompareOptions = CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth | CompareOptions.IgnoreCase;
+        internal const CompareOptions DefaultCompareOptions =
+            CompareOptions.IgnoreKanaType | CompareOptions.IgnoreWidth | CompareOptions.IgnoreCase;
         internal const int DefaultConnectionTimeout = DbConnectionStringDefaults.ConnectTimeout;
 
         static partial void TraceException(string trace, Exception e);
@@ -37,7 +38,10 @@ namespace System.Data.Common
 
         internal static void TraceExceptionWithoutRethrow(Exception e)
         {
-            Debug.Assert(ADP.IsCatchableExceptionType(e), "Invalid exception type, should have been re-thrown!");
+            Debug.Assert(
+                ADP.IsCatchableExceptionType(e),
+                "Invalid exception type, should have been re-thrown!"
+            );
             TraceException("<comm.ADP.TraceException|ERR|CATCH> '%ls'\n", e);
         }
 
@@ -83,7 +87,10 @@ namespace System.Data.Common
             return e;
         }
 
-        internal static ArgumentOutOfRangeException ArgumentOutOfRange(string message, string parameterName)
+        internal static ArgumentOutOfRangeException ArgumentOutOfRange(
+            string message,
+            string parameterName
+        )
         {
             ArgumentOutOfRangeException e = new ArgumentOutOfRangeException(parameterName, message);
             TraceExceptionAsReturnValue(e);
@@ -132,7 +139,12 @@ namespace System.Data.Common
 
         // the return value is true if the string was quoted and false if it was not
         // this allows the caller to determine if it is an error or not for the quotedString to not be quoted
-        internal static bool RemoveStringQuotes(string? quotePrefix, string? quoteSuffix, string? quotedString, out string? unquotedString)
+        internal static bool RemoveStringQuotes(
+            string? quotePrefix,
+            string? quoteSuffix,
+            string? quotedString,
+            out string? unquotedString
+        )
         {
             int prefixLength = quotePrefix != null ? quotePrefix.Length : 0;
             int suffixLength = quoteSuffix != null ? quoteSuffix.Length : 0;
@@ -176,18 +188,30 @@ namespace System.Data.Common
                     unquotedString = quotedString;
                     return false;
                 }
-                unquotedString = quotedString.Substring(prefixLength, quotedStringLength - (prefixLength + suffixLength)).Replace(quoteSuffix + quoteSuffix, quoteSuffix);
+                unquotedString = quotedString
+                    .Substring(prefixLength, quotedStringLength - (prefixLength + suffixLength))
+                    .Replace(quoteSuffix + quoteSuffix, quoteSuffix);
             }
             else
             {
-                unquotedString = quotedString.Substring(prefixLength, quotedStringLength - prefixLength);
+                unquotedString = quotedString.Substring(
+                    prefixLength,
+                    quotedStringLength - prefixLength
+                );
             }
             return true;
         }
 
-        internal static ArgumentOutOfRangeException NotSupportedEnumerationValue(Type type, string value, string method)
+        internal static ArgumentOutOfRangeException NotSupportedEnumerationValue(
+            Type type,
+            string value,
+            string method
+        )
         {
-            return ArgumentOutOfRange(SR.Format(SR.ADP_NotSupportedEnumerationValue, type.Name, value, method), type.Name);
+            return ArgumentOutOfRange(
+                SR.Format(SR.ADP_NotSupportedEnumerationValue, type.Name, value, method),
+                type.Name
+            );
         }
 
         internal static InvalidOperationException DataAdapter(string error)
@@ -202,21 +226,34 @@ namespace System.Data.Common
 
         internal static ArgumentException InvalidMultipartName(string property, string value)
         {
-            ArgumentException e = new ArgumentException(SR.Format(SR.ADP_InvalidMultipartName, property, value));
+            ArgumentException e = new ArgumentException(
+                SR.Format(SR.ADP_InvalidMultipartName, property, value)
+            );
             TraceExceptionAsReturnValue(e);
             return e;
         }
 
-        internal static ArgumentException InvalidMultipartNameIncorrectUsageOfQuotes(string property, string value)
+        internal static ArgumentException InvalidMultipartNameIncorrectUsageOfQuotes(
+            string property,
+            string value
+        )
         {
-            ArgumentException e = new ArgumentException(SR.Format(SR.ADP_InvalidMultipartNameQuoteUsage, property, value));
+            ArgumentException e = new ArgumentException(
+                SR.Format(SR.ADP_InvalidMultipartNameQuoteUsage, property, value)
+            );
             TraceExceptionAsReturnValue(e);
             return e;
         }
 
-        internal static ArgumentException InvalidMultipartNameToManyParts(string property, string value, int limit)
+        internal static ArgumentException InvalidMultipartNameToManyParts(
+            string property,
+            string value,
+            int limit
+        )
         {
-            ArgumentException e = new ArgumentException(SR.Format(SR.ADP_InvalidMultipartNameToManyParts, property, value, limit));
+            ArgumentException e = new ArgumentException(
+                SR.Format(SR.ADP_InvalidMultipartNameToManyParts, property, value, limit)
+            );
             TraceExceptionAsReturnValue(e);
             return e;
         }
@@ -243,12 +280,14 @@ namespace System.Data.Common
             Debug.Assert(e != null, "Unexpected null exception!");
             Type type = e.GetType();
 
-            return ((type != s_stackOverflowType) &&
-                     (type != s_outOfMemoryType) &&
-                     (type != s_threadAbortType) &&
-                     (type != s_nullReferenceType) &&
-                     (type != s_accessViolationType) &&
-                     !s_securityType.IsAssignableFrom(type));
+            return (
+                (type != s_stackOverflowType)
+                && (type != s_outOfMemoryType)
+                && (type != s_threadAbortType)
+                && (type != s_nullReferenceType)
+                && (type != s_accessViolationType)
+                && !s_securityType.IsAssignableFrom(type)
+            );
         }
 
         internal static bool IsCatchableOrSecurityExceptionType(Exception e)
@@ -263,17 +302,26 @@ namespace System.Data.Common
             Debug.Assert(e != null, "Unexpected null exception!");
             Type type = e.GetType();
 
-            return ((type != s_stackOverflowType) &&
-                     (type != s_outOfMemoryType) &&
-                     (type != s_threadAbortType) &&
-                     (type != s_nullReferenceType) &&
-                     (type != s_accessViolationType));
+            return (
+                (type != s_stackOverflowType)
+                && (type != s_outOfMemoryType)
+                && (type != s_threadAbortType)
+                && (type != s_nullReferenceType)
+                && (type != s_accessViolationType)
+            );
         }
 
         // Invalid Enumeration
         internal static ArgumentOutOfRangeException InvalidEnumerationValue(Type type, int value)
         {
-            return ArgumentOutOfRange(SR.Format(SR.ADP_InvalidEnumerationValue, type.Name, value.ToString(CultureInfo.InvariantCulture)), type.Name);
+            return ArgumentOutOfRange(
+                SR.Format(
+                    SR.ADP_InvalidEnumerationValue,
+                    type.Name,
+                    value.ToString(CultureInfo.InvariantCulture)
+                ),
+                type.Name
+            );
         }
 
         //
@@ -283,13 +331,22 @@ namespace System.Data.Common
         {
             return Argument(SR.Format(SR.ADP_ConnectionStringSyntax, index));
         }
+
         internal static ArgumentException KeywordNotSupported(string keyword)
         {
             return Argument(SR.Format(SR.ADP_KeywordNotSupported, keyword));
         }
-        internal static ArgumentException ConvertFailed(Type fromType, Type toType, Exception? innerException)
+
+        internal static ArgumentException ConvertFailed(
+            Type fromType,
+            Type toType,
+            Exception? innerException
+        )
         {
-            return ADP.Argument(SR.Format(SR.SqlConvert_ConvertFailed, fromType.FullName, toType.FullName), innerException);
+            return ADP.Argument(
+                SR.Format(SR.SqlConvert_ConvertFailed, fromType.FullName, toType.FullName),
+                innerException
+            );
         }
 
         //
@@ -299,6 +356,7 @@ namespace System.Data.Common
         {
             return InvalidConnectionOptionValue(key, null);
         }
+
         internal static Exception InvalidConnectionOptionValue(string key, Exception? inner)
         {
             return Argument(SR.Format(SR.ADP_InvalidConnectionOptionValue, key), inner);
@@ -307,25 +365,80 @@ namespace System.Data.Common
         //
         // Generic Data Provider Collection
         //
-        internal static ArgumentException CollectionRemoveInvalidObject(Type itemType, ICollection collection)
+        internal static ArgumentException CollectionRemoveInvalidObject(
+            Type itemType,
+            ICollection collection
+        )
         {
-            return Argument(SR.Format(SR.ADP_CollectionRemoveInvalidObject, itemType.Name, collection.GetType().Name));
+            return Argument(
+                SR.Format(
+                    SR.ADP_CollectionRemoveInvalidObject,
+                    itemType.Name,
+                    collection.GetType().Name
+                )
+            );
         }
-        internal static ArgumentNullException CollectionNullValue(string parameter, Type collection, Type itemType)
+
+        internal static ArgumentNullException CollectionNullValue(
+            string parameter,
+            Type collection,
+            Type itemType
+        )
         {
-            return ArgumentNull(parameter, SR.Format(SR.ADP_CollectionNullValue, collection.Name, itemType.Name));
+            return ArgumentNull(
+                parameter,
+                SR.Format(SR.ADP_CollectionNullValue, collection.Name, itemType.Name)
+            );
         }
-        internal static IndexOutOfRangeException CollectionIndexInt32(int index, Type collection, int count)
+
+        internal static IndexOutOfRangeException CollectionIndexInt32(
+            int index,
+            Type collection,
+            int count
+        )
         {
-            return IndexOutOfRange(SR.Format(SR.ADP_CollectionIndexInt32, index.ToString(CultureInfo.InvariantCulture), collection.Name, count.ToString(CultureInfo.InvariantCulture)));
+            return IndexOutOfRange(
+                SR.Format(
+                    SR.ADP_CollectionIndexInt32,
+                    index.ToString(CultureInfo.InvariantCulture),
+                    collection.Name,
+                    count.ToString(CultureInfo.InvariantCulture)
+                )
+            );
         }
-        internal static IndexOutOfRangeException CollectionIndexString(Type itemType, string propertyName, string propertyValue, Type collection)
+
+        internal static IndexOutOfRangeException CollectionIndexString(
+            Type itemType,
+            string propertyName,
+            string propertyValue,
+            Type collection
+        )
         {
-            return IndexOutOfRange(SR.Format(SR.ADP_CollectionIndexString, itemType.Name, propertyName, propertyValue, collection.Name));
+            return IndexOutOfRange(
+                SR.Format(
+                    SR.ADP_CollectionIndexString,
+                    itemType.Name,
+                    propertyName,
+                    propertyValue,
+                    collection.Name
+                )
+            );
         }
-        internal static InvalidCastException CollectionInvalidType(Type collection, Type itemType, object invalidValue)
+
+        internal static InvalidCastException CollectionInvalidType(
+            Type collection,
+            Type itemType,
+            object invalidValue
+        )
         {
-            return InvalidCast(SR.Format(SR.ADP_CollectionInvalidType, collection.Name, itemType.Name, invalidValue.GetType().Name));
+            return InvalidCast(
+                SR.Format(
+                    SR.ADP_CollectionInvalidType,
+                    collection.Name,
+                    itemType.Name,
+                    invalidValue.GetType().Name
+                )
+            );
         }
 
         //
@@ -359,16 +472,26 @@ namespace System.Data.Common
             return InvalidOperation(SR.Format(SR.ADP_StreamClosed, method));
         }
 
-        internal static string BuildQuotedString(string quotePrefix, string quoteSuffix, string unQuotedString)
+        internal static string BuildQuotedString(
+            string quotePrefix,
+            string quoteSuffix,
+            string unQuotedString
+        )
         {
-            var resultString = new StringBuilder(unQuotedString.Length + quoteSuffix.Length + quoteSuffix.Length);
+            var resultString = new StringBuilder(
+                unQuotedString.Length + quoteSuffix.Length + quoteSuffix.Length
+            );
             AppendQuotedString(resultString, quotePrefix, quoteSuffix, unQuotedString);
             return resultString.ToString();
         }
 
-        internal static string AppendQuotedString(StringBuilder buffer, string quotePrefix, string quoteSuffix, string unQuotedString)
+        internal static string AppendQuotedString(
+            StringBuilder buffer,
+            string quotePrefix,
+            string quoteSuffix,
+            string unQuotedString
+        )
         {
-
             if (!string.IsNullOrEmpty(quotePrefix))
             {
                 buffer.Append(quotePrefix);
@@ -379,7 +502,12 @@ namespace System.Data.Common
             {
                 int start = buffer.Length;
                 buffer.Append(unQuotedString);
-                buffer.Replace(quoteSuffix, quoteSuffix + quoteSuffix, start, unQuotedString.Length);
+                buffer.Replace(
+                    quoteSuffix,
+                    quoteSuffix + quoteSuffix,
+                    start,
+                    unQuotedString.Length
+                );
                 buffer.Append(quoteSuffix);
             }
             else
@@ -393,15 +521,33 @@ namespace System.Data.Common
         //
         // Generic Data Provider Collection
         //
-        internal static ArgumentException ParametersIsNotParent(Type parameterType, ICollection collection)
+        internal static ArgumentException ParametersIsNotParent(
+            Type parameterType,
+            ICollection collection
+        )
         {
-            return Argument(SR.Format(SR.ADP_CollectionIsNotParent, parameterType.Name, collection.GetType().Name));
-        }
-        internal static ArgumentException ParametersIsParent(Type parameterType, ICollection collection)
-        {
-            return Argument(SR.Format(SR.ADP_CollectionIsNotParent, parameterType.Name, collection.GetType().Name));
+            return Argument(
+                SR.Format(
+                    SR.ADP_CollectionIsNotParent,
+                    parameterType.Name,
+                    collection.GetType().Name
+                )
+            );
         }
 
+        internal static ArgumentException ParametersIsParent(
+            Type parameterType,
+            ICollection collection
+        )
+        {
+            return Argument(
+                SR.Format(
+                    SR.ADP_CollectionIsNotParent,
+                    parameterType.Name,
+                    collection.GetType().Name
+                )
+            );
+        }
 
         internal enum InternalErrorCode
         {
@@ -414,8 +560,10 @@ namespace System.Data.Common
             NewObjectCannotBePooled = 6,
             NonPooledObjectUsedMoreThanOnce = 7,
             AttemptingToPoolOnRestrictedToken = 8,
+
             //          ConnectionOptionsInUse                                  =  9,
             ConvertSidToStringSidWReturnedNull = 10,
+
             //          UnexpectedTransactedObject                              = 11,
             AttemptingToConstructReferenceCollectionOnStaticObject = 12,
             AttemptingToEnlistTwice = 13,
@@ -455,29 +603,73 @@ namespace System.Data.Common
         {
             return InvalidOperation(SR.Format(SR.ADP_DataReaderClosed, method));
         }
-        internal static ArgumentOutOfRangeException InvalidSourceBufferIndex(int maxLen, long srcOffset, string parameterName)
+
+        internal static ArgumentOutOfRangeException InvalidSourceBufferIndex(
+            int maxLen,
+            long srcOffset,
+            string parameterName
+        )
         {
-            return ArgumentOutOfRange(SR.Format(SR.ADP_InvalidSourceBufferIndex, maxLen.ToString(CultureInfo.InvariantCulture), srcOffset.ToString(CultureInfo.InvariantCulture)), parameterName);
+            return ArgumentOutOfRange(
+                SR.Format(
+                    SR.ADP_InvalidSourceBufferIndex,
+                    maxLen.ToString(CultureInfo.InvariantCulture),
+                    srcOffset.ToString(CultureInfo.InvariantCulture)
+                ),
+                parameterName
+            );
         }
-        internal static ArgumentOutOfRangeException InvalidDestinationBufferIndex(int maxLen, int dstOffset, string parameterName)
+
+        internal static ArgumentOutOfRangeException InvalidDestinationBufferIndex(
+            int maxLen,
+            int dstOffset,
+            string parameterName
+        )
         {
-            return ArgumentOutOfRange(SR.Format(SR.ADP_InvalidDestinationBufferIndex, maxLen.ToString(CultureInfo.InvariantCulture), dstOffset.ToString(CultureInfo.InvariantCulture)), parameterName);
+            return ArgumentOutOfRange(
+                SR.Format(
+                    SR.ADP_InvalidDestinationBufferIndex,
+                    maxLen.ToString(CultureInfo.InvariantCulture),
+                    dstOffset.ToString(CultureInfo.InvariantCulture)
+                ),
+                parameterName
+            );
         }
-        internal static IndexOutOfRangeException InvalidBufferSizeOrIndex(int numBytes, int bufferIndex)
+
+        internal static IndexOutOfRangeException InvalidBufferSizeOrIndex(
+            int numBytes,
+            int bufferIndex
+        )
         {
-            return IndexOutOfRange(SR.Format(SR.SQL_InvalidBufferSizeOrIndex, numBytes.ToString(CultureInfo.InvariantCulture), bufferIndex.ToString(CultureInfo.InvariantCulture)));
+            return IndexOutOfRange(
+                SR.Format(
+                    SR.SQL_InvalidBufferSizeOrIndex,
+                    numBytes.ToString(CultureInfo.InvariantCulture),
+                    bufferIndex.ToString(CultureInfo.InvariantCulture)
+                )
+            );
         }
+
         internal static Exception InvalidDataLength(long length)
         {
-            return IndexOutOfRange(SR.Format(SR.SQL_InvalidDataLength, length.ToString(CultureInfo.InvariantCulture)));
+            return IndexOutOfRange(
+                SR.Format(SR.SQL_InvalidDataLength, length.ToString(CultureInfo.InvariantCulture))
+            );
         }
 
         internal static bool CompareInsensitiveInvariant(string? strvalue, string? strconst) =>
-            0 == CultureInfo.InvariantCulture.CompareInfo.Compare(strvalue, strconst, CompareOptions.IgnoreCase);
+            0
+            == CultureInfo.InvariantCulture.CompareInfo.Compare(
+                strvalue,
+                strconst,
+                CompareOptions.IgnoreCase
+            );
 
-        internal static int DstCompare(string strA, string strB) => CultureInfo.CurrentCulture.CompareInfo.Compare(strA, strB, ADP.DefaultCompareOptions);
+        internal static int DstCompare(string strA, string strB) =>
+            CultureInfo.CurrentCulture.CompareInfo.Compare(strA, strB, ADP.DefaultCompareOptions);
 
-        internal static bool IsEmptyArray([NotNullWhen(false)] string?[]? array) => (null == array) || (0 == array.Length);
+        internal static bool IsEmptyArray([NotNullWhen(false)] string?[]? array) =>
+            (null == array) || (0 == array.Length);
 
         internal static bool IsNull(object? value)
         {

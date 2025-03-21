@@ -10,8 +10,10 @@ namespace System.Net.Security.Tests
 {
     public class SslAuthenticationOptionsTests
     {
-        private readonly SslClientAuthenticationOptions _clientOptions = new SslClientAuthenticationOptions();
-        private readonly SslServerAuthenticationOptions _serverOptions = new SslServerAuthenticationOptions();
+        private readonly SslClientAuthenticationOptions _clientOptions =
+            new SslClientAuthenticationOptions();
+        private readonly SslServerAuthenticationOptions _serverOptions =
+            new SslServerAuthenticationOptions();
 
         [Fact]
         public void AllowRenegotiation_Get_Set_Succeeds()
@@ -41,7 +43,12 @@ namespace System.Net.Security.Tests
             Assert.Null(_clientOptions.ApplicationProtocols);
             Assert.Null(_serverOptions.ApplicationProtocols);
 
-            List<SslApplicationProtocol> applnProtos = new List<SslApplicationProtocol> { SslApplicationProtocol.Http3, SslApplicationProtocol.Http2, SslApplicationProtocol.Http11 };
+            List<SslApplicationProtocol> applnProtos = new List<SslApplicationProtocol>
+            {
+                SslApplicationProtocol.Http3,
+                SslApplicationProtocol.Http2,
+                SslApplicationProtocol.Http11,
+            };
             _clientOptions.ApplicationProtocols = applnProtos;
             _serverOptions.ApplicationProtocols = applnProtos;
 
@@ -55,7 +62,10 @@ namespace System.Net.Security.Tests
             Assert.Null(_clientOptions.RemoteCertificateValidationCallback);
             Assert.Null(_serverOptions.RemoteCertificateValidationCallback);
 
-            RemoteCertificateValidationCallback callback = (sender, certificate, chain, errors) => { return true; };
+            RemoteCertificateValidationCallback callback = (sender, certificate, chain, errors) =>
+            {
+                return true;
+            };
             _clientOptions.RemoteCertificateValidationCallback = callback;
             _serverOptions.RemoteCertificateValidationCallback = callback;
 
@@ -68,7 +78,13 @@ namespace System.Net.Security.Tests
         {
             Assert.Null(_clientOptions.LocalCertificateSelectionCallback);
 
-            LocalCertificateSelectionCallback callback = (sender, host, localCertificates, remoteCertificate, issuers) => default;
+            LocalCertificateSelectionCallback callback = (
+                sender,
+                host,
+                localCertificates,
+                remoteCertificate,
+                issuers
+            ) => default;
             _clientOptions.LocalCertificateSelectionCallback = callback;
 
             Assert.Equal(callback, _clientOptions.LocalCertificateSelectionCallback);
@@ -140,8 +156,12 @@ namespace System.Net.Security.Tests
             Assert.Equal(X509RevocationMode.Online, _clientOptions.CertificateRevocationCheckMode);
             Assert.Equal(X509RevocationMode.Offline, _serverOptions.CertificateRevocationCheckMode);
 
-            Assert.Throws<ArgumentException>(() => _clientOptions.CertificateRevocationCheckMode = (X509RevocationMode)3);
-            Assert.Throws<ArgumentException>(() => _serverOptions.CertificateRevocationCheckMode = (X509RevocationMode)3);
+            Assert.Throws<ArgumentException>(() =>
+                _clientOptions.CertificateRevocationCheckMode = (X509RevocationMode)3
+            );
+            Assert.Throws<ArgumentException>(() =>
+                _serverOptions.CertificateRevocationCheckMode = (X509RevocationMode)3
+            );
         }
 
         [Fact]
@@ -158,8 +178,12 @@ namespace System.Net.Security.Tests
             Assert.Equal(EncryptionPolicy.NoEncryption, _serverOptions.EncryptionPolicy);
 #pragma warning restore SYSLIB0040
 
-            Assert.Throws<ArgumentException>(() => _clientOptions.EncryptionPolicy = (EncryptionPolicy)3);
-            Assert.Throws<ArgumentException>(() => _serverOptions.EncryptionPolicy = (EncryptionPolicy)3);
+            Assert.Throws<ArgumentException>(() =>
+                _clientOptions.EncryptionPolicy = (EncryptionPolicy)3
+            );
+            Assert.Throws<ArgumentException>(() =>
+                _serverOptions.EncryptionPolicy = (EncryptionPolicy)3
+            );
         }
     }
 }

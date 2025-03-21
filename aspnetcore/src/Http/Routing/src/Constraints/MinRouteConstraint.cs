@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// <summary>
 /// Constrains a route parameter to be a long with a minimum value.
 /// </summary>
-public class MinRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchingPolicy, ICachableParameterPolicy
+public class MinRouteConstraint
+    : IRouteConstraint,
+        IParameterLiteralNodeMatchingPolicy,
+        ICachableParameterPolicy
 #else
 internal class MinRouteConstraint : IRouteConstraint
 #endif
@@ -41,10 +44,10 @@ internal class MinRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);
@@ -61,7 +64,14 @@ internal class MinRouteConstraint : IRouteConstraint
 
     private bool CheckConstraintCore(string? valueString)
     {
-        if (long.TryParse(valueString, NumberStyles.Integer, CultureInfo.InvariantCulture, out var longValue))
+        if (
+            long.TryParse(
+                valueString,
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out var longValue
+            )
+        )
         {
             return longValue >= Min;
         }

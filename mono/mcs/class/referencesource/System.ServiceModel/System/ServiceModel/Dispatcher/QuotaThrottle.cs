@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.Diagnostics;
-    using System.ServiceModel.Diagnostics;
-    using System.ServiceModel.Channels;
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
     using System.Threading;
 
     sealed class QuotaThrottle
@@ -64,8 +64,12 @@ namespace System.ServiceModel.Dispatcher
                                 TraceUtility.TraceEvent(
                                     TraceEventType.Warning,
                                     TraceCode.ManualFlowThrottleLimitReached,
-                                    SR.GetString(SR.TraceCodeManualFlowThrottleLimitReached,
-                                                 this.propertyName, this.owner));
+                                    SR.GetString(
+                                        SR.TraceCodeManualFlowThrottleLimitReached,
+                                        this.propertyName,
+                                        this.owner
+                                    )
+                                );
                             }
                         }
 
@@ -87,8 +91,13 @@ namespace System.ServiceModel.Dispatcher
         internal int IncrementLimit(int incrementBy)
         {
             if (incrementBy < 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("incrementBy", incrementBy,
-                                                     SR.GetString(SR.ValueMustBeNonNegative)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "incrementBy",
+                        incrementBy,
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
             int newLimit;
             object[] released = null;
 
@@ -96,7 +105,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (this.IsEnabled)
                 {
-                    checked { this.limit += incrementBy; }
+                    checked
+                    {
+                        this.limit += incrementBy;
+                    }
                     released = this.LimitChanged();
                 }
                 newLimit = this.limit;
@@ -148,8 +160,13 @@ namespace System.ServiceModel.Dispatcher
         internal void SetLimit(int messageLimit)
         {
             if (messageLimit < 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("messageLimit", messageLimit,
-                                                    SR.GetString(SR.ValueMustBeNonNegative)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "messageLimit",
+                        messageLimit,
+                        SR.GetString(SR.ValueMustBeNonNegative)
+                    )
+                );
 
             object[] released = null;
 

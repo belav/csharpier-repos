@@ -47,9 +47,22 @@ namespace MS.Internal.Xml.XPath
             return false;
         }
 
-        public override int Count { get { return _query.Count; } }
-        public override XPathNavigator Current { get { return _nav; } }
-        public override int CurrentPosition { get { return _position; } }
-        public override XPathNodeIterator Clone() { return new XPathSelectionIterator(this); }
+        public override int Count
+        {
+            get { return _query.Count; }
+        }
+        public override XPathNavigator Current
+        {
+            get { return _nav; }
+        }
+        public override int CurrentPosition
+        {
+            get { return _position; }
+        }
+
+        public override XPathNodeIterator Clone()
+        {
+            return new XPathSelectionIterator(this);
+        }
     }
 }

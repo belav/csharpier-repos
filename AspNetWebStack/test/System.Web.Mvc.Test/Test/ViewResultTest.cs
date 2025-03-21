@@ -28,22 +28,35 @@ namespace System.Web.Mvc.Test
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             List<IViewEngine> viewEngines = new List<IViewEngine>();
             viewEngines.Add(viewEngine.Object);
-            Mock<ViewEngineCollection> viewEngineCollection = new Mock<ViewEngineCollection>(MockBehavior.Strict, viewEngines);
-            ViewResult result = new ViewResultHelper { ViewEngineCollection = viewEngineCollection.Object };
+            Mock<ViewEngineCollection> viewEngineCollection = new Mock<ViewEngineCollection>(
+                MockBehavior.Strict,
+                viewEngines
+            );
+            ViewResult result = new ViewResultHelper
+            {
+                ViewEngineCollection = viewEngineCollection.Object,
+            };
             viewEngineCollection
                 .Setup(e => e.FindView(It.IsAny<ControllerContext>(), _viewName, _masterName))
                 .Returns(new ViewEngineResult(view.Object, viewEngine.Object));
             viewEngine
-                .Setup(e => e.FindView(It.IsAny<ControllerContext>(), _viewName, _masterName, It.IsAny<bool>()))
+                .Setup(e =>
+                    e.FindView(
+                        It.IsAny<ControllerContext>(),
+                        _viewName,
+                        _masterName,
+                        It.IsAny<bool>()
+                    )
+                )
                 .Callback<ControllerContext, string, string, bool>(
                     (controllerContext, viewName, masterName, useCache) =>
                     {
                         Assert.Same(httpContext, controllerContext.HttpContext);
                         Assert.Same(routeData, controllerContext.RouteData);
-                    })
+                    }
+                )
                 .Returns(new ViewEngineResult(view.Object, viewEngine.Object));
-            view
-                .Setup(o => o.Render(It.IsAny<ViewContext>(), httpContext.Response.Output))
+            view.Setup(o => o.Render(It.IsAny<ViewContext>(), httpContext.Response.Output))
                 .Callback<ViewContext, TextWriter>(
                     (viewContext, writer) =>
                     {
@@ -51,11 +64,16 @@ namespace System.Web.Mvc.Test
                         Assert.Same(result.ViewData, viewContext.ViewData);
                         Assert.Same(result.TempData, viewContext.TempData);
                         Assert.Same(controller, viewContext.Controller);
-                    });
+                    }
+                );
             viewEngine
                 .Setup(e => e.ReleaseView(context, It.IsAny<IView>()))
                 .Callback<ControllerContext, IView>(
-                    (controllerContext, releasedView) => { Assert.Same(releasedView, view.Object); });
+                    (controllerContext, releasedView) =>
+                    {
+                        Assert.Same(releasedView, view.Object);
+                    }
+                );
 
             // Act
             result.ExecuteResult(context);
@@ -78,27 +96,46 @@ namespace System.Web.Mvc.Test
             Mock<IViewEngine> viewEngine = new Mock<IViewEngine>(MockBehavior.Strict);
             List<IViewEngine> viewEngines = new List<IViewEngine>();
             viewEngines.Add(viewEngine.Object);
-            Mock<ViewEngineCollection> viewEngineCollection = new Mock<ViewEngineCollection>(MockBehavior.Strict, viewEngines);
-            ViewResult result = new ViewResultHelper { ViewEngineCollection = viewEngineCollection.Object };
+            Mock<ViewEngineCollection> viewEngineCollection = new Mock<ViewEngineCollection>(
+                MockBehavior.Strict,
+                viewEngines
+            );
+            ViewResult result = new ViewResultHelper
+            {
+                ViewEngineCollection = viewEngineCollection.Object,
+            };
             viewEngineCollection
                 .Setup(e => e.FindView(It.IsAny<ControllerContext>(), _viewName, _masterName))
                 .Returns(new ViewEngineResult(new[] { "location1", "location2" }));
             viewEngine
-                .Setup(e => e.FindView(It.IsAny<ControllerContext>(), _viewName, _masterName, It.IsAny<bool>()))
+                .Setup(e =>
+                    e.FindView(
+                        It.IsAny<ControllerContext>(),
+                        _viewName,
+                        _masterName,
+                        It.IsAny<bool>()
+                    )
+                )
                 .Callback<ControllerContext, string, string, bool>(
                     (controllerContext, viewName, masterName, useCache) =>
                     {
                         Assert.Same(httpContext, controllerContext.HttpContext);
                         Assert.Same(routeData, controllerContext.RouteData);
-                    })
+                    }
+                )
                 .Returns(new ViewEngineResult(new[] { "location1", "location2" }));
 
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => result.ExecuteResult(context),
-                "The view '" + _viewName + "' or its master was not found or no view engine supports the searched locations. The following locations were searched:" + Environment.NewLine
-              + "location1" + Environment.NewLine
-              + "location2");
+                "The view '"
+                    + _viewName
+                    + "' or its master was not found or no view engine supports the searched locations. The following locations were searched:"
+                    + Environment.NewLine
+                    + "location1"
+                    + Environment.NewLine
+                    + "location2"
+            );
 
             viewEngine.Verify();
             viewEngineCollection.Verify();
@@ -116,10 +153,16 @@ namespace System.Web.Mvc.Test
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             List<IViewEngine> viewEngines = new List<IViewEngine>();
             viewEngines.Add(viewEngine.Object);
-            Mock<ViewEngineCollection> viewEngineCollection = new Mock<ViewEngineCollection>(MockBehavior.Strict, viewEngines);
-            ViewResult result = new ViewResultHelper { ViewName = _viewName, ViewEngineCollection = viewEngineCollection.Object };
-            view
-                .Setup(o => o.Render(It.IsAny<ViewContext>(), httpContext.Response.Output))
+            Mock<ViewEngineCollection> viewEngineCollection = new Mock<ViewEngineCollection>(
+                MockBehavior.Strict,
+                viewEngines
+            );
+            ViewResult result = new ViewResultHelper
+            {
+                ViewName = _viewName,
+                ViewEngineCollection = viewEngineCollection.Object,
+            };
+            view.Setup(o => o.Render(It.IsAny<ViewContext>(), httpContext.Response.Output))
                 .Callback<ViewContext, TextWriter>(
                     (viewContext, writer) =>
                     {
@@ -127,23 +170,36 @@ namespace System.Web.Mvc.Test
                         Assert.Same(result.ViewData, viewContext.ViewData);
                         Assert.Same(result.TempData, viewContext.TempData);
                         Assert.Same(controller, viewContext.Controller);
-                    });
+                    }
+                );
             viewEngineCollection
                 .Setup(e => e.FindView(It.IsAny<ControllerContext>(), _viewName, _masterName))
                 .Returns(new ViewEngineResult(view.Object, viewEngine.Object));
             viewEngine
-                .Setup(e => e.FindView(It.IsAny<ControllerContext>(), _viewName, _masterName, It.IsAny<bool>()))
+                .Setup(e =>
+                    e.FindView(
+                        It.IsAny<ControllerContext>(),
+                        _viewName,
+                        _masterName,
+                        It.IsAny<bool>()
+                    )
+                )
                 .Callback<ControllerContext, string, string, bool>(
                     (controllerContext, viewName, masterName, useCache) =>
                     {
                         Assert.Same(httpContext, controllerContext.HttpContext);
                         Assert.Same(routeData, controllerContext.RouteData);
-                    })
+                    }
+                )
                 .Returns(new ViewEngineResult(view.Object, viewEngine.Object));
             viewEngine
                 .Setup(e => e.ReleaseView(context, It.IsAny<IView>()))
                 .Callback<ControllerContext, IView>(
-                    (controllerContext, releasedView) => { Assert.Same(releasedView, view.Object); });
+                    (controllerContext, releasedView) =>
+                    {
+                        Assert.Same(releasedView, view.Object);
+                    }
+                );
 
             // Act
             result.ExecuteResult(context);
@@ -165,8 +221,7 @@ namespace System.Web.Mvc.Test
             ControllerContext context = new ControllerContext(httpContext, routeData, controller);
             Mock<IView> view = new Mock<IView>(MockBehavior.Strict);
             ViewResult result = new ViewResultHelper { View = view.Object };
-            view
-                .Setup(o => o.Render(It.IsAny<ViewContext>(), httpContext.Response.Output))
+            view.Setup(o => o.Render(It.IsAny<ViewContext>(), httpContext.Response.Output))
                 .Callback<ViewContext, TextWriter>(
                     (viewContext, writer) =>
                     {
@@ -174,7 +229,8 @@ namespace System.Web.Mvc.Test
                         Assert.Same(result.ViewData, viewContext.ViewData);
                         Assert.Same(result.TempData, viewContext.TempData);
                         Assert.Same(controller, viewContext.Controller);
-                    });
+                    }
+                );
 
             // Act
             result.ExecuteResult(context);
@@ -190,9 +246,7 @@ namespace System.Web.Mvc.Test
             ViewResult result = new ViewResultHelper();
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(
-                () => result.ExecuteResult(null),
-                "context");
+            Assert.ThrowsArgumentNull(() => result.ExecuteResult(null), "context");
         }
 
         [Fact]
@@ -216,7 +270,9 @@ namespace System.Web.Mvc.Test
         {
             public ViewResultHelper()
             {
-                ViewEngineCollection = new ViewEngineCollection(new IViewEngine[] { new WebFormViewEngine() });
+                ViewEngineCollection = new ViewEngineCollection(
+                    new IViewEngine[] { new WebFormViewEngine() }
+                );
                 MasterName = _masterName;
             }
         }

@@ -17,9 +17,7 @@ namespace System.Speech.Internal.SrgsCompiler
     {
         #region Constructors
 
-        internal CustomGrammar()
-        {
-        }
+        internal CustomGrammar() { }
 
         #endregion
 

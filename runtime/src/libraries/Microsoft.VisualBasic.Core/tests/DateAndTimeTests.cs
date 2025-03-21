@@ -12,16 +12,27 @@ namespace Microsoft.VisualBasic.Tests
     {
         [Theory]
         [MemberData(nameof(DateAdd_DateInterval_TestData))]
-        public void DateAdd_DateInterval(DateInterval interval, double number, DateTime dateValue, DateTime expected)
+        public void DateAdd_DateInterval(
+            DateInterval interval,
+            double number,
+            DateTime dateValue,
+            DateTime expected
+        )
         {
             Assert.Equal(expected, DateAndTime.DateAdd(interval, number, dateValue));
         }
 
         [Theory]
         [MemberData(nameof(DateAdd_DateInterval_ArgumentOutOfRangeException_TestData))]
-        public void DateAdd_DateInterval_ArgumentOutOfRangeException(DateInterval interval, double number, DateTime dateValue)
+        public void DateAdd_DateInterval_ArgumentOutOfRangeException(
+            DateInterval interval,
+            double number,
+            DateTime dateValue
+        )
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => DateAndTime.DateAdd(interval, number, dateValue));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                DateAndTime.DateAdd(interval, number, dateValue)
+            );
         }
 
         public static IEnumerable<object[]> DateAdd_DateInterval_TestData()
@@ -29,85 +40,343 @@ namespace Microsoft.VisualBasic.Tests
             var now = DateTime.UtcNow;
             var calendar = System.Threading.Thread.CurrentThread.CurrentCulture.Calendar;
 
-            yield return new object[] { DateInterval.Year, 0.0, DateTime.MinValue, DateTime.MinValue };
+            yield return new object[]
+            {
+                DateInterval.Year,
+                0.0,
+                DateTime.MinValue,
+                DateTime.MinValue,
+            };
             yield return new object[] { DateInterval.Year, 0.0, now, now };
-            yield return new object[] { DateInterval.Year, 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { DateInterval.Year, 2.0, DateTime.MinValue, calendar.AddYears(DateTime.MinValue, 2) };
+            yield return new object[]
+            {
+                DateInterval.Year,
+                0.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue,
+            };
+            yield return new object[]
+            {
+                DateInterval.Year,
+                2.0,
+                DateTime.MinValue,
+                calendar.AddYears(DateTime.MinValue, 2),
+            };
             yield return new object[] { DateInterval.Year, 2.0, now, calendar.AddYears(now, 2) };
             yield return new object[] { DateInterval.Year, -2.0, now, calendar.AddYears(now, -2) };
-            yield return new object[] { DateInterval.Year, -2.0, DateTime.MaxValue, calendar.AddYears(DateTime.MaxValue, -2) };
+            yield return new object[]
+            {
+                DateInterval.Year,
+                -2.0,
+                DateTime.MaxValue,
+                calendar.AddYears(DateTime.MaxValue, -2),
+            };
 
-            yield return new object[] { DateInterval.Quarter, 0.0, DateTime.MinValue, DateTime.MinValue };
+            yield return new object[]
+            {
+                DateInterval.Quarter,
+                0.0,
+                DateTime.MinValue,
+                DateTime.MinValue,
+            };
             yield return new object[] { DateInterval.Quarter, 0.0, now, now };
-            yield return new object[] { DateInterval.Quarter, 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { DateInterval.Quarter, 2.0, DateTime.MinValue, calendar.AddMonths(DateTime.MinValue, 6) };
-            yield return new object[] { DateInterval.Quarter, 2.0, now, calendar.AddMonths(now, 6) };
-            yield return new object[] { DateInterval.Quarter, -2.0, now, calendar.AddMonths(now, -6) };
-            yield return new object[] { DateInterval.Quarter, -2.0, DateTime.MaxValue, calendar.AddMonths(DateTime.MaxValue, -6) };
+            yield return new object[]
+            {
+                DateInterval.Quarter,
+                0.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue,
+            };
+            yield return new object[]
+            {
+                DateInterval.Quarter,
+                2.0,
+                DateTime.MinValue,
+                calendar.AddMonths(DateTime.MinValue, 6),
+            };
+            yield return new object[]
+            {
+                DateInterval.Quarter,
+                2.0,
+                now,
+                calendar.AddMonths(now, 6),
+            };
+            yield return new object[]
+            {
+                DateInterval.Quarter,
+                -2.0,
+                now,
+                calendar.AddMonths(now, -6),
+            };
+            yield return new object[]
+            {
+                DateInterval.Quarter,
+                -2.0,
+                DateTime.MaxValue,
+                calendar.AddMonths(DateTime.MaxValue, -6),
+            };
 
-            yield return new object[] { DateInterval.Month, 0.0, DateTime.MinValue, DateTime.MinValue };
+            yield return new object[]
+            {
+                DateInterval.Month,
+                0.0,
+                DateTime.MinValue,
+                DateTime.MinValue,
+            };
             yield return new object[] { DateInterval.Month, 0.0, now, now };
-            yield return new object[] { DateInterval.Month, 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { DateInterval.Month, 2.0, DateTime.MinValue, calendar.AddMonths(DateTime.MinValue, 2) };
+            yield return new object[]
+            {
+                DateInterval.Month,
+                0.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue,
+            };
+            yield return new object[]
+            {
+                DateInterval.Month,
+                2.0,
+                DateTime.MinValue,
+                calendar.AddMonths(DateTime.MinValue, 2),
+            };
             yield return new object[] { DateInterval.Month, 2.0, now, calendar.AddMonths(now, 2) };
-            yield return new object[] { DateInterval.Month, -2.0, now, calendar.AddMonths(now, -2) };
-            yield return new object[] { DateInterval.Month, -2.0, DateTime.MaxValue, calendar.AddMonths(DateTime.MaxValue, -2) };
+            yield return new object[]
+            {
+                DateInterval.Month,
+                -2.0,
+                now,
+                calendar.AddMonths(now, -2),
+            };
+            yield return new object[]
+            {
+                DateInterval.Month,
+                -2.0,
+                DateTime.MaxValue,
+                calendar.AddMonths(DateTime.MaxValue, -2),
+            };
 
-            yield return new object[] { DateInterval.DayOfYear, 0.0, DateTime.MinValue, DateTime.MinValue };
+            yield return new object[]
+            {
+                DateInterval.DayOfYear,
+                0.0,
+                DateTime.MinValue,
+                DateTime.MinValue,
+            };
             yield return new object[] { DateInterval.DayOfYear, 0.0, now, now };
-            yield return new object[] { DateInterval.DayOfYear, 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { DateInterval.DayOfYear, 2.0, DateTime.MinValue, DateTime.MinValue.AddDays(2) };
+            yield return new object[]
+            {
+                DateInterval.DayOfYear,
+                0.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue,
+            };
+            yield return new object[]
+            {
+                DateInterval.DayOfYear,
+                2.0,
+                DateTime.MinValue,
+                DateTime.MinValue.AddDays(2),
+            };
             yield return new object[] { DateInterval.DayOfYear, 2.0, now, now.AddDays(2) };
             yield return new object[] { DateInterval.DayOfYear, -2.0, now, now.AddDays(-2) };
-            yield return new object[] { DateInterval.DayOfYear, -2.0, DateTime.MaxValue, DateTime.MaxValue.AddDays(-2) };
+            yield return new object[]
+            {
+                DateInterval.DayOfYear,
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddDays(-2),
+            };
 
-            yield return new object[] { DateInterval.Day, 0.0, DateTime.MinValue, DateTime.MinValue };
+            yield return new object[]
+            {
+                DateInterval.Day,
+                0.0,
+                DateTime.MinValue,
+                DateTime.MinValue,
+            };
             yield return new object[] { DateInterval.Day, 0.0, now, now };
-            yield return new object[] { DateInterval.Day, 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { DateInterval.Day, 2.0, DateTime.MinValue, DateTime.MinValue.AddDays(2) };
+            yield return new object[]
+            {
+                DateInterval.Day,
+                0.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue,
+            };
+            yield return new object[]
+            {
+                DateInterval.Day,
+                2.0,
+                DateTime.MinValue,
+                DateTime.MinValue.AddDays(2),
+            };
             yield return new object[] { DateInterval.Day, 2.0, now, now.AddDays(2) };
             yield return new object[] { DateInterval.Day, -2.0, now, now.AddDays(-2) };
-            yield return new object[] { DateInterval.Day, -2.0, DateTime.MaxValue, DateTime.MaxValue.AddDays(-2) };
+            yield return new object[]
+            {
+                DateInterval.Day,
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddDays(-2),
+            };
 
-            yield return new object[] { DateInterval.WeekOfYear, 0.0, DateTime.MinValue, DateTime.MinValue };
+            yield return new object[]
+            {
+                DateInterval.WeekOfYear,
+                0.0,
+                DateTime.MinValue,
+                DateTime.MinValue,
+            };
             yield return new object[] { DateInterval.WeekOfYear, 0.0, now, now };
-            yield return new object[] { DateInterval.WeekOfYear, 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { DateInterval.WeekOfYear, 2.0, DateTime.MinValue, DateTime.MinValue.AddDays(14) };
+            yield return new object[]
+            {
+                DateInterval.WeekOfYear,
+                0.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue,
+            };
+            yield return new object[]
+            {
+                DateInterval.WeekOfYear,
+                2.0,
+                DateTime.MinValue,
+                DateTime.MinValue.AddDays(14),
+            };
             yield return new object[] { DateInterval.WeekOfYear, 2.0, now, now.AddDays(14) };
             yield return new object[] { DateInterval.WeekOfYear, -2.0, now, now.AddDays(-14) };
-            yield return new object[] { DateInterval.WeekOfYear, -2.0, DateTime.MaxValue, DateTime.MaxValue.AddDays(-14) };
+            yield return new object[]
+            {
+                DateInterval.WeekOfYear,
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddDays(-14),
+            };
 
-            yield return new object[] { DateInterval.Weekday, 0.0, DateTime.MinValue, DateTime.MinValue };
+            yield return new object[]
+            {
+                DateInterval.Weekday,
+                0.0,
+                DateTime.MinValue,
+                DateTime.MinValue,
+            };
             yield return new object[] { DateInterval.Weekday, 0.0, now, now };
-            yield return new object[] { DateInterval.Weekday, 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { DateInterval.Weekday, 2.0, DateTime.MinValue, DateTime.MinValue.AddDays(2) };
+            yield return new object[]
+            {
+                DateInterval.Weekday,
+                0.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue,
+            };
+            yield return new object[]
+            {
+                DateInterval.Weekday,
+                2.0,
+                DateTime.MinValue,
+                DateTime.MinValue.AddDays(2),
+            };
             yield return new object[] { DateInterval.Weekday, 2.0, now, now.AddDays(2) };
             yield return new object[] { DateInterval.Weekday, -2.0, now, now.AddDays(-2) };
-            yield return new object[] { DateInterval.Weekday, -2.0, DateTime.MaxValue, DateTime.MaxValue.AddDays(-2) };
+            yield return new object[]
+            {
+                DateInterval.Weekday,
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddDays(-2),
+            };
 
-            yield return new object[] { DateInterval.Hour, 0.0, DateTime.MinValue, DateTime.MinValue };
+            yield return new object[]
+            {
+                DateInterval.Hour,
+                0.0,
+                DateTime.MinValue,
+                DateTime.MinValue,
+            };
             yield return new object[] { DateInterval.Hour, 0.0, now, now };
-            yield return new object[] { DateInterval.Hour, 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { DateInterval.Hour, 2.0, DateTime.MinValue, DateTime.MinValue.AddHours(2) };
+            yield return new object[]
+            {
+                DateInterval.Hour,
+                0.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue,
+            };
+            yield return new object[]
+            {
+                DateInterval.Hour,
+                2.0,
+                DateTime.MinValue,
+                DateTime.MinValue.AddHours(2),
+            };
             yield return new object[] { DateInterval.Hour, 2.0, now, now.AddHours(2) };
             yield return new object[] { DateInterval.Hour, -2.0, now, now.AddHours(-2) };
-            yield return new object[] { DateInterval.Hour, -2.0, DateTime.MaxValue, DateTime.MaxValue.AddHours(-2) };
+            yield return new object[]
+            {
+                DateInterval.Hour,
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddHours(-2),
+            };
 
-            yield return new object[] { DateInterval.Minute, 0.0, DateTime.MinValue, DateTime.MinValue };
+            yield return new object[]
+            {
+                DateInterval.Minute,
+                0.0,
+                DateTime.MinValue,
+                DateTime.MinValue,
+            };
             yield return new object[] { DateInterval.Minute, 0.0, now, now };
-            yield return new object[] { DateInterval.Minute, 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { DateInterval.Minute, 2.0, DateTime.MinValue, DateTime.MinValue.AddMinutes(2) };
+            yield return new object[]
+            {
+                DateInterval.Minute,
+                0.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue,
+            };
+            yield return new object[]
+            {
+                DateInterval.Minute,
+                2.0,
+                DateTime.MinValue,
+                DateTime.MinValue.AddMinutes(2),
+            };
             yield return new object[] { DateInterval.Minute, 2.0, now, now.AddMinutes(2) };
             yield return new object[] { DateInterval.Minute, -2.0, now, now.AddMinutes(-2) };
-            yield return new object[] { DateInterval.Minute, -2.0, DateTime.MaxValue, DateTime.MaxValue.AddMinutes(-2) };
+            yield return new object[]
+            {
+                DateInterval.Minute,
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddMinutes(-2),
+            };
 
-            yield return new object[] { DateInterval.Second, 0.0, DateTime.MinValue, DateTime.MinValue };
+            yield return new object[]
+            {
+                DateInterval.Second,
+                0.0,
+                DateTime.MinValue,
+                DateTime.MinValue,
+            };
             yield return new object[] { DateInterval.Second, 0.0, now, now };
-            yield return new object[] { DateInterval.Second, 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { DateInterval.Second, 2.0, DateTime.MinValue, DateTime.MinValue.AddSeconds(2) };
+            yield return new object[]
+            {
+                DateInterval.Second,
+                0.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue,
+            };
+            yield return new object[]
+            {
+                DateInterval.Second,
+                2.0,
+                DateTime.MinValue,
+                DateTime.MinValue.AddSeconds(2),
+            };
             yield return new object[] { DateInterval.Second, 2.0, now, now.AddSeconds(2) };
             yield return new object[] { DateInterval.Second, -2.0, now, now.AddSeconds(-2) };
-            yield return new object[] { DateInterval.Second, -2.0, DateTime.MaxValue, DateTime.MaxValue.AddSeconds(-2) };
+            yield return new object[]
+            {
+                DateInterval.Second,
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddSeconds(-2),
+            };
         }
 
         public static IEnumerable<object[]> DateAdd_DateInterval_ArgumentOutOfRangeException_TestData()
@@ -124,16 +393,27 @@ namespace Microsoft.VisualBasic.Tests
 
         [Theory]
         [MemberData(nameof(DateAdd_StringInterval_TestData))]
-        public void DateAdd_StringInterval(string interval, double number, object dateValue, DateTime expected)
+        public void DateAdd_StringInterval(
+            string interval,
+            double number,
+            object dateValue,
+            DateTime expected
+        )
         {
             Assert.Equal(expected, DateAndTime.DateAdd(interval, number, dateValue));
         }
 
         [Theory]
         [MemberData(nameof(DateAdd_StringInterval_ArgumentOutOfRangeException_TestData))]
-        public void DateAdd_StringInterval_ArgumentOutOfRangeException(string interval, double number, object dateValue)
+        public void DateAdd_StringInterval_ArgumentOutOfRangeException(
+            string interval,
+            double number,
+            object dateValue
+        )
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => DateAndTime.DateAdd(interval, number, dateValue));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                DateAndTime.DateAdd(interval, number, dateValue)
+            );
         }
 
         public static IEnumerable<object[]> DateAdd_StringInterval_TestData()
@@ -144,26 +424,62 @@ namespace Microsoft.VisualBasic.Tests
             yield return new object[] { "YYYY", 0.0, DateTime.MinValue, DateTime.MinValue };
             yield return new object[] { "YYYY", 0.0, now, now };
             yield return new object[] { "YYYY", 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { "YYYY", 2.0, DateTime.MinValue, calendar.AddYears(DateTime.MinValue, 2) };
+            yield return new object[]
+            {
+                "YYYY",
+                2.0,
+                DateTime.MinValue,
+                calendar.AddYears(DateTime.MinValue, 2),
+            };
             yield return new object[] { "YYYY", 2.0, now, calendar.AddYears(now, 2) };
             yield return new object[] { "YYYY", -2.0, now, calendar.AddYears(now, -2) };
-            yield return new object[] { "YYYY", -2.0, DateTime.MaxValue, calendar.AddYears(DateTime.MaxValue, -2) };
+            yield return new object[]
+            {
+                "YYYY",
+                -2.0,
+                DateTime.MaxValue,
+                calendar.AddYears(DateTime.MaxValue, -2),
+            };
 
             yield return new object[] { "Q", 0.0, DateTime.MinValue, DateTime.MinValue };
             yield return new object[] { "Q", 0.0, now, now };
             yield return new object[] { "Q", 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { "Q", 2.0, DateTime.MinValue, calendar.AddMonths(DateTime.MinValue, 6) };
+            yield return new object[]
+            {
+                "Q",
+                2.0,
+                DateTime.MinValue,
+                calendar.AddMonths(DateTime.MinValue, 6),
+            };
             yield return new object[] { "Q", 2.0, now, calendar.AddMonths(now, 6) };
             yield return new object[] { "Q", -2.0, now, calendar.AddMonths(now, -6) };
-            yield return new object[] { "Q", -2.0, DateTime.MaxValue, calendar.AddMonths(DateTime.MaxValue, -6) };
+            yield return new object[]
+            {
+                "Q",
+                -2.0,
+                DateTime.MaxValue,
+                calendar.AddMonths(DateTime.MaxValue, -6),
+            };
 
             yield return new object[] { "M", 0.0, DateTime.MinValue, DateTime.MinValue };
             yield return new object[] { "M", 0.0, now, now };
             yield return new object[] { "M", 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { "M", 2.0, DateTime.MinValue, calendar.AddMonths(DateTime.MinValue, 2) };
+            yield return new object[]
+            {
+                "M",
+                2.0,
+                DateTime.MinValue,
+                calendar.AddMonths(DateTime.MinValue, 2),
+            };
             yield return new object[] { "M", 2.0, now, calendar.AddMonths(now, 2) };
             yield return new object[] { "M", -2.0, now, calendar.AddMonths(now, -2) };
-            yield return new object[] { "M", -2.0, DateTime.MaxValue, calendar.AddMonths(DateTime.MaxValue, -2) };
+            yield return new object[]
+            {
+                "M",
+                -2.0,
+                DateTime.MaxValue,
+                calendar.AddMonths(DateTime.MaxValue, -2),
+            };
 
             yield return new object[] { "Y", 0.0, DateTime.MinValue, DateTime.MinValue };
             yield return new object[] { "Y", 0.0, now, now };
@@ -171,7 +487,13 @@ namespace Microsoft.VisualBasic.Tests
             yield return new object[] { "Y", 2.0, DateTime.MinValue, DateTime.MinValue.AddDays(2) };
             yield return new object[] { "Y", 2.0, now, now.AddDays(2) };
             yield return new object[] { "Y", -2.0, now, now.AddDays(-2) };
-            yield return new object[] { "Y", -2.0, DateTime.MaxValue, DateTime.MaxValue.AddDays(-2) };
+            yield return new object[]
+            {
+                "Y",
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddDays(-2),
+            };
 
             yield return new object[] { "D", 0.0, DateTime.MinValue, DateTime.MinValue };
             yield return new object[] { "D", 0.0, now, now };
@@ -179,15 +501,33 @@ namespace Microsoft.VisualBasic.Tests
             yield return new object[] { "D", 2.0, DateTime.MinValue, DateTime.MinValue.AddDays(2) };
             yield return new object[] { "D", 2.0, now, now.AddDays(2) };
             yield return new object[] { "D", -2.0, now, now.AddDays(-2) };
-            yield return new object[] { "D", -2.0, DateTime.MaxValue, DateTime.MaxValue.AddDays(-2) };
+            yield return new object[]
+            {
+                "D",
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddDays(-2),
+            };
 
             yield return new object[] { "WW", 0.0, DateTime.MinValue, DateTime.MinValue };
             yield return new object[] { "WW", 0.0, now, now };
             yield return new object[] { "WW", 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { "WW", 2.0, DateTime.MinValue, DateTime.MinValue.AddDays(14) };
+            yield return new object[]
+            {
+                "WW",
+                2.0,
+                DateTime.MinValue,
+                DateTime.MinValue.AddDays(14),
+            };
             yield return new object[] { "WW", 2.0, now, now.AddDays(14) };
             yield return new object[] { "WW", -2.0, now, now.AddDays(-14) };
-            yield return new object[] { "WW", -2.0, DateTime.MaxValue, DateTime.MaxValue.AddDays(-14) };
+            yield return new object[]
+            {
+                "WW",
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddDays(-14),
+            };
 
             yield return new object[] { "W", 0.0, DateTime.MinValue, DateTime.MinValue };
             yield return new object[] { "W", 0.0, now, now };
@@ -195,31 +535,73 @@ namespace Microsoft.VisualBasic.Tests
             yield return new object[] { "W", 2.0, DateTime.MinValue, DateTime.MinValue.AddDays(2) };
             yield return new object[] { "W", 2.0, now, now.AddDays(2) };
             yield return new object[] { "W", -2.0, now, now.AddDays(-2) };
-            yield return new object[] { "W", -2.0, DateTime.MaxValue, DateTime.MaxValue.AddDays(-2) };
+            yield return new object[]
+            {
+                "W",
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddDays(-2),
+            };
 
             yield return new object[] { "H", 0.0, DateTime.MinValue, DateTime.MinValue };
             yield return new object[] { "H", 0.0, now, now };
             yield return new object[] { "H", 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { "H", 2.0, DateTime.MinValue, DateTime.MinValue.AddHours(2) };
+            yield return new object[]
+            {
+                "H",
+                2.0,
+                DateTime.MinValue,
+                DateTime.MinValue.AddHours(2),
+            };
             yield return new object[] { "H", 2.0, now, now.AddHours(2) };
             yield return new object[] { "H", -2.0, now, now.AddHours(-2) };
-            yield return new object[] { "H", -2.0, DateTime.MaxValue, DateTime.MaxValue.AddHours(-2) };
+            yield return new object[]
+            {
+                "H",
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddHours(-2),
+            };
 
             yield return new object[] { "N", 0.0, DateTime.MinValue, DateTime.MinValue };
             yield return new object[] { "N", 0.0, now, now };
             yield return new object[] { "N", 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { "N", 2.0, DateTime.MinValue, DateTime.MinValue.AddMinutes(2) };
+            yield return new object[]
+            {
+                "N",
+                2.0,
+                DateTime.MinValue,
+                DateTime.MinValue.AddMinutes(2),
+            };
             yield return new object[] { "N", 2.0, now, now.AddMinutes(2) };
             yield return new object[] { "N", -2.0, now, now.AddMinutes(-2) };
-            yield return new object[] { "N", -2.0, DateTime.MaxValue, DateTime.MaxValue.AddMinutes(-2) };
+            yield return new object[]
+            {
+                "N",
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddMinutes(-2),
+            };
 
             yield return new object[] { "S", 0.0, DateTime.MinValue, DateTime.MinValue };
             yield return new object[] { "S", 0.0, now, now };
             yield return new object[] { "S", 0.0, DateTime.MaxValue, DateTime.MaxValue };
-            yield return new object[] { "S", 2.0, DateTime.MinValue, DateTime.MinValue.AddSeconds(2) };
+            yield return new object[]
+            {
+                "S",
+                2.0,
+                DateTime.MinValue,
+                DateTime.MinValue.AddSeconds(2),
+            };
             yield return new object[] { "S", 2.0, now, now.AddSeconds(2) };
             yield return new object[] { "S", -2.0, now, now.AddSeconds(-2) };
-            yield return new object[] { "S", -2.0, DateTime.MaxValue, DateTime.MaxValue.AddSeconds(-2) };
+            yield return new object[]
+            {
+                "S",
+                -2.0,
+                DateTime.MaxValue,
+                DateTime.MaxValue.AddSeconds(-2),
+            };
         }
 
         public static IEnumerable<object[]> DateAdd_StringInterval_ArgumentOutOfRangeException_TestData()
@@ -236,7 +618,12 @@ namespace Microsoft.VisualBasic.Tests
 
         [Theory]
         [MemberData(nameof(DateDiff_DateInterval_TestData))]
-        public void DateDiff_DateInterval(DateInterval interval, DateTime dateTime1, DateTime dateTime2, long expected)
+        public void DateDiff_DateInterval(
+            DateInterval interval,
+            DateTime dateTime1,
+            DateTime dateTime2,
+            long expected
+        )
         {
             Assert.Equal(expected, DateAndTime.DateDiff(interval, dateTime1, dateTime2));
         }
@@ -245,9 +632,21 @@ namespace Microsoft.VisualBasic.Tests
         {
             var now = DateTime.UtcNow;
 
-            yield return new object[] { DateInterval.Year, DateTime.MinValue, DateTime.MinValue, 0 };
+            yield return new object[]
+            {
+                DateInterval.Year,
+                DateTime.MinValue,
+                DateTime.MinValue,
+                0,
+            };
             yield return new object[] { DateInterval.Year, now, now, 0 };
-            yield return new object[] { DateInterval.Year, DateTime.MaxValue, DateTime.MaxValue, 0 };
+            yield return new object[]
+            {
+                DateInterval.Year,
+                DateTime.MaxValue,
+                DateTime.MaxValue,
+                0,
+            };
 
             yield return new object[] { DateInterval.Quarter, now, now, 0 };
 
@@ -276,7 +675,12 @@ namespace Microsoft.VisualBasic.Tests
 
         [Theory]
         [MemberData(nameof(DateDiff_StringInterval_TestData))]
-        public void DateDiff_StringInterval(string interval, object dateTime1, object dateTime2, long expected)
+        public void DateDiff_StringInterval(
+            string interval,
+            object dateTime1,
+            object dateTime2,
+            long expected
+        )
         {
             Assert.Equal(expected, DateAndTime.DateDiff(interval, dateTime1, dateTime2));
         }
@@ -405,8 +809,12 @@ namespace Microsoft.VisualBasic.Tests
                 Assert.Equal("December", DateAndTime.MonthName(12, Abbreviate: false));
                 Assert.Equal("Dec", DateAndTime.MonthName(12, Abbreviate: true));
 
-                Assert.Throws<ArgumentException>(() => DateAndTime.MonthName(int.MaxValue, Abbreviate: false));
-                Assert.Throws<ArgumentException>(() => DateAndTime.MonthName(int.MaxValue, Abbreviate: true));
+                Assert.Throws<ArgumentException>(() =>
+                    DateAndTime.MonthName(int.MaxValue, Abbreviate: false)
+                );
+                Assert.Throws<ArgumentException>(() =>
+                    DateAndTime.MonthName(int.MaxValue, Abbreviate: true)
+                );
             }
             finally
             {
@@ -454,8 +862,10 @@ namespace Microsoft.VisualBasic.Tests
             {
                 System.Threading.Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
-                Assert.Throws<ArgumentException>(() => DateAndTime.WeekdayName(0, Abbreviate: false));
-                Assert.Throws<ArgumentException>(() => DateAndTime.WeekdayName(0, Abbreviate: true));
+                Assert.Throws<ArgumentException>(() => DateAndTime.WeekdayName(0, Abbreviate: false)
+                );
+                Assert.Throws<ArgumentException>(() => DateAndTime.WeekdayName(0, Abbreviate: true)
+                );
 
                 Assert.Equal("Sunday", DateAndTime.WeekdayName(1, Abbreviate: false));
                 Assert.Equal("Sun", DateAndTime.WeekdayName(1, Abbreviate: true));
@@ -463,8 +873,12 @@ namespace Microsoft.VisualBasic.Tests
                 Assert.Equal("Saturday", DateAndTime.WeekdayName(7, Abbreviate: false));
                 Assert.Equal("Sat", DateAndTime.WeekdayName(7, Abbreviate: true));
 
-                Assert.Throws<ArgumentException>(() => DateAndTime.WeekdayName(int.MaxValue, Abbreviate: false));
-                Assert.Throws<ArgumentException>(() => DateAndTime.WeekdayName(int.MaxValue, Abbreviate: true));
+                Assert.Throws<ArgumentException>(() =>
+                    DateAndTime.WeekdayName(int.MaxValue, Abbreviate: false)
+                );
+                Assert.Throws<ArgumentException>(() =>
+                    DateAndTime.WeekdayName(int.MaxValue, Abbreviate: true)
+                );
             }
             finally
             {

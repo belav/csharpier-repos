@@ -38,7 +38,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 #endif
                 }
                 """;
-            await TestAsync(pdbLocation, sourceLocation, source, c => c.GetMember("C.M"), preprocessorSymbols: ["SOME_DEFINED_CONSTANT"]);
+            await TestAsync(
+                pdbLocation,
+                sourceLocation,
+                source,
+                c => c.GetMember("C.M"),
+                preprocessorSymbols: ["SOME_DEFINED_CONSTANT"]
+            );
         }
 
         [Theory]
@@ -107,12 +113,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                     }
                 }
                 """;
-            await TestAsync(pdbLocation, sourceLocation, source, c => c.GetMember<IMethodSymbol>("C.M").Parameters.First());
+            await TestAsync(
+                pdbLocation,
+                sourceLocation,
+                source,
+                c => c.GetMember<IMethodSymbol>("C.M").Parameters.First()
+            );
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task Class_FromTypeDefinitionDocument(Location pdbLocation, Location sourceLocation)
+        public async Task Class_FromTypeDefinitionDocument(
+            Location pdbLocation,
+            Location sourceLocation
+        )
         {
             var source = """
                 public class [|C|]
@@ -126,7 +140,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
         [Theory]
         [CombinatorialData]
-        public async Task Constructor_FromTypeDefinitionDocument(Location pdbLocation, Location sourceLocation)
+        public async Task Constructor_FromTypeDefinitionDocument(
+            Location pdbLocation,
+            Location sourceLocation
+        )
         {
             var source = """
                 public class [|C|]
@@ -139,7 +156,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
         [Theory]
         [CombinatorialData]
-        public async Task NestedClass_FromTypeDefinitionDocument(Location pdbLocation, Location sourceLocation)
+        public async Task NestedClass_FromTypeDefinitionDocument(
+            Location pdbLocation,
+            Location sourceLocation
+        )
         {
             var source = """
                 public class Outer
@@ -155,7 +175,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
         [Theory]
         [CombinatorialData]
-        public async Task NestedClassConstructor_FromTypeDefinitionDocument(Location pdbLocation, Location sourceLocation)
+        public async Task NestedClassConstructor_FromTypeDefinitionDocument(
+            Location pdbLocation,
+            Location sourceLocation
+        )
         {
             var source = """
                 public class Outer
@@ -171,7 +194,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
         [Theory]
         [CombinatorialData]
-        public async Task Class_FromTypeDefinitionDocumentOfNestedClass(Location pdbLocation, Location sourceLocation)
+        public async Task Class_FromTypeDefinitionDocumentOfNestedClass(
+            Location pdbLocation,
+            Location sourceLocation
+        )
         {
             var source = """
                 public class [|Outer|]
@@ -187,7 +213,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
         [Theory]
         [CombinatorialData]
-        public async Task Constructor_FromTypeDefinitionDocumentOfNestedClass(Location pdbLocation, Location sourceLocation)
+        public async Task Constructor_FromTypeDefinitionDocumentOfNestedClass(
+            Location pdbLocation,
+            Location sourceLocation
+        )
         {
             var source = """
                 public class [|Outer|]
@@ -199,12 +228,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 }
                 """;
             await TestAsync(pdbLocation, sourceLocation, source, c => c.GetMember("Outer..ctor"));
-
         }
 
         [Theory]
         [CombinatorialData]
-        public async Task NestedClass_FromMethodDocument(Location pdbLocation, Location sourceLocation)
+        public async Task NestedClass_FromMethodDocument(
+            Location pdbLocation,
+            Location sourceLocation
+        )
         {
             var source = """
                 public class Outer
@@ -223,7 +254,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
         [Theory]
         [CombinatorialData]
-        public async Task NestedClassConstructor_FromMethodDocument(Location pdbLocation, Location sourceLocation)
+        public async Task NestedClassConstructor_FromMethodDocument(
+            Location pdbLocation,
+            Location sourceLocation
+        )
         {
             var source = """
                 public class Outer
@@ -243,7 +277,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
         [Theory]
         [CombinatorialData]
-        public async Task Class_FromMethodDocumentOfNestedClass(Location pdbLocation, Location sourceLocation)
+        public async Task Class_FromMethodDocumentOfNestedClass(
+            Location pdbLocation,
+            Location sourceLocation
+        )
         {
             var source = """
                 public class [|Outer|]
@@ -263,7 +300,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
         [Theory]
         [CombinatorialData]
-        public async Task Constructor_FromMethodDocumentOfNestedClass(Location pdbLocation, Location sourceLocation)
+        public async Task Constructor_FromMethodDocumentOfNestedClass(
+            Location pdbLocation,
+            Location sourceLocation
+        )
         {
             var source = """
                 public class [|Outer|]
@@ -299,7 +339,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
         [Theory]
         [CombinatorialData]
-        public async Task Constructor_FromMethodDocument(Location pdbLocation, Location sourceLocation)
+        public async Task Constructor_FromMethodDocument(
+            Location pdbLocation,
+            Location sourceLocation
+        )
         {
             var source = """
                 public class [|C|]
@@ -406,7 +449,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 }
                 """;
             // A pdb won't be emitted when building a reference assembly so the first two parameters don't actually matter
-            await TestAsync(Location.OnDisk, Location.OnDisk, source, c => c.GetMember("C.E"), buildReferenceAssembly: true, expectNullResult: true);
+            await TestAsync(
+                Location.OnDisk,
+                Location.OnDisk,
+                source,
+                c => c.GetMember("C.E"),
+                buildReferenceAssembly: true,
+                expectNullResult: true
+            );
         }
 
         [Fact]
@@ -430,12 +480,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
 
                 // Compile reference assembly
                 var sourceText = SourceText.From(metadataSource, encoding: Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(Path.Combine(path, "ref"), Location.Embedded, Location.OnDisk, sourceText, c => c.GetMember("C.E"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    Path.Combine(path, "ref"),
+                    Location.Embedded,
+                    Location.OnDisk,
+                    sourceText,
+                    c => c.GetMember("C.E"),
+                    buildReferenceAssembly: true
+                );
 
                 // Compile implementation assembly
-                CompileTestSource(Path.Combine(path, "lib"), sourceText, project, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    Path.Combine(path, "lib"),
+                    sourceText,
+                    project,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
-                await GenerateFileAndVerifyAsync(project, symbol, Location.Embedded, metadataSource.ToString(), expectedSpan, expectNullResult: false);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.Embedded,
+                    metadataSource.ToString(),
+                    expectedSpan,
+                    expectNullResult: false
+                );
             });
         }
 
@@ -454,24 +526,57 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var packDir = Directory.CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "ref", "net6.0")).FullName;
-                var dataDir = Directory.CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "data")).FullName;
-                var sharedDir = Directory.CreateDirectory(Path.Combine(path, "shared", "MyPack", "1.0")).FullName;
+                var packDir = Directory
+                    .CreateDirectory(
+                        Path.Combine(path, "packs", "MyPack.Ref", "1.0", "ref", "net6.0")
+                    )
+                    .FullName;
+                var dataDir = Directory
+                    .CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "data"))
+                    .FullName;
+                var sharedDir = Directory
+                    .CreateDirectory(Path.Combine(path, "shared", "MyPack", "1.0"))
+                    .FullName;
 
                 // Compile reference assembly
                 var sourceText = SourceText.From(metadataSource, encoding: Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(packDir, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("C.E"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    packDir,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("C.E"),
+                    buildReferenceAssembly: true
+                );
 
                 // Compile implementation assembly
-                CompileTestSource(sharedDir, sourceText, project, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    sharedDir,
+                    sourceText,
+                    project,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Create FrameworkList.xml
-                File.WriteAllText(Path.Combine(dataDir, "FrameworkList.xml"), """
+                File.WriteAllText(
+                    Path.Combine(dataDir, "FrameworkList.xml"),
+                    """
                     <FileList FrameworkName="MyPack">
                     </FileList>
-                    """);
+                    """
+                );
 
-                await GenerateFileAndVerifyAsync(project, symbol, Location.Embedded, metadataSource.ToString(), expectedSpan, expectNullResult: false);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.Embedded,
+                    metadataSource.ToString(),
+                    expectedSpan,
+                    expectNullResult: false
+                );
             });
         }
 
@@ -491,31 +596,67 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var packDir = Directory.CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "ref", "net6.0")).FullName;
-                var dataDir = Directory.CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "data")).FullName;
-                var sharedDir = Directory.CreateDirectory(Path.Combine(path, "shared", "MyPack", "1.0")).FullName;
+                var packDir = Directory
+                    .CreateDirectory(
+                        Path.Combine(path, "packs", "MyPack.Ref", "1.0", "ref", "net6.0")
+                    )
+                    .FullName;
+                var dataDir = Directory
+                    .CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "data"))
+                    .FullName;
+                var sharedDir = Directory
+                    .CreateDirectory(Path.Combine(path, "shared", "MyPack", "1.0"))
+                    .FullName;
 
                 var sourceText = SourceText.From(metadataSource, Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(packDir, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("C.M"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    packDir,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("C.M"),
+                    buildReferenceAssembly: true
+                );
 
-                var workspace = TestWorkspace.Create(@$"
+                var workspace = TestWorkspace.Create(
+                    @$"
 <Workspace>
     <Project Language=""{LanguageNames.CSharp}"" CommonReferences=""true"" ReferencesOnDisk=""true"">
     </Project>
-</Workspace>", composition: GetTestComposition());
+</Workspace>",
+                    composition: GetTestComposition()
+                );
 
                 var implProject = workspace.CurrentSolution.Projects.First();
 
                 // Compile implementation assembly
-                CompileTestSource(sharedDir, sourceText, project, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    sharedDir,
+                    sourceText,
+                    project,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Create FrameworkList.xml
-                File.WriteAllText(Path.Combine(dataDir, "FrameworkList.xml"), """
+                File.WriteAllText(
+                    Path.Combine(dataDir, "FrameworkList.xml"),
+                    """
                     <FileList FrameworkName="MyPack">
                     </FileList>
-                    """);
+                    """
+                );
 
-                await GenerateFileAndVerifyAsync(project, symbol, Location.Embedded, metadataSource.ToString(), expectedSpan, expectNullResult: false);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.Embedded,
+                    metadataSource.ToString(),
+                    expectedSpan,
+                    expectNullResult: false
+                );
             });
         }
 
@@ -538,18 +679,36 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var packDir = Directory.CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "ref", "net6.0")).FullName;
-                var dataDir = Directory.CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "data")).FullName;
-                var sharedDir = Directory.CreateDirectory(Path.Combine(path, "shared", "MyPack", "1.0")).FullName;
+                var packDir = Directory
+                    .CreateDirectory(
+                        Path.Combine(path, "packs", "MyPack.Ref", "1.0", "ref", "net6.0")
+                    )
+                    .FullName;
+                var dataDir = Directory
+                    .CreateDirectory(Path.Combine(path, "packs", "MyPack.Ref", "1.0", "data"))
+                    .FullName;
+                var sharedDir = Directory
+                    .CreateDirectory(Path.Combine(path, "shared", "MyPack", "1.0"))
+                    .FullName;
 
                 var sourceText = SourceText.From(metadataSource, Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(packDir, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("C"), buildReferenceAssembly: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    packDir,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("C"),
+                    buildReferenceAssembly: true
+                );
 
-                var workspace = TestWorkspace.Create(@$"
+                var workspace = TestWorkspace.Create(
+                    @$"
 <Workspace>
     <Project Language=""{LanguageNames.CSharp}"" CommonReferences=""true"" ReferencesOnDisk=""true"">
     </Project>
-</Workspace>", composition: GetTestComposition());
+</Workspace>",
+                    composition: GetTestComposition()
+                );
 
                 var implProject = workspace.CurrentSolution.Projects.First();
 
@@ -559,7 +718,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var pdbFilePath = Path.Combine(sharedDir, "implementation.pdb");
                 var assemblyName = "implementation";
 
-                CompileTestSource(implementationDllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, project, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    implementationDllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    project,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Compile type forwarding implementation DLL, that looks like reference.dll
                 var typeForwardDllFilePath = Path.Combine(sharedDir, "reference.dll");
@@ -567,17 +737,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 pdbFilePath = Path.Combine(sharedDir, "reference.pdb");
                 assemblyName = "reference";
 
-                implProject = implProject.AddMetadataReference(MetadataReference.CreateFromFile(implementationDllFilePath));
+                implProject = implProject.AddMetadataReference(
+                    MetadataReference.CreateFromFile(implementationDllFilePath)
+                );
                 sourceText = SourceText.From(typeForwardSource, Encoding.UTF8);
-                CompileTestSource(typeForwardDllFilePath, sourceCodePath, pdbFilePath, assemblyName, sourceText, implProject, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    typeForwardDllFilePath,
+                    sourceCodePath,
+                    pdbFilePath,
+                    assemblyName,
+                    sourceText,
+                    implProject,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Create FrameworkList.xml
-                File.WriteAllText(Path.Combine(dataDir, "FrameworkList.xml"), """
+                File.WriteAllText(
+                    Path.Combine(dataDir, "FrameworkList.xml"),
+                    """
                     <FileList FrameworkName="MyPack">
                     </FileList>
-                    """);
+                    """
+                );
 
-                await GenerateFileAndVerifyAsync(project, symbol, Location.Embedded, metadataSource.ToString(), expectedSpan, expectNullResult: false);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.Embedded,
+                    metadataSource.ToString(),
+                    expectedSpan,
+                    expectNullResult: false
+                );
             });
         }
 
@@ -595,12 +788,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.OnDisk, Location.OnDisk, metadataSource, c => c.GetMember("C.E"));
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
                 // Now delete the PDB
                 File.Delete(GetPdbPath(path));
 
-                await GenerateFileAndVerifyAsync(project, symbol, Location.OnDisk, source, expectedSpan, expectNullResult: true);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.OnDisk,
+                    source,
+                    expectedSpan,
+                    expectNullResult: true
+                );
             });
         }
 
@@ -618,12 +824,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.OnDisk, Location.OnDisk, metadataSource, c => c.GetMember("C.E"));
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
                 // Now delete the DLL
                 File.Delete(GetDllPath(path));
 
-                await GenerateFileAndVerifyAsync(project, symbol, Location.OnDisk, source, expectedSpan, expectNullResult: true);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.OnDisk,
+                    source,
+                    expectedSpan,
+                    expectNullResult: true
+                );
             });
         }
 
@@ -640,12 +859,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.OnDisk, Location.OnDisk, metadataSource, c => c.GetMember("C.E"));
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
                 // Now delete the source
                 File.Delete(GetSourceFilePath(path));
 
-                await GenerateFileAndVerifyAsync(project, symbol, Location.OnDisk, source, expectedSpan, expectNullResult: true);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.OnDisk,
+                    source,
+                    expectedSpan,
+                    expectNullResult: true
+                );
             });
         }
 
@@ -662,10 +894,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.OnDisk, Location.OnDisk, metadataSource, c => c.GetMember("C.E"), windowsPdb: true);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E"),
+                    windowsPdb: true
+                );
 
                 //TODO: This should not be a null result: https://github.com/dotnet/roslyn/issues/55834
-                await GenerateFileAndVerifyAsync(project, symbol, Location.OnDisk, source, expectedSpan, expectNullResult: true);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.OnDisk,
+                    source,
+                    expectedSpan,
+                    expectNullResult: true
+                );
             });
         }
 
@@ -683,12 +929,25 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.OnDisk, Location.OnDisk, metadataSource, c => c.GetMember("C.E"));
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
                 // Now make the PDB a zero byte file
                 File.WriteAllBytes(GetPdbPath(path), new byte[0]);
 
-                await GenerateFileAndVerifyAsync(project, symbol, Location.OnDisk, source, expectedSpan, expectNullResult: true);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.OnDisk,
+                    source,
+                    expectedSpan,
+                    expectNullResult: true
+                );
             });
         }
 
@@ -706,14 +965,27 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source, out var metadataSource, out var expectedSpan);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.OnDisk, Location.OnDisk, metadataSource, c => c.GetMember("C.E"));
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
                 // The first four bytes of this are BSJB so it is identified as a portable PDB.
                 // The next two bytes are unimportant, they're just not valid PDB data.
                 var corruptPdb = new byte[] { 66, 83, 74, 66, 68, 87 };
                 File.WriteAllBytes(GetPdbPath(path), corruptPdb);
 
-                await GenerateFileAndVerifyAsync(project, symbol, Location.OnDisk, source, expectedSpan, expectNullResult: true);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.OnDisk,
+                    source,
+                    expectedSpan,
+                    expectNullResult: true
+                );
             });
         }
 
@@ -738,20 +1010,41 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source1, out var metadataSource, out var expectedSpan);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.OnDisk, Location.OnDisk, metadataSource, c => c.GetMember("C.E"));
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
                 // Archive off the current PDB so we can restore it later
                 var pdbFilePath = GetPdbPath(path);
                 var archivePdbFilePath = pdbFilePath + ".old";
                 File.Move(pdbFilePath, archivePdbFilePath);
 
-                CompileTestSource(path, SourceText.From(source2, Encoding.UTF8), project, Location.OnDisk, Location.OnDisk, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    path,
+                    SourceText.From(source2, Encoding.UTF8),
+                    project,
+                    Location.OnDisk,
+                    Location.OnDisk,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
                 // Move the old file back, so the PDB is now old
                 File.Delete(pdbFilePath);
                 File.Move(archivePdbFilePath, pdbFilePath);
 
-                await GenerateFileAndVerifyAsync(project, symbol, Location.OnDisk, source1, expectedSpan, expectNullResult: true);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.OnDisk,
+                    source1,
+                    expectedSpan,
+                    expectNullResult: true
+                );
             });
         }
 
@@ -777,11 +1070,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             {
                 MarkupTestFile.GetSpan(source1, out var metadataSource, out var expectedSpan);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, pdbLocation, Location.OnDisk, metadataSource, c => c.GetMember("C.E"));
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    pdbLocation,
+                    Location.OnDisk,
+                    metadataSource,
+                    c => c.GetMember("C.E")
+                );
 
                 File.WriteAllText(GetSourceFilePath(path), source2, Encoding.UTF8);
 
-                await GenerateFileAndVerifyAsync(project, symbol, Location.OnDisk, metadataSource, expectedSpan, expectNullResult: true);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.OnDisk,
+                    metadataSource,
+                    expectedSpan,
+                    expectNullResult: true
+                );
             });
         }
 
@@ -816,9 +1122,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 using var ms = new MemoryStream(encoding.GetBytes(source));
                 var encodedSourceText = EncodedStringText.Create(ms, encoding, canBeEmbedded: true);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, pdbLocation, Location.Embedded, encodedSourceText, c => c.GetMember("C.E"));
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    pdbLocation,
+                    Location.Embedded,
+                    encodedSourceText,
+                    c => c.GetMember("C.E")
+                );
 
-                var (actualText, _) = await GetGeneratedSourceTextAsync(project, symbol, Location.Embedded, expectNullResult: false);
+                var (actualText, _) = await GetGeneratedSourceTextAsync(
+                    project,
+                    symbol,
+                    Location.Embedded,
+                    expectNullResult: false
+                );
 
                 AssertEx.NotNull(actualText);
                 AssertEx.NotNull(actualText.Encoding);
@@ -846,9 +1163,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 using var ms = new MemoryStream(encoding.GetBytes(source));
                 var encodedSourceText = EncodedStringText.Create(ms, encoding, canBeEmbedded: true);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, pdbLocation, Location.Embedded, encodedSourceText, c => c.GetMember("C.E"));
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    pdbLocation,
+                    Location.Embedded,
+                    encodedSourceText,
+                    c => c.GetMember("C.E")
+                );
 
-                var (actualText, _) = await GetGeneratedSourceTextAsync(project, symbol, Location.Embedded, expectNullResult: false);
+                var (actualText, _) = await GetGeneratedSourceTextAsync(
+                    project,
+                    symbol,
+                    Location.Embedded,
+                    expectNullResult: false
+                );
 
                 AssertEx.NotNull(actualText);
                 AssertEx.NotNull(actualText.Encoding);
@@ -876,9 +1204,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 using var ms = new MemoryStream(encoding.GetBytes(source));
                 var encodedSourceText = EncodedStringText.Create(ms, encoding, canBeEmbedded: true);
 
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, pdbLocation, Location.Embedded, encodedSourceText, c => c.GetMember("C.E"), fallbackEncoding: encoding);
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    pdbLocation,
+                    Location.Embedded,
+                    encodedSourceText,
+                    c => c.GetMember("C.E"),
+                    fallbackEncoding: encoding
+                );
 
-                var (actualText, _) = await GetGeneratedSourceTextAsync(project, symbol, Location.Embedded, expectNullResult: false);
+                var (actualText, _) = await GetGeneratedSourceTextAsync(
+                    project,
+                    symbol,
+                    Location.Embedded,
+                    expectNullResult: false
+                );
 
                 AssertEx.NotNull(actualText);
                 AssertEx.NotNull(actualText.Encoding);
@@ -900,7 +1240,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
             await RunTestAsync(async path =>
             {
                 var sourceText = SourceText.From(source, Encoding.UTF8);
-                var (project, symbol) = await CompileAndFindSymbolAsync(path, Location.Embedded, Location.Embedded, sourceText, c => c.GetMember("C.E"));
+                var (project, symbol) = await CompileAndFindSymbolAsync(
+                    path,
+                    Location.Embedded,
+                    Location.Embedded,
+                    sourceText,
+                    c => c.GetMember("C.E")
+                );
 
                 using var workspace = (TestWorkspace)project.Solution.Workspace;
 
@@ -909,9 +1255,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 {
                     var options = MetadataAsSourceOptions.GetDefault(project.Services) with
                     {
-                        NavigateToSourceLinkAndEmbeddedSources = false
+                        NavigateToSourceLinkAndEmbeddedSources = false,
                     };
-                    var file = await service.GetGeneratedFileAsync(workspace, project, symbol, signaturesOnly: false, options, CancellationToken.None).ConfigureAwait(false);
+                    var file = await service
+                        .GetGeneratedFileAsync(
+                            workspace,
+                            project,
+                            symbol,
+                            signaturesOnly: false,
+                            options,
+                            CancellationToken.None
+                        )
+                        .ConfigureAwait(false);
 
                     Assert.Same(NullResultMetadataAsSourceFileProvider.NullResult, file);
                 }
@@ -954,28 +1309,53 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.PdbSourceDocument
                 var sourceText1 = SourceText.From(source1, Encoding.UTF8);
                 var sourceText2 = SourceText.From(source2, Encoding.UTF8);
 
-                var workspace = TestWorkspace.Create(@$"
+                var workspace = TestWorkspace.Create(
+                    @$"
 <Workspace>
     <Project Language=""{LanguageNames.CSharp}"" CommonReferences=""true"" ReferencesOnDisk=""true"">
     </Project>
-</Workspace>", composition: GetTestComposition());
+</Workspace>",
+                    composition: GetTestComposition()
+                );
 
                 var project = workspace.CurrentSolution.Projects.First();
 
                 var dllFilePath = GetDllPath(path);
                 var sourceCodePath = GetSourceFilePath(path);
                 var pdbFilePath = GetPdbPath(path);
-                CompileTestSource(dllFilePath, [Path.Combine(path, "source1.cs"), Path.Combine(path, "source2.cs")], pdbFilePath, "reference", [sourceText1, sourceText2], project, Location.Embedded, Location.Embedded, buildReferenceAssembly: false, windowsPdb: false);
+                CompileTestSource(
+                    dllFilePath,
+                    [Path.Combine(path, "source1.cs"), Path.Combine(path, "source2.cs")],
+                    pdbFilePath,
+                    "reference",
+                    [sourceText1, sourceText2],
+                    project,
+                    Location.Embedded,
+                    Location.Embedded,
+                    buildReferenceAssembly: false,
+                    windowsPdb: false
+                );
 
-                project = project.AddMetadataReference(MetadataReference.CreateFromFile(GetDllPath(path)));
+                project = project.AddMetadataReference(
+                    MetadataReference.CreateFromFile(GetDllPath(path))
+                );
 
-                var mainCompilation = await project.GetRequiredCompilationAsync(CancellationToken.None).ConfigureAwait(false);
+                var mainCompilation = await project
+                    .GetRequiredCompilationAsync(CancellationToken.None)
+                    .ConfigureAwait(false);
 
                 var symbol = mainCompilation.GetMember("C.M2");
 
                 AssertEx.NotNull(symbol, $"Couldn't find symbol to go-to-def for.");
 
-                await GenerateFileAndVerifyAsync(project, symbol, Location.Embedded, source2.ToString(), expectedSpan, expectNullResult: false);
+                await GenerateFileAndVerifyAsync(
+                    project,
+                    symbol,
+                    Location.Embedded,
+                    source2.ToString(),
+                    expectedSpan,
+                    expectNullResult: false
+                );
             });
         }
     }

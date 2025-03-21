@@ -9,7 +9,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         internal readonly CSharpCompilation Compilation;
         internal readonly EvaluationContext? EvaluationContext;
 
-        internal CSharpMetadataContext(CSharpCompilation compilation, EvaluationContext? evaluationContext = null)
+        internal CSharpMetadataContext(
+            CSharpCompilation compilation,
+            EvaluationContext? evaluationContext = null
+        )
         {
             Compilation = compilation;
             EvaluationContext = evaluationContext;

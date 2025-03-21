@@ -8,9 +8,7 @@ namespace System.Runtime.Serialization.Formatters.Binary
         internal int _objectId;
         internal int _value;
 
-        internal BinaryCrossAppDomainString()
-        {
-        }
+        internal BinaryCrossAppDomainString() { }
 
         public void Write(BinaryFormatterWriter output)
         {

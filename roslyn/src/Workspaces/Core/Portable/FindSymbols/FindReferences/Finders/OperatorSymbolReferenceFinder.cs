@@ -12,22 +12,38 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal sealed class OperatorSymbolReferenceFinder : AbstractMethodOrPropertyOrEventSymbolReferenceFinder<IMethodSymbol>
+    internal sealed class OperatorSymbolReferenceFinder
+        : AbstractMethodOrPropertyOrEventSymbolReferenceFinder<IMethodSymbol>
     {
-        protected override bool CanFind(IMethodSymbol symbol)
-            => symbol.MethodKind is MethodKind.UserDefinedOperator or MethodKind.BuiltinOperator;
+        protected override bool CanFind(IMethodSymbol symbol) =>
+            symbol.MethodKind is MethodKind.UserDefinedOperator or MethodKind.BuiltinOperator;
 
-        protected sealed override async Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
+        protected sealed override async Task<
+            ImmutableArray<Document>
+        > DetermineDocumentsToSearchAsync(
             IMethodSymbol symbol,
             HashSet<string>? globalAliases,
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var op = symbol.GetPredefinedOperator();
-            var documentsWithOp = await FindDocumentsAsync(project, documents, op, cancellationToken).ConfigureAwait(false);
-            var documentsWithGlobalAttributes = await FindDocumentsWithGlobalSuppressMessageAttributeAsync(project, documents, cancellationToken).ConfigureAwait(false);
+            var documentsWithOp = await FindDocumentsAsync(
+                    project,
+                    documents,
+                    op,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var documentsWithGlobalAttributes =
+                await FindDocumentsWithGlobalSuppressMessageAttributeAsync(
+                        project,
+                        documents,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             return documentsWithOp.Concat(documentsWithGlobalAttributes);
         }
 
@@ -35,32 +51,52 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
             Project project,
             IImmutableSet<Document>? documents,
             PredefinedOperator op,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (op == PredefinedOperator.None)
                 return SpecializedTasks.EmptyImmutableArray<Document>();
 
             return FindDocumentsWithPredicateAsync(
-                project, documents, static (index, op) => index.ContainsPredefinedOperator(op), op, cancellationToken);
+                project,
+                documents,
+                static (index, op) => index.ContainsPredefinedOperator(op),
+                op,
+                cancellationToken
+            );
         }
 
-        protected sealed override async ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
+        protected sealed override async ValueTask<
+            ImmutableArray<FinderLocation>
+        > FindReferencesInDocumentAsync(
             IMethodSymbol symbol,
             FindReferencesDocumentState state,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var op = symbol.GetPredefinedOperator();
-            var tokens = state.Root
-                .DescendantTokens(descendIntoTrivia: true)
+            var tokens = state
+                .Root.DescendantTokens(descendIntoTrivia: true)
                 .WhereAsArray(
-                    static (token, tuple) => IsPotentialReference(tuple.state.SyntaxFacts, tuple.op, token),
-                    (state, op));
+                    static (token, tuple) =>
+                        IsPotentialReference(tuple.state.SyntaxFacts, tuple.op, token),
+                    (state, op)
+                );
 
             var opReferences = await FindReferencesInTokensAsync(
-                symbol, state, tokens, cancellationToken).ConfigureAwait(false);
+                    symbol,
+                    state,
+                    tokens,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var suppressionReferences = await FindReferencesInDocumentInsideGlobalSuppressionsAsync(
-                symbol, state, cancellationToken).ConfigureAwait(false);
+                    symbol,
+                    state,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return opReferences.Concat(suppressionReferences);
         }
@@ -68,9 +104,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         private static bool IsPotentialReference(
             ISyntaxFactsService syntaxFacts,
             PredefinedOperator op,
-            SyntaxToken token)
+            SyntaxToken token
+        )
         {
-            return syntaxFacts.TryGetPredefinedOperator(token, out var actualOperator) && actualOperator == op;
+            return syntaxFacts.TryGetPredefinedOperator(token, out var actualOperator)
+                && actualOperator == op;
         }
     }
 }

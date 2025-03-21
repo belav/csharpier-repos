@@ -19,6 +19,7 @@ using Xunit;
 public class DblArray4
 {
     private static int s_LOH_GEN = 0;
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -27,7 +28,10 @@ public class DblArray4
             s_LOH_GEN = 2;
         }
 
-        Console.WriteLine("DoubleArrayToLargeObjectHeap is {0}", Environment.GetEnvironmentVariable("DOTNET_DoubleArrayToLargeObjectHeap"));
+        Console.WriteLine(
+            "DoubleArrayToLargeObjectHeap is {0}",
+            Environment.GetEnvironmentVariable("DOTNET_DoubleArrayToLargeObjectHeap")
+        );
 
         try
         {

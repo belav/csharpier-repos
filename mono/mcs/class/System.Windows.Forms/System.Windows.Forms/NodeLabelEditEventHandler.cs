@@ -22,12 +22,9 @@
 // Authors:
 //	Jackson Harper (jackson@ximian.com)
 
-
 using System;
 
-namespace System.Windows.Forms {
-
-	public delegate void NodeLabelEditEventHandler (object sender, NodeLabelEditEventArgs e);
-
+namespace System.Windows.Forms
+{
+    public delegate void NodeLabelEditEventHandler(object sender, NodeLabelEditEventArgs e);
 }
-

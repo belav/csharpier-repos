@@ -6,29 +6,29 @@ namespace System.ServiceModel.Activation
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading;
     using System.Diagnostics;
-    using System.Runtime;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using System.Runtime;
+    using System.Threading;
 
     // This class implements an LRU cache that support recycling of oldest items.
     //
-    // The read path is very light-weighted. It takes the reader lock, do a cache lookup, and increment the counter to 
+    // The read path is very light-weighted. It takes the reader lock, do a cache lookup, and increment the counter to
     // make sure the item is up-to-date.
     //
     // It exposes the writer lock through an IDisposable object through CreateWriterLockScope(). Whenever a modification
     // is required to the cache, we create a scope to perform the work.
-    // 
-    // It exposes a list of "unsafe" methods for cache modifications. These operations should be invoked only inside a 
+    //
+    // It exposes a list of "unsafe" methods for cache modifications. These operations should be invoked only inside a
     // WriterLockScope.
     //
-    // Recycling happens in batches. The method UnsafeBeginBatchCollect() finds a batch of items, remove them from the 
+    // Recycling happens in batches. The method UnsafeBeginBatchCollect() finds a batch of items, remove them from the
     // cache, and have them closed. The counter is updated whenever Collect happens.
     //
     // It supports the recycling for the whole cache. In order to avoid blocking the closing, the asynchronous method
     // UnsafeBeginCollectAll() is used to initiate the close operations for all of the nodes.
-    // 
+    //
     // Since the cache favors reads than writes, the items in the cache are not sorted until a Collect operation happens.
     // When the Collect operation happens, items are sorted by the LastCounter field of CollectibleNode. Oldest items which
     // are collectible (CanClose returns true) are moved into the batch for collection.
@@ -37,7 +37,7 @@ namespace System.ServiceModel.Activation
     // - collectPercentageInOneBatch: This defines how many items the batch can have for a single Collect operation.
     //   We need to best leverage the machine capacity but at the same time have an efficient recycling result. This
     //   number defines the percentage of items in the cache to be collected. The value is hard-coded to be 25%.
-    // - minSkipCountForWrites: This defines the consecutive writes (service activation, for example) before the next 
+    // - minSkipCountForWrites: This defines the consecutive writes (service activation, for example) before the next
     // Collect operation.
     class CollectibleLRUCache<TKey, TValue>
     {
@@ -75,7 +75,7 @@ namespace System.ServiceModel.Activation
                     CollectibleNode node = UnsafeGet(key);
                     if (node != null)
                     {
-                        // Record the last counter in the node. We don't take a writer lock here because the counter does 
+                        // Record the last counter in the node. We don't take a writer lock here because the counter does
                         // not have to be very accurate.
                         node.LastCounter = Interlocked.Increment(ref counter);
                     }
@@ -110,8 +110,8 @@ namespace System.ServiceModel.Activation
 
                 if (node != null)
                 {
-                    // Record the last counter in the node. We don't take a writer lock here because the counter does 
-                    // not have to be very accurate. 
+                    // Record the last counter in the node. We don't take a writer lock here because the counter does
+                    // not have to be very accurate.
                     node.LastCounter = Interlocked.Increment(ref counter);
                 }
             }
@@ -132,7 +132,10 @@ namespace System.ServiceModel.Activation
         // This method must be called inside a writable lock
         public void UnsafeAdd(CollectibleNode node)
         {
-            Fx.Assert(rwLock.IsWriteLockHeld, "This method can be called only when the WriterLock is acquired");
+            Fx.Assert(
+                rwLock.IsWriteLockHeld,
+                "This method can be called only when the WriterLock is acquired"
+            );
 
             writeCounter++;
             directory.Add(node.GetKey(), node);
@@ -147,7 +150,10 @@ namespace System.ServiceModel.Activation
 
         public bool UnsafeBeginBatchCollect(bool collectingAll)
         {
-            Fx.Assert(rwLock.IsWriteLockHeld, "This method can be called only when the WriterLock is acquired");
+            Fx.Assert(
+                rwLock.IsWriteLockHeld,
+                "This method can be called only when the WriterLock is acquired"
+            );
 
             if (collectingAll)
             {
@@ -204,8 +210,11 @@ namespace System.ServiceModel.Activation
             return true;
         }
 
-        [SuppressMessage(FxCop.Category.Reliability, FxCop.Rule.AvoidCallingProblematicMethods,
-            Justification = "Calling GC.Collect to control memory usage more explicitly.")]        
+        [SuppressMessage(
+            FxCop.Category.Reliability,
+            FxCop.Rule.AvoidCallingProblematicMethods,
+            Justification = "Calling GC.Collect to control memory usage more explicitly."
+        )]
         public void EndBatchCollect()
         {
             currentCollectibleBatch.WaitForRecyclingCompletion();
@@ -238,10 +247,7 @@ namespace System.ServiceModel.Activation
 
         public int Count
         {
-            get
-            {
-                return this.directory.Count;
-            }
+            get { return this.directory.Count; }
         }
 
         public IDisposable CreateWriterLockScope()
@@ -265,7 +271,8 @@ namespace System.ServiceModel.Activation
 
         internal abstract class CollectibleNode
         {
-            public static Comparison<CollectibleNode> CounterComparison = new Comparison<CollectibleNode>(CounterLessThan);
+            public static Comparison<CollectibleNode> CounterComparison =
+                new Comparison<CollectibleNode>(CounterLessThan);
             public int LastCounter;
             public abstract TKey GetKey();
             public abstract IAsyncResult BeginClose(AsyncCallback callback, object state);
@@ -283,6 +290,7 @@ namespace System.ServiceModel.Activation
         class WriterLockScope : IDisposable
         {
             ReaderWriterLockSlim rwLock;
+
             public WriterLockScope(ReaderWriterLockSlim rwLock)
             {
                 this.rwLock = rwLock;
@@ -305,7 +313,9 @@ namespace System.ServiceModel.Activation
             {
                 // The event is initially set when the batch is empty.
                 recyclingCompletedWaitHandle = new ManualResetEvent(true);
-                collectibleNodeClosedCallback = Fx.ThunkCallback(new AsyncCallback(OnCollectibleNodeClosed));
+                collectibleNodeClosedCallback = Fx.ThunkCallback(
+                    new AsyncCallback(OnCollectibleNodeClosed)
+                );
             }
 
             public void BeginCollect()
@@ -319,7 +329,8 @@ namespace System.ServiceModel.Activation
                 recyclingCompletedWaitHandle.Reset();
                 for (int i = 0; i < this.Count; i++)
                 {
-                    IAsyncResult result = this[i].BeginClose(collectibleNodeClosedCallback, this[i]);
+                    IAsyncResult result = this[i]
+                        .BeginClose(collectibleNodeClosedCallback, this[i]);
                     if (result == null)
                     {
                         DecrementCollectCount();
@@ -377,7 +388,6 @@ namespace System.ServiceModel.Activation
 
                 DecrementCollectCount();
             }
-
         }
     }
 }

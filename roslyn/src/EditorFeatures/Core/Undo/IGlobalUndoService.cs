@@ -26,6 +26,9 @@ namespace Microsoft.CodeAnalysis.Editor.Undo
         /// <summary>
         /// open global undo transaction for the workspace
         /// </summary>
-        IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(Workspace workspace, string description);
+        IWorkspaceGlobalUndoTransaction OpenGlobalUndoTransaction(
+            Workspace workspace,
+            string description
+        );
     }
 }

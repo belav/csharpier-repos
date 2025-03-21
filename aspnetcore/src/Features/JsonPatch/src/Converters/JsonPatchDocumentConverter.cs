@@ -19,12 +19,19 @@ public class JsonPatchDocumentConverter : JsonConverter
         return true;
     }
 
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue,
-        JsonSerializer serializer)
+    public override object ReadJson(
+        JsonReader reader,
+        Type objectType,
+        object existingValue,
+        JsonSerializer serializer
+    )
     {
         if (objectType != typeof(JsonPatchDocument))
         {
-            throw new ArgumentException(Resources.FormatParameterMustMatchType(nameof(objectType), "JsonPatchDocument"), nameof(objectType));
+            throw new ArgumentException(
+                Resources.FormatParameterMustMatchType(nameof(objectType), "JsonPatchDocument"),
+                nameof(objectType)
+            );
         }
 
         try

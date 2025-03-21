@@ -16,7 +16,10 @@ public class ViewDataOfTTest
 
         // Act and Assert
         Exception ex = Assert.Throws<InvalidOperationException>(() => viewData.Model = null);
-        Assert.Equal("The model item passed is null, but this ViewDataDictionary instance requires a non-null model item of type 'System.Int32'.", ex.Message);
+        Assert.Equal(
+            "The model item passed is null, but this ViewDataDictionary instance requires a non-null model item of type 'System.Int32'.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -27,8 +30,13 @@ public class ViewDataOfTTest
         ViewDataDictionary viewData = viewDataOfT;
 
         // Act and Assert
-        Exception ex = Assert.Throws<InvalidOperationException>(() => viewData.Model = DateTime.UtcNow);
-        Assert.Equal("The model item passed into the ViewDataDictionary is of type 'System.DateTime', but this ViewDataDictionary instance requires a model item of type 'System.String'.", ex.Message);
+        Exception ex = Assert.Throws<InvalidOperationException>(() =>
+            viewData.Model = DateTime.UtcNow
+        );
+        Assert.Equal(
+            "The model item passed into the ViewDataDictionary is of type 'System.DateTime', but this ViewDataDictionary instance requires a model item of type 'System.String'.",
+            ex.Message
+        );
     }
 
     [Fact]

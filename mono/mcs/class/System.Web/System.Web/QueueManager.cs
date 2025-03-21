@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,131 +37,152 @@ using System.Web.Configuration;
 
 namespace System.Web
 {
-	sealed class QueueManager
-	{
-		// keep the defaults in sync with the ones in HttpRuntimeSection.cs
-		int minFree = 8;
-		int minLocalFree = 4;
-		int queueLimit = 5000;
-		Queue queue;
-		bool disposing;
-		Exception initialException;
-		PerformanceCounter requestsQueuedCounter;
-		
-		public QueueManager ()
-		{
-			Exception ex = null;
-			
-			try {
-				HttpRuntimeSection config = HttpRuntime.Section;
-				if (config != null) {
-					minFree = config.MinFreeThreads;
-					minLocalFree = config.MinLocalRequestFreeThreads;
-					queueLimit = config.AppRequestQueueLimit;
-				}
-			} catch (Exception e) {
-				ex = e;
-			}
+    sealed class QueueManager
+    {
+        // keep the defaults in sync with the ones in HttpRuntimeSection.cs
+        int minFree = 8;
+        int minLocalFree = 4;
+        int queueLimit = 5000;
+        Queue queue;
+        bool disposing;
+        Exception initialException;
+        PerformanceCounter requestsQueuedCounter;
 
-			try {
-				queue = new Queue (queueLimit);
-			} catch (Exception e) {
-				if (ex == null) {
-					initialException = e;
-				} else {
-					StringBuilder sb = new StringBuilder ("Several exceptions occurred:\n");
-					sb.AppendFormat ("--- Exception Q1:\n{0}\n", ex.ToString ());
-					sb.AppendFormat ("--- Exception Q2:\n{0}\n", e.ToString ());
-					initialException = new Exception (sb.ToString ());
-				}
-			}
+        public QueueManager()
+        {
+            Exception ex = null;
 
-			if (initialException == null && ex != null)
-				initialException = ex;
+            try
+            {
+                HttpRuntimeSection config = HttpRuntime.Section;
+                if (config != null)
+                {
+                    minFree = config.MinFreeThreads;
+                    minLocalFree = config.MinLocalRequestFreeThreads;
+                    queueLimit = config.AppRequestQueueLimit;
+                }
+            }
+            catch (Exception e)
+            {
+                ex = e;
+            }
 
-			requestsQueuedCounter = new PerformanceCounter ("ASP.NET", "Requests Queued");
-			requestsQueuedCounter.RawValue = 0;
-		}
+            try
+            {
+                queue = new Queue(queueLimit);
+            }
+            catch (Exception e)
+            {
+                if (ex == null)
+                {
+                    initialException = e;
+                }
+                else
+                {
+                    StringBuilder sb = new StringBuilder("Several exceptions occurred:\n");
+                    sb.AppendFormat("--- Exception Q1:\n{0}\n", ex.ToString());
+                    sb.AppendFormat("--- Exception Q2:\n{0}\n", e.ToString());
+                    initialException = new Exception(sb.ToString());
+                }
+            }
 
-		public bool HasException {
-			get { return initialException != null; }
-		}
+            if (initialException == null && ex != null)
+                initialException = ex;
 
-		public Exception InitialException {
-			get { return initialException; }
-		}
-		
-		bool CanExecuteRequest (HttpWorkerRequest req)
-		{
-			if (disposing)
-				return false;
-				
-			int threads, cports;
-			ThreadPool.GetAvailableThreads (out threads, out cports);
-			bool local = (req != null && req.GetLocalAddress () == "127.0.0.1");
-			return (threads > minFree) || (local && threads > minLocalFree);
-		}
+            requestsQueuedCounter = new PerformanceCounter("ASP.NET", "Requests Queued");
+            requestsQueuedCounter.RawValue = 0;
+        }
 
-		public HttpWorkerRequest GetNextRequest (HttpWorkerRequest req)
-		{
-			if (!CanExecuteRequest (req)) {
-				if (!disposing && req != null) {
-					lock (queue) {
-						Queue (req);
-					}
-				}
+        public bool HasException
+        {
+            get { return initialException != null; }
+        }
 
-				return null;
-			}
+        public Exception InitialException
+        {
+            get { return initialException; }
+        }
 
-			HttpWorkerRequest result;
-			lock (queue) {
-				result = Dequeue ();
-				if (result != null) {
-					if (req != null)
-						Queue (req);
-				} else {
-					result = req;
-				}
-			}
+        bool CanExecuteRequest(HttpWorkerRequest req)
+        {
+            if (disposing)
+                return false;
 
-			return result;
-		}
-		
-		void Queue (HttpWorkerRequest wr)
-		{
-			if (queue.Count < queueLimit) {
-				queue.Enqueue (wr);
-				requestsQueuedCounter.Increment ();
-				return;
-			}
+            int threads,
+                cports;
+            ThreadPool.GetAvailableThreads(out threads, out cports);
+            bool local = (req != null && req.GetLocalAddress() == "127.0.0.1");
+            return (threads > minFree) || (local && threads > minLocalFree);
+        }
 
-			HttpRuntime.FinishUnavailable (wr);
-		}
+        public HttpWorkerRequest GetNextRequest(HttpWorkerRequest req)
+        {
+            if (!CanExecuteRequest(req))
+            {
+                if (!disposing && req != null)
+                {
+                    lock (queue)
+                    {
+                        Queue(req);
+                    }
+                }
 
-		HttpWorkerRequest Dequeue ()
-		{
-			if (queue.Count > 0) {
-				HttpWorkerRequest request = (HttpWorkerRequest) queue.Dequeue ();
-				requestsQueuedCounter.Decrement ();
-				return request;
-			}
+                return null;
+            }
 
-			return null;
-		}
+            HttpWorkerRequest result;
+            lock (queue)
+            {
+                result = Dequeue();
+                if (result != null)
+                {
+                    if (req != null)
+                        Queue(req);
+                }
+                else
+                {
+                    result = req;
+                }
+            }
 
-		public void Dispose ()
-		{
-			if (disposing)
-				return;
+            return result;
+        }
 
-			disposing = true;
-			HttpWorkerRequest wr;
-			while ((wr = GetNextRequest (null)) != null)
-				HttpRuntime.FinishUnavailable (wr);
+        void Queue(HttpWorkerRequest wr)
+        {
+            if (queue.Count < queueLimit)
+            {
+                queue.Enqueue(wr);
+                requestsQueuedCounter.Increment();
+                return;
+            }
 
-			queue = null;
-		}
-	}
+            HttpRuntime.FinishUnavailable(wr);
+        }
+
+        HttpWorkerRequest Dequeue()
+        {
+            if (queue.Count > 0)
+            {
+                HttpWorkerRequest request = (HttpWorkerRequest)queue.Dequeue();
+                requestsQueuedCounter.Decrement();
+                return request;
+            }
+
+            return null;
+        }
+
+        public void Dispose()
+        {
+            if (disposing)
+                return;
+
+            disposing = true;
+            HttpWorkerRequest wr;
+            while ((wr = GetNextRequest(null)) != null)
+                HttpRuntime.FinishUnavailable(wr);
+
+            queue = null;
+        }
+    }
 }
-

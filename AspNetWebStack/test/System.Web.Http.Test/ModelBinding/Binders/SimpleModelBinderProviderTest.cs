@@ -16,7 +16,8 @@ namespace System.Web.Http.ModelBinding.Binders
             // Act & assert
             Assert.ThrowsArgumentNull(
                 () => new SimpleModelBinderProvider(typeof(object), (Func<IModelBinder>)null),
-                "modelBinderFactory");
+                "modelBinderFactory"
+            );
         }
 
         [Fact]
@@ -25,7 +26,8 @@ namespace System.Web.Http.ModelBinding.Binders
             // Act & assert
             Assert.ThrowsArgumentNull(
                 () => new SimpleModelBinderProvider(null, () => null),
-                "modelType");
+                "modelType"
+            );
         }
 
         [Fact]
@@ -34,7 +36,8 @@ namespace System.Web.Http.ModelBinding.Binders
             // Act & assert
             Assert.ThrowsArgumentNull(
                 () => new SimpleModelBinderProvider(typeof(object), (IModelBinder)null),
-                "modelBinder");
+                "modelBinder"
+            );
         }
 
         [Fact]
@@ -43,16 +46,20 @@ namespace System.Web.Http.ModelBinding.Binders
             // Act & assert
             Assert.ThrowsArgumentNull(
                 () => new SimpleModelBinderProvider(null, new Mock<IModelBinder>().Object),
-                "modelType");
+                "modelType"
+            );
         }
 
         [Fact]
         public void GetBinder_TypeDoesNotMatch_ReturnsNull()
         {
             // Arrange
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(typeof(string), new Mock<IModelBinder>().Object)
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                typeof(string),
+                new Mock<IModelBinder>().Object
+            )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
             ModelBindingContext bindingContext = GetBindingContext(typeof(object));
 
@@ -68,7 +75,10 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             // Arrange
             IModelBinder binderInstance = new Mock<IModelBinder>().Object;
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(typeof(string), binderInstance);
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                typeof(string),
+                binderInstance
+            );
 
             ModelBindingContext bindingContext = GetBindingContext(typeof(string));
             bindingContext.ValueProvider = new SimpleHttpValueProvider();
@@ -93,9 +103,12 @@ namespace System.Web.Http.ModelBinding.Binders
                 return theBinderInstance;
             };
 
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(typeof(string), factory)
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                typeof(string),
+                factory
+            )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
             ModelBindingContext bindingContext = GetBindingContext(typeof(string));
 
@@ -115,9 +128,12 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             // Arrange
             IModelBinder theBinderInstance = new Mock<IModelBinder>().Object;
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(typeof(string), theBinderInstance)
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                typeof(string),
+                theBinderInstance
+            )
             {
-                SuppressPrefixCheck = true
+                SuppressPrefixCheck = true,
             };
             ModelBindingContext bindingContext = GetBindingContext(typeof(string));
 
@@ -132,18 +148,29 @@ namespace System.Web.Http.ModelBinding.Binders
         public void GetBinderThrowsIfBindingContextIsNull()
         {
             // Arrange
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(typeof(string), new Mock<IModelBinder>().Object);
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                typeof(string),
+                new Mock<IModelBinder>().Object
+            );
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { provider.GetBinder(null, null); }, "modelType");
+                delegate
+                {
+                    provider.GetBinder(null, null);
+                },
+                "modelType"
+            );
         }
 
         [Fact]
         public void ModelTypeProperty()
         {
             // Arrange
-            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(typeof(string), new Mock<IModelBinder>().Object);
+            SimpleModelBinderProvider provider = new SimpleModelBinderProvider(
+                typeof(string),
+                new Mock<IModelBinder>().Object
+            );
 
             // Act & assert
             Assert.Equal(typeof(string), provider.ModelType);
@@ -153,7 +180,10 @@ namespace System.Web.Http.ModelBinding.Binders
         {
             return new ModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(() => null, modelType)
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    () => null,
+                    modelType
+                ),
             };
         }
     }

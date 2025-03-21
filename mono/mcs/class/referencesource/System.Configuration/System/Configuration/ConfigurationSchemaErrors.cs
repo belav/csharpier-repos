@@ -4,13 +4,15 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.Specialized;
     using System.Text;
 
-    internal class ConfigurationSchemaErrors {
+    internal class ConfigurationSchemaErrors
+    {
         // Errors with ExceptionAction.Local are logged to this list.
         // This list is reset when processing of a section is complete.
         // Errors on this list may be added to the _errorsAll list
@@ -25,37 +27,35 @@ namespace System.Configuration {
         // and local errors for input that applies to this config file.
         private List<ConfigurationException> _errorsAll;
 
-        internal ConfigurationSchemaErrors() {}
+        internal ConfigurationSchemaErrors() { }
 
-        internal bool HasLocalErrors {
-            get {
-                return ErrorsHelper.GetHasErrors(_errorsLocal);
-            }
+        internal bool HasLocalErrors
+        {
+            get { return ErrorsHelper.GetHasErrors(_errorsLocal); }
         }
 
-        internal bool HasGlobalErrors {
-            get {
-                return ErrorsHelper.GetHasErrors(_errorsGlobal);
-            }
+        internal bool HasGlobalErrors
+        {
+            get { return ErrorsHelper.GetHasErrors(_errorsGlobal); }
         }
 
-        private bool HasAllErrors {
-            get {
-                return ErrorsHelper.GetHasErrors(_errorsAll);
-            }
+        private bool HasAllErrors
+        {
+            get { return ErrorsHelper.GetHasErrors(_errorsAll); }
         }
 
-        internal int GlobalErrorCount {
-            get {
-                return ErrorsHelper.GetErrorCount(_errorsGlobal);
-            }
+        internal int GlobalErrorCount
+        {
+            get { return ErrorsHelper.GetErrorCount(_errorsGlobal); }
         }
 
         //
         // Add a configuration Error.
         //
-        internal void AddError(ConfigurationException ce, ExceptionAction action) {
-            switch (action) {
+        internal void AddError(ConfigurationException ce, ExceptionAction action)
+        {
+            switch (action)
+            {
                 case ExceptionAction.Global:
                     ErrorsHelper.AddError(ref _errorsAll, ce);
                     ErrorsHelper.AddError(ref _errorsGlobal, ce);
@@ -71,7 +71,8 @@ namespace System.Configuration {
             }
         }
 
-        internal void SetSingleGlobalError(ConfigurationException ce) {
+        internal void SetSingleGlobalError(ConfigurationException ce)
+        {
             _errorsAll = null;
             _errorsLocal = null;
             _errorsGlobal = null;
@@ -79,11 +80,14 @@ namespace System.Configuration {
             AddError(ce, ExceptionAction.Global);
         }
 
-        internal bool HasErrors(bool ignoreLocal) {
-            if (ignoreLocal) {
+        internal bool HasErrors(bool ignoreLocal)
+        {
+            if (ignoreLocal)
+            {
                 return HasGlobalErrors;
             }
-            else {
+            else
+            {
                 return HasAllErrors;
             }
         }
@@ -99,14 +103,18 @@ namespace System.Configuration {
         // Note: We will always return all the errors, no matter what
         //       IgnoreLocal is.
         //
-        internal void ThrowIfErrors(bool ignoreLocal) {
-            if (HasErrors(ignoreLocal)) {
-                if (HasGlobalErrors) {
+        internal void ThrowIfErrors(bool ignoreLocal)
+        {
+            if (HasErrors(ignoreLocal))
+            {
+                if (HasGlobalErrors)
+                {
                     // Throw just the global errors, as they invalidate
                     // all other config file parsing.
                     throw new ConfigurationErrorsException(_errorsGlobal);
                 }
-                else {
+                else
+                {
                     // Throw all errors no matter what
                     throw new ConfigurationErrorsException(_errorsAll);
                 }
@@ -117,11 +125,13 @@ namespace System.Configuration {
         //
         // Retrieve the Local Errors, and Reset them to none.
         //
-        internal List<ConfigurationException> RetrieveAndResetLocalErrors(bool keepLocalErrors) {
+        internal List<ConfigurationException> RetrieveAndResetLocalErrors(bool keepLocalErrors)
+        {
             List<ConfigurationException> list = _errorsLocal;
             _errorsLocal = null;
 
-            if (keepLocalErrors) {
+            if (keepLocalErrors)
+            {
                 ErrorsHelper.AddErrors(ref _errorsAll, list);
             }
 
@@ -131,7 +141,8 @@ namespace System.Configuration {
         //
         // Add errors that have been saved for a specific section.
         //
-        internal void AddSavedLocalErrors(ICollection<ConfigurationException> coll) {
+        internal void AddSavedLocalErrors(ICollection<ConfigurationException> coll)
+        {
             ErrorsHelper.AddErrors(ref _errorsAll, coll);
         }
 
@@ -139,7 +150,8 @@ namespace System.Configuration {
         //
         // Remove all the Local Errors, so we can start from scratch
         //
-        internal void ResetLocalErrors() {
+        internal void ResetLocalErrors()
+        {
             RetrieveAndResetLocalErrors(false);
         }
     }

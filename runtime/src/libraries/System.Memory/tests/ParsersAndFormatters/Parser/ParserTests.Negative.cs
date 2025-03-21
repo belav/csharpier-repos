@@ -11,7 +11,15 @@ namespace System.Buffers.Text.Tests
         [MemberData(nameof(TestData.TypesThatCanBeParsed), MemberType = typeof(TestData))]
         public static void TestParserBadFormat(Type type)
         {
-            Assert.Throws<FormatException>(() => TryParseUtf8(type, Array.Empty<byte>(), out object value, out int bytesConsumed, '$'));
+            Assert.Throws<FormatException>(() =>
+                TryParseUtf8(
+                    type,
+                    Array.Empty<byte>(),
+                    out object value,
+                    out int bytesConsumed,
+                    '$'
+                )
+            );
         }
     }
 }

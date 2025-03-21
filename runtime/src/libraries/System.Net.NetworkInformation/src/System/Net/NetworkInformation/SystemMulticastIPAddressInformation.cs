@@ -13,83 +13,67 @@ namespace System.Net.NetworkInformation
             _innerInfo = addressInfo;
         }
 
-        public override IPAddress Address { get { return _innerInfo.Address; } }
+        public override IPAddress Address
+        {
+            get { return _innerInfo.Address; }
+        }
 
         // The address is a cluster address and shouldn't be used by most applications.
         public override bool IsTransient
         {
-            get
-            {
-                return (_innerInfo.IsTransient);
-            }
+            get { return (_innerInfo.IsTransient); }
         }
 
         // This address can be used for DNS.
         public override bool IsDnsEligible
         {
-            get
-            {
-                return (_innerInfo.IsDnsEligible);
-            }
+            get { return (_innerInfo.IsDnsEligible); }
         }
 
         public override PrefixOrigin PrefixOrigin
         {
-            get
-            {
-                return PrefixOrigin.Other;
-            }
+            get { return PrefixOrigin.Other; }
         }
 
         public override SuffixOrigin SuffixOrigin
         {
-            get
-            {
-                return SuffixOrigin.Other;
-            }
+            get { return SuffixOrigin.Other; }
         }
 
         public override DuplicateAddressDetectionState DuplicateAddressDetectionState
         {
-            get
-            {
-                return DuplicateAddressDetectionState.Invalid;
-            }
+            get { return DuplicateAddressDetectionState.Invalid; }
         }
 
         // Specifies the valid lifetime of the address in seconds.
         public override long AddressValidLifetime
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         // Specifies the preferred lifetime of the address in seconds.
         public override long AddressPreferredLifetime
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         // Specifies the preferred lifetime of the address in seconds.
         public override long DhcpLeaseLifetime
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
-        internal static MulticastIPAddressInformationCollection ToMulticastIpAddressInformationCollection(IPAddressInformationCollection addresses)
+        internal static MulticastIPAddressInformationCollection ToMulticastIpAddressInformationCollection(
+            IPAddressInformationCollection addresses
+        )
         {
-            MulticastIPAddressInformationCollection multicastList = new MulticastIPAddressInformationCollection();
+            MulticastIPAddressInformationCollection multicastList =
+                new MulticastIPAddressInformationCollection();
             foreach (IPAddressInformation addressInfo in addresses)
             {
-                multicastList.InternalAdd(new SystemMulticastIPAddressInformation((SystemIPAddressInformation)addressInfo));
+                multicastList.InternalAdd(
+                    new SystemMulticastIPAddressInformation((SystemIPAddressInformation)addressInfo)
+                );
             }
             return multicastList;
         }

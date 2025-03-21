@@ -8,6 +8,4 @@ namespace Microsoft.AspNetCore.Mvc.RazorPages;
 /// the model instance. The property must have a public set method.
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false, Inherited = true)]
-public class PageContextAttribute : Attribute
-{
-}
+public class PageContextAttribute : Attribute { }

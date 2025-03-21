@@ -78,18 +78,40 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             Assert.True(Empty<int, int>().ToReadOnlyDictionary().Equals(Empty<int, int>()));
             Assert.True(Empty<int, int>().Equals(Empty<int, int>().ToReadOnlyDictionary()));
-            Assert.True(Empty<int, int>().ToReadOnlyDictionary().Equals(Empty<int, int>().ToReadOnlyDictionary()));
-            Assert.False(Empty<int, int>().Add(3, 1).ToReadOnlyDictionary().Equals(Empty<int, int>()));
-            Assert.False(Empty<int, int>().Equals(Empty<int, int>().Add(3, 1).ToReadOnlyDictionary()));
-            Assert.False(Empty<int, int>().ToReadOnlyDictionary().Equals(Empty<int, int>().Add(3, 1).ToReadOnlyDictionary()));
+            Assert.True(
+                Empty<int, int>()
+                    .ToReadOnlyDictionary()
+                    .Equals(Empty<int, int>().ToReadOnlyDictionary())
+            );
+            Assert.False(
+                Empty<int, int>().Add(3, 1).ToReadOnlyDictionary().Equals(Empty<int, int>())
+            );
+            Assert.False(
+                Empty<int, int>().Equals(Empty<int, int>().Add(3, 1).ToReadOnlyDictionary())
+            );
+            Assert.False(
+                Empty<int, int>()
+                    .ToReadOnlyDictionary()
+                    .Equals(Empty<int, int>().Add(3, 1).ToReadOnlyDictionary())
+            );
         }
 
         [Fact]
         public void AddRangeTest()
         {
             var map = Empty<int, GenericParameterHelper>();
-            map = map.AddRange(Enumerable.Range(1, 100).Select(n => new KeyValuePair<int, GenericParameterHelper>(n, new GenericParameterHelper())));
-            CollectionAssertAreEquivalent(map.Select(kv => kv.Key).ToList(), Enumerable.Range(1, 100).ToList());
+            map = map.AddRange(
+                Enumerable
+                    .Range(1, 100)
+                    .Select(n => new KeyValuePair<int, GenericParameterHelper>(
+                        n,
+                        new GenericParameterHelper()
+                    ))
+            );
+            CollectionAssertAreEquivalent(
+                map.Select(kv => kv.Key).ToList(),
+                Enumerable.Range(1, 100).ToList()
+            );
             Assert.Equal(100, map.Count);
 
             // Test optimization for empty map.
@@ -122,7 +144,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             AddRemoveEnumerableTestHelper(Empty<int, int>());
         }
 
-        private static IImmutableDictionary<TKey, TValue> AddTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue> map, TKey key, TValue value) where TKey : IComparable<TKey>
+        private static IImmutableDictionary<TKey, TValue> AddTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue> map,
+            TKey key,
+            TValue value
+        )
+            where TKey : IComparable<TKey>
         {
             Assert.NotNull(map);
             Assert.NotNull(key);
@@ -137,7 +164,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return addedMap;
         }
 
-        protected static void AddAscendingTestHelper(IImmutableDictionary<int, GenericParameterHelper> map)
+        protected static void AddAscendingTestHelper(
+            IImmutableDictionary<int, GenericParameterHelper> map
+        )
         {
             Assert.NotNull(map);
 
@@ -153,7 +182,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             }
         }
 
-        protected static void AddDescendingTestHelper(IImmutableDictionary<int, GenericParameterHelper> map)
+        protected static void AddDescendingTestHelper(
+            IImmutableDictionary<int, GenericParameterHelper> map
+        )
         {
             for (int i = 10; i > 0; i--)
             {
@@ -167,7 +198,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             }
         }
 
-        protected static void AddRemoveRandomDataTestHelper(IImmutableDictionary<double, GenericParameterHelper> map)
+        protected static void AddRemoveRandomDataTestHelper(
+            IImmutableDictionary<double, GenericParameterHelper> map
+        )
         {
             Assert.NotNull(map);
 
@@ -197,14 +230,21 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             Assert.True(IsSame(empty, empty.RemoveRange(Enumerable.Empty<int>())));
             Assert.True(IsSame(empty, empty.AddRange(Enumerable.Empty<KeyValuePair<int, int>>())));
-            var list = new List<KeyValuePair<int, int>> { new KeyValuePair<int, int>(3, 5), new KeyValuePair<int, int>(8, 10) };
+            var list = new List<KeyValuePair<int, int>>
+            {
+                new KeyValuePair<int, int>(3, 5),
+                new KeyValuePair<int, int>(8, 10),
+            };
             var nonEmpty = empty.AddRange(list);
             var halfRemoved = nonEmpty.RemoveRange(Enumerable.Range(1, 5));
             Assert.Equal(1, halfRemoved.Count);
             Assert.True(halfRemoved.ContainsKey(8));
         }
 
-        protected static void KeysTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue?> map, TKey key)
+        protected static void KeysTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue?> map,
+            TKey key
+        )
             where TKey : notnull
         {
             Assert.Equal(0, map.Keys.Count());
@@ -216,7 +256,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             KeysOrValuesTestHelper(((IDictionary<TKey, TValue>)nonEmpty).Keys, key);
         }
 
-        protected static void ValuesTestHelper<TKey, TValue>(IImmutableDictionary<TKey, TValue?> map, TKey key)
+        protected static void ValuesTestHelper<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue?> map,
+            TKey key
+        )
         {
             Assert.Equal(0, map.Values.Count());
             Assert.Equal(0, map.ToReadOnlyDictionary().Values.Count());
@@ -227,7 +270,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             KeysOrValuesTestHelper(((IDictionary<TKey, TValue?>)nonEmpty).Values, default(TValue));
         }
 
-        protected static void EnumeratorTestHelper(IImmutableDictionary<int, GenericParameterHelper> map)
+        protected static void EnumeratorTestHelper(
+            IImmutableDictionary<int, GenericParameterHelper> map
+        )
         {
             for (int i = 0; i < 10; i++)
             {
@@ -243,7 +288,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             }
 
             var list = map.ToList();
-            Assert.Equal<KeyValuePair<int, GenericParameterHelper>>(list, ToListNonGeneric<KeyValuePair<int, GenericParameterHelper>>(map));
+            Assert.Equal<KeyValuePair<int, GenericParameterHelper>>(
+                list,
+                ToListNonGeneric<KeyValuePair<int, GenericParameterHelper>>(map)
+            );
 
             // Apply some less common uses to the enumerator to test its metal.
             using (var enumerator = map.GetEnumerator())

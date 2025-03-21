@@ -17,26 +17,26 @@ namespace System.Net.Configuration
         {
             this.properties.Add(this.enabled);
         }
-        
-        [ConfigurationProperty(ConfigurationStrings.Enabled, DefaultValue=false)]
+
+        [ConfigurationProperty(ConfigurationStrings.Enabled, DefaultValue = false)]
         public bool Enabled
         {
-            get { return (bool) this[this.enabled]; }
+            get { return (bool)this[this.enabled]; }
             set { this[this.enabled] = value; }
         }
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get 
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty enabled =
-            new ConfigurationProperty(ConfigurationStrings.Enabled, typeof(bool), false,
-                    ConfigurationPropertyOptions.None);
+        readonly ConfigurationProperty enabled = new ConfigurationProperty(
+            ConfigurationStrings.Enabled,
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
     }
 }

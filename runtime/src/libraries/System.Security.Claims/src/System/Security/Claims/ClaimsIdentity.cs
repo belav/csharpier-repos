@@ -52,9 +52,13 @@ namespace System.Security.Claims
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
         /// </summary>
         public ClaimsIdentity()
-            : this((IIdentity?)null, (IEnumerable<Claim>?)null, (string?)null, (string?)null, (string?)null)
-        {
-        }
+            : this(
+                (IIdentity?)null,
+                (IEnumerable<Claim>?)null,
+                (string?)null,
+                (string?)null,
+                (string?)null
+            ) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -63,8 +67,7 @@ namespace System.Security.Claims
         /// <remarks><seealso cref="ClaimsIdentity(IIdentity, IEnumerable{Claim}, string, string, string)"/> for details on how internal values are set.</remarks>
         public ClaimsIdentity(IIdentity? identity)
             : this(identity, (IEnumerable<Claim>?)null, (string?)null, (string?)null, (string?)null)
-        {
-        }
+        { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -74,18 +77,20 @@ namespace System.Security.Claims
         /// <remarks><seealso cref="ClaimsIdentity(IIdentity, IEnumerable{Claim}, string, string, string)"/> for details on how internal values are set.</remarks>
         /// </remarks>
         public ClaimsIdentity(IEnumerable<Claim>? claims)
-            : this((IIdentity?)null, claims, (string?)null, (string?)null, (string?)null)
-        {
-        }
+            : this((IIdentity?)null, claims, (string?)null, (string?)null, (string?)null) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
         /// </summary>
         /// <param name="authenticationType">The authentication method used to establish this identity.</param>
         public ClaimsIdentity(string? authenticationType)
-            : this((IIdentity?)null, (IEnumerable<Claim>?)null, authenticationType, (string?)null, (string?)null)
-        {
-        }
+            : this(
+                (IIdentity?)null,
+                (IEnumerable<Claim>?)null,
+                authenticationType,
+                (string?)null,
+                (string?)null
+            ) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -94,9 +99,7 @@ namespace System.Security.Claims
         /// <param name="authenticationType">The authentication method used to establish this identity.</param>
         /// <remarks><seealso cref="ClaimsIdentity(IIdentity, IEnumerable{Claim}, string, string, string)"/> for details on how internal values are set.</remarks>
         public ClaimsIdentity(IEnumerable<Claim>? claims, string? authenticationType)
-            : this((IIdentity?)null, claims, authenticationType, (string?)null, (string?)null)
-        {
-        }
+            : this((IIdentity?)null, claims, authenticationType, (string?)null, (string?)null) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -105,9 +108,7 @@ namespace System.Security.Claims
         /// <param name="claims"><see cref="IEnumerable{Claim}"/> associated with this instance.</param>
         /// <remarks><seealso cref="ClaimsIdentity(IIdentity, IEnumerable{Claim}, string, string, string)"/> for details on how internal values are set.</remarks>
         public ClaimsIdentity(IIdentity? identity, IEnumerable<Claim>? claims)
-            : this(identity, claims, (string?)null, (string?)null, (string?)null)
-        {
-        }
+            : this(identity, claims, (string?)null, (string?)null, (string?)null) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -117,9 +118,13 @@ namespace System.Security.Claims
         /// <param name="roleType">The <see cref="Claim.Type"/> used when performing logic for <see cref="ClaimsPrincipal.IsInRole"/>.</param>
         /// <remarks><seealso cref="ClaimsIdentity(IIdentity, IEnumerable{Claim}, string, string, string)"/> for details on how internal values are set.</remarks>
         public ClaimsIdentity(string? authenticationType, string? nameType, string? roleType)
-            : this((IIdentity?)null, (IEnumerable<Claim>?)null, authenticationType, nameType, roleType)
-        {
-        }
+            : this(
+                (IIdentity?)null,
+                (IEnumerable<Claim>?)null,
+                authenticationType,
+                nameType,
+                roleType
+            ) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -129,10 +134,13 @@ namespace System.Security.Claims
         /// <param name="nameType">The <see cref="Claim.Type"/> used when obtaining the value of <see cref="ClaimsIdentity.Name"/>.</param>
         /// <param name="roleType">The <see cref="Claim.Type"/> used when performing logic for <see cref="ClaimsPrincipal.IsInRole"/>.</param>
         /// <remarks><seealso cref="ClaimsIdentity(IIdentity, IEnumerable{Claim}, string, string, string)"/> for details on how internal values are set.</remarks>
-        public ClaimsIdentity(IEnumerable<Claim>? claims, string? authenticationType, string? nameType, string? roleType)
-            : this((IIdentity?)null, claims, authenticationType, nameType, roleType)
-        {
-        }
+        public ClaimsIdentity(
+            IEnumerable<Claim>? claims,
+            string? authenticationType,
+            string? nameType,
+            string? roleType
+        )
+            : this((IIdentity?)null, claims, authenticationType, nameType, roleType) { }
 
         /// <summary>
         /// Initializes an instance of <see cref="ClaimsIdentity"/>.
@@ -148,13 +156,26 @@ namespace System.Security.Claims
         /// <para>Any 'External' claims are ignored.</para>
         /// </remarks>
         /// <exception cref="InvalidOperationException">if 'identity' is a <see cref="ClaimsIdentity"/> and <see cref="ClaimsIdentity.Actor"/> results in a circular reference back to 'this'.</exception>
-        public ClaimsIdentity(IIdentity? identity, IEnumerable<Claim>? claims, string? authenticationType, string? nameType, string? roleType)
+        public ClaimsIdentity(
+            IIdentity? identity,
+            IEnumerable<Claim>? claims,
+            string? authenticationType,
+            string? nameType,
+            string? roleType
+        )
         {
             ClaimsIdentity? claimsIdentity = identity as ClaimsIdentity;
 
-            _authenticationType = (identity != null && string.IsNullOrEmpty(authenticationType)) ? identity.AuthenticationType : authenticationType;
-            _nameClaimType = !string.IsNullOrEmpty(nameType) ? nameType : (claimsIdentity != null ? claimsIdentity._nameClaimType : DefaultNameClaimType);
-            _roleClaimType = !string.IsNullOrEmpty(roleType) ? roleType : (claimsIdentity != null ? claimsIdentity._roleClaimType : DefaultRoleClaimType);
+            _authenticationType =
+                (identity != null && string.IsNullOrEmpty(authenticationType))
+                    ? identity.AuthenticationType
+                    : authenticationType;
+            _nameClaimType = !string.IsNullOrEmpty(nameType)
+                ? nameType
+                : (claimsIdentity != null ? claimsIdentity._nameClaimType : DefaultNameClaimType);
+            _roleClaimType = !string.IsNullOrEmpty(roleType)
+                ? roleType
+                : (claimsIdentity != null ? claimsIdentity._roleClaimType : DefaultRoleClaimType);
 
             if (claimsIdentity != null)
             {
@@ -173,7 +194,9 @@ namespace System.Security.Claims
                     }
                     else
                     {
-                        throw new InvalidOperationException(SR.InvalidOperationException_ActorGraphCircular);
+                        throw new InvalidOperationException(
+                            SR.InvalidOperationException_ActorGraphCircular
+                        );
                     }
                 }
                 SafeAddClaims(claimsIdentity._instanceClaims);
@@ -182,7 +205,16 @@ namespace System.Security.Claims
             {
                 if (identity != null && !string.IsNullOrEmpty(identity.Name))
                 {
-                    SafeAddClaim(new Claim(_nameClaimType, identity.Name, ClaimValueTypes.String, DefaultIssuer, DefaultIssuer, this));
+                    SafeAddClaim(
+                        new Claim(
+                            _nameClaimType,
+                            identity.Name,
+                            ClaimValueTypes.String,
+                            DefaultIssuer,
+                            DefaultIssuer,
+                            this
+                        )
+                    );
                 }
             }
 
@@ -232,7 +264,11 @@ namespace System.Security.Claims
             SafeAddClaims(other._instanceClaims);
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected ClaimsIdentity(SerializationInfo info, StreamingContext context)
         {
@@ -247,7 +283,11 @@ namespace System.Security.Claims
         /// The <see cref="SerializationInfo"/> to read from.
         /// </param>
         /// <exception cref="ArgumentNullException">Thrown is the <paramref name="info"/> is null.</exception>
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected ClaimsIdentity(SerializationInfo info)
         {
@@ -283,7 +323,9 @@ namespace System.Security.Claims
                 {
                     if (IsCircular(value))
                     {
-                        throw new InvalidOperationException(SR.InvalidOperationException_ActorGraphCircular);
+                        throw new InvalidOperationException(
+                            SR.InvalidOperationException_ActorGraphCircular
+                        );
                     }
                 }
                 _actor = value;
@@ -340,10 +382,7 @@ namespace System.Security.Claims
         /// </summary>
         protected virtual byte[]? CustomSerializationData
         {
-            get
-            {
-                return _userSerializationData;
-            }
+            get { return _userSerializationData; }
         }
 
         /// <summary>
@@ -492,7 +531,9 @@ namespace System.Security.Claims
         {
             if (!TryRemoveClaim(claim))
             {
-                throw new InvalidOperationException(SR.Format(SR.InvalidOperation_ClaimCannotBeRemoved, claim));
+                throw new InvalidOperationException(
+                    SR.Format(SR.InvalidOperation_ClaimCannotBeRemoved, claim)
+                );
             }
         }
 
@@ -671,9 +712,11 @@ namespace System.Security.Claims
 
             foreach (Claim claim in Claims)
             {
-                if (claim != null
-                        && string.Equals(claim.Type, type, StringComparison.OrdinalIgnoreCase)
-                        && string.Equals(claim.Value, value, StringComparison.Ordinal))
+                if (
+                    claim != null
+                    && string.Equals(claim.Type, type, StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(claim.Value, value, StringComparison.Ordinal)
+                )
                 {
                     return true;
                 }
@@ -696,7 +739,10 @@ namespace System.Security.Claims
             int numPropertiesRead = 0;
             int numPropertiesToRead = reader.ReadInt32();
 
-            if ((mask & SerializationMask.AuthenticationType) == SerializationMask.AuthenticationType)
+            if (
+                (mask & SerializationMask.AuthenticationType)
+                == SerializationMask.AuthenticationType
+            )
             {
                 _authenticationType = reader.ReadString();
                 numPropertiesRead++;
@@ -812,13 +858,25 @@ namespace System.Security.Claims
                 }
             }
 
-            if (!string.Equals(_nameClaimType, ClaimsIdentity.DefaultNameClaimType, StringComparison.Ordinal))
+            if (
+                !string.Equals(
+                    _nameClaimType,
+                    ClaimsIdentity.DefaultNameClaimType,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 mask |= SerializationMask.NameClaimType;
                 numberOfPropertiesWritten++;
             }
 
-            if (!string.Equals(_roleClaimType, ClaimsIdentity.DefaultRoleClaimType, StringComparison.Ordinal))
+            if (
+                !string.Equals(
+                    _roleClaimType,
+                    ClaimsIdentity.DefaultRoleClaimType,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 mask |= SerializationMask.RoleClaimType;
                 numberOfPropertiesWritten++;
@@ -850,7 +908,10 @@ namespace System.Security.Claims
 
             writer.Write((int)mask);
             writer.Write(numberOfPropertiesWritten);
-            if ((mask & SerializationMask.AuthenticationType) == SerializationMask.AuthenticationType)
+            if (
+                (mask & SerializationMask.AuthenticationType)
+                == SerializationMask.AuthenticationType
+            )
             {
                 writer.Write(_authenticationType!);
             }

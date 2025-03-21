@@ -10,11 +10,11 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Text;
-using System.Xml.Serialization;
-using System.Xml.Schema;
-using System.Xml;
 using System.Globalization;
+using System.Text;
+using System.Xml;
+using System.Xml.Schema;
+using System.Xml.Serialization;
 
 namespace System.Data.Metadata.Edm
 {
@@ -28,9 +28,8 @@ namespace System.Data.Metadata.Edm
         /// Implementing this internal constructor so that this class can't be derived
         /// outside this assembly
         /// </summary>
-        internal MetadataItem()
-        {
-        }
+        internal MetadataItem() { }
+
         internal MetadataItem(MetadataFlags flags)
         {
             _flags = flags;
@@ -39,14 +38,15 @@ namespace System.Data.Metadata.Edm
 
         #region Fields
         [Flags]
-        internal enum MetadataFlags {
+        internal enum MetadataFlags
+        {
             // GlobalItem
-            None = 0,  // DataSpace flags are off by one so that zero can be the uninitialized state
-            CSpace = 1,   // (1 << 0)
-            OSpace = 2,   // (1 << 1)
-            OCSpace = 3,  // CSpace | OSpace
-            SSpace = 4,   // (1 << 2)
-            CSSpace = 5,  // CSpace | SSpace
+            None = 0, // DataSpace flags are off by one so that zero can be the uninitialized state
+            CSpace = 1, // (1 << 0)
+            OSpace = 2, // (1 << 1)
+            OCSpace = 3, // CSpace | OSpace
+            SSpace = 4, // (1 << 2)
+            CSSpace = 5, // CSpace | SSpace
 
             DataSpace = OSpace | CSpace | SSpace | OCSpace | CSSpace,
 
@@ -64,6 +64,7 @@ namespace System.Data.Metadata.Edm
 
             ParameterMode = (In | Out | InOut | ReturnValue),
         }
+
         private MetadataFlags _flags;
         private object _flagsLock = new object();
         private MetadataCollection<MetadataProperty> _itemAttributes;
@@ -75,10 +76,7 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public abstract BuiltInTypeKind BuiltInTypeKind
-        {
-            get;
-        }
+        public abstract BuiltInTypeKind BuiltInTypeKind { get; }
 
         /// <summary>
         /// List of item attributes on this type
@@ -90,13 +88,16 @@ namespace System.Data.Metadata.Edm
             {
                 if (null == _itemAttributes)
                 {
-                    MetadataPropertyCollection itemAttributes = new MetadataPropertyCollection(this);
+                    MetadataPropertyCollection itemAttributes = new MetadataPropertyCollection(
+                        this
+                    );
                     if (IsReadOnly)
                     {
                         itemAttributes.SetReadOnly();
                     }
-                    System.Threading.Interlocked.CompareExchange<MetadataCollection<MetadataProperty>>(
-                        ref _itemAttributes, itemAttributes, null);
+                    System.Threading.Interlocked.CompareExchange<
+                        MetadataCollection<MetadataProperty>
+                    >(ref _itemAttributes, itemAttributes, null);
                 }
                 return _itemAttributes.AsReadOnlyMetadataCollection();
             }
@@ -107,10 +108,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         internal MetadataCollection<MetadataProperty> RawMetadataProperties
         {
-            get
-            {
-                return _itemAttributes;
-            }
+            get { return _itemAttributes; }
         }
 
         /// <summary>
@@ -118,14 +116,8 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public Documentation Documentation
         {
-            get
-            {
-                return _documentation; 
-            }
-            set
-            {
-                _documentation = value;
-            }
+            get { return _documentation; }
+            set { _documentation = value; }
         }
 
         /// <summary>
@@ -140,10 +132,14 @@ namespace System.Data.Metadata.Edm
         /// <returns></returns>
         internal virtual bool EdmEquals(MetadataItem item)
         {
-            return ((null != item) &&
-                    ((this == item) || // same reference
-                     (this.BuiltInTypeKind == item.BuiltInTypeKind &&
-                      this.Identity == item.Identity)));
+            return (
+                (null != item)
+                && (
+                    (this == item)
+                    || // same reference
+                    (this.BuiltInTypeKind == item.BuiltInTypeKind && this.Identity == item.Identity)
+                )
+            );
         }
 
         /// <summary>
@@ -151,17 +147,14 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         internal bool IsReadOnly
         {
-            get
-            {
-                return GetFlag(MetadataFlags.Readonly);
-            }
+            get { return GetFlag(MetadataFlags.Readonly); }
         }
         #endregion
 
         #region Methods
         /// <summary>
         /// Validates the types and sets the readOnly property to true. Once the type is set to readOnly,
-        /// it can never be changed. 
+        /// it can never be changed.
         /// </summary>
         internal virtual void SetReadOnly()
         {
@@ -199,27 +192,43 @@ namespace System.Data.Metadata.Edm
         {
             switch (_flags & MetadataFlags.DataSpace)
             {
-                default: return (DataSpace)(-1);
-                case MetadataFlags.CSpace: return DataSpace.CSpace;
-                case MetadataFlags.OSpace: return DataSpace.OSpace;
-                case MetadataFlags.SSpace: return DataSpace.SSpace;
-                case MetadataFlags.OCSpace: return DataSpace.OCSpace;
-                case MetadataFlags.CSSpace: return DataSpace.CSSpace;
+                default:
+                    return (DataSpace)(-1);
+                case MetadataFlags.CSpace:
+                    return DataSpace.CSpace;
+                case MetadataFlags.OSpace:
+                    return DataSpace.OSpace;
+                case MetadataFlags.SSpace:
+                    return DataSpace.SSpace;
+                case MetadataFlags.OCSpace:
+                    return DataSpace.OCSpace;
+                case MetadataFlags.CSSpace:
+                    return DataSpace.CSSpace;
             }
         }
+
         internal void SetDataSpace(DataSpace space)
         {
-            _flags = (_flags & ~MetadataFlags.DataSpace) | (MetadataFlags.DataSpace & Convert(space));
+            _flags =
+                (_flags & ~MetadataFlags.DataSpace) | (MetadataFlags.DataSpace & Convert(space));
         }
-        private static MetadataFlags Convert(DataSpace space) {
+
+        private static MetadataFlags Convert(DataSpace space)
+        {
             switch (space)
             {
-                default: return MetadataFlags.None; // invalid
-                case DataSpace.CSpace: return MetadataFlags.CSpace;
-                case DataSpace.OSpace: return MetadataFlags.OSpace;
-                case DataSpace.SSpace: return MetadataFlags.SSpace;
-                case DataSpace.OCSpace: return MetadataFlags.OCSpace;
-                case DataSpace.CSSpace: return MetadataFlags.CSSpace;
+                default:
+                    return MetadataFlags.None; // invalid
+                case DataSpace.CSpace:
+                    return MetadataFlags.CSpace;
+                case DataSpace.OSpace:
+                    return MetadataFlags.OSpace;
+                case DataSpace.SSpace:
+                    return MetadataFlags.SSpace;
+                case DataSpace.OCSpace:
+                    return MetadataFlags.OCSpace;
+                case DataSpace.CSSpace:
+                    return MetadataFlags.CSSpace;
             }
         }
 
@@ -227,39 +236,59 @@ namespace System.Data.Metadata.Edm
         {
             switch (_flags & MetadataFlags.ParameterMode)
             {
-                default: return (ParameterMode)(-1); // invalid
-                case MetadataFlags.In: return ParameterMode.In;
-                case MetadataFlags.Out: return ParameterMode.Out;
-                case MetadataFlags.InOut: return ParameterMode.InOut;
-                case MetadataFlags.ReturnValue: return ParameterMode.ReturnValue;
+                default:
+                    return (ParameterMode)(-1); // invalid
+                case MetadataFlags.In:
+                    return ParameterMode.In;
+                case MetadataFlags.Out:
+                    return ParameterMode.Out;
+                case MetadataFlags.InOut:
+                    return ParameterMode.InOut;
+                case MetadataFlags.ReturnValue:
+                    return ParameterMode.ReturnValue;
             }
         }
+
         internal void SetParameterMode(ParameterMode mode)
         {
-            _flags = (_flags & ~MetadataFlags.ParameterMode) | (MetadataFlags.ParameterMode & Convert(mode));
+            _flags =
+                (_flags & ~MetadataFlags.ParameterMode)
+                | (MetadataFlags.ParameterMode & Convert(mode));
         }
+
         private static MetadataFlags Convert(ParameterMode mode)
         {
             switch (mode)
             {
-                default: return MetadataFlags.ParameterMode; // invalid
-                case ParameterMode.In: return MetadataFlags.In;
-                case ParameterMode.Out: return MetadataFlags.Out;
-                case ParameterMode.InOut: return MetadataFlags.InOut;
-                case ParameterMode.ReturnValue: return MetadataFlags.ReturnValue;
+                default:
+                    return MetadataFlags.ParameterMode; // invalid
+                case ParameterMode.In:
+                    return MetadataFlags.In;
+                case ParameterMode.Out:
+                    return MetadataFlags.Out;
+                case ParameterMode.InOut:
+                    return MetadataFlags.InOut;
+                case ParameterMode.ReturnValue:
+                    return MetadataFlags.ReturnValue;
             }
         }
 
         internal bool GetFlag(MetadataFlags flag)
         {
-            return (flag == (_flags & flag)); 
+            return (flag == (_flags & flag));
         }
+
         internal void SetFlag(MetadataFlags flag, bool value)
         {
             if ((flag & MetadataFlags.Readonly) == MetadataFlags.Readonly)
             {
-                Debug.Assert(System.Convert.ToInt32(flag & ~MetadataFlags.Readonly,CultureInfo.InvariantCulture) == 0,
-                            "SetFlag() invoked with Readonly and additional flags.");
+                Debug.Assert(
+                    System.Convert.ToInt32(
+                        flag & ~MetadataFlags.Readonly,
+                        CultureInfo.InvariantCulture
+                    ) == 0,
+                    "SetFlag() invoked with Readonly and additional flags."
+                );
             }
 
             lock (_flagsLock)

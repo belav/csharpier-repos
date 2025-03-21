@@ -24,14 +24,29 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     /// </summary>
     internal sealed class SynthesizedRecordEqualityOperator : SynthesizedRecordEqualityOperatorBase
     {
-        public SynthesizedRecordEqualityOperator(SourceMemberContainerTypeSymbol containingType, int memberOffset, BindingDiagnosticBag diagnostics)
-            : base(containingType, WellKnownMemberNames.EqualityOperatorName, memberOffset, diagnostics)
-        {
-        }
+        public SynthesizedRecordEqualityOperator(
+            SourceMemberContainerTypeSymbol containingType,
+            int memberOffset,
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                containingType,
+                WellKnownMemberNames.EqualityOperatorName,
+                memberOffset,
+                diagnostics
+            ) { }
 
-        internal override void GenerateMethodBody(TypeCompilationState compilationState, BindingDiagnosticBag diagnostics)
+        internal override void GenerateMethodBody(
+            TypeCompilationState compilationState,
+            BindingDiagnosticBag diagnostics
+        )
         {
-            var F = new SyntheticBoundNodeFactory(this, ContainingType.GetNonNullSyntaxNode(), compilationState, diagnostics);
+            var F = new SyntheticBoundNodeFactory(
+                this,
+                ContainingType.GetNonNullSyntaxNode(),
+                compilationState,
+                diagnostics
+            );
 
             try
             {
@@ -42,9 +57,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 MethodSymbol? equals = null;
                 foreach (var member in ContainingType.GetMembers(WellKnownMemberNames.ObjectEquals))
                 {
-                    if (member is MethodSymbol candidate && candidate.ParameterCount == 1 && candidate.Parameters[0].RefKind == RefKind.None &&
-                        candidate.ReturnType.SpecialType == SpecialType.System_Boolean && !candidate.IsStatic &&
-                        candidate.Parameters[0].Type.Equals(ContainingType, TypeCompareKind.AllIgnoreOptions))
+                    if (
+                        member is MethodSymbol candidate
+                        && candidate.ParameterCount == 1
+                        && candidate.Parameters[0].RefKind == RefKind.None
+                        && candidate.ReturnType.SpecialType == SpecialType.System_Boolean
+                        && !candidate.IsStatic
+                        && candidate
+                            .Parameters[0]
+                            .Type.Equals(ContainingType, TypeCompareKind.AllIgnoreOptions)
+                    )
                     {
                         equals = candidate;
                         break;
@@ -69,8 +91,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 else
                 {
                     BoundExpression objectEqual = F.ObjectEqual(left, right);
-                    BoundExpression recordEquals = F.LogicalAnd(F.ObjectNotEqual(left, F.Null(F.SpecialType(SpecialType.System_Object))),
-                                                            F.Call(left, equals, right));
+                    BoundExpression recordEquals = F.LogicalAnd(
+                        F.ObjectNotEqual(left, F.Null(F.SpecialType(SpecialType.System_Object))),
+                        F.Call(left, equals, right)
+                    );
                     expression = F.LogicalOr(objectEqual, recordEquals);
                 }
 

@@ -12,7 +12,11 @@ public static class TestExtensions
 {
     public const string CookieAuthenticationScheme = "External";
 
-    public static async Task<Transaction> SendAsync(this TestServer server, string uri, string cookieHeader = null)
+    public static async Task<Transaction> SendAsync(
+        this TestServer server,
+        string uri,
+        string cookieHeader = null
+    )
     {
         var request = new HttpRequestMessage(HttpMethod.Get, uri);
         if (!string.IsNullOrEmpty(cookieHeader))
@@ -30,9 +34,11 @@ public static class TestExtensions
         }
         transaction.ResponseText = await transaction.Response.Content.ReadAsStringAsync();
 
-        if (transaction.Response.Content != null &&
-            transaction.Response.Content.Headers.ContentType != null &&
-            transaction.Response.Content.Headers.ContentType.MediaType == "text/xml")
+        if (
+            transaction.Response.Content != null
+            && transaction.Response.Content.Headers.ContentType != null
+            && transaction.Response.Content.Headers.ContentType.MediaType == "text/xml"
+        )
         {
             transaction.ResponseElement = XElement.Parse(transaction.ResponseText);
         }

@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// <summary>
 /// Constrains a route parameter to represent only 32-bit floating-point values.
 /// </summary>
-public class FloatRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchingPolicy, ICachableParameterPolicy
+public class FloatRouteConstraint
+    : IRouteConstraint,
+        IParameterLiteralNodeMatchingPolicy,
+        ICachableParameterPolicy
 #else
 internal class FloatRouteConstraint : IRouteConstraint
 #endif
@@ -27,10 +30,10 @@ internal class FloatRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);
@@ -56,7 +59,8 @@ internal class FloatRouteConstraint : IRouteConstraint
             valueString,
             NumberStyles.Float | NumberStyles.AllowThousands,
             CultureInfo.InvariantCulture,
-            out _);
+            out _
+        );
     }
 
 #if !COMPONENTS

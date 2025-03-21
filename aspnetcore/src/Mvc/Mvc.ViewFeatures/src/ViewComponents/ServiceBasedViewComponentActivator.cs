@@ -18,11 +18,11 @@ public class ServiceBasedViewComponentActivator : IViewComponentActivator
 
         var viewComponentType = context.ViewComponentDescriptor.TypeInfo.AsType();
 
-        return context.ViewContext.HttpContext.RequestServices.GetRequiredService(viewComponentType);
+        return context.ViewContext.HttpContext.RequestServices.GetRequiredService(
+            viewComponentType
+        );
     }
 
     /// <inheritdoc />
-    public virtual void Release(ViewComponentContext context, object viewComponent)
-    {
-    }
+    public virtual void Release(ViewComponentContext context, object viewComponent) { }
 }

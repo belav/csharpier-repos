@@ -16,7 +16,8 @@ public readonly struct ModelMetadataIdentity : IEquatable<ModelMetadataIdentity>
         string? name = null,
         Type? containerType = null,
         object? fieldInfo = null,
-        ConstructorInfo? constructorInfo = null)
+        ConstructorInfo? constructorInfo = null
+    )
     {
         ModelType = modelType;
         Name = name;
@@ -44,11 +45,10 @@ public readonly struct ModelMetadataIdentity : IEquatable<ModelMetadataIdentity>
     /// <param name="name">The name of the property.</param>
     /// <param name="containerType">The container type of the model property.</param>
     /// <returns>A <see cref="ModelMetadataIdentity"/>.</returns>
-    [Obsolete("This API is obsolete and may be removed in a future release. Please use the overload that takes a PropertyInfo object.")] // Remove after .NET 6.
-    public static ModelMetadataIdentity ForProperty(
-        Type modelType,
-        string name,
-        Type containerType)
+    [Obsolete(
+        "This API is obsolete and may be removed in a future release. Please use the overload that takes a PropertyInfo object."
+    )] // Remove after .NET 6.
+    public static ModelMetadataIdentity ForProperty(Type modelType, string name, Type containerType)
     {
         ArgumentNullException.ThrowIfNull(modelType);
         ArgumentNullException.ThrowIfNull(containerType);
@@ -71,13 +71,19 @@ public readonly struct ModelMetadataIdentity : IEquatable<ModelMetadataIdentity>
     public static ModelMetadataIdentity ForProperty(
         PropertyInfo propertyInfo,
         Type modelType,
-        Type containerType)
+        Type containerType
+    )
     {
         ArgumentNullException.ThrowIfNull(propertyInfo);
         ArgumentNullException.ThrowIfNull(modelType);
         ArgumentNullException.ThrowIfNull(containerType);
 
-        return new ModelMetadataIdentity(modelType, propertyInfo.Name, containerType, fieldInfo: propertyInfo);
+        return new ModelMetadataIdentity(
+            modelType,
+            propertyInfo.Name,
+            containerType,
+            fieldInfo: propertyInfo
+        );
     }
 
     /// <summary>
@@ -85,8 +91,8 @@ public readonly struct ModelMetadataIdentity : IEquatable<ModelMetadataIdentity>
     /// </summary>
     /// <param name="parameter">The <see cref="ParameterInfo" />.</param>
     /// <returns>A <see cref="ModelMetadataIdentity"/>.</returns>
-    public static ModelMetadataIdentity ForParameter(ParameterInfo parameter)
-        => ForParameter(parameter, parameter.ParameterType);
+    public static ModelMetadataIdentity ForParameter(ParameterInfo parameter) =>
+        ForParameter(parameter, parameter.ParameterType);
 
     /// <summary>
     /// Creates a <see cref="ModelMetadataIdentity"/> for the provided parameter with the specified
@@ -184,13 +190,12 @@ public readonly struct ModelMetadataIdentity : IEquatable<ModelMetadataIdentity>
     /// <inheritdoc />
     public bool Equals(ModelMetadataIdentity other)
     {
-        return
-            ContainerType == other.ContainerType &&
-            ModelType == other.ModelType &&
-            Name == other.Name &&
-            ParameterInfo == other.ParameterInfo &&
-            PropertyInfo == other.PropertyInfo &&
-            ConstructorInfo == other.ConstructorInfo;
+        return ContainerType == other.ContainerType
+            && ModelType == other.ModelType
+            && Name == other.Name
+            && ParameterInfo == other.ParameterInfo
+            && PropertyInfo == other.PropertyInfo
+            && ConstructorInfo == other.ConstructorInfo;
     }
 
     /// <inheritdoc />

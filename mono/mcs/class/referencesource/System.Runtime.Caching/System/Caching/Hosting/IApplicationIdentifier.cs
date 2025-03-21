@@ -3,8 +3,10 @@
 // </copyright>
 using System;
 
-namespace System.Runtime.Caching.Hosting {
-    public interface IApplicationIdentifier {
+namespace System.Runtime.Caching.Hosting
+{
+    public interface IApplicationIdentifier
+    {
         String GetApplicationId();
     }
 }

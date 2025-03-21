@@ -27,56 +27,93 @@ public class BlazorWasmTemplateAuthTest : BlazorTemplateTest
     [Fact]
     public async Task BlazorWasmStandaloneTemplate_IndividualAuth_CreateBuildPublish()
     {
-        var project = await CreateBuildPublishAsync("Individual", args: new[] {
+        var project = await CreateBuildPublishAsync(
+            "Individual",
+            args: new[]
+            {
                 "--authority",
                 "https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration",
                 ArgConstants.ClientId,
-                "sample-client-id"
-            });
+                "sample-client-id",
+            }
+        );
     }
 
     [Fact]
     public async Task BlazorWasmStandaloneTemplate_NoHttps_IndividualAuth_CreateBuildPublish()
     {
-        var project = await CreateBuildPublishAsync("Individual", args: new[] {
+        var project = await CreateBuildPublishAsync(
+            "Individual",
+            args: new[]
+            {
                 "--authority",
                 "https://login.microsoftonline.com/common/v2.0/.well-known/openid-configuration",
                 ArgConstants.ClientId,
                 "sample-client-id",
-                ArgConstants.NoHttps
-            });
+                ArgConstants.NoHttps,
+            }
+        );
     }
 
-    public static TheoryData<TemplateInstance> TemplateDataIndividualB2C => new TheoryData<TemplateInstance>
+    public static TheoryData<TemplateInstance> TemplateDataIndividualB2C =>
+        new TheoryData<TemplateInstance>
         {
-            new TemplateInstance("blazorwasmstandaloneaadb2c", "IndividualB2C",
-                ArgConstants.AadB2cInstance, "example.b2clogin.com",
-                "-ssp", "b2c_1_siupin",
-                ArgConstants.ClientId, "clientId",
-                ArgConstants.Domain, "my-domain"),
-            new TemplateInstance("blazorwasmstandaloneaadb2c_program_main", "IndividualB2C",
-                ArgConstants.AadB2cInstance, "example.b2clogin.com",
-                "-ssp", "b2c_1_siupin",
-                ArgConstants.ClientId, "clientId",
-                ArgConstants.Domain, "my-domain",
-                ArgConstants.UseProgramMain),
+            new TemplateInstance(
+                "blazorwasmstandaloneaadb2c",
+                "IndividualB2C",
+                ArgConstants.AadB2cInstance,
+                "example.b2clogin.com",
+                "-ssp",
+                "b2c_1_siupin",
+                ArgConstants.ClientId,
+                "clientId",
+                ArgConstants.Domain,
+                "my-domain"
+            ),
+            new TemplateInstance(
+                "blazorwasmstandaloneaadb2c_program_main",
+                "IndividualB2C",
+                ArgConstants.AadB2cInstance,
+                "example.b2clogin.com",
+                "-ssp",
+                "b2c_1_siupin",
+                ArgConstants.ClientId,
+                "clientId",
+                ArgConstants.Domain,
+                "my-domain",
+                ArgConstants.UseProgramMain
+            ),
         };
 
-    public static TheoryData<TemplateInstance> TemplateDataSingleOrg => new TheoryData<TemplateInstance>
+    public static TheoryData<TemplateInstance> TemplateDataSingleOrg =>
+        new TheoryData<TemplateInstance>
         {
-            new TemplateInstance("blazorwasmstandaloneaad", "SingleOrg",
-                ArgConstants.Domain, "my-domain",
-                ArgConstants.TenantId, "tenantId",
-                ArgConstants.ClientId, "clientId"),
+            new TemplateInstance(
+                "blazorwasmstandaloneaad",
+                "SingleOrg",
+                ArgConstants.Domain,
+                "my-domain",
+                ArgConstants.TenantId,
+                "tenantId",
+                ArgConstants.ClientId,
+                "clientId"
+            ),
         };
 
-    public static TheoryData<TemplateInstance> TemplateDataSingleOrgProgramMain => new TheoryData<TemplateInstance>
+    public static TheoryData<TemplateInstance> TemplateDataSingleOrgProgramMain =>
+        new TheoryData<TemplateInstance>
         {
-            new TemplateInstance("blazorwasmstandaloneaad_program_main", "SingleOrg",
-                ArgConstants.Domain, "my-domain",
-                ArgConstants.TenantId, "tenantId",
-                ArgConstants.ClientId, "clientId",
-                ArgConstants.UseProgramMain),
+            new TemplateInstance(
+                "blazorwasmstandaloneaad_program_main",
+                "SingleOrg",
+                ArgConstants.Domain,
+                "my-domain",
+                ArgConstants.TenantId,
+                "tenantId",
+                ArgConstants.ClientId,
+                "clientId",
+                ArgConstants.UseProgramMain
+            ),
         };
 
     public class TemplateInstance
@@ -95,31 +132,67 @@ public class BlazorWasmTemplateAuthTest : BlazorTemplateTest
 
     [ConditionalTheory]
     [MemberData(nameof(TemplateDataIndividualB2C))]
-    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_IndividualB2C_Works(TemplateInstance instance)
-        => CreateBuildPublishAsync(auth: instance.Auth, args: instance.Arguments, targetFramework: "netstandard2.1");
+    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_IndividualB2C_Works(
+        TemplateInstance instance
+    ) =>
+        CreateBuildPublishAsync(
+            auth: instance.Auth,
+            args: instance.Arguments,
+            targetFramework: "netstandard2.1"
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(TemplateDataIndividualB2C))]
-    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_IndividualB2C_NoHttps_Works(TemplateInstance instance)
-        => CreateBuildPublishAsync(auth: instance.Auth, args: instance.Arguments.Union(new[] { ArgConstants.NoHttps }).ToArray(), targetFramework: "netstandard2.1");
+    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_IndividualB2C_NoHttps_Works(
+        TemplateInstance instance
+    ) =>
+        CreateBuildPublishAsync(
+            auth: instance.Auth,
+            args: instance.Arguments.Union(new[] { ArgConstants.NoHttps }).ToArray(),
+            targetFramework: "netstandard2.1"
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(TemplateDataSingleOrg))]
-    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_SingleOrg_Works(TemplateInstance instance)
-        => CreateBuildPublishAsync(auth: instance.Auth, args: instance.Arguments, targetFramework: "netstandard2.1");
+    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_SingleOrg_Works(
+        TemplateInstance instance
+    ) =>
+        CreateBuildPublishAsync(
+            auth: instance.Auth,
+            args: instance.Arguments,
+            targetFramework: "netstandard2.1"
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(TemplateDataSingleOrg))]
-    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_SingleOrg_NoHttps_Works(TemplateInstance instance)
-        => CreateBuildPublishAsync(auth: instance.Auth, args: instance.Arguments.Union(new[] { ArgConstants.NoHttps }).ToArray(), targetFramework: "netstandard2.1");
+    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_SingleOrg_NoHttps_Works(
+        TemplateInstance instance
+    ) =>
+        CreateBuildPublishAsync(
+            auth: instance.Auth,
+            args: instance.Arguments.Union(new[] { ArgConstants.NoHttps }).ToArray(),
+            targetFramework: "netstandard2.1"
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(TemplateDataSingleOrgProgramMain))]
-    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_SingleOrg_ProgramMain_Works(TemplateInstance instance)
-        => CreateBuildPublishAsync(auth: instance.Auth, args: instance.Arguments, targetFramework: "netstandard2.1");
+    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_SingleOrg_ProgramMain_Works(
+        TemplateInstance instance
+    ) =>
+        CreateBuildPublishAsync(
+            auth: instance.Auth,
+            args: instance.Arguments,
+            targetFramework: "netstandard2.1"
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(TemplateDataSingleOrgProgramMain))]
-    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_SingleOrg_NoHttps_ProgramMain_Works(TemplateInstance instance)
-        => CreateBuildPublishAsync(auth: instance.Auth, args: instance.Arguments.Union(new[] { ArgConstants.NoHttps }).ToArray(), targetFramework: "netstandard2.1");
+    public Task BlazorWasmHostedTemplate_AzureActiveDirectoryTemplate_SingleOrg_NoHttps_ProgramMain_Works(
+        TemplateInstance instance
+    ) =>
+        CreateBuildPublishAsync(
+            auth: instance.Auth,
+            args: instance.Arguments.Union(new[] { ArgConstants.NoHttps }).ToArray(),
+            targetFramework: "netstandard2.1"
+        );
 }

@@ -4,9 +4,7 @@
 using System;
 using System.Reflection;
 using System.Runtime.InteropServices;
-
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime
@@ -24,14 +22,29 @@ namespace Internal.Runtime
             return new BadImageFormatException(GetFormatString(id));
         }
 
-        public static Exception CreateTypeLoadException(ExceptionStringID id, string typeName, string moduleName)
+        public static Exception CreateTypeLoadException(
+            ExceptionStringID id,
+            string typeName,
+            string moduleName
+        )
         {
-            return new TypeLoadException(SR.Format(GetFormatString(id), typeName, moduleName), typeName);
+            return new TypeLoadException(
+                SR.Format(GetFormatString(id), typeName, moduleName),
+                typeName
+            );
         }
 
-        public static Exception CreateTypeLoadException(ExceptionStringID id, string typeName, string moduleName, string messageArg)
+        public static Exception CreateTypeLoadException(
+            ExceptionStringID id,
+            string typeName,
+            string moduleName,
+            string messageArg
+        )
         {
-            return new TypeLoadException(SR.Format(GetFormatString(id), typeName, moduleName, messageArg), typeName);
+            return new TypeLoadException(
+                SR.Format(GetFormatString(id), typeName, moduleName, messageArg),
+                typeName
+            );
         }
 
         public static Exception CreateMissingFieldException(ExceptionStringID id, string fieldName)
@@ -39,14 +52,20 @@ namespace Internal.Runtime
             return new MissingFieldException(SR.Format(GetFormatString(id), fieldName));
         }
 
-        public static Exception CreateMissingMethodException(ExceptionStringID id, string methodName)
+        public static Exception CreateMissingMethodException(
+            ExceptionStringID id,
+            string methodName
+        )
         {
             throw new MissingMethodException(SR.Format(GetFormatString(id), methodName));
         }
 
         public static Exception CreateFileNotFoundException(ExceptionStringID id, string fileName)
         {
-            throw new System.IO.FileNotFoundException(SR.Format(GetFormatString(id), fileName), fileName);
+            throw new System.IO.FileNotFoundException(
+                SR.Format(GetFormatString(id), fileName),
+                fileName
+            );
         }
 
         public static Exception CreateInvalidProgramException(ExceptionStringID id)
@@ -54,7 +73,10 @@ namespace Internal.Runtime
             throw new InvalidProgramException(GetFormatString(id));
         }
 
-        public static Exception CreateInvalidProgramException(ExceptionStringID id, string methodName)
+        public static Exception CreateInvalidProgramException(
+            ExceptionStringID id,
+            string methodName
+        )
         {
             throw new InvalidProgramException(SR.Format(GetFormatString(id), methodName));
         }

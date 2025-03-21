@@ -17,16 +17,21 @@ namespace Microsoft.CodeAnalysis.Utilities
         /// <summary>
         /// Returns true if a type name matches a document name. We use
         /// case insensitive matching to determine this match so that files
-        /// "a.cs" and "A.cs" both match a class called "A" 
+        /// "a.cs" and "A.cs" both match a class called "A"
         /// </summary>
-        public static bool TypeNameMatchesDocumentName(Document document, string typeName)
-            => GetTypeNameFromDocumentName(document)?.Equals(typeName, StringComparison.OrdinalIgnoreCase) == true;
+        public static bool TypeNameMatchesDocumentName(Document document, string typeName) =>
+            GetTypeNameFromDocumentName(document)
+                ?.Equals(typeName, StringComparison.OrdinalIgnoreCase) == true;
 
         /// <summary>
         /// Standard way to get the display name from a SyntaxNode. If the display
         /// name is null, returns false. Otherwise uses <see cref="TypeNameMatchesDocumentName(Document, string)"/>
         /// </summary>
-        public static bool TypeNameMatchesDocumentName(Document document, SyntaxNode typeDeclaration, ISyntaxFacts syntaxFacts)
+        public static bool TypeNameMatchesDocumentName(
+            Document document,
+            SyntaxNode typeDeclaration,
+            ISyntaxFacts syntaxFacts
+        )
         {
             var name = syntaxFacts.GetDisplayName(typeDeclaration, DisplayNameOptions.None);
             return name != null && TypeNameMatchesDocumentName(document, name);

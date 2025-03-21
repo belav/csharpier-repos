@@ -21,7 +21,8 @@ internal sealed class HttpMethodSingleEntryPolicyJumpTable : PolicyJumpTable
         int destination,
         bool supportsCorsPreflight,
         int corsPreflightExitDestination,
-        int corsPreflightDestination)
+        int corsPreflightDestination
+    )
     {
         _exitDestination = exitDestination;
         _method = method;
@@ -34,9 +35,18 @@ internal sealed class HttpMethodSingleEntryPolicyJumpTable : PolicyJumpTable
     public override int GetDestination(HttpContext httpContext)
     {
         var httpMethod = httpContext.Request.Method;
-        if (_supportsCorsPreflight && HttpMethodMatcherPolicy.IsCorsPreflightRequest(httpContext, httpMethod, out var accessControlRequestMethod))
+        if (
+            _supportsCorsPreflight
+            && HttpMethodMatcherPolicy.IsCorsPreflightRequest(
+                httpContext,
+                httpMethod,
+                out var accessControlRequestMethod
+            )
+        )
         {
-            return HttpMethods.Equals(accessControlRequestMethod.ToString(), _method) ? _corsPreflightDestination : _corsPreflightExitDestination;
+            return HttpMethods.Equals(accessControlRequestMethod.ToString(), _method)
+                ? _corsPreflightDestination
+                : _corsPreflightExitDestination;
         }
 
         return HttpMethods.Equals(httpMethod, _method) ? _destination : _exitDestination;

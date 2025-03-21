@@ -12,7 +12,10 @@ public abstract class IISDeployerBase : ApplicationDeployer
 
     public IISDeploymentParameters IISDeploymentParameters { get; }
 
-    public IISDeployerBase(IISDeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
+    public IISDeployerBase(
+        IISDeploymentParameters deploymentParameters,
+        ILoggerFactory loggerFactory
+    )
         : base(deploymentParameters, loggerFactory)
     {
         IISDeploymentParameters = deploymentParameters;
@@ -37,7 +40,9 @@ public abstract class IISDeployerBase : ApplicationDeployer
 
         if (!DeploymentParameters.PublishApplicationBeforeDeployment)
         {
-            throw new InvalidOperationException("Cannot modify web.config file if no published output.");
+            throw new InvalidOperationException(
+                "Cannot modify web.config file if no published output."
+            );
         }
 
         var path = Path.Combine(DeploymentParameters.PublishedApplicationRootPath, "web.config");
@@ -91,8 +96,15 @@ public abstract class IISDeployerBase : ApplicationDeployer
         // There are issues with having multiple dlls copy to the same location in both build and publish
         // It's inherently racy. Therefore, we have two different copy locations and when trying verify backwards compat tests,
         // we select the version of ANCM in a different folder.
-        var basePath = File.Exists(Path.Combine(AppContext.BaseDirectory, "x64", "aspnetcorev2.dll")) ? "" : @"ANCM\";
-        var arch = DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x64 ? $@"{basePath}x64\{ancmDllName}" : $@"{basePath}x86\{ancmDllName}";
+        var basePath = File.Exists(
+            Path.Combine(AppContext.BaseDirectory, "x64", "aspnetcorev2.dll")
+        )
+            ? ""
+            : @"ANCM\";
+        var arch =
+            DeploymentParameters.RuntimeArchitecture == RuntimeArchitecture.x64
+                ? $@"{basePath}x64\{ancmDllName}"
+                : $@"{basePath}x86\{ancmDllName}";
         var ancmFile = Path.Combine(AppContext.BaseDirectory, arch);
         if (!File.Exists(Environment.ExpandEnvironmentVariables(ancmFile)))
         {
@@ -116,7 +128,8 @@ public abstract class IISDeployerBase : ApplicationDeployer
 
         foreach (var envVar in IISDeploymentParameters.WebConfigBasedEnvironmentVariables)
         {
-            environmentVariables.GetOrAdd("environmentVariable", "name", envVar.Key)
+            environmentVariables
+                .GetOrAdd("environmentVariable", "name", envVar.Key)
                 .SetAttributeValue("value", envVar.Value);
         }
     }
@@ -131,7 +144,8 @@ public abstract class IISDeployerBase : ApplicationDeployer
 
         foreach (var handlerSetting in IISDeploymentParameters.HandlerSettings)
         {
-            handlerSettings.GetOrAdd("handlerSetting", "name", handlerSetting.Key)
+            handlerSettings
+                .GetOrAdd("handlerSetting", "name", handlerSetting.Key)
                 .SetAttributeValue("value", handlerSetting.Value);
         }
     }

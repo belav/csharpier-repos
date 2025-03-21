@@ -23,31 +23,41 @@ namespace System.Threading.Tests
         [Fact]
         public void Ctor_InvalidMode()
         {
-            AssertExtensions.Throws<ArgumentException>("mode", null, () => new EventWaitHandle(true, (EventResetMode)12345));
+            AssertExtensions.Throws<ArgumentException>(
+                "mode",
+                null,
+                () => new EventWaitHandle(true, (EventResetMode)12345)
+            );
         }
 
-        [PlatformSpecific(TestPlatforms.Windows)]  // names aren't supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // names aren't supported on Unix
         [Theory]
         [MemberData(nameof(GetValidNames))]
         public void Ctor_ValidNames(string name)
         {
             bool createdNew;
-            using (var ewh = new EventWaitHandle(true, EventResetMode.AutoReset, name, out createdNew))
+            using (
+                var ewh = new EventWaitHandle(true, EventResetMode.AutoReset, name, out createdNew)
+            )
             {
                 Assert.True(createdNew);
             }
         }
 
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // names aren't supported on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // names aren't supported on Unix
         [Fact]
         public void Ctor_NamesArentSupported_Unix()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => new EventWaitHandle(false, EventResetMode.AutoReset, "anything"));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new EventWaitHandle(false, EventResetMode.AutoReset, "anything")
+            );
             bool createdNew;
-            Assert.Throws<PlatformNotSupportedException>(() => new EventWaitHandle(false, EventResetMode.AutoReset, "anything", out createdNew));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                new EventWaitHandle(false, EventResetMode.AutoReset, "anything", out createdNew)
+            );
         }
 
-        [PlatformSpecific(TestPlatforms.Windows)]  // names aren't supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // names aren't supported on Unix
         [Theory]
         [InlineData(false, EventResetMode.AutoReset)]
         [InlineData(false, EventResetMode.ManualReset)]
@@ -75,7 +85,9 @@ namespace System.Threading.Tests
         {
             string name = Guid.NewGuid().ToString("N");
             using (Mutex m = new Mutex(false, name))
-                Assert.Throws<WaitHandleCannotBeOpenedException>(() => new EventWaitHandle(false, mode, name));
+                Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
+                    new EventWaitHandle(false, mode, name)
+                );
         }
 
         [Fact]
@@ -110,7 +122,7 @@ namespace System.Threading.Tests
             }
         }
 
-        [PlatformSpecific(TestPlatforms.Windows)]  // OpenExisting not supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // OpenExisting not supported on Unix
         [Theory]
         [MemberData(nameof(GetValidNames))]
         public void OpenExisting_Windows(string name)
@@ -119,7 +131,9 @@ namespace System.Threading.Tests
             Assert.False(EventWaitHandle.TryOpenExisting(name, out resultHandle));
             Assert.Null(resultHandle);
 
-            using (EventWaitHandle are1 = new EventWaitHandle(false, EventResetMode.AutoReset, name))
+            using (
+                EventWaitHandle are1 = new EventWaitHandle(false, EventResetMode.AutoReset, name)
+            )
             {
                 using (EventWaitHandle are2 = EventWaitHandle.OpenExisting(name))
                 {
@@ -140,47 +154,64 @@ namespace System.Threading.Tests
             }
         }
 
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // OpenExisting not supported on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // OpenExisting not supported on Unix
         [Fact]
         public void OpenExisting_NotSupported_Unix()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => EventWaitHandle.OpenExisting("anything"));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                EventWaitHandle.OpenExisting("anything")
+            );
             EventWaitHandle ewh;
-            Assert.Throws<PlatformNotSupportedException>(() => EventWaitHandle.TryOpenExisting("anything", out ewh));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                EventWaitHandle.TryOpenExisting("anything", out ewh)
+            );
         }
 
-        [PlatformSpecific(TestPlatforms.Windows)]  // OpenExisting not supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // OpenExisting not supported on Unix
         [Fact]
         public void OpenExisting_InvalidNames_Windows()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => EventWaitHandle.OpenExisting(null));
-            AssertExtensions.Throws<ArgumentException>("name", null, () => EventWaitHandle.OpenExisting(string.Empty));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => EventWaitHandle.OpenExisting(null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                null,
+                () => EventWaitHandle.OpenExisting(string.Empty)
+            );
         }
 
-        [PlatformSpecific(TestPlatforms.Windows)]  // OpenExisting not supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // OpenExisting not supported on Unix
         [Fact]
         public void OpenExisting_UnavailableName_Windows()
         {
             string name = Guid.NewGuid().ToString("N");
-            Assert.Throws<WaitHandleCannotBeOpenedException>(() => EventWaitHandle.OpenExisting(name));
+            Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
+                EventWaitHandle.OpenExisting(name)
+            );
             EventWaitHandle e;
             Assert.False(EventWaitHandle.TryOpenExisting(name, out e));
             Assert.Null(e);
 
             using (e = new EventWaitHandle(false, EventResetMode.AutoReset, name)) { }
-            Assert.Throws<WaitHandleCannotBeOpenedException>(() => EventWaitHandle.OpenExisting(name));
+            Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
+                EventWaitHandle.OpenExisting(name)
+            );
             Assert.False(EventWaitHandle.TryOpenExisting(name, out e));
             Assert.Null(e);
         }
 
-        [PlatformSpecific(TestPlatforms.Windows)]  // OpenExisting not supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // OpenExisting not supported on Unix
         [Fact]
         public void OpenExisting_NameUsedByOtherSynchronizationPrimitive_Windows()
         {
             string name = Guid.NewGuid().ToString("N");
             using (Mutex mtx = new Mutex(true, name))
             {
-                Assert.Throws<WaitHandleCannotBeOpenedException>(() => EventWaitHandle.OpenExisting(name));
+                Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
+                    EventWaitHandle.OpenExisting(name)
+                );
                 EventWaitHandle ignored;
                 Assert.False(EventWaitHandle.TryOpenExisting(name, out ignored));
             }
@@ -199,7 +230,14 @@ namespace System.Threading.Tests
             // Create the two events and the other process with which to synchronize
             using (var inbound = new EventWaitHandle(true, mode, inboundName))
             using (var outbound = new EventWaitHandle(false, mode, outboundName))
-            using (var remote = RemoteExecutor.Invoke(PingPong_OtherProcess, mode.ToString(), outboundName, inboundName))
+            using (
+                var remote = RemoteExecutor.Invoke(
+                    PingPong_OtherProcess,
+                    mode.ToString(),
+                    outboundName,
+                    inboundName
+                )
+            )
             {
                 // Repeatedly wait for one event and then set the other
                 for (int i = 0; i < 10; i++)
@@ -214,7 +252,11 @@ namespace System.Threading.Tests
             }
         }
 
-        private static void PingPong_OtherProcess(string modeName, string inboundName, string outboundName)
+        private static void PingPong_OtherProcess(
+            string modeName,
+            string inboundName,
+            string outboundName
+        )
         {
             EventResetMode mode = (EventResetMode)Enum.Parse(typeof(EventResetMode), modeName);
 
@@ -237,7 +279,7 @@ namespace System.Threading.Tests
 
         public static TheoryData<string> GetValidNames()
         {
-            var names  =  new TheoryData<string>() { Guid.NewGuid().ToString("N") };
+            var names = new TheoryData<string>() { Guid.NewGuid().ToString("N") };
             names.Add(Guid.NewGuid().ToString("N") + new string('a', 1000));
 
             return names;

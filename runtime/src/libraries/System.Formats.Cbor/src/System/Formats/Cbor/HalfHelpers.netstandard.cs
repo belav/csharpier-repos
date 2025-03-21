@@ -25,8 +25,7 @@ namespace System.Formats.Cbor
         #region From Half and related helpers.
         // Instead of copying (yet again) the explicit operator,
         // we perform a Half to float to double conversion.
-        public static double HalfToDouble(ushort value)
-            => (double)HalfToFloat(value);
+        public static double HalfToDouble(ushort value) => (double)HalfToFloat(value);
 
         public static unsafe float HalfToFloat(ushort value)
         {
@@ -61,8 +60,14 @@ namespace System.Formats.Cbor
 
             return CreateSingle(sign, (byte)(exp + 0x70), sig << 13);
 
-            static float CreateSingle(bool sign, byte exp, uint sig)
-                => CborHelpers.Int32BitsToSingle((int)(((sign ? 1U : 0U) << FloatSignShift) + ((uint)exp << FloatExponentShift) + sig));
+            static float CreateSingle(bool sign, byte exp, uint sig) =>
+                CborHelpers.Int32BitsToSingle(
+                    (int)(
+                        ((sign ? 1U : 0U) << FloatSignShift)
+                        + ((uint)exp << FloatExponentShift)
+                        + sig
+                    )
+                );
         }
 
         public static bool HalfIsNaN(ushort value)
@@ -88,12 +93,40 @@ namespace System.Formats.Cbor
         }
 
         private static ReadOnlySpan<byte> Log2DeBruijn => // 32
-        [
-            00, 09, 01, 10, 13, 21, 02, 29,
-            11, 14, 16, 18, 22, 25, 03, 30,
-            08, 12, 20, 28, 15, 17, 24, 07,
-            19, 27, 23, 06, 26, 05, 04, 31
-        ];
+            [
+                00,
+                09,
+                01,
+                10,
+                13,
+                21,
+                02,
+                29,
+                11,
+                14,
+                16,
+                18,
+                22,
+                25,
+                03,
+                30,
+                08,
+                12,
+                20,
+                28,
+                15,
+                17,
+                24,
+                07,
+                19,
+                27,
+                23,
+                06,
+                26,
+                05,
+                04,
+                31,
+            ];
 
         private static int Log2SoftwareFallback(uint value)
         {
@@ -112,7 +145,8 @@ namespace System.Formats.Cbor
                 // Using deBruijn sequence, k=2, n=5 (2^5=32) : 0b_0000_0111_1100_0100_1010_1100_1101_1101u
                 ref MemoryMarshal.GetReference(Log2DeBruijn),
                 // uint|long -> IntPtr cast on 32-bit platforms does expensive overflow checks not needed here
-                (IntPtr)(int)((value * 0x07C4ACDDu) >> 27));
+                (IntPtr)(int)((value * 0x07C4ACDDu) >> 27)
+            );
         }
 
         private static float CreateSingleNaN(bool sign, ulong significand)
@@ -165,8 +199,8 @@ namespace System.Formats.Cbor
             return (ushort)(signInt | NaNBits | sigInt);
         }
 
-        private static ushort HalfCtor(bool sign, ushort exp, ushort sig)
-            => (ushort)(((sign ? 1 : 0) << HalfSignShift) + (exp << HalfExponentShift) + sig);
+        private static ushort HalfCtor(bool sign, ushort exp, ushort sig) =>
+            (ushort)(((sign ? 1 : 0) << HalfSignShift) + (exp << HalfExponentShift) + sig);
 
         private static ushort RoundPackToHalf(bool sign, short exp, ushort sig)
         {
@@ -201,8 +235,8 @@ namespace System.Formats.Cbor
         // If any bits are lost by shifting, "jam" them into the LSB.
         // if dist > bit count, Will be 1 or 0 depending on i
         // (unlike bitwise operators that masks the lower 5 bits)
-        private static uint ShiftRightJam(uint i, int dist)
-            => dist < 31 ? (i >> dist) | (i << (-dist & 31) != 0 ? 1U : 0U) : (i != 0 ? 1U : 0U);
+        private static uint ShiftRightJam(uint i, int dist) =>
+            dist < 31 ? (i >> dist) | (i << (-dist & 31) != 0 ? 1U : 0U) : (i != 0 ? 1U : 0U);
         #endregion
     }
 }

@@ -8,7 +8,10 @@ namespace Microsoft.AspNetCore.Mvc.Routing;
 
 internal static class RoutePatternWriter
 {
-    public static void WriteString(StringBuilder sb, IEnumerable<RoutePatternPathSegment> routeSegments)
+    public static void WriteString(
+        StringBuilder sb,
+        IEnumerable<RoutePatternPathSegment> routeSegments
+    )
     {
         foreach (var segment in routeSegments)
         {

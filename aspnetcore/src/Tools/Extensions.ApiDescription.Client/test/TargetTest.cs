@@ -17,7 +17,8 @@ public class TargetTest : IDisposable
 {
     private static Assembly _assembly = typeof(TargetTest).Assembly;
     private static string _assemblyLocation = Path.GetDirectoryName(_assembly.Location);
-    private static string _targetFramework = _assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+    private static string _targetFramework = _assembly
+        .GetCustomAttributes<AssemblyMetadataAttribute>()
         .Single(m => m.Key == "TargetFramework")
         .Value;
 
@@ -66,10 +67,7 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-            });
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" });
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -78,7 +76,10 @@ public class TargetTest : IDisposable
         Assert.Equal(0, process.ExitCode);
         Assert.Empty(process.Error);
         Assert.Contains($"Compile: {Path.Combine("obj", "azureMonitorClient.cs")}", process.Output);
-        Assert.Contains($"FileWrites: {Path.Combine("obj", "azureMonitorClient.cs")}", process.Output);
+        Assert.Contains(
+            $"FileWrites: {Path.Combine("obj", "azureMonitorClient.cs")}",
+            process.Output
+        );
         Assert.DoesNotContain("TypeScriptCompile:", process.Output);
     }
 
@@ -87,11 +88,13 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-                CodeGenerator = "NSwagTypeScript",
-            });
+            .WithItem(
+                new TemporaryOpenApiProject.ItemSpec
+                {
+                    Include = "files/azureMonitor.json",
+                    CodeGenerator = "NSwagTypeScript",
+                }
+            );
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -100,8 +103,14 @@ public class TargetTest : IDisposable
         Assert.Equal(0, process.ExitCode);
         Assert.Empty(process.Error);
         Assert.DoesNotContain(" Compile:", process.Output);
-        Assert.Contains($"FileWrites: {Path.Combine("obj", "azureMonitorClient.ts")}", process.Output);
-        Assert.Contains($"TypeScriptCompile: {Path.Combine("obj", "azureMonitorClient.ts")}", process.Output);
+        Assert.Contains(
+            $"FileWrites: {Path.Combine("obj", "azureMonitorClient.ts")}",
+            process.Output
+        );
+        Assert.Contains(
+            $"TypeScriptCompile: {Path.Combine("obj", "azureMonitorClient.ts")}",
+            process.Output
+        );
     }
 
     [Fact]
@@ -109,10 +118,12 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json;files/NSwag.json;files/swashbuckle.json",
-            });
+            .WithItem(
+                new TemporaryOpenApiProject.ItemSpec
+                {
+                    Include = "files/azureMonitor.json;files/NSwag.json;files/swashbuckle.json",
+                }
+            );
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -123,9 +134,15 @@ public class TargetTest : IDisposable
         Assert.Contains($"Compile: {Path.Combine("obj", "azureMonitorClient.cs")}", process.Output);
         Assert.Contains($"Compile: {Path.Combine("obj", "NSwagClient.cs")}", process.Output);
         Assert.Contains($"Compile: {Path.Combine("obj", "swashbuckleClient.cs")}", process.Output);
-        Assert.Contains($"FileWrites: {Path.Combine("obj", "azureMonitorClient.cs")}", process.Output);
+        Assert.Contains(
+            $"FileWrites: {Path.Combine("obj", "azureMonitorClient.cs")}",
+            process.Output
+        );
         Assert.Contains($"FileWrites: {Path.Combine("obj", "NSwagClient.cs")}", process.Output);
-        Assert.Contains($"FileWrites: {Path.Combine("obj", "swashbuckleClient.cs")}", process.Output);
+        Assert.Contains(
+            $"FileWrites: {Path.Combine("obj", "swashbuckleClient.cs")}",
+            process.Output
+        );
         Assert.DoesNotContain("TypeScriptCompile:", process.Output);
     }
 
@@ -134,11 +151,13 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-                CodeGenerator = "CustomCSharp",
-            });
+            .WithItem(
+                new TemporaryOpenApiProject.ItemSpec
+                {
+                    Include = "files/azureMonitor.json",
+                    CodeGenerator = "CustomCSharp",
+                }
+            );
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -146,14 +165,22 @@ public class TargetTest : IDisposable
 
         Assert.Equal(0, process.ExitCode);
         Assert.Empty(process.Error);
-        Assert.Contains($"Compile: {Path.Combine("obj", "azureMonitorClient.cs", "Generated1.cs")}", process.Output);
-        Assert.Contains($"Compile: {Path.Combine("obj", "azureMonitorClient.cs", "Generated2.cs")}", process.Output);
+        Assert.Contains(
+            $"Compile: {Path.Combine("obj", "azureMonitorClient.cs", "Generated1.cs")}",
+            process.Output
+        );
+        Assert.Contains(
+            $"Compile: {Path.Combine("obj", "azureMonitorClient.cs", "Generated2.cs")}",
+            process.Output
+        );
         Assert.Contains(
             $"FileWrites: {Path.Combine("obj", "azureMonitorClient.cs", "Generated1.cs")}",
-            process.Output);
+            process.Output
+        );
         Assert.Contains(
             $"FileWrites: {Path.Combine("obj", "azureMonitorClient.cs", "Generated2.cs")}",
-            process.Output);
+            process.Output
+        );
         Assert.DoesNotContain("TypeScriptCompile:", process.Output);
     }
 
@@ -162,10 +189,7 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-            });
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" });
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -174,11 +198,12 @@ public class TargetTest : IDisposable
         Assert.Equal(0, process.ExitCode);
         Assert.Empty(process.Error);
         Assert.Contains(
-            "GenerateNSwagCSharp " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} " +
-            "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' " +
-            $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
-            process.Output);
+            "GenerateNSwagCSharp "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} "
+                + "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' "
+                + $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
+            process.Output
+        );
     }
 
     [Fact]
@@ -187,10 +212,7 @@ public class TargetTest : IDisposable
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
             .WithProperty("OpenApiGenerateCodeOptions", "--an-option")
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-            });
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" });
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -199,11 +221,12 @@ public class TargetTest : IDisposable
         Assert.Equal(0, process.ExitCode);
         Assert.Empty(process.Error);
         Assert.Contains(
-            "GenerateNSwagCSharp " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} " +
-            "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' " +
-            $"Options: '--an-option' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
-            process.Output);
+            "GenerateNSwagCSharp "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} "
+                + "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' "
+                + $"Options: '--an-option' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
+            process.Output
+        );
     }
 
     [Fact]
@@ -212,10 +235,7 @@ public class TargetTest : IDisposable
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
             .WithProperty("OpenApiCodeDirectory", "generated")
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-            });
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" });
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -224,11 +244,12 @@ public class TargetTest : IDisposable
         Assert.Equal(0, process.ExitCode);
         Assert.Empty(process.Error);
         Assert.Contains(
-            "GenerateNSwagCSharp " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} " +
-            "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' " +
-            $"Options: '' OutputPath: '{Path.Combine("generated", "azureMonitorClient.cs")}'",
-            process.Output);
+            "GenerateNSwagCSharp "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} "
+                + "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' "
+                + $"Options: '' OutputPath: '{Path.Combine("generated", "azureMonitorClient.cs")}'",
+            process.Output
+        );
     }
 
     [Fact]
@@ -236,11 +257,13 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-                ClassName = "AzureMonitor"
-            });
+            .WithItem(
+                new TemporaryOpenApiProject.ItemSpec
+                {
+                    Include = "files/azureMonitor.json",
+                    ClassName = "AzureMonitor",
+                }
+            );
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -251,11 +274,12 @@ public class TargetTest : IDisposable
 
         // Note ClassName does **not** override OutputPath.
         Assert.Contains(
-            "GenerateNSwagCSharp " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} " +
-            "Class: 'test.AzureMonitor' FirstForGenerator: 'true' " +
-            $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
-            process.Output);
+            "GenerateNSwagCSharp "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} "
+                + "Class: 'test.AzureMonitor' FirstForGenerator: 'true' "
+                + $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
+            process.Output
+        );
     }
 
     [Fact]
@@ -263,11 +287,13 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-                CodeGenerator = "NSwagTypeScript"
-            });
+            .WithItem(
+                new TemporaryOpenApiProject.ItemSpec
+                {
+                    Include = "files/azureMonitor.json",
+                    CodeGenerator = "NSwagTypeScript",
+                }
+            );
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -276,11 +302,12 @@ public class TargetTest : IDisposable
         Assert.Equal(0, process.ExitCode);
         Assert.Empty(process.Error);
         Assert.Contains(
-            "GenerateNSwagTypeScript " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} " +
-            "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' " +
-            $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.ts")}'",
-            process.Output);
+            "GenerateNSwagTypeScript "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} "
+                + "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' "
+                + $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.ts")}'",
+            process.Output
+        );
     }
 
     [Fact]
@@ -288,11 +315,13 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-                Namespace = "SomeNamespace"
-            });
+            .WithItem(
+                new TemporaryOpenApiProject.ItemSpec
+                {
+                    Include = "files/azureMonitor.json",
+                    Namespace = "SomeNamespace",
+                }
+            );
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -301,11 +330,12 @@ public class TargetTest : IDisposable
         Assert.Equal(0, process.ExitCode);
         Assert.Empty(process.Error);
         Assert.Contains(
-            "GenerateNSwagCSharp " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} " +
-            "Class: 'SomeNamespace.azureMonitorClient' FirstForGenerator: 'true' " +
-            $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
-            process.Output);
+            "GenerateNSwagCSharp "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} "
+                + "Class: 'SomeNamespace.azureMonitorClient' FirstForGenerator: 'true' "
+                + $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
+            process.Output
+        );
     }
 
     [Fact]
@@ -313,11 +343,13 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-                Options = "--an-option"
-            });
+            .WithItem(
+                new TemporaryOpenApiProject.ItemSpec
+                {
+                    Include = "files/azureMonitor.json",
+                    Options = "--an-option",
+                }
+            );
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -326,11 +358,12 @@ public class TargetTest : IDisposable
         Assert.Equal(0, process.ExitCode);
         Assert.Empty(process.Error);
         Assert.Contains(
-            "GenerateNSwagCSharp " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} " +
-            "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' " +
-            $"Options: '--an-option' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
-            process.Output);
+            "GenerateNSwagCSharp "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} "
+                + "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' "
+                + $"Options: '--an-option' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
+            process.Output
+        );
     }
 
     [Fact]
@@ -338,11 +371,13 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-                OutputPath = "Custom.cs"
-            });
+            .WithItem(
+                new TemporaryOpenApiProject.ItemSpec
+                {
+                    Include = "files/azureMonitor.json",
+                    OutputPath = "Custom.cs",
+                }
+            );
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -353,11 +388,12 @@ public class TargetTest : IDisposable
 
         // Note OutputPath also overrides ClassName.
         Assert.Contains(
-            "GenerateNSwagCSharp " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} " +
-            "Class: 'test.Custom' FirstForGenerator: 'true' " +
-            $"Options: '' OutputPath: '{Path.Combine("obj", "Custom.cs")}'",
-            process.Output);
+            "GenerateNSwagCSharp "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} "
+                + "Class: 'test.Custom' FirstForGenerator: 'true' "
+                + $"Options: '' OutputPath: '{Path.Combine("obj", "Custom.cs")}'",
+            process.Output
+        );
     }
 
     [Fact]
@@ -365,10 +401,12 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json;files/NSwag.json;files/swashbuckle.json",
-            });
+            .WithItem(
+                new TemporaryOpenApiProject.ItemSpec
+                {
+                    Include = "files/azureMonitor.json;files/NSwag.json;files/swashbuckle.json",
+                }
+            );
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -377,23 +415,26 @@ public class TargetTest : IDisposable
         Assert.Equal(0, process.ExitCode);
         Assert.Empty(process.Error);
         Assert.Contains(
-            "GenerateNSwagCSharp " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} " +
-            "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' " +
-            $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
-            process.Output);
+            "GenerateNSwagCSharp "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} "
+                + "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' "
+                + $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
+            process.Output
+        );
         Assert.Contains(
-            "GenerateNSwagCSharp " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "NSwag.json")} " +
-            "Class: 'test.NSwagClient' FirstForGenerator: 'false' " +
-            $"Options: '' OutputPath: '{Path.Combine("obj", "NSwagClient.cs")}'",
-            process.Output);
+            "GenerateNSwagCSharp "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "NSwag.json")} "
+                + "Class: 'test.NSwagClient' FirstForGenerator: 'false' "
+                + $"Options: '' OutputPath: '{Path.Combine("obj", "NSwagClient.cs")}'",
+            process.Output
+        );
         Assert.Contains(
-            "GenerateNSwagCSharp " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "swashbuckle.json")} " +
-            "Class: 'test.swashbuckleClient' FirstForGenerator: 'false' " +
-            $"Options: '' OutputPath: '{Path.Combine("obj", "swashbuckleClient.cs")}'",
-            process.Output);
+            "GenerateNSwagCSharp "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "swashbuckle.json")} "
+                + "Class: 'test.swashbuckleClient' FirstForGenerator: 'false' "
+                + $"Options: '' OutputPath: '{Path.Combine("obj", "swashbuckleClient.cs")}'",
+            process.Output
+        );
     }
 
     [Fact]
@@ -401,15 +442,14 @@ public class TargetTest : IDisposable
     {
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-            })
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-                CodeGenerator = "NSwagTypeScript"
-            });
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" })
+            .WithItem(
+                new TemporaryOpenApiProject.ItemSpec
+                {
+                    Include = "files/azureMonitor.json",
+                    CodeGenerator = "NSwagTypeScript",
+                }
+            );
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -418,17 +458,19 @@ public class TargetTest : IDisposable
         Assert.Equal(0, process.ExitCode);
         Assert.Empty(process.Error);
         Assert.Contains(
-            "GenerateNSwagCSharp " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} " +
-            "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' " +
-            $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
-            process.Output);
+            "GenerateNSwagCSharp "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} "
+                + "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' "
+                + $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.cs")}'",
+            process.Output
+        );
         Assert.Contains(
-            "GenerateNSwagTypeScript " +
-            $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} " +
-            "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' " +
-            $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.ts")}'",
-            process.Output);
+            "GenerateNSwagTypeScript "
+                + $"{Path.Combine(_temporaryDirectory.Root, "files", "azureMonitor.json")} "
+                + "Class: 'test.azureMonitorClient' FirstForGenerator: 'true' "
+                + $"Options: '' OutputPath: '{Path.Combine("obj", "azureMonitorClient.ts")}'",
+            process.Output
+        );
     }
 
     [Fact]
@@ -438,10 +480,7 @@ public class TargetTest : IDisposable
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
             .WithProperty("OpenApiGenerateCodeOnBuild", "false")
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-            });
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" });
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -475,10 +514,7 @@ public class TargetTest : IDisposable
         var project = new TemporaryOpenApiProject("test", _temporaryDirectory, "Microsoft.NET.Sdk")
             .WithTargetFrameworks(_targetFramework)
             .WithProperty("OpenApiGenerateCodeOnBuild", "false")
-            .WithItem(new TemporaryOpenApiProject.ItemSpec
-            {
-                Include = "files/azureMonitor.json",
-            });
+            .WithItem(new TemporaryOpenApiProject.ItemSpec { Include = "files/azureMonitor.json" });
         _temporaryDirectory.WithCSharpProject(project);
         project.Create();
 
@@ -500,7 +536,8 @@ public class TargetTest : IDisposable
             _output,
             _temporaryDirectory.Root,
             DotNetMuxer.MuxerPathOrDefault(),
-            "build");
+            "build"
+        );
         await process.Exited;
 
         return process;

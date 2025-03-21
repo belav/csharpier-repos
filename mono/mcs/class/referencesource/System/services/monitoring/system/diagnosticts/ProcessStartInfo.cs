@@ -1,46 +1,47 @@
 //------------------------------------------------------------------------------
 // <copyright file="ProcessStartInfo.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 #if MONO
 #undef FEATURE_PAL
 #endif
 
-namespace System.Diagnostics {
-    using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.ComponentModel;
-    using System.Diagnostics;
+namespace System.Diagnostics
+{
     using System;
-    using System.Security;
-    using System.Security.Permissions;
-    using Microsoft.Win32;
-    using System.IO;   
-    using System.ComponentModel.Design;
-    using System.Collections.Specialized;
-    using System.Collections.ObjectModel;
     using System.Collections;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.Diagnostics;
     using System.Globalization;
-    using System.Text;
+    using System.IO;
+    using System.Runtime.InteropServices;
     using System.Runtime.Versioning;
+    using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///     A set of values used to specify a process to start.  This is
     ///     used in conjunction with the <see cref='System.Diagnostics.Process'/>
     ///     component.
     /// </devdoc>
-
     [
-    TypeConverter(typeof(ExpandableObjectConverter)),
-    // Disabling partial trust scenarios
-    PermissionSet(SecurityAction.LinkDemand, Name="FullTrust"),
-    HostProtection(SharedState=true, SelfAffectingProcessMgmt=true)
+        TypeConverter(typeof(ExpandableObjectConverter)),
+        // Disabling partial trust scenarios
+        PermissionSet(SecurityAction.LinkDemand, Name = "FullTrust"),
+        HostProtection(SharedState = true, SelfAffectingProcessMgmt = true)
     ]
-	[StructLayout (LayoutKind.Sequential)]
-    public sealed class ProcessStartInfo {
+    [StructLayout(LayoutKind.Sequential)]
+    public sealed class ProcessStartInfo
+    {
         string fileName;
         string arguments;
         string directory;
@@ -59,25 +60,25 @@ namespace System.Diagnostics {
         bool loadUserProfile;
 #endif // FEATURE_PAL && !MONO
         bool redirectStandardInput = false;
-        bool redirectStandardOutput = false;       
+        bool redirectStandardOutput = false;
         bool redirectStandardError = false;
         Encoding standardOutputEncoding;
-        Encoding standardErrorEncoding; 
-        
+        Encoding standardErrorEncoding;
+
         bool createNoWindow = false;
         WeakReference weakParentProcess;
         internal StringDictionary environmentVariables;
 
-		static readonly string [] empty = new string [0];
+        static readonly string[] empty = new string[0];
 
         /// <devdoc>
         ///     Default constructor.  At least the <see cref='System.Diagnostics.ProcessStartInfo.FileName'/>
         ///     property must be set before starting the process.
         /// </devdoc>
-        public ProcessStartInfo() {
-        }
+        public ProcessStartInfo() { }
 
-        internal ProcessStartInfo(Process parent) {
+        internal ProcessStartInfo(Process parent)
+        {
             this.weakParentProcess = new WeakReference(parent);
         }
 
@@ -85,7 +86,8 @@ namespace System.Diagnostics {
         ///     Specifies the name of the application or document that is to be started.
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
-        public ProcessStartInfo(string fileName) {
+        public ProcessStartInfo(string fileName)
+        {
             this.fileName = fileName;
         }
 
@@ -94,16 +96,20 @@ namespace System.Diagnostics {
         ///     of command line arguments to pass to the application.
         /// </devdoc>
         [ResourceExposure(ResourceScope.Machine)]
-        public ProcessStartInfo(string fileName, string arguments) {
+        public ProcessStartInfo(string fileName, string arguments)
+        {
             this.fileName = fileName;
             this.arguments = arguments;
         }
 
         Collection<string> _argumentList;
 
-        public Collection<string> ArgumentList {
-            get {
-                if (_argumentList == null) {
+        public Collection<string> ArgumentList
+        {
+            get
+            {
+                if (_argumentList == null)
+                {
                     _argumentList = new Collection<string>();
                 }
                 return _argumentList;
@@ -126,50 +132,55 @@ namespace System.Diagnostics {
         ///    </note>
         /// </devdoc>
         [
-        DefaultValueAttribute(""), 
-        TypeConverter("System.Diagnostics.Design.VerbConverter, " + AssemblyRef.SystemDesign), 
-        MonitoringDescription(SR.ProcessVerb),
-        NotifyParentProperty(true)
+            DefaultValueAttribute(""),
+            TypeConverter("System.Diagnostics.Design.VerbConverter, " + AssemblyRef.SystemDesign),
+            MonitoringDescription(SR.ProcessVerb),
+            NotifyParentProperty(true)
         ]
-        public string Verb {
-            get {
-                if (verb == null) return string.Empty;
+        public string Verb
+        {
+            get
+            {
+                if (verb == null)
+                    return string.Empty;
                 return verb;
             }
-            set {
-                verb = value;
-            }
+            set { verb = value; }
         }
 
         /// <devdoc>
         ///     Specifies the set of command line arguments to use when starting the application.
         /// </devdoc>
         [
-        DefaultValueAttribute(""), 
-        MonitoringDescription(SR.ProcessArguments), 
-        SettingsBindable(true),
-        TypeConverter("System.Diagnostics.Design.StringValueConverter, " + AssemblyRef.SystemDesign),
-        NotifyParentProperty(true)
+            DefaultValueAttribute(""),
+            MonitoringDescription(SR.ProcessArguments),
+            SettingsBindable(true),
+            TypeConverter(
+                "System.Diagnostics.Design.StringValueConverter, " + AssemblyRef.SystemDesign
+            ),
+            NotifyParentProperty(true)
         ]
-        public string Arguments {
-            get {
-                if (arguments == null) return string.Empty;
+        public string Arguments
+        {
+            get
+            {
+                if (arguments == null)
+                    return string.Empty;
                 return arguments;
             }
-            set {
-                arguments = value;
-            }
+            set { arguments = value; }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [
-        DefaultValue(false), 
-        MonitoringDescription(SR.ProcessCreateNoWindow), 
-        NotifyParentProperty(true)
+            DefaultValue(false),
+            MonitoringDescription(SR.ProcessCreateNoWindow),
+            NotifyParentProperty(true)
         ]
-        public bool CreateNoWindow {
+        public bool CreateNoWindow
+        {
             get { return createNoWindow; }
             set { createNoWindow = value; }
         }
@@ -178,122 +189,139 @@ namespace System.Diagnostics {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [
-            Editor("System.Diagnostics.Design.StringDictionaryEditor, " + AssemblyRef.SystemDesign, "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing),
+            Editor(
+                "System.Diagnostics.Design.StringDictionaryEditor, " + AssemblyRef.SystemDesign,
+                "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
+            ),
             DesignerSerializationVisibility(DesignerSerializationVisibility.Content),
-            DefaultValue( null ), 
+            DefaultValue(null),
             MonitoringDescription(SR.ProcessEnvironmentVariables),
-            NotifyParentProperty(true)     
+            NotifyParentProperty(true)
         ]
-        public StringDictionary EnvironmentVariables {
+        public StringDictionary EnvironmentVariables
+        {
             [ResourceExposure(ResourceScope.Machine)]
             [ResourceConsumption(ResourceScope.Machine)]
-            get {
+            get
+            {
                 // Note:
                 // Creating a detached ProcessStartInfo will pre-populate the environment
-                // with current environmental variables. 
+                // with current environmental variables.
 
                 // When used with an existing Process.ProcessStartInfo the following behavior
                 //  * Desktop - Populates with current Environment (rather than that of the process)
-                                
-                if (environmentVariables == null) {
+
+                if (environmentVariables == null)
+                {
 #if PLATFORM_UNIX
                     environmentVariables = new CaseSensitiveStringDictionary();
 #else
-                    environmentVariables = new StringDictionaryWithComparer ();
+                    environmentVariables = new StringDictionaryWithComparer();
 #endif // PLATFORM_UNIX
-                    
                     // if not in design mode, initialize the child environment block with all the parent variables
-                    if (!(this.weakParentProcess != null &&
-                          this.weakParentProcess.IsAlive &&
-                          ((Component)this.weakParentProcess.Target).Site != null &&
-                          ((Component)this.weakParentProcess.Target).Site.DesignMode)) {
-                        
-                        foreach (DictionaryEntry entry in System.Environment.GetEnvironmentVariables())
+                    if (
+                        !(
+                            this.weakParentProcess != null
+                            && this.weakParentProcess.IsAlive
+                            && ((Component)this.weakParentProcess.Target).Site != null
+                            && ((Component)this.weakParentProcess.Target).Site.DesignMode
+                        )
+                    )
+                    {
+                        foreach (
+                            DictionaryEntry entry in System.Environment.GetEnvironmentVariables()
+                        )
                             environmentVariables.Add((string)entry.Key, (string)entry.Value);
                     }
-                
                 }
                 return environmentVariables;
             }
         }
 
-        private IDictionary<string,string> environment;
+        private IDictionary<string, string> environment;
 
         [
             DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
             DefaultValue(null),
             NotifyParentProperty(true)
         ]
-        public IDictionary<string, string> Environment {
-            get {
-                if (environment == null) {
+        public IDictionary<string, string> Environment
+        {
+            get
+            {
+                if (environment == null)
+                {
                     environment = this.EnvironmentVariables.AsGenericDictionary();
                 }
 
                 return environment;
             }
         }
-      
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [
-        DefaultValue(false), 
-        MonitoringDescription(SR.ProcessRedirectStandardInput),
-        NotifyParentProperty(true)
+            DefaultValue(false),
+            MonitoringDescription(SR.ProcessRedirectStandardInput),
+            NotifyParentProperty(true)
         ]
-        public bool RedirectStandardInput {
+        public bool RedirectStandardInput
+        {
             get { return redirectStandardInput; }
             set { redirectStandardInput = value; }
         }
-        
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [
-        DefaultValue(false), 
-        MonitoringDescription(SR.ProcessRedirectStandardOutput),
-        NotifyParentProperty(true)
+            DefaultValue(false),
+            MonitoringDescription(SR.ProcessRedirectStandardOutput),
+            NotifyParentProperty(true)
         ]
-        public bool RedirectStandardOutput {
+        public bool RedirectStandardOutput
+        {
             get { return redirectStandardOutput; }
             set { redirectStandardOutput = value; }
         }
-        
+
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [
-        DefaultValue(false), 
-        MonitoringDescription(SR.ProcessRedirectStandardError),
-        NotifyParentProperty(true)
+            DefaultValue(false),
+            MonitoringDescription(SR.ProcessRedirectStandardError),
+            NotifyParentProperty(true)
         ]
-        public bool RedirectStandardError {
+        public bool RedirectStandardError
+        {
             get { return redirectStandardError; }
             set { redirectStandardError = value; }
         }
 
-        
-        public Encoding StandardErrorEncoding {
+        public Encoding StandardErrorEncoding
+        {
             get { return standardErrorEncoding; }
             set { standardErrorEncoding = value; }
         }
 
-        public Encoding StandardOutputEncoding {
+        public Encoding StandardOutputEncoding
+        {
             get { return standardOutputEncoding; }
             set { standardOutputEncoding = value; }
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [
-        DefaultValue(true), 
-        MonitoringDescription(SR.ProcessUseShellExecute),
-        NotifyParentProperty(true)
+            DefaultValue(true),
+            MonitoringDescription(SR.ProcessUseShellExecute),
+            NotifyParentProperty(true)
         ]
-        public bool UseShellExecute {
+        public bool UseShellExecute
+        {
             get { return useShellExecute; }
             set { useShellExecute = value; }
         }
@@ -304,24 +332,36 @@ namespace System.Diagnostics {
         ///     <see cref='System.Diagnostics.ProcessStartInfo.FileName'/> property.
         /// </devdoc>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string[] Verbs {
+        public string[] Verbs
+        {
             [ResourceExposure(ResourceScope.None)]
             [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-            get {
+            get
+            {
                 ArrayList verbs = new ArrayList();
                 RegistryKey key = null;
                 string extension = Path.GetExtension(FileName);
-                try {
-                    if (extension != null && extension.Length > 0) {
+                try
+                {
+                    if (extension != null && extension.Length > 0)
+                    {
                         key = Registry.ClassesRoot.OpenSubKey(extension);
-                        if (key != null) {
+                        if (key != null)
+                        {
                             string value = (string)key.GetValue(String.Empty);
                             key.Close();
                             key = Registry.ClassesRoot.OpenSubKey(value + "\\shell");
-                            if (key != null) {
+                            if (key != null)
+                            {
                                 string[] names = key.GetSubKeyNames();
                                 for (int i = 0; i < names.Length; i++)
-                                    if (string.Compare(names[i], "new", StringComparison.OrdinalIgnoreCase) != 0)
+                                    if (
+                                        string.Compare(
+                                            names[i],
+                                            "new",
+                                            StringComparison.OrdinalIgnoreCase
+                                        ) != 0
+                                    )
                                         verbs.Add(names[i]);
                                 key.Close();
                                 key = null;
@@ -329,8 +369,10 @@ namespace System.Diagnostics {
                         }
                     }
                 }
-                finally {
-                    if (key != null) key.Close();
+                finally
+                {
+                    if (key != null)
+                        key.Close();
                 }
                 string[] temp = new string[verbs.Count];
                 verbs.CopyTo(temp, 0);
@@ -341,45 +383,56 @@ namespace System.Diagnostics {
 
 #if !FEATURE_PAL
         [NotifyParentProperty(true)]
-        public string UserName {
-            get { 
-                if( userName == null) {
+        public string UserName
+        {
+            get
+            {
+                if (userName == null)
+                {
                     return string.Empty;
                 }
-                else {
-                    return userName;                     
+                else
+                {
+                    return userName;
                 }
-            } 
+            }
             set { userName = value; }
         }
-        
-        public SecureString Password {
-            get { return password; } 
+
+        public SecureString Password
+        {
+            get { return password; }
             set { password = value; }
         }
 
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public string PasswordInClearText {
+        public string PasswordInClearText
+        {
             get { return passwordInClearText; }
             set { passwordInClearText = value; }
         }
-        
+
         [NotifyParentProperty(true)]
-        public string Domain {
-            get { 
-                if( domain == null) {
+        public string Domain
+        {
+            get
+            {
+                if (domain == null)
+                {
                     return string.Empty;
                 }
-                else {
-                    return domain;                     
-                }                
-            }  
-            set { domain = value;}
+                else
+                {
+                    return domain;
+                }
+            }
+            set { domain = value; }
         }
-        
+
         [NotifyParentProperty(true)]
-        public bool LoadUserProfile { 
-            get { return loadUserProfile;} 
+        public bool LoadUserProfile
+        {
+            get { return loadUserProfile; }
             set { loadUserProfile = value; }
         }
 #endif // !FEATURE_PAL
@@ -390,21 +443,29 @@ namespace System.Diagnostics {
         ///    </para>
         /// </devdoc>
         [
-        DefaultValue(""),
-        Editor("System.Diagnostics.Design.StartFileNameEditor, " + AssemblyRef.SystemDesign, "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing), 
-        MonitoringDescription(SR.ProcessFileName),
-        SettingsBindable(true),
-        TypeConverter("System.Diagnostics.Design.StringValueConverter, " + AssemblyRef.SystemDesign),
-        NotifyParentProperty(true)
+            DefaultValue(""),
+            Editor(
+                "System.Diagnostics.Design.StartFileNameEditor, " + AssemblyRef.SystemDesign,
+                "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
+            ),
+            MonitoringDescription(SR.ProcessFileName),
+            SettingsBindable(true),
+            TypeConverter(
+                "System.Diagnostics.Design.StringValueConverter, " + AssemblyRef.SystemDesign
+            ),
+            NotifyParentProperty(true)
         ]
-        public string FileName {
+        public string FileName
+        {
             [ResourceExposure(ResourceScope.Machine)]
-            get {
-                if (fileName == null) return string.Empty;
+            get
+            {
+                if (fileName == null)
+                    return string.Empty;
                 return fileName;
             }
             [ResourceExposure(ResourceScope.Machine)]
-            set { fileName = value;}
+            set { fileName = value; }
         }
 
         /// <devdoc>
@@ -412,23 +473,29 @@ namespace System.Diagnostics {
         ///     Specify "" to if the default is desired.
         /// </devdoc>
         [
-        DefaultValue(""), 
-        MonitoringDescription(SR.ProcessWorkingDirectory), 
-        Editor("System.Diagnostics.Design.WorkingDirectoryEditor, " + AssemblyRef.SystemDesign, "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing),
-        SettingsBindable(true),
-        TypeConverter("System.Diagnostics.Design.StringValueConverter, " + AssemblyRef.SystemDesign),
-        NotifyParentProperty(true)
+            DefaultValue(""),
+            MonitoringDescription(SR.ProcessWorkingDirectory),
+            Editor(
+                "System.Diagnostics.Design.WorkingDirectoryEditor, " + AssemblyRef.SystemDesign,
+                "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
+            ),
+            SettingsBindable(true),
+            TypeConverter(
+                "System.Diagnostics.Design.StringValueConverter, " + AssemblyRef.SystemDesign
+            ),
+            NotifyParentProperty(true)
         ]
-        public string WorkingDirectory {
+        public string WorkingDirectory
+        {
             [ResourceExposure(ResourceScope.Machine)]
-            get {
-                if (directory == null) return string.Empty;
+            get
+            {
+                if (directory == null)
+                    return string.Empty;
                 return directory;
             }
             [ResourceExposure(ResourceScope.Machine)]
-            set {
-                directory = value;
-            }
+            set { directory = value; }
         }
 
         /// <devdoc>
@@ -436,13 +503,14 @@ namespace System.Diagnostics {
         ///     if the process can not be started.
         /// </devdoc>
         [
-        DefaultValueAttribute(false), 
-        MonitoringDescription(SR.ProcessErrorDialog),
-        NotifyParentProperty(true)
+            DefaultValueAttribute(false),
+            MonitoringDescription(SR.ProcessErrorDialog),
+            NotifyParentProperty(true)
         ]
-        public bool ErrorDialog {
-            get { return errorDialog;}
-            set { errorDialog = value;}
+        public bool ErrorDialog
+        {
+            get { return errorDialog; }
+            set { errorDialog = value; }
         }
 
         /// <devdoc>
@@ -452,66 +520,84 @@ namespace System.Diagnostics {
         ///     useful to specify a parent in order to keep the dialog in front of the application.
         /// </devdoc>
         [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public IntPtr ErrorDialogParentHandle {
-            get { return errorDialogParentHandle;}
-            set { errorDialogParentHandle = value;}
+        public IntPtr ErrorDialogParentHandle
+        {
+            get { return errorDialogParentHandle; }
+            set { errorDialogParentHandle = value; }
         }
 
         /// <devdoc>
         ///     Sets or returns the style of window that should be used for the newly created process.
         /// </devdoc>
         [
-        DefaultValueAttribute(System.Diagnostics.ProcessWindowStyle.Normal), 
-        MonitoringDescription(SR.ProcessWindowStyle),
-        NotifyParentProperty(true)
+            DefaultValueAttribute(System.Diagnostics.ProcessWindowStyle.Normal),
+            MonitoringDescription(SR.ProcessWindowStyle),
+            NotifyParentProperty(true)
         ]
-        public ProcessWindowStyle WindowStyle {
-            get { return windowStyle;}
-            set {
-                if (!Enum.IsDefined(typeof(ProcessWindowStyle), value)) 
-                    throw new InvalidEnumArgumentException("value", (int)value, typeof(ProcessWindowStyle));
-                    
+        public ProcessWindowStyle WindowStyle
+        {
+            get { return windowStyle; }
+            set
+            {
+                if (!Enum.IsDefined(typeof(ProcessWindowStyle), value))
+                    throw new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(ProcessWindowStyle)
+                    );
+
                 windowStyle = value;
             }
         }
 
-        internal bool HaveEnvVars {
+        internal bool HaveEnvVars
+        {
             get { return (environmentVariables != null); }
         }
 
         public Encoding StandardInputEncoding { get; set; }
 
-        [DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden), Browsable (false)]
-        public string[] Verbs {
-            get {
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden), Browsable(false)]
+        public string[] Verbs
+        {
+            get
+            {
 #if MOBILE
                 return empty;
 #else
-                switch (System.Environment.OSVersion.Platform) {
-                case (PlatformID)4:
-                case (PlatformID)6:
-                case (PlatformID)128:
-                    return empty; // no verb on non-Windows
-                default:
-                    string ext = String.IsNullOrEmpty (fileName) ? null : Path.GetExtension (fileName);
-                    if (ext == null)
-                        return empty;
+                switch (System.Environment.OSVersion.Platform)
+                {
+                    case (PlatformID)4:
+                    case (PlatformID)6:
+                    case (PlatformID)128:
+                        return empty; // no verb on non-Windows
+                    default:
+                        string ext = String.IsNullOrEmpty(fileName)
+                            ? null
+                            : Path.GetExtension(fileName);
+                        if (ext == null)
+                            return empty;
 
-                    RegistryKey rk = null, rk2 = null, rk3 = null;
-                    try {
-                        rk = Registry.ClassesRoot.OpenSubKey (ext);
-                        string k = rk != null ? rk.GetValue (null) as string : null;
-                        rk2 = k != null ? Registry.ClassesRoot.OpenSubKey (k) : null;
-                        rk3 = rk2 != null ? rk2.OpenSubKey ("shell") : null;
-                        return rk3 != null ? rk3.GetSubKeyNames () : null;
-                    } finally {
-                        if (rk3 != null)
-                            rk3.Close ();
-                        if (rk2 != null)
-                            rk2.Close ();
-                        if (rk != null)
-                            rk.Close ();
-                    }
+                        RegistryKey rk = null,
+                            rk2 = null,
+                            rk3 = null;
+                        try
+                        {
+                            rk = Registry.ClassesRoot.OpenSubKey(ext);
+                            string k = rk != null ? rk.GetValue(null) as string : null;
+                            rk2 = k != null ? Registry.ClassesRoot.OpenSubKey(k) : null;
+                            rk3 = rk2 != null ? rk2.OpenSubKey("shell") : null;
+                            return rk3 != null ? rk3.GetSubKeyNames() : null;
+                        }
+                        finally
+                        {
+                            if (rk3 != null)
+                                rk3.Close();
+                            if (rk2 != null)
+                                rk2.Close();
+                            if (rk != null)
+                                rk.Close();
+                        }
                 }
 #endif
             }

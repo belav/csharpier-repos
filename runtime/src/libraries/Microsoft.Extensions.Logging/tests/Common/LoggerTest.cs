@@ -16,20 +16,31 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var store = new List<string>();
-            var loggerFactory = TestLoggerBuilder.Create(builder => builder
-                .AddProvider(new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store))
-                .AddProvider(new CustomLoggerProvider("provider2", ThrowExceptionAt.Log, store))
-                .AddProvider(new CustomLoggerProvider("provider3", ThrowExceptionAt.None, store)));
+            var loggerFactory = TestLoggerBuilder.Create(builder =>
+                builder
+                    .AddProvider(
+                        new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
+                    )
+                    .AddProvider(new CustomLoggerProvider("provider2", ThrowExceptionAt.Log, store))
+                    .AddProvider(
+                        new CustomLoggerProvider("provider3", ThrowExceptionAt.None, store)
+                    )
+            );
 
             var logger = loggerFactory.CreateLogger("Test");
 
             // Act
-            var aggregateException = Assert.Throws<AggregateException>(() => logger.LogInformation("Hello!"));
+            var aggregateException = Assert.Throws<AggregateException>(() =>
+                logger.LogInformation("Hello!")
+            );
 
             // Assert
             Assert.Equal(new[] { "provider1.Test-Hello!", "provider3.Test-Hello!" }, store);
             Assert.NotNull(aggregateException);
-            Assert.StartsWith("An error occurred while writing to logger(s).", aggregateException.Message);
+            Assert.StartsWith(
+                "An error occurred while writing to logger(s).",
+                aggregateException.Message
+            );
             Assert.Single(aggregateException.InnerExceptions);
             var exception = aggregateException.InnerExceptions[0];
             Assert.Equal("provider2.Test-Error occurred while logging data.", exception.Message);
@@ -40,20 +51,33 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var store = new List<string>();
-            var loggerFactory = TestLoggerBuilder.Create(builder => builder
-                .AddProvider(new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store))
-                .AddProvider(new CustomLoggerProvider("provider2", ThrowExceptionAt.BeginScope, store))
-                .AddProvider(new CustomLoggerProvider("provider3", ThrowExceptionAt.None, store)));
+            var loggerFactory = TestLoggerBuilder.Create(builder =>
+                builder
+                    .AddProvider(
+                        new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
+                    )
+                    .AddProvider(
+                        new CustomLoggerProvider("provider2", ThrowExceptionAt.BeginScope, store)
+                    )
+                    .AddProvider(
+                        new CustomLoggerProvider("provider3", ThrowExceptionAt.None, store)
+                    )
+            );
 
             var logger = loggerFactory.CreateLogger("Test");
 
             // Act
-            var aggregateException = Assert.Throws<AggregateException>(() => logger.BeginScope("Scope1"));
+            var aggregateException = Assert.Throws<AggregateException>(() =>
+                logger.BeginScope("Scope1")
+            );
 
             // Assert
             Assert.Equal(new[] { "provider1.Test-Scope1", "provider3.Test-Scope1" }, store);
             Assert.NotNull(aggregateException);
-            Assert.StartsWith("An error occurred while writing to logger(s).", aggregateException.Message);
+            Assert.StartsWith(
+                "An error occurred while writing to logger(s).",
+                aggregateException.Message
+            );
             Assert.Single(aggregateException.InnerExceptions);
             var exception = aggregateException.InnerExceptions[0];
             Assert.Equal("provider2.Test-Error occurred while creating scope.", exception.Message);
@@ -64,23 +88,39 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var store = new List<string>();
-            var loggerFactory = TestLoggerBuilder.Create(builder => builder
-                .AddProvider(new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store))
-                .AddProvider(new CustomLoggerProvider("provider2", ThrowExceptionAt.IsEnabled, store))
-                .AddProvider(new CustomLoggerProvider("provider3", ThrowExceptionAt.None, store)));
+            var loggerFactory = TestLoggerBuilder.Create(builder =>
+                builder
+                    .AddProvider(
+                        new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
+                    )
+                    .AddProvider(
+                        new CustomLoggerProvider("provider2", ThrowExceptionAt.IsEnabled, store)
+                    )
+                    .AddProvider(
+                        new CustomLoggerProvider("provider3", ThrowExceptionAt.None, store)
+                    )
+            );
 
             var logger = loggerFactory.CreateLogger("Test");
 
             // Act
-            var aggregateException = Assert.Throws<AggregateException>(() => logger.LogInformation("Hello!"));
+            var aggregateException = Assert.Throws<AggregateException>(() =>
+                logger.LogInformation("Hello!")
+            );
 
             // Assert
             Assert.Equal(new[] { "provider1.Test-Hello!", "provider3.Test-Hello!" }, store);
             Assert.NotNull(aggregateException);
-            Assert.StartsWith("An error occurred while writing to logger(s).", aggregateException.Message);
+            Assert.StartsWith(
+                "An error occurred while writing to logger(s).",
+                aggregateException.Message
+            );
             Assert.Single(aggregateException.InnerExceptions);
             var exception = aggregateException.InnerExceptions[0];
-            Assert.Equal("provider2.Test-Error occurred while checking if logger is enabled.", exception.Message);
+            Assert.Equal(
+                "provider2.Test-Error occurred while checking if logger is enabled.",
+                exception.Message
+            );
         }
 
         [Fact]
@@ -88,23 +128,36 @@ namespace Microsoft.Extensions.Logging.Test
         {
             // Arrange
             var store = new List<string>();
-            var loggerFactory = TestLoggerBuilder.Create(builder => builder
-                .AddProvider(new CustomLoggerProvider("provider1", ThrowExceptionAt.Log, store))
-                .AddProvider(new CustomLoggerProvider("provider2", ThrowExceptionAt.Log, store)));
+            var loggerFactory = TestLoggerBuilder.Create(builder =>
+                builder
+                    .AddProvider(new CustomLoggerProvider("provider1", ThrowExceptionAt.Log, store))
+                    .AddProvider(new CustomLoggerProvider("provider2", ThrowExceptionAt.Log, store))
+            );
 
             var logger = loggerFactory.CreateLogger("Test");
 
             // Act
-            var aggregateException = Assert.Throws<AggregateException>(() => logger.LogInformation("Hello!"));
+            var aggregateException = Assert.Throws<AggregateException>(() =>
+                logger.LogInformation("Hello!")
+            );
 
             // Assert
             Assert.Empty(store);
             Assert.NotNull(aggregateException);
-            Assert.StartsWith("An error occurred while writing to logger(s).", aggregateException.Message);
+            Assert.StartsWith(
+                "An error occurred while writing to logger(s).",
+                aggregateException.Message
+            );
             var exceptions = aggregateException.InnerExceptions;
             Assert.Equal(2, exceptions.Count);
-            Assert.Equal("provider1.Test-Error occurred while logging data.", exceptions[0].Message);
-            Assert.Equal("provider2.Test-Error occurred while logging data.", exceptions[1].Message);
+            Assert.Equal(
+                "provider1.Test-Error occurred while logging data.",
+                exceptions[0].Message
+            );
+            Assert.Equal(
+                "provider2.Test-Error occurred while logging data.",
+                exceptions[1].Message
+            );
         }
 
         [Fact]
@@ -115,7 +168,9 @@ namespace Microsoft.Extensions.Logging.Test
             var loggerFactory = new LoggerFactory();
             var logger = loggerFactory.CreateLogger("Test");
 
-            loggerFactory.AddProvider(new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store));
+            loggerFactory.AddProvider(
+                new CustomLoggerProvider("provider1", ThrowExceptionAt.None, store)
+            );
 
             // Act
             logger.LogInformation("Hello");
@@ -125,60 +180,69 @@ namespace Microsoft.Extensions.Logging.Test
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/34091", TestRuntimes.Mono)]
         public void ScopesAreNotCreatedForDisabledLoggers()
         {
             var provider = new Mock<ILoggerProvider>();
             var logger = new Mock<ILogger>();
 
-            provider.Setup(loggerProvider => loggerProvider.CreateLogger(It.IsAny<string>()))
+            provider
+                .Setup(loggerProvider => loggerProvider.CreateLogger(It.IsAny<string>()))
                 .Returns(logger.Object);
 
-            var factory = TestLoggerBuilder.Create(
-                builder => {
-                    builder.AddProvider(provider.Object);
-                    // Disable all logs
-                    builder.AddFilter(null, LogLevel.None);
-                });
+            var factory = TestLoggerBuilder.Create(builder =>
+            {
+                builder.AddProvider(provider.Object);
+                // Disable all logs
+                builder.AddFilter(null, LogLevel.None);
+            });
 
             var newLogger = factory.CreateLogger("Logger");
-            using (newLogger.BeginScope("Scope"))
-            {
-            }
+            using (newLogger.BeginScope("Scope")) { }
 
             provider.Verify(p => p.CreateLogger("Logger"), Times.Once);
             logger.Verify(l => l.BeginScope(It.IsAny<object>()), Times.Never);
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/34091", TestRuntimes.Mono)]
         public void ScopesAreNotCreatedWhenScopesAreDisabled()
         {
             var provider = new Mock<ILoggerProvider>();
             var logger = new Mock<ILogger>();
 
-            provider.Setup(loggerProvider => loggerProvider.CreateLogger(It.IsAny<string>()))
+            provider
+                .Setup(loggerProvider => loggerProvider.CreateLogger(It.IsAny<string>()))
                 .Returns(logger.Object);
 
-            var factory = TestLoggerBuilder.Create(
-                builder => {
-                    builder.AddProvider(provider.Object);
-                    builder.Services.Configure<LoggerFilterOptions>(options => options.CaptureScopes = false);
-                });
+            var factory = TestLoggerBuilder.Create(builder =>
+            {
+                builder.AddProvider(provider.Object);
+                builder.Services.Configure<LoggerFilterOptions>(options =>
+                    options.CaptureScopes = false
+                );
+            });
 
             var newLogger = factory.CreateLogger("Logger");
-            using (newLogger.BeginScope("Scope"))
-            {
-            }
+            using (newLogger.BeginScope("Scope")) { }
 
             provider.Verify(p => p.CreateLogger("Logger"), Times.Once);
             logger.Verify(l => l.BeginScope(It.IsAny<object>()), Times.Never);
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/34091", TestRuntimes.Mono)]
         public void ScopesAreNotCreatedInIScopeProviderWhenScopesAreDisabled()
         {
@@ -187,23 +251,30 @@ namespace Microsoft.Extensions.Logging.Test
 
             IExternalScopeProvider externalScopeProvider = null;
 
-            provider.Setup(loggerProvider => loggerProvider.CreateLogger(It.IsAny<string>()))
+            provider
+                .Setup(loggerProvider => loggerProvider.CreateLogger(It.IsAny<string>()))
                 .Returns(logger.Object);
-            provider.As<ISupportExternalScope>().Setup(scope => scope.SetScopeProvider(It.IsAny<IExternalScopeProvider>()))
-                .Callback((IExternalScopeProvider scopeProvider) => externalScopeProvider = scopeProvider);
+            provider
+                .As<ISupportExternalScope>()
+                .Setup(scope => scope.SetScopeProvider(It.IsAny<IExternalScopeProvider>()))
+                .Callback(
+                    (IExternalScopeProvider scopeProvider) => externalScopeProvider = scopeProvider
+                );
 
-            var factory = TestLoggerBuilder.Create(
-                builder => {
-                    builder.AddProvider(provider.Object);
-                    builder.Services.Configure<LoggerFilterOptions>(options => options.CaptureScopes = false);
-                });
+            var factory = TestLoggerBuilder.Create(builder =>
+            {
+                builder.AddProvider(provider.Object);
+                builder.Services.Configure<LoggerFilterOptions>(options =>
+                    options.CaptureScopes = false
+                );
+            });
 
             var newLogger = factory.CreateLogger("Logger");
             int scopeCount = 0;
 
             using (newLogger.BeginScope("Scope"))
             {
-                externalScopeProvider.ForEachScope<object>((_, __) => scopeCount ++, null);
+                externalScopeProvider.ForEachScope<object>((_, __) => scopeCount++, null);
             }
 
             provider.Verify(p => p.CreateLogger("Logger"), Times.Once);
@@ -212,7 +283,10 @@ namespace Microsoft.Extensions.Logging.Test
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/34091", TestRuntimes.Mono)]
         public void CaptureScopesIsReadFromConfiguration()
         {
@@ -223,23 +297,28 @@ namespace Microsoft.Extensions.Logging.Test
             var config = TestConfiguration.Create(() => json);
             IExternalScopeProvider externalScopeProvider = null;
 
-            provider.Setup(loggerProvider => loggerProvider.CreateLogger(It.IsAny<string>()))
+            provider
+                .Setup(loggerProvider => loggerProvider.CreateLogger(It.IsAny<string>()))
                 .Returns(logger.Object);
-            provider.As<ISupportExternalScope>().Setup(scope => scope.SetScopeProvider(It.IsAny<IExternalScopeProvider>()))
-                .Callback((IExternalScopeProvider scopeProvider) => externalScopeProvider = scopeProvider);
+            provider
+                .As<ISupportExternalScope>()
+                .Setup(scope => scope.SetScopeProvider(It.IsAny<IExternalScopeProvider>()))
+                .Callback(
+                    (IExternalScopeProvider scopeProvider) => externalScopeProvider = scopeProvider
+                );
 
-            var factory = TestLoggerBuilder.Create(
-                builder => {
-                    builder.AddProvider(provider.Object);
-                    builder.AddConfiguration(config);
-                });
+            var factory = TestLoggerBuilder.Create(builder =>
+            {
+                builder.AddProvider(provider.Object);
+                builder.AddConfiguration(config);
+            });
 
             var newLogger = factory.CreateLogger("Logger");
             int scopeCount = 0;
 
             using (newLogger.BeginScope("Scope"))
             {
-                externalScopeProvider.ForEachScope<object>((_, __) => scopeCount ++, null);
+                externalScopeProvider.ForEachScope<object>((_, __) => scopeCount++, null);
                 Assert.Equal(0, scopeCount);
             }
 
@@ -249,7 +328,7 @@ namespace Microsoft.Extensions.Logging.Test
             scopeCount = 0;
             using (newLogger.BeginScope("Scope"))
             {
-                externalScopeProvider.ForEachScope<object>((_, __) => scopeCount ++, null);
+                externalScopeProvider.ForEachScope<object>((_, __) => scopeCount++, null);
                 Assert.Equal(1, scopeCount);
             }
         }
@@ -264,13 +343,21 @@ namespace Microsoft.Extensions.Logging.Test
             // Act
             var beforeProvider = logger.DebuggerToString();
 
-            loggerFactory.AddProvider(new CustomLoggerProvider("provider1", ThrowExceptionAt.None, new List<string>()));
+            loggerFactory.AddProvider(
+                new CustomLoggerProvider("provider1", ThrowExceptionAt.None, new List<string>())
+            );
 
             var afterProvider = logger.DebuggerToString();
 
             // Assert
-            Assert.Equal(@"Name = ""Microsoft.Extensions.Logging.Test.LoggerTest"", Enabled = false", beforeProvider);
-            Assert.Equal(@"Name = ""Microsoft.Extensions.Logging.Test.LoggerTest"", MinLevel = Trace", afterProvider);
+            Assert.Equal(
+                @"Name = ""Microsoft.Extensions.Logging.Test.LoggerTest"", Enabled = false",
+                beforeProvider
+            );
+            Assert.Equal(
+                @"Name = ""Microsoft.Extensions.Logging.Test.LoggerTest"", MinLevel = Trace",
+                afterProvider
+            );
         }
 
         private class CustomLoggerProvider : ILoggerProvider
@@ -279,7 +366,11 @@ namespace Microsoft.Extensions.Logging.Test
             private readonly ThrowExceptionAt _throwExceptionAt;
             private readonly List<string> _store;
 
-            public CustomLoggerProvider(string providerName, ThrowExceptionAt throwExceptionAt, List<string> store)
+            public CustomLoggerProvider(
+                string providerName,
+                ThrowExceptionAt throwExceptionAt,
+                List<string> store
+            )
             {
                 _providerName = providerName;
                 _throwExceptionAt = throwExceptionAt;
@@ -291,9 +382,7 @@ namespace Microsoft.Extensions.Logging.Test
                 return new CustomLogger($"{_providerName}.{name}", _throwExceptionAt, _store);
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
 
         private class CustomLogger : ILogger
@@ -313,7 +402,9 @@ namespace Microsoft.Extensions.Logging.Test
             {
                 if (_throwExceptionAt == ThrowExceptionAt.BeginScope)
                 {
-                    throw new InvalidOperationException($"{_name}-Error occurred while creating scope.");
+                    throw new InvalidOperationException(
+                        $"{_name}-Error occurred while creating scope."
+                    );
                 }
                 _store.Add($"{_name}-{state}");
 
@@ -324,7 +415,9 @@ namespace Microsoft.Extensions.Logging.Test
             {
                 if (_throwExceptionAt == ThrowExceptionAt.IsEnabled)
                 {
-                    throw new InvalidOperationException($"{_name}-Error occurred while checking if logger is enabled.");
+                    throw new InvalidOperationException(
+                        $"{_name}-Error occurred while checking if logger is enabled."
+                    );
                 }
 
                 return true;
@@ -335,7 +428,8 @@ namespace Microsoft.Extensions.Logging.Test
                 EventId eventId,
                 TState state,
                 Exception exception,
-                Func<TState, Exception, string> formatter)
+                Func<TState, Exception, string> formatter
+            )
             {
                 if (!IsEnabled(logLevel))
                 {
@@ -344,7 +438,9 @@ namespace Microsoft.Extensions.Logging.Test
 
                 if (_throwExceptionAt == ThrowExceptionAt.Log)
                 {
-                    throw new InvalidOperationException($"{_name}-Error occurred while logging data.");
+                    throw new InvalidOperationException(
+                        $"{_name}-Error occurred while logging data."
+                    );
                 }
                 _store.Add($"{_name}-{state}");
             }
@@ -355,7 +451,7 @@ namespace Microsoft.Extensions.Logging.Test
             None,
             BeginScope,
             Log,
-            IsEnabled
+            IsEnabled,
         }
     }
 }

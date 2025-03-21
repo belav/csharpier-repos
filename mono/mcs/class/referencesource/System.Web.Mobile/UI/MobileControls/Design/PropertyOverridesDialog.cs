@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="PropertyOverridesDialog.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -11,35 +11,38 @@ namespace System.Web.UI.Design.MobileControls
     using System.Collections.Specialized;
     using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Globalization;
     using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
+    using System.Globalization;
     using System.Reflection;
-    using System.Windows.Forms;
-    using System.Windows.Forms.Design;
-
-    using Control = System.Web.UI.Control;
-
-    using System.Web.UI.MobileControls;
     using System.Web.UI.Design.MobileControls.Converters;
     using System.Web.UI.Design.MobileControls.Util;
+    using System.Web.UI.MobileControls;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
+    using Control = System.Web.UI.Control;
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal sealed class PropertyOverridesDialog :
-        DesignerForm, IRefreshableDeviceSpecificEditor, IDeviceSpecificDesigner
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal sealed class PropertyOverridesDialog
+        : DesignerForm,
+            IRefreshableDeviceSpecificEditor,
+            IDeviceSpecificDesigner
     {
         private bool _isDirty = true;
         private IDeviceSpecificDesigner _designer;
         private int _mergingContext;
         private System.Windows.Forms.Control _header;
         private String _currentDeviceSpecificID;
-        private IDictionary _cachedDeviceSpecifics =
-            new HybridDictionary(true /* make case-insensitive */);
+        private IDictionary _cachedDeviceSpecifics = new HybridDictionary(
+            true /* make case-insensitive */
+        );
         private bool _ignoreSelectionChanged = true;
 
         private System.Windows.Forms.Label _lblProperties;
@@ -50,33 +53,32 @@ namespace System.Web.UI.Design.MobileControls
         private System.Windows.Forms.Button _cmdOK;
         private System.Windows.Forms.Button _cmdCancel;
         private System.Windows.Forms.Panel _pnlMain;
-        
-        internal PropertyOverridesDialog(
-            IDeviceSpecificDesigner designer,
-            int mergingContext
-        ) : base(designer.UnderlyingControl.Site) {
+
+        internal PropertyOverridesDialog(IDeviceSpecificDesigner designer, int mergingContext)
+            : base(designer.UnderlyingControl.Site)
+        {
             _designer = designer;
             _mergingContext = mergingContext;
-           
+
             // Required for Win Form Designer support
             InitializeComponent();
 
-            this._lblAppliedFilters.Text =
-                SR.GetString(SR.PropertyOverridesDialog_AppliedDeviceFilters);
+            this._lblAppliedFilters.Text = SR.GetString(
+                SR.PropertyOverridesDialog_AppliedDeviceFilters
+            );
             this._btnEditFilters.Text = SR.GetString(SR.GenericDialog_Edit);
-            this._lblProperties.Text =
-                SR.GetString(SR.PropertyOverridesDialog_DeviceSpecificProperties);
+            this._lblProperties.Text = SR.GetString(
+                SR.PropertyOverridesDialog_DeviceSpecificProperties
+            );
             this._cmdOK.Text = SR.GetString(SR.GenericDialog_OKBtnCaption);
             this._cmdCancel.Text = SR.GetString(SR.GenericDialog_CancelBtnCaption);
 
-            int tabOffset = GenericUI.InitDialog(
-                this,
-                _designer,
-                _mergingContext
-            );
+            int tabOffset = GenericUI.InitDialog(this, _designer, _mergingContext);
 
-            this.Text = _designer.UnderlyingControl.ID
-                + " - " + SR.GetString(SR.PropertyOverridesDialog_Title);
+            this.Text =
+                _designer.UnderlyingControl.ID
+                + " - "
+                + SR.GetString(SR.PropertyOverridesDialog_Title);
             SetTabIndexes(tabOffset);
             _designer.SetDeviceSpecificEditor(this);
 
@@ -88,35 +90,32 @@ namespace System.Web.UI.Design.MobileControls
             // NOTE: Calling CurrentDeviceSpecificID will cause a refresh to
             //       happen as a side effect.
             _currentDeviceSpecificID = _designer.CurrentDeviceSpecificID;
-            if(_currentDeviceSpecificID != null)
+            if (_currentDeviceSpecificID != null)
             {
                 _cbChoices.Items.Clear();
                 LoadChoices(_currentDeviceSpecificID);
-                if(!ValidateLoadedChoices())
+                if (!ValidateLoadedChoices())
                 {
                     // Throw to prevent dialog from opening.  Caught and hidden
                     // by PropertyOverridesTypeEditor.cs
                     throw new InvalidChoiceException(
-                        "Property overrides dialog can not open because there " +
-                        "are invalid choices defined in the page."
+                        "Property overrides dialog can not open because there "
+                            + "are invalid choices defined in the page."
                     );
                 }
             }
-            
+
             // Register Event Handlers
-            _cbChoices.SelectedIndexChanged += new EventHandler(
-                OnFilterSelected
-            );
+            _cbChoices.SelectedIndexChanged += new EventHandler(OnFilterSelected);
             _btnEditFilters.Click += new EventHandler(OnEditFilters);
             _cmdOK.Click += new EventHandler(OnOK);
             _cmdCancel.Click += new EventHandler(OnCancel);
             UpdateUI();
         }
 
-        protected override string HelpTopic {
-            get {
-                return "net.Mobile.PropertyOverridesDialog";
-            }
+        protected override string HelpTopic
+        {
+            get { return "net.Mobile.PropertyOverridesDialog"; }
         }
 
         internal void SetTabIndexes(int tabOffset)
@@ -130,7 +129,7 @@ namespace System.Web.UI.Design.MobileControls
             this._cmdOK.TabIndex = ++tabOffset;
             this._cmdCancel.TabIndex = ++tabOffset;
         }
-        
+
         private void InitializeComponent()
         {
             this._cbChoices = new System.Windows.Forms.ComboBox();
@@ -149,16 +148,21 @@ namespace System.Web.UI.Design.MobileControls
             this._cmdCancel.Location = new System.Drawing.Point(201, 290);
             this._btnEditFilters.Location = new System.Drawing.Point(201, 15);
             this._btnEditFilters.Size = new System.Drawing.Size(75, 23);
-            this._pnlMain.Anchor = (System.Windows.Forms.AnchorStyles.Bottom
-                | System.Windows.Forms.AnchorStyles.Left);
-            this._pnlMain.Controls.AddRange(new System.Windows.Forms.Control[] {
-                this._cmdCancel,
-                this._cmdOK,
-                this._lblProperties,
-                this._pgProperties,
-                this._btnEditFilters,
-                this._cbChoices,
-                this._lblAppliedFilters});
+            this._pnlMain.Anchor = (
+                System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left
+            );
+            this._pnlMain.Controls.AddRange(
+                new System.Windows.Forms.Control[]
+                {
+                    this._cmdCancel,
+                    this._cmdOK,
+                    this._lblProperties,
+                    this._pgProperties,
+                    this._btnEditFilters,
+                    this._cbChoices,
+                    this._lblAppliedFilters,
+                }
+            );
             this._pnlMain.Location = new System.Drawing.Point(6, 5);
             this._pnlMain.Size = new System.Drawing.Size(276, 313);
             this._pgProperties.CommandsVisibleIfAvailable = false;
@@ -172,20 +176,21 @@ namespace System.Web.UI.Design.MobileControls
             this._pgProperties.ToolbarVisible = false;
             this._pgProperties.ViewBackColor = System.Drawing.SystemColors.Window;
             this._pgProperties.ViewForeColor = System.Drawing.SystemColors.WindowText;
-            this._pgProperties.PropertyValueChanged += new PropertyValueChangedEventHandler(this.OnPropertyValueChanged);
+            this._pgProperties.PropertyValueChanged += new PropertyValueChangedEventHandler(
+                this.OnPropertyValueChanged
+            );
             this._lblProperties.Location = new System.Drawing.Point(0, 48);
             this._lblProperties.Size = new System.Drawing.Size(275, 16);
             this._lblAppliedFilters.Size = new System.Drawing.Size(275, 16);
             this.AcceptButton = _cmdOK;
             this.CancelButton = _cmdCancel;
             this.ClientSize = new System.Drawing.Size(285, 325);
-            this.Controls.AddRange(new System.Windows.Forms.Control[] {this._pnlMain});
+            this.Controls.AddRange(new System.Windows.Forms.Control[] { this._pnlMain });
         }
-        
+
         private void CacheState(String deviceSpecificID)
         {
-            _cachedDeviceSpecifics[deviceSpecificID] = 
-                new PropertyOverridesCachedState(_cbChoices);
+            _cachedDeviceSpecifics[deviceSpecificID] = new PropertyOverridesCachedState(_cbChoices);
         }
 
         private void CacheCurrentState()
@@ -198,14 +203,12 @@ namespace System.Web.UI.Design.MobileControls
             if (null != deviceSpecificID)
             {
                 _currentDeviceSpecificID = deviceSpecificID.ToLower(CultureInfo.InvariantCulture);
-                PropertyOverridesCachedState state =
-                    (PropertyOverridesCachedState) _cachedDeviceSpecifics[
-                        _currentDeviceSpecificID
-                    ];
-                if(state != null)
+                PropertyOverridesCachedState state = (PropertyOverridesCachedState)
+                    _cachedDeviceSpecifics[_currentDeviceSpecificID];
+                if (state != null)
                 {
                     state.Restore(_cbChoices);
-                    foreach(ChoiceTreeNode node in state.Choices)
+                    foreach (ChoiceTreeNode node in state.Choices)
                     {
                         node.Choice.Refresh();
                     }
@@ -222,13 +225,17 @@ namespace System.Web.UI.Design.MobileControls
         [Conditional("DEBUG")]
         private void debug_CheckChoicesForDuplicate(DeviceSpecificChoice runtimeChoice)
         {
-            foreach(ChoiceTreeNode choiceNode in _cbChoices.Items)
+            foreach (ChoiceTreeNode choiceNode in _cbChoices.Items)
             {
-                if(choiceNode.Name == runtimeChoice.Filter
-                    && choiceNode.RuntimeChoice.Argument == runtimeChoice.Argument)
+                if (
+                    choiceNode.Name == runtimeChoice.Filter
+                    && choiceNode.RuntimeChoice.Argument == runtimeChoice.Argument
+                )
                 {
-                    Debug.Fail("Loaded duplicate choice: " + 
-                        DesignerUtility.ChoiceToUniqueIdentifier(runtimeChoice));
+                    Debug.Fail(
+                        "Loaded duplicate choice: "
+                            + DesignerUtility.ChoiceToUniqueIdentifier(runtimeChoice)
+                    );
                 }
             }
         }
@@ -239,12 +246,12 @@ namespace System.Web.UI.Design.MobileControls
             _designer.GetDeviceSpecific(deviceSpecificID, out ds);
             LoadChoices(ds);
         }
-        
+
         private void LoadChoices(DeviceSpecific deviceSpecific)
         {
-            if(deviceSpecific != null)
+            if (deviceSpecific != null)
             {
-                foreach(DeviceSpecificChoice runtimeChoice in deviceSpecific.Choices)
+                foreach (DeviceSpecificChoice runtimeChoice in deviceSpecific.Choices)
                 {
                     debug_CheckChoicesForDuplicate(runtimeChoice);
                     ChoiceTreeNode newChoiceNode = new ChoiceTreeNode(
@@ -261,57 +268,53 @@ namespace System.Web.UI.Design.MobileControls
 
         private bool ValidateLoadedChoices()
         {
-            StringCollection duplicateChoices =
-                DesignerUtility.GetDuplicateChoiceTreeNodes(
-                    _cbChoices.Items
-                );
+            StringCollection duplicateChoices = DesignerUtility.GetDuplicateChoiceTreeNodes(
+                _cbChoices.Items
+            );
 
-            if(duplicateChoices.Count > 0)
+            if (duplicateChoices.Count > 0)
             {
                 if (!_ignoreSelectionChanged)
                 {
                     GenericUI.ShowWarningMessage(
                         SR.GetString(SR.PropertyOverridesDialog_Title),
-                        SR.GetString(SR.PropertyOverridesDialog_DuplicateChoices,
-                        GenericUI.BuildCommaDelimitedList(duplicateChoices))
-                        );
+                        SR.GetString(
+                            SR.PropertyOverridesDialog_DuplicateChoices,
+                            GenericUI.BuildCommaDelimitedList(duplicateChoices)
+                        )
+                    );
                 }
                 return false;
             }
             return true;
         }
-        
+
         private void SaveChoices()
         {
-            if(_currentDeviceSpecificID != null)
+            if (_currentDeviceSpecificID != null)
             {
                 CacheCurrentState();
             }
             foreach (DictionaryEntry entry in _cachedDeviceSpecifics)
             {
-                PropertyOverridesCachedState state =
-                    (PropertyOverridesCachedState) entry.Value;
-                state.SaveChoicesFromComboBox(
-                    _designer,
-                    (String) entry.Key
-                );
+                PropertyOverridesCachedState state = (PropertyOverridesCachedState)entry.Value;
+                state.SaveChoicesFromComboBox(_designer, (String)entry.Key);
             }
         }
-        
+
         private void UpdateUI()
         {
-            if(_cbChoices.SelectedItem == null && _cbChoices.Items.Count > 0)
+            if (_cbChoices.SelectedItem == null && _cbChoices.Items.Count > 0)
             {
                 _cbChoices.SelectedItem = _cbChoices.Items[0];
             }
-            
-            ChoiceTreeNode choice = (ChoiceTreeNode) _cbChoices.SelectedItem;
+
+            ChoiceTreeNode choice = (ChoiceTreeNode)_cbChoices.SelectedItem;
             bool isChoiceSelected = (choice != null);
             if (isChoiceSelected)
             {
                 _cbChoices.Text = choice.ToString();
-                _pgProperties.SelectedObject =
-                    choice.Choice;
+                _pgProperties.SelectedObject = choice.Choice;
             }
             else
             {
@@ -352,20 +355,19 @@ namespace System.Web.UI.Design.MobileControls
             ISite componentSite = ((IComponent)(_designer.UnderlyingControl)).Site;
             Debug.Assert(componentSite != null, "Expected the runtime control to be sited.");
 
-            IComponentChangeService changeService =
-                (IComponentChangeService)componentSite.GetService(typeof(IComponentChangeService));
+            IComponentChangeService changeService = (IComponentChangeService)
+                componentSite.GetService(typeof(IComponentChangeService));
 
-            IMobileWebFormServices wfServices = 
-                (IMobileWebFormServices)componentSite.GetService(typeof(IMobileWebFormServices));
+            IMobileWebFormServices wfServices = (IMobileWebFormServices)
+                componentSite.GetService(typeof(IMobileWebFormServices));
 
             DialogResult result = DialogResult.Cancel;
             try
             {
-                AppliedDeviceFiltersDialog dialog = new
-                    AppliedDeviceFiltersDialog(
+                AppliedDeviceFiltersDialog dialog = new AppliedDeviceFiltersDialog(
                     this,
                     _mergingContext
-                    );
+                );
 
                 result = dialog.ShowDialog();
             }
@@ -378,12 +380,17 @@ namespace System.Web.UI.Design.MobileControls
 
                     if (changeService != null)
                     {
-                        changeService.OnComponentChanged(_designer.UnderlyingControl, null, null, null);
+                        changeService.OnComponentChanged(
+                            _designer.UnderlyingControl,
+                            null,
+                            null,
+                            null
+                        );
                     }
                 }
             }
         }
-        
+
         private void OnFilterSelected(Object sender, EventArgs e)
         {
             UpdateUI();
@@ -395,15 +402,14 @@ namespace System.Web.UI.Design.MobileControls
             Close();
             DialogResult = DialogResult.OK;
         }
-        
+
         private void OnCancel(Object sender, EventArgs e)
         {
             Close();
             DialogResult = DialogResult.Cancel;
         }
-        
-        private void OnPropertyValueChanged(Object sender, 
-                                            PropertyValueChangedEventArgs e)
+
+        private void OnPropertyValueChanged(Object sender, PropertyValueChangedEventArgs e)
         {
             SetDirty(true);
         }
@@ -420,11 +426,12 @@ namespace System.Web.UI.Design.MobileControls
         {
             return true;
         }
-        
+
         void IRefreshableDeviceSpecificEditor.Refresh(
             String deviceSpecificID,
             DeviceSpecific deviceSpecific
-        ) {
+        )
+        {
             if (_currentDeviceSpecificID != null)
             {
                 CacheCurrentState();
@@ -434,11 +441,9 @@ namespace System.Web.UI.Design.MobileControls
             if (!RestoreState(deviceSpecificID))
             {
                 LoadChoices(deviceSpecific);
-                if(!ValidateLoadedChoices())
+                if (!ValidateLoadedChoices())
                 {
-                    _designer.RefreshHeader(
-                        MobileControlDesigner.MergingContextProperties
-                    );
+                    _designer.RefreshHeader(MobileControlDesigner.MergingContextProperties);
                 }
             }
             UpdateUI();
@@ -452,65 +457,69 @@ namespace System.Web.UI.Design.MobileControls
 
         private bool InExternalCacheEditMode
         {
-            get
-            {
-                return _cacheBuffer != null;
-            }
+            get { return _cacheBuffer != null; }
         }
-        
+
         private IDictionary _cacheBuffer = null;
-        
+
         void IRefreshableDeviceSpecificEditor.BeginExternalDeviceSpecificEdit()
         {
-            Debug.Assert(!InExternalCacheEditMode,
+            Debug.Assert(
+                !InExternalCacheEditMode,
                 "Call to BeginExternalDeviceSpecificEdit() while already in external "
-                + "cache edit mode.");
-            if(_currentDeviceSpecificID != null)
+                    + "cache edit mode."
+            );
+            if (_currentDeviceSpecificID != null)
             {
                 CacheCurrentState();
                 _currentDeviceSpecificID = null;
             }
             _cacheBuffer = new HybridDictionary(
-                true /* make case-insensitive*/ );
-            foreach(DictionaryEntry entry in _cachedDeviceSpecifics)
+                true /* make case-insensitive*/
+            );
+            foreach (DictionaryEntry entry in _cachedDeviceSpecifics)
             {
                 _cacheBuffer.Add(entry.Key, entry.Value);
             }
         }
-        
-        void IRefreshableDeviceSpecificEditor.EndExternalDeviceSpecificEdit(
-            bool commitChanges)
+
+        void IRefreshableDeviceSpecificEditor.EndExternalDeviceSpecificEdit(bool commitChanges)
         {
-            Debug.Assert(InExternalCacheEditMode,
+            Debug.Assert(
+                InExternalCacheEditMode,
                 "Call to EndExternalDeviceSpecificEdit() while not in external "
-                + "cache edit mode.");
-            if(commitChanges)
+                    + "cache edit mode."
+            );
+            if (commitChanges)
             {
                 _cachedDeviceSpecifics = _cacheBuffer;
             }
             _cacheBuffer = null;
         }
-        
+
         void IRefreshableDeviceSpecificEditor.DeviceSpecificRenamed(
-            String oldDeviceSpecificID, String newDeviceSpecificID)
+            String oldDeviceSpecificID,
+            String newDeviceSpecificID
+        )
         {
-            Debug.Assert(InExternalCacheEditMode,
-                "Call to DeviceSpecificRenamed() while not in external "
-                + "cache edit mode.");
+            Debug.Assert(
+                InExternalCacheEditMode,
+                "Call to DeviceSpecificRenamed() while not in external " + "cache edit mode."
+            );
             Object value = _cacheBuffer[oldDeviceSpecificID];
-            if(value != null)
+            if (value != null)
             {
                 _cacheBuffer.Remove(oldDeviceSpecificID);
                 _cacheBuffer.Add(newDeviceSpecificID, value);
             }
         }
-        
-        void IRefreshableDeviceSpecificEditor.DeviceSpecificDeleted(
-            String deviceSpecificID)
+
+        void IRefreshableDeviceSpecificEditor.DeviceSpecificDeleted(String deviceSpecificID)
         {
-            Debug.Assert(InExternalCacheEditMode,
-                "Call to DeviceSpecificDeleted() while not in external "
-                + "cache edit mode.");
+            Debug.Assert(
+                InExternalCacheEditMode,
+                "Call to DeviceSpecificDeleted() while not in external " + "cache edit mode."
+            );
             _cacheBuffer.Remove(deviceSpecificID);
         }
 
@@ -522,44 +531,34 @@ namespace System.Web.UI.Design.MobileControls
         //  Begin IDeviceSpecificDesigner Implementation
         ////////////////////////////////////////////////////////////////////////
 
-        void IDeviceSpecificDesigner.SetDeviceSpecificEditor
-            (IRefreshableDeviceSpecificEditor editor)
-        {
-        }
+        void IDeviceSpecificDesigner.SetDeviceSpecificEditor(
+            IRefreshableDeviceSpecificEditor editor
+        ) { }
 
         String IDeviceSpecificDesigner.CurrentDeviceSpecificID
         {
-            get
-            {
-                return _currentDeviceSpecificID;
-            }
+            get { return _currentDeviceSpecificID; }
         }
 
         System.Windows.Forms.Control IDeviceSpecificDesigner.Header
         {
-            get
-            {
-                return _header;
-            }
+            get { return _header; }
         }
 
         System.Web.UI.Control IDeviceSpecificDesigner.UnderlyingControl
         {
-            get
-            {
-                return _designer.UnderlyingControl;
-            }
+            get { return _designer.UnderlyingControl; }
         }
 
         Object IDeviceSpecificDesigner.UnderlyingObject
         {
-            get
-            {
-                return _designer.UnderlyingObject;
-            }
+            get { return _designer.UnderlyingObject; }
         }
 
-        bool IDeviceSpecificDesigner.GetDeviceSpecific(String deviceSpecificParentID, out DeviceSpecific ds)
+        bool IDeviceSpecificDesigner.GetDeviceSpecific(
+            String deviceSpecificParentID,
+            out DeviceSpecific ds
+        )
         {
             Debug.Assert(deviceSpecificParentID == _currentDeviceSpecificID);
 
@@ -577,7 +576,10 @@ namespace System.Web.UI.Design.MobileControls
             return true;
         }
 
-        void IDeviceSpecificDesigner.SetDeviceSpecific(String deviceSpecificParentID, DeviceSpecific ds)
+        void IDeviceSpecificDesigner.SetDeviceSpecific(
+            String deviceSpecificParentID,
+            DeviceSpecific ds
+        )
         {
             Debug.Assert(_currentDeviceSpecificID != null);
             _cbChoices.Items.Clear();
@@ -592,37 +594,37 @@ namespace System.Web.UI.Design.MobileControls
 
             lblDescription.TabIndex = 0;
             lblDescription.Text = SR.GetString(SR.MobileControl_SettingGenericChoiceDescription);
-            
+
             panel.Height = lblDescription.Height;
             panel.Width = lblDescription.Width;
             panel.Controls.Add(lblDescription);
             _header = panel;
         }
 
-        void IDeviceSpecificDesigner.RefreshHeader(int mergingContext)
-        {
-        }
+        void IDeviceSpecificDesigner.RefreshHeader(int mergingContext) { }
 
-        void IDeviceSpecificDesigner.UseCurrentDeviceSpecificID()
-        {
-        }
+        void IDeviceSpecificDesigner.UseCurrentDeviceSpecificID() { }
 
         /////////////////////////////////////////////////////////////////////////
         //  End IDeviceSpecificDesigner Implementation
         /////////////////////////////////////////////////////////////////////////
     }
-    
+
     ////////////////////////////////////////////////////////////////////////////
     //  Begin Internal Class
     ////////////////////////////////////////////////////////////////////////////
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
-    internal class ChoicePropertyFilter :
-        ICustomTypeDescriptor, IDeviceSpecificChoiceDesigner, IComponent
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
+    internal class ChoicePropertyFilter
+        : ICustomTypeDescriptor,
+            IDeviceSpecificChoiceDesigner,
+            IComponent
     {
         private DeviceSpecificChoice _choice;
         private Object _copyOfOriginalObject;
@@ -640,7 +642,8 @@ namespace System.Web.UI.Design.MobileControls
             DeviceSpecificChoice choice,
             IDeviceSpecificDesigner designer,
             ISite site
-        ) {
+        )
+        {
             _events = new EventHandlerList();
             _choice = choice;
             _site = site;
@@ -655,10 +658,10 @@ namespace System.Web.UI.Design.MobileControls
             // the inheritance chain.
             _copyOfOriginalObject = CloneTarget(_designer.UnderlyingObject);
             _underlyingObject = CloneTarget(_designer.UnderlyingObject);
-            
-            // We need to pop up editors when certain property values change    
+
+            // We need to pop up editors when certain property values change
             RegisterForPropertyChangeEvents();
-            
+
             // Copy properties set on DeviceSpecificChoice
             ApplyChoiceToRuntimeControl();
         }
@@ -671,14 +674,18 @@ namespace System.Web.UI.Design.MobileControls
 
         private void RegisterForPropertyChangeEvents()
         {
-            foreach(PropertyDescriptor property in TypeDescriptor.GetProperties(
-                _underlyingObject.GetType()
-            )) {
-                if(property.Converter is NavigateUrlConverter &&
-                   (property.Name == _navigateUrl ||
-                    property.Name == _alternateUrl))
+            foreach (
+                PropertyDescriptor property in TypeDescriptor.GetProperties(
+                    _underlyingObject.GetType()
+                )
+            )
+            {
+                if (
+                    property.Converter is NavigateUrlConverter
+                    && (property.Name == _navigateUrl || property.Name == _alternateUrl)
+                )
                 {
-                    // 
+                    //
 
                     if (property.Name == _navigateUrl)
                     {
@@ -689,42 +696,37 @@ namespace System.Web.UI.Design.MobileControls
                         _specialProp_delegate = new EventHandler(OnAlternateUrlChanged);
                     }
                     _specialProp_buffer[property.Name] = property.GetValue(_underlyingObject);
-                    property.AddValueChanged(
-                        _underlyingObject,
-                        _specialProp_delegate
-                    );
+                    property.AddValueChanged(_underlyingObject, _specialProp_delegate);
                 }
             }
         }
-        
+
         private Object CloneTarget(Object target)
         {
-            Object clone = Activator.CreateInstance(
-                target.GetType()
-            );
+            Object clone = Activator.CreateInstance(target.GetType());
             // We need to copy the Site over to the new object incase setting
             // properties has a side effect that requires the component model
             // to be intact.  (e.g., Launching UrlPicker for NavigateUrl).
-            if(clone is IComponent)
+            if (clone is IComponent)
             {
                 ((IComponent)clone).Site = ((IComponent)target).Site;
             }
             // We also need to copy the Page over in case runtime properties
             // try to access the page.
-            if(clone is System.Web.UI.Control)
+            if (clone is System.Web.UI.Control)
             {
                 ((Control)clone).Page = ((Control)target).Page;
             }
             CopyOverridableProperties(target, clone);
             return clone;
         }
-        
+
         private void CopyStyleProperties(Style source, Style dest)
         {
             // We copy the StateBag to duplicate the style properties without
             // walking the inheritance.
             dest.State.Clear();
-            foreach(String key in source.State.Keys)
+            foreach (String key in source.State.Keys)
             {
                 dest.State[key] = source.State[key];
             }
@@ -733,49 +735,47 @@ namespace System.Web.UI.Design.MobileControls
         private void CopyOverridableProperties(Object source, Object dest)
         {
             MobileControl destControl = null;
-           
+
             // HACK: To avoid copying expandable property FontInfo.  We will
             //       need to required that expandable properties implement
             //       ICloneable for our designer extensibility story.
-            if(source is Style)
+            if (source is Style)
             {
                 CopyStyleProperties((Style)source, (Style)dest);
                 return;
             }
-            
-            if(source is MobileControl)
+
+            if (source is MobileControl)
             {
                 // If the control is a MobileControl, we copy the style's
                 // StateBag to get the non-inherited proprety values.
-                destControl = (MobileControl) dest;
-                MobileControl sourceControl = (MobileControl) source;
+                destControl = (MobileControl)dest;
+                MobileControl sourceControl = (MobileControl)source;
                 CopyStyleProperties(sourceControl.Style, destControl.Style);
             }
 
             // Copy remaining properties not contained in the style (or
             // all properties if not a mobile control.)
-            PropertyDescriptorCollection properties = 
-                TypeDescriptor.GetProperties(dest.GetType());
-            foreach(PropertyDescriptor property in properties)
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(dest.GetType());
+            foreach (PropertyDescriptor property in properties)
             {
-                if(IsDeviceOverridable(property)
-                    && (destControl == null
-                    || !PropertyExistsInStyle(property, destControl.Style)))
+                if (
+                    IsDeviceOverridable(property)
+                    && (destControl == null || !PropertyExistsInStyle(property, destControl.Style))
+                )
                 {
                     CopyProperty(property, source, dest);
                 }
             }
         }
 
-        private void CopyProperty(PropertyDescriptor property,
-            Object source,
-            Object dest)
+        private void CopyProperty(PropertyDescriptor property, Object source, Object dest)
         {
             Object value = property.GetValue(source);
 
-            if(property.Converter is ExpandableObjectConverter)
+            if (property.Converter is ExpandableObjectConverter)
             {
-                if(value is ICloneable)
+                if (value is ICloneable)
                 {
                     value = ((ICloneable)value).Clone();
                 }
@@ -792,23 +792,16 @@ namespace System.Web.UI.Design.MobileControls
             }
             property.SetValue(dest, value);
         }
-        
-        private bool PropertyExistsInStyle(
-            PropertyDescriptor property, Style style)
+
+        private bool PropertyExistsInStyle(PropertyDescriptor property, Style style)
         {
             return style.GetType().GetProperty(property.Name) != null;
         }
-        
-        public event EventHandler Disposed 
+
+        public event EventHandler Disposed
         {
-            add 
-            {
-                _events.AddHandler(_eventDisposed, value);
-            }
-            remove 
-            {
-                _events.RemoveHandler(_eventDisposed, value);
-            }
+            add { _events.AddHandler(_eventDisposed, value); }
+            remove { _events.RemoveHandler(_eventDisposed, value); }
         }
 
         public ISite Site
@@ -818,19 +811,16 @@ namespace System.Web.UI.Design.MobileControls
                 Debug.Assert(_site != null);
                 return _site;
             }
-
-            set
-            {
-                _site = value;
-            }
+            set { _site = value; }
         }
 
         public void Dispose()
         {
-            if (_events != null) 
+            if (_events != null)
             {
                 EventHandler handler = (EventHandler)_events[_eventDisposed];
-                if (handler != null) handler(this, EventArgs.Empty);
+                if (handler != null)
+                    handler(this, EventArgs.Empty);
             }
         }
 
@@ -844,60 +834,45 @@ namespace System.Web.UI.Design.MobileControls
             OnSpecialPropertyChanged(sender, false);
         }
 
-        // 
-
+        //
 
         private void OnSpecialPropertyChanged(Object sender, bool navigateUrl)
         {
-            IComponent component = (IComponent) sender;
-            PropertyDescriptor property
-                = TypeDescriptor.GetProperties(component)[navigateUrl ? _navigateUrl : _alternateUrl];
-            String newValue = (String) property.GetValue(component);
-            String oldValue = (String) _specialProp_buffer[navigateUrl ? _navigateUrl : _alternateUrl];
-            newValue = NavigateUrlConverter.GetUrl(
-                component,
-                newValue,
-                oldValue
-            );
-            property.RemoveValueChanged(
-                _underlyingObject,
-                _specialProp_delegate
-            );
+            IComponent component = (IComponent)sender;
+            PropertyDescriptor property = TypeDescriptor.GetProperties(component)[
+                navigateUrl ? _navigateUrl : _alternateUrl
+            ];
+            String newValue = (String)property.GetValue(component);
+            String oldValue = (String)
+                _specialProp_buffer[navigateUrl ? _navigateUrl : _alternateUrl];
+            newValue = NavigateUrlConverter.GetUrl(component, newValue, oldValue);
+            property.RemoveValueChanged(_underlyingObject, _specialProp_delegate);
             property.SetValue(component, newValue);
-            property.AddValueChanged(
-                _underlyingObject,
-                _specialProp_delegate
-            );
+            property.AddValueChanged(_underlyingObject, _specialProp_delegate);
         }
 
         private static bool IsDeviceOverridable(PropertyDescriptor property)
         {
-            // 
+            //
             return (
                 property.IsBrowsable
-                && ((!property.IsReadOnly)
-                    || (property.Converter is ExpandableObjectConverter))
-                && !property.SerializationVisibility.Equals(
-                     DesignerSerializationVisibility.Hidden)
+                && ((!property.IsReadOnly) || (property.Converter is ExpandableObjectConverter))
+                && !property.SerializationVisibility.Equals(DesignerSerializationVisibility.Hidden)
                 && property.Name != "ID"
             );
         }
 
         private void ApplyChoiceToRuntimeControl()
         {
-            PropertyDescriptorCollection properties =
-                TypeDescriptor.GetProperties(
-                    _underlyingObject.GetType());
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(
+                _underlyingObject.GetType()
+            );
 
-            foreach(PropertyDescriptor property in properties)
+            foreach (PropertyDescriptor property in properties)
             {
-                if(IsDeviceOverridable(property))
+                if (IsDeviceOverridable(property))
                 {
-                    ApplyChoiceToRuntimeControl_helper(
-                        property,
-                        _underlyingObject,
-                        ""
-                    );
+                    ApplyChoiceToRuntimeControl_helper(property, _underlyingObject, "");
                 }
             }
         }
@@ -906,19 +881,19 @@ namespace System.Web.UI.Design.MobileControls
             PropertyDescriptor property,
             Object target,
             String prefix
-        ) {
+        )
+        {
             String propertyName = prefix + property.Name;
             String value = ((IAttributeAccessor)_choice).GetAttribute(propertyName) as String;
 
-            if(property.Converter is ExpandableObjectConverter)
+            if (property.Converter is ExpandableObjectConverter)
             {
-                PropertyDescriptorCollection properties =
-                    TypeDescriptor.GetProperties(
-                        property.PropertyType
-                    );
-                foreach(PropertyDescriptor embeddedProperty in properties)
+                PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(
+                    property.PropertyType
+                );
+                foreach (PropertyDescriptor embeddedProperty in properties)
                 {
-                    if(IsDeviceOverridable(embeddedProperty))
+                    if (IsDeviceOverridable(embeddedProperty))
                     {
                         ApplyChoiceToRuntimeControl_helper(
                             embeddedProperty,
@@ -929,15 +904,12 @@ namespace System.Web.UI.Design.MobileControls
                 }
                 return;
             }
-            
-            if(value != null)
+
+            if (value != null)
             {
                 try
                 {
-                    property.SetValue(
-                        target,
-                        property.Converter.ConvertFromString(value)
-                    );
+                    property.SetValue(target, property.Converter.ConvertFromString(value));
                 }
                 catch
                 {
@@ -955,12 +927,11 @@ namespace System.Web.UI.Design.MobileControls
 
         private void ApplyChangesToRuntimeChoice()
         {
-            PropertyDescriptorCollection properties =
-                TypeDescriptor.GetProperties(
-                    _underlyingObject.GetType()
-                );
+            PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(
+                _underlyingObject.GetType()
+            );
 
-            foreach(PropertyDescriptor property in properties)
+            foreach (PropertyDescriptor property in properties)
             {
                 if (IsDeviceOverridable(property))
                 {
@@ -968,31 +939,32 @@ namespace System.Web.UI.Design.MobileControls
                         property,
                         _copyOfOriginalObject,
                         _underlyingObject,
-                        "");
+                        ""
+                    );
                 }
             }
         }
-        
+
         private void ApplyChangesToRuntimeChoice_helper(
             PropertyDescriptor property,
             Object sourceTarget,
             Object destTarget,
             String prefix
-        ) {
+        )
+        {
             Object oldValue = property.GetValue(sourceTarget);
             Object newValue = property.GetValue(destTarget);
 
             String propertyName = prefix + property.Name;
-         
-            if(property.Converter is ExpandableObjectConverter)
+
+            if (property.Converter is ExpandableObjectConverter)
             {
-                PropertyDescriptorCollection properties =
-                    TypeDescriptor.GetProperties(
-                        newValue.GetType()
-                    );
-                foreach(PropertyDescriptor embeddedProperty in properties)
+                PropertyDescriptorCollection properties = TypeDescriptor.GetProperties(
+                    newValue.GetType()
+                );
+                foreach (PropertyDescriptor embeddedProperty in properties)
                 {
-                    if(IsDeviceOverridable(embeddedProperty))
+                    if (IsDeviceOverridable(embeddedProperty))
                     {
                         ApplyChangesToRuntimeChoice_helper(
                             embeddedProperty,
@@ -1003,18 +975,12 @@ namespace System.Web.UI.Design.MobileControls
                     }
                 }
             }
-            else if(IsDeviceOverridable(property))
+            else if (IsDeviceOverridable(property))
             {
                 IAttributeAccessor overrides = (IAttributeAccessor)_choice;
-                String oldValueString =
-                    property.Converter.ConvertToInvariantString(
-                        oldValue
-                    );
-                String newValueString =
-                    property.Converter.ConvertToInvariantString(
-                        newValue
-                    );                
-                if(newValueString != oldValueString)
+                String oldValueString = property.Converter.ConvertToInvariantString(oldValue);
+                String newValueString = property.Converter.ConvertToInvariantString(newValue);
+                if (newValueString != oldValueString)
                 {
                     overrides.SetAttribute(propertyName, newValueString);
                 }
@@ -1037,29 +1003,23 @@ namespace System.Web.UI.Design.MobileControls
 
         internal IDeviceSpecificDesigner Designer
         {
-            get
-            {
-                return _designer;
-            }
+            get { return _designer; }
         }
 
         internal Object Owner
         {
-            get
-            {
-                return _underlyingObject;
-            }
+            get { return _underlyingObject; }
         }
 
         private PropertyDescriptorCollection PreFilterProperties(
             PropertyDescriptorCollection originalProperties
-        ) {
-            PropertyDescriptorCollection newProperties =
-                new PropertyDescriptorCollection(
-                    new PropertyDescriptor[] {}
-                );
-            
-            foreach(PropertyDescriptor property in originalProperties)
+        )
+        {
+            PropertyDescriptorCollection newProperties = new PropertyDescriptorCollection(
+                new PropertyDescriptor[] { }
+            );
+
+            foreach (PropertyDescriptor property in originalProperties)
             {
                 if (IsDeviceOverridable(property))
                 {
@@ -1068,7 +1028,7 @@ namespace System.Web.UI.Design.MobileControls
             }
 
             PropertyDescriptor[] arpd = new PropertyDescriptor[newProperties.Count];
-            for(int i = 0; i < newProperties.Count; i++)
+            for (int i = 0; i < newProperties.Count; i++)
             {
                 arpd[i] = newProperties[i];
             }
@@ -1128,21 +1088,19 @@ namespace System.Web.UI.Design.MobileControls
 
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties()
         {
-            PropertyDescriptorCollection collection =
-                TypeDescriptor.GetProperties(
-                    _underlyingObject.GetType()
-                );
+            PropertyDescriptorCollection collection = TypeDescriptor.GetProperties(
+                _underlyingObject.GetType()
+            );
             collection = PreFilterProperties(collection);
             return collection;
         }
 
         PropertyDescriptorCollection ICustomTypeDescriptor.GetProperties(Attribute[] attributes)
         {
-            PropertyDescriptorCollection collection =
-                TypeDescriptor.GetProperties(
-                    _underlyingObject.GetType(),
-                    attributes
-                );
+            PropertyDescriptorCollection collection = TypeDescriptor.GetProperties(
+                _underlyingObject.GetType(),
+                attributes
+            );
             collection = PreFilterProperties(collection);
             return collection;
         }
@@ -1162,20 +1120,14 @@ namespace System.Web.UI.Design.MobileControls
 
         Object IDeviceSpecificChoiceDesigner.UnderlyingObject
         {
-            get
-            {
-                return _designer.UnderlyingObject;
-            }
+            get { return _designer.UnderlyingObject; }
         }
 
         Control IDeviceSpecificChoiceDesigner.UnderlyingControl
         {
-            get
-            {
-                return _designer.UnderlyingControl;
-            }
+            get { return _designer.UnderlyingControl; }
         }
-        
+
         ///////////////////////////////////////////////////////////////////////
         //  End IDeviceSpecificChoiceDesigner Implementation
         ///////////////////////////////////////////////////////////////////////
@@ -1188,35 +1140,35 @@ namespace System.Web.UI.Design.MobileControls
     //  Begin Internal Class
     /////////////////////////////////////////////////////////////////////////
 
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class PropertyOverridesCachedState : DeviceSpecificDialogCachedState
     {
         private ArrayList _cachedComboBox = null;
-        
-        internal PropertyOverridesCachedState(
-            ComboBox comboBox
-        ) {
+
+        internal PropertyOverridesCachedState(ComboBox comboBox)
+        {
             _cachedComboBox = new ArrayList();
-            foreach(Object o in comboBox.Items)
+            foreach (Object o in comboBox.Items)
             {
                 _cachedComboBox.Add(o);
             }
         }
-        
-        internal void Restore(
-            ComboBox comboBox
-        ) {
+
+        internal void Restore(ComboBox comboBox)
+        {
             Object selectedItem = comboBox.SelectedItem;
             comboBox.Items.Clear();
             comboBox.Items.AddRange(_cachedComboBox.ToArray());
-            if(selectedItem != null)
+            if (selectedItem != null)
             {
                 int index = comboBox.Items.IndexOf(selectedItem);
-                if(index >= 0)
+                if (index >= 0)
                 {
                     comboBox.SelectedItem = comboBox.Items[index];
                 }
@@ -1225,9 +1177,9 @@ namespace System.Web.UI.Design.MobileControls
 
         internal bool FilterExistsInComboBox(DeviceFilterNode filter)
         {
-            foreach(DeviceFilterNode availableFilter in _cachedComboBox)
+            foreach (DeviceFilterNode availableFilter in _cachedComboBox)
             {
-                if(availableFilter.Name == filter.Name)
+                if (availableFilter.Name == filter.Name)
                 {
                     return true;
                 }
@@ -1238,19 +1190,17 @@ namespace System.Web.UI.Design.MobileControls
         internal void SaveChoicesFromComboBox(
             IDeviceSpecificDesigner designer,
             String deviceSpecificID
-        ) {
+        )
+        {
             SaveChoices(designer, deviceSpecificID, _cachedComboBox);
         }
 
         internal ArrayList Choices
         {
-            get
-            {
-                return _cachedComboBox;
-            }
+            get { return _cachedComboBox; }
         }
     }
-    
+
     /////////////////////////////////////////////////////////////////////////
     //  End Internal Class
     /////////////////////////////////////////////////////////////////////////
@@ -1259,14 +1209,15 @@ namespace System.Web.UI.Design.MobileControls
     //  Begin Internal Class
     /////////////////////////////////////////////////////////////////////////
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class InvalidChoiceException : ApplicationException
     {
-        internal InvalidChoiceException(String message) : base(message)
-        {
-        }
+        internal InvalidChoiceException(String message)
+            : base(message) { }
     }
-    
+
     /////////////////////////////////////////////////////////////////////////
     //  End Internal Class
     /////////////////////////////////////////////////////////////////////////

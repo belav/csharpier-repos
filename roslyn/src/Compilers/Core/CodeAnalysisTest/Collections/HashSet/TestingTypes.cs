@@ -44,7 +44,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
     }
 
     [Serializable]
-    public class EquatableBackwardsOrder : IEquatable<EquatableBackwardsOrder?>, IComparable<EquatableBackwardsOrder>, IComparable
+    public class EquatableBackwardsOrder
+        : IEquatable<EquatableBackwardsOrder?>,
+            IComparable<EquatableBackwardsOrder>,
+            IComparable
     {
         private readonly int _value;
 
@@ -77,7 +80,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         {
             if (obj != null && obj.GetType() == typeof(EquatableBackwardsOrder))
                 return ((EquatableBackwardsOrder)obj)._value - _value;
-            else return -1;
+            else
+                return -1;
         }
     }
 
@@ -174,13 +178,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
     #region TestClasses
 
     [Serializable]
-    public struct SimpleInt : IStructuralComparable, IStructuralEquatable, IComparable, IComparable<SimpleInt>
+    public struct SimpleInt
+        : IStructuralComparable,
+            IStructuralEquatable,
+            IComparable,
+            IComparable<SimpleInt>
     {
         private int _val;
+
         public SimpleInt(int t)
         {
             _val = t;
         }
+
         public int Val
         {
             get { return _val; }
@@ -310,13 +320,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
     public static class ValueComparable
     {
         // Convenience method so the compiler can work its type inference magic.
-        public static ValueComparable<T> Create<T>(T value) where T : IComparable<T>
+        public static ValueComparable<T> Create<T>(T value)
+            where T : IComparable<T>
         {
             return new ValueComparable<T>(value);
         }
     }
 
-    public readonly struct ValueComparable<T> : IComparable<ValueComparable<T>> where T : IComparable<T>
+    public readonly struct ValueComparable<T> : IComparable<ValueComparable<T>>
+        where T : IComparable<T>
     {
         public ValueComparable(T value)
         {
@@ -325,8 +337,7 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         public T Value { get; }
 
-        public int CompareTo(ValueComparable<T> other) =>
-            Value.CompareTo(other.Value);
+        public int CompareTo(ValueComparable<T> other) => Value.CompareTo(other.Value);
     }
 
     public class Equatable : IEquatable<Equatable>

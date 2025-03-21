@@ -4,23 +4,23 @@ namespace System.Workflow.Activities
     #region Using directives
 
     using System;
-    using System.Xml.Serialization;
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.CodeDom;
-    using System.Diagnostics;
     using System.ComponentModel.Design;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
     using System.Drawing;
     using System.Drawing.Design;
-    using System.Transactions;
-    using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
     using System.Reflection;
-    using System.Workflow.Runtime.DebugEngine;
+    using System.Transactions;
     using System.Workflow.Activities.Common;
+    using System.Workflow.ComponentModel;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.Runtime.DebugEngine;
+    using System.Xml.Serialization;
 
     #endregion
 
@@ -31,32 +31,64 @@ namespace System.Workflow.Activities
     [ActivityValidator(typeof(ReplicatorValidator))]
     [DefaultEvent("Initialized")]
     [WorkflowDebuggerSteppingAttribute(WorkflowDebuggerSteppingOption.Concurrent)]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ReplicatorActivity : CompositeActivity
     {
         #region Dependency Properties
-        public static readonly DependencyProperty UntilConditionProperty = DependencyProperty.Register("UntilCondition", typeof(ActivityCondition), typeof(ReplicatorActivity), new PropertyMetadata(DependencyPropertyOptions.Metadata));
-        public static readonly DependencyProperty ExecutionTypeProperty = DependencyProperty.Register("ExecutionType", typeof(ExecutionType), typeof(ReplicatorActivity), new PropertyMetadata(ExecutionType.Sequence));
+        public static readonly DependencyProperty UntilConditionProperty =
+            DependencyProperty.Register(
+                "UntilCondition",
+                typeof(ActivityCondition),
+                typeof(ReplicatorActivity),
+                new PropertyMetadata(DependencyPropertyOptions.Metadata)
+            );
+        public static readonly DependencyProperty ExecutionTypeProperty =
+            DependencyProperty.Register(
+                "ExecutionType",
+                typeof(ExecutionType),
+                typeof(ReplicatorActivity),
+                new PropertyMetadata(ExecutionType.Sequence)
+            );
 
         //events
-        public static readonly DependencyProperty InitializedEvent = DependencyProperty.Register("Initialized", typeof(EventHandler), typeof(ReplicatorActivity));
-        public static readonly DependencyProperty CompletedEvent = DependencyProperty.Register("Completed", typeof(EventHandler), typeof(ReplicatorActivity));
-        public static readonly DependencyProperty ChildInitializedEvent = DependencyProperty.Register("ChildInitialized", typeof(EventHandler<ReplicatorChildEventArgs>), typeof(ReplicatorActivity));
-        public static readonly DependencyProperty ChildCompletedEvent = DependencyProperty.Register("ChildCompleted", typeof(EventHandler<ReplicatorChildEventArgs>), typeof(ReplicatorActivity));
-        public static readonly DependencyProperty InitialChildDataProperty = DependencyProperty.Register("InitialChildData", typeof(IList), typeof(ReplicatorActivity));
+        public static readonly DependencyProperty InitializedEvent = DependencyProperty.Register(
+            "Initialized",
+            typeof(EventHandler),
+            typeof(ReplicatorActivity)
+        );
+        public static readonly DependencyProperty CompletedEvent = DependencyProperty.Register(
+            "Completed",
+            typeof(EventHandler),
+            typeof(ReplicatorActivity)
+        );
+        public static readonly DependencyProperty ChildInitializedEvent =
+            DependencyProperty.Register(
+                "ChildInitialized",
+                typeof(EventHandler<ReplicatorChildEventArgs>),
+                typeof(ReplicatorActivity)
+            );
+        public static readonly DependencyProperty ChildCompletedEvent = DependencyProperty.Register(
+            "ChildCompleted",
+            typeof(EventHandler<ReplicatorChildEventArgs>),
+            typeof(ReplicatorActivity)
+        );
+        public static readonly DependencyProperty InitialChildDataProperty =
+            DependencyProperty.Register(
+                "InitialChildData",
+                typeof(IList),
+                typeof(ReplicatorActivity)
+            );
 
         #endregion
 
         #region Constructors
 
-        public ReplicatorActivity()
-        {
-        }
+        public ReplicatorActivity() { }
 
         public ReplicatorActivity(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         #endregion
 
@@ -80,16 +112,15 @@ namespace System.Workflow.Activities
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public ExecutionType ExecutionType
         {
-            get
-            {
-                return (ExecutionType)base.GetValue(ReplicatorActivity.ExecutionTypeProperty);
-            }
+            get { return (ExecutionType)base.GetValue(ReplicatorActivity.ExecutionTypeProperty); }
             set
             {
                 if (value != ExecutionType.Sequence && value != ExecutionType.Parallel)
                     throw new ArgumentOutOfRangeException("value");
                 if (this.ActivityState != null && this.ActivityState.IsChildActive)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorChildRunning));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorChildRunning)
+                    );
 
                 base.SetValue(ReplicatorActivity.ExecutionTypeProperty, value);
             }
@@ -103,14 +134,8 @@ namespace System.Workflow.Activities
         [DefaultValue(null)]
         public IList InitialChildData
         {
-            get
-            {
-                return base.GetValue(InitialChildDataProperty) as IList;
-            }
-            set
-            {
-                base.SetValue(InitialChildDataProperty, value);
-            }
+            get { return base.GetValue(InitialChildDataProperty) as IList; }
+            set { base.SetValue(InitialChildDataProperty, value); }
         }
 
         ReplicatorChildInstanceList childDataList;
@@ -128,20 +153,13 @@ namespace System.Workflow.Activities
             }
         }
 
-
         [SRCategory(SR.Conditions)]
         [SRDescription(SR.ReplicatorUntilConditionDescr)]
         [DefaultValue(null)]
         public ActivityCondition UntilCondition
         {
-            get
-            {
-                return base.GetValue(UntilConditionProperty) as ActivityCondition;
-            }
-            set
-            {
-                base.SetValue(UntilConditionProperty, value);
-            }
+            get { return base.GetValue(UntilConditionProperty) as ActivityCondition; }
+            set { base.SetValue(UntilConditionProperty, value); }
         }
 
         [Browsable(false)]
@@ -172,7 +190,6 @@ namespace System.Workflow.Activities
                 }
                 else
                     return -1;
-
             }
         }
 
@@ -184,7 +201,10 @@ namespace System.Workflow.Activities
                     throw new ArgumentOutOfRangeException("index");
 
                 ChildExecutionStateInfo childStateInfo = this.ActivityState[index, false];
-                return (childStateInfo.Status == ChildRunStatus.PendingExecute || childStateInfo.Status == ChildRunStatus.Running);
+                return (
+                    childStateInfo.Status == ChildRunStatus.PendingExecute
+                    || childStateInfo.Status == ChildRunStatus.Running
+                );
             }
             return false;
         }
@@ -197,14 +217,8 @@ namespace System.Workflow.Activities
         [MergableProperty(false)]
         public event EventHandler<ReplicatorChildEventArgs> ChildInitialized
         {
-            add
-            {
-                base.AddHandler(ChildInitializedEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(ChildInitializedEvent, value);
-            }
+            add { base.AddHandler(ChildInitializedEvent, value); }
+            remove { base.RemoveHandler(ChildInitializedEvent, value); }
         }
 
         [SRDescription(SR.OnGeneratorChildCompletedDescr)]
@@ -212,14 +226,8 @@ namespace System.Workflow.Activities
         [MergableProperty(false)]
         public event EventHandler<ReplicatorChildEventArgs> ChildCompleted
         {
-            add
-            {
-                base.AddHandler(ChildCompletedEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(ChildCompletedEvent, value);
-            }
+            add { base.AddHandler(ChildCompletedEvent, value); }
+            remove { base.RemoveHandler(ChildCompletedEvent, value); }
         }
 
         [SRDescription(SR.OnCompletedDescr)]
@@ -227,14 +235,8 @@ namespace System.Workflow.Activities
         [MergableProperty(false)]
         public event EventHandler Completed
         {
-            add
-            {
-                base.AddHandler(CompletedEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(CompletedEvent, value);
-            }
+            add { base.AddHandler(CompletedEvent, value); }
+            remove { base.RemoveHandler(CompletedEvent, value); }
         }
 
         [SRDescription(SR.OnInitializedDescr)]
@@ -242,14 +244,8 @@ namespace System.Workflow.Activities
         [MergableProperty(false)]
         public event EventHandler Initialized
         {
-            add
-            {
-                base.AddHandler(InitializedEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(InitializedEvent, value);
-            }
+            add { base.AddHandler(InitializedEvent, value); }
+            remove { base.RemoveHandler(InitializedEvent, value); }
         }
 
         #endregion
@@ -261,7 +257,9 @@ namespace System.Workflow.Activities
                 throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotExecuting));
 
             if (this.ActivityState == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotInitialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_ReplicatorNotInitialized)
+                );
 
             ChildExecutionStateInfo childStateInfo = new ChildExecutionStateInfo(value);
             this.ActivityState.Add(childStateInfo);
@@ -277,7 +275,9 @@ namespace System.Workflow.Activities
                 throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotExecuting));
 
             if (this.ActivityState == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotInitialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_ReplicatorNotInitialized)
+                );
 
             int absoluteIndex = 0;
 
@@ -296,6 +296,7 @@ namespace System.Workflow.Activities
 
             return -1;
         }
+
         private void Insert(int index, object value)
         {
             if (value == null)
@@ -305,7 +306,9 @@ namespace System.Workflow.Activities
                 throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotExecuting));
 
             if (this.ActivityState == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotInitialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_ReplicatorNotInitialized)
+                );
 
             if (index < 0 || index > this.ActivityState.AbsoluteCount)
                 throw new ArgumentOutOfRangeException("index");
@@ -315,6 +318,7 @@ namespace System.Workflow.Activities
 
             ScheduleExecutionIfNeeded(childStateInfo, index);
         }
+
         private void Remove(object obj)
         {
             int index = this.IndexOf(obj);
@@ -325,25 +329,34 @@ namespace System.Workflow.Activities
             RemoveAt(index);
             return;
         }
+
         private void RemoveAt(int index)
         {
             if (this.ExecutionStatus != ActivityExecutionStatus.Executing)
                 throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotExecuting));
 
             if (this.ActivityState == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotInitialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_ReplicatorNotInitialized)
+                );
 
             if (index < 0 || index >= this.ActivityState.AbsoluteCount)
                 throw new ArgumentOutOfRangeException("index");
 
             ChildExecutionStateInfo childStateInfo = this.ActivityState[index, false];
 
-            if (childStateInfo.Status == ChildRunStatus.Completed || childStateInfo.Status == ChildRunStatus.Created)
+            if (
+                childStateInfo.Status == ChildRunStatus.Completed
+                || childStateInfo.Status == ChildRunStatus.Created
+            )
                 this.ActivityState.Remove(childStateInfo);
             else
             {
                 childStateInfo.MarkedForRemoval = true;
-                base.Invoke(this.HandleChildUpdateOperation, new ReplicatorInterActivityEventArgs(childStateInfo, false));
+                base.Invoke(
+                    this.HandleChildUpdateOperation,
+                    new ReplicatorInterActivityEventArgs(childStateInfo, false)
+                );
             }
         }
 
@@ -353,7 +366,9 @@ namespace System.Workflow.Activities
                 throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotExecuting));
 
             if (this.ActivityState == null)
-                throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotInitialized));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_ReplicatorNotInitialized)
+                );
 
             while (this.ActivityState.AbsoluteCount != 0)
                 this.RemoveAt(0);
@@ -361,7 +376,9 @@ namespace System.Workflow.Activities
         #endregion
 
         #region Protected Methods
-        protected override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             if (executionContext == null)
                 throw new ArgumentNullException("executionContext");
@@ -423,27 +440,25 @@ namespace System.Workflow.Activities
             }
             return this.ExecutionStatus;
         }
+
         protected override void OnClosed(IServiceProvider provider)
         {
             //
-
         }
         #endregion
 
         #region Private Implementation
         #region Data
         //Runtime State Properties
-        static DependencyProperty ActivityStateProperty = DependencyProperty.Register("ActivityState", typeof(ReplicatorStateInfo), typeof(ReplicatorActivity));
+        static DependencyProperty ActivityStateProperty = DependencyProperty.Register(
+            "ActivityState",
+            typeof(ReplicatorStateInfo),
+            typeof(ReplicatorActivity)
+        );
         ReplicatorStateInfo ActivityState
         {
-            get
-            {
-                return (ReplicatorStateInfo)base.GetValue(ActivityStateProperty);
-            }
-            set
-            {
-                base.SetValue(ActivityStateProperty, value);
-            }
+            get { return (ReplicatorStateInfo)base.GetValue(ActivityStateProperty); }
+            set { base.SetValue(ActivityStateProperty, value); }
         }
         #endregion
 
@@ -458,26 +473,24 @@ namespace System.Workflow.Activities
             #region Properties
             internal bool IsAdd
             {
-                get
-                {
-                    return this.isAdd;
-                }
+                get { return this.isAdd; }
             }
             internal ChildExecutionStateInfo ChildStateInfo
             {
-                get
-                {
-                    return this.childStateInfo;
-                }
+                get { return this.childStateInfo; }
             }
             #endregion
 
-            internal ReplicatorInterActivityEventArgs(ChildExecutionStateInfo childStateInfo, bool isAdd)
+            internal ReplicatorInterActivityEventArgs(
+                ChildExecutionStateInfo childStateInfo,
+                bool isAdd
+            )
             {
                 this.childStateInfo = childStateInfo;
                 this.isAdd = isAdd;
             }
         }
+
         void HandleChildUpdateOperation(Object sender, ReplicatorInterActivityEventArgs e)
         {
             if (sender == null)
@@ -486,7 +499,10 @@ namespace System.Workflow.Activities
             ActivityExecutionContext executionContext = sender as ActivityExecutionContext;
 
             if (executionContext == null)
-                throw new ArgumentException(SR.Error_SenderMustBeActivityExecutionContext, "sender");
+                throw new ArgumentException(
+                    SR.Error_SenderMustBeActivityExecutionContext,
+                    "sender"
+                );
 
             if (this.ExecutionStatus != ActivityExecutionStatus.Executing)
                 return;
@@ -503,7 +519,10 @@ namespace System.Workflow.Activities
             }
         }
 
-        private void CancelChildExecution(ActivityExecutionContext executionContext, ChildExecutionStateInfo childStateInfo)
+        private void CancelChildExecution(
+            ActivityExecutionContext executionContext,
+            ChildExecutionStateInfo childStateInfo
+        )
         {
             // Mark the Instance For Removal
             System.Diagnostics.Debug.Assert(childStateInfo.MarkedForRemoval);
@@ -522,17 +541,29 @@ namespace System.Workflow.Activities
         #endregion
 
         #region Execution related helpers
-        private void ExecuteTemplate(ActivityExecutionContext executionContext, ChildExecutionStateInfo childStateInfo)
+        private void ExecuteTemplate(
+            ActivityExecutionContext executionContext,
+            ChildExecutionStateInfo childStateInfo
+        )
         {
             System.Diagnostics.Debug.Assert(childStateInfo.Status != ChildRunStatus.Running);
 
-            ActivityExecutionContextManager contextManager = executionContext.ExecutionContextManager;
-            ActivityExecutionContext templateExecutionContext = contextManager.CreateExecutionContext(this.EnabledActivities[0]);
+            ActivityExecutionContextManager contextManager =
+                executionContext.ExecutionContextManager;
+            ActivityExecutionContext templateExecutionContext =
+                contextManager.CreateExecutionContext(this.EnabledActivities[0]);
             childStateInfo.RunId = templateExecutionContext.ContextGuid;
             childStateInfo.Status = ChildRunStatus.Running;
             try
             {
-                base.RaiseGenericEvent(ReplicatorActivity.ChildInitializedEvent, this, new ReplicatorChildEventArgs(childStateInfo.InstanceData, templateExecutionContext.Activity));
+                base.RaiseGenericEvent(
+                    ReplicatorActivity.ChildInitializedEvent,
+                    this,
+                    new ReplicatorChildEventArgs(
+                        childStateInfo.InstanceData,
+                        templateExecutionContext.Activity
+                    )
+                );
             }
             catch
             {
@@ -543,9 +574,17 @@ namespace System.Workflow.Activities
             }
 
             templateExecutionContext.ExecuteActivity(templateExecutionContext.Activity);
-            templateExecutionContext.Activity.RegisterForStatusChange(Activity.ClosedEvent, new ReplicatorSubscriber(this, templateExecutionContext.ContextGuid));
+            templateExecutionContext.Activity.RegisterForStatusChange(
+                Activity.ClosedEvent,
+                new ReplicatorSubscriber(this, templateExecutionContext.ContextGuid)
+            );
         }
-        private void HandleStatusChange(ActivityExecutionContext executionContext, ActivityExecutionStatusChangedEventArgs e, ReplicatorSubscriber subscriber)
+
+        private void HandleStatusChange(
+            ActivityExecutionContext executionContext,
+            ActivityExecutionStatusChangedEventArgs e,
+            ReplicatorSubscriber subscriber
+        )
         {
             //System.Diagnostics.Debug.Assert(this.ExecutionStatus != ActivityExecutionStatus.Closed, "Stale notification should not have reache here");
             //System.Diagnostics.Debug.Assert(e.Activity.QualifiedName.Equals(this.EnabledActivities[0].QualifiedName), "Got status change notification of non existing child");
@@ -556,8 +595,8 @@ namespace System.Workflow.Activities
 
             if (runIndex == -1)
             {
-                //This will happen when CancelChild is issued after Child Closed 
-                //but before StatusChange Event raised on parent.                
+                //This will happen when CancelChild is issued after Child Closed
+                //but before StatusChange Event raised on parent.
                 return;
             }
 
@@ -568,19 +607,28 @@ namespace System.Workflow.Activities
             {
                 try
                 {
-                    base.RaiseGenericEvent(ReplicatorActivity.ChildCompletedEvent, this, new ReplicatorChildEventArgs(childStateInfo.InstanceData, e.Activity));
+                    base.RaiseGenericEvent(
+                        ReplicatorActivity.ChildCompletedEvent,
+                        this,
+                        new ReplicatorChildEventArgs(childStateInfo.InstanceData, e.Activity)
+                    );
                     e.Activity.UnregisterForStatusChange(Activity.ClosedEvent, subscriber);
                 }
                 finally
                 {
-                    ActivityExecutionContextManager contextManager = executionContext.ExecutionContextManager;
-                    ActivityExecutionContext templateExecutionContext = contextManager.GetExecutionContext(e.Activity);
+                    ActivityExecutionContextManager contextManager =
+                        executionContext.ExecutionContextManager;
+                    ActivityExecutionContext templateExecutionContext =
+                        contextManager.GetExecutionContext(e.Activity);
                     contextManager.CompleteExecutionContext(templateExecutionContext);
                 }
 
                 //Reevaluate CompletionCondition
                 if (!this.ActivityState.CompletionConditionTrueAlready)
-                    this.ActivityState.CompletionConditionTrueAlready = (this.UntilCondition != null && this.UntilCondition.Evaluate(this, executionContext));
+                    this.ActivityState.CompletionConditionTrueAlready = (
+                        this.UntilCondition != null
+                        && this.UntilCondition.Evaluate(this, executionContext)
+                    );
             }
             finally //Always perform cleanup of just completed child.
             {
@@ -600,7 +648,11 @@ namespace System.Workflow.Activities
             //Next Step.
             if (!this.ActivityState.IsChildActive) //Everything is passive now.
             {
-                if (this.ExecutionStatus == ActivityExecutionStatus.Canceling || this.ExecutionStatus == ActivityExecutionStatus.Faulting || this.ActivityState.CompletionConditionTrueAlready)
+                if (
+                    this.ExecutionStatus == ActivityExecutionStatus.Canceling
+                    || this.ExecutionStatus == ActivityExecutionStatus.Faulting
+                    || this.ActivityState.CompletionConditionTrueAlready
+                )
                 {
                     base.RaiseEvent(ReplicatorActivity.CompletedEvent, this, EventArgs.Empty);
                     executionContext.CloseActivity();
@@ -611,7 +663,10 @@ namespace System.Workflow.Activities
             {
                 System.Diagnostics.Debug.Assert(this.ExecutionType == ExecutionType.Parallel);
 
-                if (this.ExecutionStatus != ActivityExecutionStatus.Canceling && this.ExecutionStatus != ActivityExecutionStatus.Faulting)
+                if (
+                    this.ExecutionStatus != ActivityExecutionStatus.Canceling
+                    && this.ExecutionStatus != ActivityExecutionStatus.Faulting
+                )
                 {
                     if (this.ActivityState.CompletionConditionTrueAlready)
                     {
@@ -630,7 +685,10 @@ namespace System.Workflow.Activities
                         ExecuteTemplate(executionContext, this.ActivityState[runIndex + 1]);
                         return;
                     }
-                    else if (this.UntilCondition == null || this.UntilCondition.Evaluate(this, executionContext))
+                    else if (
+                        this.UntilCondition == null
+                        || this.UntilCondition.Evaluate(this, executionContext)
+                    )
                     {
                         base.RaiseEvent(ReplicatorActivity.CompletedEvent, this, EventArgs.Empty);
                         executionContext.CloseActivity();
@@ -639,7 +697,13 @@ namespace System.Workflow.Activities
                     break;
 
                 case ExecutionType.Parallel:
-                    if (!this.ActivityState.IsChildActive && (this.UntilCondition == null || (this.UntilCondition.Evaluate(this, executionContext))))
+                    if (
+                        !this.ActivityState.IsChildActive
+                        && (
+                            this.UntilCondition == null
+                            || (this.UntilCondition.Evaluate(this, executionContext))
+                        )
+                    )
                     {
                         base.RaiseEvent(ReplicatorActivity.CompletedEvent, this, EventArgs.Empty);
                         executionContext.CloseActivity();
@@ -647,10 +711,12 @@ namespace System.Workflow.Activities
                     }
                     break;
                 default:
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorInvalidExecutionType));
-
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorInvalidExecutionType)
+                    );
             }
         }
+
         bool TryCancelChildren(ActivityExecutionContext executionContext)
         {
             // returns true iff scheduled cancel on one or more executions of the template
@@ -671,7 +737,11 @@ namespace System.Workflow.Activities
 
             return fScheduledCancel;
         }
-        bool TryCancelChild(ActivityExecutionContext outerProvider, ChildExecutionStateInfo childStateInfo)
+
+        bool TryCancelChild(
+            ActivityExecutionContext outerProvider,
+            ChildExecutionStateInfo childStateInfo
+        )
         {
             // schedule cancellation of the child in the inner execution context
             bool fScheduledCancel = false;
@@ -681,7 +751,10 @@ namespace System.Workflow.Activities
 
             // get the execution context for this run
             ActivityExecutionContextManager contextManager = outerProvider.ExecutionContextManager;
-            ActivityExecutionContext innerProvider = GetExecutionContext(contextManager, childStateInfo.RunId);
+            ActivityExecutionContext innerProvider = GetExecutionContext(
+                contextManager,
+                childStateInfo.RunId
+            );
             if (innerProvider != null)
             {
                 switch (innerProvider.Activity.ExecutionStatus)
@@ -705,13 +778,19 @@ namespace System.Workflow.Activities
             else
             {
                 //Finish the run if it is pending for execution.
-                if (this.ExecutionStatus != ActivityExecutionStatus.Executing && childStateInfo.Status == ChildRunStatus.PendingExecute)
+                if (
+                    this.ExecutionStatus != ActivityExecutionStatus.Executing
+                    && childStateInfo.Status == ChildRunStatus.PendingExecute
+                )
                     childStateInfo.Status = ChildRunStatus.Completed;
             }
             return fScheduledCancel;
         }
 
-        private ActivityExecutionContext GetExecutionContext(ActivityExecutionContextManager contextManager, Guid contextIdGuid)
+        private ActivityExecutionContext GetExecutionContext(
+            ActivityExecutionContextManager contextManager,
+            Guid contextIdGuid
+        )
         {
             foreach (ActivityExecutionContext context in contextManager.ExecutionContexts)
                 if (context.ContextGuid == contextIdGuid)
@@ -731,14 +810,24 @@ namespace System.Workflow.Activities
                 //Execute if its head and only node or tail and previous tail already completed.
                 int totalListSize = this.ActivityState.AbsoluteCount;
 
-                if ((index == 0 && totalListSize == 1) || ((index == totalListSize - 1) && this.ActivityState[totalListSize - 2, false].Status == ChildRunStatus.Completed))
+                if (
+                    (index == 0 && totalListSize == 1)
+                    || (
+                        (index == totalListSize - 1)
+                        && this.ActivityState[totalListSize - 2, false].Status
+                            == ChildRunStatus.Completed
+                    )
+                )
                     bShouldExecute = true;
             }
 
             if (bShouldExecute)
             {
                 childStateInfo.Status = ChildRunStatus.PendingExecute;
-                base.Invoke(this.HandleChildUpdateOperation, new ReplicatorInterActivityEventArgs(childStateInfo, true));
+                base.Invoke(
+                    this.HandleChildUpdateOperation,
+                    new ReplicatorInterActivityEventArgs(childStateInfo, true)
+                );
             }
         }
         #endregion
@@ -762,7 +851,10 @@ namespace System.Workflow.Activities
             }
 
             #region IActivityEventListener<ActivityExecutionStatusChangedEventArgs> Members
-            void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(object sender, ActivityExecutionStatusChangedEventArgs e)
+            void IActivityEventListener<ActivityExecutionStatusChangedEventArgs>.OnEvent(
+                object sender,
+                ActivityExecutionStatusChangedEventArgs e
+            )
             {
                 if (sender == null)
                     throw new ArgumentNullException("sender");
@@ -770,11 +862,12 @@ namespace System.Workflow.Activities
                 ActivityExecutionContext context = sender as ActivityExecutionContext;
 
                 if (context == null)
-                    throw new ArgumentException(SR.Error_SenderMustBeActivityExecutionContext, "sender");
+                    throw new ArgumentException(
+                        SR.Error_SenderMustBeActivityExecutionContext,
+                        "sender"
+                    );
 
                 //
-
-
 
                 ((ReplicatorActivity)context.Activity).HandleStatusChange(context, e, this);
             }
@@ -784,8 +877,11 @@ namespace System.Workflow.Activities
             public override bool Equals(object obj)
             {
                 ReplicatorSubscriber subscriber = obj as ReplicatorSubscriber;
-                return (subscriber != null && base.Equals(obj) && (this.runId.Equals(subscriber.runId)));
+                return (
+                    subscriber != null && base.Equals(obj) && (this.runId.Equals(subscriber.runId))
+                );
             }
+
             public override int GetHashCode()
             {
                 return base.GetHashCode() ^ this.runId.GetHashCode();
@@ -806,7 +902,10 @@ namespace System.Workflow.Activities
                     for (int i = 0; i < this.Count; ++i)
                     {
                         ChildExecutionStateInfo childStateInfo = this[i];
-                        if (childStateInfo.Status == ChildRunStatus.Running || childStateInfo.Status == ChildRunStatus.PendingExecute)
+                        if (
+                            childStateInfo.Status == ChildRunStatus.Running
+                            || childStateInfo.Status == ChildRunStatus.PendingExecute
+                        )
                             return true;
                     }
 
@@ -842,6 +941,7 @@ namespace System.Workflow.Activities
                 Debug.Assert(false, "Child State Info not Found for the RunID");
                 throw new IndexOutOfRangeException();
             }
+
             internal ChildExecutionStateInfo this[int index, bool includeStaleEntries]
             {
                 get
@@ -907,10 +1007,15 @@ namespace System.Workflow.Activities
             }
         }
 
-        [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+        [Obsolete(
+            "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+        )]
         enum ChildRunStatus : byte
         {
-            Created, PendingExecute, Running, Completed
+            Created,
+            PendingExecute,
+            Running,
+            Completed,
         }
 
         [Serializable]
@@ -923,50 +1028,26 @@ namespace System.Workflow.Activities
 
             internal ChildRunStatus Status
             {
-                get
-                {
-                    return this.status;
-                }
-                set
-                {
-                    this.status = value;
-                }
+                get { return this.status; }
+                set { this.status = value; }
             }
 
             internal Object InstanceData
             {
-                get
-                {
-                    return this.data;
-                }
-                set
-                {
-                    this.data = value;
-                }
+                get { return this.data; }
+                set { this.data = value; }
             }
 
             internal Guid RunId
             {
-                get
-                {
-                    return this.runId;
-                }
-                set
-                {
-                    this.runId = value;
-                }
+                get { return this.runId; }
+                set { this.runId = value; }
             }
 
             internal bool MarkedForRemoval
             {
-                get
-                {
-                    return this.markedForRemoval;
-                }
-                set
-                {
-                    this.markedForRemoval = value;
-                }
+                get { return this.markedForRemoval; }
+                set { this.markedForRemoval = value; }
             }
 
             internal ChildExecutionStateInfo(Object instanceData)
@@ -997,7 +1078,9 @@ namespace System.Workflow.Activities
             int IList.Add(object value)
             {
                 if (replicatorActivity == null)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorDisconnected));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorDisconnected)
+                    );
 
                 return replicatorActivity.Add(value);
             }
@@ -1005,7 +1088,9 @@ namespace System.Workflow.Activities
             void IList.Clear()
             {
                 if (replicatorActivity == null)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorDisconnected));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorDisconnected)
+                    );
 
                 replicatorActivity.Clear();
             }
@@ -1013,7 +1098,9 @@ namespace System.Workflow.Activities
             bool IList.Contains(object value)
             {
                 if (replicatorActivity == null)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorDisconnected));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorDisconnected)
+                    );
 
                 return replicatorActivity.IndexOf(value) != -1;
             }
@@ -1021,7 +1108,9 @@ namespace System.Workflow.Activities
             int IList.IndexOf(object value)
             {
                 if (replicatorActivity == null)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorDisconnected));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorDisconnected)
+                    );
 
                 return replicatorActivity.IndexOf(value);
             }
@@ -1029,31 +1118,29 @@ namespace System.Workflow.Activities
             void IList.Insert(int index, object value)
             {
                 if (replicatorActivity == null)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorDisconnected));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorDisconnected)
+                    );
 
                 replicatorActivity.Insert(index, value);
             }
 
             bool IList.IsFixedSize
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             bool IList.IsReadOnly
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             void IList.Remove(object value)
             {
                 if (replicatorActivity == null)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorDisconnected));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorDisconnected)
+                    );
 
                 replicatorActivity.Remove(value);
             }
@@ -1061,7 +1148,9 @@ namespace System.Workflow.Activities
             void IList.RemoveAt(int index)
             {
                 if (replicatorActivity == null)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorDisconnected));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorDisconnected)
+                    );
 
                 replicatorActivity.RemoveAt(index);
             }
@@ -1071,26 +1160,38 @@ namespace System.Workflow.Activities
                 get
                 {
                     if (replicatorActivity == null)
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorDisconnected));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_ReplicatorDisconnected)
+                        );
 
                     if (replicatorActivity.ExecutionStatus != ActivityExecutionStatus.Executing)
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotExecuting));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_ReplicatorNotExecuting)
+                        );
 
                     if (replicatorActivity.ActivityState == null)
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotInitialized));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_ReplicatorNotInitialized)
+                        );
 
                     return replicatorActivity.ActivityState[index, false].InstanceData;
                 }
                 set
                 {
                     if (replicatorActivity == null)
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorDisconnected));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_ReplicatorDisconnected)
+                        );
 
                     if (replicatorActivity.ExecutionStatus != ActivityExecutionStatus.Executing)
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotExecuting));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_ReplicatorNotExecuting)
+                        );
 
                     if (replicatorActivity.ActivityState == null)
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotInitialized));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_ReplicatorNotInitialized)
+                        );
 
                     replicatorActivity.ActivityState[index, false].InstanceData = value;
                 }
@@ -1103,29 +1204,44 @@ namespace System.Workflow.Activities
             void ICollection.CopyTo(Array array, int index)
             {
                 if (replicatorActivity == null)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorDisconnected));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorDisconnected)
+                    );
 
                 if (replicatorActivity.ExecutionStatus != ActivityExecutionStatus.Executing)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotExecuting));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorNotExecuting)
+                    );
 
                 if (replicatorActivity.ActivityState == null)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotInitialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorNotInitialized)
+                    );
 
                 if (array == null)
                     throw new ArgumentNullException("array");
 
                 if (array.Rank != 1)
-                    throw new ArgumentException(SR.GetString(SR.Error_MultiDimensionalArray), "array");
+                    throw new ArgumentException(
+                        SR.GetString(SR.Error_MultiDimensionalArray),
+                        "array"
+                    );
 
                 if (index < 0)
                     throw new ArgumentOutOfRangeException("index");
 
                 if (array.Length - index < replicatorActivity.ActivityState.AbsoluteCount)
-                    throw new ArgumentException(SR.GetString(SR.Error_InsufficientArrayPassedIn), "array");
+                    throw new ArgumentException(
+                        SR.GetString(SR.Error_InsufficientArrayPassedIn),
+                        "array"
+                    );
 
                 for (int i = 0; i < replicatorActivity.ActivityState.AbsoluteCount; ++i)
                 {
-                    array.SetValue(replicatorActivity.ActivityState[i, false].InstanceData, i + index);
+                    array.SetValue(
+                        replicatorActivity.ActivityState[i, false].InstanceData,
+                        i + index
+                    );
                 }
             }
 
@@ -1135,13 +1251,19 @@ namespace System.Workflow.Activities
                 {
 #pragma warning disable 56503
                     if (replicatorActivity == null)
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorDisconnected));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_ReplicatorDisconnected)
+                        );
 
                     if (replicatorActivity.ExecutionStatus != ActivityExecutionStatus.Executing)
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotExecuting));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_ReplicatorNotExecuting)
+                        );
 
                     if (replicatorActivity.ActivityState == null)
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotInitialized));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_ReplicatorNotInitialized)
+                        );
 
                     return replicatorActivity.ActivityState.AbsoluteCount;
 #pragma warning restore 56503
@@ -1150,10 +1272,7 @@ namespace System.Workflow.Activities
 
             bool ICollection.IsSynchronized
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             object ICollection.SyncRoot
@@ -1173,17 +1292,22 @@ namespace System.Workflow.Activities
             IEnumerator IEnumerable.GetEnumerator()
             {
                 if (replicatorActivity == null)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorDisconnected));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorDisconnected)
+                    );
 
                 if (replicatorActivity.ExecutionStatus != ActivityExecutionStatus.Executing)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotExecuting));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorNotExecuting)
+                    );
 
                 if (replicatorActivity.ActivityState == null)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_ReplicatorNotInitialized));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_ReplicatorNotInitialized)
+                    );
 
                 for (int i = 0; i < replicatorActivity.ActivityState.AbsoluteCount; ++i)
                     yield return replicatorActivity.ActivityState[i, false].InstanceData;
-
             }
 
             #endregion
@@ -1192,7 +1316,9 @@ namespace System.Workflow.Activities
     }
 
     #region ReplicatorEventArgs
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ReplicatorChildEventArgs : EventArgs
     {
         private object instanceData = null;
@@ -1206,28 +1332,24 @@ namespace System.Workflow.Activities
 
         public object InstanceData
         {
-            get
-            {
-                return this.instanceData;
-            }
+            get { return this.instanceData; }
         }
 
         public Activity Activity
         {
-            get
-            {
-                return this.activity;
-            }
+            get { return this.activity; }
         }
     }
     #endregion
 
     #region Execution Type Enum
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum ExecutionType
     {
         Sequence = 0,
-        Parallel = 1
+        Parallel = 1,
     }
     #endregion
 
@@ -1240,10 +1362,21 @@ namespace System.Workflow.Activities
 
             ReplicatorActivity replicator = obj as ReplicatorActivity;
             if (replicator == null)
-                throw new ArgumentException(SR.GetString(SR.Error_UnexpectedArgumentType, typeof(ReplicatorActivity).FullName), "obj");
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Error_UnexpectedArgumentType,
+                        typeof(ReplicatorActivity).FullName
+                    ),
+                    "obj"
+                );
 
             if ((replicator.EnabledActivities.Count != 1))
-                validationErrors.Add(new ValidationError(SR.GetString(SR.Error_GeneratorShouldContainSingleActivity), ErrorNumbers.Error_GeneratorShouldContainSingleActivity));
+                validationErrors.Add(
+                    new ValidationError(
+                        SR.GetString(SR.Error_GeneratorShouldContainSingleActivity),
+                        ErrorNumbers.Error_GeneratorShouldContainSingleActivity
+                    )
+                );
 
             return validationErrors;
         }

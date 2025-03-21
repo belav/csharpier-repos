@@ -5,16 +5,18 @@ using Microsoft.EntityFrameworkCore.TestModels.Northwind;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class NorthwindChangeTrackingQuerySqliteTest : NorthwindChangeTrackingQueryTestBase<
-    NorthwindQuerySqliteFixture<NoopModelCustomizer>>
+public class NorthwindChangeTrackingQuerySqliteTest
+    : NorthwindChangeTrackingQueryTestBase<NorthwindQuerySqliteFixture<NoopModelCustomizer>>
 {
-    public NorthwindChangeTrackingQuerySqliteTest(NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture)
-        : base(fixture)
-    {
-    }
+    public NorthwindChangeTrackingQuerySqliteTest(
+        NorthwindQuerySqliteFixture<NoopModelCustomizer> fixture
+    )
+        : base(fixture) { }
 
-    protected override NorthwindContext CreateNoTrackingContext()
-        => new NorthwindSqliteContext(
+    protected override NorthwindContext CreateNoTrackingContext() =>
+        new NorthwindSqliteContext(
             new DbContextOptionsBuilder(Fixture.CreateOptions())
-                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking).Options);
+                .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking)
+                .Options
+        );
 }

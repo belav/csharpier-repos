@@ -21,7 +21,10 @@ public partial class RedirectToPageResultExecutor : IActionResultExecutor<Redire
     /// </summary>
     /// <param name="loggerFactory">The factory used to create loggers.</param>
     /// <param name="urlHelperFactory">The factory used to create url helpers.</param>
-    public RedirectToPageResultExecutor(ILoggerFactory loggerFactory, IUrlHelperFactory urlHelperFactory)
+    public RedirectToPageResultExecutor(
+        ILoggerFactory loggerFactory,
+        IUrlHelperFactory urlHelperFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(loggerFactory);
         ArgumentNullException.ThrowIfNull(urlHelperFactory);
@@ -43,19 +46,23 @@ public partial class RedirectToPageResultExecutor : IActionResultExecutor<Redire
             result.RouteValues,
             result.Protocol,
             result.Host,
-            fragment: result.Fragment);
+            fragment: result.Fragment
+        );
 
         if (string.IsNullOrEmpty(destinationUrl))
         {
-            throw new InvalidOperationException(Resources.FormatNoRoutesMatchedForPage(result.PageName));
+            throw new InvalidOperationException(
+                Resources.FormatNoRoutesMatchedForPage(result.PageName)
+            );
         }
 
         Log.RedirectToPageResultExecuting(_logger, result.PageName);
 
         if (result.PreserveMethod)
         {
-            context.HttpContext.Response.StatusCode = result.Permanent ?
-                StatusCodes.Status308PermanentRedirect : StatusCodes.Status307TemporaryRedirect;
+            context.HttpContext.Response.StatusCode = result.Permanent
+                ? StatusCodes.Status308PermanentRedirect
+                : StatusCodes.Status307TemporaryRedirect;
             context.HttpContext.Response.Headers.Location = destinationUrl;
         }
         else
@@ -68,7 +75,12 @@ public partial class RedirectToPageResultExecutor : IActionResultExecutor<Redire
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Executing RedirectToPageResult, redirecting to {Page}.", EventName = "RedirectToPageResultExecuting")]
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing RedirectToPageResult, redirecting to {Page}.",
+            EventName = "RedirectToPageResultExecuting"
+        )]
         public static partial void RedirectToPageResultExecuting(ILogger logger, string? page);
     }
 }

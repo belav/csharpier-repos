@@ -15,24 +15,29 @@ public class PageHandlerPageFilterTest
     public async Task OnPageHandlerExecutionAsync_ExecutesAsyncFilters()
     {
         // Arrange
-        var pageContext = new PageContext(new ActionContext(
-            new DefaultHttpContext(),
-            new RouteData(),
-            new PageActionDescriptor(),
-            new ModelStateDictionary()));
+        var pageContext = new PageContext(
+            new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new PageActionDescriptor(),
+                new ModelStateDictionary()
+            )
+        );
         var model = new Mock<PageModel>();
 
         var pageHandlerExecutingContext = new PageHandlerExecutingContext(
-           pageContext,
-           Array.Empty<IFilterMetadata>(),
-           new HandlerMethodDescriptor(),
-           new Dictionary<string, object>(),
-           model.Object);
+            pageContext,
+            Array.Empty<IFilterMetadata>(),
+            new HandlerMethodDescriptor(),
+            new Dictionary<string, object>(),
+            model.Object
+        );
         var pageHandlerExecutedContext = new PageHandlerExecutedContext(
-          pageContext,
-          Array.Empty<IFilterMetadata>(),
-          new HandlerMethodDescriptor(),
-          model.Object);
+            pageContext,
+            Array.Empty<IFilterMetadata>(),
+            new HandlerMethodDescriptor(),
+            model.Object
+        );
         PageHandlerExecutionDelegate next = () => Task.FromResult(pageHandlerExecutedContext);
 
         var modelAsFilter = model.As<IAsyncPageFilter>();
@@ -54,11 +59,14 @@ public class PageHandlerPageFilterTest
     public async Task OnPageHandlerExecutionAsync_ExecutesSyncFilters()
     {
         // Arrange
-        var pageContext = new PageContext(new ActionContext(
-            new DefaultHttpContext(),
-            new RouteData(),
-            new PageActionDescriptor(),
-            new ModelStateDictionary()));
+        var pageContext = new PageContext(
+            new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new PageActionDescriptor(),
+                new ModelStateDictionary()
+            )
+        );
         var model = new Mock<object>();
 
         var modelAsFilter = model.As<IPageFilter>();
@@ -71,16 +79,18 @@ public class PageHandlerPageFilterTest
             .Verifiable();
 
         var pageHandlerExecutingContext = new PageHandlerExecutingContext(
-           pageContext,
-           Array.Empty<IFilterMetadata>(),
-           new HandlerMethodDescriptor(),
-           new Dictionary<string, object>(),
-           model.Object);
+            pageContext,
+            Array.Empty<IFilterMetadata>(),
+            new HandlerMethodDescriptor(),
+            new Dictionary<string, object>(),
+            model.Object
+        );
         var pageHandlerExecutedContext = new PageHandlerExecutedContext(
-          pageContext,
-          Array.Empty<IFilterMetadata>(),
-          new HandlerMethodDescriptor(),
-          model.Object);
+            pageContext,
+            Array.Empty<IFilterMetadata>(),
+            new HandlerMethodDescriptor(),
+            model.Object
+        );
         PageHandlerExecutionDelegate next = () => Task.FromResult(pageHandlerExecutedContext);
 
         var pageHandlerPageFilter = new PageHandlerPageFilter();
@@ -96,11 +106,14 @@ public class PageHandlerPageFilterTest
     public async Task OnPageHandlerExecutionAsync_DoesNotInvokeHandlerExecuted_IfResultIsSet()
     {
         // Arrange
-        var pageContext = new PageContext(new ActionContext(
-            new DefaultHttpContext(),
-            new RouteData(),
-            new PageActionDescriptor(),
-            new ModelStateDictionary()));
+        var pageContext = new PageContext(
+            new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new PageActionDescriptor(),
+                new ModelStateDictionary()
+            )
+        );
         var model = new Mock<object>();
 
         var modelAsFilter = model.As<IPageFilter>();
@@ -114,16 +127,18 @@ public class PageHandlerPageFilterTest
             .Throws(new Exception("Shouldn't be called"));
 
         var pageHandlerExecutingContext = new PageHandlerExecutingContext(
-           pageContext,
-           Array.Empty<IFilterMetadata>(),
-           new HandlerMethodDescriptor(),
-           new Dictionary<string, object>(),
-           model.Object);
+            pageContext,
+            Array.Empty<IFilterMetadata>(),
+            new HandlerMethodDescriptor(),
+            new Dictionary<string, object>(),
+            model.Object
+        );
         var pageHandlerExecutedContext = new PageHandlerExecutedContext(
-          pageContext,
-          Array.Empty<IFilterMetadata>(),
-          new HandlerMethodDescriptor(),
-          model.Object);
+            pageContext,
+            Array.Empty<IFilterMetadata>(),
+            new HandlerMethodDescriptor(),
+            model.Object
+        );
         PageHandlerExecutionDelegate next = () => Task.FromResult(pageHandlerExecutedContext);
 
         var pageHandlerPageFilter = new PageHandlerPageFilter();
@@ -139,24 +154,29 @@ public class PageHandlerPageFilterTest
     public async Task OnPageHandlerExecutionAsync_InvokesNextDelegateIfHandlerDoesNotImplementFilter()
     {
         // Arrange
-        var pageContext = new PageContext(new ActionContext(
-            new DefaultHttpContext(),
-            new RouteData(),
-            new PageActionDescriptor(),
-            new ModelStateDictionary()));
+        var pageContext = new PageContext(
+            new ActionContext(
+                new DefaultHttpContext(),
+                new RouteData(),
+                new PageActionDescriptor(),
+                new ModelStateDictionary()
+            )
+        );
         var model = new object();
 
         var pageHandlerExecutingContext = new PageHandlerExecutingContext(
-           pageContext,
-           Array.Empty<IFilterMetadata>(),
-           new HandlerMethodDescriptor(),
-           new Dictionary<string, object>(),
-           model);
+            pageContext,
+            Array.Empty<IFilterMetadata>(),
+            new HandlerMethodDescriptor(),
+            new Dictionary<string, object>(),
+            model
+        );
         var pageHandlerExecutedContext = new PageHandlerExecutedContext(
-          pageContext,
-          Array.Empty<IFilterMetadata>(),
-          new HandlerMethodDescriptor(),
-          model);
+            pageContext,
+            Array.Empty<IFilterMetadata>(),
+            new HandlerMethodDescriptor(),
+            model
+        );
         var invoked = false;
         PageHandlerExecutionDelegate next = () =>
         {

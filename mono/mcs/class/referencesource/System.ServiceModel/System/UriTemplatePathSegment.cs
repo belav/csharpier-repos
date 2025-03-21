@@ -17,36 +17,35 @@ namespace System
         readonly UriTemplatePartType nature;
         readonly string originalSegment;
 
-        protected UriTemplatePathSegment(string originalSegment, UriTemplatePartType nature,
-            bool endsWithSlash)
+        protected UriTemplatePathSegment(
+            string originalSegment,
+            UriTemplatePartType nature,
+            bool endsWithSlash
+        )
         {
             this.originalSegment = originalSegment;
             this.nature = nature;
             this.endsWithSlash = endsWithSlash;
         }
+
         public bool EndsWithSlash
         {
-            get
-            {
-                return this.endsWithSlash;
-            }
+            get { return this.endsWithSlash; }
         }
         public UriTemplatePartType Nature
         {
-            get
-            {
-                return this.nature;
-            }
+            get { return this.nature; }
         }
 
         public string OriginalSegment
         {
-            get
-            {
-                return this.originalSegment;
-            }
+            get { return this.originalSegment; }
         }
-        public static UriTemplatePathSegment CreateFromUriTemplate(string segment, UriTemplate template)
+
+        public static UriTemplatePathSegment CreateFromUriTemplate(
+            string segment,
+            UriTemplate template
+        )
         {
             // Identifying the type of segment - Literal|Compound|Variable
             switch (UriTemplateHelpers.IdentifyPartType(segment))
@@ -60,14 +59,18 @@ namespace System
                 case UriTemplatePartType.Variable:
                     if (segment.EndsWith("/", StringComparison.Ordinal))
                     {
-                        string varName = template.AddPathVariable(UriTemplatePartType.Variable,
-                            segment.Substring(1, segment.Length - 3));
+                        string varName = template.AddPathVariable(
+                            UriTemplatePartType.Variable,
+                            segment.Substring(1, segment.Length - 3)
+                        );
                         return new UriTemplateVariablePathSegment(segment, true, varName);
                     }
                     else
                     {
-                        string varName = template.AddPathVariable(UriTemplatePartType.Variable,
-                            segment.Substring(1, segment.Length - 2));
+                        string varName = template.AddPathVariable(
+                            UriTemplatePartType.Variable,
+                            segment.Substring(1, segment.Length - 2)
+                        );
                         return new UriTemplateVariablePathSegment(segment, false, varName);
                     }
 
@@ -76,14 +79,20 @@ namespace System
                     return null;
             }
         }
+
         public abstract void Bind(string[] values, ref int valueIndex, StringBuilder path);
 
         public abstract bool IsEquivalentTo(UriTemplatePathSegment other, bool ignoreTrailingSlash);
+
         public bool IsMatch(UriTemplateLiteralPathSegment segment)
         {
             return IsMatch(segment, false);
         }
-        public abstract bool IsMatch(UriTemplateLiteralPathSegment segment, bool ignoreTrailingSlash);
+
+        public abstract bool IsMatch(
+            UriTemplateLiteralPathSegment segment,
+            bool ignoreTrailingSlash
+        );
         public abstract void Lookup(string segment, NameValueCollection boundParameters);
     }
 }

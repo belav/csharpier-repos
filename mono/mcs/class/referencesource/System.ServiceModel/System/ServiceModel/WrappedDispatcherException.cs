@@ -11,23 +11,15 @@ namespace System.ServiceModel
     class WrappedDispatcherException : SystemException
     {
         public WrappedDispatcherException()
-            : base()
-        {
-        }
+            : base() { }
 
         public WrappedDispatcherException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public WrappedDispatcherException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
 
         public WrappedDispatcherException(string message, Exception inner)
-            : base(message, inner)
-        {
-        }
+            : base(message, inner) { }
     }
 }

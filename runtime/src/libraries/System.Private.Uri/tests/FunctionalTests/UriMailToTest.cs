@@ -76,7 +76,9 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void UriMailTo_SchemeUserAtQuery_Throws()
         {
-            Assert.ThrowsAny<FormatException>(() => new Uri("mailto:User@?to=User2@Host2.com;cc=User3@Host3com"));
+            Assert.ThrowsAny<FormatException>(() =>
+                new Uri("mailto:User@?to=User2@Host2.com;cc=User3@Host3com")
+            );
         }
 
         [Fact]
@@ -156,10 +158,18 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void UriMailTo_SchemeUserAtHostPathQuery_Success()
         {
-            Uri uri = new Uri("mailto:User@Host/Path1/./Path2/../...?to=User2@Host2.com;cc=User3@Host3com");
+            Uri uri = new Uri(
+                "mailto:User@Host/Path1/./Path2/../...?to=User2@Host2.com;cc=User3@Host3com"
+            );
             Assert.Equal("mailto", uri.Scheme);
-            Assert.Equal("mailto:User@host/Path1/./Path2/../...?to=User2@Host2.com;cc=User3@Host3com", uri.AbsoluteUri);
-            Assert.Equal("mailto:User@host/Path1/./Path2/../...?to=User2@Host2.com;cc=User3@Host3com", uri.ToString());
+            Assert.Equal(
+                "mailto:User@host/Path1/./Path2/../...?to=User2@Host2.com;cc=User3@Host3com",
+                uri.AbsoluteUri
+            );
+            Assert.Equal(
+                "mailto:User@host/Path1/./Path2/../...?to=User2@Host2.com;cc=User3@Host3com",
+                uri.ToString()
+            );
             Assert.Equal("host", uri.Host);
             Assert.Equal("User", uri.UserInfo);
             Assert.Equal("/Path1/./Path2/../...", uri.AbsolutePath);
@@ -176,7 +186,13 @@ namespace System.PrivateUri.Tests
             Assert.Equal("%E3%82%AF", uri.UserInfo);
             Assert.Equal("\u30AF", uri.Host);
             Assert.Equal("", uri.AbsolutePath);
-            Assert.Equal("\u30AF@\u30AF", uri.GetComponents(UriComponents.UserInfo | UriComponents.Host, UriFormat.SafeUnescaped));
+            Assert.Equal(
+                "\u30AF@\u30AF",
+                uri.GetComponents(
+                    UriComponents.UserInfo | UriComponents.Host,
+                    UriFormat.SafeUnescaped
+                )
+            );
         }
 
         [Fact]

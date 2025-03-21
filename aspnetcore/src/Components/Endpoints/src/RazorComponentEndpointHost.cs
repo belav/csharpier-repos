@@ -28,8 +28,7 @@ internal class RazorComponentEndpointHost : IComponent
     [Parameter]
     public IReadOnlyDictionary<string, object?>? ComponentParameters { get; set; }
 
-    public void Attach(RenderHandle renderHandle)
-        => _renderHandle = renderHandle;
+    public void Attach(RenderHandle renderHandle) => _renderHandle = renderHandle;
 
     public Task SetParametersAsync(ParameterView parameters)
     {
@@ -44,7 +43,11 @@ internal class RazorComponentEndpointHost : IComponent
 
         builder.OpenComponent<LayoutView>(0);
         builder.AddComponentParameter(1, nameof(LayoutView.Layout), pageLayoutType);
-        builder.AddComponentParameter(2, nameof(LayoutView.ChildContent), (RenderFragment)RenderPageWithParameters);
+        builder.AddComponentParameter(
+            2,
+            nameof(LayoutView.ChildContent),
+            (RenderFragment)RenderPageWithParameters
+        );
         builder.CloseComponent();
     }
 

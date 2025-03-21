@@ -37,5 +37,7 @@ public interface IWebTransportSession
     /// </summary>
     /// <param name="cancellationToken">The cancellation token used to cancel the operation.</param>
     /// <returns>The unidirectional stream that was opened.</returns>
-    ValueTask<ConnectionContext?> OpenUnidirectionalStreamAsync(CancellationToken cancellationToken = default);
+    ValueTask<ConnectionContext?> OpenUnidirectionalStreamAsync(
+        CancellationToken cancellationToken = default
+    );
 }

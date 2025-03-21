@@ -16,6 +16,6 @@ namespace System.ComponentModel
         /// <summary>
         /// Sort in descending order.
         /// </summary>
-        Descending
+        Descending,
     }
 }

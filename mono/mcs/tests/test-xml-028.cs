@@ -5,29 +5,28 @@ using System;
 /// Partial comment #2
 public partial class Test
 {
-	string Bar;
+    string Bar;
 
-	public static void Main () {}
+    public static void Main() { }
 
-	/// <summary>
-	/// Partial inner class!
-	internal partial class Inner
-	{
-		public string Hoge;
-	}
+    /// <summary>
+    /// Partial inner class!
+    internal partial class Inner
+    {
+        public string Hoge;
+    }
 }
 
 /// Partial comment #1
 /// </summary>
 public partial class Test
 {
-	public string Foo;
+    public string Foo;
 
-	/// ... is still available.
-	/// </summary>
-	internal partial class Inner
-	{
-		string Fuga;
-	}
+    /// ... is still available.
+    /// </summary>
+    internal partial class Inner
+    {
+        string Fuga;
+    }
 }
-

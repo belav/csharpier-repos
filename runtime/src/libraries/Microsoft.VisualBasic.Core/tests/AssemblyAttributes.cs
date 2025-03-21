@@ -5,4 +5,8 @@ using Xunit;
 
 // Tests that use ProjectData or AssemblyData rely on shared state
 // and should not be run in parallel.
-[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly, DisableTestParallelization = true, MaxParallelThreads = 1)]
+[assembly: CollectionBehavior(
+    CollectionBehavior.CollectionPerAssembly,
+    DisableTestParallelization = true,
+    MaxParallelThreads = 1
+)]

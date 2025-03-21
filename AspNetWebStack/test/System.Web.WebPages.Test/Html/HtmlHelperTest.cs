@@ -185,14 +185,16 @@ namespace System.Web.WebPages.Test
 
         private static object GetAttributes()
         {
-            return new { foo = "Bar",
-                         baz_bif = "pow_wow",
-                         other1 = "xx",
-                         other2 = "yy",
-                         other3 = "zz",
-                         other4 = "aa",
-                         other5 = "bb",
-                       };
+            return new
+            {
+                foo = "Bar",
+                baz_bif = "pow_wow",
+                other1 = "xx",
+                other2 = "yy",
+                other3 = "zz",
+                other4 = "aa",
+                other5 = "bb",
+            };
         }
 
         /// <summary>
@@ -201,7 +203,9 @@ namespace System.Web.WebPages.Test
         /// has the attribute name underscore correctly transformed to a dash
         /// </summary>
         /// <param name="helperInvocation"></param>
-        internal static void AssertHelperTransformsAttributesUnderscoresToDashs(Func<HtmlHelper, object, IHtmlString> helperInvocation)
+        internal static void AssertHelperTransformsAttributesUnderscoresToDashs(
+            Func<HtmlHelper, object, IHtmlString> helperInvocation
+        )
         {
             // Arrange
             HtmlHelper helper = HtmlHelperFactory.Create();

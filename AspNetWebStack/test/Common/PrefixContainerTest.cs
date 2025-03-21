@@ -122,7 +122,21 @@ namespace System.Web
         public void ContainsPrefix_ShouldIdentifyCollectionWhenNonCollectionPropertyOccursOnBinarySearchBoundary()
         {
             // Arrange
-            var container = new PrefixContainer(new[] { "foo.a", "foo.b", "foo.c", "foo.d", "foo.esSomethingElse", "foo.es[0].a", "foo.es[0].b", "foo.es[0].c", "foo.es[0].d", "foo.es[0].e" });
+            var container = new PrefixContainer(
+                new[]
+                {
+                    "foo.a",
+                    "foo.b",
+                    "foo.c",
+                    "foo.d",
+                    "foo.esSomethingElse",
+                    "foo.es[0].a",
+                    "foo.es[0].b",
+                    "foo.es[0].c",
+                    "foo.es[0].d",
+                    "foo.es[0].e",
+                }
+            );
 
             // Act & Assert
             Assert.True(container.ContainsPrefix("foo.es"));
@@ -132,7 +146,19 @@ namespace System.Web
         public void ContainsPrefix_ShouldIdentifyCollectionWhenNonCollectionPropertyDoesNotOccurOnBinarySearchBoundary()
         {
             // Arrange
-            var container = new PrefixContainer(new[] { "foo.a", "foo.b", "foo.c", "foo.d", "foo.esSomethingElse", "foo.es[0].a", "foo.es[0].b", "foo.es[0].c" });
+            var container = new PrefixContainer(
+                new[]
+                {
+                    "foo.a",
+                    "foo.b",
+                    "foo.c",
+                    "foo.d",
+                    "foo.esSomethingElse",
+                    "foo.es[0].a",
+                    "foo.es[0].b",
+                    "foo.es[0].c",
+                }
+            );
 
             // Act & Assert
             Assert.True(container.ContainsPrefix("foo.es"));
@@ -142,7 +168,17 @@ namespace System.Web
         public void GetKeysFromPrefix_DotsNotation()
         {
             // Arrange
-            var container = new PrefixContainer(new[] { "foo.bar.baz", "something.other", "foo.baz", "foot.hello", "fo.nothing", "foo" });
+            var container = new PrefixContainer(
+                new[]
+                {
+                    "foo.bar.baz",
+                    "something.other",
+                    "foo.baz",
+                    "foot.hello",
+                    "fo.nothing",
+                    "foo",
+                }
+            );
             string prefix = "foo";
 
             // Act
@@ -160,7 +196,17 @@ namespace System.Web
         public void GetKeysFromPrefix_BracketsNotation()
         {
             // Arrange
-            var container = new PrefixContainer(new[] { "foo[bar]baz", "something[other]", "foo[baz]", "foot[hello]", "fo[nothing]", "foo" });
+            var container = new PrefixContainer(
+                new[]
+                {
+                    "foo[bar]baz",
+                    "something[other]",
+                    "foo[baz]",
+                    "foot[hello]",
+                    "fo[nothing]",
+                    "foo",
+                }
+            );
             string prefix = "foo";
 
             // Act
@@ -178,7 +224,17 @@ namespace System.Web
         public void GetKeysFromPrefix_MixedDotsAndBrackets()
         {
             // Arrange
-            var container = new PrefixContainer(new[] { "foo[bar]baz", "something[other]", "foo.baz", "foot[hello]", "fo[nothing]", "foo" });
+            var container = new PrefixContainer(
+                new[]
+                {
+                    "foo[bar]baz",
+                    "something[other]",
+                    "foo.baz",
+                    "foot[hello]",
+                    "fo[nothing]",
+                    "foo",
+                }
+            );
             string prefix = "foo";
 
             // Act
@@ -196,7 +252,17 @@ namespace System.Web
         public void GetKeysFromPrefix_AllValues()
         {
             // Arrange
-            var container = new PrefixContainer(new[] { "foo[bar]baz", "something[other]", "foo.baz", "foot[hello]", "fo[nothing]", "foo" });
+            var container = new PrefixContainer(
+                new[]
+                {
+                    "foo[bar]baz",
+                    "something[other]",
+                    "foo.baz",
+                    "foot[hello]",
+                    "fo[nothing]",
+                    "foo",
+                }
+            );
             string prefix = "";
 
             // Act
@@ -214,7 +280,17 @@ namespace System.Web
         public void GetKeysFromPrefix_PrefixNotFound()
         {
             // Arrange
-            var container = new PrefixContainer(new[] { "foo[bar]", "something[other]", "foo.baz", "foot[hello]", "fo[nothing]", "foo" });
+            var container = new PrefixContainer(
+                new[]
+                {
+                    "foo[bar]",
+                    "something[other]",
+                    "foo.baz",
+                    "foot[hello]",
+                    "fo[nothing]",
+                    "foo",
+                }
+            );
             string prefix = "notfound";
 
             // Act

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,73 +37,85 @@ using System.Xml;
 
 namespace System.ServiceModel.Channels
 {
-	class SslStreamSecurityUpgradeProvider : StreamSecurityUpgradeProvider
-	{
-		SslStreamSecurityBindingElement source;
+    class SslStreamSecurityUpgradeProvider : StreamSecurityUpgradeProvider
+    {
+        SslStreamSecurityBindingElement source;
 
-		public SslStreamSecurityUpgradeProvider (SslStreamSecurityBindingElement source)
-		{
-			this.source = source;
-		}
+        public SslStreamSecurityUpgradeProvider(SslStreamSecurityBindingElement source)
+        {
+            this.source = source;
+        }
 
-		// FIXME: implement
-		public override EndpointIdentity Identity {
-			get { throw new NotImplementedException (); }
-		}
+        // FIXME: implement
+        public override EndpointIdentity Identity
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public override StreamUpgradeAcceptor CreateUpgradeAcceptor ()
-		{
-			return new SslStreamSecurityUpgradeAcceptor (this);
-		}
+        public override StreamUpgradeAcceptor CreateUpgradeAcceptor()
+        {
+            return new SslStreamSecurityUpgradeAcceptor(this);
+        }
 
-		public override StreamUpgradeInitiator CreateUpgradeInitiator (EndpointAddress remoteAddress, Uri via)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
+        public override StreamUpgradeInitiator CreateUpgradeInitiator(
+            EndpointAddress remoteAddress,
+            Uri via
+        )
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
 
-		// CommunicationObject
+        // CommunicationObject
 
-		protected override void OnAbort ()
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
+        protected override void OnAbort()
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
 
-		protected override void OnOpen (TimeSpan timeout)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
+        protected override void OnOpen(TimeSpan timeout)
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
 
-		protected override IAsyncResult OnBeginOpen (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
 
-		protected override void OnEndOpen (IAsyncResult result)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
+        protected override void OnEndOpen(IAsyncResult result)
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
 
-		protected override void OnClose (TimeSpan timeout)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
+        protected override void OnClose(TimeSpan timeout)
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
 
-		protected override IAsyncResult OnBeginClose (TimeSpan timeout, AsyncCallback callback, object state)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
 
-		protected override void OnEndClose (IAsyncResult result)
-		{
-			// FIXME: implement
-			throw new NotImplementedException ();
-		}
-	}
+        protected override void OnEndClose(IAsyncResult result)
+        {
+            // FIXME: implement
+            throw new NotImplementedException();
+        }
+    }
 }

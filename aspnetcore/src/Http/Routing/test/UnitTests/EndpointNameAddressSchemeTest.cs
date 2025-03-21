@@ -14,11 +14,13 @@ public class EndpointNameAddressSchemeTest
         // Arrange
         var endpoint1 = EndpointFactory.CreateRouteEndpoint(
             "/a",
-            metadata: new object[] { new EndpointNameMetadata("name1"), });
+            metadata: new object[] { new EndpointNameMetadata("name1") }
+        );
 
         var endpoint2 = EndpointFactory.CreateRouteEndpoint(
             "/b",
-            metadata: new object[] { new EndpointNameMetadata("name2"), });
+            metadata: new object[] { new EndpointNameMetadata("name2") }
+        );
 
         var addressScheme = CreateAddressScheme(endpoint1, endpoint2);
 
@@ -26,9 +28,7 @@ public class EndpointNameAddressSchemeTest
         var endpoints = addressScheme.FindEndpoints("name2");
 
         // Assert
-        Assert.Collection(
-            endpoints,
-            e => Assert.Same(endpoint2, e));
+        Assert.Collection(endpoints, e => Assert.Same(endpoint2, e));
     }
 
     [Fact]
@@ -37,7 +37,12 @@ public class EndpointNameAddressSchemeTest
         // Arrange
         var endpoint = EndpointFactory.CreateRouteEndpoint(
             "/a",
-            metadata: new object[] { new EndpointNameMetadata("name1"), new SuppressLinkGenerationMetadata(), });
+            metadata: new object[]
+            {
+                new EndpointNameMetadata("name1"),
+                new SuppressLinkGenerationMetadata(),
+            }
+        );
 
         var addressScheme = CreateAddressScheme(endpoint);
 
@@ -54,7 +59,12 @@ public class EndpointNameAddressSchemeTest
         // Arrange
         var endpoint = EndpointFactory.CreateRouteEndpoint(
             "/a",
-            metadata: new object[] { new EndpointNameMetadata("name1"), new SuppressLinkGenerationMetadata(), });
+            metadata: new object[]
+            {
+                new EndpointNameMetadata("name1"),
+                new SuppressLinkGenerationMetadata(),
+            }
+        );
 
         var addressScheme = CreateAddressScheme(endpoint);
 
@@ -70,7 +80,8 @@ public class EndpointNameAddressSchemeTest
     {
         var endpoint1 = EndpointFactory.CreateRouteEndpoint(
             "/a",
-            metadata: new object[] { new EndpointNameMetadata("name1"), });
+            metadata: new object[] { new EndpointNameMetadata("name1") }
+        );
         var dynamicDataSource = new DynamicEndpointDataSource(new[] { endpoint1 });
 
         // Act 1
@@ -83,7 +94,8 @@ public class EndpointNameAddressSchemeTest
         // Arrange 2
         var endpoint2 = EndpointFactory.CreateRouteEndpoint(
             "/b",
-            metadata: new object[] { new EndpointNameMetadata("name2"), });
+            metadata: new object[] { new EndpointNameMetadata("name2") }
+        );
 
         // Act 2
         // Trigger change
@@ -99,7 +111,8 @@ public class EndpointNameAddressSchemeTest
             (m) =>
             {
                 Assert.Same(endpoint2, m.Value.Single());
-            });
+            }
+        );
     }
 
     [Fact]
@@ -108,7 +121,12 @@ public class EndpointNameAddressSchemeTest
         // Arrange
         var endpoint = EndpointFactory.CreateRouteEndpoint(
             "/a",
-            metadata: new object[] { new EndpointNameMetadata("name1"), new SuppressLinkGenerationMetadata(), });
+            metadata: new object[]
+            {
+                new EndpointNameMetadata("name1"),
+                new SuppressLinkGenerationMetadata(),
+            }
+        );
 
         // Act
         var addressScheme = CreateAddressScheme(endpoint);
@@ -123,7 +141,13 @@ public class EndpointNameAddressSchemeTest
         // Arrange
         var endpoint = EndpointFactory.CreateRouteEndpoint(
             "/a",
-            metadata: new object[] { new EndpointNameMetadata("name1"), new SuppressLinkGenerationMetadata(), new EncourageLinkGenerationMetadata(), });
+            metadata: new object[]
+            {
+                new EndpointNameMetadata("name1"),
+                new SuppressLinkGenerationMetadata(),
+                new EncourageLinkGenerationMetadata(),
+            }
+        );
 
         // Act
         var addressScheme = CreateAddressScheme(endpoint);
@@ -136,9 +160,7 @@ public class EndpointNameAddressSchemeTest
     public void AddressScheme_IgnoresEndpointsWithoutEndpointName()
     {
         // Arrange
-        var endpoint = EndpointFactory.CreateRouteEndpoint(
-            "/a",
-            metadata: new object[] { });
+        var endpoint = EndpointFactory.CreateRouteEndpoint("/a", metadata: new object[] { });
 
         // Act
         var addressScheme = CreateAddressScheme(endpoint);
@@ -153,34 +175,64 @@ public class EndpointNameAddressSchemeTest
         // Arrange
         var endpoints = new Endpoint[]
         {
-                EndpointFactory.CreateRouteEndpoint("/a", displayName: "a", metadata: new object[] { new EndpointNameMetadata("name1"), }),
-                EndpointFactory.CreateRouteEndpoint("/b", displayName: "b", metadata: new object[] { new EndpointNameMetadata("name1"), }),
-                EndpointFactory.CreateRouteEndpoint("/c", displayName: "c", metadata: new object[] { new EndpointNameMetadata("name1"), }),
-
-                //// Not a duplicate
-                EndpointFactory.CreateRouteEndpoint("/d", displayName: "d", metadata: new object[] { new EndpointNameMetadata("NAME1"), }),
-
-                EndpointFactory.CreateRouteEndpoint("/e", displayName: "e", metadata: new object[] { new EndpointNameMetadata("name2"), }),
-                EndpointFactory.CreateRouteEndpoint("/f", displayName: "f", metadata: new object[] { new EndpointNameMetadata("name2"), }),
+            EndpointFactory.CreateRouteEndpoint(
+                "/a",
+                displayName: "a",
+                metadata: new object[] { new EndpointNameMetadata("name1") }
+            ),
+            EndpointFactory.CreateRouteEndpoint(
+                "/b",
+                displayName: "b",
+                metadata: new object[] { new EndpointNameMetadata("name1") }
+            ),
+            EndpointFactory.CreateRouteEndpoint(
+                "/c",
+                displayName: "c",
+                metadata: new object[] { new EndpointNameMetadata("name1") }
+            ),
+            //// Not a duplicate
+            EndpointFactory.CreateRouteEndpoint(
+                "/d",
+                displayName: "d",
+                metadata: new object[] { new EndpointNameMetadata("NAME1") }
+            ),
+            EndpointFactory.CreateRouteEndpoint(
+                "/e",
+                displayName: "e",
+                metadata: new object[] { new EndpointNameMetadata("name2") }
+            ),
+            EndpointFactory.CreateRouteEndpoint(
+                "/f",
+                displayName: "f",
+                metadata: new object[] { new EndpointNameMetadata("name2") }
+            ),
         };
 
         var addressScheme = CreateAddressScheme(endpoints);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => addressScheme.FindEndpoints("any name"));
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            addressScheme.FindEndpoints("any name")
+        );
 
         // Assert
-        Assert.Equal(String.Join(Environment.NewLine, @"The following endpoints with a duplicate endpoint name were found.",
-"",
-"Endpoints with endpoint name 'name1':",
-"a",
-"b",
-"c",
-"",
-"Endpoints with endpoint name 'name2':",
-"e",
-"f",
-""), ex.Message);
+        Assert.Equal(
+            String.Join(
+                Environment.NewLine,
+                @"The following endpoints with a duplicate endpoint name were found.",
+                "",
+                "Endpoints with endpoint name 'name1':",
+                "a",
+                "b",
+                "c",
+                "",
+                "Endpoints with endpoint name 'name2':",
+                "e",
+                "f",
+                ""
+            ),
+            ex.Message
+        );
     }
 
     private EndpointNameAddressScheme CreateAddressScheme(params Endpoint[] endpoints)

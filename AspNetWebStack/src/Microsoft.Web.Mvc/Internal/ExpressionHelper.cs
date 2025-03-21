@@ -15,9 +15,20 @@ namespace Microsoft.Web.Mvc.Internal
 {
     public static class ExpressionHelper
     {
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Users cannot use anonymous methods with the LambdaExpression type")]
-        public static RouteValueDictionary GetRouteValuesFromExpression<TController>(Expression<Action<TController>> action) where TController : Controller
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Users cannot use anonymous methods with the LambdaExpression type"
+        )]
+        public static RouteValueDictionary GetRouteValuesFromExpression<TController>(
+            Expression<Action<TController>> action
+        )
+            where TController : Controller
         {
             if (action == null)
             {
@@ -27,18 +38,30 @@ namespace Microsoft.Web.Mvc.Internal
             MethodCallExpression call = action.Body as MethodCallExpression;
             if (call == null)
             {
-                throw new ArgumentException(MvcResources.ExpressionHelper_MustBeMethodCall, "action");
+                throw new ArgumentException(
+                    MvcResources.ExpressionHelper_MustBeMethodCall,
+                    "action"
+                );
             }
 
             string controllerName = typeof(TController).Name;
             if (!controllerName.EndsWith("Controller", StringComparison.OrdinalIgnoreCase))
             {
-                throw new ArgumentException(MvcResources.ExpressionHelper_TargetMustEndInController, "action");
+                throw new ArgumentException(
+                    MvcResources.ExpressionHelper_TargetMustEndInController,
+                    "action"
+                );
             }
-            controllerName = controllerName.Substring(0, controllerName.Length - "Controller".Length);
+            controllerName = controllerName.Substring(
+                0,
+                controllerName.Length - "Controller".Length
+            );
             if (controllerName.Length == 0)
             {
-                throw new ArgumentException(MvcResources.ExpressionHelper_CannotRouteToController, "action");
+                throw new ArgumentException(
+                    MvcResources.ExpressionHelper_CannotRouteToController,
+                    "action"
+                );
             }
 
             // TODO: How do we know that this method is even web callable?
@@ -50,7 +73,13 @@ namespace Microsoft.Web.Mvc.Internal
             rvd.Add("Controller", controllerName);
             rvd.Add("Action", actionName);
 
-            ActionLinkAreaAttribute areaAttr = typeof(TController).GetCustomAttributes(typeof(ActionLinkAreaAttribute), true /* inherit */).FirstOrDefault() as ActionLinkAreaAttribute;
+            ActionLinkAreaAttribute areaAttr =
+                typeof(TController)
+                    .GetCustomAttributes(
+                        typeof(ActionLinkAreaAttribute),
+                        true /* inherit */
+                    )
+                    .FirstOrDefault() as ActionLinkAreaAttribute;
             if (areaAttr != null)
             {
                 string areaName = areaAttr.Area;
@@ -61,9 +90,19 @@ namespace Microsoft.Web.Mvc.Internal
             return rvd;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Users cannot use anonymous methods with the LambdaExpression type")]
-        public static string GetInputName<TModel, TProperty>(Expression<Func<TModel, TProperty>> expression)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "Users cannot use anonymous methods with the LambdaExpression type"
+        )]
+        public static string GetInputName<TModel, TProperty>(
+            Expression<Func<TModel, TProperty>> expression
+        )
         {
             if (expression.Body.NodeType == ExpressionType.Call)
             {
@@ -94,14 +133,30 @@ namespace Microsoft.Web.Mvc.Internal
             string methodName = methodInfo.Name;
 
             // do we know this not to be an action?
-            if (methodInfo.IsDefined(typeof(NonActionAttribute), true /* inherit */))
+            if (
+                methodInfo.IsDefined(
+                    typeof(NonActionAttribute),
+                    true /* inherit */
+                )
+            )
             {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                                                                  MvcResources.ExpressionHelper_CannotCallNonAction, methodName));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        MvcResources.ExpressionHelper_CannotCallNonAction,
+                        methodName
+                    )
+                );
             }
 
             // has this been renamed?
-            ActionNameAttribute nameAttr = methodInfo.GetCustomAttributes(typeof(ActionNameAttribute), true /* inherit */).OfType<ActionNameAttribute>().FirstOrDefault();
+            ActionNameAttribute nameAttr = methodInfo
+                .GetCustomAttributes(
+                    typeof(ActionNameAttribute),
+                    true /* inherit */
+                )
+                .OfType<ActionNameAttribute>()
+                .FirstOrDefault();
             if (nameAttr != null)
             {
                 return nameAttr.Name;
@@ -116,8 +171,13 @@ namespace Microsoft.Web.Mvc.Internal
                 }
                 if (methodName.EndsWith("Completed", StringComparison.OrdinalIgnoreCase))
                 {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture,
-                                                                      MvcResources.ExpressionHelper_CannotCallCompletedMethod, methodName));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            MvcResources.ExpressionHelper_CannotCallCompletedMethod,
+                            methodName
+                        )
+                    );
                 }
             }
 
@@ -125,7 +185,10 @@ namespace Microsoft.Web.Mvc.Internal
             return methodName;
         }
 
-        private static void AddParameterValuesFromExpressionToDictionary(RouteValueDictionary rvd, MethodCallExpression call)
+        private static void AddParameterValuesFromExpressionToDictionary(
+            RouteValueDictionary rvd,
+            MethodCallExpression call
+        )
         {
             ParameterInfo[] parameters = call.Method.GetParameters();
 

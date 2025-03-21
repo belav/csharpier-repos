@@ -3,14 +3,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Composition.Hosting.Core;
 using System.Composition.Convention;
+using System.Composition.Hosting;
+using System.Composition.Hosting.Core;
 using System.Composition.Runtime;
 using System.Composition.UnitTests.Util;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Composition.Hosting;
 using Xunit;
 
 namespace System.Composition.UnitTests
@@ -21,7 +21,8 @@ namespace System.Composition.UnitTests
 
         public class RuleExportAttribute : ExportAttribute
         {
-            public RuleExportAttribute() : base(typeof(IRule)) { }
+            public RuleExportAttribute()
+                : base(typeof(IRule)) { }
         }
 
         [RuleExport]
@@ -58,15 +59,25 @@ namespace System.Composition.UnitTests
         [Fact]
         public void InstanceExportsOfIncompatibleContractsAreDetected()
         {
-            var x = Assert.Throws<CompositionFailedException>(() => CreateContainer(typeof(IncompatibleRule)));
-            Assert.Equal("Exported contract type 'IRule' is not assignable from part 'IncompatibleRule'.", x.Message);
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                CreateContainer(typeof(IncompatibleRule))
+            );
+            Assert.Equal(
+                "Exported contract type 'IRule' is not assignable from part 'IncompatibleRule'.",
+                x.Message
+            );
         }
 
         [Fact]
         public void PropertyExportsOfIncompatibleContractsAreDetected()
         {
-            var x = Assert.Throws<CompositionFailedException>(() => CreateContainer(typeof(IncompatibleRuleProperty)));
-            Assert.Equal("Exported contract type 'IRule' is not assignable from property 'Rule' of part 'IncompatibleRuleProperty'.", x.Message);
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                CreateContainer(typeof(IncompatibleRuleProperty))
+            );
+            Assert.Equal(
+                "Exported contract type 'IRule' is not assignable from property 'Rule' of part 'IncompatibleRuleProperty'.",
+                x.Message
+            );
         }
 
         [Fact]
@@ -100,9 +111,7 @@ namespace System.Composition.UnitTests
         }
 
         [Export]
-        public class HomeController : BaseController
-        {
-        }
+        public class HomeController : BaseController { }
 
         [Fact]
         public void SatisfiesImportsAppliedToBase()
@@ -128,8 +137,13 @@ namespace System.Composition.UnitTests
                 .WithPart<MultipleImportsOnProperty>()
                 .CreateContainer();
 
-            var x = Assert.Throws<CompositionFailedException>(() => c.GetExport<MultipleImportsOnProperty>());
-            Assert.Equal("Multiple imports have been configured for 'MultiImport'. At most one import can be applied to a single site.", x.Message);
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                c.GetExport<MultipleImportsOnProperty>()
+            );
+            Assert.Equal(
+                "Multiple imports have been configured for 'MultiImport'. At most one import can be applied to a single site.",
+                x.Message
+            );
         }
     }
 }

@@ -6,20 +6,17 @@ namespace Microsoft.EntityFrameworkCore;
 public class AspNetIdentityCustomTypesIntKeySqliteTest
     : AspNetIdentityCustomTypesIntKeyTestBase<AspNetIdentityCustomTypesIntKeySqliteTest.AspNetIdentityCustomTypesIntKeySqliteFixture>
 {
-    public AspNetIdentityCustomTypesIntKeySqliteTest(AspNetIdentityCustomTypesIntKeySqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+    public AspNetIdentityCustomTypesIntKeySqliteTest(
+        AspNetIdentityCustomTypesIntKeySqliteFixture fixture
+    )
+        : base(fixture) { }
 
     public class AspNetIdentityCustomTypesIntKeySqliteFixture : AspNetIdentityFixtureBase
     {
-        public TestSqlLoggerFactory TestSqlLoggerFactory
-            => (TestSqlLoggerFactory)ListLoggerFactory;
+        public TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
-        protected override string StoreName
-            => "AspNetCustomTypesIntKeyIdentity";
+        protected override string StoreName => "AspNetCustomTypesIntKeyIdentity";
     }
 }

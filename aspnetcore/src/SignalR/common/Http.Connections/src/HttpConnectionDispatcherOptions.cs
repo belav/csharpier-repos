@@ -139,7 +139,19 @@ public class HttpConnectionDispatcherOptions
     // We initialize these lazily based on the state of the options specified here.
     // Though these are mutable it's extremely rare that they would be mutated past the
     // call to initialize the routerware.
-    internal PipeOptions TransportPipeOptions => _transportPipeOptions ??= new PipeOptions(pauseWriterThreshold: TransportMaxBufferSize, resumeWriterThreshold: TransportMaxBufferSize / 2, readerScheduler: PipeScheduler.ThreadPool, useSynchronizationContext: false);
+    internal PipeOptions TransportPipeOptions =>
+        _transportPipeOptions ??= new PipeOptions(
+            pauseWriterThreshold: TransportMaxBufferSize,
+            resumeWriterThreshold: TransportMaxBufferSize / 2,
+            readerScheduler: PipeScheduler.ThreadPool,
+            useSynchronizationContext: false
+        );
 
-    internal PipeOptions AppPipeOptions => _appPipeOptions ??= new PipeOptions(pauseWriterThreshold: ApplicationMaxBufferSize, resumeWriterThreshold: ApplicationMaxBufferSize / 2, readerScheduler: PipeScheduler.ThreadPool, useSynchronizationContext: false);
+    internal PipeOptions AppPipeOptions =>
+        _appPipeOptions ??= new PipeOptions(
+            pauseWriterThreshold: ApplicationMaxBufferSize,
+            resumeWriterThreshold: ApplicationMaxBufferSize / 2,
+            readerScheduler: PipeScheduler.ThreadPool,
+            useSynchronizationContext: false
+        );
 }

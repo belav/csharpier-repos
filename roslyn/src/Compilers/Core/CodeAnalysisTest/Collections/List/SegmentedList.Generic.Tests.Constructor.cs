@@ -55,11 +55,23 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void Constructor_IEnumerable(EnumerableType enumerableType, int listLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void Constructor_IEnumerable(
+            EnumerableType enumerableType,
+            int listLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             _ = listLength;
             _ = numberOfMatchingElements;
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, null, enumerableLength, 0, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                null,
+                enumerableLength,
+                0,
+                numberOfDuplicateElements
+            );
             SegmentedList<T> list = new SegmentedList<T>(enumerable);
             SegmentedList<T> expected = enumerable.ToSegmentedList();
 
@@ -74,7 +86,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void Constructo_NullIEnumerable_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(() => { SegmentedList<T> _list = new SegmentedList<T>(null!); }); //"Expected ArgumentnUllException for null items"
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                SegmentedList<T> _list = new SegmentedList<T>(null!);
+            }); //"Expected ArgumentnUllException for null items"
         }
     }
 }

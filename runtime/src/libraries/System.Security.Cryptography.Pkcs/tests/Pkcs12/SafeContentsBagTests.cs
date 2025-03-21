@@ -16,7 +16,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         private static readonly PbeParameters s_pbkdf2Parameters = new PbeParameters(
             PbeEncryptionAlgorithm.Aes256Cbc,
             HashAlgorithmName.SHA384,
-            0x1001);
+            0x1001
+        );
 
         [Fact]
         public static void CreatingBagSerializesInput()
@@ -26,8 +27,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12SafeContents builtContents = new Pkcs12SafeContents();
             builtContents.AddSecret(s_zeroOid, s_derNull);
 
-            builtContents.AddSecret(s_zeroOid, new byte[] { 4, 1, 2 }).Attributes.Add(
-                new Pkcs9LocalKeyId(s_derNull.Span));
+            builtContents
+                .AddSecret(s_zeroOid, new byte[] { 4, 1, 2 })
+                .Attributes.Add(new Pkcs9LocalKeyId(s_derNull.Span));
 
             builtContents.AddSecret(s_zeroOid, new byte[] { 4, 1, 3 });
 
@@ -38,9 +40,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12SafeContents readContents = safeContentsBag.SafeContents;
             Assert.NotSame(readContents, builtContents);
 
-            Assert.Equal(
-                Pkcs12ConfidentialityMode.None,
-                readContents.ConfidentialityMode);
+            Assert.Equal(Pkcs12ConfidentialityMode.None, readContents.ConfidentialityMode);
 
             Assert.True(readContents.IsReadOnly);
 
@@ -69,8 +69,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12SafeContents builtContents = new Pkcs12SafeContents();
             builtContents.AddSecret(s_zeroOid, s_derNull);
 
-            builtContents.AddSecret(s_zeroOid, new byte[] { 4, 1, 2 }).Attributes.Add(
-                new Pkcs9LocalKeyId(s_derNull.Span));
+            builtContents
+                .AddSecret(s_zeroOid, new byte[] { 4, 1, 2 })
+                .Attributes.Add(new Pkcs9LocalKeyId(s_derNull.Span));
 
             builtContents.AddSecret(s_zeroOid, new byte[] { 4, 1, 3 });
             container.AddNestedContents(builtContents);
@@ -101,9 +102,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12SafeContentsBag safeContentsBag = Assert.IsType<Pkcs12SafeContentsBag>(onlyBag);
             Pkcs12SafeContents readContents = safeContentsBag.SafeContents;
 
-            Assert.Equal(
-                Pkcs12ConfidentialityMode.None,
-                readContents.ConfidentialityMode);
+            Assert.Equal(Pkcs12ConfidentialityMode.None, readContents.ConfidentialityMode);
 
             Assert.True(readContents.IsReadOnly);
 

@@ -15,21 +15,21 @@ namespace System.Web.WebPages.Scope
         private readonly Lazy<Dictionary<object, object>> _items;
 
         public WebConfigScopeDictionary()
-            : this(WebConfigurationManager.AppSettings)
-        {
-        }
+            : this(WebConfigurationManager.AppSettings) { }
 
         public WebConfigScopeDictionary(NameValueCollection appSettings)
         {
             _items = new Lazy<Dictionary<object, object>>(() =>
+            {
+                Dictionary<object, object> items = new Dictionary<object, object>(
+                    ScopeStorageComparer.Instance
+                );
+                foreach (string key in appSettings.AllKeys)
                 {
-                    Dictionary<object, object> items = new Dictionary<object, object>(ScopeStorageComparer.Instance);
-                    foreach (string key in appSettings.AllKeys)
-                    {
-                        items[key] = appSettings[key];
-                    }
-                    return items;
-                });
+                    items[key] = appSettings[key];
+                }
+                return items;
+            });
         }
 
         private IDictionary<object, object> Items

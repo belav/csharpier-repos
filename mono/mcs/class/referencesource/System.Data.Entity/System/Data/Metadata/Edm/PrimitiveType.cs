@@ -23,7 +23,7 @@ namespace System.Data.Metadata.Edm
         #region constructors
         /// <summary>
         /// Initializes a new instance of PrimitiveType
-        /// </summary>      
+        /// </summary>
         internal PrimitiveType()
         {
             // No initialization of item attributes in here, it's used as a pass thru in the case for delay population
@@ -40,11 +40,13 @@ namespace System.Data.Metadata.Edm
         /// <param name="baseType">The primitive type that this type is derived from</param>
         /// <param name="providerManifest">The ProviderManifest of the provider of this type</param>
         /// <exception cref="System.ArgumentNullException">Thrown if name, namespaceName, version, baseType or providerManifest arguments are null</exception>
-        internal PrimitiveType(string name,
-                             string namespaceName,
-                             DataSpace dataSpace,
-                             PrimitiveType baseType,
-                             DbProviderManifest providerManifest)
+        internal PrimitiveType(
+            string name,
+            string namespaceName,
+            DataSpace dataSpace,
+            PrimitiveType baseType,
+            DbProviderManifest providerManifest
+        )
             : base(name, namespaceName, dataSpace)
         {
             EntityUtil.GenericCheckArgumentNull(baseType, "baseType");
@@ -52,9 +54,12 @@ namespace System.Data.Metadata.Edm
 
             this.BaseType = baseType;
 
-            Initialize(this, baseType.PrimitiveTypeKind,
+            Initialize(
+                this,
+                baseType.PrimitiveTypeKind,
                 false, // isDefault
-                providerManifest);
+                providerManifest
+            );
         }
 
         /// <summary>
@@ -63,11 +68,18 @@ namespace System.Data.Metadata.Edm
         /// <param name="clrType">The CLR type object for this primitive type</param>
         /// <param name="baseType">The base type for this primitive type</param>
         /// <param name="providerManifest">The ProviderManifest of the provider of this type</param>
-        internal PrimitiveType(Type clrType,
-                               PrimitiveType baseType,
-                               DbProviderManifest providerManifest)
-            : this(EntityUtil.GenericCheckArgumentNull(clrType, "clrType").Name, clrType.Namespace,
-            DataSpace.OSpace, baseType, providerManifest)
+        internal PrimitiveType(
+            Type clrType,
+            PrimitiveType baseType,
+            DbProviderManifest providerManifest
+        )
+            : this(
+                EntityUtil.GenericCheckArgumentNull(clrType, "clrType").Name,
+                clrType.Namespace,
+                DataSpace.OSpace,
+                baseType,
+                providerManifest
+            )
         {
             Debug.Assert(clrType == ClrEquivalentType, "not equivalent to ClrEquivalentType");
         }
@@ -83,7 +95,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.PrimitiveType; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.PrimitiveType; }
+        }
 
         /// <summary>
         /// </summary>
@@ -99,14 +114,8 @@ namespace System.Data.Metadata.Edm
         [MetadataProperty(BuiltInTypeKind.PrimitiveTypeKind, false)]
         public PrimitiveTypeKind PrimitiveTypeKind
         {
-            get
-            {
-                return _primitiveTypeKind;
-            }
-            internal set
-            {
-                _primitiveTypeKind = value;
-            }
+            get { return _primitiveTypeKind; }
+            internal set { _primitiveTypeKind = value; }
         }
 
         /// <summary>
@@ -117,12 +126,18 @@ namespace System.Data.Metadata.Edm
         {
             get
             {
-                Debug.Assert(_providerManifest != null, "This primitive type should have been added to a manifest, which should have set this");
+                Debug.Assert(
+                    _providerManifest != null,
+                    "This primitive type should have been added to a manifest, which should have set this"
+                );
                 return _providerManifest;
             }
             set
             {
-                Debug.Assert(value != null, "This primitive type should have been added to a manifest, which should have set this");
+                Debug.Assert(
+                    value != null,
+                    "This primitive type should have been added to a manifest, which should have set this"
+                );
                 _providerManifest = value;
             }
         }
@@ -133,10 +148,7 @@ namespace System.Data.Metadata.Edm
         /// <returns>The FacetDescritions for this type.</returns>
         public System.Collections.ObjectModel.ReadOnlyCollection<FacetDescription> FacetDescriptions
         {
-            get
-            {
-                return ProviderManifest.GetFacetDescriptions(this);
-            }
+            get { return ProviderManifest.GetFacetDescriptions(this); }
         }
 
         /// <summary>
@@ -217,10 +229,12 @@ namespace System.Data.Metadata.Edm
         /// <param name="primitiveTypeKind">The primitive type kind of this primitive type</param>
         /// <param name="isDefaultType">When true this is the default type to return when a type is asked for by PrimitiveTypeKind</param>
         /// <param name="providerManifest">The ProviderManifest of the provider of this type</param>
-        internal static void Initialize(PrimitiveType primitiveType,
-                                                      PrimitiveTypeKind primitiveTypeKind,
-                                                      bool isDefaultType,
-                                                      DbProviderManifest providerManifest)
+        internal static void Initialize(
+            PrimitiveType primitiveType,
+            PrimitiveTypeKind primitiveTypeKind,
+            bool isDefaultType,
+            DbProviderManifest providerManifest
+        )
         {
             primitiveType._primitiveTypeKind = primitiveTypeKind;
             primitiveType._providerManifest = providerManifest;
@@ -230,11 +244,15 @@ namespace System.Data.Metadata.Edm
         /// return the model equivalent type for this type,
         /// for example if this instance is nvarchar and it's
         /// base type is Edm String then the return type is Edm String.
-        /// If the type is actually already a model type then the 
+        /// If the type is actually already a model type then the
         /// return type is "this".
         /// </summary>
         /// <returns></returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         public EdmType GetEdmPrimitiveType()
         {
             return MetadataItem.EdmProviderManifest.GetPrimitiveType(PrimitiveTypeKind);
@@ -243,13 +261,21 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the list of EDM primitive types
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         public static System.Collections.ObjectModel.ReadOnlyCollection<PrimitiveType> GetEdmPrimitiveTypes()
         {
             return EdmProviderManifest.GetStoreTypes();
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Edm"
+        )]
         public static PrimitiveType GetEdmPrimitiveType(PrimitiveTypeKind primitiveTypeKind)
         {
             return MetadataItem.EdmProviderManifest.GetPrimitiveType(primitiveTypeKind);

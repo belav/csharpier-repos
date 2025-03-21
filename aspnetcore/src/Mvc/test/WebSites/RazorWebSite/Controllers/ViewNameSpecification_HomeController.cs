@@ -19,12 +19,16 @@ public class ViewNameSpecification_HomeController : Controller
 
     public IActionResult LayoutSpecifiedWithPartialPathInViewStart_ForViewSpecifiedWithRelativePath()
     {
-        return View("Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInViewStart.cshtml");
+        return View(
+            "Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInViewStart.cshtml"
+        );
     }
 
     public IActionResult LayoutSpecifiedWithPartialPathInViewStart_ForViewSpecifiedWithAppRelativePath()
     {
-        return View("~/Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInViewStart.cshtml");
+        return View(
+            "~/Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInViewStart.cshtml"
+        );
     }
 
     public IActionResult LayoutSpecifiedWithPartialPathInPage()
@@ -44,7 +48,9 @@ public class ViewNameSpecification_HomeController : Controller
 
     public IActionResult LayoutSpecifiedWithPartialPathInPageWithAppRelativePath()
     {
-        return View("~/Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInPage.cshtml");
+        return View(
+            "~/Views/ViewNameSpecification_Home/LayoutSpecifiedWithPartialPathInPage.cshtml"
+        );
     }
 
     public IActionResult LayoutSpecifiedWithRelativePath()

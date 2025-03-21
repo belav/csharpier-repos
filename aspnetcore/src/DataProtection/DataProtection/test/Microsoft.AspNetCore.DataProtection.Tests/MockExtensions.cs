@@ -15,10 +15,17 @@ internal static class MockExtensions
     /// Sets up a mock such that given the name of a deserializer class and the XML node that class's
     /// Import method should expect returns a descriptor which produces the given authenticator.
     /// </summary>
-    public static void ReturnDescriptorGivenDeserializerTypeNameAndInput(this Mock<IActivator> mockActivator, string typeName, string xml, IAuthenticatedEncryptorDescriptor descriptor)
+    public static void ReturnDescriptorGivenDeserializerTypeNameAndInput(
+        this Mock<IActivator> mockActivator,
+        string typeName,
+        string xml,
+        IAuthenticatedEncryptorDescriptor descriptor
+    )
     {
         mockActivator
-            .Setup(o => o.CreateInstance(typeof(IAuthenticatedEncryptorDescriptorDeserializer), typeName))
+            .Setup(o =>
+                o.CreateInstance(typeof(IAuthenticatedEncryptorDescriptorDeserializer), typeName)
+            )
             .Returns(() =>
             {
                 var mockDeserializer = new Mock<IAuthenticatedEncryptorDescriptorDeserializer>();
@@ -38,7 +45,12 @@ internal static class MockExtensions
     /// Sets up a mock such that given the name of a decryptor class and the XML node that class's
     /// Decrypt method should expect returns the specified XML elmeent.
     /// </summary>
-    public static void ReturnDecryptedElementGivenDecryptorTypeNameAndInput(this Mock<IActivator> mockActivator, string typeName, string expectedInputXml, string outputXml)
+    public static void ReturnDecryptedElementGivenDecryptorTypeNameAndInput(
+        this Mock<IActivator> mockActivator,
+        string typeName,
+        string expectedInputXml,
+        string outputXml
+    )
     {
         mockActivator
             .Setup(o => o.CreateInstance(typeof(IXmlDecryptor), typeName))

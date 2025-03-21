@@ -24,10 +24,22 @@ namespace System.Globalization
             if (estimatedLength < StackallocThreshold)
             {
                 char* outputStack = stackalloc char[estimatedLength];
-                actualLength = Interop.Globalization.ToAscii(flags, unicode, count, outputStack, estimatedLength);
+                actualLength = Interop.Globalization.ToAscii(
+                    flags,
+                    unicode,
+                    count,
+                    outputStack,
+                    estimatedLength
+                );
                 if (actualLength > 0 && actualLength <= estimatedLength)
                 {
-                    return GetStringForOutput(unicodeString, unicode, count, outputStack, actualLength);
+                    return GetStringForOutput(
+                        unicodeString,
+                        unicode,
+                        count,
+                        outputStack,
+                        actualLength
+                    );
                 }
             }
             else
@@ -42,7 +54,13 @@ namespace System.Globalization
             char[] outputHeap = new char[actualLength];
             fixed (char* pOutputHeap = &outputHeap[0])
             {
-                actualLength = Interop.Globalization.ToAscii(flags, unicode, count, pOutputHeap, actualLength);
+                actualLength = Interop.Globalization.ToAscii(
+                    flags,
+                    unicode,
+                    count,
+                    pOutputHeap,
+                    actualLength
+                );
                 if (actualLength == 0 || actualLength > outputHeap.Length)
                 {
                     throw new ArgumentException(SR.Argument_IdnIllegalName, nameof(unicode));
@@ -64,25 +82,55 @@ namespace System.Globalization
             if (count < StackAllocThreshold)
             {
                 char* output = stackalloc char[count];
-                return IcuGetUnicodeCore(asciiString, ascii, count, flags, output, count, reattempt: true);
+                return IcuGetUnicodeCore(
+                    asciiString,
+                    ascii,
+                    count,
+                    flags,
+                    output,
+                    count,
+                    reattempt: true
+                );
             }
             else
             {
                 char[] output = new char[count];
                 fixed (char* pOutput = &output[0])
                 {
-                    return IcuGetUnicodeCore(asciiString, ascii, count, flags, pOutput, count, reattempt: true);
+                    return IcuGetUnicodeCore(
+                        asciiString,
+                        ascii,
+                        count,
+                        flags,
+                        pOutput,
+                        count,
+                        reattempt: true
+                    );
                 }
             }
         }
 
-        private unsafe string IcuGetUnicodeCore(string asciiString, char* ascii, int count, uint flags, char* output, int outputLength, bool reattempt)
+        private unsafe string IcuGetUnicodeCore(
+            string asciiString,
+            char* ascii,
+            int count,
+            uint flags,
+            char* output,
+            int outputLength,
+            bool reattempt
+        )
         {
             Debug.Assert(!GlobalizationMode.Invariant);
             Debug.Assert(!GlobalizationMode.UseNls);
             Debug.Assert(asciiString != null && asciiString.Length >= count);
 
-            int realLen = Interop.Globalization.ToUnicode(flags, ascii, count, output, outputLength);
+            int realLen = Interop.Globalization.ToUnicode(
+                flags,
+                ascii,
+                count,
+                output,
+                outputLength
+            );
 
             if (realLen == 0)
             {
@@ -97,7 +145,15 @@ namespace System.Globalization
                 char[] newOutput = new char[realLen];
                 fixed (char* pNewOutput = newOutput)
                 {
-                    return IcuGetUnicodeCore(asciiString, ascii, count, flags, pNewOutput, realLen, reattempt: false);
+                    return IcuGetUnicodeCore(
+                        asciiString,
+                        ascii,
+                        count,
+                        flags,
+                        pNewOutput,
+                        realLen,
+                        reattempt: false
+                    );
                 }
             }
 
@@ -109,8 +165,8 @@ namespace System.Globalization
             get
             {
                 int flags =
-                    (AllowUnassigned ? Interop.Globalization.AllowUnassigned : 0) |
-                    (UseStd3AsciiRules ? Interop.Globalization.UseStd3AsciiRules : 0);
+                    (AllowUnassigned ? Interop.Globalization.AllowUnassigned : 0)
+                    | (UseStd3AsciiRules ? Interop.Globalization.UseStd3AsciiRules : 0);
                 return (uint)flags;
             }
         }
@@ -122,7 +178,12 @@ namespace System.Globalization
         /// To match Windows behavior, we walk the string ourselves looking for these
         /// bad characters so we can continue to throw ArgumentException in these cases.
         /// </summary>
-        private static unsafe void CheckInvalidIdnCharacters(char* s, int count, uint flags, string paramName)
+        private static unsafe void CheckInvalidIdnCharacters(
+            char* s,
+            int count,
+            uint flags,
+            string paramName
+        )
         {
             if ((flags & Interop.Globalization.UseStd3AsciiRules) == 0)
             {

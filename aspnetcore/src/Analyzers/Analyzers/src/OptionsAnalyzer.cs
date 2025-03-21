@@ -22,22 +22,33 @@ internal sealed class OptionsAnalyzer
     {
         var configureServicesMethod = (IMethodSymbol)context.OwningSymbol;
         var options = ImmutableArray.CreateBuilder<OptionsItem>();
-        context.RegisterOperationAction(context =>
-        {
-            if (context.Operation is ISimpleAssignmentOperation operation &&
-                operation.Value.ConstantValue.HasValue &&
-                operation.Target is IPropertyReferenceOperation property &&
-                property.Property?.ContainingType?.Name != null &&
-                property.Property.ContainingType.Name.EndsWith("Options", StringComparison.Ordinal))
+        context.RegisterOperationAction(
+            context =>
             {
-                options.Add(new OptionsItem(property.Property, operation.Value.ConstantValue.Value));
-            }
-
-        }, OperationKind.SimpleAssignment);
+                if (
+                    context.Operation is ISimpleAssignmentOperation operation
+                    && operation.Value.ConstantValue.HasValue
+                    && operation.Target is IPropertyReferenceOperation property
+                    && property.Property?.ContainingType?.Name != null
+                    && property.Property.ContainingType.Name.EndsWith(
+                        "Options",
+                        StringComparison.Ordinal
+                    )
+                )
+                {
+                    options.Add(
+                        new OptionsItem(property.Property, operation.Value.ConstantValue.Value)
+                    );
+                }
+            },
+            OperationKind.SimpleAssignment
+        );
 
         context.RegisterOperationBlockEndAction(context =>
         {
-            _context.ReportAnalysis(new OptionsAnalysis(configureServicesMethod, options.ToImmutable()));
+            _context.ReportAnalysis(
+                new OptionsAnalysis(configureServicesMethod, options.ToImmutable())
+            );
         });
     }
 }

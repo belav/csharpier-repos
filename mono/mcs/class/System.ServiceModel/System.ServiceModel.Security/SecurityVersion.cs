@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,30 +28,29 @@
 
 namespace System.ServiceModel.Security
 {
-	public abstract class SecurityVersion
-	{
-		static SecurityVersion wss10, wss11;
+    public abstract class SecurityVersion
+    {
+        static SecurityVersion wss10,
+            wss11;
 
-		static SecurityVersion ()
-		{
-			wss10 = new SecurityVersion10 ();
-			wss11 = new SecurityVersion11 ();
-		}
+        static SecurityVersion()
+        {
+            wss10 = new SecurityVersion10();
+            wss11 = new SecurityVersion11();
+        }
 
-		public static SecurityVersion WSSecurity10 {
-			get { return wss10; }
-		}
+        public static SecurityVersion WSSecurity10
+        {
+            get { return wss10; }
+        }
 
-		public static SecurityVersion WSSecurity11 {
-			get { return wss11; }
-		}
-	}
+        public static SecurityVersion WSSecurity11
+        {
+            get { return wss11; }
+        }
+    }
 
-	class SecurityVersion10 : SecurityVersion
-	{
-	}
+    class SecurityVersion10 : SecurityVersion { }
 
-	class SecurityVersion11 : SecurityVersion
-	{
-	}
+    class SecurityVersion11 : SecurityVersion { }
 }

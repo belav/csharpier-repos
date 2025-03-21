@@ -54,7 +54,13 @@ internal class ProcessEx : IDisposable
 
     public int ExitCode => _process.ExitCode;
 
-    public static ProcessEx Run(ITestOutputHelper output, string workingDirectory, string command, string args = null, IDictionary<string, string> envVars = null)
+    public static ProcessEx Run(
+        ITestOutputHelper output,
+        string workingDirectory,
+        string command,
+        string args = null,
+        IDictionary<string, string> envVars = null
+    )
     {
         var startInfo = new ProcessStartInfo(command, args)
         {
@@ -62,7 +68,7 @@ internal class ProcessEx : IDisposable
             RedirectStandardError = true,
             UseShellExecute = false,
             CreateNoWindow = true,
-            WorkingDirectory = workingDirectory
+            WorkingDirectory = workingDirectory,
         };
 
         if (envVars != null)
@@ -73,7 +79,9 @@ internal class ProcessEx : IDisposable
             }
         }
 
-        output.WriteLine($"==> {startInfo.FileName} {startInfo.Arguments} [{startInfo.WorkingDirectory}]");
+        output.WriteLine(
+            $"==> {startInfo.FileName} {startInfo.Arguments} [{startInfo.WorkingDirectory}]"
+        );
         var proc = Process.Start(startInfo);
 
         return new ProcessEx(output, proc);

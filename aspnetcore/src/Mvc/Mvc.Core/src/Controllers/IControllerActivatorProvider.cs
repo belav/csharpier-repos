@@ -27,7 +27,9 @@ public interface IControllerActivatorProvider
     /// </summary>
     /// <param name="descriptor">The <see cref="ControllerActionDescriptor"/>.</param>
     /// <returns>The delegate used to dispose the activated controller.</returns>
-    Func<ControllerContext, object, ValueTask>? CreateAsyncReleaser(ControllerActionDescriptor descriptor)
+    Func<ControllerContext, object, ValueTask>? CreateAsyncReleaser(
+        ControllerActionDescriptor descriptor
+    )
     {
         var releaser = CreateReleaser(descriptor);
         if (releaser is null)

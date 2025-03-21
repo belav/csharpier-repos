@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             private SimpleMessageEntry(
                 RoslynDefinitionBucket definitionBucket,
                 RoslynDefinitionBucket? navigationBucket,
-                string message)
+                string message
+            )
                 : base(definitionBucket)
             {
                 _navigationBucket = navigationBucket;
@@ -30,9 +31,14 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
             public static Task<Entry> CreateAsync(
                 RoslynDefinitionBucket definitionBucket,
                 RoslynDefinitionBucket? navigationBucket,
-                string message)
+                string message
+            )
             {
-                var referenceEntry = new SimpleMessageEntry(definitionBucket, navigationBucket, message);
+                var referenceEntry = new SimpleMessageEntry(
+                    definitionBucket,
+                    navigationBucket,
+                    message
+                );
                 return Task.FromResult<Entry>(referenceEntry);
             }
 
@@ -46,10 +52,13 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 };
             }
 
-            public bool CanNavigateTo()
-                => _navigationBucket != null && _navigationBucket.CanNavigateTo();
+            public bool CanNavigateTo() =>
+                _navigationBucket != null && _navigationBucket.CanNavigateTo();
 
-            public Task NavigateToAsync(NavigationOptions options, CancellationToken cancellationToken)
+            public Task NavigateToAsync(
+                NavigationOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfFalse(CanNavigateTo());
                 Contract.ThrowIfNull(_navigationBucket);

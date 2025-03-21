@@ -30,8 +30,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             // apply that filter internally.
             using (X509Certificate2 cert = new X509Certificate2(TestFiles.MicrosoftRootCertFile))
             {
-                X509AuthorityInformationAccessExtension aia =
-                    cert.Extensions.OfType<X509AuthorityInformationAccessExtension>().Single();
+                X509AuthorityInformationAccessExtension aia = cert
+                    .Extensions.OfType<X509AuthorityInformationAccessExtension>()
+                    .Single();
 
                 string[] caIssuersValues =
                 {
@@ -44,7 +45,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
 
                 Assert.Equal(caIssuersValues, aia.EnumerateCAIssuersUris());
                 Assert.Equal(caIssuersValues, aia.EnumerateUris(CertificateAuthorityIssuers));
-                Assert.Equal(caIssuersValues, aia.EnumerateUris(new Oid(CertificateAuthorityIssuers)));
+                Assert.Equal(
+                    caIssuersValues,
+                    aia.EnumerateUris(new Oid(CertificateAuthorityIssuers))
+                );
             }
         }
 
@@ -53,12 +57,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
 
-            static void WriteAccessMethod(AsnWriter writer, string oidValue, int choice, string value)
+            static void WriteAccessMethod(
+                AsnWriter writer,
+                string oidValue,
+                int choice,
+                string value
+            )
             {
                 using (writer.PushSequence())
                 {
                     writer.WriteObjectIdentifier(oidValue);
-                    writer.WriteCharacterString(UniversalTagNumber.IA5String, value, new Asn1Tag(TagClass.ContextSpecific, choice));
+                    writer.WriteCharacterString(
+                        UniversalTagNumber.IA5String,
+                        value,
+                        new Asn1Tag(TagClass.ContextSpecific, choice)
+                    );
                 }
             }
 
@@ -98,11 +111,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 "https://ocsp.some.example",
             };
 
-            string[] expectedCaIssuers =
-            {
-                "potato",
-                "salad",
-            };
+            string[] expectedCaIssuers = { "potato", "salad" };
 
             Assert.Equal(expectedOcsp, aia.EnumerateOcspUris());
             Assert.Equal(expectedCaIssuers, aia.EnumerateCAIssuersUris());
@@ -123,37 +132,32 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 ArgumentException ex = Assert.Throws<ArgumentException>(action);
                 Assert.Null(ex.ParamName);
             }
-            AssertProperException(
-                () => new X509AuthorityInformationAccessExtension(
+            AssertProperException(() =>
+                new X509AuthorityInformationAccessExtension(
                     Enumerable.Empty<string>(),
-                    Enumerable.Empty<string>()));
+                    Enumerable.Empty<string>()
+                )
+            );
 
-            AssertProperException(
-                () => new X509AuthorityInformationAccessExtension(
-                    Enumerable.Empty<string>(),
-                    null));
+            AssertProperException(() =>
+                new X509AuthorityInformationAccessExtension(Enumerable.Empty<string>(), null)
+            );
 
-            AssertProperException(
-                () => new X509AuthorityInformationAccessExtension(
-                    null,
-                    Enumerable.Empty<string>()));
+            AssertProperException(() =>
+                new X509AuthorityInformationAccessExtension(null, Enumerable.Empty<string>())
+            );
 
-            AssertProperException(
-                () => new X509AuthorityInformationAccessExtension(
-                    null,
-                    null));
+            AssertProperException(() => new X509AuthorityInformationAccessExtension(null, null));
         }
 
         [Fact]
         public static void BuildOcspOnly()
         {
-            X509AuthorityInformationAccessExtension aia = new X509AuthorityInformationAccessExtension(
-                new[]
-                {
-                    "ocsp1",
-                    "ocsp2",
-                },
-                Enumerable.Empty<string>());
+            X509AuthorityInformationAccessExtension aia =
+                new X509AuthorityInformationAccessExtension(
+                    new[] { "ocsp1", "ocsp2" },
+                    Enumerable.Empty<string>()
+                );
 
             Assert.False(aia.Critical, "aia.Critical");
             Assert.NotNull(aia.Oid);
@@ -161,23 +165,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             Assert.NotNull(aia.RawData);
 
             Assert.Equal(
-                "3026301106082B0601050507300186056F63737031301106082B060105050730" +
-                "0186056F63737032",
-                aia.RawData.ByteArrayToHex());
+                "3026301106082B0601050507300186056F63737031301106082B060105050730"
+                    + "0186056F63737032",
+                aia.RawData.ByteArrayToHex()
+            );
         }
 
         [Fact]
         public static void BuildCAIssuersOnly()
         {
-            X509AuthorityInformationAccessExtension aia = new X509AuthorityInformationAccessExtension(
-                Enumerable.Empty<string>(),
-                new[]
-                {
-                    "ca1",
-                    "ca2",
-                    "ca3",
-                },
-                true);
+            X509AuthorityInformationAccessExtension aia =
+                new X509AuthorityInformationAccessExtension(
+                    Enumerable.Empty<string>(),
+                    new[] { "ca1", "ca2", "ca3" },
+                    true
+                );
 
             Assert.True(aia.Critical, "aia.Critical");
             Assert.NotNull(aia.Oid);
@@ -185,26 +187,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             Assert.NotNull(aia.RawData);
 
             Assert.Equal(
-                "3033300F06082B060105050730028603636131300F06082B0601050507300286" +
-                "03636132300F06082B060105050730028603636133",
-                aia.RawData.ByteArrayToHex());
+                "3033300F06082B060105050730028603636131300F06082B0601050507300286"
+                    + "03636132300F06082B060105050730028603636133",
+                aia.RawData.ByteArrayToHex()
+            );
         }
 
         [Fact]
         public static void BuildBothMethods()
         {
-            X509AuthorityInformationAccessExtension aia = new X509AuthorityInformationAccessExtension(
-                new[]
-                {
-                    "A",
-                    "B",
-                    "C",
-                },
-                new[]
-                {
-                    "D",
-                },
-                false);
+            X509AuthorityInformationAccessExtension aia =
+                new X509AuthorityInformationAccessExtension(
+                    new[] { "A", "B", "C" },
+                    new[] { "D" },
+                    false
+                );
 
             Assert.False(aia.Critical, "aia.Critical");
             Assert.NotNull(aia.Oid);
@@ -212,9 +209,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             Assert.NotNull(aia.RawData);
 
             Assert.Equal(
-                "303C300D06082B06010505073001860141300D06082B06010505073001860142" +
-                "300D06082B06010505073001860143300D06082B06010505073002860144",
-                aia.RawData.ByteArrayToHex());
+                "303C300D06082B06010505073001860141300D06082B06010505073001860142"
+                    + "300D06082B06010505073001860143300D06082B06010505073002860144",
+                aia.RawData.ByteArrayToHex()
+            );
         }
 
         [Fact]
@@ -222,10 +220,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             const string BadEntry = "\u212C is not a B";
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () => new X509AuthorityInformationAccessExtension(
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                new X509AuthorityInformationAccessExtension(
                     new[] { "A", BadEntry, "C" },
-                    new[] { "D" }));
+                    new[] { "D" }
+                )
+            );
         }
 
         [Fact]
@@ -233,19 +233,20 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             const string BadEntry = "\u212B is not an A";
 
-            CryptographicException ex = Assert.Throws<CryptographicException>(
-                () => new X509AuthorityInformationAccessExtension(
+            CryptographicException ex = Assert.Throws<CryptographicException>(() =>
+                new X509AuthorityInformationAccessExtension(
                     new[] { "D" },
-                    new[] { "C", "B", BadEntry }));
+                    new[] { "C", "B", BadEntry }
+                )
+            );
         }
 
         [Fact]
         public static void BuildNullOcspValue()
         {
-            ArgumentException ex = Assert.Throws<ArgumentException>(
-                () => new X509AuthorityInformationAccessExtension(
-                    new[] { "A", null, "C" },
-                    new[] { "D" }));
+            ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                new X509AuthorityInformationAccessExtension(new[] { "A", null, "C" }, new[] { "D" })
+            );
 
             Assert.Null(ex.ParamName);
         }
@@ -253,10 +254,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         [Fact]
         public static void BuildNullCAIssuerValue()
         {
-            ArgumentException ex = Assert.Throws<ArgumentException>(
-                () => new X509AuthorityInformationAccessExtension(
-                    new[] { "D" },
-                    new[] { "C", "B", null }));
+            ArgumentException ex = Assert.Throws<ArgumentException>(() =>
+                new X509AuthorityInformationAccessExtension(new[] { "D" }, new[] { "C", "B", null })
+            );
 
             Assert.Null(ex.ParamName);
         }
@@ -267,13 +267,26 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             using (X509Certificate2 cert = new X509Certificate2(TestFiles.MicrosoftRootCertFile))
             {
-                X509AuthorityInformationAccessExtension aia =
-                    cert.Extensions.OfType<X509AuthorityInformationAccessExtension>().Single();
+                X509AuthorityInformationAccessExtension aia = cert
+                    .Extensions.OfType<X509AuthorityInformationAccessExtension>()
+                    .Single();
 
-                Assert.Throws<ArgumentNullException>("accessMethodOid", () => aia.EnumerateUris((string)null));
-                Assert.Throws<ArgumentNullException>("accessMethodOid", () => aia.EnumerateUris((Oid)null));
-                Assert.Throws<ArgumentNullException>("accessMethodOid.Value", () => aia.EnumerateUris(new Oid(null, "potato")));
-                Assert.Throws<ArgumentException>("accessMethodOid.Value", () => aia.EnumerateUris(new Oid("", "potato")));
+                Assert.Throws<ArgumentNullException>(
+                    "accessMethodOid",
+                    () => aia.EnumerateUris((string)null)
+                );
+                Assert.Throws<ArgumentNullException>(
+                    "accessMethodOid",
+                    () => aia.EnumerateUris((Oid)null)
+                );
+                Assert.Throws<ArgumentNullException>(
+                    "accessMethodOid.Value",
+                    () => aia.EnumerateUris(new Oid(null, "potato"))
+                );
+                Assert.Throws<ArgumentException>(
+                    "accessMethodOid.Value",
+                    () => aia.EnumerateUris(new Oid("", "potato"))
+                );
             }
         }
 
@@ -283,8 +296,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             using (X509Certificate2 cert = new X509Certificate2(TestFiles.MicrosoftRootCertFile))
             {
-                X509AuthorityInformationAccessExtension aia =
-                    cert.Extensions.OfType<X509AuthorityInformationAccessExtension>().Single();
+                X509AuthorityInformationAccessExtension aia = cert
+                    .Extensions.OfType<X509AuthorityInformationAccessExtension>()
+                    .Single();
 
                 string[] caIssuersValues =
                 {
@@ -296,10 +310,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
                 const string OcspEndpoint = "1.3.6.1.5.5.7.48.1";
                 const string CertificateAuthorityIssuers = "1.3.6.1.5.5.7.48.2";
 
-                Assert.Empty(aia.EnumerateUris(new Oid(value: OcspEndpoint, friendlyName: CertificateAuthorityIssuers)));
+                Assert.Empty(
+                    aia.EnumerateUris(
+                        new Oid(value: OcspEndpoint, friendlyName: CertificateAuthorityIssuers)
+                    )
+                );
                 Assert.Equal(
                     caIssuersValues,
-                    aia.EnumerateUris(new Oid(value: CertificateAuthorityIssuers, friendlyName: OcspEndpoint)));
+                    aia.EnumerateUris(
+                        new Oid(value: CertificateAuthorityIssuers, friendlyName: OcspEndpoint)
+                    )
+                );
             }
         }
 
@@ -382,8 +403,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
             //   SEQUENCE(CAIssuers, "D")
 
             const string BadHex =
-                "303C300D06082B06010505073001860141300D06082B06010505073001860142" +
-                "300D06082B06010505073001860180300D06082B06010505073002860144";
+                "303C300D06082B06010505073001860141300D06082B06010505073001860142"
+                + "300D06082B06010505073001860180300D06082B06010505073002860144";
 
             DecodeInvalid(BadHex);
         }
@@ -418,18 +439,22 @@ namespace System.Security.Cryptography.X509Certificates.Tests.ExtensionsTests
         {
             byte[] invalidEncoding = Convert.FromHexString(invalidEncodingHex);
 
-            Assert.Throws<CryptographicException>(
-                () => new X509AuthorityInformationAccessExtension(invalidEncoding));
+            Assert.Throws<CryptographicException>(() =>
+                new X509AuthorityInformationAccessExtension(invalidEncoding)
+            );
 
-            Assert.Throws<CryptographicException>(
-                () => new X509AuthorityInformationAccessExtension(new ReadOnlySpan<byte>(invalidEncoding)));
+            Assert.Throws<CryptographicException>(() =>
+                new X509AuthorityInformationAccessExtension(new ReadOnlySpan<byte>(invalidEncoding))
+            );
 
             X509Extension unverified = new X509Extension(
                 "1.3.6.1.5.5.7.1.1",
                 invalidEncoding,
-                critical: false);
+                critical: false
+            );
 
-            X509AuthorityInformationAccessExtension aia = new X509AuthorityInformationAccessExtension();
+            X509AuthorityInformationAccessExtension aia =
+                new X509AuthorityInformationAccessExtension();
             aia.CopyFrom(unverified);
 
             Assert.Throws<CryptographicException>(() => aia.EnumerateCAIssuersUris());

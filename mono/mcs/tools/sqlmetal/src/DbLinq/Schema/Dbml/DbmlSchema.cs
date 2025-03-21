@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 namespace DbLinq.Schema.Dbml
 {
@@ -35,14 +35,18 @@ namespace DbLinq.Schema.Dbml
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
-    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007", IsNullable = false)]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
+    [System.Xml.Serialization.XmlRootAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007",
+        IsNullable = false
+    )]
 #if !MONO_STRICT
     public
 #endif
     partial class Database : object, System.ComponentModel.INotifyPropertyChanged
     {
-
         private Connection connectionField;
 
         private Table[] tableField;
@@ -82,10 +86,7 @@ namespace DbLinq.Schema.Dbml
         /// <remarks/>
         public Connection Connection
         {
-            get
-            {
-                return this.connectionField;
-            }
+            get { return this.connectionField; }
             set
             {
                 this.connectionField = value;
@@ -97,10 +98,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlElementAttribute("Table")]
         public Table[] Table
         {
-            get
-            {
-                return this.tableField;
-            }
+            get { return this.tableField; }
             set
             {
                 this.tableField = value;
@@ -112,10 +110,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlElementAttribute("Function")]
         public Function[] Function
         {
-            get
-            {
-                return this.functionField;
-            }
+            get { return this.functionField; }
             set
             {
                 this.functionField = value;
@@ -127,10 +122,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Name
         {
-            get
-            {
-                return this.nameField;
-            }
+            get { return this.nameField; }
             set
             {
                 this.nameField = value;
@@ -142,10 +134,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string EntityNamespace
         {
-            get
-            {
-                return this.entityNamespaceField;
-            }
+            get { return this.entityNamespaceField; }
             set
             {
                 this.entityNamespaceField = value;
@@ -157,10 +146,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string ContextNamespace
         {
-            get
-            {
-                return this.contextNamespaceField;
-            }
+            get { return this.contextNamespaceField; }
             set
             {
                 this.contextNamespaceField = value;
@@ -172,10 +158,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Class
         {
-            get
-            {
-                return this.classField;
-            }
+            get { return this.classField; }
             set
             {
                 this.classField = value;
@@ -187,10 +170,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public AccessModifier AccessModifier
         {
-            get
-            {
-                return this.accessModifierField;
-            }
+            get { return this.accessModifierField; }
             set
             {
                 this.accessModifierField = value;
@@ -202,10 +182,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AccessModifierSpecified
         {
-            get
-            {
-                return this.accessModifierFieldSpecified;
-            }
+            get { return this.accessModifierFieldSpecified; }
             set
             {
                 this.accessModifierFieldSpecified = value;
@@ -217,10 +194,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public ClassModifier Modifier
         {
-            get
-            {
-                return this.modifierField;
-            }
+            get { return this.modifierField; }
             set
             {
                 this.modifierField = value;
@@ -232,10 +206,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ModifierSpecified
         {
-            get
-            {
-                return this.modifierFieldSpecified;
-            }
+            get { return this.modifierFieldSpecified; }
             set
             {
                 this.modifierFieldSpecified = value;
@@ -247,10 +218,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string BaseType
         {
-            get
-            {
-                return this.baseTypeField;
-            }
+            get { return this.baseTypeField; }
             set
             {
                 this.baseTypeField = value;
@@ -262,10 +230,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Provider
         {
-            get
-            {
-                return this.providerField;
-            }
+            get { return this.providerField; }
             set
             {
                 this.providerField = value;
@@ -277,10 +242,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool ExternalMapping
         {
-            get
-            {
-                return this.externalMappingField;
-            }
+            get { return this.externalMappingField; }
             set
             {
                 this.externalMappingField = value;
@@ -292,10 +254,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ExternalMappingSpecified
         {
-            get
-            {
-                return this.externalMappingFieldSpecified;
-            }
+            get { return this.externalMappingFieldSpecified; }
             set
             {
                 this.externalMappingFieldSpecified = value;
@@ -307,10 +266,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public SerializationMode Serialization
         {
-            get
-            {
-                return this.serializationField;
-            }
+            get { return this.serializationField; }
             set
             {
                 this.serializationField = value;
@@ -322,10 +278,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool SerializationSpecified
         {
-            get
-            {
-                return this.serializationFieldSpecified;
-            }
+            get { return this.serializationFieldSpecified; }
             set
             {
                 this.serializationFieldSpecified = value;
@@ -337,10 +290,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string EntityBase
         {
-            get
-            {
-                return this.entityBaseField;
-            }
+            get { return this.entityBaseField; }
             set
             {
                 this.entityBaseField = value;
@@ -352,10 +302,14 @@ namespace DbLinq.Schema.Dbml
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged =
+                this.PropertyChanged;
             if ((propertyChanged != null))
             {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                propertyChanged(
+                    this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName)
+                );
             }
         }
     }
@@ -365,13 +319,14 @@ namespace DbLinq.Schema.Dbml
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     partial class Connection : object, System.ComponentModel.INotifyPropertyChanged
     {
-
         private string providerField;
 
         private ConnectionMode modeField;
@@ -388,10 +343,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Provider
         {
-            get
-            {
-                return this.providerField;
-            }
+            get { return this.providerField; }
             set
             {
                 this.providerField = value;
@@ -403,10 +355,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public ConnectionMode Mode
         {
-            get
-            {
-                return this.modeField;
-            }
+            get { return this.modeField; }
             set
             {
                 this.modeField = value;
@@ -418,10 +367,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ModeSpecified
         {
-            get
-            {
-                return this.modeFieldSpecified;
-            }
+            get { return this.modeFieldSpecified; }
             set
             {
                 this.modeFieldSpecified = value;
@@ -433,10 +379,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string ConnectionString
         {
-            get
-            {
-                return this.connectionStringField;
-            }
+            get { return this.connectionStringField; }
             set
             {
                 this.connectionStringField = value;
@@ -448,10 +391,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string SettingsObjectName
         {
-            get
-            {
-                return this.settingsObjectNameField;
-            }
+            get { return this.settingsObjectNameField; }
             set
             {
                 this.settingsObjectNameField = value;
@@ -463,10 +403,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string SettingsPropertyName
         {
-            get
-            {
-                return this.settingsPropertyNameField;
-            }
+            get { return this.settingsPropertyNameField; }
             set
             {
                 this.settingsPropertyNameField = value;
@@ -478,10 +415,14 @@ namespace DbLinq.Schema.Dbml
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged =
+                this.PropertyChanged;
             if ((propertyChanged != null))
             {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                propertyChanged(
+                    this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName)
+                );
             }
         }
     }
@@ -489,13 +430,14 @@ namespace DbLinq.Schema.Dbml
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     enum ConnectionMode
     {
-
         /// <remarks/>
         ConnectionString,
 
@@ -511,13 +453,14 @@ namespace DbLinq.Schema.Dbml
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     partial class Return : object, System.ComponentModel.INotifyPropertyChanged
     {
-
         private string typeField;
 
         private string dbTypeField;
@@ -526,10 +469,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Type
         {
-            get
-            {
-                return this.typeField;
-            }
+            get { return this.typeField; }
             set
             {
                 this.typeField = value;
@@ -541,10 +481,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string DbType
         {
-            get
-            {
-                return this.dbTypeField;
-            }
+            get { return this.dbTypeField; }
             set
             {
                 this.dbTypeField = value;
@@ -556,10 +493,14 @@ namespace DbLinq.Schema.Dbml
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged =
+                this.PropertyChanged;
             if ((propertyChanged != null))
             {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                propertyChanged(
+                    this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName)
+                );
             }
         }
     }
@@ -569,13 +510,14 @@ namespace DbLinq.Schema.Dbml
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     partial class Parameter : object, System.ComponentModel.INotifyPropertyChanged
     {
-
         private string nameField;
 
         private string parameter1Field;
@@ -592,10 +534,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Name
         {
-            get
-            {
-                return this.nameField;
-            }
+            get { return this.nameField; }
             set
             {
                 this.nameField = value;
@@ -607,10 +546,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute("Parameter")]
         public string Parameter1
         {
-            get
-            {
-                return this.parameter1Field;
-            }
+            get { return this.parameter1Field; }
             set
             {
                 this.parameter1Field = value;
@@ -622,10 +558,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Type
         {
-            get
-            {
-                return this.typeField;
-            }
+            get { return this.typeField; }
             set
             {
                 this.typeField = value;
@@ -637,10 +570,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string DbType
         {
-            get
-            {
-                return this.dbTypeField;
-            }
+            get { return this.dbTypeField; }
             set
             {
                 this.dbTypeField = value;
@@ -652,10 +582,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public ParameterDirection Direction
         {
-            get
-            {
-                return this.directionField;
-            }
+            get { return this.directionField; }
             set
             {
                 this.directionField = value;
@@ -667,10 +594,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool DirectionSpecified
         {
-            get
-            {
-                return this.directionFieldSpecified;
-            }
+            get { return this.directionFieldSpecified; }
             set
             {
                 this.directionFieldSpecified = value;
@@ -682,10 +606,14 @@ namespace DbLinq.Schema.Dbml
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged =
+                this.PropertyChanged;
             if ((propertyChanged != null))
             {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                propertyChanged(
+                    this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName)
+                );
             }
         }
     }
@@ -693,13 +621,14 @@ namespace DbLinq.Schema.Dbml
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     enum ParameterDirection
     {
-
         /// <remarks/>
         In,
 
@@ -715,13 +644,14 @@ namespace DbLinq.Schema.Dbml
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     partial class Function : object, System.ComponentModel.INotifyPropertyChanged
     {
-
         private Parameter[] parameterField;
 
         private object[] itemsField;
@@ -752,10 +682,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlElementAttribute("Parameter")]
         public Parameter[] Parameter
         {
-            get
-            {
-                return this.parameterField;
-            }
+            get { return this.parameterField; }
             set
             {
                 this.parameterField = value;
@@ -768,10 +695,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlElementAttribute("Return", typeof(Return))]
         public object[] Items
         {
-            get
-            {
-                return this.itemsField;
-            }
+            get { return this.itemsField; }
             set
             {
                 this.itemsField = value;
@@ -783,10 +707,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Name
         {
-            get
-            {
-                return this.nameField;
-            }
+            get { return this.nameField; }
             set
             {
                 this.nameField = value;
@@ -798,10 +719,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "ID")]
         public string Id
         {
-            get
-            {
-                return this.idField;
-            }
+            get { return this.idField; }
             set
             {
                 this.idField = value;
@@ -813,10 +731,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Method
         {
-            get
-            {
-                return this.methodField;
-            }
+            get { return this.methodField; }
             set
             {
                 this.methodField = value;
@@ -828,10 +743,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public AccessModifier AccessModifier
         {
-            get
-            {
-                return this.accessModifierField;
-            }
+            get { return this.accessModifierField; }
             set
             {
                 this.accessModifierField = value;
@@ -843,10 +755,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AccessModifierSpecified
         {
-            get
-            {
-                return this.accessModifierFieldSpecified;
-            }
+            get { return this.accessModifierFieldSpecified; }
             set
             {
                 this.accessModifierFieldSpecified = value;
@@ -858,10 +767,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public MemberModifier Modifier
         {
-            get
-            {
-                return this.modifierField;
-            }
+            get { return this.modifierField; }
             set
             {
                 this.modifierField = value;
@@ -873,10 +779,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ModifierSpecified
         {
-            get
-            {
-                return this.modifierFieldSpecified;
-            }
+            get { return this.modifierFieldSpecified; }
             set
             {
                 this.modifierFieldSpecified = value;
@@ -888,10 +791,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool HasMultipleResults
         {
-            get
-            {
-                return this.hasMultipleResultsField;
-            }
+            get { return this.hasMultipleResultsField; }
             set
             {
                 this.hasMultipleResultsField = value;
@@ -903,10 +803,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool HasMultipleResultsSpecified
         {
-            get
-            {
-                return this.hasMultipleResultsFieldSpecified;
-            }
+            get { return this.hasMultipleResultsFieldSpecified; }
             set
             {
                 this.hasMultipleResultsFieldSpecified = value;
@@ -918,10 +815,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool IsComposable
         {
-            get
-            {
-                return this.isComposableField;
-            }
+            get { return this.isComposableField; }
             set
             {
                 this.isComposableField = value;
@@ -933,10 +827,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool IsComposableSpecified
         {
-            get
-            {
-                return this.isComposableFieldSpecified;
-            }
+            get { return this.isComposableFieldSpecified; }
             set
             {
                 this.isComposableFieldSpecified = value;
@@ -948,10 +839,14 @@ namespace DbLinq.Schema.Dbml
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged =
+                this.PropertyChanged;
             if ((propertyChanged != null))
             {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                propertyChanged(
+                    this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName)
+                );
             }
         }
     }
@@ -961,13 +856,14 @@ namespace DbLinq.Schema.Dbml
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     partial class Type : object, System.ComponentModel.INotifyPropertyChanged
     {
-
         private object[] itemsField;
 
         private Type[] type1Field;
@@ -997,10 +893,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlElementAttribute("Column", typeof(Column))]
         public object[] Items
         {
-            get
-            {
-                return this.itemsField;
-            }
+            get { return this.itemsField; }
             set
             {
                 this.itemsField = value;
@@ -1012,10 +905,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlElementAttribute("Type")]
         public Type[] Type1
         {
-            get
-            {
-                return this.type1Field;
-            }
+            get { return this.type1Field; }
             set
             {
                 this.type1Field = value;
@@ -1027,10 +917,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "IDREF")]
         public string IdRef
         {
-            get
-            {
-                return this.idRefField;
-            }
+            get { return this.idRefField; }
             set
             {
                 this.idRefField = value;
@@ -1042,10 +929,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "ID")]
         public string Id
         {
-            get
-            {
-                return this.idField;
-            }
+            get { return this.idField; }
             set
             {
                 this.idField = value;
@@ -1057,10 +941,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Name
         {
-            get
-            {
-                return this.nameField;
-            }
+            get { return this.nameField; }
             set
             {
                 this.nameField = value;
@@ -1072,10 +953,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string InheritanceCode
         {
-            get
-            {
-                return this.inheritanceCodeField;
-            }
+            get { return this.inheritanceCodeField; }
             set
             {
                 this.inheritanceCodeField = value;
@@ -1087,10 +965,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool IsInheritanceDefault
         {
-            get
-            {
-                return this.isInheritanceDefaultField;
-            }
+            get { return this.isInheritanceDefaultField; }
             set
             {
                 this.isInheritanceDefaultField = value;
@@ -1102,10 +977,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool IsInheritanceDefaultSpecified
         {
-            get
-            {
-                return this.isInheritanceDefaultFieldSpecified;
-            }
+            get { return this.isInheritanceDefaultFieldSpecified; }
             set
             {
                 this.isInheritanceDefaultFieldSpecified = value;
@@ -1117,10 +989,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public AccessModifier AccessModifier
         {
-            get
-            {
-                return this.accessModifierField;
-            }
+            get { return this.accessModifierField; }
             set
             {
                 this.accessModifierField = value;
@@ -1132,10 +1001,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AccessModifierSpecified
         {
-            get
-            {
-                return this.accessModifierFieldSpecified;
-            }
+            get { return this.accessModifierFieldSpecified; }
             set
             {
                 this.accessModifierFieldSpecified = value;
@@ -1147,10 +1013,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public ClassModifier Modifier
         {
-            get
-            {
-                return this.modifierField;
-            }
+            get { return this.modifierField; }
             set
             {
                 this.modifierField = value;
@@ -1162,10 +1025,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ModifierSpecified
         {
-            get
-            {
-                return this.modifierFieldSpecified;
-            }
+            get { return this.modifierFieldSpecified; }
             set
             {
                 this.modifierFieldSpecified = value;
@@ -1177,10 +1037,14 @@ namespace DbLinq.Schema.Dbml
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged =
+                this.PropertyChanged;
             if ((propertyChanged != null))
             {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                propertyChanged(
+                    this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName)
+                );
             }
         }
     }
@@ -1190,13 +1054,14 @@ namespace DbLinq.Schema.Dbml
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     partial class Association : object, System.ComponentModel.INotifyPropertyChanged
     {
-
         private string nameField;
 
         private string memberField;
@@ -1235,10 +1100,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Name
         {
-            get
-            {
-                return this.nameField;
-            }
+            get { return this.nameField; }
             set
             {
                 this.nameField = value;
@@ -1250,10 +1112,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Member
         {
-            get
-            {
-                return this.memberField;
-            }
+            get { return this.memberField; }
             set
             {
                 this.memberField = value;
@@ -1265,10 +1124,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Storage
         {
-            get
-            {
-                return this.storageField;
-            }
+            get { return this.storageField; }
             set
             {
                 this.storageField = value;
@@ -1280,10 +1136,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public AccessModifier AccessModifier
         {
-            get
-            {
-                return this.accessModifierField;
-            }
+            get { return this.accessModifierField; }
             set
             {
                 this.accessModifierField = value;
@@ -1295,10 +1148,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AccessModifierSpecified
         {
-            get
-            {
-                return this.accessModifierFieldSpecified;
-            }
+            get { return this.accessModifierFieldSpecified; }
             set
             {
                 this.accessModifierFieldSpecified = value;
@@ -1310,10 +1160,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public MemberModifier Modifier
         {
-            get
-            {
-                return this.modifierField;
-            }
+            get { return this.modifierField; }
             set
             {
                 this.modifierField = value;
@@ -1325,10 +1172,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ModifierSpecified
         {
-            get
-            {
-                return this.modifierFieldSpecified;
-            }
+            get { return this.modifierFieldSpecified; }
             set
             {
                 this.modifierFieldSpecified = value;
@@ -1340,10 +1184,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Type
         {
-            get
-            {
-                return this.typeField;
-            }
+            get { return this.typeField; }
             set
             {
                 this.typeField = value;
@@ -1355,10 +1196,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string ThisKey
         {
-            get
-            {
-                return this.thisKeyField;
-            }
+            get { return this.thisKeyField; }
             set
             {
                 this.thisKeyField = value;
@@ -1370,10 +1208,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string OtherKey
         {
-            get
-            {
-                return this.otherKeyField;
-            }
+            get { return this.otherKeyField; }
             set
             {
                 this.otherKeyField = value;
@@ -1385,10 +1220,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool IsForeignKey
         {
-            get
-            {
-                return this.isForeignKeyField;
-            }
+            get { return this.isForeignKeyField; }
             set
             {
                 this.isForeignKeyField = value;
@@ -1400,10 +1232,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool IsForeignKeySpecified
         {
-            get
-            {
-                return this.isForeignKeyFieldSpecified;
-            }
+            get { return this.isForeignKeyFieldSpecified; }
             set
             {
                 this.isForeignKeyFieldSpecified = value;
@@ -1415,10 +1244,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public Cardinality Cardinality
         {
-            get
-            {
-                return this.cardinalityField;
-            }
+            get { return this.cardinalityField; }
             set
             {
                 this.cardinalityField = value;
@@ -1430,10 +1256,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool CardinalitySpecified
         {
-            get
-            {
-                return this.cardinalityFieldSpecified;
-            }
+            get { return this.cardinalityFieldSpecified; }
             set
             {
                 this.cardinalityFieldSpecified = value;
@@ -1445,10 +1268,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string DeleteRule
         {
-            get
-            {
-                return this.deleteRuleField;
-            }
+            get { return this.deleteRuleField; }
             set
             {
                 this.deleteRuleField = value;
@@ -1460,10 +1280,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool DeleteOnNull
         {
-            get
-            {
-                return this.deleteOnNullField;
-            }
+            get { return this.deleteOnNullField; }
             set
             {
                 this.deleteOnNullField = value;
@@ -1475,10 +1292,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool DeleteOnNullSpecified
         {
-            get
-            {
-                return this.deleteOnNullFieldSpecified;
-            }
+            get { return this.deleteOnNullFieldSpecified; }
             set
             {
                 this.deleteOnNullFieldSpecified = value;
@@ -1490,10 +1304,14 @@ namespace DbLinq.Schema.Dbml
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged =
+                this.PropertyChanged;
             if ((propertyChanged != null))
             {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                propertyChanged(
+                    this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName)
+                );
             }
         }
     }
@@ -1501,13 +1319,14 @@ namespace DbLinq.Schema.Dbml
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     enum AccessModifier
     {
-
         /// <remarks/>
         Public,
 
@@ -1527,13 +1346,14 @@ namespace DbLinq.Schema.Dbml
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     enum MemberModifier
     {
-
         /// <remarks/>
         Virtual,
 
@@ -1550,13 +1370,14 @@ namespace DbLinq.Schema.Dbml
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     enum Cardinality
     {
-
         /// <remarks/>
         One,
 
@@ -1569,13 +1390,14 @@ namespace DbLinq.Schema.Dbml
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     partial class Column : object, System.ComponentModel.INotifyPropertyChanged
     {
-
         private string nameField;
 
         private string memberField;
@@ -1636,10 +1458,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Name
         {
-            get
-            {
-                return this.nameField;
-            }
+            get { return this.nameField; }
             set
             {
                 this.nameField = value;
@@ -1651,10 +1470,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Member
         {
-            get
-            {
-                return this.memberField;
-            }
+            get { return this.memberField; }
             set
             {
                 this.memberField = value;
@@ -1666,10 +1482,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Storage
         {
-            get
-            {
-                return this.storageField;
-            }
+            get { return this.storageField; }
             set
             {
                 this.storageField = value;
@@ -1681,10 +1494,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public AccessModifier AccessModifier
         {
-            get
-            {
-                return this.accessModifierField;
-            }
+            get { return this.accessModifierField; }
             set
             {
                 this.accessModifierField = value;
@@ -1696,10 +1506,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AccessModifierSpecified
         {
-            get
-            {
-                return this.accessModifierFieldSpecified;
-            }
+            get { return this.accessModifierFieldSpecified; }
             set
             {
                 this.accessModifierFieldSpecified = value;
@@ -1711,10 +1518,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public MemberModifier Modifier
         {
-            get
-            {
-                return this.modifierField;
-            }
+            get { return this.modifierField; }
             set
             {
                 this.modifierField = value;
@@ -1726,10 +1530,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ModifierSpecified
         {
-            get
-            {
-                return this.modifierFieldSpecified;
-            }
+            get { return this.modifierFieldSpecified; }
             set
             {
                 this.modifierFieldSpecified = value;
@@ -1741,10 +1542,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Type
         {
-            get
-            {
-                return this.typeField;
-            }
+            get { return this.typeField; }
             set
             {
                 this.typeField = value;
@@ -1756,10 +1554,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string DbType
         {
-            get
-            {
-                return this.dbTypeField;
-            }
+            get { return this.dbTypeField; }
             set
             {
                 this.dbTypeField = value;
@@ -1771,10 +1566,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool IsReadOnly
         {
-            get
-            {
-                return this.isReadOnlyField;
-            }
+            get { return this.isReadOnlyField; }
             set
             {
                 this.isReadOnlyField = value;
@@ -1786,10 +1578,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool IsReadOnlySpecified
         {
-            get
-            {
-                return this.isReadOnlyFieldSpecified;
-            }
+            get { return this.isReadOnlyFieldSpecified; }
             set
             {
                 this.isReadOnlyFieldSpecified = value;
@@ -1801,10 +1590,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool IsPrimaryKey
         {
-            get
-            {
-                return this.isPrimaryKeyField;
-            }
+            get { return this.isPrimaryKeyField; }
             set
             {
                 this.isPrimaryKeyField = value;
@@ -1816,10 +1602,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool IsPrimaryKeySpecified
         {
-            get
-            {
-                return this.isPrimaryKeyFieldSpecified;
-            }
+            get { return this.isPrimaryKeyFieldSpecified; }
             set
             {
                 this.isPrimaryKeyFieldSpecified = value;
@@ -1831,10 +1614,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool IsDbGenerated
         {
-            get
-            {
-                return this.isDbGeneratedField;
-            }
+            get { return this.isDbGeneratedField; }
             set
             {
                 this.isDbGeneratedField = value;
@@ -1846,10 +1626,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool IsDbGeneratedSpecified
         {
-            get
-            {
-                return this.isDbGeneratedFieldSpecified;
-            }
+            get { return this.isDbGeneratedFieldSpecified; }
             set
             {
                 this.isDbGeneratedFieldSpecified = value;
@@ -1861,10 +1638,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool CanBeNull
         {
-            get
-            {
-                return this.canBeNullField;
-            }
+            get { return this.canBeNullField; }
             set
             {
                 this.canBeNullField = value;
@@ -1876,10 +1650,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool CanBeNullSpecified
         {
-            get
-            {
-                return this.canBeNullFieldSpecified;
-            }
+            get { return this.canBeNullFieldSpecified; }
             set
             {
                 this.canBeNullFieldSpecified = value;
@@ -1891,10 +1662,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public UpdateCheck UpdateCheck
         {
-            get
-            {
-                return this.updateCheckField;
-            }
+            get { return this.updateCheckField; }
             set
             {
                 this.updateCheckField = value;
@@ -1906,10 +1674,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool UpdateCheckSpecified
         {
-            get
-            {
-                return this.updateCheckFieldSpecified;
-            }
+            get { return this.updateCheckFieldSpecified; }
             set
             {
                 this.updateCheckFieldSpecified = value;
@@ -1921,10 +1686,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool IsDiscriminator
         {
-            get
-            {
-                return this.isDiscriminatorField;
-            }
+            get { return this.isDiscriminatorField; }
             set
             {
                 this.isDiscriminatorField = value;
@@ -1936,10 +1698,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool IsDiscriminatorSpecified
         {
-            get
-            {
-                return this.isDiscriminatorFieldSpecified;
-            }
+            get { return this.isDiscriminatorFieldSpecified; }
             set
             {
                 this.isDiscriminatorFieldSpecified = value;
@@ -1951,10 +1710,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Expression
         {
-            get
-            {
-                return this.expressionField;
-            }
+            get { return this.expressionField; }
             set
             {
                 this.expressionField = value;
@@ -1966,10 +1722,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool IsVersion
         {
-            get
-            {
-                return this.isVersionField;
-            }
+            get { return this.isVersionField; }
             set
             {
                 this.isVersionField = value;
@@ -1981,10 +1734,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool IsVersionSpecified
         {
-            get
-            {
-                return this.isVersionFieldSpecified;
-            }
+            get { return this.isVersionFieldSpecified; }
             set
             {
                 this.isVersionFieldSpecified = value;
@@ -1996,10 +1746,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public bool IsDelayLoaded
         {
-            get
-            {
-                return this.isDelayLoadedField;
-            }
+            get { return this.isDelayLoadedField; }
             set
             {
                 this.isDelayLoadedField = value;
@@ -2011,10 +1758,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool IsDelayLoadedSpecified
         {
-            get
-            {
-                return this.isDelayLoadedFieldSpecified;
-            }
+            get { return this.isDelayLoadedFieldSpecified; }
             set
             {
                 this.isDelayLoadedFieldSpecified = value;
@@ -2026,10 +1770,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public AutoSync AutoSync
         {
-            get
-            {
-                return this.autoSyncField;
-            }
+            get { return this.autoSyncField; }
             set
             {
                 this.autoSyncField = value;
@@ -2041,10 +1782,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AutoSyncSpecified
         {
-            get
-            {
-                return this.autoSyncFieldSpecified;
-            }
+            get { return this.autoSyncFieldSpecified; }
             set
             {
                 this.autoSyncFieldSpecified = value;
@@ -2056,10 +1794,14 @@ namespace DbLinq.Schema.Dbml
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged =
+                this.PropertyChanged;
             if ((propertyChanged != null))
             {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                propertyChanged(
+                    this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName)
+                );
             }
         }
     }
@@ -2067,13 +1809,14 @@ namespace DbLinq.Schema.Dbml
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     enum UpdateCheck
     {
-
         /// <remarks/>
         Always,
 
@@ -2086,7 +1829,9 @@ namespace DbLinq.Schema.Dbml
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
@@ -2111,13 +1856,14 @@ namespace DbLinq.Schema.Dbml
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     enum ClassModifier
     {
-
         /// <remarks/>
         Sealed,
 
@@ -2130,23 +1876,21 @@ namespace DbLinq.Schema.Dbml
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     partial class TableFunctionReturn : object, System.ComponentModel.INotifyPropertyChanged
     {
-
         private string memberField;
 
         /// <remarks/>
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Member
         {
-            get
-            {
-                return this.memberField;
-            }
+            get { return this.memberField; }
             set
             {
                 this.memberField = value;
@@ -2158,10 +1902,14 @@ namespace DbLinq.Schema.Dbml
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged =
+                this.PropertyChanged;
             if ((propertyChanged != null))
             {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                propertyChanged(
+                    this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName)
+                );
             }
         }
     }
@@ -2171,13 +1919,14 @@ namespace DbLinq.Schema.Dbml
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     partial class TableFunctionParameter : object, System.ComponentModel.INotifyPropertyChanged
     {
-
         private string parameterField;
 
         private string memberField;
@@ -2190,10 +1939,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Parameter
         {
-            get
-            {
-                return this.parameterField;
-            }
+            get { return this.parameterField; }
             set
             {
                 this.parameterField = value;
@@ -2205,10 +1951,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Member
         {
-            get
-            {
-                return this.memberField;
-            }
+            get { return this.memberField; }
             set
             {
                 this.memberField = value;
@@ -2220,10 +1963,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public Version Version
         {
-            get
-            {
-                return this.versionField;
-            }
+            get { return this.versionField; }
             set
             {
                 this.versionField = value;
@@ -2235,10 +1975,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool VersionSpecified
         {
-            get
-            {
-                return this.versionFieldSpecified;
-            }
+            get { return this.versionFieldSpecified; }
             set
             {
                 this.versionFieldSpecified = value;
@@ -2250,10 +1987,14 @@ namespace DbLinq.Schema.Dbml
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged =
+                this.PropertyChanged;
             if ((propertyChanged != null))
             {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                propertyChanged(
+                    this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName)
+                );
             }
         }
     }
@@ -2261,13 +2002,14 @@ namespace DbLinq.Schema.Dbml
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     enum Version
     {
-
         /// <remarks/>
         Current,
 
@@ -2280,13 +2022,14 @@ namespace DbLinq.Schema.Dbml
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     partial class TableFunction : object, System.ComponentModel.INotifyPropertyChanged
     {
-
         private TableFunctionParameter[] argumentField;
 
         private TableFunctionReturn returnField;
@@ -2301,10 +2044,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlElementAttribute("Argument")]
         public TableFunctionParameter[] Argument
         {
-            get
-            {
-                return this.argumentField;
-            }
+            get { return this.argumentField; }
             set
             {
                 this.argumentField = value;
@@ -2315,10 +2055,7 @@ namespace DbLinq.Schema.Dbml
         /// <remarks/>
         public TableFunctionReturn Return
         {
-            get
-            {
-                return this.returnField;
-            }
+            get { return this.returnField; }
             set
             {
                 this.returnField = value;
@@ -2330,10 +2067,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute(DataType = "IDREF")]
         public string FunctionId
         {
-            get
-            {
-                return this.functionIdField;
-            }
+            get { return this.functionIdField; }
             set
             {
                 this.functionIdField = value;
@@ -2345,10 +2079,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public AccessModifier AccessModifier
         {
-            get
-            {
-                return this.accessModifierField;
-            }
+            get { return this.accessModifierField; }
             set
             {
                 this.accessModifierField = value;
@@ -2360,10 +2091,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AccessModifierSpecified
         {
-            get
-            {
-                return this.accessModifierFieldSpecified;
-            }
+            get { return this.accessModifierFieldSpecified; }
             set
             {
                 this.accessModifierFieldSpecified = value;
@@ -2375,10 +2103,14 @@ namespace DbLinq.Schema.Dbml
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged =
+                this.PropertyChanged;
             if ((propertyChanged != null))
             {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                propertyChanged(
+                    this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName)
+                );
             }
         }
     }
@@ -2388,13 +2120,14 @@ namespace DbLinq.Schema.Dbml
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     partial class Table : object, System.ComponentModel.INotifyPropertyChanged
     {
-
         private Type typeField;
 
         private TableFunction insertFunctionField;
@@ -2418,10 +2151,7 @@ namespace DbLinq.Schema.Dbml
         /// <remarks/>
         public Type Type
         {
-            get
-            {
-                return this.typeField;
-            }
+            get { return this.typeField; }
             set
             {
                 this.typeField = value;
@@ -2432,10 +2162,7 @@ namespace DbLinq.Schema.Dbml
         /// <remarks/>
         public TableFunction InsertFunction
         {
-            get
-            {
-                return this.insertFunctionField;
-            }
+            get { return this.insertFunctionField; }
             set
             {
                 this.insertFunctionField = value;
@@ -2446,10 +2173,7 @@ namespace DbLinq.Schema.Dbml
         /// <remarks/>
         public TableFunction UpdateFunction
         {
-            get
-            {
-                return this.updateFunctionField;
-            }
+            get { return this.updateFunctionField; }
             set
             {
                 this.updateFunctionField = value;
@@ -2460,10 +2184,7 @@ namespace DbLinq.Schema.Dbml
         /// <remarks/>
         public TableFunction DeleteFunction
         {
-            get
-            {
-                return this.deleteFunctionField;
-            }
+            get { return this.deleteFunctionField; }
             set
             {
                 this.deleteFunctionField = value;
@@ -2475,10 +2196,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Name
         {
-            get
-            {
-                return this.nameField;
-            }
+            get { return this.nameField; }
             set
             {
                 this.nameField = value;
@@ -2490,10 +2208,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public string Member
         {
-            get
-            {
-                return this.memberField;
-            }
+            get { return this.memberField; }
             set
             {
                 this.memberField = value;
@@ -2505,10 +2220,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public AccessModifier AccessModifier
         {
-            get
-            {
-                return this.accessModifierField;
-            }
+            get { return this.accessModifierField; }
             set
             {
                 this.accessModifierField = value;
@@ -2520,10 +2232,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool AccessModifierSpecified
         {
-            get
-            {
-                return this.accessModifierFieldSpecified;
-            }
+            get { return this.accessModifierFieldSpecified; }
             set
             {
                 this.accessModifierFieldSpecified = value;
@@ -2535,10 +2244,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlAttributeAttribute()]
         public MemberModifier Modifier
         {
-            get
-            {
-                return this.modifierField;
-            }
+            get { return this.modifierField; }
             set
             {
                 this.modifierField = value;
@@ -2550,10 +2256,7 @@ namespace DbLinq.Schema.Dbml
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public bool ModifierSpecified
         {
-            get
-            {
-                return this.modifierFieldSpecified;
-            }
+            get { return this.modifierFieldSpecified; }
             set
             {
                 this.modifierFieldSpecified = value;
@@ -2565,10 +2268,14 @@ namespace DbLinq.Schema.Dbml
 
         protected void RaisePropertyChanged(string propertyName)
         {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged =
+                this.PropertyChanged;
             if ((propertyChanged != null))
             {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+                propertyChanged(
+                    this,
+                    new System.ComponentModel.PropertyChangedEventArgs(propertyName)
+                );
             }
         }
     }
@@ -2576,13 +2283,14 @@ namespace DbLinq.Schema.Dbml
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "2.0.50727.1432")]
     [System.SerializableAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007")]
+    [System.Xml.Serialization.XmlTypeAttribute(
+        Namespace = "http://schemas.microsoft.com/linqtosql/dbml/2007"
+    )]
 #if !MONO_STRICT
     public
 #endif
     enum SerializationMode
     {
-
         /// <remarks/>
         None,
 

@@ -9,12 +9,15 @@ namespace System.Threading.Channels.Tests
 {
     public abstract class UnboundedChannelTests : ChannelTestBase
     {
-        protected override Channel<T> CreateChannel<T>() => Channel.CreateUnbounded<T>(
-            new UnboundedChannelOptions
-            {
-                SingleReader = RequiresSingleReader,
-                AllowSynchronousContinuations = AllowSynchronousContinuations
-            });
+        protected override Channel<T> CreateChannel<T>() =>
+            Channel.CreateUnbounded<T>(
+                new UnboundedChannelOptions
+                {
+                    SingleReader = RequiresSingleReader,
+                    AllowSynchronousContinuations = AllowSynchronousContinuations,
+                }
+            );
+
         protected override Channel<T> CreateFullChannel<T>() => null;
 
         [Fact]
@@ -142,10 +145,21 @@ namespace System.Threading.Channels.Tests
             Channel<int> c = CreateChannel();
 
             int expectedId = Environment.CurrentManagedThreadId;
-            Task r = c.Reader.WaitToReadAsync().AsTask().ContinueWith(_ =>
-            {
-                Assert.Equal(AllowSynchronousContinuations, expectedId == Environment.CurrentManagedThreadId);
-            }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+            Task r = c
+                .Reader.WaitToReadAsync()
+                .AsTask()
+                .ContinueWith(
+                    _ =>
+                    {
+                        Assert.Equal(
+                            AllowSynchronousContinuations,
+                            expectedId == Environment.CurrentManagedThreadId
+                        );
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                );
 
             Assert.True(c.Writer.WriteAsync(42).IsCompletedSuccessfully);
             ((IAsyncResult)r).AsyncWaitHandle.WaitOne(); // avoid inlining the continuation
@@ -158,10 +172,18 @@ namespace System.Threading.Channels.Tests
             Channel<int> c = CreateChannel();
 
             int expectedId = Environment.CurrentManagedThreadId;
-            Task r = c.Reader.Completion.ContinueWith(_ =>
-            {
-                Assert.Equal(AllowSynchronousContinuations, expectedId == Environment.CurrentManagedThreadId);
-            }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+            Task r = c.Reader.Completion.ContinueWith(
+                _ =>
+                {
+                    Assert.Equal(
+                        AllowSynchronousContinuations,
+                        expectedId == Environment.CurrentManagedThreadId
+                    );
+                },
+                CancellationToken.None,
+                TaskContinuationOptions.ExecuteSynchronously,
+                TaskScheduler.Default
+            );
 
             Assert.True(c.Writer.TryComplete());
             ((IAsyncResult)r).AsyncWaitHandle.WaitOne(); // avoid inlining the continuation
@@ -173,7 +195,10 @@ namespace System.Threading.Channels.Tests
     {
         protected override bool RequiresSingleReader => true;
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public void ValidateInternalDebuggerAttributes()
         {
             Channel<int> c = CreateChannel();
@@ -233,7 +258,8 @@ namespace System.Threading.Channels.Tests
                         Assert.True(c.Writer.TryWrite(i));
                     }
                     c.Writer.Complete();
-                }));
+                })
+            );
         }
     }
 

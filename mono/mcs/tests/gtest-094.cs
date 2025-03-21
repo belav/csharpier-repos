@@ -1,16 +1,14 @@
 public class LinkedList<T>
 {
-	protected class Node
-	{ }
+    protected class Node { }
 }
 
 public class HashedLinkedList<T> : LinkedList<T>
 {
-	Node node;
+    Node node;
 }
 
 class X
 {
-	public static void Main ()
-	{ }
+    public static void Main() { }
 }

@@ -98,7 +98,9 @@ public class ExactSpellingTest
         int intRet8 = Ansi.MarshalPointer_Int_InOut2(ref int8);
         Verify(intReturnAnsi, intNative, intRet8, int8);
 
-        Console.WriteLine("Method Auto.Marshal_Int_InOut: ExactSpelling = false. Verify CharSet.Auto behavior per-platform.");
+        Console.WriteLine(
+            "Method Auto.Marshal_Int_InOut: ExactSpelling = false. Verify CharSet.Auto behavior per-platform."
+        );
         int int9 = intManaged;
         int intRet9 = Auto.Marshal_Int_InOut2(int9);
         Verify(intReturnUnicode, intManaged, intRet9, int9);
@@ -114,7 +116,8 @@ public class ExactSpellingTest
 
         Console.WriteLine("Method Unicode.MarshalPointer_Int_InOut2: ExactSpelling = false");
         int int6 = intManaged;
-        Assert.Throws<EntryPointNotFoundException>(() => Unicode.MarshalPointer_Int_InOut2(ref int6));
+        Assert.Throws<EntryPointNotFoundException>(() => Unicode.MarshalPointer_Int_InOut2(ref int6)
+        );
 
         Console.WriteLine("Method Ansi.Marshal_Int_InOut2: ExactSpelling = false");
         int int7 = intManaged;
@@ -148,7 +151,12 @@ public class ExactSpellingTest
         return 100;
     }
 
-    private static void Verify(int expectedReturnValue, int expectedParameterValue, int actualReturnValue, int actualParameterValue)
+    private static void Verify(
+        int expectedReturnValue,
+        int expectedParameterValue,
+        int actualReturnValue,
+        int actualParameterValue
+    )
     {
         Assert.Equal(expectedReturnValue, actualReturnValue);
         Assert.Equal(expectedParameterValue, actualParameterValue);

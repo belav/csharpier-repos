@@ -25,7 +25,10 @@ namespace Moq.Tests
         public void CanRunCaptureCallbackWithPredicate()
         {
             var capturedValue = string.Empty;
-            var captureMatch = new CaptureMatch<string>(s => capturedValue += s, s => s.StartsWith("W"));
+            var captureMatch = new CaptureMatch<string>(
+                s => capturedValue += s,
+                s => s.StartsWith("W")
+            );
 
             var mock = new Mock<IFoo>();
             mock.Setup(x => x.DoSomething(Capture.With(captureMatch)));

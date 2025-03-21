@@ -20,7 +20,12 @@ public class DotNetObjectReferenceJsonConverterTest
         var json = "{}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(json, JsonSerializerOptions));
+        var ex = Assert.Throws<JsonException>(() =>
+            JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
+                json,
+                JsonSerializerOptions
+            )
+        );
         Assert.Equal("Required property __dotNetObject not found.", ex.Message);
     }
 
@@ -34,7 +39,12 @@ public class DotNetObjectReferenceJsonConverterTest
         var json = "{\"foo\":2}";
 
         // Act & Assert
-        var ex = Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(json, JsonSerializerOptions));
+        var ex = Assert.Throws<JsonException>(() =>
+            JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
+                json,
+                JsonSerializerOptions
+            )
+        );
         Assert.Equal("Unexpected JSON property foo.", ex.Message);
     }
 
@@ -49,7 +59,12 @@ public class DotNetObjectReferenceJsonConverterTest
         var json = $"{{\"__dotNetObject\":{objectId}";
 
         // Act & Assert
-        var ex = Record.Exception(() => JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(json, JsonSerializerOptions));
+        var ex = Record.Exception(() =>
+            JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
+                json,
+                JsonSerializerOptions
+            )
+        );
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 
@@ -64,7 +79,12 @@ public class DotNetObjectReferenceJsonConverterTest
         var json = $"{{\"__dotNetObject\":{objectId},\"__dotNetObject\":{objectId}}}";
 
         // Act & Assert
-        var ex = Record.Exception(() => JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(json, JsonSerializerOptions));
+        var ex = Record.Exception(() =>
+            JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
+                json,
+                JsonSerializerOptions
+            )
+        );
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 
@@ -79,7 +99,10 @@ public class DotNetObjectReferenceJsonConverterTest
         var json = $"{{\"__dotNetObject\":{objectId}}}";
 
         // Act
-        var deserialized = JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(json, JsonSerializerOptions)!;
+        var deserialized = JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
+            json,
+            JsonSerializerOptions
+        )!;
 
         // Assert
         Assert.Same(input, deserialized.Value);
@@ -96,10 +119,14 @@ public class DotNetObjectReferenceJsonConverterTest
         var ref1 = DotNetObjectReference.Create(instance1);
         var ref2 = DotNetObjectReference.Create(instance2);
 
-        var json = $"[{{\"__dotNetObject\":{JSRuntime.TrackObjectReference(ref1)}}},{{\"__dotNetObject\":{JSRuntime.TrackObjectReference(ref2)}}}]";
+        var json =
+            $"[{{\"__dotNetObject\":{JSRuntime.TrackObjectReference(ref1)}}},{{\"__dotNetObject\":{JSRuntime.TrackObjectReference(ref2)}}}]";
 
         // Act
-        var deserialized = JsonSerializer.Deserialize<DotNetObjectReference<TestModel>[]>(json, JsonSerializerOptions)!;
+        var deserialized = JsonSerializer.Deserialize<DotNetObjectReference<TestModel>[]>(
+            json,
+            JsonSerializerOptions
+        )!;
 
         // Assert
         Assert.Same(instance1, deserialized[0].Value);
@@ -115,12 +142,15 @@ public class DotNetObjectReferenceJsonConverterTest
         var objectId = JSRuntime.TrackObjectReference(dotNetObjectRef);
 
         var json =
-@$"{{
+            @$"{{
     ""__dotNetObject"": {objectId}
 }}";
 
         // Act
-        var deserialized = JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(json, JsonSerializerOptions)!;
+        var deserialized = JsonSerializer.Deserialize<DotNetObjectReference<TestModel>>(
+            json,
+            JsonSerializerOptions
+        )!;
 
         // Assert
         Assert.Same(input, deserialized.Value);
@@ -142,8 +172,5 @@ public class DotNetObjectReferenceJsonConverterTest
         Assert.Equal(json1, json2);
     }
 
-    private class TestModel
-    {
-
-    }
+    private class TestModel { }
 }

@@ -8,9 +8,13 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source) => Distinct(source, null);
+        public static IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source) =>
+            Distinct(source, null);
 
-        public static IEnumerable<TSource> Distinct<TSource>(this IEnumerable<TSource> source, IEqualityComparer<TSource>? comparer)
+        public static IEnumerable<TSource> Distinct<TSource>(
+            this IEnumerable<TSource> source,
+            IEqualityComparer<TSource>? comparer
+        )
         {
             if (source == null)
             {
@@ -31,7 +35,10 @@ namespace System.Linq
         /// <para>This method is implemented by using deferred execution. The immediate return value is an object that stores all the information that is required to perform the action. The query represented by this method is not executed until the object is enumerated either by calling its `GetEnumerator` method directly or by using `foreach` in Visual C# or `For Each` in Visual Basic.</para>
         /// <para>The <see cref="DistinctBy{TSource, TKey}(IEnumerable{TSource}, Func{TSource, TKey})" /> method returns an unordered sequence that contains no duplicate values. The default equality comparer, <see cref="EqualityComparer{T}.Default" />, is used to compare values.</para>
         /// </remarks>
-        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector) => DistinctBy(source, keySelector, null);
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector
+        ) => DistinctBy(source, keySelector, null);
 
         /// <summary>Returns distinct elements from a sequence according to a specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of <paramref name="source" />.</typeparam>
@@ -45,7 +52,11 @@ namespace System.Linq
         /// <para>This method is implemented by using deferred execution. The immediate return value is an object that stores all the information that is required to perform the action. The query represented by this method is not executed until the object is enumerated either by calling its `GetEnumerator` method directly or by using `foreach` in Visual C# or `For Each` in Visual Basic.</para>
         /// <para>The <see cref="DistinctBy{TSource, TKey}(IEnumerable{TSource}, Func{TSource, TKey}, IEqualityComparer{TKey}?)" /> method returns an unordered sequence that contains no duplicate values. If <paramref name="comparer" /> is <see langword="null" />, the default equality comparer, <see cref="EqualityComparer{T}.Default" />, is used to compare values.</para>
         /// </remarks>
-        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(this IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
+        public static IEnumerable<TSource> DistinctBy<TSource, TKey>(
+            this IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             if (source is null)
             {
@@ -59,7 +70,11 @@ namespace System.Linq
             return DistinctByIterator(source, keySelector, comparer);
         }
 
-        private static IEnumerable<TSource> DistinctByIterator<TSource, TKey>(IEnumerable<TSource> source, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
+        private static IEnumerable<TSource> DistinctByIterator<TSource, TKey>(
+            IEnumerable<TSource> source,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             using IEnumerator<TSource> enumerator = source.GetEnumerator();
 
@@ -73,8 +88,7 @@ namespace System.Linq
                     {
                         yield return element;
                     }
-                }
-                while (enumerator.MoveNext());
+                } while (enumerator.MoveNext());
             }
         }
 
@@ -89,14 +103,18 @@ namespace System.Linq
             private HashSet<TSource>? _set;
             private IEnumerator<TSource>? _enumerator;
 
-            public DistinctIterator(IEnumerable<TSource> source, IEqualityComparer<TSource>? comparer)
+            public DistinctIterator(
+                IEnumerable<TSource> source,
+                IEqualityComparer<TSource>? comparer
+            )
             {
                 Debug.Assert(source != null);
                 _source = source;
                 _comparer = comparer;
             }
 
-            public override Iterator<TSource> Clone() => new DistinctIterator<TSource>(_source, _comparer);
+            public override Iterator<TSource> Clone() =>
+                new DistinctIterator<TSource>(_source, _comparer);
 
             public override bool MoveNext()
             {

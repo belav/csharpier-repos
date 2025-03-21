@@ -43,22 +43,22 @@ namespace Microsoft.CodeAnalysis.CSharp
                     return ((BoundImplicitIndexerAccess)node).IndexerOrSliceAccess.GetRefKind();
 
                 case BoundKind.InlineArrayAccess:
+                {
+                    var elementAccess = (BoundInlineArrayAccess)node;
+
+                    if (!elementAccess.IsValue)
                     {
-                        var elementAccess = (BoundInlineArrayAccess)node;
-
-                        if (!elementAccess.IsValue)
+                        switch (elementAccess.GetItemOrSliceHelper)
                         {
-                            switch (elementAccess.GetItemOrSliceHelper)
-                            {
-                                case WellKnownMember.System_Span_T__get_Item:
-                                    return RefKind.Ref;
-                                case WellKnownMember.System_ReadOnlySpan_T__get_Item:
-                                    return RefKind.RefReadOnly;
-                            }
+                            case WellKnownMember.System_Span_T__get_Item:
+                                return RefKind.Ref;
+                            case WellKnownMember.System_ReadOnlySpan_T__get_Item:
+                                return RefKind.RefReadOnly;
                         }
-
-                        return RefKind.None;
                     }
+
+                    return RefKind.None;
+                }
 
                 case BoundKind.ObjectInitializerMember:
                     var member = (BoundObjectInitializerMember)node;
@@ -70,7 +70,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                         FieldSymbol f => f.RefKind,
                         PropertySymbol f => f.RefKind,
                         EventSymbol => RefKind.None,
-                        var s => throw ExceptionUtilities.UnexpectedValue(s?.Kind)
+                        var s => throw ExceptionUtilities.UnexpectedValue(s?.Kind),
                     };
 
                 default:
@@ -80,7 +80,11 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public static bool IsLiteralNull(this BoundExpression node)
         {
-            return node is { Kind: BoundKind.Literal, ConstantValueOpt: { Discriminator: ConstantValueTypeDiscriminator.Null } };
+            return node
+                is {
+                    Kind: BoundKind.Literal,
+                    ConstantValueOpt: { Discriminator: ConstantValueTypeDiscriminator.Null }
+                };
         }
 
         public static bool IsLiteralDefault(this BoundExpression node)
@@ -102,7 +106,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         // default value (null, zero, false, default(T) ...)
         //
         // NOTE: This method is a very shallow check.
-        //       It does not make any assumptions about what this node could become 
+        //       It does not make any assumptions about what this node could become
         //       after some folding/propagation/algebraic transformations.
         public static bool IsDefaultValue(this BoundExpression node)
         {
@@ -132,7 +136,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return type is { } && type.IsDynamic();
         }
 
-        public static NamedTypeSymbol? GetInferredDelegateType(this BoundExpression expr, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        public static NamedTypeSymbol? GetInferredDelegateType(
+            this BoundExpression expr,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
             Debug.Assert(expr.Kind is BoundKind.MethodGroup or BoundKind.UnboundLambda);
 
@@ -156,7 +163,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 BoundMethodGroup methodGroup => methodGroup.FunctionType,
                 UnboundLambda unboundLambda => unboundLambda.FunctionType,
-                _ => null
+                _ => null,
             };
         }
 
@@ -165,12 +172,17 @@ namespace Microsoft.CodeAnalysis.CSharp
             return node.InstanceOpt != null && node.InstanceOpt.HasDynamicType();
         }
 
-        public static void GetExpressionSymbols(this BoundExpression node, ArrayBuilder<Symbol> symbols, BoundNode parent, Binder binder)
+        public static void GetExpressionSymbols(
+            this BoundExpression node,
+            ArrayBuilder<Symbol> symbols,
+            BoundNode parent,
+            Binder binder
+        )
         {
             switch (node.Kind)
             {
                 case BoundKind.MethodGroup:
-                    // Special case: if we are looking for info on "M" in "new Action(M)" in the context of a parent 
+                    // Special case: if we are looking for info on "M" in "new Action(M)" in the context of a parent
                     // then we want to get the symbol that overload resolution chose for M, not on the whole method group M.
                     var delegateCreation = parent as BoundDelegateCreationExpression;
                     if (delegateCreation != null && delegateCreation.MethodOpt is { })
@@ -179,7 +191,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        symbols.AddRange(CSharpSemanticModel.GetReducedAndFilteredMethodGroupSymbols(binder, (BoundMethodGroup)node));
+                        symbols.AddRange(
+                            CSharpSemanticModel.GetReducedAndFilteredMethodGroupSymbols(
+                                binder,
+                                (BoundMethodGroup)node
+                            )
+                        );
                     }
                     break;
 
@@ -193,7 +210,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 case BoundKind.DelegateCreationExpression:
                     var expr = (BoundDelegateCreationExpression)node;
-                    var ctor = expr.Type.GetMembers(WellKnownMemberNames.InstanceConstructorName).FirstOrDefault();
+                    var ctor = expr
+                        .Type.GetMembers(WellKnownMemberNames.InstanceConstructorName)
+                        .FirstOrDefault();
                     if (ctor is { })
                     {
                         symbols.Add(ctor);
@@ -250,7 +269,9 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        internal static bool IsExpressionOfComImportType([NotNullWhen(true)] this BoundExpression? expressionOpt)
+        internal static bool IsExpressionOfComImportType(
+            [NotNullWhen(true)] this BoundExpression? expressionOpt
+        )
         {
             // NOTE: Dev11 also returns false if expressionOpt is a TypeExpression.  Unfortunately,
             // that makes it impossible to handle TypeOrValueExpression in a consistent way, since
@@ -262,7 +283,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return false;
 
             TypeSymbol? receiverType = expressionOpt.Type;
-            return receiverType is NamedTypeSymbol { Kind: SymbolKind.NamedType, IsComImport: true };
+            return receiverType
+                is NamedTypeSymbol { Kind: SymbolKind.NamedType, IsComImport: true };
         }
 
         internal static bool IsDiscardExpression(this BoundExpression expr)
@@ -272,7 +294,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 BoundDiscardExpression => true,
                 OutDeconstructVarPendingInference { IsDiscardExpression: true } => true,
                 BoundDeconstructValuePlaceholder { IsDiscardExpression: true } => true,
-                _ => false
+                _ => false,
             };
         }
     }

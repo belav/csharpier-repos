@@ -4,46 +4,51 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.IO;
     using System.Text;
+    using System.Xml;
 
-    public sealed class ConnectionStringsSection : ConfigurationSection {
+    public sealed class ConnectionStringsSection : ConfigurationSection
+    {
         private static ConfigurationPropertyCollection _properties;
         private static readonly ConfigurationProperty _propConnectionStrings =
-            new ConfigurationProperty(null, typeof(ConnectionStringSettingsCollection), null, 
-                                      ConfigurationPropertyOptions.IsDefaultCollection);
+            new ConfigurationProperty(
+                null,
+                typeof(ConnectionStringSettingsCollection),
+                null,
+                ConfigurationPropertyOptions.IsDefaultCollection
+            );
 
-        static ConnectionStringsSection() {
+        static ConnectionStringsSection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propConnectionStrings);
         }
 
-        public ConnectionStringsSection() {
-        }
+        public ConnectionStringsSection() { }
 
-        protected internal override object GetRuntimeObject() {
+        protected internal override object GetRuntimeObject()
+        {
             SetReadOnly();
-            return this;            // return the read only object
+            return this; // return the read only object
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("", Options = ConfigurationPropertyOptions.IsDefaultCollection)]
-        public ConnectionStringSettingsCollection ConnectionStrings {
-            get {
-                return (ConnectionStringSettingsCollection)base[_propConnectionStrings];
-            }
+        public ConnectionStringSettingsCollection ConnectionStrings
+        {
+            get { return (ConnectionStringSettingsCollection)base[_propConnectionStrings]; }
         }
     }
 }

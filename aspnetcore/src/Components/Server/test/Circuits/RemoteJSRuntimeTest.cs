@@ -30,8 +30,13 @@ public class RemoteJSRuntimeTest
         var data = new byte[50_000]; // more than the 32k default MaximumIncomingBytes
 
         // Act & Assert
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => jsRuntime.TestReceiveByteArray(id: 0, data));
-        Assert.Equal("Exceeded the maximum byte array transfer limit for a call. (Parameter 'data')", ex.Message);
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            jsRuntime.TestReceiveByteArray(id: 0, data)
+        );
+        Assert.Equal(
+            "Exceeded the maximum byte array transfer limit for a call. (Parameter 'data')",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -70,8 +75,13 @@ public class RemoteJSRuntimeTest
             jsRuntime.TestReceiveByteArray(i, Array.Empty<byte>());
         }
 
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => jsRuntime.TestReceiveByteArray(5, new byte[] { 0 }));
-        Assert.Equal("Exceeded the maximum byte array transfer limit for a call. (Parameter 'data')", ex.Message);
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            jsRuntime.TestReceiveByteArray(5, new byte[] { 0 })
+        );
+        Assert.Equal(
+            "Exceeded the maximum byte array transfer limit for a call. (Parameter 'data')",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -82,8 +92,13 @@ public class RemoteJSRuntimeTest
 
         // Act & Assert
         jsRuntime.TestReceiveByteArray(id: 0, new byte[30000]);
-        var ex = Assert.Throws<ArgumentOutOfRangeException>(() => jsRuntime.TestReceiveByteArray(1, new byte[5000]));
-        Assert.Equal("Exceeded the maximum byte array transfer limit for a call. (Parameter 'data')", ex.Message);
+        var ex = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            jsRuntime.TestReceiveByteArray(1, new byte[5000])
+        );
+        Assert.Equal(
+            "Exceeded the maximum byte array transfer limit for a call. (Parameter 'data')",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -97,19 +112,28 @@ public class RemoteJSRuntimeTest
         jsRuntime.TestReceiveByteArray(id: 0, new byte[5000]);
     }
 
-    private static TestRemoteJSRuntime CreateTestRemoteJSRuntime(long? componentHubMaximumIncomingBytes = 32 * 1024)
+    private static TestRemoteJSRuntime CreateTestRemoteJSRuntime(
+        long? componentHubMaximumIncomingBytes = 32 * 1024
+    )
     {
         var componentHubOptions = Options.Create(new HubOptions<ComponentHub>());
         componentHubOptions.Value.MaximumReceiveMessageSize = componentHubMaximumIncomingBytes;
-        var jsRuntime = new TestRemoteJSRuntime(Options.Create(new CircuitOptions()), componentHubOptions, Mock.Of<ILogger<RemoteJSRuntime>>());
+        var jsRuntime = new TestRemoteJSRuntime(
+            Options.Create(new CircuitOptions()),
+            componentHubOptions,
+            Mock.Of<ILogger<RemoteJSRuntime>>()
+        );
         return jsRuntime;
     }
 
     class TestRemoteJSRuntime : RemoteJSRuntime, IJSRuntime
     {
-        public TestRemoteJSRuntime(IOptions<CircuitOptions> circuitOptions, IOptions<HubOptions<ComponentHub>> hubOptions, ILogger<RemoteJSRuntime> logger) : base(circuitOptions, hubOptions, logger)
-        {
-        }
+        public TestRemoteJSRuntime(
+            IOptions<CircuitOptions> circuitOptions,
+            IOptions<HubOptions<ComponentHub>> hubOptions,
+            ILogger<RemoteJSRuntime> logger
+        )
+            : base(circuitOptions, hubOptions, logger) { }
 
         public void TestReceiveByteArray(int id, byte[] data)
         {

@@ -19,15 +19,15 @@ public class EndpointMetadataCollectionBenchmark
     {
         var seeds = new Type[]
         {
-                typeof(Metadata1),
-                typeof(Metadata2),
-                typeof(Metadata3),
-                typeof(Metadata4),
-                typeof(Metadata5),
-                typeof(Metadata6),
-                typeof(Metadata7),
-                typeof(Metadata8),
-                typeof(Metadata9),
+            typeof(Metadata1),
+            typeof(Metadata2),
+            typeof(Metadata3),
+            typeof(Metadata4),
+            typeof(Metadata5),
+            typeof(Metadata6),
+            typeof(Metadata7),
+            typeof(Metadata8),
+            typeof(Metadata9),
         };
 
         _items = new object[Count];
@@ -110,17 +110,30 @@ public class EndpointMetadataCollectionBenchmark
     }
 
     private interface IMetadata1 { }
+
     private interface IMetadata2 { }
+
     private interface IMetadata3 { }
+
     private interface IMetadata4 { }
+
     private interface IMetadata5 { }
+
     private sealed class Metadata1 : IMetadata1 { }
+
     private sealed class Metadata2 : IMetadata2 { }
+
     private sealed class Metadata3 : IMetadata3 { }
+
     private sealed class Metadata4 : IMetadata4 { }
+
     private sealed class Metadata5 : IMetadata5 { }
+
     private sealed class Metadata6 : IMetadata1, IMetadata2 { }
+
     private sealed class Metadata7 : IMetadata2, IMetadata3 { }
+
     private sealed class Metadata8 : IMetadata4, IMetadata5 { }
+
     private sealed class Metadata9 : IMetadata1, IMetadata2 { }
 }

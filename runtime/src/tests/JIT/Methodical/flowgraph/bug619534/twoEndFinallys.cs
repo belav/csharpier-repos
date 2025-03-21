@@ -21,84 +21,83 @@ using Xunit;
 
 namespace Test_twoEndFinallys
 {
-public class Test
-{
-    private int _temp;
-    private static int s_result = 100;
+    public class Test
+    {
+        private int _temp;
+        private static int s_result = 100;
 
-    private Test()
-    {
-        _temp = 101;
-    }
-
-    [Fact]
-    public static int TestEntryPoint()
-    {
-        Test t = TwoEndFinallys(new string[] {});
-        if (t._temp == 101)
-            return 100;
-        else return 101;
-    }
-    private static Test TwoEndFinallys(string[] args)
-    {
-        Test t = null;
-        Test u = null;
-        try
+        private Test()
         {
-            int dummy = 0;
-            Test l = null;
-            if (s_result != 1000)
+            _temp = 101;
+        }
+
+        [Fact]
+        public static int TestEntryPoint()
+        {
+            Test t = TwoEndFinallys(new string[] { });
+            if (t._temp == 101)
+                return 100;
+            else
+                return 101;
+        }
+
+        private static Test TwoEndFinallys(string[] args)
+        {
+            Test t = null;
+            Test u = null;
+            try
             {
-                if (dummy != 0)
+                int dummy = 0;
+                Test l = null;
+                if (s_result != 1000)
                 {
-                    t = new Test();
-                    t._temp = l._temp;
-                    return t;
+                    if (dummy != 0)
+                    {
+                        t = new Test();
+                        t._temp = l._temp;
+                        return t;
+                    }
+                    try
+                    {
+                        return new Test();
+                    }
+                    catch (Exception obj1)
+                    {
+                        System.Exception exn = (System.Exception)obj1;
+                        return null;
+                    }
                 }
-                try
+            }
+            finally
+            {
+                switch (args.Length)
+                {
+                    case 0:
+                        u = dummyCall(0);
+                        if (u != null)
+                            u._temp += 100;
+                        break;
+                    default:
+                        t = dummyCall(Convert.ToInt32(args[0]));
+                        t._temp += 101;
+                        break;
+                }
+            }
+            return u;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static Test dummyCall(int input)
+        {
+            try
+            {
+                if (input != 0)
                 {
                     return new Test();
                 }
-                catch (Exception obj1)
-                {
-                    System.Exception exn = (System.Exception)obj1;
-                    return null;
-                }
+                return null;
             }
-        }
-        finally
-        {
-            switch (args.Length)
-            {
-                case 0:
-                    u = dummyCall(0);
-                    if (u != null)
-                        u._temp += 100;
-                    break;
-                default:
-                    t = dummyCall(Convert.ToInt32(args[0]));
-                    t._temp += 101;
-                    break;
-            }
-        }
-        return u;
-    }
-
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    private static Test dummyCall(int input)
-    {
-        try
-        {
-            if (input != 0)
-            {
-                return new Test();
-            }
-            return null;
-        }
-        finally
-        {
+            finally { }
         }
     }
-}
-
 }

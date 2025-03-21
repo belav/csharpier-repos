@@ -15,7 +15,12 @@ internal partial class EndpointHtmlRenderer
 {
     private static readonly object ComponentSequenceKey = new object();
 
-    protected override IComponent ResolveComponentForRenderMode([DynamicallyAccessedMembers(Component)] Type componentType, int? parentComponentId, IComponentActivator componentActivator, IComponentRenderMode renderMode)
+    protected override IComponent ResolveComponentForRenderMode(
+        [DynamicallyAccessedMembers(Component)] Type componentType,
+        int? parentComponentId,
+        IComponentActivator componentActivator,
+        IComponentRenderMode renderMode
+    )
     {
         if (_isHandlingErrors)
         {
@@ -58,7 +63,9 @@ internal partial class EndpointHtmlRenderer
         return GetClosestRenderModeBoundary(componentState);
     }
 
-    private static SSRRenderModeBoundary? GetClosestRenderModeBoundary(ComponentState componentState)
+    private static SSRRenderModeBoundary? GetClosestRenderModeBoundary(
+        ComponentState componentState
+    )
     {
         var currentComponentState = componentState;
 
@@ -70,8 +77,7 @@ internal partial class EndpointHtmlRenderer
             }
 
             currentComponentState = currentComponentState.ParentComponentState;
-        }
-        while (currentComponentState is not null);
+        } while (currentComponentState is not null);
 
         return null;
     }
@@ -85,22 +91,32 @@ internal partial class EndpointHtmlRenderer
         HttpContext httpContext,
         [DynamicallyAccessedMembers(Component)] Type componentType,
         IComponentRenderMode prerenderMode,
-        ParameterView parameters)
-        => PrerenderComponentAsync(httpContext, componentType, prerenderMode, parameters, waitForQuiescence: true);
+        ParameterView parameters
+    ) =>
+        PrerenderComponentAsync(
+            httpContext,
+            componentType,
+            prerenderMode,
+            parameters,
+            waitForQuiescence: true
+        );
 
     public async ValueTask<IHtmlAsyncContent> PrerenderComponentAsync(
         HttpContext httpContext,
         [DynamicallyAccessedMembers(Component)] Type componentType,
         IComponentRenderMode? prerenderMode,
         ParameterView parameters,
-        bool waitForQuiescence)
+        bool waitForQuiescence
+    )
     {
         ArgumentNullException.ThrowIfNull(httpContext);
         ArgumentNullException.ThrowIfNull(componentType);
 
         if (!typeof(IComponent).IsAssignableFrom(componentType))
         {
-            throw new ArgumentException(Resources.FormatTypeMustDeriveFromType(componentType, typeof(IComponent)));
+            throw new ArgumentException(
+                Resources.FormatTypeMustDeriveFromType(componentType, typeof(IComponent))
+            );
         }
 
         // Make sure we only initialize the services once, but on every call we wait for that process to complete
@@ -116,7 +132,9 @@ internal partial class EndpointHtmlRenderer
             var rootComponent = prerenderMode is null
                 ? InstantiateComponent(componentType)
                 : new SSRRenderModeBoundary(_httpContext, componentType, prerenderMode);
-            var htmlRootComponent = await Dispatcher.InvokeAsync(() => BeginRenderingComponent(rootComponent, parameters));
+            var htmlRootComponent = await Dispatcher.InvokeAsync(() =>
+                BeginRenderingComponent(rootComponent, parameters)
+            );
             var result = new PrerenderedComponentHtmlContent(Dispatcher, htmlRootComponent);
 
             await WaitForResultReady(waitForQuiescence, result);
@@ -133,7 +151,8 @@ internal partial class EndpointHtmlRenderer
         HttpContext httpContext,
         [DynamicallyAccessedMembers(Component)] Type rootComponentType,
         ParameterView parameters,
-        bool waitForQuiescence)
+        bool waitForQuiescence
+    )
     {
         SetHttpContext(httpContext);
 
@@ -152,7 +171,10 @@ internal partial class EndpointHtmlRenderer
         }
     }
 
-    private async Task WaitForResultReady(bool waitForQuiescence, PrerenderedComponentHtmlContent result)
+    private async Task WaitForResultReady(
+        bool waitForQuiescence,
+        PrerenderedComponentHtmlContent result
+    )
     {
         if (waitForQuiescence)
         {
@@ -166,7 +188,10 @@ internal partial class EndpointHtmlRenderer
         }
     }
 
-    public static ValueTask<PrerenderedComponentHtmlContent> HandleNavigationException(HttpContext httpContext, NavigationException navigationException)
+    public static ValueTask<PrerenderedComponentHtmlContent> HandleNavigationException(
+        HttpContext httpContext,
+        NavigationException navigationException
+    )
     {
         if (httpContext.Response.HasStarted)
         {
@@ -176,25 +201,37 @@ internal partial class EndpointHtmlRenderer
             // synchronous render, the response would not yet have started, and if you do so during some later async
             // phase, we would already have exited this method since streaming SSR means not awaiting quiescence.
             throw new InvalidOperationException(
-                "A navigation command was attempted during prerendering after the server already started sending the response. " +
-                "Navigation commands can not be issued during server-side prerendering after the response from the server has started. Applications must buffer the" +
-                "response and avoid using features like FlushAsync() before all components on the page have been rendered to prevent failed navigation commands.");
+                "A navigation command was attempted during prerendering after the server already started sending the response. "
+                    + "Navigation commands can not be issued during server-side prerendering after the response from the server has started. Applications must buffer the"
+                    + "response and avoid using features like FlushAsync() before all components on the page have been rendered to prevent failed navigation commands."
+            );
         }
-        else if (IsPossibleExternalDestination(httpContext.Request, navigationException.Location)
-            && IsProgressivelyEnhancedNavigation(httpContext.Request))
+        else if (
+            IsPossibleExternalDestination(httpContext.Request, navigationException.Location)
+            && IsProgressivelyEnhancedNavigation(httpContext.Request)
+        )
         {
             // For progressively-enhanced nav, we prefer to use opaque redirections for external URLs rather than
             // forcing the request to be retried, since that allows post-redirect-get to work, plus avoids a
             // duplicated request. The client can't rely on receiving this header, though, since non-Blazor endpoints
             // wouldn't return it.
-            httpContext.Response.Headers.Add("blazor-enhanced-nav-redirect-location",
-                OpaqueRedirection.CreateProtectedRedirectionUrl(httpContext, navigationException.Location));
-            return new ValueTask<PrerenderedComponentHtmlContent>(PrerenderedComponentHtmlContent.Empty);
+            httpContext.Response.Headers.Add(
+                "blazor-enhanced-nav-redirect-location",
+                OpaqueRedirection.CreateProtectedRedirectionUrl(
+                    httpContext,
+                    navigationException.Location
+                )
+            );
+            return new ValueTask<PrerenderedComponentHtmlContent>(
+                PrerenderedComponentHtmlContent.Empty
+            );
         }
         else
         {
             httpContext.Response.Redirect(navigationException.Location);
-            return new ValueTask<PrerenderedComponentHtmlContent>(PrerenderedComponentHtmlContent.Empty);
+            return new ValueTask<PrerenderedComponentHtmlContent>(
+                PrerenderedComponentHtmlContent.Empty
+            );
         }
     }
 
@@ -205,11 +242,12 @@ internal partial class EndpointHtmlRenderer
             return false;
         }
 
-        return absoluteUri.Scheme != request.Scheme
-            || absoluteUri.Authority != request.Host.Value;
+        return absoluteUri.Scheme != request.Scheme || absoluteUri.Authority != request.Host.Value;
     }
 
-    internal static ServerComponentInvocationSequence GetOrCreateInvocationId(HttpContext httpContext)
+    internal static ServerComponentInvocationSequence GetOrCreateInvocationId(
+        HttpContext httpContext
+    )
     {
         if (!httpContext.Items.TryGetValue(ComponentSequenceKey, out var result))
         {
@@ -227,12 +265,13 @@ internal partial class EndpointHtmlRenderer
         private readonly Dispatcher? _dispatcher;
         private readonly HtmlRootComponent? _htmlToEmitOrNull;
 
-        public static PrerenderedComponentHtmlContent Empty { get; }
-            = new PrerenderedComponentHtmlContent(null, default);
+        public static PrerenderedComponentHtmlContent Empty { get; } =
+            new PrerenderedComponentHtmlContent(null, default);
 
         public PrerenderedComponentHtmlContent(
             Dispatcher? dispatcher, // If null, we're only emitting the markers
-            HtmlRootComponent? htmlToEmitOrNull)
+            HtmlRootComponent? htmlToEmitOrNull
+        )
         {
             _dispatcher = dispatcher;
             _htmlToEmitOrNull = htmlToEmitOrNull;
@@ -259,6 +298,8 @@ internal partial class EndpointHtmlRenderer
         }
 
         public Task QuiescenceTask =>
-            _htmlToEmitOrNull.HasValue ? _htmlToEmitOrNull.Value.QuiescenceTask : Task.CompletedTask;
+            _htmlToEmitOrNull.HasValue
+                ? _htmlToEmitOrNull.Value.QuiescenceTask
+                : Task.CompletedTask;
     }
 }

@@ -72,34 +72,22 @@ namespace System.Data.OleDb
 
         public string Message
         {
-            get
-            {
-                return this.message ?? string.Empty;
-            }
+            get { return this.message ?? string.Empty; }
         }
 
         public int NativeError
         {
-            get
-            {
-                return this.nativeError;
-            }
+            get { return this.nativeError; }
         }
 
         public string Source
         {
-            get
-            {
-                return this.source ?? string.Empty;
-            }
+            get { return this.source ?? string.Empty; }
         }
 
         public string SQLState
         {
-            get
-            {
-                return this.sqlState ?? string.Empty;
-            }
+            get { return this.sqlState ?? string.Empty; }
         }
 
         public override string ToString()

@@ -3,9 +3,6 @@
 
 using System;
 using System.IO;
-#if GENERATE_SQL_SCRIPTS
-using System.Linq;
-#endif
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +11,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
+#if GENERATE_SQL_SCRIPTS
+using System.Linq;
+#endif
 
 namespace BasicViews
 {
@@ -40,7 +40,9 @@ namespace BasicViews
             }
             else if (string.IsNullOrEmpty(connectionString))
             {
-                throw new ArgumentException("Connection string must be specified for {databaseType}.");
+                throw new ArgumentException(
+                    "Connection string must be specified for {databaseType}."
+                );
             }
 
             switch (databaseType.ToUpperInvariant())
@@ -49,7 +51,9 @@ namespace BasicViews
                 case "MYSQL":
                     services
                         .AddEntityFrameworkMySql()
-                        .AddDbContextPool<BasicViewsContext>(options => options.UseMySql(connectionString));
+                        .AddDbContextPool<BasicViewsContext>(options =>
+                            options.UseMySql(connectionString)
+                        );
                     break;
 #endif
 
@@ -57,7 +61,9 @@ namespace BasicViews
                     var settings = new NpgsqlConnectionStringBuilder(connectionString);
                     if (!settings.NoResetOnClose)
                     {
-                        throw new ArgumentException("No Reset On Close=true must be specified for Npgsql.");
+                        throw new ArgumentException(
+                            "No Reset On Close=true must be specified for Npgsql."
+                        );
                     }
                     if (settings.Enlist)
                     {
@@ -66,24 +72,32 @@ namespace BasicViews
 
                     services
                         .AddEntityFrameworkNpgsql()
-                        .AddDbContextPool<BasicViewsContext>(options => options.UseNpgsql(connectionString));
+                        .AddDbContextPool<BasicViewsContext>(options =>
+                            options.UseNpgsql(connectionString)
+                        );
                     break;
 
                 case "SQLITE":
                     _isSQLite = true;
                     services
                         .AddEntityFrameworkSqlite()
-                        .AddDbContextPool<BasicViewsContext>(options => options.UseSqlite("Data Source=BasicViews.db;Cache=Shared"));
+                        .AddDbContextPool<BasicViewsContext>(options =>
+                            options.UseSqlite("Data Source=BasicViews.db;Cache=Shared")
+                        );
                     break;
 
                 case "SQLSERVER":
                     services
                         .AddEntityFrameworkSqlServer()
-                        .AddDbContextPool<BasicViewsContext>(options => options.UseSqlServer(connectionString));
+                        .AddDbContextPool<BasicViewsContext>(options =>
+                            options.UseSqlServer(connectionString)
+                        );
                     break;
 
                 default:
-                    throw new ArgumentException($"Application does not support database type {databaseType}.");
+                    throw new ArgumentException(
+                        $"Application does not support database type {databaseType}."
+                    );
             }
 
             services.AddMvc();
@@ -102,18 +116,20 @@ namespace BasicViews
                 lifetime.ApplicationStopping.Register(() => DropDatabaseTables(services));
             }
 
-            app.Use(next => async context =>
-            {
-                try
+            app.Use(next =>
+                async context =>
                 {
-                    await next(context);
+                    try
+                    {
+                        await next(context);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex);
+                        throw;
+                    }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    throw;
-                }
-            });
+            );
 
             app.UseStaticFiles();
 
@@ -130,15 +146,21 @@ namespace BasicViews
 
         private void CreateDatabaseTables(IServiceProvider services)
         {
-            using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (
+                var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
+            )
             {
-                using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>())
+                using (
+                    var dbContext =
+                        serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>()
+                )
                 {
 #if GENERATE_SQL_SCRIPTS
                     var migrator = dbContext.GetService<IMigrator>();
                     var script = migrator.GenerateScript(
                         fromMigration: Migration.InitialDatabase,
-                        toMigration: dbContext.Database.GetMigrations().LastOrDefault());
+                        toMigration: dbContext.Database.GetMigrations().LastOrDefault()
+                    );
                     Console.WriteLine("Create script:");
                     Console.WriteLine(script);
 #endif
@@ -151,15 +173,21 @@ namespace BasicViews
         // Don't leave SQLite's .db file behind.
         public static void DropDatabase(IServiceProvider services)
         {
-            using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (
+                var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
+            )
             {
-                using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>())
+                using (
+                    var dbContext =
+                        serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>()
+                )
                 {
 #if GENERATE_SQL_SCRIPTS
                     var migrator = dbContext.GetService<IMigrator>();
                     var script = migrator.GenerateScript(
                         fromMigration: dbContext.Database.GetAppliedMigrations().LastOrDefault(),
-                        toMigration: Migration.InitialDatabase);
+                        toMigration: Migration.InitialDatabase
+                    );
                     Console.WriteLine("Delete script:");
                     Console.WriteLine(script);
 #endif
@@ -171,15 +199,21 @@ namespace BasicViews
 
         private void DropDatabaseTables(IServiceProvider services)
         {
-            using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            using (
+                var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope()
+            )
             {
-                using (var dbContext = serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>())
+                using (
+                    var dbContext =
+                        serviceScope.ServiceProvider.GetRequiredService<BasicViewsContext>()
+                )
                 {
                     var migrator = dbContext.GetService<IMigrator>();
 #if GENERATE_SQL_SCRIPTS
                     var script = migrator.GenerateScript(
                         fromMigration: dbContext.Database.GetAppliedMigrations().LastOrDefault(),
-                        toMigration: Migration.InitialDatabase);
+                        toMigration: Migration.InitialDatabase
+                    );
                     Console.WriteLine("Delete script:");
                     Console.WriteLine(script);
 #endif
@@ -191,8 +225,7 @@ namespace BasicViews
 
         public static void Main(string[] args)
         {
-            var host = CreateWebHostBuilder(args)
-                .Build();
+            var host = CreateWebHostBuilder(args).Build();
 
             host.Run();
         }

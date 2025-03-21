@@ -13,12 +13,14 @@ public class IModelConverter : JsonConverter
         return objectType == typeof(IModel);
     }
 
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    public override object ReadJson(
+        JsonReader reader,
+        Type objectType,
+        object existingValue,
+        JsonSerializer serializer
+    )
     {
-        return new DerivedModel
-        {
-            DerivedProperty = reader.Value.ToString(),
-        };
+        return new DerivedModel { DerivedProperty = reader.Value.ToString() };
     }
 
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)

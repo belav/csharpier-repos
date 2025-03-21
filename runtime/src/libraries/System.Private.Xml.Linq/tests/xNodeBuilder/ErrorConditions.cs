@@ -187,7 +187,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteCData(param);
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "");
@@ -256,7 +259,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteDocType(param, param, param, param);
                             }
-                            catch (ArgumentException) { return; }
+                            catch (ArgumentException)
+                            {
+                                return;
+                            }
                         }
                     }
                     throw new TestException(TestResult.Failed, "");
@@ -722,10 +728,17 @@ namespace CoreXml.Test.XLinq
                     int param = (int)Variation.Param;
                     switch (param)
                     {
-                        case 1: w.WriteStartDocument(); break;
-                        case 2: w.WriteStartDocument(true); break;
-                        case 3: w.WriteStartDocument(false); break;
-                        default: throw new TestException(TestResult.Failed, "");
+                        case 1:
+                            w.WriteStartDocument();
+                            break;
+                        case 2:
+                            w.WriteStartDocument(true);
+                            break;
+                        case 3:
+                            w.WriteStartDocument(false);
+                            break;
+                        default:
+                            throw new TestException(TestResult.Failed, "");
                     }
                     TestLog.Compare(w.WriteState, WriteState.Prolog, "Error");
                     w.WriteStartElement("a");
@@ -834,7 +847,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteEntityRef("ent");
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");
@@ -865,7 +881,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteEntityRef("ent");
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");
@@ -891,7 +910,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteCharEntity('\uD23E');
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");
@@ -919,7 +941,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteCharEntity('\uD23E');
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");
@@ -945,7 +970,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteSurrogateCharEntity('\uDF41', '\uD920');
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");
@@ -973,7 +1001,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteSurrogateCharEntity('\uDF41', '\uD920');
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");
@@ -999,7 +1030,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteStartAttribute("attr", "");
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");
@@ -1027,7 +1061,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteStartAttribute("attr", "");
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");
@@ -1053,7 +1090,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteCData("Invalid");
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");
@@ -1080,7 +1120,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteCData("Invalid");
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");
@@ -1106,7 +1149,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteStartDocument();
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");
@@ -1132,7 +1178,10 @@ namespace CoreXml.Test.XLinq
                             {
                                 w.WriteDocType("Test", null, null, "");
                             }
-                            catch (InvalidOperationException) { return; }
+                            catch (InvalidOperationException)
+                            {
+                                return;
+                            }
                         }
                     }
                     TestLog.WriteLine("Did not throw exception");

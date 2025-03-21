@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,57 +31,65 @@
 using System;
 using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    [ConfigurationCollection(
+        typeof(BufferModeSettings),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    public sealed class BufferModesCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static BufferModesCollection()
+        {
+            properties = new ConfigurationPropertyCollection();
+        }
 
-	[ConfigurationCollection (typeof (BufferModeSettings), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class BufferModesCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection properties;
+        public void Add(BufferModeSettings bufferModeSettings)
+        {
+            BaseAdd(bufferModeSettings);
+        }
 
-		static BufferModesCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		public void Add (BufferModeSettings bufferModeSettings)
-		{
-			BaseAdd (bufferModeSettings);
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new BufferModeSettings();
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((BufferModeSettings)element).Name;
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new BufferModeSettings();
-		}
+        public void Remove(string s)
+        {
+            BaseRemove(s);
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((BufferModeSettings)element).Name;
-		}
+        public BufferModeSettings this[int index]
+        {
+            get { return (BufferModeSettings)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
+        }
 
-		public void Remove (string s)
-		{
-			BaseRemove (s);
-		}
+        public new BufferModeSettings this[string key]
+        {
+            get { return (BufferModeSettings)BaseGet(key); }
+        }
 
-		public BufferModeSettings this [int index] {
-			get { return (BufferModeSettings)BaseGet (index); }
-			set {  if (BaseGet(index) != null)  BaseRemoveAt(index);  BaseAdd(index, value); }
-		}
-
-		public new BufferModeSettings this [string key] {
-			get { return (BufferModeSettings) BaseGet (key); }
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
-
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

@@ -8,6 +8,7 @@ namespace System.ServiceModel.Channels
 
     public interface IChannel : ICommunicationObject
     {
-        T GetProperty<T>() where T : class;
+        T GetProperty<T>()
+            where T : class;
     }
 }

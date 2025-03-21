@@ -19,7 +19,10 @@ namespace System.Text.Json.Nodes.Tests
             Assert.Equal("Hello!", jObject["MyString"].GetValue<string>());
             Assert.Null(jObject["MyNull"]);
             Assert.False(jObject["MyBoolean"].GetValue<bool>());
-            Assert.Equal("ed957609-cdfe-412f-88c1-02daca1b4f51", jObject["MyGuid"].GetValue<string>());
+            Assert.Equal(
+                "ed957609-cdfe-412f-88c1-02daca1b4f51",
+                jObject["MyGuid"].GetValue<string>()
+            );
             Assert.IsType<JsonArray>(jObject["MyArray"]);
             Assert.IsType<JsonObject>(jObject["MyObject"]);
 
@@ -42,14 +45,16 @@ namespace System.Text.Json.Nodes.Tests
             Assert.Equal(2, dt.Minute);
             Assert.Equal(3, dt.Second);
 
-            DateTimeOffset dtOffset = JsonNode.Parse("\"2020-07-08T01:02:03+01:15\"").GetValue<DateTimeOffset>();
+            DateTimeOffset dtOffset = JsonNode
+                .Parse("\"2020-07-08T01:02:03+01:15\"")
+                .GetValue<DateTimeOffset>();
             Assert.Equal(2020, dtOffset.Year);
             Assert.Equal(7, dtOffset.Month);
             Assert.Equal(8, dtOffset.Day);
             Assert.Equal(1, dtOffset.Hour);
             Assert.Equal(2, dtOffset.Minute);
             Assert.Equal(3, dtOffset.Second);
-            Assert.Equal(new TimeSpan(1,15,0), dtOffset.Offset);
+            Assert.Equal(new TimeSpan(1, 15, 0), dtOffset.Offset);
         }
 
         [Fact]
@@ -78,7 +83,10 @@ namespace System.Text.Json.Nodes.Tests
             Assert.Equal("2020-07-08T00:00:00", node.GetValue<string>());
 
             Assert.True(jObject.TryGetPropertyValue("MyGuid", out node));
-            Assert.Equal("ed957609-cdfe-412f-88c1-02daca1b4f51", node.AsValue().GetValue<Guid>().ToString());
+            Assert.Equal(
+                "ed957609-cdfe-412f-88c1-02daca1b4f51",
+                node.AsValue().GetValue<Guid>().ToString()
+            );
 
             Assert.True(jObject.TryGetPropertyValue("MyObject", out node));
             Assert.IsType<JsonObject>(node);
@@ -100,9 +108,21 @@ namespace System.Text.Json.Nodes.Tests
             Assert.True(JsonNode.Parse("42").AsValue().TryGetValue(out decimal? _));
             Assert.True(JsonNode.Parse("42").AsValue().TryGetValue(out float? _));
             Assert.True(JsonNode.Parse("42").AsValue().TryGetValue(out double? _));
-            Assert.True(JsonNode.Parse("\"2020-07-08T00:00:00\"").AsValue().TryGetValue(out DateTime? _));
-            Assert.True(JsonNode.Parse("\"ed957609-cdfe-412f-88c1-02daca1b4f51\"").AsValue().TryGetValue(out Guid? _));
-            Assert.True(JsonNode.Parse("\"2020-07-08T01:02:03+01:15\"").AsValue().TryGetValue(out DateTimeOffset? _));
+            Assert.True(
+                JsonNode.Parse("\"2020-07-08T00:00:00\"").AsValue().TryGetValue(out DateTime? _)
+            );
+            Assert.True(
+                JsonNode
+                    .Parse("\"ed957609-cdfe-412f-88c1-02daca1b4f51\"")
+                    .AsValue()
+                    .TryGetValue(out Guid? _)
+            );
+            Assert.True(
+                JsonNode
+                    .Parse("\"2020-07-08T01:02:03+01:15\"")
+                    .AsValue()
+                    .TryGetValue(out DateTimeOffset? _)
+            );
 
             JsonValue? jValue = JsonNode.Parse("\"Hello!\"").AsValue();
             Assert.False(jValue.TryGetValue(out int _));
@@ -128,7 +148,9 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static async Task NullReference_Fail()
         {
-            Assert.Throws<ArgumentNullException>(() => JsonSerializer.Deserialize<JsonNode>((string)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                JsonSerializer.Deserialize<JsonNode>((string)null)
+            );
             Assert.Throws<ArgumentNullException>(() => JsonNode.Parse((string)null));
             Assert.Throws<ArgumentNullException>(() => JsonNode.Parse((Stream)null));
             await Assert.ThrowsAsync<ArgumentNullException>(() => JsonNode.ParseAsync(null));
@@ -153,21 +175,37 @@ namespace System.Text.Json.Nodes.Tests
         {
             // Use reflection to inspect the internal state of the 3 fields that hold values.
             // There is not another way to verify, and using a debug watch causes nodes to be created.
-            FieldInfo elementField = typeof(JsonObject).GetField("_jsonElement", BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo elementField = typeof(JsonObject).GetField(
+                "_jsonElement",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             Assert.NotNull(elementField);
 
-            FieldInfo jsonDictionaryField = typeof(JsonObject).GetField("_dictionary", BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo jsonDictionaryField = typeof(JsonObject).GetField(
+                "_dictionary",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             Assert.NotNull(jsonDictionaryField);
 
-            Type jsonPropertyDictionaryType = typeof(JsonObject).Assembly.GetType("System.Text.Json.JsonPropertyDictionary`1");
+            Type jsonPropertyDictionaryType = typeof(JsonObject).Assembly.GetType(
+                "System.Text.Json.JsonPropertyDictionary`1"
+            );
             Assert.NotNull(jsonPropertyDictionaryType);
 
-            jsonPropertyDictionaryType = jsonPropertyDictionaryType.MakeGenericType(new Type[] { typeof(JsonNode) });
+            jsonPropertyDictionaryType = jsonPropertyDictionaryType.MakeGenericType(
+                new Type[] { typeof(JsonNode) }
+            );
 
-            FieldInfo listField = jsonPropertyDictionaryType.GetField("_propertyList", BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo listField = jsonPropertyDictionaryType.GetField(
+                "_propertyList",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             Assert.NotNull(listField);
 
-            FieldInfo dictionaryField = jsonPropertyDictionaryType.GetField("_propertyDictionary", BindingFlags.Instance | BindingFlags.NonPublic);
+            FieldInfo dictionaryField = jsonPropertyDictionaryType.GetField(
+                "_propertyDictionary",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            );
             Assert.NotNull(dictionaryField);
 
             using (MemoryStream stream = new MemoryStream(SimpleTestClass.s_data))
@@ -236,12 +274,11 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static async Task ReadSimpleObjectWithTrailingTrivia()
         {
-            byte[] data = Encoding.UTF8.GetBytes(SimpleTestClass.s_json + " /* Multi\r\nLine Comment */\t");
+            byte[] data = Encoding.UTF8.GetBytes(
+                SimpleTestClass.s_json + " /* Multi\r\nLine Comment */\t"
+            );
 
-            var options = new JsonDocumentOptions
-            {
-                CommentHandling = JsonCommentHandling.Skip
-            };
+            var options = new JsonDocumentOptions { CommentHandling = JsonCommentHandling.Skip };
 
             using (MemoryStream stream = new MemoryStream(data))
             {
@@ -285,26 +322,29 @@ namespace System.Text.Json.Nodes.Tests
         [Fact]
         public static void ParseThenEdit()
         {
-            const string Expected = "{\"MyString\":null,\"Node\":42,\"Array\":[43],\"Value\":44,\"IntValue\":45,\"Object\":{\"Property\":46}}";
+            const string Expected =
+                "{\"MyString\":null,\"Node\":42,\"Array\":[43],\"Value\":44,\"IntValue\":45,\"Object\":{\"Property\":46}}";
 
             JsonNode node = JsonNode.Parse(Expected);
             Assert.Equal(Expected, node.ToJsonString());
 
             // Change a primitive
             node["IntValue"] = 1;
-            const string ExpectedAfterEdit1 = "{\"MyString\":null,\"Node\":42,\"Array\":[43],\"Value\":44,\"IntValue\":1,\"Object\":{\"Property\":46}}";
+            const string ExpectedAfterEdit1 =
+                "{\"MyString\":null,\"Node\":42,\"Array\":[43],\"Value\":44,\"IntValue\":1,\"Object\":{\"Property\":46}}";
             Assert.Equal(ExpectedAfterEdit1, node.ToJsonString());
 
             // Change element
             node["Array"][0] = 2;
-            const string ExpectedAfterEdit2 = "{\"MyString\":null,\"Node\":42,\"Array\":[2],\"Value\":44,\"IntValue\":1,\"Object\":{\"Property\":46}}";
+            const string ExpectedAfterEdit2 =
+                "{\"MyString\":null,\"Node\":42,\"Array\":[2],\"Value\":44,\"IntValue\":1,\"Object\":{\"Property\":46}}";
             Assert.Equal(ExpectedAfterEdit2, node.ToJsonString());
 
             // Change property
             node["MyString"] = "3";
-            const string ExpectedAfterEdit3 = "{\"MyString\":\"3\",\"Node\":42,\"Array\":[2],\"Value\":44,\"IntValue\":1,\"Object\":{\"Property\":46}}";
+            const string ExpectedAfterEdit3 =
+                "{\"MyString\":\"3\",\"Node\":42,\"Array\":[2],\"Value\":44,\"IntValue\":1,\"Object\":{\"Property\":46}}";
             Assert.Equal(ExpectedAfterEdit3, node.ToJsonString());
         }
     }
 }
-

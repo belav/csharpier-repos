@@ -13,7 +13,7 @@ namespace System.Activities.Statements.Tracking
     using System.Diagnostics;
     using System.Runtime;
     using System.Runtime.Serialization;
-    
+
     /// <summary>
     /// Represents a tracking record that is created when an state machine instance transitions to a state.
     /// </summary>
@@ -21,7 +21,8 @@ namespace System.Activities.Statements.Tracking
     [DataContract]
     public sealed class StateMachineStateRecord : CustomTrackingRecord
     {
-        internal static readonly string StateMachineStateRecordName = "System.Activities.Statements.StateMachine";
+        internal static readonly string StateMachineStateRecordName =
+            "System.Activities.Statements.StateMachine";
 
         private const string StateKey = "currentstate";
         private const string StateMachineKey = "stateMachine";
@@ -30,30 +31,20 @@ namespace System.Activities.Statements.Tracking
         /// Initializes a new instance of the StateMachineStateRecord class.
         /// </summary>
         public StateMachineStateRecord()
-            : this(StateMachineStateRecordName)
-        {
-        }
+            : this(StateMachineStateRecordName) { }
 
         // Disable the user from arbitrary specifying a name for StateMachine specific tracking record.
         internal StateMachineStateRecord(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         internal StateMachineStateRecord(string name, TraceLevel level)
-            : base(name, level)
-        {
-        } 
+            : base(name, level) { }
 
         internal StateMachineStateRecord(Guid instanceId, string name, TraceLevel level)
-            : base(instanceId, name, level)
-        {
-        }
+            : base(instanceId, name, level) { }
 
         private StateMachineStateRecord(StateMachineStateRecord record)
-            : base(record)
-        {
-        }
+            : base(record) { }
 
         /// <summary>
         /// Gets the display name of the State Machine activity that contains the state.
@@ -69,11 +60,7 @@ namespace System.Activities.Statements.Tracking
 
                 return string.Empty;
             }
-
-            internal set
-            {
-                Data[StateMachineKey] = value;
-            }
+            internal set { Data[StateMachineKey] = value; }
         }
 
         /// <summary>
@@ -90,12 +77,8 @@ namespace System.Activities.Statements.Tracking
                 }
 
                 return string.Empty;
-            }       
-            
-            internal set
-            {
-                Data[StateKey] = value;
             }
+            internal set { Data[StateKey] = value; }
         }
 
         /// <summary>

@@ -31,67 +31,51 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntelliSense.Completion
         }
 
         [Fact]
-        public void Test1()
-            => VerifyMultipleContexts(@"((a, b) $$");
+        public void Test1() => VerifyMultipleContexts(@"((a, b) $$");
 
         [Fact]
-        public void Test2()
-            => VerifyMultipleContexts(@"(xyz, (a, b) $$");
+        public void Test2() => VerifyMultipleContexts(@"(xyz, (a, b) $$");
 
         [Fact]
-        public void Test3()
-            => VerifyMultipleContexts(@"(a $$");
+        public void Test3() => VerifyMultipleContexts(@"(a $$");
 
         [Fact]
-        public void Test4()
-            => VerifyMultipleContexts(@"(a, b $$");
+        public void Test4() => VerifyMultipleContexts(@"(a, b $$");
 
         [Fact]
-        public void Test5()
-            => VerifyMultipleContexts(@"($$");
+        public void Test5() => VerifyMultipleContexts(@"($$");
 
         [Fact]
-        public void Test6()
-            => VerifyMultipleContexts(@"(a, $$");
+        public void Test6() => VerifyMultipleContexts(@"(a, $$");
 
         [Fact]
-        public void Test7()
-            => VerifyMultipleContexts(@"(a.b $$");
+        public void Test7() => VerifyMultipleContexts(@"(a.b $$");
 
         [Fact]
-        public void Test8()
-            => VerifyMultipleContexts(@"(a, a.b $$");
+        public void Test8() => VerifyMultipleContexts(@"(a, a.b $$");
 
         [Fact]
-        public void Test9()
-            => VerifyTrue(@"class C : I<($$");
+        public void Test9() => VerifyTrue(@"class C : I<($$");
 
         [Fact]
-        public void Test10()
-            => VerifyTrue(@"class C : I<(a, $$");
+        public void Test10() => VerifyTrue(@"class C : I<(a, $$");
 
         [Fact]
-        public void Test11()
-            => VerifyTrue(AddInsideMethod(@"(var $$)"));
+        public void Test11() => VerifyTrue(AddInsideMethod(@"(var $$)"));
 
         [Fact]
-        public void Test12()
-            => VerifyTrue(AddInsideMethod(@"(var a, var $$)"));
+        public void Test12() => VerifyTrue(AddInsideMethod(@"(var a, var $$)"));
 
         [Fact]
-        public void Test13()
-            => VerifyTrue(AddInsideMethod(@"var str = (($$)items) as string;"));
+        public void Test13() => VerifyTrue(AddInsideMethod(@"var str = (($$)items) as string;"));
 
         [Fact]
-        public void False1()
-            => VerifyFalse(@"$$");
+        public void False1() => VerifyFalse(@"$$");
 
         [Fact]
-        public void False2()
-            => VerifyFalse(AddInsideMethod(@"(int) $$"));
+        public void False2() => VerifyFalse(AddInsideMethod(@"(int) $$"));
 
         [Fact]
-        public void False3()
-            => VerifyFalse(AddInsideMethod(@"(Goo()) $$"));
+        public void False3() => VerifyFalse(AddInsideMethod(@"(Goo()) $$"));
     }
 }

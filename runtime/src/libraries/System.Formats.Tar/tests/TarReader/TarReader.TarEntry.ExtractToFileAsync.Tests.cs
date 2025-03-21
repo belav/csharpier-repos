@@ -14,7 +14,11 @@ namespace System.Formats.Tar.Tests
         public async Task ExtractEntriesWithSlashDotPrefix_Async()
         {
             using (TempDirectory root = new TempDirectory())
-            await using (MemoryStream archiveStream = GetStrangeTarMemoryStream("prefixDotSlashAndCurrentFolderEntry"))
+            await using (
+                MemoryStream archiveStream = GetStrangeTarMemoryStream(
+                    "prefixDotSlashAndCurrentFolderEntry"
+                )
+            )
             await using (TarReader reader = new TarReader(archiveStream, leaveOpen: false))
             {
                 string rootPath = Path.TrimEndingDirectorySeparator(root.Path);
@@ -25,11 +29,16 @@ namespace System.Formats.Tar.Tests
                     Assert.StartsWith("./", entry.Name);
                     // Normalize the path (remove redundant segments), remove trailing separators
                     // this is so the first entry can be skipped if it's the same as the root directory
-                    string entryPath = Path.TrimEndingDirectorySeparator(Path.GetFullPath(Path.Join(rootPath, entry.Name)));
+                    string entryPath = Path.TrimEndingDirectorySeparator(
+                        Path.GetFullPath(Path.Join(rootPath, entry.Name))
+                    );
                     if (entryPath != rootPath)
                     {
                         await entry.ExtractToFileAsync(entryPath, overwrite: true);
-                        Assert.True(Path.Exists(entryPath), $"Entry was not extracted: {entryPath}");
+                        Assert.True(
+                            Path.Exists(entryPath),
+                            $"Entry was not extracted: {entryPath}"
+                        );
                     }
                 }
             }

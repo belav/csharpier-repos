@@ -5,9 +5,8 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Xunit;
-
 using LoaderLinkTest.Shared;
+using Xunit;
 
 namespace LoaderLinkTest
 {
@@ -17,10 +16,17 @@ namespace LoaderLinkTest
         public static void EnsureTypesLinked() // https://github.com/dotnet/runtime/issues/42207
         {
             string parentDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            byte[] bytes = File.ReadAllBytes(Path.Combine(parentDir != null ? parentDir : "/", "LoaderLinkTest.Dynamic.dll"));
+            byte[] bytes = File.ReadAllBytes(
+                Path.Combine(parentDir != null ? parentDir : "/", "LoaderLinkTest.Dynamic.dll")
+            );
             Assembly asm = Assembly.Load(bytes);
-            var dynamicType = asm.GetType("LoaderLinkTest.Dynamic.SharedInterfaceImplementation", true);
-            var sharedInterface = dynamicType.GetInterfaces().First(e => e.Name == nameof(ISharedInterface));
+            var dynamicType = asm.GetType(
+                "LoaderLinkTest.Dynamic.SharedInterfaceImplementation",
+                true
+            );
+            var sharedInterface = dynamicType
+                .GetInterfaces()
+                .First(e => e.Name == nameof(ISharedInterface));
             Assert.Equal(typeof(ISharedInterface).Assembly, sharedInterface.Assembly);
             Assert.Equal(typeof(ISharedInterface), sharedInterface);
 

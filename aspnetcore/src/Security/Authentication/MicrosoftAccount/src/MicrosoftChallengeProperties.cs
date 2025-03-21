@@ -35,24 +35,24 @@ public class MicrosoftChallengeProperties : OAuthChallengeProperties
     /// <summary>
     /// Initializes a new instance for <see cref="MicrosoftChallengeProperties"/>.
     /// </summary>
-    public MicrosoftChallengeProperties()
-    { }
+    public MicrosoftChallengeProperties() { }
 
     /// <summary>
     /// Initializes a new instance for <see cref="MicrosoftChallengeProperties"/>.
     /// </summary>
     /// <inheritdoc />
     public MicrosoftChallengeProperties(IDictionary<string, string?> items)
-        : base(items)
-    { }
+        : base(items) { }
 
     /// <summary>
     /// Initializes a new instance for <see cref="MicrosoftChallengeProperties"/>.
     /// </summary>
     /// <inheritdoc />
-    public MicrosoftChallengeProperties(IDictionary<string, string?> items, IDictionary<string, object?> parameters)
-        : base(items, parameters)
-    { }
+    public MicrosoftChallengeProperties(
+        IDictionary<string, string?> items,
+        IDictionary<string, object?> parameters
+    )
+        : base(items, parameters) { }
 
     /// <summary>
     /// Gets or sets the value for the <c>response_mode</c> parameter used for a challenge request. The response mode specifies the method

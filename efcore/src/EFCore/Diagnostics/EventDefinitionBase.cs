@@ -25,7 +25,8 @@ public abstract class EventDefinitionBase
         ILoggingOptions loggingOptions,
         EventId eventId,
         LogLevel level,
-        string eventIdCode)
+        string eventIdCode
+    )
     {
         EventId = eventId;
         EventIdCode = eventIdCode;
@@ -41,11 +42,14 @@ public abstract class EventDefinitionBase
             }
 
             var behavior = warningsConfiguration.GetBehavior(eventId);
-            WarningBehavior = behavior
-                ?? (level == LogLevel.Warning
+            WarningBehavior =
+                behavior
+                ?? (
+                    level == LogLevel.Warning
                     && warningsConfiguration.DefaultBehavior == WarningBehavior.Throw
                         ? WarningBehavior.Throw
-                        : WarningBehavior.Log);
+                        : WarningBehavior.Log
+                );
         }
         else
         {
@@ -58,12 +62,20 @@ public abstract class EventDefinitionBase
     /// <summary>
     ///     The <see cref="EventId" />.
     /// </summary>
-    public virtual EventId EventId { [DebuggerStepThrough] get; }
+    public virtual EventId EventId
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     The <see cref="LogLevel" /> at which the event will be logged.
     /// </summary>
-    public virtual LogLevel Level { [DebuggerStepThrough] get; }
+    public virtual LogLevel Level
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     A string representing the code that should be passed to <see cref="DbContextOptionsBuilder.ConfigureWarnings" /> to suppress this event
@@ -75,9 +87,10 @@ public abstract class EventDefinitionBase
     ///     Returns a warning-as-error exception wrapping the given message for this event.
     /// </summary>
     /// <param name="message">The message to wrap.</param>
-    protected virtual Exception WarningAsError(string message)
-        => new InvalidOperationException(
-            CoreStrings.WarningAsErrorTemplate(EventId.ToString(), message, EventIdCode));
+    protected virtual Exception WarningAsError(string message) =>
+        new InvalidOperationException(
+            CoreStrings.WarningAsErrorTemplate(EventId.ToString(), message, EventIdCode)
+        );
 
     /// <summary>
     ///     The configured <see cref="WarningBehavior" />.
@@ -99,13 +112,11 @@ public abstract class EventDefinitionBase
             EventId eventId,
             TState state,
             Exception? exception,
-            Func<TState, Exception?, string> formatter)
-            => Message = formatter(state, exception);
+            Func<TState, Exception?, string> formatter
+        ) => Message = formatter(state, exception);
 
-        bool ILogger.IsEnabled(LogLevel logLevel)
-            => true;
+        bool ILogger.IsEnabled(LogLevel logLevel) => true;
 
-        IDisposable ILogger.BeginScope<TState>(TState state)
-            => throw new NotSupportedException();
+        IDisposable ILogger.BeginScope<TState>(TState state) => throw new NotSupportedException();
     }
 }

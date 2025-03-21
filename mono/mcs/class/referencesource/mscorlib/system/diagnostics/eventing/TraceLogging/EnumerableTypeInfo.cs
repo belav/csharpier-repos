@@ -21,16 +21,15 @@ namespace System.Diagnostics.Tracing
         public override void WriteMetadata(
             TraceLoggingMetadataCollector collector,
             string name,
-            EventFieldFormat format)
+            EventFieldFormat format
+        )
         {
             collector.BeginBufferedArray();
             this.elementInfo.WriteMetadata(collector, name, format);
             collector.EndBufferedArray();
         }
 
-        public override void WriteData(
-            TraceLoggingDataCollector collector,
-            ref IterableType value)
+        public override void WriteData(TraceLoggingDataCollector collector, ref IterableType value)
         {
             var bookmark = collector.BeginBufferedArray();
 

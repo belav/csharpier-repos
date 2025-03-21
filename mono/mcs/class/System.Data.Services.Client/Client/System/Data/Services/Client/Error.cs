@@ -1,14 +1,13 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
-
 
 namespace System.Data.Services.Client
 {
@@ -26,7 +25,10 @@ namespace System.Data.Services.Client
             return Trace(new InvalidOperationException(message));
         }
 
-        internal static InvalidOperationException InvalidOperation(string message, Exception innerException)
+        internal static InvalidOperationException InvalidOperation(
+            string message,
+            Exception innerException
+        )
         {
             return Trace(new InvalidOperationException(message, innerException));
         }
@@ -41,7 +43,11 @@ namespace System.Data.Services.Client
             throw Trace(new ObjectDisposedException(type.ToString()));
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801", Justification = "errorCode ignored for code sharing")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801",
+            Justification = "errorCode ignored for code sharing"
+        )]
         internal static InvalidOperationException HttpHeaderFailure(int errorCode, string message)
         {
             return Trace(new InvalidOperationException(message));
@@ -57,7 +63,9 @@ namespace System.Data.Services.Client
             return InvalidOperation(Strings.BatchStream_ContentExpected(state.ToString()));
         }
 
-        internal static InvalidOperationException BatchStreamContentUnexpected(BatchStreamState state)
+        internal static InvalidOperationException BatchStreamContentUnexpected(
+            BatchStreamState state
+        )
         {
             return InvalidOperation(Strings.BatchStream_ContentUnexpected(state.ToString()));
         }
@@ -82,14 +90,20 @@ namespace System.Data.Services.Client
             return InvalidOperation(Strings.BatchStream_MissingEndChangesetDelimiter);
         }
 
-        internal static InvalidOperationException BatchStreamInvalidHeaderValueSpecified(string headerValue)
+        internal static InvalidOperationException BatchStreamInvalidHeaderValueSpecified(
+            string headerValue
+        )
         {
             return InvalidOperation(Strings.BatchStream_InvalidHeaderValueSpecified(headerValue));
         }
 
-        internal static InvalidOperationException BatchStreamInvalidContentLengthSpecified(string contentLength)
+        internal static InvalidOperationException BatchStreamInvalidContentLengthSpecified(
+            string contentLength
+        )
         {
-            return InvalidOperation(Strings.BatchStream_InvalidContentLengthSpecified(contentLength));
+            return InvalidOperation(
+                Strings.BatchStream_InvalidContentLengthSpecified(contentLength)
+            );
         }
 
         internal static InvalidOperationException BatchStreamOnlyGETOperationsCanBeSpecifiedInBatch()
@@ -102,7 +116,9 @@ namespace System.Data.Services.Client
             return InvalidOperation(Strings.BatchStream_InvalidOperationHeaderSpecified);
         }
 
-        internal static InvalidOperationException BatchStreamInvalidHttpMethodName(string methodName)
+        internal static InvalidOperationException BatchStreamInvalidHttpMethodName(
+            string methodName
+        )
         {
             return InvalidOperation(Strings.BatchStream_InvalidHttpMethodName(methodName));
         }
@@ -117,7 +133,9 @@ namespace System.Data.Services.Client
             return InvalidOperation(Strings.BatchStream_InternalBufferRequestTooSmall);
         }
 
-        internal static NotSupportedException MethodNotSupported(System.Linq.Expressions.MethodCallExpression m)
+        internal static NotSupportedException MethodNotSupported(
+            System.Linq.Expressions.MethodCallExpression m
+        )
         {
             return Error.NotSupported(Strings.ALinq_MethodNotSupported(m.Method.Name));
         }
@@ -132,39 +150,75 @@ namespace System.Data.Services.Client
             throw InvalidOperation(Strings.Batch_ExpectedResponse((int)value));
         }
 
-        internal static InvalidOperationException BatchStreamInvalidMethodHeaderSpecified(string header)
+        internal static InvalidOperationException BatchStreamInvalidMethodHeaderSpecified(
+            string header
+        )
         {
             return InvalidOperation(Strings.BatchStream_InvalidMethodHeaderSpecified(header));
         }
 
-        internal static InvalidOperationException BatchStreamInvalidHttpVersionSpecified(string actualVersion, string expectedVersion)
+        internal static InvalidOperationException BatchStreamInvalidHttpVersionSpecified(
+            string actualVersion,
+            string expectedVersion
+        )
         {
-            return InvalidOperation(Strings.BatchStream_InvalidHttpVersionSpecified(actualVersion, expectedVersion));
+            return InvalidOperation(
+                Strings.BatchStream_InvalidHttpVersionSpecified(actualVersion, expectedVersion)
+            );
         }
 
-        internal static InvalidOperationException BatchStreamInvalidNumberOfHeadersAtOperationStart(string header1, string header2)
+        internal static InvalidOperationException BatchStreamInvalidNumberOfHeadersAtOperationStart(
+            string header1,
+            string header2
+        )
         {
-            return InvalidOperation(Strings.BatchStream_InvalidNumberOfHeadersAtOperationStart(header1, header2));
+            return InvalidOperation(
+                Strings.BatchStream_InvalidNumberOfHeadersAtOperationStart(header1, header2)
+            );
         }
 
-        internal static InvalidOperationException BatchStreamMissingOrInvalidContentEncodingHeader(string headerName, string headerValue)
+        internal static InvalidOperationException BatchStreamMissingOrInvalidContentEncodingHeader(
+            string headerName,
+            string headerValue
+        )
         {
-            return InvalidOperation(Strings.BatchStream_MissingOrInvalidContentEncodingHeader(headerName, headerValue));
+            return InvalidOperation(
+                Strings.BatchStream_MissingOrInvalidContentEncodingHeader(headerName, headerValue)
+            );
         }
 
-        internal static InvalidOperationException BatchStreamInvalidNumberOfHeadersAtChangeSetStart(string header1, string header2)
+        internal static InvalidOperationException BatchStreamInvalidNumberOfHeadersAtChangeSetStart(
+            string header1,
+            string header2
+        )
         {
-            return InvalidOperation(Strings.BatchStream_InvalidNumberOfHeadersAtChangeSetStart(header1, header2));
+            return InvalidOperation(
+                Strings.BatchStream_InvalidNumberOfHeadersAtChangeSetStart(header1, header2)
+            );
         }
 
-        internal static InvalidOperationException BatchStreamMissingContentTypeHeader(string headerName)
+        internal static InvalidOperationException BatchStreamMissingContentTypeHeader(
+            string headerName
+        )
         {
             return InvalidOperation(Strings.BatchStream_MissingContentTypeHeader(headerName));
         }
 
-        internal static InvalidOperationException BatchStreamInvalidContentTypeSpecified(string headerName, string headerValue, string mime1, string mime2)
+        internal static InvalidOperationException BatchStreamInvalidContentTypeSpecified(
+            string headerName,
+            string headerValue,
+            string mime1,
+            string mime2
+        )
         {
-            return InvalidOperation(Strings.BatchStream_InvalidContentTypeSpecified(headerName, headerValue, mime1, mime2));
+            return InvalidOperation(
+                Strings.BatchStream_InvalidContentTypeSpecified(
+                    headerName,
+                    headerValue,
+                    mime1,
+                    mime2
+                )
+            );
         }
 
         internal static InvalidOperationException InternalError(InternalError value)
@@ -177,7 +231,8 @@ namespace System.Data.Services.Client
             throw InternalError(value);
         }
 
-        private static T Trace<T>(T exception) where T : Exception
+        private static T Trace<T>(T exception)
+            where T : Exception
         {
             return exception;
         }

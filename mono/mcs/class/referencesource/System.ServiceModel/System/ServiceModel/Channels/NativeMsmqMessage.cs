@@ -5,12 +5,12 @@ namespace System.ServiceModel.Channels
 {
     using System;
     using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Security;
+    using System.ServiceModel.Diagnostics;
     using System.Text;
     using System.Threading;
-    using System.Runtime.InteropServices;
-    using System.Security;
-    using System.Runtime.Serialization;
-    using System.ServiceModel.Diagnostics;
     using Microsoft.Win32.SafeHandles;
 
     abstract class NativeMsmqMessage : IDisposable
@@ -42,9 +42,7 @@ namespace System.ServiceModel.Channels
             Dispose(false);
         }
 
-        public virtual void GrowBuffers()
-        {
-        }
+        public virtual void GrowBuffers() { }
 
         public object[] GetBuffersForAsync()
         {
@@ -154,17 +152,11 @@ namespace System.ServiceModel.Channels
                 get { return null; }
             }
 
-            public virtual void Pin()
-            {
-            }
+            public virtual void Pin() { }
 
-            public virtual void Unpin()
-            {
-            }
+            public virtual void Unpin() { }
 
-            public virtual void Dispose()
-            {
-            }
+            public virtual void Dispose() { }
 
             protected UnsafeNativeMethods.MQPROPVARIANT[] Variants
             {
@@ -175,9 +167,7 @@ namespace System.ServiceModel.Channels
         public class ByteProperty : MsmqProperty
         {
             public ByteProperty(NativeMsmqMessage message, int id)
-                : base(message, id, UnsafeNativeMethods.VT_UI1)
-            {
-            }
+                : base(message, id, UnsafeNativeMethods.VT_UI1) { }
 
             public ByteProperty(NativeMsmqMessage message, int id, byte value)
                 : this(message, id)
@@ -187,23 +177,15 @@ namespace System.ServiceModel.Channels
 
             public byte Value
             {
-                get
-                {
-                    return this.Variants[this.Index].byteValue;
-                }
-                set
-                {
-                    this.Variants[this.Index].byteValue = value;
-                }
+                get { return this.Variants[this.Index].byteValue; }
+                set { this.Variants[this.Index].byteValue = value; }
             }
         }
 
         public class ShortProperty : MsmqProperty
         {
             public ShortProperty(NativeMsmqMessage message, int id)
-                : base(message, id, UnsafeNativeMethods.VT_UI2)
-            {
-            }
+                : base(message, id, UnsafeNativeMethods.VT_UI2) { }
 
             public ShortProperty(NativeMsmqMessage message, int id, short value)
                 : this(message, id)
@@ -213,24 +195,15 @@ namespace System.ServiceModel.Channels
 
             public short Value
             {
-                get
-                {
-                    return this.Variants[this.Index].shortValue;
-                }
-                set
-                {
-                    this.Variants[this.Index].shortValue = value;
-                }
+                get { return this.Variants[this.Index].shortValue; }
+                set { this.Variants[this.Index].shortValue = value; }
             }
         }
-
 
         public class BooleanProperty : MsmqProperty
         {
             public BooleanProperty(NativeMsmqMessage message, int id)
-                : base(message, id, UnsafeNativeMethods.VT_BOOL)
-            {
-            }
+                : base(message, id, UnsafeNativeMethods.VT_BOOL) { }
 
             public BooleanProperty(NativeMsmqMessage message, int id, bool value)
                 : this(message, id)
@@ -240,23 +213,15 @@ namespace System.ServiceModel.Channels
 
             public bool Value
             {
-                get
-                {
-                    return this.Variants[this.Index].shortValue != 0;
-                }
-                set
-                {
-                    this.Variants[this.Index].shortValue = value ? (short)-1 : (short)0;
-                }
+                get { return this.Variants[this.Index].shortValue != 0; }
+                set { this.Variants[this.Index].shortValue = value ? (short)-1 : (short)0; }
             }
         }
 
         public class IntProperty : MsmqProperty
         {
             public IntProperty(NativeMsmqMessage message, int id)
-                : base(message, id, UnsafeNativeMethods.VT_UI4)
-            {
-            }
+                : base(message, id, UnsafeNativeMethods.VT_UI4) { }
 
             public IntProperty(NativeMsmqMessage message, int id, int value)
                 : this(message, id)
@@ -266,23 +231,15 @@ namespace System.ServiceModel.Channels
 
             public int Value
             {
-                get
-                {
-                    return this.Variants[this.Index].intValue;
-                }
-                set
-                {
-                    this.Variants[this.Index].intValue = value;
-                }
+                get { return this.Variants[this.Index].intValue; }
+                set { this.Variants[this.Index].intValue = value; }
             }
         }
 
         public class LongProperty : MsmqProperty
         {
             public LongProperty(NativeMsmqMessage message, int id)
-                : base(message, id, UnsafeNativeMethods.VT_UI8)
-            {
-            }
+                : base(message, id, UnsafeNativeMethods.VT_UI8) { }
 
             public LongProperty(NativeMsmqMessage message, int id, long value)
                 : this(message, id)
@@ -292,14 +249,8 @@ namespace System.ServiceModel.Channels
 
             public long Value
             {
-                get
-                {
-                    return this.Variants[this.Index].longValue;
-                }
-                set
-                {
-                    this.Variants[this.Index].longValue = value;
-                }
+                get { return this.Variants[this.Index].longValue; }
+                set { this.Variants[this.Index].longValue = value; }
             }
         }
 
@@ -394,24 +345,20 @@ namespace System.ServiceModel.Channels
 
             public int BufferLength
             {
-                get
-                {
-                    return this.Variants[this.Index].byteArrayValue.size;
-                }
+                get { return this.Variants[this.Index].byteArrayValue.size; }
                 set
                 {
                     if (value > this.buffer.Length)
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentOutOfRangeException("value")
+                        );
                     this.Variants[this.Index].byteArrayValue.size = value;
                 }
             }
 
             public byte[] Buffer
             {
-                get
-                {
-                    return this.buffer;
-                }
+                get { return this.buffer; }
             }
         }
 
@@ -529,12 +476,22 @@ namespace System.ServiceModel.Channels
         {
             string[] pieces = messageId.Split(new char[] { '\\' });
             if (pieces.Length != 2)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MsmqInvalidMessageId, messageId), "messageId"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.MsmqInvalidMessageId, messageId),
+                        "messageId"
+                    )
+                );
 
             Guid guid;
             if (!DiagnosticUtility.Utility.TryCreateGuid(pieces[0], out guid))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MsmqInvalidMessageId, messageId), "messageId"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.MsmqInvalidMessageId, messageId),
+                        "messageId"
+                    )
+                );
             }
 
             int integerId;
@@ -544,7 +501,12 @@ namespace System.ServiceModel.Channels
             }
             catch (FormatException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MsmqInvalidMessageId, messageId), "messageId"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.MsmqInvalidMessageId, messageId),
+                        "messageId"
+                    )
+                );
             }
 
             byte[] bytes = new byte[UnsafeNativeMethods.PROPID_M_MSGID_SIZE];
@@ -557,8 +519,7 @@ namespace System.ServiceModel.Channels
     class MsmqEmptyMessage : NativeMsmqMessage
     {
         public MsmqEmptyMessage()
-            : base(0)
-        { }
+            : base(0) { }
     }
 
     static class MsmqDuration
@@ -567,8 +528,9 @@ namespace System.ServiceModel.Channels
         {
             long totalSeconds = (long)timeSpan.TotalSeconds;
             if (totalSeconds > int.MaxValue)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(
-                                                                              SR.GetString(SR.MsmqTimeSpanTooLarge)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.MsmqTimeSpanTooLarge))
+                );
             return (int)totalSeconds;
         }
 

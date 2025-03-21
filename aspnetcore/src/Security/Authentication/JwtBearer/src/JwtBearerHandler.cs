@@ -24,17 +24,24 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
     /// </summary>
     /// <inheritdoc />
     [Obsolete("ISystemClock is obsolete, use TimeProvider on AuthenticationSchemeOptions instead.")]
-    public JwtBearerHandler(IOptionsMonitor<JwtBearerOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-        : base(options, logger, encoder, clock)
-    { }
+    public JwtBearerHandler(
+        IOptionsMonitor<JwtBearerOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    )
+        : base(options, logger, encoder, clock) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="JwtBearerHandler"/>.
     /// </summary>
     /// <inheritdoc />
-    public JwtBearerHandler(IOptionsMonitor<JwtBearerOptions> options, ILoggerFactory logger, UrlEncoder encoder)
-        : base(options, logger, encoder)
-    { }
+    public JwtBearerHandler(
+        IOptionsMonitor<JwtBearerOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder
+    )
+        : base(options, logger, encoder) { }
 
     /// <summary>
     /// The handler calls methods on the events which give the application control at certain points where processing is occurring.
@@ -47,7 +54,8 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
     }
 
     /// <inheritdoc />
-    protected override Task<object> CreateEventsAsync() => Task.FromResult<object>(new JwtBearerEvents());
+    protected override Task<object> CreateEventsAsync() =>
+        Task.FromResult<object>(new JwtBearerEvents());
 
     /// <summary>
     /// Searches the 'Authorization' header for a 'Bearer' token. If the 'Bearer' token is found, it is validated using <see cref="TokenValidationParameters"/> set in the options.
@@ -104,7 +112,10 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
                 {
                     try
                     {
-                        var tokenValidationResult = await tokenHandler.ValidateTokenAsync(token, tvp);
+                        var tokenValidationResult = await tokenHandler.ValidateTokenAsync(
+                            token,
+                            tvp
+                        );
                         if (tokenValidationResult.IsValid)
                         {
                             principal = new ClaimsPrincipal(tokenValidationResult.ClaimsIdentity);
@@ -114,7 +125,13 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
                         else
                         {
                             validationFailures ??= new List<Exception>(1);
-                            RecordTokenValidationError(tokenValidationResult.Exception ?? new SecurityTokenValidationException($"The TokenHandler: '{tokenHandler}', was unable to validate the Token."), validationFailures);
+                            RecordTokenValidationError(
+                                tokenValidationResult.Exception
+                                    ?? new SecurityTokenValidationException(
+                                        $"The TokenHandler: '{tokenHandler}', was unable to validate the Token."
+                                    ),
+                                validationFailures
+                            );
                         }
                     }
                     catch (Exception ex)
@@ -152,12 +169,16 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
 
                 var tokenValidatedContext = new TokenValidatedContext(Context, Scheme, Options)
                 {
-                    Principal = principal
+                    Principal = principal,
                 };
 
                 tokenValidatedContext.SecurityToken = validatedToken;
-                tokenValidatedContext.Properties.ExpiresUtc = GetSafeDateTime(validatedToken.ValidTo);
-                tokenValidatedContext.Properties.IssuedUtc = GetSafeDateTime(validatedToken.ValidFrom);
+                tokenValidatedContext.Properties.ExpiresUtc = GetSafeDateTime(
+                    validatedToken.ValidTo
+                );
+                tokenValidatedContext.Properties.IssuedUtc = GetSafeDateTime(
+                    validatedToken.ValidFrom
+                );
 
                 await Events.TokenValidated(tokenValidatedContext);
                 if (tokenValidatedContext.Result != null)
@@ -167,10 +188,12 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
 
                 if (Options.SaveToken)
                 {
-                    tokenValidatedContext.Properties.StoreTokens(new[]
-                    {
-                        new AuthenticationToken { Name = "access_token", Value = token }
-                    });
+                    tokenValidatedContext.Properties.StoreTokens(
+                        new[]
+                        {
+                            new AuthenticationToken { Name = "access_token", Value = token },
+                        }
+                    );
                 }
 
                 tokenValidatedContext.Success();
@@ -179,9 +202,16 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
 
             if (validationFailures != null)
             {
-                var authenticationFailedContext = new AuthenticationFailedContext(Context, Scheme, Options)
+                var authenticationFailedContext = new AuthenticationFailedContext(
+                    Context,
+                    Scheme,
+                    Options
+                )
                 {
-                    Exception = (validationFailures.Count == 1) ? validationFailures[0] : new AggregateException(validationFailures)
+                    Exception =
+                        (validationFailures.Count == 1)
+                            ? validationFailures[0]
+                            : new AggregateException(validationFailures),
                 };
 
                 await Events.AuthenticationFailed(authenticationFailedContext);
@@ -204,9 +234,13 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
         {
             Logger.ErrorProcessingMessage(ex);
 
-            var authenticationFailedContext = new AuthenticationFailedContext(Context, Scheme, Options)
+            var authenticationFailedContext = new AuthenticationFailedContext(
+                Context,
+                Scheme,
+                Options
+            )
             {
-                Exception = ex
+                Exception = ex,
             };
 
             await Events.AuthenticationFailed(authenticationFailedContext);
@@ -229,8 +263,11 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
 
         // Refresh the configuration for exceptions that may be caused by key rollovers. The user can also request a refresh in the event.
         // Refreshing on SecurityTokenSignatureKeyNotFound may be redundant if Last-Known-Good is enabled, it won't do much harm, most likely will be a nop.
-        if (Options.RefreshOnIssuerKeyNotFound && Options.ConfigurationManager != null
-            && exception is SecurityTokenSignatureKeyNotFoundException)
+        if (
+            Options.RefreshOnIssuerKeyNotFound
+            && Options.ConfigurationManager != null
+            && exception is SecurityTokenSignatureKeyNotFoundException
+        )
         {
             Options.ConfigurationManager.RequestRefresh();
         }
@@ -250,10 +287,22 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
             if (Options.ConfigurationManager != null)
             {
                 // GetConfigurationAsync has a time interval that must pass before new http request will be issued.
-                var configuration = await Options.ConfigurationManager.GetConfigurationAsync(Context.RequestAborted);
+                var configuration = await Options.ConfigurationManager.GetConfigurationAsync(
+                    Context.RequestAborted
+                );
                 var issuers = new[] { configuration.Issuer };
-                tokenValidationParameters.ValidIssuers = (tokenValidationParameters.ValidIssuers == null ? issuers : tokenValidationParameters.ValidIssuers.Concat(issuers));
-                tokenValidationParameters.IssuerSigningKeys = (tokenValidationParameters.IssuerSigningKeys == null ? configuration.SigningKeys : tokenValidationParameters.IssuerSigningKeys.Concat(configuration.SigningKeys));
+                tokenValidationParameters.ValidIssuers = (
+                    tokenValidationParameters.ValidIssuers == null
+                        ? issuers
+                        : tokenValidationParameters.ValidIssuers.Concat(issuers)
+                );
+                tokenValidationParameters.IssuerSigningKeys = (
+                    tokenValidationParameters.IssuerSigningKeys == null
+                        ? configuration.SigningKeys
+                        : tokenValidationParameters.IssuerSigningKeys.Concat(
+                            configuration.SigningKeys
+                        )
+                );
             }
         }
 
@@ -277,14 +326,16 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
         var authResult = await HandleAuthenticateOnceSafeAsync();
         var eventContext = new JwtBearerChallengeContext(Context, Scheme, Options, properties)
         {
-            AuthenticateFailure = authResult?.Failure
+            AuthenticateFailure = authResult?.Failure,
         };
 
         // Avoid returning error=invalid_token if the error is not caused by an authentication failure (e.g missing token).
         if (Options.IncludeErrorDetails && eventContext.AuthenticateFailure != null)
         {
             eventContext.Error = "invalid_token";
-            eventContext.ErrorDescription = CreateErrorDescription(eventContext.AuthenticateFailure);
+            eventContext.ErrorDescription = CreateErrorDescription(
+                eventContext.AuthenticateFailure
+            );
         }
 
         await Events.Challenge(eventContext);
@@ -295,9 +346,11 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
 
         Response.StatusCode = 401;
 
-        if (string.IsNullOrEmpty(eventContext.Error) &&
-            string.IsNullOrEmpty(eventContext.ErrorDescription) &&
-            string.IsNullOrEmpty(eventContext.ErrorUri))
+        if (
+            string.IsNullOrEmpty(eventContext.Error)
+            && string.IsNullOrEmpty(eventContext.ErrorDescription)
+            && string.IsNullOrEmpty(eventContext.ErrorUri)
+        )
         {
             Response.Headers.Append(HeaderNames.WWWAuthenticate, Options.Challenge);
         }
@@ -330,8 +383,10 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
             }
             if (!string.IsNullOrEmpty(eventContext.ErrorUri))
             {
-                if (!string.IsNullOrEmpty(eventContext.Error) ||
-                    !string.IsNullOrEmpty(eventContext.ErrorDescription))
+                if (
+                    !string.IsNullOrEmpty(eventContext.Error)
+                    || !string.IsNullOrEmpty(eventContext.ErrorDescription)
+                )
                 {
                     builder.Append(',');
                 }
@@ -386,14 +441,19 @@ public class JwtBearerHandler : AuthenticationHandler<JwtBearerOptions>
             // and we want to display the most specific message possible.
             string? message = ex switch
             {
-                SecurityTokenInvalidAudienceException stia => $"The audience '{stia.InvalidAudience ?? "(null)"}' is invalid",
-                SecurityTokenInvalidIssuerException stii => $"The issuer '{stii.InvalidIssuer ?? "(null)"}' is invalid",
+                SecurityTokenInvalidAudienceException stia =>
+                    $"The audience '{stia.InvalidAudience ?? "(null)"}' is invalid",
+                SecurityTokenInvalidIssuerException stii =>
+                    $"The issuer '{stii.InvalidIssuer ?? "(null)"}' is invalid",
                 SecurityTokenNoExpirationException _ => "The token has no expiration",
-                SecurityTokenInvalidLifetimeException stil => "The token lifetime is invalid; NotBefore: "
-                    + $"'{stil.NotBefore?.ToString(CultureInfo.InvariantCulture) ?? "(null)"}'"
-                    + $", Expires: '{stil.Expires?.ToString(CultureInfo.InvariantCulture) ?? "(null)"}'",
-                SecurityTokenNotYetValidException stnyv => $"The token is not valid before '{stnyv.NotBefore.ToString(CultureInfo.InvariantCulture)}'",
-                SecurityTokenExpiredException ste => $"The token expired at '{ste.Expires.ToString(CultureInfo.InvariantCulture)}'",
+                SecurityTokenInvalidLifetimeException stil =>
+                    "The token lifetime is invalid; NotBefore: "
+                        + $"'{stil.NotBefore?.ToString(CultureInfo.InvariantCulture) ?? "(null)"}'"
+                        + $", Expires: '{stil.Expires?.ToString(CultureInfo.InvariantCulture) ?? "(null)"}'",
+                SecurityTokenNotYetValidException stnyv =>
+                    $"The token is not valid before '{stnyv.NotBefore.ToString(CultureInfo.InvariantCulture)}'",
+                SecurityTokenExpiredException ste =>
+                    $"The token expired at '{ste.Expires.ToString(CultureInfo.InvariantCulture)}'",
                 SecurityTokenSignatureKeyNotFoundException _ => "The signature key was not found",
                 SecurityTokenInvalidSignatureException _ => "The signature is invalid",
                 _ => null,

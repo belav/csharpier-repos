@@ -15,8 +15,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class RegionHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(RegionHighlighter);
+        internal override Type GetHighlighterType() => typeof(RegionHighlighter);
 
         [Fact]
         public async Task TestExample1_1()
@@ -31,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                     }
                     [|#endregion|]
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -47,7 +47,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                     }
                     {|Cursor:[|#endregion|]|}
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -65,7 +66,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                     }
                     [|#endregion|]
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -83,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                     }
                     #endregion
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -101,7 +104,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                     }
                     #endregion
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -119,7 +123,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                     }
                     {|Cursor:[|#endregion|]|}
                 }
-                """);
+                """
+            );
         }
     }
 }

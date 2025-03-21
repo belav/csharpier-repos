@@ -18,7 +18,10 @@ public static class AuthenticationTokenExtensions
     /// </summary>
     /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
     /// <param name="tokens">The tokens to store.</param>
-    public static void StoreTokens(this AuthenticationProperties properties, IEnumerable<AuthenticationToken> tokens)
+    public static void StoreTokens(
+        this AuthenticationProperties properties,
+        IEnumerable<AuthenticationToken> tokens
+    )
     {
         ArgumentNullException.ThrowIfNull(properties);
         ArgumentNullException.ThrowIfNull(tokens);
@@ -36,7 +39,10 @@ public static class AuthenticationTokenExtensions
         {
             if (token.Name is null)
             {
-                throw new ArgumentException("Token name cannot be null for any token.", nameof(tokens));
+                throw new ArgumentException(
+                    "Token name cannot be null for any token.",
+                    nameof(tokens)
+                );
             }
 
             // REVIEW: should probably check that there are no ; in the token name and throw or encode
@@ -73,7 +79,11 @@ public static class AuthenticationTokenExtensions
     /// <param name="tokenName">The token name.</param>
     /// <param name="tokenValue">The token value.</param>
     /// <returns><see langword="true"/> if the token was updated, otherwise <see langword="false"/>.</returns>
-    public static bool UpdateTokenValue(this AuthenticationProperties properties, string tokenName, string tokenValue)
+    public static bool UpdateTokenValue(
+        this AuthenticationProperties properties,
+        string tokenName,
+        string tokenValue
+    )
     {
         ArgumentNullException.ThrowIfNull(properties);
         ArgumentNullException.ThrowIfNull(tokenName);
@@ -92,12 +102,17 @@ public static class AuthenticationTokenExtensions
     /// </summary>
     /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
     /// <returns>The authentication tokens.</returns>
-    public static IEnumerable<AuthenticationToken> GetTokens(this AuthenticationProperties properties)
+    public static IEnumerable<AuthenticationToken> GetTokens(
+        this AuthenticationProperties properties
+    )
     {
         ArgumentNullException.ThrowIfNull(properties);
 
         var tokens = new List<AuthenticationToken>();
-        if (properties.Items.TryGetValue(TokenNamesKey, out var value) && !string.IsNullOrEmpty(value))
+        if (
+            properties.Items.TryGetValue(TokenNamesKey, out var value)
+            && !string.IsNullOrEmpty(value)
+        )
         {
             var tokenNames = value.Split(';');
             foreach (var name in tokenNames)
@@ -120,8 +135,11 @@ public static class AuthenticationTokenExtensions
     /// <param name="context">The <see cref="HttpContext"/> context.</param>
     /// <param name="tokenName">The name of the token.</param>
     /// <returns>The value of the token if present.</returns>
-    public static Task<string?> GetTokenAsync(this IAuthenticationService auth, HttpContext context, string tokenName)
-        => auth.GetTokenAsync(context, scheme: null, tokenName: tokenName);
+    public static Task<string?> GetTokenAsync(
+        this IAuthenticationService auth,
+        HttpContext context,
+        string tokenName
+    ) => auth.GetTokenAsync(context, scheme: null, tokenName: tokenName);
 
     /// <summary>
     /// Authenticates the request using the specified authentication scheme and returns the value for the token.
@@ -131,7 +149,12 @@ public static class AuthenticationTokenExtensions
     /// <param name="scheme">The name of the authentication scheme.</param>
     /// <param name="tokenName">The name of the token.</param>
     /// <returns>The value of the token if present.</returns>
-    public static async Task<string?> GetTokenAsync(this IAuthenticationService auth, HttpContext context, string? scheme, string tokenName)
+    public static async Task<string?> GetTokenAsync(
+        this IAuthenticationService auth,
+        HttpContext context,
+        string? scheme,
+        string tokenName
+    )
     {
         ArgumentNullException.ThrowIfNull(auth);
         ArgumentNullException.ThrowIfNull(tokenName);

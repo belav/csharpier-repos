@@ -22,6 +22,7 @@ namespace System.Runtime.InteropServices.Marshalling
         // VARIANT_BOOL constants.
         private const short VARIANT_TRUE = -1;
         private const short VARIANT_FALSE = 0;
+
         public static ComVariant ConvertToUnmanaged(object? managed)
         {
             if (managed is null)
@@ -76,11 +77,17 @@ namespace System.Runtime.InteropServices.Marshalling
                 return variant;
             }
 
-            throw new ArgumentException(SR.ComVariantMarshaller_ManagedTypeNotSupported, nameof(managed));
+            throw new ArgumentException(
+                SR.ComVariantMarshaller_ManagedTypeNotSupported,
+                nameof(managed)
+            );
         }
 
 #pragma warning disable CA1416 // Validate platform compatibility
-        private static unsafe bool TryCreateOleVariantForInterfaceWrapper(object managed, out ComVariant variant)
+        private static unsafe bool TryCreateOleVariantForInterfaceWrapper(
+            object managed,
+            out ComVariant variant
+        )
         {
             if (managed is UnknownWrapper uw)
             {
@@ -90,12 +97,30 @@ namespace System.Runtime.InteropServices.Marshalling
                     variant = default;
                     return true;
                 }
-                variant = ComVariant.CreateRaw(VarEnum.VT_UNKNOWN, StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateComInterfaceForObject(wrapped, CreateComInterfaceFlags.None));
+                variant = ComVariant.CreateRaw(
+                    VarEnum.VT_UNKNOWN,
+                    StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateComInterfaceForObject(
+                        wrapped,
+                        CreateComInterfaceFlags.None
+                    )
+                );
                 return true;
             }
-            else if (managed is not null && StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy.GetComExposedTypeDetails(managed.GetType().TypeHandle) is not null)
+            else if (
+                managed is not null
+                && StrategyBasedComWrappers.DefaultIUnknownInterfaceDetailsStrategy.GetComExposedTypeDetails(
+                    managed.GetType().TypeHandle
+                )
+                    is not null
+            )
             {
-                variant = ComVariant.CreateRaw(VarEnum.VT_UNKNOWN, StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateComInterfaceForObject(managed, CreateComInterfaceFlags.None));
+                variant = ComVariant.CreateRaw(
+                    VarEnum.VT_UNKNOWN,
+                    StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateComInterfaceForObject(
+                        managed,
+                        CreateComInterfaceFlags.None
+                    )
+                );
                 return true;
             }
             variant = default;
@@ -151,7 +176,10 @@ namespace System.Runtime.InteropServices.Marshalling
                     return unmanaged.As<CurrencyWrapper>()!.WrappedObject;
                 case VarEnum.VT_UNKNOWN:
                 case VarEnum.VT_DISPATCH:
-                    return StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateObjectForComInstance(unmanaged.GetRawDataRef<nint>(), CreateObjectFlags.Unwrap);
+                    return StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateObjectForComInstance(
+                        unmanaged.GetRawDataRef<nint>(),
+                        CreateObjectFlags.Unwrap
+                    );
                 case VarEnum.VT_BYREF | VarEnum.VT_VARIANT:
                     return ConvertToManaged(*(ComVariant*)unmanaged.GetRawDataRef<nint>());
                 case VarEnum.VT_BYREF | VarEnum.VT_I1:
@@ -187,9 +215,15 @@ namespace System.Runtime.InteropServices.Marshalling
                 case VarEnum.VT_BYREF | VarEnum.VT_CY:
                     return decimal.FromOACurrency(*(long*)unmanaged.GetRawDataRef<nint>());
                 case VarEnum.VT_BYREF | VarEnum.VT_UNKNOWN:
-                    return StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateObjectForComInstance(*(nint*)unmanaged.GetRawDataRef<nint>(), CreateObjectFlags.Unwrap);
+                    return StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateObjectForComInstance(
+                        *(nint*)unmanaged.GetRawDataRef<nint>(),
+                        CreateObjectFlags.Unwrap
+                    );
                 default:
-                    throw new ArgumentException(SR.ComVariantMarshaller_UnmanagedTypeNotSupported, nameof(unmanaged));
+                    throw new ArgumentException(
+                        SR.ComVariantMarshaller_UnmanagedTypeNotSupported,
+                        nameof(unmanaged)
+                    );
             }
 #pragma warning restore CA1416 // Validate platform compatibility
 #pragma warning restore CS0618 // Type or member is obsolete
@@ -230,11 +264,13 @@ namespace System.Runtime.InteropServices.Marshalling
                     return ConvertToUnmanaged(_managed);
                 }
 
-                if (_managed is null
-                    && (_unmanaged.VarType & ~VarEnum.VT_BYREF) is
-                        VarEnum.VT_BSTR
-                        or VarEnum.VT_DISPATCH
-                        or VarEnum.VT_UNKNOWN)
+                if (
+                    _managed is null
+                    && (_unmanaged.VarType & ~VarEnum.VT_BYREF)
+                        is VarEnum.VT_BSTR
+                            or VarEnum.VT_DISPATCH
+                            or VarEnum.VT_UNKNOWN
+                )
                 {
                     *(IntPtr*)_unmanaged.GetRawDataRef<nint>() = default;
                     return _unmanaged;
@@ -245,7 +281,9 @@ namespace System.Runtime.InteropServices.Marshalling
                 switch ((_unmanaged.VarType & ~VarEnum.VT_BYREF, _managed))
                 {
                     case (VarEnum.VT_VARIANT, _):
-                        *(ComVariant*)_unmanaged.GetRawDataRef<nint>() = ConvertToUnmanaged(_managed);
+                        *(ComVariant*)_unmanaged.GetRawDataRef<nint>() = ConvertToUnmanaged(
+                            _managed
+                        );
                         break;
                     case (VarEnum.VT_I1 or VarEnum.VT_UI1, sbyte s):
                         *(sbyte*)_unmanaged.GetRawDataRef<nint>() = s;
@@ -259,10 +297,24 @@ namespace System.Runtime.InteropServices.Marshalling
                     case (VarEnum.VT_I2 or VarEnum.VT_UI2, ushort u):
                         *(ushort*)_unmanaged.GetRawDataRef<nint>() = u;
                         break;
-                    case (VarEnum.VT_I4 or VarEnum.VT_INT or VarEnum.VT_UI4 or VarEnum.VT_UINT or VarEnum.VT_ERROR, int i):
+                    case (
+                        VarEnum.VT_I4
+                            or VarEnum.VT_INT
+                            or VarEnum.VT_UI4
+                            or VarEnum.VT_UINT
+                            or VarEnum.VT_ERROR,
+                        int i
+                    ):
                         *(int*)_unmanaged.GetRawDataRef<nint>() = i;
                         break;
-                    case (VarEnum.VT_I4 or VarEnum.VT_INT or VarEnum.VT_UI4 or VarEnum.VT_UINT or VarEnum.VT_ERROR, uint u):
+                    case (
+                        VarEnum.VT_I4
+                            or VarEnum.VT_INT
+                            or VarEnum.VT_UI4
+                            or VarEnum.VT_UINT
+                            or VarEnum.VT_ERROR,
+                        uint u
+                    ):
                         *(uint*)_unmanaged.GetRawDataRef<nint>() = u;
                         break;
                     case (VarEnum.VT_I8 or VarEnum.VT_UI8, long l):
@@ -281,22 +333,24 @@ namespace System.Runtime.InteropServices.Marshalling
                         *(decimal*)_unmanaged.GetRawDataRef<nint>() = d;
                         break;
                     case (VarEnum.VT_BOOL, bool b):
-                        *(short*)_unmanaged.GetRawDataRef<nint>() = b ? VARIANT_TRUE : VARIANT_FALSE;
+                        *(short*)_unmanaged.GetRawDataRef<nint>() = b
+                            ? VARIANT_TRUE
+                            : VARIANT_FALSE;
                         break;
                     case (VarEnum.VT_BSTR, string str):
-                        {
-                            ref IntPtr bstrStorage = ref *(IntPtr*)_unmanaged.GetRawDataRef<nint>();
-                            Marshal.FreeBSTR(bstrStorage);
-                            bstrStorage = Marshal.StringToBSTR(str);
-                            break;
-                        }
+                    {
+                        ref IntPtr bstrStorage = ref *(IntPtr*)_unmanaged.GetRawDataRef<nint>();
+                        Marshal.FreeBSTR(bstrStorage);
+                        bstrStorage = Marshal.StringToBSTR(str);
+                        break;
+                    }
                     case (VarEnum.VT_BSTR, BStrWrapper str):
-                        {
-                            ref IntPtr bstrStorage = ref *(IntPtr*)_unmanaged.GetRawDataRef<nint>();
-                            Marshal.FreeBSTR(bstrStorage);
-                            bstrStorage = Marshal.StringToBSTR(str.WrappedObject);
-                            break;
-                        }
+                    {
+                        ref IntPtr bstrStorage = ref *(IntPtr*)_unmanaged.GetRawDataRef<nint>();
+                        Marshal.FreeBSTR(bstrStorage);
+                        bstrStorage = Marshal.StringToBSTR(str.WrappedObject);
+                        break;
+                    }
                     case (VarEnum.VT_DATE, DateTime dt):
                         *(double*)_unmanaged.GetRawDataRef<nint>() = dt.ToOADate();
                         break;
@@ -304,13 +358,22 @@ namespace System.Runtime.InteropServices.Marshalling
                         *(int*)_unmanaged.GetRawDataRef<nint>() = error.ErrorCode;
                         break;
                     case (VarEnum.VT_CY, CurrencyWrapper cy):
-                        *(long*)_unmanaged.GetRawDataRef<nint>() = decimal.ToOACurrency(cy.WrappedObject);
+                        *(long*)_unmanaged.GetRawDataRef<nint>() = decimal.ToOACurrency(
+                            cy.WrappedObject
+                        );
                         break;
                     case (VarEnum.VT_UNKNOWN, object unkObj):
-                        *(IntPtr*)_unmanaged.GetRawDataRef<nint>() = StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateComInterfaceForObject(unkObj, CreateComInterfaceFlags.None);
+                        *(IntPtr*)_unmanaged.GetRawDataRef<nint>() =
+                            StrategyBasedComWrappers.DefaultMarshallingInstance.GetOrCreateComInterfaceForObject(
+                                unkObj,
+                                CreateComInterfaceFlags.None
+                            );
                         break;
                     default:
-                        throw new ArgumentException("Invalid combination of unmanaged variant type and managed object type.", nameof(_managed));
+                        throw new ArgumentException(
+                            "Invalid combination of unmanaged variant type and managed object type.",
+                            nameof(_managed)
+                        );
                 }
 #pragma warning restore CA1416 // Validate platform compatibility
 #pragma warning restore CS0618 // Type or member is obsolete

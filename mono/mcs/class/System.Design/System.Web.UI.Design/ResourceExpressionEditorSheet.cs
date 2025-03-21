@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,46 +28,47 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Collections;
 using System.ComponentModel;
 using System.Security.Permissions;
 
 namespace System.Web.UI.Design
 {
-	public class ResourceExpressionEditorSheet : ExpressionEditorSheet
-	{
-		[MonoTODO]
-		public ResourceExpressionEditorSheet (string expression, IServiceProvider serviceProvider)
-			: base (serviceProvider)
-		{
-			throw new NotImplementedException ();
-		}
+    public class ResourceExpressionEditorSheet : ExpressionEditorSheet
+    {
+        [MonoTODO]
+        public ResourceExpressionEditorSheet(string expression, IServiceProvider serviceProvider)
+            : base(serviceProvider)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		[DefaultValue ("")]
-		public string ClassKey {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        [DefaultValue("")]
+        public string ClassKey
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public override bool IsValid {
-			get { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public override bool IsValid
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		[DefaultValue ("")]
-		public string ResourceKey {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        [DefaultValue("")]
+        public string ResourceKey
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public override string GetExpression ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override string GetExpression()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

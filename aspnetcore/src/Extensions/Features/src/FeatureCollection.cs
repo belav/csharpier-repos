@@ -26,9 +26,7 @@ public class FeatureCollection : IFeatureCollection
     /// <summary>
     /// Initializes a new instance of <see cref="FeatureCollection"/>.
     /// </summary>
-    public FeatureCollection()
-    {
-    }
+    public FeatureCollection() { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FeatureCollection"/> with the specified initial capacity.
@@ -58,7 +56,10 @@ public class FeatureCollection : IFeatureCollection
     }
 
     /// <inheritdoc />
-    public bool IsReadOnly { get { return false; } }
+    public bool IsReadOnly
+    {
+        get { return false; }
+    }
 
     /// <inheritdoc />
     public object? this[Type key]
@@ -67,7 +68,9 @@ public class FeatureCollection : IFeatureCollection
         {
             ArgumentNullThrowHelper.ThrowIfNull(key);
 
-            return _features != null && _features.TryGetValue(key, out var result) ? result : _defaults?[key];
+            return _features != null && _features.TryGetValue(key, out var result)
+                ? result
+                : _defaults?[key];
         }
         set
         {
@@ -110,7 +113,11 @@ public class FeatureCollection : IFeatureCollection
         if (_defaults != null)
         {
             // Don't return features masked by the wrapper.
-            foreach (var pair in _features == null ? _defaults : _defaults.Except(_features, FeatureKeyComparer))
+            foreach (
+                var pair in _features == null
+                    ? _defaults
+                    : _defaults.Except(_features, FeatureKeyComparer)
+            )
             {
                 yield return pair;
             }
@@ -126,8 +133,9 @@ public class FeatureCollection : IFeatureCollection
             if (feature is null && Nullable.GetUnderlyingType(typeof(TFeature)) is null)
             {
                 throw new InvalidOperationException(
-                    $"{typeof(TFeature).FullName} does not exist in the feature collection " +
-                    $"and because it is a struct the method can't return null. Use 'featureCollection[typeof({typeof(TFeature).FullName})] is not null' to check if the feature exists.");
+                    $"{typeof(TFeature).FullName} does not exist in the feature collection "
+                        + $"and because it is a struct the method can't return null. Use 'featureCollection[typeof({typeof(TFeature).FullName})] is not null' to check if the feature exists."
+                );
             }
             return (TFeature?)feature;
         }
@@ -161,6 +169,12 @@ public class FeatureCollection : IFeatureCollection
         private readonly FeatureCollection _features = features;
 
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-        public KeyValuePair<string, object>[] Items => _features.Select(pair => new KeyValuePair<string, object>(pair.Key.FullName ?? string.Empty, pair.Value)).ToArray();
+        public KeyValuePair<string, object>[] Items =>
+            _features
+                .Select(pair => new KeyValuePair<string, object>(
+                    pair.Key.FullName ?? string.Empty,
+                    pair.Value
+                ))
+                .ToArray();
     }
 }

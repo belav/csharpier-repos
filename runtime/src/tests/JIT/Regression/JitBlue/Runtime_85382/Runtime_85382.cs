@@ -82,6 +82,9 @@ public class Test
             return 100;
         }
 
-        public struct S { public ushort U; }
+        public struct S
+        {
+            public ushort U;
+        }
     }
 }

@@ -21,7 +21,9 @@ public class EditFormTest
         services.AddAntiforgery();
         services.AddLogging();
         services.AddSingleton<ComponentStatePersistenceManager>();
-        services.AddSingleton(services => services.GetRequiredService<ComponentStatePersistenceManager>().State);
+        services.AddSingleton(services =>
+            services.GetRequiredService<ComponentStatePersistenceManager>().State
+        );
         services.AddSingleton<AntiforgeryStateProvider, DefaultAntiforgeryStateProvider>();
         _testRenderer = new(services.BuildServiceProvider());
     }
@@ -33,15 +35,19 @@ public class EditFormTest
         var editForm = new EditForm
         {
             EditContext = new EditContext(new TestModel()),
-            Model = new TestModel()
+            Model = new TestModel(),
         };
         var testRenderer = new TestRenderer();
         var componentId = testRenderer.AssignRootComponentId(editForm);
 
         // Act/Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => testRenderer.RenderRootComponentAsync(componentId));
-        Assert.StartsWith($"{nameof(EditForm)} requires a {nameof(EditForm.Model)} parameter, or an {nameof(EditContext)} parameter, but not both.", ex.Message);
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            testRenderer.RenderRootComponentAsync(componentId)
+        );
+        Assert.StartsWith(
+            $"{nameof(EditForm)} requires a {nameof(EditForm.Model)} parameter, or an {nameof(EditContext)} parameter, but not both.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -53,9 +59,13 @@ public class EditFormTest
         var componentId = testRenderer.AssignRootComponentId(editForm);
 
         // Act/Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => testRenderer.RenderRootComponentAsync(componentId));
-        Assert.StartsWith($"{nameof(EditForm)} requires either a {nameof(EditForm.Model)} parameter, or an {nameof(EditContext)} parameter, please provide one of these.", ex.Message);
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            testRenderer.RenderRootComponentAsync(componentId)
+        );
+        Assert.StartsWith(
+            $"{nameof(EditForm)} requires either a {nameof(EditForm.Model)} parameter, or an {nameof(EditContext)} parameter, please provide one of these.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -63,10 +73,7 @@ public class EditFormTest
     {
         // Arrange
         var model = new TestModel();
-        var rootComponent = new TestEditFormHostComponent
-        {
-            Model = model
-        };
+        var rootComponent = new TestEditFormHostComponent { Model = model };
         var editFormComponent = await RenderAndGetTestEditFormComponentAsync(rootComponent);
 
         // Act
@@ -83,11 +90,11 @@ public class EditFormTest
     public async Task ReturnsEditContextWhenEditContextParameterUsed(bool createFieldPath)
     {
         // Arrange
-        var editContext = new EditContext(new TestModel()) { ShouldUseFieldIdentifiers = createFieldPath };
-        var rootComponent = new TestEditFormHostComponent
+        var editContext = new EditContext(new TestModel())
         {
-            EditContext = editContext
+            ShouldUseFieldIdentifiers = createFieldPath,
         };
+        var rootComponent = new TestEditFormHostComponent { EditContext = editContext };
         var editFormComponent = await RenderAndGetTestEditFormComponentAsync(rootComponent);
 
         // Act
@@ -102,29 +109,30 @@ public class EditFormTest
     {
         // Arrange
         var model = new TestModel();
-        var rootComponent = new TestEditFormHostComponent
-        {
-            Model = model,
-            FormName = "my-form",
-        };
+        var rootComponent = new TestEditFormHostComponent { Model = model, FormName = "my-form" };
 
         // Act
         await RenderAndGetTestEditFormComponentAsync(rootComponent);
-        var editFormComponentId = _testRenderer.Batches.Single()
-            .GetComponentFrames<EditForm>().Single().ComponentId;
+        var editFormComponentId = _testRenderer
+            .Batches.Single()
+            .GetComponentFrames<EditForm>()
+            .Single()
+            .ComponentId;
         var editFormFrames = _testRenderer.GetCurrentRenderTreeFrames(editFormComponentId);
 
         // Assert:
         //  - Does not set any "method" attribute
         //  - Does not assign any name to the submit event
-        Assert.Collection(editFormFrames.AsEnumerable(),
+        Assert.Collection(
+            editFormFrames.AsEnumerable(),
             frame => AssertFrame.Region(frame, 7),
             frame => AssertFrame.Element(frame, "form", 6),
             frame => AssertFrame.Attribute(frame, "onsubmit"),
             frame => AssertFrame.Component<CascadingValue<EditContext>>(frame, 4),
             frame => AssertFrame.Attribute(frame, "IsFixed", true),
             frame => AssertFrame.Attribute(frame, "Value"),
-            frame => AssertFrame.Attribute(frame, "ChildContent"));
+            frame => AssertFrame.Attribute(frame, "ChildContent")
+        );
     }
 
     [Fact]
@@ -141,35 +149,39 @@ public class EditFormTest
 
         // Act
         await RenderAndGetTestEditFormComponentAsync(rootComponent);
-        var editFormComponentId = _testRenderer.Batches.Single()
-            .GetComponentFrames<EditForm>().Single().ComponentId;
+        var editFormComponentId = _testRenderer
+            .Batches.Single()
+            .GetComponentFrames<EditForm>()
+            .Single()
+            .ComponentId;
         var editFormFrames = _testRenderer.GetCurrentRenderTreeFrames(editFormComponentId);
 
         // Assert
-        Assert.Collection(editFormFrames.AsEnumerable(),
+        Assert.Collection(
+            editFormFrames.AsEnumerable(),
             frame => AssertFrame.Region(frame, 13),
             frame => AssertFrame.Element(frame, "form", 12),
-
             // Sets "method" to "post" by default
             frame => AssertFrame.Attribute(frame, "method", "post"),
-
             // Assigns name to the submit event
             frame => AssertFrame.Attribute(frame, "onsubmit"),
             frame => AssertFrame.NamedEvent(frame, "onsubmit", "my-form"),
-
             frame => AssertFrame.Region(frame, 4),
-
             // Adds FormMappingValidator child
             frame => AssertFrame.Component<FormMappingValidator>(frame, 2),
-            frame => AssertFrame.Attribute(frame, nameof(FormMappingValidator.CurrentEditContext), editContext),
-
+            frame =>
+                AssertFrame.Attribute(
+                    frame,
+                    nameof(FormMappingValidator.CurrentEditContext),
+                    editContext
+                ),
             // Adds AntiforgeryToken child
             frame => AssertFrame.Component<AntiforgeryToken>(frame, 1),
-
             frame => AssertFrame.Component<CascadingValue<EditContext>>(frame, 4),
             frame => AssertFrame.Attribute(frame, "IsFixed", true),
             frame => AssertFrame.Attribute(frame, "Value"),
-            frame => AssertFrame.Attribute(frame, "ChildContent"));
+            frame => AssertFrame.Attribute(frame, "ChildContent")
+        );
     }
 
     [Fact]
@@ -191,10 +203,14 @@ public class EditFormTest
 
         // Act
         await RenderAndGetTestEditFormComponentAsync(rootComponent);
-        var editFormComponentId = _testRenderer.Batches.Single()
-            .GetComponentFrames<EditForm>().Single().ComponentId;
+        var editFormComponentId = _testRenderer
+            .Batches.Single()
+            .GetComponentFrames<EditForm>()
+            .Single()
+            .ComponentId;
         var editFormFrames = _testRenderer.GetCurrentRenderTreeFrames(editFormComponentId);
-        var editFormAttributes = editFormFrames.AsEnumerable()
+        var editFormAttributes = editFormFrames
+            .AsEnumerable()
             .SkipWhile(f => f.FrameType != RenderTreeFrameType.Attribute)
             .TakeWhile(f => f.FrameType == RenderTreeFrameType.Attribute)
             .ToDictionary(f => f.AttributeName, f => f.AttributeValue);
@@ -204,14 +220,16 @@ public class EditFormTest
         Assert.Equal("some value", editFormAttributes["custom attribute"]);
     }
 
-    private static EditForm FindEditFormComponent(CapturedBatch batch)
-        => batch.ReferenceFrames
-                .Where(f => f.FrameType == RenderTreeFrameType.Component)
-                .Select(f => f.Component)
-                .OfType<EditForm>()
-                .Single();
+    private static EditForm FindEditFormComponent(CapturedBatch batch) =>
+        batch
+            .ReferenceFrames.Where(f => f.FrameType == RenderTreeFrameType.Component)
+            .Select(f => f.Component)
+            .OfType<EditForm>()
+            .Single();
 
-    private async Task<EditForm> RenderAndGetTestEditFormComponentAsync(TestEditFormHostComponent hostComponent)
+    private async Task<EditForm> RenderAndGetTestEditFormComponentAsync(
+        TestEditFormHostComponent hostComponent
+    )
     {
         var componentId = _testRenderer.AssignRootComponentId(hostComponent);
         await _testRenderer.RenderRootComponentAsync(componentId);
@@ -243,7 +261,11 @@ public class EditFormTest
             {
                 builder.OpenComponent<FormMappingScope>(0);
                 builder.AddComponentParameter(1, nameof(FormMappingScope.Name), MappingContextName);
-                builder.AddComponentParameter(3, nameof(FormMappingScope.ChildContent), (RenderFragment<FormMappingContext>)(_ => RenderForm));
+                builder.AddComponentParameter(
+                    3,
+                    nameof(FormMappingScope.ChildContent),
+                    (RenderFragment<FormMappingContext>)(_ => RenderForm)
+                );
                 builder.CloseComponent();
             }
             else
@@ -262,7 +284,11 @@ public class EditFormTest
                 builder.AddComponentParameter(3, "EditContext", EditContext);
                 if (SubmitHandler != null)
                 {
-                    builder.AddComponentParameter(4, "OnValidSubmit", new EventCallback<EditContext>(null, SubmitHandler));
+                    builder.AddComponentParameter(
+                        4,
+                        "OnValidSubmit",
+                        new EventCallback<EditContext>(null, SubmitHandler)
+                    );
                 }
                 builder.AddComponentParameter(5, "FormName", FormName);
 
@@ -274,6 +300,7 @@ public class EditFormTest
     private class TestFormValueModelBinder : IFormValueMapper
     {
         public bool CanMap(Type valueType, string mappingScopeName, string formName) => false;
+
         public void Map(FormValueMappingContext context) { }
     }
 }

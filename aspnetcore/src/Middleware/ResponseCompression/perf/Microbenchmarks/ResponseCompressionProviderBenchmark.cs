@@ -32,13 +32,13 @@ public class ResponseCompressionProviderBenchmark
     {
         return new[]
         {
-                "gzip;q=0.8, compress;q=0.6, br;q=0.4",
-                "gzip, compress, br",
-                "br, compress, gzip",
-                "gzip, compress",
-                "identity",
-                "*"
-            };
+            "gzip;q=0.8, compress;q=0.6, br;q=0.4",
+            "gzip, compress, br",
+            "br, compress, gzip",
+            "gzip, compress",
+            "identity",
+            "*",
+        };
     }
 
     public ResponseCompressionProvider Provider { get; set; }

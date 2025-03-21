@@ -35,13 +35,15 @@ namespace System.Data.Common
 
         // called by derived classes that may cache based on connectionString
         public DbConnectionOptions(string connectionString)
-            : this(connectionString, null, false)
-        {
-        }
+            : this(connectionString, null, false) { }
 
         // synonyms hashtable is meant to be read-only translation of parsed string
         // keywords/synonyms to a known keyword string
-        public DbConnectionOptions(string connectionString, Dictionary<string, string>? synonyms, bool useOdbcRules)
+        public DbConnectionOptions(
+            string connectionString,
+            Dictionary<string, string>? synonyms,
+            bool useOdbcRules
+        )
         {
             _useOdbcRules = useOdbcRules;
             _parsetable = new Dictionary<string, string?>();
@@ -50,9 +52,19 @@ namespace System.Data.Common
             // first pass on parsing, initial syntax check
             if (0 < _usersConnectionString.Length)
             {
-                _keyChain = ParseInternal(_parsetable, _usersConnectionString, true, synonyms, _useOdbcRules);
-                _hasPasswordKeyword = (_parsetable.ContainsKey(KEY.Password) || _parsetable.ContainsKey(SYNONYM.Pwd));
-                _hasUserIdKeyword = (_parsetable.ContainsKey(KEY.User_ID) || _parsetable.ContainsKey(SYNONYM.UID));
+                _keyChain = ParseInternal(
+                    _parsetable,
+                    _usersConnectionString,
+                    true,
+                    synonyms,
+                    _useOdbcRules
+                );
+                _hasPasswordKeyword = (
+                    _parsetable.ContainsKey(KEY.Password) || _parsetable.ContainsKey(SYNONYM.Pwd)
+                );
+                _hasUserIdKeyword = (
+                    _parsetable.ContainsKey(KEY.User_ID) || _parsetable.ContainsKey(SYNONYM.UID)
+                );
             }
         }
 
@@ -87,7 +99,16 @@ namespace System.Data.Common
                     }
                     else
                     {
-                        return ((_parsetable.ContainsKey(KEY.User_ID) && !string.IsNullOrEmpty(_parsetable[KEY.User_ID])) || (_parsetable.ContainsKey(SYNONYM.UID) && !string.IsNullOrEmpty(_parsetable[SYNONYM.UID])));
+                        return (
+                            (
+                                _parsetable.ContainsKey(KEY.User_ID)
+                                && !string.IsNullOrEmpty(_parsetable[KEY.User_ID])
+                            )
+                            || (
+                                _parsetable.ContainsKey(SYNONYM.UID)
+                                && !string.IsNullOrEmpty(_parsetable[SYNONYM.UID])
+                            )
+                        );
                     }
                 }
                 return false;
@@ -114,7 +135,12 @@ namespace System.Data.Common
             get { return _parsetable[keyword]; }
         }
 
-        internal static void AppendKeyValuePairBuilder(StringBuilder builder, string keyName, string? keyValue, bool useOdbcRules)
+        internal static void AppendKeyValuePairBuilder(
+            StringBuilder builder,
+            string keyName,
+            string? keyValue,
+            bool useOdbcRules
+        )
         {
             ADP.CheckArgumentNull(builder, nameof(builder));
             ADP.CheckArgumentLength(keyName, nameof(keyName));
@@ -147,10 +173,23 @@ namespace System.Data.Common
             { // else <keyword>=;
                 if (useOdbcRules)
                 {
-                    if ((0 < keyValue.Length) &&
+                    if (
+                        (0 < keyValue.Length)
+                        &&
                         // string.Contains(char) is .NetCore2.1+ specific
-                        (('{' == keyValue[0]) || (0 <= keyValue.IndexOf(';')) || (string.Equals(DbConnectionStringKeywords.Driver, keyName, StringComparison.OrdinalIgnoreCase))) &&
-                        !s_connectionStringQuoteOdbcValueRegex.IsMatch(keyValue))
+                        (
+                            ('{' == keyValue[0])
+                            || (0 <= keyValue.IndexOf(';'))
+                            || (
+                                string.Equals(
+                                    DbConnectionStringKeywords.Driver,
+                                    keyName,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
+                        )
+                        && !s_connectionStringQuoteOdbcValueRegex.IsMatch(keyValue)
+                    )
                     {
                         // always quote Driver value (required for ODBC Version 2.65 and earlier)
                         // always quote values that contain a ';'
@@ -202,16 +241,30 @@ namespace System.Data.Common
 
         internal static bool ConvertValueToIntegratedSecurityInternal(string stringValue)
         {
-            if (CompareInsensitiveInvariant(stringValue, "sspi") || CompareInsensitiveInvariant(stringValue, "true") || CompareInsensitiveInvariant(stringValue, "yes"))
+            if (
+                CompareInsensitiveInvariant(stringValue, "sspi")
+                || CompareInsensitiveInvariant(stringValue, "true")
+                || CompareInsensitiveInvariant(stringValue, "yes")
+            )
                 return true;
-            else if (CompareInsensitiveInvariant(stringValue, "false") || CompareInsensitiveInvariant(stringValue, "no"))
+            else if (
+                CompareInsensitiveInvariant(stringValue, "false")
+                || CompareInsensitiveInvariant(stringValue, "no")
+            )
                 return false;
             else
             {
-                string tmp = stringValue.Trim();  // Remove leading & trailing white space.
-                if (CompareInsensitiveInvariant(tmp, "sspi") || CompareInsensitiveInvariant(tmp, "true") || CompareInsensitiveInvariant(tmp, "yes"))
+                string tmp = stringValue.Trim(); // Remove leading & trailing white space.
+                if (
+                    CompareInsensitiveInvariant(tmp, "sspi")
+                    || CompareInsensitiveInvariant(tmp, "true")
+                    || CompareInsensitiveInvariant(tmp, "yes")
+                )
                     return true;
-                else if (CompareInsensitiveInvariant(tmp, "false") || CompareInsensitiveInvariant(tmp, "no"))
+                else if (
+                    CompareInsensitiveInvariant(tmp, "false")
+                    || CompareInsensitiveInvariant(tmp, "no")
+                )
                     return false;
                 else
                 {
@@ -234,7 +287,11 @@ namespace System.Data.Common
         {
             try
             {
-                return int.Parse(stringValue, System.Globalization.NumberStyles.Integer, CultureInfo.InvariantCulture);
+                return int.Parse(
+                    stringValue,
+                    System.Globalization.NumberStyles.Integer,
+                    CultureInfo.InvariantCulture
+                );
             }
             catch (FormatException e)
             {
@@ -260,10 +317,17 @@ namespace System.Data.Common
         // * this method queries "DataDirectory" value from the current AppDomain.
         //   This string is used for to replace "!DataDirectory!" values in the connection string, it is not considered as an "exposed resource".
         // * This method uses GetFullPath to validate that root path is valid, the result is not exposed out.
-        internal static string? ExpandDataDirectory(string keyword, string? value, ref string? datadir)
+        internal static string? ExpandDataDirectory(
+            string keyword,
+            string? value,
+            ref string? datadir
+        )
         {
             string? fullPath = null;
-            if ((null != value) && value.StartsWith(DataDirectory, StringComparison.OrdinalIgnoreCase))
+            if (
+                (null != value)
+                && value.StartsWith(DataDirectory, StringComparison.OrdinalIgnoreCase)
+            )
             {
                 string? rootFolderPath = datadir;
                 if (null == rootFolderPath)
@@ -288,9 +352,12 @@ namespace System.Data.Common
                 }
 
                 // We don't know if rootFolderpath ends with '\', and we don't know if the given name starts with onw
-                int fileNamePosition = DataDirectory.Length;    // filename starts right after the '|datadirectory|' keyword
-                bool rootFolderEndsWith = (0 < rootFolderPath.Length) && rootFolderPath[rootFolderPath.Length - 1] == '\\';
-                bool fileNameStartsWith = (fileNamePosition < value.Length) && value[fileNamePosition] == '\\';
+                int fileNamePosition = DataDirectory.Length; // filename starts right after the '|datadirectory|' keyword
+                bool rootFolderEndsWith =
+                    (0 < rootFolderPath.Length)
+                    && rootFolderPath[rootFolderPath.Length - 1] == '\\';
+                bool fileNameStartsWith =
+                    (fileNamePosition < value.Length) && value[fileNamePosition] == '\\';
 
                 // replace |datadirectory| with root folder path
                 if (!rootFolderEndsWith && !fileNameStartsWith)
@@ -424,7 +491,12 @@ namespace System.Data.Common
                 {
                     // only replace the parse end-result value instead of all values
                     // so that when duplicate-keywords occur other original values remain in place
-                    AppendKeyValuePairBuilder(builder, current.Name, replacementValue, _useOdbcRules);
+                    AppendKeyValuePairBuilder(
+                        builder,
+                        current.Name,
+                        replacementValue,
+                        _useOdbcRules
+                    );
                     builder.Append(';');
                     expanded = true;
                 }

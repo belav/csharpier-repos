@@ -21,7 +21,8 @@ public class StoredProcedureConvention : IEntityTypeAddedConvention
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public StoredProcedureConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -44,7 +45,8 @@ public class StoredProcedureConvention : IEntityTypeAddedConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     public virtual void ProcessEntityTypeAdded(
         IConventionEntityTypeBuilder entityTypeBuilder,
-        IConventionContext<IConventionEntityTypeBuilder> context)
+        IConventionContext<IConventionEntityTypeBuilder> context
+    )
     {
         var entityType = entityTypeBuilder.Metadata;
         if (!entityType.HasSharedClrType)
@@ -53,22 +55,19 @@ public class StoredProcedureConvention : IEntityTypeAddedConvention
         }
 
         var sproc = (StoredProcedure?)entityType.GetDeleteStoredProcedure();
-        if (sproc != null
-            && sproc.EntityType != entityType)
+        if (sproc != null && sproc.EntityType != entityType)
         {
             sproc.EntityType = (IMutableEntityType)entityType;
         }
 
         sproc = (StoredProcedure?)entityType.GetInsertStoredProcedure();
-        if (sproc != null
-            && sproc.EntityType != entityType)
+        if (sproc != null && sproc.EntityType != entityType)
         {
             sproc.EntityType = (IMutableEntityType)entityType;
         }
 
         sproc = (StoredProcedure?)entityType.GetUpdateStoredProcedure();
-        if (sproc != null
-            && sproc.EntityType != entityType)
+        if (sproc != null && sproc.EntityType != entityType)
         {
             sproc.EntityType = (IMutableEntityType)entityType;
         }

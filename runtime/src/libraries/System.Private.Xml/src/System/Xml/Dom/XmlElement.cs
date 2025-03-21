@@ -18,7 +18,8 @@ namespace System.Xml
         private XmlAttributeCollection? _attributes;
         private XmlLinkedNode? _lastChild; // == this for empty elements otherwise it is the last child
 
-        internal XmlElement(XmlName name, bool empty, XmlDocument doc) : base(doc)
+        internal XmlElement(XmlName name, bool empty, XmlDocument doc)
+            : base(doc)
         {
             Debug.Assert(name != null);
             this.parentNode = null;
@@ -37,10 +38,13 @@ namespace System.Xml
             }
         }
 
-        protected internal XmlElement(string? prefix, string localName, string? namespaceURI, XmlDocument doc)
-        : this(doc.AddXmlName(prefix, localName, namespaceURI, null), true, doc)
-        {
-        }
+        protected internal XmlElement(
+            string? prefix,
+            string localName,
+            string? namespaceURI,
+            XmlDocument doc
+        )
+            : this(doc.AddXmlName(prefix, localName, namespaceURI, null), true, doc) { }
 
         internal XmlName XmlName
         {
@@ -102,7 +106,10 @@ namespace System.Xml
         public override string Prefix
         {
             get { return _name.Prefix; }
-            set { _name = _name.OwnerDocument.AddXmlName(value, LocalName, NamespaceURI, SchemaInfo); }
+            set
+            {
+                _name = _name.OwnerDocument.AddXmlName(value, LocalName, NamespaceURI, SchemaInfo);
+            }
         }
 
         // Gets the type of the current node.
@@ -113,19 +120,13 @@ namespace System.Xml
 
         public override XmlNode? ParentNode
         {
-            get
-            {
-                return this.parentNode;
-            }
+            get { return this.parentNode; }
         }
 
         // Gets the XmlDocument that contains this node.
         public override XmlDocument OwnerDocument
         {
-            get
-            {
-                return _name.OwnerDocument;
-            }
+            get { return _name.OwnerDocument; }
         }
 
         internal override bool IsContainer
@@ -143,8 +144,7 @@ namespace System.Xml
 
             XmlLinkedNode newNode = (XmlLinkedNode)newChild;
 
-            if (_lastChild == null
-                || _lastChild == this)
+            if (_lastChild == null || _lastChild == this)
             { // if LastNode == null
                 newNode.next = newNode;
                 _lastChild = newNode; // LastNode = newNode;
@@ -156,8 +156,7 @@ namespace System.Xml
                 newNode.next = refNode.next;
                 refNode.next = newNode;
                 _lastChild = newNode; // LastNode = newNode;
-                if (refNode.IsText
-                    && newNode.IsText)
+                if (refNode.IsText && newNode.IsText)
                 {
                     NestTextNodes(refNode, newNode);
                 }
@@ -176,11 +175,7 @@ namespace System.Xml
         // Gets or sets whether the element does not have any children.
         public bool IsEmpty
         {
-            get
-            {
-                return _lastChild == this;
-            }
-
+            get { return _lastChild == this; }
             set
             {
                 if (value)
@@ -203,14 +198,8 @@ namespace System.Xml
 
         internal override XmlLinkedNode? LastNode
         {
-            get
-            {
-                return _lastChild == this ? null : _lastChild;
-            }
-            set
-            {
-                _lastChild = value;
-            }
+            get { return _lastChild == this ? null : _lastChild; }
+            set { _lastChild = value; }
         }
 
         internal override bool IsValidChildType(XmlNodeType type)
@@ -231,7 +220,6 @@ namespace System.Xml
                     return false;
             }
         }
-
 
         // Gets a XmlAttributeCollection containing the list of attributes for this node.
         public override XmlAttributeCollection Attributes
@@ -563,20 +551,14 @@ namespace System.Xml
 
         public override IXmlSchemaInfo SchemaInfo
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         // Gets or sets the markup representing just
         // the children of this node.
         public override string InnerXml
         {
-            get
-            {
-                return base.InnerXml;
-            }
+            get { return base.InnerXml; }
             set
             {
                 RemoveAllChildren();
@@ -589,16 +571,17 @@ namespace System.Xml
         // node and all its children.
         public override string InnerText
         {
-            get
-            {
-                return base.InnerText;
-            }
+            get { return base.InnerText; }
             set
             {
                 XmlLinkedNode? linkedNode = LastNode;
-                if (linkedNode != null && //there is one child
-                    linkedNode.NodeType == XmlNodeType.Text && //which is text node
-                    linkedNode.next == linkedNode) // and it is the only child
+                if (
+                    linkedNode != null
+                    && //there is one child
+                    linkedNode.NodeType == XmlNodeType.Text
+                    && //which is text node
+                    linkedNode.next == linkedNode
+                ) // and it is the only child
                 {
                     //this branch is for perf reason, event fired when TextNode.Value is changed.
                     linkedNode.Value = value;
@@ -615,8 +598,7 @@ namespace System.Xml
         {
             get
             {
-                if (this.parentNode != null
-                    && this.parentNode.LastNode != this)
+                if (this.parentNode != null && this.parentNode.LastNode != this)
                     return next;
 
                 return null;
@@ -628,9 +610,15 @@ namespace System.Xml
             this.parentNode = node;
         }
 
-        internal override XPathNodeType XPNodeType { get { return XPathNodeType.Element; } }
+        internal override XPathNodeType XPNodeType
+        {
+            get { return XPathNodeType.Element; }
+        }
 
-        internal override string XPLocalName { get { return LocalName; } }
+        internal override string XPLocalName
+        {
+            get { return LocalName; }
+        }
 
         internal override string GetXPAttribute(string localName, string ns)
         {

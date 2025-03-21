@@ -13,7 +13,7 @@ public class StartupWithHostingStartup
 
         // RuntimeCompilation supports a hosting startup that adds services before AddRazorPagesServices is invoked. This startup simulates
         // this configuration by simply putting the call to AddRazorRuntimeCompilation ahead of AddControllersWithViews / AddRazorPages.
-        var mvcBuilder = new MockMvcBuilder { Services = services, };
+        var mvcBuilder = new MockMvcBuilder { Services = services };
         mvcBuilder.AddRazorRuntimeCompilation(options => options.FileProviders.Add(fileProvider));
 
         services.AddSingleton(fileProvider);
@@ -34,17 +34,16 @@ public class StartupWithHostingStartup
 
     public static void Main(string[] args)
     {
-        var host = CreateWebHostBuilder(args)
-            .Build();
+        var host = CreateWebHostBuilder(args).Build();
 
         host.Run();
     }
 
     public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         new WebHostBuilder()
-        .UseContentRoot(Directory.GetCurrentDirectory())
-        .UseStartup<Startup>()
-        .UseKestrel();
+            .UseContentRoot(Directory.GetCurrentDirectory())
+            .UseStartup<Startup>()
+            .UseKestrel();
 
     private class MockMvcBuilder : IMvcBuilder
     {

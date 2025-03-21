@@ -17,7 +17,6 @@ namespace System.Activities.Runtime
     // ctor is public.  We did not want to put public ctors on some of our
     // pooled resources (like NativeActivityContext).
 
-
     abstract class Pool<T>
     {
         const int DefaultPoolSize = 10;
@@ -27,9 +26,7 @@ namespace System.Activities.Runtime
         int poolSize;
 
         public Pool()
-            : this(DefaultPoolSize)
-        {
-        }
+            : this(DefaultPoolSize) { }
 
         public Pool(int poolSize)
         {

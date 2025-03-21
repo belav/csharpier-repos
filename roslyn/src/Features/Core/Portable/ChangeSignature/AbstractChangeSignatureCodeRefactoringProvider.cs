@@ -13,15 +13,23 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.ChangeSignature
 {
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, LanguageNames.VisualBasic,
-        Name = PredefinedCodeRefactoringProviderNames.ChangeSignature), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeRefactoringProviderNames.ChangeSignature
+        ),
+        Shared
+    ]
     internal class ChangeSignatureCodeRefactoringProvider : CodeRefactoringProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public ChangeSignatureCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public ChangeSignatureCodeRefactoringProvider() { }
 
         public sealed override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -29,7 +37,14 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
             if (span.IsEmpty)
             {
                 var service = document.GetLanguageService<AbstractChangeSignatureService>();
-                var actions = await service.GetChangeSignatureCodeActionAsync(document, span, context.Options, cancellationToken).ConfigureAwait(false);
+                var actions = await service
+                    .GetChangeSignatureCodeActionAsync(
+                        document,
+                        span,
+                        context.Options,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 context.RegisterRefactorings(actions);
             }
         }

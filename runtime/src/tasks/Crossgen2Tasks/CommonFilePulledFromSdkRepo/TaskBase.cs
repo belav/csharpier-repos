@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Microsoft.Build.Utilities;
-using Microsoft.Build.Framework;
 using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
 
 namespace Microsoft.NET.Build.Tasks
 {
@@ -49,28 +49,36 @@ namespace Microsoft.NET.Build.Tasks
 
         private void LogErrorTelemetry(string eventName, Exception e)
         {
-            (BuildEngine as IBuildEngine5)?.LogTelemetry(eventName, new Dictionary<string, string> {
-                        {"exceptionType", e.GetType().ToString() },
-                        {"detail", ExceptionToStringWithoutMessage(e) }});
+            (BuildEngine as IBuildEngine5)?.LogTelemetry(
+                eventName,
+                new Dictionary<string, string>
+                {
+                    { "exceptionType", e.GetType().ToString() },
+                    { "detail", ExceptionToStringWithoutMessage(e) },
+                }
+            );
         }
 
         private static string ExceptionToStringWithoutMessage(Exception e)
         {
-            const string AggregateException_ToString = "{0}{1}---> (Inner Exception #{2}) {3}{4}{5}";
+            const string AggregateException_ToString =
+                "{0}{1}---> (Inner Exception #{2}) {3}{4}{5}";
             if (e is AggregateException aggregate)
             {
                 string text = NonAggregateExceptionToStringWithoutMessage(aggregate);
 
                 for (int i = 0; i < aggregate.InnerExceptions.Count; i++)
                 {
-                    text = string.Format(CultureInfo.InvariantCulture,
-                                         AggregateException_ToString,
-                                         text,
-                                         Environment.NewLine,
-                                         i,
-                                         ExceptionToStringWithoutMessage(aggregate.InnerExceptions[i]),
-                                         "<---",
-                                         Environment.NewLine);
+                    text = string.Format(
+                        CultureInfo.InvariantCulture,
+                        AggregateException_ToString,
+                        text,
+                        Environment.NewLine,
+                        i,
+                        ExceptionToStringWithoutMessage(aggregate.InnerExceptions[i]),
+                        "<---",
+                        Environment.NewLine
+                    );
                 }
 
                 return text;
@@ -84,16 +92,20 @@ namespace Microsoft.NET.Build.Tasks
         private static string NonAggregateExceptionToStringWithoutMessage(Exception e)
         {
             string s;
-            const string Exception_EndOfInnerExceptionStack = "--- End of inner exception stack trace ---";
-
+            const string Exception_EndOfInnerExceptionStack =
+                "--- End of inner exception stack trace ---";
 
             s = e.GetType().ToString();
 
             if (e.InnerException != null)
             {
-                s = s + " ---> " + ExceptionToStringWithoutMessage(e.InnerException) + Environment.NewLine +
-                "   " + Exception_EndOfInnerExceptionStack;
-
+                s =
+                    s
+                    + " ---> "
+                    + ExceptionToStringWithoutMessage(e.InnerException)
+                    + Environment.NewLine
+                    + "   "
+                    + Exception_EndOfInnerExceptionStack;
             }
 
             var stackTrace = e.StackTrace;

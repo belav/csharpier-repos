@@ -16,9 +16,7 @@ public class ModelPropertyCollection : ReadOnlyCollection<ModelMetadata>
     /// </summary>
     /// <param name="properties">The properties.</param>
     public ModelPropertyCollection(IEnumerable<ModelMetadata> properties)
-        : base(properties.ToList())
-    {
-    }
+        : base(properties.ToList()) { }
 
     /// <summary>
     /// Gets a <see cref="ModelMetadata"/> instance for the property corresponding to <paramref name="propertyName"/>.

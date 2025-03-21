@@ -3,37 +3,42 @@ using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Execution
 {
-	public class ProjectTaskOutputPropertyInstance : ProjectTaskInstanceChild
-	{
-		internal ProjectTaskOutputPropertyInstance (ProjectOutputElement xml)
-		{
-			condition = xml.Condition;
-			PropertyName = xml.PropertyName;
-			TaskParameter = xml.TaskParameter;
-			condition_location = xml.ConditionLocation;
-			location = xml.Location;
-			task_parameter_location = xml.TaskParameterLocation;
-		}
+    public class ProjectTaskOutputPropertyInstance : ProjectTaskInstanceChild
+    {
+        internal ProjectTaskOutputPropertyInstance(ProjectOutputElement xml)
+        {
+            condition = xml.Condition;
+            PropertyName = xml.PropertyName;
+            TaskParameter = xml.TaskParameter;
+            condition_location = xml.ConditionLocation;
+            location = xml.Location;
+            task_parameter_location = xml.TaskParameterLocation;
+        }
 
-		public string PropertyName { get; private set; }
-		public string TaskParameter { get; private set; }
+        public string PropertyName { get; private set; }
+        public string TaskParameter { get; private set; }
 
-		readonly string condition;
-		public override string Condition {
-			get { return condition; }
-		}
-		
-		readonly ElementLocation condition_location, location, task_parameter_location;
-		public ElementLocation PropertyNameLocation { get; private set; }
-		public override ElementLocation ConditionLocation {
-			get { return condition_location; }
-		}		
-		public override ElementLocation Location {
-			get { return location; }
-		}
-		public override ElementLocation TaskParameterLocation {
-			get { return task_parameter_location; }
-		}
-	}
+        readonly string condition;
+        public override string Condition
+        {
+            get { return condition; }
+        }
+
+        readonly ElementLocation condition_location,
+            location,
+            task_parameter_location;
+        public ElementLocation PropertyNameLocation { get; private set; }
+        public override ElementLocation ConditionLocation
+        {
+            get { return condition_location; }
+        }
+        public override ElementLocation Location
+        {
+            get { return location; }
+        }
+        public override ElementLocation TaskParameterLocation
+        {
+            get { return task_parameter_location; }
+        }
+    }
 }
-

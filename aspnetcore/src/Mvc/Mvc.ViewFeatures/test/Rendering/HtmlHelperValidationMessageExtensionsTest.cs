@@ -22,7 +22,8 @@ public class HtmlHelperValidationMessageExtensionsTest
         // Assert
         Assert.Equal(
             "<span class=\"HtmlEncode[[field-validation-valid]]\" data-valmsg-for=\"HtmlEncode[[Property1]]\" data-valmsg-replace=\"HtmlEncode[[true]]\"></span>",
-            HtmlContentUtilities.HtmlContentToString(validationMessageResult));
+            HtmlContentUtilities.HtmlContentToString(validationMessageResult)
+        );
     }
 
     [Fact]
@@ -37,7 +38,8 @@ public class HtmlHelperValidationMessageExtensionsTest
         // Assert
         Assert.Equal(
             "<span class=\"HtmlEncode[[field-validation-valid]]\" data-valmsg-for=\"HtmlEncode[[Property1]]\" data-valmsg-replace=\"HtmlEncode[[true]]\"></span>",
-            HtmlContentUtilities.HtmlContentToString(validationMessageForResult));
+            HtmlContentUtilities.HtmlContentToString(validationMessageForResult)
+        );
     }
 
     [Fact]
@@ -47,12 +49,16 @@ public class HtmlHelperValidationMessageExtensionsTest
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
         // Act
-        var validationMessageResult = helper.ValidationMessage("Property1", message: "Custom Message");
+        var validationMessageResult = helper.ValidationMessage(
+            "Property1",
+            message: "Custom Message"
+        );
 
         // Assert
         Assert.Equal(
             "<span class=\"HtmlEncode[[field-validation-valid]]\" data-valmsg-for=\"HtmlEncode[[Property1]]\" data-valmsg-replace=\"HtmlEncode[[false]]\">HtmlEncode[[Custom Message]]</span>",
-            HtmlContentUtilities.HtmlContentToString(validationMessageResult));
+            HtmlContentUtilities.HtmlContentToString(validationMessageResult)
+        );
     }
 
     [Fact]
@@ -62,12 +68,16 @@ public class HtmlHelperValidationMessageExtensionsTest
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
         // Act
-        var validationMessageForResult = helper.ValidationMessageFor(m => m.Property1, message: "Custom Message");
+        var validationMessageForResult = helper.ValidationMessageFor(
+            m => m.Property1,
+            message: "Custom Message"
+        );
 
         // Assert
         Assert.Equal(
             "<span class=\"HtmlEncode[[field-validation-valid]]\" data-valmsg-for=\"HtmlEncode[[Property1]]\" data-valmsg-replace=\"HtmlEncode[[false]]\">HtmlEncode[[Custom Message]]</span>",
-            HtmlContentUtilities.HtmlContentToString(validationMessageForResult));
+            HtmlContentUtilities.HtmlContentToString(validationMessageForResult)
+        );
     }
 
     [Fact]
@@ -77,12 +87,17 @@ public class HtmlHelperValidationMessageExtensionsTest
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
         // Act
-        var validationMessageResult = helper.ValidationMessage("Property1", message: "Custom Message", htmlAttributes: new { attr = "value" });
+        var validationMessageResult = helper.ValidationMessage(
+            "Property1",
+            message: "Custom Message",
+            htmlAttributes: new { attr = "value" }
+        );
 
         // Assert
         Assert.Equal(
             "<span attr=\"HtmlEncode[[value]]\" class=\"HtmlEncode[[field-validation-valid]]\" data-valmsg-for=\"HtmlEncode[[Property1]]\" data-valmsg-replace=\"HtmlEncode[[false]]\">HtmlEncode[[Custom Message]]</span>",
-            HtmlContentUtilities.HtmlContentToString(validationMessageResult));
+            HtmlContentUtilities.HtmlContentToString(validationMessageResult)
+        );
     }
 
     [Fact]
@@ -92,12 +107,17 @@ public class HtmlHelperValidationMessageExtensionsTest
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
         // Act
-        var validationMessageForResult = helper.ValidationMessageFor(m => m.Property1, message: "Custom Message", htmlAttributes: new { attr = "value" });
+        var validationMessageForResult = helper.ValidationMessageFor(
+            m => m.Property1,
+            message: "Custom Message",
+            htmlAttributes: new { attr = "value" }
+        );
 
         // Assert
         Assert.Equal(
             "<span attr=\"HtmlEncode[[value]]\" class=\"HtmlEncode[[field-validation-valid]]\" data-valmsg-for=\"HtmlEncode[[Property1]]\" data-valmsg-replace=\"HtmlEncode[[false]]\">HtmlEncode[[Custom Message]]</span>",
-            HtmlContentUtilities.HtmlContentToString(validationMessageForResult));
+            HtmlContentUtilities.HtmlContentToString(validationMessageForResult)
+        );
     }
 
     [Fact]
@@ -107,12 +127,17 @@ public class HtmlHelperValidationMessageExtensionsTest
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
         // Act
-        var validationMessageResult = helper.ValidationMessage("Property1", message: "Custom Message", tag: "div");
+        var validationMessageResult = helper.ValidationMessage(
+            "Property1",
+            message: "Custom Message",
+            tag: "div"
+        );
 
         // Assert
         Assert.Equal(
             "<div class=\"HtmlEncode[[field-validation-valid]]\" data-valmsg-for=\"HtmlEncode[[Property1]]\" data-valmsg-replace=\"HtmlEncode[[false]]\">HtmlEncode[[Custom Message]]</div>",
-            HtmlContentUtilities.HtmlContentToString(validationMessageResult));
+            HtmlContentUtilities.HtmlContentToString(validationMessageResult)
+        );
     }
 
     [Fact]
@@ -122,11 +147,16 @@ public class HtmlHelperValidationMessageExtensionsTest
         var helper = DefaultTemplatesUtilities.GetHtmlHelper();
 
         // Act
-        var validationMessageForResult = helper.ValidationMessageFor(m => m.Property1, message: "Custom Message", tag: "div");
+        var validationMessageForResult = helper.ValidationMessageFor(
+            m => m.Property1,
+            message: "Custom Message",
+            tag: "div"
+        );
 
         // Assert
         Assert.Equal(
             "<div class=\"HtmlEncode[[field-validation-valid]]\" data-valmsg-for=\"HtmlEncode[[Property1]]\" data-valmsg-replace=\"HtmlEncode[[false]]\">HtmlEncode[[Custom Message]]</div>",
-            HtmlContentUtilities.HtmlContentToString(validationMessageForResult));
+            HtmlContentUtilities.HtmlContentToString(validationMessageForResult)
+        );
     }
 }

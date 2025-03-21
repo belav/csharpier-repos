@@ -67,6 +67,7 @@ namespace System.Security.Cryptography
         public byte[]? Prime;
 
         private Oid _oid;
+
         /// <summary>
         /// The Oid representing the named curve. Applies only to Named curves.
         /// </summary>
@@ -78,7 +79,9 @@ namespace System.Security.Cryptography
                 ArgumentNullException.ThrowIfNull(value, nameof(Oid));
 
                 if (string.IsNullOrEmpty(value.Value) && string.IsNullOrEmpty(value.FriendlyName))
-                    throw new ArgumentException(SR.Format(SR.Cryptography_InvalidCurveOid, value.Value));
+                    throw new ArgumentException(
+                        SR.Format(SR.Cryptography_InvalidCurveOid, value.Value)
+                    );
 
                 _oid = value;
             }
@@ -131,9 +134,7 @@ namespace System.Security.Cryptography
                 {
                     oid = Oid.FromFriendlyName(oidFriendlyName, OidGroup.PublicKeyAlgorithm);
                 }
-                catch (CryptographicException)
-                {
-                }
+                catch (CryptographicException) { }
             }
 
             oid ??= new Oid(oidValue, oidFriendlyName);
@@ -144,34 +145,25 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return CurveType == ECCurve.ECCurveType.PrimeShortWeierstrass ||
-                    CurveType == ECCurve.ECCurveType.PrimeMontgomery ||
-                    CurveType == ECCurve.ECCurveType.PrimeTwistedEdwards;
+                return CurveType == ECCurve.ECCurveType.PrimeShortWeierstrass
+                    || CurveType == ECCurve.ECCurveType.PrimeMontgomery
+                    || CurveType == ECCurve.ECCurveType.PrimeTwistedEdwards;
             }
         }
 
         public bool IsCharacteristic2
         {
-            get
-            {
-                return CurveType == ECCurve.ECCurveType.Characteristic2;
-            }
+            get { return CurveType == ECCurve.ECCurveType.Characteristic2; }
         }
 
         public bool IsExplicit
         {
-            get
-            {
-                return IsPrime || IsCharacteristic2;
-            }
+            get { return IsPrime || IsCharacteristic2; }
         }
 
         public bool IsNamed
         {
-            get
-            {
-                return CurveType == ECCurve.ECCurveType.Named;
-            }
+            get { return CurveType == ECCurve.ECCurveType.Named; }
         }
 
         /// <summary>
@@ -189,22 +181,33 @@ namespace System.Security.Cryptography
                     throw new CryptographicException(SR.Cryptography_InvalidECNamedCurve);
                 }
 
-                if (Oid == null ||
-                    (string.IsNullOrEmpty(Oid.FriendlyName) && string.IsNullOrEmpty(Oid.Value)))
+                if (
+                    Oid == null
+                    || (string.IsNullOrEmpty(Oid.FriendlyName) && string.IsNullOrEmpty(Oid.Value))
+                )
                 {
-                    throw new CryptographicException(SR.Format(SR.Cryptography_InvalidCurveOid, Oid?.Value));
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_InvalidCurveOid, Oid?.Value)
+                    );
                 }
             }
             else if (IsExplicit)
             {
                 bool hasErrors = false;
 
-                if (A == null ||
-                    B == null || B.Length != A.Length ||
-                    G.X == null || G.X.Length != A.Length ||
-                    G.Y == null || G.Y.Length != A.Length ||
-                    Order == null || Order.Length == 0 ||
-                    Cofactor == null || Cofactor.Length == 0)
+                if (
+                    A == null
+                    || B == null
+                    || B.Length != A.Length
+                    || G.X == null
+                    || G.X.Length != A.Length
+                    || G.Y == null
+                    || G.Y.Length != A.Length
+                    || Order == null
+                    || Order.Length == 0
+                    || Cofactor == null
+                    || Cofactor.Length == 0
+                )
                 {
                     hasErrors = true;
                 }
@@ -233,7 +236,9 @@ namespace System.Security.Cryptography
                     }
 
                     if (hasErrors)
-                        throw new CryptographicException(SR.Cryptography_InvalidECCharacteristic2Curve);
+                        throw new CryptographicException(
+                            SR.Cryptography_InvalidECCharacteristic2Curve
+                        );
                 }
             }
             else
@@ -242,23 +247,27 @@ namespace System.Security.Cryptography
                 Debug.Assert(CurveType == ECCurveType.Implicit);
                 if (HasAnyExplicitParameters() || Oid != null)
                 {
-                    throw new CryptographicException(SR.Format(SR.Cryptography_CurveNotSupported, CurveType.ToString()));
+                    throw new CryptographicException(
+                        SR.Format(SR.Cryptography_CurveNotSupported, CurveType.ToString())
+                    );
                 }
             }
         }
 
         private bool HasAnyExplicitParameters()
         {
-            return (A != null ||
-                B != null ||
-                G.X != null ||
-                G.Y != null ||
-                Order != null ||
-                Cofactor != null ||
-                Prime != null ||
-                Polynomial != null ||
-                Seed != null ||
-                Hash != null);
+            return (
+                A != null
+                || B != null
+                || G.X != null
+                || G.Y != null
+                || Order != null
+                || Cofactor != null
+                || Prime != null
+                || Polynomial != null
+                || Seed != null
+                || Hash != null
+            );
         }
     }
 }

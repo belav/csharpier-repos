@@ -3,7 +3,6 @@
 
 using System.Net;
 using System.Tests;
-
 using Xunit;
 
 namespace System.PrivateUri.Tests
@@ -37,7 +36,10 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void IdnCheckHostName_IPv6WithoutBrackets_IPv6()
         {
-            Assert.Equal(UriHostNameType.IPv6, Uri.CheckHostName(IPAddress.IPv6Loopback.ToString()));
+            Assert.Equal(
+                UriHostNameType.IPv6,
+                Uri.CheckHostName(IPAddress.IPv6Loopback.ToString())
+            );
         }
 
         [Fact]
@@ -49,10 +51,16 @@ namespace System.PrivateUri.Tests
         [Fact]
         public void IdnCheckHostName_UnicodeIdnOffIriOn_Dns()
         {
-            Assert.Equal(UriHostNameType.Dns, Uri.CheckHostName("nZMot\u00E1\u00D3\u0063vKi\u00CD.contoso.com"));
+            Assert.Equal(
+                UriHostNameType.Dns,
+                Uri.CheckHostName("nZMot\u00E1\u00D3\u0063vKi\u00CD.contoso.com")
+            );
             using (var helper = new ThreadCultureChange("zh-cn"))
             {
-                Assert.Equal(UriHostNameType.Dns, Uri.CheckHostName("nZMot\u00E1\u00D3\u0063vKi\u00CD.contoso.com"));
+                Assert.Equal(
+                    UriHostNameType.Dns,
+                    Uri.CheckHostName("nZMot\u00E1\u00D3\u0063vKi\u00CD.contoso.com")
+                );
             }
         }
     }

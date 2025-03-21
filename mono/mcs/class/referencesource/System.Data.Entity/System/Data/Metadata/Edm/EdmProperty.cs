@@ -15,7 +15,11 @@ namespace System.Data.Metadata.Edm
     /// <summary>
     /// Represent the edm property class
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Edm"
+    )]
     public sealed class EdmProperty : EdmMember
     {
         #region Constructors
@@ -44,11 +48,11 @@ namespace System.Data.Metadata.Edm
         /// <summary>Store the handle, allowing the PropertyInfo/MethodInfo/Type references to be GC'd</summary>
         internal readonly System.RuntimeTypeHandle EntityDeclaringType;
 
-        /// <summary>cached dynamic method to get the property value from a CLR instance</summary> 
-        private Func<object,object> _memberGetter;
+        /// <summary>cached dynamic method to get the property value from a CLR instance</summary>
+        private Func<object, object> _memberGetter;
 
-        /// <summary>cached dynamic method to set a CLR property value on a CLR instance</summary> 
-        private Action<object,object> _memberSetter;
+        /// <summary>cached dynamic method to set a CLR property value on a CLR instance</summary>
+        private Action<object, object> _memberSetter;
         #endregion
 
         /// <summary>
@@ -58,7 +62,12 @@ namespace System.Data.Metadata.Edm
         /// <param name="typeUsage">TypeUsage object containing the property type and its facets</param>
         /// <param name="propertyInfo">for the property</param>
         /// <param name="entityDeclaringType">The declaring type of the entity containing the property</param>
-        internal EdmProperty(string name, TypeUsage typeUsage, System.Reflection.PropertyInfo propertyInfo, RuntimeTypeHandle entityDeclaringType)
+        internal EdmProperty(
+            string name,
+            TypeUsage typeUsage,
+            System.Reflection.PropertyInfo propertyInfo,
+            RuntimeTypeHandle entityDeclaringType
+        )
             : this(name, typeUsage)
         {
             System.Diagnostics.Debug.Assert(name == propertyInfo.Name, "different PropertyName");
@@ -67,10 +76,14 @@ namespace System.Data.Metadata.Edm
                 System.Reflection.MethodInfo method;
 
                 method = propertyInfo.GetGetMethod(true); // return public or non-public getter
-                PropertyGetterHandle = ((null != method) ? method.MethodHandle : default(System.RuntimeMethodHandle));
+                PropertyGetterHandle = (
+                    (null != method) ? method.MethodHandle : default(System.RuntimeMethodHandle)
+                );
 
                 method = propertyInfo.GetSetMethod(true); // return public or non-public getter
-                PropertySetterHandle = ((null != method) ? method.MethodHandle : default(System.RuntimeMethodHandle));
+                PropertySetterHandle = (
+                    (null != method) ? method.MethodHandle : default(System.RuntimeMethodHandle)
+                );
 
                 EntityDeclaringType = entityDeclaringType;
             }
@@ -79,7 +92,10 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Returns the kind of the type
         /// </summary>
-        public override BuiltInTypeKind BuiltInTypeKind { get { return BuiltInTypeKind.EdmProperty; } }
+        public override BuiltInTypeKind BuiltInTypeKind
+        {
+            get { return BuiltInTypeKind.EdmProperty; }
+        }
 
         /// <summary>
         /// Returns true if this property is nullable.
@@ -104,10 +120,7 @@ namespace System.Data.Metadata.Edm
         /// <exception cref="System.InvalidOperationException">Thrown if the setter is called when the EdmProperty instance is in ReadOnly state</exception>
         public bool Nullable
         {
-            get
-            {
-                return (bool)TypeUsage.Facets[DbProviderManifest.NullableFacetName].Value;
-            }
+            get { return (bool)TypeUsage.Facets[DbProviderManifest.NullableFacetName].Value; }
         }
 
         /// <summary>
@@ -116,14 +129,12 @@ namespace System.Data.Metadata.Edm
         /// <exception cref="System.InvalidOperationException">Thrown if the setter is called when the EdmProperty instance is in ReadOnly state</exception>
         public Object DefaultValue
         {
-            get
-            {
-                return TypeUsage.Facets[DbProviderManifest.DefaultValueFacetName].Value;
-            }
+            get { return TypeUsage.Facets[DbProviderManifest.DefaultValueFacetName].Value; }
         }
 
-        /// <summary>cached dynamic method to get the property value from a CLR instance</summary> 
-        internal Func<object,object> ValueGetter {
+        /// <summary>cached dynamic method to get the property value from a CLR instance</summary>
+        internal Func<object, object> ValueGetter
+        {
             get { return _memberGetter; }
             set
             {
@@ -133,8 +144,8 @@ namespace System.Data.Metadata.Edm
             }
         }
 
-        /// <summary>cached dynamic method to set a CLR property value on a CLR instance</summary> 
-        internal Action<object,object> ValueSetter
+        /// <summary>cached dynamic method to set a CLR property value on a CLR instance</summary>
+        internal Action<object, object> ValueSetter
         {
             get { return _memberSetter; }
             set

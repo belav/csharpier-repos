@@ -100,7 +100,10 @@ public partial class TypedResultsTests
     [Fact]
     public void Accepted_WithNullUriAndValue_ThrowsArgumentNullException()
     {
-        Assert.Throws<ArgumentNullException>("uri", () => TypedResults.Accepted(default(Uri), default(object)));
+        Assert.Throws<ArgumentNullException>(
+            "uri",
+            () => TypedResults.Accepted(default(Uri), default(object))
+        );
     }
 
     [Fact]
@@ -235,7 +238,14 @@ public partial class TypedResultsTests
 
     [Theory]
     [MemberData(nameof(BytesOrFile_ResultHasCorrectValues_Data))]
-    public void BytesOrFile_ResultHasCorrectValues(int bytesOrFile, string contentType, string fileDownloadName, bool enableRangeProcessing, DateTimeOffset lastModified, EntityTagHeaderValue entityTag)
+    public void BytesOrFile_ResultHasCorrectValues(
+        int bytesOrFile,
+        string contentType,
+        string fileDownloadName,
+        bool enableRangeProcessing,
+        DateTimeOffset lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         // Arrange
         var contents = new byte[0];
@@ -243,8 +253,22 @@ public partial class TypedResultsTests
         // Act
         var result = bytesOrFile switch
         {
-            0 => TypedResults.Bytes(contents, contentType, fileDownloadName, enableRangeProcessing, lastModified, entityTag),
-            _ => TypedResults.File(contents, contentType, fileDownloadName, enableRangeProcessing, lastModified, entityTag)
+            0 => TypedResults.Bytes(
+                contents,
+                contentType,
+                fileDownloadName,
+                enableRangeProcessing,
+                lastModified,
+                entityTag
+            ),
+            _ => TypedResults.File(
+                contents,
+                contentType,
+                fileDownloadName,
+                enableRangeProcessing,
+                lastModified,
+                entityTag
+            ),
         };
 
         // Assert
@@ -256,23 +280,69 @@ public partial class TypedResultsTests
         Assert.Equal(entityTag, result.EntityTag);
     }
 
-    public static IEnumerable<object[]> BytesOrFile_ResultHasCorrectValues_Data => new List<object[]>
-    {
-        new object[] { 0, "text/plain", "testfile", true, new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)), EntityTagHeaderValue.Any },
-        new object[] { 0, default(string), default(string), default(bool), default(DateTimeOffset?), default(EntityTagHeaderValue) },
-        new object[] { 1, "text/plain", "testfile", true, new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)), EntityTagHeaderValue.Any },
-        new object[] { 1, default(string), default(string), default(bool), default(DateTimeOffset?), default(EntityTagHeaderValue) }
-    };
+    public static IEnumerable<object[]> BytesOrFile_ResultHasCorrectValues_Data =>
+        new List<object[]>
+        {
+            new object[]
+            {
+                0,
+                "text/plain",
+                "testfile",
+                true,
+                new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
+                EntityTagHeaderValue.Any,
+            },
+            new object[]
+            {
+                0,
+                default(string),
+                default(string),
+                default(bool),
+                default(DateTimeOffset?),
+                default(EntityTagHeaderValue),
+            },
+            new object[]
+            {
+                1,
+                "text/plain",
+                "testfile",
+                true,
+                new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
+                EntityTagHeaderValue.Any,
+            },
+            new object[]
+            {
+                1,
+                default(string),
+                default(string),
+                default(bool),
+                default(DateTimeOffset?),
+                default(EntityTagHeaderValue),
+            },
+        };
 
     [Theory]
     [MemberData(nameof(PhysicalOrVirtualFile_ResultHasCorrectValues_Data))]
-    public void PhysicalFile_ResultHasCorrectValues(string contentType, string fileDownloadName, bool enableRangeProcessing, DateTimeOffset lastModified, EntityTagHeaderValue entityTag)
+    public void PhysicalFile_ResultHasCorrectValues(
+        string contentType,
+        string fileDownloadName,
+        bool enableRangeProcessing,
+        DateTimeOffset lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         // Arrange
         var path = "path";
 
         // Act
-        var result = TypedResults.PhysicalFile(path, contentType, fileDownloadName, lastModified, entityTag, enableRangeProcessing);
+        var result = TypedResults.PhysicalFile(
+            path,
+            contentType,
+            fileDownloadName,
+            lastModified,
+            entityTag,
+            enableRangeProcessing
+        );
 
         // Assert
         Assert.Equal(path, result.FileName);
@@ -285,13 +355,26 @@ public partial class TypedResultsTests
 
     [Theory]
     [MemberData(nameof(PhysicalOrVirtualFile_ResultHasCorrectValues_Data))]
-    public void VirtualFile_ResultHasCorrectValues(string contentType, string fileDownloadName, bool enableRangeProcessing, DateTimeOffset lastModified, EntityTagHeaderValue entityTag)
+    public void VirtualFile_ResultHasCorrectValues(
+        string contentType,
+        string fileDownloadName,
+        bool enableRangeProcessing,
+        DateTimeOffset lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         // Arrange
         var path = "path";
 
         // Act
-        var result = TypedResults.VirtualFile(path, contentType, fileDownloadName, lastModified, entityTag, enableRangeProcessing);
+        var result = TypedResults.VirtualFile(
+            path,
+            contentType,
+            fileDownloadName,
+            lastModified,
+            entityTag,
+            enableRangeProcessing
+        );
 
         // Assert
         Assert.Equal(path, result.FileName);
@@ -302,13 +385,42 @@ public partial class TypedResultsTests
         Assert.Equal(entityTag, result.EntityTag);
     }
 
-    public static IEnumerable<object[]> PhysicalOrVirtualFile_ResultHasCorrectValues_Data => new List<object[]>
-    {
-        new object[] { "text/plain", "testfile", true, new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)), EntityTagHeaderValue.Any },
-        new object[] { default(string), default(string), default(bool), default(DateTimeOffset?), default(EntityTagHeaderValue) },
-        new object[] { "text/plain", "testfile", true, new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)), EntityTagHeaderValue.Any },
-        new object[] { default(string), default(string), default(bool), default(DateTimeOffset?), default(EntityTagHeaderValue) }
-    };
+    public static IEnumerable<object[]> PhysicalOrVirtualFile_ResultHasCorrectValues_Data =>
+        new List<object[]>
+        {
+            new object[]
+            {
+                "text/plain",
+                "testfile",
+                true,
+                new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
+                EntityTagHeaderValue.Any,
+            },
+            new object[]
+            {
+                default(string),
+                default(string),
+                default(bool),
+                default(DateTimeOffset?),
+                default(EntityTagHeaderValue),
+            },
+            new object[]
+            {
+                "text/plain",
+                "testfile",
+                true,
+                new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
+                EntityTagHeaderValue.Any,
+            },
+            new object[]
+            {
+                default(string),
+                default(string),
+                default(bool),
+                default(DateTimeOffset?),
+                default(EntityTagHeaderValue),
+            },
+        };
 
     [Fact]
     public void Bytes_WithNullContents_ThrowsArgNullException()
@@ -319,13 +431,19 @@ public partial class TypedResultsTests
     [Fact]
     public void File_WithNullContents_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>("fileContents", () => TypedResults.File(default(byte[])));
+        Assert.Throws<ArgumentNullException>(
+            "fileContents",
+            () => TypedResults.File(default(byte[]))
+        );
     }
 
     [Fact]
     public void File_WithNullStream_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>("fileStream", () => TypedResults.File(default(Stream)));
+        Assert.Throws<ArgumentNullException>(
+            "fileStream",
+            () => TypedResults.File(default(Stream))
+        );
     }
 
     [Fact]
@@ -337,13 +455,19 @@ public partial class TypedResultsTests
     [Fact]
     public void Stream_WithNullPipeReader_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>("pipeReader", () => TypedResults.Stream(default(PipeReader)));
+        Assert.Throws<ArgumentNullException>(
+            "pipeReader",
+            () => TypedResults.Stream(default(PipeReader))
+        );
     }
 
     [Fact]
     public void Stream_WithNullCallback_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>("streamWriterCallback", () => TypedResults.Stream(default(Func<Stream, Task>)));
+        Assert.Throws<ArgumentNullException>(
+            "streamWriterCallback",
+            () => TypedResults.Stream(default(Func<Stream, Task>))
+        );
     }
 
     [Fact]
@@ -372,7 +496,14 @@ public partial class TypedResultsTests
 
     [Theory]
     [MemberData(nameof(Stream_ResultHasCorrectValues_Data))]
-    public void Stream_ResultHasCorrectValues(int overload, string contentType, string fileDownloadName, bool enableRangeProcessing, DateTimeOffset lastModified, EntityTagHeaderValue entityTag)
+    public void Stream_ResultHasCorrectValues(
+        int overload,
+        string contentType,
+        string fileDownloadName,
+        bool enableRangeProcessing,
+        DateTimeOffset lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         // Arrange
         var stream = new MemoryStream();
@@ -380,9 +511,30 @@ public partial class TypedResultsTests
         // Act
         var result = overload switch
         {
-            0 => TypedResults.Stream(stream, contentType, fileDownloadName, lastModified, entityTag, enableRangeProcessing),
-            1 => TypedResults.Stream(PipeReader.Create(stream), contentType, fileDownloadName, lastModified, entityTag, enableRangeProcessing),
-            _ => (IResult)TypedResults.Stream((s) => Task.CompletedTask, contentType, fileDownloadName, lastModified, entityTag)
+            0 => TypedResults.Stream(
+                stream,
+                contentType,
+                fileDownloadName,
+                lastModified,
+                entityTag,
+                enableRangeProcessing
+            ),
+            1 => TypedResults.Stream(
+                PipeReader.Create(stream),
+                contentType,
+                fileDownloadName,
+                lastModified,
+                entityTag,
+                enableRangeProcessing
+            ),
+            _ => (IResult)
+                TypedResults.Stream(
+                    (s) => Task.CompletedTask,
+                    contentType,
+                    fileDownloadName,
+                    lastModified,
+                    entityTag
+                ),
         };
 
         // Assert
@@ -391,7 +543,10 @@ public partial class TypedResultsTests
             case <= 1:
                 var fileStreamResult = result as FileStreamHttpResult;
                 Assert.NotNull(fileStreamResult.FileStream);
-                Assert.Equal(contentType ?? "application/octet-stream", fileStreamResult.ContentType);
+                Assert.Equal(
+                    contentType ?? "application/octet-stream",
+                    fileStreamResult.ContentType
+                );
                 Assert.Equal(fileDownloadName, fileStreamResult.FileDownloadName);
                 Assert.Equal(enableRangeProcessing, fileStreamResult.EnableRangeProcessing);
                 Assert.Equal(lastModified, fileStreamResult.LastModified);
@@ -400,65 +555,137 @@ public partial class TypedResultsTests
 
             default:
                 var pushStreamResult = result as PushStreamHttpResult;
-                Assert.Equal(contentType ?? "application/octet-stream", pushStreamResult.ContentType);
+                Assert.Equal(
+                    contentType ?? "application/octet-stream",
+                    pushStreamResult.ContentType
+                );
                 Assert.Equal(fileDownloadName, pushStreamResult.FileDownloadName);
                 Assert.False(pushStreamResult.EnableRangeProcessing);
                 Assert.Equal(lastModified, pushStreamResult.LastModified);
                 Assert.Equal(entityTag, pushStreamResult.EntityTag);
                 break;
         }
-
     }
 
-    public static IEnumerable<object[]> Stream_ResultHasCorrectValues_Data => new List<object[]>
-    {
-        new object[] { 0, "text/plain", "testfile", true, new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)), EntityTagHeaderValue.Any },
-        new object[] { 0, default(string), default(string), default(bool), default(DateTimeOffset?), default(EntityTagHeaderValue) },
-        new object[] { 1, "text/plain", "testfile", true, new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)), EntityTagHeaderValue.Any },
-        new object[] { 1, default(string), default(string), default(bool), default(DateTimeOffset?), default(EntityTagHeaderValue) },
-        new object[] { 2, "text/plain", "testfile", true, new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)), EntityTagHeaderValue.Any },
-        new object[] { 2, default(string), default(string), default(bool), default(DateTimeOffset?), default(EntityTagHeaderValue) }
-    };
+    public static IEnumerable<object[]> Stream_ResultHasCorrectValues_Data =>
+        new List<object[]>
+        {
+            new object[]
+            {
+                0,
+                "text/plain",
+                "testfile",
+                true,
+                new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
+                EntityTagHeaderValue.Any,
+            },
+            new object[]
+            {
+                0,
+                default(string),
+                default(string),
+                default(bool),
+                default(DateTimeOffset?),
+                default(EntityTagHeaderValue),
+            },
+            new object[]
+            {
+                1,
+                "text/plain",
+                "testfile",
+                true,
+                new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
+                EntityTagHeaderValue.Any,
+            },
+            new object[]
+            {
+                1,
+                default(string),
+                default(string),
+                default(bool),
+                default(DateTimeOffset?),
+                default(EntityTagHeaderValue),
+            },
+            new object[]
+            {
+                2,
+                "text/plain",
+                "testfile",
+                true,
+                new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
+                EntityTagHeaderValue.Any,
+            },
+            new object[]
+            {
+                2,
+                default(string),
+                default(string),
+                default(bool),
+                default(DateTimeOffset?),
+                default(EntityTagHeaderValue),
+            },
+        };
 
     [Theory]
     [MemberData(nameof(ChallengeForbidSignInOut_ResultHasCorrectValues_Data))]
-    public void Challenge_ResultHasCorrectValues(AuthenticationProperties properties, IList<string> authenticationSchemes)
+    public void Challenge_ResultHasCorrectValues(
+        AuthenticationProperties properties,
+        IList<string> authenticationSchemes
+    )
     {
         // Act
         var result = TypedResults.Challenge(properties, authenticationSchemes);
 
         // Assert
         Assert.Equal(properties, result.Properties);
-        Assert.Equal(authenticationSchemes ?? new ReadOnlyCollection<string>(new List<string>()), result.AuthenticationSchemes);
+        Assert.Equal(
+            authenticationSchemes ?? new ReadOnlyCollection<string>(new List<string>()),
+            result.AuthenticationSchemes
+        );
     }
 
     [Theory]
     [MemberData(nameof(ChallengeForbidSignInOut_ResultHasCorrectValues_Data))]
-    public void Forbid_ResultHasCorrectValues(AuthenticationProperties properties, IList<string> authenticationSchemes)
+    public void Forbid_ResultHasCorrectValues(
+        AuthenticationProperties properties,
+        IList<string> authenticationSchemes
+    )
     {
         // Act
         var result = TypedResults.Forbid(properties, authenticationSchemes);
 
         // Assert
         Assert.Equal(properties, result.Properties);
-        Assert.Equal(authenticationSchemes ?? new ReadOnlyCollection<string>(new List<string>()), result.AuthenticationSchemes);
+        Assert.Equal(
+            authenticationSchemes ?? new ReadOnlyCollection<string>(new List<string>()),
+            result.AuthenticationSchemes
+        );
     }
 
     [Theory]
     [MemberData(nameof(ChallengeForbidSignInOut_ResultHasCorrectValues_Data))]
-    public void SignOut_ResultHasCorrectValues(AuthenticationProperties properties, IList<string> authenticationSchemes)
+    public void SignOut_ResultHasCorrectValues(
+        AuthenticationProperties properties,
+        IList<string> authenticationSchemes
+    )
     {
         // Act
         var result = TypedResults.SignOut(properties, authenticationSchemes);
 
         // Assert
         Assert.Equal(properties, result.Properties);
-        Assert.Equal(authenticationSchemes ?? new ReadOnlyCollection<string>(new List<string>()), result.AuthenticationSchemes);
+        Assert.Equal(
+            authenticationSchemes ?? new ReadOnlyCollection<string>(new List<string>()),
+            result.AuthenticationSchemes
+        );
     }
 
     [Theory]
     [MemberData(nameof(ChallengeForbidSignInOut_ResultHasCorrectValues_Data))]
-    public void SignIn_ResultHasCorrectValues(AuthenticationProperties properties, IList<string> authenticationSchemes)
+    public void SignIn_ResultHasCorrectValues(
+        AuthenticationProperties properties,
+        IList<string> authenticationSchemes
+    )
     {
         // Arrange
         var principal = new ClaimsPrincipal();
@@ -472,13 +699,22 @@ public partial class TypedResultsTests
         Assert.Equal(authenticationSchemes?.First(), result.AuthenticationScheme);
     }
 
-    public static IEnumerable<object[]> ChallengeForbidSignInOut_ResultHasCorrectValues_Data => new List<object[]>
-    {
-        new object[] { new AuthenticationProperties(), new List<string> { "TestScheme" } },
-        new object[] { new AuthenticationProperties(), default(IList<string>) },
-        new object[] { default(AuthenticationProperties), new List<string> { "TestScheme" } },
-        new object[] { default(AuthenticationProperties), default(IList<string>) },
-    };
+    public static IEnumerable<object[]> ChallengeForbidSignInOut_ResultHasCorrectValues_Data =>
+        new List<object[]>
+        {
+            new object[]
+            {
+                new AuthenticationProperties(),
+                new List<string> { "TestScheme" },
+            },
+            new object[] { new AuthenticationProperties(), default(IList<string>) },
+            new object[]
+            {
+                default(AuthenticationProperties),
+                new List<string> { "TestScheme" },
+            },
+            new object[] { default(AuthenticationProperties), default(IList<string>) },
+        };
 
     [Fact]
     public void SignIn_WithNullPrincipal_ThrowsArgNullException()
@@ -894,14 +1130,22 @@ public partial class TypedResultsTests
         // Arrange
         var data = default(object);
 
-        Assert.Throws<ArgumentNullException>("context", () => TypedResults.Json(data, context: null));
+        Assert.Throws<ArgumentNullException>(
+            "context",
+            () => TypedResults.Json(data, context: null)
+        );
     }
 
     [Fact]
     public void Json_WithInvalidSerializerContext_ThrowsInvalidOperationException()
     {
-        var ex = Assert.Throws<InvalidOperationException>(() => TypedResults.Json(string.Empty, context: ObjectJsonContext.Default));
-        Assert.Equal(ex.Message, $"Unable to obtain the JsonTypeInfo for type 'System.String' from the context '{typeof(ObjectJsonContext).FullName}'.");
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            TypedResults.Json(string.Empty, context: ObjectJsonContext.Default)
+        );
+        Assert.Equal(
+            ex.Message,
+            $"Unable to obtain the JsonTypeInfo for type 'System.String' from the context '{typeof(ObjectJsonContext).FullName}'."
+        );
     }
 
     [Fact]
@@ -910,19 +1154,28 @@ public partial class TypedResultsTests
         // Arrange
         var data = default(object);
 
-        Assert.Throws<ArgumentNullException>("jsonTypeInfo", () => TypedResults.Json(data, jsonTypeInfo: null));
+        Assert.Throws<ArgumentNullException>(
+            "jsonTypeInfo",
+            () => TypedResults.Json(data, jsonTypeInfo: null)
+        );
     }
 
     [Fact]
     public void LocalRedirect_WithNullStringUrl_ThrowsArgException()
     {
-        Assert.Throws<ArgumentException>("localUrl", () => TypedResults.LocalRedirect(default(string)));
+        Assert.Throws<ArgumentException>(
+            "localUrl",
+            () => TypedResults.LocalRedirect(default(string))
+        );
     }
 
     [Fact]
     public void LocalRedirect_WithEmptyStringUrl_ThrowsArgException()
     {
-        Assert.Throws<ArgumentException>("localUrl", () => TypedResults.LocalRedirect(string.Empty));
+        Assert.Throws<ArgumentException>(
+            "localUrl",
+            () => TypedResults.LocalRedirect(string.Empty)
+        );
     }
 
     [Fact]
@@ -1055,7 +1308,10 @@ public partial class TypedResultsTests
     [Fact]
     public void Problem_WithNullProblem_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>("problemDetails", () => TypedResults.Problem(default(ProblemDetails)));
+        Assert.Throws<ArgumentNullException>(
+            "problemDetails",
+            () => TypedResults.Problem(default(ProblemDetails))
+        );
     }
 
     [Fact]
@@ -1083,12 +1339,17 @@ public partial class TypedResultsTests
     }
 
     [Theory]
-    [InlineData(StatusCodes.Status400BadRequest, "Bad Request", "https://tools.ietf.org/html/rfc9110#section-15.5.1")]
+    [InlineData(
+        StatusCodes.Status400BadRequest,
+        "Bad Request",
+        "https://tools.ietf.org/html/rfc9110#section-15.5.1"
+    )]
     [InlineData(StatusCodes.Status418ImATeapot, "I'm a teapot", null)]
     public void Problem_WithOnlyHttpStatus_ResultHasCorrectValues(
         int statusCode,
         string title,
-        string type)
+        string type
+    )
     {
         // Act
         var result = TypedResults.Problem(statusCode: statusCode);
@@ -1115,8 +1376,14 @@ public partial class TypedResultsTests
         Assert.Null(result.ProblemDetails.Instance);
         Assert.Equal("application/problem+json", result.ContentType);
         Assert.Equal(StatusCodes.Status500InternalServerError, result.StatusCode);
-        Assert.Equal("An error occurred while processing your request.", result.ProblemDetails.Title);
-        Assert.Equal("https://tools.ietf.org/html/rfc9110#section-15.6.1", result.ProblemDetails.Type);
+        Assert.Equal(
+            "An error occurred while processing your request.",
+            result.ProblemDetails.Title
+        );
+        Assert.Equal(
+            "https://tools.ietf.org/html/rfc9110#section-15.6.1",
+            result.ProblemDetails.Type
+        );
         Assert.Empty(result.ProblemDetails.Extensions);
     }
 
@@ -1155,7 +1422,10 @@ public partial class TypedResultsTests
     [Fact]
     public void ValidationProblem_WithNullErrors_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>("errors", () => TypedResults.ValidationProblem(default(IDictionary<string, string[]>)));
+        Assert.Throws<ArgumentNullException>(
+            "errors",
+            () => TypedResults.ValidationProblem(default(IDictionary<string, string[]>))
+        );
     }
 
     [Fact]
@@ -1170,7 +1440,14 @@ public partial class TypedResultsTests
         var extensions = new Dictionary<string, object>() { { "testExtension", "test value" } };
 
         // Act
-        var result = TypedResults.ValidationProblem(errors, detail, instance, title, type, extensions);
+        var result = TypedResults.ValidationProblem(
+            errors,
+            detail,
+            instance,
+            title,
+            type,
+            extensions
+        );
 
         // Assert
         Assert.Equal(errors, result.ProblemDetails.Errors);
@@ -1423,6 +1700,5 @@ public partial class TypedResultsTests
     }
 
     [JsonSerializable(typeof(object))]
-    private partial class ObjectJsonContext : JsonSerializerContext
-    { }
+    private partial class ObjectJsonContext : JsonSerializerContext { }
 }

@@ -33,13 +33,20 @@ namespace Newtonsoft.Json.Tests.TestObjects
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
 #if !(DNXCORE50)
-            writer.WriteValue(":::" + value.ToString().ToUpper(CultureInfo.InvariantCulture) + ":::");
+            writer.WriteValue(
+                ":::" + value.ToString().ToUpper(CultureInfo.InvariantCulture) + ":::"
+            );
 #else
             writer.WriteValue(":::" + value.ToString().ToUpper() + ":::");
 #endif
         }
 
-        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        public override object ReadJson(
+            JsonReader reader,
+            Type objectType,
+            object existingValue,
+            JsonSerializer serializer
+        )
         {
             string s = (string)reader.Value;
             if (s == null)

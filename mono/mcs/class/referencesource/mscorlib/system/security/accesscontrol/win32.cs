@@ -1,17 +1,17 @@
-using Microsoft.Win32;
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections;
+using System.Diagnostics.Contracts;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-#if FEATURE_CORRUPTING_EXCEPTIONS
-using System.Runtime.ExceptionServices;
-#endif // FEATURE_CORRUPTING_EXCEPTIONS
 using System.Runtime.Versioning;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Principal;
-using System.Diagnostics.Contracts;
+using Microsoft.Win32;
+using Microsoft.Win32.SafeHandles;
+#if FEATURE_CORRUPTING_EXCEPTIONS
+using System.Runtime.ExceptionServices;
+#endif // FEATURE_CORRUPTING_EXCEPTIONS
 
 namespace System.Security.AccessControl
 {
@@ -23,19 +23,29 @@ namespace System.Security.AccessControl
         // Wrapper around advapi32.ConvertSecurityDescriptorToStringSecurityDescriptorW
         //
 
-        [System.Security.SecurityCritical]  // auto-generated
-        [SecurityPermission( SecurityAction.Assert, UnmanagedCode=true )]
+        [System.Security.SecurityCritical] // auto-generated
+        [SecurityPermission(SecurityAction.Assert, UnmanagedCode = true)]
         internal static int ConvertSdToSddl(
             byte[] binaryForm,
             int requestedRevision,
             SecurityInfos si,
-            out string resultSddl )
+            out string resultSddl
+        )
         {
             int errorCode;
             IntPtr ByteArray;
             uint ByteArraySize = 0;
 
-            if ( TRUE != Win32Native.ConvertSdToStringSd( binaryForm, ( uint )requestedRevision, ( uint )si, out ByteArray, ref ByteArraySize ))
+            if (
+                TRUE
+                != Win32Native.ConvertSdToStringSd(
+                    binaryForm,
+                    (uint)requestedRevision,
+                    (uint)si,
+                    out ByteArray,
+                    ref ByteArraySize
+                )
+            )
             {
                 errorCode = Marshal.GetLastWin32Error();
                 goto Error;
@@ -45,21 +55,21 @@ namespace System.Security.AccessControl
             // Extract data from the returned pointer
             //
 
-            resultSddl = Marshal.PtrToStringUni( ByteArray );
+            resultSddl = Marshal.PtrToStringUni(ByteArray);
 
             //
             // Now is a good time to get rid of the returned pointer
             //
 
-            Win32Native.LocalFree( ByteArray );
+            Win32Native.LocalFree(ByteArray);
 
             return 0;
 
-        Error:
+            Error:
 
             resultSddl = null;
 
-            if ( errorCode == Win32Native.ERROR_NOT_ENOUGH_MEMORY )
+            if (errorCode == Win32Native.ERROR_NOT_ENOUGH_MEMORY)
             {
                 throw new OutOfMemoryException();
             }
@@ -71,9 +81,9 @@ namespace System.Security.AccessControl
         // Wrapper around advapi32.GetSecurityInfo
         //
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
 #if FEATURE_CORRUPTING_EXCEPTIONS
-        [HandleProcessCorruptedStateExceptions] // 
+        [HandleProcessCorruptedStateExceptions] //
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
 
         internal static int GetSecurityInfo(
@@ -82,7 +92,7 @@ namespace System.Security.AccessControl
             SafeHandle handle,
             AccessControlSections accessControlSections,
             out RawSecurityDescriptor resultSd
-            )
+        )
         {
             resultSd = null;
 
@@ -92,32 +102,36 @@ namespace System.Security.AccessControl
             // and, in turn, demand another permission of its caller
             //
 
-            new SecurityPermission( SecurityPermissionFlag.UnmanagedCode ).Demand();
+            new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
 
             int errorCode;
-            IntPtr SidOwner, SidGroup, Dacl, Sacl, ByteArray;
+            IntPtr SidOwner,
+                SidGroup,
+                Dacl,
+                Sacl,
+                ByteArray;
             SecurityInfos SecurityInfos = 0;
             Privilege privilege = null;
 
-            if (( accessControlSections & AccessControlSections.Owner ) != 0 )
+            if ((accessControlSections & AccessControlSections.Owner) != 0)
             {
                 SecurityInfos |= SecurityInfos.Owner;
             }
-            
-            if (( accessControlSections & AccessControlSections.Group ) != 0 )
+
+            if ((accessControlSections & AccessControlSections.Group) != 0)
             {
                 SecurityInfos |= SecurityInfos.Group;
             }
 
-            if (( accessControlSections & AccessControlSections.Access ) != 0 )
+            if ((accessControlSections & AccessControlSections.Access) != 0)
             {
                 SecurityInfos |= SecurityInfos.DiscretionaryAcl;
             }
-            
-            if (( accessControlSections & AccessControlSections.Audit ) != 0 )
+
+            if ((accessControlSections & AccessControlSections.Audit) != 0)
             {
                 SecurityInfos |= SecurityInfos.SystemAcl;
-                privilege = new Privilege( Privilege.Security );
+                privilege = new Privilege(Privilege.Security);
             }
 
             // Ensure that the finally block will execute
@@ -125,7 +139,7 @@ namespace System.Security.AccessControl
 
             try
             {
-                if ( privilege != null )
+                if (privilege != null)
                 {
                     try
                     {
@@ -136,22 +150,43 @@ namespace System.Security.AccessControl
                         // we will ignore this exception and press on just in case this is a remote resource
                     }
                 }
-                
-                if ( name != null )
+
+                if (name != null)
                 {
-                    errorCode = ( int )Win32Native.GetSecurityInfoByName( name, ( uint )resourceType, ( uint )SecurityInfos, out SidOwner, out SidGroup, out Dacl, out Sacl, out ByteArray );
+                    errorCode = (int)
+                        Win32Native.GetSecurityInfoByName(
+                            name,
+                            (uint)resourceType,
+                            (uint)SecurityInfos,
+                            out SidOwner,
+                            out SidGroup,
+                            out Dacl,
+                            out Sacl,
+                            out ByteArray
+                        );
                 }
                 else if (handle != null)
                 {
                     if (handle.IsInvalid)
                     {
                         throw new ArgumentException(
-                            Environment.GetResourceString( "Argument_InvalidSafeHandle" ),
-                            "handle" );
+                            Environment.GetResourceString("Argument_InvalidSafeHandle"),
+                            "handle"
+                        );
                     }
                     else
                     {
-                        errorCode = ( int )Win32Native.GetSecurityInfoByHandle( handle, ( uint )resourceType, ( uint )SecurityInfos, out SidOwner, out SidGroup, out Dacl, out Sacl, out ByteArray );
+                        errorCode = (int)
+                            Win32Native.GetSecurityInfoByHandle(
+                                handle,
+                                (uint)resourceType,
+                                (uint)SecurityInfos,
+                                out SidOwner,
+                                out SidGroup,
+                                out Dacl,
+                                out Sacl,
+                                out ByteArray
+                            );
                     }
                 }
                 else
@@ -160,26 +195,32 @@ namespace System.Security.AccessControl
                     throw new SystemException();
                 }
 
-                if ( errorCode == Win32Native.ERROR_SUCCESS && IntPtr.Zero.Equals(ByteArray) )
+                if (errorCode == Win32Native.ERROR_SUCCESS && IntPtr.Zero.Equals(ByteArray))
                 {
                     //
                     // This means that the object doesn't have a security descriptor. And thus we throw
                     // a specific exception for the caller to catch and handle properly.
                     //
-                    throw new InvalidOperationException(Environment.GetResourceString( "InvalidOperation_NoSecurityDescriptor" ));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString("InvalidOperation_NoSecurityDescriptor")
+                    );
                 }
-                else if (errorCode == Win32Native.ERROR_NOT_ALL_ASSIGNED ||
-                         errorCode == Win32Native.ERROR_PRIVILEGE_NOT_HELD)
+                else if (
+                    errorCode == Win32Native.ERROR_NOT_ALL_ASSIGNED
+                    || errorCode == Win32Native.ERROR_PRIVILEGE_NOT_HELD
+                )
                 {
-                    throw new PrivilegeNotHeldException( Privilege.Security );
+                    throw new PrivilegeNotHeldException(Privilege.Security);
                 }
-                else if ( errorCode == Win32Native.ERROR_ACCESS_DENIED ||
-                    errorCode == Win32Native.ERROR_CANT_OPEN_ANONYMOUS )
+                else if (
+                    errorCode == Win32Native.ERROR_ACCESS_DENIED
+                    || errorCode == Win32Native.ERROR_CANT_OPEN_ANONYMOUS
+                )
                 {
                     throw new UnauthorizedAccessException();
                 }
 
-                if ( errorCode != Win32Native.ERROR_SUCCESS )
+                if (errorCode != Win32Native.ERROR_SUCCESS)
                 {
                     goto Error;
                 }
@@ -187,7 +228,7 @@ namespace System.Security.AccessControl
             catch
             {
                 // protection against exception filter-based luring attacks
-                if ( privilege != null )
+                if (privilege != null)
                 {
                     privilege.Revert();
                 }
@@ -195,7 +236,7 @@ namespace System.Security.AccessControl
             }
             finally
             {
-                if ( privilege != null )
+                if (privilege != null)
                 {
                     privilege.Revert();
                 }
@@ -205,21 +246,21 @@ namespace System.Security.AccessControl
             // Extract data from the returned pointer
             //
 
-            uint Length = Win32Native.GetSecurityDescriptorLength( ByteArray );
+            uint Length = Win32Native.GetSecurityDescriptorLength(ByteArray);
 
             byte[] BinaryForm = new byte[Length];
 
-            Marshal.Copy( ByteArray, BinaryForm, 0, ( int )Length );
+            Marshal.Copy(ByteArray, BinaryForm, 0, (int)Length);
 
-            Win32Native.LocalFree( ByteArray );
+            Win32Native.LocalFree(ByteArray);
 
-            resultSd = new RawSecurityDescriptor( BinaryForm, 0 );
+            resultSd = new RawSecurityDescriptor(BinaryForm, 0);
 
             return Win32Native.ERROR_SUCCESS;
 
-        Error:
+            Error:
 
-            if ( errorCode == Win32Native.ERROR_NOT_ENOUGH_MEMORY )
+            if (errorCode == Win32Native.ERROR_NOT_ENOUGH_MEMORY)
             {
                 throw new OutOfMemoryException();
             }
@@ -231,11 +272,11 @@ namespace System.Security.AccessControl
         // Wrapper around advapi32.SetNamedSecurityInfoW and advapi32.SetSecurityInfo
         //
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         [ResourceExposure(ResourceScope.Machine)]
         [ResourceConsumption(ResourceScope.Machine)]
 #if FEATURE_CORRUPTING_EXCEPTIONS
-        [HandleProcessCorruptedStateExceptions] // 
+        [HandleProcessCorruptedStateExceptions] //
 #endif // FEATURE_CORRUPTING_EXCEPTIONS
         internal static int SetSecurityInfo(
             ResourceType type,
@@ -245,11 +286,15 @@ namespace System.Security.AccessControl
             SecurityIdentifier owner,
             SecurityIdentifier group,
             GenericAcl sacl,
-            GenericAcl dacl )
+            GenericAcl dacl
+        )
         {
             int errorCode;
             int Length;
-            byte[] OwnerBinary = null, GroupBinary = null, SaclBinary = null, DaclBinary = null;
+            byte[] OwnerBinary = null,
+                GroupBinary = null,
+                SaclBinary = null,
+                DaclBinary = null;
             Privilege securityPrivilege = null;
 
             //
@@ -258,44 +303,44 @@ namespace System.Security.AccessControl
             // and, in turn, demand another permission of its caller
             //
 
-            new SecurityPermission( SecurityPermissionFlag.UnmanagedCode ).Demand();
+            new SecurityPermission(SecurityPermissionFlag.UnmanagedCode).Demand();
 
-            if ( owner != null )
+            if (owner != null)
             {
                 Length = owner.BinaryLength;
                 OwnerBinary = new byte[Length];
-                owner.GetBinaryForm( OwnerBinary, 0 );
+                owner.GetBinaryForm(OwnerBinary, 0);
             }
 
-            if ( group != null )
+            if (group != null)
             {
                 Length = group.BinaryLength;
                 GroupBinary = new byte[Length];
-                group.GetBinaryForm( GroupBinary, 0 );
+                group.GetBinaryForm(GroupBinary, 0);
             }
 
-            if ( dacl != null )
+            if (dacl != null)
             {
                 Length = dacl.BinaryLength;
                 DaclBinary = new byte[Length];
-                dacl.GetBinaryForm( DaclBinary, 0 );
+                dacl.GetBinaryForm(DaclBinary, 0);
             }
 
-            if ( sacl != null )
+            if (sacl != null)
             {
                 Length = sacl.BinaryLength;
                 SaclBinary = new byte[Length];
-                sacl.GetBinaryForm( SaclBinary, 0 );
+                sacl.GetBinaryForm(SaclBinary, 0);
             }
 
-            if ( ( securityInformation & SecurityInfos.SystemAcl ) != 0 )
+            if ((securityInformation & SecurityInfos.SystemAcl) != 0)
             {
                 //
-                // Enable security privilege if trying to set a SACL. 
+                // Enable security privilege if trying to set a SACL.
                 // Note: even setting it by handle needs this privilege enabled!
                 //
-                
-                securityPrivilege = new Privilege( Privilege.Security );
+
+                securityPrivilege = new Privilege(Privilege.Security);
             }
 
             // Ensure that the finally block will execute
@@ -303,7 +348,7 @@ namespace System.Security.AccessControl
 
             try
             {
-                if ( securityPrivilege != null )
+                if (securityPrivilege != null)
                 {
                     try
                     {
@@ -315,41 +360,64 @@ namespace System.Security.AccessControl
                     }
                 }
 
-                if ( name != null )
+                if (name != null)
                 {
-                    errorCode = ( int )Win32Native.SetSecurityInfoByName( name, ( uint )type, ( uint )securityInformation, OwnerBinary, GroupBinary, DaclBinary, SaclBinary );
+                    errorCode = (int)
+                        Win32Native.SetSecurityInfoByName(
+                            name,
+                            (uint)type,
+                            (uint)securityInformation,
+                            OwnerBinary,
+                            GroupBinary,
+                            DaclBinary,
+                            SaclBinary
+                        );
                 }
                 else if (handle != null)
                 {
                     if (handle.IsInvalid)
                     {
                         throw new ArgumentException(
-                            Environment.GetResourceString( "Argument_InvalidSafeHandle" ),
-                            "handle" );
+                            Environment.GetResourceString("Argument_InvalidSafeHandle"),
+                            "handle"
+                        );
                     }
                     else
                     {
-                        errorCode = ( int )Win32Native.SetSecurityInfoByHandle( handle, ( uint )type, ( uint )securityInformation, OwnerBinary, GroupBinary, DaclBinary, SaclBinary );
+                        errorCode = (int)
+                            Win32Native.SetSecurityInfoByHandle(
+                                handle,
+                                (uint)type,
+                                (uint)securityInformation,
+                                OwnerBinary,
+                                GroupBinary,
+                                DaclBinary,
+                                SaclBinary
+                            );
                     }
                 }
                 else
                 {
                     // both are null, shouldn't happen
-                    Contract.Assert( false, "Internal error: both name and handle are null" );
+                    Contract.Assert(false, "Internal error: both name and handle are null");
                     throw new InvalidProgramException();
                 }
 
-                if (errorCode == Win32Native.ERROR_NOT_ALL_ASSIGNED ||
-                    errorCode == Win32Native.ERROR_PRIVILEGE_NOT_HELD)
+                if (
+                    errorCode == Win32Native.ERROR_NOT_ALL_ASSIGNED
+                    || errorCode == Win32Native.ERROR_PRIVILEGE_NOT_HELD
+                )
                 {
-                    throw new PrivilegeNotHeldException( Privilege.Security );
+                    throw new PrivilegeNotHeldException(Privilege.Security);
                 }
-                else if ( errorCode == Win32Native.ERROR_ACCESS_DENIED ||
-                    errorCode == Win32Native.ERROR_CANT_OPEN_ANONYMOUS )
+                else if (
+                    errorCode == Win32Native.ERROR_ACCESS_DENIED
+                    || errorCode == Win32Native.ERROR_CANT_OPEN_ANONYMOUS
+                )
                 {
                     throw new UnauthorizedAccessException();
                 }
-                else if ( errorCode != Win32Native.ERROR_SUCCESS )
+                else if (errorCode != Win32Native.ERROR_SUCCESS)
                 {
                     goto Error;
                 }
@@ -357,7 +425,7 @@ namespace System.Security.AccessControl
             catch
             {
                 // protection against exception filter-based luring attacks
-                if ( securityPrivilege != null )
+                if (securityPrivilege != null)
                 {
                     securityPrivilege.Revert();
                 }
@@ -365,7 +433,7 @@ namespace System.Security.AccessControl
             }
             finally
             {
-                if ( securityPrivilege != null )
+                if (securityPrivilege != null)
                 {
                     securityPrivilege.Revert();
                 }
@@ -373,9 +441,9 @@ namespace System.Security.AccessControl
 
             return 0;
 
-        Error:
+            Error:
 
-            if ( errorCode == Win32Native.ERROR_NOT_ENOUGH_MEMORY )
+            if (errorCode == Win32Native.ERROR_NOT_ENOUGH_MEMORY)
             {
                 throw new OutOfMemoryException();
             }

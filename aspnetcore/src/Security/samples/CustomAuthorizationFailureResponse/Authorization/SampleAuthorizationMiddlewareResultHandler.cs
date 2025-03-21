@@ -26,21 +26,31 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
         RequestDelegate requestDelegate,
         HttpContext httpContext,
         AuthorizationPolicy authorizationPolicy,
-        PolicyAuthorizationResult policyAuthorizationResult)
+        PolicyAuthorizationResult policyAuthorizationResult
+    )
     {
         // if the authorization was forbidden, let's use custom logic to handle that.
-        if (policyAuthorizationResult.Forbidden && policyAuthorizationResult.AuthorizationFailure != null)
+        if (
+            policyAuthorizationResult.Forbidden
+            && policyAuthorizationResult.AuthorizationFailure != null
+        )
         {
             if (policyAuthorizationResult.AuthorizationFailure.FailureReasons.Any())
             {
-                await httpContext.Response.WriteAsync(policyAuthorizationResult.AuthorizationFailure.FailureReasons.First().Message);
+                await httpContext.Response.WriteAsync(
+                    policyAuthorizationResult.AuthorizationFailure.FailureReasons.First().Message
+                );
 
                 // return right away as the default implementation would overwrite the status code
                 return;
             }
 
             // as an example, let's return 404 if specific requirement has failed
-            if (policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(requirement => requirement is SampleRequirement))
+            if (
+                policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(requirement =>
+                    requirement is SampleRequirement
+                )
+            )
             {
                 httpContext.Response.StatusCode = (int)HttpStatusCode.NotFound;
                 await httpContext.Response.WriteAsync(Startup.CustomForbiddenMessage);
@@ -48,17 +58,30 @@ public class SampleAuthorizationMiddlewareResultHandler : IAuthorizationMiddlewa
                 // return right away as the default implementation would overwrite the status code
                 return;
             }
-            else if (policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(requirement => requirement is SampleWithCustomMessageRequirement))
+            else if (
+                policyAuthorizationResult.AuthorizationFailure.FailedRequirements.Any(requirement =>
+                    requirement is SampleWithCustomMessageRequirement
+                )
+            )
             {
                 // if other requirements failed, let's just use a custom message
                 // but we have to use OnStarting callback because the default handlers will want to modify i.e. status code of the response
                 // and modifications of the response are not allowed once the writing has started
                 var message = Startup.CustomForbiddenMessage;
 
-                httpContext.Response.OnStarting(() => httpContext.Response.BodyWriter.WriteAsync(Encoding.UTF8.GetBytes(message)).AsTask());
+                httpContext.Response.OnStarting(() =>
+                    httpContext
+                        .Response.BodyWriter.WriteAsync(Encoding.UTF8.GetBytes(message))
+                        .AsTask()
+                );
             }
         }
 
-        await _handler.HandleAsync(requestDelegate, httpContext, authorizationPolicy, policyAuthorizationResult);
+        await _handler.HandleAsync(
+            requestDelegate,
+            httpContext,
+            authorizationPolicy,
+            policyAuthorizationResult
+        );
     }
 }

@@ -2,9 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class Runtime_81356
 {
     public static byte[] s_130;
+
     [Fact]
     public static void TestEntryPoint()
     {

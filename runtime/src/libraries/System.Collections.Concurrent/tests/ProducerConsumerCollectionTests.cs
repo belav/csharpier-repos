@@ -17,22 +17,44 @@ namespace System.Collections.Concurrent.Tests
 {
     public abstract class ProducerConsumerCollectionTests : IEnumerable_Generic_Tests<int>
     {
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new List<ModifyEnumerable>();
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
+
         protected override int CreateT(int seed) => new Random(seed).Next();
+
         protected override EnumerableOrder Order => EnumerableOrder.Unspecified;
-        protected override IEnumerable<int> GenericIEnumerableFactory(int count) => CreateProducerConsumerCollection(count);
-        protected IProducerConsumerCollection<int> CreateProducerConsumerCollection() => CreateProducerConsumerCollection<int>();
-        protected IProducerConsumerCollection<int> CreateProducerConsumerCollection(int count) => CreateProducerConsumerCollection(Enumerable.Range(0, count));
+
+        protected override IEnumerable<int> GenericIEnumerableFactory(int count) =>
+            CreateProducerConsumerCollection(count);
+
+        protected IProducerConsumerCollection<int> CreateProducerConsumerCollection() =>
+            CreateProducerConsumerCollection<int>();
+
+        protected IProducerConsumerCollection<int> CreateProducerConsumerCollection(int count) =>
+            CreateProducerConsumerCollection(Enumerable.Range(0, count));
 
         protected abstract IProducerConsumerCollection<T> CreateProducerConsumerCollection<T>();
-        protected abstract IProducerConsumerCollection<int> CreateProducerConsumerCollection(IEnumerable<int> collection);
+        protected abstract IProducerConsumerCollection<int> CreateProducerConsumerCollection(
+            IEnumerable<int> collection
+        );
         protected abstract bool IsEmpty(IProducerConsumerCollection<int> pcc);
         protected abstract bool TryPeek<T>(IProducerConsumerCollection<T> pcc, out T result);
-        protected virtual IProducerConsumerCollection<int> CreateOracle() => CreateOracle(Enumerable.Empty<int>());
-        protected abstract IProducerConsumerCollection<int> CreateOracle(IEnumerable<int> collection);
 
-        protected static TaskFactory ThreadFactory { get; } = new TaskFactory(
-            CancellationToken.None, TaskCreationOptions.LongRunning, TaskContinuationOptions.LongRunning, TaskScheduler.Default);
+        protected virtual IProducerConsumerCollection<int> CreateOracle() =>
+            CreateOracle(Enumerable.Empty<int>());
+
+        protected abstract IProducerConsumerCollection<int> CreateOracle(
+            IEnumerable<int> collection
+        );
+
+        protected static TaskFactory ThreadFactory { get; } =
+            new TaskFactory(
+                CancellationToken.None,
+                TaskCreationOptions.LongRunning,
+                TaskContinuationOptions.LongRunning,
+                TaskScheduler.Default
+            );
         private const double ConcurrencyTestSeconds =
 #if StressTest
             8.0;
@@ -45,7 +67,10 @@ namespace System.Collections.Concurrent.Tests
         [Fact]
         public void Ctor_InvalidArgs_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>("collection", () => CreateProducerConsumerCollection(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "collection",
+                () => CreateProducerConsumerCollection(null)
+            );
         }
 
         [Fact]
@@ -63,7 +88,9 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(1000)]
         public void Ctor_Collection_ItemsAndCountMatch(int count)
         {
-            IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(Enumerable.Range(1, count));
+            IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(
+                Enumerable.Range(1, count)
+            );
             IProducerConsumerCollection<int> oracle = CreateOracle(Enumerable.Range(1, count));
 
             Assert.Equal(oracle.Count == 0, IsEmpty(c));
@@ -106,13 +133,16 @@ namespace System.Collections.Concurrent.Tests
 
             const int NumItems = 100000;
 
-            Task producer = Task.Run(() => Parallel.For(1, NumItems + 1, i => Assert.True(c.TryAdd(i))));
+            Task producer = Task.Run(() =>
+                Parallel.For(1, NumItems + 1, i => Assert.True(c.TryAdd(i)))
+            );
 
             var hs = new HashSet<int>();
             while (hs.Count < NumItems)
             {
                 int item;
-                if (c.TryTake(out item)) hs.Add(item);
+                if (c.TryTake(out item))
+                    hs.Add(item);
             }
 
             producer.GetAwaiter().GetResult();
@@ -177,7 +207,8 @@ namespace System.Collections.Concurrent.Tests
                 }
                 else
                 {
-                    int expected, actual;
+                    int expected,
+                        actual;
                     Assert.Equal(oracle.TryTake(out expected), c.TryTake(out actual));
                     Assert.Equal(expected, actual);
                 }
@@ -186,36 +217,51 @@ namespace System.Collections.Concurrent.Tests
             Assert.Equal(oracle.Count, c.Count);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(100, 1, 100, true)]
         [InlineData(100, 4, 10, false)]
         [InlineData(1000, 11, 100, true)]
         [InlineData(100000, 2, 50000, true)]
-        public void Initialize_ThenTakeOrPeekInParallel_ItemsObtainedAsExpected(int numStartingItems, int threadsCount, int itemsPerThread, bool take)
+        public void Initialize_ThenTakeOrPeekInParallel_ItemsObtainedAsExpected(
+            int numStartingItems,
+            int threadsCount,
+            int itemsPerThread,
+            bool take
+        )
         {
-            IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(Enumerable.Range(1, numStartingItems));
+            IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(
+                Enumerable.Range(1, numStartingItems)
+            );
             int successes = 0;
 
             using (var b = new Barrier(threadsCount))
             {
-                WaitAllOrAnyFailed(Enumerable.Range(0, threadsCount).Select(threadNum => ThreadFactory.StartNew(() =>
-                {
-                    b.SignalAndWait();
-                    for (int j = 0; j < itemsPerThread; j++)
-                    {
-                        int data;
-                        if (take ? c.TryTake(out data) : TryPeek(c, out data))
-                        {
-                            Interlocked.Increment(ref successes);
-                            Assert.NotEqual(0, data); // shouldn't be default(T)
-                        }
-                    }
-                })).ToArray());
+                WaitAllOrAnyFailed(
+                    Enumerable
+                        .Range(0, threadsCount)
+                        .Select(threadNum =>
+                            ThreadFactory.StartNew(() =>
+                            {
+                                b.SignalAndWait();
+                                for (int j = 0; j < itemsPerThread; j++)
+                                {
+                                    int data;
+                                    if (take ? c.TryTake(out data) : TryPeek(c, out data))
+                                    {
+                                        Interlocked.Increment(ref successes);
+                                        Assert.NotEqual(0, data); // shouldn't be default(T)
+                                    }
+                                }
+                            })
+                        )
+                        .ToArray()
+                );
             }
 
-            Assert.Equal(
-                take ? numStartingItems : threadsCount * itemsPerThread,
-                successes);
+            Assert.Equal(take ? numStartingItems : threadsCount * itemsPerThread, successes);
         }
 
         [Theory]
@@ -236,7 +282,8 @@ namespace System.Collections.Concurrent.Tests
 
             if (count > 0)
             {
-                int expected, actual;
+                int expected,
+                    actual;
                 Assert.Equal(oracle.TryTake(out expected), c.TryTake(out actual));
                 Assert.Equal(expected, actual);
                 Assert.Equal(oracle.ToArray(), c.ToArray());
@@ -248,7 +295,10 @@ namespace System.Collections.Concurrent.Tests
         [InlineData(2, 10)]
         [InlineData(10, 10)]
         [InlineData(100, 10)]
-        public void ToArray_AddAndTakeItemsIntermixedWithEnumeration_ItemsAndCountMatch(int initialCount, int iters)
+        public void ToArray_AddAndTakeItemsIntermixedWithEnumeration_ItemsAndCountMatch(
+            int initialCount,
+            int iters
+        )
         {
             IEnumerable<int> initialItems = Enumerable.Range(1, initialCount);
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(initialItems);
@@ -261,7 +311,8 @@ namespace System.Collections.Concurrent.Tests
                 Assert.Equal(oracle.TryAdd(initialCount + i), c.TryAdd(initialCount + i));
                 Assert.Equal<int>(oracle, c);
 
-                int expected, actual;
+                int expected,
+                    actual;
                 Assert.Equal(oracle.TryTake(out expected), c.TryTake(out actual));
                 Assert.Equal(expected, actual);
                 Assert.Equal<int>(oracle, c);
@@ -276,13 +327,16 @@ namespace System.Collections.Concurrent.Tests
             for (int i = 0; i < 1000; i += 100)
             {
                 // Create a thread that adds items to the collection
-                ThreadFactory.StartNew(() =>
-                {
-                    for (int j = i; j < i + 100; j++)
+                ThreadFactory
+                    .StartNew(() =>
                     {
-                        Assert.True(c.TryAdd(j));
-                    }
-                }).GetAwaiter().GetResult();
+                        for (int j = i; j < i + 100; j++)
+                        {
+                            Assert.True(c.TryAdd(j));
+                        }
+                    })
+                    .GetAwaiter()
+                    .GetResult();
 
                 // Allow threads to be collected
                 GC.Collect();
@@ -296,12 +350,15 @@ namespace System.Collections.Concurrent.Tests
         [Fact]
         public void AddManyItems_ThenTakeOnSameThread_ItemsOutputInExpectedOrder()
         {
-            IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(Enumerable.Range(0, 100000));
+            IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(
+                Enumerable.Range(0, 100000)
+            );
             IProducerConsumerCollection<int> oracle = CreateOracle(Enumerable.Range(0, 100000));
 
             for (int i = 99999; i >= 0; --i)
             {
-                int expected, actual;
+                int expected,
+                    actual;
                 Assert.Equal(oracle.TryTake(out expected), c.TryTake(out actual));
                 Assert.Equal(expected, actual);
             }
@@ -348,7 +405,8 @@ namespace System.Collections.Concurrent.Tests
             // Consumer repeatedly calls IsEmpty until it's told to stop
             Task consumer = Task.Run(() =>
             {
-                while (!cts.IsCancellationRequested) Assert.False(IsEmpty(c));
+                while (!cts.IsCancellationRequested)
+                    Assert.False(IsEmpty(c));
             });
 
             // Producer adds/takes a bunch of items, then tells the consumer to stop
@@ -441,7 +499,11 @@ namespace System.Collections.Concurrent.Tests
 
             const int LowerBound = 1;
             ICollection c = CreateProducerConsumerCollection(initialItems);
-            Array actual = Array.CreateInstance(typeof(int), new int[] { initialItems.Length }, new int[] { LowerBound });
+            Array actual = Array.CreateInstance(
+                typeof(int),
+                new int[] { initialItems.Length },
+                new int[] { LowerBound }
+            );
             c.CopyTo(actual, LowerBound);
 
             ICollection oracle = CreateOracle(initialItems);
@@ -457,13 +519,23 @@ namespace System.Collections.Concurrent.Tests
         [Fact]
         public void CopyTo_InvalidArgs_Throws()
         {
-            IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(Enumerable.Range(0, 10));
+            IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(
+                Enumerable.Range(0, 10)
+            );
             int[] dest = new int[10];
 
             AssertExtensions.Throws<ArgumentNullException>("array", () => c.CopyTo(null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() => c.CopyTo(dest, -1));
-            AssertExtensions.Throws<ArgumentException>(CopyToNoLengthParamName, "", () => c.CopyTo(dest, dest.Length));
-            AssertExtensions.Throws<ArgumentException>(CopyToNoLengthParamName, "", () => c.CopyTo(dest, dest.Length - 2));
+            AssertExtensions.Throws<ArgumentException>(
+                CopyToNoLengthParamName,
+                "",
+                () => c.CopyTo(dest, dest.Length)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                CopyToNoLengthParamName,
+                "",
+                () => c.CopyTo(dest, dest.Length - 2)
+            );
 
             AssertExtensions.Throws<ArgumentException>(null, () => c.CopyTo(new int[7, 7], 0));
         }
@@ -476,38 +548,71 @@ namespace System.Collections.Concurrent.Tests
 
             AssertExtensions.Throws<ArgumentNullException>("array", () => c.CopyTo(null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() => c.CopyTo(dest, -1));
-            AssertExtensions.Throws<ArgumentException>(CopyToNoLengthParamName, "", () => c.CopyTo(dest, dest.Length));
-            AssertExtensions.Throws<ArgumentException>(CopyToNoLengthParamName, "", () => c.CopyTo(dest, dest.Length - 2));
+            AssertExtensions.Throws<ArgumentException>(
+                CopyToNoLengthParamName,
+                "",
+                () => c.CopyTo(dest, dest.Length)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                CopyToNoLengthParamName,
+                "",
+                () => c.CopyTo(dest, dest.Length - 2)
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(100, 1, 10)]
         [InlineData(4, 100000, 10)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91538", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
-        public void BlockingCollection_WrappingCollection_ExpectedElementsTransferred(int numThreadsPerConsumerProducer, int numItemsPerThread, int producerSpin)
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91538",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
+        public void BlockingCollection_WrappingCollection_ExpectedElementsTransferred(
+            int numThreadsPerConsumerProducer,
+            int numItemsPerThread,
+            int producerSpin
+        )
         {
             var bc = new BlockingCollection<int>(CreateProducerConsumerCollection());
             long dummy = 0;
 
-            Task[] producers = Enumerable.Range(0, numThreadsPerConsumerProducer).Select(_ => ThreadFactory.StartNew(() =>
-            {
-                for (int i = 1; i <= numItemsPerThread; i++)
-                {
-                    for (int j = 0; j < producerSpin; j++) dummy *= j; // spin a little
-                    bc.Add(i);
-                }
-            })).ToArray();
+            Task[] producers = Enumerable
+                .Range(0, numThreadsPerConsumerProducer)
+                .Select(_ =>
+                    ThreadFactory.StartNew(() =>
+                    {
+                        for (int i = 1; i <= numItemsPerThread; i++)
+                        {
+                            for (int j = 0; j < producerSpin; j++)
+                                dummy *= j; // spin a little
+                            bc.Add(i);
+                        }
+                    })
+                )
+                .ToArray();
 
-            Task[] consumers = Enumerable.Range(0, numThreadsPerConsumerProducer).Select(_ => ThreadFactory.StartNew(() =>
-            {
-                for (int i = 0; i < numItemsPerThread; i++)
-                {
-                    const int TimeoutMs = 100000;
-                    int item;
-                    Assert.True(bc.TryTake(out item, TimeoutMs), $"Couldn't get {i}th item after {TimeoutMs}ms");
-                    Assert.NotEqual(0, item);
-                }
-            })).ToArray();
+            Task[] consumers = Enumerable
+                .Range(0, numThreadsPerConsumerProducer)
+                .Select(_ =>
+                    ThreadFactory.StartNew(() =>
+                    {
+                        for (int i = 0; i < numItemsPerThread; i++)
+                        {
+                            const int TimeoutMs = 100000;
+                            int item;
+                            Assert.True(
+                                bc.TryTake(out item, TimeoutMs),
+                                $"Couldn't get {i}th item after {TimeoutMs}ms"
+                            );
+                            Assert.NotEqual(0, item);
+                        }
+                    })
+                )
+                .ToArray();
 
             WaitAllOrAnyFailed(producers);
             WaitAllOrAnyFailed(consumers);
@@ -565,14 +670,20 @@ namespace System.Collections.Concurrent.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0, true)]
         [InlineData(1, true)]
         [InlineData(1, false)]
         [InlineData(10, true)]
         [InlineData(100, true)]
         [InlineData(100, false)]
-        public async Task GetEnumerator_Generic_ExpectedElementsYielded(int numItems, bool consumeFromSameThread)
+        public async Task GetEnumerator_Generic_ExpectedElementsYielded(
+            int numItems,
+            bool consumeFromSameThread
+        )
         {
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection();
             using (var e = c.GetEnumerator())
@@ -649,11 +760,15 @@ namespace System.Collections.Concurrent.Tests
             Parallel.For(0, NumItems, i => Assert.True(c.TryAdd(i)));
             Assert.Equal(NumItems, c.Count);
 
-            Parallel.For(0, 10, i =>
-            {
-                var hs = new HashSet<int>(c.ToArray());
-                Assert.Equal(NumItems, hs.Count);
-            });
+            Parallel.For(
+                0,
+                10,
+                i =>
+                {
+                    var hs = new HashSet<int>(c.ToArray());
+                    Assert.Equal(NumItems, hs.Count);
+                }
+            );
         }
 
         [Fact]
@@ -673,7 +788,8 @@ namespace System.Collections.Concurrent.Tests
 
             for (int i = Items - 1; i >= 0; i--)
             {
-                int expected, actual;
+                int expected,
+                    actual;
                 Assert.Equal(oracle.TryTake(out expected), c.TryTake(out actual));
                 Assert.Equal(expected, actual);
                 Assert.Equal(oracle.ToArray(), c.ToArray());
@@ -691,46 +807,67 @@ namespace System.Collections.Concurrent.Tests
             Parallel.For(0, NumItems, i => Assert.True(c.TryAdd(i)));
             Assert.Equal(NumItems, c.Count);
 
-            Parallel.For(0, 10, i =>
-            {
-                var hs = new HashSet<int>(c);
-                Assert.Equal(NumItems, hs.Count);
-            });
+            Parallel.For(
+                0,
+                10,
+                i =>
+                {
+                    var hs = new HashSet<int>(c);
+                    Assert.Equal(NumItems, hs.Count);
+                }
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(1, ConcurrencyTestSeconds / 2)]
         [InlineData(4, ConcurrencyTestSeconds / 2)]
-        public void ManyConcurrentAddsTakes_EnsureTrackedCountsMatchResultingCollection(int threadsPerProc, double seconds)
+        public void ManyConcurrentAddsTakes_EnsureTrackedCountsMatchResultingCollection(
+            int threadsPerProc,
+            double seconds
+        )
         {
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection();
 
             DateTime end = default(DateTime);
-            using (var b = new Barrier(Environment.ProcessorCount * threadsPerProc, _ => end = DateTime.UtcNow + TimeSpan.FromSeconds(seconds)))
+            using (
+                var b = new Barrier(
+                    Environment.ProcessorCount * threadsPerProc,
+                    _ => end = DateTime.UtcNow + TimeSpan.FromSeconds(seconds)
+                )
+            )
             {
-                Task<int>[] tasks = Enumerable.Range(0, b.ParticipantCount).Select(_ => ThreadFactory.StartNew(() =>
-                {
-                    b.SignalAndWait();
-
-                    int count = 0;
-                    var rand = new Random();
-
-                    while (DateTime.UtcNow < end)
-                    {
-                        if (rand.NextDouble() < .5)
+                Task<int>[] tasks = Enumerable
+                    .Range(0, b.ParticipantCount)
+                    .Select(_ =>
+                        ThreadFactory.StartNew(() =>
                         {
-                            Assert.True(c.TryAdd(rand.Next()));
-                            count++;
-                        }
-                        else
-                        {
-                            int item;
-                            if (c.TryTake(out item)) count--;
-                        }
-                    }
+                            b.SignalAndWait();
 
-                    return count;
-                })).ToArray();
+                            int count = 0;
+                            var rand = new Random();
+
+                            while (DateTime.UtcNow < end)
+                            {
+                                if (rand.NextDouble() < .5)
+                                {
+                                    Assert.True(c.TryAdd(rand.Next()));
+                                    count++;
+                                }
+                                else
+                                {
+                                    int item;
+                                    if (c.TryTake(out item))
+                                        count--;
+                                }
+                            }
+
+                            return count;
+                        })
+                    )
+                    .ToArray();
                 Task.WaitAll(tasks);
                 Assert.Equal(tasks.Sum(t => t.Result), c.Count);
             }
@@ -767,9 +904,14 @@ namespace System.Collections.Concurrent.Tests
             Assert.Empty(c);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(ConcurrencyTestSeconds)]
-        public void ManyConcurrentAddsTakesPeeks_ForceContentionWithOtherThreadsTaking(double seconds)
+        public void ManyConcurrentAddsTakesPeeks_ForceContentionWithOtherThreadsTaking(
+            double seconds
+        )
         {
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection();
             const int MaxCount = 4;
@@ -826,11 +968,17 @@ namespace System.Collections.Concurrent.Tests
             Assert.Equal(remaining, c.Count);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(ConcurrencyTestSeconds)]
-        public void ManyConcurrentAddsTakesPeeks_ForceContentionWithOtherThreadsPeeking(double seconds)
+        public void ManyConcurrentAddsTakesPeeks_ForceContentionWithOtherThreadsPeeking(
+            double seconds
+        )
         {
-            IProducerConsumerCollection<LargeStruct> c = CreateProducerConsumerCollection<LargeStruct>();
+            IProducerConsumerCollection<LargeStruct> c =
+                CreateProducerConsumerCollection<LargeStruct>();
             const int MaxCount = 4;
 
             DateTime end = DateTime.UtcNow + TimeSpan.FromSeconds(seconds);
@@ -879,7 +1027,10 @@ namespace System.Collections.Concurrent.Tests
             Assert.Equal(0, c.Count);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(ConcurrencyTestSeconds)]
         public void ManyConcurrentAddsTakes_ForceContentionWithToArray(double seconds)
         {
@@ -916,12 +1067,20 @@ namespace System.Collections.Concurrent.Tests
             Assert.Equal(0, c.Count);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
         [InlineData(0, ConcurrencyTestSeconds / 2)]
         [InlineData(1, ConcurrencyTestSeconds / 2)]
-        public void ManyConcurrentAddsTakes_ForceContentionWithGetEnumerator(int initialCount, double seconds)
+        public void ManyConcurrentAddsTakes_ForceContentionWithGetEnumerator(
+            int initialCount,
+            double seconds
+        )
         {
-            IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(Enumerable.Range(1, initialCount));
+            IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(
+                Enumerable.Range(1, initialCount)
+            );
             const int MaxCount = 4;
 
             DateTime end = DateTime.UtcNow + TimeSpan.FromSeconds(seconds);
@@ -954,7 +1113,10 @@ namespace System.Collections.Concurrent.Tests
             Assert.Equal(initialCount, c.Count);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         [InlineData(0)]
         [InlineData(10)]
         public void DebuggerAttributes_Success(int count)
@@ -962,17 +1124,25 @@ namespace System.Collections.Concurrent.Tests
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection(count);
             DebuggerAttributes.ValidateDebuggerDisplayReferences(c);
             DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(c);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                == DebuggerBrowsableState.RootHidden
+            );
             Array items = itemProperty.GetValue(info.Instance) as Array;
             Assert.Equal(c, items.Cast<int>());
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public void DebuggerTypeProxy_Ctor_NullArgument_Throws()
         {
             IProducerConsumerCollection<int> c = CreateProducerConsumerCollection();
             Type proxyType = DebuggerAttributes.GetProxyType(c);
-            var tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, new object[] { null }));
+            var tie = Assert.Throws<TargetInvocationException>(() =>
+                Activator.CreateInstance(proxyType, new object[] { null })
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
@@ -995,13 +1165,18 @@ namespace System.Collections.Concurrent.Tests
 
             foreach (Task task in tasks)
             {
-                task.ContinueWith(t =>
-                {
-                    if (Interlocked.Decrement(ref remaining) == 0 || t.IsFaulted)
+                task.ContinueWith(
+                    t =>
                     {
-                        mres.Set();
-                    }
-                }, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                        if (Interlocked.Decrement(ref remaining) == 0 || t.IsFaulted)
+                        {
+                            mres.Set();
+                        }
+                    },
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                );
             }
 
             mres.Wait();
@@ -1018,17 +1193,37 @@ namespace System.Collections.Concurrent.Tests
 
         private struct LargeStruct // used to help validate that values aren't torn while being read
         {
-            private readonly long _a, _b, _c, _d, _e, _f, _g, _h;
+            private readonly long _a,
+                _b,
+                _c,
+                _d,
+                _e,
+                _f,
+                _g,
+                _h;
 
-            public LargeStruct(long value) { _a = _b = _c = _d = _e = _f = _g = _h = value; }
+            public LargeStruct(long value)
+            {
+                _a = _b = _c = _d = _e = _f = _g = _h = value;
+            }
 
             public long Value
             {
                 get
                 {
-                    if (_a != _b || _a != _c || _a != _d || _a != _e || _a != _f || _a != _g || _a != _h)
+                    if (
+                        _a != _b
+                        || _a != _c
+                        || _a != _d
+                        || _a != _e
+                        || _a != _f
+                        || _a != _g
+                        || _a != _h
+                    )
                     {
-                        throw new Exception($"Inconsistent {nameof(LargeStruct)}: {_a} {_b} {_c} {_d} {_e} {_f} {_g} {_h}");
+                        throw new Exception(
+                            $"Inconsistent {nameof(LargeStruct)}: {_a} {_b} {_c} {_d} {_e} {_f} {_g} {_h}"
+                        );
                     }
                     return _a;
                 }

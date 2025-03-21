@@ -35,13 +35,19 @@ internal partial class OpaqueRedirection
     //    - If it's a GET request, the client-side code will retry as a non-enhanced request
     //    - For other request types, we have to let it fail as it would be unsafe to retry
 
-    private const string RedirectionDataProtectionProviderPurpose = "Microsoft.AspNetCore.Components.Endpoints.OpaqueRedirection,V1";
+    private const string RedirectionDataProtectionProviderPurpose =
+        "Microsoft.AspNetCore.Components.Endpoints.OpaqueRedirection,V1";
     private const string RedirectionEndpointBaseRelativeUrl = "_framework/opaque-redirect";
 
-    public static string CreateProtectedRedirectionUrl(HttpContext httpContext, string destinationUrl)
+    public static string CreateProtectedRedirectionUrl(
+        HttpContext httpContext,
+        string destinationUrl
+    )
     {
         var protector = CreateProtector(httpContext);
-        var options = httpContext.RequestServices.GetRequiredService<IOptions<RazorComponentsServiceOptions>>();
+        var options = httpContext.RequestServices.GetRequiredService<
+            IOptions<RazorComponentsServiceOptions>
+        >();
         var lifetime = options.Value.TemporaryRedirectionUrlValidityDuration;
         var protectedUrl = protector.Protect(destinationUrl, lifetime);
         return $"{RedirectionEndpointBaseRelativeUrl}?url={UrlEncoder.Default.Encode(protectedUrl)}";
@@ -49,46 +55,63 @@ internal partial class OpaqueRedirection
 
     public static void AddBlazorOpaqueRedirectionEndpoint(IEndpointRouteBuilder endpoints)
     {
-        endpoints.MapGet($"/{RedirectionEndpointBaseRelativeUrl}", httpContext =>
-        {
-            if (!httpContext.Request.Query.TryGetValue("url", out var protectedUrl))
+        endpoints.MapGet(
+            $"/{RedirectionEndpointBaseRelativeUrl}",
+            httpContext =>
             {
-                httpContext.Response.StatusCode = 400;
-                return Task.CompletedTask;
-            }
-
-            var protector = CreateProtector(httpContext);
-            string url;
-
-            try
-            {
-                url = protector.Unprotect(protectedUrl[0]!);
-            }
-            catch (CryptographicException ex)
-            {
-                if (httpContext.RequestServices.GetService<ILogger<OpaqueRedirection>>() is { } logger)
+                if (!httpContext.Request.Query.TryGetValue("url", out var protectedUrl))
                 {
-                    Log.OpaqueUrlUnprotectionFailed(logger, ex);
+                    httpContext.Response.StatusCode = 400;
+                    return Task.CompletedTask;
                 }
 
-                httpContext.Response.StatusCode = 400;
+                var protector = CreateProtector(httpContext);
+                string url;
+
+                try
+                {
+                    url = protector.Unprotect(protectedUrl[0]!);
+                }
+                catch (CryptographicException ex)
+                {
+                    if (
+                        httpContext.RequestServices.GetService<ILogger<OpaqueRedirection>>() is
+                        { } logger
+                    )
+                    {
+                        Log.OpaqueUrlUnprotectionFailed(logger, ex);
+                    }
+
+                    httpContext.Response.StatusCode = 400;
+                    return Task.CompletedTask;
+                }
+
+                httpContext.Response.Redirect(url);
                 return Task.CompletedTask;
             }
-
-            httpContext.Response.Redirect(url);
-            return Task.CompletedTask;
-        });
+        );
     }
 
     private static ITimeLimitedDataProtector CreateProtector(HttpContext httpContext)
     {
-        var dataProtectionProvider = httpContext.RequestServices.GetRequiredService<IDataProtectionProvider>();
-        return dataProtectionProvider.CreateProtector(RedirectionDataProtectionProviderPurpose).ToTimeLimitedDataProtector();
+        var dataProtectionProvider =
+            httpContext.RequestServices.GetRequiredService<IDataProtectionProvider>();
+        return dataProtectionProvider
+            .CreateProtector(RedirectionDataProtectionProviderPurpose)
+            .ToTimeLimitedDataProtector();
     }
 
     public static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Opaque URL unprotection failed.", EventName = "OpaqueUrlUnprotectionFailed")]
-        public static partial void OpaqueUrlUnprotectionFailed(ILogger<OpaqueRedirection> logger, Exception exception);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Opaque URL unprotection failed.",
+            EventName = "OpaqueUrlUnprotectionFailed"
+        )]
+        public static partial void OpaqueUrlUnprotectionFailed(
+            ILogger<OpaqueRedirection> logger,
+            Exception exception
+        );
     }
 }

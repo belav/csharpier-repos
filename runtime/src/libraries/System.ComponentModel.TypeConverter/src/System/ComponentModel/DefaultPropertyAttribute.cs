@@ -29,7 +29,9 @@ namespace System.ComponentModel
         /// Specifies the default value for the <see cref='System.ComponentModel.DefaultPropertyAttribute'/>, which is <see langword='null'/>. This
         /// <see langword='static '/>field is read-only.
         /// </summary>
-        public static readonly DefaultPropertyAttribute Default = new DefaultPropertyAttribute(null);
+        public static readonly DefaultPropertyAttribute Default = new DefaultPropertyAttribute(
+            null
+        );
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {

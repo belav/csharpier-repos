@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
 {
     internal static partial class ITextViewExtensions
     {
-        private class AutoClosingViewProperty<TProperty, TTextView> where TTextView : ITextView
+        private class AutoClosingViewProperty<TProperty, TTextView>
+            where TTextView : ITextView
         {
             private readonly TTextView _textView;
             private readonly Dictionary<object, TProperty> _map = new();
@@ -21,11 +22,14 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
                 TTextView textView,
                 object key,
                 Func<TTextView, TProperty> valueCreator,
-                out TProperty value)
+                out TProperty value
+            )
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView.Properties.GetOrCreateSingletonProperty(() => new AutoClosingViewProperty<TProperty, TTextView>(textView));
+                var properties = textView.Properties.GetOrCreateSingletonProperty(() =>
+                    new AutoClosingViewProperty<TProperty, TTextView>(textView)
+                );
                 if (!properties.TryGetValue(key, out var priorValue))
                 {
                     // Need to create it.
@@ -42,28 +46,35 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             public static bool TryGetValue(
                 TTextView textView,
                 object key,
-                [MaybeNullWhen(false)] out TProperty value)
+                [MaybeNullWhen(false)] out TProperty value
+            )
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView.Properties.GetOrCreateSingletonProperty(() => new AutoClosingViewProperty<TProperty, TTextView>(textView));
+                var properties = textView.Properties.GetOrCreateSingletonProperty(() =>
+                    new AutoClosingViewProperty<TProperty, TTextView>(textView)
+                );
                 return properties.TryGetValue(key, out value);
             }
 
-            public static void AddValue(
-                TTextView textView,
-                object key,
-                TProperty value)
+            public static void AddValue(TTextView textView, object key, TProperty value)
             {
                 Contract.ThrowIfTrue(textView.IsClosed);
 
-                var properties = textView.Properties.GetOrCreateSingletonProperty(() => new AutoClosingViewProperty<TProperty, TTextView>(textView));
+                var properties = textView.Properties.GetOrCreateSingletonProperty(() =>
+                    new AutoClosingViewProperty<TProperty, TTextView>(textView)
+                );
                 properties.Add(key, value);
             }
 
             public static void RemoveValue(TTextView textView, object key)
             {
-                if (textView.Properties.TryGetProperty(typeof(AutoClosingViewProperty<TProperty, TTextView>), out AutoClosingViewProperty<TProperty, TTextView> properties))
+                if (
+                    textView.Properties.TryGetProperty(
+                        typeof(AutoClosingViewProperty<TProperty, TTextView>),
+                        out AutoClosingViewProperty<TProperty, TTextView> properties
+                    )
+                )
                 {
                     properties.Remove(key);
                 }
@@ -78,17 +89,17 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
             private void OnTextViewClosed(object? sender, EventArgs e)
             {
                 _textView.Closed -= OnTextViewClosed;
-                _textView.Properties.RemoveProperty(typeof(AutoClosingViewProperty<TProperty, TTextView>));
+                _textView.Properties.RemoveProperty(
+                    typeof(AutoClosingViewProperty<TProperty, TTextView>)
+                );
             }
 
-            public bool TryGetValue(object key, [MaybeNullWhen(false)] out TProperty value)
-                => _map.TryGetValue(key, out value);
+            public bool TryGetValue(object key, [MaybeNullWhen(false)] out TProperty value) =>
+                _map.TryGetValue(key, out value);
 
-            public void Add(object key, TProperty value)
-                => _map[key] = value;
+            public void Add(object key, TProperty value) => _map[key] = value;
 
-            public void Remove(object key)
-                => _map.Remove(key);
+            public void Remove(object key) => _map.Remove(key);
         }
     }
 }

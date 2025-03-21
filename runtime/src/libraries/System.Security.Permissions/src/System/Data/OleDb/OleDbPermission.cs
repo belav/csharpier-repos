@@ -8,16 +8,34 @@ using System.Security.Permissions;
 namespace System.Data.OleDb
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public sealed class OleDbPermission : DBDataPermission
     {
-        public OleDbPermission() : base(default(PermissionState)) { }
-        public OleDbPermission(PermissionState state) : base(default(PermissionState)) { }
-        public OleDbPermission(PermissionState state, bool allowBlankPassword) : base(default(PermissionState)) { }
+        public OleDbPermission()
+            : base(default(PermissionState)) { }
+
+        public OleDbPermission(PermissionState state)
+            : base(default(PermissionState)) { }
+
+        public OleDbPermission(PermissionState state, bool allowBlankPassword)
+            : base(default(PermissionState)) { }
+
         [System.ComponentModel.Browsable(false)]
         [System.ComponentModel.EditorBrowsable(ComponentModel.EditorBrowsableState.Never)]
-        public string Provider { get { return null; } set { } }
-        public override IPermission Copy() { return null; }
+        public string Provider
+        {
+            get { return null; }
+            set { }
+        }
+
+        public override IPermission Copy()
+        {
+            return null;
+        }
     }
 }

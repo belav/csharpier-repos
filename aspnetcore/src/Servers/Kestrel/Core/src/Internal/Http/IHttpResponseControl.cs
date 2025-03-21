@@ -12,7 +12,10 @@ internal interface IHttpResponseControl
     Span<byte> GetSpan(int sizeHint = 0);
     void Advance(int bytes);
     ValueTask<FlushResult> FlushPipeAsync(CancellationToken cancellationToken);
-    ValueTask<FlushResult> WritePipeAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken);
+    ValueTask<FlushResult> WritePipeAsync(
+        ReadOnlyMemory<byte> source,
+        CancellationToken cancellationToken
+    );
     void CancelPendingFlush();
     Task CompleteAsync(Exception? exception = null);
 }

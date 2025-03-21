@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -11,11 +12,25 @@ namespace Test
     {
         public static object m_xStatic3 = null;
 
-        public int[] Method1() { return null; }
-        public bool[] Method2() { return null; }
-        public static bool[] Static3() { return null; }
+        public int[] Method1()
+        {
+            return null;
+        }
+
+        public bool[] Method2()
+        {
+            return null;
+        }
+
+        public static bool[] Static3()
+        {
+            return null;
+        }
+
         public static int[] Static1(bool param1, bool[] param3, int param5)
-        { return null; }
+        {
+            return null;
+        }
     }
 
     public struct BB
@@ -23,10 +38,15 @@ namespace Test
         static AA[] m_axStatic1;
         static int m_nForward5;
 
-        int Method1() { return 0; }
+        int Method1()
+        {
+            return 0;
+        }
 
         int Method4(uint param1, double param2, long param3)
-        { return new BB().Method1(); }
+        {
+            return new BB().Method1();
+        }
 
         [Fact]
         public static int TestEntryPoint()
@@ -40,7 +60,10 @@ namespace Test
                 );
                 return new BB().Method4((uint)(3l * m_nForward5), 0.0d, 100);
             }
-            catch (NullReferenceException) { return 100; }
+            catch (NullReferenceException)
+            {
+                return 100;
+            }
         }
     }
 }

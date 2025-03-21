@@ -47,10 +47,13 @@ namespace System.Web.Http.Filters
         [Fact]
         public void Constructor_IfContextParameterIsNull_ThrowsException()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                new HttpActionExecutedContext(actionContext: null, exception: null);
-            }, "actionContext");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    new HttpActionExecutedContext(actionContext: null, exception: null);
+                },
+                "actionContext"
+            );
         }
 
         [Fact]
@@ -61,7 +64,8 @@ namespace System.Web.Http.Filters
                 propertyGetter: aec => aec.ActionContext,
                 expectedDefaultValue: null,
                 allowNull: false,
-                roundTripTestValue: ContextUtil.CreateActionContext());
+                roundTripTestValue: ContextUtil.CreateActionContext()
+            );
         }
 
         [Fact]
@@ -72,18 +76,23 @@ namespace System.Web.Http.Filters
                 propertyGetter: aec => aec.Exception,
                 expectedDefaultValue: null,
                 allowNull: true,
-                roundTripTestValue: new ArgumentException());
+                roundTripTestValue: new ArgumentException()
+            );
         }
 
         [Fact]
         public void Result_Property()
         {
             Assert.Reflection.Property<HttpActionExecutedContext, HttpResponseMessage>(
-            instance: new HttpActionExecutedContext(actionContext: ContextUtil.CreateActionContext(), exception: null),
+                instance: new HttpActionExecutedContext(
+                    actionContext: ContextUtil.CreateActionContext(),
+                    exception: null
+                ),
                 propertyGetter: aec => aec.Response,
                 expectedDefaultValue: null,
                 allowNull: true,
-                roundTripTestValue: new HttpResponseMessage());
+                roundTripTestValue: new HttpResponseMessage()
+            );
         }
     }
 }

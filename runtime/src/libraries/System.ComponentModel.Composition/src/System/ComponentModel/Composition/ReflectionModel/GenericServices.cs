@@ -18,13 +18,16 @@ namespace System.ComponentModel.Composition.ReflectionModel
             if (type.IsGenericType && type.ContainsGenericParameters)
             {
                 List<Type> pureGenericParameters = new List<Type>();
-                TraverseGenericType(type, (Type t) =>
-                {
-                    if (t.IsGenericParameter)
+                TraverseGenericType(
+                    type,
+                    (Type t) =>
                     {
-                        pureGenericParameters.Add(t);
+                        if (t.IsGenericParameter)
+                        {
+                            pureGenericParameters.Add(t);
+                        }
                     }
-                });
+                );
                 return pureGenericParameters;
             }
             else
@@ -40,13 +43,16 @@ namespace System.ComponentModel.Composition.ReflectionModel
             int genericArity = 0;
             if (type.IsGenericType && type.ContainsGenericParameters)
             {
-                TraverseGenericType(type, (Type t) =>
-                {
-                    if (t.IsGenericParameter)
+                TraverseGenericType(
+                    type,
+                    (Type t) =>
                     {
-                        genericArity++;
+                        if (t.IsGenericParameter)
+                        {
+                            genericArity++;
+                        }
                     }
-                });
+                );
             }
             return genericArity;
         }
@@ -65,17 +71,27 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public static int[] GetGenericParametersOrder(Type type)
         {
-            return type.GetPureGenericParameters().Select(parameter => parameter.GenericParameterPosition).ToArray();
+            return type.GetPureGenericParameters()
+                .Select(parameter => parameter.GenericParameterPosition)
+                .ToArray();
         }
 
-        public static string GetGenericName(string originalGenericName, int[] genericParametersOrder, int genericArity)
+        public static string GetGenericName(
+            string originalGenericName,
+            int[] genericParametersOrder,
+            int genericArity
+        )
         {
             string[] genericFormatArgs = new string[genericArity];
             for (int i = 0; i < genericParametersOrder.Length; i++)
             {
                 genericFormatArgs[genericParametersOrder[i]] = $"{{{i}}}";
             }
-            return string.Format(CultureInfo.InvariantCulture, originalGenericName, genericFormatArgs);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                originalGenericName,
+                genericFormatArgs
+            );
         }
 
         public static T[] Reorder<T>(T[] original, int[] genericParametersOrder)
@@ -89,7 +105,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
         }
 
         [return: NotNullIfNotNull(nameof(types))]
-        public static IEnumerable<Type>? CreateTypeSpecializations(this Type[]? types, Type[] specializationTypes)
+        public static IEnumerable<Type>? CreateTypeSpecializations(
+            this Type[]? types,
+            Type[] specializationTypes
+        )
         {
             if (types == null)
             {
@@ -122,18 +141,21 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 for (int i = 0; i < typeGenericArguments.Length; i++)
                 {
                     Type typeGenericArgument = typeGenericArguments[i];
-                    subSpecialization[i] = typeGenericArgument.IsGenericParameter ?
-                        specializationTypes[typeGenericArgument.GenericParameterPosition] : typeGenericArgument;
-
+                    subSpecialization[i] = typeGenericArgument.IsGenericParameter
+                        ? specializationTypes[typeGenericArgument.GenericParameterPosition]
+                        : typeGenericArgument;
                 }
 
                 // and "close" the generic
                 return type.GetGenericTypeDefinition().MakeGenericType(subSpecialization);
             }
-
         }
 
-        public static bool CanSpecialize(Type? type, IEnumerable<Type>? constraints, GenericParameterAttributes attributes)
+        public static bool CanSpecialize(
+            Type? type,
+            IEnumerable<Type>? constraints,
+            GenericParameterAttributes attributes
+        )
         {
             return CanSpecialize(type, constraints) && CanSpecialize(type!, attributes);
         }

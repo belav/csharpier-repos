@@ -11,12 +11,16 @@ namespace System.Linq.Parallel.Tests
         // Sum a range of integers
         public static int SumRange(int start, int count)
         {
-            return unchecked((count / 2) * (2 * start + count - 1) + (count % 2 != 0 ? start + count / 2 : 0));
+            return unchecked(
+                (count / 2) * (2 * start + count - 1) + (count % 2 != 0 ? start + count / 2 : 0)
+            );
         }
 
         public static long SumRange(long start, long count)
         {
-            return unchecked((count / 2) * (2 * start + count - 1) + (count % 2 != 0 ? start + count / 2 : 0));
+            return unchecked(
+                (count / 2) * (2 * start + count - 1) + (count % 2 != 0 ? start + count / 2 : 0)
+            );
         }
 
         public static long ProductRange(long start, long count)

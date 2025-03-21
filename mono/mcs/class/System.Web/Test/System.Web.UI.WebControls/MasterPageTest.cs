@@ -26,290 +26,325 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
-
-using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Text;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.IO;
-using System.Drawing;
-using MyWebControl = System.Web.UI.WebControls;
-using System.Collections;
-using MonoTests.SystemWeb.Framework;
 using MonoTests.stand_alone.WebHarness;
-using System.Threading;
+using MonoTests.SystemWeb.Framework;
+using NUnit.Framework;
+using MyWebControl = System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	public class PokerMasterPage : MasterPage
-	{
-		public PokerMasterPage ()
-		{
-			TrackViewState ();
-		}
-		public StateBag StateBag
-		{
-			get { return base.ViewState; }
-		}
-		public new IDictionary ContentTemplates ()
-		{
-			return base.ContentTemplates;
-		}
-		public new void AddContentTemplate (string templateName, ITemplate template)
-		{
-			base.AddContentTemplate (templateName, template);
-		}
-		public string MasterMethod ()
-		{
-			return "FromMasterMethod";
-		}
-	}
+    public class PokerMasterPage : MasterPage
+    {
+        public PokerMasterPage()
+        {
+            TrackViewState();
+        }
 
-	[TestFixture]
-	public class MasterPageTest
-	{
-		class MyTemplate : ITemplate
-		{
-			public const string MyText = "|MyTemplate.InstantiateIn called|";
+        public StateBag StateBag
+        {
+            get { return base.ViewState; }
+        }
 
-			public void InstantiateIn (Control container)
-			{
-				container.Controls.Add (new LiteralControl (MyText));
-			}
-		}
+        public new IDictionary ContentTemplates()
+        {
+            return base.ContentTemplates;
+        }
 
-		class MyContentTemplate : Content, ITemplate
-		{
-			public const string MyText = "|MyContentTemplate.InstantiateIn called|";
+        public new void AddContentTemplate(string templateName, ITemplate template)
+        {
+            base.AddContentTemplate(templateName, template);
+        }
 
-			public void InstantiateIn (Control container)
-			{
-				container.Controls.Add (new LiteralControl (MyText));
-			}
-		}
-		[TestFixtureSetUp]
-		public void CopyTestResources ()
-		{
-			WebTest.CopyResource (GetType (), "MasterTypeTest1.aspx", "MasterTypeTest1.aspx");
-			WebTest.CopyResource (GetType (), "MasterTypeTest2.aspx", "MasterTypeTest2.aspx");
-			WebTest.CopyResource (GetType (), "MyDerived.master", "MyDerived.master");
-			WebTest.CopyResource (GetType (), "MyPageWithDerivedMaster.aspx", "MyPageWithDerivedMaster.aspx");
-		}
+        public string MasterMethod()
+        {
+            return "FromMasterMethod";
+        }
+    }
 
-		[SetUp]
-		public void SetupTestCase ()
-		{
-			Thread.Sleep (100);
-		}
+    [TestFixture]
+    public class MasterPageTest
+    {
+        class MyTemplate : ITemplate
+        {
+            public const string MyText = "|MyTemplate.InstantiateIn called|";
 
-		[Test]
-		public void MasterPage_DefaultProperties ()
-		{
-			PokerMasterPage pmp = new PokerMasterPage ();
-			Assert.AreEqual (null, pmp.Master, "Master Property");
-			Assert.AreEqual (null, pmp.MasterPageFile, "MasterPageFile Property");
-		}
+            public void InstantiateIn(Control container)
+            {
+                container.Controls.Add(new LiteralControl(MyText));
+            }
+        }
 
-		[Test]
-		[Category ("NotWorking")]
-		public void MasterPage_DefaultPropertiesNotWorking ()
-		{
-			PokerMasterPage pmp = new PokerMasterPage ();
-			IDictionary i = pmp.ContentTemplates ();
-			Assert.AreEqual (null, i, "ContentTemplates");
-		}
+        class MyContentTemplate : Content, ITemplate
+        {
+            public const string MyText = "|MyContentTemplate.InstantiateIn called|";
 
-		[Test]
-		[Category ("NunitWeb")]
-		public void MasterPage_Render ()
-		{
-			Render_Helper (StandardUrl.PAGE_WITH_MASTER);
-		}
+            public void InstantiateIn(Control container)
+            {
+                container.Controls.Add(new LiteralControl(MyText));
+            }
+        }
 
+        [TestFixtureSetUp]
+        public void CopyTestResources()
+        {
+            WebTest.CopyResource(GetType(), "MasterTypeTest1.aspx", "MasterTypeTest1.aspx");
+            WebTest.CopyResource(GetType(), "MasterTypeTest2.aspx", "MasterTypeTest2.aspx");
+            WebTest.CopyResource(GetType(), "MyDerived.master", "MyDerived.master");
+            WebTest.CopyResource(
+                GetType(),
+                "MyPageWithDerivedMaster.aspx",
+                "MyPageWithDerivedMaster.aspx"
+            );
+        }
 
-		[Test]
-		[Category ("NunitWeb")]
-		public void MasterPageDerived_Render ()
-		{
-			Render_Helper (StandardUrl.PAGE_WITH_DERIVED_MASTER);
-		}
+        [SetUp]
+        public void SetupTestCase()
+        {
+            Thread.Sleep(100);
+        }
 
-		// Bug #325114
-		[Test]
-		[Category ("NunitWeb")]
-		[ExpectedException (typeof(HttpException))]
-		public void MasterPage_ContentPlaceHolder_Not_Found ()
-		{
-			Render_Helper (StandardUrl.PAGE_WITH_MASTER_INVALID_PLACE_HOLDER);
-		}
-		
-		public void Render_Helper(string url)
-		{
-			WebTest t = new WebTest (PageInvoker.CreateOnLoad (_RenderDefault));
-			t.Request.Url = url;
-			string PageRenderHtml = t.Run ();
-			
-			
-			if (PageRenderHtml.IndexOf ("Page main text") < 0) {
-			        Assert.Fail ("Master#2");
-			}
-			
-			Assert.AreEqual (-1, PageRenderHtml.IndexOf ("Master main text"), "Master#3");
-			
+        [Test]
+        public void MasterPage_DefaultProperties()
+        {
+            PokerMasterPage pmp = new PokerMasterPage();
+            Assert.AreEqual(null, pmp.Master, "Master Property");
+            Assert.AreEqual(null, pmp.MasterPageFile, "MasterPageFile Property");
+        }
 
-			if (PageRenderHtml.IndexOf ("Page dynamic text") < 0) {
-				Assert.Fail ("Master#5");
-			}
+        [Test]
+        [Category("NotWorking")]
+        public void MasterPage_DefaultPropertiesNotWorking()
+        {
+            PokerMasterPage pmp = new PokerMasterPage();
+            IDictionary i = pmp.ContentTemplates();
+            Assert.AreEqual(null, i, "ContentTemplates");
+        }
 
-			if (PageRenderHtml.IndexOf ("My master page footer") < 0) {
-			        Assert.Fail ("Master#6, result: "+PageRenderHtml);
-			}
+        [Test]
+        [Category("NunitWeb")]
+        public void MasterPage_Render()
+        {
+            Render_Helper(StandardUrl.PAGE_WITH_MASTER);
+        }
 
-			if (PageRenderHtml.IndexOf ("Master page content text") < 0) {
-				Assert.Fail ("Master#7");
-			}
+        [Test]
+        [Category("NunitWeb")]
+        public void MasterPageDerived_Render()
+        {
+            Render_Helper(StandardUrl.PAGE_WITH_DERIVED_MASTER);
+        }
 
-			if (url == StandardUrl.PAGE_WITH_DERIVED_MASTER) {
-				if (PageRenderHtml.IndexOf ("Derived header text") < 0) {
-					Assert.Fail ("Master#8");
-				}
+        // Bug #325114
+        [Test]
+        [Category("NunitWeb")]
+        [ExpectedException(typeof(HttpException))]
+        public void MasterPage_ContentPlaceHolder_Not_Found()
+        {
+            Render_Helper(StandardUrl.PAGE_WITH_MASTER_INVALID_PLACE_HOLDER);
+        }
 
-				if (PageRenderHtml.IndexOf ("Derived master page text ") < 0) {
-					Assert.Fail ("Master#9");
-				}
+        public void Render_Helper(string url)
+        {
+            WebTest t = new WebTest(PageInvoker.CreateOnLoad(_RenderDefault));
+            t.Request.Url = url;
+            string PageRenderHtml = t.Run();
 
-				if (PageRenderHtml.IndexOf ("Master header text") < 0) {
-					Assert.Fail ("Master#10");
-				}
-			}
-			else {
-				Assert.AreEqual (-1, PageRenderHtml.IndexOf ("Master header text"), "Master#1");
-				Assert.AreEqual (-1, PageRenderHtml.IndexOf ("Master dynamic text"), "Master#4");
-			}
-		}
+            if (PageRenderHtml.IndexOf("Page main text") < 0)
+            {
+                Assert.Fail("Master#2");
+            }
 
-		[Test]
-		[Category ("NunitWeb")]
-		[Category ("NotWorking")]
-		public void MasterType_VirtualPath ()
-		{
-			WebTest t = new WebTest ("MasterTypeTest1.aspx");
-			string PageRenderHtml = t.Run ();
-			if (PageRenderHtml.IndexOf ("MasterTypeMethod") < 0)
-				Assert.Fail ("MasterType VirtualPath test failed");
-		}
+            Assert.AreEqual(-1, PageRenderHtml.IndexOf("Master main text"), "Master#3");
 
-		[Test]
-		[Category ("NunitWeb")]
-		public void MasterType_TypeName ()
-		{
-			WebTest t = new WebTest ("MasterTypeTest2.aspx");
-			string PageRenderHtml = t.Run ();
-			if (PageRenderHtml.IndexOf ("FromMasterMethod") < 0)
-				Assert.Fail ("MasterType TypeName test failed");
-		}
-		[Test]
-		public void InstantiateInContentPlaceHolder ()
-		{
-			var mp = new MasterPage ();
-			ITemplate template = new MyTemplate ();
+            if (PageRenderHtml.IndexOf("Page dynamic text") < 0)
+            {
+                Assert.Fail("Master#5");
+            }
 
-			Assert.Throws<NullReferenceException> (() => {
-				mp.InstantiateInContentPlaceHolder (null, template);
-			}, "#A1-1");
+            if (PageRenderHtml.IndexOf("My master page footer") < 0)
+            {
+                Assert.Fail("Master#6, result: " + PageRenderHtml);
+            }
 
-			Control container = new Control ();
-			Assert.Throws<NullReferenceException> (() => {
-				mp.InstantiateInContentPlaceHolder (container, null);
-			}, "#A1-2");
+            if (PageRenderHtml.IndexOf("Master page content text") < 0)
+            {
+                Assert.Fail("Master#7");
+            }
+
+            if (url == StandardUrl.PAGE_WITH_DERIVED_MASTER)
+            {
+                if (PageRenderHtml.IndexOf("Derived header text") < 0)
+                {
+                    Assert.Fail("Master#8");
+                }
+
+                if (PageRenderHtml.IndexOf("Derived master page text ") < 0)
+                {
+                    Assert.Fail("Master#9");
+                }
+
+                if (PageRenderHtml.IndexOf("Master header text") < 0)
+                {
+                    Assert.Fail("Master#10");
+                }
+            }
+            else
+            {
+                Assert.AreEqual(-1, PageRenderHtml.IndexOf("Master header text"), "Master#1");
+                Assert.AreEqual(-1, PageRenderHtml.IndexOf("Master dynamic text"), "Master#4");
+            }
+        }
+
+        [Test]
+        [Category("NunitWeb")]
+        [Category("NotWorking")]
+        public void MasterType_VirtualPath()
+        {
+            WebTest t = new WebTest("MasterTypeTest1.aspx");
+            string PageRenderHtml = t.Run();
+            if (PageRenderHtml.IndexOf("MasterTypeMethod") < 0)
+                Assert.Fail("MasterType VirtualPath test failed");
+        }
+
+        [Test]
+        [Category("NunitWeb")]
+        public void MasterType_TypeName()
+        {
+            WebTest t = new WebTest("MasterTypeTest2.aspx");
+            string PageRenderHtml = t.Run();
+            if (PageRenderHtml.IndexOf("FromMasterMethod") < 0)
+                Assert.Fail("MasterType TypeName test failed");
+        }
+
+        [Test]
+        public void InstantiateInContentPlaceHolder()
+        {
+            var mp = new MasterPage();
+            ITemplate template = new MyTemplate();
+
+            Assert.Throws<NullReferenceException>(
+                () =>
+                {
+                    mp.InstantiateInContentPlaceHolder(null, template);
+                },
+                "#A1-1"
+            );
+
+            Control container = new Control();
+            Assert.Throws<NullReferenceException>(
+                () =>
+                {
+                    mp.InstantiateInContentPlaceHolder(container, null);
+                },
+                "#A1-2"
+            );
 #if DOTNET
-			// TODO: why does it throw? Unchecked 'as' type cast?
-			Assert.Throws<NullReferenceException> (() => {
-				mp.InstantiateInContentPlaceHolder (container, template);
-			}, "#B1-1");
+            // TODO: why does it throw? Unchecked 'as' type cast?
+            Assert.Throws<NullReferenceException>(
+                () =>
+                {
+                    mp.InstantiateInContentPlaceHolder(container, template);
+                },
+                "#B1-1"
+            );
 #endif
-			// TODO: Still throws a NREX, probably needs a full web request context, as it works below in the
-			// InstantiateInContentPlaceHolder_WithPage test
-			//
-			//template = new MyContentTemplate ();
-			//mp.InstantiateInContentPlaceHolder (container, template);
-		}
+            // TODO: Still throws a NREX, probably needs a full web request context, as it works below in the
+            // InstantiateInContentPlaceHolder_WithPage test
+            //
+            //template = new MyContentTemplate ();
+            //mp.InstantiateInContentPlaceHolder (container, template);
+        }
 
-		[Test]
-		public void InstantiateInContentPlaceHolder_WithPage ()
-		{
-			WebTest t = new WebTest ("MyPageWithDerivedMaster.aspx");
-			var pd = new PageDelegates ();
-			pd.Load = InstantiateInContentPlaceHolder_WithPage_Load;
-			t.Invoker = new PageInvoker (pd);
-			t.Run ();
-		}
+        [Test]
+        public void InstantiateInContentPlaceHolder_WithPage()
+        {
+            WebTest t = new WebTest("MyPageWithDerivedMaster.aspx");
+            var pd = new PageDelegates();
+            pd.Load = InstantiateInContentPlaceHolder_WithPage_Load;
+            t.Invoker = new PageInvoker(pd);
+            t.Run();
+        }
 
-		public static void InstantiateInContentPlaceHolder_WithPage_Load (Page p)
-		{
-			MasterPage mp = p.Master;
-			Assert.IsNotNull (mp, "#A0");
+        public static void InstantiateInContentPlaceHolder_WithPage_Load(Page p)
+        {
+            MasterPage mp = p.Master;
+            Assert.IsNotNull(mp, "#A0");
 
-			ITemplate template = new MyTemplate ();
+            ITemplate template = new MyTemplate();
 
-			Assert.Throws<NullReferenceException> (() => {
-				mp.InstantiateInContentPlaceHolder (null, template);
-			}, "#A1-1");
+            Assert.Throws<NullReferenceException>(
+                () =>
+                {
+                    mp.InstantiateInContentPlaceHolder(null, template);
+                },
+                "#A1-1"
+            );
 
-			Control container = new Control ();
-			Assert.Throws<NullReferenceException> (() => {
-				mp.InstantiateInContentPlaceHolder (container, null);
-			}, "#A1-2");
+            Control container = new Control();
+            Assert.Throws<NullReferenceException>(
+                () =>
+                {
+                    mp.InstantiateInContentPlaceHolder(container, null);
+                },
+                "#A1-2"
+            );
 
-			mp.InstantiateInContentPlaceHolder (container, template);
-			Assert.IsTrue (HasLiteralWithText (container, MyTemplate.MyText), "#B1-1");
+            mp.InstantiateInContentPlaceHolder(container, template);
+            Assert.IsTrue(HasLiteralWithText(container, MyTemplate.MyText), "#B1-1");
 
-			template = new MyContentTemplate ();
-			mp.InstantiateInContentPlaceHolder (container, template);
-			Assert.IsTrue (HasLiteralWithText (container, MyContentTemplate.MyText), "#B1-2");
-		}
+            template = new MyContentTemplate();
+            mp.InstantiateInContentPlaceHolder(container, template);
+            Assert.IsTrue(HasLiteralWithText(container, MyContentTemplate.MyText), "#B1-2");
+        }
 
-		static bool HasLiteralWithText (Control container, string text)
-		{
-			if (container == null || container.Controls.Count == 0)
-				return false;
+        static bool HasLiteralWithText(Control container, string text)
+        {
+            if (container == null || container.Controls.Count == 0)
+                return false;
 
-			LiteralControl ctl;
-			foreach (Control c in container.Controls) {
-				ctl = c as LiteralControl;
-				if (ctl == null)
-					continue;
+            LiteralControl ctl;
+            foreach (Control c in container.Controls)
+            {
+                ctl = c as LiteralControl;
+                if (ctl == null)
+                    continue;
 
-				if (String.Compare (ctl.Text, text, StringComparison.Ordinal) == 0)
-					return true;
-			}
+                if (String.Compare(ctl.Text, text, StringComparison.Ordinal) == 0)
+                    return true;
+            }
 
-			return false;
-		}
+            return false;
+        }
 
-		public static void _RenderDefault (Page p)
-		{
-			p.Form.Controls.Add(new LiteralControl("Page dynamic text"));
-		}
+        public static void _RenderDefault(Page p)
+        {
+            p.Form.Controls.Add(new LiteralControl("Page dynamic text"));
+        }
 
-		[Test]
-	 	[ExpectedException (typeof(HttpException))]
-		public void MasterPage_AddContentTemplate ()
-		{
-			PokerMasterPage pmp = new PokerMasterPage();
-			ITemplate it = null;
-			pmp.AddContentTemplate ("myTemplate", it);
-			pmp.AddContentTemplate ("myTemplate", it);
-		}
-		
-		[TestFixtureTearDown]
-		public void TearDown ()
-		{
-			WebTest.Unload ();
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(HttpException))]
+        public void MasterPage_AddContentTemplate()
+        {
+            PokerMasterPage pmp = new PokerMasterPage();
+            ITemplate it = null;
+            pmp.AddContentTemplate("myTemplate", it);
+            pmp.AddContentTemplate("myTemplate", it);
+        }
+
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+            WebTest.Unload();
+        }
+    }
 }

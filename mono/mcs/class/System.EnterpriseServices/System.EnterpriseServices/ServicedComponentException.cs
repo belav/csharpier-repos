@@ -1,4 +1,4 @@
-// 
+//
 // System.EnterpriseServices.ServicedComponentException.cs
 //
 // Author:
@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,28 +31,23 @@
 using System;
 using System.Runtime.InteropServices;
 
-namespace System.EnterpriseServices {
-	[Serializable]
-	[ComVisible(false)]
-	public sealed class ServicedComponentException : SystemException {
+namespace System.EnterpriseServices
+{
+    [Serializable]
+    [ComVisible(false)]
+    public sealed class ServicedComponentException : SystemException
+    {
+        #region Constructors
 
-		#region Constructors
+        public ServicedComponentException()
+            : base() { }
 
-		public ServicedComponentException ()
-			: base ()
-		{
-		}
+        public ServicedComponentException(string message)
+            : base(message) { }
 
-		public ServicedComponentException (string message)
-			: base (message)
-		{
-		}
+        public ServicedComponentException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-		public ServicedComponentException (string message, Exception innerException)
-			: base (message, innerException)
-		{
-		}
-
-		#endregion // Constructors
-	}
+        #endregion // Constructors
+    }
 }

@@ -40,53 +40,32 @@ namespace Microsoft.CodeAnalysis
             return bytesRead;
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override bool CanRead
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override long Length
         {
-            get
-            {
-                return _length;
-            }
+            get { return _length; }
         }
 
         public override long Position
         {
-            get
-            {
-                return _position;
-            }
-
-            set
-            {
-                Seek(value, SeekOrigin.Begin);
-            }
+            get { return _position; }
+            set { Seek(value, SeekOrigin.Begin); }
         }
 
         public override long Seek(long offset, SeekOrigin origin)

@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MyApp.Namespace
 {
-    #if NameIsController
+#if NameIsController
     public class HomeController : Microsoft.AspNetCore.Mvc.Controller
-    #else
+#else
     public class HomeController : Controller
-    #endif
+#endif
     {
         // GET: HomeController
         public ActionResult Index()
@@ -14,7 +14,7 @@ namespace MyApp.Namespace
             return View();
         }
 
-        #if(actions)
+#if(actions)
         // GET: HomeController/Details/5
         public ActionResult Details(int id)
         {
@@ -83,6 +83,6 @@ namespace MyApp.Namespace
                 return View();
             }
         }
-        #endif
+#endif
     }
 }

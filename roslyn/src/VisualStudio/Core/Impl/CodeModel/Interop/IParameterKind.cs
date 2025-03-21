@@ -13,7 +13,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
     {
         cmParameterTypeIn = 1,
         cmParameterTypeOut = 2,
-        cmParameterTypeInOut = 3
+        cmParameterTypeInOut = 3,
     }
 
     [ComImport]

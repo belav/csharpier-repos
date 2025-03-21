@@ -21,24 +21,30 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
 
         public static readonly string DotnetCommandName = "dotnet";
 
-        public virtual Task<PublishedApplication> Publish(DeploymentParameters deploymentParameters, ILogger logger)
+        public virtual Task<PublishedApplication> Publish(
+            DeploymentParameters deploymentParameters,
+            ILogger logger
+        )
         {
             var publishDirectory = CreateTempDirectory();
             using (logger.BeginScope("dotnet-publish"))
             {
                 if (string.IsNullOrEmpty(deploymentParameters.TargetFramework))
                 {
-                    throw new Exception($"A target framework must be specified in the deployment parameters for applications that require publishing before deployment");
+                    throw new Exception(
+                        $"A target framework must be specified in the deployment parameters for applications that require publishing before deployment"
+                    );
                 }
 
-                var parameters = $"publish "
-                                 + $" --output \"{publishDirectory.FullName}\""
-                                 + $" --framework {deploymentParameters.TargetFramework}"
-                                 + $" --configuration {deploymentParameters.Configuration}"
-                                 // avoids triggering builds of dependencies of the test app which could cause issues like https://github.com/dotnet/arcade/issues/2941
-                                 + $" --no-dependencies"
-                                 + $" /p:TargetArchitecture={deploymentParameters.RuntimeArchitecture}"
-                                 + " --no-restore";
+                var parameters =
+                    $"publish "
+                    + $" --output \"{publishDirectory.FullName}\""
+                    + $" --framework {deploymentParameters.TargetFramework}"
+                    + $" --configuration {deploymentParameters.Configuration}"
+                    // avoids triggering builds of dependencies of the test app which could cause issues like https://github.com/dotnet/arcade/issues/2941
+                    + $" --no-dependencies"
+                    + $" /p:TargetArchitecture={deploymentParameters.RuntimeArchitecture}"
+                    + " --no-restore";
 
                 if (deploymentParameters.ApplicationType == ApplicationType.Standalone)
                 {
@@ -63,7 +69,11 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                     WorkingDirectory = deploymentParameters.ApplicationPath,
                 };
 
-                ProcessHelpers.AddEnvironmentVariablesToProcess(startInfo, deploymentParameters.PublishEnvironmentVariables, logger);
+                ProcessHelpers.AddEnvironmentVariablesToProcess(
+                    startInfo,
+                    deploymentParameters.PublishEnvironmentVariables,
+                    logger
+                );
 
                 var hostProcess = new Process() { StartInfo = startInfo };
 
@@ -84,19 +94,23 @@ namespace Microsoft.Extensions.Hosting.IntegrationTesting
                 {
                     if (hostProcess.ExitCode != 0)
                     {
-                        var message = $"{DotnetCommandName} publish exited with exit code : {hostProcess.ExitCode}";
+                        var message =
+                            $"{DotnetCommandName} publish exited with exit code : {hostProcess.ExitCode}";
                         logger.LogError(message);
                         throw new Exception(message);
                     }
                 }
                 else
                 {
-                    var message = $"{DotnetCommandName} publish failed to exit after {timeoutMinutes} minutes";
+                    var message =
+                        $"{DotnetCommandName} publish failed to exit after {timeoutMinutes} minutes";
                     logger.LogError(message);
                     throw new Exception(message);
                 }
 
-                logger.LogInformation($"{DotnetCommandName} publish finished with exit code : {hostProcess.ExitCode}");
+                logger.LogInformation(
+                    $"{DotnetCommandName} publish finished with exit code : {hostProcess.ExitCode}"
+                );
             }
 
             return Task.FromResult(new PublishedApplication(publishDirectory.FullName, logger));

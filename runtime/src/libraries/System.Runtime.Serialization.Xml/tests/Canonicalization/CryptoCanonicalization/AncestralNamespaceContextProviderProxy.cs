@@ -19,7 +19,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             return new ReaderAncestralNamespaceContextProvider(reader);
         }
 
-        private sealed class ReaderAncestralNamespaceContextProvider : IAncestralNamespaceContextProvider
+        private sealed class ReaderAncestralNamespaceContextProvider
+            : IAncestralNamespaceContextProvider
         {
             private XmlReader _reader;
 

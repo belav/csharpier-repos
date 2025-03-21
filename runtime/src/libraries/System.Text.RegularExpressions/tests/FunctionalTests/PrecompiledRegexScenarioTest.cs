@@ -15,11 +15,14 @@ namespace System.Text.RegularExpressions.Tests
     public class PrecompiledRegexScenarioTest
     {
         const string text = "asdf134success1245something";
-        const string textWithMultipleMatchesCompiled = @"asdf134success1245something
+        const string textWithMultipleMatchesCompiled =
+            @"asdf134success1245something
 bsdf135success1245somethingelse
 csdf136success2245somethingnew
 dsdf137success3245somethingold";
-        static string textWithMultipleMatches = LineEndingsHelper.Normalize(textWithMultipleMatchesCompiled);
+        static string textWithMultipleMatches = LineEndingsHelper.Normalize(
+            textWithMultipleMatchesCompiled
+        );
 
         [Fact]
         public void PrecompiledRegex_MatchesTest()
@@ -46,8 +49,16 @@ dsdf137success3245somethingold";
             Assert.Equal(1, testClass.Match(text).Groups[0].Captures.Count);
             Assert.Equal(Match.Empty, testClass.Match(text, beginning: 7, length: text.Length - 7));
             Assert.Equal(5, testClass.Match(text, beginning: 5, length: text.Length - 5).Index);
-            Assert.False(testClass.Match("asdf134succes1245somethingasdf134success1245something", 0, 27).Success); // The first 27 characters shouldn't match.
-            Assert.True(testClass.Match("asdf134succes1245somethingasdf134success1245something", 26, 27).Success); // The last 27 characters should match.
+            Assert.False(
+                testClass
+                    .Match("asdf134succes1245somethingasdf134success1245something", 0, 27)
+                    .Success
+            ); // The first 27 characters shouldn't match.
+            Assert.True(
+                testClass
+                    .Match("asdf134succes1245somethingasdf134success1245something", 26, 27)
+                    .Success
+            ); // The last 27 characters should match.
             Assert.Equal(Match.Empty, testClass.Match(text, startat: 7));
             Assert.Equal(6, testClass.Match(text, startat: 6).Index);
         }
@@ -58,11 +69,20 @@ dsdf137success3245somethingold";
             RegexTestClass testClass = new RegexTestClass();
 
             Assert.Equal("4success", testClass.Replace(text, "$1${output}"));
-            Assert.Equal("4success", testClass.Replace(text, (match) =>
-            {
-                return $"{match.Groups[1]}{match.Groups["output"]}";
-            }));
-            Assert.Equal("4success\n5success\n6success\n7success", testClass.Replace(textWithMultipleMatches, "$1${output}"));
+            Assert.Equal(
+                "4success",
+                testClass.Replace(
+                    text,
+                    (match) =>
+                    {
+                        return $"{match.Groups[1]}{match.Groups["output"]}";
+                    }
+                )
+            );
+            Assert.Equal(
+                "4success\n5success\n6success\n7success",
+                testClass.Replace(textWithMultipleMatches, "$1${output}")
+            );
         }
 
         [Fact]
@@ -70,8 +90,35 @@ dsdf137success3245somethingold";
         {
             RegexTestClass testClass = new RegexTestClass();
 
-            Assert.Equal(new[] { "", "4", "success", "\n", "5", "success", "\n", "6", "success", "\n", "7", "success", "" }, testClass.Split(textWithMultipleMatches));
-            Assert.Equal(new[] { "", "4", "success", $"\nbsdf135success1245somethingelse{Environment.NewLine}csdf136success2245somethingnew{Environment.NewLine}dsdf137success3245somethingold" }, testClass.Split(textWithMultipleMatches, 2));
+            Assert.Equal(
+                new[]
+                {
+                    "",
+                    "4",
+                    "success",
+                    "\n",
+                    "5",
+                    "success",
+                    "\n",
+                    "6",
+                    "success",
+                    "\n",
+                    "7",
+                    "success",
+                    "",
+                },
+                testClass.Split(textWithMultipleMatches)
+            );
+            Assert.Equal(
+                new[]
+                {
+                    "",
+                    "4",
+                    "success",
+                    $"\nbsdf135success1245somethingelse{Environment.NewLine}csdf136success2245somethingnew{Environment.NewLine}dsdf137success3245somethingold",
+                },
+                testClass.Split(textWithMultipleMatches, 2)
+            );
         }
 
         [Fact]
@@ -113,8 +160,18 @@ namespace RegexTestNamespace
             roptions = RegexOptions.IgnoreCase;
             internalMatchTimeout = TimeSpan.FromTicks(-10000L);
             factory = new RegexFactoryTestClass();
-            Caps = new Hashtable { { 0, 0 }, { 1, 1 }, { 2, 2 } };
-            CapNames = new Hashtable { { "0", 0 }, { "1", 1 }, { "output", 2 } };
+            Caps = new Hashtable
+            {
+                { 0, 0 },
+                { 1, 1 },
+                { 2, 2 },
+            };
+            CapNames = new Hashtable
+            {
+                { "0", 0 },
+                { "1", 1 },
+                { "output", 2 },
+            };
             capslist = new string[3];
             capslist[0] = "0";
             capslist[1] = "1";
@@ -125,7 +182,8 @@ namespace RegexTestNamespace
 #pragma warning restore SYSLIB0052 // Type or member is obsolete
         }
 
-        public RegexTestClass(TimeSpan timeSpan) : this()
+        public RegexTestClass(TimeSpan timeSpan)
+            : this()
         {
             Regex.ValidateMatchTimeout(timeSpan);
             internalMatchTimeout = timeSpan;
@@ -189,7 +247,12 @@ namespace RegexTestNamespace
                     {
                         num++;
                         num4 = 1;
-                        while (RegexRunner.CharInClass(char.ToLower(runtext[num - num4--]), "\0\0\u0001\t"))
+                        while (
+                            RegexRunner.CharInClass(
+                                char.ToLower(runtext[num - num4--]),
+                                "\0\0\u0001\t"
+                            )
+                        )
                         {
                             if (num4 <= 0)
                             {
@@ -197,7 +260,12 @@ namespace RegexTestNamespace
                                 num4 = (num5 = runtextend - num) + 1;
                                 while (--num4 > 0)
                                 {
-                                    if (!RegexRunner.CharInClass(char.ToLower(runtext[num++]), "\0\0\u0001\t"))
+                                    if (
+                                        !RegexRunner.CharInClass(
+                                            char.ToLower(runtext[num++]),
+                                            "\0\0\u0001\t"
+                                        )
+                                    )
                                     {
                                         num--;
                                         break;
@@ -215,7 +283,7 @@ namespace RegexTestNamespace
                         }
                     }
                 }
-            IL_441:
+                IL_441:
                 while (true)
                 {
                     this.runtrackpos = num2;
@@ -245,7 +313,7 @@ namespace RegexTestNamespace
                     }
                     goto IL_49E;
                 }
-            IL_4C7:
+                IL_4C7:
                 this.CheckTimeout();
                 num = runtrack[num2++];
                 num4 = runtrack[num2++];
@@ -257,7 +325,7 @@ namespace RegexTestNamespace
                     continue;
                 }
                 continue;
-            IL_51D:
+                IL_51D:
                 this.CheckTimeout();
                 num = runtrack[num2++];
                 num4 = runtrack[num2++];
@@ -267,7 +335,7 @@ namespace RegexTestNamespace
                     runtrack[--num2] = num - 1;
                     runtrack[--num2] = 3;
                 }
-            IL_204:
+                IL_204:
                 this.CheckTimeout();
                 num4 = runstack[num3++];
                 this.Capture(1, num4, num);
@@ -277,7 +345,16 @@ namespace RegexTestNamespace
                 runstack[--num3] = num;
                 runtrack[--num2] = 1;
                 this.CheckTimeout();
-                if (7 > runtextend - num || char.ToLower(runtext[num]) != 's' || char.ToLower(runtext[num + 1]) != 'u' || char.ToLower(runtext[num + 2]) != 'c' || char.ToLower(runtext[num + 3]) != 'c' || char.ToLower(runtext[num + 4]) != 'e' || char.ToLower(runtext[num + 5]) != 's' || char.ToLower(runtext[num + 6]) != 's')
+                if (
+                    7 > runtextend - num
+                    || char.ToLower(runtext[num]) != 's'
+                    || char.ToLower(runtext[num + 1]) != 'u'
+                    || char.ToLower(runtext[num + 2]) != 'c'
+                    || char.ToLower(runtext[num + 3]) != 'c'
+                    || char.ToLower(runtext[num + 4]) != 'e'
+                    || char.ToLower(runtext[num + 5]) != 's'
+                    || char.ToLower(runtext[num + 6]) != 's'
+                )
                 {
                     goto IL_441;
                 }
@@ -310,21 +387,21 @@ namespace RegexTestNamespace
                 runtrack[--num2] = num - 1;
                 runtrack[--num2] = 5;
             }
-        IL_3FC:
+            IL_3FC:
             this.CheckTimeout();
             num4 = runstack[num3++];
             this.Capture(0, num4, num);
             runtrack[--num2] = num4;
             runtrack[num2 - 1] = 4;
-        IL_432:
+            IL_432:
             this.CheckTimeout();
             this.runtextpos = num;
             return;
-        IL_49E:
+            IL_49E:
             this.CheckTimeout();
             num = runtrack[num2++];
             goto IL_432;
-        IL_598:
+            IL_598:
             this.CheckTimeout();
             num = runtrack[num2++];
             num4 = runtrack[num2++];
@@ -348,18 +425,22 @@ namespace RegexTestNamespace
                 do
                 {
                     num2--;
-                    if (RegexRunner.CharInClass(char.ToLower(runtext[num++]), "\0\u0003\u0001\0\n\v\t"))
+                    if (
+                        RegexRunner.CharInClass(
+                            char.ToLower(runtext[num++]),
+                            "\0\u0003\u0001\0\n\v\t"
+                        )
+                    )
                     {
                         goto IL_63;
                     }
-                }
-                while (num2 > 0);
+                } while (num2 > 0);
                 bool arg_74_0 = false;
                 goto IL_6C;
-            IL_63:
+                IL_63:
                 num--;
                 arg_74_0 = true;
-            IL_6C:
+                IL_6C:
                 this.runtextpos = num;
                 return arg_74_0;
             }

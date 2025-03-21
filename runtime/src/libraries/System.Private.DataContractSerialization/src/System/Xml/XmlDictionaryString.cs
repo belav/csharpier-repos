@@ -19,7 +19,8 @@ namespace System.Xml
         private readonly string _value;
         private readonly int _key;
         private byte[]? _buffer;
-        private static readonly EmptyStringDictionary s_emptyStringDictionary = new EmptyStringDictionary();
+        private static readonly EmptyStringDictionary s_emptyStringDictionary =
+            new EmptyStringDictionary();
 
         public XmlDictionaryString(IXmlDictionary dictionary, string value, int key)
         {
@@ -27,7 +28,10 @@ namespace System.Xml
             ArgumentNullException.ThrowIfNull(value);
 
             if (key < MinKey || key > MaxKey)
-                throw new ArgumentOutOfRangeException(nameof(key), SR.Format(SR.ValueMustBeInRange, MinKey, MaxKey));
+                throw new ArgumentOutOfRangeException(
+                    nameof(key),
+                    SR.Format(SR.ValueMustBeInRange, MinKey, MaxKey)
+                );
             _dictionary = dictionary;
             _value = value;
             _key = key;
@@ -43,34 +47,22 @@ namespace System.Xml
 
         public static XmlDictionaryString Empty
         {
-            get
-            {
-                return s_emptyStringDictionary.EmptyString;
-            }
+            get { return s_emptyStringDictionary.EmptyString; }
         }
 
         public IXmlDictionary Dictionary
         {
-            get
-            {
-                return _dictionary;
-            }
+            get { return _dictionary; }
         }
 
         public int Key
         {
-            get
-            {
-                return _key;
-            }
+            get { return _key; }
         }
 
         public string Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         }
 
         internal byte[] ToUTF8()
@@ -94,10 +86,7 @@ namespace System.Xml
 
             public XmlDictionaryString EmptyString
             {
-                get
-                {
-                    return _empty;
-                }
+                get { return _empty; }
             }
 
             public bool TryLookup(string value, [NotNullWhen(true)] out XmlDictionaryString? result)
@@ -124,7 +113,10 @@ namespace System.Xml
                 return false;
             }
 
-            public bool TryLookup(XmlDictionaryString value, [NotNullWhen(true)] out XmlDictionaryString? result)
+            public bool TryLookup(
+                XmlDictionaryString value,
+                [NotNullWhen(true)] out XmlDictionaryString? result
+            )
             {
                 ArgumentNullException.ThrowIfNull(value);
 

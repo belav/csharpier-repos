@@ -1,36 +1,26 @@
 namespace A
 {
-	using X;
+    using X;
 
-	partial class C
-	{
-		private class N : N1
-		{
-		}
+    partial class C
+    {
+        private class N : N1 { }
 
-		public static void Main ()
-		{			
-		}
-	}
+        public static void Main() { }
+    }
 }
 
 namespace A
 {
-	using X;
+    using X;
 
-	partial class C : C1
-	{
-	}
+    partial class C : C1 { }
 }
-
 
 namespace X
 {
-	public class C1
-	{
-		public class N1
-		{
-
-		}
-	}
+    public class C1
+    {
+        public class N1 { }
+    }
 }

@@ -72,11 +72,7 @@ public abstract class TypeMappingSourceBase : ITypeMappingSource
     /// </summary>
     /// <param name="mapping">The mapping, if any.</param>
     /// <param name="property">The property, if any.</param>
-    protected virtual void ValidateMapping(
-        CoreTypeMapping? mapping,
-        IProperty? property)
-    {
-    }
+    protected virtual void ValidateMapping(CoreTypeMapping? mapping, IProperty? property) { }
 
     /// <summary>
     ///     Finds the type mapping for a given <see cref="IProperty" />.
@@ -118,14 +114,21 @@ public abstract class TypeMappingSourceBase : ITypeMappingSource
     /// <param name="model">The model.</param>
     /// <param name="elementMapping">The element mapping to use, if known.</param>
     /// <returns>The type mapping, or <see langword="null" /> if none was found.</returns>
-    public abstract CoreTypeMapping? FindMapping(Type type, IModel model, CoreTypeMapping? elementMapping = null);
+    public abstract CoreTypeMapping? FindMapping(
+        Type type,
+        IModel model,
+        CoreTypeMapping? elementMapping = null
+    );
 
     /// <inheritdoc/>
     public abstract CoreTypeMapping? FindMapping(MemberInfo member);
 
     /// <inheritdoc/>
-    public virtual CoreTypeMapping? FindMapping(MemberInfo member, IModel model, bool useAttributes)
-        => FindMapping(member);
+    public virtual CoreTypeMapping? FindMapping(
+        MemberInfo member,
+        IModel model,
+        bool useAttributes
+    ) => FindMapping(member);
 
     /// <summary>
     ///     Attempts to find a JSON-based type mapping for a collection of primitive types.
@@ -143,12 +146,15 @@ public abstract class TypeMappingSourceBase : ITypeMappingSource
         Type? providerClrType,
         ref CoreTypeMapping? elementMapping,
         out ValueComparer? elementComparer,
-        out JsonValueReaderWriter? collectionReaderWriter)
+        out JsonValueReaderWriter? collectionReaderWriter
+    )
     {
-        if ((providerClrType == null || providerClrType == typeof(string))
+        if (
+            (providerClrType == null || providerClrType == typeof(string))
             && modelClrType.TryGetElementType(typeof(IEnumerable<>)) is { } elementType
             && elementType != modelClrType
-            && !modelClrType.GetGenericTypeImplementations(typeof(IDictionary<,>)).Any())
+            && !modelClrType.GetGenericTypeImplementations(typeof(IDictionary<,>)).Any()
+        )
         {
             elementMapping ??= FindMapping(elementType);
 
@@ -156,30 +162,49 @@ public abstract class TypeMappingSourceBase : ITypeMappingSource
             {
                 var elementReader = elementMapping.JsonValueReaderWriter!;
 
-                if (elementReader.ValueType.IsNullableValueType()
-                    || !elementReader.ValueType.IsAssignableFrom(elementType.UnwrapNullableType()))
+                if (
+                    elementReader.ValueType.IsNullableValueType()
+                    || !elementReader.ValueType.IsAssignableFrom(elementType.UnwrapNullableType())
+                )
                 {
-                    elementReader = (JsonValueReaderWriter)Activator.CreateInstance(
-                        typeof(JsonCastValueReaderWriter<>).MakeGenericType(elementType.UnwrapNullableType()), elementReader)!;
+                    elementReader = (JsonValueReaderWriter)
+                        Activator.CreateInstance(
+                            typeof(JsonCastValueReaderWriter<>).MakeGenericType(
+                                elementType.UnwrapNullableType()
+                            ),
+                            elementReader
+                        )!;
                 }
 
                 var typeToInstantiate = FindTypeToInstantiate();
 
-                collectionReaderWriter = mappingInfo.JsonValueReaderWriter
-                    ?? (JsonValueReaderWriter?)Activator.CreateInstance(
-                        (elementType.IsNullableValueType()
-                            ? typeof(JsonNullableStructCollectionReaderWriter<,,>)
-                            : typeof(JsonCollectionReaderWriter<,,>))
-                        .MakeGenericType(modelClrType, typeToInstantiate, elementType.UnwrapNullableType()),
-                        elementReader);
+                collectionReaderWriter =
+                    mappingInfo.JsonValueReaderWriter
+                    ?? (JsonValueReaderWriter?)
+                        Activator.CreateInstance(
+                            (
+                                elementType.IsNullableValueType()
+                                    ? typeof(JsonNullableStructCollectionReaderWriter<,,>)
+                                    : typeof(JsonCollectionReaderWriter<,,>)
+                            ).MakeGenericType(
+                                modelClrType,
+                                typeToInstantiate,
+                                elementType.UnwrapNullableType()
+                            ),
+                            elementReader
+                        );
 
-                elementComparer = (ValueComparer?)Activator.CreateInstance(
-                    elementType.IsNullableValueType()
-                        ? typeof(NullableValueTypeListComparer<>).MakeGenericType(elementType.UnwrapNullableType())
-                        : elementMapping.Comparer.Type.IsAssignableFrom(elementType)
-                            ? typeof(ListComparer<>).MakeGenericType(elementType)
+                elementComparer = (ValueComparer?)
+                    Activator.CreateInstance(
+                        elementType.IsNullableValueType()
+                                ? typeof(NullableValueTypeListComparer<>).MakeGenericType(
+                                    elementType.UnwrapNullableType()
+                                )
+                            : elementMapping.Comparer.Type.IsAssignableFrom(elementType)
+                                ? typeof(ListComparer<>).MakeGenericType(elementType)
                             : typeof(ObjectListComparer<>).MakeGenericType(elementType),
-                    elementMapping.Comparer.ToNullableComparer(elementType)!);
+                        elementMapping.Comparer.ToNullableComparer(elementType)!
+                    );
 
                 return true;
 

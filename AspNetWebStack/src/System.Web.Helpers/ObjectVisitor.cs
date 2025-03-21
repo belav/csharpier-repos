@@ -32,7 +32,7 @@ namespace System.Web.Helpers
             { typeof(double), "double" },
             { typeof(bool), "bool" },
             { typeof(char), "char" },
-            { typeof(void), "void" }
+            { typeof(void), "void" },
         };
 
         private static readonly char[] _separators = { '&', '[', '*' };
@@ -125,26 +125,18 @@ namespace System.Web.Helpers
             VisitComplexObject(value, depth + 1);
         }
 
-        public virtual void VisitObjectVisitorException(ObjectVisitorException exception)
-        {
-        }
+        public virtual void VisitObjectVisitorException(ObjectVisitorException exception) { }
 
         public virtual void VisitConvertedValue(object value, string convertedValue)
         {
             VisitStringValue(convertedValue);
         }
 
-        public virtual void VisitVisitedObject(string id, object value)
-        {
-        }
+        public virtual void VisitVisitedObject(string id, object value) { }
 
-        public virtual void VisitNull()
-        {
-        }
+        public virtual void VisitNull() { }
 
-        public virtual void VisitStringValue(string stringValue)
-        {
-        }
+        public virtual void VisitStringValue(string stringValue) { }
 
         public virtual void VisitComplexObject(object value, int depth)
         {
@@ -164,10 +156,12 @@ namespace System.Web.Helpers
                 if (memberNames != null)
                 {
                     // Always use the runtime type for dynamic objects since there is no metadata
-                    VisitMembers(memberNames,
-                                 name => null,
-                                 name => DynamicHelper.GetMemberValue(dynamicObject, name),
-                                 depth);
+                    VisitMembers(
+                        memberNames,
+                        name => null,
+                        name => DynamicHelper.GetMemberValue(dynamicObject, name),
+                        depth
+                    );
                 }
             }
             else
@@ -176,33 +170,48 @@ namespace System.Web.Helpers
 
                 // Dump properties using type descriptor
                 var props = TypeDescriptor.GetProperties(value);
-                var propNames = from PropertyDescriptor p in props
-                                select p.Name;
+                var propNames = from PropertyDescriptor p in props select p.Name;
 
-                VisitMembers(propNames,
-                             name => props.Find(name, ignoreCase: true).PropertyType,
-                             name => GetPropertyDescriptorValue(value, name, props),
-                             depth);
+                VisitMembers(
+                    propNames,
+                    name => props.Find(name, ignoreCase: true).PropertyType,
+                    name => GetPropertyDescriptorValue(value, name, props),
+                    depth
+                );
 
                 // Dump fields
-                var fields = value.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance)
+                var fields = value
+                    .GetType()
+                    .GetFields(BindingFlags.Public | BindingFlags.Instance)
                     .ToDictionary(field => field.Name);
 
-                VisitMembers(fields.Keys,
-                             name => fields[name].FieldType,
-                             name => GetFieldValue(value, name, fields),
-                             depth);
+                VisitMembers(
+                    fields.Keys,
+                    name => fields[name].FieldType,
+                    name => GetFieldValue(value, name, fields),
+                    depth
+                );
             }
         }
 
         public virtual void VisitNameValueCollection(NameValueCollection collection, int depth)
         {
-            VisitKeyValues(collection, collection.AllKeys.Cast<object>(), key => collection[(string)key], depth);
+            VisitKeyValues(
+                collection,
+                collection.AllKeys.Cast<object>(),
+                key => collection[(string)key],
+                depth
+            );
         }
 
         public virtual void VisitDictionary(IDictionary dictionary, int depth)
         {
-            VisitKeyValues(dictionary, dictionary.Keys.Cast<object>(), key => dictionary[key], depth);
+            VisitKeyValues(
+                dictionary,
+                dictionary.Keys.Cast<object>(),
+                key => dictionary[key],
+                depth
+            );
         }
 
         public virtual void VisitEnumerable(IEnumerable enumerable, int depth)
@@ -213,8 +222,9 @@ namespace System.Web.Helpers
             }
 
             Type enumerableType = enumerable.GetType();
-            bool isIndexedEnumeration = ImplementsInterface(enumerableType, typeof(IList<>))
-                                        || ImplementsInterface(enumerableType, typeof(IList));
+            bool isIndexedEnumeration =
+                ImplementsInterface(enumerableType, typeof(IList<>))
+                || ImplementsInterface(enumerableType, typeof(IList));
 
             int index = 0;
             foreach (var item in enumerable)
@@ -246,12 +256,19 @@ namespace System.Web.Helpers
             Visit(item, depth);
         }
 
-        public virtual void VisitEnumeratonLimitExceeded()
-        {
-        }
+        public virtual void VisitEnumeratonLimitExceeded() { }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We don't want to fail surface any exceptions throw from getting property accessors")]
-        public virtual void VisitMembers(IEnumerable<string> names, Func<string, Type> typeSelector, Func<string, object> valueSelector, int depth)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We don't want to fail surface any exceptions throw from getting property accessors"
+        )]
+        public virtual void VisitMembers(
+            IEnumerable<string> names,
+            Func<string, Type> typeSelector,
+            Func<string, object> valueSelector,
+            int depth
+        )
         {
             foreach (string name in names)
             {
@@ -286,7 +303,12 @@ namespace System.Web.Helpers
             Visit(value, depth);
         }
 
-        public virtual void VisitKeyValues(object value, IEnumerable<object> keys, Func<object, object> valueSelector, int depth)
+        public virtual void VisitKeyValues(
+            object value,
+            IEnumerable<object> keys,
+            Func<object, object> valueSelector,
+            int depth
+        )
         {
             if (depth > _recursionLimit)
             {
@@ -326,10 +348,16 @@ namespace System.Web.Helpers
                 // Get the generic type name without arguments
                 string genericTypeName = GetGenericTypeName(type);
                 // Create a user friendly type name
-                var arguments = from argType in type.GetGenericArguments()
-                                select GetTypeName(argType);
+                var arguments =
+                    from argType in type.GetGenericArguments()
+                    select GetTypeName(argType);
 
-                return String.Format(CultureInfo.InvariantCulture, "{0}<{1}>", genericTypeName, String.Join(", ", arguments));
+                return String.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}<{1}>",
+                    genericTypeName,
+                    String.Join(", ", arguments)
+                );
             }
 
             if (type.IsByRef || type.IsArray || type.IsPointer)
@@ -369,9 +397,13 @@ namespace System.Web.Helpers
 
             // TODO: The only way to detect anonymous types right now.
             return Attribute.IsDefined(type, typeof(CompilerGeneratedAttribute), false)
-                   && type.IsGenericType && type.Name.Contains("AnonymousType")
-                   && (type.Name.StartsWith("<>", StringComparison.OrdinalIgnoreCase) || type.Name.StartsWith("VB$", StringComparison.OrdinalIgnoreCase))
-                   && (type.Attributes & TypeAttributes.NotPublic) == TypeAttributes.NotPublic;
+                && type.IsGenericType
+                && type.Name.Contains("AnonymousType")
+                && (
+                    type.Name.StartsWith("<>", StringComparison.OrdinalIgnoreCase)
+                    || type.Name.StartsWith("VB$", StringComparison.OrdinalIgnoreCase)
+                )
+                && (type.Attributes & TypeAttributes.NotPublic) == TypeAttributes.NotPublic;
         }
 
         private static bool ImplementsInterface(Type type, Type targetInterfaceType)
@@ -379,12 +411,18 @@ namespace System.Web.Helpers
             Func<Type, bool> implementsInterface = t => targetInterfaceType.IsAssignableFrom(t);
             if (targetInterfaceType.IsGenericType)
             {
-                implementsInterface = t => t.IsGenericType && targetInterfaceType.IsAssignableFrom(t.GetGenericTypeDefinition());
+                implementsInterface = t =>
+                    t.IsGenericType
+                    && targetInterfaceType.IsAssignableFrom(t.GetGenericTypeDefinition());
             }
             return implementsInterface(type) || type.GetInterfaces().Any(implementsInterface);
         }
 
-        private static object GetFieldValue(object value, string name, IDictionary<string, FieldInfo> fields)
+        private static object GetFieldValue(
+            object value,
+            string name,
+            IDictionary<string, FieldInfo> fields
+        )
         {
             FieldInfo fieldInfo;
             // Get the value from the dictionary
@@ -393,14 +431,22 @@ namespace System.Web.Helpers
             return fieldInfo.GetValue(value);
         }
 
-        private static object GetPropertyDescriptorValue(object value, string name, PropertyDescriptorCollection props)
+        private static object GetPropertyDescriptorValue(
+            object value,
+            string name,
+            PropertyDescriptorCollection props
+        )
         {
             PropertyDescriptor propertyDescriptor = props.Find(name, ignoreCase: true);
             Debug.Assert(propertyDescriptor != null, "Property descriptor shouldn't be null");
             return propertyDescriptor.GetValue(value);
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We don't want to surface any exceptions while trying to convert from string")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We don't want to surface any exceptions while trying to convert from string"
+        )]
         private static bool TryConvertToString(object value, out string stringValue)
         {
             stringValue = null;
@@ -443,26 +489,16 @@ namespace System.Web.Helpers
         [Serializable]
         public class ObjectVisitorException : Exception
         {
-            public ObjectVisitorException()
-            {
-            }
+            public ObjectVisitorException() { }
 
             public ObjectVisitorException(string message)
-                : base(message)
-            {
-            }
+                : base(message) { }
 
             public ObjectVisitorException(string message, Exception inner)
-                : base(message, inner)
-            {
-            }
+                : base(message, inner) { }
 
-            protected ObjectVisitorException(
-                SerializationInfo info,
-                StreamingContext context)
-                : base(info, context)
-            {
-            }
+            protected ObjectVisitorException(SerializationInfo info, StreamingContext context)
+                : base(info, context) { }
         }
     }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,34 +28,25 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-
 using System;
 using System.Collections;
 
-namespace System.Web.Compilation {
+namespace System.Web.Compilation
+{
+    public sealed class BuildDependencySet
+    {
+        internal BuildDependencySet() { }
 
-	public sealed class BuildDependencySet {
+        [MonoTODO("Not implemented")]
+        public string HashCode
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		internal BuildDependencySet ()
-		{
-		}
-
-		[MonoTODO ("Not implemented")]
-		public string HashCode {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-
-		[MonoTODO ("Not implemented")]
-		public IEnumerable VirtualPaths {
-			get {
-				throw new NotImplementedException ();
-			}
-		}
-	}
-
+        [MonoTODO("Not implemented")]
+        public IEnumerable VirtualPaths
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }
-
-

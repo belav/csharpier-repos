@@ -20,7 +20,9 @@ public interface IMultiplexedConnectionBuilder
     /// </summary>
     /// <param name="middleware">The middleware delegate.</param>
     /// <returns>The <see cref="IMultiplexedConnectionBuilder"/>.</returns>
-    IMultiplexedConnectionBuilder Use(Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate> middleware);
+    IMultiplexedConnectionBuilder Use(
+        Func<MultiplexedConnectionDelegate, MultiplexedConnectionDelegate> middleware
+    );
 
     /// <summary>
     /// Builds the delegate used by this application to process connections.

@@ -8,21 +8,31 @@ using System.Numerics;
 public struct Color
 {
     private Vector3 _simdVector;
-    public float R { get { return _simdVector.X; } }
-    public float G { get { return _simdVector.Y; } }
-    public float B { get { return _simdVector.Z; } }
+    public float R
+    {
+        get { return _simdVector.X; }
+    }
+    public float G
+    {
+        get { return _simdVector.Y; }
+    }
+    public float B
+    {
+        get { return _simdVector.Z; }
+    }
 
     public Color(double r, double g, double b)
     {
         _simdVector = new Vector3((float)r, (float)g, (float)b);
     }
+
     public Color(string str)
     {
         string[] nums = str.Split(',');
-        if (nums.Length != 3) throw new ArgumentException();
+        if (nums.Length != 3)
+            throw new ArgumentException();
         _simdVector = new Vector3(float.Parse(nums[0]), float.Parse(nums[1]), float.Parse(nums[2]));
     }
-
 
     public static Color Times(double n, Color v)
     {
@@ -30,6 +40,7 @@ public struct Color
         result._simdVector = (float)n * v._simdVector;
         return result;
     }
+
     public static Color Times(Color v1, Color v2)
     {
         Color result;
@@ -43,6 +54,7 @@ public struct Color
         result._simdVector = v1._simdVector + v2._simdVector;
         return result;
     }
+
     public static Color Minus(Color v1, Color v2)
     {
         Color result;
@@ -50,8 +62,24 @@ public struct Color
         return result;
     }
 
-    public static Color Background { get { Color result; result._simdVector = Vector3.Zero; return result; } }
-    public static Color DefaultColor { get { Color result; result._simdVector = Vector3.Zero; return result; } }
+    public static Color Background
+    {
+        get
+        {
+            Color result;
+            result._simdVector = Vector3.Zero;
+            return result;
+        }
+    }
+    public static Color DefaultColor
+    {
+        get
+        {
+            Color result;
+            result._simdVector = Vector3.Zero;
+            return result;
+        }
+    }
 
     public static float Legalize(float d)
     {
@@ -80,22 +108,31 @@ public struct Color
         float g = (float)G / 255.0f;
         float b = (float)B / 255.0f;
 
-        float max, min;
+        float max,
+            min;
 
-        max = r; min = r;
+        max = r;
+        min = r;
 
-        if (g > max) max = g;
-        if (b > max) max = b;
+        if (g > max)
+            max = g;
+        if (b > max)
+            max = b;
 
-        if (g < min) min = g;
-        if (b < min) min = b;
+        if (g < min)
+            min = g;
+        if (b < min)
+            min = b;
 
         return (max + min) / 2;
     }
 
     public void ChangeHue(float hue)
     {
-        float H, S, L, Br;
+        float H,
+            S,
+            L,
+            Br;
 
         Br = Brightness();
         H = hue;
@@ -122,8 +159,10 @@ public struct Color
 
                 for (int i = 0; i < 3; i++)
                 {
-                    if (t3[i] < 0) t3[i] += 1.0F;
-                    if (t3[i] > 1) t3[i] -= 1.0F;
+                    if (t3[i] < 0)
+                        t3[i] += 1.0F;
+                    if (t3[i] > 1)
+                        t3[i] -= 1.0F;
                     if (6.0 * t3[i] < 1.0)
                         clr[i] = temp1 + (temp2 - temp1) * t3[i] * 6.0F;
                     else if (2.0 * t3[i] < 1.0)
@@ -139,4 +178,3 @@ public struct Color
         }
     }
 }
-

@@ -30,16 +30,25 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             NamedTypeSymbol implementingType,
             string name = null,
             bool generateDebugInfo = true,
-            PropertySymbol associatedProperty = null)
+            PropertySymbol associatedProperty = null
+        )
         {
             //it does not make sense to add methods to substituted types
             Debug.Assert(implementingType.IsDefinition);
 
-            _name = name ?? ExplicitInterfaceHelpers.GetMemberName(interfaceMethod.Name, interfaceMethod.ContainingType, aliasQualifierOpt: null);
+            _name =
+                name
+                ?? ExplicitInterfaceHelpers.GetMemberName(
+                    interfaceMethod.Name,
+                    interfaceMethod.ContainingType,
+                    aliasQualifierOpt: null
+                );
             _implementingType = implementingType;
             _generateDebugInfo = generateDebugInfo;
             _associatedProperty = associatedProperty;
-            _explicitInterfaceImplementations = ImmutableArray.Create<MethodSymbol>(interfaceMethod);
+            _explicitInterfaceImplementations = ImmutableArray.Create<MethodSymbol>(
+                interfaceMethod
+            );
 
             // alpha-rename to get the implementation's type parameters
             var typeMap = interfaceMethod.ContainingType.TypeSubstitution ?? TypeMap.Empty;
@@ -103,9 +112,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _interfaceMethod.ReturnTypeWithAnnotations; }
         }
 
-        public sealed override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public sealed override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
-        public sealed override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        public sealed override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
         public sealed override ImmutableArray<ParameterSymbol> Parameters
         {
@@ -119,10 +130,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public sealed override NamedTypeSymbol ContainingType
         {
-            get
-            {
-                return _implementingType;
-            }
+            get { return _implementingType; }
         }
 
         internal sealed override bool IsExplicitInterfaceImplementation
@@ -137,10 +145,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override MethodKind MethodKind
         {
-            get
-            {
-                return MethodKind.ExplicitInterfaceImplementation;
-            }
+            get { return MethodKind.ExplicitInterfaceImplementation; }
         }
 
         public sealed override Accessibility DeclaredAccessibility
@@ -223,20 +228,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             get { return _interfaceMethod.RequiresSecurityObject; }
         }
 
-        internal sealed override bool IsMetadataVirtual(bool ignoreInterfaceImplementationChanges = false)
+        internal sealed override bool IsMetadataVirtual(
+            bool ignoreInterfaceImplementationChanges = false
+        )
         {
             return !IsStatic;
         }
 
         internal sealed override bool IsMetadataFinal
         {
-            get
-            {
-                return !IsStatic;
-            }
+            get { return !IsStatic; }
         }
 
-        internal sealed override bool IsMetadataNewSlot(bool ignoreInterfaceImplementationChanges = false)
+        internal sealed override bool IsMetadataNewSlot(
+            bool ignoreInterfaceImplementationChanges = false
+        )
         {
             return !IsStatic;
         }
@@ -266,6 +272,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return ImmutableArray<string>.Empty;
         }
 
-        protected sealed override bool HasSetsRequiredMembersImpl => throw ExceptionUtilities.Unreachable();
+        protected sealed override bool HasSetsRequiredMembersImpl =>
+            throw ExceptionUtilities.Unreachable();
     }
 }

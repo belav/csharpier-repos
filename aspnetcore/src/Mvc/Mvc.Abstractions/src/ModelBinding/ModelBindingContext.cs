@@ -139,7 +139,8 @@ public abstract class ModelBindingContext
         ModelMetadata modelMetadata,
         string fieldName,
         string modelName,
-        object? model);
+        object? model
+    );
 
     /// <summary>
     /// Pushes a layer of state onto this context. <see cref="IModelBinder"/> implementations will call this as

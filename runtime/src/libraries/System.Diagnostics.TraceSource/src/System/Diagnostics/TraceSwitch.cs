@@ -16,12 +16,10 @@ namespace System.Diagnostics
         /// <para>Initializes a new instance of the <see cref='System.Diagnostics.TraceSwitch'/> class.</para>
         /// </devdoc>
         public TraceSwitch(string displayName, string? description)
-            : base(displayName, description)
-        { }
+            : base(displayName, description) { }
 
         public TraceSwitch(string displayName, string? description, string defaultSwitchValue)
-            : base(displayName, description, defaultSwitchValue)
-        { }
+            : base(displayName, description, defaultSwitchValue) { }
 
         /// <devdoc>
         ///    <para>Gets or sets the trace
@@ -29,11 +27,7 @@ namespace System.Diagnostics
         /// </devdoc>
         public TraceLevel Level
         {
-            get
-            {
-                return (TraceLevel)SwitchSetting;
-            }
-
+            get { return (TraceLevel)SwitchSetting; }
             set
             {
                 if (value < TraceLevel.Off || value > TraceLevel.Verbose)
@@ -104,7 +98,6 @@ namespace System.Diagnostics
             {
                 level = TraceLevel.Verbose;
             }
-
 
             // Update the switch value string accordingly.
             SetSwitchValues((int)level, level.ToString());

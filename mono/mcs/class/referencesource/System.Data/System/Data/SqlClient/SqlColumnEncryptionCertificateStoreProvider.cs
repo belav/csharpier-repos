@@ -8,13 +8,13 @@
 namespace System.Data.SqlClient
 {
     using System;
-    using System.Text;
     using System.Data.Common;
     using System.Diagnostics;
     using System.Globalization;
     using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
+    using System.Text;
 
     /// <summary>
     /// Certificate Key Store Provider class
@@ -74,7 +74,11 @@ namespace System.Data.SqlClient
         /// <param name="encryptionAlgorithm">Asymmetric Key Encryption Algorithm</param>
         /// <param name="encryptedColumnEncryptionKey">Encrypted Column Encryption Key</param>
         /// <returns>Plain text column encryption key</returns>
-        public override byte[] DecryptColumnEncryptionKey(string masterKeyPath, string encryptionAlgorithm, byte[] encryptedColumnEncryptionKey)
+        public override byte[] DecryptColumnEncryptionKey(
+            string masterKeyPath,
+            string encryptionAlgorithm,
+            byte[] encryptedColumnEncryptionKey
+        )
         {
             // Validate the input parameters
             ValidateNonEmptyCertificatePath(masterKeyPath, isSystemOp: true);
@@ -99,20 +103,23 @@ namespace System.Data.SqlClient
             int keySizeInBytes = certificate.PublicKey.Key.KeySize / 8;
 
             // Validate and decrypt the EncryptedColumnEncryptionKey
-            // Format is 
+            // Format is
             //           version + keyPathLength + ciphertextLength + keyPath + ciphertext +  signature
             //
-            // keyPath is present in the encrypted column encryption key for identifying the original source of the asymmetric key pair and 
+            // keyPath is present in the encrypted column encryption key for identifying the original source of the asymmetric key pair and
             // we will not validate it against the data contained in the CMK metadata (masterKeyPath).
 
             // Validate the version byte
             if (encryptedColumnEncryptionKey[0] != _version[0])
             {
-                throw SQL.InvalidAlgorithmVersionInEncryptedCEK(encryptedColumnEncryptionKey[0], _version[0]);
+                throw SQL.InvalidAlgorithmVersionInEncryptedCEK(
+                    encryptedColumnEncryptionKey[0],
+                    _version[0]
+                );
             }
 
             // Get key path length
-            int currentIndex = _version.Length; 
+            int currentIndex = _version.Length;
             Int16 keyPathLength = BitConverter.ToInt16(encryptedColumnEncryptionKey, currentIndex);
             currentIndex += sizeof(Int16);
 
@@ -127,35 +134,63 @@ namespace System.Data.SqlClient
             // validate the ciphertext length
             if (cipherTextLength != keySizeInBytes)
             {
-                throw SQL.InvalidCiphertextLengthInEncryptedCEK(cipherTextLength, keySizeInBytes, masterKeyPath);
+                throw SQL.InvalidCiphertextLengthInEncryptedCEK(
+                    cipherTextLength,
+                    keySizeInBytes,
+                    masterKeyPath
+                );
             }
 
             // Validate the signature length
             // Signature length should be same as the key side for RSA PKCSv1.5
-            int signatureLength = encryptedColumnEncryptionKey.Length - currentIndex - cipherTextLength;
+            int signatureLength =
+                encryptedColumnEncryptionKey.Length - currentIndex - cipherTextLength;
             if (signatureLength != keySizeInBytes)
             {
-                throw SQL.InvalidSignatureInEncryptedCEK(signatureLength, keySizeInBytes, masterKeyPath);
+                throw SQL.InvalidSignatureInEncryptedCEK(
+                    signatureLength,
+                    keySizeInBytes,
+                    masterKeyPath
+                );
             }
 
             // Get ciphertext
             byte[] cipherText = new byte[cipherTextLength];
-            Buffer.BlockCopy(encryptedColumnEncryptionKey, currentIndex, cipherText, 0, cipherText.Length);
+            Buffer.BlockCopy(
+                encryptedColumnEncryptionKey,
+                currentIndex,
+                cipherText,
+                0,
+                cipherText.Length
+            );
             currentIndex += cipherTextLength;
 
             // Get signature
             byte[] signature = new byte[signatureLength];
-            Buffer.BlockCopy(encryptedColumnEncryptionKey, currentIndex, signature, 0, signature.Length);
+            Buffer.BlockCopy(
+                encryptedColumnEncryptionKey,
+                currentIndex,
+                signature,
+                0,
+                signature.Length
+            );
 
             // Compute the hash to validate the signature
             byte[] hash;
             using (SHA256Cng sha256 = new SHA256Cng())
             {
-                sha256.TransformFinalBlock(encryptedColumnEncryptionKey, 0, encryptedColumnEncryptionKey.Length - signature.Length);
+                sha256.TransformFinalBlock(
+                    encryptedColumnEncryptionKey,
+                    0,
+                    encryptedColumnEncryptionKey.Length - signature.Length
+                );
                 hash = sha256.Hash;
             }
 
-            Debug.Assert(hash != null, @"hash should not be null while decrypting encrypted column encryption key.");
+            Debug.Assert(
+                hash != null,
+                @"hash should not be null while decrypting encrypted column encryption key."
+            );
 
             // Validate the signature
             if (!RSAVerifySignature(hash, signature, certificate))
@@ -175,7 +210,11 @@ namespace System.Data.SqlClient
         /// <param name="encryptionAlgorithm">Asymmetric Key Encryption Algorithm</param>
         /// <param name="columnEncryptionKey">Plain text column encryption key</param>
         /// <returns>Encrypted column encryption key</returns>
-        public override byte[] EncryptColumnEncryptionKey(string masterKeyPath, string encryptionAlgorithm, byte[] columnEncryptionKey)
+        public override byte[] EncryptColumnEncryptionKey(
+            string masterKeyPath,
+            string encryptionAlgorithm,
+            byte[] columnEncryptionKey
+        )
         {
             // Validate the input parameters
             ValidateNonEmptyCertificatePath(masterKeyPath, isSystemOp: false);
@@ -199,7 +238,7 @@ namespace System.Data.SqlClient
             int keySizeInBytes = certificate.PublicKey.Key.KeySize / 8;
 
             // Construct the encryptedColumnEncryptionKey
-            // Format is 
+            // Format is
             //          version + keyPathLength + ciphertextLength + ciphertext + keyPath + signature
             //
             // We currently only support one version
@@ -212,54 +251,117 @@ namespace System.Data.SqlClient
             // Encrypt the plain text
             byte[] cipherText = RSAEncrypt(columnEncryptionKey, certificate);
             byte[] cipherTextLength = BitConverter.GetBytes((Int16)cipherText.Length);
-            Debug.Assert(cipherText.Length == keySizeInBytes, @"cipherText length does not match the RSA key size");
+            Debug.Assert(
+                cipherText.Length == keySizeInBytes,
+                @"cipherText length does not match the RSA key size"
+            );
 
             // Compute hash
-            // SHA-2-256(version + keyPathLength + ciphertextLength + keyPath + ciphertext) 
+            // SHA-2-256(version + keyPathLength + ciphertextLength + keyPath + ciphertext)
             byte[] hash;
             using (SHA256Cng sha256 = new SHA256Cng())
             {
                 sha256.TransformBlock(version, 0, version.Length, version, 0);
                 sha256.TransformBlock(keyPathLength, 0, keyPathLength.Length, keyPathLength, 0);
-                sha256.TransformBlock(cipherTextLength, 0, cipherTextLength.Length, cipherTextLength, 0);
-                sha256.TransformBlock(masterKeyPathBytes, 0, masterKeyPathBytes.Length, masterKeyPathBytes, 0);
+                sha256.TransformBlock(
+                    cipherTextLength,
+                    0,
+                    cipherTextLength.Length,
+                    cipherTextLength,
+                    0
+                );
+                sha256.TransformBlock(
+                    masterKeyPathBytes,
+                    0,
+                    masterKeyPathBytes.Length,
+                    masterKeyPathBytes,
+                    0
+                );
                 sha256.TransformFinalBlock(cipherText, 0, cipherText.Length);
                 hash = sha256.Hash;
             }
 
             // Sign the hash
             byte[] signedHash = RSASignHashedData(hash, certificate);
-            Debug.Assert(signedHash.Length == keySizeInBytes, @"signed hash length does not match the RSA key size");
-            Debug.Assert(RSAVerifySignature(hash, signedHash, certificate), @"Invalid signature of the encrypted column encryption key computed.");
+            Debug.Assert(
+                signedHash.Length == keySizeInBytes,
+                @"signed hash length does not match the RSA key size"
+            );
+            Debug.Assert(
+                RSAVerifySignature(hash, signedHash, certificate),
+                @"Invalid signature of the encrypted column encryption key computed."
+            );
 
             // Construct the encrypted column encryption key
             // EncryptedColumnEncryptionKey = version + keyPathLength + ciphertextLength + keyPath + ciphertext +  signature
-            int encryptedColumnEncryptionKeyLength = version.Length + cipherTextLength.Length + keyPathLength.Length + cipherText.Length + masterKeyPathBytes.Length + signedHash.Length;
+            int encryptedColumnEncryptionKeyLength =
+                version.Length
+                + cipherTextLength.Length
+                + keyPathLength.Length
+                + cipherText.Length
+                + masterKeyPathBytes.Length
+                + signedHash.Length;
             byte[] encryptedColumnEncryptionKey = new byte[encryptedColumnEncryptionKeyLength];
 
             // Copy version byte
             int currentIndex = 0;
-            Buffer.BlockCopy(version, 0, encryptedColumnEncryptionKey, currentIndex, version.Length);
+            Buffer.BlockCopy(
+                version,
+                0,
+                encryptedColumnEncryptionKey,
+                currentIndex,
+                version.Length
+            );
             currentIndex += version.Length;
 
             // Copy key path length
-            Buffer.BlockCopy(keyPathLength, 0, encryptedColumnEncryptionKey, currentIndex, keyPathLength.Length);
+            Buffer.BlockCopy(
+                keyPathLength,
+                0,
+                encryptedColumnEncryptionKey,
+                currentIndex,
+                keyPathLength.Length
+            );
             currentIndex += keyPathLength.Length;
 
             // Copy ciphertext length
-            Buffer.BlockCopy(cipherTextLength, 0, encryptedColumnEncryptionKey, currentIndex, cipherTextLength.Length);
+            Buffer.BlockCopy(
+                cipherTextLength,
+                0,
+                encryptedColumnEncryptionKey,
+                currentIndex,
+                cipherTextLength.Length
+            );
             currentIndex += cipherTextLength.Length;
 
             // Copy key path
-            Buffer.BlockCopy(masterKeyPathBytes, 0, encryptedColumnEncryptionKey, currentIndex, masterKeyPathBytes.Length);
+            Buffer.BlockCopy(
+                masterKeyPathBytes,
+                0,
+                encryptedColumnEncryptionKey,
+                currentIndex,
+                masterKeyPathBytes.Length
+            );
             currentIndex += masterKeyPathBytes.Length;
 
             // Copy ciphertext
-            Buffer.BlockCopy(cipherText, 0, encryptedColumnEncryptionKey, currentIndex, cipherText.Length);
+            Buffer.BlockCopy(
+                cipherText,
+                0,
+                encryptedColumnEncryptionKey,
+                currentIndex,
+                cipherText.Length
+            );
             currentIndex += cipherText.Length;
 
             // copy the signature
-            Buffer.BlockCopy(signedHash, 0, encryptedColumnEncryptionKey, currentIndex, signedHash.Length);
+            Buffer.BlockCopy(
+                signedHash,
+                0,
+                encryptedColumnEncryptionKey,
+                currentIndex,
+                signedHash.Length
+            );
 
             return encryptedColumnEncryptionKey;
         }
@@ -277,9 +379,19 @@ namespace System.Data.SqlClient
                 throw SQL.NullKeyEncryptionAlgorithm(isSystemOp);
             }
 
-            if (string.Equals(encryptionAlgorithm, RSAEncryptionAlgorithmWithOAEP, StringComparison.OrdinalIgnoreCase) != true)
+            if (
+                string.Equals(
+                    encryptionAlgorithm,
+                    RSAEncryptionAlgorithmWithOAEP,
+                    StringComparison.OrdinalIgnoreCase
+                ) != true
+            )
             {
-                throw SQL.InvalidKeyEncryptionAlgorithm(encryptionAlgorithm, RSAEncryptionAlgorithmWithOAEP, isSystemOp);
+                throw SQL.InvalidKeyEncryptionAlgorithm(
+                    encryptionAlgorithm,
+                    RSAEncryptionAlgorithmWithOAEP,
+                    isSystemOp
+                );
             }
         }
 
@@ -292,7 +404,11 @@ namespace System.Data.SqlClient
         {
             if (masterKeyPath.Length >= Int16.MaxValue)
             {
-                throw SQL.LargeCertificatePathLength(masterKeyPath.Length, Int16.MaxValue, isSystemOp);
+                throw SQL.LargeCertificatePathLength(
+                    masterKeyPath.Length,
+                    Int16.MaxValue,
+                    isSystemOp
+                );
             }
         }
 
@@ -301,7 +417,7 @@ namespace System.Data.SqlClient
         /// </summary>
         private string[] GetValidCertificateLocations()
         {
-            return new string[2] {_certLocationLocalMachine, _certLocationCurrentUser};
+            return new string[2] { _certLocationLocalMachine, _certLocationCurrentUser };
         }
 
         /// <summary>
@@ -317,7 +433,11 @@ namespace System.Data.SqlClient
                 }
                 else
                 {
-                    throw SQL.InvalidCertificatePath(masterKeyPath, GetValidCertificateLocations(), isSystemOp);
+                    throw SQL.InvalidCertificatePath(
+                        masterKeyPath,
+                        GetValidCertificateLocations(),
+                        isSystemOp
+                    );
                 }
             }
         }
@@ -342,38 +462,70 @@ namespace System.Data.SqlClient
             // Certificate path should only contain 3 parts (Certificate Location, Certificate Store Name and Thumbprint)
             if (certParts.Length > 3)
             {
-                throw SQL.InvalidCertificatePath(keyPath, GetValidCertificateLocations(), isSystemOp);
+                throw SQL.InvalidCertificatePath(
+                    keyPath,
+                    GetValidCertificateLocations(),
+                    isSystemOp
+                );
             }
 
             // Extract the store location where the cert is stored
             if (certParts.Length > 2)
             {
-                if (string.Equals(certParts[0], _certLocationLocalMachine, StringComparison.OrdinalIgnoreCase) == true)
+                if (
+                    string.Equals(
+                        certParts[0],
+                        _certLocationLocalMachine,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == true
+                )
                 {
                     storeLocation = StoreLocation.LocalMachine;
                 }
-                else if (string.Equals(certParts[0], _certLocationCurrentUser, StringComparison.OrdinalIgnoreCase) == true)
+                else if (
+                    string.Equals(
+                        certParts[0],
+                        _certLocationCurrentUser,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == true
+                )
                 {
                     storeLocation = StoreLocation.CurrentUser;
                 }
                 else
                 {
                     // throw an invalid certificate location exception
-                    throw SQL.InvalidCertificateLocation(certParts[0], keyPath, GetValidCertificateLocations(), isSystemOp);
+                    throw SQL.InvalidCertificateLocation(
+                        certParts[0],
+                        keyPath,
+                        GetValidCertificateLocations(),
+                        isSystemOp
+                    );
                 }
             }
 
             // Parse the certificate store name
             if (certParts.Length > 1)
             {
-                if (string.Equals(certParts[certParts.Length - 2], _myCertificateStore, StringComparison.OrdinalIgnoreCase) == true)
+                if (
+                    string.Equals(
+                        certParts[certParts.Length - 2],
+                        _myCertificateStore,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == true
+                )
                 {
                     storeName = StoreName.My;
                 }
                 else
                 {
                     // We only support storing them in My certificate store
-                    throw SQL.InvalidCertificateStore(certParts[certParts.Length - 2], keyPath, _myCertificateStore, isSystemOp);
+                    throw SQL.InvalidCertificateStore(
+                        certParts[certParts.Length - 2],
+                        keyPath,
+                        _myCertificateStore,
+                        isSystemOp
+                    );
                 }
             }
 
@@ -396,7 +548,13 @@ namespace System.Data.SqlClient
         /// <param name="storeName">Store Location: Currently this can only be My store.</param>
         /// <param name="thumbprint">Certificate thumbprint</param>
         /// <returns>Matching certificate</returns>
-        private X509Certificate2 GetCertificate(StoreLocation storeLocation, StoreName storeName, string masterKeyPath, string thumbprint, bool isSystemOp)
+        private X509Certificate2 GetCertificate(
+            StoreLocation storeLocation,
+            StoreName storeName,
+            string masterKeyPath,
+            string thumbprint,
+            bool isSystemOp
+        )
         {
             // Open specified certificate store
             X509Store certificateStore = null;
@@ -408,19 +566,26 @@ namespace System.Data.SqlClient
 
                 // Search for the specified certificate
                 X509Certificate2Collection matchingCertificates =
-                            certificateStore.Certificates.Find(X509FindType.FindByThumbprint,
-                            thumbprint,
-                            false);
+                    certificateStore.Certificates.Find(
+                        X509FindType.FindByThumbprint,
+                        thumbprint,
+                        false
+                    );
 
                 // Throw an exception if a cert with the specified thumbprint is not found
                 if (matchingCertificates == null || matchingCertificates.Count == 0)
                 {
-                    throw SQL.CertificateNotFound(thumbprint, storeName.ToString(), storeLocation.ToString(), isSystemOp);
+                    throw SQL.CertificateNotFound(
+                        thumbprint,
+                        storeName.ToString(),
+                        storeLocation.ToString(),
+                        isSystemOp
+                    );
                 }
 
                 X509Certificate2 certificate = matchingCertificates[0];
                 if (!certificate.HasPrivateKey)
-                { 
+                {
                     // ensure the certificate has private key
                     throw SQL.CertificateWithNoPrivateKey(masterKeyPath, isSystemOp);
                 }
@@ -449,7 +614,10 @@ namespace System.Data.SqlClient
         {
             Debug.Assert(plainText != null);
             Debug.Assert(certificate != null);
-            Debug.Assert(certificate.HasPrivateKey, "Attempting to encrypt with cert without privatekey");
+            Debug.Assert(
+                certificate.HasPrivateKey,
+                "Attempting to encrypt with cert without privatekey"
+            );
 
             RSACryptoServiceProvider rscp = (RSACryptoServiceProvider)certificate.PublicKey.Key;
             return rscp.Encrypt(plainText, fOAEP: true);
@@ -465,14 +633,17 @@ namespace System.Data.SqlClient
         {
             Debug.Assert((cipherText != null) && (cipherText.Length != 0));
             Debug.Assert(certificate != null);
-            Debug.Assert(certificate.HasPrivateKey, "Attempting to decrypt with cert without privatekey");
+            Debug.Assert(
+                certificate.HasPrivateKey,
+                "Attempting to decrypt with cert without privatekey"
+            );
 
             RSACryptoServiceProvider rscp = (RSACryptoServiceProvider)certificate.PrivateKey;
             return rscp.Decrypt(cipherText, fOAEP: true);
         }
 
         /// <summary>
-        /// Generates signature based on RSA PKCS#v1.5 scheme using a specified certificate. 
+        /// Generates signature based on RSA PKCS#v1.5 scheme using a specified certificate.
         /// </summary>
         /// <param name="dataToSign">Text to sign.</param>
         /// <param name="certificate">Certificate object.</param>
@@ -481,7 +652,10 @@ namespace System.Data.SqlClient
         {
             Debug.Assert((dataToSign != null) && (dataToSign.Length != 0));
             Debug.Assert(certificate != null);
-            Debug.Assert(certificate.HasPrivateKey, "Attempting to sign with cert without privatekey");
+            Debug.Assert(
+                certificate.HasPrivateKey,
+                "Attempting to sign with cert without privatekey"
+            );
 
             // Prepare RSACryptoServiceProvider from certificate's private key
             RSACryptoServiceProvider rscp = GetCSPFromCertificatePrivateKey(certificate);
@@ -492,7 +666,7 @@ namespace System.Data.SqlClient
             //Set the hash algorithm to SHA256.
             rsaFormatter.SetHashAlgorithm(_hashingAlgorithm);
 
-            //Create a signature for HashValue and return it. 
+            //Create a signature for HashValue and return it.
             return rsaFormatter.CreateSignature(dataToSign);
         }
 
@@ -503,12 +677,19 @@ namespace System.Data.SqlClient
         /// <param name="signature"></param>
         /// <param name="certificate"></param>
         /// <returns>true if signature is valid, false if it is not valid</returns>
-        private bool RSAVerifySignature(byte[] dataToVerify, byte[] signature, X509Certificate2 certificate)
+        private bool RSAVerifySignature(
+            byte[] dataToVerify,
+            byte[] signature,
+            X509Certificate2 certificate
+        )
         {
             Debug.Assert((dataToVerify != null) && (dataToVerify.Length != 0));
             Debug.Assert((signature != null) && (signature.Length != 0));
             Debug.Assert(certificate != null);
-            Debug.Assert(certificate.HasPrivateKey, "Attempting to sign with cert without privatekey");
+            Debug.Assert(
+                certificate.HasPrivateKey,
+                "Attempting to sign with cert without privatekey"
+            );
 
             // Prepare RSACryptoServiceProvider from certificate's private key
             RSACryptoServiceProvider rscp = GetCSPFromCertificatePrivateKey(certificate);
@@ -519,7 +700,7 @@ namespace System.Data.SqlClient
             //Set the hash algorithm to SHA256.
             rsaDeFormatter.SetHashAlgorithm(_hashingAlgorithm);
 
-            //Create a signature for HashValue and return it. 
+            //Create a signature for HashValue and return it.
             return rsaDeFormatter.VerifySignature(dataToVerify, signature);
         }
 
@@ -528,20 +709,31 @@ namespace System.Data.SqlClient
         /// </summary>
         /// <param name="certificate"></param>
         /// <returns></returns>
-        private RSACryptoServiceProvider GetCSPFromCertificatePrivateKey(X509Certificate2 certificate)
+        private RSACryptoServiceProvider GetCSPFromCertificatePrivateKey(
+            X509Certificate2 certificate
+        )
         {
             const int rsaAesProviderType = 24;
 
             CspParameters privateKeyParams = new CspParameters();
             privateKeyParams = new CspParameters();
-            privateKeyParams.KeyContainerName = ((RSACryptoServiceProvider)certificate.PrivateKey).CspKeyContainerInfo.KeyContainerName;
-            privateKeyParams.ProviderType = rsaAesProviderType /*PROV_RSA_AES*/;
-            privateKeyParams.KeyNumber = (int)((RSACryptoServiceProvider)certificate.PrivateKey).CspKeyContainerInfo.KeyNumber;
+            privateKeyParams.KeyContainerName = ((RSACryptoServiceProvider)certificate.PrivateKey)
+                .CspKeyContainerInfo
+                .KeyContainerName;
+            privateKeyParams.ProviderType =
+                rsaAesProviderType /*PROV_RSA_AES*/
+            ;
+            privateKeyParams.KeyNumber = (int)
+                ((RSACryptoServiceProvider)certificate.PrivateKey).CspKeyContainerInfo.KeyNumber;
 
             // For CurrentUser store, use UseExistingKey
             // For LocalMachine store, use UseMachineKeyStore
             // CspKeyContainerInfo.MachineKeyStore already contains the appropriate information so just use it.
-            if (((RSACryptoServiceProvider)certificate.PrivateKey).CspKeyContainerInfo.MachineKeyStore)
+            if (
+                ((RSACryptoServiceProvider)certificate.PrivateKey)
+                    .CspKeyContainerInfo
+                    .MachineKeyStore
+            )
             {
                 privateKeyParams.Flags = CspProviderFlags.UseMachineKeyStore;
             }

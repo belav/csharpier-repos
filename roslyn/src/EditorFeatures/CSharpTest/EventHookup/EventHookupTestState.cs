@@ -22,9 +22,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EventHookup
 {
     internal sealed class EventHookupTestState : AbstractCommandHandlerTestState
     {
-        private static readonly TestComposition s_composition = EditorTestCompositions.EditorFeaturesWpf.AddParts(
-            typeof(EventHookupCommandHandler),
-            typeof(EventHookupSessionManager));
+        private static readonly TestComposition s_composition =
+            EditorTestCompositions.EditorFeaturesWpf.AddParts(
+                typeof(EventHookupCommandHandler),
+                typeof(EventHookupSessionManager)
+            );
 
         private readonly EventHookupCommandHandler _commandHandler;
         private readonly Mutex _testSessionHookupMutex;
@@ -37,31 +39,40 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EventHookup
                 Workspace.GetService<IInlineRenameService>(),
                 Workspace.GetService<EventHookupSessionManager>(),
                 Workspace.GetService<IGlobalOptionService>(),
-                Workspace.GetService<IAsynchronousOperationListenerProvider>());
+                Workspace.GetService<IAsynchronousOperationListenerProvider>()
+            );
 
             _testSessionHookupMutex = new Mutex(false);
             _commandHandler.TESTSessionHookupMutex = _testSessionHookupMutex;
             options?.SetGlobalOptions(Workspace.GlobalOptions);
         }
 
-        public static EventHookupTestState CreateTestState(string markup, OptionsCollection options = null)
-            => new EventHookupTestState(GetWorkspaceXml(markup), options);
+        public static EventHookupTestState CreateTestState(
+            string markup,
+            OptionsCollection options = null
+        ) => new EventHookupTestState(GetWorkspaceXml(markup), options);
 
-        public static XElement GetWorkspaceXml(string markup)
-            => XElement.Parse(string.Format("""
-                <Workspace>
-                    <Project Language="C#" CommonReferences="true">
-                        <Document>{0}</Document>
-                    </Project>
-                </Workspace>
-                """, markup));
+        public static XElement GetWorkspaceXml(string markup) =>
+            XElement.Parse(
+                string.Format(
+                    """
+                    <Workspace>
+                        <Project Language="C#" CommonReferences="true">
+                            <Document>{0}</Document>
+                        </Project>
+                    </Workspace>
+                    """,
+                    markup
+                )
+            );
 
         internal void AssertShowing(string expectedText)
         {
             Assert.NotNull(_commandHandler.EventHookupSessionManager.TEST_MostRecentToolTipContent);
             Assert.Single(_commandHandler.EventHookupSessionManager.TEST_MostRecentToolTipContent);
 
-            var textElement = _commandHandler.EventHookupSessionManager.TEST_MostRecentToolTipContent.First();
+            var textElement =
+                _commandHandler.EventHookupSessionManager.TEST_MostRecentToolTipContent.First();
             Assert.Equal(3, textElement.Runs.Count());
             Assert.Equal(expectedText, textElement.Runs.First().Text);
         }
@@ -88,7 +99,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EventHookup
 
         public void SendTypeChar(char ch)
         {
-            SendTypeChar(ch, _commandHandler.ExecuteCommand, () => EditorOperations.InsertText(ch.ToString()));
+            SendTypeChar(
+                ch,
+                _commandHandler.ExecuteCommand,
+                () => EditorOperations.InsertText(ch.ToString())
+            );
         }
 
         internal void SendTab()

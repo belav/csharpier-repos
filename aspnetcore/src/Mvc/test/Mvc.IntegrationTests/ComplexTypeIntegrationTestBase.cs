@@ -4,10 +4,10 @@
 using System.Globalization;
 using System.Text;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 
@@ -32,7 +32,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
         var testContext = GetTestContext();
 
@@ -72,7 +72,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -95,7 +95,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -122,7 +123,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -145,7 +146,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -172,7 +174,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -197,7 +199,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -223,7 +226,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -246,7 +249,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -272,7 +276,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order1)
+            ParameterType = typeof(Order1),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -295,7 +299,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -330,14 +335,15 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order3)
+            ParameterType = typeof(Order3),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
         var testContext = GetTestContext(request =>
         {
-            request.QueryString =
-                new QueryString("?parameter.Customer.Name=bill&parameter.Customer.Token=" + ByteArrayEncoded);
+            request.QueryString = new QueryString(
+                "?parameter.Customer.Name=bill&parameter.Customer.Token=" + ByteArrayEncoded
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -353,7 +359,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -383,13 +390,15 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order3)
+            ParameterType = typeof(Order3),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
         var testContext = GetTestContext(request =>
         {
-            request.QueryString = new QueryString("?Customer.Name=bill&Customer.Token=" + ByteArrayEncoded);
+            request.QueryString = new QueryString(
+                "?Customer.Name=bill&Customer.Token=" + ByteArrayEncoded
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -405,7 +414,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -435,7 +445,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order3)
+            ParameterType = typeof(Order3),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -457,7 +467,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -497,7 +508,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order4)
+            ParameterType = typeof(Order4),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -520,7 +531,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -550,7 +562,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order4)
+            ParameterType = typeof(Order4),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -573,7 +585,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -603,7 +616,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order4)
+            ParameterType = typeof(Order4),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -627,7 +640,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -654,7 +668,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order4)
+            ParameterType = typeof(Order4),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -677,7 +691,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -711,7 +726,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order4)
+            ParameterType = typeof(Order4),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -734,7 +749,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -770,14 +786,15 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order5)
+            ParameterType = typeof(Order5),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
         var testContext = GetTestContext(request =>
         {
-            request.QueryString =
-                new QueryString("?parameter.Name=bill&parameter.ProductIds[0]=10&parameter.ProductIds[1]=11");
+            request.QueryString = new QueryString(
+                "?parameter.Name=bill&parameter.ProductIds[0]=10&parameter.ProductIds[1]=11"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -793,7 +810,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -826,7 +844,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order5)
+            ParameterType = typeof(Order5),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -848,7 +866,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -881,7 +900,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order5)
+            ParameterType = typeof(Order5),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -903,7 +922,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -928,7 +948,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order5)
+            ParameterType = typeof(Order5),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -950,7 +970,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -978,14 +999,15 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order6)
+            ParameterType = typeof(Order6),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
         var testContext = GetTestContext(request =>
         {
-            request.QueryString =
-                new QueryString("?parameter.Name=bill&parameter.ProductIds[0]=10&parameter.ProductIds[1]=11");
+            request.QueryString = new QueryString(
+                "?parameter.Name=bill&parameter.ProductIds[0]=10&parameter.ProductIds[1]=11"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1001,7 +1023,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1034,7 +1057,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order6)
+            ParameterType = typeof(Order6),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1056,7 +1079,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1089,7 +1113,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order6)
+            ParameterType = typeof(Order6),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1111,7 +1135,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1136,7 +1161,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order6)
+            ParameterType = typeof(Order6),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1158,7 +1183,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1186,14 +1212,15 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order7)
+            ParameterType = typeof(Order7),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
         var testContext = GetTestContext(request =>
         {
-            request.QueryString =
-                new QueryString("?parameter.Name=bill&parameter.ProductIds[0].Key=key0&parameter.ProductIds[0].Value=10");
+            request.QueryString = new QueryString(
+                "?parameter.Name=bill&parameter.ProductIds[0].Key=key0&parameter.ProductIds[0].Value=10"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1209,7 +1236,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1242,13 +1270,15 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order7)
+            ParameterType = typeof(Order7),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
         var testContext = GetTestContext(request =>
         {
-            request.QueryString = new QueryString("?Name=bill&ProductIds[0].Key=key0&ProductIds[0].Value=10");
+            request.QueryString = new QueryString(
+                "?Name=bill&ProductIds[0].Key=key0&ProductIds[0].Value=10"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1264,7 +1294,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1297,7 +1328,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order7)
+            ParameterType = typeof(Order7),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1319,7 +1350,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1344,7 +1376,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order7)
+            ParameterType = typeof(Order7),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1366,7 +1398,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1412,21 +1445,18 @@ public abstract class ComplexTypeIntegrationTestBase
     public async Task ComplexBinder_BindsDictionaryProperty_WithIEnumerableComplexTypeValue_Success()
     {
         // Arrange
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = typeof(Car1)
-        };
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car1) };
 
         var testContext = GetTestContext(request =>
         {
-            var queryString = "?p.Name=Accord"
-                    + "&p.Specs[0].Key=camera_specs"
-                    + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
-                    + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
-                    + "&p.Specs[1].Key=tyre_specs"
-                    + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
-                    + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
+            var queryString =
+                "?p.Name=Accord"
+                + "&p.Specs[0].Key=camera_specs"
+                + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
+                + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
+                + "&p.Specs[1].Key=tyre_specs"
+                + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
+                + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
             request.QueryString = new QueryString(queryString);
         });
 
@@ -1443,7 +1473,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1465,7 +1496,8 @@ public abstract class ComplexTypeIntegrationTestBase
                     (s) =>
                     {
                         Assert.Equal("camera_spec2.txt", s.Name);
-                    });
+                    }
+                );
             },
             (e) =>
             {
@@ -1479,8 +1511,10 @@ public abstract class ComplexTypeIntegrationTestBase
                     (s) =>
                     {
                         Assert.Equal("tyre_spec2.txt", s.Name);
-                    });
-            });
+                    }
+                );
+            }
+        );
 
         Assert.Equal(7, modelState.Count);
         Assert.Equal(0, modelState.ErrorCount);
@@ -1519,21 +1553,18 @@ public abstract class ComplexTypeIntegrationTestBase
     public async Task ComplexBinder_BindsDictionaryProperty_WithArrayOfComplexTypeValue_Success()
     {
         // Arrange
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = typeof(Car2)
-        };
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car2) };
 
         var testContext = GetTestContext(request =>
         {
-            var queryString = "?p.Name=Accord"
-                    + "&p.Specs[0].Key=camera_specs"
-                    + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
-                    + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
-                    + "&p.Specs[1].Key=tyre_specs"
-                    + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
-                    + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
+            var queryString =
+                "?p.Name=Accord"
+                + "&p.Specs[0].Key=camera_specs"
+                + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
+                + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
+                + "&p.Specs[1].Key=tyre_specs"
+                + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
+                + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
             request.QueryString = new QueryString(queryString);
         });
 
@@ -1550,7 +1581,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1572,7 +1604,8 @@ public abstract class ComplexTypeIntegrationTestBase
                     (s) =>
                     {
                         Assert.Equal("camera_spec2.txt", s.Name);
-                    });
+                    }
+                );
             },
             (e) =>
             {
@@ -1586,8 +1619,10 @@ public abstract class ComplexTypeIntegrationTestBase
                     (s) =>
                     {
                         Assert.Equal("tyre_spec2.txt", s.Name);
-                    });
-            });
+                    }
+                );
+            }
+        );
 
         Assert.Equal(7, modelState.Count);
         Assert.Equal(0, modelState.ErrorCount);
@@ -1626,21 +1661,18 @@ public abstract class ComplexTypeIntegrationTestBase
     public async Task ComplexBinder_BindsDictionaryProperty_WithIEnumerableOfKeyValuePair_Success()
     {
         // Arrange
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = typeof(Car3)
-        };
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car3) };
 
         var testContext = GetTestContext(request =>
         {
-            var queryString = "?p.Name=Accord"
-                    + "&p.Specs[0].Key=camera_specs"
-                    + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
-                    + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
-                    + "&p.Specs[1].Key=tyre_specs"
-                    + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
-                    + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
+            var queryString =
+                "?p.Name=Accord"
+                + "&p.Specs[0].Key=camera_specs"
+                + "&p.Specs[0].Value[0].Name=camera_spec1.txt"
+                + "&p.Specs[0].Value[1].Name=camera_spec2.txt"
+                + "&p.Specs[1].Key=tyre_specs"
+                + "&p.Specs[1].Value[0].Name=tyre_spec1.txt"
+                + "&p.Specs[1].Value[1].Name=tyre_spec2.txt";
             request.QueryString = new QueryString(queryString);
         });
 
@@ -1657,7 +1689,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1679,7 +1712,8 @@ public abstract class ComplexTypeIntegrationTestBase
                     (s) =>
                     {
                         Assert.Equal("camera_spec2.txt", s.Name);
-                    });
+                    }
+                );
             },
             (e) =>
             {
@@ -1693,8 +1727,10 @@ public abstract class ComplexTypeIntegrationTestBase
                     (s) =>
                     {
                         Assert.Equal("tyre_spec2.txt", s.Name);
-                    });
-            });
+                    }
+                );
+            }
+        );
 
         Assert.Equal(7, modelState.Count);
         Assert.Equal(0, modelState.ErrorCount);
@@ -1743,14 +1779,15 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order8)
+            ParameterType = typeof(Order8),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
         var testContext = GetTestContext(request =>
         {
-            request.QueryString =
-                new QueryString("?parameter.Name=bill&parameter.ProductId.Key=key0&parameter.ProductId.Value=10");
+            request.QueryString = new QueryString(
+                "?parameter.Name=bill&parameter.ProductId.Key=key0&parameter.ProductId.Value=10"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1766,7 +1803,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1799,13 +1837,15 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order8)
+            ParameterType = typeof(Order8),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
         var testContext = GetTestContext(request =>
         {
-            request.QueryString = new QueryString("?Name=bill&ProductId.Key=key0&ProductId.Value=10");
+            request.QueryString = new QueryString(
+                "?Name=bill&ProductId.Key=key0&ProductId.Value=10"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -1821,7 +1861,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1854,7 +1895,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order8)
+            ParameterType = typeof(Order8),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1876,7 +1917,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1903,7 +1945,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order8)
+            ParameterType = typeof(Order8),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -1925,7 +1967,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -1952,21 +1995,18 @@ public abstract class ComplexTypeIntegrationTestBase
     public async Task Foo_ComplexBinder_BindsKeyValuePairProperty_WithPrefix_Success()
     {
         // Arrange
-        var parameter = new ParameterDescriptor()
-        {
-            Name = "p",
-            ParameterType = typeof(Car4)
-        };
+        var parameter = new ParameterDescriptor() { Name = "p", ParameterType = typeof(Car4) };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
         var testContext = GetTestContext(request =>
         {
-            var queryString = "?p.Name=Accord"
-                            + "&p.Specs.Key=camera_specs"
-                            + "&p.Specs.Value[0].Key=spec1"
-                            + "&p.Specs.Value[0].Value=spec1.txt"
-                            + "&p.Specs.Value[1].Key=spec2"
-                            + "&p.Specs.Value[1].Value=spec2.txt";
+            var queryString =
+                "?p.Name=Accord"
+                + "&p.Specs.Key=camera_specs"
+                + "&p.Specs.Value[0].Key=spec1"
+                + "&p.Specs.Value[0].Value=spec1.txt"
+                + "&p.Specs.Value[1].Key=spec2"
+                + "&p.Specs.Value[1].Value=spec2.txt";
 
             request.QueryString = new QueryString(queryString);
         });
@@ -1984,7 +2024,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2003,7 +2044,8 @@ public abstract class ComplexTypeIntegrationTestBase
             {
                 Assert.Equal("spec2", e.Key);
                 Assert.Equal("spec2.txt", e.Value);
-            });
+            }
+        );
 
         Assert.Equal(6, modelState.Count);
         Assert.Equal(0, modelState.ErrorCount);
@@ -2054,7 +2096,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order9)
+            ParameterType = typeof(Order9),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -2077,7 +2119,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2111,7 +2154,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order10)
+            ParameterType = typeof(Order10),
         };
 
         // No Data
@@ -2130,7 +2173,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2146,7 +2190,10 @@ public abstract class ComplexTypeIntegrationTestBase
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["Customer"].Errors);
-        Assert.Equal("A value for the 'Customer' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'Customer' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2156,17 +2203,22 @@ public abstract class ComplexTypeIntegrationTestBase
         var metadataProvider = new TestModelMetadataProvider();
         metadataProvider
             .ForProperty(typeof(Order10), nameof(Order10.Customer))
-            .BindingDetails((Action<ModelBinding.Metadata.BindingMetadata>)(binding =>
-            {
-                // A real details provider could customize message based on BindingMetadataProviderContext.
-                binding.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(
-                name => $"Hurts when '{ name }' is not provided.");
-            }));
+            .BindingDetails(
+                (Action<ModelBinding.Metadata.BindingMetadata>)(
+                    binding =>
+                    {
+                        // A real details provider could customize message based on BindingMetadataProviderContext.
+                        binding.ModelBindingMessageProvider.SetMissingBindRequiredValueAccessor(
+                            name => $"Hurts when '{name}' is not provided."
+                        );
+                    }
+                )
+            );
 
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order10)
+            ParameterType = typeof(Order10),
         };
 
         // No Data
@@ -2185,7 +2237,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2224,7 +2277,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order11)
+            ParameterType = typeof(Order11),
         };
 
         // No Data
@@ -2246,7 +2299,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2268,7 +2322,10 @@ public abstract class ComplexTypeIntegrationTestBase
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["parameter.Customer.Name"].Errors);
-        Assert.Equal("A value for the 'Name' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'Name' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2278,7 +2335,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order11)
+            ParameterType = typeof(Order11),
         };
 
         // No Data
@@ -2300,7 +2357,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2322,7 +2380,10 @@ public abstract class ComplexTypeIntegrationTestBase
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["Customer.Name"].Errors);
-        Assert.Equal("A value for the 'Name' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'Name' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2333,10 +2394,7 @@ public abstract class ComplexTypeIntegrationTestBase
         {
             Name = "parameter",
             ParameterType = typeof(Order11),
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "customParameter"
-            }
+            BindingInfo = new BindingInfo() { BinderModelName = "customParameter" },
         };
 
         // No Data
@@ -2358,7 +2416,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2380,7 +2439,10 @@ public abstract class ComplexTypeIntegrationTestBase
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["customParameter.Customer.Name"].Errors);
-        Assert.Equal("A value for the 'Name' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'Name' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     private class Order12
@@ -2396,7 +2458,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order12)
+            ParameterType = typeof(Order12),
         };
 
         // No Data
@@ -2418,7 +2480,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2434,7 +2497,10 @@ public abstract class ComplexTypeIntegrationTestBase
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["ProductName"].Errors);
-        Assert.Equal("A value for the 'ProductName' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'ProductName' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2445,10 +2511,7 @@ public abstract class ComplexTypeIntegrationTestBase
         {
             Name = "parameter",
             ParameterType = typeof(Order12),
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "customParameter"
-            }
+            BindingInfo = new BindingInfo() { BinderModelName = "customParameter" },
         };
 
         // No Data
@@ -2470,7 +2533,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2486,7 +2550,10 @@ public abstract class ComplexTypeIntegrationTestBase
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["customParameter.ProductName"].Errors);
-        Assert.Equal("A value for the 'ProductName' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'ProductName' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2518,7 +2585,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2548,7 +2616,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order13)
+            ParameterType = typeof(Order13),
         };
 
         // No Data
@@ -2570,7 +2638,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2586,7 +2655,10 @@ public abstract class ComplexTypeIntegrationTestBase
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["OrderIds"].Errors);
-        Assert.Equal("A value for the 'OrderIds' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'OrderIds' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2597,10 +2669,7 @@ public abstract class ComplexTypeIntegrationTestBase
         {
             Name = "parameter",
             ParameterType = typeof(Order13),
-            BindingInfo = new BindingInfo()
-            {
-                BinderModelName = "customParameter"
-            }
+            BindingInfo = new BindingInfo() { BinderModelName = "customParameter" },
         };
 
         // No Data
@@ -2622,7 +2691,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2638,7 +2708,10 @@ public abstract class ComplexTypeIntegrationTestBase
         Assert.Null(entry.RawValue);
         Assert.Null(entry.AttemptedValue);
         var error = Assert.Single(modelState["customParameter.OrderIds"].Errors);
-        Assert.Equal("A value for the 'OrderIds' parameter or property was not provided.", error.ErrorMessage);
+        Assert.Equal(
+            "A value for the 'OrderIds' parameter or property was not provided.",
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -2669,7 +2742,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2700,7 +2774,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order14)
+            ParameterType = typeof(Order14),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -2722,7 +2796,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2754,7 +2829,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Order14)
+            ParameterType = typeof(Order14),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
@@ -2776,7 +2851,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2814,7 +2890,8 @@ public abstract class ComplexTypeIntegrationTestBase
     [Theory]
     [MemberData(
         nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+    )]
     public async Task ModelNameOnPropertyType_WithData_Succeeds(BindingInfo bindingInfo)
     {
         // Arrange
@@ -2825,8 +2902,9 @@ public abstract class ComplexTypeIntegrationTestBase
             ParameterType = typeof(Person12),
         };
 
-        var testContext = GetTestContext(
-            request => request.QueryString = new QueryString("?HomeAddress.Street=someStreet"));
+        var testContext = GetTestContext(request =>
+            request.QueryString = new QueryString("?HomeAddress.Street=someStreet")
+        );
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2841,7 +2919,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2863,7 +2942,8 @@ public abstract class ComplexTypeIntegrationTestBase
     [Theory]
     [MemberData(
         nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+    )]
     public async Task ModelNameOnParameterType_WithData_Succeeds(BindingInfo bindingInfo)
     {
         // Arrange
@@ -2874,8 +2954,9 @@ public abstract class ComplexTypeIntegrationTestBase
             ParameterType = typeof(Address12),
         };
 
-        var testContext = GetTestContext(
-            request => request.QueryString = new QueryString("?HomeAddress.Street=someStreet"));
+        var testContext = GetTestContext(request =>
+            request.QueryString = new QueryString("?HomeAddress.Street=someStreet")
+        );
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2890,7 +2971,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2930,7 +3012,8 @@ public abstract class ComplexTypeIntegrationTestBase
     [Theory]
     [MemberData(
         nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+    )]
     public async Task BindAttributeOnPropertyType_WithData_Succeeds(BindingInfo bindingInfo)
     {
         // Arrange
@@ -2941,9 +3024,11 @@ public abstract class ComplexTypeIntegrationTestBase
             ParameterType = typeof(Person13),
         };
 
-        var testContext = GetTestContext(
-            request => request.QueryString = new QueryString(
-                "?Address.Number=23&Address.Street=someStreet&Address.City=Redmond&Address.State=WA"));
+        var testContext = GetTestContext(request =>
+            request.QueryString = new QueryString(
+                "?Address.Number=23&Address.Street=someStreet&Address.City=Redmond&Address.State=WA"
+            )
+        );
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -2958,7 +3043,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -2985,7 +3071,8 @@ public abstract class ComplexTypeIntegrationTestBase
     [Theory]
     [MemberData(
         nameof(BinderTypeBasedModelBinderIntegrationTest.NullAndEmptyBindingInfo),
-        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest))]
+        MemberType = typeof(BinderTypeBasedModelBinderIntegrationTest)
+    )]
     public async Task BindAttributeOnParameterType_WithData_Succeeds(BindingInfo bindingInfo)
     {
         // Arrange
@@ -2996,8 +3083,11 @@ public abstract class ComplexTypeIntegrationTestBase
             ParameterType = typeof(Address13),
         };
 
-        var testContext = GetTestContext(
-            request => request.QueryString = new QueryString("?Number=23&Street=someStreet&City=Redmond&State=WA"));
+        var testContext = GetTestContext(request =>
+            request.QueryString = new QueryString(
+                "?Number=23&Street=someStreet&City=Redmond&State=WA"
+            )
+        );
 
         var modelState = testContext.ModelState;
         var metadata = GetMetadata(testContext, parameter);
@@ -3012,7 +3102,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3050,7 +3141,7 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Product)
+            ParameterType = typeof(Product),
         };
 
         // Need to have a key here so that the ComplexTypeModelBinder will recurse to bind elements.
@@ -3072,7 +3163,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3106,14 +3198,16 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
-            ParameterType = typeof(Photo)
+            ParameterType = typeof(Photo),
         };
 
         // Need to have a key here so that the MutableObjectModelBinder will recurse to bind elements.
         var testContext = GetTestContext(request =>
         {
             request.Headers.Add("GpsCoordinates", "10,20");
-            request.QueryString = new QueryString("?Id=1&Info.Key=location1&Info.Value.Zipcode=98052");
+            request.QueryString = new QueryString(
+                "?Id=1&Info.Key=location1&Info.Value.Zipcode=98052"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -3129,7 +3223,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3202,7 +3297,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3237,7 +3333,8 @@ public abstract class ComplexTypeIntegrationTestBase
 
     private class NumberModelBinder : IModelBinder
     {
-        private readonly NumberStyles _supportedStyles = NumberStyles.Float | NumberStyles.AllowThousands;
+        private readonly NumberStyles _supportedStyles =
+            NumberStyles.Float | NumberStyles.AllowThousands;
         private readonly DecimalModelBinder _innerBinder;
 
         public NumberModelBinder(ILoggerFactory loggerFactory)
@@ -3265,7 +3362,8 @@ public abstract class ComplexTypeIntegrationTestBase
         var testContext = GetTestContext(request =>
         {
             request.QueryString = new QueryString(
-                "?parameter.InnerModels[0].Rate=1,000.00&parameter.InnerModels[1].Rate=2000");
+                "?parameter.InnerModels[0].Rate=1,000.00&parameter.InnerModels[1].Rate=2000"
+            );
         });
 
         var modelState = testContext.ModelState;
@@ -3281,7 +3379,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3291,7 +3390,8 @@ public abstract class ComplexTypeIntegrationTestBase
         Assert.Collection(
             model.InnerModels,
             item => Assert.Equal(1000, item.Rate),
-            item => Assert.Equal(2000, item.Rate));
+            item => Assert.Equal(2000, item.Rate)
+        );
 
         Assert.True(modelState.IsValid);
         Assert.Collection(
@@ -3311,7 +3411,8 @@ public abstract class ComplexTypeIntegrationTestBase
                 Assert.Empty(kvp.Value.Errors);
                 Assert.Equal("2000", kvp.Value.RawValue);
                 Assert.Equal(ModelValidationState.Valid, kvp.Value.ValidationState);
-            });
+            }
+        );
     }
 
     private class Person6
@@ -3352,7 +3453,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3404,7 +3506,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3441,7 +3544,8 @@ public abstract class ComplexTypeIntegrationTestBase
                 Assert.Null(kvp.Value.AttemptedValue);
                 Assert.Empty(kvp.Value.Errors);
                 Assert.Null(kvp.Value.RawValue);
-            });
+            }
+        );
     }
 
     private class Person7
@@ -3486,7 +3590,8 @@ public abstract class ComplexTypeIntegrationTestBase
             valueProvider,
             parameter,
             metadata,
-            value: null);
+            value: null
+        );
 
         // Assert
         Assert.True(modelBindingResult.IsModelSet);
@@ -3512,7 +3617,8 @@ public abstract class ComplexTypeIntegrationTestBase
                 {
                     Assert.Equal("Hello Ginger!", reader.ReadToEnd());
                 }
-            });
+            }
+        );
 
         Assert.Null(model.Name);
         Assert.NotNull(model.Photo);
@@ -3537,12 +3643,13 @@ public abstract class ComplexTypeIntegrationTestBase
     public async Task ModelBindingSystem_ThrowsOn33Binders()
     {
         // Arrange
-        var expectedMessage = $"Model binding system exceeded " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} (32). Reduce the " +
-            $"potential nesting of '{typeof(LoopyModel)}'. For example, this type may have a property with a " +
-            "model binder that always succeeds. See the " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} documentation for more " +
-            "information.";
+        var expectedMessage =
+            $"Model binding system exceeded "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} (32). Reduce the "
+            + $"potential nesting of '{typeof(LoopyModel)}'. For example, this type may have a property with a "
+            + "model binder that always succeeds. See the "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} documentation for more "
+            + "information.";
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
@@ -3556,8 +3663,9 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext);
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 
@@ -3586,8 +3694,9 @@ public abstract class ComplexTypeIntegrationTestBase
             ParameterType = typeof(ThreeDeepModel),
         };
 
-        var testContext = GetTestContext(
-            updateOptions: options => options.MaxModelBindingRecursionDepth = 3);
+        var testContext = GetTestContext(updateOptions: options =>
+            options.MaxModelBindingRecursionDepth = 3
+        );
 
         var modelState = testContext.ModelState;
         var metadata = testContext.MetadataProvider.GetMetadataForType(parameter.ParameterType);
@@ -3621,20 +3730,22 @@ public abstract class ComplexTypeIntegrationTestBase
     public async Task ModelBindingSystem_ThrowsOn4Binders()
     {
         // Arrange
-        var expectedMessage = $"Model binding system exceeded " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} (3). Reduce the " +
-            $"potential nesting of '{typeof(FourDeepModel)}'. For example, this type may have a property with a " +
-            $"model binder that always succeeds. See the " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} documentation for more " +
-            $"information.";
+        var expectedMessage =
+            $"Model binding system exceeded "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} (3). Reduce the "
+            + $"potential nesting of '{typeof(FourDeepModel)}'. For example, this type may have a property with a "
+            + $"model binder that always succeeds. See the "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} documentation for more "
+            + $"information.";
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
             ParameterType = typeof(FourDeepModel),
         };
 
-        var testContext = GetTestContext(
-            updateOptions: options => options.MaxModelBindingRecursionDepth = 3);
+        var testContext = GetTestContext(updateOptions: options =>
+            options.MaxModelBindingRecursionDepth = 3
+        );
 
         var modelState = testContext.ModelState;
         var metadata = testContext.MetadataProvider.GetMetadataForType(parameter.ParameterType);
@@ -3642,8 +3753,9 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext);
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 
@@ -3675,12 +3787,13 @@ public abstract class ComplexTypeIntegrationTestBase
     public async Task ModelBindingSystem_ThrowsOn33Binders_WithIndirectModelTypeLoop()
     {
         // Arrange
-        var expectedMessage = $"Model binding system exceeded " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} (32). Reduce the " +
-            $"potential nesting of '{typeof(LoopyModel1)}'. For example, this type may have a property with a " +
-            $"model binder that always succeeds. See the " +
-            $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} documentation for more " +
-            $"information.";
+        var expectedMessage =
+            $"Model binding system exceeded "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} (32). Reduce the "
+            + $"potential nesting of '{typeof(LoopyModel1)}'. For example, this type may have a property with a "
+            + $"model binder that always succeeds. See the "
+            + $"{nameof(MvcOptions)}.{nameof(MvcOptions.MaxModelBindingRecursionDepth)} documentation for more "
+            + $"information.";
         var parameter = new ParameterDescriptor()
         {
             Name = "parameter",
@@ -3694,14 +3807,17 @@ public abstract class ComplexTypeIntegrationTestBase
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(testContext);
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => parameterBinder.BindModelAsync(parameter, testContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            parameterBinder.BindModelAsync(parameter, testContext)
+        );
         Assert.Equal(expectedMessage, exception.Message);
     }
 
     private static void SetJsonBodyContent(HttpRequest request, string content)
     {
-        var stream = new MemoryStream(new UTF8Encoding(encoderShouldEmitUTF8Identifier: false).GetBytes(content));
+        var stream = new MemoryStream(
+            new UTF8Encoding(encoderShouldEmitUTF8Identifier: false).GetBytes(content)
+        );
         request.Body = stream;
         request.ContentType = "application/json";
     }
@@ -3719,9 +3835,13 @@ public abstract class ComplexTypeIntegrationTestBase
         else
         {
             fileCollection = new FormFileCollection();
-            var formCollection = new FormCollection(new Dictionary<string, StringValues>(), fileCollection);
+            var formCollection = new FormCollection(
+                new Dictionary<string, StringValues>(),
+                fileCollection
+            );
 
-            request.ContentType = "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq";
+            request.ContentType =
+                "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq";
             request.Form = formCollection;
         }
 
@@ -3737,7 +3857,10 @@ public abstract class ComplexTypeIntegrationTestBase
         fileCollection.Add(file);
     }
 
-    private ModelMetadata GetMetadata(ModelBindingTestContext context, ParameterDescriptor parameter)
+    private ModelMetadata GetMetadata(
+        ModelBindingTestContext context,
+        ParameterDescriptor parameter
+    )
     {
         return context.MetadataProvider.GetMetadataForType(parameter.ParameterType);
     }
@@ -3745,11 +3868,13 @@ public abstract class ComplexTypeIntegrationTestBase
     private IModelBinder GetModelBinder(
         ModelBindingTestContext context,
         ParameterDescriptor parameter,
-        ModelMetadata metadata)
+        ModelMetadata metadata
+    )
     {
         var factory = ModelBindingTestHelper.GetModelBinderFactory(
             context.MetadataProvider,
-            context.HttpContext.RequestServices);
+            context.HttpContext.RequestServices
+        );
         var factoryContext = new ModelBinderFactoryContext
         {
             BindingInfo = parameter.BindingInfo,
@@ -3763,6 +3888,12 @@ public abstract class ComplexTypeIntegrationTestBase
     protected virtual ModelBindingTestContext GetTestContext(
         Action<HttpRequest> updateRequest = null,
         Action<MvcOptions> updateOptions = null,
-        IModelMetadataProvider metadataProvider = null)
-        => ModelBindingTestHelper.GetTestContext(updateRequest, updateOptions, actionDescriptor: null, metadataProvider);
+        IModelMetadataProvider metadataProvider = null
+    ) =>
+        ModelBindingTestHelper.GetTestContext(
+            updateRequest,
+            updateOptions,
+            actionDescriptor: null,
+            metadataProvider
+        );
 }

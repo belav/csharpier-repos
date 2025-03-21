@@ -11,11 +11,7 @@ namespace System.Linq.Expressions.Tests
         public static void UnaryArithmeticNegateNullableStackBalance(bool useInterpreter)
         {
             Expression<Func<decimal?>> e = Expression.Lambda<Func<decimal?>>(
-                Expression.Negate(
-                    Expression.Negate(
-                        Expression.Constant(1.0m, typeof(decimal?))
-                    )
-                )
+                Expression.Negate(Expression.Negate(Expression.Constant(1.0m, typeof(decimal?))))
             );
 
             Func<decimal?> f = e.Compile(useInterpreter);

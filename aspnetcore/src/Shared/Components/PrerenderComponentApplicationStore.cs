@@ -18,7 +18,11 @@ internal class PrerenderComponentApplicationStore : IPersistentComponentStateSto
         ExistingState = new();
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "Simple deserialize of primitive types.")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "Simple deserialize of primitive types."
+    )]
     public PrerenderComponentApplicationStore(string existingState)
     {
         ArgumentNullException.ThrowIfNull(existingState);
@@ -26,13 +30,20 @@ internal class PrerenderComponentApplicationStore : IPersistentComponentStateSto
         DeserializeState(Convert.FromBase64String(existingState));
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "Simple deserialize of primitive types.")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "Simple deserialize of primitive types."
+    )]
     protected void DeserializeState(byte[] existingState)
     {
         var state = JsonSerializer.Deserialize<Dictionary<string, byte[]>>(existingState);
         if (state == null)
         {
-            throw new ArgumentException("Could not deserialize state correctly", nameof(existingState));
+            throw new ArgumentException(
+                "Could not deserialize state correctly",
+                nameof(existingState)
+            );
         }
 
         ExistingState = state;
@@ -40,6 +51,7 @@ internal class PrerenderComponentApplicationStore : IPersistentComponentStateSto
 
 #nullable enable
     public string? PersistedState { get; private set; }
+
 #nullable disable
 
     public Dictionary<string, byte[]> ExistingState { get; protected set; }
@@ -49,7 +61,11 @@ internal class PrerenderComponentApplicationStore : IPersistentComponentStateSto
         return Task.FromResult((IDictionary<string, byte[]>)ExistingState);
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode", Justification = "Simple serialize of primitive types.")]
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2026:RequiresUnreferencedCode",
+        Justification = "Simple serialize of primitive types."
+    )]
     protected virtual byte[] SerializeState(IReadOnlyDictionary<string, byte[]> state) =>
         JsonSerializer.SerializeToUtf8Bytes(state);
 
@@ -71,5 +87,7 @@ internal class PrerenderComponentApplicationStore : IPersistentComponentStateSto
     }
 
     public virtual bool SupportsRenderMode(IComponentRenderMode renderMode) =>
-        renderMode is null || renderMode is InteractiveWebAssemblyRenderMode || renderMode is InteractiveAutoRenderMode;
+        renderMode is null
+        || renderMode is InteractiveWebAssemblyRenderMode
+        || renderMode is InteractiveAutoRenderMode;
 }

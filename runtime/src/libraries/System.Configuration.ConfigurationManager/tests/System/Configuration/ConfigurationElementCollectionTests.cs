@@ -10,33 +10,40 @@ namespace System.ConfigurationTests
 {
     public class ConfigurationElementCollectionTests
     {
-        public class SimpleElement : ConfigurationElement
-        {
-        }
+        public class SimpleElement : ConfigurationElement { }
 
         private class SimpleCollection : ConfigurationElementCollection
         {
             public static ConfigurationElement TestElement = new SimpleElement();
 
             public SimpleCollection()
-                : base()
-            { }
+                : base() { }
 
             public SimpleCollection(IComparer comparer)
-                : base(comparer)
-            { }
+                : base(comparer) { }
 
             // These two are abstract
             protected override ConfigurationElement CreateNewElement() => TestElement;
-            protected override object GetElementKey(ConfigurationElement element) => element == null ? null : "FooKey";
+
+            protected override object GetElementKey(ConfigurationElement element) =>
+                element == null ? null : "FooKey";
 
             public bool TestThrowOnDuplicate => ThrowOnDuplicate;
             public string TestElementName => ElementName;
+
             public bool TestIsElementName(string elementName) => IsElementName(elementName);
-            public bool TestIsElementRemovable(ConfigurationElement element) => IsElementRemovable(element);
+
+            public bool TestIsElementRemovable(ConfigurationElement element) =>
+                IsElementRemovable(element);
+
             public void TestBaseAdd(ConfigurationElement element) => BaseAdd(element);
-            public void TestBaseAdd(int index, ConfigurationElement element) => BaseAdd(index, element);
-            public ConfigurationElement TestCreateNewElement(string elementName) => CreateNewElement(elementName);
+
+            public void TestBaseAdd(int index, ConfigurationElement element) =>
+                BaseAdd(index, element);
+
+            public ConfigurationElement TestCreateNewElement(string elementName) =>
+                CreateNewElement(elementName);
+
             public int TestBaseIndexOf(ConfigurationElement element) => BaseIndexOf(element);
         }
 
@@ -48,7 +55,10 @@ namespace System.ConfigurationTests
         [Fact]
         public void NullComparerThrows()
         {
-            AssertExtensions.Throws<ArgumentNullException>("comparer", () => new SimpleCollection(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "comparer",
+                () => new SimpleCollection(null)
+            );
         }
 
         [Fact]
@@ -72,7 +82,10 @@ namespace System.ConfigurationTests
         [Fact]
         public void CollectionTypeIsAddRemoveMap()
         {
-            Assert.Equal(ConfigurationElementCollectionType.AddRemoveClearMap, new SimpleCollection().CollectionType);
+            Assert.Equal(
+                ConfigurationElementCollectionType.AddRemoveClearMap,
+                new SimpleCollection().CollectionType
+            );
         }
 
         [Fact]
@@ -102,13 +115,18 @@ namespace System.ConfigurationTests
         [Fact]
         public void CreateNewElementByNameCallsCreateNewElement()
         {
-            Assert.Same(SimpleCollection.TestElement, new SimpleCollection().TestCreateNewElement("foo"));
+            Assert.Same(
+                SimpleCollection.TestElement,
+                new SimpleCollection().TestCreateNewElement("foo")
+            );
         }
 
         [Fact]
         public void BaseIndexOfThrowsForNull()
         {
-            Assert.Throws<ConfigurationErrorsException>(() => new SimpleCollection().TestBaseIndexOf(null));
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new SimpleCollection().TestBaseIndexOf(null)
+            );
         }
 
         [Fact]
@@ -158,31 +176,40 @@ namespace System.ConfigurationTests
         [Fact]
         public void BaseAddIndexOutOfRangeThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(() => new SimpleCollection().TestBaseAdd(-2, null));
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new SimpleCollection().TestBaseAdd(-2, null)
+            );
         }
 
         [Fact]
         public void BaseAddReadOnlyThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(() => new ReadOnlySimpleCollection().TestBaseAdd(null));
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new ReadOnlySimpleCollection().TestBaseAdd(null)
+            );
         }
 
         [Fact]
         public void BaseAddIndexReadOnlyThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(() => new ReadOnlySimpleCollection().TestBaseAdd(-1, null));
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new ReadOnlySimpleCollection().TestBaseAdd(-1, null)
+            );
         }
 
         [Fact]
         public void BaseAddNullThrows()
         {
-            Assert.Throws<ConfigurationErrorsException>(() => new SimpleCollection().TestBaseAdd(null));
+            Assert.Throws<ConfigurationErrorsException>(() =>
+                new SimpleCollection().TestBaseAdd(null)
+            );
         }
 
         [Fact]
         public void BaseAddIndexNullThrows()
         {
-            Assert.Throws<NullReferenceException>(() => new SimpleCollection().TestBaseAdd(-1, null));
+            Assert.Throws<NullReferenceException>(() => new SimpleCollection().TestBaseAdd(-1, null)
+            );
         }
 
         [Fact]
@@ -193,7 +220,8 @@ namespace System.ConfigurationTests
 
         private class BasicCollection : SimpleCollection
         {
-            public override ConfigurationElementCollectionType CollectionType => ConfigurationElementCollectionType.BasicMap;
+            public override ConfigurationElementCollectionType CollectionType =>
+                ConfigurationElementCollectionType.BasicMap;
         }
 
         [Fact]
@@ -203,7 +231,10 @@ namespace System.ConfigurationTests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/21512", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/21512",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void EqualsNullIsFalse()
         {
             // Note: this null refs on desktop

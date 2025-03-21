@@ -1,43 +1,55 @@
 using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
 using System.Data.Linq;
 using System.Data.Linq.Mapping;
 using System.Data.Linq.Provider;
-using System.Linq;
 using System.Data.Linq.SqlClient;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
 
-namespace System.Data.Linq.SqlClient {
-
+namespace System.Data.Linq.SqlClient
+{
     /// <summary>
-    /// Determines whether an expression is simple or not.  
+    /// Determines whether an expression is simple or not.
     /// Simple is a scalar expression that contains only functions, operators and column references
     /// </summary>
-    internal static class SimpleExpression {
-        internal static bool IsSimple(SqlExpression expr) {
+    internal static class SimpleExpression
+    {
+        internal static bool IsSimple(SqlExpression expr)
+        {
             Visitor v = new Visitor();
             v.Visit(expr);
             return v.IsSimple;
         }
 
-        class Visitor : SqlVisitor {
+        class Visitor : SqlVisitor
+        {
             bool isSimple = true;
 
-            internal bool IsSimple {
+            internal bool IsSimple
+            {
                 get { return this.isSimple; }
             }
 
-            [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand.")]
-            internal override SqlNode Visit(SqlNode node) {
-                if (node == null) {
+            [SuppressMessage(
+                "Microsoft.Maintainability",
+                "CA1502:AvoidExcessiveComplexity",
+                Justification = "These issues are related to our use of if-then and case statements for node types, which adds to the complexity count however when reviewed they are easy to navigate and understand."
+            )]
+            internal override SqlNode Visit(SqlNode node)
+            {
+                if (node == null)
+                {
                     return null;
                 }
-                if (!this.isSimple) {
+                if (!this.isSimple)
+                {
                     return node;
                 }
-                switch (node.NodeType) {
+                switch (node.NodeType)
+                {
                     case SqlNodeType.Not:
                     case SqlNodeType.Not2V:
                     case SqlNodeType.Negate:

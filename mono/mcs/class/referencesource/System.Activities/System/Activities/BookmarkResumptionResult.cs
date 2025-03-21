@@ -10,6 +10,6 @@ namespace System.Activities
     {
         Success = 0,
         NotFound = 1,
-        NotReady = 2
+        NotReady = 2,
     }
 }

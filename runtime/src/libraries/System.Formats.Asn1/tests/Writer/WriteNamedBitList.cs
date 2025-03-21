@@ -12,36 +12,31 @@ namespace System.Formats.Asn1.Tests.Writer
     public class WriteNamedBitList : Asn1WriterTests
     {
         [Theory]
-        [InlineData(
-            AsnEncodingRules.BER,
-            "030100",
-            ReadNamedBitList.ULongFlags.None)]
-        [InlineData(
-            AsnEncodingRules.CER,
-            "030100",
-            ReadNamedBitList.ULongFlags.None)]
-        [InlineData(
-            AsnEncodingRules.DER,
-            "030100",
-            ReadNamedBitList.ULongFlags.None)]
+        [InlineData(AsnEncodingRules.BER, "030100", ReadNamedBitList.ULongFlags.None)]
+        [InlineData(AsnEncodingRules.CER, "030100", ReadNamedBitList.ULongFlags.None)]
+        [InlineData(AsnEncodingRules.DER, "030100", ReadNamedBitList.ULongFlags.None)]
         [InlineData(
             AsnEncodingRules.BER,
             "0309000000000000000003",
-            ReadNamedBitList.ULongFlags.Max | ReadNamedBitList.ULongFlags.AlmostMax)]
+            ReadNamedBitList.ULongFlags.Max | ReadNamedBitList.ULongFlags.AlmostMax
+        )]
         [InlineData(
             AsnEncodingRules.CER,
             "0309010000000080000002",
-            ReadNamedBitList.LongFlags.Max | ReadNamedBitList.LongFlags.Mid)]
+            ReadNamedBitList.LongFlags.Max | ReadNamedBitList.LongFlags.Mid
+        )]
         [InlineData(
             AsnEncodingRules.DER,
             "030204B0",
-            ReadNamedBitList.X509KeyUsageCSharpStyle.DigitalSignature |
-                ReadNamedBitList.X509KeyUsageCSharpStyle.KeyEncipherment |
-                ReadNamedBitList.X509KeyUsageCSharpStyle.DataEncipherment)]
+            ReadNamedBitList.X509KeyUsageCSharpStyle.DigitalSignature
+                | ReadNamedBitList.X509KeyUsageCSharpStyle.KeyEncipherment
+                | ReadNamedBitList.X509KeyUsageCSharpStyle.DataEncipherment
+        )]
         public static void VerifyWriteNamedBitList(
             AsnEncodingRules ruleSet,
             string expectedHex,
-            Enum value)
+            Enum value
+        )
         {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteNamedBitList(value);
@@ -50,36 +45,31 @@ namespace System.Formats.Asn1.Tests.Writer
         }
 
         [Theory]
-        [InlineData(
-            AsnEncodingRules.BER,
-            "C00100",
-            ReadNamedBitList.ULongFlags.None)]
-        [InlineData(
-            AsnEncodingRules.CER,
-            "410100",
-            ReadNamedBitList.ULongFlags.None)]
-        [InlineData(
-            AsnEncodingRules.DER,
-            "820100",
-            ReadNamedBitList.ULongFlags.None)]
+        [InlineData(AsnEncodingRules.BER, "C00100", ReadNamedBitList.ULongFlags.None)]
+        [InlineData(AsnEncodingRules.CER, "410100", ReadNamedBitList.ULongFlags.None)]
+        [InlineData(AsnEncodingRules.DER, "820100", ReadNamedBitList.ULongFlags.None)]
         [InlineData(
             AsnEncodingRules.BER,
             "C009000000000000000003",
-            ReadNamedBitList.ULongFlags.Max | ReadNamedBitList.ULongFlags.AlmostMax)]
+            ReadNamedBitList.ULongFlags.Max | ReadNamedBitList.ULongFlags.AlmostMax
+        )]
         [InlineData(
             AsnEncodingRules.CER,
             "4109010000000080000002",
-            ReadNamedBitList.LongFlags.Max | ReadNamedBitList.LongFlags.Mid)]
+            ReadNamedBitList.LongFlags.Max | ReadNamedBitList.LongFlags.Mid
+        )]
         [InlineData(
             AsnEncodingRules.DER,
             "820204B0",
-            ReadNamedBitList.X509KeyUsageCSharpStyle.DigitalSignature |
-                ReadNamedBitList.X509KeyUsageCSharpStyle.KeyEncipherment |
-                ReadNamedBitList.X509KeyUsageCSharpStyle.DataEncipherment)]
+            ReadNamedBitList.X509KeyUsageCSharpStyle.DigitalSignature
+                | ReadNamedBitList.X509KeyUsageCSharpStyle.KeyEncipherment
+                | ReadNamedBitList.X509KeyUsageCSharpStyle.DataEncipherment
+        )]
         public static void VerifyWriteNamedBitList_WithTag(
             AsnEncodingRules ruleSet,
             string expectedHex,
-            Enum value)
+            Enum value
+        )
         {
             int ruleSetVal = (int)ruleSet;
             TagClass tagClass = (TagClass)(byte)(ruleSetVal << 6);
@@ -105,9 +95,9 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter genWriter = new AsnWriter(ruleSet);
 
             var flagsValue =
-                ReadNamedBitList.X509KeyUsageCSharpStyle.DigitalSignature |
-                ReadNamedBitList.X509KeyUsageCSharpStyle.KeyEncipherment |
-                ReadNamedBitList.X509KeyUsageCSharpStyle.DataEncipherment;
+                ReadNamedBitList.X509KeyUsageCSharpStyle.DigitalSignature
+                | ReadNamedBitList.X509KeyUsageCSharpStyle.KeyEncipherment
+                | ReadNamedBitList.X509KeyUsageCSharpStyle.DataEncipherment;
 
             genWriter.WriteNamedBitList(flagsValue);
             objWriter.WriteNamedBitList((Enum)flagsValue);
@@ -126,9 +116,9 @@ namespace System.Formats.Asn1.Tests.Writer
             Asn1Tag tag = new Asn1Tag(TagClass.ContextSpecific, 52);
 
             var flagsValue =
-                ReadNamedBitList.X509KeyUsageCSharpStyle.DigitalSignature |
-                ReadNamedBitList.X509KeyUsageCSharpStyle.KeyEncipherment |
-                ReadNamedBitList.X509KeyUsageCSharpStyle.DataEncipherment;
+                ReadNamedBitList.X509KeyUsageCSharpStyle.DigitalSignature
+                | ReadNamedBitList.X509KeyUsageCSharpStyle.KeyEncipherment
+                | ReadNamedBitList.X509KeyUsageCSharpStyle.DataEncipherment;
 
             genWriter.WriteNamedBitList(flagsValue, tag);
             objWriter.WriteNamedBitList((Enum)flagsValue, tag);
@@ -146,19 +136,23 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "value",
-                () => writer.WriteNamedBitList((Enum)null));
+                () => writer.WriteNamedBitList((Enum)null)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "value",
-                () => writer.WriteNamedBitList((Enum)null, new Asn1Tag(TagClass.ContextSpecific, 1)));
+                () => writer.WriteNamedBitList((Enum)null, new Asn1Tag(TagClass.ContextSpecific, 1))
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "value",
-                () => writer.WriteNamedBitList((BitArray)null));
+                () => writer.WriteNamedBitList((BitArray)null)
+            );
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "value",
-                () => writer.WriteNamedBitList((BitArray)null, new Asn1Tag(TagClass.Private, 2)));
+                () => writer.WriteNamedBitList((BitArray)null, new Asn1Tag(TagClass.Private, 2))
+            );
         }
 
         [Theory]
@@ -171,23 +165,31 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentException>(
                 "tEnum",
-                () => writer.WriteNamedBitList(AsnEncodingRules.BER));
+                () => writer.WriteNamedBitList(AsnEncodingRules.BER)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "tEnum",
-                () => writer.WriteNamedBitList(
-                    AsnEncodingRules.BER,
-                    new Asn1Tag(TagClass.ContextSpecific, 1)));
+                () =>
+                    writer.WriteNamedBitList(
+                        AsnEncodingRules.BER,
+                        new Asn1Tag(TagClass.ContextSpecific, 1)
+                    )
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "tEnum",
-                () => writer.WriteNamedBitList((Enum)AsnEncodingRules.BER));
+                () => writer.WriteNamedBitList((Enum)AsnEncodingRules.BER)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "tEnum",
-                () => writer.WriteNamedBitList(
-                    (Enum)AsnEncodingRules.BER,
-                    new Asn1Tag(TagClass.ContextSpecific, 1)));
+                () =>
+                    writer.WriteNamedBitList(
+                        (Enum)AsnEncodingRules.BER,
+                        new Asn1Tag(TagClass.ContextSpecific, 1)
+                    )
+            );
         }
 
         [Theory]
@@ -200,15 +202,17 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteNamedBitList(
-                    StringSplitOptions.RemoveEmptyEntries,
-                    Asn1Tag.Null));
+                () => writer.WriteNamedBitList(StringSplitOptions.RemoveEmptyEntries, Asn1Tag.Null)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteNamedBitList(
-                    (Enum)StringSplitOptions.RemoveEmptyEntries,
-                    Asn1Tag.Null));
+                () =>
+                    writer.WriteNamedBitList(
+                        (Enum)StringSplitOptions.RemoveEmptyEntries,
+                        Asn1Tag.Null
+                    )
+            );
         }
 
         [Theory]
@@ -260,25 +264,35 @@ namespace System.Formats.Asn1.Tests.Writer
 
             const string ExpectedHex =
                 // Tag
-                "DF836B" +
+                "DF836B"
+                +
                 // Length
-                "820101" +
+                "820101"
+                +
                 // Unused bit count
-                "00" +
+                "00"
+                +
                 // Reversed bits for byte patterns 0x00-0x1F
-                "008040C020A060E0109050D030B070F0088848C828A868E8189858D838B878F8" +
+                "008040C020A060E0109050D030B070F0088848C828A868E8189858D838B878F8"
+                +
                 // Reversed bits for byte patterns 0x20-0x3F
-                "048444C424A464E4149454D434B474F40C8C4CCC2CAC6CEC1C9C5CDC3CBC7CFC" +
+                "048444C424A464E4149454D434B474F40C8C4CCC2CAC6CEC1C9C5CDC3CBC7CFC"
+                +
                 // Reversed bits for byte patterns 0x40-0x5F
-                "028242C222A262E2129252D232B272F20A8A4ACA2AAA6AEA1A9A5ADA3ABA7AFA" +
+                "028242C222A262E2129252D232B272F20A8A4ACA2AAA6AEA1A9A5ADA3ABA7AFA"
+                +
                 // Reversed bits for byte patterns 0x60-0x7F
-                "068646C626A666E6169656D636B676F60E8E4ECE2EAE6EEE1E9E5EDE3EBE7EFE" +
+                "068646C626A666E6169656D636B676F60E8E4ECE2EAE6EEE1E9E5EDE3EBE7EFE"
+                +
                 // Reversed bits for byte patterns 0x80-0x9F
-                "018141C121A161E1119151D131B171F1098949C929A969E9199959D939B979F9" +
+                "018141C121A161E1119151D131B171F1098949C929A969E9199959D939B979F9"
+                +
                 // Reversed bits for byte patterns 0xA0-0xBF
-                "058545C525A565E5159555D535B575F50D8D4DCD2DAD6DED1D9D5DDD3DBD7DFD" +
+                "058545C525A565E5159555D535B575F50D8D4DCD2DAD6DED1D9D5DDD3DBD7DFD"
+                +
                 // Reversed bits for byte patterns 0xC0-0xDF
-                "038343C323A363E3139353D333B373F30B8B4BCB2BAB6BEB1B9B5BDB3BBB7BFB" +
+                "038343C323A363E3139353D333B373F30B8B4BCB2BAB6BEB1B9B5BDB3BBB7BFB"
+                +
                 // Reversed bits for byte patterns 0xE0-0xFF
                 "078747C727A767E7179757D737B777F70F8F4FCF2FAF6FEF1F9F5FDF3FBF7FFF";
 
@@ -348,7 +362,8 @@ namespace System.Formats.Asn1.Tests.Writer
 
             X509KeyUsageExtension kuExt = new X509KeyUsageExtension(
                 X509KeyUsageFlags.KeyCertSign | X509KeyUsageFlags.CrlSign,
-                critical: false);
+                critical: false
+            );
 
             BitArray array = new BitArray(7);
             array.Set(6, true);
@@ -369,7 +384,8 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             X509KeyUsageExtension kuExt = new X509KeyUsageExtension(
                 X509KeyUsageFlags.KeyAgreement | X509KeyUsageFlags.DecipherOnly,
-                critical: false);
+                critical: false
+            );
 
             BitArray array = new BitArray(9);
             array.Set(4, true);

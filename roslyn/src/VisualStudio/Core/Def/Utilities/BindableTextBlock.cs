@@ -22,10 +22,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Utilities
             set { SetValue(InlineListProperty, value); }
         }
 
-        public static readonly DependencyProperty InlineListProperty =
-            DependencyProperty.Register(nameof(InlineCollection), typeof(IList<Inline>), typeof(BindableTextBlock), new UIPropertyMetadata(null, OnPropertyChanged));
+        public static readonly DependencyProperty InlineListProperty = DependencyProperty.Register(
+            nameof(InlineCollection),
+            typeof(IList<Inline>),
+            typeof(BindableTextBlock),
+            new UIPropertyMetadata(null, OnPropertyChanged)
+        );
 
-        private static void OnPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void OnPropertyChanged(
+            DependencyObject sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             var textBlock = (BindableTextBlock)sender;
             var newList = (IList<Inline>)e.NewValue;

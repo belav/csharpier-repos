@@ -10,7 +10,9 @@ namespace System.Reflection.Emit.Tests
         [Fact]
         public void GetValue_ThrowsNotSupportedException()
         {
-            FieldBuilder field = Helpers.DynamicType(TypeAttributes.Abstract).DefineField("TestField", typeof(int), FieldAttributes.Public);
+            FieldBuilder field = Helpers
+                .DynamicType(TypeAttributes.Abstract)
+                .DefineField("TestField", typeof(int), FieldAttributes.Public);
             Assert.Throws<NotSupportedException>(() => field.GetValue(null));
         }
     }

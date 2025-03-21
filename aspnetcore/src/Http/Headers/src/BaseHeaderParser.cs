@@ -8,13 +8,19 @@ namespace Microsoft.Net.Http.Headers;
 internal abstract class BaseHeaderParser<T> : HttpHeaderParser<T>
 {
     protected BaseHeaderParser(bool supportsMultipleValues)
-        : base(supportsMultipleValues)
-    {
-    }
+        : base(supportsMultipleValues) { }
 
-    protected abstract int GetParsedValueLength(StringSegment value, int startIndex, out T? parsedValue);
+    protected abstract int GetParsedValueLength(
+        StringSegment value,
+        int startIndex,
+        out T? parsedValue
+    );
 
-    public sealed override bool TryParseValue(StringSegment value, ref int index, out T? parsedValue)
+    public sealed override bool TryParseValue(
+        StringSegment value,
+        ref int index,
+        out T? parsedValue
+    )
     {
         parsedValue = default;
 
@@ -28,8 +34,12 @@ internal abstract class BaseHeaderParser<T> : HttpHeaderParser<T>
             return SupportsMultipleValues;
         }
 
-        var current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(value, index, SupportsMultipleValues,
-            out var separatorFound);
+        var current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+            value,
+            index,
+            SupportsMultipleValues,
+            out var separatorFound
+        );
 
         if (separatorFound && !SupportsMultipleValues)
         {
@@ -53,11 +63,18 @@ internal abstract class BaseHeaderParser<T> : HttpHeaderParser<T>
         }
 
         current = current + length;
-        current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(value, current, SupportsMultipleValues,
-            out separatorFound);
+        current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(
+            value,
+            current,
+            SupportsMultipleValues,
+            out separatorFound
+        );
 
         // If we support multiple values and we've not reached the end of the string, then we must have a separator.
-        if ((separatorFound && !SupportsMultipleValues) || (!separatorFound && (current < value.Length)))
+        if (
+            (separatorFound && !SupportsMultipleValues)
+            || (!separatorFound && (current < value.Length))
+        )
         {
             return false;
         }

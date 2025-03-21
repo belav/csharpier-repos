@@ -18,24 +18,36 @@ namespace Microsoft.CodeAnalysis.Host
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TextFactoryService()
-        {
-        }
+        public TextFactoryService() { }
 
-        public SourceText CreateText(Stream stream, Encoding? defaultEncoding, SourceHashAlgorithm checksumAlgorithm, CancellationToken cancellationToken)
+        public SourceText CreateText(
+            Stream stream,
+            Encoding? defaultEncoding,
+            SourceHashAlgorithm checksumAlgorithm,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
             return EncodedStringText.Create(stream, defaultEncoding, checksumAlgorithm);
         }
 
-        public SourceText CreateText(TextReader reader, Encoding? encoding, SourceHashAlgorithm checksumAlgorithm, CancellationToken cancellationToken)
+        public SourceText CreateText(
+            TextReader reader,
+            Encoding? encoding,
+            SourceHashAlgorithm checksumAlgorithm,
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
             return (reader is TextReaderWithLength textReaderWithLength)
-                ? SourceText.From(textReaderWithLength, textReaderWithLength.Length, encoding, checksumAlgorithm)
+                ? SourceText.From(
+                    textReaderWithLength,
+                    textReaderWithLength.Length,
+                    encoding,
+                    checksumAlgorithm
+                )
                 : SourceText.From(reader.ReadToEnd(), encoding, checksumAlgorithm);
         }
     }
 }
-

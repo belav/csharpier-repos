@@ -17,7 +17,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<IConventionPropertyBuilder>
+public interface IConventionPropertyBuilder
+    : IConventionPropertyBaseBuilder<IConventionPropertyBuilder>
 {
     /// <summary>
     ///     Gets the property being configured.
@@ -68,7 +69,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     ///     The same builder instance if the requiredness was configured,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? ValueGenerated(ValueGenerated? valueGenerated, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? ValueGenerated(
+        ValueGenerated? valueGenerated,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the property value generation can be configured
@@ -95,7 +99,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? IsConcurrencyToken(bool? concurrencyToken, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? IsConcurrencyToken(
+        bool? concurrencyToken,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the property can be configured as a concurrency token
@@ -218,7 +225,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? BeforeSave(PropertySaveBehavior? behavior, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? BeforeSave(
+        PropertySaveBehavior? behavior,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the ability to be modified before the entity is saved to the database
@@ -246,7 +256,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? AfterSave(PropertySaveBehavior? behavior, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? AfterSave(
+        PropertySaveBehavior? behavior,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the ability to be modified after the entity is saved to the database
@@ -273,8 +286,9 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// </returns>
     IConventionPropertyBuilder? HasValueGenerator(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? valueGeneratorType,
-        bool fromDataAnnotation = false);
+            Type? valueGeneratorType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the <see cref="ValueGenerator" /> that will generate values for this property.
@@ -287,7 +301,8 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// </returns>
     IConventionPropertyBuilder? HasValueGenerator(
         Func<IProperty, ITypeBase, ValueGenerator>? factory,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" /> that will
@@ -301,8 +316,9 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// </returns>
     IConventionPropertyBuilder? HasValueGeneratorFactory(
         [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
-        Type? valueGeneratorFactoryType,
-        bool fromDataAnnotation = false);
+            Type? valueGeneratorFactoryType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="ValueGenerator" /> can be configured for this property
@@ -319,7 +335,8 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// </returns>
     bool CanSetValueGenerator(
         Func<IProperty, ITypeBase, ValueGenerator>? factory,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="ValueGeneratorFactory" /> can be configured for this property
@@ -336,8 +353,9 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// </returns>
     bool CanSetValueGeneratorFactory(
         [DynamicallyAccessedMembers(ValueGeneratorFactory.DynamicallyAccessedMemberTypes)]
-        Type? valueGeneratorFactoryType,
-        bool fromDataAnnotation = false);
+            Type? valueGeneratorFactoryType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the property so that the property value is converted to and from the database
@@ -349,7 +367,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasConversion(ValueConverter? converter, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasConversion(
+        ValueConverter? converter,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="ValueConverter" /> can be configured for this property
@@ -372,7 +393,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasConversion(Type? providerClrType, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasConversion(
+        Type? providerClrType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given type to convert values to and from
@@ -400,8 +424,9 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// </returns>
     IConventionPropertyBuilder? HasConverter(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? converterType,
-        bool fromDataAnnotation = false);
+            Type? converterType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="ValueConverter" /> can be configured for this property
@@ -417,8 +442,9 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// </returns>
     bool CanSetConverter(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? converterType,
-        bool fromDataAnnotation = false);
+            Type? converterType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the <see cref="CoreTypeMapping" /> for this property.
@@ -429,7 +455,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasTypeMapping(CoreTypeMapping? typeMapping, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasTypeMapping(
+        CoreTypeMapping? typeMapping,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="CoreTypeMapping" />
@@ -450,7 +479,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// <returns>
     ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasValueComparer(ValueComparer? comparer, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasValueComparer(
+        ValueComparer? comparer,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -476,8 +508,9 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// </returns>
     IConventionPropertyBuilder? HasValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType,
-        bool fromDataAnnotation = false);
+            Type? comparerType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -493,8 +526,9 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// </returns>
     bool CanSetValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType,
-        bool fromDataAnnotation = false);
+            Type? comparerType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the <see cref="ValueComparer" /> to use for the provider values for this property.
@@ -504,7 +538,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// <returns>
     ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasProviderValueComparer(ValueComparer? comparer, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasProviderValueComparer(
+        ValueComparer? comparer,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -530,8 +567,9 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// </returns>
     IConventionPropertyBuilder? HasProviderValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType,
-        bool fromDataAnnotation = false);
+            Type? comparerType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -547,8 +585,9 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     /// </returns>
     bool CanSetProviderValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType,
-        bool fromDataAnnotation = false);
+            Type? comparerType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -557,7 +596,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder<ICo
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    IConventionElementTypeBuilder? SetElementType(Type? elementType, bool fromDataAnnotation = false);
+    IConventionElementTypeBuilder? SetElementType(
+        Type? elementType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

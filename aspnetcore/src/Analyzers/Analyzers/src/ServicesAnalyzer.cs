@@ -21,22 +21,32 @@ internal sealed class ServicesAnalyzer
     {
         var configureServicesMethod = (IMethodSymbol)context.OwningSymbol;
         var services = ImmutableArray.CreateBuilder<ServicesItem>();
-        context.RegisterOperationAction(context =>
-        {
-            // We're looking for usage of extension methods, so we need to look at the 'this' parameter
-            // rather than invocation.Instance.
-            if (context.Operation is IInvocationOperation invocation &&
-            invocation.Instance == null &&
-            invocation.Arguments.Length >= 1 &&
-            SymbolEqualityComparer.Default.Equals(invocation.Arguments[0].Parameter?.Type, _context.StartupSymbols.IServiceCollection))
+        context.RegisterOperationAction(
+            context =>
             {
-                services.Add(new ServicesItem(invocation));
-            }
-        }, OperationKind.Invocation);
+                // We're looking for usage of extension methods, so we need to look at the 'this' parameter
+                // rather than invocation.Instance.
+                if (
+                    context.Operation is IInvocationOperation invocation
+                    && invocation.Instance == null
+                    && invocation.Arguments.Length >= 1
+                    && SymbolEqualityComparer.Default.Equals(
+                        invocation.Arguments[0].Parameter?.Type,
+                        _context.StartupSymbols.IServiceCollection
+                    )
+                )
+                {
+                    services.Add(new ServicesItem(invocation));
+                }
+            },
+            OperationKind.Invocation
+        );
 
         context.RegisterOperationBlockEndAction(context =>
         {
-            _context.ReportAnalysis(new ServicesAnalysis(configureServicesMethod, services.ToImmutable()));
+            _context.ReportAnalysis(
+                new ServicesAnalysis(configureServicesMethod, services.ToImmutable())
+            );
         });
     }
 }

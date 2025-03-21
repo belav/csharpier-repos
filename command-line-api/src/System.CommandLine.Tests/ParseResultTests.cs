@@ -2,8 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.CommandLine.Invocation;
-using System.Linq;
 using System.CommandLine.Parsing;
+using System.Linq;
 using FluentAssertions;
 using Xunit;
 
@@ -16,11 +16,9 @@ namespace System.CommandLine.Tests
         {
             var option = new CliOption<string>("-x") { DefaultValueFactory = (_) => "default" };
 
-            var result = new CliRootCommand
-            {
-                option
-            }.Parse("-x")
-             .GetResult(option);
+            var result = new CliRootCommand { option }
+                .Parse("-x")
+                .GetResult(option);
 
             result.Tokens.Should().BeEmpty();
         }
@@ -30,10 +28,7 @@ namespace System.CommandLine.Tests
         {
             var option = new CliOption<bool>("-h", "--help");
 
-            var command = new CliCommand("the-command")
-            {
-                option
-            };
+            var command = new CliCommand("the-command") { option };
 
             var result = command.Parse("the-command -h");
 
@@ -44,10 +39,7 @@ namespace System.CommandLine.Tests
         public void GetResult_can_be_used_to_check_the_presence_of_an_implicit_option()
         {
             var option = new CliOption<int>("-c", "--count") { DefaultValueFactory = (_) => 5 };
-            var command = new CliCommand("the-command")
-            {
-                option
-            };
+            var command = new CliCommand("the-command") { option };
 
             var result = command.Parse("the-command");
 
@@ -59,10 +51,7 @@ namespace System.CommandLine.Tests
         {
             CliRootCommand rootCommand = new()
             {
-                new CliCommand("the-command")
-                {
-                    new CliOption<int>("-c")
-                }
+                new CliCommand("the-command") { new CliOption<int>("-c") },
             };
 
             var result = rootCommand.Parse("the-command -c 123");
@@ -78,18 +67,12 @@ namespace System.CommandLine.Tests
             {
                 new CliCommand("inner-one")
                 {
-                    new CliArgument<bool>("arg1")
-                    {
-                        Arity = ArgumentArity.Zero
-                    }
+                    new CliArgument<bool>("arg1") { Arity = ArgumentArity.Zero },
                 },
                 new CliCommand("inner-two")
                 {
-                    new CliArgument<bool>("arg2")
-                    {
-                        Arity = ArgumentArity.Zero
-                    }
-                }
+                    new CliArgument<bool>("arg2") { Arity = ArgumentArity.Zero },
+                },
             };
 
             var result = CliParser.Parse(command, "outer inner-one inner-two");
@@ -109,26 +92,28 @@ namespace System.CommandLine.Tests
             var leafCommand = new CliCommand("leafCommand")
             {
                 new CliOption<string>("--one") { Description = "option one" },
-                new CliOption<string>("--two") { Description = "option two" }
+                new CliOption<string>("--two") { Description = "option two" },
             };
 
-            var midCommand1 = new CliCommand("midCommand1")
-            {
-                leafCommand
-            };
-            midCommand1.Options.Add(new CliOption<string>("--three1") { Description = "option three 1", Recursive = true });
+            var midCommand1 = new CliCommand("midCommand1") { leafCommand };
+            midCommand1.Options.Add(
+                new CliOption<string>("--three1")
+                {
+                    Description = "option three 1",
+                    Recursive = true,
+                }
+            );
 
-            var midCommand2 = new CliCommand("midCommand2")
-            {
-                leafCommand
-            };
-            midCommand2.Options.Add(new CliOption<string>("--three2") { Description = "option three 2", Recursive = true });
+            var midCommand2 = new CliCommand("midCommand2") { leafCommand };
+            midCommand2.Options.Add(
+                new CliOption<string>("--three2")
+                {
+                    Description = "option three 2",
+                    Recursive = true,
+                }
+            );
 
-            var rootCommand = new CliCommand("root")
-            {
-                midCommand1,
-                midCommand2
-            };
+            var rootCommand = new CliCommand("root") { midCommand1, midCommand2 };
 
             var result = CliParser.Parse(rootCommand, "root midCommand2 leafCommand --");
 
@@ -141,8 +126,8 @@ namespace System.CommandLine.Tests
         }
 
         [Fact]
-        public void Handler_is_null_when_parsed_command_did_not_specify_handler()
-            => new CliRootCommand().Parse("").Action.Should().BeNull();
+        public void Handler_is_null_when_parsed_command_did_not_specify_handler() =>
+            new CliRootCommand().Parse("").Action.Should().BeNull();
 
         [Fact]
         public void Handler_is_not_null_when_parsed_command_specified_handler()

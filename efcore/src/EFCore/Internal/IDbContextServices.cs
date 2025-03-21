@@ -26,7 +26,8 @@ public interface IDbContextServices
     IDbContextServices Initialize(
         IServiceProvider scopedProvider,
         DbContextOptions contextOptions,
-        DbContext context);
+        DbContext context
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

@@ -8,7 +8,11 @@ using Microsoft.AspNetCore.Http.Metadata;
 
 namespace Microsoft.AspNetCore.Routing.Matching;
 
-internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPolicy, INodeBuilderPolicy, IEndpointSelectorPolicy
+internal sealed class AcceptsMatcherPolicy
+    : MatcherPolicy,
+        IEndpointComparerPolicy,
+        INodeBuilderPolicy,
+        IEndpointSelectorPolicy
 {
     private static Endpoint? Http415Endpoint;
     internal const string Http415EndpointDisplayName = "415 HTTP Unsupported Media Type";
@@ -41,7 +45,9 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
 
     private static bool AppliesToEndpointsCore(IReadOnlyList<Endpoint> endpoints)
     {
-        return endpoints.Any(e => e.Metadata.GetMetadata<IAcceptsMetadata>()?.ContentTypes.Count > 0);
+        return endpoints.Any(e =>
+            e.Metadata.GetMetadata<IAcceptsMetadata>()?.ContentTypes.Count > 0
+        );
     }
 
     public Task ApplyAsync(HttpContext httpContext, CandidateSet candidates)
@@ -78,7 +84,9 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
                 {
                     for (var j = 0; j < metadata.ContentTypes?.Count; j++)
                     {
-                        if (string.Equals("*/*", metadata.ContentTypes[j], StringComparison.Ordinal))
+                        if (
+                            string.Equals("*/*", metadata.ContentTypes[j], StringComparison.Ordinal)
+                        )
                         {
                             needs415Endpoint = false;
                             break;
@@ -90,7 +98,9 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
             }
 
             var contentType = httpContext.Request.ContentType;
-            var mediaType = string.IsNullOrEmpty(contentType) ? (ReadOnlyMediaTypeHeaderValue?)null : new(contentType);
+            var mediaType = string.IsNullOrEmpty(contentType)
+                ? (ReadOnlyMediaTypeHeaderValue?)null
+                : new(contentType);
 
             var matched = false;
             for (var j = 0; j < metadata.ContentTypes?.Count; j++)
@@ -107,7 +117,6 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
                 {
                     continue;
                 }
-
                 // We have a ContentType but it's not a match.
                 else if (mediaType != null && !mediaType.Value.IsSubsetOf(candidateMediaType))
                 {
@@ -154,7 +163,7 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
             var contentTypes = endpoint.Metadata.GetMetadata<IAcceptsMetadata>()?.ContentTypes;
             if (contentTypes == null || contentTypes.Count == 0)
             {
-                contentTypes = new string[] { AnyContentType, };
+                contentTypes = new string[] { AnyContentType };
             }
 
             for (var j = 0; j < contentTypes.Count; j++)
@@ -173,7 +182,9 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
         for (var i = 0; i < endpoints.Count; i++)
         {
             var endpoint = endpoints[i];
-            var contentTypes = endpoint.Metadata.GetMetadata<IAcceptsMetadata>()?.ContentTypes ?? Array.Empty<string>();
+            var contentTypes =
+                endpoint.Metadata.GetMetadata<IAcceptsMetadata>()?.ContentTypes
+                ?? Array.Empty<string>();
             if (contentTypes.Count == 0)
             {
                 // OK this means that this endpoint matches *all* content methods.
@@ -221,10 +232,7 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
         // endpoint that always returns a 415.
         if (!edges.TryGetValue(AnyContentType, out var anyEndpoints))
         {
-            edges.Add(AnyContentType, new List<Endpoint>()
-                {
-                    CreateRejectionEndpoint(),
-                });
+            edges.Add(AnyContentType, new List<Endpoint>() { CreateRejectionEndpoint() });
 
             // Add a node to use when there is no request content type.
             // When there is no content type we want the policy to no-op
@@ -248,16 +256,21 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
 
     private static Endpoint CreateRejectionEndpoint()
     {
-        return Http415Endpoint ??= new Endpoint(context =>
+        return Http415Endpoint ??= new Endpoint(
+            context =>
             {
                 context.Response.StatusCode = StatusCodes.Status415UnsupportedMediaType;
                 return Task.CompletedTask;
             },
             EndpointMetadataCollection.Empty,
-            Http415EndpointDisplayName);
+            Http415EndpointDisplayName
+        );
     }
 
-    public PolicyJumpTable BuildJumpTable(int exitDestination, IReadOnlyList<PolicyJumpTableEdge> edges)
+    public PolicyJumpTable BuildJumpTable(
+        int exitDestination,
+        IReadOnlyList<PolicyJumpTableEdge> edges
+    )
     {
         ArgumentNullException.ThrowIfNull(edges);
 
@@ -269,7 +282,10 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
             var e = edges[i];
             ordered[i] = (mediaType: CreateEdgeMediaType(ref e), destination: e.Destination);
         }
-        Array.Sort(ordered, static (left, right) => GetScore(left.mediaType).CompareTo(GetScore(right.mediaType)));
+        Array.Sort(
+            ordered,
+            static (left, right) => GetScore(left.mediaType).CompareTo(GetScore(right.mediaType))
+        );
 
         // If any edge matches all content types, then treat that as the 'exit'. This will
         // always happen because we insert a 415 endpoint.
@@ -287,7 +303,9 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
         return new ConsumesPolicyJumpTable(exitDestination, noContentTypeDestination, ordered);
     }
 
-    private static int GetNoContentTypeDestination((ReadOnlyMediaTypeHeaderValue mediaType, int destination)[] destinations)
+    private static int GetNoContentTypeDestination(
+        (ReadOnlyMediaTypeHeaderValue mediaType, int destination)[] destinations
+    )
     {
         for (var i = 0; i < destinations.Length; i++)
         {
@@ -305,7 +323,9 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
     private static ReadOnlyMediaTypeHeaderValue CreateEdgeMediaType(ref PolicyJumpTableEdge e)
     {
         var mediaType = (string)e.State;
-        return !string.IsNullOrEmpty(mediaType) ? new ReadOnlyMediaTypeHeaderValue(mediaType) : default;
+        return !string.IsNullOrEmpty(mediaType)
+            ? new ReadOnlyMediaTypeHeaderValue(mediaType)
+            : default;
     }
 
     private static int GetScore(ReadOnlyMediaTypeHeaderValue mediaType)
@@ -329,14 +349,16 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
         }
     }
 
-    private sealed class ConsumesMetadataEndpointComparer : EndpointMetadataComparer<IAcceptsMetadata>
+    private sealed class ConsumesMetadataEndpointComparer
+        : EndpointMetadataComparer<IAcceptsMetadata>
     {
         protected override int CompareMetadata(IAcceptsMetadata? x, IAcceptsMetadata? y)
         {
             // Ignore the metadata if it has an empty list of content types.
             return base.CompareMetadata(
                 x?.ContentTypes.Count > 0 ? x : null,
-                y?.ContentTypes.Count > 0 ? y : null);
+                y?.ContentTypes.Count > 0 ? y : null
+            );
         }
     }
 
@@ -346,7 +368,11 @@ internal sealed class AcceptsMatcherPolicy : MatcherPolicy, IEndpointComparerPol
         private readonly int _exitDestination;
         private readonly int _noContentTypeDestination;
 
-        public ConsumesPolicyJumpTable(int exitDestination, int noContentTypeDestination, (ReadOnlyMediaTypeHeaderValue mediaType, int destination)[] destinations)
+        public ConsumesPolicyJumpTable(
+            int exitDestination,
+            int noContentTypeDestination,
+            (ReadOnlyMediaTypeHeaderValue mediaType, int destination)[] destinations
+        )
         {
             _exitDestination = exitDestination;
             _noContentTypeDestination = noContentTypeDestination;

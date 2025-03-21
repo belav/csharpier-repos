@@ -5,7 +5,8 @@ namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
 internal class FormDataMappingException : Exception
 {
-    public FormDataMappingException(FormDataMappingError error) : this(error, null) { }
+    public FormDataMappingException(FormDataMappingError error)
+        : this(error, null) { }
 
     public FormDataMappingException(FormDataMappingError error, Exception? innerException)
         : base(FormDataResources.MappingExceptionMessage, innerException)

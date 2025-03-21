@@ -24,15 +24,24 @@
 #endregion
 
 using System;
-using Newtonsoft.Json.Utilities;
 using System.Globalization;
+using Newtonsoft.Json.Utilities;
 
 namespace Newtonsoft.Json
 {
     /// <summary>
     /// Instructs the <see cref="JsonSerializer"/> to use the specified <see cref="JsonConverter"/> when serializing the member or class.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Field | AttributeTargets.Property | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Interface | AttributeTargets.Enum | AttributeTargets.Parameter, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Field
+            | AttributeTargets.Property
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Interface
+            | AttributeTargets.Enum
+            | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     public sealed class JsonConverterAttribute : Attribute
     {
         private readonly Type _converterType;

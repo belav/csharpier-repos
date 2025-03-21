@@ -16,19 +16,26 @@ using Microsoft.VisualStudio.LanguageServices.Implementation.Venus;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 {
-    [ExportWorkspaceService(typeof(IWorkspaceVenusSpanMappingService), ServiceLayer.Default), Shared]
+    [
+        ExportWorkspaceService(typeof(IWorkspaceVenusSpanMappingService), ServiceLayer.Default),
+        Shared
+    ]
     internal partial class VisualStudioVenusSpanMappingService : IWorkspaceVenusSpanMappingService
     {
         private readonly VisualStudioWorkspaceImpl _workspace;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioVenusSpanMappingService(VisualStudioWorkspaceImpl workspace)
-            => _workspace = workspace;
+        public VisualStudioVenusSpanMappingService(VisualStudioWorkspaceImpl workspace) =>
+            _workspace = workspace;
 
         public void GetAdjustedDiagnosticSpan(
-            DocumentId documentId, Location location,
-            out TextSpan sourceSpan, out FileLinePositionSpan originalLineInfo, out FileLinePositionSpan mappedLineInfo)
+            DocumentId documentId,
+            Location location,
+            out TextSpan sourceSpan,
+            out FileLinePositionSpan originalLineInfo,
+            out FileLinePositionSpan mappedLineInfo
+        )
         {
             sourceSpan = location.SourceSpan;
             originalLineInfo = location.GetLineSpan();
@@ -41,14 +48,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             }
 
             // Update the original source span, if required.
-            if (!TryAdjustSpanIfNeededForVenus(documentId, originalLineInfo, mappedLineInfo, out var originalSpan, out var mappedSpan))
+            if (
+                !TryAdjustSpanIfNeededForVenus(
+                    documentId,
+                    originalLineInfo,
+                    mappedLineInfo,
+                    out var originalSpan,
+                    out var mappedSpan
+                )
+            )
             {
                 return;
             }
 
-            if (originalSpan.Start != originalLineInfo.StartLinePosition || originalSpan.End != originalLineInfo.EndLinePosition)
+            if (
+                originalSpan.Start != originalLineInfo.StartLinePosition
+                || originalSpan.End != originalLineInfo.EndLinePosition
+            )
             {
-                originalLineInfo = new FileLinePositionSpan(originalLineInfo.Path, originalSpan.Start, originalSpan.End);
+                originalLineInfo = new FileLinePositionSpan(
+                    originalLineInfo.Path,
+                    originalSpan.Start,
+                    originalSpan.End
+                );
 
                 var textLines = GetTextLines(documentId, location);
                 if (textLines != null)
@@ -61,9 +83,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 }
             }
 
-            if (mappedSpan.Start != mappedLineInfo.StartLinePosition || mappedSpan.End != mappedLineInfo.EndLinePosition)
+            if (
+                mappedSpan.Start != mappedLineInfo.StartLinePosition
+                || mappedSpan.End != mappedLineInfo.EndLinePosition
+            )
             {
-                mappedLineInfo = new FileLinePositionSpan(mappedLineInfo.Path, mappedSpan.Start, mappedSpan.End);
+                mappedLineInfo = new FileLinePositionSpan(
+                    mappedLineInfo.Path,
+                    mappedSpan.Start,
+                    mappedSpan.End
+                );
             }
         }
 
@@ -89,7 +118,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 if (documentIds.Contains(currentDocumentId))
                 {
                     // text most likely already read in
-                    return solution.GetDocument(currentDocumentId).State.GetTextSynchronously(CancellationToken.None).Lines;
+                    return solution
+                        .GetDocument(currentDocumentId)
+                        .State.GetTextSynchronously(CancellationToken.None)
+                        .Lines;
                 }
             }
 
@@ -98,31 +130,69 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
         }
 
         private static bool TryAdjustSpanIfNeededForVenus(
-            DocumentId documentId, FileLinePositionSpan originalLineInfo, FileLinePositionSpan mappedLineInfo, out LinePositionSpan originalSpan, out LinePositionSpan mappedSpan)
+            DocumentId documentId,
+            FileLinePositionSpan originalLineInfo,
+            FileLinePositionSpan mappedLineInfo,
+            out LinePositionSpan originalSpan,
+            out LinePositionSpan mappedSpan
+        )
         {
             var startChanged = true;
-            if (!TryAdjustSpanIfNeededForVenus(documentId, originalLineInfo.StartLinePosition.Line, originalLineInfo.StartLinePosition.Character, out var startLineColumn))
+            if (
+                !TryAdjustSpanIfNeededForVenus(
+                    documentId,
+                    originalLineInfo.StartLinePosition.Line,
+                    originalLineInfo.StartLinePosition.Character,
+                    out var startLineColumn
+                )
+            )
             {
                 startChanged = false;
-                startLineColumn = new MappedSpan(originalLineInfo.StartLinePosition.Line, originalLineInfo.StartLinePosition.Character, mappedLineInfo.StartLinePosition.Line, mappedLineInfo.StartLinePosition.Character);
+                startLineColumn = new MappedSpan(
+                    originalLineInfo.StartLinePosition.Line,
+                    originalLineInfo.StartLinePosition.Character,
+                    mappedLineInfo.StartLinePosition.Line,
+                    mappedLineInfo.StartLinePosition.Character
+                );
             }
 
             var endChanged = true;
-            if (!TryAdjustSpanIfNeededForVenus(documentId, originalLineInfo.EndLinePosition.Line, originalLineInfo.EndLinePosition.Character, out var endLineColumn))
+            if (
+                !TryAdjustSpanIfNeededForVenus(
+                    documentId,
+                    originalLineInfo.EndLinePosition.Line,
+                    originalLineInfo.EndLinePosition.Character,
+                    out var endLineColumn
+                )
+            )
             {
                 endChanged = false;
-                endLineColumn = new MappedSpan(originalLineInfo.EndLinePosition.Line, originalLineInfo.EndLinePosition.Character, mappedLineInfo.EndLinePosition.Line, mappedLineInfo.EndLinePosition.Character);
+                endLineColumn = new MappedSpan(
+                    originalLineInfo.EndLinePosition.Line,
+                    originalLineInfo.EndLinePosition.Character,
+                    mappedLineInfo.EndLinePosition.Line,
+                    mappedLineInfo.EndLinePosition.Character
+                );
             }
 
             // start and end position can be swapped when mapped between primary and secondary buffer if start position is within visible span (at the edge)
             // but end position is outside of visible span. in that case, swap start and end position.
-            originalSpan = GetLinePositionSpan(startLineColumn.OriginalLinePosition, endLineColumn.OriginalLinePosition);
-            mappedSpan = GetLinePositionSpan(startLineColumn.MappedLinePosition, endLineColumn.MappedLinePosition);
+            originalSpan = GetLinePositionSpan(
+                startLineColumn.OriginalLinePosition,
+                endLineColumn.OriginalLinePosition
+            );
+            mappedSpan = GetLinePositionSpan(
+                startLineColumn.MappedLinePosition,
+                endLineColumn.MappedLinePosition
+            );
 
             return startChanged || endChanged;
         }
 
-        private static LinePositionSpan GetLinePositionSpan(LinePosition position1, LinePosition position2)
+        private static LinePositionSpan GetLinePositionSpan(
+            LinePosition position1,
+            LinePosition position2
+        )
         {
             if (position1 <= position2)
             {
@@ -132,9 +202,22 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             return new LinePositionSpan(position2, position1);
         }
 
-        public static LinePosition GetAdjustedLineColumn(DocumentId documentId, int originalLine, int originalColumn, int mappedLine, int mappedColumn)
+        public static LinePosition GetAdjustedLineColumn(
+            DocumentId documentId,
+            int originalLine,
+            int originalColumn,
+            int mappedLine,
+            int mappedColumn
+        )
         {
-            if (TryAdjustSpanIfNeededForVenus(documentId, originalLine, originalColumn, out var span))
+            if (
+                TryAdjustSpanIfNeededForVenus(
+                    documentId,
+                    originalLine,
+                    originalColumn,
+                    out var span
+                )
+            )
             {
                 return span.MappedLinePosition;
             }
@@ -142,7 +225,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             return new LinePosition(mappedLine, mappedColumn);
         }
 
-        private static bool TryAdjustSpanIfNeededForVenus(DocumentId documentId, int originalLine, int originalColumn, out MappedSpan mappedSpan)
+        private static bool TryAdjustSpanIfNeededForVenus(
+            DocumentId documentId,
+            int originalLine,
+            int originalColumn,
+            out MappedSpan mappedSpan
+        )
         {
             mappedSpan = default;
 
@@ -162,23 +250,40 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 iStartLine = originalLine,
                 iStartIndex = originalColumn,
                 iEndLine = originalLine,
-                iEndIndex = originalColumn
+                iEndIndex = originalColumn,
             };
 
             var bufferCoordinator = containedDocument.BufferCoordinator;
             var containedLanguageHost = containedDocument.ContainedLanguageHost;
 
             var spansOnPrimaryBuffer = new TextManager.Interop.TextSpan[1];
-            if (VSConstants.S_OK == bufferCoordinator.MapSecondaryToPrimarySpan(originalSpanOnSecondaryBuffer, spansOnPrimaryBuffer))
+            if (
+                VSConstants.S_OK
+                == bufferCoordinator.MapSecondaryToPrimarySpan(
+                    originalSpanOnSecondaryBuffer,
+                    spansOnPrimaryBuffer
+                )
+            )
             {
                 // easy case, we can map span in subject buffer to surface buffer. no need to adjust any span
-                mappedSpan = new MappedSpan(originalLine, originalColumn, spansOnPrimaryBuffer[0].iStartLine, spansOnPrimaryBuffer[0].iStartIndex);
+                mappedSpan = new MappedSpan(
+                    originalLine,
+                    originalColumn,
+                    spansOnPrimaryBuffer[0].iStartLine,
+                    spansOnPrimaryBuffer[0].iStartIndex
+                );
                 return true;
             }
 
             // we can't directly map span in subject buffer to surface buffer. see whether there is any visible span we can use from the subject buffer span
-            if (containedLanguageHost != null &&
-                VSConstants.S_OK != containedLanguageHost.GetNearestVisibleToken(originalSpanOnSecondaryBuffer, spansOnPrimaryBuffer))
+            if (
+                containedLanguageHost != null
+                && VSConstants.S_OK
+                    != containedLanguageHost.GetNearestVisibleToken(
+                        originalSpanOnSecondaryBuffer,
+                        spansOnPrimaryBuffer
+                    )
+            )
             {
                 // no visible span we can use.
                 return false;
@@ -191,40 +296,81 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 iStartLine = spansOnPrimaryBuffer[0].iStartLine,
                 iStartIndex = spansOnPrimaryBuffer[0].iStartIndex,
                 iEndLine = spansOnPrimaryBuffer[0].iStartLine,
-                iEndIndex = spansOnPrimaryBuffer[0].iStartIndex
+                iEndIndex = spansOnPrimaryBuffer[0].iStartIndex,
             };
 
             // Map this location back to the secondary span to re-adjust the original location to be in user-code in secondary buffer.
             var spansOnSecondaryBuffer = new TextManager.Interop.TextSpan[1];
-            if (VSConstants.S_OK != bufferCoordinator.MapPrimaryToSecondarySpan(nearestVisibleSpanOnPrimaryBuffer, spansOnSecondaryBuffer))
+            if (
+                VSConstants.S_OK
+                != bufferCoordinator.MapPrimaryToSecondarySpan(
+                    nearestVisibleSpanOnPrimaryBuffer,
+                    spansOnSecondaryBuffer
+                )
+            )
             {
                 // we can't adjust original position but we can adjust mapped one
-                mappedSpan = new MappedSpan(originalLine, originalColumn, nearestVisibleSpanOnPrimaryBuffer.iStartLine, nearestVisibleSpanOnPrimaryBuffer.iStartIndex);
+                mappedSpan = new MappedSpan(
+                    originalLine,
+                    originalColumn,
+                    nearestVisibleSpanOnPrimaryBuffer.iStartLine,
+                    nearestVisibleSpanOnPrimaryBuffer.iStartIndex
+                );
                 return true;
             }
 
             var nearestVisibleSpanOnSecondaryBuffer = spansOnSecondaryBuffer[0];
-            var originalLocationMovedAboveInFile = IsOriginalLocationMovedAboveInFile(originalLine, originalColumn, nearestVisibleSpanOnSecondaryBuffer.iStartLine, nearestVisibleSpanOnSecondaryBuffer.iStartIndex);
+            var originalLocationMovedAboveInFile = IsOriginalLocationMovedAboveInFile(
+                originalLine,
+                originalColumn,
+                nearestVisibleSpanOnSecondaryBuffer.iStartLine,
+                nearestVisibleSpanOnSecondaryBuffer.iStartIndex
+            );
 
             if (!originalLocationMovedAboveInFile)
             {
-                mappedSpan = new MappedSpan(nearestVisibleSpanOnSecondaryBuffer.iStartLine, nearestVisibleSpanOnSecondaryBuffer.iStartIndex, nearestVisibleSpanOnPrimaryBuffer.iStartLine, nearestVisibleSpanOnPrimaryBuffer.iStartIndex);
+                mappedSpan = new MappedSpan(
+                    nearestVisibleSpanOnSecondaryBuffer.iStartLine,
+                    nearestVisibleSpanOnSecondaryBuffer.iStartIndex,
+                    nearestVisibleSpanOnPrimaryBuffer.iStartLine,
+                    nearestVisibleSpanOnPrimaryBuffer.iStartIndex
+                );
                 return true;
             }
 
-            if (TryFixUpNearestVisibleSpan(bufferCoordinator, nearestVisibleSpanOnSecondaryBuffer.iStartLine, nearestVisibleSpanOnSecondaryBuffer.iStartIndex, out var adjustedPosition))
+            if (
+                TryFixUpNearestVisibleSpan(
+                    bufferCoordinator,
+                    nearestVisibleSpanOnSecondaryBuffer.iStartLine,
+                    nearestVisibleSpanOnSecondaryBuffer.iStartIndex,
+                    out var adjustedPosition
+                )
+            )
             {
                 // span has changed yet again, re-calculate span
-                return TryAdjustSpanIfNeededForVenus(documentId, adjustedPosition.Line, adjustedPosition.Character, out mappedSpan);
+                return TryAdjustSpanIfNeededForVenus(
+                    documentId,
+                    adjustedPosition.Line,
+                    adjustedPosition.Character,
+                    out mappedSpan
+                );
             }
 
-            mappedSpan = new MappedSpan(nearestVisibleSpanOnSecondaryBuffer.iStartLine, nearestVisibleSpanOnSecondaryBuffer.iStartIndex, nearestVisibleSpanOnPrimaryBuffer.iStartLine, nearestVisibleSpanOnPrimaryBuffer.iStartIndex);
+            mappedSpan = new MappedSpan(
+                nearestVisibleSpanOnSecondaryBuffer.iStartLine,
+                nearestVisibleSpanOnSecondaryBuffer.iStartIndex,
+                nearestVisibleSpanOnPrimaryBuffer.iStartLine,
+                nearestVisibleSpanOnPrimaryBuffer.iStartIndex
+            );
             return true;
         }
 
         private static bool TryFixUpNearestVisibleSpan(
             TextManager.Interop.IVsTextBufferCoordinator bufferCoordinator,
-            int originalLine, int originalColumn, out LinePosition adjustedPosition)
+            int originalLine,
+            int originalColumn,
+            out LinePosition adjustedPosition
+        )
         {
             // GetNearestVisibleToken gives us the position right at the end of visible span.
             // Move the position one position to the left so that squiggle can show up on last token.
@@ -236,8 +382,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             if (originalLine > 1)
             {
-                if (VSConstants.S_OK == bufferCoordinator.GetSecondaryBuffer(out var secondaryBuffer) &&
-                    VSConstants.S_OK == secondaryBuffer.GetLengthOfLine(originalLine - 1, out var length))
+                if (
+                    VSConstants.S_OK
+                        == bufferCoordinator.GetSecondaryBuffer(out var secondaryBuffer)
+                    && VSConstants.S_OK
+                        == secondaryBuffer.GetLengthOfLine(originalLine - 1, out var length)
+                )
                 {
                     adjustedPosition = new LinePosition(originalLine - 1, length);
                     return true;
@@ -248,7 +398,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             return false;
         }
 
-        private static bool IsOriginalLocationMovedAboveInFile(int originalLine, int originalColumn, int movedLine, int movedColumn)
+        private static bool IsOriginalLocationMovedAboveInFile(
+            int originalLine,
+            int originalColumn,
+            int movedLine,
+            int movedColumn
+        )
         {
             if (movedLine < originalLine)
             {
@@ -270,7 +425,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             private readonly int _mappedLine;
             private readonly int _mappedColumn;
 
-            public MappedSpan(int originalLine, int originalColumn, int mappedLine, int mappedColumn)
+            public MappedSpan(
+                int originalLine,
+                int originalColumn,
+                int mappedLine,
+                int mappedColumn
+            )
             {
                 _originalLine = originalLine;
                 _originalColumn = originalColumn;

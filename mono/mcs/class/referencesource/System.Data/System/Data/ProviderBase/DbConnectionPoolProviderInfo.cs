@@ -5,11 +5,10 @@
 // <owner current="true" primary="true">stevesta</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data.ProviderBase {
-
+namespace System.Data.ProviderBase
+{
     using System;
     using System.Diagnostics;
 
-    internal class DbConnectionPoolProviderInfo {
-    }
+    internal class DbConnectionPoolProviderInfo { }
 }

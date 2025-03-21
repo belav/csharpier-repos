@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
@@ -13,29 +13,30 @@
 **
 **
 ===========================================================*/
-namespace System.Runtime.Remoting.Messaging {
+namespace System.Runtime.Remoting.Messaging
+{
     using System;
     using System.Collections;
-    using System.Threading;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-    using System.Runtime.Remoting;    
+    using System.Runtime.Remoting;
     using System.Runtime.Remoting.Activation;
-    using System.Runtime.Remoting.Contexts;
     using System.Runtime.Remoting.Channels;
+    using System.Runtime.Remoting.Contexts;
     using System.Runtime.Remoting.Metadata;
     using System.Runtime.Remoting.Metadata.W3cXsd2001;
     using System.Runtime.Remoting.Proxies;
     using System.Runtime.Serialization;
-    using System.Runtime.Serialization.Formatters;  
-    using System.Runtime.Serialization.Formatters.Binary;  
+    using System.Runtime.Serialization.Formatters;
+    using System.Runtime.Serialization.Formatters.Binary;
     using System.Runtime.Versioning;
-    using System.Reflection;
-    using System.Text;
-    using System.Runtime.CompilerServices;
-    using System.Security.Permissions;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
     using System.Security;
+    using System.Security.Permissions;
+    using System.Text;
+    using System.Threading;
 
     //+=======================================================================
     //
@@ -46,83 +47,93 @@ namespace System.Runtime.Remoting.Messaging {
     [Serializable]
     internal class Message : IMethodCallMessage, IInternalMessage, ISerializable
     {
-
         // *** NOTE ***
         // Keep these in sync with the flags in Message.h
         // flags
-        internal const int Sync = 0;        // Synchronous call
-        internal const int BeginAsync = 1;  // Async Begin call
-        internal const int EndAsync   = 2;  // Async End call
-        internal const int Ctor       = 4;  // The call is a .Ctor
-        internal const int OneWay     = 8;  // One way call
-        internal const int CallMask   = 15; // Mask for call type bits
-        
-        internal const int FixedArgs  = 16;  // Fixed number of arguments call       
-        internal const int VarArgs    = 32; // Variable number of arguments call        
+        internal const int Sync = 0; // Synchronous call
+        internal const int BeginAsync = 1; // Async Begin call
+        internal const int EndAsync = 2; // Async End call
+        internal const int Ctor = 4; // The call is a .Ctor
+        internal const int OneWay = 8; // One way call
+        internal const int CallMask = 15; // Mask for call type bits
 
-    //
-        // Changing the type or position of these fields requires making changes 
+        internal const int FixedArgs = 16; // Fixed number of arguments call
+        internal const int VarArgs = 32; // Variable number of arguments call
+
+        //
+        // Changing the type or position of these fields requires making changes
         //  to the corresponding unmanaged class and to mscorlib.h
         //
 
         // Private data members
-        private String _MethodName;                 // Method name
-        private Type[] _MethodSignature;            // Array of parameter types
-        private MethodBase _MethodBase;             // Reflection method object
-        private Object  _properties;                // hash table for properities
-        private String    _URI;                     // target object URI
+        private String _MethodName; // Method name
+        private Type[] _MethodSignature; // Array of parameter types
+        private MethodBase _MethodBase; // Reflection method object
+        private Object _properties; // hash table for properities
+        private String _URI; // target object URI
         private String _typeName;
-        private Exception _Fault;                   // null if no fault
+        private Exception _Fault; // null if no fault
 
-        private Identity _ID;            // identity cached during Invoke
-        private ServerIdentity _srvID;   // server Identity cached during Invoke
+        private Identity _ID; // identity cached during Invoke
+        private ServerIdentity _srvID; // server Identity cached during Invoke
         private ArgMapper _argMapper;
+
         [System.Security.SecurityCritical] // auto-generated
         private LogicalCallContext _callContext;
 
-        private IntPtr _frame;               // ptr to the call frame
-        private IntPtr _methodDesc;          // ptr to the internal method descriptor
-        private IntPtr _metaSigHolder;         // Pointer to the MetaSig structure
-        private IntPtr _delegateMD;          // ptr to the internal method descriptor for the delegate
-        private IntPtr _governingType;       // ptr to the internal type handle for the type calling the method
+        private IntPtr _frame; // ptr to the call frame
+        private IntPtr _methodDesc; // ptr to the internal method descriptor
+        private IntPtr _metaSigHolder; // Pointer to the MetaSig structure
+        private IntPtr _delegateMD; // ptr to the internal method descriptor for the delegate
+        private IntPtr _governingType; // ptr to the internal type handle for the type calling the method
 
-        private int _flags;               // internal flags
-        private bool _initDone;           // called the native init routine
-
+        private int _flags; // internal flags
+        private bool _initDone; // called the native init routine
 
         internal static String CallContextKey = "__CallContext";
-        internal static String UriKey           = "__Uri";
-        
+        internal static String UriKey = "__Uri";
 
-        public virtual Exception GetFault()       {return _Fault;}
-        public virtual void      SetFault(Exception e) {_Fault = e;}
+        public virtual Exception GetFault()
+        {
+            return _Fault;
+        }
 
-        internal virtual void SetOneWay()   { _flags |= Message.OneWay;}
-        public virtual int       GetCallType()
+        public virtual void SetFault(Exception e)
+        {
+            _Fault = e;
+        }
+
+        internal virtual void SetOneWay()
+        {
+            _flags |= Message.OneWay;
+        }
+
+        public virtual int GetCallType()
         {
             // We should call init only if neccessary
             InitIfNecessary();
             return _flags;
         }
 
-        internal IntPtr GetFramePtr() { return _frame;}
+        internal IntPtr GetFramePtr()
+        {
+            return _frame;
+        }
 
-
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern void GetAsyncBeginInfo(out AsyncCallback acbd,
-                                             out Object        state);
+        public extern void GetAsyncBeginInfo(out AsyncCallback acbd, out Object state);
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern Object         GetThisPtr();
-        [System.Security.SecurityCritical]  // auto-generated
+        public extern Object GetThisPtr();
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern IAsyncResult   GetAsyncResult();
+        public extern IAsyncResult GetAsyncResult();
 
         public void Init()
         {
@@ -130,26 +141,25 @@ namespace System.Runtime.Remoting.Messaging {
             // publicly exposed so we cannot get rid of it.
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern Object GetReturnValue();
+
         //
         // Constructor
         // This should be internal. The message object is
         // allocated and deallocated via a pool to enable
         // reuse.
         //
-        internal Message()
-        {
-        }
+        internal Message() { }
 
         // NOTE: This method is called multiple times as we reuse the
         // message object. Make sure that you reset any fields that you
         // add to the message object to the default values. This will
         // ensure that the reused message object starts with the correct
         // values.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void InitFields(MessageData msgData)
         {
             _frame = msgData.pFrame;
@@ -176,7 +186,6 @@ namespace System.Runtime.Remoting.Messaging {
                 // entries from the dictionary object and reuse it.
                 ((IDictionary)_properties).Clear();
             }
-            
         }
 
         private void InitIfNecessary()
@@ -189,7 +198,6 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-
         //-------------------------------------------------------------------
         //                  IInternalMessage
         //-------------------------------------------------------------------
@@ -198,7 +206,7 @@ namespace System.Runtime.Remoting.Messaging {
             [System.Security.SecurityCritical]
             get { return _srvID; }
             [System.Security.SecurityCritical]
-            set {_srvID = value;}
+            set { _srvID = value; }
         }
 
         Identity IInternalMessage.IdentityObject
@@ -206,7 +214,7 @@ namespace System.Runtime.Remoting.Messaging {
             [System.Security.SecurityCritical]
             get { return _ID; }
             [System.Security.SecurityCritical]
-            set { _ID = value;}
+            set { _ID = value; }
         }
 
         [System.Security.SecurityCritical]
@@ -232,14 +240,16 @@ namespace System.Runtime.Remoting.Messaging {
         //-------------------------------------------------------------------
         public IDictionary Properties
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_properties == null)
                 {
-                    Interlocked.CompareExchange(ref _properties,
-                                                new MCMDictionary(this, null),
-                                                null);
+                    Interlocked.CompareExchange(
+                        ref _properties,
+                        new MCMDictionary(this, null),
+                        null
+                    );
                 }
                 return (IDictionary)_properties;
             }
@@ -249,25 +259,23 @@ namespace System.Runtime.Remoting.Messaging {
         //                      IMethodCallMessage
         //-------------------------------------------------------------------
 
-        public String     Uri                
-        { 
-            [System.Security.SecurityCritical]  // auto-generated
-            get { return _URI;}
-
+        public String Uri
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _URI; }
             set { _URI = value; }
         }
-        
-        public bool       HasVarArgs         
-        { 
-            [System.Security.SecurityCritical]  // auto-generated
-            get 
+
+        public bool HasVarArgs
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get
             {
                 // When this method is called for the first time, we
-                // obtain the answer from a native call and set the flags 
-                if((0 == (_flags & Message.FixedArgs)) &&  
-                    (0 == (_flags & Message.VarArgs)))
+                // obtain the answer from a native call and set the flags
+                if ((0 == (_flags & Message.FixedArgs)) && (0 == (_flags & Message.VarArgs)))
                 {
-                    if(!InternalHasVarArgs())
+                    if (!InternalHasVarArgs())
                     {
                         _flags |= Message.FixedArgs;
                     }
@@ -278,23 +286,22 @@ namespace System.Runtime.Remoting.Messaging {
                 }
                 return (1 == (_flags & Message.VarArgs));
             }
-            
         }
-        
-        public int        ArgCount           
-        { 
-            [System.Security.SecurityCritical]  // auto-generated
-            get { return InternalGetArgCount();}
+
+        public int ArgCount
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get { return InternalGetArgCount(); }
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated
-        public Object     GetArg(int argNum) 
-        { 
+
+        [System.Security.SecurityCritical] // auto-generated
+        public Object GetArg(int argNum)
+        {
             return InternalGetArg(argNum);
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated
-        public String     GetArgName(int index)
+
+        [System.Security.SecurityCritical] // auto-generated
+        public String GetArgName(int index)
         {
             if (index >= ArgCount)
             {
@@ -302,8 +309,9 @@ namespace System.Runtime.Remoting.Messaging {
             }
             Contract.EndContractBlock();
 
-            RemotingMethodCachedData methodCache = 
-                InternalRemotingServices.GetReflectionCachedData(GetMethodBase());
+            RemotingMethodCachedData methodCache = InternalRemotingServices.GetReflectionCachedData(
+                GetMethodBase()
+            );
 
             ParameterInfo[] pi = methodCache.Parameters;
 
@@ -317,146 +325,142 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-        public Object[]   Args
+        public Object[] Args
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get
-            {
-                return InternalGetArgs();
-            }
+            [System.Security.SecurityCritical] // auto-generated
+            get { return InternalGetArgs(); }
         }
 
-        public int InArgCount                        
-        { 
-            [System.Security.SecurityCritical]  // auto-generated
-            get 
+        public int InArgCount
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get
             {
-                if (_argMapper == null) _argMapper = new ArgMapper(this, false);
+                if (_argMapper == null)
+                    _argMapper = new ArgMapper(this, false);
                 return _argMapper.ArgCount;
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public Object  GetInArg(int argNum)   
-        {   
-            if (_argMapper == null) _argMapper = new ArgMapper(this, false);
+        [System.Security.SecurityCritical] // auto-generated
+        public Object GetInArg(int argNum)
+        {
+            if (_argMapper == null)
+                _argMapper = new ArgMapper(this, false);
             return _argMapper.GetArg(argNum);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public String GetInArgName(int index) 
-        { 
-            if (_argMapper == null) _argMapper = new ArgMapper(this, false);
+        [System.Security.SecurityCritical] // auto-generated
+        public String GetInArgName(int index)
+        {
+            if (_argMapper == null)
+                _argMapper = new ArgMapper(this, false);
             return _argMapper.GetArgName(index);
         }
-        
-        public Object[] InArgs                       
+
+        public Object[] InArgs
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
-                if (_argMapper == null) _argMapper = new ArgMapper(this, false);
+                if (_argMapper == null)
+                    _argMapper = new ArgMapper(this, false);
                 return _argMapper.Args;
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private void UpdateNames()
         {
-            RemotingMethodCachedData methCache = 
-                InternalRemotingServices.GetReflectionCachedData(GetMethodBase());
+            RemotingMethodCachedData methCache = InternalRemotingServices.GetReflectionCachedData(
+                GetMethodBase()
+            );
             _typeName = methCache.TypeAndAssemblyName;
             _MethodName = methCache.MethodName;
         }
 
         public String MethodName
-        { 
-            [System.Security.SecurityCritical]  // auto-generated
-            get 
-            { 
-                if(null == _MethodName)
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get
+            {
+                if (null == _MethodName)
                     UpdateNames();
                 return _MethodName;
             }
         }
-        
+
         public String TypeName
-        { 
-            [System.Security.SecurityCritical]  // auto-generated
-            get 
-            { 
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get
+            {
                 if (_typeName == null)
                     UpdateNames();
                 return _typeName;
             }
         }
-        
+
         public Object MethodSignature
-        { 
-            [System.Security.SecurityCritical]  // auto-generated
+        {
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
-                if(null == _MethodSignature)
+                if (null == _MethodSignature)
                     _MethodSignature = GenerateMethodSignature(GetMethodBase());
-                    
+
                 return _MethodSignature;
             }
         }
 
-        public LogicalCallContext LogicalCallContext  
-        { 
-            [System.Security.SecurityCritical]  // auto-generated
-            get
-            {                
-                return GetLogicalCallContext();                 
-            }
+        public LogicalCallContext LogicalCallContext
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get { return GetLogicalCallContext(); }
         }
 
         public MethodBase MethodBase
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get
-            {
-                return GetMethodBase();
-            }
+            [System.Security.SecurityCritical] // auto-generated
+            get { return GetMethodBase(); }
         }
-
 
         //
         // ISerializable
         //
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotSupportedException(
-                Environment.GetResourceString("NotSupported_Method"));                
+            throw new NotSupportedException(Environment.GetResourceString("NotSupported_Method"));
         }
-        
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal MethodBase GetMethodBase()
         {
-            if(null == _MethodBase)
+            if (null == _MethodBase)
             {
-                unsafe 
+                unsafe
                 {
                     IRuntimeMethodInfo mh = new RuntimeMethodInfoStub(_methodDesc, null);
-                    _MethodBase = RuntimeType.GetMethodBase(Type.GetTypeFromHandleUnsafe(_governingType), mh);
+                    _MethodBase = RuntimeType.GetMethodBase(
+                        Type.GetTypeFromHandleUnsafe(_governingType),
+                        mh
+                    );
                 }
-            }           
+            }
             return _MethodBase;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal LogicalCallContext SetLogicalCallContext(
-            LogicalCallContext callCtx)
+        [System.Security.SecurityCritical] // auto-generated
+        internal LogicalCallContext SetLogicalCallContext(LogicalCallContext callCtx)
         {
             LogicalCallContext oldCtx = _callContext;
             _callContext = callCtx;
-            
+
             return oldCtx;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal LogicalCallContext GetLogicalCallContext()
         {
             if (_callContext == null)
@@ -464,84 +468,90 @@ namespace System.Runtime.Remoting.Messaging {
             return _callContext;
         }
 
-
         // Internal helper to create method signature
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static Type[] GenerateMethodSignature(MethodBase mb)
         {
-            RemotingMethodCachedData methodCache = 
-                InternalRemotingServices.GetReflectionCachedData(mb);
-                
+            RemotingMethodCachedData methodCache = InternalRemotingServices.GetReflectionCachedData(
+                mb
+            );
+
             ParameterInfo[] paramArray = methodCache.Parameters;
             Type[] methodSig = new Type[paramArray.Length];
-            for(int i = 0; i < paramArray.Length; i++)
+            for (int i = 0; i < paramArray.Length; i++)
             {
                 methodSig[i] = paramArray[i].ParameterType;
             }
 
             return methodSig;
         } // GenerateMethodSignature
-        
+
         //
         // The following two routines are used by StackBuilderSink to check
         // the consistency of arguments.
         //
-        // Check that all the arguments are of the type 
+        // Check that all the arguments are of the type
         // specified by the parameter list.
         //
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static Object[] CoerceArgs(IMethodMessage m)
         {
             MethodBase mb = m.MethodBase;
             Contract.Assert(mb != null, "null method base passed to CoerceArgs");
 
-            RemotingMethodCachedData methodCache = InternalRemotingServices.GetReflectionCachedData(mb);
-            
+            RemotingMethodCachedData methodCache = InternalRemotingServices.GetReflectionCachedData(
+                mb
+            );
+
             return CoerceArgs(m, methodCache.Parameters);
         } // CoerceArgs
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static Object[] CoerceArgs(IMethodMessage m, ParameterInfo[] pi)
         {
             return CoerceArgs(m.MethodBase, m.Args, pi);
         } // CoerceArgs
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static Object[] CoerceArgs(MethodBase mb, Object[] args, ParameterInfo[] pi)
         {
-            if (pi == null) 
+            if (pi == null)
             {
                 throw new ArgumentNullException("pi");
             }
             Contract.EndContractBlock();
-            
-            if (pi.Length != args.Length) 
+
+            if (pi.Length != args.Length)
             {
                 throw new RemotingException(
                     String.Format(
-                        CultureInfo.CurrentCulture, Environment.GetResourceString(
-                            "Remoting_Message_ArgMismatch"),
-                        mb.DeclaringType.FullName, mb.Name,
-                        args.Length, pi.Length));
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Remoting_Message_ArgMismatch"),
+                        mb.DeclaringType.FullName,
+                        mb.Name,
+                        args.Length,
+                        pi.Length
+                    )
+                );
             }
-            
-            for (int i=0; i < pi.Length; i++)
+
+            for (int i = 0; i < pi.Length; i++)
             {
                 ParameterInfo currentPi = pi[i];
-                Type pt = currentPi.ParameterType;                    
+                Type pt = currentPi.ParameterType;
                 Object oArg = args[i];
-                if (oArg != null) 
+                if (oArg != null)
                 {
                     args[i] = CoerceArg(oArg, pt);
                 }
                 else
-                {   
+                {
                     if (pt.IsByRef)
                     {
                         Type paramType = pt.GetElementType();
                         if (paramType.IsValueType)
                         {
-                            // nullables can be null, 
+                            // nullables can be null,
                             if (currentPi.IsOut)
                             {
                                 // we need to fill in the blanks for value types if they are null
@@ -549,12 +559,24 @@ namespace System.Runtime.Remoting.Messaging {
                             }
                             else
                             {
-                                if (!(paramType.IsGenericType && paramType.GetGenericTypeDefinition() == typeof(Nullable<>))) 
+                                if (
+                                    !(
+                                        paramType.IsGenericType
+                                        && paramType.GetGenericTypeDefinition()
+                                            == typeof(Nullable<>)
+                                    )
+                                )
                                 {
                                     throw new RemotingException(
                                         String.Format(
-                                            CultureInfo.CurrentCulture, Environment.GetResourceString("Remoting_Message_MissingArgValue"),
-                                            paramType.FullName, i));
+                                            CultureInfo.CurrentCulture,
+                                            Environment.GetResourceString(
+                                                "Remoting_Message_MissingArgValue"
+                                            ),
+                                            paramType.FullName,
+                                            i
+                                        )
+                                    );
                                 }
                             }
                         }
@@ -563,14 +585,25 @@ namespace System.Runtime.Remoting.Messaging {
                     {
                         if (pt.IsValueType)
                         {
-                            // nullables can be null, 
-                            if (!(pt.IsGenericType && pt.GetGenericTypeDefinition() == typeof(Nullable<>)))
+                            // nullables can be null,
+                            if (
+                                !(
+                                    pt.IsGenericType
+                                    && pt.GetGenericTypeDefinition() == typeof(Nullable<>)
+                                )
+                            )
                             {
                                 // A null value was passed as a value type parameter.
                                 throw new RemotingException(
                                     String.Format(
-                                        CultureInfo.CurrentCulture, Environment.GetResourceString("Remoting_Message_MissingArgValue"),
-                                        pt.FullName, i));
+                                        CultureInfo.CurrentCulture,
+                                        Environment.GetResourceString(
+                                            "Remoting_Message_MissingArgValue"
+                                        ),
+                                        pt.FullName,
+                                        i
+                                    )
+                                );
                             }
                         }
                     }
@@ -579,23 +612,22 @@ namespace System.Runtime.Remoting.Messaging {
 
             return args;
         } // CoerceArgs
-        
-        
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal static Object CoerceArg(Object value, Type pt)
         {
             Object ret = null;
-            
-            if(null != value)
+
+            if (null != value)
             {
                 Exception inner = null;
                 try
                 {
-                    if (pt.IsByRef) 
+                    if (pt.IsByRef)
                     {
                         pt = pt.GetElementType();
                     }
-                
+
                     if (pt.IsInstanceOfType(value))
                     {
                         ret = value;
@@ -605,7 +637,7 @@ namespace System.Runtime.Remoting.Messaging {
                         ret = Convert.ChangeType(value, pt, CultureInfo.InvariantCulture);
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     // Quietly ignore all exceptions. We will throw
                     // a more meaningful exception below.
@@ -613,14 +645,14 @@ namespace System.Runtime.Remoting.Messaging {
                 }
 
                 // If the coercion failed then throw an exception
-                if(null == ret)
+                if (null == ret)
                 {
                     // NOTE: Do not call value.ToString() on proxies as
                     // it results in loading the type and loss of refinement
                     // optimization or denial of service attacks by loading
                     // a lot of types in the server.
                     String valueName = null;
-                    if(RemotingServices.IsTransparentProxy(value))
+                    if (RemotingServices.IsTransparentProxy(value))
                     {
                         valueName = typeof(MarshalByRefObject).ToString();
                     }
@@ -629,17 +661,22 @@ namespace System.Runtime.Remoting.Messaging {
                         valueName = value.ToString();
                     }
 
-                    throw new RemotingException(                        
+                    throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_Message_CoercionFailed"), valueName, pt), inner);                
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Remoting_Message_CoercionFailed"),
+                            valueName,
+                            pt
+                        ),
+                        inner
+                    );
                 }
             }
-                
+
             return ret;
         } //end of CoerceArg
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static Object SoapCoerceArg(Object value, Type pt, Hashtable keyToNamespaceTable)
         {
             Object ret = null;
@@ -648,11 +685,11 @@ namespace System.Runtime.Remoting.Messaging {
             {
                 try
                 {
-                    if (pt.IsByRef) 
+                    if (pt.IsByRef)
                     {
                         pt = pt.GetElementType();
                     }
-                
+
                     if (pt.IsInstanceOfType(value))
                     {
                         ret = value;
@@ -665,23 +702,23 @@ namespace System.Runtime.Remoting.Messaging {
                             if (pt == typeof(Double))
                             {
                                 if (strValue == "INF")
-                                    ret =  Double.PositiveInfinity;
+                                    ret = Double.PositiveInfinity;
                                 else if (strValue == "-INF")
-                                    ret =  Double.NegativeInfinity;
+                                    ret = Double.NegativeInfinity;
                                 else
                                     ret = Double.Parse(strValue, CultureInfo.InvariantCulture);
                             }
                             else if (pt == typeof(Single))
                             {
                                 if (strValue == "INF")
-                                    ret =  Single.PositiveInfinity;
+                                    ret = Single.PositiveInfinity;
                                 else if (strValue == "-INF")
-                                    ret =  Single.NegativeInfinity;
+                                    ret = Single.NegativeInfinity;
                                 else
                                     ret = Single.Parse(strValue, CultureInfo.InvariantCulture);
                             }
                             else if (SoapType.typeofISoapXsd.IsAssignableFrom(pt))
-                            { 
+                            {
                                 if (pt == SoapType.typeofSoapTime)
                                     ret = SoapTime.Parse(strValue);
                                 else if (pt == SoapType.typeofSoapDate)
@@ -719,7 +756,8 @@ namespace System.Runtime.Remoting.Messaging {
                                     if (soapQName.Key.Length == 0)
                                         soapQName.Namespace = (String)keyToNamespaceTable["xmlns"];
                                     else
-                                        soapQName.Namespace = (String)keyToNamespaceTable["xmlns"+":"+soapQName.Key];
+                                        soapQName.Namespace = (String)
+                                            keyToNamespaceTable["xmlns" + ":" + soapQName.Key];
                                 }
                                 else if (pt == SoapType.typeofSoapNotation)
                                     ret = SoapNotation.Parse(strValue);
@@ -752,14 +790,20 @@ namespace System.Runtime.Remoting.Messaging {
                             {
                                 if (strValue == "1" || strValue == "true")
                                     ret = (bool)true;
-                                else if (strValue == "0" || strValue =="false")
+                                else if (strValue == "0" || strValue == "false")
                                     ret = (bool)false;
                                 else
                                 {
-                                    throw new RemotingException(                        
+                                    throw new RemotingException(
                                         String.Format(
-                                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                                "Remoting_Message_CoercionFailed"), strValue, pt));                
+                                            CultureInfo.CurrentCulture,
+                                            Environment.GetResourceString(
+                                                "Remoting_Message_CoercionFailed"
+                                            ),
+                                            strValue,
+                                            pt
+                                        )
+                                    );
                                 }
                             }
                             else if (pt == typeof(DateTime))
@@ -770,7 +814,6 @@ namespace System.Runtime.Remoting.Messaging {
                                 ret = SoapDuration.Parse(strValue);
                             else if (pt == typeof(Char))
                                 ret = strValue[0];
-
                             else
                                 ret = Convert.ChangeType(value, pt, CultureInfo.InvariantCulture); //Should this just throw an exception
                         }
@@ -778,21 +821,21 @@ namespace System.Runtime.Remoting.Messaging {
                             ret = Convert.ChangeType(value, pt, CultureInfo.InvariantCulture);
                     }
                 }
-                catch(Exception )
+                catch (Exception)
                 {
                     // Quietly ignore all exceptions. We will throw
                     // a more meaningful exception below.
                 }
 
                 // If the coercion failed then throw an exception
-                if(null == ret)
+                if (null == ret)
                 {
                     // NOTE: Do not call value.ToString() on proxies as
                     // it results in loading the type and loss of refinement
                     // optimization or denial of service attacks by loading
                     // a lot of types in the server.
                     String valueName = null;
-                    if(RemotingServices.IsTransparentProxy(value))
+                    if (RemotingServices.IsTransparentProxy(value))
                     {
                         valueName = typeof(MarshalByRefObject).ToString();
                     }
@@ -801,86 +844,94 @@ namespace System.Runtime.Remoting.Messaging {
                         valueName = value.ToString();
                     }
 
-                    throw new RemotingException(                        
+                    throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_Message_CoercionFailed"), valueName, pt));                
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Remoting_Message_CoercionFailed"),
+                            valueName,
+                            pt
+                        )
+                    );
                 }
             }
-                
+
             return ret;
-        }//end of SoapCoerceArg
+        } //end of SoapCoerceArg
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern bool InternalHasVarArgs();
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal extern int InternalGetArgCount();
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern Object    InternalGetArg(int argNum);
+        private extern Object InternalGetArg(int argNum);
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private extern Object[]    InternalGetArgs();
+        private extern Object[] InternalGetArgs();
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         public extern void PropagateOutParameters(Object[] OutArgs, Object retVal);
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        public extern bool   Dispatch(Object target);
+        public extern bool Dispatch(Object target);
 
         //
         // <
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [System.Diagnostics.Conditional("_REMOTING_DEBUG")]
         public static void DebugOut(String s)
         {
             BCLDebug.Trace(
-                "REMOTE", "RMTING: Thrd " 
-                + Thread.CurrentThread.GetHashCode() 
-                + " : " + s);
+                "REMOTE",
+                "RMTING: Thrd " + Thread.CurrentThread.GetHashCode() + " : " + s
+            );
             OutToUnmanagedDebugger(
-                "\nRMTING: Thrd "
-                + Thread.CurrentThread.GetHashCode() 
-                + " : " + s);
+                "\nRMTING: Thrd " + Thread.CurrentThread.GetHashCode() + " : " + s
+            );
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal extern static void OutToUnmanagedDebugger(String s);
+        internal static extern void OutToUnmanagedDebugger(String s);
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static LogicalCallContext PropagateCallContextFromMessageToThread(IMessage msg)
         {
             return CallContext.SetLogicalCallContext(
-                    (LogicalCallContext) msg.Properties[Message.CallContextKey]);            
+                (LogicalCallContext)msg.Properties[Message.CallContextKey]
+            );
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static void PropagateCallContextFromThreadToMessage(IMessage msg)
         {
-            LogicalCallContext callCtx = Thread.CurrentThread.GetMutableExecutionContext().LogicalCallContext;
-            
+            LogicalCallContext callCtx = Thread
+                .CurrentThread.GetMutableExecutionContext()
+                .LogicalCallContext;
+
             msg.Properties[Message.CallContextKey] = callCtx;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static void PropagateCallContextFromThreadToMessage(IMessage msg, LogicalCallContext oldcctx)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static void PropagateCallContextFromThreadToMessage(
+            IMessage msg,
+            LogicalCallContext oldcctx
+        )
         {
             // First do the common work
             PropagateCallContextFromThreadToMessage(msg);
@@ -895,37 +946,38 @@ namespace System.Runtime.Remoting.Messaging {
     // Synopsis:   Return message for constructors
     //
     //-================================================================================
-    [System.Security.SecurityCritical]  // auto-generated
+    [System.Security.SecurityCritical] // auto-generated
     internal class ConstructorReturnMessage : ReturnMessage, IConstructionReturnMessage
     {
-
         private const int Intercept = 0x1;
 
         private MarshalByRefObject _o;
-        private int    _iFlags;
+        private int _iFlags;
 
-
-        public ConstructorReturnMessage(MarshalByRefObject o, Object[] outArgs, int outArgsCount,
-                                        LogicalCallContext callCtx, IConstructionCallMessage ccm)
-        : base(o, outArgs, outArgsCount, callCtx, ccm)
+        public ConstructorReturnMessage(
+            MarshalByRefObject o,
+            Object[] outArgs,
+            int outArgsCount,
+            LogicalCallContext callCtx,
+            IConstructionCallMessage ccm
+        )
+            : base(o, outArgs, outArgsCount, callCtx, ccm)
         {
             _o = o;
             _iFlags = Intercept;
         }
 
         public ConstructorReturnMessage(Exception e, IConstructionCallMessage ccm)
-        :       base(e, ccm)
-        {
-        }
+            : base(e, ccm) { }
 
-        public override  Object  ReturnValue
+        public override Object ReturnValue
         {
             [System.Security.SecurityCritical]
             get
             {
                 if (_iFlags == Intercept)
                 {
-                    return RemotingServices.MarshalInternal(_o,null,null);
+                    return RemotingServices.MarshalInternal(_o, null, null);
                 }
                 else
                 {
@@ -934,8 +986,7 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-
-        public override  IDictionary Properties
+        public override IDictionary Properties
         {
             [System.Security.SecurityCritical]
             get
@@ -945,7 +996,7 @@ namespace System.Runtime.Remoting.Messaging {
                     Object properties = new CRMDictionary(this, new Hashtable());
                     Interlocked.CompareExchange(ref _properties, properties, null);
                 }
-                return(IDictionary) _properties;
+                return (IDictionary)_properties;
             }
         }
 
@@ -962,28 +1013,27 @@ namespace System.Runtime.Remoting.Messaging {
     //-========================================================================
     internal class ConstructorCallMessage : IConstructionCallMessage
     {
-
         // data
 
-        private Object[]            _callSiteActivationAttributes;
-        private Object[]            _womGlobalAttributes;
-        private Object[]            _typeAttributes;
+        private Object[] _callSiteActivationAttributes;
+        private Object[] _womGlobalAttributes;
+        private Object[] _typeAttributes;
 
-        // The activation type isn't serialized because we want to 
+        // The activation type isn't serialized because we want to
         // re-resolve the activation type name on the other side
         // based on _activationTypeName.
         [NonSerialized]
-        private RuntimeType         _activationType;
-        
-        private String              _activationTypeName;
-        
-        private IList               _contextProperties;
-        private int                 _iFlags;
-        private Message             _message;
-        private Object              _properties;
-        private ArgMapper           _argMapper; 
-        private IActivator          _activator;
-        
+        private RuntimeType _activationType;
+
+        private String _activationTypeName;
+
+        private IList _contextProperties;
+        private int _iFlags;
+        private Message _message;
+        private Object _properties;
+        private ArgMapper _argMapper;
+        private IActivator _activator;
+
         // flags
         private const int CCM_ACTIVATEINCONTEXT = 0x01;
 
@@ -992,9 +1042,13 @@ namespace System.Runtime.Remoting.Messaging {
             // Default constructor
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal ConstructorCallMessage(Object[] callSiteActivationAttributes,
-                    Object[]womAttr, Object[] typeAttr, RuntimeType serverType)
+        [System.Security.SecurityCritical] // auto-generated
+        internal ConstructorCallMessage(
+            Object[] callSiteActivationAttributes,
+            Object[] womAttr,
+            Object[] typeAttr,
+            RuntimeType serverType
+        )
         {
             _activationType = serverType;
             _activationTypeName = RemotingServices.GetDefaultQualifiedTypeName(_activationType);
@@ -1003,7 +1057,7 @@ namespace System.Runtime.Remoting.Messaging {
             _typeAttributes = typeAttr;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public Object GetThisPtr()
         {
             if (_message != null)
@@ -1013,19 +1067,15 @@ namespace System.Runtime.Remoting.Messaging {
             else
             {
                 throw new InvalidOperationException(
-                    Environment.GetResourceString(
-                        "InvalidOperation_InternalState"));
+                    Environment.GetResourceString("InvalidOperation_InternalState")
+                );
             }
         }
 
         public Object[] CallSiteActivationAttributes
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get
-            {
-                return _callSiteActivationAttributes;
-            }
-
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _callSiteActivationAttributes; }
         }
 
         internal Object[] GetWOMAttributes()
@@ -1040,28 +1090,28 @@ namespace System.Runtime.Remoting.Messaging {
 
         public Type ActivationType
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if ((_activationType == null) && (_activationTypeName != null))
-                    _activationType = RemotingServices.InternalGetTypeFromQualifiedTypeName(_activationTypeName, false);
-                    
+                    _activationType = RemotingServices.InternalGetTypeFromQualifiedTypeName(
+                        _activationTypeName,
+                        false
+                    );
+
                 return _activationType;
             }
         }
 
         public String ActivationTypeName
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get
-            {
-                return _activationTypeName;
-            }
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _activationTypeName; }
         }
 
         public IList ContextProperties
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_contextProperties == null)
@@ -1074,7 +1124,7 @@ namespace System.Runtime.Remoting.Messaging {
 
         public String Uri
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_message != null)
@@ -1084,11 +1134,10 @@ namespace System.Runtime.Remoting.Messaging {
                 else
                 {
                     throw new InvalidOperationException(
-                        Environment.GetResourceString(
-                            "InvalidOperation_InternalState"));
+                        Environment.GetResourceString("InvalidOperation_InternalState")
+                    );
                 }
             }
-
             set
             {
                 if (_message != null)
@@ -1098,16 +1147,15 @@ namespace System.Runtime.Remoting.Messaging {
                 else
                 {
                     throw new InvalidOperationException(
-                        Environment.GetResourceString(
-                            "InvalidOperation_InternalState"));
+                        Environment.GetResourceString("InvalidOperation_InternalState")
+                    );
                 }
             }
-
         }
 
         public String MethodName
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_message != null)
@@ -1117,15 +1165,15 @@ namespace System.Runtime.Remoting.Messaging {
                 else
                 {
                     throw new InvalidOperationException(
-                        Environment.GetResourceString(
-                            "InvalidOperation_InternalState"));
+                        Environment.GetResourceString("InvalidOperation_InternalState")
+                    );
                 }
             }
         }
 
         public String TypeName
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_message != null)
@@ -1135,15 +1183,15 @@ namespace System.Runtime.Remoting.Messaging {
                 else
                 {
                     throw new InvalidOperationException(
-                        Environment.GetResourceString(
-                            "InvalidOperation_InternalState"));
+                        Environment.GetResourceString("InvalidOperation_InternalState")
+                    );
                 }
             }
         }
 
         public Object MethodSignature
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_message != null)
@@ -1153,73 +1201,73 @@ namespace System.Runtime.Remoting.Messaging {
                 else
                 {
                     throw new InvalidOperationException(
-                        Environment.GetResourceString(
-                            "InvalidOperation_InternalState"));
+                        Environment.GetResourceString("InvalidOperation_InternalState")
+                    );
                 }
             }
         } // MethodSignature
 
         public MethodBase MethodBase
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_message != null)
                 {
                     return _message.MethodBase;
-        }
+                }
                 else
                 {
                     throw new InvalidOperationException(
-                        Environment.GetResourceString(
-                            "InvalidOperation_InternalState"));
+                        Environment.GetResourceString("InvalidOperation_InternalState")
+                    );
                 }
             }
         } // MethodBase
 
-
-    /// <internalonly/>
-        public int InArgCount                        
-        { 
-            [System.Security.SecurityCritical]  // auto-generated
-            get 
+        /// <internalonly/>
+        public int InArgCount
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get
             {
-                if (_argMapper == null) 
+                if (_argMapper == null)
                     _argMapper = new ArgMapper(this, false);
                 return _argMapper.ArgCount;
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public Object  GetInArg(int argNum)   
-        {   
-            if (_argMapper == null) 
+        [System.Security.SecurityCritical] // auto-generated
+        public Object GetInArg(int argNum)
+        {
+            if (_argMapper == null)
                 _argMapper = new ArgMapper(this, false);
             return _argMapper.GetArg(argNum);
         }
 
-    /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated
-        public String GetInArgName(int index) 
-        { 
-            if (_argMapper == null) 
+        /// <internalonly/>
+        [System.Security.SecurityCritical] // auto-generated
+        public String GetInArgName(int index)
+        {
+            if (_argMapper == null)
                 _argMapper = new ArgMapper(this, false);
             return _argMapper.GetArgName(index);
         }
-        public Object[] InArgs                       
+
+        public Object[] InArgs
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
-                if (_argMapper == null) 
+                if (_argMapper == null)
                     _argMapper = new ArgMapper(this, false);
                 return _argMapper.Args;
             }
         }
-    
+
         public int ArgCount
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_message != null)
@@ -1229,13 +1277,13 @@ namespace System.Runtime.Remoting.Messaging {
                 else
                 {
                     throw new InvalidOperationException(
-                        Environment.GetResourceString(
-                            "InvalidOperation_InternalState"));
+                        Environment.GetResourceString("InvalidOperation_InternalState")
+                    );
                 }
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public Object GetArg(int argNum)
         {
             if (_message != null)
@@ -1245,12 +1293,12 @@ namespace System.Runtime.Remoting.Messaging {
             else
             {
                 throw new InvalidOperationException(
-                    Environment.GetResourceString(
-                        "InvalidOperation_InternalState"));
+                    Environment.GetResourceString("InvalidOperation_InternalState")
+                );
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public String GetArgName(int index)
         {
             if (_message != null)
@@ -1260,14 +1308,14 @@ namespace System.Runtime.Remoting.Messaging {
             else
             {
                 throw new InvalidOperationException(
-                    Environment.GetResourceString(
-                        "InvalidOperation_InternalState"));
+                    Environment.GetResourceString("InvalidOperation_InternalState")
+                );
             }
         }
 
         public bool HasVarArgs
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_message != null)
@@ -1277,15 +1325,15 @@ namespace System.Runtime.Remoting.Messaging {
                 else
                 {
                     throw new InvalidOperationException(
-                        Environment.GetResourceString(
-                            "InvalidOperation_InternalState"));
+                        Environment.GetResourceString("InvalidOperation_InternalState")
+                    );
                 }
             }
         }
 
         public Object[] Args
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_message != null)
@@ -1295,15 +1343,15 @@ namespace System.Runtime.Remoting.Messaging {
                 else
                 {
                     throw new InvalidOperationException(
-                        Environment.GetResourceString(
-                            "InvalidOperation_InternalState"));
+                        Environment.GetResourceString("InvalidOperation_InternalState")
+                    );
                 }
             }
         }
 
         public IDictionary Properties
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_properties == null)
@@ -1311,35 +1359,36 @@ namespace System.Runtime.Remoting.Messaging {
                     Object properties = new CCMDictionary(this, new Hashtable());
                     Interlocked.CompareExchange(ref _properties, properties, null);
                 }
-                return(IDictionary) _properties;
+                return (IDictionary)_properties;
             }
         }
 
         public IActivator Activator
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return _activator; }
-            [System.Security.SecurityCritical]  // auto-generated
-            set { _activator =  value; }
+            [System.Security.SecurityCritical] // auto-generated
+            set { _activator = value; }
         }
 
-        public LogicalCallContext LogicalCallContext  
-        { 
-            [System.Security.SecurityCritical]  // auto-generated
-            get
-            {
-                return GetLogicalCallContext();                 
-            }
+        public LogicalCallContext LogicalCallContext
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get { return GetLogicalCallContext(); }
         }
-        
 
         internal bool ActivateInContext
         {
-            get { return((_iFlags & CCM_ACTIVATEINCONTEXT) != 0);}
-            set { _iFlags = value ? (_iFlags | CCM_ACTIVATEINCONTEXT) : (_iFlags & ~CCM_ACTIVATEINCONTEXT);}
+            get { return ((_iFlags & CCM_ACTIVATEINCONTEXT) != 0); }
+            set
+            {
+                _iFlags = value
+                    ? (_iFlags | CCM_ACTIVATEINCONTEXT)
+                    : (_iFlags & ~CCM_ACTIVATEINCONTEXT);
+            }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void SetFrame(MessageData msgData)
         {
             Contract.Assert(_message == null, "Can't set frame twice on ConstructorCallMessage");
@@ -1347,7 +1396,7 @@ namespace System.Runtime.Remoting.Messaging {
             _message.InitFields(msgData);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal LogicalCallContext GetLogicalCallContext()
         {
             if (_message != null)
@@ -1357,12 +1406,12 @@ namespace System.Runtime.Remoting.Messaging {
             else
             {
                 throw new InvalidOperationException(
-                    Environment.GetResourceString(
-                        "InvalidOperation_InternalState"));
+                    Environment.GetResourceString("InvalidOperation_InternalState")
+                );
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal LogicalCallContext SetLogicalCallContext(LogicalCallContext ctx)
         {
             if (_message != null)
@@ -1372,10 +1421,9 @@ namespace System.Runtime.Remoting.Messaging {
             else
             {
                 throw new InvalidOperationException(
-                    Environment.GetResourceString(
-                        "InvalidOperation_InternalState"));
+                    Environment.GetResourceString("InvalidOperation_InternalState")
+                );
             }
-
         }
 
         internal Message GetMessage()
@@ -1393,64 +1441,63 @@ namespace System.Runtime.Remoting.Messaging {
 
     internal class CCMDictionary : MessageDictionary
     {
-        public static String[] CCMkeys = {
-            "__Uri",                //0
-            "__MethodName",         //1
-            "__MethodSignature",    //2
-            "__TypeName",           //3
-            "__Args",               //4
-            "__CallContext",        //5
-            "__CallSiteActivationAttributes",   //6
-            "__ActivationType",         //7
-            "__ContextProperties",  //8
-            "__Activator",          //9
-            "__ActivationTypeName"};         //10
+        public static String[] CCMkeys =
+        {
+            "__Uri", //0
+            "__MethodName", //1
+            "__MethodSignature", //2
+            "__TypeName", //3
+            "__Args", //4
+            "__CallContext", //5
+            "__CallSiteActivationAttributes", //6
+            "__ActivationType", //7
+            "__ContextProperties", //8
+            "__Activator", //9
+            "__ActivationTypeName",
+        }; //10
 
-        internal IConstructionCallMessage _ccmsg;           // back pointer to message object
-
+        internal IConstructionCallMessage _ccmsg; // back pointer to message object
 
         public CCMDictionary(IConstructionCallMessage msg, IDictionary idict)
-        : base(CCMkeys, idict)
+            : base(CCMkeys, idict)
         {
             _ccmsg = msg;
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal override Object GetMessageValue(int i)
         {
             switch (i)
             {
-            case 0:
-                return _ccmsg.Uri;
-            case 1:
-                return _ccmsg.MethodName;
-            case 2:
-                return _ccmsg.MethodSignature;
-            case 3:
-                return _ccmsg.TypeName;
-            case 4:
-                return _ccmsg.Args;
-            case 5:
-                return FetchLogicalCallContext();
-            case 6:
-                return _ccmsg.CallSiteActivationAttributes;
-            case 7:
-                // This it to keep us from serializing the requested server type
-                return null;
-            case 8:
-                return _ccmsg.ContextProperties;
-            case 9:
-                return _ccmsg.Activator;
-            case 10:
-                return _ccmsg.ActivationTypeName;
+                case 0:
+                    return _ccmsg.Uri;
+                case 1:
+                    return _ccmsg.MethodName;
+                case 2:
+                    return _ccmsg.MethodSignature;
+                case 3:
+                    return _ccmsg.TypeName;
+                case 4:
+                    return _ccmsg.Args;
+                case 5:
+                    return FetchLogicalCallContext();
+                case 6:
+                    return _ccmsg.CallSiteActivationAttributes;
+                case 7:
+                    // This it to keep us from serializing the requested server type
+                    return null;
+                case 8:
+                    return _ccmsg.ContextProperties;
+                case 9:
+                    return _ccmsg.Activator;
+                case 10:
+                    return _ccmsg.ActivationTypeName;
             }
             // We should not get here!
-            throw new RemotingException(
-                Environment.GetResourceString(
-                    "Remoting_Default"));                    
+            throw new RemotingException(Environment.GetResourceString("Remoting_Default"));
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private LogicalCallContext FetchLogicalCallContext()
         {
             ConstructorCallMessage ccm = _ccmsg as ConstructorCallMessage;
@@ -1462,13 +1509,13 @@ namespace System.Runtime.Remoting.Messaging {
             {
                 // This is the case where the message got serialized
                 // and deserialized
-                return((MethodCall)_ccmsg).GetLogicalCallContext();
+                return ((MethodCall)_ccmsg).GetLogicalCallContext();
             }
             else
             {
                 throw new RemotingException(
-                    Environment.GetResourceString(
-                        "Remoting_Message_BadType"));                    
+                    Environment.GetResourceString("Remoting_Message_BadType")
+                );
             }
         }
 
@@ -1477,22 +1524,20 @@ namespace System.Runtime.Remoting.Messaging {
         {
             switch (keyNum)
             {
-            case 0:
-                ((ConstructorCallMessage)_ccmsg).Uri = (String)value;
-                break;
-            case 1:
-                ((ConstructorCallMessage)_ccmsg).SetLogicalCallContext(
-                      (LogicalCallContext)value);
-                break;
-            default:
-                // We should not get here!
-                throw new RemotingException(
-                    Environment.GetResourceString(
-                        "Remoting_Default"));                    
+                case 0:
+                    ((ConstructorCallMessage)_ccmsg).Uri = (String)value;
+                    break;
+                case 1:
+                    ((ConstructorCallMessage)_ccmsg).SetLogicalCallContext(
+                        (LogicalCallContext)value
+                    );
+                    break;
+                default:
+                    // We should not get here!
+                    throw new RemotingException(Environment.GetResourceString("Remoting_Default"));
             }
         }
     }
-
 
     //+========================================================================
     //
@@ -1502,57 +1547,59 @@ namespace System.Runtime.Remoting.Messaging {
 
     internal class CRMDictionary : MessageDictionary
     {
-        public static String[]  CRMkeysFault = {
+        public static String[] CRMkeysFault =
+        {
             "__Uri",
             "__MethodName",
             "__MethodSignature",
             "__TypeName",
-            "__CallContext"};
-        public static String[]  CRMkeysNoFault =  {
+            "__CallContext",
+        };
+        public static String[] CRMkeysNoFault =
+        {
             "__Uri",
             "__MethodName",
             "__MethodSignature",
             "__TypeName",
             "__Return",
-            "__OutArgs",            
-            "__CallContext"};
+            "__OutArgs",
+            "__CallContext",
+        };
         internal IConstructionReturnMessage _crmsg;
         internal bool fault;
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public CRMDictionary(IConstructionReturnMessage msg, IDictionary idict)
-        : base( (msg.Exception!=null)? CRMkeysFault : CRMkeysNoFault, idict)
+            : base((msg.Exception != null) ? CRMkeysFault : CRMkeysNoFault, idict)
         {
-            fault = (msg.Exception != null) ;
+            fault = (msg.Exception != null);
             _crmsg = msg;
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal override Object GetMessageValue(int i)
         {
             switch (i)
             {
-            case 0:
-                return _crmsg.Uri;
-            case 1:
-                return _crmsg.MethodName;
-            case 2:
-                return _crmsg.MethodSignature;
-            case 3:
-                return _crmsg.TypeName;
-            case 4:
-                return fault ? FetchLogicalCallContext() : _crmsg.ReturnValue;
-            case 5:
-                return _crmsg.Args;
-            case 6:
-                return FetchLogicalCallContext();
+                case 0:
+                    return _crmsg.Uri;
+                case 1:
+                    return _crmsg.MethodName;
+                case 2:
+                    return _crmsg.MethodSignature;
+                case 3:
+                    return _crmsg.TypeName;
+                case 4:
+                    return fault ? FetchLogicalCallContext() : _crmsg.ReturnValue;
+                case 5:
+                    return _crmsg.Args;
+                case 6:
+                    return FetchLogicalCallContext();
             }
-            throw new RemotingException(
-                Environment.GetResourceString(
-                    "Remoting_Default"));                    
+            throw new RemotingException(Environment.GetResourceString("Remoting_Default"));
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private LogicalCallContext FetchLogicalCallContext()
         {
             ReturnMessage retMsg = _crmsg as ReturnMessage;
@@ -1560,7 +1607,7 @@ namespace System.Runtime.Remoting.Messaging {
             {
                 return retMsg.GetLogicalCallContext();
             }
-            else 
+            else
             {
                 MethodResponse mr = _crmsg as MethodResponse;
                 if (null != mr)
@@ -1570,8 +1617,8 @@ namespace System.Runtime.Remoting.Messaging {
                 else
                 {
                     throw new RemotingException(
-                        Environment.GetResourceString(
-                            "Remoting_Message_BadType"));                    
+                        Environment.GetResourceString("Remoting_Message_BadType")
+                    );
                 }
             }
         }
@@ -1583,52 +1630,48 @@ namespace System.Runtime.Remoting.Messaging {
 
             ReturnMessage rm = _crmsg as ReturnMessage;
             MethodResponse mr = _crmsg as MethodResponse;
-            switch(keyNum)
+            switch (keyNum)
             {
-            case 0:
-                if (null != rm)
-                {
-                    rm.Uri = (String)value;
-                }
-                else 
-                {
-                    
-                    if (null != mr)
+                case 0:
+                    if (null != rm)
                     {
-                        mr.Uri = (String)value;
+                        rm.Uri = (String)value;
                     }
                     else
                     {
-                        throw new RemotingException(
-                            Environment.GetResourceString(
-                                "Remoting_Message_BadType"));                    
-                    }                        
-                }
-                break;
-            case 1:
-                if (null != rm)
-                {
-                    rm.SetLogicalCallContext((LogicalCallContext)value);
-                }
-                else 
-                {
-                    
-                    if (null != mr)
-                {
-                        mr.SetLogicalCallContext((LogicalCallContext)value);
-                }
-                else
-                {
-                    throw new RemotingException(
-                        Environment.GetResourceString(
-                            "Remoting_Message_BadType"));                    
-                }
-                }
-                break;
-            default:
-                throw new RemotingException(
-                    Environment.GetResourceString(
-                        "Remoting_Default"));                    
+                        if (null != mr)
+                        {
+                            mr.Uri = (String)value;
+                        }
+                        else
+                        {
+                            throw new RemotingException(
+                                Environment.GetResourceString("Remoting_Message_BadType")
+                            );
+                        }
+                    }
+                    break;
+                case 1:
+                    if (null != rm)
+                    {
+                        rm.SetLogicalCallContext((LogicalCallContext)value);
+                    }
+                    else
+                    {
+                        if (null != mr)
+                        {
+                            mr.SetLogicalCallContext((LogicalCallContext)value);
+                        }
+                        else
+                        {
+                            throw new RemotingException(
+                                Environment.GetResourceString("Remoting_Message_BadType")
+                            );
+                        }
+                    }
+                    break;
+                default:
+                    throw new RemotingException(Environment.GetResourceString("Remoting_Default"));
             }
         }
     }
@@ -1641,49 +1684,48 @@ namespace System.Runtime.Remoting.Messaging {
 
     internal class MCMDictionary : MessageDictionary
     {
-        public static String[] MCMkeys = {
+        public static String[] MCMkeys =
+        {
             "__Uri",
             "__MethodName",
             "__MethodSignature",
             "__TypeName",
             "__Args",
-            "__CallContext"};
+            "__CallContext",
+        };
 
-        internal IMethodCallMessage _mcmsg;           // back pointer to message object
-
+        internal IMethodCallMessage _mcmsg; // back pointer to message object
 
         public MCMDictionary(IMethodCallMessage msg, IDictionary idict)
-        : base(MCMkeys, idict)
+            : base(MCMkeys, idict)
         {
             _mcmsg = msg;
         }
 
-        [System.Security.SecuritySafeCritical]  // auto-generated
+        [System.Security.SecuritySafeCritical] // auto-generated
         internal override Object GetMessageValue(int i)
         {
             switch (i)
             {
-            case 0:
-                return _mcmsg.Uri;
-            case 1:
-                return _mcmsg.MethodName;
-            case 2:
-                return _mcmsg.MethodSignature;
-            case 3:
-                return _mcmsg.TypeName;
-            case 4:
-                return _mcmsg.Args;
-            case 5:
-                return FetchLogicalCallContext();
+                case 0:
+                    return _mcmsg.Uri;
+                case 1:
+                    return _mcmsg.MethodName;
+                case 2:
+                    return _mcmsg.MethodSignature;
+                case 3:
+                    return _mcmsg.TypeName;
+                case 4:
+                    return _mcmsg.Args;
+                case 5:
+                    return FetchLogicalCallContext();
             }
 
             // Shouldn't get here.
-            throw new RemotingException(
-                Environment.GetResourceString(
-                    "Remoting_Default"));                    
+            throw new RemotingException(Environment.GetResourceString("Remoting_Default"));
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private LogicalCallContext FetchLogicalCallContext()
         {
             Message msg = _mcmsg as Message;
@@ -1697,14 +1739,14 @@ namespace System.Runtime.Remoting.Messaging {
                 if (null != mc)
                 {
                     return mc.GetLogicalCallContext();
-                }                    
-            else
-            {
-                throw new RemotingException(
-                    Environment.GetResourceString(
-                        "Remoting_Message_BadType"));                    
-            }                
-        }        
+                }
+                else
+                {
+                    throw new RemotingException(
+                        Environment.GetResourceString("Remoting_Message_BadType")
+                    );
+                }
+            }
         }
 
         [System.Security.SecurityCritical]
@@ -1714,41 +1756,39 @@ namespace System.Runtime.Remoting.Messaging {
             MethodCall mc = _mcmsg as MethodCall;
             switch (keyNum)
             {
-            case 0:
-                if(null != msg)
-                {
-                    msg.Uri = (String)value;
-                }
-                else if (null != mc)
-                {
-                    mc.Uri = (String)value;
-                }                
-                else
-                {
-                    throw new RemotingException(
-                        Environment.GetResourceString(
-                            "Remoting_Message_BadType"));                    
-                }
-            break;
+                case 0:
+                    if (null != msg)
+                    {
+                        msg.Uri = (String)value;
+                    }
+                    else if (null != mc)
+                    {
+                        mc.Uri = (String)value;
+                    }
+                    else
+                    {
+                        throw new RemotingException(
+                            Environment.GetResourceString("Remoting_Message_BadType")
+                        );
+                    }
+                    break;
 
-            case 1:               
-                if(null != msg)
-                {
-                    msg.SetLogicalCallContext((LogicalCallContext)value);
-                }
-                else
-                {
-                    throw new RemotingException(
-                        Environment.GetResourceString(
-                            "Remoting_Message_BadType"));                    
-                }
-                break;
-            default:
-                // Shouldn't get here.
-                throw new RemotingException(
-                    Environment.GetResourceString(
-                        "Remoting_Default"));                    
-            }        
+                case 1:
+                    if (null != msg)
+                    {
+                        msg.SetLogicalCallContext((LogicalCallContext)value);
+                    }
+                    else
+                    {
+                        throw new RemotingException(
+                            Environment.GetResourceString("Remoting_Message_BadType")
+                        );
+                    }
+                    break;
+                default:
+                    // Shouldn't get here.
+                    throw new RemotingException(Environment.GetResourceString("Remoting_Default"));
+            }
         }
     }
 
@@ -1759,24 +1799,26 @@ namespace System.Runtime.Remoting.Messaging {
     //-================================================================================
     internal class MRMDictionary : MessageDictionary
     {
-        public static String[]  MCMkeysFault = {"__CallContext"};
-        public static String[]  MCMkeysNoFault =  {
+        public static String[] MCMkeysFault = { "__CallContext" };
+        public static String[] MCMkeysNoFault =
+        {
             "__Uri",
             "__MethodName",
             "__MethodSignature",
             "__TypeName",
             "__Return",
             "__OutArgs",
-            "__CallContext"};
+            "__CallContext",
+        };
 
         internal IMethodReturnMessage _mrmsg;
         internal bool fault;
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public MRMDictionary(IMethodReturnMessage msg, IDictionary idict)
-        : base((msg.Exception != null) ? MCMkeysFault : MCMkeysNoFault, idict)
+            : base((msg.Exception != null) ? MCMkeysFault : MCMkeysNoFault, idict)
         {
-            fault = (msg.Exception != null) ;
+            fault = (msg.Exception != null);
             _mrmsg = msg;
         }
 
@@ -1785,38 +1827,36 @@ namespace System.Runtime.Remoting.Messaging {
         {
             switch (i)
             {
-            case 0:
-                if (fault)
+                case 0:
+                    if (fault)
+                        return FetchLogicalCallContext();
+                    else
+                        return _mrmsg.Uri;
+                case 1:
+                    return _mrmsg.MethodName;
+                case 2:
+                    return _mrmsg.MethodSignature;
+                case 3:
+                    return _mrmsg.TypeName;
+                case 4:
+                    if (fault)
+                    {
+                        return _mrmsg.Exception;
+                    }
+                    else
+                    {
+                        return _mrmsg.ReturnValue;
+                    }
+                case 5:
+                    return _mrmsg.Args;
+                case 6:
                     return FetchLogicalCallContext();
-                else
-                    return _mrmsg.Uri;
-            case 1:
-                return _mrmsg.MethodName;
-            case 2:
-                return _mrmsg.MethodSignature;
-            case 3:
-                return _mrmsg.TypeName;
-            case 4:
-                if (fault)
-                {
-                    return _mrmsg.Exception;
-                }
-                else
-                {
-                    return _mrmsg.ReturnValue;
-                }
-            case 5:
-                return _mrmsg.Args;
-            case 6:
-                return FetchLogicalCallContext();
             }
             // Shouldn't get here.
-            throw new RemotingException(
-                Environment.GetResourceString(
-                    "Remoting_Default"));                    
+            throw new RemotingException(Environment.GetResourceString("Remoting_Default"));
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private LogicalCallContext FetchLogicalCallContext()
         {
             ReturnMessage rm = _mrmsg as ReturnMessage;
@@ -1824,27 +1864,27 @@ namespace System.Runtime.Remoting.Messaging {
             {
                 return rm.GetLogicalCallContext();
             }
-            else                 
+            else
             {
                 MethodResponse mr = _mrmsg as MethodResponse;
                 if (null != mr)
                 {
-                    return mr.GetLogicalCallContext(); 
-            }
+                    return mr.GetLogicalCallContext();
+                }
                 else
                 {
                     StackBasedReturnMessage srm = _mrmsg as StackBasedReturnMessage;
                     if (null != srm)
-            {
+                    {
                         return srm.GetLogicalCallContext();
-            }
-            else
-            {
-                throw new RemotingException(
-                    Environment.GetResourceString(
-                        "Remoting_Message_BadType"));                    
-            }
-        }        
+                    }
+                    else
+                    {
+                        throw new RemotingException(
+                            Environment.GetResourceString("Remoting_Message_BadType")
+                        );
+                    }
+                }
             }
         }
 
@@ -1853,59 +1893,55 @@ namespace System.Runtime.Remoting.Messaging {
         {
             // 0 == Uri
             // 1 == CallContext
-            // NOTE : we use this for Uri & CallContext only ... 
+            // NOTE : we use this for Uri & CallContext only ...
             ReturnMessage rm = _mrmsg as ReturnMessage;
             MethodResponse mr = _mrmsg as MethodResponse;
 
             switch (keyNum)
             {
-            case 0:
-                if (null != rm)
-                {
-                    rm.Uri = (String)value;
-                }
-                else 
-                {                    
-                    if (null != mr)
+                case 0:
+                    if (null != rm)
                     {
-                        mr.Uri = (String)value;
+                        rm.Uri = (String)value;
                     }
                     else
                     {
-                        throw new RemotingException(
-                            Environment.GetResourceString(
-                                "Remoting_Message_BadType"));                    
-                    }            
-                }
-                break;
-            case 1:
-                if (null != rm)
-                {
-                    rm.SetLogicalCallContext((LogicalCallContext)value);
-                }
-                else 
-                {
-                    
-                    if (null != mr)
-                {
-                        mr.SetLogicalCallContext((LogicalCallContext)value);
-                }
-                else
-                {
-                    throw new RemotingException(
-                        Environment.GetResourceString(
-                            "Remoting_Message_BadType"));                    
-                }            
-                }
-                break;
-            default:
-                // Shouldn't get here.
-                throw new RemotingException(
-                    Environment.GetResourceString(
-                        "Remoting_Default"));                    
-            }        
+                        if (null != mr)
+                        {
+                            mr.Uri = (String)value;
+                        }
+                        else
+                        {
+                            throw new RemotingException(
+                                Environment.GetResourceString("Remoting_Message_BadType")
+                            );
+                        }
+                    }
+                    break;
+                case 1:
+                    if (null != rm)
+                    {
+                        rm.SetLogicalCallContext((LogicalCallContext)value);
+                    }
+                    else
+                    {
+                        if (null != mr)
+                        {
+                            mr.SetLogicalCallContext((LogicalCallContext)value);
+                        }
+                        else
+                        {
+                            throw new RemotingException(
+                                Environment.GetResourceString("Remoting_Message_BadType")
+                            );
+                        }
+                    }
+                    break;
+                default:
+                    // Shouldn't get here.
+                    throw new RemotingException(Environment.GetResourceString("Remoting_Default"));
+            }
         }
-
     }
 
     //+================================================================================
@@ -1916,13 +1952,13 @@ namespace System.Runtime.Remoting.Messaging {
     internal abstract class MessageDictionary : IDictionary
     {
         internal String[] _keys;
-        internal IDictionary  _dict;
+        internal IDictionary _dict;
 
         internal MessageDictionary(String[] keys, IDictionary idict)
         {
             _keys = keys;
             _dict = idict;
-        }        
+        }
 
         internal bool HasUserData()
         {
@@ -1940,19 +1976,29 @@ namespace System.Runtime.Remoting.Messaging {
         {
             get { return _dict; }
         }
-        
 
         internal abstract Object GetMessageValue(int i);
 
         [System.Security.SecurityCritical]
         internal abstract void SetSpecialKey(int keyNum, Object value);
 
-        public virtual bool IsReadOnly { get { return false; } }
-        public virtual bool IsSynchronized { get { return false; } }
-        public virtual bool IsFixedSize { get { return false; } }
-        
-        public virtual Object SyncRoot { get { return this; } }
-        
+        public virtual bool IsReadOnly
+        {
+            get { return false; }
+        }
+        public virtual bool IsSynchronized
+        {
+            get { return false; }
+        }
+        public virtual bool IsFixedSize
+        {
+            get { return false; }
+        }
+
+        public virtual Object SyncRoot
+        {
+            get { return this; }
+        }
 
         public virtual bool Contains(Object key)
         {
@@ -1973,8 +2019,8 @@ namespace System.Runtime.Remoting.Messaging {
             {
                 return false;
             }
-            String skey = (String) key;
-            for (int i = 0 ; i < _keys.Length; i++)
+            String skey = (String)key;
+            for (int i = 0; i < _keys.Length; i++)
             {
                 if (skey.Equals(_keys[i]))
                 {
@@ -1986,14 +2032,14 @@ namespace System.Runtime.Remoting.Messaging {
 
         public virtual void CopyTo(Array array, int index)
         {
-            for (int i=0; i<_keys.Length; i++)
+            for (int i = 0; i < _keys.Length; i++)
             {
-                array.SetValue(GetMessageValue(i), index+i);
+                array.SetValue(GetMessageValue(i), index + i);
             }
 
             if (_dict != null)
             {
-                _dict.CopyTo(array, index+_keys.Length);
+                _dict.CopyTo(array, index + _keys.Length);
             }
         }
 
@@ -2004,7 +2050,7 @@ namespace System.Runtime.Remoting.Messaging {
                 System.String skey = key as System.String;
                 if (null != skey)
                 {
-                    for (int i=0; i<_keys.Length; i++)
+                    for (int i = 0; i < _keys.Length; i++)
                     {
                         if (skey.Equals(_keys[i]))
                         {
@@ -2018,24 +2064,24 @@ namespace System.Runtime.Remoting.Messaging {
                 }
                 return null;
             }
-            [System.Security.SecuritySafeCritical] // 
+            [System.Security.SecuritySafeCritical] //
             set
             {
                 if (ContainsSpecialKey(key))
                 {
                     if (key.Equals(Message.UriKey))
                     {
-                        SetSpecialKey(0,value);
+                        SetSpecialKey(0, value);
                     }
                     else if (key.Equals(Message.CallContextKey))
                     {
-                        SetSpecialKey(1,value);
-                    }                    
+                        SetSpecialKey(1, value);
+                    }
                     else
                     {
                         throw new ArgumentException(
-                            Environment.GetResourceString(
-                                "Argument_InvalidKey"));
+                            Environment.GetResourceString("Argument_InvalidKey")
+                        );
                     }
                 }
                 else
@@ -2046,7 +2092,6 @@ namespace System.Runtime.Remoting.Messaging {
                     }
                     _dict[key] = value;
                 }
-
             }
         }
 
@@ -2060,15 +2105,12 @@ namespace System.Runtime.Remoting.Messaging {
             throw new NotSupportedException();
         }
 
-
         public virtual void Add(Object key, Object value)
         {
             if (ContainsSpecialKey(key))
             {
-                throw new ArgumentException(
-                    Environment.GetResourceString(
-                        "Argument_InvalidKey"));
-            } 
+                throw new ArgumentException(Environment.GetResourceString("Argument_InvalidKey"));
+            }
             else
             {
                 if (_dict == null)
@@ -2094,10 +2136,8 @@ namespace System.Runtime.Remoting.Messaging {
         {
             if (ContainsSpecialKey(key) || (_dict == null))
             {
-                throw new ArgumentException(
-                    Environment.GetResourceString(
-                        "Argument_InvalidKey"));
-            } 
+                throw new ArgumentException(Environment.GetResourceString("Argument_InvalidKey"));
+            }
             else
             {
                 _dict.Remove(key);
@@ -2108,7 +2148,6 @@ namespace System.Runtime.Remoting.Messaging {
         {
             get
             {
-
                 int len = _keys.Length;
                 ICollection c = (_dict != null) ? _dict.Keys : null;
                 if (c != null)
@@ -2117,7 +2156,7 @@ namespace System.Runtime.Remoting.Messaging {
                 }
 
                 ArrayList l = new ArrayList(len);
-                for (int i = 0; i<_keys.Length; i++)
+                for (int i = 0; i < _keys.Length; i++)
                 {
                     l.Add(_keys[i]);
                 }
@@ -2144,7 +2183,7 @@ namespace System.Runtime.Remoting.Messaging {
 
                 ArrayList l = new ArrayList(len);
 
-                for (int i = 0; i<_keys.Length; i++)
+                for (int i = 0; i < _keys.Length; i++)
                 {
                     l.Add(GetMessageValue(i));
                 }
@@ -2163,7 +2202,7 @@ namespace System.Runtime.Remoting.Messaging {
             {
                 if (_dict != null)
                 {
-                    return _dict.Count+_keys.Length;
+                    return _dict.Count + _keys.Length;
                 }
                 else
                 {
@@ -2171,7 +2210,6 @@ namespace System.Runtime.Remoting.Messaging {
                 }
             }
         }
-
     }
 
     //+================================================================================
@@ -2181,10 +2219,9 @@ namespace System.Runtime.Remoting.Messaging {
     //-================================================================================
     internal class MessageDictionaryEnumerator : IDictionaryEnumerator
     {
-        private int i=-1;
+        private int i = -1;
         private IDictionaryEnumerator _enumHash;
-        private MessageDictionary    _md;
-
+        private MessageDictionary _md;
 
         public MessageDictionaryEnumerator(MessageDictionary md, IDictionary hashtable)
         {
@@ -2198,20 +2235,23 @@ namespace System.Runtime.Remoting.Messaging {
                 _enumHash = null;
             }
         }
+
         // Returns the key of the current element of the enumeration. The returned
         // value is undefined before the first call to GetNext and following
         // a call to GetNext that returned false. Multiple calls to
         // GetKey with no intervening calls to GetNext will return
         // the same object.
         //
-        public Object Key {
-            get {
+        public Object Key
+        {
+            get
+            {
                 Message.DebugOut("MessageDE::GetKey i = " + i + "\n");
                 if (i < 0)
                 {
                     throw new InvalidOperationException(
-                        Environment.GetResourceString(
-                            "InvalidOperation_InternalState"));
+                        Environment.GetResourceString("InvalidOperation_InternalState")
+                    );
                 }
                 if (i < _md._keys.Length)
                 {
@@ -2219,7 +2259,7 @@ namespace System.Runtime.Remoting.Messaging {
                 }
                 else
                 {
-                    Contract.Assert(_enumHash != null,"_enumHash != null");
+                    Contract.Assert(_enumHash != null, "_enumHash != null");
                     return _enumHash.Key;
                 }
             }
@@ -2231,13 +2271,15 @@ namespace System.Runtime.Remoting.Messaging {
         // to GetValue with no intervening calls to GetNext will
         // return the same object.
         //
-        public Object Value {
-            get {
+        public Object Value
+        {
+            get
+            {
                 if (i < 0)
                 {
                     throw new InvalidOperationException(
-                        Environment.GetResourceString(
-                            "InvalidOperation_InternalState"));
+                        Environment.GetResourceString("InvalidOperation_InternalState")
+                    );
                 }
 
                 if (i < _md._keys.Length)
@@ -2246,7 +2288,7 @@ namespace System.Runtime.Remoting.Messaging {
                 }
                 else
                 {
-                    Contract.Assert(_enumHash != null,"_enumHash != null");
+                    Contract.Assert(_enumHash != null, "_enumHash != null");
                     return _enumHash.Value;
                 }
             }
@@ -2263,8 +2305,8 @@ namespace System.Runtime.Remoting.Messaging {
             if (i == -2)
             {
                 throw new InvalidOperationException(
-                    Environment.GetResourceString(
-                        "InvalidOperation_InternalState"));
+                    Environment.GetResourceString("InvalidOperation_InternalState")
+                );
             }
             i++;
             if (i < _md._keys.Length)
@@ -2291,16 +2333,14 @@ namespace System.Runtime.Remoting.Messaging {
         // Current with no intervening calls to MoveNext will return
         // the same object.
         //
-        public Object Current {
-            get {
-                return Entry;
-            }
+        public Object Current
+        {
+            get { return Entry; }
         }
 
-        public DictionaryEntry Entry {
-            get {
-                return new DictionaryEntry(Key, Value);
-            }
+        public DictionaryEntry Entry
+        {
+            get { return new DictionaryEntry(Key, Value); }
         }
 
         // Resets the enumerator, positioning it before the first element.  If an
@@ -2328,7 +2368,7 @@ namespace System.Runtime.Remoting.Messaging {
         MRMDictionary _d;
         ArgMapper _argMapper;
 
-        internal StackBasedReturnMessage()      {}
+        internal StackBasedReturnMessage() { }
 
         // NOTE: This method is called multiple times as we reuse the
         // message object. Make sure that you reset any fields that you
@@ -2352,120 +2392,137 @@ namespace System.Runtime.Remoting.Messaging {
 
         public String Uri
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return _m.Uri;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _m.Uri; }
         }
 
         public String MethodName
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return _m.MethodName;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _m.MethodName; }
         }
 
         public String TypeName
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return _m.TypeName;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _m.TypeName; }
         }
 
         public Object MethodSignature
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return _m.MethodSignature;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _m.MethodSignature; }
         }
 
         public MethodBase MethodBase
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return _m.MethodBase;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _m.MethodBase; }
         }
 
         public bool HasVarArgs
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return _m.HasVarArgs;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _m.HasVarArgs; }
         }
 
         public int ArgCount
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return _m.ArgCount;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _m.ArgCount; }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public Object GetArg(int argNum)     {return _m.GetArg(argNum);}
-        [System.Security.SecurityCritical]  // auto-generated
-        public String GetArgName(int index)  {return _m.GetArgName(index);}
+        [System.Security.SecurityCritical] // auto-generated
+        public Object GetArg(int argNum)
+        {
+            return _m.GetArg(argNum);
+        }
+
+        [System.Security.SecurityCritical] // auto-generated
+        public String GetArgName(int index)
+        {
+            return _m.GetArgName(index);
+        }
+
         public Object[] Args
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return _m.Args;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _m.Args; }
         }
         public LogicalCallContext LogicalCallContext
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return _m.GetLogicalCallContext(); }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal LogicalCallContext GetLogicalCallContext() {return _m.GetLogicalCallContext();}
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
+        internal LogicalCallContext GetLogicalCallContext()
+        {
+            return _m.GetLogicalCallContext();
+        }
+
+        [System.Security.SecurityCritical] // auto-generated
         internal LogicalCallContext SetLogicalCallContext(LogicalCallContext callCtx)
         {
             return _m.SetLogicalCallContext(callCtx);
         }
 
-        public int OutArgCount                        
-        { 
-            [System.Security.SecurityCritical]  // auto-generated
-            get 
+        public int OutArgCount
+        {
+            [System.Security.SecurityCritical] // auto-generated
+            get
             {
-                if (_argMapper == null) _argMapper = new ArgMapper(this, true);
+                if (_argMapper == null)
+                    _argMapper = new ArgMapper(this, true);
                 return _argMapper.ArgCount;
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public Object  GetOutArg(int argNum)   
-        {   
-            if (_argMapper == null) _argMapper = new ArgMapper(this, true);
+        [System.Security.SecurityCritical] // auto-generated
+        public Object GetOutArg(int argNum)
+        {
+            if (_argMapper == null)
+                _argMapper = new ArgMapper(this, true);
             return _argMapper.GetArg(argNum);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public String GetOutArgName(int index) 
-        { 
-            if (_argMapper == null) _argMapper = new ArgMapper(this, true);
+        [System.Security.SecurityCritical] // auto-generated
+        public String GetOutArgName(int index)
+        {
+            if (_argMapper == null)
+                _argMapper = new ArgMapper(this, true);
             return _argMapper.GetArgName(index);
         }
-        public Object[] OutArgs                       
+
+        public Object[] OutArgs
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
-                if (_argMapper == null) _argMapper = new ArgMapper(this, true);
+                if (_argMapper == null)
+                    _argMapper = new ArgMapper(this, true);
                 return _argMapper.Args;
             }
         }
 
         public Exception Exception
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return null;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return null; }
         }
 
         public Object ReturnValue
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return _m.GetReturnValue();}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return _m.GetReturnValue(); }
         }
 
         public IDictionary Properties
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
-                lock(this)
+                lock (this)
                 {
                     if (_h == null)
                     {
@@ -2489,7 +2546,7 @@ namespace System.Runtime.Remoting.Messaging {
             [System.Security.SecurityCritical]
             get { return null; }
             [System.Security.SecurityCritical]
-            set {}
+            set { }
         }
 
         Identity IInternalMessage.IdentityObject
@@ -2497,7 +2554,7 @@ namespace System.Runtime.Remoting.Messaging {
             [System.Security.SecurityCritical]
             get { return null; }
             [System.Security.SecurityCritical]
-            set {}
+            set { }
         }
 
         [System.Security.SecurityCritical]
@@ -2518,45 +2575,52 @@ namespace System.Runtime.Remoting.Messaging {
             return _h != null;
         }
     } // class StackBasedReturnMessage
-    
 
     //+================================================================================
     //
     // Synopsis:   Message for return from a stack builder sink call
     //
     //-================================================================================
-    [System.Security.SecurityCritical]  // auto-generated_required
-    [SecurityPermissionAttribute(SecurityAction.InheritanceDemand, Flags=SecurityPermissionFlag.Infrastructure)]    
+    [System.Security.SecurityCritical] // auto-generated_required
+    [SecurityPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Flags = SecurityPermissionFlag.Infrastructure
+    )]
     [System.Runtime.InteropServices.ComVisible(true)]
     public class ReturnMessage : IMethodReturnMessage
     {
-        internal Object         _ret;
-        internal Object         _properties;
-        internal String         _URI;
-        internal Exception      _e;
-        internal Object[]      _outArgs;
-        internal int            _outArgsCount;
-        internal String         _methodName;
-        internal String         _typeName;
-        internal Type[]         _methodSignature;
-        internal bool           _hasVarArgs;
+        internal Object _ret;
+        internal Object _properties;
+        internal String _URI;
+        internal Exception _e;
+        internal Object[] _outArgs;
+        internal int _outArgsCount;
+        internal String _methodName;
+        internal String _typeName;
+        internal Type[] _methodSignature;
+        internal bool _hasVarArgs;
         internal LogicalCallContext _callContext;
-        internal ArgMapper      _argMapper;
-        internal MethodBase     _methodBase;
+        internal ArgMapper _argMapper;
+        internal MethodBase _methodBase;
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public ReturnMessage(Object ret, Object[] outArgs, int outArgsCount, LogicalCallContext callCtx,
-                             IMethodCallMessage mcm)
+        [System.Security.SecurityCritical] // auto-generated
+        public ReturnMessage(
+            Object ret,
+            Object[] outArgs,
+            int outArgsCount,
+            LogicalCallContext callCtx,
+            IMethodCallMessage mcm
+        )
         {
             _ret = ret;
             _outArgs = outArgs;
             _outArgsCount = outArgsCount;
-            
+
             if (callCtx != null)
                 _callContext = callCtx;
             else
                 _callContext = Thread.CurrentThread.GetMutableExecutionContext().LogicalCallContext;
-                
+
             if (mcm != null)
             {
                 _URI = mcm.Uri;
@@ -2568,10 +2632,12 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public ReturnMessage(Exception e, IMethodCallMessage mcm)
         {
-            _e   = IsCustomErrorEnabled()? new RemotingException(Environment.GetResourceString("Remoting_InternalError")):e;
+            _e = IsCustomErrorEnabled()
+                ? new RemotingException(Environment.GetResourceString("Remoting_InternalError"))
+                : e;
             _callContext = Thread.CurrentThread.GetMutableExecutionContext().LogicalCallContext;
             if (mcm != null)
             {
@@ -2600,15 +2666,15 @@ namespace System.Runtime.Remoting.Messaging {
             [System.Security.SecurityCritical]
             get { return _typeName; }
         }
-        public Object MethodSignature 
+        public Object MethodSignature
         {
             [System.Security.SecurityCritical]
-            get 
-            { 
+            get
+            {
                 if ((_methodSignature == null) && (_methodBase != null))
                     _methodSignature = Message.GenerateMethodSignature(_methodBase);
-                    
-                return _methodSignature; 
+
+                return _methodSignature;
             }
         }
 
@@ -2621,11 +2687,7 @@ namespace System.Runtime.Remoting.Messaging {
         public bool HasVarArgs
         {
             [System.Security.SecurityCritical]
-            get
-            {
-                return _hasVarArgs;
-            }
-
+            get { return _hasVarArgs; }
         }
 
         public int ArgCount
@@ -2649,7 +2711,7 @@ namespace System.Runtime.Remoting.Messaging {
         {
             if (_outArgs == null)
             {
-                if ((argNum<0) || (argNum>=_outArgsCount))
+                if ((argNum < 0) || (argNum >= _outArgsCount))
                 {
                     throw new ArgumentOutOfRangeException("argNum");
                 }
@@ -2657,37 +2719,36 @@ namespace System.Runtime.Remoting.Messaging {
             }
             else
             {
-                if ((argNum<0) || (argNum>=_outArgs.Length))
+                if ((argNum < 0) || (argNum >= _outArgs.Length))
                 {
                     throw new ArgumentOutOfRangeException("argNum");
                 }
                 return _outArgs[argNum];
             }
-
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public String GetArgName(int index)
         {
-
             if (_outArgs == null)
             {
-                if ((index < 0) || (index>=_outArgsCount))
+                if ((index < 0) || (index >= _outArgsCount))
                 {
                     throw new ArgumentOutOfRangeException("index");
                 }
             }
             else
             {
-                if ((index < 0) || (index>=_outArgs.Length))
+                if ((index < 0) || (index >= _outArgs.Length))
                 {
                     throw new ArgumentOutOfRangeException("index");
                 }
             }
-            
+
             if (_methodBase != null)
             {
-                RemotingMethodCachedData methodCache = InternalRemotingServices.GetReflectionCachedData(_methodBase);             
+                RemotingMethodCachedData methodCache =
+                    InternalRemotingServices.GetReflectionCachedData(_methodBase);
                 return methodCache.Parameters[index].Name;
             }
             else
@@ -2707,35 +2768,40 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-        public int OutArgCount                        
+        public int OutArgCount
         {
             [System.Security.SecurityCritical]
-            get 
+            get
             {
-                if (_argMapper == null) _argMapper = new ArgMapper(this, true);
+                if (_argMapper == null)
+                    _argMapper = new ArgMapper(this, true);
                 return _argMapper.ArgCount;
             }
         }
 
         [System.Security.SecurityCritical]
-        public Object GetOutArg(int argNum)   
-        {   
-            if (_argMapper == null) _argMapper = new ArgMapper(this, true);
+        public Object GetOutArg(int argNum)
+        {
+            if (_argMapper == null)
+                _argMapper = new ArgMapper(this, true);
             return _argMapper.GetArg(argNum);
         }
 
         [System.Security.SecurityCritical]
-        public String GetOutArgName(int index) 
-        { 
-            if (_argMapper == null) _argMapper = new ArgMapper(this, true);
+        public String GetOutArgName(int index)
+        {
+            if (_argMapper == null)
+                _argMapper = new ArgMapper(this, true);
             return _argMapper.GetArgName(index);
         }
-        public Object[] OutArgs                       
+
+        public Object[] OutArgs
         {
             [System.Security.SecurityCritical]
             get
             {
-                if (_argMapper == null) _argMapper = new ArgMapper(this, true);
+                if (_argMapper == null)
+                    _argMapper = new ArgMapper(this, true);
                 return _argMapper.Args;
             }
         }
@@ -2760,18 +2826,17 @@ namespace System.Runtime.Remoting.Messaging {
                 {
                     _properties = new MRMDictionary(this, null);
                 }
-                return(MRMDictionary) _properties;
+                return (MRMDictionary)_properties;
             }
         }
 
-        public LogicalCallContext LogicalCallContext 
+        public LogicalCallContext LogicalCallContext
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get { return GetLogicalCallContext();}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return GetLogicalCallContext(); }
         }
-            
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal LogicalCallContext GetLogicalCallContext()
         {
             if (_callContext == null)
@@ -2782,7 +2847,7 @@ namespace System.Runtime.Remoting.Messaging {
         internal LogicalCallContext SetLogicalCallContext(LogicalCallContext ctx)
         {
             LogicalCallContext old = _callContext;
-            _callContext=ctx;
+            _callContext = ctx;
             return old;
         }
 
@@ -2791,32 +2856,44 @@ namespace System.Runtime.Remoting.Messaging {
         {
             return _properties != null;
         }
-        [System.Security.SecurityCritical]  // auto-generated
-        static internal bool IsCustomErrorEnabled(){
-            Object oIsCustomErrorEnabled  = CallContext.GetData("__CustomErrorsEnabled");
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal static bool IsCustomErrorEnabled()
+        {
+            Object oIsCustomErrorEnabled = CallContext.GetData("__CustomErrorsEnabled");
             // The server side will always have this CallContext item set. If it is not set then
             // it means this is the client side. In that case customError is false.
-            return (oIsCustomErrorEnabled == null) ? false:(bool)oIsCustomErrorEnabled;
+            return (oIsCustomErrorEnabled == null) ? false : (bool)oIsCustomErrorEnabled;
         }
-
     } // class ReturnMessage
-    
+
     //+================================================================================
     //
     // Synopsis:   Message used for deserialization of a method call
     //
     //-================================================================================
     /// <internalonly/>
-    [System.Security.SecurityCritical]  // auto-generated_required
+    [System.Security.SecurityCritical] // auto-generated_required
     [Serializable]
     [CLSCompliant(false)]
-    [SecurityPermissionAttribute(SecurityAction.InheritanceDemand, Flags=SecurityPermissionFlag.Infrastructure)]    
+    [SecurityPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Flags = SecurityPermissionFlag.Infrastructure
+    )]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public class MethodCall : IMethodCallMessage, ISerializable, IInternalMessage, ISerializationRootObject
+    public class MethodCall
+        : IMethodCallMessage,
+            ISerializable,
+            IInternalMessage,
+            ISerializationRootObject
     {
-
-        private const BindingFlags LookupAll = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
-        private const BindingFlags LookupPublic = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
+        private const BindingFlags LookupAll =
+            BindingFlags.Instance
+            | BindingFlags.Static
+            | BindingFlags.Public
+            | BindingFlags.NonPublic;
+        private const BindingFlags LookupPublic =
+            BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public;
 
         // data
         private String uri;
@@ -2827,9 +2904,11 @@ namespace System.Runtime.Remoting.Messaging {
         private Type[] instArgs;
         private LogicalCallContext callContext;
         private Type[] methodSignature;
-    /// <internalonly/>
+
+        /// <internalonly/>
         protected IDictionary ExternalProperties = null;
-    /// <internalonly/>
+
+        /// <internalonly/>
         protected IDictionary InternalProperties = null;
 
         private ServerIdentity srvID;
@@ -2842,16 +2921,18 @@ namespace System.Runtime.Remoting.Messaging {
         // MethodCall -- SOAP uses this constructor
         //
 
-    /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated
+        /// <internalonly/>
+        [System.Security.SecurityCritical] // auto-generated
         public MethodCall(Header[] h1)
         {
-            Message.DebugOut("MethodCall ctor IN headers: " + (h1 == null ? "<null>" : h1.ToString()) + "\n");
+            Message.DebugOut(
+                "MethodCall ctor IN headers: " + (h1 == null ? "<null>" : h1.ToString()) + "\n"
+            );
 
             Init();
 
             fSoap = true;
-            FillHeaders(h1);            
+            FillHeaders(h1);
 
             ResolveMethod();
 
@@ -2862,32 +2943,31 @@ namespace System.Runtime.Remoting.Messaging {
         // MethodCall -- this constructor is used for copying an existing message
         //
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public MethodCall(IMessage msg)            
+        [System.Security.SecurityCritical] // auto-generated
+        public MethodCall(IMessage msg)
         {
             if (msg == null)
                 throw new ArgumentNullException("msg");
             Contract.EndContractBlock();
 
             Init();
-            
+
             IDictionaryEnumerator de = msg.Properties.GetEnumerator();
             while (de.MoveNext())
             {
                 FillHeader(de.Key.ToString(), de.Value);
             }
-        
+
             IMethodCallMessage mcm = msg as IMethodCallMessage;
             if (mcm != null)
-
                 MI = mcm.MethodBase;
-                    
+
             ResolveMethod();
-        } 
-                
-        [System.Security.SecurityCritical]  // auto-generated
-        internal MethodCall(SerializationInfo info, StreamingContext context) 
-        {        
+        }
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal MethodCall(SerializationInfo info, StreamingContext context)
+        {
             if (info == null)
                 throw new ArgumentNullException("info");
             Contract.EndContractBlock();
@@ -2896,8 +2976,7 @@ namespace System.Runtime.Remoting.Messaging {
             SetObjectData(info, context);
         }
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal MethodCall(SmuggledMethodCallMessage smuggledMsg, ArrayList deserializedArgs)
         {
             uri = smuggledMsg.Uri;
@@ -2907,14 +2986,14 @@ namespace System.Runtime.Remoting.Messaging {
             args = smuggledMsg.GetArgs(deserializedArgs);
             instArgs = smuggledMsg.GetInstantiation(deserializedArgs);
             callContext = smuggledMsg.GetCallContext(deserializedArgs);
-   
+
             ResolveMethod();
 
             if (smuggledMsg.MessagePropertyCount > 0)
                 smuggledMsg.PopulateMessageProperties(Properties, deserializedArgs);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal MethodCall(Object handlerObject, BinaryMethodCallMessage smuggledMsg)
         {
             if (handlerObject != null)
@@ -2925,9 +3004,9 @@ namespace System.Runtime.Remoting.Messaging {
                     // This must be the tranparent proxy
                     MarshalByRefObject mbr = handlerObject as MarshalByRefObject;
                     if (mbr != null)
-                    {                      
+                    {
                         bool fServer;
-                        srvID = MarshalByRefObject.GetIdentity(mbr, out fServer) as ServerIdentity; 
+                        srvID = MarshalByRefObject.GetIdentity(mbr, out fServer) as ServerIdentity;
                         uri = srvID.URI;
                     }
                 }
@@ -2946,13 +3025,11 @@ namespace System.Runtime.Remoting.Messaging {
                 smuggledMsg.PopulateMessageProperties(Properties);
         }
 
-        
-
         //
         // ISerializationRootObject
         //
-    /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated
+        /// <internalonly/>
+        [System.Security.SecurityCritical] // auto-generated
         public void RootSetObjectData(SerializationInfo info, StreamingContext ctx)
         {
             SetObjectData(info, ctx);
@@ -2964,7 +3041,7 @@ namespace System.Runtime.Remoting.Messaging {
         // case, just SetObjectData is called
         //
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void SetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
@@ -2982,26 +3059,30 @@ namespace System.Runtime.Remoting.Messaging {
                 {
                     FillHeader(siEnum.Name, siEnum.Value);
                 }
-                if ((context.State == StreamingContextStates.Remoting) && 
-                    (context.Context != null))
+                if ((context.State == StreamingContextStates.Remoting) && (context.Context != null))
                 {
                     Header[] h = context.Context as Header[];
-                    if(null != h)
+                    if (null != h)
                     {
-                        for (int i=0; i<h.Length; i++)
+                        for (int i = 0; i < h.Length; i++)
                             FillHeader(h[i].Name, h[i].Value);
-                    }                
+                    }
                 }
             }
         } // SetObjectData
- 
+
         //
         // ResolveMethod
         //
 
 #if FEATURE_REMOTING
         // This is used by Remoting
-        private static Type ResolveTypeRelativeTo(String typeName, int offset, int count, Type serverType)
+        private static Type ResolveTypeRelativeTo(
+            String typeName,
+            int offset,
+            int count,
+            Type serverType
+        )
         {
             Type type = ResolveTypeRelativeToBaseTypes(typeName, offset, count, serverType);
             if (type == null)
@@ -3026,7 +3107,12 @@ namespace System.Runtime.Remoting.Messaging {
         } // ResolveTypeRelativeTo
 
         // This is used by Remoting
-        private static Type ResolveTypeRelativeToBaseTypes(String typeName, int offset, int count, Type serverType)
+        private static Type ResolveTypeRelativeToBaseTypes(
+            String typeName,
+            int offset,
+            int count,
+            Type serverType
+        )
         {
             // typeName is excepted to contain the full type name
             // offset is the start of the full type name within typeName
@@ -3050,18 +3136,18 @@ namespace System.Runtime.Remoting.Messaging {
 #endif // FEATURE_REMOTING
 
         internal Type ResolveType()
-        {        
+        {
             // resolve type
             Type t = null;
 
             if (srvID == null)
-                srvID = IdentityHolder.CasualResolveIdentity(uri) as ServerIdentity;                
+                srvID = IdentityHolder.CasualResolveIdentity(uri) as ServerIdentity;
 
             if (srvID != null)
             {
                 Type serverType = srvID.GetLastCalledType(typeName);
                 if (serverType != null)
-                        return serverType;
+                    return serverType;
                 int startIndex = 0; // start of type name
 
                 // check to see if type name starts with "clr:"
@@ -3091,24 +3177,26 @@ namespace System.Runtime.Remoting.Messaging {
             return t;
         } // ResolveType
 
-
-    /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated
+        /// <internalonly/>
+        [System.Security.SecurityCritical] // auto-generated
         public void ResolveMethod()
         {
             ResolveMethod(true);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void ResolveMethod(bool bThrowIfNotResolved)
         {
             if ((MI == null) && (methodName != null))
             {
-                BCLDebug.Trace("REMOTE", "TypeName: " + (typeName == null ? "<null>" : typeName) + "\n");
+                BCLDebug.Trace(
+                    "REMOTE",
+                    "TypeName: " + (typeName == null ? "<null>" : typeName) + "\n"
+                );
 
                 // resolve type
                 RuntimeType t = ResolveType() as RuntimeType;
-                
+
                 BCLDebug.Trace("REMOTE", "Type: " + (t == null ? "<null>" : t.ToString()) + "\n");
                 if (methodName.Equals(".ctor"))
                     return;
@@ -3116,9 +3204,11 @@ namespace System.Runtime.Remoting.Messaging {
                 {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_BadType"),
-                            typeName));
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Remoting_BadType"),
+                            typeName
+                        )
+                    );
                 }
 
                 // Note: we reflect on non-public members here .. we do
@@ -3129,46 +3219,53 @@ namespace System.Runtime.Remoting.Messaging {
                 // ***********************************************************
                 // Note: For the common (non-overloaded method, urt-to-urt) case
                 // methodSignature is null.
-                // If the call is from a urt client to an overloaded method, 
-                // methodSignature is non-null. We could have a non-null 
-                // methodSignature if the call is from a non-urt client for 
+                // If the call is from a urt client to an overloaded method,
+                // methodSignature is non-null. We could have a non-null
+                // methodSignature if the call is from a non-urt client for
                 // which we have to do special work if the method is overloaded
                 // (in the try-catch below).
                 // ***********************************************************
                 if (null != methodSignature)
                 {
                     bool found = false;
-                    
+
                     int arity = instArgs == null ? 0 : instArgs.Length;
 
                     // Handle the common case efficiently, using GetMethod.
-                    // Note that GetMethod doesn't match methods with uninstantiated 
-                    // generic arguments, so we can only use the fast case for 
+                    // Note that GetMethod doesn't match methods with uninstantiated
+                    // generic arguments, so we can only use the fast case for
                     // non-generic methods.
                     if (arity == 0)
                     {
                         try
                         {
-                            MI = t.GetMethod(methodName,
-                                             MethodCall.LookupAll,
-                                             null,
-                                             CallingConventions.Any,
-                                             methodSignature,
-                                             null);
+                            MI = t.GetMethod(
+                                methodName,
+                                MethodCall.LookupAll,
+                                null,
+                                CallingConventions.Any,
+                                methodSignature,
+                                null
+                            );
                             found = true;
                         }
                         catch (AmbiguousMatchException)
                         {
-                            // There is more than one match, so we'll have to do 
+                            // There is more than one match, so we'll have to do
                             // a full search.
                         }
                     }
 
                     // Do a more thorough search if the fast case didn't succeed.
-                    if(!found)
+                    if (!found)
                     {
                         // Make a list of all the methods with the right name.
-                        MemberInfo [] methods = t.FindMembers(MemberTypes.Method, MethodCall.LookupAll, Type.FilterName, methodName);
+                        MemberInfo[] methods = t.FindMembers(
+                            MemberTypes.Method,
+                            MethodCall.LookupAll,
+                            Type.FilterName,
+                            methodName
+                        );
 
                         // Filter out all the methods with the wrong arity.
                         // (Compress them into the start of the array then copy
@@ -3182,7 +3279,9 @@ namespace System.Runtime.Remoting.Messaging {
                             try
                             {
                                 MethodInfo mi = (MethodInfo)methods[i];
-                                int miArity = mi.IsGenericMethod ? mi.GetGenericArguments().Length : 0;
+                                int miArity = mi.IsGenericMethod
+                                    ? mi.GetGenericArguments().Length
+                                    : 0;
                                 if (miArity == arity)
                                 {
                                     // Fill in generic arguments.
@@ -3206,17 +3305,22 @@ namespace System.Runtime.Remoting.Messaging {
 
                         // Use the default binder to select the right overload
                         // based on signature.
-                        MI = Type.DefaultBinder.SelectMethod(MethodCall.LookupAll,
-                                                             matches,
-                                                             methodSignature,
-                                                             null);
+                        MI = Type.DefaultBinder.SelectMethod(
+                            MethodCall.LookupAll,
+                            matches,
+                            methodSignature,
+                            null
+                        );
                     }
 
-                    BCLDebug.Trace("REMOTE", "Method resolved w/sig ", MI == null ? "<null>" : "<not null>");
+                    BCLDebug.Trace(
+                        "REMOTE",
+                        "Method resolved w/sig ",
+                        MI == null ? "<null>" : "<not null>"
+                    );
                 }
                 else
                 {
-                    
                     // Check the cache to see if you find the methodbase (unless
                     // the method has an instantiation, in which case the method
                     // name is not a unique key).
@@ -3230,52 +3334,58 @@ namespace System.Runtime.Remoting.Messaging {
                     }
 
                     // This could give us the wrong MethodBase because
-                    // the server and the client types could be of different 
+                    // the server and the client types could be of different
                     // versions. The mismatch is caught either when the server has
                     // more than one method defined with the same name or when we
-                    // coerce the args and the incoming argument types do not match 
-                    // the method signature.                    
-                    
-                    Contract.Assert(
-                        !methodName.Equals(".ctor"),
-                        "unexpected method type");
+                    // coerce the args and the incoming argument types do not match
+                    // the method signature.
+
+                    Contract.Assert(!methodName.Equals(".ctor"), "unexpected method type");
 
                     bool bOverloaded = false;
 
                     try
                     {
-                        MI = t.GetMethod(methodName,
-                                         MethodCall.LookupAll);
+                        MI = t.GetMethod(methodName, MethodCall.LookupAll);
 
                         if (instArgs != null && instArgs.Length > 0)
                             MI = ((MethodInfo)MI).MakeGenericMethod(instArgs);
 
-                        BCLDebug.Trace("REMOTE", "Method resolved w/name ", MI == null ? "<null>" : methodName);
-                        BCLDebug.Trace("REMOTE", "sig not filled in!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        BCLDebug.Trace(
+                            "REMOTE",
+                            "Method resolved w/name ",
+                            MI == null ? "<null>" : methodName
+                        );
+                        BCLDebug.Trace(
+                            "REMOTE",
+                            "sig not filled in!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+                        );
                     }
                     catch (AmbiguousMatchException)
                     {
                         // This is the case when no methodSignature was found
-                        // but the method is overloaded .. 
+                        // but the method is overloaded ..
                         // (possibly because a non-URT client called us)
-                        bOverloaded = true;                        
+                        bOverloaded = true;
                         ResolveOverloadedMethod(t);
-                    } //catch                    
+                    } //catch
 
                     // In the non-URT call, overloaded case, don't cache the MI
                     // Avoid caching generic methods -- their names aren't a unique key.
                     if (MI != null && !bOverloaded && typeCache != null)
                         typeCache.SetLastCalledMethod(methodName, MI);
                 }
-    
+
                 if (MI == null && bThrowIfNotResolved)
-                {   
+                {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_Message_MethodMissing"),
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Remoting_Message_MethodMissing"),
                             methodName,
-                            typeName));
+                            typeName
+                        )
+                    );
                 }
             }
         }
@@ -3288,10 +3398,14 @@ namespace System.Runtime.Remoting.Messaging {
         void ResolveOverloadedMethod(RuntimeType t)
         {
             // args is null the first call from soap because we havem't passed the arguments yet.
-            if (args == null) 
+            if (args == null)
                 return;
 
-            MemberInfo[] canidates = t.GetMember(methodName, MemberTypes.Method, MethodCall.LookupPublic);
+            MemberInfo[] canidates = t.GetMember(
+                methodName,
+                MemberTypes.Method,
+                MethodCall.LookupPublic
+            );
 
             int canidatesCount = canidates.Length;
 
@@ -3314,10 +3428,12 @@ namespace System.Runtime.Remoting.Messaging {
                 if (canidate.GetParameters().Length == argCount)
                 {
                     if (match != null)
-                        throw new RemotingException(Environment.GetResourceString("Remoting_AmbiguousMethod"));
+                        throw new RemotingException(
+                            Environment.GetResourceString("Remoting_AmbiguousMethod")
+                        );
 
                     match = canidate;
-                } 
+                }
             }
 
             if (match != null)
@@ -3326,9 +3442,18 @@ namespace System.Runtime.Remoting.Messaging {
 
         // This will find the right overloaded method if the argValues from soap have type information,
         // By default parameters will be of type string, this could lead to a wrong choice of methodbase.
-        void ResolveOverloadedMethod(RuntimeType t, String methodName, ArrayList argNames, ArrayList argValues)
+        void ResolveOverloadedMethod(
+            RuntimeType t,
+            String methodName,
+            ArrayList argNames,
+            ArrayList argValues
+        )
         {
-            MemberInfo[] canidates = t.GetMember(methodName, MemberTypes.Method, MethodCall.LookupPublic);
+            MemberInfo[] canidates = t.GetMember(
+                methodName,
+                MemberTypes.Method,
+                MethodCall.LookupPublic
+            );
 
             int canidatesCount = canidates.Length;
 
@@ -3337,7 +3462,6 @@ namespace System.Runtime.Remoting.Messaging {
                 MI = canidates[0] as MethodBase;
                 return;
             }
-                
 
             if (canidatesCount == 0)
                 return;
@@ -3365,7 +3489,6 @@ namespace System.Runtime.Remoting.Messaging {
                             isMatch = false;
                             break;
                         }
-
                     }
                     if (isMatch)
                     {
@@ -3375,46 +3498,48 @@ namespace System.Runtime.Remoting.Messaging {
                 }
             }
             if (match == null)
-                throw new RemotingException(Environment.GetResourceString("Remoting_AmbiguousMethod"));
+                throw new RemotingException(
+                    Environment.GetResourceString("Remoting_AmbiguousMethod")
+                );
             MI = match;
         }
-        
+
         //
         // GetObjectData -- not implemented
         //
 
         /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotSupportedException(
-                Environment.GetResourceString("NotSupported_Method"));                
+            throw new NotSupportedException(Environment.GetResourceString("NotSupported_Method"));
         }
 
         //
         // SetObjectFromSoapData -- parses soap format for serialization data
         //
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void SetObjectFromSoapData(SerializationInfo info)
         {
             // resolve method
             methodName = info.GetString("__methodName");
             ArrayList paramNames = (ArrayList)info.GetValue("__paramNameList", typeof(ArrayList));
 
-            Hashtable keyToNamespaceTable = (Hashtable)info.GetValue("__keyToNamespaceTable", typeof(Hashtable));
+            Hashtable keyToNamespaceTable = (Hashtable)
+                info.GetValue("__keyToNamespaceTable", typeof(Hashtable));
 
             if (MI == null)
             {
-                // This is the case where 
-                // 1) there is no signature in the header, 
+                // This is the case where
+                // 1) there is no signature in the header,
                 // 2) there is an overloaded method which can not be resolved by a difference in the number of parameters.
                 //
                 // The methodbase can be found only if the parameters from soap have type information
                 ArrayList argValues = new ArrayList();
                 ArrayList argNames = paramNames;
                 // SerializationInfoEnumerator siEnum1 = info.GetEnumerator();
-                for (int i=0; i<argNames.Count; i++)
+                for (int i = 0; i < argNames.Count; i++)
                 {
                     argValues.Add(info.GetValue((String)argNames[i], typeof(Object)));
                 }
@@ -3425,58 +3550,66 @@ namespace System.Runtime.Remoting.Messaging {
                 {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_BadType"),
-                            typeName));
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Remoting_BadType"),
+                            typeName
+                        )
+                    );
                 }
 
-                ResolveOverloadedMethod(t, methodName, argNames, argValues); 
+                ResolveOverloadedMethod(t, methodName, argNames, argValues);
 
                 if (MI == null)
-                {   
+                {
                     throw new RemotingException(
                         String.Format(
-                            CultureInfo.CurrentCulture, Environment.GetResourceString(
-                                "Remoting_Message_MethodMissing"),
+                            CultureInfo.CurrentCulture,
+                            Environment.GetResourceString("Remoting_Message_MethodMissing"),
                             methodName,
-                            typeName));
+                            typeName
+                        )
+                    );
                 }
             }
-            //ResolveMethod();       
-
+            //ResolveMethod();
 
             //Contract.Assert(null != MI, "null != MI");
 
             // get method parameters and parameter maps
-            RemotingMethodCachedData methodCache = InternalRemotingServices.GetReflectionCachedData(MI);
+            RemotingMethodCachedData methodCache = InternalRemotingServices.GetReflectionCachedData(
+                MI
+            );
             ParameterInfo[] pinfos = methodCache.Parameters;
             int[] marshalRequestArgMap = methodCache.MarshalRequestArgMap;
-            
+
             // check to see if parameters are in-order
-            Object fUnordered = (null == InternalProperties ? null : InternalProperties["__UnorderedParams"]);
+            Object fUnordered = (
+                null == InternalProperties ? null : InternalProperties["__UnorderedParams"]
+            );
 
             // Create an array for arguments
-            args = new Object[pinfos.Length];           
+            args = new Object[pinfos.Length];
 
             //SerializationInfoEnumerator siEnum = info.GetEnumerator();
 
             // Fill up the argument array
-            if (fUnordered != null &&
-                (fUnordered is System.Boolean) && 
-                (true == (bool)fUnordered))
+            if (fUnordered != null && (fUnordered is System.Boolean) && (true == (bool)fUnordered))
             {
                 String memberName;
 
-                for (int i=0; i<paramNames.Count; i++)
+                for (int i = 0; i < paramNames.Count; i++)
                 {
                     memberName = (String)paramNames[i];
                     Message.DebugOut(
-                        "MethodCall::PopulateData members[i].Name: " 
-                        + memberName + " substring:>>" 
-                        + memberName.Substring(7) + "<<\n");
+                        "MethodCall::PopulateData members[i].Name: "
+                            + memberName
+                            + " substring:>>"
+                            + memberName.Substring(7)
+                            + "<<\n"
+                    );
 
                     int position = -1;
-                    for (int j=0; j<pinfos.Length; j++)
+                    for (int j = 0; j < pinfos.Length; j++)
                     {
                         if (memberName.Equals(pinfos[j].Name))
                         {
@@ -3490,27 +3623,37 @@ namespace System.Runtime.Remoting.Messaging {
                         if (!memberName.StartsWith("__param", StringComparison.Ordinal))
                         {
                             throw new RemotingException(
-                                Environment.GetResourceString(
-                                "Remoting_Message_BadSerialization"));
+                                Environment.GetResourceString("Remoting_Message_BadSerialization")
+                            );
                         }
-                        position = Int32.Parse(memberName.Substring(7), CultureInfo.InvariantCulture);
+                        position = Int32.Parse(
+                            memberName.Substring(7),
+                            CultureInfo.InvariantCulture
+                        );
                     }
                     if (position >= args.Length)
                     {
                         throw new RemotingException(
-                            Environment.GetResourceString(
-                                "Remoting_Message_BadSerialization"));
+                            Environment.GetResourceString("Remoting_Message_BadSerialization")
+                        );
                     }
-                    args[position] = Message.SoapCoerceArg(info.GetValue(memberName, typeof(Object)), pinfos[position].ParameterType, keyToNamespaceTable);
+                    args[position] = Message.SoapCoerceArg(
+                        info.GetValue(memberName, typeof(Object)),
+                        pinfos[position].ParameterType,
+                        keyToNamespaceTable
+                    );
                 }
             }
             else
             {
-                for (int i=0; i<paramNames.Count; i++)
-                    {
+                for (int i = 0; i < paramNames.Count; i++)
+                {
                     String memberName = (String)paramNames[i];
-                        args[marshalRequestArgMap[i]] = 
-                    Message.SoapCoerceArg(info.GetValue(memberName, typeof(Object)), pinfos[marshalRequestArgMap[i]].ParameterType, keyToNamespaceTable);
+                    args[marshalRequestArgMap[i]] = Message.SoapCoerceArg(
+                        info.GetValue(memberName, typeof(Object)),
+                        pinfos[marshalRequestArgMap[i]].ParameterType,
+                        keyToNamespaceTable
+                    );
                 }
 
                 PopulateOutArguments(methodCache);
@@ -3532,124 +3675,123 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-
         //
         // Init -- constructor helper for for default behavior
         //
 
-    /// <internalonly/>
-        public virtual void Init()
-        {
-        }
+        /// <internalonly/>
+        public virtual void Init() { }
 
         //
         // IMethodCallMessage
         //
 
-    /// <internalonly/>
+        /// <internalonly/>
         public int ArgCount
         {
             [System.Security.SecurityCritical]
-            get
-            {
-                return(args == null) ? 0 : args.Length;
-            }
+            get { return (args == null) ? 0 : args.Length; }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         [System.Security.SecurityCritical]
         public Object GetArg(int argNum)
         {
             return args[argNum];
         }
 
-    /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated
+        /// <internalonly/>
+        [System.Security.SecurityCritical] // auto-generated
         public String GetArgName(int index)
         {
             ResolveMethod();
-        
-            RemotingMethodCachedData methodCache = InternalRemotingServices.GetReflectionCachedData(MI);
+
+            RemotingMethodCachedData methodCache = InternalRemotingServices.GetReflectionCachedData(
+                MI
+            );
             return methodCache.Parameters[index].Name;
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public Object[] Args
+        {
+            [System.Security.SecurityCritical]
+            get { return args; }
+        }
+
+        /// <internalonly/>
+        public int InArgCount
         {
             [System.Security.SecurityCritical]
             get
             {
-                return args;
-            }
-        }
-
-
-    /// <internalonly/>
-        public int InArgCount                        
-        {
-            [System.Security.SecurityCritical]
-            get 
-            {
-                if (argMapper == null) argMapper = new ArgMapper(this, false);
+                if (argMapper == null)
+                    argMapper = new ArgMapper(this, false);
                 return argMapper.ArgCount;
             }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         [System.Security.SecurityCritical]
-        public Object GetInArg(int argNum)   
+        public Object GetInArg(int argNum)
         {
-            if (argMapper == null) argMapper = new ArgMapper(this, false);
+            if (argMapper == null)
+                argMapper = new ArgMapper(this, false);
             return argMapper.GetArg(argNum);
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         [System.Security.SecurityCritical]
-        public String GetInArgName(int index) 
-        { 
-            if (argMapper == null) argMapper = new ArgMapper(this, false);
+        public String GetInArgName(int index)
+        {
+            if (argMapper == null)
+                argMapper = new ArgMapper(this, false);
             return argMapper.GetArgName(index);
         }
-    /// <internalonly/>
-        public Object[] InArgs                       
+
+        /// <internalonly/>
+        public Object[] InArgs
         {
             [System.Security.SecurityCritical]
             get
             {
-                if (argMapper == null) argMapper = new ArgMapper(this, false);
+                if (argMapper == null)
+                    argMapper = new ArgMapper(this, false);
                 return argMapper.Args;
             }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public String MethodName
         {
             [System.Security.SecurityCritical]
             get { return methodName; }
         }
-    /// <internalonly/>
+
+        /// <internalonly/>
         public String TypeName
         {
             [System.Security.SecurityCritical]
             get { return typeName; }
         }
-    /// <internalonly/>
+
+        /// <internalonly/>
         public Object MethodSignature
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (methodSignature != null)
                     return methodSignature;
                 else if (MI != null)
                     methodSignature = Message.GenerateMethodSignature(this.MethodBase);
-                
+
                 return null;
             }
-        }    
+        }
 
-    /// <internalonly/>
-        public MethodBase MethodBase 
+        /// <internalonly/>
+        public MethodBase MethodBase
         {
             [System.Security.SecurityCritical]
             get
@@ -3660,28 +3802,29 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-    /// <internalonly/>
-        public String Uri 
+        /// <internalonly/>
+        public String Uri
         {
             [System.Security.SecurityCritical]
             get { return uri; }
             set { uri = value; }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public bool HasVarArgs
         {
             [System.Security.SecurityCritical]
             get { return fVarArgs; }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public virtual IDictionary Properties
         {
             [System.Security.SecurityCritical]
             get
             {
-                lock(this) {
+                lock (this)
+                {
                     if (InternalProperties == null)
                     {
                         InternalProperties = new Hashtable();
@@ -3695,14 +3838,14 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public LogicalCallContext LogicalCallContext
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return GetLogicalCallContext(); }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal LogicalCallContext GetLogicalCallContext()
         {
             if (callContext == null)
@@ -3712,8 +3855,8 @@ namespace System.Runtime.Remoting.Messaging {
 
         internal LogicalCallContext SetLogicalCallContext(LogicalCallContext ctx)
         {
-            LogicalCallContext old=callContext;
-            callContext=ctx;
+            LogicalCallContext old = callContext;
+            callContext = ctx;
             return old;
         }
 
@@ -3745,7 +3888,7 @@ namespace System.Runtime.Remoting.Messaging {
         {
             uri = val;
         }
-        
+
         /// <internalonly/>
         [System.Security.SecurityCritical]
         void IInternalMessage.SetCallContext(LogicalCallContext newCallContext)
@@ -3763,21 +3906,21 @@ namespace System.Runtime.Remoting.Messaging {
         //
         // helper functions
         //
-            
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal void FillHeaders(Header[] h)
         {
             FillHeaders(h, false);
         }
-    
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         private void FillHeaders(Header[] h, bool bFromHeaderHandler)
-        {            
+        {
             if (h == null)
                 return;
 
             if (bFromHeaderHandler && fSoap)
-            {            
+            {
                 // Handle the case of headers coming off the wire in SOAP.
 
                 // look for message properties
@@ -3785,7 +3928,10 @@ namespace System.Runtime.Remoting.Messaging {
                 for (co = 0; co < h.Length; co++)
                 {
                     Header header = h[co];
-                    if (header.HeaderNamespace == "http://schemas.microsoft.com/clr/soap/messageProperties")
+                    if (
+                        header.HeaderNamespace
+                        == "http://schemas.microsoft.com/clr/soap/messageProperties"
+                    )
                     {
                         // add property to the message
                         FillHeader(header.Name, header.Value);
@@ -3796,19 +3942,19 @@ namespace System.Runtime.Remoting.Messaging {
                         String name = LogicalCallContext.GetPropertyKeyForHeader(header);
                         FillHeader(name, header);
                     }
-                }                
+                }
             }
             else
             {
                 int i;
-                for (i=0; i<h.Length; i++)
+                for (i = 0; i < h.Length; i++)
                 {
                     FillHeader(h[i].Name, h[i].Value);
                 }
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal virtual bool FillSpecialHeader(String key, Object value)
         {
             if (key == null)
@@ -3817,23 +3963,23 @@ namespace System.Runtime.Remoting.Messaging {
             }
             else if (key.Equals("__Uri"))
             {
-                uri = (String) value;
+                uri = (String)value;
             }
             else if (key.Equals("__MethodName"))
             {
-                methodName = (String) value;
+                methodName = (String)value;
             }
             else if (key.Equals("__MethodSignature"))
             {
-                methodSignature = (Type[]) value;
+                methodSignature = (Type[])value;
             }
             else if (key.Equals("__TypeName"))
             {
-                typeName = (String) value;
+                typeName = (String)value;
             }
             else if (key.Equals("__Args"))
             {
-                args = (Object[]) value;
+                args = (Object[])value;
             }
             else if (key.Equals("__CallContext"))
             {
@@ -3841,10 +3987,10 @@ namespace System.Runtime.Remoting.Messaging {
                 if (value is String)
                 {
                     callContext = new LogicalCallContext();
-                    callContext.RemotingData.LogicalCallID = (String) value;
+                    callContext.RemotingData.LogicalCallID = (String)value;
                 }
                 else
-                    callContext = (LogicalCallContext) value;
+                    callContext = (LogicalCallContext)value;
             }
             else
             {
@@ -3852,12 +3998,13 @@ namespace System.Runtime.Remoting.Messaging {
             }
             return true;
         }
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal void FillHeader(String key, Object value)
         {
             Message.DebugOut("MethodCall::FillHeader: key:" + key + "\n");
 
-            if (!FillSpecialHeader(key,value))
+            if (!FillSpecialHeader(key, value))
             {
                 if (InternalProperties == null)
                 {
@@ -3865,22 +4012,22 @@ namespace System.Runtime.Remoting.Messaging {
                 }
                 InternalProperties[key] = value;
             }
-
         }
-   
+
         /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public virtual Object HeaderHandler(Header[] h)
         {
-            SerializationMonkey m = (SerializationMonkey) FormatterServices.GetUninitializedObject(typeof(SerializationMonkey));
+            SerializationMonkey m = (SerializationMonkey)
+                FormatterServices.GetUninitializedObject(typeof(SerializationMonkey));
             Header[] newHeaders = null;
             if (h != null && h.Length > 0 && h[0].Name == "__methodName")
             {
                 methodName = (String)h[0].Value;
                 if (h.Length > 1)
                 {
-                    newHeaders = new Header[h.Length -1];
-                    Array.Copy(h, 1, newHeaders, 0, h.Length-1);
+                    newHeaders = new Header[h.Length - 1];
+                    Array.Copy(h, 1, newHeaders, 0, h.Length - 1);
                 }
                 else
                     newHeaders = null;
@@ -3901,47 +4048,47 @@ namespace System.Runtime.Remoting.Messaging {
         }
     }
 
-
     //+================================================================================
     //
     // Synopsis:   Message used for deserialization of a construction call
     //
     //-================================================================================
     /// <internalonly/>
-    [System.Security.SecurityCritical]  // auto-generated_required
+    [System.Security.SecurityCritical] // auto-generated_required
     [Serializable]
     [CLSCompliant(false)]
     [System.Runtime.InteropServices.ComVisible(true)]
     public class ConstructionCall : MethodCall, IConstructionCallMessage
     {
-
         //
         // data
         //
 
-        internal Type         _activationType;
-        internal String        _activationTypeName;
-        internal IList        _contextProperties;
-        internal Object[]     _callSiteActivationAttributes;
-        internal IActivator   _activator;
+        internal Type _activationType;
+        internal String _activationTypeName;
+        internal IList _contextProperties;
+        internal Object[] _callSiteActivationAttributes;
+        internal IActivator _activator;
 
         /*
         [NonSerialized]
-        internal Object       _fakeThisPtr;     // used for proxyattribute::CI 
+        internal Object       _fakeThisPtr;     // used for proxyattribute::CI
         */
 
         //
         // construction
         //
 
-    /// <internalonly/>
-        public ConstructionCall(Header[] headers) : base(headers) {}
+        /// <internalonly/>
+        public ConstructionCall(Header[] headers)
+            : base(headers) { }
 
-    /// <internalonly/>
-        public ConstructionCall(IMessage m) : base(m) {}
-        internal ConstructionCall(SerializationInfo info, StreamingContext context) : base(info, context) 
-        {
-        }
+        /// <internalonly/>
+        public ConstructionCall(IMessage m)
+            : base(m) { }
+
+        internal ConstructionCall(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
 #if false
         internal Object GetThisPtr()
@@ -3970,73 +4117,67 @@ namespace System.Runtime.Remoting.Messaging {
             }
             else if (key.Equals("__ActivationType"))
             {
-                Contract.Assert(value==null, "Phoney type in CCM");
+                Contract.Assert(value == null, "Phoney type in CCM");
                 _activationType = null;
             }
             else if (key.Equals("__ContextProperties"))
             {
-                _contextProperties = (IList) value;
+                _contextProperties = (IList)value;
             }
             else if (key.Equals("__CallSiteActivationAttributes"))
             {
-                _callSiteActivationAttributes = (Object[]) value;
+                _callSiteActivationAttributes = (Object[])value;
             }
             else if (key.Equals("__Activator"))
             {
-                _activator = (IActivator) value;
+                _activator = (IActivator)value;
             }
             else if (key.Equals("__ActivationTypeName"))
             {
-                _activationTypeName = (String) value;
+                _activationTypeName = (String)value;
             }
             else
             {
                 return base.FillSpecialHeader(key, value);
             }
             return true;
-
         }
-
 
         //
         // IConstructionCallMessage
         //
 
-    /// <internalonly/>
+        /// <internalonly/>
         public Object[] CallSiteActivationAttributes
         {
             [System.Security.SecurityCritical]
-            get
-            {
-                return _callSiteActivationAttributes;
-            }
-
+            get { return _callSiteActivationAttributes; }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public Type ActivationType
         {
             [System.Security.SecurityCritical]
             get
             {
                 if ((_activationType == null) && (_activationTypeName != null))
-                    _activationType = RemotingServices.InternalGetTypeFromQualifiedTypeName(_activationTypeName, false);
+                    _activationType = RemotingServices.InternalGetTypeFromQualifiedTypeName(
+                        _activationTypeName,
+                        false
+                    );
 
                 return _activationType;
             }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public String ActivationTypeName
         {
             [System.Security.SecurityCritical]
-            get
-            {
-                return _activationTypeName;
-            }
+            get { return _activationTypeName; }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public IList ContextProperties
         {
             [System.Security.SecurityCritical]
@@ -4050,13 +4191,13 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public override IDictionary Properties
         {
             [System.Security.SecurityCritical]
             get
             {
-                lock(this) 
+                lock (this)
                 {
                     if (InternalProperties == null)
                     {
@@ -4070,10 +4211,9 @@ namespace System.Runtime.Remoting.Messaging {
                 }
             }
         }
-        
 
         // IConstructionCallMessage::Activator
-    /// <internalonly/>
+        /// <internalonly/>
         public IActivator Activator
         {
             [System.Security.SecurityCritical]
@@ -4081,45 +4221,53 @@ namespace System.Runtime.Remoting.Messaging {
             [System.Security.SecurityCritical]
             set { _activator = value; }
         }
-        
     }
+
     //+================================================================================
     //
     // Synopsis:   Message used for deserialization of a method response
     //
     //-================================================================================
     /// <internalonly/>
-    [System.Security.SecurityCritical]  // auto-generated_required
+    [System.Security.SecurityCritical] // auto-generated_required
     [Serializable]
     [CLSCompliant(false)]
-    [SecurityPermissionAttribute(SecurityAction.InheritanceDemand, Flags=SecurityPermissionFlag.Infrastructure)]    
+    [SecurityPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Flags = SecurityPermissionFlag.Infrastructure
+    )]
     [System.Runtime.InteropServices.ComVisible(true)]
-    public class MethodResponse : IMethodReturnMessage, ISerializable, ISerializationRootObject, IInternalMessage
+    public class MethodResponse
+        : IMethodReturnMessage,
+            ISerializable,
+            ISerializationRootObject,
+            IInternalMessage
     {
         private MethodBase MI;
-        private String     methodName;
-        private Type[]     methodSignature;
-        private String     uri;
-        private String     typeName;
-        private Object     retVal;
-        private Exception  fault;
-        private Object[]  outArgs;
+        private String methodName;
+        private Type[] methodSignature;
+        private String uri;
+        private String typeName;
+        private Object retVal;
+        private Exception fault;
+        private Object[] outArgs;
         private LogicalCallContext callContext;
-    /// <internalonly/>
+
+        /// <internalonly/>
         protected IDictionary InternalProperties;
-    /// <internalonly/>
+
+        /// <internalonly/>
         protected IDictionary ExternalProperties;
 
-        private int       argCount;
-        private bool      fSoap;
+        private int argCount;
+        private bool fSoap;
         private ArgMapper argMapper;
         private RemotingMethodCachedData _methodCache;
 
         // Constructor -- this constructor is called only in the SOAP Scenario
 
-
-    /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated
+        /// <internalonly/>
+        [System.Security.SecurityCritical] // auto-generated
         public MethodResponse(Header[] h1, IMethodCallMessage mcm)
         {
             if (mcm == null)
@@ -4139,35 +4287,38 @@ namespace System.Runtime.Remoting.Messaging {
             {
                 throw new RemotingException(
                     String.Format(
-                        CultureInfo.CurrentCulture, Environment.GetResourceString(
-                            "Remoting_Message_MethodMissing"),
+                        CultureInfo.CurrentCulture,
+                        Environment.GetResourceString("Remoting_Message_MethodMissing"),
                         mcm.MethodName,
-                        mcm.TypeName));
+                        mcm.TypeName
+                    )
+                );
             }
-            
+
             _methodCache = InternalRemotingServices.GetReflectionCachedData(MI);
-            
+
             argCount = _methodCache.Parameters.Length;
             fSoap = true;
             FillHeaders(h1);
         }
 
-
-        [System.Security.SecurityCritical]  // auto-generated
-        internal MethodResponse(IMethodCallMessage msg,
-                                SmuggledMethodReturnMessage smuggledMrm,
-                                ArrayList deserializedArgs)
+        [System.Security.SecurityCritical] // auto-generated
+        internal MethodResponse(
+            IMethodCallMessage msg,
+            SmuggledMethodReturnMessage smuggledMrm,
+            ArrayList deserializedArgs
+        )
         {
             MI = (MethodBase)msg.MethodBase;
             _methodCache = InternalRemotingServices.GetReflectionCachedData(MI);
-            
+
             methodName = msg.MethodName;
             uri = msg.Uri;
             typeName = msg.TypeName;
 
             if (_methodCache.IsOverloaded())
                 methodSignature = (Type[])msg.MethodSignature;
-           
+
             retVal = smuggledMrm.GetReturnValue(deserializedArgs);
             outArgs = smuggledMrm.GetArgs(deserializedArgs);
             fault = smuggledMrm.GetException(deserializedArgs);
@@ -4175,23 +4326,24 @@ namespace System.Runtime.Remoting.Messaging {
             callContext = smuggledMrm.GetCallContext(deserializedArgs);
 
             if (smuggledMrm.MessagePropertyCount > 0)
-                smuggledMrm.PopulateMessageProperties(Properties, deserializedArgs);           
-            
+                smuggledMrm.PopulateMessageProperties(Properties, deserializedArgs);
+
             argCount = _methodCache.Parameters.Length;
             fSoap = false;
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal MethodResponse(IMethodCallMessage msg,
-                                Object handlerObject,
-                                BinaryMethodReturnMessage smuggledMrm)
+        [System.Security.SecurityCritical] // auto-generated
+        internal MethodResponse(
+            IMethodCallMessage msg,
+            Object handlerObject,
+            BinaryMethodReturnMessage smuggledMrm
+        )
         {
-
             if (msg != null)
             {
                 MI = (MethodBase)msg.MethodBase;
                 _methodCache = InternalRemotingServices.GetReflectionCachedData(MI);
-            
+
                 methodName = msg.MethodName;
                 uri = msg.Uri;
                 typeName = msg.TypeName;
@@ -4200,9 +4352,8 @@ namespace System.Runtime.Remoting.Messaging {
                     methodSignature = (Type[])msg.MethodSignature;
 
                 argCount = _methodCache.Parameters.Length;
-
             }
-           
+
             retVal = smuggledMrm.ReturnValue;
             outArgs = smuggledMrm.Args;
             fault = smuggledMrm.Exception;
@@ -4210,20 +4361,18 @@ namespace System.Runtime.Remoting.Messaging {
             callContext = smuggledMrm.LogicalCallContext;
 
             if (smuggledMrm.HasProperties)
-                smuggledMrm.PopulateMessageProperties(Properties);           
-            
+                smuggledMrm.PopulateMessageProperties(Properties);
+
             fSoap = false;
         }
-
-
 
         //
         // SetObjectData -- this can be called with the object in two possible states. 1. the object
         // is servicing a SOAP response in which it will have been half initialized by the constructor,
         // or 2. the object is uninitailized and serialization is passing in the contents.
         //
-        [System.Security.SecurityCritical]  // auto-generated
-        internal MethodResponse(SerializationInfo info, StreamingContext context) 
+        [System.Security.SecurityCritical] // auto-generated
+        internal MethodResponse(SerializationInfo info, StreamingContext context)
         {
             if (info == null)
                 throw new ArgumentNullException("info");
@@ -4231,20 +4380,20 @@ namespace System.Runtime.Remoting.Messaging {
             SetObjectData(info, context);
         }
 
-
-    /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated
+        /// <internalonly/>
+        [System.Security.SecurityCritical] // auto-generated
         public virtual Object HeaderHandler(Header[] h)
         {
-            SerializationMonkey m = (SerializationMonkey) FormatterServices.GetUninitializedObject(typeof(SerializationMonkey));
+            SerializationMonkey m = (SerializationMonkey)
+                FormatterServices.GetUninitializedObject(typeof(SerializationMonkey));
 
             Header[] newHeaders = null;
             if (h != null && h.Length > 0 && h[0].Name == "__methodName")
             {
                 if (h.Length > 1)
                 {
-                    newHeaders = new Header[h.Length -1];
-                    Array.Copy(h, 1, newHeaders, 0, h.Length-1);
+                    newHeaders = new Header[h.Length - 1];
+                    Array.Copy(h, 1, newHeaders, 0, h.Length - 1);
                 }
                 else
                     newHeaders = null;
@@ -4256,7 +4405,7 @@ namespace System.Runtime.Remoting.Messaging {
             MethodInfo mi = MI as MethodInfo;
             if (mi != null)
             {
-                retType = mi.ReturnType; 
+                retType = mi.ReturnType;
             }
 
             ParameterInfo[] pinfos = _methodCache.Parameters;
@@ -4293,14 +4442,14 @@ namespace System.Runtime.Remoting.Messaging {
         //
         // ISerializationRootObject
         //
-    /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated
+        /// <internalonly/>
+        [System.Security.SecurityCritical] // auto-generated
         public void RootSetObjectData(SerializationInfo info, StreamingContext ctx)
         {
             SetObjectData(info, ctx);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void SetObjectData(SerializationInfo info, StreamingContext ctx)
         {
             if (info == null)
@@ -4336,11 +4485,12 @@ namespace System.Runtime.Remoting.Messaging {
                 if ((excep) && (ret))
                 {
                     throw new RemotingException(
-                        Environment.GetResourceString(
-                            "Remoting_Message_BadSerialization"));
+                        Environment.GetResourceString("Remoting_Message_BadSerialization")
+                    );
                 }
             }
         }
+
         //
         // ISerializable
         //
@@ -4350,11 +4500,10 @@ namespace System.Runtime.Remoting.Messaging {
         //
 
         /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotSupportedException(
-                Environment.GetResourceString("NotSupported_Method"));                
+            throw new NotSupportedException(Environment.GetResourceString("NotSupported_Method"));
         }
 
         //
@@ -4363,14 +4512,15 @@ namespace System.Runtime.Remoting.Messaging {
 
         internal void SetObjectFromSoapData(SerializationInfo info)
         {
-            //SerializationInfoEnumerator e = info.GetEnumerator(); 
+            //SerializationInfoEnumerator e = info.GetEnumerator();
 
-            Hashtable keyToNamespaceTable = (Hashtable)info.GetValue("__keyToNamespaceTable", typeof(Hashtable));
+            Hashtable keyToNamespaceTable = (Hashtable)
+                info.GetValue("__keyToNamespaceTable", typeof(Hashtable));
             ArrayList paramNames = (ArrayList)info.GetValue("__paramNameList", typeof(ArrayList));
             SoapFault soapFault = (SoapFault)info.GetValue("__fault", typeof(SoapFault));
 
             if (soapFault != null)
-                    {
+            {
                 ServerFault serverFault = soapFault.Detail as ServerFault;
                 if (null != serverFault)
                 {
@@ -4393,21 +4543,30 @@ namespace System.Runtime.Remoting.Messaging {
                             sb.Append(serverFault.StackTrace);
                             fault = new ServerException(sb.ToString());
                         }
-                        else 
+                        else
                         {
                             // Exception type can be resolved, throw the exception
-                            Object[] args = {serverFault.ExceptionMessage};
-                            fault = (Exception)Activator.CreateInstance(
-                                                    exceptionType, 
-                                                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.CreateInstance, 
-                                                    null, 
-                                                    args, 
-                                                    null, 
-                                                    null);
+                            Object[] args = { serverFault.ExceptionMessage };
+                            fault = (Exception)
+                                Activator.CreateInstance(
+                                    exceptionType,
+                                    BindingFlags.Instance
+                                        | BindingFlags.Public
+                                        | BindingFlags.NonPublic
+                                        | BindingFlags.CreateInstance,
+                                    null,
+                                    args,
+                                    null,
+                                    null
+                                );
                         }
                     }
                 }
-                else if ((soapFault.Detail != null) && (soapFault.Detail.GetType() == typeof(String)) && (!(((String)soapFault.Detail).Length == 0)))
+                else if (
+                    (soapFault.Detail != null)
+                    && (soapFault.Detail.GetType() == typeof(String))
+                    && (!(((String)soapFault.Detail).Length == 0))
+                )
                 {
                     fault = new ServerException((String)soapFault.Detail);
                 }
@@ -4438,20 +4597,19 @@ namespace System.Runtime.Remoting.Messaging {
             // populate the args array
             ParameterInfo[] pinfos = _methodCache.Parameters;
 
-            Object fUnordered = (InternalProperties == null) ? null : InternalProperties["__UnorderedParams"];
-            if (fUnordered != null &&
-                (fUnordered is System.Boolean) && 
-                (true == (bool)fUnordered))
+            Object fUnordered =
+                (InternalProperties == null) ? null : InternalProperties["__UnorderedParams"];
+            if (fUnordered != null && (fUnordered is System.Boolean) && (true == (bool)fUnordered))
             {
                 // Unordered
-                for (int i=paramNameIndex; i<paramNames.Count; i++)
+                for (int i = paramNameIndex; i < paramNames.Count; i++)
                 {
                     String memberName = (String)paramNames[i];
 
                     // check for the parameter name
 
                     int position = -1;
-                    for (int j=0; j<pinfos.Length; j++)
+                    for (int j = 0; j < pinfos.Length; j++)
                     {
                         if (memberName.Equals(pinfos[j].Name))
                         {
@@ -4466,10 +4624,13 @@ namespace System.Runtime.Remoting.Messaging {
                         if (!memberName.StartsWith("__param", StringComparison.Ordinal))
                         {
                             throw new RemotingException(
-                                Environment.GetResourceString(
-                                    "Remoting_Message_BadSerialization"));
+                                Environment.GetResourceString("Remoting_Message_BadSerialization")
+                            );
                         }
-                        position = Int32.Parse(memberName.Substring(7), CultureInfo.InvariantCulture);
+                        position = Int32.Parse(
+                            memberName.Substring(7),
+                            CultureInfo.InvariantCulture
+                        );
                     }
 
                     // if still not resolved then throw
@@ -4477,8 +4638,8 @@ namespace System.Runtime.Remoting.Messaging {
                     if (position >= argCount)
                     {
                         throw new RemotingException(
-                            Environment.GetResourceString(
-                                "Remoting_Message_BadSerialization"));
+                            Environment.GetResourceString("Remoting_Message_BadSerialization")
+                        );
                     }
 
                     // store the arg in the parameter array
@@ -4487,14 +4648,19 @@ namespace System.Runtime.Remoting.Messaging {
                     {
                         outArgs = new Object[argCount];
                     }
-                    outArgs[position]= Message.SoapCoerceArg(info.GetValue(memberName, typeof(Object)), pinfos[position].ParameterType, keyToNamespaceTable);
+                    outArgs[position] = Message.SoapCoerceArg(
+                        info.GetValue(memberName, typeof(Object)),
+                        pinfos[position].ParameterType,
+                        keyToNamespaceTable
+                    );
                 }
             }
             else
-            {                
+            {
                 // ordered
-                if (argMapper == null) argMapper = new ArgMapper(this, true);
-                for (int j=paramNameIndex; j<paramNames.Count; j++)
+                if (argMapper == null)
+                    argMapper = new ArgMapper(this, true);
+                for (int j = paramNameIndex; j < paramNames.Count; j++)
                 {
                     String memberName = (String)paramNames[j];
                     if (outArgs == null)
@@ -4502,15 +4668,17 @@ namespace System.Runtime.Remoting.Messaging {
                         outArgs = new Object[argCount];
                     }
 
-                    int position = argMapper.Map[j-paramNameIndex];
-                    outArgs[position] = Message.SoapCoerceArg(info.GetValue(memberName, typeof(Object)), pinfos[position].ParameterType, keyToNamespaceTable);
+                    int position = argMapper.Map[j - paramNameIndex];
+                    outArgs[position] = Message.SoapCoerceArg(
+                        info.GetValue(memberName, typeof(Object)),
+                        pinfos[position].ParameterType,
+                        keyToNamespaceTable
+                    );
                 }
             }
         } // SetObjectFromSoapData
 
-
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal LogicalCallContext GetLogicalCallContext()
         {
             if (callContext == null)
@@ -4520,8 +4688,8 @@ namespace System.Runtime.Remoting.Messaging {
 
         internal LogicalCallContext SetLogicalCallContext(LogicalCallContext ctx)
         {
-            LogicalCallContext old=callContext;
-            callContext=ctx;
+            LogicalCallContext old = callContext;
+            callContext = ctx;
             return old;
         }
 
@@ -4536,24 +4704,28 @@ namespace System.Runtime.Remoting.Messaging {
             get { return uri; }
             set { uri = value; }
         }
+
         /// <internalonly/>
         public String MethodName
         {
             [System.Security.SecurityCritical]
             get { return methodName; }
         }
+
         /// <internalonly/>
         public String TypeName
         {
             [System.Security.SecurityCritical]
             get { return typeName; }
         }
+
         /// <internalonly/>
         public Object MethodSignature
         {
             [System.Security.SecurityCritical]
             get { return methodSignature; }
         }
+
         /// <internalonly/>
         public MethodBase MethodBase
         {
@@ -4561,9 +4733,8 @@ namespace System.Runtime.Remoting.Messaging {
             get { return MI; }
         }
 
-        
         /// <internalonly/>
-        public bool   HasVarArgs                      
+        public bool HasVarArgs
         {
             [System.Security.SecurityCritical]
             get
@@ -4573,102 +4744,114 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public int ArgCount
         {
             [System.Security.SecurityCritical]
-            get 
+            get
             {
                 if (outArgs == null)
                     return 0;
-                else                
+                else
                     return outArgs.Length;
             }
         }
-    /// <internalonly/>
+
+        /// <internalonly/>
         [System.Security.SecurityCritical]
-        public Object GetArg(int argNum) { return outArgs[argNum]; }
-    /// <internalonly/>
-        [System.Security.SecurityCritical]  // auto-generated
-        public String GetArgName(int index)           
+        public Object GetArg(int argNum)
+        {
+            return outArgs[argNum];
+        }
+
+        /// <internalonly/>
+        [System.Security.SecurityCritical] // auto-generated
+        public String GetArgName(int index)
         {
             if (MI != null)
             {
-                RemotingMethodCachedData methodCache = InternalRemotingServices.GetReflectionCachedData(MI);
+                RemotingMethodCachedData methodCache =
+                    InternalRemotingServices.GetReflectionCachedData(MI);
                 ParameterInfo[] paramInfo = methodCache.Parameters;
                 if (index < 0 || index >= paramInfo.Length)
                     throw new ArgumentOutOfRangeException("index");
-                
+
                 return methodCache.Parameters[index].Name;
             }
             else
                 return "__param" + index;
         }
-    /// <internalonly/>
+
+        /// <internalonly/>
         public Object[] Args
         {
             [System.Security.SecurityCritical]
             get { return outArgs; }
         }
 
-    /// <internalonly/>
-        public int OutArgCount                        
-        {
-            [System.Security.SecurityCritical]
-            get 
-            {
-                if (argMapper == null) argMapper = new ArgMapper(this, true);
-                return argMapper.ArgCount;
-            }
-        }
-
-    /// <internalonly/>
-        [System.Security.SecurityCritical]
-        public Object GetOutArg(int argNum)   
-        {   
-            if (argMapper == null) argMapper = new ArgMapper(this, true);
-            return argMapper.GetArg(argNum);
-        }
-
-    /// <internalonly/>
-        [System.Security.SecurityCritical]
-        public String GetOutArgName(int index) 
-        { 
-            if (argMapper == null) argMapper = new ArgMapper(this, true);
-            return argMapper.GetArgName(index);
-        }
-    /// <internalonly/>
-        public Object[] OutArgs                       
+        /// <internalonly/>
+        public int OutArgCount
         {
             [System.Security.SecurityCritical]
             get
             {
-                if (argMapper == null) argMapper = new ArgMapper(this, true);
+                if (argMapper == null)
+                    argMapper = new ArgMapper(this, true);
+                return argMapper.ArgCount;
+            }
+        }
+
+        /// <internalonly/>
+        [System.Security.SecurityCritical]
+        public Object GetOutArg(int argNum)
+        {
+            if (argMapper == null)
+                argMapper = new ArgMapper(this, true);
+            return argMapper.GetArg(argNum);
+        }
+
+        /// <internalonly/>
+        [System.Security.SecurityCritical]
+        public String GetOutArgName(int index)
+        {
+            if (argMapper == null)
+                argMapper = new ArgMapper(this, true);
+            return argMapper.GetArgName(index);
+        }
+
+        /// <internalonly/>
+        public Object[] OutArgs
+        {
+            [System.Security.SecurityCritical]
+            get
+            {
+                if (argMapper == null)
+                    argMapper = new ArgMapper(this, true);
                 return argMapper.Args;
             }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public Exception Exception
         {
             [System.Security.SecurityCritical]
             get { return fault; }
         }
-    /// <internalonly/>
+
+        /// <internalonly/>
         public Object ReturnValue
         {
             [System.Security.SecurityCritical]
             get { return retVal; }
         }
 
-
-    /// <internalonly/>
+        /// <internalonly/>
         public virtual IDictionary Properties
         {
             [System.Security.SecurityCritical]
             get
             {
-                lock(this)
+                lock (this)
                 {
                     if (InternalProperties == null)
                     {
@@ -4683,31 +4866,30 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public LogicalCallContext LogicalCallContext
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get { return GetLogicalCallContext();}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return GetLogicalCallContext(); }
         }
 
         //
         // helpers
         //
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void FillHeaders(Header[] h)
         {
             FillHeaders(h, false);
         } // FillHeaders
 
-        
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private void FillHeaders(Header[] h, bool bFromHeaderHandler)
         {
             if (h == null)
                 return;
-        
+
             if (bFromHeaderHandler && fSoap)
-            {            
+            {
                 // Handle the case of headers coming off the wire in SOAP.
 
                 // look for message properties
@@ -4715,7 +4897,10 @@ namespace System.Runtime.Remoting.Messaging {
                 for (co = 0; co < h.Length; co++)
                 {
                     Header header = h[co];
-                    if (header.HeaderNamespace == "http://schemas.microsoft.com/clr/soap/messageProperties")
+                    if (
+                        header.HeaderNamespace
+                        == "http://schemas.microsoft.com/clr/soap/messageProperties"
+                    )
                     {
                         // add property to the message
                         FillHeader(header.Name, header.Value);
@@ -4729,41 +4914,50 @@ namespace System.Runtime.Remoting.Messaging {
                 }
             }
             else
-            {        
-                for (int i=0; i<h.Length; i++)
+            {
+                for (int i = 0; i < h.Length; i++)
                 {
                     FillHeader(h[i].Name, h[i].Value);
                 }
             }
         } // FillHeaders
-        
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal void FillHeader(String name, Object value)
         {
-            Message.DebugOut("MethodCall::FillHeaders: name: " + (name == null ? "NULL" : name) + "\n");
-            Message.DebugOut("MethodCall::FillHeaders: Value.GetClass: " + (value == null ? "NULL" : value.GetType().FullName) + "\n");
-            Message.DebugOut("MethodCall::FillHeaders: Value.ToString: " + (value == null ? "NULL" : value.ToString()) + "\n");
+            Message.DebugOut(
+                "MethodCall::FillHeaders: name: " + (name == null ? "NULL" : name) + "\n"
+            );
+            Message.DebugOut(
+                "MethodCall::FillHeaders: Value.GetClass: "
+                    + (value == null ? "NULL" : value.GetType().FullName)
+                    + "\n"
+            );
+            Message.DebugOut(
+                "MethodCall::FillHeaders: Value.ToString: "
+                    + (value == null ? "NULL" : value.ToString())
+                    + "\n"
+            );
 
             if (name.Equals("__MethodName"))
             {
-                methodName = (String) value;
+                methodName = (String)value;
             }
             else if (name.Equals("__Uri"))
             {
-                uri = (String) value;
+                uri = (String)value;
             }
             else if (name.Equals("__MethodSignature"))
             {
-                methodSignature = (Type[]) value;
-            }            
+                methodSignature = (Type[])value;
+            }
             else if (name.Equals("__TypeName"))
             {
-                typeName = (String) value;
+                typeName = (String)value;
             }
             else if (name.Equals("__OutArgs"))
             {
-                outArgs = (Object[]) value;
+                outArgs = (Object[])value;
             }
             else if (name.Equals("__CallContext"))
             {
@@ -4771,10 +4965,10 @@ namespace System.Runtime.Remoting.Messaging {
                 if (value is String)
                 {
                     callContext = new LogicalCallContext();
-                    callContext.RemotingData.LogicalCallID = (String) value;
+                    callContext.RemotingData.LogicalCallID = (String)value;
                 }
                 else
-                    callContext = (LogicalCallContext) value;
+                    callContext = (LogicalCallContext)value;
             }
             else if (name.Equals("__Return"))
             {
@@ -4818,9 +5012,8 @@ namespace System.Runtime.Remoting.Messaging {
         {
             uri = val;
         }
-        
-        /// <internalonly/>
 
+        /// <internalonly/>
         [System.Security.SecurityCritical]
         void IInternalMessage.SetCallContext(LogicalCallContext newCallContext)
         {
@@ -4833,54 +5026,52 @@ namespace System.Runtime.Remoting.Messaging {
         {
             return (ExternalProperties != null) || (InternalProperties != null);
         }
-        
     } // class MethodResponse
 
     internal interface ISerializationRootObject
     {
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         void RootSetObjectData(SerializationInfo info, StreamingContext ctx);
     }
 
     [Serializable]
     internal class SerializationMonkey : ISerializable, IFieldInfo
     {
-        internal ISerializationRootObject       _obj;
+        internal ISerializationRootObject _obj;
         internal String[] fieldNames = null;
         internal Type[] fieldTypes = null;
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal SerializationMonkey(SerializationInfo info, StreamingContext ctx)
         {
-            Contract.Assert(_obj != null, "SerializationMonkey's _obj field should have been initialized elsewhere with a special hack.");
+            Contract.Assert(
+                _obj != null,
+                "SerializationMonkey's _obj field should have been initialized elsewhere with a special hack."
+            );
             _obj.RootSetObjectData(info, ctx);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
-            throw new NotSupportedException(
-                Environment.GetResourceString(
-                    "NotSupported_Method"));
+            throw new NotSupportedException(Environment.GetResourceString("NotSupported_Method"));
         }
 
         public String[] FieldNames
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return fieldNames;}
-            [System.Security.SecurityCritical]  // auto-generated
-            set {fieldNames = value;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return fieldNames; }
+            [System.Security.SecurityCritical] // auto-generated
+            set { fieldNames = value; }
         }
 
         public Type[] FieldTypes
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get {return fieldTypes;}
-            [System.Security.SecurityCritical]  // auto-generated
-            set {fieldTypes = value;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return fieldTypes; }
+            [System.Security.SecurityCritical] // auto-generated
+            set { fieldTypes = value; }
         }
-
-                
     }
 
     //+================================================================================
@@ -4889,24 +5080,30 @@ namespace System.Runtime.Remoting.Messaging {
     //
     //-================================================================================
     /// <internalonly/>
-    [System.Security.SecurityCritical]  // auto-generated_required
+    [System.Security.SecurityCritical] // auto-generated_required
     [Serializable]
     [CLSCompliant(false)]
-    [SecurityPermissionAttribute(SecurityAction.InheritanceDemand, Flags=SecurityPermissionFlag.Infrastructure)]    
+    [SecurityPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Flags = SecurityPermissionFlag.Infrastructure
+    )]
     [System.Runtime.InteropServices.ComVisible(true)]
     public class ConstructionResponse : MethodResponse, IConstructionReturnMessage
     {
-    /// <internalonly/>
-        public ConstructionResponse(Header[] h, IMethodCallMessage mcm) : base(h, mcm) {}
-        internal ConstructionResponse(SerializationInfo info, StreamingContext context) : base (info, context) {}
+        /// <internalonly/>
+        public ConstructionResponse(Header[] h, IMethodCallMessage mcm)
+            : base(h, mcm) { }
 
-    /// <internalonly/>
+        internal ConstructionResponse(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
+
+        /// <internalonly/>
         public override IDictionary Properties
         {
             [System.Security.SecurityCritical]
             get
             {
-                lock(this)
+                lock (this)
                 {
                     if (InternalProperties == null)
                     {
@@ -4936,15 +5133,14 @@ namespace System.Runtime.Remoting.Messaging {
     // actually having a proxy to call "Invoke" on or a server object to "Dispatch"
     // on.
     [Serializable]
-    internal class TransitionCall
-        :IMessage, IInternalMessage, IMessageSink, ISerializable
+    internal class TransitionCall : IMessage, IInternalMessage, IMessageSink, ISerializable
     {
-        IDictionary _props;             // For IMessage::GetDictionary
-        IntPtr _sourceCtxID;            // Where the request emerged
-        IntPtr _targetCtxID;            // Where the request should execute
-        int _targetDomainID;            // Non zero if we are going to another domain
-        ServerIdentity _srvID;          // Created serverID
-        Identity _ID;                   // Created ID
+        IDictionary _props; // For IMessage::GetDictionary
+        IntPtr _sourceCtxID; // Where the request emerged
+        IntPtr _targetCtxID; // Where the request should execute
+        int _targetDomainID; // Non zero if we are going to another domain
+        ServerIdentity _srvID; // Created serverID
+        Identity _ID; // Created ID
 
         CrossContextDelegate _delegate; // The delegate to execute for the cross context case
         IntPtr _eeData; // Used for DoCallbackInEE
@@ -4954,12 +5150,10 @@ namespace System.Runtime.Remoting.Messaging {
         // is not, remoting and serialization together will ensure that
         // everything happens as expected and there is no smuggling.
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal TransitionCall(
-            IntPtr targetCtxID, 
-            CrossContextDelegate deleg)
+        [System.Security.SecurityCritical] // auto-generated
+        internal TransitionCall(IntPtr targetCtxID, CrossContextDelegate deleg)
         {
-            Contract.Assert(targetCtxID!=IntPtr.Zero, "bad target ctx for call back");
+            Contract.Assert(targetCtxID != IntPtr.Zero, "bad target ctx for call back");
             _sourceCtxID = Thread.CurrentContext.InternalContextID;
             _targetCtxID = targetCtxID;
             _delegate = deleg;
@@ -4967,30 +5161,26 @@ namespace System.Runtime.Remoting.Messaging {
             _eeData = IntPtr.Zero;
 
             // We are going to another context in the same app domain
-            _srvID = new ServerIdentity(
-                null, 
-                Thread.GetContextInternal(_targetCtxID));
+            _srvID = new ServerIdentity(null, Thread.GetContextInternal(_targetCtxID));
             _ID = _srvID;
             _ID.RaceSetChannelSink(CrossContextChannel.MessageSink);
             _srvID.RaceSetServerObjectChain(this);
-                
+
             //DBG Console.WriteLine("### TransitionCall ctor: " + Int32.Format(_sourceCtxID,"x") + ":" + Int32.Format(_targetCtxID,"x"));
         } // TransitionCall
 
-
         // This constructor should be used for cross appdomain case.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal TransitionCall(IntPtr targetCtxID, IntPtr eeData, int targetDomainID)
-            {
+        {
             Contract.Assert(targetCtxID != IntPtr.Zero, "bad target ctx for call back");
-            Contract.Assert(targetDomainID !=0, "bad target ctx for call back");
+            Contract.Assert(targetDomainID != 0, "bad target ctx for call back");
 
             _sourceCtxID = Thread.CurrentContext.InternalContextID;
             _targetCtxID = targetCtxID;
             _delegate = null;
             _targetDomainID = targetDomainID;
             _eeData = eeData;
-            
 
             // In the cross domain case, the client side just has a base Identity
             // and the server domain has the Server identity. We fault in the latter
@@ -5000,37 +5190,38 @@ namespace System.Runtime.Remoting.Messaging {
             _srvID = null;
             _ID = new Identity("TransitionCallURI", null);
 
-                // Create the data needed for the channel sink creation
-            CrossAppDomainData data = 
-                new CrossAppDomainData(_targetCtxID,
-                    _targetDomainID,
-                    Identity.ProcessGuid);
+            // Create the data needed for the channel sink creation
+            CrossAppDomainData data = new CrossAppDomainData(
+                _targetCtxID,
+                _targetDomainID,
+                Identity.ProcessGuid
+            );
             String unUsed;
-            IMessageSink channelSink =
-            CrossAppDomainChannel.AppDomainChannel.CreateMessageSink(
+            IMessageSink channelSink = CrossAppDomainChannel.AppDomainChannel.CreateMessageSink(
                 null, //uri
                 data, //channelData
-                out unUsed);//out objURI
+                out unUsed
+            ); //out objURI
 
             Contract.Assert(channelSink != null, "X-domain transition failure");
             _ID.RaceSetChannelSink(channelSink);
         } // TransitionCall
-        
 
-        internal TransitionCall(SerializationInfo info, StreamingContext context) 
+        internal TransitionCall(SerializationInfo info, StreamingContext context)
         {
             if (info == null || (context.State != StreamingContextStates.CrossAppDomain))
             {
                 throw new ArgumentNullException("info");
             }
             Contract.EndContractBlock();
-            
+
             _props = (IDictionary)info.GetValue("props", typeof(IDictionary));
-            _delegate = (CrossContextDelegate) info.GetValue("delegate", typeof(CrossContextDelegate));            
-            _sourceCtxID  = (IntPtr) info.GetValue("sourceCtxID", typeof(IntPtr));
-            _targetCtxID  = (IntPtr) info.GetValue("targetCtxID", typeof(IntPtr));
-            _eeData = (IntPtr) info.GetValue("eeData", typeof(IntPtr));
-            
+            _delegate = (CrossContextDelegate)
+                info.GetValue("delegate", typeof(CrossContextDelegate));
+            _sourceCtxID = (IntPtr)info.GetValue("sourceCtxID", typeof(IntPtr));
+            _targetCtxID = (IntPtr)info.GetValue("targetCtxID", typeof(IntPtr));
+            _eeData = (IntPtr)info.GetValue("eeData", typeof(IntPtr));
+
             _targetDomainID = info.GetInt32("targetDomainID");
             Contract.Assert(_targetDomainID != 0, "target domain should be non-zero");
         }
@@ -5038,12 +5229,12 @@ namespace System.Runtime.Remoting.Messaging {
         //IMessage::GetProperties
         public IDictionary Properties
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get
             {
                 if (_props == null)
                 {
-                    lock(this)
+                    lock (this)
                     {
                         if (_props == null)
                         {
@@ -5061,33 +5252,32 @@ namespace System.Runtime.Remoting.Messaging {
             [System.Security.SecurityCritical]
             get
             {
-                if ( (_targetDomainID!=0) && _srvID == null)
+                if ((_targetDomainID != 0) && _srvID == null)
                 {
                     // We should now be in the target context! (We should not be
                     // attempting to get the server identity in the client domain).
-                    Contract.Assert(Thread.CurrentContext.InternalContextID
-                                        == _targetCtxID,
-                                "ServerID requested in wrong appDomain!");
-                    lock(this)
+                    Contract.Assert(
+                        Thread.CurrentContext.InternalContextID == _targetCtxID,
+                        "ServerID requested in wrong appDomain!"
+                    );
+                    lock (this)
                     {
                         /*DBG Console.WriteLine("### Get SrvID: thrdCtxID== " + Int32.Format(Thread.CurrentContext.InternalContextID,"x"));
                         Console.WriteLine("### Get SrvID: _targetCtxID" + Int32.Format(_targetCtxID,"x")); DBG*/
 
-                        // NOTE: if we don't have a managed context object 
-                        // corresponding to the targetCtxID ... we just use 
-                        // the default context for the AppDomain. This could 
+                        // NOTE: if we don't have a managed context object
+                        // corresponding to the targetCtxID ... we just use
+                        // the default context for the AppDomain. This could
                         // be a problem if by some means we could have
                         // a non-default target VM context without a managed
                         // context object associated with it.
-                        Context ctx = Thread.GetContextInternal(_targetCtxID);                        
+                        Context ctx = Thread.GetContextInternal(_targetCtxID);
                         if (ctx == null)
                         {
-                            ctx = Context.DefaultContext;                            
+                            ctx = Context.DefaultContext;
                         }
                         Contract.Assert(ctx != null, "Null target context unexpected!");
-                        _srvID = new ServerIdentity(
-                                    null,
-                                    Thread.GetContextInternal(_targetCtxID));
+                        _srvID = new ServerIdentity(null, Thread.GetContextInternal(_targetCtxID));
 
                         _srvID.RaceSetServerObjectChain(this);
                     }
@@ -5095,99 +5285,82 @@ namespace System.Runtime.Remoting.Messaging {
                 return _srvID;
             }
             [System.Security.SecurityCritical]
-            set
-            {
-                throw new RemotingException(
-                    Environment.GetResourceString(
-                        "Remoting_Default"));
-            }
+            set { throw new RemotingException(Environment.GetResourceString("Remoting_Default")); }
         }
 
         //IInternalMessage::IdentityObject
         Identity IInternalMessage.IdentityObject
         {
             [System.Security.SecurityCritical]
-            get
-            {
-                return _ID;
-            }
+            get { return _ID; }
             [System.Security.SecurityCritical]
-            set
-            {
-                throw new RemotingException(
-                    Environment.GetResourceString(
-                        "Remoting_Default"));
-            }
+            set { throw new RemotingException(Environment.GetResourceString("Remoting_Default")); }
         }
 
         //IInternalMessage::SetURI
         [System.Security.SecurityCritical]
         void IInternalMessage.SetURI(String uri)
         {
-            throw new RemotingException(
-                Environment.GetResourceString(
-                    "Remoting_Default"));
+            throw new RemotingException(Environment.GetResourceString("Remoting_Default"));
         }
 
         [System.Security.SecurityCritical]
         void IInternalMessage.SetCallContext(LogicalCallContext callContext)
         {
-            throw new RemotingException(
-                Environment.GetResourceString(
-                    "Remoting_Default"));
+            throw new RemotingException(Environment.GetResourceString("Remoting_Default"));
         }
 
         [System.Security.SecurityCritical]
         bool IInternalMessage.HasProperties()
         {
-            throw new RemotingException(
-                Environment.GetResourceString(
-                    "Remoting_Default"));
+            throw new RemotingException(Environment.GetResourceString("Remoting_Default"));
         }
 
-
         //IMessage::SyncProcessMessage
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public IMessage SyncProcessMessage(IMessage msg)
         {
             Contract.Assert(
                 Thread.CurrentContext.InternalContextID == _targetCtxID,
-                "Transition message routed to wrong context");
+                "Transition message routed to wrong context"
+            );
 
             try
             {
                 LogicalCallContext oldcctx = Message.PropagateCallContextFromMessageToThread(msg);
                 if (_delegate != null)
                 {
-                    _delegate();            
+                    _delegate();
                 }
                 else
                 {
                     // This is the cross appdomain case, so we need to construct
                     //   the delegate and call on it.
                     CallBackHelper cb = new CallBackHelper(
-                                            _eeData,
-                                            true /*fromEE*/,
-                                            _targetDomainID); 
+                        _eeData,
+                        true /*fromEE*/
+                        ,
+                        _targetDomainID
+                    );
                     CrossContextDelegate ctxDel = new CrossContextDelegate(cb.Func);
-                    ctxDel(); 
+                    ctxDel();
                 }
                 Message.PropagateCallContextFromThreadToMessage(msg, oldcctx);
             }
-
             catch (Exception e)
             {
                 ReturnMessage retMsg = new ReturnMessage(e, new ErrorMessage());
                 retMsg.SetLogicalCallContext(
-                    (LogicalCallContext) msg.Properties[Message.CallContextKey]);
+                    (LogicalCallContext)msg.Properties[Message.CallContextKey]
+                );
                 return retMsg;
             }
 
-            return this;    
+            return this;
         }
 
         //IMessage::AsyncProcessMessage
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         public IMessageCtrl AsyncProcessMessage(IMessage msg, IMessageSink replySink)
         {
             IMessage retMsg = SyncProcessMessage(msg);
@@ -5198,12 +5371,12 @@ namespace System.Runtime.Remoting.Messaging {
         //IMessage::GetNextSink()
         public IMessageSink NextSink
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get{return null;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return null; }
         }
 
         //ISerializable::GetObjectData
-        [System.Security.SecurityCritical]  // auto-generated_required
+        [System.Security.SecurityCritical] // auto-generated_required
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (info == null || (context.State != StreamingContextStates.CrossAppDomain))
@@ -5218,8 +5391,7 @@ namespace System.Runtime.Remoting.Messaging {
             info.AddValue("targetDomainID", _targetDomainID);
             info.AddValue("eeData", _eeData);
         }
-
-    }// class TransitionCall
+    } // class TransitionCall
 
     internal class ArgMapper
     {
@@ -5227,13 +5399,12 @@ namespace System.Runtime.Remoting.Messaging {
         IMethodMessage _mm;
         RemotingMethodCachedData _methodCachedData;
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal ArgMapper(IMethodMessage mm, bool fOut)
         {
             _mm = mm;
             MethodBase mb = (MethodBase)_mm.MethodBase;
-            _methodCachedData = 
-                InternalRemotingServices.GetReflectionCachedData(mb);
+            _methodCachedData = InternalRemotingServices.GetReflectionCachedData(mb);
 
             if (fOut)
                 _map = _methodCachedData.MarshalResponseArgMap;
@@ -5241,11 +5412,10 @@ namespace System.Runtime.Remoting.Messaging {
                 _map = _methodCachedData.MarshalRequestArgMap;
         } // ArgMapper
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal ArgMapper(MethodBase mb, bool fOut)
         {
-            _methodCachedData = 
-                InternalRemotingServices.GetReflectionCachedData(mb);
+            _methodCachedData = InternalRemotingServices.GetReflectionCachedData(mb);
 
             if (fOut)
                 _map = _methodCachedData.MarshalResponseArgMap;
@@ -5253,36 +5423,34 @@ namespace System.Runtime.Remoting.Messaging {
                 _map = _methodCachedData.MarshalRequestArgMap;
         } // ArgMapper
 
-        
         internal int[] Map
-        { 
+        {
             get { return _map; }
         }
-            
-        internal int ArgCount                        
-        { 
-            get 
+
+        internal int ArgCount
+        {
+            get
             {
-            if (_map == null) 
-            {
-                return 0;
-            }
-            else
-            {
-                return _map.Length;
-            }
+                if (_map == null)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return _map.Length;
+                }
             }
         }
-            
-        [System.Security.SecurityCritical]  // auto-generated
-        internal Object  GetArg(int argNum)   
-        { 
-            
-            if (_map == null || argNum < 0 || argNum >= _map.Length) 
+
+        [System.Security.SecurityCritical] // auto-generated
+        internal Object GetArg(int argNum)
+        {
+            if (_map == null || argNum < 0 || argNum >= _map.Length)
             {
                 throw new InvalidOperationException(
-                    Environment.GetResourceString(
-                        "InvalidOperation_InternalState"));
+                    Environment.GetResourceString("InvalidOperation_InternalState")
+                );
             }
             else
             {
@@ -5290,14 +5458,14 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal String GetArgName(int argNum) 
-        { 
-            if (_map == null || argNum < 0 || argNum >= _map.Length) 
+        [System.Security.SecurityCritical] // auto-generated
+        internal String GetArgName(int argNum)
+        {
+            if (_map == null || argNum < 0 || argNum >= _map.Length)
             {
                 throw new InvalidOperationException(
-                    Environment.GetResourceString(
-                        "InvalidOperation_InternalState"));
+                    Environment.GetResourceString("InvalidOperation_InternalState")
+                );
             }
             else
             {
@@ -5305,10 +5473,10 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-        internal Object[] Args                       
+        internal Object[] Args
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get 
+            [System.Security.SecurityCritical] // auto-generated
+            get
             {
                 if (_map == null)
                 {
@@ -5317,9 +5485,9 @@ namespace System.Runtime.Remoting.Messaging {
                 else
                 {
                     Object[] ret = new Object[_map.Length];
-                    for(int i=0; i<_map.Length; i++) 
+                    for (int i = 0; i < _map.Length; i++)
                     {
-                    ret[i] = _mm.GetArg(_map[i]);
+                        ret[i] = _mm.GetArg(_map[i]);
                     }
                     return ret;
                 }
@@ -5335,7 +5503,7 @@ namespace System.Runtime.Remoting.Messaging {
                 {
                     ParameterInfo[] pi = _methodCachedData.Parameters;
                     ret = new Type[_map.Length];
-                    for (int i=0; i<_map.Length; i++)
+                    for (int i = 0; i < _map.Length; i++)
                     {
                         ret[i] = pi[_map[i]].ParameterType;
                     }
@@ -5353,7 +5521,7 @@ namespace System.Runtime.Remoting.Messaging {
                 {
                     ParameterInfo[] pi = _methodCachedData.Parameters;
                     ret = new String[_map.Length];
-                    for (int i=0; i<_map.Length; i++)
+                    for (int i = 0; i < _map.Length; i++)
                     {
                         ret[i] = pi[_map[i]].Name;
                     }
@@ -5362,21 +5530,22 @@ namespace System.Runtime.Remoting.Messaging {
             }
         }
 
-
         //
         // Helper functions for getting argument maps
         //
 
-        internal static void GetParameterMaps(ParameterInfo[] parameters,
-                                              out int[] inRefArgMap,
-                                              out int[] outRefArgMap,
-                                              out int[] outOnlyArgMap,
-                                              out int[] nonRefOutArgMap,
-                                              out int[] marshalRequestMap,
-                                              out int[] marshalResponseMap)
+        internal static void GetParameterMaps(
+            ParameterInfo[] parameters,
+            out int[] inRefArgMap,
+            out int[] outRefArgMap,
+            out int[] outOnlyArgMap,
+            out int[] nonRefOutArgMap,
+            out int[] marshalRequestMap,
+            out int[] marshalResponseMap
+        )
         {
             int co;
-        
+
             int inRefCount = 0;
             int outRefCount = 0;
             int outOnlyCount = 0;
@@ -5391,10 +5560,10 @@ namespace System.Runtime.Remoting.Messaging {
             co = 0;
             foreach (ParameterInfo param in parameters)
             {
-                bool bIsIn = param.IsIn;    // [In]
-                bool bIsOut = param.IsOut;  // [Out]  note: out int a === [Out] ref int b
-                
-                bool bIsByRef = param.ParameterType.IsByRef; // (ref or normal)                
+                bool bIsIn = param.IsIn; // [In]
+                bool bIsOut = param.IsOut; // [Out]  note: out int a === [Out] ref int b
+
+                bool bIsByRef = param.ParameterType.IsByRef; // (ref or normal)
 
                 if (!bIsByRef)
                 {
@@ -5403,14 +5572,13 @@ namespace System.Runtime.Remoting.Messaging {
                     if (bIsOut)
                         nonRefOutCount++;
                 }
-                else
-                if (bIsOut)
+                else if (bIsOut)
                 {
                     outRefCount++;
                     outOnlyCount++;
                 }
-                else 
-                {                    
+                else
+                {
                     inRefCount++;
 
                     outRefCount++;
@@ -5430,21 +5598,20 @@ namespace System.Runtime.Remoting.Messaging {
                     else
                     {
                         // "[In] ref int a" or "out int a"
-                        bMarshalIn = bIsIn;     
-                        bMarshalOut = bIsOut;  
+                        bMarshalIn = bIsIn;
+                        bMarshalOut = bIsOut;
                     }
                 }
                 else
                 {
                     // "int a" or "[In, Out] a"
-                    bMarshalIn = true;     
+                    bMarshalIn = true;
                     bMarshalOut = bIsOut;
                 }
-                
-           
+
                 if (bMarshalIn)
                     tempMarshalRequestMap[marshalRequestCount++] = co;
-                    
+
                 if (bMarshalOut)
                     tempMarshalResponseMap[marshalResponseCount++] = co;
 
@@ -5466,9 +5633,9 @@ namespace System.Runtime.Remoting.Messaging {
             {
                 ParameterInfo param = parameters[co];
 
-                bool bIsOut = param.IsOut;  // [Out]  note: out int a === [Out] ref int b
-                
-                bool bIsByRef = param.ParameterType.IsByRef; // (ref or normal) 
+                bool bIsOut = param.IsOut; // [Out]  note: out int a === [Out] ref int b
+
+                bool bIsByRef = param.ParameterType.IsByRef; // (ref or normal)
 
                 if (!bIsByRef)
                 {
@@ -5477,36 +5644,36 @@ namespace System.Runtime.Remoting.Messaging {
                     if (bIsOut)
                         nonRefOutArgMap[nonRefOutCount++] = co;
                 }
-                else
-                if (bIsOut)
+                else if (bIsOut)
                 {
                     outRefArgMap[outRefCount++] = co;
                     outOnlyArgMap[outOnlyCount++] = co;
-                }    
-                else 
-                {                    
+                }
+                else
+                {
                     inRefArgMap[inRefCount++] = co;
 
                     outRefArgMap[outRefCount++] = co;
                 }
             }
-        
+
             // copy over marshal maps
             marshalRequestMap = new int[marshalRequestCount];
             Array.Copy(tempMarshalRequestMap, marshalRequestMap, marshalRequestCount);
-            
+
             marshalResponseMap = new int[marshalResponseCount];
             Array.Copy(tempMarshalResponseMap, marshalResponseMap, marshalResponseCount);
-        
         } // GetParameterMaps
-        
-        // 
+
+        //
         // Helper methods for expanding and contracting argument lists
         //   when translating from async methods to sync methods and back.
         //
 
-        internal static Object[] ExpandAsyncEndArgsToSyncArgs(RemotingMethodCachedData syncMethod,
-                                                              Object[] asyncEndArgs)
+        internal static Object[] ExpandAsyncEndArgsToSyncArgs(
+            RemotingMethodCachedData syncMethod,
+            Object[] asyncEndArgs
+        )
         {
             // This is when we have a list of args associated with EndFoo(), and
             //   we want to size it to a list of args associated with Foo();
@@ -5514,99 +5681,113 @@ namespace System.Runtime.Remoting.Messaging {
             Object[] args = new Object[syncMethod.Parameters.Length];
 
             int[] outRefArgMap = syncMethod.OutRefArgMap;
-            
+
             for (int co = 0; co < outRefArgMap.Length; co++)
             {
                 args[outRefArgMap[co]] = asyncEndArgs[co];
             }
 
-            return args;            
+            return args;
         } // ExpandAsyncEndArgsToSyncArgs
-                
     } // class ArgMapper
 
-    internal class ErrorMessage: IMethodCallMessage
+    internal class ErrorMessage : IMethodCallMessage
     {
-
         // IMessage
         public IDictionary Properties
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get{ return null;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return null; }
         }
 
         // IMethodMessage
         public String Uri
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get{ return m_URI; }
+            [System.Security.SecurityCritical] // auto-generated
+            get { return m_URI; }
         }
 
         public String MethodName
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get{ return m_MethodName; }
+            [System.Security.SecurityCritical] // auto-generated
+            get { return m_MethodName; }
         }
 
         public String TypeName
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get{ return m_TypeName; }
+            [System.Security.SecurityCritical] // auto-generated
+            get { return m_TypeName; }
         }
 
         public Object MethodSignature
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return m_MethodSignature; }
         }
 
         public MethodBase MethodBase
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return null; }
         }
-        
+
         public int ArgCount
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get { return m_ArgCount;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return m_ArgCount; }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        public String GetArgName(int index)     { return m_ArgName; }
-        [System.Security.SecurityCritical]  // auto-generated
-        public Object GetArg(int argNum)        { return null;}
+        [System.Security.SecurityCritical] // auto-generated
+        public String GetArgName(int index)
+        {
+            return m_ArgName;
+        }
+
+        [System.Security.SecurityCritical] // auto-generated
+        public Object GetArg(int argNum)
+        {
+            return null;
+        }
+
         public Object[] Args
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get { return null;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return null; }
         }
 
         public bool HasVarArgs
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get { return false;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return false; }
         }
-
 
         // IMethodCallMessage
         public int InArgCount
         {
-            [System.Security.SecurityCritical]  // auto-generated
-            get { return m_ArgCount;}
+            [System.Security.SecurityCritical] // auto-generated
+            get { return m_ArgCount; }
         }
-        [System.Security.SecurityCritical]  // auto-generated
-        public String GetInArgName(int index)   { return null; }
-        [System.Security.SecurityCritical]  // auto-generated
-        public Object GetInArg(int argNum)      { return null;}
+
+        [System.Security.SecurityCritical] // auto-generated
+        public String GetInArgName(int index)
+        {
+            return null;
+        }
+
+        [System.Security.SecurityCritical] // auto-generated
+        public Object GetInArg(int argNum)
+        {
+            return null;
+        }
+
         public Object[] InArgs
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return null; }
         }
         public LogicalCallContext LogicalCallContext
         {
-            [System.Security.SecurityCritical]  // auto-generated
+            [System.Security.SecurityCritical] // auto-generated
             get { return null; }
         }
 
@@ -5618,8 +5799,6 @@ namespace System.Runtime.Remoting.Messaging {
         String m_ArgName = "Unknown";
     }
 
-
-
     //+================================================================================
     //
     // Synopsis:  Message wrapper used as base class for all exposed message wrappers.
@@ -5627,49 +5806,49 @@ namespace System.Runtime.Remoting.Messaging {
     //
     //-================================================================================
     /// <internalonly/>
-    [System.Security.SecurityCritical]  // auto-generated
+    [System.Security.SecurityCritical] // auto-generated
     [System.Runtime.InteropServices.ComVisible(true)]
     public class InternalMessageWrapper
     {
-    /// <internalonly/>
+        /// <internalonly/>
         protected IMessage WrappedMessage;
-    
-    /// <internalonly/>
+
+        /// <internalonly/>
         public InternalMessageWrapper(IMessage msg)
         {
             WrappedMessage = msg;
         } // InternalMessageWrapper
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal Object GetIdentityObject()
-        {      
+        {
             IInternalMessage iim = WrappedMessage as IInternalMessage;
             if (null != iim)
             {
                 return iim.IdentityObject;
-            }                
+            }
             else
             {
                 InternalMessageWrapper imw = WrappedMessage as InternalMessageWrapper;
-                if(null != imw)
+                if (null != imw)
                 {
                     return imw.GetIdentityObject();
                 }
-            else
+                else
                 {
-                return null;
+                    return null;
                 }
-            }                
+            }
         } // GetIdentityObject
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal Object GetServerIdentityObject()
-        {      
+        {
             IInternalMessage iim = WrappedMessage as IInternalMessage;
             if (null != iim)
             {
                 return iim.ServerIdentityObject;
-            }                
+            }
             else
             {
                 InternalMessageWrapper imw = WrappedMessage as InternalMessageWrapper;
@@ -5677,16 +5856,13 @@ namespace System.Runtime.Remoting.Messaging {
                 {
                     return imw.GetServerIdentityObject();
                 }
-            else
+                else
                 {
-                return null;
-                }                    
+                    return null;
+                }
             }
         } // GetServerIdentityObject
-    
     } // class InternalMessageWrapper
-
-
 
     //+================================================================================
     //
@@ -5694,8 +5870,11 @@ namespace System.Runtime.Remoting.Messaging {
     //
     //-================================================================================
     /// <internalonly/>
-    [System.Security.SecurityCritical]  // auto-generated_required
-    [SecurityPermissionAttribute(SecurityAction.InheritanceDemand, Flags=SecurityPermissionFlag.Infrastructure)]    
+    [System.Security.SecurityCritical] // auto-generated_required
+    [SecurityPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Flags = SecurityPermissionFlag.Infrastructure
+    )]
     [System.Runtime.InteropServices.ComVisible(true)]
     public class MethodCallMessageWrapper : InternalMessageWrapper, IMethodCallMessage
     {
@@ -5703,7 +5882,7 @@ namespace System.Runtime.Remoting.Messaging {
         private class MCMWrapperDictionary : Hashtable
         {
             private IMethodCallMessage _mcmsg; // pointer to this message object
-            private IDictionary        _idict; // point to contained message's dictionary
+            private IDictionary _idict; // point to contained message's dictionary
 
             public MCMWrapperDictionary(IMethodCallMessage msg, IDictionary idict)
             {
@@ -5715,17 +5894,22 @@ namespace System.Runtime.Remoting.Messaging {
             {
                 [System.Security.SecuritySafeCritical] // overrides transparent public member
                 get
-                {   
+                {
                     System.String strKey = key as System.String;
                     if (null != strKey)
                     {
                         switch (strKey)
                         {
-                        case "__Uri": return _mcmsg.Uri;
-                        case "__MethodName": return _mcmsg.MethodName;
-                        case "__MethodSignature": return _mcmsg.MethodSignature;
-                        case "__TypeName": return _mcmsg.TypeName;
-                        case "__Args": return _mcmsg.Args;
+                            case "__Uri":
+                                return _mcmsg.Uri;
+                            case "__MethodName":
+                                return _mcmsg.MethodName;
+                            case "__MethodSignature":
+                                return _mcmsg.MethodSignature;
+                            case "__TypeName":
+                                return _mcmsg.TypeName;
+                            case "__Args":
+                                return _mcmsg.Args;
                         }
                     }
                     return _idict[key];
@@ -5738,83 +5922,80 @@ namespace System.Runtime.Remoting.Messaging {
                     {
                         switch (strKey)
                         {
-                        case "__MethodName": 
-                        case "__MethodSignature": 
-                        case "__TypeName": 
-                        case "__Args": 
-                            throw new RemotingException(
-                                Environment.GetResourceString("Remoting_Default")); 
+                            case "__MethodName":
+                            case "__MethodSignature":
+                            case "__TypeName":
+                            case "__Args":
+                                throw new RemotingException(
+                                    Environment.GetResourceString("Remoting_Default")
+                                );
                         }
                         _idict[key] = value;
                     }
                 }
-            } 
+            }
         } // class MCMWrapperDictionary
-
 
         IMethodCallMessage _msg;
         IDictionary _properties;
-        ArgMapper  _argMapper = null;
-        Object[] _args;    
-        
+        ArgMapper _argMapper = null;
+        Object[] _args;
 
-    /// <internalonly/>
-        public MethodCallMessageWrapper(IMethodCallMessage msg) : base(msg) 
+        /// <internalonly/>
+        public MethodCallMessageWrapper(IMethodCallMessage msg)
+            : base(msg)
         {
             _msg = msg;
             _args = _msg.Args;
         } // MethodCallMessageWrapper
-        
 
         // IMethodMessage implementation
-        
-    /// <internalonly/>
-        public virtual String Uri 
+
+        /// <internalonly/>
+        public virtual String Uri
         {
             [System.Security.SecurityCritical]
-            get 
-            {
-                return _msg.Uri;
-            } 
-            set 
-            { 
-                _msg.Properties[Message.UriKey] = value;
-            }
+            get { return _msg.Uri; }
+            set { _msg.Properties[Message.UriKey] = value; }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public virtual String MethodName
         {
             [System.Security.SecurityCritical]
             get { return _msg.MethodName; }
         }
-    /// <internalonly/>
+
+        /// <internalonly/>
         public virtual String TypeName
         {
             [System.Security.SecurityCritical]
             get { return _msg.TypeName; }
         }
-    /// <internalonly/>
+
+        /// <internalonly/>
         public virtual Object MethodSignature
         {
             [System.Security.SecurityCritical]
             get { return _msg.MethodSignature; }
         }
-    /// <internalonly/>
+
+        /// <internalonly/>
         public virtual LogicalCallContext LogicalCallContext
         {
             [System.Security.SecurityCritical]
             get { return _msg.LogicalCallContext; }
-        }   
-    /// <internalonly/>
+        }
+
+        /// <internalonly/>
         public virtual MethodBase MethodBase
         {
             [System.Security.SecurityCritical]
             get { return _msg.MethodBase; }
-        }        
-           
-    /// <internalonly/>
-        public virtual int ArgCount 
+        }
+
+        /// <internalonly/>
+        public virtual int ArgCount
         {
             [System.Security.SecurityCritical]
             get
@@ -5825,90 +6006,98 @@ namespace System.Runtime.Remoting.Messaging {
                     return 0;
             }
         }
-    /// <internalonly/>
+
+        /// <internalonly/>
         [System.Security.SecurityCritical]
-        public virtual String GetArgName(int index) { return _msg.GetArgName(index); }
-    /// <internalonly/>
+        public virtual String GetArgName(int index)
+        {
+            return _msg.GetArgName(index);
+        }
+
+        /// <internalonly/>
         [System.Security.SecurityCritical]
-        public virtual Object GetArg(int argNum) { return _args[argNum]; }
-    /// <internalonly/>
-        public virtual Object[] Args 
+        public virtual Object GetArg(int argNum)
+        {
+            return _args[argNum];
+        }
+
+        /// <internalonly/>
+        public virtual Object[] Args
         {
             [System.Security.SecurityCritical]
             get { return _args; }
             set { _args = value; }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public virtual bool HasVarArgs
         {
             [System.Security.SecurityCritical]
             get { return _msg.HasVarArgs; }
         }
-        
-        // end of IMethodMessage implementation
 
+        // end of IMethodMessage implementation
 
         // IMethodCallMessage implementation
         //   (We cannot simply delegate to the internal message
         //    since we override the definition of Args and create our own array
         //    which can be modified.)
-    /// <internalonly/>
-        public virtual int InArgCount                        
-        {
-            [System.Security.SecurityCritical]
-            get 
-            {
-                if (_argMapper == null) _argMapper = new ArgMapper(this, false);
-                return _argMapper.ArgCount;
-            }
-        } // InArgCount
-
-    /// <internalonly/>
-        [System.Security.SecurityCritical]
-        public virtual Object GetInArg(int argNum)   
-        {
-            if (_argMapper == null) _argMapper = new ArgMapper(this, false);
-            return _argMapper.GetArg(argNum);
-        } // GetInArg
-        
-    /// <internalonly/>
-        [System.Security.SecurityCritical]
-        public virtual String GetInArgName(int index) 
-        { 
-            if (_argMapper == null) _argMapper = new ArgMapper(this, false);
-            return _argMapper.GetArgName(index);
-        } // GetInArgName
-        
-    /// <internalonly/>
-        public virtual Object[] InArgs                       
+        /// <internalonly/>
+        public virtual int InArgCount
         {
             [System.Security.SecurityCritical]
             get
             {
-                if (_argMapper == null) _argMapper = new ArgMapper(this, false);
+                if (_argMapper == null)
+                    _argMapper = new ArgMapper(this, false);
+                return _argMapper.ArgCount;
+            }
+        } // InArgCount
+
+        /// <internalonly/>
+        [System.Security.SecurityCritical]
+        public virtual Object GetInArg(int argNum)
+        {
+            if (_argMapper == null)
+                _argMapper = new ArgMapper(this, false);
+            return _argMapper.GetArg(argNum);
+        } // GetInArg
+
+        /// <internalonly/>
+        [System.Security.SecurityCritical]
+        public virtual String GetInArgName(int index)
+        {
+            if (_argMapper == null)
+                _argMapper = new ArgMapper(this, false);
+            return _argMapper.GetArgName(index);
+        } // GetInArgName
+
+        /// <internalonly/>
+        public virtual Object[] InArgs
+        {
+            [System.Security.SecurityCritical]
+            get
+            {
+                if (_argMapper == null)
+                    _argMapper = new ArgMapper(this, false);
                 return _argMapper.Args;
             }
         } // InArgs
- 
+
         // end of IMethodCallMessage implementation
 
-
-    /// <internalonly/>
-        public virtual IDictionary Properties 
+        /// <internalonly/>
+        public virtual IDictionary Properties
         {
             [System.Security.SecurityCritical]
-            get 
+            get
             {
                 if (_properties == null)
                     _properties = new MCMWrapperDictionary(this, _msg.Properties);
                 return _properties;
             }
         }
-
     } // class MethodCallMessageWrapper
-
-
 
     //+================================================================================
     //
@@ -5916,8 +6105,11 @@ namespace System.Runtime.Remoting.Messaging {
     //
     //-================================================================================
     /// <internalonly/>
-    [System.Security.SecurityCritical]  // auto-generated_required
-    [SecurityPermissionAttribute(SecurityAction.InheritanceDemand, Flags=SecurityPermissionFlag.Infrastructure)]    
+    [System.Security.SecurityCritical] // auto-generated_required
+    [SecurityPermissionAttribute(
+        SecurityAction.InheritanceDemand,
+        Flags = SecurityPermissionFlag.Infrastructure
+    )]
     [System.Runtime.InteropServices.ComVisible(true)]
     public class MethodReturnMessageWrapper : InternalMessageWrapper, IMethodReturnMessage
     {
@@ -5925,7 +6117,7 @@ namespace System.Runtime.Remoting.Messaging {
         private class MRMWrapperDictionary : Hashtable
         {
             private IMethodReturnMessage _mrmsg; // pointer to this message object
-            private IDictionary          _idict; // point to contained message's dictionary
+            private IDictionary _idict; // point to contained message's dictionary
 
             public MRMWrapperDictionary(IMethodReturnMessage msg, IDictionary idict)
             {
@@ -5937,18 +6129,24 @@ namespace System.Runtime.Remoting.Messaging {
             {
                 [System.Security.SecuritySafeCritical] // overrides transparent public member
                 get
-                {   
+                {
                     System.String strKey = key as System.String;
                     if (null != strKey)
                     {
                         switch (strKey)
                         {
-                        case "__Uri": return _mrmsg.Uri;
-                        case "__MethodName": return _mrmsg.MethodName;
-                        case "__MethodSignature": return _mrmsg.MethodSignature;
-                        case "__TypeName": return _mrmsg.TypeName;
-                        case "__Return": return _mrmsg.ReturnValue;
-                        case "__OutArgs": return _mrmsg.OutArgs;
+                            case "__Uri":
+                                return _mrmsg.Uri;
+                            case "__MethodName":
+                                return _mrmsg.MethodName;
+                            case "__MethodSignature":
+                                return _mrmsg.MethodSignature;
+                            case "__TypeName":
+                                return _mrmsg.TypeName;
+                            case "__Return":
+                                return _mrmsg.ReturnValue;
+                            case "__OutArgs":
+                                return _mrmsg.OutArgs;
                         }
                     }
                     return _idict[key];
@@ -5961,90 +6159,86 @@ namespace System.Runtime.Remoting.Messaging {
                     {
                         switch (strKey)
                         {
-                        case "__MethodName":
-                        case "__MethodSignature":
-                        case "__TypeName":
-                        case "__Return":
-                        case "__OutArgs":
-                            throw new RemotingException(
-                                Environment.GetResourceString("Remoting_Default")); 
+                            case "__MethodName":
+                            case "__MethodSignature":
+                            case "__TypeName":
+                            case "__Return":
+                            case "__OutArgs":
+                                throw new RemotingException(
+                                    Environment.GetResourceString("Remoting_Default")
+                                );
                         }
                         _idict[key] = value;
                     }
                 }
-            } 
+            }
         } // class MCMWrapperDictionary
-
 
         IMethodReturnMessage _msg;
         IDictionary _properties;
-        ArgMapper  _argMapper = null;
-        Object[] _args = null;    
+        ArgMapper _argMapper = null;
+        Object[] _args = null;
         Object _returnValue = null;
         Exception _exception = null;
-        
 
-    /// <internalonly/>
-        public MethodReturnMessageWrapper(IMethodReturnMessage msg) : base(msg) 
+        /// <internalonly/>
+        public MethodReturnMessageWrapper(IMethodReturnMessage msg)
+            : base(msg)
         {
             _msg = msg;
             _args = _msg.Args;
-            _returnValue = _msg.ReturnValue; // be careful if you decide to lazily assign _returnValue 
-                                             //   since the return value might actually be null
+            _returnValue = _msg.ReturnValue; // be careful if you decide to lazily assign _returnValue
+            //   since the return value might actually be null
             _exception = _msg.Exception; // (same thing as above goes for _exception)
         } // MethodReturnMessageWrapper
-        
 
         // IMethodMessage implementation
-        
-    /// <internalonly/>
-        public String Uri 
+
+        /// <internalonly/>
+        public String Uri
         {
             [System.Security.SecurityCritical]
-            get 
-            {
-                return _msg.Uri;
-            } 
-
-            set
-            {
-                _msg.Properties[Message.UriKey] = value;
-            }
+            get { return _msg.Uri; }
+            set { _msg.Properties[Message.UriKey] = value; }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public virtual String MethodName
         {
             [System.Security.SecurityCritical]
             get { return _msg.MethodName; }
         }
-    /// <internalonly/>
+
+        /// <internalonly/>
         public virtual String TypeName
         {
             [System.Security.SecurityCritical]
             get { return _msg.TypeName; }
         }
-    /// <internalonly/>
+
+        /// <internalonly/>
         public virtual Object MethodSignature
         {
             [System.Security.SecurityCritical]
             get { return _msg.MethodSignature; }
         }
-    /// <internalonly/>
+
+        /// <internalonly/>
         public virtual LogicalCallContext LogicalCallContext
         {
             [System.Security.SecurityCritical]
             get { return _msg.LogicalCallContext; }
-        }                       
-    /// <internalonly/>
+        }
+
+        /// <internalonly/>
         public virtual MethodBase MethodBase
         {
             [System.Security.SecurityCritical]
             get { return _msg.MethodBase; }
         }
-           
-    /// <internalonly/>
-        public virtual int ArgCount 
+
+        /// <internalonly/>
+        public virtual int ArgCount
         {
             [System.Security.SecurityCritical]
             get
@@ -6055,107 +6249,113 @@ namespace System.Runtime.Remoting.Messaging {
                     return 0;
             }
         }
-        
-    /// <internalonly/>
+
+        /// <internalonly/>
         [System.Security.SecurityCritical]
-        public virtual String GetArgName(int index) { return _msg.GetArgName(index); }
-    /// <internalonly/>
+        public virtual String GetArgName(int index)
+        {
+            return _msg.GetArgName(index);
+        }
+
+        /// <internalonly/>
         [System.Security.SecurityCritical]
-        public virtual Object GetArg(int argNum) { return _args[argNum]; }
-    /// <internalonly/>
-        public virtual Object[] Args 
+        public virtual Object GetArg(int argNum)
+        {
+            return _args[argNum];
+        }
+
+        /// <internalonly/>
+        public virtual Object[] Args
         {
             [System.Security.SecurityCritical]
             get { return _args; }
             set { _args = value; }
         }
 
-    /// <internalonly/>
+        /// <internalonly/>
         public virtual bool HasVarArgs
         {
             [System.Security.SecurityCritical]
             get { return _msg.HasVarArgs; }
         }
-        
-        // end of IMethodMessage implementation
 
+        // end of IMethodMessage implementation
 
         // IMethodReturnMessage implementation
         //   (We cannot simply delegate to the internal message
         //    since we override the definition of Args and create our own array
         //    which can be modified.)
-    /// <internalonly/>
-        public virtual int OutArgCount                        
-        {
-            [System.Security.SecurityCritical]
-            get 
-            {
-                if (_argMapper == null) _argMapper = new ArgMapper(this, true);
-                return _argMapper.ArgCount;
-            }
-        }
-
-    /// <internalonly/>
-        [System.Security.SecurityCritical]
-        public virtual Object GetOutArg(int argNum)   
-        {   
-            if (_argMapper == null) _argMapper = new ArgMapper(this, true);
-            return _argMapper.GetArg(argNum);
-        }
-
-    /// <internalonly/>
-        [System.Security.SecurityCritical]
-        public virtual String GetOutArgName(int index) 
-        { 
-            if (_argMapper == null) _argMapper = new ArgMapper(this, true);
-            return _argMapper.GetArgName(index);
-        }
-        
-    /// <internalonly/>
-        public virtual Object[] OutArgs                       
+        /// <internalonly/>
+        public virtual int OutArgCount
         {
             [System.Security.SecurityCritical]
             get
             {
-                if (_argMapper == null) _argMapper = new ArgMapper(this, true);
+                if (_argMapper == null)
+                    _argMapper = new ArgMapper(this, true);
+                return _argMapper.ArgCount;
+            }
+        }
+
+        /// <internalonly/>
+        [System.Security.SecurityCritical]
+        public virtual Object GetOutArg(int argNum)
+        {
+            if (_argMapper == null)
+                _argMapper = new ArgMapper(this, true);
+            return _argMapper.GetArg(argNum);
+        }
+
+        /// <internalonly/>
+        [System.Security.SecurityCritical]
+        public virtual String GetOutArgName(int index)
+        {
+            if (_argMapper == null)
+                _argMapper = new ArgMapper(this, true);
+            return _argMapper.GetArgName(index);
+        }
+
+        /// <internalonly/>
+        public virtual Object[] OutArgs
+        {
+            [System.Security.SecurityCritical]
+            get
+            {
+                if (_argMapper == null)
+                    _argMapper = new ArgMapper(this, true);
                 return _argMapper.Args;
             }
         }
-        
-    /// <internalonly/>
+
+        /// <internalonly/>
         public virtual Exception Exception
         {
             [System.Security.SecurityCritical]
             get { return _exception; }
             set { _exception = value; }
         }
-        
-    /// <internalonly/>
-        public virtual Object ReturnValue 
+
+        /// <internalonly/>
+        public virtual Object ReturnValue
         {
             [System.Security.SecurityCritical]
             get { return _returnValue; }
             set { _returnValue = value; }
         }
- 
+
         // end of IMethodReturnMessage implementation
 
         // IMessage
-    /// <internalonly/>
-        public virtual IDictionary Properties 
+        /// <internalonly/>
+        public virtual IDictionary Properties
         {
             [System.Security.SecurityCritical]
-            get 
+            get
             {
                 if (_properties == null)
                     _properties = new MRMWrapperDictionary(this, _msg.Properties);
                 return _properties;
             }
         }
-
-
     } // class MethodReturnMessageWrapper
-
 } // namespace Remoting
-
-    

@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
 using System.Buffers.Binary;
 
@@ -24,15 +23,18 @@ namespace Microsoft.NET.HostModel.ComHost
         private const int OffsetOfGuidOffset = sizeof(int) * 2;
         private const int SizeOfGuidOffset = sizeof(int);
 
-        private const int OffsetOfMajorVersion = OffsetOfGuidOffset + SizeOfGuidOffset + sizeof(int) * 2 + sizeof(ushort) * 2;
+        private const int OffsetOfMajorVersion =
+            OffsetOfGuidOffset + SizeOfGuidOffset + sizeof(int) * 2 + sizeof(ushort) * 2;
         private const int SizeOfMajorVersion = sizeof(ushort);
         private const int OffsetOfMinorVersion = OffsetOfMajorVersion + SizeOfMajorVersion;
         private const int SizeOfMinorVersion = sizeof(ushort);
 
-        private const int OffsetOfTypeInfosCount = OffsetOfMinorVersion + SizeOfMinorVersion + sizeof(int);
+        private const int OffsetOfTypeInfosCount =
+            OffsetOfMinorVersion + SizeOfMinorVersion + sizeof(int);
         private const int SizeOfTypeInfosCount = sizeof(int);
 
-        private const int OffsetOfTablesStart = OffsetOfTypeInfosCount + SizeOfTypeInfosCount + sizeof(int) * 12;
+        private const int OffsetOfTablesStart =
+            OffsetOfTypeInfosCount + SizeOfTypeInfosCount + sizeof(int) * 12;
         private const int NumTablesToSkip = 5;
         private const int SizeOfTableHeader = sizeof(int) * 4;
 
@@ -40,12 +42,20 @@ namespace Microsoft.NET.HostModel.ComHost
         {
             checked
             {
-                int typelibGuidEntryOffset = (int)BinaryPrimitives.ReadUInt32LittleEndian(fileContents.Slice(OffsetOfGuidOffset));
-                int infoRefsOffsetCount = (int)BinaryPrimitives.ReadUInt32LittleEndian(fileContents.Slice(OffsetOfTypeInfosCount));
+                int typelibGuidEntryOffset = (int)
+                    BinaryPrimitives.ReadUInt32LittleEndian(fileContents.Slice(OffsetOfGuidOffset));
+                int infoRefsOffsetCount = (int)
+                    BinaryPrimitives.ReadUInt32LittleEndian(
+                        fileContents.Slice(OffsetOfTypeInfosCount)
+                    );
                 int infoBytes = infoRefsOffsetCount * SizeOfTypeInfosCount;
-                int guidTableOffset = OffsetOfTablesStart + infoBytes + SizeOfTableHeader * NumTablesToSkip;
-                int fileOffset = (int)BinaryPrimitives.ReadUInt32LittleEndian(fileContents.Slice(guidTableOffset));
-                return new Guid(fileContents.Slice(fileOffset + typelibGuidEntryOffset, 16).ToArray());
+                int guidTableOffset =
+                    OffsetOfTablesStart + infoBytes + SizeOfTableHeader * NumTablesToSkip;
+                int fileOffset = (int)
+                    BinaryPrimitives.ReadUInt32LittleEndian(fileContents.Slice(guidTableOffset));
+                return new Guid(
+                    fileContents.Slice(fileOffset + typelibGuidEntryOffset, 16).ToArray()
+                );
             }
         }
 
@@ -57,8 +67,12 @@ namespace Microsoft.NET.HostModel.ComHost
             {
                 var span = new ReadOnlySpan<byte>(tlbBytes);
                 typelibId = FindGuid(span);
-                ushort majorVer = BinaryPrimitives.ReadUInt16LittleEndian(span.Slice(OffsetOfMajorVersion));
-                ushort minorVer = BinaryPrimitives.ReadUInt16LittleEndian(span.Slice(OffsetOfMinorVersion));
+                ushort majorVer = BinaryPrimitives.ReadUInt16LittleEndian(
+                    span.Slice(OffsetOfMajorVersion)
+                );
+                ushort minorVer = BinaryPrimitives.ReadUInt16LittleEndian(
+                    span.Slice(OffsetOfMinorVersion)
+                );
                 version = new Version(majorVer, minorVer);
                 return true;
             }

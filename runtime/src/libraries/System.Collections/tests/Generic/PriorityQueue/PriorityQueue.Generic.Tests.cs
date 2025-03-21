@@ -7,10 +7,12 @@ using Xunit;
 
 namespace System.Collections.Tests
 {
-    public abstract class PriorityQueue_Generic_Tests<TElement, TPriority> : IGenericSharedAPI_Tests<(TElement Element, TPriority Priority)>
+    public abstract class PriorityQueue_Generic_Tests<TElement, TPriority>
+        : IGenericSharedAPI_Tests<(TElement Element, TPriority Priority)>
     {
         #region PriorityQueue Helper methods
-        protected virtual IComparer<TPriority>? GetPriorityComparer() => Comparer<TPriority>.Default;
+        protected virtual IComparer<TPriority>? GetPriorityComparer() =>
+            Comparer<TPriority>.Default;
 
         protected IEnumerable<(TElement, TPriority)> CreateItems(int count)
         {
@@ -22,14 +24,21 @@ namespace System.Collections.Tests
             }
         }
 
-        protected PriorityQueue<TElement, TPriority> CreateEmptyPriorityQueue(int initialCapacity = 0)
-            => new PriorityQueue<TElement, TPriority>(initialCapacity, GetPriorityComparer());
+        protected PriorityQueue<TElement, TPriority> CreateEmptyPriorityQueue(
+            int initialCapacity = 0
+        ) => new PriorityQueue<TElement, TPriority>(initialCapacity, GetPriorityComparer());
 
         protected PriorityQueue<TElement, TPriority> CreatePriorityQueue(
-            int initialCapacity, int countOfItemsToGenerate, out List<(TElement element, TPriority priority)> generatedItems)
+            int initialCapacity,
+            int countOfItemsToGenerate,
+            out List<(TElement element, TPriority priority)> generatedItems
+        )
         {
             generatedItems = CreateItems(countOfItemsToGenerate).ToList();
-            var queue = new PriorityQueue<TElement, TPriority>(initialCapacity, GetPriorityComparer());
+            var queue = new PriorityQueue<TElement, TPriority>(
+                initialCapacity,
+                GetPriorityComparer()
+            );
             queue.EnqueueRange(generatedItems);
             return queue;
         }
@@ -74,7 +83,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void PriorityQueue_CapacityConstructor_ComparerShouldEqualDefaultComparer(int initialCapacity)
+        public void PriorityQueue_CapacityConstructor_ComparerShouldEqualDefaultComparer(
+            int initialCapacity
+        )
         {
             var queue = new PriorityQueue<TElement, TPriority>(initialCapacity);
             Assert.Empty(queue.UnorderedItems);
@@ -86,9 +97,16 @@ namespace System.Collections.Tests
         public void PriorityQueue_EnumerableConstructor_ShouldContainAllElements(int count)
         {
             (TElement, TPriority)[] itemsToEnqueue = CreateItems(count).ToArray();
-            PriorityQueue<TElement, TPriority> queue = new PriorityQueue<TElement, TPriority>(itemsToEnqueue, GetPriorityComparer());
+            PriorityQueue<TElement, TPriority> queue = new PriorityQueue<TElement, TPriority>(
+                itemsToEnqueue,
+                GetPriorityComparer()
+            );
             Assert.Equal(itemsToEnqueue.Length, queue.Count);
-            AssertExtensions.CollectionEqual(itemsToEnqueue, queue.UnorderedItems, EqualityComparer<(TElement, TPriority)>.Default);
+            AssertExtensions.CollectionEqual(
+                itemsToEnqueue,
+                queue.UnorderedItems,
+                EqualityComparer<(TElement, TPriority)>.Default
+            );
         }
 
         #endregion
@@ -107,14 +125,19 @@ namespace System.Collections.Tests
                 queue.Enqueue(element, priority);
             }
 
-            AssertExtensions.CollectionEqual(itemsToEnqueue, queue.UnorderedItems, EqualityComparer<(TElement, TPriority)>.Default);
+            AssertExtensions.CollectionEqual(
+                itemsToEnqueue,
+                queue.UnorderedItems,
+                EqualityComparer<(TElement, TPriority)>.Default
+            );
         }
 
         [Theory]
         [MemberData(nameof(ValidPositiveCollectionSizes))]
         public void PriorityQueue_Peek_ShouldReturnMinimalElement(int count)
         {
-            IReadOnlyCollection<(TElement, TPriority)> itemsToEnqueue = CreateItems(count).ToArray();
+            IReadOnlyCollection<(TElement, TPriority)> itemsToEnqueue = CreateItems(count)
+                .ToArray();
             PriorityQueue<TElement, TPriority> queue = CreateEmptyPriorityQueue();
             (TElement Element, TPriority Priority) minItem = itemsToEnqueue.First();
 
@@ -130,7 +153,10 @@ namespace System.Collections.Tests
                 TElement actualPeekElement = queue.Peek();
                 Assert.Equal(minItem.Element, actualPeekElement);
 
-                bool actualTryPeekSuccess = queue.TryPeek(out TElement actualTryPeekElement, out TPriority actualTryPeekPriority);
+                bool actualTryPeekSuccess = queue.TryPeek(
+                    out TElement actualTryPeekElement,
+                    out TPriority actualTryPeekPriority
+                );
                 Assert.True(actualTryPeekSuccess);
                 Assert.Equal(minItem.Element, actualTryPeekElement);
                 Assert.Equal(minItem.Priority, actualTryPeekPriority);
@@ -143,7 +169,11 @@ namespace System.Collections.Tests
         [InlineData(3, 100)]
         public void PriorityQueue_PeekAndDequeue(int initialCapacity, int count)
         {
-            PriorityQueue<TElement, TPriority> queue = CreatePriorityQueue(initialCapacity, count, out List<(TElement element, TPriority priority)> generatedItems);
+            PriorityQueue<TElement, TPriority> queue = CreatePriorityQueue(
+                initialCapacity,
+                count,
+                out List<(TElement element, TPriority priority)> generatedItems
+            );
 
             TPriority[] expectedPeekPriorities = generatedItems
                 .Select(x => x.priority)
@@ -154,8 +184,14 @@ namespace System.Collections.Tests
             {
                 TPriority expectedPeekPriority = expectedPeekPriorities[i];
 
-                bool actualTryPeekSuccess = queue.TryPeek(out TElement actualTryPeekElement, out TPriority actualTryPeekPriority);
-                bool actualTryDequeueSuccess = queue.TryDequeue(out TElement actualTryDequeueElement, out TPriority actualTryDequeuePriority);
+                bool actualTryPeekSuccess = queue.TryPeek(
+                    out TElement actualTryPeekElement,
+                    out TPriority actualTryPeekPriority
+                );
+                bool actualTryDequeueSuccess = queue.TryDequeue(
+                    out TElement actualTryDequeueElement,
+                    out TPriority actualTryDequeuePriority
+                );
 
                 Assert.True(actualTryPeekSuccess);
                 Assert.True(actualTryDequeueSuccess);
@@ -177,13 +213,21 @@ namespace System.Collections.Tests
 
             queue.EnqueueRange(itemsToEnqueue);
 
-            AssertExtensions.CollectionEqual(itemsToEnqueue, queue.UnorderedItems, EqualityComparer<(TElement, TPriority)>.Default);
+            AssertExtensions.CollectionEqual(
+                itemsToEnqueue,
+                queue.UnorderedItems,
+                EqualityComparer<(TElement, TPriority)>.Default
+            );
         }
 
         [Fact]
         public void PriorityQueue_EnqueueRange_CollectionWithLargeCount_ThrowsOverflowException()
         {
-            PriorityQueue<TElement, TPriority> queue = CreatePriorityQueue(1, 1, out List<(TElement element, TPriority priority)> generatedItems);
+            PriorityQueue<TElement, TPriority> queue = CreatePriorityQueue(
+                1,
+                1,
+                out List<(TElement element, TPriority priority)> generatedItems
+            );
 
             CollectionWithLargeCount<(TElement, TPriority)> pairCollection = new();
             Assert.Throws<OverflowException>(() => queue.EnqueueRange(pairCollection));
@@ -198,12 +242,19 @@ namespace System.Collections.Tests
             public int Count => int.MaxValue;
 
             public bool IsReadOnly => throw new NotImplementedException();
+
             public void Add(T item) => throw new NotImplementedException();
+
             public void Clear() => throw new NotImplementedException();
+
             public bool Contains(T item) => throw new NotImplementedException();
+
             public void CopyTo(T[] array, int arrayIndex) => throw new NotImplementedException();
+
             public IEnumerator<T> GetEnumerator() => throw new NotImplementedException();
+
             public bool Remove(T item) => throw new NotImplementedException();
+
             IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
         }
 
@@ -211,7 +262,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void PriorityQueue_EnqueueDequeue(int count)
         {
-            (TElement Element, TPriority Priority)[] itemsToEnqueue = CreateItems(2 * count).ToArray();
+            (TElement Element, TPriority Priority)[] itemsToEnqueue = CreateItems(2 * count)
+                .ToArray();
             PriorityQueue<TElement, TPriority> queue = CreateEmptyPriorityQueue();
             queue.EnqueueRange(itemsToEnqueue.Take(count));
 
@@ -220,15 +272,22 @@ namespace System.Collections.Tests
                 queue.EnqueueDequeue(element, priority);
             }
 
-            IEnumerable<(TElement Element, TPriority Priority)> expectedItems = itemsToEnqueue.OrderByDescending(x => x.Priority, queue.Comparer).Take(count);
-            AssertExtensions.CollectionEqual(expectedItems, queue.UnorderedItems, EqualityComparer<(TElement, TPriority)>.Default);
+            IEnumerable<(TElement Element, TPriority Priority)> expectedItems = itemsToEnqueue
+                .OrderByDescending(x => x.Priority, queue.Comparer)
+                .Take(count);
+            AssertExtensions.CollectionEqual(
+                expectedItems,
+                queue.UnorderedItems,
+                EqualityComparer<(TElement, TPriority)>.Default
+            );
         }
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
         public void PriorityQueue_DequeueEnqueue(int count)
         {
-            (TElement Element, TPriority Priority)[] itemsToEnqueue = CreateItems(count * 2).ToArray();
+            (TElement Element, TPriority Priority)[] itemsToEnqueue = CreateItems(count * 2)
+                .ToArray();
             PriorityQueue<TElement, TPriority> queue = CreateEmptyPriorityQueue();
             queue.EnqueueRange(itemsToEnqueue.Take(count));
 
@@ -242,8 +301,15 @@ namespace System.Collections.Tests
 
             Assert.Equal(dequeuedItems.Count, count);
 
-            IEnumerable<(TElement Element, TPriority Priority)> expectedItems = itemsToEnqueue.Where(item => !dequeuedItems.Contains(item, EqualityComparer<(TElement, TPriority)>.Default));
-            AssertExtensions.CollectionEqual(expectedItems, queue.UnorderedItems, EqualityComparer<(TElement, TPriority)>.Default);
+            IEnumerable<(TElement Element, TPriority Priority)> expectedItems =
+                itemsToEnqueue.Where(item =>
+                    !dequeuedItems.Contains(item, EqualityComparer<(TElement, TPriority)>.Default)
+                );
+            AssertExtensions.CollectionEqual(
+                expectedItems,
+                queue.UnorderedItems,
+                EqualityComparer<(TElement, TPriority)>.Default
+            );
         }
 
         [Theory]
@@ -254,12 +320,16 @@ namespace System.Collections.Tests
             TElement removedElement;
             TPriority removedPriority;
 
-            PriorityQueue<TElement, TPriority> queue = CreatePriorityQueue(count, count, out List<(TElement element, TPriority priority)> generatedItems);
+            PriorityQueue<TElement, TPriority> queue = CreatePriorityQueue(
+                count,
+                count,
+                out List<(TElement element, TPriority priority)> generatedItems
+            );
 
             for (int i = count - 1; i >= 0; i--)
             {
                 (TElement element, TPriority priority) = generatedItems[i];
-                
+
                 result = queue.Remove(element, out removedElement, out removedPriority);
 
                 Assert.True(result);
@@ -283,7 +353,11 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void PriorityQueue_Clear(int count)
         {
-            PriorityQueue<TElement, TPriority> queue = CreatePriorityQueue(initialCapacity: 0, count, out _);
+            PriorityQueue<TElement, TPriority> queue = CreatePriorityQueue(
+                initialCapacity: 0,
+                count,
+                out _
+            );
             Assert.Equal(count, queue.Count);
 
             queue.Clear();
@@ -300,7 +374,11 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidPositiveCollectionSizes))]
         public void PriorityQueue_Enumeration_OrderingIsConsistent(int count)
         {
-            PriorityQueue<TElement, TPriority> queue = CreatePriorityQueue(initialCapacity: 0, count, out _);
+            PriorityQueue<TElement, TPriority> queue = CreatePriorityQueue(
+                initialCapacity: 0,
+                count,
+                out _
+            );
 
             (TElement, TPriority)[] firstEnumeration = queue.UnorderedItems.ToArray();
             (TElement, TPriority)[] secondEnumeration = queue.UnorderedItems.ToArray();
@@ -317,24 +395,60 @@ namespace System.Collections.Tests
         /// <see cref="IGenericSharedAPI_Tests{T}"/> requires collections that implement IEnumerable.
         /// Since PriorityQueue does not we use a subclass that delegates to <see cref="PriorityQueue{TElement, TPriority}.UnorderedItems"/>.
         /// </summary>
-        protected class EnumerablePriorityQueue : PriorityQueue<TElement, TPriority>, IEnumerable<(TElement Element, TPriority Priority)>
+        protected class EnumerablePriorityQueue
+            : PriorityQueue<TElement, TPriority>,
+                IEnumerable<(TElement Element, TPriority Priority)>
         {
-            public EnumerablePriorityQueue(IComparer<TPriority>? comparer) : base(comparer)
-            {
-            }
+            public EnumerablePriorityQueue(IComparer<TPriority>? comparer)
+                : base(comparer) { }
 
-            IEnumerator<(TElement Element, TPriority Priority)> IEnumerable<(TElement Element, TPriority Priority)>.GetEnumerator() => UnorderedItems.GetEnumerator();
+            IEnumerator<(TElement Element, TPriority Priority)> IEnumerable<(
+                TElement Element,
+                TPriority Priority
+            )>.GetEnumerator() => UnorderedItems.GetEnumerator();
+
             IEnumerator IEnumerable.GetEnumerator() => UnorderedItems.GetEnumerator();
         }
 
-        protected override IEnumerable<(TElement Element, TPriority Priority)> GenericIEnumerableFactory() => new EnumerablePriorityQueue(GetPriorityComparer());
-        protected override int Count(IEnumerable<(TElement Element, TPriority Priority)> enumerable) => ((EnumerablePriorityQueue)enumerable).Count;
-        protected override void Add(IEnumerable<(TElement Element, TPriority Priority)> enumerable, (TElement Element, TPriority Priority) value) => ((EnumerablePriorityQueue)enumerable).Enqueue(value.Element, value.Priority);
-        protected override void Clear(IEnumerable<(TElement Element, TPriority Priority)> enumerable) => ((EnumerablePriorityQueue)enumerable).Clear();
-        protected override bool Contains(IEnumerable<(TElement Element, TPriority Priority)> enumerable, (TElement Element, TPriority Priority) value) => ((EnumerablePriorityQueue)enumerable).Any(elem => elem.Equals(value));
-        protected override void CopyTo(IEnumerable<(TElement Element, TPriority Priority)> enumerable, (TElement Element, TPriority Priority)[] array, int index) => ((ICollection)((EnumerablePriorityQueue)enumerable).UnorderedItems).CopyTo(array, index);
-        protected override bool Remove(IEnumerable<(TElement Element, TPriority Priority)> enumerable) => ((EnumerablePriorityQueue)enumerable).TryDequeue(out _, out _);
-        protected override Type IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType => typeof(ArgumentOutOfRangeException);
+        protected override IEnumerable<(
+            TElement Element,
+            TPriority Priority
+        )> GenericIEnumerableFactory() => new EnumerablePriorityQueue(GetPriorityComparer());
+
+        protected override int Count(
+            IEnumerable<(TElement Element, TPriority Priority)> enumerable
+        ) => ((EnumerablePriorityQueue)enumerable).Count;
+
+        protected override void Add(
+            IEnumerable<(TElement Element, TPriority Priority)> enumerable,
+            (TElement Element, TPriority Priority) value
+        ) => ((EnumerablePriorityQueue)enumerable).Enqueue(value.Element, value.Priority);
+
+        protected override void Clear(
+            IEnumerable<(TElement Element, TPriority Priority)> enumerable
+        ) => ((EnumerablePriorityQueue)enumerable).Clear();
+
+        protected override bool Contains(
+            IEnumerable<(TElement Element, TPriority Priority)> enumerable,
+            (TElement Element, TPriority Priority) value
+        ) => ((EnumerablePriorityQueue)enumerable).Any(elem => elem.Equals(value));
+
+        protected override void CopyTo(
+            IEnumerable<(TElement Element, TPriority Priority)> enumerable,
+            (TElement Element, TPriority Priority)[] array,
+            int index
+        ) =>
+            ((ICollection)((EnumerablePriorityQueue)enumerable).UnorderedItems).CopyTo(
+                array,
+                index
+            );
+
+        protected override bool Remove(
+            IEnumerable<(TElement Element, TPriority Priority)> enumerable
+        ) => ((EnumerablePriorityQueue)enumerable).TryDequeue(out _, out _);
+
+        protected override Type IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
 
         #endregion
     }

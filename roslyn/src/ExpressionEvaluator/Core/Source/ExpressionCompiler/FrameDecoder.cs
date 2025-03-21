@@ -23,16 +23,36 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
     /// always used C# syntax (but with language-specific "special names").  Since these names are exposed through public
     /// APIs, we will remain consistent with the old behavior (for consumers who may be parsing the frame names).
     /// </remarks>
-    internal abstract class FrameDecoder<TCompilation, TMethodSymbol, TModuleSymbol, TTypeSymbol, TTypeParameterSymbol> : IDkmLanguageFrameDecoder
+    internal abstract class FrameDecoder<
+        TCompilation,
+        TMethodSymbol,
+        TModuleSymbol,
+        TTypeSymbol,
+        TTypeParameterSymbol
+    > : IDkmLanguageFrameDecoder
         where TCompilation : Compilation
         where TMethodSymbol : class, IMethodSymbolInternal
         where TModuleSymbol : class, IModuleSymbolInternal
         where TTypeSymbol : class, ITypeSymbolInternal
         where TTypeParameterSymbol : class, ITypeParameterSymbolInternal
     {
-        private readonly InstructionDecoder<TCompilation, TMethodSymbol, TModuleSymbol, TTypeSymbol, TTypeParameterSymbol> _instructionDecoder;
+        private readonly InstructionDecoder<
+            TCompilation,
+            TMethodSymbol,
+            TModuleSymbol,
+            TTypeSymbol,
+            TTypeParameterSymbol
+        > _instructionDecoder;
 
-        internal FrameDecoder(InstructionDecoder<TCompilation, TMethodSymbol, TModuleSymbol, TTypeSymbol, TTypeParameterSymbol> instructionDecoder)
+        internal FrameDecoder(
+            InstructionDecoder<
+                TCompilation,
+                TMethodSymbol,
+                TModuleSymbol,
+                TTypeSymbol,
+                TTypeParameterSymbol
+            > instructionDecoder
+        )
         {
             _instructionDecoder = instructionDecoder;
         }
@@ -42,15 +62,38 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmWorkList workList,
             DkmStackWalkFrame frame,
             DkmVariableInfoFlags argumentFlags,
-            DkmCompletionRoutine<DkmGetFrameNameAsyncResult> completionRoutine)
+            DkmCompletionRoutine<DkmGetFrameNameAsyncResult> completionRoutine
+        )
         {
             try
             {
-                Debug.Assert((argumentFlags & (DkmVariableInfoFlags.Names | DkmVariableInfoFlags.Types | DkmVariableInfoFlags.Values)) == argumentFlags,
-                    $"Unexpected argumentFlags '{argumentFlags}'");
+                Debug.Assert(
+                    (
+                        argumentFlags
+                        & (
+                            DkmVariableInfoFlags.Names
+                            | DkmVariableInfoFlags.Types
+                            | DkmVariableInfoFlags.Values
+                        )
+                    ) == argumentFlags,
+                    $"Unexpected argumentFlags '{argumentFlags}'"
+                );
 
-                GetNameWithGenericTypeArguments(workList, frame, onSuccess: method => GetFrameName(inspectionContext, workList, frame, argumentFlags, completionRoutine, method),
-                    onFailure: e => completionRoutine(DkmGetFrameNameAsyncResult.CreateErrorResult(e)));
+                GetNameWithGenericTypeArguments(
+                    workList,
+                    frame,
+                    onSuccess: method =>
+                        GetFrameName(
+                            inspectionContext,
+                            workList,
+                            frame,
+                            argumentFlags,
+                            completionRoutine,
+                            method
+                        ),
+                    onFailure: e =>
+                        completionRoutine(DkmGetFrameNameAsyncResult.CreateErrorResult(e))
+                );
             }
             catch (NotImplementedMetadataException)
             {
@@ -66,12 +109,23 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmInspectionContext inspectionContext,
             DkmWorkList workList,
             DkmStackWalkFrame frame,
-            DkmCompletionRoutine<DkmGetFrameReturnTypeAsyncResult> completionRoutine)
+            DkmCompletionRoutine<DkmGetFrameReturnTypeAsyncResult> completionRoutine
+        )
         {
             try
             {
-                GetNameWithGenericTypeArguments(workList, frame, onSuccess: method => completionRoutine(new DkmGetFrameReturnTypeAsyncResult(_instructionDecoder.GetReturnTypeName(method))),
-                    onFailure: e => completionRoutine(DkmGetFrameReturnTypeAsyncResult.CreateErrorResult(e)));
+                GetNameWithGenericTypeArguments(
+                    workList,
+                    frame,
+                    onSuccess: method =>
+                        completionRoutine(
+                            new DkmGetFrameReturnTypeAsyncResult(
+                                _instructionDecoder.GetReturnTypeName(method)
+                            )
+                        ),
+                    onFailure: e =>
+                        completionRoutine(DkmGetFrameReturnTypeAsyncResult.CreateErrorResult(e))
+                );
             }
             catch (NotImplementedMetadataException)
             {
@@ -87,13 +141,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmWorkList workList,
             DkmStackWalkFrame frame,
             Action<TMethodSymbol> onSuccess,
-            Action<Exception> onFailure)
+            Action<Exception> onFailure
+        )
         {
             // NOTE: We could always call GetClrGenericParameters, pass them to GetMethod and have that
             // return a constructed method symbol, but it seems unwise to call GetClrGenericParameters
             // for all frames (as this call requires a round-trip to the debuggee process).
 
-            // [nullability] We do not expect frames without instruction addresses in this path. Additionally, there is no good 
+            // [nullability] We do not expect frames without instruction addresses in this path. Additionally, there is no good
             // way to return if we receive a frame with no address, as executing the onFailure callback would just hide a deeper issue.
             RoslynDebug.AssertNotNull(frame.InstructionAddress);
             var instructionAddress = (DkmClrInstructionAddress)frame.InstructionAddress;
@@ -109,11 +164,20 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         try
                         {
                             // DkmGetClrGenericParametersAsyncResult.ParameterTypeNames will throw if ErrorCode != 0.
-                            var serializedTypeNames = (result.ErrorCode == 0) ? result.ParameterTypeNames : null;
-                            var typeArguments = _instructionDecoder.GetTypeSymbols(compilation, method, serializedTypeNames);
+                            var serializedTypeNames =
+                                (result.ErrorCode == 0) ? result.ParameterTypeNames : null;
+                            var typeArguments = _instructionDecoder.GetTypeSymbols(
+                                compilation,
+                                method,
+                                serializedTypeNames
+                            );
                             if (!typeArguments.IsEmpty)
                             {
-                                method = _instructionDecoder.ConstructMethod(method, typeParameters, typeArguments);
+                                method = _instructionDecoder.ConstructMethod(
+                                    method,
+                                    typeParameters,
+                                    typeArguments
+                                );
                             }
                             onSuccess(method);
                         }
@@ -121,7 +185,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         {
                             onFailure(e);
                         }
-                    });
+                    }
+                );
             }
             else
             {
@@ -135,7 +200,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             DkmStackWalkFrame frame,
             DkmVariableInfoFlags argumentFlags,
             DkmCompletionRoutine<DkmGetFrameNameAsyncResult> completionRoutine,
-            TMethodSymbol method)
+            TMethodSymbol method
+        )
         {
             var includeParameterTypes = argumentFlags.Includes(DkmVariableInfoFlags.Types);
             var includeParameterNames = argumentFlags.Includes(DkmVariableInfoFlags.Names);
@@ -156,7 +222,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     inspectionContext.ReturnValue,
                     inspectionContext.AdditionalVisualizationData,
                     inspectionContext.AdditionalVisualizationDataPriority,
-                    inspectionContext.ReturnValues);
+                    inspectionContext.ReturnValues
+                );
 
                 // GetFrameArguments returns an array of formatted argument values. We'll pass
                 // ourselves (GetFrameName) as the continuation of the GetFrameArguments call.
@@ -177,12 +244,23 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                                 {
                                     var formattedArgument = argument as DkmSuccessEvaluationResult;
                                     // Not expecting Expandable bit, at least not from this EE.
-                                    Debug.Assert((formattedArgument == null) || (formattedArgument.Flags & DkmEvaluationResultFlags.Expandable) == 0);
+                                    Debug.Assert(
+                                        (formattedArgument == null)
+                                            || (
+                                                formattedArgument.Flags
+                                                & DkmEvaluationResultFlags.Expandable
+                                            ) == 0
+                                    );
                                     builder.Add(formattedArgument?.Value);
                                 }
                             }
 
-                            var frameName = _instructionDecoder.GetName(method, includeParameterTypes, includeParameterNames, argumentValues: builder);
+                            var frameName = _instructionDecoder.GetName(
+                                method,
+                                includeParameterTypes,
+                                includeParameterNames,
+                                argumentValues: builder
+                            );
                             builder?.Free();
                             completionRoutine(new DkmGetFrameNameAsyncResult(frameName));
                         }
@@ -200,11 +278,17 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                                 }
                             }
                         }
-                    });
+                    }
+                );
             }
             else
             {
-                var frameName = _instructionDecoder.GetName(method, includeParameterTypes, includeParameterNames, argumentValues: null);
+                var frameName = _instructionDecoder.GetName(
+                    method,
+                    includeParameterTypes,
+                    includeParameterNames,
+                    argumentValues: null
+                );
                 completionRoutine(new DkmGetFrameNameAsyncResult(frameName));
             }
         }

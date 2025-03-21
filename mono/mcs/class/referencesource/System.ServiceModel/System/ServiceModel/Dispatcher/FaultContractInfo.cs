@@ -5,10 +5,10 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
-    using System.ServiceModel;
     using System.Collections.Generic;
-    using System.ServiceModel.Description;
     using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Description;
 
     public class FaultContractInfo
     {
@@ -20,10 +20,15 @@ namespace System.ServiceModel.Dispatcher
         DataContractSerializer serializer;
 
         public FaultContractInfo(string action, Type detail)
-            : this(action, detail, null, null, null)
-        {
-        }
-        internal FaultContractInfo(string action, Type detail, XmlName elementName, string ns, IList<Type> knownTypes)
+            : this(action, detail, null, null, null) { }
+
+        internal FaultContractInfo(
+            string action,
+            Type detail,
+            XmlName elementName,
+            string ns,
+            IList<Type> knownTypes
+        )
         {
             if (action == null)
             {
@@ -42,15 +47,30 @@ namespace System.ServiceModel.Dispatcher
             this.knownTypes = knownTypes;
         }
 
-        public string Action { get { return this.action; } }
+        public string Action
+        {
+            get { return this.action; }
+        }
 
-        public Type Detail { get { return this.detail; } }
+        public Type Detail
+        {
+            get { return this.detail; }
+        }
 
-        internal string ElementName { get { return this.elementName; } }
+        internal string ElementName
+        {
+            get { return this.elementName; }
+        }
 
-        internal string ElementNamespace { get { return this.ns; } }
+        internal string ElementNamespace
+        {
+            get { return this.ns; }
+        }
 
-        internal IList<Type> KnownTypes { get { return this.knownTypes; } }
+        internal IList<Type> KnownTypes
+        {
+            get { return this.knownTypes; }
+        }
 
         internal DataContractSerializer Serializer
         {
@@ -60,11 +80,21 @@ namespace System.ServiceModel.Dispatcher
                 {
                     if (this.elementName == null)
                     {
-                        this.serializer = DataContractSerializerDefaults.CreateSerializer(this.detail, this.knownTypes, int.MaxValue /* maxItemsInObjectGraph */);
+                        this.serializer = DataContractSerializerDefaults.CreateSerializer(
+                            this.detail,
+                            this.knownTypes,
+                            int.MaxValue /* maxItemsInObjectGraph */
+                        );
                     }
                     else
                     {
-                        this.serializer = DataContractSerializerDefaults.CreateSerializer(this.detail, this.knownTypes, this.elementName, this.ns == null ? string.Empty : this.ns, int.MaxValue /* maxItemsInObjectGraph */);
+                        this.serializer = DataContractSerializerDefaults.CreateSerializer(
+                            this.detail,
+                            this.knownTypes,
+                            this.elementName,
+                            this.ns == null ? string.Empty : this.ns,
+                            int.MaxValue /* maxItemsInObjectGraph */
+                        );
                     }
                 }
                 return this.serializer;
@@ -72,4 +102,3 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 }
-

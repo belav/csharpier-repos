@@ -45,8 +45,11 @@ namespace System.Net.WebSockets
             {
                 if (value != Timeout.InfiniteTimeSpan && value < TimeSpan.Zero)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(KeepAliveInterval), value,
-                        SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall, 0));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(KeepAliveInterval),
+                        value,
+                        SR.Format(SR.net_WebSockets_ArgumentOutOfRange_TooSmall, 0)
+                    );
                 }
                 _keepAliveInterval = value;
             }

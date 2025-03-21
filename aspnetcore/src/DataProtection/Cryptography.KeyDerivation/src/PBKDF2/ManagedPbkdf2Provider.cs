@@ -14,7 +14,13 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2;
 /// </summary>
 internal sealed class ManagedPbkdf2Provider : IPbkdf2Provider
 {
-    public byte[] DeriveKey(string password, byte[] salt, KeyDerivationPrf prf, int iterationCount, int numBytesRequested)
+    public byte[] DeriveKey(
+        string password,
+        byte[] salt,
+        KeyDerivationPrf prf,
+        int iterationCount,
+        int numBytesRequested
+    )
     {
         Debug.Assert(password != null);
         Debug.Assert(salt != null);
@@ -66,7 +72,10 @@ internal sealed class ManagedPbkdf2Provider : IPbkdf2Provider
         return retVal;
     }
 
-    private static KeyedHashAlgorithm PrfToManagedHmacAlgorithm(KeyDerivationPrf prf, string password)
+    private static KeyedHashAlgorithm PrfToManagedHmacAlgorithm(
+        KeyDerivationPrf prf,
+        string password
+    )
     {
         byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
         try

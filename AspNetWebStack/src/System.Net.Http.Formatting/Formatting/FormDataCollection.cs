@@ -30,7 +30,11 @@ namespace System.Net.Http.Formatting
         /// The key value enumeration should be immutable.
         /// </summary>
         /// <param name="pairs">incoming set of key value pairs. Ordering is preserved.</param>
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is the convention for representing FormData")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is the convention for representing FormData"
+        )]
         public FormDataCollection(IEnumerable<KeyValuePair<string, string>> pairs)
         {
             if (pairs == null)
@@ -64,7 +68,11 @@ namespace System.Net.Http.Formatting
         /// Initialize a form collection from a URL encoded query string. Any leading question
         /// mark (?) will be considered part of the query string and treated as any other value.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads", Justification = "string is a query string, not a URI")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1057:StringUriOverloadsCallSystemUriOverloads",
+            Justification = "string is a query string, not a URI"
+        )]
         public FormDataCollection(string query)
         {
             _pairs = ParseQueryString(query);
@@ -77,10 +85,7 @@ namespace System.Net.Http.Formatting
         /// <returns>Values associated with a given key. If there are multiple values, they're concatenated.</returns>
         public string this[string name]
         {
-            get
-            {
-                return Get(name);
-            }
+            get { return Get(name); }
         }
 
         // Helper to invoke parser around a query string
@@ -97,11 +102,19 @@ namespace System.Net.Http.Formatting
             FormUrlEncodedParser parser = new FormUrlEncodedParser(result, Int64.MaxValue);
 
             int bytesConsumed = 0;
-            ParserState state = parser.ParseBuffer(bytes, bytes.Length, ref bytesConsumed, isFinal: true);
+            ParserState state = parser.ParseBuffer(
+                bytes,
+                bytes.Length,
+                ref bytesConsumed,
+                isFinal: true
+            );
 
             if (state != ParserState.Done)
             {
-                throw Error.InvalidOperation(Properties.Resources.FormUrlEncodedParseError, bytesConsumed);
+                throw Error.InvalidOperation(
+                    Properties.Resources.FormUrlEncodedParseError,
+                    bytesConsumed
+                );
             }
 
             return result;

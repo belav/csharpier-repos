@@ -36,8 +36,13 @@ namespace ILCompiler.Reflection.ReadyToRun.Arm64
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
-            sb.AppendLine($"        Epilog Start Offset: 0x{EpilogStartOffset:X5} Actual offset = 0x{EpilogStartOffset * 4:X5} Offset from main function begin = 0x{EpilogStartOffsetFromMainFunctionBegin:X6}");
-            sb.AppendLine($"        Condition: {Condition} (0x{Condition:X})" + ((Condition == 0xE) ? " (always)" : ""));
+            sb.AppendLine(
+                $"        Epilog Start Offset: 0x{EpilogStartOffset:X5} Actual offset = 0x{EpilogStartOffset * 4:X5} Offset from main function begin = 0x{EpilogStartOffsetFromMainFunctionBegin:X6}"
+            );
+            sb.AppendLine(
+                $"        Condition: {Condition} (0x{Condition:X})"
+                    + ((Condition == 0xE) ? " (always)" : "")
+            );
             sb.Append($"        Epilog Start Index: {EpilogStartIndex} (0x{EpilogStartIndex:X})");
             return sb.ToString();
         }
@@ -52,7 +57,6 @@ namespace ILCompiler.Reflection.ReadyToRun.Arm64
         public UnwindCode(int index)
         {
             Index = index;
-
         }
     }
 
@@ -116,8 +120,6 @@ namespace ILCompiler.Reflection.ReadyToRun.Arm64
                 Epilogs = new Epilog[0];
                 epilogStartAt[EpilogCount] = true; // the one and only epilog starts its unwind codes at this offset
             }
-
-
 
             Size = offset - (int)startOffset + (int)CodeWords * 4;
             int alignmentPad = ((Size + sizeof(int) - 1) & ~(sizeof(int) - 1)) - Size;

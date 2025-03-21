@@ -25,46 +25,38 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.IO;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public static class ManifestReader {
-	
-		[MonoTODO]
-		public static Manifest ReadManifest (Stream input,
-						     bool preserveStream)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static Manifest ReadManifest (string path,
-						     bool preserveStream)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static Manifest ReadManifest (string manifestType,
-						     Stream input,
-						     bool preserveStream)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public static Manifest ReadManifest (string manifestType,
-						     string path,
-						     bool preserveStream)
-		{
-			throw new NotImplementedException ();
-		}
-	}
-}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public static class ManifestReader
+    {
+        [MonoTODO]
+        public static Manifest ReadManifest(Stream input, bool preserveStream)
+        {
+            throw new NotImplementedException();
+        }
 
+        [MonoTODO]
+        public static Manifest ReadManifest(string path, bool preserveStream)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public static Manifest ReadManifest(string manifestType, Stream input, bool preserveStream)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public static Manifest ReadManifest(string manifestType, string path, bool preserveStream)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

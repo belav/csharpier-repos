@@ -23,7 +23,8 @@ public sealed class PropertyAccessors
         Delegate preStoreGeneratedCurrentValueGetter,
         Delegate? originalValueGetter,
         Delegate relationshipSnapshotGetter,
-        Func<ValueBuffer, object>? valueBufferGetter)
+        Func<ValueBuffer, object>? valueBufferGetter
+    )
     {
         CurrentValueGetter = currentValueGetter;
         PreStoreGeneratedCurrentValueGetter = preStoreGeneratedCurrentValueGetter;

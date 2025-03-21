@@ -20,10 +20,16 @@ public class StartupWithProblemDetails
         app.UseExceptionHandler();
 
         // The broken section of our application.
-        app.Map("/throw", throwApp =>
-        {
-            throwApp.Run(context => { throw new Exception("Application Exception"); });
-        });
+        app.Map(
+            "/throw",
+            throwApp =>
+            {
+                throwApp.Run(context =>
+                {
+                    throw new Exception("Application Exception");
+                });
+            }
+        );
 
         app.UseStaticFiles();
 
@@ -32,9 +38,10 @@ public class StartupWithProblemDetails
         {
             context.Response.ContentType = "text/html";
             await context.Response.WriteAsync("<html><body>Welcome to the sample<br><br>\r\n");
-            await context.Response.WriteAsync("Click here to throw an exception: <a href=\"/throw\">throw</a>\r\n");
+            await context.Response.WriteAsync(
+                "Click here to throw an exception: <a href=\"/throw\">throw</a>\r\n"
+            );
             await context.Response.WriteAsync("</body></html>\r\n");
         });
     }
 }
-

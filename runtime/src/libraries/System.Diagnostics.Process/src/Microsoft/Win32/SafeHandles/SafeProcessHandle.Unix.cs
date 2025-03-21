@@ -27,8 +27,8 @@ namespace Microsoft.Win32.SafeHandles
         private readonly SafeWaitHandle? _handle;
         private readonly bool _releaseRef;
 
-        internal SafeProcessHandle(int processId, SafeWaitHandle handle) :
-            this(handle.DangerousGetHandle(), ownsHandle: true)
+        internal SafeProcessHandle(int processId, SafeWaitHandle handle)
+            : this(handle.DangerousGetHandle(), ownsHandle: true)
         {
             ProcessId = processId;
             _handle = handle;

@@ -26,9 +26,7 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
-namespace Microsoft.Build.Framework {
-	public delegate void BuildErrorEventHandler (object sender,
-						     BuildErrorEventArgs e);
+namespace Microsoft.Build.Framework
+{
+    public delegate void BuildErrorEventHandler(object sender, BuildErrorEventArgs e);
 }
-

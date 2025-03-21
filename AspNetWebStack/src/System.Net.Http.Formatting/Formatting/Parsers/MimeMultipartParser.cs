@@ -24,7 +24,9 @@ namespace System.Net.Http.Formatting.Parsers
         private const byte CR = 0x0D;
         private const byte LF = 0x0A;
         private const byte Dash = 0x2D;
-        private static readonly ArraySegment<byte> _emptyBodyPart = new ArraySegment<byte>(new byte[0]);
+        private static readonly ArraySegment<byte> _emptyBodyPart = new ArraySegment<byte>(
+            new byte[0]
+        );
 
         private long _totalBytesConsumed;
         private long _maxMessageSize;
@@ -43,7 +45,11 @@ namespace System.Net.Http.Formatting.Parsers
             // The minimum length which would be an empty message terminated by CRLF
             if (maxMessageSize < MimeMultipartParser.MinMessageSize)
             {
-                throw Error.ArgumentMustBeGreaterThanOrEqualTo("maxMessageSize", maxMessageSize, MinMessageSize);
+                throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                    "maxMessageSize",
+                    maxMessageSize,
+                    MinMessageSize
+                );
             }
 
             if (String.IsNullOrWhiteSpace(boundary))
@@ -53,12 +59,19 @@ namespace System.Net.Http.Formatting.Parsers
 
             if (boundary.Length > MaxBoundarySize - 10)
             {
-                throw Error.ArgumentMustBeLessThanOrEqualTo("boundary", boundary.Length, MaxBoundarySize - 10);
+                throw Error.ArgumentMustBeLessThanOrEqualTo(
+                    "boundary",
+                    boundary.Length,
+                    MaxBoundarySize - 10
+                );
             }
 
             if (boundary.EndsWith(" ", StringComparison.Ordinal))
             {
-                throw Error.Argument("boundary", Properties.Resources.MimeMultipartParserBadBoundary);
+                throw Error.Argument(
+                    "boundary",
+                    Properties.Resources.MimeMultipartParserBadBoundary
+                );
             }
 
             _maxMessageSize = maxMessageSize;
@@ -71,10 +84,9 @@ namespace System.Net.Http.Formatting.Parsers
         {
             get
             {
-                return
-                    _bodyPartState == BodyPartState.AfterBoundary &&
-                    _currentBoundary != null &&
-                    _currentBoundary.IsFinal;
+                return _bodyPartState == BodyPartState.AfterBoundary
+                    && _currentBoundary != null
+                    && _currentBoundary.IsFinal;
             }
         }
 
@@ -87,14 +99,14 @@ namespace System.Net.Http.Formatting.Parsers
             Boundary,
             AfterBoundary,
             AfterSecondDash,
-            AfterSecondCarriageReturn
+            AfterSecondCarriageReturn,
         }
 
         private enum MessageState
         {
             Boundary = 0, // about to parse boundary
             BodyPart, // about to parse body-part
-            CloseDelimiter // about to read close-delimiter
+            CloseDelimiter, // about to read close-delimiter
         }
 
         /// <summary>
@@ -159,14 +171,19 @@ namespace System.Net.Http.Formatting.Parsers
         /// <remarks>In order to get the complete body part, the caller is responsible for concatenating the contents of the
         /// <paramref name="remainingBodyPart"/> and <paramref name="bodyPart"/> out parameters.</remarks>
         /// <returns>State of the parser.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is translated to parse state.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception is translated to parse state."
+        )]
         public State ParseBuffer(
             byte[] buffer,
             int bytesReady,
             ref int bytesConsumed,
             out ArraySegment<byte> remainingBodyPart,
             out ArraySegment<byte> bodyPart,
-            out bool isFinalBodyPart)
+            out bool isFinalBodyPart
+        )
         {
             if (buffer == null)
             {
@@ -187,7 +204,8 @@ namespace System.Net.Http.Formatting.Parsers
                     ref _bodyPartState,
                     _maxMessageSize,
                     ref _totalBytesConsumed,
-                    _currentBoundary);
+                    _currentBoundary
+                );
             }
             catch (Exception)
             {
@@ -209,7 +227,11 @@ namespace System.Net.Http.Formatting.Parsers
             return parseStatus;
         }
 
-        [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity", Justification = "This is a parser which cannot be split up for performance reasons.")]
+        [SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity",
+            Justification = "This is a parser which cannot be split up for performance reasons."
+        )]
         private static State ParseBodyPart(
             byte[] buffer,
             int bytesReady,
@@ -217,16 +239,27 @@ namespace System.Net.Http.Formatting.Parsers
             ref BodyPartState bodyPartState,
             long maximumMessageLength,
             ref long totalBytesConsumed,
-            CurrentBodyPartStore currentBodyPart)
+            CurrentBodyPartStore currentBodyPart
+        )
         {
-            Contract.Assert((bytesReady - bytesConsumed) >= 0, "ParseBodyPart()|(bytesReady - bytesConsumed) < 0");
-            Contract.Assert(maximumMessageLength <= 0 || totalBytesConsumed <= maximumMessageLength, "ParseBodyPart()|Message already read exceeds limit.");
+            Contract.Assert(
+                (bytesReady - bytesConsumed) >= 0,
+                "ParseBodyPart()|(bytesReady - bytesConsumed) < 0"
+            );
+            Contract.Assert(
+                maximumMessageLength <= 0 || totalBytesConsumed <= maximumMessageLength,
+                "ParseBodyPart()|Message already read exceeds limit."
+            );
 
             // Remember where we started.
             int segmentStart;
             int initialBytesParsed = bytesConsumed;
 
-            if (bytesReady == 0 && bodyPartState == BodyPartState.AfterBoundary && currentBodyPart.IsFinal)
+            if (
+                bytesReady == 0
+                && bodyPartState == BodyPartState.AfterBoundary
+                && currentBodyPart.IsFinal
+            )
             {
                 // We've seen the end of the stream - the final body part has no trailing CRLF
                 return State.BodyPartCompleted;
@@ -234,7 +267,10 @@ namespace System.Net.Http.Formatting.Parsers
 
             // Set up parsing status with what will happen if we exceed the buffer.
             State parseStatus = State.DataTooBig;
-            long effectiveMax = maximumMessageLength <= 0 ? Int64.MaxValue : (maximumMessageLength - totalBytesConsumed + bytesConsumed);
+            long effectiveMax =
+                maximumMessageLength <= 0
+                    ? Int64.MaxValue
+                    : (maximumMessageLength - totalBytesConsumed + bytesConsumed);
             if (effectiveMax == 0)
             {
                 // effectiveMax is based on our max message size - if we've arrrived at the max size, then we need
@@ -250,7 +286,10 @@ namespace System.Net.Http.Formatting.Parsers
 
             currentBodyPart.ResetBoundaryOffset();
 
-            Contract.Assert(bytesConsumed < effectiveMax, "We have already consumed more than the max header length.");
+            Contract.Assert(
+                bytesConsumed < effectiveMax,
+                "We have already consumed more than the max header length."
+            );
 
             switch (bodyPartState)
             {
@@ -357,7 +396,13 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         if (++bytesConsumed == effectiveMax)
                         {
-                            if (currentBodyPart.AppendBoundary(buffer, segmentStart, bytesConsumed - segmentStart))
+                            if (
+                                currentBodyPart.AppendBoundary(
+                                    buffer,
+                                    segmentStart,
+                                    bytesConsumed - segmentStart
+                                )
+                            )
                             {
                                 if (currentBodyPart.IsBoundaryComplete())
                                 {
@@ -378,7 +423,13 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        if (!currentBodyPart.AppendBoundary(buffer, segmentStart, bytesConsumed - segmentStart))
+                        if (
+                            !currentBodyPart.AppendBoundary(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            )
+                        )
                         {
                             currentBodyPart.ResetBoundary();
                             bodyPartState = BodyPartState.BodyPart;
@@ -393,7 +444,10 @@ namespace System.Net.Http.Formatting.Parsers
                     // This state means that we just saw the end of a boundary. It might by a 'normal' boundary, in which
                     // case it's followed by optional whitespace and a CRLF. Or it might be the 'final' boundary and will
                     // be followed by '--', optional whitespace and an optional CRLF.
-                    if (buffer[bytesConsumed] == MimeMultipartParser.Dash && !currentBodyPart.IsFinal)
+                    if (
+                        buffer[bytesConsumed] == MimeMultipartParser.Dash
+                        && !currentBodyPart.IsFinal
+                    )
                     {
                         currentBodyPart.AppendBoundary(MimeMultipartParser.Dash);
                         if (++bytesConsumed == effectiveMax)
@@ -411,7 +465,13 @@ namespace System.Net.Http.Formatting.Parsers
                     {
                         if (++bytesConsumed == effectiveMax)
                         {
-                            if (!currentBodyPart.AppendBoundary(buffer, segmentStart, bytesConsumed - segmentStart))
+                            if (
+                                !currentBodyPart.AppendBoundary(
+                                    buffer,
+                                    segmentStart,
+                                    bytesConsumed - segmentStart
+                                )
+                            )
                             {
                                 // It's an unexpected character
                                 currentBodyPart.ResetBoundary();
@@ -424,7 +484,13 @@ namespace System.Net.Http.Formatting.Parsers
 
                     if (bytesConsumed > segmentStart)
                     {
-                        if (!currentBodyPart.AppendBoundary(buffer, segmentStart, bytesConsumed - segmentStart))
+                        if (
+                            !currentBodyPart.AppendBoundary(
+                                buffer,
+                                segmentStart,
+                                bytesConsumed - segmentStart
+                            )
+                        )
                         {
                             currentBodyPart.ResetBoundary();
                             bodyPartState = BodyPartState.BodyPart;
@@ -515,7 +581,7 @@ namespace System.Net.Http.Formatting.Parsers
                     }
             }
 
-        quit:
+            quit:
             if (initialBytesParsed < bytesConsumed)
             {
                 int boundaryLength = currentBodyPart.BoundaryDelta;
@@ -526,7 +592,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                 int bodyPartEnd = bytesConsumed - initialBytesParsed - boundaryLength;
 
-                currentBodyPart.BodyPart = new ArraySegment<byte>(buffer, initialBytesParsed, bodyPartEnd);
+                currentBodyPart.BodyPart = new ArraySegment<byte>(
+                    buffer,
+                    initialBytesParsed,
+                    bodyPartEnd
+                );
             }
 
             totalBytesConsumed += bytesConsumed - initialBytesParsed;
@@ -568,7 +638,15 @@ namespace System.Net.Http.Formatting.Parsers
                 _referenceBoundary[1] = MimeMultipartParser.LF;
                 _referenceBoundary[2] = MimeMultipartParser.Dash;
                 _referenceBoundary[3] = MimeMultipartParser.Dash;
-                _referenceBoundaryLength = 4 + Encoding.UTF8.GetBytes(referenceBoundary, 0, referenceBoundary.Length, _referenceBoundary, 4);
+                _referenceBoundaryLength =
+                    4
+                    + Encoding.UTF8.GetBytes(
+                        referenceBoundary,
+                        0,
+                        referenceBoundary.Length,
+                        _referenceBoundary,
+                        4
+                    );
 
                 _boundary[0] = MimeMultipartParser.CR;
                 _boundary[1] = MimeMultipartParser.LF;
@@ -588,7 +666,12 @@ namespace System.Net.Http.Formatting.Parsers
             /// </summary>
             public int BoundaryDelta
             {
-                get { return (_boundaryLength - _boundaryOffset > 0) ? _boundaryLength - _boundaryOffset : _boundaryLength; }
+                get
+                {
+                    return (_boundaryLength - _boundaryOffset > 0)
+                        ? _boundaryLength - _boundaryOffset
+                        : _boundaryLength;
+                }
             }
 
             /// <summary>
@@ -600,7 +683,6 @@ namespace System.Net.Http.Formatting.Parsers
             public ArraySegment<byte> BodyPart
             {
                 get { return _bodyPart; }
-
                 set { _bodyPart = value; }
             }
 
@@ -691,7 +773,11 @@ namespace System.Net.Http.Formatting.Parsers
             {
                 if (_boundaryStoreLength > 0 && _releaseDiscardedBoundary)
                 {
-                    ArraySegment<byte> discarded = new ArraySegment<byte>(_boundaryStore, 0, _boundaryStoreLength);
+                    ArraySegment<byte> discarded = new ArraySegment<byte>(
+                        _boundaryStore,
+                        0,
+                        _boundaryStoreLength
+                    );
                     _boundaryStoreLength = 0;
                     return discarded;
                 }
@@ -724,8 +810,10 @@ namespace System.Net.Http.Formatting.Parsers
 
                 // Check for final
                 bool boundaryIsFinal = false;
-                if (_boundary[count] == MimeMultipartParser.Dash &&
-                    _boundary[count + 1] == MimeMultipartParser.Dash)
+                if (
+                    _boundary[count] == MimeMultipartParser.Dash
+                    && _boundary[count + 1] == MimeMultipartParser.Dash
+                )
                 {
                     boundaryIsFinal = true;
                     count += 2;
@@ -734,7 +822,10 @@ namespace System.Net.Http.Formatting.Parsers
                 // Rest of boundary must be ignorable whitespace in order for it to match
                 for (; count < _boundaryLength - 2; count++)
                 {
-                    if (_boundary[count] != MimeMultipartParser.SP && _boundary[count] != MimeMultipartParser.HTAB)
+                    if (
+                        _boundary[count] != MimeMultipartParser.SP
+                        && _boundary[count] != MimeMultipartParser.HTAB
+                    )
                     {
                         return false;
                     }
@@ -759,8 +850,10 @@ namespace System.Net.Http.Formatting.Parsers
                     return false;
                 }
 
-                if (_boundaryLength == _referenceBoundaryLength + 1 &&
-                    _boundary[_referenceBoundaryLength] == MimeMultipartParser.Dash)
+                if (
+                    _boundaryLength == _referenceBoundaryLength + 1
+                    && _boundary[_referenceBoundaryLength] == MimeMultipartParser.Dash
+                )
                 {
                     return false;
                 }
@@ -790,17 +883,26 @@ namespace System.Net.Http.Formatting.Parsers
                 ClearBodyPart();
             }
 
-            [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Used for Debugger Display.")]
+            [SuppressMessage(
+                "Microsoft.Performance",
+                "CA1811:AvoidUncalledPrivateCode",
+                Justification = "Used for Debugger Display."
+            )]
             private string DebuggerToString()
             {
-                var referenceBoundary = Encoding.UTF8.GetString(_referenceBoundary, 0, _referenceBoundaryLength);
+                var referenceBoundary = Encoding.UTF8.GetString(
+                    _referenceBoundary,
+                    0,
+                    _referenceBoundaryLength
+                );
                 var boundary = Encoding.UTF8.GetString(_boundary, 0, _boundaryLength);
 
                 return String.Format(
                     CultureInfo.InvariantCulture,
                     "Expected: {0} *** Current: {1}",
                     referenceBoundary,
-                    boundary);
+                    boundary
+                );
             }
         }
     }

@@ -7,7 +7,9 @@ using System.Runtime.CompilerServices;
 namespace System.Globalization
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public sealed class SortVersion : IEquatable<SortVersion?>
     {
         private readonly int m_NlsVersion; // Do not rename (binary serialization)
@@ -72,7 +74,6 @@ namespace System.Globalization
             return right.Equals(left);
         }
 
-        public static bool operator !=(SortVersion? left, SortVersion? right) =>
-            !(left == right);
+        public static bool operator !=(SortVersion? left, SortVersion? right) => !(left == right);
     }
 }

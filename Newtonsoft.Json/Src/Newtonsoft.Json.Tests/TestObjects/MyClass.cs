@@ -28,6 +28,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public class MyClass
     {
         public int PreProperty { get; set; }
+
         //public DateTime DateProperty { get; set; }
         public int PostProperty { get; set; }
     }

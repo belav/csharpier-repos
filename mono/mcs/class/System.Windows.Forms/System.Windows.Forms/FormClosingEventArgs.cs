@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,26 +26,27 @@
 //	Jonathan Pobst (monkey@jpobst.com)
 //
 
-
 using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-	public class FormClosingEventArgs : CancelEventArgs
-	{
-		private CloseReason close_reason;
+    public class FormClosingEventArgs : CancelEventArgs
+    {
+        private CloseReason close_reason;
 
-		#region Public Constructors
-		public FormClosingEventArgs (CloseReason closeReason, bool cancel) : base (cancel)
-		{
-			this.close_reason = closeReason;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public FormClosingEventArgs(CloseReason closeReason, bool cancel)
+            : base(cancel)
+        {
+            this.close_reason = closeReason;
+        }
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
-		public CloseReason CloseReason {
-			get { return this.close_reason; }
-		}
-		#endregion	// Public Instance Properties
-	}
+        #region Public Instance Properties
+        public CloseReason CloseReason
+        {
+            get { return this.close_reason; }
+        }
+        #endregion	// Public Instance Properties
+    }
 }

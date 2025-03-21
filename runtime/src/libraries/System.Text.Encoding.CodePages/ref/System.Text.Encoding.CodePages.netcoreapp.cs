@@ -5,6 +5,9 @@ namespace System.Text
 {
     public sealed partial class CodePagesEncodingProvider : System.Text.EncodingProvider
     {
-        public override System.Collections.Generic.IEnumerable<System.Text.EncodingInfo> GetEncodings() { throw null; }
+        public override System.Collections.Generic.IEnumerable<System.Text.EncodingInfo> GetEncodings()
+        {
+            throw null;
+        }
     }
 }

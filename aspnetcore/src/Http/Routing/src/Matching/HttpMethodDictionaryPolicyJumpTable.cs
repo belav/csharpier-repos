@@ -12,7 +12,8 @@ internal sealed class HttpMethodDictionaryPolicyJumpTable : PolicyJumpTable
 
     public HttpMethodDictionaryPolicyJumpTable(
         HttpMethodDestinationsLookup destinations,
-        HttpMethodDestinationsLookup? corsPreflightDestinations)
+        HttpMethodDestinationsLookup? corsPreflightDestinations
+    )
     {
         _httpMethodDestinations = destinations;
         _corsHttpMethodDestinations = corsPreflightDestinations;
@@ -21,7 +22,14 @@ internal sealed class HttpMethodDictionaryPolicyJumpTable : PolicyJumpTable
     public override int GetDestination(HttpContext httpContext)
     {
         var httpMethod = httpContext.Request.Method;
-        if (_corsHttpMethodDestinations != null && HttpMethodMatcherPolicy.IsCorsPreflightRequest(httpContext, httpMethod, out var accessControlRequestMethod))
+        if (
+            _corsHttpMethodDestinations != null
+            && HttpMethodMatcherPolicy.IsCorsPreflightRequest(
+                httpContext,
+                httpMethod,
+                out var accessControlRequestMethod
+            )
+        )
         {
             var corsHttpMethod = accessControlRequestMethod.ToString();
             return _corsHttpMethodDestinations.GetDestination(corsHttpMethod);

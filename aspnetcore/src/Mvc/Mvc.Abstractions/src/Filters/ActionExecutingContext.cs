@@ -24,7 +24,8 @@ public class ActionExecutingContext : FilterContext
         ActionContext actionContext,
         IList<IFilterMetadata> filters,
         IDictionary<string, object?> actionArguments,
-        object controller)
+        object controller
+    )
         : base(actionContext, filters)
     {
         ArgumentNullException.ThrowIfNull(actionArguments);

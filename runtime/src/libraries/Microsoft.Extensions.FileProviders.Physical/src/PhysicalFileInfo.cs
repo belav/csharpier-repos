@@ -54,7 +54,8 @@ namespace Microsoft.Extensions.FileProviders.Physical
                 FileAccess.Read,
                 FileShare.ReadWrite,
                 bufferSize,
-                FileOptions.Asynchronous | FileOptions.SequentialScan);
+                FileOptions.Asynchronous | FileOptions.SequentialScan
+            );
         }
     }
 }

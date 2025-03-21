@@ -15,7 +15,7 @@ namespace System.Xml
 
     internal sealed class XmlUTF8TextWriter : XmlBaseWriter, IXmlTextWriterInitializer
     {
-        private XmlUTF8NodeWriter _writer = null!;  // initialized in SetOutput
+        private XmlUTF8NodeWriter _writer = null!; // initialized in SetOutput
 
         public void SetOutput(Stream stream, Encoding encoding, bool ownsStream)
         {
@@ -62,23 +62,141 @@ namespace System.Xml
 
         private static readonly bool[] s_defaultIsEscapedAttributeChar = new bool[]
         {
-            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-            false, false, true, false, false, false, true, false, false, false, false, false, false, false, false, false, // '"', '&'
-            false, false, false, false, false, false, false, false, false, false, false, false, true, false, true, false  // '<', '>'
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false, // '"', '&'
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            false, // '<', '>'
         };
         private static readonly bool[] s_defaultIsEscapedElementChar = new bool[]
         {
-            true, true, true, true, true, true, true, true, true, false, false, true, true, true, true, true, // All but 0x09, 0x0A
-            true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true,
-            false, false, false, false, false, false, true, false, false, false, false, false, false, false, false, false, // '&'
-            false, false, false, false, false, false, false, false, false, false, false, false, true, false, true, false  // '<', '>'
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true, // All but 0x09, 0x0A
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false, // '&'
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            false, // '<', '>'
         };
 
         public XmlUTF8NodeWriter()
-            : this(s_defaultIsEscapedAttributeChar, s_defaultIsEscapedElementChar)
-        {
-        }
+            : this(s_defaultIsEscapedAttributeChar, s_defaultIsEscapedElementChar) { }
 
         public XmlUTF8NodeWriter(bool[] isEscapedAttributeChar, bool[] isEscapedElementChar)
         {
@@ -102,10 +220,7 @@ namespace System.Xml
 
         public Encoding? Encoding
         {
-            get
-            {
-                return _encoding;
-            }
+            get { return _encoding; }
         }
 
         private byte[] GetCharEntityBuffer() => _entityChars ??= new byte[maxEntityLength];
@@ -190,7 +305,14 @@ namespace System.Xml
             WriteStartElement(prefix, localName.Value);
         }
 
-        public override void WriteStartElement(byte[] prefixBuffer, int prefixOffset, int prefixLength, byte[] localNameBuffer, int localNameOffset, int localNameLength)
+        public override void WriteStartElement(
+            byte[] prefixBuffer,
+            int prefixOffset,
+            int prefixLength,
+            byte[] localNameBuffer,
+            int localNameOffset,
+            int localNameLength
+        )
         {
             WriteByte('<');
             if (prefixLength != 0)
@@ -249,7 +371,14 @@ namespace System.Xml
             await WriteByteAsync('>').ConfigureAwait(false);
         }
 
-        public override void WriteEndElement(byte[] prefixBuffer, int prefixOffset, int prefixLength, byte[] localNameBuffer, int localNameOffset, int localNameLength)
+        public override void WriteEndElement(
+            byte[] prefixBuffer,
+            int prefixOffset,
+            int prefixLength,
+            byte[] localNameBuffer,
+            int localNameOffset,
+            int localNameLength
+        )
         {
             WriteBytes('<', '/');
             if (prefixLength != 0)
@@ -285,7 +414,14 @@ namespace System.Xml
             WriteXmlnsAttribute(prefix, ns.Value);
         }
 
-        public override void WriteXmlnsAttribute(byte[] prefixBuffer, int prefixOffset, int prefixLength, byte[] nsBuffer, int nsOffset, int nsLength)
+        public override void WriteXmlnsAttribute(
+            byte[] prefixBuffer,
+            int prefixOffset,
+            int prefixLength,
+            byte[] nsBuffer,
+            int nsOffset,
+            int nsLength
+        )
         {
             WriteStartXmlnsAttribute();
             if (prefixLength != 0)
@@ -316,7 +452,14 @@ namespace System.Xml
             WriteStartAttribute(prefix, localName.Value);
         }
 
-        public override void WriteStartAttribute(byte[] prefixBuffer, int prefixOffset, int prefixLength, byte[] localNameBuffer, int localNameOffset, int localNameLength)
+        public override void WriteStartAttribute(
+            byte[] prefixBuffer,
+            int prefixOffset,
+            int prefixLength,
+            byte[] localNameBuffer,
+            int localNameOffset,
+            int localNameLength
+        )
         {
             WriteByte(' ');
             if (prefixLength != 0)
@@ -370,7 +513,11 @@ namespace System.Xml
             WriteUTF8Chars(localName);
         }
 
-        private void WriteLocalName(byte[] localNameBuffer, int localNameOffset, int localNameLength)
+        private void WriteLocalName(
+            byte[] localNameBuffer,
+            int localNameOffset,
+            int localNameLength
+        )
         {
             WriteUTF8Bytes(localNameBuffer.AsSpan(localNameOffset, localNameLength));
         }
@@ -554,8 +701,7 @@ namespace System.Xml
                 count++;
                 chars[--offset] = Digits[(int)(value & 0x0F)];
                 value /= 16;
-            }
-            while (value != 0);
+            } while (value != 0);
             return count;
         }
 
@@ -627,7 +773,13 @@ namespace System.Xml
             WriteText(value.ToString());
         }
 
-        public override void WriteBase64Text(byte[] trailBytes, int trailByteCount, byte[] buffer, int offset, int count)
+        public override void WriteBase64Text(
+            byte[] trailBytes,
+            int trailByteCount,
+            byte[] buffer,
+            int offset,
+            int count
+        )
         {
             if (trailByteCount > 0)
             {
@@ -636,11 +788,18 @@ namespace System.Xml
             InternalWriteBase64Text(buffer, offset, count);
         }
 
-        public override async Task WriteBase64TextAsync(byte[] trailBytes, int trailByteCount, byte[] buffer, int offset, int count)
+        public override async Task WriteBase64TextAsync(
+            byte[] trailBytes,
+            int trailByteCount,
+            byte[] buffer,
+            int offset,
+            int count
+        )
         {
             if (trailByteCount > 0)
             {
-                await InternalWriteBase64TextAsync(trailBytes, 0, trailByteCount).ConfigureAwait(false);
+                await InternalWriteBase64TextAsync(trailBytes, 0, trailByteCount)
+                    .ConfigureAwait(false);
             }
 
             await InternalWriteBase64TextAsync(buffer, offset, count).ConfigureAwait(false);
@@ -673,7 +832,8 @@ namespace System.Xml
                 int byteCount = Math.Min(bufferLength / 4 * 3, count - count % 3);
                 int charCount = byteCount / 3 * 4;
                 int charOffset;
-                BytesWithOffset bufferResult = await GetBufferAsync(charCount).ConfigureAwait(false);
+                BytesWithOffset bufferResult = await GetBufferAsync(charCount)
+                    .ConfigureAwait(false);
                 byte[] chars = bufferResult.Bytes;
                 charOffset = bufferResult.Offset;
                 Advance(encoding.GetChars(buffer, offset, byteCount, chars, charOffset));
@@ -695,18 +855,14 @@ namespace System.Xml
             WriteText(XmlConvert.ToString(value));
         }
 
-        public override void WriteStartListText()
-        {
-        }
+        public override void WriteStartListText() { }
 
         public override void WriteListSeparator()
         {
             WriteByte(' ');
         }
 
-        public override void WriteEndListText()
-        {
-        }
+        public override void WriteEndListText() { }
 
         public override void WriteQualifiedName(string prefix, XmlDictionaryString localName)
         {

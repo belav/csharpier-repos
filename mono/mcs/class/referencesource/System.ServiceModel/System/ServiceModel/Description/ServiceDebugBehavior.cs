@@ -43,8 +43,15 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && value.IsAbsoluteUri && value.Scheme != Uri.UriSchemeHttp)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
-                        "HttpHelpPageUrl", Uri.UriSchemeHttp, value.ToString(), value.Scheme));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(
+                            SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
+                            "HttpHelpPageUrl",
+                            Uri.UriSchemeHttp,
+                            value.ToString(),
+                            value.Scheme
+                        )
+                    );
                 }
                 this.httpHelpPageUrl = value;
             }
@@ -66,8 +73,15 @@ namespace System.ServiceModel.Description
             {
                 if (value != null && value.IsAbsoluteUri && value.Scheme != Uri.UriSchemeHttps)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
-                        "HttpsHelpPageUrl", Uri.UriSchemeHttps, value.ToString(), value.Scheme));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        SR.GetString(
+                            SR.SFxServiceMetadataBehaviorUrlMustBeHttpOrRelative,
+                            "HttpsHelpPageUrl",
+                            Uri.UriSchemeHttps,
+                            value.ToString(),
+                            value.Scheme
+                        )
+                    );
                 }
                 this.httpsHelpPageUrl = value;
             }
@@ -82,17 +96,35 @@ namespace System.ServiceModel.Description
                 {
                     if (!value.Scheme.Equals(Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase))
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxBindingSchemeDoesNotMatch,
-                            value.Scheme, value.GetType().ToString(), Uri.UriSchemeHttp));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SFxBindingSchemeDoesNotMatch,
+                                value.Scheme,
+                                value.GetType().ToString(),
+                                Uri.UriSchemeHttp
+                            )
+                        );
                     }
                     CustomBinding customBinding = new CustomBinding(value);
-                    TextMessageEncodingBindingElement textMessageEncodingBindingElement = customBinding.Elements.Find<TextMessageEncodingBindingElement>();
-                    if (textMessageEncodingBindingElement != null && !textMessageEncodingBindingElement.MessageVersion.IsMatch(MessageVersion.None))
+                    TextMessageEncodingBindingElement textMessageEncodingBindingElement =
+                        customBinding.Elements.Find<TextMessageEncodingBindingElement>();
+                    if (
+                        textMessageEncodingBindingElement != null
+                        && !textMessageEncodingBindingElement.MessageVersion.IsMatch(
+                            MessageVersion.None
+                        )
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxIncorrectMessageVersion,
-                            textMessageEncodingBindingElement.MessageVersion.ToString(), MessageVersion.None.ToString()));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SFxIncorrectMessageVersion,
+                                textMessageEncodingBindingElement.MessageVersion.ToString(),
+                                MessageVersion.None.ToString()
+                            )
+                        );
                     }
-                    HttpTransportBindingElement httpTransportBindingElement = customBinding.Elements.Find<HttpTransportBindingElement>();
+                    HttpTransportBindingElement httpTransportBindingElement =
+                        customBinding.Elements.Find<HttpTransportBindingElement>();
                     if (httpTransportBindingElement != null)
                     {
                         httpTransportBindingElement.Method = "GET";
@@ -109,19 +141,39 @@ namespace System.ServiceModel.Description
             {
                 if (value != null)
                 {
-                    if (!value.Scheme.Equals(Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        !value.Scheme.Equals(Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxBindingSchemeDoesNotMatch,
-                            value.Scheme, value.GetType().ToString(), Uri.UriSchemeHttps));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SFxBindingSchemeDoesNotMatch,
+                                value.Scheme,
+                                value.GetType().ToString(),
+                                Uri.UriSchemeHttps
+                            )
+                        );
                     }
                     CustomBinding customBinding = new CustomBinding(value);
-                    TextMessageEncodingBindingElement textMessageEncodingBindingElement = customBinding.Elements.Find<TextMessageEncodingBindingElement>();
-                    if (textMessageEncodingBindingElement != null && !textMessageEncodingBindingElement.MessageVersion.IsMatch(MessageVersion.None))
+                    TextMessageEncodingBindingElement textMessageEncodingBindingElement =
+                        customBinding.Elements.Find<TextMessageEncodingBindingElement>();
+                    if (
+                        textMessageEncodingBindingElement != null
+                        && !textMessageEncodingBindingElement.MessageVersion.IsMatch(
+                            MessageVersion.None
+                        )
+                    )
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.SFxIncorrectMessageVersion,
-                            textMessageEncodingBindingElement.MessageVersion.ToString(), MessageVersion.None.ToString()));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            SR.GetString(
+                                SR.SFxIncorrectMessageVersion,
+                                textMessageEncodingBindingElement.MessageVersion.ToString(),
+                                MessageVersion.None.ToString()
+                            )
+                        );
                     }
-                    HttpsTransportBindingElement httpsTransportBindingElement = customBinding.Elements.Find<HttpsTransportBindingElement>();
+                    HttpsTransportBindingElement httpsTransportBindingElement =
+                        customBinding.Elements.Find<HttpsTransportBindingElement>();
                     if (httpsTransportBindingElement != null)
                     {
                         httpsTransportBindingElement.Method = "GET";
@@ -138,11 +190,17 @@ namespace System.ServiceModel.Description
             set { this.includeExceptionDetailInFaults = value; }
         }
 
-        void IServiceBehavior.Validate(ServiceDescription description, ServiceHostBase serviceHostBase)
-        {
-        }
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
 
-        void IServiceBehavior.AddBindingParameters(ServiceDescription description, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection parameters)
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        )
         {
             if (parameters == null)
             {
@@ -156,13 +214,17 @@ namespace System.ServiceModel.Description
             }
         }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription description, ServiceHostBase serviceHostBase)
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (this.includeExceptionDetailInFaults)
             {
                 for (int i = 0; i < serviceHostBase.ChannelDispatchers.Count; i++)
                 {
-                    ChannelDispatcher channelDispatcher = serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
+                    ChannelDispatcher channelDispatcher =
+                        serviceHostBase.ChannelDispatchers[i] as ChannelDispatcher;
                     if (channelDispatcher != null)
                     {
                         channelDispatcher.IncludeExceptionDetailInFaults = true;
@@ -173,7 +235,10 @@ namespace System.ServiceModel.Description
             if (!(this.httpHelpPageEnabled || this.httpsHelpPageEnabled))
                 return;
 
-            ServiceMetadataExtension mex = ServiceMetadataExtension.EnsureServiceMetadataExtension(description, serviceHostBase);
+            ServiceMetadataExtension mex = ServiceMetadataExtension.EnsureServiceMetadataExtension(
+                description,
+                serviceHostBase
+            );
             SetExtensionProperties(mex, serviceHostBase);
             CreateHelpPageEndpoints(description, serviceHostBase, mex);
         }
@@ -181,36 +246,72 @@ namespace System.ServiceModel.Description
         private void SetExtensionProperties(ServiceMetadataExtension mex, ServiceHostBase host)
         {
             mex.HttpHelpPageEnabled = this.httpHelpPageEnabled;
-            mex.HttpHelpPageUrl = host.GetVia(Uri.UriSchemeHttp, this.httpHelpPageUrl == null ? new Uri(string.Empty, UriKind.Relative) : this.httpHelpPageUrl);
+            mex.HttpHelpPageUrl = host.GetVia(
+                Uri.UriSchemeHttp,
+                this.httpHelpPageUrl == null
+                    ? new Uri(string.Empty, UriKind.Relative)
+                    : this.httpHelpPageUrl
+            );
             mex.HttpHelpPageBinding = this.HttpHelpPageBinding;
 
             mex.HttpsHelpPageEnabled = this.httpsHelpPageEnabled;
-            mex.HttpsHelpPageUrl = host.GetVia(Uri.UriSchemeHttps, this.httpsHelpPageUrl == null ? new Uri(string.Empty, UriKind.Relative) : this.httpsHelpPageUrl);
+            mex.HttpsHelpPageUrl = host.GetVia(
+                Uri.UriSchemeHttps,
+                this.httpsHelpPageUrl == null
+                    ? new Uri(string.Empty, UriKind.Relative)
+                    : this.httpsHelpPageUrl
+            );
             mex.HttpsHelpPageBinding = this.HttpsHelpPageBinding;
         }
 
-        bool EnsureHelpPageDispatcher(ServiceHostBase host, ServiceMetadataExtension mex, Uri url, string scheme)
+        bool EnsureHelpPageDispatcher(
+            ServiceHostBase host,
+            ServiceMetadataExtension mex,
+            Uri url,
+            string scheme
+        )
         {
-            Uri address = host.GetVia(scheme, url == null ? new Uri(string.Empty, UriKind.Relative) : url);
+            Uri address = host.GetVia(
+                scheme,
+                url == null ? new Uri(string.Empty, UriKind.Relative) : url
+            );
 
             if (address == null)
             {
                 return false;
             }
 
-            ChannelDispatcher channelDispatcher = mex.EnsureGetDispatcher(address, true /* isServiceDebugBehavior */);
-            ((ServiceMetadataExtension.HttpGetImpl)channelDispatcher.Endpoints[0].DispatchRuntime.SingletonInstanceContext.UserObject).HelpPageEnabled = true;
+            ChannelDispatcher channelDispatcher = mex.EnsureGetDispatcher(
+                address,
+                true /* isServiceDebugBehavior */
+            );
+            (
+                (ServiceMetadataExtension.HttpGetImpl)
+                    channelDispatcher
+                        .Endpoints[0]
+                        .DispatchRuntime
+                        .SingletonInstanceContext
+                        .UserObject
+            ).HelpPageEnabled = true;
 
             return true;
         }
 
-        void CreateHelpPageEndpoints(ServiceDescription description, ServiceHostBase host, ServiceMetadataExtension mex)
+        void CreateHelpPageEndpoints(
+            ServiceDescription description,
+            ServiceHostBase host,
+            ServiceMetadataExtension mex
+        )
         {
             if (this.httpHelpPageEnabled)
             {
                 if (!EnsureHelpPageDispatcher(host, mex, this.httpHelpPageUrl, Uri.UriSchemeHttp))
                 {
-                    TraceWarning(this.httpHelpPageUrl, "ServiceDebugBehaviorHttpHelpPageUrl", "ServiceDebugBehaviorHttpHelpPageEnabled");
+                    TraceWarning(
+                        this.httpHelpPageUrl,
+                        "ServiceDebugBehaviorHttpHelpPageUrl",
+                        "ServiceDebugBehaviorHttpHelpPageEnabled"
+                    );
                 }
             }
 
@@ -218,7 +319,11 @@ namespace System.ServiceModel.Description
             {
                 if (!EnsureHelpPageDispatcher(host, mex, this.httpsHelpPageUrl, Uri.UriSchemeHttps))
                 {
-                    TraceWarning(this.httpHelpPageUrl, "ServiceDebugBehaviorHttpsHelpPageUrl", "ServiceDebugBehaviorHttpsHelpPageEnabled");
+                    TraceWarning(
+                        this.httpHelpPageUrl,
+                        "ServiceDebugBehaviorHttpsHelpPageUrl",
+                        "ServiceDebugBehaviorHttpsHelpPageEnabled"
+                    );
                 }
             }
         }
@@ -230,12 +335,17 @@ namespace System.ServiceModel.Description
                 Hashtable h = new Hashtable(2)
                 {
                     { enabledProperty, "true" },
-                    { urlProperty, (address == null) ? string.Empty : address.ToString() }
+                    { urlProperty, (address == null) ? string.Empty : address.ToString() },
                 };
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.WarnHelpPageEnabledNoBaseAddress,
-                    SR.GetString(SR.TraceCodeWarnHelpPageEnabledNoBaseAddress), new DictionaryTraceRecord(h), null, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.WarnHelpPageEnabledNoBaseAddress,
+                    SR.GetString(SR.TraceCodeWarnHelpPageEnabledNoBaseAddress),
+                    new DictionaryTraceRecord(h),
+                    null,
+                    null
+                );
             }
         }
     }
 }
-

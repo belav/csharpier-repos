@@ -12,21 +12,27 @@ internal sealed class ResourceManagerShim
 {
     private readonly DtcProxyShimFactory _shimFactory;
 
-    internal ResourceManagerShim(DtcProxyShimFactory shimFactory)
-        => _shimFactory = shimFactory;
+    internal ResourceManagerShim(DtcProxyShimFactory shimFactory) => _shimFactory = shimFactory;
 
     public IResourceManager? ResourceManager { get; set; }
 
     public void Enlist(
         TransactionShim transactionShim,
         OletxEnlistment managedIdentifier,
-        out EnlistmentShim enlistmentShim)
+        out EnlistmentShim enlistmentShim
+    )
     {
         var pEnlistmentNotifyShim = new EnlistmentNotifyShim(_shimFactory, managedIdentifier);
         var pEnlistmentShim = new EnlistmentShim(pEnlistmentNotifyShim);
 
         ITransaction transaction = transactionShim.Transaction;
-        ResourceManager!.Enlist(transaction, pEnlistmentNotifyShim, out Guid txUow, out OletxTransactionIsolationLevel isoLevel, out ITransactionEnlistmentAsync pEnlistmentAsync);
+        ResourceManager!.Enlist(
+            transaction,
+            pEnlistmentNotifyShim,
+            out Guid txUow,
+            out OletxTransactionIsolationLevel isoLevel,
+            out ITransactionEnlistmentAsync pEnlistmentAsync
+        );
 
         pEnlistmentNotifyShim.EnlistmentAsync = pEnlistmentAsync;
         pEnlistmentShim.EnlistmentAsync = pEnlistmentAsync;
@@ -41,12 +47,17 @@ internal sealed class ResourceManagerShim
         // ReenlistThread.
         try
         {
-            ResourceManager!.Reenlist(prepareInfo, (uint)prepareInfo.Length, 5, out OletxXactStat xactStatus);
+            ResourceManager!.Reenlist(
+                prepareInfo,
+                (uint)prepareInfo.Length,
+                5,
+                out OletxXactStat xactStatus
+            );
             outcome = xactStatus switch
             {
                 OletxXactStat.XACTSTAT_ABORTED => OletxTransactionOutcome.Aborted,
                 OletxXactStat.XACTSTAT_COMMITTED => OletxTransactionOutcome.Committed,
-                _ => OletxTransactionOutcome.Aborted
+                _ => OletxTransactionOutcome.Aborted,
             };
         }
         catch (COMException e) when (e.ErrorCode == OletxHelper.XACT_E_REENLISTTIMEOUT)
@@ -56,6 +67,5 @@ internal sealed class ResourceManagerShim
         }
     }
 
-    public void ReenlistComplete()
-        => ResourceManager!.ReenlistmentComplete();
+    public void ReenlistComplete() => ResourceManager!.ReenlistmentComplete();
 }

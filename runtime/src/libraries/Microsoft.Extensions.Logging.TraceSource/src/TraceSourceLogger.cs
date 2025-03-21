@@ -24,7 +24,13 @@ namespace Microsoft.Extensions.Logging.TraceSource
         }
 
         /// <inheritdoc />
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception? exception, Func<TState, Exception?, string> formatter)
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception? exception,
+            Func<TState, Exception?, string> formatter
+        )
         {
             if (!IsEnabled(logLevel))
             {
@@ -69,16 +75,22 @@ namespace Microsoft.Extensions.Logging.TraceSource
         {
             switch (logLevel)
             {
-                case LogLevel.Critical: return TraceEventType.Critical;
-                case LogLevel.Error: return TraceEventType.Error;
-                case LogLevel.Warning: return TraceEventType.Warning;
-                case LogLevel.Information: return TraceEventType.Information;
+                case LogLevel.Critical:
+                    return TraceEventType.Critical;
+                case LogLevel.Error:
+                    return TraceEventType.Error;
+                case LogLevel.Warning:
+                    return TraceEventType.Warning;
+                case LogLevel.Information:
+                    return TraceEventType.Information;
                 case LogLevel.Trace:
-                default: return TraceEventType.Verbose;
+                default:
+                    return TraceEventType.Verbose;
             }
         }
 
-        public IDisposable BeginScope<TState>(TState state) where TState : notnull
+        public IDisposable BeginScope<TState>(TState state)
+            where TState : notnull
         {
             return new TraceSourceScope(state);
         }

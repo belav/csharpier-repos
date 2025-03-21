@@ -16,7 +16,13 @@ namespace System.ComponentModel.Composition.Factories
             private readonly bool _isPrerequisite;
             private readonly IEnumerable<KeyValuePair<string, Type>> _requiredMetadata;
 
-            public DerivedContractBasedImportDefinition(string contractName, IEnumerable<KeyValuePair<string, Type>> requiredMetadata, ImportCardinality cardinality, bool isRecomposable, bool isPrerequisite)
+            public DerivedContractBasedImportDefinition(
+                string contractName,
+                IEnumerable<KeyValuePair<string, Type>> requiredMetadata,
+                ImportCardinality cardinality,
+                bool isRecomposable,
+                bool isPrerequisite
+            )
             {
                 _contractName = contractName;
                 _cardinality = cardinality;

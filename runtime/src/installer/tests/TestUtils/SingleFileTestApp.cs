@@ -37,8 +37,8 @@ namespace Microsoft.DotNet.CoreSetup.Test
         /// The <paramref name="appName"/> is expected to be in <see cref="TestContext.TestAssetsOutput"/>
         /// and have been built as framework-dependent
         /// </returns>
-        public static SingleFileTestApp CreateFrameworkDependent(string appName)
-            => Create(appName, selfContained: false);
+        public static SingleFileTestApp CreateFrameworkDependent(string appName) =>
+            Create(appName, selfContained: false);
 
         /// <summary>
         /// Create a self-contained single-file test app from pre-built output of <paramref name="appName"/>.
@@ -48,15 +48,15 @@ namespace Microsoft.DotNet.CoreSetup.Test
         /// The <paramref name="appName"/> is expected to be in <see cref="TestContext.TestAssetsOutput"/>
         /// and have been built as framework-dependent
         /// </returns>
-        public static SingleFileTestApp CreateSelfContained(string appName)
-            => Create(appName, selfContained: true);
+        public static SingleFileTestApp CreateSelfContained(string appName) =>
+            Create(appName, selfContained: true);
 
         private static SingleFileTestApp Create(string appName, bool selfContained)
         {
             var (location, parentPath) = GetNewTestArtifactPath(appName);
             return new SingleFileTestApp(appName, selfContained, location)
             {
-                DirectoryToDelete = parentPath
+                DirectoryToDelete = parentPath,
             };
         }
 
@@ -69,27 +69,43 @@ namespace Microsoft.DotNet.CoreSetup.Test
                 fileSpecs.Add(new FileSpec(asset, Path.GetFileName(asset)));
             }
 
-            fileSpecs.Sort((a, b) => string.CompareOrdinal(a.BundleRelativePath, b.BundleRelativePath));
+            fileSpecs.Sort(
+                (a, b) => string.CompareOrdinal(a.BundleRelativePath, b.BundleRelativePath)
+            );
             return fileSpecs;
         }
 
-        public string Bundle(BundleOptions options = BundleOptions.None, Version? bundleVersion = null)
+        public string Bundle(
+            BundleOptions options = BundleOptions.None,
+            Version? bundleVersion = null
+        )
         {
             return Bundle(options, out _, bundleVersion);
         }
 
-        public string Bundle(BundleOptions options, out Manifest manifest, Version? bundleVersion = null)
+        public string Bundle(
+            BundleOptions options,
+            out Manifest manifest,
+            Version? bundleVersion = null
+        )
         {
-            string bundleDirectory = SharedFramework.CalculateUniqueTestDirectory(Path.Combine(Location, "bundle"));
+            string bundleDirectory = SharedFramework.CalculateUniqueTestDirectory(
+                Path.Combine(Location, "bundle")
+            );
             var bundler = new Bundler(
                 Binaries.GetExeFileNameForCurrentPlatform(AppName),
                 bundleDirectory,
                 options,
                 targetFrameworkVersion: bundleVersion,
-                macosCodesign: true);
+                macosCodesign: true
+            );
 
             // Get all files in the source directory and all sub-directories.
-            string[] sources = Directory.GetFiles(builtApp.Location, searchPattern: "*", searchOption: SearchOption.AllDirectories);
+            string[] sources = Directory.GetFiles(
+                builtApp.Location,
+                searchPattern: "*",
+                searchOption: SearchOption.AllDirectories
+            );
             List<FileSpec> fileSpecs = new List<FileSpec>(sources.Length);
             foreach (var file in sources)
             {
@@ -103,7 +119,9 @@ namespace Microsoft.DotNet.CoreSetup.Test
             }
 
             // Sort the file specs to keep the bundle construction deterministic.
-            fileSpecs.Sort((a, b) => string.CompareOrdinal(a.BundleRelativePath, b.BundleRelativePath));
+            fileSpecs.Sort(
+                (a, b) => string.CompareOrdinal(a.BundleRelativePath, b.BundleRelativePath)
+            );
             var singleFile = bundler.GenerateBundle(fileSpecs);
 
             // Copy excluded files to the bundle directory. This mimics the SDK behaviour where
@@ -137,45 +155,74 @@ namespace Microsoft.DotNet.CoreSetup.Test
             // Copy the compiled app output - the app is expected to have been built as framework-dependent
             TestArtifact.CopyRecursive(
                 Path.Combine(TestContext.TestAssetsOutput, AppName),
-                builtApp.Location);
+                builtApp.Location
+            );
 
             // Remove any runtimeconfig.json or deps.json - we will be creating new ones
             File.Delete(builtApp.RuntimeConfigJson);
             File.Delete(builtApp.DepsJson);
 
             var shortVersion = TestContext.Tfm[3..]; // trim "net" from beginning
-            var builder = NetCoreAppBuilder.ForNETCoreApp(AppName, TestContext.TargetRID, shortVersion);
+            var builder = NetCoreAppBuilder.ForNETCoreApp(
+                AppName,
+                TestContext.TargetRID,
+                shortVersion
+            );
 
             // Update the .runtimeconfig.json
             builder.WithRuntimeConfig(c =>
             {
                 c.WithTfm(TestContext.Tfm);
                 c = selfContained
-                    ? c.WithIncludedFramework(Constants.MicrosoftNETCoreApp, TestContext.MicrosoftNETCoreAppVersion)
-                    : c.WithFramework(Constants.MicrosoftNETCoreApp, TestContext.MicrosoftNETCoreAppVersion);
+                    ? c.WithIncludedFramework(
+                        Constants.MicrosoftNETCoreApp,
+                        TestContext.MicrosoftNETCoreAppVersion
+                    )
+                    : c.WithFramework(
+                        Constants.MicrosoftNETCoreApp,
+                        TestContext.MicrosoftNETCoreAppVersion
+                    );
             });
 
             // Add runtime libraries and assets for generating the .deps.json.
             // Native libraries are excluded - matches DropFromSingleFile setting in RuntimeList.xml.
             // All assets are configured to not be on disk as this app is just for bundling purposes.
             // We can grab the runtime assets from their original location and avoid copying everything
-            builder.WithProject(AppName, "1.0.0", p => p
-                .WithAssemblyGroup(string.Empty, g => g
-                    .WithAsset(Path.GetFileName(builtApp.AppDll), f => f.NotOnDisk())));
+            builder.WithProject(
+                AppName,
+                "1.0.0",
+                p =>
+                    p.WithAssemblyGroup(
+                        string.Empty,
+                        g => g.WithAsset(Path.GetFileName(builtApp.AppDll), f => f.NotOnDisk())
+                    )
+            );
             if (selfContained)
             {
-                builder.WithRuntimePack($"{Constants.MicrosoftNETCoreApp}.Runtime.{TestContext.TargetRID}", TestContext.MicrosoftNETCoreAppVersion, l => l
-                    .WithAssemblyGroup(string.Empty, g =>
-                    {
-                        foreach (var file in Binaries.GetRuntimeFiles().Assemblies)
-                        {
-                            var fileVersion = FileVersionInfo.GetVersionInfo(file).FileVersion;
-                            var asmVersion = AssemblyName.GetAssemblyName(file).Version!.ToString();
-                            g.WithAsset(
-                                Path.GetFileName(file),
-                                f => f.WithVersion(asmVersion, fileVersion!).NotOnDisk());
-                        }
-                    }));
+                builder.WithRuntimePack(
+                    $"{Constants.MicrosoftNETCoreApp}.Runtime.{TestContext.TargetRID}",
+                    TestContext.MicrosoftNETCoreAppVersion,
+                    l =>
+                        l.WithAssemblyGroup(
+                            string.Empty,
+                            g =>
+                            {
+                                foreach (var file in Binaries.GetRuntimeFiles().Assemblies)
+                                {
+                                    var fileVersion = FileVersionInfo
+                                        .GetVersionInfo(file)
+                                        .FileVersion;
+                                    var asmVersion = AssemblyName
+                                        .GetAssemblyName(file)
+                                        .Version!.ToString();
+                                    g.WithAsset(
+                                        Path.GetFileName(file),
+                                        f => f.WithVersion(asmVersion, fileVersion!).NotOnDisk()
+                                    );
+                                }
+                            }
+                        )
+                );
             }
 
             // Write out the app

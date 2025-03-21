@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.Host;
 
 namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.DataProvider
 {
-    internal interface IWorkspaceSettingsProviderFactory<TData> : ISettingsProviderFactory<TData>, IWorkspaceService
-    {
-    }
+    internal interface IWorkspaceSettingsProviderFactory<TData>
+        : ISettingsProviderFactory<TData>,
+            IWorkspaceService { }
 }

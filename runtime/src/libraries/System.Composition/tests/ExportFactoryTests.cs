@@ -38,7 +38,8 @@ namespace System.Composition.UnitTests
         [Export]
         public class SharedPartConsumer
         {
-            public SharedBoundedByDC Sc1, Sc2;
+            public SharedBoundedByDC Sc1,
+                Sc2;
 
             [ImportingConstructor]
             public SharedPartConsumer(SharedBoundedByDC sc1, SharedBoundedByDC sc2)
@@ -107,7 +108,10 @@ namespace System.Composition.UnitTests
         [Fact]
         public void SharedPartsAreSharedBetweenAllScopes()
         {
-            var cc = CreateContainer(typeof(SharedUnbounded), typeof(DataConsistencyBoundaryProvider));
+            var cc = CreateContainer(
+                typeof(SharedUnbounded),
+                typeof(DataConsistencyBoundaryProvider)
+            );
             var bp = cc.GetExport<DataConsistencyBoundaryProvider>().SharingScopeFactory;
             var x = bp.CreateExport().Value.GetExport<SharedUnbounded>();
             var y = bp.CreateExport().Value.GetExport<SharedUnbounded>();
@@ -117,7 +121,11 @@ namespace System.Composition.UnitTests
         [Fact]
         public void TheSameSharedInstanceIsReusedWithinItsSharingBoundary()
         {
-            var cc = CreateContainer(typeof(SharedBoundedByDC), typeof(SharedPartConsumer), typeof(DataConsistencyBoundaryProvider));
+            var cc = CreateContainer(
+                typeof(SharedBoundedByDC),
+                typeof(SharedPartConsumer),
+                typeof(DataConsistencyBoundaryProvider)
+            );
             var sf = cc.GetExport<DataConsistencyBoundaryProvider>().SharingScopeFactory;
             var s = sf.CreateExport();
             var s2 = sf.CreateExport();
@@ -143,9 +151,14 @@ namespace System.Composition.UnitTests
         public void DependenciesOfSharedPartsAreResolvedInTheGlobalScope()
         {
             var cc = new ContainerConfiguration()
-                .WithParts(typeof(GloballySharedWithDependency), typeof(A), typeof(DataConsistencyBoundaryProvider))
+                .WithParts(
+                    typeof(GloballySharedWithDependency),
+                    typeof(A),
+                    typeof(DataConsistencyBoundaryProvider)
+                )
                 .CreateContainer();
-            var s = cc.GetExport<DataConsistencyBoundaryProvider>().SharingScopeFactory.CreateExport();
+            var s = cc.GetExport<DataConsistencyBoundaryProvider>()
+                .SharingScopeFactory.CreateExport();
             var g = s.Value.GetExport<GloballySharedWithDependency>();
             s.Dispose();
             var a = (A)g.A;
@@ -157,8 +170,13 @@ namespace System.Composition.UnitTests
         [Fact]
         public void WhenABoundaryIsPresentBoundedPartsCannotBeCreatedOutsideIt()
         {
-            var container = CreateContainer(typeof(DataConsistencyBoundaryProvider), typeof(SharedBoundedByDC));
-            var x = Assert.Throws<CompositionFailedException>(() => container.GetExport<SharedBoundedByDC>());
+            var container = CreateContainer(
+                typeof(DataConsistencyBoundaryProvider),
+                typeof(SharedBoundedByDC)
+            );
+            var x = Assert.Throws<CompositionFailedException>(() =>
+                container.GetExport<SharedBoundedByDC>()
+            );
         }
 
         [Fact]
@@ -228,7 +246,11 @@ namespace System.Composition.UnitTests
         [Fact]
         public void WhenReleasingAnExportFromAnExportFactoryItsNonSharedDependenciesAreDisposed()
         {
-            var cc = CreateContainer(typeof(Disposable), typeof(HasDisposableDependency), typeof(HasFactory));
+            var cc = CreateContainer(
+                typeof(Disposable),
+                typeof(HasDisposableDependency),
+                typeof(HasFactory)
+            );
             var hf = cc.GetExport<HasFactory>();
             var hddx = hf.Factory.CreateExport();
             var hdd = hddx.Value;

@@ -15,12 +15,24 @@ namespace System.Collections.Tests
         [Fact]
         public void InsertRange_InvalidArgs_Throws()
         {
-            AssertExtensions.Throws<ArgumentNullException>("list", () => CollectionExtensions.InsertRange(null, 0, ReadOnlySpan<int>.Empty));
-            AssertExtensions.Throws<ArgumentNullException>("list", () => CollectionExtensions.InsertRange(null, 0, new ReadOnlySpan<int>(new int[1])));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "list",
+                () => CollectionExtensions.InsertRange(null, 0, ReadOnlySpan<int>.Empty)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "list",
+                () => CollectionExtensions.InsertRange(null, 0, new ReadOnlySpan<int>(new int[1]))
+            );
 
             var list = new List<int>();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => CollectionExtensions.InsertRange(list, 1, new int[0]));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => CollectionExtensions.InsertRange(list, -1, new int[0]));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => CollectionExtensions.InsertRange(list, 1, new int[0])
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => CollectionExtensions.InsertRange(list, -1, new int[0])
+            );
         }
 
         [Fact]

@@ -17,9 +17,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
 
         private void ConnectHierarchyEvents()
         {
-            Debug.Assert(!this.AreHierarchyEventsConnected, "IVsHierarchyEvents are already connected!");
+            Debug.Assert(
+                !this.AreHierarchyEventsConnected,
+                "IVsHierarchyEvents are already connected!"
+            );
 
-            if (ErrorHandler.Failed(Hierarchy.AdviseHierarchyEvents(this, out _hierarchyEventsCookie)))
+            if (
+                ErrorHandler.Failed(
+                    Hierarchy.AdviseHierarchyEvents(this, out _hierarchyEventsCookie)
+                )
+            )
             {
                 Debug.Fail("Failed to connect IVsHierarchyEvents");
                 _hierarchyEventsCookie = 0;
@@ -40,26 +47,29 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.L
             get { return _hierarchyEventsCookie != 0; }
         }
 
-        int IVsHierarchyEvents.OnInvalidateIcon(IntPtr hicon)
-            => VSConstants.E_NOTIMPL;
+        int IVsHierarchyEvents.OnInvalidateIcon(IntPtr hicon) => VSConstants.E_NOTIMPL;
 
-        int IVsHierarchyEvents.OnInvalidateItems(uint itemidParent)
-            => VSConstants.E_NOTIMPL;
+        int IVsHierarchyEvents.OnInvalidateItems(uint itemidParent) => VSConstants.E_NOTIMPL;
 
-        int IVsHierarchyEvents.OnItemAdded(uint itemidParent, uint itemidSiblingPrev, uint itemidAdded)
-            => VSConstants.E_NOTIMPL;
+        int IVsHierarchyEvents.OnItemAdded(
+            uint itemidParent,
+            uint itemidSiblingPrev,
+            uint itemidAdded
+        ) => VSConstants.E_NOTIMPL;
 
-        int IVsHierarchyEvents.OnItemDeleted(uint itemid)
-            => VSConstants.E_NOTIMPL;
+        int IVsHierarchyEvents.OnItemDeleted(uint itemid) => VSConstants.E_NOTIMPL;
 
-        int IVsHierarchyEvents.OnItemsAppended(uint itemidParent)
-            => VSConstants.E_NOTIMPL;
+        int IVsHierarchyEvents.OnItemsAppended(uint itemidParent) => VSConstants.E_NOTIMPL;
 
         int IVsHierarchyEvents.OnPropertyChanged(uint itemid, int propid, uint flags)
         {
-            if ((propid == (int)__VSHPROPID.VSHPROPID_Caption ||
-                 propid == (int)__VSHPROPID.VSHPROPID_Name) &&
-                itemid == (uint)VSConstants.VSITEMID.Root)
+            if (
+                (
+                    propid == (int)__VSHPROPID.VSHPROPID_Caption
+                    || propid == (int)__VSHPROPID.VSHPROPID_Name
+                )
+                && itemid == (uint)VSConstants.VSITEMID.Root
+            )
             {
                 var filePath = Hierarchy.TryGetProjectFilePath();
 

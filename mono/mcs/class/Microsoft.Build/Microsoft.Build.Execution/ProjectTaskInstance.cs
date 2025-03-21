@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,70 +27,75 @@
 //
 using System;
 using System.Collections.Generic;
-using Microsoft.Build.Construction;
 using System.Linq;
+using Microsoft.Build.Construction;
 
 namespace Microsoft.Build.Execution
 {
-	public sealed class ProjectTaskInstance : ProjectTargetInstanceChild
-	{
-		internal ProjectTaskInstance (ProjectTaskElement xml)
-		{
-			condition = xml.Condition;
-			ContinueOnError = xml.ContinueOnError;
-			Name = xml.Name;
-			Outputs = xml.Outputs.Select (o => {
-				if (o.IsOutputItem)
-					return (ProjectTaskInstanceChild) new ProjectTaskOutputItemInstance ((ProjectOutputElement) o);
-				if (o.IsOutputProperty)
-					return new ProjectTaskOutputPropertyInstance ((ProjectOutputElement) o);
-				throw new NotSupportedException ();
-				}).ToArray ();
-			Parameters = new Dictionary<string,string> (xml.Parameters);
-			MSBuildArchitecture = xml.MSBuildArchitecture;
-			MSBuildRuntime = xml.MSBuildRuntime;
-			
-			condition_location = xml.ConditionLocation;
-			ContinueOnErrorLocation = xml.ContinueOnErrorLocation;
-			location = xml.Location;
-			MSBuildArchitectureLocation = xml.MSBuildArchitectureLocation;
-			MSBuildRuntimeLocation = xml.MSBuildRuntimeLocation;
-		}
-		
-		string condition;
-		public override string Condition {
-			get { return condition; }
-		}
-		
-		ElementLocation condition_location, location;
-		
-		public
-		override ElementLocation ConditionLocation {
-			get { return condition_location; }
-		}
+    public sealed class ProjectTaskInstance : ProjectTargetInstanceChild
+    {
+        internal ProjectTaskInstance(ProjectTaskElement xml)
+        {
+            condition = xml.Condition;
+            ContinueOnError = xml.ContinueOnError;
+            Name = xml.Name;
+            Outputs = xml
+                .Outputs.Select(o =>
+                {
+                    if (o.IsOutputItem)
+                        return (ProjectTaskInstanceChild)
+                            new ProjectTaskOutputItemInstance((ProjectOutputElement)o);
+                    if (o.IsOutputProperty)
+                        return new ProjectTaskOutputPropertyInstance((ProjectOutputElement)o);
+                    throw new NotSupportedException();
+                })
+                .ToArray();
+            Parameters = new Dictionary<string, string>(xml.Parameters);
+            MSBuildArchitecture = xml.MSBuildArchitecture;
+            MSBuildRuntime = xml.MSBuildRuntime;
 
-		public
-		override ElementLocation Location {
-			get { return location; }
-		}
-		
-		public string ContinueOnError { get; private set; }
-		
-		public ElementLocation ContinueOnErrorLocation { get; private set; }
+            condition_location = xml.ConditionLocation;
+            ContinueOnErrorLocation = xml.ContinueOnErrorLocation;
+            location = xml.Location;
+            MSBuildArchitectureLocation = xml.MSBuildArchitectureLocation;
+            MSBuildRuntimeLocation = xml.MSBuildRuntimeLocation;
+        }
 
-		public string MSBuildArchitecture { get; private set; }
+        string condition;
+        public override string Condition
+        {
+            get { return condition; }
+        }
 
-		public ElementLocation MSBuildArchitectureLocation { get; private set; }
+        ElementLocation condition_location,
+            location;
 
-		public string MSBuildRuntime { get; private set; }
+        public override ElementLocation ConditionLocation
+        {
+            get { return condition_location; }
+        }
 
-		public ElementLocation MSBuildRuntimeLocation { get; private set; }
-		
-		public string Name { get; private set; }
+        public override ElementLocation Location
+        {
+            get { return location; }
+        }
 
-		public IList<ProjectTaskInstanceChild> Outputs { get; private set; }
+        public string ContinueOnError { get; private set; }
 
-		public IDictionary<string, string> Parameters { get; private set; }
-	}
+        public ElementLocation ContinueOnErrorLocation { get; private set; }
+
+        public string MSBuildArchitecture { get; private set; }
+
+        public ElementLocation MSBuildArchitectureLocation { get; private set; }
+
+        public string MSBuildRuntime { get; private set; }
+
+        public ElementLocation MSBuildRuntimeLocation { get; private set; }
+
+        public string Name { get; private set; }
+
+        public IList<ProjectTaskInstanceChild> Outputs { get; private set; }
+
+        public IDictionary<string, string> Parameters { get; private set; }
+    }
 }
-

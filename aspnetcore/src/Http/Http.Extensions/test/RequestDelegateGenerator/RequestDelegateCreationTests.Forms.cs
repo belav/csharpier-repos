@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
+
 namespace Microsoft.AspNetCore.Http.Generators.Tests;
 
 public abstract partial class RequestDelegateCreationTests : RequestDelegateCreationTestBase
@@ -18,7 +19,8 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
     [Fact]
     public async Task RequestDelegatePopulatesFromIFormFileCollectionParameter()
     {
-        var source = """app.MapPost("/", (IFormFileCollection formFiles, HttpContext httpContext) => httpContext.Items["formFiles"] = formFiles);""";
+        var source =
+            """app.MapPost("/", (IFormFileCollection formFiles, HttpContext httpContext) => httpContext.Items["formFiles"] = formFiles);""";
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -34,12 +36,16 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
         Assert.Equal(httpContext.Request.Form.Files, httpContext.Items["formFiles"]);
-        var formFilesArgument = Assert.IsAssignableFrom<IFormFileCollection>(httpContext.Items["formFiles"]);
+        var formFilesArgument = Assert.IsAssignableFrom<IFormFileCollection>(
+            httpContext.Items["formFiles"]
+        );
         Assert.NotNull(formFilesArgument!["file"]);
 
         var allAcceptsMetadata = endpoint.Metadata.OfType<IAcceptsMetadata>();
@@ -53,7 +59,8 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
     [Fact]
     public async Task RequestDelegatePopulatesFromIFormFileCollectionParameterWithAttribute()
     {
-        var source = """app.MapPost("/", ([FromForm] IFormFileCollection formFiles, HttpContext httpContext) => httpContext.Items["formFiles"] = formFiles);""";
+        var source =
+            """app.MapPost("/", ([FromForm] IFormFileCollection formFiles, HttpContext httpContext) => httpContext.Items["formFiles"] = formFiles);""";
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -69,12 +76,16 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
         Assert.Equal(httpContext.Request.Form.Files, httpContext.Items["formFiles"]);
-        var formFiles = Assert.IsAssignableFrom<IFormFileCollection>(httpContext.Items["formFiles"]);
+        var formFiles = Assert.IsAssignableFrom<IFormFileCollection>(
+            httpContext.Items["formFiles"]
+        );
         Assert.NotNull(formFiles["file"]);
 
         var allAcceptsMetadata = endpoint.Metadata.OfType<IAcceptsMetadata>();
@@ -88,7 +99,8 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
     [Fact]
     public async Task RequestDelegatePopulatesFromIFormFileParameter()
     {
-        var source = """app.MapPost("/", (IFormFile file, HttpContext httpContext) => httpContext.Items["formFiles"] = file);""";
+        var source =
+            """app.MapPost("/", (IFormFile file, HttpContext httpContext) => httpContext.Items["formFiles"] = file);""";
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -104,7 +116,9 @@ public abstract partial class RequestDelegateCreationTests : RequestDelegateCrea
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -142,7 +156,9 @@ app.MapPost("/", (IFormFile? file, HttpContext httpContext) =>
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -180,7 +196,9 @@ app.MapPost("/", (IFormFile file1, IFormFile file2, HttpContext httpContext) =>
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -221,7 +239,9 @@ app.MapPost("/", (IFormFile? file1, IFormFile? file2, HttpContext httpContext) =
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -242,7 +262,8 @@ app.MapPost("/", (IFormFile? file1, IFormFile? file2, HttpContext httpContext) =
     [Fact]
     public async Task RequestDelegatePopulatesFromIFormFileParameterWithMetadata()
     {
-        var source = """app.MapPost("/", ([FromForm(Name = "my_file")] IFormFile file, HttpContext httpContext) => httpContext.Items["formFiles"] = file);""";
+        var source =
+            """app.MapPost("/", ([FromForm(Name = "my_file")] IFormFile file, HttpContext httpContext) => httpContext.Items["formFiles"] = file);""";
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -258,7 +279,9 @@ app.MapPost("/", (IFormFile? file1, IFormFile? file2, HttpContext httpContext) =
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -294,7 +317,9 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
         httpContext.TraceIdentifier = "my-trace-id";
 
         await endpoint.RequestDelegate(httpContext);
@@ -314,18 +339,25 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
     [InlineData(false)]
     public async Task RequestDelegateRejectsNonFormContent(bool shouldThrow)
     {
-        var source = """app.MapPost("/", (IFormFile file, HttpContext httpContext) => httpContext.Items["formFiles"] = file);""";
+        var source =
+            """app.MapPost("/", (IFormFile file, HttpContext httpContext) => httpContext.Items["formFiles"] = file);""";
         var (_, compilation) = await RunGeneratorAsync(source);
-        var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: CreateServiceProvider());
+        var endpoint = GetEndpointFromCompilation(
+            compilation,
+            serviceProvider: CreateServiceProvider()
+        );
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/xml";
         httpContext.Request.Headers["Content-Length"] = "1";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
-        var factoryResult = RequestDelegateFactory.Create((HttpContext context, IFormFile file) =>
-        {
-        }, new RequestDelegateFactoryOptions() { ThrowOnBadRequest = shouldThrow });
+        var factoryResult = RequestDelegateFactory.Create(
+            (HttpContext context, IFormFile file) => { },
+            new RequestDelegateFactoryOptions() { ThrowOnBadRequest = shouldThrow }
+        );
         var requestDelegate = factoryResult.RequestDelegate;
 
         var request = requestDelegate(httpContext);
@@ -333,7 +365,10 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
         if (shouldThrow)
         {
             var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() => request);
-            Assert.Equal("Expected a supported form media type but got \"application/xml\".", ex.Message);
+            Assert.Equal(
+                "Expected a supported form media type but got \"application/xml\".",
+                ex.Message
+            );
             Assert.Equal(StatusCodes.Status415UnsupportedMediaType, ex.StatusCode);
         }
         else
@@ -344,14 +379,18 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
             var logMessage = Assert.Single(TestSink.Writes);
             Assert.Equal(new EventId(7, "UnexpectedContentType"), logMessage.EventId);
             Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
-            Assert.Equal("Expected a supported form media type but got \"application/xml\".", logMessage.Message);
+            Assert.Equal(
+                "Expected a supported form media type but got \"application/xml\".",
+                logMessage.Message
+            );
         }
     }
 
     [Fact]
     public async Task RequestDelegateSets400ResponseIfRequiredFileNotSpecified()
     {
-        var source = """app.MapPost("/", (IFormFile file, HttpContext httpContext) => httpContext.Items["invoked"] = true);""";
+        var source =
+            """app.MapPost("/", (IFormFile file, HttpContext httpContext) => httpContext.Items["invoked"] = true);""";
         var (_, compilation) = await RunGeneratorAsync(source);
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -368,7 +407,9 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
         httpContext.Items["invoked"] = false;
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -401,7 +442,9 @@ app.MapPost("/", (IFormFile file, IFormFileCollection formFiles, HttpContext htt
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -426,7 +469,8 @@ app.MapPost("/", (IFormFile file, IFormFileCollection formFiles, HttpContext htt
     [InlineData("Cookie", ".AspNetCore.Auth=abc123")]
     public async Task RequestDelegatePopulatesFromIFormFileParameterIfRequestContainsSecureHeader(
         string headerName,
-        string headerValue)
+        string headerValue
+    )
     {
         var source = """
 app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpContext) =>
@@ -451,7 +495,9 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
         httpContext.Request.Body = stream;
         httpContext.Request.Headers[headerName] = headerValue;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
         httpContext.TraceIdentifier = "my-trace-id";
 
         await endpoint.RequestDelegate(httpContext);
@@ -461,7 +507,9 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
         Assert.Equal("file.txt", fileArgument!.FileName);
         Assert.Equal("file", fileArgument.Name);
 
-        var traceIdArgument = Assert.IsAssignableFrom<TraceIdentifier>(httpContext.Items["traceId"]);
+        var traceIdArgument = Assert.IsAssignableFrom<TraceIdentifier>(
+            httpContext.Items["traceId"]
+        );
         Assert.Equal("my-trace-id", traceIdArgument.Id);
     }
 
@@ -490,14 +538,18 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
         httpContext.TraceIdentifier = "my-trace-id";
 
 #pragma warning disable SYSLIB0026 // Type or member is obsolete
         var clientCertificate = new X509Certificate2();
 #pragma warning restore SYSLIB0026 // Type or member is obsolete
 
-        httpContext.Features.Set<ITlsConnectionFeature>(new TlsConnectionFeature(clientCertificate));
+        httpContext.Features.Set<ITlsConnectionFeature>(
+            new TlsConnectionFeature(clientCertificate)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -506,7 +558,9 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
         Assert.Equal("file.txt", fileArgument!.FileName);
         Assert.Equal("file", fileArgument.Name);
 
-        var traceIdArgument = Assert.IsAssignableFrom<TraceIdentifier>(httpContext.Items["traceId"]);
+        var traceIdArgument = Assert.IsAssignableFrom<TraceIdentifier>(
+            httpContext.Items["traceId"]
+        );
         Assert.Equal("my-trace-id", traceIdArgument.Id);
     }
 
@@ -521,7 +575,9 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
             multipartFormData.Add(new StringContent("foo"), "name");
             dataset.Add(multipartFormData, "multipart/form-data;boundary=some-boundary");
 
-            var urlEncondedForm = new FormUrlEncodedContent(new Dictionary<string, string> { ["message"] = "hello", ["name"] = "foo" });
+            var urlEncondedForm = new FormUrlEncodedContent(
+                new Dictionary<string, string> { ["message"] = "hello", ["name"] = "foo" }
+            );
             dataset.Add(urlEncondedForm, "application/x-www-form-urlencoded");
 
             return dataset;
@@ -530,7 +586,10 @@ app.MapPost("/", (IFormFile? file, TraceIdentifier traceId, HttpContext httpCont
 
     [Theory]
     [MemberData(nameof(FormContent))]
-    public async Task RequestDelegatePopulatesFromIFormCollectionParameter(HttpContent content, string contentType)
+    public async Task RequestDelegatePopulatesFromIFormCollectionParameter(
+        HttpContent content,
+        string contentType
+    )
     {
         var source = """
 app.MapPost("/", (IFormCollection formFiles, HttpContext httpContext) =>
@@ -549,14 +608,17 @@ app.MapPost("/", (IFormCollection formFiles, HttpContext httpContext) =>
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = contentType;
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
         Assert.Equal(httpContext.Request.Form, httpContext.Items["formFiles"]);
         var formArgument = Assert.IsAssignableFrom<IFormCollection>(httpContext.Items["formFiles"]);
         Assert.NotNull(formArgument);
-        Assert.Collection(formArgument!,
+        Assert.Collection(
+            formArgument!,
             (item) =>
             {
                 Assert.Equal("message", item.Key);
@@ -566,18 +628,25 @@ app.MapPost("/", (IFormCollection formFiles, HttpContext httpContext) =>
             {
                 Assert.Equal("name", item.Key);
                 Assert.Equal("foo", item.Value);
-            });
+            }
+        );
 
         var allAcceptsMetadata = endpoint.Metadata.OfType<IAcceptsMetadata>();
         var acceptsMetadata = Assert.Single(allAcceptsMetadata);
 
         Assert.NotNull(acceptsMetadata);
-        Assert.Equal(new[] { "multipart/form-data", "application/x-www-form-urlencoded" }, acceptsMetadata.ContentTypes);
+        Assert.Equal(
+            new[] { "multipart/form-data", "application/x-www-form-urlencoded" },
+            acceptsMetadata.ContentTypes
+        );
     }
 
     [Theory]
     [MemberData(nameof(FormContent))]
-    public async Task RequestDelegatePopulatesFromIFormCollectionParameterWithAttribute(HttpContent content, string contentType)
+    public async Task RequestDelegatePopulatesFromIFormCollectionParameterWithAttribute(
+        HttpContent content,
+        string contentType
+    )
     {
         var source = """
 app.MapPost("/", ([FromForm] IFormCollection formFiles, HttpContext httpContext) =>
@@ -596,14 +665,17 @@ app.MapPost("/", ([FromForm] IFormCollection formFiles, HttpContext httpContext)
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = contentType;
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
         Assert.Equal(httpContext.Request.Form, httpContext.Items["formFiles"]);
         var formArgument = Assert.IsAssignableFrom<IFormCollection>(httpContext.Items["formFiles"]);
         Assert.NotNull(formArgument);
-        Assert.Collection(formArgument!,
+        Assert.Collection(
+            formArgument!,
             (item) =>
             {
                 Assert.Equal("message", item.Key);
@@ -613,18 +685,25 @@ app.MapPost("/", ([FromForm] IFormCollection formFiles, HttpContext httpContext)
             {
                 Assert.Equal("name", item.Key);
                 Assert.Equal("foo", item.Value);
-            });
+            }
+        );
 
         var allAcceptsMetadata = endpoint.Metadata.OfType<IAcceptsMetadata>();
         var acceptsMetadata = Assert.Single(allAcceptsMetadata);
 
         Assert.NotNull(acceptsMetadata);
-        Assert.Equal(new[] { "multipart/form-data", "application/x-www-form-urlencoded" }, acceptsMetadata.ContentTypes);
+        Assert.Equal(
+            new[] { "multipart/form-data", "application/x-www-form-urlencoded" },
+            acceptsMetadata.ContentTypes
+        );
     }
 
     [Theory]
     [MemberData(nameof(FormContent))]
-    public async Task RequestDelegatePopulatesFromOptionalFormParameter(HttpContent content, string contentType)
+    public async Task RequestDelegatePopulatesFromOptionalFormParameter(
+        HttpContent content,
+        string contentType
+    )
     {
         var source = """
 app.MapPost("/", ([FromForm] string? message, HttpContext httpContext) =>
@@ -643,7 +722,9 @@ app.MapPost("/", ([FromForm] string? message, HttpContext httpContext) =>
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = contentType;
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -652,7 +733,10 @@ app.MapPost("/", ([FromForm] string? message, HttpContext httpContext) =>
 
     [Theory]
     [MemberData(nameof(FormContent))]
-    public async Task RequestDelegatePopulatesFromMultipleRequiredFormParameters(HttpContent content, string contentType)
+    public async Task RequestDelegatePopulatesFromMultipleRequiredFormParameters(
+        HttpContent content,
+        string contentType
+    )
     {
         var source = """
 app.MapPost("/", ([FromForm] string message, [FromForm] string name, HttpContext httpContext) =>
@@ -672,7 +756,9 @@ app.MapPost("/", ([FromForm] string message, [FromForm] string name, HttpContext
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = contentType;
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -685,7 +771,10 @@ app.MapPost("/", ([FromForm] string message, [FromForm] string name, HttpContext
 
     [Theory]
     [MemberData(nameof(FormContent))]
-    public async Task RequestDelegatePopulatesFromOptionalMissingFormParameter(HttpContent content, string contentType)
+    public async Task RequestDelegatePopulatesFromOptionalMissingFormParameter(
+        HttpContent content,
+        string contentType
+    )
     {
         var source = """
 app.MapPost("/", ([FromForm] string? message, [FromForm] string? additionalMessage, HttpContext httpContext) =>
@@ -705,7 +794,9 @@ app.MapPost("/", ([FromForm] string? message, [FromForm] string? additionalMessa
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = contentType;
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -716,7 +807,10 @@ app.MapPost("/", ([FromForm] string? message, [FromForm] string? additionalMessa
 
     [Theory]
     [MemberData(nameof(FormContent))]
-    public async Task RequestDelegatePopulatesFromFormParameterWithMetadata(HttpContent content, string contentType)
+    public async Task RequestDelegatePopulatesFromFormParameterWithMetadata(
+        HttpContent content,
+        string contentType
+    )
     {
         var source = """
 app.MapPost("/", ([FromForm(Name = "message")] string text, HttpContext httpContext) =>
@@ -735,7 +829,9 @@ app.MapPost("/", ([FromForm(Name = "message")] string text, HttpContext httpCont
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = contentType;
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -745,7 +841,10 @@ app.MapPost("/", ([FromForm(Name = "message")] string text, HttpContext httpCont
 
     [Theory]
     [MemberData(nameof(FormContent))]
-    public async Task RequestDelegatePopulatesFromFormAndBoundParameter(HttpContent content, string contentType)
+    public async Task RequestDelegatePopulatesFromFormAndBoundParameter(
+        HttpContent content,
+        string contentType
+    )
     {
         var source = """
 app.MapPost("/", ([FromForm] string? message, TraceIdentifier traceId, HttpContext httpContext) =>
@@ -765,7 +864,9 @@ app.MapPost("/", ([FromForm] string? message, TraceIdentifier traceId, HttpConte
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = contentType;
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
         httpContext.TraceIdentifier = "my-trace-id";
         await endpoint.RequestDelegate(httpContext);
 
@@ -806,7 +907,9 @@ void TestAction(HttpContext context, IFormFileCollection formFiles, IFormCollect
 
     [Theory]
     [MemberData(nameof(FormAndFormFileParametersDelegates))]
-    public async Task RequestDelegatePopulatesFromBothIFormCollectionAndIFormFileParameters(string innerSource)
+    public async Task RequestDelegatePopulatesFromBothIFormCollectionAndIFormFileParameters(
+        string innerSource
+    )
     {
         var source = $"""
 {innerSource}
@@ -828,12 +931,18 @@ app.MapPost("/", TestAction);
         var httpContext = CreateHttpContext();
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = "multipart/form-data;boundary=some-boundary";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
-        var formFilesArgument = Assert.IsAssignableFrom<FormFileCollection>(httpContext.Items["FormFilesArgument"]);
-        var formArgument = Assert.IsAssignableFrom<IFormCollection>(httpContext.Items["FormArgument"]);
+        var formFilesArgument = Assert.IsAssignableFrom<FormFileCollection>(
+            httpContext.Items["FormFilesArgument"]
+        );
+        var formArgument = Assert.IsAssignableFrom<IFormCollection>(
+            httpContext.Items["FormArgument"]
+        );
 
         Assert.Equal(httpContext.Request.Form.Files, formFilesArgument);
         Assert.NotNull(formFilesArgument!["file"]);
@@ -841,21 +950,28 @@ app.MapPost("/", TestAction);
 
         Assert.Equal(httpContext.Request.Form, formArgument);
         Assert.NotNull(formArgument);
-        Assert.Collection(formArgument!,
+        Assert.Collection(
+            formArgument!,
             (item) =>
             {
                 Assert.Equal("name", item.Key);
                 Assert.Equal("foo", item.Value);
-            });
+            }
+        );
 
         var allAcceptsMetadata = endpoint.Metadata.OfType<IAcceptsMetadata>();
-        Assert.Collection(allAcceptsMetadata,
-            (m) => Assert.Equal(new[] { "multipart/form-data" }, m.ContentTypes));
+        Assert.Collection(
+            allAcceptsMetadata,
+            (m) => Assert.Equal(new[] { "multipart/form-data" }, m.ContentTypes)
+        );
     }
 
     [Theory]
     [MemberData(nameof(FormContent))]
-    public async Task RequestDelegateSets400ResponseIfRequiredFormItemNotSpecified(HttpContent content, string contentType)
+    public async Task RequestDelegateSets400ResponseIfRequiredFormItemNotSpecified(
+        HttpContent content,
+        string contentType
+    )
     {
         var source = """
 app.MapPost("/", ([FromForm] string unknownParameter, HttpContext httpContext) => httpContext.Items["invoked"] = true);
@@ -872,7 +988,9 @@ app.MapPost("/", ([FromForm] string unknownParameter, HttpContext httpContext) =
         httpContext.Items["invoked"] = false;
         httpContext.Request.Body = stream;
         httpContext.Request.Headers["Content-Type"] = contentType;
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -894,10 +1012,9 @@ app.MapPost("/", (HttpContext httpContext, [FromForm] MyTryParseRecord tryParsab
 
         var httpContext = CreateHttpContext();
 
-        httpContext.Request.Form = new FormCollection(new Dictionary<string, StringValues>
-        {
-            ["tryParsable"] = "https://example.org"
-        });
+        httpContext.Request.Form = new FormCollection(
+            new Dictionary<string, StringValues> { ["tryParsable"] = "https://example.org" }
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -908,7 +1025,9 @@ app.MapPost("/", (HttpContext httpContext, [FromForm] MyTryParseRecord tryParsab
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task RequestDelegateLogsIOExceptionsForFormAsDebugDoesNotAbortAndNeverThrows(bool throwOnBadRequests)
+    public async Task RequestDelegateLogsIOExceptionsForFormAsDebugDoesNotAbortAndNeverThrows(
+        bool throwOnBadRequests
+    )
     {
         var source = """
 void TestAction(HttpContext httpContext, IFormFile file)
@@ -920,7 +1039,9 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = throwOnBadRequests);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = throwOnBadRequests
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
@@ -930,7 +1051,9 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(ioException);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -962,7 +1085,9 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
         httpContext.Request.Headers["Content-Length"] = "2049";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(new string('x', 2049)));
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -974,7 +1099,10 @@ app.MapPost("/", TestAction);
         var logMessage = Assert.Single(TestSink.Writes);
         Assert.Equal(new EventId(8, "InvalidFormRequestBody"), logMessage.EventId);
         Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
-        Assert.Equal(@"Failed to read parameter ""IFormFile file"" from the request body as form.", logMessage.Message);
+        Assert.Equal(
+            @"Failed to read parameter ""IFormFile file"" from the request body as form.",
+            logMessage.Message
+        );
         Assert.IsType<InvalidDataException>(logMessage.Exception);
     }
 
@@ -991,7 +1119,9 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = true);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = true
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
@@ -999,9 +1129,13 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/x-www-form-urlencoded";
         httpContext.Request.Headers["Content-Length"] = "2049";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(new string('x', 2049)));
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => endpoint.RequestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() =>
+            endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Null(httpContext.Items["invoked"]);
 
@@ -1013,7 +1147,10 @@ app.MapPost("/", TestAction);
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Failed to read parameter ""IFormFile file"" from the request body as form.", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Failed to read parameter ""IFormFile file"" from the request body as form.",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
         Assert.IsType<InvalidDataException>(badHttpRequestException.InnerException);
     }

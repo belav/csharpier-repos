@@ -25,64 +25,49 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-	public sealed class GenerateTrustInfo : TaskExtension {
-	
-		ITaskItem	baseManifest;
-		string		excludedPermissions;
-		string		targetZone;
-		ITaskItem	trustInfoFile;
-		
-		public GenerateTrustInfo ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public sealed class GenerateTrustInfo : TaskExtension
+    {
+        ITaskItem baseManifest;
+        string excludedPermissions;
+        string targetZone;
+        ITaskItem trustInfoFile;
 
-		public override bool Execute ()
-		{
-			throw new NotImplementedException ();
-		}
+        public GenerateTrustInfo() { }
 
-		public ITaskItem BaseManifest {
-			get {
-				return baseManifest;
-			}
-			set {
-				baseManifest = value;
-			}
-		}
+        public override bool Execute()
+        {
+            throw new NotImplementedException();
+        }
 
-		public string ExcludedPermissions {
-			get {
-				return excludedPermissions;
-			}
-			set {
-				excludedPermissions = value;
-			}
-		}
+        public ITaskItem BaseManifest
+        {
+            get { return baseManifest; }
+            set { baseManifest = value; }
+        }
 
-		public string TargetZone {
-			get {
-				return targetZone;
-			}
-			set {
-				targetZone = value;
-			}
-		}
+        public string ExcludedPermissions
+        {
+            get { return excludedPermissions; }
+            set { excludedPermissions = value; }
+        }
 
-		[Required]
-		[Output]
-		public ITaskItem TrustInfoFile {
-			get {
-				return trustInfoFile;
-			}
-			set {
-				trustInfoFile = value;
-			}
-		}
-	}
+        public string TargetZone
+        {
+            get { return targetZone; }
+            set { targetZone = value; }
+        }
+
+        [Required]
+        [Output]
+        public ITaskItem TrustInfoFile
+        {
+            get { return trustInfoFile; }
+            set { trustInfoFile = value; }
+        }
+    }
 }
-

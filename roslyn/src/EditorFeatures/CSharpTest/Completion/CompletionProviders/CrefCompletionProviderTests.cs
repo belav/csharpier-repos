@@ -25,39 +25,112 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class CrefCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(CrefCompletionProvider);
+        internal override Type GetCompletionProviderType() => typeof(CrefCompletionProvider);
 
-        private protected override async Task VerifyWorkerAsync(string code, int position, string expectedItemOrNull,
-            string expectedDescriptionOrNull, SourceCodeKind sourceCodeKind, bool usePreviousCharAsTrigger,
-            bool checkForAbsence, int? glyph, int? matchPriority, bool? hasSuggestionItem, string displayTextSuffix,
-            string displayTextPrefix, string? inlineDescription = null, bool? isComplexTextEdit = null,
-            List<CompletionFilter>? matchingFilters = null, CompletionItemFlags? flags = null,
-            CompletionOptions? options = null, bool skipSpeculation = false)
+        private protected override async Task VerifyWorkerAsync(
+            string code,
+            int position,
+            string expectedItemOrNull,
+            string expectedDescriptionOrNull,
+            SourceCodeKind sourceCodeKind,
+            bool usePreviousCharAsTrigger,
+            bool checkForAbsence,
+            int? glyph,
+            int? matchPriority,
+            bool? hasSuggestionItem,
+            string displayTextSuffix,
+            string displayTextPrefix,
+            string? inlineDescription = null,
+            bool? isComplexTextEdit = null,
+            List<CompletionFilter>? matchingFilters = null,
+            CompletionItemFlags? flags = null,
+            CompletionOptions? options = null,
+            bool skipSpeculation = false
+        )
         {
             await VerifyAtPositionAsync(
-                code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull, sourceCodeKind,
-                checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix, displayTextPrefix, inlineDescription,
-                isComplexTextEdit, matchingFilters, flags, options);
+                code,
+                position,
+                usePreviousCharAsTrigger,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters,
+                flags,
+                options
+            );
 
             await VerifyAtEndOfFileAsync(
-                code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull, sourceCodeKind,
-                checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix, displayTextPrefix, inlineDescription,
-                isComplexTextEdit, matchingFilters, flags, options);
+                code,
+                position,
+                usePreviousCharAsTrigger,
+                expectedItemOrNull,
+                expectedDescriptionOrNull,
+                sourceCodeKind,
+                checkForAbsence,
+                glyph,
+                matchPriority,
+                hasSuggestionItem,
+                displayTextSuffix,
+                displayTextPrefix,
+                inlineDescription,
+                isComplexTextEdit,
+                matchingFilters,
+                flags,
+                options
+            );
 
             // Items cannot be partially written if we're checking for their absence,
             // or if we're verifying that the list will show up (without specifying an actual item)
             if (!checkForAbsence && expectedItemOrNull != null)
             {
                 await VerifyAtPosition_ItemPartiallyWrittenAsync(
-                    code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull,
-                    sourceCodeKind, checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix,
-                    displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters, flags: null, options);
+                    code,
+                    position,
+                    usePreviousCharAsTrigger,
+                    expectedItemOrNull,
+                    expectedDescriptionOrNull,
+                    sourceCodeKind,
+                    checkForAbsence,
+                    glyph,
+                    matchPriority,
+                    hasSuggestionItem,
+                    displayTextSuffix,
+                    displayTextPrefix,
+                    inlineDescription,
+                    isComplexTextEdit,
+                    matchingFilters,
+                    flags: null,
+                    options
+                );
 
                 await VerifyAtEndOfFile_ItemPartiallyWrittenAsync(
-                    code, position, usePreviousCharAsTrigger, expectedItemOrNull, expectedDescriptionOrNull,
-                    sourceCodeKind, checkForAbsence, glyph, matchPriority, hasSuggestionItem, displayTextSuffix,
-                    displayTextPrefix, inlineDescription, isComplexTextEdit, matchingFilters, flags: null, options);
+                    code,
+                    position,
+                    usePreviousCharAsTrigger,
+                    expectedItemOrNull,
+                    expectedDescriptionOrNull,
+                    sourceCodeKind,
+                    checkForAbsence,
+                    glyph,
+                    matchPriority,
+                    hasSuggestionItem,
+                    displayTextSuffix,
+                    displayTextPrefix,
+                    inlineDescription,
+                    isComplexTextEdit,
+                    matchingFilters,
+                    flags: null,
+                    options
+                );
             }
         }
 
@@ -442,25 +515,43 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 {
                 }
                 """;
-            using var workspace = TestWorkspace.Create(LanguageNames.CSharp, new CSharpCompilationOptions(OutputKind.ConsoleApplication), new CSharpParseOptions(), new[] { text }, composition: GetComposition());
+            using var workspace = TestWorkspace.Create(
+                LanguageNames.CSharp,
+                new CSharpCompilationOptions(OutputKind.ConsoleApplication),
+                new CSharpParseOptions(),
+                new[] { text },
+                composition: GetComposition()
+            );
             var called = false;
 
             var hostDocument = workspace.DocumentWithCursor;
             var document = workspace.CurrentSolution.GetRequiredDocument(hostDocument.Id);
             var service = GetCompletionService(document.Project);
-            var provider = Assert.IsType<CrefCompletionProvider>(service.GetTestAccessor().GetImportedAndBuiltInProviders(ImmutableHashSet<string>.Empty).Single());
-            provider.GetTestAccessor().SetSpeculativeNodeCallback(n =>
-            {
-                // asserts that we aren't be asked speculate on nodes inside documentation trivia.
-                // This verifies that the provider is asking for a speculative SemanticModel
-                // by walking to the node the documentation is attached to. 
-                Contract.ThrowIfNull(n);
-                called = true;
-                var parent = n.GetAncestor<DocumentationCommentTriviaSyntax>();
-                Assert.Null(parent);
-            });
+            var provider = Assert.IsType<CrefCompletionProvider>(
+                service
+                    .GetTestAccessor()
+                    .GetImportedAndBuiltInProviders(ImmutableHashSet<string>.Empty)
+                    .Single()
+            );
+            provider
+                .GetTestAccessor()
+                .SetSpeculativeNodeCallback(n =>
+                {
+                    // asserts that we aren't be asked speculate on nodes inside documentation trivia.
+                    // This verifies that the provider is asking for a speculative SemanticModel
+                    // by walking to the node the documentation is attached to.
+                    Contract.ThrowIfNull(n);
+                    called = true;
+                    var parent = n.GetAncestor<DocumentationCommentTriviaSyntax>();
+                    Assert.Null(parent);
+                });
 
-            var completionList = await GetCompletionListAsync(service, document, hostDocument.CursorPosition!.Value, RoslynTrigger.Invoke);
+            var completionList = await GetCompletionListAsync(
+                service,
+                document,
+                hostDocument.CursorPosition!.Value,
+                RoslynTrigger.Invoke
+            );
 
             Assert.True(called);
         }

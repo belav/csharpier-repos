@@ -2,15 +2,16 @@
 
 class SampleClass
 {
-        public static SuperClass operator ++ (SampleClass value) {
-                return new SuperClass();
-        }
+    public static SuperClass operator ++(SampleClass value)
+    {
+        return new SuperClass();
+    }
 }
 
-class SuperClass: SampleClass
+class SuperClass : SampleClass
 {
-        public static int Main ()
-        {
-            return 0;
-        }
+    public static int Main()
+    {
+        return 0;
+    }
 }

@@ -45,16 +45,25 @@ namespace System
             // the choice of target method ambiguous) for backwards
             // compatibility. The name matching was case sensitive and we
             // preserve that as well.
-            if (!BindToMethodName(target, (RuntimeType)target.GetType(), method,
-                                  DelegateBindingFlags.InstanceMethodOnly |
-                                  DelegateBindingFlags.ClosedDelegateOnly))
+            if (
+                !BindToMethodName(
+                    target,
+                    (RuntimeType)target.GetType(),
+                    method,
+                    DelegateBindingFlags.InstanceMethodOnly
+                        | DelegateBindingFlags.ClosedDelegateOnly
+                )
+            )
                 throw new ArgumentException(SR.Arg_DlgtTargMeth);
         }
 
         // This constructor is called from a class to generate a
         // delegate based upon a static method name and the Type object
         // for the class defining the method.
-        protected Delegate([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target, string method)
+        protected Delegate(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
+            string method
+        )
         {
             ArgumentNullException.ThrowIfNull(target);
             ArgumentNullException.ThrowIfNull(method);
@@ -71,20 +80,24 @@ namespace System
             // The name matching was case insensitive (no idea why this is
             // different from the constructor above) and we preserve that as
             // well.
-            BindToMethodName(null, rtTarget, method,
-                             DelegateBindingFlags.StaticMethodOnly |
-                             DelegateBindingFlags.OpenDelegateOnly |
-                             DelegateBindingFlags.CaselessMatching);
+            BindToMethodName(
+                null,
+                rtTarget,
+                method,
+                DelegateBindingFlags.StaticMethodOnly
+                    | DelegateBindingFlags.OpenDelegateOnly
+                    | DelegateBindingFlags.CaselessMatching
+            );
         }
 
         protected virtual object? DynamicInvokeImpl(object?[]? args)
         {
             RuntimeMethodHandleInternal method = new RuntimeMethodHandleInternal(GetInvokeMethod());
-            RuntimeMethodInfo invoke = (RuntimeMethodInfo)RuntimeType.GetMethodBase((RuntimeType)this.GetType(), method)!;
+            RuntimeMethodInfo invoke = (RuntimeMethodInfo)
+                RuntimeType.GetMethodBase((RuntimeType)this.GetType(), method)!;
 
             return invoke.Invoke(this, BindingFlags.Default, null, args, null);
         }
-
 
         public override bool Equals([NotNullWhen(true)] object? obj)
         {
@@ -94,7 +107,11 @@ namespace System
             Delegate d = (Delegate)obj;
 
             // do an optimistic check first. This is hopefully cheap enough to be worth
-            if (_target == d._target && _methodPtr == d._methodPtr && _methodPtrAux == d._methodPtrAux)
+            if (
+                _target == d._target
+                && _methodPtr == d._methodPtr
+                && _methodPtrAux == d._methodPtrAux
+            )
                 return true;
 
             // even though the fields were not all equals the delegates may still match
@@ -130,7 +147,12 @@ namespace System
 
             // method ptrs don't match, go down long path
             //
-            if (_methodBase == null || d._methodBase == null || !(_methodBase is MethodInfo) || !(d._methodBase is MethodInfo))
+            if (
+                _methodBase == null
+                || d._methodBase == null
+                || !(_methodBase is MethodInfo)
+                || !(d._methodBase is MethodInfo)
+            )
                 return InternalEqualMethodHandles(this, d);
             else
                 return _methodBase.Equals(d._methodBase);
@@ -149,7 +171,8 @@ namespace System
                 return unchecked((int)((long)this._methodPtrAux));
             */
             if (_methodPtrAux == IntPtr.Zero)
-                return (_target != null ? RuntimeHelpers.GetHashCode(_target) * 33 : 0) + GetType().GetHashCode();
+                return (_target != null ? RuntimeHelpers.GetHashCode(_target) * 33 : 0)
+                    + GetType().GetHashCode();
             else
                 return GetType().GetHashCode();
         }
@@ -163,7 +186,9 @@ namespace System
                 // need a proper declaring type instance method on a generic type
                 if (declaringType.IsGenericType)
                 {
-                    bool isStatic = (RuntimeMethodHandle.GetAttributes(method) & MethodAttributes.Static) != (MethodAttributes)0;
+                    bool isStatic =
+                        (RuntimeMethodHandle.GetAttributes(method) & MethodAttributes.Static)
+                        != (MethodAttributes)0;
                     if (!isStatic)
                     {
                         if (_methodPtrAux == IntPtr.Zero)
@@ -182,8 +207,10 @@ namespace System
                             Type targetType = declaringType.GetGenericTypeDefinition();
                             while (currentType != null)
                             {
-                                if (currentType.IsGenericType &&
-                                    currentType.GetGenericTypeDefinition() == targetType)
+                                if (
+                                    currentType.IsGenericType
+                                    && currentType.GetGenericTypeDefinition() == targetType
+                                )
                                 {
                                     declaringType = currentType as RuntimeType;
                                     break;
@@ -194,13 +221,17 @@ namespace System
                             // RCWs don't need to be "strongly-typed" in which case we don't find a base type
                             // that matches the declaring type of the method. This is fine because interop needs
                             // to work with exact methods anyway so declaringType is never shared at this point.
-                            Debug.Assert(currentType != null || _target.GetType().IsCOMObject, "The class hierarchy should declare the method");
+                            Debug.Assert(
+                                currentType != null || _target.GetType().IsCOMObject,
+                                "The class hierarchy should declare the method"
+                            );
                         }
                         else
                         {
                             // it's an open one, need to fetch the first arg of the instantiation
                             MethodInfo invoke = this.GetType().GetMethod("Invoke")!;
-                            declaringType = (RuntimeType)invoke.GetParametersAsSpan()[0].ParameterType;
+                            declaringType = (RuntimeType)
+                                invoke.GetParametersAsSpan()[0].ParameterType;
                         }
                     }
                 }
@@ -213,7 +244,13 @@ namespace System
 
         // V1 API.
         [RequiresUnreferencedCode("The target method might be removed")]
-        public static Delegate? CreateDelegate(Type type, object target, string method, bool ignoreCase, bool throwOnBindFailure)
+        public static Delegate? CreateDelegate(
+            Type type,
+            object target,
+            string method,
+            bool ignoreCase,
+            bool throwOnBindFailure
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
             ArgumentNullException.ThrowIfNull(target);
@@ -232,11 +269,17 @@ namespace System
             // We never generate a closed over null delegate and this is
             // actually enforced via the check on target above, but we pass
             // NeverCloseOverNull anyway just for clarity.
-            if (!d.BindToMethodName(target, (RuntimeType)target.GetType(), method,
-                                    DelegateBindingFlags.InstanceMethodOnly |
-                                    DelegateBindingFlags.ClosedDelegateOnly |
-                                    DelegateBindingFlags.NeverCloseOverNull |
-                                    (ignoreCase ? DelegateBindingFlags.CaselessMatching : 0)))
+            if (
+                !d.BindToMethodName(
+                    target,
+                    (RuntimeType)target.GetType(),
+                    method,
+                    DelegateBindingFlags.InstanceMethodOnly
+                        | DelegateBindingFlags.ClosedDelegateOnly
+                        | DelegateBindingFlags.NeverCloseOverNull
+                        | (ignoreCase ? DelegateBindingFlags.CaselessMatching : 0)
+                )
+            )
             {
                 if (throwOnBindFailure)
                     throw new ArgumentException(SR.Arg_DlgtTargMeth);
@@ -248,7 +291,13 @@ namespace System
         }
 
         // V1 API.
-        public static Delegate? CreateDelegate(Type type, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target, string method, bool ignoreCase, bool throwOnBindFailure)
+        public static Delegate? CreateDelegate(
+            Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
+            string method,
+            bool ignoreCase,
+            bool throwOnBindFailure
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
             ArgumentNullException.ThrowIfNull(target);
@@ -269,10 +318,16 @@ namespace System
             // static delegates. Constrain the call to BindToMethodName to such
             // and don't allow relaxed signature matching (which could make the
             // choice of target method ambiguous) for backwards compatibility.
-            if (!d.BindToMethodName(null, rtTarget, method,
-                                    DelegateBindingFlags.StaticMethodOnly |
-                                    DelegateBindingFlags.OpenDelegateOnly |
-                                    (ignoreCase ? DelegateBindingFlags.CaselessMatching : 0)))
+            if (
+                !d.BindToMethodName(
+                    null,
+                    rtTarget,
+                    method,
+                    DelegateBindingFlags.StaticMethodOnly
+                        | DelegateBindingFlags.OpenDelegateOnly
+                        | (ignoreCase ? DelegateBindingFlags.CaselessMatching : 0)
+                )
+            )
             {
                 if (throwOnBindFailure)
                     throw new ArgumentException(SR.Arg_DlgtTargMeth);
@@ -284,7 +339,11 @@ namespace System
         }
 
         // V1 API.
-        public static Delegate? CreateDelegate(Type type, MethodInfo method, bool throwOnBindFailure)
+        public static Delegate? CreateDelegate(
+            Type type,
+            MethodInfo method,
+            bool throwOnBindFailure
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
             ArgumentNullException.ThrowIfNull(method);
@@ -310,7 +369,8 @@ namespace System
                 rtType,
                 rmi,
                 null,
-                DelegateBindingFlags.OpenDelegateOnly | DelegateBindingFlags.RelaxedSignature);
+                DelegateBindingFlags.OpenDelegateOnly | DelegateBindingFlags.RelaxedSignature
+            );
 
             if (d == null && throwOnBindFailure)
                 throw new ArgumentException(SR.Arg_DlgtTargMeth);
@@ -319,7 +379,12 @@ namespace System
         }
 
         // V2 API.
-        public static Delegate? CreateDelegate(Type type, object? firstArgument, MethodInfo method, bool throwOnBindFailure)
+        public static Delegate? CreateDelegate(
+            Type type,
+            object? firstArgument,
+            MethodInfo method,
+            bool throwOnBindFailure
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
             ArgumentNullException.ThrowIfNull(method);
@@ -342,7 +407,8 @@ namespace System
                 rtType,
                 rmi,
                 firstArgument,
-                DelegateBindingFlags.RelaxedSignature);
+                DelegateBindingFlags.RelaxedSignature
+            );
 
             if (d == null && throwOnBindFailure)
                 throw new ArgumentException(SR.Arg_DlgtTargMeth);
@@ -355,7 +421,11 @@ namespace System
         //
 
         // V2 internal API.
-        internal static Delegate CreateDelegateNoSecurityCheck(Type type, object? target, RuntimeMethodHandle method)
+        internal static Delegate CreateDelegateNoSecurityCheck(
+            Type type,
+            object? target,
+            RuntimeMethodHandle method
+        )
         {
             ArgumentNullException.ThrowIfNull(type);
 
@@ -375,19 +445,35 @@ namespace System
             // Allow flexible binding options since the target method is
             // unambiguously provided to us.
 
-            if (!d.BindToMethodInfo(target,
-                                    method.GetMethodInfo(),
-                                    RuntimeMethodHandle.GetDeclaringType(method.GetMethodInfo()),
-                                    DelegateBindingFlags.RelaxedSignature))
+            if (
+                !d.BindToMethodInfo(
+                    target,
+                    method.GetMethodInfo(),
+                    RuntimeMethodHandle.GetDeclaringType(method.GetMethodInfo()),
+                    DelegateBindingFlags.RelaxedSignature
+                )
+            )
                 throw new ArgumentException(SR.Arg_DlgtTargMeth);
             return d;
         }
 
-        internal static Delegate? CreateDelegateInternal(RuntimeType rtType, RuntimeMethodInfo rtMethod, object? firstArgument, DelegateBindingFlags flags)
+        internal static Delegate? CreateDelegateInternal(
+            RuntimeType rtType,
+            RuntimeMethodInfo rtMethod,
+            object? firstArgument,
+            DelegateBindingFlags flags
+        )
         {
             Delegate d = InternalAlloc(rtType);
 
-            if (d.BindToMethodInfo(firstArgument, rtMethod, rtMethod.GetDeclaringTypeInternal(), flags))
+            if (
+                d.BindToMethodInfo(
+                    firstArgument,
+                    rtMethod,
+                    rtMethod.GetDeclaringTypeInternal(),
+                    flags
+                )
+            )
                 return d;
             else
                 return null;
@@ -400,10 +486,20 @@ namespace System
         // BindToMethodName is annotated as DynamicallyAccessedMemberTypes.All because it will bind to non-public methods
         // on a base type of methodType. Using All is currently the only way ILLinker will preserve these methods.
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private extern bool BindToMethodName(object? target, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] RuntimeType methodType, string method, DelegateBindingFlags flags);
+        private extern bool BindToMethodName(
+            object? target,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] RuntimeType methodType,
+            string method,
+            DelegateBindingFlags flags
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private extern bool BindToMethodInfo(object? target, IRuntimeMethodInfo method, RuntimeType methodType, DelegateBindingFlags flags);
+        private extern bool BindToMethodInfo(
+            object? target,
+            IRuntimeMethodInfo method,
+            RuntimeType methodType,
+            DelegateBindingFlags flags
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern MulticastDelegate InternalAlloc(RuntimeType type);

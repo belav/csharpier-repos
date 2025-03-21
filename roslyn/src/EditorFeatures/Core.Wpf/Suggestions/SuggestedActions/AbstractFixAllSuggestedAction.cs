@@ -31,14 +31,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             ITextBuffer subjectBuffer,
             IFixAllState fixAllState,
             CodeAction originalCodeAction,
-            AbstractFixAllCodeAction fixAllCodeAction)
-            : base(threadingContext,
-                   sourceProvider,
-                   workspace,
-                   originalSolution,
-                   subjectBuffer,
-                   fixAllState.FixAllProvider,
-                   fixAllCodeAction)
+            AbstractFixAllCodeAction fixAllCodeAction
+        )
+            : base(
+                threadingContext,
+                sourceProvider,
+                workspace,
+                originalSolution,
+                subjectBuffer,
+                fixAllState.FixAllProvider,
+                fixAllCodeAction
+            )
         {
             OriginalCodeAction = originalCodeAction;
             FixAllState = fixAllState;
@@ -54,19 +57,29 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         }
 
         protected override async Task InnerInvokeAsync(
-            IProgress<CodeAnalysisProgress> progress, CancellationToken cancellationToken)
+            IProgress<CodeAnalysisProgress> progress,
+            CancellationToken cancellationToken
+        )
         {
-            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
+            await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                cancellationToken
+            );
 
             var fixAllKind = FixAllState.FixAllKind;
             var functionId = fixAllKind switch
             {
                 FixAllKind.CodeFix => FunctionId.CodeFixes_FixAllOccurrencesSession,
                 FixAllKind.Refactoring => FunctionId.Refactoring_FixAllOccurrencesSession,
-                _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind)
+                _ => throw ExceptionUtilities.UnexpectedValue(fixAllKind),
             };
 
-            using (Logger.LogBlock(functionId, FixAllLogger.CreateCorrelationLogMessage(FixAllState.CorrelationId), cancellationToken))
+            using (
+                Logger.LogBlock(
+                    functionId,
+                    FixAllLogger.CreateCorrelationLogMessage(FixAllState.CorrelationId),
+                    cancellationToken
+                )
+            )
             {
                 await base.InnerInvokeAsync(progress, cancellationToken).ConfigureAwait(false);
             }

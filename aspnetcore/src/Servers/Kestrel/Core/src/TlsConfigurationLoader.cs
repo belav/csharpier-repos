@@ -29,7 +29,8 @@ internal sealed class TlsConfigurationLoader
     public TlsConfigurationLoader(
         IHostEnvironment hostEnvironment,
         ILogger<KestrelServer> serverLogger,
-        ILogger<HttpsConnectionMiddleware> httpsLogger)
+        ILogger<HttpsConnectionMiddleware> httpsLogger
+    )
     {
         _certificateConfigLoader = new CertificateConfigLoader(hostEnvironment, serverLogger);
         _applicationName = hostEnvironment.ApplicationName;
@@ -45,7 +46,8 @@ internal sealed class TlsConfigurationLoader
         EndpointConfig endpoint,
         KestrelServerOptions serverOptions,
         CertificateConfig? defaultCertificateConfig,
-        ConfigurationReader configurationReader)
+        ConfigurationReader configurationReader
+    )
     {
         serverOptions.ApplyHttpsDefaults(httpsOptions);
 
@@ -66,11 +68,16 @@ internal sealed class TlsConfigurationLoader
         else
         {
             // Ensure endpoint is reloaded if it used the default mode and the ClientCertificateMode changed.
-            endpoint.ClientCertificateMode = configurationReader.EndpointDefaults.ClientCertificateMode;
+            endpoint.ClientCertificateMode = configurationReader
+                .EndpointDefaults
+                .ClientCertificateMode;
         }
 
         // A cert specified directly on the endpoint overrides any defaults.
-        var (serverCert, fullChain) = _certificateConfigLoader.LoadCertificate(endpoint.Certificate, endpoint.Name);
+        var (serverCert, fullChain) = _certificateConfigLoader.LoadCertificate(
+            endpoint.Certificate,
+            endpoint.Name
+        );
         httpsOptions.ServerCertificate = serverCert ?? httpsOptions.ServerCertificate;
         httpsOptions.ServerCertificateChain = fullChain ?? httpsOptions.ServerCertificateChain;
 
@@ -92,7 +99,8 @@ internal sealed class TlsConfigurationLoader
     public ListenOptions UseHttpsWithSni(
         ListenOptions listenOptions,
         HttpsConnectionAdapterOptions httpsOptions,
-        EndpointConfig endpoint)
+        EndpointConfig endpoint
+    )
     {
         if (listenOptions.IsTls)
         {
@@ -103,14 +111,22 @@ internal sealed class TlsConfigurationLoader
         {
             if (!httpsOptions.HasServerCertificateOrSelector)
             {
-                throw new InvalidOperationException(CoreStrings.NoCertSpecifiedNoDevelopmentCertificateFound);
+                throw new InvalidOperationException(
+                    CoreStrings.NoCertSpecifiedNoDevelopmentCertificateFound
+                );
             }
 
             return listenOptions.UseHttps(httpsOptions);
         }
 
-        var sniOptionsSelector = new SniOptionsSelector(endpoint.Name, endpoint.Sni, _certificateConfigLoader,
-            httpsOptions, listenOptions.Protocols, _httpsLogger);
+        var sniOptionsSelector = new SniOptionsSelector(
+            endpoint.Name,
+            endpoint.Sni,
+            _certificateConfigLoader,
+            httpsOptions,
+            listenOptions.Protocols,
+            _httpsLogger
+        );
         var tlsCallbackOptions = new TlsHandshakeCallbackOptions()
         {
             OnConnection = SniOptionsSelector.OptionsCallback,
@@ -128,7 +144,10 @@ internal sealed class TlsConfigurationLoader
     {
         if (configurationReader.Certificates.TryGetValue("Default", out var defaultCertConfig))
         {
-            var (defaultCert, _ /* cert chain */) = _certificateConfigLoader.LoadCertificate(defaultCertConfig, "Default");
+            var (
+                defaultCert,
+                _ /* cert chain */
+            ) = _certificateConfigLoader.LoadCertificate(defaultCertConfig, "Default");
             if (defaultCert != null)
             {
                 return new CertificateAndConfig(defaultCert, defaultCertConfig);
@@ -143,14 +162,18 @@ internal sealed class TlsConfigurationLoader
         return null;
     }
 
-    private CertificateAndConfig? FindDeveloperCertificateFile(ConfigurationReader configurationReader)
+    private CertificateAndConfig? FindDeveloperCertificateFile(
+        ConfigurationReader configurationReader
+    )
     {
         string? certificatePath = null;
-        if (configurationReader.Certificates.TryGetValue("Development", out var certificateConfig) &&
-            certificateConfig.Path == null &&
-            certificateConfig.Password != null &&
-            TryGetCertificatePath(_applicationName, out certificatePath) &&
-            File.Exists(certificatePath))
+        if (
+            configurationReader.Certificates.TryGetValue("Development", out var certificateConfig)
+            && certificateConfig.Path == null
+            && certificateConfig.Password != null
+            && TryGetCertificatePath(_applicationName, out certificatePath)
+            && File.Exists(certificatePath)
+        )
         {
             try
             {
@@ -183,7 +206,13 @@ internal sealed class TlsConfigurationLoader
 
         foreach (var ext in certificate.Extensions)
         {
-            if (string.Equals(ext.Oid?.Value, CertificateManager.AspNetHttpsOid, StringComparison.Ordinal))
+            if (
+                string.Equals(
+                    ext.Oid?.Value,
+                    CertificateManager.AspNetHttpsOid,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 return true;
             }
@@ -192,7 +221,10 @@ internal sealed class TlsConfigurationLoader
         return false;
     }
 
-    private static bool TryGetCertificatePath(string applicationName, [NotNullWhen(true)] out string? path)
+    private static bool TryGetCertificatePath(
+        string applicationName,
+        [NotNullWhen(true)] out string? path
+    )
     {
         // See https://github.com/aspnet/Hosting/issues/1294
         var appData = Environment.GetEnvironmentVariable("APPDATA");

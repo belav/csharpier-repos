@@ -27,7 +27,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             var builder = ImmutableSegmentedDictionary.CreateBuilder<string, string>();
             Assert.Same(EqualityComparer<string>.Default, builder.KeyComparer);
 
-            builder = ImmutableSegmentedDictionary.CreateBuilder<string, string>(StringComparer.Ordinal);
+            builder = ImmutableSegmentedDictionary.CreateBuilder<string, string>(
+                StringComparer.Ordinal
+            );
             Assert.Same(StringComparer.Ordinal, builder.KeyComparer);
         }
 
@@ -93,12 +95,15 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            var builder = ImmutableSegmentedDictionary<int, string?>.Empty
-                .AddRange(Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string?>(n, null)))
+            var builder = ImmutableSegmentedDictionary<int, string?>
+                .Empty.AddRange(
+                    Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string?>(n, null))
+                )
                 .ToBuilder();
             Assert.Equal(
-               Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string?>(n, null)),
-               builder);
+                Enumerable.Range(1, 10).Select(n => new KeyValuePair<int, string?>(n, null)),
+                builder
+            );
 
             var enumerator = builder.GetEnumerator();
             Assert.True(enumerator.MoveNext());
@@ -107,7 +112,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             // Verify that a new enumerator will succeed.
             Assert.Equal(
                 Enumerable.Range(1, 11).Select(n => new KeyValuePair<int, string?>(n, null)),
-                builder);
+                builder
+            );
 
             // Try enumerating further with the previous enumerable now that we've changed the collection.
             Assert.Throws<InvalidOperationException>(() => enumerator.MoveNext());
@@ -117,7 +123,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             // Verify that by obtaining a new enumerator, we can enumerate all the contents.
             Assert.Equal(
                 Enumerable.Range(1, 11).Select(n => new KeyValuePair<int, string?>(n, null)),
-                builder);
+                builder
+            );
         }
 
         [Fact]
@@ -146,10 +153,17 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void RemoveRange()
         {
-            var builder =
-                ImmutableSegmentedDictionary.Create<string, int>()
-                                   .AddRange(new Dictionary<string, int> { { "a", 1 }, { "b", 2 }, { "c", 3 } })
-                                   .ToBuilder();
+            var builder = ImmutableSegmentedDictionary
+                .Create<string, int>()
+                .AddRange(
+                    new Dictionary<string, int>
+                    {
+                        { "a", 1 },
+                        { "b", 2 },
+                        { "c", 3 },
+                    }
+                )
+                .ToBuilder();
             Assert.Equal(3, builder.Count);
             builder.RemoveRange(new[] { "a", "b" });
             Assert.Equal(1, builder.Count);
@@ -178,8 +192,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void KeyComparer()
         {
-            var builder = ImmutableSegmentedDictionary.Create<string, string>()
-                .Add("a", "1").Add("B", "1").ToBuilder();
+            var builder = ImmutableSegmentedDictionary
+                .Create<string, string>()
+                .Add("a", "1")
+                .Add("B", "1")
+                .ToBuilder();
             Assert.Same(EqualityComparer<string>.Default, builder.KeyComparer);
             Assert.True(builder.ContainsKey("a"));
             Assert.False(builder.ContainsKey("A"));
@@ -202,8 +219,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void KeyComparerCollisions()
         {
             // First check where collisions have matching values.
-            var builder = ImmutableSegmentedDictionary.Create<string, string>()
-                .Add("a", "1").Add("A", "1").ToBuilder();
+            var builder = ImmutableSegmentedDictionary
+                .Create<string, string>()
+                .Add("a", "1")
+                .Add("A", "1")
+                .ToBuilder();
             builder.KeyComparer = StringComparer.OrdinalIgnoreCase;
             Assert.Equal(1, builder.Count);
             Assert.True(builder.ContainsKey("a"));
@@ -214,16 +234,26 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.True(set.ContainsKey("a"));
 
             // Now check where collisions have conflicting values.
-            builder = ImmutableSegmentedDictionary.Create<string, string>()
-                .Add("a", "1").Add("A", "2").Add("b", "3").ToBuilder();
-            Assert.Throws<ArgumentException>(null, () => builder.KeyComparer = StringComparer.OrdinalIgnoreCase);
+            builder = ImmutableSegmentedDictionary
+                .Create<string, string>()
+                .Add("a", "1")
+                .Add("A", "2")
+                .Add("b", "3")
+                .ToBuilder();
+            Assert.Throws<ArgumentException>(
+                null,
+                () => builder.KeyComparer = StringComparer.OrdinalIgnoreCase
+            );
         }
 
         [Fact]
         public void KeyComparerEmptyCollection()
         {
-            var builder = ImmutableSegmentedDictionary.Create<string, string>()
-                .Add("a", "1").Add("B", "1").ToBuilder();
+            var builder = ImmutableSegmentedDictionary
+                .Create<string, string>()
+                .Add("a", "1")
+                .Add("B", "1")
+                .ToBuilder();
             Assert.Same(EqualityComparer<string>.Default, builder.KeyComparer);
             builder.KeyComparer = StringComparer.OrdinalIgnoreCase;
             Assert.Same(StringComparer.OrdinalIgnoreCase, builder.KeyComparer);
@@ -235,7 +265,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         public void GetValueOrDefaultOfConcreteType()
         {
             var empty = ImmutableSegmentedDictionary.Create<string, int>().ToBuilder();
-            var populated = ImmutableSegmentedDictionary.Create<string, int>().Add("a", 5).ToBuilder();
+            var populated = ImmutableSegmentedDictionary
+                .Create<string, int>()
+                .Add("a", 5)
+                .ToBuilder();
             Assert.Equal(0, empty.GetValueOrDefault("a"));
             Assert.Equal(1, empty.GetValueOrDefault("a", 1));
             Assert.Equal(5, populated.GetValueOrDefault("a"));
@@ -245,28 +278,42 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact(Skip = "Not implemented: https://github.com/dotnet/roslyn/issues/50657")]
         public void DebuggerAttributesValid()
         {
-            DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableSegmentedDictionary.CreateBuilder<string, int>());
-            ImmutableSegmentedDictionary<int, string>.Builder builder = ImmutableSegmentedDictionary.CreateBuilder<int, string>();
+            DebuggerAttributes.ValidateDebuggerDisplayReferences(
+                ImmutableSegmentedDictionary.CreateBuilder<string, int>()
+            );
+            ImmutableSegmentedDictionary<int, string>.Builder builder =
+                ImmutableSegmentedDictionary.CreateBuilder<int, string>();
             builder.Add(1, "One");
             builder.Add(2, "Two");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(builder);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State == DebuggerBrowsableState.RootHidden);
-            KeyValuePair<int, string>[]? items = itemProperty.GetValue(info.Instance) as KeyValuePair<int, string>[];
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                builder
+            );
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
+                == DebuggerBrowsableState.RootHidden
+            );
+            KeyValuePair<int, string>[]? items =
+                itemProperty.GetValue(info.Instance) as KeyValuePair<int, string>[];
             Assert.Equal(builder, items);
         }
 
         [Fact(Skip = "Not implemented: https://github.com/dotnet/roslyn/issues/50657")]
         public static void TestDebuggerAttributes_Null()
         {
-            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableSegmentedDictionary.Create<string, int>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object?)null));
+            Type proxyType = DebuggerAttributes.GetProxyType(
+                ImmutableSegmentedDictionary.Create<string, int>()
+            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() =>
+                Activator.CreateInstance(proxyType, (object?)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
         [Fact]
         public void ToImmutableDictionary()
         {
-            ImmutableSegmentedDictionary<int, int>.Builder builder = ImmutableSegmentedDictionary.CreateBuilder<int, int>();
+            ImmutableSegmentedDictionary<int, int>.Builder builder =
+                ImmutableSegmentedDictionary.CreateBuilder<int, int>();
             builder.Add(0, 0);
             builder.Add(1, 1);
             builder.Add(2, 2);
@@ -285,27 +332,48 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.False(dictionary.IsEmpty);
 
             ImmutableSegmentedDictionary<int, int>.Builder? nullBuilder = null;
-            Assert.Throws<ArgumentNullException>("builder", () => nullBuilder!.ToImmutableSegmentedDictionary());
+            Assert.Throws<ArgumentNullException>(
+                "builder",
+                () => nullBuilder!.ToImmutableSegmentedDictionary()
+            );
         }
 
-        protected override IImmutableDictionary<TKey, TValue> GetEmptyImmutableDictionary<TKey, TValue>()
+        protected override IImmutableDictionary<TKey, TValue> GetEmptyImmutableDictionary<
+            TKey,
+            TValue
+        >()
         {
             return ImmutableSegmentedDictionary.Create<TKey, TValue>();
         }
 
-        protected override IImmutableDictionary<string, TValue> Empty<TValue>(StringComparer comparer)
+        protected override IImmutableDictionary<string, TValue> Empty<TValue>(
+            StringComparer comparer
+        )
         {
             return ImmutableSegmentedDictionary.Create<string, TValue>(comparer);
         }
 
-        protected override bool TryGetKeyHelper<TKey, TValue>(IDictionary<TKey, TValue> dictionary, TKey equalKey, out TKey actualKey)
+        protected override bool TryGetKeyHelper<TKey, TValue>(
+            IDictionary<TKey, TValue> dictionary,
+            TKey equalKey,
+            out TKey actualKey
+        )
         {
-            return ((ImmutableSegmentedDictionary<TKey, TValue>.Builder)dictionary).TryGetKey(equalKey, out actualKey);
+            return ((ImmutableSegmentedDictionary<TKey, TValue>.Builder)dictionary).TryGetKey(
+                equalKey,
+                out actualKey
+            );
         }
 
-        protected override IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(IImmutableDictionary<TKey, TValue>? basis)
+        protected override IDictionary<TKey, TValue> GetBuilder<TKey, TValue>(
+            IImmutableDictionary<TKey, TValue>? basis
+        )
         {
-            return ((ImmutableSegmentedDictionary<TKey, TValue>)(basis ?? GetEmptyImmutableDictionary<TKey, TValue>())).ToBuilder();
+            return (
+                (ImmutableSegmentedDictionary<TKey, TValue>)(
+                    basis ?? GetEmptyImmutableDictionary<TKey, TValue>()
+                )
+            ).ToBuilder();
         }
     }
 }

@@ -1,70 +1,75 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Class:    OperatingSystem
 **
 **
-** Purpose: 
+** Purpose:
 **
 **
 ===========================================================*/
-namespace System {
-    using System.Runtime.Serialization;
-    using System.Globalization;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
+namespace System
+{
     using System.Diagnostics.Contracts;
-
+    using System.Globalization;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Serialization;
+    using System.Security.Permissions;
 
     [ComVisible(true)]
     [Serializable]
-    public sealed class OperatingSystem : ICloneable , ISerializable
+    public sealed class OperatingSystem : ICloneable, ISerializable
     {
         private Version _version;
         private PlatformID _platform;
         private string _servicePack;
         private string _versionString;
 
-        private OperatingSystem()
-        {
-        }
+        private OperatingSystem() { }
 
-        public OperatingSystem(PlatformID platform, Version version) : this(platform, version, null) {
-        }
-    
-        internal OperatingSystem(PlatformID platform, Version version, string servicePack) {
+        public OperatingSystem(PlatformID platform, Version version)
+            : this(platform, version, null) { }
+
+        internal OperatingSystem(PlatformID platform, Version version, string servicePack)
+        {
 #if !FEATURE_LEGACYNETCF
-            if( platform < PlatformID.Win32S || platform > PlatformID.MacOSX) {
+            if (platform < PlatformID.Win32S || platform > PlatformID.MacOSX)
+            {
 #else // FEATURE_LEGACYNETCF
-            if( platform < PlatformID.Win32S || platform > PlatformID.NokiaS60) {
+            if (platform < PlatformID.Win32S || platform > PlatformID.NokiaS60)
+            {
 #endif // FEATURE_LEGACYNETCF
                 throw new ArgumentException(
                     Environment.GetResourceString("Arg_EnumIllegalVal", (int)platform),
-                    "platform");
+                    "platform"
+                );
             }
 
-            if ((Object) version == null)
+            if ((Object)version == null)
                 throw new ArgumentNullException("version");
             Contract.EndContractBlock();
 
             _platform = platform;
-            _version = (Version) version.Clone();
+            _version = (Version)version.Clone();
             _servicePack = servicePack;
         }
-        
-        private OperatingSystem(SerializationInfo info, StreamingContext context) {            
-            SerializationInfoEnumerator enumerator = info.GetEnumerator();                        
-            while( enumerator.MoveNext()) {
-                switch( enumerator.Name) {
+
+        private OperatingSystem(SerializationInfo info, StreamingContext context)
+        {
+            SerializationInfoEnumerator enumerator = info.GetEnumerator();
+            while (enumerator.MoveNext())
+            {
+                switch (enumerator.Name)
+                {
                     case "_version":
-                        _version = (Version) info.GetValue("_version", typeof(Version));
+                        _version = (Version)info.GetValue("_version", typeof(Version));
                         break;
                     case "_platform":
-                        _platform = (PlatformID) info.GetValue("_platform", typeof(PlatformID));
+                        _platform = (PlatformID)info.GetValue("_platform", typeof(PlatformID));
                         break;
                     case "_servicePack":
                         _servicePack = info.GetString("_servicePack");
@@ -72,14 +77,19 @@ namespace System {
                 }
             }
 
-            if (_version == null ) {
-                throw new SerializationException(Environment.GetResourceString("Serialization_MissField", "_version"));
+            if (_version == null)
+            {
+                throw new SerializationException(
+                    Environment.GetResourceString("Serialization_MissField", "_version")
+                );
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated_required
-        public void GetObjectData(SerializationInfo info, StreamingContext context) {
-            if( info == null ) {
+        [System.Security.SecurityCritical] // auto-generated_required
+        public void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            if (info == null)
+            {
                 throw new ArgumentNullException("info");
             }
             Contract.EndContractBlock();
@@ -87,50 +97,58 @@ namespace System {
             info.AddValue("_version", _version);
             info.AddValue("_platform", _platform);
             info.AddValue("_servicePack", _servicePack);
-        }        
+        }
 
-        public PlatformID Platform {
+        public PlatformID Platform
+        {
             get { return _platform; }
         }
-        
-        public string ServicePack { 
-            get { 
-                if( _servicePack == null) {
+
+        public string ServicePack
+        {
+            get
+            {
+                if (_servicePack == null)
+                {
                     return string.Empty;
                 }
 
                 return _servicePack;
             }
-        }    
+        }
 
-        public Version Version {
+        public Version Version
+        {
             get { return _version; }
         }
-    
-        public Object Clone() {
-            return new OperatingSystem(_platform,
-                                       _version, _servicePack );
+
+        public Object Clone()
+        {
+            return new OperatingSystem(_platform, _version, _servicePack);
         }
-    
-        public override String ToString() {
+
+        public override String ToString()
+        {
             return VersionString;
         }
 
-        public String VersionString {
-            get {
-                if(_versionString != null) {
+        public String VersionString
+        {
+            get
+            {
+                if (_versionString != null)
+                {
                     return _versionString;
                 }
 
                 String os;
-                switch(_platform)
+                switch (_platform)
                 {
                     case PlatformID.Win32NT:
                         os = "Microsoft Windows NT ";
                         break;
                     case PlatformID.Win32Windows:
-                        if ((_version.Major > 4) ||
-                            ((_version.Major == 4) && (_version.Minor > 0)))
+                        if ((_version.Major > 4) || ((_version.Major == 4) && (_version.Minor > 0)))
                             os = "Microsoft Windows 98 ";
                         else
                             os = "Microsoft Windows 95 ";
@@ -151,14 +169,16 @@ namespace System {
                         break;
                 }
 
-                if( String.IsNullOrEmpty(_servicePack)) {
+                if (String.IsNullOrEmpty(_servicePack))
+                {
                     _versionString = os + _version.ToString();
                 }
-                else {
+                else
+                {
                     _versionString = os + _version.ToString(3) + " " + _servicePack;
                 }
 
-                return _versionString;            
+                return _versionString;
             }
         }
     }

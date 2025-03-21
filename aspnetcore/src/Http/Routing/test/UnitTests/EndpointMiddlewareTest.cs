@@ -29,7 +29,11 @@ public class EndpointMiddlewareTest
             return Task.CompletedTask;
         };
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, next, RouteOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            next,
+            RouteOptions
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -53,7 +57,11 @@ public class EndpointMiddlewareTest
             return Task.CompletedTask;
         };
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, next, RouteOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            next,
+            RouteOptions
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -76,14 +84,20 @@ public class EndpointMiddlewareTest
             return Task.CompletedTask;
         };
 
-        httpContext.SetEndpoint(new Endpoint(endpointFunc, EndpointMetadataCollection.Empty, "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint(endpointFunc, EndpointMetadataCollection.Empty, "Test")
+        );
 
         RequestDelegate next = (c) =>
         {
             throw new InvalidTimeZoneException("Should not be called");
         };
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, next, RouteOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            next,
+            RouteOptions
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -96,26 +110,36 @@ public class EndpointMiddlewareTest
     public async Task Invoke_WithEndpoint_ThrowsIfAuthAttributesWereFound_ButAuthMiddlewareNotInvoked()
     {
         // Arrange
-        var expected = "Endpoint Test contains authorization metadata, but a middleware was not found that supports authorization." +
-            Environment.NewLine +
-            "Configure your application startup by adding app.UseAuthorization() in the application startup code. " +
-            "If there are calls to app.UseRouting() and app.UseEndpoints(...), the call to app.UseAuthorization() must go between them.";
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new ServiceProvider()
-        };
+        var expected =
+            "Endpoint Test contains authorization metadata, but a middleware was not found that supports authorization."
+            + Environment.NewLine
+            + "Configure your application startup by adding app.UseAuthorization() in the application startup code. "
+            + "If there are calls to app.UseRouting() and app.UseEndpoints(...), the call to app.UseAuthorization() must go between them.";
+        var httpContext = new DefaultHttpContext { RequestServices = new ServiceProvider() };
 
         RequestDelegate throwIfCalled = (c) =>
         {
             throw new InvalidTimeZoneException("Should not be called");
         };
 
-        httpContext.SetEndpoint(new Endpoint(throwIfCalled, new EndpointMetadataCollection(Mock.Of<IAuthorizeData>()), "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint(
+                throwIfCalled,
+                new EndpointMetadataCollection(Mock.Of<IAuthorizeData>()),
+                "Test"
+            )
+        );
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, throwIfCalled, RouteOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            throwIfCalled,
+            RouteOptions
+        );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => middleware.Invoke(httpContext));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            middleware.Invoke(httpContext)
+        );
 
         // Assert
         Assert.Equal(expected, ex.Message);
@@ -125,26 +149,36 @@ public class EndpointMiddlewareTest
     public async Task Invoke_WithEndpointWithNullRequestDelegate_ThrowsIfAuthAttributesWereFound_ButAuthMiddlewareNotInvoked()
     {
         // Arrange
-        var expected = "Endpoint Test contains authorization metadata, but a middleware was not found that supports authorization." +
-            Environment.NewLine +
-            "Configure your application startup by adding app.UseAuthorization() in the application startup code. " +
-            "If there are calls to app.UseRouting() and app.UseEndpoints(...), the call to app.UseAuthorization() must go between them.";
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new ServiceProvider()
-        };
+        var expected =
+            "Endpoint Test contains authorization metadata, but a middleware was not found that supports authorization."
+            + Environment.NewLine
+            + "Configure your application startup by adding app.UseAuthorization() in the application startup code. "
+            + "If there are calls to app.UseRouting() and app.UseEndpoints(...), the call to app.UseAuthorization() must go between them.";
+        var httpContext = new DefaultHttpContext { RequestServices = new ServiceProvider() };
 
         RequestDelegate throwIfCalled = (c) =>
         {
             throw new InvalidTimeZoneException("Should not be called");
         };
 
-        httpContext.SetEndpoint(new Endpoint(requestDelegate: null, new EndpointMetadataCollection(Mock.Of<IAuthorizeData>()), "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint(
+                requestDelegate: null,
+                new EndpointMetadataCollection(Mock.Of<IAuthorizeData>()),
+                "Test"
+            )
+        );
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, throwIfCalled, RouteOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            throwIfCalled,
+            RouteOptions
+        );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => middleware.Invoke(httpContext));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            middleware.Invoke(httpContext)
+        );
 
         // Assert
         Assert.Equal(expected, ex.Message);
@@ -154,10 +188,7 @@ public class EndpointMiddlewareTest
     public async Task Invoke_WithEndpoint_WorksIfAuthAttributesWereFound_AndAuthMiddlewareInvoked()
     {
         // Arrange
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new ServiceProvider()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = new ServiceProvider() };
 
         var calledEndpoint = false;
         RequestDelegate endpointFunc = (c) =>
@@ -166,7 +197,13 @@ public class EndpointMiddlewareTest
             return Task.CompletedTask;
         };
 
-        httpContext.SetEndpoint(new Endpoint(endpointFunc, new EndpointMetadataCollection(Mock.Of<IAuthorizeData>()), "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint(
+                endpointFunc,
+                new EndpointMetadataCollection(Mock.Of<IAuthorizeData>()),
+                "Test"
+            )
+        );
 
         httpContext.Items[EndpointMiddleware.AuthorizationMiddlewareInvokedKey] = true;
 
@@ -175,7 +212,11 @@ public class EndpointMiddlewareTest
             throw new InvalidTimeZoneException("Should not be called");
         };
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, next, RouteOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            next,
+            RouteOptions
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -188,10 +229,7 @@ public class EndpointMiddlewareTest
     public async Task Invoke_WithEndpoint_DoesNotThrowIfUnhandledAuthAttributesWereFound_ButSuppressedViaOptions()
     {
         // Arrange
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new ServiceProvider()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = new ServiceProvider() };
 
         var calledEndpoint = false;
         RequestDelegate endpointFunc = (c) =>
@@ -200,16 +238,28 @@ public class EndpointMiddlewareTest
             return Task.CompletedTask;
         };
 
-        httpContext.SetEndpoint(new Endpoint(endpointFunc, new EndpointMetadataCollection(Mock.Of<IAuthorizeData>()), "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint(
+                endpointFunc,
+                new EndpointMetadataCollection(Mock.Of<IAuthorizeData>()),
+                "Test"
+            )
+        );
 
-        var routeOptions = Options.Create(new RouteOptions { SuppressCheckForUnhandledSecurityMetadata = true });
+        var routeOptions = Options.Create(
+            new RouteOptions { SuppressCheckForUnhandledSecurityMetadata = true }
+        );
 
         RequestDelegate next = (c) =>
         {
             throw new InvalidTimeZoneException("Should not be called");
         };
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, next, routeOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            next,
+            routeOptions
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -222,26 +272,36 @@ public class EndpointMiddlewareTest
     public async Task Invoke_WithEndpoint_ThrowsIfCorsMetadataWasFound_ButCorsMiddlewareNotInvoked()
     {
         // Arrange
-        var expected = "Endpoint Test contains CORS metadata, but a middleware was not found that supports CORS." +
-            Environment.NewLine +
-            "Configure your application startup by adding app.UseCors() in the application startup code. " +
-            "If there are calls to app.UseRouting() and app.UseEndpoints(...), the call to app.UseCors() must go between them.";
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new ServiceProvider()
-        };
+        var expected =
+            "Endpoint Test contains CORS metadata, but a middleware was not found that supports CORS."
+            + Environment.NewLine
+            + "Configure your application startup by adding app.UseCors() in the application startup code. "
+            + "If there are calls to app.UseRouting() and app.UseEndpoints(...), the call to app.UseCors() must go between them.";
+        var httpContext = new DefaultHttpContext { RequestServices = new ServiceProvider() };
 
         RequestDelegate throwIfCalled = (c) =>
         {
             throw new InvalidTimeZoneException("Should not be called");
         };
 
-        httpContext.SetEndpoint(new Endpoint(throwIfCalled, new EndpointMetadataCollection(Mock.Of<ICorsMetadata>()), "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint(
+                throwIfCalled,
+                new EndpointMetadataCollection(Mock.Of<ICorsMetadata>()),
+                "Test"
+            )
+        );
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, throwIfCalled, RouteOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            throwIfCalled,
+            RouteOptions
+        );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => middleware.Invoke(httpContext));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            middleware.Invoke(httpContext)
+        );
 
         // Assert
         Assert.Equal(expected, ex.Message);
@@ -251,10 +311,7 @@ public class EndpointMiddlewareTest
     public async Task Invoke_WithEndpoint_WorksIfCorsMetadataWasFound_AndCorsMiddlewareInvoked()
     {
         // Arrange
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new ServiceProvider()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = new ServiceProvider() };
 
         var calledEndpoint = false;
         RequestDelegate endpointFunc = (c) =>
@@ -263,7 +320,13 @@ public class EndpointMiddlewareTest
             return Task.CompletedTask;
         };
 
-        httpContext.SetEndpoint(new Endpoint(endpointFunc, new EndpointMetadataCollection(Mock.Of<ICorsMetadata>()), "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint(
+                endpointFunc,
+                new EndpointMetadataCollection(Mock.Of<ICorsMetadata>()),
+                "Test"
+            )
+        );
 
         httpContext.Items[EndpointMiddleware.CorsMiddlewareInvokedKey] = true;
 
@@ -272,7 +335,11 @@ public class EndpointMiddlewareTest
             throw new InvalidTimeZoneException("Should not be called");
         };
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, next, RouteOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            next,
+            RouteOptions
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -285,10 +352,7 @@ public class EndpointMiddlewareTest
     public async Task Invoke_WithEndpoint_DoesNotThrowIfUnhandledCorsAttributesWereFound_ButSuppressedViaOptions()
     {
         // Arrange
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new ServiceProvider()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = new ServiceProvider() };
 
         var calledEndpoint = false;
         RequestDelegate endpointFunc = (c) =>
@@ -297,16 +361,28 @@ public class EndpointMiddlewareTest
             return Task.CompletedTask;
         };
 
-        httpContext.SetEndpoint(new Endpoint(endpointFunc, new EndpointMetadataCollection(Mock.Of<IAuthorizeData>()), "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint(
+                endpointFunc,
+                new EndpointMetadataCollection(Mock.Of<IAuthorizeData>()),
+                "Test"
+            )
+        );
 
-        var routeOptions = Options.Create(new RouteOptions { SuppressCheckForUnhandledSecurityMetadata = true });
+        var routeOptions = Options.Create(
+            new RouteOptions { SuppressCheckForUnhandledSecurityMetadata = true }
+        );
 
         RequestDelegate next = (c) =>
         {
             throw new InvalidTimeZoneException("Should not be called");
         };
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, next, routeOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            next,
+            routeOptions
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -319,27 +395,37 @@ public class EndpointMiddlewareTest
     public async Task Invoke_WithEndpoint_ThrowsIfAntiforgeryMetadataWasFound_ButAntiforgeryMiddlewareNotInvoked()
     {
         // Arrange
-        var expected = "Endpoint Test contains anti-forgery metadata, but a middleware was not found that supports anti-forgery." +
-            Environment.NewLine +
-            "Configure your application startup by adding app.UseAntiforgery() in the application startup code. " +
-            "If there are calls to app.UseRouting() and app.UseEndpoints(...), the call to app.UseAntiforgery() must go between them. " +
-            "Calls to app.UseAntiforgery() must be placed after calls to app.UseAuthentication() and app.UseAuthorization().";
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new ServiceProvider()
-        };
+        var expected =
+            "Endpoint Test contains anti-forgery metadata, but a middleware was not found that supports anti-forgery."
+            + Environment.NewLine
+            + "Configure your application startup by adding app.UseAntiforgery() in the application startup code. "
+            + "If there are calls to app.UseRouting() and app.UseEndpoints(...), the call to app.UseAntiforgery() must go between them. "
+            + "Calls to app.UseAntiforgery() must be placed after calls to app.UseAuthentication() and app.UseAuthorization().";
+        var httpContext = new DefaultHttpContext { RequestServices = new ServiceProvider() };
 
         RequestDelegate throwIfCalled = (c) =>
         {
             throw new InvalidTimeZoneException("Should not be called");
         };
 
-        httpContext.SetEndpoint(new Endpoint(throwIfCalled, new EndpointMetadataCollection(AntiforgeryMetadata.ValidationRequired), "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint(
+                throwIfCalled,
+                new EndpointMetadataCollection(AntiforgeryMetadata.ValidationRequired),
+                "Test"
+            )
+        );
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, throwIfCalled, RouteOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            throwIfCalled,
+            RouteOptions
+        );
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => middleware.Invoke(httpContext));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            middleware.Invoke(httpContext)
+        );
 
         // Assert
         Assert.Equal(expected, ex.Message);
@@ -349,10 +435,7 @@ public class EndpointMiddlewareTest
     public async Task Invoke_WithEndpoint_WorksIfAntiforgeryMetadataWasFound_AndAntiforgeryMiddlewareInvoked()
     {
         // Arrange
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new ServiceProvider()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = new ServiceProvider() };
 
         var calledEndpoint = false;
         RequestDelegate endpointFunc = (c) =>
@@ -361,7 +444,13 @@ public class EndpointMiddlewareTest
             return Task.CompletedTask;
         };
 
-        httpContext.SetEndpoint(new Endpoint(endpointFunc, new EndpointMetadataCollection(AntiforgeryMetadata.ValidationRequired), "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint(
+                endpointFunc,
+                new EndpointMetadataCollection(AntiforgeryMetadata.ValidationRequired),
+                "Test"
+            )
+        );
 
         httpContext.Items[EndpointMiddleware.AntiforgeryMiddlewareWithEndpointInvokedKey] = true;
 
@@ -370,7 +459,11 @@ public class EndpointMiddlewareTest
             throw new InvalidTimeZoneException("Should not be called");
         };
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, next, RouteOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            next,
+            RouteOptions
+        );
 
         // Act
         await middleware.Invoke(httpContext);
@@ -383,10 +476,7 @@ public class EndpointMiddlewareTest
     public async Task Invoke_WithEndpoint_DoesNotThrowIfUnhandledAntiforgeryMetadataWereFound_ButSuppressedViaOptions()
     {
         // Arrange
-        var httpContext = new DefaultHttpContext
-        {
-            RequestServices = new ServiceProvider()
-        };
+        var httpContext = new DefaultHttpContext { RequestServices = new ServiceProvider() };
 
         var calledEndpoint = false;
         RequestDelegate endpointFunc = (c) =>
@@ -395,16 +485,28 @@ public class EndpointMiddlewareTest
             return Task.CompletedTask;
         };
 
-        httpContext.SetEndpoint(new Endpoint(endpointFunc, new EndpointMetadataCollection(AntiforgeryMetadata.ValidationRequired), "Test"));
+        httpContext.SetEndpoint(
+            new Endpoint(
+                endpointFunc,
+                new EndpointMetadataCollection(AntiforgeryMetadata.ValidationRequired),
+                "Test"
+            )
+        );
 
-        var routeOptions = Options.Create(new RouteOptions { SuppressCheckForUnhandledSecurityMetadata = true });
+        var routeOptions = Options.Create(
+            new RouteOptions { SuppressCheckForUnhandledSecurityMetadata = true }
+        );
 
         RequestDelegate next = (c) =>
         {
             throw new InvalidTimeZoneException("Should not be called");
         };
 
-        var middleware = new EndpointMiddleware(NullLogger<EndpointMiddleware>.Instance, next, routeOptions);
+        var middleware = new EndpointMiddleware(
+            NullLogger<EndpointMiddleware>.Instance,
+            next,
+            routeOptions
+        );
 
         // Act
         await middleware.Invoke(httpContext);

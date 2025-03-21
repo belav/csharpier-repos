@@ -13,64 +13,64 @@ public class PathTokenizerTest
         get
         {
             return new TheoryData<string, StringSegment[]>
+            {
+                { string.Empty, new StringSegment[] { } },
+                { "/", new StringSegment[] { } },
+                { "//", new StringSegment[] { new StringSegment("//", 1, 0) } },
                 {
-                    { string.Empty, new StringSegment[] { } },
-                    { "/", new StringSegment[] { } },
-                    { "//", new StringSegment[] { new StringSegment("//", 1, 0) } },
+                    "///",
+                    new StringSegment[]
                     {
-                        "///",
-                        new StringSegment[]
-                        {
-                            new StringSegment("///", 1, 0),
-                            new StringSegment("///", 2, 0),
-                        }
-                    },
+                        new StringSegment("///", 1, 0),
+                        new StringSegment("///", 2, 0),
+                    }
+                },
+                {
+                    "////",
+                    new StringSegment[]
                     {
-                        "////",
-                        new StringSegment[]
-                        {
-                            new StringSegment("////", 1, 0),
-                            new StringSegment("////", 2, 0),
-                            new StringSegment("////", 3, 0),
-                        }
-                    },
-                    { "/zero", new StringSegment[] { new StringSegment("/zero", 1, 4) } },
-                    { "/zero/", new StringSegment[] { new StringSegment("/zero/", 1, 4) } },
+                        new StringSegment("////", 1, 0),
+                        new StringSegment("////", 2, 0),
+                        new StringSegment("////", 3, 0),
+                    }
+                },
+                { "/zero", new StringSegment[] { new StringSegment("/zero", 1, 4) } },
+                { "/zero/", new StringSegment[] { new StringSegment("/zero/", 1, 4) } },
+                {
+                    "/zero/one",
+                    new StringSegment[]
                     {
-                        "/zero/one",
-                        new StringSegment[]
-                        {
-                            new StringSegment("/zero/one", 1, 4),
-                            new StringSegment("/zero/one", 6, 3),
-                        }
-                    },
+                        new StringSegment("/zero/one", 1, 4),
+                        new StringSegment("/zero/one", 6, 3),
+                    }
+                },
+                {
+                    "/zero/one/",
+                    new StringSegment[]
                     {
-                        "/zero/one/",
-                        new StringSegment[]
-                        {
-                            new StringSegment("/zero/one/", 1, 4),
-                            new StringSegment("/zero/one/", 6, 3),
-                        }
-                    },
+                        new StringSegment("/zero/one/", 1, 4),
+                        new StringSegment("/zero/one/", 6, 3),
+                    }
+                },
+                {
+                    "/zero/one/two",
+                    new StringSegment[]
                     {
-                        "/zero/one/two",
-                        new StringSegment[]
-                        {
-                            new StringSegment("/zero/one/two", 1, 4),
-                            new StringSegment("/zero/one/two", 6, 3),
-                            new StringSegment("/zero/one/two", 10, 3),
-                        }
-                    },
+                        new StringSegment("/zero/one/two", 1, 4),
+                        new StringSegment("/zero/one/two", 6, 3),
+                        new StringSegment("/zero/one/two", 10, 3),
+                    }
+                },
+                {
+                    "/zero/one/two/",
+                    new StringSegment[]
                     {
-                        "/zero/one/two/",
-                        new StringSegment[]
-                        {
-                            new StringSegment("/zero/one/two/", 1, 4),
-                            new StringSegment("/zero/one/two/", 6, 3),
-                            new StringSegment("/zero/one/two/", 10, 3),
-                        }
-                    },
-                };
+                        new StringSegment("/zero/one/two/", 1, 4),
+                        new StringSegment("/zero/one/two/", 6, 3),
+                        new StringSegment("/zero/one/two/", 10, 3),
+                    }
+                },
+            };
         }
     }
 

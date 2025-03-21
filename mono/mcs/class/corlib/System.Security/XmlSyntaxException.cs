@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,40 +31,34 @@ using System.Globalization;
 using System.Runtime.InteropServices;
 using System.Runtime.Serialization;
 
-namespace System.Security {
+namespace System.Security
+{
+    [Serializable]
+    [ComVisible(true)]
+    public sealed class XmlSyntaxException : SystemException
+    {
+        // Constructors
+        public XmlSyntaxException() { }
 
-	[Serializable]
-	[ComVisible (true)]
-	public sealed class XmlSyntaxException : SystemException {
+        public XmlSyntaxException(int lineNumber)
+            : base(String.Format(Locale.GetText("Invalid syntax on line {0}."), lineNumber)) { }
 
-		// Constructors
-		public XmlSyntaxException ()
-		{
-		}
+        public XmlSyntaxException(int lineNumber, string message)
+            : base(
+                String.Format(
+                    Locale.GetText("Invalid syntax on line {0} - {1}."),
+                    lineNumber,
+                    message
+                )
+            ) { }
 
-		public XmlSyntaxException (int lineNumber)
-			: base (String.Format (Locale.GetText ("Invalid syntax on line {0}."), lineNumber))
-		{
-		}
+        public XmlSyntaxException(string message)
+            : base(message) { }
 
-		public XmlSyntaxException (int lineNumber, string message)
-			: base (String.Format (Locale.GetText ("Invalid syntax on line {0} - {1}."), lineNumber, message))
-		{
-		}
+        public XmlSyntaxException(string message, Exception inner)
+            : base(message, inner) { }
 
-		public XmlSyntaxException (string message) 
-			: base (message)
-		{
-		}
-
-		public XmlSyntaxException (string message, Exception inner) 
-			: base (message, inner) 
-		{
-		}
-
-		internal XmlSyntaxException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-		}
-	}
+        internal XmlSyntaxException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
+    }
 }

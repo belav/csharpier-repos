@@ -17,9 +17,8 @@ public static class GitHub_18362
 {
     private static bool AreSameInfinity(double d1, double d2)
     {
-        return
-            double.IsNegativeInfinity(d1) == double.IsNegativeInfinity(d2) &&
-            double.IsPositiveInfinity(d1) == double.IsPositiveInfinity(d2);
+        return double.IsNegativeInfinity(d1) == double.IsNegativeInfinity(d2)
+            && double.IsPositiveInfinity(d1) == double.IsPositiveInfinity(d2);
     }
 
     private static bool IsDiffTolerable(double d1, double d2)
@@ -37,31 +36,58 @@ public static class GitHub_18362
         return Math.Abs(diffRatio) < 1;
     }
 
-    private static void VerifyRealImaginaryProperties(Complex complex, double real, double imaginary, [CallerLineNumber] int lineNumber = 0)
+    private static void VerifyRealImaginaryProperties(
+        Complex complex,
+        double real,
+        double imaginary,
+        [CallerLineNumber] int lineNumber = 0
+    )
     {
         if (!real.Equals(complex.Real) && !IsDiffTolerable(complex.Real, real))
         {
-            Console.WriteLine("Failure at line {0}. Expected real: {1}. Actual real: {2}", lineNumber, real, complex.Real);
+            Console.WriteLine(
+                "Failure at line {0}. Expected real: {1}. Actual real: {2}",
+                lineNumber,
+                real,
+                complex.Real
+            );
             throw new Exception();
         }
         if (!imaginary.Equals(complex.Imaginary) && !IsDiffTolerable(complex.Imaginary, imaginary))
         {
-            Console.WriteLine("Failure at line {0}. Expected imaginary: {1}. Actual imaginary: {2}", lineNumber, imaginary, complex.Imaginary);
+            Console.WriteLine(
+                "Failure at line {0}. Expected imaginary: {1}. Actual imaginary: {2}",
+                lineNumber,
+                imaginary,
+                complex.Imaginary
+            );
             throw new Exception();
         }
     }
 
-
-    private static void VerifyMagnitudePhaseProperties(Complex complex, double magnitude, double phase, [CallerLineNumber] int lineNumber = 0)
+    private static void VerifyMagnitudePhaseProperties(
+        Complex complex,
+        double magnitude,
+        double phase,
+        [CallerLineNumber] int lineNumber = 0
+    )
     {
         // The magnitude (m) of a complex number (z = x + yi) is the absolute value - |z| = sqrt(x^2 + y^2)
         // Verification is done using the square of the magnitude since m^2 = x^2 + y^2
         double expectedMagnitudeSquared = magnitude * magnitude;
         double actualMagnitudeSquared = complex.Magnitude * complex.Magnitude;
 
-        if (!expectedMagnitudeSquared.Equals(actualMagnitudeSquared) && !IsDiffTolerable(actualMagnitudeSquared, expectedMagnitudeSquared))
+        if (
+            !expectedMagnitudeSquared.Equals(actualMagnitudeSquared)
+            && !IsDiffTolerable(actualMagnitudeSquared, expectedMagnitudeSquared)
+        )
         {
-            Console.WriteLine("Failure at line {0}. Expected magnitude squared: {1}. Actual magnitude squared: {2}", lineNumber, expectedMagnitudeSquared, actualMagnitudeSquared);
+            Console.WriteLine(
+                "Failure at line {0}. Expected magnitude squared: {1}. Actual magnitude squared: {2}",
+                lineNumber,
+                expectedMagnitudeSquared,
+                actualMagnitudeSquared
+            );
             throw new Exception();
         }
 
@@ -80,7 +106,12 @@ public static class GitHub_18362
 
         if (!phase.Equals(complex.Phase) && !IsDiffTolerable(complex.Phase, phase))
         {
-            Console.WriteLine("Failure at line {0}. Expected phase: {1}. Actual phase: {2}", lineNumber, phase, complex.Phase);
+            Console.WriteLine(
+                "Failure at line {0}. Expected phase: {1}. Actual phase: {2}",
+                lineNumber,
+                phase,
+                complex.Phase
+            );
             throw new Exception();
         }
     }

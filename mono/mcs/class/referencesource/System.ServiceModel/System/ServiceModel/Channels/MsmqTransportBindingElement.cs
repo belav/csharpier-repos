@@ -3,12 +3,11 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Channels
 {
-    using System.ServiceModel.Activation;
     using System.Collections.Generic;
     using System.Net.Security;
     using System.Runtime.Serialization;
+    using System.ServiceModel.Activation;
     using System.ServiceModel.Security;
-
     using System.Xml;
 
     public sealed class MsmqTransportBindingElement : MsmqBindingElementBase
@@ -38,23 +37,27 @@ namespace System.ServiceModel.Channels
                     case QueueTransferProtocol.SrmpSecure:
                         return MsmqUri.SrmpsAddressTranslator;
                     default:
-                        return this.useActiveDirectory ? MsmqUri.ActiveDirectoryAddressTranslator : MsmqUri.NetMsmqAddressTranslator;
+                        return this.useActiveDirectory
+                            ? MsmqUri.ActiveDirectoryAddressTranslator
+                            : MsmqUri.NetMsmqAddressTranslator;
                 }
             }
         }
 
         public int MaxPoolSize
         {
-            get
-            {
-                return this.maxPoolSize;
-            }
+            get { return this.maxPoolSize; }
             set
             {
                 if (value < 0)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentOutOfRangeException("value", value, SR.GetString(SR.MsmqNonNegativeArgumentExpected)));
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.MsmqNonNegativeArgumentExpected)
+                        )
+                    );
                 }
                 this.maxPoolSize = value;
             }
@@ -62,44 +65,31 @@ namespace System.ServiceModel.Channels
 
         public QueueTransferProtocol QueueTransferProtocol
         {
-            get
-            {
-                return this.queueTransferProtocol;
-            }
+            get { return this.queueTransferProtocol; }
             set
             {
                 if (!QueueTransferProtocolHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 this.queueTransferProtocol = value;
             }
         }
 
         public override string Scheme
         {
-            get
-            {
-                return "net.msmq";
-            }
+            get { return "net.msmq"; }
         }
 
         public bool UseActiveDirectory
         {
-            get
-            {
-                return this.useActiveDirectory;
-            }
-            set
-            {
-                this.useActiveDirectory = value;
-            }
+            get { return this.useActiveDirectory; }
+            set { this.useActiveDirectory = value; }
         }
 
         internal override string WsdlTransportUri
         {
-            get
-            {
-                return TransportPolicyConstants.MsmqTransportUri;
-            }
+            get { return TransportPolicyConstants.MsmqTransportUri; }
         }
 
         public override BindingElement Clone()
@@ -109,17 +99,23 @@ namespace System.ServiceModel.Channels
 
         public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
         {
-            return (typeof(TChannel) == typeof(IOutputChannel)
-                || typeof(TChannel) == typeof(IOutputSessionChannel));
+            return (
+                typeof(TChannel) == typeof(IOutputChannel)
+                || typeof(TChannel) == typeof(IOutputSessionChannel)
+            );
         }
 
         public override bool CanBuildChannelListener<TChannel>(BindingContext context)
         {
-            return (typeof(TChannel) == typeof(IInputChannel)
-                || typeof(TChannel) == typeof(IInputSessionChannel));
+            return (
+                typeof(TChannel) == typeof(IInputChannel)
+                || typeof(TChannel) == typeof(IInputSessionChannel)
+            );
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -128,23 +124,32 @@ namespace System.ServiceModel.Channels
 
             if (typeof(TChannel) == typeof(IOutputChannel))
             {
-                MsmqChannelFactoryBase<IOutputChannel> factory = new MsmqOutputChannelFactory(this, context);
+                MsmqChannelFactoryBase<IOutputChannel> factory = new MsmqOutputChannelFactory(
+                    this,
+                    context
+                );
                 MsmqVerifier.VerifySender<IOutputChannel>(factory);
                 return (IChannelFactory<TChannel>)(object)factory;
             }
             else if (typeof(TChannel) == typeof(IOutputSessionChannel))
             {
-                MsmqChannelFactoryBase<IOutputSessionChannel> factory = new MsmqOutputSessionChannelFactory(this, context);
+                MsmqChannelFactoryBase<IOutputSessionChannel> factory =
+                    new MsmqOutputSessionChannelFactory(this, context);
                 MsmqVerifier.VerifySender<IOutputSessionChannel>(factory);
                 return (IChannelFactory<TChannel>)(object)factory;
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -153,7 +158,10 @@ namespace System.ServiceModel.Channels
 
             TransportChannelListener msmqListener;
 
-            MsmqTransportReceiveParameters receiveParameters = new MsmqTransportReceiveParameters(this, MsmqUri.NetMsmqAddressTranslator);
+            MsmqTransportReceiveParameters receiveParameters = new MsmqTransportReceiveParameters(
+                this,
+                MsmqUri.NetMsmqAddressTranslator
+            );
 
             if (typeof(TChannel) == typeof(IInputChannel))
             {
@@ -161,11 +169,18 @@ namespace System.ServiceModel.Channels
             }
             else if (typeof(TChannel) == typeof(IInputSessionChannel))
             {
-                msmqListener = new MsmqInputSessionChannelListener(this, context, receiveParameters);
+                msmqListener = new MsmqInputSessionChannelListener(
+                    this,
+                    context,
+                    receiveParameters
+                );
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
             AspNetEnvironment.Current.ApplyHostedContext(msmqListener, context);
 

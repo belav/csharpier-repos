@@ -17,7 +17,10 @@ using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
 using static Microsoft.CodeAnalysis.AnalyzerConfig;
 using AnalyzerOptions = System.Collections.Immutable.ImmutableDictionary<string, string>;
-using TreeOptions = System.Collections.Immutable.ImmutableDictionary<string, Microsoft.CodeAnalysis.ReportDiagnostic>;
+using TreeOptions = System.Collections.Immutable.ImmutableDictionary<
+    string,
+    Microsoft.CodeAnalysis.ReportDiagnostic
+>;
 
 namespace Microsoft.CodeAnalysis
 {
@@ -45,19 +48,32 @@ namespace Microsoft.CodeAnalysis
         // the solution. We share string instances for each diagnostic ID to avoid creating
         // excess strings
         private readonly ConcurrentDictionary<ReadOnlyMemory<char>, string> _diagnosticIdCache =
-            new ConcurrentDictionary<ReadOnlyMemory<char>, string>(CharMemoryEqualityComparer.Instance);
+            new ConcurrentDictionary<ReadOnlyMemory<char>, string>(
+                CharMemoryEqualityComparer.Instance
+            );
 
         // PERF: Most files will probably have the same options, so share the dictionary instances
         private readonly ConcurrentCache<List<Section>, AnalyzerConfigOptionsResult> _optionsCache =
-            new ConcurrentCache<List<Section>, AnalyzerConfigOptionsResult>(50, SequenceEqualComparer.Instance); // arbitrary size
+            new ConcurrentCache<List<Section>, AnalyzerConfigOptionsResult>(
+                50,
+                SequenceEqualComparer.Instance
+            ); // arbitrary size
 
         private readonly ObjectPool<TreeOptions.Builder> _treeOptionsPool =
-            new ObjectPool<TreeOptions.Builder>(() => ImmutableDictionary.CreateBuilder<string, ReportDiagnostic>(Section.PropertiesKeyComparer));
+            new ObjectPool<TreeOptions.Builder>(() =>
+                ImmutableDictionary.CreateBuilder<string, ReportDiagnostic>(
+                    Section.PropertiesKeyComparer
+                )
+            );
 
         private readonly ObjectPool<AnalyzerOptions.Builder> _analyzerOptionsPool =
-            new ObjectPool<AnalyzerOptions.Builder>(() => ImmutableDictionary.CreateBuilder<string, string>(Section.PropertiesKeyComparer));
+            new ObjectPool<AnalyzerOptions.Builder>(() =>
+                ImmutableDictionary.CreateBuilder<string, string>(Section.PropertiesKeyComparer)
+            );
 
-        private readonly ObjectPool<List<Section>> _sectionKeyPool = new ObjectPool<List<Section>>(() => new List<Section>());
+        private readonly ObjectPool<List<Section>> _sectionKeyPool = new ObjectPool<List<Section>>(
+            () => new List<Section>()
+        );
 
         private StrongBox<AnalyzerConfigOptionsResult>? _lazyConfigOptions;
 
@@ -91,41 +107,51 @@ namespace Microsoft.CodeAnalysis
             public int GetHashCode(List<Section> obj) => Hash.CombineValues(obj);
         }
 
-        private static readonly DiagnosticDescriptor InvalidAnalyzerConfigSeverityDescriptor
-            = new DiagnosticDescriptor(
+        private static readonly DiagnosticDescriptor InvalidAnalyzerConfigSeverityDescriptor =
+            new DiagnosticDescriptor(
                 "InvalidSeverityInAnalyzerConfig",
                 CodeAnalysisResources.WRN_InvalidSeverityInAnalyzerConfig_Title,
                 CodeAnalysisResources.WRN_InvalidSeverityInAnalyzerConfig,
                 "AnalyzerConfig",
                 DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-        private static readonly DiagnosticDescriptor MultipleGlobalAnalyzerKeysDescriptor
-            = new DiagnosticDescriptor(
+        private static readonly DiagnosticDescriptor MultipleGlobalAnalyzerKeysDescriptor =
+            new DiagnosticDescriptor(
                 "MultipleGlobalAnalyzerKeys",
                 CodeAnalysisResources.WRN_MultipleGlobalAnalyzerKeys_Title,
                 CodeAnalysisResources.WRN_MultipleGlobalAnalyzerKeys,
                 "AnalyzerConfig",
                 DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-        private static readonly DiagnosticDescriptor InvalidGlobalAnalyzerSectionDescriptor
-            = new DiagnosticDescriptor(
+        private static readonly DiagnosticDescriptor InvalidGlobalAnalyzerSectionDescriptor =
+            new DiagnosticDescriptor(
                 "InvalidGlobalSectionName",
                 CodeAnalysisResources.WRN_InvalidGlobalSectionName_Title,
                 CodeAnalysisResources.WRN_InvalidGlobalSectionName,
                 "AnalyzerConfig",
                 DiagnosticSeverity.Warning,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-        public static AnalyzerConfigSet Create<TList>(TList analyzerConfigs) where TList : IReadOnlyCollection<AnalyzerConfig>
+        public static AnalyzerConfigSet Create<TList>(TList analyzerConfigs)
+            where TList : IReadOnlyCollection<AnalyzerConfig>
         {
             return Create(analyzerConfigs, out _);
         }
 
-        public static AnalyzerConfigSet Create<TList>(TList analyzerConfigs, out ImmutableArray<Diagnostic> diagnostics) where TList : IReadOnlyCollection<AnalyzerConfig>
+        public static AnalyzerConfigSet Create<TList>(
+            TList analyzerConfigs,
+            out ImmutableArray<Diagnostic> diagnostics
+        )
+            where TList : IReadOnlyCollection<AnalyzerConfig>
         {
-            var sortedAnalyzerConfigs = ArrayBuilder<AnalyzerConfig>.GetInstance(analyzerConfigs.Count);
+            var sortedAnalyzerConfigs = ArrayBuilder<AnalyzerConfig>.GetInstance(
+                analyzerConfigs.Count
+            );
             sortedAnalyzerConfigs.AddRange(analyzerConfigs);
             sortedAnalyzerConfigs.Sort(AnalyzerConfig.DirectoryLengthComparer);
 
@@ -133,21 +159,30 @@ namespace Microsoft.CodeAnalysis
             return new AnalyzerConfigSet(sortedAnalyzerConfigs.ToImmutableAndFree(), globalConfig);
         }
 
-        private AnalyzerConfigSet(ImmutableArray<AnalyzerConfig> analyzerConfigs, GlobalAnalyzerConfig globalConfig)
+        private AnalyzerConfigSet(
+            ImmutableArray<AnalyzerConfig> analyzerConfigs,
+            GlobalAnalyzerConfig globalConfig
+        )
         {
             _analyzerConfigs = analyzerConfigs;
             _globalConfig = globalConfig;
 
-            var allMatchers = ArrayBuilder<ImmutableArray<SectionNameMatcher?>>.GetInstance(_analyzerConfigs.Length);
+            var allMatchers = ArrayBuilder<ImmutableArray<SectionNameMatcher?>>.GetInstance(
+                _analyzerConfigs.Length
+            );
 
             foreach (var config in _analyzerConfigs)
             {
                 // Create an array of regexes with each entry corresponding to the same index
                 // in <see cref="EditorConfig.NamedSections"/>.
-                var builder = ArrayBuilder<SectionNameMatcher?>.GetInstance(config.NamedSections.Length);
+                var builder = ArrayBuilder<SectionNameMatcher?>.GetInstance(
+                    config.NamedSections.Length
+                );
                 foreach (var section in config.NamedSections)
                 {
-                    SectionNameMatcher? matcher = AnalyzerConfig.TryCreateSectionNameMatcher(section.Name);
+                    SectionNameMatcher? matcher = AnalyzerConfig.TryCreateSectionNameMatcher(
+                        section.Name
+                    );
                     builder.Add(matcher);
                 }
 
@@ -159,7 +194,6 @@ namespace Microsoft.CodeAnalysis
             Debug.Assert(allMatchers.Count == _analyzerConfigs.Length);
 
             _analyzerMatchers = allMatchers.ToImmutableAndFree();
-
         }
 
         /// <summary>
@@ -174,7 +208,8 @@ namespace Microsoft.CodeAnalysis
                     Interlocked.CompareExchange(
                         ref _lazyConfigOptions,
                         new StrongBox<AnalyzerConfigOptionsResult>(ParseGlobalConfigOptions()),
-                        null);
+                        null
+                    );
                 }
 
                 return _lazyConfigOptions.Value;
@@ -213,7 +248,11 @@ namespace Microsoft.CodeAnalysis
 
             // The editorconfig paths are sorted from shortest to longest, so matches
             // are resolved from most nested to least nested, where last setting wins
-            for (int analyzerConfigIndex = 0; analyzerConfigIndex < _analyzerConfigs.Length; analyzerConfigIndex++)
+            for (
+                int analyzerConfigIndex = 0;
+                analyzerConfigIndex < _analyzerConfigs.Length;
+                analyzerConfigIndex++
+            )
             {
                 var config = _analyzerConfigs[analyzerConfigIndex];
 
@@ -223,20 +262,25 @@ namespace Microsoft.CodeAnalysis
                     // to this source file.
                     if (config.IsRoot)
                     {
-                        sectionKey.RemoveRange(globalConfigOptionsCount, sectionKey.Count - globalConfigOptionsCount);
+                        sectionKey.RemoveRange(
+                            globalConfigOptionsCount,
+                            sectionKey.Count - globalConfigOptionsCount
+                        );
                     }
 
                     int dirLength = config.NormalizedDirectory.Length;
                     // Leave '/' if the normalized directory ends with a '/'. This can happen if
                     // we're in a root directory (e.g. '/' or 'Z:/'). The section matching
-                    // always expects that the relative path start with a '/'. 
+                    // always expects that the relative path start with a '/'.
                     if (config.NormalizedDirectory[dirLength - 1] == '/')
                     {
                         dirLength--;
                     }
                     string relativePath = normalizedPath.Substring(dirLength);
 
-                    ImmutableArray<SectionNameMatcher?> matchers = _analyzerMatchers[analyzerConfigIndex];
+                    ImmutableArray<SectionNameMatcher?> matchers = _analyzerMatchers[
+                        analyzerConfigIndex
+                    ];
                     for (int sectionIndex = 0; sectionIndex < matchers.Length; sectionIndex++)
                     {
                         if (matchers[sectionIndex]?.IsMatch(relativePath) == true)
@@ -269,7 +313,8 @@ namespace Microsoft.CodeAnalysis
                             analyzerOptionsBuilder,
                             diagnosticBuilder,
                             GlobalAnalyzerConfigBuilder.GlobalConfigPath,
-                            _diagnosticIdCache);
+                            _diagnosticIdCache
+                        );
                         sectionKeyIndex++;
                         if (sectionKeyIndex == sectionKey.Count)
                         {
@@ -278,12 +323,17 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                for (int analyzerConfigIndex = 0;
-                    analyzerConfigIndex < _analyzerConfigs.Length && sectionKeyIndex < sectionKey.Count;
-                    analyzerConfigIndex++)
+                for (
+                    int analyzerConfigIndex = 0;
+                    analyzerConfigIndex < _analyzerConfigs.Length
+                        && sectionKeyIndex < sectionKey.Count;
+                    analyzerConfigIndex++
+                )
                 {
                     AnalyzerConfig config = _analyzerConfigs[analyzerConfigIndex];
-                    ImmutableArray<SectionNameMatcher?> matchers = _analyzerMatchers[analyzerConfigIndex];
+                    ImmutableArray<SectionNameMatcher?> matchers = _analyzerMatchers[
+                        analyzerConfigIndex
+                    ];
                     for (int matcherIndex = 0; matcherIndex < matchers.Length; matcherIndex++)
                     {
                         if (sectionKey[sectionKeyIndex] == config.NamedSections[matcherIndex])
@@ -294,7 +344,8 @@ namespace Microsoft.CodeAnalysis
                                 analyzerOptionsBuilder,
                                 diagnosticBuilder,
                                 config.PathToFile,
-                                _diagnosticIdCache);
+                                _diagnosticIdCache
+                            );
                             sectionKeyIndex++;
                             if (sectionKeyIndex == sectionKey.Count)
                             {
@@ -307,9 +358,14 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 result = new AnalyzerConfigOptionsResult(
-                    treeOptionsBuilder.Count > 0 ? treeOptionsBuilder.ToImmutable() : SyntaxTree.EmptyDiagnosticOptions,
-                    analyzerOptionsBuilder.Count > 0 ? analyzerOptionsBuilder.ToImmutable() : DictionaryAnalyzerConfigOptions.EmptyDictionary,
-                    diagnosticBuilder.ToImmutableAndFree());
+                    treeOptionsBuilder.Count > 0
+                        ? treeOptionsBuilder.ToImmutable()
+                        : SyntaxTree.EmptyDiagnosticOptions,
+                    analyzerOptionsBuilder.Count > 0
+                        ? analyzerOptionsBuilder.ToImmutable()
+                        : DictionaryAnalyzerConfigOptions.EmptyDictionary,
+                    diagnosticBuilder.ToImmutableAndFree()
+                );
 
                 if (_optionsCache.TryAdd(sectionKey, result))
                 {
@@ -384,17 +440,20 @@ namespace Microsoft.CodeAnalysis
             var analyzerOptionsBuilder = _analyzerOptionsPool.Allocate();
             var diagnosticBuilder = ArrayBuilder<Diagnostic>.GetInstance();
 
-            ParseSectionOptions(_globalConfig.GlobalSection,
-                        treeOptionsBuilder,
-                        analyzerOptionsBuilder,
-                        diagnosticBuilder,
-                        GlobalAnalyzerConfigBuilder.GlobalConfigPath,
-                        _diagnosticIdCache);
+            ParseSectionOptions(
+                _globalConfig.GlobalSection,
+                treeOptionsBuilder,
+                analyzerOptionsBuilder,
+                diagnosticBuilder,
+                GlobalAnalyzerConfigBuilder.GlobalConfigPath,
+                _diagnosticIdCache
+            );
 
             var options = new AnalyzerConfigOptionsResult(
                 treeOptionsBuilder.ToImmutable(),
                 analyzerOptionsBuilder.ToImmutable(),
-                diagnosticBuilder.ToImmutableAndFree());
+                diagnosticBuilder.ToImmutableAndFree()
+            );
 
             treeOptionsBuilder.Clear();
             analyzerOptionsBuilder.Clear();
@@ -404,7 +463,14 @@ namespace Microsoft.CodeAnalysis
             return options;
         }
 
-        private static void ParseSectionOptions(Section section, TreeOptions.Builder treeBuilder, AnalyzerOptions.Builder analyzerBuilder, ArrayBuilder<Diagnostic> diagnosticBuilder, string analyzerConfigPath, ConcurrentDictionary<ReadOnlyMemory<char>, string> diagIdCache)
+        private static void ParseSectionOptions(
+            Section section,
+            TreeOptions.Builder treeBuilder,
+            AnalyzerOptions.Builder analyzerBuilder,
+            ArrayBuilder<Diagnostic> diagnosticBuilder,
+            string analyzerConfigPath,
+            ConcurrentDictionary<ReadOnlyMemory<char>, string> diagIdCache
+        )
         {
             const string diagnosticOptionPrefix = "dotnet_diagnostic.";
             const string diagnosticOptionSuffix = ".severity";
@@ -413,15 +479,20 @@ namespace Microsoft.CodeAnalysis
             {
                 // Keys are lowercased in editorconfig parsing
                 int diagIdLength = -1;
-                if (key.StartsWith(diagnosticOptionPrefix, StringComparison.Ordinal) &&
-                    key.EndsWith(diagnosticOptionSuffix, StringComparison.Ordinal))
+                if (
+                    key.StartsWith(diagnosticOptionPrefix, StringComparison.Ordinal)
+                    && key.EndsWith(diagnosticOptionSuffix, StringComparison.Ordinal)
+                )
                 {
-                    diagIdLength = key.Length - (diagnosticOptionPrefix.Length + diagnosticOptionSuffix.Length);
+                    diagIdLength =
+                        key.Length
+                        - (diagnosticOptionPrefix.Length + diagnosticOptionSuffix.Length);
                 }
 
                 if (diagIdLength >= 0)
                 {
-                    ReadOnlyMemory<char> idSlice = key.AsMemory().Slice(diagnosticOptionPrefix.Length, diagIdLength);
+                    ReadOnlyMemory<char> idSlice = key.AsMemory()
+                        .Slice(diagnosticOptionPrefix.Length, diagIdLength);
                     // PERF: this is similar to a double-checked locking pattern, and trying to fetch the ID first
                     // lets us avoid an allocation if the id has already been added
                     if (!diagIdCache.TryGetValue(idSlice, out var diagId))
@@ -441,12 +512,15 @@ namespace Microsoft.CodeAnalysis
                     }
                     else
                     {
-                        diagnosticBuilder.Add(Diagnostic.Create(
-                            InvalidAnalyzerConfigSeverityDescriptor,
-                            Location.None,
-                            diagId,
-                            value,
-                            analyzerConfigPath));
+                        diagnosticBuilder.Add(
+                            Diagnostic.Create(
+                                InvalidAnalyzerConfigSeverityDescriptor,
+                                Location.None,
+                                diagId,
+                                value,
+                                analyzerConfigPath
+                            )
+                        );
                     }
                 }
                 else
@@ -462,15 +536,22 @@ namespace Microsoft.CodeAnalysis
         /// <param name="analyzerConfigs">An <see cref="ArrayBuilder{T}"/> of <see cref="AnalyzerConfig"/> containing a mix of regular and unmerged partial global configs</param>
         /// <param name="diagnostics">Diagnostics produced during merge will be added to this bag</param>
         /// <returns>A <see cref="GlobalAnalyzerConfig" /> that contains the merged partial configs, or <c>null</c> if there were no partial configs</returns>
-        internal static GlobalAnalyzerConfig MergeGlobalConfigs(ArrayBuilder<AnalyzerConfig> analyzerConfigs, out ImmutableArray<Diagnostic> diagnostics)
+        internal static GlobalAnalyzerConfig MergeGlobalConfigs(
+            ArrayBuilder<AnalyzerConfig> analyzerConfigs,
+            out ImmutableArray<Diagnostic> diagnostics
+        )
         {
-            GlobalAnalyzerConfigBuilder globalAnalyzerConfigBuilder = new GlobalAnalyzerConfigBuilder();
+            GlobalAnalyzerConfigBuilder globalAnalyzerConfigBuilder =
+                new GlobalAnalyzerConfigBuilder();
             DiagnosticBag diagnosticBag = DiagnosticBag.GetInstance();
             for (int i = 0; i < analyzerConfigs.Count; i++)
             {
                 if (analyzerConfigs[i].IsGlobal)
                 {
-                    globalAnalyzerConfigBuilder.MergeIntoGlobalConfig(analyzerConfigs[i], diagnosticBag);
+                    globalAnalyzerConfigBuilder.MergeIntoGlobalConfig(
+                        analyzerConfigs[i],
+                        diagnosticBag
+                    );
                     analyzerConfigs.RemoveAt(i);
                     i--;
                 }
@@ -486,8 +567,20 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal struct GlobalAnalyzerConfigBuilder
         {
-            private ImmutableDictionary<string, ImmutableDictionary<string, (string value, string configPath, int globalLevel)>.Builder>.Builder? _values;
-            private ImmutableDictionary<string, ImmutableDictionary<string, (int globalLevel, ArrayBuilder<string> configPaths)>.Builder>.Builder? _duplicates;
+            private ImmutableDictionary<
+                string,
+                ImmutableDictionary<
+                    string,
+                    (string value, string configPath, int globalLevel)
+                >.Builder
+            >.Builder? _values;
+            private ImmutableDictionary<
+                string,
+                ImmutableDictionary<
+                    string,
+                    (int globalLevel, ArrayBuilder<string> configPaths)
+                >.Builder
+            >.Builder? _duplicates;
 
             internal const string GlobalConfigPath = "<Global Config>";
             internal const string GlobalSectionName = "Global Section";
@@ -496,27 +589,49 @@ namespace Microsoft.CodeAnalysis
             {
                 if (_values is null)
                 {
-                    _values = ImmutableDictionary.CreateBuilder<string, ImmutableDictionary<string, (string, string, int)>.Builder>(Section.NameEqualityComparer);
-                    _duplicates = ImmutableDictionary.CreateBuilder<string, ImmutableDictionary<string, (int, ArrayBuilder<string>)>.Builder>(Section.NameEqualityComparer);
+                    _values = ImmutableDictionary.CreateBuilder<
+                        string,
+                        ImmutableDictionary<string, (string, string, int)>.Builder
+                    >(Section.NameEqualityComparer);
+                    _duplicates = ImmutableDictionary.CreateBuilder<
+                        string,
+                        ImmutableDictionary<string, (int, ArrayBuilder<string>)>.Builder
+                    >(Section.NameEqualityComparer);
                 }
 
-                MergeSection(config.PathToFile, config.GlobalSection, config.GlobalLevel, isGlobalSection: true);
+                MergeSection(
+                    config.PathToFile,
+                    config.GlobalSection,
+                    config.GlobalLevel,
+                    isGlobalSection: true
+                );
                 foreach (var section in config.NamedSections)
                 {
                     if (IsAbsoluteEditorConfigPath(section.Name))
                     {
                         // Let's recreate the section with the name unescaped, since we can then properly merge and match it later
-                        var unescapedSection = new Section(UnescapeSectionName(section.Name), section.Properties);
+                        var unescapedSection = new Section(
+                            UnescapeSectionName(section.Name),
+                            section.Properties
+                        );
 
-                        MergeSection(config.PathToFile, unescapedSection, config.GlobalLevel, isGlobalSection: false);
+                        MergeSection(
+                            config.PathToFile,
+                            unescapedSection,
+                            config.GlobalLevel,
+                            isGlobalSection: false
+                        );
                     }
                     else
                     {
-                        diagnostics.Add(Diagnostic.Create(
-                            InvalidGlobalAnalyzerSectionDescriptor,
-                            Location.None,
-                            section.Name,
-                            config.PathToFile));
+                        diagnostics.Add(
+                            Diagnostic.Create(
+                                InvalidGlobalAnalyzerSectionDescriptor,
+                                Location.None,
+                                section.Name,
+                                config.PathToFile
+                            )
+                        );
                     }
                 }
             }
@@ -525,7 +640,10 @@ namespace Microsoft.CodeAnalysis
             {
                 if (_values is null || _duplicates is null)
                 {
-                    return new GlobalAnalyzerConfig(new Section(GlobalSectionName, AnalyzerOptions.Empty), ImmutableArray<Section>.Empty);
+                    return new GlobalAnalyzerConfig(
+                        new Section(GlobalSectionName, AnalyzerOptions.Empty),
+                        ImmutableArray<Section>.Empty
+                    );
                 }
 
                 // issue diagnostics for any duplicate keys
@@ -535,12 +653,15 @@ namespace Microsoft.CodeAnalysis
                     string sectionName = isGlobalSection ? GlobalSectionName : section;
                     foreach ((var keyName, (_, var configPaths)) in keys)
                     {
-                        diagnostics.Add(Diagnostic.Create(
-                             MultipleGlobalAnalyzerKeysDescriptor,
-                             Location.None,
-                             keyName,
-                             sectionName,
-                             string.Join(", ", configPaths)));
+                        diagnostics.Add(
+                            Diagnostic.Create(
+                                MultipleGlobalAnalyzerKeysDescriptor,
+                                Location.None,
+                                keyName,
+                                sectionName,
+                                string.Join(", ", configPaths)
+                            )
+                        );
                     }
                 }
                 _duplicates = null;
@@ -549,14 +670,19 @@ namespace Microsoft.CodeAnalysis
                 Section globalSection = GetSection(string.Empty);
                 _values.Remove(string.Empty);
 
-                ArrayBuilder<Section> namedSectionBuilder = new ArrayBuilder<Section>(_values.Count);
+                ArrayBuilder<Section> namedSectionBuilder = new ArrayBuilder<Section>(
+                    _values.Count
+                );
                 foreach (var sectionName in _values.Keys.Order())
                 {
                     namedSectionBuilder.Add(GetSection(sectionName));
                 }
 
                 // create the global config
-                GlobalAnalyzerConfig globalConfig = new GlobalAnalyzerConfig(globalSection, namedSectionBuilder.ToImmutableAndFree());
+                GlobalAnalyzerConfig globalConfig = new GlobalAnalyzerConfig(
+                    globalSection,
+                    namedSectionBuilder.ToImmutableAndFree()
+                );
                 _values = null;
                 return globalConfig;
             }
@@ -566,25 +692,42 @@ namespace Microsoft.CodeAnalysis
                 Debug.Assert(_values is object);
 
                 var dict = _values[sectionName];
-                var result = dict.ToImmutableDictionary(d => d.Key, d => d.Value.value, Section.PropertiesKeyComparer);
+                var result = dict.ToImmutableDictionary(
+                    d => d.Key,
+                    d => d.Value.value,
+                    Section.PropertiesKeyComparer
+                );
                 return new Section(sectionName, result);
             }
 
-            private void MergeSection(string configPath, Section section, int globalLevel, bool isGlobalSection)
+            private void MergeSection(
+                string configPath,
+                Section section,
+                int globalLevel,
+                bool isGlobalSection
+            )
             {
                 Debug.Assert(_values is object);
                 Debug.Assert(_duplicates is object);
 
                 if (!_values.TryGetValue(section.Name, out var sectionDict))
                 {
-                    sectionDict = ImmutableDictionary.CreateBuilder<string, (string, string, int)>(Section.PropertiesKeyComparer);
+                    sectionDict = ImmutableDictionary.CreateBuilder<string, (string, string, int)>(
+                        Section.PropertiesKeyComparer
+                    );
                     _values.Add(section.Name, sectionDict);
                 }
 
                 _duplicates.TryGetValue(section.Name, out var duplicateDict);
                 foreach ((var key, var value) in section.Properties)
                 {
-                    if (isGlobalSection && (Section.PropertiesKeyComparer.Equals(key, GlobalKey) || Section.PropertiesKeyComparer.Equals(key, GlobalLevelKey)))
+                    if (
+                        isGlobalSection
+                        && (
+                            Section.PropertiesKeyComparer.Equals(key, GlobalKey)
+                            || Section.PropertiesKeyComparer.Equals(key, GlobalLevelKey)
+                        )
+                    )
                     {
                         continue;
                     }
@@ -592,16 +735,20 @@ namespace Microsoft.CodeAnalysis
                     bool keyInSection = sectionDict.TryGetValue(key, out var sectionValue);
 
                     (int globalLevel, ArrayBuilder<string> configPaths) duplicateValue = default;
-                    bool keyDuplicated = !keyInSection && duplicateDict?.TryGetValue(key, out duplicateValue) == true;
+                    bool keyDuplicated =
+                        !keyInSection
+                        && duplicateDict?.TryGetValue(key, out duplicateValue) == true;
 
-                    // if this key is neither already present, or already duplicate, we can add it	
+                    // if this key is neither already present, or already duplicate, we can add it
                     if (!keyInSection && !keyDuplicated)
                     {
                         sectionDict.Add(key, (value, configPath, globalLevel));
                     }
                     else
                     {
-                        int currentGlobalLevel = keyInSection ? sectionValue.globalLevel : duplicateValue.globalLevel;
+                        int currentGlobalLevel = keyInSection
+                            ? sectionValue.globalLevel
+                            : duplicateValue.globalLevel;
 
                         // if this key overrides one we knew about previously, replace it
                         if (currentGlobalLevel < globalLevel)
@@ -617,12 +764,16 @@ namespace Microsoft.CodeAnalysis
                         {
                             if (duplicateDict is null)
                             {
-                                duplicateDict = ImmutableDictionary.CreateBuilder<string, (int, ArrayBuilder<string>)>(Section.PropertiesKeyComparer);
+                                duplicateDict = ImmutableDictionary.CreateBuilder<
+                                    string,
+                                    (int, ArrayBuilder<string>)
+                                >(Section.PropertiesKeyComparer);
                                 _duplicates.Add(section.Name, duplicateDict);
                             }
 
                             // record that this key is now a duplicate
-                            ArrayBuilder<string> configList = duplicateValue.configPaths ?? ArrayBuilder<string>.GetInstance();
+                            ArrayBuilder<string> configList =
+                                duplicateValue.configPaths ?? ArrayBuilder<string>.GetInstance();
                             configList.Add(configPath);
                             duplicateDict[key] = (globalLevel, configList);
 
@@ -646,10 +797,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// We parse all <see cref="AnalyzerConfig"/>s as individual files, according to the editorconfig spec.
-        /// 
+        ///
         /// However, when viewing the configs as an <see cref="AnalyzerConfigSet"/> if multiple files have the
-        /// <c>is_global</c> property set to <c>true</c> we combine those files and treat them as a single 
-        /// 'logical' global config file. This type represents that combined file. 
+        /// <c>is_global</c> property set to <c>true</c> we combine those files and treat them as a single
+        /// 'logical' global config file. This type represents that combined file.
         /// </remarks>
         internal sealed class GlobalAnalyzerConfig
         {
@@ -657,7 +808,10 @@ namespace Microsoft.CodeAnalysis
 
             internal ImmutableArray<AnalyzerConfig.Section> NamedSections { get; }
 
-            public GlobalAnalyzerConfig(AnalyzerConfig.Section globalSection, ImmutableArray<AnalyzerConfig.Section> namedSections)
+            public GlobalAnalyzerConfig(
+                AnalyzerConfig.Section globalSection,
+                ImmutableArray<AnalyzerConfig.Section> namedSections
+            )
             {
                 GlobalSection = globalSection;
                 NamedSections = namedSections;

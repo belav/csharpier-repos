@@ -16,21 +16,21 @@ namespace System.ServiceModel.Activities.Description
     [Fx.Tag.XamlVisible(false)]
     public class EtwTrackingBehavior : IServiceBehavior
     {
-        public EtwTrackingBehavior()
-        {
-        }
+        public EtwTrackingBehavior() { }
 
-        public string ProfileName
-        {
-            get;
-            set;
-        }
+        public string ProfileName { get; set; }
 
-        public virtual void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
-        {
-        }
+        public virtual void AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        public virtual void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        public virtual void ApplyDispatchBehavior(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        )
         {
             WorkflowServiceHost workflowServiceHost = serviceHostBase as WorkflowServiceHost;
             if (null != workflowServiceHost)
@@ -40,32 +40,48 @@ namespace System.ServiceModel.Activities.Description
 
                 if (AspNetEnvironment.Enabled)
                 {
-                    VirtualPathExtension virtualPathExtension = serviceHostBase.Extensions.Find<VirtualPathExtension>();
+                    VirtualPathExtension virtualPathExtension =
+                        serviceHostBase.Extensions.Find<VirtualPathExtension>();
                     if (virtualPathExtension != null && virtualPathExtension.VirtualPath != null)
                     {
-                        //Format Website name\Application Virtual Path|\relative service virtual path|serviceName 
-                        string name = serviceDescription != null ? serviceDescription.Name : string.Empty;
+                        //Format Website name\Application Virtual Path|\relative service virtual path|serviceName
+                        string name =
+                            serviceDescription != null ? serviceDescription.Name : string.Empty;
                         string application = virtualPathExtension.ApplicationVirtualPath;
 
                         //If the application is the root, do not include it in servicePath
-                        string servicePath = virtualPathExtension.VirtualPath.Replace("~", application + "|");
-                        hostReference = string.Format(CultureInfo.InvariantCulture, "{0}{1}|{2}", virtualPathExtension.SiteName, servicePath, name);
+                        string servicePath = virtualPathExtension.VirtualPath.Replace(
+                            "~",
+                            application + "|"
+                        );
+                        hostReference = string.Format(
+                            CultureInfo.InvariantCulture,
+                            "{0}{1}|{2}",
+                            virtualPathExtension.SiteName,
+                            servicePath,
+                            name
+                        );
                     }
                 }
 
-                TrackingProfile trackingProfile = this.GetProfile(this.ProfileName, workflowDisplayName);
-                workflowServiceHost.WorkflowExtensions.Add(
-                    () => new EtwTrackingParticipant
+                TrackingProfile trackingProfile = this.GetProfile(
+                    this.ProfileName,
+                    workflowDisplayName
+                );
+                workflowServiceHost.WorkflowExtensions.Add(() =>
+                    new EtwTrackingParticipant
                     {
                         ApplicationReference = hostReference,
-                        TrackingProfile = trackingProfile
-                    });
+                        TrackingProfile = trackingProfile,
+                    }
+                );
             }
         }
 
-        public virtual void Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
-        {
-        }
+        public virtual void Validate(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        ) { }
 
         TrackingProfile GetProfile(string profileName, string displayName)
         {

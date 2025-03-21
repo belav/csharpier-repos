@@ -28,7 +28,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> plaintext,
             Span<byte> ciphertext,
             Span<byte> tag,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             CheckDisposed();
             Interop.AppleCrypto.ChaCha20Poly1305Encrypt(
@@ -37,7 +38,8 @@ namespace System.Security.Cryptography
                 plaintext,
                 ciphertext,
                 tag,
-                associatedData);
+                associatedData
+            );
         }
 
         private void DecryptCore(
@@ -45,7 +47,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> ciphertext,
             ReadOnlySpan<byte> tag,
             Span<byte> plaintext,
-            ReadOnlySpan<byte> associatedData = default)
+            ReadOnlySpan<byte> associatedData = default
+        )
         {
             CheckDisposed();
             Interop.AppleCrypto.ChaCha20Poly1305Decrypt(
@@ -54,7 +57,8 @@ namespace System.Security.Cryptography
                 ciphertext,
                 tag,
                 plaintext,
-                associatedData);
+                associatedData
+            );
         }
 
         public void Dispose()

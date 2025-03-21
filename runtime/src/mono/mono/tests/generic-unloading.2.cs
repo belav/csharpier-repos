@@ -1,35 +1,39 @@
 using System;
 
-public class Gen<A,B,C> {}
+public class Gen<A, B, C> { }
 
-public class main {
-    static object GenericFunc<A,B,C> () {
-	return new Gen<A,B,C> ();
-    }
-
-    static void DoGenericStuff () {
-	Console.WriteLine ("doing generic stuff");
-	GenericFunc<object,object,object> ();
-    }
-
-    static void DoOtherGenericStuff () {
-	Console.WriteLine ("doing other generic stuff");
-	GenericFunc<object,object,int> ();
-    }
-
-    public static void Main ()
+public class main
+{
+    static object GenericFunc<A, B, C>()
     {
-	// Create an Application Domain:
-	System.AppDomain newDomain = System.AppDomain.CreateDomain("NewApplicationDomain");
+        return new Gen<A, B, C>();
+    }
 
-	// Load and execute an assembly:
-	newDomain.ExecuteAssembly(@"generic-unloading-sub.2.exe");
+    static void DoGenericStuff()
+    {
+        Console.WriteLine("doing generic stuff");
+        GenericFunc<object, object, object>();
+    }
 
-	DoGenericStuff ();
+    static void DoOtherGenericStuff()
+    {
+        Console.WriteLine("doing other generic stuff");
+        GenericFunc<object, object, int>();
+    }
 
-	// Unload the application domain:
-	System.AppDomain.Unload(newDomain);
+    public static void Main()
+    {
+        // Create an Application Domain:
+        System.AppDomain newDomain = System.AppDomain.CreateDomain("NewApplicationDomain");
 
-	DoOtherGenericStuff ();
+        // Load and execute an assembly:
+        newDomain.ExecuteAssembly(@"generic-unloading-sub.2.exe");
+
+        DoGenericStuff();
+
+        // Unload the application domain:
+        System.AppDomain.Unload(newDomain);
+
+        DoOtherGenericStuff();
     }
 }

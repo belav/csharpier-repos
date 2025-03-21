@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,65 +26,63 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
 using System.Timers;
+using NUnit.Framework;
 using ST = System.Threading;
 
-namespace MonoCasTests.System.Timers {
+namespace MonoCasTests.System.Timers
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class ElapsedEventArgsCas
+    {
+        Timer t;
+        ElapsedEventArgs eea;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ElapsedEventArgsCas {
+        private void SetElapsedEventArgs(object sender, ElapsedEventArgs e)
+        {
+            eea = e;
+        }
 
-		Timer t;
-		ElapsedEventArgs eea;
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            // fulltrust
+            t = new Timer(1);
+            t.Elapsed += new ElapsedEventHandler(SetElapsedEventArgs);
+            t.Enabled = true;
+            ST.Thread.Sleep(100);
+        }
 
-		private void SetElapsedEventArgs (object sender, ElapsedEventArgs e)
-		{
-			eea = e;
-		}
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// fulltrust
-			t = new Timer (1);
-			t.Elapsed += new ElapsedEventHandler (SetElapsedEventArgs);
-			t.Enabled = true;
-			ST.Thread.Sleep (100);
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            Assert.IsNotNull(eea, "ElapsedEventArgs");
+            DateTime dt = eea.SignalTime;
+            DateTime now = DateTime.Now;
+            Assert.IsTrue(dt > now.AddSeconds(-2), ">");
+            Assert.IsTrue(dt < now.AddSeconds(2), "<");
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			Assert.IsNotNull (eea, "ElapsedEventArgs");
-			DateTime dt = eea.SignalTime;
-			DateTime now = DateTime.Now;
-			Assert.IsTrue (dt > now.AddSeconds (-2), ">");
-			Assert.IsTrue (dt < now.AddSeconds (2), "<");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			MethodInfo mi = typeof (ElapsedEventArgs).GetProperty ("SignalTime").GetGetMethod ();
-			Assert.IsNotNull (mi, "SignalTime");
-			Assert.IsNotNull (mi.Invoke (eea, null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            MethodInfo mi = typeof(ElapsedEventArgs).GetProperty("SignalTime").GetGetMethod();
+            Assert.IsNotNull(mi, "SignalTime");
+            Assert.IsNotNull(mi.Invoke(eea, null), "invoke");
+        }
+    }
 }
-

@@ -17,10 +17,9 @@ public class PropertyInjectionTest : ServerTestBase<ToggleExecutionModeServerFix
     public PropertyInjectionTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {
@@ -43,7 +42,10 @@ public class PropertyInjectionTest : ServerTestBase<ToggleExecutionModeServerFix
 
         Browser.Click(By.Id("invalid-service-key"));
 
-        Browser.Exists(By.CssSelector("#blazor-error-ui[style='display: block;']"), TimeSpan.FromSeconds(10));
+        Browser.Exists(
+            By.CssSelector("#blazor-error-ui[style='display: block;']"),
+            TimeSpan.FromSeconds(10)
+        );
     }
 
     [Fact]
@@ -54,6 +56,9 @@ public class PropertyInjectionTest : ServerTestBase<ToggleExecutionModeServerFix
 
         Browser.Click(By.Id("invalid-keyed-service-type"));
 
-        Browser.Exists(By.CssSelector("#blazor-error-ui[style='display: block;']"), TimeSpan.FromSeconds(10));
+        Browser.Exists(
+            By.CssSelector("#blazor-error-ui[style='display: block;']"),
+            TimeSpan.FromSeconds(10)
+        );
     }
 }

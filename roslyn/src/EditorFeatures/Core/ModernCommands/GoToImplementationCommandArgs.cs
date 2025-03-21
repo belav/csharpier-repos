@@ -15,7 +15,8 @@ namespace Microsoft.CodeAnalysis.Editor.Commanding.Commands
     /// Arguments for Go To Implementation.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    internal sealed class GoToImplementationCommandArgs(ITextView textView, ITextBuffer subjectBuffer) : EditorCommandArgs(textView, subjectBuffer)
-    {
-    }
+    internal sealed class GoToImplementationCommandArgs(
+        ITextView textView,
+        ITextBuffer subjectBuffer
+    ) : EditorCommandArgs(textView, subjectBuffer) { }
 }

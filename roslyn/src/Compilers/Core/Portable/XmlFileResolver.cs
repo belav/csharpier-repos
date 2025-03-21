@@ -21,9 +21,15 @@ namespace Microsoft.CodeAnalysis
 
         public XmlFileResolver(string? baseDirectory)
         {
-            if (baseDirectory != null && PathUtilities.GetPathKind(baseDirectory) != PathKind.Absolute)
+            if (
+                baseDirectory != null
+                && PathUtilities.GetPathKind(baseDirectory) != PathKind.Absolute
+            )
             {
-                throw new ArgumentException(CodeAnalysisResources.AbsolutePathExpected, nameof(baseDirectory));
+                throw new ArgumentException(
+                    CodeAnalysisResources.AbsolutePathExpected,
+                    nameof(baseDirectory)
+                );
             }
 
             _baseDirectory = baseDirectory;
@@ -55,7 +61,11 @@ namespace Microsoft.CodeAnalysis
 
             if (baseFilePath != null)
             {
-                resolvedPath = FileUtilities.ResolveRelativePath(path, baseFilePath, _baseDirectory);
+                resolvedPath = FileUtilities.ResolveRelativePath(
+                    path,
+                    baseFilePath,
+                    _baseDirectory
+                );
                 Debug.Assert(resolvedPath == null || PathUtilities.IsAbsolute(resolvedPath));
                 if (FileExists(resolvedPath))
                 {

@@ -20,5 +20,6 @@ public interface IComplexTypeMemberIgnoredConvention : IConvention
     void ProcessComplexTypeMemberIgnored(
         IConventionComplexTypeBuilder complexTypeBuilder,
         string name,
-        IConventionContext<string> context);
+        IConventionContext<string> context
+    );
 }

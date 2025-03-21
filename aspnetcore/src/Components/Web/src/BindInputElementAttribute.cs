@@ -24,7 +24,14 @@ public sealed class BindInputElementAttribute : Attribute
     /// <param name="format">
     /// An optional format to use when converting values.
     /// </param>
-    public BindInputElementAttribute(string? type, string? suffix, string? valueAttribute, string? changeAttribute, bool isInvariantCulture, string? format)
+    public BindInputElementAttribute(
+        string? type,
+        string? suffix,
+        string? valueAttribute,
+        string? changeAttribute,
+        bool isInvariantCulture,
+        string? format
+    )
     {
         ArgumentNullException.ThrowIfNull(valueAttribute);
         ArgumentNullException.ThrowIfNull(changeAttribute);

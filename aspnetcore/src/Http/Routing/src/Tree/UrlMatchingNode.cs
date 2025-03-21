@@ -18,7 +18,6 @@ public class UrlMatchingNode
 internal class UrlMatchingNode
 #endif
 {
-
     /// <summary>
     /// Initializes a new instance of <see cref="UrlMatchingNode"/>.
     /// </summary>

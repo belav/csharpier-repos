@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,34 +28,48 @@
 
 using System;
 using System.Xml;
+
 namespace Microsoft.Build.Construction
 {
-        [System.Diagnostics.DebuggerDisplayAttribute ("{Name} Value={Value} Condition={Condition}")]
-        public class ProjectPropertyElement : ProjectElement
+    [System.Diagnostics.DebuggerDisplayAttribute("{Name} Value={Value} Condition={Condition}")]
+    public class ProjectPropertyElement : ProjectElement
+    {
+        string name;
+        public string Name
         {
-                string name;
-                public string Name { get { return name ?? String.Empty; } set { name = value; } }
-                string internalValue;
-                public string Value { get { return internalValue ?? String.Empty; } set { internalValue = value; } }
-                internal ProjectPropertyElement (string name, ProjectRootElement containingProject)
-                {
-                        Name = name;
-                        ContainingProject = containingProject;
-                }
-                internal override string XmlName {
-                        get { return Name; }
-                }
-                internal override void SaveValue (XmlWriter writer)
-                {
-                        base.SaveValue (writer);
-                        if (!string.IsNullOrWhiteSpace (Value))
-                                writer.WriteValue (Value);
-                }
-                internal override void LoadValue (XmlReader reader)
-                {
-                        while (reader.Read () & reader.NodeType != XmlNodeType.Text)
-                                ;
-                        Value = reader.Value;
-                }
+            get { return name ?? String.Empty; }
+            set { name = value; }
         }
+        string internalValue;
+        public string Value
+        {
+            get { return internalValue ?? String.Empty; }
+            set { internalValue = value; }
+        }
+
+        internal ProjectPropertyElement(string name, ProjectRootElement containingProject)
+        {
+            Name = name;
+            ContainingProject = containingProject;
+        }
+
+        internal override string XmlName
+        {
+            get { return Name; }
+        }
+
+        internal override void SaveValue(XmlWriter writer)
+        {
+            base.SaveValue(writer);
+            if (!string.IsNullOrWhiteSpace(Value))
+                writer.WriteValue(Value);
+        }
+
+        internal override void LoadValue(XmlReader reader)
+        {
+            while (reader.Read() & reader.NodeType != XmlNodeType.Text)
+                ;
+            Value = reader.Value;
+        }
+    }
 }

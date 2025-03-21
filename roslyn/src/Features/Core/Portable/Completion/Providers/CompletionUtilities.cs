@@ -12,7 +12,11 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal static class CompletionUtilities
     {
-        public static bool IsTypeImplicitlyConvertible(Compilation compilation, ITypeSymbol sourceType, ImmutableArray<ITypeSymbol> targetTypes)
+        public static bool IsTypeImplicitlyConvertible(
+            Compilation compilation,
+            ITypeSymbol sourceType,
+            ImmutableArray<ITypeSymbol> targetTypes
+        )
         {
             foreach (var targetType in targetTypes)
             {
@@ -25,7 +29,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             return false;
         }
 
-        public static ImmutableArray<Project> GetDistinctProjectsFromLatestSolutionSnapshot(ImmutableSegmentedList<Project> projects)
+        public static ImmutableArray<Project> GetDistinctProjectsFromLatestSolutionSnapshot(
+            ImmutableSegmentedList<Project> projects
+        )
         {
             if (projects.IsEmpty)
                 return ImmutableArray<Project>.Empty;
@@ -38,7 +44,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             foreach (var project in projects)
             {
                 projectIds.Add(project.Id);
-                if (solution is null || project.Solution.WorkspaceVersion > solution.WorkspaceVersion)
+                if (
+                    solution is null
+                    || project.Solution.WorkspaceVersion > solution.WorkspaceVersion
+                )
                 {
                     solution = project.Solution;
                 }

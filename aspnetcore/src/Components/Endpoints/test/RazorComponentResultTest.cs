@@ -25,8 +25,12 @@ public class RazorComponentResultTest
     [Fact]
     public void RejectsNullParameters()
     {
-        Assert.Throws<ArgumentNullException>(() => new RazorComponentResult(typeof(SimpleComponent), (object)null));
-        Assert.Throws<ArgumentNullException>(() => new RazorComponentResult(typeof(SimpleComponent), null));
+        Assert.Throws<ArgumentNullException>(() =>
+            new RazorComponentResult(typeof(SimpleComponent), (object)null)
+        );
+        Assert.Throws<ArgumentNullException>(() =>
+            new RazorComponentResult(typeof(SimpleComponent), null)
+        );
     }
 
     [Fact]
@@ -42,7 +46,10 @@ public class RazorComponentResultTest
     [Fact]
     public void AcceptsObjectParameters()
     {
-        var result = new RazorComponentResult(typeof(SimpleComponent), new { Param1 = 123, Param2 = "Another" });
+        var result = new RazorComponentResult(
+            typeof(SimpleComponent),
+            new { Param1 = 123, Param2 = "Another" }
+        );
         Assert.Equal(2, result.Parameters.Count);
         Assert.Equal(123, result.Parameters["Param1"]);
         Assert.Equal("Another", result.Parameters["Param2"]);
@@ -98,13 +105,16 @@ public class RazorComponentResultTest
         httpContext.Response.Body = responseBody;
 
         // Act/Assert 1: Emits the initial pre-quiescent output to the response
-        var result = new RazorComponentResult(typeof(StreamingAsyncLoadingComponent),
-            PropertyHelper.ObjectToDictionary(new { LoadingTask = tcs.Task }).AsReadOnly());
+        var result = new RazorComponentResult(
+            typeof(StreamingAsyncLoadingComponent),
+            PropertyHelper.ObjectToDictionary(new { LoadingTask = tcs.Task }).AsReadOnly()
+        );
         var completionTask = result.ExecuteAsync(httpContext);
         await WaitForContentWrittenAsync(responseBody);
         Assert.Equal(
             "<!--bl:X-->Loading task status: WaitingForActivation<!--/bl:X-->",
-            MaskComponentIds(GetStringContent(responseBody)));
+            MaskComponentIds(GetStringContent(responseBody))
+        );
 
         // Assert 2: Result task remains incomplete for as long as the component's loading operation remains in flight
         // This keeps the HTTP response open
@@ -116,7 +126,8 @@ public class RazorComponentResultTest
         await completionTask;
         Assert.Equal(
             "<!--bl:X-->Loading task status: WaitingForActivation<!--/bl:X--><blazor-ssr><template blazor-component-id=\"X\">Loading task status: RanToCompletion</template><blazor-ssr-end></blazor-ssr-end></blazor-ssr>",
-            MaskComponentIds(GetStringContent(responseBody)));
+            MaskComponentIds(GetStringContent(responseBody))
+        );
     }
 
     [Fact]
@@ -129,13 +140,16 @@ public class RazorComponentResultTest
         httpContext.Response.Body = responseBody;
 
         // Act/Assert 1: Emits the initial pre-quiescent output to the response
-        var result = new RazorComponentResult(typeof(DoubleRenderingStreamingAsyncComponent),
-            PropertyHelper.ObjectToDictionary(new { WaitFor = tcs.Task }).AsReadOnly());
+        var result = new RazorComponentResult(
+            typeof(DoubleRenderingStreamingAsyncComponent),
+            PropertyHelper.ObjectToDictionary(new { WaitFor = tcs.Task }).AsReadOnly()
+        );
         var completionTask = result.ExecuteAsync(httpContext);
         await WaitForContentWrittenAsync(responseBody);
         Assert.Equal(
             "<!--bl:X-->Loading...<!--/bl:X-->",
-            MaskComponentIds(GetStringContent(responseBody)));
+            MaskComponentIds(GetStringContent(responseBody))
+        );
 
         // Act/Assert 2: When loading completes, it emits a streaming batch update with only one copy of the final output,
         // despite the RenderBatch containing two diffs from the component
@@ -143,7 +157,8 @@ public class RazorComponentResultTest
         await completionTask;
         Assert.Equal(
             "<!--bl:X-->Loading...<!--/bl:X--><blazor-ssr><template blazor-component-id=\"X\">Loaded</template><blazor-ssr-end></blazor-ssr-end></blazor-ssr>",
-            MaskComponentIds(GetStringContent(responseBody)));
+            MaskComponentIds(GetStringContent(responseBody))
+        );
     }
 
     [Fact]
@@ -160,22 +175,24 @@ public class RazorComponentResultTest
         httpContext.Response.Body = responseBody;
 
         // Act/Assert 1: Emits the initial pre-quiescent output to the response
-        var result = new RazorComponentResult(typeof(StreamingComponentWithChild),
-            PropertyHelper.ObjectToDictionary(new { LoadingTask = tcs.Task }).AsReadOnly());
+        var result = new RazorComponentResult(
+            typeof(StreamingComponentWithChild),
+            PropertyHelper.ObjectToDictionary(new { LoadingTask = tcs.Task }).AsReadOnly()
+        );
         var completionTask = result.ExecuteAsync(httpContext);
         await WaitForContentWrittenAsync(responseBody);
-        var expectedInitialHtml = "<!--bl:X-->[LoadingTask: WaitingForActivation]\n<!--bl:X-->[Child render: 1]\n<!--/bl:X--><!--/bl:X-->";
-        Assert.Equal(
-            expectedInitialHtml,
-            MaskComponentIds(GetStringContent(responseBody)));
-        
+        var expectedInitialHtml =
+            "<!--bl:X-->[LoadingTask: WaitingForActivation]\n<!--bl:X-->[Child render: 1]\n<!--/bl:X--><!--/bl:X-->";
+        Assert.Equal(expectedInitialHtml, MaskComponentIds(GetStringContent(responseBody)));
+
         // Act/Assert 2: When loading completes, it emits a streaming batch update in which the
         // child is present only within the parent markup, not as a separate entry
         tcs.SetResult();
         await completionTask;
         Assert.Equal(
             $"{expectedInitialHtml}<blazor-ssr><template blazor-component-id=\"X\">[LoadingTask: RanToCompletion]\n<!--bl:X-->[Child render: 2]\n<!--/bl:X--></template><blazor-ssr-end></blazor-ssr-end></blazor-ssr>",
-            MaskComponentIds(GetStringContent(responseBody)));
+            MaskComponentIds(GetStringContent(responseBody))
+        );
     }
 
     [Fact]
@@ -188,10 +205,12 @@ public class RazorComponentResultTest
         httpContext.Response.Body = responseBody;
 
         // Act/Assert: Doesn't complete until loading finishes
-        var result = new RazorComponentResult(typeof(StreamingAsyncLoadingComponent),
-            PropertyHelper.ObjectToDictionary(new { LoadingTask = tcs.Task }).AsReadOnly())
+        var result = new RazorComponentResult(
+            typeof(StreamingAsyncLoadingComponent),
+            PropertyHelper.ObjectToDictionary(new { LoadingTask = tcs.Task }).AsReadOnly()
+        )
         {
-            PreventStreamingRendering = true
+            PreventStreamingRendering = true,
         };
         var completionTask = result.ExecuteAsync(httpContext);
         await Task.Yield();
@@ -202,7 +221,8 @@ public class RazorComponentResultTest
         await completionTask;
         Assert.Equal(
             "<!--bl:X-->Loading task status: RanToCompletion<!--/bl:X-->",
-            MaskComponentIds(GetStringContent(responseBody)));
+            MaskComponentIds(GetStringContent(responseBody))
+        );
     }
 
     [Fact]
@@ -217,7 +237,10 @@ public class RazorComponentResultTest
         await new RazorComponentResult(typeof(ComponentWithLayout)).ExecuteAsync(httpContext);
 
         // Assert
-        Assert.Equal($"[TestParentLayout with content: [TestLayout with content: Page\n]\n]\n", GetStringContent(responseBody));
+        Assert.Equal(
+            $"[TestParentLayout with content: [TestLayout with content: Page\n]\n]\n",
+            GetStringContent(responseBody)
+        );
     }
 
     [Fact]
@@ -227,7 +250,9 @@ public class RazorComponentResultTest
         var httpContext = GetTestHttpContext();
 
         // Act
-        await new RazorComponentResult(typeof(ComponentThatRedirectsSynchronously)).ExecuteAsync(httpContext);
+        await new RazorComponentResult(typeof(ComponentThatRedirectsSynchronously)).ExecuteAsync(
+            httpContext
+        );
 
         // Assert
         Assert.Equal("https://test/somewhere/else", httpContext.Response.Headers.Location);
@@ -246,13 +271,17 @@ public class RazorComponentResultTest
         // Act
         var result = new RazorComponentResult(typeof(StreamingComponentThatRedirectsAsynchronously))
         {
-            PreventStreamingRendering = true
+            PreventStreamingRendering = true,
         };
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => result.ExecuteAsync(httpContext));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            result.ExecuteAsync(httpContext)
+        );
 
         // Assert
-        Assert.Contains("A navigation command was attempted during prerendering after the server already started sending the response", ex.Message);
+        Assert.Contains(
+            "A navigation command was attempted during prerendering after the server already started sending the response",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -264,16 +293,17 @@ public class RazorComponentResultTest
         httpContext.Response.Body = responseBody;
 
         // Act
-        await new RazorComponentResult(typeof(StreamingComponentThatRedirectsAsynchronously)).ExecuteAsync(httpContext);
+        await new RazorComponentResult(
+            typeof(StreamingComponentThatRedirectsAsynchronously)
+        ).ExecuteAsync(httpContext);
 
         // Assert
         var markup = MaskComponentIds(GetStringContent(responseBody));
         Assert.StartsWith(
             "<!--bl:X-->Some output\n<!--/bl:X--><blazor-ssr><template type=\"redirection\">_framework/opaque-redirect?url=",
-            markup);
-        Assert.EndsWith(
-            "</template><blazor-ssr-end></blazor-ssr-end></blazor-ssr>",
-            markup);
+            markup
+        );
+        Assert.EndsWith("</template><blazor-ssr-end></blazor-ssr-end></blazor-ssr>", markup);
     }
 
     [Fact]
@@ -284,7 +314,10 @@ public class RazorComponentResultTest
 
         // Act
         var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
-            new RazorComponentResult(typeof(ComponentThatThrowsSynchronously)).ExecuteAsync(httpContext));
+            new RazorComponentResult(typeof(ComponentThatThrowsSynchronously)).ExecuteAsync(
+                httpContext
+            )
+        );
 
         // Assert
         Assert.Contains("Test message", ex.Message);
@@ -297,9 +330,12 @@ public class RazorComponentResultTest
         var httpContext = GetTestHttpContext();
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(
-            () => new RazorComponentResult(typeof(StreamingComponentThatThrowsAsynchronously)) { PreventStreamingRendering = true }
-                .ExecuteAsync(httpContext));
+        var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
+            new RazorComponentResult(typeof(StreamingComponentThatThrowsAsynchronously))
+            {
+                PreventStreamingRendering = true,
+            }.ExecuteAsync(httpContext)
+        );
 
         // Assert
         Assert.Contains("Test message", ex.Message);
@@ -308,10 +344,14 @@ public class RazorComponentResultTest
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public async Task OnUnhandledExceptionAfterResponseStarted_WithStreamingOn_EmitsCommand(bool isDevelopmentEnvironment)
+    public async Task OnUnhandledExceptionAfterResponseStarted_WithStreamingOn_EmitsCommand(
+        bool isDevelopmentEnvironment
+    )
     {
         // Arrange
-        var httpContext = GetTestHttpContext(isDevelopmentEnvironment ? Environments.Development : Environments.Production);
+        var httpContext = GetTestHttpContext(
+            isDevelopmentEnvironment ? Environments.Development : Environments.Production
+        );
         var responseBody = new MemoryStream();
         httpContext.Response.Body = responseBody;
 
@@ -320,15 +360,18 @@ public class RazorComponentResultTest
             : "There was an unhandled exception on the current request. For more details turn on detailed exceptions by setting &#x27;DetailedErrors: true&#x27; in &#x27;appSettings.Development.json&#x27;";
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(
-            () => new RazorComponentResult(typeof(StreamingComponentThatThrowsAsynchronously))
-                .ExecuteAsync(httpContext));
+        var ex = await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
+            new RazorComponentResult(
+                typeof(StreamingComponentThatThrowsAsynchronously)
+            ).ExecuteAsync(httpContext)
+        );
 
         // Assert
         Assert.Contains("Test message with <b>markup</b>", ex.Message);
         Assert.Contains(
             $"<!--bl:X-->Some output\n<!--/bl:X--><blazor-ssr><template type=\"error\">{expectedResponseExceptionInfo}",
-            MaskComponentIds(GetStringContent(responseBody)));
+            MaskComponentIds(GetStringContent(responseBody))
+        );
     }
 
     [Fact]
@@ -360,7 +403,8 @@ public class RazorComponentResultTest
         html = GetStringContent(testContext.ResponseBody);
         Assert.EndsWith(
             "<blazor-ssr><template blazor-component-id=\"X\">Loaded</template><blazor-ssr-end></blazor-ssr-end></blazor-ssr>",
-            MaskComponentIds(html));
+            MaskComponentIds(html)
+        );
     }
 
     [Fact]
@@ -394,13 +438,17 @@ public class RazorComponentResultTest
         html = GetStringContent(testContext.ResponseBody);
         Assert.EndsWith(
             "<blazor-ssr><template blazor-component-id=\"X\">Loaded</template><blazor-ssr-end></blazor-ssr-end></blazor-ssr>",
-            MaskComponentIds(html));
+            MaskComponentIds(html)
+        );
     }
 
     // We don't want these tests to be hardcoded for specific component ID numbers, so replace them all with X for assertions
-    private static readonly Regex TemplateElementComponentIdRegex = new Regex("blazor-component-id=\"\\d+\"");
+    private static readonly Regex TemplateElementComponentIdRegex = new Regex(
+        "blazor-component-id=\"\\d+\""
+    );
     private static readonly Regex OpenBoundaryMarkerRegex = new Regex("<!--bl:\\d+-->");
     private static readonly Regex CloseBoundaryMarkerRegex = new Regex("<!--/bl:\\d+-->");
+
     private static string MaskComponentIds(string html)
     {
         html = TemplateElementComponentIdRegex.Replace(html, "blazor-component-id=\"X\"");
@@ -422,14 +470,27 @@ public class RazorComponentResultTest
         var parameters = new Dictionary<string, object>
         {
             { nameof(VaryStreamingScenarios.TopLevelComponentTask), topLevelComponentTask.Task },
-            { nameof(VaryStreamingScenarios.WithinStreamingRegionTask), withinStreamingRegionTask.Task },
-            { nameof(VaryStreamingScenarios.WithinNestedNonstreamingRegionTask), withinNestedNonstreamingRegionTask.Task },
+            {
+                nameof(VaryStreamingScenarios.WithinStreamingRegionTask),
+                withinStreamingRegionTask.Task
+            },
+            {
+                nameof(VaryStreamingScenarios.WithinNestedNonstreamingRegionTask),
+                withinNestedNonstreamingRegionTask.Task
+            },
         };
 
         var result = new RazorComponentResult(typeof(VaryStreamingScenarios), parameters);
         var quiescence = result.ExecuteAsync(httpContext);
 
-        return new(renderer, quiescence, responseBody, topLevelComponentTask, withinStreamingRegionTask, withinNestedNonstreamingRegionTask);
+        return new(
+            renderer,
+            quiescence,
+            responseBody,
+            topLevelComponentTask,
+            withinStreamingRegionTask,
+            withinNestedNonstreamingRegionTask
+        );
     }
 
     private record struct VaryStreamingScenariosContext(
@@ -438,7 +499,8 @@ public class RazorComponentResultTest
         MemoryStream ResponseBody,
         TaskCompletionSource TopLevelComponentTask,
         TaskCompletionSource WithinStreamingRegionTask,
-        TaskCompletionSource WithinNestedNonstreamingRegionTask);
+        TaskCompletionSource WithinNestedNonstreamingRegionTask
+    );
 
     private static string GetStringContent(MemoryStream stream)
     {
@@ -448,25 +510,33 @@ public class RazorComponentResultTest
 
     public static DefaultHttpContext GetTestHttpContext(string environmentName = null)
     {
-        var mockWebHostEnvironment = Mock.Of<IWebHostEnvironment>(
-            x => x.EnvironmentName == (environmentName ?? Environments.Production));
+        var mockWebHostEnvironment = Mock.Of<IWebHostEnvironment>(x =>
+            x.EnvironmentName == (environmentName ?? Environments.Production)
+        );
         var serviceCollection = new ServiceCollection()
             .AddAntiforgery()
             .AddSingleton(new DiagnosticListener("test"))
             .AddSingleton<IWebHostEnvironment>(mockWebHostEnvironment)
             .AddSingleton<EndpointHtmlRenderer>()
-            .AddSingleton<IComponentPrerenderer>(services => services.GetRequiredService<EndpointHtmlRenderer>())
+            .AddSingleton<IComponentPrerenderer>(services =>
+                services.GetRequiredService<EndpointHtmlRenderer>()
+            )
             .AddSingleton<NavigationManager, FakeNavigationManager>()
             .AddSingleton<ServerComponentSerializer>()
             .AddSingleton<ComponentStatePersistenceManager>()
             .AddSingleton<IDataProtectionProvider, FakeDataProtectionProvider>()
             .AddSingleton<HttpContextFormDataProvider>()
             .AddSingleton<ComponentStatePersistenceManager>()
-            .AddSingleton<PersistentComponentState>(sp => sp.GetRequiredService<ComponentStatePersistenceManager>().State)
+            .AddSingleton<PersistentComponentState>(sp =>
+                sp.GetRequiredService<ComponentStatePersistenceManager>().State
+            )
             .AddSingleton<AntiforgeryStateProvider, EndpointAntiforgeryStateProvider>()
             .AddLogging();
 
-        var result = new DefaultHttpContext { RequestServices = serviceCollection.BuildServiceProvider() };
+        var result = new DefaultHttpContext
+        {
+            RequestServices = serviceCollection.BuildServiceProvider(),
+        };
         result.Request.Scheme = "https";
         result.Request.Host = new HostString("test");
         return result;
@@ -495,21 +565,21 @@ public class RazorComponentResultTest
 
     class FakeDataProtectionProvider : IDataProtectionProvider
     {
-        public IDataProtector CreateProtector(string purpose)
-            => new FakeDataProtector();
+        public IDataProtector CreateProtector(string purpose) => new FakeDataProtector();
 
         class FakeDataProtector : IDataProtector
         {
             public IDataProtector CreateProtector(string purpose) => this;
+
             public byte[] Protect(byte[] plaintext) => new byte[] { 1, 2, 3 };
+
             public byte[] Unprotect(byte[] protectedData) => throw new NotImplementedException();
         }
     }
 
     class FakeNavigationManager : NavigationManager, IHostEnvironmentNavigationManager
     {
-        public new void Initialize(string baseUri, string uri)
-            => base.Initialize(baseUri, uri);
+        public new void Initialize(string baseUri, string uri) => base.Initialize(baseUri, uri);
 
         protected override void NavigateToCore(string uri, NavigationOptions options)
         {

@@ -3,12 +3,11 @@
 //------------------------------------------------------------
 namespace System.ServiceModel.Dispatcher
 {
-    using System.Threading;
     using System.Collections.Generic;
+    using System.Threading;
 
     class WorkflowDispatchContext : IDisposable
     {
-
         [ThreadStatic]
         static WorkflowDispatchContext workflowDispatchContext = null;
         bool isWorkflowStarting;
@@ -29,26 +28,17 @@ namespace System.ServiceModel.Dispatcher
 
         public static WorkflowDispatchContext Current
         {
-            get
-            {
-                return workflowDispatchContext;
-            }
+            get { return workflowDispatchContext; }
         }
 
         public bool IsSynchronous
         {
-            get
-            {
-                return this.synchronous;
-            }
+            get { return this.synchronous; }
         }
 
         public bool IsWorkflowStarting
         {
-            get
-            {
-                return this.isWorkflowStarting;
-            }
+            get { return this.isWorkflowStarting; }
         }
 
         public void Dispose()

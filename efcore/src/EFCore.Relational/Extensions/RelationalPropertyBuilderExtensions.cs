@@ -23,9 +23,7 @@ public static class RelationalPropertyBuilderExtensions
     /// <param name="propertyBuilder">The builder for the property being configured.</param>
     /// <param name="name">The name of the column.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static PropertyBuilder HasColumnName(
-        this PropertyBuilder propertyBuilder,
-        string? name)
+    public static PropertyBuilder HasColumnName(this PropertyBuilder propertyBuilder, string? name)
     {
         Check.NullButNotEmpty(name, nameof(name));
 
@@ -46,8 +44,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> HasColumnName<TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder,
-        string? name)
-        => (PropertyBuilder<TProperty>)HasColumnName((PropertyBuilder)propertyBuilder, name);
+        string? name
+    ) => (PropertyBuilder<TProperty>)HasColumnName((PropertyBuilder)propertyBuilder, name);
 
     /// <summary>
     ///     Configures the column that the property maps to when targeting a relational database.
@@ -65,7 +63,8 @@ public static class RelationalPropertyBuilderExtensions
     public static IConventionPropertyBuilder? HasColumnName(
         this IConventionPropertyBuilder propertyBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!propertyBuilder.CanSetColumnName(name, fromDataAnnotation))
         {
@@ -94,7 +93,8 @@ public static class RelationalPropertyBuilderExtensions
         this IConventionPropertyBuilder propertyBuilder,
         string? name,
         in StoreObjectIdentifier storeObject,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!propertyBuilder.CanSetColumnName(name, storeObject, fromDataAnnotation))
         {
@@ -118,8 +118,13 @@ public static class RelationalPropertyBuilderExtensions
     public static bool CanSetColumnName(
         this IConventionPropertyBuilder propertyBuilder,
         string? name,
-        bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(RelationalAnnotationNames.ColumnName, name, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        propertyBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.ColumnName,
+            name,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Returns a value indicating whether the given column for a particular table-like store object can be set for the property.
@@ -136,13 +141,17 @@ public static class RelationalPropertyBuilderExtensions
         this IConventionPropertyBuilder propertyBuilder,
         string? name,
         in StoreObjectIdentifier storeObject,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
-        var overrides = (IConventionRelationalPropertyOverrides?)RelationalPropertyOverrides.Find(
-            propertyBuilder.Metadata, storeObject);
+        var overrides = (IConventionRelationalPropertyOverrides?)
+            RelationalPropertyOverrides.Find(propertyBuilder.Metadata, storeObject);
         return overrides == null
-            || (fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention)
-            .Overrides(overrides.GetColumnNameConfigurationSource())
+            || (
+                fromDataAnnotation
+                    ? ConfigurationSource.DataAnnotation
+                    : ConfigurationSource.Convention
+            ).Overrides(overrides.GetColumnNameConfigurationSource())
             || overrides.ColumnName == name;
     }
 
@@ -165,8 +174,10 @@ public static class RelationalPropertyBuilderExtensions
     /// <param name="propertyBuilder">The builder of the property being configured.</param>
     /// <param name="order">The column order.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static PropertyBuilder<TProperty> HasColumnOrder<TProperty>(this PropertyBuilder<TProperty> propertyBuilder, int? order)
-        => (PropertyBuilder<TProperty>)HasColumnOrder((PropertyBuilder)propertyBuilder, order);
+    public static PropertyBuilder<TProperty> HasColumnOrder<TProperty>(
+        this PropertyBuilder<TProperty> propertyBuilder,
+        int? order
+    ) => (PropertyBuilder<TProperty>)HasColumnOrder((PropertyBuilder)propertyBuilder, order);
 
     /// <summary>
     ///     Configures the order of the column the property is mapped to.
@@ -178,7 +189,8 @@ public static class RelationalPropertyBuilderExtensions
     public static IConventionPropertyBuilder? HasColumnOrder(
         this IConventionPropertyBuilder propertyBuilder,
         int? order,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!propertyBuilder.CanSetColumnOrder(order, fromDataAnnotation))
         {
@@ -197,8 +209,16 @@ public static class RelationalPropertyBuilderExtensions
     /// <param name="order">The column order.</param>
     /// <param name="fromDataAnnotation">A value indicating whether the configuration was specified using a data annotation.</param>
     /// <returns><see langword="true" /> if the column order can be set for the property.</returns>
-    public static bool CanSetColumnOrder(this IConventionPropertyBuilder propertyBuilder, int? order, bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(RelationalAnnotationNames.ColumnOrder, order, fromDataAnnotation);
+    public static bool CanSetColumnOrder(
+        this IConventionPropertyBuilder propertyBuilder,
+        int? order,
+        bool fromDataAnnotation = false
+    ) =>
+        propertyBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.ColumnOrder,
+            order,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the data type of the column that the property maps to when targeting a relational database.
@@ -212,7 +232,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder HasColumnType(
         this PropertyBuilder propertyBuilder,
-        string? typeName)
+        string? typeName
+    )
     {
         Check.NullButNotEmpty(typeName, nameof(typeName));
 
@@ -234,8 +255,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> HasColumnType<TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder,
-        string? typeName)
-        => (PropertyBuilder<TProperty>)HasColumnType((PropertyBuilder)propertyBuilder, typeName);
+        string? typeName
+    ) => (PropertyBuilder<TProperty>)HasColumnType((PropertyBuilder)propertyBuilder, typeName);
 
     /// <summary>
     ///     Configures the data type of the column that the property maps to when targeting a relational database.
@@ -254,7 +275,8 @@ public static class RelationalPropertyBuilderExtensions
     public static IConventionPropertyBuilder? HasColumnType(
         this IConventionPropertyBuilder propertyBuilder,
         string? typeName,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!propertyBuilder.CanSetColumnType(typeName, fromDataAnnotation))
         {
@@ -278,8 +300,13 @@ public static class RelationalPropertyBuilderExtensions
     public static bool CanSetColumnType(
         this IConventionPropertyBuilder propertyBuilder,
         string? typeName,
-        bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(RelationalAnnotationNames.ColumnType, typeName, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        propertyBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.ColumnType,
+            typeName,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the property as capable of storing only fixed-length data, such as strings.
@@ -292,7 +319,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public static PropertyBuilder IsFixedLength(
         this PropertyBuilder propertyBuilder,
-        bool fixedLength = true)
+        bool fixedLength = true
+    )
     {
         propertyBuilder.Metadata.SetIsFixedLength(fixedLength);
 
@@ -311,8 +339,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public static PropertyBuilder<TProperty> IsFixedLength<TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder,
-        bool fixedLength = true)
-        => (PropertyBuilder<TProperty>)IsFixedLength((PropertyBuilder)propertyBuilder, fixedLength);
+        bool fixedLength = true
+    ) => (PropertyBuilder<TProperty>)IsFixedLength((PropertyBuilder)propertyBuilder, fixedLength);
 
     /// <summary>
     ///     Configures the property as capable of storing only fixed-length data, such as strings.
@@ -330,7 +358,8 @@ public static class RelationalPropertyBuilderExtensions
     public static IConventionPropertyBuilder? IsFixedLength(
         this IConventionPropertyBuilder propertyBuilder,
         bool? fixedLength,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!propertyBuilder.CanSetIsFixedLength(fixedLength, fromDataAnnotation))
         {
@@ -354,8 +383,13 @@ public static class RelationalPropertyBuilderExtensions
     public static bool CanSetIsFixedLength(
         this IConventionPropertyBuilder propertyBuilder,
         bool? fixedLength,
-        bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(RelationalAnnotationNames.IsFixedLength, fixedLength, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        propertyBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.IsFixedLength,
+            fixedLength,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the default value expression for the column that the property maps to when targeting a
@@ -391,7 +425,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder HasDefaultValueSql(
         this PropertyBuilder propertyBuilder,
-        string? sql)
+        string? sql
+    )
     {
         Check.NullButNotEmpty(sql, nameof(sql));
 
@@ -418,8 +453,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <param name="propertyBuilder">The builder for the property being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> HasDefaultValueSql<TProperty>(
-        this PropertyBuilder<TProperty> propertyBuilder)
-        => (PropertyBuilder<TProperty>)HasDefaultValueSql((PropertyBuilder)propertyBuilder);
+        this PropertyBuilder<TProperty> propertyBuilder
+    ) => (PropertyBuilder<TProperty>)HasDefaultValueSql((PropertyBuilder)propertyBuilder);
 
     /// <summary>
     ///     Configures the default value expression for the column that the property maps to when targeting a relational database.
@@ -433,8 +468,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> HasDefaultValueSql<TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder,
-        string? sql)
-        => (PropertyBuilder<TProperty>)HasDefaultValueSql((PropertyBuilder)propertyBuilder, sql);
+        string? sql
+    ) => (PropertyBuilder<TProperty>)HasDefaultValueSql((PropertyBuilder)propertyBuilder, sql);
 
     /// <summary>
     ///     Configures the default value expression for the column that the property maps to when targeting a relational database.
@@ -452,7 +487,8 @@ public static class RelationalPropertyBuilderExtensions
     public static IConventionPropertyBuilder? HasDefaultValueSql(
         this IConventionPropertyBuilder propertyBuilder,
         string? sql,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!propertyBuilder.CanSetDefaultValueSql(sql, fromDataAnnotation))
         {
@@ -476,11 +512,13 @@ public static class RelationalPropertyBuilderExtensions
     public static bool CanSetDefaultValueSql(
         this IConventionPropertyBuilder propertyBuilder,
         string? sql,
-        bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(
+        bool fromDataAnnotation = false
+    ) =>
+        propertyBuilder.CanSetAnnotation(
             RelationalAnnotationNames.DefaultValueSql,
             sql,
-            fromDataAnnotation);
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the property to map to a computed column when targeting a relational database.
@@ -515,8 +553,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder HasComputedColumnSql(
         this PropertyBuilder propertyBuilder,
-        string? sql)
-        => HasComputedColumnSql(propertyBuilder, sql, null);
+        string? sql
+    ) => HasComputedColumnSql(propertyBuilder, sql, null);
 
     /// <summary>
     ///     Configures the property to map to a computed column when targeting a relational database.
@@ -535,7 +573,8 @@ public static class RelationalPropertyBuilderExtensions
     public static PropertyBuilder HasComputedColumnSql(
         this PropertyBuilder propertyBuilder,
         string? sql,
-        bool? stored)
+        bool? stored
+    )
     {
         Check.NullButNotEmpty(sql, nameof(sql));
 
@@ -566,8 +605,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <param name="propertyBuilder">The builder for the property being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> HasComputedColumnSql<TProperty>(
-        this PropertyBuilder<TProperty> propertyBuilder)
-        => (PropertyBuilder<TProperty>)HasComputedColumnSql((PropertyBuilder)propertyBuilder);
+        this PropertyBuilder<TProperty> propertyBuilder
+    ) => (PropertyBuilder<TProperty>)HasComputedColumnSql((PropertyBuilder)propertyBuilder);
 
     /// <summary>
     ///     Configures the property to map to a computed column when targeting a relational database.
@@ -581,8 +620,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> HasComputedColumnSql<TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder,
-        string? sql)
-        => HasComputedColumnSql(propertyBuilder, sql, null);
+        string? sql
+    ) => HasComputedColumnSql(propertyBuilder, sql, null);
 
     /// <summary>
     ///     Configures the property to map to a computed column when targeting a relational database.
@@ -602,8 +641,10 @@ public static class RelationalPropertyBuilderExtensions
     public static PropertyBuilder<TProperty> HasComputedColumnSql<TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder,
         string? sql,
-        bool? stored)
-        => (PropertyBuilder<TProperty>)HasComputedColumnSql((PropertyBuilder)propertyBuilder, sql, stored);
+        bool? stored
+    ) =>
+        (PropertyBuilder<TProperty>)
+            HasComputedColumnSql((PropertyBuilder)propertyBuilder, sql, stored);
 
     /// <summary>
     ///     Configures the property to map to a computed column when targeting a relational database.
@@ -621,7 +662,8 @@ public static class RelationalPropertyBuilderExtensions
     public static IConventionPropertyBuilder? HasComputedColumnSql(
         this IConventionPropertyBuilder propertyBuilder,
         string? sql,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!propertyBuilder.CanSetComputedColumnSql(sql, fromDataAnnotation))
         {
@@ -651,7 +693,8 @@ public static class RelationalPropertyBuilderExtensions
     public static IConventionPropertyBuilder? IsStoredComputedColumn(
         this IConventionPropertyBuilder propertyBuilder,
         bool? stored,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!propertyBuilder.CanSetIsStoredComputedColumn(stored, fromDataAnnotation))
         {
@@ -675,11 +718,13 @@ public static class RelationalPropertyBuilderExtensions
     public static bool CanSetComputedColumnSql(
         this IConventionPropertyBuilder propertyBuilder,
         string? sql,
-        bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(
+        bool fromDataAnnotation = false
+    ) =>
+        propertyBuilder.CanSetAnnotation(
             RelationalAnnotationNames.ComputedColumnSql,
             sql,
-            fromDataAnnotation);
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Returns a value indicating whether the given computed column type can be set for the column.
@@ -698,11 +743,13 @@ public static class RelationalPropertyBuilderExtensions
     public static bool CanSetIsStoredComputedColumn(
         this IConventionPropertyBuilder propertyBuilder,
         bool? stored,
-        bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(
+        bool fromDataAnnotation = false
+    ) =>
+        propertyBuilder.CanSetAnnotation(
             RelationalAnnotationNames.IsStored,
             stored,
-            fromDataAnnotation);
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the default value for the column that the property maps
@@ -739,7 +786,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder HasDefaultValue(
         this PropertyBuilder propertyBuilder,
-        object? value)
+        object? value
+    )
     {
         propertyBuilder.Metadata.SetDefaultValue(value);
 
@@ -764,8 +812,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <param name="propertyBuilder">The builder for the property being configured.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> HasDefaultValue<TProperty>(
-        this PropertyBuilder<TProperty> propertyBuilder)
-        => (PropertyBuilder<TProperty>)HasDefaultValue((PropertyBuilder)propertyBuilder);
+        this PropertyBuilder<TProperty> propertyBuilder
+    ) => (PropertyBuilder<TProperty>)HasDefaultValue((PropertyBuilder)propertyBuilder);
 
     /// <summary>
     ///     Configures the default value for the column that the property maps
@@ -780,8 +828,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> HasDefaultValue<TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder,
-        object? value)
-        => (PropertyBuilder<TProperty>)HasDefaultValue((PropertyBuilder)propertyBuilder, value);
+        object? value
+    ) => (PropertyBuilder<TProperty>)HasDefaultValue((PropertyBuilder)propertyBuilder, value);
 
     /// <summary>
     ///     Configures the default value for the column that the property maps to when targeting a relational database.
@@ -799,7 +847,8 @@ public static class RelationalPropertyBuilderExtensions
     public static IConventionPropertyBuilder? HasDefaultValue(
         this IConventionPropertyBuilder propertyBuilder,
         object? value,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!propertyBuilder.CanSetDefaultValue(value, fromDataAnnotation))
         {
@@ -823,11 +872,13 @@ public static class RelationalPropertyBuilderExtensions
     public static bool CanSetDefaultValue(
         this IConventionPropertyBuilder propertyBuilder,
         object? value,
-        bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(
+        bool fromDataAnnotation = false
+    ) =>
+        propertyBuilder.CanSetAnnotation(
             RelationalAnnotationNames.DefaultValue,
             value,
-            fromDataAnnotation);
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures a comment to be applied to the column
@@ -838,9 +889,7 @@ public static class RelationalPropertyBuilderExtensions
     /// <param name="propertyBuilder">The builder for the property being configured.</param>
     /// <param name="comment">The comment for the column.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static PropertyBuilder HasComment(
-        this PropertyBuilder propertyBuilder,
-        string? comment)
+    public static PropertyBuilder HasComment(this PropertyBuilder propertyBuilder, string? comment)
     {
         propertyBuilder.Metadata.SetComment(comment);
 
@@ -859,8 +908,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> HasComment<TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder,
-        string? comment)
-        => (PropertyBuilder<TProperty>)HasComment((PropertyBuilder)propertyBuilder, comment);
+        string? comment
+    ) => (PropertyBuilder<TProperty>)HasComment((PropertyBuilder)propertyBuilder, comment);
 
     /// <summary>
     ///     Configures a comment to be applied to the column
@@ -878,7 +927,8 @@ public static class RelationalPropertyBuilderExtensions
     public static IConventionPropertyBuilder? HasComment(
         this IConventionPropertyBuilder propertyBuilder,
         string? comment,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!propertyBuilder.CanSetComment(comment, fromDataAnnotation))
         {
@@ -902,11 +952,13 @@ public static class RelationalPropertyBuilderExtensions
     public static bool CanSetComment(
         this IConventionPropertyBuilder propertyBuilder,
         string? comment,
-        bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(
+        bool fromDataAnnotation = false
+    ) =>
+        propertyBuilder.CanSetAnnotation(
             RelationalAnnotationNames.Comment,
             comment,
-            fromDataAnnotation);
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the property to use the given collation. The database column will be created with the given
@@ -918,7 +970,10 @@ public static class RelationalPropertyBuilderExtensions
     /// <param name="propertyBuilder">The builder for the property being configured.</param>
     /// <param name="collation">The collation for the column.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public static PropertyBuilder UseCollation(this PropertyBuilder propertyBuilder, string? collation)
+    public static PropertyBuilder UseCollation(
+        this PropertyBuilder propertyBuilder,
+        string? collation
+    )
     {
         Check.NullButNotEmpty(collation, nameof(collation));
 
@@ -939,8 +994,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> UseCollation<TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder,
-        string? collation)
-        => (PropertyBuilder<TProperty>)UseCollation((PropertyBuilder)propertyBuilder, collation);
+        string? collation
+    ) => (PropertyBuilder<TProperty>)UseCollation((PropertyBuilder)propertyBuilder, collation);
 
     /// <summary>
     ///     Configures the property to use the given collation. The database column will be created with the given
@@ -959,7 +1014,8 @@ public static class RelationalPropertyBuilderExtensions
     public static IConventionPropertyBuilder? UseCollation(
         this IConventionPropertyBuilder propertyBuilder,
         string? collation,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (propertyBuilder.CanSetCollation(collation, fromDataAnnotation))
         {
@@ -984,8 +1040,13 @@ public static class RelationalPropertyBuilderExtensions
     public static bool CanSetCollation(
         this IConventionPropertyBuilder propertyBuilder,
         string? collation,
-        bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(RelationalAnnotationNames.Collation, collation, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        propertyBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.Collation,
+            collation,
+            fromDataAnnotation
+        );
 
     /// <summary>
     ///     Configures the property of an entity mapped to a JSON column, mapping the entity property to a specific JSON property,
@@ -996,7 +1057,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder HasJsonPropertyName(
         this PropertyBuilder propertyBuilder,
-        string? name)
+        string? name
+    )
     {
         Check.NullButNotEmpty(name, nameof(name));
 
@@ -1014,8 +1076,8 @@ public static class RelationalPropertyBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static PropertyBuilder<TProperty> HasJsonPropertyName<TProperty>(
         this PropertyBuilder<TProperty> propertyBuilder,
-        string? name)
-        => (PropertyBuilder<TProperty>)HasJsonPropertyName((PropertyBuilder)propertyBuilder, name);
+        string? name
+    ) => (PropertyBuilder<TProperty>)HasJsonPropertyName((PropertyBuilder)propertyBuilder, name);
 
     /// <summary>
     ///     Configures the property of an entity mapped to a JSON column, mapping the entity property to a specific JSON property,
@@ -1031,7 +1093,8 @@ public static class RelationalPropertyBuilderExtensions
     public static IConventionPropertyBuilder? HasJsonPropertyName(
         this IConventionPropertyBuilder propertyBuilder,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         if (!propertyBuilder.CanSetJsonPropertyName(name, fromDataAnnotation))
         {
@@ -1053,6 +1116,11 @@ public static class RelationalPropertyBuilderExtensions
     public static bool CanSetJsonPropertyName(
         this IConventionPropertyBuilder propertyBuilder,
         string? name,
-        bool fromDataAnnotation = false)
-        => propertyBuilder.CanSetAnnotation(RelationalAnnotationNames.JsonPropertyName, name, fromDataAnnotation);
+        bool fromDataAnnotation = false
+    ) =>
+        propertyBuilder.CanSetAnnotation(
+            RelationalAnnotationNames.JsonPropertyName,
+            name,
+            fromDataAnnotation
+        );
 }

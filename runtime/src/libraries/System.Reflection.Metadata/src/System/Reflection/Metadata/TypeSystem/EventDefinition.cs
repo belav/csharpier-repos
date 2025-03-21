@@ -30,26 +30,17 @@ namespace System.Reflection.Metadata
 
         public StringHandle Name
         {
-            get
-            {
-                return _reader.EventTable.GetName(Handle);
-            }
+            get { return _reader.EventTable.GetName(Handle); }
         }
 
         public EventAttributes Attributes
         {
-            get
-            {
-                return _reader.EventTable.GetFlags(Handle);
-            }
+            get { return _reader.EventTable.GetFlags(Handle); }
         }
 
         public EntityHandle Type
         {
-            get
-            {
-                return _reader.EventTable.GetEventType(Handle);
-            }
+            get { return _reader.EventTable.GetEventType(Handle); }
         }
 
         public CustomAttributeHandleCollection GetCustomAttributes()
@@ -65,7 +56,10 @@ namespace System.Reflection.Metadata
             ImmutableArray<MethodDefinitionHandle>.Builder? other = null;
 
             ushort methodCount;
-            int firstRowId = _reader.MethodSemanticsTable.FindSemanticMethodsForEvent(Handle, out methodCount);
+            int firstRowId = _reader.MethodSemanticsTable.FindSemanticMethodsForEvent(
+                Handle,
+                out methodCount
+            );
             for (ushort i = 0; i < methodCount; i++)
             {
                 int rowId = firstRowId + i;
@@ -91,7 +85,8 @@ namespace System.Reflection.Metadata
                 }
             }
 
-            var otherAccessors = other?.ToImmutable() ?? ImmutableArray<MethodDefinitionHandle>.Empty;
+            var otherAccessors =
+                other?.ToImmutable() ?? ImmutableArray<MethodDefinitionHandle>.Empty;
             return new EventAccessors(adder, remover, fire, otherAccessors);
         }
     }

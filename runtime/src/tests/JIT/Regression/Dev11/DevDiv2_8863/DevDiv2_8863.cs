@@ -44,7 +44,7 @@ public class Program
     static void x64_JIT_Bug(Derived d)
     {
         Base b = d;
-    loop:
+        loop:
         if (b != null)
         {
             if (b is Derived)
@@ -72,11 +72,10 @@ public class Program
         /* This issue is caused by CSE and trying to pull a typecheck out of a loop.
          * We used to do this incorrectly and this could allow a type to call methods
          * from it's "cousin" types...
-         * 
+         *
          * This example will AV...
          * */
         x64_JIT_Bug(new MyDerived());
         // Well, we made it here... should be good.
     }
 }
-

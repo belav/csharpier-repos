@@ -8,9 +8,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json
 {
     internal abstract class JsonNode : EmbeddedSyntaxNode<JsonKind, JsonNode>
     {
-        protected JsonNode(JsonKind kind) : base(kind)
-        {
-        }
+        protected JsonNode(JsonKind kind)
+            : base(kind) { }
 
         public abstract void Accept(IJsonNodeVisitor visitor);
     }

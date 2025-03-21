@@ -23,10 +23,10 @@ using System;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-	public enum SyncFromAllServersErrorCategory
-	{
-		ErrorContactingServer,
-		ErrorReplicating,
-		ServerUnreachable
-	}
+    public enum SyncFromAllServersErrorCategory
+    {
+        ErrorContactingServer,
+        ErrorReplicating,
+        ServerUnreachable,
+    }
 }

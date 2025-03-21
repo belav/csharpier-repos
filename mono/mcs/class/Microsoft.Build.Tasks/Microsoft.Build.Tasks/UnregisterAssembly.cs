@@ -25,52 +25,40 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-	public class UnregisterAssembly : AppDomainIsolatedTaskExtension {
-	
-		ITaskItem[]	assemblies;
-		ITaskItem	assemblyListFile;
-		ITaskItem[]	typeLibFiles;
-	
-		public UnregisterAssembly ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public class UnregisterAssembly : AppDomainIsolatedTaskExtension
+    {
+        ITaskItem[] assemblies;
+        ITaskItem assemblyListFile;
+        ITaskItem[] typeLibFiles;
 
-		public override bool Execute ()
-		{
-			throw new NotImplementedException ();
-		}
+        public UnregisterAssembly() { }
 
-		public ITaskItem[] Assemblies {
-			get {
-				return assemblies;
-			}
-			set {
-				assemblies = value;
-			}
-		}
+        public override bool Execute()
+        {
+            throw new NotImplementedException();
+        }
 
-		public ITaskItem AssemblyListFile {
-			get {
-				return assemblyListFile;
-			}
-			set {
-				assemblyListFile = value;
-			}
-		}
+        public ITaskItem[] Assemblies
+        {
+            get { return assemblies; }
+            set { assemblies = value; }
+        }
 
-		public ITaskItem[] TypeLibFiles {
-			get {
-				return typeLibFiles;
-			}
-			set {
-				typeLibFiles = value;
-			}
-		}
-	}
+        public ITaskItem AssemblyListFile
+        {
+            get { return assemblyListFile; }
+            set { assemblyListFile = value; }
+        }
+
+        public ITaskItem[] TypeLibFiles
+        {
+            get { return typeLibFiles; }
+            set { typeLibFiles = value; }
+        }
+    }
 }
-

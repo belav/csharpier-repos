@@ -29,8 +29,11 @@ public class RouteHandlerTest
                     {
                         app.UseRouting();
                         app.UseEndpoints(b =>
-                            b.MapPost("/EchoTodo/{id}",
-                                (int id, Todo todo) => todo with { Id = id }));
+                            b.MapPost(
+                                "/EchoTodo/{id}",
+                                (int id, Todo todo) => todo with { Id = id }
+                            )
+                        );
                     })
                     .UseTestServer();
             })
@@ -44,10 +47,7 @@ public class RouteHandlerTest
         await host.StartAsync();
         var client = server.CreateClient();
 
-        var todo = new Todo
-        {
-            Name = "Write tests!"
-        };
+        var todo = new Todo { Name = "Write tests!" };
 
         var response = await client.PostAsJsonAsync("/EchoTodo/42", todo);
         response.EnsureSuccessStatusCode();
@@ -77,7 +77,9 @@ public class RouteHandlerTest
                             b.DataSources.Add(testDisposeDataSource);
 
                             var group = b.MapGroup("");
-                            ((IEndpointRouteBuilder)group).DataSources.Add(testGroupDisposeDataSource);
+                            ((IEndpointRouteBuilder)group).DataSources.Add(
+                                testGroupDisposeDataSource
+                            );
                         });
                     })
                     .UseTestServer();

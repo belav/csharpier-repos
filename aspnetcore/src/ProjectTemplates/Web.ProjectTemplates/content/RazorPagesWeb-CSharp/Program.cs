@@ -35,47 +35,53 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 #if (IndividualLocalAuth)
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+var connectionString =
+    builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 #if (UseLocalDB)
-    options.UseSqlServer(connectionString));
+    options.UseSqlServer(connectionString)
+);
 #else
     options.UseSqlite(connectionString));
 #endif
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder
+    .Services.AddDefaultIdentity<IdentityUser>(options =>
+        options.SignIn.RequireConfirmedAccount = true
+    )
     .AddEntityFrameworkStores<ApplicationDbContext>();
 #elif (OrganizationalAuth)
 #if (GenerateApiOrGraph)
 var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
-
 #endif
-builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+builder
+    .Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApiOrGraph)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"))
-        .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+    .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
 #if (GenerateApi)
             .AddDownstreamApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
 #endif
 #if (GenerateGraph)
             .AddMicrosoftGraph(builder.Configuration.GetSection("DownstreamApi"))
 #endif
-            .AddInMemoryTokenCaches();
+    .AddInMemoryTokenCaches();
 #else
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAd"));
 #endif
 #elif (IndividualB2CAuth)
 #if (GenerateApi)
 var initialScopes = builder.Configuration["DownstreamApi:Scopes"]?.Split(' ');
-
 #endif
-builder.Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
+builder
+    .Services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
 #if (GenerateApi)
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAdB2C"))
-        .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
-            .AddDownstreamApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
-            .AddInMemoryTokenCaches();
+    .EnableTokenAcquisitionToCallDownstreamApi(initialScopes)
+    .AddDownstreamApi("DownstreamApi", builder.Configuration.GetSection("DownstreamApi"))
+    .AddInMemoryTokenCaches();
 #else
     .AddMicrosoftIdentityWebApp(builder.Configuration.GetSection("AzureAdB2C"));
 #endif
@@ -87,15 +93,12 @@ builder.Services.AddAuthorization(options =>
     // By default, all incoming requests will be authorized according to the default policy.
     options.FallbackPolicy = options.DefaultPolicy;
 });
-builder.Services.AddRazorPages()
-    .AddMicrosoftIdentityUI();
+builder.Services.AddRazorPages().AddMicrosoftIdentityUI();
 #elif (IndividualB2CAuth)
-builder.Services.AddRazorPages()
-    .AddMicrosoftIdentityUI();
+builder.Services.AddRazorPages().AddMicrosoftIdentityUI();
 #elif (WindowsAuth)
 
-builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-   .AddNegotiate();
+builder.Services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
 builder.Services.AddAuthorization(options =>
 {

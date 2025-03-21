@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Runtime.InteropServices;
 using System;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Text;
 using Xunit;
 
@@ -11,7 +11,6 @@ using Xunit;
 
 public class Test
 {
-
     [Fact]
     public static int TestEntryPoint()
     {
@@ -31,8 +30,12 @@ public class Test
 
             StringBuilder builder = new StringBuilder();
 
-            Assert.Throws<MarshalDirectiveException>(() => VBByRefStrNative.Marshal_StringBuilder(ref builder));
-            Assert.Throws<MarshalDirectiveException>(() => VBByRefStrNative.Marshal_ByVal(string.Empty));
+            Assert.Throws<MarshalDirectiveException>(() =>
+                VBByRefStrNative.Marshal_StringBuilder(ref builder)
+            );
+            Assert.Throws<MarshalDirectiveException>(() =>
+                VBByRefStrNative.Marshal_ByVal(string.Empty)
+            );
         }
         catch (Exception e)
         {

@@ -45,7 +45,9 @@ public class ApplicationModelTest : IClassFixture<MvcTestFixture<ApplicationMode
     public async Task ParameterModel_CustomizedWithAttribute()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ParameterModel/GetParameterMetadata");
+        var response = await Client.GetAsync(
+            "http://localhost/ParameterModel/GetParameterMetadata"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -71,7 +73,9 @@ public class ApplicationModelTest : IClassFixture<MvcTestFixture<ApplicationMode
     public async Task ApplicationModel_AddPropertyToActionDescriptor_ControllerModelOverwritesCommonApplicationProperty()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApplicationModel/GetControllerDescription");
+        var response = await Client.GetAsync(
+            "http://localhost/ApplicationModel/GetControllerDescription"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -84,7 +88,9 @@ public class ApplicationModelTest : IClassFixture<MvcTestFixture<ApplicationMode
     public async Task ApplicationModel_ProvidesMetadataToActionDescriptor_ActionModelOverwritesControllerModelProperty()
     {
         // Arrange & Act
-        var response = await Client.GetAsync("http://localhost/ApplicationModel/GetActionSpecificDescription");
+        var response = await Client.GetAsync(
+            "http://localhost/ApplicationModel/GetActionSpecificDescription"
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -103,8 +109,11 @@ public class ApplicationModelTest : IClassFixture<MvcTestFixture<ApplicationMode
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
         var body = await response.Content.ReadAsStringAsync();
-        Assert.Equal(@"Licensed to the .NET Foundation under one or more agreements.
-The .NET Foundation licenses this file to you under the MIT license.", body);
+        Assert.Equal(
+            @"Licensed to the .NET Foundation under one or more agreements.
+The .NET Foundation licenses this file to you under the MIT license.",
+            body
+        );
     }
 
     [Fact]
@@ -148,8 +157,9 @@ The .NET Foundation licenses this file to you under the MIT license.", body);
     public async Task ActionModelSuppressedForLinkGeneration_CannotBeLinked()
     {
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(
-            () => Client.GetStringAsync("Home/RouteToSuppressLinkGeneration"));
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+            Client.GetStringAsync("Home/RouteToSuppressLinkGeneration")
+        );
         Assert.Equal("No route matches the supplied values.", ex.Message);
     }
 
@@ -167,7 +177,10 @@ The .NET Foundation licenses this file to you under the MIT license.", body);
     [InlineData("Products", "Products View")]
     [InlineData("Services", "Services View")]
     [InlineData("Manage", "Manage View")]
-    public async Task ApplicationModel_CanDuplicateController_InMultipleAreas(string areaName, string expectedContent)
+    public async Task ApplicationModel_CanDuplicateController_InMultipleAreas(
+        string areaName,
+        string expectedContent
+    )
     {
         // Arrange & Act
         var response = await Client.GetAsync(areaName + "/MultipleAreas/Index");
@@ -181,7 +194,10 @@ The .NET Foundation licenses this file to you under the MIT license.", body);
     [Theory]
     [InlineData("Help", "This is the help page")]
     [InlineData("MoreHelp", "This is the more help page")]
-    public async Task ControllerModel_CanDuplicateActions_RoutesToDifferentNames(string actionName, string expectedContent)
+    public async Task ControllerModel_CanDuplicateActions_RoutesToDifferentNames(
+        string actionName,
+        string expectedContent
+    )
     {
         // Arrange & Act
         var response = await Client.GetAsync("ActionModel/" + actionName);

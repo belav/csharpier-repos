@@ -3,25 +3,28 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
- 
-namespace System.Web.UI {
+
+namespace System.Web.UI
+{
     using System;
     using System.Web;
 
-    public class AsyncPostBackErrorEventArgs : EventArgs {
+    public class AsyncPostBackErrorEventArgs : EventArgs
+    {
         private readonly Exception _exception;
 
-        public AsyncPostBackErrorEventArgs(Exception exception) {
-            if (exception == null) {
+        public AsyncPostBackErrorEventArgs(Exception exception)
+        {
+            if (exception == null)
+            {
                 throw new ArgumentNullException("exception");
             }
             _exception = exception;
         }
 
-        public Exception Exception {
-            get {
-                return _exception;
-            }
+        public Exception Exception
+        {
+            get { return _exception; }
         }
     }
 }

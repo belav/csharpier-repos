@@ -26,101 +26,100 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
-using System.IO;
-using System.Data;
 using System.ComponentModel;
+using System.Data;
+using System.IO;
 using NUnit.Framework;
 
 namespace MonoTests.System.Data
-{	
-	[TestFixture]
-	public class DataViewTest_IBindingListView
-	{
-		DataTable table = null;
-		
-		[TestFixtureSetUp]
-		public void TestFixtureSetUp ()
-		{
-			table = new DataTable ("table");
-			table.Columns.Add ("col1", typeof(int));
-			table.Columns.Add ("col2", typeof(int));
-			table.Columns.Add ("col3", typeof(int));
-			
-			table.Rows.Add (new object[] { 1, 1, 1 });
-			table.Rows.Add (new object[] { 1, 1, 2 });
-			table.Rows.Add (new object[] { 1, 2, 1 });
-			table.Rows.Add (new object[] { 1, 2, 2 });
-			table.Rows.Add (new object[] { 2, 0, 0 });
-			table.Rows.Add (new object[] { 2, 1, 0 });
-			table.Rows.Add (new object[] { 2, 1, 1 });
-			table.Rows.Add (new object[] { 2, 1, 2 });
-			table.Rows.Add (new object[] { 2, 2, 1 });
-			table.Rows.Add (new object[] { 2, 2, 2 });
-		}
-		
-		[Test]
-		public void FilterTest()
-		{
-			IBindingListView view = (IBindingListView) new DataView (table);
-			
-			view.Filter = "";
-			Assert.AreEqual (table.Rows.Count, view.Count, "#1");
-			
-			view.Filter = null;
-			Assert.AreEqual (table.Rows.Count, view.Count, "#2");
-			
-			view.Filter = "col1 <> 1";
-			Assert.AreEqual (view.Filter, ((DataView)view).RowFilter, "#4");
-			Assert.AreEqual (6, view.Count, "#5");
-			
-			//RemoveFilter Test
-			view.RemoveFilter ();
-			Assert.AreEqual ("", view.Filter, "#6");
-			Assert.AreEqual ("", ((DataView)view).RowFilter, "#7");
-			Assert.AreEqual (table.Rows.Count, view.Count, "#8");
-		}
-		
-		[Test]
-		public void SortDescriptionTest()
-		{
-			IBindingListView view = (IBindingListView)new DataView (table);
-			
-			ListSortDescriptionCollection col = view.SortDescriptions;
-			
-			((DataView)view).Sort = "";
-			col = view.SortDescriptions;
-			Assert.AreEqual (0, col.Count, "#1");
-			
-			((DataView)view).Sort = null;
-			col = view.SortDescriptions;
-			Assert.AreEqual (0, col.Count, "#2");
-			
-			((DataView)view).Sort = "col1 DESC, col2 ASC";
-			col = view.SortDescriptions;
-			Assert.AreEqual (2, col.Count, "#3");
-			Assert.AreEqual ("col1", col[0].PropertyDescriptor.Name, "#4");
-			Assert.AreEqual (ListSortDirection.Descending, col[0].SortDirection, "#5");
-			Assert.AreEqual ("col2", col[1].PropertyDescriptor.Name, "#6");
-			Assert.AreEqual (ListSortDirection.Ascending, col[1].SortDirection, "#7");
-			
-			//ApplySort Test
-			IBindingListView view1 = (IBindingListView)new DataView (table);
-			
-			Assert.IsFalse (view.Equals(view1), "#8");
-			view1.ApplySort (col);
-			Assert.AreEqual ("[col1] DESC,[col2]", ((DataView)view1).Sort, "#9");
-			for (int i = 0; i < view.Count; ++i)
-				Assert.AreEqual (((DataView)view)[i].Row, ((DataView)view1)[i].Row, "#10"+i);      
-		}
-		
-		[Test]
-		public void ReadOnlyPropTest()
-		{
-			IBindingListView view = (IBindingListView)new DataView (table);
-			Assert.IsTrue (view.SupportsAdvancedSorting, "#1");
-			Assert.IsTrue (view.SupportsFiltering, "#2");
-		}
-	}
+{
+    [TestFixture]
+    public class DataViewTest_IBindingListView
+    {
+        DataTable table = null;
+
+        [TestFixtureSetUp]
+        public void TestFixtureSetUp()
+        {
+            table = new DataTable("table");
+            table.Columns.Add("col1", typeof(int));
+            table.Columns.Add("col2", typeof(int));
+            table.Columns.Add("col3", typeof(int));
+
+            table.Rows.Add(new object[] { 1, 1, 1 });
+            table.Rows.Add(new object[] { 1, 1, 2 });
+            table.Rows.Add(new object[] { 1, 2, 1 });
+            table.Rows.Add(new object[] { 1, 2, 2 });
+            table.Rows.Add(new object[] { 2, 0, 0 });
+            table.Rows.Add(new object[] { 2, 1, 0 });
+            table.Rows.Add(new object[] { 2, 1, 1 });
+            table.Rows.Add(new object[] { 2, 1, 2 });
+            table.Rows.Add(new object[] { 2, 2, 1 });
+            table.Rows.Add(new object[] { 2, 2, 2 });
+        }
+
+        [Test]
+        public void FilterTest()
+        {
+            IBindingListView view = (IBindingListView)new DataView(table);
+
+            view.Filter = "";
+            Assert.AreEqual(table.Rows.Count, view.Count, "#1");
+
+            view.Filter = null;
+            Assert.AreEqual(table.Rows.Count, view.Count, "#2");
+
+            view.Filter = "col1 <> 1";
+            Assert.AreEqual(view.Filter, ((DataView)view).RowFilter, "#4");
+            Assert.AreEqual(6, view.Count, "#5");
+
+            //RemoveFilter Test
+            view.RemoveFilter();
+            Assert.AreEqual("", view.Filter, "#6");
+            Assert.AreEqual("", ((DataView)view).RowFilter, "#7");
+            Assert.AreEqual(table.Rows.Count, view.Count, "#8");
+        }
+
+        [Test]
+        public void SortDescriptionTest()
+        {
+            IBindingListView view = (IBindingListView)new DataView(table);
+
+            ListSortDescriptionCollection col = view.SortDescriptions;
+
+            ((DataView)view).Sort = "";
+            col = view.SortDescriptions;
+            Assert.AreEqual(0, col.Count, "#1");
+
+            ((DataView)view).Sort = null;
+            col = view.SortDescriptions;
+            Assert.AreEqual(0, col.Count, "#2");
+
+            ((DataView)view).Sort = "col1 DESC, col2 ASC";
+            col = view.SortDescriptions;
+            Assert.AreEqual(2, col.Count, "#3");
+            Assert.AreEqual("col1", col[0].PropertyDescriptor.Name, "#4");
+            Assert.AreEqual(ListSortDirection.Descending, col[0].SortDirection, "#5");
+            Assert.AreEqual("col2", col[1].PropertyDescriptor.Name, "#6");
+            Assert.AreEqual(ListSortDirection.Ascending, col[1].SortDirection, "#7");
+
+            //ApplySort Test
+            IBindingListView view1 = (IBindingListView)new DataView(table);
+
+            Assert.IsFalse(view.Equals(view1), "#8");
+            view1.ApplySort(col);
+            Assert.AreEqual("[col1] DESC,[col2]", ((DataView)view1).Sort, "#9");
+            for (int i = 0; i < view.Count; ++i)
+                Assert.AreEqual(((DataView)view)[i].Row, ((DataView)view1)[i].Row, "#10" + i);
+        }
+
+        [Test]
+        public void ReadOnlyPropTest()
+        {
+            IBindingListView view = (IBindingListView)new DataView(table);
+            Assert.IsTrue(view.SupportsAdvancedSorting, "#1");
+            Assert.IsTrue(view.SupportsFiltering, "#2");
+        }
+    }
 }

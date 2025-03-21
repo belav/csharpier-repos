@@ -46,7 +46,9 @@ namespace System.Composition.Runtime.Tests
                     Assert.True(context.TryGetExport(contractName, out int export1));
                     Assert.Equal(10, export1);
 
-                    Assert.True(context.TryGetExport(typeof(int), contractName, out object export2));
+                    Assert.True(
+                        context.TryGetExport(typeof(int), contractName, out object export2)
+                    );
                     Assert.Equal(10, export2);
                 }
             }
@@ -65,13 +67,19 @@ namespace System.Composition.Runtime.Tests
                 }
                 else
                 {
-                    Assert.Throws<CompositionFailedException>(() => context.GetExport<int>(contractName));
-                    Assert.Throws<CompositionFailedException>(() => context.GetExport(typeof(int), contractName));
+                    Assert.Throws<CompositionFailedException>(() =>
+                        context.GetExport<int>(contractName)
+                    );
+                    Assert.Throws<CompositionFailedException>(() =>
+                        context.GetExport(typeof(int), contractName)
+                    );
 
                     Assert.False(context.TryGetExport(contractName, out int export1));
                     Assert.Equal(0, export1);
 
-                    Assert.False(context.TryGetExport(typeof(int), contractName, out object export2));
+                    Assert.False(
+                        context.TryGetExport(typeof(int), contractName, out object export2)
+                    );
                     Assert.Null(export2);
                 }
             }
@@ -88,13 +96,15 @@ namespace System.Composition.Runtime.Tests
             {
                 Assert.Equal(typeof(object[]), contract.ContractType);
                 Assert.Equal(contractName, contract.ContractName);
-                Assert.Equal(new Dictionary<string, object> { { "IsImportMany", true } }, contract.MetadataConstraints);
+                Assert.Equal(
+                    new Dictionary<string, object> { { "IsImportMany", true } },
+                    contract.MetadataConstraints
+                );
 
                 return (success, new object[] { 10 });
             });
             if (success)
             {
-
                 if (contractName == null)
                 {
                     Assert.Equal(new object[] { 10 }, context.GetExports<object>());
@@ -103,7 +113,10 @@ namespace System.Composition.Runtime.Tests
                 else
                 {
                     Assert.Equal(new object[] { 10 }, context.GetExports<object>(contractName));
-                    Assert.Equal(new object[] { 10 }, context.GetExports(typeof(object), contractName));
+                    Assert.Equal(
+                        new object[] { 10 },
+                        context.GetExports(typeof(object), contractName)
+                    );
                 }
             }
             else
@@ -111,12 +124,18 @@ namespace System.Composition.Runtime.Tests
                 if (contractName == null)
                 {
                     Assert.Throws<CompositionFailedException>(() => context.GetExports<object>());
-                    Assert.Throws<CompositionFailedException>(() => context.GetExports(typeof(object)));
+                    Assert.Throws<CompositionFailedException>(() =>
+                        context.GetExports(typeof(object))
+                    );
                 }
                 else
                 {
-                    Assert.Throws<CompositionFailedException>(() => context.GetExports<object>(contractName));
-                    Assert.Throws<CompositionFailedException>(() => context.GetExports(typeof(object), contractName));
+                    Assert.Throws<CompositionFailedException>(() =>
+                        context.GetExports<object>(contractName)
+                    );
+                    Assert.Throws<CompositionFailedException>(() =>
+                        context.GetExports(typeof(object), contractName)
+                    );
                 }
             }
         }
@@ -125,7 +144,8 @@ namespace System.Composition.Runtime.Tests
         {
             public Func<CompositionContract, (bool, object)> Handler { get; }
 
-            public SubContext(Func<CompositionContract, (bool, object)> handler) => Handler = handler;
+            public SubContext(Func<CompositionContract, (bool, object)> handler) =>
+                Handler = handler;
 
             public override bool TryGetExport(CompositionContract contract, out object export)
             {

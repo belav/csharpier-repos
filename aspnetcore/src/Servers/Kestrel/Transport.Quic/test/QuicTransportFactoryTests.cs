@@ -9,8 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.Server.Kestrel.Https;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.Kestrel.Https;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Xunit;
@@ -26,10 +26,23 @@ public class QuicTransportFactoryTests : TestApplicationErrorLoggerLoggedTest
     {
         // Arrange
         var quicTransportOptions = new QuicTransportOptions();
-        var quicTransportFactory = new QuicTransportFactory(NullLoggerFactory.Instance, Options.Create(quicTransportOptions));
+        var quicTransportFactory = new QuicTransportFactory(
+            NullLoggerFactory.Instance,
+            Options.Create(quicTransportOptions)
+        );
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => quicTransportFactory.BindAsync(new IPEndPoint(0, 0), features: null, cancellationToken: CancellationToken.None).AsTask()).DefaultTimeout();
+        var ex = await Assert
+            .ThrowsAsync<InvalidOperationException>(() =>
+                quicTransportFactory
+                    .BindAsync(
+                        new IPEndPoint(0, 0),
+                        features: null,
+                        cancellationToken: CancellationToken.None
+                    )
+                    .AsTask()
+            )
+            .DefaultTimeout();
 
         // Assert
         Assert.Equal("Couldn't find HTTPS configuration for QUIC transport.", ex.Message);
@@ -41,12 +54,25 @@ public class QuicTransportFactoryTests : TestApplicationErrorLoggerLoggedTest
     {
         // Arrange
         var quicTransportOptions = new QuicTransportOptions();
-        var quicTransportFactory = new QuicTransportFactory(NullLoggerFactory.Instance, Options.Create(quicTransportOptions));
+        var quicTransportFactory = new QuicTransportFactory(
+            NullLoggerFactory.Instance,
+            Options.Create(quicTransportOptions)
+        );
         var features = new FeatureCollection();
         features.Set(new TlsConnectionCallbackOptions());
 
         // Act
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => quicTransportFactory.BindAsync(new IPEndPoint(0, 0), features: features, cancellationToken: CancellationToken.None).AsTask()).DefaultTimeout();
+        var ex = await Assert
+            .ThrowsAsync<InvalidOperationException>(() =>
+                quicTransportFactory
+                    .BindAsync(
+                        new IPEndPoint(0, 0),
+                        features: features,
+                        cancellationToken: CancellationToken.None
+                    )
+                    .AsTask()
+            )
+            .DefaultTimeout();
 
         // Assert
         Assert.Equal("No application protocols specified for QUIC transport.", ex.Message);
@@ -58,17 +84,29 @@ public class QuicTransportFactoryTests : TestApplicationErrorLoggerLoggedTest
     {
         // Arrange
         var quicTransportOptions = new QuicTransportOptions();
-        var quicTransportFactory = new QuicTransportFactory(NullLoggerFactory.Instance, Options.Create(quicTransportOptions));
+        var quicTransportFactory = new QuicTransportFactory(
+            NullLoggerFactory.Instance,
+            Options.Create(quicTransportOptions)
+        );
         var features = new FeatureCollection();
-        features.Set(new TlsConnectionCallbackOptions
-        {
-            ApplicationProtocols = new List<SslApplicationProtocol>
+        features.Set(
+            new TlsConnectionCallbackOptions
             {
-                SslApplicationProtocol.Http3
+                ApplicationProtocols = new List<SslApplicationProtocol>
+                {
+                    SslApplicationProtocol.Http3,
+                },
             }
-        });
+        );
 
         // Act & Assert
-        await quicTransportFactory.BindAsync(new IPEndPoint(0, 0), features: features, cancellationToken: CancellationToken.None).AsTask().DefaultTimeout();
+        await quicTransportFactory
+            .BindAsync(
+                new IPEndPoint(0, 0),
+                features: features,
+                cancellationToken: CancellationToken.None
+            )
+            .AsTask()
+            .DefaultTimeout();
     }
 }

@@ -14,11 +14,17 @@ internal class MockMultiplexedConnectionListenerFactory : IMultiplexedConnection
 {
     public Action<EndPoint, IFeatureCollection> OnBindAsync { get; set; }
 
-    public ValueTask<IMultiplexedConnectionListener> BindAsync(EndPoint endpoint, IFeatureCollection features = null, CancellationToken cancellationToken = default)
+    public ValueTask<IMultiplexedConnectionListener> BindAsync(
+        EndPoint endpoint,
+        IFeatureCollection features = null,
+        CancellationToken cancellationToken = default
+    )
     {
         OnBindAsync?.Invoke(endpoint, features);
 
-        return ValueTask.FromResult<IMultiplexedConnectionListener>(new MockMultiplexedConnectionListener(endpoint));
+        return ValueTask.FromResult<IMultiplexedConnectionListener>(
+            new MockMultiplexedConnectionListener(endpoint)
+        );
     }
 
     private class MockMultiplexedConnectionListener : IMultiplexedConnectionListener
@@ -30,7 +36,10 @@ internal class MockMultiplexedConnectionListenerFactory : IMultiplexedConnection
 
         public EndPoint EndPoint { get; }
 
-        public ValueTask<MultiplexedConnectionContext> AcceptAsync(IFeatureCollection features = null, CancellationToken cancellationToken = default)
+        public ValueTask<MultiplexedConnectionContext> AcceptAsync(
+            IFeatureCollection features = null,
+            CancellationToken cancellationToken = default
+        )
         {
             return ValueTask.FromResult<MultiplexedConnectionContext>(null);
         }

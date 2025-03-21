@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler
@@ -19,14 +18,18 @@ namespace ILCompiler
             _fallbackAlgorithm = fallbackAlgorithm;
         }
 
-        public override ComputedInstanceFieldLayout ComputeInstanceLayout(DefType defType, InstanceLayoutKind layoutKind)
+        public override ComputedInstanceFieldLayout ComputeInstanceLayout(
+            DefType defType,
+            InstanceLayoutKind layoutKind
+        )
         {
             Debug.Assert(IsIntegerType(defType));
 
             string name = defType.Name;
             Debug.Assert((name == "Int128") || (name == "UInt128"));
 
-            ComputedInstanceFieldLayout layoutFromMetadata = _fallbackAlgorithm.ComputeInstanceLayout(defType, layoutKind);
+            ComputedInstanceFieldLayout layoutFromMetadata =
+                _fallbackAlgorithm.ComputeInstanceLayout(defType, layoutKind);
 
             // 32bit platforms use standard metadata layout engine
             if (defType.Context.Target.Architecture == TargetArchitecture.ARM)
@@ -46,11 +49,14 @@ namespace ILCompiler
                 FieldSize = layoutFromMetadata.FieldSize,
                 Offsets = layoutFromMetadata.Offsets,
                 LayoutAbiStable = false, // Int128 parameter passing ABI is unstable at this time
-                IsInt128OrHasInt128Fields = true
+                IsInt128OrHasInt128Fields = true,
             };
         }
 
-        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(DefType defType, StaticLayoutKind layoutKind)
+        public override ComputedStaticFieldLayout ComputeStaticFieldLayout(
+            DefType defType,
+            StaticLayoutKind layoutKind
+        )
         {
             return _fallbackAlgorithm.ComputeStaticFieldLayout(defType, layoutKind);
         }
@@ -67,9 +73,14 @@ namespace ILCompiler
             return false;
         }
 
-        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(DefType type)
+        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
+            DefType type
+        )
         {
-            Debug.Assert(_fallbackAlgorithm.ComputeValueTypeShapeCharacteristics(type) == ValueTypeShapeCharacteristics.None);
+            Debug.Assert(
+                _fallbackAlgorithm.ComputeValueTypeShapeCharacteristics(type)
+                    == ValueTypeShapeCharacteristics.None
+            );
             return ValueTypeShapeCharacteristics.None;
         }
 

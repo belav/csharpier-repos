@@ -1,24 +1,25 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Reflection;
     using System.Collections;
-    using System.Globalization;
-    using System.ComponentModel;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
-    using System.Runtime.Serialization;
-    using System.Workflow.ComponentModel.Compiler;
     using System.ComponentModel.Design.Serialization;
-    using System.Workflow.ComponentModel.Serialization;
-    using System.Runtime.Serialization.Formatters.Binary;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Formatters.Binary;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Serialization;
+    using System.Xml;
 
     internal class XomlComponentSerializationService : ComponentSerializationService
     {
         private IServiceProvider serviceProvider = null;
+
         internal XomlComponentSerializationService(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
@@ -31,7 +32,8 @@ namespace System.Workflow.ComponentModel.Design
 
         public override SerializationStore LoadStore(Stream stream)
         {
-            if (stream == null) throw new ArgumentNullException("stream");
+            if (stream == null)
+                throw new ArgumentNullException("stream");
             BinaryFormatter f = new BinaryFormatter();
             return (WorkflowMarkupSerializationStore)f.Deserialize(stream);
         }
@@ -44,42 +46,71 @@ namespace System.Workflow.ComponentModel.Design
 
         public override void Serialize(SerializationStore store, object value)
         {
-            if (store == null) throw new ArgumentNullException("store");
-            if (value == null) throw new ArgumentNullException("value");
+            if (store == null)
+                throw new ArgumentNullException("store");
+            if (value == null)
+                throw new ArgumentNullException("value");
             WorkflowMarkupSerializationStore xomlStore = store as WorkflowMarkupSerializationStore;
-            if (xomlStore == null) throw new InvalidOperationException(SR.GetString(SR.Error_UnknownSerializationStore));
+            if (xomlStore == null)
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_UnknownSerializationStore)
+                );
             xomlStore.AddObject(value);
         }
 
         //error CS0534: 'System.Workflow.ComponentModel.Design.XomlComponentSerializationService' does not implement inherited abstract member 'System.ComponentModel.Design.Serialization.ComponentSerializationService.SerializeMemberAbsolute(System.ComponentModel.Design.Serialization.SerializationStore, object, System.ComponentModel.MemberDescriptor)'
-        public override void SerializeMemberAbsolute(SerializationStore store, object owningObject, MemberDescriptor member)
+        public override void SerializeMemberAbsolute(
+            SerializationStore store,
+            object owningObject,
+            MemberDescriptor member
+        )
         {
             this.SerializeMember(store, owningObject, member);
         }
 
-        public override void SerializeMember(SerializationStore store, object owningObject, MemberDescriptor member)
+        public override void SerializeMember(
+            SerializationStore store,
+            object owningObject,
+            MemberDescriptor member
+        )
         {
-            if (store == null) throw new ArgumentNullException("store");
-            if (owningObject == null) throw new ArgumentNullException("owningObject");
-            if (member == null) throw new ArgumentNullException("member");
+            if (store == null)
+                throw new ArgumentNullException("store");
+            if (owningObject == null)
+                throw new ArgumentNullException("owningObject");
+            if (member == null)
+                throw new ArgumentNullException("member");
             WorkflowMarkupSerializationStore xomlStore = store as WorkflowMarkupSerializationStore;
-            if (xomlStore == null) throw new InvalidOperationException(SR.GetString(SR.Error_UnknownSerializationStore));
+            if (xomlStore == null)
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_UnknownSerializationStore)
+                );
             xomlStore.AddMember(owningObject, member);
         }
 
         public override ICollection Deserialize(SerializationStore store)
         {
-            if (store == null) throw new ArgumentNullException("store");
+            if (store == null)
+                throw new ArgumentNullException("store");
             WorkflowMarkupSerializationStore xomlStore = store as WorkflowMarkupSerializationStore;
-            if (xomlStore == null) throw new InvalidOperationException(SR.GetString(SR.Error_UnknownSerializationStore));
+            if (xomlStore == null)
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_UnknownSerializationStore)
+                );
             return (ICollection)xomlStore.Deserialize(this.serviceProvider);
         }
+
         public override ICollection Deserialize(SerializationStore store, IContainer container)
         {
-            if (store == null) throw new ArgumentNullException("store");
-            if (container == null) throw new ArgumentNullException("container");
+            if (store == null)
+                throw new ArgumentNullException("store");
+            if (container == null)
+                throw new ArgumentNullException("container");
             WorkflowMarkupSerializationStore xomlStore = store as WorkflowMarkupSerializationStore;
-            if (xomlStore == null) throw new InvalidOperationException(SR.GetString(SR.Error_UnknownSerializationStore));
+            if (xomlStore == null)
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_UnknownSerializationStore)
+                );
             return xomlStore.Deserialize(this.serviceProvider, container);
         }
 
@@ -87,13 +118,23 @@ namespace System.Workflow.ComponentModel.Design
         // error CS0115: 'System.Workflow.ComponentModel.Design.XomlComponentSerializationService.DeserializeTo(System.ComponentModel.Design.Serialization.SerializationStore, System.ComponentModel.IContainer)': no suitable method found to override
         // build 40420
         // error CS0506: 'System.Workflow.ComponentModel.Design.XomlComponentSerializationService.DeserializeTo(System.ComponentModel.Design.Serialization.SerializationStore, System.ComponentModel.IContainer, bool)': cannot override inherited member 'System.ComponentModel.Design.Serialization.ComponentSerializationService.DeserializeTo(System.ComponentModel.Design.Serialization.SerializationStore, System.ComponentModel.IContainer, bool)' because it is not marked virtual, abstract, or override
-        public override void DeserializeTo(SerializationStore store, IContainer container, bool validateRecycledTypes, bool applyDefaults)
+        public override void DeserializeTo(
+            SerializationStore store,
+            IContainer container,
+            bool validateRecycledTypes,
+            bool applyDefaults
+        )
         {
-            // 
-            if (store == null) throw new ArgumentNullException("store");
-            if (container == null) throw new ArgumentNullException("container");
+            //
+            if (store == null)
+                throw new ArgumentNullException("store");
+            if (container == null)
+                throw new ArgumentNullException("container");
             WorkflowMarkupSerializationStore xomlStore = store as WorkflowMarkupSerializationStore;
-            if (xomlStore == null) throw new InvalidOperationException(SR.GetString(SR.Error_UnknownSerializationStore));
+            if (xomlStore == null)
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_UnknownSerializationStore)
+                );
             xomlStore.DeserializeTo(this.serviceProvider, container);
         }
 
@@ -123,8 +164,7 @@ namespace System.Workflow.ComponentModel.Design
     }
 
     [Serializable]
-    internal class WorkflowMarkupSerializationStore : SerializationStore,
-                                            ISerializable
+    internal class WorkflowMarkupSerializationStore : SerializationStore, ISerializable
     {
         // keys used to persist data in binary stream
         private const string SerializedXmlString = "XmlString";
@@ -140,7 +180,6 @@ namespace System.Workflow.ComponentModel.Design
         private string serializedXmlString;
         private AssemblyName[] assemblies;
 
-
         internal WorkflowMarkupSerializationStore(IServiceProvider serviceProvider)
         {
             this.serviceProvider = serviceProvider;
@@ -154,16 +193,15 @@ namespace System.Workflow.ComponentModel.Design
 
         private AssemblyName[] AssemblyNames
         {
-            get
-            {
-                return this.assemblies;
-            }
+            get { return this.assemblies; }
         }
 
         internal void AddObject(object value)
         {
             if (this.serializedXmlString != null)
-                throw new InvalidOperationException(DR.GetString(DR.InvalidOperationStoreAlreadyClosed));
+                throw new InvalidOperationException(
+                    DR.GetString(DR.InvalidOperationStoreAlreadyClosed)
+                );
 
             Activity activity = value as Activity;
             if (activity == null)
@@ -179,39 +217,67 @@ namespace System.Workflow.ComponentModel.Design
             if (member == null)
                 throw new ArgumentNullException("member");
             if (this.serializedXmlString != null)
-                throw new InvalidOperationException(DR.GetString(DR.InvalidOperationStoreAlreadyClosed));
+                throw new InvalidOperationException(
+                    DR.GetString(DR.InvalidOperationStoreAlreadyClosed)
+                );
 
-            IReferenceService referenceService = this.serviceProvider.GetService(typeof(IReferenceService)) as IReferenceService;
+            IReferenceService referenceService =
+                this.serviceProvider.GetService(typeof(IReferenceService)) as IReferenceService;
             this.parentObjectNameList.Add(referenceService.GetName(value));
             this.memberList.Add(member);
         }
 
         internal IList Deserialize(IServiceProvider serviceProvider)
         {
-            DesignerSerializationManager serializationManager = new LocalDesignerSerializationManager(this, serviceProvider);
+            DesignerSerializationManager serializationManager =
+                new LocalDesignerSerializationManager(this, serviceProvider);
             using (serializationManager.CreateSession())
             {
                 ArrayList objects = new ArrayList();
-                WorkflowMarkupSerializationManager xomlSerializationManager = new WorkflowMarkupSerializationManager(serializationManager);
-                XmlTextReader reader = new XmlTextReader(this.serializedXmlString, XmlNodeType.Element, null) { DtdProcessing = DtdProcessing.Prohibit };
+                WorkflowMarkupSerializationManager xomlSerializationManager =
+                    new WorkflowMarkupSerializationManager(serializationManager);
+                XmlTextReader reader = new XmlTextReader(
+                    this.serializedXmlString,
+                    XmlNodeType.Element,
+                    null
+                )
+                {
+                    DtdProcessing = DtdProcessing.Prohibit,
+                };
                 reader.MoveToElement();
                 do
                 {
                     if (!reader.Read())
                         return objects;
 
-                    xomlSerializationManager.FoundDefTag += delegate(object sender, WorkflowMarkupElementEventArgs eventArgs)
+                    xomlSerializationManager.FoundDefTag += delegate(
+                        object sender,
+                        WorkflowMarkupElementEventArgs eventArgs
+                    )
                     {
-                        if (eventArgs.XmlReader.LookupNamespace(eventArgs.XmlReader.Prefix) == StandardXomlKeys.Definitions_XmlNs &&
-                            xomlSerializationManager.Context.Current is Activity
-                            )
-                            WorkflowMarkupSerializationHelpers.ProcessDefTag(xomlSerializationManager, eventArgs.XmlReader, xomlSerializationManager.Context.Current as Activity, true, string.Empty);
+                        if (
+                            eventArgs.XmlReader.LookupNamespace(eventArgs.XmlReader.Prefix)
+                                == StandardXomlKeys.Definitions_XmlNs
+                            && xomlSerializationManager.Context.Current is Activity
+                        )
+                            WorkflowMarkupSerializationHelpers.ProcessDefTag(
+                                xomlSerializationManager,
+                                eventArgs.XmlReader,
+                                xomlSerializationManager.Context.Current as Activity,
+                                true,
+                                string.Empty
+                            );
                     };
 
                     WorkflowMarkupSerializer xomlSerializer = new WorkflowMarkupSerializer();
-                    object activityDecl = xomlSerializer.DeserializeObject(xomlSerializationManager, reader);
+                    object activityDecl = xomlSerializer.DeserializeObject(
+                        xomlSerializationManager,
+                        reader
+                    );
                     if (activityDecl == null)
-                        throw new InvalidOperationException(DR.GetString(DR.InvalidOperationDeserializationReturnedNonActivity));
+                        throw new InvalidOperationException(
+                            DR.GetString(DR.InvalidOperationDeserializationReturnedNonActivity)
+                        );
                     if (activityDecl is Activity)
                         (activityDecl as Activity).UserData.Remove(UserDataKeys.CustomActivity);
                     objects.Add(activityDecl);
@@ -226,36 +292,64 @@ namespace System.Workflow.ComponentModel.Design
 
         internal void DeserializeTo(IServiceProvider serviceProvider, IContainer container)
         {
-            DesignerSerializationManager serializationManager = new LocalDesignerSerializationManager(this, serviceProvider);
+            DesignerSerializationManager serializationManager =
+                new LocalDesignerSerializationManager(this, serviceProvider);
 
             using (serializationManager.CreateSession())
             {
-                WorkflowMarkupSerializationManager xomlSerializationManager = new WorkflowMarkupSerializationManager(serializationManager);
-                PropertySegmentSerializationProvider propertySegmentSerializationProvider = new PropertySegmentSerializationProvider();
-                xomlSerializationManager.AddSerializationProvider(propertySegmentSerializationProvider);
+                WorkflowMarkupSerializationManager xomlSerializationManager =
+                    new WorkflowMarkupSerializationManager(serializationManager);
+                PropertySegmentSerializationProvider propertySegmentSerializationProvider =
+                    new PropertySegmentSerializationProvider();
+                xomlSerializationManager.AddSerializationProvider(
+                    propertySegmentSerializationProvider
+                );
 
                 StringReader stringReader = new StringReader(this.serializedXmlString);
-                using (XmlTextReader reader = new XmlTextReader(stringReader) { DtdProcessing = DtdProcessing.Prohibit })
+                using (
+                    XmlTextReader reader = new XmlTextReader(stringReader)
+                    {
+                        DtdProcessing = DtdProcessing.Prohibit,
+                    }
+                )
                 {
-                    while (reader.NodeType != XmlNodeType.Element && reader.NodeType != XmlNodeType.ProcessingInstruction && reader.Read());
+                    while (
+                        reader.NodeType != XmlNodeType.Element
+                        && reader.NodeType != XmlNodeType.ProcessingInstruction
+                        && reader.Read()
+                    )
+                        ;
 
-                    IReferenceService referenceService = this.serviceProvider.GetService(typeof(IReferenceService)) as IReferenceService;
-                    IComponentChangeService componentChangeService = this.serviceProvider.GetService(typeof(IComponentChangeService)) as IComponentChangeService;
+                    IReferenceService referenceService =
+                        this.serviceProvider.GetService(typeof(IReferenceService))
+                        as IReferenceService;
+                    IComponentChangeService componentChangeService =
+                        this.serviceProvider.GetService(typeof(IComponentChangeService))
+                        as IComponentChangeService;
                     for (int loop = 0; loop < this.memberList.Count; loop++)
                     {
                         object obj = referenceService.GetReference(this.parentObjectNameList[loop]);
                         if (obj != null)
                         {
-                            bool needChangeEvent = (componentChangeService != null) && (!(obj is IComponent) || (((IComponent)obj).Site == null));
+                            bool needChangeEvent =
+                                (componentChangeService != null)
+                                && (!(obj is IComponent) || (((IComponent)obj).Site == null));
 
                             PropertyDescriptor member = this.memberList[loop] as PropertyDescriptor;
                             if (needChangeEvent)
                                 componentChangeService.OnComponentChanging(obj, member);
 
                             xomlSerializationManager.Context.Push(obj);
-                            PropertySegmentSerializer serializer = new PropertySegmentSerializer(null);
-                            PropertySegment propertySegment = serializer.DeserializeObject(xomlSerializationManager, reader) as PropertySegment;
-                            System.Diagnostics.Debug.Assert(obj == xomlSerializationManager.Context.Current, "Serialization Store did not remove object which it pushed onto the stack.");
+                            PropertySegmentSerializer serializer = new PropertySegmentSerializer(
+                                null
+                            );
+                            PropertySegment propertySegment =
+                                serializer.DeserializeObject(xomlSerializationManager, reader)
+                                as PropertySegment;
+                            System.Diagnostics.Debug.Assert(
+                                obj == xomlSerializationManager.Context.Current,
+                                "Serialization Store did not remove object which it pushed onto the stack."
+                            );
                             xomlSerializationManager.Context.Pop();
 
                             if (needChangeEvent)
@@ -264,7 +358,9 @@ namespace System.Workflow.ComponentModel.Design
                     }
                 }
 
-                xomlSerializationManager.RemoveSerializationProvider(propertySegmentSerializationProvider);
+                xomlSerializationManager.RemoveSerializationProvider(
+                    propertySegmentSerializationProvider
+                );
             }
         }
 
@@ -292,11 +388,13 @@ namespace System.Workflow.ComponentModel.Design
             if (this.serializedXmlString != null)
                 return;
 
-            DesignerSerializationManager serializationManager = new LocalDesignerSerializationManager(this, serviceProvider);
+            DesignerSerializationManager serializationManager =
+                new LocalDesignerSerializationManager(this, serviceProvider);
             using (serializationManager.CreateSession())
             {
-                // serialize all objects 
-                WorkflowMarkupSerializationManager xomlSerializationManager = new WorkflowMarkupSerializationManager(serializationManager);
+                // serialize all objects
+                WorkflowMarkupSerializationManager xomlSerializationManager =
+                    new WorkflowMarkupSerializationManager(serializationManager);
                 StringWriter stringWriter = new StringWriter(CultureInfo.InvariantCulture);
                 using (XmlTextWriter writer = new XmlTextWriter(stringWriter))
                 {
@@ -304,45 +402,95 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         WorkflowMarkupSerializer xomlSerializer = new WorkflowMarkupSerializer();
                         foreach (Activity activity in this.activities)
-                            xomlSerializer.SerializeObject(xomlSerializationManager, activity, writer);
+                            xomlSerializer.SerializeObject(
+                                xomlSerializationManager,
+                                activity,
+                                writer
+                            );
                     }
                     else
                     {
-                        PropertySegmentSerializationProvider propertySegmentSerializationProvider = new PropertySegmentSerializationProvider();
-                        xomlSerializationManager.AddSerializationProvider(propertySegmentSerializationProvider);
+                        PropertySegmentSerializationProvider propertySegmentSerializationProvider =
+                            new PropertySegmentSerializationProvider();
+                        xomlSerializationManager.AddSerializationProvider(
+                            propertySegmentSerializationProvider
+                        );
 
-                        xomlSerializationManager.Context.Push(new StringWriter(CultureInfo.InvariantCulture));
+                        xomlSerializationManager.Context.Push(
+                            new StringWriter(CultureInfo.InvariantCulture)
+                        );
 
-                        IReferenceService referenceService = this.serviceProvider.GetService(typeof(IReferenceService)) as IReferenceService;
+                        IReferenceService referenceService =
+                            this.serviceProvider.GetService(typeof(IReferenceService))
+                            as IReferenceService;
                         if (referenceService != null)
                         {
                             for (int loop = 0; loop < this.memberList.Count; loop++)
                             {
-                                object obj = referenceService.GetReference(this.parentObjectNameList[loop]);
-                                PropertySegmentSerializer serializer = new PropertySegmentSerializer(null);
+                                object obj = referenceService.GetReference(
+                                    this.parentObjectNameList[loop]
+                                );
+                                PropertySegmentSerializer serializer =
+                                    new PropertySegmentSerializer(null);
                                 if (this.memberList[loop] is PropertyDescriptor)
                                 {
-                                    PropertyInfo propertyInfo = XomlComponentSerializationService.GetProperty(obj.GetType(), (this.memberList[loop] as PropertyDescriptor).Name, BindingFlags.Public | BindingFlags.Instance);
+                                    PropertyInfo propertyInfo =
+                                        XomlComponentSerializationService.GetProperty(
+                                            obj.GetType(),
+                                            (this.memberList[loop] as PropertyDescriptor).Name,
+                                            BindingFlags.Public | BindingFlags.Instance
+                                        );
                                     if (propertyInfo != null)
-                                        serializer.SerializeObject(xomlSerializationManager, new PropertySegment(this.serviceProvider, obj, propertyInfo), writer);
+                                        serializer.SerializeObject(
+                                            xomlSerializationManager,
+                                            new PropertySegment(
+                                                this.serviceProvider,
+                                                obj,
+                                                propertyInfo
+                                            ),
+                                            writer
+                                        );
                                     else
-                                        serializer.SerializeObject(xomlSerializationManager, new PropertySegment(this.serviceProvider, obj, this.memberList[loop] as PropertyDescriptor), writer);
+                                        serializer.SerializeObject(
+                                            xomlSerializationManager,
+                                            new PropertySegment(
+                                                this.serviceProvider,
+                                                obj,
+                                                this.memberList[loop] as PropertyDescriptor
+                                            ),
+                                            writer
+                                        );
                                 }
                                 else if (this.memberList[loop] is EventDescriptor)
                                 {
                                     // Events.
-                                    IEventBindingService eventBindingService = this.serviceProvider.GetService(typeof(IEventBindingService)) as IEventBindingService;
+                                    IEventBindingService eventBindingService =
+                                        this.serviceProvider.GetService(
+                                            typeof(IEventBindingService)
+                                        ) as IEventBindingService;
                                     if (eventBindingService != null)
                                     {
-                                        PropertySegment propertySegment = new PropertySegment(serviceProvider, obj, eventBindingService.GetEventProperty(this.memberList[loop] as EventDescriptor));
-                                        serializer.SerializeObject(xomlSerializationManager, propertySegment, writer);
+                                        PropertySegment propertySegment = new PropertySegment(
+                                            serviceProvider,
+                                            obj,
+                                            eventBindingService.GetEventProperty(
+                                                this.memberList[loop] as EventDescriptor
+                                            )
+                                        );
+                                        serializer.SerializeObject(
+                                            xomlSerializationManager,
+                                            propertySegment,
+                                            writer
+                                        );
                                     }
                                 }
                             }
                         }
 
                         xomlSerializationManager.Context.Pop();
-                        xomlSerializationManager.RemoveSerializationProvider(propertySegmentSerializationProvider);
+                        xomlSerializationManager.RemoveSerializationProvider(
+                            propertySegmentSerializationProvider
+                        );
                     }
                 }
                 this.serializedXmlString = stringWriter.ToString();
@@ -362,10 +510,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public override System.Collections.ICollection Errors
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
         #endregion
 
@@ -374,14 +519,21 @@ namespace System.Workflow.ComponentModel.Design
         {
             private WorkflowMarkupSerializationStore store;
 
-            internal LocalDesignerSerializationManager(WorkflowMarkupSerializationStore store, IServiceProvider provider)
+            internal LocalDesignerSerializationManager(
+                WorkflowMarkupSerializationStore store,
+                IServiceProvider provider
+            )
                 : base(provider)
             {
                 this.store = store;
             }
 
-
-            [SuppressMessage("Microsoft.Globalization", "CA1307:SpecifyStringComparison", MessageId = "System.String.IndexOf(System.String)", Justification = "This is not a security issue because its a design time class")]
+            [SuppressMessage(
+                "Microsoft.Globalization",
+                "CA1307:SpecifyStringComparison",
+                MessageId = "System.String.IndexOf(System.String)",
+                Justification = "This is not a security issue because its a design time class"
+            )]
             protected override Type GetType(string name)
             {
                 Type t = base.GetType(name);
@@ -449,14 +601,22 @@ namespace System.Workflow.ComponentModel.Design
             this.obj = obj;
         }
 
-        internal PropertySegment(IServiceProvider serviceProvider, object obj, PropertyInfo property)
+        internal PropertySegment(
+            IServiceProvider serviceProvider,
+            object obj,
+            PropertyInfo property
+        )
         {
             this.serviceProvider = serviceProvider;
             this.obj = obj;
             this.property = property;
         }
 
-        internal PropertySegment(IServiceProvider serviceProvider, object obj, PropertyDescriptor propertyDescriptor)
+        internal PropertySegment(
+            IServiceProvider serviceProvider,
+            object obj,
+            PropertyDescriptor propertyDescriptor
+        )
         {
             this.serviceProvider = serviceProvider;
             this.obj = obj;
@@ -470,10 +630,7 @@ namespace System.Workflow.ComponentModel.Design
 
         internal IServiceProvider ServiceProvider
         {
-            get
-            {
-                return this.serviceProvider;
-            }
+            get { return this.serviceProvider; }
         }
 
         internal PropertyDescriptor PropertyDescriptor
@@ -505,7 +662,11 @@ namespace System.Workflow.ComponentModel.Design
                 TypeConverter converter = TypeDescriptor.GetConverter(this.obj);
                 if (converter != null && converter.GetPropertiesSupported())
                 {
-                    DummyTypeDescriptorContext dummyContext = new DummyTypeDescriptorContext(this.serviceProvider, GetComponent(this.obj, serviceProvider), null);
+                    DummyTypeDescriptorContext dummyContext = new DummyTypeDescriptorContext(
+                        this.serviceProvider,
+                        GetComponent(this.obj, serviceProvider),
+                        null
+                    );
                     props = converter.GetProperties(dummyContext, this.obj, new Attribute[] { });
                 }
                 else
@@ -513,10 +674,17 @@ namespace System.Workflow.ComponentModel.Design
 
                 foreach (PropertyDescriptor propDesc in props)
                 {
-                    PropertyInfo propInfo = XomlComponentSerializationService.GetProperty(this.obj.GetType(), propDesc.Name, BindingFlags.Public | BindingFlags.Instance);
+                    PropertyInfo propInfo = XomlComponentSerializationService.GetProperty(
+                        this.obj.GetType(),
+                        propDesc.Name,
+                        BindingFlags.Public | BindingFlags.Instance
+                    );
                     if (propInfo != null)
                     {
-                        if (Helpers.GetSerializationVisibility(propInfo) == DesignerSerializationVisibility.Hidden)
+                        if (
+                            Helpers.GetSerializationVisibility(propInfo)
+                            == DesignerSerializationVisibility.Hidden
+                        )
                             continue;
 
                         properties.Add(new PropertySegmentPropertyInfo(this, propInfo));
@@ -526,12 +694,25 @@ namespace System.Workflow.ComponentModel.Design
                         properties.Add(new PropertySegmentPropertyInfo(this, propDesc));
                         if (propDesc.Converter != null)
                         {
-                            DummyTypeDescriptorContext dummyContext = new DummyTypeDescriptorContext(this.serviceProvider, GetComponent(this.obj, serviceProvider), propDesc);
+                            DummyTypeDescriptorContext dummyContext =
+                                new DummyTypeDescriptorContext(
+                                    this.serviceProvider,
+                                    GetComponent(this.obj, serviceProvider),
+                                    propDesc
+                                );
                             if (propDesc.Converter.GetPropertiesSupported(dummyContext))
                             {
-                                foreach (PropertyDescriptor childDesc in propDesc.Converter.GetProperties(dummyContext, this.obj, new Attribute[] { }))
+                                foreach (
+                                    PropertyDescriptor childDesc in propDesc.Converter.GetProperties(
+                                        dummyContext,
+                                        this.obj,
+                                        new Attribute[] { }
+                                    )
+                                )
                                 {
-                                    properties.Add(new PropertySegmentPropertyInfo(this, childDesc));
+                                    properties.Add(
+                                        new PropertySegmentPropertyInfo(this, childDesc)
+                                    );
                                 }
                             }
                         }
@@ -548,7 +729,8 @@ namespace System.Workflow.ComponentModel.Design
 
             if ((component == null || component.Site == null) && serviceProvider != null)
             {
-                IReferenceService rs = serviceProvider.GetService(typeof(IReferenceService)) as IReferenceService;
+                IReferenceService rs =
+                    serviceProvider.GetService(typeof(IReferenceService)) as IReferenceService;
                 if (rs != null)
                     component = rs.GetComponent(obj);
             }
@@ -564,21 +746,38 @@ namespace System.Workflow.ComponentModel.Design
         private object component = null;
         private PropertyDescriptor propDescriptor = null;
 
-        public DummyTypeDescriptorContext(IServiceProvider serviceProvider, object component, PropertyDescriptor propDescriptor)
+        public DummyTypeDescriptorContext(
+            IServiceProvider serviceProvider,
+            object component,
+            PropertyDescriptor propDescriptor
+        )
         {
             this.serviceProvider = serviceProvider;
             this.propDescriptor = propDescriptor;
             this.component = component;
         }
 
-        public IContainer Container { get { return null; } }
+        public IContainer Container
+        {
+            get { return null; }
+        }
 
-        public object Instance { get { return this.component; } }
+        public object Instance
+        {
+            get { return this.component; }
+        }
 
-        public PropertyDescriptor PropertyDescriptor { get { return this.propDescriptor; } }
+        public PropertyDescriptor PropertyDescriptor
+        {
+            get { return this.propDescriptor; }
+        }
 
         public void OnComponentChanged() { }
-        public bool OnComponentChanging() { return true; }
+
+        public bool OnComponentChanging()
+        {
+            return true;
+        }
 
         public object GetService(Type serviceType)
         {
@@ -597,13 +796,19 @@ namespace System.Workflow.ComponentModel.Design
         private PropertyDescriptor realPropDesc = null;
         private PropertySegment propertySegment;
 
-        internal PropertySegmentPropertyInfo(PropertySegment propertySegment, PropertyInfo realPropInfo)
+        internal PropertySegmentPropertyInfo(
+            PropertySegment propertySegment,
+            PropertyInfo realPropInfo
+        )
         {
             this.realPropInfo = realPropInfo;
             this.propertySegment = propertySegment;
         }
 
-        internal PropertySegmentPropertyInfo(PropertySegment propertySegment, PropertyDescriptor realPropDesc)
+        internal PropertySegmentPropertyInfo(
+            PropertySegment propertySegment,
+            PropertyDescriptor realPropDesc
+        )
         {
             this.realPropDesc = realPropDesc;
             this.propertySegment = propertySegment;
@@ -611,10 +816,7 @@ namespace System.Workflow.ComponentModel.Design
 
         internal PropertySegment PropertySegment
         {
-            get
-            {
-                return this.propertySegment;
-            }
+            get { return this.propertySegment; }
         }
 
         #region Property Info overrides
@@ -632,7 +834,13 @@ namespace System.Workflow.ComponentModel.Design
             }
         }
 
-        public override object GetValue(object obj, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+        public override object GetValue(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
         {
             DependencyProperty dependencyProperty = null;
             Activity activity = null;
@@ -665,7 +873,13 @@ namespace System.Workflow.ComponentModel.Design
             if (value == null)
             {
                 if (this.realPropInfo != null)
-                    value = this.realPropInfo.GetValue(targetObj, invokeAttr, binder, index, culture);
+                    value = this.realPropInfo.GetValue(
+                        targetObj,
+                        invokeAttr,
+                        binder,
+                        index,
+                        culture
+                    );
                 else if (this.realPropDesc != null)
                     value = this.realPropDesc.GetValue(targetObj);
             }
@@ -673,7 +887,14 @@ namespace System.Workflow.ComponentModel.Design
             return value;
         }
 
-        public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+        public override void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
         {
             if (obj == null)
                 throw new ArgumentNullException("obj");
@@ -682,7 +903,8 @@ namespace System.Workflow.ComponentModel.Design
 
             DependencyProperty dependencyProperty = null;
             PropertySegment propertySegment = obj as PropertySegment;
-            Activity activity = (propertySegment != null) ? propertySegment.Object as Activity : obj as Activity;
+            Activity activity =
+                (propertySegment != null) ? propertySegment.Object as Activity : obj as Activity;
             if (activity != null)
             {
                 Type propertyType = DeclaringType;
@@ -698,8 +920,16 @@ namespace System.Workflow.ComponentModel.Design
                 TypeConverter converter = TypeDescriptor.GetConverter(propertySegment.Object);
                 if (converter != null && converter.GetPropertiesSupported())
                 {
-                    DummyTypeDescriptorContext dummyContext = new DummyTypeDescriptorContext(propertySegment.ServiceProvider, propertySegment.Object, this.realPropDesc);
-                    props = converter.GetProperties(dummyContext, propertySegment.Object, new Attribute[] { });
+                    DummyTypeDescriptorContext dummyContext = new DummyTypeDescriptorContext(
+                        propertySegment.ServiceProvider,
+                        propertySegment.Object,
+                        this.realPropDesc
+                    );
+                    props = converter.GetProperties(
+                        dummyContext,
+                        propertySegment.Object,
+                        new Attribute[] { }
+                    );
                 }
                 else
                     props = TypeDescriptor.GetProperties(propertySegment.Object);
@@ -712,10 +942,23 @@ namespace System.Workflow.ComponentModel.Design
                     }
                     else if (propDesc.Converter != null)
                     {
-                        DummyTypeDescriptorContext dummyContext = new DummyTypeDescriptorContext(propertySegment.ServiceProvider, propertySegment.Object, propDesc);
-                        if (propDesc.GetValue(propertySegment.Object) != null && propDesc.Converter.GetPropertiesSupported(dummyContext))
+                        DummyTypeDescriptorContext dummyContext = new DummyTypeDescriptorContext(
+                            propertySegment.ServiceProvider,
+                            propertySegment.Object,
+                            propDesc
+                        );
+                        if (
+                            propDesc.GetValue(propertySegment.Object) != null
+                            && propDesc.Converter.GetPropertiesSupported(dummyContext)
+                        )
                         {
-                            foreach (PropertyDescriptor childDesc in propDesc.Converter.GetProperties(dummyContext, propDesc.GetValue(propertySegment.Object), new Attribute[] { }))
+                            foreach (
+                                PropertyDescriptor childDesc in propDesc.Converter.GetProperties(
+                                    dummyContext,
+                                    propDesc.GetValue(propertySegment.Object),
+                                    new Attribute[] { }
+                                )
+                            )
                             {
                                 if (childDesc.Name == propertyName)
                                     propertyDescriptor = childDesc;
@@ -751,6 +994,7 @@ namespace System.Workflow.ComponentModel.Design
 
             return null;
         }
+
         public override MethodInfo GetSetMethod(bool nonPublic)
         {
             if (this.realPropInfo != null)
@@ -758,6 +1002,7 @@ namespace System.Workflow.ComponentModel.Design
 
             return null;
         }
+
         public override ParameterInfo[] GetIndexParameters()
         {
             if (this.realPropInfo != null)
@@ -765,6 +1010,7 @@ namespace System.Workflow.ComponentModel.Design
 
             return new ParameterInfo[0];
         }
+
         public override PropertyAttributes Attributes
         {
             get

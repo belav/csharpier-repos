@@ -37,12 +37,18 @@ public class EntityFrameworkRelationalDesignServicesBuilder : EntityFrameworkDes
     ///     It should not be used from application code.
     /// </remarks>
     [EntityFrameworkInternal]
-    public static readonly IDictionary<Type, ServiceCharacteristics> RelationalServices
-        = new Dictionary<Type, ServiceCharacteristics>
+    public static readonly IDictionary<Type, ServiceCharacteristics> RelationalServices =
+        new Dictionary<Type, ServiceCharacteristics>
         {
-            { typeof(IAnnotationCodeGenerator), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IProviderConfigurationCodeGenerator), new ServiceCharacteristics(ServiceLifetime.Singleton) },
-            { typeof(IDatabaseModelFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) }
+            {
+                typeof(IAnnotationCodeGenerator),
+                new ServiceCharacteristics(ServiceLifetime.Singleton)
+            },
+            {
+                typeof(IProviderConfigurationCodeGenerator),
+                new ServiceCharacteristics(ServiceLifetime.Singleton)
+            },
+            { typeof(IDatabaseModelFactory), new ServiceCharacteristics(ServiceLifetime.Scoped) },
         };
 
     /// <summary>
@@ -51,17 +57,15 @@ public class EntityFrameworkRelationalDesignServicesBuilder : EntityFrameworkDes
     /// </summary>
     /// <param name="serviceCollection">The collection to which services will be registered.</param>
     public EntityFrameworkRelationalDesignServicesBuilder(IServiceCollection serviceCollection)
-        : base(serviceCollection)
-    {
-    }
+        : base(serviceCollection) { }
 
     /// <summary>
     ///     Gets the <see cref="ServiceCharacteristics" /> for the given service type.
     /// </summary>
     /// <param name="serviceType">The type that defines the service API.</param>
     /// <returns>The <see cref="ServiceCharacteristics" /> for the type or <see langword="null" /> if it's not an EF service.</returns>
-    protected override ServiceCharacteristics? TryGetServiceCharacteristics(Type serviceType)
-        => RelationalServices.TryGetValue(serviceType, out var characteristics)
+    protected override ServiceCharacteristics? TryGetServiceCharacteristics(Type serviceType) =>
+        RelationalServices.TryGetValue(serviceType, out var characteristics)
             ? characteristics
             : base.TryGetServiceCharacteristics(serviceType);
 
@@ -75,10 +79,14 @@ public class EntityFrameworkRelationalDesignServicesBuilder : EntityFrameworkDes
     {
         TryAdd<IAnnotationCodeGenerator, AnnotationCodeGenerator>();
 #pragma warning disable EF1001 // Internal EF Core API usage.
-        TryAdd<ICSharpRuntimeAnnotationCodeGenerator, RelationalCSharpRuntimeAnnotationCodeGenerator>();
+        TryAdd<
+            ICSharpRuntimeAnnotationCodeGenerator,
+            RelationalCSharpRuntimeAnnotationCodeGenerator
+        >();
 #pragma warning restore EF1001 // Internal EF Core API usage.
 
-        ServiceCollectionMap.GetInfrastructure()
+        ServiceCollectionMap
+            .GetInfrastructure()
             .AddDependencySingleton<AnnotationCodeGeneratorDependencies>()
             .AddDependencySingleton<ProviderCodeGeneratorDependencies>()
             .AddDependencySingleton<RelationalCSharpRuntimeAnnotationCodeGeneratorDependencies>();

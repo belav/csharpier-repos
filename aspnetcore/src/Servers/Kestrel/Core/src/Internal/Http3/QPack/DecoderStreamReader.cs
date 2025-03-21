@@ -13,7 +13,7 @@ internal sealed class DecoderStreamReader
         Ready,
         HeaderAckowledgement,
         StreamCancellation,
-        InsertCountIncrement
+        InsertCountIncrement,
     }
 
     //0   1   2   3   4   5   6   7
@@ -46,9 +46,7 @@ internal sealed class DecoderStreamReader
     private IntegerDecoder _integerDecoder;
     private State _state;
 
-    public DecoderStreamReader()
-    {
-    }
+    public DecoderStreamReader() { }
 
     public void Read(ReadOnlySequence<byte> data)
     {
@@ -72,7 +70,13 @@ internal sealed class DecoderStreamReader
                 if ((b & HeaderAcknowledgementMask) == HeaderAcknowledgementRepresentation)
                 {
                     prefixInt = HeaderAcknowledgementPrefixMask & b;
-                    if (_integerDecoder.BeginTryDecode((byte)prefixInt, HeaderAcknowledgementPrefix, out intResult))
+                    if (
+                        _integerDecoder.BeginTryDecode(
+                            (byte)prefixInt,
+                            HeaderAcknowledgementPrefix,
+                            out intResult
+                        )
+                    )
                     {
                         OnHeaderAcknowledgement(intResult);
                     }
@@ -84,7 +88,13 @@ internal sealed class DecoderStreamReader
                 else if ((b & StreamCancellationMask) == StreamCancellationRepresentation)
                 {
                     prefixInt = StreamCancellationPrefixMask & b;
-                    if (_integerDecoder.BeginTryDecode((byte)prefixInt, StreamCancellationPrefix, out intResult))
+                    if (
+                        _integerDecoder.BeginTryDecode(
+                            (byte)prefixInt,
+                            StreamCancellationPrefix,
+                            out intResult
+                        )
+                    )
                     {
                         OnStreamCancellation(intResult);
                     }
@@ -96,7 +106,13 @@ internal sealed class DecoderStreamReader
                 else if ((b & InsertCountIncrementMask) == InsertCountIncrementRepresentation)
                 {
                     prefixInt = InsertCountIncrementPrefixMask & b;
-                    if (_integerDecoder.BeginTryDecode((byte)prefixInt, InsertCountIncrementPrefix, out intResult))
+                    if (
+                        _integerDecoder.BeginTryDecode(
+                            (byte)prefixInt,
+                            InsertCountIncrementPrefix,
+                            out intResult
+                        )
+                    )
                     {
                         OnInsertCountIncrement(intResult);
                     }

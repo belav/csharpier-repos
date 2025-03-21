@@ -15,9 +15,11 @@ namespace System.ServiceModel.Activities
     using System.Runtime;
     using System.Runtime.Collections;
     using System.Runtime.Diagnostics;
+    using System.Runtime.DurableInstancing;
+    using System.Runtime.Serialization;
+    using System.Security;
     using System.Security.Principal;
     using System.ServiceModel;
-    using System.Runtime.Serialization;
     using System.ServiceModel.Activities.Description;
     using System.ServiceModel.Activities.Dispatcher;
     using System.ServiceModel.Activities.Tracking;
@@ -27,8 +29,6 @@ namespace System.ServiceModel.Activities
     using System.Transactions;
     using System.Xaml;
     using System.Xml.Linq;
-    using System.Runtime.DurableInstancing;
-    using System.Security;
 
     // InternalSendMessage encapsulates both the server and client send.  For the server
     // send it provides the ability to persist after correlations have been initialized
@@ -37,7 +37,8 @@ namespace System.ServiceModel.Activities
 
     class InternalSendMessage : NativeActivity
     {
-        static string runtimeTransactionHandlePropertyName = typeof(RuntimeTransactionHandle).FullName;
+        static string runtimeTransactionHandlePropertyName =
+            typeof(RuntimeTransactionHandle).FullName;
 
         // Explicit correlation OM
         Collection<CorrelationInitializer> correlationInitializers;
@@ -54,8 +55,10 @@ namespace System.ServiceModel.Activities
         bool isConfigSettingsSecure;
         bool configVerified;
 
-        KeyValuePair<ObjectCacheItem<ChannelFactoryReference>, SendMessageChannelCache> lastUsedFactoryCacheItem;
-
+        KeyValuePair<
+            ObjectCacheItem<ChannelFactoryReference>,
+            SendMessageChannelCache
+        > lastUsedFactoryCacheItem;
 
         // this will be scheduled if ShouldPersistBeforeSend is set to true
         Activity persist;
@@ -76,92 +79,59 @@ namespace System.ServiceModel.Activities
             this.TokenImpersonationLevel = TokenImpersonationLevel.Identification;
 
             this.sendMessageInstance = new Variable<VolatileSendMessageInstance>();
-            this.channelCorrelationCompletionWaiter = new WaitOnChannelCorrelation { Instance = this.sendMessageInstance };
+            this.channelCorrelationCompletionWaiter = new WaitOnChannelCorrelation
+            {
+                Instance = this.sendMessageInstance,
+            };
 
             this.noPersistHandle = new Variable<NoPersistHandle>();
             this.extensionSendCompleteBookmark = new Variable<Bookmark>();
             this.e2eActivityId = new Variable<Guid>();
 
-            this.openChannelFactory = new OpenChannelFactory { Instance = this.sendMessageInstance };
-            this.openChannelAndSendMessage = new OpenChannelAndSendMessage { Instance = this.sendMessageInstance, InternalSendMessage = this, };
+            this.openChannelFactory = new OpenChannelFactory
+            {
+                Instance = this.sendMessageInstance,
+            };
+            this.openChannelAndSendMessage = new OpenChannelAndSendMessage
+            {
+                Instance = this.sendMessageInstance,
+                InternalSendMessage = this,
+            };
         }
 
-        public TokenImpersonationLevel TokenImpersonationLevel
-        {
-            get;
-            set;
-        }
+        public TokenImpersonationLevel TokenImpersonationLevel { get; set; }
 
-        // Endpoint defines the service to talk to, and endpointAddress is used to set 
+        // Endpoint defines the service to talk to, and endpointAddress is used to set
         // the Uri at the runtime, such as the duplex scenario.
-        public Endpoint Endpoint
-        {
-            get;
-            set;
-        }
+        public Endpoint Endpoint { get; set; }
 
-        public string EndpointConfigurationName
-        {
-            get;
-            set;
-        }
+        public string EndpointConfigurationName { get; set; }
 
         // This is needed for the callback case
-        public InArgument<Uri> EndpointAddress
-        {
-            get;
-            set;
-        }
+        public InArgument<Uri> EndpointAddress { get; set; }
 
-        public InArgument<CorrelationHandle> CorrelatesWith
-        {
-            get;
-            set;
-        }
-        
-        public string OperationName
-        {
-            get;
-            set;
-        }
+        public InArgument<CorrelationHandle> CorrelatesWith { get; set; }
 
-        public string Action
-        {
-            get;
-            set;
-        }
+        public string OperationName { get; set; }
+
+        public string Action { get; set; }
 
         // cache for internal implementation. This should be set by the Send<T>
-        // Should only be used in initating send. 
+        // Should only be used in initating send.
         // Should use this instead of OperationContract.IsOneWay
-        public bool IsOneWay
-        {
-            get;
-            set;
-        }
+        public bool IsOneWay { get; set; }
 
         protected override bool CanInduceIdle
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         // this flag is for Send/SendReply to indicate if we are client-side send or receive-side sendreply
-        // 
-        internal bool IsSendReply
-        {
-            get;
-            set;
-        }
+        //
+        internal bool IsSendReply { get; set; }
 
         // Used for cleaning up the Message variable
-        internal OutArgument<Message> MessageOut
-        {
-            get;
-            set;
-        }
+        internal OutArgument<Message> MessageOut { get; set; }
 
         // should be used to decide whether persist before sending the message
         internal bool ShouldPersistBeforeSend { get; set; }
@@ -181,11 +151,7 @@ namespace System.ServiceModel.Activities
         }
 
         // This will be passed in from the parent Send activity
-        public CorrelationQuery CorrelationQuery
-        {
-            get;
-            set;
-        }
+        public CorrelationQuery CorrelationQuery { get; set; }
 
         // This needs to be set by the ReceiveReply, we assume that this is unique
         internal ICollection<CorrelationQuery> ReplyCorrelationQueries
@@ -204,38 +170,25 @@ namespace System.ServiceModel.Activities
         // on the serverside, the ContractName is set during ContractInference and is used for retrieving the
         // correct CorrelationQueryBehavior. ContractName on the Serverside can thus be different from what is
         // set on the OM
-        public XName ServiceContractName
-        {
-            get;
-            set;
-        }
+        public XName ServiceContractName { get; set; }
 
-        public InArgument<Message> Message
-        {
-            get;
-            set;
-        }
+        public InArgument<Message> Message { get; set; }
 
-        internal Send Parent
-        {
-            get;
-            set;
-        }
+        internal Send Parent { get; set; }
 
         internal static Guid TraceCorrelationActivityId
         {
-            [Fx.Tag.SecurityNote(Critical = "Critical because Trace.CorrelationManager has a Link demand for UnmanagedCode.",
-                Safe = "Safe because we aren't leaking a critical resource.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Critical because Trace.CorrelationManager has a Link demand for UnmanagedCode.",
+                Safe = "Safe because we aren't leaking a critical resource."
+            )]
             [SecuritySafeCritical]
-            get
-            {
-                return Trace.CorrelationManager.ActivityId;
-            }
+            get { return Trace.CorrelationManager.ActivityId; }
         }
 
         // we cache the ServiceEndpoint for perf reasons so that we can retrieve endpointaddress, contract etc without
         // creating a new ServiceEndpoint each time
-        // Note that we should not pass the cachedServiceEndpoint to the ChannelFactory, as we need to have a 
+        // Note that we should not pass the cachedServiceEndpoint to the ChannelFactory, as we need to have a
         // distinct instance per-Factory.
         ServiceEndpoint GetCachedServiceEndpoint()
         {
@@ -251,7 +204,9 @@ namespace System.ServiceModel.Activities
             Fx.Assert(this.Endpoint != null, "Endpoint should not be null");
             if (this.cachedEndpointHeaderCollection == null)
             {
-                this.cachedEndpointHeaderCollection = new AddressHeaderCollection(this.Endpoint.Headers);
+                this.cachedEndpointHeaderCollection = new AddressHeaderCollection(
+                    this.Endpoint.Headers
+                );
             }
             return this.cachedEndpointHeaderCollection;
         }
@@ -263,7 +218,11 @@ namespace System.ServiceModel.Activities
             if (configurationName != null)
             {
                 // load the standard endpoint from the config
-                serviceEndpointFromConfig = ConfigLoader.LookupEndpoint(configurationName, null, serviceEndpoint.Contract);
+                serviceEndpointFromConfig = ConfigLoader.LookupEndpoint(
+                    configurationName,
+                    null,
+                    serviceEndpoint.Contract
+                );
             }
 
             if (serviceEndpointFromConfig != null)
@@ -281,8 +240,8 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        // used to create ChannelFactoryReference instances. We don't cache the serviceEndpoint 
-        // directly, as we need to have a distinct instance per-Factory. So it's cached behind the 
+        // used to create ChannelFactoryReference instances. We don't cache the serviceEndpoint
+        // directly, as we need to have a distinct instance per-Factory. So it's cached behind the
         // scenes as part of the ChannelFactoryReference
         ServiceEndpoint CreateServiceEndpoint()
         {
@@ -303,11 +262,15 @@ namespace System.ServiceModel.Activities
                 result.Binding = this.Endpoint.Binding;
                 if (this.Endpoint.AddressUri != null)
                 {
-                    result.Address = new EndpointAddress(this.Endpoint.AddressUri, this.Endpoint.Identity, this.GetCachedEndpointHeaders());
+                    result.Address = new EndpointAddress(
+                        this.Endpoint.AddressUri,
+                        this.Endpoint.Identity,
+                        this.GetCachedEndpointHeaders()
+                    );
                 }
             }
-            // Get ServiceEndpoint will be called only on the client side, hence if endpoint is null, we will try to load the config with 
-            // endpointConfigurationName. 
+            // Get ServiceEndpoint will be called only on the client side, hence if endpoint is null, we will try to load the config with
+            // endpointConfigurationName.
             // endpointConfigurationName = null will be translated to endpointConfigurationName = String.Empty
             else
             {
@@ -320,7 +283,7 @@ namespace System.ServiceModel.Activities
             }
 
             // if the cachedContract is null, verify if TransactionFlow is accounted for in the contract
-            // if cachedContract is not null, we can skip this since the contract should be fixed for the workflow definition 
+            // if cachedContract is not null, we can skip this since the contract should be fixed for the workflow definition
             if (ensureTransactionFlow)
             {
                 EnsureTransactionFlowOnContract(ref result);
@@ -333,23 +296,31 @@ namespace System.ServiceModel.Activities
 
         void EnsureCorrelationQueryBehavior(ServiceEndpoint serviceEndpoint)
         {
-            CorrelationQueryBehavior correlationQueryBehavior = serviceEndpoint.Behaviors.Find<CorrelationQueryBehavior>();
+            CorrelationQueryBehavior correlationQueryBehavior =
+                serviceEndpoint.Behaviors.Find<CorrelationQueryBehavior>();
             if (correlationQueryBehavior == null)
             {
-                // Add CorrelationQueryBehavior if either Binding has queries or if either Send or ReceiveReplies 
+                // Add CorrelationQueryBehavior if either Binding has queries or if either Send or ReceiveReplies
                 // have correlation query associated with them
-                if (CorrelationQueryBehavior.BindingHasDefaultQueries(serviceEndpoint.Binding)
+                if (
+                    CorrelationQueryBehavior.BindingHasDefaultQueries(serviceEndpoint.Binding)
                     || this.CorrelationQuery != null
-                    || this.ReplyCorrelationQueries.Count > 0)
+                    || this.ReplyCorrelationQueries.Count > 0
+                )
                 {
-                    correlationQueryBehavior = new CorrelationQueryBehavior(new Collection<CorrelationQuery>());
+                    correlationQueryBehavior = new CorrelationQueryBehavior(
+                        new Collection<CorrelationQuery>()
+                    );
                     serviceEndpoint.Behaviors.Add(correlationQueryBehavior);
                 }
             }
             if (correlationQueryBehavior != null)
             {
                 // add CorrelationQuery from Send
-                if (this.CorrelationQuery != null && !correlationQueryBehavior.CorrelationQueries.Contains(this.CorrelationQuery))
+                if (
+                    this.CorrelationQuery != null
+                    && !correlationQueryBehavior.CorrelationQueries.Contains(this.CorrelationQuery)
+                )
                 {
                     correlationQueryBehavior.CorrelationQueries.Add(this.CorrelationQuery);
                 }
@@ -376,7 +347,10 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        static void EnsureCorrelationBehaviorScopeName(ActivityContext context, CorrelationQueryBehavior correlationBehavior)
+        static void EnsureCorrelationBehaviorScopeName(
+            ActivityContext context,
+            CorrelationQueryBehavior correlationBehavior
+        )
         {
             Fx.Assert(correlationBehavior != null, "caller must verify");
             if (correlationBehavior.ScopeName == null)
@@ -393,13 +367,20 @@ namespace System.ServiceModel.Activities
         {
             if (!this.IsOneWay)
             {
-                BindingElementCollection elementCollection = serviceEndpoint.Binding.CreateBindingElements();
-                TransactionFlowBindingElement bindingElement = elementCollection.Find<TransactionFlowBindingElement>();
+                BindingElementCollection elementCollection =
+                    serviceEndpoint.Binding.CreateBindingElements();
+                TransactionFlowBindingElement bindingElement =
+                    elementCollection.Find<TransactionFlowBindingElement>();
                 bool flowTransaction = ((bindingElement != null) && (bindingElement.Transactions));
                 if (flowTransaction)
                 {
-                    ContractInferenceHelper.EnsureTransactionFlowOnContract(ref serviceEndpoint,
-                        this.ServiceContractName, this.OperationName, this.Action, this.Parent.ProtectionLevel);
+                    ContractInferenceHelper.EnsureTransactionFlowOnContract(
+                        ref serviceEndpoint,
+                        this.ServiceContractName,
+                        this.OperationName,
+                        this.Action,
+                        this.Parent.ProtectionLevel
+                    );
                 }
             }
         }
@@ -409,7 +390,10 @@ namespace System.ServiceModel.Activities
             if (this.messageVersion == null)
             {
                 ServiceEndpoint endpoint = this.GetCachedServiceEndpoint();
-                this.messageVersion = (endpoint != null && endpoint.Binding != null) ? endpoint.Binding.MessageVersion : null;
+                this.messageVersion =
+                    (endpoint != null && endpoint.Binding != null)
+                        ? endpoint.Binding.MessageVersion
+                        : null;
             }
             return this.messageVersion;
         }
@@ -426,11 +410,18 @@ namespace System.ServiceModel.Activities
                 // If this is one-way send untyped message, this.OperationDescription would still be null
                 if (this.Parent.OperationDescription == null)
                 {
-                    Fx.Assert(this.IsOneWay, "We can only reach here when we are one-way send Message!");
-                    this.Parent.OperationDescription = ContractInferenceHelper.CreateOneWayOperationDescription(this.Parent);
+                    Fx.Assert(
+                        this.IsOneWay,
+                        "We can only reach here when we are one-way send Message!"
+                    );
+                    this.Parent.OperationDescription =
+                        ContractInferenceHelper.CreateOneWayOperationDescription(this.Parent);
                 }
 
-                cd = ContractInferenceHelper.CreateContractFromOperation(this.ServiceContractName, this.Parent.OperationDescription);
+                cd = ContractInferenceHelper.CreateContractFromOperation(
+                    this.ServiceContractName,
+                    this.Parent.OperationDescription
+                );
             }
             else
             {
@@ -440,11 +431,17 @@ namespace System.ServiceModel.Activities
 
                 if (this.IsOneWay)
                 {
-                    cd = ContractInferenceHelper.CreateOutputChannelContractDescription(this.ServiceContractName, this.Parent.ProtectionLevel);
+                    cd = ContractInferenceHelper.CreateOutputChannelContractDescription(
+                        this.ServiceContractName,
+                        this.Parent.ProtectionLevel
+                    );
                 }
                 else
                 {
-                    cd = ContractInferenceHelper.CreateRequestChannelContractDescription(this.ServiceContractName, this.Parent.ProtectionLevel);
+                    cd = ContractInferenceHelper.CreateRequestChannelContractDescription(
+                        this.ServiceContractName,
+                        this.Parent.ProtectionLevel
+                    );
                 }
             }
 
@@ -458,19 +455,26 @@ namespace System.ServiceModel.Activities
         EndpointAddress CreateEndpointAddress(NativeActivityContext context)
         {
             ServiceEndpoint endpoint = this.GetCachedServiceEndpoint();
-            Uri endpointAddressUri = (this.EndpointAddress != null) ? this.EndpointAddress.Get(context) : null;
+            Uri endpointAddressUri =
+                (this.EndpointAddress != null) ? this.EndpointAddress.Get(context) : null;
 
             if (endpoint != null && endpoint.Address != null)
             {
-                return endpointAddressUri == null ?
-                    endpoint.Address :
-                    (new EndpointAddressBuilder(endpoint.Address) { Uri = endpointAddressUri }).ToEndpointAddress();
+                return endpointAddressUri == null
+                    ? endpoint.Address
+                    : (
+                        new EndpointAddressBuilder(endpoint.Address) { Uri = endpointAddressUri }
+                    ).ToEndpointAddress();
             }
             else if (this.Endpoint != null)
             {
-                return endpointAddressUri == null ?
-                    this.Endpoint.GetAddress() :
-                    new EndpointAddress(endpointAddressUri, this.Endpoint.Identity, this.GetCachedEndpointHeaders());
+                return endpointAddressUri == null
+                    ? this.Endpoint.GetAddress()
+                    : new EndpointAddress(
+                        endpointAddressUri,
+                        this.Endpoint.Identity,
+                        this.GetCachedEndpointHeaders()
+                    );
             }
             else
             {
@@ -516,13 +520,11 @@ namespace System.ServiceModel.Activities
             return endpointAddress;
         }
 
-
         bool IsEndpointSettingsSafeForCache()
         {
             if (!this.configVerified)
             {
-
-                // let's set isConfigSettingsSecure flag to false if we use endpointConfiguration, 
+                // let's set isConfigSettingsSecure flag to false if we use endpointConfiguration,
                 // this is used to decide if we cache factory or not
 
                 this.isConfigSettingsSecure = this.Endpoint != null ? true : false;
@@ -542,7 +544,11 @@ namespace System.ServiceModel.Activities
                 metadata.AddImplementationChild(this.persist);
             }
 
-            RuntimeArgument endpointAddressArgument = new RuntimeArgument(Constants.EndpointAddress, Constants.UriType, ArgumentDirection.In);
+            RuntimeArgument endpointAddressArgument = new RuntimeArgument(
+                Constants.EndpointAddress,
+                Constants.UriType,
+                ArgumentDirection.In
+            );
             if (this.EndpointAddress == null)
             {
                 this.EndpointAddress = new InArgument<Uri>();
@@ -550,14 +556,18 @@ namespace System.ServiceModel.Activities
             metadata.Bind(this.EndpointAddress, endpointAddressArgument);
             metadata.AddArgument(endpointAddressArgument);
 
-            RuntimeArgument correlatesWithArgument = new RuntimeArgument(Constants.CorrelatesWith, Constants.CorrelationHandleType, ArgumentDirection.In);
+            RuntimeArgument correlatesWithArgument = new RuntimeArgument(
+                Constants.CorrelatesWith,
+                Constants.CorrelationHandleType,
+                ArgumentDirection.In
+            );
             if (this.CorrelatesWith == null)
             {
                 this.CorrelatesWith = new InArgument<CorrelationHandle>();
             }
             metadata.Bind(this.CorrelatesWith, correlatesWithArgument);
             metadata.AddArgument(correlatesWithArgument);
-            
+
             if (this.correlationInitializers != null)
             {
                 int count = 0;
@@ -565,8 +575,12 @@ namespace System.ServiceModel.Activities
                 {
                     if (correlation.CorrelationHandle != null)
                     {
-                        RuntimeArgument argument = new RuntimeArgument(Constants.Parameter + count,
-                            correlation.CorrelationHandle.ArgumentType, correlation.CorrelationHandle.Direction, true);
+                        RuntimeArgument argument = new RuntimeArgument(
+                            Constants.Parameter + count,
+                            correlation.CorrelationHandle.ArgumentType,
+                            correlation.CorrelationHandle.Direction,
+                            true
+                        );
                         metadata.Bind(correlation.CorrelationHandle, argument);
                         metadata.AddArgument(argument);
                         count++;
@@ -574,7 +588,11 @@ namespace System.ServiceModel.Activities
                 }
             }
 
-            RuntimeArgument requestMessageArgument = new RuntimeArgument(Constants.RequestMessage, Constants.MessageType, ArgumentDirection.In);
+            RuntimeArgument requestMessageArgument = new RuntimeArgument(
+                Constants.RequestMessage,
+                Constants.MessageType,
+                ArgumentDirection.In
+            );
             if (this.Message == null)
             {
                 this.Message = new InArgument<Message>();
@@ -584,7 +602,11 @@ namespace System.ServiceModel.Activities
 
             if (this.MessageOut != null)
             {
-                RuntimeArgument requestMessageReference = new RuntimeArgument("MessageReference", Constants.MessageType, ArgumentDirection.Out);
+                RuntimeArgument requestMessageReference = new RuntimeArgument(
+                    "MessageReference",
+                    Constants.MessageType,
+                    ArgumentDirection.Out
+                );
                 metadata.Bind(this.MessageOut, requestMessageReference);
                 metadata.AddArgument(requestMessageReference);
             }
@@ -603,7 +625,8 @@ namespace System.ServiceModel.Activities
 
         protected override void Cancel(NativeActivityContext context)
         {
-            SendReceiveExtension sendReceiveExtension = context.GetExtension<SendReceiveExtension>();
+            SendReceiveExtension sendReceiveExtension =
+                context.GetExtension<SendReceiveExtension>();
             if (sendReceiveExtension != null)
             {
                 Bookmark pendingBookmark = this.extensionSendCompleteBookmark.Get(context);
@@ -623,7 +646,8 @@ namespace System.ServiceModel.Activities
 
         protected override void Abort(NativeActivityAbortContext context)
         {
-            SendReceiveExtension sendReceiveExtension = context.GetExtension<SendReceiveExtension>();
+            SendReceiveExtension sendReceiveExtension =
+                context.GetExtension<SendReceiveExtension>();
             if (sendReceiveExtension != null)
             {
                 Bookmark pendingBookmark = this.extensionSendCompleteBookmark.Get(context);
@@ -635,8 +659,9 @@ namespace System.ServiceModel.Activities
             }
             else
             {
-
-                VolatileSendMessageInstance volatileInstance = this.sendMessageInstance.Get(context);
+                VolatileSendMessageInstance volatileInstance = this.sendMessageInstance.Get(
+                    context
+                );
 
                 if (volatileInstance != null)
                 {
@@ -653,28 +678,27 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        // A separate code-path for extension based execution least impacts 
-        // the existing workflow hosts. In the future we will add an extension from 
+        // A separate code-path for extension based execution least impacts
+        // the existing workflow hosts. In the future we will add an extension from
         // workflowservicehost and always use the extension.
         protected override void Execute(NativeActivityContext context)
         {
-            SendReceiveExtension sendReceiveExtension = context.GetExtension<SendReceiveExtension>();
+            SendReceiveExtension sendReceiveExtension =
+                context.GetExtension<SendReceiveExtension>();
             if (sendReceiveExtension != null)
             {
                 this.ExecuteUsingExtension(sendReceiveExtension, context);
             }
             else
             {
-                // 
-
-
+                //
 
                 // The entire InternalSendMessage runs in a no persist zone
                 NoPersistHandle noPersistHandle = this.noPersistHandle.Get(context);
                 noPersistHandle.Enter(context);
 
-                // Set up the SendMessageInstance, which will 
-                // setup an AsyncOperationBlock under the hood and thus block persistence 
+                // Set up the SendMessageInstance, which will
+                // setup an AsyncOperationBlock under the hood and thus block persistence
                 // until the message has been sent and we return to the workflow thread
                 SendMessageInstance instance = new SendMessageInstance(this, context);
                 SetSendMessageInstance(context, instance);
@@ -690,12 +714,22 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        void ExecuteUsingExtension(SendReceiveExtension sendReceiveExtension, NativeActivityContext context)
+        void ExecuteUsingExtension(
+            SendReceiveExtension sendReceiveExtension,
+            NativeActivityContext context
+        )
         {
             CorrelationHandle correlatesWith = null;
-            if (this.TryGetCorrelatesWithHandle(context, out correlatesWith) && !correlatesWith.IsInitalized())
+            if (
+                this.TryGetCorrelatesWithHandle(context, out correlatesWith)
+                && !correlatesWith.IsInitalized()
+            )
             {
-                throw FxTrace.Exception.AsError(new ValidationException(SR.SendWithUninitializedCorrelatesWith(this.OperationName ?? string.Empty)));
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(
+                        SR.SendWithUninitializedCorrelatesWith(this.OperationName ?? string.Empty)
+                    )
+                );
             }
 
             CorrelationHandle ambientHandle = CorrelationHandle.GetAmbientCorrelation(context);
@@ -711,7 +745,13 @@ namespace System.ServiceModel.Activities
             {
                 if (correlatesWith == null || !correlatesWith.IsInitalized())
                 {
-                    throw FxTrace.Exception.AsError(new ValidationException(SR.SendWithUninitializedCorrelatesWith(this.OperationName ?? string.Empty)));
+                    throw FxTrace.Exception.AsError(
+                        new ValidationException(
+                            SR.SendWithUninitializedCorrelatesWith(
+                                this.OperationName ?? string.Empty
+                            )
+                        )
+                    );
                 }
 
                 e2eTracingId = correlatesWith.E2ETraceId;
@@ -720,7 +760,10 @@ namespace System.ServiceModel.Activities
             else
             {
                 CorrelationHandle requestReplyCorrelationHandle;
-                this.correlationInitializers.TryGetRequestReplyCorrelationHandle(context, out requestReplyCorrelationHandle);
+                this.correlationInitializers.TryGetRequestReplyCorrelationHandle(
+                    context,
+                    out requestReplyCorrelationHandle
+                );
 
                 // validate correlation configuration
                 if (this.IsOneWay)
@@ -728,7 +771,11 @@ namespace System.ServiceModel.Activities
                     if (requestReplyCorrelationHandle != null)
                     {
                         // this is a one-way send , we should not have a RequestReply Correlation initializer
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.RequestReplyHandleShouldNotBePresentForOneWay));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.RequestReplyHandleShouldNotBePresentForOneWay
+                            )
+                        );
                     }
                 }
                 else
@@ -736,8 +783,13 @@ namespace System.ServiceModel.Activities
                     if (requestReplyCorrelationHandle == null && ambientHandle == null)
                     {
                         // we neither have a requestReply nor an ambientHandle
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(
-                            SR.SendMessageNeedsToPairWithReceiveMessageForTwoWayContract(this.OperationName ?? string.Empty)));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.SendMessageNeedsToPairWithReceiveMessageForTwoWayContract(
+                                    this.OperationName ?? string.Empty
+                                )
+                            )
+                        );
                     }
                 }
 
@@ -749,10 +801,22 @@ namespace System.ServiceModel.Activities
                 sendSettings = GetSettingsForSend(context);
             }
 
-            this.SendToExtension(sendReceiveExtension, context, sendSettings, e2eTracingId, correlatesWith);
+            this.SendToExtension(
+                sendReceiveExtension,
+                context,
+                sendSettings,
+                e2eTracingId,
+                correlatesWith
+            );
         }
 
-        void SendToExtension(SendReceiveExtension sendReceiveExtension, NativeActivityContext context, SendSettings sendSettings, Guid e2eTracingId, CorrelationHandle correlatesWith)
+        void SendToExtension(
+            SendReceiveExtension sendReceiveExtension,
+            NativeActivityContext context,
+            SendSettings sendSettings,
+            Guid e2eTracingId,
+            CorrelationHandle correlatesWith
+        )
         {
             Message message = this.Message.Get(context);
 
@@ -760,52 +824,84 @@ namespace System.ServiceModel.Activities
             if (!IsOneWay && !IsSendReply)
             {
                 CorrelationMessageProperty correlationMessageProperty;
-                if (!message.Properties.TryGetValue(CorrelationMessageProperty.Name, out correlationMessageProperty))
+                if (
+                    !message.Properties.TryGetValue(
+                        CorrelationMessageProperty.Name,
+                        out correlationMessageProperty
+                    )
+                )
                 {
-                    InstanceKey requestReplyCorrelationKey = new InstanceKey(Guid.NewGuid(),
-                            new Dictionary<XName, InstanceValue>
+                    InstanceKey requestReplyCorrelationKey = new InstanceKey(
+                        Guid.NewGuid(),
+                        new Dictionary<XName, InstanceValue>
+                        {
                             {
-                                { WorkflowServiceNamespace.RequestReplyCorrelation, new InstanceValue(true) }
-                            });
+                                WorkflowServiceNamespace.RequestReplyCorrelation,
+                                new InstanceValue(true)
+                            },
+                        }
+                    );
 
                     List<InstanceKey> transientCorrelations = new List<InstanceKey>();
                     transientCorrelations.Add(requestReplyCorrelationKey);
-                    correlationMessageProperty = new CorrelationMessageProperty(InstanceKey.InvalidKey, new List<InstanceKey>(0), transientCorrelations);
-                    message.Properties[CorrelationMessageProperty.Name] = correlationMessageProperty;
+                    correlationMessageProperty = new CorrelationMessageProperty(
+                        InstanceKey.InvalidKey,
+                        new List<InstanceKey>(0),
+                        transientCorrelations
+                    );
+                    message.Properties[CorrelationMessageProperty.Name] =
+                        correlationMessageProperty;
                 }
                 else
                 {
                     InstanceKey requestReplyCorrelationKey;
                     // if requestReplyCorrelationKey does not exist, clone correlationMessageProperty and
                     // replace it in the message with one that has the key.
-                    if (!this.TryGetRequestReplyCorrelationInstanceKey(correlationMessageProperty, out requestReplyCorrelationKey))
+                    if (
+                        !this.TryGetRequestReplyCorrelationInstanceKey(
+                            correlationMessageProperty,
+                            out requestReplyCorrelationKey
+                        )
+                    )
                     {
-                        requestReplyCorrelationKey = new InstanceKey(Guid.NewGuid(),
+                        requestReplyCorrelationKey = new InstanceKey(
+                            Guid.NewGuid(),
                             new Dictionary<XName, InstanceValue>
                             {
-                                { WorkflowServiceNamespace.RequestReplyCorrelation, new InstanceValue(true) }
-                            });
-                        List<InstanceKey> transientCorrelations = new List<InstanceKey>(correlationMessageProperty.TransientCorrelations);
+                                {
+                                    WorkflowServiceNamespace.RequestReplyCorrelation,
+                                    new InstanceValue(true)
+                                },
+                            }
+                        );
+                        List<InstanceKey> transientCorrelations = new List<InstanceKey>(
+                            correlationMessageProperty.TransientCorrelations
+                        );
                         transientCorrelations.Add(requestReplyCorrelationKey);
                         CorrelationMessageProperty newProperty = new CorrelationMessageProperty(
-                                correlationMessageProperty.CorrelationKey,
-                                correlationMessageProperty.AdditionalKeys,
-                                transientCorrelations);
+                            correlationMessageProperty.CorrelationKey,
+                            correlationMessageProperty.AdditionalKeys,
+                            transientCorrelations
+                        );
                         message.Properties[CorrelationMessageProperty.Name] = newProperty;
                     }
                 }
             }
 
-            MessageContext messageContext = new MessageContext(message) { EndToEndTracingId = e2eTracingId };
+            MessageContext messageContext = new MessageContext(message)
+            {
+                EndToEndTracingId = e2eTracingId,
+            };
             Bookmark sendCompleteBookmark = context.CreateBookmark(SendCompleteOnExtension);
             this.extensionSendCompleteBookmark.Set(context, sendCompleteBookmark);
             this.e2eActivityId.Set(context, e2eTracingId);
             this.ProcessSendMessageTrace(context, e2eTracingId, true);
             sendReceiveExtension.Send(
-                messageContext, 
-                sendSettings, 
-                (correlatesWith == null) ? null : correlatesWith.InstanceKey, 
-                sendCompleteBookmark);
+                messageContext,
+                sendSettings,
+                (correlatesWith == null) ? null : correlatesWith.InstanceKey,
+                sendCompleteBookmark
+            );
 
             if (this.MessageOut != null)
             {
@@ -820,7 +916,7 @@ namespace System.ServiceModel.Activities
             return new SendSettings
             {
                 RequirePersistBeforeSend = this.ShouldPersistBeforeSend,
-                OwnerDisplayName = this.OwnerDisplayName
+                OwnerDisplayName = this.OwnerDisplayName,
             };
         }
 
@@ -832,7 +928,7 @@ namespace System.ServiceModel.Activities
                 EndpointConfigurationName = this.EndpointConfigurationName,
                 TokenImpersonationLevel = this.TokenImpersonationLevel,
                 ProtectionLevel = this.Parent.ProtectionLevel,
-                OwnerDisplayName = this.OwnerDisplayName
+                OwnerDisplayName = this.OwnerDisplayName,
             };
 
             if (this.EndpointAddress != null)
@@ -842,7 +938,8 @@ namespace System.ServiceModel.Activities
 
             if (this.Endpoint != null)
             {
-                settings.Endpoint = XamlServices.Parse(XamlServices.Save(this.Endpoint)) as Endpoint;
+                settings.Endpoint =
+                    XamlServices.Parse(XamlServices.Save(this.Endpoint)) as Endpoint;
             }
 
             return settings;
@@ -850,7 +947,7 @@ namespace System.ServiceModel.Activities
 
         void SendCompleteOnExtension(NativeActivityContext context, Bookmark bookmark, object state)
         {
-            // Now that the bookmark has been resumed, clear out the workflow variable holding 
+            // Now that the bookmark has been resumed, clear out the workflow variable holding
             // its value.
             this.extensionSendCompleteBookmark.Set(context, null);
 
@@ -860,11 +957,16 @@ namespace System.ServiceModel.Activities
                 throw FxTrace.Exception.AsError(fault);
             }
 
-            CorrelationMessageProperty correlationMessageProperty = state as CorrelationMessageProperty;
+            CorrelationMessageProperty correlationMessageProperty =
+                state as CorrelationMessageProperty;
 
             if (state != null && correlationMessageProperty == null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.InvalidDataFromSendBookmarkState(this.OperationName ?? string.Empty)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.InvalidDataFromSendBookmarkState(this.OperationName ?? string.Empty)
+                    )
+                );
             }
 
             if (correlationMessageProperty != null)
@@ -876,29 +978,66 @@ namespace System.ServiceModel.Activities
             this.ProcessSendMessageCompleteTrace(context, e2eActivityId);
         }
 
-        void InitializeCorrelationHandles(NativeActivityContext context, CorrelationMessageProperty correlationMessageProperty)
+        void InitializeCorrelationHandles(
+            NativeActivityContext context,
+            CorrelationMessageProperty correlationMessageProperty
+        )
         {
-            CorrelationHandle ambientCorrelationHandle = CorrelationHandle.GetAmbientCorrelation(context);
+            CorrelationHandle ambientCorrelationHandle = CorrelationHandle.GetAmbientCorrelation(
+                context
+            );
 
             if (this.IsSendReply)
             {
                 // Check for ContextCorrelationInitializer handle
-                CorrelationHandle contextCorrelationHandle = CorrelationHandle.GetExplicitContextCorrelation(context, this.correlationInitializers);
-                MessagingActivityHelper.InitializeCorrelationHandles(context, contextCorrelationHandle, ambientCorrelationHandle, this.correlationInitializers, correlationMessageProperty.CorrelationKey, correlationMessageProperty.AdditionalKeys);
+                CorrelationHandle contextCorrelationHandle =
+                    CorrelationHandle.GetExplicitContextCorrelation(
+                        context,
+                        this.correlationInitializers
+                    );
+                MessagingActivityHelper.InitializeCorrelationHandles(
+                    context,
+                    contextCorrelationHandle,
+                    ambientCorrelationHandle,
+                    this.correlationInitializers,
+                    correlationMessageProperty.CorrelationKey,
+                    correlationMessageProperty.AdditionalKeys
+                );
             }
             else
             {
                 // Check for CallbackCorrelationInitializer handle
-                CorrelationHandle callbackCorrelationHandle = CorrelationHandle.GetExplicitCallbackCorrelation(context, this.correlationInitializers);
-                MessagingActivityHelper.InitializeCorrelationHandles(context, callbackCorrelationHandle, ambientCorrelationHandle, this.correlationInitializers, correlationMessageProperty.CorrelationKey, correlationMessageProperty.AdditionalKeys);
+                CorrelationHandle callbackCorrelationHandle =
+                    CorrelationHandle.GetExplicitCallbackCorrelation(
+                        context,
+                        this.correlationInitializers
+                    );
+                MessagingActivityHelper.InitializeCorrelationHandles(
+                    context,
+                    callbackCorrelationHandle,
+                    ambientCorrelationHandle,
+                    this.correlationInitializers,
+                    correlationMessageProperty.CorrelationKey,
+                    correlationMessageProperty.AdditionalKeys
+                );
 
                 InstanceKey requestReplyInstanceKey;
-                if (this.TryGetRequestReplyCorrelationInstanceKey(correlationMessageProperty, out requestReplyInstanceKey))
+                if (
+                    this.TryGetRequestReplyCorrelationInstanceKey(
+                        correlationMessageProperty,
+                        out requestReplyInstanceKey
+                    )
+                )
                 {
-                    CorrelationHandle requestReplyCorrelationHandle = CorrelationHandle.GetExplicitRequestReplyCorrelation(context, this.correlationInitializers);
+                    CorrelationHandle requestReplyCorrelationHandle =
+                        CorrelationHandle.GetExplicitRequestReplyCorrelation(
+                            context,
+                            this.correlationInitializers
+                        );
                     if (requestReplyCorrelationHandle != null)
                     {
-                        requestReplyCorrelationHandle.TransientInstanceKey = requestReplyInstanceKey;
+                        requestReplyCorrelationHandle.TransientInstanceKey =
+                            requestReplyInstanceKey;
                     }
                     else if (ambientCorrelationHandle != null)
                     {
@@ -908,14 +1047,22 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        bool TryGetRequestReplyCorrelationInstanceKey(CorrelationMessageProperty correlationMessageProperty, out InstanceKey instanceKey)
+        bool TryGetRequestReplyCorrelationInstanceKey(
+            CorrelationMessageProperty correlationMessageProperty,
+            out InstanceKey instanceKey
+        )
         {
             instanceKey = null;
 
             foreach (InstanceKey key in correlationMessageProperty.TransientCorrelations)
             {
                 InstanceValue value;
-                if (key.Metadata.TryGetValue(WorkflowServiceNamespace.RequestReplyCorrelation, out value))
+                if (
+                    key.Metadata.TryGetValue(
+                        WorkflowServiceNamespace.RequestReplyCorrelation,
+                        out value
+                    )
+                )
                 {
                     instanceKey = key;
                     break;
@@ -925,7 +1072,10 @@ namespace System.ServiceModel.Activities
             return instanceKey != null;
         }
 
-        bool TryGetCorrelatesWithHandle(NativeActivityContext context, out CorrelationHandle correlationHandle)
+        bool TryGetCorrelatesWithHandle(
+            NativeActivityContext context,
+            out CorrelationHandle correlationHandle
+        )
         {
             correlationHandle = null;
             if (this.CorrelatesWith != null)
@@ -938,7 +1088,10 @@ namespace System.ServiceModel.Activities
 
         void SetSendMessageInstance(NativeActivityContext context, SendMessageInstance instance)
         {
-            VolatileSendMessageInstance volatileInstance = new VolatileSendMessageInstance { Instance = instance };
+            VolatileSendMessageInstance volatileInstance = new VolatileSendMessageInstance
+            {
+                Instance = instance,
+            };
             this.sendMessageInstance.Set(context, volatileInstance);
         }
 
@@ -956,11 +1109,17 @@ namespace System.ServiceModel.Activities
         void ExecuteServerResponse(NativeActivityContext context, SendMessageInstance instance)
         {
             Fx.Assert(instance.ResponseContext != null, "only valid for responses");
-            Fx.Assert(instance.ResponseContext.WorkflowOperationContext != null, "The WorkflowOperationContext is required on the CorrelationResponseContext");
-            instance.OperationContext = instance.ResponseContext.WorkflowOperationContext.OperationContext;
+            Fx.Assert(
+                instance.ResponseContext.WorkflowOperationContext != null,
+                "The WorkflowOperationContext is required on the CorrelationResponseContext"
+            );
+            instance.OperationContext = instance
+                .ResponseContext
+                .WorkflowOperationContext
+                .OperationContext;
 
-            // now that we have our op-context, invoke the callback that user might have added in the AEC in the previous activity 
-            // e.g. distributed compensation activity will add this so that they can convert an execution property 
+            // now that we have our op-context, invoke the callback that user might have added in the AEC in the previous activity
+            // e.g. distributed compensation activity will add this so that they can convert an execution property
             // to an message properties, as will Transaction Flow
             instance.ProcessMessagePropertyCallbacks();
 
@@ -968,7 +1127,8 @@ namespace System.ServiceModel.Activities
 
             // retrieve the correct CorrelationQueryBehavior from the ChannelExtensions collection
             CorrelationQueryBehavior correlationBehavior = null;
-            Collection<CorrelationQueryBehavior> correlationQueryBehaviors = instance.OperationContext.Channel.Extensions.FindAll<CorrelationQueryBehavior>();
+            Collection<CorrelationQueryBehavior> correlationQueryBehaviors =
+                instance.OperationContext.Channel.Extensions.FindAll<CorrelationQueryBehavior>();
             foreach (CorrelationQueryBehavior cqb in correlationQueryBehaviors)
             {
                 if (cqb.ServiceContractName == this.ServiceContractName)
@@ -988,19 +1148,41 @@ namespace System.ServiceModel.Activities
 
                 if (instance.CorrelationKeyCalculator != null)
                 {
-                    if (correlationBehavior.SendNames != null && correlationBehavior.SendNames.Count > 0)
+                    if (
+                        correlationBehavior.SendNames != null
+                        && correlationBehavior.SendNames.Count > 0
+                    )
                     {
-                        if (correlationBehavior.SendNames.Count == 1 && (correlationBehavior.SendNames.Contains(ContextExchangeCorrelationHelper.CorrelationName)))
+                        if (
+                            correlationBehavior.SendNames.Count == 1
+                            && (
+                                correlationBehavior.SendNames.Contains(
+                                    ContextExchangeCorrelationHelper.CorrelationName
+                                )
+                            )
+                        )
                         {
                             // Contextchannel is the only channel participating in correlation
-                            // Since we already have the instance id, we don't have to wait for the context channel to call us back to initialize 
+                            // Since we already have the instance id, we don't have to wait for the context channel to call us back to initialize
                             // the correlation - InstanceId can be retrieved directly from ContextMessageProperty through Operation context.
                             ContextMessageProperty contextProperties = null;
-                            if (ContextMessageProperty.TryGet(instance.OperationContext.OutgoingMessageProperties, out contextProperties))
+                            if (
+                                ContextMessageProperty.TryGet(
+                                    instance.OperationContext.OutgoingMessageProperties,
+                                    out contextProperties
+                                )
+                            )
                             {
-                                // 
+                                //
 
-                                CorrelationDataMessageProperty.AddData(instance.RequestOrReply, ContextExchangeCorrelationHelper.CorrelationName, () => ContextExchangeCorrelationHelper.GetContextCorrelationData(instance.OperationContext));
+                                CorrelationDataMessageProperty.AddData(
+                                    instance.RequestOrReply,
+                                    ContextExchangeCorrelationHelper.CorrelationName,
+                                    () =>
+                                        ContextExchangeCorrelationHelper.GetContextCorrelationData(
+                                            instance.OperationContext
+                                        )
+                                );
                             }
                             // Initialize correlations right away without waiting for the context channel to call us back
                             InitializeCorrelations(context, instance);
@@ -1008,8 +1190,13 @@ namespace System.ServiceModel.Activities
                         else
                         {
                             // Initialize correlations through channel callback
-                            instance.OperationContext.OutgoingMessageProperties.Add(CorrelationCallbackMessageProperty.Name,
-                                new MessageCorrelationCallbackMessageProperty(correlationBehavior.SendNames ?? new string[0], instance));
+                            instance.OperationContext.OutgoingMessageProperties.Add(
+                                CorrelationCallbackMessageProperty.Name,
+                                new MessageCorrelationCallbackMessageProperty(
+                                    correlationBehavior.SendNames ?? new string[0],
+                                    instance
+                                )
+                            );
                             instance.CorrelationSynchronizer = new CorrelationSynchronizer();
                         }
                     }
@@ -1021,13 +1208,15 @@ namespace System.ServiceModel.Activities
                 }
             }
 
-            // For exception case: Always call WorkflowOperationContext.SendFault to either send back the fault in the request/reply case 
+            // For exception case: Always call WorkflowOperationContext.SendFault to either send back the fault in the request/reply case
             // or make sure the error handler extension gets a chance to handle this fault;
             if (instance.ResponseContext.Exception != null)
             {
                 try
                 {
-                    instance.ResponseContext.WorkflowOperationContext.SendFault(instance.ResponseContext.Exception);
+                    instance.ResponseContext.WorkflowOperationContext.SendFault(
+                        instance.ResponseContext.Exception
+                    );
                 }
                 catch (Exception e)
                 {
@@ -1042,7 +1231,9 @@ namespace System.ServiceModel.Activities
             {
                 try
                 {
-                    instance.ResponseContext.WorkflowOperationContext.SendReply(instance.RequestOrReply);
+                    instance.ResponseContext.WorkflowOperationContext.SendReply(
+                        instance.RequestOrReply
+                    );
                 }
                 catch (Exception e)
                 {
@@ -1060,11 +1251,22 @@ namespace System.ServiceModel.Activities
                 {
                     if (TD.StopSignpostEventIsEnabled())
                     {
-                        TD.StopSignpostEvent(new DictionaryTraceRecord(new Dictionary<string, string>(3) {
-                                                    { MessagingActivityHelper.ActivityName, this.DisplayName },
-                                                    { MessagingActivityHelper.ActivityType, MessagingActivityHelper.MessagingActivityTypeActivityExecution },
-                                                    { MessagingActivityHelper.ActivityInstanceId, context.ActivityInstanceId }
-                            }));
+                        TD.StopSignpostEvent(
+                            new DictionaryTraceRecord(
+                                new Dictionary<string, string>(3)
+                                {
+                                    { MessagingActivityHelper.ActivityName, this.DisplayName },
+                                    {
+                                        MessagingActivityHelper.ActivityType,
+                                        MessagingActivityHelper.MessagingActivityTypeActivityExecution
+                                    },
+                                    {
+                                        MessagingActivityHelper.ActivityInstanceId,
+                                        context.ActivityInstanceId
+                                    },
+                                }
+                            )
+                        );
                     }
                     FxTrace.Trace.SetAndTraceTransfer(instance.AmbientActivityId, true);
                     instance.AmbientActivityId = Guid.Empty;
@@ -1084,8 +1286,11 @@ namespace System.ServiceModel.Activities
                     NoPersistHandle noPersistHandle = this.noPersistHandle.Get(context);
                     noPersistHandle.Exit(context);
 
-                    // 
-                    context.ScheduleActivity(this.persist, new CompletionCallback(OnPersistCompleted));
+                    //
+                    context.ScheduleActivity(
+                        this.persist,
+                        new CompletionCallback(OnPersistCompleted)
+                    );
                 }
                 else
                 {
@@ -1103,7 +1308,11 @@ namespace System.ServiceModel.Activities
                 }
                 else
                 {
-                    context.ScheduleActivity(this.channelCorrelationCompletionWaiter, OnChannelCorrelationComplete, null);
+                    context.ScheduleActivity(
+                        this.channelCorrelationCompletionWaiter,
+                        OnChannelCorrelationComplete,
+                        null
+                    );
                 }
 
                 // We notify that we're done with the send.  If the
@@ -1116,7 +1325,11 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        void ProcessSendMessageTrace(NativeActivityContext context, SendMessageInstance instance, bool isClient)
+        void ProcessSendMessageTrace(
+            NativeActivityContext context,
+            SendMessageInstance instance,
+            bool isClient
+        )
         {
             if (TraceUtility.MessageFlowTracing)
             {
@@ -1136,14 +1349,21 @@ namespace System.ServiceModel.Activities
                 }
                 else
                 {
-                    instance.E2EActivityId = instance.ResponseContext.WorkflowOperationContext.E2EActivityId;
+                    instance.E2EActivityId = instance
+                        .ResponseContext
+                        .WorkflowOperationContext
+                        .E2EActivityId;
                 }
 
                 this.ProcessSendMessageTrace(context, instance.E2EActivityId, isClient);
             }
         }
 
-        void ProcessSendMessageTrace(NativeActivityContext context, Guid e2eActivityId, bool isClient)
+        void ProcessSendMessageTrace(
+            NativeActivityContext context,
+            Guid e2eActivityId,
+            bool isClient
+        )
         {
             if (TraceUtility.MessageFlowTracing)
             {
@@ -1165,18 +1385,30 @@ namespace System.ServiceModel.Activities
                     context.Track(
                         new SendMessageRecord(MessagingActivityHelper.MessageCorrelationSendRecord)
                         {
-                            E2EActivityId = e2eActivityId
-                        });
+                            E2EActivityId = e2eActivityId,
+                        }
+                    );
 
                     if (TraceUtility.ActivityTracing)
                     {
                         if (TD.StartSignpostEventIsEnabled())
                         {
-                            TD.StartSignpostEvent(new DictionaryTraceRecord(new Dictionary<string, string>(3) {
-                                                    { MessagingActivityHelper.ActivityName, this.DisplayName },
-                                                    { MessagingActivityHelper.ActivityType, MessagingActivityHelper.MessagingActivityTypeActivityExecution },
-                                                    { MessagingActivityHelper.ActivityInstanceId, context.ActivityInstanceId }
-                            }));
+                            TD.StartSignpostEvent(
+                                new DictionaryTraceRecord(
+                                    new Dictionary<string, string>(3)
+                                    {
+                                        { MessagingActivityHelper.ActivityName, this.DisplayName },
+                                        {
+                                            MessagingActivityHelper.ActivityType,
+                                            MessagingActivityHelper.MessagingActivityTypeActivityExecution
+                                        },
+                                        {
+                                            MessagingActivityHelper.ActivityInstanceId,
+                                            context.ActivityInstanceId
+                                        },
+                                    }
+                                )
+                            );
                         }
                     }
                 }
@@ -1198,17 +1430,28 @@ namespace System.ServiceModel.Activities
             {
                 if (TD.StopSignpostEventIsEnabled())
                 {
-                    TD.StopSignpostEvent(new DictionaryTraceRecord(new Dictionary<string, string>(3) {
-                                                    { MessagingActivityHelper.ActivityName, this.DisplayName },
-                                                    { MessagingActivityHelper.ActivityType, MessagingActivityHelper.MessagingActivityTypeActivityExecution },
-                                                    { MessagingActivityHelper.ActivityInstanceId, context.ActivityInstanceId }
-                                }));
+                    TD.StopSignpostEvent(
+                        new DictionaryTraceRecord(
+                            new Dictionary<string, string>(3)
+                            {
+                                { MessagingActivityHelper.ActivityName, this.DisplayName },
+                                {
+                                    MessagingActivityHelper.ActivityType,
+                                    MessagingActivityHelper.MessagingActivityTypeActivityExecution
+                                },
+                                {
+                                    MessagingActivityHelper.ActivityInstanceId,
+                                    context.ActivityInstanceId
+                                },
+                            }
+                        )
+                    );
                 }
                 FxTrace.Trace.SetAndTraceTransfer(ambientActivityId, true);
             }
             if (TD.WfMessageSentIsEnabled())
             {
-                // 
+                //
                 EventTraceActivity eta = new EventTraceActivity();
                 if (e2eActivityId != Guid.Empty)
                 {
@@ -1218,7 +1461,10 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        void OnChannelCorrelationComplete(NativeActivityContext context, ActivityInstance completedInstance)
+        void OnChannelCorrelationComplete(
+            NativeActivityContext context,
+            ActivityInstance completedInstance
+        )
         {
             SendMessageInstance instance = GetSendMessageInstance(context);
             Fx.Assert(instance != null, "The instance cannot be null here.");
@@ -1226,7 +1472,10 @@ namespace System.ServiceModel.Activities
             OnChannelCorrelationCompleteCore(context, instance);
         }
 
-        void OnChannelCorrelationCompleteCore(NativeActivityContext context, SendMessageInstance instance)
+        void OnChannelCorrelationCompleteCore(
+            NativeActivityContext context,
+            SendMessageInstance instance
+        )
         {
             Message message = InitializeCorrelations(context, instance);
             instance.CorrelationSynchronizer.NotifyMessageUpdatedByWorkflow(message);
@@ -1240,21 +1489,28 @@ namespace System.ServiceModel.Activities
                 NoPersistHandle noPersistHandle = this.noPersistHandle.Get(context);
                 noPersistHandle.Exit(context);
 
-                // 
+                //
                 context.ScheduleActivity(this.persist, new CompletionCallback(OnPersistCompleted));
             }
             else
             {
-                // Create a bookmark to complete the callback, this is to ensure that the InstanceKey does get saved in the PPD 
-                // by the time the bookmark is resumed. The instancekey is not getting  saved in the PPD  till workflow gets to 
-                // the next idle state. 
-                // 
-                Bookmark completeCorrelationBookmark = context.CreateBookmark(CompleteCorrelationCallback, BookmarkOptions.NonBlocking);
+                // Create a bookmark to complete the callback, this is to ensure that the InstanceKey does get saved in the PPD
+                // by the time the bookmark is resumed. The instancekey is not getting  saved in the PPD  till workflow gets to
+                // the next idle state.
+                //
+                Bookmark completeCorrelationBookmark = context.CreateBookmark(
+                    CompleteCorrelationCallback,
+                    BookmarkOptions.NonBlocking
+                );
                 context.ResumeBookmark(completeCorrelationBookmark, null);
             }
         }
 
-        void CompleteCorrelationCallback(NativeActivityContext context, Bookmark bookmark, object value)
+        void CompleteCorrelationCallback(
+            NativeActivityContext context,
+            Bookmark bookmark,
+            object value
+        )
         {
             SendMessageInstance instance = GetSendMessageInstance(context);
             Fx.Assert(instance != null, "The instance cannot be null here.");
@@ -1281,7 +1537,10 @@ namespace System.ServiceModel.Activities
             if (instance != null)
             {
                 // Do it with or without correlation
-                if (instance.CorrelationSynchronizer == null || instance.CorrelationSynchronizer.NotifyWorkflowCorrelationProcessingComplete())
+                if (
+                    instance.CorrelationSynchronizer == null
+                    || instance.CorrelationSynchronizer.NotifyWorkflowCorrelationProcessingComplete()
+                )
                 {
                     // The send complete notification has already occurred
                     // so it is up to us to finalize the send.
@@ -1298,7 +1557,6 @@ namespace System.ServiceModel.Activities
             instance.CacheExtension = context.GetExtension<SendMessageChannelCache>();
             Fx.Assert(instance.CacheExtension != null, "channelCacheExtension must exist.");
 
-
             // Send.ChannelCacheEnabled must be set before we call CreateEndpointAddress
             // because CreateEndpointAddress will cache description and description resolution depends on the value of ChannelCacheEnabled
             this.Parent.InitializeChannelCacheEnabledSetting(instance.CacheExtension);
@@ -1312,7 +1570,9 @@ namespace System.ServiceModel.Activities
                     instance.CorrelationCallbackContext = instance.CorrelatesWith.CallbackContext;
 
                     // construct EndpointAdress based on the ListenAddress from callback and the identity and headers from Endpoint or from Config
-                    instance.EndpointAddress = CreateEndpointAddressFromCallback(instance.CorrelationCallbackContext.ListenAddress.ToEndpointAddress());
+                    instance.EndpointAddress = CreateEndpointAddressFromCallback(
+                        instance.CorrelationCallbackContext.ListenAddress.ToEndpointAddress()
+                    );
                 }
 
                 if (instance.CorrelatesWith.Context != null)
@@ -1331,10 +1591,12 @@ namespace System.ServiceModel.Activities
 
             if (instance.EndpointAddress == null)
             {
-                throw FxTrace.Exception.AsError(new ValidationException(SR.EndpointAddressNotSetInEndpoint(this.OperationName)));
+                throw FxTrace.Exception.AsError(
+                    new ValidationException(SR.EndpointAddressNotSetInEndpoint(this.OperationName))
+                );
             }
 
-            // Configname to be used for the FactoryCacheKey, 
+            // Configname to be used for the FactoryCacheKey,
             // if endpoint is defined, we use the settings from endpoint and ignore the endpointConfigurationName
             // if endpoint is not defined we use the endpointConfigurationName
             string configName = (this.Endpoint != null) ? null : this.EndpointConfigurationName;
@@ -1344,43 +1606,61 @@ namespace System.ServiceModel.Activities
             // Get ChannelFactory from the cache
             ObjectCache<FactoryCacheKey, ChannelFactoryReference> channelFactoryCache = null;
             ObjectCacheItem<ChannelFactoryReference> cacheItem = null;
-            ChannelCacheSettings channelCacheSettings;                        
-            
-            // retrieve the FactoryCacheKey and cache it so that we could use it later.  
+            ChannelCacheSettings channelCacheSettings;
+
+            // retrieve the FactoryCacheKey and cache it so that we could use it later.
             if (this.cachedFactoryCacheKey == null)
             {
                 ServiceEndpoint targetEndpoint = this.GetCachedServiceEndpoint();
-                this.cachedFactoryCacheKey = new FactoryCacheKey(this.Endpoint, configName, this.IsOneWay, this.TokenImpersonationLevel,
-                    targetEndpoint.Contract, this.correlationQueries);
+                this.cachedFactoryCacheKey = new FactoryCacheKey(
+                    this.Endpoint,
+                    configName,
+                    this.IsOneWay,
+                    this.TokenImpersonationLevel,
+                    targetEndpoint.Contract,
+                    this.correlationQueries
+                );
             }
-            
+
             // let's decide if we can share the cache from the extension
             // cache can be share if AllowUnsafeSharing is true or it is safe to share
             if (instance.CacheExtension.AllowUnsafeCaching || this.IsEndpointSettingsSafeForCache())
             {
                 channelFactoryCache = instance.CacheExtension.GetFactoryCache();
-                Fx.Assert(channelFactoryCache != null, "factory cache should be initialized either from the extension or from the globalcache");
+                Fx.Assert(
+                    channelFactoryCache != null,
+                    "factory cache should be initialized either from the extension or from the globalcache"
+                );
 
                 channelCacheSettings = instance.CacheExtension.ChannelSettings;
 
                 // Get a ChannelFactoryReference (either cached or brand new)
-                KeyValuePair<ObjectCacheItem<ChannelFactoryReference>, SendMessageChannelCache> localLastUsedCacheItem = this.lastUsedFactoryCacheItem;
+                KeyValuePair<
+                    ObjectCacheItem<ChannelFactoryReference>,
+                    SendMessageChannelCache
+                > localLastUsedCacheItem = this.lastUsedFactoryCacheItem;
                 if (object.ReferenceEquals(localLastUsedCacheItem.Value, instance.CacheExtension))
                 {
-                    if (localLastUsedCacheItem.Key != null && localLastUsedCacheItem.Key.TryAddReference())
+                    if (
+                        localLastUsedCacheItem.Key != null
+                        && localLastUsedCacheItem.Key.TryAddReference()
+                    )
                     {
                         cacheItem = localLastUsedCacheItem.Key;
                     }
                     else
                     {
                         // the item is invalid
-                        this.lastUsedFactoryCacheItem = new KeyValuePair<ObjectCacheItem<ChannelFactoryReference>, SendMessageChannelCache>(null, null);
+                        this.lastUsedFactoryCacheItem = new KeyValuePair<
+                            ObjectCacheItem<ChannelFactoryReference>,
+                            SendMessageChannelCache
+                        >(null, null);
                     }
                 }
 
                 if (cacheItem == null)
                 {
-                    // try retrieving the factoryreference directly from the factory cache 
+                    // try retrieving the factoryreference directly from the factory cache
                     cacheItem = channelFactoryCache.Take(this.cachedFactoryCacheKey);
                 }
                 if (cacheItem == null && TD.SendMessageChannelCacheMissIsEnabled())
@@ -1399,9 +1679,13 @@ namespace System.ServiceModel.Activities
             {
                 // nothing in our cache, we'll have to setup a new factory reference, which ClientSendAsyncResult will open asynchronously
                 ServiceEndpoint targetEndpoint = this.CreateServiceEndpoint();
-                // create a new ChannelFactoryReference that holds the channelfactory and a cache for its channels, 
+                // create a new ChannelFactoryReference that holds the channelfactory and a cache for its channels,
                 // cache settings are based on the channelcachesettings provided through the extension
-                newFactoryReference = new ChannelFactoryReference(this.cachedFactoryCacheKey, targetEndpoint, channelCacheSettings);
+                newFactoryReference = new ChannelFactoryReference(
+                    this.cachedFactoryCacheKey,
+                    targetEndpoint,
+                    channelCacheSettings
+                );
             }
 
             instance.SetupFactoryReference(cacheItem, newFactoryReference, channelFactoryCache);
@@ -1413,7 +1697,11 @@ namespace System.ServiceModel.Activities
 
             if (instance.FactoryReference.NeedsOpen)
             {
-                context.ScheduleActivity(this.openChannelFactory, OnChannelFactoryOpened, this.onSendFailure);
+                context.ScheduleActivity(
+                    this.openChannelFactory,
+                    OnChannelFactoryOpened,
+                    this.onSendFailure
+                );
             }
             else
             {
@@ -1421,7 +1709,11 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        void OnSendFailure(NativeActivityFaultContext context, Exception propagatedException, ActivityInstance propagatedFrom)
+        void OnSendFailure(
+            NativeActivityFaultContext context,
+            Exception propagatedException,
+            ActivityInstance propagatedFrom
+        )
         {
             // We throw the exception because we want this activity to abort
             // as well.  The abort path will take care of performing resource
@@ -1429,7 +1721,10 @@ namespace System.ServiceModel.Activities
             throw FxTrace.Exception.AsError(propagatedException);
         }
 
-        void OnChannelFactoryOpened(NativeActivityContext context, ActivityInstance completedInstance)
+        void OnChannelFactoryOpened(
+            NativeActivityContext context,
+            ActivityInstance completedInstance
+        )
         {
             SendMessageInstance instance = GetSendMessageInstance(context);
             Fx.Assert(instance != null, "Must have a SendMessageInstance here.");
@@ -1443,12 +1738,15 @@ namespace System.ServiceModel.Activities
             instance.PopulateClientChannel();
 
             IContextChannel contextChannel = instance.ClientSendChannel as IContextChannel;
-            instance.OperationContext = (contextChannel == null) ? null : new OperationContext(contextChannel);
-            
+            instance.OperationContext =
+                (contextChannel == null) ? null : new OperationContext(contextChannel);
+
             // Retrieve the CorrelationQueryBehavior from the serviceEndpoint that we used for ChannelFactoryCreation
             // we later look for CorrelationQueryBehavior.SendNames which actually gets initialized during ChannelFactory creation
-            // 
-            CorrelationQueryBehavior correlationQueryBehavior = instance.FactoryReference.CorrelationQueryBehavior;
+            //
+            CorrelationQueryBehavior correlationQueryBehavior = instance
+                .FactoryReference
+                .CorrelationQueryBehavior;
 
             if (correlationQueryBehavior != null)
             {
@@ -1456,8 +1754,8 @@ namespace System.ServiceModel.Activities
                 instance.RegisterCorrelationBehavior(correlationQueryBehavior);
             }
 
-            // now that we have our op-context, invoke the callback that user might have added in the AEC in the previous activity 
-            // e.g. distributed compensation activity will add this so that they can convert an execution property 
+            // now that we have our op-context, invoke the callback that user might have added in the AEC in the previous activity
+            // e.g. distributed compensation activity will add this so that they can convert an execution property
             // to an message properties, as will Transaction Flow
             instance.ProcessMessagePropertyCallbacks();
 
@@ -1467,22 +1765,35 @@ namespace System.ServiceModel.Activities
             if (instance.CorrelationCallbackContext != null && instance.CorrelationContext != null)
             {
                 // validate if the context is equivalent
-                if (MessagingActivityHelper.CompareContextEquality(instance.CorrelationCallbackContext.Context, instance.CorrelationContext.Context))
+                if (
+                    MessagingActivityHelper.CompareContextEquality(
+                        instance.CorrelationCallbackContext.Context,
+                        instance.CorrelationContext.Context
+                    )
+                )
                 {
-                    contextMessageProperty = new ContextMessageProperty(instance.CorrelationCallbackContext.Context);
+                    contextMessageProperty = new ContextMessageProperty(
+                        instance.CorrelationCallbackContext.Context
+                    );
                 }
                 else
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR.ContextMismatchInContextAndCallBackContext));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(SR.ContextMismatchInContextAndCallBackContext)
+                    );
                 }
             }
             else if (instance.CorrelationCallbackContext != null)
             {
-                contextMessageProperty = new ContextMessageProperty(instance.CorrelationCallbackContext.Context);
+                contextMessageProperty = new ContextMessageProperty(
+                    instance.CorrelationCallbackContext.Context
+                );
             }
             else if (instance.CorrelationContext != null)
             {
-                contextMessageProperty = new ContextMessageProperty(instance.CorrelationContext.Context);
+                contextMessageProperty = new ContextMessageProperty(
+                    instance.CorrelationContext.Context
+                );
             }
 
             if (contextMessageProperty != null)
@@ -1494,29 +1805,45 @@ namespace System.ServiceModel.Activities
             // If binding contains ContextBindingElement with listenaddress set, the callback context message property will flow on the wire
 
             // Pull the instanceId from the CorrelationHandle, if it is already initialized, else create a new GUID.
-            // we want to send the callback context only for the first message and when there is a FollowingContextCorrelation defined ( i.e., we are expecting a 
-            // receive message back) or when there is an ambienthandle and the handle is not initalized. We will never use CorrelatesWith handle to initialize 
+            // we want to send the callback context only for the first message and when there is a FollowingContextCorrelation defined ( i.e., we are expecting a
+            // receive message back) or when there is an ambienthandle and the handle is not initalized. We will never use CorrelatesWith handle to initialize
             // FollowingContext, since CorrelatesWith on the client side should always be used for a following correlation
             String contextValue;
-            CorrelationHandle followingContextHandle = instance.ContextBasedCorrelationHandle != null ? instance.ContextBasedCorrelationHandle : instance.AmbientHandle;
+            CorrelationHandle followingContextHandle =
+                instance.ContextBasedCorrelationHandle != null
+                    ? instance.ContextBasedCorrelationHandle
+                    : instance.AmbientHandle;
 
-            if (followingContextHandle != null && (followingContextHandle.Scope == null || followingContextHandle.Scope.IsInitialized == false))
+            if (
+                followingContextHandle != null
+                && (
+                    followingContextHandle.Scope == null
+                    || followingContextHandle.Scope.IsInitialized == false
+                )
+            )
             {
                 // we are creating a new GUID for the context. As a practice,we don't want to send the WorkflowInstanceId over the wire
                 contextValue = Guid.NewGuid().ToString();
                 Dictionary<string, string> contextValues = new Dictionary<string, string>(1)
-                    {
-                        { ContextMessageProperty.InstanceIdKey, contextValue }
-                    };
-                new CallbackContextMessageProperty(contextValues).AddOrReplaceInMessage(instance.RequestOrReply);
+                {
+                    { ContextMessageProperty.InstanceIdKey, contextValue },
+                };
+                new CallbackContextMessageProperty(contextValues).AddOrReplaceInMessage(
+                    instance.RequestOrReply
+                );
             }
 
             // verify if we can complete Correlation intialization now
             if (instance.CorrelationSendNames != null)
             {
                 // we're going to initialize request correlations later
-                instance.RequestOrReply.Properties.Add(CorrelationCallbackMessageProperty.Name,
-                    new MessageCorrelationCallbackMessageProperty(instance.CorrelationSendNames, instance));
+                instance.RequestOrReply.Properties.Add(
+                    CorrelationCallbackMessageProperty.Name,
+                    new MessageCorrelationCallbackMessageProperty(
+                        instance.CorrelationSendNames,
+                        instance
+                    )
+                );
 
                 instance.CorrelationSynchronizer = new CorrelationSynchronizer();
             }
@@ -1527,17 +1854,28 @@ namespace System.ServiceModel.Activities
 
             if (instance.CorrelationSynchronizer != null)
             {
-                context.ScheduleActivity(this.channelCorrelationCompletionWaiter, OnChannelCorrelationComplete, this.onSendFailure);
+                context.ScheduleActivity(
+                    this.channelCorrelationCompletionWaiter,
+                    OnChannelCorrelationComplete,
+                    this.onSendFailure
+                );
             }
 
-            context.ScheduleActivity(this.openChannelAndSendMessage, OnClientSendComplete, this.onSendFailure);
+            context.ScheduleActivity(
+                this.openChannelAndSendMessage,
+                OnClientSendComplete,
+                this.onSendFailure
+            );
         }
 
         void OnClientSendComplete(NativeActivityContext context, ActivityInstance completedInstance)
         {
             SendMessageInstance instance = GetSendMessageInstance(context);
 
-            if (instance.CorrelationSynchronizer == null || instance.CorrelationSynchronizer.NotifySendComplete())
+            if (
+                instance.CorrelationSynchronizer == null
+                || instance.CorrelationSynchronizer.NotifySendComplete()
+            )
             {
                 // Either there was no correlation or the send completed
                 // after the correlation processing so we need to do the
@@ -1550,27 +1888,43 @@ namespace System.ServiceModel.Activities
         {
             if (instance.CorrelationKeyCalculator != null)
             {
-                // first setup the key-based correlations, pass in the Correlation Initialiers and the AmbientHandle 
-                // for associating the keys. 
-                // For content based correlation, we will never initalize correlation with a selectHandle.It has to be either specified in a CorrelationInitalizer 
+                // first setup the key-based correlations, pass in the Correlation Initialiers and the AmbientHandle
+                // for associating the keys.
+                // For content based correlation, we will never initalize correlation with a selectHandle.It has to be either specified in a CorrelationInitalizer
                 // or should be an ambient handle
                 // For contextbased correlation, selecthandle will be callbackHandle in case of Send and contextHandle in case of sendReply
-                instance.RequestOrReply = MessagingActivityHelper.InitializeCorrelationHandles(context,
-                    instance.ContextBasedCorrelationHandle, instance.AmbientHandle, this.correlationInitializers,
-                    instance.CorrelationKeyCalculator, instance.RequestOrReply);
+                instance.RequestOrReply = MessagingActivityHelper.InitializeCorrelationHandles(
+                    context,
+                    instance.ContextBasedCorrelationHandle,
+                    instance.AmbientHandle,
+                    this.correlationInitializers,
+                    instance.CorrelationKeyCalculator,
+                    instance.RequestOrReply
+                );
             }
 
             // then setup any channel based correlations as necessary
-            // 
+            //
             if (instance.RequestContext != null)
             {
                 // first check for an explicit association
-                CorrelationHandle requestReplyCorrelationHandle = instance.GetExplicitRequestReplyCorrelationHandle(context, this.correlationInitializers);
+                CorrelationHandle requestReplyCorrelationHandle =
+                    instance.GetExplicitRequestReplyCorrelationHandle(
+                        context,
+                        this.correlationInitializers
+                    );
                 if (requestReplyCorrelationHandle != null)
                 {
-                    if (!requestReplyCorrelationHandle.TryRegisterRequestContext(context, instance.RequestContext))
+                    if (
+                        !requestReplyCorrelationHandle.TryRegisterRequestContext(
+                            context,
+                            instance.RequestContext
+                        )
+                    )
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.TryRegisterRequestContextFailed));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(SR.TryRegisterRequestContextFailed)
+                        );
                     }
                 }
                 else // if that fails, use the ambient handle. We do not use the CorrelatesWith handle for RequestReply correlation
@@ -1578,10 +1932,20 @@ namespace System.ServiceModel.Activities
                     if (!this.IsOneWay)
                     {
                         // we have already validated this in SendMessageInstanceConstructor, just assert here
-                        Fx.Assert(instance.AmbientHandle != null, "For two way send we need to have either a RequestReply correlation handle or an ambient handle");
-                        if (!instance.AmbientHandle.TryRegisterRequestContext(context, instance.RequestContext))
+                        Fx.Assert(
+                            instance.AmbientHandle != null,
+                            "For two way send we need to have either a RequestReply correlation handle or an ambient handle"
+                        );
+                        if (
+                            !instance.AmbientHandle.TryRegisterRequestContext(
+                                context,
+                                instance.RequestContext
+                            )
+                        )
                         {
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.TryRegisterRequestContextFailed));
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(SR.TryRegisterRequestContextFailed)
+                            );
                         }
                     }
                 }
@@ -1602,19 +1966,17 @@ namespace System.ServiceModel.Activities
 
         class OpenChannelFactory : AsyncCodeActivity
         {
-            public OpenChannelFactory()
-            {
-            }
+            public OpenChannelFactory() { }
 
-            public InArgument<VolatileSendMessageInstance> Instance
-            {
-                get;
-                set;
-            }
+            public InArgument<VolatileSendMessageInstance> Instance { get; set; }
 
             protected override void CacheMetadata(CodeActivityMetadata metadata)
             {
-                RuntimeArgument instanceArgument = new RuntimeArgument("Instance", typeof(VolatileSendMessageInstance), ArgumentDirection.In);
+                RuntimeArgument instanceArgument = new RuntimeArgument(
+                    "Instance",
+                    typeof(VolatileSendMessageInstance),
+                    ArgumentDirection.In
+                );
                 if (this.Instance == null)
                 {
                     this.Instance = new InArgument<VolatileSendMessageInstance>();
@@ -1622,31 +1984,46 @@ namespace System.ServiceModel.Activities
                 metadata.Bind(this.Instance, instanceArgument);
 
                 metadata.SetArgumentsCollection(
-                    new Collection<RuntimeArgument>
-                {
-                    instanceArgument
-                });
+                    new Collection<RuntimeArgument> { instanceArgument }
+                );
             }
 
-            protected override IAsyncResult BeginExecute(AsyncCodeActivityContext context, AsyncCallback callback, object state)
+            protected override IAsyncResult BeginExecute(
+                AsyncCodeActivityContext context,
+                AsyncCallback callback,
+                object state
+            )
             {
                 VolatileSendMessageInstance volatileInstance = this.Instance.Get(context);
 
-                return new OpenChannelFactoryAsyncResult(volatileInstance.Instance, callback, state);
+                return new OpenChannelFactoryAsyncResult(
+                    volatileInstance.Instance,
+                    callback,
+                    state
+                );
             }
 
-            protected override void EndExecute(AsyncCodeActivityContext context, IAsyncResult result)
+            protected override void EndExecute(
+                AsyncCodeActivityContext context,
+                IAsyncResult result
+            )
             {
                 OpenChannelFactoryAsyncResult.End(result);
             }
 
             class OpenChannelFactoryAsyncResult : AsyncResult
             {
-                static AsyncCompletion channelFactoryOpenCompletion = new AsyncCompletion(ChannelFactoryOpenCompletion);
+                static AsyncCompletion channelFactoryOpenCompletion = new AsyncCompletion(
+                    ChannelFactoryOpenCompletion
+                );
 
                 SendMessageInstance instance;
 
-                public OpenChannelFactoryAsyncResult(SendMessageInstance instance, AsyncCallback callback, object state)
+                public OpenChannelFactoryAsyncResult(
+                    SendMessageInstance instance,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.instance = instance;
@@ -1654,7 +2031,10 @@ namespace System.ServiceModel.Activities
 
                     if (this.instance.FactoryReference.NeedsOpen)
                     {
-                        IAsyncResult result = this.instance.FactoryReference.BeginOpen(PrepareAsyncCompletion(channelFactoryOpenCompletion), this);
+                        IAsyncResult result = this.instance.FactoryReference.BeginOpen(
+                            PrepareAsyncCompletion(channelFactoryOpenCompletion),
+                            this
+                        );
                         if (result.CompletedSynchronously)
                         {
                             completeSelf = OnNewChannelFactoryOpened(result);
@@ -1678,7 +2058,8 @@ namespace System.ServiceModel.Activities
 
                 static bool ChannelFactoryOpenCompletion(IAsyncResult result)
                 {
-                    OpenChannelFactoryAsyncResult thisPtr = (OpenChannelFactoryAsyncResult)result.AsyncState;
+                    OpenChannelFactoryAsyncResult thisPtr = (OpenChannelFactoryAsyncResult)
+                        result.AsyncState;
                     return thisPtr.OnNewChannelFactoryOpened(result);
                 }
 
@@ -1690,31 +2071,24 @@ namespace System.ServiceModel.Activities
 
                     return true;
                 }
-
             }
         }
 
         class OpenChannelAndSendMessage : AsyncCodeActivity
         {
-            public OpenChannelAndSendMessage()
-            {
-            }
+            public OpenChannelAndSendMessage() { }
 
-            public InArgument<VolatileSendMessageInstance> Instance
-            {
-                get;
-                set;
-            }
+            public InArgument<VolatileSendMessageInstance> Instance { get; set; }
 
-            public InternalSendMessage InternalSendMessage
-            {
-                get;
-                set;
-            }
+            public InternalSendMessage InternalSendMessage { get; set; }
 
             protected override void CacheMetadata(CodeActivityMetadata metadata)
             {
-                RuntimeArgument instanceArgument = new RuntimeArgument("Instance", typeof(VolatileSendMessageInstance), ArgumentDirection.In);
+                RuntimeArgument instanceArgument = new RuntimeArgument(
+                    "Instance",
+                    typeof(VolatileSendMessageInstance),
+                    ArgumentDirection.In
+                );
                 if (this.Instance == null)
                 {
                     this.Instance = new InArgument<VolatileSendMessageInstance>();
@@ -1723,7 +2097,11 @@ namespace System.ServiceModel.Activities
                 metadata.AddArgument(instanceArgument);
             }
 
-            protected override IAsyncResult BeginExecute(AsyncCodeActivityContext context, AsyncCallback callback, object state)
+            protected override IAsyncResult BeginExecute(
+                AsyncCodeActivityContext context,
+                AsyncCallback callback,
+                object state
+            )
             {
                 VolatileSendMessageInstance volatileInstance = this.Instance.Get(context);
                 Transaction transaction = null;
@@ -1734,10 +2112,19 @@ namespace System.ServiceModel.Activities
                     transaction = handle.GetCurrentTransaction(context);
                 }
 
-                return new OpenChannelAndSendMessageAsyncResult(InternalSendMessage, volatileInstance.Instance, transaction, callback, state);
+                return new OpenChannelAndSendMessageAsyncResult(
+                    InternalSendMessage,
+                    volatileInstance.Instance,
+                    transaction,
+                    callback,
+                    state
+                );
             }
 
-            protected override void EndExecute(AsyncCodeActivityContext context, IAsyncResult result)
+            protected override void EndExecute(
+                AsyncCodeActivityContext context,
+                IAsyncResult result
+            )
             {
                 OpenChannelAndSendMessageAsyncResult.End(result);
             }
@@ -1745,8 +2132,12 @@ namespace System.ServiceModel.Activities
             class OpenChannelAndSendMessageAsyncResult : TransactedAsyncResult
             {
                 static AsyncCompletion onChannelOpened = new AsyncCompletion(OnChannelOpened);
-                static AsyncCompletion onChannelSendComplete = new AsyncCompletion(OnChannelSendComplete);
-                static AsyncCallback onChannelReceiveReplyCompleted = Fx.ThunkCallback(OnChannelReceiveReplyComplete);
+                static AsyncCompletion onChannelSendComplete = new AsyncCompletion(
+                    OnChannelSendComplete
+                );
+                static AsyncCallback onChannelReceiveReplyCompleted = Fx.ThunkCallback(
+                    OnChannelReceiveReplyComplete
+                );
 
                 SendMessageInstance instance;
                 InternalSendMessage internalSendMessage;
@@ -1758,27 +2149,37 @@ namespace System.ServiceModel.Activities
                 //that is created in this async result.
                 DependentTransaction dependentClone;
 
-                public OpenChannelAndSendMessageAsyncResult(InternalSendMessage internalSendMessage, SendMessageInstance instance, Transaction currentTransactionContext, AsyncCallback callback, object state)
+                public OpenChannelAndSendMessageAsyncResult(
+                    InternalSendMessage internalSendMessage,
+                    SendMessageInstance instance,
+                    Transaction currentTransactionContext,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.internalSendMessage = internalSendMessage;
                     this.instance = instance;
                     this.channel = this.instance.ClientSendChannel;
                     this.currentTransactionContext = currentTransactionContext;
-                    
+
                     bool completeSelf = false;
 
                     //channel is still in created state, we need to open it
                     if (this.channel.State == CommunicationState.Created)
                     {
                         // Disable ContextManager before channel is opened
-                        IContextManager contextManager = this.channel.GetProperty<IContextManager>();
+                        IContextManager contextManager =
+                            this.channel.GetProperty<IContextManager>();
                         if (contextManager != null)
                         {
                             contextManager.Enabled = false;
                         }
 
-                        IAsyncResult result = this.channel.BeginOpen(PrepareAsyncCompletion(onChannelOpened), this);
+                        IAsyncResult result = this.channel.BeginOpen(
+                            PrepareAsyncCompletion(onChannelOpened),
+                            this
+                        );
                         if (result.CompletedSynchronously)
                         {
                             completeSelf = OnChannelOpened(result);
@@ -1804,7 +2205,8 @@ namespace System.ServiceModel.Activities
 
                 static bool OnChannelOpened(IAsyncResult result)
                 {
-                    OpenChannelAndSendMessageAsyncResult thisPtr = (OpenChannelAndSendMessageAsyncResult)result.AsyncState;
+                    OpenChannelAndSendMessageAsyncResult thisPtr =
+                        (OpenChannelAndSendMessageAsyncResult)result.AsyncState;
                     thisPtr.channel.EndOpen(result);
                     return thisPtr.BeginSendMessage();
                 }
@@ -1833,21 +2235,37 @@ namespace System.ServiceModel.Activities
                                 //If there is a transaction that we could be flowing out then we create this blocking clone to sync with the commit processing.
                                 if (this.currentTransactionContext != null)
                                 {
-                                    this.dependentClone = this.currentTransactionContext.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
+                                    this.dependentClone =
+                                        this.currentTransactionContext.DependentClone(
+                                            DependentCloneOption.BlockCommitUntilComplete
+                                        );
                                 }
 
                                 this.instance.RequestContext.EnsureAsyncWaitHandle();
 
-                                result = ((IRequestChannel)this.channel).BeginRequest(this.instance.RequestOrReply, onChannelReceiveReplyCompleted, this);
+                                result = ((IRequestChannel)this.channel).BeginRequest(
+                                    this.instance.RequestOrReply,
+                                    onChannelReceiveReplyCompleted,
+                                    this
+                                );
                                 if (result.CompletedSynchronously)
                                 {
-                                    Message reply = ((IRequestChannel)this.channel).EndRequest(result);
-                                    this.instance.RequestContext.ReceiveReply(this.instance.OperationContext, reply);
+                                    Message reply = ((IRequestChannel)this.channel).EndRequest(
+                                        result
+                                    );
+                                    this.instance.RequestContext.ReceiveReply(
+                                        this.instance.OperationContext,
+                                        reply
+                                    );
                                 }
                             }
                             else
                             {
-                                result = ((IOutputChannel)this.channel).BeginSend(this.instance.RequestOrReply, PrepareAsyncCompletion(onChannelSendComplete), this);
+                                result = ((IOutputChannel)this.channel).BeginSend(
+                                    this.instance.RequestOrReply,
+                                    PrepareAsyncCompletion(onChannelSendComplete),
+                                    this
+                                );
                                 if (result.CompletedSynchronously)
                                 {
                                     ((IOutputChannel)this.channel).EndSend(result);
@@ -1901,7 +2319,8 @@ namespace System.ServiceModel.Activities
                         return;
                     }
 
-                    OpenChannelAndSendMessageAsyncResult thisPtr = (OpenChannelAndSendMessageAsyncResult)result.AsyncState;
+                    OpenChannelAndSendMessageAsyncResult thisPtr =
+                        (OpenChannelAndSendMessageAsyncResult)result.AsyncState;
 
                     OperationContext oldContext = OperationContext.Current;
 
@@ -1914,15 +2333,25 @@ namespace System.ServiceModel.Activities
 
                         thisPtr.TraceActivityData();
 
-                        System.Transactions.TransactionScope scope = TransactionHelper.CreateTransactionScope(thisPtr.currentTransactionContext);
+                        System.Transactions.TransactionScope scope =
+                            TransactionHelper.CreateTransactionScope(
+                                thisPtr.currentTransactionContext
+                            );
                         try
                         {
-                            Fx.Assert(thisPtr.channel is IRequestChannel, "Channel must be of IRequestChannel type!");
+                            Fx.Assert(
+                                thisPtr.channel is IRequestChannel,
+                                "Channel must be of IRequestChannel type!"
+                            );
 
                             reply = ((IRequestChannel)thisPtr.channel).EndRequest(result);
 
                             //
-                            thisPtr.instance.RequestContext.ReceiveAsyncReply(thisPtr.instance.OperationContext, reply, null);
+                            thisPtr.instance.RequestContext.ReceiveAsyncReply(
+                                thisPtr.instance.OperationContext,
+                                reply,
+                                null
+                            );
 
                             requestSucceeded = true;
                         }
@@ -1938,7 +2367,11 @@ namespace System.ServiceModel.Activities
                             throw;
                         }
 
-                        thisPtr.instance.RequestContext.ReceiveAsyncReply(thisPtr.instance.OperationContext, null, exception);
+                        thisPtr.instance.RequestContext.ReceiveAsyncReply(
+                            thisPtr.instance.OperationContext,
+                            null,
+                            exception
+                        );
                     }
                     finally
                     {
@@ -1967,7 +2400,8 @@ namespace System.ServiceModel.Activities
                         return true;
                     }
 
-                    OpenChannelAndSendMessageAsyncResult thisPtr = (OpenChannelAndSendMessageAsyncResult)result.AsyncState;
+                    OpenChannelAndSendMessageAsyncResult thisPtr =
+                        (OpenChannelAndSendMessageAsyncResult)result.AsyncState;
 
                     OperationContext oldContext = OperationContext.Current;
 
@@ -1977,10 +2411,16 @@ namespace System.ServiceModel.Activities
 
                         thisPtr.TraceActivityData();
 
-                        System.Transactions.TransactionScope scope = TransactionHelper.CreateTransactionScope(thisPtr.currentTransactionContext);
+                        System.Transactions.TransactionScope scope =
+                            TransactionHelper.CreateTransactionScope(
+                                thisPtr.currentTransactionContext
+                            );
                         try
                         {
-                            Fx.Assert(thisPtr.channel is IOutputChannel, "Channel must be of IOutputChannel type!");
+                            Fx.Assert(
+                                thisPtr.channel is IOutputChannel,
+                                "Channel must be of IOutputChannel type!"
+                            );
 
                             ((IOutputChannel)thisPtr.channel).EndSend(result);
                         }
@@ -2014,18 +2454,32 @@ namespace System.ServiceModel.Activities
                     {
                         if (TD.StopSignpostEventIsEnabled())
                         {
-                            TD.StopSignpostEvent(new DictionaryTraceRecord(new Dictionary<string, string>(3) {
-                                                    { MessagingActivityHelper.ActivityName, this.instance.Activity.DisplayName },
-                                                    { MessagingActivityHelper.ActivityType, MessagingActivityHelper.MessagingActivityTypeActivityExecution },
-                                                    { MessagingActivityHelper.ActivityInstanceId, this.instance.ActivityInstanceId }
-                                }));
+                            TD.StopSignpostEvent(
+                                new DictionaryTraceRecord(
+                                    new Dictionary<string, string>(3)
+                                    {
+                                        {
+                                            MessagingActivityHelper.ActivityName,
+                                            this.instance.Activity.DisplayName
+                                        },
+                                        {
+                                            MessagingActivityHelper.ActivityType,
+                                            MessagingActivityHelper.MessagingActivityTypeActivityExecution
+                                        },
+                                        {
+                                            MessagingActivityHelper.ActivityInstanceId,
+                                            this.instance.ActivityInstanceId
+                                        },
+                                    }
+                                )
+                            );
                         }
                         FxTrace.Trace.SetAndTraceTransfer(this.ambientActivityId, true);
                         this.ambientActivityId = Guid.Empty;
                     }
                     if (TD.WfMessageSentIsEnabled())
                     {
-                        // 
+                        //
                         EventTraceActivity eta = new EventTraceActivity();
                         if (this.instance.E2EActivityId != Guid.Empty)
                         {
@@ -2039,19 +2493,17 @@ namespace System.ServiceModel.Activities
 
         class WaitOnChannelCorrelation : AsyncCodeActivity
         {
-            public WaitOnChannelCorrelation()
-            {
-            }
+            public WaitOnChannelCorrelation() { }
 
-            public InArgument<VolatileSendMessageInstance> Instance
-            {
-                get;
-                set;
-            }
+            public InArgument<VolatileSendMessageInstance> Instance { get; set; }
 
             protected override void CacheMetadata(CodeActivityMetadata metadata)
             {
-                RuntimeArgument instanceArgument = new RuntimeArgument("Instance", typeof(VolatileSendMessageInstance), ArgumentDirection.In);
+                RuntimeArgument instanceArgument = new RuntimeArgument(
+                    "Instance",
+                    typeof(VolatileSendMessageInstance),
+                    ArgumentDirection.In
+                );
                 if (this.Instance == null)
                 {
                     this.Instance = new InArgument<VolatileSendMessageInstance>();
@@ -2059,22 +2511,34 @@ namespace System.ServiceModel.Activities
                 metadata.Bind(this.Instance, instanceArgument);
 
                 metadata.SetArgumentsCollection(
-                    new Collection<RuntimeArgument>
-                {
-                    instanceArgument
-                });
+                    new Collection<RuntimeArgument> { instanceArgument }
+                );
             }
 
-            protected override IAsyncResult BeginExecute(AsyncCodeActivityContext context, AsyncCallback callback, object state)
+            protected override IAsyncResult BeginExecute(
+                AsyncCodeActivityContext context,
+                AsyncCallback callback,
+                object state
+            )
             {
                 VolatileSendMessageInstance volatileInstance = this.Instance.Get(context);
 
-                Fx.Assert(volatileInstance.Instance != null, "This should not have gone through a persistence episode yet.");
+                Fx.Assert(
+                    volatileInstance.Instance != null,
+                    "This should not have gone through a persistence episode yet."
+                );
 
-                return new WaitOnChannelCorrelationAsyncResult(volatileInstance.Instance.CorrelationSynchronizer, callback, state);
+                return new WaitOnChannelCorrelationAsyncResult(
+                    volatileInstance.Instance.CorrelationSynchronizer,
+                    callback,
+                    state
+                );
             }
 
-            protected override void EndExecute(AsyncCodeActivityContext context, IAsyncResult result)
+            protected override void EndExecute(
+                AsyncCodeActivityContext context,
+                IAsyncResult result
+            )
             {
                 WaitOnChannelCorrelationAsyncResult.End(result);
             }
@@ -2083,7 +2547,11 @@ namespace System.ServiceModel.Activities
             {
                 CorrelationSynchronizer synchronizer;
 
-                public WaitOnChannelCorrelationAsyncResult(CorrelationSynchronizer synchronizer, AsyncCallback callback, object state)
+                public WaitOnChannelCorrelationAsyncResult(
+                    CorrelationSynchronizer synchronizer,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     this.synchronizer = synchronizer;
@@ -2094,7 +2562,11 @@ namespace System.ServiceModel.Activities
                     }
                     else
                     {
-                        if (synchronizer.SetWorkflowNotificationCallback(new Action(OnChannelCorrelationComplete)))
+                        if (
+                            synchronizer.SetWorkflowNotificationCallback(
+                                new Action(OnChannelCorrelationComplete)
+                            )
+                        )
                         {
                             // The bool flipped just before we set the action so
                             // we're actually complete.  The contract is that the
@@ -2116,7 +2588,7 @@ namespace System.ServiceModel.Activities
             }
         }
 
-       internal class CorrelationSynchronizer
+        internal class CorrelationSynchronizer
         {
             Action onRequestSetByChannel;
             Action<Message> onWorkflowCorrelationProcessingComplete;
@@ -2128,27 +2600,25 @@ namespace System.ServiceModel.Activities
                 this.thisLock = new object();
             }
 
-            public bool IsChannelWorkComplete
-            {
-                get;
-                private set;
-            }
+            public bool IsChannelWorkComplete { get; private set; }
 
-            public Message UpdatedMessage
-            {
-                get;
-                private set;
-            }
+            public Message UpdatedMessage { get; private set; }
 
-            public void NotifyRequestSetByChannel(Action<Message> onWorkflowCorrelationProcessingComplete)
+            public void NotifyRequestSetByChannel(
+                Action<Message> onWorkflowCorrelationProcessingComplete
+            )
             {
-                Fx.Assert(onWorkflowCorrelationProcessingComplete != null, "Must have a non-null callback.");
+                Fx.Assert(
+                    onWorkflowCorrelationProcessingComplete != null,
+                    "Must have a non-null callback."
+                );
                 Action toCall = null;
 
                 lock (this.thisLock)
                 {
                     this.IsChannelWorkComplete = true;
-                    this.onWorkflowCorrelationProcessingComplete = onWorkflowCorrelationProcessingComplete;
+                    this.onWorkflowCorrelationProcessingComplete =
+                        onWorkflowCorrelationProcessingComplete;
 
                     toCall = this.onRequestSetByChannel;
                 }
@@ -2166,7 +2636,10 @@ namespace System.ServiceModel.Activities
 
             public bool NotifyWorkflowCorrelationProcessingComplete()
             {
-                Fx.Assert(this.onWorkflowCorrelationProcessingComplete != null, "This must be set before this can be called.");
+                Fx.Assert(
+                    this.onWorkflowCorrelationProcessingComplete != null,
+                    "This must be set before this can be called."
+                );
 
                 bool result = false;
 
@@ -2180,7 +2653,10 @@ namespace System.ServiceModel.Activities
                     }
                     else
                     {
-                        Fx.Assert(this.completion == Completion.None, "We should be the first one to complete.");
+                        Fx.Assert(
+                            this.completion == Completion.None,
+                            "We should be the first one to complete."
+                        );
 
                         this.completion = Completion.CorrelationComplete;
                     }
@@ -2204,7 +2680,10 @@ namespace System.ServiceModel.Activities
                     }
                     else
                     {
-                        Fx.Assert(this.completion == Completion.None, "We should be the first one to complete.");
+                        Fx.Assert(
+                            this.completion == Completion.None,
+                            "We should be the first one to complete."
+                        );
 
                         this.completion = Completion.SendComplete;
                     }
@@ -2236,7 +2715,7 @@ namespace System.ServiceModel.Activities
             {
                 None,
                 SendComplete,
-                CorrelationComplete
+                CorrelationComplete,
             }
         }
 
@@ -2249,7 +2728,7 @@ namespace System.ServiceModel.Activities
             ChannelFactoryReference factoryReference;
             ObjectCacheItem<ChannelFactoryReference> cacheItem;
             ObjectCache<FactoryCacheKey, ChannelFactoryReference> factoryCache;
-            
+
             readonly InternalSendMessage parent;
             bool isUsingCacheFromExtension;
 
@@ -2261,17 +2740,26 @@ namespace System.ServiceModel.Activities
                 this.parent = parent;
 
                 // setup both our following state as well as any anonymous response information
-                CorrelationHandle correlatesWith = (parent.CorrelatesWith == null) ? null : parent.CorrelatesWith.Get(context);
+                CorrelationHandle correlatesWith =
+                    (parent.CorrelatesWith == null) ? null : parent.CorrelatesWith.Get(context);
                 if (correlatesWith != null && !correlatesWith.IsInitalized())
                 {
-                    // if send or sendReply has a correlatesWith, it should always be initialized with either content or with callbackcontext, context or 
+                    // if send or sendReply has a correlatesWith, it should always be initialized with either content or with callbackcontext, context or
                     // ResponseContext
-                    throw FxTrace.Exception.AsError(new ValidationException(SR.SendWithUninitializedCorrelatesWith(this.parent.OperationName ?? string.Empty)));
+                    throw FxTrace.Exception.AsError(
+                        new ValidationException(
+                            SR.SendWithUninitializedCorrelatesWith(
+                                this.parent.OperationName ?? string.Empty
+                            )
+                        )
+                    );
                 }
 
                 if (correlatesWith == null)
                 {
-                    this.AmbientHandle = context.Properties.Find(CorrelationHandle.StaticExecutionPropertyName) as CorrelationHandle;
+                    this.AmbientHandle =
+                        context.Properties.Find(CorrelationHandle.StaticExecutionPropertyName)
+                        as CorrelationHandle;
                     correlatesWith = this.AmbientHandle;
                 }
 
@@ -2282,26 +2770,41 @@ namespace System.ServiceModel.Activities
                     // we're a client-side request
 
                     // Validate correlation handle
-                    CorrelationHandle requestReplyCorrelationHandle = GetExplicitRequestReplyCorrelationHandle(context, parent.correlationInitializers);
+                    CorrelationHandle requestReplyCorrelationHandle =
+                        GetExplicitRequestReplyCorrelationHandle(
+                            context,
+                            parent.correlationInitializers
+                        );
                     if (parent.IsOneWay)
                     {
                         if (requestReplyCorrelationHandle != null)
                         {
                             // this is a one-way send , we should not have a RequestReply Correlation initializer
-                            throw FxTrace.Exception.AsError(new InvalidOperationException(SR.RequestReplyHandleShouldNotBePresentForOneWay));
-
+                            throw FxTrace.Exception.AsError(
+                                new InvalidOperationException(
+                                    SR.RequestReplyHandleShouldNotBePresentForOneWay
+                                )
+                            );
                         }
                     }
                     else // two-way send
                     {
                         if (requestReplyCorrelationHandle == null && this.AmbientHandle == null)
                         {
-                            this.AmbientHandle = context.Properties.Find(CorrelationHandle.StaticExecutionPropertyName) as CorrelationHandle;
+                            this.AmbientHandle =
+                                context.Properties.Find(
+                                    CorrelationHandle.StaticExecutionPropertyName
+                                ) as CorrelationHandle;
                             if (this.AmbientHandle == null)
                             {
                                 // we neither have a channelHandle nor an ambientHandle
-                                throw FxTrace.Exception.AsError(new InvalidOperationException(
-                                    SR.SendMessageNeedsToPairWithReceiveMessageForTwoWayContract(parent.OperationName ?? string.Empty)));
+                                throw FxTrace.Exception.AsError(
+                                    new InvalidOperationException(
+                                        SR.SendMessageNeedsToPairWithReceiveMessageForTwoWayContract(
+                                            parent.OperationName ?? string.Empty
+                                        )
+                                    )
+                                );
                             }
                         }
                     }
@@ -2310,8 +2813,12 @@ namespace System.ServiceModel.Activities
                     // This will be done when SendMessage/ReceiveMessage is completely removed from the code base
                     this.RequestContext = new CorrelationRequestContext();
 
-                    // callback correlationHandle is used for initalizing context based correlation 
-                    this.ContextBasedCorrelationHandle = CorrelationHandle.GetExplicitCallbackCorrelation(context, parent.correlationInitializers);
+                    // callback correlationHandle is used for initalizing context based correlation
+                    this.ContextBasedCorrelationHandle =
+                        CorrelationHandle.GetExplicitCallbackCorrelation(
+                            context,
+                            parent.correlationInitializers
+                        );
 
                     // by default we use the channel factory cache from the extension
                     isUsingCacheFromExtension = true;
@@ -2320,9 +2827,16 @@ namespace System.ServiceModel.Activities
                 {
                     // we are a server-side following send
                     CorrelationResponseContext responseContext;
-                    if (correlatesWith == null || !correlatesWith.TryAcquireResponseContext(context, out responseContext))
+                    if (
+                        correlatesWith == null
+                        || !correlatesWith.TryAcquireResponseContext(context, out responseContext)
+                    )
                     {
-                        throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CorrelatedContextRequiredForAnonymousSend));
+                        throw FxTrace.Exception.AsError(
+                            new InvalidOperationException(
+                                SR.CorrelatedContextRequiredForAnonymousSend
+                            )
+                        );
                     }
 
                     // Contract inference logic should validate that the Receive and Following send do not have conflicting data(e.g., OperationName)
@@ -2330,10 +2844,15 @@ namespace System.ServiceModel.Activities
                     this.ResponseContext = responseContext;
 
                     // in case of Context based correlation, we use context handle to initialize correlation
-                    this.ContextBasedCorrelationHandle = CorrelationHandle.GetExplicitContextCorrelation(context, parent.correlationInitializers);
+                    this.ContextBasedCorrelationHandle =
+                        CorrelationHandle.GetExplicitContextCorrelation(
+                            context,
+                            parent.correlationInitializers
+                        );
                 }
 
-                this.sendMessageCallbacks = MessagingActivityHelper.GetCallbacks<ISendMessageCallback>(context.Properties);
+                this.sendMessageCallbacks =
+                    MessagingActivityHelper.GetCallbacks<ISendMessageCallback>(context.Properties);
 
                 if (TraceUtility.MessageFlowTracing)
                 {
@@ -2343,146 +2862,65 @@ namespace System.ServiceModel.Activities
 
             public InternalSendMessage Activity
             {
-                get
-                {
-                    return this.parent;
-                }
+                get { return this.parent; }
             }
 
-            public CorrelationHandle CorrelatesWith
-            {
-                get;
-                private set;
-            }
+            public CorrelationHandle CorrelatesWith { get; private set; }
 
-            public CorrelationHandle AmbientHandle
-            {
-                get;
-                private set;
-            }
+            public CorrelationHandle AmbientHandle { get; private set; }
 
-            public CorrelationHandle ContextBasedCorrelationHandle
-            {
-                get;
-                private set;
-            }
+            public CorrelationHandle ContextBasedCorrelationHandle { get; private set; }
 
-            public EndpointAddress EndpointAddress
-            {
-                get;
-                set;
-            }
+            public EndpointAddress EndpointAddress { get; set; }
 
-            public IChannel ClientSendChannel
-            {
-                get;
-                private set;
-            }
+            public IChannel ClientSendChannel { get; private set; }
 
-            public CorrelationSynchronizer CorrelationSynchronizer
-            {
-                get;
-                set;
-            }
+            public CorrelationSynchronizer CorrelationSynchronizer { get; set; }
 
-            public Message RequestOrReply
-            {
-                get;
-                set;
-            }
+            public Message RequestOrReply { get; set; }
 
-            public OperationContext OperationContext
-            {
-                get;
-                set;
-            }
+            public OperationContext OperationContext { get; set; }
 
-            public CorrelationRequestContext RequestContext
-            {
-                get;
-                private set;
-            }
+            public CorrelationRequestContext RequestContext { get; private set; }
 
             // This is required for setting adding the ChannelFactory to the cache once it is opened
             public ObjectCache<FactoryCacheKey, ChannelFactoryReference> FactoryCache
             {
-                get
-                {
-                    return this.factoryCache;
-                }
+                get { return this.factoryCache; }
             }
 
             // This is required for setting adding the ChannelFactory to the cache once it is opened
-            public SendMessageChannelCache CacheExtension
-            {
-                get;
-                set;
-            }
+            public SendMessageChannelCache CacheExtension { get; set; }
 
             //This is required for returning it to the cache after use
             public ChannelFactoryReference FactoryReference
             {
-                get
-                {
-                    return this.factoryReference;
-                }
+                get { return this.factoryReference; }
             }
 
-            public CorrelationResponseContext ResponseContext
-            {
-                get;
-                private set;
-            }
+            public CorrelationResponseContext ResponseContext { get; private set; }
 
-            public CorrelationKeyCalculator CorrelationKeyCalculator
-            {
-                get;
-                private set;
-            }
+            public CorrelationKeyCalculator CorrelationKeyCalculator { get; private set; }
 
-            public CorrelationCallbackContext CorrelationCallbackContext
-            {
-                get;
-                set;
-            }
+            public CorrelationCallbackContext CorrelationCallbackContext { get; set; }
 
-            public CorrelationContext CorrelationContext
-            {
-                get;
-                set;
-            }
+            public CorrelationContext CorrelationContext { get; set; }
 
-            public Guid AmbientActivityId
-            {
-                get;
-                set;
-            }
+            public Guid AmbientActivityId { get; set; }
 
-            public ICollection<string> CorrelationSendNames
-            {
-                get;
-                private set;
-            }
+            public ICollection<string> CorrelationSendNames { get; private set; }
 
-            public Guid E2EActivityId
-            {
-                get;
-                set;
-            }
+            public Guid E2EActivityId { get; set; }
 
-            public string ActivityInstanceId
-            {
-                get;
-                private set;
-            }
+            public string ActivityInstanceId { get; private set; }
 
-            public bool IsCorrelationInitialized
-            {
-                get;
-                set;
-            }
+            public bool IsCorrelationInitialized { get; set; }
 
-            public void SetupFactoryReference(ObjectCacheItem<ChannelFactoryReference> cacheItem, ChannelFactoryReference newFactoryReference, ObjectCache<FactoryCacheKey, ChannelFactoryReference> factoryCache)
+            public void SetupFactoryReference(
+                ObjectCacheItem<ChannelFactoryReference> cacheItem,
+                ChannelFactoryReference newFactoryReference,
+                ObjectCache<FactoryCacheKey, ChannelFactoryReference> factoryCache
+            )
             {
                 this.factoryCache = factoryCache;
                 if (this.factoryCache == null)
@@ -2492,14 +2930,20 @@ namespace System.ServiceModel.Activities
                 if (cacheItem != null)
                 {
                     // we found the item in our cache
-                    Fx.Assert(newFactoryReference == null, "need one of cacheItem or newFactoryReference");
+                    Fx.Assert(
+                        newFactoryReference == null,
+                        "need one of cacheItem or newFactoryReference"
+                    );
                     Fx.Assert(cacheItem.Value != null, "should have valid value");
                     this.cacheItem = cacheItem;
                     this.factoryReference = cacheItem.Value;
                 }
                 else
                 {
-                    Fx.Assert(newFactoryReference != null, "need one of cacheItem or newFactoryReference");
+                    Fx.Assert(
+                        newFactoryReference != null,
+                        "need one of cacheItem or newFactoryReference"
+                    );
                     this.factoryReference = newFactoryReference;
                 }
             }
@@ -2510,11 +2954,18 @@ namespace System.ServiceModel.Activities
                 this.cacheItem = newCacheItem;
             }
 
-            public CorrelationHandle GetExplicitRequestReplyCorrelationHandle(NativeActivityContext context, Collection<CorrelationInitializer> additionalCorrelations)
+            public CorrelationHandle GetExplicitRequestReplyCorrelationHandle(
+                NativeActivityContext context,
+                Collection<CorrelationInitializer> additionalCorrelations
+            )
             {
                 if (this.explicitChannelCorrelationHandle == null)
                 {
-                    this.explicitChannelCorrelationHandle = CorrelationHandle.GetExplicitRequestReplyCorrelation(context, additionalCorrelations);
+                    this.explicitChannelCorrelationHandle =
+                        CorrelationHandle.GetExplicitRequestReplyCorrelation(
+                            context,
+                            additionalCorrelations
+                        );
                 }
                 return this.explicitChannelCorrelationHandle;
             }
@@ -2532,7 +2983,10 @@ namespace System.ServiceModel.Activities
                         {
                             this.RequestContext.CorrelationKeyCalculator = keyCalculator;
                             // for requests, determine if we should be using the correlation callback
-                            if (correlationBehavior.SendNames != null && correlationBehavior.SendNames.Count > 0)
+                            if (
+                                correlationBehavior.SendNames != null
+                                && correlationBehavior.SendNames.Count > 0
+                            )
                             {
                                 this.CorrelationSendNames = correlationBehavior.SendNames;
                             }
@@ -2554,8 +3008,14 @@ namespace System.ServiceModel.Activities
 
             public void PopulateClientChannel()
             {
-                Fx.Assert(this.ClientSendChannel == null && this.clientChannelPool == null, "should only be called once per instance");
-                this.ClientSendChannel = this.FactoryReference.TakeChannel(this.EndpointAddress, out this.clientChannelPool);
+                Fx.Assert(
+                    this.ClientSendChannel == null && this.clientChannelPool == null,
+                    "should only be called once per instance"
+                );
+                this.ClientSendChannel = this.FactoryReference.TakeChannel(
+                    this.EndpointAddress,
+                    out this.clientChannelPool
+                );
             }
 
             public void Dispose()
@@ -2563,7 +3023,10 @@ namespace System.ServiceModel.Activities
                 if (this.ClientSendChannel != null)
                 {
                     Fx.Assert(this.FactoryReference != null, "Must have a factory reference.");
-                    this.FactoryReference.ReturnChannel(this.ClientSendChannel, this.clientChannelPool);
+                    this.FactoryReference.ReturnChannel(
+                        this.ClientSendChannel,
+                        this.clientChannelPool
+                    );
                     this.ClientSendChannel = null;
                     this.clientChannelPool = null;
                 }
@@ -2575,7 +3038,10 @@ namespace System.ServiceModel.Activities
                     // if we are using the FactoryCache from the extension, store the last used cacheItem and extension
                     if (this.isUsingCacheFromExtension)
                     {
-                        this.parent.lastUsedFactoryCacheItem = new KeyValuePair<ObjectCacheItem<ChannelFactoryReference>, SendMessageChannelCache>(this.cacheItem, this.CacheExtension);
+                        this.parent.lastUsedFactoryCacheItem = new KeyValuePair<
+                            ObjectCacheItem<ChannelFactoryReference>,
+                            SendMessageChannelCache
+                        >(this.cacheItem, this.CacheExtension);
                     }
                     this.cacheItem = null;
                 }
@@ -2598,30 +3064,36 @@ namespace System.ServiceModel.Activities
 
         class MessageCorrelationCallbackMessageProperty : CorrelationCallbackMessageProperty
         {
-            public MessageCorrelationCallbackMessageProperty(ICollection<string> neededData, SendMessageInstance instance)
+            public MessageCorrelationCallbackMessageProperty(
+                ICollection<string> neededData,
+                SendMessageInstance instance
+            )
                 : base(neededData)
             {
                 this.Instance = instance;
             }
 
-            protected MessageCorrelationCallbackMessageProperty(MessageCorrelationCallbackMessageProperty callback)
+            protected MessageCorrelationCallbackMessageProperty(
+                MessageCorrelationCallbackMessageProperty callback
+            )
                 : base(callback)
             {
                 this.Instance = callback.Instance;
             }
 
-            public SendMessageInstance Instance
-            {
-                get;
-                private set;
-            }
+            public SendMessageInstance Instance { get; private set; }
 
             public override IMessageProperty CreateCopy()
             {
                 return new MessageCorrelationCallbackMessageProperty(this);
             }
 
-            protected override IAsyncResult OnBeginFinalizeCorrelation(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginFinalizeCorrelation(
+                Message message,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new FinalizeCorrelationAsyncResult(this, message, callback, state);
             }
@@ -2633,7 +3105,9 @@ namespace System.ServiceModel.Activities
 
             protected override Message OnFinalizeCorrelation(Message message, TimeSpan timeout)
             {
-                return OnEndFinalizeCorrelation(OnBeginFinalizeCorrelation(message, timeout, null, null));
+                return OnEndFinalizeCorrelation(
+                    OnBeginFinalizeCorrelation(message, timeout, null, null)
+                );
             }
 
             class FinalizeCorrelationAsyncResult : AsyncResult
@@ -2643,8 +3117,12 @@ namespace System.ServiceModel.Activities
 
                 object thisLock;
 
-                public FinalizeCorrelationAsyncResult(MessageCorrelationCallbackMessageProperty property, Message message,
-                    AsyncCallback callback, object state)
+                public FinalizeCorrelationAsyncResult(
+                    MessageCorrelationCallbackMessageProperty property,
+                    Message message,
+                    AsyncCallback callback,
+                    object state
+                )
                     : base(callback, state)
                 {
                     bool completeSelf = false;
@@ -2661,7 +3139,9 @@ namespace System.ServiceModel.Activities
 
                         property.Instance.RequestOrReply = message;
 
-                        property.Instance.CorrelationSynchronizer.NotifyRequestSetByChannel(new Action<Message>(OnWorkflowCorrelationProcessingComplete));
+                        property.Instance.CorrelationSynchronizer.NotifyRequestSetByChannel(
+                            new Action<Message>(OnWorkflowCorrelationProcessingComplete)
+                        );
 
                         // We have to do this dance with the lock because
                         // we aren't sure if we've been running sync or not.
@@ -2679,7 +3159,10 @@ namespace System.ServiceModel.Activities
                             }
                             else
                             {
-                                Fx.Assert(this.completion == Completion.None, "We must be not ready then.");
+                                Fx.Assert(
+                                    this.completion == Completion.None,
+                                    "We must be not ready then."
+                                );
 
                                 this.completion = Completion.ConstructorComplete;
                             }
@@ -2689,7 +3172,6 @@ namespace System.ServiceModel.Activities
                     {
                         Complete(true);
                     }
-
                 }
 
                 void OnWorkflowCorrelationProcessingComplete(Message updatedMessage)
@@ -2712,7 +3194,10 @@ namespace System.ServiceModel.Activities
                         }
                         else
                         {
-                            Fx.Assert(this.completion == Completion.None, "We must be not ready then.");
+                            Fx.Assert(
+                                this.completion == Completion.None,
+                                "We must be not ready then."
+                            );
 
                             this.completion = Completion.WorkflowCorrelationProcessingComplete;
                         }
@@ -2726,7 +3211,8 @@ namespace System.ServiceModel.Activities
 
                 public static Message End(IAsyncResult result)
                 {
-                    FinalizeCorrelationAsyncResult thisPtr = AsyncResult.End<FinalizeCorrelationAsyncResult>(result);
+                    FinalizeCorrelationAsyncResult thisPtr =
+                        AsyncResult.End<FinalizeCorrelationAsyncResult>(result);
                     return thisPtr.message;
                 }
 
@@ -2737,7 +3223,7 @@ namespace System.ServiceModel.Activities
                 {
                     None,
                     ConstructorComplete,
-                    WorkflowCorrelationProcessingComplete
+                    WorkflowCorrelationProcessingComplete,
                 }
             }
         }
@@ -2745,18 +3231,18 @@ namespace System.ServiceModel.Activities
         [DataContract]
         internal class VolatileSendMessageInstance
         {
-            public VolatileSendMessageInstance()
-            {
-            }
+            public VolatileSendMessageInstance() { }
 
-            // Note that we do not mark this DataMember since we don’t want it to be serialized
+            // Note that we do not mark this DataMember since we donï¿½t want it to be serialized
             public SendMessageInstance Instance { get; set; }
         }
 
         // Represents an item in our object cache. Stores a ChannelFactory and an associated pool of channels
         internal sealed class ChannelFactoryReference : IDisposable
         {
-            static AsyncCallback onDisposeCommunicationObject = Fx.ThunkCallback(new AsyncCallback(OnDisposeCommunicationObject));
+            static AsyncCallback onDisposeCommunicationObject = Fx.ThunkCallback(
+                new AsyncCallback(OnDisposeCommunicationObject)
+            );
             Action<Pool<IChannel>> disposeChannelPool;
             readonly FactoryCacheKey factoryKey;
             readonly ServiceEndpoint targetEndpoint;
@@ -2766,12 +3252,16 @@ namespace System.ServiceModel.Activities
             Func<Pool<IChannel>> createChannelCacheItem;
 
             // Aborting a channel that is in the middle of closing can cause an ObjectDisposedException in the Close.
-            // We need to prevent DisposeCommunicationObject(ChannelFactory) from racing with a call to 
+            // We need to prevent DisposeCommunicationObject(ChannelFactory) from racing with a call to
             // DisposeCommunicationObject()on an individual channel.
             // This lock will be used to synchronize calls into DisposeCommunicationObject method.
             object disposeLock = new object();
 
-            public ChannelFactoryReference(FactoryCacheKey factoryKey, ServiceEndpoint targetEndpoint, ChannelCacheSettings channelCacheSettings)
+            public ChannelFactoryReference(
+                FactoryCacheKey factoryKey,
+                ServiceEndpoint targetEndpoint,
+                ChannelCacheSettings channelCacheSettings
+            )
             {
                 Fx.Assert(channelCacheSettings != null, " channelCacheSettings should not be null");
                 Fx.Assert(factoryKey != null, " factoryKey should not be null");
@@ -2779,7 +3269,7 @@ namespace System.ServiceModel.Activities
 
                 this.factoryKey = factoryKey;
                 this.targetEndpoint = targetEndpoint;
-                                
+
                 if (factoryKey.IsOperationContractOneWay)
                 {
                     this.channelFactory = new ChannelFactory<IOutputChannel>(targetEndpoint);
@@ -2790,24 +3280,28 @@ namespace System.ServiceModel.Activities
                 }
 
                 this.channelFactory.UseActiveAutoClose = true;
-                this.channelFactory.Credentials.Windows.AllowedImpersonationLevel = factoryKey.TokenImpersonationLevel;
+                this.channelFactory.Credentials.Windows.AllowedImpersonationLevel =
+                    factoryKey.TokenImpersonationLevel;
 
                 ObjectCacheSettings channelSettings = new ObjectCacheSettings
                 {
                     CacheLimit = channelCacheSettings.MaxItemsInCache,
                     IdleTimeout = channelCacheSettings.IdleTimeout,
-                    LeaseTimeout = channelCacheSettings.LeaseTimeout
+                    LeaseTimeout = channelCacheSettings.LeaseTimeout,
                 };
 
                 this.disposeChannelPool = new Action<Pool<IChannel>>(this.DisposeChannelPool);
 
                 // our channel cache is keyed solely on endpoint since we don't allow the via to be dynamic
                 // for a ChannelFactoryReference
-                this.channelCache = new ObjectCache<EndpointAddress, Pool<IChannel>>(channelSettings)
+                this.channelCache = new ObjectCache<EndpointAddress, Pool<IChannel>>(
+                    channelSettings
+                )
                 {
-                    DisposeItemCallback = this.disposeChannelPool
+                    DisposeItemCallback = this.disposeChannelPool,
                 };
-                this.createChannelCacheItem = () => new Pool<IChannel>(channelCacheSettings.MaxItemsInCache);
+                this.createChannelCacheItem = () =>
+                    new Pool<IChannel>(channelCacheSettings.MaxItemsInCache);
             }
 
             public CorrelationQueryBehavior CorrelationQueryBehavior
@@ -2816,20 +3310,18 @@ namespace System.ServiceModel.Activities
                 {
                     if (this.correlationQueryBehavior == null)
                     {
-                        this.correlationQueryBehavior = this.targetEndpoint.Behaviors.Find<CorrelationQueryBehavior>();
+                        this.correlationQueryBehavior =
+                            this.targetEndpoint.Behaviors.Find<CorrelationQueryBehavior>();
                     }
 
                     return this.correlationQueryBehavior;
                 }
             }
-            
+
             // As a perf optimization, we provide this property to avoid async result/callback creations
             public bool NeedsOpen
             {
-                get
-                {
-                    return this.channelFactory.State == CommunicationState.Created;
-                }
+                get { return this.channelFactory.State == CommunicationState.Created; }
             }
 
             public IAsyncResult BeginOpen(AsyncCallback callback, object state)
@@ -2839,7 +3331,10 @@ namespace System.ServiceModel.Activities
             }
 
             // after open we should be added to a cache if one is provided
-            public ObjectCacheItem<ChannelFactoryReference> EndOpen(IAsyncResult result, ObjectCache<FactoryCacheKey, ChannelFactoryReference> factoryCache)
+            public ObjectCacheItem<ChannelFactoryReference> EndOpen(
+                IAsyncResult result,
+                ObjectCache<FactoryCacheKey, ChannelFactoryReference> factoryCache
+            )
             {
                 this.channelFactory.EndOpen(result);
 
@@ -2852,8 +3347,11 @@ namespace System.ServiceModel.Activities
                 return cacheItem;
             }
 
-            [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.DisposableFieldsShouldBeDisposed,
-                Justification = "disposable field is being disposed using DisposeCommunicationObject")]
+            [SuppressMessage(
+                FxCop.Category.Usage,
+                FxCop.Rule.DisposableFieldsShouldBeDisposed,
+                Justification = "disposable field is being disposed using DisposeCommunicationObject"
+            )]
             public void Dispose()
             {
                 lock (this.disposeLock)
@@ -2862,10 +3360,16 @@ namespace System.ServiceModel.Activities
                 }
             }
 
-            public IChannel TakeChannel(EndpointAddress endpointAddress, out ObjectCacheItem<Pool<IChannel>> channelPool)
+            public IChannel TakeChannel(
+                EndpointAddress endpointAddress,
+                out ObjectCacheItem<Pool<IChannel>> channelPool
+            )
             {
                 channelPool = this.channelCache.Take(endpointAddress, this.createChannelCacheItem);
-                Fx.Assert(channelPool != null, "Take with delegate should always return a valid Item");
+                Fx.Assert(
+                    channelPool != null,
+                    "Take with delegate should always return a valid Item"
+                );
 
                 IChannel result = null;
 
@@ -2876,7 +3380,16 @@ namespace System.ServiceModel.Activities
 
                 // make an effort to kill stale channels
                 ServiceChannel serviceChannel = result as ServiceChannel;
-                if (result != null && (result.State != CommunicationState.Opened || (serviceChannel != null && serviceChannel.Binder.Channel.State != CommunicationState.Opened)))
+                if (
+                    result != null
+                    && (
+                        result.State != CommunicationState.Opened
+                        || (
+                            serviceChannel != null
+                            && serviceChannel.Binder.Channel.State != CommunicationState.Opened
+                        )
+                    )
+                )
                 {
                     result.Abort();
                     result = null;
@@ -2887,18 +3400,25 @@ namespace System.ServiceModel.Activities
                     Uri via = null;
 
                     // service endpoint always sets the ListenUri, which will break default callback-context behavior
-                    if (this.targetEndpoint.Address != null && this.targetEndpoint.Address.Uri != this.targetEndpoint.ListenUri)
+                    if (
+                        this.targetEndpoint.Address != null
+                        && this.targetEndpoint.Address.Uri != this.targetEndpoint.ListenUri
+                    )
                     {
                         via = this.targetEndpoint.ListenUri;
                     }
 
                     if (this.factoryKey.IsOperationContractOneWay)
                     {
-                        result = ((ChannelFactory<IOutputChannel>)this.channelFactory).CreateChannel(endpointAddress, via);
+                        result = (
+                            (ChannelFactory<IOutputChannel>)this.channelFactory
+                        ).CreateChannel(endpointAddress, via);
                     }
                     else
                     {
-                        result = ((ChannelFactory<IRequestChannel>)this.channelFactory).CreateChannel(endpointAddress, via);
+                        result = (
+                            (ChannelFactory<IRequestChannel>)this.channelFactory
+                        ).CreateChannel(endpointAddress, via);
                     }
                 }
 
@@ -2927,8 +3447,10 @@ namespace System.ServiceModel.Activities
                 {
                     lock (this.disposeLock)
                     {
-                        if (this.channelFactory.State != CommunicationState.Closed &&
-                            this.channelFactory.State != CommunicationState.Closing)
+                        if (
+                            this.channelFactory.State != CommunicationState.Closed
+                            && this.channelFactory.State != CommunicationState.Closing
+                        )
                         {
                             // not caching the channel, so we need to close it
                             DisposeCommunicationObject(channel);
@@ -2950,8 +3472,10 @@ namespace System.ServiceModel.Activities
                 {
                     lock (this.disposeLock)
                     {
-                        if (this.channelFactory.State != CommunicationState.Closed &&
-                            this.channelFactory.State != CommunicationState.Closing)
+                        if (
+                            this.channelFactory.State != CommunicationState.Closed
+                            && this.channelFactory.State != CommunicationState.Closing
+                        )
                         {
                             DisposeCommunicationObject(channel);
                         }
@@ -2966,7 +3490,11 @@ namespace System.ServiceModel.Activities
                 {
                     if (communicationObject.State == CommunicationState.Opened)
                     {
-                        IAsyncResult result = communicationObject.BeginClose(ServiceDefaults.CloseTimeout, onDisposeCommunicationObject, communicationObject);
+                        IAsyncResult result = communicationObject.BeginClose(
+                            ServiceDefaults.CloseTimeout,
+                            onDisposeCommunicationObject,
+                            communicationObject
+                        );
                         if (result.CompletedSynchronously)
                         {
                             communicationObject.EndClose(result);
@@ -3033,15 +3561,20 @@ namespace System.ServiceModel.Activities
         {
             Endpoint endpoint;
             bool isOperationContractOneWay;
-            
+
             TokenImpersonationLevel tokenImpersonationLevel;
             ContractDescription contract;
             Collection<CorrelationQuery> correlationQueries;
             string endpointConfigurationName;
 
-            public FactoryCacheKey(Endpoint endpoint, string endpointConfigurationName, bool isOperationOneway,
-                TokenImpersonationLevel tokenImpersonationLevel, ContractDescription contractDescription,
-                ICollection<CorrelationQuery> correlationQueries)
+            public FactoryCacheKey(
+                Endpoint endpoint,
+                string endpointConfigurationName,
+                bool isOperationOneway,
+                TokenImpersonationLevel tokenImpersonationLevel,
+                ContractDescription contractDescription,
+                ICollection<CorrelationQuery> correlationQueries
+            )
             {
                 this.endpoint = endpoint;
                 this.endpointConfigurationName = endpointConfigurationName;
@@ -3061,18 +3594,12 @@ namespace System.ServiceModel.Activities
 
             public bool IsOperationContractOneWay
             {
-                get
-                {
-                    return this.isOperationContractOneWay;
-                }
+                get { return this.isOperationContractOneWay; }
             }
 
             public TokenImpersonationLevel TokenImpersonationLevel
             {
-                get
-                {
-                    return this.tokenImpersonationLevel;
-                }
+                get { return this.tokenImpersonationLevel; }
             }
 
             public bool Equals(FactoryCacheKey other)
@@ -3089,8 +3616,10 @@ namespace System.ServiceModel.Activities
                 }
 
                 // 1) Compare Endpoint/EndpointConfigurationName
-                if ((this.endpoint == null && other.endpoint != null) ||
-                    (other.endpoint == null && this.endpoint != null))
+                if (
+                    (this.endpoint == null && other.endpoint != null)
+                    || (other.endpoint == null && this.endpoint != null)
+                )
                 {
                     return false;
                 }
@@ -3126,22 +3655,32 @@ namespace System.ServiceModel.Activities
                 }
 
                 // (4) Verify if the ContractDescriptions are equivalent
-                if (!ContractDescriptionComparerHelper.IsContractDescriptionEquivalent(this.contract, other.contract))
+                if (
+                    !ContractDescriptionComparerHelper.IsContractDescriptionEquivalent(
+                        this.contract,
+                        other.contract
+                    )
+                )
                 {
                     return false;
                 }
 
                 // (5) Verify the correlationquery collection
                 //  For now, we verify each query by ref, so that loop scenarios would work
-                //  Can we do a value comparison here?  
-                if (!ContractDescriptionComparerHelper.EqualsUnordered(this.correlationQueries, other.correlationQueries))
+                //  Can we do a value comparison here?
+                if (
+                    !ContractDescriptionComparerHelper.EqualsUnordered(
+                        this.correlationQueries,
+                        other.correlationQueries
+                    )
+                )
                 {
                     return false;
                 }
-                
+
                 return true;
             }
-            
+
             public override int GetHashCode()
             {
                 int hashCode = 0;
@@ -3161,15 +3700,19 @@ namespace System.ServiceModel.Activities
                 return hashCode;
             }
         }
-        
+
         static class ContractDescriptionComparerHelper
         {
-            public static bool EqualsUnordered<T>(Collection<T> left, Collection<T> right) where T : class
+            public static bool EqualsUnordered<T>(Collection<T> left, Collection<T> right)
+                where T : class
             {
                 return EqualsUnordered(left, right, (t1, t2) => t1 == t2);
             }
 
-            public static bool IsContractDescriptionEquivalent(ContractDescription c1, ContractDescription c2)
+            public static bool IsContractDescriptionEquivalent(
+                ContractDescription c1,
+                ContractDescription c2
+            )
             {
                 if (c1 == c2)
                 {
@@ -3184,16 +3727,23 @@ namespace System.ServiceModel.Activities
                 }
 
                 //compare contractname
-                return (c1 != null &&
-                        c2 != null &&
-                        c1.Name == c2.Name &&
-                        c1.Namespace == c2.Namespace &&
-                        c1.ConfigurationName == c2.ConfigurationName &&
-                        c1.ProtectionLevel == c2.ProtectionLevel &&
-                        c1.SessionMode == c2.SessionMode &&
-                        c1.ContractType == c2.ContractType &&
-                        c1.Behaviors.Count == c2.Behaviors.Count && //we have no way to verify each one
-                        EqualsUnordered<OperationDescription>(c1.Operations, c2.Operations, (o1, o2) => IsOperationDescriptionEquivalent(o1, o2)));
+                return (
+                    c1 != null
+                    && c2 != null
+                    && c1.Name == c2.Name
+                    && c1.Namespace == c2.Namespace
+                    && c1.ConfigurationName == c2.ConfigurationName
+                    && c1.ProtectionLevel == c2.ProtectionLevel
+                    && c1.SessionMode == c2.SessionMode
+                    && c1.ContractType == c2.ContractType
+                    && c1.Behaviors.Count == c2.Behaviors.Count
+                    && //we have no way to verify each one
+                    EqualsUnordered<OperationDescription>(
+                        c1.Operations,
+                        c2.Operations,
+                        (o1, o2) => IsOperationDescriptionEquivalent(o1, o2)
+                    )
+                );
             }
 
             static bool EqualsOrdered<T>(IList<T> left, IList<T> right, Func<T, T, bool> equals)
@@ -3220,7 +3770,11 @@ namespace System.ServiceModel.Activities
                 return true;
             }
 
-            static bool EqualsUnordered<T>(Collection<T> left, Collection<T> right, Func<T, T, bool> equals)
+            static bool EqualsUnordered<T>(
+                Collection<T> left,
+                Collection<T> right,
+                Func<T, T, bool> equals
+            )
             {
                 if (left == null)
                 {
@@ -3232,23 +3786,33 @@ namespace System.ServiceModel.Activities
                 }
                 // This check ensures that the lists have the same contents, but does not verify that they have the same
                 // quantity of each item if they are duplicates.
-                return left.Count == right.Count &&
-                    left.All(leftItem => right.Any(rightItem => equals(leftItem, rightItem))) &&
-                    right.All(rightItem => left.Any(leftItem => equals(leftItem, rightItem)));
+                return left.Count == right.Count
+                    && left.All(leftItem => right.Any(rightItem => equals(leftItem, rightItem)))
+                    && right.All(rightItem => left.Any(leftItem => equals(leftItem, rightItem)));
             }
 
-            static bool IsOperationDescriptionEquivalent(OperationDescription o1, OperationDescription o2)
+            static bool IsOperationDescriptionEquivalent(
+                OperationDescription o1,
+                OperationDescription o2
+            )
             {
                 if (o1 == o2)
                 {
                     return true;
                 }
 
-                return (o1.Name == o2.Name &&
-                        o1.ProtectionLevel == o2.ProtectionLevel &&
-                        o1.IsOneWay == o2.IsOneWay &&
-                        IsTransactionBehaviorEquivalent(o1, o2) && //we are verifying only the TransactionFlowBehavior
-                        EqualsOrdered(o1.Messages, o2.Messages, (m1, m2) => IsMessageDescriptionEquivalent(m1, m2)));
+                return (
+                    o1.Name == o2.Name
+                    && o1.ProtectionLevel == o2.ProtectionLevel
+                    && o1.IsOneWay == o2.IsOneWay
+                    && IsTransactionBehaviorEquivalent(o1, o2)
+                    && //we are verifying only the TransactionFlowBehavior
+                    EqualsOrdered(
+                        o1.Messages,
+                        o2.Messages,
+                        (m1, m2) => IsMessageDescriptionEquivalent(m1, m2)
+                    )
+                );
             }
 
             static bool IsMessageDescriptionEquivalent(MessageDescription m1, MessageDescription m2)
@@ -3262,7 +3826,10 @@ namespace System.ServiceModel.Activities
                 return (m1.Action == m2.Action && m1.Direction == m2.Direction);
             }
 
-            static bool IsTransactionBehaviorEquivalent(OperationDescription o1, OperationDescription o2)
+            static bool IsTransactionBehaviorEquivalent(
+                OperationDescription o1,
+                OperationDescription o2
+            )
             {
                 if ((o1 == null || o2 == null) && o1 == o2)
                 {
@@ -3276,7 +3843,6 @@ namespace System.ServiceModel.Activities
                     if ((t1 == null && t2 != null) || (t2 == null && t1 != null))
                     {
                         return false;
-
                     }
                     //verify if both have the same value for TransactionFlowOption
                     if ((t1 != null) && (t1.Transactions != t2.Transactions))

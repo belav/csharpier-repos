@@ -11,7 +11,7 @@ namespace Roslyn.Utilities
     internal static class ConcurrentDictionaryExtensions
     {
         /// <summary>
-        /// NOTE!!! adding duplicates will result in exceptions. 
+        /// NOTE!!! adding duplicates will result in exceptions.
         /// Being concurrent only allows accessing the dictionary without taking locks.
         /// Duplicate keys are still not allowed in the hashtable.
         /// If unsure about adding unique items use APIs such as TryAdd, GetOrAdd, etc...
@@ -25,7 +25,12 @@ namespace Roslyn.Utilities
             }
         }
 
-        public static TValue GetOrAdd<TKey, TArg, TValue>(this ConcurrentDictionary<TKey, TValue> dictionary, TKey key, Func<TKey, TArg, TValue> valueFactory, TArg factoryArgument)
+        public static TValue GetOrAdd<TKey, TArg, TValue>(
+            this ConcurrentDictionary<TKey, TValue> dictionary,
+            TKey key,
+            Func<TKey, TArg, TValue> valueFactory,
+            TArg factoryArgument
+        )
             where TKey : notnull
         {
 #if NETCOREAPP
@@ -34,7 +39,11 @@ namespace Roslyn.Utilities
             if (dictionary.TryGetValue(key, out var value))
                 return value;
 
-            using var _ = PooledDelegates.GetPooledFunction(valueFactory, factoryArgument, out var boundFunction);
+            using var _ = PooledDelegates.GetPooledFunction(
+                valueFactory,
+                factoryArgument,
+                out var boundFunction
+            );
             return dictionary.GetOrAdd(key, boundFunction);
 #endif
         }
@@ -46,17 +55,30 @@ namespace Roslyn.Utilities
             TKey key,
             Func<TKey, TArg, TValue> addValueFactory,
             Func<TKey, TValue, TArg, TValue> updateValueFactory,
-            TArg factoryArgument)
+            TArg factoryArgument
+        )
             where TKey : notnull
         {
 #if NETCOREAPP
-            return dictionary.AddOrUpdate(key, addValueFactory, updateValueFactory, factoryArgument);
+            return dictionary.AddOrUpdate(
+                key,
+                addValueFactory,
+                updateValueFactory,
+                factoryArgument
+            );
 #else
-            using var _a = PooledDelegates.GetPooledFunction(addValueFactory, factoryArgument, out var pooledAddValueFactory);
-            using var _b = PooledDelegates.GetPooledFunction(updateValueFactory, factoryArgument, out var pooledUpdateValueFactory);
+            using var _a = PooledDelegates.GetPooledFunction(
+                addValueFactory,
+                factoryArgument,
+                out var pooledAddValueFactory
+            );
+            using var _b = PooledDelegates.GetPooledFunction(
+                updateValueFactory,
+                factoryArgument,
+                out var pooledUpdateValueFactory
+            );
             return dictionary.AddOrUpdate(key, pooledAddValueFactory, pooledUpdateValueFactory);
 #endif
         }
-
     }
 }

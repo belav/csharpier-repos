@@ -9,13 +9,16 @@ using System.Globalization;
 using System.Reflection;
 using System.Text;
 
-
 namespace System.Workflow.Activities.Rules
 {
     internal abstract class Symbol
     {
         internal abstract string Name { get; }
-        internal abstract CodeExpression ParseRootIdentifier(Parser parser, ParserContext parserContext, bool assignIsEquality);
+        internal abstract CodeExpression ParseRootIdentifier(
+            Parser parser,
+            ParserContext parserContext,
+            bool assignIsEquality
+        );
         internal abstract void RecordSymbol(ArrayList list);
     }
 
@@ -34,7 +37,11 @@ namespace System.Workflow.Activities.Rules
             get { return member.Name; }
         }
 
-        internal override CodeExpression ParseRootIdentifier(Parser parser, ParserContext parserContext, bool assignIsEquality)
+        internal override CodeExpression ParseRootIdentifier(
+            Parser parser,
+            ParserContext parserContext,
+            bool assignIsEquality
+        )
         {
             return parser.ParseUnadornedMemberIdentifier(parserContext, this, assignIsEquality);
         }
@@ -60,9 +67,7 @@ namespace System.Workflow.Activities.Rules
         }
 
         // For unnamed namespaces.  There is only one of these.
-        internal NamespaceSymbol()
-        {
-        }
+        internal NamespaceSymbol() { }
 
         internal override string Name
         {
@@ -137,7 +142,11 @@ namespace System.Workflow.Activities.Rules
             Stack<string> names = new Stack<string>();
 
             names.Push(Name);
-            for (NamespaceSymbol currentParent = Parent; currentParent != null; currentParent = currentParent.Parent)
+            for (
+                NamespaceSymbol currentParent = Parent;
+                currentParent != null;
+                currentParent = currentParent.Parent
+            )
                 names.Push(currentParent.Name);
 
             sb.Append(names.Pop());
@@ -150,7 +159,11 @@ namespace System.Workflow.Activities.Rules
             return sb.ToString();
         }
 
-        internal override CodeExpression ParseRootIdentifier(Parser parser, ParserContext parserContext, bool assignIsEquality)
+        internal override CodeExpression ParseRootIdentifier(
+            Parser parser,
+            ParserContext parserContext,
+            bool assignIsEquality
+        )
         {
             return parser.ParseRootNamespaceIdentifier(parserContext, this, assignIsEquality);
         }
@@ -221,7 +234,11 @@ namespace System.Workflow.Activities.Rules
             return typeSym.GenericArgCount != this.GenericArgCount;
         }
 
-        internal override CodeExpression ParseRootIdentifier(Parser parser, ParserContext parserContext, bool assignIsEquality)
+        internal override CodeExpression ParseRootIdentifier(
+            Parser parser,
+            ParserContext parserContext,
+            bool assignIsEquality
+        )
         {
             // The root name is a type (might be generic or not).
             return parser.ParseRootTypeIdentifier(parserContext, this, assignIsEquality);
@@ -299,9 +316,17 @@ namespace System.Workflow.Activities.Rules
             return new OverloadedTypeSymbol(name, newOverloads);
         }
 
-        internal override CodeExpression ParseRootIdentifier(Parser parser, ParserContext parserContext, bool assignIsEquality)
+        internal override CodeExpression ParseRootIdentifier(
+            Parser parser,
+            ParserContext parserContext,
+            bool assignIsEquality
+        )
         {
-            return parser.ParseRootOverloadedTypeIdentifier(parserContext, this.TypeSymbols, assignIsEquality);
+            return parser.ParseRootOverloadedTypeIdentifier(
+                parserContext,
+                this.TypeSymbols,
+                assignIsEquality
+            );
         }
 
         internal override void RecordSymbol(ArrayList list)

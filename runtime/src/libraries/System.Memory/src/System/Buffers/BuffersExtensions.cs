@@ -14,7 +14,8 @@ namespace System.Buffers
         /// Returns position of first occurrence of item in the <see cref="ReadOnlySequence{T}"/>
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static SequencePosition? PositionOf<T>(in this ReadOnlySequence<T> source, T value) where T : IEquatable<T>?
+        public static SequencePosition? PositionOf<T>(in this ReadOnlySequence<T> source, T value)
+            where T : IEquatable<T>?
         {
             if (source.IsSingleSegment)
             {
@@ -32,7 +33,11 @@ namespace System.Buffers
             }
         }
 
-        private static SequencePosition? PositionOfMultiSegment<T>(in ReadOnlySequence<T> source, T value) where T : IEquatable<T>?
+        private static SequencePosition? PositionOfMultiSegment<T>(
+            in ReadOnlySequence<T> source,
+            T value
+        )
+            where T : IEquatable<T>?
         {
             SequencePosition position = source.Start;
             SequencePosition result = position;
@@ -75,7 +80,10 @@ namespace System.Buffers
             }
         }
 
-        private static void CopyToMultiSegment<T>(in ReadOnlySequence<T> sequence, Span<T> destination)
+        private static void CopyToMultiSegment<T>(
+            in ReadOnlySequence<T> sequence,
+            Span<T> destination
+        )
         {
             if (sequence.Length > destination.Length)
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.destination);
@@ -129,7 +137,11 @@ namespace System.Buffers
             }
         }
 
-        private static void WriteMultiSegment<T>(IBufferWriter<T> writer, in ReadOnlySpan<T> source, Span<T> destination)
+        private static void WriteMultiSegment<T>(
+            IBufferWriter<T> writer,
+            in ReadOnlySpan<T> source,
+            Span<T> destination
+        )
         {
             ReadOnlySpan<T> input = source;
             while (true)

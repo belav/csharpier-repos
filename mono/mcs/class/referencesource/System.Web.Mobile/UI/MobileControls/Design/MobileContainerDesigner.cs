@@ -18,31 +18,32 @@ namespace System.Web.UI.Design.MobileControls
     using System.Web.UI.Design.MobileControls.Adapters;
     using System.Web.UI.MobileControls;
     using System.Web.UI.MobileControls.Adapters;
-
     using IHTMLElement = NativeMethods.IHTMLElement;
     using IHTMLElementCollection = NativeMethods.IHTMLElementCollection;
 
     /// <summary>
     ///    <para>Provides a base designer class for all mobile container controls.</para>
     /// </summary>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal abstract class MobileContainerDesigner : ControlDesigner, IMobileDesigner
     {
-        private MobileControl               _mobileControl;
-        private readonly Size               _defaultSize;
-        private bool                        _containmentStatusDirty = true;
-        private bool                        _hasAttributesCached = false;
-        private bool                        _shouldDirtyPage = false;
-        private ContainmentStatus           _containmentStatus = ContainmentStatus.Unknown;
-        private IDictionary                 _behaviorAttributes;
-        private String                      _currentErrorMessage = null;
-        private IWebFormsDocumentService    _iWebFormsDocumentService;
-        private IMobileWebFormServices      _iMobileWebFormServices;
-        private EventHandler                _loadComplete = null;
+        private MobileControl _mobileControl;
+        private readonly Size _defaultSize;
+        private bool _containmentStatusDirty = true;
+        private bool _hasAttributesCached = false;
+        private bool _shouldDirtyPage = false;
+        private ContainmentStatus _containmentStatus = ContainmentStatus.Unknown;
+        private IDictionary _behaviorAttributes;
+        private String _currentErrorMessage = null;
+        private IWebFormsDocumentService _iWebFormsDocumentService;
+        private IMobileWebFormServices _iMobileWebFormServices;
+        private EventHandler _loadComplete = null;
 
         // cached Behavior object
         private IHtmlControlDesignerBehavior _cachedBehavior = null;
@@ -72,8 +73,7 @@ namespace System.Web.UI.Design.MobileControls
                     return _containmentStatus;
                 }
 
-                _containmentStatus =
-                    DesignerAdapterUtil.GetContainmentStatus(_mobileControl);
+                _containmentStatus = DesignerAdapterUtil.GetContainmentStatus(_mobileControl);
 
                 _containmentStatusDirty = false;
                 return _containmentStatus;
@@ -84,9 +84,14 @@ namespace System.Web.UI.Design.MobileControls
         {
             get
             {
-                return typeof(HtmlControlDesigner).InvokeMember("DesignTimeElement", 
-                    BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.NonPublic, 
-                    null, this, null, CultureInfo.InvariantCulture);
+                return typeof(HtmlControlDesigner).InvokeMember(
+                    "DesignTimeElement",
+                    BindingFlags.Instance | BindingFlags.GetProperty | BindingFlags.NonPublic,
+                    null,
+                    this,
+                    null,
+                    CultureInfo.InvariantCulture
+                );
             }
         }
 
@@ -96,8 +101,9 @@ namespace System.Web.UI.Design.MobileControls
             {
                 if (_iMobileWebFormServices == null)
                 {
-                    _iMobileWebFormServices =
-                        (IMobileWebFormServices)GetService(typeof(IMobileWebFormServices));
+                    _iMobileWebFormServices = (IMobileWebFormServices)GetService(
+                        typeof(IMobileWebFormServices)
+                    );
                 }
 
                 return _iMobileWebFormServices;
@@ -110,8 +116,9 @@ namespace System.Web.UI.Design.MobileControls
             {
                 if (_iWebFormsDocumentService == null)
                 {
-                    _iWebFormsDocumentService =
-                        (IWebFormsDocumentService)GetService(typeof(IWebFormsDocumentService));
+                    _iWebFormsDocumentService = (IWebFormsDocumentService)GetService(
+                        typeof(IWebFormsDocumentService)
+                    );
 
                     Debug.Assert(_iWebFormsDocumentService != null);
                 }
@@ -125,10 +132,7 @@ namespace System.Web.UI.Design.MobileControls
         /// </summary>
         protected bool LoadComplete
         {
-            get
-            {
-                return !IWebFormsDocumentService.IsLoading;
-            }
+            get { return !IWebFormsDocumentService.IsLoading; }
         }
 
         /// <summary>
@@ -177,15 +181,13 @@ namespace System.Web.UI.Design.MobileControls
             }
             if (propName == null || propName.Equals("Font"))
             {
-                bool bold =
-                    (BooleanOption)Style[Style.BoldKey, true] == BooleanOption.True;
-                bool italic =
-                    (BooleanOption)Style[Style.ItalicKey, true] == BooleanOption.True;
-                FontSize  fontSize  = (FontSize) Style[Style.FontSizeKey , true];
-                String    fontName  = (String)   Style[Style.FontNameKey , true];
+                bool bold = (BooleanOption)Style[Style.BoldKey, true] == BooleanOption.True;
+                bool italic = (BooleanOption)Style[Style.ItalicKey, true] == BooleanOption.True;
+                FontSize fontSize = (FontSize)Style[Style.FontSizeKey, true];
+                String fontName = (String)Style[Style.FontNameKey, true];
 
-                SetBehaviorStyle("fontWeight", bold? "bold" : "normal");
-                SetBehaviorStyle("fontStyle", italic? "italic" : "normal");
+                SetBehaviorStyle("fontWeight", bold ? "bold" : "normal");
+                SetBehaviorStyle("fontStyle", italic ? "italic" : "normal");
 
                 if (fontSize == FontSize.Large)
                 {
@@ -207,8 +209,10 @@ namespace System.Web.UI.Design.MobileControls
                 Alignment alignment = (Alignment)Style[Style.AlignmentKey, true];
                 bool alignmentNotSet = alignment == Alignment.NotSet;
 
-                SetBehaviorStyle("textAlign",
-                    alignmentNotSet ? "" : Enum.Format(typeof(Alignment), alignment, "G"));
+                SetBehaviorStyle(
+                    "textAlign",
+                    alignmentNotSet ? "" : Enum.Format(typeof(Alignment), alignment, "G")
+                );
             }
         }
 
@@ -266,10 +270,12 @@ namespace System.Web.UI.Design.MobileControls
         /// <seealso cref='System.ComponentModel.Design.IDesigner'/>
         public override void Initialize(IComponent component)
         {
-            Debug.Assert(component is MobileControl,
-                         "MobileContainerDesigner.Initialize - Invalid Mobile Control");
+            Debug.Assert(
+                component is MobileControl,
+                "MobileContainerDesigner.Initialize - Invalid Mobile Control"
+            );
 
-            _mobileControl = (MobileControl) component;
+            _mobileControl = (MobileControl)component;
             base.Initialize(component);
 
             _loadComplete = new EventHandler(this.OnLoadComplete);
@@ -285,17 +291,16 @@ namespace System.Web.UI.Design.MobileControls
         private bool IsAppearanceAttribute(String propertyName)
         {
             return (
-                propertyName.Equals("Font") ||
-                propertyName.Equals("ForeColor") ||
-                propertyName.Equals("BackColor") ||
-                propertyName.Equals("Wrapping") ||
-                propertyName.Equals("Alignment") ||
-                propertyName.Equals("StyleReference"));
+                propertyName.Equals("Font")
+                || propertyName.Equals("ForeColor")
+                || propertyName.Equals("BackColor")
+                || propertyName.Equals("Wrapping")
+                || propertyName.Equals("Alignment")
+                || propertyName.Equals("StyleReference")
+            );
         }
 
-        internal virtual void OnBackgroundImageChange(String message, bool infoMode)
-        {
-        }
+        internal virtual void OnBackgroundImageChange(String message, bool infoMode) { }
 
         /// <summary>
         ///    <para>
@@ -349,8 +354,10 @@ namespace System.Web.UI.Design.MobileControls
             base.OnComponentChanged(sender, ce);
 
             MemberDescriptor member = ce.Member;
-            if (member != null &&
-                member.GetType().FullName.Equals(Constants.ReflectPropertyDescriptorTypeFullName))
+            if (
+                member != null
+                && member.GetType().FullName.Equals(Constants.ReflectPropertyDescriptorTypeFullName)
+            )
             {
                 PropertyDescriptor propDesc = (PropertyDescriptor)member;
                 String propName = propDesc.Name;
@@ -380,8 +387,8 @@ namespace System.Web.UI.Design.MobileControls
             ISite site = _mobileControl.Site;
             if (site != null)
             {
-                IComponentChangeService changeService =
-                    (IComponentChangeService)site.GetService(typeof(IComponentChangeService));
+                IComponentChangeService changeService = (IComponentChangeService)
+                    site.GetService(typeof(IComponentChangeService));
                 if (changeService != null)
                 {
                     try
@@ -464,9 +471,14 @@ namespace System.Web.UI.Design.MobileControls
         {
             base.PreFilterProperties(properties);
 
-            PropertyDescriptor property = (PropertyDescriptor) properties["Expressions"];
-            if (property != null) {
-                properties["Expressions"] = TypeDescriptor.CreateProperty(this.GetType(), property, BrowsableAttribute.No);
+            PropertyDescriptor property = (PropertyDescriptor)properties["Expressions"];
+            if (property != null)
+            {
+                properties["Expressions"] = TypeDescriptor.CreateProperty(
+                    this.GetType(),
+                    property,
+                    BrowsableAttribute.No
+                );
             }
         }
 
@@ -476,18 +488,21 @@ namespace System.Web.UI.Design.MobileControls
         /// </summary>
         private void PrefixDeviceSpecificTags()
         {
-            IHTMLElement htmlElement = (IHTMLElement) DesignTimeElementInternal;
-            Debug.Assert(htmlElement != null,
-                "Invalid HTML element in FormDesigner.OnBehaviorAttached");
+            IHTMLElement htmlElement = (IHTMLElement)DesignTimeElementInternal;
+            Debug.Assert(
+                htmlElement != null,
+                "Invalid HTML element in FormDesigner.OnBehaviorAttached"
+            );
 
-            IWebFormReferenceManager refMgr =
-                (IWebFormReferenceManager) GetService(typeof(IWebFormReferenceManager));
+            IWebFormReferenceManager refMgr = (IWebFormReferenceManager)GetService(
+                typeof(IWebFormReferenceManager)
+            );
             Debug.Assert(refMgr != null, "Did not get back IWebFormReferenceManager service.");
 
             String tagPrefix = refMgr.GetTagPrefix(typeof(DeviceSpecific));
             Debug.Assert(tagPrefix != null && tagPrefix.Length > 0, "TagPrefix is invalid");
 
-            IHTMLElementCollection allChildren = (IHTMLElementCollection) htmlElement.GetChildren();
+            IHTMLElementCollection allChildren = (IHTMLElementCollection)htmlElement.GetChildren();
             if (null != allChildren)
             {
                 bool substitutions = false;
@@ -495,14 +510,24 @@ namespace System.Web.UI.Design.MobileControls
                 String modifiedInnerHTML = String.Empty;
                 for (Int32 i = 0; i < allChildren.GetLength(); i++)
                 {
-                    IHTMLElement htmlChild = (IHTMLElement) allChildren.Item(i, 0);
+                    IHTMLElement htmlChild = (IHTMLElement)allChildren.Item(i, 0);
                     Debug.Assert(null != htmlChild, "htmlChild is null");
                     String childContent = htmlChild.GetOuterHTML();
                     String childUpperContent = childContent.ToUpper(CultureInfo.InvariantCulture);
-                    if (childContent.StartsWith("<", StringComparison.Ordinal) &&
-                        !(childContent.StartsWith("</", StringComparison.Ordinal) || (childContent.EndsWith("/>", StringComparison.Ordinal))))
+                    if (
+                        childContent.StartsWith("<", StringComparison.Ordinal)
+                        && !(
+                            childContent.StartsWith("</", StringComparison.Ordinal)
+                            || (childContent.EndsWith("/>", StringComparison.Ordinal))
+                        )
+                    )
                     {
-                        if (!childUpperContent.StartsWith("<" + tagPrefix.ToUpper(CultureInfo.InvariantCulture) + ":", StringComparison.Ordinal))
+                        if (
+                            !childUpperContent.StartsWith(
+                                "<" + tagPrefix.ToUpper(CultureInfo.InvariantCulture) + ":",
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             nestingLevel++;
                         }
@@ -511,22 +536,40 @@ namespace System.Web.UI.Design.MobileControls
                     {
                         nestingLevel--;
                     }
-                    if (1 == nestingLevel &&
-                        childUpperContent.StartsWith("<DEVICESPECIFIC", StringComparison.Ordinal) &&
-                        childUpperContent.EndsWith(">", StringComparison.Ordinal))
+                    if (
+                        1 == nestingLevel
+                        && childUpperContent.StartsWith("<DEVICESPECIFIC", StringComparison.Ordinal)
+                        && childUpperContent.EndsWith(">", StringComparison.Ordinal)
+                    )
                     {
                         Debug.Assert(substitutions == false, "substitutions is true");
-                        modifiedInnerHTML += "<" + tagPrefix + ":DeviceSpecific runat=\"server\">\r\n";
+                        modifiedInnerHTML +=
+                            "<" + tagPrefix + ":DeviceSpecific runat=\"server\">\r\n";
                         substitutions = true;
                     }
-                    else if (1 == nestingLevel &&
-                             childUpperContent.StartsWith("<DEVICESPECIFIC", StringComparison.Ordinal) &&
-                             childUpperContent.EndsWith("/>", StringComparison.Ordinal))
+                    else if (
+                        1 == nestingLevel
+                        && childUpperContent.StartsWith("<DEVICESPECIFIC", StringComparison.Ordinal)
+                        && childUpperContent.EndsWith("/>", StringComparison.Ordinal)
+                    )
                     {
-                        modifiedInnerHTML += "<" + tagPrefix + ":DeviceSpecific runat=\"server\"></" + tagPrefix + ":DeviceSpecific>\r\n";
+                        modifiedInnerHTML +=
+                            "<"
+                            + tagPrefix
+                            + ":DeviceSpecific runat=\"server\"></"
+                            + tagPrefix
+                            + ":DeviceSpecific>\r\n";
                         substitutions = true;
                     }
-                    else if (0 == nestingLevel && 0 == String.Compare(childUpperContent, "</DEVICESPECIFIC>", StringComparison.Ordinal))
+                    else if (
+                        0 == nestingLevel
+                        && 0
+                            == String.Compare(
+                                childUpperContent,
+                                "</DEVICESPECIFIC>",
+                                StringComparison.Ordinal
+                            )
+                    )
                     {
                         Debug.Assert(substitutions == true, "substitutions is false");
                         modifiedInnerHTML += "</" + tagPrefix + ":DeviceSpecific>\r\n";
@@ -569,7 +612,7 @@ namespace System.Web.UI.Design.MobileControls
         /// </param>
         protected void RemoveBehaviorStyle(String attribute)
         {
-            Debug.Assert (_behaviorAttributes != null);
+            Debug.Assert(_behaviorAttributes != null);
 
             if (Behavior != null)
             {
@@ -591,8 +634,8 @@ namespace System.Web.UI.Design.MobileControls
         /// </param>
         protected void SetBehaviorStyle(String attribute, Object obj)
         {
-            Debug.Assert (obj != null, "null object passed in!");
-            Debug.Assert (_behaviorAttributes != null);
+            Debug.Assert(obj != null, "null object passed in!");
+            Debug.Assert(_behaviorAttributes != null);
 
             // here we cache the value;
             // Note that the value is cached even if Behavior is not available,

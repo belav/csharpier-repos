@@ -19,7 +19,8 @@ public class StartupWithoutEndpointRouting
     {
         services.AddSingleton(new TestService { Message = "true" });
 
-        services.AddAuthentication()
+        services
+            .AddAuthentication()
             .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("Api", _ => { });
         services.AddTransient<IAuthorizationHandler, ManagerHandler>();
 
@@ -83,10 +84,14 @@ public class StartupWithoutEndpointRouting
             routes.MapRoute(
                 "areaRoute",
                 "{area:exists}/{controller}/{action}",
-                new { controller = "Home", action = "Index" });
+                new { controller = "Home", action = "Index" }
+            );
 
-            routes.MapRoute("ActionAsMethod", "{controller}/{action}",
-                defaults: new { controller = "Home", action = "Index" });
+            routes.MapRoute(
+                "ActionAsMethod",
+                "{controller}/{action}",
+                defaults: new { controller = "Home", action = "Index" }
+            );
 
             routes.MapRoute("PageRoute", "{controller}/{action}/{page}");
         });

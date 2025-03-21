@@ -10,18 +10,25 @@ namespace System.Web.Http.ValueProviders.Providers
 {
     public class QueryStringValueProviderFactoryTest
     {
-        private readonly QueryStringValueProviderFactory _factory = new QueryStringValueProviderFactory();
+        private readonly QueryStringValueProviderFactory _factory =
+            new QueryStringValueProviderFactory();
 
         [Fact]
         public void GetValueProvider_WhenActionContextParameterIsNull_Throws()
         {
-            Assert.ThrowsArgumentNull(() => _factory.GetValueProvider(actionContext: null), "actionContext");
+            Assert.ThrowsArgumentNull(
+                () => _factory.GetValueProvider(actionContext: null),
+                "actionContext"
+            );
         }
 
         [Fact]
         public void GetValueProvider_ReturnsQueryStringValueProviderInstaceWithInvariantCulture()
         {
-            var controllerContext = new HttpControllerContext() { Request = new HttpRequestMessage() };
+            var controllerContext = new HttpControllerContext()
+            {
+                Request = new HttpRequestMessage(),
+            };
             var context = new HttpActionContext() { ControllerContext = controllerContext };
 
             IValueProvider result = _factory.GetValueProvider(context);

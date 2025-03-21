@@ -22,7 +22,9 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <exception cref="InvalidOperationException">
         /// If <paramref name="reportDiagnostic"/> is not one of the expected values.
         /// </exception>
-        public static DiagnosticSeverity? ToDiagnosticSeverity(this ReportDiagnostic reportDiagnostic)
+        public static DiagnosticSeverity? ToDiagnosticSeverity(
+            this ReportDiagnostic reportDiagnostic
+        )
         {
             switch (reportDiagnostic)
             {
@@ -58,7 +60,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <para>-or-</para>
         /// <para>Otherwise, returns <paramref name="reportDiagnostic"/> if it has a non-default value.</para>
         /// </returns>
-        public static ReportDiagnostic WithDefaultSeverity(this ReportDiagnostic reportDiagnostic, DiagnosticSeverity defaultSeverity)
+        public static ReportDiagnostic WithDefaultSeverity(
+            this ReportDiagnostic reportDiagnostic,
+            DiagnosticSeverity defaultSeverity
+        )
         {
             if (reportDiagnostic != ReportDiagnostic.Default)
             {
@@ -77,11 +82,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 ReportDiagnostic.Info => EditorConfigSeverityStrings.Suggestion,
                 ReportDiagnostic.Warn => EditorConfigSeverityStrings.Warning,
                 ReportDiagnostic.Error => EditorConfigSeverityStrings.Error,
-                _ => throw ExceptionUtilities.UnexpectedValue(reportDiagnostic)
+                _ => throw ExceptionUtilities.UnexpectedValue(reportDiagnostic),
             };
         }
 
-        public static NotificationOption2 ToNotificationOption(this ReportDiagnostic reportDiagnostic, DiagnosticSeverity defaultSeverity)
+        public static NotificationOption2 ToNotificationOption(
+            this ReportDiagnostic reportDiagnostic,
+            DiagnosticSeverity defaultSeverity
+        )
         {
             var isNonDefault = reportDiagnostic != ReportDiagnostic.Default;
             var notificationOption = reportDiagnostic.WithDefaultSeverity(defaultSeverity) switch

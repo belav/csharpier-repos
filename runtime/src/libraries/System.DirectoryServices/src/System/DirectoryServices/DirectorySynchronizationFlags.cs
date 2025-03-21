@@ -10,6 +10,6 @@ namespace System.DirectoryServices
         ObjectSecurity = 0x1,
         ParentsFirst = 0x0800,
         PublicDataOnly = 0x2000,
-        IncrementalValues = 0x80000000
+        IncrementalValues = 0x80000000,
     }
 }

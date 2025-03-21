@@ -59,9 +59,20 @@ namespace System.Collections.Immutable
                 _stack = null;
                 if (!_root.IsEmpty)
                 {
-                    if (!SecureObjectPool<Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>, Enumerator>.TryTake(this, out _stack))
+                    if (
+                        !SecureObjectPool<
+                            Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>,
+                            Enumerator
+                        >.TryTake(this, out _stack)
+                    )
                     {
-                        _stack = SecureObjectPool<Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>, Enumerator>.PrepNew(this, new Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>(root.Height));
+                        _stack = SecureObjectPool<
+                            Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>,
+                            Enumerator
+                        >.PrepNew(
+                            this,
+                            new Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>(root.Height)
+                        );
                     }
 
                     this.PushLeft(_root);
@@ -106,10 +117,19 @@ namespace System.Collections.Immutable
             {
                 _root = null!;
                 _current = null;
-                if (_stack != null && _stack.TryUse(ref this, out Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>? stack))
+                if (
+                    _stack != null
+                    && _stack.TryUse(
+                        ref this,
+                        out Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>? stack
+                    )
+                )
                 {
                     stack.ClearFastWhenEmpty();
-                    SecureObjectPool<Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>, Enumerator>.TryAdd(this, _stack!);
+                    SecureObjectPool<
+                        Stack<RefAsValueType<SortedInt32KeyNode<TValue>>>,
+                        Enumerator
+                    >.TryAdd(this, _stack!);
                 }
 
                 _stack = null;

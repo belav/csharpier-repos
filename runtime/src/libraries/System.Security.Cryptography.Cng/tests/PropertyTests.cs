@@ -9,7 +9,10 @@ namespace System.Security.Cryptography.Cng.Tests
 {
     public static class PropertyTests
     {
-        [ConditionalTheory(typeof(PlatformSupport), nameof(PlatformSupport.PlatformCryptoProviderFunctionalP256))]
+        [ConditionalTheory(
+            typeof(PlatformSupport),
+            nameof(PlatformSupport.PlatformCryptoProviderFunctionalP256)
+        )]
         [InlineData("ECDH_P256")]
         [InlineData("ECDSA_P256")]
         [OuterLoop("Hardware backed key generation takes several seconds.")]
@@ -23,7 +26,10 @@ namespace System.Security.Cryptography.Cng.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformSupport), nameof(PlatformSupport.PlatformCryptoProviderFunctionalP384))]
+        [ConditionalTheory(
+            typeof(PlatformSupport),
+            nameof(PlatformSupport.PlatformCryptoProviderFunctionalP384)
+        )]
         [InlineData("ECDH_P384")]
         [InlineData("ECDSA_P384")]
         [OuterLoop("Hardware backed key generation takes several seconds.")]
@@ -37,17 +43,25 @@ namespace System.Security.Cryptography.Cng.Tests
             }
         }
 
-        [ConditionalTheory(typeof(PlatformSupport), nameof(PlatformSupport.PlatformCryptoProviderFunctionalRsa))]
+        [ConditionalTheory(
+            typeof(PlatformSupport),
+            nameof(PlatformSupport.PlatformCryptoProviderFunctionalRsa)
+        )]
         [InlineData(1024)]
         [InlineData(2048)]
         [OuterLoop("Hardware backed key generation takes several seconds.")]
         public static void CreatePersisted_PlatformRsaKeyHasKeySize(int keySize)
         {
-            CngProperty keyLengthProperty = new CngProperty("Length", BitConverter.GetBytes(keySize), CngPropertyOptions.None);
+            CngProperty keyLengthProperty = new CngProperty(
+                "Length",
+                BitConverter.GetBytes(keySize),
+                CngPropertyOptions.None
+            );
             CngPlatformProviderKey platformKey = new CngPlatformProviderKey(
                 CngAlgorithm.Rsa,
                 keySuffix: keySize.ToString(),
-                additionalParameters: keyLengthProperty);
+                additionalParameters: keyLengthProperty
+            );
 
             using (platformKey)
             {
@@ -58,19 +72,35 @@ namespace System.Security.Cryptography.Cng.Tests
         [Fact]
         public static void GetProperty_NoSuchProperty()
         {
-            using (CngKey key = CngKey.Import(TestData.Key_ECDiffieHellmanP256, CngKeyBlobFormat.GenericPublicBlob))
+            using (
+                CngKey key = CngKey.Import(
+                    TestData.Key_ECDiffieHellmanP256,
+                    CngKeyBlobFormat.GenericPublicBlob
+                )
+            )
             {
-                Assert.ThrowsAny<CryptographicException>(() => key.GetProperty("DOES NOT EXIST", CngPropertyOptions.CustomProperty));
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    key.GetProperty("DOES NOT EXIST", CngPropertyOptions.CustomProperty)
+                );
             }
         }
 
         [Fact]
         public static void SetPropertyZeroLengthCornerCase()
         {
-            using (CngKey key = CngKey.Import(TestData.Key_ECDiffieHellmanP256, CngKeyBlobFormat.GenericPublicBlob))
+            using (
+                CngKey key = CngKey.Import(
+                    TestData.Key_ECDiffieHellmanP256,
+                    CngKeyBlobFormat.GenericPublicBlob
+                )
+            )
             {
                 const string propertyName = "CustomZeroLengthProperty";
-                CngProperty p = new CngProperty(propertyName, new byte[0], CngPropertyOptions.CustomProperty);
+                CngProperty p = new CngProperty(
+                    propertyName,
+                    new byte[0],
+                    CngPropertyOptions.CustomProperty
+                );
                 key.SetProperty(p);
 
                 CngProperty p2 = key.GetProperty(propertyName, CngPropertyOptions.CustomProperty);
@@ -85,10 +115,19 @@ namespace System.Security.Cryptography.Cng.Tests
         [Fact]
         public static void SetPropertyNullCornerCase()
         {
-            using (CngKey key = CngKey.Import(TestData.Key_ECDiffieHellmanP256, CngKeyBlobFormat.GenericPublicBlob))
+            using (
+                CngKey key = CngKey.Import(
+                    TestData.Key_ECDiffieHellmanP256,
+                    CngKeyBlobFormat.GenericPublicBlob
+                )
+            )
             {
                 const string propertyName = "CustomNullProperty";
-                CngProperty p = new CngProperty(propertyName, null, CngPropertyOptions.CustomProperty);
+                CngProperty p = new CngProperty(
+                    propertyName,
+                    null,
+                    CngPropertyOptions.CustomProperty
+                );
                 Assert.ThrowsAny<CryptographicException>(() => key.SetProperty(p));
             }
         }
@@ -96,7 +135,12 @@ namespace System.Security.Cryptography.Cng.Tests
         [Fact]
         public static void HasProperty()
         {
-            using (CngKey key = CngKey.Import(TestData.Key_ECDiffieHellmanP256, CngKeyBlobFormat.GenericPublicBlob))
+            using (
+                CngKey key = CngKey.Import(
+                    TestData.Key_ECDiffieHellmanP256,
+                    CngKeyBlobFormat.GenericPublicBlob
+                )
+            )
             {
                 const string propertyName = "CustomProperty";
                 bool hasProperty;
@@ -104,7 +148,9 @@ namespace System.Security.Cryptography.Cng.Tests
                 hasProperty = key.HasProperty(propertyName, CngPropertyOptions.CustomProperty);
                 Assert.False(hasProperty);
 
-                key.SetProperty(new CngProperty(propertyName, new byte[0], CngPropertyOptions.CustomProperty));
+                key.SetProperty(
+                    new CngProperty(propertyName, new byte[0], CngPropertyOptions.CustomProperty)
+                );
                 hasProperty = key.HasProperty(propertyName, CngPropertyOptions.CustomProperty);
                 Assert.True(hasProperty);
             }
@@ -113,17 +159,30 @@ namespace System.Security.Cryptography.Cng.Tests
         [Fact]
         public static void GetAndSetProperties()
         {
-            using (CngKey key = CngKey.Import(TestData.Key_ECDiffieHellmanP256, CngKeyBlobFormat.GenericPublicBlob))
+            using (
+                CngKey key = CngKey.Import(
+                    TestData.Key_ECDiffieHellmanP256,
+                    CngKeyBlobFormat.GenericPublicBlob
+                )
+            )
             {
                 string propertyName = "Are you there";
                 bool hasProperty = key.HasProperty(propertyName, CngPropertyOptions.CustomProperty);
                 Assert.False(hasProperty);
 
                 byte[] propertyValue = { 1, 2, 3 };
-                CngProperty property = new CngProperty(propertyName, propertyValue, CngPropertyOptions.CustomProperty);
+                CngProperty property = new CngProperty(
+                    propertyName,
+                    propertyValue,
+                    CngPropertyOptions.CustomProperty
+                );
                 key.SetProperty(property);
 
-                byte[] actualValue = key.GetProperty(propertyName, CngPropertyOptions.CustomProperty).GetValue();
+                byte[] actualValue = key.GetProperty(
+                        propertyName,
+                        CngPropertyOptions.CustomProperty
+                    )
+                    .GetValue();
                 Assert.Equal<byte>(propertyValue, actualValue);
             }
         }
@@ -131,7 +190,12 @@ namespace System.Security.Cryptography.Cng.Tests
         [Fact]
         public static void OverwriteProperties()
         {
-            using (CngKey key = CngKey.Import(TestData.Key_ECDiffieHellmanP256, CngKeyBlobFormat.GenericPublicBlob))
+            using (
+                CngKey key = CngKey.Import(
+                    TestData.Key_ECDiffieHellmanP256,
+                    CngKeyBlobFormat.GenericPublicBlob
+                )
+            )
             {
                 string propertyName = "Are you there";
                 bool hasProperty = key.HasProperty(propertyName, CngPropertyOptions.CustomProperty);
@@ -139,15 +203,26 @@ namespace System.Security.Cryptography.Cng.Tests
 
                 // Set it once.
                 byte[] propertyValue = { 1, 2, 3 };
-                CngProperty property = new CngProperty(propertyName, propertyValue, CngPropertyOptions.CustomProperty);
+                CngProperty property = new CngProperty(
+                    propertyName,
+                    propertyValue,
+                    CngPropertyOptions.CustomProperty
+                );
                 key.SetProperty(property);
 
                 // Set it again.
                 propertyValue = new byte[] { 5, 6, 7 };
-                property = new CngProperty(propertyName, propertyValue, CngPropertyOptions.CustomProperty);
+                property = new CngProperty(
+                    propertyName,
+                    propertyValue,
+                    CngPropertyOptions.CustomProperty
+                );
                 key.SetProperty(property);
 
-                CngProperty retrievedProperty = key.GetProperty(propertyName, CngPropertyOptions.CustomProperty);
+                CngProperty retrievedProperty = key.GetProperty(
+                    propertyName,
+                    CngPropertyOptions.CustomProperty
+                );
                 Assert.Equal(propertyName, retrievedProperty.Name);
                 Assert.Equal<byte>(propertyValue, retrievedProperty.GetValue());
                 Assert.Equal(CngPropertyOptions.CustomProperty, retrievedProperty.Options);
@@ -157,7 +232,11 @@ namespace System.Security.Cryptography.Cng.Tests
         [Fact]
         public static void NullValueRoundtrip()
         {
-            CngProperty property = new CngProperty("banana", null, CngPropertyOptions.CustomProperty);
+            CngProperty property = new CngProperty(
+                "banana",
+                null,
+                CngPropertyOptions.CustomProperty
+            );
             Assert.Null(property.GetValue());
         }
     }

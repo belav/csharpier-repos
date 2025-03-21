@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// An <see cref="ContentHttpResult"/> that when executed
 /// will produce a response with content.
 /// </summary>
-public sealed partial class ContentHttpResult : IResult, IStatusCodeHttpResult, IContentTypeHttpResult
+public sealed partial class ContentHttpResult
+    : IResult,
+        IStatusCodeHttpResult,
+        IContentTypeHttpResult
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ContentHttpResult"/> class with the values.
@@ -18,9 +21,7 @@ public sealed partial class ContentHttpResult : IResult, IStatusCodeHttpResult, 
     /// <param name="content">The value to format in the entity body.</param>
     /// <param name="contentType">The Content-Type header for the response</param>
     internal ContentHttpResult(string? content, string? contentType)
-        : this(content, contentType, statusCode: null)
-    {
-    }
+        : this(content, contentType, statusCode: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="ContentHttpResult"/> class with the values
@@ -73,6 +74,7 @@ public sealed partial class ContentHttpResult : IResult, IStatusCodeHttpResult, 
             httpContext,
             logger,
             ResponseContent,
-            ContentType);
+            ContentType
+        );
     }
 }

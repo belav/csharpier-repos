@@ -11,7 +11,8 @@ public static class OpenIdConnectDefaults
     /// <summary>
     /// Constant used to identify state in openIdConnect protocol message.
     /// </summary>
-    public static readonly string AuthenticationPropertiesKey = "OpenIdConnect.AuthenticationProperties";
+    public static readonly string AuthenticationPropertiesKey =
+        "OpenIdConnect.AuthenticationProperties";
 
     /// <summary>
     /// The default value used for OpenIdConnectOptions.AuthenticationScheme.
@@ -31,7 +32,8 @@ public static class OpenIdConnectDefaults
     /// <summary>
     /// The property for the RedirectUri that was used when asking for a 'authorizationCode'.
     /// </summary>
-    public static readonly string RedirectUriForCodePropertiesKey = "OpenIdConnect.Code.RedirectUri";
+    public static readonly string RedirectUriForCodePropertiesKey =
+        "OpenIdConnect.Code.RedirectUri";
 
     /// <summary>
     /// Constant used to identify userstate inside AuthenticationProperties that have been serialized in the 'state' parameter.

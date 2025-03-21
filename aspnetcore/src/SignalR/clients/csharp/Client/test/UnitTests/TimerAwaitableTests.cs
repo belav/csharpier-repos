@@ -50,9 +50,7 @@ public class ObjectWithTimerAwaitable
     {
         using (_timer)
         {
-            while (await _timer)
-            {
-            }
+            while (await _timer) { }
         }
     }
 

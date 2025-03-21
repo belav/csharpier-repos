@@ -12,10 +12,10 @@
 using System.IO;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
+using System.Net.Test.Common;
 using System.Threading;
 using System.Threading.Tasks;
 using Systen.Net.Mail.Tests;
-using System.Net.Test.Common;
 using Xunit;
 
 namespace System.Net.Mail.Tests
@@ -29,18 +29,12 @@ namespace System.Net.Mail.Tests
 
         private SmtpClient Smtp
         {
-            get
-            {
-                return _smtp ??= new SmtpClient();
-            }
+            get { return _smtp ??= new SmtpClient(); }
         }
 
         private string TempFolder
         {
-            get
-            {
-                return TestDirectory;
-            }
+            get { return TestDirectory; }
         }
 
         protected override void Dispose(bool disposing)
@@ -200,14 +194,18 @@ namespace System.Net.Mail.Tests
         [Fact]
         public void Send_Network_Host_Null()
         {
-            Assert.Throws<InvalidOperationException>(() => Smtp.Send("mono@novell.com", "everyone@novell.com", "introduction", "hello"));
+            Assert.Throws<InvalidOperationException>(() =>
+                Smtp.Send("mono@novell.com", "everyone@novell.com", "introduction", "hello")
+            );
         }
 
         [Fact]
         public void Send_Network_Host_Whitespace()
         {
             Smtp.Host = " \r\n ";
-            Assert.Throws<InvalidOperationException>(() => Smtp.Send("mono@novell.com", "everyone@novell.com", "introduction", "hello"));
+            Assert.Throws<InvalidOperationException>(() =>
+                Smtp.Send("mono@novell.com", "everyone@novell.com", "introduction", "hello")
+            );
         }
 
         [Fact]
@@ -253,7 +251,9 @@ namespace System.Net.Mail.Tests
         {
             Smtp.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
             Smtp.PickupDirectoryLocation = location;
-            Assert.Throws<SmtpException>(() => Smtp.Send("mono@novell.com", "everyone@novell.com", "introduction", "hello"));
+            Assert.Throws<SmtpException>(() =>
+                Smtp.Send("mono@novell.com", "everyone@novell.com", "introduction", "hello")
+            );
         }
 
         [Theory]
@@ -279,7 +279,9 @@ namespace System.Net.Mail.Tests
         {
             using (var smtp = new SmtpClient(Guid.NewGuid().ToString("N")))
             {
-                Assert.Throws<SmtpException>(() => smtp.Send("anyone@anyone.com", "anyone@anyone.com", "subject", "body"));
+                Assert.Throws<SmtpException>(() =>
+                    smtp.Send("anyone@anyone.com", "anyone@anyone.com", "subject", "body")
+                );
             }
         }
 
@@ -288,7 +290,9 @@ namespace System.Net.Mail.Tests
         {
             using (var smtp = new SmtpClient(Guid.NewGuid().ToString("N")))
             {
-                await Assert.ThrowsAsync<SmtpException>(() => smtp.SendMailAsync("anyone@anyone.com", "anyone@anyone.com", "subject", "body"));
+                await Assert.ThrowsAsync<SmtpException>(() =>
+                    smtp.SendMailAsync("anyone@anyone.com", "anyone@anyone.com", "subject", "body")
+                );
             }
         }
 
@@ -298,7 +302,12 @@ namespace System.Net.Mail.Tests
             using var server = new LoopbackSmtpServer();
             using SmtpClient client = server.CreateClient();
             client.Credentials = new NetworkCredential("foo", "bar");
-            MailMessage msg = new MailMessage("foo@example.com", "bar@example.com", "hello", "howdydoo");
+            MailMessage msg = new MailMessage(
+                "foo@example.com",
+                "bar@example.com",
+                "hello",
+                "howdydoo"
+            );
 
             client.Send(msg);
 
@@ -313,20 +322,37 @@ namespace System.Net.Mail.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.OSX, "on OSX, not all synchronous operations (e.g. connect) can be aborted by closing the socket.")]
+        [SkipOnPlatform(
+            TestPlatforms.OSX,
+            "on OSX, not all synchronous operations (e.g. connect) can be aborted by closing the socket."
+        )]
         public void TestZeroTimeout()
         {
             var testTask = Task.Run(() =>
             {
-                using (Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+                using (
+                    Socket serverSocket = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    )
+                )
                 {
                     serverSocket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                     serverSocket.Listen(1);
 
-                    SmtpClient smtpClient = new SmtpClient("localhost", (serverSocket.LocalEndPoint as IPEndPoint).Port);
+                    SmtpClient smtpClient = new SmtpClient(
+                        "localhost",
+                        (serverSocket.LocalEndPoint as IPEndPoint).Port
+                    );
                     smtpClient.Timeout = 0;
 
-                    MailMessage msg = new MailMessage("foo@example.com", "bar@example.com", "hello", "test");
+                    MailMessage msg = new MailMessage(
+                        "foo@example.com",
+                        "bar@example.com",
+                        "hello",
+                        "test"
+                    );
                     Assert.Throws<SmtpException>(() => smtpClient.Send(msg));
                 }
             });
@@ -341,7 +367,10 @@ namespace System.Net.Mail.Tests
         [InlineData("howdydoo")]
         [InlineData("")]
         [InlineData(null)]
-        [SkipOnCoreClr("System.Net.Tests are flaky and/or long running: https://github.com/dotnet/runtime/issues/131", ~RuntimeConfiguration.Release)]
+        [SkipOnCoreClr(
+            "System.Net.Tests are flaky and/or long running: https://github.com/dotnet/runtime/issues/131",
+            ~RuntimeConfiguration.Release
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/131", TestRuntimes.Mono)] // System.Net.Tests are flaky and/or long running
         public async Task TestMailDeliveryAsync(string body)
         {
@@ -360,13 +389,21 @@ namespace System.Net.Mail.Tests
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // NTLM support required, see https://github.com/dotnet/runtime/issues/25827
-        [SkipOnCoreClr("System.Net.Tests are flaky and/or long running: https://github.com/dotnet/runtime/issues/131", ~RuntimeConfiguration.Release)]
+        [SkipOnCoreClr(
+            "System.Net.Tests are flaky and/or long running: https://github.com/dotnet/runtime/issues/131",
+            ~RuntimeConfiguration.Release
+        )]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/131", TestRuntimes.Mono)] // System.Net.Tests are flaky and/or long running
         public async Task TestCredentialsCopyInAsyncContext()
         {
             using var server = new LoopbackSmtpServer();
             using SmtpClient client = server.CreateClient();
-            MailMessage msg = new MailMessage("foo@example.com", "bar@example.com", "hello", "howdydoo");
+            MailMessage msg = new MailMessage(
+                "foo@example.com",
+                "bar@example.com",
+                "hello",
+                "howdydoo"
+            );
 
             CredentialCache cache = new CredentialCache();
             cache.Add("localhost", server.Port, "NTLM", CredentialCache.DefaultNetworkCredentials);
@@ -380,7 +417,6 @@ namespace System.Net.Mail.Tests
             Assert.Equal("NTLM", server.AuthMethodUsed, StringComparer.OrdinalIgnoreCase);
         }
 
-
         [Theory]
         [InlineData(false, false, false)]
         [InlineData(false, false, true)] // Received subjectText.
@@ -390,7 +426,11 @@ namespace System.Net.Mail.Tests
         [InlineData(true, false, true)] // Received subjectText.
         [InlineData(true, true, false)]
         [InlineData(true, true, true)] // Received subjectBase64. If subjectText is received, the test fails, and the results are inconsistent with those of synchronous methods.
-        public void SendMail_DeliveryFormat_SubjectEncoded(bool useAsyncSend, bool useSevenBit, bool useSmtpUTF8)
+        public void SendMail_DeliveryFormat_SubjectEncoded(
+            bool useAsyncSend,
+            bool useSevenBit,
+            bool useSmtpUTF8
+        )
         {
             // If the server support `SMTPUTF8` and use `SmtpDeliveryFormat.International`, the server should received this subject.
             const string subjectText = "Test \u6d4b\u8bd5 Contain \u5305\u542b UTF8";
@@ -415,8 +455,16 @@ namespace System.Net.Mail.Tests
                 client.DeliveryFormat = SmtpDeliveryFormat.International;
             }
 
-            MailMessage msg = new MailMessage("foo@example.com", "bar@example.com", subjectText, "hello \u9ad8\u575a\u679c");
-            msg.HeadersEncoding = msg.BodyEncoding = msg.SubjectEncoding = System.Text.Encoding.UTF8;
+            MailMessage msg = new MailMessage(
+                "foo@example.com",
+                "bar@example.com",
+                subjectText,
+                "hello \u9ad8\u575a\u679c"
+            );
+            msg.HeadersEncoding =
+                msg.BodyEncoding =
+                msg.SubjectEncoding =
+                    System.Text.Encoding.UTF8;
 
             if (useAsyncSend)
             {
@@ -476,10 +524,13 @@ namespace System.Net.Mail.Tests
             await Task.Delay(500);
             serverMre.Set();
 
-            await Assert.ThrowsAsync<TaskCanceledException>(async () => await sendTask).WaitAsync(TestHelper.PassingTestTimeout);
+            await Assert
+                .ThrowsAsync<TaskCanceledException>(async () => await sendTask)
+                .WaitAsync(TestHelper.PassingTestTimeout);
 
             // We should still be able to send mail on the SmtpClient instance
-            await Task.Run(() => client.SendMailAsync(message)).WaitAsync(TestHelper.PassingTestTimeout);
+            await Task.Run(() => client.SendMailAsync(message))
+                .WaitAsync(TestHelper.PassingTestTimeout);
 
             Assert.Equal("<foo@internet.com>", server.MailFrom);
             Assert.Equal("<bar@internet.com>", server.MailTo);
@@ -488,7 +539,8 @@ namespace System.Net.Mail.Tests
             Assert.Equal(GetClientDomain(), server.ClientDomain);
         }
 
-        private static string GetClientDomain() => IPGlobalProperties.GetIPGlobalProperties().HostName.Trim().ToLower();
+        private static string GetClientDomain() =>
+            IPGlobalProperties.GetIPGlobalProperties().HostName.Trim().ToLower();
 
         [Theory]
         [InlineData(false)]
@@ -507,7 +559,12 @@ namespace System.Net.Mail.Tests
             using (SmtpClient client = server.CreateClient())
             {
                 client.Credentials = new NetworkCredential("Foo", "Bar");
-                MailMessage msg = new MailMessage("foo@example.com", "bar@example.com", "hello", "howdydoo");
+                MailMessage msg = new MailMessage(
+                    "foo@example.com",
+                    "bar@example.com",
+                    "hello",
+                    "howdydoo"
+                );
                 if (asyncSend)
                 {
                     await client.SendMailAsync(msg).WaitAsync(TimeSpan.FromSeconds(30));
@@ -533,7 +590,12 @@ namespace System.Net.Mail.Tests
             using SmtpClient client = server.CreateClient();
             client.Timeout = 10000;
             client.Credentials = new NetworkCredential("foo", "bar");
-            MailMessage msg = new MailMessage("foo@example.com", "bar@example.com", "hello", "howdydoo");
+            MailMessage msg = new MailMessage(
+                "foo@example.com",
+                "bar@example.com",
+                "hello",
+                "howdydoo"
+            );
 
             for (var i = 0; i < 5; i++)
             {
@@ -559,7 +621,10 @@ namespace System.Net.Mail.Tests
         }
 
         [ConditionalFact(nameof(IsNtlmInstalled))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/65678", TestPlatforms.OSX | TestPlatforms.iOS | TestPlatforms.MacCatalyst)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/65678",
+            TestPlatforms.OSX | TestPlatforms.iOS | TestPlatforms.MacCatalyst
+        )]
         public void TestGssapiAuthentication()
         {
             using var server = new LoopbackSmtpServer();
@@ -567,7 +632,12 @@ namespace System.Net.Mail.Tests
             server.ExpectedGssapiCredential = new NetworkCredential("foo", "bar");
             using SmtpClient client = server.CreateClient();
             client.Credentials = server.ExpectedGssapiCredential;
-            MailMessage msg = new MailMessage("foo@example.com", "bar@example.com", "hello", "howdydoo");
+            MailMessage msg = new MailMessage(
+                "foo@example.com",
+                "bar@example.com",
+                "hello",
+                "howdydoo"
+            );
 
             client.Send(msg);
 

@@ -1,30 +1,32 @@
 //------------------------------------------------------------------------------
 // <copyright file="XmlSchemaNotation.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright> 
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// </copyright>
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Schema {
-
+namespace System.Xml.Schema
+{
     using System.Xml.Serialization;
 
     /// <include file='doc\XmlSchemaNotation.uex' path='docs/doc[@for="XmlSchemaNotation"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class XmlSchemaNotation : XmlSchemaAnnotated {
-        string name;        
+    public class XmlSchemaNotation : XmlSchemaAnnotated
+    {
+        string name;
         string publicId;
         string systemId;
-        XmlQualifiedName qname = XmlQualifiedName.Empty; 
-        
+        XmlQualifiedName qname = XmlQualifiedName.Empty;
+
         /// <include file='doc\XmlSchemaNotation.uex' path='docs/doc[@for="XmlSchemaNotation.Name"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("name")]
-        public string Name { 
+        public string Name
+        {
             get { return name; }
             set { name = value; }
         }
@@ -34,7 +36,8 @@ namespace System.Xml.Schema {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("public")]
-        public string Public {
+        public string Public
+        {
             get { return publicId; }
             set { publicId = value; }
         }
@@ -44,19 +47,22 @@ namespace System.Xml.Schema {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [XmlAttribute("system")]
-        public string System {
+        public string System
+        {
             get { return systemId; }
             set { systemId = value; }
         }
 
         [XmlIgnore]
-        internal XmlQualifiedName QualifiedName {
+        internal XmlQualifiedName QualifiedName
+        {
             get { return qname; }
             set { qname = value; }
         }
 
         [XmlIgnore]
-        internal override string NameAttribute {
+        internal override string NameAttribute
+        {
             get { return Name; }
             set { Name = value; }
         }

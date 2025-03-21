@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,53 +28,52 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System.Drawing;
 using System.Drawing.Design;
 using System.Drawing.Drawing2D;
 
 namespace System.Windows.Forms.Design.Behavior
 {
-	public sealed class Adorner
-	{
-		public Adorner ()
-		{
-		}
+    public sealed class Adorner
+    {
+        public Adorner() { }
 
-		[MonoTODO]
-		public void Invalidate ()
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Invalidate()
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public void Invalidate (Rectangle rectangle)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Invalidate(Rectangle rectangle)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public void Invalidate (Region region)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public void Invalidate(Region region)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public BehaviorService BehaviorService {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public BehaviorService BehaviorService
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public bool Enabled {
-			get { throw new NotImplementedException (); }
-			set { throw new NotImplementedException (); }
-		}
+        [MonoTODO]
+        public bool Enabled
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
+        }
 
-		[MonoTODO]
-		public GlyphCollection Glyphs {
-			get { throw new NotImplementedException (); }
-		}
-	}
+        [MonoTODO]
+        public GlyphCollection Glyphs
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
 }
-

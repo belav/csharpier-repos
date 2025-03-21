@@ -46,7 +46,8 @@ public sealed class AuthenticatedEncryptorFactory : IAuthenticatedEncryptorFacto
     [return: NotNullIfNotNull("authenticatedConfiguration")]
     internal IAuthenticatedEncryptor? CreateAuthenticatedEncryptorInstance(
         ISecret secret,
-        AuthenticatedEncryptorConfiguration? authenticatedConfiguration)
+        AuthenticatedEncryptorConfiguration? authenticatedConfiguration
+    )
     {
         if (authenticatedConfiguration == null)
         {
@@ -56,7 +57,10 @@ public sealed class AuthenticatedEncryptorFactory : IAuthenticatedEncryptorFacto
         if (IsGcmAlgorithm(authenticatedConfiguration.EncryptionAlgorithm))
         {
 #if NETCOREAPP
-            return new AesGcmAuthenticatedEncryptor(secret, GetAlgorithmKeySizeInBits(authenticatedConfiguration.EncryptionAlgorithm) / 8);
+            return new AesGcmAuthenticatedEncryptor(
+                secret,
+                GetAlgorithmKeySizeInBits(authenticatedConfiguration.EncryptionAlgorithm) / 8
+            );
 #else
             // GCM requires CNG, and CNG is only supported on Windows.
             if (!OSVersionUtil.IsWindows())
@@ -68,11 +72,17 @@ public sealed class AuthenticatedEncryptorFactory : IAuthenticatedEncryptorFacto
 
             var configuration = new CngGcmAuthenticatedEncryptorConfiguration()
             {
-                EncryptionAlgorithm = GetBCryptAlgorithmNameFromEncryptionAlgorithm(authenticatedConfiguration.EncryptionAlgorithm),
-                EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(authenticatedConfiguration.EncryptionAlgorithm)
+                EncryptionAlgorithm = GetBCryptAlgorithmNameFromEncryptionAlgorithm(
+                    authenticatedConfiguration.EncryptionAlgorithm
+                ),
+                EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(
+                    authenticatedConfiguration.EncryptionAlgorithm
+                ),
             };
 
-            return new CngGcmAuthenticatedEncryptorFactory(_loggerFactory).CreateAuthenticatedEncryptorInstance(secret, configuration);
+            return new CngGcmAuthenticatedEncryptorFactory(
+                _loggerFactory
+            ).CreateAuthenticatedEncryptorInstance(secret, configuration);
 #endif
         }
         else
@@ -83,31 +93,50 @@ public sealed class AuthenticatedEncryptorFactory : IAuthenticatedEncryptorFacto
                 // CNG preferred over managed implementations if running on Windows
                 var configuration = new CngCbcAuthenticatedEncryptorConfiguration()
                 {
-                    EncryptionAlgorithm = GetBCryptAlgorithmNameFromEncryptionAlgorithm(authenticatedConfiguration.EncryptionAlgorithm),
-                    EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(authenticatedConfiguration.EncryptionAlgorithm),
-                    HashAlgorithm = GetBCryptAlgorithmNameFromValidationAlgorithm(authenticatedConfiguration.ValidationAlgorithm)
+                    EncryptionAlgorithm = GetBCryptAlgorithmNameFromEncryptionAlgorithm(
+                        authenticatedConfiguration.EncryptionAlgorithm
+                    ),
+                    EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(
+                        authenticatedConfiguration.EncryptionAlgorithm
+                    ),
+                    HashAlgorithm = GetBCryptAlgorithmNameFromValidationAlgorithm(
+                        authenticatedConfiguration.ValidationAlgorithm
+                    ),
                 };
 
-                return new CngCbcAuthenticatedEncryptorFactory(_loggerFactory).CreateAuthenticatedEncryptorInstance(secret, configuration);
+                return new CngCbcAuthenticatedEncryptorFactory(
+                    _loggerFactory
+                ).CreateAuthenticatedEncryptorInstance(secret, configuration);
             }
             else
             {
                 // Use managed implementations as a fallback
                 var configuration = new ManagedAuthenticatedEncryptorConfiguration()
                 {
-                    EncryptionAlgorithmType = GetManagedTypeFromEncryptionAlgorithm(authenticatedConfiguration.EncryptionAlgorithm),
-                    EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(authenticatedConfiguration.EncryptionAlgorithm),
-                    ValidationAlgorithmType = GetManagedTypeFromValidationAlgorithm(authenticatedConfiguration.ValidationAlgorithm)
+                    EncryptionAlgorithmType = GetManagedTypeFromEncryptionAlgorithm(
+                        authenticatedConfiguration.EncryptionAlgorithm
+                    ),
+                    EncryptionAlgorithmKeySize = GetAlgorithmKeySizeInBits(
+                        authenticatedConfiguration.EncryptionAlgorithm
+                    ),
+                    ValidationAlgorithmType = GetManagedTypeFromValidationAlgorithm(
+                        authenticatedConfiguration.ValidationAlgorithm
+                    ),
                 };
 
-                return new ManagedAuthenticatedEncryptorFactory(_loggerFactory).CreateAuthenticatedEncryptorInstance(secret, configuration);
+                return new ManagedAuthenticatedEncryptorFactory(
+                    _loggerFactory
+                ).CreateAuthenticatedEncryptorInstance(secret, configuration);
             }
         }
     }
 
     internal static bool IsGcmAlgorithm(EncryptionAlgorithm algorithm)
     {
-        return (EncryptionAlgorithm.AES_128_GCM <= algorithm && algorithm <= EncryptionAlgorithm.AES_256_GCM);
+        return (
+            EncryptionAlgorithm.AES_128_GCM <= algorithm
+            && algorithm <= EncryptionAlgorithm.AES_256_GCM
+        );
     }
 
     private static int GetAlgorithmKeySizeInBits(EncryptionAlgorithm algorithm)
@@ -131,7 +160,9 @@ public sealed class AuthenticatedEncryptorFactory : IAuthenticatedEncryptorFacto
         }
     }
 
-    private static string GetBCryptAlgorithmNameFromEncryptionAlgorithm(EncryptionAlgorithm algorithm)
+    private static string GetBCryptAlgorithmNameFromEncryptionAlgorithm(
+        EncryptionAlgorithm algorithm
+    )
     {
         switch (algorithm)
         {
@@ -148,7 +179,9 @@ public sealed class AuthenticatedEncryptorFactory : IAuthenticatedEncryptorFacto
         }
     }
 
-    private static string GetBCryptAlgorithmNameFromValidationAlgorithm(ValidationAlgorithm algorithm)
+    private static string GetBCryptAlgorithmNameFromValidationAlgorithm(
+        ValidationAlgorithm algorithm
+    )
     {
         switch (algorithm)
         {
@@ -163,7 +196,9 @@ public sealed class AuthenticatedEncryptorFactory : IAuthenticatedEncryptorFacto
         }
     }
 
-    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+    [return: DynamicallyAccessedMembers(
+        DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+    )]
     private static Type GetManagedTypeFromEncryptionAlgorithm(EncryptionAlgorithm algorithm)
     {
         switch (algorithm)
@@ -181,7 +216,9 @@ public sealed class AuthenticatedEncryptorFactory : IAuthenticatedEncryptorFacto
         }
     }
 
-    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+    [return: DynamicallyAccessedMembers(
+        DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+    )]
     private static Type GetManagedTypeFromValidationAlgorithm(ValidationAlgorithm algorithm)
     {
         switch (algorithm)

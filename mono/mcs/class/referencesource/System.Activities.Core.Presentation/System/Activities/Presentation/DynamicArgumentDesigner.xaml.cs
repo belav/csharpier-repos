@@ -4,64 +4,87 @@
 
 namespace System.Activities.Presentation
 {
+    using System.Activities.Presentation.Hosting;
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.View;
-    using System.Activities.Presentation.Hosting;
-    using System.Runtime;
     using System.Collections;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Collections.Specialized;
     using System.ComponentModel;
-    using System.Linq;
     using System.Globalization;
+    using System.Linq;
+    using System.Reflection;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Threading;
-    using System.Reflection;
 
     internal sealed partial class DynamicArgumentDesigner : UserControl
     {
-        public static readonly DependencyProperty ContextProperty =
-            DependencyProperty.Register("Context",
+        public static readonly DependencyProperty ContextProperty = DependencyProperty.Register(
+            "Context",
             typeof(EditingContext),
-            typeof(DynamicArgumentDesigner));
+            typeof(DynamicArgumentDesigner)
+        );
 
         public static readonly DependencyProperty OwnerActivityProperty =
-           DependencyProperty.Register("OwnerActivity",
-           typeof(ModelItem),
-           typeof(DynamicArgumentDesigner));
+            DependencyProperty.Register(
+                "OwnerActivity",
+                typeof(ModelItem),
+                typeof(DynamicArgumentDesigner)
+            );
 
         public static readonly DependencyProperty IsDirectionReadOnlyProperty =
-            DependencyProperty.Register("IsDirectionReadOnly",
-            typeof(bool),
-            typeof(DynamicArgumentDesigner),
-            new UIPropertyMetadata(true, OnIsDirectionReadOnlyChanged));
+            DependencyProperty.Register(
+                "IsDirectionReadOnly",
+                typeof(bool),
+                typeof(DynamicArgumentDesigner),
+                new UIPropertyMetadata(true, OnIsDirectionReadOnlyChanged)
+            );
 
         public static readonly DependencyProperty DynamicArgumentsProperty =
-            DependencyProperty.Register("DynamicArguments",
-            typeof(ObservableCollection<DynamicArgumentWrapperObject>),
-            typeof(DynamicArgumentDesigner),
-            new PropertyMetadata(new ObservableCollection<DynamicArgumentWrapperObject>()));
+            DependencyProperty.Register(
+                "DynamicArguments",
+                typeof(ObservableCollection<DynamicArgumentWrapperObject>),
+                typeof(DynamicArgumentDesigner),
+                new PropertyMetadata(new ObservableCollection<DynamicArgumentWrapperObject>())
+            );
 
         public static readonly DependencyProperty IsDictionaryProperty =
-            DependencyProperty.Register("IsDictionary",
-            typeof(bool?),
-            typeof(DynamicArgumentDesigner),
-            new PropertyMetadata(false));
+            DependencyProperty.Register(
+                "IsDictionary",
+                typeof(bool?),
+                typeof(DynamicArgumentDesigner),
+                new PropertyMetadata(false)
+            );
 
         public static readonly DependencyProperty UnderlyingArgumentTypeProperty =
-            DependencyProperty.Register("UnderlyingArgumentType",
-            typeof(Type),
-            typeof(DynamicArgumentDesigner),
-            new PropertyMetadata(typeof(Argument)));
+            DependencyProperty.Register(
+                "UnderlyingArgumentType",
+                typeof(Type),
+                typeof(DynamicArgumentDesigner),
+                new PropertyMetadata(typeof(Argument))
+            );
 
-        public static readonly RoutedCommand CreateDynamicArgumentCommand   = new RoutedCommand("CreateDynamicArgumentCommand", typeof(DynamicArgumentDesigner));
-        public static readonly RoutedCommand MoveUpArgumentCommand          = new RoutedCommand("MoveUpArgumentCommand", typeof(DynamicArgumentDesigner));
-        public static readonly RoutedCommand MoveDownArgumentCommand        = new RoutedCommand("MoveDownArgumentCommand", typeof(DynamicArgumentDesigner));
-        public static readonly RoutedCommand DeleteArgumentCommand          = new RoutedCommand("DeleteArgumentCommand", typeof(DynamicArgumentDesigner));
+        public static readonly RoutedCommand CreateDynamicArgumentCommand = new RoutedCommand(
+            "CreateDynamicArgumentCommand",
+            typeof(DynamicArgumentDesigner)
+        );
+        public static readonly RoutedCommand MoveUpArgumentCommand = new RoutedCommand(
+            "MoveUpArgumentCommand",
+            typeof(DynamicArgumentDesigner)
+        );
+        public static readonly RoutedCommand MoveDownArgumentCommand = new RoutedCommand(
+            "MoveDownArgumentCommand",
+            typeof(DynamicArgumentDesigner)
+        );
+        public static readonly RoutedCommand DeleteArgumentCommand = new RoutedCommand(
+            "DeleteArgumentCommand",
+            typeof(DynamicArgumentDesigner)
+        );
         public const string DefaultArgumentPrefix = "Argument";
 
         SubscribeContextCallback<ReadOnlyState> onReadOnlyStateChangedCallback;
@@ -81,7 +104,7 @@ namespace System.Activities.Presentation
         string argumentPrefix = DefaultArgumentPrefix;
         string hintText;
         DataGridHelper dgHelper;
-        ContextItemManager contextItemManager;        
+        ContextItemManager contextItemManager;
 
         public DynamicArgumentDesigner()
         {
@@ -96,13 +119,17 @@ namespace System.Activities.Presentation
             this.Loaded += (sender, e) =>
             {
                 OnReadOnlyStateChanged(new ReadOnlyState());
-                this.ContextItemManager.Subscribe<ReadOnlyState>(this.OnReadOnlyStateChangedCallback);
+                this.ContextItemManager.Subscribe<ReadOnlyState>(
+                    this.OnReadOnlyStateChangedCallback
+                );
                 this.OnDynamicArgumentsLoaded();
                 this.OnUnderlyingArgumentTypeChanged();
             };
             this.Unloaded += (sender, e) =>
             {
-                this.ContextItemManager.Unsubscribe<ReadOnlyState>(this.OnReadOnlyStateChangedCallback);
+                this.ContextItemManager.Unsubscribe<ReadOnlyState>(
+                    this.OnReadOnlyStateChangedCallback
+                );
             };
 
             DynamicArgumentWrapperObject.Editor = this;
@@ -127,7 +154,9 @@ namespace System.Activities.Presentation
 
         void UpdateChildrenElementStatus()
         {
-            this.isReadOnly = this.ContextItemManager.GetValue<ReadOnlyState>().IsReadOnly || this.DynamicArguments == null;
+            this.isReadOnly =
+                this.ContextItemManager.GetValue<ReadOnlyState>().IsReadOnly
+                || this.DynamicArguments == null;
 
             if (this.isReadOnly)
             {
@@ -140,26 +169,29 @@ namespace System.Activities.Presentation
 
         void OnDataGridSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (this.isReadOnly 
+            if (
+                this.isReadOnly
                 || this.WPF_DataGrid.SelectedItems == null
-                || this.WPF_DataGrid.SelectedItems.Count == 0)
+                || this.WPF_DataGrid.SelectedItems.Count == 0
+            )
             {
-                this.ButtonMovUp.IsEnabled   = false;
+                this.ButtonMovUp.IsEnabled = false;
                 this.ButtonMovDown.IsEnabled = false;
-                this.ButtonDelete.IsEnabled  = false;
+                this.ButtonDelete.IsEnabled = false;
                 return;
             }
 
             // delete button
             this.ButtonDelete.IsEnabled = true;
-            
+
             // up/down button.
             if (this.WPF_DataGrid.SelectedItems.Count == 1)
             {
                 bool upHadFocus = ButtonMovUp.IsFocused;
                 bool downHadFocus = ButtonMovDown.IsFocused;
                 this.ButtonMovUp.IsEnabled = this.WPF_DataGrid.SelectedIndex > 0;
-                this.ButtonMovDown.IsEnabled = this.WPF_DataGrid.SelectedIndex < this.DynamicArguments.Count - 1;
+                this.ButtonMovDown.IsEnabled =
+                    this.WPF_DataGrid.SelectedIndex < this.DynamicArguments.Count - 1;
                 if (!this.ButtonMovDown.IsEnabled && downHadFocus)
                 {
                     this.ButtonMovUp.Focus();
@@ -184,7 +216,7 @@ namespace System.Activities.Presentation
             {
                 this.ParentDialog.CloseDialog(false);
             }
-        }        
+        }
 
         protected override void OnInitialized(EventArgs e)
         {
@@ -198,7 +230,9 @@ namespace System.Activities.Presentation
             {
                 if (onReadOnlyStateChangedCallback == null)
                 {
-                    onReadOnlyStateChangedCallback = new SubscribeContextCallback<ReadOnlyState>(OnReadOnlyStateChanged);
+                    onReadOnlyStateChangedCallback = new SubscribeContextCallback<ReadOnlyState>(
+                        OnReadOnlyStateChanged
+                    );
                 }
                 return onReadOnlyStateChangedCallback;
             }
@@ -214,7 +248,8 @@ namespace System.Activities.Presentation
         {
             get
             {
-                return (ObservableCollection<DynamicArgumentWrapperObject>)GetValue(DynamicArgumentsProperty);
+                return (ObservableCollection<DynamicArgumentWrapperObject>)
+                    GetValue(DynamicArgumentsProperty);
             }
             set
             {
@@ -248,34 +283,27 @@ namespace System.Activities.Presentation
 
         public bool HideDirection
         {
-            get
-            {
-                return this.hideDirection;
-            }
+            get { return this.hideDirection; }
             set
             {
                 this.hideDirection = value;
                 if (this.hideDirection)
                 {
-                    this.WPF_DataGrid.Columns[DynamicArgumentDesigner.DirectionColumn].Visibility = Visibility.Hidden;
+                    this.WPF_DataGrid.Columns[DynamicArgumentDesigner.DirectionColumn].Visibility =
+                        Visibility.Hidden;
                 }
                 else
                 {
-                    this.WPF_DataGrid.Columns[DynamicArgumentDesigner.DirectionColumn].Visibility = Visibility.Visible;
+                    this.WPF_DataGrid.Columns[DynamicArgumentDesigner.DirectionColumn].Visibility =
+                        Visibility.Visible;
                 }
             }
         }
 
         public string ArgumentPrefix
         {
-            get
-            {
-                return this.argumentPrefix;
-            }
-            set
-            {
-                this.argumentPrefix = value;
-            }
+            get { return this.argumentPrefix; }
+            set { this.argumentPrefix = value; }
         }
 
         public string HintText
@@ -296,7 +324,8 @@ namespace System.Activities.Presentation
                 this.hintText = value;
                 if (hintText == null)
                 {
-                    dgHelper.AddNewRowContent = (string)this.FindResource("addDynamicArgumentNewRowLabel");
+                    dgHelper.AddNewRowContent = (string)
+                        this.FindResource("addDynamicArgumentNewRowLabel");
                 }
                 else
                 {
@@ -305,13 +334,12 @@ namespace System.Activities.Presentation
             }
         }
 
-        public WorkflowElementDialog ParentDialog
-        {
-            get;
-            set;
-        }
+        public WorkflowElementDialog ParentDialog { get; set; }
 
-        static void OnIsDirectionReadOnlyChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
+        static void OnIsDirectionReadOnlyChanged(
+            DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             ((DynamicArgumentDesigner)dependencyObject).OnIsDirectionReadOnlyChanged();
         }
@@ -320,17 +348,16 @@ namespace System.Activities.Presentation
         {
             if (!this.IsDirectionReadOnly)
             {
-                DataGridTemplateColumn directionCol = this.WPF_DataGrid.Columns[1] as DataGridTemplateColumn;
-                directionCol.CellEditingTemplate = (DataTemplate)this.WPF_DataGrid.FindResource("argumentDirectionEditingTemplate");
+                DataGridTemplateColumn directionCol =
+                    this.WPF_DataGrid.Columns[1] as DataGridTemplateColumn;
+                directionCol.CellEditingTemplate = (DataTemplate)
+                    this.WPF_DataGrid.FindResource("argumentDirectionEditingTemplate");
             }
         }
 
         internal Type UnderlyingArgumentType
         {
-            get
-            {
-                return (Type)GetValue(UnderlyingArgumentTypeProperty);
-            }
+            get { return (Type)GetValue(UnderlyingArgumentTypeProperty); }
             set
             {
                 if (!typeof(Argument).IsAssignableFrom(value))
@@ -349,29 +376,35 @@ namespace System.Activities.Presentation
         {
             Type currentArgumentType = this.UnderlyingArgumentType;
 
-            if (currentArgumentType != null && (OutArgumentType.IsAssignableFrom(currentArgumentType) || InOutArgumentType.IsAssignableFrom(currentArgumentType)))
+            if (
+                currentArgumentType != null
+                && (
+                    OutArgumentType.IsAssignableFrom(currentArgumentType)
+                    || InOutArgumentType.IsAssignableFrom(currentArgumentType)
+                )
+            )
             {
-                this.WPF_DataGrid.Columns[DynamicArgumentDesigner.ExpressionColumn].Header = (string)this.FindResource("assignToHeader");
+                this.WPF_DataGrid.Columns[DynamicArgumentDesigner.ExpressionColumn].Header =
+                    (string)this.FindResource("assignToHeader");
             }
             else
             {
-                this.WPF_DataGrid.Columns[DynamicArgumentDesigner.ExpressionColumn].Header = (string)this.FindResource("valueHeader");
+                this.WPF_DataGrid.Columns[DynamicArgumentDesigner.ExpressionColumn].Header =
+                    (string)this.FindResource("valueHeader");
             }
         }
 
         internal bool? IsDictionary
         {
-            get
-            {
-                return (bool?)GetValue(IsDictionaryProperty);
-            }
-            set
-            {
-                SetValue(IsDictionaryProperty, value);
-            }
+            get { return (bool?)GetValue(IsDictionaryProperty); }
+            set { SetValue(IsDictionaryProperty, value); }
         }
 
-        internal static ObservableCollection<DynamicArgumentWrapperObject> ModelItemToWrapperCollection(ModelItem model, out bool isDictionary, out Type underlyingArgumentType)
+        internal static ObservableCollection<DynamicArgumentWrapperObject> ModelItemToWrapperCollection(
+            ModelItem model,
+            out bool isDictionary,
+            out Type underlyingArgumentType
+        )
         {
             string errorMessage = string.Empty;
             underlyingArgumentType = null;
@@ -409,16 +442,23 @@ namespace System.Activities.Presentation
             }
             if (isDictionary)
             {
-                ObservableCollection<DynamicArgumentWrapperObject> wrappers = new ObservableCollection<DynamicArgumentWrapperObject>();
+                ObservableCollection<DynamicArgumentWrapperObject> wrappers =
+                    new ObservableCollection<DynamicArgumentWrapperObject>();
                 foreach (ModelItem item in GetArgumentCollection(model))
                 {
-                    wrappers.Add(new DynamicArgumentWrapperObject(item.Properties["Key"].ComputedValue as string, item.Properties["Value"].Value));
+                    wrappers.Add(
+                        new DynamicArgumentWrapperObject(
+                            item.Properties["Key"].ComputedValue as string,
+                            item.Properties["Value"].Value
+                        )
+                    );
                 }
                 return wrappers;
             }
             else
             {
-                ObservableCollection<DynamicArgumentWrapperObject> wrappers = new ObservableCollection<DynamicArgumentWrapperObject>();
+                ObservableCollection<DynamicArgumentWrapperObject> wrappers =
+                    new ObservableCollection<DynamicArgumentWrapperObject>();
                 foreach (ModelItem item in GetArgumentCollection(model))
                 {
                     wrappers.Add(new DynamicArgumentWrapperObject(null, item));
@@ -427,23 +467,40 @@ namespace System.Activities.Presentation
             }
         }
 
-        internal static void WrapperCollectionToModelItem(ObservableCollection<DynamicArgumentWrapperObject> wrappers, ModelItem data, bool isDictionary, Type underlyingArgumentType)
+        internal static void WrapperCollectionToModelItem(
+            ObservableCollection<DynamicArgumentWrapperObject> wrappers,
+            ModelItem data,
+            bool isDictionary,
+            Type underlyingArgumentType
+        )
         {
             ModelItemCollection collection = GetArgumentCollection(data);
-            using (ModelEditingScope change = collection.BeginEdit(SR.UpdateDynamicArgumentsDescription))
+            using (
+                ModelEditingScope change = collection.BeginEdit(
+                    SR.UpdateDynamicArgumentsDescription
+                )
+            )
             {
                 if (isDictionary)
                 {
                     collection.Clear();
-                    Type dictionaryEntryType = typeof(ModelItemKeyValuePair<,>).MakeGenericType(new Type[] { typeof(string), underlyingArgumentType });
+                    Type dictionaryEntryType = typeof(ModelItemKeyValuePair<,>).MakeGenericType(
+                        new Type[] { typeof(string), underlyingArgumentType }
+                    );
                     foreach (DynamicArgumentWrapperObject wrapper in wrappers)
                     {
                         Argument argument = Argument.Create(wrapper.Type, wrapper.Direction);
-                        object mutableKVPair = Activator.CreateInstance(dictionaryEntryType, new object[] { wrapper.Name, argument });
+                        object mutableKVPair = Activator.CreateInstance(
+                            dictionaryEntryType,
+                            new object[] { wrapper.Name, argument }
+                        );
                         ModelItem argumentKVPair = collection.Add(mutableKVPair);
                         if (wrapper.Expression != null)
                         {
-                            argumentKVPair.Properties["Value"].Value.Properties["Expression"].SetValue(wrapper.Expression.GetCurrentValue());
+                            argumentKVPair
+                                .Properties["Value"]
+                                .Value.Properties["Expression"]
+                                .SetValue(wrapper.Expression.GetCurrentValue());
                         }
                     }
                 }
@@ -456,7 +513,9 @@ namespace System.Activities.Presentation
                         ModelItem argumentItem = collection.Add(argument);
                         if (wrapper.Expression != null)
                         {
-                            argumentItem.Properties["Expression"].SetValue(wrapper.Expression.GetCurrentValue());
+                            argumentItem
+                                .Properties["Expression"]
+                                .SetValue(wrapper.Expression.GetCurrentValue());
                         }
                     }
                 }
@@ -486,10 +545,11 @@ namespace System.Activities.Presentation
         {
             Fx.Assert(this.Context != null, "EditingContext cannot be null");
             Fx.Assert(this.IsDictionary != null, "IsDictionary is not set");
-            Fx.Assert(this.UnderlyingArgumentType != null, "UnderlyingArgumentType is not set");            
+            Fx.Assert(this.UnderlyingArgumentType != null, "UnderlyingArgumentType is not set");
             if (!(this.IsDictionary.Value))
             {
-                this.WPF_DataGrid.Columns[DynamicArgumentDesigner.NameColumn].Visibility = Visibility.Hidden;
+                this.WPF_DataGrid.Columns[DynamicArgumentDesigner.NameColumn].Visibility =
+                    Visibility.Hidden;
             }
 
             if (null != this.DynamicArguments)
@@ -505,7 +565,9 @@ namespace System.Activities.Presentation
                     if (innerArgumentTypes.Length > 0)
                     {
                         Type innerArgumentType = innerArgumentTypes[0];
-                        this.WPF_DataGrid.Columns[DynamicArgumentDesigner.ArgumentTypeColumn].IsReadOnly = !innerArgumentType.IsGenericParameter;
+                        this.WPF_DataGrid
+                            .Columns[DynamicArgumentDesigner.ArgumentTypeColumn]
+                            .IsReadOnly = !innerArgumentType.IsGenericParameter;
                     }
                 }
             }
@@ -515,7 +577,10 @@ namespace System.Activities.Presentation
             UpdateChildrenElementStatus();
         }
 
-        internal void ValidateEntry(DynamicArgumentWrapperObject entry, DependencyPropertyChangedEventArgs e)
+        internal void ValidateEntry(
+            DynamicArgumentWrapperObject entry,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             if (e.Property == DynamicArgumentWrapperObject.NameProperty)
             {
@@ -524,19 +589,27 @@ namespace System.Activities.Presentation
                     DataGridRow row = entry.Row;
                     string newName = e.NewValue as string;
 
-                    bool duplicates =
-                        this.DynamicArguments.Any<DynamicArgumentWrapperObject>(
-                            p => string.Equals(p.Name, newName) && p != entry);
+                    bool duplicates = this.DynamicArguments.Any<DynamicArgumentWrapperObject>(p =>
+                        string.Equals(p.Name, newName) && p != entry
+                    );
                     if (duplicates || string.IsNullOrEmpty(newName))
                     {
                         entry.Name = e.OldValue as string;
                         if (duplicates)
                         {
-                            ErrorReporting.ShowErrorMessage(string.Format(CultureInfo.CurrentCulture, SR.DuplicateArgumentName, newName));
+                            ErrorReporting.ShowErrorMessage(
+                                string.Format(
+                                    CultureInfo.CurrentCulture,
+                                    SR.DuplicateArgumentName,
+                                    newName
+                                )
+                            );
                         }
                         else
                         {
-                            ErrorReporting.ShowErrorMessage(string.Format(CultureInfo.CurrentCulture, SR.EmptyArgumentName));
+                            ErrorReporting.ShowErrorMessage(
+                                string.Format(CultureInfo.CurrentCulture, SR.EmptyArgumentName)
+                            );
                         }
                     }
                     entry.IsValidating = false;
@@ -547,20 +620,34 @@ namespace System.Activities.Presentation
                 if (e.Property == DynamicArgumentWrapperObject.DirectionProperty)
                 {
                     entry.UseLocationExpression = (entry.Direction != ArgumentDirection.In);
-                }                
-                if ((e.Property != DynamicArgumentWrapperObject.ExpressionProperty) && (entry.Expression != null))
+                }
+                if (
+                    (e.Property != DynamicArgumentWrapperObject.ExpressionProperty)
+                    && (entry.Expression != null)
+                )
                 {
-                    ActivityWithResult expression = entry.Expression.GetCurrentValue() as ActivityWithResult;                    
+                    ActivityWithResult expression =
+                        entry.Expression.GetCurrentValue() as ActivityWithResult;
                     if (expression != null)
                     {
                         ActivityWithResult newExpression;
-                        if (ExpressionHelper.TryMorphExpression(expression, entry.UseLocationExpression, entry.Type, this.Context, out newExpression))
+                        if (
+                            ExpressionHelper.TryMorphExpression(
+                                expression,
+                                entry.UseLocationExpression,
+                                entry.Type,
+                                this.Context,
+                                out newExpression
+                            )
+                        )
                         {
-                            entry.Expression = (this.OwnerActivity as IModelTreeItem).ModelTreeManager.WrapAsModelItem(newExpression);
+                            entry.Expression = (
+                                this.OwnerActivity as IModelTreeItem
+                            ).ModelTreeManager.WrapAsModelItem(newExpression);
                         }
                         else
                         {
-                            //Microsoft 
+                            //Microsoft
 
                             entry.Expression = null;
                         }
@@ -578,10 +665,22 @@ namespace System.Activities.Presentation
             }
             else
             {
-                var defaultNames = this.DynamicArguments
-                        .Select<DynamicArgumentWrapperObject, string>(p => (string)p.Name)
-                        .Where<string>(p => 0 == string.Compare(p, 0, this.ArgumentPrefix, 0, this.ArgumentPrefix.Length, StringComparison.Ordinal))
-                        .Select(p => p.Substring(this.ArgumentPrefix.Length));
+                var defaultNames = this
+                    .DynamicArguments.Select<DynamicArgumentWrapperObject, string>(p =>
+                        (string)p.Name
+                    )
+                    .Where<string>(p =>
+                        0
+                        == string.Compare(
+                            p,
+                            0,
+                            this.ArgumentPrefix,
+                            0,
+                            this.ArgumentPrefix.Length,
+                            StringComparison.Ordinal
+                        )
+                    )
+                    .Select(p => p.Substring(this.ArgumentPrefix.Length));
 
                 int maxNum = 1;
                 foreach (string numberPart in defaultNames)
@@ -595,9 +694,13 @@ namespace System.Activities.Presentation
                         }
                     }
                 }
-                return string.Format(CultureInfo.InvariantCulture, "{0}{1}", this.ArgumentPrefix, maxNum);
+                return string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}{1}",
+                    this.ArgumentPrefix,
+                    maxNum
+                );
             }
-
         }
 
         internal Type GetDefaultType()
@@ -630,7 +733,10 @@ namespace System.Activities.Presentation
                 return ArgumentDirection.Out;
             }
 
-            Fx.Assert(InOutArgumentType.IsAssignableFrom(this.UnderlyingArgumentType), "UnderlyingArgumentType should be of type OutArgumentType");
+            Fx.Assert(
+                InOutArgumentType.IsAssignableFrom(this.UnderlyingArgumentType),
+                "UnderlyingArgumentType should be of type OutArgumentType"
+            );
             return ArgumentDirection.InOut;
         }
 
@@ -718,38 +824,44 @@ namespace System.Activities.Presentation
             "ModelItem",
             typeof(ModelItem),
             typeof(DynamicArgumentWrapperObject),
-            new UIPropertyMetadata(null));
+            new UIPropertyMetadata(null)
+        );
 
         public static readonly DependencyProperty NameProperty = DependencyProperty.Register(
             "Name",
             typeof(string),
             typeof(DynamicArgumentWrapperObject),
-            new UIPropertyMetadata(string.Empty, OnArgumentPropertyChanged));
+            new UIPropertyMetadata(string.Empty, OnArgumentPropertyChanged)
+        );
 
-        public static readonly DependencyProperty ArgumentTypeProperty = DependencyProperty.Register(
-            "Type",
-            typeof(Type),
-            typeof(DynamicArgumentWrapperObject),
-            new UIPropertyMetadata(typeof(string), OnArgumentPropertyChanged));
+        public static readonly DependencyProperty ArgumentTypeProperty =
+            DependencyProperty.Register(
+                "Type",
+                typeof(Type),
+                typeof(DynamicArgumentWrapperObject),
+                new UIPropertyMetadata(typeof(string), OnArgumentPropertyChanged)
+            );
 
         public static readonly DependencyProperty DirectionProperty = DependencyProperty.Register(
             "Direction",
             typeof(ArgumentDirection),
             typeof(DynamicArgumentWrapperObject),
-            new UIPropertyMetadata(ArgumentDirection.In, OnArgumentPropertyChanged));
+            new UIPropertyMetadata(ArgumentDirection.In, OnArgumentPropertyChanged)
+        );
 
-        public static readonly DependencyProperty ExpressionProperty =
-            DependencyProperty.Register(
+        public static readonly DependencyProperty ExpressionProperty = DependencyProperty.Register(
             "Expression",
             typeof(ModelItem),
             typeof(DynamicArgumentWrapperObject),
-            new UIPropertyMetadata(OnArgumentPropertyChanged));
+            new UIPropertyMetadata(OnArgumentPropertyChanged)
+        );
 
         public static readonly DependencyProperty UseLocationExpressionProperty =
             DependencyProperty.Register(
-            "UseLocationExpression",
-            typeof(bool),
-            typeof(DynamicArgumentWrapperObject));
+                "UseLocationExpression",
+                typeof(bool),
+                typeof(DynamicArgumentWrapperObject)
+            );
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -787,23 +899,11 @@ namespace System.Activities.Presentation
             set { SetValue(UseLocationExpressionProperty, value); }
         }
 
-        internal bool IsValidating
-        {
-            get;
-            set;
-        }
+        internal bool IsValidating { get; set; }
 
-        internal DataGridRow Row
-        {
-            get;
-            set;
-        }
+        internal DataGridRow Row { get; set; }
 
-        public static DynamicArgumentDesigner Editor
-        {
-            get;
-            set;
-        }
+        public static DynamicArgumentDesigner Editor { get; set; }
 
         public DynamicArgumentWrapperObject()
         {
@@ -820,7 +920,7 @@ namespace System.Activities.Presentation
         {
             Fx.Assert(argumentItem != null, "argumentItem canot be null");
             this.isInitializing = true;
-            this.IsValidating = false;            
+            this.IsValidating = false;
             Argument argument = (Argument)argumentItem.GetCurrentValue();
             this.Name = argumentName;
             this.Direction = argument.Direction;
@@ -830,7 +930,10 @@ namespace System.Activities.Presentation
             this.isInitializing = false;
         }
 
-        static void OnArgumentPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        static void OnArgumentPropertyChanged(
+            DependencyObject sender,
+            DependencyPropertyChangedEventArgs e
+        )
         {
             DynamicArgumentWrapperObject wrapper = (DynamicArgumentWrapperObject)sender;
             if (!wrapper.IsValidating && !wrapper.isInitializing)

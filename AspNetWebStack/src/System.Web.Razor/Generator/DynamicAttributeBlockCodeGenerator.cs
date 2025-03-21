@@ -16,12 +16,18 @@ namespace System.Web.Razor.Generator
         private bool _isExpression;
         private ExpressionRenderingMode _oldRenderingMode;
 
-        public DynamicAttributeBlockCodeGenerator(LocationTagged<string> prefix, int offset, int line, int col)
-            : this(prefix, new SourceLocation(offset, line, col))
-        {
-        }
+        public DynamicAttributeBlockCodeGenerator(
+            LocationTagged<string> prefix,
+            int offset,
+            int line,
+            int col
+        )
+            : this(prefix, new SourceLocation(offset, line, col)) { }
 
-        public DynamicAttributeBlockCodeGenerator(LocationTagged<string> prefix, SourceLocation valueStart)
+        public DynamicAttributeBlockCodeGenerator(
+            LocationTagged<string> prefix,
+            SourceLocation valueStart
+        )
         {
             Prefix = prefix;
             ValueStart = valueStart;
@@ -128,15 +134,12 @@ namespace System.Web.Razor.Generator
         public override bool Equals(object obj)
         {
             DynamicAttributeBlockCodeGenerator other = obj as DynamicAttributeBlockCodeGenerator;
-            return other != null &&
-                   Equals(other.Prefix, Prefix);
+            return other != null && Equals(other.Prefix, Prefix);
         }
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
-                .Add(Prefix)
-                .CombinedHash;
+            return HashCodeCombiner.Start().Add(Prefix).CombinedHash;
         }
     }
 }

@@ -7,7 +7,8 @@ using Microsoft.TestCommon;
 
 namespace System.Net.Http
 {
-    public class MultipartRelatedStreamProviderTests : MultipartStreamProviderTestBase<MultipartRelatedStreamProvider>
+    public class MultipartRelatedStreamProviderTests
+        : MultipartStreamProviderTestBase<MultipartRelatedStreamProvider>
     {
         private const string ContentID = "12345";
         private const string Boundary = "-A-";
@@ -22,8 +23,20 @@ namespace System.Net.Http
             {
                 return new TheoryDataSet<string>
                 {
-                    { String.Format("multipart/related; boundary={0}; start=\"{1}\"", Boundary, ContentID) },
-                    { String.Format("multipart/related; start={0}; boundary={1}", ContentID, Boundary) },
+                    {
+                        String.Format(
+                            "multipart/related; boundary={0}; start=\"{1}\"",
+                            Boundary,
+                            ContentID
+                        )
+                    },
+                    {
+                        String.Format(
+                            "multipart/related; start={0}; boundary={1}",
+                            ContentID,
+                            Boundary
+                        )
+                    },
                 };
             }
         }
@@ -34,11 +47,29 @@ namespace System.Net.Http
             {
                 return new TheoryDataSet<string>
                 {
-                    { String.Format("multipart/form-data; start=\"{0}\"; boundary={1}", ContentID, Boundary) },
-                    { String.Format("multipart/form-data; start={0}; boundary={1}", ContentID, Boundary) },
+                    {
+                        String.Format(
+                            "multipart/form-data; start=\"{0}\"; boundary={1}",
+                            ContentID,
+                            Boundary
+                        )
+                    },
+                    {
+                        String.Format(
+                            "multipart/form-data; start={0}; boundary={1}",
+                            ContentID,
+                            Boundary
+                        )
+                    },
                     { String.Format("multipart/form-data; boundary={0}", Boundary) },
                     { String.Format("multipart/related; boundary={0}", Boundary) },
-                    { String.Format("multipart/mixed; start={0}; boundary={1}", ContentID, Boundary) },
+                    {
+                        String.Format(
+                            "multipart/mixed; start={0}; boundary={1}",
+                            ContentID,
+                            Boundary
+                        )
+                    },
                     { String.Format("multipart/mixed; boundary={1}", ContentID, Boundary) },
                 };
             }
@@ -66,7 +97,9 @@ namespace System.Net.Http
             expectedRootContent.Headers.Add("Content-ID", "NoMatch");
             content.Add(expectedRootContent);
 
-            MultipartRelatedStreamProvider provider = await content.ReadAsMultipartAsync(new MultipartRelatedStreamProvider());
+            MultipartRelatedStreamProvider provider = await content.ReadAsMultipartAsync(
+                new MultipartRelatedStreamProvider()
+            );
 
             // Act
             HttpContent actualRootContent = provider.RootContent;
@@ -104,7 +137,9 @@ namespace System.Net.Http
             contentIDContent.Headers.Add("Content-ID", ContentID);
             content.Add(contentIDContent);
 
-            MultipartRelatedStreamProvider provider = await content.ReadAsMultipartAsync(new MultipartRelatedStreamProvider());
+            MultipartRelatedStreamProvider provider = await content.ReadAsMultipartAsync(
+                new MultipartRelatedStreamProvider()
+            );
 
             // Act
             HttpContent actualRootContent = provider.RootContent;

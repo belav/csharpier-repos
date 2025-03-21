@@ -11,14 +11,19 @@ namespace Microsoft.AspNet.Facebook.Client
         private const string SignedRequestKey = "signed_request";
         private const string ParsedSignedRequestKey = "parsed_signed_request";
 
-        public static dynamic GetSignedRequest(HttpContextBase context, Func<string, object> parseSignedRequest)
+        public static dynamic GetSignedRequest(
+            HttpContextBase context,
+            Func<string, object> parseSignedRequest
+        )
         {
             if (context.Items.Contains(ParsedSignedRequestKey))
             {
                 return context.Items[ParsedSignedRequestKey];
             }
 
-            string rawSignedRequest = context.Request.Form[SignedRequestKey] ?? context.Request.QueryString[SignedRequestKey];
+            string rawSignedRequest =
+                context.Request.Form[SignedRequestKey]
+                ?? context.Request.QueryString[SignedRequestKey];
             object signedRequest = null;
             if (!String.IsNullOrEmpty(rawSignedRequest))
             {

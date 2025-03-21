@@ -154,7 +154,6 @@ namespace System.Threading.Tasks
         // Internal overridable methods
         //
 
-
         /// <summary>
         /// Attempts to execute the target task synchronously.
         /// </summary>
@@ -170,13 +169,16 @@ namespace System.Threading.Tasks
             TaskScheduler? ets = task.ExecutingTaskScheduler;
 
             // Delegate cross-scheduler inlining requests to target scheduler
-            if (ets != this && ets != null) return ets.TryRunInline(task, taskWasPreviouslyQueued);
+            if (ets != this && ets != null)
+                return ets.TryRunInline(task, taskWasPreviouslyQueued);
 
-            if ((ets == null) ||
-                (task.m_action == null) ||
-                task.IsDelegateInvoked ||
-                task.IsCanceled ||
-                !RuntimeHelpers.TryEnsureSufficientExecutionStack())
+            if (
+                (ets == null)
+                || (task.m_action == null)
+                || task.IsDelegateInvoked
+                || task.IsCanceled
+                || !RuntimeHelpers.TryEnsureSufficientExecutionStack()
+            )
             {
                 return false;
             }
@@ -193,7 +195,9 @@ namespace System.Threading.Tasks
             // Otherwise the scheduler is buggy
             if (inlined && !(task.IsDelegateInvoked || task.IsCanceled))
             {
-                throw new InvalidOperationException(SR.TaskScheduler_InconsistentStateAfterTryExecuteTaskInline);
+                throw new InvalidOperationException(
+                    SR.TaskScheduler_InconsistentStateAfterTryExecuteTaskInline
+                );
             }
 
             return inlined;
@@ -214,9 +218,7 @@ namespace System.Threading.Tasks
         /// <summary>
         /// Notifies the scheduler that a work item has made progress.
         /// </summary>
-        internal virtual void NotifyWorkItemProgress()
-        {
-        }
+        internal virtual void NotifyWorkItemProgress() { }
 
         /// <summary>
         /// Indicates whether this is a custom scheduler, in which case the safe code paths will be taken upon task entry
@@ -237,7 +239,6 @@ namespace System.Threading.Tasks
             this.QueueTask(task);
         }
 
-
         ////////////////////////////////////////////////////////////
         //
         // Member variables
@@ -247,15 +248,14 @@ namespace System.Threading.Tasks
         private static ConditionalWeakTable<TaskScheduler, object?>? s_activeTaskSchedulers;
 
         // An AppDomain-wide default manager.
-        private static readonly TaskScheduler s_defaultTaskScheduler = new ThreadPoolTaskScheduler();
+        private static readonly TaskScheduler s_defaultTaskScheduler =
+            new ThreadPoolTaskScheduler();
 
         // static counter used to generate unique TaskScheduler IDs
         internal static int s_taskSchedulerIdCounter;
 
         // this TaskScheduler's unique ID
         private volatile int m_taskSchedulerId;
-
-
 
         ////////////////////////////////////////////////////////////
         //
@@ -282,10 +282,15 @@ namespace System.Threading.Tasks
         /// <summary>Adds this scheduler ot the active schedulers tracking collection for debugging purposes.</summary>
         private void AddToActiveTaskSchedulers()
         {
-            ConditionalWeakTable<TaskScheduler, object?>? activeTaskSchedulers = s_activeTaskSchedulers;
+            ConditionalWeakTable<TaskScheduler, object?>? activeTaskSchedulers =
+                s_activeTaskSchedulers;
             if (activeTaskSchedulers == null)
             {
-                Interlocked.CompareExchange(ref s_activeTaskSchedulers, new ConditionalWeakTable<TaskScheduler, object?>(), null);
+                Interlocked.CompareExchange(
+                    ref s_activeTaskSchedulers,
+                    new ConditionalWeakTable<TaskScheduler, object?>(),
+                    null
+                );
                 activeTaskSchedulers = s_activeTaskSchedulers;
             }
             activeTaskSchedulers.Add(this, null);
@@ -317,9 +322,12 @@ namespace System.Threading.Tasks
             get
             {
                 Task? currentTask = Task.InternalCurrent;
-                return ((currentTask != null)
+                return (
+                    (currentTask != null)
                     && ((currentTask.CreationOptions & TaskCreationOptions.HideScheduler) == 0)
-                    ) ? currentTask.ExecutingTaskScheduler : null;
+                )
+                    ? currentTask.ExecutingTaskScheduler
+                    : null;
             }
         }
 
@@ -405,7 +413,9 @@ namespace System.Threading.Tasks
         {
             if (task.ExecutingTaskScheduler != this)
             {
-                throw new InvalidOperationException(SR.TaskScheduler_ExecuteTask_WrongTaskScheduler);
+                throw new InvalidOperationException(
+                    SR.TaskScheduler_ExecuteTask_WrongTaskScheduler
+                );
             }
 
             return task.ExecuteEntry();
@@ -434,7 +444,10 @@ namespace System.Threading.Tasks
         //
 
         // This is called by the TaskExceptionHolder finalizer.
-        internal static void PublishUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs ueea)
+        internal static void PublishUnobservedTaskException(
+            object sender,
+            UnobservedTaskExceptionEventArgs ueea
+        )
         {
             UnobservedTaskException?.Invoke(sender, ueea);
         }
@@ -509,7 +522,10 @@ namespace System.Threading.Tasks
             TaskScheduler[] arr = schedulers.ToArray();
             foreach (TaskScheduler scheduler in arr)
             {
-                Debug.Assert(scheduler != null, "Table returned an incorrect Count or CopyTo failed");
+                Debug.Assert(
+                    scheduler != null,
+                    "Table returned an incorrect Count or CopyTo failed"
+                );
                 _ = scheduler.Id; // force Ids for debugger
             }
             return arr;
@@ -521,6 +537,7 @@ namespace System.Threading.Tasks
         internal sealed class SystemThreadingTasks_TaskSchedulerDebugView
         {
             private readonly TaskScheduler m_taskScheduler;
+
             public SystemThreadingTasks_TaskSchedulerDebugView(TaskScheduler scheduler)
             {
                 m_taskScheduler = scheduler;
@@ -549,9 +566,13 @@ namespace System.Threading.Tasks
         /// <exception cref="InvalidOperationException">This constructor expects <see cref="SynchronizationContext.Current"/> to be set.</exception>
         internal SynchronizationContextTaskScheduler()
         {
-            m_synchronizationContext = SynchronizationContext.Current ??
+            m_synchronizationContext =
+                SynchronizationContext.Current
+                ??
                 // make sure we have a synccontext to work with
-                throw new InvalidOperationException(SR.TaskScheduler_FromCurrentSynchronizationContext_NoCurrent);
+                throw new InvalidOperationException(
+                    SR.TaskScheduler_FromCurrentSynchronizationContext_NoCurrent
+                );
         }
 
         /// <summary>
@@ -627,13 +648,19 @@ namespace System.Threading.Tasks
         /// with the unobserved exception.
         /// </summary>
         /// <param name="exception">The Exception that has gone unobserved.</param>
-        public UnobservedTaskExceptionEventArgs(AggregateException exception) { m_exception = exception; }
+        public UnobservedTaskExceptionEventArgs(AggregateException exception)
+        {
+            m_exception = exception;
+        }
 
         /// <summary>
         /// Marks the <see cref="Exception"/> as "observed," thus preventing it
         /// from triggering exception escalation policy which, by default, terminates the process.
         /// </summary>
-        public void SetObserved() { m_observed = true; }
+        public void SetObserved()
+        {
+            m_observed = true;
+        }
 
         /// <summary>
         /// Gets whether this exception has been marked as "observed."

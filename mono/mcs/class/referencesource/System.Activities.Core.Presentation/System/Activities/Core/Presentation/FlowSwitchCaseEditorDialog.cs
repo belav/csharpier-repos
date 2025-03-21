@@ -6,33 +6,44 @@ namespace System.Activities.Core.Presentation
 {
     using System;
     using System.Activities;
+    using System.Activities.Core.Presentation.Themes;
     using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.Model;
+    using System.Activities.Presentation.View;
     using System.Activities.Statements;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.Runtime;
     using System.Windows;
     using System.Windows.Controls;
     using System.Windows.Data;
     using System.Windows.Input;
     using System.Windows.Media;
     using System.Windows.Threading;
-    using System.Runtime;
-    using System.Collections.Generic;
-    using System.Activities.Core.Presentation.Themes;
-    using System.Activities.Presentation.View;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Collections.ObjectModel;
-    using System.Globalization;
 
     sealed class FlowSwitchCaseEditorDialog : WorkflowElementDialog
     {
-        static DependencyProperty caseProperty = DependencyProperty.Register("Case", typeof(object), typeof(FlowSwitchCaseEditorDialog), new UIPropertyMetadata(null));
+        static DependencyProperty caseProperty = DependencyProperty.Register(
+            "Case",
+            typeof(object),
+            typeof(FlowSwitchCaseEditorDialog),
+            new UIPropertyMetadata(null)
+        );
         Type genericType;
         CaseKeyBox caseKeyBox;
 
-        public FlowSwitchCaseEditorDialog(ModelItem activity, EditingContext context, DependencyObject owner, string title, Type genericType)
+        public FlowSwitchCaseEditorDialog(
+            ModelItem activity,
+            EditingContext context,
+            DependencyObject owner,
+            string title,
+            Type genericType
+        )
         {
             this.WindowSizeToContent = SizeToContent.Manual;
             this.ModelItem = activity;
@@ -59,37 +70,42 @@ namespace System.Activities.Core.Presentation
             };
             caseKeyBox.ViewModel.DataTemplateName = CaseKeyBoxViewModel.BoxesTemplate;
             caseKeyBox.ViewModel.IsBoxOnly = true;
-            caseKeyBox.SetBinding(CaseKeyBox.ValueProperty, new Binding()
-            {
-                Source = this,
-                Path = new PropertyPath(FlowSwitchCaseEditorDialog.caseProperty),
-                Mode = BindingMode.TwoWay
-            });
+            caseKeyBox.SetBinding(
+                CaseKeyBox.ValueProperty,
+                new Binding()
+                {
+                    Source = this,
+                    Path = new PropertyPath(FlowSwitchCaseEditorDialog.caseProperty),
+                    Mode = BindingMode.TwoWay,
+                }
+            );
             caseKeyBox.CaseKeyValidationCallback = this.ValidateCaseKey;
             caseKeyBox.ValueCommitted += (sender, e) =>
-                {
-                    this.CloseDialog(true);
-                };
+            {
+                this.CloseDialog(true);
+            };
             caseKeyBox.EditCancelled += (sender, e) =>
-                {
-                    this.CloseDialog(false);
-                };
+            {
+                this.CloseDialog(false);
+            };
 
             this.Content = caseKeyBox;
 
             this.OnOk = () =>
-                {
-                    caseKeyBox.CommitChanges();
-                    return false; // ValueCommitted event handler will handle CloseDialog
-                };
+            {
+                caseKeyBox.CommitChanges();
+                return false; // ValueCommitted event handler will handle CloseDialog
+            };
         }
 
         bool ValidateCaseKey(object obj, out string reason)
         {
-            return GenericFlowSwitchHelper.ValidateCaseKey(obj,
+            return GenericFlowSwitchHelper.ValidateCaseKey(
+                obj,
                 this.ModelItem.Properties["Cases"],
                 this.genericType,
-                out reason);
+                out reason
+            );
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -116,10 +132,7 @@ namespace System.Activities.Core.Presentation
 
         public object Case
         {
-            get
-            {
-                return GetValue(caseProperty);
-            }
+            get { return GetValue(caseProperty); }
         }
     }
 }

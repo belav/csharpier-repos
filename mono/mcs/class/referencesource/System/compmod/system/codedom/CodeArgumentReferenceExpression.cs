@@ -1,54 +1,47 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeArgumentReferenceExpression.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeArgumentReferenceExpression : CodeExpression {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeArgumentReferenceExpression : CodeExpression
+    {
         private string parameterName;
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeArgumentReferenceExpression() {
-        }
+        public CodeArgumentReferenceExpression() { }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public CodeArgumentReferenceExpression(string parameterName) {
+        public CodeArgumentReferenceExpression(string parameterName)
+        {
             this.parameterName = parameterName;
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string ParameterName {
-            get {
-                return (parameterName == null) ? string.Empty : parameterName;
-            }
-            set {
-                parameterName = value;
-            }
+        public string ParameterName
+        {
+            get { return (parameterName == null) ? string.Empty : parameterName; }
+            set { parameterName = value; }
         }
     }
 }

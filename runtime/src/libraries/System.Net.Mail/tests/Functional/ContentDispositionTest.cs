@@ -14,7 +14,9 @@ namespace System.Net.Mime.Tests
         private const string ValidDateTimeLocal = "Sun, 17 May 2009 15:34:07 -0800";
         private const string ValidDateTimeNotLocal = "Sun, 17 May 2009 15:34:07 -0200";
         private const string InvalidDate = "Sun, 32 Say 2009 25:15:15 7m-gte";
-        private static readonly TimeSpan s_localTimeOffset = TimeZoneInfo.Local.GetUtcOffset(new DateTime(2009, 5, 17, 15, 34, 07, DateTimeKind.Local));
+        private static readonly TimeSpan s_localTimeOffset = TimeZoneInfo.Local.GetUtcOffset(
+            new DateTime(2009, 5, 17, 15, 34, 07, DateTimeKind.Local)
+        );
 
         [Fact]
         public static void DefaultCtor_ExpectedDefaultPropertyValues()
@@ -34,9 +36,15 @@ namespace System.Net.Mime.Tests
         [Fact]
         public void ConstructorWithOtherPropertyValues_ShouldSetAppropriately()
         {
-            var cd = new ContentDisposition("attachment;creation-date=\"" + ValidDateTimeLocal + "\";read-date=\"" +
-                ValidDateTimeLocal + "\";modification-date=\"" +
-                ValidDateTimeLocal + "\";filename=\"=?utf-8?B?dGVzdC50eHTnkIY=?=\";size=200");
+            var cd = new ContentDisposition(
+                "attachment;creation-date=\""
+                    + ValidDateTimeLocal
+                    + "\";read-date=\""
+                    + ValidDateTimeLocal
+                    + "\";modification-date=\""
+                    + ValidDateTimeLocal
+                    + "\";filename=\"=?utf-8?B?dGVzdC50eHTnkIY=?=\";size=200"
+            );
 
             Assert.Equal("attachment", cd.DispositionType);
             Assert.False(cd.Inline);
@@ -58,9 +66,15 @@ namespace System.Net.Mime.Tests
         [Theory]
         [InlineData(typeof(ArgumentNullException), null)]
         [InlineData(typeof(ArgumentException), "")]
-        public static void DispositionType_SetValue_InvalidThrows(Type exceptionType, string contentDisposition)
+        public static void DispositionType_SetValue_InvalidThrows(
+            Type exceptionType,
+            string contentDisposition
+        )
         {
-            Assert.Throws(exceptionType, () => new ContentDisposition().DispositionType = contentDisposition);
+            Assert.Throws(
+                exceptionType,
+                () => new ContentDisposition().DispositionType = contentDisposition
+            );
         }
 
         [Fact]
@@ -183,12 +197,19 @@ namespace System.Net.Mime.Tests
         [Fact]
         public static void ConstructorWithDateTimesBefore10AM_DateTimesAreValidForReUse()
         {
-            ContentDisposition contentDisposition =
-                new ContentDisposition("attachment; filename=\"image.jpg\"; size=461725;\tcreation-date=\"Sun, 15 Apr 2012 09:55:44 GMT\";\tmodification-date=\"Sun, 15 Apr 2012 06:30:20 GMT\"");
+            ContentDisposition contentDisposition = new ContentDisposition(
+                "attachment; filename=\"image.jpg\"; size=461725;\tcreation-date=\"Sun, 15 Apr 2012 09:55:44 GMT\";\tmodification-date=\"Sun, 15 Apr 2012 06:30:20 GMT\""
+            );
 
             var contentDisposition2 = new ContentDisposition();
-            contentDisposition2.Parameters.Add("creation-date", contentDisposition.Parameters["creation-date"]);
-            contentDisposition2.Parameters.Add("modification-date", contentDisposition.Parameters["modification-date"]);
+            contentDisposition2.Parameters.Add(
+                "creation-date",
+                contentDisposition.Parameters["creation-date"]
+            );
+            contentDisposition2.Parameters.Add(
+                "modification-date",
+                contentDisposition.Parameters["modification-date"]
+            );
 
             Assert.Equal(contentDisposition.CreationDate, contentDisposition2.CreationDate);
             Assert.Equal(contentDisposition.ModificationDate, contentDisposition2.ModificationDate);
@@ -197,19 +218,29 @@ namespace System.Net.Mime.Tests
         [Fact]
         public static void UseDifferentCultureAndConstructorWithDateTimesBefore10AM_DateTimesAreValidForReUse()
         {
-            ContentDisposition contentDisposition =
-                new ContentDisposition("attachment; filename=\"image.jpg\"; size=461725;\tcreation-date=\"Sun, 15 Apr 2012 09:55:44 GMT\";\tmodification-date=\"Sun, 15 Apr 2012 06:30:20 GMT\"");
+            ContentDisposition contentDisposition = new ContentDisposition(
+                "attachment; filename=\"image.jpg\"; size=461725;\tcreation-date=\"Sun, 15 Apr 2012 09:55:44 GMT\";\tmodification-date=\"Sun, 15 Apr 2012 06:30:20 GMT\""
+            );
 
             CultureInfo origCulture = CultureInfo.CurrentCulture;
             CultureInfo.CurrentCulture = new CultureInfo("zh-cn");
             try
             {
                 ContentDisposition contentDisposition2 = new ContentDisposition();
-                contentDisposition2.Parameters.Add("creation-date", contentDisposition.Parameters["creation-date"]);
-                contentDisposition2.Parameters.Add("modification-date", contentDisposition.Parameters["modification-date"]);
+                contentDisposition2.Parameters.Add(
+                    "creation-date",
+                    contentDisposition.Parameters["creation-date"]
+                );
+                contentDisposition2.Parameters.Add(
+                    "modification-date",
+                    contentDisposition.Parameters["modification-date"]
+                );
 
                 Assert.Equal(contentDisposition.CreationDate, contentDisposition2.CreationDate);
-                Assert.Equal(contentDisposition.ModificationDate, contentDisposition2.ModificationDate);
+                Assert.Equal(
+                    contentDisposition.ModificationDate,
+                    contentDisposition2.ModificationDate
+                );
             }
             finally
             {
@@ -226,7 +257,10 @@ namespace System.Net.Mime.Tests
             var cd = new ContentDisposition(disposition);
 
             Assert.Equal(ValidDateGmtOffset, cd.Parameters["creation-date"]);
-            Assert.Equal(new DateTime(2009, 5, 17, 15, 34, 07, DateTimeKind.Local) + s_localTimeOffset, cd.CreationDate);
+            Assert.Equal(
+                new DateTime(2009, 5, 17, 15, 34, 07, DateTimeKind.Local) + s_localTimeOffset,
+                cd.CreationDate
+            );
 
             Assert.Equal("inline", cd.DispositionType);
             Assert.Equal(dispositionValue, cd.ToString());
@@ -251,7 +285,10 @@ namespace System.Net.Mime.Tests
             cd.Parameters["creation-date"] = ValidDateGmt;
 
             Assert.Equal(DateTimeKind.Local, cd.CreationDate.Kind);
-            Assert.Equal(new DateTime(2009, 5, 17, 15, 34, 07, DateTimeKind.Local) + s_localTimeOffset, cd.CreationDate);
+            Assert.Equal(
+                new DateTime(2009, 5, 17, 15, 34, 07, DateTimeKind.Local) + s_localTimeOffset,
+                cd.CreationDate
+            );
         }
 
         [Fact]
@@ -315,11 +352,16 @@ namespace System.Net.Mime.Tests
         [Fact]
         public void SetDispositionViaConstructor_ShouldSetCorrectly_AndRespectCustomValues()
         {
-            var cd = new ContentDisposition("inline; creation-date=\"" + ValidDateGmtOffset + "\"; X-Test=\"value\"");
+            var cd = new ContentDisposition(
+                "inline; creation-date=\"" + ValidDateGmtOffset + "\"; X-Test=\"value\""
+            );
 
             Assert.Equal("inline", cd.DispositionType);
             Assert.Equal(ValidDateGmtOffset, cd.Parameters["creation-date"]);
-            Assert.Equal(new DateTime(2009, 5, 17, 15, 34, 07, DateTimeKind.Local) + s_localTimeOffset, cd.CreationDate);
+            Assert.Equal(
+                new DateTime(2009, 5, 17, 15, 34, 07, DateTimeKind.Local) + s_localTimeOffset,
+                cd.CreationDate
+            );
         }
 
         [Fact]
@@ -337,7 +379,10 @@ namespace System.Net.Mime.Tests
 
                 Assert.Equal("Wed, 08 Jun 2011 15:34:07 -0000", cd.Parameters["creation-date"]);
                 Assert.Equal(date, cd.CreationDate);
-                Assert.Equal("inline; creation-date=\"Wed, 08 Jun 2011 15:34:07 -0000\"", cd.ToString());
+                Assert.Equal(
+                    "inline; creation-date=\"Wed, 08 Jun 2011 15:34:07 -0000\"",
+                    cd.ToString()
+                );
             }
             finally
             {

@@ -4,9 +4,9 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 
@@ -16,7 +16,8 @@ public class DefaultObjectValidatorTests
 {
     private readonly MvcOptions _options = new MvcOptions();
 
-    private ModelMetadataProvider MetadataProvider { get; } = TestModelMetadataProvider.CreateDefaultProvider();
+    private ModelMetadataProvider MetadataProvider { get; } =
+        TestModelMetadataProvider.CreateDefaultProvider();
 
     [Fact]
     public void Validate_SimpleValueType_Valid_WithPrefix()
@@ -113,7 +114,10 @@ public class DefaultObjectValidatorTests
         var model = (object)"test";
 
         modelState.SetModelValue("parameter", "test", "test");
-        validationState.Add(model, new ValidationStateEntry() { Key = "parameter", SuppressValidation = true });
+        validationState.Add(
+            model,
+            new ValidationStateEntry() { Key = "parameter", SuppressValidation = true }
+        );
 
         // Act
         validator.Validate(actionContext, validationState, "parameter", model);
@@ -137,9 +141,12 @@ public class DefaultObjectValidatorTests
         var validator = CreateValidator();
         var model = "test";
         var validationState = new ValidationStateDictionary
+        {
             {
-                { model, new ValidationStateEntry { SuppressValidation = true } }
-            };
+                model,
+                new ValidationStateEntry { SuppressValidation = true }
+            },
+        };
 
         // Act
         validator.Validate(actionContext, validationState, "parameter", model);
@@ -242,7 +249,10 @@ public class DefaultObjectValidatorTests
         entry = modelState["Profession"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
         error = Assert.Single(entry.Errors);
-        Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+        Assert.Equal(
+            ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -258,17 +268,20 @@ public class DefaultObjectValidatorTests
         var model = new Person2()
         {
             Name = "Billy",
-            Address = new Address { Street = "GreaterThan5Characters" }
+            Address = new Address { Street = "GreaterThan5Characters" },
         };
 
         modelState.SetModelValue("person.Name", "Billy", "Billy");
-        modelState.SetModelValue("person.Address.Street", "GreaterThan5Characters", "GreaterThan5Characters");
+        modelState.SetModelValue(
+            "person.Address.Street",
+            "GreaterThan5Characters",
+            "GreaterThan5Characters"
+        );
         validationState.Add(model, new ValidationStateEntry() { Key = "person" });
-        validationState.Add(model.Address, new ValidationStateEntry()
-        {
-            Key = "person.Address",
-            SuppressValidation = true
-        });
+        validationState.Add(
+            model.Address,
+            new ValidationStateEntry() { Key = "person.Address", SuppressValidation = true }
+        );
 
         // Act
         validator.Validate(actionContext, validationState, "person", model);
@@ -314,8 +327,14 @@ public class DefaultObjectValidatorTests
 
         Assert.Equal(2, entry.Errors.Count);
         var errorMessages = entry.Errors.Select(e => e.ErrorMessage);
-        Assert.Contains(ValidationAttributeUtil.GetStringLengthErrorMessage(null, 5, "Street"), errorMessages);
-        Assert.Contains(ValidationAttributeUtil.GetRegExErrorMessage("hehehe", "Street"), errorMessages);
+        Assert.Contains(
+            ValidationAttributeUtil.GetStringLengthErrorMessage(null, 5, "Street"),
+            errorMessages
+        );
+        Assert.Contains(
+            ValidationAttributeUtil.GetRegExErrorMessage("hehehe", "Street"),
+            errorMessages
+        );
     }
 
     [Fact]
@@ -346,8 +365,14 @@ public class DefaultObjectValidatorTests
 
         Assert.Equal(2, entry.Errors.Count);
         var errorMessages = entry.Errors.Select(e => e.ErrorMessage);
-        Assert.Contains(ValidationAttributeUtil.GetStringLengthErrorMessage(null, 5, "Street"), errorMessages);
-        Assert.Contains(ValidationAttributeUtil.GetRegExErrorMessage("hehehe", "Street"), errorMessages);
+        Assert.Contains(
+            ValidationAttributeUtil.GetStringLengthErrorMessage(null, 5, "Street"),
+            errorMessages
+        );
+        Assert.Contains(
+            ValidationAttributeUtil.GetRegExErrorMessage("hehehe", "Street"),
+            errorMessages
+        );
     }
 
     [Fact]
@@ -379,7 +404,10 @@ public class DefaultObjectValidatorTests
         entry = modelState["Profession"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
         var error = Assert.Single(entry.Errors);
-        Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+        Assert.Equal(
+            ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+            error.ErrorMessage
+        );
 
         entry = modelState["Friend.Name"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
@@ -389,7 +417,10 @@ public class DefaultObjectValidatorTests
         entry = modelState["Friend.Profession"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
         error = Assert.Single(entry.Errors);
-        Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+        Assert.Equal(
+            ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -400,9 +431,9 @@ public class DefaultObjectValidatorTests
         var modelState = actionContext.ModelState;
         var model = new InvalidProperties();
         var validationState = new ValidationStateDictionary
-            {
-                { model, new ValidationStateEntry() },
-            };
+        {
+            { model, new ValidationStateEntry() },
+        };
 
         var validator = CreateValidator();
 
@@ -423,7 +454,8 @@ public class DefaultObjectValidatorTests
                 Assert.Equal("Address.City", state.Key);
                 var error = Assert.Single(state.Value.Errors);
                 Assert.Equal("User object lacks some data.", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -434,14 +466,22 @@ public class DefaultObjectValidatorTests
         var modelState = actionContext.ModelState;
         var model = new InvalidProperties();
         var validationState = new ValidationStateDictionary
+        {
             {
-                { model, new ValidationStateEntry { Key = "invalidProperties" } },
-            };
+                model,
+                new ValidationStateEntry { Key = "invalidProperties" }
+            },
+        };
 
         var validator = CreateValidator();
 
         // Act
-        validator.Validate(actionContext, validationState, prefix: "invalidProperties", model: model);
+        validator.Validate(
+            actionContext,
+            validationState,
+            prefix: "invalidProperties",
+            model: model
+        );
 
         // Assert
         Assert.Collection(
@@ -457,7 +497,8 @@ public class DefaultObjectValidatorTests
                 Assert.Equal("invalidProperties.Address.City", state.Key);
                 var error = Assert.Single(state.Value.Errors);
                 Assert.Equal("User object lacks some data.", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     // IValidatableObject is significant because the validators are on the object
@@ -484,7 +525,13 @@ public class DefaultObjectValidatorTests
 
         // Assert
         Assert.False(modelState.IsValid);
-        AssertKeysEqual(modelState, "parameter", "parameter.Property1", "parameter.Property2", "parameter.Property3");
+        AssertKeysEqual(
+            modelState,
+            "parameter",
+            "parameter.Property1",
+            "parameter.Property2",
+            "parameter.Property3"
+        );
 
         var entry = modelState["parameter"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
@@ -518,10 +565,8 @@ public class DefaultObjectValidatorTests
 
         var validator = CreateValidator();
 
-        var model = (object)new ValidatableModelContainer
-        {
-            ValidatableModelProperty = new ValidatableModel(),
-        };
+        var model = (object)
+            new ValidatableModelContainer { ValidatableModelProperty = new ValidatableModel() };
 
         modelState.SetModelValue("parameter", "model", "model");
         validationState.Add(model, new ValidationStateEntry() { Key = "parameter" });
@@ -546,7 +591,8 @@ public class DefaultObjectValidatorTests
                 var error = Assert.Single(entry.Value.Errors);
                 Assert.Equal(
                     "Error1 about 'ValidatableModelProperty' (display: 'Never valid').",
-                    error.ErrorMessage);
+                    error.ErrorMessage
+                );
             },
             entry =>
             {
@@ -568,7 +614,8 @@ public class DefaultObjectValidatorTests
                 Assert.Equal(ModelValidationState.Invalid, entry.Value.ValidationState);
                 var error = Assert.Single(entry.Value.Errors);
                 Assert.Equal("Error3", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     [ConditionalFact]
@@ -594,12 +641,14 @@ public class DefaultObjectValidatorTests
         var model = new Mock<IValidatableObject>();
         model
             .Setup(x => x.Validate(It.IsAny<ValidationContext>()))
-            .Callback((ValidationContext context) =>
-            {
-                var receivedService = context.GetService<IExampleService>();
-                Assert.Equal(service.Object, receivedService);
-                receivedService.DoSomething();
-            })
+            .Callback(
+                (ValidationContext context) =>
+                {
+                    var receivedService = context.GetService<IExampleService>();
+                    Assert.Equal(service.Object, receivedService);
+                    receivedService.DoSomething();
+                }
+            )
             .Returns(new List<ValidationResult>());
 
         // Act
@@ -670,7 +719,10 @@ public class DefaultObjectValidatorTests
         entry = modelState["parameter.Profession"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
         var error = Assert.Single(entry.Errors);
-        Assert.Equal(error.ErrorMessage, ValidationAttributeUtil.GetRequiredErrorMessage("Profession"));
+        Assert.Equal(
+            error.ErrorMessage,
+            ValidationAttributeUtil.GetRequiredErrorMessage("Profession")
+        );
     }
 
     [Fact]
@@ -706,7 +758,10 @@ public class DefaultObjectValidatorTests
         entry = modelState["parameter.Profession"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
         var error = Assert.Single(entry.Errors);
-        Assert.Equal(error.ErrorMessage, ValidationAttributeUtil.GetRequiredErrorMessage("Profession"));
+        Assert.Equal(
+            error.ErrorMessage,
+            ValidationAttributeUtil.GetRequiredErrorMessage("Profession")
+        );
     }
 
     [Fact]
@@ -719,18 +774,14 @@ public class DefaultObjectValidatorTests
 
         var validator = CreateValidator(typeof(string));
 
-        var model = new User()
-        {
-            Password = "password-val",
-            ConfirmPassword = "not-password-val"
-        };
+        var model = new User() { Password = "password-val", ConfirmPassword = "not-password-val" };
 
         modelState.MaxAllowedErrors = 2;
         modelState.AddModelError("key1", "error1");
         modelState.SetModelValue("user.Password", "password-val", "password-val");
         modelState.SetModelValue("user.ConfirmPassword", "not-password-val", "not-password-val");
 
-        validationState.Add(model, new ValidationStateEntry() { Key = "user", });
+        validationState.Add(model, new ValidationStateEntry() { Key = "user" });
 
         // Act
         validator.Validate(actionContext, validationState, "user", model);
@@ -808,7 +859,10 @@ public class DefaultObjectValidatorTests
         entry = modelState["[0].Profession"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
         error = Assert.Single(entry.Errors);
-        Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+        Assert.Equal(
+            ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+            error.ErrorMessage
+        );
 
         entry = modelState["[1].Name"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
@@ -818,7 +872,10 @@ public class DefaultObjectValidatorTests
         entry = modelState["[1].Profession"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
         error = Assert.Single(entry.Errors);
-        Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+        Assert.Equal(
+            ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+            error.ErrorMessage
+        );
     }
 
     [Fact]
@@ -851,7 +908,10 @@ public class DefaultObjectValidatorTests
         entry = modelState["[0].Profession"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
         error = Assert.Single(entry.Errors);
-        Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+        Assert.Equal(
+            ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+            error.ErrorMessage
+        );
 
         entry = modelState["[1].Name"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
@@ -861,7 +921,10 @@ public class DefaultObjectValidatorTests
         entry = modelState["[1].Profession"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
         error = Assert.Single(entry.Errors);
-        Assert.Equal(ValidationAttributeUtil.GetRequiredErrorMessage("Profession"), error.ErrorMessage);
+        Assert.Equal(
+            ValidationAttributeUtil.GetRequiredErrorMessage("Profession"),
+            error.ErrorMessage
+        );
     }
 
     public static TheoryData<object, Type> ValidCollectionData
@@ -869,30 +932,36 @@ public class DefaultObjectValidatorTests
         get
         {
             return new TheoryData<object, Type>()
+            {
+                { new int[] { 1, 2, 3 }, typeof(int[]) },
+                { new string[] { "Foo", "Bar", "Baz" }, typeof(string[]) },
                 {
-                    { new int[] { 1, 2, 3 }, typeof(int[]) },
-                    { new string[] { "Foo", "Bar", "Baz" }, typeof(string[]) },
-                    { new List<string> { "Foo", "Bar", "Baz" }, typeof(IList<string>)},
-                    { new HashSet<string> { "Foo", "Bar", "Baz" }, typeof(string[]) },
+                    new List<string> { "Foo", "Bar", "Baz" },
+                    typeof(IList<string>)
+                },
+                {
+                    new HashSet<string> { "Foo", "Bar", "Baz" },
+                    typeof(string[])
+                },
+                {
+                    new List<DateTime>
                     {
-                        new List<DateTime>
-                        {
-                            new DateTime(2014, 1, 1),
-                            new DateTime(2014, 2, 1),
-                            new DateTime(2014, 3, 1),
-                        },
-                        typeof(ICollection<DateTime>)
+                        new DateTime(2014, 1, 1),
+                        new DateTime(2014, 2, 1),
+                        new DateTime(2014, 3, 1),
                     },
+                    typeof(ICollection<DateTime>)
+                },
+                {
+                    new HashSet<Uri>
                     {
-                        new HashSet<Uri>
-                        {
-                            new Uri("http://example.com/1"),
-                            new Uri("http://example.com/2"),
-                            new Uri("http://example.com/3"),
-                        },
-                        typeof(HashSet<Uri>)
+                        new Uri("http://example.com/1"),
+                        new Uri("http://example.com/2"),
+                        new Uri("http://example.com/3"),
                     },
-                };
+                    typeof(HashSet<Uri>)
+                },
+            };
         }
     }
 
@@ -910,13 +979,16 @@ public class DefaultObjectValidatorTests
         modelState.SetModelValue("items[0]", "value1", "value1");
         modelState.SetModelValue("items[1]", "value2", "value2");
         modelState.SetModelValue("items[2]", "value3", "value3");
-        validationState.Add(model, new ValidationStateEntry()
-        {
-            Key = "items",
+        validationState.Add(
+            model,
+            new ValidationStateEntry()
+            {
+                Key = "items",
 
-            // Force the validator to treat it as the specified type.
-            Metadata = MetadataProvider.GetMetadataForType(type),
-        });
+                // Force the validator to treat it as the specified type.
+                Metadata = MetadataProvider.GetMetadataForType(type),
+            }
+        );
 
         // Act
         validator.Validate(actionContext, validationState, "items", model);
@@ -946,9 +1018,9 @@ public class DefaultObjectValidatorTests
         var modelState = actionContext.ModelState;
         var model = new InvalidItemsContainer();
         var validationState = new ValidationStateDictionary
-            {
-                { model, new ValidationStateEntry() },
-            };
+        {
+            { model, new ValidationStateEntry() },
+        };
 
         var validator = CreateValidator();
 
@@ -969,7 +1041,8 @@ public class DefaultObjectValidatorTests
                 Assert.Equal("Items[2]", state.Key);
                 var error = Assert.Single(state.Value.Errors);
                 Assert.Equal("Collection contains duplicate value 'Joe'.", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -983,10 +1056,10 @@ public class DefaultObjectValidatorTests
         var validator = CreateValidator();
 
         var model = new Dictionary<string, string>()
-            {
-                { "FooKey", "FooValue" },
-                { "BarKey", "BarValue" }
-            };
+        {
+            { "FooKey", "FooValue" },
+            { "BarKey", "BarValue" },
+        };
 
         modelState.SetModelValue("items[0].Key", "key0", "key0");
         modelState.SetModelValue("items[0].Value", "value0", "value0");
@@ -999,7 +1072,13 @@ public class DefaultObjectValidatorTests
 
         // Assert
         Assert.True(modelState.IsValid);
-        AssertKeysEqual(modelState, "items[0].Key", "items[0].Value", "items[1].Key", "items[1].Value");
+        AssertKeysEqual(
+            modelState,
+            "items[0].Key",
+            "items[0].Value",
+            "items[1].Key",
+            "items[1].Value"
+        );
 
         var entry = modelState["items[0].Key"];
         Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
@@ -1029,7 +1108,8 @@ public class DefaultObjectValidatorTests
 
         var validator = CreateValidator();
 
-        var model = (object)new Dictionary<string, Person> { { "Joe", new Person() }, { "Mark", new Person() } };
+        var model = (object)
+            new Dictionary<string, Person> { { "Joe", new Person() }, { "Mark", new Person() } };
 
         modelState.SetModelValue("[0].Key", "Joe", "Joe");
         modelState.SetModelValue("[1].Key", "Mark", "Mark");
@@ -1047,7 +1127,8 @@ public class DefaultObjectValidatorTests
             "[0].Value.Profession",
             "[1].Key",
             "[1].Value.Name",
-            "[1].Value.Profession");
+            "[1].Value.Profession"
+        );
 
         var entry = modelState["[0].Key"];
         Assert.Equal(ModelValidationState.Valid, entry.ValidationState);
@@ -1065,7 +1146,10 @@ public class DefaultObjectValidatorTests
         entry = modelState["[0].Value.Profession"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
         error = Assert.Single(entry.Errors);
-        Assert.Equal(error.ErrorMessage, ValidationAttributeUtil.GetRequiredErrorMessage("Profession"));
+        Assert.Equal(
+            error.ErrorMessage,
+            ValidationAttributeUtil.GetRequiredErrorMessage("Profession")
+        );
 
         entry = modelState["[1].Value.Name"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
@@ -1075,7 +1159,10 @@ public class DefaultObjectValidatorTests
         entry = modelState["[1].Value.Profession"];
         Assert.Equal(ModelValidationState.Invalid, entry.ValidationState);
         error = Assert.Single(entry.Errors);
-        Assert.Equal(error.ErrorMessage, ValidationAttributeUtil.GetRequiredErrorMessage("Profession"));
+        Assert.Equal(
+            error.ErrorMessage,
+            ValidationAttributeUtil.GetRequiredErrorMessage("Profession")
+        );
     }
 
     [Fact]
@@ -1092,11 +1179,10 @@ public class DefaultObjectValidatorTests
         var model = new ThrowingProperty();
 
         // Act & Assert
-        Assert.Throws<InvalidTimeZoneException>(
-            () =>
-            {
-                validator.Validate(actionContext, validationState, string.Empty, model);
-            });
+        Assert.Throws<InvalidTimeZoneException>(() =>
+        {
+            validator.Validate(actionContext, validationState, string.Empty, model);
+        });
     }
 
     // We use the reference equality comparer for breaking cycles
@@ -1112,8 +1198,8 @@ public class DefaultObjectValidatorTests
 
         var model = new TypeThatOverridesEquals[]
         {
-                new TypeThatOverridesEquals { Funny = "hehe" },
-                new TypeThatOverridesEquals { Funny = "hehe" }
+            new TypeThatOverridesEquals { Funny = "hehe" },
+            new TypeThatOverridesEquals { Funny = "hehe" },
         };
 
         // Act & Assert (does not throw)
@@ -1130,16 +1216,12 @@ public class DefaultObjectValidatorTests
 
         var validator = CreateValidator(typeof(User));
 
-        var model = new User()
-        {
-            Password = "password-val",
-            ConfirmPassword = "not-password-val"
-        };
+        var model = new User() { Password = "password-val", ConfirmPassword = "not-password-val" };
 
         // Note that user.ConfirmPassword has no entry in modelstate - we should not
         // create one just to mark it as skipped.
         modelState.SetModelValue("user.Password", "password-val", "password-val");
-        validationState.Add(model, new ValidationStateEntry() { Key = "user", });
+        validationState.Add(model, new ValidationStateEntry() { Key = "user" });
 
         // Act
         validator.Validate(actionContext, validationState, "user", model);
@@ -1163,13 +1245,10 @@ public class DefaultObjectValidatorTests
 
         var validator = CreateValidator(typeof(List<ValidatedModel>));
 
-        var model = new List<ValidatedModel>()
-            {
-                new ValidatedModel { Value = "15" },
-            };
+        var model = new List<ValidatedModel>() { new ValidatedModel { Value = "15" } };
 
         modelState.SetModelValue("userIds[0]", "15", "15");
-        validationState.Add(model, new ValidationStateEntry() { Key = "userIds", });
+        validationState.Add(model, new ValidationStateEntry() { Key = "userIds" });
 
         // Act
         validator.Validate(actionContext, validationState, "userIds", model);
@@ -1202,9 +1281,12 @@ public class DefaultObjectValidatorTests
         var modelState = actionContext.ModelState;
         modelState.SetModelValue("parameter", rawValue: null, attemptedValue: null);
         var validationState = new ValidationStateDictionary
+        {
             {
-                { model, new ValidationStateEntry() { Key = "parameter" } }
-            };
+                model,
+                new ValidationStateEntry() { Key = "parameter" }
+            },
+        };
 
         // Act
         validator.Validate(actionContext, validationState, "parameter", model);
@@ -1230,9 +1312,12 @@ public class DefaultObjectValidatorTests
         var validator = CreateValidator();
         var model = (object)23; // Box ASAP
         var validationState = new ValidationStateDictionary
+        {
             {
-                { model, new ValidationStateEntry { SuppressValidation = true } }
-            };
+                model,
+                new ValidationStateEntry { SuppressValidation = true }
+            },
+        };
 
         // Act
         validator.Validate(actionContext, validationState, prefix: string.Empty, model);
@@ -1255,7 +1340,8 @@ public class DefaultObjectValidatorTests
                 Assert.Equal(ModelValidationState.Invalid, kvp.Value.ValidationState);
                 var error = Assert.Single(kvp.Value.Errors);
                 Assert.Equal("1", error.ErrorMessage);
-            });
+            }
+        );
     }
 
     [Theory]
@@ -1264,19 +1350,22 @@ public class DefaultObjectValidatorTests
     public void Validate_Throws_IfValidationDepthExceedsMaxDepth(int maxDepth)
     {
         // Arrange
-        var expected = $"ValidationVisitor exceeded the maximum configured validation depth '{maxDepth}' when validating property '{nameof(DepthObject.Depth)}' on type '{typeof(DepthObject)}'. " +
-            "This may indicate a very deep or infinitely recursive object graph. Consider modifying 'MvcOptions.MaxValidationDepth' or suppressing validation on the model type.";
+        var expected =
+            $"ValidationVisitor exceeded the maximum configured validation depth '{maxDepth}' when validating property '{nameof(DepthObject.Depth)}' on type '{typeof(DepthObject)}'. "
+            + "This may indicate a very deep or infinitely recursive object graph. Consider modifying 'MvcOptions.MaxValidationDepth' or suppressing validation on the model type.";
         _options.MaxValidationDepth = maxDepth;
         var actionContext = new ActionContext();
         var validator = CreateValidator();
         var model = new DepthObject(maxDepth);
         var validationState = new ValidationStateDictionary
-            {
-                { model, new ValidationStateEntry() }
-            };
+        {
+            { model, new ValidationStateEntry() },
+        };
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => validator.Validate(actionContext, validationState, prefix: string.Empty, model));
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            validator.Validate(actionContext, validationState, prefix: string.Empty, model)
+        );
         Assert.Equal(expected, ex.Message);
         Assert.Equal("https://aka.ms/AA21ue1", ex.HelpLink);
     }
@@ -1291,9 +1380,9 @@ public class DefaultObjectValidatorTests
         var validator = CreateValidator();
         var model = new DepthObject(maxDepth - 1);
         var validationState = new ValidationStateDictionary
-            {
-                { model, new ValidationStateEntry() }
-            };
+        {
+            { model, new ValidationStateEntry() },
+        };
 
         // Act & Assert
         validator.Validate(actionContext, validationState, prefix: string.Empty, model);
@@ -1310,19 +1399,22 @@ public class DefaultObjectValidatorTests
         actionContext.ModelState.MaxAllowedErrors = 2;
         var validator = CreateValidator();
         var model = new List<ModelWithRequiredProperty>
-            {
-                new ModelWithRequiredProperty(), new ModelWithRequiredProperty(),
-                // After the first 2 items we will reach MaxAllowedErrors
-                // If we add items without popping after having reached max validation,
-                // with 4 more items (on top of the list) we would go over max depth of 4
-                new ModelWithRequiredProperty(), new ModelWithRequiredProperty(),
-                new ModelWithRequiredProperty(), new ModelWithRequiredProperty(),
-            };
+        {
+            new ModelWithRequiredProperty(),
+            new ModelWithRequiredProperty(),
+            // After the first 2 items we will reach MaxAllowedErrors
+            // If we add items without popping after having reached max validation,
+            // with 4 more items (on top of the list) we would go over max depth of 4
+            new ModelWithRequiredProperty(),
+            new ModelWithRequiredProperty(),
+            new ModelWithRequiredProperty(),
+            new ModelWithRequiredProperty(),
+        };
 
         var validationState = new ValidationStateDictionary
-            {
-                { model, new ValidationStateEntry() }
-            };
+        {
+            { model, new ValidationStateEntry() },
+        };
 
         // Act & Assert
         validator.Validate(actionContext, validationState, prefix: string.Empty, model);
@@ -1332,7 +1424,10 @@ public class DefaultObjectValidatorTests
     [Theory]
     [InlineData(false, ModelValidationState.Unvalidated)]
     [InlineData(true, ModelValidationState.Invalid)]
-    public void Validate_RespectsMvcOptionsConfiguration_WhenChildValidationFails(bool optionValue, ModelValidationState expectedParentValidationState)
+    public void Validate_RespectsMvcOptionsConfiguration_WhenChildValidationFails(
+        bool optionValue,
+        ModelValidationState expectedParentValidationState
+    )
     {
         // Arrange
         _options.ValidateComplexTypesIfChildValidationFails = optionValue;
@@ -1341,11 +1436,12 @@ public class DefaultObjectValidatorTests
         var validationState = new ValidationStateDictionary();
         var validator = CreateValidator();
 
-        var model = (object)new SelfValidatableModelContainer
-        {
-            IsParentValid = false,
-            ValidatableModelProperty = new ValidatableModel()
-        };
+        var model = (object)
+            new SelfValidatableModelContainer
+            {
+                IsParentValid = false,
+                ValidatableModelProperty = new ValidatableModel(),
+            };
 
         // Act
         validator.Validate(actionContext, validationState, prefix: string.Empty, model);
@@ -1363,9 +1459,9 @@ public class DefaultObjectValidatorTests
         var validator = CreateValidator();
         var model = new ModelWithoutValidation();
         var validationState = new ValidationStateDictionary
-            {
-                { model, new ValidationStateEntry() }
-            };
+        {
+            { model, new ValidationStateEntry() },
+        };
 
         actionContext.ModelState.SetModelValue("Property1", new ValueProviderResult("value1"));
         actionContext.ModelState.SetModelValue("Property2", new ValueProviderResult("value2"));
@@ -1392,9 +1488,9 @@ public class DefaultObjectValidatorTests
         var validator = CreateValidator();
         var model = new ModelWithoutValidation();
         var validationState = new ValidationStateDictionary
-            {
-                { model, new ValidationStateEntry() }
-            };
+        {
+            { model, new ValidationStateEntry() },
+        };
 
         var modelState = actionContext.ModelState;
         modelState.SetModelValue("Property1", new ValueProviderResult("value1"));
@@ -1422,9 +1518,9 @@ public class DefaultObjectValidatorTests
         var validator = CreateValidator();
         var model = new ModelWithoutValidation();
         var validationState = new ValidationStateDictionary
-            {
-                { model, new ValidationStateEntry() }
-            };
+        {
+            { model, new ValidationStateEntry() },
+        };
 
         var modelState = actionContext.ModelState;
         modelState.SetModelValue("Property1", new ValueProviderResult("value1"));
@@ -1466,21 +1562,30 @@ public class DefaultObjectValidatorTests
             excludeFilters.Add(new SuppressChildValidationMetadataProvider(excludedType));
         }
 
-        var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider(excludeFilters.ToArray());
-        var validatorProviders = TestModelValidatorProvider.CreateDefaultProvider().ValidatorProviders;
+        var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider(
+            excludeFilters.ToArray()
+        );
+        var validatorProviders = TestModelValidatorProvider
+            .CreateDefaultProvider()
+            .ValidatorProviders;
         return new DefaultObjectValidator(metadataProvider, validatorProviders, new MvcOptions());
     }
 
     private DefaultObjectValidator CreateValidator(params IMetadataDetailsProvider[] providers)
     {
         var metadataProvider = TestModelMetadataProvider.CreateDefaultProvider(providers);
-        var validatorProviders = TestModelValidatorProvider.CreateDefaultProvider().ValidatorProviders;
+        var validatorProviders = TestModelValidatorProvider
+            .CreateDefaultProvider()
+            .ValidatorProviders;
         return new DefaultObjectValidator(metadataProvider, validatorProviders, _options);
     }
 
     private static void AssertKeysEqual(ModelStateDictionary modelState, params string[] keys)
     {
-        Assert.Equal<string>(keys.OrderBy(k => k).ToArray(), modelState.Keys.OrderBy(k => k).ToArray());
+        Assert.Equal<string>(
+            keys.OrderBy(k => k).ToArray(),
+            modelState.Keys.OrderBy(k => k).ToArray()
+        );
     }
 
     private class ThrowingProperty
@@ -1488,10 +1593,7 @@ public class DefaultObjectValidatorTests
         [Required]
         public string WatchOut
         {
-            get
-            {
-                throw new InvalidTimeZoneException();
-            }
+            get { throw new InvalidTimeZoneException(); }
         }
     }
 
@@ -1544,7 +1646,8 @@ public class DefaultObjectValidatorTests
         {
             yield return new ValidationResult(
                 $"Error1 about '{validationContext.MemberName}' (display: '{validationContext.DisplayName}').",
-                new string[] { });
+                new string[] { }
+            );
             yield return new ValidationResult("Error2", new[] { "Property1" });
             yield return new ValidationResult("Error3", new[] { "Property2", "Property3" });
         }
@@ -1605,7 +1708,9 @@ public class DefaultObjectValidatorTests
         {
             if (Password == "password")
             {
-                yield return new ValidationResult("Password does not meet complexity requirements.");
+                yield return new ValidationResult(
+                    "Password does not meet complexity requirements."
+                );
             }
         }
     }
@@ -1621,29 +1726,38 @@ public class DefaultObjectValidatorTests
     // names are indexers. An example scenario is an attribute that confirms all entries in a list are unique.
     private class InvalidItemsAttribute : ValidationAttribute
     {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult IsValid(
+            object value,
+            ValidationContext validationContext
+        )
         {
             return new ValidationResult(
                 "Collection contains duplicate value 'Joe'.",
-                new[] { "[0]", "[2]" });
+                new[] { "[0]", "[2]" }
+            );
         }
     }
 
     private class InvalidItemsContainer
     {
         [InvalidItems]
-        public List<string> Items { get; set; } = new List<string> { "Joe", "Fred", "Joe", "Herman" };
+        public List<string> Items { get; set; } =
+            new List<string> { "Joe", "Fred", "Joe", "Herman" };
     }
 
     // Custom validation attribute that returns multiple entries in ValidationResult.MemberNames. An example
     // scenario is an attribute that confirms all properties in a complex type are non-empty.
     private class InvalidPropertiesAttribute : ValidationAttribute
     {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        protected override ValidationResult IsValid(
+            object value,
+            ValidationContext validationContext
+        )
         {
             return new ValidationResult(
                 "User object lacks some data.",
-                new[] { "FirstName", "Address.City" });
+                new[] { "FirstName", "Address.City" }
+            );
         }
     }
 

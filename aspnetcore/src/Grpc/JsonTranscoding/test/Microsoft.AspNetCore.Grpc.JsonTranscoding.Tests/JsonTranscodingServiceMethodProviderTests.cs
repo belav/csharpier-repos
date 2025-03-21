@@ -27,7 +27,10 @@ public class JsonTranscodingServiceMethodProviderTests
         // Assert
         var endpoint = FindGrpcEndpoint(endpoints, nameof(JsonTranscodingGreeterService.SayHello));
 
-        Assert.Equal("GET", endpoint.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single());
+        Assert.Equal(
+            "GET",
+            endpoint.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single()
+        );
         Assert.Equal("/v1/greeter/{name}", endpoint.RoutePattern.RawText);
         Assert.Equal(1, endpoint.RoutePattern.Parameters.Count);
         Assert.Equal("name", endpoint.RoutePattern.Parameters[0].Name);
@@ -43,7 +46,10 @@ public class JsonTranscodingServiceMethodProviderTests
         var endpoint = FindGrpcEndpoint(endpoints, nameof(JsonTranscodingGreeterService.Custom));
 
         Assert.Equal("/v1/greeter/{name}", endpoint.RoutePattern.RawText);
-        Assert.Equal("HEAD", endpoint.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single());
+        Assert.Equal(
+            "HEAD",
+            endpoint.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single()
+        );
     }
 
     [Fact]
@@ -52,19 +58,36 @@ public class JsonTranscodingServiceMethodProviderTests
         // Arrange & Act
         var endpoints = MapEndpoints<JsonTranscodingGreeterService>();
 
-        var matchedEndpoints = FindGrpcEndpoints(endpoints, nameof(JsonTranscodingGreeterService.AdditionalBindings));
+        var matchedEndpoints = FindGrpcEndpoints(
+            endpoints,
+            nameof(JsonTranscodingGreeterService.AdditionalBindings)
+        );
 
         // Assert
         Assert.Equal(2, matchedEndpoints.Count);
 
         var getMethodModel = matchedEndpoints[0];
-        Assert.Equal("GET", getMethodModel.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single());
-        Assert.Equal("/v1/additional_bindings/{name}", getMethodModel.Metadata.GetMetadata<GrpcJsonTranscodingMetadata>()?.HttpRule.Get);
+        Assert.Equal(
+            "GET",
+            getMethodModel.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single()
+        );
+        Assert.Equal(
+            "/v1/additional_bindings/{name}",
+            getMethodModel.Metadata.GetMetadata<GrpcJsonTranscodingMetadata>()?.HttpRule.Get
+        );
         Assert.Equal("/v1/additional_bindings/{name}", getMethodModel.RoutePattern.RawText);
 
         var additionalMethodModel = matchedEndpoints[1];
-        Assert.Equal("DELETE", additionalMethodModel.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single());
-        Assert.Equal("/v1/additional_bindings/{name}", additionalMethodModel.Metadata.GetMetadata<GrpcJsonTranscodingMetadata>()?.HttpRule.Delete);
+        Assert.Equal(
+            "DELETE",
+            additionalMethodModel.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single()
+        );
+        Assert.Equal(
+            "/v1/additional_bindings/{name}",
+            additionalMethodModel
+                .Metadata.GetMetadata<GrpcJsonTranscodingMetadata>()
+                ?.HttpRule.Delete
+        );
         Assert.Equal("/v1/additional_bindings/{name}", additionalMethodModel.RoutePattern.RawText);
     }
 
@@ -74,16 +97,32 @@ public class JsonTranscodingServiceMethodProviderTests
         // Arrange & Act
         var endpoints = MapEndpoints<JsonTranscodingColonRouteService>();
 
-        var startFrameImport = Assert.Single(FindGrpcEndpoints(endpoints, nameof(JsonTranscodingColonRouteService.StartFrameImport)));
-        var getFrameImport = Assert.Single(FindGrpcEndpoints(endpoints, nameof(JsonTranscodingColonRouteService.GetFrameImport)));
+        var startFrameImport = Assert.Single(
+            FindGrpcEndpoints(endpoints, nameof(JsonTranscodingColonRouteService.StartFrameImport))
+        );
+        var getFrameImport = Assert.Single(
+            FindGrpcEndpoints(endpoints, nameof(JsonTranscodingColonRouteService.GetFrameImport))
+        );
 
         // Assert
-        Assert.Equal("POST", startFrameImport.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single());
-        Assert.Equal("/v1/frames:startFrameImport", startFrameImport.Metadata.GetMetadata<GrpcJsonTranscodingMetadata>()?.HttpRule.Post);
+        Assert.Equal(
+            "POST",
+            startFrameImport.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single()
+        );
+        Assert.Equal(
+            "/v1/frames:startFrameImport",
+            startFrameImport.Metadata.GetMetadata<GrpcJsonTranscodingMetadata>()?.HttpRule.Post
+        );
         Assert.Equal("/v1/frames:startFrameImport", startFrameImport.RoutePattern.RawText);
 
-        Assert.Equal("POST", getFrameImport.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single());
-        Assert.Equal("/v1/frames:getFrameImport", getFrameImport.Metadata.GetMetadata<GrpcJsonTranscodingMetadata>()?.HttpRule.Post);
+        Assert.Equal(
+            "POST",
+            getFrameImport.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single()
+        );
+        Assert.Equal(
+            "/v1/frames:getFrameImport",
+            getFrameImport.Metadata.GetMetadata<GrpcJsonTranscodingMetadata>()?.HttpRule.Post
+        );
         Assert.Equal("/v1/frames:getFrameImport", getFrameImport.RoutePattern.RawText);
     }
 
@@ -94,7 +133,9 @@ public class JsonTranscodingServiceMethodProviderTests
         var endpoints = MapEndpoints<JsonTranscodingGreeterService>();
 
         // Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => FindGrpcEndpoint(endpoints, nameof(JsonTranscodingGreeterService.NoOption)));
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            FindGrpcEndpoint(endpoints, nameof(JsonTranscodingGreeterService.NoOption))
+        );
         Assert.Equal("Couldn't find gRPC endpoint for method NoOption.", ex.Message);
     }
 
@@ -106,12 +147,11 @@ public class JsonTranscodingServiceMethodProviderTests
         var testProvider = new TestLoggerProvider(testSink);
 
         // Act
-        var endpoints = MapEndpoints<JsonTranscodingGreeterService>(
-            configureLogging: c =>
-            {
-                c.AddProvider(testProvider);
-                c.SetMinimumLevel(LogLevel.Trace);
-            });
+        var endpoints = MapEndpoints<JsonTranscodingGreeterService>(configureLogging: c =>
+        {
+            c.AddProvider(testProvider);
+            c.SetMinimumLevel(LogLevel.Trace);
+        });
 
         // Assert
         var write = testSink.Writes.Single(w =>
@@ -129,7 +169,10 @@ public class JsonTranscodingServiceMethodProviderTests
             return true;
         });
 
-        Assert.Equal(@"Found HttpRule mapping. Method SayHello on transcoding.JsonTranscodingGreeter. HttpRule payload: { ""get"": ""/v1/greeter/{name}"" }", write.Message);
+        Assert.Equal(
+            @"Found HttpRule mapping. Method SayHello on transcoding.JsonTranscodingGreeter. HttpRule payload: { ""get"": ""/v1/greeter/{name}"" }",
+            write.Message
+        );
     }
 
     [Fact]
@@ -140,22 +183,40 @@ public class JsonTranscodingServiceMethodProviderTests
         var testProvider = new TestLoggerProvider(testSink);
 
         // Act
-        var endpoints = MapEndpoints<JsonTranscodingStreamingService>(
-            configureLogging: c =>
-            {
-                c.AddProvider(testProvider);
-                c.SetMinimumLevel(LogLevel.Trace);
-            });
+        var endpoints = MapEndpoints<JsonTranscodingStreamingService>(configureLogging: c =>
+        {
+            c.AddProvider(testProvider);
+            c.SetMinimumLevel(LogLevel.Trace);
+        });
 
         // Assert
-        Assert.Contains(testSink.Writes, c => c.Message == "Unable to bind GetClientStreaming on transcoding.JsonTranscodingStreaming to gRPC JSON transcoding. Client and bidirectional streaming methods are not supported.");
-        Assert.Contains(testSink.Writes, c => c.Message == "Unable to bind GetBidiStreaming on transcoding.JsonTranscodingStreaming to gRPC JSON transcoding. Client and bidirectional streaming methods are not supported.");
+        Assert.Contains(
+            testSink.Writes,
+            c =>
+                c.Message
+                == "Unable to bind GetClientStreaming on transcoding.JsonTranscodingStreaming to gRPC JSON transcoding. Client and bidirectional streaming methods are not supported."
+        );
+        Assert.Contains(
+            testSink.Writes,
+            c =>
+                c.Message
+                == "Unable to bind GetBidiStreaming on transcoding.JsonTranscodingStreaming to gRPC JSON transcoding. Client and bidirectional streaming methods are not supported."
+        );
 
-        var matchedEndpoints = FindGrpcEndpoints(endpoints, nameof(JsonTranscodingStreamingService.GetServerStreaming));
+        var matchedEndpoints = FindGrpcEndpoints(
+            endpoints,
+            nameof(JsonTranscodingStreamingService.GetServerStreaming)
+        );
         var endpoint = Assert.Single(matchedEndpoints);
 
-        Assert.Equal("GET", endpoint.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single());
-        Assert.Equal("/v1/server_greeter/{name}", endpoint.Metadata.GetMetadata<GrpcJsonTranscodingMetadata>()?.HttpRule.Get);
+        Assert.Equal(
+            "GET",
+            endpoint.Metadata.GetMetadata<IHttpMethodMetadata>()?.HttpMethods.Single()
+        );
+        Assert.Equal(
+            "/v1/server_greeter/{name}",
+            endpoint.Metadata.GetMetadata<GrpcJsonTranscodingMetadata>()?.HttpRule.Get
+        );
         Assert.Equal("/v1/server_greeter/{name}", endpoint.RoutePattern.RawText);
     }
 
@@ -163,75 +224,141 @@ public class JsonTranscodingServiceMethodProviderTests
     public void AddMethod_BadResponseBody_ThrowError()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(() => MapEndpoints<JsonTranscodingInvalidResponseBodyGreeterService>());
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            MapEndpoints<JsonTranscodingInvalidResponseBodyGreeterService>()
+        );
 
         // Assert
-        Assert.Equal("Error binding gRPC service 'JsonTranscodingInvalidResponseBodyGreeterService'.", ex.Message);
-        Assert.Equal("Error binding BadResponseBody on JsonTranscodingInvalidResponseBodyGreeterService to HTTP API.", ex.InnerException!.InnerException!.Message);
-        Assert.Equal("Couldn't find matching field for response body 'NoMatch' on HelloReply.", ex.InnerException!.InnerException!.InnerException!.Message);
+        Assert.Equal(
+            "Error binding gRPC service 'JsonTranscodingInvalidResponseBodyGreeterService'.",
+            ex.Message
+        );
+        Assert.Equal(
+            "Error binding BadResponseBody on JsonTranscodingInvalidResponseBodyGreeterService to HTTP API.",
+            ex.InnerException!.InnerException!.Message
+        );
+        Assert.Equal(
+            "Couldn't find matching field for response body 'NoMatch' on HelloReply.",
+            ex.InnerException!.InnerException!.InnerException!.Message
+        );
     }
 
     [Fact]
     public void AddMethod_BadResponseBody_Nested_ThrowError()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(() => MapEndpoints<JsonTranscodingInvalidNestedResponseBodyGreeterService>());
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            MapEndpoints<JsonTranscodingInvalidNestedResponseBodyGreeterService>()
+        );
 
         // Assert
-        Assert.Equal("Error binding gRPC service 'JsonTranscodingInvalidNestedResponseBodyGreeterService'.", ex.Message);
-        Assert.Equal("Error binding BadResponseBody on JsonTranscodingInvalidNestedResponseBodyGreeterService to HTTP API.", ex.InnerException!.InnerException!.Message);
-        Assert.Equal("The response body field 'sub.subfield' references a nested field. The response body field name must be on the top-level response message.", ex.InnerException!.InnerException!.InnerException!.Message);
+        Assert.Equal(
+            "Error binding gRPC service 'JsonTranscodingInvalidNestedResponseBodyGreeterService'.",
+            ex.Message
+        );
+        Assert.Equal(
+            "Error binding BadResponseBody on JsonTranscodingInvalidNestedResponseBodyGreeterService to HTTP API.",
+            ex.InnerException!.InnerException!.Message
+        );
+        Assert.Equal(
+            "The response body field 'sub.subfield' references a nested field. The response body field name must be on the top-level response message.",
+            ex.InnerException!.InnerException!.InnerException!.Message
+        );
     }
 
     [Fact]
     public void AddMethod_BadBody_ThrowError()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(() => MapEndpoints<JsonTranscodingInvalidBodyGreeterService>());
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            MapEndpoints<JsonTranscodingInvalidBodyGreeterService>()
+        );
 
         // Assert
-        Assert.Equal("Error binding gRPC service 'JsonTranscodingInvalidBodyGreeterService'.", ex.Message);
-        Assert.Equal("Error binding BadBody on JsonTranscodingInvalidBodyGreeterService to HTTP API.", ex.InnerException!.InnerException!.Message);
-        Assert.Equal("Couldn't find matching field for body 'NoMatch' on HelloRequest.", ex.InnerException!.InnerException!.InnerException!.Message);
+        Assert.Equal(
+            "Error binding gRPC service 'JsonTranscodingInvalidBodyGreeterService'.",
+            ex.Message
+        );
+        Assert.Equal(
+            "Error binding BadBody on JsonTranscodingInvalidBodyGreeterService to HTTP API.",
+            ex.InnerException!.InnerException!.Message
+        );
+        Assert.Equal(
+            "Couldn't find matching field for body 'NoMatch' on HelloRequest.",
+            ex.InnerException!.InnerException!.InnerException!.Message
+        );
     }
 
     [Fact]
     public void AddMethod_BadBody_Nested_ThrowError()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(() => MapEndpoints<JsonTranscodingInvalidNestedBodyGreeterService>());
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            MapEndpoints<JsonTranscodingInvalidNestedBodyGreeterService>()
+        );
 
         // Assert
-        Assert.Equal("Error binding gRPC service 'JsonTranscodingInvalidNestedBodyGreeterService'.", ex.Message);
-        Assert.Equal("Error binding BadBody on JsonTranscodingInvalidNestedBodyGreeterService to HTTP API.", ex.InnerException!.InnerException!.Message);
-        Assert.Equal("The body field 'sub.subfield' references a nested field. The body field name must be on the top-level request message.", ex.InnerException!.InnerException!.InnerException!.Message);
+        Assert.Equal(
+            "Error binding gRPC service 'JsonTranscodingInvalidNestedBodyGreeterService'.",
+            ex.Message
+        );
+        Assert.Equal(
+            "Error binding BadBody on JsonTranscodingInvalidNestedBodyGreeterService to HTTP API.",
+            ex.InnerException!.InnerException!.Message
+        );
+        Assert.Equal(
+            "The body field 'sub.subfield' references a nested field. The body field name must be on the top-level request message.",
+            ex.InnerException!.InnerException!.InnerException!.Message
+        );
     }
 
     [Fact]
     public void AddMethod_BadPattern_ThrowError()
     {
         // Arrange & Act
-        var ex = Assert.Throws<InvalidOperationException>(() => MapEndpoints<JsonTranscodingInvalidPatternGreeterService>());
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+            MapEndpoints<JsonTranscodingInvalidPatternGreeterService>()
+        );
 
         // Assert
-        Assert.Equal("Error binding gRPC service 'JsonTranscodingInvalidPatternGreeterService'.", ex.Message);
-        Assert.Equal("Error binding BadPattern on JsonTranscodingInvalidPatternGreeterService to HTTP API.", ex.InnerException!.InnerException!.Message);
-        Assert.Equal("Error parsing path template 'v1/greeter/{name}'.", ex.InnerException!.InnerException!.InnerException!.Message);
-        Assert.Equal("Path template must start with a '/'.", ex.InnerException!.InnerException!.InnerException!.InnerException!.Message);
+        Assert.Equal(
+            "Error binding gRPC service 'JsonTranscodingInvalidPatternGreeterService'.",
+            ex.Message
+        );
+        Assert.Equal(
+            "Error binding BadPattern on JsonTranscodingInvalidPatternGreeterService to HTTP API.",
+            ex.InnerException!.InnerException!.Message
+        );
+        Assert.Equal(
+            "Error parsing path template 'v1/greeter/{name}'.",
+            ex.InnerException!.InnerException!.InnerException!.Message
+        );
+        Assert.Equal(
+            "Path template must start with a '/'.",
+            ex.InnerException!.InnerException!.InnerException!.InnerException!.Message
+        );
     }
 
-    private static RouteEndpoint FindGrpcEndpoint(IReadOnlyList<Endpoint> endpoints, string methodName)
+    private static RouteEndpoint FindGrpcEndpoint(
+        IReadOnlyList<Endpoint> endpoints,
+        string methodName
+    )
     {
         var e = FindGrpcEndpoints(endpoints, methodName).SingleOrDefault();
         if (e == null)
         {
-            throw new InvalidOperationException($"Couldn't find gRPC endpoint for method {methodName}.");
+            throw new InvalidOperationException(
+                $"Couldn't find gRPC endpoint for method {methodName}."
+            );
         }
 
         return e;
     }
 
-    private static List<RouteEndpoint> FindGrpcEndpoints(IReadOnlyList<Endpoint> endpoints, string methodName)
+    private static List<RouteEndpoint> FindGrpcEndpoints(
+        IReadOnlyList<Endpoint> endpoints,
+        string methodName
+    )
     {
         var e = endpoints
             .Where(e => e.Metadata.GetMetadata<GrpcMethodMetadata>()?.Method.Name == methodName)
@@ -258,7 +385,9 @@ public class JsonTranscodingServiceMethodProviderTests
         }
     }
 
-    private IReadOnlyList<Endpoint> MapEndpoints<TService>(Action<ILoggingBuilder>? configureLogging = null)
+    private IReadOnlyList<Endpoint> MapEndpoints<TService>(
+        Action<ILoggingBuilder>? configureLogging = null
+    )
         where TService : class
     {
         var serviceCollection = new ServiceCollection();
@@ -270,7 +399,9 @@ public class JsonTranscodingServiceMethodProviderTests
         serviceCollection.RemoveAll(typeof(IServiceMethodProvider<>));
         builder.AddJsonTranscoding();
 
-        IEndpointRouteBuilder endpointRouteBuilder = new TestEndpointRouteBuilder(serviceCollection.BuildServiceProvider());
+        IEndpointRouteBuilder endpointRouteBuilder = new TestEndpointRouteBuilder(
+            serviceCollection.BuildServiceProvider()
+        );
 
         endpointRouteBuilder.MapGrpcService<TService>();
 

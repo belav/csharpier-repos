@@ -20,16 +20,31 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal class EntryPointsWalker : AbstractRegionControlFlowPass
     {
-        internal static IEnumerable<LabeledStatementSyntax> Analyze(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion, out bool? succeeded)
+        internal static IEnumerable<LabeledStatementSyntax> Analyze(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion,
+            out bool? succeeded
+        )
         {
-            var walker = new EntryPointsWalker(compilation, member, node, firstInRegion, lastInRegion);
+            var walker = new EntryPointsWalker(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion
+            );
             bool badRegion = false;
             try
             {
                 walker.Analyze(ref badRegion);
                 var result = walker._entryPoints;
                 succeeded = !badRegion;
-                return badRegion ? SpecializedCollections.EmptyEnumerable<LabeledStatementSyntax>() : result;
+                return badRegion
+                    ? SpecializedCollections.EmptyEnumerable<LabeledStatementSyntax>()
+                    : result;
             }
             finally
             {
@@ -37,7 +52,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        private readonly HashSet<LabeledStatementSyntax> _entryPoints = new HashSet<LabeledStatementSyntax>();
+        private readonly HashSet<LabeledStatementSyntax> _entryPoints =
+            new HashSet<LabeledStatementSyntax>();
 
         private void Analyze(ref bool badRegion)
         {
@@ -45,20 +61,33 @@ namespace Microsoft.CodeAnalysis.CSharp
             Scan(ref badRegion);
         }
 
-        private EntryPointsWalker(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion)
-            : base(compilation, member, node, firstInRegion, lastInRegion)
-        {
-        }
+        private EntryPointsWalker(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion
+        )
+            : base(compilation, member, node, firstInRegion, lastInRegion) { }
 
         protected override void Free()
         {
             base.Free();
         }
 
-        protected override void NoteBranch(PendingBranch pending, BoundNode gotoStmt, BoundStatement targetStmt)
+        protected override void NoteBranch(
+            PendingBranch pending,
+            BoundNode gotoStmt,
+            BoundStatement targetStmt
+        )
         {
             targetStmt.AssertIsLabeledStatement();
-            if (!gotoStmt.WasCompilerGenerated && !targetStmt.WasCompilerGenerated && RegionContains(targetStmt.Syntax.Span) && !RegionContains(gotoStmt.Syntax.Span))
+            if (
+                !gotoStmt.WasCompilerGenerated
+                && !targetStmt.WasCompilerGenerated
+                && RegionContains(targetStmt.Syntax.Span)
+                && !RegionContains(gotoStmt.Syntax.Span)
+            )
                 _entryPoints.Add((LabeledStatementSyntax)targetStmt.Syntax);
         }
     }

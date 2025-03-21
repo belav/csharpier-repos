@@ -21,5 +21,5 @@ public enum FileHandleType
     /// <summary>
     /// This API is unused and no longer supported.
     /// </summary>
-    Pipe
+    Pipe,
 }

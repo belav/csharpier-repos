@@ -77,7 +77,10 @@ namespace MonoTests.System.Configuration
             TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
             object o = null;
 
-            AssertExtensions.Throws<ArgumentException>(null, () => o = cv.ConvertFrom(null, null, "100.5"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => o = cv.ConvertFrom(null, null, "100.5")
+            );
             Assert.Null(o);
         }
 
@@ -87,7 +90,10 @@ namespace MonoTests.System.Configuration
             TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
             object o = null;
 
-            AssertExtensions.Throws<ArgumentException>(null, () => o = cv.ConvertFrom(null, null, 59));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => o = cv.ConvertFrom(null, null, 59)
+            );
             Assert.Null(o);
         }
 
@@ -112,7 +118,9 @@ namespace MonoTests.System.Configuration
         {
             TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
 
-            Assert.Throws<NullReferenceException>(() => cv.ConvertTo(null, null, null, typeof(string)));
+            Assert.Throws<NullReferenceException>(() =>
+                cv.ConvertTo(null, null, null, typeof(string))
+            );
         }
 
         [Fact]
@@ -120,7 +128,10 @@ namespace MonoTests.System.Configuration
         {
             TimeSpanSecondsConverter cv = new TimeSpanSecondsConverter();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => cv.ConvertTo(null, null, 59, typeof(string)));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => cv.ConvertTo(null, null, 59, typeof(string))
+            );
         }
 
         [Fact]

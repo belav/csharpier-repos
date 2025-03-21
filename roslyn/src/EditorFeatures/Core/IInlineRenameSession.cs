@@ -18,7 +18,7 @@ namespace Microsoft.CodeAnalysis.Editor
         public bool CanRename { get; }
 
         /// <summary>
-        /// Provides the reason that can be displayed to the user if the entity at the selected 
+        /// Provides the reason that can be displayed to the user if the entity at the selected
         /// location cannot be renamed.
         /// </summary>
         public string LocalizedErrorMessage { get; }

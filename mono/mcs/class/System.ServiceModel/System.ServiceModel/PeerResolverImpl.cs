@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,45 +27,52 @@
 //
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using System.ServiceModel.Security.Tokens;
 using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel.Security.Tokens;
 
 namespace System.ServiceModel
 {
-	// FIXME: implement. However, for now we don't have any prefered
-	// P2P API like Pnrp that Microsoft uses.
-	internal class PeerResolverImpl : PeerResolver
-	{
-		public PeerResolverImpl ()
-		{
-		}
+    // FIXME: implement. However, for now we don't have any prefered
+    // P2P API like Pnrp that Microsoft uses.
+    internal class PeerResolverImpl : PeerResolver
+    {
+        public PeerResolverImpl() { }
 
-		public override bool CanShareReferrals {
-			get { throw new NotImplementedException (); }
-		}
+        public override bool CanShareReferrals
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public override object Register (string meshId,
-			PeerNodeAddress nodeAddress, TimeSpan timeout)
-		{
-			throw new NotImplementedException ();
-		}
+        public override object Register(
+            string meshId,
+            PeerNodeAddress nodeAddress,
+            TimeSpan timeout
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public override ReadOnlyCollection<PeerNodeAddress> Resolve (
-			string meshId, int maxAddresses, TimeSpan timeout)
-		{
-			throw new NotImplementedException ();
-		}
+        public override ReadOnlyCollection<PeerNodeAddress> Resolve(
+            string meshId,
+            int maxAddresses,
+            TimeSpan timeout
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public override void Unregister (object registrationId,
-			TimeSpan timeout)
-		{
-			throw new NotImplementedException ();
-		}
+        public override void Unregister(object registrationId, TimeSpan timeout)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override void Update (object registrationId,
-			PeerNodeAddress updatedNodeAddress, TimeSpan timeout)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override void Update(
+            object registrationId,
+            PeerNodeAddress updatedNodeAddress,
+            TimeSpan timeout
+        )
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

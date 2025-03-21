@@ -4,25 +4,32 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Symbols;
-using Roslyn.Utilities;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 {
-    internal sealed class CapturedVariableRewriter : BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
+    internal sealed class CapturedVariableRewriter
+        : BoundTreeRewriterWithStackGuardWithoutRecursionOnTheLeftOfBinaryOperator
     {
         internal static BoundNode Rewrite(
             GenerateThisReference getThisReference,
             Conversions conversions,
             ImmutableDictionary<string, DisplayClassVariable> displayClassVariables,
             BoundNode node,
-            DiagnosticBag diagnostics)
+            DiagnosticBag diagnostics
+        )
         {
-            var rewriter = new CapturedVariableRewriter(getThisReference, conversions, displayClassVariables, diagnostics);
+            var rewriter = new CapturedVariableRewriter(
+                getThisReference,
+                conversions,
+                displayClassVariables,
+                diagnostics
+            );
             return rewriter.Visit(node);
         }
 
@@ -35,7 +42,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             GenerateThisReference getThisReference,
             Conversions conversions,
             ImmutableDictionary<string, DisplayClassVariable> displayClassVariables,
-            DiagnosticBag diagnostics)
+            DiagnosticBag diagnostics
+        )
         {
             _getThisReference = getThisReference;
             _conversions = conversions;
@@ -45,10 +53,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 
         public override BoundNode VisitBlock(BoundBlock node)
         {
-            var rewrittenLocals = node.Locals.WhereAsArray((local, rewriter) => local.IsCompilerGenerated || local.Name == null || rewriter.GetVariable(local.Name) == null, this);
+            var rewrittenLocals = node.Locals.WhereAsArray(
+                (local, rewriter) =>
+                    local.IsCompilerGenerated
+                    || local.Name == null
+                    || rewriter.GetVariable(local.Name) == null,
+                this
+            );
             var rewrittenLocalFunctions = node.LocalFunctions;
             var rewrittenStatements = VisitList(node.Statements);
-            return node.Update(rewrittenLocals, rewrittenLocalFunctions, node.HasUnsafeModifier, instrumentation: null, rewrittenStatements);
+            return node.Update(
+                rewrittenLocals,
+                rewrittenLocalFunctions,
+                node.HasUnsafeModifier,
+                instrumentation: null,
+                rewrittenStatements
+            );
         }
 
         public override BoundNode VisitLocal(BoundLocal node)
@@ -60,7 +80,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 if (variable != null)
                 {
                     var result = variable.ToBoundExpression(node.Syntax);
-                    Debug.Assert(TypeSymbol.Equals(node.Type, result.Type, TypeCompareKind.ConsiderEverything2));
+                    Debug.Assert(
+                        TypeSymbol.Equals(
+                            node.Type,
+                            result.Type,
+                            TypeCompareKind.ConsiderEverything2
+                        )
+                    );
                     return result;
                 }
             }
@@ -75,7 +101,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         public override BoundNode VisitThisReference(BoundThisReference node)
         {
             var rewrittenThis = GenerateThisReference(node);
-            Debug.Assert(rewrittenThis.Type.Equals(node.Type, TypeCompareKind.IgnoreDynamicAndTupleNames | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes));
+            Debug.Assert(
+                rewrittenThis.Type.Equals(
+                    node.Type,
+                    TypeCompareKind.IgnoreDynamicAndTupleNames
+                        | TypeCompareKind.IgnoreNullableModifiersForReferenceTypes
+                )
+            );
             return rewrittenThis;
         }
 
@@ -90,8 +122,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
 #else
                 CompoundUseSiteInfo<AssemblySymbol>.Discarded;
 #endif
-            var conversion = _conversions.ClassifyImplicitConversionFromExpression(rewrittenThis, baseType, ref discardedSiteInfo);
-            Debug.Assert(discardedSiteInfo.Diagnostics == null || !conversion.IsValid || discardedSiteInfo.Diagnostics.All(d => d.Severity < DiagnosticSeverity.Error));
+            var conversion = _conversions.ClassifyImplicitConversionFromExpression(
+                rewrittenThis,
+                baseType,
+                ref discardedSiteInfo
+            );
+            Debug.Assert(
+                discardedSiteInfo.Diagnostics == null
+                    || !conversion.IsValid
+                    || discardedSiteInfo.Diagnostics.All(d => d.Severity < DiagnosticSeverity.Error)
+            );
 
             // It would be nice if we could just call BoundConversion.Synthesized, but it doesn't seem worthwhile to
             // introduce a bunch of new overloads to accommodate isBaseConversion.
@@ -105,8 +145,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 conversionGroupOpt: null,
                 constantValueOpt: null,
                 type: baseType,
-                hasErrors: !conversion.IsValid)
-            { WasCompilerGenerated = true };
+                hasErrors: !conversion.IsValid
+            )
+            {
+                WasCompilerGenerated = true,
+            };
         }
 
         private BoundExpression GenerateThisReference(BoundExpression node)
@@ -118,10 +161,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
                 return rewrittenThis;
             }
             var boundKind = node.Kind;
-            Debug.Assert(boundKind == BoundKind.ThisReference || boundKind == BoundKind.BaseReference);
-            var errorCode = boundKind == BoundKind.BaseReference
-                ? ErrorCode.ERR_BaseInBadContext
-                : ErrorCode.ERR_ThisInBadContext;
+            Debug.Assert(
+                boundKind == BoundKind.ThisReference || boundKind == BoundKind.BaseReference
+            );
+            var errorCode =
+                boundKind == BoundKind.BaseReference
+                    ? ErrorCode.ERR_BaseInBadContext
+                    : ErrorCode.ERR_ThisInBadContext;
             _diagnostics.Add(new CSDiagnostic(new CSDiagnosticInfo(errorCode), syntax.Location));
             return node;
         }

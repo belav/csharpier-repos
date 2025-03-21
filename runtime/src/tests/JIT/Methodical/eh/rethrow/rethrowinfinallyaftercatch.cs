@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 // Re-throwing an exception from finally block enclosed within a catch block.
 // NDPWhidbey 10965
 //
@@ -38,7 +37,7 @@ namespace Test_rethrowinfinallyaftercatch_cs
         }
 
         [Fact]
-        static public int TestEntryPoint()
+        public static int TestEntryPoint()
         {
             //Start recording
             testLog.StartRecording();

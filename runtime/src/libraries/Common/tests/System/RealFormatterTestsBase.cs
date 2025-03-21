@@ -15,11 +15,15 @@ namespace System.Tests
 
         [Theory]
         [InlineData(1.23E+22, "1.23E+22")] // [ActiveIssue("https://github.com/dotnet/runtime/issues/31483")]
-        public void TestFormatterDouble_Shortest(double value, string expectedResult) => TestFormatterDouble_Standard(value, "R", expectedResult);
+        public void TestFormatterDouble_Shortest(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "R", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "\u00A40.00")]
-        [InlineData(double.MaxValue, "\u00A4179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.00")]
+        [InlineData(
+            double.MaxValue,
+            "\u00A4179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.00"
+        )]
         [InlineData(Math.E, "\u00A42.72")]
         [InlineData(Math.PI, "\u00A43.14")]
         [InlineData(0.0, "\u00A40.00")]
@@ -38,11 +42,15 @@ namespace System.Tests
         [InlineData(555.0, "\u00A4555.00")]
         [InlineData(65747.125, "\u00A465,747.12")]
         [InlineData(1844674407370955.25, "\u00A41,844,674,407,370,955.25")]
-        public void TestFormatterDouble_C(double value, string expectedResult) => TestFormatterDouble_Standard(value, "C", expectedResult);
+        public void TestFormatterDouble_C(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "C", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "\u00A40")]
-        [InlineData(double.MaxValue, "\u00A4179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368")]
+        [InlineData(
+            double.MaxValue,
+            "\u00A4179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368"
+        )]
         [InlineData(Math.E, "\u00A43")]
         [InlineData(Math.PI, "\u00A43")]
         [InlineData(0.0, "\u00A40")]
@@ -61,11 +69,15 @@ namespace System.Tests
         [InlineData(555.0, "\u00A4555")]
         [InlineData(65747.125, "\u00A465,747")]
         [InlineData(1844674407370955.25, "\u00A41,844,674,407,370,955")]
-        public void TestFormatterDouble_C0(double value, string expectedResult) => TestFormatterDouble_Standard(value, "C0", expectedResult);
+        public void TestFormatterDouble_C0(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "C0", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "\u00A40.00")]
-        [InlineData(double.MaxValue, "\u00A4179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.00")]
+        [InlineData(
+            double.MaxValue,
+            "\u00A4179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.00"
+        )]
         [InlineData(Math.E, "\u00A42.72")]
         [InlineData(Math.PI, "\u00A43.14")]
         [InlineData(0.0, "\u00A40.00")]
@@ -84,11 +96,15 @@ namespace System.Tests
         [InlineData(555.0, "\u00A4555.00")]
         [InlineData(65747.125, "\u00A465,747.12")]
         [InlineData(1844674407370955.25, "\u00A41,844,674,407,370,955.25")]
-        public void TestFormatterDouble_C2(double value, string expectedResult) => TestFormatterDouble_Standard(value, "C2", expectedResult);
+        public void TestFormatterDouble_C2(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "C2", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "\u00A40.0000")]
-        [InlineData(double.MaxValue, "\u00A4179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.0000")]
+        [InlineData(
+            double.MaxValue,
+            "\u00A4179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.0000"
+        )]
         [InlineData(Math.E, "\u00A42.7183")]
         [InlineData(Math.PI, "\u00A43.1416")]
         [InlineData(0.0, "\u00A40.0000")]
@@ -107,11 +123,15 @@ namespace System.Tests
         [InlineData(555.0, "\u00A4555.0000")]
         [InlineData(65747.125, "\u00A465,747.1250")]
         [InlineData(1844674407370955.25, "\u00A41,844,674,407,370,955.2500")]
-        public void TestFormatterDouble_C4(double value, string expectedResult) => TestFormatterDouble_Standard(value, "C4", expectedResult);
+        public void TestFormatterDouble_C4(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "C4", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "\u00A40.00000000000000000000")]
-        [InlineData(double.MaxValue, "\u00A4179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.00000000000000000000")]
+        [InlineData(
+            double.MaxValue,
+            "\u00A4179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.00000000000000000000"
+        )]
         [InlineData(Math.E, "\u00A42.71828182845904509080")]
         [InlineData(Math.PI, "\u00A43.14159265358979311600")]
         [InlineData(0.0, "\u00A40.00000000000000000000")]
@@ -130,7 +150,8 @@ namespace System.Tests
         [InlineData(555.0, "\u00A4555.00000000000000000000")]
         [InlineData(65747.125, "\u00A465,747.12500000000000000000")]
         [InlineData(1844674407370955.25, "\u00A41,844,674,407,370,955.25000000000000000000")]
-        public void TestFormatterDouble_C20(double value, string expectedResult) => TestFormatterDouble_Standard(value, "C20", expectedResult);
+        public void TestFormatterDouble_C20(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "C20", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "4.940656E-324")]
@@ -153,7 +174,8 @@ namespace System.Tests
         [InlineData(555.0, "5.550000E+002")]
         [InlineData(65747.125, "6.574712E+004")]
         [InlineData(1844674407370955.25, "1.844674E+015")]
-        public void TestFormatterDouble_E(double value, string expectedResult) => TestFormatterDouble_Standard(value, "E", expectedResult);
+        public void TestFormatterDouble_E(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "E", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "5E-324")]
@@ -176,7 +198,8 @@ namespace System.Tests
         [InlineData(555.0, "6E+002")]
         [InlineData(65747.125, "7E+004")]
         [InlineData(1844674407370955.25, "2E+015")]
-        public void TestFormatterDouble_E0(double value, string expectedResult) => TestFormatterDouble_Standard(value, "E0", expectedResult);
+        public void TestFormatterDouble_E0(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "E0", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "4.94E-324")]
@@ -199,7 +222,8 @@ namespace System.Tests
         [InlineData(555.0, "5.55E+002")]
         [InlineData(65747.125, "6.57E+004")]
         [InlineData(1844674407370955.25, "1.84E+015")]
-        public void TestFormatterDouble_E2(double value, string expectedResult) => TestFormatterDouble_Standard(value, "E2", expectedResult);
+        public void TestFormatterDouble_E2(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "E2", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "4.9407E-324")]
@@ -222,7 +246,8 @@ namespace System.Tests
         [InlineData(555.0, "5.5500E+002")]
         [InlineData(65747.125, "6.5747E+004")]
         [InlineData(1844674407370955.25, "1.8447E+015")]
-        public void TestFormatterDouble_E4(double value, string expectedResult) => TestFormatterDouble_Standard(value, "E4", expectedResult);
+        public void TestFormatterDouble_E4(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "E4", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "4.94065645841246544177E-324")]
@@ -245,11 +270,15 @@ namespace System.Tests
         [InlineData(555.0, "5.55000000000000000000E+002")]
         [InlineData(65747.125, "6.57471250000000000000E+004")]
         [InlineData(1844674407370955.25, "1.84467440737095525000E+015")]
-        public void TestFormatterDouble_E20(double value, string expectedResult) => TestFormatterDouble_Standard(value, "E20", expectedResult);
+        public void TestFormatterDouble_E20(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "E20", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0.00")]
-        [InlineData(double.MaxValue, "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00")]
+        [InlineData(
+            double.MaxValue,
+            "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00"
+        )]
         [InlineData(Math.E, "2.72")]
         [InlineData(Math.PI, "3.14")]
         [InlineData(0.0, "0.00")]
@@ -268,11 +297,15 @@ namespace System.Tests
         [InlineData(555.0, "555.00")]
         [InlineData(65747.125, "65747.12")]
         [InlineData(1844674407370955.25, "1844674407370955.25")]
-        public void TestFormatterDouble_F(double value, string expectedResult) => TestFormatterDouble_Standard(value, "F", expectedResult);
+        public void TestFormatterDouble_F(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "F", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0")]
-        [InlineData(double.MaxValue, "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368")]
+        [InlineData(
+            double.MaxValue,
+            "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368"
+        )]
         [InlineData(Math.E, "3")]
         [InlineData(Math.PI, "3")]
         [InlineData(0.0, "0")]
@@ -291,11 +324,15 @@ namespace System.Tests
         [InlineData(555.0, "555")]
         [InlineData(65747.125, "65747")]
         [InlineData(1844674407370955.25, "1844674407370955")]
-        public void TestFormatterDouble_F0(double value, string expectedResult) => TestFormatterDouble_Standard(value, "F0", expectedResult);
+        public void TestFormatterDouble_F0(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "F0", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0.00")]
-        [InlineData(double.MaxValue, "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00")]
+        [InlineData(
+            double.MaxValue,
+            "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00"
+        )]
         [InlineData(Math.E, "2.72")]
         [InlineData(Math.PI, "3.14")]
         [InlineData(0.0, "0.00")]
@@ -314,11 +351,15 @@ namespace System.Tests
         [InlineData(555.0, "555.00")]
         [InlineData(65747.125, "65747.12")]
         [InlineData(1844674407370955.25, "1844674407370955.25")]
-        public void TestFormatterDouble_F2(double value, string expectedResult) => TestFormatterDouble_Standard(value, "F2", expectedResult);
+        public void TestFormatterDouble_F2(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "F2", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0.0000")]
-        [InlineData(double.MaxValue, "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0000")]
+        [InlineData(
+            double.MaxValue,
+            "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.0000"
+        )]
         [InlineData(Math.E, "2.7183")]
         [InlineData(Math.PI, "3.1416")]
         [InlineData(0.0, "0.0000")]
@@ -337,11 +378,15 @@ namespace System.Tests
         [InlineData(555.0, "555.0000")]
         [InlineData(65747.125, "65747.1250")]
         [InlineData(1844674407370955.25, "1844674407370955.2500")]
-        public void TestFormatterDouble_F4(double value, string expectedResult) => TestFormatterDouble_Standard(value, "F4", expectedResult);
+        public void TestFormatterDouble_F4(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "F4", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0.00000000000000000000")]
-        [InlineData(double.MaxValue, "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00000000000000000000")]
+        [InlineData(
+            double.MaxValue,
+            "179769313486231570814527423731704356798070567525844996598917476803157260780028538760589558632766878171540458953514382464234321326889464182768467546703537516986049910576551282076245490090389328944075868508455133942304583236903222948165808559332123348274797826204144723168738177180919299881250404026184124858368.00000000000000000000"
+        )]
         [InlineData(Math.E, "2.71828182845904509080")]
         [InlineData(Math.PI, "3.14159265358979311600")]
         [InlineData(0.0, "0.00000000000000000000")]
@@ -360,7 +405,8 @@ namespace System.Tests
         [InlineData(555.0, "555.00000000000000000000")]
         [InlineData(65747.125, "65747.12500000000000000000")]
         [InlineData(1844674407370955.25, "1844674407370955.25000000000000000000")]
-        public void TestFormatterDouble_F20(double value, string expectedResult) => TestFormatterDouble_Standard(value, "F20", expectedResult);
+        public void TestFormatterDouble_F20(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "F20", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "5E-324")]
@@ -383,7 +429,8 @@ namespace System.Tests
         [InlineData(555.0, "555")]
         [InlineData(65747.125, "65747.125")]
         [InlineData(1844674407370955.25, "1844674407370955.2")]
-        public void TestFormatterDouble_G(double value, string expectedResult) => TestFormatterDouble_Standard(value, "G", expectedResult);
+        public void TestFormatterDouble_G(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "G", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "5E-324")]
@@ -406,7 +453,8 @@ namespace System.Tests
         [InlineData(555.0, "555")]
         [InlineData(65747.125, "65747.125")]
         [InlineData(1844674407370955.25, "1844674407370955.2")]
-        public void TestFormatterDouble_G0(double value, string expectedResult) => TestFormatterDouble_Standard(value, "G0", expectedResult);
+        public void TestFormatterDouble_G0(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "G0", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "4.9E-324")]
@@ -429,7 +477,8 @@ namespace System.Tests
         [InlineData(555.0, "5.6E+02")]
         [InlineData(65747.125, "6.6E+04")]
         [InlineData(1844674407370955.25, "1.8E+15")]
-        public void TestFormatterDouble_G2(double value, string expectedResult) => TestFormatterDouble_Standard(value, "G2", expectedResult);
+        public void TestFormatterDouble_G2(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "G2", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "4.941E-324")]
@@ -452,7 +501,8 @@ namespace System.Tests
         [InlineData(555.0, "555")]
         [InlineData(65747.125, "6.575E+04")]
         [InlineData(1844674407370955.25, "1.845E+15")]
-        public void TestFormatterDouble_G4(double value, string expectedResult) => TestFormatterDouble_Standard(value, "G4", expectedResult);
+        public void TestFormatterDouble_G4(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "G4", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "4.9406564584124654418E-324")]
@@ -475,11 +525,15 @@ namespace System.Tests
         [InlineData(555.0, "555")]
         [InlineData(65747.125, "65747.125")]
         [InlineData(1844674407370955.25, "1844674407370955.25")]
-        public void TestFormatterDouble_G20(double value, string expectedResult) => TestFormatterDouble_Standard(value, "G20", expectedResult);
+        public void TestFormatterDouble_G20(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "G20", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0.00")]
-        [InlineData(double.MaxValue, "179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.00")]
+        [InlineData(
+            double.MaxValue,
+            "179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.00"
+        )]
         [InlineData(Math.E, "2.72")]
         [InlineData(Math.PI, "3.14")]
         [InlineData(0.0, "0.00")]
@@ -498,11 +552,15 @@ namespace System.Tests
         [InlineData(555.0, "555.00")]
         [InlineData(65747.125, "65,747.12")]
         [InlineData(1844674407370955.25, "1,844,674,407,370,955.25")]
-        public void TestFormatterDouble_N(double value, string expectedResult) => TestFormatterDouble_Standard(value, "N", expectedResult);
+        public void TestFormatterDouble_N(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "N", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0")]
-        [InlineData(double.MaxValue, "179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368")]
+        [InlineData(
+            double.MaxValue,
+            "179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368"
+        )]
         [InlineData(Math.E, "3")]
         [InlineData(Math.PI, "3")]
         [InlineData(0.0, "0")]
@@ -521,11 +579,15 @@ namespace System.Tests
         [InlineData(555.0, "555")]
         [InlineData(65747.125, "65,747")]
         [InlineData(1844674407370955.25, "1,844,674,407,370,955")]
-        public void TestFormatterDouble_N0(double value, string expectedResult) => TestFormatterDouble_Standard(value, "N0", expectedResult);
+        public void TestFormatterDouble_N0(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "N0", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0.00")]
-        [InlineData(double.MaxValue, "179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.00")]
+        [InlineData(
+            double.MaxValue,
+            "179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.00"
+        )]
         [InlineData(Math.E, "2.72")]
         [InlineData(Math.PI, "3.14")]
         [InlineData(0.0, "0.00")]
@@ -544,11 +606,15 @@ namespace System.Tests
         [InlineData(555.0, "555.00")]
         [InlineData(65747.125, "65,747.12")]
         [InlineData(1844674407370955.25, "1,844,674,407,370,955.25")]
-        public void TestFormatterDouble_N2(double value, string expectedResult) => TestFormatterDouble_Standard(value, "N2", expectedResult);
+        public void TestFormatterDouble_N2(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "N2", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0.0000")]
-        [InlineData(double.MaxValue, "179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.0000")]
+        [InlineData(
+            double.MaxValue,
+            "179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.0000"
+        )]
         [InlineData(Math.E, "2.7183")]
         [InlineData(Math.PI, "3.1416")]
         [InlineData(0.0, "0.0000")]
@@ -567,11 +633,15 @@ namespace System.Tests
         [InlineData(555.0, "555.0000")]
         [InlineData(65747.125, "65,747.1250")]
         [InlineData(1844674407370955.25, "1,844,674,407,370,955.2500")]
-        public void TestFormatterDouble_N4(double value, string expectedResult) => TestFormatterDouble_Standard(value, "N4", expectedResult);
+        public void TestFormatterDouble_N4(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "N4", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0.00000000000000000000")]
-        [InlineData(double.MaxValue, "179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.00000000000000000000")]
+        [InlineData(
+            double.MaxValue,
+            "179,769,313,486,231,570,814,527,423,731,704,356,798,070,567,525,844,996,598,917,476,803,157,260,780,028,538,760,589,558,632,766,878,171,540,458,953,514,382,464,234,321,326,889,464,182,768,467,546,703,537,516,986,049,910,576,551,282,076,245,490,090,389,328,944,075,868,508,455,133,942,304,583,236,903,222,948,165,808,559,332,123,348,274,797,826,204,144,723,168,738,177,180,919,299,881,250,404,026,184,124,858,368.00000000000000000000"
+        )]
         [InlineData(Math.E, "2.71828182845904509080")]
         [InlineData(Math.PI, "3.14159265358979311600")]
         [InlineData(0.0, "0.00000000000000000000")]
@@ -590,11 +660,15 @@ namespace System.Tests
         [InlineData(555.0, "555.00000000000000000000")]
         [InlineData(65747.125, "65,747.12500000000000000000")]
         [InlineData(1844674407370955.25, "1,844,674,407,370,955.25000000000000000000")]
-        public void TestFormatterDouble_N20(double value, string expectedResult) => TestFormatterDouble_Standard(value, "N20", expectedResult);
+        public void TestFormatterDouble_N20(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "N20", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0.00 %")]
-        [InlineData(double.MaxValue, "17,976,931,348,623,157,081,452,742,373,170,435,679,807,056,752,584,499,659,891,747,680,315,726,078,002,853,876,058,955,863,276,687,817,154,045,895,351,438,246,423,432,132,688,946,418,276,846,754,670,353,751,698,604,991,057,655,128,207,624,549,009,038,932,894,407,586,850,845,513,394,230,458,323,690,322,294,816,580,855,933,212,334,827,479,782,620,414,472,316,873,817,718,091,929,988,125,040,402,618,412,485,836,800.00 %")]
+        [InlineData(
+            double.MaxValue,
+            "17,976,931,348,623,157,081,452,742,373,170,435,679,807,056,752,584,499,659,891,747,680,315,726,078,002,853,876,058,955,863,276,687,817,154,045,895,351,438,246,423,432,132,688,946,418,276,846,754,670,353,751,698,604,991,057,655,128,207,624,549,009,038,932,894,407,586,850,845,513,394,230,458,323,690,322,294,816,580,855,933,212,334,827,479,782,620,414,472,316,873,817,718,091,929,988,125,040,402,618,412,485,836,800.00 %"
+        )]
         [InlineData(Math.E, "271.83 %")]
         [InlineData(Math.PI, "314.16 %")]
         [InlineData(0.0, "0.00 %")]
@@ -613,11 +687,15 @@ namespace System.Tests
         [InlineData(555.0, "55,500.00 %")]
         [InlineData(65747.125, "6,574,712.50 %")]
         [InlineData(1844674407370955.25, "184,467,440,737,095,525.00 %")]
-        public void TestFormatterDouble_P(double value, string expectedResult) => TestFormatterDouble_Standard(value, "P", expectedResult);
+        public void TestFormatterDouble_P(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "P", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0 %")]
-        [InlineData(double.MaxValue, "17,976,931,348,623,157,081,452,742,373,170,435,679,807,056,752,584,499,659,891,747,680,315,726,078,002,853,876,058,955,863,276,687,817,154,045,895,351,438,246,423,432,132,688,946,418,276,846,754,670,353,751,698,604,991,057,655,128,207,624,549,009,038,932,894,407,586,850,845,513,394,230,458,323,690,322,294,816,580,855,933,212,334,827,479,782,620,414,472,316,873,817,718,091,929,988,125,040,402,618,412,485,836,800 %")]
+        [InlineData(
+            double.MaxValue,
+            "17,976,931,348,623,157,081,452,742,373,170,435,679,807,056,752,584,499,659,891,747,680,315,726,078,002,853,876,058,955,863,276,687,817,154,045,895,351,438,246,423,432,132,688,946,418,276,846,754,670,353,751,698,604,991,057,655,128,207,624,549,009,038,932,894,407,586,850,845,513,394,230,458,323,690,322,294,816,580,855,933,212,334,827,479,782,620,414,472,316,873,817,718,091,929,988,125,040,402,618,412,485,836,800 %"
+        )]
         [InlineData(Math.E, "272 %")]
         [InlineData(Math.PI, "314 %")]
         [InlineData(0.0, "0 %")]
@@ -636,11 +714,15 @@ namespace System.Tests
         [InlineData(555.0, "55,500 %")]
         [InlineData(65747.125, "6,574,712 %")]
         [InlineData(1844674407370955.25, "184,467,440,737,095,525 %")]
-        public void TestFormatterDouble_P0(double value, string expectedResult) => TestFormatterDouble_Standard(value, "P0", expectedResult);
+        public void TestFormatterDouble_P0(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "P0", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0.00 %")]
-        [InlineData(double.MaxValue, "17,976,931,348,623,157,081,452,742,373,170,435,679,807,056,752,584,499,659,891,747,680,315,726,078,002,853,876,058,955,863,276,687,817,154,045,895,351,438,246,423,432,132,688,946,418,276,846,754,670,353,751,698,604,991,057,655,128,207,624,549,009,038,932,894,407,586,850,845,513,394,230,458,323,690,322,294,816,580,855,933,212,334,827,479,782,620,414,472,316,873,817,718,091,929,988,125,040,402,618,412,485,836,800.00 %")]
+        [InlineData(
+            double.MaxValue,
+            "17,976,931,348,623,157,081,452,742,373,170,435,679,807,056,752,584,499,659,891,747,680,315,726,078,002,853,876,058,955,863,276,687,817,154,045,895,351,438,246,423,432,132,688,946,418,276,846,754,670,353,751,698,604,991,057,655,128,207,624,549,009,038,932,894,407,586,850,845,513,394,230,458,323,690,322,294,816,580,855,933,212,334,827,479,782,620,414,472,316,873,817,718,091,929,988,125,040,402,618,412,485,836,800.00 %"
+        )]
         [InlineData(Math.E, "271.83 %")]
         [InlineData(Math.PI, "314.16 %")]
         [InlineData(0.0, "0.00 %")]
@@ -659,11 +741,15 @@ namespace System.Tests
         [InlineData(555.0, "55,500.00 %")]
         [InlineData(65747.125, "6,574,712.50 %")]
         [InlineData(1844674407370955.25, "184,467,440,737,095,525.00 %")]
-        public void TestFormatterDouble_P2(double value, string expectedResult) => TestFormatterDouble_Standard(value, "P2", expectedResult);
+        public void TestFormatterDouble_P2(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "P2", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0.0000 %")]
-        [InlineData(double.MaxValue, "17,976,931,348,623,157,081,452,742,373,170,435,679,807,056,752,584,499,659,891,747,680,315,726,078,002,853,876,058,955,863,276,687,817,154,045,895,351,438,246,423,432,132,688,946,418,276,846,754,670,353,751,698,604,991,057,655,128,207,624,549,009,038,932,894,407,586,850,845,513,394,230,458,323,690,322,294,816,580,855,933,212,334,827,479,782,620,414,472,316,873,817,718,091,929,988,125,040,402,618,412,485,836,800.0000 %")]
+        [InlineData(
+            double.MaxValue,
+            "17,976,931,348,623,157,081,452,742,373,170,435,679,807,056,752,584,499,659,891,747,680,315,726,078,002,853,876,058,955,863,276,687,817,154,045,895,351,438,246,423,432,132,688,946,418,276,846,754,670,353,751,698,604,991,057,655,128,207,624,549,009,038,932,894,407,586,850,845,513,394,230,458,323,690,322,294,816,580,855,933,212,334,827,479,782,620,414,472,316,873,817,718,091,929,988,125,040,402,618,412,485,836,800.0000 %"
+        )]
         [InlineData(Math.E, "271.8282 %")]
         [InlineData(Math.PI, "314.1593 %")]
         [InlineData(0.0, "0.0000 %")]
@@ -682,11 +768,15 @@ namespace System.Tests
         [InlineData(555.0, "55,500.0000 %")]
         [InlineData(65747.125, "6,574,712.5000 %")]
         [InlineData(1844674407370955.25, "184,467,440,737,095,525.0000 %")]
-        public void TestFormatterDouble_P4(double value, string expectedResult) => TestFormatterDouble_Standard(value, "P4", expectedResult);
+        public void TestFormatterDouble_P4(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "P4", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "0.00000000000000000000 %")]
-        [InlineData(double.MaxValue, "17,976,931,348,623,157,081,452,742,373,170,435,679,807,056,752,584,499,659,891,747,680,315,726,078,002,853,876,058,955,863,276,687,817,154,045,895,351,438,246,423,432,132,688,946,418,276,846,754,670,353,751,698,604,991,057,655,128,207,624,549,009,038,932,894,407,586,850,845,513,394,230,458,323,690,322,294,816,580,855,933,212,334,827,479,782,620,414,472,316,873,817,718,091,929,988,125,040,402,618,412,485,836,800.00000000000000000000 %")]
+        [InlineData(
+            double.MaxValue,
+            "17,976,931,348,623,157,081,452,742,373,170,435,679,807,056,752,584,499,659,891,747,680,315,726,078,002,853,876,058,955,863,276,687,817,154,045,895,351,438,246,423,432,132,688,946,418,276,846,754,670,353,751,698,604,991,057,655,128,207,624,549,009,038,932,894,407,586,850,845,513,394,230,458,323,690,322,294,816,580,855,933,212,334,827,479,782,620,414,472,316,873,817,718,091,929,988,125,040,402,618,412,485,836,800.00000000000000000000 %"
+        )]
         [InlineData(Math.E, "271.82818284590450907956 %")]
         [InlineData(Math.PI, "314.15926535897931159980 %")]
         [InlineData(0.0, "0.00000000000000000000 %")]
@@ -705,7 +795,8 @@ namespace System.Tests
         [InlineData(555.0, "55,500.00000000000000000000 %")]
         [InlineData(65747.125, "6,574,712.50000000000000000000 %")]
         [InlineData(1844674407370955.25, "184,467,440,737,095,525.00000000000000000000 %")]
-        public void TestFormatterDouble_P20(double value, string expectedResult) => TestFormatterDouble_Standard(value, "P20", expectedResult);
+        public void TestFormatterDouble_P20(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "P20", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "5E-324")]
@@ -728,7 +819,8 @@ namespace System.Tests
         [InlineData(555.0, "555")]
         [InlineData(65747.125, "65747.125")]
         [InlineData(1844674407370955.25, "1844674407370955.2")]
-        public void TestFormatterDouble_R(double value, string expectedResult) => TestFormatterDouble_Standard(value, "R", expectedResult);
+        public void TestFormatterDouble_R(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "R", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "5E-324")]
@@ -751,7 +843,8 @@ namespace System.Tests
         [InlineData(555.0, "555")]
         [InlineData(65747.125, "65747.125")]
         [InlineData(1844674407370955.25, "1844674407370955.2")]
-        public void TestFormatterDouble_R0(double value, string expectedResult) => TestFormatterDouble_Standard(value, "R0", expectedResult);
+        public void TestFormatterDouble_R0(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "R0", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "5E-324")]
@@ -774,7 +867,8 @@ namespace System.Tests
         [InlineData(555.0, "555")]
         [InlineData(65747.125, "65747.125")]
         [InlineData(1844674407370955.25, "1844674407370955.2")]
-        public void TestFormatterDouble_R2(double value, string expectedResult) => TestFormatterDouble_Standard(value, "R2", expectedResult);
+        public void TestFormatterDouble_R2(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "R2", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "5E-324")]
@@ -797,7 +891,8 @@ namespace System.Tests
         [InlineData(555.0, "555")]
         [InlineData(65747.125, "65747.125")]
         [InlineData(1844674407370955.25, "1844674407370955.2")]
-        public void TestFormatterDouble_R4(double value, string expectedResult) => TestFormatterDouble_Standard(value, "R4", expectedResult);
+        public void TestFormatterDouble_R4(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "R4", expectedResult);
 
         [Theory]
         [InlineData(double.Epsilon, "5E-324")]
@@ -820,18 +915,34 @@ namespace System.Tests
         [InlineData(555.0, "555")]
         [InlineData(65747.125, "65747.125")]
         [InlineData(1844674407370955.25, "1844674407370955.2")]
-        public void TestFormatterDouble_R20(double value, string expectedResult) => TestFormatterDouble_Standard(value, "R20", expectedResult);
+        public void TestFormatterDouble_R20(double value, string expectedResult) =>
+            TestFormatterDouble_Standard(value, "R20", expectedResult);
 
         public static IEnumerable<object[]> TestFormatterDouble_InvalidMemberData =>
-            from value in new[] { double.Epsilon, double.MaxValue, Math.E, Math.PI, 0.0, 0.84551240822557006, 1.0, 1844674407370955.25 }
+            from value in new[]
+            {
+                double.Epsilon,
+                double.MaxValue,
+                Math.E,
+                Math.PI,
+                0.0,
+                0.84551240822557006,
+                1.0,
+                1844674407370955.25,
+            }
             from format in new[] { "D", "D4", "D20", "X", "X4", "X20" }
             select new object[] { value, format };
 
         [Theory]
         [MemberData(nameof(TestFormatterDouble_InvalidMemberData))]
-        public void TestFormatterDouble_Invalid(double value, string format) => Assert.Throws<FormatException>(() => InvariantToStringDouble(value, format));
+        public void TestFormatterDouble_Invalid(double value, string format) =>
+            Assert.Throws<FormatException>(() => InvariantToStringDouble(value, format));
 
-        protected void TestFormatterDouble_Standard(double value, string format, string expectedResult)
+        protected void TestFormatterDouble_Standard(
+            double value,
+            string format,
+            string expectedResult
+        )
         {
             string actualResult = InvariantToStringDouble(value, format);
             Assert.Equal(expectedResult, actualResult);
@@ -858,7 +969,8 @@ namespace System.Tests
         [InlineData(555.0f, "\u00A4555.00")]
         [InlineData(65747.125f, "\u00A465,747.12")]
         [InlineData(429496.72f, "\u00A4429,496.72")]
-        public void TestFormatterSingle_C(float value, string expectedResult) => TestFormatterSingle_Standard(value, "C", expectedResult);
+        public void TestFormatterSingle_C(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "C", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "\u00A40")]
@@ -881,7 +993,8 @@ namespace System.Tests
         [InlineData(555.0f, "\u00A4555")]
         [InlineData(65747.125f, "\u00A465,747")]
         [InlineData(429496.72f, "\u00A4429,497")]
-        public void TestFormatterSingle_C0(float value, string expectedResult) => TestFormatterSingle_Standard(value, "C0", expectedResult);
+        public void TestFormatterSingle_C0(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "C0", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "\u00A40.00")]
@@ -904,11 +1017,15 @@ namespace System.Tests
         [InlineData(555.0f, "\u00A4555.00")]
         [InlineData(65747.125f, "\u00A465,747.12")]
         [InlineData(429496.72f, "\u00A4429,496.72")]
-        public void TestFormatterSingle_C2(float value, string expectedResult) => TestFormatterSingle_Standard(value, "C2", expectedResult);
+        public void TestFormatterSingle_C2(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "C2", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "\u00A40.0000")]
-        [InlineData(float.MaxValue, "\u00A4340,282,346,638,528,859,811,704,183,484,516,925,440.0000")]
+        [InlineData(
+            float.MaxValue,
+            "\u00A4340,282,346,638,528,859,811,704,183,484,516,925,440.0000"
+        )]
         [InlineData(MathF.E, "\u00A42.7183")]
         [InlineData(MathF.PI, "\u00A43.1416")]
         [InlineData(0.0f, "\u00A40.0000")]
@@ -927,11 +1044,15 @@ namespace System.Tests
         [InlineData(555.0f, "\u00A4555.0000")]
         [InlineData(65747.125f, "\u00A465,747.1250")]
         [InlineData(429496.72f, "\u00A4429,496.7188")]
-        public void TestFormatterSingle_C4(float value, string expectedResult) => TestFormatterSingle_Standard(value, "C4", expectedResult);
+        public void TestFormatterSingle_C4(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "C4", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "\u00A40.00000000000000000000")]
-        [InlineData(float.MaxValue, "\u00A4340,282,346,638,528,859,811,704,183,484,516,925,440.00000000000000000000")]
+        [InlineData(
+            float.MaxValue,
+            "\u00A4340,282,346,638,528,859,811,704,183,484,516,925,440.00000000000000000000"
+        )]
         [InlineData(MathF.E, "\u00A42.71828174591064453125")]
         [InlineData(MathF.PI, "\u00A43.14159274101257324219")]
         [InlineData(0.0f, "\u00A40.00000000000000000000")]
@@ -950,7 +1071,8 @@ namespace System.Tests
         [InlineData(555.0f, "\u00A4555.00000000000000000000")]
         [InlineData(65747.125f, "\u00A465,747.12500000000000000000")]
         [InlineData(429496.72f, "\u00A4429,496.71875000000000000000")]
-        public void TestFormatterSingle_C20(float value, string expectedResult) => TestFormatterSingle_Standard(value, "C20", expectedResult);
+        public void TestFormatterSingle_C20(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "C20", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1.401298E-045")]
@@ -973,7 +1095,8 @@ namespace System.Tests
         [InlineData(555.0f, "5.550000E+002")]
         [InlineData(65747.125f, "6.574712E+004")]
         [InlineData(429496.72f, "4.294967E+005")]
-        public void TestFormatterSingle_E(float value, string expectedResult) => TestFormatterSingle_Standard(value, "E", expectedResult);
+        public void TestFormatterSingle_E(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "E", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1E-045")]
@@ -996,7 +1119,8 @@ namespace System.Tests
         [InlineData(555.0f, "6E+002")]
         [InlineData(65747.125f, "7E+004")]
         [InlineData(429496.72f, "4E+005")]
-        public void TestFormatterSingle_E0(float value, string expectedResult) => TestFormatterSingle_Standard(value, "E0", expectedResult);
+        public void TestFormatterSingle_E0(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "E0", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1.40E-045")]
@@ -1019,7 +1143,8 @@ namespace System.Tests
         [InlineData(555.0f, "5.55E+002")]
         [InlineData(65747.125f, "6.57E+004")]
         [InlineData(429496.72f, "4.29E+005")]
-        public void TestFormatterSingle_E2(float value, string expectedResult) => TestFormatterSingle_Standard(value, "E2", expectedResult);
+        public void TestFormatterSingle_E2(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "E2", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1.4013E-045")]
@@ -1042,7 +1167,8 @@ namespace System.Tests
         [InlineData(555.0f, "5.5500E+002")]
         [InlineData(65747.125f, "6.5747E+004")]
         [InlineData(429496.72f, "4.2950E+005")]
-        public void TestFormatterSingle_E4(float value, string expectedResult) => TestFormatterSingle_Standard(value, "E4", expectedResult);
+        public void TestFormatterSingle_E4(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "E4", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1.40129846432481707092E-045")]
@@ -1065,7 +1191,8 @@ namespace System.Tests
         [InlineData(555.0f, "5.55000000000000000000E+002")]
         [InlineData(65747.125f, "6.57471250000000000000E+004")]
         [InlineData(429496.72f, "4.29496718750000000000E+005")]
-        public void TestFormatterSingle_E20(float value, string expectedResult) => TestFormatterSingle_Standard(value, "E20", expectedResult);
+        public void TestFormatterSingle_E20(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "E20", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0.00")]
@@ -1088,7 +1215,8 @@ namespace System.Tests
         [InlineData(555.0f, "555.00")]
         [InlineData(65747.125f, "65747.12")]
         [InlineData(429496.72f, "429496.72")]
-        public void TestFormatterSingle_F(float value, string expectedResult) => TestFormatterSingle_Standard(value, "F", expectedResult);
+        public void TestFormatterSingle_F(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "F", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0")]
@@ -1111,7 +1239,8 @@ namespace System.Tests
         [InlineData(555.0f, "555")]
         [InlineData(65747.125f, "65747")]
         [InlineData(429496.72f, "429497")]
-        public void TestFormatterSingle_F0(float value, string expectedResult) => TestFormatterSingle_Standard(value, "F0", expectedResult);
+        public void TestFormatterSingle_F0(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "F0", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0.00")]
@@ -1134,7 +1263,8 @@ namespace System.Tests
         [InlineData(555.0f, "555.00")]
         [InlineData(65747.125f, "65747.12")]
         [InlineData(429496.72f, "429496.72")]
-        public void TestFormatterSingle_F2(float value, string expectedResult) => TestFormatterSingle_Standard(value, "F2", expectedResult);
+        public void TestFormatterSingle_F2(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "F2", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0.0000")]
@@ -1157,7 +1287,8 @@ namespace System.Tests
         [InlineData(555.0f, "555.0000")]
         [InlineData(65747.125f, "65747.1250")]
         [InlineData(429496.72f, "429496.7188")]
-        public void TestFormatterSingle_F4(float value, string expectedResult) => TestFormatterSingle_Standard(value, "F4", expectedResult);
+        public void TestFormatterSingle_F4(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "F4", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0.00000000000000000000")]
@@ -1180,7 +1311,8 @@ namespace System.Tests
         [InlineData(555.0f, "555.00000000000000000000")]
         [InlineData(65747.125f, "65747.12500000000000000000")]
         [InlineData(429496.72f, "429496.71875000000000000000")]
-        public void TestFormatterSingle_F20(float value, string expectedResult) => TestFormatterSingle_Standard(value, "F20", expectedResult);
+        public void TestFormatterSingle_F20(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "F20", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1E-45")]
@@ -1203,7 +1335,8 @@ namespace System.Tests
         [InlineData(555.0f, "555")]
         [InlineData(65747.125f, "65747.125")]
         [InlineData(429496.72f, "429496.72")]
-        public void TestFormatterSingle_G(float value, string expectedResult) => TestFormatterSingle_Standard(value, "G", expectedResult);
+        public void TestFormatterSingle_G(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "G", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1E-45")]
@@ -1226,7 +1359,8 @@ namespace System.Tests
         [InlineData(555.0f, "555")]
         [InlineData(65747.125f, "65747.125")]
         [InlineData(429496.72f, "429496.72")]
-        public void TestFormatterSingle_G0(float value, string expectedResult) => TestFormatterSingle_Standard(value, "G0", expectedResult);
+        public void TestFormatterSingle_G0(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "G0", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1.4E-45")]
@@ -1249,7 +1383,8 @@ namespace System.Tests
         [InlineData(555.0f, "5.6E+02")]
         [InlineData(65747.125f, "6.6E+04")]
         [InlineData(429496.72f, "4.3E+05")]
-        public void TestFormatterSingle_G2(float value, string expectedResult) => TestFormatterSingle_Standard(value, "G2", expectedResult);
+        public void TestFormatterSingle_G2(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "G2", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1.401E-45")]
@@ -1272,7 +1407,8 @@ namespace System.Tests
         [InlineData(555.0f, "555")]
         [InlineData(65747.125f, "6.575E+04")]
         [InlineData(429496.72f, "4.295E+05")]
-        public void TestFormatterSingle_G4(float value, string expectedResult) => TestFormatterSingle_Standard(value, "G4", expectedResult);
+        public void TestFormatterSingle_G4(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "G4", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1.4012984643248170709E-45")]
@@ -1295,7 +1431,8 @@ namespace System.Tests
         [InlineData(555.0f, "555")]
         [InlineData(65747.125f, "65747.125")]
         [InlineData(429496.72f, "429496.71875")]
-        public void TestFormatterSingle_G20(float value, string expectedResult) => TestFormatterSingle_Standard(value, "G20", expectedResult);
+        public void TestFormatterSingle_G20(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "G20", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0.00")]
@@ -1318,7 +1455,8 @@ namespace System.Tests
         [InlineData(555.0f, "555.00")]
         [InlineData(65747.125f, "65,747.12")]
         [InlineData(429496.72f, "429,496.72")]
-        public void TestFormatterSingle_N(float value, string expectedResult) => TestFormatterSingle_Standard(value, "N", expectedResult);
+        public void TestFormatterSingle_N(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "N", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0")]
@@ -1341,7 +1479,8 @@ namespace System.Tests
         [InlineData(555.0f, "555")]
         [InlineData(65747.125f, "65,747")]
         [InlineData(429496.72f, "429,497")]
-        public void TestFormatterSingle_N0(float value, string expectedResult) => TestFormatterSingle_Standard(value, "N0", expectedResult);
+        public void TestFormatterSingle_N0(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "N0", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0.00")]
@@ -1364,7 +1503,8 @@ namespace System.Tests
         [InlineData(555.0f, "555.00")]
         [InlineData(65747.125f, "65,747.12")]
         [InlineData(429496.72f, "429,496.72")]
-        public void TestFormatterSingle_N2(float value, string expectedResult) => TestFormatterSingle_Standard(value, "N2", expectedResult);
+        public void TestFormatterSingle_N2(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "N2", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0.0000")]
@@ -1387,11 +1527,15 @@ namespace System.Tests
         [InlineData(555.0f, "555.0000")]
         [InlineData(65747.125f, "65,747.1250")]
         [InlineData(429496.72f, "429,496.7188")]
-        public void TestFormatterSingle_N4(float value, string expectedResult) => TestFormatterSingle_Standard(value, "N4", expectedResult);
+        public void TestFormatterSingle_N4(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "N4", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0.00000000000000000000")]
-        [InlineData(float.MaxValue, "340,282,346,638,528,859,811,704,183,484,516,925,440.00000000000000000000")]
+        [InlineData(
+            float.MaxValue,
+            "340,282,346,638,528,859,811,704,183,484,516,925,440.00000000000000000000"
+        )]
         [InlineData(MathF.E, "2.71828174591064453125")]
         [InlineData(MathF.PI, "3.14159274101257324219")]
         [InlineData(0.0f, "0.00000000000000000000")]
@@ -1410,7 +1554,8 @@ namespace System.Tests
         [InlineData(555.0f, "555.00000000000000000000")]
         [InlineData(65747.125f, "65,747.12500000000000000000")]
         [InlineData(429496.72f, "429,496.71875000000000000000")]
-        public void TestFormatterSingle_N20(float value, string expectedResult) => TestFormatterSingle_Standard(value, "N20", expectedResult);
+        public void TestFormatterSingle_N20(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "N20", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0.00 %")]
@@ -1433,7 +1578,8 @@ namespace System.Tests
         [InlineData(555.0f, "55,500.00 %")]
         [InlineData(65747.125f, "6,574,712.50 %")]
         [InlineData(429496.72f, "42,949,671.88 %")]
-        public void TestFormatterSingle_P(float value, string expectedResult) => TestFormatterSingle_Standard(value, "P", expectedResult);
+        public void TestFormatterSingle_P(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "P", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0 %")]
@@ -1456,7 +1602,8 @@ namespace System.Tests
         [InlineData(555.0f, "55,500 %")]
         [InlineData(65747.125f, "6,574,712 %")]
         [InlineData(429496.72f, "42,949,672 %")]
-        public void TestFormatterSingle_P0(float value, string expectedResult) => TestFormatterSingle_Standard(value, "P0", expectedResult);
+        public void TestFormatterSingle_P0(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "P0", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0.00 %")]
@@ -1479,11 +1626,15 @@ namespace System.Tests
         [InlineData(555.0f, "55,500.00 %")]
         [InlineData(65747.125f, "6,574,712.50 %")]
         [InlineData(429496.72f, "42,949,671.88 %")]
-        public void TestFormatterSingle_P2(float value, string expectedResult) => TestFormatterSingle_Standard(value, "P2", expectedResult);
+        public void TestFormatterSingle_P2(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "P2", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0.0000 %")]
-        [InlineData(float.MaxValue, "34,028,234,663,852,885,981,170,418,348,451,692,544,000.0000 %")]
+        [InlineData(
+            float.MaxValue,
+            "34,028,234,663,852,885,981,170,418,348,451,692,544,000.0000 %"
+        )]
         [InlineData(MathF.E, "271.8282 %")]
         [InlineData(MathF.PI, "314.1593 %")]
         [InlineData(0.0f, "0.0000 %")]
@@ -1502,11 +1653,15 @@ namespace System.Tests
         [InlineData(555.0f, "55,500.0000 %")]
         [InlineData(65747.125f, "6,574,712.5000 %")]
         [InlineData(429496.72f, "42,949,671.8750 %")]
-        public void TestFormatterSingle_P4(float value, string expectedResult) => TestFormatterSingle_Standard(value, "P4", expectedResult);
+        public void TestFormatterSingle_P4(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "P4", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "0.00000000000000000000 %")]
-        [InlineData(float.MaxValue, "34,028,234,663,852,885,981,170,418,348,451,692,544,000.00000000000000000000 %")]
+        [InlineData(
+            float.MaxValue,
+            "34,028,234,663,852,885,981,170,418,348,451,692,544,000.00000000000000000000 %"
+        )]
         [InlineData(MathF.E, "271.82817459106445312500 %")]
         [InlineData(MathF.PI, "314.15927410125732421875 %")]
         [InlineData(0.0f, "0.00000000000000000000 %")]
@@ -1525,7 +1680,8 @@ namespace System.Tests
         [InlineData(555.0f, "55,500.00000000000000000000 %")]
         [InlineData(65747.125f, "6,574,712.50000000000000000000 %")]
         [InlineData(429496.72f, "42,949,671.87500000000000000000 %")]
-        public void TestFormatterSingle_P20(float value, string expectedResult) => TestFormatterSingle_Standard(value, "P20", expectedResult);
+        public void TestFormatterSingle_P20(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "P20", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1E-45")]
@@ -1548,7 +1704,8 @@ namespace System.Tests
         [InlineData(555.0f, "555")]
         [InlineData(65747.125f, "65747.125")]
         [InlineData(429496.72f, "429496.72")]
-        public void TestFormatterSingle_R(float value, string expectedResult) => TestFormatterSingle_Standard(value, "R", expectedResult);
+        public void TestFormatterSingle_R(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "R", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1E-45")]
@@ -1571,7 +1728,8 @@ namespace System.Tests
         [InlineData(555.0f, "555")]
         [InlineData(65747.125f, "65747.125")]
         [InlineData(429496.72f, "429496.72")]
-        public void TestFormatterSingle_R0(float value, string expectedResult) => TestFormatterSingle_Standard(value, "R0", expectedResult);
+        public void TestFormatterSingle_R0(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "R0", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1E-45")]
@@ -1594,7 +1752,8 @@ namespace System.Tests
         [InlineData(555.0f, "555")]
         [InlineData(65747.125f, "65747.125")]
         [InlineData(429496.72f, "429496.72")]
-        public void TestFormatterSingle_R2(float value, string expectedResult) => TestFormatterSingle_Standard(value, "R2", expectedResult);
+        public void TestFormatterSingle_R2(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "R2", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1E-45")]
@@ -1617,7 +1776,8 @@ namespace System.Tests
         [InlineData(555.0f, "555")]
         [InlineData(65747.125f, "65747.125")]
         [InlineData(429496.72f, "429496.72")]
-        public void TestFormatterSingle_R4(float value, string expectedResult) => TestFormatterSingle_Standard(value, "R4", expectedResult);
+        public void TestFormatterSingle_R4(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "R4", expectedResult);
 
         [Theory]
         [InlineData(float.Epsilon, "1E-45")]
@@ -1640,18 +1800,34 @@ namespace System.Tests
         [InlineData(555.0f, "555")]
         [InlineData(65747.125f, "65747.125")]
         [InlineData(429496.72f, "429496.72")]
-        public void TestFormatterSingle_R20(float value, string expectedResult) => TestFormatterSingle_Standard(value, "R20", expectedResult);
+        public void TestFormatterSingle_R20(float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, "R20", expectedResult);
 
         public static IEnumerable<object[]> TestFormatterSingle_InvalidMemberData =>
-            from value in new[] { float.Epsilon, float.MaxValue, MathF.E, MathF.PI, 0.0, 0.845512390f, 1.0, 429496.72 }
+            from value in new[]
+            {
+                float.Epsilon,
+                float.MaxValue,
+                MathF.E,
+                MathF.PI,
+                0.0,
+                0.845512390f,
+                1.0,
+                429496.72,
+            }
             from format in new[] { "D", "D4", "D20", "X", "X4", "X20" }
             select new object[] { value, format };
 
         [Theory]
         [MemberData(nameof(TestFormatterSingle_InvalidMemberData))]
-        public void TestFormatterSingle_Invalid(float value, string format) => Assert.Throws<FormatException>(() => InvariantToStringSingle(value, format));
+        public void TestFormatterSingle_Invalid(float value, string format) =>
+            Assert.Throws<FormatException>(() => InvariantToStringSingle(value, format));
 
-        protected void TestFormatterSingle_Standard(float value, string format, string expectedResult)
+        protected void TestFormatterSingle_Standard(
+            float value,
+            string format,
+            string expectedResult
+        )
         {
             string actualResult = InvariantToStringSingle(value, format);
             Assert.Equal(expectedResult, actualResult);

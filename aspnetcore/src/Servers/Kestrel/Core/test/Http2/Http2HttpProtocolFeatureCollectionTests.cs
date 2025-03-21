@@ -3,12 +3,12 @@
 
 using System;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
-using Microsoft.AspNetCore.InternalTesting;
 using Moq;
 using Xunit;
 
@@ -22,7 +22,8 @@ public class Http2HttpProtocolFeatureCollectionTests
     {
         var context = TestContextFactory.CreateHttp2StreamContext(
             serviceContext: new TestServiceContext(),
-            timeoutControl: Mock.Of<ITimeoutControl>());
+            timeoutControl: Mock.Of<ITimeoutControl>()
+        );
 
         var http2Stream = new TestHttp2Stream(context);
         http2Stream.Reset();
@@ -52,7 +53,9 @@ public class Http2HttpProtocolFeatureCollectionTests
         Assert.NotNull(minRateFeature);
 
         Assert.Throws<NotSupportedException>(() => minRateFeature.MinDataRate);
-        Assert.Throws<NotSupportedException>(() => minRateFeature.MinDataRate = new MinDataRate(1, TimeSpan.FromSeconds(2)));
+        Assert.Throws<NotSupportedException>(() =>
+            minRateFeature.MinDataRate = new MinDataRate(1, TimeSpan.FromSeconds(2))
+        );
 
         // You can set the MinDataRate to null though.
         minRateFeature.MinDataRate = null;
@@ -68,8 +71,6 @@ public class Http2HttpProtocolFeatureCollectionTests
             Initialize(context);
         }
 
-        public override void Execute()
-        {
-        }
+        public override void Execute() { }
     }
 }

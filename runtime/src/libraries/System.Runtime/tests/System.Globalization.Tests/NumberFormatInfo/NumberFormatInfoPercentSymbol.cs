@@ -36,13 +36,19 @@ namespace System.Globalization.Tests
         public void PercentSymbol_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", "PercentSymbol", () => format.PercentSymbol = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                "PercentSymbol",
+                () => format.PercentSymbol = null
+            );
         }
 
         [Fact]
         public void PercentSymbol_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.PercentSymbol = "");
+            Assert.Throws<InvalidOperationException>(() =>
+                NumberFormatInfo.InvariantInfo.PercentSymbol = ""
+            );
         }
     }
 }

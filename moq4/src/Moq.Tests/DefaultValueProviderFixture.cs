@@ -3,7 +3,6 @@
 
 using System;
 using System.Reflection;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -12,7 +11,6 @@ namespace Moq.Tests
     /// Tests for the <see cref="DefaultValueProvider"/> abstract base class.
     /// </summary>
     public class DefaultValueProviderFixture
-
     /* Unmerged change from project 'Moq.Tests(net6.0)'
     Before:
             private static MethodInfo fooActionMethod = typeof(IFoo).GetMethod(nameof(IFoo.Action));
@@ -25,9 +23,10 @@ namespace Moq.Tests
     */
     {
         static MethodInfo fooActionMethod = typeof(IFoo).GetMethod(nameof(IFoo.Action));
-        static ParameterInfo fooActionMethodParameter = typeof(IFoo).GetMethod(nameof(IFoo.Action)).GetParameters()[0];
+        static ParameterInfo fooActionMethodParameter = typeof(IFoo)
+            .GetMethod(nameof(IFoo.Action))
+            .GetParameters()[0];
         static MethodInfo fooFuncMethod = typeof(IFoo).GetMethod(nameof(IFoo.Func));
-
 
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:

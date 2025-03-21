@@ -15,7 +15,7 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
     internal static class ITextSnapshotLineExtensions
     {
         /// <summary>
-        /// Returns the first non-whitespace position on the given line, or null if 
+        /// Returns the first non-whitespace position on the given line, or null if
         /// the line is empty or contains only whitespace.
         /// </summary>
         public static int? GetFirstNonWhitespacePosition(this ITextSnapshotLine line)
@@ -58,16 +58,20 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
         }
 
         /// <summary>
-        /// Returns the last non-whitespace position on the given line, or null if 
+        /// Returns the last non-whitespace position on the given line, or null if
         /// the line is empty or contains only whitespace.
         /// </summary>
-        public static int? GetLastNonWhitespacePosition(this ITextSnapshotLine line)
-            => line.AsTextLine().GetLastNonWhitespacePosition();
+        public static int? GetLastNonWhitespacePosition(this ITextSnapshotLine line) =>
+            line.AsTextLine().GetLastNonWhitespacePosition();
 
         /// <summary>
         /// Determines whether the specified line is empty or contains whitespace only.
         /// </summary>
-        public static bool IsEmptyOrWhitespace(this ITextSnapshotLine line, int startIndex = 0, int endIndex = -1)
+        public static bool IsEmptyOrWhitespace(
+            this ITextSnapshotLine line,
+            int startIndex = 0,
+            int endIndex = -1
+        )
         {
             Contract.ThrowIfNull(line, "line");
             Contract.ThrowIfFalse(startIndex >= 0);
@@ -90,7 +94,10 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             return true;
         }
 
-        public static ITextSnapshotLine? GetPreviousMatchingLine(this ITextSnapshotLine line, Func<ITextSnapshotLine, bool> predicate)
+        public static ITextSnapshotLine? GetPreviousMatchingLine(
+            this ITextSnapshotLine line,
+            Func<ITextSnapshotLine, bool> predicate
+        )
         {
             Contract.ThrowIfNull(line, @"line");
             Contract.ThrowIfNull(predicate, @"tree");
@@ -115,22 +122,37 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             return null;
         }
 
-        public static int GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(this ITextSnapshotLine line, IEditorOptions editorOptions)
-            => line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(editorOptions.GetTabSize());
+        public static int GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(
+            this ITextSnapshotLine line,
+            IEditorOptions editorOptions
+        ) => line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(editorOptions.GetTabSize());
 
-        public static int GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(this ITextSnapshotLine line, int tabSize)
-            => line.GetText().GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(tabSize);
+        public static int GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(
+            this ITextSnapshotLine line,
+            int tabSize
+        ) => line.GetText().GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(tabSize);
 
-        public static int GetColumnFromLineOffset(this ITextSnapshotLine line, int lineOffset, IEditorOptions editorOptions)
-            => line.GetText().GetColumnFromLineOffset(lineOffset, editorOptions.GetTabSize());
+        public static int GetColumnFromLineOffset(
+            this ITextSnapshotLine line,
+            int lineOffset,
+            IEditorOptions editorOptions
+        ) => line.GetText().GetColumnFromLineOffset(lineOffset, editorOptions.GetTabSize());
 
-        public static int GetLineOffsetFromColumn(this ITextSnapshotLine line, int column, IEditorOptions editorOptions)
-            => line.GetText().GetLineOffsetFromColumn(column, editorOptions.GetTabSize());
+        public static int GetLineOffsetFromColumn(
+            this ITextSnapshotLine line,
+            int column,
+            IEditorOptions editorOptions
+        ) => line.GetText().GetLineOffsetFromColumn(column, editorOptions.GetTabSize());
 
         /// <summary>
         /// Checks if the given line at the given snapshot index starts with the provided value.
         /// </summary>
-        public static bool StartsWith(this ITextSnapshotLine line, int index, string value, bool ignoreCase)
+        public static bool StartsWith(
+            this ITextSnapshotLine line,
+            int index,
+            string value,
+            bool ignoreCase
+        )
         {
             var snapshot = line.Snapshot;
             if (index + value.Length > snapshot.Length)
@@ -155,7 +177,12 @@ namespace Microsoft.CodeAnalysis.Text.Shared.Extensions
             return true;
         }
 
-        public static bool Contains(this ITextSnapshotLine line, int index, string value, bool ignoreCase)
+        public static bool Contains(
+            this ITextSnapshotLine line,
+            int index,
+            string value,
+            bool ignoreCase
+        )
         {
             var snapshot = line.Snapshot;
             for (var i = index; i < line.End; i++)

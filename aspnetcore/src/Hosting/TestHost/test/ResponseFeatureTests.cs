@@ -47,10 +47,13 @@ public class ResponseFeatureTests
         // Act & Assert
         Assert.Throws<InvalidOperationException>(() =>
         {
-            responseInformation.OnStarting((status) =>
-            {
-                return Task.FromResult(string.Empty);
-            }, state: "string");
+            responseInformation.OnStarting(
+                (status) =>
+                {
+                    return Task.FromResult(string.Empty);
+                },
+                state: "string"
+            );
         });
     }
 
@@ -61,7 +64,9 @@ public class ResponseFeatureTests
         responseInformation.HasStarted = true;
 
         Assert.Throws<InvalidOperationException>(() => responseInformation.StatusCode = 400);
-        Assert.Throws<InvalidOperationException>(() => responseInformation.ReasonPhrase = "Hello World");
+        Assert.Throws<InvalidOperationException>(() =>
+            responseInformation.ReasonPhrase = "Hello World"
+        );
     }
 
     [Fact]

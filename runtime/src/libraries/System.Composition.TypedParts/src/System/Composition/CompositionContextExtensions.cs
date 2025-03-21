@@ -17,7 +17,8 @@ namespace System.Composition
     /// </summary>
     public static class CompositionContextExtensions
     {
-        private static readonly DirectAttributeContext s_directAttributeContext = new DirectAttributeContext();
+        private static readonly DirectAttributeContext s_directAttributeContext =
+            new DirectAttributeContext();
 
         /// <summary>
         /// Set public properties decorated with the <see cref="ImportAttribute"/>.
@@ -25,9 +26,16 @@ namespace System.Composition
         /// <remarks>Uses reflection, is slow - caching would help here.</remarks>
         /// <param name="objectWithLooseImports">An object with decorated with import attributes.</param>
         /// <param name="compositionContext">Export provider that will supply imported values.</param>
-        public static void SatisfyImports(this CompositionContext compositionContext, object objectWithLooseImports)
+        public static void SatisfyImports(
+            this CompositionContext compositionContext,
+            object objectWithLooseImports
+        )
         {
-            SatisfyImportsInternal(compositionContext, objectWithLooseImports, s_directAttributeContext);
+            SatisfyImportsInternal(
+                compositionContext,
+                objectWithLooseImports,
+                s_directAttributeContext
+            );
         }
 
         /// <summary>
@@ -37,12 +45,20 @@ namespace System.Composition
         /// <param name="conventions">Conventions to apply when satisfying loose imports.</param>
         /// <param name="objectWithLooseImports">An object with decorated with import attributes.</param>
         /// <param name="compositionContext">Export provider that will supply imported values.</param>
-        public static void SatisfyImports(this CompositionContext compositionContext, object objectWithLooseImports, AttributedModelProvider conventions)
+        public static void SatisfyImports(
+            this CompositionContext compositionContext,
+            object objectWithLooseImports,
+            AttributedModelProvider conventions
+        )
         {
             SatisfyImportsInternal(compositionContext, objectWithLooseImports, conventions);
         }
 
-        private static void SatisfyImportsInternal(this CompositionContext exportProvider, object objectWithLooseImports, AttributedModelProvider conventions)
+        private static void SatisfyImportsInternal(
+            this CompositionContext exportProvider,
+            object objectWithLooseImports,
+            AttributedModelProvider conventions
+        )
         {
             if (exportProvider is null)
             {
@@ -63,7 +79,14 @@ namespace System.Composition
             {
                 ImportInfo importInfo;
                 var site = new PropertyImportSite(pi);
-                if (ContractHelpers.TryGetExplicitImportInfo(pi.PropertyType, conventions.GetDeclaredAttributes(pi.DeclaringType, pi), site, out importInfo))
+                if (
+                    ContractHelpers.TryGetExplicitImportInfo(
+                        pi.PropertyType,
+                        conventions.GetDeclaredAttributes(pi.DeclaringType, pi),
+                        site,
+                        out importInfo
+                    )
+                )
                 {
                     object value;
                     if (exportProvider.TryGetExport(importInfo.Contract, out value))
@@ -72,14 +95,25 @@ namespace System.Composition
                     }
                     else if (!importInfo.AllowDefault)
                     {
-                        throw new CompositionFailedException(SR.Format(
-                            SR.CompositionContextExtensions_MissingDependency, pi.Name, objectWithLooseImports));
+                        throw new CompositionFailedException(
+                            SR.Format(
+                                SR.CompositionContextExtensions_MissingDependency,
+                                pi.Name,
+                                objectWithLooseImports
+                            )
+                        );
                     }
                 }
             }
 
-            var importsSatisfiedMethods = objectWithLooseImports.GetType().GetRuntimeMethods().Where(m =>
-                m.CustomAttributes.Any(ca => ca.AttributeType == typeof(OnImportsSatisfiedAttribute)));
+            var importsSatisfiedMethods = objectWithLooseImports
+                .GetType()
+                .GetRuntimeMethods()
+                .Where(m =>
+                    m.CustomAttributes.Any(ca =>
+                        ca.AttributeType == typeof(OnImportsSatisfiedAttribute)
+                    )
+                );
 
             foreach (var ois in importsSatisfiedMethods)
                 ois.Invoke(objectWithLooseImports, null);

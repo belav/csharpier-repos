@@ -4,7 +4,6 @@
 using System.Buffers;
 using System.Diagnostics;
 using System.Security;
-
 using ZErrorCode = System.IO.Compression.ZLibNative.ErrorCode;
 using ZFlushCode = System.IO.Compression.ZLibNative.FlushCode;
 
@@ -18,8 +17,8 @@ namespace System.IO.Compression
         private readonly ZLibNative.ZLibStreamHandle _zlibStream;
         private MemoryHandle _inputBufferHandle;
         private bool _isDisposed;
-        private const int minWindowBits = -15;  // WindowBits must be between -8..-15 to write no header, 8..15 for a
-        private const int maxWindowBits = 31;   // zlib header, or 24..31 for a GZip header
+        private const int minWindowBits = -15; // WindowBits must be between -8..-15 to write no header, 8..15 for a
+        private const int maxWindowBits = 31; // zlib header, or 24..31 for a GZip header
 
         // Note, DeflateStream or the deflater do not try to be thread safe.
         // The lock is just used to make writing to unmanaged structures atomic to make sure
@@ -62,13 +61,20 @@ namespace System.IO.Compression
                     throw new ArgumentOutOfRangeException(nameof(compressionLevel));
             }
 
-            ZLibNative.CompressionStrategy strategy = ZLibNative.CompressionStrategy.DefaultStrategy;
+            ZLibNative.CompressionStrategy strategy = ZLibNative
+                .CompressionStrategy
+                .DefaultStrategy;
 
             ZErrorCode errC;
             try
             {
-                errC = ZLibNative.CreateZLibStreamForDeflate(out _zlibStream, zlibCompressionLevel,
-                                                             windowBits, memLevel, strategy);
+                errC = ZLibNative.CreateZLibStreamForDeflate(
+                    out _zlibStream,
+                    zlibCompressionLevel,
+                    windowBits,
+                    memLevel,
+                    strategy
+                );
             }
             catch (Exception cause)
             {
@@ -81,16 +87,36 @@ namespace System.IO.Compression
                     return;
 
                 case ZErrorCode.MemError:
-                    throw new ZLibException(SR.ZLibErrorNotEnoughMemory, "deflateInit2_", (int)errC, _zlibStream.GetErrorMessage());
+                    throw new ZLibException(
+                        SR.ZLibErrorNotEnoughMemory,
+                        "deflateInit2_",
+                        (int)errC,
+                        _zlibStream.GetErrorMessage()
+                    );
 
                 case ZErrorCode.VersionError:
-                    throw new ZLibException(SR.ZLibErrorVersionMismatch, "deflateInit2_", (int)errC, _zlibStream.GetErrorMessage());
+                    throw new ZLibException(
+                        SR.ZLibErrorVersionMismatch,
+                        "deflateInit2_",
+                        (int)errC,
+                        _zlibStream.GetErrorMessage()
+                    );
 
                 case ZErrorCode.StreamError:
-                    throw new ZLibException(SR.ZLibErrorIncorrectInitParameters, "deflateInit2_", (int)errC, _zlibStream.GetErrorMessage());
+                    throw new ZLibException(
+                        SR.ZLibErrorIncorrectInitParameters,
+                        "deflateInit2_",
+                        (int)errC,
+                        _zlibStream.GetErrorMessage()
+                    );
 
                 default:
-                    throw new ZLibException(SR.ZLibErrorUnexpected, "deflateInit2_", (int)errC, _zlibStream.GetErrorMessage());
+                    throw new ZLibException(
+                        SR.ZLibErrorUnexpected,
+                        "deflateInit2_",
+                        (int)errC,
+                        _zlibStream.GetErrorMessage()
+                    );
             }
         }
 
@@ -149,7 +175,10 @@ namespace System.IO.Compression
         internal int GetDeflateOutput(byte[] outputBuffer)
         {
             Debug.Assert(null != outputBuffer, "Can't pass in a null output buffer!");
-            Debug.Assert(!NeedsInput(), "GetDeflateOutput should only be called after providing input");
+            Debug.Assert(
+                !NeedsInput(),
+                "GetDeflateOutput should only be called after providing input"
+            );
 
             try
             {
@@ -167,7 +196,11 @@ namespace System.IO.Compression
             }
         }
 
-        private unsafe ZErrorCode ReadDeflateOutput(byte[] outputBuffer, ZFlushCode flushCode, out int bytesRead)
+        private unsafe ZErrorCode ReadDeflateOutput(
+            byte[] outputBuffer,
+            ZFlushCode flushCode,
+            out int bytesRead
+        )
         {
             Debug.Assert(outputBuffer?.Length > 0);
 
@@ -204,12 +237,12 @@ namespace System.IO.Compression
             Debug.Assert(outputBuffer.Length > 0, "Can't pass in an empty output buffer!");
             Debug.Assert(NeedsInput(), "We have something left in previous input!");
 
-
             // Note: we require that NeedsInput() == true, i.e. that 0 == _zlibStream.AvailIn.
             // If there is still input left we should never be getting here; instead we
             // should be calling GetDeflateOutput.
 
-            return ReadDeflateOutput(outputBuffer, ZFlushCode.SyncFlush, out bytesRead) == ZErrorCode.Ok;
+            return ReadDeflateOutput(outputBuffer, ZFlushCode.SyncFlush, out bytesRead)
+                == ZErrorCode.Ok;
         }
 
         private void DeallocateInputBufferHandle()
@@ -241,13 +274,23 @@ namespace System.IO.Compression
                     return errC;
 
                 case ZErrorCode.BufError:
-                    return errC;  // This is a recoverable error
+                    return errC; // This is a recoverable error
 
                 case ZErrorCode.StreamError:
-                    throw new ZLibException(SR.ZLibErrorInconsistentStream, "deflate", (int)errC, _zlibStream.GetErrorMessage());
+                    throw new ZLibException(
+                        SR.ZLibErrorInconsistentStream,
+                        "deflate",
+                        (int)errC,
+                        _zlibStream.GetErrorMessage()
+                    );
 
                 default:
-                    throw new ZLibException(SR.ZLibErrorUnexpected, "deflate", (int)errC, _zlibStream.GetErrorMessage());
+                    throw new ZLibException(
+                        SR.ZLibErrorUnexpected,
+                        "deflate",
+                        (int)errC,
+                        _zlibStream.GetErrorMessage()
+                    );
             }
         }
     }

@@ -9,7 +9,7 @@ public class FormatExceptionHandlingTests
 {
     [Theory]
     [InlineData(
-@"<rewrite>
+        @"<rewrite>
     <rules>
         <rule name=""Rewrite to article.aspx"">
             <match url = ""(.*)"" />
@@ -20,9 +20,10 @@ public class FormatExceptionHandlingTests
         </rule>
     </rules>
 </rewrite>",
-        "Match does not have an associated pattern attribute in condition")]
+        "Match does not have an associated pattern attribute in condition"
+    )]
     [InlineData(
-@"<rewrite>
+        @"<rewrite>
     <rules>
         <rule name=""Rewrite to article.aspx"">
             <match url = ""(.*)"" />
@@ -33,9 +34,10 @@ public class FormatExceptionHandlingTests
         </rule>
     </rules>
 </rewrite>",
-        "Match does not have an associated pattern attribute in condition")]
+        "Match does not have an associated pattern attribute in condition"
+    )]
     [InlineData(
-@"<rewrite>
+        @"<rewrite>
     <rules>
         <rule name=""Rewrite to article.aspx"">
             <match url = ""(.*)"" />
@@ -46,9 +48,10 @@ public class FormatExceptionHandlingTests
         </rule>
     </rules>
 </rewrite>",
-        "Missing close brace for parameter at string index: '6'")]
+        "Missing close brace for parameter at string index: '6'"
+    )]
     [InlineData(
-@"<rewrite>
+        @"<rewrite>
     <rules>
         <rule name=""Rewrite to article.aspx"">
             <match url = ""(.*)"" />
@@ -56,11 +59,14 @@ public class FormatExceptionHandlingTests
         </rule>
     </rules>
 </rewrite>",
-        "Missing close brace for parameter at string index: '1'")]
+        "Missing close brace for parameter at string index: '1'"
+    )]
     public void ThrowFormatExceptionWithCorrectMessage(string input, string expected)
     {
         // Arrange, Act, Assert
-        var ex = Assert.Throws<FormatException>(() => new UrlRewriteFileParser().Parse(new StringReader(input), false));
+        var ex = Assert.Throws<FormatException>(() =>
+            new UrlRewriteFileParser().Parse(new StringReader(input), false)
+        );
         Assert.Equal(expected, ex.Message);
     }
 }

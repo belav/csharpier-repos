@@ -7,29 +7,34 @@ namespace System.ServiceModel.Channels
     using System.Collections.ObjectModel;
     using System.Net;
     using System.Net.Security;
-    using System.ServiceModel.Description;
     using System.ServiceModel;
+    using System.ServiceModel.Description;
     using System.ServiceModel.PeerResolvers;
     using System.Xml;
-
-
 
     static class PeerTransportPolicyConstants
     {
         public const string PeerTransportSecurityMode = "PeerTransportSecurityMode";
         public const string PeerTransportCredentialType = "PeerTransportCredentialType";
-        public const string PeerTransportCredentialTypePassword = "PeerTransportCredentialTypePassword";
-        public const string PeerTransportCredentialTypeCertificate = "PeerTransportCredentialTypeCertificate";
+        public const string PeerTransportCredentialTypePassword =
+            "PeerTransportCredentialTypePassword";
+        public const string PeerTransportCredentialTypeCertificate =
+            "PeerTransportCredentialTypeCertificate";
         public const string PeerTransportSecurityModeNone = "PeerTransportSecurityModeNone";
-        public const string PeerTransportSecurityModeTransport = "PeerTransportSecurityModeTransport";
+        public const string PeerTransportSecurityModeTransport =
+            "PeerTransportSecurityModeTransport";
         public const string PeerTransportSecurityModeMessage = "PeerTransportSecurityModeMessage";
-        public const string PeerTransportSecurityModeTransportWithMessageCredential = "PeerTransportSecurityModeTransportWithMessageCredential";
+        public const string PeerTransportSecurityModeTransportWithMessageCredential =
+            "PeerTransportSecurityModeTransportWithMessageCredential";
         public const string PeerTransportPrefix = "pc";
     }
 
-    [ObsoleteAttribute ("PeerChannel feature is obsolete and will be removed in the future.", false)]
+    [ObsoleteAttribute("PeerChannel feature is obsolete and will be removed in the future.", false)]
     public sealed class PeerTransportBindingElement
-        : TransportBindingElement, IWsdlExportExtension, ITransportPolicyImport, IPolicyExportExtension
+        : TransportBindingElement,
+            IWsdlExportExtension,
+            ITransportPolicyImport,
+            IPolicyExportExtension
     {
         IPAddress listenIPAddress;
         int port;
@@ -61,11 +66,7 @@ namespace System.ServiceModel.Channels
 
         public IPAddress ListenIPAddress
         {
-            get
-            {
-                return this.listenIPAddress;
-            }
-
+            get { return this.listenIPAddress; }
             set
             {
                 PeerValidateHelper.ValidateListenIPAddress(value);
@@ -75,11 +76,7 @@ namespace System.ServiceModel.Channels
 
         public override long MaxReceivedMessageSize
         {
-            get
-            {
-                return base.MaxReceivedMessageSize;
-            }
-
+            get { return base.MaxReceivedMessageSize; }
             set
             {
                 PeerValidateHelper.ValidateMaxMessageSize(value);
@@ -89,11 +86,7 @@ namespace System.ServiceModel.Channels
 
         public int Port
         {
-            get
-            {
-                return this.port;
-            }
-
+            get { return this.port; }
             set
             {
                 PeerValidateHelper.ValidatePort(value);
@@ -103,11 +96,7 @@ namespace System.ServiceModel.Channels
 
         internal PeerResolver Resolver
         {
-            get
-            {
-                return this.resolver;
-            }
-
+            get { return this.resolver; }
             set
             {
                 if (value == null)
@@ -119,11 +108,17 @@ namespace System.ServiceModel.Channels
                 {
                     if (!PeerTransportDefaults.ResolverInstalled)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.PeerPnrpNotInstalled));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "value",
+                            SR.GetString(SR.PeerPnrpNotInstalled)
+                        );
                     }
                     else if (!PeerTransportDefaults.ResolverAvailable)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.PeerPnrpNotAvailable));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                            "value",
+                            SR.GetString(SR.PeerPnrpNotAvailable)
+                        );
                     }
                 }
 
@@ -132,15 +127,20 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public override string Scheme { get { return PeerStrings.Scheme; } }
+        public override string Scheme
+        {
+            get { return PeerStrings.Scheme; }
+        }
 
         public PeerSecuritySettings Security
         {
             get { return peerSecurity; }
         }
 
-
-        void ITransportPolicyImport.ImportPolicy(MetadataImporter importer, PolicyConversionContext context)
+        void ITransportPolicyImport.ImportPolicy(
+            MetadataImporter importer,
+            PolicyConversionContext context
+        )
         {
             if (importer == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("importer");
@@ -151,7 +151,10 @@ namespace System.ServiceModel.Channels
             peerSecurity.OnImportPolicy(importer, context);
         }
 
-        void IPolicyExportExtension.ExportPolicy(MetadataExporter exporter, PolicyConversionContext context)
+        void IPolicyExportExtension.ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (exporter == null)
             {
@@ -166,24 +169,39 @@ namespace System.ServiceModel.Channels
             peerSecurity.OnExportPolicy(exporter, context);
 
             bool createdNew;
-            MessageEncodingBindingElement encodingBindingElement = FindMessageEncodingBindingElement(context.BindingElements, out createdNew);
+            MessageEncodingBindingElement encodingBindingElement =
+                FindMessageEncodingBindingElement(context.BindingElements, out createdNew);
             if (createdNew && encodingBindingElement is IPolicyExportExtension)
             {
                 ((IPolicyExportExtension)encodingBindingElement).ExportPolicy(exporter, context);
             }
 
-            WsdlExporter.WSAddressingHelper.AddWSAddressingAssertion(exporter, context, encodingBindingElement.MessageVersion.Addressing);
+            WsdlExporter.WSAddressingHelper.AddWSAddressingAssertion(
+                exporter,
+                context,
+                encodingBindingElement.MessageVersion.Addressing
+            );
         }
 
-        void IWsdlExportExtension.ExportContract(WsdlExporter exporter, WsdlContractConversionContext context) { }
+        void IWsdlExportExtension.ExportContract(
+            WsdlExporter exporter,
+            WsdlContractConversionContext context
+        ) { }
 
-        void IWsdlExportExtension.ExportEndpoint(WsdlExporter exporter, WsdlEndpointConversionContext endpointContext)
+        void IWsdlExportExtension.ExportEndpoint(
+            WsdlExporter exporter,
+            WsdlEndpointConversionContext endpointContext
+        )
         {
             bool createdNew;
-            MessageEncodingBindingElement encodingBindingElement = FindMessageEncodingBindingElement(endpointContext, out createdNew);
+            MessageEncodingBindingElement encodingBindingElement =
+                FindMessageEncodingBindingElement(endpointContext, out createdNew);
             TransportBindingElement.ExportWsdlEndpoint(
-                exporter, endpointContext, TransportPolicyConstants.PeerTransportUri,
-                encodingBindingElement.MessageVersion.Addressing);
+                exporter,
+                endpointContext,
+                TransportPolicyConstants.PeerTransportUri,
+                encodingBindingElement.MessageVersion.Addressing
+            );
         }
 
         internal void CreateDefaultResolver(PeerResolverSettings settings)
@@ -194,10 +212,14 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        MessageEncodingBindingElement FindMessageEncodingBindingElement(BindingElementCollection bindingElements, out bool createdNew)
+        MessageEncodingBindingElement FindMessageEncodingBindingElement(
+            BindingElementCollection bindingElements,
+            out bool createdNew
+        )
         {
             createdNew = false;
-            MessageEncodingBindingElement encodingBindingElement = bindingElements.Find<MessageEncodingBindingElement>();
+            MessageEncodingBindingElement encodingBindingElement =
+                bindingElements.Find<MessageEncodingBindingElement>();
             if (encodingBindingElement == null)
             {
                 createdNew = true;
@@ -206,34 +228,49 @@ namespace System.ServiceModel.Channels
             return encodingBindingElement;
         }
 
-        MessageEncodingBindingElement FindMessageEncodingBindingElement(WsdlEndpointConversionContext endpointContext, out bool createdNew)
+        MessageEncodingBindingElement FindMessageEncodingBindingElement(
+            WsdlEndpointConversionContext endpointContext,
+            out bool createdNew
+        )
         {
-            BindingElementCollection bindingElements = endpointContext.Endpoint.Binding.CreateBindingElements();
+            BindingElementCollection bindingElements =
+                endpointContext.Endpoint.Binding.CreateBindingElements();
             return FindMessageEncodingBindingElement(bindingElements, out createdNew);
         }
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("context"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("context")
+                );
             }
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             if (this.ManualAddressing)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ManualAddressingNotSupported)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.ManualAddressingNotSupported))
+                );
             }
 
             PeerResolver peerResolver = GetResolver(context);
             return new PeerChannelFactory<TChannel>(this, context, peerResolver);
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
             {
@@ -252,7 +289,10 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("TChannel", SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "TChannel",
+                    SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel))
+                );
             }
 
             return (IChannelListener<TChannel>)peerListener;
@@ -260,14 +300,18 @@ namespace System.ServiceModel.Channels
 
         public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
         {
-            return (typeof(TChannel) == typeof(IOutputChannel)
-                || typeof(TChannel) == typeof(IDuplexChannel));
+            return (
+                typeof(TChannel) == typeof(IOutputChannel)
+                || typeof(TChannel) == typeof(IDuplexChannel)
+            );
         }
 
         public override bool CanBuildChannelListener<TChannel>(BindingContext context)
         {
-            return (typeof(TChannel) == typeof(IInputChannel)
-                || typeof(TChannel) == typeof(IDuplexChannel));
+            return (
+                typeof(TChannel) == typeof(IInputChannel)
+                || typeof(TChannel) == typeof(IDuplexChannel)
+            );
         }
 
         public override BindingElement Clone()
@@ -287,8 +331,15 @@ namespace System.ServiceModel.Channels
             }
             else if (typeof(T) == typeof(ISecurityCapabilities))
             {
-                return (T)(object)new SecurityCapabilities(Security.SupportsAuthentication, Security.SupportsAuthentication,
-                    false, Security.SupportedProtectionLevel, Security.SupportedProtectionLevel);
+                return (T)
+                    (object)
+                        new SecurityCapabilities(
+                            Security.SupportsAuthentication,
+                            Security.SupportsAuthentication,
+                            false,
+                            Security.SupportedProtectionLevel,
+                            Security.SupportedProtectionLevel
+                        );
             }
             else if (typeof(T) == typeof(IBindingDeliveryCapabilities))
             {
@@ -306,12 +357,16 @@ namespace System.ServiceModel.Channels
                 return this.resolver;
             }
 
-            Collection<PeerCustomResolverBindingElement> customResolverElements
-                = context.BindingParameters.FindAll<PeerCustomResolverBindingElement>();
+            Collection<PeerCustomResolverBindingElement> customResolverElements =
+                context.BindingParameters.FindAll<PeerCustomResolverBindingElement>();
 
             if (customResolverElements.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MultiplePeerCustomResolverBindingElementsInParameters)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.MultiplePeerCustomResolverBindingElementsInParameters)
+                    )
+                );
             }
             else if (customResolverElements.Count == 1)
             {
@@ -319,39 +374,53 @@ namespace System.ServiceModel.Channels
                 return customResolverElements[0].CreatePeerResolver();
             }
 
-
             // If resolver binding element is included in the context, use it to create the resolver. elementToBeClonedwise,
             // if default resolver is available, use it.
-            Collection<PeerResolverBindingElement> resolverBindingElements
-                = context.BindingParameters.FindAll<PeerResolverBindingElement>();
+            Collection<PeerResolverBindingElement> resolverBindingElements =
+                context.BindingParameters.FindAll<PeerResolverBindingElement>();
 
             if (resolverBindingElements.Count > 1)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.MultiplePeerResolverBindingElementsinParameters)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.MultiplePeerResolverBindingElementsinParameters)
+                    )
+                );
             }
             else if (resolverBindingElements.Count == 0)
             {
-                if (this.resolver != null)  // default resolver available?
+                if (this.resolver != null) // default resolver available?
                 {
                     return this.resolver;
                 }
                 else
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.PeerResolverBindingElementRequired, context.Binding.Name)));
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.PeerResolverBindingElementRequired,
+                                context.Binding.Name
+                            )
+                        )
+                    );
                 }
             }
-            else if (resolverBindingElements[0].GetType() == PeerTransportDefaults.ResolverBindingElementType)
+            else if (
+                resolverBindingElements[0].GetType()
+                == PeerTransportDefaults.ResolverBindingElementType
+            )
             {
                 if (!PeerTransportDefaults.ResolverInstalled)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.PeerPnrpNotInstalled)));
+                        new InvalidOperationException(SR.GetString(SR.PeerPnrpNotInstalled))
+                    );
                 }
                 else if (!PeerTransportDefaults.ResolverAvailable)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR.GetString(SR.PeerPnrpNotAvailable)));
+                        new InvalidOperationException(SR.GetString(SR.PeerPnrpNotAvailable))
+                    );
                 }
             }
 
@@ -361,14 +430,16 @@ namespace System.ServiceModel.Channels
 
         class BindingMulticastCapabilities : IBindingMulticastCapabilities
         {
-            public bool IsMulticast { get { return true; } }
+            public bool IsMulticast
+            {
+                get { return true; }
+            }
         }
 
         class BindingDeliveryCapabilitiesHelper : IBindingDeliveryCapabilities
         {
-            internal BindingDeliveryCapabilitiesHelper()
-            {
-            }
+            internal BindingDeliveryCapabilitiesHelper() { }
+
             bool IBindingDeliveryCapabilities.AssuresOrderedDelivery
             {
                 get { return false; }
@@ -379,7 +450,5 @@ namespace System.ServiceModel.Channels
                 get { return false; }
             }
         }
-
-
     }
 }

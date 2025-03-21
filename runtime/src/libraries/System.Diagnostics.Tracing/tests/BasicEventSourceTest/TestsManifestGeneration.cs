@@ -3,21 +3,20 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
+using SdtEventSources;
+using Xunit;
 #if USE_MDT_EVENTSOURCE
 using Microsoft.Diagnostics.Tracing;
 #else
 using System.Diagnostics.Tracing;
 #endif
-using Xunit;
-using System.Reflection;
-
-using SdtEventSources;
-using System.Diagnostics;
-using System.Threading;
-using System.Text.RegularExpressions;
 
 namespace BasicEventSourceTests
 {
@@ -27,7 +26,10 @@ namespace BasicEventSourceTests
         /// EventSource would fail when an EventSource was named "EventSource".
         /// </summary>
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/21297", TargetFrameworkMonikers.NetFramework)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/21297",
+            TargetFrameworkMonikers.NetFramework
+        )]
         public void Test_EventSource_NamedEventSource()
         {
             using (var es = new SdtEventSources.DontPollute.EventSource())
@@ -53,15 +55,28 @@ namespace BasicEventSourceTests
         /// <returns>The filename under 'folder' that contains the ETW manifest</returns>
         private string SaveEventSourceManifest(Type eventSourceType, string folder)
         {
-            var manfilename = Path.Combine(folder, GetPrefixFromType(eventSourceType) + eventSourceType.Name + ".man");
-            using (var manfile = new System.IO.StreamWriter(new System.IO.MemoryStream(Encoding.Unicode.GetBytes(manfilename))))
+            var manfilename = Path.Combine(
+                folder,
+                GetPrefixFromType(eventSourceType) + eventSourceType.Name + ".man"
+            );
+            using (
+                var manfile = new System.IO.StreamWriter(
+                    new System.IO.MemoryStream(Encoding.Unicode.GetBytes(manfilename))
+                )
+            )
             {
                 string man = null;
                 string dllName = Path.GetFileName(eventSourceType.GetTypeInfo().Assembly.Location);
                 //if (!eventSourceType.GetTypeInfo().Assembly.ReflectionOnly)
                 //{
                 var baseAssm = eventSourceType.GetTypeInfo().BaseType.GetTypeInfo().Assembly;
-                var tyGmf = (baseAssm != null) ? baseAssm.GetType(eventSourceType.GetTypeInfo().BaseType.Namespace + ".EventManifestOptions") : null;
+                var tyGmf =
+                    (baseAssm != null)
+                        ? baseAssm.GetType(
+                            eventSourceType.GetTypeInfo().BaseType.Namespace
+                                + ".EventManifestOptions"
+                        )
+                        : null;
                 MethodInfo mi = null;
                 if (tyGmf != null)
                 {
@@ -95,7 +110,9 @@ namespace BasicEventSourceTests
             var baselineOrig = Path.GetFullPath(baseline);
             baselineOrig = baselineOrig.Replace(@"\bin\Debug\", @"\");
             baselineOrig = baselineOrig.Replace(@"\bin\Release\", @"\");
-            Debug.WriteLine("To Compare: windiff " + Path.GetFullPath(manifest) + " " + baselineOrig);
+            Debug.WriteLine(
+                "To Compare: windiff " + Path.GetFullPath(manifest) + " " + baselineOrig
+            );
             Debug.WriteLine("To Update: copy " + Path.GetFullPath(manifest) + " " + baselineOrig);
 
             var baselineLines = File.ReadLines(baseline).ToArray();

@@ -1,15 +1,15 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Win32.SafeHandles;
 using System;
 using System.Diagnostics.Eventing.Reader;
 using System.Runtime.InteropServices;
+using System.Security;
+using System.Text;
+using Microsoft.Win32.SafeHandles;
 #if NET7_0_OR_GREATER
 using System.Runtime.InteropServices.Marshalling;
 #endif
-using System.Security;
-using System.Text;
 
 namespace Microsoft.Win32
 {
@@ -31,7 +31,7 @@ namespace Microsoft.Win32
             EvtQueryFilePath = 0x2,
             EvtQueryForwardDirection = 0x100,
             EvtQueryReverseDirection = 0x200,
-            EvtQueryTolerateQueryErrors = 0x1000
+            EvtQueryTolerateQueryErrors = 0x1000,
         }
 
         [Flags]
@@ -41,7 +41,7 @@ namespace Microsoft.Win32
             EvtSubscribeStartAtOldestRecord = 2,
             EvtSubscribeStartAfterBookmark = 3,
             EvtSubscribeTolerateQueryErrors = 0x1000,
-            EvtSubscribeStrict = 0x10000
+            EvtSubscribeStrict = 0x10000,
         }
 
         /// <summary>
@@ -71,18 +71,20 @@ namespace Microsoft.Win32
             EvtVarTypeSid = 19,
             EvtVarTypeHexInt32 = 20,
             EvtVarTypeHexInt64 = 21,
+
             // these types used internally
             EvtVarTypeEvtHandle = 32,
             EvtVarTypeEvtXml = 35,
+
             // Array = 128
             EvtVarTypeStringArray = 129,
-            EvtVarTypeUInt32Array = 136
+            EvtVarTypeUInt32Array = 136,
         }
 
         internal enum EvtMasks
         {
             EVT_VARIANT_TYPE_MASK = 0x7f,
-            EVT_VARIANT_TYPE_ARRAY = 128
+            EVT_VARIANT_TYPE_ARRAY = 128,
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -90,18 +92,25 @@ namespace Microsoft.Win32
         {
             [MarshalAs(UnmanagedType.U2)]
             public short Year;
+
             [MarshalAs(UnmanagedType.U2)]
             public short Month;
+
             [MarshalAs(UnmanagedType.U2)]
             public short DayOfWeek;
+
             [MarshalAs(UnmanagedType.U2)]
             public short Day;
+
             [MarshalAs(UnmanagedType.U2)]
             public short Hour;
+
             [MarshalAs(UnmanagedType.U2)]
             public short Minute;
+
             [MarshalAs(UnmanagedType.U2)]
             public short Second;
+
             [MarshalAs(UnmanagedType.U2)]
             public short Milliseconds;
         }
@@ -114,50 +123,73 @@ namespace Microsoft.Win32
         {
             [FieldOffset(0)]
             public uint UInteger;
+
             [FieldOffset(0)]
             public int Integer;
+
             [FieldOffset(0)]
             public byte UInt8;
+
             [FieldOffset(0)]
             public short Short;
+
             [FieldOffset(0)]
             public ushort UShort;
+
             [FieldOffset(0)]
             public uint Bool;
+
             [FieldOffset(0)]
             public byte ByteVal;
+
             [FieldOffset(0)]
             public byte SByte;
+
             [FieldOffset(0)]
             public ulong ULong;
+
             [FieldOffset(0)]
             public long Long;
+
             [FieldOffset(0)]
             public float Single;
+
             [FieldOffset(0)]
             public double Double;
+
             [FieldOffset(0)]
             public IntPtr StringVal;
+
             [FieldOffset(0)]
             public IntPtr AnsiString;
+
             [FieldOffset(0)]
             public IntPtr SidVal;
+
             [FieldOffset(0)]
             public IntPtr Binary;
+
             [FieldOffset(0)]
             public IntPtr Reference;
+
             [FieldOffset(0)]
             public IntPtr Handle;
+
             [FieldOffset(0)]
             public IntPtr GuidReference;
+
             [FieldOffset(0)]
             public ulong FileTime;
+
             [FieldOffset(0)]
             public IntPtr SystemTime;
+
             [FieldOffset(0)]
             public IntPtr SizeT;
+
             [FieldOffset(8)]
-            public uint Count;   // number of elements (not length) in bytes.
+            public uint Count; // number of elements (not length) in bytes.
+
             [FieldOffset(12)]
             public uint Type;
         }
@@ -165,7 +197,7 @@ namespace Microsoft.Win32
         internal enum EvtEventPropertyId
         {
             EvtEventQueryIDs = 0,
-            EvtEventPath = 1
+            EvtEventPath = 1,
         }
 
         /// <summary>
@@ -173,8 +205,8 @@ namespace Microsoft.Win32
         /// </summary>
         internal enum EvtQueryPropertyId
         {
-            EvtQueryNames = 0,   //String;   //Variant will be array of EvtVarTypeString
-            EvtQueryStatuses = 1 //UInt32;   //Variant will be Array of EvtVarTypeUInt32
+            EvtQueryNames = 0, //String;   //Variant will be array of EvtVarTypeString
+            EvtQueryStatuses = 1, //UInt32;   //Variant will be Array of EvtVarTypeUInt32
         }
 
         /// <summary>
@@ -182,121 +214,121 @@ namespace Microsoft.Win32
         /// </summary>
         internal enum EvtPublisherMetadataPropertyId
         {
-            EvtPublisherMetadataPublisherGuid = 0,      // EvtVarTypeGuid
-            EvtPublisherMetadataResourceFilePath = 1,       // EvtVarTypeString
-            EvtPublisherMetadataParameterFilePath = 2,      // EvtVarTypeString
-            EvtPublisherMetadataMessageFilePath = 3,        // EvtVarTypeString
-            EvtPublisherMetadataHelpLink = 4,               // EvtVarTypeString
-            EvtPublisherMetadataPublisherMessageID = 5,     // EvtVarTypeUInt32
+            EvtPublisherMetadataPublisherGuid = 0, // EvtVarTypeGuid
+            EvtPublisherMetadataResourceFilePath = 1, // EvtVarTypeString
+            EvtPublisherMetadataParameterFilePath = 2, // EvtVarTypeString
+            EvtPublisherMetadataMessageFilePath = 3, // EvtVarTypeString
+            EvtPublisherMetadataHelpLink = 4, // EvtVarTypeString
+            EvtPublisherMetadataPublisherMessageID = 5, // EvtVarTypeUInt32
 
-            EvtPublisherMetadataChannelReferences = 6,      // EvtVarTypeEvtHandle, ObjectArray
-            EvtPublisherMetadataChannelReferencePath = 7,   // EvtVarTypeString
-            EvtPublisherMetadataChannelReferenceIndex = 8,  // EvtVarTypeUInt32
-            EvtPublisherMetadataChannelReferenceID = 9,     // EvtVarTypeUInt32
-            EvtPublisherMetadataChannelReferenceFlags = 10,  // EvtVarTypeUInt32
+            EvtPublisherMetadataChannelReferences = 6, // EvtVarTypeEvtHandle, ObjectArray
+            EvtPublisherMetadataChannelReferencePath = 7, // EvtVarTypeString
+            EvtPublisherMetadataChannelReferenceIndex = 8, // EvtVarTypeUInt32
+            EvtPublisherMetadataChannelReferenceID = 9, // EvtVarTypeUInt32
+            EvtPublisherMetadataChannelReferenceFlags = 10, // EvtVarTypeUInt32
             EvtPublisherMetadataChannelReferenceMessageID = 11, // EvtVarTypeUInt32
 
-            EvtPublisherMetadataLevels = 12,                 // EvtVarTypeEvtHandle, ObjectArray
-            EvtPublisherMetadataLevelName = 13,              // EvtVarTypeString
-            EvtPublisherMetadataLevelValue = 14,             // EvtVarTypeUInt32
-            EvtPublisherMetadataLevelMessageID = 15,         // EvtVarTypeUInt32
+            EvtPublisherMetadataLevels = 12, // EvtVarTypeEvtHandle, ObjectArray
+            EvtPublisherMetadataLevelName = 13, // EvtVarTypeString
+            EvtPublisherMetadataLevelValue = 14, // EvtVarTypeUInt32
+            EvtPublisherMetadataLevelMessageID = 15, // EvtVarTypeUInt32
 
-            EvtPublisherMetadataTasks = 16,                  // EvtVarTypeEvtHandle, ObjectArray
-            EvtPublisherMetadataTaskName = 17,               // EvtVarTypeString
-            EvtPublisherMetadataTaskEventGuid = 18,          // EvtVarTypeGuid
-            EvtPublisherMetadataTaskValue = 19,              // EvtVarTypeUInt32
-            EvtPublisherMetadataTaskMessageID = 20,          // EvtVarTypeUInt32
+            EvtPublisherMetadataTasks = 16, // EvtVarTypeEvtHandle, ObjectArray
+            EvtPublisherMetadataTaskName = 17, // EvtVarTypeString
+            EvtPublisherMetadataTaskEventGuid = 18, // EvtVarTypeGuid
+            EvtPublisherMetadataTaskValue = 19, // EvtVarTypeUInt32
+            EvtPublisherMetadataTaskMessageID = 20, // EvtVarTypeUInt32
 
-            EvtPublisherMetadataOpcodes = 21,                // EvtVarTypeEvtHandle, ObjectArray
-            EvtPublisherMetadataOpcodeName = 22,             // EvtVarTypeString
-            EvtPublisherMetadataOpcodeValue = 23,            // EvtVarTypeUInt32
-            EvtPublisherMetadataOpcodeMessageID = 24,        // EvtVarTypeUInt32
+            EvtPublisherMetadataOpcodes = 21, // EvtVarTypeEvtHandle, ObjectArray
+            EvtPublisherMetadataOpcodeName = 22, // EvtVarTypeString
+            EvtPublisherMetadataOpcodeValue = 23, // EvtVarTypeUInt32
+            EvtPublisherMetadataOpcodeMessageID = 24, // EvtVarTypeUInt32
 
-            EvtPublisherMetadataKeywords = 25,               // EvtVarTypeEvtHandle, ObjectArray
-            EvtPublisherMetadataKeywordName = 26,            // EvtVarTypeString
-            EvtPublisherMetadataKeywordValue = 27,           // EvtVarTypeUInt64
-            EvtPublisherMetadataKeywordMessageID = 28//,       // EvtVarTypeUInt32
+            EvtPublisherMetadataKeywords = 25, // EvtVarTypeEvtHandle, ObjectArray
+            EvtPublisherMetadataKeywordName = 26, // EvtVarTypeString
+            EvtPublisherMetadataKeywordValue = 27, // EvtVarTypeUInt64
+            EvtPublisherMetadataKeywordMessageID = 28, //,       // EvtVarTypeUInt32
             // EvtPublisherMetadataPropertyIdEND
         }
 
         internal enum EvtChannelReferenceFlags
         {
-            EvtChannelReferenceImported = 1
+            EvtChannelReferenceImported = 1,
         }
 
         internal enum EvtEventMetadataPropertyId
         {
-            EventMetadataEventID,        // EvtVarTypeUInt32
-            EventMetadataEventVersion,   // EvtVarTypeUInt32
-            EventMetadataEventChannel,   // EvtVarTypeUInt32
-            EventMetadataEventLevel,     // EvtVarTypeUInt32
-            EventMetadataEventOpcode,    // EvtVarTypeUInt32
-            EventMetadataEventTask,      // EvtVarTypeUInt32
-            EventMetadataEventKeyword,   // EvtVarTypeUInt64
+            EventMetadataEventID, // EvtVarTypeUInt32
+            EventMetadataEventVersion, // EvtVarTypeUInt32
+            EventMetadataEventChannel, // EvtVarTypeUInt32
+            EventMetadataEventLevel, // EvtVarTypeUInt32
+            EventMetadataEventOpcode, // EvtVarTypeUInt32
+            EventMetadataEventTask, // EvtVarTypeUInt32
+            EventMetadataEventKeyword, // EvtVarTypeUInt64
             EventMetadataEventMessageID, // EvtVarTypeUInt32
-            EventMetadataEventTemplate   // EvtVarTypeString
+            EventMetadataEventTemplate, // EvtVarTypeString
             // EvtEventMetadataPropertyIdEND
         }
 
         // CHANNEL CONFIGURATION
         internal enum EvtChannelConfigPropertyId
         {
-            EvtChannelConfigEnabled = 0,            // EvtVarTypeBoolean
-            EvtChannelConfigIsolation,              // EvtVarTypeUInt32, EVT_CHANNEL_ISOLATION_TYPE
-            EvtChannelConfigType,                   // EvtVarTypeUInt32, EVT_CHANNEL_TYPE
-            EvtChannelConfigOwningPublisher,        // EvtVarTypeString
-            EvtChannelConfigClassicEventlog,        // EvtVarTypeBoolean
-            EvtChannelConfigAccess,                 // EvtVarTypeString
-            EvtChannelLoggingConfigRetention,       // EvtVarTypeBoolean
-            EvtChannelLoggingConfigAutoBackup,      // EvtVarTypeBoolean
-            EvtChannelLoggingConfigMaxSize,         // EvtVarTypeUInt64
-            EvtChannelLoggingConfigLogFilePath,     // EvtVarTypeString
-            EvtChannelPublishingConfigLevel,        // EvtVarTypeUInt32
-            EvtChannelPublishingConfigKeywords,     // EvtVarTypeUInt64
-            EvtChannelPublishingConfigControlGuid,  // EvtVarTypeGuid
-            EvtChannelPublishingConfigBufferSize,   // EvtVarTypeUInt32
-            EvtChannelPublishingConfigMinBuffers,   // EvtVarTypeUInt32
-            EvtChannelPublishingConfigMaxBuffers,   // EvtVarTypeUInt32
-            EvtChannelPublishingConfigLatency,      // EvtVarTypeUInt32
-            EvtChannelPublishingConfigClockType,    // EvtVarTypeUInt32, EVT_CHANNEL_CLOCK_TYPE
-            EvtChannelPublishingConfigSidType,      // EvtVarTypeUInt32, EVT_CHANNEL_SID_TYPE
-            EvtChannelPublisherList,                // EvtVarTypeString | EVT_VARIANT_TYPE_ARRAY
-            EvtChannelConfigPropertyIdEND
+            EvtChannelConfigEnabled = 0, // EvtVarTypeBoolean
+            EvtChannelConfigIsolation, // EvtVarTypeUInt32, EVT_CHANNEL_ISOLATION_TYPE
+            EvtChannelConfigType, // EvtVarTypeUInt32, EVT_CHANNEL_TYPE
+            EvtChannelConfigOwningPublisher, // EvtVarTypeString
+            EvtChannelConfigClassicEventlog, // EvtVarTypeBoolean
+            EvtChannelConfigAccess, // EvtVarTypeString
+            EvtChannelLoggingConfigRetention, // EvtVarTypeBoolean
+            EvtChannelLoggingConfigAutoBackup, // EvtVarTypeBoolean
+            EvtChannelLoggingConfigMaxSize, // EvtVarTypeUInt64
+            EvtChannelLoggingConfigLogFilePath, // EvtVarTypeString
+            EvtChannelPublishingConfigLevel, // EvtVarTypeUInt32
+            EvtChannelPublishingConfigKeywords, // EvtVarTypeUInt64
+            EvtChannelPublishingConfigControlGuid, // EvtVarTypeGuid
+            EvtChannelPublishingConfigBufferSize, // EvtVarTypeUInt32
+            EvtChannelPublishingConfigMinBuffers, // EvtVarTypeUInt32
+            EvtChannelPublishingConfigMaxBuffers, // EvtVarTypeUInt32
+            EvtChannelPublishingConfigLatency, // EvtVarTypeUInt32
+            EvtChannelPublishingConfigClockType, // EvtVarTypeUInt32, EVT_CHANNEL_CLOCK_TYPE
+            EvtChannelPublishingConfigSidType, // EvtVarTypeUInt32, EVT_CHANNEL_SID_TYPE
+            EvtChannelPublisherList, // EvtVarTypeString | EVT_VARIANT_TYPE_ARRAY
+            EvtChannelConfigPropertyIdEND,
         }
 
         // LOG INFORMATION
         internal enum EvtLogPropertyId
         {
-            EvtLogCreationTime = 0,             // EvtVarTypeFileTime
-            EvtLogLastAccessTime,               // EvtVarTypeFileTime
-            EvtLogLastWriteTime,                // EvtVarTypeFileTime
-            EvtLogFileSize,                     // EvtVarTypeUInt64
-            EvtLogAttributes,                   // EvtVarTypeUInt32
-            EvtLogNumberOfLogRecords,           // EvtVarTypeUInt64
-            EvtLogOldestRecordNumber,           // EvtVarTypeUInt64
-            EvtLogFull,                         // EvtVarTypeBoolean
+            EvtLogCreationTime = 0, // EvtVarTypeFileTime
+            EvtLogLastAccessTime, // EvtVarTypeFileTime
+            EvtLogLastWriteTime, // EvtVarTypeFileTime
+            EvtLogFileSize, // EvtVarTypeUInt64
+            EvtLogAttributes, // EvtVarTypeUInt32
+            EvtLogNumberOfLogRecords, // EvtVarTypeUInt64
+            EvtLogOldestRecordNumber, // EvtVarTypeUInt64
+            EvtLogFull, // EvtVarTypeBoolean
         }
 
         internal enum EvtExportLogFlags
         {
             EvtExportLogChannelPath = 1,
             EvtExportLogFilePath = 2,
-            EvtExportLogTolerateQueryErrors = 0x1000
+            EvtExportLogTolerateQueryErrors = 0x1000,
         }
 
         // RENDERING
         internal enum EvtRenderContextFlags
         {
-            EvtRenderContextValues = 0,      // Render specific properties
-            EvtRenderContextSystem = 1,      // Render all system properties (System)
-            EvtRenderContextUser = 2         // Render all user properties (User/EventData)
+            EvtRenderContextValues = 0, // Render specific properties
+            EvtRenderContextSystem = 1, // Render all system properties (System)
+            EvtRenderContextUser = 2, // Render all user properties (User/EventData)
         }
 
         internal enum EvtRenderFlags
         {
-            EvtRenderEventValues = 0,       // Variants
-            EvtRenderEventXml = 1,          // XML
-            EvtRenderBookmark = 2           // Bookmark
+            EvtRenderEventValues = 0, // Variants
+            EvtRenderEventXml = 1, // XML
+            EvtRenderBookmark = 2, // Bookmark
         }
 
         internal enum EvtFormatMessageFlags
@@ -309,36 +341,36 @@ namespace Microsoft.Win32
             EvtFormatMessageChannel = 6,
             EvtFormatMessageProvider = 7,
             EvtFormatMessageId = 8,
-            EvtFormatMessageXml = 9
+            EvtFormatMessageXml = 9,
         }
 
         internal enum EvtSystemPropertyId
         {
-            EvtSystemProviderName = 0,          // EvtVarTypeString
-            EvtSystemProviderGuid,              // EvtVarTypeGuid
-            EvtSystemEventID,                   // EvtVarTypeUInt16
-            EvtSystemQualifiers,                // EvtVarTypeUInt16
-            EvtSystemLevel,                     // EvtVarTypeUInt8
-            EvtSystemTask,                      // EvtVarTypeUInt16
-            EvtSystemOpcode,                    // EvtVarTypeUInt8
-            EvtSystemKeywords,                  // EvtVarTypeHexInt64
-            EvtSystemTimeCreated,               // EvtVarTypeFileTime
-            EvtSystemEventRecordId,             // EvtVarTypeUInt64
-            EvtSystemActivityID,                // EvtVarTypeGuid
-            EvtSystemRelatedActivityID,         // EvtVarTypeGuid
-            EvtSystemProcessID,                 // EvtVarTypeUInt32
-            EvtSystemThreadID,                  // EvtVarTypeUInt32
-            EvtSystemChannel,                   // EvtVarTypeString
-            EvtSystemComputer,                  // EvtVarTypeString
-            EvtSystemUserID,                    // EvtVarTypeSid
-            EvtSystemVersion,                   // EvtVarTypeUInt8
-            EvtSystemPropertyIdEND
+            EvtSystemProviderName = 0, // EvtVarTypeString
+            EvtSystemProviderGuid, // EvtVarTypeGuid
+            EvtSystemEventID, // EvtVarTypeUInt16
+            EvtSystemQualifiers, // EvtVarTypeUInt16
+            EvtSystemLevel, // EvtVarTypeUInt8
+            EvtSystemTask, // EvtVarTypeUInt16
+            EvtSystemOpcode, // EvtVarTypeUInt8
+            EvtSystemKeywords, // EvtVarTypeHexInt64
+            EvtSystemTimeCreated, // EvtVarTypeFileTime
+            EvtSystemEventRecordId, // EvtVarTypeUInt64
+            EvtSystemActivityID, // EvtVarTypeGuid
+            EvtSystemRelatedActivityID, // EvtVarTypeGuid
+            EvtSystemProcessID, // EvtVarTypeUInt32
+            EvtSystemThreadID, // EvtVarTypeUInt32
+            EvtSystemChannel, // EvtVarTypeString
+            EvtSystemComputer, // EvtVarTypeString
+            EvtSystemUserID, // EvtVarTypeSid
+            EvtSystemVersion, // EvtVarTypeUInt8
+            EvtSystemPropertyIdEND,
         }
 
         // SESSION
         internal enum EvtLoginClass
         {
-            EvtRpcLogin = 1
+            EvtRpcLogin = 1,
         }
 
 #if NET7_0_OR_GREATER
@@ -349,14 +381,21 @@ namespace Microsoft.Win32
         {
             [MarshalAs(UnmanagedType.LPWStr)]
             public string Server;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string User;
+
             [MarshalAs(UnmanagedType.LPWStr)]
             public string Domain;
             public CoTaskMemUnicodeSafeHandle Password;
             public int Flags;
+
 #if NET7_0_OR_GREATER
-            [CustomMarshaller(typeof(EvtRpcLogin), MarshalMode.ManagedToUnmanagedRef, typeof(ValueMarshaller))]
+            [CustomMarshaller(
+                typeof(EvtRpcLogin),
+                MarshalMode.ManagedToUnmanagedRef,
+                typeof(ValueMarshaller)
+            )]
             public static class Marshaller
             {
                 public struct ValueMarshaller
@@ -383,7 +422,8 @@ namespace Microsoft.Win32
                         _value.Domain = Marshal.StringToCoTaskMemUni(managed.Domain);
                         _passwordHandle = managed.Password;
                         _passwordHandle.DangerousAddRef(ref _passwordHandleAddRefd);
-                        _value.Password = _originalHandleValue = _passwordHandle.DangerousGetHandle();
+                        _value.Password = _originalHandleValue =
+                            _passwordHandle.DangerousGetHandle();
                         _value.Flags = managed.Flags;
                     }
 
@@ -409,7 +449,7 @@ namespace Microsoft.Win32
                             User = Marshal.PtrToStringUni(_value.User),
                             Domain = Marshal.PtrToStringUni(_value.Domain),
                             Password = _passwordHandle,
-                            Flags = _value.Flags
+                            Flags = _value.Flags,
                         };
                     }
 
@@ -437,46 +477,50 @@ namespace Microsoft.Win32
             EvtSeekRelativeToCurrent = 3,
             EvtSeekRelativeToBookmark = 4,
             EvtSeekOriginMask = 7,
-            EvtSeekStrict = 0x10000
+            EvtSeekStrict = 0x10000,
         }
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         internal static partial EventLogHandle EvtQuery(
-                            EventLogHandle session,
-                            [MarshalAs(UnmanagedType.LPWStr)] string path,
-                            [MarshalAs(UnmanagedType.LPWStr)] string query,
-                            int flags);
+            EventLogHandle session,
+            [MarshalAs(UnmanagedType.LPWStr)] string path,
+            [MarshalAs(UnmanagedType.LPWStr)] string query,
+            int flags
+        );
 
         // SEEK
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtSeek(
-                            EventLogHandle resultSet,
-                            long position,
-                            EventLogHandle bookmark,
-                            int timeout,
-                            EvtSeekFlags flags);
+            EventLogHandle resultSet,
+            long position,
+            EventLogHandle bookmark,
+            int timeout,
+            EvtSeekFlags flags
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         internal static partial EventLogHandle EvtSubscribe(
-                            EventLogHandle session,
-                            SafeWaitHandle signalEvent,
-                            [MarshalAs(UnmanagedType.LPWStr)] string path,
-                            [MarshalAs(UnmanagedType.LPWStr)] string query,
-                            EventLogHandle bookmark,
-                            IntPtr context,
-                            IntPtr callback,
-                            int flags);
+            EventLogHandle session,
+            SafeWaitHandle signalEvent,
+            [MarshalAs(UnmanagedType.LPWStr)] string path,
+            [MarshalAs(UnmanagedType.LPWStr)] string query,
+            EventLogHandle bookmark,
+            IntPtr context,
+            IntPtr callback,
+            int flags
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtNext(
-                            EventLogHandle queryHandle,
-                            int eventSize,
-                            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] events,
-                            int timeout,
-                            int flags,
-                            ref int returned);
+            EventLogHandle queryHandle,
+            int eventSize,
+            [MarshalAs(UnmanagedType.LPArray)] IntPtr[] events,
+            int timeout,
+            int flags,
+            ref int returned
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
@@ -489,211 +533,245 @@ namespace Microsoft.Win32
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtGetEventInfo(
-                            EventLogHandle eventHandle,
-                            EvtEventPropertyId propertyId,
-                            int bufferSize,
-                            IntPtr bufferPtr,
-                            out int bufferUsed);
+            EventLogHandle eventHandle,
+            EvtEventPropertyId propertyId,
+            int bufferSize,
+            IntPtr bufferPtr,
+            out int bufferUsed
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtGetQueryInfo(
-                            EventLogHandle queryHandle,
-                            EvtQueryPropertyId propertyId,
-                            int bufferSize,
-                            IntPtr buffer,
-                            ref int bufferRequired);
+            EventLogHandle queryHandle,
+            EvtQueryPropertyId propertyId,
+            int bufferSize,
+            IntPtr buffer,
+            ref int bufferRequired
+        );
 
         // PUBLISHER METADATA
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         internal static partial EventLogHandle EvtOpenPublisherMetadata(
-                            EventLogHandle session,
-                            [MarshalAs(UnmanagedType.LPWStr)] string publisherId,
-                            [MarshalAs(UnmanagedType.LPWStr)] string logFilePath,
-                            int locale,
-                            int flags);
+            EventLogHandle session,
+            [MarshalAs(UnmanagedType.LPWStr)] string publisherId,
+            [MarshalAs(UnmanagedType.LPWStr)] string logFilePath,
+            int locale,
+            int flags
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtGetPublisherMetadataProperty(
-                            EventLogHandle publisherMetadataHandle,
-                            EvtPublisherMetadataPropertyId propertyId,
-                            int flags,
-                            int publisherMetadataPropertyBufferSize,
-                            IntPtr publisherMetadataPropertyBuffer,
-                            out int publisherMetadataPropertyBufferUsed);
+            EventLogHandle publisherMetadataHandle,
+            EvtPublisherMetadataPropertyId propertyId,
+            int flags,
+            int publisherMetadataPropertyBufferSize,
+            IntPtr publisherMetadataPropertyBuffer,
+            out int publisherMetadataPropertyBufferUsed
+        );
 
         // NEW
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtGetObjectArraySize(
-                            EventLogHandle objectArray,
-                            out int objectArraySize);
+            EventLogHandle objectArray,
+            out int objectArraySize
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtGetObjectArrayProperty(
-                            EventLogHandle objectArray,
-                            int propertyId,
-                            int arrayIndex,
-                            int flags,
-                            int propertyValueBufferSize,
-                            IntPtr propertyValueBuffer,
-                            out int propertyValueBufferUsed);
+            EventLogHandle objectArray,
+            int propertyId,
+            int arrayIndex,
+            int flags,
+            int propertyValueBufferSize,
+            IntPtr propertyValueBuffer,
+            out int propertyValueBufferUsed
+        );
 
         // NEW 2
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         internal static partial EventLogHandle EvtOpenEventMetadataEnum(
-                            EventLogHandle publisherMetadata,
-                            int flags);
+            EventLogHandle publisherMetadata,
+            int flags
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         internal static partial EventLogHandle EvtNextEventMetadata(
-                            EventLogHandle eventMetadataEnum,
-                            int flags);
+            EventLogHandle eventMetadataEnum,
+            int flags
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtGetEventMetadataProperty(
-                            EventLogHandle eventMetadata,
-                            EvtEventMetadataPropertyId propertyId,
-                            int flags,
-                            int eventMetadataPropertyBufferSize,
-                            IntPtr eventMetadataPropertyBuffer,
-                            out int eventMetadataPropertyBufferUsed);
+            EventLogHandle eventMetadata,
+            EvtEventMetadataPropertyId propertyId,
+            int flags,
+            int eventMetadataPropertyBufferSize,
+            IntPtr eventMetadataPropertyBuffer,
+            out int eventMetadataPropertyBufferUsed
+        );
 
         // Channel Configuration Native Api
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         internal static partial EventLogHandle EvtOpenChannelEnum(
-                            EventLogHandle session,
-                            int flags);
+            EventLogHandle session,
+            int flags
+        );
 
-        [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Interop.Libraries.Wevtapi,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtNextChannelPath(
-                            EventLogHandle channelEnum,
-                            int channelPathBufferSize,
-                            [Out] char[]? channelPathBuffer,
-                            out int channelPathBufferUsed);
+            EventLogHandle channelEnum,
+            int channelPathBufferSize,
+            [Out] char[]? channelPathBuffer,
+            out int channelPathBufferUsed
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         internal static partial EventLogHandle EvtOpenPublisherEnum(
-                            EventLogHandle session,
-                            int flags);
+            EventLogHandle session,
+            int flags
+        );
 
-        [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Interop.Libraries.Wevtapi,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtNextPublisherId(
-                            EventLogHandle publisherEnum,
-                            int publisherIdBufferSize,
-                            [Out] char[]? publisherIdBuffer,
-                            out int publisherIdBufferUsed);
+            EventLogHandle publisherEnum,
+            int publisherIdBufferSize,
+            [Out] char[]? publisherIdBuffer,
+            out int publisherIdBufferUsed
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         internal static partial EventLogHandle EvtOpenChannelConfig(
-                            EventLogHandle session,
-                            [MarshalAs(UnmanagedType.LPWStr)] string channelPath,
-                            int flags);
+            EventLogHandle session,
+            [MarshalAs(UnmanagedType.LPWStr)] string channelPath,
+            int flags
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static partial bool EvtSaveChannelConfig(
-                            EventLogHandle channelConfig,
-                            int flags);
+        internal static partial bool EvtSaveChannelConfig(EventLogHandle channelConfig, int flags);
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtSetChannelConfigProperty(
-                            EventLogHandle channelConfig,
-                            EvtChannelConfigPropertyId propertyId,
-                            int flags,
-                            ref EvtVariant propertyValue);
+            EventLogHandle channelConfig,
+            EvtChannelConfigPropertyId propertyId,
+            int flags,
+            ref EvtVariant propertyValue
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtGetChannelConfigProperty(
-                            EventLogHandle channelConfig,
-                            EvtChannelConfigPropertyId propertyId,
-                            int flags,
-                            int propertyValueBufferSize,
-                            IntPtr propertyValueBuffer,
-                            out int propertyValueBufferUsed);
+            EventLogHandle channelConfig,
+            EvtChannelConfigPropertyId propertyId,
+            int flags,
+            int propertyValueBufferSize,
+            IntPtr propertyValueBuffer,
+            out int propertyValueBufferUsed
+        );
 
         // Log Information Native Api
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         internal static partial EventLogHandle EvtOpenLog(
-                            EventLogHandle session,
-                            [MarshalAs(UnmanagedType.LPWStr)] string path,
-                            PathType flags);
+            EventLogHandle session,
+            [MarshalAs(UnmanagedType.LPWStr)] string path,
+            PathType flags
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtGetLogInfo(
-                            EventLogHandle log,
-                            EvtLogPropertyId propertyId,
-                            int propertyValueBufferSize,
-                            IntPtr propertyValueBuffer,
-                            out int propertyValueBufferUsed);
+            EventLogHandle log,
+            EvtLogPropertyId propertyId,
+            int propertyValueBufferSize,
+            IntPtr propertyValueBuffer,
+            out int propertyValueBufferUsed
+        );
 
         // LOG MANIPULATION
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtExportLog(
-                            EventLogHandle session,
-                            [MarshalAs(UnmanagedType.LPWStr)] string channelPath,
-                            [MarshalAs(UnmanagedType.LPWStr)] string query,
-                            [MarshalAs(UnmanagedType.LPWStr)] string targetFilePath,
-                            int flags);
+            EventLogHandle session,
+            [MarshalAs(UnmanagedType.LPWStr)] string channelPath,
+            [MarshalAs(UnmanagedType.LPWStr)] string query,
+            [MarshalAs(UnmanagedType.LPWStr)] string targetFilePath,
+            int flags
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtArchiveExportedLog(
-                            EventLogHandle session,
-                            [MarshalAs(UnmanagedType.LPWStr)]string logFilePath,
-                            int locale,
-                            int flags);
+            EventLogHandle session,
+            [MarshalAs(UnmanagedType.LPWStr)] string logFilePath,
+            int locale,
+            int flags
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtClearLog(
-                            EventLogHandle session,
-                            [MarshalAs(UnmanagedType.LPWStr)]string channelPath,
-                            [MarshalAs(UnmanagedType.LPWStr)]string targetFilePath,
-                            int flags);
+            EventLogHandle session,
+            [MarshalAs(UnmanagedType.LPWStr)] string channelPath,
+            [MarshalAs(UnmanagedType.LPWStr)] string targetFilePath,
+            int flags
+        );
 
         // RENDERING
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         internal static partial EventLogHandle EvtCreateRenderContext(
-                            int valuePathsCount,
-                            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)]
-                                string[] valuePaths,
-                            EvtRenderContextFlags flags);
+            int valuePathsCount,
+            [MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr)]
+                string[] valuePaths,
+            EvtRenderContextFlags flags
+        );
 
-        [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Interop.Libraries.Wevtapi,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtRender(
-                            EventLogHandle context,
-                            EventLogHandle eventHandle,
-                            EvtRenderFlags flags,
-                            int buffSize,
-                            [Out] char[]? buffer,
-                            out int buffUsed,
-                            out int propCount);
+            EventLogHandle context,
+            EventLogHandle eventHandle,
+            EvtRenderFlags flags,
+            int buffSize,
+            [Out] char[]? buffer,
+            out int buffUsed,
+            out int propCount
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, EntryPoint = "EvtRender", SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtRender(
-                            EventLogHandle context,
-                            EventLogHandle eventHandle,
-                            EvtRenderFlags flags,
-                            int buffSize,
-                            IntPtr buffer,
-                            out int buffUsed,
-                            out int propCount);
+            EventLogHandle context,
+            EventLogHandle eventHandle,
+            EvtRenderFlags flags,
+            int buffSize,
+            IntPtr buffer,
+            out int buffUsed,
+            out int propCount
+        );
 
 #if NET7_0_OR_GREATER
         [NativeMarshalling(typeof(Marshaller))]
@@ -703,8 +781,10 @@ namespace Microsoft.Win32
         {
             [MarshalAs(UnmanagedType.LPWStr), FieldOffset(0)]
             public string StringVal;
+
             [FieldOffset(8)]
             public uint Count;
+
             [FieldOffset(12)]
             public uint Type;
 
@@ -713,7 +793,10 @@ namespace Microsoft.Win32
             public static class Marshaller
             {
                 public static Native ConvertToUnmanaged(EvtStringVariant managed) => new(managed);
-                public static EvtStringVariant ConvertToManaged(Native native) => native.ToManaged();
+
+                public static EvtStringVariant ConvertToManaged(Native native) =>
+                    native.ToManaged();
+
                 public static void Free(Native native) => native.FreeNative();
 
                 [StructLayout(LayoutKind.Explicit)]
@@ -721,8 +804,10 @@ namespace Microsoft.Win32
                 {
                     [FieldOffset(0)]
                     private IntPtr StringVal;
+
                     [FieldOffset(8)]
                     private uint Count;
+
                     [FieldOffset(12)]
                     private uint Type;
 
@@ -739,7 +824,7 @@ namespace Microsoft.Win32
                         {
                             StringVal = Marshal.PtrToStringUni(StringVal),
                             Count = Count,
-                            Type = Type
+                            Type = Type,
                         };
                     }
 
@@ -752,50 +837,67 @@ namespace Microsoft.Win32
 #endif
         };
 
-        [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Interop.Libraries.Wevtapi,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtFormatMessage(
-                             EventLogHandle publisherMetadataHandle,
-                             EventLogHandle eventHandle,
-                             uint messageId,
-                             int valueCount,
-                             EvtStringVariant[] values,
-                             EvtFormatMessageFlags flags,
-                             int bufferSize,
-                             [Out] char[]? buffer,
-                             out int bufferUsed);
+            EventLogHandle publisherMetadataHandle,
+            EventLogHandle eventHandle,
+            uint messageId,
+            int valueCount,
+            EvtStringVariant[] values,
+            EvtFormatMessageFlags flags,
+            int bufferSize,
+            [Out] char[]? buffer,
+            out int bufferUsed
+        );
 
-        [LibraryImport(Interop.Libraries.Wevtapi, EntryPoint = "EvtFormatMessage", SetLastError = true)]
+        [LibraryImport(
+            Interop.Libraries.Wevtapi,
+            EntryPoint = "EvtFormatMessage",
+            SetLastError = true
+        )]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtFormatMessageBuffer(
-                             EventLogHandle publisherMetadataHandle,
-                             EventLogHandle eventHandle,
-                             uint messageId,
-                             int valueCount,
-                             IntPtr values,
-                             EvtFormatMessageFlags flags,
-                             int bufferSize,
-                             IntPtr buffer,
-                             out int bufferUsed);
+            EventLogHandle publisherMetadataHandle,
+            EventLogHandle eventHandle,
+            uint messageId,
+            int valueCount,
+            IntPtr values,
+            EvtFormatMessageFlags flags,
+            int bufferSize,
+            IntPtr buffer,
+            out int bufferUsed
+        );
 
         // SESSION
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         internal static partial EventLogHandle EvtOpenSession(
-                            EvtLoginClass loginClass,
-                            ref EvtRpcLogin login,
-                            int timeout,
-                            int flags);
+            EvtLoginClass loginClass,
+            ref EvtRpcLogin login,
+            int timeout,
+            int flags
+        );
 
         // BOOKMARK
-        [LibraryImport(Interop.Libraries.Wevtapi, EntryPoint = "EvtCreateBookmark", SetLastError = true)]
+        [LibraryImport(
+            Interop.Libraries.Wevtapi,
+            EntryPoint = "EvtCreateBookmark",
+            SetLastError = true
+        )]
         internal static partial EventLogHandle EvtCreateBookmark(
-                            [MarshalAs(UnmanagedType.LPWStr)] string bookmarkXml);
+            [MarshalAs(UnmanagedType.LPWStr)] string bookmarkXml
+        );
 
         [LibraryImport(Interop.Libraries.Wevtapi, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool EvtUpdateBookmark(
-                            EventLogHandle bookmark,
-                            EventLogHandle eventHandle);
+            EventLogHandle bookmark,
+            EventLogHandle eventHandle
+        );
         //
         // EventLog
         //

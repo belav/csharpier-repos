@@ -19,8 +19,12 @@ namespace Microsoft.CodeAnalysis.Interactive
     {
         internal sealed class RemoteService
         {
-            private static readonly char[] s_unicodeAsciiTranscodingMarkerDesktop = EncodeMarker("\nProcess is terminated due to StackOverflowException.\n");
-            private static readonly char[] s_unicodeAsciiTranscodingMarkerCore = EncodeMarker("Stack overflow.\n");
+            private static readonly char[] s_unicodeAsciiTranscodingMarkerDesktop = EncodeMarker(
+                "\nProcess is terminated due to StackOverflowException.\n"
+            );
+            private static readonly char[] s_unicodeAsciiTranscodingMarkerCore = EncodeMarker(
+                "Stack overflow.\n"
+            );
 
             public readonly Process Process;
             public readonly JsonRpc JsonRpc;
@@ -32,12 +36,19 @@ namespace Microsoft.CodeAnalysis.Interactive
             private readonly bool _joinOutputWritingThreadsOnDisposal;
 
             // output pumping threads (stream output from stdout/stderr of the host process to the output/errorOutput writers)
-            private InteractiveHost? _host;              // nulled on dispose
-            private Thread? _readOutputThread;           // nulled on dispose	
-            private Thread? _readErrorOutputThread;      // nulled on dispose
-            private volatile ProcessExitHandlerStatus _processExitHandlerStatus;  // set to Handled on dispose
+            private InteractiveHost? _host; // nulled on dispose
+            private Thread? _readOutputThread; // nulled on dispose
+            private Thread? _readErrorOutputThread; // nulled on dispose
+            private volatile ProcessExitHandlerStatus _processExitHandlerStatus; // set to Handled on dispose
 
-            internal RemoteService(InteractiveHost host, Process process, int processId, JsonRpc jsonRpc, InteractiveHostPlatformInfo platformInfo, InteractiveHostOptions options)
+            internal RemoteService(
+                InteractiveHost host,
+                Process process,
+                int processId,
+                JsonRpc jsonRpc,
+                InteractiveHostPlatformInfo platformInfo,
+                InteractiveHostOptions options
+            )
             {
                 Process = process;
                 JsonRpc = jsonRpc;
@@ -121,8 +132,10 @@ namespace Microsoft.CodeAnalysis.Interactive
                 // Hence it will come out as ASCII bytes interpreted as UTF-16 characters.
                 // We detect known message text in the output stream and transcode it and the output that follows to Unicode.
 
-                var transcodingMarker = Options.Platform == InteractiveHostPlatform.Core ?
-                    s_unicodeAsciiTranscodingMarkerCore : s_unicodeAsciiTranscodingMarkerDesktop;
+                var transcodingMarker =
+                    Options.Platform == InteractiveHostPlatform.Core
+                        ? s_unicodeAsciiTranscodingMarkerCore
+                        : s_unicodeAsciiTranscodingMarkerDesktop;
 
                 var buffer = new char[BaseLength + transcodingMarker.Length];
                 StreamReader reader = error ? Process.StandardError : Process.StandardOutput;
@@ -144,19 +157,42 @@ namespace Microsoft.CodeAnalysis.Interactive
                         }
                         else if (error)
                         {
-                            int transcodingMarkerStart = Array.IndexOf(buffer, transcodingMarker[0], startIndex: 0, count: charsRead);
+                            int transcodingMarkerStart = Array.IndexOf(
+                                buffer,
+                                transcodingMarker[0],
+                                startIndex: 0,
+                                count: charsRead
+                            );
                             if (transcodingMarkerStart >= 0)
                             {
-                                int additionalCharsToRead = transcodingMarkerStart + transcodingMarker.Length - charsRead;
+                                int additionalCharsToRead =
+                                    transcodingMarkerStart + transcodingMarker.Length - charsRead;
                                 if (additionalCharsToRead > 0)
                                 {
-                                    charsRead += ReadAll(reader, buffer, index: charsRead, length: additionalCharsToRead);
+                                    charsRead += ReadAll(
+                                        reader,
+                                        buffer,
+                                        index: charsRead,
+                                        length: additionalCharsToRead
+                                    );
                                 }
 
-                                if (ArraysEqual(buffer, transcodingMarkerStart, transcodingMarker, 0, transcodingMarker.Length))
+                                if (
+                                    ArraysEqual(
+                                        buffer,
+                                        transcodingMarkerStart,
+                                        transcodingMarker,
+                                        0,
+                                        transcodingMarker.Length
+                                    )
+                                )
                                 {
                                     // once we hit the marker we assume everything that follows is encoded:
-                                    charsRead = Transcode(ref buffer, charsRead, transcodingMarkerStart);
+                                    charsRead = Transcode(
+                                        ref buffer,
+                                        charsRead,
+                                        transcodingMarkerStart
+                                    );
                                     transcoding = true;
                                 }
                             }
@@ -173,11 +209,21 @@ namespace Microsoft.CodeAnalysis.Interactive
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine("InteractiveHostProcess: exception while reading output from process {0}: {1}", _processId, e.Message);
+                    Debug.WriteLine(
+                        "InteractiveHostProcess: exception while reading output from process {0}: {1}",
+                        _processId,
+                        e.Message
+                    );
                 }
             }
 
-            private static bool ArraysEqual(char[] left, int leftStart, char[] right, int rightStart, int length)
+            private static bool ArraysEqual(
+                char[] left,
+                int leftStart,
+                char[] right,
+                int rightStart,
+                int length
+            )
             {
                 if (leftStart + length > left.Length || rightStart + length > right.Length)
                 {
@@ -237,7 +283,7 @@ namespace Microsoft.CodeAnalysis.Interactive
             // Dispose may called anytime, on any thread.
             internal void Dispose()
             {
-                // There can be a call from host initiated from OnProcessExit. 
+                // There can be a call from host initiated from OnProcessExit.
                 // We should not proceed with disposing if _disposeSemaphore is locked.
                 using (_disposeSemaphore.DisposableWait())
                 {
@@ -258,7 +304,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                     }
                     catch (ThreadStateException)
                     {
-                        // thread hasn't started	
+                        // thread hasn't started
                     }
 
                     try
@@ -267,7 +313,7 @@ namespace Microsoft.CodeAnalysis.Interactive
                     }
                     catch (ThreadStateException)
                     {
-                        // thread hasn't started	
+                        // thread hasn't started
                     }
                 }
 
@@ -288,7 +334,11 @@ namespace Microsoft.CodeAnalysis.Interactive
                 }
                 catch (Exception e)
                 {
-                    Debug.WriteLine("InteractiveHostProcess: can't terminate process {0}: {1}", processId, e.Message);
+                    Debug.WriteLine(
+                        "InteractiveHostProcess: can't terminate process {0}: {1}",
+                        processId,
+                        e.Message
+                    );
                 }
             }
 
@@ -296,7 +346,7 @@ namespace Microsoft.CodeAnalysis.Interactive
             {
                 Uninitialized = 0,
                 Hooked = 1,
-                Handled = 2
+                Handled = 2,
             }
         }
     }

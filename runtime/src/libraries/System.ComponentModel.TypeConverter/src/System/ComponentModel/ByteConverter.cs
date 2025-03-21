@@ -19,7 +19,8 @@ namespace System.ComponentModel
         /// <summary>
         /// Convert the given string to a Byte using the given radix
         /// </summary>
-        internal override object FromString(string value, int radix) => Convert.ToByte(value, radix);
+        internal override object FromString(string value, int radix) =>
+            Convert.ToByte(value, radix);
 
         /// <summary>
         /// Convert the given string to a Byte using the given formatInfo

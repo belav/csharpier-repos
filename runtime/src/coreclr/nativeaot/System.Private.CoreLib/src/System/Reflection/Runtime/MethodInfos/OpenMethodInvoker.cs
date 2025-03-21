@@ -7,19 +7,27 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Runtime.ParameterInfos;
 using System.Reflection.Runtime.TypeInfos;
-
 using Internal.Reflection.Core.Execution;
 
 namespace System.Reflection.Runtime.MethodInfos
 {
     internal sealed class OpenMethodInvoker : MethodBaseInvoker
     {
-        protected sealed override object? Invoke(object? thisObject, object?[]? arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object? Invoke(
+            object? thisObject,
+            object?[]? arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             throw new InvalidOperationException(SR.Arg_UnboundGenParam);
         }
 
-        protected sealed override object CreateInstance(object?[]? arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object CreateInstance(
+            object?[]? arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             throw new InvalidOperationException(SR.Arg_UnboundGenParam);
         }
@@ -34,27 +42,36 @@ namespace System.Reflection.Runtime.MethodInfos
             throw new InvalidOperationException(SR.Arg_UnboundGenParam);
         }
 
-        protected internal sealed override object? Invoke(object? thisObject, Span<object?> arguments)
+        protected internal sealed override object? Invoke(
+            object? thisObject,
+            Span<object?> arguments
+        )
         {
             throw new InvalidOperationException(SR.Arg_UnboundGenParam);
         }
 
-        protected internal sealed override object? InvokeDirectWithFewArgs(object? thisObject, Span<object?> arguments)
+        protected internal sealed override object? InvokeDirectWithFewArgs(
+            object? thisObject,
+            Span<object?> arguments
+        )
         {
             throw new InvalidOperationException(SR.Arg_UnboundGenParam);
         }
 
-        public sealed override Delegate CreateDelegate(RuntimeTypeHandle delegateType, object target, bool isStatic, bool isVirtual, bool isOpen)
+        public sealed override Delegate CreateDelegate(
+            RuntimeTypeHandle delegateType,
+            object target,
+            bool isStatic,
+            bool isVirtual,
+            bool isOpen
+        )
         {
             throw new InvalidOperationException(SR.Arg_UnboundGenParam);
         }
 
         public sealed override IntPtr LdFtnResult
         {
-            get
-            {
-                throw new InvalidOperationException(SR.Arg_UnboundGenParam);
-            }
+            get { throw new InvalidOperationException(SR.Arg_UnboundGenParam); }
         }
     }
 }

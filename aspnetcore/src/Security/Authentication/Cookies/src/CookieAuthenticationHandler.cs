@@ -41,9 +41,13 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
     /// <param name="encoder">The <see cref="UrlEncoder"/>.</param>
     /// <param name="clock">The <see cref="ISystemClock"/>.</param>
     [Obsolete("ISystemClock is obsolete, use TimeProvider on AuthenticationSchemeOptions instead.")]
-    public CookieAuthenticationHandler(IOptionsMonitor<CookieAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock)
-        : base(options, logger, encoder, clock)
-    { }
+    public CookieAuthenticationHandler(
+        IOptionsMonitor<CookieAuthenticationOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    )
+        : base(options, logger, encoder, clock) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="CookieAuthenticationHandler"/>.
@@ -51,9 +55,12 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
     /// <param name="options">Accessor to <see cref="CookieAuthenticationOptions"/>.</param>
     /// <param name="logger">The <see cref="ILoggerFactory"/>.</param>
     /// <param name="encoder">The <see cref="UrlEncoder"/>.</param>
-    public CookieAuthenticationHandler(IOptionsMonitor<CookieAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder)
-        : base(options, logger, encoder)
-    { }
+    public CookieAuthenticationHandler(
+        IOptionsMonitor<CookieAuthenticationOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder
+    )
+        : base(options, logger, encoder) { }
 
     /// <summary>
     /// The handler calls methods on the events which give the application control at certain points where processing is occurring.
@@ -77,7 +84,8 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
     /// Creates a new instance of the events instance.
     /// </summary>
     /// <returns>A new instance of the events instance.</returns>
-    protected override Task<object> CreateEventsAsync() => Task.FromResult<object>(new CookieAuthenticationEvents());
+    protected override Task<object> CreateEventsAsync() =>
+        Task.FromResult<object>(new CookieAuthenticationEvents());
 
     private Task<AuthenticateResult> EnsureCookieTicket()
     {
@@ -100,7 +108,14 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
             var timeElapsed = currentUtc.Subtract(issuedUtc.Value);
             var timeRemaining = expiresUtc.Value.Subtract(currentUtc);
 
-            var eventContext = new CookieSlidingExpirationContext(Context, Scheme, Options, ticket, timeElapsed, timeRemaining)
+            var eventContext = new CookieSlidingExpirationContext(
+                Context,
+                Scheme,
+                Options,
+                ticket,
+                timeElapsed,
+                timeRemaining
+            )
             {
                 ShouldRenew = timeRemaining < timeElapsed,
             };
@@ -113,7 +128,10 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
         }
     }
 
-    private void RequestRefresh(AuthenticationTicket ticket, ClaimsPrincipal? replacedPrincipal = null)
+    private void RequestRefresh(
+        AuthenticationTicket ticket,
+        ClaimsPrincipal? replacedPrincipal = null
+    )
     {
         var issuedUtc = ticket.Properties.IssuedUtc;
         var expiresUtc = ticket.Properties.ExpiresUtc;
@@ -129,7 +147,10 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
         }
     }
 
-    private static AuthenticationTicket CloneTicket(AuthenticationTicket ticket, ClaimsPrincipal? replacedPrincipal)
+    private static AuthenticationTicket CloneTicket(
+        AuthenticationTicket ticket,
+        ClaimsPrincipal? replacedPrincipal
+    )
     {
         var principal = replacedPrincipal ?? ticket.Principal;
         var newPrincipal = new ClaimsPrincipal();
@@ -169,7 +190,11 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
                 return AuthenticateResults.MissingSessionId;
             }
             // Only store _sessionKey if it matches an existing session. Otherwise we'll create a new one.
-            ticket = await Options.SessionStore.RetrieveAsync(claim.Value, Context, Context.RequestAborted);
+            ticket = await Options.SessionStore.RetrieveAsync(
+                claim.Value,
+                Context,
+                Context.RequestAborted
+            );
             if (ticket == null)
             {
                 return AuthenticateResults.MissingIdentityInSession;
@@ -184,7 +209,11 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
         {
             if (Options.SessionStore != null)
             {
-                await Options.SessionStore.RemoveAsync(_sessionKey!, Context, Context.RequestAborted);
+                await Options.SessionStore.RemoveAsync(
+                    _sessionKey!,
+                    Context,
+                    Context.RequestAborted
+                );
 
                 // Clear out the session key if its expired, so renew doesn't try to use it
                 _sessionKey = null;
@@ -223,7 +252,9 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
             RequestRefresh(result.Ticket, context.Principal);
         }
 
-        return AuthenticateResult.Success(new AuthenticationTicket(context.Principal, context.Properties, Scheme.Name));
+        return AuthenticateResult.Success(
+            new AuthenticationTicket(context.Principal, context.Properties, Scheme.Name)
+        );
     }
 
     private CookieOptions BuildCookieOptions()
@@ -261,11 +292,26 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
 
             if (Options.SessionStore != null && _sessionKey != null)
             {
-                await Options.SessionStore.RenewAsync(_sessionKey, ticket, Context, Context.RequestAborted);
+                await Options.SessionStore.RenewAsync(
+                    _sessionKey,
+                    ticket,
+                    Context,
+                    Context.RequestAborted
+                );
                 var principal = new ClaimsPrincipal(
                     new ClaimsIdentity(
-                        new[] { new Claim(SessionIdClaim, _sessionKey, ClaimValueTypes.String, Options.ClaimsIssuer) },
-                        Scheme.Name));
+                        new[]
+                        {
+                            new Claim(
+                                SessionIdClaim,
+                                _sessionKey,
+                                ClaimValueTypes.String,
+                                Options.ClaimsIssuer
+                            ),
+                        },
+                        Scheme.Name
+                    )
+                );
                 ticket = new AuthenticationTicket(principal, null, Scheme.Name);
             }
 
@@ -281,14 +327,22 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
                 Context,
                 Options.Cookie.Name!,
                 cookieValue,
-                cookieOptions);
+                cookieOptions
+            );
 
-            await ApplyHeaders(shouldRedirect: false, shouldHonorReturnUrlParameter: false, properties: properties);
+            await ApplyHeaders(
+                shouldRedirect: false,
+                shouldHonorReturnUrlParameter: false,
+                properties: properties
+            );
         }
     }
 
     /// <inheritdoc />
-    protected override async Task HandleSignInAsync(ClaimsPrincipal user, AuthenticationProperties? properties)
+    protected override async Task HandleSignInAsync(
+        ClaimsPrincipal user,
+        AuthenticationProperties? properties
+    )
     {
         ArgumentNullException.ThrowIfNull(user);
 
@@ -306,7 +360,8 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
             Options,
             user,
             properties,
-            cookieOptions);
+            cookieOptions
+        );
 
         DateTimeOffset issuedUtc;
         if (signInContext.Properties.IssuedUtc.HasValue)
@@ -328,28 +383,52 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
 
         if (signInContext.Properties.IsPersistent)
         {
-            var expiresUtc = signInContext.Properties.ExpiresUtc ?? issuedUtc.Add(Options.ExpireTimeSpan);
+            var expiresUtc =
+                signInContext.Properties.ExpiresUtc ?? issuedUtc.Add(Options.ExpireTimeSpan);
             signInContext.CookieOptions.Expires = expiresUtc.ToUniversalTime();
         }
 
-        var ticket = new AuthenticationTicket(signInContext.Principal!, signInContext.Properties, signInContext.Scheme.Name);
+        var ticket = new AuthenticationTicket(
+            signInContext.Principal!,
+            signInContext.Properties,
+            signInContext.Scheme.Name
+        );
 
         if (Options.SessionStore != null)
         {
             if (_sessionKey != null)
             {
                 // Renew the ticket in cases of multiple requests see: https://github.com/dotnet/aspnetcore/issues/22135
-                await Options.SessionStore.RenewAsync(_sessionKey, ticket, Context, Context.RequestAborted);
+                await Options.SessionStore.RenewAsync(
+                    _sessionKey,
+                    ticket,
+                    Context,
+                    Context.RequestAborted
+                );
             }
             else
             {
-                _sessionKey = await Options.SessionStore.StoreAsync(ticket, Context, Context.RequestAborted);
+                _sessionKey = await Options.SessionStore.StoreAsync(
+                    ticket,
+                    Context,
+                    Context.RequestAborted
+                );
             }
 
             var principal = new ClaimsPrincipal(
                 new ClaimsIdentity(
-                    new[] { new Claim(SessionIdClaim, _sessionKey, ClaimValueTypes.String, Options.ClaimsIssuer) },
-                    Options.ClaimsIssuer));
+                    new[]
+                    {
+                        new Claim(
+                            SessionIdClaim,
+                            _sessionKey,
+                            ClaimValueTypes.String,
+                            Options.ClaimsIssuer
+                        ),
+                    },
+                    Options.ClaimsIssuer
+                )
+            );
             ticket = new AuthenticationTicket(principal, null, Scheme.Name);
         }
 
@@ -359,20 +438,27 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
             Context,
             Options.Cookie.Name!,
             cookieValue,
-            signInContext.CookieOptions);
+            signInContext.CookieOptions
+        );
 
         var signedInContext = new CookieSignedInContext(
             Context,
             Scheme,
             signInContext.Principal!,
             signInContext.Properties,
-            Options);
+            Options
+        );
 
         await Events.SignedIn(signedInContext);
 
         // Only honor the ReturnUrl query string parameter on the login path
-        var shouldHonorReturnUrlParameter = Options.LoginPath.HasValue && OriginalPath == Options.LoginPath;
-        await ApplyHeaders(shouldRedirect: true, shouldHonorReturnUrlParameter, signedInContext.Properties);
+        var shouldHonorReturnUrlParameter =
+            Options.LoginPath.HasValue && OriginalPath == Options.LoginPath;
+        await ApplyHeaders(
+            shouldRedirect: true,
+            shouldHonorReturnUrlParameter,
+            signedInContext.Properties
+        );
 
         Logger.AuthenticationSchemeSignedIn(Scheme.Name);
     }
@@ -397,23 +483,26 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
             Scheme,
             Options,
             properties,
-            cookieOptions);
+            cookieOptions
+        );
 
         await Events.SigningOut(context);
 
-        Options.CookieManager.DeleteCookie(
-            Context,
-            Options.Cookie.Name!,
-            context.CookieOptions);
+        Options.CookieManager.DeleteCookie(Context, Options.Cookie.Name!, context.CookieOptions);
 
         // Only honor the ReturnUrl query string parameter on the logout path
-        var shouldHonorReturnUrlParameter = Options.LogoutPath.HasValue && OriginalPath == Options.LogoutPath;
+        var shouldHonorReturnUrlParameter =
+            Options.LogoutPath.HasValue && OriginalPath == Options.LogoutPath;
         await ApplyHeaders(shouldRedirect: true, shouldHonorReturnUrlParameter, context.Properties);
 
         Logger.AuthenticationSchemeSignedOut(Scheme.Name);
     }
 
-    private async Task ApplyHeaders(bool shouldRedirect, bool shouldHonorReturnUrlParameter, AuthenticationProperties properties)
+    private async Task ApplyHeaders(
+        bool shouldRedirect,
+        bool shouldHonorReturnUrlParameter,
+        AuthenticationProperties properties
+    )
     {
         Response.Headers.CacheControl = HeaderValueNoCacheNoStore;
         Response.Headers.Pragma = HeaderValueNoCache;
@@ -440,7 +529,14 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
             if (redirectUri != null)
             {
                 await Events.RedirectToReturnUrl(
-                    new RedirectContext<CookieAuthenticationOptions>(Context, Scheme, Options, properties, redirectUri));
+                    new RedirectContext<CookieAuthenticationOptions>(
+                        Context,
+                        Scheme,
+                        Options,
+                        properties,
+                        redirectUri
+                    )
+                );
             }
         }
     }
@@ -466,8 +562,15 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
         {
             returnUrl = OriginalPathBase + OriginalPath + Request.QueryString;
         }
-        var accessDeniedUri = Options.AccessDeniedPath + QueryString.Create(Options.ReturnUrlParameter, returnUrl);
-        var redirectContext = new RedirectContext<CookieAuthenticationOptions>(Context, Scheme, Options, properties, BuildRedirectUri(accessDeniedUri));
+        var accessDeniedUri =
+            Options.AccessDeniedPath + QueryString.Create(Options.ReturnUrlParameter, returnUrl);
+        var redirectContext = new RedirectContext<CookieAuthenticationOptions>(
+            Context,
+            Scheme,
+            Options,
+            properties,
+            BuildRedirectUri(accessDeniedUri)
+        );
         await Events.RedirectToAccessDenied(redirectContext);
     }
 
@@ -480,8 +583,15 @@ public class CookieAuthenticationHandler : SignInAuthenticationHandler<CookieAut
             redirectUri = OriginalPathBase + OriginalPath + Request.QueryString;
         }
 
-        var loginUri = Options.LoginPath + QueryString.Create(Options.ReturnUrlParameter, redirectUri);
-        var redirectContext = new RedirectContext<CookieAuthenticationOptions>(Context, Scheme, Options, properties, BuildRedirectUri(loginUri));
+        var loginUri =
+            Options.LoginPath + QueryString.Create(Options.ReturnUrlParameter, redirectUri);
+        var redirectContext = new RedirectContext<CookieAuthenticationOptions>(
+            Context,
+            Scheme,
+            Options,
+            properties,
+            BuildRedirectUri(loginUri)
+        );
         await Events.RedirectToLogin(redirectContext);
     }
 

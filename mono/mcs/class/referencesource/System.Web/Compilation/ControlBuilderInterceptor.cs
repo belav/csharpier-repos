@@ -23,15 +23,16 @@ namespace System.Web.Compilation
         /// <param name="attributes">List of attributes of the element in the markup.</param>
         /// <param name="additionalState">This is an additional state which can be used to store/retrive data within several methods of <see cref="System.Web.Compilation.ControlBuilderInterceptor"/>.
         /// The state is per control builder.</param>
-        public virtual void PreControlBuilderInit(ControlBuilder controlBuilder, 
-                                                  TemplateParser parser, 
-                                                  ControlBuilder parentBuilder, 
-                                                  Type type, 
-                                                  string tagName, 
-                                                  string id, 
-                                                  IDictionary attributes,
-                                                  IDictionary additionalState) { 
-        }
+        public virtual void PreControlBuilderInit(
+            ControlBuilder controlBuilder,
+            TemplateParser parser,
+            ControlBuilder parentBuilder,
+            Type type,
+            string tagName,
+            string id,
+            IDictionary attributes,
+            IDictionary additionalState
+        ) { }
 
         /// <summary>
         /// This method is called after the code generation for this <see cref="System.Web.UI.ControlBuilder"/> is complete.
@@ -44,13 +45,14 @@ namespace System.Web.Compilation
         /// <param name="dataBindingMethod">The method with code to evaluate data binding expressions within the control.</param>
         /// <param name="additionalState">This is an additional state which can be used to store/retrive data within several methods of <see cref="System.Web.Compilation.ControlBuilderInterceptor"/>.
         /// The state is per control builder.</param>
-        public virtual void OnProcessGeneratedCode(ControlBuilder controlBuilder, 
-                                                   CodeCompileUnit codeCompileUnit, 
-                                                   CodeTypeDeclaration baseType, 
-                                                   CodeTypeDeclaration derivedType, 
-                                                   CodeMemberMethod buildMethod, 
-                                                   CodeMemberMethod dataBindingMethod,
-                                                   IDictionary additionalState) {
-        }
+        public virtual void OnProcessGeneratedCode(
+            ControlBuilder controlBuilder,
+            CodeCompileUnit codeCompileUnit,
+            CodeTypeDeclaration baseType,
+            CodeTypeDeclaration derivedType,
+            CodeMemberMethod buildMethod,
+            CodeMemberMethod dataBindingMethod,
+            IDictionary additionalState
+        ) { }
     }
 }

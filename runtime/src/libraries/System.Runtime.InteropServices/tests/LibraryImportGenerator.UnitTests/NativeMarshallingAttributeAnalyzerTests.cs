@@ -1,15 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Testing;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Testing;
 using Xunit;
 using static Microsoft.Interop.Analyzers.NativeMarshallingAttributeAnalyzer;
-
-using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpAnalyzerVerifier<
-    Microsoft.Interop.Analyzers.NativeMarshallingAttributeAnalyzer>;
+using VerifyCS = Microsoft.Interop.UnitTests.Verifiers.CSharpAnalyzerVerifier<Microsoft.Interop.Analyzers.NativeMarshallingAttributeAnalyzer>;
 
 namespace LibraryImportGenerator.UnitTests
 {
@@ -25,8 +23,13 @@ namespace LibraryImportGenerator.UnitTests
                 class ManagedType {}
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(source,
-                VerifyCS.Diagnostic(MarshallerEntryPointTypeMustBeNonNullRule).WithLocation(0).WithArguments("ManagedType"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(MarshallerEntryPointTypeMustBeNonNullRule)
+                    .WithLocation(0)
+                    .WithArguments("ManagedType")
+            );
         }
 
         [Fact]
@@ -43,8 +46,15 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(source,
-                VerifyCS.Diagnostic(MarshallerEntryPointTypeMustHaveCustomMarshallerAttributeWithMatchingManagedTypeRule).WithLocation(0).WithArguments("MarshallerType", "ManagedType"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(
+                        MarshallerEntryPointTypeMustHaveCustomMarshallerAttributeWithMatchingManagedTypeRule
+                    )
+                    .WithLocation(0)
+                    .WithArguments("MarshallerType", "ManagedType")
+            );
         }
 
         [Fact]
@@ -63,8 +73,15 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(source,
-                VerifyCS.Diagnostic(MarshallerEntryPointTypeMustHaveCustomMarshallerAttributeWithMatchingManagedTypeRule).WithLocation(0).WithArguments("MarshallerType", "ManagedType"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(
+                        MarshallerEntryPointTypeMustHaveCustomMarshallerAttributeWithMatchingManagedTypeRule
+                    )
+                    .WithLocation(0)
+                    .WithArguments("MarshallerType", "ManagedType")
+            );
         }
 
         [Fact]
@@ -72,10 +89,10 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 [NativeMarshalling(typeof(MarshallerType))]
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType))]
                 static class MarshallerType
                 {
@@ -91,10 +108,10 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 [NativeMarshalling(typeof(MarshallerType<>))]
                 class ManagedType<T> {}
-                
+
                 [CustomMarshaller(typeof(ManagedType<>), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
                 static class MarshallerType<T>
                 {
@@ -116,7 +133,7 @@ namespace LibraryImportGenerator.UnitTests
                     [NativeMarshalling(typeof(MarshallerType<>))]
                     public class ManagedType {}
                 }
-                
+
                 [CustomMarshaller(typeof(Container<>.ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType<>))]
                 static class MarshallerType<T>
                 {
@@ -132,10 +149,10 @@ namespace LibraryImportGenerator.UnitTests
         {
             string source = """
                 using System.Runtime.InteropServices.Marshalling;
-                
+
                 [NativeMarshalling(typeof(MarshallerType))]
                 class ManagedType {}
-                
+
                 [CustomMarshaller(typeof(int), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType))]
                 [CustomMarshaller(typeof(ManagedType), MarshalMode.ManagedToUnmanagedIn, typeof(MarshallerType))]
                 static class MarshallerType
@@ -164,8 +181,13 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(source,
-                VerifyCS.Diagnostic(GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule).WithLocation(0).WithArguments("MarshallerType<U, V>", "ManagedType<T>"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule)
+                    .WithLocation(0)
+                    .WithArguments("MarshallerType<U, V>", "ManagedType<T>")
+            );
         }
 
         [Fact]
@@ -184,8 +206,13 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(source,
-                VerifyCS.Diagnostic(GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule).WithLocation(0).WithArguments("MarshallerType<V>", "ManagedType<T, U>"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule)
+                    .WithLocation(0)
+                    .WithArguments("MarshallerType<V>", "ManagedType<T, U>")
+            );
         }
 
         [Fact]
@@ -229,8 +256,13 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(source,
-                VerifyCS.Diagnostic(GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule).WithLocation(0).WithArguments("MarshallerType<U>", "ManagedType<T>"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule)
+                    .WithLocation(0)
+                    .WithArguments("MarshallerType<U>", "ManagedType<T>")
+            );
         }
 
         [Fact]
@@ -252,8 +284,13 @@ namespace LibraryImportGenerator.UnitTests
                 }
                 """;
 
-            await VerifyCS.VerifyAnalyzerAsync(source,
-                VerifyCS.Diagnostic(GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule).WithLocation(0).WithArguments("MarshallerType<U, V, W>", "ManagedType<T>"));
+            await VerifyCS.VerifyAnalyzerAsync(
+                source,
+                VerifyCS
+                    .Diagnostic(GenericEntryPointMarshallerTypeMustBeClosedOrMatchArityRule)
+                    .WithLocation(0)
+                    .WithArguments("MarshallerType<U, V, W>", "ManagedType<T>")
+            );
         }
 
         [Fact]
@@ -266,7 +303,7 @@ namespace LibraryImportGenerator.UnitTests
 
                 [assembly:AssemblyMetadata("MyKey", "MyValue")]
                 [module:SkipLocalsInit]
-                
+
                 public class X
                 {
                     void Foo([MarshalAs(UnmanagedType.I4)] int i)

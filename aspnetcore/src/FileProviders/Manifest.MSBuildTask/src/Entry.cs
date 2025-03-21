@@ -22,11 +22,15 @@ public class Entry : IEquatable<Entry>
 
     public ISet<Entry> Children { get; } = new SortedSet<Entry>(NameComparer.Instance);
 
-    public static Entry Directory(string name) =>
-        new Entry { Name = name };
+    public static Entry Directory(string name) => new Entry { Name = name };
 
     public static Entry File(string name, string assemblyResourceName) =>
-        new Entry { Name = name, AssemblyResourceName = assemblyResourceName, IsFile = true };
+        new Entry
+        {
+            Name = name,
+            AssemblyResourceName = assemblyResourceName,
+            IsFile = true,
+        };
 
     internal void AddChild(Entry child)
     {
@@ -37,7 +41,9 @@ public class Entry : IEquatable<Entry>
 
         if (Children.Contains(child))
         {
-            throw new InvalidOperationException($"An item with the name '{child.Name}' already exists.");
+            throw new InvalidOperationException(
+                $"An item with the name '{child.Name}' already exists."
+            );
         }
 
         Children.Add(child);
@@ -56,7 +62,9 @@ public class Entry : IEquatable<Entry>
             {
                 if (child.IsFile)
                 {
-                    throw new InvalidOperationException("Tried to find a directory but found a file instead");
+                    throw new InvalidOperationException(
+                        "Tried to find a directory but found a file instead"
+                    );
                 }
                 else
                 {
@@ -77,7 +85,11 @@ public class Entry : IEquatable<Entry>
 
         if (IsFile)
         {
-            return string.Equals(other.AssemblyResourceName, AssemblyResourceName, StringComparison.Ordinal);
+            return string.Equals(
+                other.AssemblyResourceName,
+                AssemblyResourceName,
+                StringComparison.Ordinal
+            );
         }
         else
         {

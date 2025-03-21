@@ -12,8 +12,10 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 internal sealed class HtmlAttributePropertyHelper
 {
-    private static readonly ConcurrentDictionary<Type, HtmlAttributePropertyHelper[]> ReflectionCache =
-        new ConcurrentDictionary<Type, HtmlAttributePropertyHelper[]>();
+    private static readonly ConcurrentDictionary<
+        Type,
+        HtmlAttributePropertyHelper[]
+    > ReflectionCache = new ConcurrentDictionary<Type, HtmlAttributePropertyHelper[]>();
     private readonly PropertyHelper _propertyHelper;
 
     public HtmlAttributePropertyHelper(PropertyHelper propertyHelper)

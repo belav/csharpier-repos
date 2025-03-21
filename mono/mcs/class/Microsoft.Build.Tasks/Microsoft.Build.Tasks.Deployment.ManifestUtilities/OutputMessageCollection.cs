@@ -25,53 +25,54 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public sealed class OutputMessageCollection : IEnumerable {
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public sealed class OutputMessageCollection : IEnumerable
+    {
+        int error_count;
+        List<OutputMessage> list;
+        int warning_count;
 
-		int			error_count;
-		List <OutputMessage>	list;
-		int			warning_count;
+        OutputMessageCollection()
+        {
+            list = new List<OutputMessage>();
+        }
 
-		OutputMessageCollection ()
-		{
-			list = new List <OutputMessage> ();
-		}
-	
-		[MonoTODO]
-		public void Clear ()
-		{
-			list.Clear ();
-		}
-		
-		[MonoTODO]
-		public IEnumerator GetEnumerator ()
-		{
-			return list.GetEnumerator ();
-		}
-		
-		[MonoTODO]
-		public int ErrorCount {
-			get { return error_count; }
-		}
-		
-		[MonoTODO]
-		public int WarningCount {
-			get { return warning_count; }
-		}
-		
-		[MonoTODO]
-		public OutputMessage this [int index] {
-			get { return list [index]; }
-		}
-	}
+        [MonoTODO]
+        public void Clear()
+        {
+            list.Clear();
+        }
+
+        [MonoTODO]
+        public IEnumerator GetEnumerator()
+        {
+            return list.GetEnumerator();
+        }
+
+        [MonoTODO]
+        public int ErrorCount
+        {
+            get { return error_count; }
+        }
+
+        [MonoTODO]
+        public int WarningCount
+        {
+            get { return warning_count; }
+        }
+
+        [MonoTODO]
+        public OutputMessage this[int index]
+        {
+            get { return list[index]; }
+        }
+    }
 }
-

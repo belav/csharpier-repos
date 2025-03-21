@@ -22,5 +22,6 @@ public interface ICompiledModelScaffolder
     IReadOnlyList<string> ScaffoldModel(
         IModel model,
         string outputDir,
-        CompiledModelCodeGenerationOptions options);
+        CompiledModelCodeGenerationOptions options
+    );
 }

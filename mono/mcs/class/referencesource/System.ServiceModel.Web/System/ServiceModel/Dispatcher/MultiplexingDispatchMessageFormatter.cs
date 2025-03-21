@@ -26,13 +26,13 @@ namespace System.ServiceModel.Dispatcher
 
         public Dictionary<WebMessageFormat, string> DefaultContentTypes
         {
-            get
-            {
-                return this.defaultContentTypes;
-            }
+            get { return this.defaultContentTypes; }
         }
 
-        public MultiplexingDispatchMessageFormatter(Dictionary<WebMessageFormat, IDispatchMessageFormatter> formatters, WebMessageFormat defaultFormat)
+        public MultiplexingDispatchMessageFormatter(
+            Dictionary<WebMessageFormat, IDispatchMessageFormatter> formatters,
+            WebMessageFormat defaultFormat
+        )
         {
             if (formatters == null)
             {
@@ -41,15 +41,26 @@ namespace System.ServiceModel.Dispatcher
             this.formatters = formatters;
             this.defaultFormat = defaultFormat;
             this.defaultContentTypes = new Dictionary<WebMessageFormat, string>();
-            Fx.Assert(this.formatters.ContainsKey(this.defaultFormat), "The default format should always be included in the dictionary of formatters.");
+            Fx.Assert(
+                this.formatters.ContainsKey(this.defaultFormat),
+                "The default format should always be included in the dictionary of formatters."
+            );
         }
 
         public void DeserializeRequest(Message message, object[] parameters)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.GetString(SR2.SerializingRequestNotSupportedByFormatter, this)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotSupportedException(
+                    SR2.GetString(SR2.SerializingRequestNotSupportedByFormatter, this)
+                )
+            );
         }
 
-        public Message SerializeReply(MessageVersion messageVersion, object[] parameters, object result)
+        public Message SerializeReply(
+            MessageVersion messageVersion,
+            object[] parameters,
+            object result
+        )
         {
             WebOperationContext currentContext = WebOperationContext.Current;
             OutgoingWebResponseContext outgoingResponse = null;
@@ -58,7 +69,7 @@ namespace System.ServiceModel.Dispatcher
             {
                 outgoingResponse = currentContext.OutgoingResponse;
             }
-            
+
             WebMessageFormat format = this.defaultFormat;
             if (outgoingResponse != null)
             {
@@ -75,22 +86,46 @@ namespace System.ServiceModel.Dispatcher
 
                 if (OperationContext.Current != null)
                 {
-                    MessageProperties messageProperties = OperationContext.Current.IncomingMessageProperties;
-                    if (messageProperties.ContainsKey(WebHttpDispatchOperationSelector.HttpOperationNamePropertyName))
+                    MessageProperties messageProperties = OperationContext
+                        .Current
+                        .IncomingMessageProperties;
+                    if (
+                        messageProperties.ContainsKey(
+                            WebHttpDispatchOperationSelector.HttpOperationNamePropertyName
+                        )
+                    )
                     {
-                        operationName = messageProperties[WebHttpDispatchOperationSelector.HttpOperationNamePropertyName] as string;
+                        operationName =
+                            messageProperties[
+                                WebHttpDispatchOperationSelector.HttpOperationNamePropertyName
+                            ] as string;
                     }
                 }
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(SR2.GetString(SR2.OperationDoesNotSupportFormat, operationName, format.ToString())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException(
+                        SR2.GetString(
+                            SR2.OperationDoesNotSupportFormat,
+                            operationName,
+                            format.ToString()
+                        )
+                    )
+                );
             }
 
             if (outgoingResponse != null && string.IsNullOrEmpty(outgoingResponse.ContentType))
             {
-                string automatedSelectionContentType = outgoingResponse.AutomatedFormatSelectionContentType;
+                string automatedSelectionContentType =
+                    outgoingResponse.AutomatedFormatSelectionContentType;
                 if (!string.IsNullOrEmpty(automatedSelectionContentType))
                 {
                     // Don't set the content-type if it is default xml for backwards compatiabilty
-                    if (!string.Equals(automatedSelectionContentType, defaultContentTypes[WebMessageFormat.Xml], StringComparison.OrdinalIgnoreCase))
+                    if (
+                        !string.Equals(
+                            automatedSelectionContentType,
+                            defaultContentTypes[WebMessageFormat.Xml],
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         outgoingResponse.ContentType = automatedSelectionContentType;
                     }
@@ -105,7 +140,8 @@ namespace System.ServiceModel.Dispatcher
                 }
             }
 
-            Message message = this.formatters[format].SerializeReply(messageVersion, parameters, result);
+            Message message = this.formatters[format]
+                .SerializeReply(messageVersion, parameters, result);
 
             return message;
         }
@@ -116,4 +152,3 @@ namespace System.ServiceModel.Dispatcher
         }
     }
 }
-

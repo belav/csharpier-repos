@@ -42,7 +42,11 @@ namespace System.Collections.Concurrent
     [UnsupportedOSPlatform("browser")]
     [DebuggerTypeProxy(typeof(BlockingCollectionDebugView<>))]
     [DebuggerDisplay("Count = {Count}, Type = {_collection}")]
-    public class BlockingCollection<T> : IEnumerable<T>, ICollection, IDisposable, IReadOnlyCollection<T>
+    public class BlockingCollection<T>
+        : IEnumerable<T>,
+            ICollection,
+            IDisposable,
+            IReadOnlyCollection<T>
     {
         private IProducerConsumerCollection<T> _collection;
         private int _boundedCapacity;
@@ -128,10 +132,7 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.NotSupportedException">The SyncRoot property is not supported.</exception>
         object ICollection.SyncRoot
         {
-            get
-            {
-                throw new NotSupportedException(SR.ConcurrentCollection_SyncRoot_NotSupported);
-            }
+            get { throw new NotSupportedException(SR.ConcurrentCollection_SyncRoot_NotSupported); }
         }
         #endregion
 
@@ -144,9 +145,7 @@ namespace System.Collections.Concurrent
         /// The default underlying collection is a <see cref="System.Collections.Concurrent.ConcurrentQueue{T}">ConcurrentQueue&lt;T&gt;</see>.
         /// </remarks>
         public BlockingCollection()
-            : this(new ConcurrentQueue<T>())
-        {
-        }
+            : this(new ConcurrentQueue<T>()) { }
 
         /// <summary>Initializes a new instance of the <see
         /// cref="System.Collections.Concurrent.BlockingCollection{T}"/>
@@ -159,9 +158,7 @@ namespace System.Collections.Concurrent
         /// The default underlying collection is a <see cref="System.Collections.Concurrent.ConcurrentQueue{T}">ConcurrentQueue&lt;T&gt;</see>.
         /// </remarks>
         public BlockingCollection(int boundedCapacity)
-            : this(new ConcurrentQueue<T>(), boundedCapacity)
-        {
-        }
+            : this(new ConcurrentQueue<T>(), boundedCapacity) { }
 
         /// <summary>Initializes a new instance of the <see cref="System.Collections.Concurrent.BlockingCollection{T}"/>
         /// class with the specified upper-bound and using the provided
@@ -207,7 +204,11 @@ namespace System.Collections.Concurrent
         [MemberNotNull(nameof(_consumersCancellationTokenSource))]
         [MemberNotNull(nameof(_producersCancellationTokenSource))]
         [MemberNotNull(nameof(_occupiedNodes))]
-        private void Initialize(IProducerConsumerCollection<T> collection, int boundedCapacity, int collectionCount)
+        private void Initialize(
+            IProducerConsumerCollection<T> collection,
+            int boundedCapacity,
+            int collectionCount
+        )
         {
             Debug.Assert(boundedCapacity > 0 || boundedCapacity == NON_BOUNDED);
 
@@ -227,10 +228,8 @@ namespace System.Collections.Concurrent
                 _freeNodes = new SemaphoreSlim(boundedCapacity - collectionCount);
             }
 
-
             _occupiedNodes = new SemaphoreSlim(collectionCount);
         }
-
 
         /// <summary>
         /// Adds the item to the <see cref="System.Collections.Concurrent.BlockingCollection{T}"/>.
@@ -325,7 +324,11 @@ namespace System.Collections.Concurrent
         public bool TryAdd(T item, TimeSpan timeout)
         {
             ValidateTimeout(timeout);
-            return TryAddWithNoTimeValidation(item, (int)timeout.TotalMilliseconds, CancellationToken.None);
+            return TryAddWithNoTimeValidation(
+                item,
+                (int)timeout.TotalMilliseconds,
+                CancellationToken.None
+            );
         }
 
         /// <summary>
@@ -391,7 +394,11 @@ namespace System.Collections.Concurrent
         /// as complete with regards to additions.</exception>
         /// <exception cref="System.ObjectDisposedException">If the collection has been disposed.</exception>
         /// <exception cref="System.InvalidOperationException">The underlying collection didn't accept the item.</exception>
-        private bool TryAddWithNoTimeValidation(T item, int millisecondsTimeout, CancellationToken cancellationToken)
+        private bool TryAddWithNoTimeValidation(
+            T item,
+            int millisecondsTimeout,
+            CancellationToken cancellationToken
+        )
         {
             CheckDisposed();
 
@@ -415,8 +422,13 @@ namespace System.Collections.Concurrent
                     if (waitForSemaphoreWasSuccessful == false && millisecondsTimeout != 0)
                     {
                         linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
-                            cancellationToken, _producersCancellationTokenSource.Token);
-                        waitForSemaphoreWasSuccessful = _freeNodes.Wait(millisecondsTimeout, linkedTokenSource.Token);
+                            cancellationToken,
+                            _producersCancellationTokenSource.Token
+                        );
+                        waitForSemaphoreWasSuccessful = _freeNodes.Wait(
+                            millisecondsTimeout,
+                            linkedTokenSource.Token
+                        );
                     }
                 }
                 catch (OperationCanceledException)
@@ -427,8 +439,9 @@ namespace System.Collections.Concurrent
                     //if cancellation was via internal token, this indicates invalid use, hence InvalidOpEx.
                     //Debug.Assert(_ProducersCancellationTokenSource.Token.IsCancellationRequested);
 
-                    throw new InvalidOperationException
-                        (SR.BlockingCollection_Add_ConcurrentCompleteAdd);
+                    throw new InvalidOperationException(
+                        SR.BlockingCollection_Add_ConcurrentCompleteAdd
+                    );
                 }
                 finally
                 {
@@ -449,13 +462,23 @@ namespace System.Collections.Concurrent
                     {
                         spinner.Reset();
                         // CompleteAdding is requested, spin then throw
-                        while (_currentAdders != COMPLETE_ADDING_ON_MASK) spinner.SpinOnce();
+                        while (_currentAdders != COMPLETE_ADDING_ON_MASK)
+                            spinner.SpinOnce();
                         throw new InvalidOperationException(SR.BlockingCollection_Completed);
                     }
 
-                    if (Interlocked.CompareExchange(ref _currentAdders, observedAdders + 1, observedAdders) == observedAdders)
+                    if (
+                        Interlocked.CompareExchange(
+                            ref _currentAdders,
+                            observedAdders + 1,
+                            observedAdders
+                        ) == observedAdders
+                    )
                     {
-                        Debug.Assert((observedAdders + 1) <= (~COMPLETE_ADDING_ON_MASK), "The number of concurrent adders thread exceeded the maximum limit.");
+                        Debug.Assert(
+                            (observedAdders + 1) <= (~COMPLETE_ADDING_ON_MASK),
+                            "The number of concurrent adders thread exceeded the maximum limit."
+                        );
                         break;
                     }
                     spinner.SpinOnce(sleep1Threshold: -1);
@@ -577,7 +600,12 @@ namespace System.Collections.Concurrent
         public bool TryTake([MaybeNullWhen(false)] out T item, TimeSpan timeout)
         {
             ValidateTimeout(timeout);
-            return TryTakeWithNoTimeValidation(out item, (int)timeout.TotalMilliseconds, CancellationToken.None, null);
+            return TryTakeWithNoTimeValidation(
+                out item,
+                (int)timeout.TotalMilliseconds,
+                CancellationToken.None,
+                null
+            );
         }
 
         /// <summary>
@@ -598,7 +626,12 @@ namespace System.Collections.Concurrent
         public bool TryTake([MaybeNullWhen(false)] out T item, int millisecondsTimeout)
         {
             ValidateMillisecondsTimeout(millisecondsTimeout);
-            return TryTakeWithNoTimeValidation(out item, millisecondsTimeout, CancellationToken.None, null);
+            return TryTakeWithNoTimeValidation(
+                out item,
+                millisecondsTimeout,
+                CancellationToken.None,
+                null
+            );
         }
 
         /// <summary>
@@ -620,10 +653,19 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.InvalidOperationException">The underlying collection was modified
         /// outside of this <see
         /// cref="System.Collections.Concurrent.BlockingCollection{T}"/> instance.</exception>
-        public bool TryTake([MaybeNullWhen(false)] out T item, int millisecondsTimeout, CancellationToken cancellationToken)
+        public bool TryTake(
+            [MaybeNullWhen(false)] out T item,
+            int millisecondsTimeout,
+            CancellationToken cancellationToken
+        )
         {
             ValidateMillisecondsTimeout(millisecondsTimeout);
-            return TryTakeWithNoTimeValidation(out item, millisecondsTimeout, cancellationToken, null);
+            return TryTakeWithNoTimeValidation(
+                out item,
+                millisecondsTimeout,
+                cancellationToken,
+                null
+            );
         }
 
         /// <summary>Takes an item from the underlying data store using its IProducerConsumerCollection&lt;T&gt;.Take
@@ -642,7 +684,12 @@ namespace System.Collections.Concurrent
         /// <returns>False if the collection remained empty till the timeout period was exhausted. True otherwise.</returns>
         /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken"/> is canceled.</exception>
         /// <exception cref="System.ObjectDisposedException">If the collection has been disposed.</exception>
-        private bool TryTakeWithNoTimeValidation([MaybeNullWhen(false)] out T item, int millisecondsTimeout, CancellationToken cancellationToken, CancellationTokenSource? combinedTokenSource)
+        private bool TryTakeWithNoTimeValidation(
+            [MaybeNullWhen(false)] out T item,
+            int millisecondsTimeout,
+            CancellationToken cancellationToken,
+            CancellationTokenSource? combinedTokenSource
+        )
         {
             CheckDisposed();
             item = default(T)!;
@@ -664,8 +711,14 @@ namespace System.Collections.Concurrent
                 if (waitForSemaphoreWasSuccessful == false && millisecondsTimeout != 0)
                 {
                     // create the linked token if it is not created yet
-                    linkedTokenSource ??= CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _consumersCancellationTokenSource.Token);
-                    waitForSemaphoreWasSuccessful = _occupiedNodes.Wait(millisecondsTimeout, linkedTokenSource.Token);
+                    linkedTokenSource ??= CancellationTokenSource.CreateLinkedTokenSource(
+                        cancellationToken,
+                        _consumersCancellationTokenSource.Token
+                    );
+                    waitForSemaphoreWasSuccessful = _occupiedNodes.Wait(
+                        millisecondsTimeout,
+                        linkedTokenSource.Token
+                    );
                 }
             }
             //The collection became completed while waiting on the semaphore.
@@ -697,8 +750,9 @@ namespace System.Collections.Concurrent
                     if (!removeSucceeded)
                     {
                         // Check if the collection is empty which means that the collection was modified outside BlockingCollection
-                        throw new InvalidOperationException
-                            (SR.BlockingCollection_Take_CollectionModified);
+                        throw new InvalidOperationException(
+                            SR.BlockingCollection_Take_CollectionModified
+                        );
                     }
                 }
                 finally
@@ -730,8 +784,6 @@ namespace System.Collections.Concurrent
             return waitForSemaphoreWasSuccessful;
         }
 
-
-
         /// <summary>
         /// Adds the specified item to any one of the specified
         /// <see cref="System.Collections.Concurrent.BlockingCollection{T}"/> instances.
@@ -762,10 +814,12 @@ namespace System.Collections.Concurrent
 #else
             return
 #endif
-                TryAddToAny(collections, item, Timeout.Infinite, CancellationToken.None);
+            TryAddToAny(collections, item, Timeout.Infinite, CancellationToken.None);
 #if DEBUG
-            Debug.Assert(tryAddAnyReturnValue >= 0 && tryAddAnyReturnValue < collections.Length,
-                         "TryAddToAny() was expected to return an index within the bounds of the collections array.");
+            Debug.Assert(
+                tryAddAnyReturnValue >= 0 && tryAddAnyReturnValue < collections.Length,
+                "TryAddToAny() was expected to return an index within the bounds of the collections array."
+            );
             return tryAddAnyReturnValue;
 #endif
         }
@@ -797,17 +851,23 @@ namespace System.Collections.Concurrent
         /// a call to AddToAny may block until space is available in one of the collections
         /// to store the provided item.
         /// </remarks>
-        public static int AddToAny(BlockingCollection<T>[] collections, T item, CancellationToken cancellationToken)
+        public static int AddToAny(
+            BlockingCollection<T>[] collections,
+            T item,
+            CancellationToken cancellationToken
+        )
         {
 #if DEBUG
             int tryAddAnyReturnValue =
 #else
             return
 #endif
-                TryAddToAny(collections, item, Timeout.Infinite, cancellationToken);
+            TryAddToAny(collections, item, Timeout.Infinite, cancellationToken);
 #if DEBUG
-            Debug.Assert(tryAddAnyReturnValue >= 0 && tryAddAnyReturnValue < collections.Length,
-                         "TryAddToAny() was expected to return an index within the bounds of the collections array.");
+            Debug.Assert(
+                tryAddAnyReturnValue >= 0 && tryAddAnyReturnValue < collections.Length,
+                "TryAddToAny() was expected to return an index within the bounds of the collections array."
+            );
             return tryAddAnyReturnValue;
 #endif
         }
@@ -862,7 +922,12 @@ namespace System.Collections.Concurrent
         public static int TryAddToAny(BlockingCollection<T>[] collections, T item, TimeSpan timeout)
         {
             ValidateTimeout(timeout);
-            return TryAddToAnyCore(collections, item, (int)timeout.TotalMilliseconds, CancellationToken.None);
+            return TryAddToAnyCore(
+                collections,
+                item,
+                (int)timeout.TotalMilliseconds,
+                CancellationToken.None
+            );
         }
 
         /// <summary>
@@ -886,7 +951,11 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.InvalidOperationException">At least one underlying collection didn't accept the item.</exception>
         /// <exception cref="System.ArgumentOutOfRangeException">The count of <paramref name="collections"/> is greater than the maximum size of
         /// 62 for STA and 63 for MTA.</exception>
-        public static int TryAddToAny(BlockingCollection<T>[] collections, T item, int millisecondsTimeout)
+        public static int TryAddToAny(
+            BlockingCollection<T>[] collections,
+            T item,
+            int millisecondsTimeout
+        )
         {
             ValidateMillisecondsTimeout(millisecondsTimeout);
             return TryAddToAnyCore(collections, item, millisecondsTimeout, CancellationToken.None);
@@ -918,7 +987,12 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.InvalidOperationException">At least one underlying collection didn't accept the item.</exception>
         /// <exception cref="System.ArgumentOutOfRangeException">The count of <paramref name="collections"/> is greater than the maximum size of
         /// 62 for STA and 63 for MTA.</exception>
-        public static int TryAddToAny(BlockingCollection<T>[] collections, T item, int millisecondsTimeout, CancellationToken cancellationToken)
+        public static int TryAddToAny(
+            BlockingCollection<T>[] collections,
+            T item,
+            int millisecondsTimeout,
+            CancellationToken cancellationToken
+        )
         {
             ValidateMillisecondsTimeout(millisecondsTimeout);
             return TryAddToAnyCore(collections, item, millisecondsTimeout, cancellationToken);
@@ -940,7 +1014,12 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.ArgumentException">If the collections argument is a 0-length array or contains a
         /// null element. Also, if at least one of the collections has been marked complete for adds.</exception>
         /// <exception cref="System.ObjectDisposedException">If at least one of the collections has been disposed.</exception>
-        private static int TryAddToAnyCore(BlockingCollection<T>[] collections, T item, int millisecondsTimeout, CancellationToken externalCancellationToken)
+        private static int TryAddToAnyCore(
+            BlockingCollection<T>[] collections,
+            T item,
+            int millisecondsTimeout,
+            CancellationToken externalCancellationToken
+        )
         {
             ValidateCollectionsArray(collections, true);
             const int OPERATION_FAILED = -1;
@@ -959,7 +1038,6 @@ namespace System.Collections.Concurrent
             if (index > -1)
                 return index;
 
-
             // Get wait handles and the tokens for all collections,
             // and construct a single combined token from all the tokens,
             // add the combined token handle to the handles list
@@ -968,7 +1046,12 @@ namespace System.Collections.Concurrent
             // If the combined token is cancelled, this mean either the external token is cancelled then throw OCE
             // or one if the collection is AddingCompleted then throw AE
             CancellationToken[] collatedCancellationTokens;
-            List<WaitHandle> handles = GetHandles(collections, externalCancellationToken, true, out collatedCancellationTokens);
+            List<WaitHandle> handles = GetHandles(
+                collections,
+                externalCancellationToken,
+                true,
+                out collatedCancellationTokens
+            );
 
             //Loop until one of these conditions is met:
             // 1- The operation is succeeded
@@ -979,7 +1062,10 @@ namespace System.Collections.Concurrent
             {
                 index = -1;
 
-                using (CancellationTokenSource linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(collatedCancellationTokens))
+                using (
+                    CancellationTokenSource linkedTokenSource =
+                        CancellationTokenSource.CreateLinkedTokenSource(collatedCancellationTokens)
+                )
                 {
                     handles.Add(linkedTokenSource.Token.WaitHandle); // add the combined token to the handles list
 
@@ -991,11 +1077,16 @@ namespace System.Collections.Concurrent
                     if (linkedTokenSource.IsCancellationRequested)
                     {
                         externalCancellationToken.ThrowIfCancellationRequested(); //case#3
-                        throw new ArgumentException(SR.BlockingCollection_CantAddAnyWhenCompleted, nameof(collections)); //case#4
+                        throw new ArgumentException(
+                            SR.BlockingCollection_CantAddAnyWhenCompleted,
+                            nameof(collections)
+                        ); //case#4
                     }
                 }
 
-                Debug.Assert((index == WaitHandle.WaitTimeout) || (index >= 0 && index < handles.Count));
+                Debug.Assert(
+                    (index == WaitHandle.WaitTimeout) || (index >= 0 && index < handles.Count)
+                );
 
                 if (index == WaitHandle.WaitTimeout) //case#2
                     return OPERATION_FAILED;
@@ -1037,6 +1128,7 @@ namespace System.Collections.Concurrent
             }
             return -1;
         }
+
         /// <summary>
         /// Local static method, used by TryAddTakeAny to get the wait handles for the collection, with exclude option to exclude the Completed collections
         /// </summary>
@@ -1045,11 +1137,18 @@ namespace System.Collections.Concurrent
         /// <param name="isAddOperation">True if Add or TryAdd, false if Take or TryTake</param>
         /// <param name="cancellationTokens">Complete list of cancellationTokens to observe</param>
         /// <returns>The collections wait handles</returns>
-        private static List<WaitHandle> GetHandles(BlockingCollection<T>[] collections, CancellationToken externalCancellationToken, bool isAddOperation, out CancellationToken[] cancellationTokens)
+        private static List<WaitHandle> GetHandles(
+            BlockingCollection<T>[] collections,
+            CancellationToken externalCancellationToken,
+            bool isAddOperation,
+            out CancellationToken[] cancellationTokens
+        )
         {
             Debug.Assert(collections != null);
             List<WaitHandle> handlesList = new List<WaitHandle>(collections.Length + 1); // + 1 for the external token handle to be added
-            List<CancellationToken> tokensList = new List<CancellationToken>(collections.Length + 1); // + 1 for the external token
+            List<CancellationToken> tokensList = new List<CancellationToken>(
+                collections.Length + 1
+            ); // + 1 for the external token
             tokensList.Add(externalCancellationToken);
 
             // Read the appropriate WaitHandle based on the operation mode.
@@ -1113,6 +1212,7 @@ namespace System.Collections.Concurrent
 
             return currentWaitTimeout;
         }
+
         /// <summary>
         /// Takes an item from any one of the specified
         /// <see cref="System.Collections.Concurrent.BlockingCollection{T}"/> instances.
@@ -1162,11 +1262,23 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.ArgumentOutOfRangeException">The count of <paramref name="collections"/> is greater than the maximum size of
         /// 62 for STA and 63 for MTA.</exception>
         /// <remarks>A call to TakeFromAny may block until an item is available to be removed.</remarks>
-        public static int TakeFromAny(BlockingCollection<T>[] collections, out T? item, CancellationToken cancellationToken)
+        public static int TakeFromAny(
+            BlockingCollection<T>[] collections,
+            out T? item,
+            CancellationToken cancellationToken
+        )
         {
-            int returnValue = TryTakeFromAnyCore(collections, out item, Timeout.Infinite, true, cancellationToken);
-            Debug.Assert(returnValue >= 0 && returnValue < collections.Length,
-                         "TryTakeFromAny() was expected to return an index within the bounds of the collections array.");
+            int returnValue = TryTakeFromAnyCore(
+                collections,
+                out item,
+                Timeout.Infinite,
+                true,
+                cancellationToken
+            );
+            Debug.Assert(
+                returnValue >= 0 && returnValue < collections.Length,
+                "TryTakeFromAny() was expected to return an index within the bounds of the collections array."
+            );
             return returnValue;
         }
 
@@ -1221,10 +1333,20 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.ArgumentOutOfRangeException">The count of <paramref name="collections"/> is greater than the maximum size of
         /// 62 for STA and 63 for MTA.</exception>
         /// <remarks>A call to TryTakeFromAny may block until an item is available to be removed.</remarks>
-        public static int TryTakeFromAny(BlockingCollection<T>[] collections, out T? item, TimeSpan timeout)
+        public static int TryTakeFromAny(
+            BlockingCollection<T>[] collections,
+            out T? item,
+            TimeSpan timeout
+        )
         {
             ValidateTimeout(timeout);
-            return TryTakeFromAnyCore(collections, out item, (int)timeout.TotalMilliseconds, false, CancellationToken.None);
+            return TryTakeFromAnyCore(
+                collections,
+                out item,
+                (int)timeout.TotalMilliseconds,
+                false,
+                CancellationToken.None
+            );
         }
 
         /// <summary>
@@ -1251,10 +1373,20 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.ArgumentOutOfRangeException">The count of <paramref name="collections"/> is greater than the maximum size of
         /// 62 for STA and 63 for MTA.</exception>
         /// <remarks>A call to TryTakeFromAny may block until an item is available to be removed.</remarks>
-        public static int TryTakeFromAny(BlockingCollection<T>[] collections, out T? item, int millisecondsTimeout)
+        public static int TryTakeFromAny(
+            BlockingCollection<T>[] collections,
+            out T? item,
+            int millisecondsTimeout
+        )
         {
             ValidateMillisecondsTimeout(millisecondsTimeout);
-            return TryTakeFromAnyCore(collections, out item, millisecondsTimeout, false, CancellationToken.None);
+            return TryTakeFromAnyCore(
+                collections,
+                out item,
+                millisecondsTimeout,
+                false,
+                CancellationToken.None
+            );
         }
 
         /// <summary>
@@ -1285,10 +1417,21 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.ArgumentOutOfRangeException">The count of <paramref name="collections"/> is greater than the maximum size of
         /// 62 for STA and 63 for MTA.</exception>
         /// <remarks>A call to TryTakeFromAny may block until an item is available to be removed.</remarks>
-        public static int TryTakeFromAny(BlockingCollection<T>[] collections, out T? item, int millisecondsTimeout, CancellationToken cancellationToken)
+        public static int TryTakeFromAny(
+            BlockingCollection<T>[] collections,
+            out T? item,
+            int millisecondsTimeout,
+            CancellationToken cancellationToken
+        )
         {
             ValidateMillisecondsTimeout(millisecondsTimeout);
-            return TryTakeFromAnyCore(collections, out item, millisecondsTimeout, false, cancellationToken);
+            return TryTakeFromAnyCore(
+                collections,
+                out item,
+                millisecondsTimeout,
+                false,
+                cancellationToken
+            );
         }
 
         /// <summary>Takes an item from anyone of the specified collections.
@@ -1308,7 +1451,13 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.ArgumentException">If the collections argument is a 0-length array or contains a
         /// null element. Also, if at least one of the collections has been marked complete for adds.</exception>
         /// <exception cref="System.ObjectDisposedException">If at least one of the collections has been disposed.</exception>
-        private static int TryTakeFromAnyCore(BlockingCollection<T>[] collections, out T? item, int millisecondsTimeout, bool isTakeOperation, CancellationToken externalCancellationToken)
+        private static int TryTakeFromAnyCore(
+            BlockingCollection<T>[] collections,
+            out T? item,
+            int millisecondsTimeout,
+            bool isTakeOperation,
+            CancellationToken externalCancellationToken
+        )
         {
             ValidateCollectionsArray(collections, false);
 
@@ -1316,14 +1465,23 @@ namespace System.Collections.Concurrent
             for (int i = 0; i < collections.Length; i++)
             {
                 // Check if the collection is not completed, and potentially has at least one element by checking the semaphore count
-                if (!collections[i].IsCompleted && collections[i]._occupiedNodes.CurrentCount > 0 && collections[i].TryTake(out item))
+                if (
+                    !collections[i].IsCompleted
+                    && collections[i]._occupiedNodes.CurrentCount > 0
+                    && collections[i].TryTake(out item)
+                )
                     return i;
             }
 
             //Fast path failed, try the slow path
-            return TryTakeFromAnyCoreSlow(collections, out item, millisecondsTimeout, isTakeOperation, externalCancellationToken);
+            return TryTakeFromAnyCoreSlow(
+                collections,
+                out item,
+                millisecondsTimeout,
+                isTakeOperation,
+                externalCancellationToken
+            );
         }
-
 
         /// <summary>Takes an item from anyone of the specified collections.
         /// A <see cref="System.OperationCanceledException"/> is thrown if the <see cref="CancellationToken"/> is
@@ -1342,7 +1500,13 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.ArgumentException">If the collections argument is a 0-length array or contains a
         /// null element. Also, if at least one of the collections has been marked complete for adds.</exception>
         /// <exception cref="System.ObjectDisposedException">If at least one of the collections has been disposed.</exception>
-        private static int TryTakeFromAnyCoreSlow(BlockingCollection<T>[] collections, out T? item, int millisecondsTimeout, bool isTakeOperation, CancellationToken externalCancellationToken)
+        private static int TryTakeFromAnyCoreSlow(
+            BlockingCollection<T>[] collections,
+            out T? item,
+            int millisecondsTimeout,
+            bool isTakeOperation,
+            CancellationToken externalCancellationToken
+        )
         {
             const int OPERATION_FAILED = -1;
 
@@ -1354,7 +1518,6 @@ namespace System.Collections.Concurrent
             {
                 startTime = unchecked((uint)Environment.TickCount);
             }
-
 
             //Loop until one of these conditions is met:
             // 1- The operation is succeeded
@@ -1372,16 +1535,27 @@ namespace System.Collections.Concurrent
                 // If the combined token is cancelled, this mean either the external token is cancelled then throw OCE
                 // or one if the collection is Completed then exclude it and retry
                 CancellationToken[] collatedCancellationTokens;
-                List<WaitHandle> handles = GetHandles(collections, externalCancellationToken, false, out collatedCancellationTokens);
+                List<WaitHandle> handles = GetHandles(
+                    collections,
+                    externalCancellationToken,
+                    false,
+                    out collatedCancellationTokens
+                );
 
                 if (handles.Count == 0 && isTakeOperation) //case#5
-                    throw new ArgumentException(SR.BlockingCollection_CantTakeAnyWhenAllDone, nameof(collections));
+                    throw new ArgumentException(
+                        SR.BlockingCollection_CantTakeAnyWhenAllDone,
+                        nameof(collections)
+                    );
 
                 if (handles.Count == 0) //case#4
                     break;
 
                 //Wait for any collection to become available.
-                using (CancellationTokenSource linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(collatedCancellationTokens))
+                using (
+                    CancellationTokenSource linkedTokenSource =
+                        CancellationTokenSource.CreateLinkedTokenSource(collatedCancellationTokens)
+                )
                 {
                     handles.Add(linkedTokenSource.Token.WaitHandle); // add the combined token to the handles list
                     int index = WaitHandle.WaitAny(handles.ToArray(), timeout);
@@ -1393,7 +1567,10 @@ namespace System.Collections.Concurrent
 
                     if (!linkedTokenSource.IsCancellationRequested) // if neither internal nor external cancellation requested
                     {
-                        Debug.Assert((index == WaitHandle.WaitTimeout) || (index >= 0 && index < handles.Count));
+                        Debug.Assert(
+                            (index == WaitHandle.WaitTimeout)
+                                || (index >= 0 && index < handles.Count)
+                        );
                         if (index == WaitHandle.WaitTimeout) //case#2
                             break;
 
@@ -1402,7 +1579,10 @@ namespace System.Collections.Concurrent
                         {
                             for (int i = 0; i < collections.Length; i++)
                             {
-                                if (collections[i]._occupiedNodes.AvailableWaitHandle == handles[index])
+                                if (
+                                    collections[i]._occupiedNodes.AvailableWaitHandle
+                                    == handles[index]
+                                )
                                 {
                                     index = i;
                                     break;
@@ -1449,14 +1629,22 @@ namespace System.Collections.Concurrent
                 {
                     spinner.Reset();
                     // If there is another CompleteAdding in progress waiting the current adders, then spin until it finishes
-                    while (_currentAdders != COMPLETE_ADDING_ON_MASK) spinner.SpinOnce();
+                    while (_currentAdders != COMPLETE_ADDING_ON_MASK)
+                        spinner.SpinOnce();
                     return;
                 }
 
-                if (Interlocked.CompareExchange(ref _currentAdders, observedAdders | COMPLETE_ADDING_ON_MASK, observedAdders) == observedAdders)
+                if (
+                    Interlocked.CompareExchange(
+                        ref _currentAdders,
+                        observedAdders | COMPLETE_ADDING_ON_MASK,
+                        observedAdders
+                    ) == observedAdders
+                )
                 {
                     spinner.Reset();
-                    while (_currentAdders != COMPLETE_ADDING_ON_MASK) spinner.SpinOnce();
+                    while (_currentAdders != COMPLETE_ADDING_ON_MASK)
+                        spinner.SpinOnce();
 
                     if (Count == 0)
                     {
@@ -1482,7 +1670,6 @@ namespace System.Collections.Concurrent
         {
             _producersCancellationTokenSource.Cancel();
         }
-
 
         /// <summary>
         /// Releases resources used by the <see cref="System.Collections.Concurrent.BlockingCollection{T}"/> instance.
@@ -1571,7 +1758,11 @@ namespace System.Collections.Concurrent
             }
             catch (ArgumentOutOfRangeException)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, SR.BlockingCollection_CopyTo_NonNegative);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    index,
+                    SR.BlockingCollection_CopyTo_NonNegative
+                );
             }
             catch (ArgumentException)
             {
@@ -1583,11 +1774,17 @@ namespace System.Collections.Concurrent
             }
             catch (InvalidCastException)
             {
-                throw new ArgumentException(SR.BlockingCollection_CopyTo_IncorrectType, nameof(array));
+                throw new ArgumentException(
+                    SR.BlockingCollection_CopyTo_IncorrectType,
+                    nameof(array)
+                );
             }
             catch (ArrayTypeMismatchException)
             {
-                throw new ArgumentException(SR.BlockingCollection_CopyTo_IncorrectType, nameof(array));
+                throw new ArgumentException(
+                    SR.BlockingCollection_CopyTo_IncorrectType,
+                    nameof(array)
+                );
             }
         }
 
@@ -1616,8 +1813,19 @@ namespace System.Collections.Concurrent
                 yield break;
             }
 
-            using CancellationTokenSource linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, _consumersCancellationTokenSource.Token);
-            while (TryTakeWithNoTimeValidation(out T? item, Timeout.Infinite, cancellationToken, linkedTokenSource))
+            using CancellationTokenSource linkedTokenSource =
+                CancellationTokenSource.CreateLinkedTokenSource(
+                    cancellationToken,
+                    _consumersCancellationTokenSource.Token
+                );
+            while (
+                TryTakeWithNoTimeValidation(
+                    out T? item,
+                    Timeout.Infinite,
+                    cancellationToken,
+                    linkedTokenSource
+                )
+            )
             {
                 yield return item;
             }
@@ -1650,21 +1858,33 @@ namespace System.Collections.Concurrent
         /// <exception cref="System.ArgumentException">If the collections argument is a 0-length array or contains a
         /// null element. Also, if at least one of the collections has been marked complete for adds.</exception>
         /// <exception cref="System.ObjectDisposedException">If at least one of the collections has been disposed.</exception>
-        private static void ValidateCollectionsArray(BlockingCollection<T>[] collections, bool isAddOperation)
+        private static void ValidateCollectionsArray(
+            BlockingCollection<T>[] collections,
+            bool isAddOperation
+        )
         {
             ArgumentNullException.ThrowIfNull(collections);
 
             if (collections.Length < 1)
             {
                 throw new ArgumentException(
-                    SR.BlockingCollection_ValidateCollectionsArray_ZeroSize, nameof(collections));
+                    SR.BlockingCollection_ValidateCollectionsArray_ZeroSize,
+                    nameof(collections)
+                );
             }
-            if ((collections.Length > 63) ||
-                ((collections.Length == 63) && (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)))
+            if (
+                (collections.Length > 63)
+                || (
+                    (collections.Length == 63)
+                    && (Thread.CurrentThread.GetApartmentState() == ApartmentState.STA)
+                )
+            )
             {
                 //The number of WaitHandles must be <= 64 for MTA, and <=63 for STA, as we reserve one for CancellationToken
                 throw new ArgumentOutOfRangeException(
-                    nameof(collections), SR.BlockingCollection_ValidateCollectionsArray_LargeSize);
+                    nameof(collections),
+                    SR.BlockingCollection_ValidateCollectionsArray_LargeSize
+                );
             }
 
             for (int i = 0; i < collections.Length; ++i)
@@ -1672,17 +1892,23 @@ namespace System.Collections.Concurrent
                 if (collections[i] == null)
                 {
                     throw new ArgumentException(
-                        SR.BlockingCollection_ValidateCollectionsArray_NullElems, nameof(collections));
+                        SR.BlockingCollection_ValidateCollectionsArray_NullElems,
+                        nameof(collections)
+                    );
                 }
 
                 if (collections[i]._isDisposed)
                     throw new ObjectDisposedException(
-                        nameof(collections), SR.BlockingCollection_ValidateCollectionsArray_DispElems);
+                        nameof(collections),
+                        SR.BlockingCollection_ValidateCollectionsArray_DispElems
+                    );
 
                 if (isAddOperation && collections[i].IsAddingCompleted)
                 {
                     throw new ArgumentException(
-                        SR.BlockingCollection_CantAddAnyWhenCompleted, nameof(collections));
+                        SR.BlockingCollection_CantAddAnyWhenCompleted,
+                        nameof(collections)
+                    );
                 }
             }
         }
@@ -1696,10 +1922,20 @@ namespace System.Collections.Concurrent
         private static void ValidateTimeout(TimeSpan timeout)
         {
             long totalMilliseconds = (long)timeout.TotalMilliseconds;
-            if ((totalMilliseconds < 0 || totalMilliseconds > int.MaxValue) && (totalMilliseconds != Timeout.Infinite))
+            if (
+                (totalMilliseconds < 0 || totalMilliseconds > int.MaxValue)
+                && (totalMilliseconds != Timeout.Infinite)
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(timeout), timeout,
-                    SR.Format(CultureInfo.InvariantCulture, SR.BlockingCollection_TimeoutInvalid, int.MaxValue));
+                throw new ArgumentOutOfRangeException(
+                    nameof(timeout),
+                    timeout,
+                    SR.Format(
+                        CultureInfo.InvariantCulture,
+                        SR.BlockingCollection_TimeoutInvalid,
+                        int.MaxValue
+                    )
+                );
             }
         }
 
@@ -1712,8 +1948,15 @@ namespace System.Collections.Concurrent
         {
             if ((millisecondsTimeout < 0) && (millisecondsTimeout != Timeout.Infinite))
             {
-                throw new ArgumentOutOfRangeException(nameof(millisecondsTimeout), millisecondsTimeout,
-                    SR.Format(CultureInfo.InvariantCulture, SR.BlockingCollection_TimeoutInvalid, int.MaxValue));
+                throw new ArgumentOutOfRangeException(
+                    nameof(millisecondsTimeout),
+                    millisecondsTimeout,
+                    SR.Format(
+                        CultureInfo.InvariantCulture,
+                        SR.BlockingCollection_TimeoutInvalid,
+                        int.MaxValue
+                    )
+                );
             }
         }
 
@@ -1746,10 +1989,7 @@ namespace System.Collections.Concurrent
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
         public T[] Items
         {
-            get
-            {
-                return _blockingCollection.ToArray();
-            }
+            get { return _blockingCollection.ToArray(); }
         }
     }
 }

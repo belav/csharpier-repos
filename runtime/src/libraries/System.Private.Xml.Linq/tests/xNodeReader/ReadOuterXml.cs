@@ -10,7 +10,6 @@ namespace CoreXml.Test.XLinq
 {
     public partial class XNodeReaderFunctionalTests : TestModule
     {
-
         public partial class XNodeReaderTests : XLinqTestCase
         {
             public partial class TCReadOuterXml : BridgeHelpers
@@ -46,10 +45,14 @@ namespace CoreXml.Test.XLinq
                 private static string s_EXP_NEMP1 = "<NONEMPTY1>ABCDE</NONEMPTY1>";
                 private static string s_EXP_NEMP2 = "<NONEMPTY2 val=\"abc\">1234</NONEMPTY2>";
                 private static string s_EXP_ELEM1 = "<CHARS2>xxx<MARKUP />yyy</CHARS2>";
-                private static string s_EXP_ELEM2 = "<SKIP3><ELEM1 /><ELEM2>xxx yyy</ELEM2><ELEM3 /></SKIP3>";
-                private static string s_EXP_ELEM3 = "<CONTENT><e1 a1=\"a1value\" a2=\"a2value\"><e2 a1=\"a1value\" a2=\"a2value\"><e3 a1=\"a1value\" a2=\"a2value\">leave</e3></e2></e1></CONTENT>";
-                private static string s_EXP_ELEM4 = "<COMPLEX>Text<!-- comment --><![CDATA[cdata]]></COMPLEX>";
-                private static string s_EXP_ENT1_EXPAND_CHAR = "<ENTITY1 att1=\"xxx&lt;xxxAxxxCxxxe1fooxxx\">xxx&gt;xxxBxxxDxxxe1fooxxx</ENTITY1>";
+                private static string s_EXP_ELEM2 =
+                    "<SKIP3><ELEM1 /><ELEM2>xxx yyy</ELEM2><ELEM3 /></SKIP3>";
+                private static string s_EXP_ELEM3 =
+                    "<CONTENT><e1 a1=\"a1value\" a2=\"a2value\"><e2 a1=\"a1value\" a2=\"a2value\"><e3 a1=\"a1value\" a2=\"a2value\">leave</e3></e2></e1></CONTENT>";
+                private static string s_EXP_ELEM4 =
+                    "<COMPLEX>Text<!-- comment --><![CDATA[cdata]]></COMPLEX>";
+                private static string s_EXP_ENT1_EXPAND_CHAR =
+                    "<ENTITY1 att1=\"xxx&lt;xxxAxxxCxxxe1fooxxx\">xxx&gt;xxxBxxxDxxxe1fooxxx</ENTITY1>";
 
                 public override void Init()
                 {
@@ -61,35 +64,57 @@ namespace CoreXml.Test.XLinq
                     base.Terminate();
                 }
 
-                void TestOuterOnText(string strElem, string strOuterXml, string strNextElemName, bool bWhitespace)
+                void TestOuterOnText(
+                    string strElem,
+                    string strOuterXml,
+                    string strNextElemName,
+                    bool bWhitespace
+                )
                 {
-                    XmlReader DataReader = GetReader();//GetReader(pGenericXml);
+                    XmlReader DataReader = GetReader(); //GetReader(pGenericXml);
                     PositionOnElement(DataReader, strElem);
                     TestLog.Compare(DataReader.ReadOuterXml(), strOuterXml, "outer");
-                    TestLog.Compare(VerifyNode(DataReader, XmlNodeType.Text, string.Empty, "\n"), true, "vn2");
+                    TestLog.Compare(
+                        VerifyNode(DataReader, XmlNodeType.Text, string.Empty, "\n"),
+                        true,
+                        "vn2"
+                    );
                 }
 
-                void TestOuterOnElement(string strElem, string strOuterXml, string strNextElemName, bool bWhitespace)
+                void TestOuterOnElement(
+                    string strElem,
+                    string strOuterXml,
+                    string strNextElemName,
+                    bool bWhitespace
+                )
                 {
-                    XmlReader DataReader = GetReader();//GetReader(pGenericXml);
+                    XmlReader DataReader = GetReader(); //GetReader(pGenericXml);
                     PositionOnElement(DataReader, strElem);
                     TestLog.Compare(DataReader.ReadOuterXml(), strOuterXml, "outer");
-                    TestLog.Compare(VerifyNode(DataReader, XmlNodeType.Element, strNextElemName, string.Empty), true, "vn2");
+                    TestLog.Compare(
+                        VerifyNode(DataReader, XmlNodeType.Element, strNextElemName, string.Empty),
+                        true,
+                        "vn2"
+                    );
                 }
 
                 void TestOuterOnAttribute(string strElem, string strName, string strValue)
                 {
-                    XmlReader DataReader = GetReader();//GetReader(pGenericXml);
+                    XmlReader DataReader = GetReader(); //GetReader(pGenericXml);
                     PositionOnElement(DataReader, strElem);
                     DataReader.MoveToAttribute(DataReader.AttributeCount / 2);
                     string strExpected = string.Format("{0}=\"{1}\"", strName, strValue);
                     TestLog.Compare(DataReader.ReadOuterXml(), strExpected, "outer");
-                    TestLog.Compare(VerifyNode(DataReader, XmlNodeType.Attribute, strName, strValue), true, "vn");
+                    TestLog.Compare(
+                        VerifyNode(DataReader, XmlNodeType.Attribute, strName, strValue),
+                        true,
+                        "vn"
+                    );
                 }
 
                 void TestOuterOnNodeType(XmlNodeType nt)
                 {
-                    XmlReader DataReader = GetReader();//GetReader(pGenericXml);
+                    XmlReader DataReader = GetReader(); //GetReader(pGenericXml);
                     PositionOnNodeType(DataReader, nt);
                     DataReader.Read();
 
@@ -192,7 +217,16 @@ namespace CoreXml.Test.XLinq
                     string strExpected = "att1=\"xxx&lt;xxxAxxxCxxxe1fooxxx\"";
 
                     TestLog.Compare(DataReader.ReadOuterXml(), strExpected, "outer");
-                    TestLog.Compare(VerifyNode(DataReader, XmlNodeType.Attribute, "att1", ST_ENT1_ATT_EXPAND_ENTITIES), true, "vn");
+                    TestLog.Compare(
+                        VerifyNode(
+                            DataReader,
+                            XmlNodeType.Attribute,
+                            "att1",
+                            ST_ENT1_ATT_EXPAND_ENTITIES
+                        ),
+                        true,
+                        "vn"
+                    );
                 }
 
                 //[Variation("ReadOuterXml on ProcessingInstruction")]
@@ -219,8 +253,14 @@ namespace CoreXml.Test.XLinq
                             throw new TestException(TestResult.Failed, "");
                         }
                         catch (ArgumentOutOfRangeException) { }
-                        Assert.True(TestLog.Compare(DataReader.ReadOuterXml(), string.Empty, "outer"));
-                        Assert.True((DataReader.NodeType != XmlNodeType.Attribute) || (DataReader.Name != string.Empty) || (DataReader.Value != "UTF-8"));
+                        Assert.True(
+                            TestLog.Compare(DataReader.ReadOuterXml(), string.Empty, "outer")
+                        );
+                        Assert.True(
+                            (DataReader.NodeType != XmlNodeType.Attribute)
+                                || (DataReader.Name != string.Empty)
+                                || (DataReader.Value != "UTF-8")
+                        );
                     }
                 }
 
@@ -233,7 +273,11 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, s_ENT1);
 
                     TestLog.Compare(DataReader.ReadOuterXml(), strExpected, "outer");
-                    TestLog.Compare(VerifyNode(DataReader, XmlNodeType.Element, s_NEXT6, string.Empty), true, "vn");
+                    TestLog.Compare(
+                        VerifyNode(DataReader, XmlNodeType.Element, s_NEXT6, string.Empty),
+                        true,
+                        "vn"
+                    );
                 }
 
                 //[Variation("ReadOuterXml on attribute with entities, EntityHandling = ExpandCharEntities")]
@@ -244,7 +288,16 @@ namespace CoreXml.Test.XLinq
                     PositionOnElement(DataReader, s_ENT1);
                     DataReader.MoveToAttribute(DataReader.AttributeCount / 2);
                     TestLog.Compare(DataReader.ReadOuterXml(), strExpected, "outer");
-                    TestLog.Compare(VerifyNode(DataReader, XmlNodeType.Attribute, "att1", ST_ENT1_ATT_EXPAND_ENTITIES), true, "vn");
+                    TestLog.Compare(
+                        VerifyNode(
+                            DataReader,
+                            XmlNodeType.Attribute,
+                            "att1",
+                            ST_ENT1_ATT_EXPAND_ENTITIES
+                        ),
+                        true,
+                        "vn"
+                    );
                 }
 
                 //[Variation("One large element")]
@@ -269,10 +322,15 @@ namespace CoreXml.Test.XLinq
                 //[Variation("Read OuterXml when Namespaces=false and has an attribute xmlns")]
                 private void ReadOuterXmlWhenNamespacesEqualsToFalseAndHasAnAttributeXmlns()
                 {
-                    string xml = "<?xml version='1.0' encoding='utf-8' ?> <foo xmlns=\"testing\"><bar id=\"1\" /></foo>";
+                    string xml =
+                        "<?xml version='1.0' encoding='utf-8' ?> <foo xmlns=\"testing\"><bar id=\"1\" /></foo>";
                     XmlReader DataReader = GetReaderStr(xml);
                     DataReader.MoveToContent();
-                    TestLog.Compare(DataReader.ReadOuterXml(), "<foo xmlns=\"testing\"><bar id=\"1\" /></foo>", "mismatch");
+                    TestLog.Compare(
+                        DataReader.ReadOuterXml(),
+                        "<foo xmlns=\"testing\"><bar id=\"1\" /></foo>",
+                        "mismatch"
+                    );
                 }
             }
         }

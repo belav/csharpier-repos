@@ -7,7 +7,11 @@ using System.Linq;
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
 internal sealed class ImmutableStackBufferAdapter<TElement>
-    : ArrayPoolBufferAdapter<ImmutableStack<TElement>, ImmutableStackBufferAdapter<TElement>.ImmutableStackFactory, TElement>
+    : ArrayPoolBufferAdapter<
+        ImmutableStack<TElement>,
+        ImmutableStackBufferAdapter<TElement>.ImmutableStackFactory,
+        TElement
+    >
 {
     internal class ImmutableStackFactory : ICollectionFactory<ImmutableStack<TElement>, TElement>
     {
@@ -17,7 +21,9 @@ internal sealed class ImmutableStackBufferAdapter<TElement>
         }
     }
 
-    public static CollectionConverter<IImmutableStack<TElement>> CreateInterfaceConverter(FormDataConverter<TElement> elementConverter)
+    public static CollectionConverter<IImmutableStack<TElement>> CreateInterfaceConverter(
+        FormDataConverter<TElement> elementConverter
+    )
     {
         return new CollectionConverter<
             IImmutableStack<TElement>,
@@ -26,20 +32,33 @@ internal sealed class ImmutableStackBufferAdapter<TElement>
                 ImmutableStack<TElement>,
                 ImmutableStackBufferAdapter<TElement>,
                 PooledBuffer,
-                TElement>,
+                TElement
+            >,
             PooledBuffer,
-            TElement>(elementConverter);
+            TElement
+        >(elementConverter);
     }
 }
 
-internal class StaticCastAdapter<TCollectionInterface, TCollectionImplementation, TCollectionAdapter, TBuffer, TElement>
-    : ICollectionBufferAdapter<TCollectionInterface, TBuffer, TElement>
-    where TCollectionAdapter : ICollectionBufferAdapter<TCollectionImplementation, TBuffer, TElement>
+internal class StaticCastAdapter<
+    TCollectionInterface,
+    TCollectionImplementation,
+    TCollectionAdapter,
+    TBuffer,
+    TElement
+> : ICollectionBufferAdapter<TCollectionInterface, TBuffer, TElement>
+    where TCollectionAdapter : ICollectionBufferAdapter<
+            TCollectionImplementation,
+            TBuffer,
+            TElement
+        >
     where TCollectionImplementation : TCollectionInterface
 {
     public static TBuffer CreateBuffer() => TCollectionAdapter.CreateBuffer();
 
-    public static TBuffer Add(ref TBuffer buffer, TElement element) => TCollectionAdapter.Add(ref buffer, element);
+    public static TBuffer Add(ref TBuffer buffer, TElement element) =>
+        TCollectionAdapter.Add(ref buffer, element);
 
-    public static TCollectionInterface ToResult(TBuffer buffer) => TCollectionAdapter.ToResult(buffer);
+    public static TCollectionInterface ToResult(TBuffer buffer) =>
+        TCollectionAdapter.ToResult(buffer);
 }

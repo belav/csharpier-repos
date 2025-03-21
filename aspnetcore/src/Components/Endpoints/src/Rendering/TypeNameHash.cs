@@ -15,7 +15,9 @@ internal class TypeNameHash
     {
         if (type.FullName is not { } typeName)
         {
-            throw new InvalidOperationException($"Cannot compute a hash for a type without a {nameof(Type.FullName)}.");
+            throw new InvalidOperationException(
+                $"Cannot compute a hash for a type without a {nameof(Type.FullName)}."
+            );
         }
 
         Span<byte> typeNameBytes = stackalloc byte[MaxStackBufferSize];

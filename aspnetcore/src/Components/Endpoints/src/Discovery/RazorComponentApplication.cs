@@ -17,7 +17,8 @@ internal class RazorComponentApplication
 
     internal RazorComponentApplication(
         PageComponentInfo[] pageCollection,
-        ComponentInfo[] componentCollection)
+        ComponentInfo[] componentCollection
+    )
     {
         _pages = pageCollection;
         _components = componentCollection;

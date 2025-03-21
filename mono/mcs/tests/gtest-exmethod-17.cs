@@ -5,10 +5,9 @@ using Testy;
 
 public static class MainClass
 {
-	public static void Main ()
-	{
-		Object o = new Object ();
-		Console.WriteLine (o.MyFormat ("hello:{0}:{1}:", "there", "yak"));
-	}
+    public static void Main()
+    {
+        Object o = new Object();
+        Console.WriteLine(o.MyFormat("hello:{0}:{1}:", "there", "yak"));
+    }
 }
-

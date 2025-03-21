@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,28 +23,27 @@
 //	Pedro Martínez Juliá <pedromj@gmail.com>
 //
 
+namespace System.Windows.Forms
+{
+    public class DataGridViewCellEventArgs : EventArgs
+    {
+        private int columnIndex;
+        private int rowIndex;
 
-namespace System.Windows.Forms {
+        public DataGridViewCellEventArgs(int columnIndex, int rowIndex)
+        {
+            this.columnIndex = columnIndex;
+            this.rowIndex = rowIndex;
+        }
 
-	public class DataGridViewCellEventArgs : EventArgs {
+        public int ColumnIndex
+        {
+            get { return columnIndex; }
+        }
 
-		private int columnIndex;
-		private int rowIndex;
-
-		public DataGridViewCellEventArgs (int columnIndex, int rowIndex) {
-			this.columnIndex = columnIndex;
-			this.rowIndex = rowIndex;
-		}
-
-		public int ColumnIndex {
-			get { return columnIndex; }
-		}
-
-		public int RowIndex {
-			get { return rowIndex; }
-		}
-
-	}
-
+        public int RowIndex
+        {
+            get { return rowIndex; }
+        }
+    }
 }
-

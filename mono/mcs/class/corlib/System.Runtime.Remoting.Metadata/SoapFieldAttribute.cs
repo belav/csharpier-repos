@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,54 +30,48 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.Reflection;
 using System.Runtime.Remoting;
 using System.Runtime.Remoting.Metadata;
-using System.Reflection;
 
-namespace System.Runtime.Remoting.Metadata {
+namespace System.Runtime.Remoting.Metadata
+{
+    [AttributeUsage(AttributeTargets.Field)]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public sealed class SoapFieldAttribute : SoapAttribute
+    {
+        int _order;
+        string _elementName;
+        bool _isElement = false;
 
-	[AttributeUsage (AttributeTargets.Field)]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public sealed class SoapFieldAttribute : SoapAttribute
-	{
-		int _order;
-		string _elementName;
-		bool _isElement = false;
-		
-		public SoapFieldAttribute ()
-		{
-		}
+        public SoapFieldAttribute() { }
 
-		public int Order {
-			get {
-				return _order;
-			}
+        public int Order
+        {
+            get { return _order; }
+            set { _order = value; }
+        }
 
-			set {
-				_order = value;
-			}
-		}
-		
-		public string XmlElementName {
-			get {
-				return _elementName;
-			}
+        public string XmlElementName
+        {
+            get { return _elementName; }
+            set
+            {
+                _isElement = value != null;
+                _elementName = value;
+            }
+        }
 
-			set {
-				_isElement = value != null;
-				_elementName = value;
-			}
-		}
+        public bool IsInteropXmlElement()
+        {
+            return _isElement;
+        }
 
-		public bool IsInteropXmlElement ()
-		{
-			return _isElement;
-		}
-		
-		internal override void SetReflectionObject (object reflectionObject)
-		{
-			FieldInfo f = (FieldInfo) reflectionObject;
-			if (_elementName == null) _elementName = f.Name;
-		}
-	}
+        internal override void SetReflectionObject(object reflectionObject)
+        {
+            FieldInfo f = (FieldInfo)reflectionObject;
+            if (_elementName == null)
+                _elementName = f.Name;
+        }
+    }
 }

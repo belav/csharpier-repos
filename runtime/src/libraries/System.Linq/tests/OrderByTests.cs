@@ -31,20 +31,35 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x1 in new int[] { 1, 6, 0, -1, 3 }
-                             from x2 in new int[] { 55, 49, 9, -100, 24, 25 }
-                             select new { a1 = x1, a2 = x2 };
+            var q =
+                from x1 in new int[] { 1, 6, 0, -1, 3 }
+                from x2 in new int[] { 55, 49, 9, -100, 24, 25 }
+                select new { a1 = x1, a2 = x2 };
 
-            Assert.Equal(q.OrderBy(e => e.a1).ThenBy(f => f.a2), q.OrderBy(e => e.a1).ThenBy(f => f.a2));
+            Assert.Equal(
+                q.OrderBy(e => e.a1).ThenBy(f => f.a2),
+                q.OrderBy(e => e.a1).ThenBy(f => f.a2)
+            );
         }
 
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x1 in new[] { 55, 49, 9, -100, 24, 25, -1, 0 }
-                             from x2 in new[] { "!@#$%^", "C", "AAA", "", null, "Calling Twice", "SoS", string.Empty }
-                             where !string.IsNullOrEmpty(x2)
-                             select new { a1 = x1, a2 = x2 };
+            var q =
+                from x1 in new[] { 55, 49, 9, -100, 24, 25, -1, 0 }
+                from x2 in new[]
+                {
+                    "!@#$%^",
+                    "C",
+                    "AAA",
+                    "",
+                    null,
+                    "Calling Twice",
+                    "SoS",
+                    string.Empty,
+                }
+                where !string.IsNullOrEmpty(x2)
+                select new { a1 = x1, a2 = x2 };
 
             Assert.Equal(q.OrderBy(e => e.a1), q.OrderBy(e => e.a1));
         }
@@ -98,13 +113,13 @@ namespace System.Linq.Tests
             {
                 new { Name = "Tim", Score = 90 },
                 new { Name = "Robert", Score = 45 },
-                new { Name = "Prakash", Score = 99 }
+                new { Name = "Prakash", Score = 99 },
             };
             var expected = new[]
             {
                 new { Name = "Prakash", Score = 99 },
                 new { Name = "Robert", Score = 45 },
-                new { Name = "Tim", Score = 90 }
+                new { Name = "Tim", Score = 90 },
             };
 
             Assert.Equal(expected, source.OrderBy(e => e.Name, null));
@@ -125,7 +140,10 @@ namespace System.Linq.Tests
             string[] source = { "Prakash", "Alpha", "dan", "DAN", "Prakash" };
             string[] expected = { "Alpha", "dan", "DAN", "Prakash", "Prakash" };
 
-            Assert.Equal(expected, source.RunOnce().OrderBy(e => e, StringComparer.OrdinalIgnoreCase));
+            Assert.Equal(
+                expected,
+                source.RunOnce().OrderBy(e => e, StringComparer.OrdinalIgnoreCase)
+            );
         }
 
         [Fact]
@@ -174,7 +192,7 @@ namespace System.Linq.Tests
         [Fact]
         public void OrderedToArray()
         {
-            var source = new []
+            var source = new[]
             {
                 new { Name = "Tim", Score = 90 },
                 new { Name = "Robert", Score = 90 },
@@ -183,7 +201,7 @@ namespace System.Linq.Tests
                 new { Name = "John", Score = 90 },
                 new { Name = "Albert", Score = 90 },
             };
-            var expected = new []
+            var expected = new[]
             {
                 new { Name = "Tim", Score = 90 },
                 new { Name = "Robert", Score = 90 },
@@ -259,7 +277,10 @@ namespace System.Linq.Tests
         public void OrderByExtremeComparer()
         {
             var outOfOrder = new[] { 7, 1, 0, 9, 3, 5, 4, 2, 8, 6 };
-            Assert.Equal(Enumerable.Range(0, 10), outOfOrder.OrderBy(i => i, new ExtremeComparer()));
+            Assert.Equal(
+                Enumerable.Range(0, 10),
+                outOfOrder.OrderBy(i => i, new ExtremeComparer())
+            );
         }
 
         [Fact]
@@ -273,7 +294,10 @@ namespace System.Linq.Tests
         public void NullKeySelector()
         {
             Func<DateTime, int> keySelector = null;
-            AssertExtensions.Throws<ArgumentNullException>("keySelector", () => Enumerable.Empty<DateTime>().OrderBy(keySelector));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "keySelector",
+                () => Enumerable.Empty<DateTime>().OrderBy(keySelector)
+            );
         }
 
         [Fact]
@@ -281,44 +305,97 @@ namespace System.Linq.Tests
         {
             Assert.Equal(0, Enumerable.Range(0, 10).Shuffle().OrderBy(i => i).First());
             Assert.Equal(9, Enumerable.Range(0, 10).Shuffle().OrderByDescending(i => i).First());
-            Assert.Equal(10, Enumerable.Range(0, 100).Shuffle().OrderByDescending(i => i.ToString().Length).ThenBy(i => i).First());
+            Assert.Equal(
+                10,
+                Enumerable
+                    .Range(0, 100)
+                    .Shuffle()
+                    .OrderByDescending(i => i.ToString().Length)
+                    .ThenBy(i => i)
+                    .First()
+            );
         }
 
         [Fact]
         public void FirstOnEmptyOrderedThrows()
         {
-            Assert.Throws<InvalidOperationException>(() => Enumerable.Empty<int>().OrderBy(i => i).First());
+            Assert.Throws<InvalidOperationException>(() =>
+                Enumerable.Empty<int>().OrderBy(i => i).First()
+            );
         }
 
         [Fact]
         public void FirstWithPredicateOnOrdered()
         {
             IEnumerable<int> orderBy = Enumerable.Range(0, 10).Shuffle().OrderBy(i => i);
-            IEnumerable<int> orderByDescending = Enumerable.Range(0, 10).Shuffle().OrderByDescending(i => i);
+            IEnumerable<int> orderByDescending = Enumerable
+                .Range(0, 10)
+                .Shuffle()
+                .OrderByDescending(i => i);
             int counter;
 
             counter = 0;
-            Assert.Equal(0, orderBy.First(i => { counter++; return true; }));
+            Assert.Equal(
+                0,
+                orderBy.First(i =>
+                {
+                    counter++;
+                    return true;
+                })
+            );
             Assert.Equal(1, counter);
 
             counter = 0;
-            Assert.Equal(9, orderBy.First(i => { counter++; return i == 9; }));
+            Assert.Equal(
+                9,
+                orderBy.First(i =>
+                {
+                    counter++;
+                    return i == 9;
+                })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Throws<InvalidOperationException>(() => orderBy.First(i => { counter++; return false; }));
+            Assert.Throws<InvalidOperationException>(() =>
+                orderBy.First(i =>
+                {
+                    counter++;
+                    return false;
+                })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Equal(9, orderByDescending.First(i => { counter++; return true; }));
+            Assert.Equal(
+                9,
+                orderByDescending.First(i =>
+                {
+                    counter++;
+                    return true;
+                })
+            );
             Assert.Equal(1, counter);
 
             counter = 0;
-            Assert.Equal(0, orderByDescending.First(i => { counter++; return i == 0; }));
+            Assert.Equal(
+                0,
+                orderByDescending.First(i =>
+                {
+                    counter++;
+                    return i == 0;
+                })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Throws<InvalidOperationException>(() => orderByDescending.First(i => { counter++; return false; }));
+            Assert.Throws<InvalidOperationException>(() =>
+                orderByDescending.First(i =>
+                {
+                    counter++;
+                    return false;
+                })
+            );
             Assert.Equal(10, counter);
         }
 
@@ -326,8 +403,19 @@ namespace System.Linq.Tests
         public void FirstOrDefaultOnOrdered()
         {
             Assert.Equal(0, Enumerable.Range(0, 10).Shuffle().OrderBy(i => i).FirstOrDefault());
-            Assert.Equal(9, Enumerable.Range(0, 10).Shuffle().OrderByDescending(i => i).FirstOrDefault());
-            Assert.Equal(10, Enumerable.Range(0, 100).Shuffle().OrderByDescending(i => i.ToString().Length).ThenBy(i => i).FirstOrDefault());
+            Assert.Equal(
+                9,
+                Enumerable.Range(0, 10).Shuffle().OrderByDescending(i => i).FirstOrDefault()
+            );
+            Assert.Equal(
+                10,
+                Enumerable
+                    .Range(0, 100)
+                    .Shuffle()
+                    .OrderByDescending(i => i.ToString().Length)
+                    .ThenBy(i => i)
+                    .FirstOrDefault()
+            );
             Assert.Equal(0, Enumerable.Empty<int>().OrderBy(i => i).FirstOrDefault());
         }
 
@@ -335,31 +423,76 @@ namespace System.Linq.Tests
         public void FirstOrDefaultWithPredicateOnOrdered()
         {
             IEnumerable<int> orderBy = Enumerable.Range(0, 10).Shuffle().OrderBy(i => i);
-            IEnumerable<int> orderByDescending = Enumerable.Range(0, 10).Shuffle().OrderByDescending(i => i);
+            IEnumerable<int> orderByDescending = Enumerable
+                .Range(0, 10)
+                .Shuffle()
+                .OrderByDescending(i => i);
             int counter;
 
             counter = 0;
-            Assert.Equal(0, orderBy.FirstOrDefault(i => { counter++; return true; }));
+            Assert.Equal(
+                0,
+                orderBy.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return true;
+                })
+            );
             Assert.Equal(1, counter);
 
             counter = 0;
-            Assert.Equal(9, orderBy.FirstOrDefault(i => { counter++; return i == 9; }));
+            Assert.Equal(
+                9,
+                orderBy.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return i == 9;
+                })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Equal(0, orderBy.FirstOrDefault(i => { counter++; return false; }));
+            Assert.Equal(
+                0,
+                orderBy.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return false;
+                })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Equal(9, orderByDescending.FirstOrDefault(i => { counter++; return true; }));
+            Assert.Equal(
+                9,
+                orderByDescending.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return true;
+                })
+            );
             Assert.Equal(1, counter);
 
             counter = 0;
-            Assert.Equal(0, orderByDescending.FirstOrDefault(i => { counter++; return i == 0; }));
+            Assert.Equal(
+                0,
+                orderByDescending.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return i == 0;
+                })
+            );
             Assert.Equal(10, counter);
 
             counter = 0;
-            Assert.Equal(0, orderByDescending.FirstOrDefault(i => { counter++; return false; }));
+            Assert.Equal(
+                0,
+                orderByDescending.FirstOrDefault(i =>
+                {
+                    counter++;
+                    return false;
+                })
+            );
             Assert.Equal(10, counter);
         }
 
@@ -368,38 +501,65 @@ namespace System.Linq.Tests
         {
             Assert.Equal(9, Enumerable.Range(0, 10).Shuffle().OrderBy(i => i).Last());
             Assert.Equal(0, Enumerable.Range(0, 10).Shuffle().OrderByDescending(i => i).Last());
-            Assert.Equal(10, Enumerable.Range(0, 100).Shuffle().OrderBy(i => i.ToString().Length).ThenByDescending(i => i).Last());
+            Assert.Equal(
+                10,
+                Enumerable
+                    .Range(0, 100)
+                    .Shuffle()
+                    .OrderBy(i => i.ToString().Length)
+                    .ThenByDescending(i => i)
+                    .Last()
+            );
         }
 
         [Fact]
         public void LastOnOrderedMatchingCases()
         {
-            object[] boxedInts = new object[] {0, 1, 2, 9, 1, 2, 3, 9, 4, 5, 7, 8, 9, 0, 1};
+            object[] boxedInts = new object[] { 0, 1, 2, 9, 1, 2, 3, 9, 4, 5, 7, 8, 9, 0, 1 };
             Assert.Same(boxedInts[12], boxedInts.OrderBy(o => (int)o).Last());
             Assert.Same(boxedInts[12], boxedInts.OrderBy(o => (int)o).LastOrDefault());
             Assert.Same(boxedInts[12], boxedInts.OrderBy(o => (int)o).Last(o => (int)o % 2 == 1));
-            Assert.Same(boxedInts[12], boxedInts.OrderBy(o => (int)o).LastOrDefault(o => (int)o % 2 == 1));
+            Assert.Same(
+                boxedInts[12],
+                boxedInts.OrderBy(o => (int)o).LastOrDefault(o => (int)o % 2 == 1)
+            );
         }
 
         [Fact]
         public void LastOnEmptyOrderedThrows()
         {
-            Assert.Throws<InvalidOperationException>(() => Enumerable.Empty<int>().OrderBy(i => i).Last());
+            Assert.Throws<InvalidOperationException>(() =>
+                Enumerable.Empty<int>().OrderBy(i => i).Last()
+            );
         }
 
         [Fact]
         public void LastOrDefaultOnOrdered()
         {
             Assert.Equal(9, Enumerable.Range(0, 10).Shuffle().OrderBy(i => i).LastOrDefault());
-            Assert.Equal(0, Enumerable.Range(0, 10).Shuffle().OrderByDescending(i => i).LastOrDefault());
-            Assert.Equal(10, Enumerable.Range(0, 100).Shuffle().OrderBy(i => i.ToString().Length).ThenByDescending(i => i).LastOrDefault());
+            Assert.Equal(
+                0,
+                Enumerable.Range(0, 10).Shuffle().OrderByDescending(i => i).LastOrDefault()
+            );
+            Assert.Equal(
+                10,
+                Enumerable
+                    .Range(0, 100)
+                    .Shuffle()
+                    .OrderBy(i => i.ToString().Length)
+                    .ThenByDescending(i => i)
+                    .LastOrDefault()
+            );
             Assert.Equal(0, Enumerable.Empty<int>().OrderBy(i => i).LastOrDefault());
         }
 
         [Fact]
         public void EnumeratorDoesntContinue()
         {
-            var enumerator = NumberRangeGuaranteedNotCollectionType(0, 3).Shuffle().OrderBy(i => i).GetEnumerator();
+            var enumerator = NumberRangeGuaranteedNotCollectionType(0, 3)
+                .Shuffle()
+                .OrderBy(i => i)
+                .GetEnumerator();
             while (enumerator.MoveNext()) { }
             Assert.False(enumerator.MoveNext());
         }
@@ -410,8 +570,12 @@ namespace System.Linq.Tests
             var ordered = Enumerable.Range(0, 100).Select(i => i.ToString()).OrderBy(i => i.Length);
             IOrderedEnumerable<IComparable> covariantOrdered = ordered;
             covariantOrdered = covariantOrdered.ThenBy(i => i);
-            string[] expected =
-                Enumerable.Range(0, 100).Select(i => i.ToString()).OrderBy(i => i.Length).ThenBy(i => i).ToArray();
+            string[] expected = Enumerable
+                .Range(0, 100)
+                .Select(i => i.ToString())
+                .OrderBy(i => i.Length)
+                .ThenBy(i => i)
+                .ToArray();
             Assert.Equal(expected, covariantOrdered);
         }
 
@@ -419,8 +583,12 @@ namespace System.Linq.Tests
         public void OrderByIsCovariantTestWithAssignToArgument()
         {
             var ordered = Enumerable.Range(0, 100).Select(i => i.ToString()).OrderBy(i => i.Length);
-            IOrderedEnumerable<IComparable> covariantOrdered = ordered.ThenByDescending<IComparable, IComparable>(i => i);
-            string[] expected = Enumerable.Range(0, 100)
+            IOrderedEnumerable<IComparable> covariantOrdered = ordered.ThenByDescending<
+                IComparable,
+                IComparable
+            >(i => i);
+            string[] expected = Enumerable
+                .Range(0, 100)
                 .Select(i => i.ToString())
                 .OrderBy(i => i.Length)
                 .ThenByDescending(i => i)
@@ -436,11 +604,18 @@ namespace System.Linq.Tests
             // that ThenBy() to be processed within Linq-to-objects, as otherwise there is no
             // equivalent ThenBy() overload to translate the call to.
 
-            IOrderedQueryable<IComparable> ordered =
-                Enumerable.Range(0, 100).AsQueryable().Select(i => i.ToString()).OrderBy(i => i.Length);
+            IOrderedQueryable<IComparable> ordered = Enumerable
+                .Range(0, 100)
+                .AsQueryable()
+                .Select(i => i.ToString())
+                .OrderBy(i => i.Length);
             ordered = ordered.ThenBy(i => i);
-            string[] expected =
-                Enumerable.Range(0, 100).Select(i => i.ToString()).OrderBy(i => i.Length).ThenBy(i => i).ToArray();
+            string[] expected = Enumerable
+                .Range(0, 100)
+                .Select(i => i.ToString())
+                .OrderBy(i => i.Length)
+                .ThenBy(i => i)
+                .ToArray();
             Assert.Equal(expected, ordered);
         }
 
@@ -511,7 +686,15 @@ namespace System.Linq.Tests
         [Fact]
         public void CultureOrderBy()
         {
-            string[] source = new[] { "Apple0", "\uFFFDble0", "Apple1", "\uFFFDble1", "Apple2", "\uFFFDble2" };
+            string[] source = new[]
+            {
+                "Apple0",
+                "\uFFFDble0",
+                "Apple1",
+                "\uFFFDble1",
+                "Apple2",
+                "\uFFFDble2",
+            };
 
             CultureInfo dk = new CultureInfo("da-DK");
             CultureInfo au = new CultureInfo("en-AU");
@@ -544,7 +727,7 @@ namespace System.Linq.Tests
 
             using (new ThreadCultureChange(dk)) // "dk" whilst GetEnumerator
             {
-                IEnumerator<string> s = source.OrderBy(x => x).GetEnumerator(); 
+                IEnumerator<string> s = source.OrderBy(x => x).GetEnumerator();
                 using (new ThreadCultureChange(au)) // but "au" whilst accessing...
                 {
                     int idx = 0;
@@ -558,12 +741,12 @@ namespace System.Linq.Tests
             using (new ThreadCultureChange(au))
             {
                 // "au" whilst GetEnumerator
-                IEnumerator<string> s = source.OrderBy(x => x).GetEnumerator(); 
-                
-                using (new ThreadCultureChange(dk)) 
+                IEnumerator<string> s = source.OrderBy(x => x).GetEnumerator();
+
+                using (new ThreadCultureChange(dk))
                 {
                     // but "dk" on first MoveNext
-                    bool moveNext = s.MoveNext(); 
+                    bool moveNext = s.MoveNext();
                     Assert.True(moveNext);
 
                     // ensure changing culture after MoveNext doesn't affect sort
@@ -583,7 +766,15 @@ namespace System.Linq.Tests
         [Fact]
         public void CultureOrderByElementAt()
         {
-            string[] source = new[] { "Apple0", "\uFFFDble0", "Apple1", "\uFFFDble1", "Apple2", "\uFFFDble2" };
+            string[] source = new[]
+            {
+                "Apple0",
+                "\uFFFDble0",
+                "Apple1",
+                "\uFFFDble1",
+                "Apple2",
+                "\uFFFDble2",
+            };
 
             CultureInfo dk = new CultureInfo("da-DK");
             CultureInfo au = new CultureInfo("en-AU");
@@ -605,12 +796,20 @@ namespace System.Linq.Tests
             {
                 using (new ThreadCultureChange(dk))
                 {
-                    Assert.Equal(resultDK[i], delaySortedSource.ElementAt(i), StringComparer.Ordinal);
+                    Assert.Equal(
+                        resultDK[i],
+                        delaySortedSource.ElementAt(i),
+                        StringComparer.Ordinal
+                    );
                 }
 
                 using (new ThreadCultureChange(au))
                 {
-                    Assert.Equal(resultAU[i], delaySortedSource.ElementAt(i), StringComparer.Ordinal);
+                    Assert.Equal(
+                        resultAU[i],
+                        delaySortedSource.ElementAt(i),
+                        StringComparer.Ordinal
+                    );
                 }
             }
         }

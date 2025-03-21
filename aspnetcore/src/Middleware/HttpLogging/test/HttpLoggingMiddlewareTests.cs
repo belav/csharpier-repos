@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.AspNetCore.TestHost;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.TestHost;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -38,63 +38,86 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [Fact]
     public void Ctor_ThrowsExceptionsWhenNullArgs()
     {
-        Assert.Throws<ArgumentNullException>(() => new HttpLoggingMiddleware(
-            null,
-            CreateOptionsAccessor(),
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
-            Array.Empty<IHttpLoggingInterceptor>(),
-            ObjectPool.Create<HttpLoggingInterceptorContext>(),
-            TimeProvider.System));
+        Assert.Throws<ArgumentNullException>(() =>
+            new HttpLoggingMiddleware(
+                null,
+                CreateOptionsAccessor(),
+                LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
+                Array.Empty<IHttpLoggingInterceptor>(),
+                ObjectPool.Create<HttpLoggingInterceptorContext>(),
+                TimeProvider.System
+            )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new HttpLoggingMiddleware(c =>
-            {
-                return Task.CompletedTask;
-            },
-            null,
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
-            Array.Empty<IHttpLoggingInterceptor>(),
-            ObjectPool.Create<HttpLoggingInterceptorContext>(),
-            TimeProvider.System));
+        Assert.Throws<ArgumentNullException>(() =>
+            new HttpLoggingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                null,
+                LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
+                Array.Empty<IHttpLoggingInterceptor>(),
+                ObjectPool.Create<HttpLoggingInterceptorContext>(),
+                TimeProvider.System
+            )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new HttpLoggingMiddleware(c =>
-            {
-                return Task.CompletedTask;
-            },
-            CreateOptionsAccessor(),
-            null,
-            Array.Empty<IHttpLoggingInterceptor>(),
-            ObjectPool.Create<HttpLoggingInterceptorContext>(),
-            TimeProvider.System));
+        Assert.Throws<ArgumentNullException>(() =>
+            new HttpLoggingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                CreateOptionsAccessor(),
+                null,
+                Array.Empty<IHttpLoggingInterceptor>(),
+                ObjectPool.Create<HttpLoggingInterceptorContext>(),
+                TimeProvider.System
+            )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new HttpLoggingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
-            CreateOptionsAccessor(),
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
-            null,
-            ObjectPool.Create<HttpLoggingInterceptorContext>(),
-            TimeProvider.System));
+        Assert.Throws<ArgumentNullException>(() =>
+            new HttpLoggingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                CreateOptionsAccessor(),
+                LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
+                null,
+                ObjectPool.Create<HttpLoggingInterceptorContext>(),
+                TimeProvider.System
+            )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new HttpLoggingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
-            CreateOptionsAccessor(),
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
-            Array.Empty<IHttpLoggingInterceptor>(),
-            null,
-            TimeProvider.System));
+        Assert.Throws<ArgumentNullException>(() =>
+            new HttpLoggingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                CreateOptionsAccessor(),
+                LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
+                Array.Empty<IHttpLoggingInterceptor>(),
+                null,
+                TimeProvider.System
+            )
+        );
 
-        Assert.Throws<ArgumentNullException>(() => new HttpLoggingMiddleware(c =>
-        {
-            return Task.CompletedTask;
-        },
-            CreateOptionsAccessor(),
-            LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
-            Array.Empty<IHttpLoggingInterceptor>(),
-            ObjectPool.Create<HttpLoggingInterceptorContext>(),
-            null));
+        Assert.Throws<ArgumentNullException>(() =>
+            new HttpLoggingMiddleware(
+                c =>
+                {
+                    return Task.CompletedTask;
+                },
+                CreateOptionsAccessor(),
+                LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
+                Array.Empty<IHttpLoggingInterceptor>(),
+                ObjectPool.Create<HttpLoggingInterceptorContext>(),
+                null
+            )
+        );
     }
 
     [Fact]
@@ -115,19 +138,18 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [Fact]
     public async Task DefaultRequestInfoOnlyHeadersAndRequestInfo()
     {
-        var middleware = CreateMiddleware(
-            async c =>
+        var middleware = CreateMiddleware(async c =>
+        {
+            var arr = new byte[4096];
+            while (true)
             {
-                var arr = new byte[4096];
-                while (true)
+                var res = await c.Request.Body.ReadAsync(arr);
+                if (res == 0)
                 {
-                    var res = await c.Request.Body.ReadAsync(arr);
-                    if (res == 0)
-                    {
-                        break;
-                    }
+                    break;
                 }
-            });
+            }
+        });
 
         var httpContext = CreateRequest();
 
@@ -159,7 +181,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                     }
                 }
             },
-            options);
+            options
+        );
 
         var httpContext = CreateRequest();
 
@@ -191,7 +214,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                     }
                 }
             },
-            options);
+            options
+        );
 
         var httpContext = CreateRequest();
 
@@ -223,7 +247,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                     }
                 }
             },
-            options);
+            options
+        );
 
         var httpContext = CreateRequest();
 
@@ -241,19 +266,18 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [Fact]
     public async Task UnknownRequestHeadersRedacted()
     {
-        var middleware = CreateMiddleware(
-            async c =>
+        var middleware = CreateMiddleware(async c =>
+        {
+            var arr = new byte[4096];
+            while (true)
             {
-                var arr = new byte[4096];
-                while (true)
+                var res = await c.Request.Body.ReadAsync(arr);
+                if (res == 0)
                 {
-                    var res = await c.Request.Body.ReadAsync(arr);
-                    if (res == 0)
-                    {
-                        break;
-                    }
+                    break;
                 }
-            });
+            }
+        });
 
         var httpContext = new DefaultHttpContext();
 
@@ -300,7 +324,10 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         await middleware.Invoke(httpContext);
 
-        Assert.Contains(TestSink.Writes, w => w.Message.Contains("RequestBody: [Not consumed by app]"));
+        Assert.Contains(
+            TestSink.Writes,
+            w => w.Message.Contains("RequestBody: [Not consumed by app]")
+        );
     }
 
     [Theory]
@@ -323,7 +350,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                     }
                 }
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
@@ -351,7 +379,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 var body = await sr.ReadToEndAsync();
                 Assert.Equal(expected, body);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
@@ -379,7 +408,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 var body = await sr.ReadToEndAsync();
                 Assert.Equal(expected, body);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
@@ -415,14 +445,17 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
                 Assert.Equal(15, count);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
 
         await middleware.Invoke(httpContext);
-        var expected = input.Substring(0, options.CurrentValue.RequestBodyLogLimit / 3) + "[Truncated by RequestBodyLogLimit]";
+        var expected =
+            input.Substring(0, options.CurrentValue.RequestBodyLogLimit / 3)
+            + "[Truncated by RequestBodyLogLimit]";
 
         Assert.Contains(TestSink.Writes, w => w.Message.Equals("RequestBody: " + expected));
     }
@@ -451,14 +484,17 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
                 Assert.Equal(63000, count);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes(input));
 
         await middleware.Invoke(httpContext);
-        var expected = input.Substring(0, options.CurrentValue.RequestBodyLogLimit) + "[Truncated by RequestBodyLogLimit]";
+        var expected =
+            input.Substring(0, options.CurrentValue.RequestBodyLogLimit)
+            + "[Truncated by RequestBodyLogLimit]";
 
         Assert.Contains(TestSink.Writes, w => w.Message.Equals("RequestBody: " + expected));
     }
@@ -476,7 +512,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 var arr = new byte[4096];
                 var res = await c.Request.Body.ReadAsync(arr);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
@@ -502,7 +539,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 _ = await c.Request.Body.ReadAsync(new byte[0]);
                 var res = await c.Request.Body.ReadAsync(arr);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
@@ -541,7 +579,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                     }
                 }
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = contentType;
@@ -581,7 +620,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
                 Assert.Equal(1000, count);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = contentType;
@@ -590,7 +630,10 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         await middleware.Invoke(httpContext);
 
         Assert.DoesNotContain(TestSink.Writes, w => w.Message.Contains(expected));
-        Assert.Contains(TestSink.Writes, w => w.Message.Contains("Unrecognized Content-Type for request body."));
+        Assert.Contains(
+            TestSink.Writes,
+            w => w.Message.Contains("Unrecognized Content-Type for request body.")
+        );
     }
 
     [Fact]
@@ -620,7 +663,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
                 Assert.Equal(2000, count);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain";
@@ -658,7 +702,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
                 Assert.Equal(1000, count);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain; charset=" + Encoding.ASCII.WebName;
@@ -697,7 +742,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
                 Assert.Equal(4000, count);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
         httpContext.Request.ContentType = "text/plain; charset=" + Encoding.UTF32.WebName;
@@ -714,10 +760,14 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = HttpLoggingFields.All;
 
-        var middleware = CreateMiddleware(RequestResponseApp, options, new FakeInterceptor(context =>
-        {
-            context.LoggingFields = HttpLoggingFields.None;
-        }));
+        var middleware = CreateMiddleware(
+            RequestResponseApp,
+            options,
+            new FakeInterceptor(context =>
+            {
+                context.LoggingFields = HttpLoggingFields.None;
+            })
+        );
 
         var httpContext = CreateRequest();
 
@@ -732,11 +782,14 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = HttpLoggingFields.None;
 
-        var middleware = CreateMiddleware(RequestResponseApp, options,
+        var middleware = CreateMiddleware(
+            RequestResponseApp,
+            options,
             interceptor: new FakeInterceptor(context =>
             {
                 context.LoggingFields = HttpLoggingFields.All;
-            }));
+            })
+        );
 
         var httpContext = CreateRequest();
 
@@ -759,11 +812,14 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = HttpLoggingFields.All;
 
-        var middleware = CreateMiddleware(RequestResponseApp, options,
+        var middleware = CreateMiddleware(
+            RequestResponseApp,
+            options,
             interceptor: new FakeInterceptor(context =>
             {
                 context.AddParameter("foo", "bar");
-            }));
+            })
+        );
 
         var httpContext = CreateRequest();
 
@@ -787,12 +843,15 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = HttpLoggingFields.All;
 
-        var middleware = CreateMiddleware(RequestResponseApp, options,
+        var middleware = CreateMiddleware(
+            RequestResponseApp,
+            options,
             interceptor: new FakeInterceptor(context =>
             {
                 Assert.True(context.TryDisable(HttpLoggingFields.RequestPath));
                 context.AddParameter("Path", "ReplacedPath");
-            }));
+            })
+        );
 
         var httpContext = CreateRequest();
 
@@ -813,14 +872,13 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [Fact]
     public async Task DefaultResponseInfoOnlyHeadersAndRequestInfo()
     {
-        var middleware = CreateMiddleware(
-            async c =>
-            {
-                c.Response.StatusCode = 200;
-                c.Response.Headers[HeaderNames.TransferEncoding] = "test";
-                c.Response.ContentType = "text/plain";
-                await c.Response.WriteAsync("test");
-            });
+        var middleware = CreateMiddleware(async c =>
+        {
+            c.Response.StatusCode = 200;
+            c.Response.Headers[HeaderNames.TransferEncoding] = "test";
+            c.Response.ContentType = "text/plain";
+            await c.Response.WriteAsync("test");
+        });
 
         var httpContext = new DefaultHttpContext();
 
@@ -844,7 +902,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 c.Response.ContentType = "text/plain";
                 await c.Response.WriteAsync("test");
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -868,12 +927,16 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 c.Response.ContentType = "text/plain";
                 await c.Response.WriteAsync("test");
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
         await middleware.Invoke(httpContext);
-        Assert.Contains(TestSink.Writes, w => w.Message.StartsWith("Duration: ", StringComparison.Ordinal));
+        Assert.Contains(
+            TestSink.Writes,
+            w => w.Message.StartsWith("Duration: ", StringComparison.Ordinal)
+        );
     }
 
     [Fact]
@@ -891,7 +954,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
                 throw new IOException("Test exception");
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -916,7 +980,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
                 throw new IOException("Test exception");
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -940,7 +1005,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 c.Response.ContentType = "text/plain";
                 await c.Response.WriteAsync("test");
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -964,7 +1030,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 c.Response.ContentType = "text/plain";
                 await c.Response.WriteAsync("test");
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -986,7 +1053,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 c.Response.Headers["Test"] = "Kestrel";
                 return Task.CompletedTask;
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -1009,7 +1077,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 c.Response.Headers["Server"] = "Kestrel";
                 return Task.CompletedTask;
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -1030,7 +1099,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 c.Response.ContentType = "text/plain";
                 return c.Response.WriteAsync(expected);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -1050,7 +1120,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 c.Response.ContentType = "text/plain";
                 return Task.CompletedTask;
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -1071,7 +1142,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 c.Response.ContentType = "text/plain";
                 return c.Response.WriteAsync(input);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -1100,7 +1172,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 writtenHeaders.SetResult();
                 await letBodyFinish.Task;
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -1138,7 +1211,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 writtenHeaders.SetResult();
                 await letBodyFinish.Task;
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
@@ -1167,13 +1241,17 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 c.Response.ContentType = "foo/*";
                 return c.Response.WriteAsync(expected);
             },
-            options);
+            options
+        );
 
         var httpContext = new DefaultHttpContext();
 
         await middleware.Invoke(httpContext);
 
-        Assert.Contains(TestSink.Writes, w => w.Message.Contains("Unrecognized Content-Type for response body."));
+        Assert.Contains(
+            TestSink.Writes,
+            w => w.Message.Contains("Unrecognized Content-Type for response body.")
+        );
     }
 
     [Fact]
@@ -1188,7 +1266,10 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         await middleware.Invoke(httpContext);
 
-        Assert.Contains(TestSink.Writes, w => w.Message.Contains("No Content-Type header for request body."));
+        Assert.Contains(
+            TestSink.Writes,
+            w => w.Message.Contains("No Content-Type header for request body.")
+        );
     }
 
     [Fact]
@@ -1221,7 +1302,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 writtenHeaders.SetResult();
                 await letBodyFinish.Task;
             },
-            options);
+            options
+        );
 
         var middlewareTask = middleware.Invoke(httpContext);
 
@@ -1269,7 +1351,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
             {
                 await c.Features.Get<IHttpUpgradeFeature>().UpgradeAsync();
             },
-            options);
+            options
+        );
 
         await middleware.Invoke(httpContext);
 
@@ -1325,7 +1408,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 writtenHeaders.SetResult();
                 await letBodyFinish.Task;
             },
-            options);
+            options
+        );
 
         var middlewareTask = middleware.Invoke(httpContext);
 
@@ -1342,7 +1426,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     public async Task UpgradeToWebSocketDoesNotLogWhenResponseIsFlushedIfLoggingOptionsAreOtherThanResponseStatusCodeOrResponseHeaders()
     {
         var options = CreateOptionsAccessor();
-        options.CurrentValue.LoggingFields = HttpLoggingFields.All ^ HttpLoggingFields.ResponsePropertiesAndHeaders;
+        options.CurrentValue.LoggingFields =
+            HttpLoggingFields.All ^ HttpLoggingFields.ResponsePropertiesAndHeaders;
 
         var writtenHeaders = new TaskCompletionSource();
         var letBodyFinish = new TaskCompletionSource();
@@ -1368,7 +1453,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 writtenHeaders.SetResult();
                 await letBodyFinish.Task;
             },
-            options);
+            options
+        );
 
         var middlewareTask = middleware.Invoke(httpContext);
 
@@ -1385,7 +1471,9 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public async Task LogsWrittenOutsideUpgradeWrapperIfUpgradeDoesNotOccur(bool isUpgradableRequest)
+    public async Task LogsWrittenOutsideUpgradeWrapperIfUpgradeDoesNotOccur(
+        bool isUpgradableRequest
+    )
     {
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = HttpLoggingFields.ResponsePropertiesAndHeaders;
@@ -1404,7 +1492,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 c.Response.ContentType = "text/plain";
                 await c.Response.StartAsync();
             },
-            options);
+            options
+        );
 
         var middlewareTask = middleware.Invoke(httpContext);
 
@@ -1412,7 +1501,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         Assert.Contains(TestSink.Writes, w => w.Message.Contains("Transfer-Encoding: test"));
         Assert.Contains(TestSink.Writes, w => w.Message.Contains("Content-Type: text/plain"));
         Assert.Null(
-            Record.Exception(() => upgradeFeatureMock.Verify(m => m.UpgradeAsync(), Times.Never)));
+            Record.Exception(() => upgradeFeatureMock.Verify(m => m.UpgradeAsync(), Times.Never))
+        );
 
         await middlewareTask;
     }
@@ -1440,14 +1530,18 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         httpContext.Features.Set<IHttpUpgradeFeature>(upgradeFeatureMock.Object);
 
         var writeCount = 0;
-        TestSink.MessageLogged += (context) => { writeCount++; };
+        TestSink.MessageLogged += (context) =>
+        {
+            writeCount++;
+        };
 
         var middleware = CreateMiddleware(
             async c =>
             {
                 await c.Features.Get<IHttpUpgradeFeature>().UpgradeAsync();
             },
-            options);
+            options
+        );
 
         await middleware.Invoke(httpContext);
 
@@ -1457,7 +1551,9 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [Theory]
     [InlineData(HttpLoggingFields.ResponseStatusCode)]
     [InlineData(HttpLoggingFields.ResponseHeaders)]
-    public async Task OriginalUpgradeFeatureIsRestoredBeforeMiddlewareCompletes(HttpLoggingFields loggingFields)
+    public async Task OriginalUpgradeFeatureIsRestoredBeforeMiddlewareCompletes(
+        HttpLoggingFields loggingFields
+    )
     {
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = loggingFields;
@@ -1479,7 +1575,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                 upgradeFeature = c.Features.Get<IHttpUpgradeFeature>();
                 await letBodyFinish.Task;
             },
-            options);
+            options
+        );
 
         var middlewareTask = middleware.Invoke(httpContext);
 
@@ -1488,7 +1585,9 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         letBodyFinish.SetResult();
         await middlewareTask;
 
-        Assert.False(httpContext.Features.Get<IHttpUpgradeFeature>() is UpgradeFeatureLoggingDecorator);
+        Assert.False(
+            httpContext.Features.Get<IHttpUpgradeFeature>() is UpgradeFeatureLoggingDecorator
+        );
     }
 
     [Theory]
@@ -1498,7 +1597,11 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [InlineData(HttpLoggingFields.RequestPropertiesAndHeaders, false, false)]
     [InlineData(HttpLoggingFields.ResponsePropertiesAndHeaders, true, true)]
     [InlineData(HttpLoggingFields.ResponsePropertiesAndHeaders, false, false)]
-    public async Task CombineLogs_OneLog(HttpLoggingFields fields, bool hasRequestBody, bool hasResponseBody)
+    public async Task CombineLogs_OneLog(
+        HttpLoggingFields fields,
+        bool hasRequestBody,
+        bool hasResponseBody
+    )
     {
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = fields;
@@ -1515,7 +1618,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
                     await c.Response.WriteAsync("test response");
                 }
             },
-            options);
+            options
+        );
 
         var httpContext = CreateRequest();
         if (!hasRequestBody)
@@ -1525,7 +1629,9 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         }
         await middleware.Invoke(httpContext);
 
-        var lines = Assert.Single(TestSink.Writes.Where(w => w.LogLevel >= LogLevel.Information)).Message.Split(Environment.NewLine);
+        var lines = Assert
+            .Single(TestSink.Writes.Where(w => w.LogLevel >= LogLevel.Information))
+            .Message.Split(Environment.NewLine);
         var i = 0;
         Assert.Equal("Request and Response:", lines[i++]);
         if (fields.HasFlag(HttpLoggingFields.RequestPropertiesAndHeaders))
@@ -1582,7 +1688,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
                 throw new IOException("Test exception");
             },
-            options);
+            options
+        );
 
         var httpContext = CreateRequest();
         await Assert.ThrowsAsync<IOException>(() => middleware.Invoke(httpContext));
@@ -1612,10 +1719,17 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = HttpLoggingFields.All;
 
-        var middleware = CreateMiddleware(RequestResponseApp, options, new FakeInterceptor(_ => { }, context =>
-        {
-            context.LoggingFields = HttpLoggingFields.None;
-        }));
+        var middleware = CreateMiddleware(
+            RequestResponseApp,
+            options,
+            new FakeInterceptor(
+                _ => { },
+                context =>
+                {
+                    context.LoggingFields = HttpLoggingFields.None;
+                }
+            )
+        );
 
         var httpContext = CreateRequest();
 
@@ -1630,7 +1744,10 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         Assert.Contains(TestSink.Writes, w => w.Message.Contains("RequestBody: test"));
         // Only response is disabled
         Assert.DoesNotContain(TestSink.Writes, w => w.Message.Contains("StatusCode: 418"));
-        Assert.DoesNotContain(TestSink.Writes, w => w.Message.Contains("Content-Type: text/plain; p=response"));
+        Assert.DoesNotContain(
+            TestSink.Writes,
+            w => w.Message.Contains("Content-Type: text/plain; p=response")
+        );
         Assert.DoesNotContain(TestSink.Writes, w => w.Message.Contains("Body: Hello World"));
     }
 
@@ -1640,11 +1757,17 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = HttpLoggingFields.None;
 
-        var middleware = CreateMiddleware(RequestResponseApp, options,
-            interceptor: new FakeInterceptor(_ => { }, context =>
-            {
-                context.LoggingFields = HttpLoggingFields.All;
-            }));
+        var middleware = CreateMiddleware(
+            RequestResponseApp,
+            options,
+            interceptor: new FakeInterceptor(
+                _ => { },
+                context =>
+                {
+                    context.LoggingFields = HttpLoggingFields.All;
+                }
+            )
+        );
 
         var httpContext = CreateRequest();
 
@@ -1668,11 +1791,17 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = HttpLoggingFields.All;
 
-        var middleware = CreateMiddleware(RequestResponseApp, options,
-            interceptor: new FakeInterceptor(_ => { }, context =>
-            {
-                context.AddParameter("foo", "bar");
-            }));
+        var middleware = CreateMiddleware(
+            RequestResponseApp,
+            options,
+            interceptor: new FakeInterceptor(
+                _ => { },
+                context =>
+                {
+                    context.AddParameter("foo", "bar");
+                }
+            )
+        );
 
         var httpContext = CreateRequest();
 
@@ -1696,12 +1825,18 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         var options = CreateOptionsAccessor();
         options.CurrentValue.LoggingFields = HttpLoggingFields.All;
 
-        var middleware = CreateMiddleware(RequestResponseApp, options,
-            interceptor: new FakeInterceptor(_ => { }, context =>
-            {
-                Assert.True(context.TryDisable(HttpLoggingFields.ResponseStatusCode));
-                context.AddParameter("StatusCode", "412");
-            }));
+        var middleware = CreateMiddleware(
+            RequestResponseApp,
+            options,
+            interceptor: new FakeInterceptor(
+                _ => { },
+                context =>
+                {
+                    Assert.True(context.TryDisable(HttpLoggingFields.ResponseStatusCode));
+                    context.AddParameter("StatusCode", "412");
+                }
+            )
+        );
 
         var httpContext = CreateRequest();
 
@@ -1728,7 +1863,9 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         using var server = app.GetTestServer();
         var client = server.CreateClient();
-        var initialResponse = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/attr_responseonly"));
+        var initialResponse = await client.SendAsync(
+            new HttpRequestMessage(HttpMethod.Get, "/attr_responseonly")
+        );
 
         var filteredLogs = TestSink.Writes.Where(w => w.LoggerName.Contains("HttpLogging"));
         Assert.DoesNotContain(filteredLogs, w => w.Message.Contains("Request"));
@@ -1743,7 +1880,9 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         using var server = app.GetTestServer();
         var client = server.CreateClient();
-        var initialResponse = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/attr_responseandrequest"));
+        var initialResponse = await client.SendAsync(
+            new HttpRequestMessage(HttpMethod.Get, "/attr_responseandrequest")
+        );
 
         var filteredLogs = TestSink.Writes.Where(w => w.LoggerName.Contains("HttpLogging"));
         Assert.Contains(filteredLogs, w => w.Message.Contains("Request"));
@@ -1758,7 +1897,9 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         using var server = app.GetTestServer();
         var client = server.CreateClient();
-        var initialResponse = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/attr_restrictedheaders"));
+        var initialResponse = await client.SendAsync(
+            new HttpRequestMessage(HttpMethod.Get, "/attr_restrictedheaders")
+        );
 
         var filteredLogs = TestSink.Writes.Where(w => w.LoggerName.Contains("HttpLogging"));
         Assert.DoesNotContain(filteredLogs, w => w.Message.Contains("Scheme"));
@@ -1773,28 +1914,44 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         using var server = app.GetTestServer();
         var client = server.CreateClient();
-        var request = new HttpRequestMessage(HttpMethod.Get, "/attr_restrictedsize") { Content = new ReadOnlyMemoryContent("from request"u8.ToArray()) };
-        request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("text/plain");
+        var request = new HttpRequestMessage(HttpMethod.Get, "/attr_restrictedsize")
+        {
+            Content = new ReadOnlyMemoryContent("from request"u8.ToArray()),
+        };
+        request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(
+            "text/plain"
+        );
         var initialResponse = await client.SendAsync(request);
 
         var filteredLogs = TestSink.Writes.Where(w => w.LoggerName.Contains("HttpLogging"));
-        Assert.Contains(filteredLogs, w => w.Message.Equals("RequestBody: fro[Truncated by RequestBodyLogLimit]"));
+        Assert.Contains(
+            filteredLogs,
+            w => w.Message.Equals("RequestBody: fro[Truncated by RequestBodyLogLimit]")
+        );
         Assert.Contains(filteredLogs, w => w.Message.Equals("ResponseBody: testin"));
     }
 
     [Fact]
     public async Task InterceptorCanSeeAndOverrideAttributeSettings()
     {
-        var app = CreateApp(HttpLoggingFields.None, new FakeInterceptor(requestContext =>
-        {
-            Assert.Equal(HttpLoggingFields.All, requestContext.LoggingFields);
-            requestContext.Disable(HttpLoggingFields.RequestHeaders);
-        },
-        responseContext =>
-        {
-            Assert.Equal(HttpLoggingFields.All & ~HttpLoggingFields.RequestHeaders, responseContext.LoggingFields);
-            responseContext.Disable(HttpLoggingFields.ResponseHeaders);
-        }));
+        var app = CreateApp(
+            HttpLoggingFields.None,
+            new FakeInterceptor(
+                requestContext =>
+                {
+                    Assert.Equal(HttpLoggingFields.All, requestContext.LoggingFields);
+                    requestContext.Disable(HttpLoggingFields.RequestHeaders);
+                },
+                responseContext =>
+                {
+                    Assert.Equal(
+                        HttpLoggingFields.All & ~HttpLoggingFields.RequestHeaders,
+                        responseContext.LoggingFields
+                    );
+                    responseContext.Disable(HttpLoggingFields.ResponseHeaders);
+                }
+            )
+        );
         await app.StartAsync();
 
         using var server = app.GetTestServer();
@@ -1818,7 +1975,9 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         using var server = app.GetTestServer();
         var client = server.CreateClient();
-        var initialResponse = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/ext_responseonly"));
+        var initialResponse = await client.SendAsync(
+            new HttpRequestMessage(HttpMethod.Get, "/ext_responseonly")
+        );
 
         var filteredLogs = TestSink.Writes.Where(w => w.LoggerName.Contains("HttpLogging"));
         Assert.DoesNotContain(filteredLogs, w => w.Message.Contains("Request"));
@@ -1833,7 +1992,9 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         using var server = app.GetTestServer();
         var client = server.CreateClient();
-        var initialResponse = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/ext_responseandrequest"));
+        var initialResponse = await client.SendAsync(
+            new HttpRequestMessage(HttpMethod.Get, "/ext_responseandrequest")
+        );
 
         var filteredLogs = TestSink.Writes.Where(w => w.LoggerName.Contains("HttpLogging"));
         Assert.Contains(filteredLogs, w => w.Message.Contains("Request"));
@@ -1848,7 +2009,9 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         using var server = app.GetTestServer();
         var client = server.CreateClient();
-        var initialResponse = await client.SendAsync(new HttpRequestMessage(HttpMethod.Get, "/ext_restrictedheaders"));
+        var initialResponse = await client.SendAsync(
+            new HttpRequestMessage(HttpMethod.Get, "/ext_restrictedheaders")
+        );
 
         var filteredLogs = TestSink.Writes.Where(w => w.LoggerName.Contains("HttpLogging"));
         Assert.DoesNotContain(filteredLogs, w => w.Message.Contains("Scheme"));
@@ -1863,28 +2026,44 @@ public class HttpLoggingMiddlewareTests : LoggedTest
 
         using var server = app.GetTestServer();
         var client = server.CreateClient();
-        var request = new HttpRequestMessage(HttpMethod.Get, "/ext_restrictedsize") { Content = new ReadOnlyMemoryContent("from request"u8.ToArray()) };
-        request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("text/plain");
+        var request = new HttpRequestMessage(HttpMethod.Get, "/ext_restrictedsize")
+        {
+            Content = new ReadOnlyMemoryContent("from request"u8.ToArray()),
+        };
+        request.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue(
+            "text/plain"
+        );
         var initialResponse = await client.SendAsync(request);
 
         var filteredLogs = TestSink.Writes.Where(w => w.LoggerName.Contains("HttpLogging"));
-        Assert.Contains(filteredLogs, w => w.Message.Equals("RequestBody: fro[Truncated by RequestBodyLogLimit]"));
+        Assert.Contains(
+            filteredLogs,
+            w => w.Message.Equals("RequestBody: fro[Truncated by RequestBodyLogLimit]")
+        );
         Assert.Contains(filteredLogs, w => w.Message.Equals("ResponseBody: testin"));
     }
 
     [Fact]
     public async Task InterceptorCanSeeAndOverrideExtensions()
     {
-        var app = CreateApp(HttpLoggingFields.None, new FakeInterceptor(requestContext =>
-        {
-            Assert.Equal(HttpLoggingFields.All, requestContext.LoggingFields);
-            requestContext.Disable(HttpLoggingFields.RequestHeaders);
-        },
-        responseContext =>
-        {
-            Assert.Equal(HttpLoggingFields.All & ~HttpLoggingFields.RequestHeaders, responseContext.LoggingFields);
-            responseContext.Disable(HttpLoggingFields.ResponseHeaders);
-        }));
+        var app = CreateApp(
+            HttpLoggingFields.None,
+            new FakeInterceptor(
+                requestContext =>
+                {
+                    Assert.Equal(HttpLoggingFields.All, requestContext.LoggingFields);
+                    requestContext.Disable(HttpLoggingFields.RequestHeaders);
+                },
+                responseContext =>
+                {
+                    Assert.Equal(
+                        HttpLoggingFields.All & ~HttpLoggingFields.RequestHeaders,
+                        responseContext.LoggingFields
+                    );
+                    responseContext.Disable(HttpLoggingFields.ResponseHeaders);
+                }
+            )
+        );
         await app.StartAsync();
 
         using var server = app.GetTestServer();
@@ -1903,33 +2082,35 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     [Fact]
     public async Task MultipleInterceptorsRun()
     {
-        var builder = new HostBuilder()
-            .ConfigureWebHost(webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseTestServer()
-                    .ConfigureServices(services =>
+        var builder = new HostBuilder().ConfigureWebHost(webHostBuilder =>
+        {
+            webHostBuilder
+                .UseTestServer()
+                .ConfigureServices(services =>
+                {
+                    services.AddRouting();
+                    services.AddHttpLogging(o => o.LoggingFields = HttpLoggingFields.All);
+                    services.AddHttpLoggingInterceptor<FakeInterceptor0>();
+                    services.AddHttpLoggingInterceptor<FakeInterceptor1>();
+                    services.AddSingleton(LoggerFactory);
+                })
+                .Configure(app =>
+                {
+                    app.UseRouting();
+                    app.UseHttpLogging();
+                    app.UseEndpoints(endpoint =>
                     {
-                        services.AddRouting();
-                        services.AddHttpLogging(o => o.LoggingFields = HttpLoggingFields.All);
-                        services.AddHttpLoggingInterceptor<FakeInterceptor0>();
-                        services.AddHttpLoggingInterceptor<FakeInterceptor1>();
-                        services.AddSingleton(LoggerFactory);
-                    })
-                    .Configure(app =>
-                    {
-                        app.UseRouting();
-                        app.UseHttpLogging();
-                        app.UseEndpoints(endpoint =>
-                        {
-                            endpoint.MapGet("/", async (HttpContext c) =>
+                        endpoint.MapGet(
+                            "/",
+                            async (HttpContext c) =>
                             {
                                 await c.Request.Body.ReadAsync(new byte[100]);
                                 return "testing";
-                            });
-                        });
+                            }
+                        );
                     });
-            });
+                });
+        });
         using var host = builder.Build();
         await host.StartAsync();
 
@@ -1968,13 +2149,17 @@ public class HttpLoggingMiddlewareTests : LoggedTest
     private IOptionsMonitor<HttpLoggingOptions> CreateOptionsAccessor()
     {
         var options = new HttpLoggingOptions();
-        var optionsAccessor = Mock.Of<IOptionsMonitor<HttpLoggingOptions>>(o => o.CurrentValue == options);
+        var optionsAccessor = Mock.Of<IOptionsMonitor<HttpLoggingOptions>>(o =>
+            o.CurrentValue == options
+        );
         return optionsAccessor;
     }
 
-    private HttpLoggingMiddleware CreateMiddleware(RequestDelegate app = null,
+    private HttpLoggingMiddleware CreateMiddleware(
+        RequestDelegate app = null,
         IOptionsMonitor<HttpLoggingOptions> options = null,
-        IHttpLoggingInterceptor interceptor = null)
+        IHttpLoggingInterceptor interceptor = null
+    )
     {
         return new HttpLoggingMiddleware(
             app ?? (c => Task.CompletedTask),
@@ -1982,7 +2167,8 @@ public class HttpLoggingMiddlewareTests : LoggedTest
             LoggerFactory.CreateLogger<HttpLoggingMiddleware>(),
             interceptor == null ? Array.Empty<IHttpLoggingInterceptor>() : [interceptor],
             ObjectPool.Create<HttpLoggingInterceptorContext>(),
-            TimeProvider.System);
+            TimeProvider.System
+        );
     }
 
     private static async Task RequestResponseApp(HttpContext context)
@@ -2002,87 +2188,148 @@ public class HttpLoggingMiddlewareTests : LoggedTest
         await context.Response.WriteAsync("Hello World");
     }
 
-    private IHost CreateApp(HttpLoggingFields defaultFields = HttpLoggingFields.All, IHttpLoggingInterceptor interceptor = null)
+    private IHost CreateApp(
+        HttpLoggingFields defaultFields = HttpLoggingFields.All,
+        IHttpLoggingInterceptor interceptor = null
+    )
     {
-        var builder = new HostBuilder()
-                .ConfigureWebHost(webHostBuilder =>
+        var builder = new HostBuilder().ConfigureWebHost(webHostBuilder =>
+        {
+            webHostBuilder
+                .UseTestServer()
+                .ConfigureServices(services =>
                 {
-                    webHostBuilder
-                    .UseTestServer()
-                    .ConfigureServices(services =>
+                    services.AddRouting();
+                    services.AddHttpLogging(o =>
                     {
-                        services.AddRouting();
-                        services.AddHttpLogging(o =>
-                        {
-                            o.LoggingFields = defaultFields;
-                        });
-                        if (interceptor != null)
-                        {
-                            services.AddSingleton(interceptor);
-                        }
-                        services.AddSingleton(LoggerFactory);
-                    })
-                    .Configure(app =>
+                        o.LoggingFields = defaultFields;
+                    });
+                    if (interceptor != null)
                     {
-                        app.UseRouting();
-                        app.UseHttpLogging();
-                        app.UseEndpoints(endpoint =>
-                        {
-                            endpoint.MapGet("/attr_responseonly", [HttpLogging(HttpLoggingFields.Response)] async (HttpContext c) =>
+                        services.AddSingleton(interceptor);
+                    }
+                    services.AddSingleton(LoggerFactory);
+                })
+                .Configure(app =>
+                {
+                    app.UseRouting();
+                    app.UseHttpLogging();
+                    app.UseEndpoints(endpoint =>
+                    {
+                        endpoint.MapGet(
+                            "/attr_responseonly",
+                            [HttpLogging(HttpLoggingFields.Response)]
+                            async (HttpContext c) =>
                             {
                                 await c.Request.Body.ReadAsync(new byte[100]);
                                 return "testing";
-                            });
+                            }
+                        );
 
-                            endpoint.MapGet("/ext_responseonly", async (HttpContext c) =>
-                            {
-                                await c.Request.Body.ReadAsync(new byte[100]);
-                                return "testing";
-                            }).WithHttpLogging(HttpLoggingFields.Response);
+                        endpoint
+                            .MapGet(
+                                "/ext_responseonly",
+                                async (HttpContext c) =>
+                                {
+                                    await c.Request.Body.ReadAsync(new byte[100]);
+                                    return "testing";
+                                }
+                            )
+                            .WithHttpLogging(HttpLoggingFields.Response);
 
-                            endpoint.MapGet("/attr_responseandrequest", [HttpLogging(HttpLoggingFields.All)] async (HttpContext c) =>
+                        endpoint.MapGet(
+                            "/attr_responseandrequest",
+                            [HttpLogging(HttpLoggingFields.All)]
+                            async (HttpContext c) =>
                             {
                                 await c.Request.Body.ReadAsync(new byte[100]);
                                 c.Response.ContentType = "text/plain";
                                 return "testing";
-                            });
+                            }
+                        );
 
-                            endpoint.MapGet("/ext_responseandrequest", async(HttpContext c) =>
+                        endpoint
+                            .MapGet(
+                                "/ext_responseandrequest",
+                                async (HttpContext c) =>
+                                {
+                                    await c.Request.Body.ReadAsync(new byte[100]);
+                                    return "testing";
+                                }
+                            )
+                            .WithHttpLogging(HttpLoggingFields.All);
+
+                        endpoint.MapGet(
+                            "/attr_restrictedheaders",
+                            [HttpLogging(
+                                (HttpLoggingFields.Request & ~HttpLoggingFields.RequestScheme)
+                                    | (
+                                        HttpLoggingFields.Response
+                                        & ~HttpLoggingFields.ResponseStatusCode
+                                    )
+                            )]
+                            async (HttpContext c) =>
                             {
                                 await c.Request.Body.ReadAsync(new byte[100]);
                                 return "testing";
-                            }).WithHttpLogging(HttpLoggingFields.All);
+                            }
+                        );
 
-                            endpoint.MapGet("/attr_restrictedheaders", [HttpLogging((HttpLoggingFields.Request & ~HttpLoggingFields.RequestScheme) | (HttpLoggingFields.Response & ~HttpLoggingFields.ResponseStatusCode))] async (HttpContext c) =>
+                        endpoint
+                            .MapGet(
+                                "/ext_restrictedheaders",
+                                async (HttpContext c) =>
+                                {
+                                    await c.Request.Body.ReadAsync(new byte[100]);
+                                    return "testing";
+                                }
+                            )
+                            .WithHttpLogging(
+                                (HttpLoggingFields.Request & ~HttpLoggingFields.RequestScheme)
+                                    | (
+                                        HttpLoggingFields.Response
+                                        & ~HttpLoggingFields.ResponseStatusCode
+                                    )
+                            );
+
+                        endpoint.MapGet(
+                            "/attr_restrictedsize",
+                            [HttpLogging(
+                                HttpLoggingFields.RequestBody | HttpLoggingFields.ResponseBody,
+                                RequestBodyLogLimit = 3,
+                                ResponseBodyLogLimit = 6
+                            )]
+                            async (HttpContext c) =>
                             {
                                 await c.Request.Body.ReadAsync(new byte[100]);
                                 return "testing";
-                            });
+                            }
+                        );
 
-                            endpoint.MapGet("/ext_restrictedheaders", async (HttpContext c) =>
-                            {
-                                await c.Request.Body.ReadAsync(new byte[100]);
-                                return "testing";
-                            }).WithHttpLogging((HttpLoggingFields.Request & ~HttpLoggingFields.RequestScheme) | (HttpLoggingFields.Response & ~HttpLoggingFields.ResponseStatusCode));
-
-                            endpoint.MapGet("/attr_restrictedsize", [HttpLogging(HttpLoggingFields.RequestBody | HttpLoggingFields.ResponseBody, RequestBodyLogLimit = 3, ResponseBodyLogLimit = 6)] async (HttpContext c) =>
-                            {
-                                await c.Request.Body.ReadAsync(new byte[100]);
-                                return "testing";
-                            });
-
-                            endpoint.MapGet("/ext_restrictedsize", async (HttpContext c) =>
-                            {
-                                await c.Request.Body.ReadAsync(new byte[100]);
-                                return "testing";
-                            }).WithHttpLogging(HttpLoggingFields.RequestBody | HttpLoggingFields.ResponseBody, requestBodyLogLimit: 3, responseBodyLogLimit: 6);
-                        });
+                        endpoint
+                            .MapGet(
+                                "/ext_restrictedsize",
+                                async (HttpContext c) =>
+                                {
+                                    await c.Request.Body.ReadAsync(new byte[100]);
+                                    return "testing";
+                                }
+                            )
+                            .WithHttpLogging(
+                                HttpLoggingFields.RequestBody | HttpLoggingFields.ResponseBody,
+                                requestBodyLogLimit: 3,
+                                responseBodyLogLimit: 6
+                            );
                     });
                 });
+        });
         return builder.Build();
     }
 
-    private class FakeInterceptor(Action<HttpLoggingInterceptorContext> interceptRequest, Action<HttpLoggingInterceptorContext> interceptResponse = null) : IHttpLoggingInterceptor
+    private class FakeInterceptor(
+        Action<HttpLoggingInterceptorContext> interceptRequest,
+        Action<HttpLoggingInterceptorContext> interceptResponse = null
+    ) : IHttpLoggingInterceptor
     {
         public ValueTask OnRequestAsync(HttpLoggingInterceptorContext logContext)
         {

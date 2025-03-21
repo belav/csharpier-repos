@@ -28,13 +28,19 @@ namespace System.Globalization.Tests
         public void PercentGroupSeparator_SetNull_ThrowsArgumentNullException()
         {
             var format = new NumberFormatInfo();
-            AssertExtensions.Throws<ArgumentNullException>("value", "PercentGroupSeparator", () => format.PercentGroupSeparator = null);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                "PercentGroupSeparator",
+                () => format.PercentGroupSeparator = null
+            );
         }
 
         [Fact]
         public void PercentGroupSeparator_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => NumberFormatInfo.InvariantInfo.PercentGroupSeparator = "string");
+            Assert.Throws<InvalidOperationException>(() =>
+                NumberFormatInfo.InvariantInfo.PercentGroupSeparator = "string"
+            );
         }
     }
 }

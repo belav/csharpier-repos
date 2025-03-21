@@ -4,8 +4,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
 using Microsoft.DotNet.XUnitExtensions;
 using Test.Cryptography;
 using Xunit;
@@ -18,11 +18,18 @@ namespace System.Security.Cryptography.Tests
         protected abstract byte[] IV { get; }
         protected abstract SymmetricAlgorithm CreateAlgorithm();
 
-        protected void OneShotRoundtripTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void OneShotRoundtripTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
-                int paddingSizeBytes = mode == CipherMode.CFB ? feedbackSize / 8 : alg.BlockSize / 8;
+                int paddingSizeBytes =
+                    mode == CipherMode.CFB ? feedbackSize / 8 : alg.BlockSize / 8;
                 alg.Key = Key;
 
                 // Set the instance to use a different mode and padding than what will be used
@@ -69,7 +76,13 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        protected void TryDecryptOneShot_DestinationTooSmallTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void TryDecryptOneShot_DestinationTooSmallTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             if (plaintext.Length == 0)
             {
@@ -86,9 +99,27 @@ namespace System.Security.Cryptography.Tests
                 int bytesWritten;
                 bool result = mode switch
                 {
-                    CipherMode.ECB => alg.TryDecryptEcb(ciphertext, destinationBuffer, padding, out bytesWritten),
-                    CipherMode.CBC => alg.TryDecryptCbc(ciphertext, IV, destinationBuffer, out bytesWritten, padding),
-                    CipherMode.CFB => alg.TryDecryptCfb(ciphertext, IV, destinationBuffer, out bytesWritten, padding, feedbackSize),
+                    CipherMode.ECB => alg.TryDecryptEcb(
+                        ciphertext,
+                        destinationBuffer,
+                        padding,
+                        out bytesWritten
+                    ),
+                    CipherMode.CBC => alg.TryDecryptCbc(
+                        ciphertext,
+                        IV,
+                        destinationBuffer,
+                        out bytesWritten,
+                        padding
+                    ),
+                    CipherMode.CFB => alg.TryDecryptCfb(
+                        ciphertext,
+                        IV,
+                        destinationBuffer,
+                        out bytesWritten,
+                        padding,
+                        feedbackSize
+                    ),
                     _ => throw new NotImplementedException(),
                 };
 
@@ -97,7 +128,13 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        protected void TryEncryptOneShot_DestinationTooSmallTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void TryEncryptOneShot_DestinationTooSmallTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             if (ciphertext.Length == 0)
             {
@@ -114,9 +151,27 @@ namespace System.Security.Cryptography.Tests
                 int bytesWritten;
                 bool result = mode switch
                 {
-                    CipherMode.ECB => alg.TryEncryptEcb(plaintext, destinationBuffer, padding, out bytesWritten),
-                    CipherMode.CBC => alg.TryEncryptCbc(plaintext, IV, destinationBuffer, out bytesWritten, padding),
-                    CipherMode.CFB => alg.TryEncryptCfb(plaintext, IV, destinationBuffer, out bytesWritten, padding, feedbackSize),
+                    CipherMode.ECB => alg.TryEncryptEcb(
+                        plaintext,
+                        destinationBuffer,
+                        padding,
+                        out bytesWritten
+                    ),
+                    CipherMode.CBC => alg.TryEncryptCbc(
+                        plaintext,
+                        IV,
+                        destinationBuffer,
+                        out bytesWritten,
+                        padding
+                    ),
+                    CipherMode.CFB => alg.TryEncryptCfb(
+                        plaintext,
+                        IV,
+                        destinationBuffer,
+                        out bytesWritten,
+                        padding,
+                        feedbackSize
+                    ),
                     _ => throw new NotImplementedException(),
                 };
                 Assert.False(result, "TryEncrypt");
@@ -124,21 +179,46 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        protected void TryDecryptOneShot_DestinationJustRightTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void TryDecryptOneShot_DestinationJustRightTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
                 alg.Key = Key;
 
-                int expectedPlaintextSize = padding == PaddingMode.Zeros ? ciphertext.Length : plaintext.Length;
+                int expectedPlaintextSize =
+                    padding == PaddingMode.Zeros ? ciphertext.Length : plaintext.Length;
                 Span<byte> destinationBuffer = new byte[expectedPlaintextSize];
 
                 int bytesWritten;
                 bool result = mode switch
                 {
-                    CipherMode.ECB => alg.TryDecryptEcb(ciphertext, destinationBuffer, padding, out bytesWritten),
-                    CipherMode.CBC => alg.TryDecryptCbc(ciphertext, IV, destinationBuffer, out bytesWritten, padding),
-                    CipherMode.CFB => alg.TryDecryptCfb(ciphertext, IV, destinationBuffer, out bytesWritten, padding, feedbackSize),
+                    CipherMode.ECB => alg.TryDecryptEcb(
+                        ciphertext,
+                        destinationBuffer,
+                        padding,
+                        out bytesWritten
+                    ),
+                    CipherMode.CBC => alg.TryDecryptCbc(
+                        ciphertext,
+                        IV,
+                        destinationBuffer,
+                        out bytesWritten,
+                        padding
+                    ),
+                    CipherMode.CFB => alg.TryDecryptCfb(
+                        ciphertext,
+                        IV,
+                        destinationBuffer,
+                        out bytesWritten,
+                        padding,
+                        feedbackSize
+                    ),
                     _ => throw new NotImplementedException(),
                 };
                 Assert.True(result, "TryDecrypt");
@@ -148,18 +228,29 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        protected void TryEncryptOneShot_DestinationJustRightTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void TryEncryptOneShot_DestinationJustRightTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
-                int paddingSizeBytes = mode == CipherMode.CFB ? feedbackSize / 8 : alg.BlockSize / 8;
+                int paddingSizeBytes =
+                    mode == CipherMode.CFB ? feedbackSize / 8 : alg.BlockSize / 8;
                 alg.Key = Key;
 
                 int expectedCiphertextSize = mode switch
                 {
                     CipherMode.ECB => alg.GetCiphertextLengthEcb(plaintext.Length, padding),
                     CipherMode.CBC => alg.GetCiphertextLengthCbc(plaintext.Length, padding),
-                    CipherMode.CFB => alg.GetCiphertextLengthCfb(plaintext.Length, padding, feedbackSize),
+                    CipherMode.CFB => alg.GetCiphertextLengthCfb(
+                        plaintext.Length,
+                        padding,
+                        feedbackSize
+                    ),
                     _ => throw new NotImplementedException(),
                 };
                 Span<byte> destinationBuffer = new byte[expectedCiphertextSize];
@@ -167,9 +258,27 @@ namespace System.Security.Cryptography.Tests
                 int bytesWritten;
                 bool result = mode switch
                 {
-                    CipherMode.ECB => alg.TryEncryptEcb(plaintext, destinationBuffer, padding, out bytesWritten),
-                    CipherMode.CBC => alg.TryEncryptCbc(plaintext, IV, destinationBuffer, out bytesWritten, padding),
-                    CipherMode.CFB => alg.TryEncryptCfb(plaintext, IV, destinationBuffer, out bytesWritten, padding, feedbackSize),
+                    CipherMode.ECB => alg.TryEncryptEcb(
+                        plaintext,
+                        destinationBuffer,
+                        padding,
+                        out bytesWritten
+                    ),
+                    CipherMode.CBC => alg.TryEncryptCbc(
+                        plaintext,
+                        IV,
+                        destinationBuffer,
+                        out bytesWritten,
+                        padding
+                    ),
+                    CipherMode.CFB => alg.TryEncryptCfb(
+                        plaintext,
+                        IV,
+                        destinationBuffer,
+                        out bytesWritten,
+                        padding,
+                        feedbackSize
+                    ),
                     _ => throw new NotImplementedException(),
                 };
                 Assert.True(result, "TryEncrypt");
@@ -179,12 +288,19 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        protected void TryDecryptOneShot_DestinationLargerTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void TryDecryptOneShot_DestinationLargerTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
                 alg.Key = Key;
-                int expectedPlaintextSize = padding == PaddingMode.Zeros ? ciphertext.Length : plaintext.Length;
+                int expectedPlaintextSize =
+                    padding == PaddingMode.Zeros ? ciphertext.Length : plaintext.Length;
 
                 Span<byte> largeBuffer = new byte[expectedPlaintextSize + 10];
                 Span<byte> destinationBuffer = largeBuffer.Slice(0, expectedPlaintextSize);
@@ -193,9 +309,27 @@ namespace System.Security.Cryptography.Tests
                 int bytesWritten;
                 bool result = mode switch
                 {
-                    CipherMode.ECB => alg.TryDecryptEcb(ciphertext, destinationBuffer, padding, out bytesWritten),
-                    CipherMode.CBC => alg.TryDecryptCbc(ciphertext, IV, destinationBuffer, out bytesWritten, padding),
-                    CipherMode.CFB => alg.TryDecryptCfb(ciphertext, IV, destinationBuffer, out bytesWritten, padding, feedbackSize),
+                    CipherMode.ECB => alg.TryDecryptEcb(
+                        ciphertext,
+                        destinationBuffer,
+                        padding,
+                        out bytesWritten
+                    ),
+                    CipherMode.CBC => alg.TryDecryptCbc(
+                        ciphertext,
+                        IV,
+                        destinationBuffer,
+                        out bytesWritten,
+                        padding
+                    ),
+                    CipherMode.CFB => alg.TryDecryptCfb(
+                        ciphertext,
+                        IV,
+                        destinationBuffer,
+                        out bytesWritten,
+                        padding,
+                        feedbackSize
+                    ),
                     _ => throw new NotImplementedException(),
                 };
 
@@ -209,11 +343,18 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        protected void TryEncryptOneShot_DestinationLargerTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void TryEncryptOneShot_DestinationLargerTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
-                int paddingSizeBytes = mode == CipherMode.CFB ? feedbackSize / 8 : alg.BlockSize / 8;
+                int paddingSizeBytes =
+                    mode == CipherMode.CFB ? feedbackSize / 8 : alg.BlockSize / 8;
                 alg.Key = Key;
 
                 Span<byte> largeBuffer = new byte[ciphertext.Length + 10];
@@ -223,9 +364,27 @@ namespace System.Security.Cryptography.Tests
                 int bytesWritten;
                 bool result = mode switch
                 {
-                    CipherMode.ECB => alg.TryEncryptEcb(plaintext, destinationBuffer, padding, out bytesWritten),
-                    CipherMode.CBC => alg.TryEncryptCbc(plaintext, IV, destinationBuffer, out bytesWritten, padding),
-                    CipherMode.CFB => alg.TryEncryptCfb(plaintext, IV, destinationBuffer, out bytesWritten, padding, feedbackSize),
+                    CipherMode.ECB => alg.TryEncryptEcb(
+                        plaintext,
+                        destinationBuffer,
+                        padding,
+                        out bytesWritten
+                    ),
+                    CipherMode.CBC => alg.TryEncryptCbc(
+                        plaintext,
+                        IV,
+                        destinationBuffer,
+                        out bytesWritten,
+                        padding
+                    ),
+                    CipherMode.CFB => alg.TryEncryptCfb(
+                        plaintext,
+                        IV,
+                        destinationBuffer,
+                        out bytesWritten,
+                        padding,
+                        feedbackSize
+                    ),
                     _ => throw new NotImplementedException(),
                 };
 
@@ -237,11 +396,20 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        protected void TryDecryptOneShot_OverlapsTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void TryDecryptOneShot_OverlapsTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             (int plaintextOffset, int ciphertextOffset)[] offsets =
             {
-                (0, 0), (8, 0), (0, 8), (8, 8),
+                (0, 0),
+                (8, 0),
+                (0, 8),
+                (8, 8),
             };
 
             foreach ((int plaintextOffset, int ciphertextOffset) in offsets)
@@ -250,68 +418,138 @@ namespace System.Security.Cryptography.Tests
                 {
                     alg.Key = Key;
 
-                    int expectedPlaintextSize = padding == PaddingMode.Zeros ? ciphertext.Length : plaintext.Length;
-                    int destinationSize = Math.Max(expectedPlaintextSize, ciphertext.Length) + Math.Max(plaintextOffset, ciphertextOffset);
+                    int expectedPlaintextSize =
+                        padding == PaddingMode.Zeros ? ciphertext.Length : plaintext.Length;
+                    int destinationSize =
+                        Math.Max(expectedPlaintextSize, ciphertext.Length)
+                        + Math.Max(plaintextOffset, ciphertextOffset);
                     Span<byte> buffer = new byte[destinationSize];
-                    Span<byte> destinationBuffer = buffer.Slice(plaintextOffset, expectedPlaintextSize);
+                    Span<byte> destinationBuffer = buffer.Slice(
+                        plaintextOffset,
+                        expectedPlaintextSize
+                    );
                     Span<byte> ciphertextBuffer = buffer.Slice(ciphertextOffset, ciphertext.Length);
                     ciphertext.AsSpan().CopyTo(ciphertextBuffer);
 
                     int bytesWritten;
                     bool result = mode switch
                     {
-                        CipherMode.ECB => alg.TryDecryptEcb(ciphertextBuffer, destinationBuffer, padding, out bytesWritten),
-                        CipherMode.CBC => alg.TryDecryptCbc(ciphertextBuffer, IV, destinationBuffer, out bytesWritten, padding),
-                        CipherMode.CFB => alg.TryDecryptCfb(ciphertextBuffer, IV, destinationBuffer, out bytesWritten, padding, feedbackSize),
+                        CipherMode.ECB => alg.TryDecryptEcb(
+                            ciphertextBuffer,
+                            destinationBuffer,
+                            padding,
+                            out bytesWritten
+                        ),
+                        CipherMode.CBC => alg.TryDecryptCbc(
+                            ciphertextBuffer,
+                            IV,
+                            destinationBuffer,
+                            out bytesWritten,
+                            padding
+                        ),
+                        CipherMode.CFB => alg.TryDecryptCfb(
+                            ciphertextBuffer,
+                            IV,
+                            destinationBuffer,
+                            out bytesWritten,
+                            padding,
+                            feedbackSize
+                        ),
                         _ => throw new NotImplementedException(),
                     };
                     Assert.True(result, "TryDecrypt");
                     Assert.Equal(destinationBuffer.Length, bytesWritten);
 
                     AssertPlaintexts(plaintext, destinationBuffer, padding);
-                    Assert.True(destinationBuffer.Overlaps(ciphertextBuffer) || plaintext.Length == 0 || ciphertext.Length == 0);
+                    Assert.True(
+                        destinationBuffer.Overlaps(ciphertextBuffer)
+                            || plaintext.Length == 0
+                            || ciphertext.Length == 0
+                    );
                 }
             }
         }
 
-        protected void TryEncryptOneShot_OverlapsTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void TryEncryptOneShot_OverlapsTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             (int plaintextOffset, int ciphertextOffset)[] offsets =
             {
-                (0, 0), (8, 0), (0, 8), (8, 8),
+                (0, 0),
+                (8, 0),
+                (0, 8),
+                (8, 8),
             };
 
             foreach ((int plaintextOffset, int ciphertextOffset) in offsets)
             {
                 using (SymmetricAlgorithm alg = CreateAlgorithm())
                 {
-                    int paddingSizeBytes = mode == CipherMode.CFB ? feedbackSize / 8 : alg.BlockSize / 8;
+                    int paddingSizeBytes =
+                        mode == CipherMode.CFB ? feedbackSize / 8 : alg.BlockSize / 8;
                     alg.Key = Key;
 
-                    int destinationSize = ciphertext.Length + Math.Max(plaintextOffset, ciphertextOffset);
+                    int destinationSize =
+                        ciphertext.Length + Math.Max(plaintextOffset, ciphertextOffset);
                     Span<byte> buffer = new byte[destinationSize];
-                    Span<byte> destinationBuffer = buffer.Slice(ciphertextOffset, ciphertext.Length);
+                    Span<byte> destinationBuffer = buffer.Slice(
+                        ciphertextOffset,
+                        ciphertext.Length
+                    );
                     Span<byte> plaintextBuffer = buffer.Slice(plaintextOffset, plaintext.Length);
                     plaintext.AsSpan().CopyTo(plaintextBuffer);
 
                     int bytesWritten;
                     bool result = mode switch
                     {
-                        CipherMode.ECB => alg.TryEncryptEcb(plaintextBuffer, destinationBuffer, padding, out bytesWritten),
-                        CipherMode.CBC => alg.TryEncryptCbc(plaintextBuffer, IV, destinationBuffer, out bytesWritten, padding),
-                        CipherMode.CFB => alg.TryEncryptCfb(plaintextBuffer, IV, destinationBuffer, out bytesWritten, padding, feedbackSize),
+                        CipherMode.ECB => alg.TryEncryptEcb(
+                            plaintextBuffer,
+                            destinationBuffer,
+                            padding,
+                            out bytesWritten
+                        ),
+                        CipherMode.CBC => alg.TryEncryptCbc(
+                            plaintextBuffer,
+                            IV,
+                            destinationBuffer,
+                            out bytesWritten,
+                            padding
+                        ),
+                        CipherMode.CFB => alg.TryEncryptCfb(
+                            plaintextBuffer,
+                            IV,
+                            destinationBuffer,
+                            out bytesWritten,
+                            padding,
+                            feedbackSize
+                        ),
                         _ => throw new NotImplementedException(),
                     };
                     Assert.True(result, "TryEncrypt");
                     Assert.Equal(destinationBuffer.Length, bytesWritten);
 
                     AssertCiphertexts(ciphertext, destinationBuffer, padding, paddingSizeBytes);
-                    Assert.True(destinationBuffer.Overlaps(plaintextBuffer) || plaintext.Length == 0 || ciphertext.Length == 0);
+                    Assert.True(
+                        destinationBuffer.Overlaps(plaintextBuffer)
+                            || plaintext.Length == 0
+                            || ciphertext.Length == 0
+                    );
                 }
             }
         }
 
-        protected void DecryptOneShot_SpanTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void DecryptOneShot_SpanTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
@@ -320,7 +558,12 @@ namespace System.Security.Cryptography.Tests
                 {
                     CipherMode.ECB => alg.DecryptEcb(ciphertext.AsSpan(), padding),
                     CipherMode.CBC => alg.DecryptCbc(ciphertext.AsSpan(), IV.AsSpan(), padding),
-                    CipherMode.CFB => alg.DecryptCfb(ciphertext.AsSpan(), IV.AsSpan(), padding, feedbackSize),
+                    CipherMode.CFB => alg.DecryptCfb(
+                        ciphertext.AsSpan(),
+                        IV.AsSpan(),
+                        padding,
+                        feedbackSize
+                    ),
                     _ => throw new NotImplementedException(),
                 };
 
@@ -328,17 +571,29 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        protected void EncryptOneShot_SpanTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void EncryptOneShot_SpanTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
                 alg.Key = Key;
-                int paddingSizeBytes = mode == CipherMode.CFB ? feedbackSize / 8 : alg.BlockSize / 8;
+                int paddingSizeBytes =
+                    mode == CipherMode.CFB ? feedbackSize / 8 : alg.BlockSize / 8;
                 byte[] encrypted = mode switch
                 {
                     CipherMode.ECB => alg.EncryptEcb(plaintext.AsSpan(), padding),
                     CipherMode.CBC => alg.EncryptCbc(plaintext.AsSpan(), IV.AsSpan(), padding),
-                    CipherMode.CFB => alg.EncryptCfb(plaintext.AsSpan(), IV.AsSpan(), padding, feedbackSize),
+                    CipherMode.CFB => alg.EncryptCfb(
+                        plaintext.AsSpan(),
+                        IV.AsSpan(),
+                        padding,
+                        feedbackSize
+                    ),
                     _ => throw new NotImplementedException(),
                 };
 
@@ -346,7 +601,13 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        protected void DecryptOneShot_ArrayTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void DecryptOneShot_ArrayTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
@@ -363,12 +624,19 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        protected void EncryptOneShot_ArrayTest(byte[] plaintext, byte[] ciphertext, PaddingMode padding, CipherMode mode, int feedbackSize = 0)
+        protected void EncryptOneShot_ArrayTest(
+            byte[] plaintext,
+            byte[] ciphertext,
+            PaddingMode padding,
+            CipherMode mode,
+            int feedbackSize = 0
+        )
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
                 alg.Key = Key;
-                int paddingSizeBytes = mode == CipherMode.CFB ? feedbackSize / 8 : alg.BlockSize / 8;
+                int paddingSizeBytes =
+                    mode == CipherMode.CFB ? feedbackSize / 8 : alg.BlockSize / 8;
                 byte[] encrypted = mode switch
                 {
                     CipherMode.ECB => alg.EncryptEcb(plaintext, padding),
@@ -389,7 +657,11 @@ namespace System.Security.Cryptography.Tests
             Type defType = typeof(SymmetricOneShotBase);
             List<string> missingMethods = new List<string>();
 
-            foreach (MethodInfo info in defType.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic))
+            foreach (
+                MethodInfo info in defType.GetMethods(
+                    BindingFlags.Instance | BindingFlags.NonPublic
+                )
+            )
             {
                 if (info.IsFamily && info.Name.EndsWith(TestSuffix, StringComparison.Ordinal))
                 {
@@ -397,7 +669,8 @@ namespace System.Security.Cryptography.Tests
 
                     MethodInfo info2 = implType.GetMethod(
                         targetMethodName,
-                        BindingFlags.Instance | BindingFlags.Public);
+                        BindingFlags.Instance | BindingFlags.Public
+                    );
 
                     if (info2 is null)
                     {
@@ -428,10 +701,20 @@ namespace System.Security.Cryptography.Tests
                 excessPadding[0] = 0x42;
 
                 // Use paddingMode: None since we manually padded our data
-                byte[] ciphertext = alg.EncryptCfb(excessPadding, IV, paddingMode: PaddingMode.None, feedbackSizeInBits: 8);
+                byte[] ciphertext = alg.EncryptCfb(
+                    excessPadding,
+                    IV,
+                    paddingMode: PaddingMode.None,
+                    feedbackSizeInBits: 8
+                );
 
                 // Now decrypt it with PKCS7 padding mode. It should remove all but the first byte since it is not padding.
-                byte[] decrypted = alg.DecryptCfb(ciphertext, IV, paddingMode: PaddingMode.PKCS7, feedbackSizeInBits: 8);
+                byte[] decrypted = alg.DecryptCfb(
+                    ciphertext,
+                    IV,
+                    paddingMode: PaddingMode.PKCS7,
+                    feedbackSizeInBits: 8
+                );
                 Assert.Equal(new byte[] { 0x42 }, decrypted);
             }
         }
@@ -443,7 +726,10 @@ namespace System.Security.Cryptography.Tests
         [InlineData(PaddingMode.PKCS7, 2048)]
         [InlineData(PaddingMode.ANSIX923, 2048)]
         [InlineData(PaddingMode.ISO10126, 2048)]
-        public void DecryptOneShot_Cbc_InvalidPadding_DoesNotContainPlaintext(PaddingMode paddingMode, int ciphertextSize)
+        public void DecryptOneShot_Cbc_InvalidPadding_DoesNotContainPlaintext(
+            PaddingMode paddingMode,
+            int ciphertextSize
+        )
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
@@ -456,9 +742,18 @@ namespace System.Security.Cryptography.Tests
                 byte[] destination = new byte[size];
 
                 // Use paddingMode: None since we manually padded our data
-                byte[] ciphertext = alg.EncryptCbc(invalidPadding, IV, paddingMode: PaddingMode.None);
-                Assert.Throws<CryptographicException>(() => alg.DecryptCbc(ciphertext, IV, destination, paddingMode: paddingMode));
-                Assert.True(destination.AsSpan().IndexOf(plaintextByte) < 0, "does not contain plaintext data");
+                byte[] ciphertext = alg.EncryptCbc(
+                    invalidPadding,
+                    IV,
+                    paddingMode: PaddingMode.None
+                );
+                Assert.Throws<CryptographicException>(() =>
+                    alg.DecryptCbc(ciphertext, IV, destination, paddingMode: paddingMode)
+                );
+                Assert.True(
+                    destination.AsSpan().IndexOf(plaintextByte) < 0,
+                    "does not contain plaintext data"
+                );
             }
         }
 
@@ -469,7 +764,10 @@ namespace System.Security.Cryptography.Tests
         [InlineData(PaddingMode.PKCS7, 2048)]
         [InlineData(PaddingMode.ANSIX923, 2048)]
         [InlineData(PaddingMode.ISO10126, 2048)]
-        public void DecryptOneShot_Ecb_InvalidPadding_DoesNotContainPlaintext(PaddingMode paddingMode, int ciphertextSize)
+        public void DecryptOneShot_Ecb_InvalidPadding_DoesNotContainPlaintext(
+            PaddingMode paddingMode,
+            int ciphertextSize
+        )
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
@@ -483,8 +781,13 @@ namespace System.Security.Cryptography.Tests
 
                 // Use paddingMode: None since we manually padded our data
                 byte[] ciphertext = alg.EncryptEcb(invalidPadding, paddingMode: PaddingMode.None);
-                Assert.Throws<CryptographicException>(() => alg.DecryptEcb(ciphertext, destination, paddingMode: paddingMode));
-                Assert.True(destination.AsSpan().IndexOf(plaintextByte) < 0, "does not contain plaintext data");
+                Assert.Throws<CryptographicException>(() =>
+                    alg.DecryptEcb(ciphertext, destination, paddingMode: paddingMode)
+                );
+                Assert.True(
+                    destination.AsSpan().IndexOf(plaintextByte) < 0,
+                    "does not contain plaintext data"
+                );
             }
         }
 
@@ -495,7 +798,10 @@ namespace System.Security.Cryptography.Tests
         [InlineData(PaddingMode.PKCS7, 2048)]
         [InlineData(PaddingMode.ANSIX923, 2048)]
         [InlineData(PaddingMode.ISO10126, 2048)]
-        public void DecryptOneShot_Cfb_InvalidPadding_DoesNotContainPlaintext(PaddingMode paddingMode, int ciphertextSize)
+        public void DecryptOneShot_Cfb_InvalidPadding_DoesNotContainPlaintext(
+            PaddingMode paddingMode,
+            int ciphertextSize
+        )
         {
             using (SymmetricAlgorithm alg = CreateAlgorithm())
             {
@@ -513,9 +819,18 @@ namespace System.Security.Cryptography.Tests
                 byte[] destination = new byte[size];
 
                 // Use paddingMode: None since we manually padded our data
-                byte[] ciphertext = alg.EncryptCfb(invalidPadding, IV, paddingMode: PaddingMode.None);
-                Assert.Throws<CryptographicException>(() => alg.DecryptCfb(ciphertext, IV, destination, paddingMode: paddingMode));
-                Assert.True(destination.AsSpan().IndexOf(plaintextByte) < 0, "does not contain plaintext data");
+                byte[] ciphertext = alg.EncryptCfb(
+                    invalidPadding,
+                    IV,
+                    paddingMode: PaddingMode.None
+                );
+                Assert.Throws<CryptographicException>(() =>
+                    alg.DecryptCfb(ciphertext, IV, destination, paddingMode: paddingMode)
+                );
+                Assert.True(
+                    destination.AsSpan().IndexOf(plaintextByte) < 0,
+                    "does not contain plaintext data"
+                );
             }
         }
 
@@ -536,9 +851,18 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination = new byte[size];
                 byte[] ciphertext = alg.EncryptCbc(plaintext, IV, paddingMode: paddingMode);
 
-                bool success = alg.TryDecryptCbc(ciphertext, IV, destination, out int bytesWritten, paddingMode: paddingMode);
+                bool success = alg.TryDecryptCbc(
+                    ciphertext,
+                    IV,
+                    destination,
+                    out int bytesWritten,
+                    paddingMode: paddingMode
+                );
                 Assert.False(success, nameof(alg.TryDecryptCbc));
-                Assert.True(destination.IndexOf(plaintextByte) < 0, "does not contain plaintext data");
+                Assert.True(
+                    destination.IndexOf(plaintextByte) < 0,
+                    "does not contain plaintext data"
+                );
                 Assert.Equal(0, bytesWritten);
             }
         }
@@ -565,14 +889,27 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination = new byte[size];
                 byte[] ciphertext = alg.EncryptCfb(plaintext, IV, paddingMode: paddingMode);
 
-                bool success = alg.TryDecryptCfb(ciphertext, IV, destination, out int bytesWritten, paddingMode: paddingMode);
+                bool success = alg.TryDecryptCfb(
+                    ciphertext,
+                    IV,
+                    destination,
+                    out int bytesWritten,
+                    paddingMode: paddingMode
+                );
                 Assert.False(success, nameof(alg.TryDecryptCfb));
-                Assert.True(destination.IndexOf(plaintextByte) < 0, "does not contain plaintext data");
+                Assert.True(
+                    destination.IndexOf(plaintextByte) < 0,
+                    "does not contain plaintext data"
+                );
                 Assert.Equal(0, bytesWritten);
             }
         }
 
-        private static void AssertPlaintexts(ReadOnlySpan<byte> expected, ReadOnlySpan<byte> actual, PaddingMode padding)
+        private static void AssertPlaintexts(
+            ReadOnlySpan<byte> expected,
+            ReadOnlySpan<byte> actual,
+            PaddingMode padding
+        )
         {
             if (padding == PaddingMode.Zeros)
             {
@@ -585,12 +922,20 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        private static void AssertCiphertexts(ReadOnlySpan<byte> expected, ReadOnlySpan<byte> actual, PaddingMode padding, int paddingSizeBytes)
+        private static void AssertCiphertexts(
+            ReadOnlySpan<byte> expected,
+            ReadOnlySpan<byte> actual,
+            PaddingMode padding,
+            int paddingSizeBytes
+        )
         {
             if (padding == PaddingMode.ISO10126)
             {
                 // The padding is random, so we can't check the exact ciphertext.
-                AssertExtensions.SequenceEqual(expected[..^paddingSizeBytes], actual[..^paddingSizeBytes]);
+                AssertExtensions.SequenceEqual(
+                    expected[..^paddingSizeBytes],
+                    actual[..^paddingSizeBytes]
+                );
             }
             else
             {

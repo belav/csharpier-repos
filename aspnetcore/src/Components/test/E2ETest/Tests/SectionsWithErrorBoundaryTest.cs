@@ -2,25 +2,25 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using BasicTestApp;
-using Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
-using Microsoft.AspNetCore.Components.E2ETest.Infrastructure;
-using Microsoft.AspNetCore.E2ETesting;
-using Xunit.Abstractions;
 using Microsoft.AspNetCore.Components.E2ETest;
-using OpenQA.Selenium;
+using Microsoft.AspNetCore.Components.E2ETest.Infrastructure;
+using Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 using Microsoft.AspNetCore.Components.Sections;
+using Microsoft.AspNetCore.E2ETesting;
+using OpenQA.Selenium;
+using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETests.Tests;
 
-public class SectionsWithErrorBoundaryTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
+public class SectionsWithErrorBoundaryTest
+    : ServerTestBase<ToggleExecutionModeServerFixture<Program>>
 {
-    public SectionsWithErrorBoundaryTest
-        (BrowserFixture browserFixture,
+    public SectionsWithErrorBoundaryTest(
+        BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {

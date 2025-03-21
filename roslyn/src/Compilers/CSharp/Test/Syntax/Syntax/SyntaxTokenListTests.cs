@@ -4,11 +4,11 @@
 
 #nullable disable
 
+using System;
 using System.Collections.Generic;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
 using Microsoft.CodeAnalysis.Test.Utilities;
-using System;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp
@@ -22,13 +22,22 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             EqualityTesting.AssertEqual(default(SyntaxTokenList), default(SyntaxTokenList));
 
-            EqualityTesting.AssertEqual(new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0), new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0));
+            EqualityTesting.AssertEqual(
+                new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0),
+                new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0)
+            );
 
             // index is considered
-            EqualityTesting.AssertNotEqual(new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 1), new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0));
+            EqualityTesting.AssertNotEqual(
+                new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 1),
+                new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0)
+            );
 
             // position not considered:
-            EqualityTesting.AssertEqual(new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 1, 0), new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0));
+            EqualityTesting.AssertEqual(
+                new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 1, 0),
+                new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0)
+            );
         }
 
         [Fact]
@@ -36,30 +45,56 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             var node1 = SyntaxFactory.ReturnStatement();
 
-            EqualityTesting.AssertEqual(default(SyntaxTokenList).Reverse(), default(SyntaxTokenList).Reverse());
+            EqualityTesting.AssertEqual(
+                default(SyntaxTokenList).Reverse(),
+                default(SyntaxTokenList).Reverse()
+            );
 
-            EqualityTesting.AssertEqual(new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0).Reverse(), new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0).Reverse());
+            EqualityTesting.AssertEqual(
+                new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0).Reverse(),
+                new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0).Reverse()
+            );
 
             // index is considered
-            EqualityTesting.AssertNotEqual(new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 1).Reverse(), new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0).Reverse());
+            EqualityTesting.AssertNotEqual(
+                new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 1).Reverse(),
+                new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0).Reverse()
+            );
 
             // position not considered:
-            EqualityTesting.AssertEqual(new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 1, 0).Reverse(), new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0).Reverse());
+            EqualityTesting.AssertEqual(
+                new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 1, 0).Reverse(),
+                new SyntaxTokenList(node1, node1.ReturnKeyword.Node, 0, 0).Reverse()
+            );
         }
 
         [Fact]
         public void TestEnumeratorEquality()
         {
-            Assert.Throws<NotSupportedException>(() => default(SyntaxTokenList.Enumerator).GetHashCode());
-            Assert.Throws<NotSupportedException>(() => default(SyntaxTokenList.Enumerator).Equals(default(SyntaxTokenList.Enumerator)));
-            Assert.Throws<NotSupportedException>(() => default(SyntaxTokenList.Reversed.Enumerator).GetHashCode());
-            Assert.Throws<NotSupportedException>(() => default(SyntaxTokenList.Reversed.Enumerator).Equals(default(SyntaxTokenList.Reversed.Enumerator)));
+            Assert.Throws<NotSupportedException>(() =>
+                default(SyntaxTokenList.Enumerator).GetHashCode()
+            );
+            Assert.Throws<NotSupportedException>(() =>
+                default(SyntaxTokenList.Enumerator).Equals(default(SyntaxTokenList.Enumerator))
+            );
+            Assert.Throws<NotSupportedException>(() =>
+                default(SyntaxTokenList.Reversed.Enumerator).GetHashCode()
+            );
+            Assert.Throws<NotSupportedException>(() =>
+                default(SyntaxTokenList.Reversed.Enumerator).Equals(
+                    default(SyntaxTokenList.Reversed.Enumerator)
+                )
+            );
         }
 
         [Fact]
         public void TestAddInsertRemoveReplace()
         {
-            var list = SyntaxFactory.TokenList(SyntaxFactory.ParseToken("A "), SyntaxFactory.ParseToken("B "), SyntaxFactory.ParseToken("C "));
+            var list = SyntaxFactory.TokenList(
+                SyntaxFactory.ParseToken("A "),
+                SyntaxFactory.ParseToken("B "),
+                SyntaxFactory.ParseToken("C ")
+            );
 
             Assert.Equal(3, list.Count);
             Assert.Equal("A", list[0].ToString());
@@ -177,15 +212,23 @@ namespace Microsoft.CodeAnalysis.CSharp
             Assert.Equal(-1, list.IndexOf(tokenD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, tokenD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(list.Count + 1, tokenD));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { tokenD }));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(list.Count + 1, new[] { tokenD }));
+            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { tokenD })
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.InsertRange(list.Count + 1, new[] { tokenD })
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(list.Count));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Add(default(SyntaxToken)));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(0, default(SyntaxToken)));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxToken>)null));
-            Assert.Throws<ArgumentNullException>(() => list.InsertRange(0, (IEnumerable<SyntaxToken>)null));
-            Assert.Throws<ArgumentNullException>(() => list.ReplaceRange(elementA, (IEnumerable<SyntaxToken>)null));
+            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxToken>)null)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                list.InsertRange(0, (IEnumerable<SyntaxToken>)null)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                list.ReplaceRange(elementA, (IEnumerable<SyntaxToken>)null)
+            );
         }
 
         [Fact]
@@ -225,14 +268,22 @@ namespace Microsoft.CodeAnalysis.CSharp
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(0));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(1, tokenD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, tokenD));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { tokenD }));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(list.Count + 1, new[] { tokenD }));
+            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { tokenD })
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.InsertRange(list.Count + 1, new[] { tokenD })
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Replace(tokenD, tokenE));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.ReplaceRange(tokenD, new[] { tokenE }));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.ReplaceRange(tokenD, new[] { tokenE })
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Add(default(SyntaxToken)));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(0, default(SyntaxToken)));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxToken>)null));
-            Assert.Throws<ArgumentNullException>(() => list.InsertRange(0, (IEnumerable<SyntaxToken>)null));
+            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxToken>)null)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                list.InsertRange(0, (IEnumerable<SyntaxToken>)null)
+            );
         }
 
         [Fact]
@@ -241,7 +292,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             var list = SyntaxFactory.TokenList(
                 SyntaxFactory.Token(SyntaxKind.SizeOfKeyword),
                 SyntaxFactory.Literal("x"),
-                SyntaxFactory.Token(SyntaxKind.DotToken));
+                SyntaxFactory.Token(SyntaxKind.DotToken)
+            );
 
             Assert.Equal(0, list.IndexOf(SyntaxKind.SizeOfKeyword));
             Assert.True(list.Any(SyntaxKind.SizeOfKeyword));

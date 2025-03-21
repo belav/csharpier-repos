@@ -17,26 +17,65 @@ namespace System.Runtime.InteropServices.Tests
         [StructLayout(LayoutKind.Explicit)]
         public struct UnionTypes
         {
-            [FieldOffset(0)] internal SByte _i1;
-            [FieldOffset(0)] internal Int16 _i2;
-            [FieldOffset(0)] internal Int32 _i4;
-            [FieldOffset(0)] internal Int64 _i8;
-            [FieldOffset(0)] internal Byte _ui1;
-            [FieldOffset(0)] internal UInt16 _ui2;
-            [FieldOffset(0)] internal UInt32 _ui4;
-            [FieldOffset(0)] internal UInt64 _ui8;
-            [FieldOffset(0)] internal Int32 _int;
-            [FieldOffset(0)] internal UInt32 _uint;
-            [FieldOffset(0)] internal Single _r4;
-            [FieldOffset(0)] internal Double _r8;
-            [FieldOffset(0)] internal Int64 _cy;
-            [FieldOffset(0)] internal double _date;
-            [FieldOffset(0)] internal IntPtr _bstr;
-            [FieldOffset(0)] internal IntPtr _unknown;
-            [FieldOffset(0)] internal IntPtr _dispatch;
-            [FieldOffset(0)] internal IntPtr _pvarVal;
-            [FieldOffset(0)] internal IntPtr _byref;
-            [FieldOffset(0)] internal Record _record;
+            [FieldOffset(0)]
+            internal SByte _i1;
+
+            [FieldOffset(0)]
+            internal Int16 _i2;
+
+            [FieldOffset(0)]
+            internal Int32 _i4;
+
+            [FieldOffset(0)]
+            internal Int64 _i8;
+
+            [FieldOffset(0)]
+            internal Byte _ui1;
+
+            [FieldOffset(0)]
+            internal UInt16 _ui2;
+
+            [FieldOffset(0)]
+            internal UInt32 _ui4;
+
+            [FieldOffset(0)]
+            internal UInt64 _ui8;
+
+            [FieldOffset(0)]
+            internal Int32 _int;
+
+            [FieldOffset(0)]
+            internal UInt32 _uint;
+
+            [FieldOffset(0)]
+            internal Single _r4;
+
+            [FieldOffset(0)]
+            internal Double _r8;
+
+            [FieldOffset(0)]
+            internal Int64 _cy;
+
+            [FieldOffset(0)]
+            internal double _date;
+
+            [FieldOffset(0)]
+            internal IntPtr _bstr;
+
+            [FieldOffset(0)]
+            internal IntPtr _unknown;
+
+            [FieldOffset(0)]
+            internal IntPtr _dispatch;
+
+            [FieldOffset(0)]
+            internal IntPtr _pvarVal;
+
+            [FieldOffset(0)]
+            internal IntPtr _byref;
+
+            [FieldOffset(0)]
+            internal Record _record;
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -52,8 +91,11 @@ namespace System.Runtime.InteropServices.Tests
         [StructLayout(LayoutKind.Explicit)]
         internal struct Variant
         {
-            [FieldOffset(0)] public TypeUnion m_Variant;
-            [FieldOffset(0)] public decimal m_decimal;
+            [FieldOffset(0)]
+            public TypeUnion m_Variant;
+
+            [FieldOffset(0)]
+            public decimal m_decimal;
         }
 #pragma warning disable 618
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
@@ -270,22 +312,38 @@ namespace System.Runtime.InteropServices.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public static void GetObjectsForNativeVariants_Unix_ThrowsPlatformNotSupportedException()
         {
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetObjectsForNativeVariants(IntPtr.Zero, 10));
-            Assert.Throws<PlatformNotSupportedException>(() => Marshal.GetObjectsForNativeVariants<int>(IntPtr.Zero, 10));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.GetObjectsForNativeVariants(IntPtr.Zero, 10)
+            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                Marshal.GetObjectsForNativeVariants<int>(IntPtr.Zero, 10)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public static void GetObjectsForNativeVariants_ZeroPointer_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("aSrcNativeVariant", () => Marshal.GetObjectsForNativeVariants(IntPtr.Zero, 10));
-            AssertExtensions.Throws<ArgumentNullException>("aSrcNativeVariant", () => Marshal.GetObjectsForNativeVariants<int>(IntPtr.Zero, 10));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "aSrcNativeVariant",
+                () => Marshal.GetObjectsForNativeVariants(IntPtr.Zero, 10)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "aSrcNativeVariant",
+                () => Marshal.GetObjectsForNativeVariants<int>(IntPtr.Zero, 10)
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltInComEnabled))]
         public static void GetObjectsForNativeVariants_NegativeCount_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("cVars", () => Marshal.GetObjectsForNativeVariants((IntPtr)1, -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("cVars", () => Marshal.GetObjectsForNativeVariants<int>((IntPtr)1, -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "cVars",
+                () => Marshal.GetObjectsForNativeVariants((IntPtr)1, -1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "cVars",
+                () => Marshal.GetObjectsForNativeVariants<int>((IntPtr)1, -1)
+            );
         }
 #pragma warning restore 618
     }

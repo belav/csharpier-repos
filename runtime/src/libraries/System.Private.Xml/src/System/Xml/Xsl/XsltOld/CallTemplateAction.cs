@@ -53,7 +53,10 @@ namespace System.Xml.Xsl.XsltOld
                             string nspace = input.NamespaceURI;
                             string name = input.LocalName;
 
-                            if (Ref.Equal(nspace, input.Atoms.UriXsl) && Ref.Equal(name, input.Atoms.WithParam))
+                            if (
+                                Ref.Equal(nspace, input.Atoms.UriXsl)
+                                && Ref.Equal(name, input.Atoms.WithParam)
+                            )
                             {
                                 WithParamAction par = compiler.CreateWithParamAction();
                                 CheckDuplicateParams(par.Name!);

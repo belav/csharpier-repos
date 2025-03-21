@@ -8,18 +8,20 @@ using System.Configuration;
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Web.Configuration {
-
+namespace System.Web.Configuration
+{
     //
-    // If we are not using the HttpConfigurationSystem, delegate to the 
+    // If we are not using the HttpConfigurationSystem, delegate to the
     // client configuration system.
     //
-    internal class ClientRuntimeConfig : RuntimeConfig {
+    internal class ClientRuntimeConfig : RuntimeConfig
+    {
+        internal ClientRuntimeConfig()
+            : base(null, false) { }
 
-        internal ClientRuntimeConfig() : base(null, false) {}
-
-        [ConfigurationPermission(SecurityAction.Assert, Unrestricted=true)]
-        protected override object GetSectionObject(string sectionName) {
+        [ConfigurationPermission(SecurityAction.Assert, Unrestricted = true)]
+        protected override object GetSectionObject(string sectionName)
+        {
             return ConfigurationManager.GetSection(sectionName);
         }
     }

@@ -13,14 +13,19 @@ namespace System.Web.Http.Tracing.Tracers
     /// <summary>
     /// Tracer for <see cref="IHttpControllerActivator"/>.
     /// </summary>
-    internal class HttpControllerActivatorTracer : IHttpControllerActivator, IDecorator<IHttpControllerActivator>
+    internal class HttpControllerActivatorTracer
+        : IHttpControllerActivator,
+            IDecorator<IHttpControllerActivator>
     {
         private const string CreateMethodName = "Create";
 
         private readonly IHttpControllerActivator _innerActivator;
         private readonly ITraceWriter _traceWriter;
 
-        public HttpControllerActivatorTracer(IHttpControllerActivator innerActivator, ITraceWriter traceWriter)
+        public HttpControllerActivatorTracer(
+            IHttpControllerActivator innerActivator,
+            ITraceWriter traceWriter
+        )
         {
             Contract.Assert(innerActivator != null);
             Contract.Assert(traceWriter != null);
@@ -34,8 +39,16 @@ namespace System.Web.Http.Tracing.Tracers
             get { return _innerActivator; }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "disposable controller is later released in ReleaseController")]
-        IHttpController IHttpControllerActivator.Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor, Type controllerType)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "disposable controller is later released in ReleaseController"
+        )]
+        IHttpController IHttpControllerActivator.Create(
+            HttpRequestMessage request,
+            HttpControllerDescriptor controllerDescriptor,
+            Type controllerType
+        )
         {
             IHttpController controller = null;
 
@@ -48,13 +61,21 @@ namespace System.Web.Http.Tracing.Tracers
                 beginTrace: null,
                 execute: () =>
                 {
-                    controller = _innerActivator.Create(request, controllerDescriptor, controllerType);
+                    controller = _innerActivator.Create(
+                        request,
+                        controllerDescriptor,
+                        controllerType
+                    );
                 },
                 endTrace: (tr) =>
                 {
-                    tr.Message = controller == null ? SRResources.TraceNoneObjectMessage : controller.GetType().FullName;
+                    tr.Message =
+                        controller == null
+                            ? SRResources.TraceNoneObjectMessage
+                            : controller.GetType().FullName;
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
 
             if (controller != null && !(controller is HttpControllerTracer))
             {

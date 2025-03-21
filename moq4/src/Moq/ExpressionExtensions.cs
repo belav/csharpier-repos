@@ -9,14 +9,12 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-
 using Moq.Async;
 using Moq.Properties;
 using Moq.Protected;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal static partial class ExpressionExtensions
@@ -58,7 +56,11 @@ namespace Moq
                 // no conversion is necessary:
                 return expression;
             }
-            if (!expression.Type.IsValueType && !type.IsValueType && type.IsAssignableFrom(expression.Type))
+            if (
+                !expression.Type.IsValueType
+                && !type.IsValueType
+                && type.IsAssignableFrom(expression.Type)
+            )
             {
                 // if source and target types are reference types and assignment-compatible,
                 // no conversion is necessary:
@@ -78,7 +80,10 @@ namespace Moq
             return ExpressionCompiler.Instance.Compile(expression);
         }
 
-        internal static TDelegate CompileUsingExpressionCompiler<TDelegate>(this Expression<TDelegate> expression) where TDelegate : Delegate
+        internal static TDelegate CompileUsingExpressionCompiler<TDelegate>(
+            this Expression<TDelegate> expression
+        )
+            where TDelegate : Delegate
         {
             // Expression trees are not compiled directly.
             // The indirection via an ExpressionCompiler allows users to plug a different expression compiler.
@@ -110,34 +115,34 @@ namespace Moq
                 case ExpressionType.Assign:
                 case ExpressionType.AddAssign:
                 case ExpressionType.SubtractAssign:
-                    {
-                        var assignmentExpression = (BinaryExpression)e;
-                        return CanSplit(assignmentExpression.Left);
-                    }
+                {
+                    var assignmentExpression = (BinaryExpression)e;
+                    return CanSplit(assignmentExpression.Left);
+                }
 
                 case ExpressionType.Call:
                 case ExpressionType.Index:
-                    {
-                        return true;
-                    }
+                {
+                    return true;
+                }
 
                 case ExpressionType.Invoke:
-                    {
-                        var invocationExpression = (InvocationExpression)e;
-                        return typeof(Delegate).IsAssignableFrom(invocationExpression.Expression.Type);
-                    }
+                {
+                    var invocationExpression = (InvocationExpression)e;
+                    return typeof(Delegate).IsAssignableFrom(invocationExpression.Expression.Type);
+                }
 
                 case ExpressionType.MemberAccess:
-                    {
-                        var memberAccessExpression = (MemberExpression)e;
-                        return memberAccessExpression.Member is PropertyInfo;
-                    }
+                {
+                    var memberAccessExpression = (MemberExpression)e;
+                    return memberAccessExpression.Member is PropertyInfo;
+                }
 
                 case ExpressionType.Parameter:
                 default:
-                    {
-                        return false;
-                    }
+                {
+                    return false;
+                }
             }
         }
 
@@ -158,7 +163,10 @@ namespace Moq
         /// <exception cref="ArgumentException">
         ///   It was not possible to completely split up the expression.
         /// </exception>
-        internal static Stack<MethodExpectation> Split(this LambdaExpression expression, bool allowNonOverridableLastProperty = false)
+        internal static Stack<MethodExpectation> Split(
+            this LambdaExpression expression,
+            bool allowNonOverridableLastProperty = false
+        )
         {
             Debug.Assert(expression != null);
 
@@ -167,7 +175,13 @@ namespace Moq
             Expression remainder = expression.Body;
             while (CanSplit(remainder))
             {
-                Split(remainder, out remainder, out var part, allowNonOverridableLastProperty: allowNonOverridableLastProperty && parts.Count == 0);
+                Split(
+                    remainder,
+                    out remainder,
+                    out var part,
+                    allowNonOverridableLastProperty: allowNonOverridableLastProperty
+                        && parts.Count == 0
+                );
                 parts.Push(part);
             }
 
@@ -181,182 +195,236 @@ namespace Moq
                     string.Format(
                         CultureInfo.CurrentCulture,
                         Resources.UnsupportedExpression,
-                        remainder.ToStringFixed()));
+                        remainder.ToStringFixed()
+                    )
+                );
             }
 
-            void Split(Expression e, out Expression r /* remainder */, out MethodExpectation p /* part */, bool assignment = false, bool allowNonOverridableLastProperty = false)
+            void Split(
+                Expression e,
+                out Expression r /* remainder */
+                ,
+                out MethodExpectation p /* part */
+                ,
+                bool assignment = false,
+                bool allowNonOverridableLastProperty = false
+            )
             {
                 const string ParameterName = "...";
 
                 switch (e.NodeType)
                 {
-                    case ExpressionType.Assign:          // assignment to a property or indexer
-                    case ExpressionType.AddAssign:       // subscription of event handler to event
-                    case ExpressionType.SubtractAssign:  // unsubscription of event handler from event
+                    case ExpressionType.Assign: // assignment to a property or indexer
+                    case ExpressionType.AddAssign: // subscription of event handler to event
+                    case ExpressionType.SubtractAssign: // unsubscription of event handler from event
+                    {
+                        var assignmentExpression = (BinaryExpression)e;
+                        Split(assignmentExpression.Left, out r, out var lhs, assignment: true);
+                        var parameter = Expression.Parameter(
+                            r.Type,
+                            r is ParameterExpression ope ? ope.Name : ParameterName
+                        );
+                        var arguments = new Expression[lhs.Method.GetParameters().Length];
+                        for (var ai = 0; ai < arguments.Length - 1; ++ai)
                         {
-                            var assignmentExpression = (BinaryExpression)e;
-                            Split(assignmentExpression.Left, out r, out var lhs, assignment: true);
-                            var parameter = Expression.Parameter(r.Type, r is ParameterExpression ope ? ope.Name : ParameterName);
-                            var arguments = new Expression[lhs.Method.GetParameters().Length];
-                            for (var ai = 0; ai < arguments.Length - 1; ++ai)
-                            {
-                                arguments[ai] = lhs.Arguments[ai];
-                            }
-                            arguments[arguments.Length - 1] = assignmentExpression.Right;
-                            p = new MethodExpectation(
-                                expression: Expression.Lambda(
-                                    Expression.MakeBinary(e.NodeType, lhs.Expression.Body, assignmentExpression.Right),
-                                    parameter),
-                                method: lhs.Method,
-                                arguments);
-                            return;
+                            arguments[ai] = lhs.Arguments[ai];
                         }
+                        arguments[arguments.Length - 1] = assignmentExpression.Right;
+                        p = new MethodExpectation(
+                            expression: Expression.Lambda(
+                                Expression.MakeBinary(
+                                    e.NodeType,
+                                    lhs.Expression.Body,
+                                    assignmentExpression.Right
+                                ),
+                                parameter
+                            ),
+                            method: lhs.Method,
+                            arguments
+                        );
+                        return;
+                    }
 
-                    case ExpressionType.Call:  // regular method call
+                    case ExpressionType.Call: // regular method call
+                    {
+                        var methodCallExpression = (MethodCallExpression)e;
+
+                        if (methodCallExpression.Method.IsGenericMethod)
                         {
-                            var methodCallExpression = (MethodCallExpression)e;
-
-                            if (methodCallExpression.Method.IsGenericMethod)
+                            foreach (
+                                var typeArgument in methodCallExpression.Method.GetGenericArguments()
+                            )
                             {
-                                foreach (var typeArgument in methodCallExpression.Method.GetGenericArguments())
+                                if (typeArgument.IsOrContainsTypeMatcher())
                                 {
-                                    if (typeArgument.IsOrContainsTypeMatcher())
-                                    {
-                                        // This is a (somewhat roundabout) way of ensuring that the type matchers used
-                                        // will be usable. They will not be usable if they don't implement the type
-                                        // matcher protocol correctly; and `SubstituteTypeMatchers` tests for that, so
-                                        // we'll reuse its recursive logic instead of having to reimplement our own.
-                                        _ = typeArgument.SubstituteTypeMatchers(typeArgument);
-                                    }
+                                    // This is a (somewhat roundabout) way of ensuring that the type matchers used
+                                    // will be usable. They will not be usable if they don't implement the type
+                                    // matcher protocol correctly; and `SubstituteTypeMatchers` tests for that, so
+                                    // we'll reuse its recursive logic instead of having to reimplement our own.
+                                    _ = typeArgument.SubstituteTypeMatchers(typeArgument);
                                 }
                             }
-
-                            if (!methodCallExpression.Method.IsStatic)
-                            {
-                                r = methodCallExpression.Object;
-                                var parameter = Expression.Parameter(r.Type, r is ParameterExpression ope ? ope.Name : ParameterName);
-                                var method = methodCallExpression.Method;
-                                var arguments = methodCallExpression.Arguments;
-                                p = new MethodExpectation(
-                                            expression: Expression.Lambda(
-                                                Expression.Call(parameter, method, arguments),
-                                                parameter),
-                                            method,
-                                            arguments);
-                            }
-                            else
-                            {
-                                Debug.Assert(methodCallExpression.Method.IsExtensionMethod());
-                                Debug.Assert(methodCallExpression.Arguments.Count > 0);
-                                r = methodCallExpression.Arguments[0];
-                                var parameter = Expression.Parameter(r.Type, r is ParameterExpression ope ? ope.Name : ParameterName);
-                                var method = methodCallExpression.Method;
-                                var arguments = methodCallExpression.Arguments.ToArray();
-                                arguments[0] = parameter;
-                                p = new MethodExpectation(
-                                            expression: Expression.Lambda(
-                                                Expression.Call(method, arguments),
-                                                parameter),
-                                            method,
-                                            arguments);
-                            }
-                            return;
                         }
 
-                    case ExpressionType.Index:  // indexer query
+                        if (!methodCallExpression.Method.IsStatic)
                         {
-                            var indexExpression = (IndexExpression)e;
-                            r = indexExpression.Object;
-                            var parameter = Expression.Parameter(r.Type, r is ParameterExpression ope ? ope.Name : ParameterName);
-                            var indexer = indexExpression.Indexer;
-                            var arguments = indexExpression.Arguments;
-                            MethodInfo method;
-                            if (!assignment && indexer.CanRead(out var getter, out var getterIndexer))
-                            {
-                                method = getter;
-                                indexer = getterIndexer;
-                            }
-                            else if (indexer.CanWrite(out var setter, out var setterIndexer))
-                            {
-                                method = setter;
-                                indexer = setterIndexer;
-                            }
-                            else  // This should be unreachable.
-                            {
-                                method = null;
-                            }
+                            r = methodCallExpression.Object;
+                            var parameter = Expression.Parameter(
+                                r.Type,
+                                r is ParameterExpression ope ? ope.Name : ParameterName
+                            );
+                            var method = methodCallExpression.Method;
+                            var arguments = methodCallExpression.Arguments;
                             p = new MethodExpectation(
-                                        expression: Expression.Lambda(
-                                            Expression.MakeIndex(parameter, indexer, arguments),
-                                            parameter),
-                                        method,
-                                        arguments,
-                                        skipMatcherInitialization: assignment,
-                                        allowNonOverridable: allowNonOverridableLastProperty);
-                            return;
+                                expression: Expression.Lambda(
+                                    Expression.Call(parameter, method, arguments),
+                                    parameter
+                                ),
+                                method,
+                                arguments
+                            );
                         }
-
-                    case ExpressionType.Invoke:  // delegate invocation
+                        else
                         {
-                            var invocationExpression = (InvocationExpression)e;
-                            Debug.Assert(invocationExpression.Expression.Type.IsDelegateType());
-                            r = invocationExpression.Expression;
-                            var parameter = Expression.Parameter(r.Type, r is ParameterExpression ope ? ope.Name : ParameterName);
-                            var arguments = invocationExpression.Arguments;
+                            Debug.Assert(methodCallExpression.Method.IsExtensionMethod());
+                            Debug.Assert(methodCallExpression.Arguments.Count > 0);
+                            r = methodCallExpression.Arguments[0];
+                            var parameter = Expression.Parameter(
+                                r.Type,
+                                r is ParameterExpression ope ? ope.Name : ParameterName
+                            );
+                            var method = methodCallExpression.Method;
+                            var arguments = methodCallExpression.Arguments.ToArray();
+                            arguments[0] = parameter;
                             p = new MethodExpectation(
-                                        expression: Expression.Lambda(
-                                            Expression.Invoke(parameter, arguments),
-                                            parameter),
-                                        method: r.Type.GetMethod("Invoke", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance),
-                                        arguments);
-                            return;
+                                expression: Expression.Lambda(
+                                    Expression.Call(method, arguments),
+                                    parameter
+                                ),
+                                method,
+                                arguments
+                            );
                         }
+                        return;
+                    }
 
-                    case ExpressionType.MemberAccess:  // property query
+                    case ExpressionType.Index: // indexer query
+                    {
+                        var indexExpression = (IndexExpression)e;
+                        r = indexExpression.Object;
+                        var parameter = Expression.Parameter(
+                            r.Type,
+                            r is ParameterExpression ope ? ope.Name : ParameterName
+                        );
+                        var indexer = indexExpression.Indexer;
+                        var arguments = indexExpression.Arguments;
+                        MethodInfo method;
+                        if (!assignment && indexer.CanRead(out var getter, out var getterIndexer))
                         {
-                            var memberAccessExpression = (MemberExpression)e;
-                            Debug.Assert(memberAccessExpression.Member is PropertyInfo);
+                            method = getter;
+                            indexer = getterIndexer;
+                        }
+                        else if (indexer.CanWrite(out var setter, out var setterIndexer))
+                        {
+                            method = setter;
+                            indexer = setterIndexer;
+                        }
+                        else // This should be unreachable.
+                        {
+                            method = null;
+                        }
+                        p = new MethodExpectation(
+                            expression: Expression.Lambda(
+                                Expression.MakeIndex(parameter, indexer, arguments),
+                                parameter
+                            ),
+                            method,
+                            arguments,
+                            skipMatcherInitialization: assignment,
+                            allowNonOverridable: allowNonOverridableLastProperty
+                        );
+                        return;
+                    }
 
-                            if (IsResult(memberAccessExpression.Member, out var awaitableFactory))
-                            {
-                                Split(memberAccessExpression.Expression, out r, out p);
-                                p.AddResultExpression(
-                                    awaitable => Expression.MakeMemberAccess(awaitable, memberAccessExpression.Member),
-                                    awaitableFactory);
-                                return;
-                            }
+                    case ExpressionType.Invoke: // delegate invocation
+                    {
+                        var invocationExpression = (InvocationExpression)e;
+                        Debug.Assert(invocationExpression.Expression.Type.IsDelegateType());
+                        r = invocationExpression.Expression;
+                        var parameter = Expression.Parameter(
+                            r.Type,
+                            r is ParameterExpression ope ? ope.Name : ParameterName
+                        );
+                        var arguments = invocationExpression.Arguments;
+                        p = new MethodExpectation(
+                            expression: Expression.Lambda(
+                                Expression.Invoke(parameter, arguments),
+                                parameter
+                            ),
+                            method: r.Type.GetMethod(
+                                "Invoke",
+                                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                            ),
+                            arguments
+                        );
+                        return;
+                    }
 
-                            r = memberAccessExpression.Expression;
-                            var parameter = Expression.Parameter(r.Type, r is ParameterExpression ope ? ope.Name : ParameterName);
-                            var property = memberAccessExpression.GetReboundProperty();
-                            MethodInfo method;
-                            if (!assignment && property.CanRead(out var getter, out var getterProperty))
-                            {
-                                method = getter;
-                                property = getterProperty;
-                            }
-                            else if (property.CanWrite(out var setter, out var setterProperty))
-                            {
-                                method = setter;
-                                property = setterProperty;
-                            }
-                            else  // This should be unreachable.
-                            {
-                                method = null;
-                            }
-                            p = new MethodExpectation(
-                                        expression: Expression.Lambda(
-                                            Expression.MakeMemberAccess(parameter, property),
-                                            parameter),
-                                        method,
-                                        skipMatcherInitialization: assignment,
-                                        allowNonOverridable: allowNonOverridableLastProperty);
+                    case ExpressionType.MemberAccess: // property query
+                    {
+                        var memberAccessExpression = (MemberExpression)e;
+                        Debug.Assert(memberAccessExpression.Member is PropertyInfo);
+
+                        if (IsResult(memberAccessExpression.Member, out var awaitableFactory))
+                        {
+                            Split(memberAccessExpression.Expression, out r, out p);
+                            p.AddResultExpression(
+                                awaitable =>
+                                    Expression.MakeMemberAccess(
+                                        awaitable,
+                                        memberAccessExpression.Member
+                                    ),
+                                awaitableFactory
+                            );
                             return;
                         }
+
+                        r = memberAccessExpression.Expression;
+                        var parameter = Expression.Parameter(
+                            r.Type,
+                            r is ParameterExpression ope ? ope.Name : ParameterName
+                        );
+                        var property = memberAccessExpression.GetReboundProperty();
+                        MethodInfo method;
+                        if (!assignment && property.CanRead(out var getter, out var getterProperty))
+                        {
+                            method = getter;
+                            property = getterProperty;
+                        }
+                        else if (property.CanWrite(out var setter, out var setterProperty))
+                        {
+                            method = setter;
+                            property = setterProperty;
+                        }
+                        else // This should be unreachable.
+                        {
+                            method = null;
+                        }
+                        p = new MethodExpectation(
+                            expression: Expression.Lambda(
+                                Expression.MakeMemberAccess(parameter, property),
+                                parameter
+                            ),
+                            method,
+                            skipMatcherInitialization: assignment,
+                            allowNonOverridable: allowNonOverridableLastProperty
+                        );
+                        return;
+                    }
 
                     default:
                         Debug.Assert(!CanSplit(e));
-                        throw new InvalidOperationException();  // this should be unreachable
+                        throw new InvalidOperationException(); // this should be unreachable
                 }
             }
 
@@ -367,9 +435,10 @@ namespace Moq
                 var returnType = member switch
                 {
                     PropertyInfo p => p.PropertyType,
-                    _ => null
+                    _ => null,
                 };
-                return awaitableFactory != null && object.Equals(returnType, awaitableFactory.ResultType);
+                return awaitableFactory != null
+                    && object.Equals(returnType, awaitableFactory.ResultType);
             }
         }
 
@@ -387,18 +456,34 @@ namespace Moq
             if (property.DeclaringType != expression.Expression.Type)
             {
                 var parameterTypes = new ParameterTypes(property.GetIndexParameters());
-                var derivedProperty = expression.Expression.Type
-                    .GetMember(property.Name, MemberTypes.Property, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+                var derivedProperty = expression
+                    .Expression.Type.GetMember(
+                        property.Name,
+                        MemberTypes.Property,
+                        BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance
+                    )
                     .Cast<PropertyInfo>()
                     .SingleOrDefault(p =>
                     {
                         return p.PropertyType == property.PropertyType
-                            && new ParameterTypes(p.GetIndexParameters()).CompareTo(parameterTypes, true, false);
+                            && new ParameterTypes(p.GetIndexParameters()).CompareTo(
+                                parameterTypes,
+                                true,
+                                false
+                            );
                     });
                 if (derivedProperty != null)
                 {
-                    if ((derivedProperty.CanRead(out var getter) && getter.GetBaseDefinition() == property.GetGetMethod(true)) ||
-                        (derivedProperty.CanWrite(out var setter) && setter.GetBaseDefinition() == property.GetSetMethod(true)))
+                    if (
+                        (
+                            derivedProperty.CanRead(out var getter)
+                            && getter.GetBaseDefinition() == property.GetGetMethod(true)
+                        )
+                        || (
+                            derivedProperty.CanWrite(out var setter)
+                            && setter.GetBaseDefinition() == property.GetSetMethod(true)
+                        )
+                    )
                         return derivedProperty;
                 }
             }
@@ -416,10 +501,13 @@ namespace Moq
                 return prop.GetReboundProperty();
             }
 
-            throw new ArgumentException(string.Format(
-                CultureInfo.CurrentCulture,
-                Resources.SetupNotProperty,
-                expression.ToStringFixed()));
+            throw new ArgumentException(
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    Resources.SetupNotProperty,
+                    expression.ToStringFixed()
+                )
+            );
         }
 
         /// <summary>
@@ -429,7 +517,8 @@ namespace Moq
         {
             Debug.Assert(expression != null);
 
-            return expression.Body is MemberExpression memberExpression && memberExpression.Member is PropertyInfo;
+            return expression.Body is MemberExpression memberExpression
+                && memberExpression.Member is PropertyInfo;
         }
 
         /// <summary>
@@ -440,19 +529,23 @@ namespace Moq
             Debug.Assert(expression != null);
 
             return expression.Body is IndexExpression
-                || (expression.Body is MethodCallExpression methodCallExpression && methodCallExpression.Method.IsSpecialName);
+                || (
+                    expression.Body is MethodCallExpression methodCallExpression
+                    && methodCallExpression.Method.IsSpecialName
+                );
         }
 
-        public static Expression<Action<TMock>> AssignItIsAny<TMock, T>(this Expression<Func<TMock, T>> expression)
+        public static Expression<Action<TMock>> AssignItIsAny<TMock, T>(
+            this Expression<Func<TMock, T>> expression
+        )
         {
             Debug.Assert(expression != null);
             Debug.Assert(expression.Body is MemberExpression || expression.Body is IndexExpression);
 
             return Expression.Lambda<Action<TMock>>(
-                    Expression.Assign(
-                            expression.Body,
-                            ItExpr.IsAny<T>()),
-                    expression.Parameters[0]);
+                Expression.Assign(expression.Body, ItExpr.IsAny<T>()),
+                expression.Parameters[0]
+            );
         }
 
         public static Expression PartialEval(this Expression expression)
@@ -462,9 +555,7 @@ namespace Moq
 
         public static Expression PartialMatcherAwareEval(this Expression expression)
         {
-            return Evaluator.PartialEval(
-                expression,
-                PartialMatcherAwareEval_ShouldEvaluate);
+            return Evaluator.PartialEval(expression, PartialMatcherAwareEval_ShouldEvaluate);
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -496,8 +587,10 @@ namespace Moq
                 ExpressionType.Quote => false,
                 ExpressionType.Parameter => false,
                 ExpressionType.Extension => !(expression is MatchExpression),
-                ExpressionType.Call => !((MethodCallExpression)expression).Method.IsDefined(typeof(MatcherAttribute), true)
-                                               && !expression.IsMatch(out _),
+                ExpressionType.Call => !((MethodCallExpression)expression).Method.IsDefined(
+                    typeof(MatcherAttribute),
+                    true
+                ) && !expression.IsMatch(out _),
                 ExpressionType.MemberAccess => !expression.IsMatch(out _),
                 _ => true,
             };
@@ -505,7 +598,7 @@ namespace Moq
         }
 
         /// <devdoc>
-        /// TODO: remove this code when https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=331583 
+        /// TODO: remove this code when https://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=331583
         /// is fixed.
         /// </devdoc>
         public static string ToStringFixed(this Expression expression)

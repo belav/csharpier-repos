@@ -18,11 +18,11 @@ using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
 using Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -33,8 +33,10 @@ using Xunit;
 
 #if SOCKETS
 namespace Microsoft.AspNetCore.Server.Kestrel.Sockets.FunctionalTests;
+
 #else
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests;
+
 #endif
 
 public class RequestTests : LoggedTest
@@ -44,17 +46,18 @@ public class RequestTests : LoggedTest
     private const int _connectionResetEventId = 19;
     private static readonly int _semaphoreWaitTimeout = Debugger.IsAttached ? 10000 : 2500;
 
-    public static Dictionary<string, Func<ListenOptions>> ConnectionMiddlewareData { get; } = new Dictionary<string, Func<ListenOptions>>
-    {
-        { "Loopback", () => new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)) },
-        { "PassThrough", () => new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)).UsePassThrough() }
-    };
+    public static Dictionary<string, Func<ListenOptions>> ConnectionMiddlewareData { get; } =
+        new Dictionary<string, Func<ListenOptions>>
+        {
+            { "Loopback", () => new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)) },
+            {
+                "PassThrough",
+                () => new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0)).UsePassThrough()
+            },
+        };
 
-    public static TheoryData<string> ConnectionMiddlewareDataName => new TheoryData<string>
-    {
-        "Loopback",
-        "PassThrough"
-    };
+    public static TheoryData<string> ConnectionMiddlewareDataName =>
+        new TheoryData<string> { "Loopback", "PassThrough" };
 
     [Theory]
     [InlineData(10 * 1024 * 1024, true)]
@@ -66,10 +69,17 @@ public class RequestTests : LoggedTest
     public async Task LargeUpload(long contentLength, bool checkBytes)
     {
         const int bufferLength = 1024 * 1024;
-        Assert.True(contentLength % bufferLength == 0, $"{nameof(contentLength)} sent must be evenly divisible by {bufferLength}.");
-        Assert.True(bufferLength % 256 == 0, $"{nameof(bufferLength)} must be evenly divisible by 256");
+        Assert.True(
+            contentLength % bufferLength == 0,
+            $"{nameof(contentLength)} sent must be evenly divisible by {bufferLength}."
+        );
+        Assert.True(
+            bufferLength % 256 == 0,
+            $"{nameof(bufferLength)} must be evenly divisible by 256"
+        );
 
-        var builder = TransportSelector.GetHostBuilder()
+        var builder = TransportSelector
+            .GetHostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
@@ -87,14 +97,25 @@ public class RequestTests : LoggedTest
                             long total = 0;
                             var receivedBytes = new byte[bufferLength];
                             var received = 0;
-                            while ((received = await context.Request.Body.ReadAsync(receivedBytes, 0, receivedBytes.Length)) > 0)
+                            while (
+                                (
+                                    received = await context.Request.Body.ReadAsync(
+                                        receivedBytes,
+                                        0,
+                                        receivedBytes.Length
+                                    )
+                                ) > 0
+                            )
                             {
                                 if (checkBytes)
                                 {
                                     for (var i = 0; i < received; i++)
                                     {
                                         // Do not use Assert.Equal here, it is to slow for this hot path
-                                        Assert.True((byte)((total + i) % 256) == receivedBytes[i], "Data received is incorrect");
+                                        Assert.True(
+                                            (byte)((total + i) % 256) == receivedBytes[i],
+                                            "Data received is incorrect"
+                                        );
                                     }
                                 }
 
@@ -111,7 +132,13 @@ public class RequestTests : LoggedTest
         {
             await host.StartAsync();
 
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 socket.Connect(new IPEndPoint(IPAddress.Loopback, host.GetPort()));
                 socket.Send(Encoding.ASCII.GetBytes("POST / HTTP/1.1\r\nHost: \r\n"));
@@ -158,7 +185,8 @@ public class RequestTests : LoggedTest
     [Fact]
     public async Task DoesNotHangOnConnectionCloseRequest()
     {
-        var builder = TransportSelector.GetHostBuilder()
+        var builder = TransportSelector
+            .GetHostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
@@ -193,44 +221,47 @@ public class RequestTests : LoggedTest
     public async Task CanHandleMultipleConcurrentRequests()
     {
         var requestNumber = 0;
-        var ensureConcurrentRequestTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var ensureConcurrentRequestTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
-        await using (var server = new TestServer(async context =>
-        {
-            if (Interlocked.Increment(ref requestNumber) == 1)
-            {
-                await ensureConcurrentRequestTcs.Task.DefaultTimeout();
-            }
-            else
-            {
-                ensureConcurrentRequestTcs.SetResult();
-            }
-        }, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    if (Interlocked.Increment(ref requestNumber) == 1)
+                    {
+                        await ensureConcurrentRequestTcs.Task.DefaultTimeout();
+                    }
+                    else
+                    {
+                        ensureConcurrentRequestTcs.SetResult();
+                    }
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection1 = server.CreateConnection())
             using (var connection2 = server.CreateConnection())
             {
-                await connection1.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
-                await connection2.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection1.Send("GET / HTTP/1.1", "Host:", "", "");
+                await connection2.Send("GET / HTTP/1.1", "Host:", "", "");
 
-                await connection1.Receive($"HTTP/1.1 200 OK",
+                await connection1.Receive(
+                    $"HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
-                await connection2.Receive($"HTTP/1.1 200 OK",
+                    ""
+                );
+                await connection2.Receive(
+                    $"HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -244,9 +275,11 @@ public class RequestTests : LoggedTest
 
         TestSink.MessageLogged += context =>
         {
-            if (context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel" &&
-                context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Connections" &&
-                context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets")
+            if (
+                context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel"
+                && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Connections"
+                && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+            )
             {
                 return;
             }
@@ -266,7 +299,12 @@ public class RequestTests : LoggedTest
             }
         };
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -296,9 +334,11 @@ public class RequestTests : LoggedTest
 
         TestSink.MessageLogged += context =>
         {
-            if (context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel" &&
-                context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Connections" &&
-                context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets")
+            if (
+                context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel"
+                && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Connections"
+                && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+            )
             {
                 return;
             }
@@ -318,7 +358,12 @@ public class RequestTests : LoggedTest
             }
         };
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -346,8 +391,10 @@ public class RequestTests : LoggedTest
 
         TestSink.MessageLogged += context =>
         {
-            if (context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel" &&
-                context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets")
+            if (
+                context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel"
+                && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+            )
             {
                 return;
             }
@@ -363,15 +410,16 @@ public class RequestTests : LoggedTest
             }
         };
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
                 // Make sure the response is fully received, so a write failure (e.g. EPIPE) doesn't cause
                 // a more critical log message.
@@ -380,7 +428,8 @@ public class RequestTests : LoggedTest
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
 
                 connection.ShutdownSend();
 
@@ -405,8 +454,10 @@ public class RequestTests : LoggedTest
 
         TestSink.MessageLogged += context =>
         {
-            if (context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel" &&
-                context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets")
+            if (
+                context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel"
+                && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+            )
             {
                 return;
             }
@@ -422,15 +473,16 @@ public class RequestTests : LoggedTest
             }
         };
 
-        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                context => Task.CompletedTask,
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
                 // Make sure the response is fully received, so a write failure (e.g. EPIPE) doesn't cause
                 // a more critical log message.
@@ -439,7 +491,8 @@ public class RequestTests : LoggedTest
                     "Content-Length: 0",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
 
                 connection.Reset();
                 // Force a reset
@@ -468,8 +521,10 @@ public class RequestTests : LoggedTest
 
         TestSink.MessageLogged += context =>
         {
-            if (context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel" &&
-                context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets")
+            if (
+                context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel"
+                && context.LoggerName != "Microsoft.AspNetCore.Server.Kestrel.Transport.Sockets"
+            )
             {
                 return;
             }
@@ -490,24 +545,34 @@ public class RequestTests : LoggedTest
             }
         };
 
-        await using (var server = new TestServer(async context =>
-            {
-                requestStarted.Release();
-                await connectionClosing.WaitAsync();
-            },
-            new TestServiceContext(LoggerFactory)))
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    requestStarted.Release();
+                    await connectionClosing.WaitAsync();
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
                 await connection.SendEmptyGet();
 
                 // Wait until connection is established
-                Assert.True(await requestStarted.WaitAsync(TestConstants.DefaultTimeout), "request should have started");
+                Assert.True(
+                    await requestStarted.WaitAsync(TestConstants.DefaultTimeout),
+                    "request should have started"
+                );
 
                 if (close)
                 {
                     connection.ShutdownSend();
-                    Assert.True(await connectionReadFin.WaitAsync(TestConstants.DefaultTimeout), "Connection close event should have been logged");
+                    Assert.True(
+                        await connectionReadFin.WaitAsync(TestConstants.DefaultTimeout),
+                        "Connection close event should have been logged"
+                    );
                 }
                 else
                 {
@@ -517,7 +582,10 @@ public class RequestTests : LoggedTest
                     // This check MUST come before disposing the server, otherwise there's a race where the RST
                     // is still in flight when the connection is aborted, leading to the reset never being received
                     // and therefore not logged.
-                    Assert.True(await connectionReset.WaitAsync(TestConstants.DefaultTimeout), "Connection reset event should have been logged");
+                    Assert.True(
+                        await connectionReset.WaitAsync(TestConstants.DefaultTimeout),
+                        "Connection reset event should have been logged"
+                    );
                 }
                 connectionClosing.Release();
             }
@@ -534,28 +602,31 @@ public class RequestTests : LoggedTest
         var appDone = new SemaphoreSlim(0);
         var expectedExceptionThrown = false;
 
-        var builder = TransportSelector.GetHostBuilder()
+        var builder = TransportSelector
+            .GetHostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
                     .UseKestrel()
                     .UseUrls("http://127.0.0.1:0")
-                    .Configure(app => app.Run(async context =>
-                    {
-                        requestStarted.Release();
-                        Assert.True(await connectionReset.WaitAsync(_semaphoreWaitTimeout));
-
-                        try
+                    .Configure(app =>
+                        app.Run(async context =>
                         {
-                            await context.Request.Body.ReadAsync(new byte[1], 0, 1);
-                        }
-                        catch (ConnectionResetException)
-                        {
-                            expectedExceptionThrown = true;
-                        }
+                            requestStarted.Release();
+                            Assert.True(await connectionReset.WaitAsync(_semaphoreWaitTimeout));
 
-                        appDone.Release();
-                    }));
+                            try
+                            {
+                                await context.Request.Body.ReadAsync(new byte[1], 0, 1);
+                            }
+                            catch (ConnectionResetException)
+                            {
+                                expectedExceptionThrown = true;
+                            }
+
+                            appDone.Release();
+                        })
+                    );
             })
             .ConfigureServices(AddTestLogging);
 
@@ -563,11 +634,19 @@ public class RequestTests : LoggedTest
         {
             await host.StartAsync();
 
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 socket.Connect(new IPEndPoint(IPAddress.Loopback, host.GetPort()));
                 socket.LingerState = new LingerOption(true, 0);
-                socket.Send(Encoding.ASCII.GetBytes("GET / HTTP/1.1\r\nHost:\r\nContent-Length: 1\r\n\r\n"));
+                socket.Send(
+                    Encoding.ASCII.GetBytes("GET / HTTP/1.1\r\nHost:\r\nContent-Length: 1\r\n\r\n")
+                );
                 Assert.True(await requestStarted.WaitAsync(_semaphoreWaitTimeout));
             }
 
@@ -585,20 +664,23 @@ public class RequestTests : LoggedTest
     {
         var appStarted = new SemaphoreSlim(0);
         var requestAborted = new SemaphoreSlim(0);
-        var builder = TransportSelector.GetHostBuilder()
+        var builder = TransportSelector
+            .GetHostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
                     .UseKestrel()
                     .UseUrls("http://127.0.0.1:0")
-                    .Configure(app => app.Run(async context =>
-                    {
-                        appStarted.Release();
+                    .Configure(app =>
+                        app.Run(async context =>
+                        {
+                            appStarted.Release();
 
-                        var token = context.RequestAborted;
-                        token.Register(() => requestAborted.Release(2));
-                        await requestAborted.WaitAsync().DefaultTimeout();
-                    }));
+                            var token = context.RequestAborted;
+                            token.Register(() => requestAborted.Release(2));
+                            await requestAborted.WaitAsync().DefaultTimeout();
+                        })
+                    );
             })
             .ConfigureServices(AddTestLogging);
 
@@ -606,7 +688,13 @@ public class RequestTests : LoggedTest
         {
             await host.StartAsync();
 
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 socket.Connect(new IPEndPoint(IPAddress.Loopback, host.GetPort()));
                 socket.Send(Encoding.ASCII.GetBytes("GET / HTTP/1.1\r\nHost:\r\n\r\n"));
@@ -622,38 +710,43 @@ public class RequestTests : LoggedTest
     [Fact]
     public async Task RequestAbortedTokenUnchangedOnAbort()
     {
-        var appDoneTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var appDoneTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         CancellationToken? beforeAbort = null;
         CancellationToken? afterAbort = null;
 
-        await using (var server = new TestServer(async context =>
-        {
-            var abortedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            context.RequestAborted.Register(() =>
-            {
-                abortedTcs.SetResult();
-            });
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    var abortedTcs = new TaskCompletionSource(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
+                    context.RequestAborted.Register(() =>
+                    {
+                        abortedTcs.SetResult();
+                    });
 
-            beforeAbort = context.RequestAborted;
+                    beforeAbort = context.RequestAborted;
 
-            context.Abort();
+                    context.Abort();
 
-            // Abort doesn't happen inline. Need to wait for it to complete before reading token again.
-            await abortedTcs.Task;
+                    // Abort doesn't happen inline. Need to wait for it to complete before reading token again.
+                    await abortedTcs.Task;
 
-            afterAbort = context.RequestAborted;
+                    afterAbort = context.RequestAborted;
 
-            appDoneTcs.SetResult();
-        }, new TestServiceContext(LoggerFactory)))
+                    appDoneTcs.SetResult();
+                },
+                new TestServiceContext(LoggerFactory)
+            )
+        )
         {
             using (var connection1 = server.CreateConnection())
             {
-                await connection1.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection1.Send("GET / HTTP/1.1", "Host:", "", "");
 
                 await appDoneTcs.Task.DefaultTimeout();
             }
@@ -669,7 +762,8 @@ public class RequestTests : LoggedTest
     [InlineData(false)]
     public async Task AbortingTheConnection(bool fin)
     {
-        var builder = TransportSelector.GetHostBuilder()
+        var builder = TransportSelector
+            .GetHostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
@@ -682,11 +776,13 @@ public class RequestTests : LoggedTest
                         o.FinOnError = fin;
                     })
                     .UseUrls("http://127.0.0.1:0")
-                    .Configure(app => app.Run(context =>
-                    {
-                        context.Abort();
-                        return Task.CompletedTask;
-                    }));
+                    .Configure(app =>
+                        app.Run(context =>
+                        {
+                            context.Abort();
+                            return Task.CompletedTask;
+                        })
+                    );
             })
             .ConfigureServices(AddTestLogging);
 
@@ -694,7 +790,13 @@ public class RequestTests : LoggedTest
         {
             await host.StartAsync();
 
-            using (var socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+            using (
+                var socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                )
+            )
             {
                 socket.Connect(new IPEndPoint(IPAddress.Loopback, host.GetPort()));
                 socket.Send(Encoding.ASCII.GetBytes("GET / HTTP/1.1\r\nHost:\r\n\r\n"));
@@ -718,26 +820,35 @@ public class RequestTests : LoggedTest
     public async Task ConnectionClosedTokenFiresOnClientFIN(string listenOptionsName)
     {
         var testContext = new TestServiceContext(LoggerFactory);
-        var appStartedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var connectionClosedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var appStartedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var connectionClosedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
-        await using (var server = new TestServer(context =>
-        {
-            appStartedTcs.SetResult();
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    appStartedTcs.SetResult();
 
-            var connectionLifetimeFeature = context.Features.Get<IConnectionLifetimeFeature>();
-            connectionLifetimeFeature.ConnectionClosed.Register(() => connectionClosedTcs.SetResult());
+                    var connectionLifetimeFeature =
+                        context.Features.Get<IConnectionLifetimeFeature>();
+                    connectionLifetimeFeature.ConnectionClosed.Register(() =>
+                        connectionClosedTcs.SetResult()
+                    );
 
-            return Task.CompletedTask;
-        }, testContext, ConnectionMiddlewareData[listenOptionsName]()))
+                    return Task.CompletedTask;
+                },
+                testContext,
+                ConnectionMiddlewareData[listenOptionsName]()
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
                 await appStartedTcs.Task.DefaultTimeout();
 
@@ -753,33 +864,41 @@ public class RequestTests : LoggedTest
     public async Task ConnectionClosedTokenFiresOnServerFIN(string listenOptionsName)
     {
         var testContext = new TestServiceContext(LoggerFactory);
-        var connectionClosedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var connectionClosedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
-        await using (var server = new TestServer(context =>
-        {
-            var connectionLifetimeFeature = context.Features.Get<IConnectionLifetimeFeature>();
-            connectionLifetimeFeature.ConnectionClosed.Register(() => connectionClosedTcs.SetResult());
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    var connectionLifetimeFeature =
+                        context.Features.Get<IConnectionLifetimeFeature>();
+                    connectionLifetimeFeature.ConnectionClosed.Register(() =>
+                        connectionClosedTcs.SetResult()
+                    );
 
-            return Task.CompletedTask;
-        }, testContext, ConnectionMiddlewareData[listenOptionsName]()))
+                    return Task.CompletedTask;
+                },
+                testContext,
+                ConnectionMiddlewareData[listenOptionsName]()
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "Connection: close",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "Connection: close", "", "");
 
                 await connectionClosedTcs.Task.DefaultTimeout();
 
-                await connection.ReceiveEnd($"HTTP/1.1 200 OK",
+                await connection.ReceiveEnd(
+                    $"HTTP/1.1 200 OK",
                     "Content-Length: 0",
                     "Connection: close",
                     $"Date: {server.Context.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
             }
         }
     }
@@ -789,25 +908,32 @@ public class RequestTests : LoggedTest
     public async Task ConnectionClosedTokenFiresOnServerAbort(string listenOptionsName)
     {
         var testContext = new TestServiceContext(LoggerFactory);
-        var connectionClosedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var connectionClosedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
-        await using (var server = new TestServer(context =>
-        {
-            var connectionLifetimeFeature = context.Features.Get<IConnectionLifetimeFeature>();
-            connectionLifetimeFeature.ConnectionClosed.Register(() => connectionClosedTcs.SetResult());
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    var connectionLifetimeFeature =
+                        context.Features.Get<IConnectionLifetimeFeature>();
+                    connectionLifetimeFeature.ConnectionClosed.Register(() =>
+                        connectionClosedTcs.SetResult()
+                    );
 
-            context.Abort();
+                    context.Abort();
 
-            return Task.CompletedTask;
-        }, testContext, ConnectionMiddlewareData[listenOptionsName]()))
+                    return Task.CompletedTask;
+                },
+                testContext,
+                ConnectionMiddlewareData[listenOptionsName]()
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
 
                 await connectionClosedTcs.Task.DefaultTimeout();
 
@@ -835,72 +961,72 @@ public class RequestTests : LoggedTest
         var testContext = new TestServiceContext(LoggerFactory);
 
         var readTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var registrationTcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var registrationTcs = new TaskCompletionSource<int>(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var requestId = 0;
 
-        await using (var server = new TestServer(async httpContext =>
-        {
-            requestId++;
-
-            var response = httpContext.Response;
-            var request = httpContext.Request;
-            var lifetime = httpContext.Features.Get<IHttpRequestLifetimeFeature>();
-
-            lifetime.RequestAborted.Register(() => registrationTcs.TrySetResult(requestId));
-
-            if (requestId == 1)
-            {
-                response.Headers["Content-Length"] = new[] { "5" };
-
-                await response.WriteAsync("World");
-            }
-            else
-            {
-                var readTask = request.Body.CopyToAsync(Stream.Null);
-
-                lifetime.Abort();
-
-                try
+        await using (
+            var server = new TestServer(
+                async httpContext =>
                 {
-                    await readTask;
-                }
-                catch (Exception ex)
-                {
-                    readTcs.SetException(ex);
-                    throw;
-                }
-                finally
-                {
-                    await registrationTcs.Task.DefaultTimeout();
-                }
+                    requestId++;
 
-                readTcs.SetException(new Exception("This shouldn't be reached."));
-            }
-        }, testContext, ConnectionMiddlewareData[listenOptionsName]()))
+                    var response = httpContext.Response;
+                    var request = httpContext.Request;
+                    var lifetime = httpContext.Features.Get<IHttpRequestLifetimeFeature>();
+
+                    lifetime.RequestAborted.Register(() => registrationTcs.TrySetResult(requestId));
+
+                    if (requestId == 1)
+                    {
+                        response.Headers["Content-Length"] = new[] { "5" };
+
+                        await response.WriteAsync("World");
+                    }
+                    else
+                    {
+                        var readTask = request.Body.CopyToAsync(Stream.Null);
+
+                        lifetime.Abort();
+
+                        try
+                        {
+                            await readTask;
+                        }
+                        catch (Exception ex)
+                        {
+                            readTcs.SetException(ex);
+                            throw;
+                        }
+                        finally
+                        {
+                            await registrationTcs.Task.DefaultTimeout();
+                        }
+
+                        readTcs.SetException(new Exception("This shouldn't be reached."));
+                    }
+                },
+                testContext,
+                ConnectionMiddlewareData[listenOptionsName]()
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
                 // Full request and response
-                await connection.Send(
-                    "POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "Hello");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "Hello");
 
                 await connection.Receive(
                     "HTTP/1.1 200 OK",
                     "Content-Length: 5",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "World");
+                    "World"
+                );
 
                 // Never send the body so CopyToAsync always fails.
-                await connection.Send("POST / HTTP/1.1",
-                    "Host:",
-                    "Content-Length: 5",
-                    "",
-                    "");
+                await connection.Send("POST / HTTP/1.1", "Host:", "Content-Length: 5", "", "");
                 await connection.WaitForConnectionClose();
             }
         }
@@ -911,8 +1037,12 @@ public class RequestTests : LoggedTest
         var abortedRequestId = await registrationTcs.Task.DefaultTimeout();
         Assert.Equal(2, abortedRequestId);
 
-        Assert.Single(TestSink.Writes.Where(w => w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Connections" &&
-                                                    w.EventId == applicationAbortedConnectionId));
+        Assert.Single(
+            TestSink.Writes.Where(w =>
+                w.LoggerName == "Microsoft.AspNetCore.Server.Kestrel.Connections"
+                && w.EventId == applicationAbortedConnectionId
+            )
+        );
     }
 
     [Theory]
@@ -920,18 +1050,31 @@ public class RequestTests : LoggedTest
     [InlineData("Loopback", false)]
     [InlineData("PassThrough", true)]
     [InlineData("PassThrough", false)]
-    public async Task ServerCanAbortConnectionAfterUnobservedClose(string listenOptionsName, bool fin)
+    public async Task ServerCanAbortConnectionAfterUnobservedClose(
+        string listenOptionsName,
+        bool fin
+    )
     {
         const int connectionPausedEventId = 4;
         const int connectionFinSentEventId = 7;
         const int connectionRstSentEventId = 8;
         const int maxRequestBufferSize = 4096;
 
-        var readCallbackUnwired = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var clientClosedConnection = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var serverFinConnection = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var serverRstConnection = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var appFuncCompleted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var readCallbackUnwired = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var clientClosedConnection = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var serverFinConnection = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var serverRstConnection = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
+        var appFuncCompleted = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         TestSink.MessageLogged += context =>
         {
@@ -964,42 +1107,48 @@ public class RequestTests : LoggedTest
                     MaxRequestBufferSize = maxRequestBufferSize,
                     MaxRequestLineSize = maxRequestBufferSize,
                     MaxRequestHeadersTotalSize = maxRequestBufferSize,
-                }
-            }
+                },
+            },
         };
 
         var scratchBuffer = new byte[maxRequestBufferSize * 8];
 
-        await using (var server = new TestServer(async context =>
-        {
-            await clientClosedConnection.Task;
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    await clientClosedConnection.Task;
 
-            context.Abort();
+                    context.Abort();
 
-            if (fin)
-            {
-                await serverFinConnection.Task.DefaultTimeout();
-            }
-            else
-            {
-                await serverRstConnection.Task.DefaultTimeout();
-            }
+                    if (fin)
+                    {
+                        await serverFinConnection.Task.DefaultTimeout();
+                    }
+                    else
+                    {
+                        await serverRstConnection.Task.DefaultTimeout();
+                    }
 
-            appFuncCompleted.SetResult();
-        }, testContext, listen =>
-        {
-            if (listenOptionsName == "PassThrough")
-            {
-                listen.UsePassThrough();
-            }
-        },
-        services =>
-        {
-            services.Configure<SocketTransportOptions>(options =>
-            {
-                options.FinOnError = fin;
-            });
-        }))
+                    appFuncCompleted.SetResult();
+                },
+                testContext,
+                listen =>
+                {
+                    if (listenOptionsName == "PassThrough")
+                    {
+                        listen.UsePassThrough();
+                    }
+                },
+                services =>
+                {
+                    services.Configure<SocketTransportOptions>(options =>
+                    {
+                        options.FinOnError = fin;
+                    });
+                }
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1008,7 +1157,8 @@ public class RequestTests : LoggedTest
                     "Host:",
                     $"Content-Length: {scratchBuffer.Length}",
                     "",
-                    "");
+                    ""
+                );
 
                 var ignore = connection.Stream.WriteAsync(scratchBuffer, 0, scratchBuffer.Length);
 
@@ -1030,29 +1180,36 @@ public class RequestTests : LoggedTest
     public async Task AppCanHandleClientAbortingConnectionMidRequest(string listenOptionsName)
     {
         var readTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var appStartedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var appStartedTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         var testContext = new TestServiceContext(LoggerFactory);
 
         var scratchBuffer = new byte[4096];
 
-        await using (var server = new TestServer(async context =>
-        {
-            appStartedTcs.SetResult();
+        await using (
+            var server = new TestServer(
+                async context =>
+                {
+                    appStartedTcs.SetResult();
 
-            try
-            {
-                await context.Request.Body.CopyToAsync(Stream.Null);
-            }
-            catch (Exception ex)
-            {
-                readTcs.SetException(ex);
-                throw;
-            }
+                    try
+                    {
+                        await context.Request.Body.CopyToAsync(Stream.Null);
+                    }
+                    catch (Exception ex)
+                    {
+                        readTcs.SetException(ex);
+                        throw;
+                    }
 
-            readTcs.SetException(new Exception("This shouldn't be reached."));
-
-        }, testContext, ConnectionMiddlewareData[listenOptionsName]()))
+                    readTcs.SetException(new Exception("This shouldn't be reached."));
+                },
+                testContext,
+                ConnectionMiddlewareData[listenOptionsName]()
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
@@ -1061,7 +1218,8 @@ public class RequestTests : LoggedTest
                     "Host:",
                     $"Content-Length: {scratchBuffer.Length * 2}",
                     "",
-                    "");
+                    ""
+                );
 
                 await appStartedTcs.Task.DefaultTimeout();
 
@@ -1076,9 +1234,14 @@ public class RequestTests : LoggedTest
         Assert.Single(TestSink.Writes.Where(c => c.EventId.Name == "ConnectionStop"));
     }
 
-    private async Task TestRemoteIPAddress(string registerAddress, string requestAddress, string expectAddress)
+    private async Task TestRemoteIPAddress(
+        string registerAddress,
+        string requestAddress,
+        string expectAddress
+    )
     {
-        var builder = TransportSelector.GetHostBuilder()
+        var builder = TransportSelector
+            .GetHostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
@@ -1089,13 +1252,17 @@ public class RequestTests : LoggedTest
                         app.Run(async context =>
                         {
                             var connection = context.Connection;
-                            await context.Response.WriteAsync(JsonConvert.SerializeObject(new
-                            {
-                                RemoteIPAddress = connection.RemoteIpAddress?.ToString(),
-                                RemotePort = connection.RemotePort,
-                                LocalIPAddress = connection.LocalIpAddress?.ToString(),
-                                LocalPort = connection.LocalPort
-                            }));
+                            await context.Response.WriteAsync(
+                                JsonConvert.SerializeObject(
+                                    new
+                                    {
+                                        RemoteIPAddress = connection.RemoteIpAddress?.ToString(),
+                                        RemotePort = connection.RemotePort,
+                                        LocalIPAddress = connection.LocalIpAddress?.ToString(),
+                                        LocalPort = connection.LocalPort,
+                                    }
+                                )
+                            );
                         });
                     });
             })
@@ -1132,7 +1299,9 @@ public class RequestTests : LoggedTest
 
         while (matchedChars < expectedLength)
         {
-            var count = await stream.ReadAsync(responseBuffer, 0, expectedLength - matchedChars).DefaultTimeout();
+            var count = await stream
+                .ReadAsync(responseBuffer, 0, expectedLength - matchedChars)
+                .DefaultTimeout();
 
             if (count == 0)
             {

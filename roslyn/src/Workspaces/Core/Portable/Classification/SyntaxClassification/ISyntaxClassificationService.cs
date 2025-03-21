@@ -18,17 +18,20 @@ namespace Microsoft.CodeAnalysis.Classification
         ImmutableArray<ISyntaxClassifier> GetDefaultSyntaxClassifiers();
 
         /// <inheritdoc cref="IClassificationService.AddLexicalClassifications"/>
-        void AddLexicalClassifications(SourceText text,
+        void AddLexicalClassifications(
+            SourceText text,
             TextSpan textSpan,
             SegmentedList<ClassifiedSpan> result,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <inheritdoc cref="IClassificationService.AddSyntacticClassificationsAsync"/>
         void AddSyntacticClassifications(
             SyntaxNode root,
             ImmutableArray<TextSpan> textSpans,
             SegmentedList<ClassifiedSpan> result,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <inheritdoc cref="IClassificationService.AddSemanticClassificationsAsync"/>
         Task AddSemanticClassificationsAsync(
@@ -38,7 +41,8 @@ namespace Microsoft.CodeAnalysis.Classification
             Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
             Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
             SegmentedList<ClassifiedSpan> result,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         /// <inheritdoc cref="AddSemanticClassificationsAsync"/>
         void AddSemanticClassifications(
@@ -48,7 +52,8 @@ namespace Microsoft.CodeAnalysis.Classification
             Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
             SegmentedList<ClassifiedSpan> result,
             ClassificationOptions options,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         string? GetSyntacticClassificationForIdentifier(SyntaxToken identifier);
 
@@ -57,6 +62,10 @@ namespace Microsoft.CodeAnalysis.Classification
 
         /// <inheritdoc cref="IClassificationService.ComputeSyntacticChangeRangeAsync"/>
         TextChangeRange? ComputeSyntacticChangeRange(
-            SyntaxNode oldRoot, SyntaxNode newRoot, TimeSpan timeout, CancellationToken cancellationToken);
+            SyntaxNode oldRoot,
+            SyntaxNode newRoot,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 /*
  * If using a value type/struct that contains only a single reference type field, under certain situations the x64 JIT reports the stack location as a live GC pointer before zero-initializing it.
  * The only workaround would be to disable optimizations via MethodImplOptions.NoOptimization.  This GC hole is sort of an existing one and sort of a regression.
@@ -25,7 +24,7 @@
  * 2
  * 3
  * and then a crash!
- * 
+ *
  */
 
 using System;
@@ -34,78 +33,79 @@ using Xunit;
 
 namespace Test_GCOverReporting_cs
 {
-public struct MB8
-{
-    public object foo;
-}
-
-public class Repro
-{
-    private static int s_counter;
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    private static MB8 MakeNewMB8()
+    public struct MB8
     {
-        GC.Collect();
-        MB8 mb;
-        mb.foo = ++s_counter;
-        return mb;
+        public object foo;
     }
 
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    private static MB8 MakeAndUseMB8(MB8 mb)
+    public class Repro
     {
-        mb.foo = ++s_counter;
-        return mb;
-    }
+        private static int s_counter;
 
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Method()
-    {
-        MB8 mb = MakeNewMB8();
-        for (int i = 0; i < 5; i += 3)
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static MB8 MakeNewMB8()
         {
-            try
+            GC.Collect();
+            MB8 mb;
+            mb.foo = ++s_counter;
+            return mb;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static MB8 MakeAndUseMB8(MB8 mb)
+        {
+            mb.foo = ++s_counter;
+            return mb;
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static void Method()
+        {
+            MB8 mb = MakeNewMB8();
+            for (int i = 0; i < 5; i += 3)
             {
-                mb = MakeAndUseMB8(mb);
-            }
-            finally
-            {
-                Console.WriteLine(s_counter);
+                try
+                {
+                    mb = MakeAndUseMB8(mb);
+                }
+                finally
+                {
+                    Console.WriteLine(s_counter);
+                }
             }
         }
-    }
 
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    private static unsafe void TrashStack()
-    {
-        ulong* stack = stackalloc ulong[256];
-        for (int i = 0; i < 256; i++)
-            stack[i] = 0xCCCCCCCCCCCCCCCCL;
-    }
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static unsafe void TrashStack()
+        {
+            ulong* stack = stackalloc ulong[256];
+            for (int i = 0; i < 256; i++)
+                stack[i] = 0xCCCCCCCCCCCCCCCCL;
+        }
 
-    [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-    private static void ConsumeStack(int i)
-    {
-        if (i > 0)
-            ConsumeStack(i - 1);
-        else
+        [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
+        private static void ConsumeStack(int i)
+        {
+            if (i > 0)
+                ConsumeStack(i - 1);
+            else
+                Method();
+        }
+
+        [MethodImpl(MethodImplOptions.NoInlining)]
+        private static unsafe void DoTest()
+        {
+            TrashStack();
+            ConsumeStack(3);
+        }
+
+        [Fact]
+        public static void TestEntryPoint()
+        {
             Method();
+            TrashStack();
+            ConsumeStack(0);
+            DoTest();
+        }
     }
-
-    [MethodImpl(MethodImplOptions.NoInlining)]
-    private static unsafe void DoTest()
-    {
-        TrashStack();
-        ConsumeStack(3);
-    }
-
-    [Fact]
-    public static void TestEntryPoint()
-    {
-        Method();
-        TrashStack();
-        ConsumeStack(0);
-        DoTest();
-    }
-}
 }

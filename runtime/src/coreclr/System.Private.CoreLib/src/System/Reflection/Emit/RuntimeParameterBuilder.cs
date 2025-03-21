@@ -13,24 +13,32 @@ namespace System.Reflection.Emit
             RuntimeTypeBuilder.SetConstantValue(
                 _methodBuilder.GetModuleBuilder(),
                 _token,
-                _position == 0 ? _methodBuilder.ReturnType : _methodBuilder.m_parameterTypes![_position - 1],
-                defaultValue);
+                _position == 0
+                    ? _methodBuilder.ReturnType
+                    : _methodBuilder.m_parameterTypes![_position - 1],
+                defaultValue
+            );
         }
 
-        protected override void SetCustomAttributeCore(ConstructorInfo con, ReadOnlySpan<byte> binaryAttribute)
+        protected override void SetCustomAttributeCore(
+            ConstructorInfo con,
+            ReadOnlySpan<byte> binaryAttribute
+        )
         {
             RuntimeTypeBuilder.DefineCustomAttribute(
                 _methodBuilder.GetModuleBuilder(),
                 _token,
                 ((RuntimeModuleBuilder)_methodBuilder.GetModule()).GetMethodMetadataToken(con),
-                binaryAttribute);
+                binaryAttribute
+            );
         }
 
         internal RuntimeParameterBuilder(
             RuntimeMethodBuilder methodBuilder,
             int sequence,
             ParameterAttributes attributes,
-            string? paramName)            // can be NULL string
+            string? paramName
+        ) // can be NULL string
         {
             _position = sequence;
             _name = paramName;
@@ -38,11 +46,12 @@ namespace System.Reflection.Emit
             _attributes = attributes;
             RuntimeModuleBuilder module = _methodBuilder.GetModuleBuilder();
             _token = RuntimeTypeBuilder.SetParamInfo(
-                        new QCallModule(ref module),
-                        _methodBuilder.MetadataToken,
-                        sequence,
-                        attributes,
-                        paramName);
+                new QCallModule(ref module),
+                _methodBuilder.MetadataToken,
+                sequence,
+                attributes,
+                paramName
+            );
         }
 
         internal int GetToken()

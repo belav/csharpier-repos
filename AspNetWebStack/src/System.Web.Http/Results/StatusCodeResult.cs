@@ -20,17 +20,13 @@ namespace System.Web.Http.Results
         /// <param name="statusCode">The HTTP status code for the response message.</param>
         /// <param name="request">The request message which led to this result.</param>
         public StatusCodeResult(HttpStatusCode statusCode, HttpRequestMessage request)
-            : this(statusCode, new DirectDependencyProvider(request))
-        {
-        }
+            : this(statusCode, new DirectDependencyProvider(request)) { }
 
         /// <summary>Initializes a new instance of the <see cref="StatusCodeResult"/> class.</summary>
         /// <param name="statusCode">The HTTP status code for the response message.</param>
         /// <param name="controller">The controller from which to obtain the dependencies needed for execution.</param>
         public StatusCodeResult(HttpStatusCode statusCode, ApiController controller)
-            : this(statusCode, new ApiControllerDependencyProvider(controller))
-        {
-        }
+            : this(statusCode, new ApiControllerDependencyProvider(controller)) { }
 
         private StatusCodeResult(HttpStatusCode statusCode, IDependencyProvider dependencies)
         {
@@ -63,7 +59,10 @@ namespace System.Web.Http.Results
             return Execute(_statusCode, _dependencies.Request);
         }
 
-        internal static HttpResponseMessage Execute(HttpStatusCode statusCode, HttpRequestMessage request)
+        internal static HttpResponseMessage Execute(
+            HttpStatusCode statusCode,
+            HttpRequestMessage request
+        )
         {
             HttpResponseMessage response = new HttpResponseMessage(statusCode);
 
@@ -143,7 +142,9 @@ namespace System.Web.Http.Results
 
                     if (request == null)
                     {
-                        throw new InvalidOperationException(SRResources.ApiController_RequestMustNotBeNull);
+                        throw new InvalidOperationException(
+                            SRResources.ApiController_RequestMustNotBeNull
+                        );
                     }
 
                     _request = request;

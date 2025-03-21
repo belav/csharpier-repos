@@ -20,7 +20,11 @@ public static class ClaimActionCollectionUniqueExtensions
     /// <param name="collection"></param>
     /// <param name="claimType">The value to use for Claim.Type when creating a Claim.</param>
     /// <param name="jsonKey">The top level key to look for in the json user data.</param>
-    public static void MapUniqueJsonKey(this ClaimActionCollection collection, string claimType, string jsonKey)
+    public static void MapUniqueJsonKey(
+        this ClaimActionCollection collection,
+        string claimType,
+        string jsonKey
+    )
     {
         collection.MapUniqueJsonKey(claimType, jsonKey, ClaimValueTypes.String);
     }
@@ -34,7 +38,12 @@ public static class ClaimActionCollectionUniqueExtensions
     /// <param name="claimType">The value to use for Claim.Type when creating a Claim.</param>
     /// <param name="jsonKey">The top level key to look for in the json user data.</param>
     /// <param name="valueType">The value to use for Claim.ValueType when creating a Claim.</param>
-    public static void MapUniqueJsonKey(this ClaimActionCollection collection, string claimType, string jsonKey, string valueType)
+    public static void MapUniqueJsonKey(
+        this ClaimActionCollection collection,
+        string claimType,
+        string jsonKey,
+        string valueType
+    )
     {
         collection.Add(new UniqueJsonKeyClaimAction(claimType, valueType, jsonKey));
     }

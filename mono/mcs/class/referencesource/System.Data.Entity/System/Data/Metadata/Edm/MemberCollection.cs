@@ -12,10 +12,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Common;
-using System.Reflection;
-using System.Text;
 using System.Diagnostics;
 using System.Globalization;
+using System.Reflection;
+using System.Text;
 
 namespace System.Data.Metadata.Edm
 {
@@ -45,9 +45,7 @@ namespace System.Data.Metadata.Edm
         /// <param name="declaringType">The type that has this member collection</param>
         /// <exception cref="System.ArgumentNullException">Thrown if the declaring type is null</exception>
         public MemberCollection(StructuralType declaringType)
-            : this(declaringType, null)
-        {
-        }
+            : this(declaringType, null) { }
 
         /// <summary>
         /// The constructor for constructing the collection with the given items
@@ -58,7 +56,10 @@ namespace System.Data.Metadata.Edm
         public MemberCollection(StructuralType declaringType, IEnumerable<EdmMember> items)
             : base(items)
         {
-            Debug.Assert(declaringType != null, "This member collection must belong to a declaring type");
+            Debug.Assert(
+                declaringType != null,
+                "This member collection must belong to a declaring type"
+            );
             _declaringType = declaringType;
         }
         #endregion
@@ -73,10 +74,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public override System.Collections.ObjectModel.ReadOnlyCollection<EdmMember> AsReadOnly
         {
-            get
-            {
-                return new System.Collections.ObjectModel.ReadOnlyCollection<EdmMember>(this);
-            }
+            get { return new System.Collections.ObjectModel.ReadOnlyCollection<EdmMember>(this); }
         }
 
         /// <summary>
@@ -84,10 +82,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         public override int Count
         {
-            get
-            {
-                return GetBaseTypeMemberCount() + base.Count;
-            }
+            get { return GetBaseTypeMemberCount() + base.Count; }
         }
 
         /// <summary>
@@ -110,10 +105,7 @@ namespace System.Data.Metadata.Edm
 
                 return base[relativeIndex];
             }
-            set
-            {
-                throw EntityUtil.OperationOnReadOnlyCollection();
-            }
+            set { throw EntityUtil.OperationOnReadOnlyCollection(); }
         }
 
         /// <summary>
@@ -126,18 +118,12 @@ namespace System.Data.Metadata.Edm
         /// <exception cref="System.InvalidOperationException">Always thrown on setter</exception>
         public override EdmMember this[string identity]
         {
-            get
-            {
-                return GetValue(identity, false);
-            }
-            set
-            {
-                throw EntityUtil.OperationOnReadOnlyCollection();
-            }
+            get { return GetValue(identity, false); }
+            set { throw EntityUtil.OperationOnReadOnlyCollection(); }
         }
 
         /// <summary>
-        /// Adds an item to the collection 
+        /// Adds an item to the collection
         /// </summary>
         /// <param name="member">The item to add to the list</param>
         /// <exception cref="System.ArgumentNullException">Thrown if member argument is null</exception>
@@ -146,9 +132,9 @@ namespace System.Data.Metadata.Edm
         /// <exception cref="System.ArgumentException">Thrown if the MemberCollection already contains a member with the same identity</exception>
         public override void Add(EdmMember member)
         {
-            // Make sure the member is valid for the add operation. 
+            // Make sure the member is valid for the add operation.
             ValidateMemberForAdd(member, "member");
-            
+
             base.Add(member);
 
             // Fix up the declaring type
@@ -279,7 +265,8 @@ namespace System.Data.Metadata.Edm
         /// <summary>
         /// Get the declared only members of a particular type
         /// </summary>
-        internal ReadOnlyMetadataCollection<T> GetDeclaredOnlyMembers<T>() where T : EdmMember
+        internal ReadOnlyMetadataCollection<T> GetDeclaredOnlyMembers<T>()
+            where T : EdmMember
         {
             MetadataCollection<T> newCollection = new MetadataCollection<T>();
             for (int i = 0; i < base.Count; i++)
@@ -330,15 +317,22 @@ namespace System.Data.Metadata.Edm
 
             return index - baseTypeMemberCount;
         }
-        
+
         private void ValidateMemberForAdd(EdmMember member, string argumentName)
         {
             // Check to make sure the given member is not associated with another type
             EntityUtil.GenericCheckArgumentNull(member, argumentName);
 
-            Debug.Assert(member.DeclaringType == null, string.Format(CultureInfo.CurrentCulture, "The member {0} already has a declaring type, it cannot be added to this collection.", argumentName));
+            Debug.Assert(
+                member.DeclaringType == null,
+                string.Format(
+                    CultureInfo.CurrentCulture,
+                    "The member {0} already has a declaring type, it cannot be added to this collection.",
+                    argumentName
+                )
+            );
 
-            // Validate the item with the declaring type. 
+            // Validate the item with the declaring type.
             _declaringType.ValidateMemberForAdd(member);
         }
 

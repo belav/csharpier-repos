@@ -1,5 +1,5 @@
 //
-// CodeSubDirectoryTest.cs 
+// CodeSubDirectoryTest.cs
 //	- unit tests for System.Web.Configuration.CodeSubDirectory
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,51 +27,47 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.Configuration;
-using System.Web.Configuration;
-using System.Web;
-using System.Web.Security;
 using System.IO;
-using System.Xml;
 using System.Reflection;
+using System.Web;
+using System.Web.Configuration;
+using System.Web.Security;
+using System.Xml;
+using NUnit.Framework;
 
-namespace MonoTests.System.Web.Configuration {
+namespace MonoTests.System.Web.Configuration
+{
+    [TestFixture]
+    public class CodeSubDirectoryTest
+    {
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void ctor_validationFailure()
+        {
+            CodeSubDirectory c = new CodeSubDirectory("");
+        }
 
-	[TestFixture]
-	public class CodeSubDirectoryTest  {
+        [Test]
+        [ExpectedException(typeof(ConfigurationErrorsException))]
+        public void setter_validationFailure()
+        {
+            CodeSubDirectory c = new CodeSubDirectory("hi");
+            c.DirectoryName = "";
+        }
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void ctor_validationFailure ()
-		{
-			CodeSubDirectory c = new CodeSubDirectory ("");
-		}
+        [Test]
+        public void WhiteSpaceTrimTest()
+        {
+            CodeSubDirectory c = new CodeSubDirectory(" /this/is/a/path/with-spaces ");
+            Assert.AreEqual(" /this/is/a/path/with-spaces ", c.DirectoryName, "A1");
 
-		[Test]
-		[ExpectedException (typeof (ConfigurationErrorsException))]
-		public void setter_validationFailure ()
-		{
-			CodeSubDirectory c = new CodeSubDirectory ("hi");
-			c.DirectoryName = "";
-		}
+            c.DirectoryName = " /another/one";
+            Assert.AreEqual(" /another/one", c.DirectoryName, "A2");
 
-		[Test]
-		public void WhiteSpaceTrimTest ()
-		{
-			CodeSubDirectory c = new CodeSubDirectory (" /this/is/a/path/with-spaces ");
-			Assert.AreEqual (" /this/is/a/path/with-spaces ", c.DirectoryName, "A1");
-
-			c.DirectoryName = " /another/one";
-			Assert.AreEqual (" /another/one", c.DirectoryName, "A2");
-
-			c.DirectoryName = "/one/more ";
-			Assert.AreEqual ("/one/more ", c.DirectoryName, "A3");
-		}
-	}
-
+            c.DirectoryName = "/one/more ";
+            Assert.AreEqual("/one/more ", c.DirectoryName, "A3");
+        }
+    }
 }
-

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,89 +36,99 @@ using System.Xml;
 
 namespace System.IdentityModel.Selectors
 {
-	public class SamlSecurityTokenAuthenticator
-		: SecurityTokenAuthenticator
-	{
-		IList<SecurityTokenAuthenticator> authenticators;
-		TimeSpan max_clock_skew;
+    public class SamlSecurityTokenAuthenticator : SecurityTokenAuthenticator
+    {
+        IList<SecurityTokenAuthenticator> authenticators;
+        TimeSpan max_clock_skew;
 
-		public SamlSecurityTokenAuthenticator (
-			IList<SecurityTokenAuthenticator> supportingAuthenticators)
-			: this (supportingAuthenticators, TimeSpan.MaxValue)
-		{
-		}
+        public SamlSecurityTokenAuthenticator(
+            IList<SecurityTokenAuthenticator> supportingAuthenticators
+        )
+            : this(supportingAuthenticators, TimeSpan.MaxValue) { }
 
-		public SamlSecurityTokenAuthenticator (
-			IList<SecurityTokenAuthenticator> supportingAuthenticators,
-			TimeSpan maxClockSkew)
-		{
-			if (supportingAuthenticators == null)
-				throw new ArgumentNullException ("supportingAuthenticators");
-			authenticators = supportingAuthenticators;
-			max_clock_skew = maxClockSkew;
-		}
+        public SamlSecurityTokenAuthenticator(
+            IList<SecurityTokenAuthenticator> supportingAuthenticators,
+            TimeSpan maxClockSkew
+        )
+        {
+            if (supportingAuthenticators == null)
+                throw new ArgumentNullException("supportingAuthenticators");
+            authenticators = supportingAuthenticators;
+            max_clock_skew = maxClockSkew;
+        }
 
-		protected override bool CanValidateTokenCore (SecurityToken token)
-		{
-			return token is SamlSecurityToken;
-		}
+        protected override bool CanValidateTokenCore(SecurityToken token)
+        {
+            return token is SamlSecurityToken;
+        }
 
-		[MonoTODO]
-		protected override ReadOnlyCollection<IAuthorizationPolicy>
-			ValidateTokenCore (SecurityToken token)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        protected override ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public virtual ClaimSet ResolveClaimSet (SecurityKeyIdentifier keyIdentifier)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual ClaimSet ResolveClaimSet(SecurityKeyIdentifier keyIdentifier)
+        {
+            throw new NotImplementedException();
+        }
 
-		public virtual ClaimSet ResolveClaimSet (SecurityToken token)
-		{
-			return ResolveClaimSet (new SecurityKeyIdentifier (
-				token.CreateKeyIdentifierClause<SamlAssertionKeyIdentifierClause> ()));
-		}
+        public virtual ClaimSet ResolveClaimSet(SecurityToken token)
+        {
+            return ResolveClaimSet(
+                new SecurityKeyIdentifier(
+                    token.CreateKeyIdentifierClause<SamlAssertionKeyIdentifierClause>()
+                )
+            );
+        }
 
-		[MonoTODO]
-		public virtual IIdentity ResolveIdentity (SecurityKeyIdentifier keyIdentifier)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public virtual IIdentity ResolveIdentity(SecurityKeyIdentifier keyIdentifier)
+        {
+            throw new NotImplementedException();
+        }
 
-		public virtual IIdentity ResolveIdentity (SecurityToken token)
-		{
-			return ResolveIdentity (new SecurityKeyIdentifier (
-				token.CreateKeyIdentifierClause<SamlAssertionKeyIdentifierClause> ()));
-		}
+        public virtual IIdentity ResolveIdentity(SecurityToken token)
+        {
+            return ResolveIdentity(
+                new SecurityKeyIdentifier(
+                    token.CreateKeyIdentifierClause<SamlAssertionKeyIdentifierClause>()
+                )
+            );
+        }
 
-		class SamlAuthorizationPolicy : SystemIdentityAuthorizationPolicy
-		{
-			SamlSecurityTokenAuthenticator authenticator;
-			SamlSecurityToken token;
+        class SamlAuthorizationPolicy : SystemIdentityAuthorizationPolicy
+        {
+            SamlSecurityTokenAuthenticator authenticator;
+            SamlSecurityToken token;
 
-			public SamlAuthorizationPolicy (SamlSecurityTokenAuthenticator authenticator, SamlSecurityToken token)
-				: base (new UniqueId ().ToString ())
-			{
-				this.authenticator = authenticator;
-				this.token = token;
-			}
+            public SamlAuthorizationPolicy(
+                SamlSecurityTokenAuthenticator authenticator,
+                SamlSecurityToken token
+            )
+                : base(new UniqueId().ToString())
+            {
+                this.authenticator = authenticator;
+                this.token = token;
+            }
 
-			public override DateTime ExpirationTime {
-				get { return token.ValidTo; }
-			}
+            public override DateTime ExpirationTime
+            {
+                get { return token.ValidTo; }
+            }
 
-			public override ClaimSet CreateClaims ()
-			{
-				return authenticator.ResolveClaimSet (token);
-			}
+            public override ClaimSet CreateClaims()
+            {
+                return authenticator.ResolveClaimSet(token);
+            }
 
-			public override IIdentity CreateIdentity ()
-			{
-				return authenticator.ResolveIdentity (token);
-			}
-		}
-	}
+            public override IIdentity CreateIdentity()
+            {
+                return authenticator.ResolveIdentity(token);
+            }
+        }
+    }
 }

@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,22 +24,21 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 // Net 2.0 SP1 class
 using System.Collections.ObjectModel;
 
 namespace System.Windows.Forms
 {
-	public class FileDialogCustomPlacesCollection : Collection<FileDialogCustomPlace>
-	{
-		public void Add (Guid knownFolderGuid)
-		{
-			Add (new FileDialogCustomPlace (knownFolderGuid));
-		}
-		
-		public void Add (string path)
-		{
-			Add (new FileDialogCustomPlace (path));
-		}
-	}
+    public class FileDialogCustomPlacesCollection : Collection<FileDialogCustomPlace>
+    {
+        public void Add(Guid knownFolderGuid)
+        {
+            Add(new FileDialogCustomPlace(knownFolderGuid));
+        }
+
+        public void Add(string path)
+        {
+            Add(new FileDialogCustomPlace(path));
+        }
+    }
 }

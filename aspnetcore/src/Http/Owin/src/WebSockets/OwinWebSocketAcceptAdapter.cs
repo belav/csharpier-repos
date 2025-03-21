@@ -7,22 +7,18 @@ using Microsoft.AspNetCore.Http;
 namespace Microsoft.AspNetCore.Owin;
 
 using AppFunc = Func<IDictionary<string, object>, Task>;
-using WebSocketAccept =
-    Action
+using WebSocketAccept = Action<
+    IDictionary<string, object>, // WebSocket Accept parameters
+    Func // WebSocketFunc callback
     <
-        IDictionary<string, object>, // WebSocket Accept parameters
-        Func // WebSocketFunc callback
-        <
-            IDictionary<string, object>, // WebSocket environment
-            Task // Complete
-        >
-    >;
-using WebSocketAcceptAlt =
-    Func
-    <
-        WebSocketAcceptContext, // WebSocket Accept parameters
-        Task<WebSocket>
-    >;
+        IDictionary<string, object>, // WebSocket environment
+        Task // Complete
+    >
+>;
+using WebSocketAcceptAlt = Func<
+    WebSocketAcceptContext, // WebSocket Accept parameters
+    Task<WebSocket>
+>;
 
 /// <summary>
 /// This adapts the OWIN WebSocket accept flow to match the ASP.NET Core WebSocket Accept flow.
@@ -32,7 +28,8 @@ public class OwinWebSocketAcceptAdapter
 {
     private readonly WebSocketAccept _owinWebSocketAccept;
     private readonly TaskCompletionSource<int> _requestTcs = new TaskCompletionSource<int>();
-    private readonly TaskCompletionSource<WebSocket> _acceptTcs = new TaskCompletionSource<WebSocket>();
+    private readonly TaskCompletionSource<WebSocket> _acceptTcs =
+        new TaskCompletionSource<WebSocket>();
     private readonly TaskCompletionSource<int> _upstreamWentAsync = new TaskCompletionSource<int>();
     private string _subProtocol;
 
@@ -41,9 +38,15 @@ public class OwinWebSocketAcceptAdapter
         _owinWebSocketAccept = owinWebSocketAccept;
     }
 
-    private Task RequestTask { get { return _requestTcs.Task; } }
+    private Task RequestTask
+    {
+        get { return _requestTcs.Task; }
+    }
     private Task UpstreamTask { get; set; }
-    private TaskCompletionSource<int> UpstreamWentAsyncTcs { get { return _upstreamWentAsync; } }
+    private TaskCompletionSource<int> UpstreamWentAsyncTcs
+    {
+        get { return _upstreamWentAsync; }
+    }
 
     private async Task<WebSocket> AcceptWebSocketAsync(WebSocketAcceptContext context)
     {
@@ -57,9 +60,9 @@ public class OwinWebSocketAcceptAdapter
         else if (context?.SubProtocol != null)
         {
             options = new Dictionary<string, object>(1)
-                {
-                    { OwinConstants.WebSocket.SubProtocol, context.SubProtocol }
-                };
+            {
+                { OwinConstants.WebSocket.SubProtocol, context.SubProtocol },
+            };
             _subProtocol = context.SubProtocol;
         }
 
@@ -116,17 +119,27 @@ public class OwinWebSocketAcceptAdapter
         return environment =>
         {
             object accept;
-            if (environment.TryGetValue(OwinConstants.WebSocket.Accept, out accept) && accept is WebSocketAccept)
+            if (
+                environment.TryGetValue(OwinConstants.WebSocket.Accept, out accept)
+                && accept is WebSocketAccept
+            )
             {
                 var adapter = new OwinWebSocketAcceptAdapter((WebSocketAccept)accept);
 
-                environment[OwinConstants.WebSocket.AcceptAlt] = new WebSocketAcceptAlt(adapter.AcceptWebSocketAsync);
+                environment[OwinConstants.WebSocket.AcceptAlt] = new WebSocketAcceptAlt(
+                    adapter.AcceptWebSocketAsync
+                );
 
                 try
                 {
                     adapter.UpstreamTask = next(environment);
                     adapter.UpstreamWentAsyncTcs.TrySetResult(0);
-                    adapter.UpstreamTask.ContinueWith(adapter.EnsureCompleted, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                    adapter.UpstreamTask.ContinueWith(
+                        adapter.EnsureCompleted,
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Default
+                    );
                 }
                 catch (Exception ex)
                 {

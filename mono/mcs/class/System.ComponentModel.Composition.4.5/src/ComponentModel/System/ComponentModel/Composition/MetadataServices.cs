@@ -10,9 +10,14 @@ namespace System.ComponentModel.Composition
 {
     internal static class MetadataServices
     {
-        public static readonly IDictionary<string, object> EmptyMetadata = new ReadOnlyDictionary<string, object>(new Dictionary<string, object>(0));
+        public static readonly IDictionary<string, object> EmptyMetadata = new ReadOnlyDictionary<
+            string,
+            object
+        >(new Dictionary<string, object>(0));
 
-        public static IDictionary<string, object> AsReadOnly(this IDictionary<string, object> metadata)
+        public static IDictionary<string, object> AsReadOnly(
+            this IDictionary<string, object> metadata
+        )
         {
             if (metadata == null)
             {

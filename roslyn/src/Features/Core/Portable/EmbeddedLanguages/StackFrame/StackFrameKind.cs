@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.EmbeddedLanguages.StackFrame
         FileInformation,
         Constructor,
 
-        // Tokens 
+        // Tokens
         EndOfFrame,
         AmpersandToken,
         OpenBracketToken,

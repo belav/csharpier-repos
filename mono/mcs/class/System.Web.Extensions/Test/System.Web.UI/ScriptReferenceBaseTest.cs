@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,57 +30,57 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using NUnit.Framework;
 using System.Web.UI;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI
 {
-	class MyScriptReference : ScriptReferenceBase
-	{
-		protected override string GetUrl (ScriptManager scriptManager, bool zip)
-		{
-			return null;
-		}
-	
-		protected override bool IsFromSystemWebExtensions ()
-		{
-			return false;
-		}
+    class MyScriptReference : ScriptReferenceBase
+    {
+        protected override string GetUrl(ScriptManager scriptManager, bool zip)
+        {
+            return null;
+        }
 
-		public static string DoReplaceExtension (string path)
-		{
-			return ReplaceExtension (path);
-		}
-	}
-	
-	[TestFixture]
-	public class ScriptReferenceBaseTest
-	{
-		[Test (Description="No checks are performed by .NET")]
-		[ExpectedException (typeof (NullReferenceException))]
-		public void ReplaceExtensionNullPath ()
-		{
-			MyScriptReference.DoReplaceExtension (null);
-		}
+        protected override bool IsFromSystemWebExtensions()
+        {
+            return false;
+        }
 
-		[Test (Description="No checks are performed by .NET")]
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void ReplaceExtensionShortPath ()
-		{
-			MyScriptReference.DoReplaceExtension (String.Empty);
-		}
+        public static string DoReplaceExtension(string path)
+        {
+            return ReplaceExtension(path);
+        }
+    }
 
-		[Test]
-		public void ReplaceExtension ()
-		{
-			string ext = MyScriptReference.DoReplaceExtension ("js");
-			Assert.AreEqual ("debug.js", ext, "#1");
+    [TestFixture]
+    public class ScriptReferenceBaseTest
+    {
+        [Test(Description = "No checks are performed by .NET")]
+        [ExpectedException(typeof(NullReferenceException))]
+        public void ReplaceExtensionNullPath()
+        {
+            MyScriptReference.DoReplaceExtension(null);
+        }
 
-			ext = MyScriptReference.DoReplaceExtension ("testjs");
-			Assert.AreEqual ("testdebug.js", ext, "#2");
-			
-			ext = MyScriptReference.DoReplaceExtension ("test.js");
-			Assert.AreEqual ("test.debug.js", ext, "#3");
-		}
-	}
+        [Test(Description = "No checks are performed by .NET")]
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void ReplaceExtensionShortPath()
+        {
+            MyScriptReference.DoReplaceExtension(String.Empty);
+        }
+
+        [Test]
+        public void ReplaceExtension()
+        {
+            string ext = MyScriptReference.DoReplaceExtension("js");
+            Assert.AreEqual("debug.js", ext, "#1");
+
+            ext = MyScriptReference.DoReplaceExtension("testjs");
+            Assert.AreEqual("testdebug.js", ext, "#2");
+
+            ext = MyScriptReference.DoReplaceExtension("test.js");
+            Assert.AreEqual("test.debug.js", ext, "#3");
+        }
+    }
 }

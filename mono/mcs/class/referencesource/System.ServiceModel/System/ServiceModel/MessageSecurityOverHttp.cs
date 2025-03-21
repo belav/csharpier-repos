@@ -3,16 +3,17 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Runtime;
     using System.Runtime.CompilerServices;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
-    using System.ComponentModel;
 
     public class MessageSecurityOverHttp
     {
-        internal const MessageCredentialType DefaultClientCredentialType = MessageCredentialType.Windows;
+        internal const MessageCredentialType DefaultClientCredentialType =
+            MessageCredentialType.Windows;
         internal const bool DefaultNegotiateServiceCredential = true;
 
         MessageCredentialType clientCredentialType;
@@ -34,7 +35,9 @@ namespace System.ServiceModel
             {
                 if (!MessageCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.clientCredentialType = value;
             }
@@ -71,11 +74,19 @@ namespace System.ServiceModel
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        internal SecurityBindingElement CreateSecurityBindingElement(bool isSecureTransportMode, bool isReliableSession, MessageSecurityVersion version)
+        internal SecurityBindingElement CreateSecurityBindingElement(
+            bool isSecureTransportMode,
+            bool isReliableSession,
+            MessageSecurityVersion version
+        )
         {
             if (isReliableSession && !this.IsSecureConversationEnabled())
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecureConversationRequiredByReliableSession)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecureConversationRequiredByReliableSession)
+                    )
+                );
             }
 
             SecurityBindingElement result;
@@ -88,26 +99,48 @@ namespace System.ServiceModel
                 switch (this.clientCredentialType)
                 {
                     case MessageCredentialType.None:
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ClientCredentialTypeMustBeSpecifiedForMixedMode)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(SR.ClientCredentialTypeMustBeSpecifiedForMixedMode)
+                            )
+                        );
                     case MessageCredentialType.UserName:
-                        oneShotSecurity = SecurityBindingElement.CreateUserNameOverTransportBindingElement();
+                        oneShotSecurity =
+                            SecurityBindingElement.CreateUserNameOverTransportBindingElement();
                         break;
                     case MessageCredentialType.Certificate:
-                        oneShotSecurity = SecurityBindingElement.CreateCertificateOverTransportBindingElement();
+                        oneShotSecurity =
+                            SecurityBindingElement.CreateCertificateOverTransportBindingElement();
                         break;
                     case MessageCredentialType.Windows:
-                        oneShotSecurity = SecurityBindingElement.CreateSspiNegotiationOverTransportBindingElement(true);
+                        oneShotSecurity =
+                            SecurityBindingElement.CreateSspiNegotiationOverTransportBindingElement(
+                                true
+                            );
                         break;
                     case MessageCredentialType.IssuedToken:
-                        oneShotSecurity = SecurityBindingElement.CreateIssuedTokenOverTransportBindingElement(IssuedSecurityTokenParameters.CreateInfoCardParameters(new SecurityStandardsManager(new WSSecurityTokenSerializer(emitBspAttributes)), this.algorithmSuite));
+                        oneShotSecurity =
+                            SecurityBindingElement.CreateIssuedTokenOverTransportBindingElement(
+                                IssuedSecurityTokenParameters.CreateInfoCardParameters(
+                                    new SecurityStandardsManager(
+                                        new WSSecurityTokenSerializer(emitBspAttributes)
+                                    ),
+                                    this.algorithmSuite
+                                )
+                            );
                         break;
                     default:
                         Fx.Assert("unknown ClientCredentialType");
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException()
+                        );
                 }
                 if (this.IsSecureConversationEnabled())
                 {
-                    result = SecurityBindingElement.CreateSecureConversationBindingElement(oneShotSecurity, true);
+                    result = SecurityBindingElement.CreateSecureConversationBindingElement(
+                        oneShotSecurity,
+                        true
+                    );
                 }
                 else
                 {
@@ -121,23 +154,44 @@ namespace System.ServiceModel
                     switch (this.clientCredentialType)
                     {
                         case MessageCredentialType.None:
-                            oneShotSecurity = SecurityBindingElement.CreateSslNegotiationBindingElement(false, true);
+                            oneShotSecurity =
+                                SecurityBindingElement.CreateSslNegotiationBindingElement(
+                                    false,
+                                    true
+                                );
                             break;
                         case MessageCredentialType.UserName:
-                            oneShotSecurity = SecurityBindingElement.CreateUserNameForSslBindingElement(true);
+                            oneShotSecurity =
+                                SecurityBindingElement.CreateUserNameForSslBindingElement(true);
                             break;
                         case MessageCredentialType.Certificate:
-                            oneShotSecurity = SecurityBindingElement.CreateSslNegotiationBindingElement(true, true);
+                            oneShotSecurity =
+                                SecurityBindingElement.CreateSslNegotiationBindingElement(
+                                    true,
+                                    true
+                                );
                             break;
                         case MessageCredentialType.Windows:
-                            oneShotSecurity = SecurityBindingElement.CreateSspiNegotiationBindingElement(true);
+                            oneShotSecurity =
+                                SecurityBindingElement.CreateSspiNegotiationBindingElement(true);
                             break;
                         case MessageCredentialType.IssuedToken:
-                            oneShotSecurity = SecurityBindingElement.CreateIssuedTokenForSslBindingElement(IssuedSecurityTokenParameters.CreateInfoCardParameters(new SecurityStandardsManager(new WSSecurityTokenSerializer(emitBspAttributes)), this.algorithmSuite), true);
+                            oneShotSecurity =
+                                SecurityBindingElement.CreateIssuedTokenForSslBindingElement(
+                                    IssuedSecurityTokenParameters.CreateInfoCardParameters(
+                                        new SecurityStandardsManager(
+                                            new WSSecurityTokenSerializer(emitBspAttributes)
+                                        ),
+                                        this.algorithmSuite
+                                    ),
+                                    true
+                                );
                             break;
                         default:
                             Fx.Assert("unknown ClientCredentialType");
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new NotSupportedException()
+                            );
                     }
                 }
                 else
@@ -145,29 +199,45 @@ namespace System.ServiceModel
                     switch (this.clientCredentialType)
                     {
                         case MessageCredentialType.None:
-                            oneShotSecurity = SecurityBindingElement.CreateAnonymousForCertificateBindingElement();
+                            oneShotSecurity =
+                                SecurityBindingElement.CreateAnonymousForCertificateBindingElement();
                             break;
                         case MessageCredentialType.UserName:
-                            oneShotSecurity = SecurityBindingElement.CreateUserNameForCertificateBindingElement();
+                            oneShotSecurity =
+                                SecurityBindingElement.CreateUserNameForCertificateBindingElement();
                             break;
                         case MessageCredentialType.Certificate:
-                            oneShotSecurity = SecurityBindingElement.CreateMutualCertificateBindingElement();
+                            oneShotSecurity =
+                                SecurityBindingElement.CreateMutualCertificateBindingElement();
                             break;
                         case MessageCredentialType.Windows:
                             oneShotSecurity = SecurityBindingElement.CreateKerberosBindingElement();
                             isKerberosSelected = true;
                             break;
                         case MessageCredentialType.IssuedToken:
-                            oneShotSecurity = SecurityBindingElement.CreateIssuedTokenForCertificateBindingElement(IssuedSecurityTokenParameters.CreateInfoCardParameters(new SecurityStandardsManager(new WSSecurityTokenSerializer(emitBspAttributes)), this.algorithmSuite));
+                            oneShotSecurity =
+                                SecurityBindingElement.CreateIssuedTokenForCertificateBindingElement(
+                                    IssuedSecurityTokenParameters.CreateInfoCardParameters(
+                                        new SecurityStandardsManager(
+                                            new WSSecurityTokenSerializer(emitBspAttributes)
+                                        ),
+                                        this.algorithmSuite
+                                    )
+                                );
                             break;
                         default:
                             Fx.Assert("unknown ClientCredentialType");
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new NotSupportedException()
+                            );
                     }
                 }
                 if (this.IsSecureConversationEnabled())
                 {
-                    result = SecurityBindingElement.CreateSecureConversationBindingElement(oneShotSecurity, true);
+                    result = SecurityBindingElement.CreateSecureConversationBindingElement(
+                        oneShotSecurity,
+                        true
+                    );
                 }
                 else
                 {
@@ -178,11 +248,13 @@ namespace System.ServiceModel
             // set the algorithm suite and issued token params if required
             if (wasAlgorithmSuiteSet || (!isKerberosSelected))
             {
-                result.DefaultAlgorithmSuite = oneShotSecurity.DefaultAlgorithmSuite = this.AlgorithmSuite;
+                result.DefaultAlgorithmSuite = oneShotSecurity.DefaultAlgorithmSuite =
+                    this.AlgorithmSuite;
             }
             else if (isKerberosSelected)
             {
-                result.DefaultAlgorithmSuite = oneShotSecurity.DefaultAlgorithmSuite = SecurityAlgorithmSuite.KerberosDefault;
+                result.DefaultAlgorithmSuite = oneShotSecurity.DefaultAlgorithmSuite =
+                    SecurityAlgorithmSuite.KerberosDefault;
             }
 
             result.IncludeTimestamp = true;
@@ -202,13 +274,19 @@ namespace System.ServiceModel
             if (this.IsSecureConversationEnabled())
             {
                 // issue the transition SCT for a short duration only
-                oneShotSecurity.LocalServiceSettings.IssuedCookieLifetime = SpnegoTokenAuthenticator.defaultServerIssuedTransitionTokenLifetime;
+                oneShotSecurity.LocalServiceSettings.IssuedCookieLifetime =
+                    SpnegoTokenAuthenticator.defaultServerIssuedTransitionTokenLifetime;
             }
 
             return result;
         }
 
-        internal static bool TryCreate<TSecurity>(SecurityBindingElement sbe, bool isSecureTransportMode, bool isReliableSession, out TSecurity messageSecurity)
+        internal static bool TryCreate<TSecurity>(
+            SecurityBindingElement sbe,
+            bool isSecureTransportMode,
+            bool isReliableSession,
+            out TSecurity messageSecurity
+        )
             where TSecurity : MessageSecurityOverHttp
         {
             Fx.Assert(null != sbe, string.Empty);
@@ -235,7 +313,13 @@ namespace System.ServiceModel
             bool isSecureConversation;
 
             SecurityBindingElement bootstrapSecurity;
-            if (!SecurityBindingElement.IsSecureConversationBinding(sbe, true, out bootstrapSecurity))
+            if (
+                !SecurityBindingElement.IsSecureConversationBinding(
+                    sbe,
+                    true,
+                    out bootstrapSecurity
+                )
+            )
             {
                 isSecureConversation = false;
 
@@ -268,17 +352,30 @@ namespace System.ServiceModel
                 {
                     clientCredentialType = MessageCredentialType.UserName;
                 }
-                else if (SecurityBindingElement.IsCertificateOverTransportBinding(bootstrapSecurity))
+                else if (
+                    SecurityBindingElement.IsCertificateOverTransportBinding(bootstrapSecurity)
+                )
                 {
                     clientCredentialType = MessageCredentialType.Certificate;
                 }
-                else if (SecurityBindingElement.IsSspiNegotiationOverTransportBinding(bootstrapSecurity, true))
+                else if (
+                    SecurityBindingElement.IsSspiNegotiationOverTransportBinding(
+                        bootstrapSecurity,
+                        true
+                    )
+                )
                 {
                     clientCredentialType = MessageCredentialType.Windows;
                 }
-                else if (SecurityBindingElement.IsIssuedTokenOverTransportBinding(bootstrapSecurity, out infocardParameters))
+                else if (
+                    SecurityBindingElement.IsIssuedTokenOverTransportBinding(
+                        bootstrapSecurity,
+                        out infocardParameters
+                    )
+                )
                 {
-                    if (!IssuedSecurityTokenParameters.IsInfoCardParameters(
+                    if (
+                        !IssuedSecurityTokenParameters.IsInfoCardParameters(
                             infocardParameters,
                             new SecurityStandardsManager(
                                 sbe.MessageSecurityVersion,
@@ -287,7 +384,13 @@ namespace System.ServiceModel
                                     sbe.MessageSecurityVersion.TrustVersion,
                                     sbe.MessageSecurityVersion.SecureConversationVersion,
                                     true,
-                                    null, null, null))))
+                                    null,
+                                    null,
+                                    null
+                                )
+                            )
+                        )
+                    )
                     {
                         return false;
                     }
@@ -311,7 +414,9 @@ namespace System.ServiceModel
                     negotiateServiceCredential = true;
                     clientCredentialType = MessageCredentialType.UserName;
                 }
-                else if (SecurityBindingElement.IsSslNegotiationBinding(bootstrapSecurity, true, true))
+                else if (
+                    SecurityBindingElement.IsSslNegotiationBinding(bootstrapSecurity, true, true)
+                )
                 {
                     negotiateServiceCredential = true;
                     clientCredentialType = MessageCredentialType.Certificate;
@@ -321,9 +426,16 @@ namespace System.ServiceModel
                     negotiateServiceCredential = true;
                     clientCredentialType = MessageCredentialType.Windows;
                 }
-                else if (SecurityBindingElement.IsIssuedTokenForSslBinding(bootstrapSecurity, true, out infocardParameters))
+                else if (
+                    SecurityBindingElement.IsIssuedTokenForSslBinding(
+                        bootstrapSecurity,
+                        true,
+                        out infocardParameters
+                    )
+                )
                 {
-                    if (!IssuedSecurityTokenParameters.IsInfoCardParameters(
+                    if (
+                        !IssuedSecurityTokenParameters.IsInfoCardParameters(
                             infocardParameters,
                             new SecurityStandardsManager(
                                 sbe.MessageSecurityVersion,
@@ -332,7 +444,13 @@ namespace System.ServiceModel
                                     sbe.MessageSecurityVersion.TrustVersion,
                                     sbe.MessageSecurityVersion.SecureConversationVersion,
                                     true,
-                                    null, null, null))))
+                                    null,
+                                    null,
+                                    null
+                                )
+                            )
+                        )
+                    )
                     {
                         return false;
                     }
@@ -354,9 +472,15 @@ namespace System.ServiceModel
                     negotiateServiceCredential = false;
                     clientCredentialType = MessageCredentialType.Windows;
                 }
-                else if (SecurityBindingElement.IsIssuedTokenForCertificateBinding(bootstrapSecurity, out infocardParameters))
+                else if (
+                    SecurityBindingElement.IsIssuedTokenForCertificateBinding(
+                        bootstrapSecurity,
+                        out infocardParameters
+                    )
+                )
                 {
-                    if (!IssuedSecurityTokenParameters.IsInfoCardParameters(
+                    if (
+                        !IssuedSecurityTokenParameters.IsInfoCardParameters(
                             infocardParameters,
                             new SecurityStandardsManager(
                                 sbe.MessageSecurityVersion,
@@ -365,7 +489,13 @@ namespace System.ServiceModel
                                     sbe.MessageSecurityVersion.TrustVersion,
                                     sbe.MessageSecurityVersion.SecureConversationVersion,
                                     true,
-                                    null, null, null))))
+                                    null,
+                                    null,
+                                    null
+                                )
+                            )
+                        )
+                    )
                     {
                         return false;
                     }
@@ -390,7 +520,8 @@ namespace System.ServiceModel
             if (typeof(NonDualMessageSecurityOverHttp).Equals(typeof(TSecurity)))
             {
                 messageSecurity = (TSecurity)(object)new NonDualMessageSecurityOverHttp();
-                ((NonDualMessageSecurityOverHttp)(object)messageSecurity).EstablishSecurityContext = isSecureConversation;
+                ((NonDualMessageSecurityOverHttp)(object)messageSecurity).EstablishSecurityContext =
+                    isSecureConversation;
             }
             else
             {

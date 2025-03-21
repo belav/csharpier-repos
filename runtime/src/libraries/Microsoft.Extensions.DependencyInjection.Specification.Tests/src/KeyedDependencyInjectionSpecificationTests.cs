@@ -11,7 +11,7 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 {
     public abstract partial class KeyedDependencyInjectionSpecificationTests
     {
-        protected abstract  IServiceProvider CreateServiceProvider(IServiceCollection collection);
+        protected abstract IServiceProvider CreateServiceProvider(IServiceCollection collection);
 
         [Fact]
         public void ResolveKeyedService()
@@ -65,12 +65,18 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         public void ResolveKeyedOpenGenericService()
         {
             var collection = new ServiceCollection();
-            collection.AddKeyedTransient(typeof(IFakeOpenGenericService<>), "my-service", typeof(FakeOpenGenericService<>));
+            collection.AddKeyedTransient(
+                typeof(IFakeOpenGenericService<>),
+                "my-service",
+                typeof(FakeOpenGenericService<>)
+            );
             collection.AddSingleton<IFakeSingletonService, FakeService>();
             var provider = CreateServiceProvider(collection);
 
             // Act
-            var genericService = provider.GetKeyedService<IFakeOpenGenericService<IFakeSingletonService>>("my-service");
+            var genericService = provider.GetKeyedService<
+                IFakeOpenGenericService<IFakeSingletonService>
+            >("my-service");
             var singletonService = provider.GetService<IFakeSingletonService>();
 
             // Assert
@@ -108,18 +114,34 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var service3 = new FakeService();
             var service4 = new FakeService();
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddKeyedSingleton<IFakeOpenGenericService<PocoClass>>("first-service", service1);
-            serviceCollection.AddKeyedSingleton<IFakeOpenGenericService<PocoClass>>("service", service2);
-            serviceCollection.AddKeyedSingleton<IFakeOpenGenericService<PocoClass>>("service", service3);
-            serviceCollection.AddKeyedSingleton<IFakeOpenGenericService<PocoClass>>("service", service4);
+            serviceCollection.AddKeyedSingleton<IFakeOpenGenericService<PocoClass>>(
+                "first-service",
+                service1
+            );
+            serviceCollection.AddKeyedSingleton<IFakeOpenGenericService<PocoClass>>(
+                "service",
+                service2
+            );
+            serviceCollection.AddKeyedSingleton<IFakeOpenGenericService<PocoClass>>(
+                "service",
+                service3
+            );
+            serviceCollection.AddKeyedSingleton<IFakeOpenGenericService<PocoClass>>(
+                "service",
+                service4
+            );
 
             var provider = CreateServiceProvider(serviceCollection);
 
-            var firstSvc = provider.GetKeyedServices<IFakeOpenGenericService<PocoClass>>("first-service").ToList();
+            var firstSvc = provider
+                .GetKeyedServices<IFakeOpenGenericService<PocoClass>>("first-service")
+                .ToList();
             Assert.Single(firstSvc);
             Assert.Same(service1, firstSvc[0]);
 
-            var services = provider.GetKeyedServices<IFakeOpenGenericService<PocoClass>>("service").ToList();
+            var services = provider
+                .GetKeyedServices<IFakeOpenGenericService<PocoClass>>("service")
+                .ToList();
             Assert.Equal(new[] { service2, service3, service4 }, services);
         }
 
@@ -179,12 +201,20 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var service2 = new FakeService();
 
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddKeyedSingleton<IFakeOpenGenericService<PocoClass>>(KeyedService.AnyKey, service1);
-            serviceCollection.AddKeyedSingleton<IFakeOpenGenericService<PocoClass>>("some-key", service2);
+            serviceCollection.AddKeyedSingleton<IFakeOpenGenericService<PocoClass>>(
+                KeyedService.AnyKey,
+                service1
+            );
+            serviceCollection.AddKeyedSingleton<IFakeOpenGenericService<PocoClass>>(
+                "some-key",
+                service2
+            );
 
             var provider = CreateServiceProvider(serviceCollection);
 
-            var services = provider.GetKeyedServices<IFakeOpenGenericService<PocoClass>>("some-key").ToList();
+            var services = provider
+                .GetKeyedServices<IFakeOpenGenericService<PocoClass>>("some-key")
+                .ToList();
             Assert.Equal(new[] { service1, service2 }, services);
         }
 
@@ -239,13 +269,16 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         public void ResolveKeyedServiceSingletonFactoryWithAnyKey()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddKeyedSingleton<IService>(KeyedService.AnyKey, (sp, key) => new Service((string)key));
+            serviceCollection.AddKeyedSingleton<IService>(
+                KeyedService.AnyKey,
+                (sp, key) => new Service((string)key)
+            );
 
             var provider = CreateServiceProvider(serviceCollection);
 
             Assert.Null(provider.GetService<IService>());
 
-            for (int i=0; i<3; i++)
+            for (int i = 0; i < 3; i++)
             {
                 var key = "service" + i;
                 var s1 = provider.GetKeyedService<IService>(key);
@@ -265,7 +298,9 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
 
             Assert.Null(provider.GetService<IService>());
             Assert.NotNull(provider.GetKeyedService<IService>(87));
-            Assert.ThrowsAny<InvalidOperationException>(() => provider.GetKeyedService<IService>(new object()));
+            Assert.ThrowsAny<InvalidOperationException>(() =>
+                provider.GetKeyedService<IService>(new object())
+            );
         }
 
         [Fact]
@@ -277,14 +312,20 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             var provider = CreateServiceProvider(serviceCollection);
 
             Assert.Null(provider.GetService<IService>());
-            Assert.Equal(typeof(Service), provider.GetKeyedService<IService>("service1")!.GetType());
+            Assert.Equal(
+                typeof(Service),
+                provider.GetKeyedService<IService>("service1")!.GetType()
+            );
         }
 
         [Fact]
         public void ResolveKeyedServiceTransientFactory()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddKeyedTransient<IService>("service1", (sp, key) => new Service(key as string));
+            serviceCollection.AddKeyedTransient<IService>(
+                "service1",
+                (sp, key) => new Service(key as string)
+            );
 
             var provider = CreateServiceProvider(serviceCollection);
 
@@ -449,7 +490,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
         {
             public OtherService(
                 [FromKeyedServices("service1")] IService service1,
-                [FromKeyedServices("service2")] IService service2)
+                [FromKeyedServices("service2")] IService service2
+            )
             {
                 Service1 = service1;
                 Service2 = service2;
@@ -477,23 +519,23 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
             public IServiceProvider ServiceProvider { get; }
         }
 
-            [Fact]
-            public void SimpleServiceKeyedResolution()
-            {
-                // Arrange
-                var services = new ServiceCollection();
-                services.AddKeyedTransient<ISimpleService, SimpleService>("simple");
-                services.AddKeyedTransient<ISimpleService, AnotherSimpleService>("another");
-                services.AddTransient<SimpleParentWithDynamicKeyedService>();
-                var provider = CreateServiceProvider(services);
-                var sut = provider.GetService<SimpleParentWithDynamicKeyedService>();
+        [Fact]
+        public void SimpleServiceKeyedResolution()
+        {
+            // Arrange
+            var services = new ServiceCollection();
+            services.AddKeyedTransient<ISimpleService, SimpleService>("simple");
+            services.AddKeyedTransient<ISimpleService, AnotherSimpleService>("another");
+            services.AddTransient<SimpleParentWithDynamicKeyedService>();
+            var provider = CreateServiceProvider(services);
+            var sut = provider.GetService<SimpleParentWithDynamicKeyedService>();
 
-                // Act
-                var result = sut!.GetService("simple");
+            // Act
+            var result = sut!.GetService("simple");
 
-                // Assert
-                Assert.True(result.GetType() == typeof(SimpleService));
-            }
+            // Assert
+            Assert.True(result.GetType() == typeof(SimpleService));
+        }
 
         public class SimpleParentWithDynamicKeyedService
         {
@@ -504,7 +546,8 @@ namespace Microsoft.Extensions.DependencyInjection.Specification
                 _serviceProvider = serviceProvider;
             }
 
-            public ISimpleService GetService(string name) => _serviceProvider.GetKeyedService<ISimpleService>(name)!;
+            public ISimpleService GetService(string name) =>
+                _serviceProvider.GetKeyedService<ISimpleService>(name)!;
         }
 
         public interface ISimpleService { }

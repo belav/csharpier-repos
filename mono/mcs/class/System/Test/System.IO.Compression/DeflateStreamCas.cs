@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,115 +26,118 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.IO.Compression;
 using System.Security;
 using System.Security.Permissions;
 using System.Threading;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.IO.Compression {
+namespace MonoCasTests.System.IO.Compression
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class DeflateStreamCas
+    {
+        private const int timeout = 30000;
+        private string message;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DeflateStreamCas {
+        static ManualResetEvent reset;
 
-		private const int timeout = 30000;
-		private string message;
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            // this occurs with a "clean" stack (full trust)
+            reset = new ManualResetEvent(false);
+        }
 
-		static ManualResetEvent reset;
+        [TestFixtureTearDown]
+        public void FixtureTearDown()
+        {
+            reset.Close();
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			// this occurs with a "clean" stack (full trust)
-			reset = new ManualResetEvent (false);
-		}
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[TestFixtureTearDown]
-		public void FixtureTearDown ()
-		{
-			reset.Close ();
-		}
+        // async tests (for stack propagation)
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        private void ReadCallback(IAsyncResult ar)
+        {
+            DeflateStream s = (DeflateStream)ar.AsyncState;
+            s.EndRead(ar);
+            try
+            {
+                // can we do something bad here ?
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("USERNAME"));
+                message = "Expected a SecurityException";
+            }
+            catch (SecurityException)
+            {
+                message = null;
+                reset.Set();
+            }
+            catch (Exception e)
+            {
+                message = e.ToString();
+            }
+        }
 
-		// async tests (for stack propagation)
+        [Test]
+        [EnvironmentPermission(SecurityAction.Deny, Read = "USERNAME")]
+        public void AsyncRead()
+        {
+            DeflateStream cs = new DeflateStream(new MemoryStream(), CompressionMode.Decompress);
+            message = "AsyncRead";
+            reset.Reset();
+            IAsyncResult r = cs.BeginRead(new byte[0], 0, 0, new AsyncCallback(ReadCallback), cs);
+            Assert.IsNotNull(r, "IAsyncResult");
+            if (!reset.WaitOne(timeout, true))
+                Assert.Ignore("Timeout");
+            Assert.IsNull(message, message);
+            cs.Close();
+        }
 
-		private void ReadCallback (IAsyncResult ar)
-		{
-			DeflateStream s = (DeflateStream)ar.AsyncState;
-			s.EndRead (ar);
-			try {
-				// can we do something bad here ?
-				Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
-				message = "Expected a SecurityException";
-			}
-			catch (SecurityException) {
-				message = null;
-				reset.Set ();
-			}
-			catch (Exception e) {
-				message = e.ToString ();
-			}
-		}
+        private void WriteCallback(IAsyncResult ar)
+        {
+            DeflateStream s = (DeflateStream)ar.AsyncState;
+            s.EndWrite(ar);
+            try
+            {
+                // can we do something bad here ?
+                Assert.IsNotNull(Environment.GetEnvironmentVariable("USERNAME"));
+                message = "Expected a SecurityException";
+            }
+            catch (SecurityException)
+            {
+                message = null;
+                reset.Set();
+            }
+            catch (Exception e)
+            {
+                message = e.ToString();
+            }
+        }
 
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-		public void AsyncRead ()
-		{
-			DeflateStream cs = new DeflateStream (new MemoryStream (), CompressionMode.Decompress);
-			message = "AsyncRead";
-			reset.Reset ();
-			IAsyncResult r = cs.BeginRead (new byte[0], 0, 0, new AsyncCallback (ReadCallback), cs);
-			Assert.IsNotNull (r, "IAsyncResult");
-			if (!reset.WaitOne (timeout, true))
-				Assert.Ignore ("Timeout");
-			Assert.IsNull (message, message);
-			cs.Close ();
-		}
-
-		private void WriteCallback (IAsyncResult ar)
-		{
-			DeflateStream s = (DeflateStream)ar.AsyncState;
-			s.EndWrite (ar);
-			try {
-				// can we do something bad here ?
-				Assert.IsNotNull (Environment.GetEnvironmentVariable ("USERNAME"));
-				message = "Expected a SecurityException";
-			}
-			catch (SecurityException) {
-				message = null;
-				reset.Set ();
-			}
-			catch (Exception e) {
-				message = e.ToString ();
-			}
-		}
-
-		[Test]
-		[EnvironmentPermission (SecurityAction.Deny, Read = "USERNAME")]
-		public void AsyncWrite ()
-		{
-			DeflateStream cs = new DeflateStream (new MemoryStream (), CompressionMode.Compress);
-			message = "AsyncWrite";
-			reset.Reset ();
-			IAsyncResult r = cs.BeginWrite (new byte[1], 0, 1, new AsyncCallback (WriteCallback), cs);
-			Assert.IsNotNull (r, "IAsyncResult");
-			if (!reset.WaitOne (timeout, true))
-				Assert.Ignore ("Timeout");
-			Assert.IsNull (message, message);
-// the Close is currently buggy in Mono
-//			cs.Close ();
-		}
-	}
+        [Test]
+        [EnvironmentPermission(SecurityAction.Deny, Read = "USERNAME")]
+        public void AsyncWrite()
+        {
+            DeflateStream cs = new DeflateStream(new MemoryStream(), CompressionMode.Compress);
+            message = "AsyncWrite";
+            reset.Reset();
+            IAsyncResult r = cs.BeginWrite(new byte[1], 0, 1, new AsyncCallback(WriteCallback), cs);
+            Assert.IsNotNull(r, "IAsyncResult");
+            if (!reset.WaitOne(timeout, true))
+                Assert.Ignore("Timeout");
+            Assert.IsNull(message, message);
+            // the Close is currently buggy in Mono
+            //			cs.Close ();
+        }
+    }
 }
-

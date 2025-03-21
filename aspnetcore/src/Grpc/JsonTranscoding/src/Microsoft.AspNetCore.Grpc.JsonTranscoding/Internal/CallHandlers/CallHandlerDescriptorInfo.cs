@@ -16,7 +16,8 @@ internal sealed class CallHandlerDescriptorInfo
         bool bodyDescriptorRepeated,
         FieldDescriptor? bodyFieldDescriptor,
         Dictionary<string, RouteParameter> routeParameterDescriptors,
-        JsonTranscodingRouteAdapter routeAdapter)
+        JsonTranscodingRouteAdapter routeAdapter
+    )
     {
         ResponseBodyDescriptor = responseBodyDescriptor;
         BodyDescriptor = bodyDescriptor;
@@ -29,6 +30,7 @@ internal sealed class CallHandlerDescriptorInfo
 
     public FieldDescriptor? ResponseBodyDescriptor { get; }
     public MessageDescriptor? BodyDescriptor { get; }
+
     [MemberNotNullWhen(true, nameof(BodyFieldDescriptor))]
     public bool BodyDescriptorRepeated { get; }
     public FieldDescriptor? BodyFieldDescriptor { get; }

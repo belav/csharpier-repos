@@ -28,9 +28,17 @@ internal sealed class ReporterEventListener : EventListener
             EventLevel.Warning => _reporter.Warn,
             EventLevel.Informational => _reporter.Output,
             EventLevel.Verbose => _reporter.Verbose,
-            _ => throw new ArgumentOutOfRangeException(nameof(eventData), eventData.Level, $"The value of argument '{nameof(eventData.Level)}' ({eventData.Level}) is invalid for Enum type '{nameof(EventLevel)}'.")
+            _ => throw new ArgumentOutOfRangeException(
+                nameof(eventData),
+                eventData.Level,
+                $"The value of argument '{nameof(eventData.Level)}' ({eventData.Level}) is invalid for Enum type '{nameof(EventLevel)}'."
+            ),
         };
-        var message = string.Format(CultureInfo.InvariantCulture, eventData.Message ?? "", eventData.Payload?.ToArray() ?? Array.Empty<object>());
+        var message = string.Format(
+            CultureInfo.InvariantCulture,
+            eventData.Message ?? "",
+            eventData.Payload?.ToArray() ?? Array.Empty<object>()
+        );
         report($"[{eventData.EventId}] " + message);
     }
 }

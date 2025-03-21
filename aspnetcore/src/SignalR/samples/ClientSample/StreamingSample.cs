@@ -12,21 +12,22 @@ internal class StreamingSample
 {
     internal static void Register(CommandLineApplication app)
     {
-        app.Command("streaming", cmd =>
-        {
-            cmd.Description = "Tests a streaming connection to a hub";
+        app.Command(
+            "streaming",
+            cmd =>
+            {
+                cmd.Description = "Tests a streaming connection to a hub";
 
-            var baseUrlArgument = cmd.Argument("<BASEURL>", "The URL to the Chat Hub to test");
+                var baseUrlArgument = cmd.Argument("<BASEURL>", "The URL to the Chat Hub to test");
 
-            cmd.OnExecute(() => ExecuteAsync(baseUrlArgument.Value));
-        });
+                cmd.OnExecute(() => ExecuteAsync(baseUrlArgument.Value));
+            }
+        );
     }
 
     public static async Task<int> ExecuteAsync(string baseUrl)
     {
-        var connection = new HubConnectionBuilder()
-            .WithUrl(baseUrl)
-            .Build();
+        var connection = new HubConnectionBuilder().WithUrl(baseUrl).Build();
 
         await connection.StartAsync();
 

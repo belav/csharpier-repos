@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,231 +26,288 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
-using NUnit.Framework;
-
 using System;
 using System.Runtime.Serialization;
 using System.Security;
 using System.Security.Permissions;
 using System.Security.Policy;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security.Policy {
+namespace MonoTests.System.Security.Policy
+{
+    [TestFixture]
+    public class ApplicationTrustTest
+    {
+        private string AdjustLineEnds(string s)
+        {
+            return s.Replace("\r\n", "\n");
+        }
 
-	[TestFixture]
-	public class ApplicationTrustTest {
+        [Test]
+        public void Constructor_Empty()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            Assert.IsNull(at.ApplicationIdentity, "ApplicationIdentity");
+            Assert.AreEqual(
+                PolicyStatementAttribute.Nothing,
+                at.DefaultGrantSet.Attributes,
+                "DefaultGrantSet.Attributes"
+            );
+            Assert.AreEqual(
+                String.Empty,
+                at.DefaultGrantSet.AttributeString,
+                "DefaultGrantSet.AttributeString"
+            );
+            Assert.IsTrue(
+                at.DefaultGrantSet.PermissionSet.IsEmpty(),
+                "DefaultGrantSet.PermissionSet.IsEmpty"
+            );
+            Assert.IsFalse(
+                at.DefaultGrantSet.PermissionSet.IsUnrestricted(),
+                "DefaultGrantSet.PermissionSet.IsUnrestricted"
+            );
+            Assert.IsNull(at.ExtraInfo, "ExtraInfo");
+            Assert.IsFalse(at.IsApplicationTrustedToRun, "IsApplicationTrustedToRun");
+            Assert.IsFalse(at.Persist, "Persist");
+            string expected = AdjustLineEnds(
+                "<ApplicationTrust version=\"1\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n</ApplicationTrust>\r\n"
+            );
+            Assert.AreEqual(expected, AdjustLineEnds(at.ToXml().ToString()), "XML");
+        }
 
-		private string AdjustLineEnds (string s)
-		{
-			return s.Replace ("\r\n", "\n");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor_Null()
+        {
+            ApplicationTrust at = new ApplicationTrust(null);
+        }
 
-		[Test]
-		public void Constructor_Empty ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			Assert.IsNull (at.ApplicationIdentity, "ApplicationIdentity");
-			Assert.AreEqual (PolicyStatementAttribute.Nothing, at.DefaultGrantSet.Attributes, "DefaultGrantSet.Attributes");
-			Assert.AreEqual (String.Empty, at.DefaultGrantSet.AttributeString, "DefaultGrantSet.AttributeString");
-			Assert.IsTrue (at.DefaultGrantSet.PermissionSet.IsEmpty (), "DefaultGrantSet.PermissionSet.IsEmpty");
-			Assert.IsFalse (at.DefaultGrantSet.PermissionSet.IsUnrestricted (), "DefaultGrantSet.PermissionSet.IsUnrestricted");
-			Assert.IsNull (at.ExtraInfo, "ExtraInfo");
-			Assert.IsFalse (at.IsApplicationTrustedToRun, "IsApplicationTrustedToRun");
-			Assert.IsFalse (at.Persist, "Persist");
-			string expected = AdjustLineEnds ("<ApplicationTrust version=\"1\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n</ApplicationTrust>\r\n");
-			Assert.AreEqual (expected, AdjustLineEnds (at.ToXml ().ToString ()), "XML");
-		}
+        [Test]
+        public void ApplicationIdentity()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            at.ApplicationIdentity = new ApplicationIdentity("Mono Unit Test");
+            Assert.IsNotNull(at.ApplicationIdentity, "not null");
+            string expected = AdjustLineEnds(
+                "<ApplicationTrust version=\"1\"\r\nFullName=\"Mono Unit Test, Culture=neutral\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n</ApplicationTrust>\r\n"
+            );
+            Assert.AreEqual(expected, AdjustLineEnds(at.ToXml().ToString()), "XML");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Constructor_Null ()
-		{
-			ApplicationTrust at = new ApplicationTrust (null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ApplicationIdentity_Null()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            at.ApplicationIdentity = new ApplicationIdentity("Mono Unit Test");
+            // once set it cannot be "unset" ...
+            at.ApplicationIdentity = null;
+        }
 
-		[Test]
-		public void ApplicationIdentity ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			at.ApplicationIdentity = new ApplicationIdentity ("Mono Unit Test");
-			Assert.IsNotNull (at.ApplicationIdentity, "not null");
-			string expected = AdjustLineEnds ("<ApplicationTrust version=\"1\"\r\nFullName=\"Mono Unit Test, Culture=neutral\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n</ApplicationTrust>\r\n");
-			Assert.AreEqual (expected, AdjustLineEnds (at.ToXml ().ToString ()), "XML");
-		}
+        [Test]
+        public void ApplicationIdentity_Change()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            at.ApplicationIdentity = new ApplicationIdentity("Mono Unit Test");
+            // ... but it can be changed
+            at.ApplicationIdentity = new ApplicationIdentity("Mono Unit Test Too");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ApplicationIdentity_Null ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			at.ApplicationIdentity = new ApplicationIdentity ("Mono Unit Test");
-			// once set it cannot be "unset" ...
-			at.ApplicationIdentity = null;
-		}
+        [Test]
+        public void DefaultGrantSet()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            at.DefaultGrantSet = new PolicyStatement(
+                new PermissionSet(PermissionState.Unrestricted)
+            );
+            Assert.IsNotNull(at.DefaultGrantSet, "not null");
+            string expected = AdjustLineEnds(
+                "<ApplicationTrust version=\"1\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"\r\nUnrestricted=\"true\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n</ApplicationTrust>\r\n"
+            );
+            Assert.AreEqual(expected, AdjustLineEnds(at.ToXml().ToString()), "XML");
 
-		[Test]
-		public void ApplicationIdentity_Change ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			at.ApplicationIdentity = new ApplicationIdentity ("Mono Unit Test");
-			// ... but it can be changed
-			at.ApplicationIdentity = new ApplicationIdentity ("Mono Unit Test Too");
-		}
+            at.DefaultGrantSet = null;
+            // returns to defaults
+            Assert.IsNotNull(at.DefaultGrantSet, "null");
+            Assert.AreEqual(
+                PolicyStatementAttribute.Nothing,
+                at.DefaultGrantSet.Attributes,
+                "DefaultGrantSet.Attributes"
+            );
+            Assert.AreEqual(
+                String.Empty,
+                at.DefaultGrantSet.AttributeString,
+                "DefaultGrantSet.AttributeString"
+            );
+            Assert.IsTrue(
+                at.DefaultGrantSet.PermissionSet.IsEmpty(),
+                "DefaultGrantSet.PermissionSet.IsEmpty"
+            );
+            Assert.IsFalse(
+                at.DefaultGrantSet.PermissionSet.IsUnrestricted(),
+                "DefaultGrantSet.PermissionSet.IsUnrestricted"
+            );
+        }
 
-		[Test]
-		public void DefaultGrantSet ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			at.DefaultGrantSet = new PolicyStatement (new PermissionSet (PermissionState.Unrestricted));
-			Assert.IsNotNull (at.DefaultGrantSet, "not null");
-			string expected = AdjustLineEnds ("<ApplicationTrust version=\"1\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"\r\nUnrestricted=\"true\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n</ApplicationTrust>\r\n");
-			Assert.AreEqual (expected, AdjustLineEnds (at.ToXml ().ToString ()), "XML");
+        [Test]
+        public void ExtraInfo()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            at.ExtraInfo = "Mono";
+            Assert.IsNotNull(at.ExtraInfo, "not null");
 
-			at.DefaultGrantSet = null;
-			// returns to defaults
-			Assert.IsNotNull (at.DefaultGrantSet, "null");
-			Assert.AreEqual (PolicyStatementAttribute.Nothing, at.DefaultGrantSet.Attributes, "DefaultGrantSet.Attributes");
-			Assert.AreEqual (String.Empty, at.DefaultGrantSet.AttributeString, "DefaultGrantSet.AttributeString");
-			Assert.IsTrue (at.DefaultGrantSet.PermissionSet.IsEmpty (), "DefaultGrantSet.PermissionSet.IsEmpty");
-			Assert.IsFalse (at.DefaultGrantSet.PermissionSet.IsUnrestricted (), "DefaultGrantSet.PermissionSet.IsUnrestricted");
-		}
+            string expected = AdjustLineEnds(
+                "<ApplicationTrust version=\"1\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n<ExtraInfo Data=\"0001000000FFFFFFFF01000000000000000601000000044D6F6E6F0B\"/>\r\n</ApplicationTrust>\r\n"
+            );
+            Assert.AreEqual(expected, AdjustLineEnds(at.ToXml().ToString()), "XML");
 
-		[Test]
-		public void ExtraInfo ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			at.ExtraInfo = "Mono";
-			Assert.IsNotNull (at.ExtraInfo, "not null");
+            at.ExtraInfo = null;
+            Assert.IsNull(at.ExtraInfo, "null");
+        }
 
-			string expected = AdjustLineEnds ("<ApplicationTrust version=\"1\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n<ExtraInfo Data=\"0001000000FFFFFFFF01000000000000000601000000044D6F6E6F0B\"/>\r\n</ApplicationTrust>\r\n");
-			Assert.AreEqual (expected, AdjustLineEnds (at.ToXml ().ToString ()), "XML");
+        [Test]
+        [ExpectedException(typeof(SerializationException))]
+        public void ExtraInfo_NotSerializable()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            at.ExtraInfo = this;
+            SecurityElement se = at.ToXml();
+        }
 
-			at.ExtraInfo = null;
-			Assert.IsNull (at.ExtraInfo, "null");
-		}
+        [Test]
+        public void IsApplicationTrustedToRun()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            at.IsApplicationTrustedToRun = true;
+            Assert.IsTrue(at.IsApplicationTrustedToRun);
 
-		[Test]
-		[ExpectedException (typeof (SerializationException))]
-		public void ExtraInfo_NotSerializable ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			at.ExtraInfo = this;
-			SecurityElement se = at.ToXml ();
-		}
+            string expected = AdjustLineEnds(
+                "<ApplicationTrust version=\"1\"\r\nTrustedToRun=\"true\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n</ApplicationTrust>\r\n"
+            );
+            Assert.AreEqual(expected, AdjustLineEnds(at.ToXml().ToString()), "XML");
 
-		[Test]
-		public void IsApplicationTrustedToRun ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			at.IsApplicationTrustedToRun = true;
-			Assert.IsTrue (at.IsApplicationTrustedToRun);
+            at.IsApplicationTrustedToRun = false;
+            Assert.IsFalse(at.IsApplicationTrustedToRun);
+        }
 
-			string expected = AdjustLineEnds ("<ApplicationTrust version=\"1\"\r\nTrustedToRun=\"true\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n</ApplicationTrust>\r\n");
-			Assert.AreEqual (expected, AdjustLineEnds (at.ToXml ().ToString ()), "XML");
+        [Test]
+        public void Persist()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            at.Persist = true;
+            Assert.IsTrue(at.Persist, "true");
 
-			at.IsApplicationTrustedToRun = false;
-			Assert.IsFalse (at.IsApplicationTrustedToRun);
-		}
+            string expected = AdjustLineEnds(
+                "<ApplicationTrust version=\"1\"\r\nPersist=\"true\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n</ApplicationTrust>\r\n"
+            );
+            Assert.AreEqual(expected, AdjustLineEnds(at.ToXml().ToString()), "XML");
 
-		[Test]
-		public void Persist ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			at.Persist = true;
-			Assert.IsTrue (at.Persist, "true");
+            at.Persist = false;
+            Assert.IsFalse(at.Persist, "false");
+        }
 
-			string expected = AdjustLineEnds ("<ApplicationTrust version=\"1\"\r\nPersist=\"true\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n</ApplicationTrust>\r\n");
-			Assert.AreEqual (expected, AdjustLineEnds (at.ToXml ().ToString ()), "XML");
+        [Test]
+        public void ToFromXmlRoundtrip()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            at.ApplicationIdentity = new ApplicationIdentity("Mono Unit Test");
+            at.DefaultGrantSet = new PolicyStatement(
+                new PermissionSet(PermissionState.Unrestricted)
+            );
+            at.ExtraInfo = "Mono";
+            at.IsApplicationTrustedToRun = true;
+            at.Persist = true;
 
-			at.Persist = false;
-			Assert.IsFalse (at.Persist, "false");
-		}
+            SecurityElement se = at.ToXml();
+            string expected = AdjustLineEnds(
+                "<ApplicationTrust version=\"1\"\r\nFullName=\"Mono Unit Test, Culture=neutral\"\r\nTrustedToRun=\"true\"\r\nPersist=\"true\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"\r\nUnrestricted=\"true\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n<ExtraInfo Data=\"0001000000FFFFFFFF01000000000000000601000000044D6F6E6F0B\"/>\r\n</ApplicationTrust>\r\n"
+            );
+            Assert.AreEqual(expected, AdjustLineEnds(at.ToXml().ToString()), "XML");
 
-		[Test]
-		public void ToFromXmlRoundtrip ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			at.ApplicationIdentity = new ApplicationIdentity ("Mono Unit Test");
-			at.DefaultGrantSet = new PolicyStatement (new PermissionSet (PermissionState.Unrestricted));
-			at.ExtraInfo = "Mono";
-			at.IsApplicationTrustedToRun = true;
-			at.Persist = true;
+            ApplicationTrust copy = new ApplicationTrust();
+            copy.FromXml(se);
+            se = copy.ToXml();
+            Assert.AreEqual(expected, AdjustLineEnds(at.ToXml().ToString()), "Copy");
+        }
 
-			SecurityElement se = at.ToXml ();
-			string expected = AdjustLineEnds ("<ApplicationTrust version=\"1\"\r\nFullName=\"Mono Unit Test, Culture=neutral\"\r\nTrustedToRun=\"true\"\r\nPersist=\"true\">\r\n<DefaultGrant>\r\n<PolicyStatement version=\"1\">\r\n<PermissionSet class=\"System.Security.PermissionSet\"\r\nversion=\"1\"\r\nUnrestricted=\"true\"/>\r\n</PolicyStatement>\r\n</DefaultGrant>\r\n<ExtraInfo Data=\"0001000000FFFFFFFF01000000000000000601000000044D6F6E6F0B\"/>\r\n</ApplicationTrust>\r\n");
-			Assert.AreEqual (expected, AdjustLineEnds (at.ToXml ().ToString ()), "XML");
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FromXml_Null()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            at.FromXml(null);
+        }
 
-			ApplicationTrust copy = new ApplicationTrust ();
-			copy.FromXml (se);
-			se = copy.ToXml ();
-			Assert.AreEqual (expected, AdjustLineEnds (at.ToXml ().ToString ()), "Copy");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void FromXml_InvalidTag()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            SecurityElement se = at.ToXml();
+            se.Tag = "MonoTrust";
+            at.FromXml(se);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void FromXml_Null ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			at.FromXml (null);
-		}
+        [Test]
+        public void FromXml_InvalidVersion()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            SecurityElement se = at.ToXml();
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void FromXml_InvalidTag ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			SecurityElement se = at.ToXml ();
-			se.Tag = "MonoTrust";
-			at.FromXml (se);
-		}
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("version", "2");
+            foreach (SecurityElement child in se.Children)
+                w.AddChild(child);
 
-		[Test]
-		public void FromXml_InvalidVersion ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			SecurityElement se = at.ToXml ();
+            at.FromXml(w);
+        }
 
-			SecurityElement w = new SecurityElement (se.Tag);
-			w.AddAttribute ("version", "2");
-			foreach (SecurityElement child in se.Children)
-				w.AddChild (child);
+        [Test]
+        public void FromXml_NoVersion()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            SecurityElement se = at.ToXml();
 
-			at.FromXml (w);
-		}
+            SecurityElement w = new SecurityElement(se.Tag);
+            foreach (SecurityElement child in se.Children)
+                w.AddChild(child);
 
-		[Test]
-		public void FromXml_NoVersion ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			SecurityElement se = at.ToXml ();
+            at.FromXml(w);
+        }
 
-			SecurityElement w = new SecurityElement (se.Tag);
-			foreach (SecurityElement child in se.Children)
-				w.AddChild (child);
+        [Test]
+        public void FromXml_NoChild()
+        {
+            ApplicationTrust at = new ApplicationTrust();
+            SecurityElement se = at.ToXml();
 
-			at.FromXml (w);
-		}
+            SecurityElement w = new SecurityElement(se.Tag);
+            w.AddAttribute("version", "1");
 
-		[Test]
-		public void FromXml_NoChild ()
-		{
-			ApplicationTrust at = new ApplicationTrust ();
-			SecurityElement se = at.ToXml ();
+            at.FromXml(w);
 
-			SecurityElement w = new SecurityElement (se.Tag);
-			w.AddAttribute ("version", "1");
-
-			at.FromXml (w);
-
-			Assert.IsNull (at.ApplicationIdentity, "ApplicationIdentity");
-			Assert.AreEqual (PolicyStatementAttribute.Nothing, at.DefaultGrantSet.Attributes, "DefaultGrantSet.Attributes");
-			Assert.AreEqual (String.Empty, at.DefaultGrantSet.AttributeString, "DefaultGrantSet.AttributeString");
-			Assert.IsTrue (at.DefaultGrantSet.PermissionSet.IsEmpty (), "DefaultGrantSet.PermissionSet.IsEmpty");
-			Assert.IsFalse (at.DefaultGrantSet.PermissionSet.IsUnrestricted (), "DefaultGrantSet.PermissionSet.IsUnrestricted");
-			Assert.IsNull (at.ExtraInfo, "ExtraInfo");
-			Assert.IsFalse (at.IsApplicationTrustedToRun, "IsApplicationTrustedToRun");
-			Assert.IsFalse (at.Persist, "Persist");
-		}
-	}
+            Assert.IsNull(at.ApplicationIdentity, "ApplicationIdentity");
+            Assert.AreEqual(
+                PolicyStatementAttribute.Nothing,
+                at.DefaultGrantSet.Attributes,
+                "DefaultGrantSet.Attributes"
+            );
+            Assert.AreEqual(
+                String.Empty,
+                at.DefaultGrantSet.AttributeString,
+                "DefaultGrantSet.AttributeString"
+            );
+            Assert.IsTrue(
+                at.DefaultGrantSet.PermissionSet.IsEmpty(),
+                "DefaultGrantSet.PermissionSet.IsEmpty"
+            );
+            Assert.IsFalse(
+                at.DefaultGrantSet.PermissionSet.IsUnrestricted(),
+                "DefaultGrantSet.PermissionSet.IsUnrestricted"
+            );
+            Assert.IsNull(at.ExtraInfo, "ExtraInfo");
+            Assert.IsFalse(at.IsApplicationTrustedToRun, "IsApplicationTrustedToRun");
+            Assert.IsFalse(at.Persist, "Persist");
+        }
+    }
 }
-

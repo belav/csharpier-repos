@@ -13,14 +13,17 @@ namespace System.Web.Razor.Parser
 {
     internal class ConditionalAttributeCollapser : MarkupRewriter
     {
-        public ConditionalAttributeCollapser(Action<SpanBuilder, SourceLocation, string> markupSpanFactory) : base(markupSpanFactory)
-        {
-        }
+        public ConditionalAttributeCollapser(
+            Action<SpanBuilder, SourceLocation, string> markupSpanFactory
+        )
+            : base(markupSpanFactory) { }
 
         protected override bool CanRewrite(Block block)
         {
             AttributeBlockCodeGenerator gen = block.CodeGenerator as AttributeBlockCodeGenerator;
-            return gen != null && block.Children.Any() && block.Children.All(IsLiteralAttributeValue);
+            return gen != null
+                && block.Children.Any()
+                && block.Children.All(IsLiteralAttributeValue);
         }
 
         protected override SyntaxTreeNode RewriteBlock(BlockBuilder parent, Block block)
@@ -44,12 +47,15 @@ namespace System.Web.Razor.Parser
             Span span = node as Span;
             Debug.Assert(span != null);
 
-            LiteralAttributeCodeGenerator litGen = span.CodeGenerator as LiteralAttributeCodeGenerator;
+            LiteralAttributeCodeGenerator litGen =
+                span.CodeGenerator as LiteralAttributeCodeGenerator;
 
-            return span != null &&
-                   ((litGen != null && litGen.ValueGenerator == null) ||
-                    span.CodeGenerator == SpanCodeGenerator.Null ||
-                    span.CodeGenerator is MarkupCodeGenerator);
+            return span != null
+                && (
+                    (litGen != null && litGen.ValueGenerator == null)
+                    || span.CodeGenerator == SpanCodeGenerator.Null
+                    || span.CodeGenerator is MarkupCodeGenerator
+                );
         }
     }
 }

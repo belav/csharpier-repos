@@ -11,9 +11,20 @@ namespace Microsoft.AspNetCore.Http;
 internal sealed class DefaultConnectionInfo : ConnectionInfo
 {
     // Lambdas hoisted to static readonly fields to improve inlining https://github.com/dotnet/roslyn/issues/13624
-    private static readonly Func<IFeatureCollection, IHttpConnectionFeature> _newHttpConnectionFeature = f => new HttpConnectionFeature();
-    private static readonly Func<IFeatureCollection, ITlsConnectionFeature> _newTlsConnectionFeature = f => new TlsConnectionFeature();
-    private static readonly Func<IFeatureCollection, IConnectionLifetimeNotificationFeature> _newConnectionLifetime = f => new DefaultConnectionLifetimeNotificationFeature(f.Get<IHttpResponseFeature>());
+    private static readonly Func<
+        IFeatureCollection,
+        IHttpConnectionFeature
+    > _newHttpConnectionFeature = f => new HttpConnectionFeature();
+    private static readonly Func<
+        IFeatureCollection,
+        ITlsConnectionFeature
+    > _newTlsConnectionFeature = f => new TlsConnectionFeature();
+    private static readonly Func<
+        IFeatureCollection,
+        IConnectionLifetimeNotificationFeature
+    > _newConnectionLifetime = f => new DefaultConnectionLifetimeNotificationFeature(
+        f.Get<IHttpResponseFeature>()
+    );
 
     private FeatureReferences<FeatureInterfaces> _features;
 
@@ -83,7 +94,9 @@ internal sealed class DefaultConnectionInfo : ConnectionInfo
         set { TlsConnectionFeature.ClientCertificate = value; }
     }
 
-    public override Task<X509Certificate2?> GetClientCertificateAsync(CancellationToken cancellationToken = default)
+    public override Task<X509Certificate2?> GetClientCertificateAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         return TlsConnectionFeature.GetClientCertificateAsync(cancellationToken);
     }

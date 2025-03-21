@@ -11,11 +11,18 @@ public class LinkExternalLogin : DefaultUIPage
     private readonly IHtmlFormElement _linkLoginForm;
     private readonly IHtmlElement _linkLoginButton;
 
-    public LinkExternalLogin(HttpClient client, IHtmlDocument externalLoginsDocument, DefaultUIContext context)
+    public LinkExternalLogin(
+        HttpClient client,
+        IHtmlDocument externalLoginsDocument,
+        DefaultUIContext context
+    )
         : base(client, externalLoginsDocument, context)
     {
         _linkLoginForm = HtmlAssert.HasForm($"#link-login-form", externalLoginsDocument);
-        _linkLoginButton = HtmlAssert.HasElement($"#link-login-button-Contoso", externalLoginsDocument);
+        _linkLoginButton = HtmlAssert.HasElement(
+            $"#link-login-button-Contoso",
+            externalLoginsDocument
+        );
     }
 
     public async Task<ManageExternalLogin> LinkExternalLoginAsync(string loginEmail)

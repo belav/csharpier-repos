@@ -3,7 +3,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -30,67 +30,62 @@ using System.Runtime.Serialization;
 using System.Security.Permissions;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.BuildEngine {
-	[Serializable]
-	public sealed class InternalLoggerException : Exception {
-		
-		BuildEventArgs	buildEventArgs;
-		string		errorCode;
-		string		helpKeyword;
-		
-		public InternalLoggerException ()
-		{
-			throw new System.InvalidOperationException (
-				"An InternalLoggerException can only be thrown by the MSBuild engine. " +
-				"The public constructors of this class cannot be used to create an " +
-				"instance of the exception.");
-		}
+namespace Microsoft.Build.BuildEngine
+{
+    [Serializable]
+    public sealed class InternalLoggerException : Exception
+    {
+        BuildEventArgs buildEventArgs;
+        string errorCode;
+        string helpKeyword;
 
-		public InternalLoggerException (string message)
-			: this ()
-		{
-		}
+        public InternalLoggerException()
+        {
+            throw new System.InvalidOperationException(
+                "An InternalLoggerException can only be thrown by the MSBuild engine. "
+                    + "The public constructors of this class cannot be used to create an "
+                    + "instance of the exception."
+            );
+        }
 
-		public InternalLoggerException (string message,	Exception innerException)
-			: this ()
-		{
-		}
+        public InternalLoggerException(string message)
+            : this() { }
 
-		// FIXME: I made it private temporarily, later we can change it to internal (but not protected)
-		private InternalLoggerException (SerializationInfo info, StreamingContext context)
-			: base (info, context)
-		{
-			buildEventArgs = (BuildEventArgs) info.GetValue ("BuildEventArgs", typeof (BuildEventArgs));
-			errorCode = info.GetString ("ErrorCode");
-			helpKeyword = info.GetString ("HelpKeywordPrefix");
-		}
+        public InternalLoggerException(string message, Exception innerException)
+            : this() { }
 
-		[SecurityPermission (SecurityAction.LinkDemand, SerializationFormatter = true)]
-		public override void GetObjectData (SerializationInfo info,
-						    StreamingContext context)
-		{
-			base.GetObjectData (info, context);
-			info.AddValue ("BuildEventArgs", buildEventArgs);
-			info.AddValue ("ErrorCode", errorCode);
-			info.AddValue ("HelpKeywordPrefix", helpKeyword);
-		}
+        // FIXME: I made it private temporarily, later we can change it to internal (but not protected)
+        private InternalLoggerException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
+        {
+            buildEventArgs = (BuildEventArgs)
+                info.GetValue("BuildEventArgs", typeof(BuildEventArgs));
+            errorCode = info.GetString("ErrorCode");
+            helpKeyword = info.GetString("HelpKeywordPrefix");
+        }
 
-		public BuildEventArgs BuildEventArgs {
-			get {
-				return buildEventArgs;
-			}
-		}
+        [SecurityPermission(SecurityAction.LinkDemand, SerializationFormatter = true)]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            base.GetObjectData(info, context);
+            info.AddValue("BuildEventArgs", buildEventArgs);
+            info.AddValue("ErrorCode", errorCode);
+            info.AddValue("HelpKeywordPrefix", helpKeyword);
+        }
 
-		public string ErrorCode {
-			get {
-				return errorCode;
-			}
-		}
+        public BuildEventArgs BuildEventArgs
+        {
+            get { return buildEventArgs; }
+        }
 
-		public string HelpKeyword {
-			get {
-				return helpKeyword;
-			}
-		}
-	}
+        public string ErrorCode
+        {
+            get { return errorCode; }
+        }
+
+        public string HelpKeyword
+        {
+            get { return helpKeyword; }
+        }
+    }
 }

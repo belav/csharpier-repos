@@ -7,5 +7,6 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     internal readonly record struct RazorIndentationOptions(
         bool UseTabs,
         int TabSize,
-        int IndentationSize);
+        int IndentationSize
+    );
 }

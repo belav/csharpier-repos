@@ -12,10 +12,8 @@ namespace Microsoft.Win32.SafeHandles
     {
         private SafeHandle? _parent;
 
-        public SafeBioHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeBioHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -48,7 +46,10 @@ namespace Microsoft.Win32.SafeHandles
         internal void TransferOwnershipToParent(SafeHandle parent)
         {
             Debug.Assert(_parent == null, "Expected no existing parent");
-            Debug.Assert(parent != null && !parent.IsInvalid, "Expected new parent to be non-null and valid");
+            Debug.Assert(
+                parent != null && !parent.IsInvalid,
+                "Expected new parent to be non-null and valid"
+            );
 
             bool addedRef = false;
             parent.DangerousAddRef(ref addedRef);

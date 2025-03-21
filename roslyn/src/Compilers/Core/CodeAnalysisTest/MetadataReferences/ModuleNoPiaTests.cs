@@ -14,9 +14,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void ContainsNoPiaLocalTypes()
         {
-            using (AssemblyMetadata piaMetadata = AssemblyMetadata.CreateFromImage(TestResources.SymbolsTests.NoPia.Pia1),
-                                    metadata1 = AssemblyMetadata.CreateFromImage(TestResources.SymbolsTests.NoPia.LocalTypes1),
-                                    metadata2 = AssemblyMetadata.CreateFromImage(TestResources.SymbolsTests.NoPia.LocalTypes2))
+            using (
+                AssemblyMetadata piaMetadata = AssemblyMetadata.CreateFromImage(
+                        TestResources.SymbolsTests.NoPia.Pia1
+                    ),
+                    metadata1 = AssemblyMetadata.CreateFromImage(
+                        TestResources.SymbolsTests.NoPia.LocalTypes1
+                    ),
+                    metadata2 = AssemblyMetadata.CreateFromImage(
+                        TestResources.SymbolsTests.NoPia.LocalTypes2
+                    )
+            )
             {
                 var pia1 = piaMetadata.GetAssembly().Modules[0];
                 var localTypes1 = metadata1.GetAssembly().Modules[0];

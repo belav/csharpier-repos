@@ -9,12 +9,12 @@ namespace System.DirectoryServices.ActiveDirectory
         NamingRole = 1,
         PdcRole = 2,
         RidRole = 3,
-        InfrastructureRole = 4
+        InfrastructureRole = 4,
     }
 
     public enum AdamRole : int
     {
         SchemaRole = 0,
-        NamingRole = 1
+        NamingRole = 1,
     }
 }

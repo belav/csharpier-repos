@@ -5,10 +5,10 @@
 #nullable disable
 
 using System;
-using System.IO;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
+using System.IO;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.ComTypes;
 using STATSTG = System.Runtime.InteropServices.ComTypes.STATSTG;
 
 namespace Microsoft.DiaSymReader
@@ -90,7 +90,7 @@ namespace Microsoft.DiaSymReader
                 else
                 {
                     // The caller seeked behind the end of the stream and didn't write there.
-                    // The allocated array is not big in practice. 
+                    // The allocated array is not big in practice.
                     chunk = new byte[remainingBytes];
                     bytesToCopy = remainingBytes;
                 }
@@ -100,6 +100,7 @@ namespace Microsoft.DiaSymReader
                 remainingBytes -= bytesToCopy;
             }
         }
+
         private static unsafe void ZeroMemory(byte* dest, int count)
         {
             var p = dest;
@@ -118,7 +119,10 @@ namespace Microsoft.DiaSymReader
 
             while (true)
             {
-                int bytesToCopy = Math.Min(_length - _position, Math.Min(cb, _chunkSize - chunkOffset));
+                int bytesToCopy = Math.Min(
+                    _length - _position,
+                    Math.Min(cb, _chunkSize - chunkOffset)
+                );
                 if (bytesToCopy == 0)
                 {
                     break;
@@ -126,7 +130,12 @@ namespace Microsoft.DiaSymReader
 
                 if (chunkIndex < _chunks.Count)
                 {
-                    Marshal.Copy(_chunks[chunkIndex], chunkOffset, (IntPtr)(pv + destinationIndex), bytesToCopy);
+                    Marshal.Copy(
+                        _chunks[chunkIndex],
+                        chunkOffset,
+                        (IntPtr)(pv + destinationIndex),
+                        bytesToCopy
+                    );
                 }
                 else
                 {
@@ -183,7 +192,10 @@ namespace Microsoft.DiaSymReader
                     break;
 
                 default:
-                    throw new ArgumentException($"{nameof(origin)} ({origin}) is invalid.", nameof(origin));
+                    throw new ArgumentException(
+                        $"{nameof(origin)} ({origin}) is invalid.",
+                        nameof(origin)
+                    );
             }
 
             if (plibNewPosition != null)
@@ -199,10 +211,7 @@ namespace Microsoft.DiaSymReader
 
         void IUnsafeComStream.Stat(out STATSTG pstatstg, int grfStatFlag)
         {
-            pstatstg = new STATSTG()
-            {
-                cbSize = _length
-            };
+            pstatstg = new STATSTG() { cbSize = _length };
         }
 
         unsafe void IUnsafeComStream.Write(byte* pv, int cb, int* pcbWritten)
@@ -223,7 +232,12 @@ namespace Microsoft.DiaSymReader
                     _chunks.Add(new byte[_chunkSize]);
                 }
 
-                Marshal.Copy((IntPtr)(pv + bytesWritten), _chunks[chunkIndex], chunkOffset, bytesToCopy);
+                Marshal.Copy(
+                    (IntPtr)(pv + bytesWritten),
+                    _chunks[chunkIndex],
+                    chunkOffset,
+                    bytesToCopy
+                );
                 bytesWritten += bytesToCopy;
                 cb -= bytesToCopy;
                 chunkIndex++;
@@ -238,9 +252,7 @@ namespace Microsoft.DiaSymReader
             }
         }
 
-        void IUnsafeComStream.Commit(int grfCommitFlags)
-        {
-        }
+        void IUnsafeComStream.Commit(int grfCommitFlags) { }
 
         void IUnsafeComStream.Clone(out IStream ppstm)
         {
@@ -268,4 +280,3 @@ namespace Microsoft.DiaSymReader
         }
     }
 }
-

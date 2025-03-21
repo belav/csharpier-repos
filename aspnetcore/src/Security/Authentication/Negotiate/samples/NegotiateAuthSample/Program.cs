@@ -16,7 +16,13 @@ public class Program
         Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
-                if (string.Equals("HttpSys", webBuilder.GetSetting("server"), StringComparison.OrdinalIgnoreCase))
+                if (
+                    string.Equals(
+                        "HttpSys",
+                        webBuilder.GetSetting("server"),
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     webBuilder.UseHttpSys(options =>
                     {

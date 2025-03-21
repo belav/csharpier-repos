@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using Xunit;
-
 using static System.Buffers.Binary.BinaryPrimitives;
 
 namespace System.Buffers.Binary.Tests
@@ -398,30 +397,71 @@ namespace System.Buffers.Binary.Tests
             readSbyte = MemoryMarshal.Read<sbyte>(span);
             Assert.Equal<sbyte>(sbyteValue, readSbyte);
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Write<short>(_span, in shortValue));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Write<short>(_span, in shortValue)
+            );
             Assert.False(MemoryMarshal.TryWrite<short>(span, in shortValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Write<int>(_span, in intValue));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Write<int>(_span, in intValue)
+            );
             Assert.False(MemoryMarshal.TryWrite<int>(span, in intValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Write<long>(_span, in longValue));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Write<long>(_span, in longValue)
+            );
             Assert.False(MemoryMarshal.TryWrite<long>(span, in longValue));
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Write<ushort>(_span, in ushortValue));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Write<ushort>(_span, in ushortValue)
+            );
             Assert.False(MemoryMarshal.TryWrite<ushort>(span, in ushortValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Write<uint>(_span, in uintValue));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Write<uint>(_span, in uintValue)
+            );
             Assert.False(MemoryMarshal.TryWrite<uint>(span, in uintValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Write<ulong>(_span, in ulongValue));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Write<ulong>(_span, in ulongValue)
+            );
             Assert.False(MemoryMarshal.TryWrite<ulong>(span, in ulongValue));
 
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Write<Half>(_span, in halfValue));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Write<Half>(_span, in halfValue)
+            );
             Assert.False(MemoryMarshal.TryWrite<Half>(span, in halfValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Write<float>(_span, in floatValue));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Write<float>(_span, in floatValue)
+            );
             Assert.False(MemoryMarshal.TryWrite<float>(span, in floatValue));
-            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(span, (_span) => MemoryMarshal.Write<double>(_span, in doubleValue));
+            TestHelpers.AssertThrows<ArgumentOutOfRangeException, byte>(
+                span,
+                (_span) => MemoryMarshal.Write<double>(_span, in doubleValue)
+            );
             Assert.False(MemoryMarshal.TryWrite<double>(span, in doubleValue));
 
             var structValue = new TestHelpers.TestValueTypeWithReference { I = 1, S = "1" };
-            TestHelpers.AssertThrows<ArgumentException, byte>(span, (_span) => MemoryMarshal.Write<TestHelpers.TestValueTypeWithReference>(_span, in structValue));
-            TestHelpers.AssertThrows<ArgumentException, byte>(span, (_span) => MemoryMarshal.TryWrite<TestHelpers.TestValueTypeWithReference>(_span, in structValue));
+            TestHelpers.AssertThrows<ArgumentException, byte>(
+                span,
+                (_span) =>
+                    MemoryMarshal.Write<TestHelpers.TestValueTypeWithReference>(
+                        _span,
+                        in structValue
+                    )
+            );
+            TestHelpers.AssertThrows<ArgumentException, byte>(
+                span,
+                (_span) =>
+                    MemoryMarshal.TryWrite<TestHelpers.TestValueTypeWithReference>(
+                        _span,
+                        in structValue
+                    )
+            );
         }
     }
 }

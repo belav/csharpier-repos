@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>LadiPro</OWNER>
@@ -23,10 +23,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     {
         [Pure]
         T GetAt(uint index);
+
         [Pure]
         uint Size { get; }
+
         [Pure]
-        IReadOnlyList<T> GetView();  // Really an IVectorView<T>.
+        IReadOnlyList<T> GetView(); // Really an IVectorView<T>.
+
         [Pure]
         bool IndexOf(T value, out uint index);
         void SetAt(uint index, T value);
@@ -35,6 +38,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         void Append(T value);
         void RemoveAtEnd();
         void Clear();
+
         [Pure]
         uint GetMany(uint startIndex, [Out] T[] items);
         void ReplaceAll(T[] items);
@@ -48,10 +52,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     {
         [Pure]
         T GetAt(uint index);
+
         [Pure]
         uint Size { get; }
+
         [Pure]
         IVectorView<T> GetView();
+
         [Pure]
         bool IndexOf(T value, out uint index);
         void SetAt(uint index, T value);
@@ -60,6 +67,7 @@ namespace System.Runtime.InteropServices.WindowsRuntime
         void Append(T value);
         void RemoveAtEnd();
         void Clear();
+
         [Pure]
         uint GetMany(uint startIndex, [Out] T[] items);
         void ReplaceAll(T[] items);
@@ -72,10 +80,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     {
         [Pure]
         T GetAt(uint index);
+
         [Pure]
         uint Size { get; }
+
         [Pure]
         bool IndexOf(T value, out uint index);
+
         [Pure]
         uint GetMany(uint startIndex, [Out] T[] items);
     }
@@ -87,10 +98,13 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     {
         [Pure]
         object GetAt(uint index);
+
         [Pure]
         uint Size { get; }
+
         [Pure]
         IBindableVectorView GetView();
+
         [Pure]
         bool IndexOf(object value, out uint index);
         void SetAt(uint index, object value);
@@ -108,8 +122,10 @@ namespace System.Runtime.InteropServices.WindowsRuntime
     {
         [Pure]
         object GetAt(uint index);
+
         [Pure]
         uint Size { get; }
+
         [Pure]
         bool IndexOf(object value, out uint index);
     }

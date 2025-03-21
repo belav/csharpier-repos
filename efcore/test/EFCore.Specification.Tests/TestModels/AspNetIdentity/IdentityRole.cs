@@ -6,9 +6,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 public class IdentityRole<TKey>
     where TKey : IEquatable<TKey>
 {
-    public IdentityRole()
-    {
-    }
+    public IdentityRole() { }
 
     public IdentityRole(string roleName)
         : this()
@@ -24,8 +22,7 @@ public class IdentityRole<TKey>
 
     public virtual string ConcurrencyStamp { get; set; } = Guid.NewGuid().ToString();
 
-    public override string ToString()
-        => Name;
+    public override string ToString() => Name;
 }
 
 public class IdentityRole : IdentityRole<string>

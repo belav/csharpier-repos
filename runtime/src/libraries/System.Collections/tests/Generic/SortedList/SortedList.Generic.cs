@@ -28,6 +28,7 @@ namespace System.Collections.Tests
     public class SortedList_Generic_Tests_int_int : SortedList_Generic_Tests<int, int>
     {
         protected override bool DefaultValueAllowed => true;
+
         protected override KeyValuePair<int, int> CreateT(int seed)
         {
             Random rand = new Random(seed);
@@ -44,12 +45,16 @@ namespace System.Collections.Tests
     }
 
     [OuterLoop]
-    public class SortedList_Generic_Tests_EquatableBackwardsOrder_int : SortedList_Generic_Tests<EquatableBackwardsOrder, int>
+    public class SortedList_Generic_Tests_EquatableBackwardsOrder_int
+        : SortedList_Generic_Tests<EquatableBackwardsOrder, int>
     {
         protected override KeyValuePair<EquatableBackwardsOrder, int> CreateT(int seed)
         {
             Random rand = new Random(seed);
-            return new KeyValuePair<EquatableBackwardsOrder, int>(new EquatableBackwardsOrder(rand.Next()), rand.Next());
+            return new KeyValuePair<EquatableBackwardsOrder, int>(
+                new EquatableBackwardsOrder(rand.Next()),
+                rand.Next()
+            );
         }
 
         protected override EquatableBackwardsOrder CreateTKey(int seed)

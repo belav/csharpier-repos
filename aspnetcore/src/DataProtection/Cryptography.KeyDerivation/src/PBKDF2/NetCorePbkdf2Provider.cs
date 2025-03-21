@@ -14,7 +14,13 @@ namespace Microsoft.AspNetCore.Cryptography.KeyDerivation.PBKDF2;
 /// </summary>
 internal sealed class NetCorePbkdf2Provider : IPbkdf2Provider
 {
-    public byte[] DeriveKey(string password, byte[] salt, KeyDerivationPrf prf, int iterationCount, int numBytesRequested)
+    public byte[] DeriveKey(
+        string password,
+        byte[] salt,
+        KeyDerivationPrf prf,
+        int iterationCount,
+        int numBytesRequested
+    )
     {
         Debug.Assert(password != null);
         Debug.Assert(salt != null);
@@ -37,7 +43,13 @@ internal sealed class NetCorePbkdf2Provider : IPbkdf2Provider
                 throw new ArgumentOutOfRangeException(nameof(prf));
         }
 
-        return Rfc2898DeriveBytes.Pbkdf2(password, salt, iterationCount, algorithmName, numBytesRequested);
+        return Rfc2898DeriveBytes.Pbkdf2(
+            password,
+            salt,
+            iterationCount,
+            algorithmName,
+            numBytesRequested
+        );
     }
 }
 #endif

@@ -11,11 +11,7 @@ namespace RazorPagesClassLibrary;
 /// </summary>
 public class ClassLibraryStartup
 {
-    public void ConfigureServices(IServiceCollection services)
-    {
-    }
+    public void ConfigureServices(IServiceCollection services) { }
 
-    public void Configure(IApplicationBuilder app)
-    {
-    }
+    public void Configure(IApplicationBuilder app) { }
 }

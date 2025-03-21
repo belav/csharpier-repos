@@ -12,11 +12,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class ElseKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public ElseKeywordRecommender()
-            : base(SyntaxKind.ElseKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.ElseKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             if (context.IsPreProcessorKeywordContext)
             {

@@ -5,9 +5,9 @@
 // InlineIL.Fody to compile. It is not used as anything but a reference of that
 // IL file.
 
-using InlineIL;
 using System;
 using System.Runtime.CompilerServices;
+using InlineIL;
 
 public class Runtime_70607
 {

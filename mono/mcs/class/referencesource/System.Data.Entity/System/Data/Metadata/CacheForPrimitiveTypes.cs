@@ -10,23 +10,23 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.Data.EntityModel;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Text;
-using System.Xml.Serialization;
 using System.Xml;
 using System.Xml.Schema;
-using System.IO;
-using System.Data.Common;
-using System.Globalization;
+using System.Xml.Serialization;
 
 namespace System.Data.Metadata.Edm
 {
     internal class CacheForPrimitiveTypes
     {
         #region Fields
-        // The primitive type kind is a list of enum which the EDM model 
-        // Every specific instantiation of the model should map their 
+        // The primitive type kind is a list of enum which the EDM model
+        // Every specific instantiation of the model should map their
         // primitive types to the edm primitive types.
 
         // In this class, primitive type is to be cached
@@ -35,7 +35,9 @@ namespace System.Data.Metadata.Edm
         // Value for the cache: List<PrimitiveType>.  A list is used because there an be multiple types mapping to the
         // same primitive type kind.  For example, sqlserver has multiple string types.
 
-        private List<PrimitiveType>[] _primitiveTypeMap = new List<PrimitiveType>[EdmConstants.NumPrimitiveTypes];
+        private List<PrimitiveType>[] _primitiveTypeMap = new List<PrimitiveType>[
+            EdmConstants.NumPrimitiveTypes
+        ];
         #endregion
 
         #region Methods
@@ -46,7 +48,11 @@ namespace System.Data.Metadata.Edm
         internal void Add(PrimitiveType type)
         {
             // Get to the list
-            List<PrimitiveType> primitiveTypes = EntityUtil.CheckArgumentOutOfRange(_primitiveTypeMap, (int)type.PrimitiveTypeKind, "primitiveTypeKind");
+            List<PrimitiveType> primitiveTypes = EntityUtil.CheckArgumentOutOfRange(
+                _primitiveTypeMap,
+                (int)type.PrimitiveTypeKind,
+                "primitiveTypeKind"
+            );
 
             // If there isn't a list for the given model type, create one and add it
             if (primitiveTypes == null)
@@ -68,12 +74,20 @@ namespace System.Data.Metadata.Edm
         /// <param name="facets">The facets to use in picking the primitive type</param>
         /// <param name="type">The resulting type</param>
         /// <returns>Whether a type was retrieved or not</returns>
-        internal bool TryGetType(PrimitiveTypeKind primitiveTypeKind, IEnumerable<Facet> facets, out PrimitiveType type)
+        internal bool TryGetType(
+            PrimitiveTypeKind primitiveTypeKind,
+            IEnumerable<Facet> facets,
+            out PrimitiveType type
+        )
         {
             type = null;
 
             // Now, see if we have any types for this model type, if so, loop through to find the best matching one
-            List<PrimitiveType> primitiveTypes = EntityUtil.CheckArgumentOutOfRange(_primitiveTypeMap, (int)primitiveTypeKind, "primitiveTypeKind");
+            List<PrimitiveType> primitiveTypes = EntityUtil.CheckArgumentOutOfRange(
+                _primitiveTypeMap,
+                (int)primitiveTypeKind,
+                "primitiveTypeKind"
+            );
             if ((null != primitiveTypes) && (0 < primitiveTypes.Count))
             {
                 if (primitiveTypes.Count == 1)
@@ -84,7 +98,8 @@ namespace System.Data.Metadata.Edm
 
                 if (facets == null)
                 {
-                    FacetDescription[] facetDescriptions = EdmProviderManifest.GetInitialFacetDescriptions(primitiveTypeKind);
+                    FacetDescription[] facetDescriptions =
+                        EdmProviderManifest.GetInitialFacetDescriptions(primitiveTypeKind);
                     if (facetDescriptions == null)
                     {
                         type = primitiveTypes[0];
@@ -101,11 +116,15 @@ namespace System.Data.Metadata.Edm
                 // Create a dictionary of facets for easy lookup
                 foreach (Facet facet in facets)
                 {
-                    if ((primitiveTypeKind == PrimitiveTypeKind.String ||
-                         primitiveTypeKind == PrimitiveTypeKind.Binary) &&
-                        facet.Value != null &&
-                        facet.Name == EdmProviderManifest.MaxLengthFacetName &&
-                        Helper.IsUnboundedFacetValue(facet))
+                    if (
+                        (
+                            primitiveTypeKind == PrimitiveTypeKind.String
+                            || primitiveTypeKind == PrimitiveTypeKind.Binary
+                        )
+                        && facet.Value != null
+                        && facet.Name == EdmProviderManifest.MaxLengthFacetName
+                        && Helper.IsUnboundedFacetValue(facet)
+                    )
                     {
                         // MaxLength has the sentinel value. So this facet need not be added.
                         isMaxLengthSentinel = true;
@@ -122,11 +141,21 @@ namespace System.Data.Metadata.Edm
                         if (type == null)
                         {
                             type = primitiveType;
-                            maxLength = Helper.GetFacet(primitiveType.FacetDescriptions, EdmProviderManifest.MaxLengthFacetName).MaxValue.Value;
+                            maxLength = Helper
+                                .GetFacet(
+                                    primitiveType.FacetDescriptions,
+                                    EdmProviderManifest.MaxLengthFacetName
+                                )
+                                .MaxValue.Value;
                         }
                         else
                         {
-                            int newMaxLength = Helper.GetFacet(primitiveType.FacetDescriptions, EdmProviderManifest.MaxLengthFacetName).MaxValue.Value;
+                            int newMaxLength = Helper
+                                .GetFacet(
+                                    primitiveType.FacetDescriptions,
+                                    EdmProviderManifest.MaxLengthFacetName
+                                )
+                                .MaxValue.Value;
                             if (newMaxLength > maxLength)
                             {
                                 type = primitiveType;
@@ -159,23 +188,38 @@ namespace System.Data.Metadata.Edm
                 switch (facetDescriptions[i].FacetName)
                 {
                     case DbProviderManifest.MaxLengthFacetName:
-                        facets[i] = Facet.Create(facetDescriptions[i], TypeUsage.DefaultMaxLengthFacetValue);
+                        facets[i] = Facet.Create(
+                            facetDescriptions[i],
+                            TypeUsage.DefaultMaxLengthFacetValue
+                        );
                         break;
 
                     case DbProviderManifest.UnicodeFacetName:
-                        facets[i] = Facet.Create(facetDescriptions[i], TypeUsage.DefaultUnicodeFacetValue);
+                        facets[i] = Facet.Create(
+                            facetDescriptions[i],
+                            TypeUsage.DefaultUnicodeFacetValue
+                        );
                         break;
 
                     case DbProviderManifest.FixedLengthFacetName:
-                        facets[i] = Facet.Create(facetDescriptions[i], TypeUsage.DefaultFixedLengthFacetValue);
+                        facets[i] = Facet.Create(
+                            facetDescriptions[i],
+                            TypeUsage.DefaultFixedLengthFacetValue
+                        );
                         break;
 
                     case DbProviderManifest.PrecisionFacetName:
-                        facets[i] = Facet.Create(facetDescriptions[i], TypeUsage.DefaultPrecisionFacetValue);
+                        facets[i] = Facet.Create(
+                            facetDescriptions[i],
+                            TypeUsage.DefaultPrecisionFacetValue
+                        );
                         break;
 
                     case DbProviderManifest.ScaleFacetName:
-                        facets[i] = Facet.Create(facetDescriptions[i], TypeUsage.DefaultScaleFacetValue);
+                        facets[i] = Facet.Create(
+                            facetDescriptions[i],
+                            TypeUsage.DefaultScaleFacetValue
+                        );
                         break;
 
                     default:

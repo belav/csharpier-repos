@@ -4,7 +4,6 @@
 using System;
 using Xunit;
 
-
 delegate int Del(object p);
 
 abstract class Base
@@ -35,11 +34,11 @@ class Top : Middle
 public class Test_LdVirtFtnOnAbstractMethod
 {
     [Fact]
-    public static int TestEntryPoint() 
+    public static int TestEntryPoint()
     {
         var del1 = new Top().TestA<object>();
         var del2 = new Top().TestB<object>();
-        
+
         var x = del1(null);
         var y = del2(null);
         Console.WriteLine(x);

@@ -15,17 +15,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
 {
     public static class ClassificationTestHelper
     {
-        private static string GetText(FormattedClassification formattedClassification)
-            => $"({formattedClassification.Text}, {formattedClassification.ClassificationName})";
+        private static string GetText(FormattedClassification formattedClassification) =>
+            $"({formattedClassification.Text}, {formattedClassification.ClassificationName})";
 
-        private static string GetText(ClassifiedSpan tuple)
-            => $"({tuple.TextSpan}, {tuple.ClassificationType})";
+        private static string GetText(ClassifiedSpan tuple) =>
+            $"({tuple.TextSpan}, {tuple.ClassificationType})";
 
         public static void VerifyTextAndClassifications(
             string expectedText,
             IEnumerable<FormattedClassification> expectedClassifications,
             string actualText,
-            IEnumerable<ClassifiedSpan> actualClassifications)
+            IEnumerable<ClassifiedSpan> actualClassifications
+        )
         {
             Assert.Equal(expectedText, actualText);
 
@@ -36,16 +37,25 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
 
                 actualClassificationList.Sort((t1, t2) => t1.TextSpan.Start - t2.TextSpan.Start);
 
-                var max = Math.Max(expectedClassificationList.Count, actualClassificationList.Count);
+                var max = Math.Max(
+                    expectedClassificationList.Count,
+                    actualClassificationList.Count
+                );
                 for (var i = 0; i < max; i++)
                 {
                     if (i >= expectedClassificationList.Count)
                     {
-                        AssertEx.Fail("Unexpected actual classification: {0}", GetText(actualClassificationList[i]));
+                        AssertEx.Fail(
+                            "Unexpected actual classification: {0}",
+                            GetText(actualClassificationList[i])
+                        );
                     }
                     else if (i >= actualClassificationList.Count)
                     {
-                        AssertEx.Fail("Missing classification for: {0}", GetText(expectedClassificationList[i]));
+                        AssertEx.Fail(
+                            "Missing classification for: {0}",
+                            GetText(expectedClassificationList[i])
+                        );
                     }
 
                     var actual = actualClassificationList[i];
@@ -61,13 +71,15 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
         public static void VerifyTextAndClassifications(
             string expectedText,
             IEnumerable<FormattedClassification> expectedClassifications,
-            IList<TaggedText> actualContent)
+            IList<TaggedText> actualContent
+        )
         {
             VerifyTextAndClassifications(
                 expectedText,
                 expectedClassifications,
                 actualText: actualContent.GetFullText(),
-                actualClassifications: actualContent.ToClassifiedSpans());
+                actualClassifications: actualContent.ToClassifiedSpans()
+            );
         }
     }
 }

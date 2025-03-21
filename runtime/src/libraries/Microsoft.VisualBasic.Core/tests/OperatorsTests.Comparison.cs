@@ -900,9 +900,30 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { new char[] { '8' }, "8", false, true, false };
             yield return new object[] { new char[] { '8' }, "9", false, false, true };
             yield return new object[] { new char[] { '8' }, "", true, false, false };
-            yield return new object[] { new char[] { '8' }, new char[] { '7' }, true, false, false };
-            yield return new object[] { new char[] { '8' }, new char[] { '8' }, false, true, false };
-            yield return new object[] { new char[] { '8' }, new char[] { '9' }, false, false, true };
+            yield return new object[]
+            {
+                new char[] { '8' },
+                new char[] { '7' },
+                true,
+                false,
+                false,
+            };
+            yield return new object[]
+            {
+                new char[] { '8' },
+                new char[] { '8' },
+                false,
+                true,
+                false,
+            };
+            yield return new object[]
+            {
+                new char[] { '8' },
+                new char[] { '9' },
+                false,
+                false,
+                true,
+            };
             yield return new object[] { new char[] { '8' }, null, true, false, false };
 
             // chars.
@@ -997,18 +1018,81 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { '8', null, true, false, false };
 
             // DateTime.
-            yield return new object[] { new DateTime(2018, 7, 20), new DateTime(2018, 7, 19), true, false, false };
-            yield return new object[] { new DateTime(2018, 7, 20), new DateTime(2018, 7, 20), false, true, false };
-            yield return new object[] { new DateTime(2018, 7, 20), new DateTime(2018, 7, 11), true, false, false };
-            yield return new object[] { new DateTime(2018, 7, 20), new DateTime(2018, 7, 19).ToString(), true, false, false };
-            yield return new object[] { new DateTime(2018, 7, 20), new DateTime(2018, 7, 20).ToString(), false, true, false };
-            yield return new object[] { new DateTime(2018, 7, 20), new DateTime(2018, 7, 11).ToString(), true, false, false };
+            yield return new object[]
+            {
+                new DateTime(2018, 7, 20),
+                new DateTime(2018, 7, 19),
+                true,
+                false,
+                false,
+            };
+            yield return new object[]
+            {
+                new DateTime(2018, 7, 20),
+                new DateTime(2018, 7, 20),
+                false,
+                true,
+                false,
+            };
+            yield return new object[]
+            {
+                new DateTime(2018, 7, 20),
+                new DateTime(2018, 7, 11),
+                true,
+                false,
+                false,
+            };
+            yield return new object[]
+            {
+                new DateTime(2018, 7, 20),
+                new DateTime(2018, 7, 19).ToString(),
+                true,
+                false,
+                false,
+            };
+            yield return new object[]
+            {
+                new DateTime(2018, 7, 20),
+                new DateTime(2018, 7, 20).ToString(),
+                false,
+                true,
+                false,
+            };
+            yield return new object[]
+            {
+                new DateTime(2018, 7, 20),
+                new DateTime(2018, 7, 11).ToString(),
+                true,
+                false,
+                false,
+            };
             yield return new object[] { new DateTime(2018, 7, 20), null, true, false, false };
 
             // string.
-            yield return new object[] { new DateTime(2018, 7, 20).ToString(), new DateTime(2018, 7, 19), true, false, false };
-            yield return new object[] { new DateTime(2018, 7, 20).ToString(), new DateTime(2018, 7, 20), false, true, false };
-            yield return new object[] { new DateTime(2018, 7, 20).ToString(), new DateTime(2018, 7, 21), false, false, true };
+            yield return new object[]
+            {
+                new DateTime(2018, 7, 20).ToString(),
+                new DateTime(2018, 7, 19),
+                true,
+                false,
+                false,
+            };
+            yield return new object[]
+            {
+                new DateTime(2018, 7, 20).ToString(),
+                new DateTime(2018, 7, 20),
+                false,
+                true,
+                false,
+            };
+            yield return new object[]
+            {
+                new DateTime(2018, 7, 20).ToString(),
+                new DateTime(2018, 7, 21),
+                false,
+                false,
+                true,
+            };
 
             // null.
             yield return new object[] { null, (byte)7, false, false, true };
@@ -1109,36 +1193,63 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(Compare_Primitives_TestData))]
-        public void CompareObjectEqual_Invoke_ReturnsExpected(object left, object right, bool greater, bool equal, bool less)
+        public void CompareObjectEqual_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            bool greater,
+            bool equal,
+            bool less
+        )
         {
             _ = greater;
             _ = less;
-             Assert.Equal(equal, Operators.CompareObjectEqual(left, right, true));
-             Assert.Equal(equal, Operators.CompareObjectEqual(left, right, false));
+            Assert.Equal(equal, Operators.CompareObjectEqual(left, right, true));
+            Assert.Equal(equal, Operators.CompareObjectEqual(left, right, false));
         }
 
         public static IEnumerable<object[]> CompareObjectEqual_OverloadOperator_TestData()
         {
             yield return new object[] { new CompareObjectEqual(), 2, "custom" };
             yield return new object[] { 2, new CompareObjectEqual(), "motsuc" };
-            yield return new object[] { new CompareObjectEqual(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new CompareObjectEqual(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new CompareObjectEqual(),
+                new OperatorsTests(),
+                "customobject",
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new CompareObjectEqual(),
+                "tcejbomotsuc",
+            };
         }
 
         [Theory]
         [MemberData(nameof(CompareObjectEqual_OverloadOperator_TestData))]
-        public void CompareObjectEqual_InvokeOverloadedOperator_ReturnsExpected(object left, object right, object expected)
+        public void CompareObjectEqual_InvokeOverloadedOperator_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        )
         {
-             Assert.Equal(expected, Operators.CompareObjectEqual(left, right, true));
-             Assert.Equal(expected, Operators.CompareObjectEqual(left, right, false));
+            Assert.Equal(expected, Operators.CompareObjectEqual(left, right, true));
+            Assert.Equal(expected, Operators.CompareObjectEqual(left, right, false));
         }
 
         [Theory]
         [MemberData(nameof(Compare_InvalidObjects_TestData))]
-        public void CompareObjectEqual_InvalidObjects_ThrowsInvalidCastException(object left, object right)
+        public void CompareObjectEqual_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectEqual(left, right, true));
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectEqual(right, left, true));
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.CompareObjectEqual(left, right, true)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.CompareObjectEqual(right, left, true)
+            );
         }
 
         public static IEnumerable<object[]> CompareObjectEqual_MismatchingObjects_TestData()
@@ -1151,58 +1262,92 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(CompareObjectEqual_MismatchingObjects_TestData))]
-        public void CompareObjectEqual_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
+        public void CompareObjectEqual_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<AmbiguousMatchException>(() => Operators.CompareObjectEqual(left, right, true));
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Operators.CompareObjectEqual(left, right, true)
+            );
         }
 
         public class CompareObjectEqual
         {
-             [SpecialName]
-             public static string op_Equality(CompareObjectEqual left, int right) => "custom";
+            [SpecialName]
+            public static string op_Equality(CompareObjectEqual left, int right) => "custom";
 
-             [SpecialName]
-             public static string op_Equality(int left, CompareObjectEqual right) => "motsuc";
+            [SpecialName]
+            public static string op_Equality(int left, CompareObjectEqual right) => "motsuc";
 
-             [SpecialName]
-             public static string op_Equality(CompareObjectEqual left, OperatorsTests right) => "customobject";
+            [SpecialName]
+            public static string op_Equality(CompareObjectEqual left, OperatorsTests right) =>
+                "customobject";
 
-             [SpecialName]
-             public static string op_Equality(OperatorsTests left, CompareObjectEqual right) => "tcejbomotsuc";
+            [SpecialName]
+            public static string op_Equality(OperatorsTests left, CompareObjectEqual right) =>
+                "tcejbomotsuc";
         }
 
         [Theory]
         [MemberData(nameof(Compare_Primitives_TestData))]
-        public void CompareObjectGreater_Invoke_ReturnsExpected(object left, object right, bool greater, bool equal, bool less)
+        public void CompareObjectGreater_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            bool greater,
+            bool equal,
+            bool less
+        )
         {
             _ = equal;
             _ = less;
             Assert.Equal(greater, Operators.CompareObjectGreater(left, right, true));
-             Assert.Equal(greater, Operators.CompareObjectGreater(left, right, false));
+            Assert.Equal(greater, Operators.CompareObjectGreater(left, right, false));
         }
 
         public static IEnumerable<object[]> CompareObjectGreater_OverloadOperator_TestData()
         {
             yield return new object[] { new CompareObjectGreater(), 2, "custom" };
             yield return new object[] { 2, new CompareObjectGreater(), "motsuc" };
-            yield return new object[] { new CompareObjectGreater(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new CompareObjectGreater(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new CompareObjectGreater(),
+                new OperatorsTests(),
+                "customobject",
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new CompareObjectGreater(),
+                "tcejbomotsuc",
+            };
         }
 
         [Theory]
         [MemberData(nameof(CompareObjectGreater_OverloadOperator_TestData))]
-        public void CompareObjectGreater_InvokeOverloadedOperator_ReturnsExpected(object left, object right, object expected)
+        public void CompareObjectGreater_InvokeOverloadedOperator_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        )
         {
-             Assert.Equal(expected, Operators.CompareObjectGreater(left, right, true));
-             Assert.Equal(expected, Operators.CompareObjectGreater(left, right, false));
+            Assert.Equal(expected, Operators.CompareObjectGreater(left, right, true));
+            Assert.Equal(expected, Operators.CompareObjectGreater(left, right, false));
         }
 
         [Theory]
         [MemberData(nameof(Compare_InvalidObjects_TestData))]
-        public void CompareObjectGreater_InvalidObjects_ThrowsInvalidCastException(object left, object right)
+        public void CompareObjectGreater_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectGreater(left, right, true));
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectGreater(right, left, true));
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.CompareObjectGreater(left, right, true)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.CompareObjectGreater(right, left, true)
+            );
         }
 
         public static IEnumerable<object[]> CompareObjectGreater_MismatchingObjects_TestData()
@@ -1215,57 +1360,91 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(CompareObjectGreater_MismatchingObjects_TestData))]
-        public void CompareObjectGreater_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
+        public void CompareObjectGreater_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<AmbiguousMatchException>(() => Operators.CompareObjectGreater(left, right, true));
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Operators.CompareObjectGreater(left, right, true)
+            );
         }
 
         public class CompareObjectGreater
         {
-             [SpecialName]
-             public static string op_GreaterThan(CompareObjectGreater left, int right) => "custom";
+            [SpecialName]
+            public static string op_GreaterThan(CompareObjectGreater left, int right) => "custom";
 
-             [SpecialName]
-             public static string op_GreaterThan(int left, CompareObjectGreater right) => "motsuc";
+            [SpecialName]
+            public static string op_GreaterThan(int left, CompareObjectGreater right) => "motsuc";
 
-             [SpecialName]
-             public static string op_GreaterThan(CompareObjectGreater left, OperatorsTests right) => "customobject";
+            [SpecialName]
+            public static string op_GreaterThan(CompareObjectGreater left, OperatorsTests right) =>
+                "customobject";
 
-             [SpecialName]
-             public static string op_GreaterThan(OperatorsTests left, CompareObjectGreater right) => "tcejbomotsuc";
+            [SpecialName]
+            public static string op_GreaterThan(OperatorsTests left, CompareObjectGreater right) =>
+                "tcejbomotsuc";
         }
 
         [Theory]
         [MemberData(nameof(Compare_Primitives_TestData))]
-        public void CompareObjectGreaterEqual_Invoke_ReturnsExpected(object left, object right, bool greater, bool equal, bool less)
+        public void CompareObjectGreaterEqual_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            bool greater,
+            bool equal,
+            bool less
+        )
         {
             _ = less;
             Assert.Equal(greater || equal, Operators.CompareObjectGreaterEqual(left, right, true));
-             Assert.Equal(greater || equal, Operators.CompareObjectGreaterEqual(left, right, false));
+            Assert.Equal(greater || equal, Operators.CompareObjectGreaterEqual(left, right, false));
         }
 
         public static IEnumerable<object[]> CompareObjectGreaterEqual_OverloadOperator_TestData()
         {
             yield return new object[] { new CompareObjectGreaterEqual(), 2, "custom" };
             yield return new object[] { 2, new CompareObjectGreaterEqual(), "motsuc" };
-            yield return new object[] { new CompareObjectGreaterEqual(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new CompareObjectGreaterEqual(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new CompareObjectGreaterEqual(),
+                new OperatorsTests(),
+                "customobject",
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new CompareObjectGreaterEqual(),
+                "tcejbomotsuc",
+            };
         }
 
         [Theory]
         [MemberData(nameof(CompareObjectGreaterEqual_OverloadOperator_TestData))]
-        public void CompareObjectGreaterEqual_InvokeOverloadedOperator_ReturnsExpected(object left, object right, object expected)
+        public void CompareObjectGreaterEqual_InvokeOverloadedOperator_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        )
         {
-             Assert.Equal(expected, Operators.CompareObjectGreaterEqual(left, right, true));
-             Assert.Equal(expected, Operators.CompareObjectGreaterEqual(left, right, false));
+            Assert.Equal(expected, Operators.CompareObjectGreaterEqual(left, right, true));
+            Assert.Equal(expected, Operators.CompareObjectGreaterEqual(left, right, false));
         }
 
         [Theory]
         [MemberData(nameof(Compare_InvalidObjects_TestData))]
-        public void CompareObjectGreaterEqual_InvalidObjects_ThrowsInvalidCastException(object left, object right)
+        public void CompareObjectGreaterEqual_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectGreaterEqual(left, right, true));
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectGreaterEqual(right, left, true));
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.CompareObjectGreaterEqual(left, right, true)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.CompareObjectGreaterEqual(right, left, true)
+            );
         }
 
         public static IEnumerable<object[]> CompareObjectGreaterEqual_MismatchingObjects_TestData()
@@ -1273,63 +1452,105 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { new CompareObjectGreaterEqual(), new object() };
             yield return new object[] { new object(), new CompareObjectGreaterEqual() };
 
-            yield return new object[] { new CompareObjectGreaterEqual(), new CompareObjectGreaterEqual() };
+            yield return new object[]
+            {
+                new CompareObjectGreaterEqual(),
+                new CompareObjectGreaterEqual(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(CompareObjectGreaterEqual_MismatchingObjects_TestData))]
-        public void CompareObjectGreaterEqual_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
+        public void CompareObjectGreaterEqual_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<AmbiguousMatchException>(() => Operators.CompareObjectGreaterEqual(left, right, true));
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Operators.CompareObjectGreaterEqual(left, right, true)
+            );
         }
 
         public class CompareObjectGreaterEqual
         {
-             [SpecialName]
-             public static string op_GreaterThanOrEqual(CompareObjectGreaterEqual left, int right) => "custom";
+            [SpecialName]
+            public static string op_GreaterThanOrEqual(CompareObjectGreaterEqual left, int right) =>
+                "custom";
 
-             [SpecialName]
-             public static string op_GreaterThanOrEqual(int left, CompareObjectGreaterEqual right) => "motsuc";
+            [SpecialName]
+            public static string op_GreaterThanOrEqual(int left, CompareObjectGreaterEqual right) =>
+                "motsuc";
 
-             [SpecialName]
-             public static string op_GreaterThanOrEqual(CompareObjectGreaterEqual left, OperatorsTests right) => "customobject";
+            [SpecialName]
+            public static string op_GreaterThanOrEqual(
+                CompareObjectGreaterEqual left,
+                OperatorsTests right
+            ) => "customobject";
 
-             [SpecialName]
-             public static string op_GreaterThanOrEqual(OperatorsTests left, CompareObjectGreaterEqual right) => "tcejbomotsuc";
+            [SpecialName]
+            public static string op_GreaterThanOrEqual(
+                OperatorsTests left,
+                CompareObjectGreaterEqual right
+            ) => "tcejbomotsuc";
         }
 
         [Theory]
         [MemberData(nameof(Compare_Primitives_TestData))]
-        public void CompareObjectLess_Invoke_ReturnsExpected(object left, object right, bool greater, bool equal, bool less)
+        public void CompareObjectLess_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            bool greater,
+            bool equal,
+            bool less
+        )
         {
             _ = greater;
             _ = equal;
-             Assert.Equal(less, Operators.CompareObjectLess(left, right, true));
-             Assert.Equal(less, Operators.CompareObjectLess(left, right, false));
+            Assert.Equal(less, Operators.CompareObjectLess(left, right, true));
+            Assert.Equal(less, Operators.CompareObjectLess(left, right, false));
         }
 
         public static IEnumerable<object[]> CompareObjectLess_OverloadOperator_TestData()
         {
             yield return new object[] { new CompareObjectLess(), 2, "custom" };
             yield return new object[] { 2, new CompareObjectLess(), "motsuc" };
-            yield return new object[] { new CompareObjectLess(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new CompareObjectLess(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new CompareObjectLess(),
+                new OperatorsTests(),
+                "customobject",
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new CompareObjectLess(),
+                "tcejbomotsuc",
+            };
         }
 
         [Theory]
         [MemberData(nameof(CompareObjectLess_OverloadOperator_TestData))]
-        public void CompareObjectLess_InvokeOverloadedOperator_ReturnsExpected(object left, object right, object expected)
+        public void CompareObjectLess_InvokeOverloadedOperator_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        )
         {
-             Assert.Equal(expected, Operators.CompareObjectLess(left, right, true));
-             Assert.Equal(expected, Operators.CompareObjectLess(left, right, false));
+            Assert.Equal(expected, Operators.CompareObjectLess(left, right, true));
+            Assert.Equal(expected, Operators.CompareObjectLess(left, right, false));
         }
 
         [Theory]
         [MemberData(nameof(Compare_InvalidObjects_TestData))]
-        public void CompareObjectLess_InvalidObjects_ThrowsInvalidCastException(object left, object right)
+        public void CompareObjectLess_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectLess(left, right, true));
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectLess(right, left, true));
+            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectLess(left, right, true)
+            );
+            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectLess(right, left, true)
+            );
         }
 
         public static IEnumerable<object[]> CompareObjectLess_MismatchingObjects_TestData()
@@ -1342,57 +1563,91 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(CompareObjectLess_MismatchingObjects_TestData))]
-        public void CompareObjectLess_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
+        public void CompareObjectLess_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<AmbiguousMatchException>(() => Operators.CompareObjectLess(left, right, true));
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Operators.CompareObjectLess(left, right, true)
+            );
         }
 
         public class CompareObjectLess
         {
-             [SpecialName]
-             public static string op_LessThan(CompareObjectLess left, int right) => "custom";
+            [SpecialName]
+            public static string op_LessThan(CompareObjectLess left, int right) => "custom";
 
-             [SpecialName]
-             public static string op_LessThan(int left, CompareObjectLess right) => "motsuc";
+            [SpecialName]
+            public static string op_LessThan(int left, CompareObjectLess right) => "motsuc";
 
-             [SpecialName]
-             public static string op_LessThan(CompareObjectLess left, OperatorsTests right) => "customobject";
+            [SpecialName]
+            public static string op_LessThan(CompareObjectLess left, OperatorsTests right) =>
+                "customobject";
 
-             [SpecialName]
-             public static string op_LessThan(OperatorsTests left, CompareObjectLess right) => "tcejbomotsuc";
+            [SpecialName]
+            public static string op_LessThan(OperatorsTests left, CompareObjectLess right) =>
+                "tcejbomotsuc";
         }
 
         [Theory]
         [MemberData(nameof(Compare_Primitives_TestData))]
-        public void CompareObjectLessEqual_Invoke_ReturnsExpected(object left, object right, bool greater, bool equal, bool less)
+        public void CompareObjectLessEqual_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            bool greater,
+            bool equal,
+            bool less
+        )
         {
             _ = greater;
             Assert.Equal(less || equal, Operators.CompareObjectLessEqual(left, right, true));
-             Assert.Equal(less || equal, Operators.CompareObjectLessEqual(left, right, false));
+            Assert.Equal(less || equal, Operators.CompareObjectLessEqual(left, right, false));
         }
 
         public static IEnumerable<object[]> CompareObjectLessEqual_OverloadOperator_TestData()
         {
             yield return new object[] { new CompareObjectLessEqual(), 2, "custom" };
             yield return new object[] { 2, new CompareObjectLessEqual(), "motsuc" };
-            yield return new object[] { new CompareObjectLessEqual(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new CompareObjectLessEqual(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new CompareObjectLessEqual(),
+                new OperatorsTests(),
+                "customobject",
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new CompareObjectLessEqual(),
+                "tcejbomotsuc",
+            };
         }
 
         [Theory]
         [MemberData(nameof(CompareObjectLessEqual_OverloadOperator_TestData))]
-        public void CompareObjectLessEqual_InvokeOverloadedOperator_ReturnsExpected(object left, object right, object expected)
+        public void CompareObjectLessEqual_InvokeOverloadedOperator_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        )
         {
-             Assert.Equal(expected, Operators.CompareObjectLessEqual(left, right, true));
-             Assert.Equal(expected, Operators.CompareObjectLessEqual(left, right, false));
+            Assert.Equal(expected, Operators.CompareObjectLessEqual(left, right, true));
+            Assert.Equal(expected, Operators.CompareObjectLessEqual(left, right, false));
         }
 
         [Theory]
         [MemberData(nameof(Compare_InvalidObjects_TestData))]
-        public void CompareObjectLessEqual_InvalidObjects_ThrowsInvalidCastException(object left, object right)
+        public void CompareObjectLessEqual_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectLessEqual(left, right, true));
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectLessEqual(right, left, true));
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.CompareObjectLessEqual(left, right, true)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.CompareObjectLessEqual(right, left, true)
+            );
         }
 
         public static IEnumerable<object[]> CompareObjectLessEqual_MismatchingObjects_TestData()
@@ -1400,63 +1655,107 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { new CompareObjectLessEqual(), new object() };
             yield return new object[] { new object(), new CompareObjectLessEqual() };
 
-            yield return new object[] { new CompareObjectLessEqual(), new CompareObjectLessEqual() };
+            yield return new object[]
+            {
+                new CompareObjectLessEqual(),
+                new CompareObjectLessEqual(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(CompareObjectLessEqual_MismatchingObjects_TestData))]
-        public void CompareObjectLessEqual_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
+        public void CompareObjectLessEqual_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<AmbiguousMatchException>(() => Operators.CompareObjectLessEqual(left, right, true));
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Operators.CompareObjectLessEqual(left, right, true)
+            );
         }
 
         public class CompareObjectLessEqual
         {
-             [SpecialName]
-             public static string op_LessThanOrEqual(CompareObjectLessEqual left, int right) => "custom";
+            [SpecialName]
+            public static string op_LessThanOrEqual(CompareObjectLessEqual left, int right) =>
+                "custom";
 
-             [SpecialName]
-             public static string op_LessThanOrEqual(int left, CompareObjectLessEqual right) => "motsuc";
+            [SpecialName]
+            public static string op_LessThanOrEqual(int left, CompareObjectLessEqual right) =>
+                "motsuc";
 
-             [SpecialName]
-             public static string op_LessThanOrEqual(CompareObjectLessEqual left, OperatorsTests right) => "customobject";
+            [SpecialName]
+            public static string op_LessThanOrEqual(
+                CompareObjectLessEqual left,
+                OperatorsTests right
+            ) => "customobject";
 
-             [SpecialName]
-             public static string op_LessThanOrEqual(OperatorsTests left, CompareObjectLessEqual right) => "tcejbomotsuc";
+            [SpecialName]
+            public static string op_LessThanOrEqual(
+                OperatorsTests left,
+                CompareObjectLessEqual right
+            ) => "tcejbomotsuc";
         }
 
         [Theory]
         [MemberData(nameof(Compare_Primitives_TestData))]
-        public void CompareObjectNotEqual_Invoke_ReturnsExpected(object left, object right, bool greater, bool equal, bool less)
+        public void CompareObjectNotEqual_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            bool greater,
+            bool equal,
+            bool less
+        )
         {
             _ = greater;
             _ = less;
             Assert.Equal(!equal, Operators.CompareObjectNotEqual(left, right, true));
-             Assert.Equal(!equal, Operators.CompareObjectNotEqual(left, right, false));
+            Assert.Equal(!equal, Operators.CompareObjectNotEqual(left, right, false));
         }
 
         public static IEnumerable<object[]> CompareObjectNotEqual_OverloadOperator_TestData()
         {
             yield return new object[] { new CompareObjectNotEqual(), 2, "custom" };
             yield return new object[] { 2, new CompareObjectNotEqual(), "motsuc" };
-            yield return new object[] { new CompareObjectNotEqual(), new OperatorsTests(), "customobject" };
-            yield return new object[] { new OperatorsTests(), new CompareObjectNotEqual(), "tcejbomotsuc" };
+            yield return new object[]
+            {
+                new CompareObjectNotEqual(),
+                new OperatorsTests(),
+                "customobject",
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new CompareObjectNotEqual(),
+                "tcejbomotsuc",
+            };
         }
 
         [Theory]
         [MemberData(nameof(CompareObjectNotEqual_OverloadOperator_TestData))]
-        public void CompareObjectNotEqual_InvokeOverloadedOperator_ReturnsExpected(object left, object right, object expected)
+        public void CompareObjectNotEqual_InvokeOverloadedOperator_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        )
         {
-             Assert.Equal(expected, Operators.CompareObjectNotEqual(left, right, true));
-             Assert.Equal(expected, Operators.CompareObjectNotEqual(left, right, false));
+            Assert.Equal(expected, Operators.CompareObjectNotEqual(left, right, true));
+            Assert.Equal(expected, Operators.CompareObjectNotEqual(left, right, false));
         }
 
         [Theory]
         [MemberData(nameof(Compare_InvalidObjects_TestData))]
-        public void CompareObjectNotEqual_InvalidObjects_ThrowsInvalidCastException(object left, object right)
+        public void CompareObjectNotEqual_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectNotEqual(left, right, true));
-            Assert.Throws<InvalidCastException>(() => Operators.CompareObjectNotEqual(right, left, true));
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.CompareObjectNotEqual(left, right, true)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.CompareObjectNotEqual(right, left, true)
+            );
         }
 
         public static IEnumerable<object[]> CompareObjectNotEqual_MismatchingObjects_TestData()
@@ -1469,59 +1768,92 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
 
         [Theory]
         [MemberData(nameof(CompareObjectNotEqual_MismatchingObjects_TestData))]
-        public void CompareObjectNotEqual_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
+        public void CompareObjectNotEqual_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<AmbiguousMatchException>(() => Operators.CompareObjectNotEqual(left, right, true));
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Operators.CompareObjectNotEqual(left, right, true)
+            );
         }
 
         public class CompareObjectNotEqual
         {
-             [SpecialName]
-             public static string op_Inequality(CompareObjectNotEqual left, int right) => "custom";
+            [SpecialName]
+            public static string op_Inequality(CompareObjectNotEqual left, int right) => "custom";
 
-             [SpecialName]
-             public static string op_Inequality(int left, CompareObjectNotEqual right) => "motsuc";
+            [SpecialName]
+            public static string op_Inequality(int left, CompareObjectNotEqual right) => "motsuc";
 
-             [SpecialName]
-             public static string op_Inequality(CompareObjectNotEqual left, OperatorsTests right) => "customobject";
+            [SpecialName]
+            public static string op_Inequality(CompareObjectNotEqual left, OperatorsTests right) =>
+                "customobject";
 
-             [SpecialName]
-             public static string op_Inequality(OperatorsTests left, CompareObjectNotEqual right) => "tcejbomotsuc";
+            [SpecialName]
+            public static string op_Inequality(OperatorsTests left, CompareObjectNotEqual right) =>
+                "tcejbomotsuc";
         }
-
 
         [Theory]
         [MemberData(nameof(Compare_Primitives_TestData))]
-        public void ConditionalCompareObjectEqual_Invoke_ReturnsExpected(object left, object right, bool greater, bool equal, bool less)
+        public void ConditionalCompareObjectEqual_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            bool greater,
+            bool equal,
+            bool less
+        )
         {
             _ = greater;
             _ = less;
             Assert.Equal(equal, Operators.ConditionalCompareObjectEqual(left, right, true));
-             Assert.Equal(equal, Operators.ConditionalCompareObjectEqual(left, right, false));
+            Assert.Equal(equal, Operators.ConditionalCompareObjectEqual(left, right, false));
         }
 
         public static IEnumerable<object[]> ConditionalCompareObjectEqual_OverloadOperator_TestData()
         {
             yield return new object[] { new ConditionalCompareObjectEqual(), 2, true };
             yield return new object[] { 2, new ConditionalCompareObjectEqual(), false };
-            yield return new object[] { new ConditionalCompareObjectEqual(), new OperatorsTests(), false };
-            yield return new object[] { new OperatorsTests(), new ConditionalCompareObjectEqual(), true };
+            yield return new object[]
+            {
+                new ConditionalCompareObjectEqual(),
+                new OperatorsTests(),
+                false,
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new ConditionalCompareObjectEqual(),
+                true,
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConditionalCompareObjectEqual_OverloadOperator_TestData))]
-        public void ConditionalCompareObjectEqual_InvokeOverloadedOperator_ReturnsExpected(object left, object right, object expected)
+        public void ConditionalCompareObjectEqual_InvokeOverloadedOperator_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        )
         {
-             Assert.Equal(expected, Operators.ConditionalCompareObjectEqual(left, right, true));
-             Assert.Equal(expected, Operators.ConditionalCompareObjectEqual(left, right, false));
+            Assert.Equal(expected, Operators.ConditionalCompareObjectEqual(left, right, true));
+            Assert.Equal(expected, Operators.ConditionalCompareObjectEqual(left, right, false));
         }
 
         [Theory]
         [MemberData(nameof(Compare_InvalidObjects_TestData))]
-        public void ConditionalCompareObjectEqual_InvalidObjects_ThrowsInvalidCastException(object left, object right)
+        public void ConditionalCompareObjectEqual_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.ConditionalCompareObjectEqual(left, right, true));
-            Assert.Throws<InvalidCastException>(() => Operators.ConditionalCompareObjectEqual(right, left, true));
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.ConditionalCompareObjectEqual(left, right, true)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.ConditionalCompareObjectEqual(right, left, true)
+            );
         }
 
         public static IEnumerable<object[]> ConditionalCompareObjectEqual_MismatchingObjects_TestData()
@@ -1529,63 +1861,105 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { new ConditionalCompareObjectEqual(), new object() };
             yield return new object[] { new object(), new ConditionalCompareObjectEqual() };
 
-            yield return new object[] { new ConditionalCompareObjectEqual(), new ConditionalCompareObjectEqual() };
+            yield return new object[]
+            {
+                new ConditionalCompareObjectEqual(),
+                new ConditionalCompareObjectEqual(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConditionalCompareObjectEqual_MismatchingObjects_TestData))]
-        public void ConditionalCompareObjectEqual_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
+        public void ConditionalCompareObjectEqual_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<AmbiguousMatchException>(() => Operators.ConditionalCompareObjectEqual(left, right, true));
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Operators.ConditionalCompareObjectEqual(left, right, true)
+            );
         }
 
         public class ConditionalCompareObjectEqual
         {
-             [SpecialName]
-             public static bool op_Equality(ConditionalCompareObjectEqual left, int right) => true;
+            [SpecialName]
+            public static bool op_Equality(ConditionalCompareObjectEqual left, int right) => true;
 
-             [SpecialName]
-             public static bool op_Equality(int left, ConditionalCompareObjectEqual right) => false;
+            [SpecialName]
+            public static bool op_Equality(int left, ConditionalCompareObjectEqual right) => false;
 
-             [SpecialName]
-             public static bool op_Equality(ConditionalCompareObjectEqual left, OperatorsTests right) => false;
+            [SpecialName]
+            public static bool op_Equality(
+                ConditionalCompareObjectEqual left,
+                OperatorsTests right
+            ) => false;
 
-             [SpecialName]
-             public static bool op_Equality(OperatorsTests left, ConditionalCompareObjectEqual right) => true;
+            [SpecialName]
+            public static bool op_Equality(
+                OperatorsTests left,
+                ConditionalCompareObjectEqual right
+            ) => true;
         }
 
         [Theory]
         [MemberData(nameof(Compare_Primitives_TestData))]
-        public void ConditionalCompareObjectGreater_Invoke_ReturnsExpected(object left, object right, bool greater, bool equal, bool less)
+        public void ConditionalCompareObjectGreater_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            bool greater,
+            bool equal,
+            bool less
+        )
         {
             _ = equal;
             _ = less;
             Assert.Equal(greater, Operators.ConditionalCompareObjectGreater(left, right, true));
-             Assert.Equal(greater, Operators.ConditionalCompareObjectGreater(left, right, false));
+            Assert.Equal(greater, Operators.ConditionalCompareObjectGreater(left, right, false));
         }
 
         public static IEnumerable<object[]> ConditionalCompareObjectGreater_OverloadOperator_TestData()
         {
             yield return new object[] { new ConditionalCompareObjectGreater(), 2, true };
             yield return new object[] { 2, new ConditionalCompareObjectGreater(), false };
-            yield return new object[] { new ConditionalCompareObjectGreater(), new OperatorsTests(), false };
-            yield return new object[] { new OperatorsTests(), new ConditionalCompareObjectGreater(), true };
+            yield return new object[]
+            {
+                new ConditionalCompareObjectGreater(),
+                new OperatorsTests(),
+                false,
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new ConditionalCompareObjectGreater(),
+                true,
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConditionalCompareObjectGreater_OverloadOperator_TestData))]
-        public void ConditionalCompareObjectGreater_InvokeOverloadedOperator_ReturnsExpected(object left, object right, object expected)
+        public void ConditionalCompareObjectGreater_InvokeOverloadedOperator_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        )
         {
-             Assert.Equal(expected, Operators.ConditionalCompareObjectGreater(left, right, true));
-             Assert.Equal(expected, Operators.ConditionalCompareObjectGreater(left, right, false));
+            Assert.Equal(expected, Operators.ConditionalCompareObjectGreater(left, right, true));
+            Assert.Equal(expected, Operators.ConditionalCompareObjectGreater(left, right, false));
         }
 
         [Theory]
         [MemberData(nameof(Compare_InvalidObjects_TestData))]
-        public void ConditionalCompareObjectGreater_InvalidObjects_ThrowsInvalidCastException(object left, object right)
+        public void ConditionalCompareObjectGreater_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.ConditionalCompareObjectGreater(left, right, true));
-            Assert.Throws<InvalidCastException>(() => Operators.ConditionalCompareObjectGreater(right, left, true));
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.ConditionalCompareObjectGreater(left, right, true)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.ConditionalCompareObjectGreater(right, left, true)
+            );
         }
 
         public static IEnumerable<object[]> ConditionalCompareObjectGreater_MismatchingObjects_TestData()
@@ -1593,62 +1967,118 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { new ConditionalCompareObjectGreater(), new object() };
             yield return new object[] { new object(), new ConditionalCompareObjectGreater() };
 
-            yield return new object[] { new ConditionalCompareObjectGreater(), new ConditionalCompareObjectGreater() };
+            yield return new object[]
+            {
+                new ConditionalCompareObjectGreater(),
+                new ConditionalCompareObjectGreater(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConditionalCompareObjectGreater_MismatchingObjects_TestData))]
-        public void ConditionalCompareObjectGreater_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
+        public void ConditionalCompareObjectGreater_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<AmbiguousMatchException>(() => Operators.ConditionalCompareObjectGreater(left, right, true));
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Operators.ConditionalCompareObjectGreater(left, right, true)
+            );
         }
 
         public class ConditionalCompareObjectGreater
         {
-             [SpecialName]
-             public static bool op_GreaterThan(ConditionalCompareObjectGreater left, int right) => true;
+            [SpecialName]
+            public static bool op_GreaterThan(ConditionalCompareObjectGreater left, int right) =>
+                true;
 
-             [SpecialName]
-             public static bool op_GreaterThan(int left, ConditionalCompareObjectGreater right) => false;
+            [SpecialName]
+            public static bool op_GreaterThan(int left, ConditionalCompareObjectGreater right) =>
+                false;
 
-             [SpecialName]
-             public static bool op_GreaterThan(ConditionalCompareObjectGreater left, OperatorsTests right) => false;
+            [SpecialName]
+            public static bool op_GreaterThan(
+                ConditionalCompareObjectGreater left,
+                OperatorsTests right
+            ) => false;
 
-             [SpecialName]
-             public static bool op_GreaterThan(OperatorsTests left, ConditionalCompareObjectGreater right) => true;
+            [SpecialName]
+            public static bool op_GreaterThan(
+                OperatorsTests left,
+                ConditionalCompareObjectGreater right
+            ) => true;
         }
 
         [Theory]
         [MemberData(nameof(Compare_Primitives_TestData))]
-        public void ConditionalCompareObjectGreaterEqual_Invoke_ReturnsExpected(object left, object right, bool greater, bool equal, bool less)
+        public void ConditionalCompareObjectGreaterEqual_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            bool greater,
+            bool equal,
+            bool less
+        )
         {
             _ = less;
-            Assert.Equal(greater || equal, Operators.ConditionalCompareObjectGreaterEqual(left, right, true));
-             Assert.Equal(greater || equal, Operators.ConditionalCompareObjectGreaterEqual(left, right, false));
+            Assert.Equal(
+                greater || equal,
+                Operators.ConditionalCompareObjectGreaterEqual(left, right, true)
+            );
+            Assert.Equal(
+                greater || equal,
+                Operators.ConditionalCompareObjectGreaterEqual(left, right, false)
+            );
         }
 
         public static IEnumerable<object[]> ConditionalCompareObjectGreaterEqual_OverloadOperator_TestData()
         {
             yield return new object[] { new ConditionalCompareObjectGreaterEqual(), 2, true };
             yield return new object[] { 2, new ConditionalCompareObjectGreaterEqual(), false };
-            yield return new object[] { new ConditionalCompareObjectGreaterEqual(), new OperatorsTests(), false };
-            yield return new object[] { new OperatorsTests(), new ConditionalCompareObjectGreaterEqual(), true };
+            yield return new object[]
+            {
+                new ConditionalCompareObjectGreaterEqual(),
+                new OperatorsTests(),
+                false,
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new ConditionalCompareObjectGreaterEqual(),
+                true,
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConditionalCompareObjectGreaterEqual_OverloadOperator_TestData))]
-        public void ConditionalCompareObjectGreaterEqual_InvokeOverloadedOperator_ReturnsExpected(object left, object right, object expected)
+        public void ConditionalCompareObjectGreaterEqual_InvokeOverloadedOperator_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        )
         {
-             Assert.Equal(expected, Operators.ConditionalCompareObjectGreaterEqual(left, right, true));
-             Assert.Equal(expected, Operators.ConditionalCompareObjectGreaterEqual(left, right, false));
+            Assert.Equal(
+                expected,
+                Operators.ConditionalCompareObjectGreaterEqual(left, right, true)
+            );
+            Assert.Equal(
+                expected,
+                Operators.ConditionalCompareObjectGreaterEqual(left, right, false)
+            );
         }
 
         [Theory]
         [MemberData(nameof(Compare_InvalidObjects_TestData))]
-        public void ConditionalCompareObjectGreaterEqual_InvalidObjects_ThrowsInvalidCastException(object left, object right)
+        public void ConditionalCompareObjectGreaterEqual_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.ConditionalCompareObjectGreaterEqual(left, right, true));
-            Assert.Throws<InvalidCastException>(() => Operators.ConditionalCompareObjectGreaterEqual(right, left, true));
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.ConditionalCompareObjectGreaterEqual(left, right, true)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.ConditionalCompareObjectGreaterEqual(right, left, true)
+            );
         }
 
         public static IEnumerable<object[]> ConditionalCompareObjectGreaterEqual_MismatchingObjects_TestData()
@@ -1656,63 +2086,111 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { new ConditionalCompareObjectGreaterEqual(), new object() };
             yield return new object[] { new object(), new ConditionalCompareObjectGreaterEqual() };
 
-            yield return new object[] { new ConditionalCompareObjectGreaterEqual(), new ConditionalCompareObjectGreaterEqual() };
+            yield return new object[]
+            {
+                new ConditionalCompareObjectGreaterEqual(),
+                new ConditionalCompareObjectGreaterEqual(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConditionalCompareObjectGreaterEqual_MismatchingObjects_TestData))]
-        public void ConditionalCompareObjectGreaterEqual_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
+        public void ConditionalCompareObjectGreaterEqual_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<AmbiguousMatchException>(() => Operators.ConditionalCompareObjectGreaterEqual(left, right, true));
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Operators.ConditionalCompareObjectGreaterEqual(left, right, true)
+            );
         }
 
         public class ConditionalCompareObjectGreaterEqual
         {
-             [SpecialName]
-             public static bool op_GreaterThanOrEqual(ConditionalCompareObjectGreaterEqual left, int right) => true;
+            [SpecialName]
+            public static bool op_GreaterThanOrEqual(
+                ConditionalCompareObjectGreaterEqual left,
+                int right
+            ) => true;
 
-             [SpecialName]
-             public static bool op_GreaterThanOrEqual(int left, ConditionalCompareObjectGreaterEqual right) => false;
+            [SpecialName]
+            public static bool op_GreaterThanOrEqual(
+                int left,
+                ConditionalCompareObjectGreaterEqual right
+            ) => false;
 
-             [SpecialName]
-             public static bool op_GreaterThanOrEqual(ConditionalCompareObjectGreaterEqual left, OperatorsTests right) => false;
+            [SpecialName]
+            public static bool op_GreaterThanOrEqual(
+                ConditionalCompareObjectGreaterEqual left,
+                OperatorsTests right
+            ) => false;
 
-             [SpecialName]
-             public static bool op_GreaterThanOrEqual(OperatorsTests left, ConditionalCompareObjectGreaterEqual right) => true;
+            [SpecialName]
+            public static bool op_GreaterThanOrEqual(
+                OperatorsTests left,
+                ConditionalCompareObjectGreaterEqual right
+            ) => true;
         }
 
         [Theory]
         [MemberData(nameof(Compare_Primitives_TestData))]
-        public void ConditionalCompareObjectLess_Invoke_ReturnsExpected(object left, object right, bool greater, bool equal, bool less)
+        public void ConditionalCompareObjectLess_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            bool greater,
+            bool equal,
+            bool less
+        )
         {
             _ = greater;
             _ = equal;
-             Assert.Equal(less, Operators.ConditionalCompareObjectLess(left, right, true));
-             Assert.Equal(less, Operators.ConditionalCompareObjectLess(left, right, false));
+            Assert.Equal(less, Operators.ConditionalCompareObjectLess(left, right, true));
+            Assert.Equal(less, Operators.ConditionalCompareObjectLess(left, right, false));
         }
 
         public static IEnumerable<object[]> ConditionalCompareObjectLess_OverloadOperator_TestData()
         {
             yield return new object[] { new ConditionalCompareObjectLess(), 2, true };
             yield return new object[] { 2, new ConditionalCompareObjectLess(), false };
-            yield return new object[] { new ConditionalCompareObjectLess(), new OperatorsTests(), false };
-            yield return new object[] { new OperatorsTests(), new ConditionalCompareObjectLess(), true };
+            yield return new object[]
+            {
+                new ConditionalCompareObjectLess(),
+                new OperatorsTests(),
+                false,
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new ConditionalCompareObjectLess(),
+                true,
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConditionalCompareObjectLess_OverloadOperator_TestData))]
-        public void ConditionalCompareObjectLess_InvokeOverloadedOperator_ReturnsExpected(object left, object right, object expected)
+        public void ConditionalCompareObjectLess_InvokeOverloadedOperator_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        )
         {
-             Assert.Equal(expected, Operators.ConditionalCompareObjectLess(left, right, true));
-             Assert.Equal(expected, Operators.ConditionalCompareObjectLess(left, right, false));
+            Assert.Equal(expected, Operators.ConditionalCompareObjectLess(left, right, true));
+            Assert.Equal(expected, Operators.ConditionalCompareObjectLess(left, right, false));
         }
 
         [Theory]
         [MemberData(nameof(Compare_InvalidObjects_TestData))]
-        public void ConditionalCompareObjectLess_InvalidObjects_ThrowsInvalidCastException(object left, object right)
+        public void ConditionalCompareObjectLess_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.ConditionalCompareObjectLess(left, right, true));
-            Assert.Throws<InvalidCastException>(() => Operators.ConditionalCompareObjectLess(right, left, true));
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.ConditionalCompareObjectLess(left, right, true)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.ConditionalCompareObjectLess(right, left, true)
+            );
         }
 
         public static IEnumerable<object[]> ConditionalCompareObjectLess_MismatchingObjects_TestData()
@@ -1720,62 +2198,110 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { new ConditionalCompareObjectLess(), new object() };
             yield return new object[] { new object(), new ConditionalCompareObjectLess() };
 
-            yield return new object[] { new ConditionalCompareObjectLess(), new ConditionalCompareObjectLess() };
+            yield return new object[]
+            {
+                new ConditionalCompareObjectLess(),
+                new ConditionalCompareObjectLess(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConditionalCompareObjectLess_MismatchingObjects_TestData))]
-        public void ConditionalCompareObjectLess_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
+        public void ConditionalCompareObjectLess_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<AmbiguousMatchException>(() => Operators.ConditionalCompareObjectLess(left, right, true));
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Operators.ConditionalCompareObjectLess(left, right, true)
+            );
         }
 
         public class ConditionalCompareObjectLess
         {
-             [SpecialName]
-             public static bool op_LessThan(ConditionalCompareObjectLess left, int right) => true;
+            [SpecialName]
+            public static bool op_LessThan(ConditionalCompareObjectLess left, int right) => true;
 
-             [SpecialName]
-             public static bool op_LessThan(int left, ConditionalCompareObjectLess right) => false;
+            [SpecialName]
+            public static bool op_LessThan(int left, ConditionalCompareObjectLess right) => false;
 
-             [SpecialName]
-             public static bool op_LessThan(ConditionalCompareObjectLess left, OperatorsTests right) => false;
+            [SpecialName]
+            public static bool op_LessThan(
+                ConditionalCompareObjectLess left,
+                OperatorsTests right
+            ) => false;
 
-             [SpecialName]
-             public static bool op_LessThan(OperatorsTests left, ConditionalCompareObjectLess right) => true;
+            [SpecialName]
+            public static bool op_LessThan(
+                OperatorsTests left,
+                ConditionalCompareObjectLess right
+            ) => true;
         }
 
         [Theory]
         [MemberData(nameof(Compare_Primitives_TestData))]
-        public void ConditionalCompareObjectLessEqual_Invoke_ReturnsExpected(object left, object right, bool greater, bool equal, bool less)
+        public void ConditionalCompareObjectLessEqual_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            bool greater,
+            bool equal,
+            bool less
+        )
         {
             _ = greater;
-            Assert.Equal(less || equal, Operators.ConditionalCompareObjectLessEqual(left, right, true));
-             Assert.Equal(less || equal, Operators.ConditionalCompareObjectLessEqual(left, right, false));
+            Assert.Equal(
+                less || equal,
+                Operators.ConditionalCompareObjectLessEqual(left, right, true)
+            );
+            Assert.Equal(
+                less || equal,
+                Operators.ConditionalCompareObjectLessEqual(left, right, false)
+            );
         }
 
         public static IEnumerable<object[]> ConditionalCompareObjectLessEqual_OverloadOperator_TestData()
         {
             yield return new object[] { new ConditionalCompareObjectLessEqual(), 2, true };
             yield return new object[] { 2, new ConditionalCompareObjectLessEqual(), false };
-            yield return new object[] { new ConditionalCompareObjectLessEqual(), new OperatorsTests(), false };
-            yield return new object[] { new OperatorsTests(), new ConditionalCompareObjectLessEqual(), true };
+            yield return new object[]
+            {
+                new ConditionalCompareObjectLessEqual(),
+                new OperatorsTests(),
+                false,
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new ConditionalCompareObjectLessEqual(),
+                true,
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConditionalCompareObjectLessEqual_OverloadOperator_TestData))]
-        public void ConditionalCompareObjectLessEqual_InvokeOverloadedOperator_ReturnsExpected(object left, object right, object expected)
+        public void ConditionalCompareObjectLessEqual_InvokeOverloadedOperator_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        )
         {
-             Assert.Equal(expected, Operators.ConditionalCompareObjectLessEqual(left, right, true));
-             Assert.Equal(expected, Operators.ConditionalCompareObjectLessEqual(left, right, false));
+            Assert.Equal(expected, Operators.ConditionalCompareObjectLessEqual(left, right, true));
+            Assert.Equal(expected, Operators.ConditionalCompareObjectLessEqual(left, right, false));
         }
 
         [Theory]
         [MemberData(nameof(Compare_InvalidObjects_TestData))]
-        public void ConditionalCompareObjectLessEqual_InvalidObjects_ThrowsInvalidCastException(object left, object right)
+        public void ConditionalCompareObjectLessEqual_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.ConditionalCompareObjectLessEqual(left, right, true));
-            Assert.Throws<InvalidCastException>(() => Operators.ConditionalCompareObjectLessEqual(right, left, true));
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.ConditionalCompareObjectLessEqual(left, right, true)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.ConditionalCompareObjectLessEqual(right, left, true)
+            );
         }
 
         public static IEnumerable<object[]> ConditionalCompareObjectLessEqual_MismatchingObjects_TestData()
@@ -1783,63 +2309,111 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { new ConditionalCompareObjectLessEqual(), new object() };
             yield return new object[] { new object(), new ConditionalCompareObjectLessEqual() };
 
-            yield return new object[] { new ConditionalCompareObjectLessEqual(), new ConditionalCompareObjectLessEqual() };
+            yield return new object[]
+            {
+                new ConditionalCompareObjectLessEqual(),
+                new ConditionalCompareObjectLessEqual(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConditionalCompareObjectLessEqual_MismatchingObjects_TestData))]
-        public void ConditionalCompareObjectLessEqual_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
+        public void ConditionalCompareObjectLessEqual_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<AmbiguousMatchException>(() => Operators.ConditionalCompareObjectLessEqual(left, right, true));
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Operators.ConditionalCompareObjectLessEqual(left, right, true)
+            );
         }
 
         public class ConditionalCompareObjectLessEqual
         {
-             [SpecialName]
-             public static bool op_LessThanOrEqual(ConditionalCompareObjectLessEqual left, int right) => true;
+            [SpecialName]
+            public static bool op_LessThanOrEqual(
+                ConditionalCompareObjectLessEqual left,
+                int right
+            ) => true;
 
-             [SpecialName]
-             public static bool op_LessThanOrEqual(int left, ConditionalCompareObjectLessEqual right) => false;
+            [SpecialName]
+            public static bool op_LessThanOrEqual(
+                int left,
+                ConditionalCompareObjectLessEqual right
+            ) => false;
 
-             [SpecialName]
-             public static bool op_LessThanOrEqual(ConditionalCompareObjectLessEqual left, OperatorsTests right) => false;
+            [SpecialName]
+            public static bool op_LessThanOrEqual(
+                ConditionalCompareObjectLessEqual left,
+                OperatorsTests right
+            ) => false;
 
-             [SpecialName]
-             public static bool op_LessThanOrEqual(OperatorsTests left, ConditionalCompareObjectLessEqual right) => true;
+            [SpecialName]
+            public static bool op_LessThanOrEqual(
+                OperatorsTests left,
+                ConditionalCompareObjectLessEqual right
+            ) => true;
         }
 
         [Theory]
         [MemberData(nameof(Compare_Primitives_TestData))]
-        public void ConditionalCompareObjectNotEqual_Invoke_ReturnsExpected(object left, object right, bool greater, bool equal, bool less)
+        public void ConditionalCompareObjectNotEqual_Invoke_ReturnsExpected(
+            object left,
+            object right,
+            bool greater,
+            bool equal,
+            bool less
+        )
         {
             _ = greater;
             _ = less;
-             Assert.Equal(!equal, Operators.ConditionalCompareObjectNotEqual(left, right, true));
-             Assert.Equal(!equal, Operators.ConditionalCompareObjectNotEqual(left, right, false));
+            Assert.Equal(!equal, Operators.ConditionalCompareObjectNotEqual(left, right, true));
+            Assert.Equal(!equal, Operators.ConditionalCompareObjectNotEqual(left, right, false));
         }
 
         public static IEnumerable<object[]> ConditionalCompareObjectNotEqual_OverloadOperator_TestData()
         {
             yield return new object[] { new ConditionalCompareObjectNotEqual(), 2, true };
             yield return new object[] { 2, new ConditionalCompareObjectNotEqual(), false };
-            yield return new object[] { new ConditionalCompareObjectNotEqual(), new OperatorsTests(), false };
-            yield return new object[] { new OperatorsTests(), new ConditionalCompareObjectNotEqual(), true };
+            yield return new object[]
+            {
+                new ConditionalCompareObjectNotEqual(),
+                new OperatorsTests(),
+                false,
+            };
+            yield return new object[]
+            {
+                new OperatorsTests(),
+                new ConditionalCompareObjectNotEqual(),
+                true,
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConditionalCompareObjectNotEqual_OverloadOperator_TestData))]
-        public void ConditionalCompareObjectNotEqual_InvokeOverloadedOperator_ReturnsExpected(object left, object right, object expected)
+        public void ConditionalCompareObjectNotEqual_InvokeOverloadedOperator_ReturnsExpected(
+            object left,
+            object right,
+            object expected
+        )
         {
-             Assert.Equal(expected, Operators.ConditionalCompareObjectNotEqual(left, right, true));
-             Assert.Equal(expected, Operators.ConditionalCompareObjectNotEqual(left, right, false));
+            Assert.Equal(expected, Operators.ConditionalCompareObjectNotEqual(left, right, true));
+            Assert.Equal(expected, Operators.ConditionalCompareObjectNotEqual(left, right, false));
         }
 
         [Theory]
         [MemberData(nameof(Compare_InvalidObjects_TestData))]
-        public void ConditionalCompareObjectNotEqual_InvalidObjects_ThrowsInvalidCastException(object left, object right)
+        public void ConditionalCompareObjectNotEqual_InvalidObjects_ThrowsInvalidCastException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<InvalidCastException>(() => Operators.ConditionalCompareObjectNotEqual(left, right, true));
-            Assert.Throws<InvalidCastException>(() => Operators.ConditionalCompareObjectNotEqual(right, left, true));
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.ConditionalCompareObjectNotEqual(left, right, true)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                Operators.ConditionalCompareObjectNotEqual(right, left, true)
+            );
         }
 
         public static IEnumerable<object[]> ConditionalCompareObjectNotEqual_MismatchingObjects_TestData()
@@ -1847,29 +2421,46 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
             yield return new object[] { new ConditionalCompareObjectNotEqual(), new object() };
             yield return new object[] { new object(), new ConditionalCompareObjectNotEqual() };
 
-            yield return new object[] { new ConditionalCompareObjectNotEqual(), new ConditionalCompareObjectNotEqual() };
+            yield return new object[]
+            {
+                new ConditionalCompareObjectNotEqual(),
+                new ConditionalCompareObjectNotEqual(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(ConditionalCompareObjectNotEqual_MismatchingObjects_TestData))]
-        public void ConditionalCompareObjectNotEqual_MismatchingObjects_ThrowsAmibguousMatchException(object left, object right)
+        public void ConditionalCompareObjectNotEqual_MismatchingObjects_ThrowsAmibguousMatchException(
+            object left,
+            object right
+        )
         {
-            Assert.Throws<AmbiguousMatchException>(() => Operators.ConditionalCompareObjectNotEqual(left, right, true));
+            Assert.Throws<AmbiguousMatchException>(() =>
+                Operators.ConditionalCompareObjectNotEqual(left, right, true)
+            );
         }
 
         public class ConditionalCompareObjectNotEqual
         {
-             [SpecialName]
-             public static bool op_Inequality(ConditionalCompareObjectNotEqual left, int right) => true;
+            [SpecialName]
+            public static bool op_Inequality(ConditionalCompareObjectNotEqual left, int right) =>
+                true;
 
-             [SpecialName]
-             public static bool op_Inequality(int left, ConditionalCompareObjectNotEqual right) => false;
+            [SpecialName]
+            public static bool op_Inequality(int left, ConditionalCompareObjectNotEqual right) =>
+                false;
 
-             [SpecialName]
-             public static bool op_Inequality(ConditionalCompareObjectNotEqual left, OperatorsTests right) => false;
+            [SpecialName]
+            public static bool op_Inequality(
+                ConditionalCompareObjectNotEqual left,
+                OperatorsTests right
+            ) => false;
 
-             [SpecialName]
-             public static bool op_Inequality(OperatorsTests left, ConditionalCompareObjectNotEqual right) => true;
+            [SpecialName]
+            public static bool op_Inequality(
+                OperatorsTests left,
+                ConditionalCompareObjectNotEqual right
+            ) => true;
         }
     }
 }

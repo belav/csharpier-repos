@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,55 +26,62 @@
 using System;
 using System.Windows;
 
-namespace System.Collections.Specialized {
+namespace System.Collections.Specialized
+{
+    public class CollectionChangedEventManager : WeakEventManager
+    {
+        internal CollectionChangedEventManager() { }
 
-	public class CollectionChangedEventManager : WeakEventManager
-	{
-		internal CollectionChangedEventManager ()
-		{
-		}
+        public static void AddListener(INotifyCollectionChanged source, IWeakEventListener listener)
+        {
+            CurrentManager.ProtectedAddListener(source, listener);
+        }
 
-		public static void AddListener (INotifyCollectionChanged source, IWeakEventListener listener)
-		{
-			CurrentManager.ProtectedAddListener (source, listener);
-		}
+        public static void RemoveListener(
+            INotifyCollectionChanged source,
+            IWeakEventListener listener
+        )
+        {
+            CurrentManager.ProtectedAddListener(source, listener);
+        }
 
-		public static void RemoveListener (INotifyCollectionChanged source, IWeakEventListener listener)
-		{
-			CurrentManager.ProtectedAddListener (source, listener);
-		}
+        protected override void StartListening(object source)
+        {
+            INotifyCollectionChanged inotify = (INotifyCollectionChanged)source;
+            inotify.CollectionChanged += OnCollectionChanged;
+        }
 
-		protected override void StartListening (object source)
-		{
-			INotifyCollectionChanged inotify = (INotifyCollectionChanged) source;
-			inotify.CollectionChanged += OnCollectionChanged;
-		}
+        protected override void StopListening(object source)
+        {
+            INotifyCollectionChanged inotify = (INotifyCollectionChanged)source;
+            inotify.CollectionChanged -= OnCollectionChanged;
+        }
 
-		protected override void StopListening (object source)
-		{
-			INotifyCollectionChanged inotify = (INotifyCollectionChanged) source;
-			inotify.CollectionChanged -= OnCollectionChanged;
-		}
+        private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            DeliverEvent(sender, e);
+        }
 
-		private void OnCollectionChanged (object sender, NotifyCollectionChangedEventArgs e)
-		{
-			DeliverEvent (sender, e);
-		}
+        private static object CurrentManagerLock = new object();
 
-		private static object CurrentManagerLock = new object ();
-
-		private static CollectionChangedEventManager CurrentManager {
-			get {
-				lock (CurrentManagerLock) {
-					CollectionChangedEventManager manager = (CollectionChangedEventManager)GetCurrentManager (typeof (CollectionChangedEventManager));
-					if (manager == null) {
-						manager = new CollectionChangedEventManager ();
-						SetCurrentManager (typeof (CollectionChangedEventManager), manager);
-					}
-					return manager;
-				}
-			}
-		}
-	}
+        private static CollectionChangedEventManager CurrentManager
+        {
+            get
+            {
+                lock (CurrentManagerLock)
+                {
+                    CollectionChangedEventManager manager =
+                        (CollectionChangedEventManager)GetCurrentManager(
+                            typeof(CollectionChangedEventManager)
+                        );
+                    if (manager == null)
+                    {
+                        manager = new CollectionChangedEventManager();
+                        SetCurrentManager(typeof(CollectionChangedEventManager), manager);
+                    }
+                    return manager;
+                }
+            }
+        }
+    }
 }
-

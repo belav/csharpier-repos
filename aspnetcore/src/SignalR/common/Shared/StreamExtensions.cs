@@ -11,7 +11,11 @@ namespace System.IO;
 
 internal static class StreamExtensions
 {
-    public static ValueTask WriteAsync(this Stream stream, ReadOnlySequence<byte> buffer, CancellationToken cancellationToken = default)
+    public static ValueTask WriteAsync(
+        this Stream stream,
+        ReadOnlySequence<byte> buffer,
+        CancellationToken cancellationToken = default
+    )
     {
         if (buffer.IsSingleSegment)
         {
@@ -21,14 +25,25 @@ internal static class StreamExtensions
             var isArray = MemoryMarshal.TryGetArray(buffer.First, out var arraySegment);
             // We're using the managed memory pool which is backed by managed buffers
             Debug.Assert(isArray);
-            return new ValueTask(stream.WriteAsync(arraySegment.Array, arraySegment.Offset, arraySegment.Count, cancellationToken));
+            return new ValueTask(
+                stream.WriteAsync(
+                    arraySegment.Array,
+                    arraySegment.Offset,
+                    arraySegment.Count,
+                    cancellationToken
+                )
+            );
 #endif
         }
 
         return WriteMultiSegmentAsync(stream, buffer, cancellationToken);
     }
 
-    private static async ValueTask WriteMultiSegmentAsync(Stream stream, ReadOnlySequence<byte> buffer, CancellationToken cancellationToken)
+    private static async ValueTask WriteMultiSegmentAsync(
+        Stream stream,
+        ReadOnlySequence<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         var position = buffer.Start;
         while (buffer.TryGet(ref position, out var segment))
@@ -39,7 +54,14 @@ internal static class StreamExtensions
             var isArray = MemoryMarshal.TryGetArray(segment, out var arraySegment);
             // We're using the managed memory pool which is backed by managed buffers
             Debug.Assert(isArray);
-            await stream.WriteAsync(arraySegment.Array, arraySegment.Offset, arraySegment.Count, cancellationToken).ConfigureAwait(false);
+            await stream
+                .WriteAsync(
+                    arraySegment.Array,
+                    arraySegment.Offset,
+                    arraySegment.Count,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 #endif
         }
     }

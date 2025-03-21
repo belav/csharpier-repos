@@ -26,7 +26,9 @@ public class MemoryOutputCacheStoreTests
     public async Task StoreAndGetValue_TimesOut()
     {
         var testClock = new TestMemoryOptionsClock { UtcNow = DateTimeOffset.UtcNow };
-        var store = new MemoryOutputCacheStore(new MemoryCache(new MemoryCacheOptions { Clock = testClock }));
+        var store = new MemoryOutputCacheStore(
+            new MemoryCache(new MemoryCacheOptions { Clock = testClock })
+        );
         var value = "abc"u8.ToArray();
         var key = "abc";
 
@@ -45,7 +47,10 @@ public class MemoryOutputCacheStoreTests
         var value = "abc"u8.ToArray();
         string key = null;
 
-        _ = await Assert.ThrowsAsync<ArgumentNullException>("key", () => store.SetAsync(key, value, null, TimeSpan.FromMilliseconds(5), default).AsTask());
+        _ = await Assert.ThrowsAsync<ArgumentNullException>(
+            "key",
+            () => store.SetAsync(key, value, null, TimeSpan.FromMilliseconds(5), default).AsTask()
+        );
     }
 
     [Fact]
@@ -55,14 +60,19 @@ public class MemoryOutputCacheStoreTests
         var value = default(byte[]);
         var key = "abc";
 
-        _ = await Assert.ThrowsAsync<ArgumentNullException>("value", () => store.SetAsync(key, value, null, TimeSpan.FromMilliseconds(5), default).AsTask());
+        _ = await Assert.ThrowsAsync<ArgumentNullException>(
+            "value",
+            () => store.SetAsync(key, value, null, TimeSpan.FromMilliseconds(5), default).AsTask()
+        );
     }
 
     [Fact]
     public async Task EvictByTag_SingleTag_SingleEntry()
     {
         var testClock = new TestMemoryOptionsClock { UtcNow = DateTimeOffset.UtcNow };
-        var store = new MemoryOutputCacheStore(new MemoryCache(new MemoryCacheOptions { Clock = testClock }));
+        var store = new MemoryOutputCacheStore(
+            new MemoryCache(new MemoryCacheOptions { Clock = testClock })
+        );
         var value = "abc"u8.ToArray();
         var key = "abc";
         var tags = new string[] { "tag1" };
@@ -90,7 +100,9 @@ public class MemoryOutputCacheStoreTests
     public async Task EvictByTag_SingleTag_MultipleEntries()
     {
         var testClock = new TestMemoryOptionsClock { UtcNow = DateTimeOffset.UtcNow };
-        var store = new MemoryOutputCacheStore(new MemoryCache(new MemoryCacheOptions { Clock = testClock }));
+        var store = new MemoryOutputCacheStore(
+            new MemoryCache(new MemoryCacheOptions { Clock = testClock })
+        );
         var value = "abc"u8.ToArray();
         var key1 = "abc";
         var key2 = "def";
@@ -110,7 +122,9 @@ public class MemoryOutputCacheStoreTests
     public async Task EvictByTag_MultipleTags_SingleEntry()
     {
         var testClock = new TestMemoryOptionsClock { UtcNow = DateTimeOffset.UtcNow };
-        var store = new MemoryOutputCacheStore(new MemoryCache(new MemoryCacheOptions { Clock = testClock }));
+        var store = new MemoryOutputCacheStore(
+            new MemoryCache(new MemoryCacheOptions { Clock = testClock })
+        );
         var value = "abc"u8.ToArray();
         var key = "abc";
         var tags = new string[] { "tag1", "tag2" };
@@ -126,7 +140,9 @@ public class MemoryOutputCacheStoreTests
     public async Task EvictByTag_MultipleTags_MultipleEntries()
     {
         var testClock = new TestMemoryOptionsClock { UtcNow = DateTimeOffset.UtcNow };
-        var store = new MemoryOutputCacheStore(new MemoryCache(new MemoryCacheOptions { Clock = testClock }));
+        var store = new MemoryOutputCacheStore(
+            new MemoryCache(new MemoryCacheOptions { Clock = testClock })
+        );
         var value = "abc"u8.ToArray();
         var key1 = "abc";
         var key2 = "def";
@@ -156,12 +172,25 @@ public class MemoryOutputCacheStoreTests
     public async Task ExpiredEntries_AreRemovedFromTags()
     {
         var testClock = new TestMemoryOptionsClock { UtcNow = DateTimeOffset.UtcNow };
-        var cache = new MemoryCache(new MemoryCacheOptions { SizeLimit = 1000, Clock = testClock, ExpirationScanFrequency = TimeSpan.FromMilliseconds(1) });
+        var cache = new MemoryCache(
+            new MemoryCacheOptions
+            {
+                SizeLimit = 1000,
+                Clock = testClock,
+                ExpirationScanFrequency = TimeSpan.FromMilliseconds(1),
+            }
+        );
         var store = new MemoryOutputCacheStore(cache);
         var value = "abc"u8.ToArray();
 
         await store.SetAsync("a", value, new[] { "tag1" }, TimeSpan.FromMilliseconds(5), default);
-        await store.SetAsync("b", value, new[] { "tag1", "tag2" }, TimeSpan.FromMilliseconds(5), default);
+        await store.SetAsync(
+            "b",
+            value,
+            new[] { "tag1", "tag2" },
+            TimeSpan.FromMilliseconds(5),
+            default
+        );
         await store.SetAsync("c", value, new[] { "tag2" }, TimeSpan.FromMilliseconds(20), default);
 
         testClock.Advance(TimeSpan.FromMilliseconds(10));
@@ -177,7 +206,8 @@ public class MemoryOutputCacheStoreTests
         Assert.Null(resultb);
         Assert.NotNull(resultc);
 
-        HashSet<string> tag1s, tag2s;
+        HashSet<string> tag1s,
+            tag2s;
 
         // Wait for the hashset to be removed as it happens on a separate thread
 
@@ -188,7 +218,11 @@ public class MemoryOutputCacheStoreTests
             await Task.Yield();
         }
 
-        while (store.TaggedEntries.TryGetValue("tag2", out tag2s) && tag2s.Count != 1 && !cts.IsCancellationRequested)
+        while (
+            store.TaggedEntries.TryGetValue("tag2", out tag2s)
+            && tag2s.Count != 1
+            && !cts.IsCancellationRequested
+        )
         {
             await Task.Yield();
         }
@@ -205,12 +239,15 @@ public class MemoryOutputCacheStoreTests
         var value = "abc"u8.ToArray();
         var key = "abc";
 
-        await Assert.ThrowsAsync<ArgumentException>(async () => await store.SetAsync(key, value, new string[] { tag }, TimeSpan.FromMinutes(1), default));
+        await Assert.ThrowsAsync<ArgumentException>(async () =>
+            await store.SetAsync(key, value, new string[] { tag }, TimeSpan.FromMinutes(1), default)
+        );
     }
 
     private class TestMemoryOptionsClock : Extensions.Internal.ISystemClock
     {
         public DateTimeOffset UtcNow { get; set; }
+
         public void Advance(TimeSpan duration)
         {
             UtcNow += duration;

@@ -11,10 +11,13 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void CreateCompositionService_NullCatalog_ShouldThrowArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>("composablePartCatalog", () =>
-            {
-                CatalogExtensions.CreateCompositionService(null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "composablePartCatalog",
+                () =>
+                {
+                    CatalogExtensions.CreateCompositionService(null);
+                }
+            );
         }
 
         [Fact]
@@ -22,7 +25,7 @@ namespace System.ComponentModel.Composition
         {
             //Create and dispose an empty immutable catalog, I.e no INotifyComposablePartCatalogChanged interface
             var catalog = new TypeCatalog();
-            using(var cs = catalog.CreateCompositionService())
+            using (var cs = catalog.CreateCompositionService())
             {
                 //Do nothing
             }

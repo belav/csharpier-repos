@@ -23,8 +23,19 @@ namespace System.CodeDom.Tests
             yield return new object[] { null, new CodePrimitiveExpression[0] };
             yield return new object[] { "", new CodePrimitiveExpression[0] };
             yield return new object[] { "Value1", new CodeAttributeArgument[0] };
-            yield return new object[] { "Value1", new CodeAttributeArgument[] { new CodeAttributeArgument("Name", new CodePrimitiveExpression("Value")) } };
-            yield return new object[] { "Value1", new CodeAttributeArgument[] { new CodeAttributeArgument() } };
+            yield return new object[]
+            {
+                "Value1",
+                new CodeAttributeArgument[]
+                {
+                    new CodeAttributeArgument("Name", new CodePrimitiveExpression("Value")),
+                },
+            };
+            yield return new object[]
+            {
+                "Value1",
+                new CodeAttributeArgument[] { new CodeAttributeArgument() },
+            };
         }
 
         [Theory]
@@ -36,7 +47,10 @@ namespace System.CodeDom.Tests
                 var declaration1 = new CodeAttributeDeclaration(name);
                 Assert.Equal(name ?? string.Empty, declaration1.Name);
                 Assert.Empty(declaration1.Arguments);
-                Assert.Equal(new CodeTypeReference(name).BaseType, declaration1.AttributeType.BaseType);
+                Assert.Equal(
+                    new CodeTypeReference(name).BaseType,
+                    declaration1.AttributeType.BaseType
+                );
             }
             var declaration2 = new CodeAttributeDeclaration(name, arguments);
             Assert.Equal(name ?? string.Empty, declaration2.Name);
@@ -47,14 +61,32 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_CodeTypeReference_TestData()
         {
             yield return new object[] { null, null };
-            yield return new object[] { new CodeTypeReference(typeof(int)), new CodeAttributeArgument[0] };
-            yield return new object[] { new CodeTypeReference("System.Void"), new CodeAttributeArgument[] { new CodeAttributeArgument("Name", new CodePrimitiveExpression("Value")) } };
-            yield return new object[] { new CodeTypeReference("System.Void"), new CodeAttributeArgument[] { new CodeAttributeArgument() } };
+            yield return new object[]
+            {
+                new CodeTypeReference(typeof(int)),
+                new CodeAttributeArgument[0],
+            };
+            yield return new object[]
+            {
+                new CodeTypeReference("System.Void"),
+                new CodeAttributeArgument[]
+                {
+                    new CodeAttributeArgument("Name", new CodePrimitiveExpression("Value")),
+                },
+            };
+            yield return new object[]
+            {
+                new CodeTypeReference("System.Void"),
+                new CodeAttributeArgument[] { new CodeAttributeArgument() },
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_CodeTypeReference_TestData))]
-        public void Ctor_CodeTypeReference(CodeTypeReference attributeType, CodeAttributeArgument[] arguments)
+        public void Ctor_CodeTypeReference(
+            CodeTypeReference attributeType,
+            CodeAttributeArgument[] arguments
+        )
         {
             if (arguments == null || arguments.Length == 0)
             {
@@ -66,21 +98,33 @@ namespace System.CodeDom.Tests
             var declaration2 = new CodeAttributeDeclaration(attributeType, arguments);
             Assert.Equal(attributeType?.BaseType ?? string.Empty, declaration2.Name);
             Assert.Equal(attributeType, declaration2.AttributeType);
-            Assert.Equal(arguments ?? new CodeAttributeArgument[0], declaration2.Arguments.Cast<CodeAttributeArgument>());
+            Assert.Equal(
+                arguments ?? new CodeAttributeArgument[0],
+                declaration2.Arguments.Cast<CodeAttributeArgument>()
+            );
         }
 
         [Fact]
         public void Ctor_NullArguments_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeAttributeDeclaration("name", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeAttributeDeclaration("name", null)
+            );
         }
 
         [Fact]
         public void Ctor_NullObjectInArguments_ThrowsArgumentNullException()
         {
             CodeAttributeArgument[] arguments = new CodeAttributeArgument[] { null };
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeAttributeDeclaration("name", arguments));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeAttributeDeclaration(new CodeTypeReference(), arguments));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeAttributeDeclaration("name", arguments)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeAttributeDeclaration(new CodeTypeReference(), arguments)
+            );
         }
 
         [Theory]
@@ -99,13 +143,23 @@ namespace System.CodeDom.Tests
         {
             var declaration = new CodeAttributeDeclaration();
 
-            CodeAttributeArgument argument1 = new CodeAttributeArgument(new CodePrimitiveExpression("Value1"));
+            CodeAttributeArgument argument1 = new CodeAttributeArgument(
+                new CodePrimitiveExpression("Value1")
+            );
             declaration.Arguments.Add(argument1);
-            Assert.Equal(new CodeAttributeArgument[] { argument1 }, declaration.Arguments.Cast<CodeAttributeArgument>());
+            Assert.Equal(
+                new CodeAttributeArgument[] { argument1 },
+                declaration.Arguments.Cast<CodeAttributeArgument>()
+            );
 
-            CodeAttributeArgument argument2 = new CodeAttributeArgument(new CodePrimitiveExpression("Value2"));
+            CodeAttributeArgument argument2 = new CodeAttributeArgument(
+                new CodePrimitiveExpression("Value2")
+            );
             declaration.Arguments.Add(argument2);
-            Assert.Equal(new CodeAttributeArgument[] { argument1, argument2 }, declaration.Arguments.Cast<CodeAttributeArgument>());
+            Assert.Equal(
+                new CodeAttributeArgument[] { argument1, argument2 },
+                declaration.Arguments.Cast<CodeAttributeArgument>()
+            );
         }
     }
 }

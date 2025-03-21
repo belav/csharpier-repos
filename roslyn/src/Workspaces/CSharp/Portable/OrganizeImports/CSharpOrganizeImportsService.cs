@@ -21,11 +21,13 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpOrganizeImportsService()
-        {
-        }
+        public CSharpOrganizeImportsService() { }
 
-        public async Task<Document> OrganizeImportsAsync(Document document, OrganizeImportsOptions options, CancellationToken cancellationToken)
+        public async Task<Document> OrganizeImportsAsync(
+            Document document,
+            OrganizeImportsOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
 
@@ -35,10 +37,10 @@ namespace Microsoft.CodeAnalysis.CSharp.OrganizeImports
             return document.WithSyntaxRoot(newRoot);
         }
 
-        public string SortImportsDisplayStringWithAccelerator
-            => CSharpWorkspaceResources.Sort_Usings;
+        public string SortImportsDisplayStringWithAccelerator =>
+            CSharpWorkspaceResources.Sort_Usings;
 
-        public string SortAndRemoveUnusedImportsDisplayStringWithAccelerator
-            => CSharpWorkspaceResources.Remove_and_Sort_Usings;
+        public string SortAndRemoveUnusedImportsDisplayStringWithAccelerator =>
+            CSharpWorkspaceResources.Remove_and_Sort_Usings;
     }
 }

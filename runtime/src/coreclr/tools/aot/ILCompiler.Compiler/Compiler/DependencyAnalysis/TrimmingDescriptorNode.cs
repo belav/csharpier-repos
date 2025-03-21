@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.IO;
-
 using ILCompiler.DependencyAnalysisFramework;
 
 namespace ILCompiler.DependencyAnalysis
@@ -22,7 +21,15 @@ namespace ILCompiler.DependencyAnalysis
             using (Stream fs = File.OpenRead(_fileName))
             {
                 var metadataManager = (UsageBasedMetadataManager)factory.MetadataManager;
-                return DescriptorMarker.GetDependencies(metadataManager.Logger, factory, fs, default, default, _fileName, metadataManager.FeatureSwitches);
+                return DescriptorMarker.GetDependencies(
+                    metadataManager.Logger,
+                    factory,
+                    fs,
+                    default,
+                    default,
+                    _fileName,
+                    metadataManager.FeatureSwitches
+                );
             }
         }
 
@@ -35,8 +42,18 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory context) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory context) => null;
-        void ICompilationRootProvider.AddCompilationRoots(IRootingServiceProvider rootProvider) => rootProvider.AddCompilationRoot(this, "Descriptor from command line");
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory context
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory context
+        ) => null;
+
+        void ICompilationRootProvider.AddCompilationRoots(IRootingServiceProvider rootProvider) =>
+            rootProvider.AddCompilationRoot(this, "Descriptor from command line");
     }
 }

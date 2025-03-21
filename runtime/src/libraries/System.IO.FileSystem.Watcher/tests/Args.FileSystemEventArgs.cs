@@ -12,7 +12,11 @@ namespace System.IO.Tests
         [InlineData(WatcherChangeTypes.All, "C:", "foo.txt")]
         [InlineData((WatcherChangeTypes)0, "", "")]
         [InlineData((WatcherChangeTypes)0, "", null)]
-        public static void FileSystemEventArgs_ctor_NonPathPropertiesAreSetCorrectly(WatcherChangeTypes changeType, string directory, string name)
+        public static void FileSystemEventArgs_ctor_NonPathPropertiesAreSetCorrectly(
+            WatcherChangeTypes changeType,
+            string directory,
+            string name
+        )
         {
             FileSystemEventArgs args = new FileSystemEventArgs(changeType, directory, name);
 
@@ -31,9 +35,17 @@ namespace System.IO.Tests
         [InlineData("E:\\bar\\", null, "E:\\bar\\")]
         [InlineData("E:\\bar\\", "", "E:\\bar\\")]
         [InlineData("E:\\bar\\", "foo.txt", "E:\\bar\\foo.txt")]
-        public static void FileSystemEventArgs_ctor_DirectoryIsAbsolutePath_Windows(string directory, string name, string expectedFullPath)
+        public static void FileSystemEventArgs_ctor_DirectoryIsAbsolutePath_Windows(
+            string directory,
+            string name,
+            string expectedFullPath
+        )
         {
-            FileSystemEventArgs args = new FileSystemEventArgs(WatcherChangeTypes.All, directory, name);
+            FileSystemEventArgs args = new FileSystemEventArgs(
+                WatcherChangeTypes.All,
+                directory,
+                name
+            );
 
             Assert.Equal(expectedFullPath, args.FullPath);
         }
@@ -50,9 +62,17 @@ namespace System.IO.Tests
         [InlineData("/bar/", null, "/bar/")]
         [InlineData("/bar/", "", "/bar/")]
         [InlineData("/bar/", "foo.txt", "/bar/foo.txt")]
-        public static void FileSystemEventArgs_ctor_DirectoryIsAbsolutePath_Unix(string directory, string name, string expectedFullPath)
+        public static void FileSystemEventArgs_ctor_DirectoryIsAbsolutePath_Unix(
+            string directory,
+            string name,
+            string expectedFullPath
+        )
         {
-            FileSystemEventArgs args = new FileSystemEventArgs(WatcherChangeTypes.All, directory, name);
+            FileSystemEventArgs args = new FileSystemEventArgs(
+                WatcherChangeTypes.All,
+                directory,
+                name
+            );
 
             Assert.Equal(expectedFullPath, args.FullPath);
         }
@@ -63,9 +83,17 @@ namespace System.IO.Tests
         [InlineData("", "foo.txt", "\\foo.txt")]
         [InlineData("bar", "foo.txt", "bar\\foo.txt")]
         [InlineData("bar\\baz", "foo.txt", "bar\\baz\\foo.txt")]
-        public static void FileSystemEventArgs_ctor_DirectoryIsRelativePath_Windows(string directory, string name, string expectedFullPath)
+        public static void FileSystemEventArgs_ctor_DirectoryIsRelativePath_Windows(
+            string directory,
+            string name,
+            string expectedFullPath
+        )
         {
-            FileSystemEventArgs args = new FileSystemEventArgs(WatcherChangeTypes.All, directory, name);
+            FileSystemEventArgs args = new FileSystemEventArgs(
+                WatcherChangeTypes.All,
+                directory,
+                name
+            );
 
             Assert.Equal(expectedFullPath, args.FullPath);
         }
@@ -78,9 +106,17 @@ namespace System.IO.Tests
         [InlineData("   ", "foo.txt", "   /foo.txt")]
         [InlineData("bar", "foo.txt", "bar/foo.txt")]
         [InlineData("bar/baz", "foo.txt", "bar/baz/foo.txt")]
-        public static void FileSystemEventArgs_ctor_DirectoryIsRelativePath_Unix(string directory, string name, string expectedFullPath)
+        public static void FileSystemEventArgs_ctor_DirectoryIsRelativePath_Unix(
+            string directory,
+            string name,
+            string expectedFullPath
+        )
         {
-            FileSystemEventArgs args = new FileSystemEventArgs(WatcherChangeTypes.All, directory, name);
+            FileSystemEventArgs args = new FileSystemEventArgs(
+                WatcherChangeTypes.All,
+                directory,
+                name
+            );
 
             Assert.Equal(expectedFullPath, args.FullPath);
         }
@@ -89,9 +125,17 @@ namespace System.IO.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         [InlineData("bar", "", "bar\\")]
         [InlineData("bar", null, "bar\\")]
-        public static void FileSystemEventArgs_ctor_EmptyFileName_Windows(string directory, string name, string expectedFullPath)
+        public static void FileSystemEventArgs_ctor_EmptyFileName_Windows(
+            string directory,
+            string name,
+            string expectedFullPath
+        )
         {
-            FileSystemEventArgs args = new FileSystemEventArgs(WatcherChangeTypes.All, directory, name);
+            FileSystemEventArgs args = new FileSystemEventArgs(
+                WatcherChangeTypes.All,
+                directory,
+                name
+            );
 
             Assert.Equal(expectedFullPath, args.FullPath);
         }
@@ -100,9 +144,17 @@ namespace System.IO.Tests
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         [InlineData("bar", "", "bar/")]
         [InlineData("bar", null, "bar/")]
-        public static void FileSystemEventArgs_ctor_EmptyFileName_Unix(string directory, string name, string expectedFullPath)
+        public static void FileSystemEventArgs_ctor_EmptyFileName_Unix(
+            string directory,
+            string name,
+            string expectedFullPath
+        )
         {
-            FileSystemEventArgs args = new FileSystemEventArgs(WatcherChangeTypes.All, directory, name);
+            FileSystemEventArgs args = new FileSystemEventArgs(
+                WatcherChangeTypes.All,
+                directory,
+                name
+            );
 
             Assert.Equal(expectedFullPath, args.FullPath);
         }
@@ -110,7 +162,9 @@ namespace System.IO.Tests
         [Fact]
         public static void FileSystemEventArgs_ctor_Invalid()
         {
-            Assert.Throws<ArgumentNullException>(() => new FileSystemEventArgs((WatcherChangeTypes)0, null, "foo.txt"));
+            Assert.Throws<ArgumentNullException>(() =>
+                new FileSystemEventArgs((WatcherChangeTypes)0, null, "foo.txt")
+            );
         }
     }
 }

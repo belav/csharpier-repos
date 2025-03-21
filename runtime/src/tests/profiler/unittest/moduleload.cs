@@ -3,25 +3,28 @@
 
 using System;
 using System.IO;
+using System.Reflection;
+using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Reflection;
-using System.Reflection.Emit;
 
 namespace Profiler.Tests
 {
     class ModuleLoadTest
     {
-        private static readonly Guid ModuleLoadGuid = new Guid("1774B2E5-028B-4FA8-9DE5-26218CBCBBAC");
+        private static readonly Guid ModuleLoadGuid = new Guid(
+            "1774B2E5-028B-4FA8-9DE5-26218CBCBBAC"
+        );
 
         public static int RunTest(string[] args)
         {
-            var type = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("TestAssembly"), AssemblyBuilderAccess.Run)
-                                      .DefineDynamicModule("TestModule")
-                                      .DefineType("TestClass", TypeAttributes.Public)
-                                      .CreateType();
-                                      
+            var type = AssemblyBuilder
+                .DefineDynamicAssembly(new AssemblyName("TestAssembly"), AssemblyBuilderAccess.Run)
+                .DefineDynamicModule("TestModule")
+                .DefineType("TestClass", TypeAttributes.Public)
+                .CreateType();
+
             var obj = Activator.CreateInstance(type);
             if (obj == null)
             {
@@ -38,9 +41,11 @@ namespace Profiler.Tests
                 return RunTest(args);
             }
 
-            return ProfilerTestRunner.Run(profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
-                                          testName: "UnitTestModuleLoad",
-                                          profilerClsid: ModuleLoadGuid);
+            return ProfilerTestRunner.Run(
+                profileePath: System.Reflection.Assembly.GetExecutingAssembly().Location,
+                testName: "UnitTestModuleLoad",
+                profilerClsid: ModuleLoadGuid
+            );
         }
     }
 }

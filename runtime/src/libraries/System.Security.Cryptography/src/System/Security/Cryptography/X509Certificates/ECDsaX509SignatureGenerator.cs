@@ -51,7 +51,8 @@ namespace System.Security.Cryptography.X509Certificates
                 throw new ArgumentOutOfRangeException(
                     nameof(hashAlgorithm),
                     hashAlgorithm,
-                    SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name));
+                    SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name)
+                );
             }
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
@@ -98,20 +99,29 @@ namespace System.Security.Cryptography.X509Certificates
             curveOidEncoded = writer.Encode();
 
             Debug.Assert(ecParameters.Q.X!.Length == ecParameters.Q.Y!.Length);
-            byte[] uncompressedPoint = new byte[1 + ecParameters.Q.X.Length + ecParameters.Q.Y.Length];
+            byte[] uncompressedPoint = new byte[
+                1 + ecParameters.Q.X.Length + ecParameters.Q.Y.Length
+            ];
 
             // Uncompressed point (0x04)
             uncompressedPoint[0] = 0x04;
 
             Buffer.BlockCopy(ecParameters.Q.X, 0, uncompressedPoint, 1, ecParameters.Q.X.Length);
-            Buffer.BlockCopy(ecParameters.Q.Y, 0, uncompressedPoint, 1 + ecParameters.Q.X.Length, ecParameters.Q.Y.Length);
+            Buffer.BlockCopy(
+                ecParameters.Q.Y,
+                0,
+                uncompressedPoint,
+                1 + ecParameters.Q.X.Length,
+                ecParameters.Q.Y.Length
+            );
 
             Oid ecPublicKey = Oids.EcPublicKeyOid;
 
             return new PublicKey(
                 ecPublicKey,
                 new AsnEncodedData(ecPublicKey, curveOidEncoded, skipCopy: true),
-                new AsnEncodedData(ecPublicKey, uncompressedPoint, skipCopy: true));
+                new AsnEncodedData(ecPublicKey, uncompressedPoint, skipCopy: true)
+            );
         }
     }
 }

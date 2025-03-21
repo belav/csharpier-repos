@@ -4,34 +4,41 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
-    using  System.Collections.Specialized;
-    using  System.Runtime.Serialization;
-    using  System.Configuration.Provider;
+namespace System.Configuration
+{
+    using System.Collections.Specialized;
+    using System.Configuration.Provider;
+    using System.Runtime.Serialization;
 
-   ////////////////////////////////////////////////////////////
-   ////////////////////////////////////////////////////////////
-   ////////////////////////////////////////////////////////////
-   public class SettingsProviderCollection : ProviderCollection
-   {
-       public override void Add(ProviderBase provider) {
-           if( provider == null )
-           {
-               throw new ArgumentNullException( "provider" );
-           }
+    ////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////
+    public class SettingsProviderCollection : ProviderCollection
+    {
+        public override void Add(ProviderBase provider)
+        {
+            if (provider == null)
+            {
+                throw new ArgumentNullException("provider");
+            }
 
-           if( !( provider is SettingsProvider ) )
-           {
-                throw new ArgumentException(SR.GetString(SR.Config_provider_must_implement_type, typeof(SettingsProvider).ToString()), "provider");
-           }
- 
-           base.Add( provider );
-       }
+            if (!(provider is SettingsProvider))
+            {
+                throw new ArgumentException(
+                    SR.GetString(
+                        SR.Config_provider_must_implement_type,
+                        typeof(SettingsProvider).ToString()
+                    ),
+                    "provider"
+                );
+            }
 
-       new public SettingsProvider this[string name] {
-           get {
-               return (SettingsProvider) base[name];
-           }
-       }
-   }
+            base.Add(provider);
+        }
+
+        public new SettingsProvider this[string name]
+        {
+            get { return (SettingsProvider)base[name]; }
+        }
+    }
 }

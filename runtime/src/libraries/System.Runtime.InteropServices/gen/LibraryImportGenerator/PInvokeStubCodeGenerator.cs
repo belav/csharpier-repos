@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Collections.Immutable;
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
@@ -50,19 +50,34 @@ namespace Microsoft.Interop
             bool setLastError,
             GeneratorDiagnosticsBag diagnosticsBag,
             IMarshallingGeneratorFactory generatorFactory,
-            CodeEmitOptions codeEmitOptions)
+            CodeEmitOptions codeEmitOptions
+        )
         {
             _setLastError = setLastError;
 
             _context = new ManagedToNativeStubCodeContext(ReturnIdentifier, ReturnIdentifier);
-            _marshallers = BoundGenerators.Create(argTypes, generatorFactory, _context, new Forwarder(), out var bindingDiagnostics);
+            _marshallers = BoundGenerators.Create(
+                argTypes,
+                generatorFactory,
+                _context,
+                new Forwarder(),
+                out var bindingDiagnostics
+            );
 
             diagnosticsBag.ReportGeneratorDiagnostics(bindingDiagnostics);
 
-            if (_marshallers.ManagedReturnMarshaller.Generator.UsesNativeIdentifier(_marshallers.ManagedReturnMarshaller.TypeInfo, _context))
+            if (
+                _marshallers.ManagedReturnMarshaller.Generator.UsesNativeIdentifier(
+                    _marshallers.ManagedReturnMarshaller.TypeInfo,
+                    _context
+                )
+            )
             {
                 // If we need a different native return identifier, then recreate the context with the correct identifier before we generate any code.
-                _context = new ManagedToNativeStubCodeContext(ReturnIdentifier, $"{ReturnIdentifier}{StubCodeContext.GeneratedNativeIdentifierSuffix}");
+                _context = new ManagedToNativeStubCodeContext(
+                    ReturnIdentifier,
+                    $"{ReturnIdentifier}{StubCodeContext.GeneratedNativeIdentifierSuffix}"
+                );
             }
 
             _context = _context with { CodeEmitOptions = codeEmitOptions };
@@ -72,13 +87,14 @@ namespace Microsoft.Interop
             foreach (BoundGenerator generator in _marshallers.SignatureMarshallers)
             {
                 // Check if generator is either blittable or just a forwarder.
-                noMarshallingNeeded &= generator is { Generator: BlittableMarshaller, TypeInfo.IsByRef: false }
-                        or { Generator: Forwarder };
+                noMarshallingNeeded &=
+                    generator
+                        is { Generator: BlittableMarshaller, TypeInfo.IsByRef: false }
+                            or { Generator: Forwarder };
             }
 
-            StubIsBasicForwarder = !setLastError
-                && _marshallers.ManagedNativeSameReturn
-                && noMarshallingNeeded;
+            StubIsBasicForwarder =
+                !setLastError && _marshallers.ManagedNativeSameReturn && noMarshallingNeeded;
         }
 
         /// <summary>
@@ -91,24 +107,50 @@ namespace Microsoft.Interop
         /// </remarks>
         public BlockSyntax GeneratePInvokeBody(string dllImportName)
         {
-            GeneratedStatements statements = GeneratedStatements.Create(_marshallers, _context, IdentifierName(dllImportName));
-            bool shouldInitializeVariables = !statements.GuaranteedUnmarshal.IsEmpty || !statements.CleanupCallerAllocated.IsEmpty || !statements.CleanupCalleeAllocated.IsEmpty;
-            VariableDeclarations declarations = VariableDeclarations.GenerateDeclarationsForManagedToUnmanaged(_marshallers, _context, shouldInitializeVariables);
+            GeneratedStatements statements = GeneratedStatements.Create(
+                _marshallers,
+                _context,
+                IdentifierName(dllImportName)
+            );
+            bool shouldInitializeVariables =
+                !statements.GuaranteedUnmarshal.IsEmpty
+                || !statements.CleanupCallerAllocated.IsEmpty
+                || !statements.CleanupCalleeAllocated.IsEmpty;
+            VariableDeclarations declarations =
+                VariableDeclarations.GenerateDeclarationsForManagedToUnmanaged(
+                    _marshallers,
+                    _context,
+                    shouldInitializeVariables
+                );
 
             var setupStatements = new List<StatementSyntax>();
 
             if (_setLastError)
             {
                 // Declare variable for last error
-                setupStatements.Add(Declare(
-                    PredefinedType(Token(SyntaxKind.IntKeyword)),
-                    LastErrorIdentifier,
-                    initializeToDefault: false));
+                setupStatements.Add(
+                    Declare(
+                        PredefinedType(Token(SyntaxKind.IntKeyword)),
+                        LastErrorIdentifier,
+                        initializeToDefault: false
+                    )
+                );
             }
 
-            if (!(statements.GuaranteedUnmarshal.IsEmpty && statements.CleanupCalleeAllocated.IsEmpty))
+            if (
+                !(
+                    statements.GuaranteedUnmarshal.IsEmpty
+                    && statements.CleanupCalleeAllocated.IsEmpty
+                )
+            )
             {
-                setupStatements.Add(Declare(PredefinedType(Token(SyntaxKind.BoolKeyword)), InvokeSucceededIdentifier, initializeToDefault: true));
+                setupStatements.Add(
+                    Declare(
+                        PredefinedType(Token(SyntaxKind.BoolKeyword)),
+                        InvokeSucceededIdentifier,
+                        initializeToDefault: true
+                    )
+                );
             }
 
             setupStatements.AddRange(declarations.Initializations);
@@ -121,11 +163,18 @@ namespace Microsoft.Interop
             BlockSyntax fixedBlock = Block(statements.PinnedMarshal);
             if (_setLastError)
             {
-                StatementSyntax clearLastError = MarshallerHelpers.CreateClearLastSystemErrorStatement(SuccessErrorCode);
+                StatementSyntax clearLastError =
+                    MarshallerHelpers.CreateClearLastSystemErrorStatement(SuccessErrorCode);
 
-                StatementSyntax getLastError = MarshallerHelpers.CreateGetLastSystemErrorStatement(LastErrorIdentifier);
+                StatementSyntax getLastError = MarshallerHelpers.CreateGetLastSystemErrorStatement(
+                    LastErrorIdentifier
+                );
 
-                fixedBlock = fixedBlock.AddStatements(clearLastError, statements.InvokeStatement, getLastError);
+                fixedBlock = fixedBlock.AddStatements(
+                    clearLastError,
+                    statements.InvokeStatement,
+                    getLastError
+                );
             }
             else
             {
@@ -133,11 +182,22 @@ namespace Microsoft.Interop
             }
             tryStatements.Add(statements.Pin.NestFixedStatements(fixedBlock));
             // <invokeSucceeded> = true;
-            if (!(statements.GuaranteedUnmarshal.IsEmpty && statements.CleanupCalleeAllocated.IsEmpty))
+            if (
+                !(
+                    statements.GuaranteedUnmarshal.IsEmpty
+                    && statements.CleanupCalleeAllocated.IsEmpty
+                )
+            )
             {
-                tryStatements.Add(ExpressionStatement(AssignmentExpression(SyntaxKind.SimpleAssignmentExpression,
-                    IdentifierName(InvokeSucceededIdentifier),
-                    LiteralExpression(SyntaxKind.TrueLiteralExpression))));
+                tryStatements.Add(
+                    ExpressionStatement(
+                        AssignmentExpression(
+                            SyntaxKind.SimpleAssignmentExpression,
+                            IdentifierName(InvokeSucceededIdentifier),
+                            LiteralExpression(SyntaxKind.TrueLiteralExpression)
+                        )
+                    )
+                );
             }
 
             tryStatements.AddRange(statements.NotifyForSuccessfulInvoke);
@@ -145,9 +205,21 @@ namespace Microsoft.Interop
 
             List<StatementSyntax> allStatements = setupStatements;
             List<StatementSyntax> finallyStatements = new List<StatementSyntax>();
-            if (!(statements.GuaranteedUnmarshal.IsEmpty && statements.CleanupCalleeAllocated.IsEmpty))
+            if (
+                !(
+                    statements.GuaranteedUnmarshal.IsEmpty
+                    && statements.CleanupCalleeAllocated.IsEmpty
+                )
+            )
             {
-                finallyStatements.Add(IfStatement(IdentifierName(InvokeSucceededIdentifier), Block(statements.GuaranteedUnmarshal.Concat(statements.CleanupCalleeAllocated))));
+                finallyStatements.Add(
+                    IfStatement(
+                        IdentifierName(InvokeSucceededIdentifier),
+                        Block(
+                            statements.GuaranteedUnmarshal.Concat(statements.CleanupCalleeAllocated)
+                        )
+                    )
+                );
             }
 
             finallyStatements.AddRange(statements.CleanupCallerAllocated);
@@ -155,7 +227,12 @@ namespace Microsoft.Interop
             {
                 // Add try-finally block if there are any statements in the finally block
                 allStatements.Add(
-                    TryStatement(Block(tryStatements), default, FinallyClause(Block(finallyStatements))));
+                    TryStatement(
+                        Block(tryStatements),
+                        default,
+                        FinallyClause(Block(finallyStatements))
+                    )
+                );
             }
             else
             {
@@ -165,17 +242,31 @@ namespace Microsoft.Interop
             if (_setLastError)
             {
                 // Marshal.SetLastPInvokeError(<lastError>);
-                allStatements.Add(MarshallerHelpers.CreateSetLastPInvokeErrorStatement(LastErrorIdentifier));
+                allStatements.Add(
+                    MarshallerHelpers.CreateSetLastPInvokeErrorStatement(LastErrorIdentifier)
+                );
             }
 
             // Return
             if (!_marshallers.IsManagedVoidReturn)
-                allStatements.Add(ReturnStatement(IdentifierName(_context.GetIdentifiers(_marshallers.ManagedReturnMarshaller.TypeInfo).managed)));
+                allStatements.Add(
+                    ReturnStatement(
+                        IdentifierName(
+                            _context
+                                .GetIdentifiers(_marshallers.ManagedReturnMarshaller.TypeInfo)
+                                .managed
+                        )
+                    )
+                );
 
             return Block(allStatements);
         }
 
-        public (ParameterListSyntax ParameterList, TypeSyntax ReturnType, AttributeListSyntax? ReturnTypeAttributes) GenerateTargetMethodSignatureData()
+        public (
+            ParameterListSyntax ParameterList,
+            TypeSyntax ReturnType,
+            AttributeListSyntax? ReturnTypeAttributes
+        ) GenerateTargetMethodSignatureData()
         {
             return _marshallers.GenerateTargetMethodSignatureData(_context);
         }

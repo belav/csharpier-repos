@@ -17,42 +17,27 @@ namespace System.Reflection.Metadata
 
         public int Generation
         {
-            get
-            {
-                return _reader.ModuleTable.GetGeneration();
-            }
+            get { return _reader.ModuleTable.GetGeneration(); }
         }
 
         public StringHandle Name
         {
-            get
-            {
-                return _reader.ModuleTable.GetName();
-            }
+            get { return _reader.ModuleTable.GetName(); }
         }
 
         public GuidHandle Mvid
         {
-            get
-            {
-                return _reader.ModuleTable.GetMvid();
-            }
+            get { return _reader.ModuleTable.GetMvid(); }
         }
 
         public GuidHandle GenerationId
         {
-            get
-            {
-                return _reader.ModuleTable.GetEncId();
-            }
+            get { return _reader.ModuleTable.GetEncId(); }
         }
 
         public GuidHandle BaseGenerationId
         {
-            get
-            {
-                return _reader.ModuleTable.GetEncBaseId();
-            }
+            get { return _reader.ModuleTable.GetEncBaseId(); }
         }
 
         public CustomAttributeHandleCollection GetCustomAttributes()

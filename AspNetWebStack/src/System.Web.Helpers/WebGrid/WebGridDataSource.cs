@@ -17,7 +17,11 @@ namespace System.Web.Helpers
     /// </summary>
     internal sealed class WebGridDataSource : IWebGridDataSource
     {
-        private static readonly MethodInfo SortGenericExpressionMethod = typeof(WebGridDataSource).GetMethod("SortGenericExpression", BindingFlags.Static | BindingFlags.NonPublic);
+        private static readonly MethodInfo SortGenericExpressionMethod =
+            typeof(WebGridDataSource).GetMethod(
+                "SortGenericExpression",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
 
         private readonly WebGrid _grid;
         private readonly Type _elementType;
@@ -25,7 +29,13 @@ namespace System.Web.Helpers
         private readonly bool _canPage;
         private readonly bool _canSort;
 
-        public WebGridDataSource(WebGrid grid, IEnumerable<dynamic> values, Type elementType, bool canPage, bool canSort)
+        public WebGridDataSource(
+            WebGrid grid,
+            IEnumerable<dynamic> values,
+            Type elementType,
+            bool canPage,
+            bool canSort
+        )
         {
             Debug.Assert(grid != null);
             Debug.Assert(values != null);
@@ -64,18 +74,23 @@ namespace System.Web.Helpers
             }
             catch (ArgumentException)
             {
-                // The OrderBy method uses a generic comparer which fails when the collection contains 2 or more 
+                // The OrderBy method uses a generic comparer which fails when the collection contains 2 or more
                 // items that cannot be compared (e.g. DBNulls, mixed types such as strings and ints et al) with the exception
                 // System.ArgumentException: At least one object must implement IComparable.
                 // Silently fail if this exception occurs and declare that the two items are equivalent
                 rowData = Page(_values.AsQueryable(), pageIndex);
             }
-            return rowData.Select((value, index) => new WebGridRow(_grid, value: value, rowIndex: index)).ToList();
+            return rowData
+                .Select((value, index) => new WebGridRow(_grid, value: value, rowIndex: index))
+                .ToList();
         }
 
         private IQueryable<dynamic> Sort(IQueryable<dynamic> data, SortInfo sortInfo)
         {
-            if (!String.IsNullOrEmpty(sortInfo.SortColumn) || ((DefaultSort != null) && !String.IsNullOrEmpty(DefaultSort.SortColumn)))
+            if (
+                !String.IsNullOrEmpty(sortInfo.SortColumn)
+                || ((DefaultSort != null) && !String.IsNullOrEmpty(DefaultSort.SortColumn))
+            )
             {
                 return Sort(data, _elementType, sortInfo);
             }
@@ -102,13 +117,20 @@ namespace System.Web.Helpers
                 // must build a custom LINQ expression for getting the dynamic property value.
                 // Lambda: o => o.Property (where Property is obtained by runtime binder)
                 // NOTE: lambda must not use internals otherwise this will fail in partial trust when Helpers assembly is in GAC
-                var binder = Binder.GetMember(CSharpBinderFlags.None, sort.SortColumn, typeof(WebGrid), new[]
-                {
-                    CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null)
-                });
+                var binder = Binder.GetMember(
+                    CSharpBinderFlags.None,
+                    sort.SortColumn,
+                    typeof(WebGrid),
+                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) }
+                );
                 var param = Expression.Parameter(typeof(IDynamicMetaObjectProvider), "o");
                 var getter = Expression.Dynamic(binder, typeof(object), param);
-                return SortGenericExpression<IDynamicMetaObjectProvider, object>(data, getter, param, sort.SortDirection);
+                return SortGenericExpression<IDynamicMetaObjectProvider, object>(
+                    data,
+                    getter,
+                    param,
+                    sort.SortDirection
+                );
             }
 
             Expression sorterFunctionBody;
@@ -138,7 +160,11 @@ namespace System.Web.Helpers
                     if (prop == null)
                     {
                         // no-op in case navigation property came from querystring (falls back to default sort)
-                        if ((DefaultSort != null) && !sort.Equals(DefaultSort) && !String.IsNullOrEmpty(DefaultSort.SortColumn))
+                        if (
+                            (DefaultSort != null)
+                            && !sort.Equals(DefaultSort)
+                            && !String.IsNullOrEmpty(DefaultSort.SortColumn)
+                        )
                         {
                             return Sort(data, elementType, DefaultSort);
                         }
@@ -150,12 +176,29 @@ namespace System.Web.Helpers
                 sorterFunctionBody = member;
             }
 
-            var actualSortMethod = SortGenericExpressionMethod.MakeGenericMethod(elementType, sorterFunctionBody.Type);
-            return (IQueryable<dynamic>)actualSortMethod.Invoke(null, new object[] { data, sorterFunctionBody, sorterFunctionParameter, sort.SortDirection });
+            var actualSortMethod = SortGenericExpressionMethod.MakeGenericMethod(
+                elementType,
+                sorterFunctionBody.Type
+            );
+            return (IQueryable<dynamic>)
+                actualSortMethod.Invoke(
+                    null,
+                    new object[]
+                    {
+                        data,
+                        sorterFunctionBody,
+                        sorterFunctionParameter,
+                        sort.SortDirection,
+                    }
+                );
         }
 
-        private static IQueryable<TElement> SortGenericExpression<TElement, TProperty>(IQueryable<dynamic> data, Expression body,
-                                                                                       ParameterExpression param, SortDirection sortDirection)
+        private static IQueryable<TElement> SortGenericExpression<TElement, TProperty>(
+            IQueryable<dynamic> data,
+            Expression body,
+            ParameterExpression param,
+            SortDirection sortDirection
+        )
         {
             Debug.Assert(data != null);
             Debug.Assert(body != null);
@@ -164,7 +207,9 @@ namespace System.Web.Helpers
             // The IQueryable<dynamic> data source is cast as an IQueryable<object> at runtime.  We must cast
             // this to an IQueryable<TElement> so that the reflection done by the LINQ expressions will work.
             IQueryable<TElement> data2 = data.Cast<TElement>();
-            Expression<Func<TElement, TProperty>> lambda = Expression.Lambda<Func<TElement, TProperty>>(body, param);
+            Expression<Func<TElement, TProperty>> lambda = Expression.Lambda<
+                Func<TElement, TProperty>
+            >(body, param);
             if (sortDirection == SortDirection.Descending)
             {
                 return data2.OrderByDescending(lambda);

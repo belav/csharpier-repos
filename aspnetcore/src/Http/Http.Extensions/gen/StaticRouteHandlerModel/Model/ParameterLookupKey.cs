@@ -27,8 +27,8 @@ internal sealed class ParameterLookupKey
     {
         if (obj is ParameterLookupKey other)
         {
-            return SymbolEqualityComparer.Default.Equals(Type, other.Type) &&
-                string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase);
+            return SymbolEqualityComparer.Default.Equals(Type, other.Type)
+                && string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase);
         }
         return false;
     }

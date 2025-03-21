@@ -4,22 +4,25 @@
 namespace System.ServiceModel
 {
     using System.ServiceModel.Channels;
+
     public enum NetMsmqSecurityMode
     {
         None,
         Transport,
         Message,
-        Both
+        Both,
     }
 
     static class NetMsmqSecurityModeHelper
     {
         internal static bool IsDefined(NetMsmqSecurityMode value)
         {
-            return (value == NetMsmqSecurityMode.Transport
+            return (
+                value == NetMsmqSecurityMode.Transport
                 || value == NetMsmqSecurityMode.Message
                 || value == NetMsmqSecurityMode.Both
-                || value == NetMsmqSecurityMode.None);
+                || value == NetMsmqSecurityMode.None
+            );
         }
 
         internal static NetMsmqSecurityMode ToSecurityMode(UnifiedSecurityMode value)
@@ -40,5 +43,3 @@ namespace System.ServiceModel
         }
     }
 }
-
-

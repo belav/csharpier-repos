@@ -22,7 +22,8 @@ public class EmptySchemaTest : IClassFixture<ScratchDatabaseFixture>
             .AddSingleton<IConfiguration>(new ConfigurationBuilder().Build())
             .AddDbContext<EmptyDbContext>(o =>
                 o.UseSqlite(fixture.Connection)
-                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning)))
+                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
+            )
             .AddIdentity<IdentityUser, IdentityRole>(o =>
             {
                 // Versions >= 10 are empty
@@ -31,7 +32,9 @@ public class EmptySchemaTest : IClassFixture<ScratchDatabaseFixture>
             .AddEntityFrameworkStores<EmptyDbContext>();
 
         _builder = new ApplicationBuilder(services.BuildServiceProvider());
-        using var scope = _builder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
+        using var scope = _builder
+            .ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+            .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<EmptyDbContext>();
         db.Database.EnsureCreated();
     }
@@ -39,7 +42,9 @@ public class EmptySchemaTest : IClassFixture<ScratchDatabaseFixture>
     [Fact]
     public void CanIgnoreEverything()
     {
-        using var scope = _builder.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope();
+        using var scope = _builder
+            .ApplicationServices.GetRequiredService<IServiceScopeFactory>()
+            .CreateScope();
         var db = scope.ServiceProvider.GetRequiredService<EmptyDbContext>();
         VerifyEmptySchema(db);
     }

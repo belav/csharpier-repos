@@ -48,8 +48,12 @@ namespace System.Web.Mvc.Test
             // Act & assert
             controller.BeginExecute(requestContext, null, null);
             Assert.Throws<InvalidOperationException>(
-                delegate { controller.BeginExecute(requestContext, null, null); },
-                @"A single instance of controller 'System.Web.Mvc.Test.AsyncControllerTest+EmptyController' cannot be used to handle multiple requests. If a custom controller factory is in use, make sure that it creates a new instance of the controller for each request.");
+                delegate
+                {
+                    controller.BeginExecute(requestContext, null, null);
+                },
+                @"A single instance of controller 'System.Web.Mvc.Test.AsyncControllerTest+EmptyController' cannot be used to handle multiple requests. If a custom controller factory is in use, make sure that it creates a new instance of the controller for each request."
+            );
         }
 
         [Fact]
@@ -60,7 +64,12 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { controller.BeginExecute(null, null, null); }, "requestContext");
+                delegate
+                {
+                    controller.BeginExecute(null, null, null);
+                },
+                "requestContext"
+            );
         }
 
         [Fact]
@@ -70,17 +79,30 @@ namespace System.Web.Mvc.Test
             using (MockAsyncResult innerAsyncResult = new MockAsyncResult())
             {
                 Mock<IAsyncActionInvoker> mockActionInvoker = new Mock<IAsyncActionInvoker>();
-                mockActionInvoker.Setup(o => o.BeginInvokeAction(It.IsAny<ControllerContext>(), "SomeAction", It.IsAny<AsyncCallback>(), It.IsAny<object>())).Returns(innerAsyncResult);
+                mockActionInvoker
+                    .Setup(o =>
+                        o.BeginInvokeAction(
+                            It.IsAny<ControllerContext>(),
+                            "SomeAction",
+                            It.IsAny<AsyncCallback>(),
+                            It.IsAny<object>()
+                        )
+                    )
+                    .Returns(innerAsyncResult);
                 mockActionInvoker.Setup(o => o.EndInvokeAction(innerAsyncResult)).Returns(true);
 
                 RequestContext requestContext = GetRequestContext("SomeAction");
                 EmptyController controller = new EmptyController()
                 {
-                    ActionInvoker = mockActionInvoker.Object
+                    ActionInvoker = mockActionInvoker.Object,
                 };
 
                 // Act & assert
-                IAsyncResult outerAsyncResult = ((IAsyncController)controller).BeginExecute(requestContext, null, null);
+                IAsyncResult outerAsyncResult = ((IAsyncController)controller).BeginExecute(
+                    requestContext,
+                    null,
+                    null
+                );
                 Assert.False(controller.TempDataSaved);
 
                 ((IAsyncController)controller).EndExecute(outerAsyncResult);
@@ -96,17 +118,30 @@ namespace System.Web.Mvc.Test
             using (MockAsyncResult innerAsyncResult = new MockAsyncResult())
             {
                 Mock<IAsyncActionInvoker> mockActionInvoker = new Mock<IAsyncActionInvoker>();
-                mockActionInvoker.Setup(o => o.BeginInvokeAction(It.IsAny<ControllerContext>(), "SomeAction", It.IsAny<AsyncCallback>(), It.IsAny<object>())).Returns(innerAsyncResult);
+                mockActionInvoker
+                    .Setup(o =>
+                        o.BeginInvokeAction(
+                            It.IsAny<ControllerContext>(),
+                            "SomeAction",
+                            It.IsAny<AsyncCallback>(),
+                            It.IsAny<object>()
+                        )
+                    )
+                    .Returns(innerAsyncResult);
                 mockActionInvoker.Setup(o => o.EndInvokeAction(innerAsyncResult)).Returns(false);
 
                 RequestContext requestContext = GetRequestContext("SomeAction");
                 EmptyController controller = new EmptyController()
                 {
-                    ActionInvoker = mockActionInvoker.Object
+                    ActionInvoker = mockActionInvoker.Object,
                 };
 
                 // Act & assert
-                IAsyncResult outerAsyncResult = ((IAsyncController)controller).BeginExecute(requestContext, null, null);
+                IAsyncResult outerAsyncResult = ((IAsyncController)controller).BeginExecute(
+                    requestContext,
+                    null,
+                    null
+                );
                 Assert.False(controller.TempDataSaved);
 
                 ((IAsyncController)controller).EndExecute(outerAsyncResult);
@@ -122,16 +157,22 @@ namespace System.Web.Mvc.Test
             using (MockAsyncResult innerAsyncResult = new MockAsyncResult())
             {
                 Mock<IActionInvoker> mockActionInvoker = new Mock<IActionInvoker>();
-                mockActionInvoker.Setup(o => o.InvokeAction(It.IsAny<ControllerContext>(), "SomeAction")).Returns(true);
+                mockActionInvoker
+                    .Setup(o => o.InvokeAction(It.IsAny<ControllerContext>(), "SomeAction"))
+                    .Returns(true);
 
                 RequestContext requestContext = GetRequestContext("SomeAction");
                 EmptyController controller = new EmptyController()
                 {
-                    ActionInvoker = mockActionInvoker.Object
+                    ActionInvoker = mockActionInvoker.Object,
                 };
 
                 // Act & assert
-                IAsyncResult outerAsyncResult = ((IAsyncController)controller).BeginExecute(requestContext, null, null);
+                IAsyncResult outerAsyncResult = ((IAsyncController)controller).BeginExecute(
+                    requestContext,
+                    null,
+                    null
+                );
                 Assert.False(controller.TempDataSaved);
 
                 ((IAsyncController)controller).EndExecute(outerAsyncResult);
@@ -147,16 +188,22 @@ namespace System.Web.Mvc.Test
             using (MockAsyncResult innerAsyncResult = new MockAsyncResult())
             {
                 Mock<IActionInvoker> mockActionInvoker = new Mock<IActionInvoker>();
-                mockActionInvoker.Setup(o => o.InvokeAction(It.IsAny<ControllerContext>(), "SomeAction")).Returns(false);
+                mockActionInvoker
+                    .Setup(o => o.InvokeAction(It.IsAny<ControllerContext>(), "SomeAction"))
+                    .Returns(false);
 
                 RequestContext requestContext = GetRequestContext("SomeAction");
                 EmptyController controller = new EmptyController()
                 {
-                    ActionInvoker = mockActionInvoker.Object
+                    ActionInvoker = mockActionInvoker.Object,
                 };
 
                 // Act & assert
-                IAsyncResult outerAsyncResult = ((IAsyncController)controller).BeginExecute(requestContext, null, null);
+                IAsyncResult outerAsyncResult = ((IAsyncController)controller).BeginExecute(
+                    requestContext,
+                    null,
+                    null
+                );
                 Assert.False(controller.TempDataSaved);
 
                 ((IAsyncController)controller).EndExecute(outerAsyncResult);
@@ -171,19 +218,30 @@ namespace System.Web.Mvc.Test
             // Arrange
             Mock<IAsyncActionInvoker> mockActionInvoker = new Mock<IAsyncActionInvoker>();
             mockActionInvoker
-                .Setup(o => o.BeginInvokeAction(It.IsAny<ControllerContext>(), "SomeAction", It.IsAny<AsyncCallback>(), It.IsAny<object>()))
+                .Setup(o =>
+                    o.BeginInvokeAction(
+                        It.IsAny<ControllerContext>(),
+                        "SomeAction",
+                        It.IsAny<AsyncCallback>(),
+                        It.IsAny<object>()
+                    )
+                )
                 .Throws(new Exception("Some exception text."));
 
             RequestContext requestContext = GetRequestContext("SomeAction");
             EmptyController controller = new EmptyController()
             {
-                ActionInvoker = mockActionInvoker.Object
+                ActionInvoker = mockActionInvoker.Object,
             };
 
             // Act & assert
             Assert.Throws<Exception>(
-                delegate { ((IAsyncController)controller).BeginExecute(requestContext, null, null); },
-                @"Some exception text.");
+                delegate
+                {
+                    ((IAsyncController)controller).BeginExecute(requestContext, null, null);
+                },
+                @"Some exception text."
+            );
             Assert.True(controller.TempDataSaved);
         }
 
@@ -194,7 +252,9 @@ namespace System.Web.Mvc.Test
             var controller = new EmptyController();
             Mock<IDependencyResolver> resolverMock = new Mock<IDependencyResolver>();
             Mock<IAsyncActionInvoker> actionInvokerMock = new Mock<IAsyncActionInvoker>();
-            resolverMock.Setup(r => r.GetService(typeof(IAsyncActionInvoker))).Returns(actionInvokerMock.Object);
+            resolverMock
+                .Setup(r => r.GetService(typeof(IAsyncActionInvoker)))
+                .Returns(actionInvokerMock.Object);
             controller.Resolver = resolverMock.Object;
 
             var ai = controller.CreateActionInvoker();
@@ -219,7 +279,6 @@ namespace System.Web.Mvc.Test
             resolverMock.Verify(r => r.GetService(typeof(IActionInvoker)), Times.Once());
             Assert.NotNull(ai);
         }
-
 
         private static RequestContext GetRequestContext(string actionName)
         {
@@ -251,7 +310,6 @@ namespace System.Web.Mvc.Test
                 return base.CreateActionInvoker();
             }
 
-
             private class DummyTempDataProvider : ITempDataProvider
             {
                 public IDictionary<string, object> LoadTempData(ControllerContext controllerContext)
@@ -259,7 +317,10 @@ namespace System.Web.Mvc.Test
                     return new TempDataDictionary();
                 }
 
-                public void SaveTempData(ControllerContext controllerContext, IDictionary<string, object> values)
+                public void SaveTempData(
+                    ControllerContext controllerContext,
+                    IDictionary<string, object> values
+                )
                 {
                     ((EmptyController)controllerContext.Controller).TempDataSaved = true;
                 }

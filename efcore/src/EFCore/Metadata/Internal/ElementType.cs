@@ -15,7 +15,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class ElementType : ConventionAnnotatable, IMutableElementType, IConventionElementType, IElementType
+public class ElementType
+    : ConventionAnnotatable,
+        IMutableElementType,
+        IConventionElementType,
+        IElementType
 {
     private InternalElementTypeBuilder? _builder;
 
@@ -35,12 +39,16 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     public ElementType(
         Type clrType,
         Property collectionProperty,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         ClrType = clrType;
         CollectionProperty = collectionProperty;
         _configurationSource = configurationSource;
-        _builder = new InternalElementTypeBuilder(this, collectionProperty.DeclaringType.Model.Builder);
+        _builder = new InternalElementTypeBuilder(
+            this,
+            collectionProperty.DeclaringType.Model.Builder
+        );
     }
 
     /// <summary>
@@ -49,8 +57,7 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource GetConfigurationSource()
-        => _configurationSource;
+    public virtual ConfigurationSource GetConfigurationSource() => _configurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,8 +65,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource)
-        => _configurationSource = configurationSource.Max(_configurationSource);
+    public virtual void UpdateConfigurationSource(ConfigurationSource configurationSource) =>
+        _configurationSource = configurationSource.Max(_configurationSource);
 
     // Needed for a workaround before reference counting is implemented
     // Issue #15898
@@ -69,8 +76,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetConfigurationSource(ConfigurationSource configurationSource)
-        => _configurationSource = configurationSource;
+    public virtual void SetConfigurationSource(ConfigurationSource configurationSource) =>
+        _configurationSource = configurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -81,7 +88,11 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     public virtual InternalElementTypeBuilder Builder
     {
         [DebuggerStepThrough]
-        get => _builder ?? throw new InvalidOperationException(CoreStrings.ObjectRemovedFromModel(ClrType.ShortDisplayName()));
+        get =>
+            _builder
+            ?? throw new InvalidOperationException(
+                CoreStrings.ObjectRemovedFromModel(ClrType.ShortDisplayName())
+            );
     }
 
     /// <summary>
@@ -90,9 +101,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsInModel
-        => _builder is not null
-            && CollectionProperty.DeclaringType.IsInModel;
+    public virtual bool IsInModel =>
+        _builder is not null && CollectionProperty.DeclaringType.IsInModel;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -100,8 +110,7 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SetRemovedFromModel()
-        => _builder = null;
+    public virtual void SetRemovedFromModel() => _builder = null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -112,9 +121,14 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     protected override IConventionAnnotation? OnAnnotationSet(
         string name,
         IConventionAnnotation? annotation,
-        IConventionAnnotation? oldAnnotation)
-        => CollectionProperty.DeclaringType.Model.ConventionDispatcher.OnElementTypeAnnotationChanged(
-            Builder, name, annotation, oldAnnotation);
+        IConventionAnnotation? oldAnnotation
+    ) =>
+        CollectionProperty.DeclaringType.Model.ConventionDispatcher.OnElementTypeAnnotationChanged(
+            Builder,
+            name,
+            annotation,
+            oldAnnotation
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -139,8 +153,7 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool IsReadOnly
-        => CollectionProperty.IsReadOnly;
+    public override bool IsReadOnly => CollectionProperty.IsReadOnly;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -181,16 +194,18 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
         {
             throw new InvalidOperationException(
                 CoreStrings.CannotBeNullableElement(
-                    CollectionProperty.DeclaringType.DisplayName(), CollectionProperty.Name, ClrType.ShortDisplayName()));
+                    CollectionProperty.DeclaringType.DisplayName(),
+                    CollectionProperty.Name,
+                    ClrType.ShortDisplayName()
+                )
+            );
         }
 
         _isNullableConfigurationSource = configurationSource.Max(_isNullableConfigurationSource);
 
         _isNullable = nullable;
 
-        return isChanging
-            ? OnElementTypeNullableChanged()
-            : nullable;
+        return isChanging ? OnElementTypeNullableChanged() : nullable;
     }
 
     /// <summary>
@@ -199,11 +214,12 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual bool? OnElementTypeNullableChanged()
-        => CollectionProperty.DeclaringType.Model.ConventionDispatcher.OnElementTypeNullabilityChanged(Builder);
+    protected virtual bool? OnElementTypeNullableChanged() =>
+        CollectionProperty.DeclaringType.Model.ConventionDispatcher.OnElementTypeNullabilityChanged(
+            Builder
+        );
 
-    private bool DefaultIsNullable
-        => ClrType.IsNullableType();
+    private bool DefaultIsNullable => ClrType.IsNullableType();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -211,8 +227,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetIsNullableConfigurationSource()
-        => _isNullableConfigurationSource;
+    public virtual ConfigurationSource? GetIsNullableConfigurationSource() =>
+        _isNullableConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -227,7 +243,12 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
             throw new ArgumentOutOfRangeException(nameof(maxLength));
         }
 
-        return (int?)SetOrRemoveAnnotation(CoreAnnotationNames.MaxLength, maxLength, configurationSource)?.Value;
+        return (int?)
+            SetOrRemoveAnnotation(
+                CoreAnnotationNames.MaxLength,
+                maxLength,
+                configurationSource
+            )?.Value;
     }
 
     /// <summary>
@@ -236,8 +257,7 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual int? GetMaxLength()
-        => (int?)this[CoreAnnotationNames.MaxLength];
+    public virtual int? GetMaxLength() => (int?)this[CoreAnnotationNames.MaxLength];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -245,8 +265,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetMaxLengthConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.MaxLength)?.GetConfigurationSource();
+    public virtual ConfigurationSource? GetMaxLengthConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.MaxLength)?.GetConfigurationSource();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -254,8 +274,9 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool? SetIsUnicode(bool? unicode, ConfigurationSource configurationSource)
-        => (bool?)SetOrRemoveAnnotation(CoreAnnotationNames.Unicode, unicode, configurationSource)?.Value;
+    public virtual bool? SetIsUnicode(bool? unicode, ConfigurationSource configurationSource) =>
+        (bool?)
+            SetOrRemoveAnnotation(CoreAnnotationNames.Unicode, unicode, configurationSource)?.Value;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -263,8 +284,7 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool? IsUnicode()
-        => (bool?)this[CoreAnnotationNames.Unicode];
+    public virtual bool? IsUnicode() => (bool?)this[CoreAnnotationNames.Unicode];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -272,8 +292,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetIsUnicodeConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.Unicode)?.GetConfigurationSource();
+    public virtual ConfigurationSource? GetIsUnicodeConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.Unicode)?.GetConfigurationSource();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -288,7 +308,12 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
             throw new ArgumentOutOfRangeException(nameof(precision));
         }
 
-        return (int?)SetOrRemoveAnnotation(CoreAnnotationNames.Precision, precision, configurationSource)?.Value;
+        return (int?)
+            SetOrRemoveAnnotation(
+                CoreAnnotationNames.Precision,
+                precision,
+                configurationSource
+            )?.Value;
     }
 
     /// <summary>
@@ -297,8 +322,7 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual int? GetPrecision()
-        => (int?)this[CoreAnnotationNames.Precision];
+    public virtual int? GetPrecision() => (int?)this[CoreAnnotationNames.Precision];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -306,8 +330,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetPrecisionConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.Precision)?.GetConfigurationSource();
+    public virtual ConfigurationSource? GetPrecisionConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.Precision)?.GetConfigurationSource();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -322,7 +346,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
             throw new ArgumentOutOfRangeException(nameof(scale));
         }
 
-        return (int?)SetOrRemoveAnnotation(CoreAnnotationNames.Scale, scale, configurationSource)?.Value;
+        return (int?)
+            SetOrRemoveAnnotation(CoreAnnotationNames.Scale, scale, configurationSource)?.Value;
     }
 
     /// <summary>
@@ -331,8 +356,7 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual int? GetScale()
-        => (int?)this[CoreAnnotationNames.Scale];
+    public virtual int? GetScale() => (int?)this[CoreAnnotationNames.Scale];
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -340,8 +364,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetScaleConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.Scale)?.GetConfigurationSource();
+    public virtual ConfigurationSource? GetScaleConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.Scale)?.GetConfigurationSource();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -351,7 +375,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     /// </summary>
     public virtual ValueConverter? SetValueConverter(
         ValueConverter? converter,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         var errorString = CheckValueConverter(converter);
         if (errorString != null)
@@ -360,7 +385,12 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
         }
 
         RemoveAnnotation(CoreAnnotationNames.ValueConverterType);
-        return (ValueConverter?)SetAnnotation(CoreAnnotationNames.ValueConverter, converter, configurationSource)?.Value;
+        return (ValueConverter?)
+            SetAnnotation(
+                CoreAnnotationNames.ValueConverter,
+                converter,
+                configurationSource
+            )?.Value;
     }
 
     /// <summary>
@@ -371,8 +401,9 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     /// </summary>
     public virtual Type? SetValueConverter(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? converterType,
-        ConfigurationSource configurationSource)
+            Type? converterType,
+        ConfigurationSource configurationSource
+    )
     {
         ValueConverter? converter = null;
         if (converterType != null)
@@ -380,7 +411,11 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
             if (!typeof(ValueConverter).IsAssignableFrom(converterType))
             {
                 throw new InvalidOperationException(
-                    CoreStrings.BadValueConverterType(converterType.ShortDisplayName(), typeof(ValueConverter).ShortDisplayName()));
+                    CoreStrings.BadValueConverterType(
+                        converterType.ShortDisplayName(),
+                        typeof(ValueConverter).ShortDisplayName()
+                    )
+                );
             }
 
             try
@@ -391,7 +426,11 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
             {
                 throw new InvalidOperationException(
                     CoreStrings.CannotCreateValueConverter(
-                        converterType.ShortDisplayName(), nameof(PropertyBuilder.HasConversion)), e);
+                        converterType.ShortDisplayName(),
+                        nameof(PropertyBuilder.HasConversion)
+                    ),
+                    e
+                );
             }
         }
 
@@ -407,8 +446,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ValueConverter? GetValueConverter()
-        => (ValueConverter?)FindAnnotation(CoreAnnotationNames.ValueConverter)?.Value;
+    public virtual ValueConverter? GetValueConverter() =>
+        (ValueConverter?)FindAnnotation(CoreAnnotationNames.ValueConverter)?.Value;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -416,8 +455,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetValueConverterConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.ValueConverter)?.GetConfigurationSource();
+    public virtual ConfigurationSource? GetValueConverterConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.ValueConverter)?.GetConfigurationSource();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -425,15 +464,16 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string? CheckValueConverter(ValueConverter? converter)
-        => converter != null
-            && converter.ModelClrType.UnwrapNullableType() != ClrType.UnwrapNullableType()
-                ? CoreStrings.ConverterPropertyMismatchElement(
-                    converter.ModelClrType.ShortDisplayName(),
-                    CollectionProperty.DeclaringType.DisplayName(),
-                    CollectionProperty.Name,
-                    ClrType.ShortDisplayName())
-                : null;
+    public virtual string? CheckValueConverter(ValueConverter? converter) =>
+        converter != null
+        && converter.ModelClrType.UnwrapNullableType() != ClrType.UnwrapNullableType()
+            ? CoreStrings.ConverterPropertyMismatchElement(
+                converter.ModelClrType.ShortDisplayName(),
+                CollectionProperty.DeclaringType.DisplayName(),
+                CollectionProperty.Name,
+                ClrType.ShortDisplayName()
+            )
+            : null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -441,8 +481,16 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Type? SetProviderClrType(Type? providerClrType, ConfigurationSource configurationSource)
-        => (Type?)SetAnnotation(CoreAnnotationNames.ProviderClrType, providerClrType, configurationSource)?.Value;
+    public virtual Type? SetProviderClrType(
+        Type? providerClrType,
+        ConfigurationSource configurationSource
+    ) =>
+        (Type?)
+            SetAnnotation(
+                CoreAnnotationNames.ProviderClrType,
+                providerClrType,
+                configurationSource
+            )?.Value;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -450,8 +498,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual Type? GetProviderClrType()
-        => (Type?)FindAnnotation(CoreAnnotationNames.ProviderClrType)?.Value;
+    public virtual Type? GetProviderClrType() =>
+        (Type?)FindAnnotation(CoreAnnotationNames.ProviderClrType)?.Value;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -459,8 +507,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetProviderClrTypeConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.ProviderClrType)?.GetConfigurationSource();
+    public virtual ConfigurationSource? GetProviderClrTypeConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.ProviderClrType)?.GetConfigurationSource();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -471,12 +519,17 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     [DisallowNull]
     public virtual CoreTypeMapping? TypeMapping
     {
-        get => IsReadOnly
-            ? NonCapturingLazyInitializer.EnsureInitialized(
-                ref _typeMapping, (IElementType)this, static elementType =>
-                    elementType.CollectionProperty.DeclaringType.Model.GetModelDependencies().TypeMappingSource.FindMapping(elementType)!)
-            : _typeMapping;
-
+        get =>
+            IsReadOnly
+                ? NonCapturingLazyInitializer.EnsureInitialized(
+                    ref _typeMapping,
+                    (IElementType)this,
+                    static elementType =>
+                        elementType
+                            .CollectionProperty.DeclaringType.Model.GetModelDependencies()
+                            .TypeMappingSource.FindMapping(elementType)!
+                )
+                : _typeMapping;
         set => SetTypeMapping(value, ConfigurationSource.Explicit);
     }
 
@@ -486,7 +539,10 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual CoreTypeMapping? SetTypeMapping(CoreTypeMapping? typeMapping, ConfigurationSource configurationSource)
+    public virtual CoreTypeMapping? SetTypeMapping(
+        CoreTypeMapping? typeMapping,
+        ConfigurationSource configurationSource
+    )
     {
         _typeMapping = typeMapping;
         _typeMappingConfigurationSource = typeMapping is null
@@ -502,8 +558,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetTypeMappingConfigurationSource()
-        => _typeMappingConfigurationSource;
+    public virtual ConfigurationSource? GetTypeMappingConfigurationSource() =>
+        _typeMappingConfigurationSource;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -511,7 +567,10 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ValueComparer? SetValueComparer(ValueComparer? comparer, ConfigurationSource configurationSource)
+    public virtual ValueComparer? SetValueComparer(
+        ValueComparer? comparer,
+        ConfigurationSource configurationSource
+    )
     {
         var errorString = CheckValueComparer(comparer);
         if (errorString != null)
@@ -520,7 +579,12 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
         }
 
         RemoveAnnotation(CoreAnnotationNames.ValueComparerType);
-        return (ValueComparer?)SetOrRemoveAnnotation(CoreAnnotationNames.ValueComparer, comparer, configurationSource)?.Value;
+        return (ValueComparer?)
+            SetOrRemoveAnnotation(
+                CoreAnnotationNames.ValueComparer,
+                comparer,
+                configurationSource
+            )?.Value;
     }
 
     /// <summary>
@@ -529,11 +593,14 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+    [return: DynamicallyAccessedMembers(
+        DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+    )]
     public virtual Type? SetValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType,
-        ConfigurationSource configurationSource)
+            Type? comparerType,
+        ConfigurationSource configurationSource
+    )
     {
         ValueComparer? comparer = null;
         if (comparerType != null)
@@ -541,7 +608,11 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
             if (!typeof(ValueComparer).IsAssignableFrom(comparerType))
             {
                 throw new InvalidOperationException(
-                    CoreStrings.BadValueComparerType(comparerType.ShortDisplayName(), typeof(ValueComparer).ShortDisplayName()));
+                    CoreStrings.BadValueComparerType(
+                        comparerType.ShortDisplayName(),
+                        typeof(ValueComparer).ShortDisplayName()
+                    )
+                );
             }
 
             try
@@ -552,12 +623,21 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
             {
                 throw new InvalidOperationException(
                     CoreStrings.CannotCreateValueComparer(
-                        comparerType.ShortDisplayName(), nameof(PropertyBuilder.HasConversion)), e);
+                        comparerType.ShortDisplayName(),
+                        nameof(PropertyBuilder.HasConversion)
+                    ),
+                    e
+                );
             }
         }
 
         SetValueComparer(comparer, configurationSource);
-        return (Type?)SetOrRemoveAnnotation(CoreAnnotationNames.ValueComparerType, comparerType, configurationSource)?.Value;
+        return (Type?)
+            SetOrRemoveAnnotation(
+                CoreAnnotationNames.ValueComparerType,
+                comparerType,
+                configurationSource
+            )?.Value;
     }
 
     /// <summary>
@@ -566,9 +646,10 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ValueComparer? GetValueComparer()
-        => ((ValueComparer?)this[CoreAnnotationNames.ValueComparer]
-            ?? TypeMapping?.Comparer)?.ToNullableComparer(ClrType);
+    public virtual ValueComparer? GetValueComparer() =>
+        (
+            (ValueComparer?)this[CoreAnnotationNames.ValueComparer] ?? TypeMapping?.Comparer
+        )?.ToNullableComparer(ClrType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -576,8 +657,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetValueComparerConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.ValueComparer)?.GetConfigurationSource();
+    public virtual ConfigurationSource? GetValueComparerConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.ValueComparer)?.GetConfigurationSource();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -585,15 +666,15 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string? CheckValueComparer(ValueComparer? comparer)
-        => comparer != null
-            && comparer.Type.UnwrapNullableType() != ClrType.UnwrapNullableType()
-                ? CoreStrings.ComparerPropertyMismatchElement(
-                    comparer.Type.ShortDisplayName(),
-                    CollectionProperty.DeclaringType.DisplayName(),
-                    CollectionProperty.Name,
-                    ClrType.ShortDisplayName())
-                : null;
+    public virtual string? CheckValueComparer(ValueComparer? comparer) =>
+        comparer != null && comparer.Type.UnwrapNullableType() != ClrType.UnwrapNullableType()
+            ? CoreStrings.ComparerPropertyMismatchElement(
+                comparer.Type.ShortDisplayName(),
+                CollectionProperty.DeclaringType.DisplayName(),
+                CollectionProperty.Name,
+                ClrType.ShortDisplayName()
+            )
+            : null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -601,9 +682,10 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual JsonValueReaderWriter? GetJsonValueReaderWriter()
-        => JsonValueReaderWriter.CreateFromType((Type?)this[CoreAnnotationNames.JsonValueReaderWriterType])
-            ?? TypeMapping?.JsonValueReaderWriter;
+    public virtual JsonValueReaderWriter? GetJsonValueReaderWriter() =>
+        JsonValueReaderWriter.CreateFromType(
+            (Type?)this[CoreAnnotationNames.JsonValueReaderWriterType]
+        ) ?? TypeMapping?.JsonValueReaderWriter;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -613,18 +695,28 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     /// </summary>
     public virtual Type? SetJsonValueReaderWriterType(
         Type? readerWriterType,
-        ConfigurationSource configurationSource)
+        ConfigurationSource configurationSource
+    )
     {
         if (readerWriterType != null)
         {
-            var genericType = readerWriterType.GetGenericTypeImplementations(typeof(JsonValueReaderWriter<>)).FirstOrDefault();
+            var genericType = readerWriterType
+                .GetGenericTypeImplementations(typeof(JsonValueReaderWriter<>))
+                .FirstOrDefault();
             if (genericType == null)
             {
-                throw new InvalidOperationException(CoreStrings.BadJsonValueReaderWriterType(readerWriterType.ShortDisplayName()));
+                throw new InvalidOperationException(
+                    CoreStrings.BadJsonValueReaderWriterType(readerWriterType.ShortDisplayName())
+                );
             }
         }
 
-        return (Type?)SetOrRemoveAnnotation(CoreAnnotationNames.JsonValueReaderWriterType, readerWriterType, configurationSource)?.Value;
+        return (Type?)
+            SetOrRemoveAnnotation(
+                CoreAnnotationNames.JsonValueReaderWriterType,
+                readerWriterType,
+                configurationSource
+            )?.Value;
     }
 
     /// <summary>
@@ -633,8 +725,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ConfigurationSource? GetJsonValueReaderWriterTypeConfigurationSource()
-        => FindAnnotation(CoreAnnotationNames.JsonValueReaderWriterType)?.GetConfigurationSource();
+    public virtual ConfigurationSource? GetJsonValueReaderWriterTypeConfigurationSource() =>
+        FindAnnotation(CoreAnnotationNames.JsonValueReaderWriterType)?.GetConfigurationSource();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -642,10 +734,11 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IReadOnlyElementType)this).ToDebugString(),
-            () => ((IReadOnlyElementType)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IReadOnlyElementType)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -653,8 +746,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IReadOnlyElementType)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IReadOnlyElementType)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -711,8 +804,7 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    CoreTypeMapping? IReadOnlyElementType.FindTypeMapping()
-        => TypeMapping;
+    CoreTypeMapping? IReadOnlyElementType.FindTypeMapping() => TypeMapping;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -721,8 +813,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    void IMutableElementType.SetTypeMapping(CoreTypeMapping typeMapping)
-        => SetTypeMapping(typeMapping, ConfigurationSource.Explicit);
+    void IMutableElementType.SetTypeMapping(CoreTypeMapping typeMapping) =>
+        SetTypeMapping(typeMapping, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -731,8 +823,14 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    CoreTypeMapping? IConventionElementType.SetTypeMapping(CoreTypeMapping typeMapping, bool fromDataAnnotation)
-        => SetTypeMapping(typeMapping, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    CoreTypeMapping? IConventionElementType.SetTypeMapping(
+        CoreTypeMapping typeMapping,
+        bool fromDataAnnotation
+    ) =>
+        SetTypeMapping(
+            typeMapping,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -741,9 +839,11 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    bool? IConventionElementType.SetIsNullable(bool? nullable, bool fromDataAnnotation)
-        => SetIsNullable(
-            nullable, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool? IConventionElementType.SetIsNullable(bool? nullable, bool fromDataAnnotation) =>
+        SetIsNullable(
+            nullable,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -752,8 +852,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    void IMutableElementType.SetMaxLength(int? maxLength)
-        => SetMaxLength(maxLength, ConfigurationSource.Explicit);
+    void IMutableElementType.SetMaxLength(int? maxLength) =>
+        SetMaxLength(maxLength, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -762,8 +862,11 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    int? IConventionElementType.SetMaxLength(int? maxLength, bool fromDataAnnotation)
-        => SetMaxLength(maxLength, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    int? IConventionElementType.SetMaxLength(int? maxLength, bool fromDataAnnotation) =>
+        SetMaxLength(
+            maxLength,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -772,8 +875,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    void IMutableElementType.SetPrecision(int? precision)
-        => SetPrecision(precision, ConfigurationSource.Explicit);
+    void IMutableElementType.SetPrecision(int? precision) =>
+        SetPrecision(precision, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -782,8 +885,11 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    int? IConventionElementType.SetPrecision(int? precision, bool fromDataAnnotation)
-        => SetPrecision(precision, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    int? IConventionElementType.SetPrecision(int? precision, bool fromDataAnnotation) =>
+        SetPrecision(
+            precision,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -792,8 +898,7 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    void IMutableElementType.SetScale(int? scale)
-        => SetScale(scale, ConfigurationSource.Explicit);
+    void IMutableElementType.SetScale(int? scale) => SetScale(scale, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -802,8 +907,11 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    int? IConventionElementType.SetScale(int? scale, bool fromDataAnnotation)
-        => SetScale(scale, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    int? IConventionElementType.SetScale(int? scale, bool fromDataAnnotation) =>
+        SetScale(
+            scale,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -812,8 +920,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    void IMutableElementType.SetIsUnicode(bool? unicode)
-        => SetIsUnicode(unicode, ConfigurationSource.Explicit);
+    void IMutableElementType.SetIsUnicode(bool? unicode) =>
+        SetIsUnicode(unicode, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -822,8 +930,11 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    bool? IConventionElementType.SetIsUnicode(bool? unicode, bool fromDataAnnotation)
-        => SetIsUnicode(unicode, fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+    bool? IConventionElementType.SetIsUnicode(bool? unicode, bool fromDataAnnotation) =>
+        SetIsUnicode(
+            unicode,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -832,8 +943,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    void IMutableElementType.SetValueConverter(ValueConverter? converter)
-        => SetValueConverter(converter, ConfigurationSource.Explicit);
+    void IMutableElementType.SetValueConverter(ValueConverter? converter) =>
+        SetValueConverter(converter, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -842,10 +953,14 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    ValueConverter? IConventionElementType.SetValueConverter(ValueConverter? converter, bool fromDataAnnotation)
-        => SetValueConverter(
+    ValueConverter? IConventionElementType.SetValueConverter(
+        ValueConverter? converter,
+        bool fromDataAnnotation
+    ) =>
+        SetValueConverter(
             converter,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -856,8 +971,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     [DebuggerStepThrough]
     void IMutableElementType.SetValueConverter(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? converterType)
-        => SetValueConverter(converterType, ConfigurationSource.Explicit);
+            Type? converterType
+    ) => SetValueConverter(converterType, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -868,11 +983,13 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     [DebuggerStepThrough]
     Type? IConventionElementType.SetValueConverter(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? converterType,
-        bool fromDataAnnotation)
-        => SetValueConverter(
+            Type? converterType,
+        bool fromDataAnnotation
+    ) =>
+        SetValueConverter(
             converterType,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -881,8 +998,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    void IMutableElementType.SetProviderClrType(Type? providerClrType)
-        => SetProviderClrType(providerClrType, ConfigurationSource.Explicit);
+    void IMutableElementType.SetProviderClrType(Type? providerClrType) =>
+        SetProviderClrType(providerClrType, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -891,10 +1008,14 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    Type? IConventionElementType.SetProviderClrType(Type? providerClrType, bool fromDataAnnotation)
-        => SetProviderClrType(
+    Type? IConventionElementType.SetProviderClrType(
+        Type? providerClrType,
+        bool fromDataAnnotation
+    ) =>
+        SetProviderClrType(
             providerClrType,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -903,8 +1024,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    void IMutableElementType.SetValueComparer(ValueComparer? comparer)
-        => SetValueComparer(comparer, ConfigurationSource.Explicit);
+    void IMutableElementType.SetValueComparer(ValueComparer? comparer) =>
+        SetValueComparer(comparer, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -913,10 +1034,14 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    ValueComparer? IConventionElementType.SetValueComparer(ValueComparer? comparer, bool fromDataAnnotation)
-        => SetValueComparer(
+    ValueComparer? IConventionElementType.SetValueComparer(
+        ValueComparer? comparer,
+        bool fromDataAnnotation
+    ) =>
+        SetValueComparer(
             comparer,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -927,8 +1052,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     [DebuggerStepThrough]
     void IMutableElementType.SetValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType)
-        => SetValueComparer(comparerType, ConfigurationSource.Explicit);
+            Type? comparerType
+    ) => SetValueComparer(comparerType, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -937,14 +1062,18 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
+    [return: DynamicallyAccessedMembers(
+        DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+    )]
     Type? IConventionElementType.SetValueComparer(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-        Type? comparerType,
-        bool fromDataAnnotation)
-        => SetValueComparer(
+            Type? comparerType,
+        bool fromDataAnnotation
+    ) =>
+        SetValueComparer(
             comparerType,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -953,8 +1082,8 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [DebuggerStepThrough]
-    void IMutableElementType.SetJsonValueReaderWriterType(Type? readerWriterType)
-        => SetJsonValueReaderWriterType(readerWriterType, ConfigurationSource.Explicit);
+    void IMutableElementType.SetJsonValueReaderWriterType(Type? readerWriterType) =>
+        SetJsonValueReaderWriterType(readerWriterType, ConfigurationSource.Explicit);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -965,8 +1094,10 @@ public class ElementType : ConventionAnnotatable, IMutableElementType, IConventi
     [DebuggerStepThrough]
     Type? IConventionElementType.SetJsonValueReaderWriterType(
         Type? readerWriterType,
-        bool fromDataAnnotation)
-        => SetJsonValueReaderWriterType(
+        bool fromDataAnnotation
+    ) =>
+        SetJsonValueReaderWriterType(
             readerWriterType,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
 }

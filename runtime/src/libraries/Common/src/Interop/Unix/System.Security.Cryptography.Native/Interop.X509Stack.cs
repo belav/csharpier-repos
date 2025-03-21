@@ -36,7 +36,10 @@ internal static partial class Interop
         internal static partial IntPtr GetX509StackField(SafeSharedX509StackHandle stack, int loc);
 
         [LibraryImport(Libraries.CryptoNative, StringMarshalling = StringMarshalling.Utf8)]
-        private static partial int CryptoNative_X509StackAddDirectoryStore(SafeX509StackHandle stack, string storePath);
+        private static partial int CryptoNative_X509StackAddDirectoryStore(
+            SafeX509StackHandle stack,
+            string storePath
+        );
 
         internal static void X509StackAddDirectoryStore(SafeX509StackHandle stack, string storePath)
         {
@@ -47,7 +50,10 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CryptoNative)]
-        private static partial int CryptoNative_X509StackAddMultiple(SafeX509StackHandle dest, SafeX509StackHandle src);
+        private static partial int CryptoNative_X509StackAddMultiple(
+            SafeX509StackHandle dest,
+            SafeX509StackHandle src
+        );
 
         internal static void X509StackAddMultiple(SafeX509StackHandle dest, SafeX509StackHandle src)
         {
@@ -63,10 +69,8 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeX509StackHandle : SafeHandle
     {
-        public SafeX509StackHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeX509StackHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {
@@ -98,11 +102,10 @@ namespace Microsoft.Win32.SafeHandles
     /// </summary>
     internal sealed class SafeSharedX509StackHandle : SafeInteriorHandle
     {
-        internal static readonly SafeSharedX509StackHandle InvalidHandle = new SafeSharedX509StackHandle();
+        internal static readonly SafeSharedX509StackHandle InvalidHandle =
+            new SafeSharedX509StackHandle();
 
-        public SafeSharedX509StackHandle() :
-            base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeSharedX509StackHandle()
+            : base(IntPtr.Zero, ownsHandle: true) { }
     }
 }

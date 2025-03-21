@@ -27,9 +27,7 @@ namespace System.Speech.Internal.SrgsCompiler
         /// <summary>
         /// Clear all the rules
         /// </summary>
-        void IElementFactory.RemoveAllRules()
-        {
-        }
+        void IElementFactory.RemoveAllRules() { }
 
         IPropertyTag IElementFactory.CreatePropertyTag(IElement parent)
         {
@@ -46,13 +44,32 @@ namespace System.Speech.Internal.SrgsCompiler
             return null;
         }
 
-        IToken IElementFactory.CreateToken(IElement parent, string content, string pronunciation, string display, float reqConfidence)
+        IToken IElementFactory.CreateToken(
+            IElement parent,
+            string content,
+            string pronunciation,
+            string display,
+            float reqConfidence
+        )
         {
-            ParseToken((ParseElementCollection)parent, content, pronunciation, display, reqConfidence);
+            ParseToken(
+                (ParseElementCollection)parent,
+                content,
+                pronunciation,
+                display,
+                reqConfidence
+            );
             return null;
         }
 
-        IItem IElementFactory.CreateItem(IElement parent, IRule rule, int minRepeat, int maxRepeat, float repeatProbability, float weight)
+        IItem IElementFactory.CreateItem(
+            IElement parent,
+            IRule rule,
+            int minRepeat,
+            int maxRepeat,
+            float repeatProbability,
+            float weight
+        )
         {
             return new Item(_backend, (Rule)rule, minRepeat, maxRepeat, repeatProbability, weight);
         }
@@ -62,9 +79,21 @@ namespace System.Speech.Internal.SrgsCompiler
             throw new NotImplementedException();
         }
 
-        IRuleRef IElementFactory.CreateRuleRef(IElement parent, Uri srgsUri, string semanticKey, string parameters)
+        IRuleRef IElementFactory.CreateRuleRef(
+            IElement parent,
+            Uri srgsUri,
+            string semanticKey,
+            string parameters
+        )
         {
-            return new RuleRef((ParseElementCollection)parent, _backend, srgsUri, _grammar.UndefRules, semanticKey, parameters);
+            return new RuleRef(
+                (ParseElementCollection)parent,
+                _backend,
+                srgsUri,
+                _grammar.UndefRules,
+                semanticKey,
+                parameters
+            );
         }
 
         void IElementFactory.InitSpecialRuleRef(IElement parent, IRuleRef specialRule)
@@ -87,7 +116,13 @@ namespace System.Speech.Internal.SrgsCompiler
             ((GrammarElement)grammar).AddScript(rule, code);
         }
 
-        string IElementFactory.AddScript(IGrammar grammar, string rule, string code, string filename, int line)
+        string IElementFactory.AddScript(
+            IGrammar grammar,
+            string rule,
+            string code,
+            string filename,
+            int line
+        )
         {
             // add the #line information
             if (line >= 0)
@@ -95,12 +130,24 @@ namespace System.Speech.Internal.SrgsCompiler
                 if (_cg._language == "C#")
                 {
                     // C#
-                    return string.Format(CultureInfo.InvariantCulture, "#line {0} \"{1}\"\n{2}", line.ToString(CultureInfo.InvariantCulture), filename, code);
+                    return string.Format(
+                        CultureInfo.InvariantCulture,
+                        "#line {0} \"{1}\"\n{2}",
+                        line.ToString(CultureInfo.InvariantCulture),
+                        filename,
+                        code
+                    );
                 }
                 else
                 {
                     // VB.Net
-                    return string.Format(CultureInfo.InvariantCulture, "#ExternalSource (\"{1}\",{0}) \n{2}\n#End ExternalSource\n", line.ToString(CultureInfo.InvariantCulture), filename, code);
+                    return string.Format(
+                        CultureInfo.InvariantCulture,
+                        "#ExternalSource (\"{1}\",{0}) \n{2}\n#End ExternalSource\n",
+                        line.ToString(CultureInfo.InvariantCulture),
+                        filename,
+                        code
+                    );
                 }
             }
             return code;
@@ -140,17 +187,11 @@ namespace System.Speech.Internal.SrgsCompiler
             }
         }
 
-        void IElementFactory.AddItem(IOneOf oneOf, IItem item)
-        {
-        }
+        void IElementFactory.AddItem(IOneOf oneOf, IItem item) { }
 
-        void IElementFactory.AddElement(IRule rule, IElement value)
-        {
-        }
+        void IElementFactory.AddElement(IRule rule, IElement value) { }
 
-        void IElementFactory.AddElement(IItem item, IElement value)
-        {
-        }
+        void IElementFactory.AddElement(IItem item, IElement value) { }
 
         #endregion
 
@@ -158,32 +199,20 @@ namespace System.Speech.Internal.SrgsCompiler
 
         IGrammar IElementFactory.Grammar
         {
-            get
-            {
-                return _grammar;
-            }
+            get { return _grammar; }
         }
 
         IRuleRef IElementFactory.Null
         {
-            get
-            {
-                return RuleRef.Null;
-            }
+            get { return RuleRef.Null; }
         }
         IRuleRef IElementFactory.Void
         {
-            get
-            {
-                return RuleRef.Void;
-            }
+            get { return RuleRef.Void; }
         }
         IRuleRef IElementFactory.Garbage
         {
-            get
-            {
-                return RuleRef.Garbage;
-            }
+            get { return RuleRef.Garbage; }
         }
         #endregion
 
@@ -209,9 +238,16 @@ namespace System.Speech.Internal.SrgsCompiler
         /// AddTransition(NormalizedToken, Parent.EndState, NewState)
         /// Parent.EndState = NewState
         /// </summary>
-        private void ParseToken(ParseElementCollection parent, string sToken, string pronunciation, string display, float reqConfidence)
+        private void ParseToken(
+            ParseElementCollection parent,
+            string sToken,
+            string pronunciation,
+            string display,
+            float reqConfidence
+        )
         {
-            int requiredConfidence = (parent != null) ? parent._confidence : CfgGrammar.SP_NORMAL_CONFIDENCE;
+            int requiredConfidence =
+                (parent != null) ? parent._confidence : CfgGrammar.SP_NORMAL_CONFIDENCE;
 
             // Performs white space normalization in place
             sToken = Backend.NormalizeTokenWhiteSpace(sToken);
@@ -221,11 +257,11 @@ namespace System.Speech.Internal.SrgsCompiler
             }
 
             // "sapi:reqconf" Attribute
-            parent._confidence = CfgGrammar.SP_NORMAL_CONFIDENCE;  // Default to normal
+            parent._confidence = CfgGrammar.SP_NORMAL_CONFIDENCE; // Default to normal
 
             if (reqConfidence < 0 || reqConfidence.Equals(0.5f))
             {
-                parent._confidence = CfgGrammar.SP_NORMAL_CONFIDENCE;  // Default to normal
+                parent._confidence = CfgGrammar.SP_NORMAL_CONFIDENCE; // Default to normal
             }
             else if (reqConfidence < 0.5)
             {
@@ -246,9 +282,15 @@ namespace System.Speech.Internal.SrgsCompiler
                 if (pronunciation != null)
                 {
                     // Garbage transition is optional whereas Wildcard is not.  So we need additional epsilon transition.
-                    OneOf oneOf = pronunciation.Contains(';') ? new OneOf(parent._rule, _backend) : null;
+                    OneOf oneOf = pronunciation.Contains(';')
+                        ? new OneOf(parent._rule, _backend)
+                        : null;
 
-                    for (int iCurPron = 0, iDeliminator = 0; iCurPron < pronunciation.Length; iCurPron = iDeliminator + 1)
+                    for (
+                        int iCurPron = 0, iDeliminator = 0;
+                        iCurPron < pronunciation.Length;
+                        iCurPron = iDeliminator + 1
+                    )
                     {
                         // Find semi-colon delimiter and replace with null
                         iDeliminator = pronunciation.IndexOf(';', iCurPron);
@@ -262,7 +304,10 @@ namespace System.Speech.Internal.SrgsCompiler
                         switch (_backend.Alphabet)
                         {
                             case AlphabetType.Sapi:
-                                sSubPron = PhonemeConverter.ConvertPronToId(pron, _grammar.Backend.LangId);
+                                sSubPron = PhonemeConverter.ConvertPronToId(
+                                    pron,
+                                    _grammar.Backend.LangId
+                                );
                                 break;
 
                             case AlphabetType.Ipa:
@@ -276,7 +321,13 @@ namespace System.Speech.Internal.SrgsCompiler
                         }
 
                         // Build /D/L/P; form for this pronunciation.
-                        string sDLP = string.Format(CultureInfo.InvariantCulture, "/{0}/{1}/{2};", sDisplayToken, sEscapedToken, sSubPron);
+                        string sDLP = string.Format(
+                            CultureInfo.InvariantCulture,
+                            "/{0}/{1}/{2};",
+                            sDisplayToken,
+                            sEscapedToken,
+                            sSubPron
+                        );
 
                         // Add /D/L/P; transition to the new state.
                         if (oneOf != null)
@@ -297,7 +348,12 @@ namespace System.Speech.Internal.SrgsCompiler
                 else
                 {
                     // Build /D/L; form for this pronunciation.
-                    string sDLP = string.Format(CultureInfo.InvariantCulture, "/{0}/{1};", sDisplayToken, sEscapedToken);
+                    string sDLP = string.Format(
+                        CultureInfo.InvariantCulture,
+                        "/{0}/{1};",
+                        sDisplayToken,
+                        sEscapedToken
+                    );
 
                     // Add /D/L; transition to the new state.
                     parent.AddArc(_backend.WordTransition(sDLP, 1.0f, requiredConfidence));
@@ -313,7 +369,7 @@ namespace System.Speech.Internal.SrgsCompiler
         /// <summary>
         /// Escape token.  "/" -> "\/", "\" -> "\\"
         /// </summary>
-        private static string EscapeToken(string sToken)                     // String to escape
+        private static string EscapeToken(string sToken) // String to escape
         {
             System.Diagnostics.Debug.Assert(!string.IsNullOrEmpty(sToken));
 
@@ -328,11 +384,11 @@ namespace System.Speech.Internal.SrgsCompiler
             int iDest = 0;
 
             // Escape slashes and backslashes.
-            for (int i = 0; i < achSrc.Length;)
+            for (int i = 0; i < achSrc.Length; )
             {
                 if ((achSrc[i] == '\\') || (achSrc[i] == '/'))
                 {
-                    achDest[iDest++] = '\\';                            // Escape special character
+                    achDest[iDest++] = '\\'; // Escape special character
                 }
 
                 achDest[iDest++] = achSrc[i++];

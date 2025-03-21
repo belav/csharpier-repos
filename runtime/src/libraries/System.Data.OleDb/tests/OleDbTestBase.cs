@@ -14,7 +14,6 @@ namespace System.Data.OleDb.Tests
         protected OleDbCommand command;
         private bool _disposed;
 
-
         public OleDbTestBase()
         {
             _disposed = false;
@@ -34,7 +33,10 @@ namespace System.Data.OleDb.Tests
                     Thread.Sleep(10); // Give a transient condition like antivirus/indexing a chance to go away
                 }
             }
-            Assert.True(ConnectionState.Open == connection.State, $"{nameof(OleDbTestBase)} failed to open {nameof(OleDbConnection)}. {failure}");
+            Assert.True(
+                ConnectionState.Open == connection.State,
+                $"{nameof(OleDbTestBase)} failed to open {nameof(OleDbConnection)}. {failure}"
+            );
             transaction = connection.BeginTransaction();
             command = connection.CreateCommand();
             command.Transaction = transaction;
@@ -68,6 +70,11 @@ namespace System.Data.OleDb.Tests
             base.Dispose(disposing);
         }
 
-        protected string ConnectionString => @"Provider=" + Helpers.ProviderName + @";Data source=" + TestDirectory + @";Extended Properties=""Text;HDR=No;FMT=Delimited""";
+        protected string ConnectionString =>
+            @"Provider="
+            + Helpers.ProviderName
+            + @";Data source="
+            + TestDirectory
+            + @";Extended Properties=""Text;HDR=No;FMT=Delimited""";
     }
 }

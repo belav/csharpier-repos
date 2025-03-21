@@ -9,10 +9,13 @@ namespace System.Globalization
 {
     partial class TimeSpanParse
     {
-        internal static void ValidateStyles (TimeSpanStyles style, String parameterName) 
+        internal static void ValidateStyles(TimeSpanStyles style, String parameterName)
         {
             if (style != TimeSpanStyles.None && style != TimeSpanStyles.AssumeNegative)
-                throw new ArgumentException (Environment.GetResourceString ("Argument_InvalidTimeSpanStyles"), parameterName);
+                throw new ArgumentException(
+                    Environment.GetResourceString("Argument_InvalidTimeSpanStyles"),
+                    parameterName
+                );
         }
     }
 }

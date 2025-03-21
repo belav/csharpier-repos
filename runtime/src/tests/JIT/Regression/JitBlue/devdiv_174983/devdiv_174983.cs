@@ -34,7 +34,7 @@ public class Test_devdiv_174983
     // This tests a multi-entry loop where we have to evaluate recursive phi's
     // for heap state in value numbering.
     public int Foo()
-    {        
+    {
         if (l != 17)
         {
             goto L2;
@@ -42,14 +42,14 @@ public class Test_devdiv_174983
 
         i = 0;
 
-L1:
+        L1:
         if (l == 1)
         {
             // In the bug the compiler incorrectly concluded that i is always 0 here.
             return i + j;
-        }       
+        }
 
-L2:
+        L2:
         if (l == 12)
         {
             return i;

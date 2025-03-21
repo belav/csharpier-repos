@@ -19,27 +19,34 @@ namespace System.Xml.Xsl.Xslt
             BackwardCompatibility = 0x1,
             ForwardCompatibility = 0x2,
             CanHaveApplyImports = 0x4,
-            NsDecl = 0x10,                   // NS declaration
-            NsExcl = 0x20,                   // NS Extencion (null for ExcludeAll)
+            NsDecl = 0x10, // NS declaration
+            NsExcl = 0x20, // NS Extencion (null for ExcludeAll)
             Variable = 0x40,
 
             CompatibilityFlags = BackwardCompatibility | ForwardCompatibility,
             InheritedFlags = CompatibilityFlags | CanHaveApplyImports,
-            ExclusiveFlags = NsDecl | NsExcl | Variable
+            ExclusiveFlags = NsDecl | NsExcl | Variable,
         }
 
         public struct ScopeRecord
         {
             public int scopeCount;
             public ScopeFlags flags;
-            public string? ncName;     // local-name for variable, prefix for namespace, null for extension or excluded namespace
-            public string? nsUri;      // namespace uri
+            public string? ncName; // local-name for variable, prefix for namespace, null for extension or excluded namespace
+            public string? nsUri; // namespace uri
+
             [AllowNull]
-            public V value;      // value for variable, null for namespace
+            public V value; // value for variable, null for namespace
 
             // Exactly one of these three properties is true for every given record
-            public bool IsVariable { get { return (flags & ScopeFlags.Variable) != 0; } }
-            public bool IsNamespace { get { return (flags & ScopeFlags.NsDecl) != 0; } }
+            public bool IsVariable
+            {
+                get { return (flags & ScopeFlags.Variable) != 0; }
+            }
+            public bool IsNamespace
+            {
+                get { return (flags & ScopeFlags.NsDecl) != 0; }
+            }
             //          public bool IsExNamespace   { get { return (flags & ScopeFlags.NsExcl  ) != 0; } }
         }
 
@@ -82,9 +89,7 @@ namespace System.Xml.Xsl.Xslt
             }
             else
             {
-                while (_records[--_lastRecord].scopeCount == 0)
-                {
-                }
+                while (_records[--_lastRecord].scopeCount == 0) { }
                 _lastScopes = _records[_lastRecord].scopeCount;
                 _lastScopes--;
             }
@@ -94,7 +99,10 @@ namespace System.Xml.Xsl.Xslt
         public void CheckEmpty()
         {
             ExitScope();
-            Debug.Assert(_lastRecord == 0 && _lastScopes == 0, "PushScope() and PopScope() calls are unbalanced");
+            Debug.Assert(
+                _lastRecord == 0 && _lastScopes == 0,
+                "PushScope() and PopScope() calls are unbalanced"
+            );
         }
 
         // returns true if ns decls was added to scope
@@ -108,7 +116,10 @@ namespace System.Xml.Xsl.Xslt
             {
                 if (nsDecl.NsUri == null)
                 {
-                    Debug.Assert(nsDecl.Prefix == null, "NS may be null only when prefix is null where it is used for extension-element-prefixes='#all'");
+                    Debug.Assert(
+                        nsDecl.Prefix == null,
+                        "NS may be null only when prefix is null where it is used for extension-element-prefixes='#all'"
+                    );
                     excludeAll = true;
                 }
                 else if (nsDecl.Prefix == null)
@@ -146,11 +157,15 @@ namespace System.Xml.Xsl.Xslt
 
         private void AddRecord(ScopeFlags flag, string? ncName, string? uri, [AllowNull] V value)
         {
-            Debug.Assert(flag == (flag & ScopeFlags.ExclusiveFlags) && BitOperations.IsPow2((uint)flag), "One exclusive flag");
+            Debug.Assert(
+                flag == (flag & ScopeFlags.ExclusiveFlags) && BitOperations.IsPow2((uint)flag),
+                "One exclusive flag"
+            );
             Debug.Assert(uri != null || ncName == null, "null, null means exclude '#all'");
 
             ScopeFlags flags = _records[_lastRecord].flags;
-            bool canReuseLastRecord = (_lastScopes == 0) && (flags & ScopeFlags.ExclusiveFlags) == 0;
+            bool canReuseLastRecord =
+                (_lastScopes == 0) && (flags & ScopeFlags.ExclusiveFlags) == 0;
             if (!canReuseLastRecord)
             {
                 AddRecord();
@@ -165,12 +180,15 @@ namespace System.Xml.Xsl.Xslt
 
         private void SetFlag(ScopeFlags flag, bool value)
         {
-            Debug.Assert(flag == (flag & ScopeFlags.InheritedFlags) && BitOperations.IsPow2((uint)flag), "one inherited flag");
+            Debug.Assert(
+                flag == (flag & ScopeFlags.InheritedFlags) && BitOperations.IsPow2((uint)flag),
+                "one inherited flag"
+            );
             ScopeFlags flags = _records[_lastRecord].flags;
             if (((flags & flag) != 0) != value)
             {
                 // lastScopes == records[lastRecord].scopeCount;          // we know this because we are cashing it.
-                bool canReuseLastRecord = _lastScopes == 0;                // last record is from last scope
+                bool canReuseLastRecord = _lastScopes == 0; // last record is from last scope
                 if (!canReuseLastRecord)
                 {
                     AddRecord();
@@ -190,7 +208,9 @@ namespace System.Xml.Xsl.Xslt
                 }
                 _records[_lastRecord].flags = flags;
             }
-            Debug.Assert((_records[_lastRecord].flags & ScopeFlags.CompatibilityFlags) != ScopeFlags.CompatibilityFlags,
+            Debug.Assert(
+                (_records[_lastRecord].flags & ScopeFlags.CompatibilityFlags)
+                    != ScopeFlags.CompatibilityFlags,
                 "BackwardCompatibility and ForwardCompatibility flags are mutually exclusive"
             );
         }
@@ -209,12 +229,10 @@ namespace System.Xml.Xsl.Xslt
             Debug.Assert(prefix != null);
             for (int record = from; to <= record; --record)
             {
-                string? recPrefix, recNsUri;
+                string? recPrefix,
+                    recNsUri;
                 ScopeFlags flags = GetName(ref _records[record], out recPrefix, out recNsUri);
-                if (
-                    (flags & ScopeFlags.NsDecl) != 0 &&
-                    recPrefix == prefix
-                )
+                if ((flags & ScopeFlags.NsDecl) != 0 && recPrefix == prefix)
                 {
                     return recNsUri;
                 }
@@ -250,25 +268,22 @@ namespace System.Xml.Xsl.Xslt
             int exAll = 0;
             for (int record = _lastRecord; 0 <= record; record--)
             {
-                string? recPrefix, recNsUri;
+                string? recPrefix,
+                    recNsUri;
                 ScopeFlags flags = GetName(ref _records[record], out recPrefix, out recNsUri);
                 if ((flags & ScopeFlags.NsExcl) != 0)
                 {
                     Debug.Assert(recPrefix == null);
                     if (recNsUri == nsUri)
                     {
-                        return true;               // This namespace is excluded
+                        return true; // This namespace is excluded
                     }
                     if (recNsUri == null)
                     {
-                        exAll = record;            // #all namespaces below are excluded
+                        exAll = record; // #all namespaces below are excluded
                     }
                 }
-                else if (
-                  exAll != 0 &&
-                  (flags & ScopeFlags.NsDecl) != 0 &&
-                  recNsUri == nsUri
-              )
+                else if (exAll != 0 && (flags & ScopeFlags.NsDecl) != 0 && recNsUri == nsUri)
                 {
                     // We need to check that this namespace wasn't undefined before last "#all"
                     bool undefined = false;
@@ -276,10 +291,7 @@ namespace System.Xml.Xsl.Xslt
                     {
                         string? prevPrefix;
                         GetName(ref _records[prev], out prevPrefix, out _);
-                        if (
-                            (flags & ScopeFlags.NsDecl) != 0 &&
-                            prevPrefix == recPrefix
-                        )
+                        if ((flags & ScopeFlags.NsDecl) != 0 && prevPrefix == recPrefix)
                         {
                             // We don't care if records[prev].nsUri == records[record].nsUri.
                             // In this case the namespace was already undefined above.
@@ -301,13 +313,10 @@ namespace System.Xml.Xsl.Xslt
             Debug.Assert(localName != null);
             for (int record = _lastRecord; 0 <= record; --record)
             {
-                string? recLocal, recNsUri;
+                string? recLocal,
+                    recNsUri;
                 ScopeFlags flags = GetName(ref _records[record], out recLocal, out recNsUri);
-                if (
-                    (flags & ScopeFlags.Variable) != 0 &&
-                    recLocal == localName &&
-                    recNsUri == uri
-                )
+                if ((flags & ScopeFlags.Variable) != 0 && recLocal == localName && recNsUri == uri)
                 {
                     return record;
                 }
@@ -362,7 +371,13 @@ namespace System.Xml.Xsl.Xslt
                 if (_records[currentRecord].IsNamespace)
                 {
                     // This is a namespace declaration
-                    if (LookupNamespace(_records[currentRecord].ncName!, _lastRecord, currentRecord + 1) != null)
+                    if (
+                        LookupNamespace(
+                            _records[currentRecord].ncName!,
+                            _lastRecord,
+                            currentRecord + 1
+                        ) != null
+                    )
                     {
                         continue;
                     }
@@ -397,7 +412,13 @@ namespace System.Xml.Xsl.Xslt
                     if (_scope._records[_currentRecord].IsNamespace)
                     {
                         // This is a namespace declaration
-                        if (_scope.LookupNamespace(_scope._records[_currentRecord].ncName!, _lastRecord, _currentRecord + 1) == null)
+                        if (
+                            _scope.LookupNamespace(
+                                _scope._records[_currentRecord].ncName!,
+                                _lastRecord,
+                                _currentRecord + 1
+                            ) == null
+                        )
                         {
                             // Its prefix has not been redefined later in [currentRecord + 1, lastRecord]
                             return true;
@@ -411,7 +432,10 @@ namespace System.Xml.Xsl.Xslt
             {
                 get
                 {
-                    Debug.Assert(LastPredefRecord <= _currentRecord && _currentRecord <= _scope._lastRecord, "MoveNext() either was not called or returned false");
+                    Debug.Assert(
+                        LastPredefRecord <= _currentRecord && _currentRecord <= _scope._lastRecord,
+                        "MoveNext() either was not called or returned false"
+                    );
                     Debug.Assert(_scope._records[_currentRecord].IsNamespace);
                     return _scope._records[_currentRecord];
                 }

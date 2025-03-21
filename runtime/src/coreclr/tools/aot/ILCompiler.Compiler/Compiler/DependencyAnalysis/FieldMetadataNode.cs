@@ -2,13 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using ILCompiler.Dataflow;
 using ILCompiler.DependencyAnalysisFramework;
 using ILCompiler.Logging;
-
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 using EcmaField = Internal.TypeSystem.Ecma.EcmaField;
 
@@ -38,28 +35,51 @@ namespace ILCompiler.DependencyAnalysis
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {
             DependencyList dependencies = new DependencyList();
-            dependencies.Add(factory.TypeMetadata((MetadataType)_field.OwningType), "Owning type metadata");
+            dependencies.Add(
+                factory.TypeMetadata((MetadataType)_field.OwningType),
+                "Owning type metadata"
+            );
 
-            CustomAttributeBasedDependencyAlgorithm.AddDependenciesDueToCustomAttributes(ref dependencies, factory, ((EcmaField)_field));
+            CustomAttributeBasedDependencyAlgorithm.AddDependenciesDueToCustomAttributes(
+                ref dependencies,
+                factory,
+                ((EcmaField)_field)
+            );
 
             if (_field is EcmaField ecmaField)
             {
-                DynamicDependencyAttributesOnEntityNode.AddDependenciesDueToDynamicDependencyAttribute(ref dependencies, factory, ecmaField);
+                DynamicDependencyAttributesOnEntityNode.AddDependenciesDueToDynamicDependencyAttribute(
+                    ref dependencies,
+                    factory,
+                    ecmaField
+                );
 
                 // On a reflectable field, perform generic data flow for the field's type
                 // This is a compensation for the DI issue described in https://github.com/dotnet/runtime/issues/81358
-                GenericArgumentDataFlow.ProcessGenericArgumentDataFlow(ref dependencies, factory, new MessageOrigin(_field), ecmaField.FieldType, ecmaField.OwningType);
+                GenericArgumentDataFlow.ProcessGenericArgumentDataFlow(
+                    ref dependencies,
+                    factory,
+                    new MessageOrigin(_field),
+                    ecmaField.FieldType,
+                    ecmaField.OwningType
+                );
             }
 
             if (_field.HasEmbeddedSignatureData)
             {
                 foreach (var sigData in _field.GetEmbeddedSignatureData())
                     if (sigData.type != null)
-                        TypeMetadataNode.GetMetadataDependencies(ref dependencies, factory, sigData.type, "Modifier in a field signature");
+                        TypeMetadataNode.GetMetadataDependencies(
+                            ref dependencies,
+                            factory,
+                            sigData.type,
+                            "Modifier in a field signature"
+                        );
             }
 
             return dependencies;
         }
+
         protected override string GetName(NodeFactory factory)
         {
             return "Field metadata: " + _field.ToString();
@@ -75,7 +95,15 @@ namespace ILCompiler.DependencyAnalysis
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

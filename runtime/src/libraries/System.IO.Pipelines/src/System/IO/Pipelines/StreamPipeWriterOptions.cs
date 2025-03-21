@@ -16,14 +16,19 @@ namespace System.IO.Pipelines
         /// <param name="pool">The memory pool to use when allocating memory. The default value is <see langword="null" />.</param>
         /// <param name="minimumBufferSize">The minimum buffer size to use when renting memory from the <paramref name="pool" />. The default value is 4096.</param>
         /// <param name="leaveOpen"><see langword="true" /> to leave the underlying stream open after the <see cref="System.IO.Pipelines.PipeWriter" /> completes; <see langword="false" /> to close it. The default is <see langword="false" />.</param>
-        public StreamPipeWriterOptions(MemoryPool<byte>? pool = null, int minimumBufferSize = -1, bool leaveOpen = false)
+        public StreamPipeWriterOptions(
+            MemoryPool<byte>? pool = null,
+            int minimumBufferSize = -1,
+            bool leaveOpen = false
+        )
         {
             Pool = pool ?? MemoryPool<byte>.Shared;
 
             MinimumBufferSize =
-                minimumBufferSize == -1 ? DefaultMinimumBufferSize :
-                minimumBufferSize <= 0 ? throw new ArgumentOutOfRangeException(nameof(minimumBufferSize)) :
-                minimumBufferSize;
+                minimumBufferSize == -1 ? DefaultMinimumBufferSize
+                : minimumBufferSize <= 0
+                    ? throw new ArgumentOutOfRangeException(nameof(minimumBufferSize))
+                : minimumBufferSize;
 
             LeaveOpen = leaveOpen;
         }

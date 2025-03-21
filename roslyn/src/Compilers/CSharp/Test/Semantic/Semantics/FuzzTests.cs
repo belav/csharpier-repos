@@ -4,10 +4,10 @@
 
 #nullable disable
 
+using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
-using System.Linq;
 using Xunit;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
         [Fact, WorkItem(16167, "https://github.com/dotnet/roslyn/issues/16167")]
         public void CompileXmlAsSource()
         {
-            var text = @"
+            var text =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;

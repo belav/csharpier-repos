@@ -10,7 +10,9 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security;
 
-    sealed class TransactionChannelListener<TChannel> : DelegatingChannelListener<TChannel>, ITransactionChannelManager
+    sealed class TransactionChannelListener<TChannel>
+        : DelegatingChannelListener<TChannel>,
+            ITransactionChannelManager
         where TChannel : class, IChannel
     {
         TransactionFlowOption flowIssuedTokens;
@@ -18,27 +20,32 @@ namespace System.ServiceModel.Channels
         SecurityStandardsManager standardsManager;
         TransactionProtocol transactionProtocol;
 
-        public TransactionChannelListener(TransactionProtocol transactionProtocol, IDefaultCommunicationTimeouts timeouts, Dictionary<DirectionalAction, TransactionFlowOption> dictionary, IChannelListener<TChannel> innerListener)
+        public TransactionChannelListener(
+            TransactionProtocol transactionProtocol,
+            IDefaultCommunicationTimeouts timeouts,
+            Dictionary<DirectionalAction, TransactionFlowOption> dictionary,
+            IChannelListener<TChannel> innerListener
+        )
             : base(timeouts, innerListener)
         {
             this.dictionary = dictionary;
             this.TransactionProtocol = transactionProtocol;
             this.Acceptor = new TransactionChannelAcceptor(this, innerListener);
 
-            this.standardsManager = SecurityStandardsHelper.CreateStandardsManager(this.TransactionProtocol);
+            this.standardsManager = SecurityStandardsHelper.CreateStandardsManager(
+                this.TransactionProtocol
+            );
         }
 
         public TransactionProtocol TransactionProtocol
         {
-            get
-            {
-                return this.transactionProtocol;
-            }
+            get { return this.transactionProtocol; }
             set
             {
                 if (!TransactionProtocol.IsDefined(value))
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols)));
+                        new ArgumentException(SR.GetString(SR.SFxBadTransactionProtocols))
+                    );
                 this.transactionProtocol = value;
             }
         }
@@ -52,7 +59,14 @@ namespace System.ServiceModel.Channels
         public SecurityStandardsManager StandardsManager
         {
             get { return this.standardsManager; }
-            set { this.standardsManager = (value != null ? value : SecurityStandardsHelper.CreateStandardsManager(this.transactionProtocol)); }
+            set
+            {
+                this.standardsManager = (
+                    value != null
+                        ? value
+                        : SecurityStandardsHelper.CreateStandardsManager(this.transactionProtocol)
+                );
+            }
         }
 
         public IDictionary<DirectionalAction, TransactionFlowOption> Dictionary
@@ -67,7 +81,12 @@ namespace System.ServiceModel.Channels
                 return txFlow;
 
             // Look for the wildcard action
-            if (dictionary.TryGetValue(new DirectionalAction(direction, MessageHeaders.WildcardAction), out txFlow))
+            if (
+                dictionary.TryGetValue(
+                    new DirectionalAction(direction, MessageHeaders.WildcardAction),
+                    out txFlow
+                )
+            )
                 return txFlow;
 
             return TransactionFlowOption.NotAllowed;
@@ -77,45 +96,73 @@ namespace System.ServiceModel.Channels
         {
             TransactionChannelListener<TChannel> listener;
 
-            public TransactionChannelAcceptor(TransactionChannelListener<TChannel> listener, IChannelListener<TChannel> innerListener)
+            public TransactionChannelAcceptor(
+                TransactionChannelListener<TChannel> listener,
+                IChannelListener<TChannel> innerListener
+            )
                 : base(listener, innerListener)
             {
                 this.listener = listener;
             }
 
-            override protected TChannel OnAcceptChannel(TChannel innerChannel)
+            protected override TChannel OnAcceptChannel(TChannel innerChannel)
             {
                 if (typeof(TChannel) == typeof(IInputSessionChannel))
                 {
-                    return (TChannel)(object)new TransactionInputSessionChannel(this.listener, (IInputSessionChannel)innerChannel);
+                    return (TChannel)
+                        (object)
+                            new TransactionInputSessionChannel(
+                                this.listener,
+                                (IInputSessionChannel)innerChannel
+                            );
                 }
                 if (typeof(TChannel) == typeof(IDuplexSessionChannel))
                 {
-                    return (TChannel)(object)new TransactionDuplexSessionChannel(this.listener, (IDuplexSessionChannel)innerChannel);
+                    return (TChannel)
+                        (object)
+                            new TransactionDuplexSessionChannel(
+                                this.listener,
+                                (IDuplexSessionChannel)innerChannel
+                            );
                 }
                 else if (typeof(TChannel) == typeof(IInputChannel))
                 {
-                    return (TChannel)(object)new TransactionInputChannel(this.listener, (IInputChannel)innerChannel);
+                    return (TChannel)
+                        (object)
+                            new TransactionInputChannel(this.listener, (IInputChannel)innerChannel);
                 }
                 else if (typeof(TChannel) == typeof(IReplyChannel))
                 {
-                    return (TChannel)(object)new TransactionReplyChannel(this.listener, (IReplyChannel)innerChannel);
+                    return (TChannel)
+                        (object)
+                            new TransactionReplyChannel(this.listener, (IReplyChannel)innerChannel);
                 }
                 else if (typeof(TChannel) == typeof(IReplySessionChannel))
                 {
-                    return (TChannel)(object)new TransactionReplySessionChannel(this.listener, (IReplySessionChannel)innerChannel);
+                    return (TChannel)
+                        (object)
+                            new TransactionReplySessionChannel(
+                                this.listener,
+                                (IReplySessionChannel)innerChannel
+                            );
                 }
                 else if (typeof(TChannel) == typeof(IDuplexChannel))
                 {
-                    return (TChannel)(object)new TransactionDuplexChannel(this.listener, (IDuplexChannel)innerChannel);
+                    return (TChannel)
+                        (object)
+                            new TransactionDuplexChannel(
+                                this.listener,
+                                (IDuplexChannel)innerChannel
+                            );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(listener.CreateChannelTypeNotSupportedException(typeof(TChannel)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        listener.CreateChannelTypeNotSupportedException(typeof(TChannel))
+                    );
                 }
             }
         }
-
 
         //==============================================================
         //                Transaction channel classes
@@ -123,67 +170,92 @@ namespace System.ServiceModel.Channels
 
         sealed class TransactionInputChannel : TransactionReceiveChannelGeneric<IInputChannel>
         {
-            public TransactionInputChannel(ChannelManagerBase channelManager, IInputChannel innerChannel)
-                : base(channelManager, innerChannel, MessageDirection.Input)
-            {
-            }
+            public TransactionInputChannel(
+                ChannelManagerBase channelManager,
+                IInputChannel innerChannel
+            )
+                : base(channelManager, innerChannel, MessageDirection.Input) { }
         }
 
         sealed class TransactionReplyChannel : TransactionReplyChannelGeneric<IReplyChannel>
         {
-            public TransactionReplyChannel(ChannelManagerBase channelManager, IReplyChannel innerChannel)
-                : base(channelManager, innerChannel)
-            {
-            }
+            public TransactionReplyChannel(
+                ChannelManagerBase channelManager,
+                IReplyChannel innerChannel
+            )
+                : base(channelManager, innerChannel) { }
         }
 
         sealed class TransactionDuplexChannel : TransactionInputDuplexChannelGeneric<IDuplexChannel>
         {
-            public TransactionDuplexChannel(ChannelManagerBase channelManager, IDuplexChannel innerChannel)
-                : base(channelManager, innerChannel)
+            public TransactionDuplexChannel(
+                ChannelManagerBase channelManager,
+                IDuplexChannel innerChannel
+            )
+                : base(channelManager, innerChannel) { }
+        }
+
+        sealed class TransactionInputSessionChannel
+            : TransactionReceiveChannelGeneric<IInputSessionChannel>,
+                IInputSessionChannel
+        {
+            public TransactionInputSessionChannel(
+                ChannelManagerBase channelManager,
+                IInputSessionChannel innerChannel
+            )
+                : base(channelManager, innerChannel, MessageDirection.Input) { }
+
+            public IInputSession Session
             {
+                get { return InnerChannel.Session; }
             }
         }
 
-        sealed class TransactionInputSessionChannel : TransactionReceiveChannelGeneric<IInputSessionChannel>, IInputSessionChannel
+        sealed class TransactionReplySessionChannel
+            : TransactionReplyChannelGeneric<IReplySessionChannel>,
+                IReplySessionChannel
         {
-            public TransactionInputSessionChannel(ChannelManagerBase channelManager, IInputSessionChannel innerChannel)
-                : base(channelManager, innerChannel, MessageDirection.Input)
-            {
-            }
+            public TransactionReplySessionChannel(
+                ChannelManagerBase channelManager,
+                IReplySessionChannel innerChannel
+            )
+                : base(channelManager, innerChannel) { }
 
-            public IInputSession Session { get { return InnerChannel.Session; } }
+            public IInputSession Session
+            {
+                get { return InnerChannel.Session; }
+            }
         }
 
-        sealed class TransactionReplySessionChannel : TransactionReplyChannelGeneric<IReplySessionChannel>, IReplySessionChannel
+        sealed class TransactionDuplexSessionChannel
+            : TransactionInputDuplexChannelGeneric<IDuplexSessionChannel>,
+                IDuplexSessionChannel
         {
-            public TransactionReplySessionChannel(ChannelManagerBase channelManager, IReplySessionChannel innerChannel)
-                : base(channelManager, innerChannel)
+            public TransactionDuplexSessionChannel(
+                ChannelManagerBase channelManager,
+                IDuplexSessionChannel innerChannel
+            )
+                : base(channelManager, innerChannel) { }
+
+            public IDuplexSession Session
             {
+                get { return InnerChannel.Session; }
             }
-
-            public IInputSession Session { get { return InnerChannel.Session; } }
-        }
-
-        sealed class TransactionDuplexSessionChannel : TransactionInputDuplexChannelGeneric<IDuplexSessionChannel>, IDuplexSessionChannel
-        {
-            public TransactionDuplexSessionChannel(ChannelManagerBase channelManager, IDuplexSessionChannel innerChannel)
-                : base(channelManager, innerChannel)
-            {
-            }
-
-            public IDuplexSession Session { get { return InnerChannel.Session; } }
         }
     }
-
 
     sealed class TransactionRequestContext : RequestContextBase
     {
         ITransactionChannel transactionChannel;
         RequestContext innerContext;
 
-        public TransactionRequestContext(ITransactionChannel transactionChannel, ChannelBase channel, RequestContext innerContext,
-            TimeSpan defaultCloseTimeout, TimeSpan defaultSendTimeout)
+        public TransactionRequestContext(
+            ITransactionChannel transactionChannel,
+            ChannelBase channel,
+            RequestContext innerContext,
+            TimeSpan defaultCloseTimeout,
+            TimeSpan defaultSendTimeout
+        )
             : base(innerContext.RequestMessage, defaultCloseTimeout, defaultSendTimeout)
         {
             this.transactionChannel = transactionChannel;
@@ -194,17 +266,27 @@ namespace System.ServiceModel.Channels
         {
             if (this.innerContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName)
+                );
             }
 
             this.innerContext.Abort();
         }
 
-        protected override IAsyncResult OnBeginReply(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginReply(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (this.innerContext == null)
             {
-                throw TraceUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName), message);
+                throw TraceUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName),
+                    message
+                );
             }
 
             if (message != null)
@@ -214,12 +296,13 @@ namespace System.ServiceModel.Channels
             return this.innerContext.BeginReply(message, timeout, callback, state);
         }
 
-
         protected override void OnClose(TimeSpan timeout)
         {
             if (this.innerContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName)
+                );
             }
 
             this.innerContext.Close(timeout);
@@ -229,7 +312,9 @@ namespace System.ServiceModel.Channels
         {
             if (this.innerContext == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName)
+                );
             }
 
             this.innerContext.EndReply(result);
@@ -239,7 +324,10 @@ namespace System.ServiceModel.Channels
         {
             if (this.innerContext == null)
             {
-                throw TraceUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().FullName), message);
+                throw TraceUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().FullName),
+                    message
+                );
             }
 
             if (message != null)
@@ -250,8 +338,6 @@ namespace System.ServiceModel.Channels
         }
     }
 
-
-
     //==============================================================
     //                Transaction channel base generic classes
     //==============================================================
@@ -261,7 +347,11 @@ namespace System.ServiceModel.Channels
     {
         MessageDirection receiveMessageDirection;
 
-        public TransactionReceiveChannelGeneric(ChannelManagerBase channelManager, TChannel innerChannel, MessageDirection direction)
+        public TransactionReceiveChannelGeneric(
+            ChannelManagerBase channelManager,
+            TChannel innerChannel,
+            MessageDirection direction
+        )
             : base(channelManager, innerChannel)
         {
             this.receiveMessageDirection = direction;
@@ -269,10 +359,7 @@ namespace System.ServiceModel.Channels
 
         public EndpointAddress LocalAddress
         {
-            get
-            {
-                return InnerChannel.LocalAddress;
-            }
+            get { return InnerChannel.LocalAddress; }
         }
 
         public Message Receive()
@@ -340,7 +427,11 @@ namespace System.ServiceModel.Channels
             return InnerChannel.WaitForMessage(timeout);
         }
 
-        public IAsyncResult BeginWaitForMessage(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForMessage(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return InnerChannel.BeginWaitForMessage(timeout, callback, state);
         }
@@ -351,23 +442,19 @@ namespace System.ServiceModel.Channels
         }
     }
 
-
     //-------------------------------------------------------------
     class TransactionReplyChannelGeneric<TChannel> : TransactionChannel<TChannel>, IReplyChannel
         where TChannel : class, IReplyChannel
     {
-
-        public TransactionReplyChannelGeneric(ChannelManagerBase channelManager, TChannel innerChannel)
-            : base(channelManager, innerChannel)
-        {
-        }
+        public TransactionReplyChannelGeneric(
+            ChannelManagerBase channelManager,
+            TChannel innerChannel
+        )
+            : base(channelManager, innerChannel) { }
 
         public EndpointAddress LocalAddress
         {
-            get
-            {
-                return InnerChannel.LocalAddress;
-            }
+            get { return InnerChannel.LocalAddress; }
         }
 
         public RequestContext ReceiveRequest()
@@ -385,7 +472,11 @@ namespace System.ServiceModel.Channels
             return this.BeginReceiveRequest(this.DefaultReceiveTimeout, callback, state);
         }
 
-        public IAsyncResult BeginReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return ReplyChannel.HelpBeginReceiveRequest(this, timeout, callback, state);
         }
@@ -395,10 +486,22 @@ namespace System.ServiceModel.Channels
             return ReplyChannel.HelpEndReceiveRequest(result);
         }
 
-        public IAsyncResult BeginTryReceiveRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginTryReceiveRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
-            ReceiveTimeoutAsyncResult result = new ReceiveTimeoutAsyncResult(timeout, callback, state);
-            result.InnerResult = this.InnerChannel.BeginTryReceiveRequest(timeout, result.InnerCallback, result.InnerState);
+            ReceiveTimeoutAsyncResult result = new ReceiveTimeoutAsyncResult(
+                timeout,
+                callback,
+                state
+            );
+            result.InnerResult = this.InnerChannel.BeginTryReceiveRequest(
+                timeout,
+                result.InnerCallback,
+                result.InnerState
+            );
             return result;
         }
 
@@ -409,12 +512,21 @@ namespace System.ServiceModel.Channels
 
             try
             {
-                this.ReadTransactionDataFromMessage(innerContext.RequestMessage, MessageDirection.Input);
+                this.ReadTransactionDataFromMessage(
+                    innerContext.RequestMessage,
+                    MessageDirection.Input
+                );
             }
             catch (FaultException fault)
             {
-                string faultAction = fault.Action ?? innerContext.RequestMessage.Version.Addressing.DefaultFaultAction;
-                Message reply = Message.CreateMessage(innerContext.RequestMessage.Version, fault.CreateMessageFault(), faultAction);
+                string faultAction =
+                    fault.Action
+                    ?? innerContext.RequestMessage.Version.Addressing.DefaultFaultAction;
+                Message reply = Message.CreateMessage(
+                    innerContext.RequestMessage.Version,
+                    fault.CreateMessageFault(),
+                    faultAction
+                );
                 try
                 {
                     innerContext.Reply(reply, timeout);
@@ -426,23 +538,36 @@ namespace System.ServiceModel.Channels
                 throw;
             }
 
-            return new TransactionRequestContext(this, this, innerContext, this.DefaultCloseTimeout, this.DefaultSendTimeout);
+            return new TransactionRequestContext(
+                this,
+                this,
+                innerContext,
+                this.DefaultCloseTimeout,
+                this.DefaultSendTimeout
+            );
         }
 
-
-        public bool EndTryReceiveRequest(IAsyncResult asyncResult, out RequestContext requestContext)
+        public bool EndTryReceiveRequest(
+            IAsyncResult asyncResult,
+            out RequestContext requestContext
+        )
         {
             if (asyncResult == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("asyncResult");
 
             ReceiveTimeoutAsyncResult result = asyncResult as ReceiveTimeoutAsyncResult;
             if (result == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.AsyncEndCalledWithAnIAsyncResult)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.AsyncEndCalledWithAnIAsyncResult))
+                );
 
             RequestContext innerContext;
             if (InnerChannel.EndTryReceiveRequest(result.InnerResult, out innerContext))
             {
-                requestContext = FinishReceiveRequest(innerContext, result.TimeoutHelper.RemainingTime());
+                requestContext = FinishReceiveRequest(
+                    innerContext,
+                    result.TimeoutHelper.RemainingTime()
+                );
                 return true;
             }
             else
@@ -474,7 +599,11 @@ namespace System.ServiceModel.Channels
             return InnerChannel.WaitForRequest(timeout);
         }
 
-        public IAsyncResult BeginWaitForRequest(TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginWaitForRequest(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return InnerChannel.BeginWaitForRequest(timeout, callback, state);
         }
@@ -485,25 +614,30 @@ namespace System.ServiceModel.Channels
         }
     }
 
-
     //-------------------------------------------------------------
     class TransactionInputDuplexChannelGeneric<TChannel> : TransactionDuplexChannelGeneric<TChannel>
         where TChannel : class, IDuplexChannel
     {
-        public TransactionInputDuplexChannelGeneric(ChannelManagerBase channelManager, TChannel innerChannel)
-            : base(channelManager, innerChannel, MessageDirection.Input)
-        {
-        }
+        public TransactionInputDuplexChannelGeneric(
+            ChannelManagerBase channelManager,
+            TChannel innerChannel
+        )
+            : base(channelManager, innerChannel, MessageDirection.Input) { }
     }
 
-
     //-------------------------------------------------------------
-    class TransactionDuplexChannelGeneric<TChannel> : TransactionReceiveChannelGeneric<TChannel>, IDuplexChannel
+    class TransactionDuplexChannelGeneric<TChannel>
+        : TransactionReceiveChannelGeneric<TChannel>,
+            IDuplexChannel
         where TChannel : class, IDuplexChannel
     {
         MessageDirection sendMessageDirection;
 
-        public TransactionDuplexChannelGeneric(ChannelManagerBase channelManager, TChannel innerChannel, MessageDirection direction)
+        public TransactionDuplexChannelGeneric(
+            ChannelManagerBase channelManager,
+            TChannel innerChannel,
+            MessageDirection direction
+        )
             : base(channelManager, innerChannel, direction)
         {
             if (direction == MessageDirection.Input)
@@ -518,21 +652,18 @@ namespace System.ServiceModel.Channels
 
         public EndpointAddress RemoteAddress
         {
-            get
-            {
-                return InnerChannel.RemoteAddress;
-            }
+            get { return InnerChannel.RemoteAddress; }
         }
 
         public Uri Via
         {
-            get
-            {
-                return InnerChannel.Via;
-            }
+            get { return InnerChannel.Via; }
         }
 
-        public override void ReadTransactionDataFromMessage(Message message, MessageDirection direction)
+        public override void ReadTransactionDataFromMessage(
+            Message message,
+            MessageDirection direction
+        )
         {
             try
             {
@@ -540,10 +671,17 @@ namespace System.ServiceModel.Channels
             }
             catch (FaultException fault)
             {
-                Message reply = Message.CreateMessage(message.Version, fault.CreateMessageFault(), fault.Action);
+                Message reply = Message.CreateMessage(
+                    message.Version,
+                    fault.CreateMessageFault(),
+                    fault.Action
+                );
 
                 System.ServiceModel.Channels.RequestReplyCorrelator.AddressReply(reply, message);
-                System.ServiceModel.Channels.RequestReplyCorrelator.PrepareReply(reply, message.Headers.MessageId);
+                System.ServiceModel.Channels.RequestReplyCorrelator.PrepareReply(
+                    reply,
+                    message.Headers.MessageId
+                );
 
                 try
                 {
@@ -563,11 +701,21 @@ namespace System.ServiceModel.Channels
             return this.BeginSend(message, this.DefaultSendTimeout, callback, state);
         }
 
-        public virtual IAsyncResult BeginSend(Message message, TimeSpan timeout, AsyncCallback asyncCallback, object state)
+        public virtual IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback asyncCallback,
+            object state
+        )
         {
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
             WriteTransactionDataToMessage(message, sendMessageDirection);
-            return InnerChannel.BeginSend(message, timeoutHelper.RemainingTime(), asyncCallback, state);
+            return InnerChannel.BeginSend(
+                message,
+                timeoutHelper.RemainingTime(),
+                asyncCallback,
+                state
+            );
         }
 
         public void EndSend(IAsyncResult result)
@@ -587,7 +735,6 @@ namespace System.ServiceModel.Channels
             InnerChannel.Send(message, timeoutHelper.RemainingTime());
         }
     }
-
 
     //==============================================================
     //                async helper classes
@@ -615,7 +762,9 @@ namespace System.ServiceModel.Channels
             get
             {
                 if (ReceiveTimeoutAsyncResult.innerCallback == null)
-                    ReceiveTimeoutAsyncResult.innerCallback = Fx.ThunkCallback(new AsyncCallback(Callback));
+                    ReceiveTimeoutAsyncResult.innerCallback = Fx.ThunkCallback(
+                        new AsyncCallback(Callback)
+                    );
                 return ReceiveTimeoutAsyncResult.innerCallback;
             }
         }
@@ -627,7 +776,9 @@ namespace System.ServiceModel.Channels
                 if (!(this.innerResult != null))
                 {
                     // tx processing requires failfast when state is inconsistent
-                    DiagnosticUtility.FailFast("ReceiveTimeoutAsyncResult.InnerResult: (this.innerResult != null)");
+                    DiagnosticUtility.FailFast(
+                        "ReceiveTimeoutAsyncResult.InnerResult: (this.innerResult != null)"
+                    );
                 }
                 return this.innerResult;
             }
@@ -642,7 +793,9 @@ namespace System.ServiceModel.Channels
                 }
                 else if (this.innerResult != value)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxAsyncResultsDontMatch0)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SFxAsyncResultsDontMatch0))
+                    );
                 }
             }
         }
@@ -663,6 +816,4 @@ namespace System.ServiceModel.Channels
             outerResult.Complete(result.CompletedSynchronously);
         }
     }
-
-
 }

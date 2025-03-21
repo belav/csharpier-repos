@@ -26,7 +26,11 @@ namespace System.ServiceModel.Channels
             this.bindingParameters = context.BindingParameters;
         }
 
-        public ChannelBuilder(Binding binding, BindingParameterCollection bindingParameters, bool addChannelDemuxerIfRequired)
+        public ChannelBuilder(
+            Binding binding,
+            BindingParameterCollection bindingParameters,
+            bool addChannelDemuxerIfRequired
+        )
         {
             this.binding = new CustomBinding(binding);
             this.bindingParameters = bindingParameters;
@@ -42,7 +46,9 @@ namespace System.ServiceModel.Channels
             this.bindingParameters = channelBuilder.BindingParameters;
             if (this.binding.Elements.Find<ChannelDemuxerBindingElement>() == null)
             {
-                throw Fx.AssertAndThrow("ChannelBuilder.ctor (this.binding.Elements.Find<ChannelDemuxerBindingElement>() != null)");
+                throw Fx.AssertAndThrow(
+                    "ChannelBuilder.ctor (this.binding.Elements.Find<ChannelDemuxerBindingElement>() != null)"
+                );
             }
         }
 
@@ -66,11 +72,18 @@ namespace System.ServiceModel.Channels
                 TransportBindingElement transport = elements.Find<TransportBindingElement>();
                 if (transport == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.TransportBindingElementNotFound)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.TransportBindingElementNotFound)
+                        )
+                    );
                 }
                 // cache the context state in the demuxer so that the same context state can be provided to the transport
                 // when building auxilliary channels and listeners (for ex, for security negotiation)
-                elements.Insert(elements.IndexOf(transport), new ChannelDemuxerBindingElement(true));
+                elements.Insert(
+                    elements.IndexOf(transport),
+                    new ChannelDemuxerBindingElement(true)
+                );
             }
         }
 
@@ -78,7 +91,8 @@ namespace System.ServiceModel.Channels
         {
             if (this.context != null)
             {
-                IChannelFactory<TChannel> factory = this.context.BuildInnerChannelFactory<TChannel>();
+                IChannelFactory<TChannel> factory =
+                    this.context.BuildInnerChannelFactory<TChannel>();
                 this.context = null;
                 return factory;
             }
@@ -88,22 +102,31 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public IChannelListener<TChannel> BuildChannelListener<TChannel>() where TChannel : class, IChannel
+        public IChannelListener<TChannel> BuildChannelListener<TChannel>()
+            where TChannel : class, IChannel
         {
             if (this.context != null)
             {
-                IChannelListener<TChannel> listener = this.context.BuildInnerChannelListener<TChannel>();
+                IChannelListener<TChannel> listener =
+                    this.context.BuildInnerChannelListener<TChannel>();
                 this.listenUri = listener.Uri;
                 this.context = null;
                 return listener;
             }
             else
             {
-                return this.binding.BuildChannelListener<TChannel>(this.listenUri, this.bindingParameters);
+                return this.binding.BuildChannelListener<TChannel>(
+                    this.listenUri,
+                    this.bindingParameters
+                );
             }
         }
 
-        public IChannelListener<TChannel> BuildChannelListener<TChannel>(MessageFilter filter, int priority) where TChannel : class, IChannel
+        public IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            MessageFilter filter,
+            int priority
+        )
+            where TChannel : class, IChannel
         {
             this.bindingParameters.Add(new ChannelDemuxerFilter(filter, priority));
             IChannelListener<TChannel> listener = this.BuildChannelListener<TChannel>();
@@ -117,7 +140,8 @@ namespace System.ServiceModel.Channels
             return this.binding.CanBuildChannelFactory<TChannel>(this.bindingParameters);
         }
 
-        public bool CanBuildChannelListener<TChannel>() where TChannel : class, IChannel
+        public bool CanBuildChannelListener<TChannel>()
+            where TChannel : class, IChannel
         {
             return this.binding.CanBuildChannelListener<TChannel>(this.bindingParameters);
         }

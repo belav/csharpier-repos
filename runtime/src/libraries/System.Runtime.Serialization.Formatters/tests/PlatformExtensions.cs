@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -12,7 +11,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
     {
         private static bool IsNetFxPatchedVersion(int build)
         {
-            string versionRaw = RuntimeInformation.FrameworkDescription.Replace(".NET Framework", "").Trim();
+            string versionRaw = RuntimeInformation
+                .FrameworkDescription.Replace(".NET Framework", "")
+                .Trim();
             if (Version.TryParse(versionRaw, out Version version))
             {
                 return version.Build >= build;
@@ -32,7 +33,9 @@ namespace System.Runtime.Serialization.Formatters.Tests
                 // Check if a specialized blob for >=netfx472 build 3260 is present and return if found.
                 if (IsNetFxPatchedVersion(3260))
                 {
-                    index = blobList.FindIndex(b => b.Platform == TargetFrameworkMoniker.netfx472_3260);
+                    index = blobList.FindIndex(b =>
+                        b.Platform == TargetFrameworkMoniker.netfx472_3260
+                    );
 
                     if (index >= 0)
                         return index;

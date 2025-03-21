@@ -26,10 +26,17 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Ctor_NullSourceInterfaceType1_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute((Type)null));
-            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute(null, typeof(int)));
-            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute(null, typeof(int), typeof(string)));
-            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute(null, typeof(int), typeof(string), typeof(bool)));
+            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute((Type)null)
+            );
+            Assert.Throws<NullReferenceException>(() =>
+                new ComSourceInterfacesAttribute(null, typeof(int))
+            );
+            Assert.Throws<NullReferenceException>(() =>
+                new ComSourceInterfacesAttribute(null, typeof(int), typeof(string))
+            );
+            Assert.Throws<NullReferenceException>(() =>
+                new ComSourceInterfacesAttribute(null, typeof(int), typeof(string), typeof(bool))
+            );
         }
 
         [Fact]
@@ -42,36 +49,60 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void Ctor_NullSourceInterfaceType2_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute(typeof(int), null));
-            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute(typeof(int), null, typeof(string)));
-            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute(typeof(int), null, typeof(string), typeof(bool)));
+            Assert.Throws<NullReferenceException>(() =>
+                new ComSourceInterfacesAttribute(typeof(int), null)
+            );
+            Assert.Throws<NullReferenceException>(() =>
+                new ComSourceInterfacesAttribute(typeof(int), null, typeof(string))
+            );
+            Assert.Throws<NullReferenceException>(() =>
+                new ComSourceInterfacesAttribute(typeof(int), null, typeof(string), typeof(bool))
+            );
         }
 
         [Fact]
         public void Ctor_SourceInterface1_SourceInterfaceType2_SourceInterfaceType3()
         {
-            var attribute = new ComSourceInterfacesAttribute(typeof(int), typeof(string), typeof(bool));
+            var attribute = new ComSourceInterfacesAttribute(
+                typeof(int),
+                typeof(string),
+                typeof(bool)
+            );
             Assert.Equal("System.Int32\0System.String\0System.Boolean", attribute.Value);
         }
 
         [Fact]
         public void Ctor_NullSourceInterfaceType3_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute(typeof(int), typeof(string), null));
-            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute(typeof(int), typeof(string), null, typeof(bool)));
+            Assert.Throws<NullReferenceException>(() =>
+                new ComSourceInterfacesAttribute(typeof(int), typeof(string), null)
+            );
+            Assert.Throws<NullReferenceException>(() =>
+                new ComSourceInterfacesAttribute(typeof(int), typeof(string), null, typeof(bool))
+            );
         }
 
         [Fact]
         public void Ctor_SourceInterface1_SourceInterfaceType2_SourceInterfaceType3_SourceInterfaceType4()
         {
-            var attribute = new ComSourceInterfacesAttribute(typeof(int), typeof(string), typeof(bool), typeof(short));
-            Assert.Equal("System.Int32\0System.String\0System.Boolean\0System.Int16", attribute.Value);
+            var attribute = new ComSourceInterfacesAttribute(
+                typeof(int),
+                typeof(string),
+                typeof(bool),
+                typeof(short)
+            );
+            Assert.Equal(
+                "System.Int32\0System.String\0System.Boolean\0System.Int16",
+                attribute.Value
+            );
         }
 
         [Fact]
         public void Ctor_NullSourceInterfaceType4_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() => new ComSourceInterfacesAttribute(typeof(int), typeof(string), typeof(bool), null));
+            Assert.Throws<NullReferenceException>(() =>
+                new ComSourceInterfacesAttribute(typeof(int), typeof(string), typeof(bool), null)
+            );
         }
     }
 }

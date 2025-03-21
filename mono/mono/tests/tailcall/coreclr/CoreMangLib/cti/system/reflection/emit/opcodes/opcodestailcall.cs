@@ -7,14 +7,14 @@ using System.Reflection.Emit;
 ///<summary>
 ///System.Reflection.Emit.OpCodes.Tailcall [v-zuolan]
 ///</summary>
-
 public class OpCodesTailcall
 {
-
     public static int Main()
     {
         OpCodesTailcall testObj = new OpCodesTailcall();
-        TestLibrary.TestFramework.BeginTestCase("for field of System.Reflection.Emit.OpCodes.Tailcall");
+        TestLibrary.TestFramework.BeginTestCase(
+            "for field of System.Reflection.Emit.OpCodes.Tailcall"
+        );
         if (testObj.RunTests())
         {
             TestLibrary.TestFramework.EndTestCase();
@@ -27,7 +27,6 @@ public class OpCodesTailcall
             TestLibrary.TestFramework.LogInformation("FAIL");
             return 0;
         }
-
     }
 
     public bool RunTests()
@@ -52,14 +51,27 @@ public class OpCodesTailcall
         {
             OpCode opcode = OpCodes.Tailcall;
 
-            actualValue = CompareOpCode(opcode, "tail.", StackBehaviour.Pop0, StackBehaviour.Push0, OperandType.InlineNone, OpCodeType.Prefix, 2, (byte)0xfe, (byte)0x14, FlowControl.Meta);
+            actualValue = CompareOpCode(
+                opcode,
+                "tail.",
+                StackBehaviour.Pop0,
+                StackBehaviour.Push0,
+                OperandType.InlineNone,
+                OpCodeType.Prefix,
+                2,
+                (byte)0xfe,
+                (byte)0x14,
+                FlowControl.Meta
+            );
 
             if (expectedValue != actualValue)
             {
-                TestLibrary.TestFramework.LogError("001", "Errors accured in fields:" + GetResult(actualValue));
+                TestLibrary.TestFramework.LogError(
+                    "001",
+                    "Errors accured in fields:" + GetResult(actualValue)
+                );
                 retVal = false;
             }
-
         }
         catch (Exception e)
         {
@@ -74,7 +86,7 @@ public class OpCodesTailcall
     #region helper method
 
     //verify the opcode fields
-    //if not equal,retun the field name which contains error. 
+    //if not equal,retun the field name which contains error.
     private CompareResult CompareOpCode(
         OpCode opcode,
         String stringname,
@@ -85,15 +97,22 @@ public class OpCodesTailcall
         int size,
         byte s1,
         byte s2,
-        FlowControl ctrl)
+        FlowControl ctrl
+    )
     {
         CompareResult returnValue = CompareResult.Equal;
-        if (opcode.Name != stringname) returnValue = returnValue | CompareResult.Name;
-        if (opcode.StackBehaviourPop != pop) returnValue = returnValue | CompareResult.Pop;
-        if (opcode.StackBehaviourPush != push) returnValue = returnValue | CompareResult.Push;
-        if (opcode.OperandType != operand) returnValue = returnValue | CompareResult.OpenrandType;
-        if (opcode.OpCodeType != type) returnValue = returnValue | CompareResult.OpCodeType;
-        if (opcode.Size != size) returnValue = returnValue | CompareResult.Size;
+        if (opcode.Name != stringname)
+            returnValue = returnValue | CompareResult.Name;
+        if (opcode.StackBehaviourPop != pop)
+            returnValue = returnValue | CompareResult.Pop;
+        if (opcode.StackBehaviourPush != push)
+            returnValue = returnValue | CompareResult.Push;
+        if (opcode.OperandType != operand)
+            returnValue = returnValue | CompareResult.OpenrandType;
+        if (opcode.OpCodeType != type)
+            returnValue = returnValue | CompareResult.OpCodeType;
+        if (opcode.Size != size)
+            returnValue = returnValue | CompareResult.Size;
         if (size == 2)
         {
             if (opcode.Value != ((short)(s1 << 8 | s2)))
@@ -114,7 +133,6 @@ public class OpCodesTailcall
         }
         return returnValue;
     }
-
 
     //Transform numeric result into string description
     public String GetResult(CompareResult result)
@@ -159,7 +177,7 @@ public enum CompareResult
     OpCodeType = 0x10,
     Size = 0x20,
     Value = 0x40,
-    FlowControl = 0x80
+    FlowControl = 0x80,
 }
 
 #endregion

@@ -4,12 +4,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
-
 using Moq.Async;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class InnerMockSetup : SetupWithOutParameterSupport
@@ -31,7 +29,6 @@ namespace Moq
         sealed class InnerMockSetup : SetupWithOutParameterSupport
     */
     sealed class InnerMockSetup : SetupWithOutParameterSupport
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly object returnValue;
@@ -55,7 +52,12 @@ namespace Moq
     {
         readonly object returnValue;
 
-        public InnerMockSetup(Expression originalExpression, Mock mock, MethodExpectation expectation, object returnValue)
+        public InnerMockSetup(
+            Expression originalExpression,
+            Mock mock,
+            MethodExpectation expectation,
+            object returnValue
+        )
             : base(originalExpression, mock, expectation)
         {
             Debug.Assert(Awaitable.TryGetResultRecursive(returnValue) is IMocked);
@@ -88,8 +90,6 @@ namespace Moq
             }
         }
 
-        protected override void VerifySelf()
-        {
-        }
+        protected override void VerifySelf() { }
     }
 }

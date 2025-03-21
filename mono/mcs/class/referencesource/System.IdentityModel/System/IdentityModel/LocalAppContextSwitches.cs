@@ -14,10 +14,14 @@ namespace System.IdentityModel
     // in 4.6 and above. So we set DisableExplicitConnectionCloseHeader to true if running 4.5.2 or less.
     internal static class LocalAppContextSwitches
     {
-        private const string EnableCachedEmptyDefaultAuthorizationContextString = "Switch.System.IdentityModel.EnableCachedEmptyDefaultAuthorizationContext";
-        private const string DisableMultipleDNSEntriesInSANCertificateString = "Switch.System.IdentityModel.DisableMultipleDNSEntriesInSANCertificate";
-        private const string DisableUpdatingRsaProviderTypeString = "Switch.System.IdentityModel.DisableUpdatingRsaProviderType";
-        private const string DisableCngCertificatesString = "Switch.System.IdentityModel.DisableCngCertificates";
+        private const string EnableCachedEmptyDefaultAuthorizationContextString =
+            "Switch.System.IdentityModel.EnableCachedEmptyDefaultAuthorizationContext";
+        private const string DisableMultipleDNSEntriesInSANCertificateString =
+            "Switch.System.IdentityModel.DisableMultipleDNSEntriesInSANCertificate";
+        private const string DisableUpdatingRsaProviderTypeString =
+            "Switch.System.IdentityModel.DisableUpdatingRsaProviderType";
+        private const string DisableCngCertificatesString =
+            "Switch.System.IdentityModel.DisableCngCertificates";
 
         private static int enableCachedEmptyDefaultAuthorizationContext;
         private static int disableMultipleDNSEntriesInSANCertificate;
@@ -29,7 +33,10 @@ namespace System.IdentityModel
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(EnableCachedEmptyDefaultAuthorizationContextString, ref enableCachedEmptyDefaultAuthorizationContext);
+                return LocalAppContext.GetCachedSwitchValue(
+                    EnableCachedEmptyDefaultAuthorizationContextString,
+                    ref enableCachedEmptyDefaultAuthorizationContext
+                );
             }
         }
 
@@ -38,7 +45,10 @@ namespace System.IdentityModel
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(DisableMultipleDNSEntriesInSANCertificateString, ref disableMultipleDNSEntriesInSANCertificate);
+                return LocalAppContext.GetCachedSwitchValue(
+                    DisableMultipleDNSEntriesInSANCertificateString,
+                    ref disableMultipleDNSEntriesInSANCertificate
+                );
             }
         }
 
@@ -47,7 +57,10 @@ namespace System.IdentityModel
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(DisableUpdatingRsaProviderTypeString, ref disableUpdatingRsaProviderType);
+                return LocalAppContext.GetCachedSwitchValue(
+                    DisableUpdatingRsaProviderTypeString,
+                    ref disableUpdatingRsaProviderType
+                );
             }
         }
 
@@ -56,7 +69,10 @@ namespace System.IdentityModel
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(DisableCngCertificatesString, ref disableCngCertificatesString);
+                return LocalAppContext.GetCachedSwitchValue(
+                    DisableCngCertificatesString,
+                    ref disableCngCertificatesString
+                );
             }
         }
 
@@ -64,7 +80,10 @@ namespace System.IdentityModel
         {
 #pragma warning disable BCL0012
             // Define the switches that should be true for 4.5.2 or less, false for 4.6+.
-            LocalAppContext.DefineSwitchDefault(EnableCachedEmptyDefaultAuthorizationContextString, true);
+            LocalAppContext.DefineSwitchDefault(
+                EnableCachedEmptyDefaultAuthorizationContextString,
+                true
+            );
 #pragma warning restore BCL0012
         }
 
@@ -72,7 +91,10 @@ namespace System.IdentityModel
         {
 #pragma warning disable BCL0012
             // Define the switches that should be true for 4.6 or less, false for 4.6.1+.
-            LocalAppContext.DefineSwitchDefault(DisableMultipleDNSEntriesInSANCertificateString, true);
+            LocalAppContext.DefineSwitchDefault(
+                DisableMultipleDNSEntriesInSANCertificateString,
+                true
+            );
 #pragma warning restore BCL0012
         }
 

@@ -25,8 +25,7 @@ public abstract class ModelSnapshot
     /// <summary>
     ///     The snapshot model.
     /// </summary>
-    public virtual IModel Model
-        => _model ??= CreateModel();
+    public virtual IModel Model => _model ??= CreateModel();
 
     /// <summary>
     ///     Called lazily by <see cref="Model" /> to build the model snapshot

@@ -16,10 +16,22 @@ public class DefaultFileVersionProviderTest
 {
     [Theory]
     [InlineData("/hello/world", "/hello/world?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk")]
-    [InlineData("/hello/world?q=test", "/hello/world?q=test&v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk")]
-    [InlineData("/hello/world?q=foo&bar", "/hello/world?q=foo&bar&v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk")]
-    [InlineData("/hello/world?q=foo&bar#abc", "/hello/world?q=foo&bar&v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk#abc")]
-    [InlineData("/hello/world#somefragment", "/hello/world?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk#somefragment")]
+    [InlineData(
+        "/hello/world?q=test",
+        "/hello/world?q=test&v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk"
+    )]
+    [InlineData(
+        "/hello/world?q=foo&bar",
+        "/hello/world?q=foo&bar&v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk"
+    )]
+    [InlineData(
+        "/hello/world?q=foo&bar#abc",
+        "/hello/world?q=foo&bar&v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk#abc"
+    )]
+    [InlineData(
+        "/hello/world#somefragment",
+        "/hello/world?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk#somefragment"
+    )]
     public void AddFileVersionToPath_WhenCacheIsAbsent(string filePath, string expected)
     {
         // Arrange
@@ -42,7 +54,8 @@ public class DefaultFileVersionProviderTest
         var fileProvider = GetMockFileProvider(
             path,
             pathStartsWithAppName: false,
-            fileDoesNotExist: true);
+            fileDoesNotExist: true
+        );
         var fileVersionProvider = GetFileVersionProvider(fileProvider);
         var mockFileProvider = Mock.Get(fileProvider);
         var requestPath = GetRequestPathBase();
@@ -70,9 +83,7 @@ public class DefaultFileVersionProviderTest
     public void AddFileVersionToPath_CachesFoundResults(string path, bool pathStartsWithAppName)
     {
         // Arrange
-        var fileProvider = GetMockFileProvider(
-            "file.txt",
-            pathStartsWithAppName);
+        var fileProvider = GetMockFileProvider("file.txt", pathStartsWithAppName);
         var fileVersionProvider = GetFileVersionProvider(fileProvider);
         var mockFileProvider = Mock.Get(fileProvider);
         var requestPath = GetRequestPathBase();
@@ -173,9 +184,7 @@ public class DefaultFileVersionProviderTest
         var stream = new TestableMemoryStream(Encoding.UTF8.GetBytes("Hello World!"));
         var mockFile = new Mock<IFileInfo>();
         mockFile.SetupGet(f => f.Exists).Returns(true);
-        mockFile
-            .Setup(m => m.CreateReadStream())
-            .Returns(stream);
+        mockFile.Setup(m => m.CreateReadStream()).Returns(stream);
 
         var fileProvider = new TestFileProvider();
         fileProvider.AddFile("/hello/world", mockFile.Object);
@@ -196,7 +205,8 @@ public class DefaultFileVersionProviderTest
     public void AddFileVersionToPath_PathContainingAppName(
         string filePath,
         bool pathStartsWithAppBase,
-        string requestPathBase)
+        string requestPathBase
+    )
     {
         // Arrange
         var fileProvider = GetMockFileProvider(filePath, pathStartsWithAppBase);
@@ -246,12 +256,18 @@ public class DefaultFileVersionProviderTest
     }
 
     [Fact]
-    public void AddFileVersionToPath_CachesEntry() => AddFileVersionToPath("/hello/world", "/hello/world", null);
+    public void AddFileVersionToPath_CachesEntry() =>
+        AddFileVersionToPath("/hello/world", "/hello/world", null);
 
     [Fact]
-    public void AddFileVersionToPath_WithRequestPathBase_CachesEntry() => AddFileVersionToPath("/testApp/hello/world", "/hello/world", "/testApp");
+    public void AddFileVersionToPath_WithRequestPathBase_CachesEntry() =>
+        AddFileVersionToPath("/testApp/hello/world", "/hello/world", "/testApp");
 
-    private static void AddFileVersionToPath(string filePath, string watchPath, string requestPathBase)
+    private static void AddFileVersionToPath(
+        string filePath,
+        string watchPath,
+        string requestPathBase
+    )
     {
         // Arrange
         var expected = filePath + "?v=f4OxZX_x_FO5LcGBSKHWXfwtSx-j1ncoSt3SABJtkGk";
@@ -259,15 +275,12 @@ public class DefaultFileVersionProviderTest
         var changeToken = Mock.Of<IChangeToken>();
 
         var fileProvider = GetMockFileProvider(filePath, requestPathBase != null);
-        Mock.Get(fileProvider)
-            .Setup(f => f.Watch(watchPath)).Returns(changeToken);
+        Mock.Get(fileProvider).Setup(f => f.Watch(watchPath)).Returns(changeToken);
 
         var cacheEntry = Mock.Of<ICacheEntry>(c => c.ExpirationTokens == new List<IChangeToken>());
         var cache = new Mock<IMemoryCache>();
 
-        cache.Setup(c => c.CreateEntry(filePath))
-            .Returns(cacheEntry)
-            .Verifiable();
+        cache.Setup(c => c.CreateEntry(filePath)).Returns(cacheEntry).Verifiable();
 
         var requestPath = GetRequestPathBase(requestPathBase);
 
@@ -285,7 +298,8 @@ public class DefaultFileVersionProviderTest
 
     private static DefaultFileVersionProvider GetFileVersionProvider(
         IFileProvider fileProvider,
-        IMemoryCache memoryCache = null)
+        IMemoryCache memoryCache = null
+    )
     {
         var hostingEnv = Mock.Of<IWebHostEnvironment>(e => e.WebRootFileProvider == fileProvider);
         var cacheProvider = new TagHelperMemoryCacheProvider();
@@ -300,7 +314,8 @@ public class DefaultFileVersionProviderTest
     private static IFileProvider GetMockFileProvider(
         string filePath,
         bool pathStartsWithAppName = false,
-        bool fileDoesNotExist = false)
+        bool fileDoesNotExist = false
+    )
     {
         var existingMockFile = new Mock<IFileInfo>();
         existingMockFile.SetupGet(f => f.Exists).Returns(true);
@@ -314,17 +329,22 @@ public class DefaultFileVersionProviderTest
         var mockFileProvider = new Mock<IFileProvider>();
         if (pathStartsWithAppName)
         {
-            mockFileProvider.Setup(fp => fp.GetFileInfo(filePath)).Returns(doesNotExistMockFile.Object);
-            mockFileProvider.Setup(fp => fp.GetFileInfo(It.Is<string>(str => str != filePath)))
+            mockFileProvider
+                .Setup(fp => fp.GetFileInfo(filePath))
+                .Returns(doesNotExistMockFile.Object);
+            mockFileProvider
+                .Setup(fp => fp.GetFileInfo(It.Is<string>(str => str != filePath)))
                 .Returns(existingMockFile.Object);
         }
         else
         {
-            mockFileProvider.Setup(fp => fp.GetFileInfo(It.IsAny<string>()))
+            mockFileProvider
+                .Setup(fp => fp.GetFileInfo(It.IsAny<string>()))
                 .Returns(fileDoesNotExist ? doesNotExistMockFile.Object : existingMockFile.Object);
         }
 
-        mockFileProvider.Setup(fp => fp.Watch(It.IsAny<string>()))
+        mockFileProvider
+            .Setup(fp => fp.Watch(It.IsAny<string>()))
             .Returns(new TestFileChangeToken());
 
         return mockFileProvider.Object;
@@ -338,9 +358,7 @@ public class DefaultFileVersionProviderTest
     private class TestableMemoryStream : MemoryStream
     {
         public TestableMemoryStream(byte[] buffer)
-            : base(buffer)
-        {
-        }
+            : base(buffer) { }
 
         public bool Disposed { get; private set; }
 

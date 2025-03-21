@@ -25,35 +25,49 @@ public class ServerDeferralTests
     [Fact]
     public async Task ServerSupportsAuthButDisabled_Error()
     {
-        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () => await CreateHostAsync(supportsAuth: true, isEnabled: false));
-        Assert.Equal("The Negotiate Authentication handler cannot be used on a server that directly supports Windows Authentication."
-                    + " Enable Windows Authentication for the server and the Negotiate Authentication handler will defer to it.", ex.Message);
+        var ex = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            await CreateHostAsync(supportsAuth: true, isEnabled: false)
+        );
+        Assert.Equal(
+            "The Negotiate Authentication handler cannot be used on a server that directly supports Windows Authentication."
+                + " Enable Windows Authentication for the server and the Negotiate Authentication handler will defer to it.",
+            ex.Message
+        );
     }
 
     [Fact]
     public async Task ServerSupportsAuthAndEnabled_Deferred()
     {
-        using var host = await CreateHostAsync(supportsAuth: true, isEnabled: true, authScheme: "DeferralScheme");
+        using var host = await CreateHostAsync(
+            supportsAuth: true,
+            isEnabled: true,
+            authScheme: "DeferralScheme"
+        );
         var options = host.Services.GetRequiredService<IOptions<NegotiateOptions>>().Value;
         Assert.True(options.DeferToServer);
         Assert.Equal("DeferralScheme", options.ForwardDefault);
     }
 
-    private static async Task<IHost> CreateHostAsync(bool supportsAuth = false, bool isEnabled = false, string authScheme = null)
+    private static async Task<IHost> CreateHostAsync(
+        bool supportsAuth = false,
+        bool isEnabled = false,
+        string authScheme = null
+    )
     {
         var builder = new HostBuilder()
             .ConfigureServices(services =>
             {
-                services.AddAuthentication()
-                    .AddNegotiate();
+                services.AddAuthentication().AddNegotiate();
 
                 if (supportsAuth)
                 {
-                    services.AddSingleton<IServerIntegratedAuth>(new ServerIntegratedAuth()
-                    {
-                        IsEnabled = isEnabled,
-                        AuthenticationScheme = authScheme,
-                    });
+                    services.AddSingleton<IServerIntegratedAuth>(
+                        new ServerIntegratedAuth()
+                        {
+                            IsEnabled = isEnabled,
+                            AuthenticationScheme = authScheme,
+                        }
+                    );
                 }
             })
             .ConfigureWebHost(webHostBuilder =>

@@ -44,36 +44,29 @@ namespace Microsoft.DiaSymReader
     internal partial interface ISymNGenWriter
     {
         // Add a new public symbol to the NGEN PDB.
-        void AddSymbol([MarshalAs(UnmanagedType.BStr)] string pSymbol,
-                        ushort iSection,
-                        ulong rva);
+        void AddSymbol([MarshalAs(UnmanagedType.BStr)] string pSymbol, ushort iSection, ulong rva);
 
         // Adds a new section to the NGEN PDB.
-        void AddSection(ushort iSection,
-                        OMF flags,
-                        int offset,
-                        int cb);
+        void AddSection(ushort iSection, OMF flags, int offset, int cb);
     }
 
     [Flags]
     internal enum OMF : ushort
     {
-        Const_Read =            0x0001,
-        Const_Write =          0x0002,
-        Const_Exec =           0x0004,
-        Const_F32Bit =         0x0008,
-        Const_ReservedBits1 =  0x00f0,
-        Const_FSel =           0x0100,
-        Const_FAbs =           0x0200,
-        Const_ReservedBits2 =  0x0C00,
-        Const_FGroup =         0x1000,
-        Const_ReservedBits3 =  0xE000,
+        Const_Read = 0x0001,
+        Const_Write = 0x0002,
+        Const_Exec = 0x0004,
+        Const_F32Bit = 0x0008,
+        Const_ReservedBits1 = 0x00f0,
+        Const_FSel = 0x0100,
+        Const_FAbs = 0x0200,
+        Const_ReservedBits2 = 0x0C00,
+        Const_FGroup = 0x1000,
+        Const_ReservedBits3 = 0xE000,
 
-
-        StandardText = (Const_FSel|Const_F32Bit|Const_Exec|Const_Read), // 0x10D
-        SentinelType = (Const_FAbs|Const_F32Bit) // 0x208
+        StandardText = (Const_FSel | Const_F32Bit | Const_Exec | Const_Read), // 0x10D
+        SentinelType = (Const_FAbs | Const_F32Bit), // 0x208
     }
-
 
     /// <summary>
     /// IUnknown COM type for writing NGen PDBs
@@ -115,9 +108,11 @@ namespace Microsoft.DiaSymReader
     [Guid("B029E51B-4C55-4fe2-B993-9F7BC1F10DB4")]
     internal partial interface ISymNGenWriter2 : ISymNGenWriter
     {
-        void OpenModW([MarshalAs(UnmanagedType.LPWStr)] string wszModule,
-                      [MarshalAs(UnmanagedType.LPWStr)] string wszObjFile,
-                      out UIntPtr ppmod);
+        void OpenModW(
+            [MarshalAs(UnmanagedType.LPWStr)] string wszModule,
+            [MarshalAs(UnmanagedType.LPWStr)] string wszObjFile,
+            out UIntPtr ppmod
+        );
 
         void CloseMod(UIntPtr pmod);
 
@@ -130,11 +125,12 @@ namespace Microsoft.DiaSymReader
             int cb,
             uint dwCharacteristics,
             uint dwDataCrc,
-            uint dwRelocCrc);
+            uint dwRelocCrc
+        );
 
         void QueryPDBNameExW(
-            [MarshalUsing(CountElementName = nameof(cchMax))]
-            char[] pdb,
-            IntPtr cchMax);
+            [MarshalUsing(CountElementName = nameof(cchMax))] char[] pdb,
+            IntPtr cchMax
+        );
     }
 }

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,49 +27,45 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Collections.Specialized;
 using System.Configuration.Provider;
 using System.Web.Security;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.Security {
+namespace MonoTests.System.Web.Security
+{
+    class TestProviderBase : ProviderBase { }
 
-	class TestProviderBase : ProviderBase {
-	}
+    [TestFixture]
+    public class MembershipProviderCollectionTest
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Add_Null()
+        {
+            MembershipProviderCollection mpc = new MembershipProviderCollection();
+            mpc.Add(null);
+        }
 
-	[TestFixture]
-	public class MembershipProviderCollectionTest {
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void Add_ProviderBase()
+        {
+            TestProviderBase pb = new TestProviderBase();
+            MembershipProviderCollection mpc = new MembershipProviderCollection();
+            mpc.Add(pb);
+            // Add accept ProviderBase but docs says it throws
+            // an exception if it's not a MembershipProvider
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Add_Null ()
-		{
-			MembershipProviderCollection mpc = new MembershipProviderCollection ();
-			mpc.Add (null);
-		}
-
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void Add_ProviderBase ()
-		{
-			TestProviderBase pb = new TestProviderBase ();
-			MembershipProviderCollection mpc = new MembershipProviderCollection ();
-			mpc.Add (pb);
-			// Add accept ProviderBase but docs says it throws 
-			// an exception if it's not a MembershipProvider
-		}
-
-		[Test]
-		public void UnexistingProvider ()
-		{
-			MembershipProviderCollection mpc = new MembershipProviderCollection ();
-			Assert.IsNull (mpc["uho"]);
-			// but this will throw an HttpException if we're using an unknown provider
-			// in an ASP.NET control (like Login)
-		}
-	}
+        [Test]
+        public void UnexistingProvider()
+        {
+            MembershipProviderCollection mpc = new MembershipProviderCollection();
+            Assert.IsNull(mpc["uho"]);
+            // but this will throw an HttpException if we're using an unknown provider
+            // in an ASP.NET control (like Login)
+        }
+    }
 }
-

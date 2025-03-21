@@ -7,8 +7,8 @@ using System.Web.Http;
 namespace System.Net.Http.Formatting.Parsers
 {
     /// <summary>
-    /// The <see cref="HttpRequestHeaderParser"/> combines <see cref="HttpRequestLineParser"/> for parsing the HTTP Request Line  
-    /// and <see cref="InternetMessageFormatHeaderParser"/> for parsing each header field. 
+    /// The <see cref="HttpRequestHeaderParser"/> combines <see cref="HttpRequestLineParser"/> for parsing the HTTP Request Line
+    /// and <see cref="InternetMessageFormatHeaderParser"/> for parsing each header field.
     /// </summary>
     internal class HttpRequestHeaderParser
     {
@@ -26,9 +26,7 @@ namespace System.Net.Http.Formatting.Parsers
         /// </summary>
         /// <param name="httpRequest">The parsed HTTP request without any header sorting.</param>
         public HttpRequestHeaderParser(HttpUnsortedRequest httpRequest)
-            : this(httpRequest, DefaultMaxRequestLineSize, DefaultMaxHeaderSize)
-        {
-        }
+            : this(httpRequest, DefaultMaxRequestLineSize, DefaultMaxHeaderSize) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="HttpRequestHeaderParser"/> class.
@@ -36,7 +34,11 @@ namespace System.Net.Http.Formatting.Parsers
         /// <param name="httpRequest">The parsed HTTP request without any header sorting.</param>
         /// <param name="maxRequestLineSize">The max length of the HTTP request line.</param>
         /// <param name="maxHeaderSize">The max length of the HTTP header.</param>
-        public HttpRequestHeaderParser(HttpUnsortedRequest httpRequest, int maxRequestLineSize, int maxHeaderSize)
+        public HttpRequestHeaderParser(
+            HttpUnsortedRequest httpRequest,
+            int maxRequestLineSize,
+            int maxHeaderSize
+        )
         {
             if (httpRequest == null)
             {
@@ -49,13 +51,16 @@ namespace System.Net.Http.Formatting.Parsers
             _requestLineParser = new HttpRequestLineParser(_httpRequest, maxRequestLineSize);
 
             // Create header parser
-            _headerParser = new InternetMessageFormatHeaderParser(_httpRequest.HttpHeaders, maxHeaderSize);
+            _headerParser = new InternetMessageFormatHeaderParser(
+                _httpRequest.HttpHeaders,
+                maxHeaderSize
+            );
         }
 
         private enum HttpRequestState
         {
             RequestLine = 0, // parsing request line
-            RequestHeaders // reading headers
+            RequestHeaders, // reading headers
         }
 
         /// <summary>
@@ -65,11 +70,12 @@ namespace System.Net.Http.Formatting.Parsers
         /// <param name="bytesReady">Size of request buffer</param>
         /// <param name="bytesConsumed">Offset into request buffer</param>
         /// <returns>State of the parser.</returns>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Exception is propagated.")]
-        public ParserState ParseBuffer(
-            byte[] buffer,
-            int bytesReady,
-            ref int bytesConsumed)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Exception is propagated."
+        )]
+        public ParserState ParseBuffer(byte[] buffer, int bytesReady, ref int bytesConsumed)
         {
             if (buffer == null)
             {
@@ -84,7 +90,11 @@ namespace System.Net.Http.Formatting.Parsers
                 case HttpRequestState.RequestLine:
                     try
                     {
-                        subParseStatus = _requestLineParser.ParseBuffer(buffer, bytesReady, ref bytesConsumed);
+                        subParseStatus = _requestLineParser.ParseBuffer(
+                            buffer,
+                            bytesReady,
+                            ref bytesConsumed
+                        );
                     }
                     catch (Exception)
                     {
@@ -115,7 +125,11 @@ namespace System.Net.Http.Formatting.Parsers
 
                     try
                     {
-                        subParseStatus = _headerParser.ParseBuffer(buffer, bytesReady, ref bytesConsumed);
+                        subParseStatus = _headerParser.ParseBuffer(
+                            buffer,
+                            bytesReady,
+                            ref bytesConsumed
+                        );
                     }
                     catch (Exception)
                     {

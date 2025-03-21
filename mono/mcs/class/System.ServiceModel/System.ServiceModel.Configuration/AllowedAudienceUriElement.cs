@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,34 +28,45 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Configuration;
+using System.Text;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class AllowedAudienceUriElement : ConfigurationElement
-	{
-		ConfigurationPropertyCollection _properties;
+    public sealed class AllowedAudienceUriElement : ConfigurationElement
+    {
+        ConfigurationPropertyCollection _properties;
 
-		public AllowedAudienceUriElement () {
-		}
+        public AllowedAudienceUriElement() { }
 
-		[StringValidator (MinLength = 1)]
-		[ConfigurationProperty ("allowedAudienceUri",
-			Options = ConfigurationPropertyOptions.IsKey)]
-		public string AllowedAudienceUri {
-			get { return (string) this ["allowedAudienceUri"]; }
-			set { this ["allowedAudienceUri"] = value; }
-		}
+        [StringValidator(MinLength = 1)]
+        [ConfigurationProperty("allowedAudienceUri", Options = ConfigurationPropertyOptions.IsKey)]
+        public string AllowedAudienceUri
+        {
+            get { return (string)this["allowedAudienceUri"]; }
+            set { this["allowedAudienceUri"] = value; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get {
-				if (_properties == null) {
-					_properties = new ConfigurationPropertyCollection ();
-					_properties.Add (new ConfigurationProperty ("allowedAudienceUri", typeof (string), null, null, new StringValidator (1), ConfigurationPropertyOptions.IsKey));
-				}
-				return _properties;
-			}
-		}
-	}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get
+            {
+                if (_properties == null)
+                {
+                    _properties = new ConfigurationPropertyCollection();
+                    _properties.Add(
+                        new ConfigurationProperty(
+                            "allowedAudienceUri",
+                            typeof(string),
+                            null,
+                            null,
+                            new StringValidator(1),
+                            ConfigurationPropertyOptions.IsKey
+                        )
+                    );
+                }
+                return _properties;
+            }
+        }
+    }
 }

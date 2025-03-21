@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 /// Windows CNG algorithms in CBC encryption + HMAC authentication modes.
 /// </summary>
 [SupportedOSPlatform("windows")]
-public sealed class CngCbcAuthenticatedEncryptorConfiguration : AlgorithmConfiguration, IInternalAlgorithmConfiguration
+public sealed class CngCbcAuthenticatedEncryptorConfiguration
+    : AlgorithmConfiguration,
+        IInternalAlgorithmConfiguration
 {
     /// <summary>
     /// The name of the algorithm to use for symmetric encryption.
@@ -80,7 +82,9 @@ public sealed class CngCbcAuthenticatedEncryptorConfiguration : AlgorithmConfigu
         return internalConfiguration.CreateDescriptorFromSecret(Secret.Random(KDK_SIZE_IN_BYTES));
     }
 
-    IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(ISecret secret)
+    IAuthenticatedEncryptorDescriptor IInternalAlgorithmConfiguration.CreateDescriptorFromSecret(
+        ISecret secret
+    )
     {
         return new CngCbcAuthenticatedEncryptorDescriptor(this, secret);
     }

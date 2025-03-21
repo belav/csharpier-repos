@@ -17,20 +17,39 @@ namespace Microsoft.Extensions.Options.Generators
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            IncrementalValuesProvider<(TypeDeclarationSyntax? TypeSyntax, SemanticModel SemanticModel)> typeDeclarations = context.SyntaxProvider
-                .ForAttributeWithMetadataName(
+            IncrementalValuesProvider<(
+                TypeDeclarationSyntax? TypeSyntax,
+                SemanticModel SemanticModel
+            )> typeDeclarations = context
+                .SyntaxProvider.ForAttributeWithMetadataName(
                     SymbolLoader.OptionsValidatorAttribute,
                     (node, _) => node is TypeDeclarationSyntax,
-                    (context, _) => (TypeSyntax:context.TargetNode as TypeDeclarationSyntax, SemanticModel: context.SemanticModel))
+                    (context, _) =>
+                        (
+                            TypeSyntax: context.TargetNode as TypeDeclarationSyntax,
+                            SemanticModel: context.SemanticModel
+                        )
+                )
                 .Where(static m => m.TypeSyntax is not null);
 
-            IncrementalValueProvider<(Compilation, ImmutableArray<(TypeDeclarationSyntax? TypeSyntax, SemanticModel SemanticModel)>)> compilationAndTypes =
-                context.CompilationProvider.Combine(typeDeclarations.Collect());
+            IncrementalValueProvider<(
+                Compilation,
+                ImmutableArray<(TypeDeclarationSyntax? TypeSyntax, SemanticModel SemanticModel)>
+            )> compilationAndTypes = context.CompilationProvider.Combine(
+                typeDeclarations.Collect()
+            );
 
-            context.RegisterSourceOutput(compilationAndTypes, static (spc, source) => HandleAnnotatedTypes(source.Item1, source.Item2, spc));
+            context.RegisterSourceOutput(
+                compilationAndTypes,
+                static (spc, source) => HandleAnnotatedTypes(source.Item1, source.Item2, spc)
+            );
         }
 
-        private static void HandleAnnotatedTypes(Compilation compilation, ImmutableArray<(TypeDeclarationSyntax? TypeSyntax, SemanticModel SemanticModel)> types, SourceProductionContext context)
+        private static void HandleAnnotatedTypes(
+            Compilation compilation,
+            ImmutableArray<(TypeDeclarationSyntax? TypeSyntax, SemanticModel SemanticModel)> types,
+            SourceProductionContext context
+        )
         {
             if (types.Length == 0)
             {
@@ -45,7 +64,13 @@ namespace Microsoft.Extensions.Options.Generators
 
             OptionsSourceGenContext optionsSourceGenContext = new(compilation);
 
-            var parser = new Parser(compilation, context.ReportDiagnostic, symbolHolder!, optionsSourceGenContext, context.CancellationToken);
+            var parser = new Parser(
+                compilation,
+                context.ReportDiagnostic,
+                symbolHolder!,
+                optionsSourceGenContext,
+                context.CancellationToken
+            );
 
             var validatorTypes = parser.GetValidatorTypes(types);
             if (validatorTypes.Count > 0)

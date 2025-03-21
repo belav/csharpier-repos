@@ -5,11 +5,11 @@ using System.Buffers;
 using System.IO.Pipelines;
 using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
-using Microsoft.AspNetCore.InternalTesting;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 
@@ -25,13 +25,19 @@ public class RequestParsingBenchmark
     public void Setup()
     {
         _memoryPool = PinnedBlockMemoryPoolFactory.Create();
-        var options = new PipeOptions(_memoryPool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, useSynchronizationContext: false);
+        var options = new PipeOptions(
+            _memoryPool,
+            readerScheduler: PipeScheduler.Inline,
+            writerScheduler: PipeScheduler.Inline,
+            useSynchronizationContext: false
+        );
         var pair = DuplexPipe.CreateConnectionPair(options, options);
 
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
             httpParser: new HttpParser<Http1ParsingHandler>(),
-            dateHeaderValueManager: new DateHeaderValueManager(TimeProvider.System));
+            dateHeaderValueManager: new DateHeaderValueManager(TimeProvider.System)
+        );
 
         var connectionContext = TestContextFactory.CreateHttpConnectionContext(
             serviceContext: serviceContext,
@@ -39,7 +45,8 @@ public class RequestParsingBenchmark
             transport: pair.Transport,
             memoryPool: _memoryPool,
             connectionFeatures: new FeatureCollection(),
-            timeoutControl: new TimeoutControl(timeoutHandler: null, TimeProvider.System));
+            timeoutControl: new TimeoutControl(timeoutHandler: null, TimeProvider.System)
+        );
 
         var http1Connection = new Http1Connection(connectionContext);
 
@@ -69,7 +76,9 @@ public class RequestParsingBenchmark
         }
     }
 
-    [Benchmark(OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining)]
+    [Benchmark(
+        OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining
+    )]
     public void PipelinedPlaintextTechEmpower()
     {
         for (var i = 0; i < RequestParsingData.InnerLoopCount; i++)
@@ -79,7 +88,9 @@ public class RequestParsingBenchmark
         }
     }
 
-    [Benchmark(OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining)]
+    [Benchmark(
+        OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining
+    )]
     public void PipelinedPlaintextTechEmpowerDrainBuffer()
     {
         for (var i = 0; i < RequestParsingData.InnerLoopCount; i++)
@@ -99,7 +110,9 @@ public class RequestParsingBenchmark
         }
     }
 
-    [Benchmark(OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining)]
+    [Benchmark(
+        OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining
+    )]
     public void PipelinedLiveAspNet()
     {
         for (var i = 0; i < RequestParsingData.InnerLoopCount; i++)
@@ -119,7 +132,9 @@ public class RequestParsingBenchmark
         }
     }
 
-    [Benchmark(OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining)]
+    [Benchmark(
+        OperationsPerInvoke = RequestParsingData.InnerLoopCount * RequestParsingData.Pipelining
+    )]
     public void UnicodePipelined()
     {
         for (var i = 0; i < RequestParsingData.InnerLoopCount; i++)
@@ -160,8 +175,7 @@ public class RequestParsingBenchmark
             {
                 ErrorUtilities.ThrowInvalidRequestHeaders();
             }
-        }
-        while (!reader.End);
+        } while (!reader.End);
 
         Pipe.Reader.AdvanceTo(readableBuffer.End);
     }
@@ -198,8 +212,7 @@ public class RequestParsingBenchmark
                 ErrorUtilities.ThrowInvalidRequestHeaders();
             }
             Pipe.Reader.AdvanceTo(reader.Position, reader.Position);
-        }
-        while (true);
+        } while (true);
     }
 
     [IterationCleanup]

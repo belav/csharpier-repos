@@ -60,7 +60,8 @@ namespace System.Linq.Expressions.Tests
 
         private class BogusReadOnlyCollection<T> : ReadOnlyCollection<T>
         {
-            public BogusReadOnlyCollection() : base(new BogusCollection<T>()) { }
+            public BogusReadOnlyCollection()
+                : base(new BogusCollection<T>()) { }
         }
 
         public static IEnumerable<object> Bounds_TestData()
@@ -130,20 +131,47 @@ namespace System.Linq.Expressions.Tests
         [Theory]
         [ActiveIssue("https://github.com/mono/mono/issues/14912", TestRuntimes.Mono)]
         [PerCompilationType(nameof(TestData))]
-        public static void NewArrayBounds(Type arrayType, object size, Type sizeType, object defaultValue, bool useInterpreter)
+        public static void NewArrayBounds(
+            Type arrayType,
+            object size,
+            Type sizeType,
+            object defaultValue,
+            bool useInterpreter
+        )
         {
-            Expression newArrayExpression = Expression.NewArrayBounds(arrayType, Expression.Constant(size, sizeType));
-            Expression <Func<Array>> e = Expression.Lambda<Func<Array>>(newArrayExpression);
+            Expression newArrayExpression = Expression.NewArrayBounds(
+                arrayType,
+                Expression.Constant(size, sizeType)
+            );
+            Expression<Func<Array>> e = Expression.Lambda<Func<Array>>(newArrayExpression);
             Func<Array> f = e.Compile(useInterpreter);
 
-            if (sizeType == typeof(sbyte) || sizeType == typeof(short) || sizeType == typeof(int) || sizeType == typeof(long) ||
-                sizeType == typeof(sbyte?) || sizeType == typeof(short?) || sizeType == typeof(int?) || sizeType == typeof(long?))
+            if (
+                sizeType == typeof(sbyte)
+                || sizeType == typeof(short)
+                || sizeType == typeof(int)
+                || sizeType == typeof(long)
+                || sizeType == typeof(sbyte?)
+                || sizeType == typeof(short?)
+                || sizeType == typeof(int?)
+                || sizeType == typeof(long?)
+            )
             {
-                VerifyArrayGenerator(f, arrayType, size == null ? (long?)null : Convert.ToInt64(size), defaultValue);
+                VerifyArrayGenerator(
+                    f,
+                    arrayType,
+                    size == null ? (long?)null : Convert.ToInt64(size),
+                    defaultValue
+                );
             }
             else
             {
-                VerifyArrayGenerator(f, arrayType, size == null ? (long?)null : unchecked((long)Convert.ToUInt64(size)), defaultValue);
+                VerifyArrayGenerator(
+                    f,
+                    arrayType,
+                    size == null ? (long?)null : unchecked((long)Convert.ToUInt64(size)),
+                    defaultValue
+                );
             }
         }
 
@@ -153,10 +181,17 @@ namespace System.Linq.Expressions.Tests
             // This is an obscure case, and it doesn't much matter what is thrown, as long as is thrown before such
             // an edge case could cause more obscure damage. A class derived from ReadOnlyCollection is used to catch
             // assumptions that such a type is safe.
-            Assert.ThrowsAny<Exception>(() => Expression.NewArrayBounds(typeof(int), new BogusReadOnlyCollection<Expression>()));
+            Assert.ThrowsAny<Exception>(() =>
+                Expression.NewArrayBounds(typeof(int), new BogusReadOnlyCollection<Expression>())
+            );
         }
 
-        private static void VerifyArrayGenerator(Func<Array> func, Type arrayType, long? size, object defaultValue)
+        private static void VerifyArrayGenerator(
+            Func<Array> func,
+            Type arrayType,
+            long? size,
+            object defaultValue
+        )
         {
             if (!size.HasValue)
             {
@@ -186,64 +221,108 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public static void NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => Expression.NewArrayBounds(null, Expression.Constant(2)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => Expression.NewArrayBounds(null, Expression.Constant(2))
+            );
         }
 
         [Fact]
         public static void VoidType_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayBounds(typeof(void), Expression.Constant(2)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.NewArrayBounds(typeof(void), Expression.Constant(2))
+            );
         }
 
         [Fact]
         public static void NullBounds_ThrowsArgumentnNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("bounds", () => Expression.NewArrayBounds(typeof(int), default(Expression[])));
-            AssertExtensions.Throws<ArgumentNullException>("bounds", () => Expression.NewArrayBounds(typeof(int), default(IEnumerable<Expression>)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "bounds",
+                () => Expression.NewArrayBounds(typeof(int), default(Expression[]))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "bounds",
+                () => Expression.NewArrayBounds(typeof(int), default(IEnumerable<Expression>))
+            );
         }
 
         [Fact]
         public static void EmptyBounds_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("bounds", () => Expression.NewArrayBounds(typeof(int)));
+            AssertExtensions.Throws<ArgumentException>(
+                "bounds",
+                () => Expression.NewArrayBounds(typeof(int))
+            );
         }
 
         [Fact]
         public static void NullBoundInBounds_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("bounds[0]", () => Expression.NewArrayBounds(typeof(int), new Expression[] { null, null }));
-            AssertExtensions.Throws<ArgumentNullException>("bounds[0]", () => Expression.NewArrayBounds(typeof(int), new List<Expression> { null, null }));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "bounds[0]",
+                () => Expression.NewArrayBounds(typeof(int), new Expression[] { null, null })
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "bounds[0]",
+                () => Expression.NewArrayBounds(typeof(int), new List<Expression> { null, null })
+            );
         }
 
         [Fact]
         public static void NonIntegralBoundInBounds_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("bounds[0]", () => Expression.NewArrayBounds(typeof(int), Expression.Constant(2.0)));
+            AssertExtensions.Throws<ArgumentException>(
+                "bounds[0]",
+                () => Expression.NewArrayBounds(typeof(int), Expression.Constant(2.0))
+            );
         }
 
         [Fact]
         public static void ByRefType_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayBounds(typeof(int).MakeByRefType(), Expression.Constant(2)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.NewArrayBounds(typeof(int).MakeByRefType(), Expression.Constant(2))
+            );
         }
 
         [Fact]
         public static void PointerType_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayBounds(typeof(int).MakePointerType(), Expression.Constant(2)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () =>
+                    Expression.NewArrayBounds(typeof(int).MakePointerType(), Expression.Constant(2))
+            );
         }
 
         [Fact]
         public static void OpenGenericType_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayBounds(typeof(List<>), Expression.Constant(2)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.NewArrayBounds(typeof(List<>), Expression.Constant(2))
+            );
         }
 
         [Fact]
         public static void TypeContainsGenericParameters_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayBounds(typeof(List<>.Enumerator), Expression.Constant(2)));
-            AssertExtensions.Throws<ArgumentException>("type", () => Expression.NewArrayBounds(typeof(List<>).MakeGenericType(typeof(List<>)), Expression.Constant(2)));
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () => Expression.NewArrayBounds(typeof(List<>.Enumerator), Expression.Constant(2))
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "type",
+                () =>
+                    Expression.NewArrayBounds(
+                        typeof(List<>).MakeGenericType(typeof(List<>)),
+                        Expression.Constant(2)
+                    )
+            );
         }
 
         [Fact]
@@ -251,8 +330,12 @@ namespace System.Linq.Expressions.Tests
         {
             Expression bound0 = Expression.Constant(2);
             Expression bound1 = Expression.Constant(3);
-            NewArrayExpression newArrayExpression = Expression.NewArrayBounds(typeof(string), bound0, bound1);
-            Assert.Same(newArrayExpression, newArrayExpression.Update(new [] {bound0, bound1}));
+            NewArrayExpression newArrayExpression = Expression.NewArrayBounds(
+                typeof(string),
+                bound0,
+                bound1
+            );
+            Assert.Same(newArrayExpression, newArrayExpression.Update(new[] { bound0, bound1 }));
         }
 
         [Fact]
@@ -260,10 +343,20 @@ namespace System.Linq.Expressions.Tests
         {
             Expression bound0 = Expression.Constant(2);
             Expression bound1 = Expression.Constant(3);
-            NewArrayExpression newArrayExpression = Expression.NewArrayBounds(typeof(string), bound0, bound1);
+            NewArrayExpression newArrayExpression = Expression.NewArrayBounds(
+                typeof(string),
+                bound0,
+                bound1
+            );
             Assert.NotSame(newArrayExpression, newArrayExpression.Update(new[] { bound0 }));
-            Assert.NotSame(newArrayExpression, newArrayExpression.Update(new[] { bound0, bound1, bound0, bound1 }));
-            Assert.NotSame(newArrayExpression, newArrayExpression.Update(newArrayExpression.Expressions.Reverse()));
+            Assert.NotSame(
+                newArrayExpression,
+                newArrayExpression.Update(new[] { bound0, bound1, bound0, bound1 })
+            );
+            Assert.NotSame(
+                newArrayExpression,
+                newArrayExpression.Update(newArrayExpression.Expressions.Reverse())
+            );
         }
 
         [Fact]
@@ -271,8 +364,15 @@ namespace System.Linq.Expressions.Tests
         {
             Expression bound0 = Expression.Constant(2);
             Expression bound1 = Expression.Constant(3);
-            NewArrayExpression newArrayExpression = Expression.NewArrayBounds(typeof(string), bound0, bound1);
-            Assert.NotSame(newArrayExpression, newArrayExpression.Update(new RunOnceEnumerable<Expression>(new[] { bound0 })));
+            NewArrayExpression newArrayExpression = Expression.NewArrayBounds(
+                typeof(string),
+                bound0,
+                bound1
+            );
+            Assert.NotSame(
+                newArrayExpression,
+                newArrayExpression.Update(new RunOnceEnumerable<Expression>(new[] { bound0 }))
+            );
         }
 
         [Fact]
@@ -280,8 +380,15 @@ namespace System.Linq.Expressions.Tests
         {
             Expression bound0 = Expression.Constant(2);
             Expression bound1 = Expression.Constant(3);
-            NewArrayExpression newArrayExpression = Expression.NewArrayBounds(typeof(string), bound0, bound1);
-            AssertExtensions.Throws<ArgumentNullException>("expressions", () => newArrayExpression.Update(null));
+            NewArrayExpression newArrayExpression = Expression.NewArrayBounds(
+                typeof(string),
+                bound0,
+                bound1
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "expressions",
+                () => newArrayExpression.Update(null)
+            );
         }
 
         [Theory, ClassData(typeof(CompilationTypes))]
@@ -298,8 +405,9 @@ namespace System.Linq.Expressions.Tests
                 localizedMessage = oe.Message;
             }
 
-            Expression<Func<int[]>> lambda =
-                Expression.Lambda<Func<int[]>>(Expression.NewArrayBounds(typeof(int), Expression.Constant(-2)));
+            Expression<Func<int[]>> lambda = Expression.Lambda<Func<int[]>>(
+                Expression.NewArrayBounds(typeof(int), Expression.Constant(-2))
+            );
             var func = lambda.Compile(useInterpreter);
             OverflowException ex = Assert.Throws<OverflowException>(() => func());
             Assert.Equal(localizedMessage, ex.Message);
@@ -321,7 +429,12 @@ namespace System.Linq.Expressions.Tests
 
             Expression<Func<int[,,]>> lambda = Expression.Lambda<Func<int[,,]>>(
                 Expression.NewArrayBounds(
-                    typeof(int), Expression.Constant(0), Expression.Constant(0), Expression.Constant(-2)));
+                    typeof(int),
+                    Expression.Constant(0),
+                    Expression.Constant(0),
+                    Expression.Constant(-2)
+                )
+            );
             var func = lambda.Compile(useInterpreter);
             OverflowException ex = Assert.Throws<OverflowException>(() => func());
             Assert.Equal(localizedMessage, ex.Message);

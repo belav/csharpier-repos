@@ -11,7 +11,8 @@ public class RazorViewEngineOptions
     /// <summary>
     /// Gets a <see cref="IList{IViewLocationExpander}"/> used by the <see cref="RazorViewEngine"/>.
     /// </summary>
-    public IList<IViewLocationExpander> ViewLocationExpanders { get; } = new List<IViewLocationExpander>();
+    public IList<IViewLocationExpander> ViewLocationExpanders { get; } =
+        new List<IViewLocationExpander>();
 
     /// <summary>
     /// Gets the locations where <see cref="RazorViewEngine"/> will search for views.

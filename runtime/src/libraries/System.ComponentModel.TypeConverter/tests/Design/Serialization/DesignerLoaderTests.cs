@@ -23,7 +23,9 @@ namespace System.ComponentModel.Design.Serialization.Tests
 
         private class TestDesignerLoader : DesignerLoader
         {
-            public override void BeginLoad(IDesignerLoaderHost host) => throw new NotImplementedException();
+            public override void BeginLoad(IDesignerLoaderHost host) =>
+                throw new NotImplementedException();
+
             public override void Dispose() => throw new NotImplementedException();
         }
     }

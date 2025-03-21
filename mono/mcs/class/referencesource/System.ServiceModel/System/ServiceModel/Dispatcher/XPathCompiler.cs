@@ -13,7 +13,7 @@ namespace System.ServiceModel.Dispatcher
         int nestingLevel;
         bool pushInitialContext;
 
-#if FILTEROPTIMIZER        
+#if FILTEROPTIMIZER
         FilterOptimizer optimizer;
 
         internal XPathCompiler(FilterOptimizer optimizer, QueryCompilerFlags flags)
@@ -24,9 +24,7 @@ namespace System.ServiceModel.Dispatcher
         }
 
         internal XPathCompiler(QueryCompilerFlags flags)
-            : this(new FilterOptimizer(SelectFunctionTree.standard), flags)
-        {
-        }
+            : this(new FilterOptimizer(SelectFunctionTree.standard), flags) { }
 #else
         internal XPathCompiler(QueryCompilerFlags flags)
         {
@@ -273,7 +271,7 @@ namespace System.ServiceModel.Dispatcher
                 Fx.Assert(XPathExprType.Filter == expr.Type, "");
                 // The filter expression has two components - the expression and its predicate
                 // It may have an optional relative path following it
-                //Debug.Assert(expr.SubExprCount <= 3);                
+                //Debug.Assert(expr.SubExprCount <= 3);
                 XPathExprList subExpr = expr.SubExpr;
 
                 XPathExpr filterExpr = subExpr[0];
@@ -301,7 +299,9 @@ namespace System.ServiceModel.Dispatcher
                     this.compiler.nestingLevel++;
                     if (this.compiler.nestingLevel > 3) // throw if we find something deepter than [ [ ] ]
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.PredicateNestingTooDeep));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new QueryCompileException(QueryCompileError.PredicateNestingTooDeep)
+                        );
                     }
                     for (int i = 1; i < expr.SubExprCount; ++i)
                     {
@@ -318,7 +318,8 @@ namespace System.ServiceModel.Dispatcher
                     return false;
                 }
 
-                XPathMessageFunction func = ((XPathXsltFunctionExpr)expr).Function as XPathMessageFunction;
+                XPathMessageFunction func =
+                    ((XPathXsltFunctionExpr)expr).Function as XPathMessageFunction;
                 if (func != null)
                 {
                     return func.ReturnType == XPathResultType.NodeSet && func.Maxargs == 0;
@@ -348,7 +349,10 @@ namespace System.ServiceModel.Dispatcher
                     }
                 }
                 this.codeBlock.Append(new FunctionCallOpcode(function));
-                if (1 == this.compiler.nestingLevel && function.TestFlag(QueryFunctionFlag.UsesContextNode))
+                if (
+                    1 == this.compiler.nestingLevel
+                    && function.TestFlag(QueryFunctionFlag.UsesContextNode)
+                )
                 {
                     this.compiler.SetPushInitialContext(true);
                 }
@@ -364,7 +368,9 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (function.ParamTypes[index] == ValueDataType.Sequence)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.InvalidTypeConversion));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new QueryCompileException(QueryCompileError.InvalidTypeConversion)
+                            );
                         }
 
                         this.CompileTypecast(function.ParamTypes[index]);
@@ -386,7 +392,9 @@ namespace System.ServiceModel.Dispatcher
                         if (XPathExprType.String == expr.SubExpr[1].Type)
                         {
                             this.CompileFunctionParam(function, expr.SubExpr, 0);
-                            this.codeBlock.Append(new StringPrefixOpcode(((XPathStringExpr)expr.SubExpr[1]).String));
+                            this.codeBlock.Append(
+                                new StringPrefixOpcode(((XPathStringExpr)expr.SubExpr[1]).String)
+                            );
                             return true;
                         }
                     }
@@ -400,7 +408,11 @@ namespace System.ServiceModel.Dispatcher
                 XPathLiteralExpr left = (XPathLiteralExpr)expr.Left;
                 XPathLiteralExpr right = (XPathLiteralExpr)expr.Right;
 
-                bool result = QueryValueModel.CompileTimeCompare(left.Literal, right.Literal, expr.Op);
+                bool result = QueryValueModel.CompileTimeCompare(
+                    left.Literal,
+                    right.Literal,
+                    expr.Op
+                );
                 this.codeBlock.Append(new PushBooleanOpcode(result));
             }
 
@@ -447,14 +459,19 @@ namespace System.ServiceModel.Dispatcher
 
                 if (1 == this.compiler.nestingLevel)
                 {
-                    this.compiler.SetPushInitialContext(firstStep.SelectDesc.Type != QueryNodeType.Root);
+                    this.compiler.SetPushInitialContext(
+                        firstStep.SelectDesc.Type != QueryNodeType.Root
+                    );
                 }
             }
 
             void CompileMath(XPathMathExpr mathExpr)
             {
                 // are we doing math on two literal numbers? If so, do it at compile time
-                if (XPathExprType.Number == mathExpr.Right.Type && XPathExprType.Number == mathExpr.Left.Type)
+                if (
+                    XPathExprType.Number == mathExpr.Right.Type
+                    && XPathExprType.Number == mathExpr.Left.Type
+                )
                 {
                     double left = ((XPathNumberExpr)mathExpr.Left).Number;
                     if (((XPathNumberExpr)mathExpr.Left).Negate)
@@ -515,7 +532,9 @@ namespace System.ServiceModel.Dispatcher
                 Fx.Assert(!(leftNumber && rightNumber), "");
 
                 this.CompileExpression(leftNumber ? expr.Right : expr.Left);
-                XPathNumberExpr litExpr = leftNumber ? (XPathNumberExpr)expr.Left : (XPathNumberExpr)expr.Right;
+                XPathNumberExpr litExpr = leftNumber
+                    ? (XPathNumberExpr)expr.Left
+                    : (XPathNumberExpr)expr.Right;
                 double literal = litExpr.Number;
                 if (litExpr.Negate)
                 {
@@ -539,7 +558,9 @@ namespace System.ServiceModel.Dispatcher
                 Fx.Assert(!(leftNumber && rightNumber), "");
 
                 this.CompileExpression(leftNumber ? expr.Right : expr.Left);
-                XPathNumberExpr litExpr = leftNumber ? (XPathNumberExpr)expr.Left : (XPathNumberExpr)expr.Right;
+                XPathNumberExpr litExpr = leftNumber
+                    ? (XPathNumberExpr)expr.Left
+                    : (XPathNumberExpr)expr.Right;
                 double literal = litExpr.Number;
                 if (litExpr.Negate)
                 {
@@ -620,7 +641,9 @@ namespace System.ServiceModel.Dispatcher
 
                     if (!step.SelectDesc.Axis.IsSupported())
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.UnsupportedAxis));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new QueryCompileException(QueryCompileError.UnsupportedAxis)
+                        );
                     }
 
                     this.codeBlock.Append(new SelectOpcode(step.SelectDesc));
@@ -631,7 +654,9 @@ namespace System.ServiceModel.Dispatcher
                         this.compiler.nestingLevel++;
                         if (this.compiler.nestingLevel > 3) // throw if we find something deepter than [ [ ] ]
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.PredicateNestingTooDeep));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new QueryCompileException(QueryCompileError.PredicateNestingTooDeep)
+                            );
                         }
                         this.CompilePredicates(step.SubExpr);
                         this.compiler.nestingLevel--;
@@ -689,14 +714,23 @@ namespace System.ServiceModel.Dispatcher
                 if (expr.Op != RelationOperator.Ne)
                 {
                     // Number relations are handled in a special way
-                    if (XPathExprType.Number == expr.Left.Type || XPathExprType.Number == expr.Right.Type)
+                    if (
+                        XPathExprType.Number == expr.Left.Type
+                        || XPathExprType.Number == expr.Right.Type
+                    )
                     {
                         this.CompileNumberRelation(expr);
                         return;
                     }
 
                     // Equality tests with string literals are handled in a special way
-                    if (expr.Op == RelationOperator.Eq && (XPathExprType.String == expr.Left.Type || XPathExprType.String == expr.Right.Type))
+                    if (
+                        expr.Op == RelationOperator.Eq
+                        && (
+                            XPathExprType.String == expr.Left.Type
+                            || XPathExprType.String == expr.Right.Type
+                        )
+                    )
                     {
                         this.CompileStringLiteralEquality(expr);
                         return;
@@ -728,7 +762,9 @@ namespace System.ServiceModel.Dispatcher
                 Fx.Assert(!(leftString && rightString), "");
 
                 this.CompileExpression(leftString ? expr.Right : expr.Left);
-                string literal = leftString ? ((XPathStringExpr)expr.Left).String : ((XPathStringExpr)expr.Right).String;
+                string literal = leftString
+                    ? ((XPathStringExpr)expr.Left).String
+                    : ((XPathStringExpr)expr.Right).String;
                 this.codeBlock.Append(new StringEqualsOpcode(literal));
             }
 
@@ -745,7 +781,9 @@ namespace System.ServiceModel.Dispatcher
                     XPathStepExpr step = (XPathStepExpr)steps[i];
                     if (!step.SelectDesc.Axis.IsSupported())
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.UnsupportedAxis));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new QueryCompileException(QueryCompileError.UnsupportedAxis)
+                        );
                     }
                     Opcode stepOpcode = null;
                     if (start && 0 == i)
@@ -773,7 +811,9 @@ namespace System.ServiceModel.Dispatcher
                         this.compiler.nestingLevel++;
                         if (this.compiler.nestingLevel > 3) // throw if we find something deepter than [ [ ] ]
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(QueryCompileError.PredicateNestingTooDeep));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new QueryCompileException(QueryCompileError.PredicateNestingTooDeep)
+                            );
                         }
                         this.CompilePredicates(step.SubExpr);
                         this.compiler.nestingLevel--;
@@ -798,7 +838,9 @@ namespace System.ServiceModel.Dispatcher
                     {
                         XPathExpr param = paramList[i];
                         this.CompileExpression(param);
-                        ValueDataType paramType = XPathXsltFunctionExpr.ConvertTypeFromXslt(expr.Function.ArgTypes[i]);
+                        ValueDataType paramType = XPathXsltFunctionExpr.ConvertTypeFromXslt(
+                            expr.Function.ArgTypes[i]
+                        );
                         if (ValueDataType.None != paramType)
                         {
                             if (param.ReturnType != paramType)
@@ -811,7 +853,12 @@ namespace System.ServiceModel.Dispatcher
 
                 if (expr.Function is XPathMessageFunction)
                 {
-                    this.codeBlock.Append(new XPathMessageFunctionCallOpcode((XPathMessageFunction)expr.Function, expr.SubExprCount));
+                    this.codeBlock.Append(
+                        new XPathMessageFunctionCallOpcode(
+                            (XPathMessageFunction)expr.Function,
+                            expr.SubExprCount
+                        )
+                    );
                     if (IsSpecialInternalFunction(expr))
                     {
                         this.codeBlock.Append(new PopSequenceToValueStackOpcode());
@@ -819,7 +866,9 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    this.codeBlock.Append(new XsltFunctionCallOpcode(expr.Context, expr.Function, expr.SubExprCount));
+                    this.codeBlock.Append(
+                        new XsltFunctionCallOpcode(expr.Context, expr.Function, expr.SubExprCount)
+                    );
                 }
             }
 
@@ -830,7 +879,9 @@ namespace System.ServiceModel.Dispatcher
                 // It is here in case we decide to
                 if (expr.Variable is XPathMessageVariable)
                 {
-                    this.codeBlock.Append(new PushXPathMessageVariableOpcode((XPathMessageVariable)expr.Variable));
+                    this.codeBlock.Append(
+                        new PushXPathMessageVariableOpcode((XPathMessageVariable)expr.Variable)
+                    );
                 }
                 else
                 {
@@ -894,7 +945,9 @@ namespace System.ServiceModel.Dispatcher
 
             void ThrowError(QueryCompileError error)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new QueryCompileException(error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new QueryCompileException(error)
+                );
             }
         }
     }

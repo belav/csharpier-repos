@@ -29,64 +29,95 @@ public class Startup
         // app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
         // "/[?statuscode=400]"
-        app.Use(async (context, next) =>
-        {
-            // Check for ?statuscode=400
-            var requestedStatusCode = context.Request.Query["statuscode"];
-            if (!string.IsNullOrEmpty(requestedStatusCode))
+        app.Use(
+            async (context, next) =>
             {
-                context.Response.StatusCode = int.Parse(requestedStatusCode, CultureInfo.InvariantCulture);
-
-                // To turn off the StatusCode feature - For example the below code turns off the StatusCode middleware
-                // if the query contains a disableStatusCodePages=true parameter.
-                var disableStatusCodePages = context.Request.Query["disableStatusCodePages"];
-                if (disableStatusCodePages == "true")
+                // Check for ?statuscode=400
+                var requestedStatusCode = context.Request.Query["statuscode"];
+                if (!string.IsNullOrEmpty(requestedStatusCode))
                 {
-                    var statusCodePagesFeature = context.Features.Get<IStatusCodePagesFeature>();
-                    if (statusCodePagesFeature != null)
-                    {
-                        statusCodePagesFeature.Enabled = false;
-                    }
-                }
+                    context.Response.StatusCode = int.Parse(
+                        requestedStatusCode,
+                        CultureInfo.InvariantCulture
+                    );
 
-                await Task.FromResult(0);
+                    // To turn off the StatusCode feature - For example the below code turns off the StatusCode middleware
+                    // if the query contains a disableStatusCodePages=true parameter.
+                    var disableStatusCodePages = context.Request.Query["disableStatusCodePages"];
+                    if (disableStatusCodePages == "true")
+                    {
+                        var statusCodePagesFeature =
+                            context.Features.Get<IStatusCodePagesFeature>();
+                        if (statusCodePagesFeature != null)
+                        {
+                            statusCodePagesFeature.Enabled = false;
+                        }
+                    }
+
+                    await Task.FromResult(0);
+                }
+                else
+                {
+                    await next(context);
+                }
             }
-            else
-            {
-                await next(context);
-            }
-        });
+        );
 
         // "/errors/400"
-        app.Map("/errors", error =>
-        {
-            error.Run(async context =>
+        app.Map(
+            "/errors",
+            error =>
             {
-                var builder = new StringBuilder();
-                builder.AppendLine("<html><body>");
-                builder.AppendLine("An error occurred, Status Code: " + HtmlEncoder.Default.Encode(context.Request.Path.ToString().Substring(1)) + "<br>");
-                var referrer = context.Request.Headers["referer"];
-                if (!string.IsNullOrEmpty(referrer))
+                error.Run(async context =>
                 {
-                    builder.AppendLine("<a href=\"" + HtmlEncoder.Default.Encode(referrer) + "\">Retry " + WebUtility.HtmlEncode(referrer) + "</a><br>");
-                }
-                builder.AppendLine("</body></html>");
-                context.Response.ContentType = "text/html";
-                await context.Response.WriteAsync(builder.ToString());
-            });
-        });
+                    var builder = new StringBuilder();
+                    builder.AppendLine("<html><body>");
+                    builder.AppendLine(
+                        "An error occurred, Status Code: "
+                            + HtmlEncoder.Default.Encode(
+                                context.Request.Path.ToString().Substring(1)
+                            )
+                            + "<br>"
+                    );
+                    var referrer = context.Request.Headers["referer"];
+                    if (!string.IsNullOrEmpty(referrer))
+                    {
+                        builder.AppendLine(
+                            "<a href=\""
+                                + HtmlEncoder.Default.Encode(referrer)
+                                + "\">Retry "
+                                + WebUtility.HtmlEncode(referrer)
+                                + "</a><br>"
+                        );
+                    }
+                    builder.AppendLine("</body></html>");
+                    context.Response.ContentType = "text/html";
+                    await context.Response.WriteAsync(builder.ToString());
+                });
+            }
+        );
 
         app.Run(async context =>
         {
             // Generates the HTML with all status codes.
             var builder = new StringBuilder();
             builder.AppendLine("<html><body>");
-            builder.AppendLine("<a href=\"" +
-                HtmlEncoder.Default.Encode(context.Request.PathBase.ToString()) + "/missingpage/\">" +
-                HtmlEncoder.Default.Encode(context.Request.PathBase.ToString()) + "/missingpage/</a><br>");
+            builder.AppendLine(
+                "<a href=\""
+                    + HtmlEncoder.Default.Encode(context.Request.PathBase.ToString())
+                    + "/missingpage/\">"
+                    + HtmlEncoder.Default.Encode(context.Request.PathBase.ToString())
+                    + "/missingpage/</a><br>"
+            );
 
             var space = string.Concat(Enumerable.Repeat("&nbsp;", 12));
-            builder.AppendFormat(CultureInfo.InvariantCulture, "<br><b>{0}{1}{2}</b><br>", "Status Code", space, "Status Code Pages");
+            builder.AppendFormat(
+                CultureInfo.InvariantCulture,
+                "<br><b>{0}{1}{2}</b><br>",
+                "Status Code",
+                space,
+                "Status Code Pages"
+            );
             for (int statusCode = 400; statusCode < 600; statusCode++)
             {
                 builder.AppendFormat(
@@ -94,8 +125,19 @@ public class Startup
                     "{0}{1}{2}{3}<br>",
                     statusCode,
                     space + space,
-                    string.Format(CultureInfo.InvariantCulture, "<a href=\"?statuscode={0}\">[Enabled]</a>{1}", statusCode, space),
-                    string.Format(CultureInfo.InvariantCulture, "<a href=\"?statuscode={0}&disableStatusCodePages=true\">[Disabled]</a>{1}", statusCode, space));
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "<a href=\"?statuscode={0}\">[Enabled]</a>{1}",
+                        statusCode,
+                        space
+                    ),
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        "<a href=\"?statuscode={0}&disableStatusCodePages=true\">[Disabled]</a>{1}",
+                        statusCode,
+                        space
+                    )
+                );
             }
 
             builder.AppendLine("</body></html>");
@@ -109,11 +151,9 @@ public class Startup
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                .UseKestrel()
-                .UseIISIntegration()
-                .UseStartup<Startup>();
-            }).Build();
+                webHostBuilder.UseKestrel().UseIISIntegration().UseStartup<Startup>();
+            })
+            .Build();
 
         return host.RunAsync();
     }

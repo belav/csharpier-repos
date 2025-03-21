@@ -23,7 +23,9 @@ namespace System.Security.Cryptography.Cose.Tests
             writer.WriteInt64(value);
 
             CoseHeaderValue headerValue = CoseHeaderValue.FromEncodedValue(writer.Encode());
-            Exception ex = Assert.Throws<InvalidOperationException>(() => headerValue.GetValueAsInt32());
+            Exception ex = Assert.Throws<InvalidOperationException>(() =>
+                headerValue.GetValueAsInt32()
+            );
             Assert.IsType<OverflowException>(ex.InnerException);
         }
 
@@ -136,7 +138,7 @@ namespace System.Security.Cryptography.Cose.Tests
                 int length = headerValue.GetValueAsBytes(buffer);
                 Assert.Equal(expectedLength, length);
 
-                for (int i = 0; i < expectedLength; i+= content.Length)
+                for (int i = 0; i < expectedLength; i += content.Length)
                 {
                     AssertExtensions.SequenceEqual(content, buffer.Slice(i, content.Length));
                 }
@@ -165,7 +167,9 @@ namespace System.Security.Cryptography.Cose.Tests
             {
                 Assert.Equal(GetValueAs.BytesSpan, method);
                 Memory<byte> buffer = new byte[1024]; // big enough to not throw ArgumentException.
-                Assert.Throws<InvalidOperationException>(() => headerValue.GetValueAsBytes(buffer.Span));
+                Assert.Throws<InvalidOperationException>(() =>
+                    headerValue.GetValueAsBytes(buffer.Span)
+                );
             }
         }
 
@@ -186,7 +190,7 @@ namespace System.Security.Cryptography.Cose.Tests
             Int32,
             String,
             Bytes,
-            BytesSpan
+            BytesSpan,
         }
 
         [Theory]
@@ -256,13 +260,16 @@ namespace System.Security.Cryptography.Cose.Tests
             byte[] content = GetDummyContent(@case);
             CoseHeaderValue headerValue = CoseHeaderValue.FromBytes(content.AsSpan());
             Memory<byte> buffer = new byte[content.Length - 1];
-            Assert.Throws<ArgumentException>("destination", () => headerValue.GetValueAsBytes(buffer.Span));
+            Assert.Throws<ArgumentException>(
+                "destination",
+                () => headerValue.GetValueAsBytes(buffer.Span)
+            );
         }
 
         [Fact]
         public void FromBytesThrowsArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("value",() => CoseHeaderValue.FromBytes(null!));
+            Assert.Throws<ArgumentNullException>("value", () => CoseHeaderValue.FromBytes(null!));
         }
 
         [Theory]
@@ -295,7 +302,10 @@ namespace System.Security.Cryptography.Cose.Tests
         [Fact]
         public void FromEncodedValueThrowsArgumentNull()
         {
-            Assert.Throws<ArgumentNullException>("encodedValue", () => CoseHeaderValue.FromEncodedValue(null!));
+            Assert.Throws<ArgumentNullException>(
+                "encodedValue",
+                () => CoseHeaderValue.FromEncodedValue(null!)
+            );
         }
 
         [Fact]
@@ -320,35 +330,59 @@ namespace System.Security.Cryptography.Cose.Tests
         [Fact]
         public void CoseHeaderValue_Equals()
         {
-            Assert.True(default(CoseHeaderValue).Equals(default), "default(CoseHeaderValue).Equals(default)");
+            Assert.True(
+                default(CoseHeaderValue).Equals(default),
+                "default(CoseHeaderValue).Equals(default)"
+            );
 
-            Assert.True(default(CoseHeaderValue).Equals(new CoseHeaderValue()), "default(CoseHeaderValue).Equals(new CoseHeaderValue()");
+            Assert.True(
+                default(CoseHeaderValue).Equals(new CoseHeaderValue()),
+                "default(CoseHeaderValue).Equals(new CoseHeaderValue()"
+            );
 
             CoseHeaderValue value1 = CoseHeaderValue.FromInt32(0);
             CoseHeaderValue value2 = CoseHeaderValue.FromInt32(0);
-            Assert.True(value1.Equals(value2), "CoseHeaderValue.FromInt32(0) - value1.Equals(value2)");
+            Assert.True(
+                value1.Equals(value2),
+                "CoseHeaderValue.FromInt32(0) - value1.Equals(value2)"
+            );
 
             value1 = CoseHeaderValue.FromString("foo");
             value2 = CoseHeaderValue.FromString("foo");
-            Assert.True(value1.Equals(value2), "CoseHeaderValue.FromString(\"foo\") - value1.Equals(value2)");
+            Assert.True(
+                value1.Equals(value2),
+                "CoseHeaderValue.FromString(\"foo\") - value1.Equals(value2)"
+            );
 
             byte[] bytes = "foo"u8.ToArray();
             value1 = CoseHeaderValue.FromBytes(bytes);
             value2 = CoseHeaderValue.FromBytes(bytes);
-            Assert.True(value1.Equals(value2), "CoseHeaderValue.FromBytes(bytes) - value1.Equals(value2)");
+            Assert.True(
+                value1.Equals(value2),
+                "CoseHeaderValue.FromBytes(bytes) - value1.Equals(value2)"
+            );
 
             value1 = CoseHeaderValue.FromBytes(bytes.AsSpan());
             value2 = CoseHeaderValue.FromBytes(bytes.AsSpan());
-            Assert.True(value1.Equals(value2), "CoseHeaderValue.FromBytes(bytes.AsSpan()) - value1.Equals(value2)");
+            Assert.True(
+                value1.Equals(value2),
+                "CoseHeaderValue.FromBytes(bytes.AsSpan()) - value1.Equals(value2)"
+            );
 
             byte[] encodedValue = ByteUtils.HexToByteArray("80"); // empty array
             value1 = CoseHeaderValue.FromEncodedValue(encodedValue);
             value2 = CoseHeaderValue.FromEncodedValue(encodedValue);
-            Assert.True(value1.Equals(value2), "CoseHeaderValue.FromEncodedValue(encodedValue) - value1.Equals(value2)");
+            Assert.True(
+                value1.Equals(value2),
+                "CoseHeaderValue.FromEncodedValue(encodedValue) - value1.Equals(value2)"
+            );
 
             value1 = CoseHeaderValue.FromString("foo");
             value2 = CoseHeaderValue.FromString("bar");
-            Assert.False(value1.Equals(value2), "CoseHeaderValue.FromString(\"foo\").Equals(CoseHeaderValue.FromString(\"bar\"))");
+            Assert.False(
+                value1.Equals(value2),
+                "CoseHeaderValue.FromString(\"foo\").Equals(CoseHeaderValue.FromString(\"bar\"))"
+            );
 
             value1 = CoseHeaderValue.FromInt32(0);
             value2 = default;
@@ -360,7 +394,10 @@ namespace System.Security.Cryptography.Cose.Tests
         {
             Assert.True(default(CoseHeaderValue) == default, "default(CoseHeaderValue) == default");
 
-            Assert.True(default(CoseHeaderValue) == new CoseHeaderValue(), "default(CoseHeaderValue) == new CoseHeaderValue(");
+            Assert.True(
+                default(CoseHeaderValue) == new CoseHeaderValue(),
+                "default(CoseHeaderValue) == new CoseHeaderValue("
+            );
 
             CoseHeaderValue value1 = CoseHeaderValue.FromInt32(0);
             CoseHeaderValue value2 = CoseHeaderValue.FromInt32(0);
@@ -377,16 +414,25 @@ namespace System.Security.Cryptography.Cose.Tests
 
             value1 = CoseHeaderValue.FromBytes(bytes.AsSpan());
             value2 = CoseHeaderValue.FromBytes(bytes.AsSpan());
-            Assert.True(value1 == value2, "CoseHeaderValue.FromBytes(bytes.AsSpan()) - value1 == value2");
+            Assert.True(
+                value1 == value2,
+                "CoseHeaderValue.FromBytes(bytes.AsSpan()) - value1 == value2"
+            );
 
             byte[] encodedValue = ByteUtils.HexToByteArray("80"); // empty array
             value1 = CoseHeaderValue.FromEncodedValue(encodedValue);
             value2 = CoseHeaderValue.FromEncodedValue(encodedValue);
-            Assert.True(value1 == value2, "CoseHeaderValue.FromEncodedValue(encodedValue) - value1 == value2");
+            Assert.True(
+                value1 == value2,
+                "CoseHeaderValue.FromEncodedValue(encodedValue) - value1 == value2"
+            );
 
             value1 = CoseHeaderValue.FromString("foo");
             value2 = CoseHeaderValue.FromString("bar");
-            Assert.False(value1 == value2, "CoseHeaderValue.FromString(\"foo\") == CoseHeaderValue.FromString(\"bar\")");
+            Assert.False(
+                value1 == value2,
+                "CoseHeaderValue.FromString(\"foo\") == CoseHeaderValue.FromString(\"bar\")"
+            );
 
             value1 = CoseHeaderValue.FromInt32(0);
             value2 = default;
@@ -396,9 +442,15 @@ namespace System.Security.Cryptography.Cose.Tests
         [Fact]
         public void CoseHeaderValue_op_Inequality()
         {
-            Assert.False(default(CoseHeaderValue) != default, "default(CoseHeaderValue) != default");
+            Assert.False(
+                default(CoseHeaderValue) != default,
+                "default(CoseHeaderValue) != default"
+            );
 
-            Assert.False(default(CoseHeaderValue) != new CoseHeaderValue(), "default(CoseHeaderValue) != new CoseHeaderValue(");
+            Assert.False(
+                default(CoseHeaderValue) != new CoseHeaderValue(),
+                "default(CoseHeaderValue) != new CoseHeaderValue("
+            );
 
             CoseHeaderValue value1 = CoseHeaderValue.FromInt32(0);
             CoseHeaderValue value2 = CoseHeaderValue.FromInt32(0);
@@ -406,7 +458,10 @@ namespace System.Security.Cryptography.Cose.Tests
 
             value1 = CoseHeaderValue.FromString("foo");
             value2 = CoseHeaderValue.FromString("foo");
-            Assert.False(value1 != value2, "CoseHeaderValue.FromString(\"foo\") - value1 != value2");
+            Assert.False(
+                value1 != value2,
+                "CoseHeaderValue.FromString(\"foo\") - value1 != value2"
+            );
 
             byte[] bytes = "foo"u8.ToArray();
             value1 = CoseHeaderValue.FromBytes(bytes);
@@ -415,16 +470,25 @@ namespace System.Security.Cryptography.Cose.Tests
 
             value1 = CoseHeaderValue.FromBytes(bytes.AsSpan());
             value2 = CoseHeaderValue.FromBytes(bytes.AsSpan());
-            Assert.False(value1 != value2, "CoseHeaderValue.FromBytes(bytes.AsSpan()) - value1 != value2");
+            Assert.False(
+                value1 != value2,
+                "CoseHeaderValue.FromBytes(bytes.AsSpan()) - value1 != value2"
+            );
 
             byte[] encodedValue = ByteUtils.HexToByteArray("80"); // empty array
             value1 = CoseHeaderValue.FromEncodedValue(encodedValue);
             value2 = CoseHeaderValue.FromEncodedValue(encodedValue);
-            Assert.False(value1 != value2, "CoseHeaderValue.FromEncodedValue(encodedValue) - value1 != value2");
+            Assert.False(
+                value1 != value2,
+                "CoseHeaderValue.FromEncodedValue(encodedValue) - value1 != value2"
+            );
 
             value1 = CoseHeaderValue.FromString("foo");
             value2 = CoseHeaderValue.FromString("bar");
-            Assert.True(value1 != value2, "CoseHeaderValue.FromString(\"foo\") != (CoseHeaderValue.FromString(\"bar\")");
+            Assert.True(
+                value1 != value2,
+                "CoseHeaderValue.FromString(\"foo\") != (CoseHeaderValue.FromString(\"bar\")"
+            );
 
             value1 = CoseHeaderValue.FromInt32(0);
             value2 = default;

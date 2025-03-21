@@ -10,7 +10,12 @@ namespace Microsoft.CodeAnalysis.Interactive
     internal abstract class InteractiveEvaluatorLanguageInfoProvider
     {
         public abstract string LanguageName { get; }
-        public abstract CompilationOptions GetSubmissionCompilationOptions(string name, MetadataReferenceResolver metadataReferenceResolver, SourceReferenceResolver sourceReferenceResolver, ImmutableArray<string> imports);
+        public abstract CompilationOptions GetSubmissionCompilationOptions(
+            string name,
+            MetadataReferenceResolver metadataReferenceResolver,
+            SourceReferenceResolver sourceReferenceResolver,
+            ImmutableArray<string> imports
+        );
         public abstract ParseOptions ParseOptions { get; }
         public abstract CommandLineParser CommandLineParser { get; }
         public abstract bool IsCompleteSubmission(string text);

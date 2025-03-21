@@ -63,7 +63,10 @@ public class CSharpIdentifierTest
     [InlineData("Q", "Q")]
     [InlineData("\u2164", "\u2164")]
     [InlineData("_", "_")]
-    public void SanitizeIdentifier_DoesNotAddUnderscore_WhenValidStartCharacter(string input, string expectdOutput)
+    public void SanitizeIdentifier_DoesNotAddUnderscore_WhenValidStartCharacter(
+        string input,
+        string expectdOutput
+    )
     {
         // Arrange and Act
         var output = CSharpIdentifier.SanitizeIdentifier(input);
@@ -79,7 +82,10 @@ public class CSharpIdentifierTest
     [InlineData("\u2005", "_")] // UnicodeCategory.SpaceSeparator (four-per-em space)
     [InlineData("\u0096", "_")] // UnicodeCategory.Control (start of guarded area)
     [InlineData("\uFF1C", "_")] // UnicodeCategory.MathSymbol (fullwidth less-than sign)
-    public void SanitizeIdentifier_DoesNotAddUnderscore_WhenInvalidCharacter(string input, string expectdOutput)
+    public void SanitizeIdentifier_DoesNotAddUnderscore_WhenInvalidCharacter(
+        string input,
+        string expectdOutput
+    )
     {
         // Arrange and Act
         var output = CSharpIdentifier.SanitizeIdentifier(input);
@@ -95,7 +101,10 @@ public class CSharpIdentifierTest
     [InlineData("aa\u2005bb\u2005cc", "aa_bb_cc")] // UnicodeCategory.SpaceSeparator (four-per-em space)
     [InlineData("aa\u0096\u0096bb", "aa__bb")] // UnicodeCategory.Control (start of guarded area)
     [InlineData("aa\uFF1C\uFF1C\uFF1Cbb", "aa___bb")] // UnicodeCategory.MathSymbol (fullwidth less-than sign)
-    public void SanitizeIdentifier_ReplacesInvalidCharacters_WhenNotFirst(string input, string expectdOutput)
+    public void SanitizeIdentifier_ReplacesInvalidCharacters_WhenNotFirst(
+        string input,
+        string expectdOutput
+    )
     {
         // Arrange and Act
         var output = CSharpIdentifier.SanitizeIdentifier(input);

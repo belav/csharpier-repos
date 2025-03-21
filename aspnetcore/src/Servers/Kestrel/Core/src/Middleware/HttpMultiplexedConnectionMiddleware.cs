@@ -9,14 +9,20 @@ using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-internal sealed class HttpMultiplexedConnectionMiddleware<TContext> where TContext : notnull
+internal sealed class HttpMultiplexedConnectionMiddleware<TContext>
+    where TContext : notnull
 {
     private readonly ServiceContext _serviceContext;
     private readonly IHttpApplication<TContext> _application;
     private readonly HttpProtocols _protocols;
     private readonly bool _addAltSvcHeader;
 
-    public HttpMultiplexedConnectionMiddleware(ServiceContext serviceContext, IHttpApplication<TContext> application, HttpProtocols protocols, bool addAltSvcHeader)
+    public HttpMultiplexedConnectionMiddleware(
+        ServiceContext serviceContext,
+        IHttpApplication<TContext> application,
+        HttpProtocols protocols,
+        bool addAltSvcHeader
+    )
     {
         _serviceContext = serviceContext;
         _application = application;
@@ -28,7 +34,10 @@ internal sealed class HttpMultiplexedConnectionMiddleware<TContext> where TConte
     {
         var memoryPoolFeature = connectionContext.Features.Get<IMemoryPoolFeature>();
         var localEndPoint = connectionContext.LocalEndPoint as IPEndPoint;
-        var altSvcHeader = _addAltSvcHeader && localEndPoint != null ? HttpUtilities.GetEndpointAltSvc(localEndPoint, _protocols) : null;
+        var altSvcHeader =
+            _addAltSvcHeader && localEndPoint != null
+                ? HttpUtilities.GetEndpointAltSvc(localEndPoint, _protocols)
+                : null;
 
         var httpConnectionContext = new HttpMultiplexedConnectionContext(
             connectionContext.ConnectionId,
@@ -39,7 +48,8 @@ internal sealed class HttpMultiplexedConnectionMiddleware<TContext> where TConte
             connectionContext.Features,
             memoryPoolFeature?.MemoryPool ?? System.Buffers.MemoryPool<byte>.Shared,
             localEndPoint,
-            connectionContext.RemoteEndPoint as IPEndPoint);
+            connectionContext.RemoteEndPoint as IPEndPoint
+        );
 
         if (connectionContext.Features.Get<IConnectionMetricsTagsFeature>() is { } metricsTags)
         {

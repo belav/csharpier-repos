@@ -29,7 +29,12 @@ namespace Microsoft.CodeAnalysis.Emit
             IsUnused = true;
         }
 
-        public EncLocalInfo(LocalSlotDebugInfo slotInfo, Cci.ITypeReference type, LocalSlotConstraints constraints, byte[]? signature)
+        public EncLocalInfo(
+            LocalSlotDebugInfo slotInfo,
+            Cci.ITypeReference type,
+            LocalSlotConstraints constraints,
+            byte[]? signature
+        )
         {
             SlotInfo = slotInfo;
             Type = type;
@@ -38,28 +43,29 @@ namespace Microsoft.CodeAnalysis.Emit
             IsUnused = false;
         }
 
-        public bool IsDefault
-            => Type is null && Signature is null;
+        public bool IsDefault => Type is null && Signature is null;
 
         public bool Equals(EncLocalInfo other)
         {
-            return SlotInfo.Equals(other.SlotInfo) &&
-                   Cci.SymbolEquivalentEqualityComparer.Instance.Equals(Type, other.Type) &&
-                   Constraints == other.Constraints &&
-                   IsUnused == other.IsUnused;
+            return SlotInfo.Equals(other.SlotInfo)
+                && Cci.SymbolEquivalentEqualityComparer.Instance.Equals(Type, other.Type)
+                && Constraints == other.Constraints
+                && IsUnused == other.IsUnused;
         }
 
-        public override bool Equals(object? obj)
-            => obj is EncLocalInfo info && Equals(info);
+        public override bool Equals(object? obj) => obj is EncLocalInfo info && Equals(info);
 
         public override int GetHashCode()
         {
             Debug.Assert(Type != null);
 
-            return Hash.Combine(SlotInfo.GetHashCode(),
-                   Hash.Combine(Cci.SymbolEquivalentEqualityComparer.Instance.GetHashCode(Type),
-                   Hash.Combine((int)Constraints,
-                   Hash.Combine(IsUnused, 0))));
+            return Hash.Combine(
+                SlotInfo.GetHashCode(),
+                Hash.Combine(
+                    Cci.SymbolEquivalentEqualityComparer.Instance.GetHashCode(Type),
+                    Hash.Combine((int)Constraints, Hash.Combine(IsUnused, 0))
+                )
+            );
         }
 
         private string GetDebuggerDisplay()
@@ -74,12 +80,14 @@ namespace Microsoft.CodeAnalysis.Emit
                 return "[invalid]";
             }
 
-            return string.Format("[Id={0}, SynthesizedKind={1}, Type={2}, Constraints={3}, Sig={4}]",
+            return string.Format(
+                "[Id={0}, SynthesizedKind={1}, Type={2}, Constraints={3}, Sig={4}]",
                 SlotInfo.Id,
                 SlotInfo.SynthesizedKind,
                 Type,
                 Constraints,
-                (Signature != null) ? BitConverter.ToString(Signature) : "null");
+                (Signature != null) ? BitConverter.ToString(Signature) : "null"
+            );
         }
     }
 }

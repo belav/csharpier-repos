@@ -21,7 +21,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <see cref="ServiceFilterAttribute"/> instead if the filter is itself a service.
 /// </para>
 /// </remarks>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = true,
+    Inherited = true
+)]
 [DebuggerDisplay("Type = {ImplementationType}, Order = {Order}")]
 public class TypeFilterAttribute : Attribute, IFilterFactory, IOrderedFilter
 {
@@ -64,7 +68,10 @@ public class TypeFilterAttribute : Attribute, IFilterFactory, IOrderedFilter
         if (_factory == null)
         {
             var argumentTypes = Arguments?.Select(a => a.GetType())?.ToArray();
-            _factory = ActivatorUtilities.CreateFactory(ImplementationType, argumentTypes ?? Type.EmptyTypes);
+            _factory = ActivatorUtilities.CreateFactory(
+                ImplementationType,
+                argumentTypes ?? Type.EmptyTypes
+            );
         }
 
         var filter = (IFilterMetadata)_factory(serviceProvider, Arguments);

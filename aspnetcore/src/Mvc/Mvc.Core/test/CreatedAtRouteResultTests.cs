@@ -2,11 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Routing;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
@@ -21,17 +21,13 @@ public class CreatedAtRouteResultTests
         get
         {
             yield return new object[] { null };
-            yield return
-                new object[] {
-                        new Dictionary<string, string>() { { "hello", "world" } }
-                };
-            yield return
-                new object[] {
-                        new RouteValueDictionary(new Dictionary<string, string>() {
-                            { "test", "case" },
-                            { "sample", "route" }
-                        })
-                };
+            yield return new object[] { new Dictionary<string, string>() { { "hello", "world" } } };
+            yield return new object[]
+            {
+                new RouteValueDictionary(
+                    new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+                ),
+            };
         }
     }
 
@@ -66,14 +62,16 @@ public class CreatedAtRouteResultTests
         var result = new CreatedAtRouteResult(
             routeName: null,
             routeValues: new Dictionary<string, object>(),
-            value: null);
+            value: null
+        );
 
         result.UrlHelper = urlHelper;
 
         // Act & Assert
         await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
             async () => await result.ExecuteResultAsync(actionContext),
-        "No route matches the supplied values.");
+            "No route matches the supplied values."
+        );
     }
 
     private static ActionContext GetActionContext(HttpContext httpContext)
@@ -81,9 +79,7 @@ public class CreatedAtRouteResultTests
         var routeData = new RouteData();
         routeData.Routers.Add(Mock.Of<IRouter>());
 
-        return new ActionContext(httpContext,
-                                routeData,
-                                new ActionDescriptor());
+        return new ActionContext(httpContext, routeData, new ActionDescriptor());
     }
 
     private static HttpContext GetHttpContext()
@@ -99,14 +95,19 @@ public class CreatedAtRouteResultTests
     {
         var options = Options.Create(new MvcOptions());
         options.Value.OutputFormatters.Add(new StringOutputFormatter());
-        options.Value.OutputFormatters.Add(SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions()));
+        options.Value.OutputFormatters.Add(
+            SystemTextJsonOutputFormatter.CreateFormatter(new JsonOptions())
+        );
 
         var services = new ServiceCollection();
-        services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-            new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-            new TestHttpResponseStreamWriterFactory(),
-            NullLoggerFactory.Instance,
-            options));
+        services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+            new ObjectResultExecutor(
+                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                new TestHttpResponseStreamWriterFactory(),
+                NullLoggerFactory.Instance,
+                options
+            )
+        );
 
         return services.BuildServiceProvider();
     }

@@ -43,29 +43,40 @@ namespace System.Text.Json.Serialization.Tests
                 Type keyType = type.GetGenericArguments()[0];
                 Type valueType = type.GetGenericArguments()[1];
 
-                JsonConverter converter = (JsonConverter)Activator.CreateInstance(
-                    typeof(DictionaryKeyValueConverterInner<,>).MakeGenericType(new Type[] { keyType, valueType }),
-                    BindingFlags.Instance | BindingFlags.Public,
-                    binder: null,
-                    args: new object[] { options },
-                    culture: null);
+                JsonConverter converter = (JsonConverter)
+                    Activator.CreateInstance(
+                        typeof(DictionaryKeyValueConverterInner<,>).MakeGenericType(
+                            new Type[] { keyType, valueType }
+                        ),
+                        BindingFlags.Instance | BindingFlags.Public,
+                        binder: null,
+                        args: new object[] { options },
+                        culture: null
+                    );
 
                 return converter;
             }
 
-            private class DictionaryKeyValueConverterInner<TKey, TValue> : JsonConverter<Dictionary<TKey, TValue>>
+            private class DictionaryKeyValueConverterInner<TKey, TValue>
+                : JsonConverter<Dictionary<TKey, TValue>>
             {
                 private readonly JsonConverter<KeyValuePair<TKey, TValue>> _converter;
 
                 public DictionaryKeyValueConverterInner(JsonSerializerOptions options)
                 {
-                    _converter = (JsonConverter<KeyValuePair<TKey, TValue>>)options.GetConverter(typeof(KeyValuePair<TKey, TValue>));
+                    _converter =
+                        (JsonConverter<KeyValuePair<TKey, TValue>>)
+                            options.GetConverter(typeof(KeyValuePair<TKey, TValue>));
 
                     // KeyValuePair<> converter is built-in.
                     Debug.Assert(_converter != null);
                 }
 
-                public override Dictionary<TKey, TValue> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+                public override Dictionary<TKey, TValue> Read(
+                    ref Utf8JsonReader reader,
+                    Type typeToConvert,
+                    JsonSerializerOptions options
+                )
                 {
                     if (reader.TokenType != JsonTokenType.StartArray)
                     {
@@ -81,14 +92,22 @@ namespace System.Text.Json.Serialization.Tests
                             return value;
                         }
 
-                        KeyValuePair<TKey, TValue> kv = _converter.Read(ref reader, typeof(KeyValuePair<TKey, TValue>), options);
+                        KeyValuePair<TKey, TValue> kv = _converter.Read(
+                            ref reader,
+                            typeof(KeyValuePair<TKey, TValue>),
+                            options
+                        );
                         value.Add(kv.Key, kv.Value);
                     }
 
                     throw new JsonException();
                 }
 
-                public override void Write(Utf8JsonWriter writer, Dictionary<TKey, TValue> value, JsonSerializerOptions options)
+                public override void Write(
+                    Utf8JsonWriter writer,
+                    Dictionary<TKey, TValue> value,
+                    JsonSerializerOptions options
+                )
                 {
                     writer.WriteStartArray();
 
@@ -110,7 +129,9 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new DictionaryKeyValueConverter());
 
-            Dictionary<int, string> dictionary = JsonSerializer.Deserialize<Dictionary<int, string>>(json, options);
+            Dictionary<int, string> dictionary = JsonSerializer.Deserialize<
+                Dictionary<int, string>
+            >(json, options);
             Assert.Equal("One", dictionary[1]);
             Assert.Equal("Two", dictionary[2]);
 
@@ -121,12 +142,15 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void NestedDictionaryConversion()
         {
-            const string json = @"[{""Key"":1,""Value"":[{""Key"":10,""Value"":11}]},{""Key"":2,""Value"":[{""Key"":20,""Value"":21}]}]";
+            const string json =
+                @"[{""Key"":1,""Value"":[{""Key"":10,""Value"":11}]},{""Key"":2,""Value"":[{""Key"":20,""Value"":21}]}]";
 
             var options = new JsonSerializerOptions();
             options.Converters.Add(new DictionaryKeyValueConverter());
 
-            Dictionary<int, Dictionary<int, int>> dictionary = JsonSerializer.Deserialize<Dictionary<int, Dictionary<int, int>>>(json, options);
+            Dictionary<int, Dictionary<int, int>> dictionary = JsonSerializer.Deserialize<
+                Dictionary<int, Dictionary<int, int>>
+            >(json, options);
             Assert.Equal(11, dictionary[1][10]);
             Assert.Equal(21, dictionary[2][20]);
 
@@ -141,7 +165,7 @@ namespace System.Text.Json.Serialization.Tests
 
         private enum MyEnum
         {
-            One = 1
+            One = 1,
         }
 
         private class ClassWithDictionaries
@@ -178,14 +202,26 @@ namespace System.Text.Json.Serialization.Tests
             obj = new ClassWithDictionaries
             {
                 BoolKey = new Dictionary<bool, Entity> { [true] = new Entity { Value = "test" } },
-                EnumKey = new Dictionary<MyEnum, Entity> { [MyEnum.One] = new Entity { Value = "test" } },
+                EnumKey = new Dictionary<MyEnum, Entity>
+                {
+                    [MyEnum.One] = new Entity { Value = "test" },
+                },
                 GuidKey = new Dictionary<Guid, Entity> { [guid] = new Entity { Value = "test" } },
-                DoubleKey = new Dictionary<double, Entity> { [1.35] = new Entity { Value = "test" } },
-                FloatKey = new Dictionary<float, Entity> { [1.34f] = new Entity { Value = "test" } },
+                DoubleKey = new Dictionary<double, Entity>
+                {
+                    [1.35] = new Entity { Value = "test" },
+                },
+                FloatKey = new Dictionary<float, Entity>
+                {
+                    [1.34f] = new Entity { Value = "test" },
+                },
                 IntKey = new Dictionary<int, Entity> { [1] = new Entity { Value = "test" } },
 
                 // String is actually handled by built-in converter, not the custom converter.
-                StringKey = new Dictionary<string, Entity> { ["key"] = new Entity { Value = "test" } },
+                StringKey = new Dictionary<string, Entity>
+                {
+                    ["key"] = new Entity { Value = "test" },
+                },
             };
 
             // Verify baseline.
@@ -206,14 +242,23 @@ namespace System.Text.Json.Serialization.Tests
             options.Converters.Add(new JsonStringEnumConverter()); // Use string for Enum instead of int.
 
             // Baseline.
-            Dictionary<MyEnum, int> dictionary = JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(@"[{""Key"":""One"",""Value"":100}]", options);
+            Dictionary<MyEnum, int> dictionary = JsonSerializer.Deserialize<
+                Dictionary<MyEnum, int>
+            >(@"[{""Key"":""One"",""Value"":100}]", options);
             Assert.Equal(100, dictionary[MyEnum.One]);
 
             // Invalid JSON.
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(@"{x}", options));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(@"{x}", options)
+            );
 
             // Invalid enum value.
-            Assert.Throws<JsonException>(() => JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(@"[{""Key"":""BAD"",""Value"":100}]", options));
+            Assert.Throws<JsonException>(() =>
+                JsonSerializer.Deserialize<Dictionary<MyEnum, int>>(
+                    @"[{""Key"":""BAD"",""Value"":100}]",
+                    options
+                )
+            );
         }
     }
 }

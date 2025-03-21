@@ -16,7 +16,11 @@ namespace Microsoft.DiaSymReader
     /// the Read and Write methods take an <see cref="IntPtr"/> instead of a byte[] to avoid the
     /// allocation cost when called from native code.
     /// </summary>
-    [Guid("0000000c-0000-0000-C000-000000000046"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown), ComImport]
+    [
+        Guid("0000000c-0000-0000-C000-000000000046"),
+        InterfaceType(ComInterfaceType.InterfaceIsIUnknown),
+        ComImport
+    ]
     internal unsafe interface IUnsafeComStream
     {
         // ISequentialStream portion

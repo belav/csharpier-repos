@@ -15,14 +15,19 @@ public abstract class TextInputFormatter : InputFormatter
     /// <summary>
     /// Returns UTF8 Encoding without BOM and throws on invalid bytes.
     /// </summary>
-    protected static readonly Encoding UTF8EncodingWithoutBOM
-        = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false, throwOnInvalidBytes: true);
+    protected static readonly Encoding UTF8EncodingWithoutBOM = new UTF8Encoding(
+        encoderShouldEmitUTF8Identifier: false,
+        throwOnInvalidBytes: true
+    );
 
     /// <summary>
     /// Returns UTF16 Encoding which uses littleEndian byte order with BOM and throws on invalid bytes.
     /// </summary>
-    protected static readonly Encoding UTF16EncodingLittleEndian
-        = new UnicodeEncoding(bigEndian: false, byteOrderMark: true, throwOnInvalidBytes: true);
+    protected static readonly Encoding UTF16EncodingLittleEndian = new UnicodeEncoding(
+        bigEndian: false,
+        byteOrderMark: true,
+        throwOnInvalidBytes: true
+    );
 
     /// <summary>
     /// Gets the mutable collection of character encodings supported by
@@ -40,7 +45,8 @@ public abstract class TextInputFormatter : InputFormatter
         if (selectedEncoding == null)
         {
             var message = Resources.FormatUnsupportedContentType(
-                context.HttpContext.Request.ContentType);
+                context.HttpContext.Request.ContentType
+            );
 
             var exception = new UnsupportedContentTypeException(message);
             context.ModelState.AddModelError(context.ModelName, exception, context.Metadata);
@@ -59,7 +65,8 @@ public abstract class TextInputFormatter : InputFormatter
     /// <returns>A <see cref="Task"/> that on completion deserializes the request body.</returns>
     public abstract Task<InputFormatterResult> ReadRequestBodyAsync(
         InputFormatterContext context,
-        Encoding encoding);
+        Encoding encoding
+    );
 
     /// <summary>
     /// Returns an <see cref="Encoding"/> based on <paramref name="context"/>'s
@@ -77,12 +84,15 @@ public abstract class TextInputFormatter : InputFormatter
         if (SupportedEncodings.Count == 0)
         {
             var message = Resources.FormatTextInputFormatter_SupportedEncodingsMustNotBeEmpty(
-                nameof(SupportedEncodings));
+                nameof(SupportedEncodings)
+            );
             throw new InvalidOperationException(message);
         }
 
         var requestContentType = context.HttpContext.Request.ContentType;
-        var requestMediaType = string.IsNullOrEmpty(requestContentType) ? default : new MediaType(requestContentType);
+        var requestMediaType = string.IsNullOrEmpty(requestContentType)
+            ? default
+            : new MediaType(requestContentType);
         if (requestMediaType.Charset.HasValue)
         {
             // Create Encoding based on requestMediaType.Charset to support charset aliases and custom Encoding
@@ -92,10 +102,13 @@ public abstract class TextInputFormatter : InputFormatter
             {
                 for (int i = 0; i < SupportedEncodings.Count; i++)
                 {
-                    if (string.Equals(
-                        requestEncoding.WebName,
-                        SupportedEncodings[i].WebName,
-                        StringComparison.OrdinalIgnoreCase))
+                    if (
+                        string.Equals(
+                            requestEncoding.WebName,
+                            SupportedEncodings[i].WebName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         return SupportedEncodings[i];
                     }

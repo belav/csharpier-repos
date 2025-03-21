@@ -26,8 +26,13 @@ public class FileLoggerProvider : BatchingLoggerProvider
     /// Creates a new instance of <see cref="FileLoggerProvider"/>.
     /// </summary>
     /// <param name="options">The options to use when creating a provider.</param>
-    [SuppressMessage("ApiDesign", "RS0022:Constructor make noninheritable base class inheritable", Justification = "Required for backwards compatibility")]
-    public FileLoggerProvider(IOptionsMonitor<AzureFileLoggerOptions> options) : base(options)
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0022:Constructor make noninheritable base class inheritable",
+        Justification = "Required for backwards compatibility"
+    )]
+    public FileLoggerProvider(IOptionsMonitor<AzureFileLoggerOptions> options)
+        : base(options)
     {
         var loggerOptions = options.CurrentValue;
         _path = loggerOptions.LogDirectory;
@@ -36,7 +41,10 @@ public class FileLoggerProvider : BatchingLoggerProvider
         _maxRetainedFiles = loggerOptions.RetainedFileCountLimit;
     }
 
-    internal override async Task WriteMessagesAsync(IEnumerable<LogMessage> messages, CancellationToken cancellationToken)
+    internal override async Task WriteMessagesAsync(
+        IEnumerable<LogMessage> messages,
+        CancellationToken cancellationToken
+    )
     {
         Directory.CreateDirectory(_path);
 
@@ -63,7 +71,10 @@ public class FileLoggerProvider : BatchingLoggerProvider
 
     private string GetFullName((int Year, int Month, int Day) group)
     {
-        return Path.Combine(_path, $"{_fileName}{group.Year:0000}{group.Month:00}{group.Day:00}.txt");
+        return Path.Combine(
+            _path,
+            $"{_fileName}{group.Year:0000}{group.Month:00}{group.Day:00}.txt"
+        );
     }
 
     private (int Year, int Month, int Day) GetGrouping(LogMessage message)

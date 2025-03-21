@@ -18,9 +18,7 @@ public class TableTriggerBuilder : TriggerBuilder
     /// </summary>
     /// <param name="trigger">The trigger to configure.</param>
     public TableTriggerBuilder(IMutableTrigger trigger)
-        : base(trigger)
-    {
-    }
+        : base(trigger) { }
 
     /// <summary>
     ///     Sets the database name of the trigger.
@@ -44,8 +42,8 @@ public class TableTriggerBuilder : TriggerBuilder
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual TableTriggerBuilder HasAnnotation(string annotation, object? value)
-        => (TableTriggerBuilder)base.HasAnnotation(annotation, value);
+    public new virtual TableTriggerBuilder HasAnnotation(string annotation, object? value) =>
+        (TableTriggerBuilder)base.HasAnnotation(annotation, value);
 
     #region Hidden System.Object members
 
@@ -54,8 +52,7 @@ public class TableTriggerBuilder : TriggerBuilder
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -64,8 +61,7 @@ public class TableTriggerBuilder : TriggerBuilder
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -73,8 +69,7 @@ public class TableTriggerBuilder : TriggerBuilder
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

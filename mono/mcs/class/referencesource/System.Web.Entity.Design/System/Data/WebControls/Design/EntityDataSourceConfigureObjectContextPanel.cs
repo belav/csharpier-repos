@@ -8,9 +8,9 @@
 //------------------------------------------------------------------------------
 
 using System.Collections.Generic;
-using System.Web.UI.Design.WebControls.Util;
 using System.Diagnostics;
 using System.Drawing;
+using System.Web.UI.Design.WebControls.Util;
 using System.Windows.Forms;
 
 namespace System.Web.UI.Design.WebControls
@@ -20,7 +20,6 @@ namespace System.Web.UI.Design.WebControls
         private EntityDataSourceConfigureObjectContext _configureObjectContext;
         private bool _ignoreEvents; // used when a control value is set by the wizard, tells the event handlers to do nothing
         private bool _connectionInEdit; // indicates that a change has been made to the connection and it has not yet been validated
-        
         #region Constructors
         internal EntityDataSourceConfigureObjectContextPanel()
         {
@@ -87,7 +86,7 @@ namespace System.Web.UI.Design.WebControls
             _connectionStringTextBox.TabStop = true;
             _containerNameLabel.TabStop = false;
             _containerNameComboBox.TabStop = true;
-            
+
             int tabIndex = 0;
             _radioButtonsGroupContainer.TabIndex = tabIndex;
             _databaseConnectionGroupLabel.TabIndex = tabIndex += 10;
@@ -97,20 +96,28 @@ namespace System.Web.UI.Design.WebControls
             _connectionStringRadioButton.TabIndex = tabIndex += 10;
             _connectionStringTextBox.TabIndex = tabIndex += 10;
             _containerNameLabel.TabIndex = tabIndex += 10;
-            _containerNameComboBox.TabIndex = tabIndex += 10;            
+            _containerNameComboBox.TabIndex = tabIndex += 10;
         }
 
         private void InitializeUI()
         {
-            this._databaseConnectionGroupLabel.Text = Strings.Wizard_ObjectContextPanel_ConnectionStringGroupDescription;
-            this._connectionStringRadioButton.Text = Strings.Wizard_ObjectContextPanel_ConnectionStringRadioButton;
-            this._connectionStringRadioButton.AccessibleName = Strings.Wizard_ObjectContextPanel_ConnectionStringRadioButtonAccessibleName;
-            this._connectionStringTextBox.AccessibleName = Strings.Wizard_ObjectContextPanel_ConnectionStringRadioButtonAccessibleName;
-            this._namedConnectionRadioButton.Text = Strings.Wizard_ObjectContextPanel_NamedConnectionRadioButton;
-            this._namedConnectionRadioButton.AccessibleName = Strings.Wizard_ObjectContextPanel_NamedConnectionRadioButtonAccessibleName;
-            this._namedConnectionComboBox.AccessibleName = Strings.Wizard_ObjectContextPanel_NamedConnectionRadioButtonAccessibleName;
+            this._databaseConnectionGroupLabel.Text =
+                Strings.Wizard_ObjectContextPanel_ConnectionStringGroupDescription;
+            this._connectionStringRadioButton.Text =
+                Strings.Wizard_ObjectContextPanel_ConnectionStringRadioButton;
+            this._connectionStringRadioButton.AccessibleName =
+                Strings.Wizard_ObjectContextPanel_ConnectionStringRadioButtonAccessibleName;
+            this._connectionStringTextBox.AccessibleName =
+                Strings.Wizard_ObjectContextPanel_ConnectionStringRadioButtonAccessibleName;
+            this._namedConnectionRadioButton.Text =
+                Strings.Wizard_ObjectContextPanel_NamedConnectionRadioButton;
+            this._namedConnectionRadioButton.AccessibleName =
+                Strings.Wizard_ObjectContextPanel_NamedConnectionRadioButtonAccessibleName;
+            this._namedConnectionComboBox.AccessibleName =
+                Strings.Wizard_ObjectContextPanel_NamedConnectionRadioButtonAccessibleName;
             this._containerNameLabel.Text = Strings.Wizard_ObjectContextPanel_DefaultContainerName;
-            this._containerNameComboBox.AccessibleName = Strings.Wizard_ObjectContextPanel_DefaultContainerNameAccessibleName;
+            this._containerNameComboBox.AccessibleName =
+                Strings.Wizard_ObjectContextPanel_DefaultContainerNameAccessibleName;
             this.Caption = Strings.Wizard_ObjectContextPanel_Caption;
             this.AccessibleName = Strings.Wizard_ObjectContextPanel_Caption;
         }
@@ -130,7 +137,9 @@ namespace System.Web.UI.Design.WebControls
                     EnterConnectionEditMode();
 
                     // Update the flag to track if we have text in the box
-                    _configureObjectContext.SelectConnectionStringHasValue(!String.IsNullOrEmpty(_connectionStringTextBox.Text));
+                    _configureObjectContext.SelectConnectionStringHasValue(
+                        !String.IsNullOrEmpty(_connectionStringTextBox.Text)
+                    );
 
                     if (LocalAppContextSwitches.UseLegacyAccessibilityFeatures)
                     {
@@ -155,7 +164,9 @@ namespace System.Web.UI.Design.WebControls
 
                 // Update the state of the flag that tracks if there is anything in this TextBox.
                 // This will cause the Next button to be disabled if all of the text is removed from the box, otherwise it is enabled
-                _configureObjectContext.SelectConnectionStringHasValue(!String.IsNullOrEmpty(_connectionStringTextBox.Text));
+                _configureObjectContext.SelectConnectionStringHasValue(
+                    !String.IsNullOrEmpty(_connectionStringTextBox.Text)
+                );
             }
         }
 
@@ -172,7 +183,9 @@ namespace System.Web.UI.Design.WebControls
                     EnterConnectionEditMode();
 
                     // Update flag to indicate if there is a value selected in this box
-                    _configureObjectContext.SelectConnectionStringHasValue(_namedConnectionComboBox.SelectedIndex != -1);
+                    _configureObjectContext.SelectConnectionStringHasValue(
+                        _namedConnectionComboBox.SelectedIndex != -1
+                    );
 
                     if (LocalAppContextSwitches.UseLegacyAccessibilityFeatures)
                     {
@@ -187,7 +200,7 @@ namespace System.Web.UI.Design.WebControls
                         VerifyConnectionString();
                     }
                 }
-                // else it's being unchecked, so that means another radio button is being checked and that handler will take care of updating the state            
+                // else it's being unchecked, so that means another radio button is being checked and that handler will take care of updating the state
             }
         }
 
@@ -198,7 +211,9 @@ namespace System.Web.UI.Design.WebControls
                 EnterConnectionEditMode();
 
                 // Update flag to indicate if there is a value selected in this box
-                _configureObjectContext.SelectConnectionStringHasValue(_namedConnectionComboBox.SelectedIndex != -1);
+                _configureObjectContext.SelectConnectionStringHasValue(
+                    _namedConnectionComboBox.SelectedIndex != -1
+                );
 
                 // If there is a selected NamedConnection, validate the connection string right away
                 // so that we can potentially select the default container name if there is one
@@ -221,7 +236,9 @@ namespace System.Web.UI.Design.WebControls
         {
             if (!_ignoreEvents)
             {
-                _configureObjectContext.SelectContainerName(_containerNameComboBox.SelectedItem as EntityDataSourceContainerNameItem);
+                _configureObjectContext.SelectContainerName(
+                    _containerNameComboBox.SelectedItem as EntityDataSourceContainerNameItem
+                );
             }
         }
 
@@ -249,25 +266,36 @@ namespace System.Web.UI.Design.WebControls
                 if (_connectionInEdit)
                 {
                     bool isNamedConnection = _namedConnectionRadioButton.Checked;
-                    Debug.Assert(!isNamedConnection ? _connectionStringRadioButton.Checked : true, "only expecting either named connection or connection string radio button options");
+                    Debug.Assert(
+                        !isNamedConnection ? _connectionStringRadioButton.Checked : true,
+                        "only expecting either named connection or connection string radio button options"
+                    );
 
                     EntityConnectionStringBuilderItem selectedConnection = null;
                     if (isNamedConnection)
                     {
                         if (_namedConnectionComboBox.SelectedIndex != -1)
                         {
-                            selectedConnection = _namedConnectionComboBox.SelectedItem as EntityConnectionStringBuilderItem;
+                            selectedConnection =
+                                _namedConnectionComboBox.SelectedItem
+                                as EntityConnectionStringBuilderItem;
                         }
                     }
                     else
                     {
                         // Make a builder item out of the specified connection string. This will do some basic verification on the string.
-                        selectedConnection = _configureObjectContext.GetEntityConnectionStringBuilderItem(_connectionStringTextBox.Text);
+                        selectedConnection =
+                            _configureObjectContext.GetEntityConnectionStringBuilderItem(
+                                _connectionStringTextBox.Text
+                            );
                     }
 
                     if (selectedConnection != null)
                     {
-                        bool metadataLoaded = _configureObjectContext.SelectConnectionStringBuilder(selectedConnection, true /*resetContainer*/);
+                        bool metadataLoaded = _configureObjectContext.SelectConnectionStringBuilder(
+                            selectedConnection,
+                            true /*resetContainer*/
+                        );
 
                         // If verification failed, try to move the focus back to the appropriate control.
                         if (!metadataLoaded)
@@ -278,10 +306,16 @@ namespace System.Web.UI.Design.WebControls
                             }
                             else
                             {
-                                if (LocalAppContextSwitches.UseLegacyAccessibilityFeatures || _connectionStringTextBox.TextLength != 0)
+                                if (
+                                    LocalAppContextSwitches.UseLegacyAccessibilityFeatures
+                                    || _connectionStringTextBox.TextLength != 0
+                                )
                                 {
                                     _connectionStringTextBox.Select();
-                                    _connectionStringTextBox.Select(0, _connectionStringTextBox.TextLength);
+                                    _connectionStringTextBox.Select(
+                                        0,
+                                        _connectionStringTextBox.TextLength
+                                    );
                                 }
                             }
                         }
@@ -304,7 +338,10 @@ namespace System.Web.UI.Design.WebControls
         #region Wizard state management
         public override bool OnNext()
         {
-            Debug.Assert(_configureObjectContext.CanEnableNext, "OnNext called when CanEnableNext is false");
+            Debug.Assert(
+                _configureObjectContext.CanEnableNext,
+                "OnNext called when CanEnableNext is false"
+            );
 
             return VerifyConnectionString();
         }
@@ -330,8 +367,9 @@ namespace System.Web.UI.Design.WebControls
             _ignoreEvents = true;
 
             // set the state of the ConnectionString radio buttons and associated controls
-            bool isNamedConnection = connStrBuilderItem.IsEmpty || connStrBuilderItem.IsNamedConnection; 
-           
+            bool isNamedConnection =
+                connStrBuilderItem.IsEmpty || connStrBuilderItem.IsNamedConnection;
+
             _namedConnectionRadioButton.Checked = isNamedConnection;
             _namedConnectionComboBox.Enabled = isNamedConnection;
             _connectionStringRadioButton.Checked = !isNamedConnection;
@@ -341,12 +379,16 @@ namespace System.Web.UI.Design.WebControls
             if (connStrBuilderItem.IsEmpty)
             {
                 _namedConnectionComboBox.SelectedIndex = -1;
-                _configureObjectContext.SelectConnectionStringHasValue(false /*connectionStringHasValue*/);
+                _configureObjectContext.SelectConnectionStringHasValue(
+                    false /*connectionStringHasValue*/
+                );
             }
             else if (connStrBuilderItem.IsNamedConnection)
             {
                 _namedConnectionComboBox.SelectedItem = connStrBuilderItem;
-                _configureObjectContext.SelectConnectionStringHasValue(true /*connectionStringHasValue*/);
+                _configureObjectContext.SelectConnectionStringHasValue(
+                    true /*connectionStringHasValue*/
+                );
             }
             else
             {
@@ -373,19 +415,22 @@ namespace System.Web.UI.Design.WebControls
         }
 
         /// <summary>
-        /// Expects that selectedContainer is already in the ComboBox list, or should be null 
+        /// Expects that selectedContainer is already in the ComboBox list, or should be null
         /// </summary>
         /// <param name="selectedContainer"></param>
         /// <param name="initialLoad">If this is the initial load, we want to suppress events so that the change does
         /// not cause additional work in panels that listen to the container name changed event</param>
-        internal void SetSelectedContainerName(EntityDataSourceContainerNameItem selectedContainer, bool initialLoad)
+        internal void SetSelectedContainerName(
+            EntityDataSourceContainerNameItem selectedContainer,
+            bool initialLoad
+        )
         {
             if (initialLoad)
             {
                 _ignoreEvents = true;
             }
             if (selectedContainer == null)
-            {    
+            {
                 _containerNameComboBox.SelectedIndex = -1;
             }
             else
@@ -393,7 +438,7 @@ namespace System.Web.UI.Design.WebControls
                 _containerNameComboBox.SelectedItem = selectedContainer;
             }
             _ignoreEvents = false;
-        }        
+        }
         #endregion
     }
 }

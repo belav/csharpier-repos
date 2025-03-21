@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -22,18 +22,16 @@ namespace System.Linq.Parallel
 {
     /// <summary>
     /// Inlined aggregations for summing up primitives (int, long, float, double, decimal), as
-    /// well as the nullable versions of each (int?, long?, float?, double?, decimal?). 
+    /// well as the nullable versions of each (int?, long?, float?, double?, decimal?).
     /// </summary>
     internal sealed class IntSumAggregationOperator : InlinedAggregationOperator<int, int, int>
     {
-
         //---------------------------------------------------------------------------------------
         // Constructs a new instance of a sum associative operator.
         //
 
-        internal IntSumAggregationOperator(IEnumerable<int> child) : base(child)
-        {
-        }
+        internal IntSumAggregationOperator(IEnumerable<int> child)
+            : base(child) { }
 
         //---------------------------------------------------------------------------------------
         // Executes the entire query tree, and aggregates the intermediate results into the
@@ -45,11 +43,16 @@ namespace System.Linq.Parallel
 
         protected override int InternalAggregate(ref Exception singularExceptionToThrow)
         {
-            // Because the final reduction is typically much cheaper than the intermediate 
+            // Because the final reduction is typically much cheaper than the intermediate
             // reductions over the individual partitions, and because each parallel partition
             // will do a lot of work to produce a single output element, we prefer to turn off
             // pipelining, and process the final reductions serially.
-            using (IEnumerator<int> enumerator = GetEnumerator(ParallelMergeOptions.FullyBuffered, true))
+            using (
+                IEnumerator<int> enumerator = GetEnumerator(
+                    ParallelMergeOptions.FullyBuffered,
+                    true
+                )
+            )
             {
                 // We just reduce the elements in each output partition.
                 int sum = 0;
@@ -69,8 +72,13 @@ namespace System.Linq.Parallel
         // Creates an enumerator that is used internally for the final aggregation step.
         //
 
-        protected override QueryOperatorEnumerator<int,int> CreateEnumerator<TKey>(
-            int index, int count, QueryOperatorEnumerator<int, TKey> source, object sharedData, CancellationToken cancellationToken)
+        protected override QueryOperatorEnumerator<int, int> CreateEnumerator<TKey>(
+            int index,
+            int count,
+            QueryOperatorEnumerator<int, TKey> source,
+            object sharedData,
+            CancellationToken cancellationToken
+        )
         {
             return new IntSumAggregationOperatorEnumerator<TKey>(source, index, cancellationToken);
         }
@@ -80,7 +88,8 @@ namespace System.Linq.Parallel
         // (possibly partitioned) data source.
         //
 
-        private class IntSumAggregationOperatorEnumerator<TKey> : InlinedAggregationOperatorEnumerator<int>
+        private class IntSumAggregationOperatorEnumerator<TKey>
+            : InlinedAggregationOperatorEnumerator<int>
         {
             private readonly QueryOperatorEnumerator<int, TKey> m_source; // The source data.
 
@@ -88,9 +97,12 @@ namespace System.Linq.Parallel
             // Instantiates a new aggregation operator.
             //
 
-            internal IntSumAggregationOperatorEnumerator(QueryOperatorEnumerator<int, TKey> source, int partitionIndex,
-                CancellationToken cancellationToken) :
-                base(partitionIndex, cancellationToken)
+            internal IntSumAggregationOperatorEnumerator(
+                QueryOperatorEnumerator<int, TKey> source,
+                int partitionIndex,
+                CancellationToken cancellationToken
+            )
+                : base(partitionIndex, cancellationToken)
             {
                 Contract.Assert(source != null);
                 m_source = source;
@@ -116,13 +128,11 @@ namespace System.Linq.Parallel
                     {
                         if ((i++ & CancellationState.POLL_INTERVAL) == 0)
                             CancellationState.ThrowIfCanceled(m_cancellationToken);
-
                         checked
                         {
                             tempSum += element;
                         }
-                    }
-                    while (source.MoveNext(ref element, ref keyUnused));
+                    } while (source.MoveNext(ref element, ref keyUnused));
 
                     // The sum has been calculated. Now just return.
                     currentElement = tempSum;

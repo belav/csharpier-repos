@@ -18,27 +18,44 @@ using Microsoft.CodeAnalysis.Shared.Utilities;
 
 namespace Microsoft.CodeAnalysis.UseSystemHashCode
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, LanguageNames.VisualBasic, Name = PredefinedCodeFixProviderNames.UseSystemHashCode), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeFixProviderNames.UseSystemHashCode
+        ),
+        Shared
+    ]
     internal class UseSystemHashCodeCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public UseSystemHashCodeCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public UseSystemHashCodeCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds { get; }
-            = ImmutableArray.Create(IDEDiagnosticIds.UseSystemHashCode);
+        public override ImmutableArray<string> FixableDiagnosticIds { get; } =
+            ImmutableArray.Create(IDEDiagnosticIds.UseSystemHashCode);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, AnalyzersResources.Use_System_HashCode, nameof(AnalyzersResources.Use_System_HashCode));
+            RegisterCodeFix(
+                context,
+                AnalyzersResources.Use_System_HashCode,
+                nameof(AnalyzersResources.Use_System_HashCode)
+            );
             return Task.CompletedTask;
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var generator = SyntaxGenerator.GetGenerator(document);
             var generatorInternal = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
@@ -48,7 +65,9 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
                 return;
             }
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (!HashCodeAnalyzer.TryGetAnalyzer(semanticModel.Compilation, out var analyzer))
             {
                 Debug.Fail("Could not get analyzer");
@@ -57,7 +76,9 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
 
             foreach (var diagnostic in diagnostics)
             {
-                var operationLocation = diagnostic.AdditionalLocations[0].FindNode(cancellationToken);
+                var operationLocation = diagnostic
+                    .AdditionalLocations[0]
+                    .FindNode(cancellationToken);
                 var operation = semanticModel.GetOperation(operationLocation, cancellationToken);
 
                 var methodDecl = diagnostic.AdditionalLocations[1].FindNode(cancellationToken);
@@ -65,7 +86,9 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
                 if (method == null)
                     continue;
 
-                var methodBlock = declarationService.GetDeclarations(method)[0].GetSyntax(cancellationToken);
+                var methodBlock = declarationService
+                    .GetDeclarations(method)[0]
+                    .GetSyntax(cancellationToken);
 
                 var (accessesBase, members, _) = analyzer.GetHashedMembers(method, operation);
                 if (accessesBase || !members.IsDefaultOrEmpty)
@@ -77,12 +100,21 @@ namespace Microsoft.CodeAnalysis.UseSystemHashCode
                     // so that we generate the same.
                     var containingType = accessesBase ? method!.ContainingType : null;
                     var components = generator.GetGetHashCodeComponents(
-                        generatorInternal, semanticModel.Compilation, containingType, members, justMemberReference: true);
+                        generatorInternal,
+                        semanticModel.Compilation,
+                        containingType,
+                        members,
+                        justMemberReference: true
+                    );
 
                     var updatedDecl = generator.WithStatements(
                         methodBlock,
                         generator.CreateGetHashCodeStatementsUsingSystemHashCode(
-                            generatorInternal, analyzer.SystemHashCodeType, components));
+                            generatorInternal,
+                            analyzer.SystemHashCodeType,
+                            components
+                        )
+                    );
                     editor.ReplaceNode(methodBlock, updatedDecl);
                 }
             }

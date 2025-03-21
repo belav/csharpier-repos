@@ -4,8 +4,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Threading;
+using System.Threading.Tasks;
 using Xunit;
 #pragma warning disable xUnit1026 // Theory methods should use all of their parameters
 
@@ -22,8 +22,14 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public async Task MultipleImportAsync()
         {
-            var first = await JSHost.ImportAsync("JavaScriptTestHelper", "../JavaScriptTestHelper.mjs");
-            var second = await JSHost.ImportAsync("JavaScriptTestHelper", "../JavaScriptTestHelper.mjs");
+            var first = await JSHost.ImportAsync(
+                "JavaScriptTestHelper",
+                "../JavaScriptTestHelper.mjs"
+            );
+            var second = await JSHost.ImportAsync(
+                "JavaScriptTestHelper",
+                "../JavaScriptTestHelper.mjs"
+            );
             Assert.NotNull(first);
             Assert.NotNull(second);
             Assert.Equal("object", first.GetTypeOfProperty("instance"));
@@ -39,12 +45,24 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public async Task CancelableImportAsync()
         {
             var cts = new CancellationTokenSource();
-            var exTask = Assert.ThrowsAsync<JSException>(async () => await JSHost.ImportAsync("JavaScriptTestHelper", "../JavaScriptTestHelper.mjs", cts.Token));
+            var exTask = Assert.ThrowsAsync<JSException>(async () =>
+                await JSHost.ImportAsync(
+                    "JavaScriptTestHelper",
+                    "../JavaScriptTestHelper.mjs",
+                    cts.Token
+                )
+            );
             cts.Cancel();
             var actualEx2 = await exTask;
             Assert.Equal("Error: OperationCanceledException", actualEx2.Message);
 
-            var actualEx = await Assert.ThrowsAsync<JSException>(async () => await JSHost.ImportAsync("JavaScriptTestHelper", "../JavaScriptTestHelper.mjs", new CancellationToken(true)));
+            var actualEx = await Assert.ThrowsAsync<JSException>(async () =>
+                await JSHost.ImportAsync(
+                    "JavaScriptTestHelper",
+                    "../JavaScriptTestHelper.mjs",
+                    new CancellationToken(true)
+                )
+            );
             Assert.Equal("Error: OperationCanceledException", actualEx.Message);
         }
 
@@ -91,18 +109,30 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             JSException ex;
             JSHost.DotnetInstance.SetProperty("testBool", true);
-            ex = Assert.Throws<JSException>(() => JSHost.DotnetInstance.GetPropertyAsInt32("testBool"));
+            ex = Assert.Throws<JSException>(() =>
+                JSHost.DotnetInstance.GetPropertyAsInt32("testBool")
+            );
             Assert.Contains("Value is not an integer", ex.Message);
-            ex = Assert.Throws<JSException>(() => JSHost.DotnetInstance.GetPropertyAsDouble("testBool"));
+            ex = Assert.Throws<JSException>(() =>
+                JSHost.DotnetInstance.GetPropertyAsDouble("testBool")
+            );
             Assert.Contains("Value is not a Number", ex.Message);
-            ex = Assert.Throws<JSException>(() => JSHost.DotnetInstance.GetPropertyAsString("testBool"));
+            ex = Assert.Throws<JSException>(() =>
+                JSHost.DotnetInstance.GetPropertyAsString("testBool")
+            );
             Assert.Contains("Value is not a String", ex.Message);
-            ex = Assert.Throws<JSException>(() => JSHost.DotnetInstance.GetPropertyAsJSObject("testBool"));
+            ex = Assert.Throws<JSException>(() =>
+                JSHost.DotnetInstance.GetPropertyAsJSObject("testBool")
+            );
             Assert.Contains("JSObject proxy of boolean is not supported", ex.Message);
-            ex = Assert.Throws<JSException>(() => JSHost.DotnetInstance.GetPropertyAsByteArray("testBool"));
+            ex = Assert.Throws<JSException>(() =>
+                JSHost.DotnetInstance.GetPropertyAsByteArray("testBool")
+            );
             Assert.Contains("Value is not an Array or Uint8Array", ex.Message);
             JSHost.DotnetInstance.SetProperty("testInt", 42);
-            ex = Assert.Throws<JSException>(() => JSHost.DotnetInstance.GetPropertyAsBoolean("testInt"));
+            ex = Assert.Throws<JSException>(() =>
+                JSHost.DotnetInstance.GetPropertyAsBoolean("testInt")
+            );
             Assert.Contains("Value is not a Boolean", ex.Message);
         }
 
@@ -111,8 +141,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             JSException ex;
             JSHost.DotnetInstance.SetProperty("testDouble", 9007199254740991L);
-            ex = Assert.Throws<JSException>(() => JSHost.DotnetInstance.GetPropertyAsInt32("testDouble"));
-            Assert.Contains("Overflow: value 9007199254740991 is out of -2147483648 2147483647 range", ex.Message);
+            ex = Assert.Throws<JSException>(() =>
+                JSHost.DotnetInstance.GetPropertyAsInt32("testDouble")
+            );
+            Assert.Contains(
+                "Overflow: value 9007199254740991 is out of -2147483648 2147483647 range",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -129,16 +164,18 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             Assert.Equal(43 + 123 + 31, JavaScriptTestHelper.optimizedReached);
         }
 
-
         #region Get/Set Property
 
         [Fact]
         public unsafe void JSObjectGetSet()
         {
-            Func<double, JSObject> createObject = Utils.CreateFunctionDoubleJSObject("a", @"
+            Func<double, JSObject> createObject = Utils.CreateFunctionDoubleJSObject(
+                "a",
+                @"
                 var x = {a, x:42 };
                 return x;
-                ");
+                "
+            );
             JSObject obj = createObject(1);
             Assert.NotNull(obj);
             double? a = obj.GetPropertyAsDouble("a");
@@ -175,7 +212,11 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public unsafe void CreateFunctionDouble()
         {
-            Func<double, double, double> doublePlus = Utils.CreateFunctionDoubleDoubleDouble("a", "b", "return a+b");
+            Func<double, double, double> doublePlus = Utils.CreateFunctionDoubleDoubleDouble(
+                "a",
+                "b",
+                "return a+b"
+            );
             Assert.Equal(3, doublePlus(1, 2));
             Assert.Equal(Math.PI * 2, doublePlus(Math.PI, Math.PI));
         }
@@ -183,7 +224,11 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public unsafe void CreateFunctionDoubleThrow()
         {
-            Func<double, double, double> doubleThrows = Utils.CreateFunctionDoubleDoubleDouble("a", "b", "throw Error('test '+a+' '+b);");
+            Func<double, double, double> doubleThrows = Utils.CreateFunctionDoubleDoubleDouble(
+                "a",
+                "b",
+                "throw Error('test '+a+' '+b);"
+            );
             var ex = Assert.Throws<JSException>(() => doubleThrows(1, 2));
             Assert.Equal("Error: test 1 2", ex.Message);
             Assert.Contains("create_function", ex.StackTrace);
@@ -192,7 +237,11 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public unsafe void CreateFunctionString()
         {
-            Func<string, string, string> stringPlus = Utils.CreateFunctionStringStringString("a", "b", "return a+b");
+            Func<string, string, string> stringPlus = Utils.CreateFunctionStringStringString(
+                "a",
+                "b",
+                "return a+b"
+            );
             Assert.Equal("hello world", stringPlus("hello ", "world"));
             Assert.Equal("hellonull", stringPlus("hello", null));
         }
@@ -200,7 +249,9 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public unsafe void CreateFunctionInternal()
         {
-            Func<bool> internals = Utils.CreateFunctionBool("return INTERNAL.mono_wasm_runtime_is_ready");
+            Func<bool> internals = Utils.CreateFunctionBool(
+                "return INTERNAL.mono_wasm_runtime_is_ready"
+            );
             Assert.True(internals());
         }
 
@@ -221,7 +272,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             var actual = JavaScriptTestHelper.echo1_ByteArray(expected);
             Assert.Equal(expected, actual);
-            if (expected != null) for (int i = 0; i < expected.Length; i++)
+            if (expected != null)
+                for (int i = 0; i < expected.Length; i++)
                 {
                     var actualI = JavaScriptTestHelper.store_ByteArray(expected, i);
                     Assert.Equal(expected[i], actualI);
@@ -241,7 +293,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             var actual = JavaScriptTestHelper.echo1_Int32Array(expected);
             Assert.Equal(expected, actual);
-            if (expected != null) for (int i = 0; i < expected.Length; i++)
+            if (expected != null)
+                for (int i = 0; i < expected.Length; i++)
                 {
                     var actualI = JavaScriptTestHelper.store_Int32Array(expected, i);
                     Assert.Equal(expected[i], actualI);
@@ -250,7 +303,21 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         public static IEnumerable<object[]> MarshalDoubleArrayCases()
         {
-            yield return new object[] { new double[] { 1, 2, 3, double.MaxValue, double.MinValue, double.Pi, double.NegativeInfinity, double.PositiveInfinity, double.NaN } };
+            yield return new object[]
+            {
+                new double[]
+                {
+                    1,
+                    2,
+                    3,
+                    double.MaxValue,
+                    double.MinValue,
+                    double.Pi,
+                    double.NegativeInfinity,
+                    double.PositiveInfinity,
+                    double.NaN,
+                },
+            };
             yield return new object[] { new double[] { } };
             yield return new object[] { null };
         }
@@ -261,7 +328,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             var actual = JavaScriptTestHelper.echo1_DoubleArray(expected);
             Assert.Equal(expected, actual);
-            if (expected != null) for (int i = 0; i < expected.Length; i++)
+            if (expected != null)
+                for (int i = 0; i < expected.Length; i++)
                 {
                     var actualI = JavaScriptTestHelper.store_DoubleArray(expected, i);
                     Assert.Equal(expected[i], actualI);
@@ -270,8 +338,18 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         public static IEnumerable<object[]> MarshalStringArrayCases()
         {
-            yield return new object[] { new string[] { "\u0050\u0159\u00ed\u006c\u0069\u0161", "\u017e\u006c\u0075\u0165\u006f\u0075\u010d\u006b\u00fd" } };
-            yield return new object[] { new string[] { string.Intern("hello"), string.Empty, null } };
+            yield return new object[]
+            {
+                new string[]
+                {
+                    "\u0050\u0159\u00ed\u006c\u0069\u0161",
+                    "\u017e\u006c\u0075\u0165\u006f\u0075\u010d\u006b\u00fd",
+                },
+            };
+            yield return new object[]
+            {
+                new string[] { string.Intern("hello"), string.Empty, null },
+            };
             yield return new object[] { new string[] { } };
             yield return new object[] { null };
         }
@@ -283,31 +361,92 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             var actual = JavaScriptTestHelper.echo1_StringArray(expected);
             Assert.Equal(expected, actual);
 
-            if (expected != null) for (int i = 0; i < expected.Length; i++)
+            if (expected != null)
+                for (int i = 0; i < expected.Length; i++)
                 {
                     var actualI = JavaScriptTestHelper.store_StringArray(expected, i);
                     Assert.Equal(expected[i], actualI);
                 }
         }
 
-        public class SomethingRef
-        {
-        }
+        public class SomethingRef { }
 
-        public class SomethingStruct
-        {
-        }
+        public class SomethingStruct { }
 
         public static IEnumerable<object[]> MarshalObjectArrayCases()
         {
             yield return new object[] { new object[] { string.Intern("hello"), string.Empty } };
-            yield return new object[] { new object[] { 1.1d, new DateTime(2022, 5, 8, 14, 55, 01, DateTimeKind.Utc), false, true } };
-            yield return new object[] { new object[] { new double?(1.1d), new DateTime?(new DateTime(2022, 5, 8, 14, 55, 01, DateTimeKind.Utc)), new bool?(false), new bool?(true) } };
-            yield return new object[] { new object[] { null, new object(), new SomethingRef(), new SomethingStruct(), new Exception("test") } };
+            yield return new object[]
+            {
+                new object[]
+                {
+                    1.1d,
+                    new DateTime(2022, 5, 8, 14, 55, 01, DateTimeKind.Utc),
+                    false,
+                    true,
+                },
+            };
+            yield return new object[]
+            {
+                new object[]
+                {
+                    new double?(1.1d),
+                    new DateTime?(new DateTime(2022, 5, 8, 14, 55, 01, DateTimeKind.Utc)),
+                    new bool?(false),
+                    new bool?(true),
+                },
+            };
+            yield return new object[]
+            {
+                new object[]
+                {
+                    null,
+                    new object(),
+                    new SomethingRef(),
+                    new SomethingStruct(),
+                    new Exception("test"),
+                },
+            };
             yield return new object[] { new object[] { "JSData" } }; // special cased, so we call createData in the test itself
-            yield return new object[] { new object[] { new byte[] { }, new int[] { }, new double[] { }, new string[] { }, new object[] { } } };
-            yield return new object[] { new object[] { new byte[] { 1, 2, 3 }, new int[] { 1, 2, 3 }, new double[] { 1, 2, 3 }, new string[] { "a", "b", "c" }, new object[] { } } };
-            yield return new object[] { new object[] { new object[] { new byte[] { 1, 2, 3 }, new int[] { 1, 2, 3 }, new double[] { 1, 2, 3 }, new string[] { "a", "b", "c" }, new object(), new SomethingRef(), new SomethingStruct(), new Exception("test") } } };
+            yield return new object[]
+            {
+                new object[]
+                {
+                    new byte[] { },
+                    new int[] { },
+                    new double[] { },
+                    new string[] { },
+                    new object[] { },
+                },
+            };
+            yield return new object[]
+            {
+                new object[]
+                {
+                    new byte[] { 1, 2, 3 },
+                    new int[] { 1, 2, 3 },
+                    new double[] { 1, 2, 3 },
+                    new string[] { "a", "b", "c" },
+                    new object[] { },
+                },
+            };
+            yield return new object[]
+            {
+                new object[]
+                {
+                    new object[]
+                    {
+                        new byte[] { 1, 2, 3 },
+                        new int[] { 1, 2, 3 },
+                        new double[] { 1, 2, 3 },
+                        new string[] { "a", "b", "c" },
+                        new object(),
+                        new SomethingRef(),
+                        new SomethingStruct(),
+                        new Exception("test"),
+                    },
+                },
+            };
             yield return new object[] { new object[] { } };
             yield return new object[] { null };
         }
@@ -318,16 +457,24 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             if (expected?.Length == 1 && expected[0] is string s && s == "JSData")
             {
-                expected = new object[] { new object[] { JavaScriptTestHelper.createData("test"), JavaScriptTestHelper.createException("test") } };
+                expected = new object[]
+                {
+                    new object[]
+                    {
+                        JavaScriptTestHelper.createData("test"),
+                        JavaScriptTestHelper.createException("test"),
+                    },
+                };
             }
             var actual = JavaScriptTestHelper.echo1_ObjectArray(expected);
             Assert.Equal(expected, actual);
 
-            if (expected != null) for (int i = 0; i < expected.Length; i++)
-            {
-                var actualI = JavaScriptTestHelper.store_ObjectArray(expected, i);
-                Assert.Equal(expected[i], actualI);
-            }
+            if (expected != null)
+                for (int i = 0; i < expected.Length; i++)
+                {
+                    var actualI = JavaScriptTestHelper.store_ObjectArray(expected, i);
+                    Assert.Equal(expected[i], actualI);
+                }
         }
 
         public static IEnumerable<object[]> MarshalObjectArrayCasesToDouble()
@@ -343,7 +490,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalObjectArrayCasesToDouble))]
         public unsafe void JsImportObjectArrayToDouble(object[]? expected)
         {
-            if (expected != null) for (int i = 0; i < expected.Length; i++)
+            if (expected != null)
+                for (int i = 0; i < expected.Length; i++)
                 {
                     var actualI = JavaScriptTestHelper.store_ObjectArray(expected, i);
                     if (expected[i].GetType() == typeof(char))
@@ -361,26 +509,40 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             yield return new object[] { new object[] { () => { } } };
             yield return new object[] { new object[] { (int a) => { } } };
-            yield return new object[] { new object[] { (int a) => { return a; } } };
+            yield return new object[]
+            {
+                new object[]
+                {
+                    (int a) =>
+                    {
+                        return a;
+                    },
+                },
+            };
             yield return new object[] { new object[] { (dummyDelegate)dummyDelegateA } };
             yield return new object[] { new object[] { 0L } };
             yield return new object[] { new object[] { 0UL } };
             yield return new object[] { new object[] { (sbyte)0 } };
             yield return new object[] { new object[] { (ushort)0 } };
             yield return new object[] { new object[] { new SomethingStruct[] { } } };
-            yield return new object[] { new object[] { new SomethingRef[] { }, } };
-            yield return new object[] { new object[] { new ArraySegment<byte>(new byte[] { 11 }), } };
+            yield return new object[] { new object[] { new SomethingRef[] { } } };
+            yield return new object[]
+            {
+                new object[] { new ArraySegment<byte>(new byte[] { 11 }) },
+            };
         }
+
         delegate void dummyDelegate();
-        static void dummyDelegateA()
-        {
-        }
+
+        static void dummyDelegateA() { }
 
         [Theory]
         [MemberData(nameof(MarshalObjectArrayCasesThrow))]
         public unsafe void JsImportObjectArrayThrows(object[]? expected)
         {
-            Assert.Throws<NotSupportedException>(() => JavaScriptTestHelper.echo1_ObjectArray(expected));
+            Assert.Throws<NotSupportedException>(() =>
+                JavaScriptTestHelper.echo1_ObjectArray(expected)
+            );
         }
 
         [Fact]
@@ -470,7 +632,19 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public unsafe void JsImportSpanOfDouble()
         {
-            var expectedBytes = stackalloc double[] { 0, 1, -1, double.Pi, 42, double.MaxValue, double.MinValue, double.NaN, double.PositiveInfinity, double.NegativeInfinity };
+            var expectedBytes =
+                stackalloc double[] {
+                    0,
+                    1,
+                    -1,
+                    double.Pi,
+                    42,
+                    double.MaxValue,
+                    double.MinValue,
+                    double.NaN,
+                    double.PositiveInfinity,
+                    double.NegativeInfinity,
+                };
             Span<double> expected = new Span<double>(expectedBytes, 10);
             Assert.True(Unsafe.AsPointer(ref expected.GetPinnableReference()) == expectedBytes);
             Span<double> actual = JavaScriptTestHelper.echo1_SpanOfDouble(expected, false);
@@ -489,7 +663,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             var expectedBytes = new byte[] { 88, 1, 2, 42, 0, 127, 255 };
             ArraySegment<byte> expected = new ArraySegment<byte>(expectedBytes, 1, 6);
-            ArraySegment<byte> actual = JavaScriptTestHelper.echo1_ArraySegmentOfByte(expected, false);
+            ArraySegment<byte> actual = JavaScriptTestHelper.echo1_ArraySegmentOfByte(
+                expected,
+                false
+            );
             Assert.Equal(expected.Count, actual.Count);
             Assert.NotEqual(expected[0], expected[1]);
             Assert.Equal(expected.Array, actual.Array);
@@ -503,7 +680,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             var expectedBytes = new int[] { 88, 0, 1, -2, 42, int.MaxValue, int.MinValue };
             ArraySegment<int> expected = new ArraySegment<int>(expectedBytes, 1, 6);
-            ArraySegment<int> actual = JavaScriptTestHelper.echo1_ArraySegmentOfInt32(expected, false);
+            ArraySegment<int> actual = JavaScriptTestHelper.echo1_ArraySegmentOfInt32(
+                expected,
+                false
+            );
             Assert.Equal(expected.Count, actual.Count);
             Assert.NotEqual(expected[0], expected[1]);
             Assert.Equal(expected.Array, actual.Array);
@@ -515,9 +695,25 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public unsafe void JsImportArraySegmentOfDouble()
         {
-            var expectedBytes = new double[] { 88.88, 0, 1, -1, double.Pi, 42, double.MaxValue, double.MinValue, double.NaN, double.PositiveInfinity, double.NegativeInfinity };
+            var expectedBytes = new double[]
+            {
+                88.88,
+                0,
+                1,
+                -1,
+                double.Pi,
+                42,
+                double.MaxValue,
+                double.MinValue,
+                double.NaN,
+                double.PositiveInfinity,
+                double.NegativeInfinity,
+            };
             ArraySegment<double> expected = new ArraySegment<double>(expectedBytes, 1, 10);
-            ArraySegment<double> actual = JavaScriptTestHelper.echo1_ArraySegmentOfDouble(expected, false);
+            ArraySegment<double> actual = JavaScriptTestHelper.echo1_ArraySegmentOfDouble(
+                expected,
+                false
+            );
             Assert.Equal(expected.Count, actual.Count);
             Assert.NotEqual(expected[0], expected[1]);
             Assert.Equal(expected.Array, actual.Array);
@@ -539,23 +735,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalBooleanCases))]
         public void JsImportBoolean(bool value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_Boolean,
                 JavaScriptTestHelper.retrieve1_Boolean,
                 JavaScriptTestHelper.echo1_Boolean,
                 JavaScriptTestHelper.throw1_Boolean,
                 JavaScriptTestHelper.identity1_Boolean,
-                "boolean");
+                "boolean"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalBooleanCases))]
         public void JsExportBoolean(bool value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_Boolean,
                 nameof(JavaScriptTestHelper.EchoBoolean),
-                "boolean");
+                "boolean"
+            );
         }
         #endregion Boolean
 
@@ -574,23 +774,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalCharCases))]
         public void JsImportChar(char value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_Char,
                 JavaScriptTestHelper.retrieve1_Char,
                 JavaScriptTestHelper.echo1_Char,
                 JavaScriptTestHelper.throw1_Char,
                 JavaScriptTestHelper.identity1_Char,
-                "number");
+                "number"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalCharCases))]
         public void JsExportChar(char value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_Char,
                 nameof(JavaScriptTestHelper.EchoChar),
-                "number");
+                "number"
+            );
         }
         #endregion Char
 
@@ -607,23 +811,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalByteCases))]
         public void JsImportByte(byte value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_Byte,
                 JavaScriptTestHelper.retrieve1_Byte,
                 JavaScriptTestHelper.echo1_Byte,
                 JavaScriptTestHelper.throw1_Byte,
                 JavaScriptTestHelper.identity1_Byte,
-                "number");
+                "number"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalByteCases))]
         public void JsExportByte(byte value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_Byte,
                 nameof(JavaScriptTestHelper.EchoByte),
-                "number");
+                "number"
+            );
         }
 
         [Theory]
@@ -652,23 +860,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalInt16Cases))]
         public void JsImportInt16(short value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_Int16,
                 JavaScriptTestHelper.retrieve1_Int16,
                 JavaScriptTestHelper.echo1_Int16,
                 JavaScriptTestHelper.throw1_Int16,
                 JavaScriptTestHelper.identity1_Int16,
-                "number");
+                "number"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalInt16Cases))]
         public void JsExportInt16(short value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_Int16,
                 nameof(JavaScriptTestHelper.EchoInt16),
-                "number");
+                "number"
+            );
         }
         #endregion Int16
 
@@ -697,23 +909,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalInt32Cases))]
         public void JsImportInt32(int value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_Int32,
                 JavaScriptTestHelper.retrieve1_Int32,
                 JavaScriptTestHelper.echo1_Int32,
                 JavaScriptTestHelper.throw1_Int32,
                 JavaScriptTestHelper.identity1_Int32,
-                "number");
+                "number"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalInt32Cases))]
         public void JsExportInt32(int value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_Int32,
                 nameof(JavaScriptTestHelper.EchoInt32),
-                "number");
+                "number"
+            );
         }
 
         [Theory]
@@ -728,8 +944,9 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         #endregion Int32
 
         #region Int52
-        const long MAX_SAFE_INTEGER = 9007199254740991L;// Number.MAX_SAFE_INTEGER
-        const long MIN_SAFE_INTEGER = -9007199254740991L;// Number.MIN_SAFE_INTEGER
+        const long MAX_SAFE_INTEGER = 9007199254740991L; // Number.MAX_SAFE_INTEGER
+        const long MIN_SAFE_INTEGER = -9007199254740991L; // Number.MIN_SAFE_INTEGER
+
         public static IEnumerable<object[]> MarshalInt52Cases()
         {
             yield return new object[] { -1 };
@@ -744,23 +961,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalInt52Cases))]
         public void JsImportInt52(long value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_Int52,
                 JavaScriptTestHelper.retrieve1_Int52,
                 JavaScriptTestHelper.echo1_Int52,
                 JavaScriptTestHelper.throw1_Int52,
                 JavaScriptTestHelper.identity1_Int52,
-                "number");
+                "number"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalInt52Cases))]
         public void JsExportInt52(long value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_Int52,
                 nameof(JavaScriptTestHelper.EchoInt52),
-                "number");
+                "number"
+            );
         }
         #endregion Int52
 
@@ -781,23 +1002,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalBigInt64Cases))]
         public void JsImportBigInt64(long value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_BigInt64,
                 JavaScriptTestHelper.retrieve1_BigInt64,
                 JavaScriptTestHelper.echo1_BigInt64,
                 JavaScriptTestHelper.throw1_BigInt64,
                 JavaScriptTestHelper.identity1_BigInt64,
-                "bigint");
+                "bigint"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalBigInt64Cases))]
         public void JsExportBigInt64(long value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_BigInt64,
                 nameof(JavaScriptTestHelper.EchoBigInt64),
-                "bigint");
+                "bigint"
+            );
         }
         #endregion BigInt64
 
@@ -817,23 +1042,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalDoubleCases))]
         public void JsImportDouble(double value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_Double,
                 JavaScriptTestHelper.retrieve1_Double,
                 JavaScriptTestHelper.echo1_Double,
                 JavaScriptTestHelper.throw1_Double,
                 JavaScriptTestHelper.identity1_Double,
-                "number");
+                "number"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalDoubleCases))]
         public void JsExportDouble(double value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_Double,
                 nameof(JavaScriptTestHelper.EchoDouble),
-                "number");
+                "number"
+            );
         }
         #endregion Double
 
@@ -853,23 +1082,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalSingleCases))]
         public void JsImportSingle(float value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_Single,
                 JavaScriptTestHelper.retrieve1_Single,
                 JavaScriptTestHelper.echo1_Single,
                 JavaScriptTestHelper.throw1_Single,
                 JavaScriptTestHelper.identity1_Single,
-                "number");
+                "number"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalSingleCases))]
         public void JsExportSingle(float value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_Single,
                 nameof(JavaScriptTestHelper.EchoSingle),
-                "number");
+                "number"
+            );
         }
         #endregion Single
 
@@ -888,23 +1121,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalIntPtrCases))]
         public void JsImportIntPtr(IntPtr value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_IntPtr,
                 JavaScriptTestHelper.retrieve1_IntPtr,
                 JavaScriptTestHelper.echo1_IntPtr,
                 JavaScriptTestHelper.throw1_IntPtr,
                 JavaScriptTestHelper.identity1_IntPtr,
-                "number");
+                "number"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalIntPtrCases))]
         public void JsExportIntPtr(IntPtr value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_IntPtr,
                 nameof(JavaScriptTestHelper.EchoIntPtr),
-                "number");
+                "number"
+            );
         }
         #endregion IntPtr
 
@@ -931,7 +1168,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public unsafe void JsExportVoidPtr(IntPtr xvalue)
         {
             void* value = (void*)xvalue;
-            void* res = JavaScriptTestHelper.invoke1_VoidPtr(value, nameof(JavaScriptTestHelper.EchoVoidPtr));
+            void* res = JavaScriptTestHelper.invoke1_VoidPtr(
+                value,
+                nameof(JavaScriptTestHelper.EchoVoidPtr)
+            );
             Assert.True(value == res);
         }
         #endregion VoidPtr
@@ -948,23 +1188,29 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalDateTimeCases))]
         public void JSImportDateTime(DateTime value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_DateTime,
                 JavaScriptTestHelper.retrieve1_DateTime,
                 JavaScriptTestHelper.echo1_DateTime,
                 JavaScriptTestHelper.throw1_DateTime,
                 JavaScriptTestHelper.identity1_DateTime,
-                "object", "Date");
+                "object",
+                "Date"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalDateTimeCases))]
         public void JsExportDateTime(DateTime value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_DateTime,
                 nameof(JavaScriptTestHelper.EchoDateTime),
-                "object", "Date");
+                "object",
+                "Date"
+            );
         }
         #endregion Datetime
 
@@ -980,23 +1226,29 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalDateTimeOffsetCases))]
         public void JSImportDateTimeOffset(DateTimeOffset value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_DateTimeOffset,
                 JavaScriptTestHelper.retrieve1_DateTimeOffset,
                 JavaScriptTestHelper.echo1_DateTimeOffset,
                 JavaScriptTestHelper.throw1_DateTimeOffset,
                 JavaScriptTestHelper.identity1_DateTimeOffset,
-                "object", "Date");
+                "object",
+                "Date"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalDateTimeOffsetCases))]
         public void JsExportDateTimeOffset(DateTimeOffset value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_DateTimeOffset,
                 nameof(JavaScriptTestHelper.EchoDateTimeOffset),
-                "object", "Date");
+                "object",
+                "Date"
+            );
         }
         #endregion DateTimeOffset
 
@@ -1012,23 +1264,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalNullableBooleanCases))]
         public void JsImportNullableBoolean(bool? value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_NullableBoolean,
                 JavaScriptTestHelper.retrieve1_NullableBoolean,
                 JavaScriptTestHelper.echo1_NullableBoolean,
                 JavaScriptTestHelper.throw1_NullableBoolean,
                 JavaScriptTestHelper.identity1_NullableBoolean,
-                "boolean");
+                "boolean"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalNullableBooleanCases))]
         public void JsExportNullableBoolean(bool? value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_NullableBoolean,
                 nameof(JavaScriptTestHelper.EchoNullableBoolean),
-                "boolean");
+                "boolean"
+            );
         }
         #endregion NullableBoolean
 
@@ -1048,23 +1304,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalNullableInt32Cases))]
         public void JsImportNullableInt32(int? value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_NullableInt32,
                 JavaScriptTestHelper.retrieve1_NullableInt32,
                 JavaScriptTestHelper.echo1_NullableInt32,
                 JavaScriptTestHelper.throw1_NullableInt32,
                 JavaScriptTestHelper.identity1_NullableInt32,
-                "number");
+                "number"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalNullableInt32Cases))]
         public void JsExportNullableInt32(int? value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_NullableInt32,
                 nameof(JavaScriptTestHelper.EchoNullableInt32),
-                "number");
+                "number"
+            );
         }
         #endregion NullableInt32
 
@@ -1086,23 +1346,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalNullableBigInt64Cases))]
         public void JsImportNullableBigInt64(long? value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_NullableBigInt64,
                 JavaScriptTestHelper.retrieve1_NullableBigInt64,
                 JavaScriptTestHelper.echo1_NullableBigInt64,
                 JavaScriptTestHelper.throw1_NullableBigInt64,
                 JavaScriptTestHelper.identity1_NullableBigInt64,
-                "bigint");
+                "bigint"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalNullableBigInt64Cases))]
         public void JsExportNullableBigInt64(long? value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_NullableBigInt64,
                 nameof(JavaScriptTestHelper.EchoNullableBigInt64),
-                "bigint");
+                "bigint"
+            );
         }
         #endregion NullableBigInt64
 
@@ -1122,23 +1386,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalNullableIntPtrCases))]
         public void JsImportNullableIntPtr(IntPtr? value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_NullableIntPtr,
                 JavaScriptTestHelper.retrieve1_NullableIntPtr,
                 JavaScriptTestHelper.echo1_NullableIntPtr,
                 JavaScriptTestHelper.throw1_NullableIntPtr,
                 JavaScriptTestHelper.identity1_NullableIntPtr,
-                "number");
+                "number"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalNullableIntPtrCases))]
         public void JsExportNullableIntPtr(IntPtr? value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_NullableIntPtr,
                 nameof(JavaScriptTestHelper.EchoNullableIntPtr),
-                "number");
+                "number"
+            );
         }
         #endregion NullableIntPtr
 
@@ -1159,23 +1427,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalNullableDoubleCases))]
         public void JsImportNullableDouble(double? value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_NullableDouble,
                 JavaScriptTestHelper.retrieve1_NullableDouble,
                 JavaScriptTestHelper.echo1_NullableDouble,
                 JavaScriptTestHelper.throw1_NullableDouble,
                 JavaScriptTestHelper.identity1_NullableDouble,
-                "number");
+                "number"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalNullableDoubleCases))]
         public void JsExportNullableDouble(double? value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_NullableDouble,
                 nameof(JavaScriptTestHelper.EchoNullableDouble),
-                "number");
+                "number"
+            );
         }
         #endregion NullableDouble
 
@@ -1192,23 +1464,27 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalNullableDateTimeCases))]
         public void JsImportNullableDateTime(DateTime? value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_NullableDateTime,
                 JavaScriptTestHelper.retrieve1_NullableDateTime,
                 JavaScriptTestHelper.echo1_NullableDateTime,
                 JavaScriptTestHelper.throw1_NullableDateTime,
                 JavaScriptTestHelper.identity1_NullableDateTime,
-                "object");
+                "object"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalNullableDateTimeCases))]
         public void JsExportNullableDateTime(DateTime? value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_NullableDateTime,
                 nameof(JavaScriptTestHelper.EchoNullableDateTime),
-                "object");
+                "object"
+            );
         }
         #endregion NullableDateTime
 
@@ -1217,8 +1493,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             yield return new object[] { null };
             yield return new object[] { string.Empty };
-            yield return new object[] { "Ahoj" + Random.Shared.Next() };// shorted than 256 -> check in JS interned
-            yield return new object[] { "Ahoj" + new string('!', 300) };// longer than 256 -> no check in JS interned
+            yield return new object[] { "Ahoj" + Random.Shared.Next() }; // shorted than 256 -> check in JS interned
+            yield return new object[] { "Ahoj" + new string('!', 300) }; // longer than 256 -> no check in JS interned
             yield return new object[] { string.Intern("dotnet") };
         }
 
@@ -1226,29 +1502,36 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalStringCases))]
         public void JsImportString(string value)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_String,
                 JavaScriptTestHelper.retrieve1_String,
                 JavaScriptTestHelper.echo1_String,
                 JavaScriptTestHelper.throw1_String,
-                JavaScriptTestHelper.identity1_String
-                , "string");
+                JavaScriptTestHelper.identity1_String,
+                "string"
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalStringCases))]
         public void JsExportString(string value)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_String,
                 nameof(JavaScriptTestHelper.EchoString),
-                "string");
+                "string"
+            );
         }
 
         [Fact]
         public void JsExportStringNoNs()
         {
-            var actual = JavaScriptTestHelper.invoke2_String("test", nameof(JavaScriptTestHelperNoNamespace.EchoString));
+            var actual = JavaScriptTestHelper.invoke2_String(
+                "test",
+                nameof(JavaScriptTestHelperNoNamespace.EchoString)
+            );
             Assert.Equal("test51", actual);
         }
 
@@ -1344,23 +1627,29 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [MemberData(nameof(MarshalObjectCases))]
         public void JSImportObject(object value, string clazz)
         {
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_Object,
                 JavaScriptTestHelper.retrieve1_Object,
                 JavaScriptTestHelper.echo1_Object,
                 JavaScriptTestHelper.throw1_Object,
                 JavaScriptTestHelper.identity1_Object,
-                "object", clazz);
+                "object",
+                clazz
+            );
         }
 
         [Theory]
         [MemberData(nameof(MarshalObjectCases))]
         public void JsExportObject(object value, string clazz)
         {
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_Object,
                 nameof(JavaScriptTestHelper.EchoObject),
-                "object", clazz);
+                "object",
+                clazz
+            );
         }
         #endregion Object
 
@@ -1381,13 +1670,16 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 value = JavaScriptTestHelper.createException("!CreateEx!");
             }
 
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_Exception,
                 JavaScriptTestHelper.retrieve1_Exception,
                 JavaScriptTestHelper.echo1_Exception,
                 JavaScriptTestHelper.throw1_Exception,
                 JavaScriptTestHelper.identity1_Exception,
-                "object", clazz);
+                "object",
+                clazz
+            );
         }
 
         [Theory]
@@ -1399,16 +1691,24 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 value = JavaScriptTestHelper.createException("!CreateEx!");
             }
 
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_Exception,
                 nameof(JavaScriptTestHelper.EchoException),
-                "object", clazz);
+                "object",
+                clazz
+            );
         }
 
         [Fact]
         public void JsExportThrows()
         {
-            var ex = Assert.Throws<ArgumentException>(() => JavaScriptTestHelper.invoke1_String("-t-e-s-t-", nameof(JavaScriptTestHelper.ThrowFromJSExport)));
+            var ex = Assert.Throws<ArgumentException>(() =>
+                JavaScriptTestHelper.invoke1_String(
+                    "-t-e-s-t-",
+                    nameof(JavaScriptTestHelper.ThrowFromJSExport)
+                )
+            );
             Assert.DoesNotContain("Unexpected error", ex.Message);
             Assert.Contains("-t-e-s-t-", ex.Message);
         }
@@ -1424,7 +1724,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public void JsExportCatchToString()
         {
-            var toString = JavaScriptTestHelper.catch1toString("-t-e-s-t-", nameof(JavaScriptTestHelper.ThrowFromJSExport));
+            var toString = JavaScriptTestHelper.catch1toString(
+                "-t-e-s-t-",
+                nameof(JavaScriptTestHelper.ThrowFromJSExport)
+            );
             Assert.DoesNotContain("Unexpected error", toString);
             Assert.Contains("-t-e-s-t-", toString);
             Assert.DoesNotContain(nameof(JavaScriptTestHelper.ThrowFromJSExport), toString);
@@ -1433,7 +1736,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public void JsExportCatchStack()
         {
-            var stack = JavaScriptTestHelper.catch1stack("-t-e-s-t-", nameof(JavaScriptTestHelper.ThrowFromJSExport));
+            var stack = JavaScriptTestHelper.catch1stack(
+                "-t-e-s-t-",
+                nameof(JavaScriptTestHelper.ThrowFromJSExport)
+            );
             Assert.Contains(nameof(JavaScriptTestHelper.ThrowFromJSExport), stack);
             if (PlatformDetection.IsBrowserDomSupportedOrNodeJS)
             {
@@ -1459,13 +1765,16 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 value = JavaScriptTestHelper.createData("!CreateJS!");
             }
 
-            JsImportTest(value,
+            JsImportTest(
+                value,
                 JavaScriptTestHelper.store1_JSObject,
                 JavaScriptTestHelper.retrieve1_JSObject,
                 JavaScriptTestHelper.echo1_JSObject,
                 JavaScriptTestHelper.throw1_JSObject,
                 JavaScriptTestHelper.identity1_JSObject,
-                "object", clazz);
+                "object",
+                clazz
+            );
         }
 
         [Theory]
@@ -1477,10 +1786,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 value = JavaScriptTestHelper.createData("!CreateJS!");
             }
 
-            JsExportTest(value,
+            JsExportTest(
+                value,
                 JavaScriptTestHelper.invoke1_JSObject,
                 nameof(JavaScriptTestHelper.EchoIJSObject),
-                "object", clazz);
+                "object",
+                clazz
+            );
         }
         #endregion JSObject
 
@@ -1492,7 +1804,6 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             JavaScriptTestHelper.store1_Object(new object());
             Assert.Throws<JSException>(() => JavaScriptTestHelper.retrieve1_JSObject());
         }
-
 
         [Fact]
         public void ProxyOfIntThrows()
@@ -1514,7 +1825,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         [Fact]
         public async Task JsImportTaskTypes()
         {
-            for(int i=0;i<100;i++)
+            for (int i = 0; i < 100; i++)
             {
                 object a = new object();
                 Exception e = new Exception();
@@ -1595,7 +1906,6 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             int ms = await JavaScriptTestHelper.sleep_Int(100);
             Assert.Equal(100, ms);
         }
-
 
         [Fact]
         public async Task JsImportTaskEchoComplete()
@@ -1700,7 +2010,6 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             Assert.Equal("Test", task.Result.Message);
         }
 
-
         [Fact]
         public async Task JsImportTaskAwait()
         {
@@ -1716,7 +2025,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
 
-            var res = JavaScriptTestHelper.invoke1_TaskOfInt(tcs.Task, nameof(JavaScriptTestHelper.AwaitTaskOfObject));
+            var res = JavaScriptTestHelper.invoke1_TaskOfInt(
+                tcs.Task,
+                nameof(JavaScriptTestHelper.AwaitTaskOfObject)
+            );
             tcs.SetResult(value);
             await Task.Yield();
             var rr = await res;
@@ -1743,7 +2055,6 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             actual();
             Assert.True(called);
         }
-
 
         [Fact]
         [OuterLoop]
@@ -1794,10 +2105,12 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public void JsImportEcho_ActionIntActionInt()
         {
             int calledA = -1;
-            Action<int> res = JavaScriptTestHelper.echo1_ActionIntActionInt((a) =>
-            {
-                calledA = a;
-            });
+            Action<int> res = JavaScriptTestHelper.echo1_ActionIntActionInt(
+                (a) =>
+                {
+                    calledA = a;
+                }
+            );
             Assert.Equal(-1, calledA);
             res.Invoke(42);
             Assert.Equal(42, calledA);
@@ -1807,10 +2120,13 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public void JsImportCallback_ActionInt()
         {
             int called = -1;
-            JavaScriptTestHelper.back3_ActionInt((a) =>
-            {
-                called = a;
-            }, 42);
+            JavaScriptTestHelper.back3_ActionInt(
+                (a) =>
+                {
+                    called = a;
+                },
+                42
+            );
             Assert.Equal(42, called);
         }
 
@@ -1818,11 +2134,14 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public void JsImportCallback_FunctionIntInt()
         {
             int called = -1;
-            int res = JavaScriptTestHelper.back3_FunctionIntInt((a) =>
-            {
-                called = a;
-                return a;
-            }, 42);
+            int res = JavaScriptTestHelper.back3_FunctionIntInt(
+                (a) =>
+                {
+                    called = a;
+                    return a;
+                },
+                42
+            );
             Assert.Equal(42, called);
             Assert.Equal(42, res);
         }
@@ -1831,11 +2150,14 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public void JsImportBackCallback_FunctionIntInt()
         {
             int called = -1;
-            Func<int, int> res = JavaScriptTestHelper.backback_FuncIntFuncInt((a) =>
-            {
-                called = a;
-                return a;
-            }, 42);
+            Func<int, int> res = JavaScriptTestHelper.backback_FuncIntFuncInt(
+                (a) =>
+                {
+                    called = a;
+                    return a;
+                },
+                42
+            );
             Assert.Equal(-1, called);
             int actual = res.Invoke(42);
             Assert.Equal(84, actual);
@@ -1847,12 +2169,16 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             int calledA = -1;
             int calledB = -1;
-            Func<int, int, int> res = JavaScriptTestHelper.backback_FuncIntIntFuncIntInt((a, b) =>
-            {
-                calledA = a;
-                calledB = b;
-                return a + b;
-            }, 42, 43);
+            Func<int, int, int> res = JavaScriptTestHelper.backback_FuncIntIntFuncIntInt(
+                (a, b) =>
+                {
+                    calledA = a;
+                    calledB = b;
+                    return a + b;
+                },
+                42,
+                43
+            );
             Assert.Equal(-1, calledA);
             Assert.Equal(-1, calledB);
             int actual = res.Invoke(40, 41);
@@ -1866,11 +2192,15 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             int calledA = -1;
             int calledB = -1;
-            JavaScriptTestHelper.back3_ActionIntInt((a, b) =>
-            {
-                calledA = a;
-                calledB = b;
-            }, 42, 43);
+            JavaScriptTestHelper.back3_ActionIntInt(
+                (a, b) =>
+                {
+                    calledA = a;
+                    calledB = b;
+                },
+                42,
+                43
+            );
             Assert.Equal(42, calledA);
             Assert.Equal(43, calledB);
         }
@@ -1880,11 +2210,15 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             long calledA = -1;
             long calledB = -1;
-            JavaScriptTestHelper.back3_ActionLongLong((a, b) =>
-            {
-                calledA = a;
-                calledB = b;
-            }, 42, 43);
+            JavaScriptTestHelper.back3_ActionLongLong(
+                (a, b) =>
+                {
+                    calledA = a;
+                    calledB = b;
+                },
+                42,
+                43
+            );
             Assert.Equal(42, calledA);
             Assert.Equal(43, calledB);
         }
@@ -1894,11 +2228,15 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             int calledA = -1;
             long calledB = -1;
-            JavaScriptTestHelper.back3_ActionIntLong((a, b) =>
-            {
-                calledA = a;
-                calledB = b;
-            }, 42, 43);
+            JavaScriptTestHelper.back3_ActionIntLong(
+                (a, b) =>
+                {
+                    calledA = a;
+                    calledB = b;
+                },
+                42,
+                43
+            );
             Assert.Equal(42, calledA);
             Assert.Equal(43, calledB);
         }
@@ -1908,11 +2246,16 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             int called = -1;
             Exception expected = new Exception("test!!");
-            Exception actual = Assert.Throws<Exception>(() => JavaScriptTestHelper.back3_ActionInt((a) =>
-            {
-                called = a;
-                throw expected;
-            }, 42));
+            Exception actual = Assert.Throws<Exception>(() =>
+                JavaScriptTestHelper.back3_ActionInt(
+                    (a) =>
+                    {
+                        called = a;
+                        throw expected;
+                    },
+                    42
+                )
+            );
             Assert.Equal(42, called);
             Assert.Same(expected, actual);
         }
@@ -1921,11 +2264,14 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         public void JsExportCallback_FunctionIntInt()
         {
             int called = -1;
-            var chain = JavaScriptTestHelper.invoke1_FuncOfIntInt((int a) =>
-            {
-                called = a;
-                return a;
-            }, nameof(JavaScriptTestHelper.BackFuncOfIntInt));
+            var chain = JavaScriptTestHelper.invoke1_FuncOfIntInt(
+                (int a) =>
+                {
+                    called = a;
+                    return a;
+                },
+                nameof(JavaScriptTestHelper.BackFuncOfIntInt)
+            );
 
             Assert.Equal(-1, called);
             var actual = chain(42);
@@ -1938,11 +2284,14 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         {
             int called = -1;
             var expected = new Exception("test!!");
-            var chain = JavaScriptTestHelper.invoke1_FuncOfIntInt((int a) =>
-            {
-                called = a;
-                throw expected;
-            }, nameof(JavaScriptTestHelper.BackFuncOfIntInt));
+            var chain = JavaScriptTestHelper.invoke1_FuncOfIntInt(
+                (int a) =>
+                {
+                    called = a;
+                    throw expected;
+                },
+                nameof(JavaScriptTestHelper.BackFuncOfIntInt)
+            );
 
             Assert.Equal(-1, called);
             var actual = Assert.Throws<Exception>(() => chain(42));
@@ -1959,21 +2308,29 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         #endregion
 
-        private void JsExportTest<T>(T value
-        , Func<T, string, T> invoke, string echoName, string jsType, string? jsClass = null)
+        private void JsExportTest<T>(
+            T value,
+            Func<T, string, T> invoke,
+            string echoName,
+            string jsType,
+            string? jsClass = null
+        )
         {
             T res;
             res = invoke(value, echoName);
             Assert.Equal(value, res);
         }
 
-        private void JsImportTest<T>(T value
-            , Action<T> store1
-            , Func<T> retrieve1
-            , Func<T, T> echo1
-            , Func<T, T> throw1
-            , Func<T, bool> identity1
-            , string jsType, string? jsClass = null)
+        private void JsImportTest<T>(
+            T value,
+            Action<T> store1,
+            Func<T> retrieve1,
+            Func<T, T> echo1,
+            Func<T, T> throw1,
+            Func<T, bool> identity1,
+            string jsType,
+            string? jsClass = null
+        )
         {
             if (value == null)
             {
@@ -1981,7 +2338,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 jsType = "object";
             }
 
-            // invoke 
+            // invoke
             store1(value);
             var res = retrieve1();
             Assert.Equal(value, res);
@@ -2013,7 +2370,6 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             {
                 if (typeof(T) != typeof(long))
                 {
-
                     object resBoxed = JavaScriptTestHelper.echo1_Object(value);
                     // js Number always boxes as double
                     if (typeof(T) == typeof(IntPtr))
@@ -2068,7 +2424,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                         }
                         else if (vt == typeof(DateTimeOffset))
                         {
-                            Assert.Equal(((DateTimeOffset?)(object)value).Value.UtcDateTime, resBoxed);
+                            Assert.Equal(
+                                ((DateTimeOffset?)(object)value).Value.UtcDateTime,
+                                resBoxed
+                            );
                         }
                         else if (vt == typeof(IntPtr))
                         {
@@ -2115,12 +2474,18 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         // js Date doesn't have nanosecond precision
         public static DateTime TrimNano(DateTime date)
         {
-            return new DateTime(date.Ticks - (date.Ticks % TimeSpan.TicksPerMillisecond), DateTimeKind.Utc);
+            return new DateTime(
+                date.Ticks - (date.Ticks % TimeSpan.TicksPerMillisecond),
+                DateTimeKind.Utc
+            );
         }
 
         public static DateTimeOffset TrimNano(DateTimeOffset date)
         {
-            return new DateTime(date.Ticks - (date.Ticks % TimeSpan.TicksPerMillisecond), DateTimeKind.Utc);
+            return new DateTime(
+                date.Ticks - (date.Ticks % TimeSpan.TicksPerMillisecond),
+                DateTimeKind.Utc
+            );
         }
     }
 }

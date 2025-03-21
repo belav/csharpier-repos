@@ -1,11 +1,11 @@
 /* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -20,38 +20,45 @@ using System.Dynamic.Utils;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Runtime.CompilerServices;
-
 #if SILVERLIGHT
 using System.Core;
 #endif
 
 #if CLR2
-namespace Microsoft.Scripting.Ast.Compiler {
+namespace Microsoft.Scripting.Ast.Compiler
+{
 #else
-namespace System.Linq.Expressions.Compiler {
+namespace System.Linq.Expressions.Compiler
+{
 #endif
 #if CLR2 || SILVERLIGHT
     using ILGenerator = OffsetTrackingILGenerator;
 #endif
 
-    internal static class ILGen {
-
-        internal static void Emit(this ILGenerator il, OpCode opcode, MethodBase methodBase) {
+    internal static class ILGen
+    {
+        internal static void Emit(this ILGenerator il, OpCode opcode, MethodBase methodBase)
+        {
             Debug.Assert(methodBase is MethodInfo || methodBase is ConstructorInfo);
 
-            if (methodBase.MemberType == MemberTypes.Constructor) {
+            if (methodBase.MemberType == MemberTypes.Constructor)
+            {
                 il.Emit(opcode, (ConstructorInfo)methodBase);
-            } else {
+            }
+            else
+            {
                 il.Emit(opcode, (MethodInfo)methodBase);
             }
         }
 
         #region Instruction helpers
 
-        internal static void EmitLoadArg(this ILGenerator il, int index) {
+        internal static void EmitLoadArg(this ILGenerator il, int index)
+        {
             Debug.Assert(index >= 0);
 
-            switch (index) {
+            switch (index)
+            {
                 case 0:
                     il.Emit(OpCodes.Ldarg_0);
                     break;
@@ -65,31 +72,42 @@ namespace System.Linq.Expressions.Compiler {
                     il.Emit(OpCodes.Ldarg_3);
                     break;
                 default:
-                    if (index <= Byte.MaxValue) {
+                    if (index <= Byte.MaxValue)
+                    {
                         il.Emit(OpCodes.Ldarg_S, (byte)index);
-                    } else {
+                    }
+                    else
+                    {
                         il.Emit(OpCodes.Ldarg, index);
                     }
                     break;
             }
         }
 
-        internal static void EmitLoadArgAddress(this ILGenerator il, int index) {
+        internal static void EmitLoadArgAddress(this ILGenerator il, int index)
+        {
             Debug.Assert(index >= 0);
 
-            if (index <= Byte.MaxValue) {
+            if (index <= Byte.MaxValue)
+            {
                 il.Emit(OpCodes.Ldarga_S, (byte)index);
-            } else {
+            }
+            else
+            {
                 il.Emit(OpCodes.Ldarga, index);
             }
         }
 
-        internal static void EmitStoreArg(this ILGenerator il, int index) {
+        internal static void EmitStoreArg(this ILGenerator il, int index)
+        {
             Debug.Assert(index >= 0);
 
-            if (index <= Byte.MaxValue) {
+            if (index <= Byte.MaxValue)
+            {
                 il.Emit(OpCodes.Starg_S, (byte)index);
-            } else {
+            }
+            else
+            {
                 il.Emit(OpCodes.Starg, index);
             }
         }
@@ -97,77 +115,125 @@ namespace System.Linq.Expressions.Compiler {
         /// <summary>
         /// Emits a Ldind* instruction for the appropriate type
         /// </summary>
-        internal static void EmitLoadValueIndirect(this ILGenerator il, Type type) {
+        internal static void EmitLoadValueIndirect(this ILGenerator il, Type type)
+        {
             ContractUtils.RequiresNotNull(type, "type");
 
-            if (type.IsValueType) {
-                if (type == typeof(int)) {
+            if (type.IsValueType)
+            {
+                if (type == typeof(int))
+                {
                     il.Emit(OpCodes.Ldind_I4);
-                } else if (type == typeof(uint)) {
+                }
+                else if (type == typeof(uint))
+                {
                     il.Emit(OpCodes.Ldind_U4);
-                } else if (type == typeof(short)) {
+                }
+                else if (type == typeof(short))
+                {
                     il.Emit(OpCodes.Ldind_I2);
-                } else if (type == typeof(ushort)) {
+                }
+                else if (type == typeof(ushort))
+                {
                     il.Emit(OpCodes.Ldind_U2);
-                } else if (type == typeof(long) || type == typeof(ulong)) {
+                }
+                else if (type == typeof(long) || type == typeof(ulong))
+                {
                     il.Emit(OpCodes.Ldind_I8);
-                } else if (type == typeof(char)) {
+                }
+                else if (type == typeof(char))
+                {
                     il.Emit(OpCodes.Ldind_I2);
-                } else if (type == typeof(bool)) {
+                }
+                else if (type == typeof(bool))
+                {
                     il.Emit(OpCodes.Ldind_I1);
-                } else if (type == typeof(float)) {
+                }
+                else if (type == typeof(float))
+                {
                     il.Emit(OpCodes.Ldind_R4);
-                } else if (type == typeof(double)) {
+                }
+                else if (type == typeof(double))
+                {
                     il.Emit(OpCodes.Ldind_R8);
-                } else {
+                }
+                else
+                {
                     il.Emit(OpCodes.Ldobj, type);
                 }
-            } else {
+            }
+            else
+            {
                 il.Emit(OpCodes.Ldind_Ref);
             }
         }
 
-
         /// <summary>
         /// Emits a Stind* instruction for the appropriate type.
         /// </summary>
-        internal static void EmitStoreValueIndirect(this ILGenerator il, Type type) {
+        internal static void EmitStoreValueIndirect(this ILGenerator il, Type type)
+        {
             ContractUtils.RequiresNotNull(type, "type");
 
-            if (type.IsValueType) {
-                if (type == typeof(int)) {
+            if (type.IsValueType)
+            {
+                if (type == typeof(int))
+                {
                     il.Emit(OpCodes.Stind_I4);
-                } else if (type == typeof(short)) {
+                }
+                else if (type == typeof(short))
+                {
                     il.Emit(OpCodes.Stind_I2);
-                } else if (type == typeof(long) || type == typeof(ulong)) {
+                }
+                else if (type == typeof(long) || type == typeof(ulong))
+                {
                     il.Emit(OpCodes.Stind_I8);
-                } else if (type == typeof(char)) {
+                }
+                else if (type == typeof(char))
+                {
                     il.Emit(OpCodes.Stind_I2);
-                } else if (type == typeof(bool)) {
+                }
+                else if (type == typeof(bool))
+                {
                     il.Emit(OpCodes.Stind_I1);
-                } else if (type == typeof(float)) {
+                }
+                else if (type == typeof(float))
+                {
                     il.Emit(OpCodes.Stind_R4);
-                } else if (type == typeof(double)) {
+                }
+                else if (type == typeof(double))
+                {
                     il.Emit(OpCodes.Stind_R8);
-                } else {
+                }
+                else
+                {
                     il.Emit(OpCodes.Stobj, type);
                 }
-            } else {
+            }
+            else
+            {
                 il.Emit(OpCodes.Stind_Ref);
             }
         }
 
         // Emits the Ldelem* instruction for the appropriate type
 
-        internal static void EmitLoadElement(this ILGenerator il, Type type) {
+        internal static void EmitLoadElement(this ILGenerator il, Type type)
+        {
             ContractUtils.RequiresNotNull(type, "type");
 
-            if (!type.IsValueType) {
+            if (!type.IsValueType)
+            {
                 il.Emit(OpCodes.Ldelem_Ref);
-            } else if (type.IsEnum) {
+            }
+            else if (type.IsEnum)
+            {
                 il.Emit(OpCodes.Ldelem, type);
-            } else {
-                switch (Type.GetTypeCode(type)) {
+            }
+            else
+            {
+                switch (Type.GetTypeCode(type))
+                {
                     case TypeCode.Boolean:
                     case TypeCode.SByte:
                         il.Emit(OpCodes.Ldelem_I1);
@@ -208,14 +274,17 @@ namespace System.Linq.Expressions.Compiler {
         /// <summary>
         /// Emits a Stelem* instruction for the appropriate type.
         /// </summary>
-        internal static void EmitStoreElement(this ILGenerator il, Type type) {
+        internal static void EmitStoreElement(this ILGenerator il, Type type)
+        {
             ContractUtils.RequiresNotNull(type, "type");
 
-            if (type.IsEnum) {
+            if (type.IsEnum)
+            {
                 il.Emit(OpCodes.Stelem, type);
                 return;
             }
-            switch (Type.GetTypeCode(type)) {
+            switch (Type.GetTypeCode(type))
+            {
                 case TypeCode.Boolean:
                 case TypeCode.SByte:
                 case TypeCode.Byte:
@@ -241,16 +310,20 @@ namespace System.Linq.Expressions.Compiler {
                     il.Emit(OpCodes.Stelem_R8);
                     break;
                 default:
-                    if (type.IsValueType) {
+                    if (type.IsValueType)
+                    {
                         il.Emit(OpCodes.Stelem, type);
-                    } else {
+                    }
+                    else
+                    {
                         il.Emit(OpCodes.Stelem_Ref);
                     }
                     break;
             }
         }
 
-        internal static void EmitType(this ILGenerator il, Type type) {
+        internal static void EmitType(this ILGenerator il, Type type)
+        {
             ContractUtils.RequiresNotNull(type, "type");
 
             il.Emit(OpCodes.Ldtoken, type);
@@ -261,54 +334,76 @@ namespace System.Linq.Expressions.Compiler {
 
         #region Fields, properties and methods
 
-        internal static void EmitFieldAddress(this ILGenerator il, FieldInfo fi) {
+        internal static void EmitFieldAddress(this ILGenerator il, FieldInfo fi)
+        {
             ContractUtils.RequiresNotNull(fi, "fi");
 
-            if (fi.IsStatic) {
+            if (fi.IsStatic)
+            {
                 il.Emit(OpCodes.Ldsflda, fi);
-            } else {
+            }
+            else
+            {
                 il.Emit(OpCodes.Ldflda, fi);
             }
         }
 
-        internal static void EmitFieldGet(this ILGenerator il, FieldInfo fi) {
+        internal static void EmitFieldGet(this ILGenerator il, FieldInfo fi)
+        {
             ContractUtils.RequiresNotNull(fi, "fi");
 
-            if (fi.IsStatic) {
+            if (fi.IsStatic)
+            {
                 il.Emit(OpCodes.Ldsfld, fi);
-            } else {
+            }
+            else
+            {
                 il.Emit(OpCodes.Ldfld, fi);
             }
         }
 
-        internal static void EmitFieldSet(this ILGenerator il, FieldInfo fi) {
+        internal static void EmitFieldSet(this ILGenerator il, FieldInfo fi)
+        {
             ContractUtils.RequiresNotNull(fi, "fi");
 
-            if (fi.IsStatic) {
+            if (fi.IsStatic)
+            {
                 il.Emit(OpCodes.Stsfld, fi);
-            } else {
+            }
+            else
+            {
                 il.Emit(OpCodes.Stfld, fi);
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        internal static void EmitNew(this ILGenerator il, ConstructorInfo ci) {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1711:IdentifiersShouldNotHaveIncorrectSuffix"
+        )]
+        internal static void EmitNew(this ILGenerator il, ConstructorInfo ci)
+        {
             ContractUtils.RequiresNotNull(ci, "ci");
 
-            if (ci.DeclaringType.ContainsGenericParameters) {
+            if (ci.DeclaringType.ContainsGenericParameters)
+            {
                 throw Error.IllegalNewGenericParams(ci.DeclaringType);
             }
 
             il.Emit(OpCodes.Newobj, ci);
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1711:IdentifiersShouldNotHaveIncorrectSuffix")]
-        internal static void EmitNew(this ILGenerator il, Type type, Type[] paramTypes) {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1711:IdentifiersShouldNotHaveIncorrectSuffix"
+        )]
+        internal static void EmitNew(this ILGenerator il, Type type, Type[] paramTypes)
+        {
             ContractUtils.RequiresNotNull(type, "type");
             ContractUtils.RequiresNotNull(paramTypes, "paramTypes");
 
             ConstructorInfo ci = type.GetConstructor(paramTypes);
-            if (ci == null) throw Error.TypeDoesNotHaveConstructorForTheSignature();
+            if (ci == null)
+                throw Error.TypeDoesNotHaveConstructorForTheSignature();
             il.EmitNew(ci);
         }
 
@@ -316,51 +411,64 @@ namespace System.Linq.Expressions.Compiler {
 
         #region Constants
 
-        internal static void EmitNull(this ILGenerator il) {
+        internal static void EmitNull(this ILGenerator il)
+        {
             il.Emit(OpCodes.Ldnull);
         }
 
-        internal static void EmitString(this ILGenerator il, string value) {
+        internal static void EmitString(this ILGenerator il, string value)
+        {
             ContractUtils.RequiresNotNull(value, "value");
             il.Emit(OpCodes.Ldstr, value);
         }
 
-        internal static void EmitBoolean(this ILGenerator il, bool value) {
-            if (value) {
+        internal static void EmitBoolean(this ILGenerator il, bool value)
+        {
+            if (value)
+            {
                 il.Emit(OpCodes.Ldc_I4_1);
-            } else {
+            }
+            else
+            {
                 il.Emit(OpCodes.Ldc_I4_0);
             }
         }
 
-        internal static void EmitChar(this ILGenerator il, char value) {
+        internal static void EmitChar(this ILGenerator il, char value)
+        {
             il.EmitInt(value);
             il.Emit(OpCodes.Conv_U2);
         }
 
-        internal static void EmitByte(this ILGenerator il, byte value) {
+        internal static void EmitByte(this ILGenerator il, byte value)
+        {
             il.EmitInt(value);
             il.Emit(OpCodes.Conv_U1);
         }
 
-        internal static void EmitSByte(this ILGenerator il, sbyte value) {
+        internal static void EmitSByte(this ILGenerator il, sbyte value)
+        {
             il.EmitInt(value);
             il.Emit(OpCodes.Conv_I1);
         }
 
-        internal static void EmitShort(this ILGenerator il, short value) {
+        internal static void EmitShort(this ILGenerator il, short value)
+        {
             il.EmitInt(value);
             il.Emit(OpCodes.Conv_I2);
         }
 
-        internal static void EmitUShort(this ILGenerator il, ushort value) {
+        internal static void EmitUShort(this ILGenerator il, ushort value)
+        {
             il.EmitInt(value);
             il.Emit(OpCodes.Conv_U2);
         }
 
-        internal static void EmitInt(this ILGenerator il, int value) {
+        internal static void EmitInt(this ILGenerator il, int value)
+        {
             OpCode c;
-            switch (value) {
+            switch (value)
+            {
                 case -1:
                     c = OpCodes.Ldc_I4_M1;
                     break;
@@ -392,9 +500,12 @@ namespace System.Linq.Expressions.Compiler {
                     c = OpCodes.Ldc_I4_8;
                     break;
                 default:
-                    if (value >= -128 && value <= 127) {
+                    if (value >= -128 && value <= 127)
+                    {
                         il.Emit(OpCodes.Ldc_I4_S, (sbyte)value);
-                    } else {
+                    }
+                    else
+                    {
                         il.Emit(OpCodes.Ldc_I4, value);
                     }
                     return;
@@ -402,12 +513,14 @@ namespace System.Linq.Expressions.Compiler {
             il.Emit(c);
         }
 
-        internal static void EmitUInt(this ILGenerator il, uint value) {
+        internal static void EmitUInt(this ILGenerator il, uint value)
+        {
             il.EmitInt((int)value);
             il.Emit(OpCodes.Conv_U4);
         }
 
-        internal static void EmitLong(this ILGenerator il, long value) {
+        internal static void EmitLong(this ILGenerator il, long value)
+        {
             il.Emit(OpCodes.Ldc_I8, value);
 
             //
@@ -419,32 +532,39 @@ namespace System.Linq.Expressions.Compiler {
             il.Emit(OpCodes.Conv_I8);
         }
 
-        internal static void EmitULong(this ILGenerator il, ulong value) {
+        internal static void EmitULong(this ILGenerator il, ulong value)
+        {
             il.Emit(OpCodes.Ldc_I8, (long)value);
             il.Emit(OpCodes.Conv_U8);
         }
 
-        internal static void EmitDouble(this ILGenerator il, double value) {
+        internal static void EmitDouble(this ILGenerator il, double value)
+        {
             il.Emit(OpCodes.Ldc_R8, value);
         }
 
-        internal static void EmitSingle(this ILGenerator il, float value) {
+        internal static void EmitSingle(this ILGenerator il, float value)
+        {
             il.Emit(OpCodes.Ldc_R4, value);
         }
 
         // matches TryEmitConstant
-        internal static bool CanEmitConstant(object value, Type type) {
-            if (value == null || CanEmitILConstant(type)) {
+        internal static bool CanEmitConstant(object value, Type type)
+        {
+            if (value == null || CanEmitILConstant(type))
+            {
                 return true;
             }
 
             Type t = value as Type;
-            if (t != null && ShouldLdtoken(t)) {
+            if (t != null && ShouldLdtoken(t))
+            {
                 return true;
             }
 
             MethodBase mb = value as MethodBase;
-            if (mb != null && ShouldLdtoken(mb)) {
+            if (mb != null && ShouldLdtoken(mb))
+            {
                 return true;
             }
 
@@ -452,8 +572,10 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         // matches TryEmitILConstant
-        private static bool CanEmitILConstant(Type type) {
-            switch (Type.GetTypeCode(type)) {
+        private static bool CanEmitILConstant(Type type)
+        {
+            switch (Type.GetTypeCode(type))
+            {
                 case TypeCode.Boolean:
                 case TypeCode.SByte:
                 case TypeCode.Int16:
@@ -473,17 +595,19 @@ namespace System.Linq.Expressions.Compiler {
             return false;
         }
 
-        internal static void EmitConstant(this ILGenerator il, object value) {
+        internal static void EmitConstant(this ILGenerator il, object value)
+        {
             Debug.Assert(value != null);
             EmitConstant(il, value, value.GetType());
         }
 
-
         //
         // Note: we support emitting more things as IL constants than
         // Linq does
-        internal static void EmitConstant(this ILGenerator il, object value, Type type) {
-            if (value == null) {
+        internal static void EmitConstant(this ILGenerator il, object value, Type type)
+        {
+            if (value == null)
+            {
                 // Smarter than the Linq implementation which uses the initobj
                 // pattern for all value types (works, but requires a local and
                 // more IL)
@@ -492,31 +616,51 @@ namespace System.Linq.Expressions.Compiler {
             }
 
             // Handle the easy cases
-            if (il.TryEmitILConstant(value, type)) {
+            if (il.TryEmitILConstant(value, type))
+            {
                 return;
             }
 
             // Check for a few more types that we support emitting as constants
             Type t = value as Type;
-            if (t != null && ShouldLdtoken(t)) {
+            if (t != null && ShouldLdtoken(t))
+            {
                 il.EmitType(t);
-                if (type != typeof(Type)) {
+                if (type != typeof(Type))
+                {
                     il.Emit(OpCodes.Castclass, type);
                 }
                 return;
             }
 
             MethodBase mb = value as MethodBase;
-            if (mb != null && ShouldLdtoken(mb)) {
+            if (mb != null && ShouldLdtoken(mb))
+            {
                 il.Emit(OpCodes.Ldtoken, mb);
                 Type dt = mb.DeclaringType;
-                if (dt != null && dt.IsGenericType) {
+                if (dt != null && dt.IsGenericType)
+                {
                     il.Emit(OpCodes.Ldtoken, dt);
-                    il.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) }));
-                } else {
-                    il.Emit(OpCodes.Call, typeof(MethodBase).GetMethod("GetMethodFromHandle", new Type[] { typeof(RuntimeMethodHandle) }));
+                    il.Emit(
+                        OpCodes.Call,
+                        typeof(MethodBase).GetMethod(
+                            "GetMethodFromHandle",
+                            new Type[] { typeof(RuntimeMethodHandle), typeof(RuntimeTypeHandle) }
+                        )
+                    );
                 }
-                if (type != typeof(MethodBase)) {
+                else
+                {
+                    il.Emit(
+                        OpCodes.Call,
+                        typeof(MethodBase).GetMethod(
+                            "GetMethodFromHandle",
+                            new Type[] { typeof(RuntimeMethodHandle) }
+                        )
+                    );
+                }
+                if (type != typeof(MethodBase))
+                {
                     il.Emit(OpCodes.Castclass, type);
                 }
                 return;
@@ -525,13 +669,16 @@ namespace System.Linq.Expressions.Compiler {
             throw ContractUtils.Unreachable;
         }
 
-        internal static bool ShouldLdtoken(Type t) {
+        internal static bool ShouldLdtoken(Type t)
+        {
             return t is TypeBuilder || t.IsGenericParameter || t.IsVisible;
         }
 
-        internal static bool ShouldLdtoken(MethodBase mb) {
+        internal static bool ShouldLdtoken(MethodBase mb)
+        {
             // Can't ldtoken on a DynamicMethod
-            if (mb is DynamicMethod) {
+            if (mb is DynamicMethod)
+            {
                 return false;
             }
 
@@ -539,9 +686,10 @@ namespace System.Linq.Expressions.Compiler {
             return dt == null || ShouldLdtoken(dt);
         }
 
-
-        private static bool TryEmitILConstant(this ILGenerator il, object value, Type type) {
-            switch (Type.GetTypeCode(type)) {
+        private static bool TryEmitILConstant(this ILGenerator il, object value, Type type)
+        {
+            switch (Type.GetTypeCode(type))
+            {
                 case TypeCode.Boolean:
                     il.EmitBoolean((bool)value);
                     return true;
@@ -593,12 +741,20 @@ namespace System.Linq.Expressions.Compiler {
 
         #region Linq Conversions
 
-        internal static void EmitConvertToType(this ILGenerator il, Type typeFrom, Type typeTo, bool isChecked) {
-            if (TypeUtils.AreEquivalent(typeFrom, typeTo)) {
+        internal static void EmitConvertToType(
+            this ILGenerator il,
+            Type typeFrom,
+            Type typeTo,
+            bool isChecked
+        )
+        {
+            if (TypeUtils.AreEquivalent(typeFrom, typeTo))
+            {
                 return;
             }
 
-            if (typeFrom == typeof(void) || typeTo == typeof(void)) {
+            if (typeFrom == typeof(void) || typeTo == typeof(void))
+            {
                 throw ContractUtils.Unreachable;
             }
 
@@ -608,66 +764,105 @@ namespace System.Linq.Expressions.Compiler {
             Type nnExprType = TypeUtils.GetNonNullableType(typeFrom);
             Type nnType = TypeUtils.GetNonNullableType(typeTo);
 
-            if (typeFrom.IsInterface || // interface cast
-               typeTo.IsInterface ||
-               typeFrom == typeof(object) || // boxing cast
-               typeTo == typeof(object) ||
-               typeFrom == typeof(System.Enum) ||
-               typeFrom == typeof(System.ValueType) ||
-               TypeUtils.IsLegalExplicitVariantDelegateConversion(typeFrom, typeTo))
+            if (
+                typeFrom.IsInterface
+                || // interface cast
+                typeTo.IsInterface
+                || typeFrom == typeof(object)
+                || // boxing cast
+                typeTo == typeof(object)
+                || typeFrom == typeof(System.Enum)
+                || typeFrom == typeof(System.ValueType)
+                || TypeUtils.IsLegalExplicitVariantDelegateConversion(typeFrom, typeTo)
+            )
             {
                 il.EmitCastToType(typeFrom, typeTo);
-            } else if (isTypeFromNullable || isTypeToNullable) {
+            }
+            else if (isTypeFromNullable || isTypeToNullable)
+            {
                 il.EmitNullableConversion(typeFrom, typeTo, isChecked);
-            } else if (!(TypeUtils.IsConvertible(typeFrom) && TypeUtils.IsConvertible(typeTo)) // primitive runtime conversion
-                       &&
-                       (nnExprType.IsAssignableFrom(nnType) || // down cast
-                       nnType.IsAssignableFrom(nnExprType))) // up cast
+            }
+            else if (
+                !(TypeUtils.IsConvertible(typeFrom) && TypeUtils.IsConvertible(typeTo)) // primitive runtime conversion
+                && (
+                    nnExprType.IsAssignableFrom(nnType)
+                    || // down cast
+                    nnType.IsAssignableFrom(nnExprType)
+                )
+            ) // up cast
             {
                 il.EmitCastToType(typeFrom, typeTo);
-            } else if (typeFrom.IsArray && typeTo.IsArray) {
+            }
+            else if (typeFrom.IsArray && typeTo.IsArray)
+            {
                 // See DevDiv Bugs #94657.
                 il.EmitCastToType(typeFrom, typeTo);
-            } else {
+            }
+            else
+            {
                 il.EmitNumericConversion(typeFrom, typeTo, isChecked);
             }
         }
 
-
-        private static void EmitCastToType(this ILGenerator il, Type typeFrom, Type typeTo) {
-            if (!typeFrom.IsValueType && typeTo.IsValueType) {
+        private static void EmitCastToType(this ILGenerator il, Type typeFrom, Type typeTo)
+        {
+            if (!typeFrom.IsValueType && typeTo.IsValueType)
+            {
                 il.Emit(OpCodes.Unbox_Any, typeTo);
-            } else if (typeFrom.IsValueType && !typeTo.IsValueType) {
+            }
+            else if (typeFrom.IsValueType && !typeTo.IsValueType)
+            {
                 il.Emit(OpCodes.Box, typeFrom);
-                if (typeTo != typeof(object)) {
+                if (typeTo != typeof(object))
+                {
                     il.Emit(OpCodes.Castclass, typeTo);
                 }
-            } else if (!typeFrom.IsValueType && !typeTo.IsValueType) {
+            }
+            else if (!typeFrom.IsValueType && !typeTo.IsValueType)
+            {
                 il.Emit(OpCodes.Castclass, typeTo);
-            } else {
+            }
+            else
+            {
                 throw Error.InvalidCast(typeFrom, typeTo);
             }
         }
 
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        private static void EmitNumericConversion(this ILGenerator il, Type typeFrom, Type typeTo, bool isChecked) {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Maintainability",
+            "CA1502:AvoidExcessiveComplexity"
+        )]
+        private static void EmitNumericConversion(
+            this ILGenerator il,
+            Type typeFrom,
+            Type typeTo,
+            bool isChecked
+        )
+        {
             bool isFromUnsigned = TypeUtils.IsUnsigned(typeFrom);
             bool isFromFloatingPoint = TypeUtils.IsFloatingPoint(typeFrom);
-            if (typeTo == typeof(Single)) {
+            if (typeTo == typeof(Single))
+            {
                 if (isFromUnsigned)
                     il.Emit(OpCodes.Conv_R_Un);
                 il.Emit(OpCodes.Conv_R4);
-            } else if (typeTo == typeof(Double)) {
+            }
+            else if (typeTo == typeof(Double))
+            {
                 if (isFromUnsigned)
                     il.Emit(OpCodes.Conv_R_Un);
                 il.Emit(OpCodes.Conv_R8);
-            } else {
+            }
+            else
+            {
                 TypeCode tc = Type.GetTypeCode(typeTo);
-                if (isChecked) {
+                if (isChecked)
+                {
                     // Overflow checking needs to know if the source value on the IL stack is unsigned or not.
-                    if (isFromUnsigned) {
-                        switch (tc) {
+                    if (isFromUnsigned)
+                    {
+                        switch (tc)
+                        {
                             case TypeCode.SByte:
                                 il.Emit(OpCodes.Conv_Ovf_I1_Un);
                                 break;
@@ -696,8 +891,11 @@ namespace System.Linq.Expressions.Compiler {
                             default:
                                 throw Error.UnhandledConvert(typeTo);
                         }
-                    } else {
-                        switch (tc) {
+                    }
+                    else
+                    {
+                        switch (tc)
+                        {
                             case TypeCode.SByte:
                                 il.Emit(OpCodes.Conv_Ovf_I1);
                                 break;
@@ -727,8 +925,11 @@ namespace System.Linq.Expressions.Compiler {
                                 throw Error.UnhandledConvert(typeTo);
                         }
                     }
-                } else {
-                    switch (tc) {
+                }
+                else
+                {
+                    switch (tc)
+                    {
                         case TypeCode.SByte:
                             il.Emit(OpCodes.Conv_I1);
                             break;
@@ -749,16 +950,22 @@ namespace System.Linq.Expressions.Compiler {
                             il.Emit(OpCodes.Conv_U4);
                             break;
                         case TypeCode.Int64:
-                            if (isFromUnsigned) {
+                            if (isFromUnsigned)
+                            {
                                 il.Emit(OpCodes.Conv_U8);
-                            } else {
+                            }
+                            else
+                            {
                                 il.Emit(OpCodes.Conv_I8);
                             }
                             break;
                         case TypeCode.UInt64:
-                            if (isFromUnsigned || isFromFloatingPoint) {
+                            if (isFromUnsigned || isFromFloatingPoint)
+                            {
                                 il.Emit(OpCodes.Conv_U8);
-                            } else {
+                            }
+                            else
+                            {
                                 il.Emit(OpCodes.Conv_I8);
                             }
                             break;
@@ -769,7 +976,13 @@ namespace System.Linq.Expressions.Compiler {
             }
         }
 
-        private static void EmitNullableToNullableConversion(this ILGenerator il, Type typeFrom, Type typeTo, bool isChecked) {
+        private static void EmitNullableToNullableConversion(
+            this ILGenerator il,
+            Type typeFrom,
+            Type typeTo,
+            bool isChecked
+        )
+        {
             Debug.Assert(TypeUtils.IsNullableType(typeFrom));
             Debug.Assert(TypeUtils.IsNullableType(typeTo));
             Label labIfNull = default(Label);
@@ -803,8 +1016,13 @@ namespace System.Linq.Expressions.Compiler {
             il.Emit(OpCodes.Ldloc, locTo);
         }
 
-
-        private static void EmitNonNullableToNullableConversion(this ILGenerator il, Type typeFrom, Type typeTo, bool isChecked) {
+        private static void EmitNonNullableToNullableConversion(
+            this ILGenerator il,
+            Type typeFrom,
+            Type typeTo,
+            bool isChecked
+        )
+        {
             Debug.Assert(!TypeUtils.IsNullableType(typeFrom));
             Debug.Assert(TypeUtils.IsNullableType(typeTo));
             LocalBuilder locTo = null;
@@ -817,8 +1035,13 @@ namespace System.Linq.Expressions.Compiler {
             il.Emit(OpCodes.Ldloc, locTo);
         }
 
-
-        private static void EmitNullableToNonNullableConversion(this ILGenerator il, Type typeFrom, Type typeTo, bool isChecked) {
+        private static void EmitNullableToNonNullableConversion(
+            this ILGenerator il,
+            Type typeFrom,
+            Type typeTo,
+            bool isChecked
+        )
+        {
             Debug.Assert(TypeUtils.IsNullableType(typeFrom));
             Debug.Assert(!TypeUtils.IsNullableType(typeTo));
             if (typeTo.IsValueType)
@@ -827,8 +1050,13 @@ namespace System.Linq.Expressions.Compiler {
                 il.EmitNullableToReferenceConversion(typeFrom);
         }
 
-
-        private static void EmitNullableToNonNullableStructConversion(this ILGenerator il, Type typeFrom, Type typeTo, bool isChecked) {
+        private static void EmitNullableToNonNullableStructConversion(
+            this ILGenerator il,
+            Type typeFrom,
+            Type typeTo,
+            bool isChecked
+        )
+        {
             Debug.Assert(TypeUtils.IsNullableType(typeFrom));
             Debug.Assert(!TypeUtils.IsNullableType(typeTo));
             Debug.Assert(typeTo.IsValueType);
@@ -841,16 +1069,21 @@ namespace System.Linq.Expressions.Compiler {
             il.EmitConvertToType(nnTypeFrom, typeTo, isChecked);
         }
 
-
-        private static void EmitNullableToReferenceConversion(this ILGenerator il, Type typeFrom) {
+        private static void EmitNullableToReferenceConversion(this ILGenerator il, Type typeFrom)
+        {
             Debug.Assert(TypeUtils.IsNullableType(typeFrom));
             // We've got a conversion from nullable to Object, ValueType, Enum, etc.  Just box it so that
-            // we get the nullable semantics.  
+            // we get the nullable semantics.
             il.Emit(OpCodes.Box, typeFrom);
         }
 
-
-        private static void EmitNullableConversion(this ILGenerator il, Type typeFrom, Type typeTo, bool isChecked) {
+        private static void EmitNullableConversion(
+            this ILGenerator il,
+            Type typeFrom,
+            Type typeTo,
+            bool isChecked
+        )
+        {
             bool isTypeFromNullable = TypeUtils.IsNullableType(typeFrom);
             bool isTypeToNullable = TypeUtils.IsNullableType(typeTo);
             Debug.Assert(isTypeFromNullable || isTypeToNullable);
@@ -862,22 +1095,28 @@ namespace System.Linq.Expressions.Compiler {
                 il.EmitNonNullableToNullableConversion(typeFrom, typeTo, isChecked);
         }
 
-
-        internal static void EmitHasValue(this ILGenerator il, Type nullableType) {
-            MethodInfo mi = nullableType.GetMethod("get_HasValue", BindingFlags.Instance | BindingFlags.Public);
+        internal static void EmitHasValue(this ILGenerator il, Type nullableType)
+        {
+            MethodInfo mi = nullableType.GetMethod(
+                "get_HasValue",
+                BindingFlags.Instance | BindingFlags.Public
+            );
             Debug.Assert(nullableType.IsValueType);
             il.Emit(OpCodes.Call, mi);
         }
 
-
-        internal static void EmitGetValue(this ILGenerator il, Type nullableType) {
-            MethodInfo mi = nullableType.GetMethod("get_Value", BindingFlags.Instance | BindingFlags.Public);
+        internal static void EmitGetValue(this ILGenerator il, Type nullableType)
+        {
+            MethodInfo mi = nullableType.GetMethod(
+                "get_Value",
+                BindingFlags.Instance | BindingFlags.Public
+            );
             Debug.Assert(nullableType.IsValueType);
             il.Emit(OpCodes.Call, mi);
         }
 
-
-        internal static void EmitGetValueOrDefault(this ILGenerator il, Type nullableType) {
+        internal static void EmitGetValueOrDefault(this ILGenerator il, Type nullableType)
+        {
             MethodInfo mi = nullableType.GetMethod("GetValueOrDefault", System.Type.EmptyTypes);
             Debug.Assert(nullableType.IsValueType);
             il.Emit(OpCodes.Call, mi);
@@ -891,12 +1130,14 @@ namespace System.Linq.Expressions.Compiler {
         /// Emits an array of constant values provided in the given list.
         /// The array is strongly typed.
         /// </summary>
-        internal static void EmitArray<T>(this ILGenerator il, IList<T> items) {
+        internal static void EmitArray<T>(this ILGenerator il, IList<T> items)
+        {
             ContractUtils.RequiresNotNull(items, "items");
 
             il.EmitInt(items.Count);
             il.Emit(OpCodes.Newarr, typeof(T));
-            for (int i = 0; i < items.Count; i++) {
+            for (int i = 0; i < items.Count; i++)
+            {
                 il.Emit(OpCodes.Dup);
                 il.EmitInt(i);
                 il.EmitConstant(items[i], typeof(T));
@@ -908,14 +1149,22 @@ namespace System.Linq.Expressions.Compiler {
         /// Emits an array of values of count size.  The items are emitted via the callback
         /// which is provided with the current item index to emit.
         /// </summary>
-        internal static void EmitArray(this ILGenerator il, Type elementType, int count, Action<int> emit) {
+        internal static void EmitArray(
+            this ILGenerator il,
+            Type elementType,
+            int count,
+            Action<int> emit
+        )
+        {
             ContractUtils.RequiresNotNull(elementType, "elementType");
             ContractUtils.RequiresNotNull(emit, "emit");
-            if (count < 0) throw Error.CountCannotBeNegative();
+            if (count < 0)
+                throw Error.CountCannotBeNegative();
 
             il.EmitInt(count);
             il.Emit(OpCodes.Newarr, elementType);
-            for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++)
+            {
                 il.Emit(OpCodes.Dup);
                 il.EmitInt(i);
 
@@ -926,20 +1175,26 @@ namespace System.Linq.Expressions.Compiler {
         }
 
         /// <summary>
-        /// Emits an array construction code.  
+        /// Emits an array construction code.
         /// The code assumes that bounds for all dimensions
         /// are already emitted.
         /// </summary>
-        internal static void EmitArray(this ILGenerator il, Type arrayType) {
+        internal static void EmitArray(this ILGenerator il, Type arrayType)
+        {
             ContractUtils.RequiresNotNull(arrayType, "arrayType");
-            if (!arrayType.IsArray) throw Error.ArrayTypeMustBeArray();
+            if (!arrayType.IsArray)
+                throw Error.ArrayTypeMustBeArray();
 
             int rank = arrayType.GetArrayRank();
-            if (rank == 1) {
+            if (rank == 1)
+            {
                 il.Emit(OpCodes.Newarr, arrayType.GetElementType());
-            } else {
+            }
+            else
+            {
                 Type[] types = new Type[rank];
-                for (int i = 0; i < rank; i++) {
+                for (int i = 0; i < rank; i++)
+                {
                     types[i] = typeof(int);
                 }
                 il.EmitNew(arrayType, types);
@@ -950,43 +1205,60 @@ namespace System.Linq.Expressions.Compiler {
 
         #region Support for emitting constants
 
-        internal static void EmitDecimal(this ILGenerator il, decimal value) {
-            if (Decimal.Truncate(value) == value) {
-                if (Int32.MinValue <= value && value <= Int32.MaxValue) {
+        internal static void EmitDecimal(this ILGenerator il, decimal value)
+        {
+            if (Decimal.Truncate(value) == value)
+            {
+                if (Int32.MinValue <= value && value <= Int32.MaxValue)
+                {
                     int intValue = Decimal.ToInt32(value);
                     il.EmitInt(intValue);
                     il.EmitNew(typeof(Decimal).GetConstructor(new Type[] { typeof(int) }));
-                } else if (Int64.MinValue <= value && value <= Int64.MaxValue) {
+                }
+                else if (Int64.MinValue <= value && value <= Int64.MaxValue)
+                {
                     long longValue = Decimal.ToInt64(value);
                     il.EmitLong(longValue);
                     il.EmitNew(typeof(Decimal).GetConstructor(new Type[] { typeof(long) }));
-                } else {
+                }
+                else
+                {
                     il.EmitDecimalBits(value);
                 }
-            } else {
+            }
+            else
+            {
                 il.EmitDecimalBits(value);
             }
         }
 
-        private static void EmitDecimalBits(this ILGenerator il, decimal value) {
+        private static void EmitDecimalBits(this ILGenerator il, decimal value)
+        {
             int[] bits = Decimal.GetBits(value);
             il.EmitInt(bits[0]);
             il.EmitInt(bits[1]);
             il.EmitInt(bits[2]);
             il.EmitBoolean((bits[3] & 0x80000000) != 0);
             il.EmitByte((byte)(bits[3] >> 16));
-            il.EmitNew(typeof(decimal).GetConstructor(new Type[] { typeof(int), typeof(int), typeof(int), typeof(bool), typeof(byte) }));
+            il.EmitNew(
+                typeof(decimal).GetConstructor(
+                    new Type[] { typeof(int), typeof(int), typeof(int), typeof(bool), typeof(byte) }
+                )
+            );
         }
 
         /// <summary>
         /// Emits default(T)
         /// Semantics match C# compiler behavior
         /// </summary>
-        internal static void EmitDefault(this ILGenerator il, Type type) {
-            switch (Type.GetTypeCode(type)) {
+        internal static void EmitDefault(this ILGenerator il, Type type)
+        {
+            switch (Type.GetTypeCode(type))
+            {
                 case TypeCode.Object:
                 case TypeCode.DateTime:
-                    if (type.IsValueType) {
+                    if (type.IsValueType)
+                    {
                         // Type.GetTypeCode on an enum returns the underlying
                         // integer TypeCode, so we won't get here.
                         Debug.Assert(!type.IsEnum);
@@ -998,7 +1270,9 @@ namespace System.Linq.Expressions.Compiler {
                         il.Emit(OpCodes.Ldloca, lb);
                         il.Emit(OpCodes.Initobj, type);
                         il.Emit(OpCodes.Ldloc, lb);
-                    } else {
+                    }
+                    else
+                    {
                         il.Emit(OpCodes.Ldnull);
                     }
                     break;
@@ -1036,7 +1310,10 @@ namespace System.Linq.Expressions.Compiler {
 
                 case TypeCode.Decimal:
                     il.Emit(OpCodes.Ldc_I4_0);
-                    il.Emit(OpCodes.Newobj, typeof(Decimal).GetConstructor(new Type[] { typeof(int) }));
+                    il.Emit(
+                        OpCodes.Newobj,
+                        typeof(Decimal).GetConstructor(new Type[] { typeof(int) })
+                    );
                     break;
 
                 default:

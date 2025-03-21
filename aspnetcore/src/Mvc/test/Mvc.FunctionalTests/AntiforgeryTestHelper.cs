@@ -8,8 +8,8 @@ namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
 public static class AntiforgeryTestHelper
 {
-    public static string RetrieveAntiforgeryToken(string htmlContent)
-        => RetrieveAntiforgeryToken(htmlContent, actionUrl: string.Empty);
+    public static string RetrieveAntiforgeryToken(string htmlContent) =>
+        RetrieveAntiforgeryToken(htmlContent, actionUrl: string.Empty);
 
     public static string RetrieveAntiforgeryToken(string htmlContent, string actionUrl)
     {
@@ -26,11 +26,7 @@ public static class AntiforgeryTestHelper
         var cookieKey = cookie[0];
         var cookieData = cookie[1];
 
-        return new CookieMetadata()
-        {
-            Key = cookieKey,
-            Value = cookieData
-        };
+        return new CookieMetadata() { Key = cookieKey, Value = cookieData };
     }
 
     public class CookieMetadata

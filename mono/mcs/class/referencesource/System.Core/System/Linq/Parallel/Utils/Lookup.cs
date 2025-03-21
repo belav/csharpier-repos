@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -116,7 +116,10 @@ namespace System.Linq.Parallel
         {
             if (m_comparer.Equals(grouping.Key, default(TKey)))
             {
-                Contract.Assert(m_defaultKeyGrouping == null, "Cannot insert two groupings with the default key into a lookup.");
+                Contract.Assert(
+                    m_defaultKeyGrouping == null,
+                    "Cannot insert two groupings with the default key into a lookup."
+                );
 
                 m_defaultKeyGrouping = grouping;
             }

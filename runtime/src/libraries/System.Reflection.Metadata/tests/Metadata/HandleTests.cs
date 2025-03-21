@@ -50,7 +50,9 @@ namespace System.Reflection.Metadata.Tests
         [Fact]
         public void HandleConversionGivesCorrectKind()
         {
-            var expectedKinds = new SortedSet<HandleKind>((HandleKind[])Enum.GetValues(typeof(HandleKind)));
+            var expectedKinds = new SortedSet<HandleKind>(
+                (HandleKind[])Enum.GetValues(typeof(HandleKind))
+            );
 
             Action<Handle, HandleKind> assert = (handle, expectedKind) =>
             {
@@ -79,10 +81,16 @@ namespace System.Reflection.Metadata.Tests
             assert(default(PropertyDefinitionHandle), HandleKind.PropertyDefinition);
             assert(default(ParameterHandle), HandleKind.Parameter);
             assert(default(GenericParameterHandle), HandleKind.GenericParameter);
-            assert(default(GenericParameterConstraintHandle), HandleKind.GenericParameterConstraint);
+            assert(
+                default(GenericParameterConstraintHandle),
+                HandleKind.GenericParameterConstraint
+            );
             assert(default(ModuleReferenceHandle), HandleKind.ModuleReference);
             assert(default(CustomAttributeHandle), HandleKind.CustomAttribute);
-            assert(default(DeclarativeSecurityAttributeHandle), HandleKind.DeclarativeSecurityAttribute);
+            assert(
+                default(DeclarativeSecurityAttributeHandle),
+                HandleKind.DeclarativeSecurityAttribute
+            );
             assert(default(ManifestResourceHandle), HandleKind.ManifestResource);
             assert(default(ConstantHandle), HandleKind.Constant);
             assert(default(ManifestResourceHandle), HandleKind.ManifestResource);
@@ -102,286 +110,905 @@ namespace System.Reflection.Metadata.Tests
             assert(default(ImportScopeHandle), HandleKind.ImportScope);
             assert(default(CustomDebugInformationHandle), HandleKind.CustomDebugInformation);
 
-            Assert.True(expectedKinds.Count == 0, "Some handles are missing from this test: " + string.Join("," + Environment.NewLine, expectedKinds));
+            Assert.True(
+                expectedKinds.Count == 0,
+                "Some handles are missing from this test: "
+                    + string.Join("," + Environment.NewLine, expectedKinds)
+            );
         }
 
         [Fact]
         public void Conversions_Handles()
         {
             Assert.Equal(1, ((ModuleDefinitionHandle)new Handle((byte)HandleType.Module, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ModuleDefinitionHandle)new Handle((byte)HandleType.Module, 0x00ffffff)).RowId);
+            Assert.Equal(
+                0x00ffffff,
+                ((ModuleDefinitionHandle)new Handle((byte)HandleType.Module, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((AssemblyDefinitionHandle)new Handle((byte)HandleType.Assembly, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((AssemblyDefinitionHandle)new Handle((byte)HandleType.Assembly, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((AssemblyDefinitionHandle)new Handle((byte)HandleType.Assembly, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((AssemblyDefinitionHandle)new Handle((byte)HandleType.Assembly, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((InterfaceImplementationHandle)new Handle((byte)HandleType.InterfaceImpl, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((InterfaceImplementationHandle)new Handle((byte)HandleType.InterfaceImpl, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((InterfaceImplementationHandle)new Handle((byte)HandleType.InterfaceImpl, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (InterfaceImplementationHandle)
+                        new Handle((byte)HandleType.InterfaceImpl, 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((MethodDefinitionHandle)new Handle((byte)HandleType.MethodDef, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((MethodDefinitionHandle)new Handle((byte)HandleType.MethodDef, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((MethodDefinitionHandle)new Handle((byte)HandleType.MethodDef, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((MethodDefinitionHandle)new Handle((byte)HandleType.MethodDef, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((MethodSpecificationHandle)new Handle((byte)HandleType.MethodSpec, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((MethodSpecificationHandle)new Handle((byte)HandleType.MethodSpec, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((MethodSpecificationHandle)new Handle((byte)HandleType.MethodSpec, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (MethodSpecificationHandle)new Handle((byte)HandleType.MethodSpec, 0x00ffffff)
+                ).RowId
+            );
 
             Assert.Equal(1, ((TypeDefinitionHandle)new Handle((byte)HandleType.TypeDef, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((TypeDefinitionHandle)new Handle((byte)HandleType.TypeDef, 0x00ffffff)).RowId);
+            Assert.Equal(
+                0x00ffffff,
+                ((TypeDefinitionHandle)new Handle((byte)HandleType.TypeDef, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((ExportedTypeHandle)new Handle((byte)HandleType.ExportedType, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ExportedTypeHandle)new Handle((byte)HandleType.ExportedType, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((ExportedTypeHandle)new Handle((byte)HandleType.ExportedType, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((ExportedTypeHandle)new Handle((byte)HandleType.ExportedType, 0x00ffffff)).RowId
+            );
 
             Assert.Equal(1, ((TypeReferenceHandle)new Handle((byte)HandleType.TypeRef, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((TypeReferenceHandle)new Handle((byte)HandleType.TypeRef, 0x00ffffff)).RowId);
+            Assert.Equal(
+                0x00ffffff,
+                ((TypeReferenceHandle)new Handle((byte)HandleType.TypeRef, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((TypeSpecificationHandle)new Handle((byte)HandleType.TypeSpec, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((TypeSpecificationHandle)new Handle((byte)HandleType.TypeSpec, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((TypeSpecificationHandle)new Handle((byte)HandleType.TypeSpec, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((TypeSpecificationHandle)new Handle((byte)HandleType.TypeSpec, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((MemberReferenceHandle)new Handle((byte)HandleType.MemberRef, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((MemberReferenceHandle)new Handle((byte)HandleType.MemberRef, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((MemberReferenceHandle)new Handle((byte)HandleType.MemberRef, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((MemberReferenceHandle)new Handle((byte)HandleType.MemberRef, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((FieldDefinitionHandle)new Handle((byte)HandleType.FieldDef, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((FieldDefinitionHandle)new Handle((byte)HandleType.FieldDef, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((FieldDefinitionHandle)new Handle((byte)HandleType.FieldDef, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((FieldDefinitionHandle)new Handle((byte)HandleType.FieldDef, 0x00ffffff)).RowId
+            );
 
             Assert.Equal(1, ((EventDefinitionHandle)new Handle((byte)HandleType.Event, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((EventDefinitionHandle)new Handle((byte)HandleType.Event, 0x00ffffff)).RowId);
+            Assert.Equal(
+                0x00ffffff,
+                ((EventDefinitionHandle)new Handle((byte)HandleType.Event, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((PropertyDefinitionHandle)new Handle((byte)HandleType.Property, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((PropertyDefinitionHandle)new Handle((byte)HandleType.Property, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((PropertyDefinitionHandle)new Handle((byte)HandleType.Property, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((PropertyDefinitionHandle)new Handle((byte)HandleType.Property, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((StandaloneSignatureHandle)new Handle((byte)HandleType.Signature, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((StandaloneSignatureHandle)new Handle((byte)HandleType.Signature, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((StandaloneSignatureHandle)new Handle((byte)HandleType.Signature, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (StandaloneSignatureHandle)new Handle((byte)HandleType.Signature, 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((MemberReferenceHandle)new Handle((byte)HandleType.MemberRef, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((MemberReferenceHandle)new Handle((byte)HandleType.MemberRef, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((MemberReferenceHandle)new Handle((byte)HandleType.MemberRef, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((MemberReferenceHandle)new Handle((byte)HandleType.MemberRef, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((FieldDefinitionHandle)new Handle((byte)HandleType.FieldDef, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((FieldDefinitionHandle)new Handle((byte)HandleType.FieldDef, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((FieldDefinitionHandle)new Handle((byte)HandleType.FieldDef, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((FieldDefinitionHandle)new Handle((byte)HandleType.FieldDef, 0x00ffffff)).RowId
+            );
 
             Assert.Equal(1, ((EventDefinitionHandle)new Handle((byte)HandleType.Event, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((EventDefinitionHandle)new Handle((byte)HandleType.Event, 0x00ffffff)).RowId);
+            Assert.Equal(
+                0x00ffffff,
+                ((EventDefinitionHandle)new Handle((byte)HandleType.Event, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((PropertyDefinitionHandle)new Handle((byte)HandleType.Property, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((PropertyDefinitionHandle)new Handle((byte)HandleType.Property, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((PropertyDefinitionHandle)new Handle((byte)HandleType.Property, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((PropertyDefinitionHandle)new Handle((byte)HandleType.Property, 0x00ffffff)).RowId
+            );
 
             Assert.Equal(1, ((ParameterHandle)new Handle((byte)HandleType.ParamDef, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ParameterHandle)new Handle((byte)HandleType.ParamDef, 0x00ffffff)).RowId);
+            Assert.Equal(
+                0x00ffffff,
+                ((ParameterHandle)new Handle((byte)HandleType.ParamDef, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((GenericParameterHandle)new Handle((byte)HandleType.GenericParam, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((GenericParameterHandle)new Handle((byte)HandleType.GenericParam, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((GenericParameterHandle)new Handle((byte)HandleType.GenericParam, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (GenericParameterHandle)new Handle((byte)HandleType.GenericParam, 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((GenericParameterConstraintHandle)new Handle((byte)HandleType.GenericParamConstraint, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((GenericParameterConstraintHandle)new Handle((byte)HandleType.GenericParamConstraint, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                (
+                    (GenericParameterConstraintHandle)
+                        new Handle((byte)HandleType.GenericParamConstraint, 1)
+                ).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (GenericParameterConstraintHandle)
+                        new Handle((byte)HandleType.GenericParamConstraint, 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((ModuleReferenceHandle)new Handle((byte)HandleType.ModuleRef, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ModuleReferenceHandle)new Handle((byte)HandleType.ModuleRef, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((ModuleReferenceHandle)new Handle((byte)HandleType.ModuleRef, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((ModuleReferenceHandle)new Handle((byte)HandleType.ModuleRef, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((CustomAttributeHandle)new Handle((byte)HandleType.CustomAttribute, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((CustomAttributeHandle)new Handle((byte)HandleType.CustomAttribute, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((CustomAttributeHandle)new Handle((byte)HandleType.CustomAttribute, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (CustomAttributeHandle)new Handle((byte)HandleType.CustomAttribute, 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((DeclarativeSecurityAttributeHandle)new Handle((byte)HandleType.DeclSecurity, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((DeclarativeSecurityAttributeHandle)new Handle((byte)HandleType.DeclSecurity, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                (
+                    (DeclarativeSecurityAttributeHandle)new Handle((byte)HandleType.DeclSecurity, 1)
+                ).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (DeclarativeSecurityAttributeHandle)
+                        new Handle((byte)HandleType.DeclSecurity, 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((ManifestResourceHandle)new Handle((byte)HandleType.ManifestResource, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ManifestResourceHandle)new Handle((byte)HandleType.ManifestResource, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((ManifestResourceHandle)new Handle((byte)HandleType.ManifestResource, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (ManifestResourceHandle)
+                        new Handle((byte)HandleType.ManifestResource, 0x00ffffff)
+                ).RowId
+            );
 
             Assert.Equal(1, ((ConstantHandle)new Handle((byte)HandleType.Constant, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ConstantHandle)new Handle((byte)HandleType.Constant, 0x00ffffff)).RowId);
+            Assert.Equal(
+                0x00ffffff,
+                ((ConstantHandle)new Handle((byte)HandleType.Constant, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((ManifestResourceHandle)new Handle((byte)HandleType.ManifestResource, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ManifestResourceHandle)new Handle((byte)HandleType.ManifestResource, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((ManifestResourceHandle)new Handle((byte)HandleType.ManifestResource, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (ManifestResourceHandle)
+                        new Handle((byte)HandleType.ManifestResource, 0x00ffffff)
+                ).RowId
+            );
 
             Assert.Equal(1, ((AssemblyFileHandle)new Handle((byte)HandleType.File, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((AssemblyFileHandle)new Handle((byte)HandleType.File, 0x00ffffff)).RowId);
+            Assert.Equal(
+                0x00ffffff,
+                ((AssemblyFileHandle)new Handle((byte)HandleType.File, 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((MethodImplementationHandle)new Handle((byte)HandleType.MethodImpl, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((MethodImplementationHandle)new Handle((byte)HandleType.MethodImpl, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((MethodImplementationHandle)new Handle((byte)HandleType.MethodImpl, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (MethodImplementationHandle)new Handle((byte)HandleType.MethodImpl, 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((AssemblyReferenceHandle)new Handle((byte)HandleType.AssemblyRef, 1)).RowId);
-            Assert.Equal(0x00ffffff, ((AssemblyReferenceHandle)new Handle((byte)HandleType.AssemblyRef, 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((AssemblyReferenceHandle)new Handle((byte)HandleType.AssemblyRef, 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (AssemblyReferenceHandle)new Handle((byte)HandleType.AssemblyRef, 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((UserStringHandle)new Handle((byte)HandleType.UserString, 1)).GetHeapOffset());
-            Assert.Equal(0x00ffffff, ((UserStringHandle)new Handle((byte)HandleType.UserString, 0x00ffffff)).GetHeapOffset());
+            Assert.Equal(
+                1,
+                ((UserStringHandle)new Handle((byte)HandleType.UserString, 1)).GetHeapOffset()
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (UserStringHandle)new Handle((byte)HandleType.UserString, 0x00ffffff)
+                ).GetHeapOffset()
+            );
 
             Assert.Equal(1, ((GuidHandle)new Handle((byte)HandleType.Guid, 1)).Index);
-            Assert.Equal(0x1fffffff, ((GuidHandle)new Handle((byte)HandleType.Guid, 0x1fffffff)).Index);
+            Assert.Equal(
+                0x1fffffff,
+                ((GuidHandle)new Handle((byte)HandleType.Guid, 0x1fffffff)).Index
+            );
 
-            Assert.Equal(1, ((NamespaceDefinitionHandle)new Handle((byte)HandleType.Namespace, 1)).GetHeapOffset());
-            Assert.Equal(0x1fffffff, ((NamespaceDefinitionHandle)new Handle((byte)HandleType.Namespace, 0x1fffffff)).GetHeapOffset());
+            Assert.Equal(
+                1,
+                (
+                    (NamespaceDefinitionHandle)new Handle((byte)HandleType.Namespace, 1)
+                ).GetHeapOffset()
+            );
+            Assert.Equal(
+                0x1fffffff,
+                (
+                    (NamespaceDefinitionHandle)new Handle((byte)HandleType.Namespace, 0x1fffffff)
+                ).GetHeapOffset()
+            );
 
             Assert.Equal(1, ((StringHandle)new Handle((byte)HandleType.String, 1)).GetHeapOffset());
-            Assert.Equal(0x1fffffff, ((StringHandle)new Handle((byte)HandleType.String, 0x1fffffff)).GetHeapOffset());
+            Assert.Equal(
+                0x1fffffff,
+                ((StringHandle)new Handle((byte)HandleType.String, 0x1fffffff)).GetHeapOffset()
+            );
 
             Assert.Equal(1, ((BlobHandle)new Handle((byte)HandleType.Blob, 1)).GetHeapOffset());
-            Assert.Equal(0x1fffffff, ((BlobHandle)new Handle((byte)HandleType.Blob, 0x1fffffff)).GetHeapOffset());
+            Assert.Equal(
+                0x1fffffff,
+                ((BlobHandle)new Handle((byte)HandleType.Blob, 0x1fffffff)).GetHeapOffset()
+            );
         }
 
         [Fact]
         public void Conversions_EntityHandles()
         {
-            Assert.Equal(1, ((ModuleDefinitionHandle)new EntityHandle(TokenTypeIds.Module | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ModuleDefinitionHandle)new EntityHandle(TokenTypeIds.Module | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((ModuleDefinitionHandle)new EntityHandle(TokenTypeIds.Module | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((ModuleDefinitionHandle)new EntityHandle(TokenTypeIds.Module | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((AssemblyDefinitionHandle)new EntityHandle(TokenTypeIds.Assembly | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((AssemblyDefinitionHandle)new EntityHandle(TokenTypeIds.Assembly | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((AssemblyDefinitionHandle)new EntityHandle(TokenTypeIds.Assembly | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (AssemblyDefinitionHandle)new EntityHandle(TokenTypeIds.Assembly | 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((InterfaceImplementationHandle)new EntityHandle(TokenTypeIds.InterfaceImpl | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((InterfaceImplementationHandle)new EntityHandle(TokenTypeIds.InterfaceImpl | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                (
+                    (InterfaceImplementationHandle)new EntityHandle(TokenTypeIds.InterfaceImpl | 1)
+                ).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (InterfaceImplementationHandle)
+                        new EntityHandle(TokenTypeIds.InterfaceImpl | 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((MethodDefinitionHandle)new EntityHandle(TokenTypeIds.MethodDef | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((MethodDefinitionHandle)new EntityHandle(TokenTypeIds.MethodDef | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((MethodDefinitionHandle)new EntityHandle(TokenTypeIds.MethodDef | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (MethodDefinitionHandle)new EntityHandle(TokenTypeIds.MethodDef | 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((MethodSpecificationHandle)new EntityHandle(TokenTypeIds.MethodSpec | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((MethodSpecificationHandle)new EntityHandle(TokenTypeIds.MethodSpec | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((MethodSpecificationHandle)new EntityHandle(TokenTypeIds.MethodSpec | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (MethodSpecificationHandle)
+                        new EntityHandle(TokenTypeIds.MethodSpec | 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((TypeDefinitionHandle)new EntityHandle(TokenTypeIds.TypeDef | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((TypeDefinitionHandle)new EntityHandle(TokenTypeIds.TypeDef | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((TypeDefinitionHandle)new EntityHandle(TokenTypeIds.TypeDef | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((TypeDefinitionHandle)new EntityHandle(TokenTypeIds.TypeDef | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((ExportedTypeHandle)new EntityHandle(TokenTypeIds.ExportedType | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ExportedTypeHandle)new EntityHandle(TokenTypeIds.ExportedType | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((ExportedTypeHandle)new EntityHandle(TokenTypeIds.ExportedType | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((ExportedTypeHandle)new EntityHandle(TokenTypeIds.ExportedType | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((TypeReferenceHandle)new EntityHandle(TokenTypeIds.TypeRef | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((TypeReferenceHandle)new EntityHandle(TokenTypeIds.TypeRef | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((TypeReferenceHandle)new EntityHandle(TokenTypeIds.TypeRef | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((TypeReferenceHandle)new EntityHandle(TokenTypeIds.TypeRef | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((TypeSpecificationHandle)new EntityHandle(TokenTypeIds.TypeSpec | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((TypeSpecificationHandle)new EntityHandle(TokenTypeIds.TypeSpec | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((TypeSpecificationHandle)new EntityHandle(TokenTypeIds.TypeSpec | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (TypeSpecificationHandle)new EntityHandle(TokenTypeIds.TypeSpec | 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((MemberReferenceHandle)new EntityHandle(TokenTypeIds.MemberRef | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((MemberReferenceHandle)new EntityHandle(TokenTypeIds.MemberRef | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((MemberReferenceHandle)new EntityHandle(TokenTypeIds.MemberRef | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((MemberReferenceHandle)new EntityHandle(TokenTypeIds.MemberRef | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((FieldDefinitionHandle)new EntityHandle(TokenTypeIds.FieldDef | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((FieldDefinitionHandle)new EntityHandle(TokenTypeIds.FieldDef | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((FieldDefinitionHandle)new EntityHandle(TokenTypeIds.FieldDef | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((FieldDefinitionHandle)new EntityHandle(TokenTypeIds.FieldDef | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((EventDefinitionHandle)new EntityHandle(TokenTypeIds.Event | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((EventDefinitionHandle)new EntityHandle(TokenTypeIds.Event | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((EventDefinitionHandle)new EntityHandle(TokenTypeIds.Event | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((EventDefinitionHandle)new EntityHandle(TokenTypeIds.Event | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.Property | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.Property | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.Property | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.Property | 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((StandaloneSignatureHandle)new EntityHandle(TokenTypeIds.Signature | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((StandaloneSignatureHandle)new EntityHandle(TokenTypeIds.Signature | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((StandaloneSignatureHandle)new EntityHandle(TokenTypeIds.Signature | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (StandaloneSignatureHandle)new EntityHandle(TokenTypeIds.Signature | 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((MemberReferenceHandle)new EntityHandle(TokenTypeIds.MemberRef | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((MemberReferenceHandle)new EntityHandle(TokenTypeIds.MemberRef | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((MemberReferenceHandle)new EntityHandle(TokenTypeIds.MemberRef | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((MemberReferenceHandle)new EntityHandle(TokenTypeIds.MemberRef | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((FieldDefinitionHandle)new EntityHandle(TokenTypeIds.FieldDef | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((FieldDefinitionHandle)new EntityHandle(TokenTypeIds.FieldDef | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((FieldDefinitionHandle)new EntityHandle(TokenTypeIds.FieldDef | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((FieldDefinitionHandle)new EntityHandle(TokenTypeIds.FieldDef | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((EventDefinitionHandle)new EntityHandle(TokenTypeIds.Event | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((EventDefinitionHandle)new EntityHandle(TokenTypeIds.Event | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((EventDefinitionHandle)new EntityHandle(TokenTypeIds.Event | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((EventDefinitionHandle)new EntityHandle(TokenTypeIds.Event | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.Property | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.Property | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.Property | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.Property | 0x00ffffff)
+                ).RowId
+            );
 
             Assert.Equal(1, ((ParameterHandle)new EntityHandle(TokenTypeIds.ParamDef | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ParameterHandle)new EntityHandle(TokenTypeIds.ParamDef | 0x00ffffff)).RowId);
+            Assert.Equal(
+                0x00ffffff,
+                ((ParameterHandle)new EntityHandle(TokenTypeIds.ParamDef | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((GenericParameterHandle)new EntityHandle(TokenTypeIds.GenericParam | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((GenericParameterHandle)new EntityHandle(TokenTypeIds.GenericParam | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((GenericParameterHandle)new EntityHandle(TokenTypeIds.GenericParam | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (GenericParameterHandle)new EntityHandle(TokenTypeIds.GenericParam | 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((GenericParameterConstraintHandle)new EntityHandle(TokenTypeIds.GenericParamConstraint | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((GenericParameterConstraintHandle)new EntityHandle(TokenTypeIds.GenericParamConstraint | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                (
+                    (GenericParameterConstraintHandle)
+                        new EntityHandle(TokenTypeIds.GenericParamConstraint | 1)
+                ).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (GenericParameterConstraintHandle)
+                        new EntityHandle(TokenTypeIds.GenericParamConstraint | 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((ModuleReferenceHandle)new EntityHandle(TokenTypeIds.ModuleRef | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ModuleReferenceHandle)new EntityHandle(TokenTypeIds.ModuleRef | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((ModuleReferenceHandle)new EntityHandle(TokenTypeIds.ModuleRef | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                ((ModuleReferenceHandle)new EntityHandle(TokenTypeIds.ModuleRef | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((CustomAttributeHandle)new EntityHandle(TokenTypeIds.CustomAttribute | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((CustomAttributeHandle)new EntityHandle(TokenTypeIds.CustomAttribute | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((CustomAttributeHandle)new EntityHandle(TokenTypeIds.CustomAttribute | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (CustomAttributeHandle)
+                        new EntityHandle(TokenTypeIds.CustomAttribute | 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((DeclarativeSecurityAttributeHandle)new EntityHandle(TokenTypeIds.DeclSecurity | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((DeclarativeSecurityAttributeHandle)new EntityHandle(TokenTypeIds.DeclSecurity | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                (
+                    (DeclarativeSecurityAttributeHandle)
+                        new EntityHandle(TokenTypeIds.DeclSecurity | 1)
+                ).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (DeclarativeSecurityAttributeHandle)
+                        new EntityHandle(TokenTypeIds.DeclSecurity | 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((ManifestResourceHandle)new EntityHandle(TokenTypeIds.ManifestResource | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ManifestResourceHandle)new EntityHandle(TokenTypeIds.ManifestResource | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((ManifestResourceHandle)new EntityHandle(TokenTypeIds.ManifestResource | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (ManifestResourceHandle)
+                        new EntityHandle(TokenTypeIds.ManifestResource | 0x00ffffff)
+                ).RowId
+            );
 
             Assert.Equal(1, ((ConstantHandle)new EntityHandle(TokenTypeIds.Constant | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ConstantHandle)new EntityHandle(TokenTypeIds.Constant | 0x00ffffff)).RowId);
+            Assert.Equal(
+                0x00ffffff,
+                ((ConstantHandle)new EntityHandle(TokenTypeIds.Constant | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((ManifestResourceHandle)new EntityHandle(TokenTypeIds.ManifestResource | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((ManifestResourceHandle)new EntityHandle(TokenTypeIds.ManifestResource | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((ManifestResourceHandle)new EntityHandle(TokenTypeIds.ManifestResource | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (ManifestResourceHandle)
+                        new EntityHandle(TokenTypeIds.ManifestResource | 0x00ffffff)
+                ).RowId
+            );
 
             Assert.Equal(1, ((AssemblyFileHandle)new EntityHandle(TokenTypeIds.File | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((AssemblyFileHandle)new EntityHandle(TokenTypeIds.File | 0x00ffffff)).RowId);
+            Assert.Equal(
+                0x00ffffff,
+                ((AssemblyFileHandle)new EntityHandle(TokenTypeIds.File | 0x00ffffff)).RowId
+            );
 
-            Assert.Equal(1, ((MethodImplementationHandle)new EntityHandle(TokenTypeIds.MethodImpl | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((MethodImplementationHandle)new EntityHandle(TokenTypeIds.MethodImpl | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((MethodImplementationHandle)new EntityHandle(TokenTypeIds.MethodImpl | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (MethodImplementationHandle)
+                        new EntityHandle(TokenTypeIds.MethodImpl | 0x00ffffff)
+                ).RowId
+            );
 
-            Assert.Equal(1, ((AssemblyReferenceHandle)new EntityHandle(TokenTypeIds.AssemblyRef | 1)).RowId);
-            Assert.Equal(0x00ffffff, ((AssemblyReferenceHandle)new EntityHandle(TokenTypeIds.AssemblyRef | 0x00ffffff)).RowId);
+            Assert.Equal(
+                1,
+                ((AssemblyReferenceHandle)new EntityHandle(TokenTypeIds.AssemblyRef | 1)).RowId
+            );
+            Assert.Equal(
+                0x00ffffff,
+                (
+                    (AssemblyReferenceHandle)new EntityHandle(TokenTypeIds.AssemblyRef | 0x00ffffff)
+                ).RowId
+            );
         }
 
         [Fact]
         public void Conversions_VirtualHandles()
         {
-            Assert.Throws<InvalidCastException>(() => (ModuleDefinitionHandle)             new Handle((byte)(HandleType.VirtualBit | HandleType.Module ), 1));
-            Assert.Throws<InvalidCastException>(() => (AssemblyDefinitionHandle)           new Handle((byte)(HandleType.VirtualBit | HandleType.Assembly ), 1));
-            Assert.Throws<InvalidCastException>(() => (InterfaceImplementationHandle)      new Handle((byte)(HandleType.VirtualBit | HandleType.InterfaceImpl), 1));
-            Assert.Throws<InvalidCastException>(() => (MethodDefinitionHandle)             new Handle((byte)(HandleType.VirtualBit | HandleType.MethodDef ), 1));
-            Assert.Throws<InvalidCastException>(() => (MethodSpecificationHandle)          new Handle((byte)(HandleType.VirtualBit | HandleType.MethodSpec), 1));
-            Assert.Throws<InvalidCastException>(() => (TypeDefinitionHandle)               new Handle((byte)(HandleType.VirtualBit | HandleType.TypeDef ), 1));
-            Assert.Throws<InvalidCastException>(() => (ExportedTypeHandle)                 new Handle((byte)(HandleType.VirtualBit | HandleType.ExportedType), 1));
-            Assert.Throws<InvalidCastException>(() => (TypeReferenceHandle)                new Handle((byte)(HandleType.VirtualBit | HandleType.TypeRef), 1));
-            Assert.Throws<InvalidCastException>(() => (TypeSpecificationHandle)            new Handle((byte)(HandleType.VirtualBit | HandleType.TypeSpec), 1));
-            Assert.Throws<InvalidCastException>(() => (MemberReferenceHandle)              new Handle((byte)(HandleType.VirtualBit | HandleType.MemberRef), 1));
-            Assert.Throws<InvalidCastException>(() => (FieldDefinitionHandle)              new Handle((byte)(HandleType.VirtualBit | HandleType.FieldDef ), 1));
-            Assert.Throws<InvalidCastException>(() => (EventDefinitionHandle)              new Handle((byte)(HandleType.VirtualBit | HandleType.Event ), 1));
-            Assert.Throws<InvalidCastException>(() => (PropertyDefinitionHandle)           new Handle((byte)(HandleType.VirtualBit | HandleType.Property ), 1));
-            Assert.Throws<InvalidCastException>(() => (StandaloneSignatureHandle)          new Handle((byte)(HandleType.VirtualBit | HandleType.Signature), 1));
-            Assert.Throws<InvalidCastException>(() => (MemberReferenceHandle)              new Handle((byte)(HandleType.VirtualBit | HandleType.MemberRef), 1));
-            Assert.Throws<InvalidCastException>(() => (FieldDefinitionHandle)              new Handle((byte)(HandleType.VirtualBit | HandleType.FieldDef ), 1));
-            Assert.Throws<InvalidCastException>(() => (EventDefinitionHandle)              new Handle((byte)(HandleType.VirtualBit | HandleType.Event ), 1));
-            Assert.Throws<InvalidCastException>(() => (PropertyDefinitionHandle)           new Handle((byte)(HandleType.VirtualBit | HandleType.Property ), 1));
-            Assert.Throws<InvalidCastException>(() => (ParameterHandle)                    new Handle((byte)(HandleType.VirtualBit | HandleType.ParamDef), 1));
-            Assert.Throws<InvalidCastException>(() => (GenericParameterHandle)             new Handle((byte)(HandleType.VirtualBit | HandleType.GenericParam), 1));
-            Assert.Throws<InvalidCastException>(() => (GenericParameterConstraintHandle)   new Handle((byte)(HandleType.VirtualBit | HandleType.GenericParamConstraint), 1));
-            Assert.Throws<InvalidCastException>(() => (ModuleReferenceHandle)              new Handle((byte)(HandleType.VirtualBit | HandleType.ModuleRef), 1));
-            Assert.Throws<InvalidCastException>(() => (CustomAttributeHandle)              new Handle((byte)(HandleType.VirtualBit | HandleType.CustomAttribute), 1));
-            Assert.Throws<InvalidCastException>(() => (DeclarativeSecurityAttributeHandle) new Handle((byte)(HandleType.VirtualBit | HandleType.DeclSecurity), 1));
-            Assert.Throws<InvalidCastException>(() => (ManifestResourceHandle)             new Handle((byte)(HandleType.VirtualBit | HandleType.ManifestResource), 1));
-            Assert.Throws<InvalidCastException>(() => (ConstantHandle)                     new Handle((byte)(HandleType.VirtualBit | HandleType.Constant), 1));
-            Assert.Throws<InvalidCastException>(() => (ManifestResourceHandle)             new Handle((byte)(HandleType.VirtualBit | HandleType.ManifestResource), 1));
-            Assert.Throws<InvalidCastException>(() => (AssemblyFileHandle)                 new Handle((byte)(HandleType.VirtualBit | HandleType.File), 1));
-            Assert.Throws<InvalidCastException>(() => (MethodImplementationHandle)         new Handle((byte)(HandleType.VirtualBit | HandleType.MethodImpl), 1));
-            Assert.Throws<InvalidCastException>(() => (UserStringHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.UserString), 1));
-            Assert.Throws<InvalidCastException>(() => (GuidHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.Guid), 1));
+            Assert.Throws<InvalidCastException>(() =>
+                (ModuleDefinitionHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Module), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (AssemblyDefinitionHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Assembly), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (InterfaceImplementationHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.InterfaceImpl), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (MethodDefinitionHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.MethodDef), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (MethodSpecificationHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.MethodSpec), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (TypeDefinitionHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.TypeDef), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (ExportedTypeHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.ExportedType), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (TypeReferenceHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.TypeRef), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (TypeSpecificationHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.TypeSpec), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (MemberReferenceHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.MemberRef), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (FieldDefinitionHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.FieldDef), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (EventDefinitionHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Event), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (PropertyDefinitionHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Property), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (StandaloneSignatureHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Signature), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (MemberReferenceHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.MemberRef), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (FieldDefinitionHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.FieldDef), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (EventDefinitionHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Event), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (PropertyDefinitionHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.Property), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (ParameterHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.ParamDef), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (GenericParameterHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.GenericParam), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (GenericParameterConstraintHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.GenericParamConstraint), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (ModuleReferenceHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.ModuleRef), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (CustomAttributeHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.CustomAttribute), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (DeclarativeSecurityAttributeHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.DeclSecurity), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (ManifestResourceHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.ManifestResource), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (ConstantHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.Constant), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (ManifestResourceHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.ManifestResource), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (AssemblyFileHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.File), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (MethodImplementationHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.MethodImpl), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (UserStringHandle)
+                    new Handle((byte)(HandleType.VirtualBit | HandleType.UserString), 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (GuidHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.Guid), 1)
+            );
 
-            var x1 = (AssemblyReferenceHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.AssemblyRef), 1);
+            var x1 = (AssemblyReferenceHandle)
+                new Handle((byte)(HandleType.VirtualBit | HandleType.AssemblyRef), 1);
             var x2 = (StringHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.String), 1);
             var x3 = (BlobHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.Blob), 1);
-            var x4 = (NamespaceDefinitionHandle)new Handle((byte)(HandleType.VirtualBit | HandleType.Namespace), 1);
+            var x4 = (NamespaceDefinitionHandle)
+                new Handle((byte)(HandleType.VirtualBit | HandleType.Namespace), 1);
         }
 
         [Fact]
         public void Conversions_VirtualEntityHandles()
         {
-            Assert.Throws<InvalidCastException>(() => (ModuleDefinitionHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Module | 1));
-            Assert.Throws<InvalidCastException>(() => (AssemblyDefinitionHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Assembly | 1));
-            Assert.Throws<InvalidCastException>(() => (InterfaceImplementationHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.InterfaceImpl | 1));
-            Assert.Throws<InvalidCastException>(() => (MethodDefinitionHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MethodDef | 1));
-            Assert.Throws<InvalidCastException>(() => (MethodSpecificationHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MethodSpec | 1));
-            Assert.Throws<InvalidCastException>(() => (TypeDefinitionHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.TypeDef | 1));
-            Assert.Throws<InvalidCastException>(() => (ExportedTypeHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ExportedType | 1));
-            Assert.Throws<InvalidCastException>(() => (TypeReferenceHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.TypeRef | 1));
-            Assert.Throws<InvalidCastException>(() => (TypeSpecificationHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.TypeSpec | 1));
-            Assert.Throws<InvalidCastException>(() => (MemberReferenceHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MemberRef | 1));
-            Assert.Throws<InvalidCastException>(() => (FieldDefinitionHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.FieldDef | 1));
-            Assert.Throws<InvalidCastException>(() => (EventDefinitionHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Event | 1));
-            Assert.Throws<InvalidCastException>(() => (PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Property | 1));
-            Assert.Throws<InvalidCastException>(() => (StandaloneSignatureHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Signature | 1));
-            Assert.Throws<InvalidCastException>(() => (MemberReferenceHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MemberRef | 1));
-            Assert.Throws<InvalidCastException>(() => (FieldDefinitionHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.FieldDef | 1));
-            Assert.Throws<InvalidCastException>(() => (EventDefinitionHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Event | 1));
-            Assert.Throws<InvalidCastException>(() => (PropertyDefinitionHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Property | 1));
-            Assert.Throws<InvalidCastException>(() => (ParameterHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ParamDef | 1));
-            Assert.Throws<InvalidCastException>(() => (GenericParameterHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.GenericParam | 1));
-            Assert.Throws<InvalidCastException>(() => (GenericParameterConstraintHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.GenericParamConstraint | 1));
-            Assert.Throws<InvalidCastException>(() => (ModuleReferenceHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ModuleRef | 1));
-            Assert.Throws<InvalidCastException>(() => (CustomAttributeHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.CustomAttribute | 1));
-            Assert.Throws<InvalidCastException>(() => (DeclarativeSecurityAttributeHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.DeclSecurity | 1));
-            Assert.Throws<InvalidCastException>(() => (ManifestResourceHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ManifestResource | 1));
-            Assert.Throws<InvalidCastException>(() => (ConstantHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Constant | 1));
-            Assert.Throws<InvalidCastException>(() => (ManifestResourceHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ManifestResource | 1));
-            Assert.Throws<InvalidCastException>(() => (AssemblyFileHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.File | 1));
-            Assert.Throws<InvalidCastException>(() => (MethodImplementationHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MethodImpl | 1));
-            var x1 = (AssemblyReferenceHandle)new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.AssemblyRef | 1);
+            Assert.Throws<InvalidCastException>(() =>
+                (ModuleDefinitionHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Module | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (AssemblyDefinitionHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Assembly | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (InterfaceImplementationHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.InterfaceImpl | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (MethodDefinitionHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MethodDef | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (MethodSpecificationHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MethodSpec | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (TypeDefinitionHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.TypeDef | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (ExportedTypeHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ExportedType | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (TypeReferenceHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.TypeRef | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (TypeSpecificationHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.TypeSpec | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (MemberReferenceHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MemberRef | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (FieldDefinitionHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.FieldDef | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (EventDefinitionHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Event | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (PropertyDefinitionHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Property | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (StandaloneSignatureHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Signature | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (MemberReferenceHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MemberRef | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (FieldDefinitionHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.FieldDef | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (EventDefinitionHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Event | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (PropertyDefinitionHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Property | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (ParameterHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ParamDef | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (GenericParameterHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.GenericParam | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (GenericParameterConstraintHandle)
+                    new EntityHandle(
+                        TokenTypeIds.VirtualBit | TokenTypeIds.GenericParamConstraint | 1
+                    )
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (ModuleReferenceHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ModuleRef | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (CustomAttributeHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.CustomAttribute | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (DeclarativeSecurityAttributeHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.DeclSecurity | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (ManifestResourceHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ManifestResource | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (ConstantHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.Constant | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (ManifestResourceHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.ManifestResource | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (AssemblyFileHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.File | 1)
+            );
+            Assert.Throws<InvalidCastException>(() =>
+                (MethodImplementationHandle)
+                    new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.MethodImpl | 1)
+            );
+            var x1 = (AssemblyReferenceHandle)
+                new EntityHandle(TokenTypeIds.VirtualBit | TokenTypeIds.AssemblyRef | 1);
         }
 
         [Fact]
@@ -623,7 +1250,9 @@ namespace System.Reflection.Metadata.Tests
             Assert.Equal(0xFC, ((Handle)virtual2).VType);
             Assert.Equal((int)(uint.MaxValue >> 3), ((Handle)virtual2).Offset);
 
-            Assert.Throws<BadImageFormatException>(() => NamespaceDefinitionHandle.FromVirtualIndex((uint.MaxValue >> 3) + 1));
+            Assert.Throws<BadImageFormatException>(() =>
+                NamespaceDefinitionHandle.FromVirtualIndex((uint.MaxValue >> 3) + 1)
+            );
         }
 
         [Fact]
@@ -661,11 +1290,13 @@ namespace System.Reflection.Metadata.Tests
         {
             Assert.Equal(
                 MethodDefinitionHandle.FromRowId(123).ToDebugInformationHandle(),
-                MethodDebugInformationHandle.FromRowId(123));
+                MethodDebugInformationHandle.FromRowId(123)
+            );
 
             Assert.Equal(
                 MethodDebugInformationHandle.FromRowId(123).ToDefinitionHandle(),
-                MethodDefinitionHandle.FromRowId(123));
+                MethodDefinitionHandle.FromRowId(123)
+            );
         }
     }
 }

@@ -13,8 +13,9 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-public class HttpClientTest : ServerTestBase<BlazorWasmTestAppFixture<BasicTestApp.Program>>,
-    IClassFixture<BasicTestAppServerSiteFixture<CorsStartup>>
+public class HttpClientTest
+    : ServerTestBase<BlazorWasmTestAppFixture<BasicTestApp.Program>>,
+        IClassFixture<BasicTestAppServerSiteFixture<CorsStartup>>
 {
     private readonly ServerFixture _apiServerFixture;
     IWebElement _appElement;
@@ -26,7 +27,8 @@ public class HttpClientTest : ServerTestBase<BlazorWasmTestAppFixture<BasicTestA
         BrowserFixture browserFixture,
         BlazorWasmTestAppFixture<BasicTestApp.Program> devHostServerFixture,
         BasicTestAppServerSiteFixture<CorsStartup> apiServerFixture,
-        ITestOutputHelper output)
+        ITestOutputHelper output
+    )
         : base(browserFixture, devHostServerFixture, output)
     {
         _serverFixture.PathBase = "/subdir";
@@ -100,7 +102,11 @@ public class HttpClientTest : ServerTestBase<BlazorWasmTestAppFixture<BasicTestA
         AddRequestHeader("Content-Type", "application/json");
         IssueRequest("PUT", "/subdir/api/person", "{\"Name\": \"Bert\", \"Id\": 123}");
         Assert.Equal("OK", _responseStatus.Text);
-        Assert.Contains("Content-Type: application/json", _responseHeaders.Text, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains(
+            "Content-Type: application/json",
+            _responseHeaders.Text,
+            StringComparison.OrdinalIgnoreCase
+        );
         Assert.Equal("{\"id\":123,\"name\":\"Bert\"}", _responseBody.Text);
     }
 
@@ -140,8 +146,7 @@ public class HttpClientTest : ServerTestBase<BlazorWasmTestAppFixture<BasicTestA
         var targetUri = new Uri(_apiServerFixture.RootUri, relativeUri);
         SetValue("request-uri", targetUri.AbsoluteUri);
         SetValue("request-body", requestBody ?? string.Empty);
-        new SelectElement(Browser.Exists(By.Id("request-method")))
-            .SelectByText(requestMethod);
+        new SelectElement(Browser.Exists(By.Id("request-method"))).SelectByText(requestMethod);
 
         _appElement.FindElement(By.Id("send-request")).Click();
 

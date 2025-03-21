@@ -24,7 +24,16 @@ namespace CookieExtensionsTest
 
         public async Task<HttpListenerRequest> GetRequest(string requestType, string[] headers)
         {
-            _client.Send(_factory.GetContent("1.1", requestType, query: null, text: "Text\r\n", headers, true));
+            _client.Send(
+                _factory.GetContent(
+                    "1.1",
+                    requestType,
+                    query: null,
+                    text: "Text\r\n",
+                    headers,
+                    true
+                )
+            );
 
             HttpListener listener = _factory.GetListener();
             return (await listener.GetContextAsync()).Request;
@@ -32,7 +41,16 @@ namespace CookieExtensionsTest
 
         public async Task<HttpListenerResponse> GetResponse()
         {
-            _client.Send(_factory.GetContent(httpVersion: "1.1", "POST", query: null, "Give me a context, please", headers: null, headerOnly: false));
+            _client.Send(
+                _factory.GetContent(
+                    httpVersion: "1.1",
+                    "POST",
+                    query: null,
+                    "Give me a context, please",
+                    headers: null,
+                    headerOnly: false
+                )
+            );
             HttpListenerContext context = await _factory.GetListener().GetContextAsync();
             return context.Response;
         }
@@ -44,10 +62,17 @@ namespace CookieExtensionsTest
             int totalReceived = 0;
             while (totalReceived < expectedLength)
             {
-                int bytesReceived = _client.Receive(buffer, totalReceived, buffer.Length - totalReceived, SocketFlags.None);
+                int bytesReceived = _client.Receive(
+                    buffer,
+                    totalReceived,
+                    buffer.Length - totalReceived,
+                    SocketFlags.None
+                );
                 if (bytesReceived == 0)
                 {
-                    throw new Exception($"Unexpected early end of response: received {totalReceived} bytes, expected {expectedLength}");
+                    throw new Exception(
+                        $"Unexpected early end of response: received {totalReceived} bytes, expected {expectedLength}"
+                    );
                 }
                 totalReceived += bytesReceived;
             }
@@ -113,9 +138,14 @@ namespace CookieExtensionsTest
                         // If we can't access the host (e.g. if it is '+' or '*' and the current user is the administrator)
                         // then throw.
                         const int ERROR_ACCESS_DENIED = 5;
-                        if (listenerException.ErrorCode == ERROR_ACCESS_DENIED && (_hostname == "*" || _hostname == "+"))
+                        if (
+                            listenerException.ErrorCode == ERROR_ACCESS_DENIED
+                            && (_hostname == "*" || _hostname == "+")
+                        )
                         {
-                            throw new InvalidOperationException($"Access denied for host {_hostname}");
+                            throw new InvalidOperationException(
+                                $"Access denied for host {_hostname}"
+                            );
                         }
                     }
                     else if (!(e is SocketException))
@@ -138,7 +168,10 @@ namespace CookieExtensionsTest
             {
                 if (_port == 0)
                 {
-                    throw new Exception("Could not reserve a port for HttpListener", _processPrefixException);
+                    throw new Exception(
+                        "Could not reserve a port for HttpListener",
+                        _processPrefixException
+                    );
                 }
 
                 return _port;
@@ -151,20 +184,27 @@ namespace CookieExtensionsTest
             {
                 if (_processPrefix == null)
                 {
-                    throw new Exception("Could not reserve a port for HttpListener", _processPrefixException);
+                    throw new Exception(
+                        "Could not reserve a port for HttpListener",
+                        _processPrefixException
+                    );
                 }
 
                 return _processPrefix;
             }
         }
 
-        public HttpListener GetListener() => _processPrefixListener ?? throw new Exception("Could not reserve a port for HttpListener", _processPrefixException);
+        public HttpListener GetListener() =>
+            _processPrefixListener
+            ?? throw new Exception(
+                "Could not reserve a port for HttpListener",
+                _processPrefixException
+            );
 
         public void Dispose() => _processPrefixListener?.Close();
 
         public Socket GetConnectedSocket()
         {
-
             if (_processPrefixException != null)
             {
                 throw new Exception("Could not create HttpListener", _processPrefixException);
@@ -175,20 +215,33 @@ namespace CookieExtensionsTest
             // Some platforms or distributions require IPv6 sockets if the OS supports IPv6. Others (e.g. Ubuntu) don't.
             try
             {
-                AddressFamily addressFamily = Socket.OSSupportsIPv6 ? AddressFamily.InterNetworkV6 : AddressFamily.InterNetwork;
+                AddressFamily addressFamily = Socket.OSSupportsIPv6
+                    ? AddressFamily.InterNetworkV6
+                    : AddressFamily.InterNetwork;
                 Socket socket = new Socket(addressFamily, SocketType.Stream, ProtocolType.Tcp);
                 socket.Connect(hostname, Port);
                 return socket;
             }
             catch
             {
-                Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                Socket socket = new Socket(
+                    AddressFamily.InterNetwork,
+                    SocketType.Stream,
+                    ProtocolType.Tcp
+                );
                 socket.Connect(hostname, Port);
                 return socket;
             }
         }
 
-        public byte[] GetContent(string httpVersion, string requestType, string query, string text, IEnumerable<string> headers, bool headerOnly)
+        public byte[] GetContent(
+            string httpVersion,
+            string requestType,
+            string query,
+            string text,
+            IEnumerable<string> headers,
+            bool headerOnly
+        )
         {
             headers ??= Enumerable.Empty<string>();
 
@@ -202,9 +255,12 @@ namespace CookieExtensionsTest
             string content = $"{requestType} {rawUrl} HTTP/{httpVersion}\r\n";
             if (!headers.Any(header => header.ToLower().StartsWith("host:")))
             {
-                content += $"Host: { listeningUri.Host}\r\n";
+                content += $"Host: {listeningUri.Host}\r\n";
             }
-            if (text != null && !headers.Any(header => header.ToLower().StartsWith("content-length:")))
+            if (
+                text != null
+                && !headers.Any(header => header.ToLower().StartsWith("content-length:"))
+            )
             {
                 content += $"Content-Length: {text.Length}\r\n";
             }

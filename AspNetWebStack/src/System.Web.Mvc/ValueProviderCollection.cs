@@ -7,16 +7,16 @@ using System.Linq;
 
 namespace System.Web.Mvc
 {
-    public class ValueProviderCollection : Collection<IValueProvider>, IValueProvider, IUnvalidatedValueProvider, IEnumerableValueProvider
+    public class ValueProviderCollection
+        : Collection<IValueProvider>,
+            IValueProvider,
+            IUnvalidatedValueProvider,
+            IEnumerableValueProvider
     {
-        public ValueProviderCollection()
-        {
-        }
+        public ValueProviderCollection() { }
 
         public ValueProviderCollection(IList<IValueProvider> list)
-            : base(list)
-        {
-        }
+            : base(list) { }
 
         public virtual bool ContainsPrefix(string prefix)
         {
@@ -56,26 +56,39 @@ namespace System.Web.Mvc
 
         public virtual IDictionary<string, string> GetKeysFromPrefix(string prefix)
         {
-            return (from provider in this
+            return (
+                    from provider in this
                     let result = GetKeysFromPrefixFromProvider(provider, prefix)
                     where result != null && result.Any()
-                    select result).FirstOrDefault() ?? new Dictionary<string, string>();
+                    select result
+                ).FirstOrDefault() ?? new Dictionary<string, string>();
         }
 
-        internal static ValueProviderResult GetValueFromProvider(IValueProvider provider, string key, bool skipValidation)
+        internal static ValueProviderResult GetValueFromProvider(
+            IValueProvider provider,
+            string key,
+            bool skipValidation
+        )
         {
             // Since IUnvalidatedValueProvider is a superset of IValueProvider, it's always OK to use the
             // IUnvalidatedValueProvider-supplied members if they're present. Otherwise just call the
             // normal IValueProvider members.
 
             IUnvalidatedValueProvider unvalidatedProvider = provider as IUnvalidatedValueProvider;
-            return (unvalidatedProvider != null) ? unvalidatedProvider.GetValue(key, skipValidation) : provider.GetValue(key);
+            return (unvalidatedProvider != null)
+                ? unvalidatedProvider.GetValue(key, skipValidation)
+                : provider.GetValue(key);
         }
 
-        internal static IDictionary<string, string> GetKeysFromPrefixFromProvider(IValueProvider provider, string prefix)
+        internal static IDictionary<string, string> GetKeysFromPrefixFromProvider(
+            IValueProvider provider,
+            string prefix
+        )
         {
             IEnumerableValueProvider enumeratedProvider = provider as IEnumerableValueProvider;
-            return (enumeratedProvider != null) ? enumeratedProvider.GetKeysFromPrefix(prefix) : null;
+            return (enumeratedProvider != null)
+                ? enumeratedProvider.GetKeysFromPrefix(prefix)
+                : null;
         }
 
         protected override void InsertItem(int index, IValueProvider item)

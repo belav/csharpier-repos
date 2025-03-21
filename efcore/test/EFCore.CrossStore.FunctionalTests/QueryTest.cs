@@ -10,7 +10,11 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class QueryTest
 {
-    public static IEnumerable<object[]> IsAsyncData = new[] { new object[] { false }, new object[] { true } };
+    public static IEnumerable<object[]> IsAsyncData = new[]
+    {
+        new object[] { false },
+        new object[] { true },
+    };
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -52,10 +56,15 @@ public class QueryTest
         var query = RelationalQueryableExtensions.FromSqlRaw(context.Blogs, "Select 1");
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(FromSqlQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(nameof(FromSqlQueryRootExpression)),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -66,10 +75,15 @@ public class QueryTest
         var query = CosmosQueryableExtensions.FromSqlRaw(context.Blogs, "Select 1");
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(FromSqlQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(nameof(FromSqlQueryRootExpression)),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -80,10 +94,15 @@ public class QueryTest
         var query = context.Blogs.FromSqlInterpolated($"Select 1");
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(FromSqlQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(nameof(FromSqlQueryRootExpression)),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -94,10 +113,15 @@ public class QueryTest
         var query = context.Blogs.FromSql($"Select 1");
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(FromSqlQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(nameof(FromSqlQueryRootExpression)),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -108,10 +132,15 @@ public class QueryTest
         var query = context.Blogs.TemporalAsOf(DateTime.Now);
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalAsOfQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalAsOfQueryRootExpression)),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -122,10 +151,15 @@ public class QueryTest
         var query = context.Blogs.TemporalAll();
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalAllQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalAllQueryRootExpression)),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -136,10 +170,17 @@ public class QueryTest
         var query = context.Blogs.TemporalBetween(DateTime.Now, DateTime.Now.AddDays(7));
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalBetweenQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(
+                nameof(TemporalBetweenQueryRootExpression)
+            ),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -150,10 +191,17 @@ public class QueryTest
         var query = context.Blogs.TemporalContainedIn(DateTime.Now, DateTime.Now.AddDays(7));
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalContainedInQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(
+                nameof(TemporalContainedInQueryRootExpression)
+            ),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -164,10 +212,17 @@ public class QueryTest
         var query = context.Blogs.TemporalFromTo(DateTime.Now, DateTime.Now.AddDays(7));
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalFromToQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(
+                nameof(TemporalFromToQueryRootExpression)
+            ),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -178,10 +233,15 @@ public class QueryTest
         var query = context.Blogs.TemporalAsOf(DateTime.Now);
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalAsOfQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalAsOfQueryRootExpression)),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -192,10 +252,15 @@ public class QueryTest
         var query = context.Blogs.TemporalAll();
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalAllQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalAllQueryRootExpression)),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -206,10 +271,17 @@ public class QueryTest
         var query = context.Blogs.TemporalBetween(DateTime.Now, DateTime.Now.AddDays(7));
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalBetweenQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(
+                nameof(TemporalBetweenQueryRootExpression)
+            ),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -220,10 +292,17 @@ public class QueryTest
         var query = context.Blogs.TemporalContainedIn(DateTime.Now, DateTime.Now.AddDays(7));
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalContainedInQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(
+                nameof(TemporalContainedInQueryRootExpression)
+            ),
+            message
+        );
     }
 
     [ConditionalTheory]
@@ -234,10 +313,17 @@ public class QueryTest
         var query = context.Blogs.TemporalFromTo(DateTime.Now, DateTime.Now.AddDays(7));
 
         var message = async
-            ? (await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())).Message
+            ? (
+                await Assert.ThrowsAsync<InvalidOperationException>(() => query.ToListAsync())
+            ).Message
             : Assert.Throws<InvalidOperationException>(() => query.ToList()).Message;
 
-        Assert.Equal(CoreStrings.QueryUnhandledQueryRootExpression(nameof(TemporalFromToQueryRootExpression)), message);
+        Assert.Equal(
+            CoreStrings.QueryUnhandledQueryRootExpression(
+                nameof(TemporalFromToQueryRootExpression)
+            ),
+            message
+        );
     }
 
     private class Blog
@@ -258,30 +344,34 @@ public class QueryTest
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Post> Posts { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder builder)
-        {
-        }
+        protected override void OnModelCreating(ModelBuilder builder) { }
     }
 
     private class InMemoryQueryContext : QueryContextBase
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseInMemoryDatabase(nameof(InMemoryQueryContext));
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseInMemoryDatabase(nameof(InMemoryQueryContext));
     }
 
     private class SqliteQueryContext : QueryContextBase
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseSqlite(((RelationalTestStore)SqliteTestStoreFactory.Instance.Create(nameof(SqliteQueryContext))).ConnectionString);
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseSqlite(
+                (
+                    (RelationalTestStore)
+                        SqliteTestStoreFactory.Instance.Create(nameof(SqliteQueryContext))
+                ).ConnectionString
+            );
     }
 
     private class SqlServerQueryContext : QueryContextBase
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseSqlite(
-                    ((RelationalTestStore)SqlServerTestStoreFactory.Instance.Create(nameof(SqlServerQueryContext))).ConnectionString);
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder.UseSqlite(
+                (
+                    (RelationalTestStore)
+                        SqlServerTestStoreFactory.Instance.Create(nameof(SqlServerQueryContext))
+                ).ConnectionString
+            );
     }
 }

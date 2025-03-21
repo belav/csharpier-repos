@@ -19,8 +19,10 @@ namespace System.ServiceModel.Dispatcher
     {
         internal const int DefaultMaxConcurrentCalls = 16;
         internal const int DefaultMaxConcurrentSessions = 100;
-        internal static int DefaultMaxConcurrentCallsCpuCount = DefaultMaxConcurrentCalls * OSEnvironmentHelper.ProcessorCount;
-        internal static int DefaultMaxConcurrentSessionsCpuCount = DefaultMaxConcurrentSessions * OSEnvironmentHelper.ProcessorCount;
+        internal static int DefaultMaxConcurrentCallsCpuCount =
+            DefaultMaxConcurrentCalls * OSEnvironmentHelper.ProcessorCount;
+        internal static int DefaultMaxConcurrentSessionsCpuCount =
+            DefaultMaxConcurrentSessions * OSEnvironmentHelper.ProcessorCount;
 
         FlowThrottle calls;
         FlowThrottle sessions;
@@ -56,8 +58,12 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (this.calls == null)
                         {
-                            FlowThrottle callsFt = new FlowThrottle(this.GotCall, ServiceThrottle.DefaultMaxConcurrentCallsCpuCount,
-                                ServiceThrottle.MaxConcurrentCallsPropertyName, ServiceThrottle.MaxConcurrentCallsConfigName);
+                            FlowThrottle callsFt = new FlowThrottle(
+                                this.GotCall,
+                                ServiceThrottle.DefaultMaxConcurrentCallsCpuCount,
+                                ServiceThrottle.MaxConcurrentCallsPropertyName,
+                                ServiceThrottle.MaxConcurrentCallsConfigName
+                            );
 
                             callsFt.SetRatio(this.RatioCallsToken);
 
@@ -80,8 +86,12 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (this.sessions == null)
                         {
-                            FlowThrottle sessionsFt = new FlowThrottle(this.GotSession, ServiceThrottle.DefaultMaxConcurrentSessionsCpuCount,
-                                ServiceThrottle.MaxConcurrentSessionsPropertyName, ServiceThrottle.MaxConcurrentSessionsConfigName);
+                            FlowThrottle sessionsFt = new FlowThrottle(
+                                this.GotSession,
+                                ServiceThrottle.DefaultMaxConcurrentSessionsCpuCount,
+                                ServiceThrottle.MaxConcurrentSessionsPropertyName,
+                                ServiceThrottle.MaxConcurrentSessionsConfigName
+                            );
 
                             sessionsFt.SetRatio(this.RatioSessionsToken);
 
@@ -104,7 +114,10 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (this.dynamic == null)
                         {
-                            QuotaThrottle dynamicQt = new QuotaThrottle(this.GotDynamic, new object());
+                            QuotaThrottle dynamicQt = new QuotaThrottle(
+                                this.GotDynamic,
+                                new object()
+                            );
                             dynamicQt.Owner = "ServiceHost";
 
                             this.dynamic = dynamicQt;
@@ -135,7 +148,10 @@ namespace System.ServiceModel.Dispatcher
                 this.UpdateIsActive();
                 if (null != this.servicePerformanceCounters)
                 {
-                    this.servicePerformanceCounters.SetThrottleBase((int)ServicePerformanceCounters.PerfCounters.CallsPercentMaxCallsBase, this.Calls.Capacity);
+                    this.servicePerformanceCounters.SetThrottleBase(
+                        (int)ServicePerformanceCounters.PerfCounters.CallsPercentMaxCallsBase,
+                        this.Calls.Capacity
+                    );
                 }
             }
         }
@@ -152,7 +168,10 @@ namespace System.ServiceModel.Dispatcher
                 this.UpdateIsActive();
                 if (null != this.servicePerformanceCounters)
                 {
-                    this.servicePerformanceCounters.SetThrottleBase((int)ServicePerformanceCounters.PerfCounters.SessionsPercentMaxSessionsBase, this.Sessions.Capacity);
+                    this.servicePerformanceCounters.SetThrottleBase(
+                        (int)ServicePerformanceCounters.PerfCounters.SessionsPercentMaxSessionsBase,
+                        this.Sessions.Capacity
+                    );
                 }
             }
         }
@@ -169,7 +188,13 @@ namespace System.ServiceModel.Dispatcher
                 this.UpdateIsActive();
                 if (null != this.servicePerformanceCounters)
                 {
-                    this.servicePerformanceCounters.SetThrottleBase((int)ServicePerformanceCounters.PerfCounters.InstancesPercentMaxInstancesBase, this.InstanceContexts.Capacity);
+                    this.servicePerformanceCounters.SetThrottleBase(
+                        (int)
+                            ServicePerformanceCounters
+                                .PerfCounters
+                                .InstancesPercentMaxInstancesBase,
+                        this.InstanceContexts.Capacity
+                    );
                 }
             }
         }
@@ -184,8 +209,12 @@ namespace System.ServiceModel.Dispatcher
                     {
                         if (this.instanceContexts == null)
                         {
-                            FlowThrottle instanceContextsFt = new FlowThrottle(this.GotInstanceContext, Int32.MaxValue,
-                                                                     ServiceThrottle.MaxConcurrentInstancesPropertyName, ServiceThrottle.MaxConcurrentInstancesConfigName);
+                            FlowThrottle instanceContextsFt = new FlowThrottle(
+                                this.GotInstanceContext,
+                                Int32.MaxValue,
+                                ServiceThrottle.MaxConcurrentInstancesPropertyName,
+                                ServiceThrottle.MaxConcurrentInstancesConfigName
+                            );
                             instanceContextsFt.SetRatio(this.RatioInstancesToken);
 
                             if (this.servicePerformanceCounters != null)
@@ -229,31 +258,49 @@ namespace System.ServiceModel.Dispatcher
         void InitializeInstancePerfCounterSettings(FlowThrottle instanceContextsFt)
         {
             Fx.Assert(instanceContextsFt != null, "Expect instanceContext to be initialized");
-            Fx.Assert(this.servicePerformanceCounters != null, "expect servicePerformanceCounters to be set");
+            Fx.Assert(
+                this.servicePerformanceCounters != null,
+                "expect servicePerformanceCounters to be set"
+            );
             instanceContextsFt.SetAcquired(this.AcquiredInstancesToken);
             instanceContextsFt.SetReleased(this.ReleasedInstancesToken);
             instanceContextsFt.SetRatio(this.RatioInstancesToken);
-            this.servicePerformanceCounters.SetThrottleBase((int)ServicePerformanceCounters.PerfCounters.InstancesPercentMaxInstancesBase, instanceContextsFt.Capacity);
+            this.servicePerformanceCounters.SetThrottleBase(
+                (int)ServicePerformanceCounters.PerfCounters.InstancesPercentMaxInstancesBase,
+                instanceContextsFt.Capacity
+            );
         }
 
         void InitializeCallsPerfCounterSettings()
         {
             Fx.Assert(this.calls != null, "Expect calls to be initialized");
-            Fx.Assert(this.servicePerformanceCounters != null, "expect servicePerformanceCounters to be set");
+            Fx.Assert(
+                this.servicePerformanceCounters != null,
+                "expect servicePerformanceCounters to be set"
+            );
             this.calls.SetAcquired(this.AcquiredCallsToken);
             this.calls.SetReleased(this.ReleasedCallsToken);
             this.calls.SetRatio(this.RatioCallsToken);
-            this.servicePerformanceCounters.SetThrottleBase((int)ServicePerformanceCounters.PerfCounters.CallsPercentMaxCallsBase, this.calls.Capacity);
+            this.servicePerformanceCounters.SetThrottleBase(
+                (int)ServicePerformanceCounters.PerfCounters.CallsPercentMaxCallsBase,
+                this.calls.Capacity
+            );
         }
 
         void InitializeSessionsPerfCounterSettings()
         {
             Fx.Assert(this.sessions != null, "Expect sessions to be initialized");
-            Fx.Assert(this.servicePerformanceCounters != null, "expect servicePerformanceCounters to be set");
+            Fx.Assert(
+                this.servicePerformanceCounters != null,
+                "expect servicePerformanceCounters to be set"
+            );
             this.sessions.SetAcquired(this.AcquiredSessionsToken);
             this.sessions.SetReleased(this.ReleasedSessionsToken);
             this.sessions.SetRatio(this.RatioSessionsToken);
-            this.servicePerformanceCounters.SetThrottleBase((int)ServicePerformanceCounters.PerfCounters.SessionsPercentMaxSessionsBase, this.sessions.Capacity);
+            this.servicePerformanceCounters.SetThrottleBase(
+                (int)ServicePerformanceCounters.PerfCounters.SessionsPercentMaxSessionsBase,
+                this.sessions.Capacity
+            );
         }
 
         bool PrivateAcquireCall(ChannelHandler channel)
@@ -263,7 +310,11 @@ namespace System.ServiceModel.Dispatcher
 
         bool PrivateAcquireSessionListenerHandler(ListenerHandler listener)
         {
-            if ((this.sessions != null) && (listener.Channel != null) && (listener.Channel.Throttle == null))
+            if (
+                (this.sessions != null)
+                && (listener.Channel != null)
+                && (listener.Channel.Throttle == null)
+            )
             {
                 listener.Channel.Throttle = this;
                 return this.sessions.Acquire(listener);
@@ -305,7 +356,10 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        internal bool AcquireInstanceContextAndDynamic(ChannelHandler channel, bool acquireInstanceContextThrottle)
+        internal bool AcquireInstanceContextAndDynamic(
+            ChannelHandler channel,
+            bool acquireInstanceContextThrottle
+        )
         {
             lock (this.ThisLock)
             {
@@ -315,8 +369,10 @@ namespace System.ServiceModel.Dispatcher
                 }
                 else
                 {
-                    return (this.PrivateAcquireInstanceContext(channel) &&
-                            this.PrivateAcquireDynamic(channel));
+                    return (
+                        this.PrivateAcquireInstanceContext(channel)
+                        && this.PrivateAcquireDynamic(channel)
+                    );
                 }
             }
         }
@@ -406,7 +462,11 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.host.State == CommunicationState.Opened)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxImmutableThrottle1, memberName)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxImmutableThrottle1, memberName)
+                    )
+                );
             }
             else
             {
@@ -416,20 +476,29 @@ namespace System.ServiceModel.Dispatcher
 
         void UpdateIsActive()
         {
-            this.isActive = ((this.dynamic != null) ||
-                             ((this.calls != null) && (this.calls.Capacity != Int32.MaxValue)) ||
-                             ((this.sessions != null) && (this.sessions.Capacity != Int32.MaxValue)) ||
-                             ((this.instanceContexts != null) && (this.instanceContexts.Capacity != Int32.MaxValue)));
+            this.isActive = (
+                (this.dynamic != null)
+                || ((this.calls != null) && (this.calls.Capacity != Int32.MaxValue))
+                || ((this.sessions != null) && (this.sessions.Capacity != Int32.MaxValue))
+                || (
+                    (this.instanceContexts != null)
+                    && (this.instanceContexts.Capacity != Int32.MaxValue)
+                )
+            );
         }
 
         internal void AcquiredCallsToken()
         {
-            this.servicePerformanceCounters.IncrementThrottlePercent((int)ServicePerformanceCounters.PerfCounters.CallsPercentMaxCalls);
+            this.servicePerformanceCounters.IncrementThrottlePercent(
+                (int)ServicePerformanceCounters.PerfCounters.CallsPercentMaxCalls
+            );
         }
 
         internal void ReleasedCallsToken()
         {
-            this.servicePerformanceCounters.DecrementThrottlePercent((int)ServicePerformanceCounters.PerfCounters.CallsPercentMaxCalls);
+            this.servicePerformanceCounters.DecrementThrottlePercent(
+                (int)ServicePerformanceCounters.PerfCounters.CallsPercentMaxCalls
+            );
         }
 
         internal void RatioCallsToken(int count)
@@ -442,12 +511,16 @@ namespace System.ServiceModel.Dispatcher
 
         internal void AcquiredInstancesToken()
         {
-            this.servicePerformanceCounters.IncrementThrottlePercent((int)ServicePerformanceCounters.PerfCounters.InstancesPercentMaxInstances);
+            this.servicePerformanceCounters.IncrementThrottlePercent(
+                (int)ServicePerformanceCounters.PerfCounters.InstancesPercentMaxInstances
+            );
         }
 
         internal void ReleasedInstancesToken()
         {
-            this.servicePerformanceCounters.DecrementThrottlePercent((int)ServicePerformanceCounters.PerfCounters.InstancesPercentMaxInstances);
+            this.servicePerformanceCounters.DecrementThrottlePercent(
+                (int)ServicePerformanceCounters.PerfCounters.InstancesPercentMaxInstances
+            );
         }
 
         internal void RatioInstancesToken(int count)
@@ -460,12 +533,16 @@ namespace System.ServiceModel.Dispatcher
 
         internal void AcquiredSessionsToken()
         {
-            this.servicePerformanceCounters.IncrementThrottlePercent((int)ServicePerformanceCounters.PerfCounters.SessionsPercentMaxSessions);
+            this.servicePerformanceCounters.IncrementThrottlePercent(
+                (int)ServicePerformanceCounters.PerfCounters.SessionsPercentMaxSessions
+            );
         }
 
         internal void ReleasedSessionsToken()
         {
-            this.servicePerformanceCounters.DecrementThrottlePercent((int)ServicePerformanceCounters.PerfCounters.SessionsPercentMaxSessions);
+            this.servicePerformanceCounters.DecrementThrottlePercent(
+                (int)ServicePerformanceCounters.PerfCounters.SessionsPercentMaxSessions
+            );
         }
 
         internal void RatioSessionsToken(int count)

@@ -34,17 +34,16 @@ namespace Microsoft.CodeAnalysis.Collections
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.KeyComparer"/>
             public IEqualityComparer<T> KeyComparer
             {
-                get
-                {
-                    return ReadOnlySet.Comparer;
-                }
-
+                get { return ReadOnlySet.Comparer; }
                 set
                 {
                     if (Equals(KeyComparer, value ?? EqualityComparer<T>.Default))
                         return;
 
-                    _mutableSet = new SegmentedHashSet<T>(ReadOnlySet, value ?? EqualityComparer<T>.Default);
+                    _mutableSet = new SegmentedHashSet<T>(
+                        ReadOnlySet,
+                        value ?? EqualityComparer<T>.Default
+                    );
                     _set = default;
                 }
             }
@@ -60,11 +59,19 @@ namespace Microsoft.CodeAnalysis.Collections
             {
                 if (_mutableSet is null)
                 {
-                    var originalSet = RoslynImmutableInterlocked.InterlockedExchange(ref _set, default);
+                    var originalSet = RoslynImmutableInterlocked.InterlockedExchange(
+                        ref _set,
+                        default
+                    );
                     if (originalSet.IsDefault)
-                        throw new InvalidOperationException($"Unexpected concurrent access to {GetType()}");
+                        throw new InvalidOperationException(
+                            $"Unexpected concurrent access to {GetType()}"
+                        );
 
-                    _mutableSet = new SegmentedHashSet<T>(originalSet._set, originalSet.KeyComparer);
+                    _mutableSet = new SegmentedHashSet<T>(
+                        originalSet._set,
+                        originalSet.KeyComparer
+                    );
                 }
 
                 return _mutableSet;
@@ -97,8 +104,7 @@ namespace Microsoft.CodeAnalysis.Collections
             }
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.Contains(T)"/>
-            public bool Contains(T item)
-                => ReadOnlySet.Contains(item);
+            public bool Contains(T item) => ReadOnlySet.Contains(item);
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.ExceptWith(IEnumerable{T})"/>
             public void ExceptWith(IEnumerable<T> other)
@@ -158,32 +164,28 @@ namespace Microsoft.CodeAnalysis.Collections
             }
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.GetEnumerator()"/>
-            public Enumerator GetEnumerator()
-                => new Enumerator(GetOrCreateMutableSet());
+            public Enumerator GetEnumerator() => new Enumerator(GetOrCreateMutableSet());
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.IntersectWith(IEnumerable{T})"/>
-            public void IntersectWith(IEnumerable<T> other)
-                => GetOrCreateMutableSet().IntersectWith(other);
+            public void IntersectWith(IEnumerable<T> other) =>
+                GetOrCreateMutableSet().IntersectWith(other);
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.IsProperSubsetOf(IEnumerable{T})"/>
-            public bool IsProperSubsetOf(IEnumerable<T> other)
-                => ReadOnlySet.IsProperSubsetOf(other);
+            public bool IsProperSubsetOf(IEnumerable<T> other) =>
+                ReadOnlySet.IsProperSubsetOf(other);
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.IsProperSupersetOf(IEnumerable{T})"/>
-            public bool IsProperSupersetOf(IEnumerable<T> other)
-                => ReadOnlySet.IsProperSupersetOf(other);
+            public bool IsProperSupersetOf(IEnumerable<T> other) =>
+                ReadOnlySet.IsProperSupersetOf(other);
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.IsSubsetOf(IEnumerable{T})"/>
-            public bool IsSubsetOf(IEnumerable<T> other)
-                => ReadOnlySet.IsSubsetOf(other);
+            public bool IsSubsetOf(IEnumerable<T> other) => ReadOnlySet.IsSubsetOf(other);
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.IsSupersetOf(IEnumerable{T})"/>
-            public bool IsSupersetOf(IEnumerable<T> other)
-                => ReadOnlySet.IsSupersetOf(other);
+            public bool IsSupersetOf(IEnumerable<T> other) => ReadOnlySet.IsSupersetOf(other);
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.Overlaps(IEnumerable{T})"/>
-            public bool Overlaps(IEnumerable<T> other)
-                => ReadOnlySet.Overlaps(other);
+            public bool Overlaps(IEnumerable<T> other) => ReadOnlySet.Overlaps(other);
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.Remove(T)"/>
             public bool Remove(T item)
@@ -195,12 +197,11 @@ namespace Microsoft.CodeAnalysis.Collections
             }
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.SetEquals(IEnumerable{T})"/>
-            public bool SetEquals(IEnumerable<T> other)
-                => ReadOnlySet.SetEquals(other);
+            public bool SetEquals(IEnumerable<T> other) => ReadOnlySet.SetEquals(other);
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.SymmetricExceptWith(IEnumerable{T})"/>
-            public void SymmetricExceptWith(IEnumerable<T> other)
-                => GetOrCreateMutableSet().SymmetricExceptWith(other);
+            public void SymmetricExceptWith(IEnumerable<T> other) =>
+                GetOrCreateMutableSet().SymmetricExceptWith(other);
 
             /// <inheritdoc cref="ImmutableHashSet{T}.Builder.TryGetValue(T, out T)"/>
             public bool TryGetValue(T equalValue, out T actualValue)
@@ -261,17 +262,14 @@ namespace Microsoft.CodeAnalysis.Collections
                 return _set;
             }
 
-            void ICollection<T>.Add(T item)
-                => ((ICollection<T>)GetOrCreateMutableSet()).Add(item);
+            void ICollection<T>.Add(T item) => ((ICollection<T>)GetOrCreateMutableSet()).Add(item);
 
-            void ICollection<T>.CopyTo(T[] array, int arrayIndex)
-                => ((ICollection<T>)ReadOnlySet).CopyTo(array, arrayIndex);
+            void ICollection<T>.CopyTo(T[] array, int arrayIndex) =>
+                ((ICollection<T>)ReadOnlySet).CopyTo(array, arrayIndex);
 
-            IEnumerator<T> IEnumerable<T>.GetEnumerator()
-                => GetEnumerator();
+            IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
 
-            IEnumerator IEnumerable.GetEnumerator()
-                => GetEnumerator();
+            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         }
     }
 }

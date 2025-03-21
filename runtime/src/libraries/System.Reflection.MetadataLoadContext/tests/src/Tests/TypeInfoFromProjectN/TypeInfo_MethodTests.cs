@@ -34,7 +34,6 @@ namespace System.Reflection.Tests
             Assert.Equal(runtimeType, type);
         }
 
-
         // Verify GetArrayRank() method
         [Fact]
         public static void TestGetArrayRank1()
@@ -49,7 +48,6 @@ namespace System.Reflection.Tests
 
             Assert.Equal(expectedRank, rank);
         }
-
 
         // Verify GetArrayRank() method
         [Fact]
@@ -76,7 +74,6 @@ namespace System.Reflection.Tests
             VerifyGetDeclaredEvent(typeInfo, "EventPublic");
         }
 
-
         // Verify GetDeclaredEvent() method
         [Fact]
         public static void TestGetDeclaredEvent2()
@@ -89,7 +86,6 @@ namespace System.Reflection.Tests
             Assert.Null(ei);
         }
 
-
         // Verify GetDeclaredEvent() method
         [Fact]
         public static void TestGetDeclaredEvent3()
@@ -97,9 +93,11 @@ namespace System.Reflection.Tests
             Type type = typeof(MethodPublicClass).Project();
             TypeInfo typeInfo = type.GetTypeInfo();
 
-            Assert.Throws<ArgumentNullException>(() => { EventInfo ei = typeInfo.GetDeclaredEvent(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                EventInfo ei = typeInfo.GetDeclaredEvent(null);
+            });
         }
-
 
         // Verify GetDeclaredField() method
         [Fact]
@@ -111,7 +109,6 @@ namespace System.Reflection.Tests
             VerifyGetDeclaredField(typeInfo, "PublicField");
         }
 
-
         // Verify GetDeclaredField() method
         [Fact]
         public static void TestGetDeclaredField2()
@@ -121,7 +118,6 @@ namespace System.Reflection.Tests
 
             VerifyGetDeclaredField(typeInfo, "PublicStaticField");
         }
-
 
         // Verify GetDeclaredField() method
         [Fact]
@@ -135,7 +131,6 @@ namespace System.Reflection.Tests
             Assert.Null(fi);
         }
 
-
         // Verify  GetDeclaredField() method
         [Fact]
         public static void TestGetDeclaredField4()
@@ -143,9 +138,11 @@ namespace System.Reflection.Tests
             Type type = typeof(MethodPublicClass).Project();
             TypeInfo typeInfo = type.GetTypeInfo();
 
-            Assert.Throws<ArgumentNullException>(() => { FieldInfo fi = typeInfo.GetDeclaredField(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                FieldInfo fi = typeInfo.GetDeclaredField(null);
+            });
         }
-
 
         // Verify GetDeclaredMethod() method
         [Fact]
@@ -157,7 +154,6 @@ namespace System.Reflection.Tests
             VerifyGetDeclaredMethod(typeInfo, "PublicMethod");
         }
 
-
         // Verify  GetDeclaredMethod() method
         [Fact]
         public static void TestGetDeclaredMethod2()
@@ -167,7 +163,6 @@ namespace System.Reflection.Tests
 
             VerifyGetDeclaredMethod(typeInfo, "PublicStaticMethod");
         }
-
 
         // Verify GetDeclaredMethod() method
         [Fact]
@@ -181,7 +176,6 @@ namespace System.Reflection.Tests
             Assert.Null(mi);
         }
 
-
         // Verify  GetDeclaredMethod() method
         [Fact]
         public static void TestGetDeclaredMethod4()
@@ -189,9 +183,11 @@ namespace System.Reflection.Tests
             Type type = typeof(MethodPublicClass).Project();
             TypeInfo typeInfo = type.GetTypeInfo();
 
-            Assert.Throws<ArgumentNullException>(() => { MethodInfo mi = typeInfo.GetDeclaredMethod(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                MethodInfo mi = typeInfo.GetDeclaredMethod(null);
+            });
         }
-
 
         // Verify  GetDeclaredMethods() method
         [Fact]
@@ -202,7 +198,6 @@ namespace System.Reflection.Tests
 
             VerifyGetDeclaredMethods(typeInfo, "overRiddenMethod", 4);
         }
-
 
         // Verify  GetDeclaredMethods() method
         [Fact]
@@ -224,8 +219,6 @@ namespace System.Reflection.Tests
             VerifyGetDeclaredNestedType(typeInfo, "PublicNestedType");
         }
 
-
-
         // Verify GetDeclaredNestedType() method
         [Fact]
         public static void TestGetDeclaredNestedType2()
@@ -238,7 +231,6 @@ namespace System.Reflection.Tests
             Assert.Null(nested_ti);
         }
 
-
         // Verify  GetDeclaredNestedType() method
         [Fact]
         public static void TestGetDeclaredNestedType3()
@@ -246,9 +238,11 @@ namespace System.Reflection.Tests
             Type type = typeof(MethodPublicClass).Project();
             TypeInfo typeInfo = type.GetTypeInfo();
 
-            Assert.Throws<ArgumentNullException>(() => { TypeInfo nested_ti = typeInfo.GetDeclaredNestedType(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                TypeInfo nested_ti = typeInfo.GetDeclaredNestedType(null);
+            });
         }
-
 
         // Verify GetElementType() method
         [Fact]
@@ -261,7 +255,6 @@ namespace System.Reflection.Tests
 
             Assert.Null(type);
         }
-
 
         // Verify GetElementType() method
         [Fact]
@@ -290,7 +283,6 @@ namespace System.Reflection.Tests
             Assert.NotNull(type);
             Assert.Equal(typeof(int).Project().Name, type.Name);
         }
-
 
         // Verify GetGenericParameterConstraints() method
         [Fact]
@@ -327,7 +319,6 @@ namespace System.Reflection.Tests
             Assert.Equal(0, tpConstraints.Length);
         }
 
-
         // Verify GetGenericTypeDefinition() method
         [Fact]
         public static void TestGetGenericTypeDefinition()
@@ -354,7 +345,6 @@ namespace System.Reflection.Tests
             Assert.False(isSubClass);
         }
 
-
         // Verify IsSubClassOf() method
         [Fact]
         public static void TestIsSubClassOf2()
@@ -364,7 +354,10 @@ namespace System.Reflection.Tests
 
             bool isSubClass = t2.IsSubclassOf(t1.AsType());
 
-            Assert.True(isSubClass, "Failed! isSubClass returned False when this class derives from input class ");
+            Assert.True(
+                isSubClass,
+                "Failed! isSubClass returned False when this class derives from input class "
+            );
         }
 
         // Verify IsAssignableFrom() method
@@ -378,7 +371,6 @@ namespace System.Reflection.Tests
 
             Assert.True(isAssignable, "Failed! IsAssignableFrom returned False");
         }
-
 
         // Verify IsAssignableFrom() method
         [Fact]
@@ -404,7 +396,6 @@ namespace System.Reflection.Tests
             Assert.True(isAssignable, "Failed! IsAssignableFrom returned False for same Type");
         }
 
-
         // Verify IsAssignableFrom() method
         [Fact]
         public static void TestIsAssignableFrom4()
@@ -416,7 +407,6 @@ namespace System.Reflection.Tests
 
             Assert.True(isAssignable, "Failed! IsAssignableFrom returned False");
         }
-
 
         // Verify MakeArrayType() method
         [Fact]
@@ -432,7 +422,6 @@ namespace System.Reflection.Tests
             Assert.Equal(strArray.GetType().Project(), arraytype);
         }
 
-
         // Verify MakeArrayType() method
         [Fact]
         public static void TestMakeArrayType2()
@@ -447,7 +436,6 @@ namespace System.Reflection.Tests
             Assert.Equal(intArray.GetType().Project(), arraytype);
         }
 
-
         // Verify MakeArrayType(int rank) method
         [Fact]
         public static void TestMakeArrayTypeWithRank1()
@@ -455,11 +443,12 @@ namespace System.Reflection.Tests
             TypeInfo ti = typeof(string).Project().GetTypeInfo();
             Type arraytype = ti.MakeArrayType(1);
 
-
             Assert.NotNull(arraytype);
-            Assert.True(arraytype.IsArray, "Failed!!  MakeArrayType() returned type that is not Array");
+            Assert.True(
+                arraytype.IsArray,
+                "Failed!!  MakeArrayType() returned type that is not Array"
+            );
         }
-
 
         // Verify MakeArrayType(int rank) method
         [Fact]
@@ -470,9 +459,11 @@ namespace System.Reflection.Tests
             TypeInfo ti = typeof(int).Project().GetTypeInfo();
             Type arraytype = ti.MakeArrayType(2);
 
-
             Assert.NotNull(arraytype);
-            Assert.True(arraytype.IsArray, "Failed!!  MakeArrayType() returned type that is not Array");
+            Assert.True(
+                arraytype.IsArray,
+                "Failed!!  MakeArrayType() returned type that is not Array"
+            );
         }
 
         // Verify MakeArrayType() method
@@ -489,7 +480,6 @@ namespace System.Reflection.Tests
             Assert.Equal(arraytype.GetElementType(), typeof(char*).Project());
         }
 
-
         // Verify MakeArrayType(int rank) method
         [Fact]
         public static void TestMakeArrayTypeWithRank3()
@@ -500,7 +490,10 @@ namespace System.Reflection.Tests
             Type arraytype = ti.MakeArrayType(3);
 
             Assert.NotNull(arraytype);
-            Assert.True(arraytype.IsArray, "Failed!!  MakeArrayType() returned type that is not Array");
+            Assert.True(
+                arraytype.IsArray,
+                "Failed!!  MakeArrayType() returned type that is not Array"
+            );
         }
 
         // Verify MakeByRefType method
@@ -510,9 +503,11 @@ namespace System.Reflection.Tests
             TypeInfo ti = typeof(int).Project().GetTypeInfo();
             Type byreftype = ti.MakeByRefType();
 
-
             Assert.NotNull(byreftype);
-            Assert.True(byreftype.IsByRef, "Failed!!  MakeByRefType() returned type that is not ByRef");
+            Assert.True(
+                byreftype.IsByRef,
+                "Failed!!  MakeByRefType() returned type that is not ByRef"
+            );
         }
 
         // Verify MakeByRefType method
@@ -522,11 +517,12 @@ namespace System.Reflection.Tests
             TypeInfo ti = typeof(string).Project().GetTypeInfo();
             Type byreftype = ti.MakeByRefType();
 
-
             Assert.NotNull(byreftype);
-            Assert.True(byreftype.IsByRef, "Failed!!  MakeByRefType() returned type that is not ByRef");
+            Assert.True(
+                byreftype.IsByRef,
+                "Failed!!  MakeByRefType() returned type that is not ByRef"
+            );
         }
-
 
         // Verify MakePointerType method
         [Fact]
@@ -535,9 +531,11 @@ namespace System.Reflection.Tests
             TypeInfo ti = typeof(int).Project().GetTypeInfo();
             Type ptrtype = ti.MakePointerType();
 
-
             Assert.NotNull(ptrtype);
-            Assert.True(ptrtype.IsPointer, "Failed!!  MakePointerType() returned type that is not Pointer");
+            Assert.True(
+                ptrtype.IsPointer,
+                "Failed!!  MakePointerType() returned type that is not Pointer"
+            );
         }
 
         // Verify MakePointerType method
@@ -547,9 +545,11 @@ namespace System.Reflection.Tests
             TypeInfo ti = typeof(string).Project().GetTypeInfo();
             Type ptrtype = ti.MakePointerType();
 
-
             Assert.NotNull(ptrtype);
-            Assert.True(ptrtype.IsPointer, "Failed!!  MakePointerType() returned type that is not Pointer");
+            Assert.True(
+                ptrtype.IsPointer,
+                "Failed!!  MakePointerType() returned type that is not Pointer"
+            );
         }
 
         // Verify MakeGenericType() method
@@ -563,9 +563,11 @@ namespace System.Reflection.Tests
             Type generictype = typeInfo.MakeGenericType(typeArgs);
 
             Assert.NotNull(generictype);
-            Assert.True(generictype.GetTypeInfo().IsGenericType, "Failed!!  MakeGenericType() returned type that is not generic");
+            Assert.True(
+                generictype.GetTypeInfo().IsGenericType,
+                "Failed!!  MakeGenericType() returned type that is not generic"
+            );
         }
-
 
         // Verify ToString() method
         [Fact]
@@ -577,7 +579,6 @@ namespace System.Reflection.Tests
             Assert.Equal("System.String", typeInfo.ToString());
         }
 
-
         // Verify ToString() method
         [Fact]
         public static void TestToString2()
@@ -587,8 +588,6 @@ namespace System.Reflection.Tests
 
             Assert.Equal("System.Int32", typeInfo.ToString());
         }
-
-
 
         //Private Helper Methods
 
@@ -616,10 +615,10 @@ namespace System.Reflection.Tests
             Assert.Equal(methodName, mi.Name);
         }
 
-
         private static void VerifyGetDeclaredMethods(TypeInfo ti, string methodName, int count)
         {
-            IEnumerator<MethodInfo> alldefinedMethods = ti.GetDeclaredMethods(methodName).GetEnumerator();
+            IEnumerator<MethodInfo> alldefinedMethods = ti.GetDeclaredMethods(methodName)
+                .GetEnumerator();
             MethodInfo mi = null;
             int numMethods = 0;
 
@@ -660,26 +659,39 @@ namespace System.Reflection.Tests
         public MethodPublicClass() { }
 
         public void PublicMethod() { }
+
         public void overRiddenMethod() { }
+
         public void overRiddenMethod(int i) { }
+
         public void overRiddenMethod(string s) { }
+
         public void overRiddenMethod(object o) { }
 
         public static void PublicStaticMethod() { }
+
         public class PublicNestedType { }
 
-        public int PublicProperty { get { return default(int); } set { } }
+        public int PublicProperty
+        {
+            get { return default(int); }
+            set { }
+        }
 
         public event System.EventHandler EventPublic;
     }
 
     public interface MethodITest { }
+
     public class TypeInfoMethodBase { }
+
     public class TypeInfoMethodDerived : TypeInfoMethodBase { }
+
     public class TypeInfoMethodImplClass : MethodITest { }
+
     public class TypeInfoMethodGenericClass<T> { }
+
     public class TypeInfoMethodClassWithConstraints<T, U>
         where T : TypeInfoMethodBase, MethodITest
-        where U : class, new()
-    { }
+        where U : class, new() { }
 }

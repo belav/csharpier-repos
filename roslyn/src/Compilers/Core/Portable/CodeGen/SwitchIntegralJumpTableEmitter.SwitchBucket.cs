@@ -3,10 +3,10 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
-using System.Collections.Generic;
 
 namespace Microsoft.CodeAnalysis.CodeGen
 {
@@ -32,26 +32,26 @@ namespace Microsoft.CodeAnalysis.CodeGen
             ///      case 2:
             ///      case 3:
             ///           DoOneThing();
-            ///           break;               
+            ///           break;
             ///
             ///      case 4:
             ///      case 5:
             ///      case 6:
             ///      case 7:
             ///           DoAnotherThing();
-            ///           break;   
-            ///  
+            ///           break;
+            ///
             ///  NOTE: A trivial bucket with only one case constant is by definition degenerate.
             /// </summary>
             internal bool IsDegenerate
             {
-                get
-                {
-                    return _isKnownDegenerate;
-                }
+                get { return _isKnownDegenerate; }
             }
 
-            internal SwitchBucket(ImmutableArray<KeyValuePair<ConstantValue, object>> allLabels, int index)
+            internal SwitchBucket(
+                ImmutableArray<KeyValuePair<ConstantValue, object>> allLabels,
+                int index
+            )
             {
                 _startLabelIndex = index;
                 _endLabelIndex = index;
@@ -59,7 +59,11 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 _isKnownDegenerate = true;
             }
 
-            private SwitchBucket(ImmutableArray<KeyValuePair<ConstantValue, object>> allLabels, int startIndex, int endIndex)
+            private SwitchBucket(
+                ImmutableArray<KeyValuePair<ConstantValue, object>> allLabels,
+                int startIndex,
+                int endIndex
+            )
             {
                 Debug.Assert((uint)startIndex < (uint)endIndex);
 
@@ -69,7 +73,12 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 _isKnownDegenerate = false;
             }
 
-            internal SwitchBucket(ImmutableArray<KeyValuePair<ConstantValue, object>> allLabels, int startIndex, int endIndex, bool isDegenerate)
+            internal SwitchBucket(
+                ImmutableArray<KeyValuePair<ConstantValue, object>> allLabels,
+                int startIndex,
+                int endIndex,
+                bool isDegenerate
+            )
             {
                 Debug.Assert((uint)startIndex <= (uint)endIndex);
                 Debug.Assert((uint)startIndex != (uint)endIndex || isDegenerate);
@@ -82,10 +91,7 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             internal uint LabelsCount
             {
-                get
-                {
-                    return (uint)(_endLabelIndex - _startLabelIndex + 1);
-                }
+                get { return (uint)(_endLabelIndex - _startLabelIndex + 1); }
             }
 
             internal KeyValuePair<ConstantValue, object> this[int i]
@@ -99,33 +105,30 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             internal ulong BucketSize
             {
-                get
-                {
-                    return GetBucketSize(this.StartConstant, this.EndConstant);
-                }
+                get { return GetBucketSize(this.StartConstant, this.EndConstant); }
             }
 
             // if a bucket could be split into two degenerate ones
             // specifies a label index where the second bucket would start
             // -1 indicates that the bucket cannot be split into degenerate ones
             //  0 indicates that the bucket is already degenerate
-            // 
+            //
             // Code Review question: why are we supporting splitting only in two buckets. Why not in more?
             // Explanation:
-            //  The input here is a "dense" bucket - the one that previous heuristics 
-            //  determined as not worth splitting. 
+            //  The input here is a "dense" bucket - the one that previous heuristics
+            //  determined as not worth splitting.
             //
-            //  A dense bucket has rough execution cost of 1 conditional branch (range check) 
+            //  A dense bucket has rough execution cost of 1 conditional branch (range check)
             //  and 1 computed branch (which cost roughly the same as conditional one or perhaps more).
-            //  The only way to surely beat that cost via splitting is if the bucket can be 
+            //  The only way to surely beat that cost via splitting is if the bucket can be
             //  split into 2 degenerate buckets. Then we have just 2 conditional branches.
             //
-            //  3 degenerate buckets would require up to 3 conditional branches. 
-            //  On some hardware computed jumps may cost significantly more than 
-            //  conditional ones (because they are harder to predict or whatever), 
+            //  3 degenerate buckets would require up to 3 conditional branches.
+            //  On some hardware computed jumps may cost significantly more than
+            //  conditional ones (because they are harder to predict or whatever),
             //  so it could still be profitable, but I did not want to guess that.
             //
-            //  Basically if we have 3 degenerate buckets that can be merged into a dense bucket, 
+            //  Basically if we have 3 degenerate buckets that can be merged into a dense bucket,
             //  we prefer a dense bucket, which we emit as "switch" opcode.
             //
             internal int DegenerateBucketSplit
@@ -137,7 +140,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
                         return 0;
                     }
 
-                    Debug.Assert(_startLabelIndex != _endLabelIndex, "1-sized buckets should be already known as degenerate.");
+                    Debug.Assert(
+                        _startLabelIndex != _endLabelIndex,
+                        "1-sized buckets should be already known as degenerate."
+                    );
 
                     var allLabels = this._allLabels;
                     var split = 0;
@@ -148,8 +154,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
                     {
                         var switchLabel = allLabels[idx];
 
-                        if (lastLabel != switchLabel.Value ||
-                            !IsContiguous(lastConst, switchLabel.Key))
+                        if (
+                            lastLabel != switchLabel.Value
+                            || !IsContiguous(lastConst, switchLabel.Key)
+                        )
                         {
                             if (split != 0)
                             {
@@ -178,7 +186,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 return GetBucketSize(lastConst, nextConst) == 2;
             }
 
-            private static ulong GetBucketSize(ConstantValue startConstant, ConstantValue endConstant)
+            private static ulong GetBucketSize(
+                ConstantValue startConstant,
+                ConstantValue endConstant
+            )
             {
                 Debug.Assert(!BucketOverflowUInt64Limit(startConstant, endConstant));
                 Debug.Assert(endConstant.Discriminator == startConstant.Discriminator);
@@ -188,7 +199,9 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 if (startConstant.IsNegativeNumeric || endConstant.IsNegativeNumeric)
                 {
                     Debug.Assert(endConstant.Int64Value >= startConstant.Int64Value);
-                    bucketSize = unchecked((ulong)(endConstant.Int64Value - startConstant.Int64Value + 1));
+                    bucketSize = unchecked(
+                        (ulong)(endConstant.Int64Value - startConstant.Int64Value + 1)
+                    );
                 }
                 else
                 {
@@ -200,7 +213,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
             }
 
             // Check if bucket size exceeds UInt64.MaxValue
-            private static bool BucketOverflowUInt64Limit(ConstantValue startConstant, ConstantValue endConstant)
+            private static bool BucketOverflowUInt64Limit(
+                ConstantValue startConstant,
+                ConstantValue endConstant
+            )
             {
                 Debug.Assert(IsValidSwitchBucketConstantPair(startConstant, endConstant));
 
@@ -220,7 +236,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             // Virtual switch instruction has a max limit of Int32.MaxValue labels
             // Check if bucket size exceeds Int32.MaxValue
-            private static bool BucketOverflow(ConstantValue startConstant, ConstantValue endConstant)
+            private static bool BucketOverflow(
+                ConstantValue startConstant,
+                ConstantValue endConstant
+            )
             {
                 return BucketOverflowUInt64Limit(startConstant, endConstant)
                     || GetBucketSize(startConstant, endConstant) > Int32.MaxValue;
@@ -228,34 +247,22 @@ namespace Microsoft.CodeAnalysis.CodeGen
 
             internal int StartLabelIndex
             {
-                get
-                {
-                    return _startLabelIndex;
-                }
+                get { return _startLabelIndex; }
             }
 
             internal int EndLabelIndex
             {
-                get
-                {
-                    return _endLabelIndex;
-                }
+                get { return _endLabelIndex; }
             }
 
             internal ConstantValue StartConstant
             {
-                get
-                {
-                    return _allLabels[_startLabelIndex].Key;
-                }
+                get { return _allLabels[_startLabelIndex].Key; }
             }
 
             internal ConstantValue EndConstant
             {
-                get
-                {
-                    return _allLabels[_endLabelIndex].Key;
-                }
+                get { return _allLabels[_endLabelIndex].Key; }
             }
 
             private static bool IsValidSwitchBucketConstant(ConstantValue constant)
@@ -266,7 +273,10 @@ namespace Microsoft.CodeAnalysis.CodeGen
                     && !constant.IsString;
             }
 
-            private static bool IsValidSwitchBucketConstantPair(ConstantValue startConstant, ConstantValue endConstant)
+            private static bool IsValidSwitchBucketConstantPair(
+                ConstantValue startConstant,
+                ConstantValue endConstant
+            )
             {
                 return IsValidSwitchBucketConstant(startConstant)
                     && IsValidSwitchBucketConstant(endConstant)
@@ -306,7 +316,11 @@ namespace Microsoft.CodeAnalysis.CodeGen
                 Debug.Assert(prevBucket._endLabelIndex + 1 == _startLabelIndex);
                 if (MergeIsAdvantageous(prevBucket, this))
                 {
-                    this = new SwitchBucket(_allLabels, prevBucket._startLabelIndex, _endLabelIndex);
+                    this = new SwitchBucket(
+                        _allLabels,
+                        prevBucket._startLabelIndex,
+                        _endLabelIndex
+                    );
                     return true;
                 }
 

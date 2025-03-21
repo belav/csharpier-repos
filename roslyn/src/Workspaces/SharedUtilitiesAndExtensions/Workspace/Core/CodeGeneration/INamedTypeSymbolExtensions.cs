@@ -8,7 +8,9 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
 {
     internal static class INamedTypeSymbolExtensions
     {
-        public static CodeGenerationAbstractNamedTypeSymbol ToCodeGenerationSymbol(this INamedTypeSymbol namedType)
+        public static CodeGenerationAbstractNamedTypeSymbol ToCodeGenerationSymbol(
+            this INamedTypeSymbol namedType
+        )
         {
             if (namedType is CodeGenerationAbstractNamedTypeSymbol typeSymbol)
             {
@@ -31,7 +33,8 @@ namespace Microsoft.CodeAnalysis.CodeGeneration
                 namedType.NullableAnnotation,
                 namedType.GetMembers().WhereAsArray(s => s is not INamedTypeSymbol),
                 namedType.GetTypeMembers().SelectAsArray(t => t.ToCodeGenerationSymbol()),
-                namedType.EnumUnderlyingType);
+                namedType.EnumUnderlyingType
+            );
         }
     }
 }

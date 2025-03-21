@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.RoutePattern;
 
 using static RoutePatternHelpers;
-
 using RoutePatternToken = EmbeddedSyntaxToken<RoutePatternKind>;
 
 internal struct RoutePatternLexer
@@ -17,7 +16,8 @@ internal struct RoutePatternLexer
     public readonly RoutePatternOptions RoutePatternOptions;
     public int Position;
 
-    public RoutePatternLexer(VirtualCharSequence text, RoutePatternOptions routePatternOptions) : this()
+    public RoutePatternLexer(VirtualCharSequence text, RoutePatternOptions routePatternOptions)
+        : this()
     {
         Text = text;
         RoutePatternOptions = routePatternOptions;
@@ -25,11 +25,11 @@ internal struct RoutePatternLexer
 
     public VirtualChar CurrentChar => Position < Text.Length ? Text[Position] : default;
 
-    public VirtualCharSequence GetSubPatternToCurrentPos(int start)
-        => GetSubPattern(start, Position);
+    public VirtualCharSequence GetSubPatternToCurrentPos(int start) =>
+        GetSubPattern(start, Position);
 
-    public VirtualCharSequence GetSubPattern(int start, int end)
-        => Text.GetSubSequence(TextSpan.FromBounds(start, end));
+    public VirtualCharSequence GetSubPattern(int start, int end) =>
+        Text.GetSubSequence(TextSpan.FromBounds(start, end));
 
     public RoutePatternToken ScanNextToken()
     {
@@ -44,8 +44,8 @@ internal struct RoutePatternLexer
         return CreateToken(GetKind(ch), Text.GetSubSequence(new TextSpan(Position - 1, 1)));
     }
 
-    private static RoutePatternKind GetKind(VirtualChar ch)
-        => ch.Value switch
+    private static RoutePatternKind GetKind(VirtualChar ch) =>
+        ch.Value switch
         {
             '/' => RoutePatternKind.SlashToken,
             '~' => RoutePatternKind.TildeToken,
@@ -64,18 +64,16 @@ internal struct RoutePatternLexer
             _ => RoutePatternKind.TextToken,
         };
 
-    public TextSpan GetTextSpan(int startInclusive, int endExclusive)
-        => TextSpan.FromBounds(Text[startInclusive].Span.Start, Text[endExclusive - 1].Span.End);
+    public TextSpan GetTextSpan(int startInclusive, int endExclusive) =>
+        TextSpan.FromBounds(Text[startInclusive].Span.Start, Text[endExclusive - 1].Span.End);
 
-    public bool IsAt(string val)
-        => TextAt(Position, val);
+    public bool IsAt(string val) => TextAt(Position, val);
 
     private bool TextAt(int position, string val)
     {
         for (var i = 0; i < val.Length; i++)
         {
-            if (position + i >= Text.Length ||
-                Text[position + i].Value != val[i])
+            if (position + i >= Text.Length || Text[position + i].Value != val[i])
             {
                 return false;
             }
@@ -119,12 +117,18 @@ internal struct RoutePatternLexer
             {
                 questionMarkPosition = Position;
             }
-            else if (ch.Value == '[' && IsUnescapedChar(ref Position, '[') && RoutePatternOptions.SupportTokenReplacement)
+            else if (
+                ch.Value == '['
+                && IsUnescapedChar(ref Position, '[')
+                && RoutePatternOptions.SupportTokenReplacement
+            )
             {
                 // Literal ends at bracket start if token replacement is supported.
                 break;
             }
-            else if (IsUnescapedChar(ref Position, ']') && RoutePatternOptions.SupportTokenReplacement)
+            else if (
+                IsUnescapedChar(ref Position, ']') && RoutePatternOptions.SupportTokenReplacement
+            )
             {
                 mismatchBracketPosition = Position;
             }
@@ -143,21 +147,27 @@ internal struct RoutePatternLexer
         // It's fine that this only warns about the first invalid close brace.
         if (mismatchBracePosition != null)
         {
-            token = token.AddDiagnosticIfNone(new EmbeddedDiagnostic(
-                Resources.TemplateRoute_MismatchedParameter,
-                token.GetSpan()));
+            token = token.AddDiagnosticIfNone(
+                new EmbeddedDiagnostic(Resources.TemplateRoute_MismatchedParameter, token.GetSpan())
+            );
         }
         if (mismatchBracketPosition != null)
         {
-            token = token.AddDiagnosticIfNone(new EmbeddedDiagnostic(
-                Resources.AttributeRoute_TokenReplacement_ImbalancedSquareBrackets,
-                token.GetSpan()));
+            token = token.AddDiagnosticIfNone(
+                new EmbeddedDiagnostic(
+                    Resources.AttributeRoute_TokenReplacement_ImbalancedSquareBrackets,
+                    token.GetSpan()
+                )
+            );
         }
         if (questionMarkPosition != null)
         {
-            token = token.AddDiagnosticIfNone(new EmbeddedDiagnostic(
-                Resources.FormatTemplateRoute_InvalidLiteral(token.Value),
-                token.GetSpan()));
+            token = token.AddDiagnosticIfNone(
+                new EmbeddedDiagnostic(
+                    Resources.FormatTemplateRoute_InvalidLiteral(token.Value),
+                    token.GetSpan()
+                )
+            );
         }
 
         return token;
@@ -215,17 +225,27 @@ internal struct RoutePatternLexer
             return null;
         }
 
-        var token = CreateToken(RoutePatternKind.ParameterNameToken, GetSubPatternToCurrentPos(start));
+        var token = CreateToken(
+            RoutePatternKind.ParameterNameToken,
+            GetSubPatternToCurrentPos(start)
+        );
         token = token.With(value: token.VirtualChars.CreateString());
         if (hasUnescapedOpenBrace)
         {
             token = token.AddDiagnosticIfNone(
-                new EmbeddedDiagnostic(Resources.TemplateRoute_UnescapedBrace, token.GetSpan()));
+                new EmbeddedDiagnostic(Resources.TemplateRoute_UnescapedBrace, token.GetSpan())
+            );
         }
         if (hasInvalidChar)
         {
             token = token.AddDiagnosticIfNone(
-                new EmbeddedDiagnostic(Resources.FormatTemplateRoute_InvalidParameterName(token.Value!.ToString().Replace("{{", "{").Replace("}}", "}")), token.GetSpan()));
+                new EmbeddedDiagnostic(
+                    Resources.FormatTemplateRoute_InvalidParameterName(
+                        token.Value!.ToString().Replace("{{", "{").Replace("}}", "}")
+                    ),
+                    token.GetSpan()
+                )
+            );
         }
 
         return token;
@@ -238,7 +258,7 @@ internal struct RoutePatternLexer
                 CloseBrace => true,
                 QuestionMark => true,
                 Asterisk => true,
-                _ => false
+                _ => false,
             };
     }
 
@@ -288,12 +308,16 @@ internal struct RoutePatternLexer
             return null;
         }
 
-        var token = CreateToken(RoutePatternKind.PolicyFragmentToken, GetSubPatternToCurrentPos(start));
+        var token = CreateToken(
+            RoutePatternKind.PolicyFragmentToken,
+            GetSubPatternToCurrentPos(start)
+        );
         token = token.With(value: token.VirtualChars.CreateString());
         if (hasUnescapedOpenBrace)
         {
             token = token.AddDiagnosticIfNone(
-                new EmbeddedDiagnostic(Resources.TemplateRoute_UnescapedBrace, token.GetSpan()));
+                new EmbeddedDiagnostic(Resources.TemplateRoute_UnescapedBrace, token.GetSpan())
+            );
         }
         return token;
     }
@@ -378,12 +402,16 @@ internal struct RoutePatternLexer
         }
 
         // This token could end with an unclosed parameter.
-        var token = CreateToken(RoutePatternKind.PolicyFragmentToken, GetSubPatternToCurrentPos(start));
+        var token = CreateToken(
+            RoutePatternKind.PolicyFragmentToken,
+            GetSubPatternToCurrentPos(start)
+        );
         token = token.With(value: token.VirtualChars.CreateString());
         if (hasUnescapedOpenBrace)
         {
             token = token.AddDiagnosticIfNone(
-                new EmbeddedDiagnostic(Resources.TemplateRoute_UnescapedBrace, token.GetSpan()));
+                new EmbeddedDiagnostic(Resources.TemplateRoute_UnescapedBrace, token.GetSpan())
+            );
         }
         return token;
     }
@@ -421,12 +449,19 @@ internal struct RoutePatternLexer
         }
 
         // This token could end with an unclosed parameter.
-        var token = CreateToken(RoutePatternKind.ReplacementToken, GetSubPatternToCurrentPos(start));
+        var token = CreateToken(
+            RoutePatternKind.ReplacementToken,
+            GetSubPatternToCurrentPos(start)
+        );
         token = token.With(value: token.VirtualChars.CreateString());
         if (hasUnescapedOpenBracket)
         {
             token = token.AddDiagnosticIfNone(
-                new EmbeddedDiagnostic(Resources.AttributeRoute_TokenReplacement_UnescapedBraceInToken, token.GetSpan()));
+                new EmbeddedDiagnostic(
+                    Resources.AttributeRoute_TokenReplacement_UnescapedBraceInToken,
+                    token.GetSpan()
+                )
+            );
         }
         return token;
     }
@@ -462,7 +497,10 @@ internal struct RoutePatternLexer
             return null;
         }
 
-        var token = CreateToken(RoutePatternKind.DefaultValueToken, GetSubPatternToCurrentPos(start));
+        var token = CreateToken(
+            RoutePatternKind.DefaultValueToken,
+            GetSubPatternToCurrentPos(start)
+        );
         token = token.With(value: token.VirtualChars.CreateString());
         return token;
     }

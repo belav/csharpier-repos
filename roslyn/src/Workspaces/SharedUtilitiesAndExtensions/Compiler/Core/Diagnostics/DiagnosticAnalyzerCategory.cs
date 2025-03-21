@@ -39,6 +39,6 @@ namespace Microsoft.CodeAnalysis.Diagnostics
         /// <summary>
         /// Analyzer reports project diagnostics (i.e. registers a Compilation action and/or Compilation end action diagnostics).
         /// </summary>
-        ProjectAnalysis = 0x1000
+        ProjectAnalysis = 0x1000,
     }
 }

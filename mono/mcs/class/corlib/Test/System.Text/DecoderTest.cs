@@ -5,143 +5,221 @@
 //	Atsushi Enomoto  <atsushi@ximian.com>
 //
 // (C) 2006 Novell, Inc.
-// 
-using NUnit.Framework;
+//
 using System;
 using System.Text;
+using NUnit.Framework;
 
 namespace MonoTests.System.Text
 {
-	[TestFixture]
-	public class DecoderTest
-	{
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConvertNullChars ()
-		{
-			int charsUsed, bytesUsed;
-			bool done;
-			Encoding.UTF8.GetDecoder ().Convert (
-				null, 0, 100, new char [100], 0, 100, false,
-				out charsUsed, out bytesUsed, out done);
-		}
+    [TestFixture]
+    public class DecoderTest
+    {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConvertNullChars()
+        {
+            int charsUsed,
+                bytesUsed;
+            bool done;
+            Encoding
+                .UTF8.GetDecoder()
+                .Convert(
+                    null,
+                    0,
+                    100,
+                    new char[100],
+                    0,
+                    100,
+                    false,
+                    out charsUsed,
+                    out bytesUsed,
+                    out done
+                );
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConvertNullBytes ()
-		{
-			int charsUsed, bytesUsed;
-			bool done;
-			Encoding.UTF8.GetDecoder ().Convert (
-				new byte [100], 0, 100, null, 0, 100, false,
-				out charsUsed, out bytesUsed, out done);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConvertNullBytes()
+        {
+            int charsUsed,
+                bytesUsed;
+            bool done;
+            Encoding
+                .UTF8.GetDecoder()
+                .Convert(
+                    new byte[100],
+                    0,
+                    100,
+                    null,
+                    0,
+                    100,
+                    false,
+                    out charsUsed,
+                    out bytesUsed,
+                    out done
+                );
+        }
 
-		[Test]
-		public void ConvertLimitedDestination ()
-		{
-			char [] chars = new char [10000];
-			byte [] bytes = new byte [10000];
+        [Test]
+        public void ConvertLimitedDestination()
+        {
+            char[] chars = new char[10000];
+            byte[] bytes = new byte[10000];
 
-			Decoder conv = new ExposedDecoder ();
-			int charsUsed, bytesUsed;
-			bool done;
+            Decoder conv = new ExposedDecoder();
+            int charsUsed,
+                bytesUsed;
+            bool done;
 
-			conv.Convert (bytes, 0, 10000, chars, 0, 1000, true,
-				      out charsUsed, out bytesUsed, out done);
+            conv.Convert(
+                bytes,
+                0,
+                10000,
+                chars,
+                0,
+                1000,
+                true,
+                out charsUsed,
+                out bytesUsed,
+                out done
+            );
 
-			Assert.IsFalse (done, "#1");
-			Assert.AreEqual (625, charsUsed, "#2");
-			Assert.AreEqual (625, bytesUsed, "#3");
-		}
+            Assert.IsFalse(done, "#1");
+            Assert.AreEqual(625, charsUsed, "#2");
+            Assert.AreEqual(625, bytesUsed, "#3");
+        }
 
-		[Test]
-		public void ConvertLimitedDestinationUTF8 ()
-		{
-			char [] chars = new char [10000];
-			byte [] bytes = new byte [10000];
+        [Test]
+        public void ConvertLimitedDestinationUTF8()
+        {
+            char[] chars = new char[10000];
+            byte[] bytes = new byte[10000];
 
-			Decoder conv = Encoding.UTF8.GetDecoder ();
-			int charsUsed, bytesUsed;
-			bool done;
+            Decoder conv = Encoding.UTF8.GetDecoder();
+            int charsUsed,
+                bytesUsed;
+            bool done;
 
-			conv.Convert (bytes, 0, 10000, chars, 0, 1000, true,
-				      out charsUsed, out bytesUsed, out done);
+            conv.Convert(
+                bytes,
+                0,
+                10000,
+                chars,
+                0,
+                1000,
+                true,
+                out charsUsed,
+                out bytesUsed,
+                out done
+            );
 
-			Assert.IsFalse (done, "#1");
-			Assert.AreEqual (1000, charsUsed, "#2");
-			Assert.AreEqual (1000, bytesUsed, "#3");
-		}
+            Assert.IsFalse(done, "#1");
+            Assert.AreEqual(1000, charsUsed, "#2");
+            Assert.AreEqual(1000, bytesUsed, "#3");
+        }
 
+        [Test]
+        public void CustomEncodingGetDecoder()
+        {
+            var encoding = new CustomEncoding();
+            var decoder = encoding.GetDecoder();
+            Assert.IsNotNull(decoder);
+        }
 
-		[Test]
-		public void CustomEncodingGetDecoder ()
-		{
-			var encoding = new CustomEncoding ();
-			var decoder = encoding.GetDecoder ();
-			Assert.IsNotNull (decoder);
-		}
+        class ExposedDecoder : Decoder
+        {
+            public override int GetCharCount(byte[] bytes, int index, int count)
+            {
+                return Encoding.UTF8.GetDecoder().GetCharCount(bytes, index, count);
+            }
 
-		class ExposedDecoder : Decoder {
-			public override int GetCharCount (byte [] bytes, int index, int count)
-			{
-				return Encoding.UTF8.GetDecoder ().GetCharCount (bytes, index, count);
-			}
+            public override int GetChars(
+                byte[] bytes,
+                int byteIndex,
+                int byteCount,
+                char[] chars,
+                int charIndex
+            )
+            {
+                return Encoding
+                    .UTF8.GetDecoder()
+                    .GetChars(bytes, byteIndex, byteCount, chars, charIndex);
+            }
+        }
 
-			public override int GetChars (byte [] bytes, int byteIndex, int byteCount, char [] chars, int charIndex)
-			{
-				return Encoding.UTF8.GetDecoder ().GetChars (bytes, byteIndex, byteCount, chars, charIndex);
-			}
-		}
+        class CustomEncoding : Encoding
+        {
+            public override int GetByteCount(char[] chars, int index, int count)
+            {
+                throw new NotSupportedException();
+            }
 
-		class CustomEncoding : Encoding {
+            public override int GetBytes(
+                char[] chars,
+                int charIndex,
+                int charCount,
+                byte[] bytes,
+                int byteIndex
+            )
+            {
+                throw new NotSupportedException();
+            }
 
-			public override int GetByteCount (char [] chars, int index, int count)
-			{
-				throw new NotSupportedException ();
-			}
+            public override int GetCharCount(byte[] bytes, int index, int count)
+            {
+                throw new NotSupportedException();
+            }
 
-			public override int GetBytes (char [] chars, int charIndex, int charCount, byte [] bytes, int byteIndex)
-			{
-				throw new NotSupportedException ();
-			}
+            public override int GetChars(
+                byte[] bytes,
+                int byteIndex,
+                int byteCount,
+                char[] chars,
+                int charIndex
+            )
+            {
+                throw new NotSupportedException();
+            }
 
-			public override int GetCharCount (byte [] bytes, int index, int count)
-			{
-				throw new NotSupportedException ();
-			}
+            public override int GetMaxByteCount(int charCount)
+            {
+                throw new NotSupportedException();
+            }
 
-			public override int GetChars (byte [] bytes, int byteIndex, int byteCount, char [] chars, int charIndex)
-			{
-				throw new NotSupportedException ();
-			}
+            public override int GetMaxCharCount(int byteCount)
+            {
+                throw new NotSupportedException();
+            }
+        }
 
-			public override int GetMaxByteCount (int charCount)
-			{
-				throw new NotSupportedException ();
-			}
+        [Test]
+        public void Bug10789()
+        {
+            byte[] bytes = new byte[100];
+            char[] chars = new char[100];
 
-			public override int GetMaxCharCount (int byteCount)
-			{
-				throw new NotSupportedException ();
-			}
-		}
+            Decoder conv = Encoding.UTF8.GetDecoder();
+            int charsUsed,
+                bytesUsed;
+            bool completed;
 
-		[Test]
-		public void Bug10789 ()
-		{
-			byte[] bytes = new byte[100];
-			char[] chars = new char[100];  
+            conv.Convert(
+                bytes,
+                0,
+                0,
+                chars,
+                100,
+                0,
+                false,
+                out bytesUsed,
+                out charsUsed,
+                out completed
+            );
 
-			Decoder conv = Encoding.UTF8.GetDecoder ();
-			int charsUsed, bytesUsed;
-			bool completed;
-			
-			conv.Convert (bytes, 0, 0, chars, 100, 0, false, out bytesUsed, out charsUsed, out completed);
-
-			Assert.IsTrue (completed, "#1");
-			Assert.AreEqual (0, charsUsed, "#2");
-			Assert.AreEqual (0, bytesUsed, "#3");
-		}
-	}
+            Assert.IsTrue(completed, "#1");
+            Assert.AreEqual(0, charsUsed, "#2");
+            Assert.AreEqual(0, bytesUsed, "#3");
+        }
+    }
 }

@@ -26,11 +26,13 @@ internal sealed class PipeWriterStream : Stream
 
     public override long Length => _length;
 
-    public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
-
-    public override void Flush()
+    public override long Position
     {
+        get => throw new NotSupportedException();
+        set => throw new NotSupportedException();
     }
+
+    public override void Flush() { }
 
     public override int Read(byte[] buffer, int offset, int count)
     {
@@ -53,19 +55,30 @@ internal sealed class PipeWriterStream : Stream
         _length += count;
     }
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    )
     {
         return WriteCoreAsync(buffer.AsMemory(offset, count), cancellationToken).AsTask();
     }
 
 #if NETCOREAPP || NETSTANDARD2_1_OR_GREATER
-    public override ValueTask WriteAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
+    public override ValueTask WriteAsync(
+        ReadOnlyMemory<byte> source,
+        CancellationToken cancellationToken = default
+    )
     {
         return WriteCoreAsync(source, cancellationToken);
     }
 #endif
 
-    private ValueTask WriteCoreAsync(ReadOnlyMemory<byte> source, CancellationToken cancellationToken = default)
+    private ValueTask WriteCoreAsync(
+        ReadOnlyMemory<byte> source,
+        CancellationToken cancellationToken = default
+    )
     {
         if (cancellationToken.IsCancellationRequested)
         {

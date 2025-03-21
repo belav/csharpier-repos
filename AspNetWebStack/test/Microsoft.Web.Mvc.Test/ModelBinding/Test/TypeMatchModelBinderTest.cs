@@ -17,7 +17,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ExtensibleModelBindingContext bindingContext = GetBindingContext();
             bindingContext.ValueProvider = new SimpleValueProvider
             {
-                { "theModelName", "not an integer" }
+                { "theModelName", "not an integer" },
             };
 
             TypeMatchModelBinder binder = new TypeMatchModelBinder();
@@ -35,10 +35,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Arrange
             ExtensibleModelBindingContext bindingContext = GetBindingContext();
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", 42 }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", 42 } };
 
             TypeMatchModelBinder binder = new TypeMatchModelBinder();
 
@@ -58,11 +55,13 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ExtensibleModelBindingContext bindingContext = GetBindingContext();
             bindingContext.ValueProvider = new SimpleValueProvider
             {
-                { "theModelName", "not an integer" }
+                { "theModelName", "not an integer" },
             };
 
             // Act
-            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext);
+            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(
+                bindingContext
+            );
 
             // Assert
             Assert.Null(vpResult); // Raw value is the wrong type
@@ -73,13 +72,12 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Arrange
             ExtensibleModelBindingContext bindingContext = GetBindingContext();
-            bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", 42 }
-            };
+            bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", 42 } };
 
             // Act
-            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext);
+            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(
+                bindingContext
+            );
 
             // Assert
             Assert.NotNull(vpResult);
@@ -93,7 +91,9 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             bindingContext.ValueProvider = new SimpleValueProvider();
 
             // Act
-            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(bindingContext);
+            ValueProviderResult vpResult = TypeMatchModelBinder.GetCompatibleValueProviderResult(
+                bindingContext
+            );
 
             // Assert
             Assert.Null(vpResult); // No key matched
@@ -108,8 +108,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             return new ExtensibleModelBindingContext
             {
-                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(null, modelType),
-                ModelName = "theModelName"
+                ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(
+                    null,
+                    modelType
+                ),
+                ModelName = "theModelName",
             };
         }
     }

@@ -17,7 +17,11 @@ internal static class TaskTimeoutExtensions
         }
     }
 
-    public static async Task<T> WithTimeout<T>(this Task<T> task, TimeSpan timeoutDelay, string message)
+    public static async Task<T> WithTimeout<T>(
+        this Task<T> task,
+        TimeSpan timeoutDelay,
+        string message
+    )
     {
         if (task == await Task.WhenAny(task, Task.Delay(timeoutDelay)))
         {

@@ -19,17 +19,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpParseOptionsChangingService()
-        {
-        }
+        public CSharpParseOptionsChangingService() { }
 
-        public bool CanApplyChange(ParseOptions oldOptions, ParseOptions newOptions, string? maxLangVersion)
+        public bool CanApplyChange(
+            ParseOptions oldOptions,
+            ParseOptions newOptions,
+            string? maxLangVersion
+        )
         {
             var oldCSharpOptions = (CSharpParseOptions)oldOptions;
             var newCSharpOptions = (CSharpParseOptions)newOptions;
 
             // Currently, only changes to the LanguageVersion of parse options are supported.
-            if (oldCSharpOptions.WithLanguageVersion(newCSharpOptions.SpecifiedLanguageVersion) != newOptions)
+            if (
+                oldCSharpOptions.WithLanguageVersion(newCSharpOptions.SpecifiedLanguageVersion)
+                != newOptions
+            )
             {
                 return false;
             }
@@ -49,7 +54,9 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
             }
             else
             {
-                Contract.ThrowIfFalse(LanguageVersionFacts.TryParse(maxLangVersion, out var parsedMaxLanguageVersion));
+                Contract.ThrowIfFalse(
+                    LanguageVersionFacts.TryParse(maxLangVersion, out var parsedMaxLanguageVersion)
+                );
                 return newCSharpOptions.LanguageVersion <= parsedMaxLanguageVersion;
             }
         }
@@ -58,8 +65,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Utilities
         {
             var csharpOptions = (CSharpParseOptions)options;
 
-            storage.SetProperty("LangVersion", nameof(CSharpProjectConfigurationProperties3.LanguageVersion),
-                LanguageVersionFacts.ToDisplayString(csharpOptions.SpecifiedLanguageVersion));
+            storage.SetProperty(
+                "LangVersion",
+                nameof(CSharpProjectConfigurationProperties3.LanguageVersion),
+                LanguageVersionFacts.ToDisplayString(csharpOptions.SpecifiedLanguageVersion)
+            );
         }
     }
 }

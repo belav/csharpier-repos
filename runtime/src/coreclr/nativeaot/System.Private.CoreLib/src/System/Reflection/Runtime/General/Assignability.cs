@@ -6,23 +6,28 @@ using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Reflection.Runtime.TypeInfos;
-
 using Internal.Reflection.Core;
 
 namespace System.Reflection.Runtime.General
 {
     internal static class Assignability
     {
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2055:UnrecognizedReflectionPattern",
-            Justification = "Just instantiating over formals for desktop compat reasons")]
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:AotUnfriendlyApi",
-            Justification = "Just instantiating over formals for desktop compat reasons")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2055:UnrecognizedReflectionPattern",
+            Justification = "Just instantiating over formals for desktop compat reasons"
+        )]
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:AotUnfriendlyApi",
+            Justification = "Just instantiating over formals for desktop compat reasons"
+        )]
         public static bool IsAssignableFrom(Type toTypeInfo, Type fromTypeInfo)
         {
             if (toTypeInfo == null)
                 throw new NullReferenceException();
             if (fromTypeInfo == null)
-                return false;   // It would be more appropriate to throw ArgumentNullException here, but returning "false" is the desktop-compat behavior.
+                return false; // It would be more appropriate to throw ArgumentNullException here, but returning "false" is the desktop-compat behavior.
 
             if (fromTypeInfo.Equals(toTypeInfo))
                 return true;
@@ -42,7 +47,9 @@ namespace System.Reflection.Runtime.General
                 // generic type parameters. The .NET Native framework keeps the two separate. For the purpose of IsAssignableFrom(),
                 // it makes sense to unify the two for the sake of backward compat. We'll just make the transform here so that the rest of code
                 // doesn't need to know about this quirk.
-                fromTypeInfo = fromTypeInfo.GetGenericTypeDefinition().MakeGenericType(fromTypeInfo.GetGenericTypeParameters());
+                fromTypeInfo = fromTypeInfo
+                    .GetGenericTypeDefinition()
+                    .MakeGenericType(fromTypeInfo.GetGenericTypeParameters());
             }
 
             if (fromTypeInfo.CanCastTo(toTypeInfo))
@@ -58,8 +65,11 @@ namespace System.Reflection.Runtime.General
             return false;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Looking at interface list is safe because we wouldn't remove reflection-visible interface from a reflection-visible type")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Looking at interface list is safe because we wouldn't remove reflection-visible interface from a reflection-visible type"
+        )]
         private static bool CanCastTo(this Type fromTypeInfo, Type toTypeInfo)
         {
             if (fromTypeInfo.Equals(toTypeInfo))
@@ -71,7 +81,7 @@ namespace System.Reflection.Runtime.General
                     return fromTypeInfo.CanCastArrayToInterface(toTypeInfo);
 
                 if (fromTypeInfo.IsSubclassOf(toTypeInfo))
-                    return true;  // T[] is castable to Array or Object.
+                    return true; // T[] is castable to Array or Object.
 
                 if (!toTypeInfo.IsArray)
                     return false;
@@ -130,7 +140,10 @@ namespace System.Reflection.Runtime.General
                 if (toTypeInfo == typeof(ValueType))
                 {
                     GenericParameterAttributes attributes = fromTypeInfo.GenericParameterAttributes;
-                    if ((attributes & GenericParameterAttributes.NotNullableValueTypeConstraint) != 0)
+                    if (
+                        (attributes & GenericParameterAttributes.NotNullableValueTypeConstraint)
+                        != 0
+                    )
                         return true;
                 }
 
@@ -143,7 +156,12 @@ namespace System.Reflection.Runtime.General
                 return false;
             }
 
-            if (toTypeInfo.IsArray || toTypeInfo.IsByRef || toTypeInfo.IsPointer || toTypeInfo.IsGenericParameter)
+            if (
+                toTypeInfo.IsArray
+                || toTypeInfo.IsByRef
+                || toTypeInfo.IsPointer
+                || toTypeInfo.IsGenericParameter
+            )
                 return false;
 
             if (fromTypeInfo.MatchesWithVariance(toTypeInfo))
@@ -165,7 +183,7 @@ namespace System.Reflection.Runtime.General
                     return true;
 
                 Type walk = fromTypeInfo;
-                for (;;)
+                for (; ; )
                 {
                     Type? baseType = walk.BaseType;
                     if (baseType == null)
@@ -183,8 +201,22 @@ namespace System.Reflection.Runtime.General
         //
         private static bool MatchesWithVariance(this Type fromTypeInfo, Type toTypeInfo)
         {
-            Debug.Assert(!(fromTypeInfo.IsArray || fromTypeInfo.IsByRef || fromTypeInfo.IsPointer || fromTypeInfo.IsGenericParameter));
-            Debug.Assert(!(toTypeInfo.IsArray || toTypeInfo.IsByRef || toTypeInfo.IsPointer || toTypeInfo.IsGenericParameter));
+            Debug.Assert(
+                !(
+                    fromTypeInfo.IsArray
+                    || fromTypeInfo.IsByRef
+                    || fromTypeInfo.IsPointer
+                    || fromTypeInfo.IsGenericParameter
+                )
+            );
+            Debug.Assert(
+                !(
+                    toTypeInfo.IsArray
+                    || toTypeInfo.IsByRef
+                    || toTypeInfo.IsPointer
+                    || toTypeInfo.IsGenericParameter
+                )
+            );
 
             if (fromTypeInfo.Equals(toTypeInfo))
                 return true;
@@ -204,16 +236,30 @@ namespace System.Reflection.Runtime.General
                 Type fromTypeArgumentInfo = fromTypeArguments[i];
                 Type toTypeArgumentInfo = toTypeArguments[i];
 
-                GenericParameterAttributes attributes = genericTypeParameters[i].GenericParameterAttributes;
+                GenericParameterAttributes attributes = genericTypeParameters[
+                    i
+                ].GenericParameterAttributes;
                 switch (attributes & GenericParameterAttributes.VarianceMask)
                 {
                     case GenericParameterAttributes.Covariant:
-                        if (!(fromTypeArgumentInfo.IsGcReferenceTypeAndCastableTo(toTypeArgumentInfo)))
+                        if (
+                            !(
+                                fromTypeArgumentInfo.IsGcReferenceTypeAndCastableTo(
+                                    toTypeArgumentInfo
+                                )
+                            )
+                        )
                             return false;
                         break;
 
                     case GenericParameterAttributes.Contravariant:
-                        if (!(toTypeArgumentInfo.IsGcReferenceTypeAndCastableTo(fromTypeArgumentInfo)))
+                        if (
+                            !(
+                                toTypeArgumentInfo.IsGcReferenceTypeAndCastableTo(
+                                    fromTypeArgumentInfo
+                                )
+                            )
+                        )
                             return false;
                         break;
 
@@ -223,7 +269,7 @@ namespace System.Reflection.Runtime.General
                         break;
 
                     default:
-                        throw new BadImageFormatException();  // Unexpected variance value in metadata.
+                        throw new BadImageFormatException(); // Unexpected variance value in metadata.
                 }
             }
             return true;
@@ -306,7 +352,7 @@ namespace System.Reflection.Runtime.General
             {
                 GenericParameterAttributes attributes = t.GenericParameterAttributes;
                 if ((attributes & GenericParameterAttributes.ReferenceTypeConstraint) != 0)
-                    return true;   // generic parameter with a "class" constraint.
+                    return true; // generic parameter with a "class" constraint.
             }
 
             return t.ProvablyAGcReferenceTypeHelper();
@@ -341,8 +387,11 @@ namespace System.Reflection.Runtime.General
         // T[] casts to IList<T>. This could be handled by the normal ancestor-walking code
         // but for one complication: T[] also casts to IList<U> if T[] casts to U[].
         //
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Looking at interface list is safe because we wouldn't remove reflection-visible interface from a reflection-visible type")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Looking at interface list is safe because we wouldn't remove reflection-visible interface from a reflection-visible type"
+        )]
         private static bool CanCastArrayToInterface(this Type fromTypeInfo, Type toTypeInfo)
         {
             Debug.Assert(fromTypeInfo.IsArray);

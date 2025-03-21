@@ -10,7 +10,10 @@ namespace System.Web.Http.Filters
 {
     public class ExceptionFilterAttributeTest
     {
-        private readonly HttpActionExecutedContext _context = new HttpActionExecutedContext(ContextUtil.CreateActionContext(), new Exception());
+        private readonly HttpActionExecutedContext _context = new HttpActionExecutedContext(
+            ContextUtil.CreateActionContext(),
+            new Exception()
+        );
 
         [Fact]
         public void AllowsMultiple_DefaultReturnsTrue()
@@ -23,12 +26,21 @@ namespace System.Web.Http.Filters
         [Fact]
         public void ExecuteExceptionFilterAsync_IfContextParameterIsNull_ThrowsException()
         {
-            IExceptionFilter filter = new Mock<ExceptionFilterAttribute>() { CallBase = true }.Object;
-
-            Assert.ThrowsArgumentNull(() =>
+            IExceptionFilter filter = new Mock<ExceptionFilterAttribute>()
             {
-                filter.ExecuteExceptionFilterAsync(actionExecutedContext: null, cancellationToken: CancellationToken.None);
-            }, "actionExecutedContext");
+                CallBase = true,
+            }.Object;
+
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    filter.ExecuteExceptionFilterAsync(
+                        actionExecutedContext: null,
+                        cancellationToken: CancellationToken.None
+                    );
+                },
+                "actionExecutedContext"
+            );
         }
 
         [Fact]
@@ -43,7 +55,8 @@ namespace System.Web.Http.Filters
 
             // Act & Assert
             var thrownException = await Assert.ThrowsAsync<Exception>(() =>
-                filter.ExecuteExceptionFilterAsync(_context, CancellationToken.None));
+                filter.ExecuteExceptionFilterAsync(_context, CancellationToken.None)
+            );
             Assert.Same(exception, thrownException);
         }
 
@@ -51,10 +64,7 @@ namespace System.Web.Http.Filters
         public async Task ExecuteExceptionFilterAsync_InvokesOnExceptionMethod()
         {
             // Arrange
-            var mockFilter = new Mock<ExceptionFilterAttribute>()
-            {
-                CallBase = true,
-            };
+            var mockFilter = new Mock<ExceptionFilterAttribute>() { CallBase = true };
 
             IExceptionFilter filter = mockFilter.Object;
 
@@ -79,8 +89,6 @@ namespace System.Web.Http.Filters
             Assert.True(result.Status == TaskStatus.RanToCompletion);
         }
 
-        public sealed class TestableExceptionFilter : ExceptionFilterAttribute
-        {
-        }
+        public sealed class TestableExceptionFilter : ExceptionFilterAttribute { }
     }
 }

@@ -8,46 +8,126 @@ using System.Web.Mvc;
 
 namespace Microsoft.Web.Mvc
 {
-    [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "MailTo", Justification = "This is correctly cased.")]
+    [SuppressMessage(
+        "Microsoft.Naming",
+        "CA1702:CompoundWordsShouldBeCasedCorrectly",
+        MessageId = "MailTo",
+        Justification = "This is correctly cased."
+    )]
     public static class MailToExtensions
     {
-        public static MvcHtmlString Mailto(this HtmlHelper helper, string linkText, string emailAddress)
+        public static MvcHtmlString Mailto(
+            this HtmlHelper helper,
+            string linkText,
+            string emailAddress
+        )
         {
             return Mailto(helper, linkText, emailAddress, null, null, null, null, null);
         }
 
-        public static MvcHtmlString Mailto(this HtmlHelper helper, string linkText, string emailAddress, object htmlAttributes)
+        public static MvcHtmlString Mailto(
+            this HtmlHelper helper,
+            string linkText,
+            string emailAddress,
+            object htmlAttributes
+        )
         {
             return Mailto(helper, linkText, emailAddress, null, null, null, null, htmlAttributes);
         }
 
-        public static MvcHtmlString Mailto(this HtmlHelper helper, string linkText, string emailAddress, IDictionary<string, object> htmlAttributes)
+        public static MvcHtmlString Mailto(
+            this HtmlHelper helper,
+            string linkText,
+            string emailAddress,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             return Mailto(helper, linkText, emailAddress, null, null, null, null, htmlAttributes);
         }
 
-        public static MvcHtmlString Mailto(this HtmlHelper helper, string linkText, string emailAddress, string subject)
+        public static MvcHtmlString Mailto(
+            this HtmlHelper helper,
+            string linkText,
+            string emailAddress,
+            string subject
+        )
         {
             return Mailto(helper, linkText, emailAddress, subject, null, null, null, null);
         }
 
-        public static MvcHtmlString Mailto(this HtmlHelper helper, string linkText, string emailAddress, string subject, object htmlAttributes)
+        public static MvcHtmlString Mailto(
+            this HtmlHelper helper,
+            string linkText,
+            string emailAddress,
+            string subject,
+            object htmlAttributes
+        )
         {
-            return Mailto(helper, linkText, emailAddress, subject, null, null, null, htmlAttributes);
+            return Mailto(
+                helper,
+                linkText,
+                emailAddress,
+                subject,
+                null,
+                null,
+                null,
+                htmlAttributes
+            );
         }
 
-        public static MvcHtmlString Mailto(this HtmlHelper helper, string linkText, string emailAddress, string subject, IDictionary<string, object> htmlAttributes)
+        public static MvcHtmlString Mailto(
+            this HtmlHelper helper,
+            string linkText,
+            string emailAddress,
+            string subject,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return Mailto(helper, linkText, emailAddress, subject, null, null, null, htmlAttributes);
+            return Mailto(
+                helper,
+                linkText,
+                emailAddress,
+                subject,
+                null,
+                null,
+                null,
+                htmlAttributes
+            );
         }
 
-        public static MvcHtmlString Mailto(this HtmlHelper helper, string linkText, string emailAddress, string subject, string body, string cc, string bcc, object htmlAttributes)
+        public static MvcHtmlString Mailto(
+            this HtmlHelper helper,
+            string linkText,
+            string emailAddress,
+            string subject,
+            string body,
+            string cc,
+            string bcc,
+            object htmlAttributes
+        )
         {
-            return Mailto(helper, linkText, emailAddress, subject, body, cc, bcc, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return Mailto(
+                helper,
+                linkText,
+                emailAddress,
+                subject,
+                body,
+                cc,
+                bcc,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
-        public static MvcHtmlString Mailto(this HtmlHelper helper, string linkText, string emailAddress, string subject,
-                                           string body, string cc, string bcc, IDictionary<string, object> htmlAttributes)
+        public static MvcHtmlString Mailto(
+            this HtmlHelper helper,
+            string linkText,
+            string emailAddress,
+            string subject,
+            string body,
+            string cc,
+            string bcc,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             if (emailAddress == null)
             {

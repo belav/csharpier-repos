@@ -32,7 +32,9 @@ namespace Microsoft.Extensions.Hosting.Internal
             ApplicationLifetime.StopApplication();
             if (!_shutdownBlock.WaitOne(HostOptions.ShutdownTimeout))
             {
-                Logger.LogInformation("Waiting for the host to be disposed. Ensure all 'IHost' instances are wrapped in 'using' blocks.");
+                Logger.LogInformation(
+                    "Waiting for the host to be disposed. Ensure all 'IHost' instances are wrapped in 'using' blocks."
+                );
             }
 
             // wait one more time after the above log message, but only for ShutdownTimeout, so it doesn't hang forever

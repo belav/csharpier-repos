@@ -124,9 +124,18 @@ namespace System.Text.RegularExpressions.Tests
             ICollection<Match> collection = CreateCollection();
             Assert.Throws<ArgumentNullException>(() => collection.CopyTo(null, 0));
             Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(new Match[1], -1));
-            AssertExtensions.Throws<ArgumentException>("destinationArray", () => collection.CopyTo(new Match[1], 0));
-            AssertExtensions.Throws<ArgumentException>("destinationArray", () => collection.CopyTo(new Match[1], 1));
-            AssertExtensions.Throws<ArgumentException>("destinationArray", () => collection.CopyTo(new Match[1], 2));
+            AssertExtensions.Throws<ArgumentException>(
+                "destinationArray",
+                () => collection.CopyTo(new Match[1], 0)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "destinationArray",
+                () => collection.CopyTo(new Match[1], 1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "destinationArray",
+                () => collection.CopyTo(new Match[1], 2)
+            );
         }
 
         [Fact]
@@ -161,8 +170,13 @@ namespace System.Text.RegularExpressions.Tests
         {
             MatchCollection col = CreateCollection();
             DebuggerAttributes.ValidateDebuggerDisplayReferences(col);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(col);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                col
+            );
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                == DebuggerBrowsableState.RootHidden
+            );
             Match[] items = itemProperty.GetValue(info.Instance) as Match[];
             Assert.Equal(col, items);
         }
@@ -170,7 +184,12 @@ namespace System.Text.RegularExpressions.Tests
         [Fact]
         public static void DebuggerAttributeTests_Null()
         {
-            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() => DebuggerAttributes.ValidateDebuggerTypeProxyProperties(typeof(MatchCollection), null));
+            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                    typeof(MatchCollection),
+                    null
+                )
+            );
             Assert.IsType<ArgumentNullException>(ex.InnerException);
         }
     }

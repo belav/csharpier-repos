@@ -10,8 +10,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 internal abstract class MessageBody
 {
-    private static readonly MessageBody _zeroContentLengthClose = new ZeroContentLengthMessageBody(keepAlive: false);
-    private static readonly MessageBody _zeroContentLengthKeepAlive = new ZeroContentLengthMessageBody(keepAlive: true);
+    private static readonly MessageBody _zeroContentLengthClose = new ZeroContentLengthMessageBody(
+        keepAlive: false
+    );
+    private static readonly MessageBody _zeroContentLengthKeepAlive =
+        new ZeroContentLengthMessageBody(keepAlive: true);
 
     private readonly HttpProtocol _context;
 
@@ -175,9 +178,7 @@ internal abstract class MessageBody
         }
     }
 
-    protected virtual void OnReadStarting()
-    {
-    }
+    protected virtual void OnReadStarting() { }
 
     protected virtual Task OnReadStartedAsync()
     {
@@ -192,11 +193,17 @@ internal abstract class MessageBody
         if (_observedBytes > maxRequestBodySize)
         {
             _context.DisableHttp1KeepAlive();
-            KestrelBadHttpRequestException.Throw(RequestRejectionReason.RequestBodyTooLarge, maxRequestBodySize.GetValueOrDefault().ToString(CultureInfo.InvariantCulture));
+            KestrelBadHttpRequestException.Throw(
+                RequestRejectionReason.RequestBodyTooLarge,
+                maxRequestBodySize.GetValueOrDefault().ToString(CultureInfo.InvariantCulture)
+            );
         }
     }
 
-    protected ValueTask<ReadResult> StartTimingReadAsync(ValueTask<ReadResult> readAwaitable, CancellationToken cancellationToken)
+    protected ValueTask<ReadResult> StartTimingReadAsync(
+        ValueTask<ReadResult> readAwaitable,
+        CancellationToken cancellationToken
+    )
     {
         if (!readAwaitable.IsCompleted)
         {
@@ -220,7 +227,11 @@ internal abstract class MessageBody
         return readAwaitable;
     }
 
-    protected async ValueTask<ReadResult> StartTimingReadAwaited(ValueTask<FlushResult> continueTask, ValueTask<ReadResult> readAwaitable, CancellationToken cancellationToken)
+    protected async ValueTask<ReadResult> StartTimingReadAwaited(
+        ValueTask<FlushResult> continueTask,
+        ValueTask<ReadResult> readAwaitable,
+        CancellationToken cancellationToken
+    )
     {
         await continueTask;
 
@@ -254,7 +265,11 @@ internal abstract class MessageBody
         }
     }
 
-    protected long TrackConsumedAndExaminedBytes(ReadResult readResult, SequencePosition consumed, SequencePosition examined)
+    protected long TrackConsumedAndExaminedBytes(
+        ReadResult readResult,
+        SequencePosition consumed,
+        SequencePosition examined
+    )
     {
         // This code path is fairly hard to understand so let's break it down with an example
         // ReadAsync returns a ReadResult of length 50.
@@ -275,7 +290,9 @@ internal abstract class MessageBody
         // _totalExaminedInPreviousReadResult is now 50
         // _totalExaminedInPreviousReadResult is finally 0 after subtracting consumedLength.
 
-        long examinedLength, consumedLength, totalLength;
+        long examinedLength,
+            consumedLength,
+            totalLength;
 
         if (consumed.Equals(examined))
         {

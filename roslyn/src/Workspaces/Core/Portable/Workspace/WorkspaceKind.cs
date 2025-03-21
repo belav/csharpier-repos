@@ -24,7 +24,9 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         internal const string Custom = "Custom";
 
-        internal const string CloudEnvironmentClientWorkspace = nameof(CloudEnvironmentClientWorkspace);
+        internal const string CloudEnvironmentClientWorkspace = nameof(
+            CloudEnvironmentClientWorkspace
+        );
         internal const string RemoteWorkspace = nameof(RemoteWorkspace);
     }
 }

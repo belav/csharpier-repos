@@ -12,7 +12,8 @@ public class ComponentParametersShouldBePublicTest : DiagnosticVerifier
     [Fact]
     public void IgnoresPublicProperties()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -28,7 +29,8 @@ public class ComponentParametersShouldBePublicTest : DiagnosticVerifier
     [Fact]
     public void IgnoresPrivateNonParameterProperties()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -44,7 +46,8 @@ public class ComponentParametersShouldBePublicTest : DiagnosticVerifier
     [Fact]
     public void ErrorsForNonPublicParameters()
     {
-        var test = $@"
+        var test =
+            $@"
     namespace ConsoleApplication1
     {{
         using {typeof(ParameterAttribute).Namespace};
@@ -57,48 +60,43 @@ public class ComponentParametersShouldBePublicTest : DiagnosticVerifier
         }}
     }}" + ComponentsTestDeclarations.Source;
 
-        VerifyCSharpDiagnostic(test,
+        VerifyCSharpDiagnostic(
+            test,
             new DiagnosticResult
             {
                 Id = DiagnosticDescriptors.ComponentParametersShouldBePublic.Id,
-                Message = "Component parameter 'ConsoleApplication1.TypeName.MyProperty1' should be public.",
+                Message =
+                    "Component parameter 'ConsoleApplication1.TypeName.MyProperty1' should be public.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 7, 32)
-                }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 7, 32) },
             },
             new DiagnosticResult
             {
                 Id = DiagnosticDescriptors.ComponentParametersShouldBePublic.Id,
-                Message = "Component parameter 'ConsoleApplication1.TypeName.MyProperty2' should be public.",
+                Message =
+                    "Component parameter 'ConsoleApplication1.TypeName.MyProperty2' should be public.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 8, 40)
-                }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 8, 40) },
             },
             new DiagnosticResult
             {
                 Id = DiagnosticDescriptors.ComponentParametersShouldBePublic.Id,
-                Message = "Component parameter 'ConsoleApplication1.TypeName.MyProperty3' should be public.",
+                Message =
+                    "Component parameter 'ConsoleApplication1.TypeName.MyProperty3' should be public.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 9, 42)
-                }
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 42) },
             },
             new DiagnosticResult
             {
                 Id = DiagnosticDescriptors.ComponentParametersShouldBePublic.Id,
-                Message = "Component parameter 'ConsoleApplication1.TypeName.MyProperty4' should be public.",
+                Message =
+                    "Component parameter 'ConsoleApplication1.TypeName.MyProperty4' should be public.",
                 Severity = DiagnosticSeverity.Error,
-                Locations = new[]
-                {
-                        new DiagnosticResultLocation("Test0.cs", 10, 41)
-                }
-            });
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 10, 41) },
+            }
+        );
     }
 
-    protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer() => new ComponentParameterAnalyzer();
+    protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer() =>
+        new ComponentParameterAnalyzer();
 }

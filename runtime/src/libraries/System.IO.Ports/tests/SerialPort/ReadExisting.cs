@@ -18,7 +18,12 @@ namespace System.IO.Ports.Tests
         //The number of random bytes to receive for large input buffer testing
         private const int largeNumRndBytesToRead = 2048;
 
-        private enum ReadDataFromEnum { NonBuffered, Buffered, BufferedAndNonBuffered };
+        private enum ReadDataFromEnum
+        {
+            NonBuffered,
+            Buffered,
+            BufferedAndNonBuffered,
+        };
 
         #region Test Cases
 
@@ -59,7 +64,11 @@ namespace System.IO.Ports.Tests
         {
             int numberOfBytesToRead = 64;
 
-            VerifyRead(Encoding.ASCII, numberOfBytesToRead, ReadDataFromEnum.BufferedAndNonBuffered);
+            VerifyRead(
+                Encoding.ASCII,
+                numberOfBytesToRead,
+                ReadDataFromEnum.BufferedAndNonBuffered
+            );
         }
 
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
@@ -67,7 +76,11 @@ namespace System.IO.Ports.Tests
         {
             int numberOfBytesToRead = 3;
 
-            VerifyRead(Encoding.ASCII, numberOfBytesToRead, ReadDataFromEnum.BufferedAndNonBuffered);
+            VerifyRead(
+                Encoding.ASCII,
+                numberOfBytesToRead,
+                ReadDataFromEnum.BufferedAndNonBuffered
+            );
         }
 
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
@@ -82,7 +95,9 @@ namespace System.IO.Ports.Tests
                 byte[] utf32CharBytes = Encoding.UTF32.GetBytes(new[] { utf32Char });
                 int numBytes;
 
-                Debug.WriteLine("Verifying that ReadExisting() will read everything from internal buffer and drivers buffer");
+                Debug.WriteLine(
+                    "Verifying that ReadExisting() will read everything from internal buffer and drivers buffer"
+                );
 
                 //Put the first byte of the utf32 encoder char in the last byte of this buffer
                 //when we read this later the buffer will have to be resized
@@ -162,7 +177,11 @@ namespace System.IO.Ports.Tests
             VerifyRead(encoding, numberOfBytesToRead, ReadDataFromEnum.NonBuffered);
         }
 
-        private void VerifyRead(Encoding encoding, int numberOfBytesToRead, ReadDataFromEnum readDataFrom)
+        private void VerifyRead(
+            Encoding encoding,
+            int numberOfBytesToRead,
+            ReadDataFromEnum readDataFrom
+        )
         {
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
@@ -179,8 +198,11 @@ namespace System.IO.Ports.Tests
                     charsToWrite[i] = randChar;
                 }
 
-                Debug.WriteLine("Verifying read method endocing={0} with {1} random chars", encoding.EncodingName,
-                    bytesToWrite.Length);
+                Debug.WriteLine(
+                    "Verifying read method endocing={0} with {1} random chars",
+                    encoding.EncodingName,
+                    bytesToWrite.Length
+                );
 
                 com1.ReadTimeout = 500;
                 com1.Encoding = encoding;
@@ -206,7 +228,11 @@ namespace System.IO.Ports.Tests
                         VerifyReadBufferedAndNonBuffered(com1, com2, bytesToWrite);
                         break;
                     default:
-                        throw new ArgumentOutOfRangeException(nameof(readDataFrom), readDataFrom, null);
+                        throw new ArgumentOutOfRangeException(
+                            nameof(readDataFrom),
+                            readDataFrom,
+                            null
+                        );
                 }
             }
         }
@@ -227,10 +253,15 @@ namespace System.IO.Ports.Tests
             PerformReadOnCom1FromCom2(com1, com2, expectedChars);
         }
 
-
-        private void VerifyReadBufferedAndNonBuffered(SerialPort com1, SerialPort com2, byte[] bytesToWrite)
+        private void VerifyReadBufferedAndNonBuffered(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite
+        )
         {
-            char[] expectedChars = new char[com1.Encoding.GetCharCount(bytesToWrite, 0, bytesToWrite.Length) * 2];
+            char[] expectedChars = new char[
+                com1.Encoding.GetCharCount(bytesToWrite, 0, bytesToWrite.Length) * 2
+            ];
             char[] encodedChars = com1.Encoding.GetChars(bytesToWrite, 0, bytesToWrite.Length);
 
             Array.Copy(encodedChars, expectedChars, bytesToWrite.Length);
@@ -253,7 +284,12 @@ namespace System.IO.Ports.Tests
             Assert.Equal(bytesToWrite.Length, com1.BytesToRead);
         }
 
-        private void VerifyBytesReadOnCom1FromCom2(SerialPort com1, SerialPort com2, byte[] bytesToWrite, char[] expectedChars)
+        private void VerifyBytesReadOnCom1FromCom2(
+            SerialPort com1,
+            SerialPort com2,
+            byte[] bytesToWrite,
+            char[] expectedChars
+        )
         {
             com2.Write(bytesToWrite, 0, bytesToWrite.Length);
             com1.ReadTimeout = 500;
@@ -261,7 +297,11 @@ namespace System.IO.Ports.Tests
             PerformReadOnCom1FromCom2(com1, com2, expectedChars);
         }
 
-        private void PerformReadOnCom1FromCom2(SerialPort com1, SerialPort com2, char[] expectedChars)
+        private void PerformReadOnCom1FromCom2(
+            SerialPort com1,
+            SerialPort com2,
+            char[] expectedChars
+        )
         {
             string rcvString = com1.ReadExisting();
             char[] rcvBuffer = rcvString.ToCharArray();

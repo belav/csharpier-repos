@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-
 #if ES_BUILD_STANDALONE
 namespace Microsoft.Diagnostics.Tracing
 #else
@@ -24,7 +23,8 @@ namespace System.Diagnostics.Tracing
         public TypeAnalysis(
             Type dataType,
             EventDataAttribute eventAttrib,
-            List<Type> recursionCheck)
+            List<Type> recursionCheck
+        )
         {
             var propertyInfos = Statics.GetProperties(dataType);
             var propertyList = new List<PropertyAnalysis>();
@@ -36,8 +36,7 @@ namespace System.Diagnostics.Tracing
                     continue;
                 }
 
-                if (!propertyInfo.CanRead ||
-                    propertyInfo.GetIndexParameters().Length != 0)
+                if (!propertyInfo.CanRead || propertyInfo.GetIndexParameters().Length != 0)
                 {
                     continue;
                 }
@@ -58,16 +57,12 @@ namespace System.Diagnostics.Tracing
                 var fieldAttribute = Statics.GetCustomAttribute<EventFieldAttribute>(propertyInfo);
 
                 string propertyName =
-                    fieldAttribute != null && fieldAttribute.Name != null
-                    ? fieldAttribute.Name
-                    : Statics.ShouldOverrideFieldName(propertyInfo.Name)
-                    ? propertyTypeInfo.Name
+                    fieldAttribute != null && fieldAttribute.Name != null ? fieldAttribute.Name
+                    : Statics.ShouldOverrideFieldName(propertyInfo.Name) ? propertyTypeInfo.Name
                     : propertyInfo.Name;
-                propertyList.Add(new PropertyAnalysis(
-                    propertyName,
-                    getterInfo,
-                    propertyTypeInfo,
-                    fieldAttribute));
+                propertyList.Add(
+                    new PropertyAnalysis(propertyName, getterInfo, propertyTypeInfo, fieldAttribute)
+                );
             }
 
             this.properties = propertyList.ToArray();
@@ -84,7 +79,8 @@ namespace System.Diagnostics.Tracing
             if (eventAttrib != null)
             {
                 this.level = (EventLevel)Statics.Combine((int)eventAttrib.Level, (int)this.level);
-                this.opcode = (EventOpcode)Statics.Combine((int)eventAttrib.Opcode, (int)this.opcode);
+                this.opcode = (EventOpcode)
+                    Statics.Combine((int)eventAttrib.Opcode, (int)this.opcode);
                 this.keywords |= eventAttrib.Keywords;
                 this.tags |= eventAttrib.Tags;
                 this.name = eventAttrib.Name;

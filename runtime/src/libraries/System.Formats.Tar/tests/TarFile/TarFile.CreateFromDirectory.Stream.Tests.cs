@@ -12,23 +12,52 @@ namespace System.Formats.Tar.Tests
         public void InvalidPath_Throws()
         {
             using MemoryStream archive = new MemoryStream();
-            Assert.Throws<ArgumentNullException>(() => TarFile.CreateFromDirectory(sourceDirectoryName: null,destination: archive, includeBaseDirectory: false));
-            Assert.Throws<ArgumentException>(() => TarFile.CreateFromDirectory(sourceDirectoryName: string.Empty,destination: archive, includeBaseDirectory: false));
+            Assert.Throws<ArgumentNullException>(() =>
+                TarFile.CreateFromDirectory(
+                    sourceDirectoryName: null,
+                    destination: archive,
+                    includeBaseDirectory: false
+                )
+            );
+            Assert.Throws<ArgumentException>(() =>
+                TarFile.CreateFromDirectory(
+                    sourceDirectoryName: string.Empty,
+                    destination: archive,
+                    includeBaseDirectory: false
+                )
+            );
         }
 
         [Fact]
         public void NullStream_Throws()
         {
             using MemoryStream archive = new MemoryStream();
-            Assert.Throws<ArgumentNullException>(() => TarFile.CreateFromDirectory(sourceDirectoryName: "path",destination: null, includeBaseDirectory: false));
+            Assert.Throws<ArgumentNullException>(() =>
+                TarFile.CreateFromDirectory(
+                    sourceDirectoryName: "path",
+                    destination: null,
+                    includeBaseDirectory: false
+                )
+            );
         }
 
         [Fact]
         public void UnwritableStream_Throws()
         {
             using MemoryStream archive = new MemoryStream();
-            using WrappedStream unwritable = new WrappedStream(archive, canRead: true, canWrite: false, canSeek: true);
-            Assert.Throws<ArgumentException>(() => TarFile.CreateFromDirectory(sourceDirectoryName: "path",destination: unwritable, includeBaseDirectory: false));
+            using WrappedStream unwritable = new WrappedStream(
+                archive,
+                canRead: true,
+                canWrite: false,
+                canSeek: true
+            );
+            Assert.Throws<ArgumentException>(() =>
+                TarFile.CreateFromDirectory(
+                    sourceDirectoryName: "path",
+                    destination: unwritable,
+                    includeBaseDirectory: false
+                )
+            );
         }
 
         [Fact]
@@ -38,7 +67,13 @@ namespace System.Formats.Tar.Tests
             string dirPath = Path.Join(root.Path, "dir");
 
             using MemoryStream archive = new MemoryStream();
-            Assert.Throws<DirectoryNotFoundException>(() => TarFile.CreateFromDirectory(sourceDirectoryName: dirPath, destination: archive, includeBaseDirectory: false));
+            Assert.Throws<DirectoryNotFoundException>(() =>
+                TarFile.CreateFromDirectory(
+                    sourceDirectoryName: dirPath,
+                    destination: archive,
+                    includeBaseDirectory: false
+                )
+            );
         }
     }
 }

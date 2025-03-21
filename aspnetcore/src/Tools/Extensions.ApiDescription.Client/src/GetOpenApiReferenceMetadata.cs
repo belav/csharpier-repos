@@ -59,11 +59,13 @@ public class GetOpenApiReferenceMetadata : Task
             if (string.IsNullOrEmpty(codeGenerator))
             {
                 // This case occurs when user overrides the required metadata with an empty string.
-                var type = string.IsNullOrEmpty(item.GetMetadata("SourceProject")) ?
-                    "OpenApiReference" :
-                    "OpenApiProjectReference";
+                var type = string.IsNullOrEmpty(item.GetMetadata("SourceProject"))
+                    ? "OpenApiReference"
+                    : "OpenApiProjectReference";
 
-                Log.LogError(Resources.FormatInvalidEmptyMetadataValue("CodeGenerator", type, item.ItemSpec));
+                Log.LogError(
+                    Resources.FormatInvalidEmptyMetadataValue("CodeGenerator", type, item.ItemSpec)
+                );
                 continue;
             }
 
@@ -86,7 +88,8 @@ public class GetOpenApiReferenceMetadata : Task
                 var filename = item.GetMetadata("Filename");
                 var isTypeScript = codeGenerator.EndsWith(
                     TypeScriptLanguageName,
-                    StringComparison.OrdinalIgnoreCase);
+                    StringComparison.OrdinalIgnoreCase
+                );
 
                 outputPath = $"{filename}Client{(isTypeScript ? ".ts" : Extension)}";
             }
@@ -124,7 +127,10 @@ public class GetOpenApiReferenceMetadata : Task
 
             // Add metadata which may be used as a property and passed to an inner build.
             newItem.RemoveMetadata("SerializedMetadata");
-            newItem.SetMetadata("SerializedMetadata", MetadataSerializer.SerializeMetadata(newItem));
+            newItem.SetMetadata(
+                "SerializedMetadata",
+                MetadataSerializer.SerializeMetadata(newItem)
+            );
         }
 
         Outputs = outputs.ToArray();

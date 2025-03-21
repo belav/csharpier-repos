@@ -44,17 +44,20 @@ namespace System.Threading.Tasks
         // sister method to above property -- avoids a TLS lookup
         private TaskScheduler GetDefaultScheduler(Task? currTask)
         {
-            return
-                m_defaultScheduler ??
-                (currTask != null && (currTask.CreationOptions & TaskCreationOptions.HideScheduler) == 0 ? currTask.ExecutingTaskScheduler! : // a "current" task must be executing, which means it must have a scheduler
-                 TaskScheduler.Default);
+            return m_defaultScheduler
+                ?? (
+                    currTask != null
+                    && (currTask.CreationOptions & TaskCreationOptions.HideScheduler) == 0
+                        ? currTask.ExecutingTaskScheduler!
+                        : // a "current" task must be executing, which means it must have a scheduler
+                        TaskScheduler.Default
+                );
         }
 
         /* Constructors */
 
         // ctor parameters provide defaults for the factory, which can be overridden by options provided to
         // specific calls on the factory
-
 
         /// <summary>
         /// Initializes a <see cref="TaskFactory"/> instance with the default configuration.
@@ -69,9 +72,7 @@ namespace System.Threading.Tasks
         /// initialized to the current scheduler (see <see
         /// cref="TaskScheduler.Current">TaskScheduler.Current</see>).
         /// </remarks>
-        public TaskFactory()
-        {
-        }
+        public TaskFactory() { }
 
         /// <summary>
         /// Initializes a <see cref="TaskFactory"/> instance with the specified configuration.
@@ -144,7 +145,10 @@ namespace System.Threading.Tasks
         /// current scheduler (see <see
         /// cref="TaskScheduler.Current">TaskScheduler.Current</see>).
         /// </remarks>
-        public TaskFactory(TaskCreationOptions creationOptions, TaskContinuationOptions continuationOptions)
+        public TaskFactory(
+            TaskCreationOptions creationOptions,
+            TaskContinuationOptions continuationOptions
+        )
         {
             CheckMultiTaskContinuationOptions(continuationOptions);
             CheckCreationOptions(creationOptions);
@@ -188,7 +192,12 @@ namespace System.Threading.Tasks
         /// current scheduler (see <see
         /// cref="TaskScheduler.Current">TaskScheduler.Current</see>).
         /// </remarks>
-        public TaskFactory(CancellationToken cancellationToken, TaskCreationOptions creationOptions, TaskContinuationOptions continuationOptions, TaskScheduler? scheduler)
+        public TaskFactory(
+            CancellationToken cancellationToken,
+            TaskCreationOptions creationOptions,
+            TaskContinuationOptions continuationOptions,
+            TaskScheduler? scheduler
+        )
             : this(creationOptions, continuationOptions)
         {
             m_defaultCancellationToken = cancellationToken;
@@ -198,13 +207,19 @@ namespace System.Threading.Tasks
         internal static void CheckCreationOptions(TaskCreationOptions creationOptions)
         {
             // Check for validity of options
-            if ((creationOptions &
-                    ~(TaskCreationOptions.AttachedToParent |
-                      TaskCreationOptions.DenyChildAttach |
-                      TaskCreationOptions.HideScheduler |
-                      TaskCreationOptions.LongRunning |
-                      TaskCreationOptions.PreferFairness |
-                      TaskCreationOptions.RunContinuationsAsynchronously)) != 0)
+            if (
+                (
+                    creationOptions
+                    & ~(
+                        TaskCreationOptions.AttachedToParent
+                        | TaskCreationOptions.DenyChildAttach
+                        | TaskCreationOptions.HideScheduler
+                        | TaskCreationOptions.LongRunning
+                        | TaskCreationOptions.PreferFairness
+                        | TaskCreationOptions.RunContinuationsAsynchronously
+                    )
+                ) != 0
+            )
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.creationOptions);
             }
@@ -276,8 +291,15 @@ namespace System.Threading.Tasks
         public Task StartNew(Action action)
         {
             Task? currTask = Task.InternalCurrent;
-            return Task.InternalStartNew(currTask, action, null, m_defaultCancellationToken, GetDefaultScheduler(currTask),
-                m_defaultCreationOptions, InternalTaskOptions.None);
+            return Task.InternalStartNew(
+                currTask,
+                action,
+                null,
+                m_defaultCancellationToken,
+                GetDefaultScheduler(currTask),
+                m_defaultCreationOptions,
+                InternalTaskOptions.None
+            );
         }
 
         /// <summary>
@@ -301,8 +323,15 @@ namespace System.Threading.Tasks
         public Task StartNew(Action action, CancellationToken cancellationToken)
         {
             Task? currTask = Task.InternalCurrent;
-            return Task.InternalStartNew(currTask, action, null, cancellationToken, GetDefaultScheduler(currTask),
-                m_defaultCreationOptions, InternalTaskOptions.None);
+            return Task.InternalStartNew(
+                currTask,
+                action,
+                null,
+                cancellationToken,
+                GetDefaultScheduler(currTask),
+                m_defaultCreationOptions,
+                InternalTaskOptions.None
+            );
         }
 
         /// <summary>
@@ -329,8 +358,15 @@ namespace System.Threading.Tasks
         public Task StartNew(Action action, TaskCreationOptions creationOptions)
         {
             Task? currTask = Task.InternalCurrent;
-            return Task.InternalStartNew(currTask, action, null, m_defaultCancellationToken, GetDefaultScheduler(currTask), creationOptions,
-                InternalTaskOptions.None);
+            return Task.InternalStartNew(
+                currTask,
+                action,
+                null,
+                m_defaultCancellationToken,
+                GetDefaultScheduler(currTask),
+                creationOptions,
+                InternalTaskOptions.None
+            );
         }
 
         /// <summary>
@@ -365,13 +401,23 @@ namespace System.Threading.Tasks
         /// However, unless creation and scheduling must be separated, StartNew is the recommended approach
         /// for both simplicity and performance.
         /// </remarks>
-        public Task StartNew(Action action, CancellationToken cancellationToken, TaskCreationOptions creationOptions, TaskScheduler scheduler)
+        public Task StartNew(
+            Action action,
+            CancellationToken cancellationToken,
+            TaskCreationOptions creationOptions,
+            TaskScheduler scheduler
+        )
         {
             return Task.InternalStartNew(
-                Task.InternalCurrentIfAttached(creationOptions), action, null, cancellationToken, scheduler, creationOptions,
-                InternalTaskOptions.None);
+                Task.InternalCurrentIfAttached(creationOptions),
+                action,
+                null,
+                cancellationToken,
+                scheduler,
+                creationOptions,
+                InternalTaskOptions.None
+            );
         }
-
 
         /// <summary>
         /// Creates and starts a <see cref="Task">Task</see>.
@@ -393,10 +439,16 @@ namespace System.Threading.Tasks
         public Task StartNew(Action<object?> action, object? state)
         {
             Task? currTask = Task.InternalCurrent;
-            return Task.InternalStartNew(currTask, action, state, m_defaultCancellationToken, GetDefaultScheduler(currTask),
-                m_defaultCreationOptions, InternalTaskOptions.None);
+            return Task.InternalStartNew(
+                currTask,
+                action,
+                state,
+                m_defaultCancellationToken,
+                GetDefaultScheduler(currTask),
+                m_defaultCreationOptions,
+                InternalTaskOptions.None
+            );
         }
-
 
         /// <summary>
         /// Creates and starts a <see cref="Task">Task</see>.
@@ -419,11 +471,22 @@ namespace System.Threading.Tasks
         /// However, unless creation and scheduling must be separated, StartNew is the recommended approach
         /// for both simplicity and performance.
         /// </remarks>
-        public Task StartNew(Action<object?> action, object? state, CancellationToken cancellationToken)
+        public Task StartNew(
+            Action<object?> action,
+            object? state,
+            CancellationToken cancellationToken
+        )
         {
             Task? currTask = Task.InternalCurrent;
-            return Task.InternalStartNew(currTask, action, state, cancellationToken, GetDefaultScheduler(currTask),
-                m_defaultCreationOptions, InternalTaskOptions.None);
+            return Task.InternalStartNew(
+                currTask,
+                action,
+                state,
+                cancellationToken,
+                GetDefaultScheduler(currTask),
+                m_defaultCreationOptions,
+                InternalTaskOptions.None
+            );
         }
 
         /// <summary>
@@ -449,11 +512,22 @@ namespace System.Threading.Tasks
         /// However, unless creation and scheduling must be separated, StartNew is the recommended approach
         /// for both simplicity and performance.
         /// </remarks>
-        public Task StartNew(Action<object?> action, object? state, TaskCreationOptions creationOptions)
+        public Task StartNew(
+            Action<object?> action,
+            object? state,
+            TaskCreationOptions creationOptions
+        )
         {
             Task? currTask = Task.InternalCurrent;
-            return Task.InternalStartNew(currTask, action, state, m_defaultCancellationToken, GetDefaultScheduler(currTask),
-                creationOptions, InternalTaskOptions.None);
+            return Task.InternalStartNew(
+                currTask,
+                action,
+                state,
+                m_defaultCancellationToken,
+                GetDefaultScheduler(currTask),
+                creationOptions,
+                InternalTaskOptions.None
+            );
         }
 
         /// <summary>
@@ -490,12 +564,23 @@ namespace System.Threading.Tasks
         /// However, unless creation and scheduling must be separated, StartNew is the recommended approach
         /// for both simplicity and performance.
         /// </remarks>
-        public Task StartNew(Action<object?> action, object? state, CancellationToken cancellationToken,
-                            TaskCreationOptions creationOptions, TaskScheduler scheduler)
+        public Task StartNew(
+            Action<object?> action,
+            object? state,
+            CancellationToken cancellationToken,
+            TaskCreationOptions creationOptions,
+            TaskScheduler scheduler
+        )
         {
             return Task.InternalStartNew(
-                Task.InternalCurrentIfAttached(creationOptions), action, state, cancellationToken, scheduler,
-                creationOptions, InternalTaskOptions.None);
+                Task.InternalCurrentIfAttached(creationOptions),
+                action,
+                state,
+                cancellationToken,
+                scheduler,
+                creationOptions,
+                InternalTaskOptions.None
+            );
         }
 
         /// <summary>
@@ -520,10 +605,15 @@ namespace System.Threading.Tasks
         public Task<TResult> StartNew<TResult>(Func<TResult> function)
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(currTask, function, m_defaultCancellationToken,
-                m_defaultCreationOptions, InternalTaskOptions.None, GetDefaultScheduler(currTask));
+            return Task<TResult>.StartNew(
+                currTask,
+                function,
+                m_defaultCancellationToken,
+                m_defaultCreationOptions,
+                InternalTaskOptions.None,
+                GetDefaultScheduler(currTask)
+            );
         }
-
 
         /// <summary>
         /// Creates and starts a <see cref="Task{TResult}"/>.
@@ -548,11 +638,20 @@ namespace System.Threading.Tasks
         /// However, unless creation and scheduling must be separated, StartNew is the recommended approach
         /// for both simplicity and performance.
         /// </remarks>
-        public Task<TResult> StartNew<TResult>(Func<TResult> function, CancellationToken cancellationToken)
+        public Task<TResult> StartNew<TResult>(
+            Func<TResult> function,
+            CancellationToken cancellationToken
+        )
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(currTask, function, cancellationToken,
-                m_defaultCreationOptions, InternalTaskOptions.None, GetDefaultScheduler(currTask));
+            return Task<TResult>.StartNew(
+                currTask,
+                function,
+                cancellationToken,
+                m_defaultCreationOptions,
+                InternalTaskOptions.None,
+                GetDefaultScheduler(currTask)
+            );
         }
 
         /// <summary>
@@ -580,11 +679,20 @@ namespace System.Threading.Tasks
         /// However, unless creation and scheduling must be separated, StartNew is the recommended approach
         /// for both simplicity and performance.
         /// </remarks>
-        public Task<TResult> StartNew<TResult>(Func<TResult> function, TaskCreationOptions creationOptions)
+        public Task<TResult> StartNew<TResult>(
+            Func<TResult> function,
+            TaskCreationOptions creationOptions
+        )
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(currTask, function, m_defaultCancellationToken,
-                creationOptions, InternalTaskOptions.None, GetDefaultScheduler(currTask));
+            return Task<TResult>.StartNew(
+                currTask,
+                function,
+                m_defaultCancellationToken,
+                creationOptions,
+                InternalTaskOptions.None,
+                GetDefaultScheduler(currTask)
+            );
         }
 
         /// <summary>
@@ -623,11 +731,21 @@ namespace System.Threading.Tasks
         /// However, unless creation and scheduling must be separated, StartNew is the recommended approach
         /// for both simplicity and performance.
         /// </remarks>
-        public Task<TResult> StartNew<TResult>(Func<TResult> function, CancellationToken cancellationToken, TaskCreationOptions creationOptions, TaskScheduler scheduler)
+        public Task<TResult> StartNew<TResult>(
+            Func<TResult> function,
+            CancellationToken cancellationToken,
+            TaskCreationOptions creationOptions,
+            TaskScheduler scheduler
+        )
         {
             return Task<TResult>.StartNew(
-                Task.InternalCurrentIfAttached(creationOptions), function, cancellationToken,
-                creationOptions, InternalTaskOptions.None, scheduler);
+                Task.InternalCurrentIfAttached(creationOptions),
+                function,
+                cancellationToken,
+                creationOptions,
+                InternalTaskOptions.None,
+                scheduler
+            );
         }
 
         /// <summary>
@@ -654,10 +772,16 @@ namespace System.Threading.Tasks
         public Task<TResult> StartNew<TResult>(Func<object?, TResult> function, object? state)
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(currTask, function, state, m_defaultCancellationToken,
-                m_defaultCreationOptions, InternalTaskOptions.None, GetDefaultScheduler(currTask));
+            return Task<TResult>.StartNew(
+                currTask,
+                function,
+                state,
+                m_defaultCancellationToken,
+                m_defaultCreationOptions,
+                InternalTaskOptions.None,
+                GetDefaultScheduler(currTask)
+            );
         }
-
 
         /// <summary>
         /// Creates and starts a <see cref="Task{TResult}"/>.
@@ -684,11 +808,22 @@ namespace System.Threading.Tasks
         /// However, unless creation and scheduling must be separated, StartNew is the recommended approach
         /// for both simplicity and performance.
         /// </remarks>
-        public Task<TResult> StartNew<TResult>(Func<object?, TResult> function, object? state, CancellationToken cancellationToken)
+        public Task<TResult> StartNew<TResult>(
+            Func<object?, TResult> function,
+            object? state,
+            CancellationToken cancellationToken
+        )
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(currTask, function, state, cancellationToken,
-                m_defaultCreationOptions, InternalTaskOptions.None, GetDefaultScheduler(currTask));
+            return Task<TResult>.StartNew(
+                currTask,
+                function,
+                state,
+                cancellationToken,
+                m_defaultCreationOptions,
+                InternalTaskOptions.None,
+                GetDefaultScheduler(currTask)
+            );
         }
 
         /// <summary>
@@ -718,11 +853,22 @@ namespace System.Threading.Tasks
         /// However, unless creation and scheduling must be separated, StartNew is the recommended approach
         /// for both simplicity and performance.
         /// </remarks>
-        public Task<TResult> StartNew<TResult>(Func<object?, TResult> function, object? state, TaskCreationOptions creationOptions)
+        public Task<TResult> StartNew<TResult>(
+            Func<object?, TResult> function,
+            object? state,
+            TaskCreationOptions creationOptions
+        )
         {
             Task? currTask = Task.InternalCurrent;
-            return Task<TResult>.StartNew(currTask, function, state, m_defaultCancellationToken,
-                creationOptions, InternalTaskOptions.None, GetDefaultScheduler(currTask));
+            return Task<TResult>.StartNew(
+                currTask,
+                function,
+                state,
+                m_defaultCancellationToken,
+                creationOptions,
+                InternalTaskOptions.None,
+                GetDefaultScheduler(currTask)
+            );
         }
 
         /// <summary>
@@ -763,12 +909,23 @@ namespace System.Threading.Tasks
         /// However, unless creation and scheduling must be separated, StartNew is the recommended approach
         /// for both simplicity and performance.
         /// </remarks>
-        public Task<TResult> StartNew<TResult>(Func<object?, TResult> function, object? state, CancellationToken cancellationToken,
-            TaskCreationOptions creationOptions, TaskScheduler scheduler)
+        public Task<TResult> StartNew<TResult>(
+            Func<object?, TResult> function,
+            object? state,
+            CancellationToken cancellationToken,
+            TaskCreationOptions creationOptions,
+            TaskScheduler scheduler
+        )
         {
             return Task<TResult>.StartNew(
-                Task.InternalCurrentIfAttached(creationOptions), function, state, cancellationToken,
-                creationOptions, InternalTaskOptions.None, scheduler);
+                Task.InternalCurrentIfAttached(creationOptions),
+                function,
+                state,
+                cancellationToken,
+                creationOptions,
+                InternalTaskOptions.None,
+                scheduler
+            );
         }
 
         //
@@ -789,9 +946,7 @@ namespace System.Threading.Tasks
         /// <paramref name="endMethod"/> argument is null.</exception>
         /// <returns>A <see cref="Task">Task</see> that represents the asynchronous
         /// operation.</returns>
-        public Task FromAsync(
-            IAsyncResult asyncResult,
-            Action<IAsyncResult> endMethod)
+        public Task FromAsync(IAsyncResult asyncResult, Action<IAsyncResult> endMethod)
         {
             return FromAsync(asyncResult, endMethod, m_defaultCreationOptions, DefaultScheduler);
         }
@@ -818,7 +973,8 @@ namespace System.Threading.Tasks
         public Task FromAsync(
             IAsyncResult asyncResult,
             Action<IAsyncResult> endMethod,
-            TaskCreationOptions creationOptions)
+            TaskCreationOptions creationOptions
+        )
         {
             return FromAsync(asyncResult, endMethod, creationOptions, DefaultScheduler);
         }
@@ -850,9 +1006,16 @@ namespace System.Threading.Tasks
             IAsyncResult asyncResult,
             Action<IAsyncResult> endMethod,
             TaskCreationOptions creationOptions,
-            TaskScheduler scheduler)
+            TaskScheduler scheduler
+        )
         {
-            return TaskFactory<VoidTaskResult>.FromAsyncImpl(asyncResult, null, endMethod, creationOptions, scheduler);
+            return TaskFactory<VoidTaskResult>.FromAsyncImpl(
+                asyncResult,
+                null,
+                endMethod,
+                creationOptions,
+                scheduler
+            );
         }
 
         /// <summary>
@@ -875,7 +1038,8 @@ namespace System.Threading.Tasks
         public Task FromAsync(
             Func<AsyncCallback, object?, IAsyncResult> beginMethod,
             Action<IAsyncResult> endMethod,
-            object? state)
+            object? state
+        )
         {
             return FromAsync(beginMethod, endMethod, state, m_defaultCreationOptions);
         }
@@ -904,9 +1068,18 @@ namespace System.Threading.Tasks
         /// </remarks>
         public Task FromAsync(
             Func<AsyncCallback, object?, IAsyncResult> beginMethod,
-            Action<IAsyncResult> endMethod, object? state, TaskCreationOptions creationOptions)
+            Action<IAsyncResult> endMethod,
+            object? state,
+            TaskCreationOptions creationOptions
+        )
         {
-            return TaskFactory<VoidTaskResult>.FromAsyncImpl(beginMethod, null, endMethod, state, creationOptions);
+            return TaskFactory<VoidTaskResult>.FromAsyncImpl(
+                beginMethod,
+                null,
+                endMethod,
+                state,
+                creationOptions
+            );
         }
 
         /// <summary>
@@ -935,7 +1108,8 @@ namespace System.Threading.Tasks
             Func<TArg1, AsyncCallback, object?, IAsyncResult> beginMethod,
             Action<IAsyncResult> endMethod,
             TArg1 arg1,
-            object? state)
+            object? state
+        )
         {
             return FromAsync(beginMethod, endMethod, arg1, state, m_defaultCreationOptions);
         }
@@ -970,9 +1144,19 @@ namespace System.Threading.Tasks
         public Task FromAsync<TArg1>(
             Func<TArg1, AsyncCallback, object?, IAsyncResult> beginMethod,
             Action<IAsyncResult> endMethod,
-            TArg1 arg1, object? state, TaskCreationOptions creationOptions)
+            TArg1 arg1,
+            object? state,
+            TaskCreationOptions creationOptions
+        )
         {
-            return TaskFactory<VoidTaskResult>.FromAsyncImpl(beginMethod, null, endMethod, arg1, state, creationOptions);
+            return TaskFactory<VoidTaskResult>.FromAsyncImpl(
+                beginMethod,
+                null,
+                endMethod,
+                arg1,
+                state,
+                creationOptions
+            );
         }
 
         /// <summary>
@@ -1004,7 +1188,10 @@ namespace System.Threading.Tasks
         public Task FromAsync<TArg1, TArg2>(
             Func<TArg1, TArg2, AsyncCallback, object?, IAsyncResult> beginMethod,
             Action<IAsyncResult> endMethod,
-            TArg1 arg1, TArg2 arg2, object? state)
+            TArg1 arg1,
+            TArg2 arg2,
+            object? state
+        )
         {
             return FromAsync(beginMethod, endMethod, arg1, arg2, state, m_defaultCreationOptions);
         }
@@ -1043,9 +1230,21 @@ namespace System.Threading.Tasks
         public Task FromAsync<TArg1, TArg2>(
             Func<TArg1, TArg2, AsyncCallback, object?, IAsyncResult> beginMethod,
             Action<IAsyncResult> endMethod,
-            TArg1 arg1, TArg2 arg2, object? state, TaskCreationOptions creationOptions)
+            TArg1 arg1,
+            TArg2 arg2,
+            object? state,
+            TaskCreationOptions creationOptions
+        )
         {
-            return TaskFactory<VoidTaskResult>.FromAsyncImpl(beginMethod, null, endMethod, arg1, arg2, state, creationOptions);
+            return TaskFactory<VoidTaskResult>.FromAsyncImpl(
+                beginMethod,
+                null,
+                endMethod,
+                arg1,
+                arg2,
+                state,
+                creationOptions
+            );
         }
 
         /// <summary>
@@ -1081,9 +1280,21 @@ namespace System.Threading.Tasks
         public Task FromAsync<TArg1, TArg2, TArg3>(
             Func<TArg1, TArg2, TArg3, AsyncCallback, object?, IAsyncResult> beginMethod,
             Action<IAsyncResult> endMethod,
-            TArg1 arg1, TArg2 arg2, TArg3 arg3, object? state)
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3,
+            object? state
+        )
         {
-            return FromAsync(beginMethod, endMethod, arg1, arg2, arg3, state, m_defaultCreationOptions);
+            return FromAsync(
+                beginMethod,
+                endMethod,
+                arg1,
+                arg2,
+                arg3,
+                state,
+                m_defaultCreationOptions
+            );
         }
 
         /// <summary>
@@ -1124,9 +1335,23 @@ namespace System.Threading.Tasks
         public Task FromAsync<TArg1, TArg2, TArg3>(
             Func<TArg1, TArg2, TArg3, AsyncCallback, object?, IAsyncResult> beginMethod,
             Action<IAsyncResult> endMethod,
-            TArg1 arg1, TArg2 arg2, TArg3 arg3, object? state, TaskCreationOptions creationOptions)
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3,
+            object? state,
+            TaskCreationOptions creationOptions
+        )
         {
-            return TaskFactory<VoidTaskResult>.FromAsyncImpl(beginMethod, null, endMethod, arg1, arg2, arg3, state, creationOptions);
+            return TaskFactory<VoidTaskResult>.FromAsyncImpl(
+                beginMethod,
+                null,
+                endMethod,
+                arg1,
+                arg2,
+                arg3,
+                state,
+                creationOptions
+            );
         }
 
         //
@@ -1151,9 +1376,17 @@ namespace System.Threading.Tasks
         /// <returns>A <see cref="Task{TResult}">Task</see> that represents the
         /// asynchronous operation.</returns>
         public Task<TResult> FromAsync<TResult>(
-            IAsyncResult asyncResult, Func<IAsyncResult, TResult> endMethod)
+            IAsyncResult asyncResult,
+            Func<IAsyncResult, TResult> endMethod
+        )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(asyncResult, endMethod, null, m_defaultCreationOptions, DefaultScheduler);
+            return TaskFactory<TResult>.FromAsyncImpl(
+                asyncResult,
+                endMethod,
+                null,
+                m_defaultCreationOptions,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -1179,9 +1412,18 @@ namespace System.Threading.Tasks
         /// <returns>A <see cref="Task{TResult}">Task</see> that represents the
         /// asynchronous operation.</returns>
         public Task<TResult> FromAsync<TResult>(
-            IAsyncResult asyncResult, Func<IAsyncResult, TResult> endMethod, TaskCreationOptions creationOptions)
+            IAsyncResult asyncResult,
+            Func<IAsyncResult, TResult> endMethod,
+            TaskCreationOptions creationOptions
+        )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(asyncResult, endMethod, null, creationOptions, DefaultScheduler);
+            return TaskFactory<TResult>.FromAsyncImpl(
+                asyncResult,
+                endMethod,
+                null,
+                creationOptions,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -1211,9 +1453,19 @@ namespace System.Threading.Tasks
         /// <returns>A <see cref="Task{TResult}">Task</see> that represents the
         /// asynchronous operation.</returns>
         public Task<TResult> FromAsync<TResult>(
-            IAsyncResult asyncResult, Func<IAsyncResult, TResult> endMethod, TaskCreationOptions creationOptions, TaskScheduler scheduler)
+            IAsyncResult asyncResult,
+            Func<IAsyncResult, TResult> endMethod,
+            TaskCreationOptions creationOptions,
+            TaskScheduler scheduler
+        )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(asyncResult, endMethod, null, creationOptions, scheduler);
+            return TaskFactory<TResult>.FromAsyncImpl(
+                asyncResult,
+                endMethod,
+                null,
+                creationOptions,
+                scheduler
+            );
         }
 
         /// <summary>
@@ -1238,9 +1490,17 @@ namespace System.Threading.Tasks
         /// </remarks>
         public Task<TResult> FromAsync<TResult>(
             Func<AsyncCallback, object?, IAsyncResult> beginMethod,
-            Func<IAsyncResult, TResult> endMethod, object? state)
+            Func<IAsyncResult, TResult> endMethod,
+            object? state
+        )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(beginMethod, endMethod, null, state, m_defaultCreationOptions);
+            return TaskFactory<TResult>.FromAsyncImpl(
+                beginMethod,
+                endMethod,
+                null,
+                state,
+                m_defaultCreationOptions
+            );
         }
 
         /// <summary>
@@ -1270,9 +1530,18 @@ namespace System.Threading.Tasks
         /// </remarks>
         public Task<TResult> FromAsync<TResult>(
             Func<AsyncCallback, object?, IAsyncResult> beginMethod,
-            Func<IAsyncResult, TResult> endMethod, object? state, TaskCreationOptions creationOptions)
+            Func<IAsyncResult, TResult> endMethod,
+            object? state,
+            TaskCreationOptions creationOptions
+        )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(beginMethod, endMethod, null, state, creationOptions);
+            return TaskFactory<TResult>.FromAsyncImpl(
+                beginMethod,
+                endMethod,
+                null,
+                state,
+                creationOptions
+            );
         }
 
         /// <summary>
@@ -1301,9 +1570,19 @@ namespace System.Threading.Tasks
         /// </remarks>
         public Task<TResult> FromAsync<TArg1, TResult>(
             Func<TArg1, AsyncCallback, object?, IAsyncResult> beginMethod,
-            Func<IAsyncResult, TResult> endMethod, TArg1 arg1, object? state)
+            Func<IAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            object? state
+        )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(beginMethod, endMethod, null, arg1, state, m_defaultCreationOptions);
+            return TaskFactory<TResult>.FromAsyncImpl(
+                beginMethod,
+                endMethod,
+                null,
+                arg1,
+                state,
+                m_defaultCreationOptions
+            );
         }
 
         /// <summary>
@@ -1335,10 +1614,22 @@ namespace System.Threading.Tasks
         /// <remarks>
         /// This method throws any exceptions thrown by the <paramref name="beginMethod"/>.
         /// </remarks>
-        public Task<TResult> FromAsync<TArg1, TResult>(Func<TArg1, AsyncCallback, object?, IAsyncResult> beginMethod,
-            Func<IAsyncResult, TResult> endMethod, TArg1 arg1, object? state, TaskCreationOptions creationOptions)
+        public Task<TResult> FromAsync<TArg1, TResult>(
+            Func<TArg1, AsyncCallback, object?, IAsyncResult> beginMethod,
+            Func<IAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            object? state,
+            TaskCreationOptions creationOptions
+        )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(beginMethod, endMethod, null, arg1, state, creationOptions);
+            return TaskFactory<TResult>.FromAsyncImpl(
+                beginMethod,
+                endMethod,
+                null,
+                arg1,
+                state,
+                creationOptions
+            );
         }
 
         /// <summary>
@@ -1369,10 +1660,23 @@ namespace System.Threading.Tasks
         /// <remarks>
         /// This method throws any exceptions thrown by the <paramref name="beginMethod"/>.
         /// </remarks>
-        public Task<TResult> FromAsync<TArg1, TArg2, TResult>(Func<TArg1, TArg2, AsyncCallback, object?, IAsyncResult> beginMethod,
-            Func<IAsyncResult, TResult> endMethod, TArg1 arg1, TArg2 arg2, object? state)
+        public Task<TResult> FromAsync<TArg1, TArg2, TResult>(
+            Func<TArg1, TArg2, AsyncCallback, object?, IAsyncResult> beginMethod,
+            Func<IAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            TArg2 arg2,
+            object? state
+        )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(beginMethod, endMethod, null, arg1, arg2, state, m_defaultCreationOptions);
+            return TaskFactory<TResult>.FromAsyncImpl(
+                beginMethod,
+                endMethod,
+                null,
+                arg1,
+                arg2,
+                state,
+                m_defaultCreationOptions
+            );
         }
 
         /// <summary>
@@ -1410,9 +1714,22 @@ namespace System.Threading.Tasks
         /// </remarks>
         public Task<TResult> FromAsync<TArg1, TArg2, TResult>(
             Func<TArg1, TArg2, AsyncCallback, object?, IAsyncResult> beginMethod,
-            Func<IAsyncResult, TResult> endMethod, TArg1 arg1, TArg2 arg2, object? state, TaskCreationOptions creationOptions)
+            Func<IAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            TArg2 arg2,
+            object? state,
+            TaskCreationOptions creationOptions
+        )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(beginMethod, endMethod, null, arg1, arg2, state, creationOptions);
+            return TaskFactory<TResult>.FromAsyncImpl(
+                beginMethod,
+                endMethod,
+                null,
+                arg1,
+                arg2,
+                state,
+                creationOptions
+            );
         }
 
         /// <summary>
@@ -1449,9 +1766,23 @@ namespace System.Threading.Tasks
         /// </remarks>
         public Task<TResult> FromAsync<TArg1, TArg2, TArg3, TResult>(
             Func<TArg1, TArg2, TArg3, AsyncCallback, object?, IAsyncResult> beginMethod,
-            Func<IAsyncResult, TResult> endMethod, TArg1 arg1, TArg2 arg2, TArg3 arg3, object? state)
+            Func<IAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3,
+            object? state
+        )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(beginMethod, endMethod, null, arg1, arg2, arg3, state, m_defaultCreationOptions);
+            return TaskFactory<TResult>.FromAsyncImpl(
+                beginMethod,
+                endMethod,
+                null,
+                arg1,
+                arg2,
+                arg3,
+                state,
+                m_defaultCreationOptions
+            );
         }
 
         /// <summary>
@@ -1493,9 +1824,24 @@ namespace System.Threading.Tasks
         /// </remarks>
         public Task<TResult> FromAsync<TArg1, TArg2, TArg3, TResult>(
             Func<TArg1, TArg2, TArg3, AsyncCallback, object?, IAsyncResult> beginMethod,
-            Func<IAsyncResult, TResult> endMethod, TArg1 arg1, TArg2 arg2, TArg3 arg3, object? state, TaskCreationOptions creationOptions)
+            Func<IAsyncResult, TResult> endMethod,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3,
+            object? state,
+            TaskCreationOptions creationOptions
+        )
         {
-            return TaskFactory<TResult>.FromAsyncImpl(beginMethod, endMethod, null, arg1, arg2, arg3, state, creationOptions);
+            return TaskFactory<TResult>.FromAsyncImpl(
+                beginMethod,
+                endMethod,
+                null,
+                arg1,
+                arg2,
+                arg3,
+                state,
+                creationOptions
+            );
         }
 
         /// <summary>
@@ -1503,29 +1849,43 @@ namespace System.Threading.Tasks
         /// </summary>
         /// <param name="creationOptions">The options to be validated.</param>
         /// <param name="hasBeginMethod">determines type of FromAsync method that called this method</param>
-        internal static void CheckFromAsyncOptions(TaskCreationOptions creationOptions, bool hasBeginMethod)
+        internal static void CheckFromAsyncOptions(
+            TaskCreationOptions creationOptions,
+            bool hasBeginMethod
+        )
         {
             if (hasBeginMethod)
             {
                 // Options detected here cause exceptions in FromAsync methods that take beginMethod as a parameter
                 if ((creationOptions & TaskCreationOptions.LongRunning) != 0)
-                    throw new ArgumentOutOfRangeException(nameof(creationOptions), SR.Task_FromAsync_LongRunning);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(creationOptions),
+                        SR.Task_FromAsync_LongRunning
+                    );
                 if ((creationOptions & TaskCreationOptions.PreferFairness) != 0)
-                    throw new ArgumentOutOfRangeException(nameof(creationOptions), SR.Task_FromAsync_PreferFairness);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(creationOptions),
+                        SR.Task_FromAsync_PreferFairness
+                    );
             }
 
             // Check for general validity of options
-            if ((creationOptions &
-                    ~(TaskCreationOptions.AttachedToParent |
-                      TaskCreationOptions.DenyChildAttach |
-                      TaskCreationOptions.HideScheduler |
-                      TaskCreationOptions.PreferFairness |
-                      TaskCreationOptions.LongRunning)) != 0)
+            if (
+                (
+                    creationOptions
+                    & ~(
+                        TaskCreationOptions.AttachedToParent
+                        | TaskCreationOptions.DenyChildAttach
+                        | TaskCreationOptions.HideScheduler
+                        | TaskCreationOptions.PreferFairness
+                        | TaskCreationOptions.LongRunning
+                    )
+                ) != 0
+            )
             {
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.creationOptions);
             }
         }
-
 
         //
         // ContinueWhenAll methods
@@ -1551,12 +1911,19 @@ namespace System.Threading.Tasks
 
             internal CompleteOnCountdownPromise(Task[] tasksCopy)
             {
-                Debug.Assert((tasksCopy != null) && (tasksCopy.Length > 0), "Expected non-null task array with at least one element in it");
+                Debug.Assert(
+                    (tasksCopy != null) && (tasksCopy.Length > 0),
+                    "Expected non-null task array with at least one element in it"
+                );
                 _tasks = tasksCopy;
                 _count = tasksCopy.Length;
 
                 if (TplEventSource.Log.IsEnabled())
-                    TplEventSource.Log.TraceOperationBegin(this.Id, "TaskFactory.ContinueWhenAll", 0);
+                    TplEventSource.Log.TraceOperationBegin(
+                        this.Id,
+                        "TaskFactory.ContinueWhenAll",
+                        0
+                    );
 
                 if (s_asyncDebuggingEnabled)
                     AddToActiveTasks(this);
@@ -1567,11 +1934,15 @@ namespace System.Threading.Tasks
                 if (TplEventSource.Log.IsEnabled())
                     TplEventSource.Log.TraceOperationRelation(this.Id, CausalityRelation.Join);
 
-                if (completingTask.IsWaitNotificationEnabled) this.SetNotificationForWaitCompletion(enabled: true);
+                if (completingTask.IsWaitNotificationEnabled)
+                    this.SetNotificationForWaitCompletion(enabled: true);
                 if (Interlocked.Decrement(ref _count) == 0)
                 {
                     if (TplEventSource.Log.IsEnabled())
-                        TplEventSource.Log.TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
+                        TplEventSource.Log.TraceOperationEnd(
+                            this.Id,
+                            AsyncCausalityStatus.Completed
+                        );
 
                     if (s_asyncDebuggingEnabled)
                         RemoveFromActiveTasks(this);
@@ -1588,8 +1959,8 @@ namespace System.Threading.Tasks
             /// true iff at least one constituent task has its bit set.
             /// </summary>
             private protected override bool ShouldNotifyDebuggerOfWaitCompletion =>
-                base.ShouldNotifyDebuggerOfWaitCompletion &&
-                AnyTaskRequiresNotifyDebuggerOfWaitCompletion(_tasks);
+                base.ShouldNotifyDebuggerOfWaitCompletion
+                && AnyTaskRequiresNotifyDebuggerOfWaitCompletion(_tasks);
         }
 
         // Performs some logic common to all ContinueWhenAll() overloads
@@ -1602,13 +1973,14 @@ namespace System.Threading.Tasks
 
             for (int i = 0; i < tasksCopy.Length; i++)
             {
-                if (tasksCopy[i].IsCompleted) promise.Invoke(tasksCopy[i]); // Short-circuit the completion action, if possible
-                else tasksCopy[i].AddCompletionAction(promise); // simple completion action
+                if (tasksCopy[i].IsCompleted)
+                    promise.Invoke(tasksCopy[i]); // Short-circuit the completion action, if possible
+                else
+                    tasksCopy[i].AddCompletionAction(promise); // simple completion action
             }
 
             return promise;
         }
-
 
         // A Task<Task<T>[]> that, given an initial collection of N tasks, will complete when
         // it has been invoked N times.  See comments for non-generic CompleteOnCountdownPromise class.
@@ -1621,12 +1993,19 @@ namespace System.Threading.Tasks
 
             internal CompleteOnCountdownPromise(Task<T>[] tasksCopy)
             {
-                Debug.Assert((tasksCopy != null) && (tasksCopy.Length > 0), "Expected non-null task array with at least one element in it");
+                Debug.Assert(
+                    (tasksCopy != null) && (tasksCopy.Length > 0),
+                    "Expected non-null task array with at least one element in it"
+                );
                 _tasks = tasksCopy;
                 _count = tasksCopy.Length;
 
                 if (TplEventSource.Log.IsEnabled())
-                    TplEventSource.Log.TraceOperationBegin(this.Id, "TaskFactory.ContinueWhenAll<>", 0);
+                    TplEventSource.Log.TraceOperationBegin(
+                        this.Id,
+                        "TaskFactory.ContinueWhenAll<>",
+                        0
+                    );
 
                 if (s_asyncDebuggingEnabled)
                     AddToActiveTasks(this);
@@ -1637,11 +2016,15 @@ namespace System.Threading.Tasks
                 if (TplEventSource.Log.IsEnabled())
                     TplEventSource.Log.TraceOperationRelation(this.Id, CausalityRelation.Join);
 
-                if (completingTask.IsWaitNotificationEnabled) this.SetNotificationForWaitCompletion(enabled: true);
+                if (completingTask.IsWaitNotificationEnabled)
+                    this.SetNotificationForWaitCompletion(enabled: true);
                 if (Interlocked.Decrement(ref _count) == 0)
                 {
                     if (TplEventSource.Log.IsEnabled())
-                        TplEventSource.Log.TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
+                        TplEventSource.Log.TraceOperationEnd(
+                            this.Id,
+                            AsyncCausalityStatus.Completed
+                        );
 
                     if (s_asyncDebuggingEnabled)
                         RemoveFromActiveTasks(this);
@@ -1658,10 +2041,9 @@ namespace System.Threading.Tasks
             /// true iff at least one constituent task has its bit set.
             /// </summary>
             private protected override bool ShouldNotifyDebuggerOfWaitCompletion =>
-                base.ShouldNotifyDebuggerOfWaitCompletion &&
-                AnyTaskRequiresNotifyDebuggerOfWaitCompletion(_tasks);
+                base.ShouldNotifyDebuggerOfWaitCompletion
+                && AnyTaskRequiresNotifyDebuggerOfWaitCompletion(_tasks);
         }
-
 
         internal static Task<Task<T>[]> CommonCWAllLogic<T>(Task<T>[] tasksCopy)
         {
@@ -1672,8 +2054,10 @@ namespace System.Threading.Tasks
 
             for (int i = 0; i < tasksCopy.Length; i++)
             {
-                if (tasksCopy[i].IsCompleted) promise.Invoke(tasksCopy[i]); // Short-circuit the completion action, if possible
-                else tasksCopy[i].AddCompletionAction(promise); // simple completion action
+                if (tasksCopy[i].IsCompleted)
+                    promise.Invoke(tasksCopy[i]); // Short-circuit the completion action, if possible
+                else
+                    tasksCopy[i].AddCompletionAction(promise); // simple completion action
             }
 
             return promise;
@@ -1699,7 +2083,14 @@ namespace System.Threading.Tasks
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(tasks, null, continuationAction, m_defaultContinuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(
+                tasks,
+                null,
+                continuationAction,
+                m_defaultContinuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -1723,11 +2114,22 @@ namespace System.Threading.Tasks
         /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
-        public Task ContinueWhenAll(Task[] tasks, Action<Task[]> continuationAction, CancellationToken cancellationToken)
+        public Task ContinueWhenAll(
+            Task[] tasks,
+            Action<Task[]> continuationAction,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(tasks, null, continuationAction, m_defaultContinuationOptions, cancellationToken, DefaultScheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(
+                tasks,
+                null,
+                continuationAction,
+                m_defaultContinuationOptions,
+                cancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -1757,11 +2159,22 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAll.
         /// </remarks>
-        public Task ContinueWhenAll(Task[] tasks, Action<Task[]> continuationAction, TaskContinuationOptions continuationOptions)
+        public Task ContinueWhenAll(
+            Task[] tasks,
+            Action<Task[]> continuationAction,
+            TaskContinuationOptions continuationOptions
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(tasks, null, continuationAction, continuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(
+                tasks,
+                null,
+                continuationAction,
+                continuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -1801,12 +2214,24 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAll.
         /// </remarks>
-        public Task ContinueWhenAll(Task[] tasks, Action<Task[]> continuationAction, CancellationToken cancellationToken,
-            TaskContinuationOptions continuationOptions, TaskScheduler scheduler)
+        public Task ContinueWhenAll(
+            Task[] tasks,
+            Action<Task[]> continuationAction,
+            CancellationToken cancellationToken,
+            TaskContinuationOptions continuationOptions,
+            TaskScheduler scheduler
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(tasks, null, continuationAction, continuationOptions, cancellationToken, scheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(
+                tasks,
+                null,
+                continuationAction,
+                continuationOptions,
+                cancellationToken,
+                scheduler
+            );
         }
 
         /// <summary>
@@ -1826,13 +2251,22 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        public Task ContinueWhenAll<TAntecedentResult>(Task<TAntecedentResult>[] tasks, Action<Task<TAntecedentResult>[]> continuationAction)
+        public Task ContinueWhenAll<TAntecedentResult>(
+            Task<TAntecedentResult>[] tasks,
+            Action<Task<TAntecedentResult>[]> continuationAction
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(tasks, null, continuationAction, m_defaultContinuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(
+                tasks,
+                null,
+                continuationAction,
+                m_defaultContinuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
-
 
         /// <summary>
         /// Creates a continuation <see cref="Task">Task</see>
@@ -1856,12 +2290,22 @@ namespace System.Threading.Tasks
         /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
-        public Task ContinueWhenAll<TAntecedentResult>(Task<TAntecedentResult>[] tasks, Action<Task<TAntecedentResult>[]> continuationAction,
-            CancellationToken cancellationToken)
+        public Task ContinueWhenAll<TAntecedentResult>(
+            Task<TAntecedentResult>[] tasks,
+            Action<Task<TAntecedentResult>[]> continuationAction,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(tasks, null, continuationAction, m_defaultContinuationOptions, cancellationToken, DefaultScheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(
+                tasks,
+                null,
+                continuationAction,
+                m_defaultContinuationOptions,
+                cancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -1892,12 +2336,22 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAll.
         /// </remarks>
-        public Task ContinueWhenAll<TAntecedentResult>(Task<TAntecedentResult>[] tasks, Action<Task<TAntecedentResult>[]> continuationAction,
-            TaskContinuationOptions continuationOptions)
+        public Task ContinueWhenAll<TAntecedentResult>(
+            Task<TAntecedentResult>[] tasks,
+            Action<Task<TAntecedentResult>[]> continuationAction,
+            TaskContinuationOptions continuationOptions
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(tasks, null, continuationAction, continuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(
+                tasks,
+                null,
+                continuationAction,
+                continuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -1938,12 +2392,24 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAll.
         /// </remarks>
-        public Task ContinueWhenAll<TAntecedentResult>(Task<TAntecedentResult>[] tasks, Action<Task<TAntecedentResult>[]> continuationAction,
-            CancellationToken cancellationToken, TaskContinuationOptions continuationOptions, TaskScheduler scheduler)
+        public Task ContinueWhenAll<TAntecedentResult>(
+            Task<TAntecedentResult>[] tasks,
+            Action<Task<TAntecedentResult>[]> continuationAction,
+            CancellationToken cancellationToken,
+            TaskContinuationOptions continuationOptions,
+            TaskScheduler scheduler
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(tasks, null, continuationAction, continuationOptions, cancellationToken, scheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAllImpl(
+                tasks,
+                null,
+                continuationAction,
+                continuationOptions,
+                cancellationToken,
+                scheduler
+            );
         }
 
         /// <summary>
@@ -1966,13 +2432,22 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        public Task<TResult> ContinueWhenAll<TResult>(Task[] tasks, Func<Task[], TResult> continuationFunction)
+        public Task<TResult> ContinueWhenAll<TResult>(
+            Task[] tasks,
+            Func<Task[], TResult> continuationFunction
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl(tasks, continuationFunction, null, m_defaultContinuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<TResult>.ContinueWhenAllImpl(
+                tasks,
+                continuationFunction,
+                null,
+                m_defaultContinuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
-
 
         /// <summary>
         /// Creates a continuation <see cref="Task">Task</see>
@@ -1999,11 +2474,22 @@ namespace System.Threading.Tasks
         /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
-        public Task<TResult> ContinueWhenAll<TResult>(Task[] tasks, Func<Task[], TResult> continuationFunction, CancellationToken cancellationToken)
+        public Task<TResult> ContinueWhenAll<TResult>(
+            Task[] tasks,
+            Func<Task[], TResult> continuationFunction,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl(tasks, continuationFunction, null, m_defaultContinuationOptions, cancellationToken, DefaultScheduler);
+            return TaskFactory<TResult>.ContinueWhenAllImpl(
+                tasks,
+                continuationFunction,
+                null,
+                m_defaultContinuationOptions,
+                cancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2037,11 +2523,22 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAll.
         /// </remarks>
-        public Task<TResult> ContinueWhenAll<TResult>(Task[] tasks, Func<Task[], TResult> continuationFunction, TaskContinuationOptions continuationOptions)
+        public Task<TResult> ContinueWhenAll<TResult>(
+            Task[] tasks,
+            Func<Task[], TResult> continuationFunction,
+            TaskContinuationOptions continuationOptions
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl(tasks, continuationFunction, null, continuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<TResult>.ContinueWhenAllImpl(
+                tasks,
+                continuationFunction,
+                null,
+                continuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2085,14 +2582,25 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAll.
         /// </remarks>
-        public Task<TResult> ContinueWhenAll<TResult>(Task[] tasks, Func<Task[], TResult> continuationFunction, CancellationToken cancellationToken,
-            TaskContinuationOptions continuationOptions, TaskScheduler scheduler)
+        public Task<TResult> ContinueWhenAll<TResult>(
+            Task[] tasks,
+            Func<Task[], TResult> continuationFunction,
+            CancellationToken cancellationToken,
+            TaskContinuationOptions continuationOptions,
+            TaskScheduler scheduler
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl(tasks, continuationFunction, null, continuationOptions, cancellationToken, scheduler);
+            return TaskFactory<TResult>.ContinueWhenAllImpl(
+                tasks,
+                continuationFunction,
+                null,
+                continuationOptions,
+                cancellationToken,
+                scheduler
+            );
         }
-
 
         /// <summary>
         /// Creates a continuation <see cref="Task{TResult}">Task</see>
@@ -2115,11 +2623,21 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        public Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(Task<TAntecedentResult>[] tasks, Func<Task<TAntecedentResult>[], TResult> continuationFunction)
+        public Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(
+            Task<TAntecedentResult>[] tasks,
+            Func<Task<TAntecedentResult>[], TResult> continuationFunction
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl(tasks, continuationFunction, null, m_defaultContinuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<TResult>.ContinueWhenAllImpl(
+                tasks,
+                continuationFunction,
+                null,
+                m_defaultContinuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2148,12 +2666,22 @@ namespace System.Threading.Tasks
         /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
-        public Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(Task<TAntecedentResult>[] tasks, Func<Task<TAntecedentResult>[], TResult> continuationFunction,
-            CancellationToken cancellationToken)
+        public Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(
+            Task<TAntecedentResult>[] tasks,
+            Func<Task<TAntecedentResult>[], TResult> continuationFunction,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl(tasks, continuationFunction, null, m_defaultContinuationOptions, cancellationToken, DefaultScheduler);
+            return TaskFactory<TResult>.ContinueWhenAllImpl(
+                tasks,
+                continuationFunction,
+                null,
+                m_defaultContinuationOptions,
+                cancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2188,12 +2716,22 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAll.
         /// </remarks>
-        public Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(Task<TAntecedentResult>[] tasks, Func<Task<TAntecedentResult>[], TResult> continuationFunction,
-            TaskContinuationOptions continuationOptions)
+        public Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(
+            Task<TAntecedentResult>[] tasks,
+            Func<Task<TAntecedentResult>[], TResult> continuationFunction,
+            TaskContinuationOptions continuationOptions
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl(tasks, continuationFunction, null, continuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<TResult>.ContinueWhenAllImpl(
+                tasks,
+                continuationFunction,
+                null,
+                continuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2238,12 +2776,24 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAll.
         /// </remarks>
-        public Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(Task<TAntecedentResult>[] tasks, Func<Task<TAntecedentResult>[], TResult> continuationFunction,
-            CancellationToken cancellationToken, TaskContinuationOptions continuationOptions, TaskScheduler scheduler)
+        public Task<TResult> ContinueWhenAll<TAntecedentResult, TResult>(
+            Task<TAntecedentResult>[] tasks,
+            Func<Task<TAntecedentResult>[], TResult> continuationFunction,
+            CancellationToken cancellationToken,
+            TaskContinuationOptions continuationOptions,
+            TaskScheduler scheduler
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAllImpl(tasks, continuationFunction, null, continuationOptions, cancellationToken, scheduler);
+            return TaskFactory<TResult>.ContinueWhenAllImpl(
+                tasks,
+                continuationFunction,
+                null,
+                continuationOptions,
+                cancellationToken,
+                scheduler
+            );
         }
 
         //
@@ -2261,7 +2811,8 @@ namespace System.Threading.Tasks
         // which saves a couple of allocations.
         //
         // Used in TaskFactory.CommonCWAnyLogic(), below.
-        internal sealed class CompleteOnInvokePromise<TTask> : Task<TTask>, ITaskCompletionAction where TTask : Task
+        internal sealed class CompleteOnInvokePromise<TTask> : Task<TTask>, ITaskCompletionAction
+            where TTask : Task
         {
             private const int CompletedFlag = 0b_01;
             private const int SyncBlockingFlag = 0b_10;
@@ -2281,7 +2832,11 @@ namespace System.Threading.Tasks
                 }
 
                 if (TplEventSource.Log.IsEnabled())
-                    TplEventSource.Log.TraceOperationBegin(this.Id, "TaskFactory.ContinueWhenAny", 0);
+                    TplEventSource.Log.TraceOperationBegin(
+                        this.Id,
+                        "TaskFactory.ContinueWhenAny",
+                        0
+                    );
 
                 if (s_asyncDebuggingEnabled)
                     AddToActiveTasks(this);
@@ -2293,20 +2848,32 @@ namespace System.Threading.Tasks
                 int isSyncBlockingFlag = flags & SyncBlockingFlag;
                 int isCompleted = flags & CompletedFlag;
 
-                if (isCompleted == 0 &&
-                    Interlocked.Exchange(ref _stateFlags, isSyncBlockingFlag | CompletedFlag) == isSyncBlockingFlag)
+                if (
+                    isCompleted == 0
+                    && Interlocked.Exchange(ref _stateFlags, isSyncBlockingFlag | CompletedFlag)
+                        == isSyncBlockingFlag
+                )
                 {
                     if (TplEventSource.Log.IsEnabled())
                     {
-                        TplEventSource.Log.TraceOperationRelation(this.Id, CausalityRelation.Choice);
-                        TplEventSource.Log.TraceOperationEnd(this.Id, AsyncCausalityStatus.Completed);
+                        TplEventSource.Log.TraceOperationRelation(
+                            this.Id,
+                            CausalityRelation.Choice
+                        );
+                        TplEventSource.Log.TraceOperationEnd(
+                            this.Id,
+                            AsyncCausalityStatus.Completed
+                        );
                     }
 
                     if (s_asyncDebuggingEnabled)
                         RemoveFromActiveTasks(this);
 
                     bool success = TrySetResult((TTask)completingTask);
-                    Debug.Assert(success, "Only one task should have gotten to this point, and thus this must be successful.");
+                    Debug.Assert(
+                        success,
+                        "Only one task should have gotten to this point, and thus this must be successful."
+                    );
 
                     // We need to remove continuations that may be left straggling on other tasks.
                     // Otherwise, repeated calls to WhenAny using the same task could leak actions.
@@ -2319,8 +2886,12 @@ namespace System.Threading.Tasks
                     for (int i = 0; i < numTasks; i++)
                     {
                         TTask task = tasks[i];
-                        if (task != null && // if an element was erroneously nulled out concurrently, just skip it; worst case is we don't remove a continuation
-                            !task.IsCompleted) task.RemoveContinuation(this);
+                        if (
+                            task != null
+                            && // if an element was erroneously nulled out concurrently, just skip it; worst case is we don't remove a continuation
+                            !task.IsCompleted
+                        )
+                            task.RemoveContinuation(this);
                     }
                     _tasks = null;
                 }
@@ -2328,12 +2899,17 @@ namespace System.Threading.Tasks
 
             public bool InvokeMayRunArbitraryCode => (_stateFlags & SyncBlockingFlag) == 0;
         }
+
         // Common ContinueWhenAny logic
         // If the tasks list is not an array, it must be an internal defensive copy so that
         // we don't need to be concerned about concurrent modifications to the list.  If the task list
         // is an array, it should be a defensive copy if this functionality is being used
         // asynchronously (e.g. WhenAny) rather than synchronously (e.g. WaitAny).
-        internal static Task<TTask> CommonCWAnyLogic<TTask>(IList<TTask> tasks, bool isSyncBlocking = false) where TTask : Task
+        internal static Task<TTask> CommonCWAnyLogic<TTask>(
+            IList<TTask> tasks,
+            bool isSyncBlocking = false
+        )
+            where TTask : Task
         {
             Debug.Assert(tasks != null);
 
@@ -2347,9 +2923,14 @@ namespace System.Threading.Tasks
             for (int i = 0; i < numTasks; i++)
             {
                 Task task = tasks[i];
-                if (task == null) throw new ArgumentException(SR.Task_MultiTaskContinuation_NullTask, nameof(tasks));
+                if (task == null)
+                    throw new ArgumentException(
+                        SR.Task_MultiTaskContinuation_NullTask,
+                        nameof(tasks)
+                    );
 
-                if (checkArgsOnly) continue;
+                if (checkArgsOnly)
+                    continue;
 
                 // If the promise has already completed, don't bother with checking any more tasks.
                 if (promise.IsCompleted)
@@ -2417,7 +2998,14 @@ namespace System.Threading.Tasks
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(tasks, null, continuationAction, m_defaultContinuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(
+                tasks,
+                null,
+                continuationAction,
+                m_defaultContinuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2441,11 +3029,22 @@ namespace System.Threading.Tasks
         /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
-        public Task ContinueWhenAny(Task[] tasks, Action<Task> continuationAction, CancellationToken cancellationToken)
+        public Task ContinueWhenAny(
+            Task[] tasks,
+            Action<Task> continuationAction,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(tasks, null, continuationAction, m_defaultContinuationOptions, cancellationToken, DefaultScheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(
+                tasks,
+                null,
+                continuationAction,
+                m_defaultContinuationOptions,
+                cancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2475,11 +3074,22 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAny.
         /// </remarks>
-        public Task ContinueWhenAny(Task[] tasks, Action<Task> continuationAction, TaskContinuationOptions continuationOptions)
+        public Task ContinueWhenAny(
+            Task[] tasks,
+            Action<Task> continuationAction,
+            TaskContinuationOptions continuationOptions
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(tasks, null, continuationAction, continuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(
+                tasks,
+                null,
+                continuationAction,
+                continuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2519,14 +3129,25 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAny.
         /// </remarks>
-        public Task ContinueWhenAny(Task[] tasks, Action<Task> continuationAction, CancellationToken cancellationToken,
-            TaskContinuationOptions continuationOptions, TaskScheduler scheduler)
+        public Task ContinueWhenAny(
+            Task[] tasks,
+            Action<Task> continuationAction,
+            CancellationToken cancellationToken,
+            TaskContinuationOptions continuationOptions,
+            TaskScheduler scheduler
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(tasks, null, continuationAction, continuationOptions, cancellationToken, scheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(
+                tasks,
+                null,
+                continuationAction,
+                continuationOptions,
+                cancellationToken,
+                scheduler
+            );
         }
-
 
         /// <summary>
         /// Creates a continuation <see cref="Task{TResult}">Task</see>
@@ -2548,11 +3169,21 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        public Task<TResult> ContinueWhenAny<TResult>(Task[] tasks, Func<Task, TResult> continuationFunction)
+        public Task<TResult> ContinueWhenAny<TResult>(
+            Task[] tasks,
+            Func<Task, TResult> continuationFunction
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl(tasks, continuationFunction, null, m_defaultContinuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<TResult>.ContinueWhenAnyImpl(
+                tasks,
+                continuationFunction,
+                null,
+                m_defaultContinuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2580,11 +3211,22 @@ namespace System.Threading.Tasks
         /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
-        public Task<TResult> ContinueWhenAny<TResult>(Task[] tasks, Func<Task, TResult> continuationFunction, CancellationToken cancellationToken)
+        public Task<TResult> ContinueWhenAny<TResult>(
+            Task[] tasks,
+            Func<Task, TResult> continuationFunction,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl(tasks, continuationFunction, null, m_defaultContinuationOptions, cancellationToken, DefaultScheduler);
+            return TaskFactory<TResult>.ContinueWhenAnyImpl(
+                tasks,
+                continuationFunction,
+                null,
+                m_defaultContinuationOptions,
+                cancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2618,11 +3260,22 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAny.
         /// </remarks>
-        public Task<TResult> ContinueWhenAny<TResult>(Task[] tasks, Func<Task, TResult> continuationFunction, TaskContinuationOptions continuationOptions)
+        public Task<TResult> ContinueWhenAny<TResult>(
+            Task[] tasks,
+            Func<Task, TResult> continuationFunction,
+            TaskContinuationOptions continuationOptions
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl(tasks, continuationFunction, null, continuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<TResult>.ContinueWhenAnyImpl(
+                tasks,
+                continuationFunction,
+                null,
+                continuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2666,12 +3319,24 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAny.
         /// </remarks>
-        public Task<TResult> ContinueWhenAny<TResult>(Task[] tasks, Func<Task, TResult> continuationFunction, CancellationToken cancellationToken,
-            TaskContinuationOptions continuationOptions, TaskScheduler scheduler)
+        public Task<TResult> ContinueWhenAny<TResult>(
+            Task[] tasks,
+            Func<Task, TResult> continuationFunction,
+            CancellationToken cancellationToken,
+            TaskContinuationOptions continuationOptions,
+            TaskScheduler scheduler
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl(tasks, continuationFunction, null, continuationOptions, cancellationToken, scheduler);
+            return TaskFactory<TResult>.ContinueWhenAnyImpl(
+                tasks,
+                continuationFunction,
+                null,
+                continuationOptions,
+                cancellationToken,
+                scheduler
+            );
         }
 
         /// <summary>
@@ -2695,11 +3360,21 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        public Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(Task<TAntecedentResult>[] tasks, Func<Task<TAntecedentResult>, TResult> continuationFunction)
+        public Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(
+            Task<TAntecedentResult>[] tasks,
+            Func<Task<TAntecedentResult>, TResult> continuationFunction
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl(tasks, continuationFunction, null, m_defaultContinuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<TResult>.ContinueWhenAnyImpl(
+                tasks,
+                continuationFunction,
+                null,
+                m_defaultContinuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2728,12 +3403,22 @@ namespace System.Threading.Tasks
         /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
-        public Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(Task<TAntecedentResult>[] tasks, Func<Task<TAntecedentResult>, TResult> continuationFunction,
-            CancellationToken cancellationToken)
+        public Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(
+            Task<TAntecedentResult>[] tasks,
+            Func<Task<TAntecedentResult>, TResult> continuationFunction,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl(tasks, continuationFunction, null, m_defaultContinuationOptions, cancellationToken, DefaultScheduler);
+            return TaskFactory<TResult>.ContinueWhenAnyImpl(
+                tasks,
+                continuationFunction,
+                null,
+                m_defaultContinuationOptions,
+                cancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2768,12 +3453,22 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAny.
         /// </remarks>
-        public Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(Task<TAntecedentResult>[] tasks, Func<Task<TAntecedentResult>, TResult> continuationFunction,
-            TaskContinuationOptions continuationOptions)
+        public Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(
+            Task<TAntecedentResult>[] tasks,
+            Func<Task<TAntecedentResult>, TResult> continuationFunction,
+            TaskContinuationOptions continuationOptions
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl(tasks, continuationFunction, null, continuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<TResult>.ContinueWhenAnyImpl(
+                tasks,
+                continuationFunction,
+                null,
+                continuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2818,14 +3513,25 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAny.
         /// </remarks>
-        public Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(Task<TAntecedentResult>[] tasks, Func<Task<TAntecedentResult>, TResult> continuationFunction,
-            CancellationToken cancellationToken, TaskContinuationOptions continuationOptions, TaskScheduler scheduler)
+        public Task<TResult> ContinueWhenAny<TAntecedentResult, TResult>(
+            Task<TAntecedentResult>[] tasks,
+            Func<Task<TAntecedentResult>, TResult> continuationFunction,
+            CancellationToken cancellationToken,
+            TaskContinuationOptions continuationOptions,
+            TaskScheduler scheduler
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationFunction);
 
-            return TaskFactory<TResult>.ContinueWhenAnyImpl(tasks, continuationFunction, null, continuationOptions, cancellationToken, scheduler);
+            return TaskFactory<TResult>.ContinueWhenAnyImpl(
+                tasks,
+                continuationFunction,
+                null,
+                continuationOptions,
+                cancellationToken,
+                scheduler
+            );
         }
-
 
         /// <summary>
         /// Creates a continuation <see cref="Task">Task</see>
@@ -2844,11 +3550,21 @@ namespace System.Threading.Tasks
         /// <paramref name="tasks"/> array contains a null value.</exception>
         /// <exception cref="ArgumentException">The exception that is thrown when the
         /// <paramref name="tasks"/> array is empty.</exception>
-        public Task ContinueWhenAny<TAntecedentResult>(Task<TAntecedentResult>[] tasks, Action<Task<TAntecedentResult>> continuationAction)
+        public Task ContinueWhenAny<TAntecedentResult>(
+            Task<TAntecedentResult>[] tasks,
+            Action<Task<TAntecedentResult>> continuationAction
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(tasks, null, continuationAction, m_defaultContinuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(
+                tasks,
+                null,
+                continuationAction,
+                m_defaultContinuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2873,12 +3589,22 @@ namespace System.Threading.Tasks
         /// <exception cref="ObjectDisposedException">The provided <see cref="Threading.CancellationToken">CancellationToken</see>
         /// has already been disposed.
         /// </exception>
-        public Task ContinueWhenAny<TAntecedentResult>(Task<TAntecedentResult>[] tasks, Action<Task<TAntecedentResult>> continuationAction,
-            CancellationToken cancellationToken)
+        public Task ContinueWhenAny<TAntecedentResult>(
+            Task<TAntecedentResult>[] tasks,
+            Action<Task<TAntecedentResult>> continuationAction,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(tasks, null, continuationAction, m_defaultContinuationOptions, cancellationToken, DefaultScheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(
+                tasks,
+                null,
+                continuationAction,
+                m_defaultContinuationOptions,
+                cancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2909,12 +3635,22 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAny.
         /// </remarks>
-        public Task ContinueWhenAny<TAntecedentResult>(Task<TAntecedentResult>[] tasks, Action<Task<TAntecedentResult>> continuationAction,
-            TaskContinuationOptions continuationOptions)
+        public Task ContinueWhenAny<TAntecedentResult>(
+            Task<TAntecedentResult>[] tasks,
+            Action<Task<TAntecedentResult>> continuationAction,
+            TaskContinuationOptions continuationOptions
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(tasks, null, continuationAction, continuationOptions, m_defaultCancellationToken, DefaultScheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(
+                tasks,
+                null,
+                continuationAction,
+                continuationOptions,
+                m_defaultCancellationToken,
+                DefaultScheduler
+            );
         }
 
         /// <summary>
@@ -2955,12 +3691,24 @@ namespace System.Threading.Tasks
         /// which constrain for which <see cref="TaskStatus">TaskStatus</see> states a continuation
         /// will be executed, are illegal with ContinueWhenAny.
         /// </remarks>
-        public Task ContinueWhenAny<TAntecedentResult>(Task<TAntecedentResult>[] tasks, Action<Task<TAntecedentResult>> continuationAction,
-            CancellationToken cancellationToken, TaskContinuationOptions continuationOptions, TaskScheduler scheduler)
+        public Task ContinueWhenAny<TAntecedentResult>(
+            Task<TAntecedentResult>[] tasks,
+            Action<Task<TAntecedentResult>> continuationAction,
+            CancellationToken cancellationToken,
+            TaskContinuationOptions continuationOptions,
+            TaskScheduler scheduler
+        )
         {
             ArgumentNullException.ThrowIfNull(continuationAction);
 
-            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(tasks, null, continuationAction, continuationOptions, cancellationToken, scheduler);
+            return TaskFactory<VoidTaskResult>.ContinueWhenAnyImpl(
+                tasks,
+                null,
+                continuationAction,
+                continuationOptions,
+                cancellationToken,
+                scheduler
+            );
         }
 
         // Check task array and return a defensive copy.
@@ -2970,7 +3718,10 @@ namespace System.Threading.Tasks
             ArgumentNullException.ThrowIfNull(tasks);
 
             if (tasks.Length == 0)
-                throw new ArgumentException(SR.Task_MultiTaskContinuation_EmptyTaskList, nameof(tasks));
+                throw new ArgumentException(
+                    SR.Task_MultiTaskContinuation_EmptyTaskList,
+                    nameof(tasks)
+                );
 
             Task[] tasksCopy = new Task[tasks.Length];
             for (int i = 0; i < tasks.Length; i++)
@@ -2978,18 +3729,26 @@ namespace System.Threading.Tasks
                 tasksCopy[i] = tasks[i];
 
                 if (tasksCopy[i] == null)
-                    throw new ArgumentException(SR.Task_MultiTaskContinuation_NullTask, nameof(tasks));
+                    throw new ArgumentException(
+                        SR.Task_MultiTaskContinuation_NullTask,
+                        nameof(tasks)
+                    );
             }
 
             return tasksCopy;
         }
 
-        internal static Task<TResult>[] CheckMultiContinuationTasksAndCopy<TResult>(Task<TResult>[] tasks)
+        internal static Task<TResult>[] CheckMultiContinuationTasksAndCopy<TResult>(
+            Task<TResult>[] tasks
+        )
         {
             ArgumentNullException.ThrowIfNull(tasks);
 
             if (tasks.Length == 0)
-                throw new ArgumentException(SR.Task_MultiTaskContinuation_EmptyTaskList, nameof(tasks));
+                throw new ArgumentException(
+                    SR.Task_MultiTaskContinuation_EmptyTaskList,
+                    nameof(tasks)
+                );
 
             Task<TResult>[] tasksCopy = new Task<TResult>[tasks.Length];
             for (int i = 0; i < tasks.Length; i++)
@@ -2997,44 +3756,63 @@ namespace System.Threading.Tasks
                 tasksCopy[i] = tasks[i];
 
                 if (tasksCopy[i] == null)
-                    throw new ArgumentException(SR.Task_MultiTaskContinuation_NullTask, nameof(tasks));
+                    throw new ArgumentException(
+                        SR.Task_MultiTaskContinuation_NullTask,
+                        nameof(tasks)
+                    );
             }
 
             return tasksCopy;
         }
 
         // Throw an exception if "options" argument specifies illegal options
-        internal static void CheckMultiTaskContinuationOptions(TaskContinuationOptions continuationOptions)
+        internal static void CheckMultiTaskContinuationOptions(
+            TaskContinuationOptions continuationOptions
+        )
         {
             // Construct a mask to check for illegal options
-            const TaskContinuationOptions NotOnAny = TaskContinuationOptions.NotOnCanceled |
-                                               TaskContinuationOptions.NotOnFaulted |
-                                               TaskContinuationOptions.NotOnRanToCompletion;
+            const TaskContinuationOptions NotOnAny =
+                TaskContinuationOptions.NotOnCanceled
+                | TaskContinuationOptions.NotOnFaulted
+                | TaskContinuationOptions.NotOnRanToCompletion;
 
             // Check that LongRunning and ExecuteSynchronously are not specified together
-            const TaskContinuationOptions illegalMask = TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.LongRunning;
+            const TaskContinuationOptions illegalMask =
+                TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.LongRunning;
             if ((continuationOptions & illegalMask) == illegalMask)
             {
-                throw new ArgumentOutOfRangeException(nameof(continuationOptions), SR.Task_ContinueWith_ESandLR);
+                throw new ArgumentOutOfRangeException(
+                    nameof(continuationOptions),
+                    SR.Task_ContinueWith_ESandLR
+                );
             }
 
             // Check that no nonsensical options are specified.
-            if ((continuationOptions & ~(
-                TaskContinuationOptions.LongRunning |
-                TaskContinuationOptions.PreferFairness |
-                TaskContinuationOptions.AttachedToParent |
-                TaskContinuationOptions.DenyChildAttach |
-                TaskContinuationOptions.HideScheduler |
-                TaskContinuationOptions.LazyCancellation |
-                NotOnAny |
-                TaskContinuationOptions.ExecuteSynchronously)) != 0)
+            if (
+                (
+                    continuationOptions
+                    & ~(
+                        TaskContinuationOptions.LongRunning
+                        | TaskContinuationOptions.PreferFairness
+                        | TaskContinuationOptions.AttachedToParent
+                        | TaskContinuationOptions.DenyChildAttach
+                        | TaskContinuationOptions.HideScheduler
+                        | TaskContinuationOptions.LazyCancellation
+                        | NotOnAny
+                        | TaskContinuationOptions.ExecuteSynchronously
+                    )
+                ) != 0
+            )
             {
                 throw new ArgumentOutOfRangeException(nameof(continuationOptions));
             }
 
             // Check that no "fire" options are specified.
             if ((continuationOptions & NotOnAny) != 0)
-                throw new ArgumentOutOfRangeException(nameof(continuationOptions), SR.Task_MultiTaskContinuation_FireOptions);
+                throw new ArgumentOutOfRangeException(
+                    nameof(continuationOptions),
+                    SR.Task_MultiTaskContinuation_FireOptions
+                );
         }
     }
 }

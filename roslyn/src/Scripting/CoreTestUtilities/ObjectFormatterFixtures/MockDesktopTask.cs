@@ -30,8 +30,7 @@ namespace ObjectFormatterFixtures
         public Exception Exception => null;
         public TaskStatus Status => TaskStatus.Created;
 
-        private string DebuggerDisplayMethodDescription
-            => m_action.Method.ToString();
+        private string DebuggerDisplayMethodDescription => m_action.Method.ToString();
     }
 
     internal class MockTaskProxy

@@ -9,10 +9,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Diagnostics;
 using System.Data.Common;
-using md=System.Data.Metadata.Edm;
+using System.Diagnostics;
+using System.Globalization;
+using md = System.Data.Metadata.Edm;
 
 namespace System.Data.Query.InternalTrees
 {
@@ -56,6 +56,7 @@ namespace System.Data.Query.InternalTrees
             // Caveat Emptor
             m_noKeys = false;
         }
+
         internal void InitFrom(KeyVec left, KeyVec right)
         {
             if (left.m_noKeys || right.m_noKeys)
@@ -69,6 +70,7 @@ namespace System.Data.Query.InternalTrees
                 m_keys.Or(right.m_keys);
             }
         }
+
         internal void InitFrom(List<KeyVec> keyVecList)
         {
             m_noKeys = false;
@@ -83,23 +85,31 @@ namespace System.Data.Query.InternalTrees
                 m_keys.Or(keyVec.m_keys);
             }
         }
+
         internal void Clear()
         {
             m_noKeys = true;
             m_keys.Clear();
         }
 
-        internal VarVec KeyVars { get { return m_keys; } }
-        internal bool NoKeys { get { return m_noKeys; } set { m_noKeys = value; } }
+        internal VarVec KeyVars
+        {
+            get { return m_keys; }
+        }
+        internal bool NoKeys
+        {
+            get { return m_noKeys; }
+            set { m_noKeys = value; }
+        }
     }
 
     /// <summary>
     /// The NodeInfo class represents additional information about a node in the tree.
     /// By default, this includes a set of external references for each node (ie) references
     /// to Vars that are not defined in the same subtree
-    /// The NodeInfo class also includes a "hashValue" that is a hash value for the entire 
+    /// The NodeInfo class also includes a "hashValue" that is a hash value for the entire
     /// subtree rooted at this node
-    /// NOTE: When adding a new member to track inforation, make sure to update the Clear method 
+    /// NOTE: When adding a new member to track inforation, make sure to update the Clear method
     /// in this class to set that member to the default value.
     /// </summary>
     internal class NodeInfo
@@ -158,8 +168,8 @@ namespace System.Data.Query.InternalTrees
         }
 
         /// <summary>
-        /// Computes the hash value for this node. The hash value is simply the 
-        /// local hash value for this node info added with the hash values of the child 
+        /// Computes the hash value for this node. The hash value is simply the
+        /// local hash value for this node info added with the hash values of the child
         /// nodes
         /// </summary>
         /// <param name="cmd">current command</param>
@@ -209,9 +219,9 @@ namespace System.Data.Query.InternalTrees
     /// - a set of local definitions
     /// - a set of definitions
     /// - a set of keys
-    /// - a set of non-nullable definitions 
+    /// - a set of non-nullable definitions
     /// - a set of non-nullable definitions that are visible at this node
-    /// NOTE: When adding a new member to track inforation, make sure to update the Clear method 
+    /// NOTE: When adding a new member to track inforation, make sure to update the Clear method
     /// in this class to set that member to the default value.
     /// </summary>
     internal class ExtendedNodeInfo : NodeInfo
@@ -270,38 +280,67 @@ namespace System.Data.Query.InternalTrees
         /// <summary>
         /// Definitions made specifically by this node
         /// </summary>
-        internal VarVec LocalDefinitions { get { return m_localDefinitions; } }
+        internal VarVec LocalDefinitions
+        {
+            get { return m_localDefinitions; }
+        }
+
         /// <summary>
         /// All definitions visible as outputs of this node
         /// </summary>
-        internal VarVec Definitions { get { return m_definitions; } }
+        internal VarVec Definitions
+        {
+            get { return m_definitions; }
+        }
+
         /// <summary>
         /// The keys for this node
         /// </summary>
-        internal KeyVec Keys { get { return m_keys; } }
+        internal KeyVec Keys
+        {
+            get { return m_keys; }
+        }
+
         /// <summary>
         /// The definitions of vars that are guaranteed to be non-nullable when output from this node
         /// </summary>
-        internal VarVec NonNullableDefinitions { get { return m_nonNullableDefinitions; } }
+        internal VarVec NonNullableDefinitions
+        {
+            get { return m_nonNullableDefinitions; }
+        }
+
         /// <summary>
         /// The definitions that come from the rel-op inputs of this node that are guaranteed to be non-nullable
         /// </summary>
-        internal VarVec NonNullableVisibleDefinitions { get { return m_nonNullableVisibleDefinitions; } }
+        internal VarVec NonNullableVisibleDefinitions
+        {
+            get { return m_nonNullableVisibleDefinitions; }
+        }
+
         /// <summary>
         /// Min number of rows returned from this node
         /// </summary>
         internal RowCount MinRows
         {
             get { return m_minRows; }
-            set { m_minRows = value; ValidateRowCount(); }
+            set
+            {
+                m_minRows = value;
+                ValidateRowCount();
+            }
         }
+
         /// <summary>
         /// Max rows returned from this node
         /// </summary>
         internal RowCount MaxRows
         {
             get { return m_maxRows; }
-            set { m_maxRows = value; ValidateRowCount(); }
+            set
+            {
+                m_maxRows = value;
+                ValidateRowCount();
+            }
         }
 
         /// <summary>
@@ -344,8 +383,8 @@ namespace System.Data.Query.InternalTrees
     {
         #region public methods
         /// <summary>
-        /// The only public method. Recomputes the nodeInfo for a node in the tree, 
-        /// but only if the node info has already been computed.  
+        /// The only public method. Recomputes the nodeInfo for a node in the tree,
+        /// but only if the node info has already been computed.
         /// Assumes that the NodeInfo for each child (if computed already) is valid
         /// </summary>
         /// <param name="n">Node to get NodeInfo for</param>
@@ -379,16 +418,19 @@ namespace System.Data.Query.InternalTrees
         {
             return n.GetNodeInfo(m_command);
         }
+
         private ExtendedNodeInfo GetExtendedNodeInfo(Node n)
         {
             return n.GetExtendedNodeInfo(m_command);
         }
+
         private NodeInfo InitNodeInfo(Node n)
         {
             NodeInfo nodeInfo = GetNodeInfo(n);
             nodeInfo.Clear();
             return nodeInfo;
         }
+
         private ExtendedNodeInfo InitExtendedNodeInfo(Node n)
         {
             ExtendedNodeInfo nodeInfo = GetExtendedNodeInfo(n);
@@ -428,11 +470,13 @@ namespace System.Data.Query.InternalTrees
         /// <returns></returns>
         private bool IsDefinitionNonNullable(Node definition, VarVec nonNullableInputs)
         {
-            return (definition.Op.OpType == OpType.Constant
+            return (
+                definition.Op.OpType == OpType.Constant
                 || definition.Op.OpType == OpType.InternalConstant
                 || definition.Op.OpType == OpType.NullSentinel
                 || definition.Op.OpType == OpType.VarRef
-                    && nonNullableInputs.IsSet(((VarRefOp)definition.Op).Var));      
+                    && nonNullableInputs.IsSet(((VarRefOp)definition.Op).Var)
+            );
         }
         #endregion
 
@@ -471,7 +515,7 @@ namespace System.Data.Query.InternalTrees
         /// Definitions = Local Definitions = referenced table columns
         /// External References = none
         /// Keys = keys of entity type
-        /// RowCount (default): MinRows = 0, MaxRows = * 
+        /// RowCount (default): MinRows = 0, MaxRows = *
         /// NonNullableDefinitions : non nullable table columns that are definitions
         /// NonNullableInputDefinitions : default(empty) because cannot be used
         /// </summary>
@@ -507,7 +551,7 @@ namespace System.Data.Query.InternalTrees
         /// External References = the unnestVar + any external references of the
         ///   computed Var (if any)
         /// RowCount (default): MinRows = 0; MaxRows = *
-        /// NonNullableDefinitions: default(empty) 
+        /// NonNullableDefinitions: default(empty)
         /// NonNullableInputDefinitions : default(empty) because cannot be used
         /// </summary>
         /// <param name="op"></param>
@@ -523,9 +567,13 @@ namespace System.Data.Query.InternalTrees
             }
 
             // Process keys if it's a TVF with inferred keys, otherwise - no keys.
-            if (n.Child0.Op.OpType == OpType.VarDef && n.Child0.Child0.Op.OpType == OpType.Function && op.Table.Keys.Count > 0)
+            if (
+                n.Child0.Op.OpType == OpType.VarDef
+                && n.Child0.Child0.Op.OpType == OpType.Function
+                && op.Table.Keys.Count > 0
+            )
             {
-                // This is a TVF case. 
+                // This is a TVF case.
                 // Get table's keys - but only if they have been referenced.
                 if (op.Table.ReferencedColumns.Subsumes(op.Table.Keys))
                 {
@@ -535,7 +583,10 @@ namespace System.Data.Query.InternalTrees
             else
             {
                 // no keys
-                Debug.Assert(nodeInfo.Keys.NoKeys, "UnnestOp should have no keys in all cases except TVFs mapped to entities.");
+                Debug.Assert(
+                    nodeInfo.Keys.NoKeys,
+                    "UnnestOp should have no keys in all cases except TVFs mapped to entities."
+                );
             }
 
             // If I have a child, then my external references are my child's external references.
@@ -586,7 +637,7 @@ namespace System.Data.Query.InternalTrees
         /// RowCount = Input's RowCount
         /// NonNullabeDefinitions = Outputs that are either among the NonNullableDefinitions of the child or
         ///                         are constants defined on this node
-        /// NonNullableInputDefinitions = NonNullableDefinitions of the child 
+        /// NonNullableInputDefinitions = NonNullableDefinitions of the child
         /// </summary>
         /// <param name="op">The ProjectOp</param>
         /// <param name="n">corresponding Node</param>
@@ -611,10 +662,12 @@ namespace System.Data.Query.InternalTrees
                 }
             }
 
-            //Nonnullable definitions 
+            //Nonnullable definitions
             nodeInfo.NonNullableDefinitions.InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
-            nodeInfo.NonNullableDefinitions.And(op.Outputs);          
-            nodeInfo.NonNullableVisibleDefinitions.InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
+            nodeInfo.NonNullableDefinitions.And(op.Outputs);
+            nodeInfo.NonNullableVisibleDefinitions.InitFrom(
+                relOpChildNodeInfo.NonNullableDefinitions
+            );
 
             // Local definitions
             foreach (Node chi in n.Child1.Children)
@@ -666,7 +719,7 @@ namespace System.Data.Query.InternalTrees
         ///    references from the predicate
         /// MaxOneRow = Input's RowCount
         ///    If the predicate is a "false" predicate, then max RowCount is zero
-        ///    If we can infer additional info from the key-selector, we may be 
+        ///    If we can infer additional info from the key-selector, we may be
         ///     able to get better estimates
         /// NonNullabeDefinitions = NonNullabeDefinitions of the input RelOp
         /// NonNullableInputDefinitions = NonNullabeDefinitions of the input RelOp
@@ -695,12 +748,14 @@ namespace System.Data.Query.InternalTrees
 
             //The non-nullable definitions are same as these of the child
             nodeInfo.NonNullableDefinitions.InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
-            nodeInfo.NonNullableVisibleDefinitions.InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
-            
-            // inherit max RowCount from child; set min RowCount to 0, because 
+            nodeInfo.NonNullableVisibleDefinitions.InitFrom(
+                relOpChildNodeInfo.NonNullableDefinitions
+            );
+
+            // inherit max RowCount from child; set min RowCount to 0, because
             // we require way more analysis to do anything smarter
             nodeInfo.MinRows = RowCount.Zero;
-            // If the predicate is a "false" predicate, then we know that MaxRows 
+            // If the predicate is a "false" predicate, then we know that MaxRows
             // is zero as well
             ConstantPredicateOp predicate = n.Child1.Op as ConstantPredicateOp;
             if (predicate != null && predicate.IsFalse)
@@ -713,7 +768,7 @@ namespace System.Data.Query.InternalTrees
             }
             return nodeInfo;
         }
-        
+
         /// <summary>
         /// Computes a NodeInfo for a GroupByOp.
         /// Definitions = Keys + aggregates
@@ -721,12 +776,12 @@ namespace System.Data.Query.InternalTrees
         /// Keys = GroupBy Keys
         /// External References = any external references from the input + any external
         ///    references from the local computed Vars
-        /// RowCount = 
-        ///          (1,1) if no group-by keys; 
-        ///          otherwise if input MinRows is 1 then (1, input MaxRows); 
+        /// RowCount =
+        ///          (1,1) if no group-by keys;
+        ///          otherwise if input MinRows is 1 then (1, input MaxRows);
         ///          otherwise (0, input MaxRows)
         /// NonNullableDefinitions: non-nullable keys
-        /// NonNullableInputDefinitions : default(empty)        
+        /// NonNullableInputDefinitions : default(empty)
         /// </summary>
         /// <param name="op">The GroupByOp</param>
         /// <param name="n">corresponding Node</param>
@@ -775,7 +830,9 @@ namespace System.Data.Query.InternalTrees
             nodeInfo.Keys.InitFrom(op.Keys);
 
             // row counts
-            nodeInfo.MinRows = op.Keys.IsEmpty ? RowCount.One : (relOpChildNodeInfo.MinRows == RowCount.One ? RowCount.One : RowCount.Zero);
+            nodeInfo.MinRows = op.Keys.IsEmpty
+                ? RowCount.One
+                : (relOpChildNodeInfo.MinRows == RowCount.One ? RowCount.One : RowCount.Zero);
             nodeInfo.MaxRows = op.Keys.IsEmpty ? RowCount.One : relOpChildNodeInfo.MaxRows;
 
             return nodeInfo;
@@ -819,7 +876,7 @@ namespace System.Data.Query.InternalTrees
                 // Not entirely precise, but good enough
                 if (chiNodeInfo.MaxRows > maxCard)
                 {
-                    maxCard = chiNodeInfo.MaxRows; 
+                    maxCard = chiNodeInfo.MaxRows;
                 }
                 if (chiNodeInfo.MinRows < minCard)
                 {
@@ -840,9 +897,9 @@ namespace System.Data.Query.InternalTrees
         /// Keys = Concatenation of the keys of my children (if every one of them has keys; otherwise, null)
         /// External References = any external references from the inputs + any external
         ///    references from the join predicates
-        /// RowCount: 
+        /// RowCount:
         ///    FullOuterJoin: MinRows = 0, MaxRows = N
-        ///    InnerJoin: MinRows = 0; 
+        ///    InnerJoin: MinRows = 0;
         ///               MaxRows = N; if both inputs have RowCount lesser than (or equal to) 1, then maxCard = 1
         ///    OuterJoin: MinRows = leftInput.MinRows
         ///               MaxRows = N; if both inputs have RowCount lesser than (or equal to) 1, then maxCard = 1
@@ -850,16 +907,20 @@ namespace System.Data.Query.InternalTrees
         ///    FullOuterJoin: None.
         ///    InnerJoin: NonNullableDefinitions of both children
         ///    LeftOuterJoin: NonNullableDefinitions of the left child
-        /// NonNullableInputDefinitions : NonNullabeDefinitions of both children  
+        /// NonNullableInputDefinitions : NonNullabeDefinitions of both children
         /// </summary>
         /// <param name="op">The JoinOp</param>
         /// <param name="n">corresponding Node</param>
         /// <returns></returns>
         protected override NodeInfo VisitJoinOp(JoinBaseOp op, Node n)
         {
-            if (!(op.OpType == OpType.InnerJoin ||
-                  op.OpType == OpType.LeftOuterJoin ||
-                  op.OpType == OpType.FullOuterJoin))
+            if (
+                !(
+                    op.OpType == OpType.InnerJoin
+                    || op.OpType == OpType.LeftOuterJoin
+                    || op.OpType == OpType.FullOuterJoin
+                )
+            )
             {
                 return Unimplemented(n);
             }
@@ -894,7 +955,9 @@ namespace System.Data.Query.InternalTrees
             {
                 nodeInfo.NonNullableDefinitions.Or(rightRelOpNodeInfo.NonNullableDefinitions);
             }
-            nodeInfo.NonNullableVisibleDefinitions.InitFrom(leftRelOpNodeInfo.NonNullableDefinitions);
+            nodeInfo.NonNullableVisibleDefinitions.InitFrom(
+                leftRelOpNodeInfo.NonNullableDefinitions
+            );
             nodeInfo.NonNullableVisibleDefinitions.Or(rightRelOpNodeInfo.NonNullableDefinitions);
 
             RowCount maxRows;
@@ -906,8 +969,10 @@ namespace System.Data.Query.InternalTrees
             }
             else
             {
-                if ((leftRelOpNodeInfo.MaxRows > RowCount.One) ||
-                    (rightRelOpNodeInfo.MaxRows > RowCount.One))
+                if (
+                    (leftRelOpNodeInfo.MaxRows > RowCount.One)
+                    || (rightRelOpNodeInfo.MaxRows > RowCount.One)
+                )
                 {
                     maxRows = RowCount.Unbounded;
                 }
@@ -936,16 +1001,16 @@ namespace System.Data.Query.InternalTrees
         /// Definitions = Definitions of my children
         /// LocalDefinitions = None
         /// Keys = Concatenation of the keys of my children (if every one of them has keys; otherwise, null)
-        /// External References = any external references from the inputs 
+        /// External References = any external references from the inputs
         /// RowCount:
-        ///    CrossApply: minRows=0; MaxRows=Unbounded 
+        ///    CrossApply: minRows=0; MaxRows=Unbounded
         ///         (MaxRows = 1, if both inputs have MaxRow less than or equal to 1)
         ///    OuterApply: minRows=leftInput.MinRows; MaxRows=Unbounded
         ///         (MaxRows = 1, if both inputs have MaxRow less than or equal to 1)
-        /// NonNullableDefinitions = 
+        /// NonNullableDefinitions =
         ///    CrossApply: NonNullableDefinitions of both children
         ///    OuterApply: NonNullableDefinitions of the left child
-        /// NonNullableInputDefinitions = NonNullabeDefinitions of both children  
+        /// NonNullableInputDefinitions = NonNullabeDefinitions of both children
         /// </summary>
         /// <param name="op">The ApplyOp</param>
         /// <param name="n">corresponding Node</param>
@@ -967,17 +1032,21 @@ namespace System.Data.Query.InternalTrees
             nodeInfo.Keys.InitFrom(leftRelOpNodeInfo.Keys, rightRelOpNodeInfo.Keys);
 
             //NonNullableDefinitions
-            nodeInfo.NonNullableDefinitions.InitFrom(leftRelOpNodeInfo.NonNullableDefinitions);          
+            nodeInfo.NonNullableDefinitions.InitFrom(leftRelOpNodeInfo.NonNullableDefinitions);
             if (op.OpType == OpType.CrossApply)
             {
                 nodeInfo.NonNullableDefinitions.Or(rightRelOpNodeInfo.NonNullableDefinitions);
             }
-            nodeInfo.NonNullableVisibleDefinitions.InitFrom(leftRelOpNodeInfo.NonNullableDefinitions);
+            nodeInfo.NonNullableVisibleDefinitions.InitFrom(
+                leftRelOpNodeInfo.NonNullableDefinitions
+            );
             nodeInfo.NonNullableVisibleDefinitions.Or(rightRelOpNodeInfo.NonNullableDefinitions);
 
             RowCount maxRows;
-            if (leftRelOpNodeInfo.MaxRows <= RowCount.One &&
-                rightRelOpNodeInfo.MaxRows <= RowCount.One)
+            if (
+                leftRelOpNodeInfo.MaxRows <= RowCount.One
+                && rightRelOpNodeInfo.MaxRows <= RowCount.One
+            )
             {
                 maxRows = RowCount.One;
             }
@@ -985,7 +1054,8 @@ namespace System.Data.Query.InternalTrees
             {
                 maxRows = RowCount.Unbounded;
             }
-            RowCount minRows = (op.OpType == OpType.CrossApply) ? RowCount.Zero : leftRelOpNodeInfo.MinRows;
+            RowCount minRows =
+                (op.OpType == OpType.CrossApply) ? RowCount.Zero : leftRelOpNodeInfo.MinRows;
             nodeInfo.SetRowCount(minRows, maxRows);
 
             return nodeInfo;
@@ -996,10 +1066,10 @@ namespace System.Data.Query.InternalTrees
         /// Definitions = OutputVars
         /// LocalDefinitions = OutputVars
         /// Keys = Output Vars for Intersect, Except. For UnionAll ??
-        /// External References = any external references from the inputs 
+        /// External References = any external references from the inputs
         /// RowCount: Min = 0, Max = unbounded.
         ///    For UnionAlls, MinRows = max(MinRows of left and right inputs)
-        /// NonNullable definitions =   
+        /// NonNullable definitions =
         ///     UnionAll - Columns that are NonNullableDefinitions on both (children) sides
         ///     Except  - Columns that are NonNullableDefinitions on the left child side
         ///     Intersect - Columns that are NonNullableDefinitions on either side
@@ -1020,15 +1090,18 @@ namespace System.Data.Query.InternalTrees
             ExtendedNodeInfo rightChildNodeInfo = GetExtendedNodeInfo(n.Child1);
 
             RowCount minRows = RowCount.Zero;
-            
-            // My external references are the external references of both of 
+
+            // My external references are the external references of both of
             // my inputs
             nodeInfo.ExternalReferences.Or(leftChildNodeInfo.ExternalReferences);
             nodeInfo.ExternalReferences.Or(rightChildNodeInfo.ExternalReferences);
 
-            if (op.OpType == OpType.UnionAll) 
+            if (op.OpType == OpType.UnionAll)
             {
-                minRows = (leftChildNodeInfo.MinRows > rightChildNodeInfo.MinRows) ? leftChildNodeInfo.MinRows  : rightChildNodeInfo.MinRows;
+                minRows =
+                    (leftChildNodeInfo.MinRows > rightChildNodeInfo.MinRows)
+                        ? leftChildNodeInfo.MinRows
+                        : rightChildNodeInfo.MinRows;
             }
 
             // for intersect, and exceptOps, the keys are simply the outputs.
@@ -1051,20 +1124,23 @@ namespace System.Data.Query.InternalTrees
                 // actually branch discriminators on the input branches.
                 UnionAllOp unionAllOp = (UnionAllOp)op;
 
-                if (null == unionAllOp.BranchDiscriminator) 
+                if (null == unionAllOp.BranchDiscriminator)
                 {
                     nodeInfo.Keys.NoKeys = true;
                 }
-                else 
+                else
                 {
                     VarVec nodeKeys = m_command.CreateVarVec();
                     VarVec mappedKeyVec;
                     for (int i = 0; i < n.Children.Count; i++)
                     {
-                        ExtendedNodeInfo childNodeInfo = n.Children[i].GetExtendedNodeInfo(m_command);
+                        ExtendedNodeInfo childNodeInfo = n.Children[i]
+                            .GetExtendedNodeInfo(m_command);
                         if (!childNodeInfo.Keys.NoKeys && !childNodeInfo.Keys.KeyVars.IsEmpty)
                         {
-                            mappedKeyVec = childNodeInfo.Keys.KeyVars.Remap(unionAllOp.VarMap[i].GetReverseMap());
+                            mappedKeyVec = childNodeInfo.Keys.KeyVars.Remap(
+                                unionAllOp.VarMap[i].GetReverseMap()
+                            );
                             nodeKeys.Or(mappedKeyVec);
                         }
                         else
@@ -1074,17 +1150,17 @@ namespace System.Data.Query.InternalTrees
                             break;
                         }
                     }
-                    
-                    // You might be tempted to ask: "Don't we need to add the branch discriminator 
-                    // to the keys as well?"  The reason we don't is that we wouldn't be here unless 
+
+                    // You might be tempted to ask: "Don't we need to add the branch discriminator
+                    // to the keys as well?"  The reason we don't is that we wouldn't be here unless
                     // we have a branch discriminator variable, which implies we've pulled up keys on
                     // the inputs, and they'll already have the branch descriminator set in the keys
                     // of each input, so we don't need to add that...
-                    if (nodeKeys.IsEmpty) 
+                    if (nodeKeys.IsEmpty)
                     {
                         nodeInfo.Keys.NoKeys = true;
                     }
-                    else 
+                    else
                     {
                         nodeInfo.Keys.InitFrom(nodeKeys);
                     }
@@ -1092,17 +1168,21 @@ namespace System.Data.Query.InternalTrees
             }
 
             //Non-nullable definitions
-            VarVec leftNonNullableVars = leftChildNodeInfo.NonNullableDefinitions.Remap(op.VarMap[0].GetReverseMap());
+            VarVec leftNonNullableVars = leftChildNodeInfo.NonNullableDefinitions.Remap(
+                op.VarMap[0].GetReverseMap()
+            );
             nodeInfo.NonNullableDefinitions.InitFrom(leftNonNullableVars);
-            
+
             if (op.OpType != OpType.Except)
             {
-                VarVec rightNonNullableVars = rightChildNodeInfo.NonNullableDefinitions.Remap(op.VarMap[1].GetReverseMap());
+                VarVec rightNonNullableVars = rightChildNodeInfo.NonNullableDefinitions.Remap(
+                    op.VarMap[1].GetReverseMap()
+                );
                 if (op.OpType == OpType.Intersect)
                 {
                     nodeInfo.NonNullableDefinitions.Or(rightNonNullableVars);
                 }
-                else  //Union all
+                else //Union all
                 {
                     nodeInfo.NonNullableDefinitions.And(rightNonNullableVars);
                 }
@@ -1135,7 +1215,7 @@ namespace System.Data.Query.InternalTrees
 
             // definitions are my child's definitions
             nodeInfo.Definitions.Or(relOpChildNodeInfo.Definitions);
-            
+
             // My references are my child's external references + those made
             // by my sort keys
             nodeInfo.ExternalReferences.Or(relOpChildNodeInfo.ExternalReferences);
@@ -1146,19 +1226,23 @@ namespace System.Data.Query.InternalTrees
 
             //Non-nullable definitions are same as the input
             nodeInfo.NonNullableDefinitions.InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
-            nodeInfo.NonNullableVisibleDefinitions.InitFrom(relOpChildNodeInfo.NonNullableDefinitions);
-            
+            nodeInfo.NonNullableVisibleDefinitions.InitFrom(
+                relOpChildNodeInfo.NonNullableDefinitions
+            );
+
             //Row counts are same as the input
             nodeInfo.InitRowCountFrom(relOpChildNodeInfo);
 
             // For constrained sort, if the Limit value is Constant(1) and WithTies is false,
             // then MinRows and MaxRows can be adjusted to 0, 1.
-            if (OpType.ConstrainedSort == op.OpType &&
-                OpType.Constant == n.Child2.Op.OpType &&
-                !((ConstrainedSortOp)op).WithTies)
+            if (
+                OpType.ConstrainedSort == op.OpType
+                && OpType.Constant == n.Child2.Op.OpType
+                && !((ConstrainedSortOp)op).WithTies
+            )
             {
                 ConstantBaseOp constOp = (ConstantBaseOp)n.Child2.Op;
-                if(TypeHelpers.IsIntegerConstant(constOp.Type, constOp.Value, 1))
+                if (TypeHelpers.IsIntegerConstant(constOp.Type, constOp.Value, 1))
                 {
                     nodeInfo.SetRowCount(RowCount.Zero, RowCount.One);
                 }
@@ -1171,8 +1255,8 @@ namespace System.Data.Query.InternalTrees
         /// Computes a NodeInfo for Distinct.
         /// Definitions = OutputVars that are not external references
         /// LocalDefinitions = None
-        /// Keys = Output Vars 
-        /// External References = any external references from the inputs 
+        /// Keys = Output Vars
+        /// External References = any external references from the inputs
         /// RowCount = Input's RowCount
         /// NonNullabeDefinitions : NonNullabeDefinitions of the input RelOp that are outputs
         /// NonNullableInputDefinitions : default(empty) because cannot be used
@@ -1220,7 +1304,7 @@ namespace System.Data.Query.InternalTrees
         /// External references = child's external references
         /// RowCount=(0,1)
         /// NonNullabeDefinitions = NonNullabeDefinitions of the input RelOp
-        /// NonNullableInputDefinitions : default(empty) because cannot be used        
+        /// NonNullableInputDefinitions : default(empty) because cannot be used
         /// </summary>
         /// <param name="op">The SingleRowOp</param>
         /// <param name="n">current subtree</param>
@@ -1284,7 +1368,7 @@ namespace System.Data.Query.InternalTrees
             //
             // Inherit the keys from the child - but only if all the columns were projected
             // out
-            // 
+            //
             ExtendedNodeInfo driverChildNodeInfo = GetExtendedNodeInfo(n.Child0);
             if (!driverChildNodeInfo.Keys.NoKeys)
             {
@@ -1299,7 +1383,9 @@ namespace System.Data.Query.InternalTrees
             //Non-nullable definitions
             nodeInfo.NonNullableDefinitions.Or(driverChildNodeInfo.NonNullableDefinitions);
             nodeInfo.NonNullableDefinitions.And(nodeInfo.Definitions);
-            nodeInfo.NonNullableVisibleDefinitions.Or(driverChildNodeInfo.NonNullableVisibleDefinitions);
+            nodeInfo.NonNullableVisibleDefinitions.Or(
+                driverChildNodeInfo.NonNullableVisibleDefinitions
+            );
 
             return nodeInfo;
         }
@@ -1309,7 +1395,7 @@ namespace System.Data.Query.InternalTrees
         /// Definitions = OutputVars
         /// LocalDefinitions = Collection Vars
         /// Keys = Keys of my child
-        /// External References = any external references from the inputs 
+        /// External References = any external references from the inputs
         /// RowCount=default
         /// </summary>
         /// <param name="op">The NestOp</param>
@@ -1334,16 +1420,16 @@ namespace System.Data.Query.InternalTrees
 
             // eliminate things I may have defined already (left correlation)
             nodeInfo.ExternalReferences.Minus(nodeInfo.Definitions);
-            
+
             // Keys are from the driving node only.
-            if (ssnOp == null) 
+            if (ssnOp == null)
             {
                 nodeInfo.Keys.InitFrom(GetExtendedNodeInfo(n.Child0).Keys);
             }
-            else 
+            else
             {
                 nodeInfo.Keys.InitFrom(ssnOp.Keys);
-            } 
+            }
             return nodeInfo;
         }
 

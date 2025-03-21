@@ -46,7 +46,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IClassificationFormatMapService classificationFormatMapService,
             IUIThreadOperationExecutor operationExecutor,
             IGlobalOptionService globalOptions,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _workspace = workspace;
             _threadingContext = threadingContext;
@@ -69,7 +70,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
                 _operationExecutor,
                 view,
                 _globalOptions,
-                _listener);
+                _listener
+            );
         }
     }
 }

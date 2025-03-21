@@ -7,7 +7,11 @@ using Xunit;
 
 public class CC
 {
-    public static bool Method2() { return true; }
+    public static bool Method2()
+    {
+        return true;
+    }
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -21,6 +25,7 @@ public class CC
             return 100;
         }
     }
+
     internal static void Main1()
     {
         bool a = false;

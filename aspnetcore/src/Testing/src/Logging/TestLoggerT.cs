@@ -29,7 +29,8 @@ public class TestLogger<T> : ILogger<T>
         EventId eventId,
         TState state,
         Exception exception,
-        Func<TState, Exception, string> formatter)
+        Func<TState, Exception, string> formatter
+    )
     {
         _logger.Log(logLevel, eventId, state, exception, formatter);
     }

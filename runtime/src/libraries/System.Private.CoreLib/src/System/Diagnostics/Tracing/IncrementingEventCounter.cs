@@ -26,7 +26,8 @@ namespace System.Diagnostics.Tracing
         /// </summary>
         /// <param name="name">The name.</param>
         /// <param name="eventSource">The event source.</param>
-        public IncrementingEventCounter(string name, EventSource eventSource) : base(name, eventSource)
+        public IncrementingEventCounter(string name, EventSource eventSource)
+            : base(name, eventSource)
         {
             Publish();
         }
@@ -48,27 +49,41 @@ namespace System.Diagnostics.Tracing
         private double _increment;
         private double _prevIncrement;
 
-        public override string ToString() => $"IncrementingEventCounter '{Name}' Increment {_increment}";
+        public override string ToString() =>
+            $"IncrementingEventCounter '{Name}' Increment {_increment}";
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "The DynamicDependency will preserve the properties of IncrementingCounterPayload")]
-        [DynamicDependency(DynamicallyAccessedMemberTypes.PublicProperties, typeof(IncrementingCounterPayload))]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "The DynamicDependency will preserve the properties of IncrementingCounterPayload"
+        )]
+        [DynamicDependency(
+            DynamicallyAccessedMemberTypes.PublicProperties,
+            typeof(IncrementingCounterPayload)
+        )]
         internal override void WritePayload(float intervalSec, int pollingIntervalMillisec)
         {
-            lock (this)     // Lock the counter
+            lock (this) // Lock the counter
             {
                 IncrementingCounterPayload payload = new IncrementingCounterPayload();
                 payload.Name = Name;
                 payload.IntervalSec = intervalSec;
                 payload.DisplayName = DisplayName ?? "";
-                payload.DisplayRateTimeScale = (DisplayRateTimeScale == TimeSpan.Zero) ? "" : DisplayRateTimeScale.ToString("c");
+                payload.DisplayRateTimeScale =
+                    (DisplayRateTimeScale == TimeSpan.Zero)
+                        ? ""
+                        : DisplayRateTimeScale.ToString("c");
                 payload.Series = $"Interval={pollingIntervalMillisec}"; // TODO: This may need to change when we support multi-session
                 payload.CounterType = "Sum";
                 payload.Metadata = GetMetadataString();
                 payload.Increment = _increment - _prevIncrement;
                 payload.DisplayUnits = DisplayUnits ?? "";
                 _prevIncrement = _increment;
-                EventSource.Write("EventCounters", new EventSourceOptions() { Level = EventLevel.LogAlways }, new IncrementingEventCounterPayloadType(payload));
+                EventSource.Write(
+                    "EventCounters",
+                    new EventSourceOptions() { Level = EventLevel.LogAlways },
+                    new IncrementingEventCounterPayloadType(payload)
+                );
             }
         }
 
@@ -82,14 +97,17 @@ namespace System.Diagnostics.Tracing
         }
     }
 
-
     /// <summary>
     /// This is the payload that is sent in the with EventSource.Write
     /// </summary>
     [EventData]
     internal sealed class IncrementingEventCounterPayloadType
     {
-        public IncrementingEventCounterPayloadType(IncrementingCounterPayload payload) { Payload = payload; }
+        public IncrementingEventCounterPayloadType(IncrementingCounterPayload payload)
+        {
+            Payload = payload;
+        }
+
         public IncrementingCounterPayload Payload { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// A LookupResult summarizes the result of a name lookup within a scope It also allows
     /// combining name lookups from different scopes in an easy way.
-    /// 
+    ///
     /// A LookupResult can be ONE OF:
     ///    empty - nothing found.
     ///    a viable result - this kind of result prevents lookup into further scopes of lower priority.
@@ -31,33 +31,33 @@ namespace Microsoft.CodeAnalysis.CSharp
     ///    a non-viable result - a result that means that the search continues into further scopes of lower priority for
     ///                          a viable or non-accessible result. An error is attached with the error that indicates
     ///                          why the result is non-viable.  A typical reason would be that it is the wrong kind of symbol.
-    /// 
+    ///
     /// Note that the class is poolable so its instances can be obtained from a pool via GetInstance.
     /// Also it is a good idea to call Free on instances after they no longer needed.
-    /// 
+    ///
     /// The typical pattern is "caller allocates / caller frees" -
-    ///    
+    ///
     ///    var result = LookupResult.GetInstance();
-    ///  
+    ///
     ///    scope.Lookup(result, "goo");
     ///    ... use result ...
-    ///         
+    ///
     ///    result.Clear();
     ///    anotherScope.Lookup(result, "moo");
     ///    ... use result ...
-    /// 
+    ///
     ///    result.Free();   //result and its content is invalid after this
-    ///    
-    /// 
-    /// 
+    ///
+    ///
+    ///
     /// </summary>
     /// <remarks>
     /// Currently LookupResult is intended only for name lookup, not for overload resolution. It is
     /// not clear if overload resolution will work with the structure as is, require enhancements,
     /// or be best served by an alternate mechanism.
-    /// 
+    ///
     /// We might want to extend this to a more general priority scheme.
-    /// 
+    ///
     /// </remarks>
     internal sealed class LookupResult
     {
@@ -97,10 +97,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal LookupResultKind Kind
         {
-            get
-            {
-                return _kind;
-            }
+            get { return _kind; }
         }
 
         /// <summary>
@@ -108,26 +105,17 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal Symbol SingleSymbolOrDefault
         {
-            get
-            {
-                return (_symbolList.Count == 1) ? _symbolList[0] : null;
-            }
+            get { return (_symbolList.Count == 1) ? _symbolList[0] : null; }
         }
 
         internal ArrayBuilder<Symbol> Symbols
         {
-            get
-            {
-                return _symbolList;
-            }
+            get { return _symbolList; }
         }
 
         internal DiagnosticInfo Error
         {
-            get
-            {
-                return _error;
-            }
+            get { return _error; }
         }
 
         /// <summary>
@@ -135,10 +123,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal bool IsMultiViable
         {
-            get
-            {
-                return Kind == LookupResultKind.Viable;
-            }
+            get { return Kind == LookupResultKind.Viable; }
         }
 
         /// <summary>
@@ -146,10 +131,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         internal bool IsSingleViable
         {
-            get
-            {
-                return Kind == LookupResultKind.Viable && _symbolList.Count == 1;
-            }
+            get { return Kind == LookupResultKind.Viable && _symbolList.Count == 1; }
         }
 
         internal static SingleLookupResult Good(Symbol symbol)
@@ -172,7 +154,10 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new SingleLookupResult(LookupResultKind.NotReferencable, symbol, error);
         }
 
-        internal static SingleLookupResult StaticInstanceMismatch(Symbol symbol, DiagnosticInfo error)
+        internal static SingleLookupResult StaticInstanceMismatch(
+            Symbol symbol,
+            DiagnosticInfo error
+        )
         {
             return new SingleLookupResult(LookupResultKind.StaticInstanceMismatch, symbol, error);
         }
@@ -182,9 +167,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new SingleLookupResult(LookupResultKind.Inaccessible, symbol, error);
         }
 
-        internal static SingleLookupResult NotInvocable(Symbol unwrappedSymbol, Symbol symbol, bool diagnose)
+        internal static SingleLookupResult NotInvocable(
+            Symbol unwrappedSymbol,
+            Symbol symbol,
+            bool diagnose
+        )
         {
-            var diagInfo = diagnose ? new CSDiagnosticInfo(ErrorCode.ERR_NonInvocableMemberCalled, unwrappedSymbol) : null;
+            var diagInfo = diagnose
+                ? new CSDiagnosticInfo(ErrorCode.ERR_NonInvocableMemberCalled, unwrappedSymbol)
+                : null;
             return new SingleLookupResult(LookupResultKind.NotInvocable, symbol, diagInfo);
         }
 
@@ -198,10 +189,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             return new SingleLookupResult(LookupResultKind.NotATypeOrNamespace, symbol, error);
         }
 
-        internal static SingleLookupResult NotTypeOrNamespace(Symbol unwrappedSymbol, Symbol symbol, bool diagnose)
+        internal static SingleLookupResult NotTypeOrNamespace(
+            Symbol unwrappedSymbol,
+            Symbol symbol,
+            bool diagnose
+        )
         {
-            // TODO: determine correct diagnosis 
-            var diagInfo = diagnose ? new CSDiagnosticInfo(ErrorCode.ERR_BadSKknown, unwrappedSymbol.Name, unwrappedSymbol.GetKindText(), MessageID.IDS_SK_TYPE.Localize()) : null;
+            // TODO: determine correct diagnosis
+            var diagInfo = diagnose
+                ? new CSDiagnosticInfo(
+                    ErrorCode.ERR_BadSKknown,
+                    unwrappedSymbol.Name,
+                    unwrappedSymbol.GetKindText(),
+                    MessageID.IDS_SK_TYPE.Localize()
+                )
+                : null;
             return new SingleLookupResult(LookupResultKind.NotATypeOrNamespace, symbol, diagInfo);
         }
 
@@ -250,7 +252,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         /// <summary>
         /// Merge another result with this one, with the symbols combined if both
-        /// this and other are viable. Otherwise the highest priority result wins (this if equal 
+        /// this and other are viable. Otherwise the highest priority result wins (this if equal
         /// priority and non-viable.)
         /// </summary>
         internal void MergeEqual(LookupResult other)

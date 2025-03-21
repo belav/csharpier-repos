@@ -30,7 +30,7 @@ namespace System.CommandLine.Binding
             return enumerableInterface?.GenericTypeArguments switch
             {
                 { Length: 1 } genericTypeArguments => genericTypeArguments[0],
-                _ => null
+                _ => null,
             };
         }
 
@@ -41,17 +41,15 @@ namespace System.CommandLine.Binding
                 return false;
             }
 
-            return
-                type.IsArray
-                ||
-                typeof(IEnumerable).IsAssignableFrom(type);
+            return type.IsArray || typeof(IEnumerable).IsAssignableFrom(type);
         }
 
         internal static bool IsNullable(this Type t) => Nullable.GetUnderlyingType(t) is not null;
 
         internal static bool TryGetNullableType(
             this Type type,
-            [NotNullWhen(true)] out Type? nullableType)
+            [NotNullWhen(true)] out Type? nullableType
+        )
         {
             nullableType = Nullable.GetUnderlyingType(type);
             return nullableType is not null;

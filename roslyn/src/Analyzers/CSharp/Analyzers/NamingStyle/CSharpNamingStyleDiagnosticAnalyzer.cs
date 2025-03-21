@@ -12,7 +12,8 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.NamingStyles
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class CSharpNamingStyleDiagnosticAnalyzer : NamingStyleDiagnosticAnalyzerBase<SyntaxKind>
+    internal sealed class CSharpNamingStyleDiagnosticAnalyzer
+        : NamingStyleDiagnosticAnalyzerBase<SyntaxKind>
     {
         protected override ImmutableArray<SyntaxKind> SupportedSyntaxKinds { get; } =
             ImmutableArray.Create(
@@ -22,18 +23,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Diagnostics.NamingStyles
                 SyntaxKind.SingleVariableDesignation,
                 SyntaxKind.LocalFunctionStatement,
                 SyntaxKind.Parameter,
-                SyntaxKind.TypeParameter);
+                SyntaxKind.TypeParameter
+            );
 
         protected override bool ShouldIgnore(ISymbol symbol)
         {
-            if (symbol.IsKind(SymbolKind.Parameter)
-                && symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax() is ParameterSyntax
-                {
-                    Parent: ParameterListSyntax
+            if (
+                symbol.IsKind(SymbolKind.Parameter)
+                && symbol.DeclaringSyntaxReferences.FirstOrDefault()?.GetSyntax()
+                    is ParameterSyntax
                     {
-                        Parent: RecordDeclarationSyntax
+                        Parent: ParameterListSyntax { Parent: RecordDeclarationSyntax }
                     }
-                })
+            )
             {
                 // Parameters of positional record declarations should be ignored because they also
                 // considered properties, and that naming style makes more sense

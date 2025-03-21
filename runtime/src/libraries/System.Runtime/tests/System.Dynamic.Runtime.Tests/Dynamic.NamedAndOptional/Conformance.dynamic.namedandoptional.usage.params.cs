@@ -39,8 +39,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms01a.prms01a
 {
     // <Area>Use of Named parameters</Area>
@@ -76,8 +74,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms01b.prms01b
 {
@@ -115,8 +111,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms01c.prms01c
 {
     // <Area>Use of Named parameters</Area>
@@ -153,8 +147,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms02.prms02
 {
     // <Area>Use of Named parameters</Area>
@@ -185,18 +177,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             int x = 3;
             int y = 2;
             dynamic p = new Parent();
-            return p.Foo(x: x, y: y, arr: new int[]
-            {
-            1, 2, 3
-            }
-
-            );
+            return p.Foo(x: x, y: y, arr: new int[] { 1, 2, 3 });
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms02a.prms02a
 {
@@ -228,18 +213,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             int x = 3;
             int y = 2;
             Parent p = new Parent();
-            return p.Foo(x: x, y: y, arr: new int[]
-            {
-            1, 2, 3
-            }
-
-            );
+            return p.Foo(x: x, y: y, arr: new int[] { 1, 2, 3 });
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms02b.prms02b
 {
@@ -270,20 +248,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         {
             dynamic x = 3;
             dynamic y = 2;
-            dynamic arr = new int[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            dynamic arr = new int[] { 1, 2, 3 };
             Parent p = new Parent();
             return p.Foo(x: x, y: y, arr: arr);
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms02c.prms02c
 {
@@ -315,18 +286,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             int x = 3;
             int y = 2;
             dynamic p = new Parent();
-            return p.Foo(x: x, y: y, arr: new int[]
-            {
-            1, 2, 3
-            }
-
-            );
+            return p.Foo(x: x, y: y, arr: new int[] { 1, 2, 3 });
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms04.prms04
 {
@@ -364,7 +328,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NamedArgumentUsedInPositional, e.Message, "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NamedArgumentUsedInPositional,
+                    e.Message,
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -374,8 +342,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms04c.prms04c
 {
@@ -413,7 +379,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NamedArgumentUsedInPositional, e.Message, "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NamedArgumentUsedInPositional,
+                    e.Message,
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -423,8 +393,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms05.prms05
 {
@@ -458,16 +426,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             dynamic p = new Parent();
             try
             {
-                p.Foo(1, 2, 3, 4, x: x, y: y, arr: new int[]
-                {
-                1, 2, 3
-                }
-
-                );
+                p.Foo(1, 2, 3, 4, x: x, y: y, arr: new int[] { 1, 2, 3 });
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NamedArgumentUsedInPositional, e.Message, "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NamedArgumentUsedInPositional,
+                    e.Message,
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -477,8 +444,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms05c.prms05c
 {
@@ -512,16 +477,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             dynamic p = new Parent();
             try
             {
-                p.Foo(1, 2, 3, 4, x: x, y: y, arr: new int[]
-                {
-                1, 2, 3
-                }
-
-                );
+                p.Foo(1, 2, 3, 4, x: x, y: y, arr: new int[] { 1, 2, 3 });
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NamedArgumentUsedInPositional, e.Message, "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NamedArgumentUsedInPositional,
+                    e.Message,
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -531,8 +495,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms06.prms06
 {
@@ -566,16 +528,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             dynamic p = new Parent();
             try
             {
-                p.Foo(1, 2, 3, 4, x: x, y: y, arr: new int[]
-                {
-                1, 2, 3
-                }
-
-                );
+                p.Foo(1, 2, 3, 4, x: x, y: y, arr: new int[] { 1, 2, 3 });
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NamedArgumentUsedInPositional, e.Message, "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NamedArgumentUsedInPositional,
+                    e.Message,
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -585,8 +546,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms06c.prms06c
 {
@@ -620,16 +579,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
             dynamic p = new Parent();
             try
             {
-                p.Foo(1, 2, 3, 4, x: x, y: y, arr: new int[]
-                {
-                1, 2, 3
-                }
-
-                );
+                p.Foo(1, 2, 3, 4, x: x, y: y, arr: new int[] { 1, 2, 3 });
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
-                bool ret = ErrorVerifier.Verify(ErrorMessageId.NamedArgumentUsedInPositional, e.Message, "x");
+                bool ret = ErrorVerifier.Verify(
+                    ErrorMessageId.NamedArgumentUsedInPositional,
+                    e.Message,
+                    "x"
+                );
                 if (ret)
                     return 0;
             }
@@ -639,8 +597,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms07.prms07
 {
@@ -670,18 +626,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         public static int MainMethod()
         {
             dynamic p = new Parent();
-            return p.Foo(3, arr: new int[]
-            {
-            1, 2, 3
-            }
-
-            );
+            return p.Foo(3, arr: new int[] { 1, 2, 3 });
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms07a.prms07a
 {
@@ -711,18 +660,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         public static int MainMethod()
         {
             Parent p = new Parent();
-            return p.Foo(3, arr: new int[]
-            {
-            1, 2, 3
-            }
-
-            );
+            return p.Foo(3, arr: new int[] { 1, 2, 3 });
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms07b.prms07b
 {
@@ -751,20 +693,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 
         public static int MainMethod()
         {
-            dynamic arr = new int[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            dynamic arr = new int[] { 1, 2, 3 };
             Parent p = new Parent();
             return p.Foo(3, arr: arr);
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms07c.prms07c
 {
@@ -794,18 +729,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         public static int MainMethod()
         {
             dynamic p = new Parent();
-            return p.Foo(3, arr: new int[]
-            {
-            1, 2, 3
-            }
-
-            );
+            return p.Foo(3, arr: new int[] { 1, 2, 3 });
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms08.prms08
 {
@@ -835,18 +763,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         public static int MainMethod()
         {
             dynamic p = new Parent();
-            return p.Foo(arr: new int[]
-            {
-            1, 2, 3
-            }
-
-            );
+            return p.Foo(arr: new int[] { 1, 2, 3 });
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms08a.prms08a
 {
@@ -876,18 +797,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         public static int MainMethod()
         {
             Parent p = new Parent();
-            return p.Foo(arr: new int[]
-            {
-            1, 2, 3
-            }
-
-            );
+            return p.Foo(arr: new int[] { 1, 2, 3 });
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms08b.prms08b
 {
@@ -916,20 +830,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
 
         public static int MainMethod()
         {
-            dynamic arr = new int[]
-            {
-            1, 2, 3
-            }
-
-            ;
+            dynamic arr = new int[] { 1, 2, 3 };
             Parent p = new Parent();
             return p.Foo(arr: arr);
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms08c.prms08c
 {
@@ -959,18 +866,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         public static int MainMethod()
         {
             dynamic p = new Parent();
-            return p.Foo(arr: new int[]
-            {
-            1, 2, 3
-            }
-
-            );
+            return p.Foo(arr: new int[] { 1, 2, 3 });
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms09.prms09
 {
@@ -1006,8 +906,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms09a.prms09a
 {
     // <Area>Use of Named parameters</Area>
@@ -1041,8 +939,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms09b.prms09b
 {
@@ -1079,8 +975,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms09c.prms09c
 {
     // <Area>Use of Named parameters</Area>
@@ -1114,8 +1008,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms10.prms10
 {
@@ -1152,8 +1044,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms10a.prms10a
 {
     // <Area>Use of Named parameters</Area>
@@ -1188,8 +1078,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms10b.prms10b
 {
@@ -1227,8 +1115,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms10c.prms10c
 {
     // <Area>Use of Named parameters</Area>
@@ -1258,19 +1144,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         public static int MainMethod()
         {
             dynamic p = new Parent();
-            dynamic[] arr = new dynamic[]
-            {
-            3
-            }
-
-            ;
+            dynamic[] arr = new dynamic[] { 3 };
             return p.Foo(arr: arr);
         }
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms12.prms12
 {
@@ -1305,8 +1184,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms12a.prms12a
 {
     // <Area>Use of Named parameters</Area>
@@ -1339,8 +1216,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     }
     //</Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms12b.prms12b
 {
@@ -1376,8 +1251,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
     //</Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.prms.prms12c.prms12c
 {
     // <Area>Use of Named parameters</Area>
@@ -1405,12 +1278,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.namedandoptional.usage.
         public static int MainMethod()
         {
             dynamic p = new Parent();
-            dynamic[] arr = new dynamic[]
-            {
-            3
-            }
-
-            ;
+            dynamic[] arr = new dynamic[] { 3 };
             return p.Foo(arr: arr);
         }
     }

@@ -13,10 +13,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.Api
         [DataMember(Order = 0)]
         internal RemoteServiceCallbackId UnderlyingObject { get; }
 
-        public UnitTestingRemoteServiceCallbackIdWrapper(RemoteServiceCallbackId underlyingObject)
-            => UnderlyingObject = underlyingObject;
+        public UnitTestingRemoteServiceCallbackIdWrapper(
+            RemoteServiceCallbackId underlyingObject
+        ) => UnderlyingObject = underlyingObject;
 
-        public static implicit operator UnitTestingRemoteServiceCallbackIdWrapper(RemoteServiceCallbackId id)
-            => new(id);
+        public static implicit operator UnitTestingRemoteServiceCallbackIdWrapper(
+            RemoteServiceCallbackId id
+        ) => new(id);
     }
 }

@@ -9,18 +9,22 @@ internal enum WasmHost
     /// V8
     /// </summary>
     V8,
+
     /// <summary>
     /// JavaScriptCore
     /// </summary>
     JavaScriptCore,
+
     /// <summary>
     /// SpiderMonkey
     /// </summary>
     SpiderMonkey,
+
     /// <summary>
     /// NodeJS
     /// </summary>
     NodeJS,
+
     /// <summary>
     /// Browser
     /// </summary>
@@ -29,5 +33,5 @@ internal enum WasmHost
     /// <summary>
     /// wasmtime
     /// </summary>
-    Wasmtime
+    Wasmtime,
 }

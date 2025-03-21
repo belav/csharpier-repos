@@ -27,12 +27,14 @@ namespace System.Web.Cors.Test
         public void SettingNegativePreflightMaxAge_Throws()
         {
             CorsPolicy corsPolicy = new CorsPolicy();
-            Assert.ThrowsArgumentOutOfRange(() =>
-            {
-                corsPolicy.PreflightMaxAge = -2;
-            },
-            "value",
-            "PreflightMaxAge must be greater than or equal to 0.");
+            Assert.ThrowsArgumentOutOfRange(
+                () =>
+                {
+                    corsPolicy.PreflightMaxAge = -2;
+                },
+                "value",
+                "PreflightMaxAge must be greater than or equal to 0."
+            );
         }
 
         [Fact]
@@ -43,7 +45,7 @@ namespace System.Web.Cors.Test
                 AllowAnyHeader = true,
                 AllowAnyOrigin = true,
                 PreflightMaxAge = 10,
-                SupportsCredentials = true
+                SupportsCredentials = true,
             };
             corsPolicy.Headers.Add("foo");
             corsPolicy.Headers.Add("bar");
@@ -51,7 +53,10 @@ namespace System.Web.Cors.Test
             corsPolicy.Origins.Add("http://example.org");
             corsPolicy.Methods.Add("GET");
 
-            Assert.Equal(@"AllowAnyHeader: True, AllowAnyMethod: False, AllowAnyOrigin: True, PreflightMaxAge: 10, SupportsCredentials: True, Origins: {http://example.com,http://example.org}, Methods: {GET}, Headers: {foo,bar}, ExposedHeaders: {}", corsPolicy.ToString());
+            Assert.Equal(
+                @"AllowAnyHeader: True, AllowAnyMethod: False, AllowAnyOrigin: True, PreflightMaxAge: 10, SupportsCredentials: True, Origins: {http://example.com,http://example.org}, Methods: {GET}, Headers: {foo,bar}, ExposedHeaders: {}",
+                corsPolicy.ToString()
+            );
         }
     }
 }

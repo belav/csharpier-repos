@@ -7,9 +7,16 @@ namespace System.Security
 {
     public static class SecureStringMarshal
     {
-        public static IntPtr SecureStringToCoTaskMemAnsi(SecureString s) => Marshal.SecureStringToCoTaskMemAnsi(s);
-        public static IntPtr SecureStringToGlobalAllocAnsi(SecureString s) => Marshal.SecureStringToGlobalAllocAnsi(s);
-        public static IntPtr SecureStringToCoTaskMemUnicode(SecureString s) => Marshal.SecureStringToCoTaskMemUnicode(s);
-        public static IntPtr SecureStringToGlobalAllocUnicode(SecureString s) => Marshal.SecureStringToGlobalAllocUnicode(s);
+        public static IntPtr SecureStringToCoTaskMemAnsi(SecureString s) =>
+            Marshal.SecureStringToCoTaskMemAnsi(s);
+
+        public static IntPtr SecureStringToGlobalAllocAnsi(SecureString s) =>
+            Marshal.SecureStringToGlobalAllocAnsi(s);
+
+        public static IntPtr SecureStringToCoTaskMemUnicode(SecureString s) =>
+            Marshal.SecureStringToCoTaskMemUnicode(s);
+
+        public static IntPtr SecureStringToGlobalAllocUnicode(SecureString s) =>
+            Marshal.SecureStringToGlobalAllocUnicode(s);
     }
 }

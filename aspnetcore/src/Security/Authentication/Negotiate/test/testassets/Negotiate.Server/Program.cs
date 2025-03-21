@@ -25,18 +25,20 @@ public class Program
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();
-                webBuilder.ConfigureKestrel((context, options) =>
-                {
-                    if (string.Equals("true", context.Configuration["Persist"]))
+                webBuilder.ConfigureKestrel(
+                    (context, options) =>
                     {
-                        options.ListenAnyIP(5000);
-                        options.ListenAnyIP(5001, listenOptions => listenOptions.UseHttps());
+                        if (string.Equals("true", context.Configuration["Persist"]))
+                        {
+                            options.ListenAnyIP(5000);
+                            options.ListenAnyIP(5001, listenOptions => listenOptions.UseHttps());
+                        }
+                        else
+                        {
+                            options.ListenAnyIP(5002);
+                            options.ListenAnyIP(5003, listenOptions => listenOptions.UseHttps());
+                        }
                     }
-                    else
-                    {
-                        options.ListenAnyIP(5002);
-                        options.ListenAnyIP(5003, listenOptions => listenOptions.UseHttps());
-                    }
-                });
+                );
             });
 }

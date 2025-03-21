@@ -18,7 +18,13 @@ namespace System.Xml
         private string _encoding;
         private string _standalone;
 
-        protected internal XmlDeclaration(string version, string? encoding, string? standalone, XmlDocument doc) : base(doc)
+        protected internal XmlDeclaration(
+            string version,
+            string? encoding,
+            string? standalone,
+            XmlDocument doc
+        )
+            : base(doc)
         {
             if (!IsValidXmlVersion(version))
                 throw new ArgumentException(SR.Xdom_Version);
@@ -29,7 +35,6 @@ namespace System.Xml
             this.Standalone = standalone;
             this.Version = version;
         }
-
 
         // The version attribute for <?xml version= '1.0' ... ?>
         public string Version
@@ -72,7 +77,6 @@ namespace System.Xml
             set { InnerText = value!; }
         }
 
-
         // Gets or sets the concatenated values of the node and
         // all its children.
         public override string InnerText
@@ -98,7 +102,6 @@ namespace System.Xml
 
                 return strb.ToString();
             }
-
             set
             {
                 string? tempVersion;
@@ -108,7 +111,12 @@ namespace System.Xml
                 string orgStandalone = this.Standalone;
                 string? orgVersion = this.Version;
 
-                XmlLoader.ParseXmlDeclarationValue(value, out tempVersion, out tempEncoding, out tempStandalone);
+                XmlLoader.ParseXmlDeclarationValue(
+                    value,
+                    out tempVersion,
+                    out tempEncoding,
+                    out tempStandalone
+                );
 
                 try
                 {
@@ -136,10 +144,7 @@ namespace System.Xml
         // Gets the name of the node.
         public override string Name
         {
-            get
-            {
-                return "xml";
-            }
+            get { return "xml"; }
         }
 
         // Gets the name of the current node without the namespace prefix.
@@ -167,7 +172,6 @@ namespace System.Xml
             w.WriteProcessingInstruction(Name, InnerText);
         }
 
-
         // Saves all the children of the node to the specified XmlWriter.
         public override void WriteContentTo(XmlWriter w)
         {
@@ -176,7 +180,10 @@ namespace System.Xml
 
         private static bool IsValidXmlVersion(string ver)
         {
-            return ver.Length >= 3 && ver[0] == '1' && ver[1] == '.' && XmlCharType.IsOnlyDigits(ver, 2, ver.Length - 2);
+            return ver.Length >= 3
+                && ver[0] == '1'
+                && ver[1] == '.'
+                && XmlCharType.IsOnlyDigits(ver, 2, ver.Length - 2);
         }
     }
 }

@@ -25,7 +25,6 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,61 +32,58 @@ using Microsoft.Build.Framework;
 using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	public class ReadLinesFromFile : TaskExtension {
-	
-		ITaskItem	file;
-		ITaskItem[]	lines;
-	
-		public ReadLinesFromFile ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public class ReadLinesFromFile : TaskExtension
+    {
+        ITaskItem file;
+        ITaskItem[] lines;
 
-		public override bool Execute ()
-		{
-			string full_filename = file.GetMetadata ("FullPath");
-			if (!System.IO.File.Exists (full_filename))
-				return true;
+        public ReadLinesFromFile() { }
 
-			StreamReader streamReader = null;
-			try {
-				streamReader = new StreamReader (full_filename);
-				List <ITaskItem> temporaryLines = new List <ITaskItem> ();
+        public override bool Execute()
+        {
+            string full_filename = file.GetMetadata("FullPath");
+            if (!System.IO.File.Exists(full_filename))
+                return true;
 
-				string line;
-				while ((line = streamReader.ReadLine ()) != null)
-					temporaryLines.Add (new TaskItem (line));
-				
-				lines = temporaryLines.ToArray ();
-			} catch (IOException ex) {
-				Log.LogWarningFromException (ex);
-			} finally {
-				if (streamReader != null)
-					streamReader.Dispose ();
-			}
+            StreamReader streamReader = null;
+            try
+            {
+                streamReader = new StreamReader(full_filename);
+                List<ITaskItem> temporaryLines = new List<ITaskItem>();
 
-			return true;
-		}
+                string line;
+                while ((line = streamReader.ReadLine()) != null)
+                    temporaryLines.Add(new TaskItem(line));
 
-		[Required]
-		public ITaskItem File {
-			get {
-				return file;
-			}
-			set {
-				file = value;
-			}
-		}
+                lines = temporaryLines.ToArray();
+            }
+            catch (IOException ex)
+            {
+                Log.LogWarningFromException(ex);
+            }
+            finally
+            {
+                if (streamReader != null)
+                    streamReader.Dispose();
+            }
 
-		[Output]
-		public ITaskItem[] Lines {
-			get {
-				return lines;
-			}
-			set {
-				lines = value;
-			}
-		}
-	}
+            return true;
+        }
+
+        [Required]
+        public ITaskItem File
+        {
+            get { return file; }
+            set { file = value; }
+        }
+
+        [Output]
+        public ITaskItem[] Lines
+        {
+            get { return lines; }
+            set { lines = value; }
+        }
+    }
 }
-

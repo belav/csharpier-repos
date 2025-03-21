@@ -15,7 +15,10 @@ internal sealed class DuplexPipe : IDuplexPipe
 
     public PipeWriter Output { get; }
 
-    public static DuplexPipePair CreateConnectionPair(PipeOptions inputOptions, PipeOptions outputOptions)
+    public static DuplexPipePair CreateConnectionPair(
+        PipeOptions inputOptions,
+        PipeOptions outputOptions
+    )
     {
         var input = new Pipe(inputOptions);
         var output = new Pipe(outputOptions);

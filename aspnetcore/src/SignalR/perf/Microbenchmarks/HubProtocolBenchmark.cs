@@ -14,7 +14,12 @@ public class HubProtocolBenchmark
     private TestBinder _binder;
     private HubMessage _hubMessage;
 
-    [Params(Message.NoArguments, Message.FewArguments, Message.ManyArguments, Message.LargeArguments)]
+    [Params(
+        Message.NoArguments,
+        Message.FewArguments,
+        Message.ManyArguments,
+        Message.LargeArguments
+    )]
     public Message Input { get; set; }
 
     [Params(Protocol.MsgPack, Protocol.Json, Protocol.NewtonsoftJson)]
@@ -45,10 +50,26 @@ public class HubProtocolBenchmark
                 _hubMessage = new InvocationMessage("Target", new object[] { 1, "Foo", 2.0f });
                 break;
             case Message.ManyArguments:
-                _hubMessage = new InvocationMessage("Target", new object[] { 1, "string", 2.0f, true, (byte)9, new byte[] { 5, 4, 3, 2, 1 }, 'c', 123456789101112L });
+                _hubMessage = new InvocationMessage(
+                    "Target",
+                    new object[]
+                    {
+                        1,
+                        "string",
+                        2.0f,
+                        true,
+                        (byte)9,
+                        new byte[] { 5, 4, 3, 2, 1 },
+                        'c',
+                        123456789101112L,
+                    }
+                );
                 break;
             case Message.LargeArguments:
-                _hubMessage = new InvocationMessage("Target", new object[] { new string('F', 10240), new byte[10240] });
+                _hubMessage = new InvocationMessage(
+                    "Target",
+                    new object[] { new string('F', 10240), new byte[10240] }
+                );
                 break;
         }
 
@@ -88,6 +109,6 @@ public class HubProtocolBenchmark
         NoArguments = 0,
         FewArguments = 1,
         ManyArguments = 2,
-        LargeArguments = 3
+        LargeArguments = 3,
     }
 }

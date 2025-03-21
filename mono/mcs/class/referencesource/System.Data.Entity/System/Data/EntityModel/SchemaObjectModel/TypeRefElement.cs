@@ -22,14 +22,11 @@ namespace System.Data.EntityModel.SchemaObjectModel
     {
         #region constructor
         /// <summary>
-        /// 
+        ///
         /// </summary>
         /// <param name="parentElement"></param>
         internal TypeRefElement(SchemaElement parentElement)
-            : base(parentElement)
-        {
-
-        }
+            : base(parentElement) { }
         #endregion
 
         protected override bool HandleAttribute(XmlReader reader)
@@ -61,7 +58,10 @@ namespace System.Data.EntityModel.SchemaObjectModel
             _unresolvedType = type;
         }
 
-        internal override bool ResolveNameAndSetTypeUsage(Converter.ConversionCache convertedItemCache, Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems)
+        internal override bool ResolveNameAndSetTypeUsage(
+            Converter.ConversionCache convertedItemCache,
+            Dictionary<Som.SchemaElement, GlobalItem> newGlobalItems
+        )
         {
             if (_type is ScalarType) //Create and store type usage for scalar type
             {
@@ -69,9 +69,15 @@ namespace System.Data.EntityModel.SchemaObjectModel
                 _typeUsage = _typeUsageBuilder.TypeUsage;
                 return true;
             }
-            else  //Try to resolve edm type. If not now, it will resolve in the second pass
+            else //Try to resolve edm type. If not now, it will resolve in the second pass
             {
-                EdmType edmType = (EdmType)Converter.LoadSchemaElement(_type, _type.Schema.ProviderManifest, convertedItemCache, newGlobalItems);
+                EdmType edmType = (EdmType)
+                    Converter.LoadSchemaElement(
+                        _type,
+                        _type.Schema.ProviderManifest,
+                        convertedItemCache,
+                        newGlobalItems
+                    );
                 if (edmType != null)
                 {
                     _typeUsageBuilder.ValidateAndSetTypeUsage(edmType, false); //use typeusagebuilder so dont lose facet information

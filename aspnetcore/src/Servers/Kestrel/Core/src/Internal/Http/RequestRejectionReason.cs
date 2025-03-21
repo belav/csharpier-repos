@@ -32,5 +32,5 @@ internal enum RequestRejectionReason
     MissingHostHeader,
     MultipleHostHeaders,
     InvalidHostHeader,
-    RequestBodyExceedsContentLength
+    RequestBodyExceedsContentLength,
 }

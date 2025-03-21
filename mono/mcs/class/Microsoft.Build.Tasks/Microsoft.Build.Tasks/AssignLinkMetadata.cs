@@ -26,62 +26,73 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using System.Collections.Generic;
 
-namespace Microsoft.Build.Tasks {
-	public class AssignLinkMetadata : TaskExtension {
-	
-		ITaskItem[]	assignedFiles;
-		ITaskItem[]	files;
-	
-		public AssignLinkMetadata ()
-		{
-		}
-		
-		public override bool Execute ()
-		{
-			if (files == null || files.Length == 0)
-				//nothing to do
-				return true;
+namespace Microsoft.Build.Tasks
+{
+    public class AssignLinkMetadata : TaskExtension
+    {
+        ITaskItem[] assignedFiles;
+        ITaskItem[] files;
 
-			List<ITaskItem> outFiles = new List<ITaskItem> ();
+        public AssignLinkMetadata() { }
 
-			for (int i = 0; i < files.Length; i ++) {
-				string file = files [i].ItemSpec;
-				string link = files [i].GetMetadata ("Link");
-				string definingProjectPath = files [i].GetMetadata ("DefiningProjectFullPath");
+        public override bool Execute()
+        {
+            if (files == null || files.Length == 0)
+                //nothing to do
+                return true;
 
-				if (String.IsNullOrEmpty (link) && Path.IsPathRooted (file) && !string.IsNullOrEmpty (definingProjectPath)) {
-					file = Path.GetFullPath (file);
-					var projectDir = Path.GetFullPath (Path.GetDirectoryName (definingProjectPath));
-					if (projectDir.Length == 0 || projectDir [projectDir.Length - 1] != Path.DirectorySeparatorChar)
-						projectDir += Path.DirectorySeparatorChar;
-					if (file.StartsWith (projectDir)) {
-						// The file is in the same folder or a subfolder of the project that contains it.
-						// Use the relative path wrt the containing project as link.
-						var outFile = new TaskItem (files [i]);
-						outFile.SetMetadata ("Link", file.Substring (projectDir.Length));
-						outFiles.Add (outFile);
-					}
-				}
-			}
+            List<ITaskItem> outFiles = new List<ITaskItem>();
 
-			assignedFiles = outFiles.ToArray ();
+            for (int i = 0; i < files.Length; i++)
+            {
+                string file = files[i].ItemSpec;
+                string link = files[i].GetMetadata("Link");
+                string definingProjectPath = files[i].GetMetadata("DefiningProjectFullPath");
 
-			return true;
-		}
-		
-		[Output]
-		public ITaskItem[] OutputItems {
-			get { return assignedFiles; }
-		}
-		
-		public ITaskItem[] Items {
-			get { return files; }
-			set { files = value; }
-		}
-	}
+                if (
+                    String.IsNullOrEmpty(link)
+                    && Path.IsPathRooted(file)
+                    && !string.IsNullOrEmpty(definingProjectPath)
+                )
+                {
+                    file = Path.GetFullPath(file);
+                    var projectDir = Path.GetFullPath(Path.GetDirectoryName(definingProjectPath));
+                    if (
+                        projectDir.Length == 0
+                        || projectDir[projectDir.Length - 1] != Path.DirectorySeparatorChar
+                    )
+                        projectDir += Path.DirectorySeparatorChar;
+                    if (file.StartsWith(projectDir))
+                    {
+                        // The file is in the same folder or a subfolder of the project that contains it.
+                        // Use the relative path wrt the containing project as link.
+                        var outFile = new TaskItem(files[i]);
+                        outFile.SetMetadata("Link", file.Substring(projectDir.Length));
+                        outFiles.Add(outFile);
+                    }
+                }
+            }
+
+            assignedFiles = outFiles.ToArray();
+
+            return true;
+        }
+
+        [Output]
+        public ITaskItem[] OutputItems
+        {
+            get { return assignedFiles; }
+        }
+
+        public ITaskItem[] Items
+        {
+            get { return files; }
+            set { files = value; }
+        }
+    }
 }

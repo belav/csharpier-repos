@@ -17,8 +17,7 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
 
     protected TFixture Fixture { get; }
 
-    protected QueryFilterFuncletizationContext CreateContext()
-        => Fixture.CreateContext();
+    protected QueryFilterFuncletizationContext CreateContext() => Fixture.CreateContext();
 
     [ConditionalFact]
     public virtual void DbContext_property_parameter_does_not_clash_with_closure_parameter_name()
@@ -104,7 +103,8 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
     {
         using var context = CreateContext();
         // This throws because IndirectionFlag is null
-        Assert.Throws<NullReferenceException>(() => context.Set<PropertyMethodCallFilter>().ToList());
+        Assert.Throws<NullReferenceException>(() => context.Set<PropertyMethodCallFilter>().ToList()
+        );
 
         context.IndirectionFlag = new Indirection();
         var entity = Assert.Single(context.Set<PropertyMethodCallFilter>().ToList());
@@ -189,10 +189,14 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
     {
         using var context = CreateContext();
         // This throws because IndirectionFlag is null
-        Assert.Throws<NullReferenceException>(() => context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList());
+        Assert.Throws<NullReferenceException>(() =>
+            context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList()
+        );
 
         context.IndirectionFlag = new Indirection { Enabled = false };
-        var entity = Assert.Single(context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList());
+        var entity = Assert.Single(
+            context.Set<EntityTypeConfigurationPropertyChainFilter>().ToList()
+        );
         Assert.False(entity.IsEnabled);
 
         context.IndirectionFlag = new Indirection { Enabled = true };
@@ -231,7 +235,8 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
     {
         using var context = CreateContext();
         // This throws because IndirectionFlag is null
-        Assert.Throws<NullReferenceException>(() => context.Set<RemoteMethodParamsFilter>().ToList());
+        Assert.Throws<NullReferenceException>(() => context.Set<RemoteMethodParamsFilter>().ToList()
+        );
 
         context.IndirectionFlag = new Indirection();
         var entity = Assert.Single(context.Set<RemoteMethodParamsFilter>().ToList());
@@ -316,9 +321,14 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
         using var context = CreateContext();
         Assert.Equal(
             CoreStrings.ExpressionParameterizationExceptionSensitive(
-                "value(Microsoft.EntityFrameworkCore.Query.QueryFilterFuncletizationContext+<>c__DisplayClass29_0).flag.Enabled"),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Set<LocalVariableErrorFilter>().ToList()).Message);
+                "value(Microsoft.EntityFrameworkCore.Query.QueryFilterFuncletizationContext+<>c__DisplayClass29_0).flag.Enabled"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(() =>
+                    context.Set<LocalVariableErrorFilter>().ToList()
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -348,7 +358,8 @@ public abstract class QueryFilterFuncletizationTestBase<TFixture> : IClassFixtur
         context.Tenant = 1;
         context.Property = false;
 
-        var query = context.Set<DeDupeFilter1>()
+        var query = context
+            .Set<DeDupeFilter1>()
             .Include(x => x.DeDupeFilter2s)
             .Include(x => x.DeDupeFilter3s)
             .ToList();

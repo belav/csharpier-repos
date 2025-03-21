@@ -10,7 +10,13 @@ namespace System.Speech.Recognition
     [Serializable]
     public class RecognizedAudio
     {
-        internal RecognizedAudio(byte[] rawAudioData, SpeechAudioFormatInfo audioFormat, DateTime startTime, TimeSpan audioPosition, TimeSpan audioDuration)
+        internal RecognizedAudio(
+            byte[] rawAudioData,
+            SpeechAudioFormatInfo audioFormat,
+            DateTime startTime,
+            TimeSpan audioPosition,
+            TimeSpan audioDuration
+        )
         {
             _audioFormat = audioFormat;
             _startTime = startTime;
@@ -18,6 +24,7 @@ namespace System.Speech.Recognition
             _audioDuration = audioDuration;
             _rawAudioData = rawAudioData;
         }
+
         public SpeechAudioFormatInfo Format
         {
             get { return _audioFormat; }
@@ -74,11 +81,17 @@ namespace System.Speech.Recognition
         {
             if (audioPosition.Ticks < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(audioPosition), SR.Get(SRID.NegativeTimesNotSupported));
+                throw new ArgumentOutOfRangeException(
+                    nameof(audioPosition),
+                    SR.Get(SRID.NegativeTimesNotSupported)
+                );
             }
             if (duration.Ticks < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(duration), SR.Get(SRID.NegativeTimesNotSupported));
+                throw new ArgumentOutOfRangeException(
+                    nameof(duration),
+                    SR.Get(SRID.NegativeTimesNotSupported)
+                );
             }
             if (audioPosition > _audioDuration)
             {
@@ -91,8 +104,14 @@ namespace System.Speech.Recognition
             }
 
             // Get the position and length in bytes offset and bytes length.
-            int startPosition = (int)((_audioFormat.BitsPerSample * _audioFormat.SamplesPerSecond * audioPosition.Ticks) / (TimeSpan.TicksPerSecond * 8));
-            int length = (int)((_audioFormat.BitsPerSample * _audioFormat.SamplesPerSecond * duration.Ticks) / (TimeSpan.TicksPerSecond * 8));
+            int startPosition = (int)(
+                (_audioFormat.BitsPerSample * _audioFormat.SamplesPerSecond * audioPosition.Ticks)
+                / (TimeSpan.TicksPerSecond * 8)
+            );
+            int length = (int)(
+                (_audioFormat.BitsPerSample * _audioFormat.SamplesPerSecond * duration.Ticks)
+                / (TimeSpan.TicksPerSecond * 8)
+            );
             if (startPosition + length > _rawAudioData.Length)
             {
                 length = _rawAudioData.Length - startPosition;
@@ -101,7 +120,13 @@ namespace System.Speech.Recognition
             // Extract the data from the original stream
             byte[] audioBytes = new byte[length];
             Array.Copy(_rawAudioData, startPosition, audioBytes, 0, length);
-            return new RecognizedAudio(audioBytes, _audioFormat, _startTime + audioPosition, audioPosition, duration);
+            return new RecognizedAudio(
+                audioBytes,
+                _audioFormat,
+                _startTime + audioPosition,
+                audioPosition,
+                duration
+            );
         }
 
         #region Private Methods

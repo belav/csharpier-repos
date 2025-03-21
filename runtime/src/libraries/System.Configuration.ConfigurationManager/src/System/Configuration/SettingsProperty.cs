@@ -5,7 +5,13 @@ namespace System.Configuration
 {
     public class SettingsProperty
     {
-        internal static bool EnableUnsafeBinaryFormatterInPropertyValueSerialization { get; } = AppContext.TryGetSwitch("System.Configuration.ConfigurationManager.EnableUnsafeBinaryFormatterInPropertyValueSerialization", out bool isEnabled) ? isEnabled : false;
+        internal static bool EnableUnsafeBinaryFormatterInPropertyValueSerialization { get; } =
+            AppContext.TryGetSwitch(
+                "System.Configuration.ConfigurationManager.EnableUnsafeBinaryFormatterInPropertyValueSerialization",
+                out bool isEnabled
+            )
+                ? isEnabled
+                : false;
 
         public virtual string Name { get; set; }
         public virtual bool IsReadOnly { get; set; }
@@ -32,7 +38,8 @@ namespace System.Configuration
             SettingsSerializeAs serializeAs,
             SettingsAttributeDictionary attributes,
             bool throwOnErrorDeserializing,
-            bool throwOnErrorSerializing)
+            bool throwOnErrorSerializing
+        )
         {
             Name = name;
             PropertyType = propertyType;
@@ -70,5 +77,4 @@ namespace System.Configuration
             Attributes = new SettingsAttributeDictionary(propertyToCopy.Attributes);
         }
     }
-
 }

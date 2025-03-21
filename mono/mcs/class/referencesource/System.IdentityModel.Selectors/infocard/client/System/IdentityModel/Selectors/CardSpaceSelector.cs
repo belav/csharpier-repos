@@ -4,59 +4,57 @@
 //
 // Presharp uses the c# pragma mechanism to supress its warnings.
 // These are not recognised by the base compiler so we need to explictly
-// disable the following warnings. See http://winweb/cse/Tools/PREsharp/userguide/default.asp 
-// for details. 
+// disable the following warnings. See http://winweb/cse/Tools/PREsharp/userguide/default.asp
+// for details.
 //
 #pragma warning disable 1634, 1691      // unknown message, unknown pragma
 
 namespace System.IdentityModel.Selectors
 {
-
     using System;
-    using System.IO;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
-    using System.Runtime.InteropServices;
+    using System.Globalization;
     using System.IdentityModel.Claims;
+    using System.IdentityModel.Tokens;
+    using System.IO;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.ServiceProcess;
     using System.Text;
     using System.Xml;
-    using System.IdentityModel.Tokens;
-    using System.ServiceProcess;
-    using System.Globalization;
-    using System.Runtime.ConstrainedExecution;
-    using System.Runtime.CompilerServices;
-    using Microsoft.InfoCards.Diagnostics;
-    using Microsoft.Win32;
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-
-
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
+    using Microsoft.InfoCards.Diagnostics;
+    using Microsoft.Win32;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // Summary
     //  This structure is the native version of the GenericXmlSecurityToken
     //
     // Remark
-    //   When adding new fields to this structure, add pointers to the end to make 
+    //   When adding new fields to this structure, add pointers to the end to make
     //   sure that alignment is done correctly
     //
     [StructLayout(LayoutKind.Sequential)]
     struct RpcGenericXmlToken
     {
+        public Int64 createDate; // Date the token was created on
+        public Int64 expiryDate; // Date the token will expire on
 
-        public Int64 createDate;              // Date the token was created on
-        public Int64 expiryDate;              // Date the token will expire on
         [MarshalAs(UnmanagedType.LPWStr)]
-        public string xmlToken;               // Token
+        public string xmlToken; // Token
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string internalTokenReference; // Internal Token reference
+
         [MarshalAs(UnmanagedType.LPWStr)]
         public string externalTokenReference; // External Token reference
-
     }
 
     //
@@ -82,12 +80,11 @@ namespace System.IdentityModel.Selectors
             //
             // Quotas for xml readers
             //
-            DefaultQuotas.MaxDepth = 32;               // max depth of elements
-            DefaultQuotas.MaxStringContentLength = 8192;             // maximum string read
-            DefaultQuotas.MaxArrayLength = 20 * 1024 * 1024; // maximum byte array 
-            DefaultQuotas.MaxBytesPerRead = 4096;             // max start element tag
-            DefaultQuotas.MaxNameTableCharCount = 16384;            // max size of name table
-
+            DefaultQuotas.MaxDepth = 32; // max depth of elements
+            DefaultQuotas.MaxStringContentLength = 8192; // maximum string read
+            DefaultQuotas.MaxArrayLength = 20 * 1024 * 1024; // maximum byte array
+            DefaultQuotas.MaxBytesPerRead = 4096; // max start element tag
+            DefaultQuotas.MaxNameTableCharCount = 16384; // max size of name table
         }
 
         // Summary
@@ -96,13 +93,15 @@ namespace System.IdentityModel.Selectors
         // Parameters
         //  endPoint                    -  The token recipient end point.
         //  policy                      -  Policy stating the requirements for the token.
-        //  requiredRemoteTokenIssuer   -  The returned token should be issued by this 
+        //  requiredRemoteTokenIssuer   -  The returned token should be issued by this
         //                                 specific issuer.
         //
-        public static GenericXmlSecurityToken GetToken(XmlElement endpoint,
-                                                IEnumerable<XmlElement> policy,
-                                                XmlElement requiredRemoteTokenIssuer,
-                                                SecurityTokenSerializer tokenSerializer)
+        public static GenericXmlSecurityToken GetToken(
+            XmlElement endpoint,
+            IEnumerable<XmlElement> policy,
+            XmlElement requiredRemoteTokenIssuer,
+            SecurityTokenSerializer tokenSerializer
+        )
         {
             if (null == endpoint)
             {
@@ -126,9 +125,21 @@ namespace System.IdentityModel.Selectors
                 policyCollection.Add(element);
             }
 
-            return GetToken(new CardSpacePolicyElement[] { new CardSpacePolicyElement(endpoint, requiredRemoteTokenIssuer, policyCollection, null, 0, false) }, tokenSerializer);
+            return GetToken(
+                new CardSpacePolicyElement[]
+                {
+                    new CardSpacePolicyElement(
+                        endpoint,
+                        requiredRemoteTokenIssuer,
+                        policyCollection,
+                        null,
+                        0,
+                        false
+                    ),
+                },
+                tokenSerializer
+            );
         }
-
 
         // Summary
         //  Request a security token from the infocard system
@@ -137,9 +148,15 @@ namespace System.IdentityModel.Selectors
         //  policyChain  - an array of PolicyElements that describe the federated security chain that the client
         //                 needs a final token to unwind.
         //
-        public static GenericXmlSecurityToken GetToken(CardSpacePolicyElement[] policyChain, SecurityTokenSerializer tokenSerializer)
+        public static GenericXmlSecurityToken GetToken(
+            CardSpacePolicyElement[] policyChain,
+            SecurityTokenSerializer tokenSerializer
+        )
         {
-            IDT.TraceDebug("ICARDCLIENT: GetToken called with a policy chain of length {0}", policyChain.Length);
+            IDT.TraceDebug(
+                "ICARDCLIENT: GetToken called with a policy chain of length {0}",
+                policyChain.Length
+            );
 
             InfoCardProofToken proofToken = null;
             InternalRefCountedHandle nativeCryptoHandle = null;
@@ -164,13 +181,9 @@ namespace System.IdentityModel.Selectors
 
             try
             {
-
-
                 RuntimeHelpers.PrepareConstrainedRegions();
                 bool mustRelease = false;
-                try
-                {
-                }
+                try { }
                 finally
                 {
                     //
@@ -180,16 +193,15 @@ namespace System.IdentityModel.Selectors
                     {
                         using (PolicyChain tmpChain = new PolicyChain(policyChain))
                         {
-
                             IDT.TraceDebug("ICARDCLIENT: PInvoking the native GetToken call");
 
-                            result = GetShim().m_csShimGetToken(
-                                                        tmpChain.Length,
-                                                        tmpChain.DoMarshal(),
-                                                        out nativeToken,
-                                                        out nativeCryptoHandle);
-
-
+                            result = GetShim()
+                                .m_csShimGetToken(
+                                    tmpChain.Length,
+                                    tmpChain.DoMarshal(),
+                                    out nativeToken,
+                                    out nativeCryptoHandle
+                                );
                         }
 
                         if (0 == result)
@@ -197,9 +209,11 @@ namespace System.IdentityModel.Selectors
                             IDT.TraceDebug("ICARDCLIENT: The PInvoke of GetToken succeeded");
                             nativeToken.DangerousAddRef(ref mustRelease);
 
-                            infocardToken = (RpcGenericXmlToken)Marshal.PtrToStructure(
-                                                                          nativeToken.DangerousGetHandle(),
-                                                                          typeof(RpcGenericXmlToken));
+                            infocardToken = (RpcGenericXmlToken)
+                                Marshal.PtrToStructure(
+                                    nativeToken.DangerousGetHandle(),
+                                    typeof(RpcGenericXmlToken)
+                                );
                         }
                     }
                     finally
@@ -209,12 +223,13 @@ namespace System.IdentityModel.Selectors
                             nativeToken.DangerousRelease();
                         }
                     }
-
                 }
                 if (0 == result)
                 {
-                    using (ProofTokenCryptoHandle crypto =
-                        (ProofTokenCryptoHandle)CryptoHandle.Create(nativeCryptoHandle))
+                    using (
+                        ProofTokenCryptoHandle crypto = (ProofTokenCryptoHandle)
+                            CryptoHandle.Create(nativeCryptoHandle)
+                    )
                     {
                         proofToken = crypto.CreateProofToken();
                     }
@@ -225,34 +240,41 @@ namespace System.IdentityModel.Selectors
                     if (null != infocardToken.internalTokenReference)
                     {
                         internalTokenReference = tokenSerializer.ReadKeyIdentifierClause(
-                                           CreateReaderWithQuotas(infocardToken.internalTokenReference));
+                            CreateReaderWithQuotas(infocardToken.internalTokenReference)
+                        );
                     }
                     SecurityKeyIdentifierClause externalTokenReference = null;
                     if (null != infocardToken.externalTokenReference)
                     {
-
                         externalTokenReference = tokenSerializer.ReadKeyIdentifierClause(
-                                CreateReaderWithQuotas(infocardToken.externalTokenReference));
+                            CreateReaderWithQuotas(infocardToken.externalTokenReference)
+                        );
                     }
                     IDT.TraceDebug("ICARDCLIENT: Constructing a new GenericXmlSecurityToken");
                     token = new GenericXmlSecurityToken(
-                                             xmlDoc.DocumentElement,
-                                             proofToken,
-                                             DateTime.FromFileTimeUtc(infocardToken.createDate),
-                                             DateTime.FromFileTimeUtc(infocardToken.expiryDate),
-                                             internalTokenReference,
-                                             externalTokenReference,
-                                             null);
+                        xmlDoc.DocumentElement,
+                        proofToken,
+                        DateTime.FromFileTimeUtc(infocardToken.createDate),
+                        DateTime.FromFileTimeUtc(infocardToken.expiryDate),
+                        internalTokenReference,
+                        externalTokenReference,
+                        null
+                    );
                 }
                 else
                 {
-                    IDT.TraceDebug("ICARDCLIENT: The PInvoke of GetToken failed with a return code of {0}", result);
+                    IDT.TraceDebug(
+                        "ICARDCLIENT: The PInvoke of GetToken failed with a return code of {0}",
+                        result
+                    );
 
                     //
                     // Convert the HRESULTS to exceptions
                     //
                     ExceptionHelper.ThrowIfCardSpaceException((int)result);
-                    throw IDT.ThrowHelperError(new CardSpaceException(SR.GetString(SR.ClientAPIInfocardError)));
+                    throw IDT.ThrowHelperError(
+                        new CardSpaceException(SR.GetString(SR.ClientAPIInfocardError))
+                    );
                 }
             }
             catch
@@ -296,9 +318,10 @@ namespace System.IdentityModel.Selectors
                 // Convert the HRESULTS to exceptions
                 //
                 ExceptionHelper.ThrowIfCardSpaceException((int)result);
-                throw IDT.ThrowHelperError(new CardSpaceException(SR.GetString(SR.ClientAPIInfocardError)));
+                throw IDT.ThrowHelperError(
+                    new CardSpaceException(SR.GetString(SR.ClientAPIInfocardError))
+                );
             }
-
         }
 
         //
@@ -312,7 +335,6 @@ namespace System.IdentityModel.Selectors
                 throw IDT.ThrowHelperArgumentNull("fileName");
             }
 
-
             IDT.TraceDebug("Import Infocard has been called");
             Int32 result = CardSpaceSelector.GetShim().m_csShimImportInformationCard(fileName);
 
@@ -325,16 +347,16 @@ namespace System.IdentityModel.Selectors
                 // Convert the HRESULTS to exceptions
                 //
                 ExceptionHelper.ThrowIfCardSpaceException((int)result);
-                throw IDT.ThrowHelperError(new CardSpaceException(SR.GetString(SR.ClientAPIInfocardError)));
+                throw IDT.ThrowHelperError(
+                    new CardSpaceException(SR.GetString(SR.ClientAPIInfocardError))
+                );
             }
-
         }
 
         internal static CardSpaceShim GetShim()
         {
             s_cardSpaceShim.InitializeIfNecessary();
             return s_cardSpaceShim;
-
         }
 
         //
@@ -355,23 +377,28 @@ namespace System.IdentityModel.Selectors
             {
                 if (null == element)
                 {
-                    throw IDT.ThrowHelperError(new ArgumentException(SR.GetString(SR.ClientAPIInvalidPolicy)));
+                    throw IDT.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.ClientAPIInvalidPolicy))
+                    );
                 }
                 builder.Append(element.OuterXml);
             }
 
             return builder.ToString();
         }
+
         private static XmlDictionaryReader CreateReaderWithQuotas(string root)
         {
             UTF8Encoding utf8 = new UTF8Encoding();
             byte[] rootbytes = utf8.GetBytes(root);
             return XmlDictionaryReader.CreateTextReader(
-                rootbytes, 0, rootbytes.GetLength(0), null, DefaultQuotas, null);
+                rootbytes,
+                0,
+                rootbytes.GetLength(0),
+                null,
+                DefaultQuotas,
+                null
+            );
         }
-
-
-
-
     }
 }

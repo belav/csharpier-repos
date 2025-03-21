@@ -4,16 +4,16 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
-using Microsoft.CodeAnalysis.PooledObjects;
-using Microsoft.CodeAnalysis.Test.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
+using Microsoft.CodeAnalysis.PooledObjects;
+using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
 
@@ -27,27 +27,45 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             var node1 = SyntaxFactory.ReturnStatement();
             var node2 = SyntaxFactory.ReturnStatement();
 
-            EqualityTesting.AssertEqual(default(SyntaxList<CSharpSyntaxNode>), default(SyntaxList<CSharpSyntaxNode>));
-            EqualityTesting.AssertEqual(new SyntaxList<CSharpSyntaxNode>(node1), new SyntaxList<CSharpSyntaxNode>(node1));
+            EqualityTesting.AssertEqual(
+                default(SyntaxList<CSharpSyntaxNode>),
+                default(SyntaxList<CSharpSyntaxNode>)
+            );
+            EqualityTesting.AssertEqual(
+                new SyntaxList<CSharpSyntaxNode>(node1),
+                new SyntaxList<CSharpSyntaxNode>(node1)
+            );
 
-            EqualityTesting.AssertNotEqual(new SyntaxList<CSharpSyntaxNode>(node1), new SyntaxList<CSharpSyntaxNode>(node2));
+            EqualityTesting.AssertNotEqual(
+                new SyntaxList<CSharpSyntaxNode>(node1),
+                new SyntaxList<CSharpSyntaxNode>(node2)
+            );
         }
 
         [Fact]
         public void EnumeratorEquality()
         {
-            Assert.Throws<NotSupportedException>(() => default(SyntaxList<CSharpSyntaxNode>.Enumerator).GetHashCode());
-            Assert.Throws<NotSupportedException>(() => default(SyntaxList<CSharpSyntaxNode>.Enumerator).Equals(default(SyntaxList<CSharpSyntaxNode>.Enumerator)));
+            Assert.Throws<NotSupportedException>(() =>
+                default(SyntaxList<CSharpSyntaxNode>.Enumerator).GetHashCode()
+            );
+            Assert.Throws<NotSupportedException>(() =>
+                default(SyntaxList<CSharpSyntaxNode>.Enumerator).Equals(
+                    default(SyntaxList<CSharpSyntaxNode>.Enumerator)
+                )
+            );
         }
 
         [Fact]
         public void TestAddInsertRemoveReplace()
         {
             var list = SyntaxFactory.List<SyntaxNode>(
-                new[] {
+                new[]
+                {
                     SyntaxFactory.ParseExpression("A "),
                     SyntaxFactory.ParseExpression("B "),
-                    SyntaxFactory.ParseExpression("C ") });
+                    SyntaxFactory.ParseExpression("C "),
+                }
+            );
 
             Assert.Equal(3, list.Count);
             Assert.Equal("A", list[0].ToString());
@@ -166,14 +184,21 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(-1, nodeD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.Insert(list.Count + 1, nodeD));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(-1, new[] { nodeD }));
-            Assert.Throws<ArgumentOutOfRangeException>(() => list.InsertRange(list.Count + 1, new[] { nodeD }));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                list.InsertRange(list.Count + 1, new[] { nodeD })
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(-1));
             Assert.Throws<ArgumentOutOfRangeException>(() => list.RemoveAt(list.Count));
             Assert.Throws<ArgumentException>(() => list.Replace(nodeD, nodeE));
             Assert.Throws<ArgumentException>(() => list.ReplaceRange(nodeD, new[] { nodeE }));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null));
-            Assert.Throws<ArgumentNullException>(() => list.InsertRange(0, (IEnumerable<SyntaxNode>)null));
-            Assert.Throws<ArgumentNullException>(() => list.ReplaceRange(elementA, (IEnumerable<SyntaxNode>)null));
+            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                list.InsertRange(0, (IEnumerable<SyntaxNode>)null)
+            );
+            Assert.Throws<ArgumentNullException>(() =>
+                list.ReplaceRange(elementA, (IEnumerable<SyntaxNode>)null)
+            );
         }
 
         [Fact]
@@ -218,16 +243,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.Throws<ArgumentException>(() => list.Replace(nodeD, nodeE));
             Assert.Throws<ArgumentException>(() => list.ReplaceRange(nodeD, new[] { nodeE }));
             Assert.Throws<ArgumentNullException>(() => list.Add(null));
-            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null));
+            Assert.Throws<ArgumentNullException>(() => list.AddRange((IEnumerable<SyntaxNode>)null)
+            );
             Assert.Throws<ArgumentNullException>(() => list.Insert(0, null));
-            Assert.Throws<ArgumentNullException>(() => list.InsertRange(0, (IEnumerable<SyntaxNode>)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                list.InsertRange(0, (IEnumerable<SyntaxNode>)null)
+            );
         }
 
         [Fact, WorkItem(127, "https://github.com/dotnet/roslyn/issues/127")]
         public void AddEmptySyntaxList()
         {
             var attributes = new AttributeListSyntax[0];
-            var newMethodDeclaration = SyntaxFactory.MethodDeclaration(SyntaxFactory.ParseTypeName("void"), "M");
+            var newMethodDeclaration = SyntaxFactory.MethodDeclaration(
+                SyntaxFactory.ParseTypeName("void"),
+                "M"
+            );
             newMethodDeclaration.AddAttributeLists(attributes);
         }
 
@@ -239,11 +270,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             Assert.True(declaration.AttributeLists.Count == 0);
             Assert.True(declaration.Modifiers.Count == 0);
 
-            declaration = declaration.AddAttributeLists(new[]
-            {
-                SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(
-                    SyntaxFactory.Attribute(SyntaxFactory.ParseName("Attr")))),
-            });
+            declaration = declaration.AddAttributeLists(
+                new[]
+                {
+                    SyntaxFactory.AttributeList(
+                        SyntaxFactory.SingletonSeparatedList(
+                            SyntaxFactory.Attribute(SyntaxFactory.ParseName("Attr"))
+                        )
+                    ),
+                }
+            );
 
             Assert.True(declaration.AttributeLists.Count == 1);
             Assert.True(declaration.Modifiers.Count == 0);
@@ -258,10 +294,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void Extensions()
         {
             var list = SyntaxFactory.List<SyntaxNode>(
-                new[] {
+                new[]
+                {
                     SyntaxFactory.ParseExpression("A+B"),
                     SyntaxFactory.IdentifierName("B"),
-                    SyntaxFactory.ParseExpression("1") });
+                    SyntaxFactory.ParseExpression("1"),
+                }
+            );
 
             Assert.Equal(0, list.IndexOf(SyntaxKind.AddExpression));
             Assert.True(list.Any(SyntaxKind.AddExpression));
@@ -315,13 +354,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             const int n = 200000;
             var builder = new StringBuilder();
             builder.Append("int[] values = new[] { ");
-            for (int i = 0; i < n; i++) builder.Append("0, ");
-            if (!trailingSeparator) builder.Append("0 ");
+            for (int i = 0; i < n; i++)
+                builder.Append("0, ");
+            if (!trailingSeparator)
+                builder.Append("0 ");
             builder.AppendLine("};");
 
             var tree = CSharpSyntaxTree.ParseText(builder.ToString());
             // Do not descend into InitializerExpressionSyntax since that will populate SeparatedWithManyChildren._children.
-            var node = tree.GetRoot().DescendantNodes().OfType<InitializerExpressionSyntax>().First();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InitializerExpressionSyntax>()
+                .First();
 
             foreach (var child in node.ChildNodesAndTokens())
             {
@@ -339,13 +383,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             const int n = 200000;
             var builder = new StringBuilder();
             builder.Append("int[] values = new[] { ");
-            for (int i = 0; i < n; i++) builder.Append("0, ");
-            if (!trailingSeparator) builder.Append("0 ");
+            for (int i = 0; i < n; i++)
+                builder.Append("0, ");
+            if (!trailingSeparator)
+                builder.Append("0 ");
             builder.AppendLine("};");
 
             var tree = CSharpSyntaxTree.ParseText(builder.ToString());
             // Do not descend into InitializerExpressionSyntax since that will populate SeparatedWithManyChildren._children.
-            var node = tree.GetRoot().DescendantNodes().OfType<InitializerExpressionSyntax>().First();
+            var node = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<InitializerExpressionSyntax>()
+                .First();
 
             foreach (var child in node.ChildNodesAndTokens().Reverse())
             {
@@ -391,7 +440,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             {
                 var tree = CSharpSyntaxTree.ParseText(source);
                 // Do not descend into InitializerExpressionSyntax since that will populate SeparatedWithManyChildren._children.
-                return tree.GetRoot().DescendantNodes().OfType<InitializerExpressionSyntax>().First();
+                return tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<InitializerExpressionSyntax>()
+                    .First();
             }
         }
     }

@@ -8,9 +8,6 @@ namespace System.ServiceModel.Channels
 
     public interface ICorrelationDataSource
     {
-        ICollection<CorrelationDataDescription> DataSources
-        {
-            get;
-        }
+        ICollection<CorrelationDataDescription> DataSources { get; }
     }
 }

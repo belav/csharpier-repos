@@ -13,7 +13,8 @@ namespace System.Reflection
     {
         private readonly RoModifiedType[] _argumentTypes;
 
-        public RoModifiedGenericType(RoConstructedGenericType genericType) : base(genericType)
+        public RoModifiedGenericType(RoConstructedGenericType genericType)
+            : base(genericType)
         {
             Debug.Assert(genericType.IsGenericType);
 

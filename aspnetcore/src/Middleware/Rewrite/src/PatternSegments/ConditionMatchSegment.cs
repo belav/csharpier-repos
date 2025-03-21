@@ -12,7 +12,11 @@ internal sealed class ConditionMatchSegment : PatternSegment
         _index = index;
     }
 
-    public override string? Evaluate(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override string? Evaluate(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         return conditionBackReferences?[_index];
     }

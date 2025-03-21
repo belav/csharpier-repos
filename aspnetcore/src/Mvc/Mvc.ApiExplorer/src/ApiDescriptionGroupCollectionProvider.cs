@@ -25,7 +25,8 @@ public class ApiDescriptionGroupCollectionProvider : IApiDescriptionGroupCollect
     /// </param>
     public ApiDescriptionGroupCollectionProvider(
         IActionDescriptorCollectionProvider actionDescriptorCollectionProvider,
-        IEnumerable<IApiDescriptionProvider> apiDescriptionProviders)
+        IEnumerable<IApiDescriptionProvider> apiDescriptionProviders
+    )
     {
         _actionDescriptorCollectionProvider = actionDescriptorCollectionProvider;
         _apiDescriptionProviders = apiDescriptionProviders.OrderBy(item => item.Order).ToArray();
@@ -37,7 +38,10 @@ public class ApiDescriptionGroupCollectionProvider : IApiDescriptionGroupCollect
         get
         {
             var actionDescriptors = _actionDescriptorCollectionProvider.ActionDescriptors;
-            if (_apiDescriptionGroups == null || _apiDescriptionGroups.Version != actionDescriptors.Version)
+            if (
+                _apiDescriptionGroups == null
+                || _apiDescriptionGroups.Version != actionDescriptors.Version
+            )
             {
                 _apiDescriptionGroups = GetCollection(actionDescriptors);
             }
@@ -46,7 +50,9 @@ public class ApiDescriptionGroupCollectionProvider : IApiDescriptionGroupCollect
         }
     }
 
-    private ApiDescriptionGroupCollection GetCollection(ActionDescriptorCollection actionDescriptors)
+    private ApiDescriptionGroupCollection GetCollection(
+        ActionDescriptorCollection actionDescriptors
+    )
     {
         var context = new ApiDescriptionProviderContext(actionDescriptors.Items);
 
@@ -60,8 +66,8 @@ public class ApiDescriptionGroupCollectionProvider : IApiDescriptionGroupCollect
             _apiDescriptionProviders[i].OnProvidersExecuted(context);
         }
 
-        var groups = context.Results
-            .GroupBy(d => d.GroupName)
+        var groups = context
+            .Results.GroupBy(d => d.GroupName)
             .Select(g => new ApiDescriptionGroup(g.Key, g.ToArray()))
             .ToArray();
 

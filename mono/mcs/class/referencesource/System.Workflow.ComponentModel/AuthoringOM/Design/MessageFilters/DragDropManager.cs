@@ -1,16 +1,16 @@
 ﻿namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.IO;
-    using System.Drawing;
-    using System.Diagnostics;
     using System.Collections;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Drawing.Imaging;
     using System.Collections.Generic;
-    using System.Windows.Forms.Design;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Imaging;
+    using System.IO;
+    using System.Windows.Forms;
+    using System.Windows.Forms.Design;
 
     #region Class DragDropManager
     //This behavior needs the logical coordinates
@@ -35,9 +35,7 @@
 
         private bool exceptionInDragDrop = false;
 
-        internal DragDropManager()
-        {
-        }
+        internal DragDropManager() { }
         #endregion
 
         #region WorkflowDesignerMessageFilter Overrides
@@ -47,7 +45,8 @@
         {
             base.Initialize(parentView);
 
-            IServiceContainer serviceContainer = GetService(typeof(IServiceContainer)) as IServiceContainer;
+            IServiceContainer serviceContainer =
+                GetService(typeof(IServiceContainer)) as IServiceContainer;
             if (serviceContainer != null)
             {
                 serviceContainer.RemoveService(typeof(DragDropManager));
@@ -61,7 +60,8 @@
             {
                 if (disposing)
                 {
-                    IServiceContainer serviceContainer = GetService(typeof(IServiceContainer)) as IServiceContainer;
+                    IServiceContainer serviceContainer =
+                        GetService(typeof(IServiceContainer)) as IServiceContainer;
                     if (serviceContainer != null)
                         serviceContainer.RemoveService(typeof(DragDropManager));
                 }
@@ -114,7 +114,17 @@
                 {
                     ((IWorkflowDesignerMessageSink)this.draggedDesigner).OnMouseDragMove(eventArgs);
                 }
-                else if (parentView.RootDesigner != null && this.dragStarted && (eventArgs.Button & MouseButtons.Left) > 0 && (Math.Abs(this.dragInitiationPoint.X - logicalPoint.X) > SystemInformation.DragSize.Width || Math.Abs(this.dragInitiationPoint.Y - logicalPoint.Y) > SystemInformation.DragSize.Height))
+                else if (
+                    parentView.RootDesigner != null
+                    && this.dragStarted
+                    && (eventArgs.Button & MouseButtons.Left) > 0
+                    && (
+                        Math.Abs(this.dragInitiationPoint.X - logicalPoint.X)
+                            > SystemInformation.DragSize.Width
+                        || Math.Abs(this.dragInitiationPoint.Y - logicalPoint.Y)
+                            > SystemInformation.DragSize.Height
+                    )
+                )
                 {
                     //Test if the mouse click was on the designer
                     ActivityDesigner potentialDraggedDesigner = hitTestInfo.AssociatedDesigner;
@@ -129,7 +139,10 @@
                         else
                         {
                             this.draggedDesigner = potentialDraggedDesigner;
-                            ((IWorkflowDesignerMessageSink)this.draggedDesigner).OnMouseDragBegin(this.dragInitiationPoint, eventArgs);
+                            ((IWorkflowDesignerMessageSink)this.draggedDesigner).OnMouseDragBegin(
+                                this.dragInitiationPoint,
+                                eventArgs
+                            );
                             parentView.Capture = true;
                         }
                     }
@@ -251,7 +264,11 @@
             {
                 try
                 {
-                    Activity[] activities = CompositeActivityDesigner.DeserializeActivitiesFromDataObject(ParentView, eventArgs.Data);
+                    Activity[] activities =
+                        CompositeActivityDesigner.DeserializeActivitiesFromDataObject(
+                            ParentView,
+                            eventArgs.Data
+                        );
                     if (activities != null)
                         this.draggedActivities.AddRange(activities);
                 }
@@ -263,13 +280,18 @@
 
             //Get the coordinates
             Point clientPoint = parentView.PointToClient(new Point(eventArgs.X, eventArgs.Y));
-            Point logicalPoint = parentView.ScreenPointToLogical(new Point(eventArgs.X, eventArgs.Y));
+            Point logicalPoint = parentView.ScreenPointToLogical(
+                new Point(eventArgs.X, eventArgs.Y)
+            );
 
             //Now try to create the drag image and invalidate the area so that we can draw the dragged image
             Debug.Assert(this.dragImage == null);
             CreateDragFeedbackImages(this.draggedActivities);
             if (this.dragImage != null)
-                this.dragImagePointInClientCoOrd = new Point(clientPoint.X + SystemInformation.CursorSize.Width / 4, clientPoint.Y + SystemInformation.CursorSize.Height / 4);
+                this.dragImagePointInClientCoOrd = new Point(
+                    clientPoint.X + SystemInformation.CursorSize.Width / 4,
+                    clientPoint.Y + SystemInformation.CursorSize.Height / 4
+                );
 
             //If the hit is not in the layouts then we need to bail out, this is very important
             if (!parentView.IsClientPointInActiveLayout(clientPoint))
@@ -277,7 +299,12 @@
 
             //Now we have a potential for successful drag drop, so construct drag event arguments with logical coordinates
             this.wasCtrlKeyPressed = ((eventArgs.KeyState & 8) == 8);
-            ActivityDragEventArgs dragdropEventArgs = new ActivityDragEventArgs(eventArgs, this.dragInitiationPoint, logicalPoint, this.draggedActivities);
+            ActivityDragEventArgs dragdropEventArgs = new ActivityDragEventArgs(
+                eventArgs,
+                this.dragInitiationPoint,
+                logicalPoint,
+                this.draggedActivities
+            );
 
             //Now check which designer is under the cursor, if there is no designer then we return
             HitTestInfo hitTestInfo = MessageHitTestContext;
@@ -290,7 +317,8 @@
             if (!this.wasCtrlKeyPressed && IsRecursiveDropOperation(potentialDropTargetDesigner))
                 return false;
 
-            CompositeActivityDesigner compositeDesigner = potentialDropTargetDesigner as CompositeActivityDesigner;
+            CompositeActivityDesigner compositeDesigner =
+                potentialDropTargetDesigner as CompositeActivityDesigner;
             if (compositeDesigner != null && !compositeDesigner.IsEditable)
                 return false;
 
@@ -301,16 +329,24 @@
             //Check the return value, if this is a potential snap location then we need to snap the image
             if (!dragdropEventArgs.DragImageSnapPoint.IsEmpty)
             {
-                Point midPointInClientCoOrd = parentView.LogicalPointToClient(dragdropEventArgs.DragImageSnapPoint);
-                Size dragImageIconSize = parentView.LogicalSizeToClient(AmbientTheme.DragImageIconSize);
-                this.dragImagePointInClientCoOrd = new Point(midPointInClientCoOrd.X - dragImageIconSize.Width / 2, midPointInClientCoOrd.Y - dragImageIconSize.Height / 2);
+                Point midPointInClientCoOrd = parentView.LogicalPointToClient(
+                    dragdropEventArgs.DragImageSnapPoint
+                );
+                Size dragImageIconSize = parentView.LogicalSizeToClient(
+                    AmbientTheme.DragImageIconSize
+                );
+                this.dragImagePointInClientCoOrd = new Point(
+                    midPointInClientCoOrd.X - dragImageIconSize.Width / 2,
+                    midPointInClientCoOrd.Y - dragImageIconSize.Height / 2
+                );
                 this.dragImageSnapped = true;
             }
 
             eventArgs.Effect = dragdropEventArgs.Effect;
 
             if (eventArgs.Effect == DragDropEffects.None && this.exceptionInDragDrop)
-                eventArgs.Effect = (this.wasCtrlKeyPressed) ? DragDropEffects.Copy : DragDropEffects.Move;
+                eventArgs.Effect =
+                    (this.wasCtrlKeyPressed) ? DragDropEffects.Copy : DragDropEffects.Move;
 
             return true;
         }
@@ -325,11 +361,16 @@
             //Get the coordinates
             WorkflowView parentView = ParentView;
             Point clientPoint = parentView.PointToClient(new Point(eventArgs.X, eventArgs.Y));
-            Point logicalPoint = parentView.ScreenPointToLogical(new Point(eventArgs.X, eventArgs.Y));
+            Point logicalPoint = parentView.ScreenPointToLogical(
+                new Point(eventArgs.X, eventArgs.Y)
+            );
 
             //Update the drag image position
             Point oldDragImagePoint = this.dragImagePointInClientCoOrd;
-            this.dragImagePointInClientCoOrd = new Point(clientPoint.X + SystemInformation.CursorSize.Width / 4, clientPoint.Y + SystemInformation.CursorSize.Height / 4);
+            this.dragImagePointInClientCoOrd = new Point(
+                clientPoint.X + SystemInformation.CursorSize.Width / 4,
+                clientPoint.Y + SystemInformation.CursorSize.Height / 4
+            );
 
             //Now check if the drag point is in active layout if not then clear the designer
             if (!parentView.IsClientPointInActiveLayout(clientPoint))
@@ -342,16 +383,26 @@
             {
                 //Now we have a potential for successful drag drop, so construct drag event arguments with logical coordinates
                 this.wasCtrlKeyPressed = ((eventArgs.KeyState & 8) == 8);
-                ActivityDragEventArgs dragdropEventArgs = new ActivityDragEventArgs(eventArgs, this.dragInitiationPoint, logicalPoint, this.draggedActivities);
+                ActivityDragEventArgs dragdropEventArgs = new ActivityDragEventArgs(
+                    eventArgs,
+                    this.dragInitiationPoint,
+                    logicalPoint,
+                    this.draggedActivities
+                );
 
                 //Now check which designer is under the cursor, if there is no designer then we return
                 HitTestInfo hitTestInfo = MessageHitTestContext;
                 ActivityDesigner potentialDropTargetDesigner = hitTestInfo.AssociatedDesigner;
                 if (potentialDropTargetDesigner != null)
                 {
-                    CompositeActivityDesigner compositeDesigner = potentialDropTargetDesigner as CompositeActivityDesigner;
-                    if ((!this.wasCtrlKeyPressed && IsRecursiveDropOperation(potentialDropTargetDesigner)) ||
-                        (compositeDesigner != null && !compositeDesigner.IsEditable))
+                    CompositeActivityDesigner compositeDesigner =
+                        potentialDropTargetDesigner as CompositeActivityDesigner;
+                    if (
+                        (
+                            !this.wasCtrlKeyPressed
+                            && IsRecursiveDropOperation(potentialDropTargetDesigner)
+                        ) || (compositeDesigner != null && !compositeDesigner.IsEditable)
+                    )
                     {
                         dragdropEventArgs.Effect = DragDropEffects.None;
                         potentialDropTargetDesigner = null;
@@ -367,20 +418,34 @@
                     this.dropTargetDesigner = potentialDropTargetDesigner;
 
                     if (this.dropTargetDesigner != null)
-                        ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragEnter(dragdropEventArgs);
+                        ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragEnter(
+                            dragdropEventArgs
+                        );
                 }
                 else
                 {
                     //Looks like we got the same designer
                     if (this.dropTargetDesigner != null)
-                        ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragOver(dragdropEventArgs);
+                        ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragOver(
+                            dragdropEventArgs
+                        );
 
                     //Check if there is a potential for the drag image to be snapped
-                    if (DragDropEffects.None != dragdropEventArgs.Effect && !dragdropEventArgs.DragImageSnapPoint.IsEmpty)
+                    if (
+                        DragDropEffects.None != dragdropEventArgs.Effect
+                        && !dragdropEventArgs.DragImageSnapPoint.IsEmpty
+                    )
                     {
-                        Point midPointInClientCoOrd = parentView.LogicalPointToClient(dragdropEventArgs.DragImageSnapPoint);
-                        Size dragImageIconSize = parentView.LogicalSizeToClient(AmbientTheme.DragImageIconSize);
-                        this.dragImagePointInClientCoOrd = new Point(midPointInClientCoOrd.X - dragImageIconSize.Width / 2, midPointInClientCoOrd.Y - dragImageIconSize.Height / 2);
+                        Point midPointInClientCoOrd = parentView.LogicalPointToClient(
+                            dragdropEventArgs.DragImageSnapPoint
+                        );
+                        Size dragImageIconSize = parentView.LogicalSizeToClient(
+                            AmbientTheme.DragImageIconSize
+                        );
+                        this.dragImagePointInClientCoOrd = new Point(
+                            midPointInClientCoOrd.X - dragImageIconSize.Width / 2,
+                            midPointInClientCoOrd.Y - dragImageIconSize.Height / 2
+                        );
                         this.dragImageSnapped = true;
                     }
                 }
@@ -390,15 +455,19 @@
 
             //
 
-
             if (this.dragImage != null)
             {
-                parentView.InvalidateClientRectangle(new Rectangle(oldDragImagePoint, this.dragImage.Size));
-                parentView.InvalidateClientRectangle(new Rectangle(this.dragImagePointInClientCoOrd, this.dragImage.Size));
+                parentView.InvalidateClientRectangle(
+                    new Rectangle(oldDragImagePoint, this.dragImage.Size)
+                );
+                parentView.InvalidateClientRectangle(
+                    new Rectangle(this.dragImagePointInClientCoOrd, this.dragImage.Size)
+                );
             }
 
             if (eventArgs.Effect == DragDropEffects.None && this.exceptionInDragDrop)
-                eventArgs.Effect = (this.wasCtrlKeyPressed) ? DragDropEffects.Copy : DragDropEffects.Move;
+                eventArgs.Effect =
+                    (this.wasCtrlKeyPressed) ? DragDropEffects.Copy : DragDropEffects.Move;
 
             return true;
         }
@@ -416,7 +485,9 @@
 
             //Get the coordinates
             Point clientPoint = parentView.PointToClient(new Point(eventArgs.X, eventArgs.Y));
-            Point logicalPoint = parentView.ScreenPointToLogical(new Point(eventArgs.X, eventArgs.Y));
+            Point logicalPoint = parentView.ScreenPointToLogical(
+                new Point(eventArgs.X, eventArgs.Y)
+            );
 
             //Now we check if the drag drop was in any valid area, if not then do not proceed further
             if (!parentView.IsClientPointInActiveLayout(clientPoint))
@@ -431,7 +502,12 @@
 
             //Now we have a potential for successful drag drop, so construct drag event arguments with logical coordinates
             this.wasCtrlKeyPressed = ((eventArgs.KeyState & 8) == 8);
-            ActivityDragEventArgs dragdropEventArgs = new ActivityDragEventArgs(eventArgs, this.dragInitiationPoint, logicalPoint, this.draggedActivities);
+            ActivityDragEventArgs dragdropEventArgs = new ActivityDragEventArgs(
+                eventArgs,
+                this.dragInitiationPoint,
+                logicalPoint,
+                this.draggedActivities
+            );
 
             //Now check which designer is under the cursor, if we have the same designer as the old one
             //If not then we set the new one as drop target and pump in messages
@@ -448,7 +524,9 @@
                 {
                     this.dropTargetDesigner = hitTestInfo.AssociatedDesigner;
                     if (this.dropTargetDesigner != null)
-                        ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragEnter(dragdropEventArgs);
+                        ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragEnter(
+                            dragdropEventArgs
+                        );
                 }
             }
 
@@ -458,8 +536,13 @@
                 if (this.dropTargetDesigner != null)
                 {
                     //We do not allow recursive drag and drop
-                    if (!this.wasCtrlKeyPressed && IsRecursiveDropOperation(this.dropTargetDesigner) ||
-                        (this.dropTargetDesigner is CompositeActivityDesigner && !((CompositeActivityDesigner)this.dropTargetDesigner).IsEditable))
+                    if (
+                        !this.wasCtrlKeyPressed && IsRecursiveDropOperation(this.dropTargetDesigner)
+                        || (
+                            this.dropTargetDesigner is CompositeActivityDesigner
+                            && !((CompositeActivityDesigner)this.dropTargetDesigner).IsEditable
+                        )
+                    )
                     {
                         ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragLeave();
                         dragdropEventArgs.Effect = DragDropEffects.None;
@@ -477,28 +560,51 @@
                         {
                             droppedActivities.AddRange(this.existingDraggedActivities);
                             if (droppedActivities.Count > 1)
-                                transactionDescription = SR.GetString(SR.MoveMultipleActivities, droppedActivities.Count);
+                                transactionDescription = SR.GetString(
+                                    SR.MoveMultipleActivities,
+                                    droppedActivities.Count
+                                );
                             else if (droppedActivities.Count == 1)
-                                transactionDescription = SR.GetString(SR.MoveSingleActivity, droppedActivities[0].GetType());
+                                transactionDescription = SR.GetString(
+                                    SR.MoveSingleActivity,
+                                    droppedActivities[0].GetType()
+                                );
                         }
                         else
                         {
-                            droppedActivities.AddRange(CompositeActivityDesigner.DeserializeActivitiesFromDataObject(ParentView, eventArgs.Data, true));
+                            droppedActivities.AddRange(
+                                CompositeActivityDesigner.DeserializeActivitiesFromDataObject(
+                                    ParentView,
+                                    eventArgs.Data,
+                                    true
+                                )
+                            );
                             if (droppedActivities.Count > 0)
-                                transactionDescription = SR.GetString(SR.CreateActivityFromToolbox, droppedActivities[0].GetType());
+                                transactionDescription = SR.GetString(
+                                    SR.CreateActivityFromToolbox,
+                                    droppedActivities[0].GetType()
+                                );
                         }
 
                         //Now that we have what needs to be dropped, we start the actual drag and drop
-                        IDesignerHost designerHost = GetService(typeof(IDesignerHost)) as IDesignerHost;
+                        IDesignerHost designerHost =
+                            GetService(typeof(IDesignerHost)) as IDesignerHost;
                         DesignerTransaction transaction = null;
                         if (droppedActivities.Count > 0)
                             transaction = designerHost.CreateTransaction(transactionDescription);
 
-                        dragdropEventArgs = new ActivityDragEventArgs(eventArgs, this.dragInitiationPoint, logicalPoint, droppedActivities);
+                        dragdropEventArgs = new ActivityDragEventArgs(
+                            eventArgs,
+                            this.dragInitiationPoint,
+                            logicalPoint,
+                            droppedActivities
+                        );
 
                         try
                         {
-                            ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragDrop(dragdropEventArgs);
+                            ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnDragDrop(
+                                dragdropEventArgs
+                            );
 
                             if (dragdropEventArgs.Effect == DragDropEffects.Move)
                                 this.existingDraggedActivities.Clear();
@@ -516,14 +622,23 @@
                         //We deserialize the designers and try to store the designer states
                         if (droppedActivities.Count > 0)
                         {
-                            Stream componentStateStream = eventArgs.Data.GetData(DragDropManager.CF_DESIGNERSTATE) as Stream;
+                            Stream componentStateStream =
+                                eventArgs.Data.GetData(DragDropManager.CF_DESIGNERSTATE) as Stream;
                             if (componentStateStream != null)
-                                Helpers.DeserializeDesignersFromStream(droppedActivities, componentStateStream);
+                                Helpers.DeserializeDesignersFromStream(
+                                    droppedActivities,
+                                    componentStateStream
+                                );
 
                             //Set the current selection
-                            ISelectionService selectionService = (ISelectionService)GetService(typeof(ISelectionService));
+                            ISelectionService selectionService = (ISelectionService)GetService(
+                                typeof(ISelectionService)
+                            );
                             if (selectionService != null)
-                                selectionService.SetSelectedComponents(droppedActivities, SelectionTypes.Replace);
+                                selectionService.SetSelectedComponents(
+                                    droppedActivities,
+                                    SelectionTypes.Replace
+                                );
                         }
 
                         //Active the design surface
@@ -596,16 +711,30 @@
         protected override bool OnQueryContinueDrag(QueryContinueDragEventArgs qcdevent)
         {
             if (this.dropTargetDesigner != null)
-                ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnQueryContinueDrag(qcdevent);
+                ((IWorkflowDesignerMessageSink)this.dropTargetDesigner).OnQueryContinueDrag(
+                    qcdevent
+                );
             return true;
         }
         #endregion
 
         #region Drawing
-        protected override bool OnPaintWorkflowAdornments(PaintEventArgs e, Rectangle viewPort, AmbientTheme ambientTheme)
+        protected override bool OnPaintWorkflowAdornments(
+            PaintEventArgs e,
+            Rectangle viewPort,
+            AmbientTheme ambientTheme
+        )
         {
             if (this.dragImage != null)
-                ActivityDesignerPaint.DrawImage(e.Graphics, this.dragImage, new Rectangle(this.dragImagePointInClientCoOrd, this.dragImage.Size), new Rectangle(0, 0, this.dragImage.Width, this.dragImage.Height), DesignerContentAlignment.Center, (this.dragImageSnapped) ? 1.0f : 0.5f, WorkflowTheme.CurrentTheme.AmbientTheme.DrawGrayscale);
+                ActivityDesignerPaint.DrawImage(
+                    e.Graphics,
+                    this.dragImage,
+                    new Rectangle(this.dragImagePointInClientCoOrd, this.dragImage.Size),
+                    new Rectangle(0, 0, this.dragImage.Width, this.dragImage.Height),
+                    DesignerContentAlignment.Center,
+                    (this.dragImageSnapped) ? 1.0f : 0.5f,
+                    WorkflowTheme.CurrentTheme.AmbientTheme.DrawGrayscale
+                );
             return false;
         }
         #endregion
@@ -615,34 +744,22 @@
         #region Properties
         public ActivityDesigner DropTargetDesigner
         {
-            get
-            {
-                return this.dropTargetDesigner;
-            }
+            get { return this.dropTargetDesigner; }
         }
 
         public ActivityDesigner DraggedDesigner
         {
-            get
-            {
-                return this.draggedDesigner;
-            }
+            get { return this.draggedDesigner; }
         }
 
         public IList<Activity> DraggedActivities
         {
-            get
-            {
-                return this.draggedActivities.AsReadOnly();
-            }
+            get { return this.draggedActivities.AsReadOnly(); }
         }
 
         public Point DragInitiationPoint
         {
-            get
-            {
-                return this.dragInitiationPoint;
-            }
+            get { return this.dragInitiationPoint; }
         }
         #endregion
 
@@ -661,8 +778,12 @@
                 }
                 else
                 {
-                    ToolboxBitmapAttribute toolboxBitmapAttribute = (ToolboxBitmapAttribute)TypeDescriptor.GetAttributes(draggedActivities[0].GetType())[typeof(ToolboxBitmapAttribute)];
-                    image = toolboxBitmapAttribute.GetImage(draggedActivities[0].GetType()) as Bitmap;
+                    ToolboxBitmapAttribute toolboxBitmapAttribute = (ToolboxBitmapAttribute)
+                        TypeDescriptor.GetAttributes(draggedActivities[0].GetType())[
+                            typeof(ToolboxBitmapAttribute)
+                        ];
+                    image =
+                        toolboxBitmapAttribute.GetImage(draggedActivities[0].GetType()) as Bitmap;
                     description = draggedActivities[0].GetType().Name;
                 }
 
@@ -670,21 +791,49 @@
                 {
                     //Start creating a bitmap
                     WorkflowView parentView = ParentView;
-                    Rectangle imageRectangle = (image != null) ? new Rectangle(Point.Empty, image.Size) : Rectangle.Empty;
-                    Rectangle descriptionRectangle = (description.Length > 0) ? new Rectangle(Point.Empty, new Size(AmbientTheme.DragImageTextSize.Width, parentView.Font.Height + 2)) : Rectangle.Empty;
+                    Rectangle imageRectangle =
+                        (image != null) ? new Rectangle(Point.Empty, image.Size) : Rectangle.Empty;
+                    Rectangle descriptionRectangle =
+                        (description.Length > 0)
+                            ? new Rectangle(
+                                Point.Empty,
+                                new Size(
+                                    AmbientTheme.DragImageTextSize.Width,
+                                    parentView.Font.Height + 2
+                                )
+                            )
+                            : Rectangle.Empty;
                     if (!imageRectangle.IsEmpty)
-                        descriptionRectangle.Offset(imageRectangle.Width + AmbientTheme.DragImageMargins.Width, 0);
+                        descriptionRectangle.Offset(
+                            imageRectangle.Width + AmbientTheme.DragImageMargins.Width,
+                            0
+                        );
 
-                    Size draggedImageSize = parentView.LogicalSizeToClient(new Size(imageRectangle.Width + descriptionRectangle.Width, Math.Max(imageRectangle.Height, descriptionRectangle.Height)));
-                    draggedImage = new Bitmap(draggedImageSize.Width, draggedImageSize.Height, PixelFormat.Format32bppArgb);
+                    Size draggedImageSize = parentView.LogicalSizeToClient(
+                        new Size(
+                            imageRectangle.Width + descriptionRectangle.Width,
+                            Math.Max(imageRectangle.Height, descriptionRectangle.Height)
+                        )
+                    );
+                    draggedImage = new Bitmap(
+                        draggedImageSize.Width,
+                        draggedImageSize.Height,
+                        PixelFormat.Format32bppArgb
+                    );
                     using (Graphics draggedImageGraphics = Graphics.FromImage(draggedImage))
                     using (Brush backgroundBrush = new SolidBrush(Color.FromArgb(0, 255, 0, 255)))
                     {
                         draggedImageGraphics.ScaleTransform(ScaleZoomFactor, ScaleZoomFactor);
 
-                        draggedImageGraphics.FillRectangle(backgroundBrush, new Rectangle(0, 0, draggedImage.Width, draggedImage.Height));
+                        draggedImageGraphics.FillRectangle(
+                            backgroundBrush,
+                            new Rectangle(0, 0, draggedImage.Width, draggedImage.Height)
+                        );
                         if (image != null)
-                            draggedImageGraphics.DrawImage(image, new Rectangle(Point.Empty, image.Size));
+                            draggedImageGraphics.DrawImage(
+                                image,
+                                new Rectangle(Point.Empty, image.Size)
+                            );
 
                         if (description.Length > 0)
                         {
@@ -692,7 +841,13 @@
                             stringFormat.Alignment = StringAlignment.Near;
                             stringFormat.Trimming = StringTrimming.EllipsisCharacter;
                             stringFormat.LineAlignment = StringAlignment.Center;
-                            draggedImageGraphics.DrawString(description, parentView.Font, SystemBrushes.WindowText, descriptionRectangle, stringFormat);
+                            draggedImageGraphics.DrawString(
+                                description,
+                                parentView.Font,
+                                SystemBrushes.WindowText,
+                                descriptionRectangle,
+                                stringFormat
+                            );
                         }
                     }
                 }
@@ -721,11 +876,18 @@
             if (dropLocation == null || dropLocation.AssociatedDesigner == null)
                 return false;
 
-            CompositeActivityDesigner compositeDesigner = dropLocation.AssociatedDesigner as CompositeActivityDesigner;
+            CompositeActivityDesigner compositeDesigner =
+                dropLocation.AssociatedDesigner as CompositeActivityDesigner;
             if (compositeDesigner == null)
                 return false;
 
-            if (!compositeDesigner.IsEditable || !compositeDesigner.CanInsertActivities(dropLocation, new List<Activity>(this.draggedActivities).AsReadOnly()))
+            if (
+                !compositeDesigner.IsEditable
+                || !compositeDesigner.CanInsertActivities(
+                    dropLocation,
+                    new List<Activity>(this.draggedActivities).AsReadOnly()
+                )
+            )
                 return false;
 
             if (!this.wasCtrlKeyPressed && this.existingDraggedActivities.Count > 0)
@@ -737,12 +899,23 @@
                 if (IsRecursiveDropOperation(dropLocation.AssociatedDesigner))
                     return false;
 
-                IDictionary commonParentActivities = Helpers.PairUpCommonParentActivities(this.draggedActivities);
+                IDictionary commonParentActivities = Helpers.PairUpCommonParentActivities(
+                    this.draggedActivities
+                );
                 foreach (DictionaryEntry entry in commonParentActivities)
                 {
-                    CompositeActivityDesigner compositeActivityDesigner = ActivityDesigner.GetDesigner(entry.Key as Activity) as CompositeActivityDesigner;
-                    Activity[] activitiesToMove = (Activity[])((ArrayList)entry.Value).ToArray(typeof(Activity));
-                    if (compositeActivityDesigner != null && !compositeActivityDesigner.CanMoveActivities(dropLocation, new List<Activity>(activitiesToMove).AsReadOnly()))
+                    CompositeActivityDesigner compositeActivityDesigner =
+                        ActivityDesigner.GetDesigner(entry.Key as Activity)
+                        as CompositeActivityDesigner;
+                    Activity[] activitiesToMove = (Activity[])
+                        ((ArrayList)entry.Value).ToArray(typeof(Activity));
+                    if (
+                        compositeActivityDesigner != null
+                        && !compositeActivityDesigner.CanMoveActivities(
+                            dropLocation,
+                            new List<Activity>(activitiesToMove).AsReadOnly()
+                        )
+                    )
                         return false;
                 }
             }
@@ -764,16 +937,20 @@
             if (dropTargetDesigner == null)
                 return false;
 
-            ISelectionService selectionService = (ISelectionService)GetService(typeof(ISelectionService));
-            CompositeActivity dropTargetComponent = dropTargetDesigner.Activity as CompositeActivity;
+            ISelectionService selectionService = (ISelectionService)GetService(
+                typeof(ISelectionService)
+            );
+            CompositeActivity dropTargetComponent =
+                dropTargetDesigner.Activity as CompositeActivity;
             if (dropTargetComponent == null || selectionService == null)
                 return false;
 
-            // First check for activity designer specific recursion - possible recursion when drag-n-drop from outside the current 
+            // First check for activity designer specific recursion - possible recursion when drag-n-drop from outside the current
             // designer such toolbox or other activity designers.
             WorkflowView workflowView = GetService(typeof(WorkflowView)) as WorkflowView;
             IDesignerHost host = GetService(typeof(IDesignerHost)) as IDesignerHost;
-            WorkflowDesignerLoader loader = GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
+            WorkflowDesignerLoader loader =
+                GetService(typeof(WorkflowDesignerLoader)) as WorkflowDesignerLoader;
 
             // When drag-n-drop within the same designer, if the drag drop is not within designer or no valid droptarget, we do not do anything
             if (this.draggedActivities.Count == 0 || this.existingDraggedActivities.Count == 0)
@@ -781,7 +958,9 @@
 
             //Go thru all the components in dragged components and check for recursive dragdrop
             //Get all the top level activities being dragged dropped
-            ArrayList topLevelActivities = new ArrayList(Helpers.GetTopLevelActivities(selectionService.GetSelectedComponents()));
+            ArrayList topLevelActivities = new ArrayList(
+                Helpers.GetTopLevelActivities(selectionService.GetSelectedComponents())
+            );
             CompositeActivity parentActivity = dropTargetComponent;
             while (parentActivity != null)
             {
@@ -791,21 +970,27 @@
                 parentActivity = parentActivity.Parent;
             }
 
-
             return false;
         }
 
         private bool CanInitiateDragDrop()
         {
             //Go thru all the selected components and make sure that they can participate in drag drop
-            ISelectionService selectionService = (ISelectionService)GetService(typeof(ISelectionService));
+            ISelectionService selectionService = (ISelectionService)GetService(
+                typeof(ISelectionService)
+            );
             IDesignerHost designerHost = (IDesignerHost)GetService(typeof(IDesignerHost));
             if (selectionService == null || designerHost == null)
                 return false;
 
             // check if we are cutting root component
             ICollection components = selectionService.GetSelectedComponents();
-            if (components == null || components.Count < 1 || selectionService.GetComponentSelected(designerHost.RootComponent) || !Helpers.AreAllActivities(components))
+            if (
+                components == null
+                || components.Count < 1
+                || selectionService.GetComponentSelected(designerHost.RootComponent)
+                || !Helpers.AreAllActivities(components)
+            )
                 return false;
 
             return true;
@@ -814,14 +999,21 @@
         private void InitiateDragDrop()
         {
             WorkflowView parentView = ParentView;
-            ISelectionService selectionService = (ISelectionService)GetService(typeof(ISelectionService));
+            ISelectionService selectionService = (ISelectionService)GetService(
+                typeof(ISelectionService)
+            );
             IDesignerHost designerHost = (IDesignerHost)GetService(typeof(IDesignerHost));
             if (selectionService == null || designerHost == null)
                 return;
 
             // check if we are cutting root component
             ICollection components = selectionService.GetSelectedComponents();
-            if (components == null || components.Count < 1 || selectionService.GetComponentSelected(designerHost.RootComponent) || !Helpers.AreAllActivities(components))
+            if (
+                components == null
+                || components.Count < 1
+                || selectionService.GetComponentSelected(designerHost.RootComponent)
+                || !Helpers.AreAllActivities(components)
+            )
                 return;
 
             DragDropEffects effects = DragDropEffects.None;
@@ -830,14 +1022,20 @@
                 // get component serialization service
                 this.existingDraggedActivities.AddRange(Helpers.GetTopLevelActivities(components));
 
-                //IMPORTANT: FOR WITHIN DESIGNER COMPONENT MOVE WE REMOVE THE ACTIVITIES BEFORE WE ADD THEM WHICH IS IN 
+                //IMPORTANT: FOR WITHIN DESIGNER COMPONENT MOVE WE REMOVE THE ACTIVITIES BEFORE WE ADD THEM WHICH IS IN
                 //ONDRAGDROP FUNCTION. ALTHOUGH THIS VIOLATES THE DODRAGDROP FUNCTION SIMANTICS, WE NEED TO DO THIS
                 //SO THAT WE CAN USE THE SAME IDS FOR THE ACTIVITIES
-                DragDropEffects allowedEffects = (DesignerHelpers.AreAssociatedDesignersMovable(this.existingDraggedActivities)) ? DragDropEffects.Move | DragDropEffects.Copy : DragDropEffects.Copy;
-                IDataObject dataObject = CompositeActivityDesigner.SerializeActivitiesToDataObject(ParentView, this.existingDraggedActivities.ToArray());
+                DragDropEffects allowedEffects =
+                    (DesignerHelpers.AreAssociatedDesignersMovable(this.existingDraggedActivities))
+                        ? DragDropEffects.Move | DragDropEffects.Copy
+                        : DragDropEffects.Copy;
+                IDataObject dataObject = CompositeActivityDesigner.SerializeActivitiesToDataObject(
+                    ParentView,
+                    this.existingDraggedActivities.ToArray()
+                );
                 effects = parentView.DoDragDrop(dataObject, allowedEffects);
 
-                // 
+                //
             }
             catch (Exception e)
             {
@@ -850,11 +1048,21 @@
                 {
                     string transactionDescription = String.Empty;
                     if (this.existingDraggedActivities.Count > 1)
-                        transactionDescription = SR.GetString(SR.MoveMultipleActivities, this.existingDraggedActivities.Count);
+                        transactionDescription = SR.GetString(
+                            SR.MoveMultipleActivities,
+                            this.existingDraggedActivities.Count
+                        );
                     else
-                        transactionDescription = SR.GetString(SR.MoveSingleActivity, this.existingDraggedActivities[0].GetType());
+                        transactionDescription = SR.GetString(
+                            SR.MoveSingleActivity,
+                            this.existingDraggedActivities[0].GetType()
+                        );
 
-                    CompositeActivityDesigner.RemoveActivities(ParentView, this.existingDraggedActivities.AsReadOnly(), transactionDescription);
+                    CompositeActivityDesigner.RemoveActivities(
+                        ParentView,
+                        this.existingDraggedActivities.AsReadOnly(),
+                        transactionDescription
+                    );
                 }
 
                 this.existingDraggedActivities.Clear();

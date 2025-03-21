@@ -5,13 +5,11 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Configuration;
-using System.ServiceModel.Channels;
+    using System.ServiceModel.Channels;
 
     public abstract partial class TransportElement : BindingElementExtensionElement
     {
-        protected TransportElement()
-        {
-        }
+        protected TransportElement() { }
 
         public override void ApplyConfiguration(BindingElement bindingElement)
         {
@@ -46,9 +44,18 @@ using System.ServiceModel.Channels;
         {
             base.InitializeFrom(bindingElement);
             TransportBindingElement binding = (TransportBindingElement)bindingElement;
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.ManualAddressing, binding.ManualAddressing);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxBufferPoolSize, binding.MaxBufferPoolSize);
-            SetPropertyValueIfNotDefaultValue(ConfigurationStrings.MaxReceivedMessageSize, binding.MaxReceivedMessageSize);
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.ManualAddressing,
+                binding.ManualAddressing
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxBufferPoolSize,
+                binding.MaxBufferPoolSize
+            );
+            SetPropertyValueIfNotDefaultValue(
+                ConfigurationStrings.MaxReceivedMessageSize,
+                binding.MaxReceivedMessageSize
+            );
         }
 
         [ConfigurationProperty(ConfigurationStrings.ManualAddressing, DefaultValue = false)]
@@ -58,7 +65,10 @@ using System.ServiceModel.Channels;
             set { base[ConfigurationStrings.ManualAddressing] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxBufferPoolSize, DefaultValue = TransportDefaults.MaxBufferPoolSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxBufferPoolSize,
+            DefaultValue = TransportDefaults.MaxBufferPoolSize
+        )]
         [LongValidator(MinValue = 1)]
         public long MaxBufferPoolSize
         {
@@ -66,7 +76,10 @@ using System.ServiceModel.Channels;
             set { base[ConfigurationStrings.MaxBufferPoolSize] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MaxReceivedMessageSize, DefaultValue = TransportDefaults.MaxReceivedMessageSize)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MaxReceivedMessageSize,
+            DefaultValue = TransportDefaults.MaxReceivedMessageSize
+        )]
         [LongValidator(MinValue = 1)]
         public long MaxReceivedMessageSize
         {
@@ -75,6 +88,3 @@ using System.ServiceModel.Channels;
         }
     }
 }
-
-
-

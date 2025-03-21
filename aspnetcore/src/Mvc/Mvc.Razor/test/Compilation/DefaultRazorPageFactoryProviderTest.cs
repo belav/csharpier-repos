@@ -14,22 +14,18 @@ public class DefaultRazorPageFactoryProviderTest
     {
         // Arrange
         var path = "/file-does-not-exist";
-        var expirationTokens = new[]
-        {
-                Mock.Of<IChangeToken>(),
-                Mock.Of<IChangeToken>(),
-            };
+        var expirationTokens = new[] { Mock.Of<IChangeToken>(), Mock.Of<IChangeToken>() };
         var descriptor = new CompiledViewDescriptor
         {
             RelativePath = path,
             ExpirationTokens = expirationTokens,
         };
         var compilerCache = new Mock<IViewCompiler>();
-        compilerCache
-            .Setup(f => f.CompileAsync(It.IsAny<string>()))
-            .ReturnsAsync(descriptor);
+        compilerCache.Setup(f => f.CompileAsync(It.IsAny<string>())).ReturnsAsync(descriptor);
 
-        var factoryProvider = new DefaultRazorPageFactoryProvider(GetCompilerProvider(compilerCache.Object));
+        var factoryProvider = new DefaultRazorPageFactoryProvider(
+            GetCompilerProvider(compilerCache.Object)
+        );
 
         // Act
         var result = factoryProvider.CreateFactory(path);
@@ -44,11 +40,7 @@ public class DefaultRazorPageFactoryProviderTest
     {
         // Arrange
         var relativePath = "/file-exists";
-        var expirationTokens = new[]
-        {
-                Mock.Of<IChangeToken>(),
-                Mock.Of<IChangeToken>(),
-            };
+        var expirationTokens = new[] { Mock.Of<IChangeToken>(), Mock.Of<IChangeToken>() };
         var descriptor = new CompiledViewDescriptor
         {
             RelativePath = relativePath,
@@ -56,11 +48,11 @@ public class DefaultRazorPageFactoryProviderTest
             ExpirationTokens = expirationTokens,
         };
         var compilerCache = new Mock<IViewCompiler>();
-        compilerCache
-            .Setup(f => f.CompileAsync(It.IsAny<string>()))
-            .ReturnsAsync(descriptor);
+        compilerCache.Setup(f => f.CompileAsync(It.IsAny<string>())).ReturnsAsync(descriptor);
 
-        var factoryProvider = new DefaultRazorPageFactoryProvider(GetCompilerProvider(compilerCache.Object));
+        var factoryProvider = new DefaultRazorPageFactoryProvider(
+            GetCompilerProvider(compilerCache.Object)
+        );
 
         // Act
         var result = factoryProvider.CreateFactory(relativePath);
@@ -82,11 +74,11 @@ public class DefaultRazorPageFactoryProviderTest
             ExpirationTokens = Array.Empty<IChangeToken>(),
         };
         var viewCompiler = new Mock<IViewCompiler>();
-        viewCompiler
-            .Setup(f => f.CompileAsync(It.IsAny<string>()))
-            .ReturnsAsync(descriptor);
+        viewCompiler.Setup(f => f.CompileAsync(It.IsAny<string>())).ReturnsAsync(descriptor);
 
-        var factoryProvider = new DefaultRazorPageFactoryProvider(GetCompilerProvider(viewCompiler.Object));
+        var factoryProvider = new DefaultRazorPageFactoryProvider(
+            GetCompilerProvider(viewCompiler.Object)
+        );
 
         // Act
         var result = factoryProvider.CreateFactory(relativePath);
@@ -100,9 +92,7 @@ public class DefaultRazorPageFactoryProviderTest
     private IViewCompilerProvider GetCompilerProvider(IViewCompiler cache)
     {
         var compilerCacheProvider = new Mock<IViewCompilerProvider>();
-        compilerCacheProvider
-            .Setup(c => c.GetCompiler())
-            .Returns(cache);
+        compilerCacheProvider.Setup(c => c.GetCompiler()).Returns(cache);
 
         return compilerCacheProvider.Object;
     }

@@ -8,7 +8,9 @@ namespace System.Reflection
     {
         private readonly AssemblyNameFlags _flags;
 
-        [Obsolete("This constructor has been deprecated. Use AssemblyFlagsAttribute(AssemblyNameFlags) instead.")]
+        [Obsolete(
+            "This constructor has been deprecated. Use AssemblyFlagsAttribute(AssemblyNameFlags) instead."
+        )]
         [CLSCompliant(false)]
         public AssemblyFlagsAttribute(uint flags)
         {
@@ -21,7 +23,9 @@ namespace System.Reflection
 
         public int AssemblyFlags => (int)_flags;
 
-        [Obsolete("This constructor has been deprecated. Use AssemblyFlagsAttribute(AssemblyNameFlags) instead.")]
+        [Obsolete(
+            "This constructor has been deprecated. Use AssemblyFlagsAttribute(AssemblyNameFlags) instead."
+        )]
         public AssemblyFlagsAttribute(int assemblyFlags)
         {
             _flags = (AssemblyNameFlags)assemblyFlags;

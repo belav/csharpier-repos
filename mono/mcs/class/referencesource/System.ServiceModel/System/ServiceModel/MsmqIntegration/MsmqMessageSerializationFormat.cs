@@ -9,20 +9,18 @@ namespace System.ServiceModel.MsmqIntegration
         Binary,
         ActiveX,
         ByteArray,
-        Stream
+        Stream,
     }
 
     static class MsmqMessageSerializationFormatHelper
     {
         internal static bool IsDefined(MsmqMessageSerializationFormat value)
         {
-            return
-                value == MsmqMessageSerializationFormat.ActiveX ||
-                value == MsmqMessageSerializationFormat.Binary ||
-                value == MsmqMessageSerializationFormat.ByteArray ||
-                value == MsmqMessageSerializationFormat.Stream ||
-                value == MsmqMessageSerializationFormat.Xml;
+            return value == MsmqMessageSerializationFormat.ActiveX
+                || value == MsmqMessageSerializationFormat.Binary
+                || value == MsmqMessageSerializationFormat.ByteArray
+                || value == MsmqMessageSerializationFormat.Stream
+                || value == MsmqMessageSerializationFormat.Xml;
         }
     }
 }
-

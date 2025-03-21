@@ -11,7 +11,11 @@ namespace System.IO.Ports.Tests
 {
     public class ctor_str_int_parity : PortsTest
     {
-        private enum ThrowAt { Set, Open };
+        private enum ThrowAt
+        {
+            Set,
+            Open,
+        };
 
         [Fact]
         public void COM1_9600_Odd()
@@ -23,7 +27,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, parity);
         }
 
-
         [Fact]
         public void COM2_14400_None()
         {
@@ -33,7 +36,6 @@ namespace System.IO.Ports.Tests
 
             VerifyCtor(portName, baudRate, parity);
         }
-
 
         [Fact]
         public void COM3_28800_Mark()
@@ -65,7 +67,6 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, parity);
         }
 
-
         //[] Error checking for PortName
         [Fact]
         public void Empty_9600_None()
@@ -76,7 +77,6 @@ namespace System.IO.Ports.Tests
 
             VerifyCtor(portName, baudRate, parity, typeof(ArgumentException), ThrowAt.Set);
         }
-
 
         [Fact]
         public void Null_14400_Even()
@@ -125,7 +125,6 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
         [Fact]
         public void PHYSICALDRIVE0_14400_Even()
         {
@@ -144,7 +143,13 @@ namespace System.IO.Ports.Tests
             int baudRate = int.MinValue;
             int parity = (int)Parity.None;
 
-            VerifyCtor(portName, baudRate, parity, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -154,7 +159,13 @@ namespace System.IO.Ports.Tests
             int baudRate = -1;
             int parity = (int)Parity.Even;
 
-            VerifyCtor(portName, baudRate, parity, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -164,7 +175,13 @@ namespace System.IO.Ports.Tests
             int baudRate = 0;
             int parity = (int)Parity.Odd;
 
-            VerifyCtor(portName, baudRate, parity, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -174,7 +191,13 @@ namespace System.IO.Ports.Tests
             int baudRate = int.MaxValue;
             int parity = (int)Parity.Mark;
 
-            VerifyCtor(portName, baudRate, parity, typeof(ArgumentOutOfRangeException), ThrowAt.Open);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Open
+            );
         }
 
         [Fact]
@@ -185,7 +208,13 @@ namespace System.IO.Ports.Tests
             int baudRate = 9600;
             int parity = int.MinValue;
 
-            VerifyCtor(portName, baudRate, parity, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -195,7 +224,13 @@ namespace System.IO.Ports.Tests
             int baudRate = 14400;
             int parity = -1;
 
-            VerifyCtor(portName, baudRate, parity, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -205,7 +240,13 @@ namespace System.IO.Ports.Tests
             int baudRate = 28800;
             int parity = 5;
 
-            VerifyCtor(portName, baudRate, parity, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         [Fact]
@@ -215,7 +256,13 @@ namespace System.IO.Ports.Tests
             int baudRate = 57600;
             int parity = int.MaxValue;
 
-            VerifyCtor(portName, baudRate, parity, typeof(ArgumentOutOfRangeException), ThrowAt.Set);
+            VerifyCtor(
+                portName,
+                baudRate,
+                parity,
+                typeof(ArgumentOutOfRangeException),
+                ThrowAt.Set
+            );
         }
 
         private void VerifyCtor(string portName, int baudRate, int parity)
@@ -223,11 +270,22 @@ namespace System.IO.Ports.Tests
             VerifyCtor(portName, baudRate, parity, null, ThrowAt.Set);
         }
 
-        private void VerifyCtor(string portName, int baudRate, int parity, Type expectedException, ThrowAt throwAt)
+        private void VerifyCtor(
+            string portName,
+            int baudRate,
+            int parity,
+            Type expectedException,
+            ThrowAt throwAt
+        )
         {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
-            Debug.WriteLine("Verifying properties where PortName={0},BaudRate={1},Parity={2}", portName, baudRate, parity);
+            Debug.WriteLine(
+                "Verifying properties where PortName={0},BaudRate={1},Parity={2}",
+                portName,
+                baudRate,
+                parity
+            );
             try
             {
                 using (SerialPort com = new SerialPort(portName, baudRate, (Parity)parity))
@@ -250,15 +308,26 @@ namespace System.IO.Ports.Tests
             {
                 if (null == expectedException)
                 {
-                    Fail("Err_07081hadnh Did not expect exception to be thrown and the following was thrown: \n{0}", e);
+                    Fail(
+                        "Err_07081hadnh Did not expect exception to be thrown and the following was thrown: \n{0}",
+                        e
+                    );
                 }
                 else if (throwAt == ThrowAt.Open)
                 {
-                    Fail("Err_88916adfa Expected {0} to be thrown at Open and the following was thrown at Set: \n{1}", expectedException, e);
+                    Fail(
+                        "Err_88916adfa Expected {0} to be thrown at Open and the following was thrown at Set: \n{1}",
+                        expectedException,
+                        e
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("Err_90282ahwhp Expected {0} to be thrown and the following was thrown: \n{1}", expectedException, e);
+                    Fail(
+                        "Err_90282ahwhp Expected {0} to be thrown and the following was thrown: \n{1}",
+                        expectedException,
+                        e
+                    );
                 }
             }
         }

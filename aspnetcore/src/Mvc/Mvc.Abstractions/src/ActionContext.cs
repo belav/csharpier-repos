@@ -33,9 +33,8 @@ public class ActionContext
             actionContext.HttpContext,
             actionContext.RouteData,
             actionContext.ActionDescriptor,
-            actionContext.ModelState)
-    {
-    }
+            actionContext.ModelState
+        ) { }
 
     /// <summary>
     /// Creates a new <see cref="ActionContext"/>.
@@ -46,10 +45,9 @@ public class ActionContext
     public ActionContext(
         HttpContext httpContext,
         RouteData routeData,
-        ActionDescriptor actionDescriptor)
-        : this(httpContext, routeData, actionDescriptor, new ModelStateDictionary())
-    {
-    }
+        ActionDescriptor actionDescriptor
+    )
+        : this(httpContext, routeData, actionDescriptor, new ModelStateDictionary()) { }
 
     /// <summary>
     /// Creates a new <see cref="ActionContext"/>.
@@ -62,7 +60,8 @@ public class ActionContext
         HttpContext httpContext,
         RouteData routeData,
         ActionDescriptor actionDescriptor,
-        ModelStateDictionary modelState)
+        ModelStateDictionary modelState
+    )
     {
         ArgumentNullException.ThrowIfNull(httpContext);
         ArgumentNullException.ThrowIfNull(routeData);

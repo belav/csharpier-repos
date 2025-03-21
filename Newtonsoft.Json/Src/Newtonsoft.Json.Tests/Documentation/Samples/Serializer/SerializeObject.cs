@@ -59,11 +59,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 Email = "james@example.com",
                 Active = true,
                 CreatedDate = new DateTime(2013, 1, 20, 0, 0, 0, DateTimeKind.Utc),
-                Roles = new List<string>
-                {
-                    "User",
-                    "Admin"
-                }
+                Roles = new List<string> { "User", "Admin" },
             };
 
             string json = JsonConvert.SerializeObject(account, Formatting.Indented);
@@ -80,7 +76,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             Console.WriteLine(json);
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""Email"": ""james@example.com"",
   ""Active"": true,
   ""CreatedDate"": ""2013-01-20T00:00:00Z"",
@@ -88,7 +85,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
     ""User"",
     ""Admin""
   ]
-}", json);
+}",
+                json
+            );
         }
     }
 }

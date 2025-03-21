@@ -27,7 +27,16 @@ namespace System.Security.AccessControl.Tests
 
             //Case 2, collection has one ACE
             rAcl = new RawAcl(0, 1);
-            gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.SuccessfulAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rAcl.InsertAce(0, gAce);
             gAces = new GenericAce[rAcl.Count];
             myCollection = (ICollection)rAcl;
@@ -35,11 +44,38 @@ namespace System.Security.AccessControl.Tests
 
             //Case 3, index = 3
             rAcl = new RawAcl(0, 1);
-            gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")), false, null);
+            gAce = new CommonAce(
+                AceFlags.SuccessfulAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                ),
+                false,
+                null
+            );
             rAcl.InsertAce(0, gAce);
-            gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.SuccessfulAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rAcl.InsertAce(0, gAce);
-            gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BO")), false, null);
+            gAce = new CommonAce(
+                AceFlags.SuccessfulAccess,
+                AceQualifier.SystemAudit,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BO")
+                ),
+                false,
+                null
+            );
             rAcl.InsertAce(0, gAce);
             gAces = new GenericAce[rAcl.Count + 5];
             //initialize to null
@@ -57,12 +93,20 @@ namespace System.Security.AccessControl.Tests
             RawAcl rAcl = null;
             GenericAce[] gAces = null;
 
-
             // Case 1, null array
             Assert.Throws<ArgumentNullException>(() =>
             {
                 rAcl = new RawAcl(0, 1);
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
                 myCollection = (ICollection)rAcl;
                 myCollection.CopyTo(gAces, 0);
@@ -72,7 +116,16 @@ namespace System.Security.AccessControl.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 rAcl = new RawAcl(0, 1);
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
                 gAces = new GenericAce[rAcl.Count];
                 myCollection = (ICollection)rAcl;
@@ -83,7 +136,16 @@ namespace System.Security.AccessControl.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 rAcl = new RawAcl(0, 1);
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
                 gAces = new GenericAce[0];
                 myCollection = (ICollection)rAcl;
@@ -94,11 +156,38 @@ namespace System.Security.AccessControl.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
                 rAcl = new RawAcl(0, 1);
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BO")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BO")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
 
                 gAces = new GenericAce[rAcl.Count - 1];
@@ -111,7 +200,16 @@ namespace System.Security.AccessControl.Tests
             for (int i = 0; i < 1820; i++)
             {
                 //this ace binary length is 36, 1820 * 36 = 65520
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, i + 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    i + 1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
             }
             gAces = new GenericAce[rAcl.Count];
@@ -123,9 +221,27 @@ namespace System.Security.AccessControl.Tests
             Assert.Throws<RankException>(() =>
             {
                 rAcl = new RawAcl(0, 1);
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
-                gAce = new CommonAce(AceFlags.SuccessfulAccess, AceQualifier.SystemAudit, 1, new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                    ),
+                    false,
+                    null
+                );
                 rAcl.InsertAce(0, gAce);
                 GenericAce[,] gAces2 = new GenericAce[1, 2];
                 myCollection = (ICollection)rAcl;

@@ -37,7 +37,10 @@ internal static partial class Interop
                 fixed (byte* ptr = &firstByte)
                 {
                     int terminator = new ReadOnlySpan<byte>(ptr, maxLength).IndexOf((byte)0);
-                    return Marshal.PtrToStringAnsi((IntPtr)ptr, (terminator >= 0) ? terminator : maxLength);
+                    return Marshal.PtrToStringAnsi(
+                        (IntPtr)ptr,
+                        (terminator >= 0) ? terminator : maxLength
+                    );
                 }
             }
         }

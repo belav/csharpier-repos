@@ -2,21 +2,22 @@
 
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Diagnostics;
 using System.DirectoryServices;
+using System.Runtime.Serialization;
 using System.Security.Permissions;
 using System.Security.Principal;
-using System.Runtime.Serialization;
-
+using System.Text;
 using System.Workflow.ComponentModel;
-using System.Diagnostics;
 
 #endregion
 
 namespace System.Workflow.Activities
 {
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class WorkflowRole
     {
         public abstract String Name { set; get; }
@@ -27,13 +28,13 @@ namespace System.Workflow.Activities
     }
 
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    sealed public class WorkflowRoleCollection : List<WorkflowRole>
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class WorkflowRoleCollection : List<WorkflowRole>
     {
         public WorkflowRoleCollection()
-            : base()
-        {
-        }
+            : base() { }
 
         public bool IncludesIdentity(String identity)
         {
@@ -54,8 +55,10 @@ namespace System.Workflow.Activities
     }
 
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
-    sealed public class ActiveDirectoryRole : WorkflowRole, ISerializable, IDisposable
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
+    public sealed class ActiveDirectoryRole : WorkflowRole, ISerializable, IDisposable
     {
         private String m_name;
         private DirectoryEntry m_root;
@@ -73,7 +76,10 @@ namespace System.Workflow.Activities
                 this.m_operations.Add(operation);
         }
 
-        internal ActiveDirectoryRole(DirectoryEntry rootEntry, ICollection<IDirectoryOperation> operations)
+        internal ActiveDirectoryRole(
+            DirectoryEntry rootEntry,
+            ICollection<IDirectoryOperation> operations
+        )
         {
             if (rootEntry == null)
                 throw new ArgumentNullException("rootEntry");
@@ -89,7 +95,9 @@ namespace System.Workflow.Activities
         private ActiveDirectoryRole(SerializationInfo info, StreamingContext context)
         {
             this.m_name = info.GetString("m_name");
-            this.m_operations = (List<IDirectoryOperation>)info.GetValue("m_operations", typeof(List<IDirectoryOperation>));
+            this.m_operations =
+                (List<IDirectoryOperation>)
+                    info.GetValue("m_operations", typeof(List<IDirectoryOperation>));
 
             String path = info.GetString("m_root\\path");
 
@@ -107,37 +115,29 @@ namespace System.Workflow.Activities
 
         public override String Name
         {
-            get
-            {
-                return this.m_name;
-            }
-
-            set
-            {
-                this.m_name = value;
-            }
+            get { return this.m_name; }
+            set { this.m_name = value; }
         }
 
         public DirectoryEntry RootEntry
         {
-            get
-            {
-                return this.m_root;
-            }
+            get { return this.m_root; }
         }
 
         internal ICollection<IDirectoryOperation> Operations
         {
-            get
-            {
-                return this.m_operations;
-            }
+            get { return this.m_operations; }
         }
 
         public ActiveDirectoryRole GetManager()
         {
             List<IDirectoryOperation> queries = new List<IDirectoryOperation>(this.Operations);
-            queries.Add(new DirectoryRedirect(ActiveDirectoryRoleFactory.Configuration.DistinguishedName, ActiveDirectoryRoleFactory.Configuration.DirectReports));
+            queries.Add(
+                new DirectoryRedirect(
+                    ActiveDirectoryRoleFactory.Configuration.DistinguishedName,
+                    ActiveDirectoryRoleFactory.Configuration.DirectReports
+                )
+            );
 
             return new ActiveDirectoryRole(this.RootEntry, queries);
         }
@@ -145,7 +145,13 @@ namespace System.Workflow.Activities
         public ActiveDirectoryRole GetManagerialChain()
         {
             List<IDirectoryOperation> queries = new List<IDirectoryOperation>(this.Operations);
-            queries.Add(new DirectoryRedirect(ActiveDirectoryRoleFactory.Configuration.DistinguishedName, ActiveDirectoryRoleFactory.Configuration.DirectReports, true));
+            queries.Add(
+                new DirectoryRedirect(
+                    ActiveDirectoryRoleFactory.Configuration.DistinguishedName,
+                    ActiveDirectoryRoleFactory.Configuration.DirectReports,
+                    true
+                )
+            );
 
             return new ActiveDirectoryRole(this.RootEntry, queries);
         }
@@ -153,7 +159,12 @@ namespace System.Workflow.Activities
         public ActiveDirectoryRole GetDirectReports()
         {
             List<IDirectoryOperation> queries = new List<IDirectoryOperation>(this.Operations);
-            queries.Add(new DirectoryRedirect(ActiveDirectoryRoleFactory.Configuration.DistinguishedName, ActiveDirectoryRoleFactory.Configuration.Manager));
+            queries.Add(
+                new DirectoryRedirect(
+                    ActiveDirectoryRoleFactory.Configuration.DistinguishedName,
+                    ActiveDirectoryRoleFactory.Configuration.Manager
+                )
+            );
 
             return new ActiveDirectoryRole(this.RootEntry, queries);
         }
@@ -161,7 +172,13 @@ namespace System.Workflow.Activities
         public ActiveDirectoryRole GetAllReports()
         {
             List<IDirectoryOperation> queries = new List<IDirectoryOperation>(this.Operations);
-            queries.Add(new DirectoryRedirect(ActiveDirectoryRoleFactory.Configuration.DistinguishedName, ActiveDirectoryRoleFactory.Configuration.Manager, true));
+            queries.Add(
+                new DirectoryRedirect(
+                    ActiveDirectoryRoleFactory.Configuration.DistinguishedName,
+                    ActiveDirectoryRoleFactory.Configuration.Manager,
+                    true
+                )
+            );
 
             return new ActiveDirectoryRole(this.RootEntry, queries);
         }
@@ -171,17 +188,35 @@ namespace System.Workflow.Activities
             ICollection<DirectoryEntry> entries = this.GetEntries();
 
             List<IDirectoryOperation> queries = new List<IDirectoryOperation>(this.Operations);
-            queries.Add(new DirectoryRedirect(ActiveDirectoryRoleFactory.Configuration.DistinguishedName, ActiveDirectoryRoleFactory.Configuration.DirectReports));
-            queries.Add(new DirectoryRedirect(ActiveDirectoryRoleFactory.Configuration.DistinguishedName, ActiveDirectoryRoleFactory.Configuration.Manager));
+            queries.Add(
+                new DirectoryRedirect(
+                    ActiveDirectoryRoleFactory.Configuration.DistinguishedName,
+                    ActiveDirectoryRoleFactory.Configuration.DirectReports
+                )
+            );
+            queries.Add(
+                new DirectoryRedirect(
+                    ActiveDirectoryRoleFactory.Configuration.DistinguishedName,
+                    ActiveDirectoryRoleFactory.Configuration.Manager
+                )
+            );
 
             foreach (DirectoryEntry entry in entries)
             {
-                queries.Add(new DirectoryLocalQuery(ActiveDirectoryRoleFactory.Configuration.DistinguishedName, (String)entry.Properties[ActiveDirectoryRoleFactory.Configuration.DistinguishedName][0], DirectoryQueryOperation.NotEqual));
+                queries.Add(
+                    new DirectoryLocalQuery(
+                        ActiveDirectoryRoleFactory.Configuration.DistinguishedName,
+                        (String)
+                            entry.Properties[
+                                ActiveDirectoryRoleFactory.Configuration.DistinguishedName
+                            ][0],
+                        DirectoryQueryOperation.NotEqual
+                    )
+                );
             }
 
             return new ActiveDirectoryRole(this.RootEntry, queries);
         }
-
 
         public ICollection<DirectoryEntry> GetEntries()
         {
@@ -224,14 +259,23 @@ namespace System.Workflow.Activities
 
             foreach (DirectoryEntry entry in this.GetEntries())
             {
-                if (entry.Properties["objectSid"] != null &&
-                    entry.Properties["objectSid"].Count != 0)
+                if (
+                    entry.Properties["objectSid"] != null
+                    && entry.Properties["objectSid"].Count != 0
+                )
                 {
-                    identifiers.Add(new SecurityIdentifier((byte[])(entry.Properties["objectSid"][0]), 0));
+                    identifiers.Add(
+                        new SecurityIdentifier((byte[])(entry.Properties["objectSid"][0]), 0)
+                    );
                 }
                 else
                 {
-                    WorkflowActivityTrace.Activity.TraceEvent(TraceEventType.Information, 0, "Unable to find 'objectSid' property for directory entry = {0}.", entry.Path);
+                    WorkflowActivityTrace.Activity.TraceEvent(
+                        TraceEventType.Information,
+                        0,
+                        "Unable to find 'objectSid' property for directory entry = {0}.",
+                        entry.Path
+                    );
                 }
             }
 
@@ -266,6 +310,5 @@ namespace System.Workflow.Activities
         {
             this.m_root.Dispose();
         }
-
     }
 }

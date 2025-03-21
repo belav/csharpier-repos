@@ -43,8 +43,12 @@ public readonly struct GridItemsProviderRequest<TGridItem>
     public CancellationToken CancellationToken { get; init; }
 
     internal GridItemsProviderRequest(
-        int startIndex, int? count, ColumnBase<TGridItem>? sortByColumn, bool sortByAscending,
-        CancellationToken cancellationToken)
+        int startIndex,
+        int? count,
+        ColumnBase<TGridItem>? sortByColumn,
+        bool sortByAscending,
+        CancellationToken cancellationToken
+    )
     {
         StartIndex = startIndex;
         Count = count;

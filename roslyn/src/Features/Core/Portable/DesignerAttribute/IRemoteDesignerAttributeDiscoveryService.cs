@@ -20,26 +20,42 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
     {
         internal interface ICallback
         {
-            ValueTask ReportDesignerAttributeDataAsync(RemoteServiceCallbackId callbackId, ImmutableArray<DesignerAttributeData> data, CancellationToken cancellationToken);
+            ValueTask ReportDesignerAttributeDataAsync(
+                RemoteServiceCallbackId callbackId,
+                ImmutableArray<DesignerAttributeData> data,
+                CancellationToken cancellationToken
+            );
         }
 
         ValueTask DiscoverDesignerAttributesAsync(
-            RemoteServiceCallbackId callbackId, Checksum solutionChecksum, DocumentId? priorityDocument, bool useFrozenSnapshots, CancellationToken cancellationToken);
+            RemoteServiceCallbackId callbackId,
+            Checksum solutionChecksum,
+            DocumentId? priorityDocument,
+            bool useFrozenSnapshots,
+            CancellationToken cancellationToken
+        );
     }
 
-    [ExportRemoteServiceCallbackDispatcher(typeof(IRemoteDesignerAttributeDiscoveryService)), Shared]
-    internal sealed class RemoteDesignerAttributeDiscoveryCallbackDispatcher : RemoteServiceCallbackDispatcher, IRemoteDesignerAttributeDiscoveryService.ICallback
+    [
+        ExportRemoteServiceCallbackDispatcher(typeof(IRemoteDesignerAttributeDiscoveryService)),
+        Shared
+    ]
+    internal sealed class RemoteDesignerAttributeDiscoveryCallbackDispatcher
+        : RemoteServiceCallbackDispatcher,
+            IRemoteDesignerAttributeDiscoveryService.ICallback
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RemoteDesignerAttributeDiscoveryCallbackDispatcher()
-        {
-        }
+        public RemoteDesignerAttributeDiscoveryCallbackDispatcher() { }
 
-        private new IDesignerAttributeDiscoveryService.ICallback GetCallback(RemoteServiceCallbackId callbackId)
-            => (IDesignerAttributeDiscoveryService.ICallback)base.GetCallback(callbackId);
+        private new IDesignerAttributeDiscoveryService.ICallback GetCallback(
+            RemoteServiceCallbackId callbackId
+        ) => (IDesignerAttributeDiscoveryService.ICallback)base.GetCallback(callbackId);
 
-        public ValueTask ReportDesignerAttributeDataAsync(RemoteServiceCallbackId callbackId, ImmutableArray<DesignerAttributeData> data, CancellationToken cancellationToken)
-            => GetCallback(callbackId).ReportDesignerAttributeDataAsync(data, cancellationToken);
+        public ValueTask ReportDesignerAttributeDataAsync(
+            RemoteServiceCallbackId callbackId,
+            ImmutableArray<DesignerAttributeData> data,
+            CancellationToken cancellationToken
+        ) => GetCallback(callbackId).ReportDesignerAttributeDataAsync(data, cancellationToken);
     }
 }

@@ -5,21 +5,33 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.Serialization;
+    using System.Runtime.Serialization.Json;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
-    using System.Runtime.Serialization;
     using DiagnosticUtility = System.ServiceModel.DiagnosticUtility;
-    using System.Runtime.Serialization.Json;
-    using System.Collections;
-    using System.Linq;
 
     class SingleBodyParameterDataContractMessageFormatter : SingleBodyParameterMessageFormatter
     {
         static readonly Type TypeOfNullable = typeof(Nullable<>);
-        static readonly Type[] CollectionDataContractInterfaces = new Type[] { typeof(IEnumerable), typeof(IList), typeof(ICollection), typeof(IDictionary) };
-        static readonly Type[] GenericCollectionDataContractInterfaces = new Type[] { typeof(IEnumerable<>), typeof(IList<>), typeof(ICollection<>), typeof(IDictionary<,>) };
+        static readonly Type[] CollectionDataContractInterfaces = new Type[]
+        {
+            typeof(IEnumerable),
+            typeof(IList),
+            typeof(ICollection),
+            typeof(IDictionary),
+        };
+        static readonly Type[] GenericCollectionDataContractInterfaces = new Type[]
+        {
+            typeof(IEnumerable<>),
+            typeof(IList<>),
+            typeof(ICollection<>),
+            typeof(IDictionary<,>),
+        };
         XmlObjectSerializer cachedOutputSerializer;
         Type cachedOutputSerializerType;
         bool ignoreExtensionData;
@@ -33,7 +45,13 @@ namespace System.ServiceModel.Dispatcher
         bool isParameterCollectionInterfaceDataContract;
         bool isQueryable;
 
-        public SingleBodyParameterDataContractMessageFormatter(OperationDescription operation, Type parameterType, bool isRequestFormatter, bool useJsonFormat, DataContractSerializerOperationBehavior dcsob)
+        public SingleBodyParameterDataContractMessageFormatter(
+            OperationDescription operation,
+            Type parameterType,
+            bool isRequestFormatter,
+            bool useJsonFormat,
+            DataContractSerializerOperationBehavior dcsob
+        )
             : base(operation, isRequestFormatter, "DataContractSerializer")
         {
             if (operation == null)
@@ -48,8 +66,14 @@ namespace System.ServiceModel.Dispatcher
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("dcsob");
             }
-            this.parameterDataContractType = DataContractSerializerOperationFormatter.GetSubstituteDataContractType(parameterType, out isQueryable);
-            this.isParameterCollectionInterfaceDataContract = IsTypeCollectionInterface(this.parameterDataContractType);
+            this.parameterDataContractType =
+                DataContractSerializerOperationFormatter.GetSubstituteDataContractType(
+                    parameterType,
+                    out isQueryable
+                );
+            this.isParameterCollectionInterfaceDataContract = IsTypeCollectionInterface(
+                this.parameterDataContractType
+            );
             List<Type> tmp = new List<Type>();
             if (operation.KnownTypes != null)
             {
@@ -84,7 +108,7 @@ namespace System.ServiceModel.Dispatcher
             return type;
         }
 
-        // The logic of this method should be kept the same as 
+        // The logic of this method should be kept the same as
         // System.ServiceModel.Dispatcher.DataContractSerializerOperationFormatter.PartInfo.ReadObject
         protected override object ReadObject(Message message)
         {
@@ -100,7 +124,10 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.useJsonFormat)
             {
-                message.Properties.Add(WebBodyFormatMessageProperty.Name, WebBodyFormatMessageProperty.JsonProperty);
+                message.Properties.Add(
+                    WebBodyFormatMessageProperty.Name,
+                    WebBodyFormatMessageProperty.JsonProperty
+                );
             }
         }
 
@@ -122,13 +149,27 @@ namespace System.ServiceModel.Dispatcher
                         // if the parameterType is a collection interface, ensure the type implements it
                         if (!this.parameterDataContractType.IsAssignableFrom(type))
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SerializationException(SR2.GetString(SR2.TypeIsNotParameterTypeAndIsNotPresentInKnownTypes, type, this.OperationName, this.ContractName, parameterDataContractType)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new SerializationException(
+                                    SR2.GetString(
+                                        SR2.TypeIsNotParameterTypeAndIsNotPresentInKnownTypes,
+                                        type,
+                                        this.OperationName,
+                                        this.ContractName,
+                                        parameterDataContractType
+                                    )
+                                )
+                            );
                         }
                         typeForSerializer = this.parameterDataContractType;
                     }
                     else
                     {
-                        typeForSerializer = GetTypeForSerializer(type, this.parameterDataContractType, this.knownTypes);
+                        typeForSerializer = GetTypeForSerializer(
+                            type,
+                            this.parameterDataContractType,
+                            this.knownTypes
+                        );
                     }
                     this.cachedOutputSerializer = CreateSerializer(typeForSerializer);
                     this.cachedOutputSerializerType = type;
@@ -167,14 +208,36 @@ namespace System.ServiceModel.Dispatcher
                 // useJsonFormat is always false in the green bits
                 object prop;
                 message.Properties.TryGetValue(WebBodyFormatMessageProperty.Name, out prop);
-                WebBodyFormatMessageProperty formatProperty = (prop as WebBodyFormatMessageProperty);
+                WebBodyFormatMessageProperty formatProperty = (
+                    prop as WebBodyFormatMessageProperty
+                );
                 if (formatProperty == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR2.GetString(SR2.MessageFormatPropertyNotFound, this.OperationName, this.ContractName, this.ContractNs)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.MessageFormatPropertyNotFound,
+                                this.OperationName,
+                                this.ContractName,
+                                this.ContractNs
+                            )
+                        )
+                    );
                 }
                 if (formatProperty.Format != WebContentFormat.Json)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new InvalidOperationException(SR2.GetString(SR2.InvalidHttpMessageFormat, this.OperationName, this.ContractName, this.ContractNs, formatProperty.Format, WebContentFormat.Json)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                        new InvalidOperationException(
+                            SR2.GetString(
+                                SR2.InvalidHttpMessageFormat,
+                                this.OperationName,
+                                this.ContractName,
+                                this.ContractNs,
+                                formatProperty.Format,
+                                WebContentFormat.Json
+                            )
+                        )
+                    );
                 }
             }
             else
@@ -183,7 +246,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        static void ValidateType(Type parameterType, IDataContractSurrogate surrogate, IEnumerable<Type> knownTypes)
+        static void ValidateType(
+            Type parameterType,
+            IDataContractSurrogate surrogate,
+            IEnumerable<Type> knownTypes
+        )
         {
             XsdDataContractExporter dataContractExporter = new XsdDataContractExporter();
             if (surrogate != null || knownTypes != null)
@@ -217,15 +284,26 @@ namespace System.ServiceModel.Dispatcher
         {
             if (this.useJsonFormat)
             {
-                return new DataContractJsonSerializer(type, this.knownTypes, this.maxItemsInObjectGraph, this.ignoreExtensionData, this.surrogate, false);
+                return new DataContractJsonSerializer(
+                    type,
+                    this.knownTypes,
+                    this.maxItemsInObjectGraph,
+                    this.ignoreExtensionData,
+                    this.surrogate,
+                    false
+                );
             }
             else
             {
-                return new DataContractSerializer(type, this.knownTypes, this.maxItemsInObjectGraph, this.ignoreExtensionData, false, this.surrogate);
+                return new DataContractSerializer(
+                    type,
+                    this.knownTypes,
+                    this.maxItemsInObjectGraph,
+                    this.ignoreExtensionData,
+                    false,
+                    this.surrogate
+                );
             }
         }
-
-
     }
 }
-

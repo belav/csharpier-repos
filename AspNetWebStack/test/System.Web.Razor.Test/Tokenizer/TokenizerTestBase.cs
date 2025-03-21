@@ -33,7 +33,9 @@ namespace System.Web.Razor.Test.Tokenizer
                     {
                         if (counter >= expectedSymbols.Length)
                         {
-                            output.AppendLine(String.Format("F: Expected: << Nothing >>; Actual: {0}", current));
+                            output.AppendLine(
+                                String.Format("F: Expected: << Nothing >>; Actual: {0}", current)
+                            );
                             success = false;
                         }
                         else if (ReferenceEquals(expectedSymbols[counter], IgnoreRemaining))
@@ -44,22 +46,38 @@ namespace System.Web.Razor.Test.Tokenizer
                         {
                             if (!Equals(expectedSymbols[counter], current))
                             {
-                                output.AppendLine(String.Format("F: Expected: {0}; Actual: {1}", expectedSymbols[counter], current));
+                                output.AppendLine(
+                                    String.Format(
+                                        "F: Expected: {0}; Actual: {1}",
+                                        expectedSymbols[counter],
+                                        current
+                                    )
+                                );
                                 success = false;
                             }
                             else
                             {
-                                output.AppendLine(String.Format("P: Expected: {0}", expectedSymbols[counter]));
+                                output.AppendLine(
+                                    String.Format("P: Expected: {0}", expectedSymbols[counter])
+                                );
                             }
                             counter++;
                         }
                     }
-                    if (counter < expectedSymbols.Length && !ReferenceEquals(expectedSymbols[counter], IgnoreRemaining))
+                    if (
+                        counter < expectedSymbols.Length
+                        && !ReferenceEquals(expectedSymbols[counter], IgnoreRemaining)
+                    )
                     {
                         success = false;
                         for (; counter < expectedSymbols.Length; counter++)
                         {
-                            output.AppendLine(String.Format("F: Expected: {0}; Actual: << None >>", expectedSymbols[counter]));
+                            output.AppendLine(
+                                String.Format(
+                                    "F: Expected: {0}; Actual: << None >>",
+                                    expectedSymbols[counter]
+                                )
+                            );
                         }
                     }
                 }

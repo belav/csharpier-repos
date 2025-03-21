@@ -14,21 +14,29 @@ using Microsoft.CodeAnalysis.MakeMemberStatic;
 
 namespace Microsoft.CodeAnalysis.CSharp.MakeMemberStatic
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.MakeMemberStatic), Shared]
-    internal sealed class CSharpMakeMemberStaticCodeFixProvider : AbstractMakeMemberStaticCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.MakeMemberStatic
+        ),
+        Shared
+    ]
+    internal sealed class CSharpMakeMemberStaticCodeFixProvider
+        : AbstractMakeMemberStaticCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMakeMemberStaticCodeFixProvider()
-        {
-        }
+        public CSharpMakeMemberStaticCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
             ImmutableArray.Create(
                 "CS0708" // 'MyMethod': cannot declare instance members in a static class
             );
 
-        protected override bool TryGetMemberDeclaration(SyntaxNode node, [NotNullWhen(true)] out SyntaxNode? memberDeclaration)
+        protected override bool TryGetMemberDeclaration(
+            SyntaxNode node,
+            [NotNullWhen(true)] out SyntaxNode? memberDeclaration
+        )
         {
             if (node is MemberDeclarationSyntax)
             {
@@ -36,7 +44,14 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeMemberStatic
                 return true;
             }
 
-            if (node.IsKind(SyntaxKind.VariableDeclarator) && node.Parent is VariableDeclarationSyntax { Parent: FieldDeclarationSyntax or EventFieldDeclarationSyntax })
+            if (
+                node.IsKind(SyntaxKind.VariableDeclarator)
+                && node.Parent
+                    is VariableDeclarationSyntax
+                    {
+                        Parent: FieldDeclarationSyntax or EventFieldDeclarationSyntax
+                    }
+            )
             {
                 memberDeclaration = node.Parent.Parent;
                 return true;

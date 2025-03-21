@@ -8,43 +8,43 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzerIntegrationTest
 {
-    private MvcDiagnosticAnalyzerRunner AnalyzerRunner { get; } = new MvcDiagnosticAnalyzerRunner(new ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzer());
+    private MvcDiagnosticAnalyzerRunner AnalyzerRunner { get; } =
+        new MvcDiagnosticAnalyzerRunner(
+            new ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzer()
+        );
 
     [Fact]
-    public Task NoDiagnosticsAreReturned_ForNonApiController()
-        => RunNoDiagnosticsAreReturned();
+    public Task NoDiagnosticsAreReturned_ForNonApiController() => RunNoDiagnosticsAreReturned();
 
     [Fact]
-    public Task NoDiagnosticsAreReturned_ForRazorPageModels()
-        => RunNoDiagnosticsAreReturned();
+    public Task NoDiagnosticsAreReturned_ForRazorPageModels() => RunNoDiagnosticsAreReturned();
 
     [Fact]
-    public Task NoDiagnosticsAreReturned_ForApiActionsWithoutModelStateChecks()
-        => RunNoDiagnosticsAreReturned();
+    public Task NoDiagnosticsAreReturned_ForApiActionsWithoutModelStateChecks() =>
+        RunNoDiagnosticsAreReturned();
 
     [Fact]
-    public Task NoDiagnosticsAreReturned_ForApiActionsReturning400FromNonModelStateIsValidBlocks()
-        => RunNoDiagnosticsAreReturned();
+    public Task NoDiagnosticsAreReturned_ForApiActionsReturning400FromNonModelStateIsValidBlocks() =>
+        RunNoDiagnosticsAreReturned();
 
     [Fact]
-    public Task NoDiagnosticsAreReturned_ForApiActionsReturningNot400FromNonModelStateIsValidBlock()
-        => RunNoDiagnosticsAreReturned();
+    public Task NoDiagnosticsAreReturned_ForApiActionsReturningNot400FromNonModelStateIsValidBlock() =>
+        RunNoDiagnosticsAreReturned();
 
     [Fact]
-    public Task NoDiagnosticsAreReturned_ForApiActionsCheckingAdditionalConditions()
-        => RunNoDiagnosticsAreReturned();
+    public Task NoDiagnosticsAreReturned_ForApiActionsCheckingAdditionalConditions() =>
+        RunNoDiagnosticsAreReturned();
 
     [Fact]
-    public Task DiagnosticsAreReturned_ForApiActionsWithModelStateChecks()
-        => RunTest();
+    public Task DiagnosticsAreReturned_ForApiActionsWithModelStateChecks() => RunTest();
 
     [Fact]
-    public Task DiagnosticsAreReturned_ForApiActionsWithModelStateChecksUsingEquality()
-        => RunTest();
+    public Task DiagnosticsAreReturned_ForApiActionsWithModelStateChecksUsingEquality() =>
+        RunTest();
 
     [Fact]
-    public Task DiagnosticsAreReturned_ForApiActionsWithModelStateChecksWithoutBracing()
-        => RunTest();
+    public Task DiagnosticsAreReturned_ForApiActionsWithModelStateChecksWithoutBracing() =>
+        RunTest();
 
     private async Task RunNoDiagnosticsAreReturned([CallerMemberName] string testMethod = "")
     {
@@ -62,7 +62,8 @@ public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzerIntegrati
     private async Task RunTest([CallerMemberName] string testMethod = "")
     {
         // Arrange
-        var descriptor = ApiDiagnosticDescriptors.API1003_ApiActionsDoNotRequireExplicitModelValidationCheck;
+        var descriptor =
+            ApiDiagnosticDescriptors.API1003_ApiActionsDoNotRequireExplicitModelValidationCheck;
         var testSource = MvcTestSource.Read(GetType().Name, testMethod);
         var expectedLocation = testSource.DefaultMarkerLocation;
 
@@ -77,6 +78,7 @@ public class ApiActionsDoNotRequireExplicitModelValidationCheckAnalyzerIntegrati
                 Assert.Equal(descriptor.Id, diagnostic.Id);
                 Assert.Same(descriptor, diagnostic.Descriptor);
                 AnalyzerAssert.DiagnosticLocation(expectedLocation, diagnostic.Location);
-            });
+            }
+        );
     }
 }

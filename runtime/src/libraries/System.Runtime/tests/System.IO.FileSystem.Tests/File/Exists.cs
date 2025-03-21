@@ -30,15 +30,13 @@ namespace System.IO.Tests
             Assert.False(Exists(string.Empty));
         }
 
-        [Theory,
-            MemberData(nameof(ValidPathComponentNames))]
+        [Theory, MemberData(nameof(ValidPathComponentNames))]
         public void NonExistentValidPath_ReturnsFalse(string path)
         {
             Assert.False(Exists(path), path);
         }
 
-        [Theory,
-            MemberData(nameof(ValidPathComponentNames))]
+        [Theory, MemberData(nameof(ValidPathComponentNames))]
         public void ValidPathExists_ReturnsTrue(string component)
         {
             string path = Path.Combine(TestDirectory, component);
@@ -61,8 +59,12 @@ namespace System.IO.Tests
             File.Create(path).Dispose();
 
             Assert.True(Exists(IOServices.RemoveTrailingSlash(path)));
-            Assert.True(Exists(IOServices.RemoveTrailingSlash(IOServices.RemoveTrailingSlash(path))));
-            Assert.True(Exists(IOServices.RemoveTrailingSlash(IOServices.AddTrailingSlashIfNeeded(path))));
+            Assert.True(
+                Exists(IOServices.RemoveTrailingSlash(IOServices.RemoveTrailingSlash(path)))
+            );
+            Assert.True(
+                Exists(IOServices.RemoveTrailingSlash(IOServices.AddTrailingSlashIfNeeded(path)))
+            );
         }
 
         [Fact]
@@ -100,19 +102,25 @@ namespace System.IO.Tests
         [Fact]
         public void DirectoryLongerThanMaxDirectoryAsPath_DoesntThrow()
         {
-            Assert.All((IOInputs.GetPathsLongerThanMaxDirectory(GetTestFilePath())), (path) =>
-            {
-                Assert.False(Exists(path));
-            });
+            Assert.All(
+                (IOInputs.GetPathsLongerThanMaxDirectory(GetTestFilePath())),
+                (path) =>
+                {
+                    Assert.False(Exists(path));
+                }
+            );
         }
 
         [Fact]
         public void DirectoryLongerThanMaxPathAsPath_DoesntThrow()
         {
-            Assert.All((IOInputs.GetPathsLongerThanMaxPath(GetTestFilePath())), (path) =>
-            {
-                Assert.False(Exists(path), path);
-            });
+            Assert.All(
+                (IOInputs.GetPathsLongerThanMaxPath(GetTestFilePath())),
+                (path) =>
+                {
+                    Assert.False(Exists(path), path);
+                }
+            );
         }
 
         [ConditionalFact(typeof(MountHelper), nameof(MountHelper.CanCreateSymbolicLinks))]
@@ -142,14 +150,12 @@ namespace System.IO.Tests
 
         #region PlatformSpecific
 
-        [Theory,
-            MemberData(nameof(WhiteSpace))]
+        [Theory, MemberData(nameof(WhiteSpace))]
         [PlatformSpecific(TestPlatforms.Windows)] // Unix equivalent tested already in CreateDirectory
         public void WindowsNonSignificantWhiteSpaceAsPath_ReturnsFalse(string component)
         {
             // Checks that errors aren't thrown when calling Exists() on impossible paths
             Assert.False(Exists(component));
-
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsCaseInsensitiveOS))]
@@ -172,8 +178,7 @@ namespace System.IO.Tests
             Assert.False(Exists(testFile.FullName.ToLowerInvariant()));
         }
 
-        [Theory,
-           MemberData(nameof(NonControlWhiteSpace))]
+        [Theory, MemberData(nameof(NonControlWhiteSpace))]
         [PlatformSpecific(TestPlatforms.Windows)]
         public void TrailingWhiteSpace_NotTrimmed(string component)
         {
@@ -185,8 +190,7 @@ namespace System.IO.Tests
             Assert.True(Exists(path));
         }
 
-        [Theory,
-           MemberData(nameof(SimpleWhiteSpace))] //*Just* spaces
+        [Theory, MemberData(nameof(SimpleWhiteSpace))] //*Just* spaces
         [PlatformSpecific(TestPlatforms.Windows)] // In Windows, trailing whitespace in a path is trimmed
         public void TrailingSpace_Trimmed(string component)
         {
@@ -197,9 +201,7 @@ namespace System.IO.Tests
             Assert.True(Exists(testFile.FullName + component));
         }
 
-
-        [Theory,
-            MemberData(nameof(PathsWithColons))]
+        [Theory, MemberData(nameof(PathsWithColons))]
         [PlatformSpecific(TestPlatforms.Windows)] // alternate data stream
         public void PathWithAlternateDataStreams_ReturnsFalse(string component)
         {
@@ -214,18 +216,22 @@ namespace System.IO.Tests
             Assert.False(Exists(component));
         }
 
-        [ActiveIssue("https://github.com/dotnet/runtimelab/issues/901", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
-        [Theory,
-            MemberData(nameof(UncPathsWithoutShareName))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtimelab/issues/901",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
+        [Theory, MemberData(nameof(UncPathsWithoutShareName))]
         public void UncPathWithoutShareNameAsPath_ReturnsFalse(string component)
         {
             Assert.False(Exists(component));
         }
 
-        [Theory,
-            MemberData(nameof(PathsWithComponentLongerThanMaxComponent))]
+        [Theory, MemberData(nameof(PathsWithComponentLongerThanMaxComponent))]
         [PlatformSpecific(TestPlatforms.Windows)] // max directory length not fixed on Unix
-        public void DirectoryWithComponentLongerThanMaxComponentAsPath_ReturnsFalse(string component)
+        public void DirectoryWithComponentLongerThanMaxComponentAsPath_ReturnsFalse(
+            string component
+        )
         {
             Assert.False(Exists(component));
         }
@@ -249,12 +255,23 @@ namespace System.IO.Tests
             Directory.CreateDirectory(path);
 
             Assert.False(File.Exists(IOServices.RemoveTrailingSlash(path)));
-            Assert.False(File.Exists(IOServices.RemoveTrailingSlash(IOServices.RemoveTrailingSlash(path))));
-            Assert.False(File.Exists(IOServices.RemoveTrailingSlash(IOServices.AddTrailingSlashIfNeeded(path))));
+            Assert.False(
+                File.Exists(IOServices.RemoveTrailingSlash(IOServices.RemoveTrailingSlash(path)))
+            );
+            Assert.False(
+                File.Exists(
+                    IOServices.RemoveTrailingSlash(IOServices.AddTrailingSlashIfNeeded(path))
+                )
+            );
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser & ~TestPlatforms.iOS & ~TestPlatforms.tvOS)]  // Uses P/Invokes
+        [PlatformSpecific(
+            TestPlatforms.AnyUnix
+                & ~TestPlatforms.Browser
+                & ~TestPlatforms.iOS
+                & ~TestPlatforms.tvOS
+        )] // Uses P/Invokes
         public void FalseForNonRegularFile()
         {
             string fileName = GetTestFilePath();

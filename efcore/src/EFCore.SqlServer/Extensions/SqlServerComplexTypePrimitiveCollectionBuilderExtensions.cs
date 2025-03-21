@@ -28,7 +28,8 @@ public static class SqlServerComplexTypePrimitiveCollectionBuilderExtensions
     /// <returns>A builder to further configure the property.</returns>
     public static ComplexTypePrimitiveCollectionBuilder IsSparse(
         this ComplexTypePrimitiveCollectionBuilder primitiveCollectionBuilder,
-        bool sparse = true)
+        bool sparse = true
+    )
     {
         primitiveCollectionBuilder.Metadata.SetIsSparse(sparse);
 
@@ -50,7 +51,8 @@ public static class SqlServerComplexTypePrimitiveCollectionBuilderExtensions
     /// <returns>A builder to further configure the property.</returns>
     public static ComplexTypePrimitiveCollectionBuilder<TProperty> IsSparse<TProperty>(
         this ComplexTypePrimitiveCollectionBuilder<TProperty> primitiveCollectionBuilder,
-        bool sparse = true)
-        => (ComplexTypePrimitiveCollectionBuilder<TProperty>)IsSparse(
-            (ComplexTypePrimitiveCollectionBuilder)primitiveCollectionBuilder, sparse);
+        bool sparse = true
+    ) =>
+        (ComplexTypePrimitiveCollectionBuilder<TProperty>)
+            IsSparse((ComplexTypePrimitiveCollectionBuilder)primitiveCollectionBuilder, sparse);
 }

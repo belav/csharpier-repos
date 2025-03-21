@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,70 +28,83 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-
 using System;
 using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	public sealed class AuthenticationSection: ConfigurationSection
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty formsProp;
-		static ConfigurationProperty passportProp;
-		static ConfigurationProperty modeProp;
-		
-		static AuthenticationSection ()
-		{
-			formsProp = new ConfigurationProperty ("forms", typeof(FormsAuthenticationConfiguration), null,
-							       null,
-							       PropertyHelper.DefaultValidator,
-							       ConfigurationPropertyOptions.None);
-			passportProp = new ConfigurationProperty ("passport", typeof(PassportAuthentication), null,
-								  null,
-								  PropertyHelper.DefaultValidator,
-								  ConfigurationPropertyOptions.None);
-			modeProp = new ConfigurationProperty ("mode", typeof(AuthenticationMode), AuthenticationMode.Windows,
-							      new GenericEnumConverter (typeof (AuthenticationMode)),
-							      PropertyHelper.DefaultValidator,
-							      ConfigurationPropertyOptions.None);
+    public sealed class AuthenticationSection : ConfigurationSection
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty formsProp;
+        static ConfigurationProperty passportProp;
+        static ConfigurationProperty modeProp;
 
-			properties = new ConfigurationPropertyCollection ();
-			properties.Add (formsProp);
-			properties.Add (passportProp);
-			properties.Add (modeProp);
-		}
-		
-		public AuthenticationSection ()
-		{
-		}
+        static AuthenticationSection()
+        {
+            formsProp = new ConfigurationProperty(
+                "forms",
+                typeof(FormsAuthenticationConfiguration),
+                null,
+                null,
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.None
+            );
+            passportProp = new ConfigurationProperty(
+                "passport",
+                typeof(PassportAuthentication),
+                null,
+                null,
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.None
+            );
+            modeProp = new ConfigurationProperty(
+                "mode",
+                typeof(AuthenticationMode),
+                AuthenticationMode.Windows,
+                new GenericEnumConverter(typeof(AuthenticationMode)),
+                PropertyHelper.DefaultValidator,
+                ConfigurationPropertyOptions.None
+            );
 
-		protected internal override void Reset (ConfigurationElement parentElement)
-		{
-			base.Reset (parentElement);
-		}
+            properties = new ConfigurationPropertyCollection();
+            properties.Add(formsProp);
+            properties.Add(passportProp);
+            properties.Add(modeProp);
+        }
 
-		[ConfigurationProperty ("forms")]
-		public FormsAuthenticationConfiguration Forms {
-			get { return (FormsAuthenticationConfiguration) base [formsProp]; }
-		}
-		
-		[ConfigurationProperty ("passport")]
-		[Obsolete ("This property is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID.")]
-		public PassportAuthentication Passport {
-			get { return (PassportAuthentication) base [passportProp]; }
-		}
-		
-		[ConfigurationProperty ("mode", DefaultValue = "Windows")]
-		public AuthenticationMode Mode {
-			get { return (AuthenticationMode) base [modeProp]; }
-			set { base [modeProp] = value; }
-		}
-		
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        public AuthenticationSection() { }
 
-	}
+        protected internal override void Reset(ConfigurationElement parentElement)
+        {
+            base.Reset(parentElement);
+        }
+
+        [ConfigurationProperty("forms")]
+        public FormsAuthenticationConfiguration Forms
+        {
+            get { return (FormsAuthenticationConfiguration)base[formsProp]; }
+        }
+
+        [ConfigurationProperty("passport")]
+        [Obsolete(
+            "This property is obsolete. The Passport authentication product is no longer supported and has been superseded by Live ID."
+        )]
+        public PassportAuthentication Passport
+        {
+            get { return (PassportAuthentication)base[passportProp]; }
+        }
+
+        [ConfigurationProperty("mode", DefaultValue = "Windows")]
+        public AuthenticationMode Mode
+        {
+            get { return (AuthenticationMode)base[modeProp]; }
+            set { base[modeProp] = value; }
+        }
+
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

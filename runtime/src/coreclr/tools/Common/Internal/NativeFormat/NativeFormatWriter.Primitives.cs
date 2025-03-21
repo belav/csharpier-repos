@@ -18,9 +18,20 @@ namespace Internal.NativeFormat
             _size = 0;
         }
 
-        public int Size { get { return _size; } }
-        public void Clear() { _size = 0; }
-        public void RollbackTo(int offset) { _size = offset; }
+        public int Size
+        {
+            get { return _size; }
+        }
+
+        public void Clear()
+        {
+            _size = 0;
+        }
+
+        public void RollbackTo(int offset)
+        {
+            _size = offset;
+        }
 
         public void WriteByte(byte b)
         {
@@ -100,10 +111,14 @@ namespace Internal.NativeFormat
 
         public static int GetUnsignedEncodingSize(uint d)
         {
-            if (d < 128) return 1;
-            if (d < 128 * 128) return 2;
-            if (d < 128 * 128 * 128) return 3;
-            if (d < 128 * 128 * 128 * 128) return 4;
+            if (d < 128)
+                return 1;
+            if (d < 128 * 128)
+                return 2;
+            if (d < 128 * 128 * 128)
+                return 3;
+            if (d < 128 * 128 * 128 * 128)
+                return 4;
             return 5;
         }
 

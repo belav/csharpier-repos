@@ -17,11 +17,13 @@ namespace System.Web.Http.Validation
         private readonly List<ModelValidationNode> _childNodes;
 
         public ModelValidationNode(ModelMetadata modelMetadata, string modelStateKey)
-            : this(modelMetadata, modelStateKey, null)
-        {
-        }
+            : this(modelMetadata, modelStateKey, null) { }
 
-        public ModelValidationNode(ModelMetadata modelMetadata, string modelStateKey, IEnumerable<ModelValidationNode> childNodes)
+        public ModelValidationNode(
+            ModelMetadata modelMetadata,
+            string modelStateKey,
+            IEnumerable<ModelValidationNode> childNodes
+        )
         {
             if (modelMetadata == null)
             {
@@ -34,14 +36,15 @@ namespace System.Web.Http.Validation
 
             ModelMetadata = modelMetadata;
             ModelStateKey = modelStateKey;
-            _childNodes = (childNodes != null) ? childNodes.ToList() : new List<ModelValidationNode>();
+            _childNodes =
+                (childNodes != null) ? childNodes.ToList() : new List<ModelValidationNode>();
         }
 
         public event EventHandler<ModelValidatedEventArgs> Validated;
 
         public event EventHandler<ModelValidatingEventArgs> Validating;
 
-        public ICollection<ModelValidationNode> ChildNodes 
+        public ICollection<ModelValidationNode> ChildNodes
         {
             get { return _childNodes; }
         }
@@ -110,7 +113,10 @@ namespace System.Web.Http.Validation
 
         public void Validate(HttpActionContext actionContext)
         {
-            Validate(actionContext, null /* parentNode */);
+            Validate(
+                actionContext,
+                null /* parentNode */
+            );
         }
 
         public void Validate(HttpActionContext actionContext, ModelValidationNode parentNode)
@@ -127,7 +133,10 @@ namespace System.Web.Http.Validation
             }
 
             // pre-validation steps
-            ModelValidatingEventArgs validatingEventArgs = new ModelValidatingEventArgs(actionContext, parentNode);
+            ModelValidatingEventArgs validatingEventArgs = new ModelValidatingEventArgs(
+                actionContext,
+                parentNode
+            );
             OnValidating(validatingEventArgs);
             if (validatingEventArgs.Cancel)
             {
@@ -138,7 +147,10 @@ namespace System.Web.Http.Validation
             ValidateThis(actionContext, parentNode);
 
             // post-validation steps
-            ModelValidatedEventArgs validatedEventArgs = new ModelValidatedEventArgs(actionContext, parentNode);
+            ModelValidatedEventArgs validatedEventArgs = new ModelValidatedEventArgs(
+                actionContext,
+                parentNode
+            );
             OnValidated(validatedEventArgs);
         }
 
@@ -164,21 +176,38 @@ namespace System.Web.Http.Validation
             // DevDiv Bugs #227802 - Caching problem in ModelMetadata requires us to manually regenerate
             // the ModelMetadata.
             object model = ModelMetadata.Model;
-            ModelMetadata updatedMetadata = actionContext.GetMetadataProvider().GetMetadataForType(() => model, ModelMetadata.ModelType);
+            ModelMetadata updatedMetadata = actionContext
+                .GetMetadataProvider()
+                .GetMetadataForType(() => model, ModelMetadata.ModelType);
 
             foreach (ModelMetadata propertyMetadata in updatedMetadata.Properties)
             {
                 // Only want to add errors to ModelState if something doesn't already exist for the property node,
                 // else we could end up with duplicate or irrelevant error messages.
-                string propertyKeyRoot = ModelBindingHelper.CreatePropertyModelName(ModelStateKey, propertyMetadata.PropertyName);
+                string propertyKeyRoot = ModelBindingHelper.CreatePropertyModelName(
+                    ModelStateKey,
+                    propertyMetadata.PropertyName
+                );
 
                 if (modelState.IsValidField(propertyKeyRoot))
                 {
-                    foreach (ModelValidator propertyValidator in actionContext.GetValidators(propertyMetadata))
+                    foreach (
+                        ModelValidator propertyValidator in actionContext.GetValidators(
+                            propertyMetadata
+                        )
+                    )
                     {
-                        foreach (ModelValidationResult propertyResult in propertyValidator.Validate(propertyMetadata, model))
+                        foreach (
+                            ModelValidationResult propertyResult in propertyValidator.Validate(
+                                propertyMetadata,
+                                model
+                            )
+                        )
                         {
-                            string thisErrorKey = ModelBindingHelper.CreatePropertyModelName(propertyKeyRoot, propertyResult.MemberName);
+                            string thisErrorKey = ModelBindingHelper.CreatePropertyModelName(
+                                propertyKeyRoot,
+                                propertyResult.MemberName
+                            );
                             modelState.AddModelError(thisErrorKey, propertyResult.Message);
                         }
                     }
@@ -199,7 +228,10 @@ namespace System.Web.Http.Validation
             // to provide a catch-all value-required validation error
             if (parentNode == null && ModelMetadata.Model == null)
             {
-                string trueModelStateKey = ModelBindingHelper.CreatePropertyModelName(ModelStateKey, ModelMetadata.GetDisplayName());
+                string trueModelStateKey = ModelBindingHelper.CreatePropertyModelName(
+                    ModelStateKey,
+                    ModelMetadata.GetDisplayName()
+                );
                 modelState.AddModelError(trueModelStateKey, SRResources.Validation_ValueNotFound);
                 return;
             }
@@ -212,9 +244,17 @@ namespace System.Web.Http.Validation
             for (int i = 0; i < validators.Length; i++)
             {
                 ModelValidator validator = validators[i];
-                foreach (ModelValidationResult validationResult in validator.Validate(ModelMetadata, container))
+                foreach (
+                    ModelValidationResult validationResult in validator.Validate(
+                        ModelMetadata,
+                        container
+                    )
+                )
                 {
-                    string trueModelStateKey = ModelBindingHelper.CreatePropertyModelName(ModelStateKey, validationResult.MemberName);
+                    string trueModelStateKey = ModelBindingHelper.CreatePropertyModelName(
+                        ModelStateKey,
+                        validationResult.MemberName
+                    );
                     modelState.AddModelError(trueModelStateKey, validationResult.Message);
                 }
             }

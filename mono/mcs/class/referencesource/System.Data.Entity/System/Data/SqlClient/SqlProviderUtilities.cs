@@ -18,12 +18,12 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace System.Data.SqlClient 
+namespace System.Data.SqlClient
 {
     class SqlProviderUtilities
     {
         /// <summary>
-        /// Requires that the given connection is of type  T. 
+        /// Requires that the given connection is of type  T.
         /// Returns the connection or throws.
         /// </summary>
         internal static SqlConnection GetRequiredSqlConnection(DbConnection connection)
@@ -31,7 +31,9 @@ namespace System.Data.SqlClient
             var result = connection as SqlConnection;
             if (null == result)
             {
-                throw EntityUtil.Argument(Strings.Mapping_Provider_WrongConnectionType(typeof(SqlConnection)));
+                throw EntityUtil.Argument(
+                    Strings.Mapping_Provider_WrongConnectionType(typeof(SqlConnection))
+                );
             }
             return result;
         }
@@ -43,7 +45,10 @@ namespace System.Data.SqlClient
         private readonly HashSet<EntitySet> ignoredEntitySets = new HashSet<EntitySet>();
 
         #region Pulblic Surface
-        internal static string CreateObjectsScript(StoreItemCollection itemCollection, bool createSchemas)
+        internal static string CreateObjectsScript(
+            StoreItemCollection itemCollection,
+            bool createSchemas
+        )
         {
             SqlDdlBuilder builder = new SqlDdlBuilder();
 
@@ -64,12 +69,20 @@ namespace System.Data.SqlClient
                     }
                 }
 
-                foreach (EntitySet entitySet in container.BaseEntitySets.OfType<EntitySet>().OrderBy(s => s.Name))
+                foreach (
+                    EntitySet entitySet in container
+                        .BaseEntitySets.OfType<EntitySet>()
+                        .OrderBy(s => s.Name)
+                )
                 {
                     builder.AppendCreateTable(entitySet);
                 }
 
-                foreach (AssociationSet associationSet in container.BaseEntitySets.OfType<AssociationSet>().OrderBy(s => s.Name))
+                foreach (
+                    AssociationSet associationSet in container
+                        .BaseEntitySets.OfType<AssociationSet>()
+                        .OrderBy(s => s.Name)
+                )
                 {
                     builder.AppendCreateForeignKeys(associationSet);
                 }
@@ -77,7 +90,11 @@ namespace System.Data.SqlClient
             return builder.GetCommandText();
         }
 
-        internal static string CreateDatabaseScript(string databaseName, string dataFileName, string logFileName)
+        internal static string CreateDatabaseScript(
+            string databaseName,
+            string dataFileName,
+            string logFileName
+        )
         {
             var builder = new SqlDdlBuilder();
             builder.AppendSql("create database ");
@@ -93,7 +110,10 @@ namespace System.Data.SqlClient
             return builder.unencodedStringBuilder.ToString();
         }
 
-        internal static string CreateDatabaseExistsScript(string databaseName, bool useDeprecatedSystemTable)
+        internal static string CreateDatabaseExistsScript(
+            string databaseName,
+            bool useDeprecatedSystemTable
+        )
         {
             var builder = new SqlDdlBuilder();
             builder.AppendSql("SELECT Count(*) FROM ");
@@ -115,7 +135,10 @@ namespace System.Data.SqlClient
             }
         }
 
-        internal static string CreateGetDatabaseNamesBasedOnFileNameScript(string databaseFileName, bool useDeprecatedSystemTable)
+        internal static string CreateGetDatabaseNamesBasedOnFileNameScript(
+            string databaseFileName,
+            bool useDeprecatedSystemTable
+        )
         {
             var builder = new SqlDdlBuilder();
             builder.AppendSql("SELECT [d].[name] FROM ");
@@ -123,7 +146,9 @@ namespace System.Data.SqlClient
             builder.AppendSql(" AS [d] ");
             if (!useDeprecatedSystemTable)
             {
-                builder.AppendSql("INNER JOIN sys.master_files AS [f] ON [f].[database_id] = [d].[database_id]");
+                builder.AppendSql(
+                    "INNER JOIN sys.master_files AS [f] ON [f].[database_id] = [d].[database_id]"
+                );
             }
             builder.AppendSql(" WHERE [");
             if (useDeprecatedSystemTable)
@@ -139,7 +164,10 @@ namespace System.Data.SqlClient
             return builder.unencodedStringBuilder.ToString();
         }
 
-        internal static string CreateCountDatabasesBasedOnFileNameScript(string databaseFileName, bool useDeprecatedSystemTable)
+        internal static string CreateCountDatabasesBasedOnFileNameScript(
+            string databaseFileName,
+            bool useDeprecatedSystemTable
+        )
         {
             var builder = new SqlDdlBuilder();
             builder.AppendSql("SELECT Count(*) FROM ");
@@ -198,9 +226,14 @@ namespace System.Data.SqlClient
             var dependentEnd = associationSet.AssociationSetEnds[constraint.ToRole.Name];
 
             // If any of the participating entity sets was skipped, skip the association too
-            if (ignoredEntitySets.Contains(principalEnd.EntitySet) || ignoredEntitySets.Contains(dependentEnd.EntitySet))
+            if (
+                ignoredEntitySets.Contains(principalEnd.EntitySet)
+                || ignoredEntitySets.Contains(dependentEnd.EntitySet)
+            )
             {
-                AppendSql("-- Ignoring association set with participating entity set with defining query: ");
+                AppendSql(
+                    "-- Ignoring association set with participating entity set with defining query: "
+                );
                 AppendIdentifierEscapeNewLine(associationSet.Name);
             }
             else
@@ -216,7 +249,10 @@ namespace System.Data.SqlClient
                 AppendSql("(");
                 AppendIdentifiers(constraint.FromProperties);
                 AppendSql(")");
-                if (principalEnd.CorrespondingAssociationEndMember.DeleteBehavior == OperationAction.Cascade)
+                if (
+                    principalEnd.CorrespondingAssociationEndMember.DeleteBehavior
+                    == OperationAction.Cascade
+                )
                 {
                     AppendSql(" on delete cascade");
                 }
@@ -323,7 +359,11 @@ namespace System.Data.SqlClient
             AppendSql(")");
         }
 
-        private void AppendJoin<T>(IEnumerable<T> elements, Action<T> appendElement, string unencodedSeparator)
+        private void AppendJoin<T>(
+            IEnumerable<T> elements,
+            Action<T> appendElement,
+            string unencodedSeparator
+        )
         {
             bool first = true;
             foreach (T element in elements)
@@ -347,11 +387,17 @@ namespace System.Data.SqlClient
             // check for rowversion-like configurations
             Facet storeGenFacet;
             bool isTimestamp = false;
-            if (type.EdmType.Name == "binary" &&
-                8 == type.GetMaxLength() &&
-                column.TypeUsage.Facets.TryGetValue("StoreGeneratedPattern", false, out storeGenFacet) &&
-                storeGenFacet.Value != null &&
-                StoreGeneratedPattern.Computed == (StoreGeneratedPattern)storeGenFacet.Value)
+            if (
+                type.EdmType.Name == "binary"
+                && 8 == type.GetMaxLength()
+                && column.TypeUsage.Facets.TryGetValue(
+                    "StoreGeneratedPattern",
+                    false,
+                    out storeGenFacet
+                )
+                && storeGenFacet.Value != null
+                && StoreGeneratedPattern.Computed == (StoreGeneratedPattern)storeGenFacet.Value
+            )
             {
                 isTimestamp = true;
                 AppendIdentifier("rowversion");
@@ -363,10 +409,17 @@ namespace System.Data.SqlClient
                 // it as a type 'nvarchar' and a type qualifier. As such, we can't escape the entire
                 // type name as the EDM sees it.
                 const string maxSuffix = "(max)";
-                if (type.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType && typeName.EndsWith(maxSuffix, StringComparison.Ordinal))
+                if (
+                    type.EdmType.BuiltInTypeKind == BuiltInTypeKind.PrimitiveType
+                    && typeName.EndsWith(maxSuffix, StringComparison.Ordinal)
+                )
                 {
-                    Debug.Assert(new[] { "nvarchar(max)", "varchar(max)", "varbinary(max)" }.Contains(typeName),
-                        "no other known SQL Server primitive types types accept (max)");
+                    Debug.Assert(
+                        new[] { "nvarchar(max)", "varchar(max)", "varbinary(max)" }.Contains(
+                            typeName
+                        ),
+                        "no other known SQL Server primitive types types accept (max)"
+                    );
                     AppendIdentifier(typeName.Substring(0, typeName.Length - maxSuffix.Length));
                     AppendSql("(max)");
                 }
@@ -378,7 +431,11 @@ namespace System.Data.SqlClient
                 {
                     case "decimal":
                     case "numeric":
-                        AppendSqlInvariantFormat("({0}, {1})", type.GetPrecision(), type.GetScale());
+                        AppendSqlInvariantFormat(
+                            "({0}, {1})",
+                            type.GetPrecision(),
+                            type.GetScale()
+                        );
                         break;
                     case "datetime2":
                     case "datetimeoffset":
@@ -399,8 +456,15 @@ namespace System.Data.SqlClient
             }
             AppendSql(column.Nullable ? " null" : " not null");
 
-            if (!isTimestamp && column.TypeUsage.Facets.TryGetValue("StoreGeneratedPattern", false, out storeGenFacet) &&
-                storeGenFacet.Value != null)
+            if (
+                !isTimestamp
+                && column.TypeUsage.Facets.TryGetValue(
+                    "StoreGeneratedPattern",
+                    false,
+                    out storeGenFacet
+                )
+                && storeGenFacet.Value != null
+            )
             {
                 StoreGeneratedPattern storeGenPattern = (StoreGeneratedPattern)storeGenFacet.Value;
                 if (storeGenPattern == StoreGeneratedPattern.Identity)

@@ -1,5 +1,5 @@
 //
-// BitVector32Cas.cs 
+// BitVector32Cas.cs
 //	- CAS unit tests for System.Collections.Specialized.BitVector32
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,52 +27,50 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Collections.Specialized;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-
 using MonoTests.System.Collections.Specialized;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Collections.Specialized {
+namespace MonoCasTests.System.Collections.Specialized
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class BitVector32Cas
+    {
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class BitVector32Cas {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void ReuseUnitTests_Deny_Unrestricted()
+        {
+            BitVector32Test unit = new BitVector32Test();
+            unit.Constructors();
+            unit.Constructors_MaxValue();
+            unit.Constructors_MinValue();
+            unit.Indexers();
+            unit.CreateMask();
+            unit.CreateSection();
+            unit.Section();
+            unit.TestSectionIndexer();
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void ReuseUnitTests_Deny_Unrestricted ()
-		{
-			BitVector32Test unit = new BitVector32Test ();
-			unit.Constructors ();
-			unit.Constructors_MaxValue ();
-			unit.Constructors_MinValue ();
-			unit.Indexers ();
-			unit.CreateMask ();
-			unit.CreateSection ();
-			unit.Section ();
-			unit.TestSectionIndexer ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[1] { typeof (int) };
-			ConstructorInfo ci = typeof (BitVector32).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(int)");
-			Assert.IsNotNull (ci.Invoke (new object[1] { 1 }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            Type[] types = new Type[1] { typeof(int) };
+            ConstructorInfo ci = typeof(BitVector32).GetConstructor(types);
+            Assert.IsNotNull(ci, ".ctor(int)");
+            Assert.IsNotNull(ci.Invoke(new object[1] { 1 }), "invoke");
+        }
+    }
 }

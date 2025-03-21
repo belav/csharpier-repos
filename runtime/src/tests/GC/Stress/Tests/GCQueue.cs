@@ -1,10 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-
 using System;
 using System.Collections;
-
 
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 //
@@ -19,7 +17,6 @@ using System.Collections;
 /*arguments:iRep: count of G_Queue, repeat time of local stacks assignment.
 /*          iObj: count of local Queues' elements.
 /****************************************************************************/
-
 
 namespace DefaultNamespace
 {
@@ -39,6 +36,7 @@ namespace DefaultNamespace
     internal class GCQueue
     {
         internal static Queue G_Queue;
+
         public static int Main(string[] args)
         {
             int iRep = 0;
@@ -82,7 +80,6 @@ namespace DefaultNamespace
             return 1;
         }
 
-
         public bool runTest(int iRep, int iObj)
         {
             try
@@ -107,7 +104,6 @@ namespace DefaultNamespace
 
             return true;
         }
-
 
         public void MakeLeak(int iRep, int iObj)
         {

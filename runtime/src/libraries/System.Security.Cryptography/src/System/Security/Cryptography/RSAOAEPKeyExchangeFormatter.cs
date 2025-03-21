@@ -10,6 +10,7 @@ namespace System.Security.Cryptography
         private RandomNumberGenerator? RngValue;
 
         public RSAOAEPKeyExchangeFormatter() { }
+
         public RSAOAEPKeyExchangeFormatter(AsymmetricAlgorithm key)
         {
             ArgumentNullException.ThrowIfNull(key);
@@ -67,7 +68,9 @@ namespace System.Security.Cryptography
         public override byte[] CreateKeyExchange(byte[] rgbData)
         {
             if (_rsaKey == null)
-                throw new CryptographicUnexpectedOperationException(SR.Cryptography_FormatterMissingKey);
+                throw new CryptographicUnexpectedOperationException(
+                    SR.Cryptography_FormatterMissingKey
+                );
 
             return _rsaKey.Encrypt(rgbData, RSAEncryptionPadding.OaepSHA1);
         }

@@ -24,14 +24,14 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System.Text;
-using System.IO;
-using System.Xml;
-using System.Runtime.Serialization.Formatters.Tests;
 using System.Globalization;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Tests;
+using System.Tests;
+using System.Text;
+using System.Xml;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
-using System.Tests;
 
 namespace System.Data.Tests
 {
@@ -188,13 +188,20 @@ namespace System.Data.Tests
         [Fact]
         public void Clone()
         {
-            DataSet ds = new DataSet(), dsTarget = null;
+            DataSet ds = new DataSet(),
+                dsTarget = null;
             ds.Tables.Add(DataProvider.CreateParentDataTable());
             ds.Tables.Add(DataProvider.CreateChildDataTable());
-            ds.Relations.Add(new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0]));
+            ds.Relations.Add(
+                new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
+            );
             ds.Tables[0].Rows.Add(new object[] { 9, "", "" });
             ds.Tables[1].Columns[2].ReadOnly = true;
-            ds.Tables[0].PrimaryKey = new DataColumn[] { ds.Tables[0].Columns[0], ds.Tables[0].Columns[1] };
+            ds.Tables[0].PrimaryKey = new DataColumn[]
+            {
+                ds.Tables[0].Columns[0],
+                ds.Tables[0].Columns[1],
+            };
 
             //copy schema only, no data
 
@@ -211,13 +218,20 @@ namespace System.Data.Tests
         [Fact]
         public void Copy()
         {
-            DataSet ds = new DataSet(), dsTarget = null;
+            DataSet ds = new DataSet(),
+                dsTarget = null;
             ds.Tables.Add(DataProvider.CreateParentDataTable());
             ds.Tables.Add(DataProvider.CreateChildDataTable());
-            ds.Relations.Add(new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0]));
+            ds.Relations.Add(
+                new DataRelation("myRelation", ds.Tables[0].Columns[0], ds.Tables[1].Columns[0])
+            );
             ds.Tables[0].Rows.Add(new object[] { 9, "", "" });
             ds.Tables[1].Columns[2].ReadOnly = true;
-            ds.Tables[0].PrimaryKey = new DataColumn[] { ds.Tables[0].Columns[0], ds.Tables[0].Columns[1] };
+            ds.Tables[0].PrimaryKey = new DataColumn[]
+            {
+                ds.Tables[0].Columns[0],
+                ds.Tables[0].Columns[1],
+            };
 
             //copy data and schema
 
@@ -312,7 +326,10 @@ namespace System.Data.Tests
         public void GetChanges_ByDataRowState()
         {
             var ds = new DataSet();
-            object[] arrAdded, arrDeleted, arrModified, arrUnchanged;
+            object[] arrAdded,
+                arrDeleted,
+                arrModified,
+                arrUnchanged;
             //object[] arrDetached;
 
             DataRow dr;
@@ -350,7 +367,15 @@ namespace System.Data.Tests
 
             // GetChanges Deleted
             dr = ds.GetChanges(DataRowState.Deleted).Tables[0].Rows[0];
-            object[] tmp = new object[] { dr[0, DataRowVersion.Original], dr[1, DataRowVersion.Original], dr[2, DataRowVersion.Original], dr[3, DataRowVersion.Original], dr[4, DataRowVersion.Original], dr[5, DataRowVersion.Original] };
+            object[] tmp = new object[]
+            {
+                dr[0, DataRowVersion.Original],
+                dr[1, DataRowVersion.Original],
+                dr[2, DataRowVersion.Original],
+                dr[3, DataRowVersion.Original],
+                dr[4, DataRowVersion.Original],
+                dr[5, DataRowVersion.Original],
+            };
             Assert.Equal(arrDeleted, tmp);
 
             //    can't check it
@@ -360,10 +385,16 @@ namespace System.Data.Tests
             //        Assert.Equal(arrDetached, tmp);
 
             // GetChanges Modified
-            Assert.Equal(arrModified, ds.GetChanges(DataRowState.Modified).Tables[0].Rows[0].ItemArray);
+            Assert.Equal(
+                arrModified,
+                ds.GetChanges(DataRowState.Modified).Tables[0].Rows[0].ItemArray
+            );
 
             // GetChanges Unchanged
-            Assert.Equal(arrUnchanged, ds.GetChanges(DataRowState.Unchanged).Tables[0].Rows[0].ItemArray);
+            Assert.Equal(
+                arrUnchanged,
+                ds.GetChanges(DataRowState.Unchanged).Tables[0].Rows[0].ItemArray
+            );
         }
 
         [Fact]
@@ -380,11 +411,23 @@ namespace System.Data.Tests
             table2.Columns.Add(col2);
 
             UniqueConstraint pkey = new UniqueConstraint("pk", new string[] { "col1" }, true);
-            ForeignKeyConstraint fkey = new ForeignKeyConstraint("fk", "table1", new string[] { "col1" },
-                                new string[] { "col2" }, AcceptRejectRule.Cascade,
-                                Rule.Cascade, Rule.Cascade);
-            DataRelation relation = new DataRelation("rel", "table1", "table2", new string[] { "col1" },
-                                 new string[] { "col2" }, false);
+            ForeignKeyConstraint fkey = new ForeignKeyConstraint(
+                "fk",
+                "table1",
+                new string[] { "col1" },
+                new string[] { "col2" },
+                AcceptRejectRule.Cascade,
+                Rule.Cascade,
+                Rule.Cascade
+            );
+            DataRelation relation = new DataRelation(
+                "rel",
+                "table1",
+                "table2",
+                new string[] { "col1" },
+                new string[] { "col2" },
+                false
+            );
             ds.BeginInit();
             table1.BeginInit();
             table2.BeginInit();
@@ -540,7 +583,10 @@ namespace System.Data.Tests
 
         #region test namespaces
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_BasicXml()
         {
             StringBuilder sb = new StringBuilder();
@@ -572,7 +618,10 @@ namespace System.Data.Tests
             Assert.Equal("Discontinued", ds.Tables[1].Columns[2].ColumnName);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_WithoutIgnoreNameSpaces()
         {
             StringBuilder sb = new StringBuilder();
@@ -597,7 +646,10 @@ namespace System.Data.Tests
             Assert.Equal(8, ds.Tables.Count);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_IgnoreNameSpace()
         {
             StringBuilder sb = new StringBuilder();
@@ -637,11 +689,16 @@ namespace System.Data.Tests
             Assert.Equal("Discontinued", ds.Tables[2].Columns["Discontinued"].ColumnName);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_IgnoreNameSpaces() //Ignoring 2 namespaces
         {
             StringBuilder sb = new StringBuilder();
-            sb.Append("<h:html xmlns:xdc='http://www.xml.com/books' xmlns:h='http://www.w3.org/HTML/1998/html4'>");
+            sb.Append(
+                "<h:html xmlns:xdc='http://www.xml.com/books' xmlns:h='http://www.w3.org/HTML/1998/html4'>"
+            );
             sb.Append("<h:head><h:title>Book Review</h:title></h:head>");
             sb.Append("<h:body>");
             sb.Append("<xdc:bookreview>");
@@ -655,7 +712,10 @@ namespace System.Data.Tests
             tempDs.ReadXml(myStream);
             myStream.Seek(0, SeekOrigin.Begin);
             var ds = new DataSet();
-            ds.InferXmlSchema(myStream, new string[] { "http://www.xml.com/books", "http://www.w3.org/HTML/1998/html4" });
+            ds.InferXmlSchema(
+                myStream,
+                new string[] { "http://www.xml.com/books", "http://www.w3.org/HTML/1998/html4" }
+            );
             //Assert.Equal(8, ds.Tables.Count);
 
             //            string str1 = tempDs.GetXmlSchema(); //DataProvider.GetDSSchema(tempDs);
@@ -667,7 +727,10 @@ namespace System.Data.Tests
         #endregion
 
         #region inferringTables
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_inferringTables1()
         {
             //According to the msdn documantaion :
@@ -691,7 +754,10 @@ namespace System.Data.Tests
             Assert.Equal("Element1_Text", ds.Tables[0].Columns["Element1_Text"].ColumnName);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_inferringTables2()
         {
             //According to the msdn documantaion :
@@ -741,7 +807,10 @@ namespace System.Data.Tests
             Assert.Equal("Element2", ds.Tables[0].Columns["Element2"].ColumnName);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_inferringTables4()
         {
             //According to the msdn documantaion :
@@ -766,7 +835,10 @@ namespace System.Data.Tests
             Assert.Equal("attr2", ds.Tables[0].Columns["attr2"].ColumnName);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_inferringTables5()
         {
             //According to the msdn documantaion :
@@ -791,7 +863,10 @@ namespace System.Data.Tests
         #endregion
 
         #region inferringColumns
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_inferringColumns1()
         {
             //ms-help://MS.MSDNQTR.2003FEB.1033/cpguide/html/cpconinferringcolumns.htm
@@ -815,7 +890,10 @@ namespace System.Data.Tests
             Assert.Equal(typeof(string), ds.Tables[0].Columns["attr2"].DataType);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_inferringColumns2()
         {
             //ms-help://MS.MSDNQTR.2003FEB.1033/cpguide/html/cpconinferringcolumns.htm
@@ -850,7 +928,10 @@ namespace System.Data.Tests
 
         #region Inferring Relationships
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_inferringRelationships1()
         {
             //ms-help://MS.MSDNQTR.2003FEB.1033/cpguide/html/cpconinferringrelationships.htm
@@ -873,35 +954,66 @@ namespace System.Data.Tests
             Assert.Equal(2, ds.Tables.Count);
 
             Assert.Equal("Element1_Id", ds.Tables["Element1"].Columns["Element1_Id"].ColumnName);
-            Assert.Equal(MappingType.Hidden, ds.Tables["Element1"].Columns["Element1_Id"].ColumnMapping);
+            Assert.Equal(
+                MappingType.Hidden,
+                ds.Tables["Element1"].Columns["Element1_Id"].ColumnMapping
+            );
             Assert.Equal(typeof(int), ds.Tables["Element1"].Columns["Element1_Id"].DataType);
 
-            Assert.Equal("ChildElement2", ds.Tables["Element1"].Columns["ChildElement2"].ColumnName);
-            Assert.Equal(MappingType.Element, ds.Tables["Element1"].Columns["ChildElement2"].ColumnMapping);
+            Assert.Equal(
+                "ChildElement2",
+                ds.Tables["Element1"].Columns["ChildElement2"].ColumnName
+            );
+            Assert.Equal(
+                MappingType.Element,
+                ds.Tables["Element1"].Columns["ChildElement2"].ColumnMapping
+            );
             Assert.Equal(typeof(string), ds.Tables["Element1"].Columns["ChildElement2"].DataType);
 
             Assert.Equal("attr1", ds.Tables["ChildElement1"].Columns["attr1"].ColumnName);
-            Assert.Equal(MappingType.Attribute, ds.Tables["ChildElement1"].Columns["attr1"].ColumnMapping);
+            Assert.Equal(
+                MappingType.Attribute,
+                ds.Tables["ChildElement1"].Columns["attr1"].ColumnMapping
+            );
             Assert.Equal(typeof(string), ds.Tables["ChildElement1"].Columns["attr1"].DataType);
 
             Assert.Equal("attr2", ds.Tables["ChildElement1"].Columns["attr2"].ColumnName);
-            Assert.Equal(MappingType.Attribute, ds.Tables["ChildElement1"].Columns["attr2"].ColumnMapping);
+            Assert.Equal(
+                MappingType.Attribute,
+                ds.Tables["ChildElement1"].Columns["attr2"].ColumnMapping
+            );
             Assert.Equal(typeof(string), ds.Tables["ChildElement1"].Columns["attr2"].DataType);
 
-            Assert.Equal("Element1_Id", ds.Tables["ChildElement1"].Columns["Element1_Id"].ColumnName);
-            Assert.Equal(MappingType.Hidden, ds.Tables["ChildElement1"].Columns["Element1_Id"].ColumnMapping);
+            Assert.Equal(
+                "Element1_Id",
+                ds.Tables["ChildElement1"].Columns["Element1_Id"].ColumnName
+            );
+            Assert.Equal(
+                MappingType.Hidden,
+                ds.Tables["ChildElement1"].Columns["Element1_Id"].ColumnMapping
+            );
             Assert.Equal(typeof(int), ds.Tables["ChildElement1"].Columns["Element1_Id"].DataType);
 
             //Checking dataRelation :
             Assert.Equal("Element1", ds.Relations["Element1_ChildElement1"].ParentTable.TableName);
-            Assert.Equal("Element1_Id", ds.Relations["Element1_ChildElement1"].ParentColumns[0].ColumnName);
-            Assert.Equal("ChildElement1", ds.Relations["Element1_ChildElement1"].ChildTable.TableName);
-            Assert.Equal("Element1_Id", ds.Relations["Element1_ChildElement1"].ChildColumns[0].ColumnName);
+            Assert.Equal(
+                "Element1_Id",
+                ds.Relations["Element1_ChildElement1"].ParentColumns[0].ColumnName
+            );
+            Assert.Equal(
+                "ChildElement1",
+                ds.Relations["Element1_ChildElement1"].ChildTable.TableName
+            );
+            Assert.Equal(
+                "Element1_Id",
+                ds.Relations["Element1_ChildElement1"].ChildColumns[0].ColumnName
+            );
             Assert.True(ds.Relations["Element1_ChildElement1"].Nested);
 
             //Checking ForeignKeyConstraint
 
-            ForeignKeyConstraint con = (ForeignKeyConstraint)ds.Tables["ChildElement1"].Constraints["Element1_ChildElement1"];
+            ForeignKeyConstraint con = (ForeignKeyConstraint)
+                ds.Tables["ChildElement1"].Constraints["Element1_ChildElement1"];
 
             Assert.Equal("Element1_Id", con.Columns[0].ColumnName);
             Assert.Equal(Rule.Cascade, con.DeleteRule);
@@ -914,7 +1026,10 @@ namespace System.Data.Tests
 
         #region Inferring Element Text
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_elementText1()
         {
             //ms-help://MS.MSDNQTR.2003FEB.1033/cpguide/html/cpconinferringelementtext.htm
@@ -934,15 +1049,27 @@ namespace System.Data.Tests
             Assert.Equal(1, ds.Tables.Count);
 
             Assert.Equal("attr1", ds.Tables["Element1"].Columns["attr1"].ColumnName);
-            Assert.Equal(MappingType.Attribute, ds.Tables["Element1"].Columns["attr1"].ColumnMapping);
+            Assert.Equal(
+                MappingType.Attribute,
+                ds.Tables["Element1"].Columns["attr1"].ColumnMapping
+            );
             Assert.Equal(typeof(string), ds.Tables["Element1"].Columns["attr1"].DataType);
 
-            Assert.Equal("Element1_Text", ds.Tables["Element1"].Columns["Element1_Text"].ColumnName);
-            Assert.Equal(MappingType.SimpleContent, ds.Tables["Element1"].Columns["Element1_Text"].ColumnMapping);
+            Assert.Equal(
+                "Element1_Text",
+                ds.Tables["Element1"].Columns["Element1_Text"].ColumnName
+            );
+            Assert.Equal(
+                MappingType.SimpleContent,
+                ds.Tables["Element1"].Columns["Element1_Text"].ColumnMapping
+            );
             Assert.Equal(typeof(string), ds.Tables["Element1"].Columns["Element1_Text"].DataType);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void InferXmlSchema_elementText2()
         {
             //ms-help://MS.MSDNQTR.2003FEB.1033/cpguide/html/cpconinferringelementtext.htm
@@ -965,8 +1092,14 @@ namespace System.Data.Tests
             Assert.Equal("Element1", ds.Tables[0].TableName);
             Assert.Equal(1, ds.Tables.Count);
 
-            Assert.Equal("ChildElement1", ds.Tables["Element1"].Columns["ChildElement1"].ColumnName);
-            Assert.Equal(MappingType.Element, ds.Tables["Element1"].Columns["ChildElement1"].ColumnMapping);
+            Assert.Equal(
+                "ChildElement1",
+                ds.Tables["Element1"].Columns["ChildElement1"].ColumnName
+            );
+            Assert.Equal(
+                MappingType.Element,
+                ds.Tables["Element1"].Columns["ChildElement1"].ColumnMapping
+            );
             Assert.Equal(typeof(string), ds.Tables["Element1"].Columns["ChildElement1"].DataType);
             Assert.Equal(1, ds.Tables["Element1"].Columns.Count);
         }
@@ -988,7 +1121,10 @@ namespace System.Data.Tests
             Assert.Equal(culInfo, ds.Locale);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void DataSetSpecificCulture()
         {
             using (new ThreadCultureChange("cs-CZ"))
@@ -1005,7 +1141,8 @@ namespace System.Data.Tests
         public void MergeFailed()
         {
             _eventRaised = false;
-            DataSet ds1, ds2;
+            DataSet ds1,
+                ds2;
             ds1 = new DataSet();
             ds1.Tables.Add(DataProvider.CreateParentDataTable());
             //add primary key to the FIRST column
@@ -1032,6 +1169,7 @@ namespace System.Data.Tests
             // MergeFailed event
             Assert.True(_eventRaised);
         }
+
         private void Merge_Failed(object sender, MergeFailedEventArgs e)
         {
             _eventRaised = true;
@@ -1199,7 +1337,15 @@ namespace System.Data.Tests
             //update existing row
             ds.Tables["Table2"].Select("ParentId=1")[0][1] = "OldValue1";
             //add new row
-            object[] arrAddedRow = new object[] { 99, "NewValue1", "NewValue2", new DateTime(0), 0.5, true };
+            object[] arrAddedRow = new object[]
+            {
+                99,
+                "NewValue1",
+                "NewValue2",
+                new DateTime(0),
+                0.5,
+                true,
+            };
             ds.Tables["Table2"].Rows.Add(arrAddedRow);
             //delete existing rows
             foreach (DataRow dr in ds.Tables["Table2"].Select("ParentId=2"))
@@ -1252,7 +1398,15 @@ namespace System.Data.Tests
             string oldValue = ds.Tables["Table2"].Select("ParentId=1")[0][1].ToString();
             ds.Tables["Table2"].Select("ParentId=1")[0][1] = "NewValue";
             //add new row
-            object[] arrAddedRow = new object[] { 99, "NewValue1", "NewValue2", new DateTime(0), 0.5, true };
+            object[] arrAddedRow = new object[]
+            {
+                99,
+                "NewValue1",
+                "NewValue2",
+                new DateTime(0),
+                0.5,
+                true,
+            };
             ds.Tables["Table2"].Rows.Add(arrAddedRow);
             //delete existing rows
             int iDeleteLength = dsTarget1.Tables["Table2"].Select("ParentId=2").Length;
@@ -1268,7 +1422,10 @@ namespace System.Data.Tests
             Assert.Equal(oldValue, dsTarget1.Tables["Table2"].Select("ParentId=1")[0][1]);
 
             // Merge - added values
-            Assert.Equal(arrAddedRow, dsTarget1.Tables["Table2"].Select("ParentId=99")[0].ItemArray);
+            Assert.Equal(
+                arrAddedRow,
+                dsTarget1.Tables["Table2"].Select("ParentId=99")[0].ItemArray
+            );
 
             // Merge - deleted row
             Assert.Equal(iDeleteLength, dsTarget1.Tables["Table2"].Select("ParentId=2").Length);
@@ -1281,7 +1438,10 @@ namespace System.Data.Tests
             Assert.Equal("NewValue", dsTarget2.Tables["Table2"].Select("ParentId=1")[0][1]);
 
             // Merge - added values
-            Assert.Equal(arrAddedRow, dsTarget2.Tables["Table2"].Select("ParentId=99")[0].ItemArray);
+            Assert.Equal(
+                arrAddedRow,
+                dsTarget2.Tables["Table2"].Select("ParentId=99")[0].ItemArray
+            );
 
             // Merge - deleted row
             Assert.Equal(0, dsTarget2.Tables["Table2"].Select("ParentId=2").Length);
@@ -1318,7 +1478,10 @@ namespace System.Data.Tests
             ds.Tables["NewTable"].Columns.Add("NewColumn2", typeof(long));
             ds.Tables["NewTable"].Rows.Add(new object[] { 1, 2 });
             ds.Tables["NewTable"].Rows.Add(new object[] { 3, 4 });
-            ds.Tables["NewTable"].PrimaryKey = new DataColumn[] { ds.Tables["NewTable"].Columns["NewColumn1"] };
+            ds.Tables["NewTable"].PrimaryKey = new DataColumn[]
+            {
+                ds.Tables["NewTable"].Columns["NewColumn1"],
+            };
 
             #region "ds,false,MissingSchemaAction.Add)"
             DataSet dsTarget1 = dsTarget.Copy();
@@ -1379,28 +1542,57 @@ namespace System.Data.Tests
 
             //------------------ make some changes in the second target dataset schema --------------------
             //add primary key
-            dsTarget1.Tables["Parent"].PrimaryKey = new DataColumn[] { dsTarget1.Tables["Parent"].Columns["ParentId"] };
-            dsTarget1.Tables["Child"].PrimaryKey = new DataColumn[] { dsTarget1.Tables["Child"].Columns["ParentId"], dsTarget1.Tables["Child"].Columns["ChildId"] };
+            dsTarget1.Tables["Parent"].PrimaryKey = new DataColumn[]
+            {
+                dsTarget1.Tables["Parent"].Columns["ParentId"],
+            };
+            dsTarget1.Tables["Child"].PrimaryKey = new DataColumn[]
+            {
+                dsTarget1.Tables["Child"].Columns["ParentId"],
+                dsTarget1.Tables["Child"].Columns["ChildId"],
+            };
 
             //add Foreign Key (different name)
-            dsTarget1.Tables["Child2"].Constraints.Add("Child2_FK_2", dsTarget1.Tables["Parent"].Columns["ParentId"], dsTarget1.Tables["Child2"].Columns["ParentId"]);
+            dsTarget1
+                .Tables["Child2"]
+                .Constraints.Add(
+                    "Child2_FK_2",
+                    dsTarget1.Tables["Parent"].Columns["ParentId"],
+                    dsTarget1.Tables["Child2"].Columns["ParentId"]
+                );
 
             //add relation (different name)
             //dsTarget1.Relations.Add("Parent_Child_1",dsTarget1.Tables["Parent"].Columns["ParentId"],dsTarget1.Tables["Child"].Columns["ParentId"]);
 
             //------------------ make some changes in the source dataset schema --------------------
             //add primary key
-            ds.Tables["Parent"].PrimaryKey = new DataColumn[] { ds.Tables["Parent"].Columns["ParentId"] };
-            ds.Tables["Child"].PrimaryKey = new DataColumn[] { ds.Tables["Child"].Columns["ParentId"], ds.Tables["Child"].Columns["ChildId"] };
+            ds.Tables["Parent"].PrimaryKey = new DataColumn[]
+            {
+                ds.Tables["Parent"].Columns["ParentId"],
+            };
+            ds.Tables["Child"].PrimaryKey = new DataColumn[]
+            {
+                ds.Tables["Child"].Columns["ParentId"],
+                ds.Tables["Child"].Columns["ChildId"],
+            };
 
             //unique column
             ds.Tables["Parent"].Columns["String2"].Unique = true; //will not be merged
 
             //add Foreign Key
-            ds.Tables["Child2"].Constraints.Add("Child2_FK", ds.Tables["Parent"].Columns["ParentId"], ds.Tables["Child2"].Columns["ParentId"]);
+            ds.Tables["Child2"]
+                .Constraints.Add(
+                    "Child2_FK",
+                    ds.Tables["Parent"].Columns["ParentId"],
+                    ds.Tables["Child2"].Columns["ParentId"]
+                );
 
             //add relation
-            ds.Relations.Add("Parent_Child", ds.Tables["Parent"].Columns["ParentId"], ds.Tables["Child"].Columns["ParentId"]);
+            ds.Relations.Add(
+                "Parent_Child",
+                ds.Tables["Parent"].Columns["ParentId"],
+                ds.Tables["Child"].Columns["ParentId"]
+            );
 
             //add allow null constraint
             ds.Tables["Parent"].Columns["ParentBool"].AllowDBNull = false; //will not be merged
@@ -1443,8 +1635,12 @@ namespace System.Data.Tests
             DataColumn ccol = table2.Columns.Add("col1", typeof(int));
 
             DataSet ds1 = ds.Copy();
-            DataRelation rel = ds1.Relations.Add("rel1", ds1.Tables[0].Columns[0],
-                                ds1.Tables[1].Columns[0], false);
+            DataRelation rel = ds1.Relations.Add(
+                "rel1",
+                ds1.Tables[0].Columns[0],
+                ds1.Tables[1].Columns[0],
+                false
+            );
 
             ds.Merge(ds1);
             Assert.Equal(1, ds.Relations.Count);
@@ -1490,7 +1686,12 @@ namespace System.Data.Tests
             DataSet ds1 = ds.Copy();
 
             table2.Constraints.Add("fk", pcol, ccol);
-            ds1.Tables[1].Constraints.Add("fk", ds1.Tables[0].Columns["col2"], ds1.Tables[1].Columns["col2"]);
+            ds1.Tables[1]
+                .Constraints.Add(
+                    "fk",
+                    ds1.Tables[0].Columns["col2"],
+                    ds1.Tables[1].Columns["col2"]
+                );
 
             // No Exceptions should be thrown
             ds.Merge(ds1);
@@ -1528,8 +1729,9 @@ namespace System.Data.Tests
         public void Merge_ConstraintsFromReadXmlSchema()
         {
             DataSet ds = new DataSet();
-            ds.ReadXml(new StringReader(
-                @"<MyDataSet>
+            ds.ReadXml(
+                new StringReader(
+                    @"<MyDataSet>
                   <xs:schema id=""MyDataSet"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema""
                  xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
                     <xs:element name=""MyDataSet"" msdata:IsDataSet=""true"" msdata:MainDataTable=""Main"" msdata:UseCurrentLocale=""true"">
@@ -1591,7 +1793,9 @@ namespace System.Data.Tests
                     <PID>2</PID>
                     <ChildData>Parent2Child3</ChildData>
                   </Child>
-                </MyDataSet>"));
+                </MyDataSet>"
+                )
+            );
             DataSet ds2 = new DataSet();
             ds2.Merge(ds, true, MissingSchemaAction.AddWithKey);
             DataRelation c = ds2.Tables[0].ChildRelations[0];
@@ -1603,40 +1807,40 @@ namespace System.Data.Tests
         public void Merge_MissingEventHandler()
         {
             Assert.Throws<DataException>(() =>
-               {
-                   var ds = new DataSet();
-                   DataTable table1 = ds.Tables.Add("table1");
+            {
+                var ds = new DataSet();
+                DataTable table1 = ds.Tables.Add("table1");
 
-                   DataColumn pcol = table1.Columns.Add("col1", typeof(int));
-                   DataColumn pcol1 = table1.Columns.Add("col2", typeof(int));
+                DataColumn pcol = table1.Columns.Add("col1", typeof(int));
+                DataColumn pcol1 = table1.Columns.Add("col2", typeof(int));
 
-                   DataSet ds1 = ds.Copy();
-                   table1.PrimaryKey = new DataColumn[] { pcol };
-                   ds1.Tables[0].PrimaryKey = new DataColumn[] { ds1.Tables[0].Columns[1] };
+                DataSet ds1 = ds.Copy();
+                table1.PrimaryKey = new DataColumn[] { pcol };
+                ds1.Tables[0].PrimaryKey = new DataColumn[] { ds1.Tables[0].Columns[1] };
 
-                   // Exception shud be raised when handler is not set for MergeFailed Event
-                   ds1.Merge(ds);
-               });
+                // Exception shud be raised when handler is not set for MergeFailed Event
+                ds1.Merge(ds);
+            });
         }
 
         [Fact]
         public void Merge_MissingColumn()
         {
             Assert.Throws<DataException>(() =>
-           {
-               var ds = new DataSet();
-               DataTable table1 = ds.Tables.Add("table1");
-               DataTable table2 = ds.Tables.Add("table2");
+            {
+                var ds = new DataSet();
+                DataTable table1 = ds.Tables.Add("table1");
+                DataTable table2 = ds.Tables.Add("table2");
 
-               table1.Columns.Add("col1", typeof(int));
-               table2.Columns.Add("col1", typeof(int));
+                table1.Columns.Add("col1", typeof(int));
+                table2.Columns.Add("col1", typeof(int));
 
-               DataSet ds1 = ds.Copy();
+                DataSet ds1 = ds.Copy();
 
-               ds1.Tables[0].Columns.Add("col2");
+                ds1.Tables[0].Columns.Add("col2");
 
-               ds.Merge(ds1, true, MissingSchemaAction.Error);
-           });
+                ds.Merge(ds1, true, MissingSchemaAction.Error);
+            });
         }
 
         [Fact]
@@ -1661,7 +1865,8 @@ namespace System.Data.Tests
             {
                 DataSet ds1 = ds.Copy();
                 DataSet ds2 = ds.Copy();
-                ds2.Tables[0].Constraints.Add("fk", ds2.Tables[0].Columns[0], ds2.Tables[1].Columns[0]);
+                ds2.Tables[0]
+                    .Constraints.Add("fk", ds2.Tables[0].Columns[0], ds2.Tables[1].Columns[0]);
                 ds1.Tables[0].Constraints.Add("uc", ds1.Tables[0].Columns[0], false);
                 ds1.Merge(ds2, true, MissingSchemaAction.Error);
             });
@@ -1679,67 +1884,107 @@ namespace System.Data.Tests
         public void Merge_PrimaryKeys_IncorrectOrder()
         {
             Assert.Throws<DataException>(() =>
-           {
-               var ds = new DataSet();
-               DataTable table1 = ds.Tables.Add("table1");
-               DataTable table2 = ds.Tables.Add("table2");
-               DataColumn pcol = table1.Columns.Add("col1", typeof(int));
-               DataColumn pcol1 = table1.Columns.Add("col2", typeof(int));
-               DataColumn ccol = table2.Columns.Add("col1", typeof(int));
+            {
+                var ds = new DataSet();
+                DataTable table1 = ds.Tables.Add("table1");
+                DataTable table2 = ds.Tables.Add("table2");
+                DataColumn pcol = table1.Columns.Add("col1", typeof(int));
+                DataColumn pcol1 = table1.Columns.Add("col2", typeof(int));
+                DataColumn ccol = table2.Columns.Add("col1", typeof(int));
 
-               DataSet ds1 = ds.Copy();
-               table1.PrimaryKey = new DataColumn[] { pcol, pcol1 };
-               ds1.Tables[0].PrimaryKey = new DataColumn[] { ds1.Tables[0].Columns[1], ds1.Tables[0].Columns[0] };
+                DataSet ds1 = ds.Copy();
+                table1.PrimaryKey = new DataColumn[] { pcol, pcol1 };
+                ds1.Tables[0].PrimaryKey = new DataColumn[]
+                {
+                    ds1.Tables[0].Columns[1],
+                    ds1.Tables[0].Columns[0],
+                };
 
-               // Though the key columns are the same, if the order is incorrect
-               // Exception must be raised
-               ds1.Merge(ds);
-           });
+                // Though the key columns are the same, if the order is incorrect
+                // Exception must be raised
+                ds1.Merge(ds);
+            });
         }
 
         private void CompareResults_1(string Msg, DataSet ds, DataSet dsTarget)
         {
             // check Parent Primary key length
-            Assert.Equal(dsTarget.Tables["Parent"].PrimaryKey.Length, ds.Tables["Parent"].PrimaryKey.Length);
+            Assert.Equal(
+                dsTarget.Tables["Parent"].PrimaryKey.Length,
+                ds.Tables["Parent"].PrimaryKey.Length
+            );
 
             // check Child Primary key length
-            Assert.Equal(dsTarget.Tables["Child"].PrimaryKey.Length, ds.Tables["Child"].PrimaryKey.Length);
+            Assert.Equal(
+                dsTarget.Tables["Child"].PrimaryKey.Length,
+                ds.Tables["Child"].PrimaryKey.Length
+            );
 
             // check Parent Primary key columns
-            Assert.Equal(dsTarget.Tables["Parent"].PrimaryKey[0].ColumnName, ds.Tables["Parent"].PrimaryKey[0].ColumnName);
+            Assert.Equal(
+                dsTarget.Tables["Parent"].PrimaryKey[0].ColumnName,
+                ds.Tables["Parent"].PrimaryKey[0].ColumnName
+            );
 
             // check Child Primary key columns[0]
-            Assert.Equal(dsTarget.Tables["Child"].PrimaryKey[0].ColumnName, ds.Tables["Child"].PrimaryKey[0].ColumnName);
+            Assert.Equal(
+                dsTarget.Tables["Child"].PrimaryKey[0].ColumnName,
+                ds.Tables["Child"].PrimaryKey[0].ColumnName
+            );
 
             // check Child Primary key columns[1]
-            Assert.Equal(dsTarget.Tables["Child"].PrimaryKey[1].ColumnName, ds.Tables["Child"].PrimaryKey[1].ColumnName);
+            Assert.Equal(
+                dsTarget.Tables["Child"].PrimaryKey[1].ColumnName,
+                ds.Tables["Child"].PrimaryKey[1].ColumnName
+            );
 
             // check Parent Unique columns
-            Assert.Equal(dsTarget.Tables["Parent"].Columns["String2"].Unique, ds.Tables["Parent"].Columns["String2"].Unique);
+            Assert.Equal(
+                dsTarget.Tables["Parent"].Columns["String2"].Unique,
+                ds.Tables["Parent"].Columns["String2"].Unique
+            );
 
             // check Child2 Foreign Key name
-            Assert.Equal(dsTarget.Tables["Child2"].Constraints[0].ConstraintName, ds.Tables["Child2"].Constraints[0].ConstraintName);
+            Assert.Equal(
+                dsTarget.Tables["Child2"].Constraints[0].ConstraintName,
+                ds.Tables["Child2"].Constraints[0].ConstraintName
+            );
 
             // check dataset relation count
             Assert.Equal(dsTarget.Relations.Count, ds.Relations.Count);
 
             // check dataset relation - Parent column
-            Assert.Equal(dsTarget.Relations[0].ParentColumns[0].ColumnName, ds.Relations[0].ParentColumns[0].ColumnName);
+            Assert.Equal(
+                dsTarget.Relations[0].ParentColumns[0].ColumnName,
+                ds.Relations[0].ParentColumns[0].ColumnName
+            );
 
             // check dataset relation - Child column
-            Assert.Equal(dsTarget.Relations[0].ChildColumns[0].ColumnName, ds.Relations[0].ChildColumns[0].ColumnName);
+            Assert.Equal(
+                dsTarget.Relations[0].ChildColumns[0].ColumnName,
+                ds.Relations[0].ChildColumns[0].ColumnName
+            );
 
             // check allow null constraint
             Assert.True(dsTarget.Tables["Parent"].Columns["ParentBool"].AllowDBNull);
 
             // check Indentity column
-            Assert.Equal(dsTarget.Tables["Parent"].Columns.Contains("Indentity"), ds.Tables["Parent"].Columns.Contains("Indentity"));
+            Assert.Equal(
+                dsTarget.Tables["Parent"].Columns.Contains("Indentity"),
+                ds.Tables["Parent"].Columns.Contains("Indentity")
+            );
 
             // check Indentity column - AutoIncrementStep
-            Assert.Equal(dsTarget.Tables["Parent"].Columns["Indentity"].AutoIncrementStep, ds.Tables["Parent"].Columns["Indentity"].AutoIncrementStep);
+            Assert.Equal(
+                dsTarget.Tables["Parent"].Columns["Indentity"].AutoIncrementStep,
+                ds.Tables["Parent"].Columns["Indentity"].AutoIncrementStep
+            );
 
             // check Indentity column - AutoIncrement
-            Assert.Equal(dsTarget.Tables["Parent"].Columns["Indentity"].AutoIncrement, ds.Tables["Parent"].Columns["Indentity"].AutoIncrement);
+            Assert.Equal(
+                dsTarget.Tables["Parent"].Columns["Indentity"].AutoIncrement,
+                ds.Tables["Parent"].Columns["Indentity"].AutoIncrement
+            );
 
             // check Indentity column - DefaultValue
             Assert.Equal(DBNull.Value, dsTarget.Tables["Child"].Columns["String1"].DefaultValue);
@@ -1751,22 +1996,40 @@ namespace System.Data.Tests
         private void CompareResults_2(string Msg, DataSet ds, DataSet dsTarget)
         {
             // check Parent Primary key length
-            Assert.Equal(dsTarget.Tables["Parent"].PrimaryKey.Length, ds.Tables["Parent"].PrimaryKey.Length);
+            Assert.Equal(
+                dsTarget.Tables["Parent"].PrimaryKey.Length,
+                ds.Tables["Parent"].PrimaryKey.Length
+            );
 
             // check Child Primary key length
-            Assert.Equal(dsTarget.Tables["Child"].PrimaryKey.Length, ds.Tables["Child"].PrimaryKey.Length);
+            Assert.Equal(
+                dsTarget.Tables["Child"].PrimaryKey.Length,
+                ds.Tables["Child"].PrimaryKey.Length
+            );
 
             // check Parent Primary key columns
-            Assert.Equal(dsTarget.Tables["Parent"].PrimaryKey[0].ColumnName, ds.Tables["Parent"].PrimaryKey[0].ColumnName);
+            Assert.Equal(
+                dsTarget.Tables["Parent"].PrimaryKey[0].ColumnName,
+                ds.Tables["Parent"].PrimaryKey[0].ColumnName
+            );
 
             // check Child Primary key columns[0]
-            Assert.Equal(dsTarget.Tables["Child"].PrimaryKey[0].ColumnName, ds.Tables["Child"].PrimaryKey[0].ColumnName);
+            Assert.Equal(
+                dsTarget.Tables["Child"].PrimaryKey[0].ColumnName,
+                ds.Tables["Child"].PrimaryKey[0].ColumnName
+            );
 
             // check Child Primary key columns[1]
-            Assert.Equal(dsTarget.Tables["Child"].PrimaryKey[1].ColumnName, ds.Tables["Child"].PrimaryKey[1].ColumnName);
+            Assert.Equal(
+                dsTarget.Tables["Child"].PrimaryKey[1].ColumnName,
+                ds.Tables["Child"].PrimaryKey[1].ColumnName
+            );
 
             // check Parent Unique columns
-            Assert.Equal(dsTarget.Tables["Parent"].Columns["String2"].Unique, ds.Tables["Parent"].Columns["String2"].Unique);
+            Assert.Equal(
+                dsTarget.Tables["Parent"].Columns["String2"].Unique,
+                ds.Tables["Parent"].Columns["String2"].Unique
+            );
 
             // check Child2 Foreign Key name
             Assert.Equal("Child2_FK_2", dsTarget.Tables["Child2"].Constraints[0].ConstraintName);
@@ -1775,22 +2038,37 @@ namespace System.Data.Tests
             Assert.Equal(dsTarget.Relations.Count, ds.Relations.Count);
 
             // check dataset relation - Parent column
-            Assert.Equal(dsTarget.Relations[0].ParentColumns[0].ColumnName, ds.Relations[0].ParentColumns[0].ColumnName);
+            Assert.Equal(
+                dsTarget.Relations[0].ParentColumns[0].ColumnName,
+                ds.Relations[0].ParentColumns[0].ColumnName
+            );
 
             // check dataset relation - Child column
-            Assert.Equal(dsTarget.Relations[0].ChildColumns[0].ColumnName, ds.Relations[0].ChildColumns[0].ColumnName);
+            Assert.Equal(
+                dsTarget.Relations[0].ChildColumns[0].ColumnName,
+                ds.Relations[0].ChildColumns[0].ColumnName
+            );
 
             // check allow null constraint
             Assert.True(dsTarget.Tables["Parent"].Columns["ParentBool"].AllowDBNull);
 
             // check Indentity column
-            Assert.Equal(dsTarget.Tables["Parent"].Columns.Contains("Indentity"), ds.Tables["Parent"].Columns.Contains("Indentity"));
+            Assert.Equal(
+                dsTarget.Tables["Parent"].Columns.Contains("Indentity"),
+                ds.Tables["Parent"].Columns.Contains("Indentity")
+            );
 
             // check Indentity column - AutoIncrementStep
-            Assert.Equal(dsTarget.Tables["Parent"].Columns["Indentity"].AutoIncrementStep, ds.Tables["Parent"].Columns["Indentity"].AutoIncrementStep);
+            Assert.Equal(
+                dsTarget.Tables["Parent"].Columns["Indentity"].AutoIncrementStep,
+                ds.Tables["Parent"].Columns["Indentity"].AutoIncrementStep
+            );
 
             // check Indentity column - AutoIncrement
-            Assert.Equal(dsTarget.Tables["Parent"].Columns["Indentity"].AutoIncrement, ds.Tables["Parent"].Columns["Indentity"].AutoIncrement);
+            Assert.Equal(
+                dsTarget.Tables["Parent"].Columns["Indentity"].AutoIncrement,
+                ds.Tables["Parent"].Columns["Indentity"].AutoIncrement
+            );
 
             // check Indentity column - DefaultValue
             Assert.Equal(DBNull.Value, dsTarget.Tables["Child"].Columns["String1"].DefaultValue);
@@ -1815,7 +2093,10 @@ namespace System.Data.Tests
 
             DataSet merged = new DataSet();
             merged.Merge(orig);
-            Assert.Equal(orig.Relations["Parent_Child"].Nested, merged.Relations["Parent_Child"].Nested);
+            Assert.Equal(
+                orig.Relations["Parent_Child"].Nested,
+                merged.Relations["Parent_Child"].Nested
+            );
         }
 
         [Fact]
@@ -1842,7 +2123,15 @@ namespace System.Data.Tests
             //update existing row
             dt.Select("ParentId=1")[0][1] = "OldValue1";
             //add new row
-            object[] arrAddedRow = new object[] { 99, "NewValue1", "NewValue2", new DateTime(0), 0.5, true };
+            object[] arrAddedRow = new object[]
+            {
+                99,
+                "NewValue1",
+                "NewValue2",
+                new DateTime(0),
+                0.5,
+                true,
+            };
             dt.Rows.Add(arrAddedRow);
             //delete existing rows
             foreach (DataRow dr in dt.Select("ParentId=2"))
@@ -1895,7 +2184,15 @@ namespace System.Data.Tests
             //delete rows
             dt.Select("ParentId=2")[0].Delete();
             //add row
-            object[] arrAddedRow = new object[] { 99, "NewRowValue1", "NewRowValue2", new DateTime(0), 0.5, true };
+            object[] arrAddedRow = new object[]
+            {
+                99,
+                "NewRowValue1",
+                "NewRowValue2",
+                new DateTime(0),
+                0.5,
+                true,
+            };
             dt.Rows.Add(arrAddedRow);
 
             #region "Merge(dt,true,MissingSchemaAction.Ignore )"
@@ -1908,7 +2205,10 @@ namespace System.Data.Tests
             Assert.Equal(OldValue, dsTarget1.Tables["Table1"].Select("ParentId=1")[0][1]);
 
             // Merge true,Ignore - added values
-            Assert.Equal(arrAddedRow, dsTarget1.Tables["Table1"].Select("ParentId=99")[0].ItemArray);
+            Assert.Equal(
+                arrAddedRow,
+                dsTarget1.Tables["Table1"].Select("ParentId=99")[0].ItemArray
+            );
 
             // Merge true,Ignore - deleted row
             Assert.True(dsTarget1.Tables["Table1"].Select("ParentId=2").Length > 0);
@@ -1925,7 +2225,10 @@ namespace System.Data.Tests
             Assert.Equal("NewValue", dsTarget1.Tables["Table1"].Select("ParentId=1")[0][1]);
 
             // Merge true,Ignore - added values
-            Assert.Equal(arrAddedRow, dsTarget1.Tables["Table1"].Select("ParentId=99")[0].ItemArray);
+            Assert.Equal(
+                arrAddedRow,
+                dsTarget1.Tables["Table1"].Select("ParentId=99")[0].ItemArray
+            );
 
             // Merge true,Ignore - deleted row
             Assert.Equal(0, dsTarget1.Tables["Table1"].Select("ParentId=2").Length);
@@ -2036,7 +2339,10 @@ namespace System.Data.Tests
         [Fact]
         public void ReadXmlSchema_ByFileName()
         {
-            string sTempFileName = Path.Combine(Path.GetTempPath(), "tmpDataSet_ReadWriteXml_43899.xml");
+            string sTempFileName = Path.Combine(
+                Path.GetTempPath(),
+                "tmpDataSet_ReadWriteXml_43899.xml"
+            );
 
             DataSet ds1 = new DataSet();
             ds1.Tables.Add(DataProvider.CreateParentDataTable());
@@ -2235,7 +2541,11 @@ namespace System.Data.Tests
             // Tables[2] ParentRelations[0] name
             Assert.Equal("Stock_Price", ds.Tables[2].ParentRelations[0].RelationName);
         }
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void ReadXml_Strm3()
         {
             DataSet ds = new DataSet("TestDataSet");
@@ -2243,11 +2553,16 @@ namespace System.Data.Tests
             StringReader sr;
 
             input += "<?xml version=\"1.0\" standalone=\"yes\"?>";
-            input += "<Stocks><Stock name=\"MSFT\"><Company name=\"Microsoft Corp.\" /><Price type=\"high\"><Value>10.0</Value>";
-            input += "<Date>01/20/2000</Date></Price><Price type=\"low\"><Value>10</Value><Date>03/21/2002</Date></Price>";
-            input += "<Price type=\"current\"><Value>3.0</Value><Date>TODAY</Date></Price></Stock><Stock name=\"GE\">";
-            input += "<Company name=\"General Electric\" /><Price type=\"high\"><Value>22.23</Value><Date>02/12/2001</Date></Price>";
-            input += "<Price type=\"low\"><Value>1.97</Value><Date>04/20/2003</Date></Price><Price type=\"current\"><Value>3.0</Value>";
+            input +=
+                "<Stocks><Stock name=\"MSFT\"><Company name=\"Microsoft Corp.\" /><Price type=\"high\"><Value>10.0</Value>";
+            input +=
+                "<Date>01/20/2000</Date></Price><Price type=\"low\"><Value>10</Value><Date>03/21/2002</Date></Price>";
+            input +=
+                "<Price type=\"current\"><Value>3.0</Value><Date>TODAY</Date></Price></Stock><Stock name=\"GE\">";
+            input +=
+                "<Company name=\"General Electric\" /><Price type=\"high\"><Value>22.23</Value><Date>02/12/2001</Date></Price>";
+            input +=
+                "<Price type=\"low\"><Value>1.97</Value><Date>04/20/2003</Date></Price><Price type=\"current\"><Value>3.0</Value>";
             input += "<Date>TODAY</Date></Price></Stock></Stocks>";
             sr = new StringReader(input);
             ds.EnforceConstraints = false;
@@ -2258,13 +2573,19 @@ namespace System.Data.Tests
             Assert.Equal(MappingType.Hidden, ds.Tables["Stock"].Columns["Stock_Id"].ColumnMapping);
 
             // CompanyTable.Stock_IdCol.ColumnMapping
-            Assert.Equal(MappingType.Hidden, ds.Tables["Company"].Columns["Stock_Id"].ColumnMapping);
+            Assert.Equal(
+                MappingType.Hidden,
+                ds.Tables["Company"].Columns["Stock_Id"].ColumnMapping
+            );
 
             // PriceTable.Stock_IdCol.ColumnMapping
             Assert.Equal(MappingType.Hidden, ds.Tables["Price"].Columns["Stock_Id"].ColumnMapping);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void ReadXml_Strm4()
         {
             _ds = new DataSet("Stocks");
@@ -2341,31 +2662,149 @@ namespace System.Data.Tests
             sr = new StringReader(input);
             _ds.EnforceConstraints = true;
             _ds.ReadXml(sr);
-            privateTestCase("TestCase 1", "Company", "name='Microsoft Corp.'", "Stock", "name='MSFT'", "DS320");
-            privateTestCase("TestCase 2", "Company", "name='General Electric'", "Stock", "name='MSFT'", "DS321");
-            privateTestCase("TestCase 3", "Price", "Date='01/20/2000'", "Stock", "name='MSFT'", "DS322");
-            privateTestCase("TestCase 4", "Price", "Date='03/21/2002'", "Stock", "name='MSFT'", "DS323");
-            privateTestCase("TestCase 5", "Company", "name='GE company'", "Stock", "name='GE'", "DS324");
-            privateTestCase("TestCase 6", "Price", "Date='02/12/2001'", "Stock", "name='GE'", "DS325");
-            privateTestCase("TestCase 7", "Price", "Date='04/20/2003'", "Stock", "name='GE'", "DS326");
-            privateTestCase("TestCase 8", "Company", "name='Intel Corp.'", "Stock", "name='Intel'", "DS327");
-            privateTestCase("TestCase 9", "Company", "name='Test1'", "Stock", "name='Intel'", "DS328");
-            privateTestCase("TestCase 10", "Company", "name='Test2'", "Stock", "name='Intel'", "DS329");
-            privateTestCase("TestCase 11", "Price", "Date='01/25/2000'", "Stock", "name='Intel'", "DS330");
-            privateTestCase("TestCase 12", "Price", "Date='03/23/2002'", "Stock", "name='Intel'", "DS331");
-            privateTestCase("TestCase 13", "Company", "name='Mainsoft Corp.'", "Stock", "name='Mainsoft'", "DS332");
-            privateTestCase("TestCase 12", "Price", "Date='01/26/2000'", "Stock", "name='Mainsoft'", "DS333");
-            privateTestCase("TestCase 12", "Price", "Date='03/26/2002'", "Stock", "name='Mainsoft'", "DS334");
+            privateTestCase(
+                "TestCase 1",
+                "Company",
+                "name='Microsoft Corp.'",
+                "Stock",
+                "name='MSFT'",
+                "DS320"
+            );
+            privateTestCase(
+                "TestCase 2",
+                "Company",
+                "name='General Electric'",
+                "Stock",
+                "name='MSFT'",
+                "DS321"
+            );
+            privateTestCase(
+                "TestCase 3",
+                "Price",
+                "Date='01/20/2000'",
+                "Stock",
+                "name='MSFT'",
+                "DS322"
+            );
+            privateTestCase(
+                "TestCase 4",
+                "Price",
+                "Date='03/21/2002'",
+                "Stock",
+                "name='MSFT'",
+                "DS323"
+            );
+            privateTestCase(
+                "TestCase 5",
+                "Company",
+                "name='GE company'",
+                "Stock",
+                "name='GE'",
+                "DS324"
+            );
+            privateTestCase(
+                "TestCase 6",
+                "Price",
+                "Date='02/12/2001'",
+                "Stock",
+                "name='GE'",
+                "DS325"
+            );
+            privateTestCase(
+                "TestCase 7",
+                "Price",
+                "Date='04/20/2003'",
+                "Stock",
+                "name='GE'",
+                "DS326"
+            );
+            privateTestCase(
+                "TestCase 8",
+                "Company",
+                "name='Intel Corp.'",
+                "Stock",
+                "name='Intel'",
+                "DS327"
+            );
+            privateTestCase(
+                "TestCase 9",
+                "Company",
+                "name='Test1'",
+                "Stock",
+                "name='Intel'",
+                "DS328"
+            );
+            privateTestCase(
+                "TestCase 10",
+                "Company",
+                "name='Test2'",
+                "Stock",
+                "name='Intel'",
+                "DS329"
+            );
+            privateTestCase(
+                "TestCase 11",
+                "Price",
+                "Date='01/25/2000'",
+                "Stock",
+                "name='Intel'",
+                "DS330"
+            );
+            privateTestCase(
+                "TestCase 12",
+                "Price",
+                "Date='03/23/2002'",
+                "Stock",
+                "name='Intel'",
+                "DS331"
+            );
+            privateTestCase(
+                "TestCase 13",
+                "Company",
+                "name='Mainsoft Corp.'",
+                "Stock",
+                "name='Mainsoft'",
+                "DS332"
+            );
+            privateTestCase(
+                "TestCase 12",
+                "Price",
+                "Date='01/26/2000'",
+                "Stock",
+                "name='Mainsoft'",
+                "DS333"
+            );
+            privateTestCase(
+                "TestCase 12",
+                "Price",
+                "Date='03/26/2002'",
+                "Stock",
+                "name='Mainsoft'",
+                "DS334"
+            );
         }
 
-        private void privateTestCase(string name, string toTable, string toTestSelect, string toCompareTable, string toCompareSelect, string AssertTag)
+        private void privateTestCase(
+            string name,
+            string toTable,
+            string toTestSelect,
+            string toCompareTable,
+            string toCompareSelect,
+            string AssertTag
+        )
         {
             DataRow drToTest = _ds.Tables[toTable].Select(toTestSelect)[0];
             DataRow drToCompare = _ds.Tables[toCompareTable].Select(toCompareSelect)[0];
-            Assert.Equal(_ds.Tables[toTable].Select(toTestSelect)[0]["Stock_Id"], _ds.Tables[toCompareTable].Select(toCompareSelect)[0]["Stock_Id"]);
+            Assert.Equal(
+                _ds.Tables[toTable].Select(toTestSelect)[0]["Stock_Id"],
+                _ds.Tables[toCompareTable].Select(toCompareSelect)[0]["Stock_Id"]
+            );
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void ReadXml_Strm5()
         {
             string xmlData;
@@ -2386,13 +2825,15 @@ namespace System.Data.Tests
             #endregion
             #region "TestCase 3 - Nesting one level single element."
             name = "Nesting one level single element.";
-            expected = "DataSet Name=NewDataSet Tables count=1 Table Name=a Rows count=1 Items count=1 1";
+            expected =
+                "DataSet Name=NewDataSet Tables count=1 Table Name=a Rows count=1 Items count=1 1";
             xmlData = "<a><b>1</b></a>";
             PrivateTestCase(name, expected, xmlData);
             #endregion
             #region "TestCase 4 - Nesting one level multiple elements."
             name = "Nesting one level multiple elements.";
-            expected = "DataSet Name=NewDataSet Tables count=1 Table Name=a Rows count=1 Items count=3 bb cc dd";
+            expected =
+                "DataSet Name=NewDataSet Tables count=1 Table Name=a Rows count=1 Items count=3 bb cc dd";
             xmlData = "<a><b>bb</b><c>cc</c><d>dd</d></a>";
             PrivateTestCase(name, expected, xmlData);
             #endregion
@@ -2404,7 +2845,8 @@ namespace System.Data.Tests
             #endregion
             #region "TestCase 6 - Nesting two levels multiple elements."
             name = "Nesting two levels multiple elements.";
-            expected = "DataSet Name=a Tables count=1 Table Name=b Rows count=1 Items count=2 cc dd";
+            expected =
+                "DataSet Name=a Tables count=1 Table Name=b Rows count=1 Items count=2 cc dd";
             xmlData = string.Empty;
             xmlData += "<a>";
             xmlData += "<b>";
@@ -2416,7 +2858,8 @@ namespace System.Data.Tests
             #endregion
             #region "TestCase 7 - Nesting two levels multiple elements."
             name = "Nesting two levels multiple elements.";
-            expected = "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=2 cc dd Table Name=e Rows count=1 Items count=2 cc dd";
+            expected =
+                "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=2 cc dd Table Name=e Rows count=1 Items count=2 cc dd";
             xmlData = string.Empty;
             xmlData += "<a>";
             xmlData += "<b>";
@@ -2440,7 +2883,8 @@ namespace System.Data.Tests
             xmlData += "</c>";
             xmlData += "</b>";
             xmlData += "</a>";
-            expected = "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=1 0 Table Name=c Rows count=1 Items count=2 0 dd";
+            expected =
+                "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=1 0 Table Name=c Rows count=1 Items count=2 0 dd";
             PrivateTestCase(name, expected, xmlData);
             #endregion
             #region "TestCase 9 - Nesting three levels multiple elements."
@@ -2454,7 +2898,8 @@ namespace System.Data.Tests
             xmlData += "</c>";
             xmlData += "</b>";
             xmlData += "</a>";
-            expected = "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=1 0 Table Name=c Rows count=1 Items count=3 0 dd ee";
+            expected =
+                "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=1 0 Table Name=c Rows count=1 Items count=3 0 dd ee";
             PrivateTestCase(name, expected, xmlData);
             #endregion
             #region "TestCase 10 - Nesting three levels multiple elements."
@@ -2469,7 +2914,8 @@ namespace System.Data.Tests
             xmlData += "<f>ff</f>";
             xmlData += "</b>";
             xmlData += "</a>";
-            expected = "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=2 0 ff Table Name=c Rows count=1 Items count=3 0 dd ee";
+            expected =
+                "DataSet Name=a Tables count=2 Table Name=b Rows count=1 Items count=2 0 ff Table Name=c Rows count=1 Items count=3 0 dd ee";
             PrivateTestCase(name, expected, xmlData);
             #endregion
             #region "TestCase 11 - Nesting three levels multiple elements."
@@ -2489,7 +2935,8 @@ namespace System.Data.Tests
             xmlData += "<j>jj</j>";
             xmlData += "</b>";
             xmlData += "</a>";
-            expected = "DataSet Name=a Tables count=3 Table Name=b Rows count=1 Items count=3 0 ff jj Table Name=c Rows count=1 Items count=3 0 dd ee Table Name=g Rows count=1 Items count=3 0 hh ii";
+            expected =
+                "DataSet Name=a Tables count=3 Table Name=b Rows count=1 Items count=3 0 ff jj Table Name=c Rows count=1 Items count=3 0 dd ee Table Name=g Rows count=1 Items count=3 0 hh ii";
             PrivateTestCase(name, expected, xmlData);
             #endregion
             #region "TestCase 12 - Nesting three levels multiple elements."
@@ -2511,7 +2958,8 @@ namespace System.Data.Tests
             xmlData += "<f>ff</f>";
             xmlData += "</g>";
             xmlData += "</a>";
-            expected = "DataSet Name=a Tables count=4 Table Name=b Rows count=1 Items count=2 0 ff Table Name=c Rows count=1 Items count=3 0 dd ee Table Name=g Rows count=1 Items count=2 ff 0 Table Name=h Rows count=1 Items count=3 0 ii jj";
+            expected =
+                "DataSet Name=a Tables count=4 Table Name=b Rows count=1 Items count=2 0 ff Table Name=c Rows count=1 Items count=3 0 dd ee Table Name=g Rows count=1 Items count=2 ff 0 Table Name=h Rows count=1 Items count=3 0 ii jj";
             PrivateTestCase(name, expected, xmlData);
             #endregion
             #region "TestCase 13 - Nesting three levels multiple elements."
@@ -2538,15 +2986,18 @@ namespace System.Data.Tests
             xmlData += "<o>oo</o>";
             xmlData += "</g>";
             xmlData += "</a>";
-            expected = "DataSet Name=a Tables count=5 Table Name=b Rows count=1 Items count=3 0 ff nn Table Name=c Rows count=1 Items count=3 0 dd ee Table Name=k Rows count=1 Items count=3 0 ll mm Table Name=g Rows count=1 Items count=2 0 oo Table Name=h Rows count=1 Items count=3 0 ii jj";
+            expected =
+                "DataSet Name=a Tables count=5 Table Name=b Rows count=1 Items count=3 0 ff nn Table Name=c Rows count=1 Items count=3 0 dd ee Table Name=k Rows count=1 Items count=3 0 ll mm Table Name=g Rows count=1 Items count=2 0 oo Table Name=h Rows count=1 Items count=3 0 ii jj";
             PrivateTestCase(name, expected, xmlData);
             #endregion
 
             #region "TestCase 14 - for Bug 2387 (System.Data.DataSet.ReadXml(..) - ArgumentException while reading specific XML)"
 
             name = "Specific XML - for Bug 2387";
-            expected = "DataSet Name=PKRoot Tables count=2 Table Name=Content Rows count=4 Items count=2 0  Items count=2 1 103 Items count=2 2 123 Items count=2 3 252 Table Name=Cont Rows count=3 Items count=3 1 103 0 Items count=3 2 123 0 Items count=3 3 252 -4";
-            xmlData = "<PKRoot><Content /><Content><ContentId>103</ContentId><Cont><ContentId>103</ContentId><ContentStatusId>0</ContentStatusId></Cont></Content><Content><ContentId>123</ContentId><Cont><ContentId>123</ContentId><ContentStatusId>0</ContentStatusId></Cont></Content><Content><ContentId>252</ContentId><Cont><ContentId>252</ContentId><ContentStatusId>-4</ContentStatusId></Cont></Content></PKRoot>";
+            expected =
+                "DataSet Name=PKRoot Tables count=2 Table Name=Content Rows count=4 Items count=2 0  Items count=2 1 103 Items count=2 2 123 Items count=2 3 252 Table Name=Cont Rows count=3 Items count=3 1 103 0 Items count=3 2 123 0 Items count=3 3 252 -4";
+            xmlData =
+                "<PKRoot><Content /><Content><ContentId>103</ContentId><Cont><ContentId>103</ContentId><ContentStatusId>0</ContentStatusId></Cont></Content><Content><ContentId>123</ContentId><Cont><ContentId>123</ContentId><ContentStatusId>0</ContentStatusId></Cont></Content><Content><ContentId>252</ContentId><Cont><ContentId>252</ContentId><ContentStatusId>-4</ContentStatusId></Cont></Content></PKRoot>";
             PrivateTestCase(name, expected, xmlData);
 
             #endregion
@@ -2589,7 +3040,10 @@ namespace System.Data.Tests
             return desc;
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void ReadXml_Strm6()
         {
             // TC1
@@ -2608,14 +3062,19 @@ namespace System.Data.Tests
             Assert.Equal(3, ds.Tables["c"].Rows.Count);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void ReadXmlSchema_2()
         {
             var ds = new DataSet();
             string xmlData = string.Empty;
             xmlData += "<?xml version=\"1.0\"?>";
-            xmlData += "<xs:schema id=\"SiteConfiguration\" targetNamespace=\"http://tempuri.org/PortalCfg.xsd\" xmlns:mstns=\"http://tempuri.org/PortalCfg.xsd\" xmlns=\"http://tempuri.org/PortalCfg.xsd\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\" attributeFormDefault=\"qualified\" elementFormDefault=\"qualified\">";
-            xmlData += "<xs:element name=\"SiteConfiguration\" msdata:IsDataSet=\"true\" msdata:EnforceConstraints=\"False\">";
+            xmlData +=
+                "<xs:schema id=\"SiteConfiguration\" targetNamespace=\"http://tempuri.org/PortalCfg.xsd\" xmlns:mstns=\"http://tempuri.org/PortalCfg.xsd\" xmlns=\"http://tempuri.org/PortalCfg.xsd\" xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" xmlns:msdata=\"urn:schemas-microsoft-com:xml-msdata\" attributeFormDefault=\"qualified\" elementFormDefault=\"qualified\">";
+            xmlData +=
+                "<xs:element name=\"SiteConfiguration\" msdata:IsDataSet=\"true\" msdata:EnforceConstraints=\"False\">";
             xmlData += "<xs:complexType>";
             xmlData += "<xs:choice maxOccurs=\"unbounded\">";
             xmlData += "<xs:element name=\"Tab\">";
@@ -2663,8 +3122,13 @@ namespace System.Data.Tests
             ds1.WriteXmlSchema(sw);
             string xml = sw.ToString();
 
-            Assert.True(xml.IndexOf(@"<xs:keyref name=""fk"" refer=""Constraint1"" " +
-                        @"msdata:ConstraintOnly=""true"">") != -1, "#1");
+            Assert.True(
+                xml.IndexOf(
+                    @"<xs:keyref name=""fk"" refer=""Constraint1"" "
+                        + @"msdata:ConstraintOnly=""true"">"
+                ) != -1,
+                "#1"
+            );
         }
 
         [Fact]
@@ -2684,10 +3148,14 @@ namespace System.Data.Tests
             ds1.WriteXmlSchema(sw);
             string xml = sw.ToString();
 
-
-            Assert.True(xml.IndexOf(@"<msdata:Relationship name=""rel"" msdata:parent=""Table1""" +
-                        @" msdata:child=""Table2"" msdata:parentkey=""col1"" " +
-                        @"msdata:childkey=""col1"" />") != -1, "#1");
+            Assert.True(
+                xml.IndexOf(
+                    @"<msdata:Relationship name=""rel"" msdata:parent=""Table1"""
+                        + @" msdata:child=""Table2"" msdata:parentkey=""col1"" "
+                        + @"msdata:childkey=""col1"" />"
+                ) != -1,
+                "#1"
+            );
         }
 
         [Fact]
@@ -2716,19 +3184,25 @@ namespace System.Data.Tests
             DataColumn col2_5 = table2.Columns.Add("col 5", typeof(int));
             DataColumn col2_6 = table2.Columns.Add("col 6", typeof(int));
 
-            ds1.Relations.Add("rel 1",
+            ds1.Relations.Add(
+                "rel 1",
                 new DataColumn[] { col1_1, col1_2 },
-                new DataColumn[] { col2_1, col2_2 });
-            ds1.Relations.Add("rel 2",
+                new DataColumn[] { col2_1, col2_2 }
+            );
+            ds1.Relations.Add(
+                "rel 2",
                 new DataColumn[] { col1_3, col1_4 },
                 new DataColumn[] { col2_3, col2_4 },
-                false);
+                false
+            );
 
             table1.Constraints.Add("pk 1", col1_7, true);
 
-            table2.Constraints.Add("fk 1",
+            table2.Constraints.Add(
+                "fk 1",
                 new DataColumn[] { col1_5, col1_6 },
-                new DataColumn[] { col2_5, col2_6 });
+                new DataColumn[] { col2_5, col2_6 }
+            );
 
             ms = new MemoryStream();
             ds1.WriteXmlSchema(ms);
@@ -2762,7 +3236,8 @@ namespace System.Data.Tests
         [Fact]
         public void RejectChanges()
         {
-            DataSet ds1, ds2 = new DataSet();
+            DataSet ds1,
+                ds2 = new DataSet();
             ds2.Tables.Add(DataProvider.CreateParentDataTable());
             ds1 = ds2.Copy();
 
@@ -2779,7 +3254,9 @@ namespace System.Data.Tests
         [Fact]
         public void Relations()
         {
-            DataTable dtChild1, dtChild2, dtParent;
+            DataTable dtChild1,
+                dtChild2,
+                dtParent;
             var ds = new DataSet();
             //Create tables
             dtChild1 = DataProvider.CreateChildDataTable();
@@ -2793,8 +3270,16 @@ namespace System.Data.Tests
 
             ds.Tables.Add(dtParent);
 
-            DataRelation drl = new DataRelation("Parent-Child", dtParent.Columns["ParentId"], dtChild1.Columns["ParentId"]);
-            DataRelation drl1 = new DataRelation("Parent-CHILD", dtParent.Columns["ParentId"], dtChild2.Columns["ParentId"]);
+            DataRelation drl = new DataRelation(
+                "Parent-Child",
+                dtParent.Columns["ParentId"],
+                dtChild1.Columns["ParentId"]
+            );
+            DataRelation drl1 = new DataRelation(
+                "Parent-CHILD",
+                dtParent.Columns["ParentId"],
+                dtChild2.Columns["ParentId"]
+            );
 
             // Checking Relations - default value
             //Check default
@@ -2831,7 +3316,11 @@ namespace System.Data.Tests
             dt2.PrimaryKey = new DataColumn[] { dt2.Columns[0], dt2.Columns[1] };
             var ds = new DataSet();
             ds.Tables.AddRange(new DataTable[] { dt1, dt2 });
-            DataRelation rel = new DataRelation("Rel", dt1.Columns["ParentId"], dt2.Columns["ParentId"]);
+            DataRelation rel = new DataRelation(
+                "Rel",
+                dt1.Columns["ParentId"],
+                dt2.Columns["ParentId"]
+            );
             ds.Relations.Add(rel);
 
             ds.Reset();
@@ -2858,6 +3347,7 @@ namespace System.Data.Tests
                 return ShouldSerializeRelations();
             }
         }
+
         [Fact]
         public void ShouldSerializeTables()
         {
@@ -2874,6 +3364,7 @@ namespace System.Data.Tests
                 return ShouldSerializeTables();
             }
         }
+
         [Fact]
         public void Tables()
         {
@@ -2923,7 +3414,10 @@ namespace System.Data.Tests
             Assert.Equal(dt4, ds.Tables[dt4.TableName]);
 
             // Checking get table by name with different case, ArgumentException
-            AssertExtensions.Throws<ArgumentException>(null, () => ds.Tables[dt4.TableName.ToLower()]);
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => ds.Tables[dt4.TableName.ToLower()]
+            );
         }
 
         [Fact]
@@ -2932,7 +3426,7 @@ namespace System.Data.Tests
             StringReader sr = null;
             StringWriter sw = null;
 
-            try  // For real
+            try // For real
             {
                 // ReadXml - DataSetOut
 
@@ -2991,7 +3485,9 @@ namespace System.Data.Tests
             DataSet ds = new DataSet();
             Assert.Equal(SchemaSerializationMode.IncludeSchema, ds.SchemaSerializationMode);
 
-            Assert.Throws<InvalidOperationException>(() => ds.SchemaSerializationMode = SchemaSerializationMode.ExcludeSchema);
+            Assert.Throws<InvalidOperationException>(() =>
+                ds.SchemaSerializationMode = SchemaSerializationMode.ExcludeSchema
+            );
         }
 
         ///<?xml version="1.0" encoding="utf-16"?>
@@ -3015,7 +3511,6 @@ namespace System.Data.Tests
         ///        </xs:complexType>
         ///    </xs:element>
         ///</xs:schema>
-
         [Fact]
         public void ParentDataTableSchema()
         {
@@ -3023,36 +3518,123 @@ namespace System.Data.Tests
             XmlNamespaceManager testedSchemaNamepaces;
             InitParentDataTableSchema(out testedSchema, out testedSchemaNamepaces);
 
-            CheckNode("DataSet name", "/xs:schema/xs:element[@name='NewDataSet']", 1, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "DataSet name",
+                "/xs:schema/xs:element[@name='NewDataSet']",
+                1,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("Parent datatable name", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element[@name='Parent']", 1, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "Parent datatable name",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element[@name='Parent']",
+                1,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("ParentId column - name", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@name='ParentId']", 1, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "ParentId column - name",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@name='ParentId']",
+                1,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("String1 column - name", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@name='String1']", 1, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "String1 column - name",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@name='String1']",
+                1,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("String2 column - name", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@name='String1']", 1, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "String2 column - name",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@name='String1']",
+                1,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("ParentDateTime column - name", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@name='ParentDateTime']", 1, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "ParentDateTime column - name",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@name='ParentDateTime']",
+                1,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("ParentDouble column - name", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@name='ParentDouble']", 1, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "ParentDouble column - name",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@name='ParentDouble']",
+                1,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("ParentBool column - name", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@name='ParentBool']", 1, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "ParentBool column - name",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@name='ParentBool']",
+                1,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("Int columns", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@type='xs:int']", 1, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "Int columns",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@type='xs:int']",
+                1,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("string columns", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@type='xs:string']", 2, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "string columns",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@type='xs:string']",
+                2,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("dateTime columns", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@type='xs:dateTime']", 1, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "dateTime columns",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@type='xs:dateTime']",
+                1,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("double columns", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@type='xs:double']", 1, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "double columns",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@type='xs:double']",
+                1,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("boolean columns", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@type='xs:boolean']", 1, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "boolean columns",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@type='xs:boolean']",
+                1,
+                testedSchema,
+                testedSchemaNamepaces
+            );
 
-            CheckNode("minOccurs columns", "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@minOccurs='0']", 6, testedSchema, testedSchemaNamepaces);
+            CheckNode(
+                "minOccurs columns",
+                "/xs:schema/xs:element/xs:complexType/xs:choice/xs:element/xs:complexType/xs:sequence/xs:element[@minOccurs='0']",
+                6,
+                testedSchema,
+                testedSchemaNamepaces
+            );
         }
 
-        private void InitParentDataTableSchema(out XmlDocument schemaDocInit, out XmlNamespaceManager namespaceManagerToInit)
+        private void InitParentDataTableSchema(
+            out XmlDocument schemaDocInit,
+            out XmlNamespaceManager namespaceManagerToInit
+        )
         {
             var ds = new DataSet();
             ds.Tables.Add(DataProvider.CreateParentDataTable());
@@ -3064,13 +3646,22 @@ namespace System.Data.Tests
             namespaceManagerToInit.AddNamespace("msdata", "urn:schemas-microsoft-com:xml-msdata");
         }
 
-        private void CheckNode(string description, string xPath, int expectedNodesCout, XmlDocument schemaDoc, XmlNamespaceManager nm)
+        private void CheckNode(
+            string description,
+            string xPath,
+            int expectedNodesCout,
+            XmlDocument schemaDoc,
+            XmlNamespaceManager nm
+        )
         {
             int actualNodeCount = schemaDoc.SelectNodes(xPath, nm).Count;
             Assert.Equal(expectedNodesCout, actualNodeCount);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void WriteXml_Stream()
         {
             {
@@ -3125,7 +3716,12 @@ namespace System.Data.Tests
                 dt.Rows.Add(new object[] { 0, "aa" });
 
                 //Add a relation between parent and child table.
-                ds.Relations.Add("ParentTable_ChildTable", ds.Tables["ParentTable"].Columns["ParentTable_Id"], ds.Tables["ChildTable"].Columns["ParentTable_Id"], true);
+                ds.Relations.Add(
+                    "ParentTable_ChildTable",
+                    ds.Tables["ParentTable"].Columns["ParentTable_Id"],
+                    ds.Tables["ChildTable"].Columns["ParentTable_Id"],
+                    true
+                );
                 ds.Relations["ParentTable_ChildTable"].Nested = true;
 
                 //Reomve the Parent_Child relation.
@@ -3196,8 +3792,9 @@ namespace System.Data.Tests
             //when Relation.Nested = false, and the schema is nested, create new relations on <table>_Id
             //columns.
             DataSet ds = new DataSet();
-            ds.ReadXmlSchema(new StringReader(
-                @"<?xml version=""1.0"" standalone=""yes""?>
+            ds.ReadXmlSchema(
+                new StringReader(
+                    @"<?xml version=""1.0"" standalone=""yes""?>
                 <xs:schema id=""dataset"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
                   <xs:element name=""dataset"" msdata:IsDataSet=""true"" msdata:Locale=""en-US"">
                     <xs:complexType>
@@ -3229,7 +3826,9 @@ namespace System.Data.Tests
                       <xs:field xpath=""col"" />
                     </xs:keyref>
                   </xs:element>
-                </xs:schema>"));
+                </xs:schema>"
+                )
+            );
             Assert.Equal(2, ds.Relations.Count);
             Assert.Equal(3, ds.Tables[0].Columns.Count);
             Assert.Equal(3, ds.Tables[1].Columns.Count);
@@ -3241,8 +3840,9 @@ namespace System.Data.Tests
         public void ReadXmlSchema_TableOrder()
         {
             DataSet ds = new DataSet();
-            ds.ReadXmlSchema(new StringReader(
-                @"<?xml version=""1.0"" standalone=""yes""?>
+            ds.ReadXmlSchema(
+                new StringReader(
+                    @"<?xml version=""1.0"" standalone=""yes""?>
                 <xs:schema id=""items"" xmlns="""" xmlns:xs=""http://www.w3.org/2001/XMLSchema"" xmlns:msdata=""urn:schemas-microsoft-com:xml-msdata"">
                   <xs:element name=""items"" msdata:IsDataSet=""true"" msdata:UseCurrentLocale=""true"">
                     <xs:complexType>
@@ -3285,7 +3885,9 @@ namespace System.Data.Tests
                       </xs:choice>
                     </xs:complexType>
                   </xs:element>
-                </xs:schema>"));
+                </xs:schema>"
+                )
+            );
             Assert.Equal("category", ds.Tables[0].TableName);
             Assert.Equal("childItemId", ds.Tables[1].TableName);
             Assert.Equal("item", ds.Tables[2].TableName);
@@ -3352,7 +3954,8 @@ namespace System.Data.Tests
             XmlTextWriter xw = new XmlTextWriter(sw);
             ds.WriteXml(xw);
             string dataset_xml = sw.ToString();
-            string child_xml = "<child><col1>p1</col1><col2>p2</col2><col3>p3</col3><col4>c1</col4></child>";
+            string child_xml =
+                "<child><col1>p1</col1><col2>p2</col2><col3>p3</col3><col4>c1</col4></child>";
             //the child table data must not be repeated.
             Assert.Equal(dataset_xml.IndexOf(child_xml), dataset_xml.LastIndexOf(child_xml));
         }
@@ -3447,6 +4050,7 @@ namespace System.Data.Tests
                 i++;
             }
         }
+
         [Fact]
         public void LoadTest2()
         {
@@ -3498,6 +4102,7 @@ namespace System.Data.Tests
                 i++;
             }
         }
+
         private void AssertDataTableValues(DataTable dt)
         {
             Assert.Equal("data1", dt.Rows[0]["_ID"]);
@@ -3515,7 +4120,11 @@ namespace System.Data.Tests
             Assert.Equal("data8", dt.Rows[0]["&ID"]);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported), nameof(PlatformDetection.IsNotInvariantGlobalization))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported),
+            nameof(PlatformDetection.IsNotInvariantGlobalization)
+        )]
         public void Bug537229_BinFormatSerializer_Test()
         {
             DataSet ds = new DataSet();

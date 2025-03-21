@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
-
 using Xunit;
 
 namespace System.Net.Primitives.Functional.Tests
@@ -22,8 +21,44 @@ namespace System.Net.Primitives.Functional.Tests
         private const string IpV6AddressString = "fe80::200:f8ff:fe21:67cf";
 
         private static readonly byte[] IpV4AddressBytes = { 0x01, 0x02, 0x03, 0x04 };
-        private static readonly byte[] IpV6AddressBytes1 = { 0x10, 0x20, 0x30, 0x40, 0x50, 0x60, 0x70, 0x80, 0x90, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 };
-        private static readonly byte[] IpV6AddressBytes2 = { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16 };
+        private static readonly byte[] IpV6AddressBytes1 =
+        {
+            0x10,
+            0x20,
+            0x30,
+            0x40,
+            0x50,
+            0x60,
+            0x70,
+            0x80,
+            0x90,
+            0x10,
+            0x11,
+            0x12,
+            0x13,
+            0x14,
+            0x15,
+            0x16,
+        };
+        private static readonly byte[] IpV6AddressBytes2 =
+        {
+            0x01,
+            0x02,
+            0x03,
+            0x04,
+            0x05,
+            0x06,
+            0x07,
+            0x08,
+            0x09,
+            0x10,
+            0x11,
+            0x12,
+            0x13,
+            0x14,
+            0x15,
+            0x16,
+        };
 
         private static IPAddress IPV4Address1()
         {
@@ -54,7 +89,9 @@ namespace System.Net.Primitives.Functional.Tests
         [InlineData(0x00FF00FF, new byte[] { 0, 0xFF, 0, 0xFF })]
         public static void Ctor_Long_Success(long address, byte[] expectedBytes)
         {
-            IPAddress ip = new IPAddress((uint)IPAddress.HostToNetworkOrder(unchecked((int)address)));
+            IPAddress ip = new IPAddress(
+                (uint)IPAddress.HostToNetworkOrder(unchecked((int)address))
+            );
             Assert.Equal(expectedBytes, ip.GetAddressBytes());
             Assert.Equal(AddressFamily.InterNetwork, ip.AddressFamily);
         }
@@ -64,7 +101,10 @@ namespace System.Net.Primitives.Functional.Tests
         [InlineData(MaxAddress + 1)]
         public static void Ctor_Long_Invalid(long address)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("newAddress", () => new IPAddress(address));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "newAddress",
+                () => new IPAddress(address)
+            );
         }
 
         [Theory]
@@ -80,14 +120,17 @@ namespace System.Net.Primitives.Functional.Tests
         {
             new object[] { new byte[] { 0x8f, 0x18, 0x14, 0x24 }, AddressFamily.InterNetwork },
             new object[] { IpV6AddressBytes1, AddressFamily.InterNetworkV6 },
-            new object[] { IpV6AddressBytes2, AddressFamily.InterNetworkV6 }
+            new object[] { IpV6AddressBytes2, AddressFamily.InterNetworkV6 },
         };
 
         [Fact]
         public static void Ctor_Bytes_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("address", () => new IPAddress(null));
-            AssertExtensions.Throws<ArgumentException>("address", () => new IPAddress(new byte[] { 0x01, 0x01, 0x02 }));
+            AssertExtensions.Throws<ArgumentException>(
+                "address",
+                () => new IPAddress(new byte[] { 0x01, 0x01, 0x02 })
+            );
         }
 
         [Theory]
@@ -115,12 +158,24 @@ namespace System.Net.Primitives.Functional.Tests
         [Fact]
         public static void Ctor_BytesScopeId_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("address", () => new IPAddress(null, 500));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "address",
+                () => new IPAddress(null, 500)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("address", () => new IPAddress(new byte[] { 0x01, 0x01, 0x02 }, 500));
+            AssertExtensions.Throws<ArgumentException>(
+                "address",
+                () => new IPAddress(new byte[] { 0x01, 0x01, 0x02 }, 500)
+            );
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("scopeid", () => new IPAddress(IpV6AddressBytes1, MinScopeId - 1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("scopeid", () => new IPAddress(IpV6AddressBytes1, MaxScopeId + 1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "scopeid",
+                () => new IPAddress(IpV6AddressBytes1, MinScopeId - 1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "scopeid",
+                () => new IPAddress(IpV6AddressBytes1, MaxScopeId + 1)
+            );
         }
 
         [Fact]
@@ -143,8 +198,14 @@ namespace System.Net.Primitives.Functional.Tests
             Assert.ThrowsAny<Exception>(() => ip.ScopeId);
 
             ip = IPV6Address1(); //IpV6
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => ip.ScopeId = MinScopeId - 1);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => ip.ScopeId = MaxScopeId + 1);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => ip.ScopeId = MinScopeId - 1
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => ip.ScopeId = MaxScopeId + 1
+            );
         }
 
         [Fact]
@@ -215,7 +276,10 @@ namespace System.Net.Primitives.Functional.Tests
         [Fact]
         public static void IsLooback_Get_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("address", () => IPAddress.IsLoopback(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "address",
+                () => IPAddress.IsLoopback(null)
+            );
         }
 
         [Fact]
@@ -295,29 +359,30 @@ namespace System.Net.Primitives.Functional.Tests
         {
             Assert.Equal(ip.GetHashCode(), ip.GetHashCode());
 
-            var clonedIp = ip.AddressFamily == AddressFamily.InterNetworkV6 ?
-                new IPAddress(ip.GetAddressBytes(), ip.ScopeId) :
-                new IPAddress(ip.GetAddressBytes());
+            var clonedIp =
+                ip.AddressFamily == AddressFamily.InterNetworkV6
+                    ? new IPAddress(ip.GetAddressBytes(), ip.ScopeId)
+                    : new IPAddress(ip.GetAddressBytes());
 
             Assert.Equal(ip.GetHashCode(), clonedIp.GetHashCode());
         }
 
         public static IEnumerable<object[]> GetValidIPAddresses()
         {
-            return IPAddressParsingFormatting.ValidIpv4Addresses
-                .Concat(IPAddressParsingFormatting.ValidIpv6Addresses)
-                .Select(array => new object[] {IPAddress.Parse((string)array[0])});
+            return IPAddressParsingFormatting
+                .ValidIpv4Addresses.Concat(IPAddressParsingFormatting.ValidIpv6Addresses)
+                .Select(array => new object[] { IPAddress.Parse((string)array[0]) });
         }
 
         public static readonly object[][] GeneratedIPAddresses =
         {
-            new object[] {IPAddress.Parse(IpV4AddressString1)},
-            new object[] {IPAddress.Parse(IpV6AddressString)},
-            new object[] {new IPAddress(MinAddress)},
-            new object[] {new IPAddress(MaxAddress)},
-            new object[] {new IPAddress(IpV4AddressBytes)},
-            new object[] {new IPAddress(IpV6AddressBytes1)},
-            new object[] {new IPAddress(IpV6AddressBytes1, MinScopeId)},
+            new object[] { IPAddress.Parse(IpV4AddressString1) },
+            new object[] { IPAddress.Parse(IpV6AddressString) },
+            new object[] { new IPAddress(MinAddress) },
+            new object[] { new IPAddress(MaxAddress) },
+            new object[] { new IPAddress(IpV4AddressBytes) },
+            new object[] { new IPAddress(IpV6AddressBytes1) },
+            new object[] { new IPAddress(IpV6AddressBytes1, MinScopeId) },
         };
 
 #pragma warning disable 618

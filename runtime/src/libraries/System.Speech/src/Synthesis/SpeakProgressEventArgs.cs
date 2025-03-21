@@ -6,7 +6,13 @@ namespace System.Speech.Synthesis
     public class SpeakProgressEventArgs : PromptEventArgs
     {
         #region Constructors
-        internal SpeakProgressEventArgs(Prompt prompt, TimeSpan audioPosition, int iWordPos, int cWordLen) : base(prompt)
+        internal SpeakProgressEventArgs(
+            Prompt prompt,
+            TimeSpan audioPosition,
+            int iWordPos,
+            int cWordLen
+        )
+            : base(prompt)
         {
             _audioPosition = audioPosition;
             _iWordPos = iWordPos;
@@ -17,39 +23,21 @@ namespace System.Speech.Synthesis
         #region public Properties
         public TimeSpan AudioPosition
         {
-            get
-            {
-                return _audioPosition;
-            }
+            get { return _audioPosition; }
         }
         public int CharacterPosition
         {
-            get
-            {
-                return _iWordPos;
-            }
+            get { return _iWordPos; }
         }
         public int CharacterCount
         {
-            get
-            {
-                return _cWordLen;
-            }
-            internal set
-            {
-                _cWordLen = value;
-            }
+            get { return _cWordLen; }
+            internal set { _cWordLen = value; }
         }
         public string Text
         {
-            get
-            {
-                return _word;
-            }
-            internal set
-            {
-                _word = value;
-            }
+            get { return _word; }
+            internal set { _word = value; }
         }
 
         #endregion

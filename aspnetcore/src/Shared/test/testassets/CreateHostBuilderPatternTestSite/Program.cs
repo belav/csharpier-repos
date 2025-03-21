@@ -13,6 +13,5 @@ public class Program
     }
 
     // Do not change the signature of this method. It's used for tests.
-    private static HostBuilder CreateHostBuilder(string[] args) =>
-        new HostBuilder();
+    private static HostBuilder CreateHostBuilder(string[] args) => new HostBuilder();
 }

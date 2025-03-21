@@ -4,7 +4,7 @@ public class InterfaceSelfMappingBug
 {
     public interface IFoo
     {
-        int Value { get; set; } 
+        int Value { get; set; }
     }
 
     public class Bar : IFoo
@@ -27,14 +27,8 @@ public class InterfaceSelfMappingBug
         });
         config.AssertConfigurationIsValid();
 
-        IFoo bar = new Bar
-        {
-            Value = 5
-        };
-        IFoo baz = new Baz
-        {
-            Value = 10
-        };
+        IFoo bar = new Bar { Value = 5 };
+        IFoo baz = new Baz { Value = 10 };
 
         config.CreateMapper().Map(bar, baz);
 

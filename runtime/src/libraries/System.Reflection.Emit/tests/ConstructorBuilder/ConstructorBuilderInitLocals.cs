@@ -13,7 +13,13 @@ namespace System.Reflection.Emit.Tests
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             Type[] parameterTypes = new Type[] { typeof(int), typeof(double) };
 
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, parameterTypes, null, null);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                parameterTypes,
+                null,
+                null
+            );
             Assert.True(constructor.InitLocals);
 
             constructor.InitLocals = false;

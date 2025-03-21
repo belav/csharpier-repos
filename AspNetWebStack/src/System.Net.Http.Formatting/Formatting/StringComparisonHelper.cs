@@ -21,14 +21,16 @@ namespace System.Net.Http.Formatting
         /// </returns>
         public static bool IsDefined(StringComparison value)
         {
-            return value == StringComparison.CurrentCulture ||
-                   value == StringComparison.CurrentCultureIgnoreCase ||
+            return value == StringComparison.CurrentCulture
+                || value == StringComparison.CurrentCultureIgnoreCase
+                ||
 #if !NETSTANDARD1_3
-                   value == StringComparison.InvariantCulture ||
-                   value == StringComparison.InvariantCultureIgnoreCase ||
+                value == StringComparison.InvariantCulture
+                || value == StringComparison.InvariantCultureIgnoreCase
+                ||
 #endif
-                   value == StringComparison.Ordinal ||
-                   value == StringComparison.OrdinalIgnoreCase;
+                value == StringComparison.Ordinal
+                || value == StringComparison.OrdinalIgnoreCase;
         }
 
         /// <summary>
@@ -41,7 +43,11 @@ namespace System.Net.Http.Formatting
         {
             if (!IsDefined(value))
             {
-                throw Error.InvalidEnumArgument(parameterName, (int)value, typeof(StringComparison));
+                throw Error.InvalidEnumArgument(
+                    parameterName,
+                    (int)value,
+                    typeof(StringComparison)
+                );
             }
         }
     }

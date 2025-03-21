@@ -4,18 +4,22 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
-[assembly: ApiConventionType(typeof(DiagnosticsAreReturned_IfMethodWithConvention_ReturnsUndocumentedStatusCodeConvention))]
+[assembly: ApiConventionType(
+    typeof(DiagnosticsAreReturned_IfMethodWithConvention_ReturnsUndocumentedStatusCodeConvention)
+)]
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 {
     [ApiController]
-    public class DiagnosticsAreReturned_IfMethodWithConvention_ReturnsUndocumentedStatusCode : ControllerBase
+    public class DiagnosticsAreReturned_IfMethodWithConvention_ReturnsUndocumentedStatusCode
+        : ControllerBase
     {
         public IActionResult Get(int id)
         {
             if (id < 0)
             {
-                return /*MM*/BadRequest();
+                return /*MM*/
+                BadRequest();
             }
 
             if (id == 0)

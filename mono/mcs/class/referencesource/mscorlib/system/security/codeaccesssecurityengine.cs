@@ -1,23 +1,24 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
-namespace System.Security {
+namespace System.Security
+{
     using System;
-    using System.Threading;
-    using System.Security.Util;
     using System.Collections;
-    using System.Runtime.CompilerServices;
-    using System.Security.Permissions;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Security.Policy;
-    using System.Runtime.Versioning;
     using System.Diagnostics.Contracts;
+    using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Versioning;
+    using System.Security.Permissions;
+    using System.Security.Policy;
+    using System.Security.Util;
+    using System.Threading;
 
     // Used in DemandInternal, to remember the result of previous demands
     // KEEP IN SYNC WITH DEFINITIONS IN SECURITYPOLICY.H
@@ -25,72 +26,74 @@ namespace System.Security {
     internal enum PermissionType
     {
         // special flags
-        SecurityUnmngdCodeAccess    = 0,
-        SecuritySkipVerification    = 1,
-        ReflectionTypeInfo          = 2,
-        SecurityAssert              = 3,
-        ReflectionMemberAccess      = 4,
-        SecuritySerialization       = 5,
-        ReflectionRestrictedMemberAccess    = 6,
-        FullTrust                   = 7,
-        SecurityBindingRedirects    = 8,
+        SecurityUnmngdCodeAccess = 0,
+        SecuritySkipVerification = 1,
+        ReflectionTypeInfo = 2,
+        SecurityAssert = 3,
+        ReflectionMemberAccess = 4,
+        SecuritySerialization = 5,
+        ReflectionRestrictedMemberAccess = 6,
+        FullTrust = 7,
+        SecurityBindingRedirects = 8,
 
         // special permissions
-        UIPermission                = 9,
-        EnvironmentPermission       = 10,
-        FileDialogPermission        = 11,
-        FileIOPermission            = 12,
-        ReflectionPermission        = 13,
-        SecurityPermission          = 14,
+        UIPermission = 9,
+        EnvironmentPermission = 10,
+        FileDialogPermission = 11,
+        FileIOPermission = 12,
+        ReflectionPermission = 13,
+        SecurityPermission = 14,
 
         // additional special flags
-        SecurityControlEvidence     = 16,
-        SecurityControlPrincipal    = 17
+        SecurityControlEvidence = 16,
+        SecurityControlPrincipal = 17,
     }
 
     internal static class CodeAccessSecurityEngine
     {
+        internal static SecurityPermission AssertPermission;
+        internal static PermissionToken AssertPermissionToken;
 
-        internal static SecurityPermission AssertPermission; 
-        internal static PermissionToken AssertPermissionToken; 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern void SpecialDemand(PermissionType whatPermission, ref StackCrawlMark stackMark);
+        internal static extern void SpecialDemand(
+            PermissionType whatPermission,
+            ref StackCrawlMark stackMark
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
-        [System.Diagnostics.Conditional( "_DEBUG" )]
+        [System.Security.SecurityCritical] // auto-generated
+        [System.Diagnostics.Conditional("_DEBUG")]
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Process, ResourceScope.Process)]
-        private static void DEBUG_OUT( String str )
+        private static void DEBUG_OUT(String str)
         {
-#if _DEBUG        
+#if _DEBUG
             if (debug)
             {
 #if !FEATURE_CORECLR
                 if (to_file)
                 {
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    sb.Append( str );
-                    sb.Append ((char)13) ;
-                    sb.Append ((char)10) ;
-                    PolicyManager.DebugOut( file, sb.ToString() );
+                    sb.Append(str);
+                    sb.Append((char)13);
+                    sb.Append((char)10);
+                    PolicyManager.DebugOut(file, sb.ToString());
                 }
                 else
-#endif                    
-                    Console.WriteLine( str );
-             }
-#endif             
+#endif
+                    Console.WriteLine(str);
+            }
+#endif
         }
-        
-#if _DEBUG 
+
+#if _DEBUG
         private static bool debug = false;
 #if !FEATURE_CORECLR
         private static readonly bool to_file = false;
 #endif
         private const String file = "d:\\foo\\debug.txt";
-#endif  
+#endif
 
         // static default constructor. This will be called before any of the static members are accessed.
         static CodeAccessSecurityEngine()
@@ -101,9 +104,17 @@ namespace System.Security {
             AssertPermissionToken = PermissionToken.GetToken(AssertPermission);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
 #pragma warning disable 618
-        private static void ThrowSecurityException(RuntimeAssembly asm, PermissionSet granted, PermissionSet refused, RuntimeMethodHandleInternal rmh, SecurityAction action, Object demand, IPermission permThatFailed)
+        private static void ThrowSecurityException(
+            RuntimeAssembly asm,
+            PermissionSet granted,
+            PermissionSet refused,
+            RuntimeMethodHandleInternal rmh,
+            SecurityAction action,
+            Object demand,
+            IPermission permThatFailed
+        )
 #pragma warning restore 618
         {
             AssemblyName asmName = null;
@@ -115,38 +126,81 @@ namespace System.Security {
                 PermissionSet.s_fullTrust.Assert();
                 asmName = asm.GetName();
 #if FEATURE_CAS_POLICY
-                if(asm != Assembly.GetExecutingAssembly()) // this condition is to avoid having to marshal mscorlib's evidence (which is always in teh default domain) to the current domain
+                if (asm != Assembly.GetExecutingAssembly()) // this condition is to avoid having to marshal mscorlib's evidence (which is always in teh default domain) to the current domain
                     asmEvidence = asm.Evidence;
 #endif // FEATURE_CAS_POLICY
             }
-            throw SecurityException.MakeSecurityException(asmName, asmEvidence, granted, refused, rmh, action, demand, permThatFailed);
+            throw SecurityException.MakeSecurityException(
+                asmName,
+                asmEvidence,
+                granted,
+                refused,
+                rmh,
+                action,
+                demand,
+                permThatFailed
+            );
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
 #pragma warning disable 618
-        private static void ThrowSecurityException(Object assemblyOrString, PermissionSet granted, PermissionSet refused, RuntimeMethodHandleInternal rmh, SecurityAction action, Object demand, IPermission permThatFailed)
+        private static void ThrowSecurityException(
+            Object assemblyOrString,
+            PermissionSet granted,
+            PermissionSet refused,
+            RuntimeMethodHandleInternal rmh,
+            SecurityAction action,
+            Object demand,
+            IPermission permThatFailed
+        )
 #pragma warning restore 618
         {
-            Contract.Assert((assemblyOrString == null || assemblyOrString is RuntimeAssembly || assemblyOrString is String), "Must pass in an Assembly object or String object here");
-            
+            Contract.Assert(
+                (
+                    assemblyOrString == null
+                    || assemblyOrString is RuntimeAssembly
+                    || assemblyOrString is String
+                ),
+                "Must pass in an Assembly object or String object here"
+            );
+
             if (assemblyOrString == null || assemblyOrString is RuntimeAssembly)
-                ThrowSecurityException((RuntimeAssembly)assemblyOrString, granted, refused, rmh, action, demand, permThatFailed);
+                ThrowSecurityException(
+                    (RuntimeAssembly)assemblyOrString,
+                    granted,
+                    refused,
+                    rmh,
+                    action,
+                    demand,
+                    permThatFailed
+                );
             else
             {
                 AssemblyName asmName = new AssemblyName((String)assemblyOrString);
-                throw SecurityException.MakeSecurityException(asmName, null, granted, refused, rmh, action, demand, permThatFailed);
+                throw SecurityException.MakeSecurityException(
+                    asmName,
+                    null,
+                    granted,
+                    refused,
+                    rmh,
+                    action,
+                    demand,
+                    permThatFailed
+                );
             }
         }
 
 #if FEATURE_COMPRESSEDSTACK
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static void CheckSetHelper(CompressedStack cs,
-                                           PermissionSet grants,
-                                           PermissionSet refused,
-                                           PermissionSet demands,
-                                           RuntimeMethodHandleInternal rmh,
-                                           RuntimeAssembly asm,
-                                           SecurityAction action)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static void CheckSetHelper(
+            CompressedStack cs,
+            PermissionSet grants,
+            PermissionSet refused,
+            PermissionSet demands,
+            RuntimeMethodHandleInternal rmh,
+            RuntimeAssembly asm,
+            SecurityAction action
+        )
         {
             if (cs != null)
                 cs.CheckSetDemand(demands, rmh);
@@ -154,41 +208,46 @@ namespace System.Security {
                 CheckSetHelper(grants, refused, demands, rmh, (Object)asm, action, true);
         }
 #else // FEATURE_COMPRESSEDSTACK
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
 #pragma warning disable 618
-        internal static void CheckSetHelper(Object notUsed,
+        internal static void CheckSetHelper(
+            Object notUsed,
 #pragma warning restore 618
-                                           PermissionSet grants,
-                                           PermissionSet refused,
-                                           PermissionSet demands,
-                                           RuntimeMethodHandleInternal rmh,
-                                           RuntimeAssembly asm,
-                                           SecurityAction action)
+            PermissionSet grants,
+            PermissionSet refused,
+            PermissionSet demands,
+            RuntimeMethodHandleInternal rmh,
+            RuntimeAssembly asm,
+            SecurityAction action
+        )
         {
             // To reduce the amount of ifdef-code-churn, a dummy arg is used for the first parameter - instead of a CompressedStack object,
             // we use a System.Object that should always be null. If we tried to change the signature of the function, there will need to be
             // corresponding changes in VM (metasig.h, mscorlib.h, securitystackwalk.cpp, number of elements in the arg array, etc.)
-            Contract.Assert(notUsed == null, "Should not reach here with a non-null first arg which is the CompressedStack");
+            Contract.Assert(
+                notUsed == null,
+                "Should not reach here with a non-null first arg which is the CompressedStack"
+            );
 
             CheckSetHelper(grants, refused, demands, rmh, (Object)asm, action, true);
         }
-
 #endif // FEATURE_COMPRESSEDSTACK
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
 #pragma warning disable 618
-        internal static bool CheckSetHelper(PermissionSet grants,
+        internal static bool CheckSetHelper(
+            PermissionSet grants,
 #pragma warning restore 618
-                                           PermissionSet refused,
-                                           PermissionSet demands,
-                                           RuntimeMethodHandleInternal rmh,
-                                           Object assemblyOrString,
-                                           SecurityAction action,
-                                           bool throwException)
+            PermissionSet refused,
+            PermissionSet demands,
+            RuntimeMethodHandleInternal rmh,
+            Object assemblyOrString,
+            SecurityAction action,
+            bool throwException
+        )
         {
-
             Contract.Assert(demands != null, "Should not reach here with a null demand set");
 #if _DEBUG && FEATURE_CAS_POLICY
             if (debug)
@@ -198,7 +257,7 @@ namespace System.Security {
                 DEBUG_OUT("Refused: ");
                 DEBUG_OUT(refused != null ? refused.ToXml().ToString() : "<null>");
                 DEBUG_OUT("Demanded: ");
-                DEBUG_OUT(demands!=null ? demands.ToXml().ToString() : "<null>");
+                DEBUG_OUT(demands != null ? demands.ToXml().ToString() : "<null>");
             }
 #endif // _DEBUG && FEATURE_CAS_POLICY
 
@@ -212,12 +271,19 @@ namespace System.Security {
 
             try
             {
-
                 // Check grant set
                 if (!demands.CheckDemand(grants, out permThatFailed))
                 {
                     if (throwException)
-                        ThrowSecurityException(assemblyOrString, grants, refused, rmh, action, demands, permThatFailed);
+                        ThrowSecurityException(
+                            assemblyOrString,
+                            grants,
+                            refused,
+                            rmh,
+                            action,
+                            demands,
+                            permThatFailed
+                        );
                     else
                         return false;
                 }
@@ -226,7 +292,15 @@ namespace System.Security {
                 if (!demands.CheckDeny(refused, out permThatFailed))
                 {
                     if (throwException)
-                        ThrowSecurityException(assemblyOrString, grants, refused, rmh, action, demands, permThatFailed);
+                        ThrowSecurityException(
+                            assemblyOrString,
+                            grants,
+                            refused,
+                            rmh,
+                            action,
+                            demands,
+                            permThatFailed
+                        );
                     else
                         return false;
                 }
@@ -241,7 +315,15 @@ namespace System.Security {
                 // a permission was unable to properly handle what we asked of it.
                 // We will define this to mean that the demand failed.
                 if (throwException)
-                    ThrowSecurityException(assemblyOrString, grants, refused, rmh, action, demands, permThatFailed);
+                    ThrowSecurityException(
+                        assemblyOrString,
+                        grants,
+                        refused,
+                        rmh,
+                        action,
+                        demands,
+                        permThatFailed
+                    );
                 else
                     return false;
             }
@@ -252,59 +334,79 @@ namespace System.Security {
             }
             return true;
         }
+
 #if FEATURE_COMPRESSEDSTACK
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static void CheckHelper(CompressedStack cs,
-                                        PermissionSet grantedSet,
-                                        PermissionSet refusedSet,
-                                        CodeAccessPermission demand, 
-                                        PermissionToken permToken,
-                                        RuntimeMethodHandleInternal rmh,
-                                        RuntimeAssembly asm,
-                                        SecurityAction action)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static void CheckHelper(
+            CompressedStack cs,
+            PermissionSet grantedSet,
+            PermissionSet refusedSet,
+            CodeAccessPermission demand,
+            PermissionToken permToken,
+            RuntimeMethodHandleInternal rmh,
+            RuntimeAssembly asm,
+            SecurityAction action
+        )
         {
             if (cs != null)
                 cs.CheckDemand(demand, permToken, rmh);
             else
-                CheckHelper(grantedSet, refusedSet, demand, permToken, rmh, (Object)asm, action, true);
+                CheckHelper(
+                    grantedSet,
+                    refusedSet,
+                    demand,
+                    permToken,
+                    rmh,
+                    (Object)asm,
+                    action,
+                    true
+                );
         }
 #else // FEATURE_COMPRESSEDSTACK
-        #if FEATURE_CORECLR
+#if FEATURE_CORECLR
         [System.Security.SecurityCritical] // auto-generated
-        #endif
+#endif
 #pragma warning disable 618
-        internal static void CheckHelper(Object notUsed,
+        internal static void CheckHelper(
+            Object notUsed,
 #pragma warning restore 618
-                                        PermissionSet grantedSet,
-                                        PermissionSet refusedSet,
-                                        CodeAccessPermission demand, 
-                                        PermissionToken permToken,
-                                        RuntimeMethodHandleInternal rmh,
-                                        RuntimeAssembly asm,
-                                        SecurityAction action)
+            PermissionSet grantedSet,
+            PermissionSet refusedSet,
+            CodeAccessPermission demand,
+            PermissionToken permToken,
+            RuntimeMethodHandleInternal rmh,
+            RuntimeAssembly asm,
+            SecurityAction action
+        )
         {
             // To reduce the amount of ifdef-code-churn, a dummy arg is used for the first parameter - instead of a CompressedStack object,
             // we use a System.Object that should always be null. If we tried to change the signature of the function, there will need to be
             // corresponding changes in VM (metasig.h, mscorlib.h, securitystackwalk.cpp, number of elements in the arg array, etc.)
-            Contract.Assert(notUsed == null, "Should not reach here with a non-null first arg which is the CompressedStack");
+            Contract.Assert(
+                notUsed == null,
+                "Should not reach here with a non-null first arg which is the CompressedStack"
+            );
             CheckHelper(grantedSet, refusedSet, demand, permToken, rmh, (Object)asm, action, true);
         }
 #endif // FEATURE_COMPRESSEDSTACK
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
 #pragma warning disable 618
-        internal static bool CheckHelper(PermissionSet grantedSet,
+        internal static bool CheckHelper(
+            PermissionSet grantedSet,
 #pragma warning restore 618
-                                        PermissionSet refusedSet,
-                                        CodeAccessPermission demand, 
-                                        PermissionToken permToken,
-                                        RuntimeMethodHandleInternal rmh,
-                                        Object assemblyOrString,
-                                        SecurityAction action,
-                                        bool throwException)
+            PermissionSet refusedSet,
+            CodeAccessPermission demand,
+            PermissionToken permToken,
+            RuntimeMethodHandleInternal rmh,
+            Object assemblyOrString,
+            SecurityAction action,
+            bool throwException
+        )
         {
             // We should never get here with a null demand
             Contract.Assert(demand != null, "Should not reach here with a null demand");
-            
+
 #if _DEBUG && FEATURE_CAS_POLICY
             if (debug)
             {
@@ -334,28 +436,43 @@ namespace System.Security {
                 if (grantedSet == null)
                 {
                     if (throwException)
-                        ThrowSecurityException(assemblyOrString, grantedSet, refusedSet, rmh, action, demand, demand);
+                        ThrowSecurityException(
+                            assemblyOrString,
+                            grantedSet,
+                            refusedSet,
+                            rmh,
+                            action,
+                            demand,
+                            demand
+                        );
                     else
                         return false;
                 }
-                
                 else if (!grantedSet.IsUnrestricted())
                 {
                     // If we aren't unrestricted, there is a refused set, or our permission is not of the unrestricted
                     // variety, we need to do the proper callback.
 
-                    Contract.Assert(demand != null,"demand != null");
+                    Contract.Assert(demand != null, "demand != null");
 
                     // Find the permission of matching type in the permission set.
 
-                    CodeAccessPermission grantedPerm = 
-                                (CodeAccessPermission)grantedSet.GetPermission(permToken);
+                    CodeAccessPermission grantedPerm = (CodeAccessPermission)
+                        grantedSet.GetPermission(permToken);
 
                     // Make sure the demand has been granted
-                    if (!demand.CheckDemand( grantedPerm ))
+                    if (!demand.CheckDemand(grantedPerm))
                     {
                         if (throwException)
-                            ThrowSecurityException(assemblyOrString, grantedSet, refusedSet, rmh, action, demand, demand);
+                            ThrowSecurityException(
+                                assemblyOrString,
+                                grantedSet,
+                                refusedSet,
+                                rmh,
+                                action,
+                                demand,
+                                demand
+                            );
                         else
                             return false;
                     }
@@ -365,28 +482,43 @@ namespace System.Security {
 
                 if (refusedSet != null)
                 {
-                    CodeAccessPermission refusedPerm = 
-                        (CodeAccessPermission)refusedSet.GetPermission(permToken);
+                    CodeAccessPermission refusedPerm = (CodeAccessPermission)
+                        refusedSet.GetPermission(permToken);
                     if (refusedPerm != null)
                     {
                         if (!refusedPerm.CheckDeny(demand))
                         {
-        #if _DEBUG
+#if _DEBUG
                             if (debug)
-                                DEBUG_OUT( "Permission found in refused set" );
-        #endif
-                                if (throwException)
-                                    ThrowSecurityException(assemblyOrString, grantedSet, refusedSet, rmh, action, demand, demand);
-                                else
-                                    return false;
-
+                                DEBUG_OUT("Permission found in refused set");
+#endif
+                            if (throwException)
+                                ThrowSecurityException(
+                                    assemblyOrString,
+                                    grantedSet,
+                                    refusedSet,
+                                    rmh,
+                                    action,
+                                    demand,
+                                    demand
+                                );
+                            else
+                                return false;
                         }
                     }
 
                     if (refusedSet.IsUnrestricted())
                     {
                         if (throwException)
-                            ThrowSecurityException(assemblyOrString, grantedSet, refusedSet, rmh, action, demand, demand);
+                            ThrowSecurityException(
+                                assemblyOrString,
+                                grantedSet,
+                                refusedSet,
+                                rmh,
+                                action,
+                                demand,
+                                demand
+                            );
                         else
                             return false;
                     }
@@ -402,7 +534,15 @@ namespace System.Security {
                 // a permission was unable to properly handle what we asked of it.
                 // We will define this to mean that the demand failed.
                 if (throwException)
-                    ThrowSecurityException(assemblyOrString, grantedSet, refusedSet, rmh, action, demand, demand);
+                    ThrowSecurityException(
+                        assemblyOrString,
+                        grantedSet,
+                        refusedSet,
+                        rmh,
+                        action,
+                        demand,
+                        demand
+                    );
                 else
                     return false;
             }
@@ -412,7 +552,7 @@ namespace System.Security {
                     SecurityManager._SetThreadSecurity(true);
             }
 
-            DEBUG_OUT( "Check passed" );
+            DEBUG_OUT("Check passed");
             return true;
         }
 
@@ -423,7 +563,7 @@ namespace System.Security {
         /// <remarks>
         ///     Managed half of SecurityStackWalk::DemandGrantSet.
         /// </remarks>
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         private static void CheckGrantSetHelper(PermissionSet grantSet)
         {
             Contract.Assert(grantSet != null, "Missing grant set");
@@ -437,8 +577,11 @@ namespace System.Security {
         /// </summary>
         /// <param name="permission">compatibility permission to check</param>
         /// <param name="targetGrant">grant set of the reflection target</param>
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static void ReflectionTargetDemandHelper(PermissionType permission, PermissionSet targetGrant)
+        [System.Security.SecurityCritical] // auto-generated
+        internal static void ReflectionTargetDemandHelper(
+            PermissionType permission,
+            PermissionSet targetGrant
+        )
         {
             ReflectionTargetDemandHelper((int)permission, targetGrant);
         }
@@ -453,7 +596,7 @@ namespace System.Security {
         /// </remarks>
         /// <param name="permission">compatibility permission to check (See PermissionType)</param>
         /// <param name="targetGrant">grant set of the reflection target</param>
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
         private static void ReflectionTargetDemandHelper(int permission, PermissionSet targetGrant)
         {
@@ -474,12 +617,18 @@ namespace System.Security {
         /// <param name="permission">compatibility permission to check (See PermissionType)</param>
         /// <param name="targetGrant">grant set of the reflection target</param>
         /// <param name="accessContext">access context to do the demand against</param>
-        [System.Security.SecurityCritical]  // auto-generated
-        private static void ReflectionTargetDemandHelper(int permission,
-                                                         PermissionSet targetGrant,
-                                                         Resolver accessContext)
+        [System.Security.SecurityCritical] // auto-generated
+        private static void ReflectionTargetDemandHelper(
+            int permission,
+            PermissionSet targetGrant,
+            Resolver accessContext
+        )
         {
-            ReflectionTargetDemandHelper(permission, targetGrant, accessContext.GetSecurityContext());
+            ReflectionTargetDemandHelper(
+                permission,
+                targetGrant,
+                accessContext.GetSecurityContext()
+            );
         }
 
         /// <summary>
@@ -491,10 +640,12 @@ namespace System.Security {
         /// <param name="permission">compatibility permission to check (See PermissionType)</param>
         /// <param name="targetGrant">grant set of the reflection target</param>
         /// <param name="securityContext">compressed stack to do the demand against</param>
-        [System.Security.SecurityCritical]  // auto-generated
-        private static void ReflectionTargetDemandHelper(int permission,
-                                                         PermissionSet targetGrant,
-                                                         CompressedStack securityContext)
+        [System.Security.SecurityCritical] // auto-generated
+        private static void ReflectionTargetDemandHelper(
+            int permission,
+            PermissionSet targetGrant,
+            CompressedStack securityContext
+        )
         {
             Contract.Assert(securityContext != null, "securityContext != null");
 
@@ -508,182 +659,235 @@ namespace System.Security {
             else
             {
                 demandSet = targetGrant.CopyWithNoIdentityPermissions();
-                demandSet.AddPermission(new ReflectionPermission(ReflectionPermissionFlag.RestrictedMemberAccess));
+                demandSet.AddPermission(
+                    new ReflectionPermission(ReflectionPermissionFlag.RestrictedMemberAccess)
+                );
             }
 
             securityContext.DemandFlagsOrGrantSet((1 << (int)permission), demandSet);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static void GetZoneAndOriginHelper( CompressedStack cs, PermissionSet grantSet, PermissionSet refusedSet, ArrayList zoneList, ArrayList originList )
+        [System.Security.SecurityCritical] // auto-generated
+        internal static void GetZoneAndOriginHelper(
+            CompressedStack cs,
+            PermissionSet grantSet,
+            PermissionSet refusedSet,
+            ArrayList zoneList,
+            ArrayList originList
+        )
         {
             if (cs != null)
-                cs.GetZoneAndOrigin(zoneList, originList, PermissionToken.GetToken(typeof(ZoneIdentityPermission)), PermissionToken.GetToken(typeof(UrlIdentityPermission)));
+                cs.GetZoneAndOrigin(
+                    zoneList,
+                    originList,
+                    PermissionToken.GetToken(typeof(ZoneIdentityPermission)),
+                    PermissionToken.GetToken(typeof(UrlIdentityPermission))
+                );
             else
-        {
-            ZoneIdentityPermission zone = (ZoneIdentityPermission)grantSet.GetPermission( typeof( ZoneIdentityPermission ) );
-            UrlIdentityPermission url = (UrlIdentityPermission)grantSet.GetPermission( typeof( UrlIdentityPermission ) );
+            {
+                ZoneIdentityPermission zone = (ZoneIdentityPermission)
+                    grantSet.GetPermission(typeof(ZoneIdentityPermission));
+                UrlIdentityPermission url = (UrlIdentityPermission)
+                    grantSet.GetPermission(typeof(UrlIdentityPermission));
 
-            if (zone != null)
-                zoneList.Add( zone.SecurityZone );
+                if (zone != null)
+                    zoneList.Add(zone.SecurityZone);
 
-            if (url != null)
-                originList.Add( url.Url );
+                if (url != null)
+                    originList.Add(url.Url);
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static void GetZoneAndOrigin( ref StackCrawlMark mark, out ArrayList zone, out ArrayList origin )
+        [System.Security.SecurityCritical] // auto-generated
+        internal static void GetZoneAndOrigin(
+            ref StackCrawlMark mark,
+            out ArrayList zone,
+            out ArrayList origin
+        )
         {
             zone = new ArrayList();
             origin = new ArrayList();
 
-            GetZoneAndOriginInternal( zone, origin, ref mark);
+            GetZoneAndOriginInternal(zone, origin, ref mark);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void GetZoneAndOriginInternal(ArrayList zoneList, 
-                                  ArrayList originList, 
-                                  ref StackCrawlMark stackMark);
+        private static extern void GetZoneAndOriginInternal(
+            ArrayList zoneList,
+            ArrayList originList,
+            ref StackCrawlMark stackMark
+        );
 #endif // FEATURE_CAS_POLICY
 
-        [System.Security.SecurityCritical]  // auto-generated
-        internal static void CheckAssembly(RuntimeAssembly asm, CodeAccessPermission demand )
+        [System.Security.SecurityCritical] // auto-generated
+        internal static void CheckAssembly(RuntimeAssembly asm, CodeAccessPermission demand)
         {
-            Contract.Assert( asm != null, "Must pass in a good assembly" );
-            Contract.Assert( demand != null, "Must pass in a good demand" );
+            Contract.Assert(asm != null, "Must pass in a good assembly");
+            Contract.Assert(demand != null, "Must pass in a good demand");
 
-            PermissionSet granted, refused;
-            asm.GetGrantSet( out granted, out refused );
+            PermissionSet granted,
+                refused;
+            asm.GetGrantSet(out granted, out refused);
 #pragma warning disable 618
-                CheckHelper( granted, refused, demand, PermissionToken.GetToken(demand), RuntimeMethodHandleInternal.EmptyHandle, asm, SecurityAction.Demand, true );
+            CheckHelper(
+                granted,
+                refused,
+                demand,
+                PermissionToken.GetToken(demand),
+                RuntimeMethodHandleInternal.EmptyHandle,
+                asm,
+                SecurityAction.Demand,
+                true
+            );
 #pragma warning restore 618
         }
 
         // Check - Used to initiate a code-access security check.
         // This method invokes a stack walk after skipping to the frame
         // referenced by stackMark.
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void Check (Object demand,
-                                  ref StackCrawlMark stackMark, 
-                                  bool isPermSet);
+        private static extern void Check(
+            Object demand,
+            ref StackCrawlMark stackMark,
+            bool isPermSet
+        );
 
-  
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern bool QuickCheckForAllDemands();
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         internal static extern bool AllDomainsHomogeneousWithNoStackModifiers();
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static void Check(CodeAccessPermission cap, ref StackCrawlMark stackMark)
         {
-            Check(cap,
-                  ref stackMark,
-                  false);
+            Check(cap, ref stackMark, false);
         }
 
-
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static void Check(PermissionSet permSet, ref StackCrawlMark stackMark)
         {
-            Check(permSet,
-                 ref stackMark,
-                 true);
+            Check(permSet, ref stackMark, true);
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         [ResourceExposure(ResourceScope.None)]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern FrameSecurityDescriptor CheckNReturnSO(PermissionToken permToken, 
-                                                                    CodeAccessPermission demand, 
-                                                                    ref StackCrawlMark stackMark,
-                                                                    int create );
+        internal static extern FrameSecurityDescriptor CheckNReturnSO(
+            PermissionToken permToken,
+            CodeAccessPermission demand,
+            ref StackCrawlMark stackMark,
+            int create
+        );
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static void Assert(CodeAccessPermission cap, ref StackCrawlMark stackMark)
         {
             // Make sure the caller of assert has the permission to assert
             //WARNING: The placement of the call here is just right to check
             //         the appropriate frame.
-            
+
             // Note: if the "AssertPermission" is not a permission that implements IUnrestrictedPermission
             // you need to change the last parameter to a zero.
-            Contract.Assert(AssertPermissionToken != null && AssertPermission != null, "Assert Permission not setup correctly");
-            FrameSecurityDescriptor secObj = CheckNReturnSO(AssertPermissionToken,
-                                                            AssertPermission,
-                                                            ref stackMark,
-                                                            1 );
+            Contract.Assert(
+                AssertPermissionToken != null && AssertPermission != null,
+                "Assert Permission not setup correctly"
+            );
+            FrameSecurityDescriptor secObj = CheckNReturnSO(
+                AssertPermissionToken,
+                AssertPermission,
+                ref stackMark,
+                1
+            );
             if (secObj == null)
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
-                // This can happen when you create delegates over functions that need the REQ_SQ 
-                System.Environment.FailFast(Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor"));
+                // This can happen when you create delegates over functions that need the REQ_SQ
+                System.Environment.FailFast(
+                    Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
+                );
             }
             else
             {
                 if (secObj.HasImperativeAsserts())
-                    throw new SecurityException( Environment.GetResourceString( "Security_MustRevertOverride" ) );
+                    throw new SecurityException(
+                        Environment.GetResourceString("Security_MustRevertOverride")
+                    );
 
                 secObj.SetAssert(cap);
             }
         }
 
-        [System.Security.SecurityCritical]  // auto-generated
+        [System.Security.SecurityCritical] // auto-generated
         internal static void Deny(CodeAccessPermission cap, ref StackCrawlMark stackMark)
         {
 #if FEATURE_CAS_POLICY
             // Deny is only valid in legacy mode
             if (!AppDomain.CurrentDomain.IsLegacyCasPolicyEnabled)
             {
-                throw new NotSupportedException(Environment.GetResourceString("NotSupported_CasDeny"));
+                throw new NotSupportedException(
+                    Environment.GetResourceString("NotSupported_CasDeny")
+                );
             }
 #endif // FEATURE_CAS_POLICY
 
-            FrameSecurityDescriptor secObj =
-                SecurityRuntime.GetSecurityObjectForFrame(ref stackMark, true);
+            FrameSecurityDescriptor secObj = SecurityRuntime.GetSecurityObjectForFrame(
+                ref stackMark,
+                true
+            );
             if (secObj == null)
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
-                // This can happen when you create delegates over functions that need the REQ_SQ 
-                System.Environment.FailFast(Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor"));
+                // This can happen when you create delegates over functions that need the REQ_SQ
+                System.Environment.FailFast(
+                    Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
+                );
             }
             else
             {
                 if (secObj.HasImperativeDenials())
-                    throw new SecurityException( Environment.GetResourceString( "Security_MustRevertOverride" ) );
+                    throw new SecurityException(
+                        Environment.GetResourceString("Security_MustRevertOverride")
+                    );
 
                 secObj.SetDeny(cap);
+            }
         }
-        }
-        
-        [System.Security.SecurityCritical]  // auto-generated
+
+        [System.Security.SecurityCritical] // auto-generated
         internal static void PermitOnly(CodeAccessPermission cap, ref StackCrawlMark stackMark)
         {
-            FrameSecurityDescriptor secObj =
-                SecurityRuntime.GetSecurityObjectForFrame(ref stackMark, true);
+            FrameSecurityDescriptor secObj = SecurityRuntime.GetSecurityObjectForFrame(
+                ref stackMark,
+                true
+            );
             if (secObj == null)
             {
                 // Security: REQ_SQ flag is missing. Bad compiler ?
-                // This can happen when you create delegates over functions that need the REQ_SQ 
-                System.Environment.FailFast(Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor"));
+                // This can happen when you create delegates over functions that need the REQ_SQ
+                System.Environment.FailFast(
+                    Environment.GetResourceString("ExecutionEngine_MissingSecurityDescriptor")
+                );
             }
             else
             {
                 if (secObj.HasImperativeRestrictions())
-                    throw new SecurityException( Environment.GetResourceString( "Security_MustRevertOverride" ) );
+                    throw new SecurityException(
+                        Environment.GetResourceString("Security_MustRevertOverride")
+                    );
 
                 secObj.SetPermitOnly(cap);
             }
         }
-        
+
 #if FEATURE_CAS_POLICY
         // Called from the VM to do a pre-domain initialization check of the security state of the
         // AppDomain.  This method looks at the state of the security of an AppDomain before it is
@@ -704,7 +908,10 @@ namespace System.Security {
 
             // If the AppDomain is setup with an ApplicationTrust then it is always homogenous and we can
             // tell its grant set right from the ApplicaitonTrust
-            ApplicationTrust domainTrust = AppDomain.CurrentDomain.SetupInformation.ApplicationTrust;
+            ApplicationTrust domainTrust = AppDomain
+                .CurrentDomain
+                .SetupInformation
+                .ApplicationTrust;
             if (domainTrust != null)
             {
                 isFullyTrusted = domainTrust.DefaultGrantSet.PermissionSet.IsUnrestricted();
@@ -713,7 +920,10 @@ namespace System.Security {
             }
 
             // Otherwise, see if the domain is being configured on input to use legacy CAS policy
-            if (CompatibilitySwitches.IsNetFx40LegacySecurityPolicy || AppDomain.CurrentDomain.IsLegacyCasPolicyEnabled)
+            if (
+                CompatibilitySwitches.IsNetFx40LegacySecurityPolicy
+                || AppDomain.CurrentDomain.IsLegacyCasPolicyEnabled
+            )
             {
                 isFullyTrusted = false;
                 isHomogeneous = false;
@@ -727,7 +937,11 @@ namespace System.Security {
 
         // Called from the VM when either a HostSecurityManager or simple sandbox domain can determine the
         // grant set of an assembly
-        private static PermissionSet ResolveGrantSet(Evidence evidence, out int specialFlags, bool checkExecutionPermission)
+        private static PermissionSet ResolveGrantSet(
+            Evidence evidence,
+            out int specialFlags,
+            bool checkExecutionPermission
+        )
         {
             Contract.Assert(evidence != null);
             Contract.Assert(!AppDomain.CurrentDomain.IsLegacyCasPolicyEnabled); // This API does not do CAS policy resolution
@@ -743,11 +957,15 @@ namespace System.Security {
             // Make sure the grant set includes the ability to execute code if that has been requested.
             if (checkExecutionPermission)
             {
-                SecurityPermission executionPermission = new SecurityPermission(SecurityPermissionFlag.Execution);
+                SecurityPermission executionPermission = new SecurityPermission(
+                    SecurityPermissionFlag.Execution
+                );
                 if (!grantSet.Contains(executionPermission))
                 {
-                    throw new PolicyException(Environment.GetResourceString("Policy_NoExecutionPermission"),
-                                              System.__HResults.CORSEC_E_NO_EXEC_PERM);
+                    throw new PolicyException(
+                        Environment.GetResourceString("Policy_NoExecutionPermission"),
+                        System.__HResults.CORSEC_E_NO_EXEC_PERM
+                    );
                 }
             }
 
@@ -773,13 +991,21 @@ namespace System.Security {
             }
             // If the host wants to participate in policy resolution, then our next option is to ask it for
             // a grant set
-            else if ((securityManager.Flags & HostSecurityManagerOptions.HostResolvePolicy) == HostSecurityManagerOptions.HostResolvePolicy)
+            else if (
+                (securityManager.Flags & HostSecurityManagerOptions.HostResolvePolicy)
+                == HostSecurityManagerOptions.HostResolvePolicy
+            )
             {
                 PermissionSet hostGrantSet = securityManager.ResolvePolicy(evidence);
 
                 if (hostGrantSet == null)
                 {
-                    throw new PolicyException(Environment.GetResourceString("Policy_NullHostGrantSet", securityManager.GetType().FullName));
+                    throw new PolicyException(
+                        Environment.GetResourceString(
+                            "Policy_NullHostGrantSet",
+                            securityManager.GetType().FullName
+                        )
+                    );
                 }
 
                 // If we're in a homogenous domain, we don't want to allow the host to create multiple
@@ -793,16 +1019,31 @@ namespace System.Security {
                     // exception message we'd hit below.
                     if (hostGrantSet.IsEmpty())
                     {
-                        throw new PolicyException(Environment.GetResourceString("Policy_NoExecutionPermission"));
+                        throw new PolicyException(
+                            Environment.GetResourceString("Policy_NoExecutionPermission")
+                        );
                     }
 
-                    PermissionSet homogenousGrantSet = AppDomain.CurrentDomain.ApplicationTrust.DefaultGrantSet.PermissionSet;
-                    bool isValidGrantSet = hostGrantSet.IsUnrestricted() ||
-                                           (hostGrantSet.IsSubsetOf(homogenousGrantSet) && homogenousGrantSet.IsSubsetOf(hostGrantSet));
+                    PermissionSet homogenousGrantSet = AppDomain
+                        .CurrentDomain
+                        .ApplicationTrust
+                        .DefaultGrantSet
+                        .PermissionSet;
+                    bool isValidGrantSet =
+                        hostGrantSet.IsUnrestricted()
+                        || (
+                            hostGrantSet.IsSubsetOf(homogenousGrantSet)
+                            && homogenousGrantSet.IsSubsetOf(hostGrantSet)
+                        );
 
                     if (!isValidGrantSet)
                     {
-                        throw new PolicyException(Environment.GetResourceString("Policy_GrantSetDoesNotMatchDomain", securityManager.GetType().FullName));
+                        throw new PolicyException(
+                            Environment.GetResourceString(
+                                "Policy_GrantSetDoesNotMatchDomain",
+                                securityManager.GetType().FullName
+                            )
+                        );
                     }
                 }
 
@@ -826,13 +1067,21 @@ namespace System.Security {
 
 #if FEATURE_PLS
         // Update the PLS used for optimization in the AppDomain: called from the VM
-        [System.Security.SecurityCritical]  // auto-generated
-        private static PermissionListSet UpdateAppDomainPLS(PermissionListSet adPLS, PermissionSet grantedPerms, PermissionSet refusedPerms) {
-            if (adPLS == null) {
+        [System.Security.SecurityCritical] // auto-generated
+        private static PermissionListSet UpdateAppDomainPLS(
+            PermissionListSet adPLS,
+            PermissionSet grantedPerms,
+            PermissionSet refusedPerms
+        )
+        {
+            if (adPLS == null)
+            {
                 adPLS = new PermissionListSet();
                 adPLS.UpdateDomainPLS(grantedPerms, refusedPerms);
                 return adPLS;
-            } else {
+            }
+            else
+            {
                 PermissionListSet newPLS = new PermissionListSet();
                 newPLS.UpdateDomainPLS(adPLS);
                 newPLS.UpdateDomainPLS(grantedPerms, refusedPerms);

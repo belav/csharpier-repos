@@ -51,7 +51,10 @@ namespace System.IdentityModel
             get
             {
                 // + and -  TimeSpan.TicksPerDay is to compensate the DateTime.ParseExact (to localtime) overflow.
-                return new DateTime(DateTime.MaxValue.Ticks - TimeSpan.TicksPerDay, DateTimeKind.Utc);
+                return new DateTime(
+                    DateTime.MaxValue.Ticks - TimeSpan.TicksPerDay,
+                    DateTimeKind.Utc
+                );
             }
         }
 
@@ -60,7 +63,10 @@ namespace System.IdentityModel
             get
             {
                 // + and -  TimeSpan.TicksPerDay is to compensate the DateTime.ParseExact (to localtime) overflow.
-                return new DateTime(DateTime.MinValue.Ticks + TimeSpan.TicksPerDay, DateTimeKind.Utc);
+                return new DateTime(
+                    DateTime.MinValue.Ticks + TimeSpan.TicksPerDay,
+                    DateTimeKind.Utc
+                );
             }
         }
 
@@ -83,21 +89,28 @@ namespace System.IdentityModel
         {
             DiagnosticUtility.DebugAssert(offset >= 0, "Negative offset passed to CloneBuffer.");
             DiagnosticUtility.DebugAssert(len >= 0, "Negative len passed to CloneBuffer.");
-            DiagnosticUtility.DebugAssert(buffer.Length - offset >= len, "Invalid parameters to CloneBuffer.");
+            DiagnosticUtility.DebugAssert(
+                buffer.Length - offset >= len,
+                "Invalid parameters to CloneBuffer."
+            );
 
             byte[] copy = DiagnosticUtility.Utility.AllocateByteArray(len);
             Buffer.BlockCopy(buffer, offset, copy, 0, len);
             return copy;
         }
 
-        internal static ReadOnlyCollection<SecurityKey> CreateSymmetricSecurityKeys( byte[] key )
+        internal static ReadOnlyCollection<SecurityKey> CreateSymmetricSecurityKeys(byte[] key)
         {
-            List<SecurityKey> temp = new List<SecurityKey>( 1 );
-            temp.Add( new InMemorySymmetricSecurityKey( key ) );
+            List<SecurityKey> temp = new List<SecurityKey>(1);
+            temp.Add(new InMemorySymmetricSecurityKey(key));
             return temp.AsReadOnly();
         }
 
-        internal static byte[] EncryptKey(SecurityToken wrappingToken, string encryptionMethod, byte[] keyToWrap)
+        internal static byte[] EncryptKey(
+            SecurityToken wrappingToken,
+            string encryptionMethod,
+            byte[] keyToWrap
+        )
         {
             SecurityKey wrappingSecurityKey = null;
             if (wrappingToken.SecurityKeys != null)
@@ -113,7 +126,9 @@ namespace System.IdentityModel
             }
             if (wrappingSecurityKey == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)
+                );
             }
             return wrappingSecurityKey.EncryptKey(encryptionMethod, keyToWrap);
         }
@@ -125,8 +140,14 @@ namespace System.IdentityModel
 
         internal static bool MatchesBuffer(byte[] src, int srcOffset, byte[] dst, int dstOffset)
         {
-            DiagnosticUtility.DebugAssert(dstOffset >= 0, "Negative dstOffset passed to MatchesBuffer.");
-            DiagnosticUtility.DebugAssert(srcOffset >= 0, "Negative srcOffset passed to MatchesBuffer.");
+            DiagnosticUtility.DebugAssert(
+                dstOffset >= 0,
+                "Negative dstOffset passed to MatchesBuffer."
+            );
+            DiagnosticUtility.DebugAssert(
+                srcOffset >= 0,
+                "Negative srcOffset passed to MatchesBuffer."
+            );
 
             // defensive programming
             if ((dstOffset < 0) || (srcOffset < 0))
@@ -155,29 +176,44 @@ namespace System.IdentityModel
             return certificateId;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls critical method X509Certificate2.Reset.",
-            Safe = "Per review from CLR security team, this method does nothing unsafe.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls critical method X509Certificate2.Reset.",
+            Safe = "Per review from CLR security team, this method does nothing unsafe."
+        )]
         [SecuritySafeCritical]
         internal static void ResetCertificate(X509Certificate2 certificate)
         {
             certificate.Reset();
         }
 
-        internal static bool IsCurrentlyTimeEffective(DateTime effectiveTime, DateTime expirationTime, TimeSpan maxClockSkew)
+        internal static bool IsCurrentlyTimeEffective(
+            DateTime effectiveTime,
+            DateTime expirationTime,
+            TimeSpan maxClockSkew
+        )
         {
-            DateTime curEffectiveTime = (effectiveTime < DateTime.MinValue.Add(maxClockSkew)) ? effectiveTime : effectiveTime.Subtract(maxClockSkew);
-            DateTime curExpirationTime = (expirationTime > DateTime.MaxValue.Subtract(maxClockSkew)) ? expirationTime : expirationTime.Add(maxClockSkew);
+            DateTime curEffectiveTime =
+                (effectiveTime < DateTime.MinValue.Add(maxClockSkew))
+                    ? effectiveTime
+                    : effectiveTime.Subtract(maxClockSkew);
+            DateTime curExpirationTime =
+                (expirationTime > DateTime.MaxValue.Subtract(maxClockSkew))
+                    ? expirationTime
+                    : expirationTime.Add(maxClockSkew);
             DateTime curTime = DateTime.UtcNow;
 
-            return (curEffectiveTime.ToUniversalTime() <= curTime) && (curTime < curExpirationTime.ToUniversalTime());
+            return (curEffectiveTime.ToUniversalTime() <= curTime)
+                && (curTime < curExpirationTime.ToUniversalTime());
         }
 
         // Federal Information Processing Standards Publications
         // at http://www.itl.nist.gov/fipspubs/geninfo.htm
         internal static bool RequiresFipsCompliance
         {
-            [Fx.Tag.SecurityNote(Critical = "Calls an UnsafeNativeMethod and a Critical method (GetFipsAlgorithmPolicyKeyFromRegistry.",
-                Safe = "processes the return and just returns a bool, which is safe.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Calls an UnsafeNativeMethod and a Critical method (GetFipsAlgorithmPolicyKeyFromRegistry.",
+                Safe = "processes the return and just returns a bool, which is safe."
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -187,7 +223,9 @@ namespace System.IdentityModel
                     {
                         bool fipsEnabled;
 #pragma warning suppress 56523 // we check for the return code of the method instead of calling GetLastWin32Error
-                        bool readPolicy = (CAPI.S_OK == CAPI.BCryptGetFipsAlgorithmMode(out fipsEnabled));
+                        bool readPolicy = (
+                            CAPI.S_OK == CAPI.BCryptGetFipsAlgorithmMode(out fipsEnabled)
+                        );
 
                         if (readPolicy && fipsEnabled)
                             fipsAlgorithmPolicy = 1;
@@ -211,11 +249,19 @@ namespace System.IdentityModel
         /// Critical - Asserts to get a value from the registry
         /// </SecurityNote>
         [SecurityCritical]
-        [RegistryPermission(SecurityAction.Assert, Read = @"HKEY_LOCAL_MACHINE\" + fipsPolicyRegistryKey)]
+        [RegistryPermission(
+            SecurityAction.Assert,
+            Read = @"HKEY_LOCAL_MACHINE\" + fipsPolicyRegistryKey
+        )]
         static int GetFipsAlgorithmPolicyKeyFromRegistry()
         {
             int fipsAlgorithmPolicy = -1;
-            using (RegistryKey fipsAlgorithmPolicyKey = Registry.LocalMachine.OpenSubKey(fipsPolicyRegistryKey, false))
+            using (
+                RegistryKey fipsAlgorithmPolicyKey = Registry.LocalMachine.OpenSubKey(
+                    fipsPolicyRegistryKey,
+                    false
+                )
+            )
             {
                 if (fipsAlgorithmPolicyKey != null)
                 {
@@ -237,7 +283,10 @@ namespace System.IdentityModel
             {
                 this.policy = (UnconditionalPolicy)authorizationPolicies[0];
                 Dictionary<string, object> properties = new Dictionary<string, object>();
-                if (this.policy.PrimaryIdentity != null && this.policy.PrimaryIdentity != SecurityUtils.AnonymousIdentity)
+                if (
+                    this.policy.PrimaryIdentity != null
+                    && this.policy.PrimaryIdentity != SecurityUtils.AnonymousIdentity
+                )
                 {
                     List<IIdentity> identities = new List<IIdentity>();
                     identities.Add(this.policy.PrimaryIdentity);
@@ -256,16 +305,31 @@ namespace System.IdentityModel
                     return this.id.Value;
                 }
             }
-            public override ReadOnlyCollection<ClaimSet> ClaimSets { get { return this.policy.Issuances; } }
-            public override DateTime ExpirationTime { get { return this.policy.ExpirationTime; } }
-            public override IDictionary<string, object> Properties { get { return this.properties; } }
+            public override ReadOnlyCollection<ClaimSet> ClaimSets
+            {
+                get { return this.policy.Issuances; }
+            }
+            public override DateTime ExpirationTime
+            {
+                get { return this.policy.ExpirationTime; }
+            }
+            public override IDictionary<string, object> Properties
+            {
+                get { return this.properties; }
+            }
         }
 
-        internal static AuthorizationContext CreateDefaultAuthorizationContext(IList<IAuthorizationPolicy> authorizationPolicies)
+        internal static AuthorizationContext CreateDefaultAuthorizationContext(
+            IList<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             AuthorizationContext authorizationContext;
             // This is faster than Policy evaluation.
-            if (authorizationPolicies != null && authorizationPolicies.Count == 1 && authorizationPolicies[0] is UnconditionalPolicy)
+            if (
+                authorizationPolicies != null
+                && authorizationPolicies.Count == 1
+                && authorizationPolicies[0] is UnconditionalPolicy
+            )
             {
                 authorizationContext = new SimpleAuthorizationContext(authorizationPolicies);
             }
@@ -304,12 +368,14 @@ namespace System.IdentityModel
 
                             if (DiagnosticUtility.ShouldTraceVerbose)
                             {
-                                TraceUtility.TraceEvent(TraceEventType.Verbose, TraceCode.AuthorizationPolicyEvaluated,
-                                    SR.GetString(SR.AuthorizationPolicyEvaluated, policy.Id));
+                                TraceUtility.TraceEvent(
+                                    TraceEventType.Verbose,
+                                    TraceCode.AuthorizationPolicyEvaluated,
+                                    SR.GetString(SR.AuthorizationPolicyEvaluated, policy.Id)
+                                );
                             }
                         }
                     }
-
                 } while (oldContextCount < evaluationContext.Generation);
 
                 authorizationContext = new DefaultAuthorizationContext(evaluationContext);
@@ -317,8 +383,11 @@ namespace System.IdentityModel
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.AuthorizationContextCreated,
-                    SR.GetString(SR.AuthorizationContextCreated, authorizationContext.Id));
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.AuthorizationContextCreated,
+                    SR.GetString(SR.AuthorizationContextCreated, authorizationContext.Id)
+                );
             }
 
             return authorizationContext;
@@ -344,7 +413,13 @@ namespace System.IdentityModel
                 // PreSharp Bug: A null-dereference can occur here.
 #pragma warning suppress 56506 // issuer was just set to this.
                 issuer = issuer.Issuer;
-                sb.AppendFormat("{0}{1}", prefix, issuer == claimSet ? "Self" : (issuer.Count <= 0 ? "Unknown" : issuer[0].ToString()));
+                sb.AppendFormat(
+                    "{0}{1}",
+                    prefix,
+                    issuer == claimSet
+                        ? "Self"
+                        : (issuer.Count <= 0 ? "Unknown" : issuer[0].ToString())
+                );
                 prefix = " -> ";
             } while (issuer.Issuer != issuer);
             return sb.ToString();
@@ -388,7 +463,11 @@ namespace System.IdentityModel
                     read += actual;
                 }
                 if (totalRead > maxBufferSize - read)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new LimitExceededException(SR.GetString(SR.BufferQuotaExceededReadingBase64, maxBufferSize)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new LimitExceededException(
+                            SR.GetString(SR.BufferQuotaExceededReadingBase64, maxBufferSize)
+                        )
+                    );
                 totalRead += read;
                 if (read < buffer.Length)
                     break;
@@ -405,7 +484,12 @@ namespace System.IdentityModel
             return buffer;
         }
 
-        internal static byte[] DecryptKey(SecurityToken unwrappingToken, string encryptionMethod, byte[] wrappedKey, out SecurityKey unwrappingSecurityKey)
+        internal static byte[] DecryptKey(
+            SecurityToken unwrappingToken,
+            string encryptionMethod,
+            byte[] wrappedKey,
+            out SecurityKey unwrappingSecurityKey
+        )
         {
             unwrappingSecurityKey = null;
             if (unwrappingToken.SecurityKeys != null)
@@ -421,14 +505,22 @@ namespace System.IdentityModel
             }
             if (unwrappingSecurityKey == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(new SecurityMessageSerializationException(SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperWarning(
+                    new SecurityMessageSerializationException(
+                        SR.GetString(SR.CannotFindMatchingCrypto, encryptionMethod)
+                    )
+                );
             }
             return unwrappingSecurityKey.DecryptKey(encryptionMethod, wrappedKey);
         }
 
-        public static bool TryCreateX509CertificateFromRawData(byte[] rawData, out X509Certificate2 certificate)
+        public static bool TryCreateX509CertificateFromRawData(
+            byte[] rawData,
+            out X509Certificate2 certificate
+        )
         {
-            certificate = (rawData == null || rawData.Length == 0) ? null : new X509Certificate2(rawData);
+            certificate =
+                (rawData == null || rawData.Length == 0) ? null : new X509Certificate2(rawData);
             return certificate != null && certificate.Handle != IntPtr.Zero;
         }
 
@@ -441,23 +533,29 @@ namespace System.IdentityModel
             int i = 0;
             int length = hexString.Length;
 
-            if ((length >= 2) &&
-                (hexString[0] == '0') &&
-                ((hexString[1] == 'x') || (hexString[1] == 'X')))
+            if (
+                (length >= 2)
+                && (hexString[0] == '0')
+                && ((hexString[1] == 'x') || (hexString[1] == 'X'))
+            )
             {
                 length = hexString.Length - 2;
                 i = 2;
             }
 
             if (length < 2)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.GetString(SR.InvalidHexString)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new FormatException(SR.GetString(SR.InvalidHexString))
+                );
 
             byte[] sArray;
 
             if (length >= 3 && hexString[i + 2] == ' ')
             {
                 if (length % 3 != 2)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.GetString(SR.InvalidHexString)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new FormatException(SR.GetString(SR.InvalidHexString))
+                    );
 
                 spaceSkippingMode = true;
 
@@ -467,7 +565,9 @@ namespace System.IdentityModel
             else
             {
                 if (length % 2 != 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.GetString(SR.InvalidHexString)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new FormatException(SR.GetString(SR.InvalidHexString))
+                    );
 
                 spaceSkippingMode = false;
 
@@ -497,15 +597,22 @@ namespace System.IdentityModel
             else if (val >= 'A' && val <= 'F')
                 return ((val - 'A') + 10);
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.GetString(SR.InvalidHexString)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new FormatException(SR.GetString(SR.InvalidHexString))
+                );
         }
 
-        internal static ReadOnlyCollection<IAuthorizationPolicy> CreateAuthorizationPolicies(ClaimSet claimSet)
+        internal static ReadOnlyCollection<IAuthorizationPolicy> CreateAuthorizationPolicies(
+            ClaimSet claimSet
+        )
         {
             return CreateAuthorizationPolicies(claimSet, SecurityUtils.MaxUtcDateTime);
         }
 
-        internal static ReadOnlyCollection<IAuthorizationPolicy> CreateAuthorizationPolicies(ClaimSet claimSet, DateTime expirationTime)
+        internal static ReadOnlyCollection<IAuthorizationPolicy> CreateAuthorizationPolicies(
+            ClaimSet claimSet,
+            DateTime expirationTime
+        )
         {
             List<IAuthorizationPolicy> policies = new List<IAuthorizationPolicy>(1);
             policies.Add(new UnconditionalPolicy(claimSet, expirationTime));
@@ -563,9 +670,11 @@ namespace System.IdentityModel
         }
 
         [SecuritySafeCritical]
-        internal static WindowsIdentity CloneWindowsIdentityIfNecessary(WindowsIdentity wid, string authenticationType)
+        internal static WindowsIdentity CloneWindowsIdentityIfNecessary(
+            WindowsIdentity wid,
+            string authenticationType
+        )
         {
-
             if (wid != null)
             {
                 IntPtr token = UnsafeGetWindowsIdentityToken(wid);
@@ -596,7 +705,10 @@ namespace System.IdentityModel
         // resulting in a null authenticationType.
         [SecurityCritical]
         [SecurityPermission(SecurityAction.Assert, ControlPrincipal = true, UnmanagedCode = true)]
-        static WindowsIdentity UnsafeCreateWindowsIdentityFromToken(IntPtr token, string authenticationType)
+        static WindowsIdentity UnsafeCreateWindowsIdentityFromToken(
+            IntPtr token,
+            string authenticationType
+        )
         {
             if (authenticationType != null)
             {
@@ -626,14 +738,16 @@ namespace System.IdentityModel
             return claimSet;
         }
 
-        internal static ReadOnlyCollection<ClaimSet> CloneClaimSetsIfNecessary(ReadOnlyCollection<ClaimSet> claimSets)
+        internal static ReadOnlyCollection<ClaimSet> CloneClaimSetsIfNecessary(
+            ReadOnlyCollection<ClaimSet> claimSets
+        )
         {
             if (claimSets != null)
             {
                 bool clone = false;
                 for (int i = 0; i < claimSets.Count; ++i)
                 {
-                    if (claimSets[i] is WindowsClaimSet)// || claimSets[i] is X509CertificateClaimSet)
+                    if (claimSets[i] is WindowsClaimSet) // || claimSets[i] is X509CertificateClaimSet)
                     {
                         clone = true;
                         break;
@@ -671,7 +785,9 @@ namespace System.IdentityModel
             }
         }
 
-        internal static ReadOnlyCollection<IAuthorizationPolicy> CloneAuthorizationPoliciesIfNecessary(ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
+        internal static ReadOnlyCollection<IAuthorizationPolicy> CloneAuthorizationPoliciesIfNecessary(
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             if (authorizationPolicies != null && authorizationPolicies.Count > 0)
             {
@@ -687,10 +803,13 @@ namespace System.IdentityModel
                 }
                 if (clone)
                 {
-                    List<IAuthorizationPolicy> ret = new List<IAuthorizationPolicy>(authorizationPolicies.Count);
+                    List<IAuthorizationPolicy> ret = new List<IAuthorizationPolicy>(
+                        authorizationPolicies.Count
+                    );
                     for (int i = 0; i < authorizationPolicies.Count; ++i)
                     {
-                        UnconditionalPolicy policy = authorizationPolicies[i] as UnconditionalPolicy;
+                        UnconditionalPolicy policy =
+                            authorizationPolicies[i] as UnconditionalPolicy;
                         if (policy != null)
                         {
                             ret.Add(policy.Clone());
@@ -706,7 +825,9 @@ namespace System.IdentityModel
             return authorizationPolicies;
         }
 
-        public static void DisposeAuthorizationPoliciesIfNecessary(ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies)
+        public static void DisposeAuthorizationPoliciesIfNecessary(
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies
+        )
         {
             if (authorizationPolicies != null && authorizationPolicies.Count > 0)
             {
@@ -728,7 +849,7 @@ namespace System.IdentityModel
 
     /// <summary>
     /// Internal helper class to help keep Kerberos and Spnego in sync.
-    /// This code is shared by: 
+    /// This code is shared by:
     ///     System\IdentityModel\Tokens\KerberosReceiverSecurityToken.cs
     ///     System\ServiceModel\Security\WindowsSspiNegotiation.cs
     /// Both this code paths require this logic.
@@ -739,7 +860,9 @@ namespace System.IdentityModel
         // keep the defaults: _protectionScenario and _policyEnforcement, in sync with: static class System.ServiceModel.Channel.ChannelBindingUtility
         // We can't access those defaults as IdentityModel cannot take a dependency on ServiceModel
         //
-        static ExtendedProtectionPolicy disabledPolicy = new ExtendedProtectionPolicy(PolicyEnforcement.Never);
+        static ExtendedProtectionPolicy disabledPolicy = new ExtendedProtectionPolicy(
+            PolicyEnforcement.Never
+        );
 
         PolicyEnforcement _policyEnforcement;
         ProtectionScenario _protectionScenario;
@@ -747,7 +870,10 @@ namespace System.IdentityModel
         ServiceNameCollection _serviceNameCollection;
         bool _checkServiceBinding;
 
-        public ExtendedProtectionPolicyHelper(ChannelBinding channelBinding, ExtendedProtectionPolicy extendedProtectionPolicy)
+        public ExtendedProtectionPolicyHelper(
+            ChannelBinding channelBinding,
+            ExtendedProtectionPolicy extendedProtectionPolicy
+        )
         {
             _protectionScenario = DefaultPolicy.ProtectionScenario;
             _policyEnforcement = DefaultPolicy.PolicyEnforcement;
@@ -771,7 +897,11 @@ namespace System.IdentityModel
 
         public bool ShouldAddChannelBindingToASC()
         {
-            return (_channelBinding != null && _policyEnforcement != PolicyEnforcement.Never && _protectionScenario != ProtectionScenario.TrustedProxy);
+            return (
+                _channelBinding != null
+                && _policyEnforcement != PolicyEnforcement.Never
+                && _protectionScenario != ProtectionScenario.TrustedProxy
+            );
         }
 
         public ChannelBinding ChannelBinding
@@ -811,7 +941,10 @@ namespace System.IdentityModel
         /// </summary>
         /// <param name="securityContext to ">status Code returned when obtaining serviceBinding from SecurityContext</param>
         /// <returns>If servicebinding is valid</returns>
-        public void CheckServiceBinding(SafeDeleteContext securityContext, string defaultServiceBinding)
+        public void CheckServiceBinding(
+            SafeDeleteContext securityContext,
+            string defaultServiceBinding
+        )
         {
             if (_policyEnforcement == PolicyEnforcement.Never)
             {
@@ -826,15 +959,26 @@ namespace System.IdentityModel
                 // only two acceptable non-zero values
                 // client OS not patched: stausCode == TargetUnknown
                 // service OS not patched: statusCode == Unsupported
-                if (statusCode != (int)SecurityStatus.TargetUnknown && statusCode != (int)SecurityStatus.Unsupported)
+                if (
+                    statusCode != (int)SecurityStatus.TargetUnknown
+                    && statusCode != (int)SecurityStatus.Unsupported
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding)
+                        )
+                    );
                 }
 
                 // if policyEnforcement is Always we needed to see a TargetName (SPN)
                 if (_policyEnforcement == PolicyEnforcement.Always)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding)
+                        )
+                    );
                 }
 
                 // in this case we accept because either the client or service is not patched.
@@ -844,7 +988,11 @@ namespace System.IdentityModel
                 }
 
                 // guard against futures, force failure and fix as necessary
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(
+                        SR.GetString(SR.InvalidServiceBindingInSspiNegotiationNoServiceBinding)
+                    )
+                );
             }
 
             switch (_policyEnforcement)
@@ -856,10 +1004,17 @@ namespace System.IdentityModel
                     break;
 
                 case PolicyEnforcement.Always:
-                    // serviceBinding == null => client is not patched 
+                    // serviceBinding == null => client is not patched
                     // serviceBinding == "" => SB was not specified
                     if (string.IsNullOrEmpty(serviceBinding))
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched, string.Empty)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityTokenException(
+                                SR.GetString(
+                                    SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
+                                    string.Empty
+                                )
+                            )
+                        );
                     break;
             }
 
@@ -867,15 +1022,42 @@ namespace System.IdentityModel
             if (_serviceNameCollection == null || _serviceNameCollection.Count < 1)
             {
                 if (defaultServiceBinding == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched, string.Empty)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
+                                string.Empty
+                            )
+                        )
+                    );
 
-                if (string.Compare(defaultServiceBinding, serviceBinding, StringComparison.OrdinalIgnoreCase) == 0)
+                if (
+                    string.Compare(
+                        defaultServiceBinding,
+                        serviceBinding,
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
                     return;
 
                 if (string.IsNullOrEmpty(serviceBinding))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched, string.Empty)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
+                                string.Empty
+                            )
+                        )
+                    );
                 else
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched, serviceBinding)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityTokenException(
+                            SR.GetString(
+                                SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
+                                serviceBinding
+                            )
+                        )
+                    );
             }
 
             if (_serviceNameCollection != null)
@@ -887,16 +1069,30 @@ namespace System.IdentityModel
             }
 
             if (string.IsNullOrEmpty(serviceBinding))
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched, string.Empty)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(
+                        SR.GetString(
+                            SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
+                            string.Empty
+                        )
+                    )
+                );
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenException(SR.GetString(SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched, serviceBinding)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenException(
+                        SR.GetString(
+                            SR.InvalidServiceBindingInSspiNegotiationServiceBindingNotMatched,
+                            serviceBinding
+                        )
+                    )
+                );
         }
 
         /// <summary>
         /// Keep this in sync with \System\ServiceModel\Channels\ChannelBindingUtility.cs
         /// </summary>
         public static ExtendedProtectionPolicy DefaultPolicy
-        {   //
+        { //
             //keep the default in sync with : static class System.ServiceModel.Channels.ChannelBindingUtility
             //we can't use these defaults as IdentityModel cannot take a dependency on ServiceModel
             //

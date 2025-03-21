@@ -44,7 +44,9 @@ public class FormFileValueProviderFactoryTest
     {
         // Arrange
         var factory = new FormFileValueProviderFactory();
-        var context = CreateContext("multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq");
+        var context = CreateContext(
+            "multipart/form-data; boundary=----WebKitFormBoundarymx2fSWqWSd0OxQqq"
+        );
         var files = (FormFileCollection)context.ActionContext.HttpContext.Request.Form.Files;
         files.Add(new FormFile(Stream.Null, 0, 10, "some-name", "some-name"));
 
@@ -52,9 +54,7 @@ public class FormFileValueProviderFactoryTest
         await factory.CreateValueProviderAsync(context);
 
         // Assert
-        Assert.Collection(
-            context.ValueProviders,
-            v => Assert.IsType<FormFileValueProvider>(v));
+        Assert.Collection(context.ValueProviders, v => Assert.IsType<FormFileValueProvider>(v));
     }
 
     [Fact]
@@ -67,7 +67,9 @@ public class FormFileValueProviderFactoryTest
         var factory = new FormFileValueProviderFactory();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<ValueProviderException>(() => factory.CreateValueProviderAsync(valueProviderContext));
+        var ex = await Assert.ThrowsAsync<ValueProviderException>(() =>
+            factory.CreateValueProviderAsync(valueProviderContext)
+        );
         Assert.Same(exception, ex.InnerException);
     }
 
@@ -81,7 +83,9 @@ public class FormFileValueProviderFactoryTest
         var factory = new FormFileValueProviderFactory();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<ValueProviderException>(() => factory.CreateValueProviderAsync(valueProviderContext));
+        var ex = await Assert.ThrowsAsync<ValueProviderException>(() =>
+            factory.CreateValueProviderAsync(valueProviderContext)
+        );
         Assert.Same(exception, ex.InnerException);
     }
 
@@ -95,7 +99,9 @@ public class FormFileValueProviderFactoryTest
         var factory = new FormFileValueProviderFactory();
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() => factory.CreateValueProviderAsync(valueProviderContext));
+        var ex = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() =>
+            factory.CreateValueProviderAsync(valueProviderContext)
+        );
         Assert.Same(exception, ex);
     }
 
@@ -104,8 +110,14 @@ public class FormFileValueProviderFactoryTest
         var context = new Mock<HttpContext>();
         context.Setup(c => c.Request.ContentType).Returns("application/x-www-form-urlencoded");
         context.Setup(c => c.Request.HasFormContentType).Returns(true);
-        context.Setup(c => c.Request.ReadFormAsync(It.IsAny<CancellationToken>())).ThrowsAsync(exception);
-        var actionContext = new ActionContext(context.Object, new RouteData(), new ActionDescriptor());
+        context
+            .Setup(c => c.Request.ReadFormAsync(It.IsAny<CancellationToken>()))
+            .ThrowsAsync(exception);
+        var actionContext = new ActionContext(
+            context.Object,
+            new RouteData(),
+            new ActionDescriptor()
+        );
         var valueProviderContext = new ValueProviderFactoryContext(actionContext);
         return valueProviderContext;
     }
@@ -114,7 +126,10 @@ public class FormFileValueProviderFactoryTest
     {
         var context = new DefaultHttpContext();
         context.Request.ContentType = contentType;
-        context.Request.Form = new FormCollection(new Dictionary<string, StringValues>(), new FormFileCollection());
+        context.Request.Form = new FormCollection(
+            new Dictionary<string, StringValues>(),
+            new FormFileCollection()
+        );
         var actionContext = new ActionContext(context, new RouteData(), new ActionDescriptor());
 
         return new ValueProviderFactoryContext(actionContext);

@@ -26,34 +26,74 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
     /// <summary>
     /// Provides an API to construct <see cref="DbExpression"/>s and allows that API to be accessed as extension methods on the expression type itself.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1709:IdentifiersShouldBeCasedCorrectly", MessageId = "Db")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1709:IdentifiersShouldBeCasedCorrectly",
+        MessageId = "Db"
+    )]
     public static class DbExpressionBuilder
     {
         #region Private Implementation
 
         private static readonly AliasGenerator _bindingAliases = new AliasGenerator("Var_", 0);
 
-        private static readonly DbNullExpression _binaryNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Binary));
-        private static readonly DbNullExpression _boolNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Boolean));
-        private static readonly DbNullExpression _byteNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Byte));
-        private static readonly DbNullExpression _dateTimeNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.DateTime));
-        private static readonly DbNullExpression _dateTimeOffsetNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.DateTimeOffset));
-        private static readonly DbNullExpression _decimalNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Decimal));
-        private static readonly DbNullExpression _doubleNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Double));
-        private static readonly DbNullExpression _geographyNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Geography));
-        private static readonly DbNullExpression _geometryNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Geometry));
-        private static readonly DbNullExpression _guidNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Guid));
-        private static readonly DbNullExpression _int16Null = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Int16));
-        private static readonly DbNullExpression _int32Null = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Int32));
-        private static readonly DbNullExpression _int64Null = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Int64));
-        private static readonly DbNullExpression _sbyteNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.SByte));
-        private static readonly DbNullExpression _singleNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Single));
-        private static readonly DbNullExpression _stringNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.String));
-        private static readonly DbNullExpression _timeNull = Null(EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Time));
+        private static readonly DbNullExpression _binaryNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Binary)
+        );
+        private static readonly DbNullExpression _boolNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Boolean)
+        );
+        private static readonly DbNullExpression _byteNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Byte)
+        );
+        private static readonly DbNullExpression _dateTimeNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.DateTime)
+        );
+        private static readonly DbNullExpression _dateTimeOffsetNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(
+                PrimitiveTypeKind.DateTimeOffset
+            )
+        );
+        private static readonly DbNullExpression _decimalNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Decimal)
+        );
+        private static readonly DbNullExpression _doubleNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Double)
+        );
+        private static readonly DbNullExpression _geographyNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Geography)
+        );
+        private static readonly DbNullExpression _geometryNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Geometry)
+        );
+        private static readonly DbNullExpression _guidNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Guid)
+        );
+        private static readonly DbNullExpression _int16Null = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Int16)
+        );
+        private static readonly DbNullExpression _int32Null = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Int32)
+        );
+        private static readonly DbNullExpression _int64Null = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Int64)
+        );
+        private static readonly DbNullExpression _sbyteNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.SByte)
+        );
+        private static readonly DbNullExpression _singleNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Single)
+        );
+        private static readonly DbNullExpression _stringNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.String)
+        );
+        private static readonly DbNullExpression _timeNull = Null(
+            EdmProviderManifest.Instance.GetCanonicalModelTypeUsage(PrimitiveTypeKind.Time)
+        );
 
         private static readonly DbConstantExpression _boolTrue = Constant(true);
         private static readonly DbConstantExpression _boolFalse = Constant(false);
-                        
+
         #endregion
 
         #region Helpers (not strictly Command Tree API)
@@ -62,12 +102,12 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         {
             return new KeyValuePair<string, DbExpression>(alias, value);
         }
-        
+
         public static KeyValuePair<string, DbAggregate> As(this DbAggregate value, string alias)
         {
             return new KeyValuePair<string, DbAggregate>(alias, value);
         }
-        
+
         #endregion
 
         #region Bindings - Expression and Group
@@ -95,7 +135,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         public static DbExpressionBinding BindAs(this DbExpression input, string varName)
         {
             TypeUsage elementType = ArgumentValidation.ValidateBindAs(input, varName);
-            DbVariableReferenceExpression inputRef = new DbVariableReferenceExpression(elementType, varName);
+            DbVariableReferenceExpression inputRef = new DbVariableReferenceExpression(
+                elementType,
+                varName
+            );
             return new DbExpressionBinding(input, inputRef);
         }
 
@@ -109,7 +152,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         public static DbGroupExpressionBinding GroupBind(this DbExpression input)
         {
             string alias = _bindingAliases.Next();
-            return DbExpressionBuilder.GroupBindAs(input, alias, string.Format(CultureInfo.InvariantCulture, "Group{0}", alias));
+            return DbExpressionBuilder.GroupBindAs(
+                input,
+                alias,
+                string.Format(CultureInfo.InvariantCulture, "Group{0}", alias)
+            );
         }
 
         /// <summary>
@@ -121,14 +168,28 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new group expression binding with the specified expression, variable name and group variable name</returns>
         /// <exception cref="ArgumentNullException"><paramref name="input"/>, <paramref name="varName"/> or <paramref name="groupVarName"/> is null</exception>
         /// <exception cref="ArgumentException"><paramref name="input"/> does not have a collection result type</exception>
-        public static DbGroupExpressionBinding GroupBindAs(this DbExpression input, string varName, string groupVarName)
+        public static DbGroupExpressionBinding GroupBindAs(
+            this DbExpression input,
+            string varName,
+            string groupVarName
+        )
         {
-            TypeUsage elementType = ArgumentValidation.ValidateGroupBindAs(input, varName, groupVarName);
-            DbVariableReferenceExpression inputRef = new DbVariableReferenceExpression(elementType, varName);
-            DbVariableReferenceExpression groupRef = new DbVariableReferenceExpression(elementType, groupVarName);
+            TypeUsage elementType = ArgumentValidation.ValidateGroupBindAs(
+                input,
+                varName,
+                groupVarName
+            );
+            DbVariableReferenceExpression inputRef = new DbVariableReferenceExpression(
+                elementType,
+                varName
+            );
+            DbVariableReferenceExpression groupRef = new DbVariableReferenceExpression(
+                elementType,
+                groupVarName
+            );
             return new DbGroupExpressionBinding(input, inputRef, groupRef);
         }
-        
+
         #endregion
 
         #region Aggregates and SortClauses are required only for Binding-based method support - replaced by OrderBy[Descending]/ThenBy[Descending] and Aggregate[Distinct] methods in new API
@@ -145,7 +206,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     the result type of <paramref name="argument"/> is not equal or promotable to
         ///     the parameter type of <paramref name="function"/>
         /// </exception>
-        public static DbFunctionAggregate Aggregate(this EdmFunction function, DbExpression argument)
+        public static DbFunctionAggregate Aggregate(
+            this EdmFunction function,
+            DbExpression argument
+        )
         {
             return CreateFunctionAggregate(function, argument, false);
         }
@@ -162,15 +226,25 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     the result type of <paramref name="argument"/> is not equal or promotable to
         ///     the parameter type of <paramref name="function"/>
         /// </exception>
-        public static DbFunctionAggregate AggregateDistinct(this EdmFunction function, DbExpression argument)
+        public static DbFunctionAggregate AggregateDistinct(
+            this EdmFunction function,
+            DbExpression argument
+        )
         {
             return CreateFunctionAggregate(function, argument, true);
         }
 
-        private static DbFunctionAggregate CreateFunctionAggregate(EdmFunction function, DbExpression argument, bool isDistinct)
+        private static DbFunctionAggregate CreateFunctionAggregate(
+            EdmFunction function,
+            DbExpression argument,
+            bool isDistinct
+        )
         {
             EntityUtil.CheckArgumentNull(argument, "argument");
-            DbExpressionList funcArgs = ArgumentValidation.ValidateFunctionAggregate(function, new[] { argument });
+            DbExpressionList funcArgs = ArgumentValidation.ValidateFunctionAggregate(
+                function,
+                new[] { argument }
+            );
             TypeUsage resultType = function.ReturnParameter.TypeUsage;
             return new DbFunctionAggregate(resultType, funcArgs, function, isDistinct);
         }
@@ -181,7 +255,8 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <param name="argument">The argument over which to perform the nest operation</param>
         /// <returns>A new group aggregate representing the elements of the group referenced by the given argument.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="argument"/> is null</exception>
-        /*ENABLE_ELEMENT_SELECTOR(*/internal/*)*/ static DbGroupAggregate GroupAggregate(DbExpression argument)
+        /*ENABLE_ELEMENT_SELECTOR(*/internal /*)*/
+        static DbGroupAggregate GroupAggregate(DbExpression argument)
         {
             DbExpressionList arguments = ArgumentValidation.ValidateGroupAggregate(argument);
             TypeUsage resultType = TypeHelpers.CreateCollectionTypeUsage(argument.ResultType);
@@ -193,8 +268,8 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// </summary>
         /// <param name="body">An expression that defines the logic of the Lambda function</param>
         /// <param name="variables">
-        ///   A <see cref="DbVariableReferenceExpression"/> collection that represents the formal parameters to the Lambda function. 
-        ///   These variables are valid for use in the <paramref name="body"/> expression. 
+        ///   A <see cref="DbVariableReferenceExpression"/> collection that represents the formal parameters to the Lambda function.
+        ///   These variables are valid for use in the <paramref name="body"/> expression.
         /// </param>
         /// <returns>A new DbLambda that describes an inline Lambda function with the specified body and formal parameters</returns>
         /// <exception cref="ArgumentNullException">
@@ -203,7 +278,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     <paramref name="variables"/> contains more than one element with the same variable name.
         /// </exception>
-        public static DbLambda Lambda(DbExpression body, IEnumerable<DbVariableReferenceExpression> variables)
+        public static DbLambda Lambda(
+            DbExpression body,
+            IEnumerable<DbVariableReferenceExpression> variables
+        )
         {
             return CreateLambda(body, variables);
         }
@@ -213,8 +291,8 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// </summary>
         /// <param name="body">An expression that defines the logic of the Lambda function</param>
         /// <param name="variables">
-        ///   A <see cref="DbVariableReferenceExpression"/> collection that represents the formal parameters to the Lambda function. 
-        ///   These variables are valid for use in the <paramref name="body"/> expression. 
+        ///   A <see cref="DbVariableReferenceExpression"/> collection that represents the formal parameters to the Lambda function.
+        ///   These variables are valid for use in the <paramref name="body"/> expression.
         /// </param>
         /// <returns>A new DbLambda that describes an inline Lambda function with the specified body and formal parameters</returns>
         /// <exception cref="ArgumentNullException">
@@ -223,12 +301,18 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     <paramref name="variables"/> contains more than one element with the same variable name.
         /// </exception>
-        public static DbLambda Lambda(DbExpression body, params DbVariableReferenceExpression[] variables)
+        public static DbLambda Lambda(
+            DbExpression body,
+            params DbVariableReferenceExpression[] variables
+        )
         {
             return CreateLambda(body, variables);
         }
 
-        private static DbLambda CreateLambda(DbExpression body, IEnumerable<DbVariableReferenceExpression> variables)
+        private static DbLambda CreateLambda(
+            DbExpression body,
+            IEnumerable<DbVariableReferenceExpression> variables
+        )
         {
             var validVars = ArgumentValidation.ValidateLambda(variables, body);
             return new DbLambda(validVars, body);
@@ -289,7 +373,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             ArgumentValidation.ValidateSortClause(key, collation);
             return new DbSortClause(key, false, collation);
         }
-                
+
         #endregion
 
         #region Binding-based methods: All, Any, Cross|OuterApply, Cross|FullOuter|Inner|LeftOuterJoin, Filter, GroupBy, Project, Skip, Sort
@@ -304,10 +388,18 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     <paramref name="predicate"/> does not have a Boolean result type.
         /// </exception>
-        public static DbQuantifierExpression All(this DbExpressionBinding input, DbExpression predicate)
+        public static DbQuantifierExpression All(
+            this DbExpressionBinding input,
+            DbExpression predicate
+        )
         {
             TypeUsage booleanResultType = ArgumentValidation.ValidateQuantifier(input, predicate);
-            return new DbQuantifierExpression(DbExpressionKind.All, booleanResultType, input, predicate);
+            return new DbQuantifierExpression(
+                DbExpressionKind.All,
+                booleanResultType,
+                input,
+                predicate
+            );
         }
 
         /// <summary>
@@ -320,10 +412,18 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     <paramref name="predicate"/> does not have a Boolean result type.
         /// </exception>
-        public static DbQuantifierExpression Any(this DbExpressionBinding input, DbExpression predicate)
+        public static DbQuantifierExpression Any(
+            this DbExpressionBinding input,
+            DbExpression predicate
+        )
         {
             TypeUsage booleanResultType = ArgumentValidation.ValidateQuantifier(input, predicate);
-            return new DbQuantifierExpression(DbExpressionKind.Any, booleanResultType, input, predicate);
+            return new DbQuantifierExpression(
+                DbExpressionKind.Any,
+                booleanResultType,
+                input,
+                predicate
+            );
         }
 
         /// <summary>
@@ -334,7 +434,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <param name="apply">An <see cref="DbExpressionBinding"/> that specifies logic to evaluate once for each member of the input set.</param>
         /// <returns>An new DbApplyExpression with the specified input and apply bindings and an <see cref="DbExpressionKind"/> of CrossApply.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="input"/> or <paramref name="apply"/> is null</exception>
-        public static DbApplyExpression CrossApply(this DbExpressionBinding input, DbExpressionBinding apply)
+        public static DbApplyExpression CrossApply(
+            this DbExpressionBinding input,
+            DbExpressionBinding apply
+        )
         {
             TypeUsage resultType = ArgumentValidation.ValidateApply(input, apply);
             return new DbApplyExpression(DbExpressionKind.CrossApply, resultType, input, apply);
@@ -348,7 +451,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <param name="apply">An <see cref="DbExpressionBinding"/> that specifies logic to evaluate once for each member of the input set.</param>
         /// <returns>An new DbApplyExpression with the specified input and apply bindings and an <see cref="DbExpressionKind"/> of OuterApply.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="input"/> or <paramref name="apply"/> is null</exception>
-        public static DbApplyExpression OuterApply(this DbExpressionBinding input, DbExpressionBinding apply)
+        public static DbApplyExpression OuterApply(
+            this DbExpressionBinding input,
+            DbExpressionBinding apply
+        )
         {
             TypeUsage resultType = ArgumentValidation.ValidateApply(input, apply);
             return new DbApplyExpression(DbExpressionKind.OuterApply, resultType, input, apply);
@@ -366,7 +472,8 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         public static DbCrossJoinExpression CrossJoin(IEnumerable<DbExpressionBinding> inputs)
         {
             TypeUsage resultType;
-            System.Collections.ObjectModel.ReadOnlyCollection<DbExpressionBinding> validInputs = ArgumentValidation.ValidateCrossJoin(inputs, out resultType);
+            System.Collections.ObjectModel.ReadOnlyCollection<DbExpressionBinding> validInputs =
+                ArgumentValidation.ValidateCrossJoin(inputs, out resultType);
             return new DbCrossJoinExpression(resultType, validInputs);
         }
 
@@ -387,10 +494,20 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     <paramref name="joinCondition"/> does not have a Boolean result type.
         /// </exception>
-        public static DbJoinExpression InnerJoin(this DbExpressionBinding left, DbExpressionBinding right, DbExpression joinCondition)
+        public static DbJoinExpression InnerJoin(
+            this DbExpressionBinding left,
+            DbExpressionBinding right,
+            DbExpression joinCondition
+        )
         {
             TypeUsage resultType = ArgumentValidation.ValidateJoin(left, right, joinCondition);
-            return new DbJoinExpression(DbExpressionKind.InnerJoin, resultType, left, right, joinCondition);
+            return new DbJoinExpression(
+                DbExpressionKind.InnerJoin,
+                resultType,
+                left,
+                right,
+                joinCondition
+            );
         }
 
         /// <summary>
@@ -410,10 +527,20 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     <paramref name="joinCondition"/> does not have a Boolean result type.
         /// </exception>
-        public static DbJoinExpression LeftOuterJoin(this DbExpressionBinding left, DbExpressionBinding right, DbExpression joinCondition)
+        public static DbJoinExpression LeftOuterJoin(
+            this DbExpressionBinding left,
+            DbExpressionBinding right,
+            DbExpression joinCondition
+        )
         {
             TypeUsage resultType = ArgumentValidation.ValidateJoin(left, right, joinCondition);
-            return new DbJoinExpression(DbExpressionKind.LeftOuterJoin, resultType, left, right, joinCondition);
+            return new DbJoinExpression(
+                DbExpressionKind.LeftOuterJoin,
+                resultType,
+                left,
+                right,
+                joinCondition
+            );
         }
 
         /// <summary>
@@ -433,10 +560,20 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     <paramref name="joinCondition"/> does not have a Boolean result type.
         /// </exception>
-        public static DbJoinExpression FullOuterJoin(this DbExpressionBinding left, DbExpressionBinding right, DbExpression joinCondition)
+        public static DbJoinExpression FullOuterJoin(
+            this DbExpressionBinding left,
+            DbExpressionBinding right,
+            DbExpression joinCondition
+        )
         {
             TypeUsage resultType = ArgumentValidation.ValidateJoin(left, right, joinCondition);
-            return new DbJoinExpression(DbExpressionKind.FullOuterJoin, resultType, left, right, joinCondition);
+            return new DbJoinExpression(
+                DbExpressionKind.FullOuterJoin,
+                resultType,
+                left,
+                right,
+                joinCondition
+            );
         }
 
         /// <summary>
@@ -449,7 +586,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     <paramref name="predicate"/> does not have a Boolean result type.
         /// </exception>
-        public static DbFilterExpression Filter(this DbExpressionBinding input, DbExpression predicate)
+        public static DbFilterExpression Filter(
+            this DbExpressionBinding input,
+            DbExpression predicate
+        )
         {
             TypeUsage resultType = ArgumentValidation.ValidateFilter(input, predicate);
             return new DbFilterExpression(resultType, input, predicate);
@@ -474,11 +614,21 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <remarks>
         ///     DbGroupByExpression allows either the list of keys or the list of aggregates to be empty, but not both.
         /// </remarks>
-        public static DbGroupByExpression GroupBy(this DbGroupExpressionBinding input, IEnumerable<KeyValuePair<string, DbExpression>> keys, IEnumerable<KeyValuePair<string, DbAggregate>> aggregates)
+        public static DbGroupByExpression GroupBy(
+            this DbGroupExpressionBinding input,
+            IEnumerable<KeyValuePair<string, DbExpression>> keys,
+            IEnumerable<KeyValuePair<string, DbAggregate>> aggregates
+        )
         {
             DbExpressionList validKeys;
             System.Collections.ObjectModel.ReadOnlyCollection<DbAggregate> validAggregates;
-            TypeUsage resultType = ArgumentValidation.ValidateGroupBy(input, keys, aggregates, out validKeys, out validAggregates);
+            TypeUsage resultType = ArgumentValidation.ValidateGroupBy(
+                input,
+                keys,
+                aggregates,
+                out validKeys,
+                out validAggregates
+            );
             return new DbGroupByExpression(resultType, input, validKeys, validAggregates);
         }
 
@@ -489,7 +639,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <param name="projection">An expression to project over the set.</param>
         /// <returns>A new DbProjectExpression that represents the projection operation.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="input"/> or <paramref name="projection"/> is null</exception>
-        public static DbProjectExpression Project(this DbExpressionBinding input, DbExpression projection)
+        public static DbProjectExpression Project(
+            this DbExpressionBinding input,
+            DbExpression projection
+        )
         {
             TypeUsage resultType = ArgumentValidation.ValidateProject(input, projection);
             return new DbProjectExpression(resultType, input, projection);
@@ -511,9 +664,14 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     or <paramref name="count"/> is not <see cref="DbConstantExpression"/> or <see cref="DbParameterReferenceExpression"/> or has a
         ///     result type that is not equal or promotable to a 64-bit integer type.
         /// </exception>
-        public static DbSkipExpression Skip(this DbExpressionBinding input, IEnumerable<DbSortClause> sortOrder, DbExpression count)
+        public static DbSkipExpression Skip(
+            this DbExpressionBinding input,
+            IEnumerable<DbSortClause> sortOrder,
+            DbExpression count
+        )
         {
-            System.Collections.ObjectModel.ReadOnlyCollection<DbSortClause> validSortOrder = ArgumentValidation.ValidateSkip(input, sortOrder, count);
+            System.Collections.ObjectModel.ReadOnlyCollection<DbSortClause> validSortOrder =
+                ArgumentValidation.ValidateSkip(input, sortOrder, count);
             return new DbSkipExpression(input.Expression.ResultType, input, validSortOrder, count);
         }
 
@@ -530,47 +688,110 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     <paramref name="sortOrder"/> is empty.
         /// </exception>
-        public static DbSortExpression Sort(this DbExpressionBinding input, IEnumerable<DbSortClause> sortOrder)
+        public static DbSortExpression Sort(
+            this DbExpressionBinding input,
+            IEnumerable<DbSortClause> sortOrder
+        )
         {
-            System.Collections.ObjectModel.ReadOnlyCollection<DbSortClause> validSortOrder = ArgumentValidation.ValidateSort(input, sortOrder);
+            System.Collections.ObjectModel.ReadOnlyCollection<DbSortClause> validSortOrder =
+                ArgumentValidation.ValidateSort(input, sortOrder);
             return new DbSortExpression(input.Expression.ResultType, input, validSortOrder);
         }
-        
+
         #endregion
 
         #region Leaf Expressions - Null, Constant, Parameter, Scan
 
 #if DBEXPRESSIONBUILDER_NULLCONSTANTS
-        // Binary 
-        public static DbNullExpression NullBinary { get { return _binaryNull; } }
-        // Boolean 
-        public static DbNullExpression NullBoolean { get { return _boolNull; } }
-        // Byte 
-        public static DbNullExpression NullByte { get { return _byteNull; } }
-        // DateTime 
-        public static DbNullExpression NullDateTime { get { return _dateTimeNull; } }
-        // DateTimeOffset 
-        public static DbNullExpression NullDateTimeOffset { get { return _dateTimeOffsetNull; } }
-        // Decimal 
-        public static DbNullExpression NullDecimal { get { return _decimalNull; } }
-        // Double 
-        public static DbNullExpression NullDouble { get { return _doubleNull; } }
-        // Guid 
-        public static DbNullExpression NullGuid { get { return _guidNull; } }
-        // Int16 
-        public static DbNullExpression NullInt16 { get { return _int16Null; } }
-        // Int32 
-        public static DbNullExpression NullInt32 { get { return _int32Null; } }
-        // Int64 
-        public static DbNullExpression NullInt64 { get { return _int64Null; } }
-        // SByte 
-        public static DbNullExpression NullSByte { get { return _sbyteNull; } }
-        // Single 
-        public static DbNullExpression NullSingle { get { return _singleNull; } }
-        // String 
-        public static DbNullExpression NullString { get { return _stringNull; } }
+        // Binary
+        public static DbNullExpression NullBinary
+        {
+            get { return _binaryNull; }
+        }
+
+        // Boolean
+        public static DbNullExpression NullBoolean
+        {
+            get { return _boolNull; }
+        }
+
+        // Byte
+        public static DbNullExpression NullByte
+        {
+            get { return _byteNull; }
+        }
+
+        // DateTime
+        public static DbNullExpression NullDateTime
+        {
+            get { return _dateTimeNull; }
+        }
+
+        // DateTimeOffset
+        public static DbNullExpression NullDateTimeOffset
+        {
+            get { return _dateTimeOffsetNull; }
+        }
+
+        // Decimal
+        public static DbNullExpression NullDecimal
+        {
+            get { return _decimalNull; }
+        }
+
+        // Double
+        public static DbNullExpression NullDouble
+        {
+            get { return _doubleNull; }
+        }
+
+        // Guid
+        public static DbNullExpression NullGuid
+        {
+            get { return _guidNull; }
+        }
+
+        // Int16
+        public static DbNullExpression NullInt16
+        {
+            get { return _int16Null; }
+        }
+
+        // Int32
+        public static DbNullExpression NullInt32
+        {
+            get { return _int32Null; }
+        }
+
+        // Int64
+        public static DbNullExpression NullInt64
+        {
+            get { return _int64Null; }
+        }
+
+        // SByte
+        public static DbNullExpression NullSByte
+        {
+            get { return _sbyteNull; }
+        }
+
+        // Single
+        public static DbNullExpression NullSingle
+        {
+            get { return _singleNull; }
+        }
+
+        // String
+        public static DbNullExpression NullString
+        {
+            get { return _stringNull; }
+        }
+
         // Time
-        public static DbNullExpression NullTime { get { return _timeNull; } }
+        public static DbNullExpression NullTime
+        {
+            get { return _timeNull; }
+        }
 #endif
 
         /// <summary>
@@ -584,18 +805,24 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             ArgumentValidation.ValidateNull(nullType);
             return new DbNullExpression(nullType);
         }
-                
+
         /// <summary>
         /// Creates a <see cref="DbConstantExpression"/> with the Boolean value <code>true</code>.
         /// </summary>
         /// <returns>A DbConstantExpression with the Boolean value true.</returns>
-        public static DbConstantExpression True { get { return _boolTrue; } }
-        
+        public static DbConstantExpression True
+        {
+            get { return _boolTrue; }
+        }
+
         /// <summary>
         /// Creates a <see cref="DbConstantExpression"/> with the Boolean value <code>false</code>.
         /// </summary>
         /// <returns>A DbConstantExpression with the Boolean value false.</returns>
-        public static DbConstantExpression False { get { return _boolFalse; } }
+        public static DbConstantExpression False
+        {
+            get { return _boolFalse; }
+        }
 
         /// <summary>
         /// Creates a new <see cref="DbConstantExpression"/> with the given constant value.
@@ -669,7 +896,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             TypeUsage resultType = ArgumentValidation.ValidateScan(targetSet);
             return new DbScanExpression(resultType, targetSet);
         }
-                        
+
         #endregion
 
         #region Boolean Operators - And, Or, Not
@@ -725,10 +952,18 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
 
         #region Arithmetic Operators - Divide, Minus, Modulo, Multiply, Plus, UnaryMinus
 
-        private static DbArithmeticExpression CreateArithmetic(DbExpressionKind kind, DbExpression left, DbExpression right)
+        private static DbArithmeticExpression CreateArithmetic(
+            DbExpressionKind kind,
+            DbExpression left,
+            DbExpression right
+        )
         {
             TypeUsage numericResultType;
-            DbExpressionList arguments = ArgumentValidation.ValidateArithmetic(left, right, out numericResultType);
+            DbExpressionList arguments = ArgumentValidation.ValidateArithmetic(
+                left,
+                right,
+                out numericResultType
+            );
             return new DbArithmeticExpression(kind, numericResultType, arguments);
         }
 
@@ -811,7 +1046,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// Creates a new <see cref="DbArithmeticExpression"/> that negates the value of the argument.
         /// </summary>
         /// <param name="argument">An expression that specifies the argument.</param>
-        /// <returns>A new DbArithmeticExpression representing the negation operation.</returns>   
+        /// <returns>A new DbArithmeticExpression representing the negation operation.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="argument"/> is null</exception>
         /// <exception cref="ArgumentException">
         ///     No numeric result type exists for <paramref name="argument"/>.
@@ -827,7 +1062,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// Creates a new <see cref="DbArithmeticExpression"/> that negates the value of the argument.
         /// </summary>
         /// <param name="argument">An expression that specifies the argument.</param>
-        /// <returns>A new DbArithmeticExpression representing the negation operation.</returns>   
+        /// <returns>A new DbArithmeticExpression representing the negation operation.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="argument"/> is null</exception>
         /// <exception cref="ArgumentException">
         ///     No numeric result type exists for <paramref name="argument"/>.
@@ -841,7 +1076,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
 
         #region Comparison Operators - Equal, NotEqual, GreaterThan, LessThan, GreaterThanEqual, LessThanEqual, IsNull, Like
 
-        private static DbComparisonExpression CreateComparison(DbExpressionKind kind, DbExpression left, DbExpression right)
+        private static DbComparisonExpression CreateComparison(
+            DbExpressionKind kind,
+            DbExpression left,
+            DbExpression right
+        )
         {
             TypeUsage resultType = ArgumentValidation.ValidateComparison(kind, left, right);
             return new DbComparisonExpression(kind, resultType, left, right);
@@ -917,9 +1156,16 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     No common result type that is both equality- and order-comparable exists between <paramref name="left"/> and <paramref name="right"/>.
         /// </exception>
-        public static DbComparisonExpression GreaterThanOrEqual(this DbExpression left, DbExpression right)
+        public static DbComparisonExpression GreaterThanOrEqual(
+            this DbExpression left,
+            DbExpression right
+        )
         {
-            return DbExpressionBuilder.CreateComparison(DbExpressionKind.GreaterThanOrEquals, left, right);
+            return DbExpressionBuilder.CreateComparison(
+                DbExpressionKind.GreaterThanOrEquals,
+                left,
+                right
+            );
         }
 
         /// <summary>
@@ -932,9 +1178,16 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     No common result type that is both equality- and order-comparable exists between <paramref name="left"/> and <paramref name="right"/>.
         /// </exception>
-        public static DbComparisonExpression LessThanOrEqual(this DbExpression left, DbExpression right)
+        public static DbComparisonExpression LessThanOrEqual(
+            this DbExpression left,
+            DbExpression right
+        )
         {
-            return DbExpressionBuilder.CreateComparison(DbExpressionKind.LessThanOrEquals, left, right);
+            return DbExpressionBuilder.CreateComparison(
+                DbExpressionKind.LessThanOrEquals,
+                left,
+                right
+            );
         }
 
         /// <summary>
@@ -974,7 +1227,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbLikeExpression with the specified input, pattern and escape.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="argument"/>, <paramref name="pattern"/> or <paramref name="escape"/> is null</exception>
         /// <exception cref="ArgumentException"><paramref name="argument"/>, <paramref name="pattern"/> or <paramref name="escape"/> does not have a string result type.</exception>
-        public static DbLikeExpression Like(this DbExpression argument, DbExpression pattern, DbExpression escape)
+        public static DbLikeExpression Like(
+            this DbExpression argument,
+            DbExpression pattern,
+            DbExpression escape
+        )
         {
             TypeUsage resultType = ArgumentValidation.ValidateLike(argument, pattern, escape);
             return new DbLikeExpression(resultType, argument, pattern, escape);
@@ -1035,8 +1292,16 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// </remarks>
         public static DbOfTypeExpression OfType(this DbExpression argument, TypeUsage type)
         {
-            TypeUsage collectionOfTypeResultType = ArgumentValidation.ValidateOfType(argument, type);
-            return new DbOfTypeExpression(DbExpressionKind.OfType, collectionOfTypeResultType, argument, type);
+            TypeUsage collectionOfTypeResultType = ArgumentValidation.ValidateOfType(
+                argument,
+                type
+            );
+            return new DbOfTypeExpression(
+                DbExpressionKind.OfType,
+                collectionOfTypeResultType,
+                argument,
+                type
+            );
         }
 
         /// <summary>
@@ -1057,10 +1322,18 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// </remarks>
         public static DbOfTypeExpression OfTypeOnly(this DbExpression argument, TypeUsage type)
         {
-            TypeUsage collectionOfTypeResultType = ArgumentValidation.ValidateOfType(argument, type);
-            return new DbOfTypeExpression(DbExpressionKind.OfTypeOnly, collectionOfTypeResultType, argument, type);
+            TypeUsage collectionOfTypeResultType = ArgumentValidation.ValidateOfType(
+                argument,
+                type
+            );
+            return new DbOfTypeExpression(
+                DbExpressionKind.OfTypeOnly,
+                collectionOfTypeResultType,
+                argument,
+                type
+            );
         }
-        
+
         /// <summary>
         /// Creates a new <see cref="DbIsOfExpression"/> that determines whether the given argument is of the specified type or a subtype.
         /// </summary>
@@ -1098,7 +1371,12 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         public static DbIsOfExpression IsOfOnly(this DbExpression argument, TypeUsage type)
         {
             TypeUsage booleanResultType = ArgumentValidation.ValidateIsOf(argument, type);
-            return new DbIsOfExpression(DbExpressionKind.IsOfOnly, booleanResultType, argument, type);
+            return new DbIsOfExpression(
+                DbExpressionKind.IsOfOnly,
+                booleanResultType,
+                argument,
+                type
+            );
         }
 
         #endregion
@@ -1112,7 +1390,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new DbDerefExpression that retrieves the specified Entity</returns>
         /// <exception cref="ArgumentNullException"><paramref name="argument"/> is null</exception>
         /// <exception cref="ArgumentException"><paramref name="argument"/> does not have a reference result type.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Deref")]
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Naming",
+            "CA1704:IdentifiersShouldBeSpelledCorrectly",
+            MessageId = "Deref"
+        )]
         public static DbDerefExpression Deref(this DbExpression argument)
         {
             TypeUsage entityResultType = ArgumentValidation.ValidateDeref(argument);
@@ -1131,35 +1413,41 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             TypeUsage refResultType = ArgumentValidation.ValidateGetEntityRef(argument);
             return new DbEntityRefExpression(refResultType, argument);
         }
-        
+
         /// <summary>
         /// Creates a new <see cref="DbRefExpression"/> that encodes a reference to a specific entity based on key values.
         /// </summary>
-        /// <param name="entitySet">The entity set in which the referenced element resides.</param>        
+        /// <param name="entitySet">The entity set in which the referenced element resides.</param>
         /// <param name="keyValues">A collection of <see cref="DbExpression"/>s that provide the key values. These expressions must match (in number, type, and order) the key properties of the referenced entity type.</param>
         /// <returns>A new DbRefExpression that references the element with the specified key values in the given entity set.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="entitySet"/> is null, or <paramref name="keyValues"/> is null or contains null.</exception>
         /// <exception cref="ArgumentException">
         ///     The count of <paramref name="keyValues"/> does not match the count of key members declared by the <paramref name="entitySet"/>'s element type,
         ///     or <paramref name="keyValues"/> contains an expression with a result type that is not compatible with the type of the corresponding key member.
-        /// </exception>        
-        public static DbRefExpression CreateRef(this EntitySet entitySet, IEnumerable<DbExpression> keyValues)
+        /// </exception>
+        public static DbRefExpression CreateRef(
+            this EntitySet entitySet,
+            IEnumerable<DbExpression> keyValues
+        )
         {
             return CreateRefExpression(entitySet, keyValues);
         }
-        
+
         /// <summary>
         /// Creates a new <see cref="DbRefExpression"/> that encodes a reference to a specific entity based on key values.
         /// </summary>
-        /// <param name="entitySet">The entity set in which the referenced element resides.</param>        
+        /// <param name="entitySet">The entity set in which the referenced element resides.</param>
         /// <param name="keyValues">A collection of <see cref="DbExpression"/>s that provide the key values. These expressions must match (in number, type, and order) the key properties of the referenced entity type.</param>
         /// <returns>A new DbRefExpression that references the element with the specified key values in the given entity set.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="entitySet"/> is null, or <paramref name="keyValues"/> is null or contains null.</exception>
         /// <exception cref="ArgumentException">
         ///     The count of <paramref name="keyValues"/> does not match the count of key members declared by the <paramref name="entitySet"/>'s element type,
         ///     or <paramref name="keyValues"/> contains an expression with a result type that is not compatible with the type of the corresponding key member.
-        /// </exception>        
-        public static DbRefExpression CreateRef(this EntitySet entitySet, params DbExpression[] keyValues)
+        /// </exception>
+        public static DbRefExpression CreateRef(
+            this EntitySet entitySet,
+            params DbExpression[] keyValues
+        )
         {
             return CreateRefExpression(entitySet, keyValues);
         }
@@ -1167,8 +1455,8 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Creates a new <see cref="DbRefExpression"/> that encodes a reference to a specific entity of a given type based on key values.
         /// </summary>
-        /// <param name="entitySet">The entity set in which the referenced element resides.</param>        
-        /// <param name="entityType">The specific type of the referenced entity. This must be an entity type from the same hierarchy as the entity set's element type.</param>        
+        /// <param name="entitySet">The entity set in which the referenced element resides.</param>
+        /// <param name="entityType">The specific type of the referenced entity. This must be an entity type from the same hierarchy as the entity set's element type.</param>
         /// <param name="keyValues">A collection of <see cref="DbExpression"/>s that provide the key values. These expressions must match (in number, type, and order) the key properties of the referenced entity type.</param>
         /// <returns>A new DbRefExpression that references the element with the specified key values in the given entity set.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="entitySet"/> or <paramref name="entityType"/> is null, or <paramref name="keyValues"/> is null or contains null.</exception>
@@ -1176,8 +1464,12 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     The count of <paramref name="keyValues"/> does not match the count of key members declared by the <paramref name="entitySet"/>'s element type,
         ///     or <paramref name="keyValues"/> contains an expression with a result type that is not compatible with the type of the corresponding key member.
-        /// </exception>        
-        public static DbRefExpression CreateRef(this EntitySet entitySet, EntityType entityType, IEnumerable<DbExpression> keyValues)
+        /// </exception>
+        public static DbRefExpression CreateRef(
+            this EntitySet entitySet,
+            EntityType entityType,
+            IEnumerable<DbExpression> keyValues
+        )
         {
             return CreateRefExpression(entitySet, entityType, keyValues);
         }
@@ -1185,8 +1477,8 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Creates a new <see cref="DbRefExpression"/> that encodes a reference to a specific entity of a given type based on key values.
         /// </summary>
-        /// <param name="entitySet">The entity set in which the referenced element resides.</param>        
-        /// <param name="entityType">The specific type of the referenced entity. This must be an entity type from the same hierarchy as the entity set's element type.</param>        
+        /// <param name="entitySet">The entity set in which the referenced element resides.</param>
+        /// <param name="entityType">The specific type of the referenced entity. This must be an entity type from the same hierarchy as the entity set's element type.</param>
         /// <param name="keyValues">A collection of <see cref="DbExpression"/>s that provide the key values. These expressions must match (in number, type, and order) the key properties of the referenced entity type.</param>
         /// <returns>A new DbRefExpression that references the element with the specified key values in the given entity set.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="entitySet"/> or <paramref name="entityType"/> is null, or <paramref name="keyValues"/> is null or contains null.</exception>
@@ -1194,30 +1486,50 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     The count of <paramref name="keyValues"/> does not match the count of key members declared by the <paramref name="entitySet"/>'s element type,
         ///     or <paramref name="keyValues"/> contains an expression with a result type that is not compatible with the type of the corresponding key member.
-        /// </exception>        
-        public static DbRefExpression CreateRef(this EntitySet entitySet, EntityType entityType, params DbExpression[] keyValues)
+        /// </exception>
+        public static DbRefExpression CreateRef(
+            this EntitySet entitySet,
+            EntityType entityType,
+            params DbExpression[] keyValues
+        )
         {
-            return CreateRefExpression(entitySet, entityType, keyValues);    
+            return CreateRefExpression(entitySet, entityType, keyValues);
         }
 
-        private static DbRefExpression CreateRefExpression(EntitySet entitySet, IEnumerable<DbExpression> keyValues)
+        private static DbRefExpression CreateRefExpression(
+            EntitySet entitySet,
+            IEnumerable<DbExpression> keyValues
+        )
         {
             DbExpression keyConstructor;
-            TypeUsage refResultType = ArgumentValidation.ValidateCreateRef(entitySet, keyValues, out keyConstructor);
+            TypeUsage refResultType = ArgumentValidation.ValidateCreateRef(
+                entitySet,
+                keyValues,
+                out keyConstructor
+            );
             return new DbRefExpression(refResultType, entitySet, keyConstructor);
         }
 
-        private static DbRefExpression CreateRefExpression(EntitySet entitySet, EntityType entityType, IEnumerable<DbExpression> keyValues)
+        private static DbRefExpression CreateRefExpression(
+            EntitySet entitySet,
+            EntityType entityType,
+            IEnumerable<DbExpression> keyValues
+        )
         {
             DbExpression keyConstructor;
-            TypeUsage refResultType = ArgumentValidation.ValidateCreateRef(entitySet, entityType, keyValues, out keyConstructor);
+            TypeUsage refResultType = ArgumentValidation.ValidateCreateRef(
+                entitySet,
+                entityType,
+                keyValues,
+                out keyConstructor
+            );
             return new DbRefExpression(refResultType, entitySet, keyConstructor);
         }
 
         /// <summary>
         /// Creates a new <see cref="DbRefExpression"/> that encodes a reference to a specific Entity based on key values.
         /// </summary>
-        /// <param name="entitySet">The Entity set in which the referenced element resides.</param>        
+        /// <param name="entitySet">The Entity set in which the referenced element resides.</param>
         /// <param name="keyRow">A <see cref="DbExpression"/> that constructs a record with columns that match (in number, type, and order) the Key properties of the referenced Entity type.</param>
         /// <returns>A new DbRefExpression that references the element with the specified key values in the given Entity set.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="entitySet"/> or <paramref name="keyRow"/> is null</exception>
@@ -1237,7 +1549,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Creates a new <see cref="DbRefExpression"/> that encodes a reference to a specific Entity based on key values.
         /// </summary>
-        /// <param name="entitySet">The Entity set in which the referenced element resides.</param>        
+        /// <param name="entitySet">The Entity set in which the referenced element resides.</param>
         /// <param name="keyRow">A <see cref="DbExpression"/> that constructs a record with columns that match (in number, type, and order) the Key properties of the referenced Entity type.</param>
         /// <param name="entityType">The type of the Entity that the reference should refer to.</param>
         /// <returns>A new DbRefExpression that references the element with the specified key values in the given Entity set.</returns>
@@ -1250,9 +1562,17 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     <paramref name="keyRow"/> should be an expression that specifies the key values that identify the referenced entity within the given entity set.
         ///     The result type of <paramref name="keyRow"/> should contain a corresponding column for each key property defined by <paramref name="entitySet"/>'s entity type.
         /// </remarks>
-        public static DbRefExpression RefFromKey(this EntitySet entitySet, DbExpression keyRow, EntityType entityType)
+        public static DbRefExpression RefFromKey(
+            this EntitySet entitySet,
+            DbExpression keyRow,
+            EntityType entityType
+        )
         {
-            TypeUsage refResultType = ArgumentValidation.ValidateRefFromKey(entitySet, keyRow, entityType);
+            TypeUsage refResultType = ArgumentValidation.ValidateRefFromKey(
+                entitySet,
+                keyRow,
+                entityType
+            );
             return new DbRefExpression(refResultType, entitySet, keyRow);
         }
 
@@ -1268,7 +1588,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             TypeUsage rowResultType = ArgumentValidation.ValidateGetRefKey(argument);
             return new DbRefKeyExpression(rowResultType, argument);
         }
-        
+
         /// <summary>
         /// Creates a new <see cref="DbRelationshipNavigationExpression"/> representing the navigation of a composition or association relationship.
         /// </summary>
@@ -1284,11 +1604,27 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <remarks>
         ///     <see cref="DbRelationshipNavigationExpression"/> requires that navigation always occur from a reference, and so <paramref name="navigateFrom"/> must always have a reference result type.
         /// </remarks>
-        public static DbRelationshipNavigationExpression Navigate(this DbExpression navigateFrom, RelationshipEndMember fromEnd, RelationshipEndMember toEnd)
+        public static DbRelationshipNavigationExpression Navigate(
+            this DbExpression navigateFrom,
+            RelationshipEndMember fromEnd,
+            RelationshipEndMember toEnd
+        )
         {
             RelationshipType relType;
-            TypeUsage resultType = ArgumentValidation.ValidateNavigate(navigateFrom, fromEnd, toEnd, out relType, allowAllRelationshipsInSameTypeHierarchy: false);
-            return new DbRelationshipNavigationExpression(resultType, relType, fromEnd, toEnd, navigateFrom);
+            TypeUsage resultType = ArgumentValidation.ValidateNavigate(
+                navigateFrom,
+                fromEnd,
+                toEnd,
+                out relType,
+                allowAllRelationshipsInSameTypeHierarchy: false
+            );
+            return new DbRelationshipNavigationExpression(
+                resultType,
+                relType,
+                fromEnd,
+                toEnd,
+                navigateFrom
+            );
         }
 
         /// <summary>
@@ -1310,13 +1646,34 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <remarks>
         ///     <see cref="DbRelationshipNavigationExpression"/> requires that navigation always occur from a reference, and so <paramref name="navigateFrom"/> must always have a reference result type.
         /// </remarks>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        public static DbRelationshipNavigationExpression Navigate(this RelationshipType type, string fromEndName, string toEndName, DbExpression navigateFrom)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )]
+        public static DbRelationshipNavigationExpression Navigate(
+            this RelationshipType type,
+            string fromEndName,
+            string toEndName,
+            DbExpression navigateFrom
+        )
         {
             RelationshipEndMember fromEnd;
             RelationshipEndMember toEnd;
-            TypeUsage resultType = ArgumentValidation.ValidateNavigate(navigateFrom, type, fromEndName, toEndName, out fromEnd, out toEnd);
-            return new DbRelationshipNavigationExpression(resultType, type, fromEnd, toEnd, navigateFrom);
+            TypeUsage resultType = ArgumentValidation.ValidateNavigate(
+                navigateFrom,
+                type,
+                fromEndName,
+                toEndName,
+                out fromEnd,
+                out toEnd
+            );
+            return new DbRelationshipNavigationExpression(
+                resultType,
+                type,
+                fromEnd,
+                toEnd,
+                navigateFrom
+            );
         }
 
         #endregion
@@ -1361,7 +1718,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             TypeUsage booleanResultType = ArgumentValidation.ValidateIsEmpty(argument);
             return new DbIsEmptyExpression(booleanResultType, argument);
         }
-        
+
         /// <summary>
         /// Creates a new <see cref="DbExceptExpression"/> that computes the subtraction of the right set argument from the left set argument.
         /// </summary>
@@ -1423,7 +1780,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         }
 
         #endregion
-                
+
         #region General Operators - Case, Function, NewInstance, Property
 
         /// <summary>
@@ -1441,11 +1798,21 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     <paramref name="whenExpressions"/> or <paramref name="thenExpressions"/> is empty or <paramref name="whenExpressions"/> contains an expression with a non-Boolean result type, or
         ///     No common result type exists for all expressions in <paramref name="thenExpressions"/> and <paramref name="elseExpression"/>.
         /// </exception>
-        public static DbCaseExpression Case(IEnumerable<DbExpression> whenExpressions, IEnumerable<DbExpression> thenExpressions, DbExpression elseExpression)
+        public static DbCaseExpression Case(
+            IEnumerable<DbExpression> whenExpressions,
+            IEnumerable<DbExpression> thenExpressions,
+            DbExpression elseExpression
+        )
         {
             DbExpressionList validWhens;
             DbExpressionList validThens;
-            TypeUsage resultType = ArgumentValidation.ValidateCase(whenExpressions, thenExpressions, elseExpression, out validWhens, out validThens);
+            TypeUsage resultType = ArgumentValidation.ValidateCase(
+                whenExpressions,
+                thenExpressions,
+                elseExpression,
+                out validWhens,
+                out validThens
+            );
             return new DbCaseExpression(resultType, validWhens, validThens, elseExpression);
         }
 
@@ -1463,7 +1830,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     or <paramref name="arguments"/> contains an expression that has a result type that is not equal or promotable
         ///     to the corresponding function parameter type.
         /// </exception>
-        public static DbFunctionExpression Invoke(this EdmFunction function, IEnumerable<DbExpression> arguments)
+        public static DbFunctionExpression Invoke(
+            this EdmFunction function,
+            IEnumerable<DbExpression> arguments
+        )
         {
             return InvokeFunction(function, arguments);
         }
@@ -1482,15 +1852,25 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     or <paramref name="arguments"/> contains an expression that has a result type that is not equal or promotable
         ///     to the corresponding function parameter type.
         /// </exception>
-        public static DbFunctionExpression Invoke(this EdmFunction function, params DbExpression[] arguments)
+        public static DbFunctionExpression Invoke(
+            this EdmFunction function,
+            params DbExpression[] arguments
+        )
         {
             return InvokeFunction(function, arguments);
         }
 
-        private static DbFunctionExpression InvokeFunction(EdmFunction function, IEnumerable<DbExpression> arguments)
+        private static DbFunctionExpression InvokeFunction(
+            EdmFunction function,
+            IEnumerable<DbExpression> arguments
+        )
         {
             DbExpressionList validArguments;
-            TypeUsage resultType = ArgumentValidation.ValidateFunction(function, arguments, out validArguments);
+            TypeUsage resultType = ArgumentValidation.ValidateFunction(
+                function,
+                arguments,
+                out validArguments
+            );
             return new DbFunctionExpression(resultType, function, validArguments);
         }
 
@@ -1508,7 +1888,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     or <paramref name="arguments"/> contains an expression that has a result type that is not equal or promotable
         ///     to the corresponding variable type.
         /// </exception>
-        public static DbLambdaExpression Invoke(this DbLambda lambda, IEnumerable<DbExpression> arguments)
+        public static DbLambdaExpression Invoke(
+            this DbLambda lambda,
+            IEnumerable<DbExpression> arguments
+        )
         {
             return InvokeLambda(lambda, arguments);
         }
@@ -1527,15 +1910,25 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     or <paramref name="arguments"/> contains an expression that has a result type that is not equal or promotable
         ///     to the corresponding variable type.
         /// </exception>
-        public static DbLambdaExpression Invoke(this DbLambda lambda, params DbExpression[] arguments)
+        public static DbLambdaExpression Invoke(
+            this DbLambda lambda,
+            params DbExpression[] arguments
+        )
         {
             return InvokeLambda(lambda, arguments);
         }
 
-        private static DbLambdaExpression InvokeLambda(DbLambda lambda, IEnumerable<DbExpression> arguments)
+        private static DbLambdaExpression InvokeLambda(
+            DbLambda lambda,
+            IEnumerable<DbExpression> arguments
+        )
         {
             DbExpressionList validArguments;
-            TypeUsage resultType = ArgumentValidation.ValidateInvoke(lambda, arguments, out validArguments);
+            TypeUsage resultType = ArgumentValidation.ValidateInvoke(
+                lambda,
+                arguments,
+                out validArguments
+            );
             return new DbLambdaExpression(resultType, lambda, validArguments);
         }
 
@@ -1562,7 +1955,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     and the result type of each expression must be equal or promotable to the type of the corresponding property.
         ///     </para>
         /// </remarks>
-        public static DbNewInstanceExpression New(this TypeUsage instanceType, IEnumerable<DbExpression> arguments)
+        public static DbNewInstanceExpression New(
+            this TypeUsage instanceType,
+            IEnumerable<DbExpression> arguments
+        )
         {
             return NewInstance(instanceType, arguments);
         }
@@ -1590,15 +1986,25 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     and the result type of each expression must be equal or promotable to the type of the corresponding property.
         ///     </para>
         /// </remarks>
-        public static DbNewInstanceExpression New(this TypeUsage instanceType, params DbExpression[] arguments)
+        public static DbNewInstanceExpression New(
+            this TypeUsage instanceType,
+            params DbExpression[] arguments
+        )
         {
             return NewInstance(instanceType, arguments);
         }
 
-        private static DbNewInstanceExpression NewInstance(TypeUsage instanceType, IEnumerable<DbExpression> arguments)
+        private static DbNewInstanceExpression NewInstance(
+            TypeUsage instanceType,
+            IEnumerable<DbExpression> arguments
+        )
         {
             DbExpressionList validArguments;
-            TypeUsage resultType = ArgumentValidation.ValidateNew(instanceType, arguments, out validArguments);
+            TypeUsage resultType = ArgumentValidation.ValidateNew(
+                instanceType,
+                arguments,
+                out validArguments
+            );
             return new DbNewInstanceExpression(resultType, validArguments);
         }
 
@@ -1630,10 +2036,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             return CreateNewCollection(elements);
         }
 
-        private static DbNewInstanceExpression CreateNewCollection(IEnumerable<DbExpression> elements)
+        private static DbNewInstanceExpression CreateNewCollection(
+            IEnumerable<DbExpression> elements
+        )
         {
             DbExpressionList validElements;
-            TypeUsage collectionResultType = ArgumentValidation.ValidateNewCollection(elements, out validElements);
+            TypeUsage collectionResultType = ArgumentValidation.ValidateNewCollection(
+                elements,
+                out validElements
+            );
             return new DbNewInstanceExpression(collectionResultType, validElements);
         }
 
@@ -1647,11 +2058,13 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         public static DbNewInstanceExpression NewEmptyCollection(this TypeUsage collectionType)
         {
             DbExpressionList validElements;
-            TypeUsage validResultType = ArgumentValidation.ValidateNewEmptyCollection(collectionType, out validElements);
+            TypeUsage validResultType = ArgumentValidation.ValidateNewEmptyCollection(
+                collectionType,
+                out validElements
+            );
             return new DbNewInstanceExpression(validResultType, validElements);
         }
 
-        
         /// <summary>
         /// Creates a new <see cref="DbNewInstanceExpression"/> that produces a row with the specified named columns and the given values, specified as expressions.
         /// </summary>
@@ -1661,10 +2074,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     <paramref name="columnValues"/> is empty, or contains a duplicate or invalid column name
         /// </exception>
-        public static DbNewInstanceExpression NewRow(IEnumerable<KeyValuePair<string, DbExpression>> columnValues)
+        public static DbNewInstanceExpression NewRow(
+            IEnumerable<KeyValuePair<string, DbExpression>> columnValues
+        )
         {
             DbExpressionList validElements;
-            TypeUsage resultType = ArgumentValidation.ValidateNewRow(columnValues, out validElements);
+            TypeUsage resultType = ArgumentValidation.ValidateNewRow(
+                columnValues,
+                out validElements
+            );
             return new DbNewInstanceExpression(resultType, validElements);
         }
 
@@ -1675,8 +2093,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <param name="propertyMetadata">Metadata for the property to retrieve.</param>
         /// <returns>A new DbPropertyExpression representing the property retrieval.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="propertyMetadata"/> is null or <paramref name="instance"/> is null and the property is not static.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "required for this feature")]
-        public static DbPropertyExpression Property(this DbExpression instance, EdmProperty propertyMetadata)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "required for this feature"
+        )]
+        public static DbPropertyExpression Property(
+            this DbExpression instance,
+            EdmProperty propertyMetadata
+        )
         {
             return PropertyFromMember(instance, propertyMetadata, "propertyMetadata");
         }
@@ -1688,8 +2113,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <param name="navigationProperty">Metadata for the navigation property to retrieve.</param>
         /// <returns>A new DbPropertyExpression representing the navigation property retrieval.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="navigationProperty"/> is null or <paramref name="instance"/> is null.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "required for this feature")]
-        public static DbPropertyExpression Property(this DbExpression instance, NavigationProperty navigationProperty)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "required for this feature"
+        )]
+        public static DbPropertyExpression Property(
+            this DbExpression instance,
+            NavigationProperty navigationProperty
+        )
         {
             return PropertyFromMember(instance, navigationProperty, "navigationProperty");
         }
@@ -1701,8 +2133,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <param name="relationshipEnd">Metadata for the relationship end member to retrieve.</param>
         /// <returns>A new DbPropertyExpression representing the relationship end member retrieval.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="relationshipEnd"/> is null or <paramref name="instance"/> is null and the property is not static.</exception>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "required for this feature")]
-        public static DbPropertyExpression Property(this DbExpression instance, RelationshipEndMember relationshipEnd)
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Design",
+            "CA1011:ConsiderPassingBaseTypesAsParameters",
+            Justification = "required for this feature"
+        )]
+        public static DbPropertyExpression Property(
+            this DbExpression instance,
+            RelationshipEndMember relationshipEnd
+        )
         {
             return PropertyFromMember(instance, relationshipEnd, "relationshipEnd");
         }
@@ -1720,28 +2159,48 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             return PropertyByName(instance, propertyName, false);
         }
 
-        private static DbPropertyExpression PropertyFromMember(DbExpression instance, EdmMember property, string propertyArgumentName)
+        private static DbPropertyExpression PropertyFromMember(
+            DbExpression instance,
+            EdmMember property,
+            string propertyArgumentName
+        )
         {
-            TypeUsage resultType = ArgumentValidation.ValidateProperty(instance, property, propertyArgumentName);
+            TypeUsage resultType = ArgumentValidation.ValidateProperty(
+                instance,
+                property,
+                propertyArgumentName
+            );
             return new DbPropertyExpression(resultType, property, instance);
         }
 
-        private static DbPropertyExpression PropertyByName(DbExpression instance, string propertyName, bool ignoreCase)
+        private static DbPropertyExpression PropertyByName(
+            DbExpression instance,
+            string propertyName,
+            bool ignoreCase
+        )
         {
             EdmMember property;
-            TypeUsage resultType = ArgumentValidation.ValidateProperty(instance, propertyName, ignoreCase, out property);
+            TypeUsage resultType = ArgumentValidation.ValidateProperty(
+                instance,
+                propertyName,
+                ignoreCase,
+                out property
+            );
             return new DbPropertyExpression(resultType, property, instance);
         }
-                
+
         #endregion
 
         #region Lambda-based methods: All, Any, Cross|OuterApply, Cross|FullOuter|Inner|LeftOuterJoin, Filter, GroupBy, Project, Skip, Sort
-        
+
         private static string ExtractAlias(MethodInfo method)
         {
             Debug.Assert(method != null, "Ensure method is non-null before calling ExtractAlias");
             string[] aliases = ExtractAliases(method);
-            Debug.Assert(aliases.Length > 0, "Incompatible method: at least one parameter is required");
+            Debug.Assert(
+                aliases.Length > 0,
+                "Incompatible method: at least one parameter is required"
+            );
             return aliases[0];
         }
 
@@ -1751,7 +2210,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             ParameterInfo[] methodParams = method.GetParameters();
             int start;
             int paramCount;
-            if (method.IsStatic && typeof(System.Runtime.CompilerServices.Closure) == methodParams[0].ParameterType)
+            if (
+                method.IsStatic
+                && typeof(System.Runtime.CompilerServices.Closure) == methodParams[0].ParameterType
+            )
             {
                 // Static lambda method has additional first closure parameter
                 start = 1;
@@ -1763,22 +2225,35 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
                 start = 0;
                 paramCount = methodParams.Length;
             }
-                        
+
             string[] paramNames = new string[paramCount];
             bool generateNames = methodParams.Skip(start).Any(p => p.Name == null);
             for (int idx = start; idx < methodParams.Length; idx++)
             {
-                paramNames[idx - start] = (generateNames ? _bindingAliases.Next() : methodParams[idx].Name);
+                paramNames[idx - start] = (
+                    generateNames ? _bindingAliases.Next() : methodParams[idx].Name
+                );
             }
             return paramNames;
         }
 
-        private static DbExpressionBinding ConvertToBinding<TResult>(DbExpression source, Func<DbExpression, TResult> argument, string argumentName, out TResult argumentResult)
+        private static DbExpressionBinding ConvertToBinding<TResult>(
+            DbExpression source,
+            Func<DbExpression, TResult> argument,
+            string argumentName,
+            out TResult argumentResult
+        )
         {
             return ConvertToBinding(source, "source", argument, argumentName, out argumentResult);
         }
 
-        private static DbExpressionBinding ConvertToBinding<TResult>(DbExpression source, string sourceName, Func<DbExpression, TResult> argument, string argumentName, out TResult argumentResult)
+        private static DbExpressionBinding ConvertToBinding<TResult>(
+            DbExpression source,
+            string sourceName,
+            Func<DbExpression, TResult> argument,
+            string argumentName,
+            out TResult argumentResult
+        )
         {
             EntityUtil.CheckArgumentNull(source, sourceName);
             EntityUtil.CheckArgumentNull(argument, argumentName);
@@ -1788,7 +2263,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             return binding;
         }
 
-        private static DbExpressionBinding[] ConvertToBinding(DbExpression left, string leftArgumentName, DbExpression right, string rightArgumentName, Func<DbExpression, DbExpression, DbExpression> argument, string argumentName, out DbExpression argumentExp)
+        private static DbExpressionBinding[] ConvertToBinding(
+            DbExpression left,
+            string leftArgumentName,
+            DbExpression right,
+            string rightArgumentName,
+            Func<DbExpression, DbExpression, DbExpression> argument,
+            string argumentName,
+            out DbExpression argumentExp
+        )
         {
             EntityUtil.CheckArgumentNull(left, leftArgumentName);
             EntityUtil.CheckArgumentNull(right, rightArgumentName);
@@ -1802,9 +2285,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         }
 
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        private static bool TryGetAnonymousTypeValues<TInstance, TRequired>(object instance, out List<KeyValuePair<string, TRequired>> values)
+        private static bool TryGetAnonymousTypeValues<TInstance, TRequired>(
+            object instance,
+            out List<KeyValuePair<string, TRequired>> values
+        )
         {
-            Debug.Assert(instance != null, "Ensure instance is non-null before calling TryGetAnonymousTypeValues");
+            Debug.Assert(
+                instance != null,
+                "Ensure instance is non-null before calling TryGetAnonymousTypeValues"
+            );
 
             // The following heuristic is used to approximate whether or not TInstance is an anonymous type:
             // - Derived directly from System.Object
@@ -1812,12 +2301,20 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             // - All public instance properties are readable and of an appropriate type
 
             values = null;
-            if (typeof(TInstance).BaseType.Equals(typeof(object)) &&
-                typeof(TInstance).GetProperties(BindingFlags.Static).Length == 0 &&
-                typeof(TInstance).GetProperties(BindingFlags.Instance | BindingFlags.NonPublic).Length == 0)
+            if (
+                typeof(TInstance).BaseType.Equals(typeof(object))
+                && typeof(TInstance).GetProperties(BindingFlags.Static).Length == 0
+                && typeof(TInstance)
+                    .GetProperties(BindingFlags.Instance | BindingFlags.NonPublic)
+                    .Length == 0
+            )
             {
                 List<KeyValuePair<string, TRequired>> foundValues = null;
-                foreach (PropertyInfo pi in typeof(TInstance).GetProperties(BindingFlags.Public | BindingFlags.Instance))
+                foreach (
+                    PropertyInfo pi in typeof(TInstance).GetProperties(
+                        BindingFlags.Public | BindingFlags.Instance
+                    )
+                )
                 {
                     if (pi.CanRead && typeof(TRequired).IsAssignableFrom(pi.PropertyType))
                     {
@@ -1825,7 +2322,12 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
                         {
                             foundValues = new List<KeyValuePair<string, TRequired>>();
                         }
-                        foundValues.Add(new KeyValuePair<string, TRequired>(pi.Name, (TRequired)pi.GetValue(instance, null)));
+                        foundValues.Add(
+                            new KeyValuePair<string, TRequired>(
+                                pi.Name,
+                                (TRequired)pi.GetValue(instance, null)
+                            )
+                        );
                     }
                     else
                     {
@@ -1839,7 +2341,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             return (values != null);
         }
 
-        private static bool TryResolveToConstant(Type type, object value, out DbExpression constantOrNullExpression)
+        private static bool TryResolveToConstant(
+            Type type,
+            object value,
+            out DbExpression constantOrNullExpression
+        )
         {
             constantOrNullExpression = null;
 
@@ -1850,7 +2356,12 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             }
 
             PrimitiveTypeKind primitiveTypeKind;
-            if (ClrProviderManifest.Instance.TryGetPrimitiveTypeKind(valueType, out primitiveTypeKind))
+            if (
+                ClrProviderManifest.Instance.TryGetPrimitiveTypeKind(
+                    valueType,
+                    out primitiveTypeKind
+                )
+            )
             {
                 TypeUsage resultType = TypeHelpers.GetLiteralTypeUsage(primitiveTypeKind);
                 if (null == value)
@@ -1895,23 +2406,42 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
 
             // Conversion from anonymous type instance to DbNewInstanceExpression of a corresponding row type
             List<KeyValuePair<string, DbExpression>> columnValues;
-            if (TryGetAnonymousTypeValues<TArgument, DbExpression>(untypedArgument, out columnValues))
+            if (
+                TryGetAnonymousTypeValues<TArgument, DbExpression>(
+                    untypedArgument,
+                    out columnValues
+                )
+            )
             {
                 return DbExpressionBuilder.NewRow(columnValues);
             }
 
             // The specified instance cannot be resolved to a DbExpression
-            throw EntityUtil.NotSupported(Strings.Cqt_Factory_MethodResultTypeNotSupported(typeof(TArgument).FullName));
+            throw EntityUtil.NotSupported(
+                Strings.Cqt_Factory_MethodResultTypeNotSupported(typeof(TArgument).FullName)
+            );
         }
 
-        private static DbApplyExpression CreateApply(DbExpression source, Func<DbExpression, KeyValuePair<string, DbExpression>> apply, Func<DbExpressionBinding, DbExpressionBinding, DbApplyExpression> resultBuilder)
+        private static DbApplyExpression CreateApply(
+            DbExpression source,
+            Func<DbExpression, KeyValuePair<string, DbExpression>> apply,
+            Func<DbExpressionBinding, DbExpressionBinding, DbApplyExpression> resultBuilder
+        )
         {
             KeyValuePair<string, DbExpression> applyTemplate;
-            DbExpressionBinding sourceBinding = ConvertToBinding(source, apply, "apply", out applyTemplate);
-            DbExpressionBinding applyBinding = DbExpressionBuilder.BindAs(applyTemplate.Value, applyTemplate.Key);
+            DbExpressionBinding sourceBinding = ConvertToBinding(
+                source,
+                apply,
+                "apply",
+                out applyTemplate
+            );
+            DbExpressionBinding applyBinding = DbExpressionBuilder.BindAs(
+                applyTemplate.Value,
+                applyTemplate.Key
+            );
             return resultBuilder(sourceBinding, applyBinding);
         }
-        
+
         /// <summary>
         /// Creates a new <see cref="DbQuantifierExpression"/> that determines whether the given predicate holds for all elements of the input set.
         /// </summary>
@@ -1930,10 +2460,18 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     The expression produced by <paramref name="predicate"/> does not have a Boolean result type.
         /// </exception>
-        public static DbQuantifierExpression All(this DbExpression source, Func<DbExpression, DbExpression> predicate)
+        public static DbQuantifierExpression All(
+            this DbExpression source,
+            Func<DbExpression, DbExpression> predicate
+        )
         {
             DbExpression predicateExp;
-            DbExpressionBinding input = ConvertToBinding(source, predicate, "predicate", out predicateExp);
+            DbExpressionBinding input = ConvertToBinding(
+                source,
+                predicate,
+                "predicate",
+                out predicateExp
+            );
             return DbExpressionBuilder.All(input, predicateExp);
         }
 
@@ -1979,10 +2517,18 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     The expression produced by <paramref name="predicate"/> does not have a Boolean result type.
         /// </exception>
-        public static DbQuantifierExpression Any(this DbExpression source, Func<DbExpression, DbExpression> predicate)
+        public static DbQuantifierExpression Any(
+            this DbExpression source,
+            Func<DbExpression, DbExpression> predicate
+        )
         {
             DbExpression predicateExp;
-            DbExpressionBinding input = ConvertToBinding(source, predicate, "predicate", out predicateExp);
+            DbExpressionBinding input = ConvertToBinding(
+                source,
+                predicate,
+                "predicate",
+                out predicateExp
+            );
             return DbExpressionBuilder.Any(input, predicateExp);
         }
 
@@ -2001,13 +2547,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException"><paramref name="source"/> does not have a collection result type.</exception>
         /// <exception cref="ArgumentNullException">The result of <paramref name="apply"/> contains a name or expression that is null.</exception>
         /// <exception cref="ArgumentException">The result of <paramref name="apply"/> contains a name or expression that is not valid in an expression binding.</exception>
-        public static DbApplyExpression CrossApply(this DbExpression source, Func<DbExpression, KeyValuePair<string, DbExpression>> apply)
+        public static DbApplyExpression CrossApply(
+            this DbExpression source,
+            Func<DbExpression, KeyValuePair<string, DbExpression>> apply
+        )
         {
             return CreateApply(source, apply, DbExpressionBuilder.CrossApply);
         }
 
-        // 
-
+        //
 
         /// <summary>
         /// Creates a new <see cref="DbApplyExpression"/> that evaluates the given <paramref name="apply"/> expression once for each element of a given input set,
@@ -2024,15 +2572,17 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException"><paramref name="source"/> does not have a collection result type.</exception>
         /// <exception cref="ArgumentNullException">The result of <paramref name="apply"/> contains a name or expression that is null.</exception>
         /// <exception cref="ArgumentException">The result of <paramref name="apply"/> contains a name or expression that is not valid in an expression binding.</exception>
-        public static DbApplyExpression OuterApply(this DbExpression source, Func<DbExpression, KeyValuePair<string, DbExpression>> apply)
+        public static DbApplyExpression OuterApply(
+            this DbExpression source,
+            Func<DbExpression, KeyValuePair<string, DbExpression>> apply
+        )
         {
             return CreateApply(source, apply, DbExpressionBuilder.OuterApply);
         }
 
-        // 
+        //
 
-
-        // 
+        //
 
         /// <summary>
         /// Creates a new <see cref="DbJoinExpression"/> that joins the sets specified by the left and right expressions,
@@ -2061,10 +2611,22 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     The expression produced by <paramref name="joinCondition"/> does not have a Boolean result type.
         /// </exception>
-        public static DbJoinExpression FullOuterJoin(this DbExpression left, DbExpression right, Func<DbExpression, DbExpression, DbExpression> joinCondition)
+        public static DbJoinExpression FullOuterJoin(
+            this DbExpression left,
+            DbExpression right,
+            Func<DbExpression, DbExpression, DbExpression> joinCondition
+        )
         {
             DbExpression condExp;
-            DbExpressionBinding[] inputs = ConvertToBinding(left, "left", right, "right", joinCondition, "joinCondition", out condExp);
+            DbExpressionBinding[] inputs = ConvertToBinding(
+                left,
+                "left",
+                right,
+                "right",
+                joinCondition,
+                "joinCondition",
+                out condExp
+            );
             return DbExpressionBuilder.FullOuterJoin(inputs[0], inputs[1], condExp);
         }
 
@@ -2095,10 +2657,22 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     The expression produced by <paramref name="joinCondition"/> does not have a Boolean result type.
         /// </exception>
-        public static DbJoinExpression InnerJoin(this DbExpression left, DbExpression right, Func<DbExpression, DbExpression, DbExpression> joinCondition)
+        public static DbJoinExpression InnerJoin(
+            this DbExpression left,
+            DbExpression right,
+            Func<DbExpression, DbExpression, DbExpression> joinCondition
+        )
         {
             DbExpression condExp;
-            DbExpressionBinding[] inputs = ConvertToBinding(left, "left", right, "right", joinCondition, "joinCondition", out condExp);
+            DbExpressionBinding[] inputs = ConvertToBinding(
+                left,
+                "left",
+                right,
+                "right",
+                joinCondition,
+                "joinCondition",
+                out condExp
+            );
             return DbExpressionBuilder.InnerJoin(inputs[0], inputs[1], condExp);
         }
 
@@ -2125,14 +2699,26 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// </exception>
         /// <exception cref="ArgumentNullException">
         ///     The expression produced by <paramref name="joinCondition"/> is null.
-        /// </exception> 
+        /// </exception>
         /// <exception cref="ArgumentException">
         ///     The expression produced by <paramref name="joinCondition"/> does not have a Boolean result type.
         /// </exception>
-        public static DbJoinExpression LeftOuterJoin(this DbExpression left, DbExpression right, Func<DbExpression, DbExpression, DbExpression> joinCondition)
+        public static DbJoinExpression LeftOuterJoin(
+            this DbExpression left,
+            DbExpression right,
+            Func<DbExpression, DbExpression, DbExpression> joinCondition
+        )
         {
             DbExpression condExp;
-            DbExpressionBinding[] inputs = ConvertToBinding(left, "left", right, "right", joinCondition, "joinCondition", out condExp);
+            DbExpressionBinding[] inputs = ConvertToBinding(
+                left,
+                "left",
+                right,
+                "right",
+                joinCondition,
+                "joinCondition",
+                out condExp
+            );
             return DbExpressionBuilder.LeftOuterJoin(inputs[0], inputs[1], condExp);
         }
 
@@ -2160,13 +2746,30 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     The expressions produced by <paramref name="outerKey"/> and <paramref name="innerKey"/> are not comparable for equality.
         /// </exception>
-        public static DbJoinExpression Join(this DbExpression outer, DbExpression inner, Func<DbExpression, DbExpression> outerKey, Func<DbExpression, DbExpression> innerKey)
+        public static DbJoinExpression Join(
+            this DbExpression outer,
+            DbExpression inner,
+            Func<DbExpression, DbExpression> outerKey,
+            Func<DbExpression, DbExpression> innerKey
+        )
         {
             DbExpression leftOperand;
-            DbExpressionBinding leftBinding = ConvertToBinding(outer, "outer", outerKey, "outerKey", out leftOperand);
-            
+            DbExpressionBinding leftBinding = ConvertToBinding(
+                outer,
+                "outer",
+                outerKey,
+                "outerKey",
+                out leftOperand
+            );
+
             DbExpression rightOperand;
-            DbExpressionBinding rightBinding = ConvertToBinding(inner, "inner", innerKey, "innerKey", out rightOperand);
+            DbExpressionBinding rightBinding = ConvertToBinding(
+                inner,
+                "inner",
+                innerKey,
+                "innerKey",
+                out rightOperand
+            );
 
             DbExpression joinCondition = DbExpressionBuilder.Equal(leftOperand, rightOperand);
 
@@ -2184,11 +2787,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <param name="selector">
         ///    A method that specifies how an element of the result set should be derived from elements of the inner and outer sets.
         ///    This method must produce an instance of a type that is compatible with Join and can be resolved
-        ///    into a <see cref="DbExpression"/>. 
+        ///    into a <see cref="DbExpression"/>.
         ///    Compatibility requirements for <typeparamref name="TSelector"/> are described in remarks.
         /// </param>
         /// <returns>
-        ///     A new DbProjectExpression with the specified selector as its projection, and a new DbJoinExpression as its input. 
+        ///     A new DbProjectExpression with the specified selector as its projection, and a new DbJoinExpression as its input.
         ///     The input DbJoinExpression is created with an <see cref="DbExpressionKind"/> of InnerJoin, that represents the inner join operation
         ///     applied to the left and right input sets under a join condition that compares the outer and inner key values for equality.
         /// </returns>
@@ -2219,18 +2822,35 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     <code>outer.Join(inner, o => o.Property("ID"), i => i.Property("ID"), (o, i) => new { OName = o.Property("Name"), IName = i.Property("Name") })</code> (<typeparamref name="TSelector"/> is an anonymous type with DbExpression-derived properties).
         ///     </para>
         /// </remarks>
-        public static DbProjectExpression Join<TSelector>(this DbExpression outer, DbExpression inner, Func<DbExpression, DbExpression> outerKey, Func<DbExpression, DbExpression> innerKey, Func<DbExpression, DbExpression, TSelector> selector)
+        public static DbProjectExpression Join<TSelector>(
+            this DbExpression outer,
+            DbExpression inner,
+            Func<DbExpression, DbExpression> outerKey,
+            Func<DbExpression, DbExpression> innerKey,
+            Func<DbExpression, DbExpression, TSelector> selector
+        )
         {
             // Defer argument validation for all but the selector to the selector-less overload of Join
-            DbJoinExpression joinExpression = DbExpressionBuilder.Join(outer, inner, outerKey, innerKey);
+            DbJoinExpression joinExpression = DbExpressionBuilder.Join(
+                outer,
+                inner,
+                outerKey,
+                innerKey
+            );
 
             // Ensure that the selector is non-null;
             EntityUtil.CheckArgumentNull(selector, "selector");
 
             // Bind the join expression and produce the selector based on the left and right inputs
             DbExpressionBinding joinBinding = DbExpressionBuilder.Bind(joinExpression);
-            DbExpression left = DbExpressionBuilder.Property(joinBinding.Variable, joinExpression.Left.VariableName);
-            DbExpression right = DbExpressionBuilder.Property(joinBinding.Variable, joinExpression.Right.VariableName);
+            DbExpression left = DbExpressionBuilder.Property(
+                joinBinding.Variable,
+                joinExpression.Left.VariableName
+            );
+            DbExpression right = DbExpressionBuilder.Property(
+                joinBinding.Variable,
+                joinExpression.Right.VariableName
+            );
             TSelector intermediateSelector = selector(left, right);
             DbExpression projection = DbExpressionBuilder.ResolveToExpression(intermediateSelector);
 
@@ -2255,14 +2875,22 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     The expression produced by <paramref name="sortKey"/> does not have an order-comparable result type.
         /// </exception>
-        public static DbSortExpression OrderBy(this DbExpression source, Func<DbExpression, DbExpression> sortKey)
+        public static DbSortExpression OrderBy(
+            this DbExpression source,
+            Func<DbExpression, DbExpression> sortKey
+        )
         {
             DbExpression keyExpression;
-            DbExpressionBinding input = ConvertToBinding(source, sortKey, "sortKey", out keyExpression);
+            DbExpressionBinding input = ConvertToBinding(
+                source,
+                sortKey,
+                "sortKey",
+                out keyExpression
+            );
             DbSortClause sortClause = DbExpressionBuilder.ToSortClause(keyExpression);
             return DbExpressionBuilder.Sort(input, new DbSortClause[] { sortClause });
         }
-        
+
         /// <summary>
         /// Creates a new <see cref="DbSortExpression"/> that sorts the given input set by the specified sort key,
         /// with ascending sort order and the specified collation.
@@ -2282,10 +2910,19 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     The expression produced by <paramref name="sortKey"/> does not have an order-comparable string result type.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="collation"/> is empty or contains only space characters</exception>
-        public static DbSortExpression OrderBy(this DbExpression source, Func<DbExpression, DbExpression> sortKey, string collation)
+        public static DbSortExpression OrderBy(
+            this DbExpression source,
+            Func<DbExpression, DbExpression> sortKey,
+            string collation
+        )
         {
             DbExpression keyExpression;
-            DbExpressionBinding input = ConvertToBinding(source, sortKey, "sortKey", out keyExpression);
+            DbExpressionBinding input = ConvertToBinding(
+                source,
+                sortKey,
+                "sortKey",
+                out keyExpression
+            );
             DbSortClause sortClause = DbExpressionBuilder.ToSortClause(keyExpression, collation);
             return DbExpressionBuilder.Sort(input, new DbSortClause[] { sortClause });
         }
@@ -2307,10 +2944,18 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     The expression produced by <paramref name="sortKey"/> does not have an order-comparable result type.
         /// </exception>
-        public static DbSortExpression OrderByDescending(this DbExpression source, Func<DbExpression, DbExpression> sortKey)
+        public static DbSortExpression OrderByDescending(
+            this DbExpression source,
+            Func<DbExpression, DbExpression> sortKey
+        )
         {
             DbExpression keyExpression;
-            DbExpressionBinding input = ConvertToBinding(source, sortKey, "sortKey", out keyExpression);
+            DbExpressionBinding input = ConvertToBinding(
+                source,
+                sortKey,
+                "sortKey",
+                out keyExpression
+            );
             DbSortClause sortClause = DbExpressionBuilder.ToSortClauseDescending(keyExpression);
             return DbExpressionBuilder.Sort(input, new DbSortClause[] { sortClause });
         }
@@ -2334,11 +2979,23 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     The expression produced by <paramref name="sortKey"/> does not have an order-comparable string result type.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="collation"/> is empty or contains only space characters</exception>
-        public static DbSortExpression OrderByDescending(this DbExpression source, Func<DbExpression, DbExpression> sortKey, string collation)
+        public static DbSortExpression OrderByDescending(
+            this DbExpression source,
+            Func<DbExpression, DbExpression> sortKey,
+            string collation
+        )
         {
             DbExpression keyExpression;
-            DbExpressionBinding input = ConvertToBinding(source, sortKey, "sortKey", out keyExpression);
-            DbSortClause sortClause = DbExpressionBuilder.ToSortClauseDescending(keyExpression, collation);
+            DbExpressionBinding input = ConvertToBinding(
+                source,
+                sortKey,
+                "sortKey",
+                out keyExpression
+            );
+            DbSortClause sortClause = DbExpressionBuilder.ToSortClauseDescending(
+                keyExpression,
+                collation
+            );
             return DbExpressionBuilder.Sort(input, new DbSortClause[] { sortClause });
         }
 
@@ -2349,7 +3006,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <param name="projection">
         ///    A method that specifies how to derive the projected expression given a member of the input set.
         ///    This method must produce an instance of a type that is compatible with Select and can be resolved
-        ///    into a <see cref="DbExpression"/>. 
+        ///    into a <see cref="DbExpression"/>.
         ///    Compatibility requirements for <typeparamref name="TProjection"/> are described in remarks.
         /// </param>
         /// <typeparam name="TProjection">The method result type of <paramref name="projection"/>.</typeparam>
@@ -2365,11 +3022,19 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     <code>source.Select(x => new { Name = x.Property("Name") })</code> (<typeparamref name="TProjection"/> is an anonymous type with a DbExpression-derived property).
         ///     </para>
         /// </remarks>
-        public static DbProjectExpression Select<TProjection>(this DbExpression source, Func<DbExpression, TProjection> projection)
+        public static DbProjectExpression Select<TProjection>(
+            this DbExpression source,
+            Func<DbExpression, TProjection> projection
+        )
         {
             EntityUtil.CheckArgumentNull(projection, "projection");
             TProjection intermediateProjection;
-            DbExpressionBinding input = ConvertToBinding(source, projection, "projection", out intermediateProjection);
+            DbExpressionBinding input = ConvertToBinding(
+                source,
+                projection,
+                "projection",
+                out intermediateProjection
+            );
             DbExpression projectionExp = ResolveToExpression(intermediateProjection);
             return DbExpressionBuilder.Project(input, projectionExp);
         }
@@ -2390,16 +3055,33 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentNullException">The expression produced by <paramref name="apply"/> is null.</exception>
         /// <exception cref="ArgumentException"><paramref name="source"/> does not have a collection result type.</exception>
         /// <exception cref="ArgumentException">The expression produced by <paramref name="apply"/> does not have a collection type.</exception>
-        public static DbProjectExpression SelectMany(this DbExpression source, Func<DbExpression, DbExpression> apply)
+        public static DbProjectExpression SelectMany(
+            this DbExpression source,
+            Func<DbExpression, DbExpression> apply
+        )
         {
             DbExpression functorResult;
-            DbExpressionBinding inputBinding = ConvertToBinding(source, apply, "apply", out functorResult);
-            
+            DbExpressionBinding inputBinding = ConvertToBinding(
+                source,
+                apply,
+                "apply",
+                out functorResult
+            );
+
             DbExpressionBinding functorBinding = DbExpressionBuilder.Bind(functorResult);
-            DbApplyExpression intermediateApply = DbExpressionBuilder.CrossApply(inputBinding, functorBinding);
-            
+            DbApplyExpression intermediateApply = DbExpressionBuilder.CrossApply(
+                inputBinding,
+                functorBinding
+            );
+
             DbExpressionBinding projectionBinding = DbExpressionBuilder.Bind(intermediateApply);
-            return DbExpressionBuilder.Project(projectionBinding, DbExpressionBuilder.Property(projectionBinding.Variable, functorBinding.VariableName));
+            return DbExpressionBuilder.Project(
+                projectionBinding,
+                DbExpressionBuilder.Property(
+                    projectionBinding.Variable,
+                    functorBinding.VariableName
+                )
+            );
         }
 
         /// <summary>
@@ -2416,7 +3098,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// </param>
         /// <param name="selector">
         ///    A method that specifies how an element of the result set should be derived given an element of the input and apply sets.
-        ///    This method must produce an instance of a type that is compatible with SelectMany and can be resolved into a <see cref="DbExpression"/>. 
+        ///    This method must produce an instance of a type that is compatible with SelectMany and can be resolved into a <see cref="DbExpression"/>.
         ///    Compatibility requirements for <typeparamref name="TSelector"/> are described in remarks.
         /// </param>
         /// <returns>An new DbProjectExpression that selects the result of the given selector from a new DbApplyExpression with the specified input and apply bindings and an <see cref="DbExpressionKind"/> of CrossApply.</returns>
@@ -2434,23 +3116,41 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     <code>source.SelectMany(x => x.Property("RelatedCollection"), (source, apply) => new { SourceName = source.Property("Name"), RelatedName = apply.Property("Name") })</code> (<typeparamref name="TSelector"/> is an anonymous type with DbExpression-derived properties).
         ///     </para>
         /// </remarks>
-        public static DbProjectExpression SelectMany<TSelector>(this DbExpression source, Func<DbExpression, DbExpression> apply, Func<DbExpression, DbExpression, TSelector> selector)
+        public static DbProjectExpression SelectMany<TSelector>(
+            this DbExpression source,
+            Func<DbExpression, DbExpression> apply,
+            Func<DbExpression, DbExpression, TSelector> selector
+        )
         {
             DbExpression functorResult;
-            DbExpressionBinding inputBinding = ConvertToBinding(source, apply, "apply", out functorResult);
+            DbExpressionBinding inputBinding = ConvertToBinding(
+                source,
+                apply,
+                "apply",
+                out functorResult
+            );
             EntityUtil.CheckArgumentNull(selector, "selector");
 
             DbExpressionBinding functorBinding = DbExpressionBuilder.Bind(functorResult);
-            DbApplyExpression intermediateApply = DbExpressionBuilder.CrossApply(inputBinding, functorBinding);
+            DbApplyExpression intermediateApply = DbExpressionBuilder.CrossApply(
+                inputBinding,
+                functorBinding
+            );
 
             DbExpressionBinding projectionBinding = DbExpressionBuilder.Bind(intermediateApply);
-            DbExpression left = DbExpressionBuilder.Property(projectionBinding.Variable, inputBinding.VariableName);
-            DbExpression right = DbExpressionBuilder.Property(projectionBinding.Variable, functorBinding.VariableName);
+            DbExpression left = DbExpressionBuilder.Property(
+                projectionBinding.Variable,
+                inputBinding.VariableName
+            );
+            DbExpression right = DbExpressionBuilder.Property(
+                projectionBinding.Variable,
+                functorBinding.VariableName
+            );
             TSelector selectorResult = selector(left, right);
             DbExpression projection = ResolveToExpression(selectorResult);
             return DbExpressionBuilder.Project(projectionBinding, projection);
         }
-                
+
         /// <summary>
         /// Creates a new <see cref="DbSkipExpression"/> that skips the specified number of elements from the given sorted input set.
         /// </summary>
@@ -2487,7 +3187,13 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             return DbExpressionBuilder.Limit(argument, count);
         }
 
-        private static DbSortExpression CreateThenBy(DbSortExpression source, Func<DbExpression, DbExpression> sortKey, bool ascending, string collation, bool useCollation)
+        private static DbSortExpression CreateThenBy(
+            DbSortExpression source,
+            Func<DbExpression, DbExpression> sortKey,
+            bool ascending,
+            string collation,
+            bool useCollation
+        )
         {
             EntityUtil.CheckArgumentNull(source, "source");
             EntityUtil.CheckArgumentNull(sortKey, "sortKey");
@@ -2495,11 +3201,19 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             DbSortClause sortClause;
             if (useCollation)
             {
-                sortClause = (ascending ? DbExpressionBuilder.ToSortClause(sortKeyResult, collation) : DbExpressionBuilder.ToSortClauseDescending(sortKeyResult, collation));
+                sortClause = (
+                    ascending
+                        ? DbExpressionBuilder.ToSortClause(sortKeyResult, collation)
+                        : DbExpressionBuilder.ToSortClauseDescending(sortKeyResult, collation)
+                );
             }
             else
             {
-                sortClause = (ascending ? DbExpressionBuilder.ToSortClause(sortKeyResult) : DbExpressionBuilder.ToSortClauseDescending(sortKeyResult));
+                sortClause = (
+                    ascending
+                        ? DbExpressionBuilder.ToSortClause(sortKeyResult)
+                        : DbExpressionBuilder.ToSortClauseDescending(sortKeyResult)
+                );
             }
 
             List<DbSortClause> newSortOrder = new List<DbSortClause>(source.SortOrder.Count + 1);
@@ -2511,12 +3225,12 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
 
         /// <summary>
         /// Creates a new <see cref="DbSortExpression"/> that with a sort order that includes the sort order
-        /// of the given order input set together with the specified sort key in ascending sort order and 
+        /// of the given order input set together with the specified sort key in ascending sort order and
         /// with default collation.
         /// </summary>
         /// <param name="source">A DbSortExpression that specifies the ordered input set.</param>
         /// <param name="sortKey">
-        ///    A method that specifies how to derive the additional sort key expression given a member of the 
+        ///    A method that specifies how to derive the additional sort key expression given a member of the
         ///    input set.
         ///    This method must produce an expression with an order-comparable result type that provides the
         ///    sort key definition.
@@ -2528,19 +3242,22 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     The expression produced by <paramref name="sortKey"/> does not have an order-comparable result type.
         /// </exception>
-        public static DbSortExpression ThenBy(this DbSortExpression source, Func<DbExpression, DbExpression> sortKey)
+        public static DbSortExpression ThenBy(
+            this DbSortExpression source,
+            Func<DbExpression, DbExpression> sortKey
+        )
         {
             return CreateThenBy(source, sortKey, true, null, false);
         }
 
         /// <summary>
         /// Creates a new <see cref="DbSortExpression"/> that with a sort order that includes the sort order
-        /// of the given order input set together with the specified sort key in ascending sort order and 
+        /// of the given order input set together with the specified sort key in ascending sort order and
         /// with the specified collation.
         /// </summary>
         /// <param name="source">A DbSortExpression that specifies the ordered input set.</param>
         /// <param name="sortKey">
-        ///    A method that specifies how to derive the additional sort key expression given a member of the 
+        ///    A method that specifies how to derive the additional sort key expression given a member of the
         ///    input set.
         ///    This method must produce an expression with an order-comparable result type that provides the
         ///    sort key definition.
@@ -2554,19 +3271,23 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     The expression produced by <paramref name="sortKey"/> does not have an order-comparable string result type.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="collation"/> is empty or contains only space characters</exception>
-        public static DbSortExpression ThenBy(this DbSortExpression source, Func<DbExpression, DbExpression> sortKey, string collation)
+        public static DbSortExpression ThenBy(
+            this DbSortExpression source,
+            Func<DbExpression, DbExpression> sortKey,
+            string collation
+        )
         {
             return CreateThenBy(source, sortKey, true, collation, true);
         }
 
         /// <summary>
         /// Creates a new <see cref="DbSortExpression"/> that with a sort order that includes the sort order
-        /// of the given order input set together with the specified sort key in descending sort order and 
+        /// of the given order input set together with the specified sort key in descending sort order and
         /// with default collation.
         /// </summary>
         /// <param name="source">A DbSortExpression that specifies the ordered input set.</param>
         /// <param name="sortKey">
-        ///    A method that specifies how to derive the additional sort key expression given a member of the 
+        ///    A method that specifies how to derive the additional sort key expression given a member of the
         ///    input set.
         ///    This method must produce an expression with an order-comparable result type that provides the
         ///    sort key definition.
@@ -2578,19 +3299,22 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     The expression produced by <paramref name="sortKey"/> does not have an order-comparable result type.
         /// </exception>
-        public static DbSortExpression ThenByDescending(this DbSortExpression source, Func<DbExpression, DbExpression> sortKey)
+        public static DbSortExpression ThenByDescending(
+            this DbSortExpression source,
+            Func<DbExpression, DbExpression> sortKey
+        )
         {
             return CreateThenBy(source, sortKey, false, null, false);
         }
 
         /// <summary>
         /// Creates a new <see cref="DbSortExpression"/> that with a sort order that includes the sort order
-        /// of the given order input set together with the specified sort key in descending sort order and 
+        /// of the given order input set together with the specified sort key in descending sort order and
         /// with the specified collation.
         /// </summary>
         /// <param name="source">A DbSortExpression that specifies the ordered input set.</param>
         /// <param name="sortKey">
-        ///    A method that specifies how to derive the additional sort key expression given a member of the 
+        ///    A method that specifies how to derive the additional sort key expression given a member of the
         ///    input set.
         ///    This method must produce an expression with an order-comparable result type that provides the
         ///    sort key definition.
@@ -2604,11 +3328,15 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     The expression produced by <paramref name="sortKey"/> does not have an order-comparable string result type.
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="collation"/> is empty or contains only space characters</exception>
-        public static DbSortExpression ThenByDescending(this DbSortExpression source, Func<DbExpression, DbExpression> sortKey, string collation)
+        public static DbSortExpression ThenByDescending(
+            this DbSortExpression source,
+            Func<DbExpression, DbExpression> sortKey,
+            string collation
+        )
         {
             return CreateThenBy(source, sortKey, false, collation, true);
         }
-                
+
         /// <summary>
         /// Creates a new <see cref="DbFilterExpression"/> that filters the elements in the given input set using the specified predicate.
         /// </summary>
@@ -2626,13 +3354,21 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <exception cref="ArgumentException">
         ///     The expression produced by <paramref name="predicate"/> does not have a Boolean result type.
         /// </exception>
-        public static DbFilterExpression Where(this DbExpression source, Func<DbExpression, DbExpression> predicate)
+        public static DbFilterExpression Where(
+            this DbExpression source,
+            Func<DbExpression, DbExpression> predicate
+        )
         {
             DbExpression predicateExp;
-            DbExpressionBinding input = ConvertToBinding(source, predicate, "predicate", out predicateExp);
+            DbExpressionBinding input = ConvertToBinding(
+                source,
+                predicate,
+                "predicate",
+                out predicateExp
+            );
             return DbExpressionBuilder.Filter(input, predicateExp);
         }
-                        
+
         /// <summary>
         /// Creates a new <see cref="DbExpression"/> that computes the union of the left and right set arguments with duplicates removed.
         /// </summary>
@@ -2647,7 +3383,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         }
 
         #endregion
-                
+
         #region Internal Helper API - ideally these methods should be removed
 
         internal static AliasGenerator AliasGenerator
@@ -2655,9 +3391,11 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
             get { return _bindingAliases; }
         }
 
-        internal static DbNullExpression CreatePrimitiveNullExpression(PrimitiveTypeKind primitiveType)
+        internal static DbNullExpression CreatePrimitiveNullExpression(
+            PrimitiveTypeKind primitiveType
+        )
         {
-            switch(primitiveType)
+            switch (primitiveType)
             {
                 case PrimitiveTypeKind.Binary:
                     return _binaryNull;
@@ -2695,13 +3433,24 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
                     return _timeNull;
 
                 default:
-                    throw EntityUtil.InvalidEnumerationValue(typeof(PrimitiveTypeKind), (int)primitiveType);
+                    throw EntityUtil.InvalidEnumerationValue(
+                        typeof(PrimitiveTypeKind),
+                        (int)primitiveType
+                    );
             }
         }
 
-        internal static DbApplyExpression CreateApplyExpressionByKind(DbExpressionKind applyKind, DbExpressionBinding input, DbExpressionBinding apply)
+        internal static DbApplyExpression CreateApplyExpressionByKind(
+            DbExpressionKind applyKind,
+            DbExpressionBinding input,
+            DbExpressionBinding apply
+        )
         {
-            Debug.Assert(DbExpressionKind.CrossApply == applyKind || DbExpressionKind.OuterApply == applyKind, "Invalid ApplyType");
+            Debug.Assert(
+                DbExpressionKind.CrossApply == applyKind
+                    || DbExpressionKind.OuterApply == applyKind,
+                "Invalid ApplyType"
+            );
 
             switch (applyKind)
             {
@@ -2712,26 +3461,42 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
                     return OuterApply(input, apply);
 
                 default:
-                    throw EntityUtil.InvalidEnumerationValue(typeof(DbExpressionKind), (int)applyKind);
+                    throw EntityUtil.InvalidEnumerationValue(
+                        typeof(DbExpressionKind),
+                        (int)applyKind
+                    );
             }
         }
 
-        internal static DbExpression CreateJoinExpressionByKind(DbExpressionKind joinKind, DbExpression joinCondition, DbExpressionBinding input1, DbExpressionBinding input2)
+        internal static DbExpression CreateJoinExpressionByKind(
+            DbExpressionKind joinKind,
+            DbExpression joinCondition,
+            DbExpressionBinding input1,
+            DbExpressionBinding input2
+        )
         {
-            Debug.Assert(DbExpressionKind.CrossJoin == joinKind ||
-                         DbExpressionKind.FullOuterJoin == joinKind ||
-                         DbExpressionKind.InnerJoin == joinKind ||
-                         DbExpressionKind.LeftOuterJoin == joinKind,
-                         "Invalid DbExpressionKind for CreateJoinExpressionByKind");
+            Debug.Assert(
+                DbExpressionKind.CrossJoin == joinKind
+                    || DbExpressionKind.FullOuterJoin == joinKind
+                    || DbExpressionKind.InnerJoin == joinKind
+                    || DbExpressionKind.LeftOuterJoin == joinKind,
+                "Invalid DbExpressionKind for CreateJoinExpressionByKind"
+            );
 
             if (DbExpressionKind.CrossJoin == joinKind)
             {
-                Debug.Assert(null == joinCondition, "Condition should not be specified for CrossJoin");
+                Debug.Assert(
+                    null == joinCondition,
+                    "Condition should not be specified for CrossJoin"
+                );
                 return CrossJoin(new DbExpressionBinding[2] { input1, input2 });
             }
             else
             {
-                Debug.Assert(joinCondition != null, "Condition must be specified for non-CrossJoin");
+                Debug.Assert(
+                    joinCondition != null,
+                    "Condition must be specified for non-CrossJoin"
+                );
 
                 switch (joinKind)
                 {
@@ -2745,7 +3510,10 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
                         return FullOuterJoin(input1, input2, joinCondition);
 
                     default:
-                        throw EntityUtil.InvalidEnumerationValue(typeof(DbExpressionKind), (int)joinKind);
+                        throw EntityUtil.InvalidEnumerationValue(
+                            typeof(DbExpressionKind),
+                            (int)joinKind
+                        );
                 }
             }
         }
@@ -2753,7 +3521,9 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <summary>
         /// Used only by span rewriter, when a row could be specified as an argument
         /// </summary>
-        internal static DbIsNullExpression CreateIsNullExpressionAllowingRowTypeArgument(DbExpression argument)
+        internal static DbIsNullExpression CreateIsNullExpressionAllowingRowTypeArgument(
+            DbExpression argument
+        )
         {
             TypeUsage resultType = ArgumentValidation.ValidateIsNull(argument, true);
             return new DbIsNullExpression(resultType, argument, true);
@@ -2763,7 +3533,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// Creates a new <see cref="DbElementExpression"/> that converts a single-member set with a single property
         /// into a singleton.  The result type of the created <see cref="DbElementExpression"/> equals the result type
         /// of the single property of the element of the argument.
-        /// 
+        ///
         /// This method should only be used when the argument is of a collection type with
         /// element of structured type with only one property.
         /// </summary>
@@ -2775,16 +3545,21 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     or does not have a collection result type, or its element type is not a structured type
         ///     with only one property
         /// </exception>
-        internal static DbElementExpression CreateElementExpressionUnwrapSingleProperty(DbExpression argument)
+        internal static DbElementExpression CreateElementExpressionUnwrapSingleProperty(
+            DbExpression argument
+        )
         {
             TypeUsage resultType = ArgumentValidation.ValidateElement(argument);
-           
-            // Change the result type of the element expression to the type of the 
+
+            // Change the result type of the element expression to the type of the
             // single property of the element of its operand.
             IList<EdmProperty> properties = TypeHelpers.GetProperties(resultType);
             if (properties == null || properties.Count != 1)
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_Element_InvalidArgumentForUnwrapSingleProperty, "arg");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.Cqt_Element_InvalidArgumentForUnwrapSingleProperty,
+                    "arg"
+                );
             }
             resultType = properties[0].TypeUsage;
             return new DbElementExpression(resultType, argument, true);
@@ -2797,14 +3572,18 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// DbRelatedEntityRefs are used in conjuction with <see cref="DbNewInstanceExpression"/>
         /// to construct Entity instances that are capable of resolving relationship navigation operations based on
         /// the provided DbRelatedEntityRefs without the need for additional navigation operations.
-        /// Note also that this factory method is not intended to be part of the public Command Tree API 
+        /// Note also that this factory method is not intended to be part of the public Command Tree API
         /// since its intent is to support Entity constructors in view definitions that express information about
         /// related Entities using the 'WITH RELATIONSHIP' clause in eSQL.
         /// </summary>
         /// <param name="sourceEnd">The relationship end from which navigation takes place</param>
         ///<param name="targetEnd">The relationship end to which navigation may be satisifed using the target entity ref</param>
         ///<param name="targetEntity">An expression that produces a reference to the target entity (and must therefore have a Ref result type)</param>
-        internal static DbRelatedEntityRef CreateRelatedEntityRef(RelationshipEndMember sourceEnd, RelationshipEndMember targetEnd, DbExpression targetEntity)
+        internal static DbRelatedEntityRef CreateRelatedEntityRef(
+            RelationshipEndMember sourceEnd,
+            RelationshipEndMember targetEnd,
+            DbExpression targetEntity
+        )
         {
             return new DbRelatedEntityRef(sourceEnd, targetEnd, targetEntity);
         }
@@ -2813,7 +3592,7 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// Creates a new <see cref="DbNewInstanceExpression"/> that constructs an instance of an Entity type
         /// together with the specified information about Entities related to the newly constructed Entity by
         /// relationship navigations where the target end has multiplicity of at most one.
-        /// Note that this factory method is not intended to be part of the public Command Tree API since its 
+        /// Note that this factory method is not intended to be part of the public Command Tree API since its
         /// intent is to support Entity constructors in view definitions that express information about
         /// related Entities using the 'WITH RELATIONSHIP' clause in eSQL.
         /// </summary>
@@ -2821,35 +3600,64 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <param name="attributeValues">Values for each (non-relationship) property of the Entity</param>
         /// <param name="relationships">A (possibly empty) list of <see cref="DbRelatedEntityRef"/>s that describe Entities that are related to the constructed Entity by various relationship types.</param>
         /// <returns>A new DbNewInstanceExpression that represents the construction of the Entity, and includes the specified related Entity information in the see <see cref="DbNewInstanceExpression.RelatedEntityReferences"/> collection.</returns>
-        internal static DbNewInstanceExpression CreateNewEntityWithRelationshipsExpression(EntityType entityType, IList<DbExpression> attributeValues, IList<DbRelatedEntityRef> relationships)
+        internal static DbNewInstanceExpression CreateNewEntityWithRelationshipsExpression(
+            EntityType entityType,
+            IList<DbExpression> attributeValues,
+            IList<DbRelatedEntityRef> relationships
+        )
         {
             DbExpressionList validAttributes;
             System.Collections.ObjectModel.ReadOnlyCollection<DbRelatedEntityRef> validRelatedRefs;
-            TypeUsage resultType = ArgumentValidation.ValidateNewEntityWithRelationships(entityType, attributeValues, relationships, out validAttributes, out validRelatedRefs);
+            TypeUsage resultType = ArgumentValidation.ValidateNewEntityWithRelationships(
+                entityType,
+                attributeValues,
+                relationships,
+                out validAttributes,
+                out validRelatedRefs
+            );
             return new DbNewInstanceExpression(resultType, validAttributes, validRelatedRefs);
         }
 
         /// <summary>
         /// Same as <see cref="Navigate(DbExpression, RelationshipEndMember, RelationshipEndMember)"/> only allows the property type of <paramref name="fromEnd"/>
         /// to be any type in the same type hierarchy as the result type of <paramref name="navigateFrom"/>.
-        /// Only used by relationship span. 
+        /// Only used by relationship span.
         /// </summary>
         /// <param name="navigateFrom"></param>
         /// <param name="fromEnd"></param>
         /// <param name="toEnd"></param>
         /// <returns></returns>
-        internal static DbRelationshipNavigationExpression NavigateAllowingAllRelationshipsInSameTypeHierarchy(this DbExpression navigateFrom, RelationshipEndMember fromEnd, RelationshipEndMember toEnd)
+        internal static DbRelationshipNavigationExpression NavigateAllowingAllRelationshipsInSameTypeHierarchy(
+            this DbExpression navigateFrom,
+            RelationshipEndMember fromEnd,
+            RelationshipEndMember toEnd
+        )
         {
             RelationshipType relType;
-            TypeUsage resultType = ArgumentValidation.ValidateNavigate(navigateFrom, fromEnd, toEnd, out relType, allowAllRelationshipsInSameTypeHierarchy: true);
-            return new DbRelationshipNavigationExpression(resultType, relType, fromEnd, toEnd, navigateFrom);
+            TypeUsage resultType = ArgumentValidation.ValidateNavigate(
+                navigateFrom,
+                fromEnd,
+                toEnd,
+                out relType,
+                allowAllRelationshipsInSameTypeHierarchy: true
+            );
+            return new DbRelationshipNavigationExpression(
+                resultType,
+                relType,
+                fromEnd,
+                toEnd,
+                navigateFrom
+            );
         }
 
-        internal static DbPropertyExpression CreatePropertyExpressionFromMember(DbExpression instance, EdmMember member)
+        internal static DbPropertyExpression CreatePropertyExpressionFromMember(
+            DbExpression instance,
+            EdmMember member
+        )
         {
             return PropertyFromMember(instance, member, "member");
         }
-                        
+
 #if ENABLE_NESTAGGREGATE
         /// <summary>
         /// Creates a new <see cref="NestAggregate"/> over the specified argument
@@ -2858,7 +3666,8 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new nest aggregate with a reference to the given argument.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="argument"/> is null</exception>
         /// <exception cref="ArgumentException"><paramref name="argument"/> is associated with a different command tree</exception>
-        /*CQT_PUBLIC_API(*/internal/*)*/ NestAggregate CreateNestAggregate(Expression argument)
+        /*CQT_PUBLIC_API(*/internal /*)*/
+        NestAggregate CreateNestAggregate(Expression argument)
         {
             return new NestAggregate(this, argument);
         }
@@ -2877,18 +3686,26 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         ///     or <paramref name="args"/> is null or contains null
         /// </exception>
         /// <exception cref="ArgumentException">
-        ///     <paramref name="methodInfo"/> is not associated with this command tree's metadata workspace, 
+        ///     <paramref name="methodInfo"/> is not associated with this command tree's metadata workspace,
         ///     <paramref name="instance"/> is associated with a different command tree
         ///     or has a result type that is not equal or promotable to the declaring type of the method,
         ///     or <paramref name="args"/> contains an incorrect number of expressions,
         ///     an expression with a result type that is not equal or promotable to the type of the corresponding
         ///     method parameter, or an expression that is associated with a different command tree.
         /// </exception>
-        /*CQT_PUBLIC_API(*/internal/*)*/ MethodExpression CreateInstanceMethodExpression(MethodMetadata methodInfo, Expression instance, IList<Expression> args)
+        /*CQT_PUBLIC_API(*/internal /*)*/
+        MethodExpression CreateInstanceMethodExpression(
+            MethodMetadata methodInfo,
+            Expression instance,
+            IList<Expression> args
+        )
         {
             if (methodInfo != null && methodInfo.IsStatic)
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_Factory_InstanceMethodRequired, "methodInfo");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.Cqt_Factory_InstanceMethodRequired,
+                    "methodInfo"
+                );
             }
 
             return new MethodExpression(this, methodInfo, args, instance);
@@ -2902,16 +3719,23 @@ namespace System.Data.Common.CommandTrees.ExpressionBuilder
         /// <returns>A new MethodExpression that represents the method invocation.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="methodInfo"/> is null, or <paramref name="args"/> is null or contains null</exception>
         /// <exception cref="ArgumentException">
-        ///     <paramref name="methodInfo"/> is not associated with this command tree's metadata workspace, 
+        ///     <paramref name="methodInfo"/> is not associated with this command tree's metadata workspace,
         ///     or <paramref name="args"/> contains an incorrect number of expressions,
         ///     an expression with a result type that is not equal or promotable to the type of the corresponding
         ///     method parameter, or an expression that is associated with a different command tree.
         /// </exception>
-        /*CQT_PUBLIC_API(*/internal/*)*/ MethodExpression CreateStaticMethodExpression(MethodMetadata methodInfo, IList<Expression> args)
+        /*CQT_PUBLIC_API(*/internal /*)*/
+        MethodExpression CreateStaticMethodExpression(
+            MethodMetadata methodInfo,
+            IList<Expression> args
+        )
         {
             if (methodInfo != null && !methodInfo.IsStatic)
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.Cqt_Factory_StaticMethodRequired, "methodInfo");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.Cqt_Factory_StaticMethodRequired,
+                    "methodInfo"
+                );
             }
 
             return new MethodExpression(this, methodInfo, args, null);

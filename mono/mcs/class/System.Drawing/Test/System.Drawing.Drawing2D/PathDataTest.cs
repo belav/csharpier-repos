@@ -32,56 +32,56 @@ using System.Drawing.Drawing2D;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoTests.System.Drawing.Drawing2D {
+namespace MonoTests.System.Drawing.Drawing2D
+{
+    [TestFixture]
+    [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+    public class PathDataTest
+    {
+        [Test]
+        public void PathData_Empty()
+        {
+            PathData data = new PathData();
+            Assert.IsNull(data.Points, "Points");
+            Assert.IsNull(data.Types, "Types");
 
-	[TestFixture]
-	[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-	public class PathDataTest {
+            data.Points = new PointF[0];
+            data.Types = new byte[0];
+            Assert.AreEqual(0, data.Points.Length, "Points-0");
+            Assert.AreEqual(0, data.Types.Length, "Types-0");
 
-		[Test]
-		public void PathData_Empty ()
-		{
-			PathData data = new PathData ();
-			Assert.IsNull (data.Points, "Points");
-			Assert.IsNull (data.Types, "Types");
+            data.Points = null;
+            data.Types = null;
+            Assert.IsNull(data.Points, "Points-1");
+            Assert.IsNull(data.Types, "Types-1");
+        }
 
-			data.Points = new PointF[0];
-			data.Types = new byte[0];
-			Assert.AreEqual (0, data.Points.Length, "Points-0");
-			Assert.AreEqual (0, data.Types.Length, "Types-0");
+        [Test]
+        public void PathData_LengthMismatch()
+        {
+            PathData data = new PathData();
+            data.Points = new PointF[2];
+            data.Types = new byte[1];
+            Assert.AreEqual(2, data.Points.Length, "Points-2");
+            Assert.AreEqual(1, data.Types.Length, "Types-1");
+        }
 
-			data.Points = null;
-			data.Types = null;
-			Assert.IsNull (data.Points, "Points-1");
-			Assert.IsNull (data.Types, "Types-1");
-		}
+        [Test]
+        public void PathData_UnclonedProperties()
+        {
+            PathData data = new PathData();
+            data.Points = new PointF[1] { new PointF(1f, 1f) };
+            data.Types = new byte[1] { 1 };
+            Assert.AreEqual(1f, data.Points[0].X, "Points.X");
+            Assert.AreEqual(1f, data.Points[0].Y, "Points.Y");
+            Assert.AreEqual(1, data.Types[0], "Types");
 
-		[Test]
-		public void PathData_LengthMismatch ()
-		{
-			PathData data = new PathData ();
-			data.Points = new PointF[2];
-			data.Types = new byte[1];
-			Assert.AreEqual (2, data.Points.Length, "Points-2");
-			Assert.AreEqual (1, data.Types.Length, "Types-1");
-		}
+            data.Points[0] = new PointF(0f, 0f);
+            Assert.AreEqual(0f, data.Points[0].X, "Points.X.1");
+            Assert.AreEqual(0f, data.Points[0].Y, "Points.Y.1");
 
-		[Test]
-		public void PathData_UnclonedProperties ()
-		{
-			PathData data = new PathData ();
-			data.Points = new PointF[1] { new PointF (1f, 1f) };
-			data.Types = new byte[1] { 1 };
-			Assert.AreEqual (1f, data.Points[0].X, "Points.X");
-			Assert.AreEqual (1f, data.Points[0].Y, "Points.Y");
-			Assert.AreEqual (1, data.Types[0], "Types");
-
-			data.Points[0] = new PointF (0f, 0f);
-			Assert.AreEqual (0f, data.Points[0].X, "Points.X.1");
-			Assert.AreEqual (0f, data.Points[0].Y, "Points.Y.1");
-
-			data.Types[0] = 0;
-			Assert.AreEqual (0, data.Types[0], "Types-1");
-		}
-	}
+            data.Types[0] = 0;
+            Assert.AreEqual(0, data.Types[0], "Types-1");
+        }
+    }
 }

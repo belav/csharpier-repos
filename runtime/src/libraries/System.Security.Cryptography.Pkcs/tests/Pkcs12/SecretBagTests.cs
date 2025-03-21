@@ -15,7 +15,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
             AssertExtensions.Throws<ArgumentNullException>(
                 "secretType",
-                () => contents.AddSecret(null, ReadOnlyMemory<byte>.Empty));
+                () => contents.AddSecret(null, ReadOnlyMemory<byte>.Empty)
+            );
         }
 
         [Theory]
@@ -43,8 +44,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         {
             Pkcs12SafeContents contents = new Pkcs12SafeContents();
 
-            Action addAction =
-                () => contents.AddSecret(new Oid("0.0", "0.0"), inputHex.HexToByteArray());
+            Action addAction = () =>
+                contents.AddSecret(new Oid("0.0", "0.0"), inputHex.HexToByteArray());
 
             if (expectSuccess)
             {
@@ -62,8 +63,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             string payloadHex = "0403090807";
 
             Pkcs12SafeContents contents = new Pkcs12SafeContents();
-            Assert.ThrowsAny<CryptographicException>(
-                () => contents.AddSecret(new Oid("Hi", "There"), payloadHex.HexToByteArray()));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                contents.AddSecret(new Oid("Hi", "There"), payloadHex.HexToByteArray())
+            );
         }
 
         [Theory]
@@ -72,13 +74,13 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         public static void HasExpectedEncode(bool withAttribute)
         {
             string expectedHexWithAttribute =
-                "303F060B2A864886F70D010C0A0105A01C301A060100A0150C1353776F726466" +
-                "6973682E20436C6561726C792E3112301006092A864886F70D01091531030401" +
-                "01";
+                "303F060B2A864886F70D010C0A0105A01C301A060100A0150C1353776F726466"
+                + "6973682E20436C6561726C792E3112301006092A864886F70D01091531030401"
+                + "01";
 
             string expectedHexNoAttribute =
-                "302B060B2A864886F70D010C0A0105A01C301A060100A0150C1353776F726466" +
-                "6973682E20436C6561726C792E";
+                "302B060B2A864886F70D010C0A0105A01C301A060100A0150C1353776F726466"
+                + "6973682E20436C6561726C792E";
 
             string expectedHex = withAttribute ? expectedHexWithAttribute : expectedHexNoAttribute;
 
@@ -86,7 +88,10 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             string payloadHex = "0C1353776F7264666973682E20436C6561726C792E";
 
             Pkcs12SafeContents contents = new Pkcs12SafeContents();
-            Pkcs12SecretBag bag = contents.AddSecret(new Oid("0.0", "0.0"), payloadHex.HexToByteArray());
+            Pkcs12SecretBag bag = contents.AddSecret(
+                new Oid("0.0", "0.0"),
+                payloadHex.HexToByteArray()
+            );
 
             if (withAttribute)
             {

@@ -38,7 +38,10 @@ namespace System.Reflection.Tests
             Type theV = typeof(IDictionary<,>).GetTypeInfo().GenericTypeParameters[1];
             theT.TestGenericTypeParameterInvariants();
 
-            MethodInfo genericMethod = typeof(ClassWithGenericMethods1).GetMethod("GenericMethod1", BindingFlags.Public | BindingFlags.Instance);
+            MethodInfo genericMethod = typeof(ClassWithGenericMethods1).GetMethod(
+                "GenericMethod1",
+                BindingFlags.Public | BindingFlags.Instance
+            );
             Debug.Assert(genericMethod != null);
             Type theM = genericMethod.GetGenericArguments()[0];
             theM.TestGenericMethodParameterInvariants();
@@ -137,7 +140,12 @@ namespace System.Reflection.Tests
             else
                 Assert.Fail("Array type does not identify as either Sz or VariableBound: " + type);
 
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly;
             MemberInfo[] mems;
             mems = type.GetEvents(bf);
             Assert.Equal(0, mems.Length);
@@ -187,7 +195,13 @@ namespace System.Reflection.Tests
             }
 
             Type systemInt32 = type.BaseType.Assembly.GetType("System.Int32", throwOnError: true);
-            ConstructorInfo[] cis = type.GetConstructors(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly);
+            ConstructorInfo[] cis = type.GetConstructors(
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Instance
+                    | BindingFlags.Static
+                    | BindingFlags.DeclaredOnly
+            );
             Assert.Equal(2, cis.Length);
             ConstructorInfo c1 = cis.Single(c => c.GetParameters().Length == rank);
             foreach (ParameterInfo p in c1.GetParameters())
@@ -195,7 +209,6 @@ namespace System.Reflection.Tests
             ConstructorInfo c2 = cis.Single(c => c.GetParameters().Length == rank * 2);
             foreach (ParameterInfo p in c2.GetParameters())
                 Assert.Equal(p.ParameterType, systemInt32);
-
         }
 
         internal static void TestByRefInvariants(this Type type)
@@ -220,7 +233,12 @@ namespace System.Reflection.Tests
             Assert.Equal(0, type.GetInterfaces().Length);
 
             // No members
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly;
             MemberInfo[] members = type.GetMembers(bf);
             Assert.Equal(0, members.Length);
         }
@@ -247,7 +265,12 @@ namespace System.Reflection.Tests
             Assert.Equal(0, type.GetInterfaces().Length);
 
             // No members
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly;
             MemberInfo[] members = type.GetMembers(bf);
             Assert.Equal(0, members.Length);
         }
@@ -264,7 +287,12 @@ namespace System.Reflection.Tests
             type.TestTypeCommonInvariants();
 
             // No members
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly;
             MemberInfo[] members = type.GetMembers(bf);
             Assert.Equal(0, members.Length);
         }
@@ -325,17 +353,26 @@ namespace System.Reflection.Tests
             isCount += type.IsGenericMethodParameter() ? 1 : 0;
             Assert.Equal(1, isCount);
 
-            Assert.Equal(type.IsGenericType, type.IsGenericTypeDefinition || type.IsConstructedGenericType);
+            Assert.Equal(
+                type.IsGenericType,
+                type.IsGenericTypeDefinition || type.IsConstructedGenericType
+            );
             Assert.Equal(type.HasElementType, type.IsArray || type.IsByRef || type.IsPointer);
             Assert.Equal(type.IsArray, type.IsSZArray() || type.IsVariableBoundArray());
-            Assert.Equal(type.IsGenericParameter, type.IsGenericTypeParameter() || type.IsGenericMethodParameter());
+            Assert.Equal(
+                type.IsGenericParameter,
+                type.IsGenericTypeParameter() || type.IsGenericMethodParameter()
+            );
 
             Assert.Same(type, type.GetTypeInfo());
             Assert.Same(type, type.GetTypeInfo().AsType());
             Assert.Same(type, type.UnderlyingSystemType);
             Assert.Same(type.DeclaringType, type.ReflectedType);
 
-            Assert.Equal(type.IsPublic || type.IsNotPublic ? MemberTypes.TypeInfo : MemberTypes.NestedType, type.MemberType);
+            Assert.Equal(
+                type.IsPublic || type.IsNotPublic ? MemberTypes.TypeInfo : MemberTypes.NestedType,
+                type.MemberType
+            );
 
             Assert.False(type.IsCOMObject);
 
@@ -374,18 +411,30 @@ namespace System.Reflection.Tests
             Assert.Equal<Type>(type.GetInterfaces(), type.GetTypeInfo().ImplementedInterfaces);
 
             TestUtils.AssertNewObjectReturnedEachTime(() => type.GenericTypeArguments);
-            TestUtils.AssertNewObjectReturnedEachTime(() => type.GetTypeInfo().GenericTypeParameters);
+            TestUtils.AssertNewObjectReturnedEachTime(() => type.GetTypeInfo().GenericTypeParameters
+            );
             TestUtils.AssertNewObjectReturnedEachTime(() => type.GetGenericArguments());
             TestUtils.AssertNewObjectReturnedEachTime(() => type.GetInterfaces());
-            TestUtils.AssertNewObjectReturnedEachTime(() => type.GetTypeInfo().ImplementedInterfaces);
-            CustomAttributeTests.ValidateCustomAttributesAllocatesFreshObjectsEachTime(() => type.CustomAttributes);
+            TestUtils.AssertNewObjectReturnedEachTime(() => type.GetTypeInfo().ImplementedInterfaces
+            );
+            CustomAttributeTests.ValidateCustomAttributesAllocatesFreshObjectsEachTime(() =>
+                type.CustomAttributes
+            );
 
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.FlattenHierarchy;
             foreach (MemberInfo mem in type.GetMember("*", MemberTypes.All, bf))
             {
                 // Workaround: Do not try to test Array.Initialize, since one of its locals is a function pointer.
                 // Delete this workaround when https://github.com/dotnet/runtime/issues/69273 is addressed.
-                if (mem.DeclaringType == mem.DeclaringType.Assembly.GetType("System.Array") && mem.Name == "Initialize")
+                if (
+                    mem.DeclaringType == mem.DeclaringType.Assembly.GetType("System.Array")
+                    && mem.Name == "Initialize"
+                )
                 {
                     continue;
                 }
@@ -401,19 +450,26 @@ namespace System.Reflection.Tests
                 if (type.Assembly.ReflectionOnly)
                 {
                     ICustomAttributeProvider icp = mem;
-                    Assert.Throws<InvalidOperationException>(() => icp.IsDefined(null, inherit: false));
-                    Assert.Throws<InvalidOperationException>(() => icp.GetCustomAttributes(null, inherit: false));
-                    Assert.Throws<InvalidOperationException>(() => icp.GetCustomAttributes(inherit: false));
+                    Assert.Throws<InvalidOperationException>(() =>
+                        icp.IsDefined(null, inherit: false)
+                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        icp.GetCustomAttributes(null, inherit: false)
+                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                        icp.GetCustomAttributes(inherit: false)
+                    );
 
                     if (mem is MethodBase mb)
                     {
                         Assert.Throws<InvalidOperationException>(() => mb.MethodHandle);
-                        Assert.Throws<InvalidOperationException>(() => mb.Invoke(null,null));
+                        Assert.Throws<InvalidOperationException>(() => mb.Invoke(null, null));
                     }
                 }
             }
 
-            TestUtils.AssertNewObjectReturnedEachTime(() => type.GetMember("*", MemberTypes.All, bf));
+            TestUtils.AssertNewObjectReturnedEachTime(() => type.GetMember("*", MemberTypes.All, bf)
+            );
 
             // Test some things that common to types that are not of a particular bucket.
             // (The Test*CommonInvariants() methods will cover the other half.)
@@ -439,13 +495,9 @@ namespace System.Reflection.Tests
                 Assert.Throws<ArgumentException>(() => type.GetArrayRank());
             }
 
-            if (!type.IsByRef)
-            {
-            }
+            if (!type.IsByRef) { }
 
-            if (!type.IsPointer)
-            {
-            }
+            if (!type.IsPointer) { }
 
             if (!type.IsConstructedGenericType)
             {
@@ -460,7 +512,8 @@ namespace System.Reflection.Tests
             {
                 Assert.Throws<InvalidOperationException>(() => type.GenericParameterAttributes);
                 Assert.Throws<InvalidOperationException>(() => type.GenericParameterPosition);
-                Assert.Throws<InvalidOperationException>(() => type.GetGenericParameterConstraints());
+                Assert.Throws<InvalidOperationException>(() => type.GetGenericParameterConstraints()
+                );
                 Assert.Throws<InvalidOperationException>(() => type.DeclaringMethod);
             }
         }
@@ -479,7 +532,6 @@ namespace System.Reflection.Tests
             Assert.NotNull(name);
             Assert.NotNull(fullName);
 
-
             string expectedFullName;
             if (type.IsNested)
             {
@@ -496,11 +548,16 @@ namespace System.Reflection.Tests
             if (declaringType != null)
             {
                 Assert.True(declaringType.IsTypeDefinition());
-                Type[] nestedTypes = declaringType.GetNestedTypes(BindingFlags.Public | BindingFlags.NonPublic);
+                Type[] nestedTypes = declaringType.GetNestedTypes(
+                    BindingFlags.Public | BindingFlags.NonPublic
+                );
                 Assert.Contains(nestedTypes, nt => object.ReferenceEquals(nt, type));
             }
 
-            Assert.Equal<Type>(type.GetTypeInfo().GenericTypeParameters, type.GetGenericArguments());
+            Assert.Equal<Type>(
+                type.GetTypeInfo().GenericTypeParameters,
+                type.GetGenericArguments()
+            );
 
             int metadataToken = type.MetadataToken;
             Assert.Equal(0x02000000, metadataToken & 0xff000000);
@@ -578,7 +635,10 @@ namespace System.Reflection.Tests
                 Assert.Equal(expectedFullName.ToString(), fullName);
             }
 
-            Assert.Equal(type.GenericTypeArguments.Any(gta => gta.ContainsGenericParameters), type.ContainsGenericParameters);
+            Assert.Equal(
+                type.GenericTypeArguments.Any(gta => gta.ContainsGenericParameters),
+                type.ContainsGenericParameters
+            );
 
             Type[] gas = type.GenericTypeArguments;
             Assert.NotNull(gas);
@@ -620,7 +680,12 @@ namespace System.Reflection.Tests
             Assert.Equal(0x2a000000, metadataToken & 0xff000000);
 
             // No members
-            BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly;
             MemberInfo[] members = type.GetMembers(bf);
             Assert.Equal(0, members.Length);
         }

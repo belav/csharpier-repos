@@ -89,7 +89,8 @@ public class HtmlContentBuilderTest
         Assert.Collection(
             content.Entries,
             entry => Assert.Equal("Written from TestHtmlContent: hello", entry.ToString()),
-            entry => Assert.Equal("Test", entry));
+            entry => Assert.Equal("Test", entry)
+        );
     }
 
     [Fact]
@@ -128,8 +129,10 @@ public class HtmlContentBuilderTest
         Assert.Collection(
             destination.Entries,
             entry => Assert.Equal("some-content", Assert.IsType<string>(entry)),
-            entry => Assert.Equal(new TestHtmlContent("hello"), Assert.IsType<TestHtmlContent>(entry)),
-            entry => Assert.Equal("Test", Assert.IsType<string>(entry)));
+            entry =>
+                Assert.Equal(new TestHtmlContent("hello"), Assert.IsType<TestHtmlContent>(entry)),
+            entry => Assert.Equal("Test", Assert.IsType<string>(entry))
+        );
     }
 
     [Fact]
@@ -156,8 +159,10 @@ public class HtmlContentBuilderTest
         Assert.Collection(
             destination.Entries,
             entry => Assert.Equal("some-content", Assert.IsType<string>(entry)),
-            entry => Assert.Equal(new TestHtmlContent("hello"), Assert.IsType<TestHtmlContent>(entry)),
-            entry => Assert.Equal("Test", Assert.IsType<string>(entry)));
+            entry =>
+                Assert.Equal(new TestHtmlContent("hello"), Assert.IsType<TestHtmlContent>(entry)),
+            entry => Assert.Equal("Test", Assert.IsType<string>(entry))
+        );
     }
 
     [Fact]
@@ -180,8 +185,10 @@ public class HtmlContentBuilderTest
         Assert.Collection(
             destination.Entries,
             entry => Assert.Equal("some-content", Assert.IsType<string>(entry)),
-            entry => Assert.Equal(new TestHtmlContent("hello"), Assert.IsType<TestHtmlContent>(entry)),
-            entry => Assert.Equal("Test", Assert.IsType<string>(entry)));
+            entry =>
+                Assert.Equal(new TestHtmlContent("hello"), Assert.IsType<TestHtmlContent>(entry)),
+            entry => Assert.Equal("Test", Assert.IsType<string>(entry))
+        );
     }
 
     [Fact]
@@ -208,8 +215,10 @@ public class HtmlContentBuilderTest
         Assert.Collection(
             destination.Entries,
             entry => Assert.Equal("some-content", Assert.IsType<string>(entry)),
-            entry => Assert.Equal(new TestHtmlContent("hello"), Assert.IsType<TestHtmlContent>(entry)),
-            entry => Assert.Equal("Test", Assert.IsType<string>(entry)));
+            entry =>
+                Assert.Equal(new TestHtmlContent("hello"), Assert.IsType<TestHtmlContent>(entry)),
+            entry => Assert.Equal("Test", Assert.IsType<string>(entry))
+        );
     }
 
     [Fact]

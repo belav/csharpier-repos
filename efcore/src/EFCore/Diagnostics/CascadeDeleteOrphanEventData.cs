@@ -25,7 +25,8 @@ public class CascadeDeleteOrphanEventData : EntityEntryEventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         EntityEntry entityEntry,
         IEntityType parentEntityTypes,
-        EntityState state)
+        EntityState state
+    )
         : base(eventDefinition, messageGenerator, entityEntry)
     {
         ParentEntityType = parentEntityTypes;

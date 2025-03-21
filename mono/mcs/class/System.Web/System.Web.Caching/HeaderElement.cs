@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,29 +30,23 @@ using System;
 
 namespace System.Web.Caching
 {
-	[Serializable]
-	public sealed class HeaderElement
-	{
-		public string Name {
-			get;
-			private set;
-		}
+    [Serializable]
+    public sealed class HeaderElement
+    {
+        public string Name { get; private set; }
 
-		public string Value {
-			get;
-			private set;
-		}
-		
-		public HeaderElement (string name, string value)
-		{
-			// LAMESPEC: empty string in name is accepted
-			if (name == null)
-				throw new ArgumentNullException ("name");
-			if (value == null)
-				throw new ArgumentNullException ("value");
+        public string Value { get; private set; }
 
-			this.Name = name;
-			this.Value = value;
-		}
-	}
+        public HeaderElement(string name, string value)
+        {
+            // LAMESPEC: empty string in name is accepted
+            if (name == null)
+                throw new ArgumentNullException("name");
+            if (value == null)
+                throw new ArgumentNullException("value");
+
+            this.Name = name;
+            this.Value = value;
+        }
+    }
 }

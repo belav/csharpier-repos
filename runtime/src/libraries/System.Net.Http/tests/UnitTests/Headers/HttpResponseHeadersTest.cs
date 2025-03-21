@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -20,39 +19,57 @@ namespace System.Net.Http.Tests
 
         public static IEnumerable<object[]> ProhibitedTrailingHeaders()
         {
-            return new KnownHeader[]    // rfc7230 4.1.2.
+            return new KnownHeader[] // rfc7230 4.1.2.
             {
                 // Message framing headers.
-                KnownHeaders.TransferEncoding, KnownHeaders.ContentLength,
-
+                KnownHeaders.TransferEncoding,
+                KnownHeaders.ContentLength,
                 // Routing headers.
                 KnownHeaders.Host,
-
                 // Request modifiers: controls and conditionals.
                 // rfc7231#section-5.1: Controls.
-                KnownHeaders.CacheControl, KnownHeaders.Expect, KnownHeaders.MaxForwards, KnownHeaders.Pragma, KnownHeaders.Range, KnownHeaders.TE,
-
+                KnownHeaders.CacheControl,
+                KnownHeaders.Expect,
+                KnownHeaders.MaxForwards,
+                KnownHeaders.Pragma,
+                KnownHeaders.Range,
+                KnownHeaders.TE,
                 // rfc7231#section-5.2: Conditionals.
-                KnownHeaders.IfMatch, KnownHeaders.IfNoneMatch, KnownHeaders.IfModifiedSince, KnownHeaders.IfUnmodifiedSince, KnownHeaders.IfRange,
-
+                KnownHeaders.IfMatch,
+                KnownHeaders.IfNoneMatch,
+                KnownHeaders.IfModifiedSince,
+                KnownHeaders.IfUnmodifiedSince,
+                KnownHeaders.IfRange,
                 // Authentication headers.
-                KnownHeaders.Authorization, KnownHeaders.SetCookie,
-
+                KnownHeaders.Authorization,
+                KnownHeaders.SetCookie,
                 // Response control data.
                 // rfc7231#section-7.1: Control Data.
-                KnownHeaders.Age, KnownHeaders.Expires, KnownHeaders.Date, KnownHeaders.Location, KnownHeaders.RetryAfter, KnownHeaders.Vary, KnownHeaders.Warning,
-
+                KnownHeaders.Age,
+                KnownHeaders.Expires,
+                KnownHeaders.Date,
+                KnownHeaders.Location,
+                KnownHeaders.RetryAfter,
+                KnownHeaders.Vary,
+                KnownHeaders.Warning,
                 // Content-Encoding, Content-Type, Content-Range, and Trailer itself.
-                KnownHeaders.ContentEncoding, KnownHeaders.ContentType, KnownHeaders.ContentRange, KnownHeaders.Trailer
-            }.Select(h => new object[] { h.Name }).ToArray();
+                KnownHeaders.ContentEncoding,
+                KnownHeaders.ContentType,
+                KnownHeaders.ContentRange,
+                KnownHeaders.Trailer,
+            }
+                .Select(h => new object[] { h.Name })
+                .ToArray();
         }
 
         public static IEnumerable<object[]> AllowedTrailingHeaders()
         {
             return new[]
             {
-                new[] {"Content-MD5", "Q2hlY2sgSW50ZWdyaXR5IQ=="}, new [] { "Accept-Encoding", "identity,gzip" },
-                new[] {"X-MyHeader", "ABC"}, new[] { "ETag", "\"737060cd8c284d8af7ad3082f209582d\"" }
+                new[] { "Content-MD5", "Q2hlY2sgSW50ZWdyaXR5IQ==" },
+                new[] { "Accept-Encoding", "identity,gzip" },
+                new[] { "X-MyHeader", "ABC" },
+                new[] { "ETag", "\"737060cd8c284d8af7ad3082f209582d\"" },
             };
         }
 
@@ -68,8 +85,10 @@ namespace System.Net.Http.Tests
 
             headers.Location = null;
             Assert.Null(headers.Location);
-            Assert.False(headers.Contains("Location"),
-                "Header store should not contain a header 'Location' after setting it to null.");
+            Assert.False(
+                headers.Contains("Location"),
+                "Header store should not contain a header 'Location' after setting it to null."
+            );
         }
 
         [Fact]
@@ -130,8 +149,10 @@ namespace System.Net.Http.Tests
 
             headers.ETag = null;
             Assert.Null(headers.ETag);
-            Assert.False(headers.Contains("ETag"),
-                "Header store should not contain a header 'ETag' after setting it to null.");
+            Assert.False(
+                headers.Contains("ETag"),
+                "Header store should not contain a header 'ETag' after setting it to null."
+            );
         }
 
         [Fact]
@@ -172,8 +193,10 @@ namespace System.Net.Http.Tests
 
             headers.AcceptRanges.Clear();
             Assert.Equal(0, headers.AcceptRanges.Count);
-            Assert.False(headers.Contains("Accept-Ranges"),
-                "There should be no Accept-Ranges header after calling Clear().");
+            Assert.False(
+                headers.Contains("Accept-Ranges"),
+                "There should be no Accept-Ranges header after calling Clear()."
+            );
         }
 
         [Fact]
@@ -190,14 +213,19 @@ namespace System.Net.Http.Tests
 
             headers.AcceptRanges.Clear();
             Assert.Equal(0, headers.AcceptRanges.Count);
-            Assert.False(headers.Contains("Accept-Ranges"),
-                "There should be no Accept-Ranges header after calling Clear().");
+            Assert.False(
+                headers.Contains("Accept-Ranges"),
+                "There should be no Accept-Ranges header after calling Clear()."
+            );
         }
 
         [Fact]
         public void AcceptRanges_AddInvalidValue_Throw()
         {
-            Assert.Throws<FormatException>(() => { headers.AcceptRanges.Add("this is invalid"); });
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.AcceptRanges.Add("this is invalid");
+            });
         }
 
         [Fact]
@@ -216,47 +244,70 @@ namespace System.Net.Http.Tests
             Assert.Equal(0, headers.WwwAuthenticate.Count);
 
             headers.WwwAuthenticate.Add(new AuthenticationHeaderValue("NTLM"));
-            headers.WwwAuthenticate.Add(new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\""));
+            headers.WwwAuthenticate.Add(
+                new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\"")
+            );
 
             Assert.Equal(2, headers.WwwAuthenticate.Count);
             Assert.Equal(2, headers.GetValues("WWW-Authenticate").Count());
 
-            Assert.Equal(new AuthenticationHeaderValue("NTLM"),
-                headers.WwwAuthenticate.ElementAt(0));
-            Assert.Equal(new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\""),
-                headers.WwwAuthenticate.ElementAt(1));
+            Assert.Equal(
+                new AuthenticationHeaderValue("NTLM"),
+                headers.WwwAuthenticate.ElementAt(0)
+            );
+            Assert.Equal(
+                new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\""),
+                headers.WwwAuthenticate.ElementAt(1)
+            );
 
             headers.WwwAuthenticate.Clear();
             Assert.Equal(0, headers.WwwAuthenticate.Count);
-            Assert.False(headers.Contains("WWW-Authenticate"),
-                "There should be no WWW-Authenticate header after calling Clear().");
+            Assert.False(
+                headers.Contains("WWW-Authenticate"),
+                "There should be no WWW-Authenticate header after calling Clear()."
+            );
         }
 
         [Fact]
         public void WwwAuthenticate_UseAddMethod_AddedValueCanBeRetrievedUsingProperty()
         {
             headers.Add("WWW-Authenticate", "Negotiate");
-            headers.TryAddWithoutValidation("WWW-Authenticate", "Basic realm=\"contoso.com\", Digest a=b, c=d, NTLM");
+            headers.TryAddWithoutValidation(
+                "WWW-Authenticate",
+                "Basic realm=\"contoso.com\", Digest a=b, c=d, NTLM"
+            );
             headers.TryAddWithoutValidation("WWW-Authenticate", "Kerberos");
 
             Assert.Equal(5, headers.WwwAuthenticate.Count);
             Assert.Equal(5, headers.GetValues("WWW-Authenticate").Count());
 
-            Assert.Equal(new AuthenticationHeaderValue("Negotiate"),
-                headers.WwwAuthenticate.ElementAt(0));
-            Assert.Equal(new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\""),
-                headers.WwwAuthenticate.ElementAt(1));
-            Assert.Equal(new AuthenticationHeaderValue("Digest", "a=b, c=d"),
-                headers.WwwAuthenticate.ElementAt(2));
-            Assert.Equal(new AuthenticationHeaderValue("NTLM"),
-                headers.WwwAuthenticate.ElementAt(3));
-            Assert.Equal(new AuthenticationHeaderValue("Kerberos"),
-                headers.WwwAuthenticate.ElementAt(4));
+            Assert.Equal(
+                new AuthenticationHeaderValue("Negotiate"),
+                headers.WwwAuthenticate.ElementAt(0)
+            );
+            Assert.Equal(
+                new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\""),
+                headers.WwwAuthenticate.ElementAt(1)
+            );
+            Assert.Equal(
+                new AuthenticationHeaderValue("Digest", "a=b, c=d"),
+                headers.WwwAuthenticate.ElementAt(2)
+            );
+            Assert.Equal(
+                new AuthenticationHeaderValue("NTLM"),
+                headers.WwwAuthenticate.ElementAt(3)
+            );
+            Assert.Equal(
+                new AuthenticationHeaderValue("Kerberos"),
+                headers.WwwAuthenticate.ElementAt(4)
+            );
 
             headers.WwwAuthenticate.Clear();
             Assert.Equal(0, headers.WwwAuthenticate.Count);
-            Assert.False(headers.Contains("WWW-Authenticate"),
-                "There should be no WWW-Authenticate header after calling Clear().");
+            Assert.False(
+                headers.Contains("WWW-Authenticate"),
+                "There should be no WWW-Authenticate header after calling Clear()."
+            );
         }
 
         [Fact]
@@ -265,20 +316,28 @@ namespace System.Net.Http.Tests
             Assert.Equal(0, headers.ProxyAuthenticate.Count);
 
             headers.ProxyAuthenticate.Add(new AuthenticationHeaderValue("NTLM"));
-            headers.ProxyAuthenticate.Add(new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\""));
+            headers.ProxyAuthenticate.Add(
+                new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\"")
+            );
 
             Assert.Equal(2, headers.ProxyAuthenticate.Count);
             Assert.Equal(2, headers.GetValues("Proxy-Authenticate").Count());
 
-            Assert.Equal(new AuthenticationHeaderValue("NTLM"),
-                headers.ProxyAuthenticate.ElementAt(0));
-            Assert.Equal(new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\""),
-                headers.ProxyAuthenticate.ElementAt(1));
+            Assert.Equal(
+                new AuthenticationHeaderValue("NTLM"),
+                headers.ProxyAuthenticate.ElementAt(0)
+            );
+            Assert.Equal(
+                new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\""),
+                headers.ProxyAuthenticate.ElementAt(1)
+            );
 
             headers.ProxyAuthenticate.Clear();
             Assert.Equal(0, headers.ProxyAuthenticate.Count);
-            Assert.False(headers.Contains("Proxy-Authenticate"),
-                "There should be no Proxy-Authenticate header after calling Clear().");
+            Assert.False(
+                headers.Contains("Proxy-Authenticate"),
+                "There should be no Proxy-Authenticate header after calling Clear()."
+            );
         }
 
         [Fact]
@@ -291,17 +350,25 @@ namespace System.Net.Http.Tests
             Assert.Equal(3, headers.ProxyAuthenticate.Count);
             Assert.Equal(3, headers.GetValues("Proxy-Authenticate").Count());
 
-            Assert.Equal(new AuthenticationHeaderValue("Negotiate"),
-                headers.ProxyAuthenticate.ElementAt(0));
-            Assert.Equal(new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\""),
-                headers.ProxyAuthenticate.ElementAt(1));
-            Assert.Equal(new AuthenticationHeaderValue("NTLM"),
-                headers.ProxyAuthenticate.ElementAt(2));
+            Assert.Equal(
+                new AuthenticationHeaderValue("Negotiate"),
+                headers.ProxyAuthenticate.ElementAt(0)
+            );
+            Assert.Equal(
+                new AuthenticationHeaderValue("Basic", "realm=\"contoso.com\""),
+                headers.ProxyAuthenticate.ElementAt(1)
+            );
+            Assert.Equal(
+                new AuthenticationHeaderValue("NTLM"),
+                headers.ProxyAuthenticate.ElementAt(2)
+            );
 
             headers.ProxyAuthenticate.Clear();
             Assert.Equal(0, headers.ProxyAuthenticate.Count);
-            Assert.False(headers.Contains("Proxy-Authenticate"),
-                "There should be no Proxy-Authenticate header after calling Clear().");
+            Assert.False(
+                headers.Contains("Proxy-Authenticate"),
+                "There should be no Proxy-Authenticate header after calling Clear()."
+            );
         }
 
         [Fact]
@@ -319,12 +386,18 @@ namespace System.Net.Http.Tests
 
             headers.Server.Clear();
             Assert.Equal(0, headers.Server.Count);
-            Assert.False(headers.Contains("Server"), "Server header should be removed after calling Clear().");
+            Assert.False(
+                headers.Contains("Server"),
+                "Server header should be removed after calling Clear()."
+            );
 
             headers.Server.Add(new ProductInfoHeaderValue("(comment)"));
             headers.Server.Remove(new ProductInfoHeaderValue("(comment)"));
             Assert.Equal(0, headers.Server.Count);
-            Assert.False(headers.Contains("Server"), "Server header should be removed after removing last value.");
+            Assert.False(
+                headers.Contains("Server"),
+                "Server header should be removed after removing last value."
+            );
         }
 
         [Fact]
@@ -341,7 +414,10 @@ namespace System.Net.Http.Tests
 
             headers.Server.Clear();
             Assert.Equal(0, headers.Server.Count);
-            Assert.False(headers.Contains("Server"), "Server header should be removed after calling Clear().");
+            Assert.False(
+                headers.Contains("Server"),
+                "Server header should be removed after calling Clear()."
+            );
         }
 
         [Fact]
@@ -383,15 +459,20 @@ namespace System.Net.Http.Tests
 
             headers.RetryAfter = null;
             Assert.Null(headers.RetryAfter);
-            Assert.False(headers.Contains("RetryAfter"),
-                "Header store should not contain a header 'ETag' after setting it to null.");
+            Assert.False(
+                headers.Contains("RetryAfter"),
+                "Header store should not contain a header 'ETag' after setting it to null."
+            );
         }
 
         [Fact]
         public void RetryAfter_UseAddMethod_AddedValueCanBeRetrievedUsingProperty()
         {
             headers.TryAddWithoutValidation("Retry-After", " 2100000 ");
-            Assert.Equal(new RetryConditionHeaderValue(new TimeSpan(0, 0, 2100000)), headers.RetryAfter);
+            Assert.Equal(
+                new RetryConditionHeaderValue(new TimeSpan(0, 0, 2100000)),
+                headers.RetryAfter
+            );
         }
 
         [Fact]
@@ -406,7 +487,10 @@ namespace System.Net.Http.Tests
             headers.TryAddWithoutValidation("Retry-After", ",Sun, 06 Nov 1994 08:49:37 GMT"); // leading separator
             Assert.Null(headers.RetryAfter);
             Assert.Equal(1, headers.GetValues("Retry-After").Count());
-            Assert.Equal(",Sun, 06 Nov 1994 08:49:37 GMT", headers.GetValues("Retry-After").First());
+            Assert.Equal(
+                ",Sun, 06 Nov 1994 08:49:37 GMT",
+                headers.GetValues("Retry-After").First()
+            );
         }
 
         [Fact]
@@ -425,8 +509,10 @@ namespace System.Net.Http.Tests
 
             headers.Vary.Clear();
             Assert.Equal(0, headers.Vary.Count);
-            Assert.False(headers.Contains("Vary"),
-                "There should be no Vary header after calling Clear().");
+            Assert.False(
+                headers.Contains("Vary"),
+                "There should be no Vary header after calling Clear()."
+            );
         }
 
         [Fact]
@@ -443,8 +529,10 @@ namespace System.Net.Http.Tests
 
             headers.Vary.Clear();
             Assert.Equal(0, headers.Vary.Count);
-            Assert.False(headers.Contains("Vary"),
-                "There should be no Vary header after calling Clear().");
+            Assert.False(
+                headers.Contains("Vary"),
+                "There should be no Vary header after calling Clear()."
+            );
         }
 
         [Fact]
@@ -468,8 +556,10 @@ namespace System.Net.Http.Tests
 
             headers.Age = null;
             Assert.Null(headers.Age);
-            Assert.False(headers.Contains("Age"),
-                "Header store should not contain a header 'Age' after setting it to null.");
+            Assert.False(
+                headers.Contains("Age"),
+                "Header store should not contain a header 'Age' after setting it to null."
+            );
 
             // Make sure the header gets serialized correctly
             headers.Age = new TimeSpan(0, 1, 2);
@@ -595,11 +685,16 @@ namespace System.Net.Http.Tests
         {
             Assert.Equal(0, headers.Warning.Count);
 
-            headers.Warning.Add(new WarningHeaderValue(199, "microsoft.com", "\"Miscellaneous warning\""));
+            headers.Warning.Add(
+                new WarningHeaderValue(199, "microsoft.com", "\"Miscellaneous warning\"")
+            );
 
             Assert.Equal(1, headers.Warning.Count);
 
-            headers.TryAddWithoutValidation("Warning", "112 example.com \"Disconnected operation\"");
+            headers.TryAddWithoutValidation(
+                "Warning",
+                "112 example.com \"Disconnected operation\""
+            );
             Assert.Equal(2, headers.Warning.Count);
         }
 
@@ -699,16 +794,46 @@ namespace System.Net.Http.Tests
         {
             // Try adding content headers. Use different casing to make sure case-insensitive comparison
             // is used.
-            Assert.Throws<InvalidOperationException>(() => { headers.Add("Allow", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { headers.Add("Content-Encoding", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { headers.Add("Content-Language", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { headers.Add("content-length", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { headers.Add("Content-Location", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { headers.Add("Content-MD5", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { headers.Add("Content-Range", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { headers.Add("CONTENT-TYPE", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { headers.Add("Expires", "v"); });
-            Assert.Throws<InvalidOperationException>(() => { headers.Add("Last-Modified", "v"); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Allow", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-Encoding", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-Language", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("content-length", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-Location", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-MD5", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-Range", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("CONTENT-TYPE", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Expires", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Last-Modified", "v");
+            });
         }
     }
 }

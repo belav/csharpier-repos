@@ -23,7 +23,10 @@ public static class XmlAssert
 
         // Since XNode's DeepEquals does not check for presence of xml declaration,
         // check it explicitly
-        bool areEqual = EqualDeclarations(sortedExpectedXDocument.Declaration, sortedActualXDocument.Declaration);
+        bool areEqual = EqualDeclarations(
+            sortedExpectedXDocument.Declaration,
+            sortedActualXDocument.Declaration
+        );
 
         areEqual = areEqual && XNode.DeepEquals(sortedExpectedXDocument, sortedActualXDocument);
 
@@ -31,7 +34,8 @@ public static class XmlAssert
         {
             throw new EqualException(
                 sortedExpectedXDocument.ToString(SaveOptions.DisableFormatting),
-                sortedActualXDocument.ToString(SaveOptions.DisableFormatting));
+                sortedActualXDocument.ToString(SaveOptions.DisableFormatting)
+            );
         }
     }
 
@@ -49,14 +53,16 @@ public static class XmlAssert
 
         // Note that this ignores 'Standalone' property comparison.
         return string.Equals(expected.Version, actual.Version, StringComparison.OrdinalIgnoreCase)
-            && string.Equals(expected.Encoding, actual.Encoding, StringComparison.OrdinalIgnoreCase);
+            && string.Equals(
+                expected.Encoding,
+                actual.Encoding,
+                StringComparison.OrdinalIgnoreCase
+            );
     }
 
     private static XDocument SortAttributes(XDocument document)
     {
-        return new XDocument(
-            document.Declaration,
-            SortAttributes(document.Root));
+        return new XDocument(document.Declaration, SortAttributes(document.Root));
     }
 
     private static XNode SortAttributes(XNode node)
@@ -70,6 +76,7 @@ public static class XmlAssert
         return new XElement(
             element.Name,
             element.Attributes().OrderBy(a => a.Name.ToString()),
-            element.Nodes().Select(child => SortAttributes(child)));
+            element.Nodes().Select(child => SortAttributes(child))
+        );
     }
 }

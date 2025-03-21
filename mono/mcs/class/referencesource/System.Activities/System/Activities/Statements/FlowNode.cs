@@ -4,8 +4,8 @@
 
 namespace System.Activities.Statements
 {
-    using System.Collections.Generic;
     using System.Activities;
+    using System.Collections.Generic;
     using System.ComponentModel;
 
     public abstract class FlowNode
@@ -18,31 +18,18 @@ namespace System.Activities.Statements
             Index = -1;
         }
 
-        internal abstract Activity ChildActivity
-        {
-            get;
-        }
+        internal abstract Activity ChildActivity { get; }
 
-        internal int Index
-        { 
-            get; 
-            set; 
-        }
+        internal int Index { get; set; }
 
         internal bool IsOpen
         {
-            get
-            {
-                return this.owner != null;
-            }
+            get { return this.owner != null; }
         }
-        
+
         internal Flowchart Owner
         {
-            get
-            {
-                return this.owner;
-            }
+            get { return this.owner; }
         }
 
         // Returns true if this is the first time we've visited this node during this pass
@@ -53,7 +40,9 @@ namespace System.Activities.Statements
                 // We've already visited this node during this pass
                 if (!object.ReferenceEquals(this.owner, owner))
                 {
-                    metadata.AddValidationError(SR.FlowNodeCannotBeShared(this.owner.DisplayName, owner.DisplayName));
+                    metadata.AddValidationError(
+                        SR.FlowNodeCannotBeShared(this.owner.DisplayName, owner.DisplayName)
+                    );
                 }
 
                 // Whether we found an issue or not we don't want to change
@@ -74,7 +63,7 @@ namespace System.Activities.Statements
         }
 
         internal abstract void OnOpen(Flowchart owner, NativeActivityMetadata metadata);
-        
+
         internal void GetChildActivities(ICollection<Activity> children)
         {
             if (ChildActivity != null)

@@ -29,7 +29,12 @@ namespace Microsoft.Extensions.Hosting.Systemd
         /// <param name="applicationLifetime">The <see cref="IHostApplicationLifetime"/> that tracks the service lifetime.</param>
         /// <param name="systemdNotifier">The <see cref="ISystemdNotifier"/> to notify Systemd about service status.</param>
         /// <param name="loggerFactory">The <see cref="ILoggerFactory"/> used to instantiate the lifetime logger.</param>
-        public SystemdLifetime(IHostEnvironment environment, IHostApplicationLifetime applicationLifetime, ISystemdNotifier systemdNotifier, ILoggerFactory loggerFactory)
+        public SystemdLifetime(
+            IHostEnvironment environment,
+            IHostApplicationLifetime applicationLifetime,
+            ISystemdNotifier systemdNotifier,
+            ILoggerFactory loggerFactory
+        )
         {
             ThrowHelper.ThrowIfNull(environment);
             ThrowHelper.ThrowIfNull(applicationLifetime);
@@ -72,16 +77,20 @@ namespace Microsoft.Extensions.Hosting.Systemd
         /// </returns>
         public Task WaitForStartAsync(CancellationToken cancellationToken)
         {
-            _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(state =>
-            {
-                ((SystemdLifetime)state!).OnApplicationStarted();
-            },
-            this);
-            _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(state =>
-            {
-                ((SystemdLifetime)state!).OnApplicationStopping();
-            },
-            this);
+            _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(
+                state =>
+                {
+                    ((SystemdLifetime)state!).OnApplicationStarted();
+                },
+                this
+            );
+            _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(
+                state =>
+                {
+                    ((SystemdLifetime)state!).OnApplicationStopping();
+                },
+                this
+            );
 
             RegisterShutdownHandlers();
 
@@ -92,8 +101,11 @@ namespace Microsoft.Extensions.Hosting.Systemd
 
         private void OnApplicationStarted()
         {
-            Logger.LogInformation("Application started. Hosting environment: {EnvironmentName}; Content root path: {ContentRoot}",
-                Environment.EnvironmentName, Environment.ContentRootPath);
+            Logger.LogInformation(
+                "Application started. Hosting environment: {EnvironmentName}; Content root path: {ContentRoot}",
+                Environment.EnvironmentName,
+                Environment.ContentRootPath
+            );
 
             SystemdNotifier.Notify(ServiceState.Ready);
         }

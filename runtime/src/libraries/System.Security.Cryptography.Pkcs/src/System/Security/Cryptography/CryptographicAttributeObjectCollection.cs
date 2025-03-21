@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using Internal.Cryptography;
 
 namespace System.Security.Cryptography
@@ -30,7 +29,12 @@ namespace System.Security.Cryptography
                 throw new ArgumentNullException(nameof(asnEncodedData));
             }
 
-            return Add(new CryptographicAttributeObject(asnEncodedData.Oid!, new AsnEncodedDataCollection(asnEncodedData)));
+            return Add(
+                new CryptographicAttributeObject(
+                    asnEncodedData.Oid!,
+                    new AsnEncodedDataCollection(asnEncodedData)
+                )
+            );
         }
 
         public int Add(CryptographicAttributeObject attribute)
@@ -51,7 +55,9 @@ namespace System.Security.Cryptography
                 // To prevent caller to add the existing item into the collection again
                 // Otherwise the merge will be an infinite loop
                 if (object.ReferenceEquals(existing.Values, attribute.Values))
-                    throw new InvalidOperationException(SR.InvalidOperation_DuplicateItemNotAllowed);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_DuplicateItemNotAllowed
+                    );
 
                 string? szOid2 = existing.Oid.Value;
                 if (string.Equals(szOid1, szOid2, StringComparison.OrdinalIgnoreCase))
@@ -60,7 +66,9 @@ namespace System.Security.Cryptography
                     // Only allow one signing time, per RFC.
                     //
                     if (string.Equals(szOid1, Oids.SigningTime, StringComparison.OrdinalIgnoreCase))
-                        throw new CryptographicException(SR.Cryptography_Pkcs9_MultipleSigningTimeNotAllowed);
+                        throw new CryptographicException(
+                            SR.Cryptography_Pkcs9_MultipleSigningTimeNotAllowed
+                        );
 
                     foreach (AsnEncodedData asnEncodedData in attribute.Values)
                     {
@@ -93,34 +101,22 @@ namespace System.Security.Cryptography
 
         public CryptographicAttributeObject this[int index]
         {
-            get
-            {
-                return _list[index];
-            }
+            get { return _list[index]; }
         }
 
         public int Count
         {
-            get
-            {
-                return _list.Count;
-            }
+            get { return _list.Count; }
         }
 
         public bool IsSynchronized
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public object SyncRoot
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         public CryptographicAttributeObjectEnumerator GetEnumerator()
@@ -143,7 +139,10 @@ namespace System.Security.Cryptography
             if (array.Rank != 1)
                 throw new ArgumentException(SR.Arg_RankMultiDimNotSupported);
             if (index < 0 || index >= array.Length)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
             if (index > array.Length - Count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 
@@ -162,7 +161,10 @@ namespace System.Security.Cryptography
             }
 
             if (index < 0 || index >= array.Length)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
             if (index > array.Length - Count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 

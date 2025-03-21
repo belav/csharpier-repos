@@ -14,10 +14,10 @@ namespace System.IdentityModel.Tokens
     /// </summary>
     /// <remarks>
     /// <para>
-    /// This base class does not directly support any by-value authentication 
-    /// context declarations (represented in XML by the AuthnContextDecl element). 
-    /// To support by-value declarations, extend this class to support the data 
-    /// model and extend Saml2AssertionSerializer, overriding ReadAuthnContext 
+    /// This base class does not directly support any by-value authentication
+    /// context declarations (represented in XML by the AuthnContextDecl element).
+    /// To support by-value declarations, extend this class to support the data
+    /// model and extend Saml2AssertionSerializer, overriding ReadAuthnContext
     /// and WriteAuthnContext to read and write the by-value declaration.
     /// </para>
     /// </remarks>
@@ -31,18 +31,14 @@ namespace System.IdentityModel.Tokens
         /// Creates an instance of Saml2AuthenticationContext.
         /// </summary>
         public Saml2AuthenticationContext()
-            : this(null, null)
-        {
-        }
+            : this(null, null) { }
 
         /// <summary>
         /// Creates an instance of Saml2AuthenticationContext.
         /// </summary>
         /// <param name="classReference">The class reference of the authentication context.</param>
         public Saml2AuthenticationContext(Uri classReference)
-            : this(classReference, null)
-        {
-        }
+            : this(classReference, null) { }
 
         /// <summary>
         /// Creates an instance of Saml2AuthenticationContext.
@@ -54,12 +50,18 @@ namespace System.IdentityModel.Tokens
             // Must be absolute URIs
             if (null != classReference && !classReference.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("classReference", SR.GetString(SR.ID0013));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "classReference",
+                    SR.GetString(SR.ID0013)
+                );
             }
-            
+
             if (null != declarationReference && !declarationReference.IsAbsoluteUri)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("declarationReference", SR.GetString(SR.ID0013));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "declarationReference",
+                    SR.GetString(SR.ID0013)
+                );
             }
 
             this.classReference = classReference;
@@ -67,7 +69,7 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets Zero or more unique identifiers of authentication authorities that 
+        /// Gets Zero or more unique identifiers of authentication authorities that
         /// were involved in the authentication of the principal (not including
         /// the assertion issuer, who is presumed to have been involved without
         /// being explicitly named here). [Saml2Core, 2.7.2.2]
@@ -78,22 +80,21 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets a URI reference identifying an authentication context class that 
+        /// Gets or sets a URI reference identifying an authentication context class that
         /// describes the authentication context declaration that follows.
         /// [Saml2Core, 2.7.2.2]
         /// </summary>
         public Uri ClassReference
         {
-            get 
-            { 
-                return this.classReference; 
-            }
-
+            get { return this.classReference; }
             set
             {
                 if (null != value && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID0013));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID0013)
+                    );
                 }
 
                 this.classReference = value;
@@ -101,21 +102,20 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets a URI reference that identifies an authentication context 
+        /// Gets or sets a URI reference that identifies an authentication context
         /// declaration. [Saml2Core, 2.7.2.2]
         /// </summary>
         public Uri DeclarationReference
         {
-            get 
-            { 
-                return this.declarationReference; 
-            }
-
+            get { return this.declarationReference; }
             set
             {
                 if (null != value && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID0013));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID0013)
+                    );
                 }
 
                 this.declarationReference = value;

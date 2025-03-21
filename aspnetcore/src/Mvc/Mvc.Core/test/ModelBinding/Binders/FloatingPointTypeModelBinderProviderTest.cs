@@ -93,7 +93,5 @@ public class FloatingPointTypeModelBinderProviderTest
         Assert.IsType<FloatModelBinder>(result);
     }
 
-    private class TestClass
-    {
-    }
+    private class TestClass { }
 }

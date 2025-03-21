@@ -22,51 +22,292 @@ public class ActionSelectorBenchmark
     // GET and one that handles POST.
     private static readonly ActionDescriptor[] _actions = new ActionDescriptor[]
     {
-            CreateActionDescriptor(new { area = "Admin", controller = "Account", action = "AddUser" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Account", action = "AddUser" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Account", action = "DeleteUser" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Account", action = "DeleteUser" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Account", action = "Details" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Account", action = "List" }),
-
-            CreateActionDescriptor(new { area = "Admin", controller = "Diagnostics", action = "Stats" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Diagnostics", action = "Performance" }),
-
-            CreateActionDescriptor(new { area = "Admin", controller = "Products", action = "CreateProduct" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Products", action = "CreateProduct" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Products", action = "DeleteProduct" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Products", action = "DeleteProduct" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Products", action = "EditProduct" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Products", action = "EditProduct" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Products", action = "Index" }),
-            CreateActionDescriptor(new { area = "Admin", controller = "Products", action = "Inventory" }),
-
-            CreateActionDescriptor(new { area = "Store", controller = "Search", action = "FindProduct" }),
-            CreateActionDescriptor(new { area = "Store", controller = "Search", action = "ShowCategory" }),
-            CreateActionDescriptor(new { area = "Store", controller = "Search", action = "HotItems" }),
-
-            CreateActionDescriptor(new { area = "Store", controller = "Product", action = "Index" }),
-            CreateActionDescriptor(new { area = "Store", controller = "Product", action = "Details" }),
-            CreateActionDescriptor(new { area = "Store", controller = "Product", action = "Buy" }),
-
-            CreateActionDescriptor(new { area = "Store", controller = "Checkout", action = "ViewCart" }),
-            CreateActionDescriptor(new { area = "Store", controller = "Checkout", action = "Billing" }),
-            CreateActionDescriptor(new { area = "Store", controller = "Checkout", action = "Confim" }),
-            CreateActionDescriptor(new { area = "Store", controller = "Checkout", action = "Confim" }),
-
-            CreateActionDescriptor(new { area = "", controller = "Blog", action = "Index" }),
-            CreateActionDescriptor(new { area = "", controller = "Blog", action = "Search" }),
-            CreateActionDescriptor(new { area = "", controller = "Blog", action = "ViewPost" }),
-            CreateActionDescriptor(new { area = "", controller = "Blog", action = "PostComment" }),
-
-            CreateActionDescriptor(new { area = "", controller = "Home", action = "Index" }),
-            CreateActionDescriptor(new { area = "", controller = "Home", action = "Search" }),
-            CreateActionDescriptor(new { area = "", controller = "Home", action = "About" }),
-            CreateActionDescriptor(new { area = "", controller = "Home", action = "Contact" }),
-            CreateActionDescriptor(new { area = "", controller = "Home", action = "Support" }),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Account",
+                action = "AddUser",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Account",
+                action = "AddUser",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Account",
+                action = "DeleteUser",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Account",
+                action = "DeleteUser",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Account",
+                action = "Details",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Account",
+                action = "List",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Diagnostics",
+                action = "Stats",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Diagnostics",
+                action = "Performance",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "CreateProduct",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "CreateProduct",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "DeleteProduct",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "DeleteProduct",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "EditProduct",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "EditProduct",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "Index",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Admin",
+                controller = "Products",
+                action = "Inventory",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Search",
+                action = "FindProduct",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Search",
+                action = "ShowCategory",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Search",
+                action = "HotItems",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Product",
+                action = "Index",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Product",
+                action = "Details",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Product",
+                action = "Buy",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Checkout",
+                action = "ViewCart",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Checkout",
+                action = "Billing",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Checkout",
+                action = "Confim",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "Store",
+                controller = "Checkout",
+                action = "Confim",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Blog",
+                action = "Index",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Blog",
+                action = "Search",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Blog",
+                action = "ViewPost",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Blog",
+                action = "PostComment",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Home",
+                action = "Index",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Home",
+                action = "Search",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Home",
+                action = "About",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Home",
+                action = "Contact",
+            }
+        ),
+        CreateActionDescriptor(
+            new
+            {
+                area = "",
+                controller = "Home",
+                action = "Support",
+            }
+        ),
     };
 
-    private static readonly KeyValuePair<RouteValueDictionary, IReadOnlyList<ActionDescriptor>>[] _dataSet = GetDataSet(_actions);
+    private static readonly KeyValuePair<
+        RouteValueDictionary,
+        IReadOnlyList<ActionDescriptor>
+    >[] _dataSet = GetDataSet(_actions);
 
     private static readonly IActionSelector _actionSelector = CreateActionSelector(_actions);
 
@@ -109,7 +350,10 @@ public class ActionSelectorBenchmark
     }
 
     // A naive implementation we can use to generate match data for inputs, and for a baseline.
-    private static IReadOnlyList<ActionDescriptor> NaiveSelectCandidates(ActionDescriptor[] actions, RouteValueDictionary routeValues)
+    private static IReadOnlyList<ActionDescriptor> NaiveSelectCandidates(
+        ActionDescriptor[] actions,
+        RouteValueDictionary routeValues
+    )
     {
         var results = new List<ActionDescriptor>();
         for (var i = 0; i < actions.Length; i++)
@@ -119,8 +363,9 @@ public class ActionSelectorBenchmark
             var isMatch = true;
             foreach (var kvp in action.RouteValues)
             {
-                var routeValue = Convert.ToString(routeValues[kvp.Key], CultureInfo.InvariantCulture) ??
-                    string.Empty;
+                var routeValue =
+                    Convert.ToString(routeValues[kvp.Key], CultureInfo.InvariantCulture)
+                    ?? string.Empty;
                 if (string.IsNullOrEmpty(kvp.Value) && string.IsNullOrEmpty(routeValue))
                 {
                     // Match
@@ -152,16 +397,18 @@ public class ActionSelectorBenchmark
         var routeValues = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         foreach (var kvp in new RouteValueDictionary(obj))
         {
-            routeValues.Add(kvp.Key, Convert.ToString(kvp.Value, CultureInfo.InvariantCulture) ?? string.Empty);
+            routeValues.Add(
+                kvp.Key,
+                Convert.ToString(kvp.Value, CultureInfo.InvariantCulture) ?? string.Empty
+            );
         }
 
-        return new ActionDescriptor()
-        {
-            RouteValues = routeValues,
-        };
+        return new ActionDescriptor() { RouteValues = routeValues };
     }
 
-    private static KeyValuePair<RouteValueDictionary, IReadOnlyList<ActionDescriptor>>[] GetDataSet(ActionDescriptor[] actions)
+    private static KeyValuePair<RouteValueDictionary, IReadOnlyList<ActionDescriptor>>[] GetDataSet(
+        ActionDescriptor[] actions
+    )
     {
         var random = new Random(Seed);
 
@@ -177,7 +424,12 @@ public class ActionSelectorBenchmark
                 throw new InvalidOperationException("This should have at least one match.");
             }
 
-            data.Add(new KeyValuePair<RouteValueDictionary, IReadOnlyList<ActionDescriptor>>(routeValues, matches));
+            data.Add(
+                new KeyValuePair<RouteValueDictionary, IReadOnlyList<ActionDescriptor>>(
+                    routeValues,
+                    matches
+                )
+            );
         }
 
         for (var i = 1; i < actions.Length; i += 3)
@@ -186,7 +438,8 @@ public class ActionSelectorBenchmark
             var routeValues = new RouteValueDictionary(action.RouteValues);
 
             // Make one of the route values not match.
-            routeValues[routeValues.First().Key] = ((string)routeValues.First().Value) + "fkdkfdkkf";
+            routeValues[routeValues.First().Key] =
+                ((string)routeValues.First().Value) + "fkdkfdkkf";
 
             var matches = NaiveSelectCandidates(actions, routeValues);
             if (matches.Count != 0)
@@ -194,13 +447,21 @@ public class ActionSelectorBenchmark
                 throw new InvalidOperationException("This should have 0 matches.");
             }
 
-            data.Add(new KeyValuePair<RouteValueDictionary, IReadOnlyList<ActionDescriptor>>(routeValues, matches));
+            data.Add(
+                new KeyValuePair<RouteValueDictionary, IReadOnlyList<ActionDescriptor>>(
+                    routeValues,
+                    matches
+                )
+            );
         }
 
         return data.ToArray();
     }
 
-    private static void Verify(IReadOnlyList<ActionDescriptor> expected, IReadOnlyList<ActionDescriptor> actual)
+    private static void Verify(
+        IReadOnlyList<ActionDescriptor> expected,
+        IReadOnlyList<ActionDescriptor> actual
+    )
     {
         if (expected.Count == 0 && actual == null)
         {
@@ -227,11 +488,16 @@ public class ActionSelectorBenchmark
 
         return new ActionSelector(
             actionCollection,
-            new ActionConstraintCache(actionCollection, Enumerable.Empty<IActionConstraintProvider>()),
-            NullLoggerFactory.Instance);
+            new ActionConstraintCache(
+                actionCollection,
+                Enumerable.Empty<IActionConstraintProvider>()
+            ),
+            NullLoggerFactory.Instance
+        );
     }
 
-    private sealed class MockActionDescriptorCollectionProvider : IActionDescriptorCollectionProvider
+    private sealed class MockActionDescriptorCollectionProvider
+        : IActionDescriptorCollectionProvider
     {
         public MockActionDescriptorCollectionProvider(ActionDescriptor[] actions)
         {

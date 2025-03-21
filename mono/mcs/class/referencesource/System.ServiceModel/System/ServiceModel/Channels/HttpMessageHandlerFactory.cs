@@ -18,7 +18,7 @@ namespace System.ServiceModel.Channels
     using System.ServiceModel.Configuration;
 
     /// <summary>
-    /// Default HTTP message handler factory used by <see cref="HttpChannelListener"/> upon creation of an <see cref="HttpMessageHandler"/> 
+    /// Default HTTP message handler factory used by <see cref="HttpChannelListener"/> upon creation of an <see cref="HttpMessageHandler"/>
     /// for instantiating a set of HTTP message handler types using their default constructors.
     /// For more complex initialization scenarios, derive from <see cref="HttpMessageHandlerFactory"/>
     /// and override the <see cref="HttpMessageHandlerFactory.OnCreate"/> method.
@@ -35,11 +35,11 @@ namespace System.ServiceModel.Channels
         /// Initializes a new instance of the <see cref="HttpMessageHandlerFactory"/> class given
         /// a set of HTTP message handler types to instantiate using their default constructors.
         /// </summary>
-        /// <param name="handlers">An ordered list of HTTP message handler types to be invoked as part of an 
+        /// <param name="handlers">An ordered list of HTTP message handler types to be invoked as part of an
         /// <see cref="HttpMessageHandler"/> instance.
         /// HTTP message handler types must derive from <see cref="DelegatingHandler"/> and have a public constructor
-        /// taking exactly one argument of type <see cref="HttpMessageHandler"/>. The handlers are invoked in a 
-        /// bottom-up fashion in the incoming path and top-down in the outgoing path. That is, the last entry is called first 
+        /// taking exactly one argument of type <see cref="HttpMessageHandler"/>. The handlers are invoked in a
+        /// bottom-up fashion in the incoming path and top-down in the outgoing path. That is, the last entry is called first
         /// for an incoming request messasge but invoked last for an outgoing response message.</param>
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -52,7 +52,10 @@ namespace System.ServiceModel.Channels
 
             if (handlers.Length == 0)
             {
-                throw FxTrace.Exception.Argument("handlers", SR.GetString(SR.InputTypeListEmptyError));
+                throw FxTrace.Exception.Argument(
+                    "handlers",
+                    SR.GetString(SR.InputTypeListEmptyError)
+                );
             }
 
             this.handlerCtors = new ConstructorInfo[handlers.Length];
@@ -63,14 +66,24 @@ namespace System.ServiceModel.Channels
                 {
                     throw FxTrace.Exception.Argument(
                         string.Format(CultureInfo.InvariantCulture, "handlers[<<{0}>>]", cnt),
-                        SR.GetString(SR.HttpMessageHandlerTypeNotSupported, "null", delegatingHandlerType.Name));
+                        SR.GetString(
+                            SR.HttpMessageHandlerTypeNotSupported,
+                            "null",
+                            delegatingHandlerType.Name
+                        )
+                    );
                 }
 
                 if (!delegatingHandlerType.IsAssignableFrom(handler) || handler.IsAbstract)
                 {
                     throw FxTrace.Exception.Argument(
                         string.Format(CultureInfo.InvariantCulture, "handlers[<<{0}>>]", cnt),
-                        SR.GetString(SR.HttpMessageHandlerTypeNotSupported, handler.Name, delegatingHandlerType.Name));
+                        SR.GetString(
+                            SR.HttpMessageHandlerTypeNotSupported,
+                            handler.Name,
+                            delegatingHandlerType.Name
+                        )
+                    );
                 }
 
                 ConstructorInfo ctorInfo = handler.GetConstructor(Type.EmptyTypes);
@@ -78,7 +91,12 @@ namespace System.ServiceModel.Channels
                 {
                     throw FxTrace.Exception.Argument(
                         string.Format(CultureInfo.InvariantCulture, "handlers[<<{0}>>]", cnt),
-                        SR.GetString(SR.HttpMessageHandlerTypeNotSupported, handler.Name, delegatingHandlerType.Name));
+                        SR.GetString(
+                            SR.HttpMessageHandlerTypeNotSupported,
+                            handler.Name,
+                            delegatingHandlerType.Name
+                        )
+                    );
                 }
 
                 this.handlerCtors[cnt] = ctorInfo;
@@ -91,9 +109,9 @@ namespace System.ServiceModel.Channels
         /// Initializes a new instance of the <see cref="HttpMessageHandlerFactory"/> class given
         /// a function to create a set of <see cref="DelegatingHandler"/> instances.
         /// </summary>
-        /// <param name="handlers">A function to generate an ordered list of <see cref="DelegatingHandler"/> instances 
+        /// <param name="handlers">A function to generate an ordered list of <see cref="DelegatingHandler"/> instances
         /// to be invoked as part of an <see cref="HttpMessageHandler"/> instance.
-        /// The handlers are invoked in a bottom-up fashion in the incoming path and top-down in the outgoing path. That is, 
+        /// The handlers are invoked in a bottom-up fashion in the incoming path and top-down in the outgoing path. That is,
         /// the last entry is called first for an incoming request messasge but invoked last for an outgoing response message.</param>
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -112,9 +130,7 @@ namespace System.ServiceModel.Channels
         /// </summary>
         [PermissionSet(SecurityAction.Demand, Unrestricted = true), SecuritySafeCritical]
         [MethodImpl(MethodImplOptions.NoInlining)]
-        protected HttpMessageHandlerFactory()
-        {
-        }
+        protected HttpMessageHandlerFactory() { }
 
         /// <summary>
         /// Creates an instance of an <see cref="HttpMessageHandler"/> using the HTTP message handlers
@@ -134,7 +150,9 @@ namespace System.ServiceModel.Channels
             return this.OnCreate(innerChannel);
         }
 
-        internal static HttpMessageHandlerFactory CreateFromConfigurationElement(HttpMessageHandlerFactoryElement configElement)
+        internal static HttpMessageHandlerFactory CreateFromConfigurationElement(
+            HttpMessageHandlerFactoryElement configElement
+        )
         {
             Fx.Assert(configElement != null, "configElement should not be null.");
 
@@ -142,23 +160,45 @@ namespace System.ServiceModel.Channels
             {
                 if (configElement.Handlers != null && configElement.Handlers.Count > 0)
                 {
-                    throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR.GetString(SR.HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList, ConfigurationStrings.MessageHandlerFactory, ConfigurationStrings.Type, ConfigurationStrings.Handlers)));
+                    throw FxTrace.Exception.AsError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.HttpMessageHandlerFactoryConfigInvalid_WithBothTypeAndHandlerList,
+                                ConfigurationStrings.MessageHandlerFactory,
+                                ConfigurationStrings.Type,
+                                ConfigurationStrings.Handlers
+                            )
+                        )
+                    );
                 }
 
-                Type factoryType = HttpChannelUtilities.GetTypeFromAssembliesInCurrentDomain(configElement.Type);
+                Type factoryType = HttpChannelUtilities.GetTypeFromAssembliesInCurrentDomain(
+                    configElement.Type
+                );
                 if (factoryType == null)
                 {
-                    throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR.GetString(SR.CanNotLoadTypeGotFromConfig, configElement.Type)));
+                    throw FxTrace.Exception.AsError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.CanNotLoadTypeGotFromConfig, configElement.Type)
+                        )
+                    );
                 }
 
-                if (!typeof(HttpMessageHandlerFactory).IsAssignableFrom(factoryType) || factoryType.IsAbstract)
+                if (
+                    !typeof(HttpMessageHandlerFactory).IsAssignableFrom(factoryType)
+                    || factoryType.IsAbstract
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                        SR.GetString(
-                        SR.WebSocketElementConfigInvalidHttpMessageHandlerFactoryType,
-                        typeof(HttpMessageHandlerFactory).Name,
-                        factoryType,
-                        typeof(HttpMessageHandlerFactory).AssemblyQualifiedName)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(
+                                SR.WebSocketElementConfigInvalidHttpMessageHandlerFactoryType,
+                                typeof(HttpMessageHandlerFactory).Name,
+                                factoryType,
+                                typeof(HttpMessageHandlerFactory).AssemblyQualifiedName
+                            )
+                        )
+                    );
                 }
 
                 return Activator.CreateInstance(factoryType) as HttpMessageHandlerFactory;
@@ -173,10 +213,19 @@ namespace System.ServiceModel.Channels
                 Type[] handlerList = new Type[configElement.Handlers.Count];
                 for (int i = 0; i < configElement.Handlers.Count; i++)
                 {
-                    Type handlerType = HttpChannelUtilities.GetTypeFromAssembliesInCurrentDomain(configElement.Handlers[i].Type);
+                    Type handlerType = HttpChannelUtilities.GetTypeFromAssembliesInCurrentDomain(
+                        configElement.Handlers[i].Type
+                    );
                     if (handlerType == null)
                     {
-                        throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR.GetString(SR.CanNotLoadTypeGotFromConfig, configElement.Handlers[i].Type)));
+                        throw FxTrace.Exception.AsError(
+                            new ConfigurationErrorsException(
+                                SR.GetString(
+                                    SR.CanNotLoadTypeGotFromConfig,
+                                    configElement.Handlers[i].Type
+                                )
+                            )
+                        );
                     }
 
                     handlerList[i] = handlerType;
@@ -188,7 +237,9 @@ namespace System.ServiceModel.Channels
                 }
                 catch (ArgumentException ex)
                 {
-                    throw FxTrace.Exception.AsError(new ConfigurationErrorsException(ex.Message, ex));
+                    throw FxTrace.Exception.AsError(
+                        new ConfigurationErrorsException(ex.Message, ex)
+                    );
                 }
             }
         }
@@ -197,7 +248,15 @@ namespace System.ServiceModel.Channels
         {
             if (this.handlerFunc != null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.GetString(SR.HttpMessageHandlerFactoryWithFuncCannotGenerateConfig, typeof(HttpMessageHandlerFactory).Name, typeof(Func<IEnumerable<DelegatingHandler>>).Name)));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.HttpMessageHandlerFactoryWithFuncCannotGenerateConfig,
+                            typeof(HttpMessageHandlerFactory).Name,
+                            typeof(Func<IEnumerable<DelegatingHandler>>).Name
+                        )
+                    )
+                );
             }
 
             Type thisType = this.GetType();
@@ -205,23 +264,23 @@ namespace System.ServiceModel.Channels
             {
                 return new HttpMessageHandlerFactoryElement
                 {
-                    Type = thisType.AssemblyQualifiedName
+                    Type = thisType.AssemblyQualifiedName,
                 };
             }
             else
             {
                 if (this.httpMessageHandlers != null)
                 {
-                    DelegatingHandlerElementCollection handlerCollection = new DelegatingHandlerElementCollection();
+                    DelegatingHandlerElementCollection handlerCollection =
+                        new DelegatingHandlerElementCollection();
                     for (int i = 0; i < this.httpMessageHandlers.Length; i++)
                     {
-                        handlerCollection.Add(new DelegatingHandlerElement(this.httpMessageHandlers[i]));
+                        handlerCollection.Add(
+                            new DelegatingHandlerElement(this.httpMessageHandlers[i])
+                        );
                     }
 
-                    return new HttpMessageHandlerFactoryElement
-                    {
-                        Handlers = handlerCollection
-                    };
+                    return new HttpMessageHandlerFactoryElement { Handlers = handlerCollection };
                 }
             }
 
@@ -254,7 +313,14 @@ namespace System.ServiceModel.Channels
                         {
                             if (handler == null)
                             {
-                                throw FxTrace.Exception.Argument("handlers", SR.GetString(SR.DelegatingHandlerArrayFromFuncContainsNullItem, delegatingHandlerType.Name, GetFuncDetails(this.handlerFunc)));
+                                throw FxTrace.Exception.Argument(
+                                    "handlers",
+                                    SR.GetString(
+                                        SR.DelegatingHandlerArrayFromFuncContainsNullItem,
+                                        delegatingHandlerType.Name,
+                                        GetFuncDetails(this.handlerFunc)
+                                    )
+                                );
                             }
                         }
                     }
@@ -264,7 +330,8 @@ namespace System.ServiceModel.Channels
                     DelegatingHandler[] instances = new DelegatingHandler[this.handlerCtors.Length];
                     for (int cnt = 0; cnt < this.handlerCtors.Length; cnt++)
                     {
-                        instances[cnt] = (DelegatingHandler)this.handlerCtors[cnt].Invoke(Type.EmptyTypes);
+                        instances[cnt] = (DelegatingHandler)
+                            this.handlerCtors[cnt].Invoke(Type.EmptyTypes);
                     }
 
                     handlerInstances = instances;
@@ -283,7 +350,15 @@ namespace System.ServiceModel.Channels
                 {
                     if (handler.InnerHandler != null)
                     {
-                        throw FxTrace.Exception.Argument("handlers", SR.GetString(SR.DelegatingHandlerArrayHasNonNullInnerHandler, delegatingHandlerType.Name, "InnerHandler", handler.GetType().Name));
+                        throw FxTrace.Exception.Argument(
+                            "handlers",
+                            SR.GetString(
+                                SR.DelegatingHandlerArrayHasNonNullInnerHandler,
+                                delegatingHandlerType.Name,
+                                "InnerHandler",
+                                handler.GetType().Name
+                            )
+                        );
                     }
 
                     handler.InnerHandler = pipeline;

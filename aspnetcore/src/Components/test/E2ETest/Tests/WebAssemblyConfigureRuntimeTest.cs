@@ -10,12 +10,14 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
 
-public class WebAssemblyConfigureRuntimeTest : ServerTestBase<BlazorWasmTestAppFixture<BasicTestApp.Program>>
+public class WebAssemblyConfigureRuntimeTest
+    : ServerTestBase<BlazorWasmTestAppFixture<BasicTestApp.Program>>
 {
     public WebAssemblyConfigureRuntimeTest(
         BrowserFixture browserFixture,
         BlazorWasmTestAppFixture<Program> serverFixture,
-        ITestOutputHelper output)
+        ITestOutputHelper output
+    )
         : base(browserFixture, serverFixture, output)
     {
         _serverFixture.PathBase = "/subdir";

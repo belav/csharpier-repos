@@ -3,9 +3,7 @@ using System.Runtime.InteropServices;
 
 public static class MainClass
 {
-	public static void Main (string[] args)
-	{
-	}
+    public static void Main(string[] args) { }
 
-	public delegate Int32 FooDelegate ([In, Optional] int foo);
+    public delegate Int32 FooDelegate([In, Optional] int foo);
 }

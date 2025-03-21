@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.Diagnostics.CodeAnalysis;
+using Microsoft.AspNetCore.Routing.Constraints;
 #if !COMPONENTS
 using System.Diagnostics;
 #endif
-using System.Diagnostics.CodeAnalysis;
-using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace Microsoft.AspNetCore.Routing;
 
@@ -29,7 +29,10 @@ internal class RouteOptions
     {
         get
         {
-            Debug.Assert(_endpointDataSources != null, "Endpoint data sources should have been set in DI.");
+            Debug.Assert(
+                _endpointDataSources != null,
+                "Endpoint data sources should have been set in DI."
+            );
             return _endpointDataSources;
         }
         set => _endpointDataSources = value;
@@ -78,11 +81,10 @@ internal class RouteOptions
     /// </summary>
     public IDictionary<string, Type> ConstraintMap
     {
-        [RequiresUnreferencedCode($"The linker cannot determine what constraints are being added via the ConstraintMap property. Prefer {nameof(RouteOptions)}.{nameof(SetParameterPolicy)} instead for setting constraints. This warning can be suppressed if this property is being used to read or delete constraints.")]
-        get
-        {
-            return _constraintTypeMap;
-        }
+        [RequiresUnreferencedCode(
+            $"The linker cannot determine what constraints are being added via the ConstraintMap property. Prefer {nameof(RouteOptions)}.{nameof(SetParameterPolicy)} instead for setting constraints. This warning can be suppressed if this property is being used to read or delete constraints."
+        )]
+        get { return _constraintTypeMap; }
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -142,7 +144,10 @@ internal class RouteOptions
     /// </summary>
     /// <typeparam name="T">The parameter policy type.</typeparam>
     /// <param name="token">The route token used to apply the parameter policy.</param>
-    public void SetParameterPolicy<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(string token) where T : IParameterPolicy
+    public void SetParameterPolicy<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+    >(string token)
+        where T : IParameterPolicy
     {
         _constraintTypeMap[token] = typeof(T);
     }
@@ -153,17 +158,25 @@ internal class RouteOptions
     /// <param name="token">The route token used to apply the parameter policy.</param>
     /// <param name="type">The parameter policy type.</param>
     /// <exception cref="InvalidOperationException">Throws an exception if the type is not an <see cref="IParameterPolicy"/>.</exception>
-    public void SetParameterPolicy(string token, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type)
+    public void SetParameterPolicy(
+        string token,
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type type
+    )
     {
         if (!type.IsAssignableTo(typeof(IParameterPolicy)))
         {
-            throw new InvalidOperationException($"{type} must implement {typeof(IParameterPolicy)}");
+            throw new InvalidOperationException(
+                $"{type} must implement {typeof(IParameterPolicy)}"
+            );
         }
 
         _constraintTypeMap[token] = type;
     }
 
-    private static void AddConstraint<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TConstraint>(Dictionary<string, Type> constraintMap, string text) where TConstraint : IRouteConstraint
+    private static void AddConstraint<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] TConstraint
+    >(Dictionary<string, Type> constraintMap, string text)
+        where TConstraint : IRouteConstraint
     {
         constraintMap[text] = typeof(TConstraint);
     }

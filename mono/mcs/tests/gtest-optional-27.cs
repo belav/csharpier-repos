@@ -2,33 +2,33 @@ using System;
 
 class EnumWrapperCtor<T>
 {
-	public enum Test
-	{
-		Wrong,
-		MyDefault
-	}
+    public enum Test
+    {
+        Wrong,
+        MyDefault,
+    }
 
-	readonly Test myVal;
+    readonly Test myVal;
 
-	public EnumWrapperCtor (Test value = Test.MyDefault)
-	{
-		myVal = value;
-	}
+    public EnumWrapperCtor(Test value = Test.MyDefault)
+    {
+        myVal = value;
+    }
 
-	public Test getValue ()
-	{
-		return myVal;
-	}
+    public Test getValue()
+    {
+        return myVal;
+    }
 }
 
 public class C
 {
-	public static int Main ()
-	{
-		var ew = new EnumWrapperCtor<int> ();
-		if ((int) ew.getValue () != 1)
-			return 1;
+    public static int Main()
+    {
+        var ew = new EnumWrapperCtor<int>();
+        if ((int)ew.getValue() != 1)
+            return 1;
 
-		return 0;
-	}
+        return 0;
+    }
 }

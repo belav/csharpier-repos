@@ -7,11 +7,15 @@ namespace System.ServiceModel.Configuration
     /// <summary>
     /// NetHttpsBindingCollectionElement for NetHttpsBinding
     /// </summary>
-    public partial class NetHttpsBindingCollectionElement : StandardBindingCollectionElement<NetHttpsBinding, NetHttpsBindingElement>
+    public partial class NetHttpsBindingCollectionElement
+        : StandardBindingCollectionElement<NetHttpsBinding, NetHttpsBindingElement>
     {
         internal static NetHttpsBindingCollectionElement GetBindingCollectionElement()
         {
-            return (NetHttpsBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.NetHttpsBindingCollectionElementName);
+            return (NetHttpsBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.NetHttpsBindingCollectionElementName
+                );
         }
     }
 }

@@ -1,22 +1,21 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlObjetListAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
-using System.Globalization;
+using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.MobileControls;
-using System.Diagnostics;
-using System.Security.Permissions;
-
-using SR=System.Web.UI.MobileControls.Adapters.SR;
+using SR = System.Web.UI.MobileControls.Adapters.SR;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
@@ -24,22 +23,31 @@ namespace System.Web.UI.MobileControls.ShippedAdapterSource
 namespace System.Web.UI.MobileControls.Adapters
 #endif
 {
-
     /*
      * HtmlObjectListAdapter provides HTML rendering of Object List control.
      *
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class HtmlObjectListAdapter : HtmlControlAdapter
     {
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.BackToList"]/*' />
         internal protected static readonly String BackToList = "__back";
+
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.ShowMoreFormat"]/*' />
         internal protected static readonly String ShowMoreFormat = "__more{0}";
+
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.ShowMore"]/*' />
         internal protected static readonly String ShowMore = "__more";
         private const int _modeDetails = 1;
@@ -47,31 +55,30 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.Control"]/*' />
         protected new ObjectList Control
         {
-            get
-            {
-                return (ObjectList)base.Control;
-            }
+            get { return (ObjectList)base.Control; }
         }
 
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.OnInit"]/*' />
-        public override void OnInit(EventArgs e)
-        {
-        }
+        public override void OnInit(EventArgs e) { }
 
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.OnPreRender"]/*' />
         public override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);
-            if(Control.MobilePage.ActiveForm == Control.Form && 
-                Control.Visible && 
-                (Control.ViewMode == ObjectListViewMode.Commands || 
-                    Control.ViewMode == ObjectListViewMode.Details))
+            if (
+                Control.MobilePage.ActiveForm == Control.Form
+                && Control.Visible
+                && (
+                    Control.ViewMode == ObjectListViewMode.Commands
+                    || Control.ViewMode == ObjectListViewMode.Details
+                )
+            )
             {
                 SecondaryUIMode = _modeDetails;
                 if (Control.Items.Count > 0)
                 {
                     int itemIndex = Control.SelectedIndex;
-                    Debug.Assert(itemIndex >= 0, "itemIndex is negative");                
+                    Debug.Assert(itemIndex >= 0, "itemIndex is negative");
                     Control.PreShowItemCommands(itemIndex);
                 }
             }
@@ -125,15 +132,17 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.RenderItemsList"]/*' />
         protected virtual void RenderItemsList(HtmlMobileTextWriter writer)
         {
-            Debug.Assert (Control.VisibleItemCount <= Control.Items.Count);
+            Debug.Assert(Control.VisibleItemCount <= Control.Items.Count);
 
             if (Control.VisibleItemCount == 0)
             {
                 return;
             }
-            
-            Debug.Assert (Control.AllFields != null && Control.AllFields.Count > 0,
-                "Should never have items but no fields.");
+
+            Debug.Assert(
+                Control.AllFields != null && Control.AllFields.Count > 0,
+                "Should never have items but no fields."
+            );
 
             if (Device.Tables)
             {
@@ -155,12 +164,13 @@ namespace System.Web.UI.MobileControls.Adapters
             bool shouldRenderAsTable = ShouldRenderAsTable();
             bool hasDefaultCommand = HasDefaultCommand();
             bool onlyHasDefaultCommand = OnlyHasDefaultCommand();
-            bool requiresDetailsScreen = HasItemDetails() || (!onlyHasDefaultCommand && HasCommands());
+            bool requiresDetailsScreen =
+                HasItemDetails() || (!onlyHasDefaultCommand && HasCommands());
             bool itemRequiresHyperlink = requiresDetailsScreen || hasDefaultCommand;
             bool itemRequiresMoreButton = requiresDetailsScreen && hasDefaultCommand;
 
             int fieldCount;
-            int[] fieldIndices = new int[]{};
+            int[] fieldIndices = new int[] { };
             if (shouldRenderAsTable)
             {
                 fieldIndices = Control.TableFieldIndices;
@@ -168,7 +178,7 @@ namespace System.Web.UI.MobileControls.Adapters
             Debug.Assert(fieldIndices != null, "fieldIndices is null");
             fieldCount = fieldIndices.Length;
 
-            if(fieldCount == 0)
+            if (fieldCount == 0)
             {
                 fieldIndices = new int[1];
                 fieldIndices[0] = Control.LabelFieldIndex;
@@ -210,13 +220,14 @@ namespace System.Web.UI.MobileControls.Adapters
                     {
                         writer.BeginStyleContext();
                         writer.EnterStyle(style);
-                        String eventArgument =
-                            hasDefaultCommand ?
-                                item.Index.ToString(CultureInfo.InvariantCulture) :
-                                String.Format(CultureInfo.InvariantCulture, ShowMoreFormat, item.Index.ToString(CultureInfo.InvariantCulture));
-                        RenderPostBackEventAsAnchor(writer,
-                            eventArgument,
-                            item[fieldIndices[0]]);
+                        String eventArgument = hasDefaultCommand
+                            ? item.Index.ToString(CultureInfo.InvariantCulture)
+                            : String.Format(
+                                CultureInfo.InvariantCulture,
+                                ShowMoreFormat,
+                                item.Index.ToString(CultureInfo.InvariantCulture)
+                            );
+                        RenderPostBackEventAsAnchor(writer, eventArgument, item[fieldIndices[0]]);
                         writer.ExitStyle(style);
                         writer.EndStyleContext();
                     }
@@ -236,13 +247,16 @@ namespace System.Web.UI.MobileControls.Adapters
                     writer.Write("<td align=right>");
                     writer.BeginStyleContext();
                     writer.EnterFormat(subCommandStyle);
-                    String moreText = Control.MoreText.Length == 0 ?
-                        GetDefaultLabel(MoreLabel) :
-                        Control.MoreText;
-                    RenderPostBackEventAsAnchor(writer,
-                        String.Format(CultureInfo.InvariantCulture, ShowMoreFormat, item.Index), 
+                    String moreText =
+                        Control.MoreText.Length == 0
+                            ? GetDefaultLabel(MoreLabel)
+                            : Control.MoreText;
+                    RenderPostBackEventAsAnchor(
+                        writer,
+                        String.Format(CultureInfo.InvariantCulture, ShowMoreFormat, item.Index),
                         moreText,
-                        subCommandStyle);
+                        subCommandStyle
+                    );
                     writer.ExitFormat(subCommandStyle);
                     writer.EndStyleContext();
                     writer.Write("</td>\r\n");
@@ -264,11 +278,10 @@ namespace System.Web.UI.MobileControls.Adapters
             ObjectListItemCollection items = Control.Items;
             IObjectListFieldCollection allFields = Control.AllFields;
             int count = allFields.Count;
-            
-            int nextStartIndex =  startIndex + pageSize;
+
+            int nextStartIndex = startIndex + pageSize;
             int labelFieldIndex = Control.LabelFieldIndex;
 
-             
             Style style = this.Style;
             Style labelStyle = Control.LabelStyle;
             writer.EnterStyle(labelStyle);
@@ -282,12 +295,10 @@ namespace System.Web.UI.MobileControls.Adapters
             for (int visibleFields = 0, i = 0; !requiresDetailsScreen && i < count; i++)
             {
                 visibleFields += allFields[i].Visible ? 1 : 0;
-                requiresDetailsScreen = 
-                    requiresDetailsScreen || visibleFields > 1;
-            }   
+                requiresDetailsScreen = requiresDetailsScreen || visibleFields > 1;
+            }
             bool itemRequiresHyperlink = requiresDetailsScreen || hasDefaultCommand;
             bool itemRequiresMoreButton = requiresDetailsScreen && hasDefaultCommand;
-            
 
             Style subCommandStyle = Control.CommandStyle;
             subCommandStyle.Alignment = style.Alignment;
@@ -300,11 +311,17 @@ namespace System.Web.UI.MobileControls.Adapters
 
                 if (itemRequiresHyperlink)
                 {
-                    RenderPostBackEventAsAnchor(writer,
-                        hasDefaultCommand ?
-                        item.Index.ToString(CultureInfo.InvariantCulture) :
-                        String.Format(CultureInfo.InvariantCulture, ShowMoreFormat, item.Index),
-                        item[labelFieldIndex]);
+                    RenderPostBackEventAsAnchor(
+                        writer,
+                        hasDefaultCommand
+                            ? item.Index.ToString(CultureInfo.InvariantCulture)
+                            : String.Format(
+                                CultureInfo.InvariantCulture,
+                                ShowMoreFormat,
+                                item.Index
+                            ),
+                        item[labelFieldIndex]
+                    );
                 }
                 else
                 {
@@ -320,14 +337,19 @@ namespace System.Web.UI.MobileControls.Adapters
                     writer.ExitFormat(subCommandStyle);
                     subCommandStyle.Font.Italic = cachedItalic;
                     writer.EnterFormat(subCommandStyle);
-                    String moreText = Control.MoreText.Length == 0 ?
-                        GetDefaultLabel(MoreLabel) :
-                        Control.MoreText;
+                    String moreText =
+                        Control.MoreText.Length == 0
+                            ? GetDefaultLabel(MoreLabel)
+                            : Control.MoreText;
                     writer.WriteBeginTag("a");
-                    RenderPostBackEventAsAttribute(writer, "href", String.Format(CultureInfo.InvariantCulture, ShowMoreFormat, item.Index));
+                    RenderPostBackEventAsAttribute(
+                        writer,
+                        "href",
+                        String.Format(CultureInfo.InvariantCulture, ShowMoreFormat, item.Index)
+                    );
                     writer.Write(">");
                     writer.WriteText(moreText, true);
-                    writer.WriteEndTag("a");                  
+                    writer.WriteEndTag("a");
                     writer.ExitFormat(subCommandStyle);
                     subCommandStyle.Font.Italic = BooleanOption.False;
                     writer.EnterFormat(subCommandStyle);
@@ -335,10 +357,10 @@ namespace System.Web.UI.MobileControls.Adapters
                     writer.ExitFormat(subCommandStyle);
                     subCommandStyle.Font.Italic = cachedItalic;
                 }
-                
-                if(i < (nextStartIndex - 1))
+
+                if (i < (nextStartIndex - 1))
                 {
-                    writer.WriteBreak();            
+                    writer.WriteBreak();
                 }
             }
             writer.ExitStyle(style, Control.BreakAfter);
@@ -351,17 +373,20 @@ namespace System.Web.UI.MobileControls.Adapters
             {
                 return;
             }
-            if(Device.Tables)
+            if (Device.Tables)
             {
                 RenderItemDetailsWithTableTags(writer, item);
             }
             else
             {
-                RenderItemDetailsWithoutTableTags(writer, item); 
+                RenderItemDetailsWithoutTableTags(writer, item);
             }
         }
 
-        private void RenderItemDetailsWithTableTags(HtmlMobileTextWriter writer, ObjectListItem item)
+        private void RenderItemDetailsWithTableTags(
+            HtmlMobileTextWriter writer,
+            ObjectListItem item
+        )
         {
             Style style = this.Style;
             Style labelStyle = Control.LabelStyle;
@@ -420,9 +445,10 @@ namespace System.Web.UI.MobileControls.Adapters
                 RenderPostBackEventAsAnchor(writer, command.Name, command.Text, subCommandStyle);
                 writer.Write("&nbsp;|&nbsp;");
             }
-            String backCommandText = Control.BackCommandText.Length == 0 ?
-                GetDefaultLabel(BackLabel) :
-                Control.BackCommandText;
+            String backCommandText =
+                Control.BackCommandText.Length == 0
+                    ? GetDefaultLabel(BackLabel)
+                    : Control.BackCommandText;
 
             RenderPostBackEventAsAnchor(writer, BackToList, backCommandText, subCommandStyle);
             writer.ExitStyle(subCommandStyle);
@@ -436,7 +462,10 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.Write("</td></tr></table>");
         }
 
-        private void RenderItemDetailsWithoutTableTags(HtmlMobileTextWriter writer, ObjectListItem item)
+        private void RenderItemDetailsWithoutTableTags(
+            HtmlMobileTextWriter writer,
+            ObjectListItem item
+        )
         {
             Style style = this.Style;
             Style labelStyle = Control.LabelStyle;
@@ -448,8 +477,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
             IObjectListFieldCollection fields = Control.AllFields;
             int fieldIndex = 0;
-            bool boldInStyle =
-                (style.Font.Bold == BooleanOption.True) ? true : false;
+            bool boldInStyle = (style.Font.Bold == BooleanOption.True) ? true : false;
 
             writer.EnterStyle(style);
             foreach (ObjectListField field in fields)
@@ -487,9 +515,10 @@ namespace System.Web.UI.MobileControls.Adapters
                 RenderPostBackEventAsAnchor(writer, command.Name, command.Text, subCommandStyle);
                 writer.Write("&nbsp;|&nbsp;");
             }
-            String backCommandText = Control.BackCommandText.Length == 0 ?
-                GetDefaultLabel(BackLabel) :
-                Control.BackCommandText;
+            String backCommandText =
+                Control.BackCommandText.Length == 0
+                    ? GetDefaultLabel(BackLabel)
+                    : Control.BackCommandText;
 
             RenderPostBackEventAsAnchor(writer, BackToList, backCommandText, subCommandStyle);
             writer.ExitStyle(subCommandStyle);
@@ -507,7 +536,8 @@ namespace System.Web.UI.MobileControls.Adapters
             HtmlMobileTextWriter writer,
             String argument,
             String linkText,
-            Style style)
+            Style style
+        )
         {
             writer.EnterFormat(style);
             writer.WriteBeginTag("a");
@@ -523,7 +553,9 @@ namespace System.Web.UI.MobileControls.Adapters
             writer.Write("<tr><td colspan=");
             writer.Write(columnSpan.ToString(CultureInfo.InvariantCulture));
             writer.Write(" bgcolor=\"");
-            writer.Write((foreColor != Color.Empty) ? ColorTranslator.ToHtml(foreColor) : "#000000");
+            writer.Write(
+                (foreColor != Color.Empty) ? ColorTranslator.ToHtml(foreColor) : "#000000"
+            );
             writer.Write("\"></td></tr>");
         }
 
@@ -548,7 +580,7 @@ namespace System.Web.UI.MobileControls.Adapters
                                 // ObjectListViewMode.Commands and .Details same for HTML,
                                 // but cannot access ObjLst.Details in Commands mode.
                                 Control.ViewMode = ObjectListViewMode.Details;
-                            }                    
+                            }
                         }
                     }
                     else
@@ -560,7 +592,9 @@ namespace System.Web.UI.MobileControls.Adapters
                         }
                         catch (System.FormatException)
                         {
-                            throw new Exception (SR.GetString(SR.ObjectListAdapter_InvalidPostedData));
+                            throw new Exception(
+                                SR.GetString(SR.ObjectListAdapter_InvalidPostedData)
+                            );
                         }
                         if (Control.SelectListItem(itemIndex, false))
                         {
@@ -595,6 +629,7 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         private BooleanOption _hasItemDetails = BooleanOption.NotSet;
+
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.HasItemDetails"]/*' />
         protected bool HasItemDetails()
         {
@@ -607,14 +642,17 @@ namespace System.Web.UI.MobileControls.Adapters
                 if (ShouldRenderAsTable() && tableFieldIndices.Length != 0)
                 {
                     visibleFieldsInListView = VisibleTableFieldsCount;
-                    Debug.Assert (visibleFieldsInListView >= 0, "visibleFieldsInListView is negative");
+                    Debug.Assert(
+                        visibleFieldsInListView >= 0,
+                        "visibleFieldsInListView is negative"
+                    );
                 }
                 else
                 {
-                    visibleFieldsInListView = Control.AllFields[Control.LabelFieldIndex].Visible ?
-                                                    1 : 0;
+                    visibleFieldsInListView = Control.AllFields[Control.LabelFieldIndex].Visible
+                        ? 1
+                        : 0;
                 }
-
 
                 // Calculate the number of visible fields.
 
@@ -650,6 +688,7 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         private BooleanOption _onlyHasDefaultCommand = BooleanOption.NotSet;
+
         /// <include file='doc\HtmlObjectListAdapter.uex' path='docs/doc[@for="HtmlObjectListAdapter.OnlyHasDefaultCommand"]/*' />
         protected bool OnlyHasDefaultCommand()
         {
@@ -659,9 +698,17 @@ namespace System.Web.UI.MobileControls.Adapters
                 if (defaultCommand.Length > 0)
                 {
                     int commandCount = Control.Commands.Count;
-                    if (commandCount == 0 ||
-                        (commandCount == 1 &&
-                            String.Compare(defaultCommand, Control.Commands[0].Name, StringComparison.OrdinalIgnoreCase) == 0))
+                    if (
+                        commandCount == 0
+                        || (
+                            commandCount == 1
+                            && String.Compare(
+                                defaultCommand,
+                                Control.Commands[0].Name,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                    )
                     {
                         _onlyHasDefaultCommand = BooleanOption.True;
                     }
@@ -678,7 +725,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
             return _onlyHasDefaultCommand == BooleanOption.True;
         }
-        
+
         // This appears in both Html and Wml adapters, is used in
         // ShouldRenderAsTable().  In adapters rather than control
         // because specialized rendering method.
@@ -702,6 +749,5 @@ namespace System.Web.UI.MobileControls.Adapters
                 return _visibleTableFieldsCount;
             }
         }
-
     }
 }

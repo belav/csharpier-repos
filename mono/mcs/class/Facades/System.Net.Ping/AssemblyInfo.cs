@@ -24,12 +24,12 @@ using System;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 
-[assembly: AssemblyTitle ("System.Net.Ping")]
-[assembly: AssemblyDescription ("System.Net.Ping")]
-[assembly: AssemblyDefaultAlias ("System.Net.Ping")]
-[assembly: AssemblyCompany ("Mono development team")]
-[assembly: AssemblyProduct ("Mono Common Language Infrastructure")]
-[assembly: AssemblyCopyright ("(c) Various Mono authors")]
-[assembly: AssemblyVersion ("4.0.1.0")]
-[assembly: AssemblyInformationalVersion ("4.0.0.0")]
-[assembly: AssemblyFileVersion ("4.0.0.0")]
+[assembly: AssemblyTitle("System.Net.Ping")]
+[assembly: AssemblyDescription("System.Net.Ping")]
+[assembly: AssemblyDefaultAlias("System.Net.Ping")]
+[assembly: AssemblyCompany("Mono development team")]
+[assembly: AssemblyProduct("Mono Common Language Infrastructure")]
+[assembly: AssemblyCopyright("(c) Various Mono authors")]
+[assembly: AssemblyVersion("4.0.1.0")]
+[assembly: AssemblyInformationalVersion("4.0.0.0")]
+[assembly: AssemblyFileVersion("4.0.0.0")]

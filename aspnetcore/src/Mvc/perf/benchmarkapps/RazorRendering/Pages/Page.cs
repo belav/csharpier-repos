@@ -17,7 +17,6 @@ namespace Pages
             Logger = logger;
         }
 
-
         public void AddErrorMessage(string message)
         {
             Response.Headers.Add("X-Error-Message", UrlEncoder.Default.Encode(message));

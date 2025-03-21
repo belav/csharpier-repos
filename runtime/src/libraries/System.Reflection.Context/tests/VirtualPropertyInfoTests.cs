@@ -11,13 +11,17 @@ namespace System.Reflection.Context.Tests
 {
     public class VirtualPropertyInfoTests
     {
-        private readonly CustomReflectionContext _customReflectionContext = new VirtualPropertyInfoCustomReflectionContext();
+        private readonly CustomReflectionContext _customReflectionContext =
+            new VirtualPropertyInfoCustomReflectionContext();
+
         // Points to a PropertyInfo instance created by reflection. This doesn't work in a reflection-only context.
         private readonly PropertyInfo[] _virtualProperties;
+
         // Fully functional virtual property with getter and setter.
         private readonly PropertyInfo _virtualProperty;
         private readonly PropertyInfo _noGetterVirtualProperty;
         private readonly PropertyInfo _noSetterVirtualProperty;
+
         // Test data
         private readonly TestObject _testObject = new TestObject("Age");
 
@@ -36,7 +40,10 @@ namespace System.Reflection.Context.Tests
         {
             TypeInfo typeInfo = typeof(NullPropertyNameCase).GetTypeInfo();
             TypeInfo customTypeInfo = _customReflectionContext.MapType(typeInfo);
-            AssertExtensions.Throws<ArgumentNullException>("name", () => customTypeInfo.DeclaredProperties);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => customTypeInfo.DeclaredProperties
+            );
         }
 
         [Fact]
@@ -52,7 +59,10 @@ namespace System.Reflection.Context.Tests
         {
             TypeInfo typeInfo = typeof(NullPropertyTypeCase).GetTypeInfo();
             TypeInfo customTypeInfo = _customReflectionContext.MapType(typeInfo);
-            AssertExtensions.Throws<ArgumentNullException>("propertyType", () => customTypeInfo.DeclaredProperties);
+            AssertExtensions.Throws<ArgumentNullException>(
+                "propertyType",
+                () => customTypeInfo.DeclaredProperties
+            );
         }
 
         [Fact]
@@ -74,13 +84,19 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void ProjectionTest()
         {
-            Assert.Equal(ProjectionConstants.VirtualPropertyInfo, _virtualProperty.GetType().FullName);
+            Assert.Equal(
+                ProjectionConstants.VirtualPropertyInfo,
+                _virtualProperty.GetType().FullName
+            );
         }
 
         [Fact]
         public void GetCustomAttributes_WithType_Test()
         {
-            object[] attributes = _virtualProperty.GetCustomAttributes(typeof(TestPropertyAttribute), true);
+            object[] attributes = _virtualProperty.GetCustomAttributes(
+                typeof(TestPropertyAttribute),
+                true
+            );
             Assert.Single(attributes);
             Assert.IsType<TestPropertyAttribute>(attributes[0]);
         }
@@ -99,7 +115,8 @@ namespace System.Reflection.Context.Tests
             // This will never return any results as virtual properties never have custom attributes
             // defined in code as they are instantiated during runtime. But as the method is overridden
             // we call it for code coverage.
-            IList<CustomAttributeData> customAttributesData = _virtualProperty.GetCustomAttributesData();
+            IList<CustomAttributeData> customAttributesData =
+                _virtualProperty.GetCustomAttributesData();
             Assert.Empty(customAttributesData);
         }
 
@@ -147,13 +164,19 @@ namespace System.Reflection.Context.Tests
         [Fact]
         public void ModuleTest()
         {
-            Assert.Equal(ProjectionConstants.CustomModule, _virtualProperty.Module.GetType().FullName);
+            Assert.Equal(
+                ProjectionConstants.CustomModule,
+                _virtualProperty.Module.GetType().FullName
+            );
         }
 
         [Fact]
         public void ReflectedTypeTest()
         {
-            Assert.Equal(ProjectionConstants.CustomType, _virtualProperty.ReflectedType.GetType().FullName);
+            Assert.Equal(
+                ProjectionConstants.CustomType,
+                _virtualProperty.ReflectedType.GetType().FullName
+            );
         }
 
         [Fact]
@@ -161,16 +184,28 @@ namespace System.Reflection.Context.Tests
         {
             MethodInfo[] virtualAccessors = _virtualProperty.GetAccessors(false);
             Assert.Equal(2, virtualAccessors.Length);
-            Assert.Equal(ProjectionConstants.VirtualPropertyInfoGetter, virtualAccessors[0].GetType().FullName);
-            Assert.Equal(ProjectionConstants.VirtualPropertyInfoSetter, virtualAccessors[1].GetType().FullName);
+            Assert.Equal(
+                ProjectionConstants.VirtualPropertyInfoGetter,
+                virtualAccessors[0].GetType().FullName
+            );
+            Assert.Equal(
+                ProjectionConstants.VirtualPropertyInfoSetter,
+                virtualAccessors[1].GetType().FullName
+            );
 
             virtualAccessors = _noGetterVirtualProperty.GetAccessors(false);
             Assert.Equal(1, virtualAccessors.Length);
-            Assert.Equal(ProjectionConstants.VirtualPropertyInfoSetter, virtualAccessors[0].GetType().FullName);
+            Assert.Equal(
+                ProjectionConstants.VirtualPropertyInfoSetter,
+                virtualAccessors[0].GetType().FullName
+            );
 
             virtualAccessors = _noSetterVirtualProperty.GetAccessors(false);
             Assert.Equal(1, virtualAccessors.Length);
-            Assert.Equal(ProjectionConstants.VirtualPropertyInfoGetter, virtualAccessors[0].GetType().FullName);
+            Assert.Equal(
+                ProjectionConstants.VirtualPropertyInfoGetter,
+                virtualAccessors[0].GetType().FullName
+            );
         }
 
         [Fact]
@@ -179,7 +214,10 @@ namespace System.Reflection.Context.Tests
             // Projecting
             ParameterInfo[] customParameters = _virtualProperties[1].GetIndexParameters();
             Assert.Single(customParameters);
-            Assert.Equal(ProjectionConstants.CustomParameter, customParameters[0].GetType().FullName);
+            Assert.Equal(
+                ProjectionConstants.CustomParameter,
+                customParameters[0].GetType().FullName
+            );
 
             // Virtual
             customParameters = _noGetterVirtualProperty.GetIndexParameters();
@@ -199,13 +237,26 @@ namespace System.Reflection.Context.Tests
         public void GetValue_NoGetter_Throws()
         {
             Assert.Throws<ArgumentException>(() =>
-                _noGetterVirtualProperty.GetValue(_testObject, BindingFlags.Default, null, null, CultureInfo.InvariantCulture));
+                _noGetterVirtualProperty.GetValue(
+                    _testObject,
+                    BindingFlags.Default,
+                    null,
+                    null,
+                    CultureInfo.InvariantCulture
+                )
+            );
         }
 
         [Fact]
         public void GetValue_HasGetter_Success()
         {
-            object returnVal = _noSetterVirtualProperty.GetValue(_testObject, BindingFlags.Default, null, null, CultureInfo.InvariantCulture);
+            object returnVal = _noSetterVirtualProperty.GetValue(
+                _testObject,
+                BindingFlags.Default,
+                null,
+                null,
+                CultureInfo.InvariantCulture
+            );
             Assert.Equal(42, returnVal);
         }
 
@@ -213,19 +264,41 @@ namespace System.Reflection.Context.Tests
         public void SetValue_NoSetter_Throws()
         {
             Assert.Throws<ArgumentException>(() =>
-                _noSetterVirtualProperty.SetValue(_testObject, 42, BindingFlags.Default, null, null, CultureInfo.InvariantCulture));
+                _noSetterVirtualProperty.SetValue(
+                    _testObject,
+                    42,
+                    BindingFlags.Default,
+                    null,
+                    null,
+                    CultureInfo.InvariantCulture
+                )
+            );
         }
 
         [Fact]
         public void SetValue_HasSetter_Success()
         {
-            _noGetterVirtualProperty.SetValue(_testObject, 42, BindingFlags.Default, null, null, CultureInfo.InvariantCulture);
+            _noGetterVirtualProperty.SetValue(
+                _testObject,
+                42,
+                BindingFlags.Default,
+                null,
+                null,
+                CultureInfo.InvariantCulture
+            );
         }
 
         [Fact]
         public void SetValue_HasSetterWithIndex_Success()
         {
-            _noGetterVirtualProperty.SetValue(_testObject, 42, BindingFlags.Default, null, new object[] { }, CultureInfo.InvariantCulture);
+            _noGetterVirtualProperty.SetValue(
+                _testObject,
+                42,
+                BindingFlags.Default,
+                null,
+                new object[] { },
+                CultureInfo.InvariantCulture
+            );
         }
 
         [Fact]

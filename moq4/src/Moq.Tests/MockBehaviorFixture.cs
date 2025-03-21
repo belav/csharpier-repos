@@ -5,7 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -256,6 +255,7 @@ namespace Moq.Tests
             public abstract string DoReturnString();
 
             public void DoNonVirtual() { }
+
             public virtual void DoVirtual() { }
 
             public int NonVirtualGet()

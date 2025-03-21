@@ -22,6 +22,6 @@ public class StringValueGeneratorTest
     }
 
     [ConditionalFact]
-    public void Generates_non_temp_values()
-        => Assert.False(new StringValueGenerator().GeneratesTemporaryValues);
+    public void Generates_non_temp_values() =>
+        Assert.False(new StringValueGenerator().GeneratesTemporaryValues);
 }

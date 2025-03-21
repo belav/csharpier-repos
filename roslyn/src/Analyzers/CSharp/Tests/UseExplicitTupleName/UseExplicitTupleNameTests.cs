@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
 {
     using VerifyCS = CSharpCodeFixVerifier<
         UseExplicitTupleNameDiagnosticAnalyzer,
-        UseExplicitTupleNameCodeFixProvider>;
+        UseExplicitTupleNameCodeFixProvider
+    >;
 
     [Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
     public class UseExplicitTupleNameTests
@@ -22,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
         [Fact]
         public async Task TestNamedTuple1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -31,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                         var v2 = v1.[|Item1|];
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -40,13 +43,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                         var v2 = v1.i;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestInArgument()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -57,7 +62,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
 
                     void Goo(int i) { }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -68,13 +74,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
 
                     void Goo(int i) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestNamedTuple2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -83,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                         var v2 = v1.[|Item2|];
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -92,7 +101,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                         var v2 = v1.s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -132,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
         [Fact]
         public async Task TestWrongCasing()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -141,7 +152,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                         var v2 = v1.[|Item1|];
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -150,13 +162,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                         var v2 = v1.item1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll1()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -166,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                         var v3 = v1.[|Item2|];
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -176,13 +191,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                         var v3 = v1.s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestFixAll2()
         {
-            await VerifyCS.VerifyCodeFixAsync("""
+            await VerifyCS.VerifyCodeFixAsync(
+                """
                 class C
                 {
                     void M()
@@ -191,7 +208,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                         v1.[|Item1|] = v1.[|Item2|];
                     }
                 }
-                """, """
+                """,
+                """
                 class C
                 {
                     void M()
@@ -200,7 +218,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                         v1.i = v1.s;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -223,8 +242,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                 FixedCode = code,
                 Options =
                 {
-                    { CodeStyleOptions2.PreferExplicitTupleNames, false, NotificationOption2.Warning }
-                }
+                    {
+                        CodeStyleOptions2.PreferExplicitTupleNames,
+                        false,
+                        NotificationOption2.Warning
+                    },
+                },
             }.RunAsync();
         }
 
@@ -248,8 +271,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                 FixedCode = code,
                 Options =
                 {
-                    { CodeStyleOptions2.PreferExplicitTupleNames, false, NotificationOption2.Warning }
-                }
+                    {
+                        CodeStyleOptions2.PreferExplicitTupleNames,
+                        false,
+                        NotificationOption2.Warning
+                    },
+                },
             }.RunAsync();
         }
 
@@ -284,22 +311,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
                     }
                 }
                 """;
-            var code = """
-                class C
-                {
-                    void M()
+            var code =
+                """
+                    class C
                     {
-                        (int, int, int, int, int, int, int, int) x = default;
-                        _ = x.Rest;
+                        void M()
+                        {
+                            (int, int, int, int, int, int, int, int) x = default;
+                            _ = x.Rest;
+                        }
                     }
-                }
-                """ + valueTuple8;
+                    """ + valueTuple8;
 
             await new VerifyCS.Test()
             {
                 TestCode = code,
                 FixedCode = code,
-                LanguageVersion = LanguageVersion.CSharp11
+                LanguageVersion = LanguageVersion.CSharp11,
             }.RunAsync();
         }
     }

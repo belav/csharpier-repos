@@ -49,7 +49,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         XmlDocCommentStyleDelimited = 0x100000,
         MaskXmlDocCommentStyle = 0x300000,
 
-        None = 0
+        None = 0,
     }
 
     // Needs to match LexMode.XmlDocCommentLocation*
@@ -58,14 +58,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         Start = 0,
         Interior = 1,
         Exterior = 2,
-        End = 4
+        End = 4,
     }
 
     // Needs to match LexMode.XmlDocCommentStyle*
     internal enum XmlDocCommentStyle
     {
         SingleLine = 0,
-        Delimited = 1
+        Delimited = 1,
     }
 
     internal partial class Lexer : AbstractLexer
@@ -110,7 +110,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             internal bool IsVerbatim;
         }
 
-        public Lexer(SourceText text, CSharpParseOptions options, bool allowPreprocessorDirectives = true, bool interpolationFollowedByColon = false)
+        public Lexer(
+            SourceText text,
+            CSharpParseOptions options,
+            bool allowPreprocessorDirectives = true,
+            bool interpolationFollowedByColon = false
+        )
             : base(text)
         {
             Debug.Assert(options != null);
@@ -154,10 +159,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         /// </summary>
         public bool InterpolationFollowedByColon
         {
-            get
-            {
-                return _interpolationFollowedByColon;
-            }
+            get { return _interpolationFollowedByColon; }
         }
 
         public void Reset(int position, DirectiveStack directives)
@@ -303,7 +305,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         private SyntaxToken LexSyntaxToken()
         {
             _leadingTriviaCache.Clear();
-            this.LexSyntaxTrivia(afterFirstToken: TextWindow.Position > 0, isTrailing: false, triviaList: ref _leadingTriviaCache);
+            this.LexSyntaxTrivia(
+                afterFirstToken: TextWindow.Position > 0,
+                isTrailing: false,
+                triviaList: ref _leadingTriviaCache
+            );
             var leading = _leadingTriviaCache;
 
             var tokenInfo = default(TokenInfo);
@@ -313,7 +319,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             var errors = this.GetErrors(GetFullWidth(leading));
 
             _trailingTriviaCache.Clear();
-            this.LexSyntaxTrivia(afterFirstToken: true, isTrailing: true, triviaList: ref _trailingTriviaCache);
+            this.LexSyntaxTrivia(
+                afterFirstToken: true,
+                isTrailing: true,
+                triviaList: ref _trailingTriviaCache
+            );
             var trailing = _trailingTriviaCache;
 
             return Create(in tokenInfo, leading, trailing, errors);
@@ -322,20 +332,41 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         internal SyntaxTriviaList LexSyntaxLeadingTrivia()
         {
             _leadingTriviaCache.Clear();
-            this.LexSyntaxTrivia(afterFirstToken: TextWindow.Position > 0, isTrailing: false, triviaList: ref _leadingTriviaCache);
-            return new SyntaxTriviaList(default(Microsoft.CodeAnalysis.SyntaxToken),
-                _leadingTriviaCache.ToListNode(), position: 0, index: 0);
+            this.LexSyntaxTrivia(
+                afterFirstToken: TextWindow.Position > 0,
+                isTrailing: false,
+                triviaList: ref _leadingTriviaCache
+            );
+            return new SyntaxTriviaList(
+                default(Microsoft.CodeAnalysis.SyntaxToken),
+                _leadingTriviaCache.ToListNode(),
+                position: 0,
+                index: 0
+            );
         }
 
         internal SyntaxTriviaList LexSyntaxTrailingTrivia()
         {
             _trailingTriviaCache.Clear();
-            this.LexSyntaxTrivia(afterFirstToken: true, isTrailing: true, triviaList: ref _trailingTriviaCache);
-            return new SyntaxTriviaList(default(Microsoft.CodeAnalysis.SyntaxToken),
-                _trailingTriviaCache.ToListNode(), position: 0, index: 0);
+            this.LexSyntaxTrivia(
+                afterFirstToken: true,
+                isTrailing: true,
+                triviaList: ref _trailingTriviaCache
+            );
+            return new SyntaxTriviaList(
+                default(Microsoft.CodeAnalysis.SyntaxToken),
+                _trailingTriviaCache.ToListNode(),
+                position: 0,
+                index: 0
+            );
         }
 
-        private SyntaxToken Create(in TokenInfo info, SyntaxListBuilder? leading, SyntaxListBuilder? trailing, SyntaxDiagnosticInfo[]? errors)
+        private SyntaxToken Create(
+            in TokenInfo info,
+            SyntaxListBuilder? leading,
+            SyntaxListBuilder? trailing,
+            SyntaxDiagnosticInfo[]? errors
+        )
         {
             Debug.Assert(info.Kind != SyntaxKind.IdentifierToken || info.StringValue != null);
 
@@ -345,38 +376,85 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             SyntaxToken token;
             if (info.RequiresTextForXmlEntity)
             {
-                token = SyntaxFactory.Token(leadingNode, info.Kind, info.Text, info.StringValue, trailingNode);
+                token = SyntaxFactory.Token(
+                    leadingNode,
+                    info.Kind,
+                    info.Text,
+                    info.StringValue,
+                    trailingNode
+                );
             }
             else
             {
                 switch (info.Kind)
                 {
                     case SyntaxKind.IdentifierToken:
-                        token = SyntaxFactory.Identifier(info.ContextualKind, leadingNode, info.Text, info.StringValue, trailingNode);
+                        token = SyntaxFactory.Identifier(
+                            info.ContextualKind,
+                            leadingNode,
+                            info.Text,
+                            info.StringValue,
+                            trailingNode
+                        );
                         break;
                     case SyntaxKind.NumericLiteralToken:
                         switch (info.ValueKind)
                         {
                             case SpecialType.System_Int32:
-                                token = SyntaxFactory.Literal(leadingNode, info.Text, info.IntValue, trailingNode);
+                                token = SyntaxFactory.Literal(
+                                    leadingNode,
+                                    info.Text,
+                                    info.IntValue,
+                                    trailingNode
+                                );
                                 break;
                             case SpecialType.System_UInt32:
-                                token = SyntaxFactory.Literal(leadingNode, info.Text, info.UintValue, trailingNode);
+                                token = SyntaxFactory.Literal(
+                                    leadingNode,
+                                    info.Text,
+                                    info.UintValue,
+                                    trailingNode
+                                );
                                 break;
                             case SpecialType.System_Int64:
-                                token = SyntaxFactory.Literal(leadingNode, info.Text, info.LongValue, trailingNode);
+                                token = SyntaxFactory.Literal(
+                                    leadingNode,
+                                    info.Text,
+                                    info.LongValue,
+                                    trailingNode
+                                );
                                 break;
                             case SpecialType.System_UInt64:
-                                token = SyntaxFactory.Literal(leadingNode, info.Text, info.UlongValue, trailingNode);
+                                token = SyntaxFactory.Literal(
+                                    leadingNode,
+                                    info.Text,
+                                    info.UlongValue,
+                                    trailingNode
+                                );
                                 break;
                             case SpecialType.System_Single:
-                                token = SyntaxFactory.Literal(leadingNode, info.Text, info.FloatValue, trailingNode);
+                                token = SyntaxFactory.Literal(
+                                    leadingNode,
+                                    info.Text,
+                                    info.FloatValue,
+                                    trailingNode
+                                );
                                 break;
                             case SpecialType.System_Double:
-                                token = SyntaxFactory.Literal(leadingNode, info.Text, info.DoubleValue, trailingNode);
+                                token = SyntaxFactory.Literal(
+                                    leadingNode,
+                                    info.Text,
+                                    info.DoubleValue,
+                                    trailingNode
+                                );
                                 break;
                             case SpecialType.System_Decimal:
-                                token = SyntaxFactory.Literal(leadingNode, info.Text, info.DecimalValue, trailingNode);
+                                token = SyntaxFactory.Literal(
+                                    leadingNode,
+                                    info.Text,
+                                    info.DecimalValue,
+                                    trailingNode
+                                );
                                 break;
                             default:
                                 throw ExceptionUtilities.UnexpectedValue(info.ValueKind);
@@ -385,7 +463,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         break;
                     case SyntaxKind.InterpolatedStringToken:
                         // we do not record a separate "value" for an interpolated string token, as it must be rescanned during parsing.
-                        token = SyntaxFactory.Literal(leadingNode, info.Text, info.Kind, info.Text, trailingNode);
+                        token = SyntaxFactory.Literal(
+                            leadingNode,
+                            info.Text,
+                            info.Kind,
+                            info.Text,
+                            trailingNode
+                        );
                         break;
                     case SyntaxKind.StringLiteralToken:
                     case SyntaxKind.Utf8StringLiteralToken:
@@ -393,19 +477,45 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     case SyntaxKind.Utf8SingleLineRawStringLiteralToken:
                     case SyntaxKind.MultiLineRawStringLiteralToken:
                     case SyntaxKind.Utf8MultiLineRawStringLiteralToken:
-                        token = SyntaxFactory.Literal(leadingNode, info.Text, info.Kind, info.StringValue, trailingNode);
+                        token = SyntaxFactory.Literal(
+                            leadingNode,
+                            info.Text,
+                            info.Kind,
+                            info.StringValue,
+                            trailingNode
+                        );
                         break;
                     case SyntaxKind.CharacterLiteralToken:
-                        token = SyntaxFactory.Literal(leadingNode, info.Text, info.CharValue, trailingNode);
+                        token = SyntaxFactory.Literal(
+                            leadingNode,
+                            info.Text,
+                            info.CharValue,
+                            trailingNode
+                        );
                         break;
                     case SyntaxKind.XmlTextLiteralNewLineToken:
-                        token = SyntaxFactory.XmlTextNewLine(leadingNode, info.Text, info.StringValue, trailingNode);
+                        token = SyntaxFactory.XmlTextNewLine(
+                            leadingNode,
+                            info.Text,
+                            info.StringValue,
+                            trailingNode
+                        );
                         break;
                     case SyntaxKind.XmlTextLiteralToken:
-                        token = SyntaxFactory.XmlTextLiteral(leadingNode, info.Text, info.StringValue, trailingNode);
+                        token = SyntaxFactory.XmlTextLiteral(
+                            leadingNode,
+                            info.Text,
+                            info.StringValue,
+                            trailingNode
+                        );
                         break;
                     case SyntaxKind.XmlEntityLiteralToken:
-                        token = SyntaxFactory.XmlEntity(leadingNode, info.Text, info.StringValue, trailingNode);
+                        token = SyntaxFactory.XmlEntity(
+                            leadingNode,
+                            info.Text,
+                            info.StringValue,
+                            trailingNode
+                        );
                         break;
                     case SyntaxKind.EndOfDocumentationCommentToken:
                     case SyntaxKind.EndOfFileToken:
@@ -422,7 +532,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 }
             }
 
-            if (errors != null && (_options.DocumentationMode >= DocumentationMode.Diagnose || !InDocumentationComment))
+            if (
+                errors != null
+                && (
+                    _options.DocumentationMode >= DocumentationMode.Diagnose
+                    || !InDocumentationComment
+                )
+            )
             {
                 token = token.WithDiagnosticsGreen(errors);
             }
@@ -452,7 +568,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 case '/':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance('=') ? SyntaxKind.SlashEqualsToken : SyntaxKind.SlashToken;
+                    info.Kind = TextWindow.TryAdvance('=')
+                        ? SyntaxKind.SlashEqualsToken
+                        : SyntaxKind.SlashToken;
                     break;
 
                 case '.':
@@ -485,7 +603,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 case ':':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance(':') ? SyntaxKind.ColonColonToken : SyntaxKind.ColonToken;
+                    info.Kind = TextWindow.TryAdvance(':')
+                        ? SyntaxKind.ColonColonToken
+                        : SyntaxKind.ColonToken;
                     break;
 
                 case ';':
@@ -500,19 +620,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                 case '!':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance('=') ? SyntaxKind.ExclamationEqualsToken : SyntaxKind.ExclamationToken;
+                    info.Kind = TextWindow.TryAdvance('=')
+                        ? SyntaxKind.ExclamationEqualsToken
+                        : SyntaxKind.ExclamationToken;
                     break;
 
                 case '=':
                     TextWindow.AdvanceChar();
                     info.Kind =
-                        TextWindow.TryAdvance('=') ? SyntaxKind.EqualsEqualsToken :
-                        TextWindow.TryAdvance('>') ? SyntaxKind.EqualsGreaterThanToken : SyntaxKind.EqualsToken;
+                        TextWindow.TryAdvance('=') ? SyntaxKind.EqualsEqualsToken
+                        : TextWindow.TryAdvance('>') ? SyntaxKind.EqualsGreaterThanToken
+                        : SyntaxKind.EqualsToken;
                     break;
 
                 case '*':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance('=') ? SyntaxKind.AsteriskEqualsToken : SyntaxKind.AsteriskToken;
+                    info.Kind = TextWindow.TryAdvance('=')
+                        ? SyntaxKind.AsteriskEqualsToken
+                        : SyntaxKind.AsteriskToken;
                     break;
 
                 case '(':
@@ -548,66 +673,81 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 case '?':
                     TextWindow.AdvanceChar();
                     info.Kind = TextWindow.TryAdvance('?')
-                        ? TextWindow.TryAdvance('=') ? SyntaxKind.QuestionQuestionEqualsToken : SyntaxKind.QuestionQuestionToken
+                        ? TextWindow.TryAdvance('=')
+                            ? SyntaxKind.QuestionQuestionEqualsToken
+                            : SyntaxKind.QuestionQuestionToken
                         : SyntaxKind.QuestionToken;
                     break;
 
                 case '+':
                     TextWindow.AdvanceChar();
                     info.Kind =
-                        TextWindow.TryAdvance('=') ? SyntaxKind.PlusEqualsToken :
-                        TextWindow.TryAdvance('+') ? SyntaxKind.PlusPlusToken : SyntaxKind.PlusToken;
+                        TextWindow.TryAdvance('=') ? SyntaxKind.PlusEqualsToken
+                        : TextWindow.TryAdvance('+') ? SyntaxKind.PlusPlusToken
+                        : SyntaxKind.PlusToken;
                     break;
 
                 case '-':
                     TextWindow.AdvanceChar();
                     info.Kind =
-                        TextWindow.TryAdvance('=') ? SyntaxKind.MinusEqualsToken :
-                        TextWindow.TryAdvance('-') ? SyntaxKind.MinusMinusToken :
-                        TextWindow.TryAdvance('>') ? SyntaxKind.MinusGreaterThanToken : SyntaxKind.MinusToken;
+                        TextWindow.TryAdvance('=') ? SyntaxKind.MinusEqualsToken
+                        : TextWindow.TryAdvance('-') ? SyntaxKind.MinusMinusToken
+                        : TextWindow.TryAdvance('>') ? SyntaxKind.MinusGreaterThanToken
+                        : SyntaxKind.MinusToken;
                     break;
 
                 case '%':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance('=') ? SyntaxKind.PercentEqualsToken : SyntaxKind.PercentToken;
+                    info.Kind = TextWindow.TryAdvance('=')
+                        ? SyntaxKind.PercentEqualsToken
+                        : SyntaxKind.PercentToken;
                     break;
 
                 case '&':
                     TextWindow.AdvanceChar();
                     info.Kind =
-                        TextWindow.TryAdvance('=') ? SyntaxKind.AmpersandEqualsToken :
-                        TextWindow.TryAdvance('&') ? SyntaxKind.AmpersandAmpersandToken : SyntaxKind.AmpersandToken;
+                        TextWindow.TryAdvance('=') ? SyntaxKind.AmpersandEqualsToken
+                        : TextWindow.TryAdvance('&') ? SyntaxKind.AmpersandAmpersandToken
+                        : SyntaxKind.AmpersandToken;
                     break;
 
                 case '^':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance('=') ? SyntaxKind.CaretEqualsToken : SyntaxKind.CaretToken;
+                    info.Kind = TextWindow.TryAdvance('=')
+                        ? SyntaxKind.CaretEqualsToken
+                        : SyntaxKind.CaretToken;
                     break;
 
                 case '|':
                     TextWindow.AdvanceChar();
                     info.Kind =
-                        TextWindow.TryAdvance('=') ? SyntaxKind.BarEqualsToken :
-                        TextWindow.TryAdvance('|') ? SyntaxKind.BarBarToken : SyntaxKind.BarToken;
+                        TextWindow.TryAdvance('=') ? SyntaxKind.BarEqualsToken
+                        : TextWindow.TryAdvance('|') ? SyntaxKind.BarBarToken
+                        : SyntaxKind.BarToken;
                     break;
 
                 case '<':
                     TextWindow.AdvanceChar();
                     info.Kind =
-                        TextWindow.TryAdvance('=') ? SyntaxKind.LessThanEqualsToken :
-                        TextWindow.TryAdvance('<')
-                            ? TextWindow.TryAdvance('=') ? SyntaxKind.LessThanLessThanEqualsToken : SyntaxKind.LessThanLessThanToken
-                            : SyntaxKind.LessThanToken;
+                        TextWindow.TryAdvance('=') ? SyntaxKind.LessThanEqualsToken
+                        : TextWindow.TryAdvance('<')
+                            ? TextWindow.TryAdvance('=') ? SyntaxKind.LessThanLessThanEqualsToken
+                                : SyntaxKind.LessThanLessThanToken
+                        : SyntaxKind.LessThanToken;
                     break;
 
                 case '>':
                     TextWindow.AdvanceChar();
-                    info.Kind = TextWindow.TryAdvance('=') ? SyntaxKind.GreaterThanEqualsToken : SyntaxKind.GreaterThanToken;
+                    info.Kind = TextWindow.TryAdvance('=')
+                        ? SyntaxKind.GreaterThanEqualsToken
+                        : SyntaxKind.GreaterThanToken;
                     break;
 
                 case '@':
-                    if (!this.TryScanAtStringToken(ref info) &&
-                        !this.ScanIdentifierOrKeyword(ref info))
+                    if (
+                        !this.TryScanAtStringToken(ref info)
+                        && !this.ScanIdentifierOrKeyword(ref info)
+                    )
                     {
                         Debug.Assert(TextWindow.PeekChar() == '@');
                         this.ConsumeAtSignSequence();
@@ -632,11 +772,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 // All the 'common' identifier characters are represented directly in these switch cases for optimal
                 // perf.  Calling IsIdentifierChar() functions is relatively expensive.
                 case '_':
-                case (>= 'a' and <= 'z') or (>= 'A' and <= 'Z'):
+                case (>= 'a' and <= 'z')
+                or (>= 'A' and <= 'Z'):
                     this.ScanIdentifierOrKeyword(ref info);
                     break;
 
-                case >= '0' and <= '9':
+                case >= '0'
+                and <= '9':
                     this.ScanNumericLiteral(ref info);
                     break;
 
@@ -688,7 +830,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         // If we ran into the start of a surrogate pair, then see if we have the whole pair.  If so,
                         // skip the pair in its entirety so we can produce a good error message that treats the two as a
                         // single entity to tell the user about.
-                        if (char.IsHighSurrogate(character) && char.IsLowSurrogate(TextWindow.PeekChar()))
+                        if (
+                            char.IsHighSurrogate(character)
+                            && char.IsLowSurrogate(TextWindow.PeekChar())
+                        )
                             TextWindow.AdvanceChar();
                     }
 
@@ -702,7 +847,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     else
                     {
                         int end = TextWindow.Text.Length;
-                        info.Text = TextWindow.Text.ToString(TextSpan.FromBounds(startingPosition, end));
+                        info.Text = TextWindow.Text.ToString(
+                            TextSpan.FromBounds(startingPosition, end)
+                        );
                         TextWindow.Reset(end);
                     }
 
@@ -712,7 +859,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     // However, if the user's code has the actual System.Char \uDCE7 char in it, then we want to print
                     // that out in escaped form so they have an actual clue about what the character value is that we
                     // have a problem with.
-                    var messageText = isEscaped ? info.Text : ObjectDisplay.FormatLiteral(info.Text, ObjectDisplayOptions.EscapeNonPrintableCharacters);
+                    var messageText = isEscaped
+                        ? info.Text
+                        : ObjectDisplay.FormatLiteral(
+                            info.Text,
+                            ObjectDisplayOptions.EscapeNonPrintableCharacters
+                        );
                     this.AddError(ErrorCode.ERR_UnexpectedCharacter, messageText);
                     break;
             }
@@ -783,7 +935,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         }
 
         // Allows underscores in integers, except at beginning for decimal and end
-        private void ScanNumericLiteralSingleInteger(ref bool underscoreInWrongPlace, ref bool usedUnderscore, ref bool firstCharWasUnderscore, bool isHex, bool isBinary)
+        private void ScanNumericLiteralSingleInteger(
+            ref bool underscoreInWrongPlace,
+            ref bool usedUnderscore,
+            ref bool firstCharWasUnderscore,
+            bool isHex,
+            bool isBinary
+        )
         {
             if (TextWindow.PeekChar() == '_')
             {
@@ -806,9 +964,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     usedUnderscore = true;
                     lastCharWasUnderscore = true;
                 }
-                else if (!(isHex ? SyntaxFacts.IsHexDigit(ch) :
-                           isBinary ? SyntaxFacts.IsBinaryDigit(ch) :
-                           SyntaxFacts.IsDecDigit(ch)))
+                else if (
+                    !(
+                        isHex ? SyntaxFacts.IsHexDigit(ch)
+                        : isBinary ? SyntaxFacts.IsBinaryDigit(ch)
+                        : SyntaxFacts.IsDecDigit(ch)
+                    )
+                )
                 {
                     break;
                 }
@@ -864,7 +1026,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             {
                 // It's OK if it has no digits after the '0x' -- we'll catch it in ScanNumericLiteral
                 // and give a proper error then.
-                ScanNumericLiteralSingleInteger(ref underscoreInWrongPlace, ref usedUnderscore, ref firstCharWasUnderscore, isHex, isBinary);
+                ScanNumericLiteralSingleInteger(
+                    ref underscoreInWrongPlace,
+                    ref usedUnderscore,
+                    ref firstCharWasUnderscore,
+                    isHex,
+                    isBinary
+                );
 
                 if (TextWindow.PeekChar() is 'L' or 'l')
                 {
@@ -889,7 +1057,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             }
             else
             {
-                ScanNumericLiteralSingleInteger(ref underscoreInWrongPlace, ref usedUnderscore, ref firstCharWasUnderscore, isHex: false, isBinary: false);
+                ScanNumericLiteralSingleInteger(
+                    ref underscoreInWrongPlace,
+                    ref usedUnderscore,
+                    ref firstCharWasUnderscore,
+                    isHex: false,
+                    isBinary: false
+                );
 
                 if (this.ModeIs(LexerMode.DebuggerSyntax) && TextWindow.PeekChar() == '#')
                 {
@@ -910,7 +1084,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         _builder.Append(ch);
                         TextWindow.AdvanceChar();
 
-                        ScanNumericLiteralSingleInteger(ref underscoreInWrongPlace, ref usedUnderscore, ref firstCharWasUnderscore, isHex: false, isBinary: false);
+                        ScanNumericLiteralSingleInteger(
+                            ref underscoreInWrongPlace,
+                            ref usedUnderscore,
+                            ref firstCharWasUnderscore,
+                            isHex: false,
+                            isBinary: false
+                        );
                     }
                     else if (_builder.Length == 0)
                     {
@@ -940,7 +1120,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     }
                     else
                     {
-                        ScanNumericLiteralSingleInteger(ref underscoreInWrongPlace, ref usedUnderscore, ref firstCharWasUnderscore, isHex: false, isBinary: false);
+                        ScanNumericLiteralSingleInteger(
+                            ref underscoreInWrongPlace,
+                            ref usedUnderscore,
+                            ref firstCharWasUnderscore,
+                            isHex: false,
+                            isBinary: false
+                        );
                     }
                 }
 
@@ -1006,7 +1192,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
             if (underscoreInWrongPlace)
             {
-                this.AddError(MakeError(start, TextWindow.Position - start, ErrorCode.ERR_InvalidNumber));
+                this.AddError(
+                    MakeError(start, TextWindow.Position - start, ErrorCode.ERR_InvalidNumber)
+                );
             }
             else if (firstCharWasUnderscore)
             {
@@ -1095,7 +1283,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             info.UlongValue = val;
                         }
                     }
-
                     // * If the literal is suffixed by L or l, it has the first of these types in which its value can be represented: long, ulong.
                     else if (!hasUSuffix & hasLSuffix)
                     {
@@ -1113,7 +1300,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                             // as special for folding if its value is 9223372036854775808
                         }
                     }
-
                     // * If the literal is suffixed by UL, Ul, uL, ul, LU, Lu, lU, or lu, it is of type ulong.
                     else
                     {
@@ -1124,17 +1310,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
                     break;
 
-                    // Note, the following portion of the spec is not implemented here. It is implemented
-                    // in the unary minus analysis.
+                // Note, the following portion of the spec is not implemented here. It is implemented
+                // in the unary minus analysis.
 
-                    // * When a decimal-integer-literal with the value 2147483648 (231) and no integer-type-suffix appears
-                    //   as the token immediately following a unary minus operator token (§7.7.2), the result is a constant
-                    //   of type int with the value −2147483648 (−231). In all other situations, such a decimal-integer-
-                    //   literal is of type uint.
-                    // * When a decimal-integer-literal with the value 9223372036854775808 (263) and no integer-type-suffix
-                    //   or the integer-type-suffix L or l appears as the token immediately following a unary minus operator
-                    //   token (§7.7.2), the result is a constant of type long with the value −9223372036854775808 (−263).
-                    //   In all other situations, such a decimal-integer-literal is of type ulong.
+                // * When a decimal-integer-literal with the value 2147483648 (231) and no integer-type-suffix appears
+                //   as the token immediately following a unary minus operator token (§7.7.2), the result is a constant
+                //   of type int with the value −2147483648 (−231). In all other situations, such a decimal-integer-
+                //   literal is of type uint.
+                // * When a decimal-integer-literal with the value 9223372036854775808 (263) and no integer-type-suffix
+                //   or the integer-type-suffix L or l appears as the token immediately following a unary minus operator
+                //   token (§7.7.2), the result is a constant of type long with the value −9223372036854775808 (−263).
+                //   In all other situations, such a decimal-integer-literal is of type ulong.
             }
 
             return true;
@@ -1163,7 +1349,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         private int GetValueInt32(string text, bool isHex)
         {
             int result;
-            if (!Int32.TryParse(text, isHex ? NumberStyles.AllowHexSpecifier : NumberStyles.None, CultureInfo.InvariantCulture, out result))
+            if (
+                !Int32.TryParse(
+                    text,
+                    isHex ? NumberStyles.AllowHexSpecifier : NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out result
+                )
+            )
             {
                 //we've already lexed the literal, so the error must be from overflow
                 this.AddError(MakeError(ErrorCode.ERR_IntOverflow));
@@ -1183,7 +1376,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     this.AddError(MakeError(ErrorCode.ERR_IntOverflow));
                 }
             }
-            else if (!UInt64.TryParse(text, isHex ? NumberStyles.AllowHexSpecifier : NumberStyles.None, CultureInfo.InvariantCulture, out result))
+            else if (
+                !UInt64.TryParse(
+                    text,
+                    isHex ? NumberStyles.AllowHexSpecifier : NumberStyles.None,
+                    CultureInfo.InvariantCulture,
+                    out result
+                )
+            )
             {
                 //we've already lexed the literal, so the error must be from overflow
                 this.AddError(MakeError(ErrorCode.ERR_IntOverflow));
@@ -1242,10 +1442,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
             //     [Bug #568494]
 
             decimal result;
-            if (!decimal.TryParse(text, NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent, CultureInfo.InvariantCulture, out result))
+            if (
+                !decimal.TryParse(
+                    text,
+                    NumberStyles.AllowDecimalPoint | NumberStyles.AllowExponent,
+                    CultureInfo.InvariantCulture,
+                    out result
+                )
+            )
             {
                 //we've already lexed the literal, so the error must be from overflow
-                this.AddError(this.MakeError(start, end - start, ErrorCode.ERR_FloatOverflow, "decimal"));
+                this.AddError(
+                    this.MakeError(start, end - start, ErrorCode.ERR_FloatOverflow, "decimal")
+                );
             }
 
             return result;
@@ -1275,12 +1484,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
 
         private bool ScanIdentifier(ref TokenInfo info)
         {
-            return
-                ScanIdentifier_FastPath(ref info) ||
-                (InXmlCrefOrNameAttributeValue ? ScanIdentifier_CrefSlowPath(ref info) : ScanIdentifier_SlowPath(ref info));
+            return ScanIdentifier_FastPath(ref info)
+                || (
+                    InXmlCrefOrNameAttributeValue
+                        ? ScanIdentifier_CrefSlowPath(ref info)
+                        : ScanIdentifier_SlowPath(ref info)
+                );
         }
 
-        // Implements a faster identifier lexer for the common case in the 
+        // Implements a faster identifier lexer for the common case in the
         // language where:
         //
         //   a) identifiers are not verbatim
@@ -1288,21 +1500,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
         //   c) identifiers don't contain unicode escapes
         //
         // Given that nearly all identifiers will contain [_a-zA-Z0-9] and will
-        // be terminated by a small set of known characters (like dot, comma, 
+        // be terminated by a small set of known characters (like dot, comma,
         // etc.), we can sit in a tight loop looking for this pattern and only
         // falling back to the slower (but correct) path if we see something we
         // can't handle.
         //
         // Note: this function also only works if the identifier (and terminator)
         // can be found in the current sliding window of chars we have from our
-        // source text.  With this constraint we can avoid the costly overhead 
+        // source text.  With this constraint we can avoid the costly overhead
         // incurred with peek/advance/next.  Because of this we can also avoid
         // the unnecessary stores/reads from identBuffer and all other instance
         // state while lexing.  Instead we just keep track of our start, end,
         // and max positions and use those for quick checks internally.
         //
-        // Note: it is critical that this method must only be called from a 
-        // code path that checked for IsIdentifierStartChar or '@' first. 
+        // Note: it is critical that this method must only be called from a
+        // code path that checked for IsIdentifierStartChar or '@' first.
         private bool ScanIdentifier_FastPath(ref TokenInfo info)
         {
             if ((_mode & LexerMode.MaskLexMode) == LexerMode.DebuggerSyntax)
@@ -1372,15 +1584,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                     case '~':
                     case '"':
                     case '\'':
-                        // All of the following characters are not valid in an 
+                        // All of the following characters are not valid in an
                         // identifier.  If we see any of them, then we know we're
                         // done.
                         var length = currentOffset - startOffset;
                         TextWindow.AdvanceChar(length);
-                        info.Text = info.StringValue = TextWindow.Intern(characterWindow, startOffset, length);
+                        info.Text = info.StringValue = TextWindow.Intern(
+                            characterWindow,
+                            startOffset,
+                            length
+                        );
                         info.IsVerbatim = false;
                         return true;
-                    case >= '0' and <= '9':
+                    case >= '0'
+                    and <= '9':
                         if (currentOffset == startOffset)
                         {
                             return false;
@@ -1389,7 +1606,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                         {
                             goto case '_';
                         }
-                    case (>= 'a' and <= 'z') or (>= 'A' and <= 'Z'):
+                    case (>= 'a' and <= 'z')
+                    or (>= 'A' and <= 'Z'):
                     case '_':
                         // All of these characters are valid inside an identifier.
                         // consume it and keep processing.
@@ -1426,7 +1644,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax.InternalSyntax
                 char surrogateCharacter = SlidingTextWindow.InvalidCharacter;
                 bool isEscaped = false;
                 char ch = TextWindow.PeekChar();
-top:
+                top:
                 switch (ch)
                 {
                     case '\\':
@@ -1455,42 +1673,46 @@ top:
 
                         goto LoopExit;
                     case '_':
-                    case (>= 'a' and <= 'z') or (>= 'A' and <= 'Z'):
-                        {
-                            // Again, these are the 'common' identifier characters...
-                            break;
-                        }
+                    case (>= 'a' and <= 'z')
+                    or (>= 'A' and <= 'Z'):
+                    {
+                        // Again, these are the 'common' identifier characters...
+                        break;
+                    }
 
                     case '0':
+                    {
+                        if (_identLen == 0)
                         {
-                            if (_identLen == 0)
+                            // Debugger syntax allows @0x[hexdigit]+ for object address identifiers.
+                            if (
+                                info.IsVerbatim
+                                && this.ModeIs(LexerMode.DebuggerSyntax)
+                                && (char.ToLower(TextWindow.PeekChar(1)) == 'x')
+                            )
                             {
-                                // Debugger syntax allows @0x[hexdigit]+ for object address identifiers.
-                                if (info.IsVerbatim &&
-                                    this.ModeIs(LexerMode.DebuggerSyntax) &&
-                                    (char.ToLower(TextWindow.PeekChar(1)) == 'x'))
-                                {
-                                    isObjectAddress = true;
-                                }
-                                else
-                                {
-                                    goto LoopExit;
-                                }
+                                isObjectAddress = true;
                             }
-
-                            // Again, these are the 'common' identifier characters...
-                            break;
-                        }
-                    case >= '1' and <= '9':
-                        {
-                            if (_identLen == 0)
+                            else
                             {
                                 goto LoopExit;
                             }
-
-                            // Again, these are the 'common' identifier characters...
-                            break;
                         }
+
+                        // Again, these are the 'common' identifier characters...
+                        break;
+                    }
+                    case >= '1'
+                    and <= '9':
+                    {
+                        if (_identLen == 0)
+                        {
+                            goto LoopExit;
+                        }
+
+                        // Again, these are the 'common' identifier characters...
+                        break;
+                    }
 
                     case ' ':
                     case '\t':
@@ -1502,7 +1724,11 @@ top:
                         // ...and these are the 'common' stop characters.
                         goto LoopExit;
                     case '<':
-                        if (_identLen == 0 && this.ModeIs(LexerMode.DebuggerSyntax) && TextWindow.PeekChar(1) == '>')
+                        if (
+                            _identLen == 0
+                            && this.ModeIs(LexerMode.DebuggerSyntax)
+                            && TextWindow.PeekChar(1) == '>'
+                        )
                         {
                             // In DebuggerSyntax mode, identifiers are allowed to begin with <>.
                             TextWindow.AdvanceChar(2);
@@ -1513,39 +1739,47 @@ top:
 
                         goto LoopExit;
                     default:
+                    {
+                        // This is the 'expensive' call
+                        if (
+                            _identLen == 0
+                            && ch > 127
+                            && SyntaxFacts.IsIdentifierStartCharacter(ch)
+                        )
                         {
-                            // This is the 'expensive' call
-                            if (_identLen == 0 && ch > 127 && SyntaxFacts.IsIdentifierStartCharacter(ch))
+                            break;
+                        }
+                        else if (
+                            _identLen > 0
+                            && ch > 127
+                            && SyntaxFacts.IsIdentifierPartCharacter(ch)
+                        )
+                        {
+                            //// BUG 424819 : Handle identifier chars > 0xFFFF via surrogate pairs
+                            if (UnicodeCharacterUtilities.IsFormattingChar(ch))
                             {
-                                break;
-                            }
-                            else if (_identLen > 0 && ch > 127 && SyntaxFacts.IsIdentifierPartCharacter(ch))
-                            {
-                                //// BUG 424819 : Handle identifier chars > 0xFFFF via surrogate pairs
-                                if (UnicodeCharacterUtilities.IsFormattingChar(ch))
+                                if (isEscaped)
                                 {
-                                    if (isEscaped)
-                                    {
-                                        SyntaxDiagnosticInfo? error;
-                                        NextCharOrUnicodeEscape(out surrogateCharacter, out error);
-                                        AddError(error);
-                                    }
-                                    else
-                                    {
-                                        TextWindow.AdvanceChar();
-                                    }
-
-                                    continue; // Ignore formatting characters
+                                    SyntaxDiagnosticInfo? error;
+                                    NextCharOrUnicodeEscape(out surrogateCharacter, out error);
+                                    AddError(error);
+                                }
+                                else
+                                {
+                                    TextWindow.AdvanceChar();
                                 }
 
-                                break;
+                                continue; // Ignore formatting characters
                             }
-                            else
-                            {
-                                // Not a valid identifier character, so bail.
-                                goto LoopExit;
-                            }
+
+                            break;
                         }
+                        else
+                        {
+                            // Not a valid identifier character, so bail.
+                            goto LoopExit;
+                        }
+                    }
                 }
 
                 if (isEscaped)
@@ -1566,7 +1800,7 @@ top:
                 }
             }
 
-LoopExit:
+            LoopExit:
             var width = TextWindow.Width; // exact size of input characters
             if (_identLen > 0)
             {
@@ -1586,8 +1820,18 @@ LoopExit:
                 {
                     // @0x[hexdigit]+
                     const int objectAddressOffset = 2;
-                    Debug.Assert(string.Equals(info.Text.Substring(0, objectAddressOffset + 1), "@0x", StringComparison.OrdinalIgnoreCase));
-                    var valueText = TextWindow.Intern(_identBuffer, objectAddressOffset, _identLen - objectAddressOffset);
+                    Debug.Assert(
+                        string.Equals(
+                            info.Text.Substring(0, objectAddressOffset + 1),
+                            "@0x",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    );
+                    var valueText = TextWindow.Intern(
+                        _identBuffer,
+                        objectAddressOffset,
+                        _identLen - objectAddressOffset
+                    );
                     // Verify valid hex value.
                     if ((valueText.Length == 0) || !valueText.All(SyntaxFacts.IsHexDigit))
                     {
@@ -1605,7 +1849,7 @@ LoopExit:
                 return true;
             }
 
-Fail:
+            Fail:
             info.Text = null;
             info.StringValue = null;
             TextWindow.Reset(start);
@@ -1667,7 +1911,7 @@ Fail:
                 // pairs aren't separately valid).
 
                 bool isEscaped = false;
-top:
+                top:
                 switch (consumedChar)
                 {
                     case '\\':
@@ -1678,10 +1922,16 @@ top:
                         // the backslash, which we have already consumed).
                         // When we're ready to implement this behavior, we can drop the position
                         // check and use AdvanceIfMatches instead of PeekChar.
-                        if (!isEscaped && (TextWindow.Position == beforeConsumed + 1) &&
-                            TextWindow.PeekChar() is 'u' or 'U')
+                        if (
+                            !isEscaped
+                            && (TextWindow.Position == beforeConsumed + 1)
+                            && TextWindow.PeekChar() is 'u' or 'U'
+                        )
                         {
-                            Debug.Assert(consumedSurrogate == SlidingTextWindow.InvalidCharacter, "Since consumedChar == '\\'");
+                            Debug.Assert(
+                                consumedSurrogate == SlidingTextWindow.InvalidCharacter,
+                                "Since consumedChar == '\\'"
+                            );
 
                             info.HasIdentifierEscapeSequence = true;
 
@@ -1697,23 +1947,25 @@ top:
                         goto default;
 
                     case '_':
-                    case (>= 'a' and <= 'z') or (>= 'A' and <= 'Z'):
+                    case (>= 'a' and <= 'z')
+                    or (>= 'A' and <= 'Z'):
+                    {
+                        // Again, these are the 'common' identifier characters...
+                        break;
+                    }
+
+                    case >= '0'
+                    and <= '9':
+                    {
+                        if (_identLen == 0)
                         {
-                            // Again, these are the 'common' identifier characters...
-                            break;
+                            TextWindow.Reset(beforeConsumed);
+                            goto LoopExit;
                         }
 
-                    case >= '0' and <= '9':
-                        {
-                            if (_identLen == 0)
-                            {
-                                TextWindow.Reset(beforeConsumed);
-                                goto LoopExit;
-                            }
-
-                            // Again, these are the 'common' identifier characters...
-                            break;
-                        }
+                        // Again, these are the 'common' identifier characters...
+                        break;
+                    }
 
                     case ' ':
                     case '$':
@@ -1736,29 +1988,37 @@ top:
                         TextWindow.Reset(beforeConsumed);
                         goto LoopExit;
                     default:
+                    {
+                        // This is the 'expensive' call
+                        if (
+                            _identLen == 0
+                            && consumedChar > 127
+                            && SyntaxFacts.IsIdentifierStartCharacter(consumedChar)
+                        )
                         {
-                            // This is the 'expensive' call
-                            if (_identLen == 0 && consumedChar > 127 && SyntaxFacts.IsIdentifierStartCharacter(consumedChar))
-                            {
-                                break;
-                            }
-                            else if (_identLen > 0 && consumedChar > 127 && SyntaxFacts.IsIdentifierPartCharacter(consumedChar))
-                            {
-                                //// BUG 424819 : Handle identifier chars > 0xFFFF via surrogate pairs
-                                if (UnicodeCharacterUtilities.IsFormattingChar(consumedChar))
-                                {
-                                    continue; // Ignore formatting characters
-                                }
-
-                                break;
-                            }
-                            else
-                            {
-                                // Not a valid identifier character, so bail.
-                                TextWindow.Reset(beforeConsumed);
-                                goto LoopExit;
-                            }
+                            break;
                         }
+                        else if (
+                            _identLen > 0
+                            && consumedChar > 127
+                            && SyntaxFacts.IsIdentifierPartCharacter(consumedChar)
+                        )
+                        {
+                            //// BUG 424819 : Handle identifier chars > 0xFFFF via surrogate pairs
+                            if (UnicodeCharacterUtilities.IsFormattingChar(consumedChar))
+                            {
+                                continue; // Ignore formatting characters
+                            }
+
+                            break;
+                        }
+                        else
+                        {
+                            // Not a valid identifier character, so bail.
+                            TextWindow.Reset(beforeConsumed);
+                            goto LoopExit;
+                        }
+                    }
                 }
 
                 this.AddIdentChar(consumedChar);
@@ -1768,7 +2028,7 @@ top:
                 }
             }
 
-LoopExit:
+            LoopExit:
             if (_identLen > 0)
             {
                 // NOTE: If we don't intern the string value, then we won't get a hit
@@ -1858,7 +2118,11 @@ LoopExit:
             }
         }
 
-        private void LexSyntaxTrivia(bool afterFirstToken, bool isTrailing, ref SyntaxListBuilder triviaList)
+        private void LexSyntaxTrivia(
+            bool afterFirstToken,
+            bool isTrailing,
+            ref SyntaxListBuilder triviaList
+        )
         {
             bool onlyWhitespaceOnLine = !isTrailing;
 
@@ -1886,16 +2150,20 @@ LoopExit:
                 switch (ch)
                 {
                     case ' ':
-                    case '\t':       // Horizontal tab
-                    case '\v':       // Vertical Tab
-                    case '\f':       // Form-feed
+                    case '\t': // Horizontal tab
+                    case '\v': // Vertical Tab
+                    case '\f': // Form-feed
                     case '\u001A':
                         this.AddTrivia(this.ScanWhitespace(), ref triviaList);
                         break;
                     case '/':
                         if ((ch = TextWindow.PeekChar(1)) == '/')
                         {
-                            if (!this.SuppressDocumentationCommentParse && TextWindow.PeekChar(2) == '/' && TextWindow.PeekChar(3) != '/')
+                            if (
+                                !this.SuppressDocumentationCommentParse
+                                && TextWindow.PeekChar(2) == '/'
+                                && TextWindow.PeekChar(3) != '/'
+                            )
                             {
                                 // Doc comments should never be in trailing trivia.
                                 // Stop processing so that it will be leading trivia on the next token.
@@ -1904,7 +2172,10 @@ LoopExit:
                                     return;
                                 }
 
-                                this.AddTrivia(this.LexXmlDocComment(XmlDocCommentStyle.SingleLine), ref triviaList);
+                                this.AddTrivia(
+                                    this.LexXmlDocComment(XmlDocCommentStyle.SingleLine),
+                                    ref triviaList
+                                );
                                 break;
                             }
 
@@ -1917,8 +2188,12 @@ LoopExit:
                         }
                         else if (ch == '*')
                         {
-                            if (!this.SuppressDocumentationCommentParse && TextWindow.PeekChar(2) == '*' &&
-                                TextWindow.PeekChar(3) != '*' && TextWindow.PeekChar(3) != '/')
+                            if (
+                                !this.SuppressDocumentationCommentParse
+                                && TextWindow.PeekChar(2) == '*'
+                                && TextWindow.PeekChar(3) != '*'
+                                && TextWindow.PeekChar(3) != '/'
+                            )
                             {
                                 // Doc comments should never be in trailing trivia.
                                 // Stop processing so that it will be leading trivia on the next token.
@@ -1927,7 +2202,10 @@ LoopExit:
                                     return;
                                 }
 
-                                this.AddTrivia(this.LexXmlDocComment(XmlDocCommentStyle.Delimited), ref triviaList);
+                                this.AddTrivia(
+                                    this.LexXmlDocComment(XmlDocCommentStyle.Delimited),
+                                    ref triviaList
+                                );
                                 break;
                             }
 
@@ -1962,7 +2240,11 @@ LoopExit:
                     case '#':
                         if (_allowPreprocessorDirectives)
                         {
-                            this.LexDirectiveAndExcludedTrivia(afterFirstToken, isTrailing || !onlyWhitespaceOnLine, ref triviaList);
+                            this.LexDirectiveAndExcludedTrivia(
+                                afterFirstToken,
+                                isTrailing || !onlyWhitespaceOnLine,
+                                ref triviaList
+                            );
                             break;
                         }
                         else
@@ -1973,7 +2255,7 @@ LoopExit:
                     // Note: we specifically do not look for the >>>>>>> pattern as the start of
                     // a conflict marker trivia.  That's because *technically* (albeit unlikely)
                     // >>>>>>> could be the end of a very generic construct.  So, instead, we only
-                    // recognize >>>>>>> as we are scanning the trivia after a ======= marker 
+                    // recognize >>>>>>> as we are scanning the trivia after a ======= marker
                     // (which can never be part of legal code).
                     // case '>':
                     case '|':
@@ -2024,8 +2306,8 @@ LoopExit:
                         return true;
                     }
 
-                    return (position + s_conflictMarkerLength) < text.Length &&
-                        text[position + s_conflictMarkerLength] == ' ';
+                    return (position + s_conflictMarkerLength) < text.Length
+                        && text[position + s_conflictMarkerLength] == ' ';
                 }
             }
 
@@ -2036,8 +2318,11 @@ LoopExit:
         {
             this.Start();
 
-            this.AddError(TextWindow.Position, s_conflictMarkerLength,
-                ErrorCode.ERR_Merge_conflict_marker_encountered);
+            this.AddError(
+                TextWindow.Position,
+                s_conflictMarkerLength,
+                ErrorCode.ERR_Merge_conflict_marker_encountered
+            );
 
             var startCh = this.TextWindow.PeekChar();
 
@@ -2056,7 +2341,10 @@ LoopExit:
             }
         }
 
-        private SyntaxListBuilder LexConflictMarkerDisabledText(bool atSecondMiddleMarker, ref SyntaxListBuilder triviaList)
+        private SyntaxListBuilder LexConflictMarkerDisabledText(
+            bool atSecondMiddleMarker,
+            ref SyntaxListBuilder triviaList
+        )
         {
             // Consume everything from the end of the current mid-conflict marker to the start of the next
             // end-conflict marker
@@ -2089,7 +2377,10 @@ LoopExit:
 
             if (this.TextWindow.Width > 0)
             {
-                this.AddTrivia(SyntaxFactory.DisabledText(TextWindow.GetText(false)), ref triviaList);
+                this.AddTrivia(
+                    SyntaxFactory.DisabledText(TextWindow.GetText(false)),
+                    ref triviaList
+                );
             }
 
             if (hitNextMarker)
@@ -2154,7 +2445,10 @@ LoopExit:
                 char ch;
                 while (true)
                 {
-                    if ((ch = TextWindow.PeekChar()) == SlidingTextWindow.InvalidCharacter && TextWindow.IsReallyAtEnd())
+                    if (
+                        (ch = TextWindow.PeekChar()) == SlidingTextWindow.InvalidCharacter
+                        && TextWindow.IsReallyAtEnd()
+                    )
                     {
                         isTerminated = false;
                         break;
@@ -2183,8 +2477,10 @@ LoopExit:
         private void ScanToEndOfLine()
         {
             char ch;
-            while (!SyntaxFacts.IsNewLine(ch = TextWindow.PeekChar()) &&
-                (ch != SlidingTextWindow.InvalidCharacter || !TextWindow.IsReallyAtEnd()))
+            while (
+                !SyntaxFacts.IsNewLine(ch = TextWindow.PeekChar())
+                && (ch != SlidingTextWindow.InvalidCharacter || !TextWindow.IsReallyAtEnd())
+            )
             {
                 TextWindow.AdvanceChar();
             }
@@ -2201,7 +2497,9 @@ LoopExit:
             {
                 case '\r':
                     TextWindow.AdvanceChar();
-                    return TextWindow.TryAdvance('\n') ? SyntaxFactory.CarriageReturnLineFeed : SyntaxFactory.CarriageReturn;
+                    return TextWindow.TryAdvance('\n')
+                        ? SyntaxFactory.CarriageReturnLineFeed
+                        : SyntaxFactory.CarriageReturn;
                 case '\n':
                     TextWindow.AdvanceChar();
                     return SyntaxFactory.LineFeed;
@@ -2227,17 +2525,17 @@ LoopExit:
                 _createWhitespaceTriviaFunction = this.CreateWhitespaceTrivia;
             }
 
-            int hashCode = Hash.FnvOffsetBias;  // FNV base
+            int hashCode = Hash.FnvOffsetBias; // FNV base
             bool onlySpaces = true;
 
-top:
+            top:
             char ch = TextWindow.PeekChar();
 
             switch (ch)
             {
-                case '\t':       // Horizontal tab
-                case '\v':       // Vertical Tab
-                case '\f':       // Form-feed
+                case '\t': // Horizontal tab
+                case '\v': // Vertical Tab
+                case '\f': // Form-feed
                 case '\u001A':
                     onlySpaces = false;
                     goto case ' ';
@@ -2247,8 +2545,8 @@ top:
                     hashCode = Hash.CombineFNVHash(hashCode, ch);
                     goto top;
 
-                case '\r':      // Carriage Return
-                case '\n':      // Line-feed
+                case '\r': // Carriage Return
+                case '\n': // Line-feed
                     break;
 
                 default:
@@ -2275,7 +2573,8 @@ top:
                         TextWindow.LexemeRelativeStart,
                         width,
                         hashCode,
-                        _createWhitespaceTriviaFunction);
+                        _createWhitespaceTriviaFunction
+                    );
                 }
                 else
                 {
@@ -2294,11 +2593,18 @@ top:
         private void LexDirectiveAndExcludedTrivia(
             bool afterFirstToken,
             bool afterNonWhitespaceOnLine,
-            ref SyntaxListBuilder triviaList)
+            ref SyntaxListBuilder triviaList
+        )
         {
-            var directive = this.LexSingleDirective(true, true, afterFirstToken, afterNonWhitespaceOnLine, ref triviaList);
+            var directive = this.LexSingleDirective(
+                true,
+                true,
+                afterFirstToken,
+                afterNonWhitespaceOnLine,
+                ref triviaList
+            );
 
-            // also lex excluded stuff            
+            // also lex excluded stuff
             var branching = directive as BranchingDirectiveTriviaSyntax;
             if (branching != null && !branching.BranchTaken)
             {
@@ -2306,7 +2612,10 @@ top:
             }
         }
 
-        private void LexExcludedDirectivesAndTrivia(bool endIsActive, ref SyntaxListBuilder triviaList)
+        private void LexExcludedDirectivesAndTrivia(
+            bool endIsActive,
+            ref SyntaxListBuilder triviaList
+        )
         {
             while (true)
             {
@@ -2322,9 +2631,18 @@ top:
                     break;
                 }
 
-                var directive = this.LexSingleDirective(false, endIsActive, false, false, ref triviaList);
+                var directive = this.LexSingleDirective(
+                    false,
+                    endIsActive,
+                    false,
+                    false,
+                    ref triviaList
+                );
                 var branching = directive as BranchingDirectiveTriviaSyntax;
-                if (directive.Kind == SyntaxKind.EndIfDirectiveTrivia || (branching != null && branching.BranchTaken))
+                if (
+                    directive.Kind == SyntaxKind.EndIfDirectiveTrivia
+                    || (branching != null && branching.BranchTaken)
+                )
                 {
                     break;
                 }
@@ -2340,7 +2658,8 @@ top:
             bool endIsActive,
             bool afterFirstToken,
             bool afterNonWhitespaceOnLine,
-            ref SyntaxListBuilder triviaList)
+            ref SyntaxListBuilder triviaList
+        )
         {
             if (SyntaxFacts.IsWhitespace(TextWindow.PeekChar()))
             {
@@ -2354,7 +2673,12 @@ top:
             _directiveParser ??= new DirectiveParser(this);
             _directiveParser.ReInitialize(_directives);
 
-            directive = _directiveParser.ParseDirective(isActive, endIsActive, afterFirstToken, afterNonWhitespaceOnLine);
+            directive = _directiveParser.ParseDirective(
+                isActive,
+                endIsActive,
+                afterFirstToken,
+                afterNonWhitespaceOnLine
+            );
 
             this.AddTrivia(directive, ref triviaList);
             _directives = directive.ApplyDirectives(_directives);
@@ -2383,17 +2707,22 @@ top:
                         }
 
                         followedByDirective = false;
-                        return TextWindow.Width > 0 ? SyntaxFactory.DisabledText(TextWindow.GetText(false)) : null;
+                        return TextWindow.Width > 0
+                            ? SyntaxFactory.DisabledText(TextWindow.GetText(false))
+                            : null;
                     case '#':
-                        if (!_allowPreprocessorDirectives) goto default;
+                        if (!_allowPreprocessorDirectives)
+                            goto default;
                         followedByDirective = true;
                         if (lastLineStart < TextWindow.Position && !allWhitespace)
                         {
                             goto default;
                         }
 
-                        TextWindow.Reset(lastLineStart);  // reset so directive parser can consume the starting whitespace on this line
-                        return TextWindow.Width > 0 ? SyntaxFactory.DisabledText(TextWindow.GetText(false)) : null;
+                        TextWindow.Reset(lastLineStart); // reset so directive parser can consume the starting whitespace on this line
+                        return TextWindow.Width > 0
+                            ? SyntaxFactory.DisabledText(TextWindow.GetText(false))
+                            : null;
                     case '\r':
                     case '\n':
                         this.ScanEndOfLine();
@@ -2420,7 +2749,9 @@ top:
             TokenInfo info = default(TokenInfo);
             this.ScanDirectiveToken(ref info);
             var errors = this.GetErrors(leadingTriviaWidth: 0);
-            var trailing = this.LexDirectiveTrailingTrivia(info.Kind == SyntaxKind.EndOfDirectiveToken);
+            var trailing = this.LexDirectiveTrailingTrivia(
+                info.Kind == SyntaxKind.EndOfDirectiveToken
+            );
             return Create(in info, null, trailing, errors);
         }
 
@@ -2437,7 +2768,10 @@ top:
                     // don't consume EOL characters here
                     break;
                 }
-                else if (ch is SlidingTextWindow.InvalidCharacter && this.TextWindow.IsReallyAtEnd())
+                else if (
+                    ch is SlidingTextWindow.InvalidCharacter
+                    && this.TextWindow.IsReallyAtEnd()
+                )
                 {
                     // don't consume EOF characters here
                     break;
@@ -2448,13 +2782,18 @@ top:
                 this.TextWindow.AdvanceChar();
             }
 
-            var leading = builder == null
-                ? null
-                : SyntaxFactory.PreprocessingMessage(builder.ToStringAndFree());
+            var leading =
+                builder == null
+                    ? null
+                    : SyntaxFactory.PreprocessingMessage(builder.ToStringAndFree());
 
             // now try to consume the EOL if there.
             var trailing = this.LexDirectiveTrailingTrivia(includeEndOfLine: true)?.ToListNode();
-            var endOfDirective = SyntaxFactory.Token(leading, SyntaxKind.EndOfDirectiveToken, trailing);
+            var endOfDirective = SyntaxFactory.Token(
+                leading,
+                SyntaxKind.EndOfDirectiveToken,
+                trailing
+            );
 
             return endOfDirective;
         }
@@ -2577,18 +2916,18 @@ top:
                     break;
 
                 case '\\':
+                {
+                    // Could be unicode escape. Try that.
+                    character = PeekCharOrUnicodeEscape(out surrogateCharacter);
+                    isEscaped = true;
+                    if (SyntaxFacts.IsIdentifierStartCharacter(character))
                     {
-                        // Could be unicode escape. Try that.
-                        character = PeekCharOrUnicodeEscape(out surrogateCharacter);
-                        isEscaped = true;
-                        if (SyntaxFacts.IsIdentifierStartCharacter(character))
-                        {
-                            this.ScanIdentifierOrKeyword(ref info);
-                            break;
-                        }
-
-                        goto default;
+                        this.ScanIdentifierOrKeyword(ref info);
+                        break;
                     }
+
+                    goto default;
+                }
 
                 default:
                     if (!isEscaped && SyntaxFacts.IsNewLine(character))
@@ -2684,9 +3023,9 @@ top:
                     trivia = this.ScanEndOfLine();
                     break;
                 case ' ':
-                case '\t':       // Horizontal tab
-                case '\v':       // Vertical Tab
-                case '\f':       // Form-feed
+                case '\t': // Horizontal tab
+                case '\v': // Vertical Tab
+                case '\f': // Form-feed
                     trivia = this.ScanWhitespace();
                     break;
 
@@ -2712,15 +3051,20 @@ top:
             var saveMode = _mode;
 
             _xmlParser ??= new DocumentationCommentParser(this);
-            _xmlParser.ReInitialize(style == XmlDocCommentStyle.SingleLine
-                ? LexerMode.XmlDocCommentStyleSingleLine
-                : LexerMode.XmlDocCommentStyleDelimited);
+            _xmlParser.ReInitialize(
+                style == XmlDocCommentStyle.SingleLine
+                    ? LexerMode.XmlDocCommentStyleSingleLine
+                    : LexerMode.XmlDocCommentStyleDelimited
+            );
 
             var docComment = _xmlParser.ParseDocumentationComment(out var isTerminated);
 
             // We better have finished with the whole comment. There should be error
             // code in the implementation of ParseXmlDocComment that ensures this.
-            Debug.Assert(this.LocationIs(XmlDocCommentLocation.End) || TextWindow.PeekChar() == SlidingTextWindow.InvalidCharacter);
+            Debug.Assert(
+                this.LocationIs(XmlDocCommentLocation.End)
+                    || TextWindow.PeekChar() == SlidingTextWindow.InvalidCharacter
+            );
 
             _mode = saveMode;
 
@@ -2729,7 +3073,11 @@ top:
                 // The comment didn't end.  Report an error at the start point.
                 // NOTE: report this error even if the DocumentationMode is less than diagnose - the comment
                 // would be malformed as a non-doc comment as well.
-                this.AddError(TextWindow.LexemeStartPosition, TextWindow.Width, ErrorCode.ERR_OpenEndedComment);
+                this.AddError(
+                    TextWindow.LexemeStartPosition,
+                    TextWindow.Width,
+                    ErrorCode.ERR_OpenEndedComment
+                );
             }
 
             return docComment;
@@ -2819,19 +3167,20 @@ top:
 
             if (TextWindow.PeekChar(1) == '!')
             {
-                if (TextWindow.PeekChar(2) == '-'
-                    && TextWindow.PeekChar(3) == '-')
+                if (TextWindow.PeekChar(2) == '-' && TextWindow.PeekChar(3) == '-')
                 {
                     TextWindow.AdvanceChar(4);
                     info.Kind = SyntaxKind.XmlCommentStartToken;
                 }
-                else if (TextWindow.PeekChar(2) == '['
+                else if (
+                    TextWindow.PeekChar(2) == '['
                     && TextWindow.PeekChar(3) == 'C'
                     && TextWindow.PeekChar(4) == 'D'
                     && TextWindow.PeekChar(5) == 'A'
                     && TextWindow.PeekChar(6) == 'T'
                     && TextWindow.PeekChar(7) == 'A'
-                    && TextWindow.PeekChar(8) == '[')
+                    && TextWindow.PeekChar(8) == '['
+                )
                 {
                     TextWindow.AdvanceChar(9);
                     info.Kind = SyntaxKind.XmlCDataStartToken;
@@ -2937,7 +3286,10 @@ top:
                         // disallow overflow
                         if (charValue <= 0x7FFFFFF)
                         {
-                            charValue = (charValue << 3) + (charValue << 1) + (uint)SyntaxFacts.DecValue(ch);
+                            charValue =
+                                (charValue << 3)
+                                + (charValue << 1)
+                                + (uint)SyntaxFacts.DecValue(ch);
                         }
                     }
                 }
@@ -2950,7 +3302,10 @@ top:
                 if (MatchesProductionForXmlChar(charValue))
                 {
                     char lowSurrogate;
-                    char highSurrogate = SlidingTextWindow.GetCharsFromUtf32(charValue, out lowSurrogate);
+                    char highSurrogate = SlidingTextWindow.GetCharsFromUtf32(
+                        charValue,
+                        out lowSurrogate
+                    );
 
                     _builder.Append(highSurrogate);
                     if (lowSurrogate != SlidingTextWindow.InvalidCharacter)
@@ -3020,19 +3375,22 @@ top:
         {
             // Char ::= #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF] /* any Unicode character, excluding the surrogate blocks, FFFE, and FFFF. */
 
-            return
-                charValue == 0x9 ||
-                charValue == 0xA ||
-                charValue == 0xD ||
-                (charValue >= 0x20 && charValue <= 0xD7FF) ||
-                (charValue >= 0xE000 && charValue <= 0xFFFD) ||
-                (charValue >= 0x10000 && charValue <= 0x10FFFF);
+            return charValue == 0x9
+                || charValue == 0xA
+                || charValue == 0xD
+                || (charValue >= 0x20 && charValue <= 0xD7FF)
+                || (charValue >= 0xE000 && charValue <= 0xFFFD)
+                || (charValue >= 0x10000 && charValue <= 0x10FFFF);
         }
 
         private void ScanXmlText(ref TokenInfo info)
         {
             // Collect "]]>" strings into their own XmlText.
-            if (TextWindow.PeekChar() == ']' && TextWindow.PeekChar(1) == ']' && TextWindow.PeekChar(2) == '>')
+            if (
+                TextWindow.PeekChar() == ']'
+                && TextWindow.PeekChar(1) == ']'
+                && TextWindow.PeekChar(2) == '>'
+            )
             {
                 TextWindow.AdvanceChar(3);
                 info.StringValue = info.Text = TextWindow.GetText(false);
@@ -3061,7 +3419,10 @@ top:
                         return;
 
                     case '*':
-                        if (this.StyleIs(XmlDocCommentStyle.Delimited) && TextWindow.PeekChar(1) == '/')
+                        if (
+                            this.StyleIs(XmlDocCommentStyle.Delimited)
+                            && TextWindow.PeekChar(1) == '/'
+                        )
                         {
                             // we're at the end of the comment, but don't lex it yet.
                             info.StringValue = info.Text = TextWindow.GetText(false);
@@ -3106,10 +3467,17 @@ top:
             var errors = this.GetErrors(GetFullWidth(leading));
 
             // PERF: De-dupe common XML element tags
-            if (errors == null && tagInfo.ContextualKind == SyntaxKind.None && tagInfo.Kind == SyntaxKind.IdentifierToken)
+            if (
+                errors == null
+                && tagInfo.ContextualKind == SyntaxKind.None
+                && tagInfo.Kind == SyntaxKind.IdentifierToken
+            )
             {
                 RoslynDebug.AssertNotNull(tagInfo.Text);
-                SyntaxToken? token = DocumentationCommentXmlTokens.LookupToken(tagInfo.Text, leading);
+                SyntaxToken? token = DocumentationCommentXmlTokens.LookupToken(
+                    tagInfo.Text,
+                    leading
+                );
                 if (token != null)
                 {
                     return token;
@@ -3191,7 +3559,10 @@ top:
                     if (this.StyleIs(XmlDocCommentStyle.Delimited) && TextWindow.PeekChar(1) == '/')
                     {
                         // Assert? We should have gotten this in the leading trivia.
-                        Debug.Assert(false, "Should have picked up leading indentationTrivia, but didn't.");
+                        Debug.Assert(
+                            false,
+                            "Should have picked up leading indentationTrivia, but didn't."
+                        );
                         break;
                     }
 
@@ -3207,7 +3578,10 @@ top:
                     else if (SyntaxFacts.IsWhitespace(ch) || SyntaxFacts.IsNewLine(ch))
                     {
                         // whitespace! needed to do a better job with trivia
-                        Debug.Assert(false, "Should have picked up leading indentationTrivia, but didn't.");
+                        Debug.Assert(
+                            false,
+                            "Should have picked up leading indentationTrivia, but didn't."
+                        );
                     }
                     else
                     {
@@ -3409,7 +3783,10 @@ top:
                         return;
 
                     case '*':
-                        if (this.StyleIs(XmlDocCommentStyle.Delimited) && TextWindow.PeekChar(1) == '/')
+                        if (
+                            this.StyleIs(XmlDocCommentStyle.Delimited)
+                            && TextWindow.PeekChar(1) == '/'
+                        )
                         {
                             // we're at the end of the comment, but don't lex it yet.
                             info.StringValue = info.Text = TextWindow.GetText(false);
@@ -3486,7 +3863,7 @@ top:
         }
 
         /// <summary>
-        /// Lexer entry point for LexerMode.XmlCrefQuote, LexerMode.XmlCrefDoubleQuote, 
+        /// Lexer entry point for LexerMode.XmlCrefQuote, LexerMode.XmlCrefDoubleQuote,
         /// LexerMode.XmlNameQuote, and LexerMode.XmlNameDoubleQuote.
         /// </summary>
         private SyntaxToken LexXmlCrefOrNameToken()
@@ -3532,7 +3909,10 @@ top:
             switch (consumedChar)
             {
                 case '"':
-                    if (this.ModeIs(LexerMode.XmlCrefDoubleQuote) || this.ModeIs(LexerMode.XmlNameDoubleQuote))
+                    if (
+                        this.ModeIs(LexerMode.XmlCrefDoubleQuote)
+                        || this.ModeIs(LexerMode.XmlNameDoubleQuote)
+                    )
                     {
                         info.Kind = SyntaxKind.DoubleQuoteToken;
                         return true;
@@ -3599,7 +3979,10 @@ top:
                     break;
             }
 
-            Debug.Assert(TextWindow.Position > beforeConsumed, "First character or entity has been consumed.");
+            Debug.Assert(
+                TextWindow.Position > beforeConsumed,
+                "First character or entity has been consumed."
+            );
 
             // NOTE: None of these cases will be matched if the surrogate is non-zero (UTF-16 rules)
             // so we don't need to check for that explicitly.
@@ -3677,34 +4060,49 @@ top:
 
                 //// Multi-Character Punctuation/Operators ////
                 case ':':
-                    if (AdvanceIfMatches(':')) info.Kind = SyntaxKind.ColonColonToken;
-                    else info.Kind = SyntaxKind.ColonToken;
+                    if (AdvanceIfMatches(':'))
+                        info.Kind = SyntaxKind.ColonColonToken;
+                    else
+                        info.Kind = SyntaxKind.ColonToken;
                     break;
                 case '=':
-                    if (AdvanceIfMatches('=')) info.Kind = SyntaxKind.EqualsEqualsToken;
-                    else info.Kind = SyntaxKind.EqualsToken;
+                    if (AdvanceIfMatches('='))
+                        info.Kind = SyntaxKind.EqualsEqualsToken;
+                    else
+                        info.Kind = SyntaxKind.EqualsToken;
                     break;
                 case '!':
-                    if (AdvanceIfMatches('=')) info.Kind = SyntaxKind.ExclamationEqualsToken;
-                    else info.Kind = SyntaxKind.ExclamationToken;
+                    if (AdvanceIfMatches('='))
+                        info.Kind = SyntaxKind.ExclamationEqualsToken;
+                    else
+                        info.Kind = SyntaxKind.ExclamationToken;
                     break;
                 case '>':
-                    if (AdvanceIfMatches('=')) info.Kind = SyntaxKind.GreaterThanEqualsToken;
+                    if (AdvanceIfMatches('='))
+                        info.Kind = SyntaxKind.GreaterThanEqualsToken;
                     // GreaterThanGreaterThanToken/GreaterThanGreaterThanGreaterThanToken is synthesized in the parser since it is ambiguous (with closing nested type parameter lists)
-                    else info.Kind = SyntaxKind.GreaterThanToken;
+                    else
+                        info.Kind = SyntaxKind.GreaterThanToken;
                     break;
                 case '<':
-                    if (AdvanceIfMatches('=')) info.Kind = SyntaxKind.LessThanEqualsToken;
-                    else if (AdvanceIfMatches('<')) info.Kind = SyntaxKind.LessThanLessThanToken;
-                    else info.Kind = SyntaxKind.LessThanToken;
+                    if (AdvanceIfMatches('='))
+                        info.Kind = SyntaxKind.LessThanEqualsToken;
+                    else if (AdvanceIfMatches('<'))
+                        info.Kind = SyntaxKind.LessThanLessThanToken;
+                    else
+                        info.Kind = SyntaxKind.LessThanToken;
                     break;
                 case '+':
-                    if (AdvanceIfMatches('+')) info.Kind = SyntaxKind.PlusPlusToken;
-                    else info.Kind = SyntaxKind.PlusToken;
+                    if (AdvanceIfMatches('+'))
+                        info.Kind = SyntaxKind.PlusPlusToken;
+                    else
+                        info.Kind = SyntaxKind.PlusToken;
                     break;
                 case '-':
-                    if (AdvanceIfMatches('-')) info.Kind = SyntaxKind.MinusMinusToken;
-                    else info.Kind = SyntaxKind.MinusToken;
+                    if (AdvanceIfMatches('-'))
+                        info.Kind = SyntaxKind.MinusMinusToken;
+                    else
+                        info.Kind = SyntaxKind.MinusToken;
                     break;
             }
 
@@ -3736,7 +4134,12 @@ top:
                     // check to see if it is an actual keyword
                     // NOTE: name attribute values don't respect keywords - everything is an identifier.
                     SyntaxKind keywordKind;
-                    if (!InXmlNameAttributeValue && !info.IsVerbatim && !info.HasIdentifierEscapeSequence && _cache.TryGetKeywordKind(info.StringValue, out keywordKind))
+                    if (
+                        !InXmlNameAttributeValue
+                        && !info.IsVerbatim
+                        && !info.HasIdentifierEscapeSequence
+                        && _cache.TryGetKeywordKind(info.StringValue, out keywordKind)
+                    )
                     {
                         if (SyntaxFacts.IsContextualKeyword(keywordKind))
                         {
@@ -3812,9 +4215,7 @@ top:
         private bool AdvanceIfMatches(char ch)
         {
             char peekCh = TextWindow.PeekChar();
-            if ((peekCh == ch) ||
-                (peekCh == '{' && ch == '<') ||
-                (peekCh == '}' && ch == '>'))
+            if ((peekCh == ch) || (peekCh == '{' && ch == '<') || (peekCh == '}' && ch == '>'))
             {
                 TextWindow.AdvanceChar();
                 return true;
@@ -3826,8 +4227,11 @@ top:
 
                 char nextChar;
                 char nextSurrogate;
-                if (TryScanXmlEntity(out nextChar, out nextSurrogate)
-                    && nextChar == ch && nextSurrogate == SlidingTextWindow.InvalidCharacter)
+                if (
+                    TryScanXmlEntity(out nextChar, out nextSurrogate)
+                    && nextChar == ch
+                    && nextSurrogate == SlidingTextWindow.InvalidCharacter
+                )
                 {
                     return true;
                 }
@@ -4000,7 +4404,10 @@ top:
                         return;
 
                     case '*':
-                        if (this.StyleIs(XmlDocCommentStyle.Delimited) && TextWindow.PeekChar(1) == '/')
+                        if (
+                            this.StyleIs(XmlDocCommentStyle.Delimited)
+                            && TextWindow.PeekChar(1) == '/'
+                        )
                         {
                             // we're at the end of the comment, but don't lex it yet.
                             info.StringValue = info.Text = TextWindow.GetText(false);
@@ -4130,7 +4537,10 @@ top:
                         return;
 
                     case '*':
-                        if (this.StyleIs(XmlDocCommentStyle.Delimited) && TextWindow.PeekChar(1) == '/')
+                        if (
+                            this.StyleIs(XmlDocCommentStyle.Delimited)
+                            && TextWindow.PeekChar(1) == '/'
+                        )
                         {
                             // we're at the end of the comment, but don't lex it yet.
                             info.StringValue = info.Text = TextWindow.GetText(false);
@@ -4254,7 +4664,10 @@ top:
                         return;
 
                     case '*':
-                        if (this.StyleIs(XmlDocCommentStyle.Delimited) && TextWindow.PeekChar(1) == '/')
+                        if (
+                            this.StyleIs(XmlDocCommentStyle.Delimited)
+                            && TextWindow.PeekChar(1) == '/'
+                        )
                         {
                             // we're at the end of the comment, but don't lex it yet.
                             info.StringValue = info.Text = TextWindow.GetText(false);
@@ -4284,25 +4697,36 @@ top:
             var start = TextWindow.Position;
             this.Start();
 
-            if (this.LocationIs(XmlDocCommentLocation.Start) && this.StyleIs(XmlDocCommentStyle.Delimited))
+            if (
+                this.LocationIs(XmlDocCommentLocation.Start)
+                && this.StyleIs(XmlDocCommentStyle.Delimited)
+            )
             {
                 // Read the /** that begins an XML doc comment. Since these are recognized only
                 // when the trailing character is not a '*', we wind up in the interior of the
                 // doc comment at the end.
 
-                if (TextWindow.PeekChar() == '/'
+                if (
+                    TextWindow.PeekChar() == '/'
                     && TextWindow.PeekChar(1) == '*'
                     && TextWindow.PeekChar(2) == '*'
-                    && TextWindow.PeekChar(3) != '*')
+                    && TextWindow.PeekChar(3) != '*'
+                )
                 {
                     TextWindow.AdvanceChar(3);
                     var text = TextWindow.GetText(true);
-                    this.AddTrivia(SyntaxFactory.DocumentationCommentExteriorTrivia(text), ref trivia);
+                    this.AddTrivia(
+                        SyntaxFactory.DocumentationCommentExteriorTrivia(text),
+                        ref trivia
+                    );
                     this.MutateLocation(XmlDocCommentLocation.Interior);
                     return;
                 }
             }
-            else if (this.LocationIs(XmlDocCommentLocation.Start) || this.LocationIs(XmlDocCommentLocation.Exterior))
+            else if (
+                this.LocationIs(XmlDocCommentLocation.Start)
+                || this.LocationIs(XmlDocCommentLocation.Exterior)
+            )
             {
                 // We're in the exterior of an XML doc comment and need to eat the beginnings of
                 // lines, for single line and delimited comments. We chew up white space until
@@ -4322,11 +4746,19 @@ top:
                             break;
 
                         case '/':
-                            if (this.StyleIs(XmlDocCommentStyle.SingleLine) && TextWindow.PeekChar(1) == '/' && TextWindow.PeekChar(2) == '/' && TextWindow.PeekChar(3) != '/')
+                            if (
+                                this.StyleIs(XmlDocCommentStyle.SingleLine)
+                                && TextWindow.PeekChar(1) == '/'
+                                && TextWindow.PeekChar(2) == '/'
+                                && TextWindow.PeekChar(3) != '/'
+                            )
                             {
                                 TextWindow.AdvanceChar(3);
                                 var text = TextWindow.GetText(true);
-                                this.AddTrivia(SyntaxFactory.DocumentationCommentExteriorTrivia(text), ref trivia);
+                                this.AddTrivia(
+                                    SyntaxFactory.DocumentationCommentExteriorTrivia(text),
+                                    ref trivia
+                                );
                                 this.MutateLocation(XmlDocCommentLocation.Interior);
                                 return;
                             }
@@ -4336,7 +4768,9 @@ top:
                         case '*':
                             if (this.StyleIs(XmlDocCommentStyle.Delimited))
                             {
-                                while (TextWindow.PeekChar() == '*' && TextWindow.PeekChar(1) != '/')
+                                while (
+                                    TextWindow.PeekChar() == '*' && TextWindow.PeekChar(1) != '/'
+                                )
                                 {
                                     TextWindow.AdvanceChar();
                                 }
@@ -4344,7 +4778,10 @@ top:
                                 var text = TextWindow.GetText(true);
                                 if (!String.IsNullOrEmpty(text))
                                 {
-                                    this.AddTrivia(SyntaxFactory.DocumentationCommentExteriorTrivia(text), ref trivia);
+                                    this.AddTrivia(
+                                        SyntaxFactory.DocumentationCommentExteriorTrivia(text),
+                                        ref trivia
+                                    );
                                 }
 
                                 // This setup ensures that on the final line of a comment, if we have
@@ -4354,7 +4791,10 @@ top:
                                 if (TextWindow.PeekChar() == '*' && TextWindow.PeekChar(1) == '/')
                                 {
                                     TextWindow.AdvanceChar(2);
-                                    this.AddTrivia(SyntaxFactory.DocumentationCommentExteriorTrivia("*/"), ref trivia);
+                                    this.AddTrivia(
+                                        SyntaxFactory.DocumentationCommentExteriorTrivia("*/"),
+                                        ref trivia
+                                    );
                                     this.MutateLocation(XmlDocCommentLocation.End);
                                 }
                                 else
@@ -4389,7 +4829,10 @@ top:
 
                                 var text = TextWindow.GetText(true);
                                 if (!String.IsNullOrEmpty(text))
-                                    this.AddTrivia(SyntaxFactory.DocumentationCommentExteriorTrivia(text), ref trivia);
+                                    this.AddTrivia(
+                                        SyntaxFactory.DocumentationCommentExteriorTrivia(text),
+                                        ref trivia
+                                    );
                                 this.MutateLocation(XmlDocCommentLocation.Interior);
                             }
 
@@ -4397,13 +4840,19 @@ top:
                     }
                 }
             }
-            else if (!this.LocationIs(XmlDocCommentLocation.End) && this.StyleIs(XmlDocCommentStyle.Delimited))
+            else if (
+                !this.LocationIs(XmlDocCommentLocation.End)
+                && this.StyleIs(XmlDocCommentStyle.Delimited)
+            )
             {
                 if (TextWindow.PeekChar() == '*' && TextWindow.PeekChar(1) == '/')
                 {
                     TextWindow.AdvanceChar(2);
                     var text = TextWindow.GetText(true);
-                    this.AddTrivia(SyntaxFactory.DocumentationCommentExteriorTrivia(text), ref trivia);
+                    this.AddTrivia(
+                        SyntaxFactory.DocumentationCommentExteriorTrivia(text),
+                        ref trivia
+                    );
                     this.MutateLocation(XmlDocCommentLocation.End);
                 }
             }
@@ -4416,8 +4865,10 @@ top:
                 this.LexXmlDocCommentLeadingTrivia(ref trivia);
 
                 char ch = TextWindow.PeekChar();
-                if (this.LocationIs(XmlDocCommentLocation.Interior)
-                    && (SyntaxFacts.IsWhitespace(ch) || SyntaxFacts.IsNewLine(ch)))
+                if (
+                    this.LocationIs(XmlDocCommentLocation.Interior)
+                    && (SyntaxFacts.IsWhitespace(ch) || SyntaxFacts.IsNewLine(ch))
+                )
                 {
                     this.LexXmlWhitespaceAndNewLineTrivia(ref trivia);
                 }
@@ -4441,9 +4892,9 @@ top:
                 switch (ch)
                 {
                     case ' ':
-                    case '\t':       // Horizontal tab
-                    case '\v':       // Vertical Tab
-                    case '\f':       // Form-feed
+                    case '\t': // Horizontal tab
+                    case '\v': // Vertical Tab
+                    case '\f': // Form-feed
                         this.AddTrivia(this.ScanWhitespace(), ref trivia);
                         break;
 
@@ -4456,7 +4907,10 @@ top:
                         return;
 
                     case '*':
-                        if (this.StyleIs(XmlDocCommentStyle.Delimited) && TextWindow.PeekChar(1) == '/')
+                        if (
+                            this.StyleIs(XmlDocCommentStyle.Delimited)
+                            && TextWindow.PeekChar(1) == '/'
+                        )
                         {
                             // we're at the end of the comment, but don't add as trivia here.
                             return;
@@ -4513,22 +4967,36 @@ top:
 
             // if we're peeking, then we don't want to change the position
             SyntaxDiagnosticInfo? info;
-            var ch = ScanUnicodeEscape(peek: true, surrogateCharacter: out surrogateCharacter, info: out info);
+            var ch = ScanUnicodeEscape(
+                peek: true,
+                surrogateCharacter: out surrogateCharacter,
+                info: out info
+            );
             Debug.Assert(info == null, "Never produce a diagnostic while peeking.");
             TextWindow.Reset(position);
             return ch;
         }
 
-        private char NextCharOrUnicodeEscape(out char surrogateCharacter, out SyntaxDiagnosticInfo? info)
+        private char NextCharOrUnicodeEscape(
+            out char surrogateCharacter,
+            out SyntaxDiagnosticInfo? info
+        )
         {
             var ch = TextWindow.PeekChar();
-            Debug.Assert(ch != SlidingTextWindow.InvalidCharacter, "Precondition established by all callers; required for correctness of AdvanceChar() call.");
+            Debug.Assert(
+                ch != SlidingTextWindow.InvalidCharacter,
+                "Precondition established by all callers; required for correctness of AdvanceChar() call."
+            );
             if (ch == '\\')
             {
                 var ch2 = TextWindow.PeekChar(1);
                 if (ch2 == 'U' || ch2 == 'u')
                 {
-                    return ScanUnicodeEscape(peek: false, surrogateCharacter: out surrogateCharacter, info: out info);
+                    return ScanUnicodeEscape(
+                        peek: false,
+                        surrogateCharacter: out surrogateCharacter,
+                        info: out info
+                    );
                 }
             }
 
@@ -4540,10 +5008,18 @@ top:
 
         private char NextUnicodeEscape(out char surrogateCharacter, out SyntaxDiagnosticInfo? info)
         {
-            return ScanUnicodeEscape(peek: false, surrogateCharacter: out surrogateCharacter, info: out info);
+            return ScanUnicodeEscape(
+                peek: false,
+                surrogateCharacter: out surrogateCharacter,
+                info: out info
+            );
         }
 
-        private char ScanUnicodeEscape(bool peek, out char surrogateCharacter, out SyntaxDiagnosticInfo? info)
+        private char ScanUnicodeEscape(
+            bool peek,
+            out char surrogateCharacter,
+            out SyntaxDiagnosticInfo? info
+        )
         {
             surrogateCharacter = SlidingTextWindow.InvalidCharacter;
             info = null;
@@ -4697,56 +5173,59 @@ top:
                     }
                     break;
                 case '#':
+                {
+                    TextWindow.AdvanceChar(); //#
+
+                    uint uintChar = 0;
+
+                    if (TextWindow.AdvanceIfMatches("x"))
                     {
-                        TextWindow.AdvanceChar(); //#
-
-                        uint uintChar = 0;
-
-                        if (TextWindow.AdvanceIfMatches("x"))
+                        char digit;
+                        while (SyntaxFacts.IsHexDigit(digit = TextWindow.PeekChar()))
                         {
-                            char digit;
-                            while (SyntaxFacts.IsHexDigit(digit = TextWindow.PeekChar()))
-                            {
-                                TextWindow.AdvanceChar();
+                            TextWindow.AdvanceChar();
 
-                                // disallow overflow
-                                if (uintChar <= 0x7FFFFFF)
-                                {
-                                    uintChar = (uintChar << 4) + (uint)SyntaxFacts.HexValue(digit);
-                                }
-                                else
-                                {
-                                    return false;
-                                }
+                            // disallow overflow
+                            if (uintChar <= 0x7FFFFFF)
+                            {
+                                uintChar = (uintChar << 4) + (uint)SyntaxFacts.HexValue(digit);
+                            }
+                            else
+                            {
+                                return false;
                             }
                         }
-                        else
-                        {
-                            char digit;
-                            while (SyntaxFacts.IsDecDigit(digit = TextWindow.PeekChar()))
-                            {
-                                TextWindow.AdvanceChar();
-
-                                // disallow overflow
-                                if (uintChar <= 0x7FFFFFF)
-                                {
-                                    uintChar = (uintChar << 3) + (uintChar << 1) + (uint)SyntaxFacts.DecValue(digit);
-                                }
-                                else
-                                {
-                                    return false;
-                                }
-                            }
-                        }
-
-                        if (TextWindow.AdvanceIfMatches(";"))
-                        {
-                            ch = GetCharsFromUtf32(uintChar, out surrogate);
-                            return true;
-                        }
-
-                        break;
                     }
+                    else
+                    {
+                        char digit;
+                        while (SyntaxFacts.IsDecDigit(digit = TextWindow.PeekChar()))
+                        {
+                            TextWindow.AdvanceChar();
+
+                            // disallow overflow
+                            if (uintChar <= 0x7FFFFFF)
+                            {
+                                uintChar =
+                                    (uintChar << 3)
+                                    + (uintChar << 1)
+                                    + (uint)SyntaxFacts.DecValue(digit);
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                    }
+
+                    if (TextWindow.AdvanceIfMatches(";"))
+                    {
+                        ch = GetCharsFromUtf32(uintChar, out surrogate);
+                        return true;
+                    }
+
+                    break;
+                }
             }
 
             return false;
@@ -4754,9 +5233,11 @@ top:
 
         private SyntaxDiagnosticInfo CreateIllegalEscapeDiagnostic(int start)
         {
-            return new SyntaxDiagnosticInfo(start - TextWindow.LexemeStartPosition,
+            return new SyntaxDiagnosticInfo(
+                start - TextWindow.LexemeStartPosition,
                 TextWindow.Position - start,
-                ErrorCode.ERR_IllegalEscape);
+                ErrorCode.ERR_IllegalEscape
+            );
         }
 
         internal static char GetCharsFromUtf32(uint codepoint, out char lowSurrogate)

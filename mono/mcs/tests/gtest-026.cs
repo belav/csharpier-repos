@@ -2,17 +2,16 @@
 
 class Foo<T>
 {
-	public T Hello;
+    public T Hello;
 
-	public Foo ()
-	{ }
+    public Foo() { }
 }
 
 class X
 {
-	public static void Main ()
-	{
-		Foo<int> foo = new Foo<int> ();
-		foo.Hello = 9;
-	}
+    public static void Main()
+    {
+        Foo<int> foo = new Foo<int>();
+        foo.Hello = 9;
+    }
 }

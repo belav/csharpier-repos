@@ -3,14 +3,15 @@
 //------------------------------------------------------------
 namespace System.ServiceModel
 {
+    using System.ComponentModel;
     using System.Runtime;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Security;
-    using System.ComponentModel;
 
     public sealed class BasicHttpMessageSecurity
     {
-        internal const BasicHttpMessageCredentialType DefaultClientCredentialType = BasicHttpMessageCredentialType.UserName;
+        internal const BasicHttpMessageCredentialType DefaultClientCredentialType =
+            BasicHttpMessageCredentialType.UserName;
 
         BasicHttpMessageCredentialType clientCredentialType;
         SecurityAlgorithmSuite algorithmSuite;
@@ -28,7 +29,9 @@ namespace System.ServiceModel
             {
                 if (!BasicHttpMessageCredentialTypeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.clientCredentialType = value;
             }
@@ -54,11 +57,15 @@ namespace System.ServiceModel
 
             if (isSecureTransportMode)
             {
-                MessageSecurityVersion version = MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
+                MessageSecurityVersion version =
+                    MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10;
                 switch (this.clientCredentialType)
                 {
                     case BasicHttpMessageCredentialType.Certificate:
-                        result = SecurityBindingElement.CreateCertificateOverTransportBindingElement(version);
+                        result =
+                            SecurityBindingElement.CreateCertificateOverTransportBindingElement(
+                                version
+                            );
                         break;
                     case BasicHttpMessageCredentialType.UserName:
                         result = SecurityBindingElement.CreateUserNameOverTransportBindingElement();
@@ -66,16 +73,25 @@ namespace System.ServiceModel
                         break;
                     default:
                         Fx.Assert("Unsupported basic http message credential type");
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new NotSupportedException()
+                        );
                 }
             }
             else
             {
                 if (this.clientCredentialType != BasicHttpMessageCredentialType.Certificate)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.BasicHttpMessageSecurityRequiresCertificate)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(SR.BasicHttpMessageSecurityRequiresCertificate)
+                        )
+                    );
                 }
-                result = SecurityBindingElement.CreateMutualCertificateBindingElement(MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10, true);
+                result = SecurityBindingElement.CreateMutualCertificateBindingElement(
+                    MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10,
+                    true
+                );
             }
 
             result.DefaultAlgorithmSuite = this.AlgorithmSuite;
@@ -87,7 +103,11 @@ namespace System.ServiceModel
         }
 
         // This method reverses the CreateMessageSecurity(bool) method
-        internal static bool TryCreate(SecurityBindingElement sbe, out BasicHttpMessageSecurity security, out bool isSecureTransportMode)
+        internal static bool TryCreate(
+            SecurityBindingElement sbe,
+            out BasicHttpMessageSecurity security,
+            out bool isSecureTransportMode
+        )
         {
             Fx.Assert(null != sbe, string.Empty);
 
@@ -100,7 +120,10 @@ namespace System.ServiceModel
                 return false;
             if (sbe.SecurityHeaderLayout != SecurityHeaderLayout.Lax)
                 return false;
-            if (sbe.MessageSecurityVersion != MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10)
+            if (
+                sbe.MessageSecurityVersion
+                != MessageSecurityVersion.WSSecurity10WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11BasicSecurityProfile10
+            )
                 return false;
 
             BasicHttpMessageCredentialType credentialType;

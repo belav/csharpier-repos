@@ -27,6 +27,6 @@ namespace HtmlAgilityPack
         /// <summary>
         /// The node can overlap.
         /// </summary>
-        CanOverlap = 8
+        CanOverlap = 8,
     }
 }

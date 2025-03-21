@@ -30,10 +30,12 @@ namespace System.Collections.Tests
             return stack;
         }
 
-        protected override Type IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType => typeof(ArgumentOutOfRangeException);
+        protected override Type IGenericSharedAPI_CopyTo_IndexLargerThanArrayCount_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
 
         protected override bool Enumerator_Empty_UsesSingletonInstance => true;
-        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException => false;
+        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException =>
+            false;
 
         #endregion
 
@@ -48,11 +50,24 @@ namespace System.Collections.Tests
         }
 
         protected override int Count(IEnumerable<T> enumerable) => ((Stack<T>)enumerable).Count;
-        protected override void Add(IEnumerable<T> enumerable, T value) => ((Stack<T>)enumerable).Push(value);
+
+        protected override void Add(IEnumerable<T> enumerable, T value) =>
+            ((Stack<T>)enumerable).Push(value);
+
         protected override void Clear(IEnumerable<T> enumerable) => ((Stack<T>)enumerable).Clear();
-        protected override bool Contains(IEnumerable<T> enumerable, T value) => ((Stack<T>)enumerable).Contains(value);
-        protected override void CopyTo(IEnumerable<T> enumerable, T[] array, int index) => ((Stack<T>)enumerable).CopyTo(array, index);
-        protected override bool Remove(IEnumerable<T> enumerable) { ((Stack<T>)enumerable).Pop(); return true; }
+
+        protected override bool Contains(IEnumerable<T> enumerable, T value) =>
+            ((Stack<T>)enumerable).Contains(value);
+
+        protected override void CopyTo(IEnumerable<T> enumerable, T[] array, int index) =>
+            ((Stack<T>)enumerable).CopyTo(array, index);
+
+        protected override bool Remove(IEnumerable<T> enumerable)
+        {
+            ((Stack<T>)enumerable).Pop();
+            return true;
+        }
+
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
 
         #endregion
@@ -74,11 +89,23 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(EnumerableTestData))]
-        public void Stack_Generic_Constructor_IEnumerable(EnumerableType enumerableType, int setLength, int enumerableLength, int numberOfMatchingElements, int numberOfDuplicateElements)
+        public void Stack_Generic_Constructor_IEnumerable(
+            EnumerableType enumerableType,
+            int setLength,
+            int enumerableLength,
+            int numberOfMatchingElements,
+            int numberOfDuplicateElements
+        )
         {
             _ = setLength;
             _ = numberOfMatchingElements;
-            IEnumerable<T> enumerable = CreateEnumerable(enumerableType, null, enumerableLength, 0, numberOfDuplicateElements);
+            IEnumerable<T> enumerable = CreateEnumerable(
+                enumerableType,
+                null,
+                enumerableLength,
+                0,
+                numberOfDuplicateElements
+            );
             Stack<T> stack = new Stack<T>(enumerable);
             Assert.Equal(enumerable.ToArray().Reverse(), stack.ToArray());
         }
@@ -104,8 +131,14 @@ namespace System.Collections.Tests
         [Fact]
         public void Stack_Generic_Constructor_int_Negative_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => new Stack<T>(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => new Stack<T>(int.MinValue));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new Stack<T>(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => new Stack<T>(int.MinValue)
+            );
         }
 
         [Theory]
@@ -183,7 +216,8 @@ namespace System.Collections.Tests
         {
             Stack<T> stack = GenericStackFactory(size);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>(() => stack.TrimExcess(newCapacity));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(() => stack.TrimExcess(newCapacity)
+            );
         }
 
         [Fact]
@@ -333,7 +367,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void Stack_Generic_EnsureCapacity_RequestingLargerCapacity_DoesNotInvalidateEnumeration(int count)
+        public void Stack_Generic_EnsureCapacity_RequestingLargerCapacity_DoesNotInvalidateEnumeration(
+            int count
+        )
         {
             Stack<T> stack = GenericStackFactory(count);
             IEnumerator<T> copiedEnumerator = new List<T>(stack).GetEnumerator();
@@ -355,7 +391,10 @@ namespace System.Collections.Tests
         public void Stack_Generic_EnsureCapacity_NegativeCapacityRequested_Throws()
         {
             var stack = GenericStackFactory();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => stack.EnsureCapacity(-1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => stack.EnsureCapacity(-1)
+            );
         }
 
         public static IEnumerable<object[]> Stack_Generic_EnsureCapacity_LargeCapacityRequested_Throws_MemberData()
@@ -367,15 +406,21 @@ namespace System.Collections.Tests
         [Theory]
         [MemberData(nameof(Stack_Generic_EnsureCapacity_LargeCapacityRequested_Throws_MemberData))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/51411", TestRuntimes.Mono)]
-        public void Stack_Generic_EnsureCapacity_LargeCapacityRequested_Throws(int requestedCapacity)
+        public void Stack_Generic_EnsureCapacity_LargeCapacityRequested_Throws(
+            int requestedCapacity
+        )
         {
             var stack = GenericStackFactory();
-            AssertExtensions.Throws<OutOfMemoryException>(() => stack.EnsureCapacity(requestedCapacity));
+            AssertExtensions.Throws<OutOfMemoryException>(() =>
+                stack.EnsureCapacity(requestedCapacity)
+            );
         }
 
         [Theory]
         [InlineData(5)]
-        public void Stack_Generic_EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCurrent_CapacityUnchanged(int currentCapacity)
+        public void Stack_Generic_EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCurrent_CapacityUnchanged(
+            int currentCapacity
+        )
         {
             var stack = new Stack<T>(currentCapacity);
 
@@ -387,7 +432,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void Stack_Generic_EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCount_CapacityUnchanged(int count)
+        public void Stack_Generic_EnsureCapacity_RequestedCapacitySmallerThanOrEqualToCount_CapacityUnchanged(
+            int count
+        )
         {
             Stack<T> stack = GenericStackFactory(count);
 
@@ -412,7 +459,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void Stack_Generic_EnsureCapacity_RequestingLargerCapacity_DoesNotImpactStackContent(int count)
+        public void Stack_Generic_EnsureCapacity_RequestingLargerCapacity_DoesNotImpactStackContent(
+            int count
+        )
         {
             Stack<T> stack = GenericStackFactory(count);
             var copiedList = new List<T>(stack);

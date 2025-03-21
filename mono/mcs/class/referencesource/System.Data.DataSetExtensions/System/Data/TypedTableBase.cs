@@ -7,25 +7,27 @@
 //------------------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.Serialization;
 
-namespace System.Data {
-
+namespace System.Data
+{
     /// <summary>
     /// This is the generic base class for TypedDataSet
     /// </summary>
     [Serializable]
-    public abstract class TypedTableBase<T> : DataTable, IEnumerable<T> where T : DataRow {
-
+    public abstract class TypedTableBase<T> : DataTable, IEnumerable<T>
+        where T : DataRow
+    {
         /// <summary>
         ///   Default constructor for generic TypedTableBase.
         ///   Will be called by generated Typed DataSet classes and is not for public use.
         /// </summary>
-        protected TypedTableBase() : base() {}
+        protected TypedTableBase()
+            : base() { }
 
         /// <summary>
         ///   Constructor for the generic TypedTableBase with takes SerializationInfo and StreamingContext.
@@ -38,8 +40,11 @@ namespace System.Data {
         /// <param name="context">
         ///   The streaming context for the object being deserializad.
         /// </param>
-        protected TypedTableBase(System.Runtime.Serialization.SerializationInfo info, System.Runtime.Serialization.StreamingContext context)
-            : base(info, context) {}
+        protected TypedTableBase(
+            System.Runtime.Serialization.SerializationInfo info,
+            System.Runtime.Serialization.StreamingContext context
+        )
+            : base(info, context) { }
 
         /// <summary>
         ///   This property returns a enumerator of T for the TypedTable.  Note, this could
@@ -48,14 +53,15 @@ namespace System.Data {
         /// <returns>
         ///   IEnumerable of T.
         /// </returns>
-        public IEnumerator<T> GetEnumerator() {
+        public IEnumerator<T> GetEnumerator()
+        {
             return this.Rows.Cast<T>().GetEnumerator();
         }
 
-        IEnumerator IEnumerable.GetEnumerator() {
+        IEnumerator IEnumerable.GetEnumerator()
+        {
             return GetEnumerator();
         }
-
 
         /// <summary>
         /// Casts an EnumerableDataTable_TSource into EnumerableDataTable_TResult
@@ -65,6 +71,5 @@ namespace System.Data {
             EnumerableRowCollection<T> erc = new EnumerableRowCollection<T>((DataTable)this);
             return erc.Cast<TResult>();
         }
-
     }
 }

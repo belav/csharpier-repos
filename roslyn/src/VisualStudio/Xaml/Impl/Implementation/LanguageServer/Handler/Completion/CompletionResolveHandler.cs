@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Editor.Xaml;
 using Microsoft.CodeAnalysis.Host.Mef;
-using Microsoft.CodeAnalysis.Options;
-using Microsoft.CodeAnalysis.LanguageService;
 using Microsoft.CodeAnalysis.LanguageServer;
 using Microsoft.CodeAnalysis.LanguageServer.Handler;
+using Microsoft.CodeAnalysis.LanguageService;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.VisualStudio.LanguageServer.Protocol;
 using Microsoft.VisualStudio.LanguageServices.Xaml.Features.Completion;
 using Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageServer.Extensions;
@@ -29,7 +29,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
     /// </summary>
     [ExportStatelessXamlLspService(typeof(CompletionResolveHandler)), Shared]
     [Method(LSP.Methods.TextDocumentCompletionResolveName)]
-    internal class CompletionResolveHandler : ILspServiceRequestHandler<LSP.CompletionItem, LSP.CompletionItem>
+    internal class CompletionResolveHandler
+        : ILspServiceRequestHandler<LSP.CompletionItem, LSP.CompletionItem>
     {
         private readonly IGlobalOptionService _globalOptions;
 
@@ -43,7 +44,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
             _globalOptions = globalOptions;
         }
 
-        public async Task<LSP.CompletionItem> HandleRequestAsync(LSP.CompletionItem completionItem, RequestContext context, CancellationToken cancellationToken)
+        public async Task<LSP.CompletionItem> HandleRequestAsync(
+            LSP.CompletionItem completionItem,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(context.Solution);
 
@@ -63,25 +68,49 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.LanguageServer.Handler
                 return completionItem;
             }
 
-            var documentId = DocumentId.CreateFromSerialized(ProjectId.CreateFromSerialized(data.ProjectGuid), data.DocumentGuid);
-            var document = context.Solution.GetDocument(documentId) ?? context.Solution.GetAdditionalDocument(documentId);
+            var documentId = DocumentId.CreateFromSerialized(
+                ProjectId.CreateFromSerialized(data.ProjectGuid),
+                data.DocumentGuid
+            );
+            var document =
+                context.Solution.GetDocument(documentId)
+                ?? context.Solution.GetAdditionalDocument(documentId);
             if (document == null)
             {
                 return completionItem;
             }
 
-            var offset = await document.GetPositionFromLinePositionAsync(ProtocolConversions.PositionToLinePosition(data.Position), cancellationToken).ConfigureAwait(false);
-            var completionService = document.Project.Services.GetRequiredService<IXamlCompletionService>();
-            var symbol = await completionService.GetSymbolAsync(new XamlCompletionContext(document, offset), completionItem.Label, cancellationToken: cancellationToken).ConfigureAwait(false);
+            var offset = await document
+                .GetPositionFromLinePositionAsync(
+                    ProtocolConversions.PositionToLinePosition(data.Position),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var completionService =
+                document.Project.Services.GetRequiredService<IXamlCompletionService>();
+            var symbol = await completionService
+                .GetSymbolAsync(
+                    new XamlCompletionContext(document, offset),
+                    completionItem.Label,
+                    cancellationToken: cancellationToken
+                )
+                .ConfigureAwait(false);
             if (symbol == null)
             {
                 return completionItem;
             }
 
             var options = _globalOptions.GetSymbolDescriptionOptions(document.Project.Language);
-            var description = await symbol.GetDescriptionAsync(document, options, cancellationToken).ConfigureAwait(false);
+            var description = await symbol
+                .GetDescriptionAsync(document, options, cancellationToken)
+                .ConfigureAwait(false);
 
-            vsCompletionItem.Description = new ClassifiedTextElement(description.Select(tp => new ClassifiedTextRun(tp.Tag.ToClassificationTypeName(), tp.Text)));
+            vsCompletionItem.Description = new ClassifiedTextElement(
+                description.Select(tp => new ClassifiedTextRun(
+                    tp.Tag.ToClassificationTypeName(),
+                    tp.Text
+                ))
+            );
             return vsCompletionItem;
         }
     }

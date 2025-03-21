@@ -216,7 +216,7 @@ public abstract class ViewComponent
         {
             ViewEngine = ViewEngine,
             ViewName = viewName,
-            ViewData = viewData
+            ViewData = viewData,
         };
     }
 }

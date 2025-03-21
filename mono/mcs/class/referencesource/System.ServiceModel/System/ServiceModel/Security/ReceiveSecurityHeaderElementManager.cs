@@ -4,6 +4,7 @@
 
 namespace System.ServiceModel.Security
 {
+    using System.Collections.Generic;
     using System.IdentityModel.Tokens;
     using System.Runtime;
     using System.ServiceModel;
@@ -12,7 +13,6 @@ namespace System.ServiceModel.Security
     using ISignatureReaderProvider = System.IdentityModel.ISignatureReaderProvider;
     using ISignatureValueSecurityElement = System.IdentityModel.ISignatureValueSecurityElement;
     using SignedXml = System.IdentityModel.SignedXml;
-    using System.Collections.Generic;
 
     sealed class ReceiveSecurityHeaderElementManager : ISignatureReaderProvider
     {
@@ -48,65 +48,126 @@ namespace System.ServiceModel.Security
         }
 
         public void AppendElement(
-            ReceiveSecurityHeaderElementCategory elementCategory, object element,
-            ReceiveSecurityHeaderBindingModes bindingMode, string id, TokenTracker supportingTokenTracker)
+            ReceiveSecurityHeaderElementCategory elementCategory,
+            object element,
+            ReceiveSecurityHeaderBindingModes bindingMode,
+            string id,
+            TokenTracker supportingTokenTracker
+        )
         {
             if (id != null)
             {
                 VerifyIdUniquenessInSecurityHeader(id);
             }
             EnsureCapacityToAdd();
-            this.elements[this.count++].SetElement(elementCategory, element, bindingMode, id, false, null, supportingTokenTracker);
+            this.elements[this.count++]
+                .SetElement(
+                    elementCategory,
+                    element,
+                    bindingMode,
+                    id,
+                    false,
+                    null,
+                    supportingTokenTracker
+                );
         }
 
         public void AppendSignature(SignedXml signedXml)
         {
-            AppendElement(ReceiveSecurityHeaderElementCategory.Signature, signedXml,
-                ReceiveSecurityHeaderBindingModes.Unknown, signedXml.Id, null);
+            AppendElement(
+                ReceiveSecurityHeaderElementCategory.Signature,
+                signedXml,
+                ReceiveSecurityHeaderBindingModes.Unknown,
+                signedXml.Id,
+                null
+            );
         }
 
         public void AppendReferenceList(ReferenceList referenceList)
         {
-            AppendElement(ReceiveSecurityHeaderElementCategory.ReferenceList, referenceList,
-                ReceiveSecurityHeaderBindingModes.Unknown, null, null);
+            AppendElement(
+                ReceiveSecurityHeaderElementCategory.ReferenceList,
+                referenceList,
+                ReceiveSecurityHeaderBindingModes.Unknown,
+                null,
+                null
+            );
         }
 
         public void AppendEncryptedData(EncryptedData encryptedData)
         {
-            AppendElement(ReceiveSecurityHeaderElementCategory.EncryptedData, encryptedData,
-                ReceiveSecurityHeaderBindingModes.Unknown, encryptedData.Id, null);
+            AppendElement(
+                ReceiveSecurityHeaderElementCategory.EncryptedData,
+                encryptedData,
+                ReceiveSecurityHeaderBindingModes.Unknown,
+                encryptedData.Id,
+                null
+            );
         }
 
-        public void AppendSignatureConfirmation(ISignatureValueSecurityElement signatureConfirmationElement)
+        public void AppendSignatureConfirmation(
+            ISignatureValueSecurityElement signatureConfirmationElement
+        )
         {
-            AppendElement(ReceiveSecurityHeaderElementCategory.SignatureConfirmation, signatureConfirmationElement,
-                ReceiveSecurityHeaderBindingModes.Unknown, signatureConfirmationElement.Id, null);
+            AppendElement(
+                ReceiveSecurityHeaderElementCategory.SignatureConfirmation,
+                signatureConfirmationElement,
+                ReceiveSecurityHeaderBindingModes.Unknown,
+                signatureConfirmationElement.Id,
+                null
+            );
         }
 
         public void AppendTimestamp(SecurityTimestamp timestamp)
         {
-            AppendElement(ReceiveSecurityHeaderElementCategory.Timestamp, timestamp,
-                ReceiveSecurityHeaderBindingModes.Unknown, timestamp.Id, null);
+            AppendElement(
+                ReceiveSecurityHeaderElementCategory.Timestamp,
+                timestamp,
+                ReceiveSecurityHeaderBindingModes.Unknown,
+                timestamp.Id,
+                null
+            );
         }
 
-        public void AppendSecurityTokenReference(SecurityKeyIdentifierClause strClause, string strId)
+        public void AppendSecurityTokenReference(
+            SecurityKeyIdentifierClause strClause,
+            string strId
+        )
         {
             if (!String.IsNullOrEmpty(strId))
             {
                 VerifyIdUniquenessInSecurityHeader(strId);
-                AppendElement(ReceiveSecurityHeaderElementCategory.SecurityTokenReference, strClause, ReceiveSecurityHeaderBindingModes.Unknown, strId, null);
+                AppendElement(
+                    ReceiveSecurityHeaderElementCategory.SecurityTokenReference,
+                    strClause,
+                    ReceiveSecurityHeaderBindingModes.Unknown,
+                    strId,
+                    null
+                );
             }
         }
 
-        public void AppendToken(SecurityToken token, ReceiveSecurityHeaderBindingModes mode, TokenTracker supportingTokenTracker)
+        public void AppendToken(
+            SecurityToken token,
+            ReceiveSecurityHeaderBindingModes mode,
+            TokenTracker supportingTokenTracker
+        )
         {
-            AppendElement(ReceiveSecurityHeaderElementCategory.Token, token,
-                mode, token.Id, supportingTokenTracker);
+            AppendElement(
+                ReceiveSecurityHeaderElementCategory.Token,
+                token,
+                mode,
+                token.Id,
+                supportingTokenTracker
+            );
         }
 
         public void EnsureAllRequiredSecurityHeaderTargetsWereProtected()
         {
-            Fx.Assert(this.securityHeader.RequireMessageProtection, "security header protection checks should only be done for message security");
+            Fx.Assert(
+                this.securityHeader.RequireMessageProtection,
+                "security header protection checks should only be done for message security"
+            );
             ReceiveSecurityHeaderEntry entry;
             for (int i = 0; i < this.count; i++)
             {
@@ -118,7 +179,14 @@ namespace System.ServiceModel.Security
                         case ReceiveSecurityHeaderElementCategory.Timestamp:
                         case ReceiveSecurityHeaderElementCategory.SignatureConfirmation:
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new MessageSecurityException(SR.GetString(SR.RequiredSecurityHeaderElementNotSigned, entry.elementCategory, entry.id)));
+                                new MessageSecurityException(
+                                    SR.GetString(
+                                        SR.RequiredSecurityHeaderElementNotSigned,
+                                        entry.elementCategory,
+                                        entry.id
+                                    )
+                                )
+                            );
                         case ReceiveSecurityHeaderElementCategory.Token:
                             switch (entry.bindingMode)
                             {
@@ -126,19 +194,35 @@ namespace System.ServiceModel.Security
                                 case ReceiveSecurityHeaderBindingModes.SignedEndorsing:
                                 case ReceiveSecurityHeaderBindingModes.Basic:
                                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                        new MessageSecurityException(SR.GetString(SR.RequiredSecurityTokenNotSigned, entry.element, entry.bindingMode)));
+                                        new MessageSecurityException(
+                                            SR.GetString(
+                                                SR.RequiredSecurityTokenNotSigned,
+                                                entry.element,
+                                                entry.bindingMode
+                                            )
+                                        )
+                                    );
                             }
                             break;
                     }
                 }
-                
+
                 if (!entry.encrypted)
                 {
-                    if (entry.elementCategory == ReceiveSecurityHeaderElementCategory.Token &&
-                        entry.bindingMode == ReceiveSecurityHeaderBindingModes.Basic)
+                    if (
+                        entry.elementCategory == ReceiveSecurityHeaderElementCategory.Token
+                        && entry.bindingMode == ReceiveSecurityHeaderBindingModes.Basic
+                    )
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new MessageSecurityException(SR.GetString(SR.RequiredSecurityTokenNotEncrypted, entry.element, entry.bindingMode)));
+                            new MessageSecurityException(
+                                SR.GetString(
+                                    SR.RequiredSecurityTokenNotEncrypted,
+                                    entry.element,
+                                    entry.bindingMode
+                                )
+                            )
+                        );
                     }
                 }
             }
@@ -148,7 +232,9 @@ namespace System.ServiceModel.Security
         {
             if (this.count == this.elements.Length)
             {
-                ReceiveSecurityHeaderEntry[] newElements = new ReceiveSecurityHeaderEntry[this.elements.Length * 2];
+                ReceiveSecurityHeaderEntry[] newElements = new ReceiveSecurityHeaderEntry[
+                    this.elements.Length * 2
+                ];
                 Array.Copy(this.elements, 0, newElements, 0, this.count);
                 this.elements = newElements;
             }
@@ -160,10 +246,11 @@ namespace System.ServiceModel.Security
             return this.elements[index].element;
         }
 
-        public T GetElement<T>(int index) where T : class
+        public T GetElement<T>(int index)
+            where T : class
         {
             Fx.Assert(0 <= index && index < this.count, "");
-            return (T) this.elements[index].element;
+            return (T)this.elements[index].element;
         }
 
         public void GetElementEntry(int index, out ReceiveSecurityHeaderEntry element)
@@ -184,8 +271,10 @@ namespace System.ServiceModel.Security
             for (int i = 0; i < this.count; i++)
             {
                 GetElementEntry(i, out entry);
-                if (entry.elementCategory == ReceiveSecurityHeaderElementCategory.Signature &&
-                    entry.bindingMode == ReceiveSecurityHeaderBindingModes.Primary)
+                if (
+                    entry.elementCategory == ReceiveSecurityHeaderElementCategory.Signature
+                    && entry.bindingMode == ReceiveSecurityHeaderBindingModes.Primary
+                )
                 {
                     reader = GetReader(i, false);
                     id = entry.id;
@@ -208,7 +297,8 @@ namespace System.ServiceModel.Security
                     return this.securityHeader.CreateDecryptedReader(decryptedBuffer);
                 }
             }
-            XmlDictionaryReader securityHeaderReader = this.securityHeader.CreateSecurityHeaderReader();
+            XmlDictionaryReader securityHeaderReader =
+                this.securityHeader.CreateSecurityHeaderReader();
             securityHeaderReader.ReadStartElement();
             for (int i = 0; securityHeaderReader.IsStartElement() && i < index; i++)
             {
@@ -217,29 +307,38 @@ namespace System.ServiceModel.Security
             return securityHeaderReader;
         }
 
-        public XmlDictionaryReader GetSignatureVerificationReader(string id, bool requiresEncryptedFormReaderIfDecrypted)
+        public XmlDictionaryReader GetSignatureVerificationReader(
+            string id,
+            bool requiresEncryptedFormReaderIfDecrypted
+        )
         {
             ReceiveSecurityHeaderEntry entry;
             for (int i = 0; i < this.count; i++)
             {
                 GetElementEntry(i, out entry);
                 bool encryptedForm = entry.encrypted && requiresEncryptedFormReaderIfDecrypted;
-                bool isSignedToken = (entry.bindingMode == ReceiveSecurityHeaderBindingModes.Signed) || (entry.bindingMode == ReceiveSecurityHeaderBindingModes.SignedEndorsing);
+                bool isSignedToken =
+                    (entry.bindingMode == ReceiveSecurityHeaderBindingModes.Signed)
+                    || (entry.bindingMode == ReceiveSecurityHeaderBindingModes.SignedEndorsing);
                 if (entry.MatchesId(id, encryptedForm))
                 {
                     SetSigned(i);
                     if (!this.IsPrimaryTokenSigned)
                     {
-                        this.IsPrimaryTokenSigned = entry.bindingMode == ReceiveSecurityHeaderBindingModes.Primary && entry.elementCategory == ReceiveSecurityHeaderElementCategory.Token;
+                        this.IsPrimaryTokenSigned =
+                            entry.bindingMode == ReceiveSecurityHeaderBindingModes.Primary
+                            && entry.elementCategory == ReceiveSecurityHeaderElementCategory.Token;
                     }
                     return GetReader(i, encryptedForm);
-                }                
+                }
                 else if (entry.MatchesId(id, isSignedToken))
                 {
                     SetSigned(i);
                     if (!this.IsPrimaryTokenSigned)
                     {
-                        this.IsPrimaryTokenSigned = entry.bindingMode == ReceiveSecurityHeaderBindingModes.Primary && entry.elementCategory == ReceiveSecurityHeaderElementCategory.Token;
+                        this.IsPrimaryTokenSigned =
+                            entry.bindingMode == ReceiveSecurityHeaderBindingModes.Primary
+                            && entry.elementCategory == ReceiveSecurityHeaderElementCategory.Token;
                     }
                     return GetReader(i, isSignedToken);
                 }
@@ -250,7 +349,9 @@ namespace System.ServiceModel.Security
         void OnDuplicateId(string id)
         {
             throw TraceUtility.ThrowHelperError(
-                new MessageSecurityException(SR.GetString(SR.DuplicateIdInMessageToBeVerified, id)), this.securityHeader.SecurityVerifiedMessage);
+                new MessageSecurityException(SR.GetString(SR.DuplicateIdInMessageToBeVerified, id)),
+                this.securityHeader.SecurityVerifiedMessage
+            );
         }
 
         public void SetBindingMode(int index, ReceiveSecurityHeaderBindingModes bindingMode)
@@ -273,29 +374,69 @@ namespace System.ServiceModel.Security
 
         public void SetElementAfterDecryption(
             int index,
-            ReceiveSecurityHeaderElementCategory elementCategory, object element,
-            ReceiveSecurityHeaderBindingModes bindingMode, string id, byte[] decryptedBuffer, TokenTracker supportingTokenTracker)
+            ReceiveSecurityHeaderElementCategory elementCategory,
+            object element,
+            ReceiveSecurityHeaderBindingModes bindingMode,
+            string id,
+            byte[] decryptedBuffer,
+            TokenTracker supportingTokenTracker
+        )
         {
             Fx.Assert(0 <= index && index < this.count, "index out of range");
-            Fx.Assert(this.elements[index].elementCategory == ReceiveSecurityHeaderElementCategory.EncryptedData, "Replaced item must be EncryptedData");
+            Fx.Assert(
+                this.elements[index].elementCategory
+                    == ReceiveSecurityHeaderElementCategory.EncryptedData,
+                "Replaced item must be EncryptedData"
+            );
             if (id != null)
             {
                 VerifyIdUniquenessInSecurityHeader(id);
             }
             this.elements[index].PreserveIdBeforeDecryption();
-            this.elements[index].SetElement(elementCategory, element, bindingMode, id, true, decryptedBuffer, supportingTokenTracker);
+            this.elements[index]
+                .SetElement(
+                    elementCategory,
+                    element,
+                    bindingMode,
+                    id,
+                    true,
+                    decryptedBuffer,
+                    supportingTokenTracker
+                );
         }
 
-        public void SetSignatureAfterDecryption(int index, SignedXml signedXml, byte[] decryptedBuffer)
+        public void SetSignatureAfterDecryption(
+            int index,
+            SignedXml signedXml,
+            byte[] decryptedBuffer
+        )
         {
-            SetElementAfterDecryption(index, ReceiveSecurityHeaderElementCategory.Signature,
-                                      signedXml, ReceiveSecurityHeaderBindingModes.Unknown, signedXml.Id, decryptedBuffer, null);
+            SetElementAfterDecryption(
+                index,
+                ReceiveSecurityHeaderElementCategory.Signature,
+                signedXml,
+                ReceiveSecurityHeaderBindingModes.Unknown,
+                signedXml.Id,
+                decryptedBuffer,
+                null
+            );
         }
 
-        public void SetSignatureConfirmationAfterDecryption(int index, ISignatureValueSecurityElement signatureConfirmationElement, byte[] decryptedBuffer)
+        public void SetSignatureConfirmationAfterDecryption(
+            int index,
+            ISignatureValueSecurityElement signatureConfirmationElement,
+            byte[] decryptedBuffer
+        )
         {
-            SetElementAfterDecryption(index, ReceiveSecurityHeaderElementCategory.SignatureConfirmation,
-                                      signatureConfirmationElement, ReceiveSecurityHeaderBindingModes.Unknown, signatureConfirmationElement.Id, decryptedBuffer, null);
+            SetElementAfterDecryption(
+                index,
+                ReceiveSecurityHeaderElementCategory.SignatureConfirmation,
+                signatureConfirmationElement,
+                ReceiveSecurityHeaderBindingModes.Unknown,
+                signatureConfirmationElement.Id,
+                decryptedBuffer,
+                null
+            );
         }
 
         internal void SetSigned(int index)
@@ -312,17 +453,34 @@ namespace System.ServiceModel.Security
         {
             for (int i = 0; i < this.count; i++)
             {
-                if (this.elements[i].elementCategory == ReceiveSecurityHeaderElementCategory.Timestamp &&
-                    this.elements[i].id == id)
+                if (
+                    this.elements[i].elementCategory
+                        == ReceiveSecurityHeaderElementCategory.Timestamp
+                    && this.elements[i].id == id
+                )
                 {
                     SetSigned(i);
                 }
             }
         }
 
-        public void SetTokenAfterDecryption(int index, SecurityToken token, ReceiveSecurityHeaderBindingModes mode, byte[] decryptedBuffer, TokenTracker supportingTokenTracker)
+        public void SetTokenAfterDecryption(
+            int index,
+            SecurityToken token,
+            ReceiveSecurityHeaderBindingModes mode,
+            byte[] decryptedBuffer,
+            TokenTracker supportingTokenTracker
+        )
         {
-            SetElementAfterDecryption(index, ReceiveSecurityHeaderElementCategory.Token, token, mode, token.Id, decryptedBuffer, supportingTokenTracker);
+            SetElementAfterDecryption(
+                index,
+                ReceiveSecurityHeaderElementCategory.Token,
+                token,
+                mode,
+                token.Id,
+                decryptedBuffer,
+                supportingTokenTracker
+            );
         }
 
         internal bool TryGetTokenElementIndexFromStrId(string strId, out int index)
@@ -331,7 +489,10 @@ namespace System.ServiceModel.Security
             SecurityKeyIdentifierClause strClause = null;
             for (int position = 0; position < this.Count; position++)
             {
-                if (this.GetElementCategory(position) == ReceiveSecurityHeaderElementCategory.SecurityTokenReference)
+                if (
+                    this.GetElementCategory(position)
+                    == ReceiveSecurityHeaderElementCategory.SecurityTokenReference
+                )
                 {
                     strClause = this.GetElement(position) as SecurityKeyIdentifierClause;
                     if (strClause.Id == strId)
@@ -453,14 +614,18 @@ namespace System.ServiceModel.Security
             for (int i = 0; i < this.count; i++)
             {
                 GetElementEntry(i, out entry);
-                if (entry.elementCategory == ReceiveSecurityHeaderElementCategory.SignatureConfirmation)
+                if (
+                    entry.elementCategory
+                    == ReceiveSecurityHeaderElementCategory.SignatureConfirmation
+                )
                 {
                     return;
                 }
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MessageSecurityException(SR.GetString(SR.SignatureConfirmationWasExpected)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new MessageSecurityException(SR.GetString(SR.SignatureConfirmationWasExpected))
+            );
         }
-
     }
 }

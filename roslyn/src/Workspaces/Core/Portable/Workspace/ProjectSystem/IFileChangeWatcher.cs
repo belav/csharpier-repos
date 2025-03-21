@@ -37,7 +37,10 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
 
             if (extensionFilter != null && !extensionFilter.StartsWith("."))
             {
-                throw new ArgumentException($"{nameof(extensionFilter)} should start with a period.", nameof(extensionFilter));
+                throw new ArgumentException(
+                    $"{nameof(extensionFilter)} should start with a period.",
+                    nameof(extensionFilter)
+                );
             }
 
             Path = path;
@@ -51,7 +54,11 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
         /// </summary>
         public string? ExtensionFilter { get; }
 
-        public static bool FilePathCoveredByWatchedDirectories(ImmutableArray<WatchedDirectory> watchedDirectories, string filePath, StringComparison stringComparison)
+        public static bool FilePathCoveredByWatchedDirectories(
+            ImmutableArray<WatchedDirectory> watchedDirectories,
+            string filePath,
+            StringComparison stringComparison
+        )
         {
             foreach (var watchedDirectory in watchedDirectories)
             {
@@ -60,7 +67,10 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
                     // If ExtensionFilter is null, then we're watching for all files in the directory so the prior check
                     // of the directory containment was sufficient. If it isn't null, then we have to check the extension
                     // matches.
-                    if (watchedDirectory.ExtensionFilter == null || filePath.EndsWith(watchedDirectory.ExtensionFilter, stringComparison))
+                    if (
+                        watchedDirectory.ExtensionFilter == null
+                        || filePath.EndsWith(watchedDirectory.ExtensionFilter, stringComparison)
+                    )
                     {
                         return true;
                     }
@@ -89,9 +99,7 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
         IWatchedFile EnqueueWatchingFile(string filePath);
     }
 
-    internal interface IWatchedFile : IDisposable
-    {
-    }
+    internal interface IWatchedFile : IDisposable { }
 
     /// <summary>
     /// When a FileChangeWatcher already has a watch on a directory, a request to watch a specific file is a no-op. In that case, we return this token,
@@ -101,12 +109,8 @@ namespace Microsoft.CodeAnalysis.ProjectSystem
     {
         public static readonly IWatchedFile Instance = new NoOpWatchedFile();
 
-        private NoOpWatchedFile()
-        {
-        }
+        private NoOpWatchedFile() { }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

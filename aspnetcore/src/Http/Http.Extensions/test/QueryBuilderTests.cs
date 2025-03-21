@@ -59,24 +59,31 @@ public class QueryBuilderTests
     [Fact]
     public void AddMultipleValuesViaConstructor_AddedInOrder()
     {
-        var builder = new QueryBuilder(new[]
-        {
+        var builder = new QueryBuilder(
+            new[]
+            {
                 new KeyValuePair<string, string>("key1", "value1"),
                 new KeyValuePair<string, string>("key2", "value2"),
                 new KeyValuePair<string, string>("key3", "value3"),
-            });
+            }
+        );
         Assert.Equal("?key1=value1&key2=value2&key3=value3", builder.ToString());
     }
 
     [Fact]
     public void AddMultipleValuesViaConstructor_WithStringValues()
     {
-        var builder = new QueryBuilder(new[]
-        {
-                new KeyValuePair<string, StringValues>("key1", new StringValues(new [] { "value1", string.Empty, "value3" })),
+        var builder = new QueryBuilder(
+            new[]
+            {
+                new KeyValuePair<string, StringValues>(
+                    "key1",
+                    new StringValues(new[] { "value1", string.Empty, "value3" })
+                ),
                 new KeyValuePair<string, StringValues>("key2", string.Empty),
-                new KeyValuePair<string, StringValues>("key3", StringValues.Empty)
-            });
+                new KeyValuePair<string, StringValues>("key3", StringValues.Empty),
+            }
+        );
         Assert.Equal("?key1=value1&key1=&key1=value3&key2=", builder.ToString());
     }
 
@@ -84,11 +91,11 @@ public class QueryBuilderTests
     public void AddMultipleValuesViaInitializer_AddedInOrder()
     {
         var builder = new QueryBuilder()
-            {
-                { "key1", "value1" },
-                { "key2", "value2" },
-                { "key3", "value3" },
-            };
+        {
+            { "key1", "value1" },
+            { "key2", "value2" },
+            { "key3", "value3" },
+        };
         Assert.Equal("?key1=value1&key2=value2&key3=value3", builder.ToString());
     }
 
@@ -96,11 +103,11 @@ public class QueryBuilderTests
     public void CopyViaConstructor_AddedInOrder()
     {
         var builder = new QueryBuilder()
-            {
-                { "key1", "value1" },
-                { "key2", "value2" },
-                { "key3", "value3" },
-            };
+        {
+            { "key1", "value1" },
+            { "key2", "value2" },
+            { "key3", "value3" },
+        };
         var builder1 = new QueryBuilder(builder);
         Assert.Equal("?key1=value1&key2=value2&key3=value3", builder1.ToString());
     }

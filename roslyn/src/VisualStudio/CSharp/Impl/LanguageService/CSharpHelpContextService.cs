@@ -33,32 +33,44 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpHelpContextService()
-        {
-        }
+        public CSharpHelpContextService() { }
 
         public override string Language => "csharp";
         public override string Product => "csharp";
 
-        private static string Keyword(string text)
-            => text + "_CSharpKeyword";
+        private static string Keyword(string text) => text + "_CSharpKeyword";
 
-        public override async Task<string> GetHelpTermAsync(Document document, TextSpan span, CancellationToken cancellationToken)
+        public override async Task<string> GetHelpTermAsync(
+            Document document,
+            TextSpan span,
+            CancellationToken cancellationToken
+        )
         {
             // For now, find the token under the start of the selection.
-            var syntaxTree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
-            var token = await syntaxTree.GetTouchingTokenAsync(span.Start, cancellationToken, findInsideTrivia: true).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var token = await syntaxTree
+                .GetTouchingTokenAsync(span.Start, cancellationToken, findInsideTrivia: true)
+                .ConfigureAwait(false);
 
             if (token.Span.IntersectsWith(span))
             {
-                var semanticModel = await document.ReuseExistingSpeculativeModelAsync(span, cancellationToken).ConfigureAwait(false);
+                var semanticModel = await document
+                    .ReuseExistingSpeculativeModelAsync(span, cancellationToken)
+                    .ConfigureAwait(false);
 
                 var result = TryGetText(token, semanticModel, document, cancellationToken);
                 if (result is null)
                 {
                     var previousToken = token.GetPreviousToken();
                     if (previousToken.Span.IntersectsWith(span))
-                        result = TryGetText(previousToken, semanticModel, document, cancellationToken);
+                        result = TryGetText(
+                            previousToken,
+                            semanticModel,
+                            document,
+                            cancellationToken
+                        );
                 }
 
                 return result ?? NotFoundHelpTerm;
@@ -66,8 +78,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 
             var root = await syntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
             var trivia = root.FindTrivia(span.Start, findInsideTrivia: true);
-            if (trivia.Span.IntersectsWith(span) && trivia.Kind() == SyntaxKind.PreprocessingMessageTrivia &&
-                trivia.Token.GetAncestor<RegionDirectiveTriviaSyntax>() != null)
+            if (
+                trivia.Span.IntersectsWith(span)
+                && trivia.Kind() == SyntaxKind.PreprocessingMessageTrivia
+                && trivia.Token.GetAncestor<RegionDirectiveTriviaSyntax>() != null
+            )
             {
                 return "#region";
             }
@@ -92,15 +107,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             return NotFoundHelpTerm;
         }
 
-        private string? TryGetText(SyntaxToken token, SemanticModel semanticModel, Document document, CancellationToken cancellationToken)
+        private string? TryGetText(
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            if (TryGetTextForSpecialCharacters(token, out var text) ||
-                TryGetTextForContextualKeyword(token, out text) ||
-                TryGetTextForCombinationKeyword(token, out text) ||
-                TryGetTextForPreProcessor(token, out text) ||
-                TryGetTextForKeyword(token, out text) ||
-                TryGetTextForOperator(token, document, out text) ||
-                TryGetTextForSymbol(token, semanticModel, document, cancellationToken, out text))
+            if (
+                TryGetTextForSpecialCharacters(token, out var text)
+                || TryGetTextForContextualKeyword(token, out text)
+                || TryGetTextForCombinationKeyword(token, out text)
+                || TryGetTextForPreProcessor(token, out text)
+                || TryGetTextForKeyword(token, out text)
+                || TryGetTextForOperator(token, document, out text)
+                || TryGetTextForSymbol(token, semanticModel, document, cancellationToken, out text)
+            )
             {
                 return text;
             }
@@ -108,15 +130,20 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             return null;
         }
 
-        private static bool TryGetTextForSpecialCharacters(SyntaxToken token, [NotNullWhen(true)] out string? text)
+        private static bool TryGetTextForSpecialCharacters(
+            SyntaxToken token,
+            [NotNullWhen(true)] out string? text
+        )
         {
-            if (token.Kind()
-                    is SyntaxKind.InterpolatedStringStartToken
+            if (
+                token.Kind()
+                is SyntaxKind.InterpolatedStringStartToken
                     or SyntaxKind.InterpolatedStringEndToken
                     or SyntaxKind.InterpolatedRawStringEndToken
                     or SyntaxKind.InterpolatedStringTextToken
                     or SyntaxKind.InterpolatedSingleLineRawStringStartToken
-                    or SyntaxKind.InterpolatedMultiLineRawStringStartToken)
+                    or SyntaxKind.InterpolatedMultiLineRawStringStartToken
+            )
             {
                 text = Keyword("$");
                 return true;
@@ -134,16 +161,22 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 return true;
             }
 
-            if (token.Kind()
-                    is SyntaxKind.Utf8StringLiteralToken
+            if (
+                token.Kind()
+                is SyntaxKind.Utf8StringLiteralToken
                     or SyntaxKind.Utf8SingleLineRawStringLiteralToken
-                    or SyntaxKind.Utf8MultiLineRawStringLiteralToken)
+                    or SyntaxKind.Utf8MultiLineRawStringLiteralToken
+            )
             {
                 text = Keyword("Utf8StringLiteral");
                 return true;
             }
 
-            if (token.Kind() is SyntaxKind.SingleLineRawStringLiteralToken or SyntaxKind.MultiLineRawStringLiteralToken)
+            if (
+                token.Kind()
+                is SyntaxKind.SingleLineRawStringLiteralToken
+                    or SyntaxKind.MultiLineRawStringLiteralToken
+            )
             {
                 text = Keyword("RawStringLiteral");
                 return true;
@@ -154,15 +187,21 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
         }
 
         private bool TryGetTextForSymbol(
-            SyntaxToken token, SemanticModel semanticModel, Document document, CancellationToken cancellationToken,
-            [NotNullWhen(true)] out string? text)
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            Document document,
+            CancellationToken cancellationToken,
+            [NotNullWhen(true)] out string? text
+        )
         {
             ISymbol? symbol = null;
             if (token.Parent is TypeArgumentListSyntax)
             {
                 var genericName = token.GetAncestor<GenericNameSyntax>();
                 if (genericName != null)
-                    symbol = semanticModel.GetSymbolInfo(genericName, cancellationToken).Symbol ?? semanticModel.GetTypeInfo(genericName, cancellationToken).Type;
+                    symbol =
+                        semanticModel.GetSymbolInfo(genericName, cancellationToken).Symbol
+                        ?? semanticModel.GetTypeInfo(genericName, cancellationToken).Type;
             }
             else if (token.Parent is NullableTypeSyntax && token.IsKind(SyntaxKind.QuestionToken))
             {
@@ -171,19 +210,31 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             }
             else
             {
-                symbol = semanticModel.GetSemanticInfo(token, document.Project.Solution.Services, cancellationToken)
-                                      .GetAnySymbol(includeType: true);
+                symbol = semanticModel
+                    .GetSemanticInfo(token, document.Project.Solution.Services, cancellationToken)
+                    .GetAnySymbol(includeType: true);
 
                 if (symbol == null)
                 {
-                    var bindableParent = document.GetRequiredLanguageService<ISyntaxFactsService>().TryGetBindableParent(token);
-                    var overloads = bindableParent != null ? semanticModel.GetMemberGroup(bindableParent) : ImmutableArray<ISymbol>.Empty;
+                    var bindableParent = document
+                        .GetRequiredLanguageService<ISyntaxFactsService>()
+                        .TryGetBindableParent(token);
+                    var overloads =
+                        bindableParent != null
+                            ? semanticModel.GetMemberGroup(bindableParent)
+                            : ImmutableArray<ISymbol>.Empty;
                     symbol = overloads.FirstOrDefault();
                 }
             }
 
             // Local: return the name if it's the declaration, otherwise the type
-            if (symbol is ILocalSymbol localSymbol && !symbol.DeclaringSyntaxReferences.Any(static (d, token) => d.GetSyntax().DescendantTokens().Contains(token), token))
+            if (
+                symbol is ILocalSymbol localSymbol
+                && !symbol.DeclaringSyntaxReferences.Any(
+                    static (d, token) => d.GetSyntax().DescendantTokens().Contains(token),
+                    token
+                )
+            )
             {
                 symbol = localSymbol.Type;
             }
@@ -212,10 +263,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             return text != null;
         }
 
-        private static bool TryGetTextForOperator(SyntaxToken token, Document document, [NotNullWhen(true)] out string? text)
+        private static bool TryGetTextForOperator(
+            SyntaxToken token,
+            Document document,
+            [NotNullWhen(true)] out string? text
+        )
         {
-            if (token.IsKind(SyntaxKind.ExclamationToken) &&
-                token.Parent.IsKind(SyntaxKind.SuppressNullableWarningExpression))
+            if (
+                token.IsKind(SyntaxKind.ExclamationToken)
+                && token.Parent.IsKind(SyntaxKind.SuppressNullableWarningExpression)
+            )
             {
                 text = Keyword("nullForgiving");
                 return true;
@@ -313,7 +370,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 }
             }
 
-            if (token.IsKind(SyntaxKind.QuestionToken) && token.Parent is ConditionalExpressionSyntax)
+            if (
+                token.IsKind(SyntaxKind.QuestionToken)
+                && token.Parent is ConditionalExpressionSyntax
+            )
             {
                 text = Keyword("?");
                 return true;
@@ -325,8 +385,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 return true;
             }
 
-            if (token.Kind() is SyntaxKind.LessThanToken or SyntaxKind.GreaterThanToken &&
-                token.Parent is (kind: SyntaxKind.TypeParameterList or SyntaxKind.TypeArgumentList))
+            if (
+                token.Kind() is SyntaxKind.LessThanToken or SyntaxKind.GreaterThanToken
+                && token.Parent
+                    is
+                    (kind: SyntaxKind.TypeParameterList or SyntaxKind.TypeArgumentList)
+            )
             {
                 text = Keyword("generics");
                 return true;
@@ -336,7 +400,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             return false;
         }
 
-        private static bool TryGetTextForPreProcessor(SyntaxToken token, [NotNullWhen(true)] out string? text)
+        private static bool TryGetTextForPreProcessor(
+            SyntaxToken token,
+            [NotNullWhen(true)] out string? text
+        )
         {
             var syntaxFacts = CSharpSyntaxFacts.Instance;
 
@@ -345,7 +412,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             var directive = token.GetAncestor<DirectiveTriviaSyntax>();
             if (directive != null)
             {
-                if (token.IsKind(SyntaxKind.DefaultKeyword) && token.Parent is LineDirectiveTriviaSyntax)
+                if (
+                    token.IsKind(SyntaxKind.DefaultKeyword)
+                    && token.Parent is LineDirectiveTriviaSyntax
+                )
                 {
                     text = Keyword("defaultline");
                     return true;
@@ -368,7 +438,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             return false;
         }
 
-        private static bool TryGetTextForContextualKeyword(SyntaxToken token, [NotNullWhen(true)] out string? text)
+        private static bool TryGetTextForContextualKeyword(
+            SyntaxToken token,
+            [NotNullWhen(true)] out string? text
+        )
         {
             if (token.Text == "nameof")
             {
@@ -395,9 +468,11 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                         break;
 
                     case SyntaxKind.WhereKeyword:
-                        text = token.Parent.GetAncestorOrThis<TypeParameterConstraintClauseSyntax>() != null
-                            ? Keyword("whereconstraint")
-                            : Keyword("whereclause");
+                        text =
+                            token.Parent.GetAncestorOrThis<TypeParameterConstraintClauseSyntax>()
+                            != null
+                                ? Keyword("whereconstraint")
+                                : Keyword("whereclause");
 
                         return true;
 
@@ -408,7 +483,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             }
             else if (token.ValueText is "notnull" or "unmanaged")
             {
-                if (token.Parent is IdentifierNameSyntax { Parent: TypeConstraintSyntax { Parent: TypeParameterConstraintClauseSyntax } })
+                if (
+                    token.Parent is IdentifierNameSyntax
+                    {
+                        Parent: TypeConstraintSyntax { Parent: TypeParameterConstraintClauseSyntax }
+                    }
+                )
                 {
                     text = Keyword(token.ValueText);
                     return true;
@@ -418,17 +498,25 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
             text = null;
             return false;
         }
-        private static bool TryGetTextForCombinationKeyword(SyntaxToken token, [NotNullWhen(true)] out string? text)
+
+        private static bool TryGetTextForCombinationKeyword(
+            SyntaxToken token,
+            [NotNullWhen(true)] out string? text
+        )
         {
             switch (token.Kind())
             {
-                case SyntaxKind.PrivateKeyword when ModifiersContains(token, SyntaxKind.ProtectedKeyword):
-                case SyntaxKind.ProtectedKeyword when ModifiersContains(token, SyntaxKind.PrivateKeyword):
+                case SyntaxKind.PrivateKeyword
+                    when ModifiersContains(token, SyntaxKind.ProtectedKeyword):
+                case SyntaxKind.ProtectedKeyword
+                    when ModifiersContains(token, SyntaxKind.PrivateKeyword):
                     text = Keyword("privateprotected");
                     return true;
 
-                case SyntaxKind.ProtectedKeyword when ModifiersContains(token, SyntaxKind.InternalKeyword):
-                case SyntaxKind.InternalKeyword when ModifiersContains(token, SyntaxKind.ProtectedKeyword):
+                case SyntaxKind.ProtectedKeyword
+                    when ModifiersContains(token, SyntaxKind.InternalKeyword):
+                case SyntaxKind.InternalKeyword
+                    when ModifiersContains(token, SyntaxKind.ProtectedKeyword):
                     text = Keyword("protectedinternal");
                     return true;
 
@@ -440,8 +528,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 case SyntaxKind.StaticKeyword when token.Parent is UsingDirectiveSyntax:
                     text = Keyword("using-static");
                     return true;
-                case SyntaxKind.ReturnKeyword when token.Parent.IsKind(SyntaxKind.YieldReturnStatement):
-                case SyntaxKind.BreakKeyword when token.Parent.IsKind(SyntaxKind.YieldBreakStatement):
+                case SyntaxKind.ReturnKeyword
+                    when token.Parent.IsKind(SyntaxKind.YieldReturnStatement):
+                case SyntaxKind.BreakKeyword
+                    when token.Parent.IsKind(SyntaxKind.YieldBreakStatement):
                     text = Keyword("yield");
                     return true;
             }
@@ -451,11 +541,16 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
 
             static bool ModifiersContains(SyntaxToken token, SyntaxKind kind)
             {
-                return CSharpSyntaxFacts.Instance.GetModifiers(token.Parent).Any(t => t.IsKind(kind));
+                return CSharpSyntaxFacts
+                    .Instance.GetModifiers(token.Parent)
+                    .Any(t => t.IsKind(kind));
             }
         }
 
-        private static bool TryGetTextForKeyword(SyntaxToken token, [NotNullWhen(true)] out string? text)
+        private static bool TryGetTextForKeyword(
+            SyntaxToken token,
+            [NotNullWhen(true)] out string? text
+        )
         {
             if (token.IsKind(SyntaxKind.InKeyword))
             {
@@ -487,19 +582,28 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 }
             }
 
-            if (token.IsKind(SyntaxKind.ClassKeyword) && token.Parent is ClassOrStructConstraintSyntax)
+            if (
+                token.IsKind(SyntaxKind.ClassKeyword)
+                && token.Parent is ClassOrStructConstraintSyntax
+            )
             {
                 text = Keyword("classconstraint");
                 return true;
             }
 
-            if (token.IsKind(SyntaxKind.StructKeyword) && token.Parent is ClassOrStructConstraintSyntax)
+            if (
+                token.IsKind(SyntaxKind.StructKeyword)
+                && token.Parent is ClassOrStructConstraintSyntax
+            )
             {
                 text = Keyword("structconstraint");
                 return true;
             }
 
-            if (token.IsKind(SyntaxKind.UsingKeyword) && token.Parent is UsingStatementSyntax or LocalDeclarationStatementSyntax)
+            if (
+                token.IsKind(SyntaxKind.UsingKeyword)
+                && token.Parent is UsingStatementSyntax or LocalDeclarationStatementSyntax
+            )
             {
                 text = Keyword("using-statement");
                 return true;
@@ -517,8 +621,12 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
                 return true;
             }
 
-            if (token.ValueText == "var" && token.IsKind(SyntaxKind.IdentifierToken) &&
-                token.Parent?.Parent is VariableDeclarationSyntax declaration && token.Parent == declaration.Type)
+            if (
+                token.ValueText == "var"
+                && token.IsKind(SyntaxKind.IdentifierToken)
+                && token.Parent?.Parent is VariableDeclarationSyntax declaration
+                && token.Parent == declaration.Type
+            )
             {
                 text = Keyword("var");
                 return true;
@@ -538,7 +646,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.LanguageService
         {
             var displayString = symbol.ToDisplayString(TypeFormat);
 
-            if (symbol is ITypeSymbol type && type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T)
+            if (
+                symbol is ITypeSymbol type
+                && type.OriginalDefinition.SpecialType == SpecialType.System_Nullable_T
+            )
             {
                 return "System.Nullable`1";
             }

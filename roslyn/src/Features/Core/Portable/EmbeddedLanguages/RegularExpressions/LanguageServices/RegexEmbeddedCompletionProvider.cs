@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
     using static FeaturesResources;
     using RegexToken = EmbeddedSyntaxToken<RegexKind>;
 
-    internal sealed partial class RegexEmbeddedCompletionProvider(RegexEmbeddedLanguage language) : EmbeddedLanguageCompletionProvider
+    internal sealed partial class RegexEmbeddedCompletionProvider(RegexEmbeddedLanguage language)
+        : EmbeddedLanguageCompletionProvider
     {
         private const string StartKey = nameof(StartKey);
         private const string LengthKey = nameof(LengthKey);
@@ -32,22 +33,36 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
         private const string DescriptionKey = nameof(DescriptionKey);
 
         // Always soft-select these completion items.  Also, never filter down.
-        private static readonly CompletionItemRules s_rules =
-            CompletionItemRules.Default.WithSelectionBehavior(CompletionItemSelectionBehavior.SoftSelection)
-                                       .WithFilterCharacterRule(CharacterSetModificationRule.Create(CharacterSetModificationKind.Replace, Array.Empty<char>()));
+        private static readonly CompletionItemRules s_rules = CompletionItemRules
+            .Default.WithSelectionBehavior(CompletionItemSelectionBehavior.SoftSelection)
+            .WithFilterCharacterRule(
+                CharacterSetModificationRule.Create(
+                    CharacterSetModificationKind.Replace,
+                    Array.Empty<char>()
+                )
+            );
 
         private readonly RegexEmbeddedLanguage _language = language;
 
-        public override ImmutableHashSet<char> TriggerCharacters { get; } = ImmutableHashSet.Create(
-            '\\', // any escape
-            '[', // character class
-            '(', // any group
-            '{'); // \p{
+        public override ImmutableHashSet<char> TriggerCharacters { get; } =
+            ImmutableHashSet.Create(
+                '\\', // any escape
+                '[', // character class
+                '(', // any group
+                '{'
+            ); // \p{
 
-        public override bool ShouldTriggerCompletion(SourceText text, int caretPosition, CompletionTrigger trigger)
+        public override bool ShouldTriggerCompletion(
+            SourceText text,
+            int caretPosition,
+            CompletionTrigger trigger
+        )
         {
-            if (trigger.Kind is CompletionTriggerKind.Invoke or
-                CompletionTriggerKind.InvokeAndCommitIfUnique)
+            if (
+                trigger.Kind
+                is CompletionTriggerKind.Invoke
+                    or CompletionTriggerKind.InvokeAndCommitIfUnique
+            )
             {
                 return true;
             }
@@ -67,25 +82,40 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
                 return;
             }
 
-            if (context.Trigger.Kind is not CompletionTriggerKind.Invoke and
-                not CompletionTriggerKind.InvokeAndCommitIfUnique and
-                not CompletionTriggerKind.Insertion)
+            if (
+                context.Trigger.Kind
+                is not CompletionTriggerKind.Invoke
+                    and not CompletionTriggerKind.InvokeAndCommitIfUnique
+                    and not CompletionTriggerKind.Insertion
+            )
             {
                 return;
             }
 
             var position = context.Position;
-            var (tree, stringToken) = await _language.TryGetTreeAndTokenAtPositionAsync(
-                context.Document, position, context.CancellationToken).ConfigureAwait(false);
+            var (tree, stringToken) = await _language
+                .TryGetTreeAndTokenAtPositionAsync(
+                    context.Document,
+                    position,
+                    context.CancellationToken
+                )
+                .ConfigureAwait(false);
 
-            if (tree == null ||
-                position <= stringToken.SpanStart ||
-                position >= stringToken.Span.End)
+            if (
+                tree == null
+                || position <= stringToken.SpanStart
+                || position >= stringToken.Span.End
+            )
             {
                 return;
             }
 
-            var embeddedContext = new EmbeddedCompletionContext(_language, context, tree, stringToken);
+            var embeddedContext = new EmbeddedCompletionContext(
+                _language,
+                context,
+                tree,
+                stringToken
+            );
             ProvideCompletions(embeddedContext);
 
             if (embeddedContext.Items.Count == 0)
@@ -93,7 +123,9 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
                 return;
             }
 
-            using var _ = ArrayBuilder<KeyValuePair<string, string>>.GetInstance(out var properties);
+            using var _ = ArrayBuilder<KeyValuePair<string, string>>.GetInstance(
+                out var properties
+            );
             foreach (var embeddedItem in embeddedContext.Items)
             {
                 properties.Clear();
@@ -101,26 +133,45 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
                 var change = embeddedItem.Change;
                 var textChange = change.TextChange;
 
-                properties.Add(new KeyValuePair<string, string>(StartKey, textChange.Span.Start.ToString()));
-                properties.Add(new KeyValuePair<string, string>(LengthKey, textChange.Span.Length.ToString()));
+                properties.Add(
+                    new KeyValuePair<string, string>(StartKey, textChange.Span.Start.ToString())
+                );
+                properties.Add(
+                    new KeyValuePair<string, string>(LengthKey, textChange.Span.Length.ToString())
+                );
                 properties.Add(new KeyValuePair<string, string>(NewTextKey, textChange.NewText));
-                properties.Add(new KeyValuePair<string, string>(DescriptionKey, embeddedItem.FullDescription));
-                properties.Add(new KeyValuePair<string, string>(AbstractAggregateEmbeddedLanguageCompletionProvider.EmbeddedProviderName, Name));
+                properties.Add(
+                    new KeyValuePair<string, string>(DescriptionKey, embeddedItem.FullDescription)
+                );
+                properties.Add(
+                    new KeyValuePair<string, string>(
+                        AbstractAggregateEmbeddedLanguageCompletionProvider.EmbeddedProviderName,
+                        Name
+                    )
+                );
 
                 if (change.NewPosition != null)
                 {
-                    properties.Add(new KeyValuePair<string, string>(NewPositionKey, change.NewPosition.ToString()));
+                    properties.Add(
+                        new KeyValuePair<string, string>(
+                            NewPositionKey,
+                            change.NewPosition.ToString()
+                        )
+                    );
                 }
 
                 // Keep everything sorted in the order we just produced the items in.
                 var sortText = context.Items.Count.ToString("0000");
-                context.AddItem(CompletionItem.CreateInternal(
-                    displayText: embeddedItem.DisplayText,
-                    inlineDescription: embeddedItem.InlineDescription,
-                    sortText: sortText,
-                    properties: properties.ToImmutable(),
-                    rules: s_rules,
-                    isComplexTextEdit: context.CompletionListSpan != textChange.Span));
+                context.AddItem(
+                    CompletionItem.CreateInternal(
+                        displayText: embeddedItem.DisplayText,
+                        inlineDescription: embeddedItem.InlineDescription,
+                        sortText: sortText,
+                        properties: properties.ToImmutable(),
+                        rules: s_rules,
+                        isComplexTextEdit: context.CompletionListSpan != textChange.Span
+                    )
+                );
             }
 
             context.IsExclusive = true;
@@ -151,7 +202,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
             // We added no items, but the user explicitly asked for completion.  Add all the
             // items we can to help them out.
             var virtualChar = context.Tree.Text.Find(context.Position);
-            var inCharacterClass = virtualChar != null && IsInCharacterClass(context.Tree.Root, virtualChar.Value);
+            var inCharacterClass =
+                virtualChar != null && IsInCharacterClass(context.Tree.Root, virtualChar.Value);
 
             ProvideBackslashCompletions(context, inCharacterClass, parentOpt: null);
             ProvideTopLevelCompletions(context, inCharacterClass);
@@ -163,12 +215,14 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
         /// Produces completions using the previous character to determine which set of
         /// regex items to show.
         /// </summary>
-        private static void ProvideCompletionsBasedOffOfPrecedingCharacter(EmbeddedCompletionContext context)
+        private static void ProvideCompletionsBasedOffOfPrecedingCharacter(
+            EmbeddedCompletionContext context
+        )
         {
             var previousVirtualCharOpt = context.Tree.Text.Find(context.Position - 1);
             if (previousVirtualCharOpt == null)
             {
-                // We didn't have a previous character.  Can't determine the set of 
+                // We didn't have a previous character.  Can't determine the set of
                 // regex items to show.
                 return;
             }
@@ -203,8 +257,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
                     return;
             }
 
-            // see if we have ```\p{```.  If so, offer property categories. This isn't handled 
-            // in the above switch because when you just have an incomplete `\p{` then the `{` 
+            // see if we have ```\p{```.  If so, offer property categories. This isn't handled
+            // in the above switch because when you just have an incomplete `\p{` then the `{`
             // will be handled as a normal character and won't have a token for it.
             if (previousVirtualChar == '{')
             {
@@ -213,7 +267,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
             }
         }
 
-        private static void ProvideTopLevelCompletions(EmbeddedCompletionContext context, bool inCharacterClass)
+        private static void ProvideTopLevelCompletions(
+            EmbeddedCompletionContext context,
+            bool inCharacterClass
+        )
         {
             if (inCharacterClass)
             {
@@ -221,34 +278,134 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
                 return;
             }
 
-            context.AddIfMissing("|", Regex_alternation_short, Regex_alternation_long, parentOpt: null);
-            context.AddIfMissing("^", Regex_start_of_string_or_line_short, Regex_start_of_string_or_line_long, parentOpt: null);
-            context.AddIfMissing("$", Regex_end_of_string_or_line_short, Regex_end_of_string_or_line_long, parentOpt: null);
-            context.AddIfMissing(".", Regex_any_character_group_short, Regex_any_character_group_long, parentOpt: null);
+            context.AddIfMissing(
+                "|",
+                Regex_alternation_short,
+                Regex_alternation_long,
+                parentOpt: null
+            );
+            context.AddIfMissing(
+                "^",
+                Regex_start_of_string_or_line_short,
+                Regex_start_of_string_or_line_long,
+                parentOpt: null
+            );
+            context.AddIfMissing(
+                "$",
+                Regex_end_of_string_or_line_short,
+                Regex_end_of_string_or_line_long,
+                parentOpt: null
+            );
+            context.AddIfMissing(
+                ".",
+                Regex_any_character_group_short,
+                Regex_any_character_group_long,
+                parentOpt: null
+            );
 
-            context.AddIfMissing("*", Regex_match_zero_or_more_times_short, Regex_match_zero_or_more_times_long, parentOpt: null);
-            context.AddIfMissing("*?", Regex_match_zero_or_more_times_lazy_short, Regex_match_zero_or_more_times_lazy_long, parentOpt: null);
+            context.AddIfMissing(
+                "*",
+                Regex_match_zero_or_more_times_short,
+                Regex_match_zero_or_more_times_long,
+                parentOpt: null
+            );
+            context.AddIfMissing(
+                "*?",
+                Regex_match_zero_or_more_times_lazy_short,
+                Regex_match_zero_or_more_times_lazy_long,
+                parentOpt: null
+            );
 
-            context.AddIfMissing("+", Regex_match_one_or_more_times_short, Regex_match_one_or_more_times_long, parentOpt: null);
-            context.AddIfMissing("+?", Regex_match_one_or_more_times_lazy_short, Regex_match_one_or_more_times_lazy_long, parentOpt: null);
+            context.AddIfMissing(
+                "+",
+                Regex_match_one_or_more_times_short,
+                Regex_match_one_or_more_times_long,
+                parentOpt: null
+            );
+            context.AddIfMissing(
+                "+?",
+                Regex_match_one_or_more_times_lazy_short,
+                Regex_match_one_or_more_times_lazy_long,
+                parentOpt: null
+            );
 
-            context.AddIfMissing("?", Regex_match_zero_or_one_time_short, Regex_match_zero_or_one_time_long, parentOpt: null);
-            context.AddIfMissing("??", Regex_match_zero_or_one_time_lazy_short, Regex_match_zero_or_one_time_lazy_long, parentOpt: null);
+            context.AddIfMissing(
+                "?",
+                Regex_match_zero_or_one_time_short,
+                Regex_match_zero_or_one_time_long,
+                parentOpt: null
+            );
+            context.AddIfMissing(
+                "??",
+                Regex_match_zero_or_one_time_lazy_short,
+                Regex_match_zero_or_one_time_lazy_long,
+                parentOpt: null
+            );
 
-            context.AddIfMissing("{n}", Regex_match_exactly_n_times_short, Regex_match_exactly_n_times_long, parentOpt: null, positionOffset: "{".Length, insertionText: "{}");
-            context.AddIfMissing("{n}?", Regex_match_exactly_n_times_lazy_short, Regex_match_exactly_n_times_lazy_long, parentOpt: null, positionOffset: "{".Length, insertionText: "{}?");
+            context.AddIfMissing(
+                "{n}",
+                Regex_match_exactly_n_times_short,
+                Regex_match_exactly_n_times_long,
+                parentOpt: null,
+                positionOffset: "{".Length,
+                insertionText: "{}"
+            );
+            context.AddIfMissing(
+                "{n}?",
+                Regex_match_exactly_n_times_lazy_short,
+                Regex_match_exactly_n_times_lazy_long,
+                parentOpt: null,
+                positionOffset: "{".Length,
+                insertionText: "{}?"
+            );
 
-            context.AddIfMissing("{n,}", Regex_match_at_least_n_times_short, Regex_match_at_least_n_times_long, parentOpt: null, positionOffset: "{".Length, insertionText: "{,}");
-            context.AddIfMissing("{n,}?", Regex_match_at_least_n_times_lazy_short, Regex_match_at_least_n_times_lazy_long, parentOpt: null, positionOffset: "{".Length, insertionText: "{,}?");
+            context.AddIfMissing(
+                "{n,}",
+                Regex_match_at_least_n_times_short,
+                Regex_match_at_least_n_times_long,
+                parentOpt: null,
+                positionOffset: "{".Length,
+                insertionText: "{,}"
+            );
+            context.AddIfMissing(
+                "{n,}?",
+                Regex_match_at_least_n_times_lazy_short,
+                Regex_match_at_least_n_times_lazy_long,
+                parentOpt: null,
+                positionOffset: "{".Length,
+                insertionText: "{,}?"
+            );
 
-            context.AddIfMissing("{m,n}", Regex_match_between_m_and_n_times_short, Regex_match_between_m_and_n_times_long, parentOpt: null, positionOffset: "{".Length, insertionText: "{,}");
-            context.AddIfMissing("{m,n}?", Regex_match_between_m_and_n_times_lazy_short, Regex_match_between_m_and_n_times_lazy_long, parentOpt: null, positionOffset: "{".Length, insertionText: "{,}?");
+            context.AddIfMissing(
+                "{m,n}",
+                Regex_match_between_m_and_n_times_short,
+                Regex_match_between_m_and_n_times_long,
+                parentOpt: null,
+                positionOffset: "{".Length,
+                insertionText: "{,}"
+            );
+            context.AddIfMissing(
+                "{m,n}?",
+                Regex_match_between_m_and_n_times_lazy_short,
+                Regex_match_between_m_and_n_times_lazy_long,
+                parentOpt: null,
+                positionOffset: "{".Length,
+                insertionText: "{,}?"
+            );
 
-            context.AddIfMissing("#", Regex_end_of_line_comment_short, Regex_end_of_line_comment_long, parentOpt: null);
+            context.AddIfMissing(
+                "#",
+                Regex_end_of_line_comment_short,
+                Regex_end_of_line_comment_long,
+                parentOpt: null
+            );
         }
 
         private static void ProvideOpenBraceCompletions(
-            EmbeddedCompletionContext context, RegexTree tree, VirtualChar previousVirtualChar)
+            EmbeddedCompletionContext context,
+            RegexTree tree,
+            VirtualChar previousVirtualChar
+        )
         {
             // we only provide completions after `{` if the user wrote `\p{`.  In that case
             // we're providing the set of unicode categories that are legal there.
@@ -282,19 +439,30 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
                     continue;
                 }
 
-                var description = longDesc.Length > 0
-                    ? longDesc
-                    : string.Format(Regex_unicode_general_category_0, name);
+                var description =
+                    longDesc.Length > 0
+                        ? longDesc
+                        : string.Format(Regex_unicode_general_category_0, name);
 
-                context.AddIfMissing(new RegexItem(
-                    displayText, shortDesc, description,
-                    change: CompletionChange.Create(
-                        new TextChange(new TextSpan(context.Position, 0), name), newPosition: null)));
+                context.AddIfMissing(
+                    new RegexItem(
+                        displayText,
+                        shortDesc,
+                        description,
+                        change: CompletionChange.Create(
+                            new TextChange(new TextSpan(context.Position, 0), name),
+                            newPosition: null
+                        )
+                    )
+                );
             }
         }
 
         private static void ProvideOpenParenCompletions(
-            EmbeddedCompletionContext context, bool inCharacterClass, RegexNode parentOpt)
+            EmbeddedCompletionContext context,
+            bool inCharacterClass,
+            RegexNode parentOpt
+        )
         {
             if (inCharacterClass)
             {
@@ -307,26 +475,127 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
                 return;
             }
 
-            context.AddIfMissing($"(  {Regex_subexpression}  )", Regex_matched_subexpression_short, Regex_matched_subexpression_long, parentOpt, positionOffset: "(".Length, insertionText: "()");
-            context.AddIfMissing($"(?<  {Regex_name}  >  {Regex_subexpression}  )", Regex_named_matched_subexpression_short, Regex_named_matched_subexpression_long, parentOpt, positionOffset: "(?<".Length, insertionText: "(?<>)");
-            context.AddIfMissing($"(?<  {Regex_name1}  -  {Regex_name2}  >  {Regex_subexpression}  )", Regex_balancing_group_short, Regex_balancing_group_long, parentOpt, positionOffset: "(?<".Length, insertionText: "(?<->)");
-            context.AddIfMissing($"(?:  {Regex_subexpression}  )", Regex_noncapturing_group_short, Regex_noncapturing_group_long, parentOpt, positionOffset: "(?:".Length, insertionText: "(?:)");
-            context.AddIfMissing($"(?=  {Regex_subexpression}  )", Regex_zero_width_positive_lookahead_assertion_short, Regex_zero_width_positive_lookahead_assertion_long, parentOpt, positionOffset: "(?=".Length, insertionText: "(?=)");
-            context.AddIfMissing($"(?!  {Regex_subexpression}  )", Regex_zero_width_negative_lookahead_assertion_short, Regex_zero_width_negative_lookahead_assertion_long, parentOpt, positionOffset: "(?!".Length, insertionText: "(?!)");
-            context.AddIfMissing($"(?<=  {Regex_subexpression}  )", Regex_zero_width_positive_lookbehind_assertion_short, Regex_zero_width_positive_lookbehind_assertion_long, parentOpt, positionOffset: "(?<=".Length, insertionText: "(?<=)");
-            context.AddIfMissing($"(?<!  {Regex_subexpression}  )", Regex_zero_width_negative_lookbehind_assertion_short, Regex_zero_width_negative_lookbehind_assertion_long, parentOpt, positionOffset: "(?<!".Length, insertionText: "(?<!)");
-            context.AddIfMissing($"(?>  {Regex_subexpression}  )", Regex_atomic_group_short, Regex_atomic_group_long, parentOpt, positionOffset: "(?>".Length, insertionText: "(?>)");
+            context.AddIfMissing(
+                $"(  {Regex_subexpression}  )",
+                Regex_matched_subexpression_short,
+                Regex_matched_subexpression_long,
+                parentOpt,
+                positionOffset: "(".Length,
+                insertionText: "()"
+            );
+            context.AddIfMissing(
+                $"(?<  {Regex_name}  >  {Regex_subexpression}  )",
+                Regex_named_matched_subexpression_short,
+                Regex_named_matched_subexpression_long,
+                parentOpt,
+                positionOffset: "(?<".Length,
+                insertionText: "(?<>)"
+            );
+            context.AddIfMissing(
+                $"(?<  {Regex_name1}  -  {Regex_name2}  >  {Regex_subexpression}  )",
+                Regex_balancing_group_short,
+                Regex_balancing_group_long,
+                parentOpt,
+                positionOffset: "(?<".Length,
+                insertionText: "(?<->)"
+            );
+            context.AddIfMissing(
+                $"(?:  {Regex_subexpression}  )",
+                Regex_noncapturing_group_short,
+                Regex_noncapturing_group_long,
+                parentOpt,
+                positionOffset: "(?:".Length,
+                insertionText: "(?:)"
+            );
+            context.AddIfMissing(
+                $"(?=  {Regex_subexpression}  )",
+                Regex_zero_width_positive_lookahead_assertion_short,
+                Regex_zero_width_positive_lookahead_assertion_long,
+                parentOpt,
+                positionOffset: "(?=".Length,
+                insertionText: "(?=)"
+            );
+            context.AddIfMissing(
+                $"(?!  {Regex_subexpression}  )",
+                Regex_zero_width_negative_lookahead_assertion_short,
+                Regex_zero_width_negative_lookahead_assertion_long,
+                parentOpt,
+                positionOffset: "(?!".Length,
+                insertionText: "(?!)"
+            );
+            context.AddIfMissing(
+                $"(?<=  {Regex_subexpression}  )",
+                Regex_zero_width_positive_lookbehind_assertion_short,
+                Regex_zero_width_positive_lookbehind_assertion_long,
+                parentOpt,
+                positionOffset: "(?<=".Length,
+                insertionText: "(?<=)"
+            );
+            context.AddIfMissing(
+                $"(?<!  {Regex_subexpression}  )",
+                Regex_zero_width_negative_lookbehind_assertion_short,
+                Regex_zero_width_negative_lookbehind_assertion_long,
+                parentOpt,
+                positionOffset: "(?<!".Length,
+                insertionText: "(?<!)"
+            );
+            context.AddIfMissing(
+                $"(?>  {Regex_subexpression}  )",
+                Regex_atomic_group_short,
+                Regex_atomic_group_long,
+                parentOpt,
+                positionOffset: "(?>".Length,
+                insertionText: "(?>)"
+            );
 
-            context.AddIfMissing($"(?(  {Regex_expression}  )  {Regex_yes}  |  {Regex_no}  )", Regex_conditional_expression_match_short, Regex_conditional_expression_match_long, parentOpt, positionOffset: "(?(".Length, insertionText: "(?()|)");
-            context.AddIfMissing($"(?(  {Regex_name_or_number}  )  {Regex_yes}  |  {Regex_no}  )", Regex_conditional_group_match_short, Regex_conditional_group_match_long, parentOpt, positionOffset: "(?(".Length, insertionText: "(?()|)");
+            context.AddIfMissing(
+                $"(?(  {Regex_expression}  )  {Regex_yes}  |  {Regex_no}  )",
+                Regex_conditional_expression_match_short,
+                Regex_conditional_expression_match_long,
+                parentOpt,
+                positionOffset: "(?(".Length,
+                insertionText: "(?()|)"
+            );
+            context.AddIfMissing(
+                $"(?(  {Regex_name_or_number}  )  {Regex_yes}  |  {Regex_no}  )",
+                Regex_conditional_group_match_short,
+                Regex_conditional_group_match_long,
+                parentOpt,
+                positionOffset: "(?(".Length,
+                insertionText: "(?()|)"
+            );
 
-            context.AddIfMissing($"(?#  {Regex_comment}  )", Regex_inline_comment_short, Regex_inline_comment_long, parentOpt, positionOffset: "(?#".Length, insertionText: "(?#)");
-            context.AddIfMissing($"(?imnsx-imnsx)", Regex_inline_options_short, Regex_inline_options_long, parentOpt, positionOffset: "(?".Length, insertionText: "(?)");
-            context.AddIfMissing($"(?imnsx-imnsx:  {Regex_subexpression}  )", Regex_group_options_short, Regex_group_options_long, parentOpt, positionOffset: "(?".Length, insertionText: "(?:)");
+            context.AddIfMissing(
+                $"(?#  {Regex_comment}  )",
+                Regex_inline_comment_short,
+                Regex_inline_comment_long,
+                parentOpt,
+                positionOffset: "(?#".Length,
+                insertionText: "(?#)"
+            );
+            context.AddIfMissing(
+                $"(?imnsx-imnsx)",
+                Regex_inline_options_short,
+                Regex_inline_options_long,
+                parentOpt,
+                positionOffset: "(?".Length,
+                insertionText: "(?)"
+            );
+            context.AddIfMissing(
+                $"(?imnsx-imnsx:  {Regex_subexpression}  )",
+                Regex_group_options_short,
+                Regex_group_options_long,
+                parentOpt,
+                positionOffset: "(?".Length,
+                insertionText: "(?:)"
+            );
         }
 
         private static void ProvideOpenBracketCompletions(
-            EmbeddedCompletionContext context, bool inCharacterClass, RegexNode parentOpt)
+            EmbeddedCompletionContext context,
+            bool inCharacterClass,
+            RegexNode parentOpt
+        )
         {
             if (inCharacterClass)
             {
@@ -334,15 +603,53 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
                 return;
             }
 
-            context.AddIfMissing($"[  {Regex_character_group}  ]", Regex_positive_character_group_short, Regex_positive_character_group_long, parentOpt, positionOffset: "[".Length, insertionText: "[]");
-            context.AddIfMissing($"[  firstCharacter-lastCharacter  ]", Regex_positive_character_range_short, Regex_positive_character_range_long, parentOpt, positionOffset: "[".Length, insertionText: "[-]");
-            context.AddIfMissing($"[^  {Regex_character_group}  ]", Regex_negative_character_group_short, Regex_negative_character_group_long, parentOpt, positionOffset: "[^".Length, insertionText: "[^]");
-            context.AddIfMissing($"[^  firstCharacter-lastCharacter  ]", Regex_negative_character_group_short, Regex_negative_character_range_long, parentOpt, positionOffset: "[^".Length, insertionText: "[^-]");
-            context.AddIfMissing($"[  {Regex_base_group}  -[  {Regex_excluded_group}  ]  ]", Regex_character_class_subtraction_short, Regex_character_class_subtraction_long, parentOpt, positionOffset: "[".Length, insertionText: "[-[]]");
+            context.AddIfMissing(
+                $"[  {Regex_character_group}  ]",
+                Regex_positive_character_group_short,
+                Regex_positive_character_group_long,
+                parentOpt,
+                positionOffset: "[".Length,
+                insertionText: "[]"
+            );
+            context.AddIfMissing(
+                $"[  firstCharacter-lastCharacter  ]",
+                Regex_positive_character_range_short,
+                Regex_positive_character_range_long,
+                parentOpt,
+                positionOffset: "[".Length,
+                insertionText: "[-]"
+            );
+            context.AddIfMissing(
+                $"[^  {Regex_character_group}  ]",
+                Regex_negative_character_group_short,
+                Regex_negative_character_group_long,
+                parentOpt,
+                positionOffset: "[^".Length,
+                insertionText: "[^]"
+            );
+            context.AddIfMissing(
+                $"[^  firstCharacter-lastCharacter  ]",
+                Regex_negative_character_group_short,
+                Regex_negative_character_range_long,
+                parentOpt,
+                positionOffset: "[^".Length,
+                insertionText: "[^-]"
+            );
+            context.AddIfMissing(
+                $"[  {Regex_base_group}  -[  {Regex_excluded_group}  ]  ]",
+                Regex_character_class_subtraction_short,
+                Regex_character_class_subtraction_long,
+                parentOpt,
+                positionOffset: "[".Length,
+                insertionText: "[-[]]"
+            );
         }
 
         private static void ProvideBackslashCompletions(
-            EmbeddedCompletionContext context, bool inCharacterClass, RegexNode parentOpt)
+            EmbeddedCompletionContext context,
+            bool inCharacterClass,
+            RegexNode parentOpt
+        )
         {
             if (parentOpt is not null and not RegexEscapeNode)
             {
@@ -351,49 +658,200 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
 
             if (!inCharacterClass)
             {
-                context.AddIfMissing(@"\A", Regex_start_of_string_only_short, Regex_start_of_string_only_long, parentOpt);
-                context.AddIfMissing(@"\b", Regex_word_boundary_short, Regex_word_boundary_long, parentOpt);
-                context.AddIfMissing(@"\B", Regex_non_word_boundary_short, Regex_non_word_boundary_long, parentOpt);
-                context.AddIfMissing(@"\G", Regex_contiguous_matches_short, Regex_contiguous_matches_long, parentOpt);
-                context.AddIfMissing(@"\z", Regex_end_of_string_only_short, Regex_end_of_string_only_long, parentOpt);
-                context.AddIfMissing(@"\Z", Regex_end_of_string_or_before_ending_newline_short, Regex_end_of_string_or_before_ending_newline_long, parentOpt);
+                context.AddIfMissing(
+                    @"\A",
+                    Regex_start_of_string_only_short,
+                    Regex_start_of_string_only_long,
+                    parentOpt
+                );
+                context.AddIfMissing(
+                    @"\b",
+                    Regex_word_boundary_short,
+                    Regex_word_boundary_long,
+                    parentOpt
+                );
+                context.AddIfMissing(
+                    @"\B",
+                    Regex_non_word_boundary_short,
+                    Regex_non_word_boundary_long,
+                    parentOpt
+                );
+                context.AddIfMissing(
+                    @"\G",
+                    Regex_contiguous_matches_short,
+                    Regex_contiguous_matches_long,
+                    parentOpt
+                );
+                context.AddIfMissing(
+                    @"\z",
+                    Regex_end_of_string_only_short,
+                    Regex_end_of_string_only_long,
+                    parentOpt
+                );
+                context.AddIfMissing(
+                    @"\Z",
+                    Regex_end_of_string_or_before_ending_newline_short,
+                    Regex_end_of_string_or_before_ending_newline_long,
+                    parentOpt
+                );
 
-                context.AddIfMissing($@"\k<  {Regex_name_or_number}  >", Regex_named_backreference_short, Regex_named_backreference_long, parentOpt, @"\k<".Length, insertionText: @"\k<>");
+                context.AddIfMissing(
+                    $@"\k<  {Regex_name_or_number}  >",
+                    Regex_named_backreference_short,
+                    Regex_named_backreference_long,
+                    parentOpt,
+                    @"\k<".Length,
+                    insertionText: @"\k<>"
+                );
 
-                // Note: we intentionally do not add `\<>` to the list.  While supported by the 
-                // .NET regex engine, it is effectively deprecated and discouraged from use.  
+                // Note: we intentionally do not add `\<>` to the list.  While supported by the
+                // .NET regex engine, it is effectively deprecated and discouraged from use.
                 // Instead, it is recommended that `\k<>` is used instead.
-                // 
+                //
                 // context.AddIfMissing(@"\<>", "", "", parentOpt, @"\<".Length));
 
-                context.AddIfMissing(@"\1-9", Regex_numbered_backreference_short, Regex_numbered_backreference_long, parentOpt, @"\".Length, @"\");
+                context.AddIfMissing(
+                    @"\1-9",
+                    Regex_numbered_backreference_short,
+                    Regex_numbered_backreference_long,
+                    parentOpt,
+                    @"\".Length,
+                    @"\"
+                );
             }
 
-            context.AddIfMissing(@"\a", Regex_bell_character_short, Regex_bell_character_long, parentOpt);
-            context.AddIfMissing(@"\b", Regex_backspace_character_short, Regex_backspace_character_long, parentOpt);
-            context.AddIfMissing(@"\e", Regex_escape_character_short, Regex_escape_character_long, parentOpt);
-            context.AddIfMissing(@"\f", Regex_form_feed_character_short, Regex_form_feed_character_long, parentOpt);
-            context.AddIfMissing(@"\n", Regex_new_line_character_short, Regex_new_line_character_long, parentOpt);
-            context.AddIfMissing(@"\r", Regex_carriage_return_character_short, Regex_carriage_return_character_long, parentOpt);
-            context.AddIfMissing(@"\t", Regex_tab_character_short, Regex_tab_character_long, parentOpt);
-            context.AddIfMissing(@"\v", Regex_vertical_tab_character_short, Regex_vertical_tab_character_long, parentOpt);
+            context.AddIfMissing(
+                @"\a",
+                Regex_bell_character_short,
+                Regex_bell_character_long,
+                parentOpt
+            );
+            context.AddIfMissing(
+                @"\b",
+                Regex_backspace_character_short,
+                Regex_backspace_character_long,
+                parentOpt
+            );
+            context.AddIfMissing(
+                @"\e",
+                Regex_escape_character_short,
+                Regex_escape_character_long,
+                parentOpt
+            );
+            context.AddIfMissing(
+                @"\f",
+                Regex_form_feed_character_short,
+                Regex_form_feed_character_long,
+                parentOpt
+            );
+            context.AddIfMissing(
+                @"\n",
+                Regex_new_line_character_short,
+                Regex_new_line_character_long,
+                parentOpt
+            );
+            context.AddIfMissing(
+                @"\r",
+                Regex_carriage_return_character_short,
+                Regex_carriage_return_character_long,
+                parentOpt
+            );
+            context.AddIfMissing(
+                @"\t",
+                Regex_tab_character_short,
+                Regex_tab_character_long,
+                parentOpt
+            );
+            context.AddIfMissing(
+                @"\v",
+                Regex_vertical_tab_character_short,
+                Regex_vertical_tab_character_long,
+                parentOpt
+            );
 
-            context.AddIfMissing(@"\x##", Regex_hexadecimal_escape_short, Regex_hexadecimal_escape_long, parentOpt, @"\x".Length, @"\x");
-            context.AddIfMissing(@"\u####", Regex_unicode_escape_short, Regex_unicode_escape_long, parentOpt, @"\u".Length, @"\u");
-            context.AddIfMissing(@"\cX", Regex_control_character_short, Regex_control_character_long, parentOpt, @"\c".Length, @"\c");
+            context.AddIfMissing(
+                @"\x##",
+                Regex_hexadecimal_escape_short,
+                Regex_hexadecimal_escape_long,
+                parentOpt,
+                @"\x".Length,
+                @"\x"
+            );
+            context.AddIfMissing(
+                @"\u####",
+                Regex_unicode_escape_short,
+                Regex_unicode_escape_long,
+                parentOpt,
+                @"\u".Length,
+                @"\u"
+            );
+            context.AddIfMissing(
+                @"\cX",
+                Regex_control_character_short,
+                Regex_control_character_long,
+                parentOpt,
+                @"\c".Length,
+                @"\c"
+            );
 
-            context.AddIfMissing(@"\d", Regex_decimal_digit_character_short, Regex_decimal_digit_character_long, parentOpt);
-            context.AddIfMissing(@"\D", Regex_non_digit_character_short, Regex_non_digit_character_long, parentOpt);
-            context.AddIfMissing(@"\p{...}", Regex_unicode_category_short, Regex_unicode_category_long, parentOpt, @"\p".Length, @"\p");
-            context.AddIfMissing(@"\P{...}", Regex_negative_unicode_category_short, Regex_negative_unicode_category_long, parentOpt, @"\P".Length, @"\P");
-            context.AddIfMissing(@"\s", Regex_white_space_character_short, Regex_white_space_character_long, parentOpt);
-            context.AddIfMissing(@"\S", Regex_non_white_space_character_short, Regex_non_white_space_character_long, parentOpt);
-            context.AddIfMissing(@"\w", Regex_word_character_short, Regex_word_character_long, parentOpt);
-            context.AddIfMissing(@"\W", Regex_non_word_character_short, Regex_non_word_character_long, parentOpt);
+            context.AddIfMissing(
+                @"\d",
+                Regex_decimal_digit_character_short,
+                Regex_decimal_digit_character_long,
+                parentOpt
+            );
+            context.AddIfMissing(
+                @"\D",
+                Regex_non_digit_character_short,
+                Regex_non_digit_character_long,
+                parentOpt
+            );
+            context.AddIfMissing(
+                @"\p{...}",
+                Regex_unicode_category_short,
+                Regex_unicode_category_long,
+                parentOpt,
+                @"\p".Length,
+                @"\p"
+            );
+            context.AddIfMissing(
+                @"\P{...}",
+                Regex_negative_unicode_category_short,
+                Regex_negative_unicode_category_long,
+                parentOpt,
+                @"\P".Length,
+                @"\P"
+            );
+            context.AddIfMissing(
+                @"\s",
+                Regex_white_space_character_short,
+                Regex_white_space_character_long,
+                parentOpt
+            );
+            context.AddIfMissing(
+                @"\S",
+                Regex_non_white_space_character_short,
+                Regex_non_white_space_character_long,
+                parentOpt
+            );
+            context.AddIfMissing(
+                @"\w",
+                Regex_word_character_short,
+                Regex_word_character_long,
+                parentOpt
+            );
+            context.AddIfMissing(
+                @"\W",
+                Regex_non_word_character_short,
+                Regex_non_word_character_long,
+                parentOpt
+            );
         }
 
         private static (RegexNode parent, RegexToken Token)? FindToken(
-            RegexNode parent, VirtualChar ch)
+            RegexNode parent,
+            VirtualChar ch
+        )
         {
             foreach (var child in parent)
             {
@@ -427,7 +885,10 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
                 {
                     if (child.IsNode)
                     {
-                        var result = IsInCharacterClassWorker(child.Node, inCharacterClass || parent is RegexBaseCharacterClassNode);
+                        var result = IsInCharacterClassWorker(
+                            child.Node,
+                            inCharacterClass || parent is RegexBaseCharacterClassNode
+                        );
                         if (result)
                         {
                             return result;
@@ -446,7 +907,12 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
             }
         }
 
-        public override Task<CompletionChange> GetChangeAsync(Document document, CompletionItem item, char? commitKey, CancellationToken cancellationToken)
+        public override Task<CompletionChange> GetChangeAsync(
+            Document document,
+            CompletionItem item,
+            char? commitKey,
+            CancellationToken cancellationToken
+        )
         {
             // These values have always been added by us.
             var startString = item.GetProperty(StartKey);
@@ -456,20 +922,33 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages.RegularExpressions.L
             // This value is optionally added in some cases and may not always be there.
             item.TryGetProperty(NewPositionKey, out var newPositionString);
 
-            return Task.FromResult(CompletionChange.Create(
-                new TextChange(new TextSpan(int.Parse(startString), int.Parse(lengthString)), newText),
-                newPositionString == null ? null : int.Parse(newPositionString)));
+            return Task.FromResult(
+                CompletionChange.Create(
+                    new TextChange(
+                        new TextSpan(int.Parse(startString), int.Parse(lengthString)),
+                        newText
+                    ),
+                    newPositionString == null ? null : int.Parse(newPositionString)
+                )
+            );
         }
 
-        public override Task<CompletionDescription> GetDescriptionAsync(Document document, CompletionItem item, CancellationToken cancellationToken)
+        public override Task<CompletionDescription> GetDescriptionAsync(
+            Document document,
+            CompletionItem item,
+            CancellationToken cancellationToken
+        )
         {
             if (!item.TryGetProperty(DescriptionKey, out var description))
             {
                 return SpecializedTasks.Null<CompletionDescription>();
             }
 
-            return Task.FromResult(CompletionDescription.Create(
-                ImmutableArray.Create(new TaggedText(TextTags.Text, description))));
+            return Task.FromResult(
+                CompletionDescription.Create(
+                    ImmutableArray.Create(new TaggedText(TextTags.Text, description))
+                )
+            );
         }
     }
 }

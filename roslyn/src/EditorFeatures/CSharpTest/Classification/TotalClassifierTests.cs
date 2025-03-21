@@ -27,10 +27,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
     [Trait(Traits.Feature, Traits.Features.Classification)]
     public partial class TotalClassifierTests : AbstractCSharpClassifierTests
     {
-        protected override async Task<ImmutableArray<ClassifiedSpan>> GetClassificationSpansAsync(string code, ImmutableArray<TextSpan> spans, ParseOptions? options, TestHost testHost)
+        protected override async Task<ImmutableArray<ClassifiedSpan>> GetClassificationSpansAsync(
+            string code,
+            ImmutableArray<TextSpan> spans,
+            ParseOptions? options,
+            TestHost testHost
+        )
         {
             using var workspace = CreateWorkspace(code, options, testHost);
-            var document = workspace.CurrentSolution.GetRequiredDocument(workspace.Documents.First().Id);
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.First().Id
+            );
 
             return await GetAllClassificationsAsync(document, spans);
         }
@@ -39,13 +46,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
         public async Task VarAsUsingAliasForNamespace(TestHost testHost)
         {
             await TestAsync(
-@"using var = System;",
+                @"using var = System;",
                 testHost,
                 Keyword("using"),
                 Namespace("var"),
                 Operators.Equals,
                 Namespace("System"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -75,14 +83,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 XmlDoc.Delimiter("="),
                 XmlDoc.AttributeQuotes("'"),
                 Identifier("_"),
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task VarAsUsingAliasForClass(TestHost testHost)
         {
             await TestAsync(
-@"using var = System.Math;",
+                @"using var = System.Math;",
                 testHost,
                 Keyword("using"),
                 Class("var"),
@@ -91,14 +100,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Operators.Dot,
                 Class("Math"),
                 Static("Math"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task VarAsUsingAliasForDelegate(TestHost testHost)
         {
             await TestAsync(
-@"using var = System.Action;",
+                @"using var = System.Action;",
                 testHost,
                 Keyword("using"),
                 Delegate("var"),
@@ -106,14 +116,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Delegate("Action"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task VarAsUsingAliasForStruct(TestHost testHost)
         {
             await TestAsync(
-@"using var = System.DateTime;",
+                @"using var = System.DateTime;",
                 testHost,
                 Keyword("using"),
                 Struct("var"),
@@ -121,14 +132,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Struct("DateTime"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task VarAsUsingAliasForEnum(TestHost testHost)
         {
             await TestAsync(
-@"using var = System.DayOfWeek;",
+                @"using var = System.DayOfWeek;",
                 testHost,
                 Keyword("using"),
                 Enum("var"),
@@ -136,14 +148,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Enum("DayOfWeek"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task VarAsUsingAliasForInterface(TestHost testHost)
         {
             await TestAsync(
-@"using var = System.IDisposable;",
+                @"using var = System.IDisposable;",
                 testHost,
                 Keyword("using"),
                 Interface("var"),
@@ -151,7 +164,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Interface("IDisposable"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -175,7 +189,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -200,7 +215,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -227,14 +243,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task UsingAliasGlobalNamespace(TestHost testHost)
         {
             await TestAsync(
-@"using IO = global::System.IO;",
+                @"using IO = global::System.IO;",
                 testHost,
                 Keyword("using"),
                 Namespace("IO"),
@@ -244,7 +261,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Namespace("System"),
                 Operators.Dot,
                 Namespace("IO"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -259,7 +277,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """;
-            await TestAsync(code,
+            await TestAsync(
+                code,
                 testHost,
                 Keyword("partial"),
                 Keyword("class"),
@@ -295,14 +314,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         [WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543123")]
         public async Task VarInForeach(TestHost testHost)
         {
-            await TestInMethodAsync(@"foreach (var v in args) { }",
+            await TestInMethodAsync(
+                @"foreach (var v in args) { }",
                 testHost,
                 ControlKeyword("foreach"),
                 Punctuation.OpenParen,
@@ -312,7 +333,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Identifier("args"),
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -352,7 +374,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -387,7 +410,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("value"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-
                 Keyword("remove"),
                 Punctuation.OpenCurly,
                 Keyword("this"),
@@ -397,7 +419,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("value"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -431,7 +454,6 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Identifier("value"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-
                 Keyword("set"),
                 Punctuation.OpenCurly,
                 Keyword("this"),
@@ -441,7 +463,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("value"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -470,14 +493,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("value"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task NewOfInterface(TestHost testHost)
         {
             await TestInMethodAsync(
-@"object o = new System.IDisposable();",
+                @"object o = new System.IDisposable();",
                 testHost,
                 Keyword("object"),
                 Local("o"),
@@ -488,7 +512,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Interface("IDisposable"),
                 Punctuation.OpenParen,
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545611")]
@@ -520,7 +545,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545609")]
@@ -553,7 +579,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Local("x"),
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545610")]
@@ -581,7 +608,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Colon,
                 Class("Attribute"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545610")]
@@ -609,7 +637,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Colon,
                 Class("Attribute"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546170")]
@@ -648,7 +677,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("Console"),
                 Static("Console"),
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/546403")]
@@ -673,7 +703,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("namespace"),
                 Namespace("C"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -702,13 +733,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 XmlDoc.Name("param"),
                 XmlDoc.AttributeName("name"),
                 XmlDoc.Delimiter("="),
-                XmlDoc.AttributeQuotes("""
+                XmlDoc.AttributeQuotes(
+                    """
                     "
-                    """),
+                    """
+                ),
                 Parameter("x"),
-                XmlDoc.AttributeQuotes("""
+                XmlDoc.AttributeQuotes(
+                    """
                     "
-                    """),
+                    """
+                ),
                 XmlDoc.Delimiter("/>"),
                 Keyword("void"),
                 Method("Goo"),
@@ -718,7 +753,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -741,16 +777,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 XmlDoc.Name("see"),
                 XmlDoc.AttributeName("cref"),
                 XmlDoc.Delimiter("="),
-                XmlDoc.AttributeQuotes("""
+                XmlDoc.AttributeQuotes(
+                    """
                     "
-                    """),
+                    """
+                ),
                 Class("Program"),
                 Punctuation.OpenCurly,
                 TypeParameter("T"),
                 Punctuation.CloseCurly,
-                XmlDoc.AttributeQuotes("""
+                XmlDoc.AttributeQuotes(
+                    """
                     "
-                    """),
+                    """
+                ),
                 XmlDoc.Delimiter("/>"),
                 Keyword("class"),
                 Class("Program"),
@@ -764,7 +804,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -787,13 +828,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 XmlDoc.Name("see"),
                 XmlDoc.AttributeName("cref"),
                 XmlDoc.Delimiter("="),
-                XmlDoc.AttributeQuotes("""
+                XmlDoc.AttributeQuotes(
+                    """
                     "
-                    """),
+                    """
+                ),
                 Namespace("N"),
-                XmlDoc.AttributeQuotes("""
+                XmlDoc.AttributeQuotes(
+                    """
                     "
-                    """),
+                    """
+                ),
                 XmlDoc.Delimiter("/>"),
                 Keyword("namespace"),
                 Namespace("N"),
@@ -802,7 +847,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Class("Program"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -838,7 +884,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Property("IGoo"),
                 Punctuation.CloseParen,
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -869,18 +916,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 XmlDoc.Name("see"),
                 XmlDoc.AttributeName("cref"),
                 XmlDoc.Delimiter("="),
-                XmlDoc.AttributeQuotes("""
+                XmlDoc.AttributeQuotes(
+                    """
                     "
-                    """),
+                    """
+                ),
                 Class("MyClass"),
                 Operators.Dot,
                 Class("MyClass"),
                 Punctuation.OpenParen,
                 Keyword("int"),
                 Punctuation.CloseParen,
-                XmlDoc.AttributeQuotes("""
+                XmlDoc.AttributeQuotes(
+                    """
                     "
-                    """),
+                    """
+                ),
                 XmlDoc.Delimiter("/>"),
                 XmlDoc.Delimiter("///"),
                 XmlDoc.Text(" "),
@@ -898,7 +949,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -925,7 +977,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Colon,
                 Interface("IReadOnlyCollection"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -957,7 +1010,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("string"),
                 Punctuation.CloseAngle,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -990,7 +1044,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1064,7 +1119,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseParen,
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1087,13 +1143,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Local("x"),
                 Operators.Equals,
                 Constant("Number"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_InsideMethod(TestHost testHost)
         {
-            await TestInMethodAsync("""
+            await TestInMethodAsync(
+                """
                 var unmanaged = 0;
                 unmanaged++;
                 """,
@@ -1105,7 +1163,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Semicolon,
                 Local("unmanaged"),
                 Operators.PlusPlus,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1124,13 +1183,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Colon,
                 Keyword("unmanaged"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_Type_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface unmanaged {}
                 class X<T> where T : unmanaged { }
                 """,
@@ -1149,13 +1210,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Colon,
                 Keyword("unmanaged"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestUnmanagedConstraint_Type_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_Type_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface unmanaged {}
@@ -1181,13 +1246,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Colon,
                 Keyword("unmanaged"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_Method_Keyword(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void M<T>() where T : unmanaged { }
@@ -1210,13 +1277,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("unmanaged"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_Method_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface unmanaged {}
                 class X
                 {
@@ -1244,13 +1313,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("unmanaged"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestUnmanagedConstraint_Method_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_Method_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface unmanaged {}
@@ -1285,7 +1358,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("unmanaged"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1306,13 +1380,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 TypeParameter("T"),
                 Punctuation.Colon,
                 Keyword("unmanaged"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_Delegate_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface unmanaged {}
                 delegate void D<T>() where T : unmanaged;
                 """,
@@ -1333,13 +1409,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 TypeParameter("T"),
                 Punctuation.Colon,
                 Keyword("unmanaged"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestUnmanagedConstraint_Delegate_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_Delegate_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface unmanaged {}
@@ -1367,13 +1447,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 TypeParameter("T"),
                 Punctuation.Colon,
                 Keyword("unmanaged"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_LocalFunction_Keyword(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -1405,13 +1487,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface unmanaged {}
                 class X
                 {
@@ -1448,13 +1532,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestUnmanagedConstraint_LocalFunction_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface unmanaged {}
@@ -1498,14 +1586,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/29492")]
         [CombinatorialData]
         public async Task TestOperatorOverloading(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class C
                 {
                     void M()
@@ -1522,67 +1612,69 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                     }
                 }
                 """,
-    testHost,
-    Keyword("class"),
-    Class("C"),
-    Punctuation.OpenCurly,
-    Keyword("void"),
-    Method("M"),
-    Punctuation.OpenParen,
-    Punctuation.CloseParen,
-    Punctuation.OpenCurly,
-    Keyword("var"),
-    Local("a"),
-    Operators.Equals,
-    Number("1"),
-    Operators.Plus,
-    Number("1"),
-    Punctuation.Semicolon,
-    Keyword("var"),
-    Local("b"),
-    Operators.Equals,
-    Keyword("new"),
-    Class("True"),
-    Punctuation.OpenParen,
-    Punctuation.CloseParen,
-    OverloadedOperators.Plus,
-    Keyword("new"),
-    Class("True"),
-    Punctuation.OpenParen,
-    Punctuation.CloseParen,
-    Punctuation.Semicolon,
-    Punctuation.CloseCurly,
-    Punctuation.CloseCurly,
-    Keyword("class"),
-    Class("True"),
-    Punctuation.OpenCurly,
-    Keyword("public"),
-    Keyword("static"),
-    Class("True"),
-    Keyword("operator"),
-    Operators.Plus,
-    Punctuation.OpenParen,
-    Class("True"),
-    Parameter("a"),
-    Punctuation.Comma,
-    Class("True"),
-    Parameter("b"),
-    Punctuation.CloseParen,
-    Punctuation.OpenCurly,
-    ControlKeyword("return"),
-    Keyword("new"),
-    Class("True"),
-    Punctuation.OpenParen,
-    Punctuation.CloseParen,
-    Punctuation.Semicolon,
-    Punctuation.CloseCurly,
-    Punctuation.CloseCurly);
+                testHost,
+                Keyword("class"),
+                Class("C"),
+                Punctuation.OpenCurly,
+                Keyword("void"),
+                Method("M"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen,
+                Punctuation.OpenCurly,
+                Keyword("var"),
+                Local("a"),
+                Operators.Equals,
+                Number("1"),
+                Operators.Plus,
+                Number("1"),
+                Punctuation.Semicolon,
+                Keyword("var"),
+                Local("b"),
+                Operators.Equals,
+                Keyword("new"),
+                Class("True"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen,
+                OverloadedOperators.Plus,
+                Keyword("new"),
+                Class("True"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen,
+                Punctuation.Semicolon,
+                Punctuation.CloseCurly,
+                Punctuation.CloseCurly,
+                Keyword("class"),
+                Class("True"),
+                Punctuation.OpenCurly,
+                Keyword("public"),
+                Keyword("static"),
+                Class("True"),
+                Keyword("operator"),
+                Operators.Plus,
+                Punctuation.OpenParen,
+                Class("True"),
+                Parameter("a"),
+                Punctuation.Comma,
+                Class("True"),
+                Parameter("b"),
+                Punctuation.CloseParen,
+                Punctuation.OpenCurly,
+                ControlKeyword("return"),
+                Keyword("new"),
+                Class("True"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen,
+                Punctuation.Semicolon,
+                Punctuation.CloseCurly,
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_InsideMethod(TestHost testHost)
         {
-            await TestInMethodAsync("""
+            await TestInMethodAsync(
+                """
                 var notnull = 0;
                 notnull++;
                 """,
@@ -1594,7 +1686,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Semicolon,
                 Local("notnull"),
                 Operators.PlusPlus,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1613,13 +1706,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Colon,
                 Keyword("notnull"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_Type_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface notnull {}
                 class X<T> where T : notnull { }
                 """,
@@ -1638,13 +1733,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Colon,
                 Keyword("notnull"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestNotNullConstraint_Type_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_Type_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface notnull {}
@@ -1670,13 +1769,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Colon,
                 Keyword("notnull"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_Method_Keyword(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void M<T>() where T : notnull { }
@@ -1699,13 +1800,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("notnull"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_Method_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface notnull {}
                 class X
                 {
@@ -1733,13 +1836,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("notnull"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestNotNullConstraint_Method_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_Method_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface notnull {}
@@ -1774,7 +1881,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("notnull"),
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -1795,13 +1903,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 TypeParameter("T"),
                 Punctuation.Colon,
                 Keyword("notnull"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_Delegate_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface notnull {}
                 delegate void D<T>() where T : notnull;
                 """,
@@ -1822,13 +1932,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 TypeParameter("T"),
                 Punctuation.Colon,
                 Keyword("notnull"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestNotNullConstraint_Delegate_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_Delegate_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface notnull {}
@@ -1856,13 +1970,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 TypeParameter("T"),
                 Punctuation.Colon,
                 Keyword("notnull"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_LocalFunction_Keyword(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class X
                 {
                     void N()
@@ -1894,13 +2010,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestNotNullConstraint_LocalFunction_ExistingInterface(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 interface notnull {}
                 class X
                 {
@@ -1937,13 +2055,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
-        public async Task TestNotNullConstraint_LocalFunction_ExistingInterfaceButOutOfScope(TestHost testHost)
+        public async Task TestNotNullConstraint_LocalFunction_ExistingInterfaceButOutOfScope(
+            TestHost testHost
+        )
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 namespace OtherScope
                 {
                     interface notnull {}
@@ -1987,7 +2109,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/10174")]
@@ -2057,7 +2180,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.Semicolon,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/42368")]
@@ -2098,7 +2222,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/42368")]
@@ -2139,7 +2264,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/59484")]
@@ -2178,7 +2304,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.CloseBracket,
                 Local("list"),
                 Punctuation.Semicolon,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/42368")]
@@ -2218,7 +2345,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Punctuation.OpenCurly,
                 Punctuation.CloseCurly,
                 Punctuation.CloseCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2237,20 +2365,24 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 Keyword("class"),
                 Class("C"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestStringEscape(TestHost testHost)
         {
-            await TestInMethodAsync(@"var goo = $@""{{{12:X}}}"";",
+            await TestInMethodAsync(
+                @"var goo = $@""{{{12:X}}}"";",
                 testHost,
                 Keyword("var"),
                 Local("goo"),
                 Operators.Equals,
-                Verbatim("""
+                Verbatim(
+                    """
                     $@"
-                    """),
+                    """
+                ),
                 Escape("{{"),
                 Punctuation.OpenCurly,
                 Number("12"),
@@ -2258,10 +2390,13 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 String("X"),
                 Punctuation.CloseCurly,
                 Escape("}}"),
-                Verbatim("""
+                Verbatim(
+                    """
                     "
-                    """),
-                Punctuation.Semicolon);
+                    """
+                ),
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2276,17 +2411,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Classification
                 }
                 """,
                 testHost,
-Keyword("class"),
-Class("C"),
-Punctuation.OpenCurly,
-Keyword("static"),
-Class("C"),
-Static("C"),
-Punctuation.OpenParen,
-Punctuation.CloseParen,
-Punctuation.OpenCurly,
-Punctuation.CloseCurly,
-Punctuation.CloseCurly);
+                Keyword("class"),
+                Class("C"),
+                Punctuation.OpenCurly,
+                Keyword("static"),
+                Class("C"),
+                Static("C"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen,
+                Punctuation.OpenCurly,
+                Punctuation.CloseCurly,
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2301,17 +2437,18 @@ Punctuation.CloseCurly);
                 }
                 """,
                 testHost,
-Keyword("interface"),
-Interface("C"),
-Punctuation.OpenCurly,
-Keyword("static"),
-Interface("C"),
-Static("C"),
-Punctuation.OpenParen,
-Punctuation.CloseParen,
-Punctuation.OpenCurly,
-Punctuation.CloseCurly,
-Punctuation.CloseCurly);
+                Keyword("interface"),
+                Interface("C"),
+                Punctuation.OpenCurly,
+                Keyword("static"),
+                Interface("C"),
+                Static("C"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen,
+                Punctuation.OpenCurly,
+                Punctuation.CloseCurly,
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2326,15 +2463,16 @@ Punctuation.CloseCurly);
                 """,
                 testHost,
                 parseOptions: null,
-ControlKeyword("foreach"),
-Punctuation.OpenParen,
-Keyword("var"),
-Local("arg"),
-ControlKeyword("in"),
-Keyword("args"),
-Punctuation.CloseParen,
-Punctuation.OpenCurly,
-Punctuation.CloseCurly);
+                ControlKeyword("foreach"),
+                Punctuation.OpenParen,
+                Keyword("var"),
+                Local("arg"),
+                ControlKeyword("in"),
+                Keyword("args"),
+                Punctuation.CloseParen,
+                Punctuation.OpenCurly,
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2355,15 +2493,16 @@ Punctuation.CloseCurly);
                 """,
                 testHost,
                 parseOptions: null,
-ControlKeyword("foreach"),
-Punctuation.OpenParen,
-Keyword("var"),
-Local("arg"),
-ControlKeyword("in"),
-Parameter("args"),
-Punctuation.CloseParen,
-Punctuation.OpenCurly,
-Punctuation.CloseCurly);
+                ControlKeyword("foreach"),
+                Punctuation.OpenParen,
+                Keyword("var"),
+                Local("arg"),
+                ControlKeyword("in"),
+                Parameter("args"),
+                Punctuation.CloseParen,
+                Punctuation.OpenCurly,
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2379,12 +2518,13 @@ Punctuation.CloseCurly);
                 """,
                 testHost,
                 parseOptions: null,
-Keyword("class"),
-Class("Test"),
-Punctuation.OpenCurly,
-Keyword("public"),
-Keyword("async"),
-Punctuation.CloseCurly);
+                Keyword("class"),
+                Class("Test"),
+                Punctuation.OpenCurly,
+                Keyword("public"),
+                Keyword("async"),
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2404,12 +2544,13 @@ Punctuation.CloseCurly);
                 """,
                 testHost,
                 parseOptions: null,
-Keyword("class"),
-Class("Test"),
-Punctuation.OpenCurly,
-Keyword("public"),
-Class("async"),
-Punctuation.CloseCurly);
+                Keyword("class"),
+                Class("Test"),
+                Punctuation.OpenCurly,
+                Keyword("public"),
+                Class("async"),
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2425,18 +2566,21 @@ Punctuation.CloseCurly);
                 """,
                 testHost,
                 parseOptions: null,
-Keyword("void"),
-Method("M"),
-Punctuation.OpenParen,
-Punctuation.CloseParen,
-Punctuation.OpenCurly,
-Keyword("async"),
-Punctuation.CloseCurly);
+                Keyword("void"),
+                Method("M"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen,
+                Punctuation.OpenCurly,
+                Keyword("async"),
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         [WorkItem(60399, "https://github.com/dotnet/roslyn/issues/60339")]
-        public async Task TestAsyncInPotentialLocalFunctionDeclarationWhenAsyncTypeIsDefined(TestHost testHost)
+        public async Task TestAsyncInPotentialLocalFunctionDeclarationWhenAsyncTypeIsDefined(
+            TestHost testHost
+        )
         {
             await TestAsync(
                 """
@@ -2451,13 +2595,14 @@ Punctuation.CloseCurly);
                 """,
                 testHost,
                 parseOptions: null,
-Keyword("void"),
-Method("M"),
-Punctuation.OpenParen,
-Punctuation.CloseParen,
-Punctuation.OpenCurly,
-Class("async"),
-Punctuation.CloseCurly);
+                Keyword("void"),
+                Method("M"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen,
+                Punctuation.OpenCurly,
+                Class("async"),
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2476,9 +2621,10 @@ Punctuation.CloseCurly);
                 """,
                 testHost,
                 parseOptions: null,
-Keyword("async"),
-Local("a"),
-Punctuation.Semicolon);
+                Keyword("async"),
+                Local("a"),
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2499,9 +2645,10 @@ Punctuation.Semicolon);
                 """,
                 testHost,
                 parseOptions: null,
-Class("async"),
-Local("a"),
-Punctuation.Semicolon);
+                Class("async"),
+                Local("a"),
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2517,15 +2664,16 @@ Punctuation.Semicolon);
                 """,
                 testHost,
                 parseOptions: null,
-Keyword("public"),
-Keyword("async"),
-Property("Prop"),
-Punctuation.OpenCurly,
-Keyword("get"),
-Punctuation.Semicolon,
-Keyword("set"),
-Punctuation.Semicolon,
-Punctuation.CloseCurly);
+                Keyword("public"),
+                Keyword("async"),
+                Property("Prop"),
+                Punctuation.OpenCurly,
+                Keyword("get"),
+                Punctuation.Semicolon,
+                Keyword("set"),
+                Punctuation.Semicolon,
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2543,15 +2691,16 @@ Punctuation.CloseCurly);
                 """,
                 testHost,
                 parseOptions: null,
-Keyword("public"),
-Class("async"),
-Property("Prop"),
-Punctuation.OpenCurly,
-Keyword("get"),
-Punctuation.Semicolon,
-Keyword("set"),
-Punctuation.Semicolon,
-Punctuation.CloseCurly);
+                Keyword("public"),
+                Class("async"),
+                Property("Prop"),
+                Punctuation.OpenCurly,
+                Keyword("get"),
+                Punctuation.Semicolon,
+                Keyword("set"),
+                Punctuation.Semicolon,
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2567,11 +2716,12 @@ Punctuation.CloseCurly);
                 """,
                 testHost,
                 parseOptions: null,
-Keyword("public"),
-Keyword("async"),
-Method("M"),
-Punctuation.OpenParen,
-Punctuation.CloseParen);
+                Keyword("public"),
+                Keyword("async"),
+                Method("M"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2589,11 +2739,12 @@ Punctuation.CloseParen);
                 """,
                 testHost,
                 parseOptions: null,
-Keyword("public"),
-Class("async"),
-Method("M"),
-Punctuation.OpenParen,
-Punctuation.CloseParen);
+                Keyword("public"),
+                Class("async"),
+                Method("M"),
+                Punctuation.OpenParen,
+                Punctuation.CloseParen
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2617,11 +2768,12 @@ Punctuation.CloseParen);
                 """,
                 testHost,
                 parseOptions: null,
-Class("C"),
-Operators.Dot,
-Field("async"),
-Static("async"),
-Punctuation.Semicolon);
+                Class("C"),
+                Operators.Dot,
+                Field("async"),
+                Static("async"),
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2641,29 +2793,33 @@ Punctuation.Semicolon);
                 """,
                 testHost,
                 parseOptions: null,
-Delegate("Action"),
-Local("a"),
-Operators.Equals,
-Keyword("async"));
+                Delegate("Action"),
+                Local("a"),
+                Operators.Equals,
+                Keyword("async")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestPartialInIncompleteMember1(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class C
                 {
                     [|partial|]
                 }
                 """,
                 testHost,
-                Keyword("partial"));
+                Keyword("partial")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestPartialInIncompleteMember2(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class C
                 {
                     [|public partial|]
@@ -2671,13 +2827,15 @@ Keyword("async"));
                 """,
                 testHost,
                 Keyword("public"),
-                Keyword("partial"));
+                Keyword("partial")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestPartialInIncompleteMember1_PartialTypeIsDefined(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class partial
                 {
                 }
@@ -2688,13 +2846,15 @@ Keyword("async"));
                 }
                 """,
                 testHost,
-                Class("partial"));
+                Class("partial")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestPartialInIncompleteMember2_PartialTypeIsDefined(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class partial
                 {
                 }
@@ -2706,34 +2866,40 @@ Keyword("async"));
                 """,
                 testHost,
                 Keyword("public"),
-                Class("partial"));
+                Class("partial")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestTopLevelPartial1(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 partial
                 """,
                 testHost,
-                Keyword("partial"));
+                Keyword("partial")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestTopLevelPartial2(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 public partial
                 """,
                 testHost,
                 Keyword("public"),
-                Keyword("partial"));
+                Keyword("partial")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestTopLevelPartial1_PartialTypeIsDefined(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class partial
                 {
                 }
@@ -2741,13 +2907,15 @@ Keyword("async"));
                 [|partial|]
                 """,
                 testHost,
-                Class("partial"));
+                Class("partial")
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestTopLevelPartial2_PartialTypeIsDefined(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 class partial
                 {
                 }
@@ -2756,7 +2924,8 @@ Keyword("async"));
                 """,
                 testHost,
                 Keyword("public"),
-                Class("partial"));
+                Class("partial")
+            );
         }
 
         /// <seealso cref="SemanticClassifierTests.LocalFunctionUse"/>
@@ -2818,20 +2987,23 @@ Keyword("async"));
                 Punctuation.OpenParen,
                 Punctuation.CloseParen,
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
         public async Task TestScopedVar(TestHost testHost)
         {
-            await TestAsync("""
+            await TestAsync(
+                """
                 static void method(scoped in S s)
                 {
                     scoped var rs1 = s;
                 }
 
                 file readonly ref struct S { }
-                """, testHost,
+                """,
+                testHost,
                 Keyword("static"),
                 Keyword("void"),
                 Method("method"),
@@ -2856,7 +3028,8 @@ Keyword("async"));
                 Keyword("struct"),
                 Struct("S"),
                 Punctuation.OpenCurly,
-                Punctuation.CloseCurly);
+                Punctuation.CloseCurly
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2884,7 +3057,8 @@ Keyword("async"));
                 Static("N"),
                 Punctuation.CloseParen,
                 Operators.EqualsGreaterThan,
-                Parameter("x"));
+                Parameter("x")
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2899,7 +3073,8 @@ Keyword("async"));
                 Struct("X"),
                 Operators.Equals,
                 Keyword("int"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2916,7 +3091,8 @@ Keyword("async"));
                 Keyword("int"),
                 Punctuation.OpenBracket,
                 Punctuation.CloseBracket,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2933,7 +3109,8 @@ Keyword("async"));
                 Operators.Equals,
                 Keyword("int"),
                 Operators.Asterisk,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2955,7 +3132,8 @@ Keyword("async"));
                 Punctuation.Comma,
                 Keyword("int"),
                 Punctuation.CloseAngle,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -2976,7 +3154,8 @@ Keyword("async"));
                 Keyword("string"),
                 Identifier("b"),
                 Punctuation.CloseParen,
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3003,7 +3182,8 @@ Keyword("async"));
                 Keyword("int"),
                 Punctuation.CloseAngle,
                 Local("fp"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [Theory, CombinatorialData]
@@ -3026,13 +3206,15 @@ Keyword("async"));
                 Keyword("int"),
                 Punctuation.CloseAngle,
                 Local("fp"),
-                Punctuation.Semicolon);
+                Punctuation.Semicolon
+            );
         }
 
         [WpfFact]
         public async Task TestTotalClassifier()
         {
-            using var workspace = TestWorkspace.CreateCSharp(""""
+            using var workspace = TestWorkspace.CreateCSharp(
+                """"
                 using System.Text.RegularExpressions;
 
                 class C
@@ -3049,10 +3231,12 @@ Keyword("async"));
                         """;
                     }
                 }
-                """");
+                """"
+            );
             var document = workspace.Documents.First();
 
-            var listenerProvider = workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
+            var listenerProvider =
+                workspace.ExportProvider.GetExportedValue<IAsynchronousOperationListenerProvider>();
             var globalOptions = workspace.ExportProvider.GetExportedValue<IGlobalOptionService>();
 
             var provider = new TotalClassificationTaggerProvider(
@@ -3060,7 +3244,8 @@ Keyword("async"));
                 workspace.GetService<ClassificationTypeMap>(),
                 globalOptions,
                 visibilityTracker: null,
-                listenerProvider);
+                listenerProvider
+            );
 
             var buffer = document.GetTextBuffer();
             using var tagger = provider.CreateTagger(document.GetTextView(), buffer);
@@ -3069,77 +3254,87 @@ Keyword("async"));
             await waiter.ExpeditedWaitAsync();
 
             var allCode = buffer.CurrentSnapshot.GetText();
-            var tags = tagger!.GetTags(new NormalizedSnapshotSpanCollection(buffer.CurrentSnapshot.GetFullSpan()));
+            var tags = tagger!.GetTags(
+                new NormalizedSnapshotSpanCollection(buffer.CurrentSnapshot.GetFullSpan())
+            );
 
             var actualOrdered = tags.OrderBy((t1, t2) => t1.Span.Span.Start - t2.Span.Span.Start);
 
-            var actualFormatted = actualOrdered.Select(a => new FormattedClassification(allCode.Substring(a.Span.Span.Start, a.Span.Span.Length), a.Tag.ClassificationType.Classification));
+            var actualFormatted = actualOrdered.Select(a => new FormattedClassification(
+                allCode.Substring(a.Span.Span.Start, a.Span.Span.Length),
+                a.Tag.ClassificationType.Classification
+            ));
 
-            AssertEx.Equal(new[]
-            {
-                Keyword("using"),
-                Namespace("System"),
-                Identifier("System"),
-                Operators.Dot,
-                Namespace("Text"),
-                Identifier("Text"),
-                Operators.Dot,
-                Namespace("RegularExpressions"),
-                Identifier("RegularExpressions"),
-                Punctuation.Semicolon,
-                Keyword("class"),
-                Class("C"),
-                Punctuation.OpenCurly,
-                Comment("// class D { }"),
-                Keyword("void"),
-                Method("M"),
-                Punctuation.OpenParen,
-                Punctuation.CloseParen,
-                Punctuation.OpenCurly,
-                Keyword("new"),
-                Class("Regex"),
-                Identifier("Regex"),
-                Punctuation.OpenParen,
-                String("\""),
-                Regex.Grouping("("),
-                Regex.Text("a"),
-                Regex.Grouping(")"),
-                String("\""),
-                Punctuation.CloseParen,
-                Punctuation.Semicolon,
-                Keyword("var"),
-                Keyword("var"),
-                Local("s1"),
-                Operators.Equals,
-                String("\"s1\""),
-                Punctuation.Semicolon,
-                Keyword("var"),
-                Keyword("var"),
-                Local("s2"),
-                Operators.Equals,
-                String("$\""),
-                String("s2"),
-                String("\""),
-                Punctuation.Semicolon,
-                Keyword("var"),
-                Keyword("var"),
-                Local("s3"),
-                Operators.Equals,
-                Verbatim("@\"s3\""),
-                Punctuation.Semicolon,
-                Keyword("var"),
-                Keyword("var"),
-                Local("s4"),
-                Operators.Equals,
-                String(""""
-                    """
-                            s4
-                            """
-                    """"),
-                Punctuation.Semicolon,
-                Punctuation.CloseCurly,
-                Punctuation.CloseCurly,
-            }, actualFormatted);
+            AssertEx.Equal(
+                new[]
+                {
+                    Keyword("using"),
+                    Namespace("System"),
+                    Identifier("System"),
+                    Operators.Dot,
+                    Namespace("Text"),
+                    Identifier("Text"),
+                    Operators.Dot,
+                    Namespace("RegularExpressions"),
+                    Identifier("RegularExpressions"),
+                    Punctuation.Semicolon,
+                    Keyword("class"),
+                    Class("C"),
+                    Punctuation.OpenCurly,
+                    Comment("// class D { }"),
+                    Keyword("void"),
+                    Method("M"),
+                    Punctuation.OpenParen,
+                    Punctuation.CloseParen,
+                    Punctuation.OpenCurly,
+                    Keyword("new"),
+                    Class("Regex"),
+                    Identifier("Regex"),
+                    Punctuation.OpenParen,
+                    String("\""),
+                    Regex.Grouping("("),
+                    Regex.Text("a"),
+                    Regex.Grouping(")"),
+                    String("\""),
+                    Punctuation.CloseParen,
+                    Punctuation.Semicolon,
+                    Keyword("var"),
+                    Keyword("var"),
+                    Local("s1"),
+                    Operators.Equals,
+                    String("\"s1\""),
+                    Punctuation.Semicolon,
+                    Keyword("var"),
+                    Keyword("var"),
+                    Local("s2"),
+                    Operators.Equals,
+                    String("$\""),
+                    String("s2"),
+                    String("\""),
+                    Punctuation.Semicolon,
+                    Keyword("var"),
+                    Keyword("var"),
+                    Local("s3"),
+                    Operators.Equals,
+                    Verbatim("@\"s3\""),
+                    Punctuation.Semicolon,
+                    Keyword("var"),
+                    Keyword("var"),
+                    Local("s4"),
+                    Operators.Equals,
+                    String(
+                        """"
+                        """
+                                s4
+                                """
+                        """"
+                    ),
+                    Punctuation.Semicolon,
+                    Punctuation.CloseCurly,
+                    Punctuation.CloseCurly,
+                },
+                actualFormatted
+            );
         }
     }
 }

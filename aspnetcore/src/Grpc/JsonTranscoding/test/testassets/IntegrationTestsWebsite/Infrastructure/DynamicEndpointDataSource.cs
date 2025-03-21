@@ -40,7 +40,9 @@ public class DynamicEndpointDataSource : EndpointDataSource
             {
                 var existingMatch = _endpoints
                     .OfType<RouteEndpoint>()
-                    .SingleOrDefault(e => e.RoutePattern.RawText == routeEndpoint.RoutePattern.RawText);
+                    .SingleOrDefault(e =>
+                        e.RoutePattern.RawText == routeEndpoint.RoutePattern.RawText
+                    );
                 if (existingMatch != null)
                 {
                     _endpoints.Remove(existingMatch);

@@ -5,9 +5,7 @@ namespace Microsoft.AspNetCore.Mvc.Filters;
 
 internal readonly struct FilterFactoryResult
 {
-    public FilterFactoryResult(
-        FilterItem[] cacheableFilters,
-        IFilterMetadata[] filters)
+    public FilterFactoryResult(FilterItem[] cacheableFilters, IFilterMetadata[] filters)
     {
         CacheableFilters = cacheableFilters;
         Filters = filters;

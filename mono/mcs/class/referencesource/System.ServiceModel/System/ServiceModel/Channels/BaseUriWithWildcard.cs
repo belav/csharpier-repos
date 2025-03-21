@@ -40,14 +40,29 @@ namespace System.ServiceModel.Channels
             // So do not check IsValid().
         }
 
-        BaseUriWithWildcard(string protocol, int defaultPort, string binding, int segmentCount, string path, string sampleBinding)
+        BaseUriWithWildcard(
+            string protocol,
+            int defaultPort,
+            string binding,
+            int segmentCount,
+            string path,
+            string sampleBinding
+        )
         {
             string[] urlParameters = SplitBinding(binding);
 
             if (urlParameters.Length != segmentCount)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new UriFormatException(SR.GetString(SR.Hosting_MisformattedBinding, binding, protocol, sampleBinding)));
+                    new UriFormatException(
+                        SR.GetString(
+                            SR.Hosting_MisformattedBinding,
+                            binding,
+                            protocol,
+                            sampleBinding
+                        )
+                    )
+                );
             }
 
             int currentIndex = segmentCount - 1;
@@ -59,10 +74,21 @@ namespace System.ServiceModel.Channels
             {
                 string portString = urlParameters[currentIndex].Trim();
 
-                if (!string.IsNullOrEmpty(portString) &&
-                    !int.TryParse(portString, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out port))
+                if (
+                    !string.IsNullOrEmpty(portString)
+                    && !int.TryParse(
+                        portString,
+                        NumberStyles.Integer,
+                        NumberFormatInfo.InvariantInfo,
+                        out port
+                    )
+                )
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new UriFormatException(SR.GetString(SR.Hosting_MisformattedPort, protocol, binding, portString)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new UriFormatException(
+                            SR.GetString(SR.Hosting_MisformattedPort, protocol, binding, portString)
+                        )
+                    );
                 }
 
                 if (port == defaultPort)
@@ -85,8 +111,11 @@ namespace System.ServiceModel.Channels
 
                 DiagnosticUtility.TraceHandledException(exception, TraceEventType.Error);
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new UriFormatException(SR.GetString(SR.Hosting_MisformattedBindingData, binding,
-                    protocol)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new UriFormatException(
+                        SR.GetString(SR.Hosting_MisformattedBindingData, binding, protocol)
+                    )
+                );
             }
             SetComparisonAddressAndHashCode();
         }
@@ -105,7 +134,9 @@ namespace System.ServiceModel.Channels
         {
             bool parsingIPv6Address = false;
             string[] tokens = null;
-            const char splitChar = ':', startIPv6Address = '[', endIPv6Address = ']';
+            const char splitChar = ':',
+                startIPv6Address = '[',
+                endIPv6Address = ']';
 
             List<int> splitLocations = null;
 
@@ -162,7 +193,11 @@ namespace System.ServiceModel.Channels
             return tokens;
         }
 
-        internal static BaseUriWithWildcard CreateHostedUri(string protocol, string binding, string path)
+        internal static BaseUriWithWildcard CreateHostedUri(
+            string protocol,
+            string binding,
+            string path
+        )
         {
             Fx.Assert(protocol != null, "caller must verify");
 
@@ -180,32 +215,79 @@ namespace System.ServiceModel.Channels
             {
                 // For http, binding format is: "<ipAddress>:<port>:<hostName>"
                 // as specified in http://www.microsoft.com/resources/documentation/WindowsServ/2003/standard/proddocs/en-us/Default.asp?url=/resources/documentation/WindowsServ/2003/standard/proddocs/en-us/ref_mb_serverbindings.asp
-                return new BaseUriWithWildcard(Uri.UriSchemeHttp, HttpUriDefaultPort, binding, 3, path, ":80:");
+                return new BaseUriWithWildcard(
+                    Uri.UriSchemeHttp,
+                    HttpUriDefaultPort,
+                    binding,
+                    3,
+                    path,
+                    ":80:"
+                );
             }
             else if (protocol.Equals(Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
             {
                 // For https, binding format is the same as http
-                return new BaseUriWithWildcard(Uri.UriSchemeHttps, HttpsUriDefaultPort, binding, 3, path, ":443:");
+                return new BaseUriWithWildcard(
+                    Uri.UriSchemeHttps,
+                    HttpsUriDefaultPort,
+                    binding,
+                    3,
+                    path,
+                    ":443:"
+                );
             }
             else if (protocol.Equals(Uri.UriSchemeNetTcp, StringComparison.OrdinalIgnoreCase))
             {
                 // For net.tcp, binding format is: "<port>:<hostName>"
-                return new BaseUriWithWildcard(Uri.UriSchemeNetTcp, TcpUri.DefaultPort, binding, 2, path, "808:*");
+                return new BaseUriWithWildcard(
+                    Uri.UriSchemeNetTcp,
+                    TcpUri.DefaultPort,
+                    binding,
+                    2,
+                    path,
+                    "808:*"
+                );
             }
             else if (protocol.Equals(Uri.UriSchemeNetPipe, StringComparison.OrdinalIgnoreCase))
             {
                 return CreateHostedPipeUri(binding, path);
             }
-            else if (protocol.Equals(MsmqUri.NetMsmqAddressTranslator.Scheme, StringComparison.OrdinalIgnoreCase))
+            else if (
+                protocol.Equals(
+                    MsmqUri.NetMsmqAddressTranslator.Scheme,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                return new BaseUriWithWildcard(MsmqUri.NetMsmqAddressTranslator.Scheme, -1, binding, 1, path, "*");
+                return new BaseUriWithWildcard(
+                    MsmqUri.NetMsmqAddressTranslator.Scheme,
+                    -1,
+                    binding,
+                    1,
+                    path,
+                    "*"
+                );
             }
-            else if (protocol.Equals(MsmqUri.FormatNameAddressTranslator.Scheme, StringComparison.OrdinalIgnoreCase))
+            else if (
+                protocol.Equals(
+                    MsmqUri.FormatNameAddressTranslator.Scheme,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
-                return new BaseUriWithWildcard(MsmqUri.FormatNameAddressTranslator.Scheme, -1, binding, 1, path, "*");
+                return new BaseUriWithWildcard(
+                    MsmqUri.FormatNameAddressTranslator.Scheme,
+                    -1,
+                    binding,
+                    1,
+                    path,
+                    "*"
+                );
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new UriFormatException(SR.GetString(SR.Hosting_NotSupportedProtocol, binding)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new UriFormatException(SR.GetString(SR.Hosting_NotSupportedProtocol, binding))
+            );
         }
 
         internal static BaseUriWithWildcard CreateHostedPipeUri(string binding, string path)
@@ -218,8 +300,12 @@ namespace System.ServiceModel.Channels
         {
             BaseUriWithWildcard other = o as BaseUriWithWildcard;
 
-            if (other == null || other.hashCode != this.hashCode || other.hostNameComparisonMode != this.hostNameComparisonMode ||
-                other.comparand.Port != this.comparand.Port)
+            if (
+                other == null
+                || other.hashCode != this.hashCode
+                || other.hostNameComparisonMode != this.hostNameComparisonMode
+                || other.comparand.Port != this.comparand.Port
+            )
             {
                 return false;
             }
@@ -249,22 +335,36 @@ namespace System.ServiceModel.Channels
 
             if (this.HostNameComparisonMode == HostNameComparisonMode.Exact)
             {
-                if (string.Compare(baseAddress.Host, fullAddress.Host, StringComparison.OrdinalIgnoreCase) != 0)
+                if (
+                    string.Compare(
+                        baseAddress.Host,
+                        fullAddress.Host,
+                        StringComparison.OrdinalIgnoreCase
+                    ) != 0
+                )
                 {
                     return false;
                 }
             }
-            string s1 = baseAddress.GetComponents(UriComponents.Path | UriComponents.KeepDelimiter, UriFormat.Unescaped);
-            string s2 = fullAddress.GetComponents(UriComponents.Path | UriComponents.KeepDelimiter, UriFormat.Unescaped);
+            string s1 = baseAddress.GetComponents(
+                UriComponents.Path | UriComponents.KeepDelimiter,
+                UriFormat.Unescaped
+            );
+            string s2 = fullAddress.GetComponents(
+                UriComponents.Path | UriComponents.KeepDelimiter,
+                UriFormat.Unescaped
+            );
 
             if (s1.Length > s2.Length)
             {
                 return false;
             }
 
-            if (s1.Length < s2.Length &&
-                s1[s1.Length - 1] != segmentDelimiter &&
-                s2[s1.Length] != segmentDelimiter)
+            if (
+                s1.Length < s2.Length
+                && s1[s1.Length - 1] != segmentDelimiter
+                && s2[s1.Length] != segmentDelimiter
+            )
             {
                 // Matching over segments
                 return false;
@@ -279,7 +379,10 @@ namespace System.ServiceModel.Channels
 
             if (!HostNameComparisonModeHelper.IsDefined(this.HostNameComparisonMode))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("context", SR.GetString(SR.Hosting_BaseUriDeserializedNotValid));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "context",
+                    SR.GetString(SR.Hosting_BaseUriDeserializedNotValid)
+                );
             }
             this.SetComparisonAddressAndHashCode();
         }
@@ -313,23 +416,37 @@ namespace System.ServiceModel.Channels
             else
             {
                 // Use canonical string representation of the absolute path for comparison
-                this.comparand.Address = this.baseAddress.GetComponents(UriComponents.Path | UriComponents.KeepDelimiter, UriFormat.UriEscaped);
+                this.comparand.Address = this.baseAddress.GetComponents(
+                    UriComponents.Path | UriComponents.KeepDelimiter,
+                    UriFormat.UriEscaped
+                );
             }
 
             this.comparand.Port = this.baseAddress.Port;
             this.comparand.Scheme = this.baseAddress.Scheme;
 
-            if ((this.comparand.Port == -1) && ((object)this.comparand.Scheme == (object)Uri.UriSchemeNetTcp))
+            if (
+                (this.comparand.Port == -1)
+                && ((object)this.comparand.Scheme == (object)Uri.UriSchemeNetTcp)
+            )
             {
                 // Compensate for the fact that the Uri type doesn't know about our default TCP port number
                 this.comparand.Port = TcpUri.DefaultPort;
             }
-            this.hashCode = this.comparand.Address.GetHashCode() ^ this.comparand.Port ^ (int)this.HostNameComparisonMode;
+            this.hashCode =
+                this.comparand.Address.GetHashCode()
+                ^ this.comparand.Port
+                ^ (int)this.HostNameComparisonMode;
         }
 
         public override string ToString()
         {
-            return string.Format(CultureInfo.InvariantCulture, "{0}:{1}", this.HostNameComparisonMode, this.BaseAddress);
+            return string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}:{1}",
+                this.HostNameComparisonMode,
+                this.BaseAddress
+            );
         }
 
         struct Comparand

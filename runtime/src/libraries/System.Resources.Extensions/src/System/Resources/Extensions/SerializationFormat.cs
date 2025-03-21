@@ -10,6 +10,6 @@ namespace System.Resources.Extensions
         BinaryFormatter = 1,
         TypeConverterByteArray = 2,
         TypeConverterString = 3,
-        ActivatorStream = 4
+        ActivatorStream = 4,
     }
 }

@@ -20,9 +20,7 @@ namespace Microsoft.CodeAnalysis.ColorSchemes
 
             public static ImmutableArray<RegistryItem> Convert(ColorScheme scheme)
             {
-                return scheme.Themes
-                    .Select(ToRegistryItem)
-                    .ToImmutableArray();
+                return scheme.Themes.Select(ToRegistryItem).ToImmutableArray();
             }
 
             private static RegistryItem ToRegistryItem(ColorTheme theme)

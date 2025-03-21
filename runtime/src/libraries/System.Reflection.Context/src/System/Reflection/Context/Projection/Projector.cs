@@ -44,37 +44,58 @@ namespace System.Reflection.Context.Projection
 
         [return: NotNullIfNotNull(nameof(value))]
         public abstract TypeInfo? ProjectType(Type? value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract Assembly? ProjectAssembly(Assembly? value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract Module? ProjectModule(Module? value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract FieldInfo? ProjectField(FieldInfo? value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract EventInfo? ProjectEvent(EventInfo? value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract ConstructorInfo? ProjectConstructor(ConstructorInfo? value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract MethodInfo? ProjectMethod(MethodInfo? value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract MethodBase? ProjectMethodBase(MethodBase? value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract PropertyInfo? ProjectProperty(PropertyInfo? value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract ParameterInfo? ProjectParameter(ParameterInfo? value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract MethodBody? ProjectMethodBody(MethodBody? value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract LocalVariableInfo? ProjectLocalVariable(LocalVariableInfo? value);
+
         [return: NotNullIfNotNull(nameof(value))]
-        public abstract ExceptionHandlingClause? ProjectExceptionHandlingClause(ExceptionHandlingClause? value);
+        public abstract ExceptionHandlingClause? ProjectExceptionHandlingClause(
+            ExceptionHandlingClause? value
+        );
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract CustomAttributeData? ProjectCustomAttributeData(CustomAttributeData? value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract ManifestResourceInfo? ProjectManifestResource(ManifestResourceInfo? value);
-        public abstract CustomAttributeTypedArgument ProjectTypedArgument(CustomAttributeTypedArgument value);
-        public abstract CustomAttributeNamedArgument ProjectNamedArgument(CustomAttributeNamedArgument value);
+        public abstract CustomAttributeTypedArgument ProjectTypedArgument(
+            CustomAttributeTypedArgument value
+        );
+        public abstract CustomAttributeNamedArgument ProjectNamedArgument(
+            CustomAttributeNamedArgument value
+        );
         public abstract InterfaceMapping ProjectInterfaceMapping(InterfaceMapping value);
+
         [return: NotNullIfNotNull(nameof(value))]
         public abstract MemberInfo? ProjectMember(MemberInfo? value);
 
@@ -110,7 +131,7 @@ namespace System.Reflection.Context.Projection
                 return false;
 
             if (value is IProjectable projector && projector == this)
-                return false;   // Already projected
+                return false; // Already projected
 
             // Different context, so we need to project it
             return true;

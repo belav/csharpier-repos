@@ -25,95 +25,106 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Security;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks {
-	public sealed class Delete : TaskExtension {
-	
-		ITaskItem []	deletedFiles;
-		ITaskItem []	files;
-		bool		treatErrorsAsWarnings;
-		
-		public Delete ()
-		{
-			treatErrorsAsWarnings = false;
-		}
+namespace Microsoft.Build.Tasks
+{
+    public sealed class Delete : TaskExtension
+    {
+        ITaskItem[] deletedFiles;
+        ITaskItem[] files;
+        bool treatErrorsAsWarnings;
 
-		public override bool Execute ()
-		{
-			if (files.Length == 0)
-				return true;
+        public Delete()
+        {
+            treatErrorsAsWarnings = false;
+        }
 
-			List <ITaskItem> temporaryDeletedFiles = new List <ITaskItem> ();
-		
-			foreach (ITaskItem file in files) {
-				string path = file.GetMetadata ("FullPath");
-				if (path == null || !File.Exists (path))
-					//skip
-					continue;
+        public override bool Execute()
+        {
+            if (files.Length == 0)
+                return true;
 
-				try {
-					File.Delete (path);
-					Log.LogMessage (MessageImportance.Normal, "Deleting file '{0}'", path);
-					temporaryDeletedFiles.Add (file);
-				}
-				catch (ArgumentException ex) {
-					LogException (ex);
-				}
-				catch (DirectoryNotFoundException ex) {
-					LogException (ex);
-				}
-				catch (SecurityException ex) {
-					LogException (ex);
-				}
-				catch (UnauthorizedAccessException ex) {
-					LogException (ex);
-				}
-				catch (PathTooLongException ex) {
-					LogException (ex);
-				}
-				catch (IOException ex) {
-					LogException (ex);
-				}
-				catch (Exception ex) {
-					LogException (ex);
-				}
-			}
-			
-			deletedFiles = temporaryDeletedFiles.ToArray ();
-			
-			return true;
-		}
-		
-		void LogException (Exception ex)
-		{
-			if (treatErrorsAsWarnings)
-				Log.LogWarningFromException (ex);
-			else
-				Log.LogErrorFromException (ex);
-		}
+            List<ITaskItem> temporaryDeletedFiles = new List<ITaskItem>();
 
-		[Output]
-		public ITaskItem [] DeletedFiles {
-			get { return deletedFiles; }
-			set { deletedFiles = value; }
-		}
+            foreach (ITaskItem file in files)
+            {
+                string path = file.GetMetadata("FullPath");
+                if (path == null || !File.Exists(path))
+                    //skip
+                    continue;
 
-		[Required]
-		public ITaskItem [] Files {
-			get { return files; }
-			set { files = value; }
-		}
+                try
+                {
+                    File.Delete(path);
+                    Log.LogMessage(MessageImportance.Normal, "Deleting file '{0}'", path);
+                    temporaryDeletedFiles.Add(file);
+                }
+                catch (ArgumentException ex)
+                {
+                    LogException(ex);
+                }
+                catch (DirectoryNotFoundException ex)
+                {
+                    LogException(ex);
+                }
+                catch (SecurityException ex)
+                {
+                    LogException(ex);
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    LogException(ex);
+                }
+                catch (PathTooLongException ex)
+                {
+                    LogException(ex);
+                }
+                catch (IOException ex)
+                {
+                    LogException(ex);
+                }
+                catch (Exception ex)
+                {
+                    LogException(ex);
+                }
+            }
 
-		public bool TreatErrorsAsWarnings {
-			get { return treatErrorsAsWarnings; }
-			set { treatErrorsAsWarnings = value; }
-		}
-	}
+            deletedFiles = temporaryDeletedFiles.ToArray();
+
+            return true;
+        }
+
+        void LogException(Exception ex)
+        {
+            if (treatErrorsAsWarnings)
+                Log.LogWarningFromException(ex);
+            else
+                Log.LogErrorFromException(ex);
+        }
+
+        [Output]
+        public ITaskItem[] DeletedFiles
+        {
+            get { return deletedFiles; }
+            set { deletedFiles = value; }
+        }
+
+        [Required]
+        public ITaskItem[] Files
+        {
+            get { return files; }
+            set { files = value; }
+        }
+
+        public bool TreatErrorsAsWarnings
+        {
+            get { return treatErrorsAsWarnings; }
+            set { treatErrorsAsWarnings = value; }
+        }
+    }
 }
-

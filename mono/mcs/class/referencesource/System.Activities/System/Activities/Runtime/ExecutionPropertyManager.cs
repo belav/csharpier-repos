@@ -34,7 +34,10 @@ namespace System.Activities.Runtime
 
         public ExecutionPropertyManager(ActivityInstance owningInstance)
         {
-            Fx.Assert(owningInstance != null, "null instance should be using the internal host-based ctor");
+            Fx.Assert(
+                owningInstance != null,
+                "null instance should be using the internal host-based ctor"
+            );
             this.owningInstance = owningInstance;
 
             // This object is only constructed if we know we have properties to add to it
@@ -42,11 +45,18 @@ namespace System.Activities.Runtime
 
             if (owningInstance.HasChildren)
             {
-                ActivityInstance previousOwner = owningInstance.PropertyManager != null ? owningInstance.PropertyManager.owningInstance : null;
+                ActivityInstance previousOwner =
+                    owningInstance.PropertyManager != null
+                        ? owningInstance.PropertyManager.owningInstance
+                        : null;
 
                 // we're setting a handle property. Walk the children and associate the new property manager
                 // then walk our instance list, fixup parent references, and perform basic validation
-                ActivityUtilities.ProcessActivityInstanceTree(owningInstance, null, (instance, executor) => AttachPropertyManager(instance, previousOwner));
+                ActivityUtilities.ProcessActivityInstanceTree(
+                    owningInstance,
+                    null,
+                    (instance, executor) => AttachPropertyManager(instance, previousOwner)
+                );
             }
             else
             {
@@ -54,7 +64,10 @@ namespace System.Activities.Runtime
             }
         }
 
-        public ExecutionPropertyManager(ActivityInstance owningInstance, ExecutionPropertyManager parentPropertyManager)
+        public ExecutionPropertyManager(
+            ActivityInstance owningInstance,
+            ExecutionPropertyManager parentPropertyManager
+        )
             : this(owningInstance)
         {
             Fx.Assert(parentPropertyManager != null, "caller must verify");
@@ -67,7 +80,10 @@ namespace System.Activities.Runtime
             }
         }
 
-        internal ExecutionPropertyManager(ActivityInstance owningInstance, Dictionary<string, ExecutionProperty> properties)
+        internal ExecutionPropertyManager(
+            ActivityInstance owningInstance,
+            Dictionary<string, ExecutionProperty> properties
+        )
         {
             Fx.Assert(properties != null, "properties should never be null");
             this.owningInstance = owningInstance;
@@ -96,23 +112,20 @@ namespace System.Activities.Runtime
 
         internal Dictionary<string, ExecutionProperty> Properties
         {
-            get
-            {
-                return this.properties;
-            }
+            get { return this.properties; }
         }
 
         internal bool HasExclusiveHandlesInScope
         {
-            get
-            {
-                return this.exclusiveHandleCount > 0;
-            }
+            get { return this.exclusiveHandleCount > 0; }
         }
 
         bool AttachPropertyManager(ActivityInstance instance, ActivityInstance previousOwner)
         {
-            if (instance.PropertyManager == null || instance.PropertyManager.owningInstance == previousOwner)
+            if (
+                instance.PropertyManager == null
+                || instance.PropertyManager.owningInstance == previousOwner
+            )
             {
                 instance.PropertyManager = this;
                 return true;
@@ -127,7 +140,13 @@ namespace System.Activities.Runtime
         {
             Fx.Assert(!string.IsNullOrEmpty(name), "The name should be validated by the caller.");
 
-            if (lastPropertyName == name && (this.lastPropertyVisibility == null || this.lastPropertyVisibility == currentIdSpace))
+            if (
+                lastPropertyName == name
+                && (
+                    this.lastPropertyVisibility == null
+                    || this.lastPropertyVisibility == currentIdSpace
+                )
+            )
             {
                 return lastProperty;
             }
@@ -139,7 +158,13 @@ namespace System.Activities.Runtime
                 ExecutionProperty property;
                 if (currentManager.properties.TryGetValue(name, out property))
                 {
-                    if (!property.IsRemoved && (!property.HasRestrictedVisibility || property.Visibility == currentIdSpace))
+                    if (
+                        !property.IsRemoved
+                        && (
+                            !property.HasRestrictedVisibility
+                            || property.Visibility == currentIdSpace
+                        )
+                    )
                     {
                         this.lastPropertyName = name;
                         this.lastProperty = property.Property;
@@ -155,18 +180,31 @@ namespace System.Activities.Runtime
             return null;
         }
 
-        void AddProperties(IDictionary<string, ExecutionProperty> properties, IDictionary<string, object> flattenedProperties, IdSpace currentIdSpace)
+        void AddProperties(
+            IDictionary<string, ExecutionProperty> properties,
+            IDictionary<string, object> flattenedProperties,
+            IdSpace currentIdSpace
+        )
         {
             foreach (KeyValuePair<string, ExecutionProperty> item in properties)
             {
-                if (!item.Value.IsRemoved && !flattenedProperties.ContainsKey(item.Key) && (!item.Value.HasRestrictedVisibility || item.Value.Visibility == currentIdSpace))
+                if (
+                    !item.Value.IsRemoved
+                    && !flattenedProperties.ContainsKey(item.Key)
+                    && (
+                        !item.Value.HasRestrictedVisibility
+                        || item.Value.Visibility == currentIdSpace
+                    )
+                )
                 {
                     flattenedProperties.Add(item.Key, item.Value.Property);
                 }
             }
         }
 
-        public IEnumerable<KeyValuePair<string, object>> GetFlattenedProperties(IdSpace currentIdSpace)
+        public IEnumerable<KeyValuePair<string, object>> GetFlattenedProperties(
+            IdSpace currentIdSpace
+        )
         {
             ExecutionPropertyManager currentManager = this;
             Dictionary<string, object> flattenedProperties = new Dictionary<string, object>();
@@ -179,7 +217,8 @@ namespace System.Activities.Runtime
         }
 
         //Currently this is only used for the exclusive scope processing
-        internal List<T> FindAll<T>() where T : class
+        internal List<T> FindAll<T>()
+            where T : class
         {
             ExecutionPropertyManager currentManager = this;
             List<T> list = null;
@@ -225,8 +264,14 @@ namespace System.Activities.Runtime
 
         public void Add(string name, object property, IdSpace visibility)
         {
-            Fx.Assert(!string.IsNullOrEmpty(name), "The name should be validated before calling this collection.");
-            Fx.Assert(property != null, "The property should be validated before caling this collection.");
+            Fx.Assert(
+                !string.IsNullOrEmpty(name),
+                "The name should be validated before calling this collection."
+            );
+            Fx.Assert(
+                property != null,
+                "The property should be validated before caling this collection."
+            );
 
             ExecutionProperty executionProperty = new ExecutionProperty(name, property, visibility);
             this.properties.Add(name, executionProperty);
@@ -270,7 +315,11 @@ namespace System.Activities.Runtime
             }
         }
 
-        void ProcessChildrenForExclusiveHandles(HybridCollection<ActivityInstance> children, int amountToUpdate, ref Queue<HybridCollection<ActivityInstance>> toProcess)
+        void ProcessChildrenForExclusiveHandles(
+            HybridCollection<ActivityInstance> children,
+            int amountToUpdate,
+            ref Queue<HybridCollection<ActivityInstance>> toProcess
+        )
         {
             for (int i = 0; i < children.Count; i++)
             {
@@ -308,7 +357,9 @@ namespace System.Activities.Runtime
             }
             else if (!this.ownsThreadPropertiesList)
             {
-                List<ExecutionProperty> updatedProperties = new List<ExecutionProperty>(this.threadProperties.Count);
+                List<ExecutionProperty> updatedProperties = new List<ExecutionProperty>(
+                    this.threadProperties.Count
+                );
 
                 // We need to copy all properties to our new list and we
                 // need to mark hidden properties as "to be removed" (or just
@@ -368,15 +419,24 @@ namespace System.Activities.Runtime
 
         public void Remove(string name)
         {
-            Fx.Assert(!string.IsNullOrEmpty(name), "This should have been validated by the caller.");
+            Fx.Assert(
+                !string.IsNullOrEmpty(name),
+                "This should have been validated by the caller."
+            );
 
             ExecutionProperty executionProperty = this.properties[name];
 
-            Fx.Assert(executionProperty != null, "This should only be called if we know the property exists");
+            Fx.Assert(
+                executionProperty != null,
+                "This should only be called if we know the property exists"
+            );
 
             if (executionProperty.Property is IExecutionProperty)
             {
-                Fx.Assert(this.ownsThreadPropertiesList && this.threadProperties != null, "We should definitely be the list owner if we have an IExecutionProperty");
+                Fx.Assert(
+                    this.ownsThreadPropertiesList && this.threadProperties != null,
+                    "We should definitely be the list owner if we have an IExecutionProperty"
+                );
 
                 if (!this.threadProperties.Remove(executionProperty))
                 {
@@ -418,7 +478,11 @@ namespace System.Activities.Runtime
             return this.owningInstance == instance;
         }
 
-        [SuppressMessage(FxCop.Category.Performance, FxCop.Rule.AvoidUncalledPrivateCode, Justification = "Called from Serialization")]
+        [SuppressMessage(
+            FxCop.Category.Performance,
+            FxCop.Rule.AvoidUncalledPrivateCode,
+            Justification = "Called from Serialization"
+        )]
         internal bool ShouldSerialize(ActivityInstance instance)
         {
             return IsOwner(instance) && this.properties.Count > 0;
@@ -485,11 +549,18 @@ namespace System.Activities.Runtime
             UnregisterProperties(completedInstance, currentIdSpace, false);
         }
 
-        public void UnregisterProperties(ActivityInstance completedInstance, IdSpace currentIdSpace, bool ignoreExceptions)
+        public void UnregisterProperties(
+            ActivityInstance completedInstance,
+            IdSpace currentIdSpace,
+            bool ignoreExceptions
+        )
         {
             if (IsOwner(completedInstance))
             {
-                RegistrationContext registrationContext = new RegistrationContext(this, currentIdSpace);
+                RegistrationContext registrationContext = new RegistrationContext(
+                    this,
+                    currentIdSpace
+                );
 
                 foreach (ExecutionProperty property in this.properties.Values)
                 {
@@ -497,7 +568,8 @@ namespace System.Activities.Runtime
                     // and we don't want to mess up our enumerator
                     property.IsRemoved = true;
 
-                    IPropertyRegistrationCallback registrationCallback = property.Property as IPropertyRegistrationCallback;
+                    IPropertyRegistrationCallback registrationCallback =
+                        property.Property as IPropertyRegistrationCallback;
 
                     if (registrationCallback != null)
                     {
@@ -515,7 +587,12 @@ namespace System.Activities.Runtime
                     }
                 }
 
-                Fx.Assert(completedInstance == null || completedInstance.GetRawChildren() == null || completedInstance.GetRawChildren().Count == 0, "There must not be any children at this point otherwise our exclusive handle count would be incorrect.");
+                Fx.Assert(
+                    completedInstance == null
+                        || completedInstance.GetRawChildren() == null
+                        || completedInstance.GetRawChildren().Count == 0,
+                    "There must not be any children at this point otherwise our exclusive handle count would be incorrect."
+                );
 
                 // We still need to clear this list in case any non-serializable
                 // properties were being used in a no persist zone
@@ -529,12 +606,20 @@ namespace System.Activities.Runtime
             {
                 if (this.properties.ContainsKey(name))
                 {
-                    throw FxTrace.Exception.Argument("name", SR.ExecutionPropertyAlreadyDefined(name));
+                    throw FxTrace.Exception.Argument(
+                        "name",
+                        SR.ExecutionPropertyAlreadyDefined(name)
+                    );
                 }
             }
         }
 
-        public void OnDeserialized(ActivityInstance owner, ActivityInstance parent, IdSpace visibility, ActivityExecutor executor)
+        public void OnDeserialized(
+            ActivityInstance owner,
+            ActivityInstance parent,
+            IdSpace visibility,
+            ActivityExecutor executor
+        )
         {
             this.owningInstance = owner;
 
@@ -582,53 +667,31 @@ namespace System.Activities.Runtime
                     this.HasRestrictedVisibility = true;
                 }
             }
-            
-            public string Name 
+
+            public string Name
             {
-                get
-                {
-                    return this.name;
-                }
-                private set
-                {
-                    this.name = value;
-                }
+                get { return this.name; }
+                private set { this.name = value; }
             }
-            
+
             public object Property
             {
-                get
-                {
-                    return this.property;
-                }
-                private set
-                {
-                    this.property = value;
-                }
+                get { return this.property; }
+                private set { this.property = value; }
             }
-           
+
             public bool HasRestrictedVisibility
             {
-                get
-                {
-                    return this.hasRestrictedVisibility;
-                }
-                private set
-                {
-                    this.hasRestrictedVisibility = value;
-                }
+                get { return this.hasRestrictedVisibility; }
+                private set { this.hasRestrictedVisibility = value; }
             }
 
             // This property is fixed up at deserialization time
-            public IdSpace Visibility
-            {
-                get;
-                set;
-            }
+            public IdSpace Visibility { get; set; }
 
             // This is always false at persistence because
             // a removed property belongs to an activity which
-            // has completed and is therefore not part of the 
+            // has completed and is therefore not part of the
             // instance map anymore
             public bool IsRemoved { get; set; }
 
@@ -662,5 +725,3 @@ namespace System.Activities.Runtime
         }
     }
 }
-
-

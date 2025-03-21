@@ -19,6 +19,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Commands
         /// <param name="commandArguments">The arguments need by the command</param>
         /// <param name="cancellationToken">cancellationToken</param>
         /// <returns>True if the command has been executed, otherwise false</returns>
-        Task<bool> ExecuteCommandAsync(TextDocument document, string command, object[]? commandArguments, CancellationToken cancellationToken);
+        Task<bool> ExecuteCommandAsync(
+            TextDocument document,
+            string command,
+            object[]? commandArguments,
+            CancellationToken cancellationToken
+        );
     }
 }

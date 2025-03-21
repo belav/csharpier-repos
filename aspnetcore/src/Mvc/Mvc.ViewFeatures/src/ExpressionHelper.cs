@@ -13,15 +13,20 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 internal static class ExpressionHelper
 {
-    public static string GetUncachedExpressionText(LambdaExpression expression)
-        => GetExpressionText(expression, expressionTextCache: null);
+    public static string GetUncachedExpressionText(LambdaExpression expression) =>
+        GetExpressionText(expression, expressionTextCache: null);
 
-    public static string GetExpressionText(LambdaExpression expression, ConcurrentDictionary<LambdaExpression, string> expressionTextCache)
+    public static string GetExpressionText(
+        LambdaExpression expression,
+        ConcurrentDictionary<LambdaExpression, string> expressionTextCache
+    )
     {
         ArgumentNullException.ThrowIfNull(expression);
 
-        if (expressionTextCache != null &&
-            expressionTextCache.TryGetValue(expression, out var expressionText))
+        if (
+            expressionTextCache != null
+            && expressionTextCache.TryGetValue(expression, out var expressionText)
+        )
         {
             return expressionText;
         }
@@ -93,7 +98,11 @@ internal static class ExpressionHelper
                     }
                     else
                     {
-                        lastIsModel = string.Equals("model", name, StringComparison.OrdinalIgnoreCase);
+                        lastIsModel = string.Equals(
+                            "model",
+                            name,
+                            StringComparison.OrdinalIgnoreCase
+                        );
                         length += name.Length + 1;
                         part = memberExpressionPart.Expression;
                         segmentCount++;
@@ -148,7 +157,11 @@ internal static class ExpressionHelper
                     Debug.Assert(doNotCache);
                     var methodExpression = (MethodCallExpression)part;
 
-                    InsertIndexerInvocationText(builder, methodExpression.Arguments.Single(), expression);
+                    InsertIndexerInvocationText(
+                        builder,
+                        methodExpression.Arguments.Single(),
+                        expression
+                    );
 
                     part = methodExpression.Object;
                     break;
@@ -197,7 +210,8 @@ internal static class ExpressionHelper
     private static void InsertIndexerInvocationText(
         StringBuilder builder,
         Expression indexExpression,
-        LambdaExpression parentExpression)
+        LambdaExpression parentExpression
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(indexExpression);
@@ -205,9 +219,12 @@ internal static class ExpressionHelper
 
         if (parentExpression.Parameters == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(parentExpression.Parameters),
-                nameof(parentExpression)));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(parentExpression.Parameters),
+                    nameof(parentExpression)
+                )
+            );
         }
 
         var converted = Expression.Convert(indexExpression, typeof(object));
@@ -223,8 +240,12 @@ internal static class ExpressionHelper
         {
             var parameters = parentExpression.Parameters.ToArray();
             throw new InvalidOperationException(
-                Resources.FormatExpressionHelper_InvalidIndexerExpression(indexExpression, parameters[0].Name),
-                ex);
+                Resources.FormatExpressionHelper_InvalidIndexerExpression(
+                    indexExpression,
+                    parameters[0].Name
+                ),
+                ex
+            );
         }
 
         builder.Insert(0, ']');
@@ -234,7 +255,10 @@ internal static class ExpressionHelper
 
     public static bool IsSingleArgumentIndexer(Expression expression)
     {
-        if (!(expression is MethodCallExpression methodExpression) || methodExpression.Arguments.Count != 1)
+        if (
+            !(expression is MethodCallExpression methodExpression)
+            || methodExpression.Arguments.Count != 1
+        )
         {
             return false;
         }
@@ -252,8 +276,12 @@ internal static class ExpressionHelper
         var runtimeProperties = declaringType.GetRuntimeProperties();
         foreach (var property in runtimeProperties)
         {
-            if ((string.Equals(defaultMember.MemberName, property.Name, StringComparison.Ordinal) &&
-                property.GetMethod == methodExpression.Method))
+            if (
+                (
+                    string.Equals(defaultMember.MemberName, property.Name, StringComparison.Ordinal)
+                    && property.GetMethod == methodExpression.Method
+                )
+            )
             {
                 return true;
             }

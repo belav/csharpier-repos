@@ -10,7 +10,11 @@ using Xunit;
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 [SkipIfHostableWebCoreNotAvailable]
-[MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win8, SkipReason = "https://github.com/aspnet/IISIntegration/issues/866")]
+[MinimumOSVersion(
+    OperatingSystems.Windows,
+    WindowsVersions.Win8,
+    SkipReason = "https://github.com/aspnet/IISIntegration/issues/866"
+)]
 [SkipOnHelix("Unsupported queue", Queues = "Windows.Amd64.VS2022.Pre.Open;")]
 public class HttpBodyControlFeatureTests : StrictTestServerTests
 {
@@ -19,32 +23,36 @@ public class HttpBodyControlFeatureTests : StrictTestServerTests
     {
         Exception writeException = null;
         Exception readException = null;
-        using (var testServer = await TestServer.Create(
-            ctx =>
-            {
-                var bodyControl = ctx.Features.Get<IHttpBodyControlFeature>();
-                Assert.False(bodyControl.AllowSynchronousIO);
+        using (
+            var testServer = await TestServer.Create(
+                ctx =>
+                {
+                    var bodyControl = ctx.Features.Get<IHttpBodyControlFeature>();
+                    Assert.False(bodyControl.AllowSynchronousIO);
 
-                try
-                {
-                    ctx.Response.Body.Write(new byte[10]);
-                }
-                catch (Exception ex)
-                {
-                    writeException = ex;
-                }
+                    try
+                    {
+                        ctx.Response.Body.Write(new byte[10]);
+                    }
+                    catch (Exception ex)
+                    {
+                        writeException = ex;
+                    }
 
-                try
-                {
-                    ctx.Request.Body.Read(new byte[10]);
-                }
-                catch (Exception ex)
-                {
-                    readException = ex;
-                }
+                    try
+                    {
+                        ctx.Request.Body.Read(new byte[10]);
+                    }
+                    catch (Exception ex)
+                    {
+                        readException = ex;
+                    }
 
-                return Task.CompletedTask;
-            }, LoggerFactory))
+                    return Task.CompletedTask;
+                },
+                LoggerFactory
+            )
+        )
         {
             await testServer.HttpClient.GetStringAsync("/");
         }

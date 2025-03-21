@@ -31,7 +31,11 @@ namespace System.Diagnostics.Eventing.Reader
 
         private readonly ProviderMetadataCachedInformation _cachedMetadataInformation;
 
-        internal EventLogRecord(EventLogHandle handle, EventLogSession session, ProviderMetadataCachedInformation cachedMetadataInfo)
+        internal EventLogRecord(
+            EventLogHandle handle,
+            EventLogSession session,
+            ProviderMetadataCachedInformation cachedMetadataInfo
+        )
         {
             _cachedMetadataInformation = cachedMetadataInfo;
             Handle = handle;
@@ -40,10 +44,7 @@ namespace System.Diagnostics.Eventing.Reader
             _syncObject = new object();
         }
 
-        internal EventLogHandle Handle
-        {
-            get;
-        }
+        internal EventLogHandle Handle { get; }
 
         internal void PrepareSystemData()
         {
@@ -57,7 +58,12 @@ namespace System.Diagnostics.Eventing.Reader
             {
                 if (_systemProperties.filled == false)
                 {
-                    NativeWrapper.EvtRenderBufferWithContextSystem(_session.renderContextHandleSystem, Handle, UnsafeNativeMethods.EvtRenderFlags.EvtRenderEventValues, _systemProperties);
+                    NativeWrapper.EvtRenderBufferWithContextSystem(
+                        _session.renderContextHandleSystem,
+                        Handle,
+                        UnsafeNativeMethods.EvtRenderFlags.EvtRenderEventValues,
+                        _systemProperties
+                    );
                     _systemProperties.filled = true;
                 }
             }
@@ -235,7 +241,11 @@ namespace System.Diagnostics.Eventing.Reader
                     return _containerChannel;
                 lock (_syncObject)
                 {
-                    return _containerChannel ??= (string)NativeWrapper.EvtGetEventInfo(this.Handle, UnsafeNativeMethods.EvtEventPropertyId.EvtEventPath);
+                    return _containerChannel ??= (string)
+                        NativeWrapper.EvtGetEventInfo(
+                            this.Handle,
+                            UnsafeNativeMethods.EvtEventPropertyId.EvtEventPath
+                        );
                 }
             }
         }
@@ -248,7 +258,11 @@ namespace System.Diagnostics.Eventing.Reader
                     return _matchedQueryIds;
                 lock (_syncObject)
                 {
-                    return _matchedQueryIds ??= (int[])NativeWrapper.EvtGetEventInfo(this.Handle, UnsafeNativeMethods.EvtEventPropertyId.EvtEventQueryIDs);
+                    return _matchedQueryIds ??= (int[])
+                        NativeWrapper.EvtGetEventInfo(
+                            this.Handle,
+                            UnsafeNativeMethods.EvtEventPropertyId.EvtEventQueryIDs
+                        );
                 }
             }
         }
@@ -293,7 +307,11 @@ namespace System.Diagnostics.Eventing.Reader
                 i++;
             }
 
-            return _cachedMetadataInformation.GetFormatDescription(this.ProviderName, Handle, theValues);
+            return _cachedMetadataInformation.GetFormatDescription(
+                this.ProviderName,
+                Handle,
+                theValues
+            );
         }
 
         public override string LevelDisplayName
@@ -307,7 +325,10 @@ namespace System.Diagnostics.Eventing.Reader
                     if (_levelNameReady == false)
                     {
                         _levelNameReady = true;
-                        _levelName = _cachedMetadataInformation.GetLevelDisplayName(this.ProviderName, Handle);
+                        _levelName = _cachedMetadataInformation.GetLevelDisplayName(
+                            this.ProviderName,
+                            Handle
+                        );
                     }
                     return _levelName;
                 }
@@ -323,7 +344,10 @@ namespace System.Diagnostics.Eventing.Reader
                     if (_opcodeNameReady == false)
                     {
                         _opcodeNameReady = true;
-                        _opcodeName = _cachedMetadataInformation.GetOpcodeDisplayName(this.ProviderName, Handle);
+                        _opcodeName = _cachedMetadataInformation.GetOpcodeDisplayName(
+                            this.ProviderName,
+                            Handle
+                        );
                     }
                     return _opcodeName;
                 }
@@ -341,7 +365,10 @@ namespace System.Diagnostics.Eventing.Reader
                     if (!_taskNameReady)
                     {
                         _taskNameReady = true;
-                        _taskName = _cachedMetadataInformation.GetTaskDisplayName(this.ProviderName, Handle);
+                        _taskName = _cachedMetadataInformation.GetTaskDisplayName(
+                            this.ProviderName,
+                            Handle
+                        );
                     }
                     return _taskName;
                 }
@@ -356,7 +383,10 @@ namespace System.Diagnostics.Eventing.Reader
                     return _keywordsNames;
                 lock (_syncObject)
                 {
-                    return _keywordsNames ??= _cachedMetadataInformation.GetKeywordDisplayNames(this.ProviderName, Handle);
+                    return _keywordsNames ??= _cachedMetadataInformation.GetKeywordDisplayNames(
+                        this.ProviderName,
+                        Handle
+                    );
                 }
             }
         }
@@ -366,7 +396,10 @@ namespace System.Diagnostics.Eventing.Reader
             get
             {
                 _session.SetupUserContext();
-                IList<object> properties = NativeWrapper.EvtRenderBufferWithContextUserOrValues(_session.renderContextHandleUser, Handle);
+                IList<object> properties = NativeWrapper.EvtRenderBufferWithContextUserOrValues(
+                    _session.renderContextHandleUser,
+                    Handle
+                );
                 List<EventProperty> list = new List<EventProperty>();
                 foreach (object value in properties)
                 {
@@ -380,7 +413,10 @@ namespace System.Diagnostics.Eventing.Reader
         {
             ArgumentNullException.ThrowIfNull(propertySelector);
 
-            return NativeWrapper.EvtRenderBufferWithContextUserOrValues(propertySelector.Handle, Handle);
+            return NativeWrapper.EvtRenderBufferWithContextUserOrValues(
+                propertySelector.Handle,
+                Handle
+            );
         }
 
         public override string ToXml()

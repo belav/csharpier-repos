@@ -22,8 +22,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
     /// </remarks>
     internal abstract class FixAllProvider : IFixAllProvider
     {
-        private protected static ImmutableArray<FixAllScope> DefaultSupportedFixAllScopes
-            = ImmutableArray.Create(FixAllScope.Document, FixAllScope.Project, FixAllScope.Solution);
+        private protected static ImmutableArray<FixAllScope> DefaultSupportedFixAllScopes =
+            ImmutableArray.Create(FixAllScope.Document, FixAllScope.Project, FixAllScope.Solution);
 
         /// <summary>
         /// Gets the supported scopes for applying multiple occurrences of a code refactoring.
@@ -32,8 +32,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// (b) <see cref="FixAllScope.Project"/> and
         /// (c) <see cref="FixAllScope.Solution"/>
         /// </summary>
-        public virtual IEnumerable<FixAllScope> GetSupportedFixAllScopes()
-            => DefaultSupportedFixAllScopes;
+        public virtual IEnumerable<FixAllScope> GetSupportedFixAllScopes() =>
+            DefaultSupportedFixAllScopes;
 
         /// <summary>
         /// Gets fix all occurrences fix for the given fixAllContext.
@@ -41,8 +41,8 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         public abstract Task<CodeAction?> GetFixAsync(FixAllContext fixAllContext);
 
         #region IFixAllProvider implementation
-        Task<CodeAction?> IFixAllProvider.GetFixAsync(IFixAllContext fixAllContext)
-            => this.GetFixAsync((FixAllContext)fixAllContext);
+        Task<CodeAction?> IFixAllProvider.GetFixAsync(IFixAllContext fixAllContext) =>
+            this.GetFixAsync((FixAllContext)fixAllContext);
         #endregion
 
         /// <summary>
@@ -56,8 +56,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// of it (like attributes), or changes to the <see cref="Project"/> or <see cref="Solution"/> it points at
         /// will be considered.
         /// </param>
-        public static FixAllProvider Create(Func<FixAllContext, Document, Optional<ImmutableArray<TextSpan>>, Task<Document?>> fixAllAsync)
-            => Create(fixAllAsync, DefaultSupportedFixAllScopes);
+        public static FixAllProvider Create(
+            Func<
+                FixAllContext,
+                Document,
+                Optional<ImmutableArray<TextSpan>>,
+                Task<Document?>
+            > fixAllAsync
+        ) => Create(fixAllAsync, DefaultSupportedFixAllScopes);
 
         /// <summary>
         /// Create a <see cref="FixAllProvider"/> that fixes documents independently.
@@ -76,8 +82,14 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
         /// and should not be part of the supported scopes.
         /// </param>
         public static FixAllProvider Create(
-            Func<FixAllContext, Document, Optional<ImmutableArray<TextSpan>>, Task<Document?>> fixAllAsync,
-            ImmutableArray<FixAllScope> supportedFixAllScopes)
+            Func<
+                FixAllContext,
+                Document,
+                Optional<ImmutableArray<TextSpan>>,
+                Task<Document?>
+            > fixAllAsync,
+            ImmutableArray<FixAllScope> supportedFixAllScopes
+        )
         {
             if (fixAllAsync is null)
                 throw new ArgumentNullException(nameof(fixAllAsync));
@@ -86,17 +98,29 @@ namespace Microsoft.CodeAnalysis.CodeRefactorings
                 throw new ArgumentNullException(nameof(supportedFixAllScopes));
 
             if (supportedFixAllScopes.Contains(FixAllScope.Custom))
-                throw new ArgumentException(WorkspacesResources.FixAllScope_Custom_is_not_supported_with_this_API, nameof(supportedFixAllScopes));
+                throw new ArgumentException(
+                    WorkspacesResources.FixAllScope_Custom_is_not_supported_with_this_API,
+                    nameof(supportedFixAllScopes)
+                );
 
             return new CallbackDocumentBasedFixAllProvider(fixAllAsync, supportedFixAllScopes);
         }
 
         private sealed class CallbackDocumentBasedFixAllProvider(
-            Func<FixAllContext, Document, Optional<ImmutableArray<TextSpan>>, Task<Document?>> fixAllAsync,
-            ImmutableArray<FixAllScope> supportedFixAllScopes) : DocumentBasedFixAllProvider(supportedFixAllScopes)
+            Func<
+                FixAllContext,
+                Document,
+                Optional<ImmutableArray<TextSpan>>,
+                Task<Document?>
+            > fixAllAsync,
+            ImmutableArray<FixAllScope> supportedFixAllScopes
+        ) : DocumentBasedFixAllProvider(supportedFixAllScopes)
         {
-            protected override Task<Document?> FixAllAsync(FixAllContext context, Document document, Optional<ImmutableArray<TextSpan>> fixAllSpans)
-                => fixAllAsync(context, document, fixAllSpans);
+            protected override Task<Document?> FixAllAsync(
+                FixAllContext context,
+                Document document,
+                Optional<ImmutableArray<TextSpan>> fixAllSpans
+            ) => fixAllAsync(context, document, fixAllSpans);
         }
     }
 }

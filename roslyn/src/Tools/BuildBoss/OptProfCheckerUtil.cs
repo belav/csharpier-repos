@@ -23,7 +23,11 @@ namespace BuildBoss
         private readonly string Configuration;
         private readonly string OptProfFile;
 
-        public OptProfCheckerUtil(string repositoryDirectory, string artifactsDirectory, string configuration)
+        public OptProfCheckerUtil(
+            string repositoryDirectory,
+            string artifactsDirectory,
+            string configuration
+        )
         {
             RepositoryDirectory = repositoryDirectory;
             ArtifactsDirectory = artifactsDirectory;
@@ -61,7 +65,12 @@ namespace BuildBoss
 
         private bool CheckVsix(TextWriter textWriter, string vsixName, JToken tests)
         {
-            string vsixRoot = Path.Combine(ArtifactsDirectory, "VSSetup", Configuration, "Insertion");
+            string vsixRoot = Path.Combine(
+                ArtifactsDirectory,
+                "VSSetup",
+                Configuration,
+                "Insertion"
+            );
             string vsixFullPath = Path.Combine(vsixRoot, vsixName);
 
             // check vsix exists
@@ -88,7 +97,9 @@ namespace BuildBoss
                         if (!manifestFileNames.Contains(filename))
                         {
                             allGood = false;
-                            textWriter.WriteLine($"Failed to find file '{filename}' in '{vsixName}' (Container: {container})");
+                            textWriter.WriteLine(
+                                $"Failed to find file '{filename}' in '{vsixName}' (Container: {container})"
+                            );
                         }
                     }
                 }
@@ -96,15 +107,29 @@ namespace BuildBoss
             return allGood;
         }
 
-        private static HashSet<string> GetManifestFileNames(TextWriter textWriter, string vsixFullPath)
+        private static HashSet<string> GetManifestFileNames(
+            TextWriter textWriter,
+            string vsixFullPath
+        )
         {
             try
             {
-                using (var archive = new ZipArchive(File.Open(vsixFullPath, FileMode.Open), ZipArchiveMode.Read))
+                using (
+                    var archive = new ZipArchive(
+                        File.Open(vsixFullPath, FileMode.Open),
+                        ZipArchiveMode.Read
+                    )
+                )
                 {
                     var entry = archive.GetEntry("manifest.json");
                     using var stream = entry.Open();
-                    using var reader = new StreamReader(stream, Encoding.UTF8, detectEncodingFromByteOrderMarks: true, bufferSize: 2048, leaveOpen: true);
+                    using var reader = new StreamReader(
+                        stream,
+                        Encoding.UTF8,
+                        detectEncodingFromByteOrderMarks: true,
+                        bufferSize: 2048,
+                        leaveOpen: true
+                    );
                     var content = reader.ReadToEnd();
                     var manifest = JObject.Parse(content);
                     return manifest["files"].Select(f => f["fileName"].ToString()).ToHashSet();

@@ -14,7 +14,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     /// <summary>
     /// Allows asking semantic questions about a tree of syntax nodes that did not appear in the original source code.
-    /// Typically, an instance is obtained by a call to SemanticModel.TryGetSpeculativeSemanticModel. 
+    /// Typically, an instance is obtained by a call to SemanticModel.TryGetSpeculativeSemanticModel.
     /// </summary>
     internal class SpeculativeSyntaxTreeSemanticModel : SyntaxTreeSemanticModel
     {
@@ -24,17 +24,40 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly int _position;
         private readonly SpeculativeBindingOption _bindingOption;
 
-        public static SpeculativeSyntaxTreeSemanticModel Create(SyntaxTreeSemanticModel parentSemanticModel, TypeSyntax root, Binder rootBinder, int position, SpeculativeBindingOption bindingOption)
+        public static SpeculativeSyntaxTreeSemanticModel Create(
+            SyntaxTreeSemanticModel parentSemanticModel,
+            TypeSyntax root,
+            Binder rootBinder,
+            int position,
+            SpeculativeBindingOption bindingOption
+        )
         {
             return CreateCore(parentSemanticModel, root, rootBinder, position, bindingOption);
         }
 
-        public static SpeculativeSyntaxTreeSemanticModel Create(SyntaxTreeSemanticModel parentSemanticModel, CrefSyntax root, Binder rootBinder, int position)
+        public static SpeculativeSyntaxTreeSemanticModel Create(
+            SyntaxTreeSemanticModel parentSemanticModel,
+            CrefSyntax root,
+            Binder rootBinder,
+            int position
+        )
         {
-            return CreateCore(parentSemanticModel, root, rootBinder, position, bindingOption: SpeculativeBindingOption.BindAsTypeOrNamespace);
+            return CreateCore(
+                parentSemanticModel,
+                root,
+                rootBinder,
+                position,
+                bindingOption: SpeculativeBindingOption.BindAsTypeOrNamespace
+            );
         }
 
-        private static SpeculativeSyntaxTreeSemanticModel CreateCore(SyntaxTreeSemanticModel parentSemanticModel, CSharpSyntaxNode root, Binder rootBinder, int position, SpeculativeBindingOption bindingOption)
+        private static SpeculativeSyntaxTreeSemanticModel CreateCore(
+            SyntaxTreeSemanticModel parentSemanticModel,
+            CSharpSyntaxNode root,
+            Binder rootBinder,
+            int position,
+            SpeculativeBindingOption bindingOption
+        )
         {
             Debug.Assert(parentSemanticModel is SyntaxTreeSemanticModel);
             Debug.Assert(root != null);
@@ -42,12 +65,29 @@ namespace Microsoft.CodeAnalysis.CSharp
             Debug.Assert(rootBinder != null);
             Debug.Assert(rootBinder.IsSemanticModelBinder);
 
-            var speculativeModel = new SpeculativeSyntaxTreeSemanticModel(parentSemanticModel, root, rootBinder, position, bindingOption);
+            var speculativeModel = new SpeculativeSyntaxTreeSemanticModel(
+                parentSemanticModel,
+                root,
+                rootBinder,
+                position,
+                bindingOption
+            );
             return speculativeModel;
         }
 
-        private SpeculativeSyntaxTreeSemanticModel(SyntaxTreeSemanticModel parentSemanticModel, CSharpSyntaxNode root, Binder rootBinder, int position, SpeculativeBindingOption bindingOption)
-            : base(parentSemanticModel.Compilation, parentSemanticModel.SyntaxTree, root.SyntaxTree, parentSemanticModel.IgnoresAccessibility)
+        private SpeculativeSyntaxTreeSemanticModel(
+            SyntaxTreeSemanticModel parentSemanticModel,
+            CSharpSyntaxNode root,
+            Binder rootBinder,
+            int position,
+            SpeculativeBindingOption bindingOption
+        )
+            : base(
+                parentSemanticModel.Compilation,
+                parentSemanticModel.SyntaxTree,
+                root.SyntaxTree,
+                parentSemanticModel.IgnoresAccessibility
+            )
         {
             _parentSemanticModel = parentSemanticModel;
             _root = root;
@@ -58,37 +98,29 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public override bool IsSpeculativeSemanticModel
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override int OriginalPositionForSpeculation
         {
-            get
-            {
-                return _position;
-            }
+            get { return _position; }
         }
 
         public override CSharpSemanticModel ParentModel
         {
-            get
-            {
-                return _parentSemanticModel;
-            }
+            get { return _parentSemanticModel; }
         }
 
         internal override CSharpSyntaxNode Root
         {
-            get
-            {
-                return _root;
-            }
+            get { return _root; }
         }
 
-        internal override BoundNode Bind(Binder binder, CSharpSyntaxNode node, BindingDiagnosticBag diagnostics)
+        internal override BoundNode Bind(
+            Binder binder,
+            CSharpSyntaxNode node,
+            BindingDiagnosticBag diagnostics
+        )
         {
             return _parentSemanticModel.Bind(binder, node, diagnostics);
         }
@@ -108,7 +140,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             return _bindingOption;
         }
 
-        internal override SymbolInfo GetSymbolInfoWorker(CSharpSyntaxNode node, SymbolInfoOptions options, CancellationToken cancellationToken = default(CancellationToken))
+        internal override SymbolInfo GetSymbolInfoWorker(
+            CSharpSyntaxNode node,
+            SymbolInfoOptions options,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             var cref = node as CrefSyntax;
             if (cref != null)
@@ -120,17 +156,32 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if ((options & SymbolInfoOptions.PreserveAliases) != 0)
             {
-                var aliasSymbol = _parentSemanticModel.GetSpeculativeAliasInfo(_position, expression, this.GetSpeculativeBindingOption(expression));
+                var aliasSymbol = _parentSemanticModel.GetSpeculativeAliasInfo(
+                    _position,
+                    expression,
+                    this.GetSpeculativeBindingOption(expression)
+                );
                 return new SymbolInfo(aliasSymbol);
             }
 
-            return _parentSemanticModel.GetSpeculativeSymbolInfo(_position, expression, this.GetSpeculativeBindingOption(expression));
+            return _parentSemanticModel.GetSpeculativeSymbolInfo(
+                _position,
+                expression,
+                this.GetSpeculativeBindingOption(expression)
+            );
         }
 
-        internal override CSharpTypeInfo GetTypeInfoWorker(CSharpSyntaxNode node, CancellationToken cancellationToken = default(CancellationToken))
+        internal override CSharpTypeInfo GetTypeInfoWorker(
+            CSharpSyntaxNode node,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             var expression = (ExpressionSyntax)node;
-            return _parentSemanticModel.GetSpeculativeTypeInfoWorker(_position, expression, this.GetSpeculativeBindingOption(expression));
+            return _parentSemanticModel.GetSpeculativeTypeInfoWorker(
+                _position,
+                expression,
+                this.GetSpeculativeBindingOption(expression)
+            );
         }
     }
 }

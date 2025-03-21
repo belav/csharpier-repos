@@ -30,7 +30,10 @@ public class TestServiceImpl : TestService.TestServiceBase
         return Task.FromResult(new Empty());
     }
 
-    public override async Task<SimpleResponse> UnaryCall(SimpleRequest request, ServerCallContext context)
+    public override async Task<SimpleResponse> UnaryCall(
+        SimpleRequest request,
+        ServerCallContext context
+    )
     {
         await EnsureEchoMetadataAsync(context, request.ResponseCompressed?.Value ?? false);
         EnsureEchoStatus(request.ResponseStatus, context);
@@ -40,9 +43,16 @@ public class TestServiceImpl : TestService.TestServiceBase
         return response;
     }
 
-    public override async Task StreamingOutputCall(StreamingOutputCallRequest request, IServerStreamWriter<StreamingOutputCallResponse> responseStream, ServerCallContext context)
+    public override async Task StreamingOutputCall(
+        StreamingOutputCallRequest request,
+        IServerStreamWriter<StreamingOutputCallResponse> responseStream,
+        ServerCallContext context
+    )
     {
-        await EnsureEchoMetadataAsync(context, request.ResponseParameters.Any(rp => rp.Compressed?.Value ?? false));
+        await EnsureEchoMetadataAsync(
+            context,
+            request.ResponseParameters.Any(rp => rp.Compressed?.Value ?? false)
+        );
         EnsureEchoStatus(request.ResponseStatus, context);
 
         foreach (var responseParam in request.ResponseParameters)
@@ -51,12 +61,18 @@ public class TestServiceImpl : TestService.TestServiceBase
                 ? new WriteOptions(WriteFlags.NoCompress)
                 : null;
 
-            var response = new StreamingOutputCallResponse { Payload = CreateZerosPayload(responseParam.Size) };
+            var response = new StreamingOutputCallResponse
+            {
+                Payload = CreateZerosPayload(responseParam.Size),
+            };
             await responseStream.WriteAsync(response);
         }
     }
 
-    public override async Task<StreamingInputCallResponse> StreamingInputCall(IAsyncStreamReader<StreamingInputCallRequest> requestStream, ServerCallContext context)
+    public override async Task<StreamingInputCallResponse> StreamingInputCall(
+        IAsyncStreamReader<StreamingInputCallRequest> requestStream,
+        ServerCallContext context
+    )
     {
         await EnsureEchoMetadataAsync(context);
 
@@ -71,7 +87,11 @@ public class TestServiceImpl : TestService.TestServiceBase
         return new StreamingInputCallResponse { AggregatedPayloadSize = sum };
     }
 
-    public override async Task FullDuplexCall(IAsyncStreamReader<StreamingOutputCallRequest> requestStream, IServerStreamWriter<StreamingOutputCallResponse> responseStream, ServerCallContext context)
+    public override async Task FullDuplexCall(
+        IAsyncStreamReader<StreamingOutputCallRequest> requestStream,
+        IServerStreamWriter<StreamingOutputCallResponse> responseStream,
+        ServerCallContext context
+    )
     {
         await EnsureEchoMetadataAsync(context);
 
@@ -80,13 +100,20 @@ public class TestServiceImpl : TestService.TestServiceBase
             EnsureEchoStatus(request.ResponseStatus, context);
             foreach (var responseParam in request.ResponseParameters)
             {
-                var response = new StreamingOutputCallResponse { Payload = CreateZerosPayload(responseParam.Size) };
+                var response = new StreamingOutputCallResponse
+                {
+                    Payload = CreateZerosPayload(responseParam.Size),
+                };
                 await responseStream.WriteAsync(response);
             }
         });
     }
 
-    public override Task HalfDuplexCall(IAsyncStreamReader<StreamingOutputCallRequest> requestStream, IServerStreamWriter<StreamingOutputCallResponse> responseStream, ServerCallContext context)
+    public override Task HalfDuplexCall(
+        IAsyncStreamReader<StreamingOutputCallRequest> requestStream,
+        IServerStreamWriter<StreamingOutputCallResponse> responseStream,
+        ServerCallContext context
+    )
     {
         throw new NotImplementedException();
     }
@@ -96,9 +123,14 @@ public class TestServiceImpl : TestService.TestServiceBase
         return new Payload { Body = ByteString.CopyFrom(new byte[size]) };
     }
 
-    private static async Task EnsureEchoMetadataAsync(ServerCallContext context, bool enableCompression = false)
+    private static async Task EnsureEchoMetadataAsync(
+        ServerCallContext context,
+        bool enableCompression = false
+    )
     {
-        var echoInitialList = context.RequestHeaders.Where((entry) => entry.Key == "x-grpc-test-echo-initial").ToList();
+        var echoInitialList = context
+            .RequestHeaders.Where((entry) => entry.Key == "x-grpc-test-echo-initial")
+            .ToList();
 
         // Append grpc internal compression header if compression is requested by the client
         if (enableCompression)
@@ -112,7 +144,9 @@ public class TestServiceImpl : TestService.TestServiceBase
             await context.WriteResponseHeadersAsync(new Metadata { entry });
         }
 
-        var echoTrailingList = context.RequestHeaders.Where((entry) => entry.Key == "x-grpc-test-echo-trailing-bin").ToList();
+        var echoTrailingList = context
+            .RequestHeaders.Where((entry) => entry.Key == "x-grpc-test-echo-trailing-bin")
+            .ToList();
         if (echoTrailingList.Any())
         {
             context.ResponseTrailers.Add(echoTrailingList.Single());
@@ -134,7 +168,12 @@ public class TestServiceImpl : TestService.TestServiceBase
         {
             // ServerCallContext.RequestHeaders filters out grpc-* headers
             // Get grpc-encoding from HttpContext instead
-            var encoding = context.GetHttpContext().Request.Headers.SingleOrDefault(h => string.Equals(h.Key, "grpc-encoding", StringComparison.OrdinalIgnoreCase)).Value.SingleOrDefault();
+            var encoding = context
+                .GetHttpContext()
+                .Request.Headers.SingleOrDefault(h =>
+                    string.Equals(h.Key, "grpc-encoding", StringComparison.OrdinalIgnoreCase)
+                )
+                .Value.SingleOrDefault();
             if (expectCompressed.Value)
             {
                 if (encoding == null || encoding == "identity")

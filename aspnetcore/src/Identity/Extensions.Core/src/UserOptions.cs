@@ -14,7 +14,8 @@ public class UserOptions
     /// <value>
     /// The list of allowed characters in the username used to validate user names.
     /// </value>
-    public string AllowedUserNameCharacters { get; set; } = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+    public string AllowedUserNameCharacters { get; set; } =
+        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
 
     /// <summary>
     /// Gets or sets a flag indicating whether the application requires unique emails for its users. Defaults to false.

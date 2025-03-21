@@ -20,7 +20,12 @@ namespace System.Reflection.Tests
 
         private static void TestField1Worker(Type t)
         {
-            const BindingFlags bf = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly;
+            const BindingFlags bf =
+                BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.DeclaredOnly;
             FieldInfo[] fields = t.GetFields(bf);
 
             foreach (FieldInfo f in fields)
@@ -34,7 +39,13 @@ namespace System.Reflection.Tests
 
             {
                 FieldInfo f = fields.Single(f1 => f1.Name == "ConstField1");
-                Assert.Equal(FieldAttributes.Private | FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault, f.Attributes);
+                Assert.Equal(
+                    FieldAttributes.Private
+                        | FieldAttributes.Static
+                        | FieldAttributes.Literal
+                        | FieldAttributes.HasDefault,
+                    f.Attributes
+                );
                 Assert.Equal(typeof(int).Project(), f.FieldType);
             }
             {
@@ -80,7 +91,10 @@ namespace System.Reflection.Tests
             {
                 FieldInfo f = fields.Single(f1 => f1.Name == "SField2");
                 Assert.Equal(FieldAttributes.Static | FieldAttributes.Family, f.Attributes);
-                Assert.Equal(typeof(GenericClass2<,>).Project().MakeGenericType(typeof(int).Project(), theT), f.FieldType);
+                Assert.Equal(
+                    typeof(GenericClass2<,>).Project().MakeGenericType(typeof(int).Project(), theT),
+                    f.FieldType
+                );
             }
             {
                 FieldInfo f = fields.Single(f1 => f1.Name == "SField3");
@@ -113,270 +127,353 @@ namespace System.Reflection.Tests
         public static unsafe void TestLiteralFields1()
         {
             Type t = typeof(ClassWithLiteralFields).Project();
-            FieldInfo[] fields = t.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.DeclaredOnly);
+            FieldInfo[] fields = t.GetFields(
+                BindingFlags.Public
+                    | BindingFlags.NonPublic
+                    | BindingFlags.Static
+                    | BindingFlags.DeclaredOnly
+            );
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.NotLiteral));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.NotLiteral)
+                );
                 Assert.Throws<InvalidOperationException>(() => f.GetRawConstantValue());
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.NotLiteralJustReadOnly));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.NotLiteralJustReadOnly)
+                );
                 Assert.Throws<InvalidOperationException>(() => f.GetRawConstantValue());
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitBool1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitBool1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is bool);
                 Assert.Equal(ClassWithLiteralFields.LitBool1, (bool)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitBool2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitBool2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is bool);
                 Assert.Equal(ClassWithLiteralFields.LitBool2, (bool)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitChar1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitChar1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is char);
                 Assert.Equal(ClassWithLiteralFields.LitChar1, (char)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitChar2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitChar2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is char);
                 Assert.Equal(ClassWithLiteralFields.LitChar2, (char)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitChar3));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitChar3)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is char);
                 Assert.Equal(ClassWithLiteralFields.LitChar3, (char)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitByte1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitByte1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is byte);
                 Assert.Equal(ClassWithLiteralFields.LitByte1, (byte)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitByte2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitByte2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is byte);
                 Assert.Equal(ClassWithLiteralFields.LitByte2, (byte)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitByte3));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitByte3)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is byte);
                 Assert.Equal(ClassWithLiteralFields.LitByte3, (byte)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitSByte1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitSByte1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is sbyte);
                 Assert.Equal(ClassWithLiteralFields.LitSByte1, (sbyte)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitSByte2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitSByte2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is sbyte);
                 Assert.Equal(ClassWithLiteralFields.LitSByte2, (sbyte)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitSByte3));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitSByte3)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is sbyte);
                 Assert.Equal(ClassWithLiteralFields.LitSByte3, (sbyte)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitShort1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitShort1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is short);
                 Assert.Equal(ClassWithLiteralFields.LitShort1, (short)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitShort2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitShort2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is short);
                 Assert.Equal(ClassWithLiteralFields.LitShort2, (short)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitShort3));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitShort3)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is short);
                 Assert.Equal(ClassWithLiteralFields.LitShort3, (short)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitUShort1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitUShort1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is ushort);
                 Assert.Equal(ClassWithLiteralFields.LitUShort1, (ushort)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitUShort2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitUShort2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is ushort);
                 Assert.Equal(ClassWithLiteralFields.LitUShort2, (ushort)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitUShort3));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitUShort3)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is ushort);
                 Assert.Equal(ClassWithLiteralFields.LitUShort3, (ushort)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitInt1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitInt1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is int);
                 Assert.Equal(ClassWithLiteralFields.LitInt1, (int)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitInt2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitInt2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is int);
                 Assert.Equal(ClassWithLiteralFields.LitInt2, (int)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitInt3));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitInt3)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is int);
                 Assert.Equal(ClassWithLiteralFields.LitInt3, (int)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitUInt1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitUInt1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is uint);
                 Assert.Equal(ClassWithLiteralFields.LitUInt1, (uint)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitUInt2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitUInt2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is uint);
                 Assert.Equal(ClassWithLiteralFields.LitUInt2, (uint)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitUInt3));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitUInt3)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is uint);
                 Assert.Equal(ClassWithLiteralFields.LitUInt3, (uint)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitLong1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitLong1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is long);
                 Assert.Equal(ClassWithLiteralFields.LitLong1, (long)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitLong2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitLong2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is long);
                 Assert.Equal(ClassWithLiteralFields.LitLong2, (long)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitLong3));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitLong3)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is long);
                 Assert.Equal(ClassWithLiteralFields.LitLong3, (long)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitULong1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitULong1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is ulong);
                 Assert.Equal(ClassWithLiteralFields.LitULong1, (ulong)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitULong2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitULong2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is ulong);
                 Assert.Equal(ClassWithLiteralFields.LitULong2, (ulong)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitULong3));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitULong3)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is ulong);
                 Assert.Equal(ClassWithLiteralFields.LitULong3, (ulong)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitSingle1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitSingle1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is float);
                 Assert.Equal(ClassWithLiteralFields.LitSingle1, (float)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitSingle2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitSingle2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is float);
                 Assert.Equal(ClassWithLiteralFields.LitSingle2, (float)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitDouble1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitDouble1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is double);
                 Assert.Equal(ClassWithLiteralFields.LitDouble1, (double)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitDouble2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitDouble2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is double);
                 Assert.Equal(ClassWithLiteralFields.LitDouble2, (double)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitString1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitString1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is string);
                 Assert.Equal(ClassWithLiteralFields.LitString1, (string)o);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitString2));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitString2)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o == null);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitObject));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitObject)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o == null);
             }
 
             {
-                FieldInfo f = fields.Single(f1 => f1.Name == nameof(ClassWithLiteralFields.LitMyColor1));
+                FieldInfo f = fields.Single(f1 =>
+                    f1.Name == nameof(ClassWithLiteralFields.LitMyColor1)
+                );
                 object o = f.GetRawConstantValue();
                 Assert.True(o is int);
                 Assert.Equal((int)(ClassWithLiteralFields.LitMyColor1), (int)o);
@@ -386,15 +483,21 @@ namespace System.Reflection.Tests
         [Fact]
         public static unsafe void TestCustomModifiers1()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(
-                new FuncMetadataAssemblyResolver(
-                    delegate (MetadataLoadContext context, AssemblyName name)
-                    {
-                        if (name.Name == "mscorlib")
-                            return context.LoadFromStream(TestUtils.CreateStreamForCoreAssembly());
-                        return null;
-                    }),
-                    "mscorlib"))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new FuncMetadataAssemblyResolver(
+                        delegate(MetadataLoadContext context, AssemblyName name)
+                        {
+                            if (name.Name == "mscorlib")
+                                return context.LoadFromStream(
+                                    TestUtils.CreateStreamForCoreAssembly()
+                                );
+                            return null;
+                        }
+                    ),
+                    "mscorlib"
+                )
+            )
             {
                 Assembly a = lc.LoadFromByteArray(TestData.s_CustomModifiersImage);
                 Type t = a.GetType("N", throwOnError: true);
@@ -420,7 +523,12 @@ namespace System.Reflection.Tests
         [Fact]
         public static unsafe void TestCustomModifiers2()
         {
-            using (MetadataLoadContext lc = new MetadataLoadContext(new CoreMetadataAssemblyResolver(), "mscorlib"))
+            using (
+                MetadataLoadContext lc = new MetadataLoadContext(
+                    new CoreMetadataAssemblyResolver(),
+                    "mscorlib"
+                )
+            )
             {
                 Assembly a = lc.LoadFromByteArray(TestData.s_CustomModifiersImage);
                 Type t = a.GetType("N", throwOnError: true);

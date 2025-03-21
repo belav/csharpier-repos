@@ -12,7 +12,9 @@ namespace System.ServiceModel.Security.Tokens
     using System.Runtime.CompilerServices;
     using System.Xml;
 
-    [TypeForwardedFrom("System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     class BufferedGenericXmlSecurityToken : GenericXmlSecurityToken
     {
         XmlBuffer tokenXmlBuffer;
@@ -26,8 +28,16 @@ namespace System.ServiceModel.Security.Tokens
             SecurityKeyIdentifierClause externalTokenReference,
             ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies,
             XmlBuffer tokenXmlBuffer
+        )
+            : base(
+                tokenXml,
+                proofToken,
+                effectiveTime,
+                expirationTime,
+                internalTokenReference,
+                externalTokenReference,
+                authorizationPolicies
             )
-            : base(tokenXml, proofToken, effectiveTime, expirationTime, internalTokenReference, externalTokenReference, authorizationPolicies)
         {
             this.tokenXmlBuffer = tokenXmlBuffer;
         }

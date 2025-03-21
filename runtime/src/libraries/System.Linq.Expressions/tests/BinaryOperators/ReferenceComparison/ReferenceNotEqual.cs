@@ -12,9 +12,9 @@ namespace System.Linq.Expressions.Tests
         public void FalseOnSame(object item, bool useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
-                    Expression.Constant(item, item.GetType()),
-                    Expression.Constant(item, item.GetType())
-                );
+                Expression.Constant(item, item.GetType()),
+                Expression.Constant(item, item.GetType())
+            );
             Assert.False(Expression.Lambda<Func<bool>>(exp).Compile(useInterpreter)());
         }
 
@@ -25,7 +25,7 @@ namespace System.Linq.Expressions.Tests
             Expression exp = Expression.ReferenceNotEqual(
                 Expression.Constant(null, type),
                 Expression.Constant(null, type)
-                );
+            );
             Assert.False(Expression.Lambda<Func<bool>>(exp).Compile(useInterpreter)());
         }
 
@@ -34,9 +34,9 @@ namespace System.Linq.Expressions.Tests
         public void TrueIfLeftNull(object item, bool useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
-                    Expression.Constant(null, item.GetType()),
-                    Expression.Constant(item, item.GetType())
-                );
+                Expression.Constant(null, item.GetType()),
+                Expression.Constant(item, item.GetType())
+            );
             Assert.True(Expression.Lambda<Func<bool>>(exp).Compile(useInterpreter)());
         }
 
@@ -45,9 +45,9 @@ namespace System.Linq.Expressions.Tests
         public void TrueIfRightNull(object item, bool useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
-                    Expression.Constant(item, item.GetType()),
-                    Expression.Constant(null, item.GetType())
-                );
+                Expression.Constant(item, item.GetType()),
+                Expression.Constant(null, item.GetType())
+            );
             Assert.True(Expression.Lambda<Func<bool>>(exp).Compile(useInterpreter)());
         }
 
@@ -56,9 +56,9 @@ namespace System.Linq.Expressions.Tests
         public void TrueIfDifferentObjectsAsObject(object x, object y, bool useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
-                    Expression.Constant(x, typeof(object)),
-                    Expression.Constant(y, typeof(object))
-                );
+                Expression.Constant(x, typeof(object)),
+                Expression.Constant(y, typeof(object))
+            );
             Assert.True(Expression.Lambda<Func<bool>>(exp).Compile(useInterpreter)());
         }
 
@@ -67,9 +67,9 @@ namespace System.Linq.Expressions.Tests
         public void TrueIfDifferentObjectsOwnType(object x, object y, bool useInterpreter)
         {
             Expression exp = Expression.ReferenceNotEqual(
-                    Expression.Constant(x),
-                    Expression.Constant(y)
-                );
+                Expression.Constant(x),
+                Expression.Constant(y)
+            );
             Assert.True(Expression.Lambda<Func<bool>>(exp).Compile(useInterpreter)());
         }
 
@@ -81,7 +81,8 @@ namespace System.Linq.Expressions.Tests
         {
             Expression xExp = Expression.Constant(x);
             Expression yExp = Expression.Constant(y);
-            Assert.Throws<InvalidOperationException>(() => Expression.ReferenceNotEqual(xExp, yExp));
+            Assert.Throws<InvalidOperationException>(() => Expression.ReferenceNotEqual(xExp, yExp)
+            );
         }
 
         [Theory]
@@ -90,7 +91,8 @@ namespace System.Linq.Expressions.Tests
         {
             Expression xExp = Expression.Constant(x);
             Expression yExp = Expression.Constant(y);
-            Assert.Throws<InvalidOperationException>(() => Expression.ReferenceNotEqual(xExp, yExp));
+            Assert.Throws<InvalidOperationException>(() => Expression.ReferenceNotEqual(xExp, yExp)
+            );
         }
 
         [Theory]
@@ -140,7 +142,10 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void CannotReduce()
         {
-            Expression exp = Expression.ReferenceNotEqual(Expression.Constant(""), Expression.Constant(""));
+            Expression exp = Expression.ReferenceNotEqual(
+                Expression.Constant(""),
+                Expression.Constant("")
+            );
             Assert.False(exp.CanReduce);
             Assert.Same(exp, exp.Reduce());
             AssertExtensions.Throws<ArgumentException>(null, () => exp.ReduceAndCheck());
@@ -149,27 +154,39 @@ namespace System.Linq.Expressions.Tests
         [Fact]
         public void ThrowsOnLeftNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("left", () => Expression.ReferenceNotEqual(null, Expression.Constant("")));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "left",
+                () => Expression.ReferenceNotEqual(null, Expression.Constant(""))
+            );
         }
 
         [Fact]
         public void ThrowsOnRightNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("right", () => Expression.ReferenceNotEqual(Expression.Constant(""), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "right",
+                () => Expression.ReferenceNotEqual(Expression.Constant(""), null)
+            );
         }
 
         [Fact]
         public static void ThrowsOnLeftUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<string>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("left", () => Expression.ReferenceNotEqual(value, Expression.Constant("")));
+            AssertExtensions.Throws<ArgumentException>(
+                "left",
+                () => Expression.ReferenceNotEqual(value, Expression.Constant(""))
+            );
         }
 
         [Fact]
         public static void ThrowsOnRightUnreadable()
         {
             Expression value = Expression.Property(null, typeof(Unreadable<string>), "WriteOnly");
-            AssertExtensions.Throws<ArgumentException>("right", () => Expression.ReferenceNotEqual(Expression.Constant(""), value));
+            AssertExtensions.Throws<ArgumentException>(
+                "right",
+                () => Expression.ReferenceNotEqual(Expression.Constant(""), value)
+            );
         }
 
         [Fact]

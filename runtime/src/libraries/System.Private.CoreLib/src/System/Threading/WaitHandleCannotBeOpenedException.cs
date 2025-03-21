@@ -8,28 +8,39 @@ using System.Runtime.Serialization;
 namespace System.Threading
 {
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class WaitHandleCannotBeOpenedException : ApplicationException
     {
-        public WaitHandleCannotBeOpenedException() : base(SR.Threading_WaitHandleCannotBeOpenedException)
+        public WaitHandleCannotBeOpenedException()
+            : base(SR.Threading_WaitHandleCannotBeOpenedException)
         {
             HResult = HResults.COR_E_WAITHANDLECANNOTBEOPENED;
         }
 
-        public WaitHandleCannotBeOpenedException(string? message) : base(message)
+        public WaitHandleCannotBeOpenedException(string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_WAITHANDLECANNOTBEOPENED;
         }
 
-        public WaitHandleCannotBeOpenedException(string? message, Exception? innerException) : base(message, innerException)
+        public WaitHandleCannotBeOpenedException(string? message, Exception? innerException)
+            : base(message, innerException)
         {
             HResult = HResults.COR_E_WAITHANDLECANNOTBEOPENED;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected WaitHandleCannotBeOpenedException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected WaitHandleCannotBeOpenedException(
+            SerializationInfo info,
+            StreamingContext context
+        )
+            : base(info, context) { }
     }
 }

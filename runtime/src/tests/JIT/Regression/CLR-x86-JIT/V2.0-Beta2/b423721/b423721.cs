@@ -7,7 +7,6 @@ using Xunit;
 
 namespace Test
 {
-
     public class C2
     {
         [Fact]
@@ -35,10 +34,14 @@ namespace Test
                 ret = 101;
             }
 
-            Type t = Type.GetType("Test.C1`1[[System.Int64, mscorlib, Version=0.0.0.0, Culture=neutral ]], c1, Version=0.0.0.0, Culture=neutral");
+            Type t = Type.GetType(
+                "Test.C1`1[[System.Int64, mscorlib, Version=0.0.0.0, Culture=neutral ]], c1, Version=0.0.0.0, Culture=neutral"
+            );
             if (t == null)
             {
-                Console.WriteLine("FAIL: Could not get Type C1`1[[System.Int64, mscorlib, Version=0.0.0.0, Culture=neutral ]], c1, Version=0.0.0.0, Culture=neutral");
+                Console.WriteLine(
+                    "FAIL: Could not get Type C1`1[[System.Int64, mscorlib, Version=0.0.0.0, Culture=neutral ]], c1, Version=0.0.0.0, Culture=neutral"
+                );
                 return 101;
             }
 
@@ -47,5 +50,4 @@ namespace Test
             return ret;
         }
     }
-
 }

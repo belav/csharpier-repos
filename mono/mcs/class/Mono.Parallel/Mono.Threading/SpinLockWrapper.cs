@@ -22,28 +22,25 @@
 //
 //
 
-
 using System;
-using System.Threading;
 using System.Collections.Concurrent;
+using System.Runtime.CompilerServices;
 using System.Runtime.ConstrainedExecution;
 using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace Mono.Threading
 {
-	public class SpinLockWrapper
-	{
-		public SpinLock Lock;
+    public class SpinLockWrapper
+    {
+        public SpinLock Lock;
 
-		public SpinLockWrapper () : this (false)
-		{
+        public SpinLockWrapper()
+            : this(false) { }
 
-		}
-
-		public SpinLockWrapper (bool enableTracking)
-		{
-			Lock = new SpinLock (enableTracking);
-		}
-	}
+        public SpinLockWrapper(bool enableTracking)
+        {
+            Lock = new SpinLock(enableTracking);
+        }
+    }
 }

@@ -21,27 +21,31 @@ namespace RenderingPlayground
 
             var tableView = new TableView<FileSystemInfo>();
 
-            tableView.Items = directory.EnumerateFileSystemInfos()
-                                       .OrderByDescending(f => f is DirectoryInfo)
-                                       .ToList();
+            tableView.Items = directory
+                .EnumerateFileSystemInfos()
+                .OrderByDescending(f => f is DirectoryInfo)
+                .ToList();
 
             tableView.AddColumn(
-                cellValue: f => f is DirectoryInfo
-                                    ? f.Name.LightGreen()
-                                    : f.Name.White(),
-                header: new ContentView("Name".Underline()));
+                cellValue: f => f is DirectoryInfo ? f.Name.LightGreen() : f.Name.White(),
+                header: new ContentView("Name".Underline())
+            );
 
             tableView.AddColumn(
                 cellValue: f => Span(f.CreationTime),
-                header: new ContentView("Created".Underline()));
+                header: new ContentView("Created".Underline())
+            );
 
             tableView.AddColumn(
                 cellValue: f => Span(f.LastWriteTime),
-                header: new ContentView("Modified".Underline()));
+                header: new ContentView("Modified".Underline())
+            );
 
             Add(tableView);
 
-            Formatter.AddFormatter<DateTime>(d => $"{d:d} {ForegroundColorSpan.DarkGray()}{d:t}{ForegroundColorSpan.Reset()}");
+            Formatter.AddFormatter<DateTime>(d =>
+                $"{d:d} {ForegroundColorSpan.DarkGray()}{d:t}{ForegroundColorSpan.Reset()}"
+            );
         }
 
         TextSpan Span(FormattableString formattableString)

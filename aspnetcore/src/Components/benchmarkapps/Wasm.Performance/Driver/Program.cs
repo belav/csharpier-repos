@@ -51,7 +51,10 @@ public class Program
         // This write is required for the benchmarking infrastructure.
         Console.WriteLine("Application started.");
 
-        using var browser = await Selenium.CreateBrowser(default, captureBrowserMemory: isStressRun);
+        using var browser = await Selenium.CreateBrowser(
+            default,
+            captureBrowserMemory: isStressRun
+        );
         using var testApp = StartTestApp();
         using var benchmarkReceiver = StartBenchmarkResultReceiver();
         var testAppUrl = GetListeningUrl(testApp);
@@ -66,7 +69,8 @@ public class Program
         var firstRun = true;
         var timeForEachRun = TimeSpan.FromMinutes(3);
 
-        var launchUrl = $"{testAppUrl}?resultsUrl={UrlEncoder.Default.Encode(receiverUrl)}#automated";
+        var launchUrl =
+            $"{testAppUrl}?resultsUrl={UrlEncoder.Default.Encode(receiverUrl)}#automated";
         browser.Url = launchUrl;
         browser.Navigate();
 
@@ -79,8 +83,11 @@ public class Program
                 string exceptionMessage = $"Timed out after {timeForEachRun}.";
                 try
                 {
-                    var innerHtml = browser.FindElement(By.CssSelector(":first-child")).GetAttribute("innerHTML");
-                    exceptionMessage += Environment.NewLine + "Browser state: " + Environment.NewLine + innerHtml;
+                    var innerHtml = browser
+                        .FindElement(By.CssSelector(":first-child"))
+                        .GetAttribute("innerHTML");
+                    exceptionMessage +=
+                        Environment.NewLine + "Browser state: " + Environment.NewLine + innerHtml;
                 }
                 catch
                 {
@@ -91,9 +98,7 @@ public class Program
 
             var results = await BenchmarkResultTask.Task;
 
-            FormatAsBenchmarksOutput(results,
-                includeMetadata: firstRun,
-                isStressRun: isStressRun);
+            FormatAsBenchmarksOutput(results, includeMetadata: firstRun, isStressRun: isStressRun);
 
             if (!isStressRun)
             {
@@ -107,115 +112,143 @@ public class Program
         return 0;
     }
 
-    private static void FormatAsBenchmarksOutput(BenchmarkResult benchmarkResult, bool includeMetadata, bool isStressRun)
+    private static void FormatAsBenchmarksOutput(
+        BenchmarkResult benchmarkResult,
+        bool includeMetadata,
+        bool isStressRun
+    )
     {
         // Sample of the the format: https://github.com/aspnet/Benchmarks/blob/e55f9e0312a7dd019d1268c1a547d1863f0c7237/src/Benchmarks/Program.cs#L51-L67
         var output = new BenchmarkOutput();
 
         if (benchmarkResult.DownloadSize != null)
         {
-            output.Metadata.Add(new BenchmarkMetadata
-            {
-                Source = "BlazorWasm",
-                Name = "blazorwasm/download-size",
-                ShortDescription = "Download size (KB)",
-                LongDescription = "Download size (KB)",
-                Format = "n2",
-            });
+            output.Metadata.Add(
+                new BenchmarkMetadata
+                {
+                    Source = "BlazorWasm",
+                    Name = "blazorwasm/download-size",
+                    ShortDescription = "Download size (KB)",
+                    LongDescription = "Download size (KB)",
+                    Format = "n2",
+                }
+            );
 
-            output.Measurements.Add(new BenchmarkMeasurement
-            {
-                Timestamp = DateTime.UtcNow,
-                Name = "blazorwasm/download-size",
-                Value = ((float)benchmarkResult.DownloadSize) / 1024,
-            });
+            output.Measurements.Add(
+                new BenchmarkMeasurement
+                {
+                    Timestamp = DateTime.UtcNow,
+                    Name = "blazorwasm/download-size",
+                    Value = ((float)benchmarkResult.DownloadSize) / 1024,
+                }
+            );
         }
 
         if (benchmarkResult.WasmMemory != null)
         {
-            output.Metadata.Add(new BenchmarkMetadata
-            {
-                Source = "BlazorWasm",
-                Name = "blazorwasm/wasm-memory",
-                ShortDescription = "Memory (KB)",
-                LongDescription = "WASM reported memory (KB)",
-                Format = "n2",
-            });
+            output.Metadata.Add(
+                new BenchmarkMetadata
+                {
+                    Source = "BlazorWasm",
+                    Name = "blazorwasm/wasm-memory",
+                    ShortDescription = "Memory (KB)",
+                    LongDescription = "WASM reported memory (KB)",
+                    Format = "n2",
+                }
+            );
 
-            output.Measurements.Add(new BenchmarkMeasurement
-            {
-                Timestamp = DateTime.UtcNow,
-                Name = "blazorwasm/wasm-memory",
-                Value = ((float)benchmarkResult.WasmMemory) / 1024,
-            });
+            output.Measurements.Add(
+                new BenchmarkMeasurement
+                {
+                    Timestamp = DateTime.UtcNow,
+                    Name = "blazorwasm/wasm-memory",
+                    Value = ((float)benchmarkResult.WasmMemory) / 1024,
+                }
+            );
 
-            output.Metadata.Add(new BenchmarkMetadata
-            {
-                Source = "BlazorWasm",
-                Name = "blazorwasm/js-usedjsheapsize",
-                ShortDescription = "UsedJSHeapSize",
-                LongDescription = "JS used heap size"
-            });
+            output.Metadata.Add(
+                new BenchmarkMetadata
+                {
+                    Source = "BlazorWasm",
+                    Name = "blazorwasm/js-usedjsheapsize",
+                    ShortDescription = "UsedJSHeapSize",
+                    LongDescription = "JS used heap size",
+                }
+            );
 
-            output.Measurements.Add(new BenchmarkMeasurement
-            {
-                Timestamp = DateTime.UtcNow,
-                Name = "blazorwasm/js-usedjsheapsize",
-                Value = benchmarkResult.UsedJSHeapSize,
-            });
+            output.Measurements.Add(
+                new BenchmarkMeasurement
+                {
+                    Timestamp = DateTime.UtcNow,
+                    Name = "blazorwasm/js-usedjsheapsize",
+                    Value = benchmarkResult.UsedJSHeapSize,
+                }
+            );
 
-            output.Metadata.Add(new BenchmarkMetadata
-            {
-                Source = "BlazorWasm",
-                Name = "blazorwasm/js-totaljsheapsize",
-                ShortDescription = "TotalJSHeapSize",
-                LongDescription = "JS total heap size"
-            });
+            output.Metadata.Add(
+                new BenchmarkMetadata
+                {
+                    Source = "BlazorWasm",
+                    Name = "blazorwasm/js-totaljsheapsize",
+                    ShortDescription = "TotalJSHeapSize",
+                    LongDescription = "JS total heap size",
+                }
+            );
 
-            output.Measurements.Add(new BenchmarkMeasurement
-            {
-                Timestamp = DateTime.UtcNow,
-                Name = "blazorwasm/js-totaljsheapsize",
-                Value = benchmarkResult.TotalJSHeapSize,
-            });
+            output.Measurements.Add(
+                new BenchmarkMeasurement
+                {
+                    Timestamp = DateTime.UtcNow,
+                    Name = "blazorwasm/js-totaljsheapsize",
+                    Value = benchmarkResult.TotalJSHeapSize,
+                }
+            );
         }
 
         // Information about the build that this was produced from
-        output.Metadata.Add(new BenchmarkMetadata
-        {
-            Source = "BlazorWasm",
-            Name = "blazorwasm/commit",
-            ShortDescription = "Commit Hash",
-        });
+        output.Metadata.Add(
+            new BenchmarkMetadata
+            {
+                Source = "BlazorWasm",
+                Name = "blazorwasm/commit",
+                ShortDescription = "Commit Hash",
+            }
+        );
 
-        output.Measurements.Add(new BenchmarkMeasurement
-        {
-            Timestamp = DateTime.UtcNow,
-            Name = "blazorwasm/commit",
-            Value = typeof(Program).Assembly
-                .GetCustomAttributes<AssemblyMetadataAttribute>()
-                .FirstOrDefault(f => f.Key == "CommitHash")
-                ?.Value,
-        });
+        output.Measurements.Add(
+            new BenchmarkMeasurement
+            {
+                Timestamp = DateTime.UtcNow,
+                Name = "blazorwasm/commit",
+                Value = typeof(Program)
+                    .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+                    .FirstOrDefault(f => f.Key == "CommitHash")
+                    ?.Value,
+            }
+        );
 
         foreach (var result in benchmarkResult.ScenarioResults)
         {
             var scenarioName = result.Descriptor.Name;
-            output.Metadata.Add(new BenchmarkMetadata
-            {
-                Source = "BlazorWasm",
-                Name = scenarioName,
-                ShortDescription = result.Name,
-                LongDescription = result.Descriptor.Description,
-                Format = "n2"
-            });
+            output.Metadata.Add(
+                new BenchmarkMetadata
+                {
+                    Source = "BlazorWasm",
+                    Name = scenarioName,
+                    ShortDescription = result.Name,
+                    LongDescription = result.Descriptor.Description,
+                    Format = "n2",
+                }
+            );
 
-            output.Measurements.Add(new BenchmarkMeasurement
-            {
-                Timestamp = DateTime.UtcNow,
-                Name = scenarioName,
-                Value = result.Duration,
-            });
+            output.Measurements.Add(
+                new BenchmarkMeasurement
+                {
+                    Timestamp = DateTime.UtcNow,
+                    Name = scenarioName,
+                    Value = result.Duration,
+                }
+            );
         }
 
         if (!includeMetadata)
@@ -225,11 +258,9 @@ public class Program
 
         if (isStressRun)
         {
-            output.Measurements.Add(new BenchmarkMeasurement
-            {
-                Timestamp = DateTime.UtcNow,
-                Name = "$$Delimiter$$",
-            });
+            output.Measurements.Add(
+                new BenchmarkMeasurement { Timestamp = DateTime.UtcNow, Name = "$$Delimiter$$" }
+            );
         }
 
         var builder = new StringBuilder();
@@ -248,7 +279,9 @@ public class Program
         Console.WriteLine("--------------------------");
         foreach (var result in benchmarkResult.ScenarioResults)
         {
-            Console.WriteLine($"| {result.Descriptor.Name} | {result.Name} | {result.Duration} | {result.NumExecutions} |");
+            Console.WriteLine(
+                $"| {result.Descriptor.Name} | {result.Name} | {result.Duration} | {result.NumExecutions} |"
+            );
         }
     }
 
@@ -256,15 +289,20 @@ public class Program
     {
         var args = new[]
         {
-                "--urls", "http://127.0.0.1:0",
-                "--applicationpath", typeof(TestApp.Program).Assembly.Location,
+            "--urls",
+            "http://127.0.0.1:0",
+            "--applicationpath",
+            typeof(TestApp.Program).Assembly.Location,
 #if DEBUG
-                "--contentroot",
-                Path.GetFullPath(typeof(Program).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+            "--contentroot",
+            Path.GetFullPath(
+                typeof(Program)
+                    .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
                     .First(f => f.Key == "TestAppLocatiion")
-                    .Value)
+                    .Value
+            )
 #endif
-            };
+        };
 
         var host = DevHostServerProgram.BuildWebHost(args);
         RunInBackgroundThread(host.Start);
@@ -273,10 +311,7 @@ public class Program
 
     static IHost StartBenchmarkResultReceiver()
     {
-        var args = new[]
-        {
-                "--urls", "http://127.0.0.1:0",
-            };
+        var args = new[] { "--urls", "http://127.0.0.1:0" };
 
         var host = Host.CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(builder => builder.UseStartup<BenchmarkDriverStartup>())
@@ -318,10 +353,9 @@ public class Program
 
     static string GetListeningUrl(IHost testApp)
     {
-        return testApp.Services.GetRequiredService<IServer>()
-            .Features
-            .Get<IServerAddressesFeature>()
-            .Addresses
-            .First();
+        return testApp
+            .Services.GetRequiredService<IServer>()
+            .Features.Get<IServerAddressesFeature>()
+            .Addresses.First();
     }
 }

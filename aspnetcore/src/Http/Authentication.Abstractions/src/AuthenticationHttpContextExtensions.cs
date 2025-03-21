@@ -28,8 +28,10 @@ public static class AuthenticationHttpContextExtensions
     /// <param name="context">The <see cref="HttpContext"/> context.</param>
     /// <param name="scheme">The name of the authentication scheme.</param>
     /// <returns>The <see cref="AuthenticateResult"/>.</returns>
-    public static Task<AuthenticateResult> AuthenticateAsync(this HttpContext context, string? scheme) =>
-        GetAuthenticationService(context).AuthenticateAsync(context, scheme);
+    public static Task<AuthenticateResult> AuthenticateAsync(
+        this HttpContext context,
+        string? scheme
+    ) => GetAuthenticationService(context).AuthenticateAsync(context, scheme);
 
     /// <summary>
     /// Challenge the current request using the specified scheme.
@@ -59,8 +61,10 @@ public static class AuthenticationHttpContextExtensions
     /// <param name="context">The <see cref="HttpContext"/> context.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
     /// <returns>The task.</returns>
-    public static Task ChallengeAsync(this HttpContext context, AuthenticationProperties? properties) =>
-        context.ChallengeAsync(scheme: null, properties: properties);
+    public static Task ChallengeAsync(
+        this HttpContext context,
+        AuthenticationProperties? properties
+    ) => context.ChallengeAsync(scheme: null, properties: properties);
 
     /// <summary>
     /// Challenge the current request using the specified scheme.
@@ -70,8 +74,11 @@ public static class AuthenticationHttpContextExtensions
     /// <param name="scheme">The name of the authentication scheme.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
     /// <returns>The task.</returns>
-    public static Task ChallengeAsync(this HttpContext context, string? scheme, AuthenticationProperties? properties) =>
-        GetAuthenticationService(context).ChallengeAsync(context, scheme, properties);
+    public static Task ChallengeAsync(
+        this HttpContext context,
+        string? scheme,
+        AuthenticationProperties? properties
+    ) => GetAuthenticationService(context).ChallengeAsync(context, scheme, properties);
 
     /// <summary>
     /// Forbid the current request using the specified scheme.
@@ -101,8 +108,10 @@ public static class AuthenticationHttpContextExtensions
     /// <param name="context">The <see cref="HttpContext"/> context.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
     /// <returns>The task.</returns>
-    public static Task ForbidAsync(this HttpContext context, AuthenticationProperties? properties) =>
-        context.ForbidAsync(scheme: null, properties: properties);
+    public static Task ForbidAsync(
+        this HttpContext context,
+        AuthenticationProperties? properties
+    ) => context.ForbidAsync(scheme: null, properties: properties);
 
     /// <summary>
     /// Forbid the current request using the specified scheme.
@@ -112,8 +121,11 @@ public static class AuthenticationHttpContextExtensions
     /// <param name="scheme">The name of the authentication scheme.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
     /// <returns>The task.</returns>
-    public static Task ForbidAsync(this HttpContext context, string? scheme, AuthenticationProperties? properties) =>
-        GetAuthenticationService(context).ForbidAsync(context, scheme, properties);
+    public static Task ForbidAsync(
+        this HttpContext context,
+        string? scheme,
+        AuthenticationProperties? properties
+    ) => GetAuthenticationService(context).ForbidAsync(context, scheme, properties);
 
     /// <summary>
     /// Sign in a principal for the specified scheme.
@@ -122,8 +134,11 @@ public static class AuthenticationHttpContextExtensions
     /// <param name="scheme">The name of the authentication scheme.</param>
     /// <param name="principal">The user.</param>
     /// <returns>The task.</returns>
-    public static Task SignInAsync(this HttpContext context, string? scheme, ClaimsPrincipal principal) =>
-        context.SignInAsync(scheme, principal, properties: null);
+    public static Task SignInAsync(
+        this HttpContext context,
+        string? scheme,
+        ClaimsPrincipal principal
+    ) => context.SignInAsync(scheme, principal, properties: null);
 
     /// <summary>
     /// Sign in a principal for the default authentication scheme.
@@ -143,8 +158,11 @@ public static class AuthenticationHttpContextExtensions
     /// <param name="principal">The user.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
     /// <returns>The task.</returns>
-    public static Task SignInAsync(this HttpContext context, ClaimsPrincipal principal, AuthenticationProperties? properties) =>
-        context.SignInAsync(scheme: null, principal: principal, properties: properties);
+    public static Task SignInAsync(
+        this HttpContext context,
+        ClaimsPrincipal principal,
+        AuthenticationProperties? properties
+    ) => context.SignInAsync(scheme: null, principal: principal, properties: properties);
 
     /// <summary>
     /// Sign in a principal for the specified scheme.
@@ -154,8 +172,12 @@ public static class AuthenticationHttpContextExtensions
     /// <param name="principal">The user.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
     /// <returns>The task.</returns>
-    public static Task SignInAsync(this HttpContext context, string? scheme, ClaimsPrincipal principal, AuthenticationProperties? properties) =>
-        GetAuthenticationService(context).SignInAsync(context, scheme, principal, properties);
+    public static Task SignInAsync(
+        this HttpContext context,
+        string? scheme,
+        ClaimsPrincipal principal,
+        AuthenticationProperties? properties
+    ) => GetAuthenticationService(context).SignInAsync(context, scheme, principal, properties);
 
     /// <summary>
     /// Sign out a principal for the default authentication scheme.
@@ -163,7 +185,8 @@ public static class AuthenticationHttpContextExtensions
     /// </summary>
     /// <param name="context">The <see cref="HttpContext"/> context.</param>
     /// <returns>The task.</returns>
-    public static Task SignOutAsync(this HttpContext context) => context.SignOutAsync(scheme: null, properties: null);
+    public static Task SignOutAsync(this HttpContext context) =>
+        context.SignOutAsync(scheme: null, properties: null);
 
     /// <summary>
     /// Sign out a principal for the default authentication scheme.
@@ -172,7 +195,10 @@ public static class AuthenticationHttpContextExtensions
     /// <param name="context">The <see cref="HttpContext"/> context.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
     /// <returns>The task.</returns>
-    public static Task SignOutAsync(this HttpContext context, AuthenticationProperties? properties) => context.SignOutAsync(scheme: null, properties: properties);
+    public static Task SignOutAsync(
+        this HttpContext context,
+        AuthenticationProperties? properties
+    ) => context.SignOutAsync(scheme: null, properties: properties);
 
     /// <summary>
     /// Sign out a principal for the specified scheme.
@@ -180,7 +206,8 @@ public static class AuthenticationHttpContextExtensions
     /// <param name="context">The <see cref="HttpContext"/> context.</param>
     /// <param name="scheme">The name of the authentication scheme.</param>
     /// <returns>The task.</returns>
-    public static Task SignOutAsync(this HttpContext context, string? scheme) => context.SignOutAsync(scheme, properties: null);
+    public static Task SignOutAsync(this HttpContext context, string? scheme) =>
+        context.SignOutAsync(scheme, properties: null);
 
     /// <summary>
     /// Sign out a principal for the specified scheme.
@@ -189,8 +216,11 @@ public static class AuthenticationHttpContextExtensions
     /// <param name="scheme">The name of the authentication scheme.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/> properties.</param>
     /// <returns>The task.</returns>
-    public static Task SignOutAsync(this HttpContext context, string? scheme, AuthenticationProperties? properties) =>
-        GetAuthenticationService(context).SignOutAsync(context, scheme, properties);
+    public static Task SignOutAsync(
+        this HttpContext context,
+        string? scheme,
+        AuthenticationProperties? properties
+    ) => GetAuthenticationService(context).SignOutAsync(context, scheme, properties);
 
     /// <summary>
     /// Authenticates the request using the specified scheme and returns the value for the token.
@@ -199,8 +229,11 @@ public static class AuthenticationHttpContextExtensions
     /// <param name="scheme">The name of the authentication scheme.</param>
     /// <param name="tokenName">The name of the token.</param>
     /// <returns>The value of the token if present.</returns>
-    public static Task<string?> GetTokenAsync(this HttpContext context, string? scheme, string tokenName) =>
-        GetAuthenticationService(context).GetTokenAsync(context, scheme, tokenName);
+    public static Task<string?> GetTokenAsync(
+        this HttpContext context,
+        string? scheme,
+        string tokenName
+    ) => GetAuthenticationService(context).GetTokenAsync(context, scheme, tokenName);
 
     /// <summary>
     /// Authenticates the request using the default authentication scheme and returns the value for the token.
@@ -214,9 +247,12 @@ public static class AuthenticationHttpContextExtensions
 
     // This project doesn't reference AuthenticationServiceCollectionExtensions.AddAuthentication so we use a string.
     private static IAuthenticationService GetAuthenticationService(HttpContext context) =>
-        context.RequestServices.GetService<IAuthenticationService>() ??
-            throw new InvalidOperationException(Resources.FormatException_UnableToFindServices(
+        context.RequestServices.GetService<IAuthenticationService>()
+        ?? throw new InvalidOperationException(
+            Resources.FormatException_UnableToFindServices(
                 nameof(IAuthenticationService),
                 nameof(IServiceCollection),
-                "AddAuthentication"));
+                "AddAuthentication"
+            )
+        );
 }

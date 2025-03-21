@@ -16,7 +16,10 @@ namespace System.ComponentModel
             var attribute = new ToolboxItemAttribute(defaultType);
             if (defaultType)
             {
-                Assert.Equal("System.Drawing.Design.ToolboxItem, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", attribute.ToolboxItemTypeName);
+                Assert.Equal(
+                    "System.Drawing.Design.ToolboxItem, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                    attribute.ToolboxItemTypeName
+                );
                 AssertExtensions.Throws<ArgumentException>(null, () => attribute.ToolboxItemType);
             }
             else
@@ -32,7 +35,10 @@ namespace System.ComponentModel
         [InlineData("invalidName", false)]
         [InlineData("invalidName.dll", false)]
         [InlineData("System.Int32", false)]
-        [InlineData("System.Drawing.Design.ToolboxItem, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", true)]
+        [InlineData(
+            "System.Drawing.Design.ToolboxItem, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+            true
+        )]
         public void Ctor_String(string toolboxItemTypeName, bool expectedIsDefault)
         {
             var attribute = new ToolboxItemAttribute(toolboxItemTypeName);
@@ -54,7 +60,9 @@ namespace System.ComponentModel
         [Fact]
         public void Ctor_NullToolboxItemTypeName_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() => new ToolboxItemAttribute((string)null));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() =>
+                new ToolboxItemAttribute((string)null)
+            );
         }
 
         [Theory]
@@ -72,7 +80,10 @@ namespace System.ComponentModel
         [Fact]
         public void Ctor_NullToolboxItemType_ThrowsNullReferenceException()
         {
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>("toolboxItemType", () => new ToolboxItemAttribute((Type)null));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
+                "toolboxItemType",
+                () => new ToolboxItemAttribute((Type)null)
+            );
         }
 
         [Fact]
@@ -80,7 +91,10 @@ namespace System.ComponentModel
         {
             ToolboxItemAttribute attribute = ToolboxItemAttribute.Default;
             Assert.Same(attribute, ToolboxItemAttribute.Default);
-            Assert.Equal("System.Drawing.Design.ToolboxItem, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", attribute.ToolboxItemTypeName);
+            Assert.Equal(
+                "System.Drawing.Design.ToolboxItem, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a",
+                attribute.ToolboxItemTypeName
+            );
             AssertExtensions.Throws<ArgumentException>(null, () => attribute.ToolboxItemType);
             Assert.True(attribute.IsDefaultAttribute());
         }
@@ -100,12 +114,37 @@ namespace System.ComponentModel
             var attribute = new ToolboxItemAttribute("toolboxItemTypeName");
 
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new ToolboxItemAttribute("toolboxItemTypeName"), true };
-            yield return new object[] { attribute, new ToolboxItemAttribute("toolboxitemtypename"), false };
-            yield return new object[] { attribute, new ToolboxItemAttribute(defaultType: false), false };
+            yield return new object[]
+            {
+                attribute,
+                new ToolboxItemAttribute("toolboxItemTypeName"),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new ToolboxItemAttribute("toolboxitemtypename"),
+                false,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new ToolboxItemAttribute(defaultType: false),
+                false,
+            };
 
-            yield return new object[] { new ToolboxItemAttribute(defaultType: false), new ToolboxItemAttribute(defaultType: false), true };
-            yield return new object[] { new ToolboxItemAttribute(defaultType: false), new ToolboxItemAttribute("toolboxItemTypeName"), false };
+            yield return new object[]
+            {
+                new ToolboxItemAttribute(defaultType: false),
+                new ToolboxItemAttribute(defaultType: false),
+                true,
+            };
+            yield return new object[]
+            {
+                new ToolboxItemAttribute(defaultType: false),
+                new ToolboxItemAttribute("toolboxItemTypeName"),
+                false,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -113,7 +152,11 @@ namespace System.ComponentModel
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Other_ReturnsExpected(ToolboxItemAttribute attribute, object other, bool expected)
+        public void Equals_Other_ReturnsExpected(
+            ToolboxItemAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is ToolboxItemAttribute)

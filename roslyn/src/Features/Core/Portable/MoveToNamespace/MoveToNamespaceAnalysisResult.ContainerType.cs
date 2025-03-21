@@ -11,7 +11,7 @@ namespace Microsoft.CodeAnalysis.MoveToNamespace
         public enum ContainerType
         {
             Namespace,
-            NamedType
+            NamedType,
         }
     }
 }

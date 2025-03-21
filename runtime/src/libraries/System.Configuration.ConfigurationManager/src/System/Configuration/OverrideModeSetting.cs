@@ -25,10 +25,16 @@ namespace System.Configuration
         private byte _mode;
 
         // Default for section is ALLOW
-        internal static readonly OverrideModeSetting s_sectionDefault = new OverrideModeSetting { _mode = (byte)OverrideMode.Allow };
+        internal static readonly OverrideModeSetting s_sectionDefault = new OverrideModeSetting
+        {
+            _mode = (byte)OverrideMode.Allow,
+        };
 
         // Default for location tags is INHERIT. Note that we do not make the value as existent in the XML or specified by the API
-        internal static readonly OverrideModeSetting s_locationDefault = new OverrideModeSetting { _mode = (byte)OverrideMode.Inherit };
+        internal static readonly OverrideModeSetting s_locationDefault = new OverrideModeSetting
+        {
+            _mode = (byte)OverrideMode.Inherit,
+        };
 
         internal static OverrideModeSetting CreateFromXmlReadValue(bool allowOverride)
         {
@@ -64,8 +70,9 @@ namespace System.Configuration
                 BaseConfigurationRecord.OverrideModeAllow => OverrideMode.Allow,
                 BaseConfigurationRecord.OverrideModeDeny => OverrideMode.Deny,
                 _ => throw new ConfigurationErrorsException(
-                        SR.Config_section_override_mode_attribute_invalid,
-                        xmlUtil),
+                    SR.Config_section_override_mode_attribute_invalid,
+                    xmlUtil
+                ),
             };
 
         internal static bool CanUseSameLocationTag(OverrideModeSetting x, OverrideModeSetting y)
@@ -79,23 +86,25 @@ namespace System.Configuration
             // 3. When mode was not changed the XML - they must've been the same in the xml ( i.e. allowOverride specified on both, or overrideMode or neither of them )
 
             bool result = x.OverrideMode == y.OverrideMode;
-            if (!result) return false;
+            if (!result)
+                return false;
 
             // Check for an API change for each setting first
             // If one mode was set through the API - the other mode has to be set in the same way through the API or has to be using the same type in the xml
 
             // Handle case where "x" was API modified
-            if ((x._mode & ApiDefinedAny) != 0) result = IsMatchingApiChangedLocationTag(x, y);
+            if ((x._mode & ApiDefinedAny) != 0)
+                result = IsMatchingApiChangedLocationTag(x, y);
             // Handle case where "y" was API modified
             else
             {
-                if ((y._mode & ApiDefinedAny) != 0) result = IsMatchingApiChangedLocationTag(y, x);
+                if ((y._mode & ApiDefinedAny) != 0)
+                    result = IsMatchingApiChangedLocationTag(y, x);
                 // Handle case where neither "x" nor "y" was API modified
                 else
                 {
                     // If one of the settings was XML defined - they are a match only if both were XML defined in the same way
-                    if (((x._mode & XmlDefinedAny) != 0) ||
-                        ((y._mode & XmlDefinedAny) != 0))
+                    if (((x._mode & XmlDefinedAny) != 0) || ((y._mode & XmlDefinedAny) != 0))
                         result = (x._mode & XmlDefinedAny) == (y._mode & XmlDefinedAny);
 
                     // Neither "x" nor "y" was XML defined - they are a match since they can both go
@@ -106,7 +115,10 @@ namespace System.Configuration
             return result;
         }
 
-        private static bool IsMatchingApiChangedLocationTag(OverrideModeSetting x, OverrideModeSetting y)
+        private static bool IsMatchingApiChangedLocationTag(
+            OverrideModeSetting x,
+            OverrideModeSetting y
+        )
         {
             // x must be a changed through the API setting
             // Returns true if x and y can share the same location tag
@@ -126,9 +138,14 @@ namespace System.Configuration
                 if ((y._mode & XmlDefinedAny) != 0)
                 {
                     // "x" was API changed in Legacy and "y" was XML defined in Legacy
-                    result = (((x._mode & ApiDefinedLegacy) != 0) && ((y._mode & XmlDefinedLegacy) != 0)) ||
-                    // "x" was API changed in New and "y" was XML defined in New
-                        (((x._mode & ApiDefinedNewMode) != 0) && ((y._mode & XmlDefinedNewMode) != 0));
+                    result =
+                        (((x._mode & ApiDefinedLegacy) != 0) && ((y._mode & XmlDefinedLegacy) != 0))
+                        ||
+                        // "x" was API changed in New and "y" was XML defined in New
+                        (
+                            ((x._mode & ApiDefinedNewMode) != 0)
+                            && ((y._mode & XmlDefinedNewMode) != 0)
+                        );
                 }
                 // "y" was not API or XML modified - since "x" was API modified - they are not a match ( i.e. "y" should go to an <location> with no explicit mode written out )
             }
@@ -163,9 +180,9 @@ namespace System.Configuration
 
                 OverrideModeSetting defaultSetting = s_locationDefault;
 
-                return (defaultSetting.OverrideMode == OverrideMode) &&
-                    ((_mode & ApiDefinedAny) == 0) &&
-                    ((_mode & XmlDefinedAny) == 0);
+                return (defaultSetting.OverrideMode == OverrideMode)
+                    && ((_mode & ApiDefinedAny) == 0)
+                    && ((_mode & XmlDefinedAny) == 0);
             }
         }
 
@@ -224,8 +241,12 @@ namespace System.Configuration
                         value = OverrideModeXmlValue;
                     }
 
-                    result = string.Format(CultureInfo.InvariantCulture,
-                        BaseConfigurationRecord.KeywordLocationOverrideModeString, attrib, value);
+                    result = string.Format(
+                        CultureInfo.InvariantCulture,
+                        BaseConfigurationRecord.KeywordLocationOverrideModeString,
+                        attrib,
+                        value
+                    );
                 }
 
                 return result;
@@ -330,7 +351,9 @@ namespace System.Configuration
 
             // Shows whats the current setting: 0 ( none ), ApiDefinedLegacy or ApiDefinedNew
             if ((current != 0) && (current != required))
-                throw new ConfigurationErrorsException(SR.Cannot_change_both_AllowOverride_and_OverrideMode);
+                throw new ConfigurationErrorsException(
+                    SR.Cannot_change_both_AllowOverride_and_OverrideMode
+                );
         }
     }
 }

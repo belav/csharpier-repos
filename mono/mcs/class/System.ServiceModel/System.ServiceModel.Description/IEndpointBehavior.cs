@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,14 +31,14 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Description
 {
-	public interface IEndpointBehavior
-	{
-		void AddBindingParameters (ServiceEndpoint endpoint,
-			BindingParameterCollection bindingParameters);
-		void ApplyDispatchBehavior (ServiceEndpoint endpoint,
-			EndpointDispatcher endpointDispatcher);
-		void ApplyClientBehavior (ServiceEndpoint endpoint,
-			ClientRuntime clientRuntime);
-		void Validate (ServiceEndpoint endpoint);
-	}
+    public interface IEndpointBehavior
+    {
+        void AddBindingParameters(
+            ServiceEndpoint endpoint,
+            BindingParameterCollection bindingParameters
+        );
+        void ApplyDispatchBehavior(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher);
+        void ApplyClientBehavior(ServiceEndpoint endpoint, ClientRuntime clientRuntime);
+        void Validate(ServiceEndpoint endpoint);
+    }
 }

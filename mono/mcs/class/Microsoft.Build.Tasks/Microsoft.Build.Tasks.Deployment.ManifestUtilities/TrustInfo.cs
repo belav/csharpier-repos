@@ -25,124 +25,127 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
-using System.Security;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public sealed class TrustInfo {
-	
-		bool		hasUnmanagedCodePermission;
-		bool		isFullTrust;
-		PermissionSet	permissionSet;
-		bool		preserveFullTrustPermissionSet;
-		string		sameSiteAccess;
-	
-		[MonoTODO]
-		public TrustInfo ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void Clear ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void Read (Stream input)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void Read (string path)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void ReadManifest (Stream input)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void ReadManifest (string path)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public override string ToString ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void Write (Stream output)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void Write (string path)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void WriteManifest (Stream output)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void WriteManifest (string path)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public void WriteManifest (Stream input, Stream output)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		[MonoTODO]
-		public bool HasUnmanagedCodePermission {
-			get { return hasUnmanagedCodePermission; }
-		}
-		
-		[MonoTODO]
-		public bool IsFullTrust {
-			get { return isFullTrust; }
-			set { isFullTrust = value; }
-		}
-		
-		[MonoTODO]
-		public PermissionSet PermissionSet {
-			get { return permissionSet; }
-			set { permissionSet = value; }
-		}
-		
-		[MonoTODO]
-		public bool PreserveFullTrustPermissionSet {
-			get { return preserveFullTrustPermissionSet; }
-			set { preserveFullTrustPermissionSet = value; }
-		}
-		
-		[MonoTODO]
-		public string SameSiteAccess {
-			get { return sameSiteAccess; }
-			set { sameSiteAccess = value; }
-		}
-	}
-}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public sealed class TrustInfo
+    {
+        bool hasUnmanagedCodePermission;
+        bool isFullTrust;
+        PermissionSet permissionSet;
+        bool preserveFullTrustPermissionSet;
+        string sameSiteAccess;
 
+        [MonoTODO]
+        public TrustInfo()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Clear()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Read(Stream input)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Read(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void ReadManifest(Stream input)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void ReadManifest(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Write(Stream output)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Write(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void WriteManifest(Stream output)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void WriteManifest(string path)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void WriteManifest(Stream input, Stream output)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public bool HasUnmanagedCodePermission
+        {
+            get { return hasUnmanagedCodePermission; }
+        }
+
+        [MonoTODO]
+        public bool IsFullTrust
+        {
+            get { return isFullTrust; }
+            set { isFullTrust = value; }
+        }
+
+        [MonoTODO]
+        public PermissionSet PermissionSet
+        {
+            get { return permissionSet; }
+            set { permissionSet = value; }
+        }
+
+        [MonoTODO]
+        public bool PreserveFullTrustPermissionSet
+        {
+            get { return preserveFullTrustPermissionSet; }
+            set { preserveFullTrustPermissionSet = value; }
+        }
+
+        [MonoTODO]
+        public string SameSiteAccess
+        {
+            get { return sameSiteAccess; }
+            set { sameSiteAccess = value; }
+        }
+    }
+}

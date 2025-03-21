@@ -24,7 +24,8 @@ public class Program
                 Directory.GetCurrentDirectory(),
                 httpClient,
                 outputWriter,
-                errorWriter);
+                errorWriter
+            );
 
             var result = application.Execute(args);
 

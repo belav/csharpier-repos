@@ -7,7 +7,7 @@ namespace System.ServiceModel.Diagnostics
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Dispatcher;
     using System.Xml;
-    
+
     class MessageLoggingFilterTraceRecord : TraceRecord
     {
         XPathMessageFilter filter;
@@ -17,7 +17,10 @@ namespace System.ServiceModel.Diagnostics
             this.filter = filter;
         }
 
-        internal override string EventId { get { return BuildEventId("MessageLoggingFilter"); } }
+        internal override string EventId
+        {
+            get { return BuildEventId("MessageLoggingFilter"); }
+        }
 
         internal override void WriteTo(XmlWriter writer)
         {

@@ -10,7 +10,8 @@ namespace System.Runtime.InteropServices
         private static string? s_osDescription;
         private static volatile int s_osArchPlusOne;
 
-        public static string OSDescription => s_osDescription ??= (GetPrettyOSDescription() ?? Interop.Sys.GetUnixVersion());
+        public static string OSDescription =>
+            s_osDescription ??= (GetPrettyOSDescription() ?? Interop.Sys.GetUnixVersion());
 
         public static Architecture OSArchitecture
         {

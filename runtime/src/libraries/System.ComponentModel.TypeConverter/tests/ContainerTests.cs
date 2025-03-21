@@ -18,9 +18,7 @@ using Xunit;
 
 namespace System.ComponentModel.Tests
 {
-    internal class TestService
-    {
-    }
+    internal class TestService { }
 
     internal class TestContainer : Container
     {
@@ -85,10 +83,7 @@ namespace System.ComponentModel.Tests
     {
         public override ISite Site
         {
-            get
-            {
-                return base.Site;
-            }
+            get { return base.Site; }
             set
             {
                 base.Site = value;
@@ -123,7 +118,6 @@ namespace System.ComponentModel.Tests
         private bool disposed;
         private bool throwOnDispose;
     }
-
 
     public class ContainerTest
     {
@@ -287,7 +281,14 @@ namespace System.ComponentModel.Tests
         public void Add_ExceedsSizeOfBuffer_Success()
         {
             var container = new Container();
-            var components = new Component[] { new Component(), new Component(), new Component(), new Component(), new Component() };
+            var components = new Component[]
+            {
+                new Component(),
+                new Component(),
+                new Component(),
+                new Component(),
+                new Component(),
+            };
 
             for (int i = 0; i < components.Length; i++)
             {
@@ -408,13 +409,19 @@ namespace System.ComponentModel.Tests
         {
             var component1 = new Component();
             var component2 = new Component();
-            TypeDescriptor.AddAttributes(component1, new InheritanceAttribute(InheritanceLevel.InheritedReadOnly));
+            TypeDescriptor.AddAttributes(
+                component1,
+                new InheritanceAttribute(InheritanceLevel.InheritedReadOnly)
+            );
 
             var container = new Container();
             container.Add(component1, "Name");
             container.Add(component2, "Name");
 
-            Assert.Equal(new IComponent[] { component1, component2 }, container.Components.Cast<IComponent>());
+            Assert.Equal(
+                new IComponent[] { component1, component2 },
+                container.Components.Cast<IComponent>()
+            );
         }
 
         [Fact]
@@ -687,13 +694,16 @@ namespace System.ComponentModel.Tests
 
         private class SitingContainer : Container
         {
-            public void DoRemoveWithoutUnsitting(IComponent component) => RemoveWithoutUnsiting(component);
+            public void DoRemoveWithoutUnsitting(IComponent component) =>
+                RemoveWithoutUnsiting(component);
         }
 
         [Fact]
         public void ValidateName_Component_Null()
         {
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => _container.InvokeValidateName((IComponent)null, "A"));
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+                _container.InvokeValidateName((IComponent)null, "A")
+            );
             Assert.Equal(typeof(ArgumentNullException), ex.GetType());
             Assert.Null(ex.InnerException);
             Assert.NotNull(ex.Message);
@@ -723,7 +733,10 @@ namespace System.ComponentModel.Tests
             _container.Add(compB, "B");
 
             ArgumentException ex;
-            ex = AssertExtensions.Throws<ArgumentException>(null, () => _container.InvokeValidateName(compB, "dup"));
+            ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => _container.InvokeValidateName(compB, "dup")
+            );
             // Duplicate component name 'duP'.  Component names must be
             // unique and case-insensitive
             Assert.Equal(typeof(ArgumentException), ex.GetType());
@@ -736,7 +749,10 @@ namespace System.ComponentModel.Tests
 
             // new component, different case
             TestComponent compC = new TestComponent();
-            ex = AssertExtensions.Throws<ArgumentException>(null, () => _container.InvokeValidateName(compC, "dup"));
+            ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => _container.InvokeValidateName(compC, "dup")
+            );
             // Duplicate component name 'duP'.  Component names must be
             // unique and case-insensitive
             Assert.Equal(typeof(ArgumentException), ex.GetType());
@@ -751,7 +767,10 @@ namespace System.ComponentModel.Tests
             TestContainer container2 = new TestContainer();
             TestComponent compD = new TestComponent();
             container2.Add(compD, "B");
-            ex = AssertExtensions.Throws<ArgumentException>(null, () => _container.InvokeValidateName(compD, "dup"));
+            ex = AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => _container.InvokeValidateName(compD, "dup")
+            );
             // Duplicate component name 'duP'.  Component names must be
             // unique and case-insensitive
             Assert.Equal(typeof(ArgumentException), ex.GetType());
@@ -777,7 +796,10 @@ namespace System.ComponentModel.Tests
             container.Add(component2);
             container.Add(component3);
 
-            Assert.Equal(new IComponent[] { component1, component2, component3 }, container.Components.Cast<IComponent>());
+            Assert.Equal(
+                new IComponent[] { component1, component2, component3 },
+                container.Components.Cast<IComponent>()
+            );
         }
 
         [Fact]
@@ -788,12 +810,18 @@ namespace System.ComponentModel.Tests
             var component3 = new SubComponent();
 
             // This filter only includes SubComponents.
-            var container = new FilterContainer { FilterService = new CustomContainerFilterService() };
+            var container = new FilterContainer
+            {
+                FilterService = new CustomContainerFilterService(),
+            };
             container.Add(component1);
             container.Add(component2);
             container.Add(component3);
 
-            Assert.Equal(new IComponent[] { component1, component3 }, container.Components.Cast<IComponent>());
+            Assert.Equal(
+                new IComponent[] { component1, component3 },
+                container.Components.Cast<IComponent>()
+            );
         }
 
         [Fact]
@@ -804,12 +832,18 @@ namespace System.ComponentModel.Tests
             var component3 = new SubComponent();
 
             // This filter only includes SubComponents.
-            var container = new FilterContainer { FilterService = new CustomContainerFilterService() };
+            var container = new FilterContainer
+            {
+                FilterService = new CustomContainerFilterService(),
+            };
             container.Add(component1);
             container.Add(component2);
             container.Add(component3);
 
-            Assert.Equal(new IComponent[] { component1, component3 }, container.Components.Cast<IComponent>());
+            Assert.Equal(
+                new IComponent[] { component1, component3 },
+                container.Components.Cast<IComponent>()
+            );
 
             container.Remove(component1);
             Assert.Equal(new IComponent[] { component3 }, container.Components.Cast<IComponent>());
@@ -823,12 +857,18 @@ namespace System.ComponentModel.Tests
             var component3 = new SubComponent();
 
             // This filter only includes SubComponents.
-            var container = new FilterContainer { FilterService = new NullContainerFilterService() };
+            var container = new FilterContainer
+            {
+                FilterService = new NullContainerFilterService(),
+            };
             container.Add(component1);
             container.Add(component2);
             container.Add(component3);
 
-            Assert.Equal(new IComponent[] { component1, component2, component3 }, container.Components.Cast<IComponent>());
+            Assert.Equal(
+                new IComponent[] { component1, component2, component3 },
+                container.Components.Cast<IComponent>()
+            );
         }
 
         private class FilterContainer : Container
@@ -891,29 +931,20 @@ namespace System.ComponentModel.Tests
 
         private class MyContainer : IContainer
         {
-            private ComponentCollection components = new ComponentCollection(
-                new Component[0]);
+            private ComponentCollection components = new ComponentCollection(new Component[0]);
 
             public ComponentCollection Components
             {
                 get { return components; }
             }
 
-            public void Add(IComponent component)
-            {
-            }
+            public void Add(IComponent component) { }
 
-            public void Add(IComponent component, string name)
-            {
-            }
+            public void Add(IComponent component, string name) { }
 
-            public void Remove(IComponent component)
-            {
-            }
+            public void Remove(IComponent component) { }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
 
         public class GetServiceContainer : Container

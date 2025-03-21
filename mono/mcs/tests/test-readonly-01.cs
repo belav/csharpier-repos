@@ -4,13 +4,11 @@ using System;
 
 readonly struct S
 {
-	readonly int field;
+    readonly int field;
 
-	static int sf;
-	static event Action e;
-	static int Prop { get; set; }
+    static int sf;
+    static event Action e;
+    static int Prop { get; set; }
 
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

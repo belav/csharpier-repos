@@ -14,7 +14,8 @@ namespace System.Security.Cryptography.Tests
             PaddingMode mode,
             int plaintextSize,
             int expectedCiphertextSize,
-            int alignmentSizeInBits)
+            int alignmentSizeInBits
+        )
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = alignmentSizeInBits };
             int ciphertextSizeCbc = alg.GetCiphertextLengthCbc(plaintextSize, mode);
@@ -29,10 +30,15 @@ namespace System.Security.Cryptography.Tests
             PaddingMode mode,
             int plaintextSize,
             int expectedCiphertextSize,
-            int alignmentSizeInBits)
+            int alignmentSizeInBits
+        )
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            int ciphertextSizeCfb = alg.GetCiphertextLengthCfb(plaintextSize, mode, alignmentSizeInBits);
+            int ciphertextSizeCfb = alg.GetCiphertextLengthCfb(
+                plaintextSize,
+                mode,
+                alignmentSizeInBits
+            );
             Assert.Equal(expectedCiphertextSize, ciphertextSizeCfb);
         }
 
@@ -41,9 +47,18 @@ namespace System.Security.Cryptography.Tests
         public static void GetCiphertextLength_ThrowsForNegativeInput(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () => alg.GetCiphertextLengthCbc(-1, mode));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () => alg.GetCiphertextLengthEcb(-1, mode));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () => alg.GetCiphertextLengthCfb(-1, mode));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthCbc(-1, mode)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthEcb(-1, mode)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthCfb(-1, mode)
+            );
         }
 
         [Theory]
@@ -54,8 +69,14 @@ namespace System.Security.Cryptography.Tests
         public static void GetCiphertextLengthBlock_ThrowsForOverflow(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () => alg.GetCiphertextLengthCbc(0x7FFFFFF1, mode));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () => alg.GetCiphertextLengthEcb(0x7FFFFFF1, mode));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthCbc(0x7FFFFFF1, mode)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthEcb(0x7FFFFFF1, mode)
+            );
         }
 
         [Theory]
@@ -66,8 +87,10 @@ namespace System.Security.Cryptography.Tests
         public static void GetCiphertextLengthCfb_ThrowsForOverflow(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("plaintextLength", () =>
-                alg.GetCiphertextLengthCfb(0x7FFFFFFF, mode, feedbackSizeInBits: 128));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthCfb(0x7FFFFFFF, mode, feedbackSizeInBits: 128)
+            );
         }
 
         [Theory]
@@ -84,8 +107,10 @@ namespace System.Security.Cryptography.Tests
         public static void GetCiphertextLengthCfb_ThrowsForNonByteFeedbackSize(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
-                alg.GetCiphertextLengthCfb(16, mode, 7));
+            AssertExtensions.Throws<ArgumentException>(
+                "feedbackSizeInBits",
+                () => alg.GetCiphertextLengthCfb(16, mode, 7)
+            );
         }
 
         [Theory]
@@ -102,8 +127,10 @@ namespace System.Security.Cryptography.Tests
         public static void GetCiphertextLengthCfb_ThrowsForZeroFeedbackSize(PaddingMode mode)
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("feedbackSizeInBits", () =>
-                alg.GetCiphertextLengthCfb(16, mode, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "feedbackSizeInBits",
+                () => alg.GetCiphertextLengthCfb(16, mode, 0)
+            );
         }
 
         [Fact]
@@ -111,25 +138,42 @@ namespace System.Security.Cryptography.Tests
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
             PaddingMode mode = (PaddingMode)(-1);
-            Assert.Throws<ArgumentOutOfRangeException>("paddingMode", () => alg.GetCiphertextLengthCbc(16, mode));
-            Assert.Throws<ArgumentOutOfRangeException>("paddingMode", () => alg.GetCiphertextLengthEcb(16, mode));
-            Assert.Throws<ArgumentOutOfRangeException>("paddingMode", () => alg.GetCiphertextLengthCfb(16, mode));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "paddingMode",
+                () => alg.GetCiphertextLengthCbc(16, mode)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "paddingMode",
+                () => alg.GetCiphertextLengthEcb(16, mode)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(
+                "paddingMode",
+                () => alg.GetCiphertextLengthCfb(16, mode)
+            );
         }
 
         [Fact]
         public static void GetCiphertextLengthBlock_NoPaddingAndPlaintextSizeNotBlockAligned()
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
-            Assert.Throws<ArgumentException>("plaintextLength", () => alg.GetCiphertextLengthCbc(17, PaddingMode.None));
-            Assert.Throws<ArgumentException>("plaintextLength", () => alg.GetCiphertextLengthEcb(17, PaddingMode.None));
+            Assert.Throws<ArgumentException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthCbc(17, PaddingMode.None)
+            );
+            Assert.Throws<ArgumentException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthEcb(17, PaddingMode.None)
+            );
         }
 
         [Fact]
         public static void GetCiphertextLengthCfb_NoPaddingAndPlaintextSizeNotFeedbackAligned()
         {
             AnySizeAlgorithm alg = new AnySizeAlgorithm();
-            Assert.Throws<ArgumentException>("plaintextLength", () =>
-                alg.GetCiphertextLengthCfb(17, PaddingMode.None, feedbackSizeInBits: 128));
+            Assert.Throws<ArgumentException>(
+                "plaintextLength",
+                () => alg.GetCiphertextLengthCfb(17, PaddingMode.None, feedbackSizeInBits: 128)
+            );
         }
 
         [Fact]
@@ -138,7 +182,8 @@ namespace System.Security.Cryptography.Tests
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
 
             Assert.Throws<NotSupportedException>(() =>
-                alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None));
+                alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None)
+            );
         }
 
         [Fact]
@@ -147,13 +192,19 @@ namespace System.Security.Cryptography.Tests
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
 
             Assert.Throws<NotSupportedException>(() =>
-                alg.DecryptEcb(Array.Empty<byte>(), PaddingMode.None));
+                alg.DecryptEcb(Array.Empty<byte>(), PaddingMode.None)
+            );
         }
 
         [Fact]
         public static void EncryptEcb_EncryptProducesIncorrectlyPaddedValue()
         {
-            static bool EncryptImpl(ReadOnlySpan<byte> plaintext, Span<byte> destination, PaddingMode paddingMode, out int bytesWritten)
+            static bool EncryptImpl(
+                ReadOnlySpan<byte> plaintext,
+                Span<byte> destination,
+                PaddingMode paddingMode,
+                out int bytesWritten
+            )
             {
                 bytesWritten = destination.Length + 1;
                 return true;
@@ -166,13 +217,19 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None));
+                alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None)
+            );
         }
 
         [Fact]
         public static void DecryptEcb_DecryptBytesWrittenLies()
         {
-            static bool DecryptImpl(ReadOnlySpan<byte> ciphertext, Span<byte> destination, PaddingMode paddingMode, out int bytesWritten)
+            static bool DecryptImpl(
+                ReadOnlySpan<byte> ciphertext,
+                Span<byte> destination,
+                PaddingMode paddingMode,
+                out int bytesWritten
+            )
             {
                 bytesWritten = destination.Length + 1;
                 return true;
@@ -185,13 +242,19 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.DecryptEcb(new byte[128 / 8], PaddingMode.None));
+                alg.DecryptEcb(new byte[128 / 8], PaddingMode.None)
+            );
         }
 
         [Fact]
         public static void EncryptEcb_EncryptCoreFails()
         {
-            static bool EncryptImpl(ReadOnlySpan<byte> plaintext, Span<byte> destination, PaddingMode paddingMode, out int bytesWritten)
+            static bool EncryptImpl(
+                ReadOnlySpan<byte> plaintext,
+                Span<byte> destination,
+                PaddingMode paddingMode,
+                out int bytesWritten
+            )
             {
                 bytesWritten = 0;
                 return false;
@@ -204,13 +267,19 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None));
+                alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None)
+            );
         }
 
         [Fact]
         public static void EncryptEcb_EncryptCoreOverflowWritten()
         {
-            static bool EncryptImpl(ReadOnlySpan<byte> plaintext, Span<byte> destination, PaddingMode paddingMode, out int bytesWritten)
+            static bool EncryptImpl(
+                ReadOnlySpan<byte> plaintext,
+                Span<byte> destination,
+                PaddingMode paddingMode,
+                out int bytesWritten
+            )
             {
                 bytesWritten = -1;
                 return true;
@@ -223,13 +292,19 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None));
+                alg.EncryptEcb(Array.Empty<byte>(), PaddingMode.None)
+            );
         }
 
         [Fact]
         public static void DecryptEcb_DecryptCoreFails()
         {
-            static bool DecryptImpl(ReadOnlySpan<byte> ciphertext, Span<byte> destination, PaddingMode paddingMode, out int bytesWritten)
+            static bool DecryptImpl(
+                ReadOnlySpan<byte> ciphertext,
+                Span<byte> destination,
+                PaddingMode paddingMode,
+                out int bytesWritten
+            )
             {
                 bytesWritten = 0;
                 return false;
@@ -242,13 +317,19 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.DecryptEcb(Array.Empty<byte>(), PaddingMode.None));
+                alg.DecryptEcb(Array.Empty<byte>(), PaddingMode.None)
+            );
         }
 
         [Fact]
         public static void DecryptEcb_DecryptCoreOverflowWritten()
         {
-            static bool DecryptImpl(ReadOnlySpan<byte> ciphertext, Span<byte> destination, PaddingMode paddingMode, out int bytesWritten)
+            static bool DecryptImpl(
+                ReadOnlySpan<byte> ciphertext,
+                Span<byte> destination,
+                PaddingMode paddingMode,
+                out int bytesWritten
+            )
             {
                 bytesWritten = -1;
                 return true;
@@ -261,7 +342,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.DecryptEcb(Array.Empty<byte>(), PaddingMode.None));
+                alg.DecryptEcb(Array.Empty<byte>(), PaddingMode.None)
+            );
         }
 
         [Fact]
@@ -270,7 +352,8 @@ namespace System.Security.Cryptography.Tests
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
 
             Assert.Throws<NotSupportedException>(() =>
-                alg.EncryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
+                alg.EncryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None)
+            );
         }
 
         [Fact]
@@ -279,7 +362,8 @@ namespace System.Security.Cryptography.Tests
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
 
             Assert.Throws<NotSupportedException>(() =>
-                alg.DecryptEcb(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
+                alg.DecryptEcb(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None)
+            );
         }
 
         [Fact]
@@ -290,7 +374,8 @@ namespace System.Security.Cryptography.Tests
                 ReadOnlySpan<byte> iv,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 bytesWritten = destination.Length + 1;
                 return true;
@@ -303,7 +388,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.EncryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
+                alg.EncryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None)
+            );
         }
 
         [Fact]
@@ -314,7 +400,8 @@ namespace System.Security.Cryptography.Tests
                 ReadOnlySpan<byte> iv,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 bytesWritten = destination.Length + 1;
                 return true;
@@ -327,7 +414,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.DecryptCbc(new byte[128 / 8], new byte[128 / 8], PaddingMode.None));
+                alg.DecryptCbc(new byte[128 / 8], new byte[128 / 8], PaddingMode.None)
+            );
         }
 
         [Fact]
@@ -338,7 +426,8 @@ namespace System.Security.Cryptography.Tests
                 ReadOnlySpan<byte> iv,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 bytesWritten = 0;
                 return false;
@@ -351,7 +440,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.EncryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
+                alg.EncryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None)
+            );
         }
 
         [Fact]
@@ -362,7 +452,8 @@ namespace System.Security.Cryptography.Tests
                 ReadOnlySpan<byte> iv,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 bytesWritten = -1;
                 return true;
@@ -375,7 +466,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.EncryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
+                alg.EncryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None)
+            );
         }
 
         [Fact]
@@ -386,7 +478,8 @@ namespace System.Security.Cryptography.Tests
                 ReadOnlySpan<byte> iv,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 bytesWritten = 0;
                 return false;
@@ -399,7 +492,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.DecryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
+                alg.DecryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None)
+            );
         }
 
         [Fact]
@@ -410,7 +504,8 @@ namespace System.Security.Cryptography.Tests
                 ReadOnlySpan<byte> iv,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 bytesWritten = -1;
                 return true;
@@ -423,7 +518,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.DecryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
+                alg.DecryptCbc(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None)
+            );
         }
 
         [Fact]
@@ -434,9 +530,12 @@ namespace System.Security.Cryptography.Tests
                 ReadOnlySpan<byte> iv,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
-                Assert.Fail("Initialization vector was not validated, core should not have been called.");
+                Assert.Fail(
+                    "Initialization vector was not validated, core should not have been called."
+                );
                 bytesWritten = 0;
                 return false;
             }
@@ -450,14 +549,27 @@ namespace System.Security.Cryptography.Tests
             byte[] badIv = new byte[alg.BlockSize / 8 + 1];
             byte[] destination = new byte[alg.BlockSize / 8];
 
-            AssertExtensions.Throws<ArgumentException>("iv", () =>
-                alg.DecryptCbc(Array.Empty<byte>(), badIv, PaddingMode.None));
+            AssertExtensions.Throws<ArgumentException>(
+                "iv",
+                () => alg.DecryptCbc(Array.Empty<byte>(), badIv, PaddingMode.None)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("iv", () =>
-                alg.DecryptCbc(Array.Empty<byte>(), badIv, destination, PaddingMode.None));
+            AssertExtensions.Throws<ArgumentException>(
+                "iv",
+                () => alg.DecryptCbc(Array.Empty<byte>(), badIv, destination, PaddingMode.None)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("iv", () =>
-                alg.TryDecryptCbc(Array.Empty<byte>(), badIv, destination, out _, PaddingMode.None));
+            AssertExtensions.Throws<ArgumentException>(
+                "iv",
+                () =>
+                    alg.TryDecryptCbc(
+                        Array.Empty<byte>(),
+                        badIv,
+                        destination,
+                        out _,
+                        PaddingMode.None
+                    )
+            );
         }
 
         [Fact]
@@ -468,9 +580,12 @@ namespace System.Security.Cryptography.Tests
                 ReadOnlySpan<byte> iv,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
-                Assert.Fail("Initialization vector was not validated, core should not have been called.");
+                Assert.Fail(
+                    "Initialization vector was not validated, core should not have been called."
+                );
                 bytesWritten = 0;
                 return false;
             }
@@ -484,14 +599,27 @@ namespace System.Security.Cryptography.Tests
             byte[] badIv = new byte[alg.BlockSize / 8 + 1];
             byte[] destination = new byte[alg.BlockSize / 8];
 
-            AssertExtensions.Throws<ArgumentException>("iv", () =>
-                alg.EncryptCbc(Array.Empty<byte>(), badIv, PaddingMode.None));
+            AssertExtensions.Throws<ArgumentException>(
+                "iv",
+                () => alg.EncryptCbc(Array.Empty<byte>(), badIv, PaddingMode.None)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("iv", () =>
-                alg.EncryptCbc(Array.Empty<byte>(), badIv, destination, PaddingMode.None));
+            AssertExtensions.Throws<ArgumentException>(
+                "iv",
+                () => alg.EncryptCbc(Array.Empty<byte>(), badIv, destination, PaddingMode.None)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("iv", () =>
-                alg.TryEncryptCbc(Array.Empty<byte>(), badIv, destination, out _, PaddingMode.None));
+            AssertExtensions.Throws<ArgumentException>(
+                "iv",
+                () =>
+                    alg.TryEncryptCbc(
+                        Array.Empty<byte>(),
+                        badIv,
+                        destination,
+                        out _,
+                        PaddingMode.None
+                    )
+            );
         }
 
         [Fact]
@@ -500,7 +628,8 @@ namespace System.Security.Cryptography.Tests
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
 
             Assert.Throws<NotSupportedException>(() =>
-                alg.EncryptCfb(Array.Empty<byte>(), new byte[alg.BlockSize / 8]));
+                alg.EncryptCfb(Array.Empty<byte>(), new byte[alg.BlockSize / 8])
+            );
         }
 
         [Fact]
@@ -509,7 +638,8 @@ namespace System.Security.Cryptography.Tests
             AnySizeAlgorithm alg = new AnySizeAlgorithm { BlockSize = 128 };
 
             Assert.Throws<NotSupportedException>(() =>
-                alg.DecryptCfb(Array.Empty<byte>(), new byte[alg.BlockSize / 8]));
+                alg.DecryptCfb(Array.Empty<byte>(), new byte[alg.BlockSize / 8])
+            );
         }
 
         [Fact]
@@ -521,7 +651,8 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 bytesWritten = destination.Length + 1;
                 return true;
@@ -534,7 +665,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.EncryptCfb(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None));
+                alg.EncryptCfb(Array.Empty<byte>(), new byte[alg.BlockSize / 8], PaddingMode.None)
+            );
         }
 
         [Fact]
@@ -546,7 +678,8 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 bytesWritten = destination.Length + 1;
                 return true;
@@ -559,7 +692,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.DecryptCfb(new byte[128 / 8], new byte[128 / 8], feedbackSizeInBits: 128));
+                alg.DecryptCfb(new byte[128 / 8], new byte[128 / 8], feedbackSizeInBits: 128)
+            );
         }
 
         [Fact]
@@ -571,7 +705,8 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 bytesWritten = 0;
                 return false;
@@ -584,7 +719,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.EncryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 128));
+                alg.EncryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 128)
+            );
         }
 
         [Fact]
@@ -596,7 +732,8 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 bytesWritten = -1;
                 return true;
@@ -609,7 +746,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.EncryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 128));
+                alg.EncryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 128)
+            );
         }
 
         [Fact]
@@ -621,7 +759,8 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 bytesWritten = 0;
                 return false;
@@ -634,7 +773,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.DecryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 128));
+                alg.DecryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 128)
+            );
         }
 
         [Fact]
@@ -646,7 +786,8 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 bytesWritten = -1;
                 return true;
@@ -659,7 +800,8 @@ namespace System.Security.Cryptography.Tests
             };
 
             Assert.Throws<CryptographicException>(() =>
-                alg.DecryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 8));
+                alg.DecryptCfb(Array.Empty<byte>(), new byte[128 / 8], feedbackSizeInBits: 8)
+            );
         }
 
         [Fact]
@@ -671,9 +813,12 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
-                Assert.Fail("Initialization vector was not validated, core should not have been called.");
+                Assert.Fail(
+                    "Initialization vector was not validated, core should not have been called."
+                );
                 bytesWritten = 0;
                 return false;
             }
@@ -687,14 +832,28 @@ namespace System.Security.Cryptography.Tests
             byte[] badIv = new byte[alg.BlockSize / 8 + 1];
             byte[] destination = new byte[128 / 8];
 
-            AssertExtensions.Throws<ArgumentException>("iv", () =>
-                alg.DecryptCfb(Array.Empty<byte>(), badIv, feedbackSizeInBits: 128));
+            AssertExtensions.Throws<ArgumentException>(
+                "iv",
+                () => alg.DecryptCfb(Array.Empty<byte>(), badIv, feedbackSizeInBits: 128)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("iv", () =>
-                alg.DecryptCfb(Array.Empty<byte>(), badIv, destination, feedbackSizeInBits: 128));
+            AssertExtensions.Throws<ArgumentException>(
+                "iv",
+                () =>
+                    alg.DecryptCfb(Array.Empty<byte>(), badIv, destination, feedbackSizeInBits: 128)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("iv", () =>
-                alg.TryDecryptCfb(Array.Empty<byte>(), badIv, destination, out _, feedbackSizeInBits: 128));
+            AssertExtensions.Throws<ArgumentException>(
+                "iv",
+                () =>
+                    alg.TryDecryptCfb(
+                        Array.Empty<byte>(),
+                        badIv,
+                        destination,
+                        out _,
+                        feedbackSizeInBits: 128
+                    )
+            );
         }
 
         [Fact]
@@ -706,9 +865,12 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
-                Assert.Fail("Initialization vector was not validated, core should not have been called.");
+                Assert.Fail(
+                    "Initialization vector was not validated, core should not have been called."
+                );
                 bytesWritten = 0;
                 return false;
             }
@@ -722,14 +884,28 @@ namespace System.Security.Cryptography.Tests
             byte[] badIv = new byte[alg.BlockSize / 8 + 1];
             byte[] destination = new byte[128 / 8];
 
-            AssertExtensions.Throws<ArgumentException>("iv", () =>
-                alg.EncryptCfb(Array.Empty<byte>(), badIv, feedbackSizeInBits: 128));
+            AssertExtensions.Throws<ArgumentException>(
+                "iv",
+                () => alg.EncryptCfb(Array.Empty<byte>(), badIv, feedbackSizeInBits: 128)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("iv", () =>
-                alg.EncryptCfb(Array.Empty<byte>(), badIv, destination, feedbackSizeInBits: 128));
+            AssertExtensions.Throws<ArgumentException>(
+                "iv",
+                () =>
+                    alg.EncryptCfb(Array.Empty<byte>(), badIv, destination, feedbackSizeInBits: 128)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("iv", () =>
-                alg.TryEncryptCfb(Array.Empty<byte>(), badIv, destination, out _, feedbackSizeInBits: 128));
+            AssertExtensions.Throws<ArgumentException>(
+                "iv",
+                () =>
+                    alg.TryEncryptCfb(
+                        Array.Empty<byte>(),
+                        badIv,
+                        destination,
+                        out _,
+                        feedbackSizeInBits: 128
+                    )
+            );
         }
 
         [Theory]
@@ -745,7 +921,8 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 Assert.Fail("Feedback size was not validated, core should not have been called.");
                 bytesWritten = 0;
@@ -761,14 +938,33 @@ namespace System.Security.Cryptography.Tests
             byte[] iv = new byte[alg.BlockSize / 8];
             byte[] destination = Array.Empty<byte>();
 
-            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
-                alg.DecryptCfb(Array.Empty<byte>(), iv, feedbackSizeInBits: feedbackSize));
+            AssertExtensions.Throws<ArgumentException>(
+                "feedbackSizeInBits",
+                () => alg.DecryptCfb(Array.Empty<byte>(), iv, feedbackSizeInBits: feedbackSize)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
-                alg.DecryptCfb(Array.Empty<byte>(), iv, destination, feedbackSizeInBits: feedbackSize));
+            AssertExtensions.Throws<ArgumentException>(
+                "feedbackSizeInBits",
+                () =>
+                    alg.DecryptCfb(
+                        Array.Empty<byte>(),
+                        iv,
+                        destination,
+                        feedbackSizeInBits: feedbackSize
+                    )
+            );
 
-            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
-                alg.TryDecryptCfb(Array.Empty<byte>(), iv, destination, out _, feedbackSizeInBits: feedbackSize));
+            AssertExtensions.Throws<ArgumentException>(
+                "feedbackSizeInBits",
+                () =>
+                    alg.TryDecryptCfb(
+                        Array.Empty<byte>(),
+                        iv,
+                        destination,
+                        out _,
+                        feedbackSizeInBits: feedbackSize
+                    )
+            );
         }
 
         [Theory]
@@ -784,7 +980,8 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten)
+                out int bytesWritten
+            )
             {
                 Assert.Fail("Feedback size was not validated, core should not have been called.");
                 bytesWritten = 0;
@@ -800,14 +997,33 @@ namespace System.Security.Cryptography.Tests
             byte[] iv = new byte[alg.BlockSize / 8];
             byte[] destination = Array.Empty<byte>();
 
-            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
-                alg.DecryptCfb(Array.Empty<byte>(), iv, feedbackSizeInBits: feedbackSize));
+            AssertExtensions.Throws<ArgumentException>(
+                "feedbackSizeInBits",
+                () => alg.DecryptCfb(Array.Empty<byte>(), iv, feedbackSizeInBits: feedbackSize)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
-                alg.DecryptCfb(Array.Empty<byte>(), iv, destination, feedbackSizeInBits: feedbackSize));
+            AssertExtensions.Throws<ArgumentException>(
+                "feedbackSizeInBits",
+                () =>
+                    alg.DecryptCfb(
+                        Array.Empty<byte>(),
+                        iv,
+                        destination,
+                        feedbackSizeInBits: feedbackSize
+                    )
+            );
 
-            AssertExtensions.Throws<ArgumentException>("feedbackSizeInBits", () =>
-                alg.TryDecryptCfb(Array.Empty<byte>(), iv, destination, out _, feedbackSizeInBits: feedbackSize));
+            AssertExtensions.Throws<ArgumentException>(
+                "feedbackSizeInBits",
+                () =>
+                    alg.TryDecryptCfb(
+                        Array.Empty<byte>(),
+                        iv,
+                        destination,
+                        out _,
+                        feedbackSizeInBits: feedbackSize
+                    )
+            );
         }
 
         public static IEnumerable<object[]> CiphertextLengthTheories
@@ -816,7 +1032,8 @@ namespace System.Security.Cryptography.Tests
             {
                 // new object[] { PaddingMode mode, int plaintextSize, int expectedCiphertextSize, int alignmentSizeInBits }
 
-                PaddingMode[] fullPaddings = new[] {
+                PaddingMode[] fullPaddings = new[]
+                {
                     PaddingMode.ANSIX923,
                     PaddingMode.ISO10126,
                     PaddingMode.PKCS7,
@@ -857,12 +1074,9 @@ namespace System.Security.Cryptography.Tests
                     yield return new object[] { mode, 0x7FFFFFFD, 0x7FFFFFFE, 176 };
                 }
 
-                PaddingMode[] noPadOnAlignSize = new[] {
-                    PaddingMode.Zeros,
-                    PaddingMode.None,
-                };
+                PaddingMode[] noPadOnAlignSize = new[] { PaddingMode.Zeros, PaddingMode.None };
 
-                foreach(PaddingMode mode in noPadOnAlignSize)
+                foreach (PaddingMode mode in noPadOnAlignSize)
                 {
                     // 128-bit aligned
                     yield return new object[] { mode, 16, 16, 128 };
@@ -903,9 +1117,12 @@ namespace System.Security.Cryptography.Tests
 
             public override ICryptoTransform CreateDecryptor(byte[] rgbKey, byte[] rgbIV) =>
                 throw new NotImplementedException();
+
             public override ICryptoTransform CreateEncryptor(byte[] rgbKey, byte[] rgbIV) =>
                 throw new NotImplementedException();
+
             public override void GenerateIV() => throw new NotImplementedException();
+
             public override void GenerateKey() => throw new NotImplementedException();
         }
 
@@ -915,27 +1132,31 @@ namespace System.Security.Cryptography.Tests
                 ReadOnlySpan<byte> plaintext,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten);
+                out int bytesWritten
+            );
 
             public delegate bool TryDecryptEcbCoreFunc(
                 ReadOnlySpan<byte> ciphertext,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten);
+                out int bytesWritten
+            );
 
             public delegate bool TryEncryptCbcCoreFunc(
                 ReadOnlySpan<byte> plaintext,
                 ReadOnlySpan<byte> iv,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten);
+                out int bytesWritten
+            );
 
             public delegate bool TryDecryptCbcCoreFunc(
                 ReadOnlySpan<byte> ciphertext,
                 ReadOnlySpan<byte> iv,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten);
+                out int bytesWritten
+            );
 
             public delegate bool TryEncryptCfbCoreFunc(
                 ReadOnlySpan<byte> plaintext,
@@ -943,7 +1164,8 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten);
+                out int bytesWritten
+            );
 
             public delegate bool TryDecryptCfbCoreFunc(
                 ReadOnlySpan<byte> ciphertext,
@@ -951,7 +1173,8 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten);
+                out int bytesWritten
+            );
 
             public TryEncryptEcbCoreFunc TryEncryptEcbCoreImpl { get; set; }
             public TryDecryptEcbCoreFunc TryDecryptEcbCoreImpl { get; set; }
@@ -964,27 +1187,31 @@ namespace System.Security.Cryptography.Tests
                 ReadOnlySpan<byte> plaintext,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten) => TryEncryptEcbCoreImpl(plaintext, destination, paddingMode, out bytesWritten);
+                out int bytesWritten
+            ) => TryEncryptEcbCoreImpl(plaintext, destination, paddingMode, out bytesWritten);
 
             protected override bool TryDecryptEcbCore(
                 ReadOnlySpan<byte> ciphertext,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten) => TryDecryptEcbCoreImpl(ciphertext, destination, paddingMode, out bytesWritten);
+                out int bytesWritten
+            ) => TryDecryptEcbCoreImpl(ciphertext, destination, paddingMode, out bytesWritten);
 
             protected override bool TryEncryptCbcCore(
                 ReadOnlySpan<byte> plaintext,
                 ReadOnlySpan<byte> iv,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten) => TryEncryptCbcCoreImpl(plaintext, iv, destination, paddingMode, out bytesWritten);
+                out int bytesWritten
+            ) => TryEncryptCbcCoreImpl(plaintext, iv, destination, paddingMode, out bytesWritten);
 
             protected override bool TryDecryptCbcCore(
                 ReadOnlySpan<byte> ciphertext,
                 ReadOnlySpan<byte> iv,
                 Span<byte> destination,
                 PaddingMode paddingMode,
-                out int bytesWritten) => TryDecryptCbcCoreImpl(ciphertext, iv, destination, paddingMode, out bytesWritten);
+                out int bytesWritten
+            ) => TryDecryptCbcCoreImpl(ciphertext, iv, destination, paddingMode, out bytesWritten);
 
             protected override bool TryEncryptCfbCore(
                 ReadOnlySpan<byte> plaintext,
@@ -992,7 +1219,16 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten) => TryEncryptCfbCoreImpl(plaintext, iv, destination, paddingMode, feedbackSizeInBits, out bytesWritten);
+                out int bytesWritten
+            ) =>
+                TryEncryptCfbCoreImpl(
+                    plaintext,
+                    iv,
+                    destination,
+                    paddingMode,
+                    feedbackSizeInBits,
+                    out bytesWritten
+                );
 
             protected override bool TryDecryptCfbCore(
                 ReadOnlySpan<byte> ciphertext,
@@ -1000,7 +1236,16 @@ namespace System.Security.Cryptography.Tests
                 Span<byte> destination,
                 PaddingMode paddingMode,
                 int feedbackSizeInBits,
-                out int bytesWritten) => TryDecryptCfbCoreImpl(ciphertext, iv, destination, paddingMode, feedbackSizeInBits, out bytesWritten);
+                out int bytesWritten
+            ) =>
+                TryDecryptCfbCoreImpl(
+                    ciphertext,
+                    iv,
+                    destination,
+                    paddingMode,
+                    feedbackSizeInBits,
+                    out bytesWritten
+                );
         }
     }
 }

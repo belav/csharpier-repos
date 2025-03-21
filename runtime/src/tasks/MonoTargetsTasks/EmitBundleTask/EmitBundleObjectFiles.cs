@@ -24,18 +24,29 @@ public class EmitBundleObjectFiles : EmitBundleBase
 
     public override bool EmitBundleFile(string destinationFile, Action<Stream> EmitBundleFile)
     {
-        if (Path.GetDirectoryName(destinationFile) is string destDir && !string.IsNullOrEmpty(destDir))
+        if (
+            Path.GetDirectoryName(destinationFile) is string destDir
+            && !string.IsNullOrEmpty(destDir)
+        )
             Directory.CreateDirectory(destDir);
 
-        (int exitCode, string output) = Utils.TryRunProcess(Log,
-                            ClangExecutable!,
-                            args: $"-xc -o \"{destinationFile}\" -c -",
-                            envVars: null, workingDir: null, silent: true, logStdErrAsMessage: false,
-                            debugMessageImportance: MessageImportance.Low, label: Path.GetFileName(destinationFile),
-                            EmitBundleFile);
+        (int exitCode, string output) = Utils.TryRunProcess(
+            Log,
+            ClangExecutable!,
+            args: $"-xc -o \"{destinationFile}\" -c -",
+            envVars: null,
+            workingDir: null,
+            silent: true,
+            logStdErrAsMessage: false,
+            debugMessageImportance: MessageImportance.Low,
+            label: Path.GetFileName(destinationFile),
+            EmitBundleFile
+        );
         if (exitCode != 0)
         {
-            Log.LogError($"Failed to compile with exit code {exitCode}{Environment.NewLine}Output: {output}");
+            Log.LogError(
+                $"Failed to compile with exit code {exitCode}{Environment.NewLine}Output: {output}"
+            );
         }
         return exitCode == 0;
     }

@@ -12,7 +12,8 @@ public class Startup
     // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
+        services
+            .AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
             .AddCertificate(options =>
             {
                 options.Events = new CertificateAuthenticationEvents()
@@ -21,13 +22,20 @@ public class Startup
                     OnChallenge = context =>
                     {
                         var request = context.Request;
-                        var redirect = UriHelper.BuildAbsolute("https",
-                            new HostString(Program.HostWithCert, context.HttpContext.Connection.LocalPort),
-                            request.PathBase, request.Path, request.QueryString);
+                        var redirect = UriHelper.BuildAbsolute(
+                            "https",
+                            new HostString(
+                                Program.HostWithCert,
+                                context.HttpContext.Connection.LocalPort
+                            ),
+                            request.PathBase,
+                            request.Path,
+                            request.QueryString
+                        );
                         context.Response.Redirect(redirect, permanent: false, preserveMethod: true);
                         context.HandleResponse(); // Don't do the default behavior that would send a 403 response.
                         return Task.CompletedTask;
-                    }
+                    },
                 };
             });
 
@@ -44,15 +52,27 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.Map("/auth", context =>
-            {
-                return context.Response.WriteAsync($"Hello {context.User.Identity.Name} at {context.Request.Host}");
-            }).RequireAuthorization();
+            endpoints
+                .Map(
+                    "/auth",
+                    context =>
+                    {
+                        return context.Response.WriteAsync(
+                            $"Hello {context.User.Identity.Name} at {context.Request.Host}"
+                        );
+                    }
+                )
+                .RequireAuthorization();
 
-            endpoints.Map("{*url}", context =>
-            {
-                return context.Response.WriteAsync($"Hello {context.User.Identity.Name} at {context.Request.Host}. Try /auth");
-            });
+            endpoints.Map(
+                "{*url}",
+                context =>
+                {
+                    return context.Response.WriteAsync(
+                        $"Hello {context.User.Identity.Name} at {context.Request.Host}. Try /auth"
+                    );
+                }
+            );
         });
     }
 }

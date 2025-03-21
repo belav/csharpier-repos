@@ -24,7 +24,11 @@ namespace System.Text.Json.Serialization.Tests
                 return typeToConvert == typeof(Dictionary<string, long>);
             }
 
-            public override IDictionary<string, long> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override IDictionary<string, long> Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType != JsonTokenType.StartObject)
                 {
@@ -61,7 +65,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, IDictionary<string, long> value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                IDictionary<string, long> value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteStartObject();
 
@@ -82,7 +90,9 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new ContravariantDictionaryConverter(10));
 
-            Dictionary<string, long> dictionary = JsonSerializer.Deserialize<Dictionary<string, long>>(Json, options);
+            Dictionary<string, long> dictionary = JsonSerializer.Deserialize<
+                Dictionary<string, long>
+            >(Json, options);
             Assert.Equal(11, dictionary["Key1"]);
             Assert.Equal(12, dictionary["Key2"]);
 
@@ -92,12 +102,17 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ClassHavingDictionaryFieldWhichUsingCustomConverterTest()
         {
-            const string Json = @"{""MyInt"":32,""MyDictionary"":{""Key1"":1,""Key2"":2},""MyString"":""Hello""}";
+            const string Json =
+                @"{""MyInt"":32,""MyDictionary"":{""Key1"":1,""Key2"":2},""MyString"":""Hello""}";
 
             var options = new JsonSerializerOptions();
             options.Converters.Add(new ContravariantDictionaryConverter(10));
 
-            ClassHavingDictionaryFieldWhichUsesCustomConverter dictionary = JsonSerializer.Deserialize<ClassHavingDictionaryFieldWhichUsesCustomConverter>(Json, options);
+            ClassHavingDictionaryFieldWhichUsesCustomConverter dictionary =
+                JsonSerializer.Deserialize<ClassHavingDictionaryFieldWhichUsesCustomConverter>(
+                    Json,
+                    options
+                );
             Assert.Equal(11, dictionary.MyDictionary["Key1"]);
             Assert.Equal(12, dictionary.MyDictionary["Key2"]);
             Assert.Equal(32, dictionary.MyInt);

@@ -19,29 +19,39 @@ namespace System.Web.Http.Controllers
             // Arrange
             HttpActionContext actionContextInstance = ContextUtil.CreateActionContext();
             List<string> log = new List<string>();
-            Mock<IAuthorizationFilter> globalFilterMock = CreateAuthorizationFilterMock((ctx, ct, continuation) =>
-            {
-                log.Add("globalFilter");
-                return continuation();
-            });
-            Mock<IAuthorizationFilter> actionFilterMock = CreateAuthorizationFilterMock((ctx, ct, continuation) =>
-            {
-                log.Add("actionFilter");
-                return continuation();
-            });
+            Mock<IAuthorizationFilter> globalFilterMock = CreateAuthorizationFilterMock(
+                (ctx, ct, continuation) =>
+                {
+                    log.Add("globalFilter");
+                    return continuation();
+                }
+            );
+            Mock<IAuthorizationFilter> actionFilterMock = CreateAuthorizationFilterMock(
+                (ctx, ct, continuation) =>
+                {
+                    log.Add("actionFilter");
+                    return continuation();
+                }
+            );
             Mock<IHttpActionResult> innerResultMock = new Mock<IHttpActionResult>();
-            innerResultMock.Setup(r => r.ExecuteAsync(It.IsAny<CancellationToken>())).Returns(() =>
-            {
-                log.Add("innerAction");
-                return Task.FromResult<HttpResponseMessage>(null);
-            });
+            innerResultMock
+                .Setup(r => r.ExecuteAsync(It.IsAny<CancellationToken>()))
+                .Returns(() =>
+                {
+                    log.Add("innerAction");
+                    return Task.FromResult<HttpResponseMessage>(null);
+                });
             IHttpActionResult innerResult = innerResultMock.Object;
-            var filters = new IAuthorizationFilter[] {
+            var filters = new IAuthorizationFilter[]
+            {
                 globalFilterMock.Object,
                 actionFilterMock.Object,
             };
-            IHttpActionResult authorizationFilter = new AuthorizationFilterResult(actionContextInstance, filters,
-                innerResult);
+            IHttpActionResult authorizationFilter = new AuthorizationFilterResult(
+                actionContextInstance,
+                filters,
+                innerResult
+            );
 
             // Act
             await authorizationFilter.ExecuteAsync(CancellationToken.None);
@@ -52,15 +62,26 @@ namespace System.Web.Http.Controllers
             actionFilterMock.Verify();
         }
 
-        private Mock<IAuthorizationFilter> CreateAuthorizationFilterMock(Func<HttpActionContext, CancellationToken,
-            Func<Task<HttpResponseMessage>>, Task<HttpResponseMessage>> implementation)
+        private Mock<IAuthorizationFilter> CreateAuthorizationFilterMock(
+            Func<
+                HttpActionContext,
+                CancellationToken,
+                Func<Task<HttpResponseMessage>>,
+                Task<HttpResponseMessage>
+            > implementation
+        )
         {
             Mock<IAuthorizationFilter> filterMock = new Mock<IAuthorizationFilter>();
-            filterMock.Setup(f => f.ExecuteAuthorizationFilterAsync(It.IsAny<HttpActionContext>(),
-                                                                    CancellationToken.None,
-                                                                    It.IsAny<Func<Task<HttpResponseMessage>>>()))
-                      .Returns(implementation)
-                      .Verifiable();
+            filterMock
+                .Setup(f =>
+                    f.ExecuteAuthorizationFilterAsync(
+                        It.IsAny<HttpActionContext>(),
+                        CancellationToken.None,
+                        It.IsAny<Func<Task<HttpResponseMessage>>>()
+                    )
+                )
+                .Returns(implementation)
+                .Verifiable();
             return filterMock;
         }
     }

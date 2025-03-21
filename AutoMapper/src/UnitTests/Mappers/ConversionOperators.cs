@@ -5,21 +5,30 @@ public class Nullable_conversion_operator : NonValidatingSpecBase
     public class QueryableValue<T>
     {
         public T Value { get; set; }
+
         public static implicit operator QueryableValue<T>(T obj) => new() { Value = obj };
+
         public static implicit operator T(QueryableValue<T> obj) => obj.Value;
     }
+
     class Destination
     {
         public QueryableValue<int?> MyProperty { get; set; } = null!;
     }
+
     class Source
     {
         public int? MyProperty { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateMap<Source, Destination>());
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(c => c.CreateMap<Source, Destination>());
+
     [Fact]
-    public void Should_work() => Map<Destination>(new Source { MyProperty = 42 }).MyProperty.Value.ShouldBe(42);
+    public void Should_work() =>
+        Map<Destination>(new Source { MyProperty = 42 }).MyProperty.Value.ShouldBe(42);
 }
+
 public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_destination
 {
     private Bar _bar;
@@ -35,12 +44,8 @@ public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_d
 
         public static implicit operator Bar(Foo other)
         {
-            return new Bar
-            {
-                OtherValue = other.Value
-            };
+            return new Bar { OtherValue = other.Value };
         }
-
     }
 
     [Fact]
@@ -54,7 +59,7 @@ public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_d
         _bar.OtherValue.ShouldBe("Hello");
     }
 }
-    
+
 public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_source
 {
     private Bar _bar;
@@ -65,21 +70,16 @@ public class When_mapping_to_classes_with_implicit_conversion_operators_on_the_s
 
         public static implicit operator Bar(Foo other)
         {
-            return new Bar
-            {
-                OtherValue = other.Value
-            };
+            return new Bar { OtherValue = other.Value };
         }
 
         public static implicit operator string(Foo other)
         {
             return other.Value;
         }
-
     }
 
-    public class InheritedFoo : Foo
-    { }
+    public class InheritedFoo : Foo { }
 
     public class Bar
     {
@@ -124,10 +124,7 @@ public class When_mapping_to_classes_with_explicit_conversion_operator_on_the_de
 
         public static explicit operator Bar(Foo other)
         {
-            return new Bar
-            {
-                OtherValue = other.Value
-            };
+            return new Bar { OtherValue = other.Value };
         }
     }
 
@@ -150,15 +147,11 @@ public class When_mapping_to_classes_with_explicit_conversion_operator_on_the_so
 
         public static explicit operator Bar(Foo other)
         {
-            return new Bar
-            {
-                OtherValue = other.Value
-            };
+            return new Bar { OtherValue = other.Value };
         }
     }
 
-    public class InheritedFoo : Foo
-    { }
+    public class InheritedFoo : Foo { }
 
     public class Bar
     {

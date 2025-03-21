@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,65 +31,74 @@ using System.Security.Permissions;
 
 namespace System.Web.UI.HtmlControls
 {
-	// CAS
-	[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	[AspNetHostingPermission (SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-	// attributes
-	[ControlBuilder (typeof (HtmlEmptyTagControlBuilder))]
-	public abstract class HtmlInputControl : HtmlControl
-	{
-		protected HtmlInputControl (string type)
-			: base ("input")
-		{
-			if (type == null)
-				type = String.Empty;
-			Attributes ["type"] = type;
-		}
+    // CAS
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    // attributes
+    [ControlBuilder(typeof(HtmlEmptyTagControlBuilder))]
+    public abstract class HtmlInputControl : HtmlControl
+    {
+        protected HtmlInputControl(string type)
+            : base("input")
+        {
+            if (type == null)
+                type = String.Empty;
+            Attributes["type"] = type;
+        }
 
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public virtual string Name
+        {
+            get { return UniqueID; }
+            set { ; }
+        }
 
-		[DefaultValue ("")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[WebSysDescription("")]
-		[WebCategory("Behavior")]
-		public virtual string Name {
-			get { return UniqueID; }
-			set { ; }
-		}
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [WebSysDescription("")]
+        [WebCategory("Behavior")]
+        public string Type
+        {
+            get { return Attributes["type"]; }
+        }
 
-		[DefaultValue ("")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[WebSysDescription("")]
-		[WebCategory("Behavior")]
-		public string Type {
-			get { return Attributes ["type"]; }
-		}
+        [DefaultValue("")]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
+        [WebSysDescription("")]
+        [WebCategory("Appearance")]
+        public virtual string Value
+        {
+            get
+            {
+                string s = Attributes["value"];
+                return (s == null) ? String.Empty : s;
+            }
+            set
+            {
+                if (value == null)
+                    Attributes.Remove("value");
+                else
+                    Attributes["value"] = value;
+            }
+        }
 
-		[DefaultValue ("")]
-		[DesignerSerializationVisibility (DesignerSerializationVisibility.Hidden)]
-		[WebSysDescription("")]
-		[WebCategory("Appearance")]
-		public virtual string Value {
-			get {
-				string s = Attributes ["value"];
-				return (s == null) ? String.Empty : s;
-			}
-			set {
-				if (value == null)
-					Attributes.Remove ("value");
-				else
-					Attributes ["value"] = value;
-			}
-		}
-
-		protected override void RenderAttributes (HtmlTextWriter writer)
-		{
-			if (Attributes ["name"] == null) {
-				writer.WriteAttribute ("name", Name);
-			}
-			base.RenderAttributes (writer);
-			writer.Write (" /");
-		}
-	}
+        protected override void RenderAttributes(HtmlTextWriter writer)
+        {
+            if (Attributes["name"] == null)
+            {
+                writer.WriteAttribute("name", Name);
+            }
+            base.RenderAttributes(writer);
+            writer.Write(" /");
+        }
+    }
 }
-
-

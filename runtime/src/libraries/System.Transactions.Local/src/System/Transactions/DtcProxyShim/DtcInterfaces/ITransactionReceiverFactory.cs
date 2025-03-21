@@ -7,7 +7,11 @@ using System.Runtime.InteropServices.Marshalling;
 namespace System.Transactions.DtcProxyShim.DtcInterfaces;
 
 // https://docs.microsoft.com/previous-versions/windows/desktop/ms683577(v=vs.85)
-[GeneratedComInterface, Guid("59313E02-B36C-11cf-A539-00AA006887C3"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+[
+    GeneratedComInterface,
+    Guid("59313E02-B36C-11cf-A539-00AA006887C3"),
+    InterfaceType(ComInterfaceType.InterfaceIsIUnknown)
+]
 internal partial interface ITransactionReceiverFactory
 {
     void Create([MarshalAs(UnmanagedType.Interface)] out ITransactionReceiver pTxReceiver);

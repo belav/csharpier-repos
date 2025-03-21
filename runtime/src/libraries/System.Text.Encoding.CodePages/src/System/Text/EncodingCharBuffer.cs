@@ -19,7 +19,14 @@ namespace System.Text
         private readonly DecoderFallbackBuffer _fallbackBuffer;
         private DecoderFallbackBufferHelper _fallbackBufferHelper;
 
-        internal unsafe EncodingCharBuffer(EncodingNLS enc, DecoderNLS? decoder, char* charStart, int charCount, byte* byteStart, int byteCount)
+        internal unsafe EncodingCharBuffer(
+            EncodingNLS enc,
+            DecoderNLS? decoder,
+            char* charStart,
+            int charCount,
+            byte* byteStart,
+            int byteCount
+        )
         {
             _enc = enc;
             _decoder = decoder;
@@ -39,8 +46,10 @@ namespace System.Text
 
             // If we're getting chars or getting char count we don't expect to have
             // to remember fallbacks between calls (so it should be empty)
-            Debug.Assert(_fallbackBuffer.Remaining == 0,
-                "[Encoding.EncodingCharBuffer.EncodingCharBuffer]Expected empty fallback buffer for getchars/charcount");
+            Debug.Assert(
+                _fallbackBuffer.Remaining == 0,
+                "[Encoding.EncodingCharBuffer.EncodingCharBuffer]Expected empty fallback buffer for getchars/charcount"
+            );
             _fallbackBufferHelper = new DecoderFallbackBufferHelper(_fallbackBuffer);
             _fallbackBufferHelper.InternalInitialize(_bytes, _charEnd);
         }
@@ -52,9 +61,9 @@ namespace System.Text
                 if (_chars >= _charEnd)
                 {
                     // Throw maybe
-                    _bytes -= numBytes;                                        // Didn't encode these bytes
-                    _enc.ThrowCharsOverflow(_decoder, _bytes <= _byteStart);    // Throw?
-                    return false;                                           // No throw, but no store either
+                    _bytes -= numBytes; // Didn't encode these bytes
+                    _enc.ThrowCharsOverflow(_decoder, _bytes <= _byteStart); // Throw?
+                    return false; // No throw, but no store either
                 }
 
                 *(_chars++) = ch;
@@ -68,16 +77,15 @@ namespace System.Text
             return AddChar(ch, 1);
         }
 
-
         internal unsafe bool AddChar(char ch1, char ch2, int numBytes)
         {
             // Need room for 2 chars
             if (_chars >= _charEnd - 1)
             {
                 // Throw maybe
-                _bytes -= numBytes;                                        // Didn't encode these bytes
-                _enc.ThrowCharsOverflow(_decoder, _bytes <= _byteStart);    // Throw?
-                return false;                                           // No throw, but no store either
+                _bytes -= numBytes; // Didn't encode these bytes
+                _enc.ThrowCharsOverflow(_decoder, _bytes <= _byteStart); // Throw?
+                return false; // No throw, but no store either
             }
             return AddChar(ch1, numBytes) && AddChar(ch2, numBytes);
         }
@@ -89,10 +97,7 @@ namespace System.Text
 
         internal unsafe bool MoreData
         {
-            get
-            {
-                return _bytes < _byteEnd;
-            }
+            get { return _bytes < _byteEnd; }
         }
 
         // Do we have count more bytes?
@@ -113,10 +118,7 @@ namespace System.Text
 
         internal unsafe int BytesUsed
         {
-            get
-            {
-                return unchecked((int)(_bytes - _byteStart));
-            }
+            get { return unchecked((int)(_bytes - _byteStart)); }
         }
 
         internal unsafe bool Fallback(byte fallbackByte)
@@ -155,10 +157,10 @@ namespace System.Text
                 if (_fallbackBufferHelper.InternalFallback(byteBuffer, _bytes, ref _chars) == false)
                 {
                     // Throw maybe
-                    _bytes -= byteBuffer.Length;                             // Didn't use how many ever bytes we're falling back
-                    _fallbackBufferHelper.InternalReset();                         // We didn't use this fallback.
-                    _enc.ThrowCharsOverflow(_decoder, _chars == _charStart);    // Throw?
-                    return false;                                           // No throw, but no store either
+                    _bytes -= byteBuffer.Length; // Didn't use how many ever bytes we're falling back
+                    _fallbackBufferHelper.InternalReset(); // We didn't use this fallback.
+                    _enc.ThrowCharsOverflow(_decoder, _chars == _charStart); // Throw?
+                    return false; // No throw, but no store either
                 }
                 _charCountResult += unchecked((int)(_chars - pTemp));
             }
@@ -172,10 +174,7 @@ namespace System.Text
 
         internal unsafe int Count
         {
-            get
-            {
-                return _charCountResult;
-            }
+            get { return _charCountResult; }
         }
     }
 }

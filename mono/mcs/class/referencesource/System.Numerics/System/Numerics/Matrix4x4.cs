@@ -15,14 +15,17 @@ namespace System.Numerics
         /// Value at row 1, column 1 of the matrix.
         /// </summary>
         public float M11;
+
         /// <summary>
         /// Value at row 1, column 2 of the matrix.
         /// </summary>
         public float M12;
+
         /// <summary>
         /// Value at row 1, column 3 of the matrix.
         /// </summary>
         public float M13;
+
         /// <summary>
         /// Value at row 1, column 4 of the matrix.
         /// </summary>
@@ -32,14 +35,17 @@ namespace System.Numerics
         /// Value at row 2, column 1 of the matrix.
         /// </summary>
         public float M21;
+
         /// <summary>
         /// Value at row 2, column 2 of the matrix.
         /// </summary>
         public float M22;
+
         /// <summary>
         /// Value at row 2, column 3 of the matrix.
         /// </summary>
         public float M23;
+
         /// <summary>
         /// Value at row 2, column 4 of the matrix.
         /// </summary>
@@ -49,14 +55,17 @@ namespace System.Numerics
         /// Value at row 3, column 1 of the matrix.
         /// </summary>
         public float M31;
+
         /// <summary>
         /// Value at row 3, column 2 of the matrix.
         /// </summary>
         public float M32;
+
         /// <summary>
         /// Value at row 3, column 3 of the matrix.
         /// </summary>
         public float M33;
+
         /// <summary>
         /// Value at row 3, column 4 of the matrix.
         /// </summary>
@@ -66,26 +75,40 @@ namespace System.Numerics
         /// Value at row 4, column 1 of the matrix.
         /// </summary>
         public float M41;
+
         /// <summary>
         /// Value at row 4, column 2 of the matrix.
         /// </summary>
         public float M42;
+
         /// <summary>
         /// Value at row 4, column 3 of the matrix.
         /// </summary>
         public float M43;
+
         /// <summary>
         /// Value at row 4, column 4 of the matrix.
         /// </summary>
         public float M44;
         #endregion Public Fields
 
-        private static readonly Matrix4x4 _identity = new Matrix4x4
-        (
-            1f, 0f, 0f, 0f,
-            0f, 1f, 0f, 0f,
-            0f, 0f, 1f, 0f,
-            0f, 0f, 0f, 1f
+        private static readonly Matrix4x4 _identity = new Matrix4x4(
+            1f,
+            0f,
+            0f,
+            0f,
+            0f,
+            1f,
+            0f,
+            0f,
+            0f,
+            0f,
+            1f,
+            0f,
+            0f,
+            0f,
+            0f,
+            1f
         );
 
         /// <summary>
@@ -103,11 +126,23 @@ namespace System.Numerics
         {
             get
             {
-                return M11 == 1f && M22 == 1f && M33 == 1f && M44 == 1f && // Check diagonal element first for early out.
-                                    M12 == 0f && M13 == 0f && M14 == 0f &&
-                       M21 == 0f && M23 == 0f && M24 == 0f &&
-                       M31 == 0f && M32 == 0f && M34 == 0f &&
-                       M41 == 0f && M42 == 0f && M43 == 0f;
+                return M11 == 1f
+                    && M22 == 1f
+                    && M33 == 1f
+                    && M44 == 1f
+                    && // Check diagonal element first for early out.
+                    M12 == 0f
+                    && M13 == 0f
+                    && M14 == 0f
+                    && M21 == 0f
+                    && M23 == 0f
+                    && M24 == 0f
+                    && M31 == 0f
+                    && M32 == 0f
+                    && M34 == 0f
+                    && M41 == 0f
+                    && M42 == 0f
+                    && M43 == 0f;
             }
         }
 
@@ -116,10 +151,7 @@ namespace System.Numerics
         /// </summary>
         public Vector3 Translation
         {
-            get
-            {
-                return new Vector3(M41, M42, M43);
-            }
+            get { return new Vector3(M41, M42, M43); }
             set
             {
                 M41 = value.X;
@@ -131,10 +163,24 @@ namespace System.Numerics
         /// <summary>
         /// Constructs a Matrix4x4 from the given components.
         /// </summary>
-        public Matrix4x4(float m11, float m12, float m13, float m14,
-                         float m21, float m22, float m23, float m24,
-                         float m31, float m32, float m33, float m34,
-                         float m41, float m42, float m43, float m44)
+        public Matrix4x4(
+            float m11,
+            float m12,
+            float m13,
+            float m14,
+            float m21,
+            float m22,
+            float m23,
+            float m24,
+            float m31,
+            float m32,
+            float m33,
+            float m34,
+            float m41,
+            float m42,
+            float m43,
+            float m44
+        )
         {
             this.M11 = m11;
             this.M12 = m12;
@@ -189,14 +235,20 @@ namespace System.Numerics
         /// <param name="cameraUpVector">The up vector of the camera.</param>
         /// <param name="cameraForwardVector">The forward vector of the camera.</param>
         /// <returns>The created billboard matrix</returns>
-        public static Matrix4x4 CreateBillboard(Vector3 objectPosition, Vector3 cameraPosition, Vector3 cameraUpVector, Vector3 cameraForwardVector)
+        public static Matrix4x4 CreateBillboard(
+            Vector3 objectPosition,
+            Vector3 cameraPosition,
+            Vector3 cameraUpVector,
+            Vector3 cameraForwardVector
+        )
         {
             const float epsilon = 1e-4f;
 
             Vector3 zaxis = new Vector3(
                 objectPosition.X - cameraPosition.X,
                 objectPosition.Y - cameraPosition.Y,
-                objectPosition.Z - cameraPosition.Z);
+                objectPosition.Z - cameraPosition.Z
+            );
 
             float norm = zaxis.LengthSquared();
 
@@ -245,7 +297,13 @@ namespace System.Numerics
         /// <param name="cameraForwardVector">Forward vector of the camera.</param>
         /// <param name="objectForwardVector">Forward vector of the object.</param>
         /// <returns>The created billboard matrix.</returns>
-        public static Matrix4x4 CreateConstrainedBillboard(Vector3 objectPosition, Vector3 cameraPosition, Vector3 rotateAxis, Vector3 cameraForwardVector, Vector3 objectForwardVector)
+        public static Matrix4x4 CreateConstrainedBillboard(
+            Vector3 objectPosition,
+            Vector3 cameraPosition,
+            Vector3 rotateAxis,
+            Vector3 cameraForwardVector,
+            Vector3 objectForwardVector
+        )
         {
             const float epsilon = 1e-4f;
             const float minAngle = 1.0f - (0.1f * ((float)Math.PI / 180.0f)); // 0.1 degrees
@@ -254,7 +312,8 @@ namespace System.Numerics
             Vector3 faceDir = new Vector3(
                 objectPosition.X - cameraPosition.X,
                 objectPosition.Y - cameraPosition.Y,
-                objectPosition.Z - cameraPosition.Z);
+                objectPosition.Z - cameraPosition.Z
+            );
 
             float norm = faceDir.LengthSquared();
 
@@ -283,7 +342,10 @@ namespace System.Numerics
 
                 if (Math.Abs(dot) > minAngle)
                 {
-                    zaxis = (Math.Abs(rotateAxis.Z) > minAngle) ? new Vector3(1, 0, 0) : new Vector3(0, 0, -1);
+                    zaxis =
+                        (Math.Abs(rotateAxis.Z) > minAngle)
+                            ? new Vector3(1, 0, 0)
+                            : new Vector3(0, 0, -1);
                 }
 
                 xaxis = Vector3.Normalize(Vector3.Cross(rotateAxis, zaxis));
@@ -419,7 +481,12 @@ namespace System.Numerics
         /// <param name="zScale">Value to scale by on the Z-axis.</param>
         /// <param name="centerPoint">The center point.</param>
         /// <returns>The scaling matrix.</returns>
-        public static Matrix4x4 CreateScale(float xScale, float yScale, float zScale, Vector3 centerPoint)
+        public static Matrix4x4 CreateScale(
+            float xScale,
+            float yScale,
+            float zScale,
+            Vector3 centerPoint
+        )
         {
             Matrix4x4 result;
 
@@ -834,10 +901,17 @@ namespace System.Numerics
             // M = [ xy-cosa*yx+sina*z    yy+cosa(1-yy)  yz-cosa*yz-sina*x ]
             //     [ zx-cosa*zx-sina*y zy-cosa*zy+sina*x   zz+cosa*(1-zz)  ]
             //
-            float x = axis.X, y = axis.Y, z = axis.Z;
-            float sa = (float)Math.Sin(angle), ca = (float)Math.Cos(angle);
-            float xx = x * x, yy = y * y, zz = z * z;
-            float xy = x * y, xz = x * z, yz = y * z;
+            float x = axis.X,
+                y = axis.Y,
+                z = axis.Z;
+            float sa = (float)Math.Sin(angle),
+                ca = (float)Math.Cos(angle);
+            float xx = x * x,
+                yy = y * y,
+                zz = z * z;
+            float xy = x * y,
+                xz = x * z,
+                yz = y * z;
 
             Matrix4x4 result;
 
@@ -862,14 +936,19 @@ namespace System.Numerics
         }
 
         /// <summary>
-        /// Creates a perspective projection matrix based on a field of view, aspect ratio, and near and far view plane distances. 
+        /// Creates a perspective projection matrix based on a field of view, aspect ratio, and near and far view plane distances.
         /// </summary>
         /// <param name="fieldOfView">Field of view in the y direction, in radians.</param>
         /// <param name="aspectRatio">Aspect ratio, defined as view space width divided by height.</param>
         /// <param name="nearPlaneDistance">Distance to the near view plane.</param>
         /// <param name="farPlaneDistance">Distance to the far view plane.</param>
         /// <returns>The perspective projection matrix.</returns>
-        public static Matrix4x4 CreatePerspectiveFieldOfView(float fieldOfView, float aspectRatio, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix4x4 CreatePerspectiveFieldOfView(
+            float fieldOfView,
+            float aspectRatio,
+            float nearPlaneDistance,
+            float farPlaneDistance
+        )
         {
             if (fieldOfView <= 0.0f || fieldOfView >= Math.PI)
                 throw new ArgumentOutOfRangeException("fieldOfView");
@@ -899,7 +978,8 @@ namespace System.Numerics
             result.M34 = -1.0f;
 
             result.M41 = result.M42 = result.M44 = 0.0f;
-            result.M43 = nearPlaneDistance * farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+            result.M43 =
+                nearPlaneDistance * farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
 
             return result;
         }
@@ -912,7 +992,12 @@ namespace System.Numerics
         /// <param name="nearPlaneDistance">Distance to the near view plane.</param>
         /// <param name="farPlaneDistance">Distance to the far view plane.</param>
         /// <returns>The perspective projection matrix.</returns>
-        public static Matrix4x4 CreatePerspective(float width, float height, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix4x4 CreatePerspective(
+            float width,
+            float height,
+            float nearPlaneDistance,
+            float farPlaneDistance
+        )
         {
             if (nearPlaneDistance <= 0.0f)
                 throw new ArgumentOutOfRangeException("nearPlaneDistance");
@@ -936,7 +1021,8 @@ namespace System.Numerics
             result.M34 = -1.0f;
 
             result.M41 = result.M42 = result.M44 = 0.0f;
-            result.M43 = nearPlaneDistance * farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+            result.M43 =
+                nearPlaneDistance * farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
 
             return result;
         }
@@ -951,7 +1037,14 @@ namespace System.Numerics
         /// <param name="nearPlaneDistance">Distance to the near view plane.</param>
         /// <param name="farPlaneDistance">Distance to of the far view plane.</param>
         /// <returns>The perspective projection matrix.</returns>
-        public static Matrix4x4 CreatePerspectiveOffCenter(float left, float right, float bottom, float top, float nearPlaneDistance, float farPlaneDistance)
+        public static Matrix4x4 CreatePerspectiveOffCenter(
+            float left,
+            float right,
+            float bottom,
+            float top,
+            float nearPlaneDistance,
+            float farPlaneDistance
+        )
         {
             if (nearPlaneDistance <= 0.0f)
                 throw new ArgumentOutOfRangeException("nearPlaneDistance");
@@ -975,7 +1068,8 @@ namespace System.Numerics
             result.M33 = farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
             result.M34 = -1.0f;
 
-            result.M43 = nearPlaneDistance * farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
+            result.M43 =
+                nearPlaneDistance * farPlaneDistance / (nearPlaneDistance - farPlaneDistance);
             result.M41 = result.M42 = result.M44 = 0.0f;
 
             return result;
@@ -989,7 +1083,12 @@ namespace System.Numerics
         /// <param name="zNearPlane">Minimum Z-value of the view volume.</param>
         /// <param name="zFarPlane">Maximum Z-value of the view volume.</param>
         /// <returns>The orthographic projection matrix.</returns>
-        public static Matrix4x4 CreateOrthographic(float width, float height, float zNearPlane, float zFarPlane)
+        public static Matrix4x4 CreateOrthographic(
+            float width,
+            float height,
+            float zNearPlane,
+            float zFarPlane
+        )
         {
             Matrix4x4 result;
 
@@ -1019,7 +1118,14 @@ namespace System.Numerics
         /// <param name="zNearPlane">Minimum Z-value of the view volume.</param>
         /// <param name="zFarPlane">Maximum Z-value of the view volume.</param>
         /// <returns>The orthographic projection matrix.</returns>
-        public static Matrix4x4 CreateOrthographicOffCenter(float left, float right, float bottom, float top, float zNearPlane, float zFarPlane)
+        public static Matrix4x4 CreateOrthographicOffCenter(
+            float left,
+            float right,
+            float bottom,
+            float top,
+            float zNearPlane,
+            float zFarPlane
+        )
         {
             Matrix4x4 result;
 
@@ -1047,7 +1153,11 @@ namespace System.Numerics
         /// <param name="cameraTarget">The target towards which the camera is pointing.</param>
         /// <param name="cameraUpVector">The direction that is "up" from the camera's point of view.</param>
         /// <returns>The view matrix.</returns>
-        public static Matrix4x4 CreateLookAt(Vector3 cameraPosition, Vector3 cameraTarget, Vector3 cameraUpVector)
+        public static Matrix4x4 CreateLookAt(
+            Vector3 cameraPosition,
+            Vector3 cameraTarget,
+            Vector3 cameraUpVector
+        )
         {
             Vector3 zaxis = Vector3.Normalize(cameraPosition - cameraTarget);
             Vector3 xaxis = Vector3.Normalize(Vector3.Cross(cameraUpVector, zaxis));
@@ -1174,7 +1284,10 @@ namespace System.Numerics
         {
             Plane p = Plane.Normalize(plane);
 
-            float dot = p.Normal.X * lightDirection.X + p.Normal.Y * lightDirection.Y + p.Normal.Z * lightDirection.Z;
+            float dot =
+                p.Normal.X * lightDirection.X
+                + p.Normal.Y * lightDirection.Y
+                + p.Normal.Z * lightDirection.Z;
             float a = -p.Normal.X;
             float b = -p.Normal.Y;
             float c = -p.Normal.Z;
@@ -1262,9 +1375,9 @@ namespace System.Numerics
             // a | j k l | = a ( f ( kp - lo ) - g ( jp - ln ) + h ( jo - kn ) )
             //   | n o p |
             //
-            //   | e g h |     
+            //   | e g h |
             // b | i k l | = b ( e ( kp - lo ) - g ( ip - lm ) + h ( io - km ) )
-            //   | m o p |     
+            //   | m o p |
             //
             //   | e f h |
             // c | i j l | = c ( e ( jp - ln ) - f ( ip - lm ) + h ( in - jm ) )
@@ -1280,10 +1393,22 @@ namespace System.Numerics
             // add: 6 + 8 + 3 = 17
             // mul: 12 + 16 = 28
 
-            float a = M11, b = M12, c = M13, d = M14;
-            float e = M21, f = M22, g = M23, h = M24;
-            float i = M31, j = M32, k = M33, l = M34;
-            float m = M41, n = M42, o = M43, p = M44;
+            float a = M11,
+                b = M12,
+                c = M13,
+                d = M14;
+            float e = M21,
+                f = M22,
+                g = M23,
+                h = M24;
+            float i = M31,
+                j = M32,
+                k = M33,
+                l = M34;
+            float m = M41,
+                n = M42,
+                o = M43,
+                p = M44;
 
             float kp_lo = k * p - l * o;
             float jp_ln = j * p - l * n;
@@ -1292,10 +1417,10 @@ namespace System.Numerics
             float io_km = i * o - k * m;
             float in_jm = i * n - j * m;
 
-            return a * (f * kp_lo - g * jp_ln + h * jo_kn) -
-                   b * (e * kp_lo - g * ip_lm + h * io_km) +
-                   c * (e * jp_ln - f * ip_lm + h * in_jm) -
-                   d * (e * jo_kn - f * io_km + g * in_jm);
+            return a * (f * kp_lo - g * jp_ln + h * jo_kn)
+                - b * (e * kp_lo - g * ip_lm + h * io_km)
+                + c * (e * jp_ln - f * ip_lm + h * in_jm)
+                - d * (e * jo_kn - f * io_km + g * in_jm);
         }
 
         /// <summary>
@@ -1309,7 +1434,7 @@ namespace System.Numerics
             //                                       -1
             // If you have matrix M, inverse Matrix M   can compute
             //
-            //     -1       1      
+            //     -1       1
             //    M   = --------- A
             //            det(M)
             //
@@ -1398,10 +1523,22 @@ namespace System.Numerics
             //
             // Cost of operation
             // 53 adds, 104 muls, and 1 div.
-            float a = matrix.M11, b = matrix.M12, c = matrix.M13, d = matrix.M14;
-            float e = matrix.M21, f = matrix.M22, g = matrix.M23, h = matrix.M24;
-            float i = matrix.M31, j = matrix.M32, k = matrix.M33, l = matrix.M34;
-            float m = matrix.M41, n = matrix.M42, o = matrix.M43, p = matrix.M44;
+            float a = matrix.M11,
+                b = matrix.M12,
+                c = matrix.M13,
+                d = matrix.M14;
+            float e = matrix.M21,
+                f = matrix.M22,
+                g = matrix.M23,
+                h = matrix.M24;
+            float i = matrix.M31,
+                j = matrix.M32,
+                k = matrix.M33,
+                l = matrix.M34;
+            float m = matrix.M41,
+                n = matrix.M42,
+                o = matrix.M43,
+                p = matrix.M44;
 
             float kp_lo = k * p - l * o;
             float jp_ln = j * p - l * n;
@@ -1419,10 +1556,24 @@ namespace System.Numerics
 
             if (Math.Abs(det) < float.Epsilon)
             {
-                result = new Matrix4x4(float.NaN, float.NaN, float.NaN, float.NaN,
-                                       float.NaN, float.NaN, float.NaN, float.NaN,
-                                       float.NaN, float.NaN, float.NaN, float.NaN,
-                                       float.NaN, float.NaN, float.NaN, float.NaN);
+                result = new Matrix4x4(
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN,
+                    float.NaN
+                );
                 return false;
             }
 
@@ -1490,7 +1641,12 @@ namespace System.Numerics
         /// <param name="translation">The translation component of the transformation matrix</param>
         /// <returns>True if the source matrix was successfully decomposed; False otherwise.</returns>
         [System.Security.SecuritySafeCritical]
-        public static bool Decompose(Matrix4x4 matrix, out Vector3 scale, out Quaternion rotation, out Vector3 translation)
+        public static bool Decompose(
+            Matrix4x4 matrix,
+            out Vector3 scale,
+            out Quaternion rotation,
+            out Vector3 translation
+        )
         {
             bool result = true;
 
@@ -1513,10 +1669,7 @@ namespace System.Numerics
                     canonicalBasis.Row1 = new Vector3(0.0f, 1.0f, 0.0f);
                     canonicalBasis.Row2 = new Vector3(0.0f, 0.0f, 1.0f);
 
-                    translation = new Vector3(
-                        matrix.M41,
-                        matrix.M42,
-                        matrix.M43);
+                    translation = new Vector3(matrix.M41, matrix.M42, matrix.M43);
 
                     pVectorBasis[0] = (Vector3*)&matTemp.M11;
                     pVectorBasis[1] = (Vector3*)&matTemp.M21;
@@ -1530,9 +1683,13 @@ namespace System.Numerics
                     scale.Y = pVectorBasis[1]->Length();
                     scale.Z = pVectorBasis[2]->Length();
 
-                    uint a, b, c;
+                    uint a,
+                        b,
+                        c;
                     #region Ranking
-                    float x = pfScales[0], y = pfScales[1], z = pfScales[2];
+                    float x = pfScales[0],
+                        y = pfScales[1],
+                        z = pfScales[2];
                     if (x < y)
                     {
                         if (y < z)
@@ -1593,7 +1750,9 @@ namespace System.Numerics
                     if (pfScales[b] < EPSILON)
                     {
                         uint cc;
-                        float fAbsX, fAbsY, fAbsZ;
+                        float fAbsX,
+                            fAbsY,
+                            fAbsZ;
 
                         fAbsX = (float)Math.Abs(pVectorBasis[a]->X);
                         fAbsY = (float)Math.Abs(pVectorBasis[a]->Y);
@@ -1913,28 +2072,92 @@ namespace System.Numerics
             Matrix4x4 result;
 
             // First row
-            result.M11 = value1.M11 * value2.M11 + value1.M12 * value2.M21 + value1.M13 * value2.M31 + value1.M14 * value2.M41;
-            result.M12 = value1.M11 * value2.M12 + value1.M12 * value2.M22 + value1.M13 * value2.M32 + value1.M14 * value2.M42;
-            result.M13 = value1.M11 * value2.M13 + value1.M12 * value2.M23 + value1.M13 * value2.M33 + value1.M14 * value2.M43;
-            result.M14 = value1.M11 * value2.M14 + value1.M12 * value2.M24 + value1.M13 * value2.M34 + value1.M14 * value2.M44;
+            result.M11 =
+                value1.M11 * value2.M11
+                + value1.M12 * value2.M21
+                + value1.M13 * value2.M31
+                + value1.M14 * value2.M41;
+            result.M12 =
+                value1.M11 * value2.M12
+                + value1.M12 * value2.M22
+                + value1.M13 * value2.M32
+                + value1.M14 * value2.M42;
+            result.M13 =
+                value1.M11 * value2.M13
+                + value1.M12 * value2.M23
+                + value1.M13 * value2.M33
+                + value1.M14 * value2.M43;
+            result.M14 =
+                value1.M11 * value2.M14
+                + value1.M12 * value2.M24
+                + value1.M13 * value2.M34
+                + value1.M14 * value2.M44;
 
             // Second row
-            result.M21 = value1.M21 * value2.M11 + value1.M22 * value2.M21 + value1.M23 * value2.M31 + value1.M24 * value2.M41;
-            result.M22 = value1.M21 * value2.M12 + value1.M22 * value2.M22 + value1.M23 * value2.M32 + value1.M24 * value2.M42;
-            result.M23 = value1.M21 * value2.M13 + value1.M22 * value2.M23 + value1.M23 * value2.M33 + value1.M24 * value2.M43;
-            result.M24 = value1.M21 * value2.M14 + value1.M22 * value2.M24 + value1.M23 * value2.M34 + value1.M24 * value2.M44;
+            result.M21 =
+                value1.M21 * value2.M11
+                + value1.M22 * value2.M21
+                + value1.M23 * value2.M31
+                + value1.M24 * value2.M41;
+            result.M22 =
+                value1.M21 * value2.M12
+                + value1.M22 * value2.M22
+                + value1.M23 * value2.M32
+                + value1.M24 * value2.M42;
+            result.M23 =
+                value1.M21 * value2.M13
+                + value1.M22 * value2.M23
+                + value1.M23 * value2.M33
+                + value1.M24 * value2.M43;
+            result.M24 =
+                value1.M21 * value2.M14
+                + value1.M22 * value2.M24
+                + value1.M23 * value2.M34
+                + value1.M24 * value2.M44;
 
             // Third row
-            result.M31 = value1.M31 * value2.M11 + value1.M32 * value2.M21 + value1.M33 * value2.M31 + value1.M34 * value2.M41;
-            result.M32 = value1.M31 * value2.M12 + value1.M32 * value2.M22 + value1.M33 * value2.M32 + value1.M34 * value2.M42;
-            result.M33 = value1.M31 * value2.M13 + value1.M32 * value2.M23 + value1.M33 * value2.M33 + value1.M34 * value2.M43;
-            result.M34 = value1.M31 * value2.M14 + value1.M32 * value2.M24 + value1.M33 * value2.M34 + value1.M34 * value2.M44;
+            result.M31 =
+                value1.M31 * value2.M11
+                + value1.M32 * value2.M21
+                + value1.M33 * value2.M31
+                + value1.M34 * value2.M41;
+            result.M32 =
+                value1.M31 * value2.M12
+                + value1.M32 * value2.M22
+                + value1.M33 * value2.M32
+                + value1.M34 * value2.M42;
+            result.M33 =
+                value1.M31 * value2.M13
+                + value1.M32 * value2.M23
+                + value1.M33 * value2.M33
+                + value1.M34 * value2.M43;
+            result.M34 =
+                value1.M31 * value2.M14
+                + value1.M32 * value2.M24
+                + value1.M33 * value2.M34
+                + value1.M34 * value2.M44;
 
             // Fourth row
-            result.M41 = value1.M41 * value2.M11 + value1.M42 * value2.M21 + value1.M43 * value2.M31 + value1.M44 * value2.M41;
-            result.M42 = value1.M41 * value2.M12 + value1.M42 * value2.M22 + value1.M43 * value2.M32 + value1.M44 * value2.M42;
-            result.M43 = value1.M41 * value2.M13 + value1.M42 * value2.M23 + value1.M43 * value2.M33 + value1.M44 * value2.M43;
-            result.M44 = value1.M41 * value2.M14 + value1.M42 * value2.M24 + value1.M43 * value2.M34 + value1.M44 * value2.M44;
+            result.M41 =
+                value1.M41 * value2.M11
+                + value1.M42 * value2.M21
+                + value1.M43 * value2.M31
+                + value1.M44 * value2.M41;
+            result.M42 =
+                value1.M41 * value2.M12
+                + value1.M42 * value2.M22
+                + value1.M43 * value2.M32
+                + value1.M44 * value2.M42;
+            result.M43 =
+                value1.M41 * value2.M13
+                + value1.M42 * value2.M23
+                + value1.M43 * value2.M33
+                + value1.M44 * value2.M43;
+            result.M44 =
+                value1.M41 * value2.M14
+                + value1.M42 * value2.M24
+                + value1.M43 * value2.M34
+                + value1.M44 * value2.M44;
 
             return result;
         }
@@ -2069,28 +2292,92 @@ namespace System.Numerics
             Matrix4x4 m;
 
             // First row
-            m.M11 = value1.M11 * value2.M11 + value1.M12 * value2.M21 + value1.M13 * value2.M31 + value1.M14 * value2.M41;
-            m.M12 = value1.M11 * value2.M12 + value1.M12 * value2.M22 + value1.M13 * value2.M32 + value1.M14 * value2.M42;
-            m.M13 = value1.M11 * value2.M13 + value1.M12 * value2.M23 + value1.M13 * value2.M33 + value1.M14 * value2.M43;
-            m.M14 = value1.M11 * value2.M14 + value1.M12 * value2.M24 + value1.M13 * value2.M34 + value1.M14 * value2.M44;
+            m.M11 =
+                value1.M11 * value2.M11
+                + value1.M12 * value2.M21
+                + value1.M13 * value2.M31
+                + value1.M14 * value2.M41;
+            m.M12 =
+                value1.M11 * value2.M12
+                + value1.M12 * value2.M22
+                + value1.M13 * value2.M32
+                + value1.M14 * value2.M42;
+            m.M13 =
+                value1.M11 * value2.M13
+                + value1.M12 * value2.M23
+                + value1.M13 * value2.M33
+                + value1.M14 * value2.M43;
+            m.M14 =
+                value1.M11 * value2.M14
+                + value1.M12 * value2.M24
+                + value1.M13 * value2.M34
+                + value1.M14 * value2.M44;
 
             // Second row
-            m.M21 = value1.M21 * value2.M11 + value1.M22 * value2.M21 + value1.M23 * value2.M31 + value1.M24 * value2.M41;
-            m.M22 = value1.M21 * value2.M12 + value1.M22 * value2.M22 + value1.M23 * value2.M32 + value1.M24 * value2.M42;
-            m.M23 = value1.M21 * value2.M13 + value1.M22 * value2.M23 + value1.M23 * value2.M33 + value1.M24 * value2.M43;
-            m.M24 = value1.M21 * value2.M14 + value1.M22 * value2.M24 + value1.M23 * value2.M34 + value1.M24 * value2.M44;
+            m.M21 =
+                value1.M21 * value2.M11
+                + value1.M22 * value2.M21
+                + value1.M23 * value2.M31
+                + value1.M24 * value2.M41;
+            m.M22 =
+                value1.M21 * value2.M12
+                + value1.M22 * value2.M22
+                + value1.M23 * value2.M32
+                + value1.M24 * value2.M42;
+            m.M23 =
+                value1.M21 * value2.M13
+                + value1.M22 * value2.M23
+                + value1.M23 * value2.M33
+                + value1.M24 * value2.M43;
+            m.M24 =
+                value1.M21 * value2.M14
+                + value1.M22 * value2.M24
+                + value1.M23 * value2.M34
+                + value1.M24 * value2.M44;
 
             // Third row
-            m.M31 = value1.M31 * value2.M11 + value1.M32 * value2.M21 + value1.M33 * value2.M31 + value1.M34 * value2.M41;
-            m.M32 = value1.M31 * value2.M12 + value1.M32 * value2.M22 + value1.M33 * value2.M32 + value1.M34 * value2.M42;
-            m.M33 = value1.M31 * value2.M13 + value1.M32 * value2.M23 + value1.M33 * value2.M33 + value1.M34 * value2.M43;
-            m.M34 = value1.M31 * value2.M14 + value1.M32 * value2.M24 + value1.M33 * value2.M34 + value1.M34 * value2.M44;
+            m.M31 =
+                value1.M31 * value2.M11
+                + value1.M32 * value2.M21
+                + value1.M33 * value2.M31
+                + value1.M34 * value2.M41;
+            m.M32 =
+                value1.M31 * value2.M12
+                + value1.M32 * value2.M22
+                + value1.M33 * value2.M32
+                + value1.M34 * value2.M42;
+            m.M33 =
+                value1.M31 * value2.M13
+                + value1.M32 * value2.M23
+                + value1.M33 * value2.M33
+                + value1.M34 * value2.M43;
+            m.M34 =
+                value1.M31 * value2.M14
+                + value1.M32 * value2.M24
+                + value1.M33 * value2.M34
+                + value1.M34 * value2.M44;
 
             // Fourth row
-            m.M41 = value1.M41 * value2.M11 + value1.M42 * value2.M21 + value1.M43 * value2.M31 + value1.M44 * value2.M41;
-            m.M42 = value1.M41 * value2.M12 + value1.M42 * value2.M22 + value1.M43 * value2.M32 + value1.M44 * value2.M42;
-            m.M43 = value1.M41 * value2.M13 + value1.M42 * value2.M23 + value1.M43 * value2.M33 + value1.M44 * value2.M43;
-            m.M44 = value1.M41 * value2.M14 + value1.M42 * value2.M24 + value1.M43 * value2.M34 + value1.M44 * value2.M44;
+            m.M41 =
+                value1.M41 * value2.M11
+                + value1.M42 * value2.M21
+                + value1.M43 * value2.M31
+                + value1.M44 * value2.M41;
+            m.M42 =
+                value1.M41 * value2.M12
+                + value1.M42 * value2.M22
+                + value1.M43 * value2.M32
+                + value1.M44 * value2.M42;
+            m.M43 =
+                value1.M41 * value2.M13
+                + value1.M42 * value2.M23
+                + value1.M43 * value2.M33
+                + value1.M44 * value2.M43;
+            m.M44 =
+                value1.M41 * value2.M14
+                + value1.M42 * value2.M24
+                + value1.M43 * value2.M34
+                + value1.M44 * value2.M44;
 
             return m;
         }
@@ -2132,11 +2419,25 @@ namespace System.Numerics
         /// <returns>True if the given matrices are equal; False otherwise.</returns>
         public static bool operator ==(Matrix4x4 value1, Matrix4x4 value2)
         {
-            return (value1.M11 == value2.M11 && value1.M22 == value2.M22 && value1.M33 == value2.M33 && value1.M44 == value2.M44 && // Check diagonal element first for early out.
-                                                value1.M12 == value2.M12 && value1.M13 == value2.M13 && value1.M14 == value2.M14 &&
-                    value1.M21 == value2.M21 && value1.M23 == value2.M23 && value1.M24 == value2.M24 &&
-                    value1.M31 == value2.M31 && value1.M32 == value2.M32 && value1.M34 == value2.M34 &&
-                    value1.M41 == value2.M41 && value1.M42 == value2.M42 && value1.M43 == value2.M43);
+            return (
+                value1.M11 == value2.M11
+                && value1.M22 == value2.M22
+                && value1.M33 == value2.M33
+                && value1.M44 == value2.M44
+                && // Check diagonal element first for early out.
+                value1.M12 == value2.M12
+                && value1.M13 == value2.M13
+                && value1.M14 == value2.M14
+                && value1.M21 == value2.M21
+                && value1.M23 == value2.M23
+                && value1.M24 == value2.M24
+                && value1.M31 == value2.M31
+                && value1.M32 == value2.M32
+                && value1.M34 == value2.M34
+                && value1.M41 == value2.M41
+                && value1.M42 == value2.M42
+                && value1.M43 == value2.M43
+            );
         }
 
         /// <summary>
@@ -2147,10 +2448,24 @@ namespace System.Numerics
         /// <returns>True if the given matrices are not equal; False if they are equal.</returns>
         public static bool operator !=(Matrix4x4 value1, Matrix4x4 value2)
         {
-            return (value1.M11 != value2.M11 || value1.M12 != value2.M12 || value1.M13 != value2.M13 || value1.M14 != value2.M14 ||
-                    value1.M21 != value2.M21 || value1.M22 != value2.M22 || value1.M23 != value2.M23 || value1.M24 != value2.M24 ||
-                    value1.M31 != value2.M31 || value1.M32 != value2.M32 || value1.M33 != value2.M33 || value1.M34 != value2.M34 ||
-                    value1.M41 != value2.M41 || value1.M42 != value2.M42 || value1.M43 != value2.M43 || value1.M44 != value2.M44);
+            return (
+                value1.M11 != value2.M11
+                || value1.M12 != value2.M12
+                || value1.M13 != value2.M13
+                || value1.M14 != value2.M14
+                || value1.M21 != value2.M21
+                || value1.M22 != value2.M22
+                || value1.M23 != value2.M23
+                || value1.M24 != value2.M24
+                || value1.M31 != value2.M31
+                || value1.M32 != value2.M32
+                || value1.M33 != value2.M33
+                || value1.M34 != value2.M34
+                || value1.M41 != value2.M41
+                || value1.M42 != value2.M42
+                || value1.M43 != value2.M43
+                || value1.M44 != value2.M44
+            );
         }
 
         /// <summary>
@@ -2160,11 +2475,25 @@ namespace System.Numerics
         /// <returns>True if the matrices are equal; False otherwise.</returns>
         public bool Equals(Matrix4x4 other)
         {
-            return (M11 == other.M11 && M22 == other.M22 && M33 == other.M33 && M44 == other.M44 && // Check diagonal element first for early out.
-                                        M12 == other.M12 && M13 == other.M13 && M14 == other.M14 &&
-                    M21 == other.M21 && M23 == other.M23 && M24 == other.M24 &&
-                    M31 == other.M31 && M32 == other.M32 && M34 == other.M34 &&
-                    M41 == other.M41 && M42 == other.M42 && M43 == other.M43);
+            return (
+                M11 == other.M11
+                && M22 == other.M22
+                && M33 == other.M33
+                && M44 == other.M44
+                && // Check diagonal element first for early out.
+                M12 == other.M12
+                && M13 == other.M13
+                && M14 == other.M14
+                && M21 == other.M21
+                && M23 == other.M23
+                && M24 == other.M24
+                && M31 == other.M31
+                && M32 == other.M32
+                && M34 == other.M34
+                && M41 == other.M41
+                && M42 == other.M42
+                && M43 == other.M43
+            );
         }
 
         /// <summary>
@@ -2190,11 +2519,26 @@ namespace System.Numerics
         {
             CultureInfo ci = CultureInfo.CurrentCulture;
 
-            return String.Format(ci, "{{ {{M11:{0} M12:{1} M13:{2} M14:{3}}} {{M21:{4} M22:{5} M23:{6} M24:{7}}} {{M31:{8} M32:{9} M33:{10} M34:{11}}} {{M41:{12} M42:{13} M43:{14} M44:{15}}} }}",
-                                 M11.ToString(ci), M12.ToString(ci), M13.ToString(ci), M14.ToString(ci),
-                                 M21.ToString(ci), M22.ToString(ci), M23.ToString(ci), M24.ToString(ci),
-                                 M31.ToString(ci), M32.ToString(ci), M33.ToString(ci), M34.ToString(ci),
-                                 M41.ToString(ci), M42.ToString(ci), M43.ToString(ci), M44.ToString(ci));
+            return String.Format(
+                ci,
+                "{{ {{M11:{0} M12:{1} M13:{2} M14:{3}}} {{M21:{4} M22:{5} M23:{6} M24:{7}}} {{M31:{8} M32:{9} M33:{10} M34:{11}}} {{M41:{12} M42:{13} M43:{14} M44:{15}}} }}",
+                M11.ToString(ci),
+                M12.ToString(ci),
+                M13.ToString(ci),
+                M14.ToString(ci),
+                M21.ToString(ci),
+                M22.ToString(ci),
+                M23.ToString(ci),
+                M24.ToString(ci),
+                M31.ToString(ci),
+                M32.ToString(ci),
+                M33.ToString(ci),
+                M34.ToString(ci),
+                M41.ToString(ci),
+                M42.ToString(ci),
+                M43.ToString(ci),
+                M44.ToString(ci)
+            );
         }
 
         /// <summary>
@@ -2203,10 +2547,22 @@ namespace System.Numerics
         /// <returns>The hash code.</returns>
         public override int GetHashCode()
         {
-            return M11.GetHashCode() + M12.GetHashCode() + M13.GetHashCode() + M14.GetHashCode() +
-                   M21.GetHashCode() + M22.GetHashCode() + M23.GetHashCode() + M24.GetHashCode() +
-                   M31.GetHashCode() + M32.GetHashCode() + M33.GetHashCode() + M34.GetHashCode() +
-                   M41.GetHashCode() + M42.GetHashCode() + M43.GetHashCode() + M44.GetHashCode();
+            return M11.GetHashCode()
+                + M12.GetHashCode()
+                + M13.GetHashCode()
+                + M14.GetHashCode()
+                + M21.GetHashCode()
+                + M22.GetHashCode()
+                + M23.GetHashCode()
+                + M24.GetHashCode()
+                + M31.GetHashCode()
+                + M32.GetHashCode()
+                + M33.GetHashCode()
+                + M34.GetHashCode()
+                + M41.GetHashCode()
+                + M42.GetHashCode()
+                + M43.GetHashCode()
+                + M44.GetHashCode();
         }
     }
 }

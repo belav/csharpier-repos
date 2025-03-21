@@ -27,8 +27,12 @@ namespace System.Security.Cryptography.X509Certificates
             return ((OpenSslX509CertificateReader)certificatePal).GetECDiffieHellmanPublicKey();
         }
 
-
-        public AsymmetricAlgorithm DecodePublicKey(Oid oid, byte[] encodedKeyValue, byte[] encodedParameters, ICertificatePal? certificatePal)
+        public AsymmetricAlgorithm DecodePublicKey(
+            Oid oid,
+            byte[] encodedKeyValue,
+            byte[] encodedParameters,
+            ICertificatePal? certificatePal
+        )
         {
             switch (oid.Value)
             {
@@ -42,12 +46,22 @@ namespace System.Security.Cryptography.X509Certificates
             throw new NotSupportedException(SR.NotSupported_KeyAlgorithm);
         }
 
-        public string X500DistinguishedNameDecode(byte[] encodedDistinguishedName, X500DistinguishedNameFlags flags)
+        public string X500DistinguishedNameDecode(
+            byte[] encodedDistinguishedName,
+            X500DistinguishedNameFlags flags
+        )
         {
-            return X500NameEncoder.X500DistinguishedNameDecode(encodedDistinguishedName, true, flags);
+            return X500NameEncoder.X500DistinguishedNameDecode(
+                encodedDistinguishedName,
+                true,
+                flags
+            );
         }
 
-        public byte[] X500DistinguishedNameEncode(string distinguishedName, X500DistinguishedNameFlags flag)
+        public byte[] X500DistinguishedNameEncode(
+            string distinguishedName,
+            X500DistinguishedNameFlags flag
+        )
         {
             return X500NameEncoder.X500DistinguishedNameEncode(distinguishedName, flag);
         }
@@ -57,8 +71,11 @@ namespace System.Security.Cryptography.X509Certificates
             return X500NameEncoder.X500DistinguishedNameDecode(
                 encodedDistinguishedName,
                 true,
-                multiLine ? X500DistinguishedNameFlags.UseNewLines : X500DistinguishedNameFlags.None,
-                multiLine);
+                multiLine
+                    ? X500DistinguishedNameFlags.UseNewLines
+                    : X500DistinguishedNameFlags.None,
+                multiLine
+            );
         }
 
         public X509ContentType GetCertContentType(ReadOnlySpan<byte> rawData)
@@ -66,8 +83,10 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 ICertificatePal? certPal;
 
-                if (OpenSslX509CertificateReader.TryReadX509Der(rawData, out certPal) ||
-                    OpenSslX509CertificateReader.TryReadX509Pem(rawData, out certPal))
+                if (
+                    OpenSslX509CertificateReader.TryReadX509Der(rawData, out certPal)
+                    || OpenSslX509CertificateReader.TryReadX509Pem(rawData, out certPal)
+                )
                 {
                     certPal.Dispose();
 
@@ -163,9 +182,17 @@ namespace System.Security.Cryptography.X509Certificates
             throw new CryptographicException();
         }
 
-        public override void DecodeX509KeyUsageExtension(byte[] encoded, out X509KeyUsageFlags keyUsages)
+        public override void DecodeX509KeyUsageExtension(
+            byte[] encoded,
+            out X509KeyUsageFlags keyUsages
+        )
         {
-            using (SafeAsn1BitStringHandle bitString = Interop.Crypto.DecodeAsn1BitString(encoded, encoded.Length))
+            using (
+                SafeAsn1BitStringHandle bitString = Interop.Crypto.DecodeAsn1BitString(
+                    encoded,
+                    encoded.Length
+                )
+            )
             {
                 Interop.Crypto.CheckValidOpenSslHandle(bitString);
 
@@ -220,24 +247,36 @@ namespace System.Security.Cryptography.X509Certificates
             byte[] encoded,
             out bool certificateAuthority,
             out bool hasPathLengthConstraint,
-            out int pathLengthConstraint)
+            out int pathLengthConstraint
+        )
         {
-            if (!Interop.Crypto.DecodeX509BasicConstraints2Extension(
-                encoded,
-                encoded.Length,
-                out certificateAuthority,
-                out hasPathLengthConstraint,
-                out pathLengthConstraint))
+            if (
+                !Interop.Crypto.DecodeX509BasicConstraints2Extension(
+                    encoded,
+                    encoded.Length,
+                    out certificateAuthority,
+                    out hasPathLengthConstraint,
+                    out pathLengthConstraint
+                )
+            )
             {
                 throw Interop.Crypto.CreateOpenSslCryptographicException();
             }
         }
 
-        public override void DecodeX509EnhancedKeyUsageExtension(byte[] encoded, out OidCollection usages)
+        public override void DecodeX509EnhancedKeyUsageExtension(
+            byte[] encoded,
+            out OidCollection usages
+        )
         {
             OidCollection oids = new OidCollection();
 
-            using (SafeEkuExtensionHandle eku = Interop.Crypto.DecodeExtendedKeyUsage(encoded, encoded.Length))
+            using (
+                SafeEkuExtensionHandle eku = Interop.Crypto.DecodeExtendedKeyUsage(
+                    encoded,
+                    encoded.Length
+                )
+            )
             {
                 Interop.Crypto.CheckValidOpenSslHandle(eku);
 
@@ -276,11 +315,18 @@ namespace System.Security.Cryptography.X509Certificates
             return rsa;
         }
 
-        private static DSAOpenSsl BuildDsaPublicKey(byte[] encodedKeyValue, byte[] encodedParameters)
+        private static DSAOpenSsl BuildDsaPublicKey(
+            byte[] encodedKeyValue,
+            byte[] encodedParameters
+        )
         {
             SubjectPublicKeyInfoAsn spki = new SubjectPublicKeyInfoAsn
             {
-                Algorithm = new AlgorithmIdentifierAsn { Algorithm = Oids.Dsa, Parameters = encodedParameters },
+                Algorithm = new AlgorithmIdentifierAsn
+                {
+                    Algorithm = Oids.Dsa,
+                    Parameters = encodedParameters,
+                },
                 SubjectPublicKey = encodedKeyValue,
             };
 

@@ -1,20 +1,20 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlMobileTextWriter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
+using System.Collections;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.Mobile;
 using System.Web.UI;
 using System.Web.UI.MobileControls;
-using System.Collections;
-using System.Diagnostics;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
@@ -23,14 +23,21 @@ namespace System.Web.UI.MobileControls.Adapters
 #endif
 
 {
-
     /*
      * HtmlMobileTextWriter class.
      */
     /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class HtmlMobileTextWriter : MobileTextWriter
     {
         private bool _shouldEnsureStyle = true;
@@ -55,9 +62,9 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /*
-         * the following TextWriter methods are overridden to 
-         * first call EnsureStyle before delegating to the base 
-         * class implementation 
+         * the following TextWriter methods are overridden to
+         * first call EnsureStyle before delegating to the base
+         * class implementation
          */
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteBeginTag"]/*' />
         public override void WriteBeginTag(String tag)
@@ -65,62 +72,77 @@ namespace System.Web.UI.MobileControls.Adapters
             EnsureStyle();
             base.WriteBeginTag(tag);
         }
+
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteFullBeginTag"]/*' />
         public override void WriteFullBeginTag(String tag)
         {
             EnsureStyle();
             base.WriteFullBeginTag(tag);
         }
+
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.Write"]/*' />
         public override void Write(char c)
         {
             EnsureStyle();
             base.Write(c);
         }
+
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.Write1"]/*' />
         public override void Write(String text)
         {
             EnsureStyle();
             base.Write(text);
         }
+
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteEncodedText"]/*' />
         public override void WriteEncodedText(String text)
         {
             EnsureStyle();
-            if(Device["supportsCharacterEntityEncoding"] != "false") {
+            if (Device["supportsCharacterEntityEncoding"] != "false")
+            {
                 base.WriteEncodedText(text);
                 return;
             }
-            if (null == text || text.Length == 0) {
+            if (null == text || text.Length == 0)
+            {
                 return;
             }
 
             int length = text.Length;
             int start = -1;
-            for(int pos = 0; pos < length; pos++) {
+            for (int pos = 0; pos < length; pos++)
+            {
                 int ch = text[pos];
-                if(ch > 160 && ch < 256) {
-                    if(start != -1) {
+                if (ch > 160 && ch < 256)
+                {
+                    if (start != -1)
+                    {
                         base.WriteEncodedText(text.Substring(start, pos - start));
                         start = -1;
                     }
                     base.Write(text[pos]);
                 }
-                else {
-                    if(start == -1) {
+                else
+                {
+                    if (start == -1)
+                    {
                         start = pos;
                     }
                 }
             }
-            if(start != -1) {
-                if(start == 0) {
+            if (start != -1)
+            {
+                if (start == 0)
+                {
                     base.WriteEncodedText(text);
                 }
-                else {
+                else
+                {
                     base.WriteEncodedText(text.Substring(start, length - start));
                 }
             }
         }
+
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteLine"]/*' />
         public override void WriteLine(String text)
         {
@@ -175,7 +197,7 @@ namespace System.Web.UI.MobileControls.Adapters
             WriterStyle writerStyle = new WriterStyle(style);
             writerStyle.Layout = false;
             EnterStyle(writerStyle);
-        }                                                                   
+        }
 
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.ExitFormat"]/*' />
         public override void ExitFormat(Style style)
@@ -192,7 +214,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.BeginStyleContext"]/*' />
         public void BeginStyleContext()
         {
-            if(_currentState.BreakPending)
+            if (_currentState.BreakPending)
             {
                 WriteBreak();
                 _currentState.BreakPending = false;
@@ -204,7 +226,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.EndStyleContext"]/*' />
         public void EndStyleContext()
         {
-            if(_currentState.BreakPending)
+            if (_currentState.BreakPending)
             {
                 WriteBreak();
                 _currentState.BreakPending = false;
@@ -230,34 +252,27 @@ namespace System.Web.UI.MobileControls.Adapters
         public new void ExitStyle(Style style)
         {
             ExitStyle(style, false);
-
         }
 
         internal bool ShouldEnsureStyle
         {
-            get
-            {
-                return _shouldEnsureStyle;
-            }
-            set
-            {
-                _shouldEnsureStyle = value;
-            }
+            get { return _shouldEnsureStyle; }
+            set { _shouldEnsureStyle = value; }
         }
 
         /*
-        all calls to Exit... converge to this 
+        all calls to Exit... converge to this
         */
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.ExitStyle1"]/*' />
         public void ExitStyle(Style style, bool breakAfter)
         {
             _currentState.Pop();
-            if((_currentState.BreakPending) && (_currentState.Count > 0))
+            if ((_currentState.BreakPending) && (_currentState.Count > 0))
             {
                 EnsureStyle();
             }
             _currentState.BreakPending = breakAfter;
-            if((_currentState.Count == 0) || (RequiresNoBreakInFormatting))
+            if ((_currentState.Count == 0) || (RequiresNoBreakInFormatting))
             {
                 _currentState.Transition(new WriterStyle());
             }
@@ -275,13 +290,13 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             if (_shouldEnsureStyle)
             {
-                if(_currentState.Count > 0)
+                if (_currentState.Count > 0)
                 {
                     _currentState.Transition(_currentState.Peek());
                 }
                 _shouldEnsureStyle = false;
             }
-            if(BeforeFirstControlWritten)
+            if (BeforeFirstControlWritten)
             {
                 BeforeFirstControlWritten = false;
             }
@@ -290,7 +305,7 @@ namespace System.Web.UI.MobileControls.Adapters
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.WriteText"]/*' />
         public void WriteText(String text, bool encodeText)
         {
-            if(text != null && text.Length == 0)
+            if (text != null && text.Length == 0)
             {
                 return;
             }
@@ -323,152 +338,83 @@ namespace System.Web.UI.MobileControls.Adapters
             Write(">\r\n");
         }
 
-
         // AUI 2285
         private bool _beforeFirstControlWritten = true;
         internal bool BeforeFirstControlWritten
         {
-            get
-            {
-                return _beforeFirstControlWritten;
-            }
-
-            set
-            {
-                _beforeFirstControlWritten = value;
-            }
+            get { return _beforeFirstControlWritten; }
+            set { _beforeFirstControlWritten = value; }
         }
 
         private bool _maintainState = true;
 
         internal bool MaintainState
         {
-            get
-            {
-                return _maintainState;
-            }
-            set
-            {
-                _maintainState = value;
-            }
+            get { return _maintainState; }
+            set { _maintainState = value; }
         }
 
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderBold"]/*' />
         protected internal bool RenderBold
         {
-            get
-            {
-                return _renderBold;
-            }
-            set
-            {
-                _renderBold = value;
-            }
+            get { return _renderBold; }
+            set { _renderBold = value; }
         }
 
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderItalic"]/*' />
         protected internal bool RenderItalic
         {
-            get
-            {
-                return _renderItalic;
-            }
-            set
-            {
-                _renderItalic = value;
-            }
+            get { return _renderItalic; }
+            set { _renderItalic = value; }
         }
 
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderFontSize"]/*' />
         protected internal bool RenderFontSize
         {
-            get
-            {
-                return _renderFontSize;
-            }
-            set
-            {
-                _renderFontSize = value;
-            }
+            get { return _renderFontSize; }
+            set { _renderFontSize = value; }
         }
 
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderFontName"]/*' />
         protected internal bool RenderFontName
         {
-            get
-            {
-                return _renderFontName;
-            }
-
-            set
-            {
-                _renderFontName = value;
-            }
+            get { return _renderFontName; }
+            set { _renderFontName = value; }
         }
 
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderFontColor"]/*' />
         protected internal bool RenderFontColor
         {
-            get
-            {
-                return _renderFontColor;
-            }
-            set
-            {
-                _renderFontColor = value;
-            }
+            get { return _renderFontColor; }
+            set { _renderFontColor = value; }
         }
 
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderBodyColor"]/*' />
         protected internal bool RenderBodyColor
         {
-            get
-            {
-                return _renderBodyColor;
-            }
-            set
-            {
-                _renderBodyColor = value;
-            }
+            get { return _renderBodyColor; }
+            set { _renderBodyColor = value; }
         }
 
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderDivAlign"]/*' />
         protected internal bool RenderDivAlign
         {
-            get
-            {
-                return _renderDivAlign;
-            }
-            set
-            {
-                _renderDivAlign = value;
-            }
+            get { return _renderDivAlign; }
+            set { _renderDivAlign = value; }
         }
 
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RenderDivNoWrap"]/*' />
         protected internal bool RenderDivNoWrap
         {
-            get
-            {
-                return _renderDivNoWrap;
-            }
-            set
-            {
-                _renderDivNoWrap = value;
-            }
+            get { return _renderDivNoWrap; }
+            set { _renderDivNoWrap = value; }
         }
 
         /// <include file='doc\HtmlMobileTextWriter.uex' path='docs/doc[@for="HtmlMobileTextWriter.RequiresNoBreakInFormatting"]/*' />
         protected internal bool RequiresNoBreakInFormatting
         {
-            get
-            {
-                return _requiresNoBreakInFormatting;
-            }
-            set
-            {
-                _requiresNoBreakInFormatting = value;
-            }
+            get { return _requiresNoBreakInFormatting; }
+            set { _requiresNoBreakInFormatting = value; }
         }
 
         private bool _renderBold = true;
@@ -486,16 +432,18 @@ namespace System.Web.UI.MobileControls.Adapters
      * the WriterStyle class is used to store and
      * control state for rendering format and layout
      */
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class WriterStyle
     {
-        private Wrapping    _wrapping;
-        private Alignment   _alignment;
-        private String      _fontName;
-        private Color       _fontColor;
-        private FontSize    _fontSize;
-        private bool        _bold;
-        private bool        _italic;
+        private Wrapping _wrapping;
+        private Alignment _alignment;
+        private String _fontName;
+        private Color _fontColor;
+        private FontSize _fontSize;
+        private bool _bold;
+        private bool _italic;
 
         private bool _format;
         private bool _layout;
@@ -517,33 +465,31 @@ namespace System.Web.UI.MobileControls.Adapters
         internal WriterStyle(Style style)
         {
             Debug.Assert(style != null, "writer style is null");
-            _alignment = (Alignment)         style[Style.AlignmentKey, true];
-            if(_alignment == Alignment.NotSet)
+            _alignment = (Alignment)style[Style.AlignmentKey, true];
+            if (_alignment == Alignment.NotSet)
             {
                 _alignment = Alignment.Left;
             }
-            _wrapping = (Wrapping)           style[Style.WrappingKey, true];
-            if(_wrapping == Wrapping.NotSet)
+            _wrapping = (Wrapping)style[Style.WrappingKey, true];
+            if (_wrapping == Wrapping.NotSet)
             {
                 _wrapping = Wrapping.Wrap;
             }
 
-            _fontSize  = (FontSize)         style[Style.FontSizeKey , true];
-            if(_fontSize == FontSize.NotSet)
+            _fontSize = (FontSize)style[Style.FontSizeKey, true];
+            if (_fontSize == FontSize.NotSet)
             {
                 _fontSize = FontSize.Normal;
             }
-            _fontName  = (String)           style[Style.FontNameKey , true];
-            _fontColor = (Color)            style[Style.ForeColorKey, true]; 
+            _fontName = (String)style[Style.FontNameKey, true];
+            _fontColor = (Color)style[Style.ForeColorKey, true];
 
-            _bold = ((BooleanOption)        style[Style.BoldKey, true] == BooleanOption.True);
-            _italic = ((BooleanOption)      style[Style.ItalicKey, true] == BooleanOption.True);
+            _bold = ((BooleanOption)style[Style.BoldKey, true] == BooleanOption.True);
+            _italic = ((BooleanOption)style[Style.ItalicKey, true] == BooleanOption.True);
 
             _format = true;
             _layout = true;
-
         }
-
 
         internal bool Format
         {
@@ -597,15 +543,15 @@ namespace System.Web.UI.MobileControls.Adapters
     /*
      * The StyleTag class is extended for specific tags
      */
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal abstract class StyleTag
     {
         private int _level = -1;
 
 #if UNUSED_CODE
-        internal StyleTag() 
-        {
-        }
+        internal StyleTag() { }
 #endif
 
         internal StyleTag(int level)
@@ -615,25 +561,20 @@ namespace System.Web.UI.MobileControls.Adapters
 
         internal virtual int Level
         {
-            get
-            {
-                return _level;
-            }
-            set
-            {
-                _level = value;
-            }
+            get { return _level; }
+            set { _level = value; }
         }
 
         internal abstract void CloseTag(WriterState state);
     }
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class BoldStyleTag : StyleTag
     {
-        internal BoldStyleTag(int level) : base(level)
-        {
-        }
+        internal BoldStyleTag(int level)
+            : base(level) { }
 
         internal override void CloseTag(WriterState state)
         {
@@ -642,12 +583,13 @@ namespace System.Web.UI.MobileControls.Adapters
         }
     }
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class ItalicStyleTag : StyleTag
     {
-        internal ItalicStyleTag(int level) : base(level)
-        {
-        }
+        internal ItalicStyleTag(int level)
+            : base(level) { }
 
         internal override void CloseTag(WriterState state)
         {
@@ -656,14 +598,17 @@ namespace System.Web.UI.MobileControls.Adapters
         }
     }
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class FontStyleTag : StyleTag
     {
         private String _name;
         private Color _color;
         private FontSize _size;
 
-        internal FontStyleTag(int level) : base(level)
+        internal FontStyleTag(int level)
+            : base(level)
         {
             _name = String.Empty;
             _color = Color.Empty;
@@ -671,7 +616,8 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
 #if UNUSED_CODE
-        internal FontStyleTag(int level, String name, Color color, FontSize size) : base(level)
+        internal FontStyleTag(int level, String name, Color color, FontSize size)
+            : base(level)
         {
             Name = _name;
             Color = color;
@@ -706,85 +652,85 @@ namespace System.Web.UI.MobileControls.Adapters
 
             //reset the FontLevel
             Stack tmpStack = new Stack();
-            while(state.TagsWritten.Count > 0)
+            while (state.TagsWritten.Count > 0)
             {
                 Object o = state.TagsWritten.Pop();
                 tmpStack.Push(o);
-                if(o is FontStyleTag)
+                if (o is FontStyleTag)
                 {
                     state.FontLevel = ((FontStyleTag)o).Level;
                     break;
                 }
             }
 
-            while(tmpStack.Count > 0)
+            while (tmpStack.Count > 0)
             {
                 state.TagsWritten.Push(tmpStack.Pop());
             }
 
             //there is a font tag in the stack
-            if(state.FontLevel > -1)
+            if (state.FontLevel > -1)
             {
-                if(Color != Color.Empty)
+                if (Color != Color.Empty)
                 {
                     //reset font color to something further down the stack
                     Stack tempStack = new Stack();
-                    while(state.TagsWritten.Count > 0)
+                    while (state.TagsWritten.Count > 0)
                     {
                         Object o = state.TagsWritten.Pop();
                         tempStack.Push(o);
-                        if(o is FontStyleTag)
+                        if (o is FontStyleTag)
                         {
-                            if(((FontStyleTag)o).Color != Color.Empty)
+                            if (((FontStyleTag)o).Color != Color.Empty)
                             {
                                 state.Current.FontColor = ((FontStyleTag)o).Color;
                                 break;
                             }
                         }
                     }
-                    while(tempStack.Count > 0)
+                    while (tempStack.Count > 0)
                     {
                         state.TagsWritten.Push(tempStack.Pop());
                     }
                 }
-                if(Name == null || Name.Length > 0)
+                if (Name == null || Name.Length > 0)
                 {
                     //reset font name to something futher down the stack
                     Stack tempStack = new Stack();
-                    while(state.TagsWritten.Count > 0)
+                    while (state.TagsWritten.Count > 0)
                     {
                         Object o = state.TagsWritten.Pop();
                         tempStack.Push(o);
-                        if(o is FontStyleTag)
+                        if (o is FontStyleTag)
                         {
                             String name = ((FontStyleTag)o).Name;
-                            if(name == null || name.Length > 0)
+                            if (name == null || name.Length > 0)
                             {
                                 state.Current.FontName = name;
                                 break;
                             }
                         }
                     }
-                    while(tempStack.Count > 0)
+                    while (tempStack.Count > 0)
                     {
                         state.TagsWritten.Push(tempStack.Pop());
                     }
                 }
-                    //reset font size to something further down the stack
-                while(state.TagsWritten.Count > 0)
+                //reset font size to something further down the stack
+                while (state.TagsWritten.Count > 0)
                 {
                     Object o = state.TagsWritten.Pop();
                     tmpStack.Push(o);
                     if (o is FontStyleTag)
                     {
-                        if(((FontStyleTag)o).FontSize != FontSize.Normal)
+                        if (((FontStyleTag)o).FontSize != FontSize.Normal)
                         {
                             state.Current.FontSize = ((FontStyleTag)o).FontSize;
                             break;
                         }
                     }
                 }
-                while(tmpStack.Count > 0)
+                while (tmpStack.Count > 0)
                 {
                     state.TagsWritten.Push(tmpStack.Pop());
                 }
@@ -792,13 +738,17 @@ namespace System.Web.UI.MobileControls.Adapters
         }
     }
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class DivStyleTag : StyleTag
     {
         private Wrapping _wrapping;
         private Alignment _alignment;
         private bool _alignWritten;
-        internal DivStyleTag(int level) : base(level)
+
+        internal DivStyleTag(int level)
+            : base(level)
         {
             _wrapping = Wrapping.Wrap;
             _alignment = Alignment.Left;
@@ -835,57 +785,56 @@ namespace System.Web.UI.MobileControls.Adapters
             //in practice, the number of items on the stack is small
             //so it may be comparable
 
-
             //reset wrapping
-            while(state.TagsWritten.Count > 0)
+            while (state.TagsWritten.Count > 0)
             {
                 Object o = state.TagsWritten.Pop();
                 tempStack.Push(o);
-                if(o is DivStyleTag)
+                if (o is DivStyleTag)
                 {
-                    if(((DivStyleTag)o).Wrapping == Wrapping.NoWrap)
+                    if (((DivStyleTag)o).Wrapping == Wrapping.NoWrap)
                     {
                         state.Current.Wrapping = Wrapping.NoWrap;
                         break;
                     }
                 }
             }
-            while(tempStack.Count > 0)
+            while (tempStack.Count > 0)
             {
                 state.TagsWritten.Push(tempStack.Pop());
             }
 
             //reset alignment
-            while(state.TagsWritten.Count > 0)
+            while (state.TagsWritten.Count > 0)
             {
                 Object o = state.TagsWritten.Pop();
                 tempStack.Push(o);
-                if(o is DivStyleTag)
+                if (o is DivStyleTag)
                 {
-                    if(((DivStyleTag)o).Alignment != Alignment.NotSet)
+                    if (((DivStyleTag)o).Alignment != Alignment.NotSet)
                     {
                         state.Current.Alignment = ((DivStyleTag)o).Alignment;
                         break;
                     }
                 }
             }
-            while(tempStack.Count > 0)
+            while (tempStack.Count > 0)
             {
                 state.TagsWritten.Push(tempStack.Pop());
             }
 
             //reset divLevel
-            while(state.TagsWritten.Count > 0)
+            while (state.TagsWritten.Count > 0)
             {
                 Object o = state.TagsWritten.Pop();
                 tempStack.Push(o);
-                if(o is DivStyleTag)
+                if (o is DivStyleTag)
                 {
                     state.DivLevel = ((DivStyleTag)o).Level;
                     break;
                 }
             }
-            while(tempStack.Count > 0)
+            while (tempStack.Count > 0)
             {
                 state.TagsWritten.Push(tempStack.Pop());
             }
@@ -897,7 +846,9 @@ namespace System.Web.UI.MobileControls.Adapters
      * pushed on the stack from Enter[Style/Format/Layout]
      * and removed using Exit[Style/Format/Layout]
      */
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class StyleStack
     {
         private HtmlMobileTextWriter _writer;
@@ -923,7 +874,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
         internal WriterStyle Peek()
         {
-            if(_stack.Count == 0)
+            if (_stack.Count == 0)
             {
                 return new WriterStyle(); //retrieves default values
             }
@@ -932,21 +883,20 @@ namespace System.Web.UI.MobileControls.Adapters
 
         internal int Count
         {
-            get
-            {
-                return _stack.Count;
-            }
+            get { return _stack.Count; }
         }
     }
 
     /* the WriterState tracks what styles have been entered, what tags have been written
         and controls transitions from the current state to a desired state
     */
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class WriterState : StyleStack
     {
         private bool _inTransition = false; //prevent recursion
-        private Stack _stack;  //stack of WriterStyle objects
+        private Stack _stack; //stack of WriterStyle objects
         private Stack _tagsWritten; //stack of StyleTag objects for written tags
         private bool _breakPending = false; //track if we owe a <br>
 
@@ -955,10 +905,11 @@ namespace System.Web.UI.MobileControls.Adapters
 
         private int _fontLevel = -1;
         private int _divLevel = -1;
-        
+
         private int _mark = 0;
 
-        internal WriterState(HtmlMobileTextWriter writer) : base(writer)
+        internal WriterState(HtmlMobileTextWriter writer)
+            : base(writer)
         {
             _writer = writer;
             _stack = new Stack();
@@ -968,10 +919,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
         internal WriterStyle Current
         {
-            get
-            {
-                return _current;
-            }
+            get { return _current; }
         }
 
         /*
@@ -987,10 +935,9 @@ namespace System.Web.UI.MobileControls.Adapters
             _tagsWritten = new Stack();
             _stack.Push(BreakPending);
             BreakPending = false;
-
         }
 
-        internal int FontLevel 
+        internal int FontLevel
         {
             get { return _fontLevel; }
             set { _fontLevel = value; }
@@ -1011,7 +958,7 @@ namespace System.Web.UI.MobileControls.Adapters
             _writer.ShouldEnsureStyle = true;
             BreakPending = (bool)_stack.Pop();
             //close all open tags
-            while(_tagsWritten.Count > 0)
+            while (_tagsWritten.Count > 0)
             {
                 CloseTag();
             }
@@ -1031,21 +978,13 @@ namespace System.Web.UI.MobileControls.Adapters
 
         internal HtmlTextWriter Writer
         {
-            get
-            {
-                return _writer;
-            }
+            get { return _writer; }
         }
 
         internal Stack TagsWritten
         {
-            get
-            {
-                return _tagsWritten;
-            }
+            get { return _tagsWritten; }
         }
-
-
 
         /*
         pop a tag from the stack of StyleTags,
@@ -1064,7 +1003,7 @@ namespace System.Web.UI.MobileControls.Adapters
 
         internal void UnMarkStyleContext()
         {
-            while(_tagsWritten.Count > _mark)
+            while (_tagsWritten.Count > _mark)
             {
                 CloseTag();
             }
@@ -1073,19 +1012,21 @@ namespace System.Web.UI.MobileControls.Adapters
         private bool FontChange(WriterStyle newStyle)
         {
             return (
-            (( _current.FontColor != newStyle.FontColor ) && (_writer.RenderFontColor)) ||
-             (( _current.FontSize != newStyle.FontSize ) && (_writer.RenderFontSize)) ||
-             (( _current.FontName != newStyle.FontName ) && (_writer.RenderFontName))
+                ((_current.FontColor != newStyle.FontColor) && (_writer.RenderFontColor))
+                || ((_current.FontSize != newStyle.FontSize) && (_writer.RenderFontSize))
+                || ((_current.FontName != newStyle.FontName) && (_writer.RenderFontName))
             );
         }
 
         private bool DivChange(WriterStyle newStyle)
         {
             return (
-             (newStyle.Layout) &&
-             (((newStyle.Wrapping != _current.Wrapping) && (_writer.RenderDivNoWrap)) ||
-              ((newStyle.Alignment != _current.Alignment) && (_writer.RenderDivAlign)) )
-             );
+                (newStyle.Layout)
+                && (
+                    ((newStyle.Wrapping != _current.Wrapping) && (_writer.RenderDivNoWrap))
+                    || ((newStyle.Alignment != _current.Alignment) && (_writer.RenderDivAlign))
+                )
+            );
         }
 
         internal void Transition(WriterStyle newStyle)
@@ -1100,14 +1041,16 @@ namespace System.Web.UI.MobileControls.Adapters
             HtmlMobileTextWriter tempWriter = _writer;
             try
             {
-                if(!captureOutput)
+                if (!captureOutput)
                 {
                     tempWriter = _writer;
                     _writer = new HtmlMobileTextWriter(
-                        new HtmlTextWriter(new StringWriter(CultureInfo.InvariantCulture)), tempWriter.Device);
+                        new HtmlTextWriter(new StringWriter(CultureInfo.InvariantCulture)),
+                        tempWriter.Device
+                    );
                 }
 
-                if(_inTransition)
+                if (_inTransition)
                 {
                     return;
                 }
@@ -1116,42 +1059,43 @@ namespace System.Web.UI.MobileControls.Adapters
                     _inTransition = true;
                 }
 
-                if(Count == 0)
+                if (Count == 0)
                 {
-                    while(_tagsWritten.Count > 0)
+                    while (_tagsWritten.Count > 0)
                     {
                         CloseTag();
                     }
-                    _inTransition= false;
+                    _inTransition = false;
                     return;
                 }
 
                 //close italic if target format !italic
-                if(( _current.Italic && !newStyle.Italic ) && (_writer.RenderItalic))
+                if ((_current.Italic && !newStyle.Italic) && (_writer.RenderItalic))
                 {
-                    while(_current.Italic)
+                    while (_current.Italic)
                     {
                         CloseTag();
                     }
                 }
 
                 //close bold if target format !bold
-                if(( _current.Bold && !newStyle.Bold ) && (_writer.RenderBold))
+                if ((_current.Bold && !newStyle.Bold) && (_writer.RenderBold))
                 {
-                    while(_current.Bold)
+                    while (_current.Bold)
                     {
                         CloseTag();
                     }
                 }
 
-                //if the target FontColor is Color.Empty, then we need to 
+                //if the target FontColor is Color.Empty, then we need to
                 //close all open color tags
-                if(
-                    (newStyle.FontColor == Color.Empty) && 
-                    (_current.FontColor != Color.Empty) && 
-                    (_writer.RenderFontColor) )
+                if (
+                    (newStyle.FontColor == Color.Empty)
+                    && (_current.FontColor != Color.Empty)
+                    && (_writer.RenderFontColor)
+                )
                 {
-                    while(_current.FontColor != Color.Empty)
+                    while (_current.FontColor != Color.Empty)
                     {
                         CloseTag();
                     }
@@ -1159,12 +1103,13 @@ namespace System.Web.UI.MobileControls.Adapters
 
                 //if the target FontName is String.Empty, then we need to
                 //close all open name tags
-                if(
-                    (newStyle.FontName != null && newStyle.FontName.Length == 0) && 
-                    (_current.FontName == null || _current.FontName.Length > 0) && 
-                    (_writer.RenderFontName) )
+                if (
+                    (newStyle.FontName != null && newStyle.FontName.Length == 0)
+                    && (_current.FontName == null || _current.FontName.Length > 0)
+                    && (_writer.RenderFontName)
+                )
                 {
-                    while(_current.FontName == null || _current.FontName.Length > 0)
+                    while (_current.FontName == null || _current.FontName.Length > 0)
                     {
                         CloseTag();
                     }
@@ -1175,9 +1120,9 @@ namespace System.Web.UI.MobileControls.Adapters
 
                 bool newFont = FontChange(newStyle);
 
-                if(newFont)
+                if (newFont)
                 {
-                    while( FontLevel >= Count )
+                    while (FontLevel >= Count)
                     {
                         CloseTag();
                     }
@@ -1185,20 +1130,21 @@ namespace System.Web.UI.MobileControls.Adapters
 
                 //if the new wrapping is Wrap, and the current is NoWrap
                 //the outer NoWrap must be removed
-                if(
-                    (newStyle.Wrapping == Wrapping.Wrap) && 
-                    (_current.Wrapping == Wrapping.NoWrap) && 
-                    (_writer.RenderDivNoWrap) )
+                if (
+                    (newStyle.Wrapping == Wrapping.Wrap)
+                    && (_current.Wrapping == Wrapping.NoWrap)
+                    && (_writer.RenderDivNoWrap)
+                )
                 {
-                    while(_current.Wrapping != Wrapping.Wrap)
+                    while (_current.Wrapping != Wrapping.Wrap)
                     {
                         CloseTag();
                     }
                 }
                 //if the alignment differs for the same generation, close any divs at this level
-                if(( newStyle.Alignment != _current.Alignment ) && ( _writer.RenderDivAlign))
+                if ((newStyle.Alignment != _current.Alignment) && (_writer.RenderDivAlign))
                 {
-                    while( DivLevel >= Count )
+                    while (DivLevel >= Count)
                     {
                         CloseTag();
                     }
@@ -1208,15 +1154,15 @@ namespace System.Web.UI.MobileControls.Adapters
                 bool newDiv = DivChange(newStyle);
 
                 //an opening div will function as a logical break
-                if((BreakPending) && (!(newDiv)))  
+                if ((BreakPending) && (!(newDiv)))
                 {
                     ((HtmlMobileTextWriter)_writer).WriteBreak();
                     BreakPending = false;
                 }
 
-                if(newDiv)
+                if (newDiv)
                 {
-                    while(_current.Bold || _current.Italic || (FontLevel == Count))
+                    while (_current.Bold || _current.Italic || (FontLevel == Count))
                     {
                         CloseTag();
                     }
@@ -1226,28 +1172,28 @@ namespace System.Web.UI.MobileControls.Adapters
                 newDiv = DivChange(newStyle);
 
                 //open div
-                if(newDiv && newStyle.Layout)
+                if (newDiv && newStyle.Layout)
                 {
                     DivStyleTag div = new DivStyleTag(Count);
                     BreakPending = false;
-                    if(
-                        ((_writer.BeforeFirstControlWritten) || (_writer.InputWritten)) &&
-                        (_writer.Device.Type == _pocketPC) &&
-                        (_writer.Device.MinorVersion == 0) &&
-                        (_writer.Device.MajorVersion == 4) &&
-                        (newStyle.Alignment != _current.Alignment) )
+                    if (
+                        ((_writer.BeforeFirstControlWritten) || (_writer.InputWritten))
+                        && (_writer.Device.Type == _pocketPC)
+                        && (_writer.Device.MinorVersion == 0)
+                        && (_writer.Device.MajorVersion == 4)
+                        && (newStyle.Alignment != _current.Alignment)
+                    )
                     {
                         _writer.WriteBreak();
                         _writer.InputWritten = false;
                     }
 
-                        
                     _writer.WriteBeginTag("div");
                     DivLevel = Count;
 
-                    if(newStyle.Wrapping == Wrapping.NoWrap)
+                    if (newStyle.Wrapping == Wrapping.NoWrap)
                     {
-                        if(_writer.RenderDivNoWrap)
+                        if (_writer.RenderDivNoWrap)
                         {
                             _writer.Write(" nowrap");
                         }
@@ -1260,13 +1206,14 @@ namespace System.Web.UI.MobileControls.Adapters
                         _current.Wrapping = Wrapping.Wrap;
                     }
 
-                    if(newStyle.Alignment != _current.Alignment)
+                    if (newStyle.Alignment != _current.Alignment)
                     {
-                        if(_writer.RenderDivAlign)
+                        if (_writer.RenderDivAlign)
                         {
                             _writer.WriteAttribute(
-                                "align", 
-                                Enum.GetName(typeof(Alignment), newStyle.Alignment));
+                                "align",
+                                Enum.GetName(typeof(Alignment), newStyle.Alignment)
+                            );
                         }
                         _current.Alignment = newStyle.Alignment;
                         div.Alignment = newStyle.Alignment;
@@ -1277,21 +1224,23 @@ namespace System.Web.UI.MobileControls.Adapters
                 }
 
                 //open font
-                if(newFont && newStyle.Format)
+                if (newFont && newStyle.Format)
                 {
                     FontStyleTag fontTag = new FontStyleTag(Count);
                     _writer.WriteBeginTag("font");
-                    if(_current.FontSize != newStyle.FontSize)
+                    if (_current.FontSize != newStyle.FontSize)
                     {
                         String relativeSize;
-                        if(newStyle.FontSize == FontSize.Large)
+                        if (newStyle.FontSize == FontSize.Large)
                         {
-                            relativeSize = (
-                               ((HtmlMobileTextWriter)_writer).Device.Type == _pocketPC) ? "+2" : "+1";
+                            relativeSize =
+                                (((HtmlMobileTextWriter)_writer).Device.Type == _pocketPC)
+                                    ? "+2"
+                                    : "+1";
                             _current.FontSize = FontSize.Large;
                             fontTag.FontSize = FontSize.Large;
                         }
-                        else if(newStyle.FontSize == FontSize.Small)
+                        else if (newStyle.FontSize == FontSize.Small)
                         {
                             relativeSize = "-1";
                             _current.FontSize = FontSize.Small;
@@ -1303,26 +1252,27 @@ namespace System.Web.UI.MobileControls.Adapters
                             _current.FontSize = FontSize.Normal;
                             fontTag.FontSize = FontSize.Normal;
                         }
-                        if(_writer.RenderFontSize)
+                        if (_writer.RenderFontSize)
                         {
                             _writer.WriteAttribute("size", relativeSize);
                         }
                     }
 
-                    if(_current.FontColor != newStyle.FontColor)
+                    if (_current.FontColor != newStyle.FontColor)
                     {
-                        if(_writer.RenderFontColor)
+                        if (_writer.RenderFontColor)
                         {
                             _writer.WriteAttribute(
-                                "color", 
-                                ColorTranslator.ToHtml(newStyle.FontColor));
+                                "color",
+                                ColorTranslator.ToHtml(newStyle.FontColor)
+                            );
                         }
                         _current.FontColor = newStyle.FontColor;
                         fontTag.Color = newStyle.FontColor;
                     }
-                    if(_current.FontName != newStyle.FontName)
+                    if (_current.FontName != newStyle.FontName)
                     {
-                        if(_writer.RenderFontName)
+                        if (_writer.RenderFontName)
                         {
                             _writer.WriteAttribute("face", newStyle.FontName);
                         }
@@ -1335,9 +1285,9 @@ namespace System.Web.UI.MobileControls.Adapters
                 }
 
                 //open bold
-                if(newStyle.Format)
+                if (newStyle.Format)
                 {
-                    if( newStyle.Bold && !_current.Bold && _writer.RenderBold )
+                    if (newStyle.Bold && !_current.Bold && _writer.RenderBold)
                     {
                         _writer.WriteFullBeginTag("b");
                         _current.Bold = true;
@@ -1345,7 +1295,7 @@ namespace System.Web.UI.MobileControls.Adapters
                     }
 
                     //open italic
-                    if( newStyle.Italic && !_current.Italic && _writer.RenderItalic )
+                    if (newStyle.Italic && !_current.Italic && _writer.RenderItalic)
                     {
                         _writer.WriteFullBeginTag("i");
                         _current.Italic = true;
@@ -1361,5 +1311,3 @@ namespace System.Web.UI.MobileControls.Adapters
         }
     }
 }
-
-

@@ -23,15 +23,8 @@ namespace Microsoft.Build.Tasks.Xaml
 
         public string ItemSpec
         {
-            get
-            {
-                return this.underlyingItem.ItemSpec;
-            }
-
-            set
-            {
-                this.underlyingItem.ItemSpec = value;
-            }
+            get { return this.underlyingItem.ItemSpec; }
+            set { this.underlyingItem.ItemSpec = value; }
         }
 
         public int MetadataCount

@@ -3,9 +3,11 @@
 
 namespace System.Runtime.InteropServices.Marshalling
 {
-    internal sealed class DefaultIUnknownInterfaceDetailsStrategy : IIUnknownInterfaceDetailsStrategy
+    internal sealed class DefaultIUnknownInterfaceDetailsStrategy
+        : IIUnknownInterfaceDetailsStrategy
     {
-        public static readonly IIUnknownInterfaceDetailsStrategy Instance = new DefaultIUnknownInterfaceDetailsStrategy();
+        public static readonly IIUnknownInterfaceDetailsStrategy Instance =
+            new DefaultIUnknownInterfaceDetailsStrategy();
 
         public IComExposedDetails? GetComExposedTypeDetails(RuntimeTypeHandle type)
         {

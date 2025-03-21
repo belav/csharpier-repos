@@ -20,16 +20,25 @@ namespace System.Collections.ObjectModel.Tests
             string[] anArray = new string[] { "one", "two", "three", "four", "five" };
             ReadOnlyObservableCollection<string> readOnlyCol =
                 new ReadOnlyObservableCollection<string>(new ObservableCollection<string>(anArray));
-            IReadOnlyList_T_Test<string> helper = new IReadOnlyList_T_Test<string>(readOnlyCol, anArray);
+            IReadOnlyList_T_Test<string> helper = new IReadOnlyList_T_Test<string>(
+                readOnlyCol,
+                anArray
+            );
             helper.InitialItems_Tests();
             IList<string> readOnlyColAsIList = readOnlyCol;
-            Assert.True(readOnlyColAsIList.IsReadOnly, "ReadOnlyObservableCollection should be readOnly.");
+            Assert.True(
+                readOnlyColAsIList.IsReadOnly,
+                "ReadOnlyObservableCollection should be readOnly."
+            );
         }
 
         [Fact]
         public static void Ctor_Tests_Negative()
         {
-            AssertExtensions.Throws<ArgumentNullException>("list", () => new ReadOnlyObservableCollection<string>(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "list",
+                () => new ReadOnlyObservableCollection<string>(null)
+            );
         }
 
         [Fact]
@@ -37,7 +46,10 @@ namespace System.Collections.ObjectModel.Tests
         {
             Assert.NotNull(ReadOnlyObservableCollection<int>.Empty);
             Assert.Equal(0, ReadOnlyObservableCollection<int>.Empty.Count);
-            Assert.Same(ReadOnlyObservableCollection<int>.Empty, ReadOnlyObservableCollection<int>.Empty);
+            Assert.Same(
+                ReadOnlyObservableCollection<int>.Empty,
+                ReadOnlyObservableCollection<int>.Empty
+            );
         }
 
         [Fact]
@@ -46,7 +58,10 @@ namespace System.Collections.ObjectModel.Tests
             string[] anArray = new string[] { "one", "two", "three", "four", "five" };
             ReadOnlyObservableCollection<string> readOnlyCol =
                 new ReadOnlyObservableCollection<string>(new ObservableCollection<string>(anArray));
-            IReadOnlyList_T_Test<string> helper = new IReadOnlyList_T_Test<string>(readOnlyCol, anArray);
+            IReadOnlyList_T_Test<string> helper = new IReadOnlyList_T_Test<string>(
+                readOnlyCol,
+                anArray
+            );
             helper.Item_get_Tests();
         }
 
@@ -56,7 +71,10 @@ namespace System.Collections.ObjectModel.Tests
             string[] anArray = new string[] { "one", "two", "three", "four", "five" };
             ReadOnlyObservableCollection<string> readOnlyCol =
                 new ReadOnlyObservableCollection<string>(new ObservableCollection<string>(anArray));
-            IReadOnlyList_T_Test<string> helper = new IReadOnlyList_T_Test<string>(readOnlyCol, anArray);
+            IReadOnlyList_T_Test<string> helper = new IReadOnlyList_T_Test<string>(
+                readOnlyCol,
+                anArray
+            );
             helper.Item_get_Tests_Negative();
         }
 
@@ -74,10 +92,16 @@ namespace System.Collections.ObjectModel.Tests
             for (int i = 0; i < anArray.Length; i++)
             {
                 string item = anArray[i];
-                Assert.True(readOnlyCol.Contains(item), "ReadOnlyCol did not contain item: " + anArray[i] + " at index: " + i);
+                Assert.True(
+                    readOnlyCol.Contains(item),
+                    "ReadOnlyCol did not contain item: " + anArray[i] + " at index: " + i
+                );
             }
 
-            Assert.False(readOnlyCol.Contains("randomItem"), "ReadOnlyCol should not have contained non-existent item");
+            Assert.False(
+                readOnlyCol.Contains("randomItem"),
+                "ReadOnlyCol should not have contained non-existent item"
+            );
             Assert.False(readOnlyCol.Contains(null), "ReadOnlyCol should not have contained null");
         }
 
@@ -104,9 +128,15 @@ namespace System.Collections.ObjectModel.Tests
             {
                 string value = aCopy[i];
                 if (i == 0)
-                    Assert.True(null == value, "Should not have a value since we did not start copying there.");
+                    Assert.True(
+                        null == value,
+                        "Should not have a value since we did not start copying there."
+                    );
                 else if (i == (aCopy.Length - 1))
-                    Assert.True(null == value, "Should not have a value since the collection is shorter than the copy array..");
+                    Assert.True(
+                        null == value,
+                        "Should not have a value since the collection is shorter than the copy array.."
+                    );
                 else
                 {
                     int indexInCollection = i - offsetIndex;
@@ -129,27 +159,66 @@ namespace System.Collections.ObjectModel.Tests
             string[] anArray = new string[] { "one", "two", "three", "four" };
             ReadOnlyObservableCollection<string> readOnlyCol =
                 new ReadOnlyObservableCollection<string>(new ObservableCollection<string>(anArray));
-            int[] iArrInvalidValues = new int[] { -1, -2, -100, -1000, -10000, -100000, -1000000, -10000000, -100000000, -1000000000, int.MinValue };
+            int[] iArrInvalidValues = new int[]
+            {
+                -1,
+                -2,
+                -100,
+                -1000,
+                -10000,
+                -100000,
+                -1000000,
+                -10000000,
+                -100000000,
+                -1000000000,
+                int.MinValue,
+            };
             foreach (var index in iArrInvalidValues)
             {
                 string[] aCopy = new string[anArray.Length];
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("destinationIndex", "dstIndex", () => readOnlyCol.CopyTo(aCopy, index));
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "destinationIndex",
+                    "dstIndex",
+                    () => readOnlyCol.CopyTo(aCopy, index)
+                );
             }
 
-            int[] iArrLargeValues = new int[] { anArray.Length, int.MaxValue, int.MaxValue / 2, int.MaxValue / 10 };
+            int[] iArrLargeValues = new int[]
+            {
+                anArray.Length,
+                int.MaxValue,
+                int.MaxValue / 2,
+                int.MaxValue / 10,
+            };
             foreach (var index in iArrLargeValues)
             {
                 string[] aCopy = new string[anArray.Length];
-                AssertExtensions.Throws<ArgumentException>("destinationArray", null, () => readOnlyCol.CopyTo(aCopy, index));
+                AssertExtensions.Throws<ArgumentException>(
+                    "destinationArray",
+                    null,
+                    () => readOnlyCol.CopyTo(aCopy, index)
+                );
             }
 
-            AssertExtensions.Throws<ArgumentNullException>("destinationArray", "dest", () => readOnlyCol.CopyTo(null, 1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "destinationArray",
+                "dest",
+                () => readOnlyCol.CopyTo(null, 1)
+            );
 
             string[] copy = new string[anArray.Length - 1];
-            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () => readOnlyCol.CopyTo(copy, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                "destinationArray",
+                "",
+                () => readOnlyCol.CopyTo(copy, 0)
+            );
 
             copy = new string[0];
-            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () => readOnlyCol.CopyTo(copy, 0));
+            AssertExtensions.Throws<ArgumentException>(
+                "destinationArray",
+                "",
+                () => readOnlyCol.CopyTo(copy, 0)
+            );
         }
 
         /// <summary>
@@ -173,7 +242,8 @@ namespace System.Collections.ObjectModel.Tests
             ObservableCollection<int> intCol = new ObservableCollection<int>();
             for (int i = 0; i < 4; ++i)
                 intCol.Add(i % 2);
-            ReadOnlyObservableCollection<int> intReadOnlyCol = new ReadOnlyObservableCollection<int>(intCol);
+            ReadOnlyObservableCollection<int> intReadOnlyCol =
+                new ReadOnlyObservableCollection<int>(intCol);
 
             Assert.Equal(0, intReadOnlyCol.IndexOf(0));
             Assert.Equal(1, intReadOnlyCol.IndexOf(1));
@@ -205,23 +275,47 @@ namespace System.Collections.ObjectModel.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/57588", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/57588",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public static void DebuggerAttribute_Tests()
         {
-            ReadOnlyObservableCollection<int> col = new ReadOnlyObservableCollection<int>(new ObservableCollection<int>(new[] {1, 2, 3, 4}));
+            ReadOnlyObservableCollection<int> col = new ReadOnlyObservableCollection<int>(
+                new ObservableCollection<int>(new[] { 1, 2, 3, 4 })
+            );
             DebuggerAttributes.ValidateDebuggerDisplayReferences(col);
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(col);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                col
+            );
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                == DebuggerBrowsableState.RootHidden
+            );
             int[] items = itemProperty.GetValue(info.Instance) as int[];
             Assert.Equal(col, items);
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/57588", typeof(PlatformDetection), nameof(PlatformDetection.IsBuiltWithAggressiveTrimming), nameof(PlatformDetection.IsBrowser))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/57588",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBuiltWithAggressiveTrimming),
+            nameof(PlatformDetection.IsBrowser)
+        )]
         public static void DebuggerAttribute_NullCollection_ThrowsArgumentNullException()
         {
-            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() => DebuggerAttributes.ValidateDebuggerTypeProxyProperties(typeof(ReadOnlyObservableCollection<int>), null));
-            ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(ex.InnerException);
+            TargetInvocationException ex = Assert.Throws<TargetInvocationException>(() =>
+                DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                    typeof(ReadOnlyObservableCollection<int>),
+                    null
+                )
+            );
+            ArgumentNullException argumentNullException = Assert.IsType<ArgumentNullException>(
+                ex.InnerException
+            );
         }
     }
 
@@ -241,10 +335,7 @@ namespace System.Collections.ObjectModel.Tests
             _expectedItems = expectedItems;
         }
 
-        public IReadOnlyList_T_Test()
-        {
-
-        }
+        public IReadOnlyList_T_Test() { }
 
         /// <summary>
         /// This verifies that the collection contains the expected items.
@@ -272,7 +363,10 @@ namespace System.Collections.ObjectModel.Tests
         public void Item_get_Tests_Negative()
         {
             // Verify get_Item with index=Int32.MinValue
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => _collection[int.MinValue]);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => _collection[int.MinValue]
+            );
 
             // Verify that the collection was not mutated
             VerifyReadOnlyCollection(_collection, _expectedItems);
@@ -294,7 +388,10 @@ namespace System.Collections.ObjectModel.Tests
             else
             {
                 // Verify get_Item with index=Count on Empty collection
-                AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => _collection[_expectedItems.Length]);
+                AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                    "index",
+                    () => _collection[_expectedItems.Length]
+                );
 
                 // Verify that the collection was not mutated
                 VerifyReadOnlyCollection(_collection, _expectedItems);
@@ -343,8 +440,14 @@ namespace System.Collections.ObjectModel.Tests
                 T tempItem;
 
                 // Verify we have not gotten more items then we expected
-                Assert.True(iterations < expectedCount,
-                    "Err_9844awpa More items have been returned from the enumerator(" + iterations + " items) than are in the expectedElements(" + expectedCount + " items)");
+                Assert.True(
+                    iterations < expectedCount,
+                    "Err_9844awpa More items have been returned from the enumerator("
+                        + iterations
+                        + " items) than are in the expectedElements("
+                        + expectedCount
+                        + " items)"
+                );
 
                 // Verify Current returned the correct value
                 Assert.Equal(currentItem, expectedItems[iterations]);
@@ -363,7 +466,12 @@ namespace System.Collections.ObjectModel.Tests
 
             for (int i = 0; i < 3; i++)
             {
-                Assert.False(enumerator.MoveNext(), "Err_2929ahiea Expected MoveNext to return false after" + iterations + " iterations");
+                Assert.False(
+                    enumerator.MoveNext(),
+                    "Err_2929ahiea Expected MoveNext to return false after"
+                        + iterations
+                        + " iterations"
+                );
             }
 
             enumerator.Dispose();
@@ -388,8 +496,14 @@ namespace System.Collections.ObjectModel.Tests
                 object tempItem;
 
                 // Verify we have not gotten more items then we expected
-                Assert.True(iterations < expectedCount,
-                    "Err_9844awpa More items have been returned from the enumerator(" + iterations + " items) then are in the expectedElements(" + expectedCount + " items)");
+                Assert.True(
+                    iterations < expectedCount,
+                    "Err_9844awpa More items have been returned from the enumerator("
+                        + iterations
+                        + " items) then are in the expectedElements("
+                        + expectedCount
+                        + " items)"
+                );
 
                 // Verify Current returned the correct value
                 itemFound = false;
@@ -403,7 +517,10 @@ namespace System.Collections.ObjectModel.Tests
                         break;
                     }
                 }
-                Assert.True(itemFound, "Err_1432pauy Current returned unexpected value=" + currentItem);
+                Assert.True(
+                    itemFound,
+                    "Err_1432pauy Current returned unexpected value=" + currentItem
+                );
 
                 // Verify Current always returns the same value every time it is called
                 for (int i = 0; i < 3; i++)
@@ -417,14 +534,25 @@ namespace System.Collections.ObjectModel.Tests
 
             for (int i = 0; i < expectedCount; ++i)
             {
-                Assert.True(itemsVisited[i], "Err_052848ahiedoi Expected Current to return true for item: " + expectedItems[i] + "index: " + i);
+                Assert.True(
+                    itemsVisited[i],
+                    "Err_052848ahiedoi Expected Current to return true for item: "
+                        + expectedItems[i]
+                        + "index: "
+                        + i
+                );
             }
 
             Assert.Equal(expectedCount, iterations);
 
             for (int i = 0; i < 3; i++)
             {
-                Assert.False(enumerator.MoveNext(), "Err_2929ahiea Expected MoveNext to return false after" + iterations + " iterations");
+                Assert.False(
+                    enumerator.MoveNext(),
+                    "Err_2929ahiea Expected MoveNext to return false after"
+                        + iterations
+                        + " iterations"
+                );
             }
         }
         #endregion

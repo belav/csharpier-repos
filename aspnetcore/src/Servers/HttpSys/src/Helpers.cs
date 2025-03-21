@@ -19,7 +19,9 @@ internal static class Helpers
         }
 
         // Greater than 2gb, perf is no longer our concern
-        return new ArraySegment<byte>(Encoding.ASCII.GetBytes(size.ToString("X", CultureInfo.InvariantCulture) + "\r\n"));
+        return new ArraySegment<byte>(
+            Encoding.ASCII.GetBytes(size.ToString("X", CultureInfo.InvariantCulture) + "\r\n")
+        );
     }
 
     /// <summary>

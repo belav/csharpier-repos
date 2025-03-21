@@ -1,23 +1,23 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
-    using System.Diagnostics;
-    using System.Windows.Forms;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Windows.Forms;
 
     #region Class WorkflowDesignerMessageFilter
     //All Coordinates passed in physical coordinate system
     //Some of the functions will have coordinates in screen coordinates ie ShowContextMenu
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class WorkflowDesignerMessageFilter : IDisposable, IWorkflowDesignerMessageSink
     {
         #region Members and Contructor/Destruction
         private WorkflowView parentView;
 
-        protected WorkflowDesignerMessageFilter()
-        {
-        }
+        protected WorkflowDesignerMessageFilter() { }
 
         ~WorkflowDesignerMessageFilter()
         {
@@ -37,9 +37,7 @@ namespace System.Workflow.ComponentModel.Design
             this.parentView = parentView;
         }
 
-        protected virtual void Dispose(bool disposing)
-        {
-        }
+        protected virtual void Dispose(bool disposing) { }
 
         protected virtual bool OnMouseDown(MouseEventArgs eventArgs)
         {
@@ -136,12 +134,20 @@ namespace System.Workflow.ComponentModel.Design
             return false;
         }
 
-        protected virtual bool OnPaint(PaintEventArgs eventArgs, Rectangle viewPort, AmbientTheme ambientTheme)
+        protected virtual bool OnPaint(
+            PaintEventArgs eventArgs,
+            Rectangle viewPort,
+            AmbientTheme ambientTheme
+        )
         {
             return false;
         }
 
-        protected virtual bool OnPaintWorkflowAdornments(PaintEventArgs eventArgs, Rectangle viewPort, AmbientTheme ambientTheme)
+        protected virtual bool OnPaintWorkflowAdornments(
+            PaintEventArgs eventArgs,
+            Rectangle viewPort,
+            AmbientTheme ambientTheme
+        )
         {
             return false;
         }
@@ -151,20 +157,13 @@ namespace System.Workflow.ComponentModel.Design
             return false;
         }
 
-        protected virtual void OnLayout(LayoutEventArgs eventArgs)
-        {
-        }
+        protected virtual void OnLayout(LayoutEventArgs eventArgs) { }
 
-        protected virtual void OnThemeChange()
-        {
-        }
+        protected virtual void OnThemeChange() { }
 
         protected WorkflowView ParentView
         {
-            get
-            {
-                return this.parentView;
-            }
+            get { return this.parentView; }
         }
 
         protected HitTestInfo MessageHitTestContext
@@ -203,9 +202,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnMouseDown(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -217,9 +214,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnMouseMove(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -231,9 +226,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnMouseUp(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -245,9 +238,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnMouseDoubleClick(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -259,9 +250,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnMouseEnter(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -273,9 +262,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnMouseHover(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -287,9 +274,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnMouseLeave();
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -301,9 +286,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnMouseWheel(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -315,14 +298,15 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnMouseCaptureChanged();
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
 
-        bool IWorkflowDesignerMessageSink.OnMouseDragBegin(Point initialPoint, MouseEventArgs eventArgs)
+        bool IWorkflowDesignerMessageSink.OnMouseDragBegin(
+            Point initialPoint,
+            MouseEventArgs eventArgs
+        )
         {
             //This message is not used in MessageFilters
             return false;
@@ -347,9 +331,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnDragEnter(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -361,9 +343,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnDragOver(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -375,9 +355,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnDragLeave();
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -389,9 +367,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnDragDrop(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -403,9 +379,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnGiveFeedback(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -417,9 +391,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnQueryContinueDrag(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -431,9 +403,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnKeyDown(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -445,9 +415,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnKeyUp(eventArgs);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -459,9 +427,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnScroll(sender, value);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -473,9 +439,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnShowContextMenu(screenMenuPoint);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -487,23 +451,26 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = OnPaint(eventArgs, viewPort, WorkflowTheme.CurrentTheme.AmbientTheme);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
 
-        bool IWorkflowDesignerMessageSink.OnPaintWorkflowAdornments(PaintEventArgs eventArgs, Rectangle viewPort)
+        bool IWorkflowDesignerMessageSink.OnPaintWorkflowAdornments(
+            PaintEventArgs eventArgs,
+            Rectangle viewPort
+        )
         {
             bool handled = false;
             try
             {
-                handled = OnPaintWorkflowAdornments(eventArgs, viewPort, WorkflowTheme.CurrentTheme.AmbientTheme);
+                handled = OnPaintWorkflowAdornments(
+                    eventArgs,
+                    viewPort,
+                    WorkflowTheme.CurrentTheme.AmbientTheme
+                );
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -515,9 +482,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 handled = ProcessMessage(message);
             }
-            catch
-            {
-            }
+            catch { }
 
             return handled;
         }
@@ -528,9 +493,7 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnLayout(layoutEventArgs);
             }
-            catch
-            {
-            }
+            catch { }
         }
 
         void IWorkflowDesignerMessageSink.OnLayoutPosition(Graphics graphics)
@@ -549,22 +512,14 @@ namespace System.Workflow.ComponentModel.Design
             {
                 OnThemeChange();
             }
-            catch
-            {
-            }
+            catch { }
         }
 
-        void IWorkflowDesignerMessageSink.OnBeginResizing(DesignerEdges sizingEdge)
-        {
-        }
+        void IWorkflowDesignerMessageSink.OnBeginResizing(DesignerEdges sizingEdge) { }
 
-        void IWorkflowDesignerMessageSink.OnResizing(DesignerEdges sizingEdge, Rectangle bounds)
-        {
-        }
+        void IWorkflowDesignerMessageSink.OnResizing(DesignerEdges sizingEdge, Rectangle bounds) { }
 
-        void IWorkflowDesignerMessageSink.OnEndResizing()
-        {
-        }
+        void IWorkflowDesignerMessageSink.OnEndResizing() { }
         #endregion
     }
     #endregion

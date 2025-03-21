@@ -7,8 +7,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace System.Collections.Generic
 {
     internal sealed class BidirectionalDictionary<T1, T2> : IEnumerable<KeyValuePair<T1, T2>>
-            where T1 : notnull
-            where T2 : notnull
+        where T1 : notnull
+        where T2 : notnull
     {
         private readonly Dictionary<T1, T2> _forward;
         private readonly Dictionary<T2, T1> _backward;
@@ -23,14 +23,20 @@ namespace System.Collections.Generic
         {
             get
             {
-                Debug.Assert(_forward.Count == _backward.Count, "both the dictionaries must have the same number of elements");
+                Debug.Assert(
+                    _forward.Count == _backward.Count,
+                    "both the dictionaries must have the same number of elements"
+                );
                 return _forward.Count;
             }
         }
 
         public void Add(T1 item1, T2 item2)
         {
-            Debug.Assert(!_backward.ContainsKey(item2), "No added item1 should ever have existing item2");
+            Debug.Assert(
+                !_backward.ContainsKey(item2),
+                "No added item1 should ever have existing item2"
+            );
             _forward.Add(item1, item2);
             _backward.Add(item2, item1);
         }

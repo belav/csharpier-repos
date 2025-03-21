@@ -13,7 +13,10 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 {
     public static class Pkcs12InfoTests
     {
-        private static ReadOnlyMemory<byte> PadContents(ReadOnlyMemory<byte> contents, int trailingByteCount)
+        private static ReadOnlyMemory<byte> PadContents(
+            ReadOnlyMemory<byte> contents,
+            int trailingByteCount
+        )
         {
             if (trailingByteCount < 0)
                 throw new ArgumentOutOfRangeException(nameof(trailingByteCount));
@@ -37,8 +40,7 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         {
             ReadOnlyMemory<byte> source = PadContents(Pkcs12Documents.EmptyPfx, trailingByteCount);
 
-            Pkcs12Info info =
-                Pkcs12Info.Decode(source, out int bytesRead, skipCopy: true);
+            Pkcs12Info info = Pkcs12Info.Decode(source, out int bytesRead, skipCopy: true);
 
             Assert.Equal(Pkcs12Documents.EmptyPfx.Length, bytesRead);
             Assert.Equal(Pkcs12IntegrityMode.Password, info.IntegrityMode);
@@ -64,12 +66,12 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         [InlineData(100)]
         public static void ReadIndefiniteEncodingNoMac(int trailingByteCount)
         {
-            ReadOnlyMemory<byte> source = PadContents(Pkcs12Documents.IndefiniteEncodingNoMac, trailingByteCount);
+            ReadOnlyMemory<byte> source = PadContents(
+                Pkcs12Documents.IndefiniteEncodingNoMac,
+                trailingByteCount
+            );
 
-            Pkcs12Info info = Pkcs12Info.Decode(
-                source,
-                out int bytesRead,
-                skipCopy: true);
+            Pkcs12Info info = Pkcs12Info.Decode(source, out int bytesRead, skipCopy: true);
 
             Assert.Equal(Pkcs12Documents.IndefiniteEncodingNoMac.Length, bytesRead);
             Assert.Equal(Pkcs12IntegrityMode.None, info.IntegrityMode);
@@ -106,8 +108,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Assert.Equal(Oids.LocalKeyId, keyBagAttrs[1].Oid.Value);
             Assert.Equal(1, keyBagAttrs[1].Values.Count);
 
-            Pkcs9AttributeObject keyFriendlyName =
-                Assert.IsAssignableFrom<Pkcs9AttributeObject>(keyBagAttrs[0].Values[0]);
+            Pkcs9AttributeObject keyFriendlyName = Assert.IsAssignableFrom<Pkcs9AttributeObject>(
+                keyBagAttrs[0].Values[0]
+            );
 
             Pkcs9LocalKeyId keyKeyId = Assert.IsType<Pkcs9LocalKeyId>(keyBagAttrs[1].Values[0]);
 
@@ -116,8 +119,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Assert.Equal(Oids.LocalKeyId, certBagAttrs[1].Oid.Value);
             Assert.Equal(1, certBagAttrs[1].Values.Count);
 
-            Pkcs9AttributeObject certFriendlyName =
-                Assert.IsAssignableFrom<Pkcs9AttributeObject>(certBagAttrs[0].Values[0]);
+            Pkcs9AttributeObject certFriendlyName = Assert.IsAssignableFrom<Pkcs9AttributeObject>(
+                certBagAttrs[0].Values[0]
+            );
 
             Pkcs9LocalKeyId certKeyId = Assert.IsType<Pkcs9LocalKeyId>(certBagAttrs[1].Values[0]);
 
@@ -126,8 +130,14 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Assert.Equal(keyFriendlyName.RawData, certFriendlyName.RawData);
 
             // The private key (KeyBag) and the public key (CertBag) are matched from their keyId value.
-            Assert.Equal("0414EDF3D122CF623CF0CFC9CD226261E8415A83E630", keyKeyId.RawData.ByteArrayToHex());
-            Assert.Equal("EDF3D122CF623CF0CFC9CD226261E8415A83E630", keyKeyId.KeyId.ByteArrayToHex());
+            Assert.Equal(
+                "0414EDF3D122CF623CF0CFC9CD226261E8415A83E630",
+                keyKeyId.RawData.ByteArrayToHex()
+            );
+            Assert.Equal(
+                "EDF3D122CF623CF0CFC9CD226261E8415A83E630",
+                keyKeyId.KeyId.ByteArrayToHex()
+            );
             Assert.Equal(keyKeyId.RawData, certKeyId.RawData);
 
             using (X509Certificate2 cert = certBag.GetCertificate())
@@ -138,7 +148,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
 
                 Assert.Equal(
                     publicKey.ExportSubjectPublicKeyInfo().ByteArrayToHex(),
-                    privateKey.ExportSubjectPublicKeyInfo().ByteArrayToHex());
+                    privateKey.ExportSubjectPublicKeyInfo().ByteArrayToHex()
+                );
             }
         }
 
@@ -148,18 +159,21 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         [InlineData(100)]
         public static void ReadOracleWallet(int trailingByteCount)
         {
-            ReadOnlyMemory<byte> source = PadContents(Pkcs12Documents.SimpleOracleWallet, trailingByteCount);
+            ReadOnlyMemory<byte> source = PadContents(
+                Pkcs12Documents.SimpleOracleWallet,
+                trailingByteCount
+            );
 
-            Pkcs12Info info = Pkcs12Info.Decode(
-                source,
-                out int bytesRead,
-                skipCopy: true);
+            Pkcs12Info info = Pkcs12Info.Decode(source, out int bytesRead, skipCopy: true);
 
             Assert.Equal(Pkcs12Documents.SimpleOracleWallet.Length, bytesRead);
             Assert.Equal(Pkcs12IntegrityMode.Password, info.IntegrityMode);
             Assert.False(info.VerifyMac(ReadOnlySpan<char>.Empty), "VerifyMac(no password)");
             Assert.False(info.VerifyMac(""), "VerifyMac(empty password)");
-            Assert.True(info.VerifyMac(Pkcs12Documents.OracleWalletPassword), "VerifyMac(correct password)");
+            Assert.True(
+                info.VerifyMac(Pkcs12Documents.OracleWalletPassword),
+                "VerifyMac(correct password)"
+            );
 
             ReadOnlyCollection<Pkcs12SafeContents> authSafes = info.AuthenticatedSafe;
             Assert.Equal(1, authSafes.Count);
@@ -167,7 +181,9 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             Pkcs12SafeContents authSafe = authSafes[0];
             Assert.Equal(Pkcs12ConfidentialityMode.Password, authSafe.ConfidentialityMode);
             // Wrong password
-            Assert.ThrowsAny<CryptographicException>(() => authSafe.Decrypt(ReadOnlySpan<char>.Empty));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                authSafe.Decrypt(ReadOnlySpan<char>.Empty)
+            );
             authSafe.Decrypt(Pkcs12Documents.OracleWalletPassword);
 
             Assert.Equal(Pkcs12ConfidentialityMode.None, authSafe.ConfidentialityMode);
@@ -179,38 +195,45 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
                 bags[0],
                 "oracle.security.client.connect_string1",
                 "a_prod_db",
-                "E6B652DD0000000400000000000000060000000300000000");
+                "E6B652DD0000000400000000000000060000000300000000"
+            );
 
             CheckOracleSecretBag(
                 bags[1],
-                "a@#3#@b", "{pwd_cred_type}@#4#@NEVER_EXPIRE@#5#@c@#111#@d",
-                "E6B652DD0000000400000000000000060000000200000000");
+                "a@#3#@b",
+                "{pwd_cred_type}@#4#@NEVER_EXPIRE@#5#@c@#111#@d",
+                "E6B652DD0000000400000000000000060000000200000000"
+            );
 
             CheckOracleSecretBag(
                 bags[2],
                 "oracle.security.client.username1",
                 "a_test_user",
-                "E6B652DD0000000400000000000000060000000100000000");
+                "E6B652DD0000000400000000000000060000000100000000"
+            );
 
             CheckOracleSecretBag(
                 bags[3],
                 "oracle.security.client.password1",
                 "potatos are tasty",
-                "E6B652DD0000000400000000000000060000000000000000");
+                "E6B652DD0000000400000000000000060000000000000000"
+            );
         }
 
         private static void CheckOracleSecretBag(
             Pkcs12SafeBag safeBag,
             string key,
             string value,
-            string keyId)
+            string keyId
+        )
         {
             Pkcs12SecretBag secretBag = Assert.IsType<Pkcs12SecretBag>(safeBag);
             Assert.Equal("1.2.840.113549.1.16.12.12", secretBag.GetSecretType().Value);
 
             Assert.Equal(
                 MakeOracleKeyValuePairHex(key, value),
-                secretBag.SecretValue.ByteArrayToHex());
+                secretBag.SecretValue.ByteArrayToHex()
+            );
 
             CryptographicAttributeObjectCollection attrs = secretBag.Attributes;
             Assert.Equal(1, attrs.Count);
@@ -248,10 +271,13 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         [Fact]
         public static void VerifyMacWithNoMac()
         {
-            const string FullyEmptyHex =
-                "3016020103301106092A864886F70D010701A00404023000";
+            const string FullyEmptyHex = "3016020103301106092A864886F70D010701A00404023000";
 
-            Pkcs12Info info = Pkcs12Info.Decode(FullyEmptyHex.HexToByteArray(), out _, skipCopy: true);
+            Pkcs12Info info = Pkcs12Info.Decode(
+                FullyEmptyHex.HexToByteArray(),
+                out _,
+                skipCopy: true
+            );
             Assert.Equal(Pkcs12IntegrityMode.None, info.IntegrityMode);
 
             Assert.Throws<InvalidOperationException>(() => info.VerifyMac("hi"));
@@ -262,7 +288,8 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         public static void DecodeWithHighPbeIterations(
             PbeEncryptionAlgorithm encryptionAlgorithm,
             HashAlgorithmName hashAlgorithmName,
-            int iterations)
+            int iterations
+        )
         {
             string pw = nameof(CreateAndSealPkcs12);
             byte[] data = CreateAndSealPkcs12(encryptionAlgorithm, hashAlgorithmName, iterations);
@@ -274,7 +301,11 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
         public static void DecodeWithTooManyPbeIterations()
         {
             const string pw = "test";
-            Pkcs12Info info = Pkcs12Info.Decode(Pkcs12Documents.HighPbeIterationCount3Des, out _, skipCopy: true);
+            Pkcs12Info info = Pkcs12Info.Decode(
+                Pkcs12Documents.HighPbeIterationCount3Des,
+                out _,
+                skipCopy: true
+            );
             foreach (Pkcs12SafeContents contents in info.AuthenticatedSafe)
             {
                 if (contents.ConfidentialityMode == Pkcs12ConfidentialityMode.None)
@@ -292,22 +323,44 @@ namespace System.Security.Cryptography.Pkcs.Tests.Pkcs12
             {
                 // On Android, the tests run out of memory when running DecodeWithHighPbeIterations and causes a crash in CI
                 // Instead of disabling the whole suite, we opted to reduce the number of iterations to help the tests pass
-                yield return new object[] { PbeEncryptionAlgorithm.Aes128Cbc, HashAlgorithmName.SHA256, OperatingSystem.IsAndroid() ? 7000 : 700_000 };
-                yield return new object[] { PbeEncryptionAlgorithm.Aes192Cbc, HashAlgorithmName.SHA256, OperatingSystem.IsAndroid() ? 7000 : 700_000 };
-                yield return new object[] { PbeEncryptionAlgorithm.Aes256Cbc, HashAlgorithmName.SHA256, OperatingSystem.IsAndroid() ? 7000 : 700_000 };
-                yield return new object[] { PbeEncryptionAlgorithm.TripleDes3KeyPkcs12, HashAlgorithmName.SHA1, OperatingSystem.IsAndroid() ? 6000 : 600_000 };
+                yield return new object[]
+                {
+                    PbeEncryptionAlgorithm.Aes128Cbc,
+                    HashAlgorithmName.SHA256,
+                    OperatingSystem.IsAndroid() ? 7000 : 700_000,
+                };
+                yield return new object[]
+                {
+                    PbeEncryptionAlgorithm.Aes192Cbc,
+                    HashAlgorithmName.SHA256,
+                    OperatingSystem.IsAndroid() ? 7000 : 700_000,
+                };
+                yield return new object[]
+                {
+                    PbeEncryptionAlgorithm.Aes256Cbc,
+                    HashAlgorithmName.SHA256,
+                    OperatingSystem.IsAndroid() ? 7000 : 700_000,
+                };
+                yield return new object[]
+                {
+                    PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
+                    HashAlgorithmName.SHA1,
+                    OperatingSystem.IsAndroid() ? 6000 : 600_000,
+                };
             }
         }
 
         private static byte[] CreateAndSealPkcs12(
             PbeEncryptionAlgorithm encryptionAlgorithm,
             HashAlgorithmName hashAlgorithmName,
-            int iterations)
+            int iterations
+        )
         {
             PbeParameters pbeParameters = new PbeParameters(
                 encryptionAlgorithm,
                 hashAlgorithmName,
-                iterations);
+                iterations
+            );
 
             using RSA rsa = RSA.Create();
             string pw = nameof(CreateAndSealPkcs12);

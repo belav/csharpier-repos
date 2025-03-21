@@ -32,20 +32,37 @@ namespace System.Linq.Tests
 
             Assert.Same(emptySourceArray.ToArray(), emptySourceArray.ToArray());
 
-            Assert.Same(emptySourceArray.Select(i => i).ToArray(), emptySourceArray.Select(i => i).ToArray());
-            Assert.Same(emptySourceArray.ToList().Select(i => i).ToArray(), emptySourceArray.ToList().Select(i => i).ToArray());
-            Assert.Same(new Collection<int>(emptySourceArray).Select(i => i).ToArray(), new Collection<int>(emptySourceArray).Select(i => i).ToArray());
-            Assert.Same(emptySourceArray.OrderBy(i => i).ToArray(), emptySourceArray.OrderBy(i => i).ToArray());
+            Assert.Same(
+                emptySourceArray.Select(i => i).ToArray(),
+                emptySourceArray.Select(i => i).ToArray()
+            );
+            Assert.Same(
+                emptySourceArray.ToList().Select(i => i).ToArray(),
+                emptySourceArray.ToList().Select(i => i).ToArray()
+            );
+            Assert.Same(
+                new Collection<int>(emptySourceArray).Select(i => i).ToArray(),
+                new Collection<int>(emptySourceArray).Select(i => i).ToArray()
+            );
+            Assert.Same(
+                emptySourceArray.OrderBy(i => i).ToArray(),
+                emptySourceArray.OrderBy(i => i).ToArray()
+            );
 
             Assert.Same(Enumerable.Range(5, 0).ToArray(), Enumerable.Range(3, 0).ToArray());
             Assert.Same(Enumerable.Range(5, 3).Take(0).ToArray(), Enumerable.Range(3, 0).ToArray());
             Assert.Same(Enumerable.Range(5, 3).Skip(3).ToArray(), Enumerable.Range(3, 0).ToArray());
 
             Assert.Same(Enumerable.Repeat(42, 0).ToArray(), Enumerable.Range(84, 0).ToArray());
-            Assert.Same(Enumerable.Repeat(42, 3).Take(0).ToArray(), Enumerable.Range(84, 3).Take(0).ToArray());
-            Assert.Same(Enumerable.Repeat(42, 3).Skip(3).ToArray(), Enumerable.Range(84, 3).Skip(3).ToArray());
+            Assert.Same(
+                Enumerable.Repeat(42, 3).Take(0).ToArray(),
+                Enumerable.Range(84, 3).Take(0).ToArray()
+            );
+            Assert.Same(
+                Enumerable.Repeat(42, 3).Skip(3).ToArray(),
+                Enumerable.Range(84, 3).Skip(3).ToArray()
+            );
         }
-
 
         private void RunToArrayOnAllCollectionTypes<T>(T[] items, Action<T[]> validation)
         {
@@ -56,46 +73,55 @@ namespace System.Linq.Tests
             validation(new TestCollection<T>(items).ToArray());
         }
 
-
         [Fact]
         public void ToArray_WorkWithEmptyCollection()
         {
-            RunToArrayOnAllCollectionTypes(new int[0],
+            RunToArrayOnAllCollectionTypes(
+                new int[0],
                 resultArray =>
                 {
                     Assert.NotNull(resultArray);
                     Assert.Equal(0, resultArray.Length);
-                });
+                }
+            );
         }
 
         [Fact]
         public void ToArray_ProduceCorrectArray()
         {
             int[] sourceArray = new int[] { 1, 2, 3, 4, 5, 6, 7 };
-            RunToArrayOnAllCollectionTypes(sourceArray,
+            RunToArrayOnAllCollectionTypes(
+                sourceArray,
                 resultArray =>
                 {
                     Assert.Equal(sourceArray.Length, resultArray.Length);
                     Assert.Equal(sourceArray, resultArray);
-                });
+                }
+            );
 
             string[] sourceStringArray = new string[] { "1", "2", "3", "4", "5", "6", "7", "8" };
-            RunToArrayOnAllCollectionTypes(sourceStringArray,
+            RunToArrayOnAllCollectionTypes(
+                sourceStringArray,
                 resultStringArray =>
                 {
                     Assert.Equal(sourceStringArray.Length, resultStringArray.Length);
                     for (int i = 0; i < sourceStringArray.Length; i++)
                         Assert.Same(sourceStringArray[i], resultStringArray[i]);
-                });
+                }
+            );
         }
 
         [Fact]
         public void RunOnce()
         {
-            Assert.Equal(new int[] {1, 2, 3, 4, 5, 6, 7}, Enumerable.Range(1, 7).RunOnce().ToArray());
             Assert.Equal(
-                new string[] {"1", "2", "3", "4", "5", "6", "7", "8"},
-                Enumerable.Range(1, 8).Select(i => i.ToString()).RunOnce().ToArray());
+                new int[] { 1, 2, 3, 4, 5, 6, 7 },
+                Enumerable.Range(1, 7).RunOnce().ToArray()
+            );
+            Assert.Equal(
+                new string[] { "1", "2", "3", "4", "5", "6", "7", "8" },
+                Enumerable.Range(1, 8).Select(i => i.ToString()).RunOnce().ToArray()
+            );
         }
 
         [Fact]
@@ -107,7 +133,6 @@ namespace System.Linq.Tests
             Assert.Equal(source, resultArray);
             Assert.Equal(1, source.CountTouched);
         }
-
 
         [Fact]
         public void ToArray_ThrowArgumentNullExceptionWhenSourceIsNull()
@@ -131,8 +156,14 @@ namespace System.Linq.Tests
         public void ToArray_FailOnExtremelyLargeCollection()
         {
             var largeSeq = new FastInfiniteEnumerator<byte>();
-            var thrownException = Assert.ThrowsAny<Exception>(() => { largeSeq.ToArray(); });
-            Assert.True(thrownException.GetType() == typeof(OverflowException) || thrownException.GetType() == typeof(OutOfMemoryException));
+            var thrownException = Assert.ThrowsAny<Exception>(() =>
+            {
+                largeSeq.ToArray();
+            });
+            Assert.True(
+                thrownException.GetType() == typeof(OverflowException)
+                    || thrownException.GetType() == typeof(OutOfMemoryException)
+            );
         }
 
         [Theory]
@@ -146,11 +177,23 @@ namespace System.Linq.Tests
             Assert.Equal(sourceIntegers, sourceIntegers.Where(i => true).ToArray());
             Assert.Equal(Array.Empty<int>(), sourceIntegers.Where(i => false).ToArray());
 
-            Assert.Equal(convertedStrings, sourceIntegers.Where(i => true).Select(i => i.ToString()).ToArray());
-            Assert.Equal(Array.Empty<string>(), sourceIntegers.Where(i => false).Select(i => i.ToString()).ToArray());
+            Assert.Equal(
+                convertedStrings,
+                sourceIntegers.Where(i => true).Select(i => i.ToString()).ToArray()
+            );
+            Assert.Equal(
+                Array.Empty<string>(),
+                sourceIntegers.Where(i => false).Select(i => i.ToString()).ToArray()
+            );
 
-            Assert.Equal(convertedStrings, sourceIntegers.Select(i => i.ToString()).Where(s => s != null).ToArray());
-            Assert.Equal(Array.Empty<string>(), sourceIntegers.Select(i => i.ToString()).Where(s => s == null).ToArray());
+            Assert.Equal(
+                convertedStrings,
+                sourceIntegers.Select(i => i.ToString()).Where(s => s != null).ToArray()
+            );
+            Assert.Equal(
+                Array.Empty<string>(),
+                sourceIntegers.Select(i => i.ToString()).Where(s => s == null).ToArray()
+            );
         }
 
         [Theory]
@@ -166,19 +209,32 @@ namespace System.Linq.Tests
             Assert.Equal(sourceList, sourceList.Where(i => true).ToArray());
             Assert.Equal(Array.Empty<int>(), sourceList.Where(i => false).ToArray());
 
-            Assert.Equal(convertedStrings, sourceList.Where(i => true).Select(i => i.ToString()).ToArray());
-            Assert.Equal(Array.Empty<string>(), sourceList.Where(i => false).Select(i => i.ToString()).ToArray());
+            Assert.Equal(
+                convertedStrings,
+                sourceList.Where(i => true).Select(i => i.ToString()).ToArray()
+            );
+            Assert.Equal(
+                Array.Empty<string>(),
+                sourceList.Where(i => false).Select(i => i.ToString()).ToArray()
+            );
 
-            Assert.Equal(convertedStrings, sourceList.Select(i => i.ToString()).Where(s => s != null).ToArray());
-            Assert.Equal(Array.Empty<string>(), sourceList.Select(i => i.ToString()).Where(s => s == null).ToArray());
+            Assert.Equal(
+                convertedStrings,
+                sourceList.Select(i => i.ToString()).Where(s => s != null).ToArray()
+            );
+            Assert.Equal(
+                Array.Empty<string>(),
+                sourceList.Select(i => i.ToString()).Where(s => s == null).ToArray()
+            );
         }
 
         [Fact]
         public void SameResultsRepeatCallsFromWhereOnIntQuery()
         {
-            var q = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                    where x > int.MinValue
-                    select x;
+            var q =
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x;
 
             Assert.Equal(q.ToArray(), q.ToArray());
         }
@@ -186,9 +242,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsFromWhereOnStringQuery()
         {
-            var q = from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
-                        where !string.IsNullOrEmpty(x)
-                        select x;
+            var q =
+                from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
+                where !string.IsNullOrEmpty(x)
+                select x;
 
             Assert.Equal(q.ToArray(), q.ToArray());
         }
@@ -196,13 +253,15 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsButNotSameObject()
         {
-            var qInt = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                    where x > int.MinValue
-                    select x;
+            var qInt =
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x;
 
-            var qString = from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
-                        where !string.IsNullOrEmpty(x)
-                        select x;
+            var qString =
+                from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
+                where !string.IsNullOrEmpty(x)
+                select x;
 
             Assert.NotSame(qInt.ToArray(), qInt.ToArray());
             Assert.NotSame(qString.ToArray(), qString.ToArray());
@@ -213,7 +272,12 @@ namespace System.Linq.Tests
         {
             // .NET Core returns the instance as an optimization.
             // see https://github.com/dotnet/corefx/pull/2401.
-            Assert.True(ReferenceEquals(Enumerable.Empty<int>().ToArray(), Enumerable.Empty<int>().ToArray()));
+            Assert.True(
+                ReferenceEquals(
+                    Enumerable.Empty<int>().ToArray(),
+                    Enumerable.Empty<int>().ToArray()
+                )
+            );
 
             var array = new int[0];
             Assert.NotSame(array, array.ToArray());
@@ -305,28 +369,42 @@ namespace System.Linq.Tests
         [Fact]
         public void NonConstantTimeCountPartitionSelectSameTypeToArray()
         {
-            var source = NumberRangeGuaranteedNotCollectionType(0, 100).OrderBy(i => i).Select(i => i * 2).Skip(1).Take(5);
+            var source = NumberRangeGuaranteedNotCollectionType(0, 100)
+                .OrderBy(i => i)
+                .Select(i => i * 2)
+                .Skip(1)
+                .Take(5);
             Assert.Equal(new[] { 2, 4, 6, 8, 10 }, source.ToArray());
         }
 
         [Fact]
         public void NonConstantTimeCountPartitionSelectDiffTypeToArray()
         {
-            var source = NumberRangeGuaranteedNotCollectionType(0, 100).OrderBy(i => i).Select(i => i.ToString()).Skip(1).Take(5);
+            var source = NumberRangeGuaranteedNotCollectionType(0, 100)
+                .OrderBy(i => i)
+                .Select(i => i.ToString())
+                .Skip(1)
+                .Take(5);
             Assert.Equal(new[] { "1", "2", "3", "4", "5" }, source.ToArray());
         }
 
         [Fact]
         public void NonConstantTimeCountEmptyPartitionSelectSameTypeToArray()
         {
-            var source = NumberRangeGuaranteedNotCollectionType(0, 100).OrderBy(i => i).Select(i => i * 2).Skip(1000);
+            var source = NumberRangeGuaranteedNotCollectionType(0, 100)
+                .OrderBy(i => i)
+                .Select(i => i * 2)
+                .Skip(1000);
             Assert.Empty(source.ToArray());
         }
 
         [Fact]
         public void NonConstantTimeCountEmptyPartitionSelectDiffTypeToArray()
         {
-            var source = NumberRangeGuaranteedNotCollectionType(0, 100).OrderBy(i => i).Select(i => i.ToString()).Skip(1000);
+            var source = NumberRangeGuaranteedNotCollectionType(0, 100)
+                .OrderBy(i => i)
+                .Select(i => i.ToString())
+                .Skip(1000);
             Assert.Empty(source.ToArray());
         }
 
@@ -347,14 +425,14 @@ namespace System.Linq.Tests
         {
             First,
             Second,
-            Third
+            Third,
         }
 
         private enum Enum1
         {
             First,
             Second,
-            Third
+            Third,
         }
 
         [Fact]

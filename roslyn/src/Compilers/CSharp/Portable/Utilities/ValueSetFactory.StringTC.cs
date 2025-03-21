@@ -38,7 +38,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return result;
             }
 
-            ConstantValue IEquatableValueTC<string>.ToConstantValue(string value) => ConstantValue.Create(value);
+            ConstantValue IEquatableValueTC<string>.ToConstantValue(string value) =>
+                ConstantValue.Create(value);
         }
     }
 }

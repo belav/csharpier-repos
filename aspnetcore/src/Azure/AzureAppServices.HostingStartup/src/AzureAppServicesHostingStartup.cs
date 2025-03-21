@@ -3,7 +3,9 @@
 
 using Microsoft.AspNetCore.Hosting;
 
-[assembly: HostingStartup(typeof(Microsoft.AspNetCore.AzureAppServices.HostingStartup.AzureAppServicesHostingStartup))]
+[assembly: HostingStartup(
+    typeof(Microsoft.AspNetCore.AzureAppServices.HostingStartup.AzureAppServicesHostingStartup)
+)]
 
 namespace Microsoft.AspNetCore.AzureAppServices.HostingStartup;
 

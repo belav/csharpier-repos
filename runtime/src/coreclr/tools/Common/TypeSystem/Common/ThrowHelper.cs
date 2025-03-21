@@ -6,33 +6,55 @@ namespace Internal.TypeSystem
     public static partial class ThrowHelper
     {
         [System.Diagnostics.DebuggerHidden]
-        private static void ThrowTypeLoadException(ExceptionStringID id, string typeName, string assemblyName, string messageArg)
+        private static void ThrowTypeLoadException(
+            ExceptionStringID id,
+            string typeName,
+            string assemblyName,
+            string messageArg
+        )
         {
             throw new TypeSystemException.TypeLoadException(id, typeName, assemblyName, messageArg);
         }
 
         [System.Diagnostics.DebuggerHidden]
-        private static void ThrowTypeLoadException(ExceptionStringID id, string typeName, string assemblyName)
+        private static void ThrowTypeLoadException(
+            ExceptionStringID id,
+            string typeName,
+            string assemblyName
+        )
         {
             throw new TypeSystemException.TypeLoadException(id, typeName, assemblyName);
         }
 
         [System.Diagnostics.DebuggerHidden]
-        public static void ThrowMissingMethodException(TypeDesc owningType, string methodName, MethodSignature signature)
+        public static void ThrowMissingMethodException(
+            TypeDesc owningType,
+            string methodName,
+            MethodSignature signature
+        )
         {
-            throw new TypeSystemException.MissingMethodException(ExceptionStringID.MissingMethod, Format.Method(owningType, methodName, signature));
+            throw new TypeSystemException.MissingMethodException(
+                ExceptionStringID.MissingMethod,
+                Format.Method(owningType, methodName, signature)
+            );
         }
 
         [System.Diagnostics.DebuggerHidden]
         public static void ThrowMissingMethodException(string methodName)
         {
-            throw new TypeSystemException.MissingMethodException(ExceptionStringID.MissingMethod, methodName);
+            throw new TypeSystemException.MissingMethodException(
+                ExceptionStringID.MissingMethod,
+                methodName
+            );
         }
 
         [System.Diagnostics.DebuggerHidden]
         public static void ThrowMissingFieldException(TypeDesc owningType, string fieldName)
         {
-            throw new TypeSystemException.MissingFieldException(ExceptionStringID.MissingField, Format.Field(owningType, fieldName));
+            throw new TypeSystemException.MissingFieldException(
+                ExceptionStringID.MissingField,
+                Format.Field(owningType, fieldName)
+            );
         }
 
         [System.Diagnostics.DebuggerHidden]
@@ -68,7 +90,9 @@ namespace Internal.TypeSystem
         [System.Diagnostics.DebuggerHidden]
         public static void ThrowMarshalDirectiveException()
         {
-            throw new TypeSystemException.MarshalDirectiveException(ExceptionStringID.MarshalDirectiveGeneric);
+            throw new TypeSystemException.MarshalDirectiveException(
+                ExceptionStringID.MarshalDirectiveGeneric
+            );
         }
 
         private static partial class Format

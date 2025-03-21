@@ -25,9 +25,6 @@ public class TodoController
     [HttpGet("[action]/{page:int?}")]
     public IEnumerable<Todo> Search(int? page, [FromQuery] string text)
     {
-        return _dbContext.Todos
-            .Where(t => t.Text.Contains(text))
-            .Skip((page ?? 0) * 10)
-            .Take(10);
+        return _dbContext.Todos.Where(t => t.Text.Contains(text)).Skip((page ?? 0) * 10).Take(10);
     }
 }

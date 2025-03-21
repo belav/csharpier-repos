@@ -23,7 +23,9 @@ namespace System.Web.Http.ExceptionHandling
                 IExceptionLogger logger = ExceptionServices.GetLogger(services);
 
                 // Assert
-                IEnumerable<IExceptionLogger> loggers = Assert.IsType<CompositeExceptionLogger>(logger).Loggers;
+                IEnumerable<IExceptionLogger> loggers = Assert
+                    .IsType<CompositeExceptionLogger>(logger)
+                    .Loggers;
                 IExceptionLogger actualLogger = Assert.Single(loggers);
                 Assert.Same(expectedLogger, actualLogger);
             }
@@ -69,7 +71,9 @@ namespace System.Web.Http.ExceptionHandling
                 IExceptionLogger logger = ExceptionServices.GetLogger(configuration);
 
                 // Assert
-                IEnumerable<IExceptionLogger> loggers = Assert.IsType<CompositeExceptionLogger>(logger).Loggers;
+                IEnumerable<IExceptionLogger> loggers = Assert
+                    .IsType<CompositeExceptionLogger>(logger)
+                    .Loggers;
                 IExceptionLogger actualLogger = Assert.Single(loggers);
                 Assert.Same(expectedLogger, actualLogger);
             }
@@ -82,7 +86,10 @@ namespace System.Web.Http.ExceptionHandling
             HttpConfiguration configuration = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => ExceptionServices.GetLogger(configuration), "configuration");
+            Assert.ThrowsArgumentNull(
+                () => ExceptionServices.GetLogger(configuration),
+                "configuration"
+            );
         }
 
         [Fact]
@@ -97,7 +104,9 @@ namespace System.Web.Http.ExceptionHandling
                 IExceptionHandler handler = ExceptionServices.GetHandler(services);
 
                 // Assert
-                IExceptionHandler innerHandler = Assert.IsType<LastChanceExceptionHandler>(handler).InnerHandler;
+                IExceptionHandler innerHandler = Assert
+                    .IsType<LastChanceExceptionHandler>(handler)
+                    .InnerHandler;
                 Assert.Same(expectedHandler, innerHandler);
             }
         }
@@ -132,7 +141,9 @@ namespace System.Web.Http.ExceptionHandling
                 IExceptionHandler handler = ExceptionServices.GetHandler(services);
 
                 // Assert
-                IExceptionHandler innerHandler = Assert.IsType<LastChanceExceptionHandler>(handler).InnerHandler;
+                IExceptionHandler innerHandler = Assert
+                    .IsType<LastChanceExceptionHandler>(handler)
+                    .InnerHandler;
                 Assert.IsType<EmptyExceptionHandler>(innerHandler);
             }
         }
@@ -159,7 +170,9 @@ namespace System.Web.Http.ExceptionHandling
                 IExceptionHandler handler = ExceptionServices.GetHandler(configuration);
 
                 // Assert
-                IExceptionHandler innerHandler = Assert.IsType<LastChanceExceptionHandler>(handler).InnerHandler;
+                IExceptionHandler innerHandler = Assert
+                    .IsType<LastChanceExceptionHandler>(handler)
+                    .InnerHandler;
                 Assert.Same(expectedHandler, innerHandler);
             }
         }
@@ -171,7 +184,10 @@ namespace System.Web.Http.ExceptionHandling
             HttpConfiguration configuration = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => ExceptionServices.GetHandler(configuration), "configuration");
+            Assert.ThrowsArgumentNull(
+                () => ExceptionServices.GetHandler(configuration),
+                "configuration"
+            );
         }
 
         private static HttpConfiguration CreateConfiguration(IExceptionHandler handler)

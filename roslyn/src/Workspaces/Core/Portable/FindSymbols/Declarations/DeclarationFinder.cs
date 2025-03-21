@@ -22,14 +22,23 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SearchQuery query,
             SymbolFilter filter,
             ArrayBuilder<ISymbol> list,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (!project.SupportsCompilation)
                 return;
 
-            Contract.ThrowIfTrue(query.Kind == SearchKind.Custom, "Custom queries are not supported in this API");
+            Contract.ThrowIfTrue(
+                query.Kind == SearchKind.Custom,
+                "Custom queries are not supported in this API"
+            );
 
-            using (Logger.LogBlock(FunctionId.SymbolFinder_Project_AddDeclarationsAsync, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.SymbolFinder_Project_AddDeclarationsAsync,
+                    cancellationToken
+                )
+            )
             {
                 var syntaxFacts = project.GetRequiredLanguageService<ISyntaxFactsService>();
 
@@ -39,26 +48,41 @@ namespace Microsoft.CodeAnalysis.FindSymbols
                 // the search is 'exact' if it's either an exact-case-sensitive search,
                 // or it's an exact-case-insensitive search and we're in a case-insensitive
                 // language.
-                var isExactNameSearch = query.Kind == SearchKind.Exact ||
-                    (query.Kind == SearchKind.ExactIgnoreCase && !syntaxFacts.IsCaseSensitive);
+                var isExactNameSearch =
+                    query.Kind == SearchKind.Exact
+                    || (query.Kind == SearchKind.ExactIgnoreCase && !syntaxFacts.IsCaseSensitive);
 
                 // Do a quick syntactic check first using our cheaply built indices.  That will help us avoid creating
-                // a compilation here if it's not necessary.  In the case of an exact name search we can call a special 
-                // overload that quickly uses the direct bloom-filter identifier maps in the index.  If it's nto an 
+                // a compilation here if it's not necessary.  In the case of an exact name search we can call a special
+                // overload that quickly uses the direct bloom-filter identifier maps in the index.  If it's nto an
                 // exact name search, then we will run the query's predicate over every DeclaredSymbolInfo stored in
                 // the doc.
                 var containsSymbol = isExactNameSearch
-                    ? await project.ContainsSymbolsWithNameAsync(query.Name!, cancellationToken).ConfigureAwait(false)
-                    : await project.ContainsSymbolsWithNameAsync(query.GetPredicate(), filter, cancellationToken).ConfigureAwait(false);
+                    ? await project
+                        .ContainsSymbolsWithNameAsync(query.Name!, cancellationToken)
+                        .ConfigureAwait(false)
+                    : await project
+                        .ContainsSymbolsWithNameAsync(
+                            query.GetPredicate(),
+                            filter,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
 
                 if (!containsSymbol)
                     return;
 
-                var compilation = await project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
+                var compilation = await project
+                    .GetRequiredCompilationAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
                 var symbols = isExactNameSearch
                     ? compilation.GetSymbolsWithName(query.Name!, filter, cancellationToken)
-                    : compilation.GetSymbolsWithName(query.GetPredicate(), filter, cancellationToken);
+                    : compilation.GetSymbolsWithName(
+                        query.GetPredicate(),
+                        filter,
+                        cancellationToken
+                    );
 
                 var symbolsWithName = symbols.ToImmutableArray();
 
@@ -73,26 +97,44 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             SearchQuery query,
             SymbolFilter filter,
             ArrayBuilder<ISymbol> list,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // All entrypoints to this function are Find functions that are only searching
             // for specific strings (i.e. they never do a custom search).
-            Contract.ThrowIfTrue(query.Kind == SearchKind.Custom, "Custom queries are not supported in this API");
+            Contract.ThrowIfTrue(
+                query.Kind == SearchKind.Custom,
+                "Custom queries are not supported in this API"
+            );
 
-            using (Logger.LogBlock(FunctionId.SymbolFinder_Assembly_AddDeclarationsAsync, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.SymbolFinder_Assembly_AddDeclarationsAsync,
+                    cancellationToken
+                )
+            )
             {
-                var info = await SymbolTreeInfo.GetInfoForMetadataReferenceAsync(
-                    project.Solution, reference, checksum: null, cancellationToken).ConfigureAwait(false);
+                var info = await SymbolTreeInfo
+                    .GetInfoForMetadataReferenceAsync(
+                        project.Solution,
+                        reference,
+                        checksum: null,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 Contract.ThrowIfNull(info);
 
-                var symbols = await info.FindAsync(query, lazyAssembly, filter, cancellationToken).ConfigureAwait(false);
+                var symbols = await info.FindAsync(query, lazyAssembly, filter, cancellationToken)
+                    .ConfigureAwait(false);
                 list.AddRange(symbols);
             }
         }
 
-        internal static ImmutableArray<ISymbol> FilterByCriteria(ImmutableArray<ISymbol> symbols, SymbolFilter criteria)
-            => symbols.WhereAsArray(s => MeetCriteria(s, criteria));
+        internal static ImmutableArray<ISymbol> FilterByCriteria(
+            ImmutableArray<ISymbol> symbols,
+            SymbolFilter criteria
+        ) => symbols.WhereAsArray(s => MeetCriteria(s, criteria));
 
         private static bool MeetCriteria(ISymbol symbol, SymbolFilter filter)
         {
@@ -119,13 +161,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
         private static bool IsNonTypeMember(ISymbol symbol)
         {
-            return symbol.Kind is SymbolKind.Method or
-                   SymbolKind.Property or
-                   SymbolKind.Event or
-                   SymbolKind.Field;
+            return symbol.Kind
+                is SymbolKind.Method
+                    or SymbolKind.Property
+                    or SymbolKind.Event
+                    or SymbolKind.Field;
         }
 
-        private static bool IsOn(SymbolFilter filter, SymbolFilter flag)
-            => (filter & flag) == flag;
+        private static bool IsOn(SymbolFilter filter, SymbolFilter flag) => (filter & flag) == flag;
     }
 }

@@ -8,15 +8,20 @@ internal static partial class Interop
 {
     internal static partial class Advapi32
     {
-        [LibraryImport(Interop.Libraries.Advapi32, EntryPoint = "SetNamedSecurityInfoW",
-            SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Interop.Libraries.Advapi32,
+            EntryPoint = "SetNamedSecurityInfoW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial uint SetSecurityInfoByName(
             string name,
-            /*DWORD*/ uint objectType,
-            /*DWORD*/ uint securityInformation,
+            /*DWORD*/uint objectType,
+            /*DWORD*/uint securityInformation,
             byte[]? owner,
             byte[]? group,
             byte[]? dacl,
-            byte[]? sacl);
+            byte[]? sacl
+        );
     }
 }

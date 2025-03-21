@@ -10,7 +10,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SkipSome()
         {
-            Assert.Equal(Enumerable.Range(10, 10).AsQueryable(), Enumerable.Range(0, 20).AsQueryable().Skip(10));
+            Assert.Equal(
+                Enumerable.Range(10, 10).AsQueryable(),
+                Enumerable.Range(0, 20).AsQueryable().Skip(10)
+            );
         }
 
         [Fact]
@@ -22,7 +25,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SkipThrowsOnNull()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IQueryable<DateTime>)null).Skip(3));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IQueryable<DateTime>)null).Skip(3)
+            );
         }
 
         [Fact]

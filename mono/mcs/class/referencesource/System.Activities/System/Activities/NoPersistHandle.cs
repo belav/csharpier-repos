@@ -11,9 +11,7 @@ namespace System.Activities
     [DataContract]
     public class NoPersistHandle : Handle
     {
-        public NoPersistHandle()
-        {
-        }
+        public NoPersistHandle() { }
 
         public void Enter(NativeActivityContext context)
         {
@@ -32,5 +30,3 @@ namespace System.Activities
         }
     }
 }
-
-

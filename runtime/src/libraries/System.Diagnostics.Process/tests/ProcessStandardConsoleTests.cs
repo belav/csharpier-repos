@@ -29,7 +29,8 @@ namespace System.Diagnostics.Tests
 
                 p.Kill();
                 Assert.True(p.WaitForExit(WaitInMS));
-            };
+            }
+            ;
 
             // Don't test this on Windows containers, as there is a known issue.
             // See https://github.com/dotnet/runtime/issues/42000 for more details.

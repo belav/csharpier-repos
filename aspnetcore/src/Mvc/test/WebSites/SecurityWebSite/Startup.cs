@@ -14,12 +14,14 @@ public class Startup
         // Add framework services.
         services.AddControllersWithViews();
         services.AddAntiforgery();
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options =>
-        {
-            options.LoginPath = "/Home/Login";
-            options.LogoutPath = "/Home/Logout";
-        })
-        .AddCookie("Cookie2");
+        services
+            .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options =>
+            {
+                options.LoginPath = "/Home/Login";
+                options.LogoutPath = "/Home/Logout";
+            })
+            .AddCookie("Cookie2");
 
         services.AddScoped<IPolicyEvaluator, CountingPolicyEvaluator>();
     }

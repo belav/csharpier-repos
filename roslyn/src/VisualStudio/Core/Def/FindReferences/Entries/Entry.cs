@@ -21,8 +21,8 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
         {
             public readonly RoslynDefinitionBucket DefinitionBucket;
 
-            protected Entry(RoslynDefinitionBucket definitionBucket)
-                => DefinitionBucket = definitionBucket;
+            protected Entry(RoslynDefinitionBucket definitionBucket) =>
+                DefinitionBucket = definitionBucket;
 
             public bool TryGetValue(string keyName, out object? content)
             {
@@ -38,7 +38,9 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                         return DefinitionBucket;
 
                     case StandardTableKeyNames2.DefinitionIcon:
-                        return DefinitionBucket?.DefinitionItem.Tags.GetFirstGlyph().GetImageMoniker();
+                        return DefinitionBucket
+                            ?.DefinitionItem.Tags.GetFirstGlyph()
+                            .GetImageMoniker();
                 }
 
                 return GetValueWorker(keyName);
@@ -46,7 +48,10 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
 
             protected abstract object? GetValueWorker(string keyName);
 
-            public virtual bool TryCreateColumnContent(string columnName, [NotNullWhen(true)] out FrameworkElement? content)
+            public virtual bool TryCreateColumnContent(
+                string columnName,
+                [NotNullWhen(true)] out FrameworkElement? content
+            )
             {
                 content = null;
                 return false;

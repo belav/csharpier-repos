@@ -22,10 +22,7 @@ public partial class RouterMiddleware
     /// <param name="next">The delegate representing the remaining middleware in the request pipeline.</param>
     /// <param name="loggerFactory">The <see cref="ILoggerFactory"/>.</param>
     /// <param name="router">The <see cref="IRouter"/> to use for routing requests.</param>
-    public RouterMiddleware(
-        RequestDelegate next,
-        ILoggerFactory loggerFactory,
-        IRouter router)
+    public RouterMiddleware(RequestDelegate next, ILoggerFactory loggerFactory, IRouter router)
     {
         _next = next;
         _router = router;
@@ -52,10 +49,7 @@ public partial class RouterMiddleware
         }
         else
         {
-            var routingFeature = new RoutingFeature()
-            {
-                RouteData = context.RouteData
-            };
+            var routingFeature = new RoutingFeature() { RouteData = context.RouteData };
 
             // Set the RouteValues on the current request, this is to keep the IRouteValuesFeature inline with the IRoutingFeature
             httpContext.Request.RouteValues = context.RouteData.Values;
@@ -67,7 +61,12 @@ public partial class RouterMiddleware
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Request did not match any routes", EventName = "RequestNotMatched")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Request did not match any routes",
+            EventName = "RequestNotMatched"
+        )]
         public static partial void RequestNotMatched(ILogger logger);
     }
 }

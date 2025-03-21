@@ -82,6 +82,7 @@ public class TestStringParserTests
         var expected = new Pattern(list);
         AssertPatternsEqual(expected, result);
     }
+
     [Fact]
     public void ConditionParser_ParseMultipleRuleVariables()
     {

@@ -12,7 +12,11 @@ namespace System.Security.Permissions.Tests
         public static void CallMethods()
         {
             HostSecurityManager hsm = new HostSecurityManager();
-            ApplicationTrust at = hsm.DetermineApplicationTrust(new Evidence(), new Evidence(), new TrustManagerContext());
+            ApplicationTrust at = hsm.DetermineApplicationTrust(
+                new Evidence(),
+                new Evidence(),
+                new TrustManagerContext()
+            );
             Evidence e = hsm.ProvideAppDomainEvidence(new Evidence());
         }
     }

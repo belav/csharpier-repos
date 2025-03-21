@@ -72,7 +72,6 @@ public static class Runtime_72550
         IsTrue(!Test1.StartsWith4("simdsimdsimdsimdsimdsimd"));
         IsTrue(!Test1.StartsWith5("simdsimdsimdsimdsimdsimd"));
 
-
         IsTrue(Test2.StartsWith1(""));
         IsTrue(Test2.StartsWith2(""));
         IsTrue(Test2.StartsWith3(""));
@@ -151,7 +150,6 @@ public static class Runtime_72550
         IsTrue(!Test2.StartsWith4("simdsimdsimdsimdsimdsimd"));
         IsTrue(!Test2.StartsWith5("simdsimdsimdsimdsimdsimd"));
 
-
         IsTrue(Test3.StartsWith1(""));
         IsTrue(Test3.StartsWith2(""));
         IsTrue(Test3.StartsWith3(""));
@@ -169,7 +167,7 @@ public static class Runtime_72550
         IsTrue(Test3.StartsWith3("simd"));
         IsTrue(Test3.StartsWith4("simd"));
         IsTrue(Test3.StartsWith5("simd"));
-        
+
         IsTrue(!Test3.StartsWith1("swar\0"));
         IsTrue(!Test3.StartsWith2("swar\0"));
         IsTrue(!Test3.StartsWith3("swar\0"));
@@ -228,45 +226,69 @@ public static class Runtime_72550
     class Test1
     {
         private const string Str = "";
+
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static bool StartsWith1(string s) => Str.StartsWith(s, StringComparison.OrdinalIgnoreCase);
+        public static bool StartsWith1(string s) =>
+            Str.StartsWith(s, StringComparison.OrdinalIgnoreCase);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool StartsWith2(string s) => Str.StartsWith(s, StringComparison.Ordinal);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool StartsWith3(string s) => Str.AsSpan().StartsWith(s);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static bool StartsWith4(string s) => Str.AsSpan().StartsWith(s, StringComparison.Ordinal);
+        public static bool StartsWith4(string s) =>
+            Str.AsSpan().StartsWith(s, StringComparison.Ordinal);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static bool StartsWith5(string s) => Str.AsSpan().StartsWith(s, StringComparison.OrdinalIgnoreCase);
+        public static bool StartsWith5(string s) =>
+            Str.AsSpan().StartsWith(s, StringComparison.OrdinalIgnoreCase);
     }
 
     class Test2
     {
         private const string Str = "swar";
+
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static bool StartsWith1(string s) => Str.StartsWith(s, StringComparison.OrdinalIgnoreCase);
+        public static bool StartsWith1(string s) =>
+            Str.StartsWith(s, StringComparison.OrdinalIgnoreCase);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool StartsWith2(string s) => Str.StartsWith(s, StringComparison.Ordinal);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool StartsWith3(string s) => Str.AsSpan().StartsWith(s);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static bool StartsWith4(string s) => Str.AsSpan().StartsWith(s, StringComparison.Ordinal);
+        public static bool StartsWith4(string s) =>
+            Str.AsSpan().StartsWith(s, StringComparison.Ordinal);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static bool StartsWith5(string s) => Str.AsSpan().StartsWith(s, StringComparison.OrdinalIgnoreCase);
+        public static bool StartsWith5(string s) =>
+            Str.AsSpan().StartsWith(s, StringComparison.OrdinalIgnoreCase);
     }
 
     class Test3
     {
         private const string Str = "simdsimdsimd";
+
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static bool StartsWith1(string s) => Str.StartsWith(s, StringComparison.OrdinalIgnoreCase);
+        public static bool StartsWith1(string s) =>
+            Str.StartsWith(s, StringComparison.OrdinalIgnoreCase);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool StartsWith2(string s) => Str.StartsWith(s, StringComparison.Ordinal);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
         public static bool StartsWith3(string s) => Str.AsSpan().StartsWith(s);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static bool StartsWith4(string s) => Str.AsSpan().StartsWith(s, StringComparison.Ordinal);
+        public static bool StartsWith4(string s) =>
+            Str.AsSpan().StartsWith(s, StringComparison.Ordinal);
+
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static bool StartsWith5(string s) => Str.AsSpan().StartsWith(s, StringComparison.OrdinalIgnoreCase);
+        public static bool StartsWith5(string s) =>
+            Str.AsSpan().StartsWith(s, StringComparison.OrdinalIgnoreCase);
     }
 }

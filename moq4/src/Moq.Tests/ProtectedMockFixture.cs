@@ -3,9 +3,7 @@
 
 using System;
 using System.Linq.Expressions;
-
 using Moq.Protected;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -15,32 +13,42 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfNullMock()
         {
-            Assert.Throws<ArgumentNullException>(() => ProtectedExtension.Protected((Mock<string>)null));
+            Assert.Throws<ArgumentNullException>(() =>
+                ProtectedExtension.Protected((Mock<string>)null)
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupNullVoidMethodName()
         {
             Assert.Throws<ArgumentNullException>(() => new Mock<FooBase>().Protected().Setup(null));
-            Assert.Throws<ArgumentNullException>(() => new Mock<FooBase>().Protected().Setup<int>(null));
+            Assert.Throws<ArgumentNullException>(() =>
+                new Mock<FooBase>().Protected().Setup<int>(null)
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupEmptyVoidMethodName()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().Setup(string.Empty));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().Setup(string.Empty)
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupResultNullMethodName()
         {
-            Assert.Throws<ArgumentNullException>(() => new Mock<FooBase>().Protected().Setup<int>(null));
+            Assert.Throws<ArgumentNullException>(() =>
+                new Mock<FooBase>().Protected().Setup<int>(null)
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupResultEmptyMethodName()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().Setup<int>(string.Empty));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().Setup<int>(string.Empty)
+            );
         }
 
         [Fact]
@@ -52,7 +60,10 @@ namespace Moq.Tests
             });
 
             Assert.IsType<ArgumentException>(actual);
-            Assert.Equal("No protected method FooBase.Foo found whose signature is compatible with the provided arguments ().", actual.Message);
+            Assert.Equal(
+                "No protected method FooBase.Foo found whose signature is compatible with the provided arguments ().",
+                actual.Message
+            );
         }
 
         [Fact]
@@ -64,7 +75,10 @@ namespace Moq.Tests
             });
 
             Assert.IsType<ArgumentException>(actual);
-            Assert.Equal("No protected method FooBase.Foo found whose signature is compatible with the provided arguments ().", actual.Message);
+            Assert.Equal(
+                "No protected method FooBase.Foo found whose signature is compatible with the provided arguments ().",
+                actual.Message
+            );
         }
 
         [Fact]
@@ -76,7 +90,10 @@ namespace Moq.Tests
             });
 
             Assert.IsType<ArgumentException>(actual);
-            Assert.Equal("No protected method FooBase.StringArg found whose signature is compatible with the provided arguments (int).", actual.Message);
+            Assert.Equal(
+                "No protected method FooBase.StringArg found whose signature is compatible with the provided arguments (int).",
+                actual.Message
+            );
         }
 
         [Fact]
@@ -88,19 +105,25 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfSetupPublicResultMethod()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().Setup<int>("PublicInt"));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().Setup<int>("PublicInt")
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupNonVirtualVoidMethod()
         {
-            Assert.Throws<NotSupportedException>(() => new Mock<FooBase>().Protected().Setup("NonVirtual"));
+            Assert.Throws<NotSupportedException>(() =>
+                new Mock<FooBase>().Protected().Setup("NonVirtual")
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupNonVirtualResultMethod()
         {
-            Assert.Throws<NotSupportedException>(() => new Mock<FooBase>().Protected().Setup<int>("NonVirtualInt"));
+            Assert.Throws<NotSupportedException>(() =>
+                new Mock<FooBase>().Protected().Setup<int>("NonVirtualInt")
+            );
         }
 
         [Fact]
@@ -120,9 +143,7 @@ namespace Moq.Tests
         public void SetupAllowsProtectedInternalResultMethod()
         {
             var mock = new Mock<FooBase>();
-            mock.Protected()
-                .Setup<int>("ProtectedInternalInt")
-                .Returns(5);
+            mock.Protected().Setup<int>("ProtectedInternalInt").Returns(5);
 
             Assert.Equal(5, mock.Object.ProtectedInternalInt());
 
@@ -149,9 +170,7 @@ namespace Moq.Tests
         public void SetupAllowsProtectedResultMethod()
         {
             var mock = new Mock<FooBase>();
-            mock.Protected()
-                .Setup<int>("ProtectedInt")
-                .Returns(5);
+            mock.Protected().Setup<int>("ProtectedInt").Returns(5);
 
             Assert.Equal(5, mock.Object.DoProtectedInt());
 
@@ -207,16 +226,16 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfSetupVoidMethodIsProperty()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().Setup("ProtectedValue"));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().Setup("ProtectedValue")
+            );
         }
 
         [Fact]
         public void SetupResultAllowsProperty()
         {
             var mock = new Mock<FooBase>();
-            mock.Protected()
-                .Setup<string>("ProtectedValue")
-                .Returns("foo");
+            mock.Protected().Setup<string>("ProtectedValue").Returns("foo");
 
             Assert.Equal("foo", mock.Object.GetProtectedValue());
         }
@@ -224,46 +243,56 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfSetupGetNullPropertyName()
         {
-            Assert.Throws<ArgumentNullException>(() => new Mock<FooBase>().Protected().SetupGet<string>(null));
+            Assert.Throws<ArgumentNullException>(() =>
+                new Mock<FooBase>().Protected().SetupGet<string>(null)
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupGetEmptyPropertyName()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().SetupGet<string>(string.Empty));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().SetupGet<string>(string.Empty)
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupGetPropertyNotFound()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().SetupGet<int>("Foo"));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().SetupGet<int>("Foo")
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupGetPropertyWithoutPropertyGet()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().SetupGet<int>("OnlySet"));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().SetupGet<int>("OnlySet")
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupGetPublicPropertyGet()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().SetupGet<int>("PublicValue"));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().SetupGet<int>("PublicValue")
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupGetNonVirtualProperty()
         {
-            Assert.Throws<NotSupportedException>(() => new Mock<FooBase>().Protected().SetupGet<string>("NonVirtualValue"));
+            Assert.Throws<NotSupportedException>(() =>
+                new Mock<FooBase>().Protected().SetupGet<string>("NonVirtualValue")
+            );
         }
 
         [Fact]
         public void SetupGetAllowsProtectedInternalPropertyGet()
         {
             var mock = new Mock<FooBase>();
-            mock.Protected()
-                .SetupGet<string>("ProtectedInternalValue")
-                .Returns("foo");
+            mock.Protected().SetupGet<string>("ProtectedInternalValue").Returns("foo");
 
             Assert.Equal("foo", mock.Object.ProtectedInternalValue);
         }
@@ -272,9 +301,7 @@ namespace Moq.Tests
         public void SetupGetAllowsProtectedPropertyGet()
         {
             var mock = new Mock<FooBase>();
-            mock.Protected()
-                .SetupGet<string>("ProtectedValue")
-                .Returns("foo");
+            mock.Protected().SetupGet<string>("ProtectedValue").Returns("foo");
 
             Assert.Equal("foo", mock.Object.GetProtectedValue());
         }
@@ -282,43 +309,53 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfSetupSetNullPropertyName()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => new Mock<FooBase>().Protected().SetupSet<string>(null, ItExpr.IsAny<string>()));
+            Assert.Throws<ArgumentNullException>(() =>
+                new Mock<FooBase>().Protected().SetupSet<string>(null, ItExpr.IsAny<string>())
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupSetEmptyPropertyName()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Mock<FooBase>().Protected().SetupSet<string>(string.Empty, ItExpr.IsAny<string>()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>()
+                    .Protected()
+                    .SetupSet<string>(string.Empty, ItExpr.IsAny<string>())
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupSetPropertyNotFound()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Mock<FooBase>().Protected().SetupSet<int>("Foo", ItExpr.IsAny<int>()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().SetupSet<int>("Foo", ItExpr.IsAny<int>())
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupSetPropertyWithoutPropertySet()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Mock<FooBase>().Protected().SetupSet<int>("OnlyGet", ItExpr.IsAny<int>()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().SetupSet<int>("OnlyGet", ItExpr.IsAny<int>())
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupSetPublicPropertySet()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Mock<FooBase>().Protected().SetupSet<int>("PublicValue", ItExpr.IsAny<int>()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().SetupSet<int>("PublicValue", ItExpr.IsAny<int>())
+            );
         }
 
         [Fact]
         public void ThrowsIfSetupSetNonVirtualProperty()
         {
-            Assert.Throws<NotSupportedException>(
-                () => new Mock<FooBase>().Protected().SetupSet<string>("NonVirtualValue", ItExpr.IsAny<string>()));
+            Assert.Throws<NotSupportedException>(() =>
+                new Mock<FooBase>()
+                    .Protected()
+                    .SetupSet<string>("NonVirtualValue", ItExpr.IsAny<string>())
+            );
         }
 
         [Fact]
@@ -368,9 +405,9 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfNullArgs()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected()
-                .Setup<string>("StringArg", null)
-                .Returns("null"));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().Setup<string>("StringArg", null).Returns("null")
+            );
         }
 
         [Fact]
@@ -378,9 +415,7 @@ namespace Moq.Tests
         {
             var mock = new Mock<FooBase>();
 
-            mock.Protected()
-                .Setup<string>("StringArg", ItExpr.IsNull<string>())
-                .Returns("null");
+            mock.Protected().Setup<string>("StringArg", ItExpr.IsNull<string>()).Returns("null");
 
             Assert.Equal("null", mock.Object.DoStringArg(null));
 
@@ -405,9 +440,7 @@ namespace Moq.Tests
             mock = new Mock<FooBase>();
             mock.CallBase = true;
 
-            mock.Protected()
-                .Setup<string>("TwoArgs", ItExpr.IsAny<string>(), 5)
-                .Returns("done");
+            mock.Protected().Setup<string>("TwoArgs", ItExpr.IsAny<string>(), 5).Returns("done");
 
             Assert.Equal("done", mock.Object.DoTwoArgs("foobar", 5));
             Assert.Equal("echo", mock.Object.DoTwoArgs("echo", 15));
@@ -416,7 +449,11 @@ namespace Moq.Tests
             mock.CallBase = true;
 
             mock.Protected()
-                .Setup<string>("TwoArgs", ItExpr.IsAny<string>(), ItExpr.IsInRange(1, 3, Range.Inclusive))
+                .Setup<string>(
+                    "TwoArgs",
+                    ItExpr.IsAny<string>(),
+                    ItExpr.IsInRange(1, 3, Range.Inclusive)
+                )
                 .Returns("inrange");
 
             Assert.Equal("inrange", mock.Object.DoTwoArgs("foobar", 2));
@@ -431,8 +468,10 @@ namespace Moq.Tests
             mock.Protected().Setup("Do", 1, 2).Verifiable();
             mock.Protected().Setup("Do", new[] { typeof(int) }, false, 1, 3).Verifiable();
             mock.Protected().Setup<string>("DoReturn", "1", "2").Returns("3").Verifiable();
-            mock.Protected().Setup<string>("DoReturn", new[] { typeof(int), typeof(string) }, false, 1, "2")
-                .Returns("4").Verifiable();
+            mock.Protected()
+                .Setup<string>("DoReturn", new[] { typeof(int), typeof(string) }, false, 1, "2")
+                .Returns("4")
+                .Verifiable();
 
             mock.Object.ExecuteDo(1, 2);
             mock.Object.ExecuteDo<int>(1, 3);
@@ -455,17 +494,16 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfSetReturnsForVoidMethod()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Mock<MethodOverloads>().Protected().Setup<string>("Do", "1", "2").Returns("3"));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<MethodOverloads>().Protected().Setup<string>("Do", "1", "2").Returns("3")
+            );
         }
 
         [Fact]
         public void SetupResultAllowsProtectedMethodInBaseClass()
         {
             var mock = new Mock<FooDerived>();
-            mock.Protected()
-                .Setup<int>("ProtectedInt")
-                .Returns(5);
+            mock.Protected().Setup<int>("ProtectedInt").Returns(5);
 
             Assert.Equal(5, mock.Object.DoProtectedInt());
 
@@ -479,9 +517,11 @@ namespace Moq.Tests
         public void SetupResultDefaulTwoOverloadsWithDerivedClassThrowsInvalidOperationException()
         {
             var mock = new Mock<MethodOverloads>();
-            Assert.Throws<InvalidOperationException>(() => mock.Protected()
-                .Setup<FooBase>("Overloaded", ItExpr.IsAny<MyDerived>())
-                .Returns(new FooBase()));
+            Assert.Throws<InvalidOperationException>(() =>
+                mock.Protected()
+                    .Setup<FooBase>("Overloaded", ItExpr.IsAny<MyDerived>())
+                    .Returns(new FooBase())
+            );
         }
 
         [Fact]
@@ -497,25 +537,33 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfVerifyNullVoidMethodName()
         {
-            Assert.Throws<ArgumentNullException>(() => new Mock<FooBase>().Protected().Verify(null, Times.Once()));
+            Assert.Throws<ArgumentNullException>(() =>
+                new Mock<FooBase>().Protected().Verify(null, Times.Once())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifyEmptyVoidMethodName()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().Verify(string.Empty, Times.Once()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().Verify(string.Empty, Times.Once())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifyNullResultMethodName()
         {
-            Assert.Throws<ArgumentNullException>(() => new Mock<FooBase>().Protected().Verify<int>(null, Times.Once()));
+            Assert.Throws<ArgumentNullException>(() =>
+                new Mock<FooBase>().Protected().Verify<int>(null, Times.Once())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifyEmptyResultMethodName()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().Verify<int>(string.Empty, Times.Once()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().Verify<int>(string.Empty, Times.Once())
+            );
         }
 
         [Fact]
@@ -527,7 +575,10 @@ namespace Moq.Tests
             });
 
             Assert.IsType<ArgumentException>(actual);
-            Assert.Equal("No protected method FooBase.Foo found whose signature is compatible with the provided arguments ().", actual.Message);
+            Assert.Equal(
+                "No protected method FooBase.Foo found whose signature is compatible with the provided arguments ().",
+                actual.Message
+            );
         }
 
         [Fact]
@@ -539,7 +590,10 @@ namespace Moq.Tests
             });
 
             Assert.IsType<ArgumentException>(actual);
-            Assert.Equal("No protected method FooBase.Foo found whose signature is compatible with the provided arguments ().", actual.Message);
+            Assert.Equal(
+                "No protected method FooBase.Foo found whose signature is compatible with the provided arguments ().",
+                actual.Message
+            );
         }
 
         [Fact]
@@ -547,37 +601,48 @@ namespace Moq.Tests
         {
             var actual = Record.Exception(() =>
             {
-                new Mock<FooBase>().Protected().Verify<string>("StringArg", Times.Once(), ItExpr.IsAny<int>());
+                new Mock<FooBase>()
+                    .Protected()
+                    .Verify<string>("StringArg", Times.Once(), ItExpr.IsAny<int>());
             });
 
             Assert.IsType<ArgumentException>(actual);
-            Assert.Equal("No protected method FooBase.StringArg found whose signature is compatible with the provided arguments (int).", actual.Message);
+            Assert.Equal(
+                "No protected method FooBase.StringArg found whose signature is compatible with the provided arguments (int).",
+                actual.Message
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifyPublicVoidMethod()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().Verify("Public", Times.Once()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().Verify("Public", Times.Once())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifyPublicResultMethod()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Mock<FooBase>().Protected().Verify<int>("PublicInt", Times.Once()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().Verify<int>("PublicInt", Times.Once())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifyNonVirtualVoidMethod()
         {
-            Assert.Throws<NotSupportedException>(() => new Mock<FooBase>().Protected().Verify("NonVirtual", Times.Once()));
+            Assert.Throws<NotSupportedException>(() =>
+                new Mock<FooBase>().Protected().Verify("NonVirtual", Times.Once())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifyNonVirtualResultMethod()
         {
-            Assert.Throws<NotSupportedException>(
-                () => new Mock<FooBase>().Protected().Verify<int>("NonVirtualInt", Times.Once()));
+            Assert.Throws<NotSupportedException>(() =>
+                new Mock<FooBase>().Protected().Verify<int>("NonVirtualInt", Times.Once())
+            );
         }
 
         [Fact]
@@ -589,7 +654,8 @@ namespace Moq.Tests
             mock.Protected().Verify("ProtectedInternal", Times.Once());
 
             mock.Object.ProtectedInternalGeneric<int>();
-            mock.Protected().Verify("ProtectedInternalGeneric", new[] { typeof(int) }, Times.Once());
+            mock.Protected()
+                .Verify("ProtectedInternalGeneric", new[] { typeof(int) }, Times.Once());
         }
 
         [Fact]
@@ -602,7 +668,8 @@ namespace Moq.Tests
 
             mock.Object.ProtectedInternalReturnGeneric<int>();
 
-            mock.Protected().Verify<int>("ProtectedInternalReturnGeneric", new[] { typeof(int) }, Times.Once());
+            mock.Protected()
+                .Verify<int>("ProtectedInternalReturnGeneric", new[] { typeof(int) }, Times.Once());
         }
 
         [Fact]
@@ -624,14 +691,16 @@ namespace Moq.Tests
             mock.Protected().Verify<int>("ProtectedInt", Times.Once());
 
             mock.Object.DoProtectedReturnGeneric<int>();
-            mock.Protected().Verify<int>("ProtectedReturnGeneric", new[] { typeof(int) }, Times.Once());
+            mock.Protected()
+                .Verify<int>("ProtectedReturnGeneric", new[] { typeof(int) }, Times.Once());
         }
 
         [Fact]
         public void ThrowsIfVerifyVoidMethodIsProperty()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Mock<FooBase>().Protected().Verify("ProtectedValue", Times.Once()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().Verify("ProtectedValue", Times.Once())
+            );
         }
 
         [Fact]
@@ -649,7 +718,9 @@ namespace Moq.Tests
             var mock = new Mock<FooBase>();
             mock.Object.DoProtected();
 
-            Assert.Throws<MockException>(() => mock.Protected().Verify("Protected", Times.Exactly(2)));
+            Assert.Throws<MockException>(() =>
+                mock.Protected().Verify("Protected", Times.Exactly(2))
+            );
         }
 
         [Fact]
@@ -658,7 +729,9 @@ namespace Moq.Tests
             var mock = new Mock<FooBase>();
             mock.Object.DoProtectedInt();
 
-            Assert.Throws<MockException>(() => mock.Protected().Verify("ProtectedInt", Times.Exactly(2)));
+            Assert.Throws<MockException>(() =>
+                mock.Protected().Verify("ProtectedInt", Times.Exactly(2))
+            );
         }
 
         [Fact]
@@ -687,7 +760,9 @@ namespace Moq.Tests
             var mock = new Mock<FooBase>();
             mock.Object.GetProtectedValue();
 
-            Assert.Throws<MockException>(() => mock.Protected().Verify<string>("ProtectedValue", Times.Exactly(2)));
+            Assert.Throws<MockException>(() =>
+                mock.Protected().Verify<string>("ProtectedValue", Times.Exactly(2))
+            );
         }
 
         [Fact]
@@ -703,32 +778,41 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfVerifyGetNullPropertyName()
         {
-            Assert.Throws<ArgumentNullException>(() => new Mock<FooBase>().Protected().VerifyGet<int>(null, Times.Once()));
+            Assert.Throws<ArgumentNullException>(() =>
+                new Mock<FooBase>().Protected().VerifyGet<int>(null, Times.Once())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifyGetEmptyPropertyName()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().VerifyGet<int>(string.Empty, Times.Once()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().VerifyGet<int>(string.Empty, Times.Once())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifyGetPropertyNotFound()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().VerifyGet<int>("Foo", Times.Once()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().VerifyGet<int>("Foo", Times.Once())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifyGetPropertyWithoutPropertyGet()
         {
-            Assert.Throws<ArgumentException>(() => new Mock<FooBase>().Protected().VerifyGet<int>("OnlySet", Times.Once()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().VerifyGet<int>("OnlySet", Times.Once())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifyGetIsPublicPropertyGet()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Mock<FooBase>().Protected().VerifyGet<string>("PublicValue", Times.Once()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>().Protected().VerifyGet<string>("PublicValue", Times.Once())
+            );
         }
 
         [Fact]
@@ -752,8 +836,9 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfVerifyGetNonVirtualPropertyGet()
         {
-            Assert.Throws<NotSupportedException>(
-                () => new Mock<FooBase>().Protected().VerifyGet<string>("NonVirtualValue", Times.Once()));
+            Assert.Throws<NotSupportedException>(() =>
+                new Mock<FooBase>().Protected().VerifyGet<string>("NonVirtualValue", Times.Once())
+            );
         }
 
         [Fact]
@@ -762,7 +847,9 @@ namespace Moq.Tests
             var mock = new Mock<FooBase>();
             mock.Object.GetProtectedValue();
 
-            Assert.Throws<MockException>(() => mock.Protected().VerifyGet<string>("ProtectedValue", Times.Exactly(2)));
+            Assert.Throws<MockException>(() =>
+                mock.Protected().VerifyGet<string>("ProtectedValue", Times.Exactly(2))
+            );
         }
 
         [Fact]
@@ -778,43 +865,61 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfVerifySetNullPropertyName()
         {
-            Assert.Throws<ArgumentNullException>(
-                () => new Mock<FooBase>().Protected().VerifySet<string>(null, Times.Once(), ItExpr.IsAny<string>()));
+            Assert.Throws<ArgumentNullException>(() =>
+                new Mock<FooBase>()
+                    .Protected()
+                    .VerifySet<string>(null, Times.Once(), ItExpr.IsAny<string>())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifySetEmptyPropertyName()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Mock<FooBase>().Protected().VerifySet<string>(string.Empty, Times.Once(), ItExpr.IsAny<int>()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>()
+                    .Protected()
+                    .VerifySet<string>(string.Empty, Times.Once(), ItExpr.IsAny<int>())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifySetPropertyNotFound()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Mock<FooBase>().Protected().VerifySet<int>("Foo", Times.Once(), ItExpr.IsAny<int>()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>()
+                    .Protected()
+                    .VerifySet<int>("Foo", Times.Once(), ItExpr.IsAny<int>())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifySetPropertyWithoutPropertySet()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Mock<FooBase>().Protected().VerifySet<int>("OnlyGet", Times.Once(), ItExpr.IsAny<int>()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>()
+                    .Protected()
+                    .VerifySet<int>("OnlyGet", Times.Once(), ItExpr.IsAny<int>())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifySetPublicPropertySet()
         {
-            Assert.Throws<ArgumentException>(
-                () => new Mock<FooBase>().Protected().VerifySet<int>("PublicValue", Times.Once(), ItExpr.IsAny<int>()));
+            Assert.Throws<ArgumentException>(() =>
+                new Mock<FooBase>()
+                    .Protected()
+                    .VerifySet<int>("PublicValue", Times.Once(), ItExpr.IsAny<int>())
+            );
         }
 
         [Fact]
         public void ThrowsIfVerifySetNonVirtualPropertySet()
         {
-            Assert.Throws<NotSupportedException>(
-                () => new Mock<FooBase>().Protected().VerifySet<string>("NonVirtualValue", Times.Once(), ItExpr.IsAny<string>()));
+            Assert.Throws<NotSupportedException>(() =>
+                new Mock<FooBase>()
+                    .Protected()
+                    .VerifySet<string>("NonVirtualValue", Times.Once(), ItExpr.IsAny<string>())
+            );
         }
 
         [Fact]
@@ -823,7 +928,9 @@ namespace Moq.Tests
             var mock = new Mock<FooBase>();
             mock.Object.ProtectedInternalValue = "foo";
 
-            Assert.Throws<MockException>(() => mock.Protected().VerifySet<string>("ProtectedInternalValue", Times.Once(), "bar"));
+            Assert.Throws<MockException>(() =>
+                mock.Protected().VerifySet<string>("ProtectedInternalValue", Times.Once(), "bar")
+            );
             mock.Protected().VerifySet<string>("ProtectedInternalValue", Times.Once(), "foo");
         }
 
@@ -833,7 +940,8 @@ namespace Moq.Tests
             var mock = new Mock<FooBase>();
             mock.Object.SetProtectedValue("foo");
 
-            mock.Protected().VerifySet<string>("ProtectedValue", Times.Once(), ItExpr.IsAny<string>());
+            mock.Protected()
+                .VerifySet<string>("ProtectedValue", Times.Once(), ItExpr.IsAny<string>());
         }
 
         [Fact]
@@ -842,8 +950,10 @@ namespace Moq.Tests
             var mock = new Mock<FooBase>();
             mock.Object.SetProtectedValue("Foo");
 
-            Assert.Throws<MockException>(
-                () => mock.Protected().VerifySet<string>("ProtectedValue", Times.Exactly(2), ItExpr.IsAny<string>()));
+            Assert.Throws<MockException>(() =>
+                mock.Protected()
+                    .VerifySet<string>("ProtectedValue", Times.Exactly(2), ItExpr.IsAny<string>())
+            );
         }
 
         [Fact]
@@ -853,7 +963,8 @@ namespace Moq.Tests
             mock.Object.SetProtectedValue("foo");
             mock.Object.SetProtectedValue("foo");
 
-            mock.Protected().VerifySet<string>("ProtectedValue", Times.Exactly(2), ItExpr.IsAny<string>());
+            mock.Protected()
+                .VerifySet<string>("ProtectedValue", Times.Exactly(2), ItExpr.IsAny<string>());
         }
 
         [Fact]
@@ -865,57 +976,85 @@ namespace Moq.Tests
 
             var expression = Expression.Constant(1);
             Expression setExpression1 = null;
-            protectedMock.SetupSet<Expression>("ExpressionProperty", expression).Callback(expr => setExpression1 = expr);
+            protectedMock
+                .SetupSet<Expression>("ExpressionProperty", expression)
+                .Callback(expr => setExpression1 = expr);
             mocked.SetExpressionProperty(expression);
             Assert.Same(expression, setExpression1);
 
             var expression2 = Expression.Constant(2);
             Expression setExpression2 = null;
-            protectedMock.SetupSet<Expression>("ExpressionProperty", ItExpr.Is<ConstantExpression>(e => (int)e.Value == 2)).Callback(expr => setExpression2 = expr);
+            protectedMock
+                .SetupSet<Expression>(
+                    "ExpressionProperty",
+                    ItExpr.Is<ConstantExpression>(e => (int)e.Value == 2)
+                )
+                .Callback(expr => setExpression2 = expr);
             mocked.SetExpressionProperty(expression2);
             Assert.Same(expression2, setExpression2);
 
             var constantExpression = Expression.Constant(1);
             ConstantExpression setConstantExpression = null;
-            protectedMock.SetupSet<ConstantExpression>("NotAMatcherExpressionProperty", constantExpression).Callback(expr => setConstantExpression = expr);
+            protectedMock
+                .SetupSet<ConstantExpression>("NotAMatcherExpressionProperty", constantExpression)
+                .Callback(expr => setConstantExpression = expr);
             mocked.SetNotAMatcherExpressionProperty(constantExpression);
             Assert.Same(constantExpression, setConstantExpression);
 
             var constantExpression2 = Expression.Constant(2);
             ConstantExpression setConstantExpression2 = null;
-            protectedMock.SetupSet<ConstantExpression>("NotAMatcherExpressionProperty", ItExpr.Is<ConstantExpression>(e => (int)e.Value == 2)).Callback(expr => setConstantExpression2 = expr);
+            protectedMock
+                .SetupSet<ConstantExpression>(
+                    "NotAMatcherExpressionProperty",
+                    ItExpr.Is<ConstantExpression>(e => (int)e.Value == 2)
+                )
+                .Callback(expr => setConstantExpression2 = expr);
             mocked.SetNotAMatcherExpressionProperty(constantExpression2);
             Assert.Same(constantExpression2, setConstantExpression2);
 
             var method = typeof(FooBase).GetMethod(nameof(FooBase.MethodForReflection));
             var methodCallExpression = Expression.Call(method);
             MethodCallExpression setMethodCallExpression = null;
-            protectedMock.SetupSet<MethodCallExpression>("MatcherExpressionProperty", methodCallExpression).Callback(expr => setMethodCallExpression = expr);
+            protectedMock
+                .SetupSet<MethodCallExpression>("MatcherExpressionProperty", methodCallExpression)
+                .Callback(expr => setMethodCallExpression = expr);
             mocked.SetMatcherExpressionProperty(methodCallExpression);
             Assert.Same(methodCallExpression, setMethodCallExpression);
 
-            var methodCallExpression2 = Expression.Call(typeof(FooBase).GetMethod(nameof(FooBase.MethodForReflection2)));
+            var methodCallExpression2 = Expression.Call(
+                typeof(FooBase).GetMethod(nameof(FooBase.MethodForReflection2))
+            );
             MethodCallExpression setMethodCallExpression2 = null;
-            protectedMock.SetupSet<MethodCallExpression>("MatcherExpressionProperty", ItExpr.Is<MethodCallExpression>(e => e.Method != method)).Callback(expr => setMethodCallExpression2 = expr);
+            protectedMock
+                .SetupSet<MethodCallExpression>(
+                    "MatcherExpressionProperty",
+                    ItExpr.Is<MethodCallExpression>(e => e.Method != method)
+                )
+                .Callback(expr => setMethodCallExpression2 = expr);
             mocked.SetMatcherExpressionProperty(methodCallExpression2);
             Assert.Same(methodCallExpression2, setMethodCallExpression2);
 
             Expression<Func<int, bool>> lambdaExpression = i => i < 5;
             LambdaExpression setLambdaExpression = null;
-            protectedMock.SetupSet<LambdaExpression>("LambdaExpressionProperty", lambdaExpression).Callback(expr => setLambdaExpression = expr);
+            protectedMock
+                .SetupSet<LambdaExpression>("LambdaExpressionProperty", lambdaExpression)
+                .Callback(expr => setLambdaExpression = expr);
             mocked.SetLambdaExpressionProperty(lambdaExpression);
             Assert.Same(lambdaExpression, setLambdaExpression);
 
             Expression<Func<int, int>> lambdaExpression2 = i => i;
             LambdaExpression setLambdaExpression2 = null;
-            protectedMock.SetupSet<LambdaExpression>("LambdaExpressionProperty", ItExpr.Is<LambdaExpression>(e => e == lambdaExpression2)).Callback(expr => setLambdaExpression2 = expr);
+            protectedMock
+                .SetupSet<LambdaExpression>(
+                    "LambdaExpressionProperty",
+                    ItExpr.Is<LambdaExpression>(e => e == lambdaExpression2)
+                )
+                .Callback(expr => setLambdaExpression2 = expr);
             mocked.SetLambdaExpressionProperty(lambdaExpression2);
             Assert.Same(lambdaExpression2, setLambdaExpression2);
-
         }
 
         public class ExpectedException : Exception
-
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
                     private static ExpectedException instance = new ExpectedException();
@@ -954,21 +1093,13 @@ namespace Moq.Tests
                 return this.DoReturn(a, b);
             }
 
-            protected virtual void Do(int a, int b)
-            {
-            }
+            protected virtual void Do(int a, int b) { }
 
-            protected virtual void Do(string a, string b)
-            {
-            }
+            protected virtual void Do(string a, string b) { }
 
-            protected virtual void Do<T>(T a, T b)
-            {
-            }
+            protected virtual void Do<T>(T a, T b) { }
 
-            protected virtual void Do<T, T2>(T a, T2 b)
-            {
-            }
+            protected virtual void Do<T, T2>(T a, T2 b) { }
 
             protected virtual int DoReturn(int a, int b)
             {
@@ -1025,7 +1156,9 @@ namespace Moq.Tests
         public class FooBase
         {
             public static void MethodForReflection() { }
+
             public static void MethodForReflection2() { }
+
             protected virtual Expression ExpressionProperty { get; set; }
 
             public void SetExpressionProperty(Expression expression)
@@ -1123,9 +1256,7 @@ namespace Moq.Tests
                 return this.ProtectedValue;
             }
 
-            public virtual void Public()
-            {
-            }
+            public virtual void Public() { }
 
             public virtual int PublicInt()
             {
@@ -1137,31 +1268,23 @@ namespace Moq.Tests
                 this.ProtectedValue = value;
             }
 
-            internal protected virtual void ProtectedInternal()
-            {
-            }
+            protected internal virtual void ProtectedInternal() { }
 
-            internal protected virtual void ProtectedInternalGeneric<T>()
-            {
-            }
+            protected internal virtual void ProtectedInternalGeneric<T>() { }
 
-            internal protected virtual int ProtectedInternalInt()
+            protected internal virtual int ProtectedInternalInt()
             {
                 return 0;
             }
 
-            internal protected virtual T ProtectedInternalReturnGeneric<T>()
+            protected internal virtual T ProtectedInternalReturnGeneric<T>()
             {
                 return default(T);
             }
 
-            protected virtual void Protected()
-            {
-            }
+            protected virtual void Protected() { }
 
-            protected virtual void ProtectedGeneric<T>()
-            {
-            }
+            protected virtual void ProtectedGeneric<T>() { }
 
             protected virtual int ProtectedInt()
             {
@@ -1183,9 +1306,7 @@ namespace Moq.Tests
                 return value;
             }
 
-            protected void NonVirtual()
-            {
-            }
+            protected void NonVirtual() { }
 
             protected int NonVirtualInt()
             {
@@ -1203,9 +1324,7 @@ namespace Moq.Tests
             }
         }
 
-        public class FooDerived : FooBase
-        {
-        }
+        public class FooDerived : FooBase { }
 
         public class MyBase { }
 

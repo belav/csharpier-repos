@@ -16,7 +16,11 @@ public class RelationalTransactionExtensionsTest
         var dbTransaction = new FakeDbTransaction(dbConnection);
 
         var connection = new FakeRelationalConnection(
-            CreateOptions((FakeRelationalOptionsExtension)new FakeRelationalOptionsExtension().WithConnection(dbConnection)));
+            CreateOptions(
+                (FakeRelationalOptionsExtension)
+                    new FakeRelationalOptionsExtension().WithConnection(dbConnection)
+            )
+        );
 
         var loggerFactory = new ListLoggerFactory();
 
@@ -29,10 +33,11 @@ public class RelationalTransactionExtensionsTest
                 new LoggingOptions(),
                 new DiagnosticListener("Fake"),
                 new TestRelationalLoggingDefinitions(),
-                new NullDbContextLogger()),
+                new NullDbContextLogger()
+            ),
             false,
-            new RelationalSqlGenerationHelper(
-                new RelationalSqlGenerationHelperDependencies()));
+            new RelationalSqlGenerationHelper(new RelationalSqlGenerationHelperDependencies())
+        );
 
         Assert.Equal(dbTransaction, transaction.GetDbTransaction());
     }
@@ -44,42 +49,41 @@ public class RelationalTransactionExtensionsTest
 
         Assert.Equal(
             RelationalStrings.RelationalNotInUse,
-            Assert.Throws<InvalidOperationException>(
-                () => transaction.GetDbTransaction()).Message);
+            Assert.Throws<InvalidOperationException>(() => transaction.GetDbTransaction()).Message
+        );
     }
 
     private class NonRelationalTransaction : IDbContextTransaction
     {
         public Guid TransactionId { get; } = Guid.NewGuid();
 
-        public void Commit()
-            => throw new NotImplementedException();
+        public void Commit() => throw new NotImplementedException();
 
-        public void Dispose()
-            => throw new NotImplementedException();
+        public void Dispose() => throw new NotImplementedException();
 
-        public void Rollback()
-            => throw new NotImplementedException();
+        public void Rollback() => throw new NotImplementedException();
 
-        public Task CommitAsync(CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+        public Task CommitAsync(CancellationToken cancellationToken = default) =>
+            throw new NotImplementedException();
 
-        public Task RollbackAsync(CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+        public Task RollbackAsync(CancellationToken cancellationToken = default) =>
+            throw new NotImplementedException();
 
-        public ValueTask DisposeAsync()
-            => throw new NotImplementedException();
+        public ValueTask DisposeAsync() => throw new NotImplementedException();
     }
 
     private const string ConnectionString = "Fake Connection String";
 
     public static IDbContextOptions CreateOptions(
-        FakeRelationalOptionsExtension optionsExtension = null)
+        FakeRelationalOptionsExtension optionsExtension = null
+    )
     {
         var optionsBuilder = new DbContextOptionsBuilder();
 
-        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder)
-            .AddOrUpdateExtension(optionsExtension ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString));
+        ((IDbContextOptionsBuilderInfrastructure)optionsBuilder).AddOrUpdateExtension(
+            optionsExtension
+                ?? new FakeRelationalOptionsExtension().WithConnectionString(ConnectionString)
+        );
 
         return optionsBuilder.Options;
     }

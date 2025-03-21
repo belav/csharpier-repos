@@ -1,6 +1,6 @@
-//------------------------------------------------------------  
-// Copyright (c) Microsoft Corporation.  All rights reserved.   
-//------------------------------------------------------------  
+//------------------------------------------------------------
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+//------------------------------------------------------------
 
 namespace System.ServiceModel.MsmqIntegration
 {
@@ -18,7 +18,12 @@ namespace System.ServiceModel.MsmqIntegration
         MsmqIntegrationChannelFactory factory;
         SecurityTokenProviderContainer certificateTokenProvider;
 
-        public MsmqIntegrationOutputChannel(MsmqIntegrationChannelFactory factory, EndpointAddress to, Uri via, bool manualAddressing)
+        public MsmqIntegrationOutputChannel(
+            MsmqIntegrationChannelFactory factory,
+            EndpointAddress to,
+            Uri via,
+            bool manualAddressing
+        )
             : base(factory, to, via, manualAddressing, factory.MessageVersion)
         {
             this.factory = factory;
@@ -27,7 +32,7 @@ namespace System.ServiceModel.MsmqIntegration
                 this.certificateTokenProvider = factory.CreateX509TokenProvider(to, via);
             }
         }
-        
+
         void CloseQueue()
         {
             if (null != this.msmqQueue)
@@ -52,7 +57,11 @@ namespace System.ServiceModel.MsmqIntegration
             this.OnCloseCore(true, TimeSpan.Zero);
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.OnCloseCore(false, timeout);
             return new CompletedAsyncResult(callback, state);
@@ -72,7 +81,10 @@ namespace System.ServiceModel.MsmqIntegration
         {
             try
             {
-                this.msmqQueue = new MsmqQueue(this.factory.AddressTranslator.UriToFormatName(this.RemoteAddress.Uri), UnsafeNativeMethods.MQ_SEND_ACCESS);
+                this.msmqQueue = new MsmqQueue(
+                    this.factory.AddressTranslator.UriToFormatName(this.RemoteAddress.Uri),
+                    UnsafeNativeMethods.MQ_SEND_ACCESS
+                );
             }
             catch (MsmqException ex)
             {
@@ -97,7 +109,11 @@ namespace System.ServiceModel.MsmqIntegration
             }
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             OnOpenCore(timeout);
             return new CompletedAsyncResult(callback, state);
@@ -113,7 +129,12 @@ namespace System.ServiceModel.MsmqIntegration
             OnOpenCore(timeout);
         }
 
-        protected override IAsyncResult OnBeginSend(Message message, TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             OnSend(message, timeout);
             return new CompletedAsyncResult(callback, state);
@@ -128,10 +149,14 @@ namespace System.ServiceModel.MsmqIntegration
         {
             MessageProperties properties = message.Properties;
             Stream stream = null;
-            
+
             MsmqIntegrationMessageProperty property = MsmqIntegrationMessageProperty.Get(message);
             if (null == property)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.MsmqMessageDoesntHaveIntegrationProperty)));                
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new CommunicationException(
+                        SR.GetString(SR.MsmqMessageDoesntHaveIntegrationProperty)
+                    )
+                );
             if (null != property.Body)
                 stream = this.factory.Serialize(property);
 
@@ -144,15 +169,29 @@ namespace System.ServiceModel.MsmqIntegration
             {
                 if (stream.Length > int.MaxValue)
                 {
-                    throw TraceUtility.ThrowHelperError(new ProtocolException(SR.GetString(SR.MessageSizeMustBeInIntegerRange)), message);
+                    throw TraceUtility.ThrowHelperError(
+                        new ProtocolException(SR.GetString(SR.MessageSizeMustBeInIntegerRange)),
+                        message
+                    );
                 }
 
                 size = (int)stream.Length;
             }
 
-            using (MsmqIntegrationOutputMessage msmqMessage = new MsmqIntegrationOutputMessage(this.factory, size, this.RemoteAddress, property))
+            using (
+                MsmqIntegrationOutputMessage msmqMessage = new MsmqIntegrationOutputMessage(
+                    this.factory,
+                    size,
+                    this.RemoteAddress,
+                    property
+                )
+            )
             {
-                msmqMessage.ApplyCertificateIfNeeded(this.certificateTokenProvider, this.factory.MsmqTransportSecurity.MsmqAuthenticationMode, timeout);
+                msmqMessage.ApplyCertificateIfNeeded(
+                    this.certificateTokenProvider,
+                    this.factory.MsmqTransportSecurity.MsmqAuthenticationMode,
+                    timeout
+                );
 
                 if (stream != null)
                 {
@@ -167,7 +206,10 @@ namespace System.ServiceModel.MsmqIntegration
                 bool lockHeld = false;
                 try
                 {
-                    Msmq.EnterXPSendLock(out lockHeld, this.factory.MsmqTransportSecurity.MsmqProtectionLevel);
+                    Msmq.EnterXPSendLock(
+                        out lockHeld,
+                        this.factory.MsmqTransportSecurity.MsmqProtectionLevel
+                    );
                     this.msmqQueue.Send(msmqMessage, this.transactionMode);
                     MsmqDiagnostics.DatagramSent(msmqMessage.MessageId, message);
                     property.Id = MsmqMessageId.ToString(msmqMessage.MessageId.Buffer);
@@ -187,6 +229,7 @@ namespace System.ServiceModel.MsmqIntegration
                 }
             }
         }
+
         class MsmqIntegrationOutputMessage : MsmqOutputMessage<IOutputChannel>
         {
             ByteProperty acknowledge;
@@ -198,12 +241,12 @@ namespace System.ServiceModel.MsmqIntegration
             ByteProperty priority;
             StringProperty responseQueue;
 
-
             public MsmqIntegrationOutputMessage(
-                MsmqChannelFactoryBase<IOutputChannel> factory, 
-                int bodySize, 
-                EndpointAddress remoteAddress, 
-                MsmqIntegrationMessageProperty property)
+                MsmqChannelFactoryBase<IOutputChannel> factory,
+                int bodySize,
+                EndpointAddress remoteAddress,
+                MsmqIntegrationMessageProperty property
+            )
                 : base(factory, bodySize, remoteAddress, 8)
             {
                 if (null == property)
@@ -218,35 +261,60 @@ namespace System.ServiceModel.MsmqIntegration
                     EnsureAdminQueueProperty(property.AdministrationQueue, false);
 
                 if (property.AppSpecific.HasValue)
-                    this.appSpecific = new IntProperty(this, UnsafeNativeMethods.PROPID_M_APPSPECIFIC, property.AppSpecific.Value);
+                    this.appSpecific = new IntProperty(
+                        this,
+                        UnsafeNativeMethods.PROPID_M_APPSPECIFIC,
+                        property.AppSpecific.Value
+                    );
 
                 if (property.BodyType.HasValue)
                     EnsureBodyTypeProperty(property.BodyType.Value);
 
                 if (null != property.CorrelationId)
-                    this.correlationId = new BufferProperty(this, UnsafeNativeMethods.PROPID_M_CORRELATIONID, MsmqMessageId.FromString(property.CorrelationId));
+                    this.correlationId = new BufferProperty(
+                        this,
+                        UnsafeNativeMethods.PROPID_M_CORRELATIONID,
+                        MsmqMessageId.FromString(property.CorrelationId)
+                    );
 
                 if (null != property.Extension)
-                    this.extension = new BufferProperty(this, UnsafeNativeMethods.PROPID_M_EXTENSION, property.Extension);
+                    this.extension = new BufferProperty(
+                        this,
+                        UnsafeNativeMethods.PROPID_M_EXTENSION,
+                        property.Extension
+                    );
 
                 if (null != property.Label)
-                    this.label = new StringProperty(this, UnsafeNativeMethods.PROPID_M_LABEL, property.Label);
+                    this.label = new StringProperty(
+                        this,
+                        UnsafeNativeMethods.PROPID_M_LABEL,
+                        property.Label
+                    );
 
                 if (property.Priority.HasValue)
-                    this.priority = new ByteProperty(this, UnsafeNativeMethods.PROPID_M_PRIORITY, (byte)property.Priority.Value);
+                    this.priority = new ByteProperty(
+                        this,
+                        UnsafeNativeMethods.PROPID_M_PRIORITY,
+                        (byte)property.Priority.Value
+                    );
 
                 if (null != property.ResponseQueue)
                     EnsureResponseQueueProperty(property.ResponseQueue);
 
                 if (property.TimeToReachQueue.HasValue)
-                    EnsureTimeToReachQueueProperty(MsmqDuration.FromTimeSpan(property.TimeToReachQueue.Value));
+                    EnsureTimeToReachQueueProperty(
+                        MsmqDuration.FromTimeSpan(property.TimeToReachQueue.Value)
+                    );
             }
 
             void EnsureAcknowledgeProperty(byte value)
             {
                 if (this.acknowledge == null)
                 {
-                    this.acknowledge = new ByteProperty(this, UnsafeNativeMethods.PROPID_M_ACKNOWLEDGE);
+                    this.acknowledge = new ByteProperty(
+                        this,
+                        UnsafeNativeMethods.PROPID_M_ACKNOWLEDGE
+                    );
                 }
                 this.acknowledge.Value = value;
             }
@@ -255,13 +323,17 @@ namespace System.ServiceModel.MsmqIntegration
             {
                 if (null != value)
                 {
-                    string queueName = useNetMsmqTranslator ?
-                        MsmqUri.NetMsmqAddressTranslator.UriToFormatName(value) : 
-                        MsmqUri.FormatNameAddressTranslator.UriToFormatName(value);
+                    string queueName = useNetMsmqTranslator
+                        ? MsmqUri.NetMsmqAddressTranslator.UriToFormatName(value)
+                        : MsmqUri.FormatNameAddressTranslator.UriToFormatName(value);
 
                     if (this.adminQueue == null)
                     {
-                        this.adminQueue = new StringProperty(this, UnsafeNativeMethods.PROPID_M_ADMIN_QUEUE, queueName);
+                        this.adminQueue = new StringProperty(
+                            this,
+                            UnsafeNativeMethods.PROPID_M_ADMIN_QUEUE,
+                            queueName
+                        );
                     }
                     else
                     {
@@ -277,7 +349,11 @@ namespace System.ServiceModel.MsmqIntegration
                     string queueName = MsmqUri.FormatNameAddressTranslator.UriToFormatName(value);
                     if (this.responseQueue == null)
                     {
-                        this.responseQueue = new StringProperty(this, UnsafeNativeMethods.PROPID_M_RESP_FORMAT_NAME, queueName);
+                        this.responseQueue = new StringProperty(
+                            this,
+                            UnsafeNativeMethods.PROPID_M_RESP_FORMAT_NAME,
+                            queueName
+                        );
                     }
                     else
                     {
@@ -288,5 +364,3 @@ namespace System.ServiceModel.MsmqIntegration
         }
     }
 }
-
-    

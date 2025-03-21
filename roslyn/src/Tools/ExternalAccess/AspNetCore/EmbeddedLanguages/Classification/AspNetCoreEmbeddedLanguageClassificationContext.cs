@@ -13,7 +13,8 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         private readonly EmbeddedLanguageClassificationContext _context;
 
         internal AspNetCoreEmbeddedLanguageClassificationContext(
-            EmbeddedLanguageClassificationContext context)
+            EmbeddedLanguageClassificationContext context
+        )
         {
             _context = context;
         }
@@ -27,7 +28,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         /// <inheritdoc cref="EmbeddedLanguageClassificationContext.CancellationToken"/>
         public CancellationToken CancellationToken => _context.CancellationToken;
 
-        public void AddClassification(string classificationType, TextSpan span)
-            => _context.AddClassification(classificationType, span);
+        public void AddClassification(string classificationType, TextSpan span) =>
+            _context.AddClassification(classificationType, span);
     }
 }

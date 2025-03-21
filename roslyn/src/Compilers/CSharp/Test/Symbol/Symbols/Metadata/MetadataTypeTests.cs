@@ -113,13 +113,22 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void MetadataTypeSymbolGenClass02()
         {
             var text = "public class A {}";
-            var compilation = CreateEmptyCompilation(text, new[] { MscorlibRef }, options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.Internal));
+            var compilation = CreateEmptyCompilation(
+                text,
+                new[] { MscorlibRef },
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
+            );
 
             var mscorlib = compilation.ExternalReferences[0];
             var mscorNS = compilation.GetReferencedAssemblySymbol(mscorlib);
             Assert.Equal("mscorlib", mscorNS.Name);
             Assert.Equal(SymbolKind.Assembly, mscorNS.Kind);
-            var ns1 = (mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol).GetMembers("Collections").Single() as NamespaceSymbol;
+            var ns1 =
+                (mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol)
+                    .GetMembers("Collections")
+                    .Single() as NamespaceSymbol;
             var ns2 = ns1.GetMembers("Generic").Single() as NamespaceSymbol;
 
             var type1 = ns2.GetTypeMembers("Dictionary").First() as NamedTypeSymbol;
@@ -146,7 +155,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             // 4 nested types, 67 members overall
             Assert.Equal(67, type1.GetMembers().Length);
             Assert.Equal(3, type1.GetTypeMembers().Length);
-            // IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>, 
+            // IDictionary<TKey, TValue>, ICollection<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>,
             // IDictionary, ICollection, IEnumerable, ISerializable, IDeserializationCallback
             Assert.Equal(10, type1.Interfaces().Length);
 
@@ -167,7 +176,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             var mscorlib = compilation.ExternalReferences[0];
             var mscorNS = compilation.GetReferencedAssemblySymbol(mscorlib);
-            var ns1 = (mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol).GetMembers("Collections").Single() as NamespaceSymbol;
+            var ns1 =
+                (mscorNS.GlobalNamespace.GetMembers("System").Single() as NamespaceSymbol)
+                    .GetMembers("Collections")
+                    .Single() as NamespaceSymbol;
             var ns2 = ns1.GetMembers("Generic").Single() as NamespaceSymbol;
 
             var type1 = ns2.GetTypeMembers("IList").First() as NamedTypeSymbol;
@@ -211,9 +223,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void MetadataTypeSymbolStruct01()
         {
             var text = "public class A {}";
-            var compilation = CreateEmptyCompilation(text,
+            var compilation = CreateEmptyCompilation(
+                text,
                 new[] { MscorlibRef },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.Internal));
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
+            );
 
             var mscorlib = compilation.ExternalReferences[0];
             var mscorNS = compilation.GetReferencedAssemblySymbol(mscorlib);
@@ -260,7 +276,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             // This is a copy of the EventProviderBase type which existed in a beta of .NET framework
             // 4.5. Replicating the structure of the type to maintain the test validation.
-            var source1 = @"
+            var source1 =
+                @"
 namespace System.Diagnostics.Eventing
 {
     internal class EventProviderBase
@@ -275,12 +292,25 @@ namespace System.Diagnostics.Eventing
 }
 ";
 
-            var compilation1 = CreateEmptyCompilation(source1, new[] { TestMetadata.Net40.mscorlib, TestMetadata.Net40.SystemCore });
+            var compilation1 = CreateEmptyCompilation(
+                source1,
+                new[] { TestMetadata.Net40.mscorlib, TestMetadata.Net40.SystemCore }
+            );
             compilation1.VerifyDiagnostics();
 
             var source2 = "public class A {}";
-            var compilation2 = CreateEmptyCompilation(source2, new MetadataReference[] { TestMetadata.Net40.mscorlib, TestMetadata.Net40.SystemCore, compilation1.EmitToImageReference() },
-                options: TestOptions.ReleaseDll.WithMetadataImportOptions(MetadataImportOptions.Internal));
+            var compilation2 = CreateEmptyCompilation(
+                source2,
+                new MetadataReference[]
+                {
+                    TestMetadata.Net40.mscorlib,
+                    TestMetadata.Net40.SystemCore,
+                    compilation1.EmitToImageReference(),
+                },
+                options: TestOptions.ReleaseDll.WithMetadataImportOptions(
+                    MetadataImportOptions.Internal
+                )
+            );
 
             var compilation1Lib = compilation2.ExternalReferences[2];
             var systemCoreNS = compilation2.GetReferencedAssemblySymbol(compilation1Lib);
@@ -290,7 +320,8 @@ namespace System.Diagnostics.Eventing
 
             var type1 = ns3.GetTypeMembers("EventProviderBase").Single() as NamedTypeSymbol;
             // EventData[]
-            var type2 = (type1.GetMembers("m_eventData").Single() as FieldSymbol).Type as ArrayTypeSymbol;
+            var type2 =
+                (type1.GetMembers("m_eventData").Single() as FieldSymbol).Type as ArrayTypeSymbol;
             var member2 = type1.GetMembers("WriteTransferEventHelper").Single() as MethodSymbol;
             Assert.Equal(3, member2.Parameters.Length);
             // params object[]
@@ -309,7 +340,10 @@ namespace System.Diagnostics.Eventing
             Assert.Equal("EventData", type2.ElementType.Name);
             Assert.Equal("Array", type2.BaseType().Name);
             Assert.Equal("Object", type3.ElementType.Name);
-            Assert.Equal("System.Diagnostics.Eventing.EventProviderBase.EventData[]", type2.ToTestDisplayString());
+            Assert.Equal(
+                "System.Diagnostics.Eventing.EventProviderBase.EventData[]",
+                type2.ToTestDisplayString()
+            );
             Assert.Equal("System.Object[]", type3.ToTestDisplayString());
 
             Assert.Equal(1, type2.Interfaces().Length);
@@ -340,15 +374,21 @@ namespace System.Diagnostics.Eventing
             Assert.Empty(compilation2.GetDeclarationDiagnostics());
         }
 
-        [Fact, WorkItem(531619, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531619"), WorkItem(531619, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531619")]
+        [
+            Fact,
+            WorkItem(531619, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531619"),
+            WorkItem(531619, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/531619")
+        ]
         public void InheritFromNetModuleMetadata01()
         {
             var modRef = TestReferences.MetadataTests.NetModule01.ModuleCS00;
 
-            var text1 = @"
+            var text1 =
+                @"
 class Test : StaticModClass
 {";
-            var text2 = @"
+            var text2 =
+                @"
     public static int Main()
     {
         r";
@@ -368,7 +408,12 @@ class Test : StaticModClass
             currComp = currComp.ReplaceSyntaxTree(oldTree, newTree);
 
             var model = currComp.GetSemanticModel(newTree);
-            var id = newTree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(s => s.ToString() == "StaticModClass").First();
+            var id = newTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(s => s.ToString() == "StaticModClass")
+                .First();
             // NRE is thrown later but this one has to be called first
             var symInfo = model.GetSymbolInfo(id);
             Assert.NotNull(symInfo.Symbol);
@@ -383,7 +428,12 @@ class Test : StaticModClass
             currComp = currComp.ReplaceSyntaxTree(oldTree, newTree);
 
             model = currComp.GetSemanticModel(newTree);
-            id = newTree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(s => s.ToString() == "StaticModClass").First();
+            id = newTree
+                .GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(s => s.ToString() == "StaticModClass")
+                .First();
             symInfo = model.GetSymbolInfo(id);
             Assert.NotNull(symInfo.Symbol);
         }
@@ -392,7 +442,8 @@ class Test : StaticModClass
         [Fact]
         public void InstanceIterator_ExplicitInterfaceImplementation_OldName()
         {
-            var ilSource = @"
+            var ilSource =
+                @"
 .class interface public abstract auto ansi I`1<T>
 {
   .method public hidebysig newslot abstract virtual 
@@ -510,10 +561,17 @@ class Test : StaticModClass
 
             var comp = CreateCompilationWithILAndMscorlib40("", ilSource);
 
-            var stateMachineClass = comp.GlobalNamespace.GetMember<NamedTypeSymbol>("C").GetMembers().OfType<NamedTypeSymbol>().Single();
+            var stateMachineClass = comp
+                .GlobalNamespace.GetMember<NamedTypeSymbol>("C")
+                .GetMembers()
+                .OfType<NamedTypeSymbol>()
+                .Single();
             Assert.Equal("<I<System.Int32>.F>d__0", stateMachineClass.Name); // The name has been reconstructed correctly.
             Assert.Equal("C.<I<System.Int32>.F>d__0", stateMachineClass.ToTestDisplayString()); // SymbolDisplay works.
-            Assert.Equal(stateMachineClass, comp.GetTypeByMetadataName("C+<I<System.Int32>.F>d__0")); // GetTypeByMetadataName works.
+            Assert.Equal(
+                stateMachineClass,
+                comp.GetTypeByMetadataName("C+<I<System.Int32>.F>d__0")
+            ); // GetTypeByMetadataName works.
         }
 
         [ConditionalFact(typeof(ClrOnly))]
@@ -521,7 +579,7 @@ class Test : StaticModClass
         public void EmptyNamespaceNames()
         {
             var ilSource =
-@".class public A
+                @".class public A
 {
   .method public hidebysig specialname rtspecialname instance void .ctor() { ret }
 }
@@ -579,11 +637,17 @@ class Test : StaticModClass
             var builder = ArrayBuilder<string>.GetInstance();
             var module = comp.GetMember<NamedTypeSymbol>("A").ContainingModule;
             GetAllNamespaceNames(builder, module.GlobalNamespace);
-            Assert.Equal(new[] { "<global namespace>", "", ".", "..N", ".N", "N", "N.M", "N.M." }, builder);
+            Assert.Equal(
+                new[] { "<global namespace>", "", ".", "..N", ".N", "N", "N.M", "N.M." },
+                builder
+            );
             builder.Free();
         }
 
-        private static void GetAllNamespaceNames(ArrayBuilder<string> builder, NamespaceSymbol @namespace)
+        private static void GetAllNamespaceNames(
+            ArrayBuilder<string> builder,
+            NamespaceSymbol @namespace
+        )
         {
             builder.Add(@namespace.ToTestDisplayString());
             foreach (var member in @namespace.GetMembers())

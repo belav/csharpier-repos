@@ -8,53 +8,67 @@ namespace System.Diagnostics.CodeAnalysis;
 // Attributes added in netstandard2.1
 #if !NETSTANDARD2_1_OR_GREATER
 /// <summary>Specifies that null is allowed as an input even if the corresponding type disallows it.</summary>
-[AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property, Inherited = false)]
+[AttributeUsage(
+    AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property,
+    Inherited = false
+)]
 #if INTERNAL_NULLABLE_ATTRIBUTES
 internal
 #else
-    public
+public
 #endif
-        sealed class AllowNullAttribute : Attribute
-{ }
+sealed class AllowNullAttribute : Attribute { }
 
 /// <summary>Specifies that null is disallowed as an input even if the corresponding type allows it.</summary>
-[AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property, Inherited = false)]
+[AttributeUsage(
+    AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property,
+    Inherited = false
+)]
 #if INTERNAL_NULLABLE_ATTRIBUTES
 internal
 #else
-    public
+public
 #endif
-        sealed class DisallowNullAttribute : Attribute
-{ }
+sealed class DisallowNullAttribute : Attribute { }
 
 /// <summary>Specifies that an output may be null even if the corresponding type disallows it.</summary>
-[AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, Inherited = false)]
+[AttributeUsage(
+    AttributeTargets.Field
+        | AttributeTargets.Parameter
+        | AttributeTargets.Property
+        | AttributeTargets.ReturnValue,
+    Inherited = false
+)]
 #if INTERNAL_NULLABLE_ATTRIBUTES
 internal
 #else
-    public
+public
 #endif
-        sealed class MaybeNullAttribute : Attribute
-{ }
+sealed class MaybeNullAttribute : Attribute { }
 
 /// <summary>Specifies that an output will not be null even if the corresponding type allows it. Specifies that an input argument was not null when the call returns.</summary>
-[AttributeUsage(AttributeTargets.Field | AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, Inherited = false)]
+[AttributeUsage(
+    AttributeTargets.Field
+        | AttributeTargets.Parameter
+        | AttributeTargets.Property
+        | AttributeTargets.ReturnValue,
+    Inherited = false
+)]
 #if INTERNAL_NULLABLE_ATTRIBUTES
 internal
 #else
-    public
+public
 #endif
-        sealed class NotNullAttribute : Attribute
-{ }
+sealed class NotNullAttribute : Attribute { }
 
 /// <summary>Specifies that when a method returns <see cref="ReturnValue"/>, the parameter may be null even if the corresponding type disallows it.</summary>
 [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
 #if INTERNAL_NULLABLE_ATTRIBUTES
 internal
 #else
-    public
+public
 #endif
-        sealed class MaybeNullWhenAttribute : Attribute
+sealed class MaybeNullWhenAttribute : Attribute
 {
     /// <summary>Initializes the attribute with the specified return value condition.</summary>
     /// <param name="returnValue">
@@ -71,9 +85,9 @@ internal
 #if INTERNAL_NULLABLE_ATTRIBUTES
 internal
 #else
-    public
+public
 #endif
-        sealed class NotNullWhenAttribute : Attribute
+sealed class NotNullWhenAttribute : Attribute
 {
     /// <summary>Initializes the attribute with the specified return value condition.</summary>
     /// <param name="returnValue">
@@ -86,13 +100,17 @@ internal
 }
 
 /// <summary>Specifies that the output will be non-null if the named parameter is non-null.</summary>
-[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue, AllowMultiple = true, Inherited = false)]
+[AttributeUsage(
+    AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.ReturnValue,
+    AllowMultiple = true,
+    Inherited = false
+)]
 #if INTERNAL_NULLABLE_ATTRIBUTES
 internal
 #else
-    public
+public
 #endif
-        sealed class NotNullIfNotNullAttribute : Attribute
+sealed class NotNullIfNotNullAttribute : Attribute
 {
     /// <summary>Initializes the attribute with the associated parameter name.</summary>
     /// <param name="parameterName">
@@ -109,19 +127,18 @@ internal
 #if INTERNAL_NULLABLE_ATTRIBUTES
 internal
 #else
-    public
+public
 #endif
-        sealed class DoesNotReturnAttribute : Attribute
-{ }
+sealed class DoesNotReturnAttribute : Attribute { }
 
 /// <summary>Specifies that the method will not return if the associated Boolean parameter is passed the specified value.</summary>
 [AttributeUsage(AttributeTargets.Parameter, Inherited = false)]
 #if INTERNAL_NULLABLE_ATTRIBUTES
 internal
 #else
-    public
+public
 #endif
-        sealed class DoesNotReturnIfAttribute : Attribute
+sealed class DoesNotReturnIfAttribute : Attribute
 {
     /// <summary>Initializes the attribute with the specified parameter value.</summary>
     /// <param name="parameterValue">
@@ -138,13 +155,17 @@ internal
 // Attributes added in 5.0
 #if NETSTANDARD || NETFRAMEWORK
 /// <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values.</summary>
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, Inherited = false, AllowMultiple = true)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Property,
+    Inherited = false,
+    AllowMultiple = true
+)]
 #if INTERNAL_NULLABLE_ATTRIBUTES
 internal
 #else
-    public
+public
 #endif
-        sealed class MemberNotNullAttribute : Attribute
+sealed class MemberNotNullAttribute : Attribute
 {
     /// <summary>Initializes the attribute with a field or property member.</summary>
     /// <param name="member">
@@ -163,13 +184,17 @@ internal
 }
 
 /// <summary>Specifies that the method or property will ensure that the listed field and property members have not-null values when returning with the specified return value condition.</summary>
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, Inherited = false, AllowMultiple = true)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Property,
+    Inherited = false,
+    AllowMultiple = true
+)]
 #if INTERNAL_NULLABLE_ATTRIBUTES
 internal
 #else
-    public
+public
 #endif
-        sealed class MemberNotNullWhenAttribute : Attribute
+sealed class MemberNotNullWhenAttribute : Attribute
 {
     /// <summary>Initializes the attribute with the specified return value condition and a field or property member.</summary>
     /// <param name="returnValue">

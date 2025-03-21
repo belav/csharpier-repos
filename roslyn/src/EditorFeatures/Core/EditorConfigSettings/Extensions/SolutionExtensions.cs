@@ -11,7 +11,10 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Extensions
 {
     internal static class SolutionExtensions
     {
-        public static ImmutableArray<Project> GetProjectsUnderEditorConfigFile(this Solution solution, string pathToEditorConfigFile)
+        public static ImmutableArray<Project> GetProjectsUnderEditorConfigFile(
+            this Solution solution,
+            string pathToEditorConfigFile
+        )
         {
             var directoryPathToCheck = Path.GetDirectoryName(pathToEditorConfigFile);
             if (directoryPathToCheck is null)
@@ -38,7 +41,10 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Extensions
 
             return builder.ToImmutableAndFree();
 
-            static bool TryGetFolderContainingProject(Project project, [NotNullWhen(true)] out DirectoryInfo? directoryInfo)
+            static bool TryGetFolderContainingProject(
+                Project project,
+                [NotNullWhen(true)] out DirectoryInfo? directoryInfo
+            )
             {
                 directoryInfo = null;
                 if (project.FilePath is null)
@@ -56,7 +62,10 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Extensions
                 return true;
             }
 
-            static bool ContainsPath(DirectoryInfo directoryContainingEditorConfig, DirectoryInfo projectDirectory)
+            static bool ContainsPath(
+                DirectoryInfo directoryContainingEditorConfig,
+                DirectoryInfo projectDirectory
+            )
             {
                 if (directoryContainingEditorConfig.FullName == projectDirectory.FullName)
                 {
@@ -70,7 +79,9 @@ namespace Microsoft.CodeAnalysis.Editor.EditorConfigSettings.Extensions
 
                 while (projectDirectory.Parent is not null)
                 {
-                    if (projectDirectory.Parent.FullName == directoryContainingEditorConfig.FullName)
+                    if (
+                        projectDirectory.Parent.FullName == directoryContainingEditorConfig.FullName
+                    )
                     {
                         return true;
                     }

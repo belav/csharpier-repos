@@ -2,20 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Xunit;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using Xunit;
 
 internal class MyCriticalHandle : CriticalHandle
 {
     static int s_uniqueHandleValue;
     static HashSet<int> s_closedHandles = new HashSet<int>();
 
-    public MyCriticalHandle() : base(new IntPtr(-1))
-    {
-
-    }
+    public MyCriticalHandle()
+        : base(new IntPtr(-1)) { }
 
     public override bool IsInvalid
     {
@@ -35,14 +33,8 @@ internal class MyCriticalHandle : CriticalHandle
 
     internal IntPtr Handle
     {
-        get
-        {
-            return handle;
-        }
-        set
-        {
-            handle = value;
-        }
+        get { return handle; }
+        set { handle = value; }
     }
 
     internal static IntPtr GetUniqueHandle()
@@ -62,7 +54,9 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(1);
         Native.InCallback callback = (handle) => { };
-        Assert.Throws<MarshalDirectiveException>(() => Native.InvokeInCallback(callback, handleValue));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            Native.InvokeInCallback(callback, handleValue)
+        );
         GC.KeepAlive(callback);
     }
 
@@ -78,7 +72,9 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(3);
         Native.OutCallback callback = (out MyCriticalHandle handle) => handle = null;
-        Assert.Throws<MarshalDirectiveException>(() => Native.InvokeOutCallback(callback, ref handleValue));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            Native.InvokeOutCallback(callback, ref handleValue)
+        );
         GC.KeepAlive(callback);
     }
 
@@ -86,7 +82,9 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(4);
         Native.InRefCallback callback = (ref MyCriticalHandle handle) => { };
-        Assert.Throws<MarshalDirectiveException>(() => Native.InvokeInRefCallback(callback, ref handleValue));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            Native.InvokeInRefCallback(callback, ref handleValue)
+        );
         GC.KeepAlive(callback);
     }
 
@@ -94,7 +92,9 @@ public class Reverse
     {
         IntPtr handleValue = new IntPtr(5);
         Native.RefCallback callback = (ref MyCriticalHandle handle) => { };
-        Assert.Throws<MarshalDirectiveException>(() => Native.InvokeRefCallback(callback, ref handleValue));
+        Assert.Throws<MarshalDirectiveException>(() =>
+            Native.InvokeRefCallback(callback, ref handleValue)
+        );
         GC.KeepAlive(callback);
     }
 
@@ -107,7 +107,7 @@ public class Reverse
         internal delegate void OutCallback(out MyCriticalHandle handle);
 
         [UnmanagedFunctionPointer(System.Runtime.InteropServices.CallingConvention.StdCall)]
-        internal delegate void InRefCallback([In]ref MyCriticalHandle handle);
+        internal delegate void InRefCallback([In] ref MyCriticalHandle handle);
 
         [UnmanagedFunctionPointer(System.Runtime.InteropServices.CallingConvention.StdCall)]
         internal delegate void RefCallback(ref MyCriticalHandle handle);
@@ -118,10 +118,18 @@ public class Reverse
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]
         internal static extern void InvokeInCallback(InCallback callback, IntPtr handle);
 
-        [DllImport("CriticalHandlesNative", EntryPoint = "InvokeRefCallback", CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            "CriticalHandlesNative",
+            EntryPoint = "InvokeRefCallback",
+            CallingConvention = CallingConvention.StdCall
+        )]
         internal static extern void InvokeOutCallback(OutCallback callback, ref IntPtr handle);
 
-        [DllImport("CriticalHandlesNative", EntryPoint = "InvokeRefCallback", CallingConvention = CallingConvention.StdCall)]
+        [DllImport(
+            "CriticalHandlesNative",
+            EntryPoint = "InvokeRefCallback",
+            CallingConvention = CallingConvention.StdCall
+        )]
         internal static extern void InvokeInRefCallback(InRefCallback callback, ref IntPtr handle);
 
         [DllImport("CriticalHandlesNative", CallingConvention = CallingConvention.StdCall)]

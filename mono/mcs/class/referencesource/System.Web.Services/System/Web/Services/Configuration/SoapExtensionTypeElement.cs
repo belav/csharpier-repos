@@ -5,34 +5,34 @@
 namespace System.Web.Services.Configuration
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Configuration;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
     using System.Security.Permissions;
 
     public sealed class SoapExtensionTypeElement : ConfigurationElement
     {
-        // These three constructors are used by the configuration system. 
-        public SoapExtensionTypeElement() : base()
+        // These three constructors are used by the configuration system.
+        public SoapExtensionTypeElement()
+            : base()
         {
             this.properties.Add(this.group);
             this.properties.Add(this.priority);
             this.properties.Add(this.type);
         }
 
-        public SoapExtensionTypeElement(string type, int priority, PriorityGroup group) : this()
+        public SoapExtensionTypeElement(string type, int priority, PriorityGroup group)
+            : this()
         {
             this.Type = Type.GetType(type, true, true);
             this.Priority = priority;
             this.Group = group;
         }
 
-        public SoapExtensionTypeElement(Type type, int priority, PriorityGroup group) : 
-            this(type.AssemblyQualifiedName, priority, group)
-        {
-        }
+        public SoapExtensionTypeElement(Type type, int priority, PriorityGroup group)
+            : this(type.AssemblyQualifiedName, priority, group) { }
 
         [ConfigurationProperty("group", IsKey = true, DefaultValue = PriorityGroup.Low)]
         public PriorityGroup Group
@@ -46,7 +46,10 @@ namespace System.Web.Services.Configuration
                 }
                 else
                 {
-                    throw new ArgumentException(Res.GetString(Res.Invalid_priority_group_value), "value");
+                    throw new ArgumentException(
+                        Res.GetString(Res.Invalid_priority_group_value),
+                        "value"
+                    );
                 }
             }
         }
@@ -63,13 +66,8 @@ namespace System.Web.Services.Configuration
         [TypeConverter(typeof(TypeTypeConverter))]
         public Type Type
         {
-            get { 
-                return (Type)base[this.type];
-            }
-            set
-            {
-                base[this.type] = value;
-            }
+            get { return (Type)base[this.type]; }
+            set { base[this.type] = value; }
         }
 
         protected override ConfigurationPropertyCollection Properties
@@ -77,20 +75,48 @@ namespace System.Web.Services.Configuration
             get { return this.properties; }
         }
 
-
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
-        readonly ConfigurationProperty group = new ConfigurationProperty("group", typeof(PriorityGroup), PriorityGroup.Low, new EnumConverter(typeof(PriorityGroup)), null, ConfigurationPropertyOptions.IsKey);
-        readonly ConfigurationProperty priority = new ConfigurationProperty("priority", typeof(int), 0, null, new IntegerValidator( 0, int.MaxValue ), ConfigurationPropertyOptions.IsKey);
-        readonly ConfigurationProperty type = new ConfigurationProperty("type", typeof(Type), null, new TypeTypeConverter(), null, ConfigurationPropertyOptions.IsKey);
+        readonly ConfigurationProperty group = new ConfigurationProperty(
+            "group",
+            typeof(PriorityGroup),
+            PriorityGroup.Low,
+            new EnumConverter(typeof(PriorityGroup)),
+            null,
+            ConfigurationPropertyOptions.IsKey
+        );
+        readonly ConfigurationProperty priority = new ConfigurationProperty(
+            "priority",
+            typeof(int),
+            0,
+            null,
+            new IntegerValidator(0, int.MaxValue),
+            ConfigurationPropertyOptions.IsKey
+        );
+        readonly ConfigurationProperty type = new ConfigurationProperty(
+            "type",
+            typeof(Type),
+            null,
+            new TypeTypeConverter(),
+            null,
+            ConfigurationPropertyOptions.IsKey
+        );
     }
 
-    class TypeTypeConverter : TypeAndNameConverter {
-        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType) {
+    class TypeTypeConverter : TypeAndNameConverter
+    {
+        public override bool CanConvertFrom(ITypeDescriptorContext context, Type sourceType)
+        {
             return base.CanConvertFrom(context, sourceType);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value) {
-            if (value is string) {
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
+        {
+            if (value is string)
+            {
                 TypeAndName baseValue = (TypeAndName)base.ConvertFrom(context, culture, value);
                 return baseValue.type;
             }
@@ -98,9 +124,15 @@ namespace System.Web.Services.Configuration
             return base.ConvertFrom(context, culture, value);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType) {
-
-            if (destinationType == typeof(string)) {
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            if (destinationType == typeof(string))
+            {
                 TypeAndName castedValue = new TypeAndName((Type)value);
                 return base.ConvertTo(context, culture, castedValue, destinationType);
             }
@@ -109,6 +141,3 @@ namespace System.Web.Services.Configuration
         }
     }
 }
-
-
-

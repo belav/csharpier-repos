@@ -23,15 +23,23 @@ namespace System.Threading
             if (handle.IsClosed || handle.IsInvalid)
                 throw new ArgumentException(SR.Argument_InvalidHandle, nameof(handle));
 
-            SafeThreadPoolIOHandle threadPoolHandle = Interop.Kernel32.CreateThreadpoolIo(handle, &OnNativeIOCompleted, IntPtr.Zero, IntPtr.Zero);
+            SafeThreadPoolIOHandle threadPoolHandle = Interop.Kernel32.CreateThreadpoolIo(
+                handle,
+                &OnNativeIOCompleted,
+                IntPtr.Zero,
+                IntPtr.Zero
+            );
             if (threadPoolHandle.IsInvalid)
             {
                 int errorCode = Marshal.GetLastWin32Error();
-                if (errorCode == Interop.Errors.ERROR_INVALID_HANDLE)         // Bad handle
+                if (errorCode == Interop.Errors.ERROR_INVALID_HANDLE) // Bad handle
                     throw new ArgumentException(SR.Argument_InvalidHandle, nameof(handle));
 
-                if (errorCode == Interop.Errors.ERROR_INVALID_PARAMETER)     // Handle already bound or sync handle
-                    throw new ArgumentException(SR.Argument_AlreadyBoundOrSyncHandle, nameof(handle));
+                if (errorCode == Interop.Errors.ERROR_INVALID_PARAMETER) // Handle already bound or sync handle
+                    throw new ArgumentException(
+                        SR.Argument_AlreadyBoundOrSyncHandle,
+                        nameof(handle)
+                    );
 
                 throw Win32Marshal.GetExceptionForWin32Error(errorCode);
             }
@@ -39,24 +47,56 @@ namespace System.Threading
             return new ThreadPoolBoundHandle(handle, threadPoolHandle);
         }
 
-        private unsafe NativeOverlapped* AllocateNativeOverlappedWindowsThreadPool(IOCompletionCallback callback, object? state, object? pinData) =>
-            AllocateNativeOverlappedWindowsThreadPool(callback, state, pinData, flowExecutionContext: true);
+        private unsafe NativeOverlapped* AllocateNativeOverlappedWindowsThreadPool(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        ) =>
+            AllocateNativeOverlappedWindowsThreadPool(
+                callback,
+                state,
+                pinData,
+                flowExecutionContext: true
+            );
 
-        private unsafe NativeOverlapped* UnsafeAllocateNativeOverlappedWindowsThreadPool(IOCompletionCallback callback, object? state, object? pinData) =>
-            AllocateNativeOverlappedWindowsThreadPool(callback, state, pinData, flowExecutionContext: false);
+        private unsafe NativeOverlapped* UnsafeAllocateNativeOverlappedWindowsThreadPool(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        ) =>
+            AllocateNativeOverlappedWindowsThreadPool(
+                callback,
+                state,
+                pinData,
+                flowExecutionContext: false
+            );
 
-        private unsafe NativeOverlapped* AllocateNativeOverlappedWindowsThreadPool(IOCompletionCallback callback, object? state, object? pinData, bool flowExecutionContext)
+        private unsafe NativeOverlapped* AllocateNativeOverlappedWindowsThreadPool(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData,
+            bool flowExecutionContext
+        )
         {
             ArgumentNullException.ThrowIfNull(callback);
 
             AddRef();
             try
             {
-                Win32ThreadPoolNativeOverlapped* overlapped = Win32ThreadPoolNativeOverlapped.Allocate(callback, state, pinData, preAllocated: null, flowExecutionContext);
+                Win32ThreadPoolNativeOverlapped* overlapped =
+                    Win32ThreadPoolNativeOverlapped.Allocate(
+                        callback,
+                        state,
+                        pinData,
+                        preAllocated: null,
+                        flowExecutionContext
+                    );
                 overlapped->Data._boundHandle = this;
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
-                    NativeRuntimeEventSource.Log.ThreadPoolIOEnqueue(Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(overlapped));
+                    NativeRuntimeEventSource.Log.ThreadPoolIOEnqueue(
+                        Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(overlapped)
+                    );
 
                 Interop.Kernel32.StartThreadpoolIo(_threadPoolHandle!);
 
@@ -69,7 +109,9 @@ namespace System.Threading
             }
         }
 
-        private unsafe NativeOverlapped* AllocateNativeOverlappedWindowsThreadPool(PreAllocatedOverlapped preAllocated)
+        private unsafe NativeOverlapped* AllocateNativeOverlappedWindowsThreadPool(
+            PreAllocatedOverlapped preAllocated
+        )
         {
             ArgumentNullException.ThrowIfNull(preAllocated);
 
@@ -80,18 +122,29 @@ namespace System.Threading
                 addedRefToThis = AddRef();
                 addedRefToPreAllocated = preAllocated.AddRef();
 
-                Win32ThreadPoolNativeOverlapped.OverlappedData data = preAllocated._overlappedWindowsThreadPool->Data;
+                Win32ThreadPoolNativeOverlapped.OverlappedData data = preAllocated
+                    ._overlappedWindowsThreadPool
+                    ->Data;
                 if (data._boundHandle != null)
-                    throw new ArgumentException(SR.Argument_PreAllocatedAlreadyAllocated, nameof(preAllocated));
+                    throw new ArgumentException(
+                        SR.Argument_PreAllocatedAlreadyAllocated,
+                        nameof(preAllocated)
+                    );
 
                 data._boundHandle = this;
 
                 if (NativeRuntimeEventSource.Log.IsEnabled())
-                    NativeRuntimeEventSource.Log.ThreadPoolIOEnqueue(Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(preAllocated._overlappedWindowsThreadPool));
+                    NativeRuntimeEventSource.Log.ThreadPoolIOEnqueue(
+                        Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(
+                            preAllocated._overlappedWindowsThreadPool
+                        )
+                    );
 
                 Interop.Kernel32.StartThreadpoolIo(_threadPoolHandle!);
 
-                return Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(preAllocated._overlappedWindowsThreadPool);
+                return Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(
+                    preAllocated._overlappedWindowsThreadPool
+                );
             }
             catch
             {
@@ -107,8 +160,12 @@ namespace System.Threading
         {
             ArgumentNullException.ThrowIfNull(overlapped);
 
-            Win32ThreadPoolNativeOverlapped* threadPoolOverlapped = Win32ThreadPoolNativeOverlapped.FromNativeOverlapped(overlapped);
-            Win32ThreadPoolNativeOverlapped.OverlappedData data = GetOverlappedData(threadPoolOverlapped, this);
+            Win32ThreadPoolNativeOverlapped* threadPoolOverlapped =
+                Win32ThreadPoolNativeOverlapped.FromNativeOverlapped(overlapped);
+            Win32ThreadPoolNativeOverlapped.OverlappedData data = GetOverlappedData(
+                threadPoolOverlapped,
+                this
+            );
 
             if (!data._completed)
             {
@@ -125,35 +182,58 @@ namespace System.Threading
                 Win32ThreadPoolNativeOverlapped.Free(threadPoolOverlapped);
         }
 
-        private static unsafe object? GetNativeOverlappedStateWindowsThreadPool(NativeOverlapped* overlapped)
+        private static unsafe object? GetNativeOverlappedStateWindowsThreadPool(
+            NativeOverlapped* overlapped
+        )
         {
             ArgumentNullException.ThrowIfNull(overlapped);
 
-            Win32ThreadPoolNativeOverlapped* threadPoolOverlapped = Win32ThreadPoolNativeOverlapped.FromNativeOverlapped(overlapped);
-            Win32ThreadPoolNativeOverlapped.OverlappedData data = GetOverlappedData(threadPoolOverlapped, null);
+            Win32ThreadPoolNativeOverlapped* threadPoolOverlapped =
+                Win32ThreadPoolNativeOverlapped.FromNativeOverlapped(overlapped);
+            Win32ThreadPoolNativeOverlapped.OverlappedData data = GetOverlappedData(
+                threadPoolOverlapped,
+                null
+            );
 
             return data._state;
         }
 
-        private static unsafe Win32ThreadPoolNativeOverlapped.OverlappedData GetOverlappedData(Win32ThreadPoolNativeOverlapped* overlapped, ThreadPoolBoundHandle? expectedBoundHandle)
+        private static unsafe Win32ThreadPoolNativeOverlapped.OverlappedData GetOverlappedData(
+            Win32ThreadPoolNativeOverlapped* overlapped,
+            ThreadPoolBoundHandle? expectedBoundHandle
+        )
         {
             Win32ThreadPoolNativeOverlapped.OverlappedData data = overlapped->Data;
 
             if (data._boundHandle == null)
-                throw new ArgumentException(SR.Argument_NativeOverlappedAlreadyFree, nameof(overlapped));
+                throw new ArgumentException(
+                    SR.Argument_NativeOverlappedAlreadyFree,
+                    nameof(overlapped)
+                );
 
             if (expectedBoundHandle != null && data._boundHandle != expectedBoundHandle)
-                throw new ArgumentException(SR.Argument_NativeOverlappedWrongBoundHandle, nameof(overlapped));
+                throw new ArgumentException(
+                    SR.Argument_NativeOverlappedWrongBoundHandle,
+                    nameof(overlapped)
+                );
 
             return data;
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe void OnNativeIOCompleted(IntPtr instance, IntPtr context, IntPtr overlappedPtr, uint ioResult, nuint numberOfBytesTransferred, IntPtr ioPtr)
+        private static unsafe void OnNativeIOCompleted(
+            IntPtr instance,
+            IntPtr context,
+            IntPtr overlappedPtr,
+            uint ioResult,
+            nuint numberOfBytesTransferred,
+            IntPtr ioPtr
+        )
         {
             var wrapper = ThreadPoolCallbackWrapper.Enter();
 
-            Win32ThreadPoolNativeOverlapped* overlapped = (Win32ThreadPoolNativeOverlapped*)overlappedPtr;
+            Win32ThreadPoolNativeOverlapped* overlapped =
+                (Win32ThreadPoolNativeOverlapped*)overlappedPtr;
 
             ThreadPoolBoundHandle? boundHandle = overlapped->Data._boundHandle;
             if (boundHandle == null)
@@ -162,9 +242,15 @@ namespace System.Threading
             boundHandle.Release();
 
             if (NativeRuntimeEventSource.Log.IsEnabled())
-                NativeRuntimeEventSource.Log.ThreadPoolIODequeue(Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(overlapped));
+                NativeRuntimeEventSource.Log.ThreadPoolIODequeue(
+                    Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(overlapped)
+                );
 
-            Win32ThreadPoolNativeOverlapped.CompleteWithCallback(ioResult, (uint)numberOfBytesTransferred, overlapped);
+            Win32ThreadPoolNativeOverlapped.CompleteWithCallback(
+                ioResult,
+                (uint)numberOfBytesTransferred,
+                overlapped
+            );
             ThreadPool.IncrementCompletedWorkItemCount();
 
             wrapper.Exit();

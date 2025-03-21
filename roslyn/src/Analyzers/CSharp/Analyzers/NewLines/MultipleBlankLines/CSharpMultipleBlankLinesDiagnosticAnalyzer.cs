@@ -9,11 +9,10 @@ using Microsoft.CodeAnalysis.NewLines.MultipleBlankLines;
 namespace Microsoft.CodeAnalysis.CSharp.NewLines.MultipleBlankLines
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class CSharpMultipleBlankLinesDiagnosticAnalyzer : AbstractMultipleBlankLinesDiagnosticAnalyzer
+    internal sealed class CSharpMultipleBlankLinesDiagnosticAnalyzer
+        : AbstractMultipleBlankLinesDiagnosticAnalyzer
     {
         public CSharpMultipleBlankLinesDiagnosticAnalyzer()
-            : base(CSharpSyntaxFacts.Instance)
-        {
-        }
+            : base(CSharpSyntaxFacts.Instance) { }
     }
 }

@@ -1,23 +1,27 @@
 namespace System.Workflow.ComponentModel.Design
 {
     using System;
-    using System.Drawing;
     using System.Collections;
-    using System.Diagnostics;
-    using System.Windows.Forms;
-    using System.ComponentModel;
-    using System.Globalization;
-    using System.Drawing.Imaging;
-    using System.Drawing.Drawing2D;
     using System.Collections.Generic;
-    using System.ComponentModel.Design;
-    using System.Workflow.ComponentModel;
     using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Drawing.Drawing2D;
+    using System.Drawing.Imaging;
+    using System.Globalization;
     using System.Runtime.InteropServices;
+    using System.Windows.Forms;
+    using System.Workflow.ComponentModel;
     using NativeMethods = System.Workflow.Interop.NativeMethods;
 
     #region Enums And Structs
-    internal enum AnchorAlignment { Near = 0, Far = 1 }
+    internal enum AnchorAlignment
+    {
+        Near = 0,
+        Far = 1,
+    }
     #endregion
 
     #region ItemInfo Class
@@ -42,10 +46,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public int Identifier
         {
-            get
-            {
-                return this.commandID;
-            }
+            get { return this.commandID; }
         }
 
         public IDictionary UserData
@@ -60,18 +61,12 @@ namespace System.Workflow.ComponentModel.Design
 
         public Image Image
         {
-            get
-            {
-                return this.image;
-            }
+            get { return this.image; }
         }
 
         public string Text
         {
-            get
-            {
-                return this.text;
-            }
+            get { return this.text; }
         }
 
         public override bool Equals(object obj)
@@ -105,10 +100,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public ItemInfo CurrentItem
         {
-            get
-            {
-                return this.currentItem;
-            }
+            get { return this.currentItem; }
         }
     }
     #endregion
@@ -122,11 +114,14 @@ namespace System.Workflow.ComponentModel.Design
         private static Brush HighliteBrush = new SolidBrush(Color.FromArgb(100, 255, 195, 107));
 
         public PageStrip(IServiceProvider serviceProvider, Size itemSize)
-            : base(serviceProvider, Orientation.Horizontal, itemSize, Size.Empty)
-        {
-        }
+            : base(serviceProvider, Orientation.Horizontal, itemSize, Size.Empty) { }
 
-        protected override ItemStrip CreateItemStrip(IServiceProvider serviceProvider, Orientation orientation, Size itemSize, Size margin)
+        protected override ItemStrip CreateItemStrip(
+            IServiceProvider serviceProvider,
+            Orientation orientation,
+            Size itemSize,
+            Size margin
+        )
         {
             return new PageItemStrip(serviceProvider, orientation, itemSize, margin);
         }
@@ -136,17 +131,34 @@ namespace System.Workflow.ComponentModel.Design
             GraphicsContainer graphicsState = graphics.BeginContainer();
 
             Rectangle bounds = Bounds;
-            using (Region clipRegion = new Region(new Rectangle(bounds.X, bounds.Y, bounds.Width + 1, bounds.Height + 1)))
+            using (
+                Region clipRegion = new Region(
+                    new Rectangle(bounds.X, bounds.Y, bounds.Width + 1, bounds.Height + 1)
+                )
+            )
             {
                 graphics.Clip = clipRegion;
 
                 base.itemStrip.Draw(graphics);
 
                 if (base.itemStrip.ScrollPosition > 0)
-                    DrawButton(graphics, (Orientation == Orientation.Horizontal) ? ScrollButton.Left : ScrollButton.Up);
+                    DrawButton(
+                        graphics,
+                        (Orientation == Orientation.Horizontal)
+                            ? ScrollButton.Left
+                            : ScrollButton.Up
+                    );
 
-                if (base.itemStrip.ScrollPosition + base.itemStrip.MaxVisibleItems < base.itemStrip.Items.Count)
-                    DrawButton(graphics, (Orientation == Orientation.Horizontal) ? ScrollButton.Right : ScrollButton.Down);
+                if (
+                    base.itemStrip.ScrollPosition + base.itemStrip.MaxVisibleItems
+                    < base.itemStrip.Items.Count
+                )
+                    DrawButton(
+                        graphics,
+                        (Orientation == Orientation.Horizontal)
+                            ? ScrollButton.Right
+                            : ScrollButton.Down
+                    );
             }
 
             graphics.EndContainer(graphicsState);
@@ -157,15 +169,22 @@ namespace System.Workflow.ComponentModel.Design
             Rectangle buttonBounds = GetButtonBounds(scrollButton);
 
             if (Orientation == Orientation.Horizontal)
-                buttonBounds.Inflate(-base.itemStrip.ItemSize.Width / 6, -base.itemStrip.ItemSize.Height / 4);
+                buttonBounds.Inflate(
+                    -base.itemStrip.ItemSize.Width / 6,
+                    -base.itemStrip.ItemSize.Height / 4
+                );
             else
-                buttonBounds.Inflate(-base.itemStrip.ItemSize.Width / 4, -base.itemStrip.ItemSize.Height / 6);
+                buttonBounds.Inflate(
+                    -base.itemStrip.ItemSize.Width / 4,
+                    -base.itemStrip.ItemSize.Height / 6
+                );
 
             if (ActiveButton == scrollButton)
             {
                 buttonBounds.Offset(1, 1);
 
-                Size inflateSize = (Orientation == Orientation.Horizontal) ? new Size(0, 2) : new Size(2, 0);
+                Size inflateSize =
+                    (Orientation == Orientation.Horizontal) ? new Size(0, 2) : new Size(2, 0);
                 buttonBounds.Inflate(inflateSize.Width, inflateSize.Height);
 
                 graphics.FillRectangle(SelectionBrush, buttonBounds);
@@ -174,7 +193,12 @@ namespace System.Workflow.ComponentModel.Design
                 buttonBounds.Inflate(-inflateSize.Width, -inflateSize.Height);
             }
 
-            using (GraphicsPath graphicsPath = ActivityDesignerPaint.GetScrollIndicatorPath(buttonBounds, scrollButton))
+            using (
+                GraphicsPath graphicsPath = ActivityDesignerPaint.GetScrollIndicatorPath(
+                    buttonBounds,
+                    scrollButton
+                )
+            )
             {
                 graphics.FillPath(Brushes.Black, graphicsPath);
                 graphics.DrawPath(Pens.Black, graphicsPath);
@@ -183,17 +207,24 @@ namespace System.Workflow.ComponentModel.Design
 
         private sealed class PageItemStrip : ItemStrip
         {
-            public PageItemStrip(IServiceProvider serviceProvider, Orientation orientation, Size itemSize, Size margin)
-                : base(serviceProvider, orientation, itemSize, margin)
-            {
-            }
+            public PageItemStrip(
+                IServiceProvider serviceProvider,
+                Orientation orientation,
+                Size itemSize,
+                Size margin
+            )
+                : base(serviceProvider, orientation, itemSize, margin) { }
 
             public override void Draw(Graphics graphics)
             {
                 GraphicsContainer graphicsState = graphics.BeginContainer();
 
                 Rectangle bounds = Bounds;
-                using (Region clipRegion = new Region(new Rectangle(bounds.X, bounds.Y, bounds.Width + 1, bounds.Height + 1)))
+                using (
+                    Region clipRegion = new Region(
+                        new Rectangle(bounds.X, bounds.Y, bounds.Width + 1, bounds.Height + 1)
+                    )
+                )
                 {
                     graphics.Clip = clipRegion;
 
@@ -205,13 +236,21 @@ namespace System.Workflow.ComponentModel.Design
 
                     int visibleItems = MaxVisibleItems;
                     int scrollPosition = ScrollPosition;
-                    for (int itemIndex = scrollPosition; itemIndex < Items.Count && itemIndex < (scrollPosition + visibleItems); itemIndex++)
+                    for (
+                        int itemIndex = scrollPosition;
+                        itemIndex < Items.Count && itemIndex < (scrollPosition + visibleItems);
+                        itemIndex++
+                    )
                     {
                         ItemInfo itemInfo = Items[itemIndex];
                         Rectangle itemRectangle = GetItemBounds(itemInfo);
 
                         int margin = itemRectangle.Width / 5;
-                        GraphicsPath[] graphicsPath = ActivityDesignerPaint.GetPagePaths(itemRectangle, margin, DesignerContentAlignment.TopRight);
+                        GraphicsPath[] graphicsPath = ActivityDesignerPaint.GetPagePaths(
+                            itemRectangle,
+                            margin,
+                            DesignerContentAlignment.TopRight
+                        );
                         using (GraphicsPath pagePath = graphicsPath[0])
                         using (GraphicsPath pageFoldPath = graphicsPath[1])
                         {
@@ -231,15 +270,27 @@ namespace System.Workflow.ComponentModel.Design
                                 itemRectangle.Y += margin;
                                 itemRectangle.Height -= margin;
                                 int index = itemIndex + 1;
-                                graphics.DrawString(index.ToString(CultureInfo.CurrentCulture), Control.DefaultFont, SystemBrushes.ControlText, (RectangleF)itemRectangle, format);
+                                graphics.DrawString(
+                                    index.ToString(CultureInfo.CurrentCulture),
+                                    Control.DefaultFont,
+                                    SystemBrushes.ControlText,
+                                    (RectangleF)itemRectangle,
+                                    format
+                                );
                             }
                             else
                             {
-                                itemRectangle.Y += margin; itemRectangle.Height -= margin;
+                                itemRectangle.Y += margin;
+                                itemRectangle.Height -= margin;
                                 itemRectangle.X += (itemRectangle.Width - itemRectangle.Height) / 2;
                                 itemRectangle.Width = itemRectangle.Height;
                                 itemRectangle.Inflate(-2, -2);
-                                ActivityDesignerPaint.DrawImage(graphics, itemInfo.Image, itemRectangle, DesignerContentAlignment.Center);
+                                ActivityDesignerPaint.DrawImage(
+                                    graphics,
+                                    itemInfo.Image,
+                                    itemRectangle,
+                                    DesignerContentAlignment.Center
+                                );
                             }
                         }
                     }
@@ -262,7 +313,12 @@ namespace System.Workflow.ComponentModel.Design
         private Size buttonSize;
         private ScrollButton activeButton = ScrollButton.Min;
 
-        public ScrollableItemStrip(IServiceProvider serviceProvider, Orientation orientation, Size itemSize, Size margin)
+        public ScrollableItemStrip(
+            IServiceProvider serviceProvider,
+            Orientation orientation,
+            Size itemSize,
+            Size margin
+        )
         {
             Debug.Assert(serviceProvider != null);
             if (serviceProvider == null)
@@ -284,45 +340,24 @@ namespace System.Workflow.ComponentModel.Design
         #region Public Properties and Methods
         public IList<ItemInfo> Items
         {
-            get
-            {
-                return this.itemStrip.Items;
-            }
+            get { return this.itemStrip.Items; }
         }
 
         public ItemInfo SelectedItem
         {
-            get
-            {
-                return this.itemStrip.SelectedItem;
-            }
-
-            set
-            {
-                this.itemStrip.SelectedItem = value;
-            }
+            get { return this.itemStrip.SelectedItem; }
+            set { this.itemStrip.SelectedItem = value; }
         }
 
         public event SelectionChangeEventHandler<SelectionChangeEventArgs> SelectionChanged
         {
-            add
-            {
-                this.itemStrip.SelectionChanged += value;
-            }
-
-            remove
-            {
-                this.itemStrip.SelectionChanged -= value;
-            }
+            add { this.itemStrip.SelectionChanged += value; }
+            remove { this.itemStrip.SelectionChanged -= value; }
         }
 
         public Point Location
         {
-            get
-            {
-                return this.bounds.Location;
-            }
-
+            get { return this.bounds.Location; }
             set
             {
                 if (this.bounds.Location != value)
@@ -333,9 +368,15 @@ namespace System.Workflow.ComponentModel.Design
 
                     Rectangle leftScrollButtonBounds = GetButtonBounds(ScrollButton.Left);
                     if (this.orientation == Orientation.Horizontal)
-                        this.itemStrip.Location = new Point(leftScrollButtonBounds.Right, leftScrollButtonBounds.Top);
+                        this.itemStrip.Location = new Point(
+                            leftScrollButtonBounds.Right,
+                            leftScrollButtonBounds.Top
+                        );
                     else
-                        this.itemStrip.Location = new Point(leftScrollButtonBounds.Left, leftScrollButtonBounds.Bottom);
+                        this.itemStrip.Location = new Point(
+                            leftScrollButtonBounds.Left,
+                            leftScrollButtonBounds.Bottom
+                        );
 
                     Invalidate();
                 }
@@ -344,11 +385,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public Size Size
         {
-            get
-            {
-                return this.bounds.Size;
-            }
-
+            get { return this.bounds.Size; }
             set
             {
                 if (this.bounds.Size != value)
@@ -363,19 +400,34 @@ namespace System.Workflow.ComponentModel.Design
                     int availableSize = 0;
                     if (this.orientation == Orientation.Horizontal)
                     {
-                        availableSize = this.bounds.Width - (2 * (2 * this.margin.Width + this.buttonSize.Width));
+                        availableSize =
+                            this.bounds.Width
+                            - (2 * (2 * this.margin.Width + this.buttonSize.Width));
                         availableSize -= this.margin.Width;
                         if (this.margin.Width + this.itemStrip.ItemSize.Width > 0)
-                            availableSize -= (availableSize % (this.margin.Width + this.itemStrip.ItemSize.Width));
-                        this.itemStrip.Size = new Size(Math.Min(availableSize, reqdSize.Width), Math.Min(this.bounds.Height, reqdSize.Height));
+                            availableSize -= (
+                                availableSize % (this.margin.Width + this.itemStrip.ItemSize.Width)
+                            );
+                        this.itemStrip.Size = new Size(
+                            Math.Min(availableSize, reqdSize.Width),
+                            Math.Min(this.bounds.Height, reqdSize.Height)
+                        );
                     }
                     else
                     {
-                        availableSize = this.bounds.Height - (2 * (2 * this.margin.Height + this.buttonSize.Height));
+                        availableSize =
+                            this.bounds.Height
+                            - (2 * (2 * this.margin.Height + this.buttonSize.Height));
                         availableSize -= this.margin.Height;
                         if (this.margin.Height + this.itemStrip.ItemSize.Height > 0)
-                            availableSize -= (availableSize % (this.margin.Height + this.itemStrip.ItemSize.Height));
-                        this.itemStrip.Size = new Size(Math.Min(this.bounds.Width, reqdSize.Width), Math.Min(availableSize, reqdSize.Height));
+                            availableSize -= (
+                                availableSize
+                                % (this.margin.Height + this.itemStrip.ItemSize.Height)
+                            );
+                        this.itemStrip.Size = new Size(
+                            Math.Min(this.bounds.Width, reqdSize.Width),
+                            Math.Min(availableSize, reqdSize.Height)
+                        );
                     }
 
                     Invalidate();
@@ -385,35 +437,23 @@ namespace System.Workflow.ComponentModel.Design
 
         public Rectangle Bounds
         {
-            get
-            {
-                return this.bounds;
-            }
+            get { return this.bounds; }
         }
 
         public Orientation Orientation
         {
-            get
-            {
-                return this.orientation;
-            }
+            get { return this.orientation; }
         }
 
         public abstract void Draw(Graphics graphics);
         #endregion
 
         #region Mouse Messages
-        public virtual void OnMouseDragBegin(Point initialDragPoint, MouseEventArgs e)
-        {
-        }
+        public virtual void OnMouseDragBegin(Point initialDragPoint, MouseEventArgs e) { }
 
-        public virtual void OnMouseDragMove(MouseEventArgs e)
-        {
-        }
+        public virtual void OnMouseDragMove(MouseEventArgs e) { }
 
-        public virtual void OnMouseDragEnd()
-        {
-        }
+        public virtual void OnMouseDragEnd() { }
 
         public virtual void OnMouseEnter(MouseEventArgs e)
         {
@@ -433,7 +473,10 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (scrollButton != ScrollButton.Min)
                 {
-                    int incr = (scrollButton == ScrollButton.Left || scrollButton == ScrollButton.Up) ? -1 : 1;
+                    int incr =
+                        (scrollButton == ScrollButton.Left || scrollButton == ScrollButton.Up)
+                            ? -1
+                            : 1;
                     this.itemStrip.ScrollPosition = this.itemStrip.ScrollPosition + incr;
                 }
 
@@ -468,7 +511,12 @@ namespace System.Workflow.ComponentModel.Design
         #endregion
 
         #region Protected Properties and Methods
-        protected abstract ItemStrip CreateItemStrip(IServiceProvider serviceProvider, Orientation orientation, Size itemSize, Size margin);
+        protected abstract ItemStrip CreateItemStrip(
+            IServiceProvider serviceProvider,
+            Orientation orientation,
+            Size itemSize,
+            Size margin
+        );
 
         protected Rectangle GetButtonBounds(ScrollButton scrollButton)
         {
@@ -484,7 +532,11 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (this.orientation == Orientation.Horizontal)
                 {
-                    buttonRectangle.X = this.bounds.X + this.margin.Width + buttonRectangle.Size.Width + this.itemStrip.Size.Width;
+                    buttonRectangle.X =
+                        this.bounds.X
+                        + this.margin.Width
+                        + buttonRectangle.Size.Width
+                        + this.itemStrip.Size.Width;
                     if (buttonRectangle.X >= this.bounds.Right)
                         buttonRectangle.X = this.bounds.Right - buttonRectangle.Size.Width;
 
@@ -494,7 +546,11 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     buttonRectangle.X = this.bounds.X + this.margin.Width;
 
-                    buttonRectangle.Y = this.bounds.Y + this.margin.Height + buttonRectangle.Size.Height + this.itemStrip.Size.Height;
+                    buttonRectangle.Y =
+                        this.bounds.Y
+                        + this.margin.Height
+                        + buttonRectangle.Size.Height
+                        + this.itemStrip.Size.Height;
                     if (buttonRectangle.Y >= this.bounds.Bottom)
                         buttonRectangle.Y = this.bounds.Bottom - buttonRectangle.Size.Height;
                 }
@@ -507,15 +563,24 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (this.itemStrip.ScrollPosition > 0)
             {
-                ScrollButton scrollButton = (this.orientation == Orientation.Horizontal) ? ScrollButton.Left : ScrollButton.Up;
+                ScrollButton scrollButton =
+                    (this.orientation == Orientation.Horizontal)
+                        ? ScrollButton.Left
+                        : ScrollButton.Up;
                 Rectangle buttonBounds = GetButtonBounds(scrollButton);
                 if (buttonBounds.Contains(mousePoint))
                     return scrollButton;
             }
 
-            if (this.itemStrip.ScrollPosition + this.itemStrip.MaxVisibleItems < this.itemStrip.Items.Count)
+            if (
+                this.itemStrip.ScrollPosition + this.itemStrip.MaxVisibleItems
+                < this.itemStrip.Items.Count
+            )
             {
-                ScrollButton scrollButton = (this.orientation == Orientation.Horizontal) ? ScrollButton.Right : ScrollButton.Down;
+                ScrollButton scrollButton =
+                    (this.orientation == Orientation.Horizontal)
+                        ? ScrollButton.Right
+                        : ScrollButton.Down;
                 Rectangle buttonBounds = GetButtonBounds(scrollButton);
                 if (buttonBounds.Contains(mousePoint))
                     return scrollButton;
@@ -526,11 +591,7 @@ namespace System.Workflow.ComponentModel.Design
 
         protected ScrollButton ActiveButton
         {
-            get
-            {
-                return this.activeButton;
-            }
-
+            get { return this.activeButton; }
             private set
             {
                 if (this.activeButton != value)
@@ -543,7 +604,8 @@ namespace System.Workflow.ComponentModel.Design
 
         protected void Invalidate()
         {
-            WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+            WorkflowView workflowView =
+                this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
             if (workflowView != null)
                 workflowView.InvalidateLogicalRectangle(this.bounds);
         }
@@ -577,7 +639,12 @@ namespace System.Workflow.ComponentModel.Design
         public event SelectionChangeEventHandler<SelectionChangeEventArgs> SelectionChanged;
         public event EventHandler ScrollPositionChanged;
 
-        public ItemStrip(IServiceProvider serviceProvider, Orientation orientation, Size itemSize, Size margin)
+        public ItemStrip(
+            IServiceProvider serviceProvider,
+            Orientation orientation,
+            Size itemSize,
+            Size margin
+        )
         {
             Debug.Assert(serviceProvider != null);
             if (serviceProvider == null)
@@ -597,19 +664,12 @@ namespace System.Workflow.ComponentModel.Design
         #region Public Properties and Methods
         public IList<ItemInfo> Items
         {
-            get
-            {
-                return this.items;
-            }
+            get { return this.items; }
         }
 
         public ItemInfo SelectedItem
         {
-            get
-            {
-                return this.selectedItem;
-            }
-
+            get { return this.selectedItem; }
             set
             {
                 if (this.selectedItem == value)
@@ -622,17 +682,16 @@ namespace System.Workflow.ComponentModel.Design
                 Invalidate();
 
                 if (SelectionChanged != null)
-                    SelectionChanged(this, new SelectionChangeEventArgs(previousSelection, this.selectedItem));
+                    SelectionChanged(
+                        this,
+                        new SelectionChangeEventArgs(previousSelection, this.selectedItem)
+                    );
             }
         }
 
         public Point Location
         {
-            get
-            {
-                return this.bounds.Location;
-            }
-
+            get { return this.bounds.Location; }
             set
             {
                 if (this.bounds.Location != value)
@@ -646,11 +705,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public Size Size
         {
-            get
-            {
-                return this.bounds.Size;
-            }
-
+            get { return this.bounds.Size; }
             set
             {
                 if (this.bounds.Size != value)
@@ -665,19 +720,12 @@ namespace System.Workflow.ComponentModel.Design
 
         public Rectangle Bounds
         {
-            get
-            {
-                return this.bounds;
-            }
+            get { return this.bounds; }
         }
 
         public int ScrollPosition
         {
-            get
-            {
-                return this.scrollPosition;
-            }
-
+            get { return this.scrollPosition; }
             set
             {
                 if (value < 0)
@@ -687,10 +735,16 @@ namespace System.Workflow.ComponentModel.Design
                 int visibleItems = MaxVisibleItems;
 
                 //If there are more items in the strip than displayed then we need to display what ever we can
-                if (this.items.Count >= visibleItems && ((this.items.Count - newPosition) < visibleItems))
+                if (
+                    this.items.Count >= visibleItems
+                    && ((this.items.Count - newPosition) < visibleItems)
+                )
                     newPosition = this.items.Count - visibleItems;
 
-                if (newPosition >= 0 && newPosition <= Math.Max(this.items.Count - visibleItems + 1, 0))
+                if (
+                    newPosition >= 0
+                    && newPosition <= Math.Max(this.items.Count - visibleItems + 1, 0)
+                )
                 {
                     this.scrollPosition = newPosition;
                     Invalidate();
@@ -704,7 +758,11 @@ namespace System.Workflow.ComponentModel.Design
         public Rectangle GetItemBounds(ItemInfo itemInfo)
         {
             int itemIndex = this.items.IndexOf(itemInfo);
-            if (itemIndex < 0 || itemIndex < this.scrollPosition || itemIndex >= this.scrollPosition + MaxVisibleItems)
+            if (
+                itemIndex < 0
+                || itemIndex < this.scrollPosition
+                || itemIndex >= this.scrollPosition + MaxVisibleItems
+            )
                 return Rectangle.Empty;
 
             Rectangle itemRectangle = Rectangle.Empty;
@@ -712,13 +770,19 @@ namespace System.Workflow.ComponentModel.Design
 
             if (this.orientation == Orientation.Horizontal)
             {
-                itemRectangle.X = bounds.Left + (itemIndex * this.itemSize.Width) + ((itemIndex + 1) * this.margin.Width);
+                itemRectangle.X =
+                    bounds.Left
+                    + (itemIndex * this.itemSize.Width)
+                    + ((itemIndex + 1) * this.margin.Width);
                 itemRectangle.Y = bounds.Top + this.margin.Height;
             }
             else
             {
                 itemRectangle.X = bounds.Left + this.margin.Width;
-                itemRectangle.Y = bounds.Top + (itemIndex * this.itemSize.Height) + ((itemIndex + 1) * this.margin.Height);
+                itemRectangle.Y =
+                    bounds.Top
+                    + (itemIndex * this.itemSize.Height)
+                    + ((itemIndex + 1) * this.margin.Height);
             }
 
             itemRectangle.Size = this.itemSize;
@@ -751,13 +815,17 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (this.orientation == Orientation.Horizontal)
                 {
-                    reqdSize.Width = (this.items.Count * this.itemSize.Width) + ((this.items.Count + 1) * this.margin.Width);
+                    reqdSize.Width =
+                        (this.items.Count * this.itemSize.Width)
+                        + ((this.items.Count + 1) * this.margin.Width);
                     reqdSize.Height = this.itemSize.Height + 2 * this.margin.Height;
                 }
                 else
                 {
                     reqdSize.Width = this.itemSize.Width + 2 * this.margin.Width;
-                    reqdSize.Height = (this.items.Count * this.itemSize.Height) + ((this.items.Count + 1) * this.margin.Height);
+                    reqdSize.Height =
+                        (this.items.Count * this.itemSize.Height)
+                        + ((this.items.Count + 1) * this.margin.Height);
                 }
 
                 return reqdSize;
@@ -766,25 +834,16 @@ namespace System.Workflow.ComponentModel.Design
 
         public Size ItemSize
         {
-            get
-            {
-                return this.itemSize;
-            }
+            get { return this.itemSize; }
         }
         #endregion
 
         #region Mouse Messages
-        public virtual void OnMouseDragBegin(Point initialDragPoint, MouseEventArgs e)
-        {
-        }
+        public virtual void OnMouseDragBegin(Point initialDragPoint, MouseEventArgs e) { }
 
-        public virtual void OnMouseDragMove(MouseEventArgs e)
-        {
-        }
+        public virtual void OnMouseDragMove(MouseEventArgs e) { }
 
-        public virtual void OnMouseDragEnd()
-        {
-        }
+        public virtual void OnMouseDragEnd() { }
 
         public virtual void OnMouseEnter(MouseEventArgs e)
         {
@@ -818,9 +877,7 @@ namespace System.Workflow.ComponentModel.Design
             HighlitedItem = itemHit;
         }
 
-        public virtual void OnMouseUp(MouseEventArgs e)
-        {
-        }
+        public virtual void OnMouseUp(MouseEventArgs e) { }
 
         public virtual void OnMouseLeave()
         {
@@ -839,12 +896,14 @@ namespace System.Workflow.ComponentModel.Design
                 if (this.orientation == Orientation.Horizontal)
                 {
                     int totalStripSize = this.bounds.Width - this.margin.Width;
-                    visibleItemCount = totalStripSize / Math.Max((this.itemSize.Width + this.margin.Width), 1);
+                    visibleItemCount =
+                        totalStripSize / Math.Max((this.itemSize.Width + this.margin.Width), 1);
                 }
                 else
                 {
                     int totalStripSize = this.bounds.Height - this.margin.Height;
-                    visibleItemCount = totalStripSize / Math.Max((this.itemSize.Height + this.margin.Height), 1);
+                    visibleItemCount =
+                        totalStripSize / Math.Max((this.itemSize.Height + this.margin.Height), 1);
                 }
 
                 return Math.Max(visibleItemCount, 1);
@@ -853,11 +912,7 @@ namespace System.Workflow.ComponentModel.Design
 
         protected ItemInfo HighlitedItem
         {
-            get
-            {
-                return this.highlitedItem;
-            }
-
+            get { return this.highlitedItem; }
             private set
             {
                 if (this.highlitedItem != value)
@@ -870,7 +925,8 @@ namespace System.Workflow.ComponentModel.Design
 
         protected void Invalidate()
         {
-            WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+            WorkflowView workflowView =
+                this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
             if (workflowView != null)
                 workflowView.InvalidateLogicalRectangle(this.bounds);
         }
@@ -879,7 +935,8 @@ namespace System.Workflow.ComponentModel.Design
         #region Helpers
         private void ShowInfoTip(string infoTip)
         {
-            WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+            WorkflowView workflowView =
+                this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
             if (workflowView != null)
                 workflowView.ShowInfoTip(String.Empty, infoTip);
         }
@@ -889,7 +946,7 @@ namespace System.Workflow.ComponentModel.Design
             int newPosition = this.scrollPosition;
             if (this.selectedItem != null)
             {
-                //The logic used for the ensuring the selected item is that there needs to be atleast one 
+                //The logic used for the ensuring the selected item is that there needs to be atleast one
                 //If marker falls outside the range then ensure it to a visible point
                 int index = this.items.IndexOf(this.selectedItem);
                 if (index >= 0)
@@ -908,11 +965,16 @@ namespace System.Workflow.ComponentModel.Design
 
         private void OnItemsChanging(object sender, ItemListChangeEventArgs<ItemInfo> e)
         {
-            if (e.Action == ItemListChangeAction.Remove && e.RemovedItems.Count > 0 && this.selectedItem == e.RemovedItems[0])
+            if (
+                e.Action == ItemListChangeAction.Remove
+                && e.RemovedItems.Count > 0
+                && this.selectedItem == e.RemovedItems[0]
+            )
             {
                 int nextIndex = this.items.IndexOf(e.RemovedItems[0]);
                 nextIndex += (nextIndex < this.items.Count - 1) ? 1 : -1;
-                SelectedItem = (nextIndex >= 0 && nextIndex < this.items.Count) ? this.items[nextIndex] : null;
+                SelectedItem =
+                    (nextIndex >= 0 && nextIndex < this.items.Count) ? this.items[nextIndex] : null;
             }
         }
 
@@ -955,19 +1017,12 @@ namespace System.Workflow.ComponentModel.Design
         #region Public Properties and Methods
         public IList<ItemInfo> Items
         {
-            get
-            {
-                return this.items;
-            }
+            get { return this.items; }
         }
 
         public ItemInfo SelectedItem
         {
-            get
-            {
-                return this.selectedItem;
-            }
-
+            get { return this.selectedItem; }
             set
             {
                 if (this.selectedItem == value)
@@ -977,7 +1032,10 @@ namespace System.Workflow.ComponentModel.Design
                 this.selectedItem = value;
                 if (this.SelectionChanged != null)
                 {
-                    this.SelectionChanged(this, new SelectionChangeEventArgs(previousItem, this.selectedItem));
+                    this.SelectionChanged(
+                        this,
+                        new SelectionChangeEventArgs(previousItem, this.selectedItem)
+                    );
                     if (this.palette != null)
                         this.palette.Invalidate();
                 }
@@ -991,10 +1049,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public bool IsVisible
         {
-            get
-            {
-                return (this.palette != null && this.palette.Visible);
-            }
+            get { return (this.palette != null && this.palette.Visible); }
         }
 
         public void Show(Point location)
@@ -1073,17 +1128,21 @@ namespace System.Workflow.ComponentModel.Design
                 this.enabledItems = new ItemList<ItemInfo>(this);
                 foreach (ItemInfo item in this.parent.items)
                 {
-                    ActivityDesignerVerb smartVerb = item.UserData[DesignerUserDataKeys.DesignerVerb] as ActivityDesignerVerb;
+                    ActivityDesignerVerb smartVerb =
+                        item.UserData[DesignerUserDataKeys.DesignerVerb] as ActivityDesignerVerb;
                     if (smartVerb == null || smartVerb.Enabled)
                         this.enabledItems.Add(item);
                 }
 
                 this.menuItemCount = this.enabledItems.Count;
 
-                SetStyle(ControlStyles.OptimizedDoubleBuffer |
-                            ControlStyles.UserPaint |
-                            ControlStyles.SupportsTransparentBackColor |
-                            ControlStyles.AllPaintingInWmPaint, true);
+                SetStyle(
+                    ControlStyles.OptimizedDoubleBuffer
+                        | ControlStyles.UserPaint
+                        | ControlStyles.SupportsTransparentBackColor
+                        | ControlStyles.AllPaintingInWmPaint,
+                    true
+                );
 
                 FormBorderStyle = FormBorderStyle.None;
                 BackColor = Color.White;
@@ -1223,9 +1282,22 @@ namespace System.Workflow.ComponentModel.Design
                 Graphics graphics = paintArgs.Graphics;
 
                 graphics.FillRectangle(SystemBrushes.Window, this.formRectangle);
-                graphics.DrawRectangle(SystemPens.ControlDarkDark, this.formRectangle.X, this.formRectangle.Y, this.formRectangle.Width - 1, this.formRectangle.Height - 1);
+                graphics.DrawRectangle(
+                    SystemPens.ControlDarkDark,
+                    this.formRectangle.X,
+                    this.formRectangle.Y,
+                    this.formRectangle.Width - 1,
+                    this.formRectangle.Height - 1
+                );
 
-                using (Brush gradientBrush = new LinearGradientBrush(new Point(this.leftGradientRectangle.Left, this.leftGradientRectangle.Top), new Point(this.leftGradientRectangle.Right, this.leftGradientRectangle.Top), SystemColors.Window, SystemColors.ScrollBar))
+                using (
+                    Brush gradientBrush = new LinearGradientBrush(
+                        new Point(this.leftGradientRectangle.Left, this.leftGradientRectangle.Top),
+                        new Point(this.leftGradientRectangle.Right, this.leftGradientRectangle.Top),
+                        SystemColors.Window,
+                        SystemColors.ScrollBar
+                    )
+                )
                 {
                     graphics.FillRectangle(gradientBrush, this.leftGradientRectangle);
                 }
@@ -1236,8 +1308,20 @@ namespace System.Workflow.ComponentModel.Design
 
                     if (this.activeIndex == i)
                     {
-                        graphics.FillRectangle(SystemBrushes.InactiveCaptionText, itemBounds.X, itemBounds.Y, itemBounds.Width - 1, itemBounds.Height - 1);
-                        graphics.DrawRectangle(SystemPens.ActiveCaption, itemBounds.X, itemBounds.Y, itemBounds.Width - 1, itemBounds.Height - 1);
+                        graphics.FillRectangle(
+                            SystemBrushes.InactiveCaptionText,
+                            itemBounds.X,
+                            itemBounds.Y,
+                            itemBounds.Width - 1,
+                            itemBounds.Height - 1
+                        );
+                        graphics.DrawRectangle(
+                            SystemPens.ActiveCaption,
+                            itemBounds.X,
+                            itemBounds.Y,
+                            itemBounds.Width - 1,
+                            itemBounds.Height - 1
+                        );
                     }
 
                     if (this.enabledItems[i].Image != null)
@@ -1254,10 +1338,20 @@ namespace System.Workflow.ComponentModel.Design
                         //    graphics.DrawRectangle(SystemPens.HotTrack, hotTrack);
                         //}
 
-                        graphics.DrawImage(this.enabledItems[i].Image, new Rectangle(imagePoint, imageSize), new Rectangle(Point.Empty, imageSize), GraphicsUnit.Pixel);
+                        graphics.DrawImage(
+                            this.enabledItems[i].Image,
+                            new Rectangle(imagePoint, imageSize),
+                            new Rectangle(Point.Empty, imageSize),
+                            GraphicsUnit.Pixel
+                        );
                     }
 
-                    Rectangle textRectangle = new Rectangle(itemBounds.Left + 20 + 5 + 2, itemBounds.Top + 1, this.itemWidth - (20 + 5 + 4), this.itemHeight - 3);
+                    Rectangle textRectangle = new Rectangle(
+                        itemBounds.Left + 20 + 5 + 2,
+                        itemBounds.Top + 1,
+                        this.itemWidth - (20 + 5 + 4),
+                        this.itemHeight - 3
+                    );
 
                     int textVerticalOffset = textRectangle.Height - this.maxTextHeight;
                     textVerticalOffset = (textVerticalOffset > 0) ? textVerticalOffset / 2 : 0;
@@ -1268,7 +1362,15 @@ namespace System.Workflow.ComponentModel.Design
                     graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
                     string descriptionString = this.enabledItems[i].Text;
                     descriptionString = descriptionString.Replace("&", "");
-                    ActivityDesignerPaint.DrawText(graphics, Font, descriptionString, textRectangle, StringAlignment.Near, TextQuality.Aliased, SystemBrushes.ControlText);
+                    ActivityDesignerPaint.DrawText(
+                        graphics,
+                        Font,
+                        descriptionString,
+                        textRectangle,
+                        StringAlignment.Near,
+                        TextQuality.Aliased,
+                        SystemBrushes.ControlText
+                    );
                     //graphics.DrawRectangle(Pens.DarkBlue, textRectangle);//uncomment for debugging purposes
                 }
             }
@@ -1339,20 +1441,33 @@ namespace System.Workflow.ComponentModel.Design
                     foreach (ItemInfo itemInfo in this.enabledItems)
                     {
                         SizeF size = paletteGraphics.MeasureString(itemInfo.Text, Font);
-                        maxTextSize.Width = Math.Max(Convert.ToInt32(Math.Ceiling(size.Width)), maxTextSize.Width);
-                        maxTextSize.Height = Math.Max(Convert.ToInt32(Math.Ceiling(size.Height)), maxTextSize.Height);
+                        maxTextSize.Width = Math.Max(
+                            Convert.ToInt32(Math.Ceiling(size.Width)),
+                            maxTextSize.Width
+                        );
+                        maxTextSize.Height = Math.Max(
+                            Convert.ToInt32(Math.Ceiling(size.Height)),
+                            maxTextSize.Height
+                        );
                     }
 
                     maxTextSize.Width = Math.Min(maxTextSize.Width, this.maximumTextWidth);
                     this.maxTextHeight = maxTextSize.Height;
                     this.itemHeight = Math.Max(imageRectangle.Height, maxTextSize.Height + 2) + 3;
-                    this.itemWidth = this.imageRectangle.Width + 2 * this.selectionItemMargin.Width + this.leftTextMargin + maxTextSize.Width + this.rightTextMargin;
+                    this.itemWidth =
+                        this.imageRectangle.Width
+                        + 2 * this.selectionItemMargin.Width
+                        + this.leftTextMargin
+                        + maxTextSize.Width
+                        + this.rightTextMargin;
                 }
 
                 int yOffset = 2; //there is a 1 pixel white space between items and the outer form border
                 foreach (ItemInfo itemInfo in this.enabledItems)
                 {
-                    this.itemRectangles.Add(new Rectangle(2, yOffset, this.itemWidth, this.itemHeight));
+                    this.itemRectangles.Add(
+                        new Rectangle(2, yOffset, this.itemWidth, this.itemHeight)
+                    );
                     yOffset += this.itemHeight + 2 * this.selectionItemMargin.Height;
                 }
 
@@ -1396,10 +1511,13 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     this.parent = parent;
 
-                    SetStyle(ControlStyles.OptimizedDoubleBuffer |
-                                ControlStyles.UserPaint |
-                                ControlStyles.SupportsTransparentBackColor |
-                                ControlStyles.AllPaintingInWmPaint, true);
+                    SetStyle(
+                        ControlStyles.OptimizedDoubleBuffer
+                            | ControlStyles.UserPaint
+                            | ControlStyles.SupportsTransparentBackColor
+                            | ControlStyles.AllPaintingInWmPaint,
+                        true
+                    );
 
                     FormBorderStyle = FormBorderStyle.None;
                     BackColor = Color.White;
@@ -1411,7 +1529,10 @@ namespace System.Workflow.ComponentModel.Design
                     Enabled = false;
 
                     Region = parent.Region;
-                    Location = new Point(this.parent.Location.X + Palette.DropShadowWidth, this.parent.Location.Y + Palette.DropShadowWidth);
+                    Location = new Point(
+                        this.parent.Location.X + Palette.DropShadowWidth,
+                        this.parent.Location.Y + Palette.DropShadowWidth
+                    );
                 }
 
                 protected override void OnPaint(PaintEventArgs e)
@@ -1420,7 +1541,15 @@ namespace System.Workflow.ComponentModel.Design
 
                     Rectangle rectangle = this.parent.formRectangle;
                     rectangle.Offset(-Palette.DropShadowWidth, -Palette.DropShadowWidth);
-                    ActivityDesignerPaint.DrawDropShadow(e.Graphics, rectangle, Color.Black, AmbientTheme.DropShadowWidth, LightSourcePosition.Left | LightSourcePosition.Top, 0.2f, false);
+                    ActivityDesignerPaint.DrawDropShadow(
+                        e.Graphics,
+                        rectangle,
+                        Color.Black,
+                        AmbientTheme.DropShadowWidth,
+                        LightSourcePosition.Left | LightSourcePosition.Top,
+                        0.2f,
+                        false
+                    );
                 }
             }
             #endregion
@@ -1461,7 +1590,10 @@ namespace System.Workflow.ComponentModel.Design
                 Width = SystemInformation.VerticalScrollBarWidth + 2;
 
                 this.splitter = new Splitter();
-                this.tabStrip = new TabStrip(Orientation.Vertical, SystemInformation.VerticalScrollBarWidth);
+                this.tabStrip = new TabStrip(
+                    Orientation.Vertical,
+                    SystemInformation.VerticalScrollBarWidth
+                );
                 this.scrollBar = new VScrollBar();
 
                 if (this.stripAnchor == AnchorAlignment.Near)
@@ -1483,7 +1615,10 @@ namespace System.Workflow.ComponentModel.Design
                 Height = SystemInformation.HorizontalScrollBarHeight + 2;
 
                 this.splitter = new Splitter();
-                this.tabStrip = new TabStrip(Orientation.Horizontal, SystemInformation.HorizontalScrollBarHeight);
+                this.tabStrip = new TabStrip(
+                    Orientation.Horizontal,
+                    SystemInformation.HorizontalScrollBarHeight
+                );
                 this.scrollBar = new HScrollBar();
 
                 if (this.stripAnchor == AnchorAlignment.Near)
@@ -1491,7 +1626,6 @@ namespace System.Workflow.ComponentModel.Design
                     this.tabStrip.Dock = DockStyle.Left;
                     this.splitter.Dock = DockStyle.Left;
                     this.scrollBar.Dock = DockStyle.Fill;
-
                 }
                 else
                 {
@@ -1506,7 +1640,8 @@ namespace System.Workflow.ComponentModel.Design
             this.splitter.Size = new Size(SplitterSize, SplitterSize);
             this.splitter.Paint += new PaintEventHandler(OnSplitterPaint);
             this.splitter.DoubleClick += new EventHandler(OnSplitterDoubleClick);
-            ((ItemList<ItemInfo>)this.TabStrip.Tabs).ListChanged += new ItemListChangeEventHandler<ItemInfo>(OnTabsChanged);
+            ((ItemList<ItemInfo>)this.TabStrip.Tabs).ListChanged +=
+                new ItemListChangeEventHandler<ItemInfo>(OnTabsChanged);
 
             BackColor = SystemColors.Control;
             this.ResumeLayout();
@@ -1527,18 +1662,12 @@ namespace System.Workflow.ComponentModel.Design
         #region Public Functions
         public ScrollBar ScrollBar
         {
-            get
-            {
-                return this.scrollBar;
-            }
+            get { return this.scrollBar; }
         }
 
         public TabStrip TabStrip
         {
-            get
-            {
-                return this.tabStrip;
-            }
+            get { return this.tabStrip; }
         }
         #endregion
 
@@ -1550,17 +1679,33 @@ namespace System.Workflow.ComponentModel.Design
             bool updateSplitterPosition = (this.splitter.SplitPosition < this.splitter.MinSize);
             if (this.splitter.Dock == DockStyle.Left || this.splitter.Dock == DockStyle.Right)
             {
-                int minExtra = Math.Max(this.splitter.MinSize, Width - this.tabStrip.MaximumRequiredSize - this.splitter.Width);
+                int minExtra = Math.Max(
+                    this.splitter.MinSize,
+                    Width - this.tabStrip.MaximumRequiredSize - this.splitter.Width
+                );
                 if (this.splitter.MinExtra != minExtra)
                     this.splitter.MinExtra = minExtra;
-                updateSplitterPosition |= (this.itemsMinimized) ? /*minimized*/(this.splitter.SplitPosition != this.splitter.MinSize) : /*maximized*/(this.splitter.SplitPosition != Width - this.splitter.MinExtra);
+                updateSplitterPosition |=
+                    (this.itemsMinimized)
+                        ? /*minimized*/
+                        (this.splitter.SplitPosition != this.splitter.MinSize)
+                        : /*maximized*/
+                        (this.splitter.SplitPosition != Width - this.splitter.MinExtra);
             }
             else
             { //top bottom
-                int minExtra = Math.Max(this.splitter.MinSize, Height - this.tabStrip.MaximumRequiredSize - this.splitter.Height);
+                int minExtra = Math.Max(
+                    this.splitter.MinSize,
+                    Height - this.tabStrip.MaximumRequiredSize - this.splitter.Height
+                );
                 if (this.splitter.MinExtra != minExtra)
                     this.splitter.MinExtra = minExtra;
-                updateSplitterPosition |= (this.itemsMinimized) ? /*minimized*/(this.splitter.SplitPosition != this.splitter.MinSize) : /*maximized*/(this.splitter.SplitPosition != Height - this.splitter.MinExtra);
+                updateSplitterPosition |=
+                    (this.itemsMinimized)
+                        ? /*minimized*/
+                        (this.splitter.SplitPosition != this.splitter.MinSize)
+                        : /*maximized*/
+                        (this.splitter.SplitPosition != Height - this.splitter.MinExtra);
             }
 
             if (updateSplitterPosition && this.idleHandler == null)
@@ -1583,12 +1728,18 @@ namespace System.Workflow.ComponentModel.Design
 
             if (this.splitter.Dock == DockStyle.Left || this.splitter.Dock == DockStyle.Right)
             {
-                if (!this.itemsMinimized && this.splitter.SplitPosition != Width - this.splitter.MinExtra)
+                if (
+                    !this.itemsMinimized
+                    && this.splitter.SplitPosition != Width - this.splitter.MinExtra
+                )
                     this.splitter.SplitPosition = Width - this.splitter.MinExtra;
             }
             else
             {
-                if (!this.itemsMinimized && this.splitter.SplitPosition != Height - this.splitter.MinExtra)
+                if (
+                    !this.itemsMinimized
+                    && this.splitter.SplitPosition != Height - this.splitter.MinExtra
+                )
                     this.splitter.SplitPosition = Height - this.splitter.MinExtra;
             }
 
@@ -1605,7 +1756,15 @@ namespace System.Workflow.ComponentModel.Design
 
             if (!this.itemsMinimized)
                 //maximized
-                this.splitter.SplitPosition = ((this.splitter.Dock == DockStyle.Left || this.splitter.Dock == DockStyle.Right) ? Width : Height) - this.splitter.MinExtra;
+                this.splitter.SplitPosition =
+                    (
+                        (
+                            this.splitter.Dock == DockStyle.Left
+                            || this.splitter.Dock == DockStyle.Right
+                        )
+                            ? Width
+                            : Height
+                    ) - this.splitter.MinExtra;
             else
                 //minimized
                 this.splitter.SplitPosition = this.splitter.MinSize;
@@ -1619,20 +1778,56 @@ namespace System.Workflow.ComponentModel.Design
                 e.Graphics.DrawLine(SystemPens.ControlLightLight, 0, 0, 0, this.splitter.Height);
                 e.Graphics.DrawLine(SystemPens.ControlLightLight, 0, 0, SplitterSize - 1, 0);
 
-                e.Graphics.DrawLine(SystemPens.ControlDark, SplitterSize - 2, 0, SplitterSize - 2, this.splitter.Height - 1);
-                e.Graphics.DrawLine(SystemPens.ControlDark, SplitterSize - 2, this.splitter.Height - 1, 0, this.splitter.Height - 1);
+                e.Graphics.DrawLine(
+                    SystemPens.ControlDark,
+                    SplitterSize - 2,
+                    0,
+                    SplitterSize - 2,
+                    this.splitter.Height - 1
+                );
+                e.Graphics.DrawLine(
+                    SystemPens.ControlDark,
+                    SplitterSize - 2,
+                    this.splitter.Height - 1,
+                    0,
+                    this.splitter.Height - 1
+                );
 
-                e.Graphics.DrawLine(SystemPens.ControlText, SplitterSize - 1, 0, SplitterSize - 1, this.splitter.Height);
+                e.Graphics.DrawLine(
+                    SystemPens.ControlText,
+                    SplitterSize - 1,
+                    0,
+                    SplitterSize - 1,
+                    this.splitter.Height
+                );
             }
             else
             {
                 e.Graphics.DrawLine(SystemPens.ControlLightLight, 0, 1, this.splitter.Width, 1);
                 e.Graphics.DrawLine(SystemPens.ControlLightLight, 0, 1, 0, SplitterSize - 1);
 
-                e.Graphics.DrawLine(SystemPens.ControlDark, 0, SplitterSize - 2, this.splitter.Width, SplitterSize - 2);
-                e.Graphics.DrawLine(SystemPens.ControlDark, this.splitter.Width - 1, SplitterSize - 2, this.splitter.Width - 1, 1);
+                e.Graphics.DrawLine(
+                    SystemPens.ControlDark,
+                    0,
+                    SplitterSize - 2,
+                    this.splitter.Width,
+                    SplitterSize - 2
+                );
+                e.Graphics.DrawLine(
+                    SystemPens.ControlDark,
+                    this.splitter.Width - 1,
+                    SplitterSize - 2,
+                    this.splitter.Width - 1,
+                    1
+                );
 
-                e.Graphics.DrawLine(SystemPens.ControlText, 0, SplitterSize - 1, this.splitter.Width, SplitterSize - 1);
+                e.Graphics.DrawLine(
+                    SystemPens.ControlText,
+                    0,
+                    SplitterSize - 1,
+                    this.splitter.Width,
+                    SplitterSize - 1
+                );
             }
         }
 
@@ -1640,12 +1835,16 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (this.splitter.Dock == DockStyle.Left || this.splitter.Dock == DockStyle.Right)
             {
-                this.splitter.MinExtra = (Width - this.tabStrip.MaximumRequiredSize - this.splitter.Width);
+                this.splitter.MinExtra = (
+                    Width - this.tabStrip.MaximumRequiredSize - this.splitter.Width
+                );
                 this.splitter.MinSize = this.tabStrip.MinimumRequiredSize;
             }
             else if (this.splitter.Dock == DockStyle.Top || this.splitter.Dock == DockStyle.Bottom)
             {
-                this.splitter.MinExtra = (Height - this.tabStrip.MaximumRequiredSize - this.splitter.Height);
+                this.splitter.MinExtra = (
+                    Height - this.tabStrip.MaximumRequiredSize - this.splitter.Height
+                );
                 this.splitter.MinSize = this.tabStrip.MinimumRequiredSize;
             }
         }
@@ -1659,7 +1858,11 @@ namespace System.Workflow.ComponentModel.Design
     {
         private Rectangle selectedTabBounds = Rectangle.Empty;
 
-        public TabSelectionChangeEventArgs(ItemInfo previousItem, ItemInfo currentItem, Rectangle selectedTabBounds)
+        public TabSelectionChangeEventArgs(
+            ItemInfo previousItem,
+            ItemInfo currentItem,
+            Rectangle selectedTabBounds
+        )
             : base(previousItem, currentItem)
         {
             this.selectedTabBounds = selectedTabBounds;
@@ -1667,10 +1870,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public Rectangle SelectedTabBounds
         {
-            get
-            {
-                return this.selectedTabBounds;
-            }
+            get { return this.selectedTabBounds; }
         }
     }
     #endregion
@@ -1702,8 +1902,12 @@ namespace System.Workflow.ComponentModel.Design
             Font = new Font(Font.FontFamily, this.reqTabItemSize * 2 / 3, GraphicsUnit.Pixel);
 
             this.tabItemList = new ItemList<ItemInfo>(this);
-            this.tabItemList.ListChanging += new ItemListChangeEventHandler<ItemInfo>(OnItemsChanging);
-            this.tabItemList.ListChanged += new ItemListChangeEventHandler<ItemInfo>(OnItemsChanged);
+            this.tabItemList.ListChanging += new ItemListChangeEventHandler<ItemInfo>(
+                OnItemsChanging
+            );
+            this.tabItemList.ListChanged += new ItemListChangeEventHandler<ItemInfo>(
+                OnItemsChanged
+            );
 
             this.buttonTips = new ToolTip();
             this.buttonTips.ShowAlways = true;
@@ -1711,27 +1915,39 @@ namespace System.Workflow.ComponentModel.Design
 
             BackColor = SystemColors.Control;
 
-            SetStyle(ControlStyles.OptimizedDoubleBuffer |
-            ControlStyles.UserPaint |
-            ControlStyles.AllPaintingInWmPaint |
-            ControlStyles.ResizeRedraw |
-            ControlStyles.Selectable |
-            ControlStyles.SupportsTransparentBackColor, true);
+            SetStyle(
+                ControlStyles.OptimizedDoubleBuffer
+                    | ControlStyles.UserPaint
+                    | ControlStyles.AllPaintingInWmPaint
+                    | ControlStyles.ResizeRedraw
+                    | ControlStyles.Selectable
+                    | ControlStyles.SupportsTransparentBackColor,
+                true
+            );
 
             this.ResumeLayout();
 
-            Microsoft.Win32.SystemEvents.UserPreferenceChanged += new Microsoft.Win32.UserPreferenceChangedEventHandler(SystemEvents_UserPreferenceChanged);
+            Microsoft.Win32.SystemEvents.UserPreferenceChanged +=
+                new Microsoft.Win32.UserPreferenceChangedEventHandler(
+                    SystemEvents_UserPreferenceChanged
+                );
         }
 
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-                Microsoft.Win32.SystemEvents.UserPreferenceChanged -= new Microsoft.Win32.UserPreferenceChangedEventHandler(SystemEvents_UserPreferenceChanged);
+                Microsoft.Win32.SystemEvents.UserPreferenceChanged -=
+                    new Microsoft.Win32.UserPreferenceChangedEventHandler(
+                        SystemEvents_UserPreferenceChanged
+                    );
 
             base.Dispose(disposing);
         }
 
-        private void SystemEvents_UserPreferenceChanged(object sender, Microsoft.Win32.UserPreferenceChangedEventArgs e)
+        private void SystemEvents_UserPreferenceChanged(
+            object sender,
+            Microsoft.Win32.UserPreferenceChangedEventArgs e
+        )
         {
             this.buttonTips.BackColor = SystemColors.Info;
             this.buttonTips.ForeColor = SystemColors.InfoText;
@@ -1742,25 +1958,21 @@ namespace System.Workflow.ComponentModel.Design
         #region Public Properties and Methods
         public IList<ItemInfo> Tabs
         {
-            get
-            {
-                return this.tabItemList;
-            }
+            get { return this.tabItemList; }
         }
 
         public int SelectedTab
         {
-            get
-            {
-                return this.selectedTab;
-            }
-
+            get { return this.selectedTab; }
             set
             {
                 if (value < 0 || value > this.tabItemList.Count)
                     return;
 
-                ItemInfo previousTab = (this.selectedTab >= 0 && this.selectedTab < this.tabItemList.Count) ? this.tabItemList[this.selectedTab] : null;
+                ItemInfo previousTab =
+                    (this.selectedTab >= 0 && this.selectedTab < this.tabItemList.Count)
+                        ? this.tabItemList[this.selectedTab]
+                        : null;
                 ItemInfo currentTab = this.tabItemList[value];
 
                 this.selectedTab = value;
@@ -1769,7 +1981,14 @@ namespace System.Workflow.ComponentModel.Design
                 if (TabChange != null)
                 {
                     Rectangle tabItemBounds = GetTabItemRectangle(currentTab);
-                    TabChange(this, new TabSelectionChangeEventArgs(previousTab, currentTab, new Rectangle(PointToScreen(tabItemBounds.Location), tabItemBounds.Size)));
+                    TabChange(
+                        this,
+                        new TabSelectionChangeEventArgs(
+                            previousTab,
+                            currentTab,
+                            new Rectangle(PointToScreen(tabItemBounds.Location), tabItemBounds.Size)
+                        )
+                    );
                 }
             }
         }
@@ -1847,7 +2066,10 @@ namespace System.Workflow.ComponentModel.Design
             foreach (ItemInfo tabItemInfo in this.tabItemList)
             {
                 Rectangle buttonRectangle = GetTabItemRectangle(tabItemInfo);
-                if (buttonRectangle.Contains(new Point(e.X, e.Y)) && tabItemInfo.Text != this.buttonTips.GetToolTip(this))
+                if (
+                    buttonRectangle.Contains(new Point(e.X, e.Y))
+                    && tabItemInfo.Text != this.buttonTips.GetToolTip(this)
+                )
                 {
                     this.buttonTips.Active = false;
                     this.buttonTips.SetToolTip(this, tabItemInfo.Text);
@@ -1879,8 +2101,16 @@ namespace System.Workflow.ComponentModel.Design
             Color selectionColor = Color.FromArgb(255, 192, 111);
             if (SystemInformation.HighContrast)
             { //invert the values
-                hottrackColor = Color.FromArgb(255 - hottrackColor.R, 255 - hottrackColor.G, 255 - hottrackColor.B);
-                selectionColor = Color.FromArgb(255 - selectionColor.R, 255 - selectionColor.G, 255 - selectionColor.B);
+                hottrackColor = Color.FromArgb(
+                    255 - hottrackColor.R,
+                    255 - hottrackColor.G,
+                    255 - hottrackColor.B
+                );
+                selectionColor = Color.FromArgb(
+                    255 - selectionColor.R,
+                    255 - selectionColor.G,
+                    255 - selectionColor.B
+                );
             }
             using (Brush hottrackBrush = new SolidBrush(hottrackColor))
             using (Brush selectionBrush = new SolidBrush(selectionColor))
@@ -1924,17 +2154,47 @@ namespace System.Workflow.ComponentModel.Design
 
                         if (this.orientation == Orientation.Horizontal)
                         {
-                            RectangleF tabTextRectangleF = new RectangleF(tabTextRectangle.X, tabTextRectangle.Y, tabTextRectangle.Width, tabTextRectangle.Height);
-                            e.Graphics.DrawString(tabItem.Text, Font, SystemBrushes.ControlText, tabTextRectangleF, stringFormat);
+                            RectangleF tabTextRectangleF = new RectangleF(
+                                tabTextRectangle.X,
+                                tabTextRectangle.Y,
+                                tabTextRectangle.Width,
+                                tabTextRectangle.Height
+                            );
+                            e.Graphics.DrawString(
+                                tabItem.Text,
+                                Font,
+                                SystemBrushes.ControlText,
+                                tabTextRectangleF,
+                                stringFormat
+                            );
                         }
                         else
                         {
-                            using (Bitmap bitmap = new Bitmap(tabTextRectangle.Height, tabTextRectangle.Width, e.Graphics))
+                            using (
+                                Bitmap bitmap = new Bitmap(
+                                    tabTextRectangle.Height,
+                                    tabTextRectangle.Width,
+                                    e.Graphics
+                                )
+                            )
                             using (Graphics graphics = Graphics.FromImage(bitmap))
                             {
-                                graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
-                                graphics.FillRectangle(backgroundBrush, new Rectangle(0, 0, bitmap.Width, bitmap.Height));
-                                graphics.DrawString(this.tabItemList[tabItemIndex].Text, Font, SystemBrushes.ControlText, new Rectangle(0, 0, bitmap.Width, bitmap.Height), stringFormat);
+                                graphics.TextRenderingHint = System
+                                    .Drawing
+                                    .Text
+                                    .TextRenderingHint
+                                    .AntiAlias;
+                                graphics.FillRectangle(
+                                    backgroundBrush,
+                                    new Rectangle(0, 0, bitmap.Width, bitmap.Height)
+                                );
+                                graphics.DrawString(
+                                    this.tabItemList[tabItemIndex].Text,
+                                    Font,
+                                    SystemBrushes.ControlText,
+                                    new Rectangle(0, 0, bitmap.Width, bitmap.Height),
+                                    stringFormat
+                                );
                                 bitmap.RotateFlip(RotateFlipType.Rotate90FlipNone);
                                 e.Graphics.DrawImage(bitmap, tabTextRectangle);
                             }
@@ -1951,7 +2211,9 @@ namespace System.Workflow.ComponentModel.Design
             using (Graphics graphics = CreateGraphics())
             {
                 this.drawItems = new DrawTabItemStruct[this.tabItemList.Count];
-                int maxTotalTabItemSize = ((this.orientation == Orientation.Horizontal) ? Width : Height);
+                int maxTotalTabItemSize = (
+                    (this.orientation == Orientation.Horizontal) ? Width : Height
+                );
                 bool iconsOnly = false;
 
                 //when it is minimum size, dont count the text in
@@ -1975,7 +2237,10 @@ namespace System.Workflow.ComponentModel.Design
                     if (itemInfo.Text != null && itemInfo.Text.Length > 0)
                     {
                         SizeF sizef = graphics.MeasureString(itemInfo.Text, Font);
-                        this.drawItems[i].TextSize = new Size(Convert.ToInt32(Math.Ceiling(sizef.Width)), Convert.ToInt32(Math.Ceiling(sizef.Height)));
+                        this.drawItems[i].TextSize = new Size(
+                            Convert.ToInt32(Math.Ceiling(sizef.Width)),
+                            Convert.ToInt32(Math.Ceiling(sizef.Height))
+                        );
 
                         if (!iconsOnly)
                             tabItemSize += this.drawItems[i].TextSize.Width + TabMargin;
@@ -2006,14 +2271,25 @@ namespace System.Workflow.ComponentModel.Design
                 //now calculate how much space we really consumed and if we need to make items smaller
                 if (offset > maxTotalTabItemSize)
                 {
-                    int itemSizeDecrease = (int)Math.Ceiling(((double)(offset - maxTotalTabItemSize)) / (double)Math.Max(1, this.tabItemList.Count));
+                    int itemSizeDecrease = (int)
+                        Math.Ceiling(
+                            ((double)(offset - maxTotalTabItemSize))
+                                / (double)Math.Max(1, this.tabItemList.Count)
+                        );
                     offset = 0;
 
                     //make sure the last icon is not over the edge
                     DrawTabItemStruct lastItemStruct = this.drawItems[this.tabItemList.Count - 1];
-                    int lastItemWidth = (this.orientation == Orientation.Horizontal) ? lastItemStruct.TabItemRectangle.Width - itemSizeDecrease : lastItemStruct.TabItemRectangle.Height - itemSizeDecrease;
+                    int lastItemWidth =
+                        (this.orientation == Orientation.Horizontal)
+                            ? lastItemStruct.TabItemRectangle.Width - itemSizeDecrease
+                            : lastItemStruct.TabItemRectangle.Height - itemSizeDecrease;
                     if (lastItemWidth < this.reqTabItemSize)
-                        itemSizeDecrease += (int)Math.Ceiling(((double)(this.reqTabItemSize - lastItemWidth)) / (double)Math.Max(1, this.tabItemList.Count));
+                        itemSizeDecrease += (int)
+                            Math.Ceiling(
+                                ((double)(this.reqTabItemSize - lastItemWidth))
+                                    / (double)Math.Max(1, this.tabItemList.Count)
+                            );
 
                     for (int i = 0; i < this.tabItemList.Count; i++)
                     {
@@ -2021,14 +2297,20 @@ namespace System.Workflow.ComponentModel.Design
                         {
                             this.drawItems[i].TabItemRectangle.X -= offset;
                             this.drawItems[i].TabItemRectangle.Width -= itemSizeDecrease;
-                            if ((i == this.tabItemList.Count - 1) && this.drawItems[i].TabItemRectangle.Width < this.reqTabItemSize)
+                            if (
+                                (i == this.tabItemList.Count - 1)
+                                && this.drawItems[i].TabItemRectangle.Width < this.reqTabItemSize
+                            )
                                 this.drawItems[i].TabItemRectangle.Width = this.reqTabItemSize;
                         }
                         else
                         {
                             this.drawItems[i].TabItemRectangle.Y -= offset;
                             this.drawItems[i].TabItemRectangle.Height -= itemSizeDecrease;
-                            if ((i == this.tabItemList.Count - 1) && this.drawItems[i].TabItemRectangle.Height < this.reqTabItemSize)
+                            if (
+                                (i == this.tabItemList.Count - 1)
+                                && this.drawItems[i].TabItemRectangle.Height < this.reqTabItemSize
+                            )
                                 this.drawItems[i].TabItemRectangle.Height = this.reqTabItemSize;
                         }
 
@@ -2086,7 +2368,10 @@ namespace System.Workflow.ComponentModel.Design
             {
                 imageRectangle = this.drawItems[index].TabItemRectangle;
                 imageRectangle.Inflate(-TabMargin, -TabMargin);
-                imageRectangle.Size = new Size(this.reqTabItemSize - 2 * TabMargin, this.reqTabItemSize - 2 * TabMargin);
+                imageRectangle.Size = new Size(
+                    this.reqTabItemSize - 2 * TabMargin,
+                    this.reqTabItemSize - 2 * TabMargin
+                );
             }
 
             return imageRectangle;
@@ -2163,7 +2448,10 @@ namespace System.Workflow.ComponentModel.Design
 
             using (Graphics graphics = this.parentControl.CreateGraphics())
             {
-                SizeF textSize = graphics.MeasureString(SR.GetString(SR.ToolTipString), this.parentControl.Font);
+                SizeF textSize = graphics.MeasureString(
+                    SR.GetString(SR.ToolTipString),
+                    this.parentControl.Font
+                );
                 int width = Convert.ToInt32((Math.Ceiling(textSize.Width) / 3)) * 30;
                 this.infoTip.SetMaxTipWidth(width);
             }
@@ -2253,13 +2541,35 @@ namespace System.Workflow.ComponentModel.Design
 
         public void RelayParentNotify(ref System.Windows.Forms.Message msg)
         {
-            if (msg.Msg == NativeMethods.WM_NOTIFY && msg.LParam != IntPtr.Zero && !this.inplaceTipRectangle.IsEmpty)
+            if (
+                msg.Msg == NativeMethods.WM_NOTIFY
+                && msg.LParam != IntPtr.Zero
+                && !this.inplaceTipRectangle.IsEmpty
+            )
             {
-                NativeMethods.NMHDR notifyHeader = Marshal.PtrToStructure(msg.LParam, typeof(NativeMethods.NMHDR)) as NativeMethods.NMHDR;
-                if (notifyHeader != null && notifyHeader.hwndFrom == this.inplaceTip.Handle && notifyHeader.code == NativeMethods.TTN_SHOW)
+                NativeMethods.NMHDR notifyHeader =
+                    Marshal.PtrToStructure(msg.LParam, typeof(NativeMethods.NMHDR))
+                    as NativeMethods.NMHDR;
+                if (
+                    notifyHeader != null
+                    && notifyHeader.hwndFrom == this.inplaceTip.Handle
+                    && notifyHeader.code == NativeMethods.TTN_SHOW
+                )
                 {
-                    Point screenCoOrd = this.parentControl.PointToScreen(new Point(this.inplaceTipRectangle.Left, this.inplaceTipRectangle.Top));
-                    int result = NativeMethods.SetWindowPos(this.inplaceTip.Handle, IntPtr.Zero, screenCoOrd.X, screenCoOrd.Y, 0, 0, NativeMethods.SWP_NOSIZE | NativeMethods.SWP_NOZORDER | NativeMethods.SWP_NOACTIVATE);
+                    Point screenCoOrd = this.parentControl.PointToScreen(
+                        new Point(this.inplaceTipRectangle.Left, this.inplaceTipRectangle.Top)
+                    );
+                    int result = NativeMethods.SetWindowPos(
+                        this.inplaceTip.Handle,
+                        IntPtr.Zero,
+                        screenCoOrd.X,
+                        screenCoOrd.Y,
+                        0,
+                        0,
+                        NativeMethods.SWP_NOSIZE
+                            | NativeMethods.SWP_NOZORDER
+                            | NativeMethods.SWP_NOACTIVATE
+                    );
                     msg.Result = new IntPtr(1);
                 }
             }
@@ -2284,7 +2594,10 @@ namespace System.Workflow.ComponentModel.Design
 
                 CreateParams createParams = new CreateParams();
                 createParams.ClassName = NativeToolTip.ToolTipClass;
-                createParams.Style = NativeMethods.WS_POPUP | NativeMethods.TTS_ALWAYSTIP | NativeMethods.TTS_NOPREFIX;
+                createParams.Style =
+                    NativeMethods.WS_POPUP
+                    | NativeMethods.TTS_ALWAYSTIP
+                    | NativeMethods.TTS_NOPREFIX;
                 createParams.ExStyle = NativeMethods.WS_EX_TOPMOST;
                 createParams.Parent = this.parentHandle;
                 CreateHandle(createParams);
@@ -2316,23 +2629,43 @@ namespace System.Workflow.ComponentModel.Design
                 {
                     this.activate = activateToolTip;
                     IntPtr activateValue = (this.activate) ? new IntPtr(1) : new IntPtr(0);
-                    IntPtr lresult = NativeMethods.SendMessage(Handle, NativeMethods.TTM_ACTIVATE, activateValue, IntPtr.Zero);
+                    IntPtr lresult = NativeMethods.SendMessage(
+                        Handle,
+                        NativeMethods.TTM_ACTIVATE,
+                        activateValue,
+                        IntPtr.Zero
+                    );
                 }
             }
 
             public void Pop()
             {
-                IntPtr lresult = NativeMethods.SendMessage(Handle, NativeMethods.TTM_POP, IntPtr.Zero, IntPtr.Zero);
+                IntPtr lresult = NativeMethods.SendMessage(
+                    Handle,
+                    NativeMethods.TTM_POP,
+                    IntPtr.Zero,
+                    IntPtr.Zero
+                );
             }
 
             public void SetMaxTipWidth(int tipWidth)
             {
-                IntPtr lresult = NativeMethods.SendMessage(Handle, NativeMethods.TTM_SETMAXTIPWIDTH, IntPtr.Zero, new IntPtr(tipWidth));
+                IntPtr lresult = NativeMethods.SendMessage(
+                    Handle,
+                    NativeMethods.TTM_SETMAXTIPWIDTH,
+                    IntPtr.Zero,
+                    new IntPtr(tipWidth)
+                );
             }
 
             public void SetDelay(int time, int delay)
             {
-                IntPtr lresult = NativeMethods.SendMessage(Handle, NativeMethods.TTM_SETDELAYTIME, new IntPtr(time), new IntPtr(delay));
+                IntPtr lresult = NativeMethods.SendMessage(
+                    Handle,
+                    NativeMethods.TTM_SETDELAYTIME,
+                    new IntPtr(time),
+                    new IntPtr(delay)
+                );
             }
 
             public void UpdateTitle(string title)
@@ -2341,7 +2674,12 @@ namespace System.Workflow.ComponentModel.Design
                 try
                 {
                     titleStr = Marshal.StringToBSTR(title);
-                    IntPtr lresult = NativeMethods.SendMessage(Handle, NativeMethods.TTM_SETTITLE, new IntPtr((int)ToolTipIcon.None), titleStr);
+                    IntPtr lresult = NativeMethods.SendMessage(
+                        Handle,
+                        NativeMethods.TTM_SETTITLE,
+                        new IntPtr((int)ToolTipIcon.None),
+                        titleStr
+                    );
                 }
                 finally
                 {
@@ -2356,7 +2694,12 @@ namespace System.Workflow.ComponentModel.Design
                 try
                 {
                     toolInfo.text = Marshal.StringToBSTR(toolTipText);
-                    IntPtr lresult = NativeMethods.SendMessage(Handle, NativeMethods.TTM_UPDATETIPTEXT, IntPtr.Zero, ref toolInfo);
+                    IntPtr lresult = NativeMethods.SendMessage(
+                        Handle,
+                        NativeMethods.TTM_UPDATETIPTEXT,
+                        IntPtr.Zero,
+                        ref toolInfo
+                    );
                 }
                 finally
                 {
@@ -2372,18 +2715,33 @@ namespace System.Workflow.ComponentModel.Design
                 toolInfo.rect.top = rectangle.Top;
                 toolInfo.rect.right = rectangle.Right;
                 toolInfo.rect.bottom = rectangle.Bottom;
-                IntPtr lresult = NativeMethods.SendMessage(Handle, NativeMethods.TTM_NEWTOOLRECT, IntPtr.Zero, ref toolInfo);
+                IntPtr lresult = NativeMethods.SendMessage(
+                    Handle,
+                    NativeMethods.TTM_NEWTOOLRECT,
+                    IntPtr.Zero,
+                    ref toolInfo
+                );
             }
 
             private bool AddTool(NativeMethods.TOOLINFO toolInfo)
             {
-                IntPtr retVal = NativeMethods.SendMessage(Handle, NativeMethods.TTM_ADDTOOL, IntPtr.Zero, ref toolInfo);
+                IntPtr retVal = NativeMethods.SendMessage(
+                    Handle,
+                    NativeMethods.TTM_ADDTOOL,
+                    IntPtr.Zero,
+                    ref toolInfo
+                );
                 return (retVal != IntPtr.Zero);
             }
 
             private void DelTool(NativeMethods.TOOLINFO toolInfo)
             {
-                IntPtr lresult = NativeMethods.SendMessage(Handle, NativeMethods.TTM_DELTOOL, IntPtr.Zero, ref toolInfo);
+                IntPtr lresult = NativeMethods.SendMessage(
+                    Handle,
+                    NativeMethods.TTM_DELTOOL,
+                    IntPtr.Zero,
+                    ref toolInfo
+                );
             }
 
             private NativeMethods.TOOLINFO GetToolInfo()
@@ -2393,7 +2751,11 @@ namespace System.Workflow.ComponentModel.Design
                 toolInfo.flags = 0;
                 toolInfo.hwnd = IntPtr.Zero;
                 toolInfo.id = IntPtr.Zero;
-                toolInfo.rect.left = toolInfo.rect.right = toolInfo.rect.top = toolInfo.rect.bottom = 0;
+                toolInfo.rect.left =
+                    toolInfo.rect.right =
+                    toolInfo.rect.top =
+                    toolInfo.rect.bottom =
+                        0;
                 toolInfo.hinst = IntPtr.Zero;
                 toolInfo.text = new IntPtr(-1);
                 toolInfo.lParam = IntPtr.Zero;
@@ -2443,10 +2805,7 @@ namespace System.Workflow.ComponentModel.Design
         #region Public Properties
         public IList<ItemInfo> Items
         {
-            get
-            {
-                return this.items;
-            }
+            get { return this.items; }
         }
 
         public AccessibleObject[] AccessibilityObjects
@@ -2456,10 +2815,30 @@ namespace System.Workflow.ComponentModel.Design
                 if (this.accessibilityObjects == null)
                 {
                     this.accessibilityObjects = new List<ItemStripAccessibleObject>();
-                    this.accessibilityObjects.Add(new ItemStripAccessibleObject(ItemStripAccessibleObject.AccessibleObjectType.LeftScroll, this));
-                    for (int i = 0; (i < VisibleItemCount) && ((this.scrollMarker + i) < Items.Count); i++)
-                        this.accessibilityObjects.Add(new ItemStripAccessibleObject(ItemStripAccessibleObject.AccessibleObjectType.Item, this, i));
-                    this.accessibilityObjects.Add(new ItemStripAccessibleObject(ItemStripAccessibleObject.AccessibleObjectType.RightScroll, this));
+                    this.accessibilityObjects.Add(
+                        new ItemStripAccessibleObject(
+                            ItemStripAccessibleObject.AccessibleObjectType.LeftScroll,
+                            this
+                        )
+                    );
+                    for (
+                        int i = 0;
+                        (i < VisibleItemCount) && ((this.scrollMarker + i) < Items.Count);
+                        i++
+                    )
+                        this.accessibilityObjects.Add(
+                            new ItemStripAccessibleObject(
+                                ItemStripAccessibleObject.AccessibleObjectType.Item,
+                                this,
+                                i
+                            )
+                        );
+                    this.accessibilityObjects.Add(
+                        new ItemStripAccessibleObject(
+                            ItemStripAccessibleObject.AccessibleObjectType.RightScroll,
+                            this
+                        )
+                    );
                 }
                 return accessibilityObjects.ToArray();
             }
@@ -2467,11 +2846,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public ItemInfo ActiveItem
         {
-            get
-            {
-                return this.activeItem;
-            }
-
+            get { return this.activeItem; }
             set
             {
                 if (this.activeItem == value)
@@ -2483,17 +2858,16 @@ namespace System.Workflow.ComponentModel.Design
                 EnsureScrollMarker();
 
                 if (SelectionChanged != null)
-                    SelectionChanged(this, new SelectionChangeEventArgs(previousSelection, this.activeItem));
+                    SelectionChanged(
+                        this,
+                        new SelectionChangeEventArgs(previousSelection, this.activeItem)
+                    );
             }
         }
 
         public int ActiveDropTarget
         {
-            get
-            {
-                return this.activeDropTarget;
-            }
-
+            get { return this.activeDropTarget; }
             set
             {
                 if (this.activeDropTarget == value)
@@ -2506,11 +2880,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public string HelpText
         {
-            get
-            {
-                return this.helpText;
-            }
-
+            get { return this.helpText; }
             set
             {
                 this.helpText = value;
@@ -2534,13 +2904,22 @@ namespace System.Workflow.ComponentModel.Design
                 for (int i = 0; i < maxItems; i++)
                 {
                     j = i + this.scrollMarker;
-                    rectangles[j].X = stripRectangle.Left + (i * (itemSize.Width + itemMargin.Width));
+                    rectangles[j].X =
+                        stripRectangle.Left + (i * (itemSize.Width + itemMargin.Width));
                     rectangles[j].Y = stripRectangle.Top + itemMargin.Height / 2;
-                    rectangles[j].Size = new Size(itemMargin.Width, itemSize.Height + itemMargin.Height);
+                    rectangles[j].Size = new Size(
+                        itemMargin.Width,
+                        itemSize.Height + itemMargin.Height
+                    );
                 }
 
                 //Make sure that final drop target occupies the entire empty area on the right
-                rectangles[j] = new Rectangle(rectangles[j].Left, rectangles[j].Top, stripRectangle.Right - rectangles[j].Left, rectangles[j].Height);
+                rectangles[j] = new Rectangle(
+                    rectangles[j].Left,
+                    rectangles[j].Top,
+                    stripRectangle.Right - rectangles[j].Left,
+                    rectangles[j].Height
+                );
                 return rectangles;
             }
         }
@@ -2561,7 +2940,10 @@ namespace System.Workflow.ComponentModel.Design
             Size itemSize = ItemSize;
 
             itemIndex = itemIndex - this.scrollMarker;
-            itemRectangle.X = stripRectangle.Left + (itemIndex * itemSize.Width) + ((itemIndex + 1) * itemMargin.Width);
+            itemRectangle.X =
+                stripRectangle.Left
+                + (itemIndex * itemSize.Width)
+                + ((itemIndex + 1) * itemMargin.Width);
             itemRectangle.Y = stripRectangle.Top + itemMargin.Height;
             itemRectangle.Size = itemSize;
             return itemRectangle;
@@ -2571,11 +2953,7 @@ namespace System.Workflow.ComponentModel.Design
         #region Members similar to ActivityDesigner.
         public Point Location
         {
-            get
-            {
-                return this.bounds.Location;
-            }
-
+            get { return this.bounds.Location; }
             set
             {
                 if (this.bounds.Location == value)
@@ -2586,18 +2964,12 @@ namespace System.Workflow.ComponentModel.Design
 
         public Size Size
         {
-            get
-            {
-                return this.bounds.Size;
-            }
+            get { return this.bounds.Size; }
         }
 
         public Rectangle Bounds
         {
-            get
-            {
-                return this.bounds;
-            }
+            get { return this.bounds; }
         }
 
         public ItemInfo HitTest(Point point)
@@ -2633,7 +3005,10 @@ namespace System.Workflow.ComponentModel.Design
                 if (ActiveItem != null)
                 {
                     int index = this.items.IndexOf(ActiveItem) + incr;
-                    index = (index >= this.items.Count) ? 0 : (index < 0) ? this.items.Count - 1 : index;
+                    index =
+                        (index >= this.items.Count) ? 0
+                        : (index < 0) ? this.items.Count - 1
+                        : index;
                     ActiveItem = this.items[index];
                 }
             }
@@ -2651,14 +3026,20 @@ namespace System.Workflow.ComponentModel.Design
 
         public void OnLayoutSize(Graphics graphics)
         {
-            ActivityPreviewDesignerTheme designerTheme = this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
+            ActivityPreviewDesignerTheme designerTheme =
+                this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
 
             //Be sure to call this atleast once
             Size itemMargin = ItemMargin;
             Size itemSize = ItemSize;
             this.bounds.Width = 2 * WorkflowTheme.CurrentTheme.AmbientTheme.Margin.Width;
-            this.bounds.Width += (itemSize.Width * ((designerTheme != null) ? designerTheme.PreviewItemCount : 0));
-            this.bounds.Width += (itemMargin.Width * (((designerTheme != null) ? designerTheme.PreviewItemCount : 0) + 1));
+            this.bounds.Width += (
+                itemSize.Width * ((designerTheme != null) ? designerTheme.PreviewItemCount : 0)
+            );
+            this.bounds.Width += (
+                itemMargin.Width
+                * (((designerTheme != null) ? designerTheme.PreviewItemCount : 0) + 1)
+            );
             this.bounds.Width += GetButtonBounds(ScrollButton.Left).Size.Width;
             this.bounds.Width += GetButtonBounds(ScrollButton.Right).Size.Width;
             this.bounds.Height = itemSize.Height + (2 * itemMargin.Height);
@@ -2669,14 +3050,18 @@ namespace System.Workflow.ComponentModel.Design
         public void Draw(Graphics graphics)
         {
             AmbientTheme ambientTheme = WorkflowTheme.CurrentTheme.AmbientTheme;
-            ActivityPreviewDesignerTheme designerTheme = this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
+            ActivityPreviewDesignerTheme designerTheme =
+                this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
             if (designerTheme != null)
             {
                 //First draw the strip
                 Rectangle stripRectangle = StripRectangle;
                 GraphicsPath stripPath = new GraphicsPath();
                 if (designerTheme.DesignerGeometry == DesignerGeometry.RoundedRectangle)
-                    stripPath.AddPath(ActivityDesignerPaint.GetRoundedRectanglePath(stripRectangle, 4), false);
+                    stripPath.AddPath(
+                        ActivityDesignerPaint.GetRoundedRectanglePath(stripRectangle, 4),
+                        false
+                    );
                 else
                     stripPath.AddRectangle(stripRectangle);
                 stripPath.CloseFigure();
@@ -2694,7 +3079,12 @@ namespace System.Workflow.ComponentModel.Design
                     scrollbuttonRectangle.Offset(1, 1);
                 }
                 if (scrollButtonImage != null)
-                    ActivityDesignerPaint.DrawImage(graphics, scrollButtonImage, scrollbuttonRectangle, DesignerContentAlignment.Center);
+                    ActivityDesignerPaint.DrawImage(
+                        graphics,
+                        scrollButtonImage,
+                        scrollbuttonRectangle,
+                        DesignerContentAlignment.Center
+                    );
 
                 scrollButtonImage = ActivityPreviewDesignerTheme.RightScrollImageUp;
                 scrollbuttonRectangle = GetButtonBounds(ScrollButton.Right);
@@ -2704,12 +3094,25 @@ namespace System.Workflow.ComponentModel.Design
                     scrollbuttonRectangle.Offset(1, 1);
                 }
                 if (scrollButtonImage != null)
-                    ActivityDesignerPaint.DrawImage(graphics, scrollButtonImage, scrollbuttonRectangle, DesignerContentAlignment.Center);
+                    ActivityDesignerPaint.DrawImage(
+                        graphics,
+                        scrollButtonImage,
+                        scrollbuttonRectangle,
+                        DesignerContentAlignment.Center
+                    );
 
                 //Draw previwed designers
                 Size itemMargin = ItemMargin;
-                int selectionSize = Math.Max(Math.Min(itemMargin.Width / 4, itemMargin.Height / 2), 1);
-                for (int itemIndex = this.scrollMarker; itemIndex < this.items.Count && itemIndex < (this.scrollMarker + VisibleItemCount); itemIndex++)
+                int selectionSize = Math.Max(
+                    Math.Min(itemMargin.Width / 4, itemMargin.Height / 2),
+                    1
+                );
+                for (
+                    int itemIndex = this.scrollMarker;
+                    itemIndex < this.items.Count
+                        && itemIndex < (this.scrollMarker + VisibleItemCount);
+                    itemIndex++
+                )
                 {
                     Rectangle itemRectangle = GetItemBounds(this.items[itemIndex]);
                     if (itemRectangle.IsEmpty)
@@ -2717,7 +3120,10 @@ namespace System.Workflow.ComponentModel.Design
 
                     GraphicsPath itemPath = new GraphicsPath();
                     if (designerTheme.DesignerGeometry == DesignerGeometry.RoundedRectangle)
-                        itemPath.AddPath(ActivityDesignerPaint.GetRoundedRectanglePath(itemRectangle, 4), true);
+                        itemPath.AddPath(
+                            ActivityDesignerPaint.GetRoundedRectanglePath(itemRectangle, 4),
+                            true
+                        );
                     else
                         itemPath.AddRectangle(itemRectangle);
 
@@ -2728,7 +3134,9 @@ namespace System.Workflow.ComponentModel.Design
                     Image itemImage = this.items[itemIndex].Image;
                     if (itemImage == null)
                     {
-                        Activity activity = this.items[itemIndex].UserData[DesignerUserDataKeys.Activity] as Activity;
+                        Activity activity =
+                            this.items[itemIndex].UserData[DesignerUserDataKeys.Activity]
+                            as Activity;
                         ActivityDesigner activityDesigner = ActivityDesigner.GetDesigner(activity);
                         if (activityDesigner != null)
                             itemImage = activityDesigner.Image;
@@ -2739,8 +3147,16 @@ namespace System.Workflow.ComponentModel.Design
                         Rectangle imageRectangle = Rectangle.Empty;
                         imageRectangle.X = itemRectangle.Left + 2;
                         imageRectangle.Y = itemRectangle.Top + 2;
-                        imageRectangle.Size = new Size(itemRectangle.Width - 4, itemRectangle.Height - 4);
-                        ActivityDesignerPaint.DrawImage(graphics, itemImage, imageRectangle, DesignerContentAlignment.Center);
+                        imageRectangle.Size = new Size(
+                            itemRectangle.Width - 4,
+                            itemRectangle.Height - 4
+                        );
+                        ActivityDesignerPaint.DrawImage(
+                            graphics,
+                            itemImage,
+                            imageRectangle,
+                            DesignerContentAlignment.Center
+                        );
                     }
 
                     if (itemIndex == this.items.IndexOf(ActiveItem))
@@ -2756,14 +3172,33 @@ namespace System.Workflow.ComponentModel.Design
                 if (activeDropTarget >= 0 && activeDropTarget < dropTargets.GetLength(0))
                 {
                     dropTargets[activeDropTarget].Width = itemMargin.Width;
-                    graphics.DrawLine(ambientTheme.DropIndicatorPen, dropTargets[activeDropTarget].Left + dropTargets[activeDropTarget].Width / 2, dropTargets[activeDropTarget].Top, dropTargets[activeDropTarget].Left + dropTargets[activeDropTarget].Width / 2, dropTargets[activeDropTarget].Bottom);
+                    graphics.DrawLine(
+                        ambientTheme.DropIndicatorPen,
+                        dropTargets[activeDropTarget].Left
+                            + dropTargets[activeDropTarget].Width / 2,
+                        dropTargets[activeDropTarget].Top,
+                        dropTargets[activeDropTarget].Left
+                            + dropTargets[activeDropTarget].Width / 2,
+                        dropTargets[activeDropTarget].Bottom
+                    );
                 }
                 else if (this.items.Count == 0 && this.helpText.Length > 0)
                 {
                     stripRectangle.Inflate(-2, -2);
 
-                    Brush textBrush = (ActiveDropTarget != -1) ? ambientTheme.DropIndicatorBrush : designerTheme.ForegroundBrush;
-                    ActivityDesignerPaint.DrawText(graphics, designerTheme.Font, this.helpText, stripRectangle, StringAlignment.Center, WorkflowTheme.CurrentTheme.AmbientTheme.TextQuality, textBrush);
+                    Brush textBrush =
+                        (ActiveDropTarget != -1)
+                            ? ambientTheme.DropIndicatorBrush
+                            : designerTheme.ForegroundBrush;
+                    ActivityDesignerPaint.DrawText(
+                        graphics,
+                        designerTheme.Font,
+                        this.helpText,
+                        stripRectangle,
+                        StringAlignment.Center,
+                        WorkflowTheme.CurrentTheme.AmbientTheme.TextQuality,
+                        textBrush
+                    );
                 }
             }
         }
@@ -2780,10 +3215,16 @@ namespace System.Workflow.ComponentModel.Design
             //If marker falls outside the range then ensure it to a visible point
             int index = this.items.IndexOf(ActiveItem);
             if (index >= 0)
-                newMarker = (index < this.scrollMarker) ? index : (index >= this.scrollMarker + VisibleItemCount) ? index - VisibleItemCount + 1 : newMarker;
+                newMarker =
+                    (index < this.scrollMarker) ? index
+                    : (index >= this.scrollMarker + VisibleItemCount) ? index - VisibleItemCount + 1
+                    : newMarker;
 
             //If there are more items in the strip than displayed then we need to display what ever we can
-            if (this.items.Count >= VisibleItemCount && ((this.items.Count - this.scrollMarker) < VisibleItemCount))
+            if (
+                this.items.Count >= VisibleItemCount
+                && ((this.items.Count - this.scrollMarker) < VisibleItemCount)
+            )
                 newMarker = this.items.Count - VisibleItemCount;
 
             if (newMarker >= 0 && newMarker <= Math.Max(this.items.Count - VisibleItemCount + 1, 0))
@@ -2794,11 +3235,7 @@ namespace System.Workflow.ComponentModel.Design
 
         private ScrollButton ActiveScrollButton
         {
-            get
-            {
-                return this.activeScrollButton;
-            }
-
+            get { return this.activeScrollButton; }
             set
             {
                 if (this.activeScrollButton == value)
@@ -2814,7 +3251,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                ActivityPreviewDesignerTheme designerTheme = this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
+                ActivityPreviewDesignerTheme designerTheme =
+                    this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
                 return ((designerTheme != null) ? designerTheme.PreviewItemCount : 1);
             }
         }
@@ -2830,7 +3268,9 @@ namespace System.Workflow.ComponentModel.Design
                 Size margin = WorkflowTheme.CurrentTheme.AmbientTheme.Margin;
                 stripRectangle.X = scrollLeftButton.Right + margin.Width;
                 stripRectangle.Y = this.bounds.Y;
-                stripRectangle.Width = (scrollRightButton.Left - margin.Width) - (scrollLeftButton.Right + margin.Width);
+                stripRectangle.Width =
+                    (scrollRightButton.Left - margin.Width)
+                    - (scrollLeftButton.Right + margin.Width);
                 stripRectangle.Height = this.bounds.Height;
                 return stripRectangle;
             }
@@ -2843,24 +3283,36 @@ namespace System.Workflow.ComponentModel.Design
                 return Rectangle.Empty;
 
             Size scrollButtonSize = scrollButtonImage.Size;
-            scrollButtonSize.Height = Math.Min(scrollButtonSize.Width, Math.Min(scrollButtonSize.Height, ItemSize.Height));
+            scrollButtonSize.Height = Math.Min(
+                scrollButtonSize.Width,
+                Math.Min(scrollButtonSize.Height, ItemSize.Height)
+            );
             scrollButtonSize.Width = Math.Min(scrollButtonSize.Width, scrollButtonSize.Height);
 
-            int startLocation = (scrollButton == ScrollButton.Left) ? this.bounds.X : this.bounds.Right - scrollButtonSize.Width;
+            int startLocation =
+                (scrollButton == ScrollButton.Left)
+                    ? this.bounds.X
+                    : this.bounds.Right - scrollButtonSize.Width;
             Rectangle scrollRectangle = Rectangle.Empty;
             scrollRectangle.X = startLocation;
-            scrollRectangle.Y = this.bounds.Y + this.bounds.Size.Height / 2 - scrollButtonSize.Height / 2;
+            scrollRectangle.Y =
+                this.bounds.Y + this.bounds.Size.Height / 2 - scrollButtonSize.Height / 2;
             scrollRectangle.Size = scrollButtonSize;
             return scrollRectangle;
         }
 
         private void OnItemsChanging(object sender, ItemListChangeEventArgs<ItemInfo> e)
         {
-            if (e.Action == ItemListChangeAction.Remove && e.RemovedItems.Count > 0 && ActiveItem == e.RemovedItems[0])
+            if (
+                e.Action == ItemListChangeAction.Remove
+                && e.RemovedItems.Count > 0
+                && ActiveItem == e.RemovedItems[0]
+            )
             {
                 int nextIndex = this.items.IndexOf(e.RemovedItems[0]);
                 nextIndex += (nextIndex < this.items.Count - 1) ? 1 : -1;
-                ActiveItem = (nextIndex >= 0 && nextIndex < this.items.Count) ? this.items[nextIndex] : null;
+                ActiveItem =
+                    (nextIndex >= 0 && nextIndex < this.items.Count) ? this.items[nextIndex] : null;
             }
         }
 
@@ -2880,7 +3332,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             get
             {
-                ActivityPreviewDesignerTheme designerTheme = this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
+                ActivityPreviewDesignerTheme designerTheme =
+                    this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
                 return ((designerTheme != null) ? designerTheme.PreviewItemSize : Size.Empty);
             }
         }
@@ -2898,7 +3351,8 @@ namespace System.Workflow.ComponentModel.Design
         {
             if (this.parentDesigner != null && parentDesigner.Activity.Site != null)
             {
-                WorkflowView workflowView = parentDesigner.Activity.Site.GetService(typeof(WorkflowView)) as WorkflowView;
+                WorkflowView workflowView =
+                    parentDesigner.Activity.Site.GetService(typeof(WorkflowView)) as WorkflowView;
                 if (workflowView != null)
                     workflowView.InvalidateLogicalRectangle(this.bounds);
             }
@@ -2908,19 +3362,31 @@ namespace System.Workflow.ComponentModel.Design
         #region Class ItemStripAccessibleObject
         private sealed class ItemStripAccessibleObject : AccessibleObject
         {
-            internal enum AccessibleObjectType { LeftScroll = 1, Item = 2, RightScroll = 3 }
+            internal enum AccessibleObjectType
+            {
+                LeftScroll = 1,
+                Item = 2,
+                RightScroll = 3,
+            }
 
             private AccessibleObjectType accessibleObjectType;
             private PreviewItemStrip itemStrip;
             private int itemIndex = -1;
 
-            internal ItemStripAccessibleObject(AccessibleObjectType type, PreviewItemStrip itemStrip)
+            internal ItemStripAccessibleObject(
+                AccessibleObjectType type,
+                PreviewItemStrip itemStrip
+            )
             {
                 this.accessibleObjectType = type;
                 this.itemStrip = itemStrip;
             }
 
-            internal ItemStripAccessibleObject(AccessibleObjectType type, PreviewItemStrip itemStrip, int itemIndex)
+            internal ItemStripAccessibleObject(
+                AccessibleObjectType type,
+                PreviewItemStrip itemStrip,
+                int itemIndex
+            )
             {
                 this.accessibleObjectType = type;
                 this.itemStrip = itemStrip;
@@ -2943,14 +3409,23 @@ namespace System.Workflow.ComponentModel.Design
                     else if (this.accessibleObjectType == AccessibleObjectType.Item)
                     {
                         int index = this.itemStrip.scrollMarker + this.itemIndex;
-                        bounds = (index >= 0 && index < this.itemStrip.Items.Count) ? this.itemStrip.GetItemBounds(this.itemStrip.Items[index]) : Rectangle.Empty;
+                        bounds =
+                            (index >= 0 && index < this.itemStrip.Items.Count)
+                                ? this.itemStrip.GetItemBounds(this.itemStrip.Items[index])
+                                : Rectangle.Empty;
                     }
 
                     if (!bounds.IsEmpty)
                     {
-                        WorkflowView workflowView = this.itemStrip.parentDesigner.Activity.Site.GetService(typeof(WorkflowView)) as WorkflowView;
+                        WorkflowView workflowView =
+                            this.itemStrip.parentDesigner.Activity.Site.GetService(
+                                typeof(WorkflowView)
+                            ) as WorkflowView;
                         if (workflowView != null)
-                            bounds = new Rectangle(workflowView.LogicalPointToScreen(bounds.Location), workflowView.LogicalSizeToClient(bounds.Size));
+                            bounds = new Rectangle(
+                                workflowView.LogicalPointToScreen(bounds.Location),
+                                workflowView.LogicalSizeToClient(bounds.Size)
+                            );
                     }
 
                     return bounds;
@@ -2959,10 +3434,7 @@ namespace System.Workflow.ComponentModel.Design
 
             public override string DefaultAction
             {
-                get
-                {
-                    return DR.GetString(DR.AccessibleAction);
-                }
+                get { return DR.GetString(DR.AccessibleAction); }
             }
 
             public override string Description
@@ -2982,7 +3454,10 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         ActivityDesigner activityDesigner = AssociatedDesigner;
                         if (activityDesigner != null)
-                            description = DR.GetString(DR.ActivityDesignerAccessibleDescription, activityDesigner.Activity.GetType().Name);
+                            description = DR.GetString(
+                                DR.ActivityDesignerAccessibleDescription,
+                                activityDesigner.Activity.GetType().Name
+                            );
                     }
 
                     return description;
@@ -3006,7 +3481,10 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         ActivityDesigner activityDesigner = AssociatedDesigner;
                         if (activityDesigner != null)
-                            help = DR.GetString(DR.ActivityDesignerAccessibleHelp, activityDesigner.Activity.GetType().Name);
+                            help = DR.GetString(
+                                DR.ActivityDesignerAccessibleHelp,
+                                activityDesigner.Activity.GetType().Name
+                            );
                     }
 
                     return help;
@@ -3038,7 +3516,6 @@ namespace System.Workflow.ComponentModel.Design
 
                     return name;
                 }
-
                 set
                 {
                     //We do not allow setting ID programatically
@@ -3047,18 +3524,12 @@ namespace System.Workflow.ComponentModel.Design
 
             public override AccessibleObject Parent
             {
-                get
-                {
-                    return this.itemStrip.parentDesigner.AccessibilityObject;
-                }
+                get { return this.itemStrip.parentDesigner.AccessibilityObject; }
             }
 
             public override AccessibleRole Role
             {
-                get
-                {
-                    return AccessibleRole.Diagram;
-                }
+                get { return AccessibleRole.Diagram; }
             }
 
             public override AccessibleStates State
@@ -3070,13 +3541,23 @@ namespace System.Workflow.ComponentModel.Design
                     if (this.accessibleObjectType == AccessibleObjectType.Item)
                     {
                         ActivityDesigner activityDesigner = AssociatedDesigner;
-                        ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                        ISelectionService selectionService =
+                            GetService(typeof(ISelectionService)) as ISelectionService;
                         if (selectionService != null && activityDesigner != null)
                         {
-                            state = (activityDesigner.IsSelected) ? AccessibleStates.Selected : AccessibleStates.Selectable;
+                            state =
+                                (activityDesigner.IsSelected)
+                                    ? AccessibleStates.Selected
+                                    : AccessibleStates.Selectable;
                             state |= AccessibleStates.MultiSelectable;
-                            state |= (activityDesigner.IsLocked) ? AccessibleStates.ReadOnly : AccessibleStates.Moveable;
-                            state |= (activityDesigner.IsPrimarySelection) ? AccessibleStates.Focused : AccessibleStates.Focusable;
+                            state |=
+                                (activityDesigner.IsLocked)
+                                    ? AccessibleStates.ReadOnly
+                                    : AccessibleStates.Moveable;
+                            state |=
+                                (activityDesigner.IsPrimarySelection)
+                                    ? AccessibleStates.Focused
+                                    : AccessibleStates.Focusable;
                         }
                     }
 
@@ -3091,9 +3572,13 @@ namespace System.Workflow.ComponentModel.Design
                     ActivityDesigner activityDesigner = AssociatedDesigner;
                     if (activityDesigner != null)
                     {
-                        ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                        ISelectionService selectionService =
+                            GetService(typeof(ISelectionService)) as ISelectionService;
                         if (selectionService != null)
-                            selectionService.SetSelectedComponents(new object[] { activityDesigner.Activity }, SelectionTypes.Replace);
+                            selectionService.SetSelectedComponents(
+                                new object[] { activityDesigner.Activity },
+                                SelectionTypes.Replace
+                            );
                     }
                 }
             }
@@ -3121,9 +3606,12 @@ namespace System.Workflow.ComponentModel.Design
                 else if (navdir == AccessibleNavigation.Next)
                 {
                     int accessibilityObjectCount = this.itemStrip.AccessibilityObjects.Length;
-                    int childCount = this.itemStrip.parentDesigner.AccessibilityObject.GetChildCount();
+                    int childCount =
+                        this.itemStrip.parentDesigner.AccessibilityObject.GetChildCount();
                     if (childCount > accessibilityObjectCount)
-                        return this.itemStrip.parentDesigner.AccessibilityObject.GetChild(accessibilityObjectCount);
+                        return this.itemStrip.parentDesigner.AccessibilityObject.GetChild(
+                            accessibilityObjectCount
+                        );
                     else
                         return this.itemStrip.parentDesigner.AccessibilityObject.Navigate(navdir);
                 }
@@ -3135,16 +3623,29 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (this.accessibleObjectType == AccessibleObjectType.Item)
                 {
-                    ISelectionService selectionService = GetService(typeof(ISelectionService)) as ISelectionService;
+                    ISelectionService selectionService =
+                        GetService(typeof(ISelectionService)) as ISelectionService;
                     ActivityDesigner activityDesigner = AssociatedDesigner;
                     if (selectionService != null && activityDesigner != null)
                     {
-                        if (((flags & AccessibleSelection.TakeFocus) > 0) || ((flags & AccessibleSelection.TakeSelection) > 0))
-                            selectionService.SetSelectedComponents(new object[] { activityDesigner.Activity }, SelectionTypes.Replace);
+                        if (
+                            ((flags & AccessibleSelection.TakeFocus) > 0)
+                            || ((flags & AccessibleSelection.TakeSelection) > 0)
+                        )
+                            selectionService.SetSelectedComponents(
+                                new object[] { activityDesigner.Activity },
+                                SelectionTypes.Replace
+                            );
                         else if ((flags & AccessibleSelection.AddSelection) > 0)
-                            selectionService.SetSelectedComponents(new object[] { activityDesigner.Activity }, SelectionTypes.Add);
+                            selectionService.SetSelectedComponents(
+                                new object[] { activityDesigner.Activity },
+                                SelectionTypes.Add
+                            );
                         else if ((flags & AccessibleSelection.RemoveSelection) > 0)
-                            selectionService.SetSelectedComponents(new object[] { activityDesigner.Activity }, SelectionTypes.Remove);
+                            selectionService.SetSelectedComponents(
+                                new object[] { activityDesigner.Activity },
+                                SelectionTypes.Remove
+                            );
                     }
                 }
                 else
@@ -3161,9 +3662,14 @@ namespace System.Workflow.ComponentModel.Design
                         return null;
 
                     int index = this.itemStrip.scrollMarker + this.itemIndex;
-                    ItemInfo itemInfo = (index >= 0 && index < this.itemStrip.Items.Count) ? this.itemStrip.Items[index] : null;
+                    ItemInfo itemInfo =
+                        (index >= 0 && index < this.itemStrip.Items.Count)
+                            ? this.itemStrip.Items[index]
+                            : null;
                     if (itemInfo != null)
-                        return ActivityDesigner.GetDesigner(itemInfo.UserData[DesignerUserDataKeys.Activity] as Activity);
+                        return ActivityDesigner.GetDesigner(
+                            itemInfo.UserData[DesignerUserDataKeys.Activity] as Activity
+                        );
                     else
                         return null;
                 }
@@ -3171,7 +3677,10 @@ namespace System.Workflow.ComponentModel.Design
 
             private object GetService(Type serviceType)
             {
-                if (this.itemStrip.parentDesigner.Activity != null || this.itemStrip.parentDesigner.Activity.Site != null)
+                if (
+                    this.itemStrip.parentDesigner.Activity != null
+                    || this.itemStrip.parentDesigner.Activity.Site != null
+                )
                     return this.itemStrip.parentDesigner.Activity.Site.GetService(serviceType);
                 else
                     return null;
@@ -3220,45 +3729,60 @@ namespace System.Workflow.ComponentModel.Design
 
         public Rectangle Bounds
         {
-            get
-            {
-                return this.bounds;
-            }
+            get { return this.bounds; }
         }
 
         public Point Location
         {
-            get
-            {
-                return this.bounds.Location;
-            }
-
+            get { return this.bounds.Location; }
             set
             {
                 Size margin = WorkflowTheme.CurrentTheme.AmbientTheme.Margin;
 
                 this.bounds.Location = value;
 
-                int maxDescHeight = Math.Max(this.previewModeDescRectangle.Height, this.previewModeButtonRectangle.Height);
+                int maxDescHeight = Math.Max(
+                    this.previewModeDescRectangle.Height,
+                    this.previewModeButtonRectangle.Height
+                );
 
                 Point descRectanglePos = Point.Empty;
-                descRectanglePos.X = this.bounds.Left + this.bounds.Width / 2 - this.previewModeDescRectangle.Width / 2 + this.previewModeButtonRectangle.Width + margin.Width;
-                descRectanglePos.Y = this.bounds.Top + maxDescHeight / 2 - this.previewModeDescRectangle.Height / 2;
+                descRectanglePos.X =
+                    this.bounds.Left
+                    + this.bounds.Width / 2
+                    - this.previewModeDescRectangle.Width / 2
+                    + this.previewModeButtonRectangle.Width
+                    + margin.Width;
+                descRectanglePos.Y =
+                    this.bounds.Top + maxDescHeight / 2 - this.previewModeDescRectangle.Height / 2;
                 this.previewModeDescRectangle.Location = descRectanglePos;
 
                 Point previewModeBitmapPos = Point.Empty;
-                previewModeBitmapPos.X = descRectanglePos.X - (this.previewModeButtonRectangle.Width + margin.Width);
-                previewModeBitmapPos.Y = this.bounds.Top + maxDescHeight / 2 - this.previewModeButtonRectangle.Height / 2;
+                previewModeBitmapPos.X =
+                    descRectanglePos.X - (this.previewModeButtonRectangle.Width + margin.Width);
+                previewModeBitmapPos.Y =
+                    this.bounds.Top
+                    + maxDescHeight / 2
+                    - this.previewModeButtonRectangle.Height / 2;
                 this.previewModeButtonRectangle.Location = previewModeBitmapPos;
 
-                this.canvasBounds.Location = new Point(value.X + this.bounds.Width / 2 - this.canvasBounds.Width / 2, this.previewModeDescRectangle.Bottom + margin.Height);
+                this.canvasBounds.Location = new Point(
+                    value.X + this.bounds.Width / 2 - this.canvasBounds.Width / 2,
+                    this.previewModeDescRectangle.Bottom + margin.Height
+                );
 
                 //Adjust the location of the activity which is previewed
                 if (PreviewDesigner != null)
                 {
                     Point location = Point.Empty;
-                    location.X = this.canvasBounds.Left + this.canvasBounds.Width / 2 - PreviewDesigner.Size.Width / 2;
-                    location.Y = this.canvasBounds.Top + this.canvasBounds.Height / 2 - PreviewDesigner.Size.Height / 2;
+                    location.X =
+                        this.canvasBounds.Left
+                        + this.canvasBounds.Width / 2
+                        - PreviewDesigner.Size.Width / 2;
+                    location.Y =
+                        this.canvasBounds.Top
+                        + this.canvasBounds.Height / 2
+                        - PreviewDesigner.Size.Height / 2;
                     PreviewDesigner.Location = location;
                 }
             }
@@ -3266,19 +3790,12 @@ namespace System.Workflow.ComponentModel.Design
 
         public Size Size
         {
-            get
-            {
-                return this.bounds.Size;
-            }
+            get { return this.bounds.Size; }
         }
 
         public Activity PreviewedActivity
         {
-            get
-            {
-                return this.previewedActivity;
-            }
-
+            get { return this.previewedActivity; }
             set
             {
                 if (this.previewedActivity == value)
@@ -3294,7 +3811,8 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (this.serviceProvider != null)
                 {
-                    WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+                    WorkflowView workflowView =
+                        this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
                     if (workflowView != null)
                         workflowView.PerformLayout(false);
                 }
@@ -3311,7 +3829,8 @@ namespace System.Workflow.ComponentModel.Design
 
             if (this.serviceProvider != null)
             {
-                WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+                WorkflowView workflowView =
+                    this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
                 if (workflowView != null)
                     workflowView.InvalidateLogicalRectangle(this.bounds);
             }
@@ -3319,11 +3838,7 @@ namespace System.Workflow.ComponentModel.Design
 
         public bool PreviewMode
         {
-            get
-            {
-                return this.previewMode;
-            }
-
+            get { return this.previewMode; }
             set
             {
                 if (this.previewMode == value)
@@ -3347,7 +3862,8 @@ namespace System.Workflow.ComponentModel.Design
 
                 if (this.serviceProvider != null)
                 {
-                    WorkflowView workflowView = this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+                    WorkflowView workflowView =
+                        this.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
                     if (workflowView != null)
                         workflowView.PerformLayout(false);
                 }
@@ -3364,7 +3880,8 @@ namespace System.Workflow.ComponentModel.Design
 
         public void OnLayoutSize(Graphics graphics, int minWidth)
         {
-            ActivityPreviewDesignerTheme designerTheme = this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
+            ActivityPreviewDesignerTheme designerTheme =
+                this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
             if (designerTheme == null)
                 return;
 
@@ -3373,7 +3890,10 @@ namespace System.Workflow.ComponentModel.Design
             {
                 this.canvasBounds.Size = PreviewDesigner.Bounds.Size;
                 this.canvasBounds.Inflate(margin.Width * 2, margin.Height * 2);
-                this.canvasBounds.Size = new Size(Math.Max(this.canvasBounds.Width, designerTheme.PreviewWindowSize.Width), Math.Max(this.canvasBounds.Height, designerTheme.PreviewWindowSize.Height));
+                this.canvasBounds.Size = new Size(
+                    Math.Max(this.canvasBounds.Width, designerTheme.PreviewWindowSize.Width),
+                    Math.Max(this.canvasBounds.Height, designerTheme.PreviewWindowSize.Height)
+                );
             }
             else
             {
@@ -3383,16 +3903,30 @@ namespace System.Workflow.ComponentModel.Design
             this.canvasBounds.Width = Math.Max(this.canvasBounds.Width, minWidth);
 
             SizeF stringSize = graphics.MeasureString(PreviewModeDescription, designerTheme.Font);
-            this.previewDescTextSize = new Size(Convert.ToInt32(Math.Ceiling(stringSize.Width)), Convert.ToInt32(Math.Ceiling(stringSize.Height)));
-            this.previewDescTextSize.Width = Math.Min(this.canvasBounds.Size.Width - margin.Width - this.previewModeButtonRectangle.Size.Width, this.previewDescTextSize.Width);
+            this.previewDescTextSize = new Size(
+                Convert.ToInt32(Math.Ceiling(stringSize.Width)),
+                Convert.ToInt32(Math.Ceiling(stringSize.Height))
+            );
+            this.previewDescTextSize.Width = Math.Min(
+                this.canvasBounds.Size.Width
+                    - margin.Width
+                    - this.previewModeButtonRectangle.Size.Width,
+                this.previewDescTextSize.Width
+            );
             this.previewModeDescRectangle.Size = this.previewDescTextSize;
 
-            this.previewModeButtonRectangle.Height = Math.Min(designerTheme.PreviewButtonSize.Height, this.previewDescTextSize.Height);
+            this.previewModeButtonRectangle.Height = Math.Min(
+                designerTheme.PreviewButtonSize.Height,
+                this.previewDescTextSize.Height
+            );
             this.previewModeButtonRectangle.Width = this.previewModeButtonRectangle.Size.Height;
 
             Size totalSize = Size.Empty;
             totalSize.Width = this.canvasBounds.Width + 2 * margin.Width;
-            totalSize.Height = Math.Max(this.previewModeButtonRectangle.Size.Height, this.previewDescTextSize.Height);
+            totalSize.Height = Math.Max(
+                this.previewModeButtonRectangle.Size.Height,
+                this.previewDescTextSize.Height
+            );
             totalSize.Height += margin.Height;
             totalSize.Height += this.canvasBounds.Height;
             this.bounds.Size = totalSize;
@@ -3400,21 +3934,55 @@ namespace System.Workflow.ComponentModel.Design
 
         public void Draw(Graphics graphics, Rectangle viewPort)
         {
-            ActivityPreviewDesignerTheme designerTheme = this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
+            ActivityPreviewDesignerTheme designerTheme =
+                this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
             if (designerTheme != null)
             {
                 //todo: check if can still draw something
                 Size margin = WorkflowTheme.CurrentTheme.AmbientTheme.Margin;
 
                 //Draw description for preview mode
-                ActivityDesignerPaint.DrawText(graphics, designerTheme.Font, PreviewModeDescription, this.previewModeDescRectangle, StringAlignment.Center, WorkflowTheme.CurrentTheme.AmbientTheme.TextQuality, designerTheme.ForegroundBrush);
+                ActivityDesignerPaint.DrawText(
+                    graphics,
+                    designerTheme.Font,
+                    PreviewModeDescription,
+                    this.previewModeDescRectangle,
+                    StringAlignment.Center,
+                    WorkflowTheme.CurrentTheme.AmbientTheme.TextQuality,
+                    designerTheme.ForegroundBrush
+                );
 
                 //Draw the button
-                graphics.DrawRectangle(Pens.Black, this.previewModeButtonRectangle.Left - 1, this.previewModeButtonRectangle.Top - 1, this.previewModeButtonRectangle.Width + 1, this.previewModeButtonRectangle.Height + 1);
-                ActivityDesignerPaint.Draw3DButton(graphics, null, this.previewModeButtonRectangle, 1.0f, (!PreviewMode) ? ButtonState.Pushed : ButtonState.Normal);
+                graphics.DrawRectangle(
+                    Pens.Black,
+                    this.previewModeButtonRectangle.Left - 1,
+                    this.previewModeButtonRectangle.Top - 1,
+                    this.previewModeButtonRectangle.Width + 1,
+                    this.previewModeButtonRectangle.Height + 1
+                );
+                ActivityDesignerPaint.Draw3DButton(
+                    graphics,
+                    null,
+                    this.previewModeButtonRectangle,
+                    1.0f,
+                    (!PreviewMode) ? ButtonState.Pushed : ButtonState.Normal
+                );
 
-                Image previewModeImage = (PreviewMode) ? ActivityPreviewDesignerTheme.PreviewButtonImage : ActivityPreviewDesignerTheme.EditButtonImage;
-                ActivityDesignerPaint.DrawImage(graphics, previewModeImage, new Rectangle(this.previewModeButtonRectangle.Left + 2, this.previewModeButtonRectangle.Top + 2, this.previewModeButtonRectangle.Width - 4, this.previewModeButtonRectangle.Height - 4), DesignerContentAlignment.Center);
+                Image previewModeImage =
+                    (PreviewMode)
+                        ? ActivityPreviewDesignerTheme.PreviewButtonImage
+                        : ActivityPreviewDesignerTheme.EditButtonImage;
+                ActivityDesignerPaint.DrawImage(
+                    graphics,
+                    previewModeImage,
+                    new Rectangle(
+                        this.previewModeButtonRectangle.Left + 2,
+                        this.previewModeButtonRectangle.Top + 2,
+                        this.previewModeButtonRectangle.Width - 4,
+                        this.previewModeButtonRectangle.Height - 4
+                    ),
+                    DesignerContentAlignment.Center
+                );
 
                 graphics.FillRectangle(designerTheme.PreviewBackgroundBrush, this.canvasBounds);
                 if (PreviewMode)
@@ -3427,13 +3995,49 @@ namespace System.Workflow.ComponentModel.Design
                     canvasRect.Inflate(2, 2);
                     graphics.DrawRectangle(SystemPens.ControlDark, canvasRect);
                     canvasRect.Inflate(-1, -1);
-                    graphics.DrawLine(SystemPens.ControlDarkDark, canvasRect.Left, canvasRect.Top, canvasRect.Left, canvasRect.Bottom);
-                    graphics.DrawLine(SystemPens.ControlDarkDark, canvasRect.Left, canvasRect.Top, canvasRect.Right, canvasRect.Top);
-                    graphics.DrawLine(SystemPens.ControlLight, canvasRect.Right, canvasRect.Top, canvasRect.Right, canvasRect.Bottom);
-                    graphics.DrawLine(SystemPens.ControlLight, canvasRect.Left, canvasRect.Bottom, canvasRect.Right, canvasRect.Bottom);
+                    graphics.DrawLine(
+                        SystemPens.ControlDarkDark,
+                        canvasRect.Left,
+                        canvasRect.Top,
+                        canvasRect.Left,
+                        canvasRect.Bottom
+                    );
+                    graphics.DrawLine(
+                        SystemPens.ControlDarkDark,
+                        canvasRect.Left,
+                        canvasRect.Top,
+                        canvasRect.Right,
+                        canvasRect.Top
+                    );
+                    graphics.DrawLine(
+                        SystemPens.ControlLight,
+                        canvasRect.Right,
+                        canvasRect.Top,
+                        canvasRect.Right,
+                        canvasRect.Bottom
+                    );
+                    graphics.DrawLine(
+                        SystemPens.ControlLight,
+                        canvasRect.Left,
+                        canvasRect.Bottom,
+                        canvasRect.Right,
+                        canvasRect.Bottom
+                    );
                     canvasRect.Inflate(-1, -1);
-                    graphics.DrawLine(SystemPens.ControlLight, canvasRect.Left, canvasRect.Top, canvasRect.Left, canvasRect.Bottom);
-                    graphics.DrawLine(SystemPens.ControlLight, canvasRect.Left, canvasRect.Top, canvasRect.Right, canvasRect.Top);
+                    graphics.DrawLine(
+                        SystemPens.ControlLight,
+                        canvasRect.Left,
+                        canvasRect.Top,
+                        canvasRect.Left,
+                        canvasRect.Bottom
+                    );
+                    graphics.DrawLine(
+                        SystemPens.ControlLight,
+                        canvasRect.Left,
+                        canvasRect.Top,
+                        canvasRect.Right,
+                        canvasRect.Top
+                    );
                     graphics.FillRectangle(designerTheme.PreviewBackgroundBrush, canvasRect);
                 }
 
@@ -3443,7 +4047,15 @@ namespace System.Workflow.ComponentModel.Design
                     Rectangle descriptionRectangle = this.canvasBounds;
                     descriptionRectangle.Inflate(-margin.Width, -margin.Height);
                     string previewDescription = DR.GetString(DR.SelectActivityDesc);
-                    ActivityDesignerPaint.DrawText(graphics, designerTheme.Font, previewDescription, descriptionRectangle, StringAlignment.Center, WorkflowTheme.CurrentTheme.AmbientTheme.TextQuality, designerTheme.ForegroundBrush);
+                    ActivityDesignerPaint.DrawText(
+                        graphics,
+                        designerTheme.Font,
+                        previewDescription,
+                        descriptionRectangle,
+                        StringAlignment.Center,
+                        WorkflowTheme.CurrentTheme.AmbientTheme.TextQuality,
+                        designerTheme.ForegroundBrush
+                    );
                 }
 
                 //Draw the preview
@@ -3456,23 +4068,50 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         Rectangle destnRectangle = Rectangle.Empty;
 
-                        Size maxBitmapSize = new Size(this.canvasBounds.Width - 2 * margin.Width, this.canvasBounds.Height - 2 * margin.Height);
-                        double stretchFactor = ((double)previewedActivityImage.Width) / maxBitmapSize.Width;
-                        stretchFactor = Math.Max(stretchFactor, ((double)previewedActivityImage.Height) / maxBitmapSize.Height);
+                        Size maxBitmapSize = new Size(
+                            this.canvasBounds.Width - 2 * margin.Width,
+                            this.canvasBounds.Height - 2 * margin.Height
+                        );
+                        double stretchFactor =
+                            ((double)previewedActivityImage.Width) / maxBitmapSize.Width;
+                        stretchFactor = Math.Max(
+                            stretchFactor,
+                            ((double)previewedActivityImage.Height) / maxBitmapSize.Height
+                        );
                         stretchFactor = Math.Max(stretchFactor, 1.3f);
 
-                        destnRectangle.Width = Convert.ToInt32(Math.Ceiling((float)previewedActivityImage.Width / stretchFactor));
-                        destnRectangle.Height = Convert.ToInt32(Math.Ceiling((float)previewedActivityImage.Height / stretchFactor));
-                        destnRectangle.X = this.canvasBounds.Left + this.canvasBounds.Width / 2 - destnRectangle.Width / 2;
-                        destnRectangle.Y = this.canvasBounds.Top + this.canvasBounds.Height / 2 - destnRectangle.Height / 2;
+                        destnRectangle.Width = Convert.ToInt32(
+                            Math.Ceiling((float)previewedActivityImage.Width / stretchFactor)
+                        );
+                        destnRectangle.Height = Convert.ToInt32(
+                            Math.Ceiling((float)previewedActivityImage.Height / stretchFactor)
+                        );
+                        destnRectangle.X =
+                            this.canvasBounds.Left
+                            + this.canvasBounds.Width / 2
+                            - destnRectangle.Width / 2;
+                        destnRectangle.Y =
+                            this.canvasBounds.Top
+                            + this.canvasBounds.Height / 2
+                            - destnRectangle.Height / 2;
 
                         graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
-                        graphics.DrawImage(previewedActivityImage, destnRectangle, new Rectangle(Point.Empty, previewedActivityImage.Size), GraphicsUnit.Pixel);
+                        graphics.DrawImage(
+                            previewedActivityImage,
+                            destnRectangle,
+                            new Rectangle(Point.Empty, previewedActivityImage.Size),
+                            GraphicsUnit.Pixel
+                        );
                     }
 
                     Rectangle indicatorBounds = this.canvasBounds;
                     indicatorBounds.Inflate(-margin.Width, -margin.Height);
-                    ActivityDesignerPaint.DrawImage(graphics, ActivityPreviewDesignerTheme.PreviewImage, indicatorBounds, DesignerContentAlignment.TopLeft);
+                    ActivityDesignerPaint.DrawImage(
+                        graphics,
+                        ActivityPreviewDesignerTheme.PreviewImage,
+                        indicatorBounds,
+                        DesignerContentAlignment.TopLeft
+                    );
                 }
                 else
                 {
@@ -3480,9 +4119,17 @@ namespace System.Workflow.ComponentModel.Design
                     {
                         Rectangle previewDesignerViewPort = PreviewDesigner.Bounds;
                         previewDesignerViewPort.Inflate(margin.Width, margin.Height);
-                        using (PaintEventArgs paintEventArgs = new PaintEventArgs(graphics, previewDesignerViewPort))
+                        using (
+                            PaintEventArgs paintEventArgs = new PaintEventArgs(
+                                graphics,
+                                previewDesignerViewPort
+                            )
+                        )
                         {
-                            ((IWorkflowDesignerMessageSink)PreviewDesigner).OnPaint(paintEventArgs, previewDesignerViewPort);
+                            ((IWorkflowDesignerMessageSink)PreviewDesigner).OnPaint(
+                                paintEventArgs,
+                                previewDesignerViewPort
+                            );
                         }
                     }
                 }
@@ -3493,27 +4140,25 @@ namespace System.Workflow.ComponentModel.Design
         #region Helpers
         private ActivityDesigner PreviewDesigner
         {
-            get
-            {
-                return ActivityDesigner.GetDesigner(this.previewedActivity);
-            }
+            get { return ActivityDesigner.GetDesigner(this.previewedActivity); }
         }
 
         private Rectangle PreviewModeButtonRectangle
         {
-            get
-            {
-                return this.previewModeButtonRectangle;
-            }
+            get { return this.previewModeButtonRectangle; }
         }
 
         private string PreviewModeDescription
         {
             get
             {
-                string previewModeDescription = (PreviewMode) ? DR.GetString(DR.PreviewMode) : DR.GetString(DR.EditMode);
+                string previewModeDescription =
+                    (PreviewMode) ? DR.GetString(DR.PreviewMode) : DR.GetString(DR.EditMode);
 
-                CompositeActivity compositeActivity = (this.parentDesigner != null) ? this.parentDesigner.Activity as CompositeActivity : null;
+                CompositeActivity compositeActivity =
+                    (this.parentDesigner != null)
+                        ? this.parentDesigner.Activity as CompositeActivity
+                        : null;
                 if (compositeActivity == null)
                     return previewModeDescription;
 
@@ -3531,7 +4176,12 @@ namespace System.Workflow.ComponentModel.Design
 
                 //
                 int index = previewedActivities.IndexOf(component as Activity) + 1;
-                previewModeDescription += " [" + index.ToString(CultureInfo.CurrentCulture) + "/" + previewedActivities.Count.ToString(CultureInfo.CurrentCulture) + "]";
+                previewModeDescription +=
+                    " ["
+                    + index.ToString(CultureInfo.CurrentCulture)
+                    + "/"
+                    + previewedActivities.Count.ToString(CultureInfo.CurrentCulture)
+                    + "]";
                 return previewModeDescription;
             }
         }
@@ -3554,7 +4204,8 @@ namespace System.Workflow.ComponentModel.Design
             CompositeActivityDesigner previewDesigner = designer as CompositeActivityDesigner;
             if (previewDesigner != null && previewDesigner.Expanded)
             {
-                ActivityPreviewDesignerTheme designerTheme = this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
+                ActivityPreviewDesignerTheme designerTheme =
+                    this.parentDesigner.DesignerTheme as ActivityPreviewDesignerTheme;
                 if (designerTheme == null)
                     return;
 
@@ -3562,13 +4213,17 @@ namespace System.Workflow.ComponentModel.Design
                 Size previewDesignerSize = previewDesigner.Size;
 
                 float stretchFactor = ((float)previewSize.Width) / previewDesignerSize.Width;
-                stretchFactor = Math.Min(stretchFactor, ((float)previewSize.Height) / previewDesignerSize.Height);
+                stretchFactor = Math.Min(
+                    stretchFactor,
+                    ((float)previewSize.Height) / previewDesignerSize.Height
+                );
                 if (stretchFactor < 0.1f) //If we are shrinking less than 10% then we collapse
                 {
                     if (!previewDesigner.CanExpandCollapse)
                     {
                         if (previewDesigner.ContainedDesigners.Count > 0)
-                            previewDesigner = previewDesigner.ContainedDesigners[0] as CompositeActivityDesigner;
+                            previewDesigner =
+                                previewDesigner.ContainedDesigners[0] as CompositeActivityDesigner;
                     }
 
                     if (previewDesigner != null)
@@ -3593,44 +4248,36 @@ namespace System.Workflow.ComponentModel.Design
                 get
                 {
                     Rectangle bounds = this.previewWindow.PreviewModeButtonRectangle;
-                    WorkflowView workflowView = this.previewWindow.serviceProvider.GetService(typeof(WorkflowView)) as WorkflowView;
+                    WorkflowView workflowView =
+                        this.previewWindow.serviceProvider.GetService(typeof(WorkflowView))
+                        as WorkflowView;
                     if (workflowView != null)
-                        bounds = new Rectangle(workflowView.LogicalPointToScreen(bounds.Location), workflowView.LogicalSizeToClient(bounds.Size));
+                        bounds = new Rectangle(
+                            workflowView.LogicalPointToScreen(bounds.Location),
+                            workflowView.LogicalSizeToClient(bounds.Size)
+                        );
                     return bounds;
                 }
             }
 
             public override string DefaultAction
             {
-                get
-                {
-                    return DR.GetString(DR.AccessibleAction);
-                }
+                get { return DR.GetString(DR.AccessibleAction); }
             }
 
             public override string Description
             {
-                get
-                {
-                    return DR.GetString(DR.PreviewButtonAccessibleDescription);
-                }
+                get { return DR.GetString(DR.PreviewButtonAccessibleDescription); }
             }
 
             public override string Help
             {
-                get
-                {
-                    return DR.GetString(DR.PreviewButtonAccessibleHelp);
-                }
+                get { return DR.GetString(DR.PreviewButtonAccessibleHelp); }
             }
 
             public override string Name
             {
-                get
-                {
-                    return DR.GetString(DR.PreviewButtonName);
-                }
-
+                get { return DR.GetString(DR.PreviewButtonName); }
                 set
                 {
                     //We do not allow setting ID programatically
@@ -3639,26 +4286,17 @@ namespace System.Workflow.ComponentModel.Design
 
             public override AccessibleObject Parent
             {
-                get
-                {
-                    return this.previewWindow.parentDesigner.AccessibilityObject;
-                }
+                get { return this.previewWindow.parentDesigner.AccessibilityObject; }
             }
 
             public override AccessibleRole Role
             {
-                get
-                {
-                    return AccessibleRole.Diagram;
-                }
+                get { return AccessibleRole.Diagram; }
             }
 
             public override AccessibleStates State
             {
-                get
-                {
-                    return base.State;
-                }
+                get { return base.State; }
             }
 
             public override void DoDefaultAction()
@@ -3670,21 +4308,29 @@ namespace System.Workflow.ComponentModel.Design
             {
                 if (navdir == AccessibleNavigation.Previous)
                 {
-                    int childCount = this.previewWindow.parentDesigner.AccessibilityObject.GetChildCount();
+                    int childCount =
+                        this.previewWindow.parentDesigner.AccessibilityObject.GetChildCount();
                     if ((childCount - 3) >= 0)
-                        return this.previewWindow.parentDesigner.AccessibilityObject.GetChild(childCount - 3);
+                        return this.previewWindow.parentDesigner.AccessibilityObject.GetChild(
+                            childCount - 3
+                        );
                 }
                 else if (navdir == AccessibleNavigation.Next)
                 {
                     if (!this.previewWindow.PreviewMode)
                     {
-                        int childCount = this.previewWindow.parentDesigner.AccessibilityObject.GetChildCount();
+                        int childCount =
+                            this.previewWindow.parentDesigner.AccessibilityObject.GetChildCount();
                         if ((childCount - 1) >= 0)
-                            return this.previewWindow.parentDesigner.AccessibilityObject.GetChild(childCount - 1);
+                            return this.previewWindow.parentDesigner.AccessibilityObject.GetChild(
+                                childCount - 1
+                            );
                     }
                     else
                     {
-                        return this.previewWindow.parentDesigner.AccessibilityObject.Navigate(navdir);
+                        return this.previewWindow.parentDesigner.AccessibilityObject.Navigate(
+                            navdir
+                        );
                     }
                 }
 

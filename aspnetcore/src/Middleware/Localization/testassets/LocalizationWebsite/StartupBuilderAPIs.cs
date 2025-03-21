@@ -17,7 +17,8 @@ public class StartupBuilderAPIs
     public void Configure(
         IApplicationBuilder app,
         ILoggerFactory loggerFactory,
-        IStringLocalizer<Customer> customerStringLocalizer)
+        IStringLocalizer<Customer> customerStringLocalizer
+    )
     {
         var supportedCultures = new[] { "en-US", "fr-FR" };
         app.UseRequestLocalization(options =>
@@ -27,11 +28,13 @@ public class StartupBuilderAPIs
                 .SetDefaultCulture("ar-YE")
         );
 
-        app.Run(async (context) =>
-        {
-            var requestCultureFeature = context.Features.Get<IRequestCultureFeature>();
-            var requestCulture = requestCultureFeature.RequestCulture;
-            await context.Response.WriteAsync(customerStringLocalizer["Hello"]);
-        });
+        app.Run(
+            async (context) =>
+            {
+                var requestCultureFeature = context.Features.Get<IRequestCultureFeature>();
+                var requestCulture = requestCultureFeature.RequestCulture;
+                await context.Response.WriteAsync(customerStringLocalizer["Hello"]);
+            }
+        );
     }
 }

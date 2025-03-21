@@ -13,20 +13,29 @@ namespace System.Web.Routing.Test
 {
     internal static class DirectRouteTestHelpers
     {
-        public static RouteCollectionRoute BuildDirectRouteFromMethod<T>(Expression<Action<T>> methodCall)
+        public static RouteCollectionRoute BuildDirectRouteFromMethod<T>(
+            Expression<Action<T>> methodCall
+        )
         {
             SubRouteCollection collector = new SubRouteCollection();
             AddDirectRouteFromMethod(collector, methodCall);
             return new RouteCollectionRoute(collector);
         }
 
-        public static void AddDirectRouteFromMethod<T>(SubRouteCollection collector, Expression<Action<T>> methodCall)
+        public static void AddDirectRouteFromMethod<T>(
+            SubRouteCollection collector,
+            Expression<Action<T>> methodCall
+        )
         {
             var method = ((MethodCallExpression)methodCall.Body).Method;
             var attributes = method.GetCustomAttributes(false).OfType<IRouteInfoProvider>();
 
             var controllerDescriptor = new ReflectedAsyncControllerDescriptor(method.DeclaringType);
-            var actionDescriptor = new ReflectedActionDescriptor(method, method.Name, controllerDescriptor);
+            var actionDescriptor = new ReflectedActionDescriptor(
+                method,
+                method.Name,
+                controllerDescriptor
+            );
 
             foreach (var attribute in attributes)
             {
@@ -47,13 +56,17 @@ namespace System.Web.Routing.Test
         {
             var controllerType = typeof(T);
             AttributeRoutingMapper.AddRouteEntries(
-                collector, 
+                collector,
                 new Type[] { controllerType },
                 new DefaultInlineConstraintResolver(),
-                new DefaultDirectRouteProvider());
+                new DefaultDirectRouteProvider()
+            );
         }
 
-        public static void AddDirectRouteMatches(this RouteData routeData, Func<RouteBase, RouteData, bool> selector = null)
+        public static void AddDirectRouteMatches(
+            this RouteData routeData,
+            Func<RouteBase, RouteData, bool> selector = null
+        )
         {
             RouteCollectionRoute route = (RouteCollectionRoute)routeData.Route;
 

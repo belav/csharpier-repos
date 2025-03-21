@@ -72,10 +72,7 @@ namespace System.Diagnostics.Eventing.Reader
 
         public int Value
         {
-            get
-            {
-                return _value;
-            }
+            get { return _value; }
         }
 
         public string DisplayName

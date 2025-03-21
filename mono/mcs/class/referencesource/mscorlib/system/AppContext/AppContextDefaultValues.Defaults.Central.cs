@@ -1,7 +1,7 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 
 //
@@ -14,7 +14,7 @@ namespace System
     internal static partial class AppContextDefaultValues
     {
         /// <summary>
-        /// This method allows reading the override for a switch. 
+        /// This method allows reading the override for a switch.
         /// The implementation is platform specific
         /// </summary>
         public static bool TryGetSwitchOverride(string switchName, out bool overrideValue)

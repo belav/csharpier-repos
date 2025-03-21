@@ -12,9 +12,19 @@ namespace Microsoft.VisualBasic.Tests
     {
         [Theory]
         [MemberData(nameof(CallByName_TestData))]
-        public void CallByName(object instance, string methodName, CallType useCallType, object[] args, Func<object, object> getResult, object expected)
+        public void CallByName(
+            object instance,
+            string methodName,
+            CallType useCallType,
+            object[] args,
+            Func<object, object> getResult,
+            object expected
+        )
         {
-            Assert.Equal(getResult is null ? expected : null, Versioned.CallByName(instance, methodName, useCallType, args));
+            Assert.Equal(
+                getResult is null ? expected : null,
+                Versioned.CallByName(instance, methodName, useCallType, args)
+            );
             if (getResult != null)
             {
                 Assert.Equal(expected, getResult(instance));
@@ -23,33 +33,99 @@ namespace Microsoft.VisualBasic.Tests
 
         [Theory]
         [MemberData(nameof(CallByName_ArgumentException_TestData))]
-        public void CallByName_ArgumentException(object instance, string methodName, CallType useCallType, object[] args)
+        public void CallByName_ArgumentException(
+            object instance,
+            string methodName,
+            CallType useCallType,
+            object[] args
+        )
         {
-            Assert.Throws<ArgumentException>(() => Versioned.CallByName(instance, methodName, useCallType, args));
+            Assert.Throws<ArgumentException>(() =>
+                Versioned.CallByName(instance, methodName, useCallType, args)
+            );
         }
 
         [Theory]
         [MemberData(nameof(CallByName_MissingMemberException_TestData))]
-        public void CallByName_MissingMemberException(object instance, string methodName, CallType useCallType, object[] args)
+        public void CallByName_MissingMemberException(
+            object instance,
+            string methodName,
+            CallType useCallType,
+            object[] args
+        )
         {
-            Assert.Throws<MissingMemberException>(() => Versioned.CallByName(instance, methodName, useCallType, args));
+            Assert.Throws<MissingMemberException>(() =>
+                Versioned.CallByName(instance, methodName, useCallType, args)
+            );
         }
 
         public static IEnumerable<object[]> CallByName_TestData()
         {
-            yield return new object[] { new Class(), "Method", CallType.Method, new object[] { 1, 2 }, null, 3 };
-            yield return new object[] { new Class(), "Method", CallType.Get, new object[] { 2, 3 }, null, 5 };
+            yield return new object[]
+            {
+                new Class(),
+                "Method",
+                CallType.Method,
+                new object[] { 1, 2 },
+                null,
+                3,
+            };
+            yield return new object[]
+            {
+                new Class(),
+                "Method",
+                CallType.Get,
+                new object[] { 2, 3 },
+                null,
+                5,
+            };
             yield return new object[] { new Class(), "P", CallType.Get, new object[0], null, 0 };
-            yield return new object[] { new Class(), "Item", CallType.Get, new object[] { 2 }, null, 2 };
-            yield return new object[] { new Class(), "P", CallType.Set, new object[] { 3 }, new Func<object, object>(obj => ((Class)obj).Value), 3 };
-            yield return new object[] { new Class(), "Item", CallType.Let, new object[] { 4, 5 }, new Func<object, object>(obj => ((Class)obj).Value), 9 };
+            yield return new object[]
+            {
+                new Class(),
+                "Item",
+                CallType.Get,
+                new object[] { 2 },
+                null,
+                2,
+            };
+            yield return new object[]
+            {
+                new Class(),
+                "P",
+                CallType.Set,
+                new object[] { 3 },
+                new Func<object, object>(obj => ((Class)obj).Value),
+                3,
+            };
+            yield return new object[]
+            {
+                new Class(),
+                "Item",
+                CallType.Let,
+                new object[] { 4, 5 },
+                new Func<object, object>(obj => ((Class)obj).Value),
+                9,
+            };
         }
 
         public static IEnumerable<object[]> CallByName_ArgumentException_TestData()
         {
             yield return new object[] { null, null, default(CallType), new object[0] };
-            yield return new object[] { new Class(), "Method", default(CallType), new object[] { 1, 2 } };
-            yield return new object[] { new Class(), "Method", (CallType)int.MaxValue, new object[] { 1, 2 } };
+            yield return new object[]
+            {
+                new Class(),
+                "Method",
+                default(CallType),
+                new object[] { 1, 2 },
+            };
+            yield return new object[]
+            {
+                new Class(),
+                "Method",
+                (CallType)int.MaxValue,
+                new object[] { 1, 2 },
+            };
         }
 
         public static IEnumerable<object[]> CallByName_MissingMemberException_TestData()
@@ -61,7 +137,9 @@ namespace Microsoft.VisualBasic.Tests
         private sealed class Class
         {
             public int Value;
+
             public int Method(int x, int y) => x + y;
+
             public int P
             {
                 get { return Value; }
@@ -106,7 +184,11 @@ namespace Microsoft.VisualBasic.Tests
             Assert.Equal(expected, Versioned.TypeName(expression));
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows), nameof(PlatformDetection.IsNotWindowsNanoServer))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWindows),
+            nameof(PlatformDetection.IsNotWindowsNanoServer)
+        )]
         [MemberData(nameof(TypeName_ComObject_TestData))]
         [SkipOnMono("COM Interop not supported on Mono")]
         public void TypeName_ComObject(string progId, string expected)

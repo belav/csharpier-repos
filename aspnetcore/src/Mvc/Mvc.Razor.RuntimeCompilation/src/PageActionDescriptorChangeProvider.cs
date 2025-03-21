@@ -20,7 +20,8 @@ internal sealed class PageActionDescriptorChangeProvider : IActionDescriptorChan
     public PageActionDescriptorChangeProvider(
         RazorProjectEngine projectEngine,
         RuntimeCompilationFileProvider fileProvider,
-        IOptions<RazorPagesOptions> razorPagesOptions)
+        IOptions<RazorPagesOptions> razorPagesOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(projectEngine);
         ArgumentNullException.ThrowIfNull(fileProvider);
@@ -38,17 +39,18 @@ internal sealed class PageActionDescriptorChangeProvider : IActionDescriptorChan
         // Search pattern that matches all cshtml files under the Pages AreaRootDirectory
         var areaRootSearchPattern = "/Areas/**/*.cshtml";
 
-        _searchPatterns = new[]
-        {
-                pagesRootSearchPattern,
-                areaRootSearchPattern
-            };
+        _searchPatterns = new[] { pagesRootSearchPattern, areaRootSearchPattern };
 
         // pagesRootSearchPattern will miss _ViewImports outside the RootDirectory despite these influencing
         // compilation. e.g. when RootDirectory = /Dir1/Dir2, the search pattern will ignore changes to
         // [/_ViewImports.cshtml, /Dir1/_ViewImports.cshtml]. We need to additionally account for these.
-        var importFeatures = projectEngine.ProjectFeatures.OfType<IImportProjectFeature>().ToArray();
-        var fileAtPagesRoot = projectEngine.FileSystem.GetItem(rootDirectory + "/Index.cshtml", fileKind: null);
+        var importFeatures = projectEngine
+            .ProjectFeatures.OfType<IImportProjectFeature>()
+            .ToArray();
+        var fileAtPagesRoot = projectEngine.FileSystem.GetItem(
+            rootDirectory + "/Index.cshtml",
+            fileKind: null
+        );
 
         _additionalFilesToTrack = GetImports(importFeatures, fileAtPagesRoot);
     }
@@ -57,7 +59,9 @@ internal sealed class PageActionDescriptorChangeProvider : IActionDescriptorChan
     {
         var fileProvider = _fileProvider.FileProvider;
 
-        var changeTokens = new IChangeToken[_additionalFilesToTrack.Length + _searchPatterns.Length];
+        var changeTokens = new IChangeToken[
+            _additionalFilesToTrack.Length + _searchPatterns.Length
+        ];
         for (var i = 0; i < _additionalFilesToTrack.Length; i++)
         {
             changeTokens[i] = fileProvider.Watch(_additionalFilesToTrack[i]);
@@ -74,7 +78,8 @@ internal sealed class PageActionDescriptorChangeProvider : IActionDescriptorChan
 
     private static string[] GetImports(
         IImportProjectFeature[] importFeatures,
-        RazorProjectItem file)
+        RazorProjectItem file
+    )
     {
         return importFeatures
             .SelectMany(f => f.GetImports(file))

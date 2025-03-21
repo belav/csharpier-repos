@@ -1,12 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Security.Cryptography.Xml;
-using System.Security.Cryptography.X509Certificates;
-using Xunit;
-
-using Test.Cryptography;
 using System.Security.Cryptography.Pkcs.Tests;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Cryptography.Xml;
+using Test.Cryptography;
+using Xunit;
 
 namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 {
@@ -15,7 +14,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public static bool SupportsRc4 { get; } = ContentEncryptionAlgorithmTests.SupportsRc4;
 
         [Fact]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
         public static void ImportEdgeCase()
         {
             //
@@ -25,18 +26,21 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             // be a problem, but this test will verify that it isn't.
             //
 
-            byte[] encodedMessage =
-                ("3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
+            byte[] encodedMessage = (
+                "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
                 + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d01010105000481805e"
                 + "bb2d08773594be9ec5d30c0707cf339f2b982a4f0797b74d520a0c973d668a9a6ad9d28066ef36e5b5620fef67f4d79ee50c"
                 + "25eb999f0c656548347d5676ac4b779f8fce2b87e6388fbe483bb0fcf78ab1f1ff29169600401fded7b2803a0bf96cc160c4"
                 + "96726216e986869eed578bda652855c85604a056201538ee56b6c4302b06092a864886f70d010701301406082a864886f70d"
-                + "030704083adadf63cd297a86800835edc437e31d0b70").HexToByteArray();
+                + "030704083adadf63cd297a86800835edc437e31d0b70"
+            ).HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
 
-            using (X509Certificate2 cert = Certificates.RSAKeyTransfer1.LoadPfxUsingCollectionImport())
+            using (
+                X509Certificate2 cert = Certificates.RSAKeyTransfer1.LoadPfxUsingCollectionImport()
+            )
             {
                 X509Certificate2Collection extraStore = new X509Certificate2Collection(cert);
                 ecms.Decrypt(extraStore);
@@ -48,20 +52,25 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         }
 
         [Fact]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
         public static void ImportEdgeCaseSki()
         {
-            byte[] encodedMessage =
-                ("3081f206092a864886f70d010703a081e43081e10201023181ae3081ab0201028014f2008aa9fa3742e8370cb1674ce1d158"
+            byte[] encodedMessage = (
+                "3081f206092a864886f70d010703a081e43081e10201023181ae3081ab0201028014f2008aa9fa3742e8370cb1674ce1d158"
                 + "2921dcc3300d06092a864886f70d01010105000481804336e978bc72ba2f5264cd854867fac438f36f2b3df6004528f2df83"
                 + "4fb2113d6f7c07667e7296b029756222d6ced396a8fffed32be838eec7f2e54b9467fa80f85d097f7d1f0fbde57e07ab3d46"
                 + "a60b31f37ef9844dcab2a8eef4fec5579fac5ec1e7ee82409898e17d30c3ac1a407fca15d23c9df2904a707294d78d4300ba"
-                + "302b06092a864886f70d010701301406082a864886f70d03070408355c596e3e8540608008f1f811e862e51bbd").HexToByteArray();
+                + "302b06092a864886f70d010701301406082a864886f70d03070408355c596e3e8540608008f1f811e862e51bbd"
+            ).HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
 
-            using (X509Certificate2 cert = Certificates.RSAKeyTransfer1.LoadPfxUsingCollectionImport())
+            using (
+                X509Certificate2 cert = Certificates.RSAKeyTransfer1.LoadPfxUsingCollectionImport()
+            )
             {
                 X509Certificate2Collection extraStore = new X509Certificate2Collection(cert);
                 ecms.Decrypt(extraStore);
@@ -95,13 +104,14 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             //      encryptedContent[0] IMPLICIT EncryptedContent OPTIONAL }
             // The input was created with ASN1 editor and verified with .NET framework. It's an enveloped message, version 0,
             // with one Key Transport recipient and holds data encrypted with 3DES.
-            byte[] content =
-                 ("3082010206092A864886F70D010703A081F43081F10201003181C83081C5020100302E301A311830160603550403130F"
-                 + "5253414B65795472616E7366657231021031D935FB63E8CFAB48A0BF7B397B67C0300D06092A864886F70D0101010500"
-                 + "04818009C16B674495C2C3D4763189C3274CF7A9142FBEEC8902ABDC9CE29910D541DF910E029A31443DC9A9F3B05F02"
-                 + "DA1C38478C400261C734D6789C4197C20143C4312CEAA99ECB1849718326D4FC3B7FBB2D1D23281E31584A63E99F2C17"
-                 + "132BCD8EDDB632967125CD0A4BAA1EFA8CE4C855F7C093339211BDF990CEF5CCE6CD74302106092A864886F70D010701"
-                 + "301406082A864886F70D03070408779B3DE045826B18").HexToByteArray();
+            byte[] content = (
+                "3082010206092A864886F70D010703A081F43081F10201003181C83081C5020100302E301A311830160603550403130F"
+                + "5253414B65795472616E7366657231021031D935FB63E8CFAB48A0BF7B397B67C0300D06092A864886F70D0101010500"
+                + "04818009C16B674495C2C3D4763189C3274CF7A9142FBEEC8902ABDC9CE29910D541DF910E029A31443DC9A9F3B05F02"
+                + "DA1C38478C400261C734D6789C4197C20143C4312CEAA99ECB1849718326D4FC3B7FBB2D1D23281E31584A63E99F2C17"
+                + "132BCD8EDDB632967125CD0A4BAA1EFA8CE4C855F7C093339211BDF990CEF5CCE6CD74302106092A864886F70D010701"
+                + "301406082A864886F70D03070408779B3DE045826B18"
+            ).HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(content);
@@ -112,8 +122,13 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         }
 
         [Fact]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
-        [SkipOnTargetFramework(TargetFrameworkMonikers.NetFramework, ".NET Framework rejects zero length content: https://github.com/dotnet/runtime/issues/21257")]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
+        [SkipOnTargetFramework(
+            TargetFrameworkMonikers.NetFramework,
+            ".NET Framework rejects zero length content: https://github.com/dotnet/runtime/issues/21257"
+        )]
         public static void ZeroLengthContent_RoundTrip()
         {
             ContentInfo contentInfo = new ContentInfo(Array.Empty<byte>());
@@ -128,21 +143,26 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         }
 
         [Fact]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
         public static void ZeroLengthContent_FixedValue()
         {
-            byte[] encodedMessage =
-                 ("3082010406092a864886f70d010703a081f63081f30201003181c83081c5020100302e301a311830160603550403130f5253"
+            byte[] encodedMessage = (
+                "3082010406092a864886f70d010703a081f63081f30201003181c83081c5020100302e301a311830160603550403130f5253"
                 + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d010101050004818009"
                 + "c16b674495c2c3d4763189c3274cf7a9142fbeec8902abdc9ce29910d541df910e029a31443dc9a9f3b05f02da1c38478c40"
                 + "0261c734d6789c4197c20143c4312ceaa99ecb1849718326d4fc3b7fbb2d1d23281e31584a63e99f2c17132bcd8eddb63296"
                 + "7125cd0a4baa1efa8ce4c855f7c093339211bdf990cef5cce6cd74302306092a864886f70d010701301406082a864886f70d"
-                + "03070408779b3de045826b188000").HexToByteArray();
+                + "03070408779b3de045826b188000"
+            ).HexToByteArray();
             ValidateZeroLengthContent(encodedMessage);
         }
 
         [ConditionalFact(nameof(SupportsRc4))]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
         public static void Rc4AndCngWrappersDontMixTest()
         {
             //
@@ -156,7 +176,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             AlgorithmIdentifier rc4 = new AlgorithmIdentifier(new Oid(Oids.Rc4));
 
             EnvelopedCms ecms = new EnvelopedCms(new ContentInfo(content), rc4);
-            CmsRecipientCollection recipients = new CmsRecipientCollection(new CmsRecipient(Certificates.RSAKeyTransferCapi1.GetCertificate()));
+            CmsRecipientCollection recipients = new CmsRecipientCollection(
+                new CmsRecipient(Certificates.RSAKeyTransferCapi1.GetCertificate())
+            );
             ecms.Encrypt(recipients);
             byte[] encodedMessage = ecms.Encode();
 
@@ -164,7 +186,11 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             ecms.Decode(encodedMessage);
 
             // In order to actually use the CAPI version of the key, perphemeral loading must be specified.
-            using (X509Certificate2 cert = Certificates.RSAKeyTransferCapi1.CloneAsPerphemeralLoader().TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert = Certificates
+                    .RSAKeyTransferCapi1.CloneAsPerphemeralLoader()
+                    .TryGetCertificateWithPrivateKey()
+            )
             {
                 if (cert == null)
                     return; // Sorry - CertLoader is not configured to load certs with private keys - we've tested as much as we can.
@@ -182,7 +208,10 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
-            using (X509Certificate2 cert = Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey())
+            using (
+                X509Certificate2 cert =
+                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+            )
             {
                 if (cert == null)
                     return;
@@ -229,13 +258,14 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         [Fact]
         public static void ReuseEnvelopeCmsDecodeThenEncode()
         {
-            byte[] encodedMessage =
-                ("3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
+            byte[] encodedMessage = (
+                "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
                 + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d01010105000481805e"
                 + "bb2d08773594be9ec5d30c0707cf339f2b982a4f0797b74d520a0c973d668a9a6ad9d28066ef36e5b5620fef67f4d79ee50c"
                 + "25eb999f0c656548347d5676ac4b779f8fce2b87e6388fbe483bb0fcf78ab1f1ff29169600401fded7b2803a0bf96cc160c4"
                 + "96726216e986869eed578bda652855c85604a056201538ee56b6c4302b06092a864886f70d010701301406082a864886f70d"
-                + "030704083adadf63cd297a86800835edc437e31d0b70").HexToByteArray();
+                + "030704083adadf63cd297a86800835edc437e31d0b70"
+            ).HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
@@ -267,7 +297,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             object ignore;
             Assert.Throws<ArgumentNullException>(() => ignore = new EnvelopedCms(null));
-            Assert.Throws<ArgumentNullException>(() => ignore = new EnvelopedCms(null, new AlgorithmIdentifier(new Oid(Oids.TripleDesCbc))));
+            Assert.Throws<ArgumentNullException>(() =>
+                ignore = new EnvelopedCms(null, new AlgorithmIdentifier(new Oid(Oids.TripleDesCbc)))
+            );
         }
 
         [Fact]
@@ -275,7 +307,8 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             object ignore;
             ContentInfo contentInfo = new ContentInfo(new byte[3]);
-            Assert.Throws<ArgumentNullException>(() => ignore = new EnvelopedCms(contentInfo, null));
+            Assert.Throws<ArgumentNullException>(() => ignore = new EnvelopedCms(contentInfo, null)
+            );
         }
 
         [Fact]
@@ -298,7 +331,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         public static void EnvelopedCmsEncryptWithZeroRecipients()
         {
             EnvelopedCms ecms = new EnvelopedCms(new ContentInfo(new byte[3]));
-            Assert.Throws<PlatformNotSupportedException>(() => ecms.Encrypt(new CmsRecipientCollection()));
+            Assert.Throws<PlatformNotSupportedException>(() =>
+                ecms.Encrypt(new CmsRecipientCollection())
+            );
         }
 
         [Fact]
@@ -320,10 +355,12 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             if (useSpan)
             {
 #if !NETFRAMEWORK
-                Assert.ThrowsAny<CryptographicException>(() => cms.Decode(ReadOnlySpan<byte>.Empty));
+                Assert.ThrowsAny<CryptographicException>(() => cms.Decode(ReadOnlySpan<byte>.Empty)
+                );
 #else
                 throw new Xunit.Sdk.XunitException(
-                    "This test should not evaluate for .NET Framework, the API is missing.");
+                    "This test should not evaluate for .NET Framework, the API is missing."
+                );
 #endif
             }
             else
@@ -335,13 +372,14 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         [Fact]
         public static void EnvelopedCmsDecryptNullary()
         {
-            byte[] encodedMessage =
-                ("3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
+            byte[] encodedMessage = (
+                "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
                 + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d01010105000481805e"
                 + "bb2d08773594be9ec5d30c0707cf339f2b982a4f0797b74d520a0c973d668a9a6ad9d28066ef36e5b5620fef67f4d79ee50c"
                 + "25eb999f0c656548347d5676ac4b779f8fce2b87e6388fbe483bb0fcf78ab1f1ff29169600401fded7b2803a0bf96cc160c4"
                 + "96726216e986869eed578bda652855c85604a056201538ee56b6c4302b06092a864886f70d010701301406082a864886f70d"
-                + "030704083adadf63cd297a86800835edc437e31d0b70").HexToByteArray();
+                + "030704083adadf63cd297a86800835edc437e31d0b70"
+            ).HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
@@ -351,13 +389,14 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         [Fact]
         public static void EnvelopedCmsDecryptNullRecipient()
         {
-            byte[] encodedMessage =
-                ("3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
+            byte[] encodedMessage = (
+                "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
                 + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d01010105000481805e"
                 + "bb2d08773594be9ec5d30c0707cf339f2b982a4f0797b74d520a0c973d668a9a6ad9d28066ef36e5b5620fef67f4d79ee50c"
                 + "25eb999f0c656548347d5676ac4b779f8fce2b87e6388fbe483bb0fcf78ab1f1ff29169600401fded7b2803a0bf96cc160c4"
                 + "96726216e986869eed578bda652855c85604a056201538ee56b6c4302b06092a864886f70d010701301406082a864886f70d"
-                + "030704083adadf63cd297a86800835edc437e31d0b70").HexToByteArray();
+                + "030704083adadf63cd297a86800835edc437e31d0b70"
+            ).HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
@@ -370,13 +409,14 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         [Fact]
         public static void EnvelopedCmsDecryptNullExtraStore()
         {
-            byte[] encodedMessage =
-                ("3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
+            byte[] encodedMessage = (
+                "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
                 + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d01010105000481805e"
                 + "bb2d08773594be9ec5d30c0707cf339f2b982a4f0797b74d520a0c973d668a9a6ad9d28066ef36e5b5620fef67f4d79ee50c"
                 + "25eb999f0c656548347d5676ac4b779f8fce2b87e6388fbe483bb0fcf78ab1f1ff29169600401fded7b2803a0bf96cc160c4"
                 + "96726216e986869eed578bda652855c85604a056201538ee56b6c4302b06092a864886f70d010701301406082a864886f70d"
-                + "030704083adadf63cd297a86800835edc437e31d0b70").HexToByteArray();
+                + "030704083adadf63cd297a86800835edc437e31d0b70"
+            ).HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
@@ -387,23 +427,28 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         }
 
         [Fact]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
         public static void EnvelopedCmsDecryptWithoutMatchingCert()
         {
             // You don't have the private key? No message for you.
 
             // This is the private key that "we don't have." We want to force it to load anyway, though, to trigger
             // the "fail the test due to bad machine config" exception if someone left this cert in the MY store check.
-            using (X509Certificate2 ignore = Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey())
-            { }
+            using (
+                X509Certificate2 ignore =
+                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+            ) { }
 
-            byte[] encodedMessage =
-                ("3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
+            byte[] encodedMessage = (
+                "3082010c06092a864886f70d010703a081fe3081fb0201003181c83081c5020100302e301a311830160603550403130f5253"
                 + "414b65795472616e7366657231021031d935fb63e8cfab48a0bf7b397b67c0300d06092a864886f70d01010105000481805e"
                 + "bb2d08773594be9ec5d30c0707cf339f2b982a4f0797b74d520a0c973d668a9a6ad9d28066ef36e5b5620fef67f4d79ee50c"
                 + "25eb999f0c656548347d5676ac4b779f8fce2b87e6388fbe483bb0fcf78ab1f1ff29169600401fded7b2803a0bf96cc160c4"
                 + "96726216e986869eed578bda652855c85604a056201538ee56b6c4302b06092a864886f70d010701301406082a864886f70d"
-                + "030704083adadf63cd297a86800835edc437e31d0b70").HexToByteArray();
+                + "030704083adadf63cd297a86800835edc437e31d0b70"
+            ).HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
@@ -415,22 +460,27 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         }
 
         [Fact]
-        [OuterLoop(/* Leaks key on disk if interrupted */)]
+        [OuterLoop( /* Leaks key on disk if interrupted */
+
+        )]
         public static void EnvelopedCmsDecryptWithoutMatchingCertSki()
         {
             // You don't have the private key? No message for you.
 
             // This is the private key that "we don't have." We want to force it to load anyway, though, to trigger
             // the "fail the test due to bad machine config" exception if someone left this cert in the MY store check.
-            using (X509Certificate2 ignore = Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey())
-            { }
+            using (
+                X509Certificate2 ignore =
+                    Certificates.RSAKeyTransfer1.TryGetCertificateWithPrivateKey()
+            ) { }
 
-            byte[] encodedMessage =
-                ("3081f206092a864886f70d010703a081e43081e10201023181ae3081ab0201028014f2008aa9fa3742e8370cb1674ce1d158"
+            byte[] encodedMessage = (
+                "3081f206092a864886f70d010703a081e43081e10201023181ae3081ab0201028014f2008aa9fa3742e8370cb1674ce1d158"
                 + "2921dcc3300d06092a864886f70d01010105000481804336e978bc72ba2f5264cd854867fac438f36f2b3df6004528f2df83"
                 + "4fb2113d6f7c07667e7296b029756222d6ced396a8fffed32be838eec7f2e54b9467fa80f85d097f7d1f0fbde57e07ab3d46"
                 + "a60b31f37ef9844dcab2a8eef4fec5579fac5ec1e7ee82409898e17d30c3ac1a407fca15d23c9df2904a707294d78d4300ba"
-                + "302b06092a864886f70d010701301406082a864886f70d03070408355c596e3e8540608008f1f811e862e51bbd").HexToByteArray();
+                + "302b06092a864886f70d010701301406082a864886f70d03070408355c596e3e8540608008f1f811e862e51bbd"
+            ).HexToByteArray();
 
             EnvelopedCms ecms = new EnvelopedCms();
             ecms.Decode(encodedMessage);
@@ -455,7 +505,10 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (X509Certificate2 cert = Certificates.RSAKeyTransfer1.GetCertificate())
             {
                 CmsRecipient r = new CmsRecipient(cert);
-                Assert.Equal(SubjectIdentifierType.IssuerAndSerialNumber, r.RecipientIdentifierType);
+                Assert.Equal(
+                    SubjectIdentifierType.IssuerAndSerialNumber,
+                    r.RecipientIdentifierType
+                );
                 Assert.Same(cert, r.Certificate);
             }
         }
@@ -466,7 +519,10 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             using (X509Certificate2 cert = Certificates.RSAKeyTransfer1.GetCertificate())
             {
                 CmsRecipient r = new CmsRecipient(SubjectIdentifierType.Unknown, cert);
-                Assert.Equal(SubjectIdentifierType.IssuerAndSerialNumber, r.RecipientIdentifierType);
+                Assert.Equal(
+                    SubjectIdentifierType.IssuerAndSerialNumber,
+                    r.RecipientIdentifierType
+                );
                 Assert.Same(cert, r.Certificate);
             }
         }
@@ -476,7 +532,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
         {
             object ignore;
             Assert.Throws<ArgumentNullException>(() => ignore = new CmsRecipient(null));
-            Assert.Throws<ArgumentNullException>(() => ignore = new CmsRecipient(SubjectIdentifierType.IssuerAndSerialNumber, null));
+            Assert.Throws<ArgumentNullException>(() =>
+                ignore = new CmsRecipient(SubjectIdentifierType.IssuerAndSerialNumber, null)
+            );
         }
 
         [Fact]
@@ -507,23 +565,27 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
 #endif
         public static void ContentInfoGetContentTypeUnknown(bool fromSpan)
         {
-            byte[] encodedMessage =
-                 ("301A06092A864886F70D010700A00D040B48656C6C6F202E4E455421").HexToByteArray();
+            byte[] encodedMessage = (
+                "301A06092A864886F70D010700A00D040B48656C6C6F202E4E455421"
+            ).HexToByteArray();
 
             if (fromSpan)
             {
 #if NETFRAMEWORK
                 throw new Xunit.Sdk.XunitException(
-                    "This test should not evaluate for .NET Framework, the API is missing.");
+                    "This test should not evaluate for .NET Framework, the API is missing."
+                );
 #else
-                Assert.ThrowsAny<CryptographicException>(
-                    () => ContentInfo.GetContentType(new ReadOnlySpan<byte>(encodedMessage)));
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    ContentInfo.GetContentType(new ReadOnlySpan<byte>(encodedMessage))
+                );
 #endif
             }
             else
             {
-                Assert.ThrowsAny<CryptographicException>(
-                    () => ContentInfo.GetContentType(encodedMessage));
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    ContentInfo.GetContentType(encodedMessage)
+                );
             }
         }
 
@@ -542,10 +604,16 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             var oid = new Oid(Oids.Sha1);
             var asnEncodedData = new AsnEncodedData(new byte[] { 1, 2, 3 });
 
-            AssertExtensions.Throws<ArgumentException, NullReferenceException>("values", () =>
-            {
-                new CryptographicAttributeObject(oid, new AsnEncodedDataCollection(asnEncodedData));
-            });
+            AssertExtensions.Throws<ArgumentException, NullReferenceException>(
+                "values",
+                () =>
+                {
+                    new CryptographicAttributeObject(
+                        oid,
+                        new AsnEncodedDataCollection(asnEncodedData)
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -568,7 +636,9 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             col.Add(new AsnEncodedData(oid, new byte[3]));
 
             object ignore;
-            Assert.Throws<InvalidOperationException>(() => ignore = new CryptographicAttributeObject(wrongOid, col));
+            Assert.Throws<InvalidOperationException>(() =>
+                ignore = new CryptographicAttributeObject(wrongOid, col)
+            );
         }
 
         [Fact]
@@ -582,7 +652,10 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 string certSubjectName = certificate.Subject;
                 AlgorithmIdentifier alg = new AlgorithmIdentifier(new Oid(Oids.Aes256));
                 EnvelopedCms ecms = new EnvelopedCms(contentInfo, alg);
-                CmsRecipient cmsRecipient = new CmsRecipient(SubjectIdentifierType.IssuerAndSerialNumber, certificate);
+                CmsRecipient cmsRecipient = new CmsRecipient(
+                    SubjectIdentifierType.IssuerAndSerialNumber,
+                    certificate
+                );
                 Assert.ThrowsAny<CryptographicException>(() => ecms.Encrypt(cmsRecipient));
             }
         }
@@ -598,7 +671,10 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
                 string certSubjectName = certificate.Subject;
                 AlgorithmIdentifier alg = new AlgorithmIdentifier(new Oid(Oids.Aes256));
                 EnvelopedCms ecms = new EnvelopedCms(contentInfo, alg);
-                CmsRecipient cmsRecipient = new CmsRecipient(SubjectIdentifierType.IssuerAndSerialNumber, certificate);
+                CmsRecipient cmsRecipient = new CmsRecipient(
+                    SubjectIdentifierType.IssuerAndSerialNumber,
+                    certificate
+                );
                 Assert.ThrowsAny<CryptographicException>(() => ecms.Encrypt(cmsRecipient));
             }
         }

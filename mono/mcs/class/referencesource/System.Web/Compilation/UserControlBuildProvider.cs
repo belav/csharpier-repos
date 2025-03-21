@@ -4,31 +4,33 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
+namespace System.Web.Compilation
+{
+    using System;
+    using System.Web.Configuration;
+    using System.Web.UI;
 
+    [BuildProviderAppliesTo(BuildProviderAppliesTo.Code | BuildProviderAppliesTo.Web)]
+    internal class UserControlBuildProvider : TemplateControlBuildProvider
+    {
+        internal override DependencyParser CreateDependencyParser()
+        {
+            return new UserControlDependencyParser();
+        }
 
-namespace System.Web.Compilation {
+        protected override TemplateParser CreateParser()
+        {
+            return new UserControlParser();
+        }
 
-using System;
-using System.Web.UI;
-using System.Web.Configuration;
+        internal override BaseCodeDomTreeGenerator CreateCodeDomTreeGenerator(TemplateParser parser)
+        {
+            return new UserControlCodeDomTreeGenerator((UserControlParser)parser);
+        }
 
-[BuildProviderAppliesTo(BuildProviderAppliesTo.Code | BuildProviderAppliesTo.Web)]
-internal class UserControlBuildProvider: TemplateControlBuildProvider {
-    internal override DependencyParser CreateDependencyParser() {
-        return new UserControlDependencyParser();
+        internal override BuildResultNoCompileTemplateControl CreateNoCompileBuildResult()
+        {
+            return new BuildResultNoCompileUserControl(Parser.BaseType, Parser);
+        }
     }
-
-    protected override TemplateParser CreateParser() {
-        return new UserControlParser();
-    }
-
-    internal override BaseCodeDomTreeGenerator CreateCodeDomTreeGenerator(TemplateParser parser) {
-        return new UserControlCodeDomTreeGenerator((UserControlParser)parser);
-    }
-
-    internal override BuildResultNoCompileTemplateControl CreateNoCompileBuildResult() {
-        return new BuildResultNoCompileUserControl(Parser.BaseType, Parser);
-    }
-}
-
 }

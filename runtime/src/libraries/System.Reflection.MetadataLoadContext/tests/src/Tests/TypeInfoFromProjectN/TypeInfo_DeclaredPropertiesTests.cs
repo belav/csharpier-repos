@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Collections.Generic;
+using Xunit;
 
 #pragma warning disable 0414
 #pragma warning disable 0067
@@ -32,7 +32,6 @@ namespace System.Reflection.Tests
         {
             VerifyProperty(typeof(TypeInfoPropertiesBaseClass).Project(), "Pubprop2");
         }
-
 
         // Verify Declared Properties for Base class
         [Fact]
@@ -89,16 +88,44 @@ namespace System.Reflection.Tests
     //Metadata for Reflection
     public class TypeInfoPropertiesBaseClass
     {
-        public string Pubprop1 { get { return ""; } set { } }
-        public string SubPubprop1 { get { return ""; } set { } }
-        public virtual string Pubprop2 { get { return ""; } set { } }
-        public static string Pubprop3 { get { return ""; } set { } }
+        public string Pubprop1
+        {
+            get { return ""; }
+            set { }
+        }
+        public string SubPubprop1
+        {
+            get { return ""; }
+            set { }
+        }
+        public virtual string Pubprop2
+        {
+            get { return ""; }
+            set { }
+        }
+        public static string Pubprop3
+        {
+            get { return ""; }
+            set { }
+        }
     }
 
     public class TypeInfoPropertiesSubClass : TypeInfoPropertiesBaseClass
     {
-        public new string Pubprop1 { get { return ""; } set { } }
-        public new virtual string Pubprop2 { get { return ""; } set { } }
-        public static new string Pubprop3 { get { return ""; } set { } }
+        public new string Pubprop1
+        {
+            get { return ""; }
+            set { }
+        }
+        public new virtual string Pubprop2
+        {
+            get { return ""; }
+            set { }
+        }
+        public static new string Pubprop3
+        {
+            get { return ""; }
+            set { }
+        }
     }
 }

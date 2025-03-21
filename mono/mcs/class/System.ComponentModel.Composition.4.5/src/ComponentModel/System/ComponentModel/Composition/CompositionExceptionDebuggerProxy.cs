@@ -8,7 +8,6 @@ using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
 using System.Reflection;
-
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
 

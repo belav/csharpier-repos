@@ -42,14 +42,18 @@ namespace System.Reflection
             throw new TargetParameterCountException(SR.Arg_ParmCnt);
         }
 
-
         internal unsafe object? InvokeWithNoArgs(object? obj, BindingFlags invokeAttr)
         {
             Debug.Assert(_argCount == 0);
 
             if ((_strategy & InvokerStrategy.StrategyDetermined_RefArgs) == 0)
             {
-                DetermineStrategy_RefArgs(ref _strategy, ref _invokeFunc_RefArgs, _method, backwardsCompat: true);
+                DetermineStrategy_RefArgs(
+                    ref _strategy,
+                    ref _invokeFunc_RefArgs,
+                    _method,
+                    backwardsCompat: true
+                );
             }
 
             try
@@ -67,7 +71,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             object?[] parameters,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
             Debug.Assert(_argCount == 1);
 
@@ -83,7 +88,13 @@ namespace System.Reflection
             object? ret;
             if ((_strategy & InvokerStrategy.StrategyDetermined_ObjSpanArgs) == 0)
             {
-                DetermineStrategy_ObjSpanArgs(ref _strategy, ref _invokeFunc_ObjSpanArgs, _method, _needsByRefStrategy, backwardsCompat: true);
+                DetermineStrategy_ObjSpanArgs(
+                    ref _strategy,
+                    ref _invokeFunc_ObjSpanArgs,
+                    _method,
+                    _needsByRefStrategy,
+                    backwardsCompat: true
+                );
             }
 
             CheckArguments(parametersSpan, copyOfArgs, shouldCopyBack, binder, culture, invokeAttr);
@@ -113,7 +124,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             object?[] parameters,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
             Debug.Assert(_argCount <= MaxStackAllocArgCount);
 
@@ -124,7 +136,13 @@ namespace System.Reflection
             object? ret;
             if ((_strategy & InvokerStrategy.StrategyDetermined_ObjSpanArgs) == 0)
             {
-                DetermineStrategy_ObjSpanArgs(ref _strategy, ref _invokeFunc_ObjSpanArgs, _method, _needsByRefStrategy, backwardsCompat: true);
+                DetermineStrategy_ObjSpanArgs(
+                    ref _strategy,
+                    ref _invokeFunc_ObjSpanArgs,
+                    _method,
+                    _needsByRefStrategy,
+                    backwardsCompat: true
+                );
             }
 
             CheckArguments(parameters, copyOfArgs, shouldCopyBack, binder, culture, invokeAttr);
@@ -143,20 +161,28 @@ namespace System.Reflection
             else
             {
                 ret = InvokeDirectByRefWithFewArgs(obj, copyOfArgs, invokeAttr);
-
-           }
+            }
 
             CopyBack(parameters, copyOfArgs, shouldCopyBack);
             return ret;
         }
 
-        internal unsafe object? InvokeDirectByRefWithFewArgs(object? obj, Span<object?> copyOfArgs, BindingFlags invokeAttr)
+        internal unsafe object? InvokeDirectByRefWithFewArgs(
+            object? obj,
+            Span<object?> copyOfArgs,
+            BindingFlags invokeAttr
+        )
         {
             Debug.Assert(_argCount <= MaxStackAllocArgCount);
 
             if ((_strategy & InvokerStrategy.StrategyDetermined_RefArgs) == 0)
             {
-                DetermineStrategy_RefArgs(ref _strategy, ref _invokeFunc_RefArgs, _method, backwardsCompat: true);
+                DetermineStrategy_RefArgs(
+                    ref _strategy,
+                    ref _invokeFunc_RefArgs,
+                    _method,
+                    backwardsCompat: true
+                );
             }
 
             StackAllocatedByRefs byrefs = default;
@@ -167,10 +193,12 @@ namespace System.Reflection
             for (int i = 0; i < _argCount; i++)
             {
 #pragma warning disable CS8500
-                *(ByReference*)(pByRefFixedStorage + i) =  (_invokerArgFlags[i] & InvokerArgFlags.IsValueType) != 0 ?
+                *(ByReference*)(pByRefFixedStorage + i) =
+                    (_invokerArgFlags[i] & InvokerArgFlags.IsValueType) != 0
+                        ?
 #pragma warning restore CS8500
-                    ByReference.Create(ref copyOfArgs[i]!.GetRawData()) :
-                    ByReference.Create(ref copyOfArgs[i]);
+                        ByReference.Create(ref copyOfArgs[i]!.GetRawData())
+                        : ByReference.Create(ref copyOfArgs[i]);
             }
 
             try
@@ -188,7 +216,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             object?[] parameters,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
             Debug.Assert(_argCount > MaxStackAllocArgCount);
 
@@ -199,7 +228,13 @@ namespace System.Reflection
 
             if ((_strategy & InvokerStrategy.StrategyDetermined_ObjSpanArgs) == 0)
             {
-                DetermineStrategy_ObjSpanArgs(ref _strategy, ref _invokeFunc_ObjSpanArgs, _method, _needsByRefStrategy, backwardsCompat: true);
+                DetermineStrategy_ObjSpanArgs(
+                    ref _strategy,
+                    ref _invokeFunc_ObjSpanArgs,
+                    _method,
+                    _needsByRefStrategy,
+                    backwardsCompat: true
+                );
             }
 
             if (_invokeFunc_ObjSpanArgs is not null)
@@ -214,7 +249,14 @@ namespace System.Reflection
                 {
                     GCFrameRegistration.RegisterForGCReporting(&regArgStorage);
 
-                    CheckArguments(parameters, copyOfArgs, shouldCopyBack, binder, culture, invokeAttr);
+                    CheckArguments(
+                        parameters,
+                        copyOfArgs,
+                        shouldCopyBack,
+                        binder,
+                        culture,
+                        invokeAttr
+                    );
 
                     try
                     {
@@ -236,7 +278,12 @@ namespace System.Reflection
             {
                 if ((_strategy & InvokerStrategy.StrategyDetermined_RefArgs) == 0)
                 {
-                    DetermineStrategy_RefArgs(ref _strategy, ref _invokeFunc_RefArgs, _method, backwardsCompat: true);
+                    DetermineStrategy_RefArgs(
+                        ref _strategy,
+                        ref _invokeFunc_RefArgs,
+                        _method,
+                        backwardsCompat: true
+                    );
                 }
 
                 IntPtr* pStorage = stackalloc IntPtr[3 * _argCount];
@@ -244,7 +291,11 @@ namespace System.Reflection
                 copyOfArgs = new(ref Unsafe.AsRef<object?>(pStorage), _argCount);
                 regArgStorage = new((void**)pStorage, (uint)_argCount, areByRefs: false);
                 IntPtr* pByRefStorage = pStorage + _argCount;
-                GCFrameRegistration regByRefStorage = new((void**)pByRefStorage, (uint)_argCount, areByRefs: true);
+                GCFrameRegistration regByRefStorage = new(
+                    (void**)pByRefStorage,
+                    (uint)_argCount,
+                    areByRefs: true
+                );
                 shouldCopyBack = new Span<bool>(pStorage + _argCount * 2, _argCount);
 
                 try
@@ -252,15 +303,26 @@ namespace System.Reflection
                     GCFrameRegistration.RegisterForGCReporting(&regArgStorage);
                     GCFrameRegistration.RegisterForGCReporting(&regByRefStorage);
 
-                    CheckArguments(parameters, copyOfArgs, shouldCopyBack, binder, culture, invokeAttr);
+                    CheckArguments(
+                        parameters,
+                        copyOfArgs,
+                        shouldCopyBack,
+                        binder,
+                        culture,
+                        invokeAttr
+                    );
 
                     for (int i = 0; i < _argCount; i++)
                     {
-    #pragma warning disable CS8500
-                        *(ByReference*)(pByRefStorage + i) = (_invokerArgFlags[i] & InvokerArgFlags.IsValueType) != 0 ?
-    #pragma warning restore CS8500
-                            ByReference.Create(ref Unsafe.AsRef<object>(pStorage + i).GetRawData()) :
-                            ByReference.Create(ref Unsafe.AsRef<object>(pStorage + i));
+#pragma warning disable CS8500
+                        *(ByReference*)(pByRefStorage + i) =
+                            (_invokerArgFlags[i] & InvokerArgFlags.IsValueType) != 0
+                                ?
+#pragma warning restore CS8500
+                                ByReference.Create(
+                                    ref Unsafe.AsRef<object>(pStorage + i).GetRawData()
+                                )
+                                : ByReference.Create(ref Unsafe.AsRef<object>(pStorage + i));
                     }
 
                     try
@@ -290,7 +352,8 @@ namespace System.Reflection
             BindingFlags invokeAttr,
             Binder? binder,
             object? parameter,
-            CultureInfo? culture)
+            CultureInfo? culture
+        )
         {
             Debug.Assert(_argCount == 1);
 
@@ -300,7 +363,14 @@ namespace System.Reflection
             bool copyBack = false;
             Span<bool> shouldCopyBack = new(ref copyBack, 1); // Not used for setters
 
-            CheckArguments(new ReadOnlySpan<object?>(in parameter), copyOfArgs, shouldCopyBack, binder, culture, invokeAttr);
+            CheckArguments(
+                new ReadOnlySpan<object?>(in parameter),
+                copyOfArgs,
+                shouldCopyBack,
+                binder,
+                culture,
+                invokeAttr
+            );
 
             if (_invokeFunc_ObjSpanArgs is not null) // Fast path check
             {
@@ -318,7 +388,13 @@ namespace System.Reflection
                 if ((_strategy & InvokerStrategy.StrategyDetermined_ObjSpanArgs) == 0)
                 {
                     // Initialize for next time.
-                    DetermineStrategy_ObjSpanArgs(ref _strategy, ref _invokeFunc_ObjSpanArgs, _method, _needsByRefStrategy, backwardsCompat: true);
+                    DetermineStrategy_ObjSpanArgs(
+                        ref _strategy,
+                        ref _invokeFunc_ObjSpanArgs,
+                        _method,
+                        _needsByRefStrategy,
+                        backwardsCompat: true
+                    );
                 }
 
                 InvokeDirectByRefWithFewArgs(obj, copyOfArgs, invokeAttr);
@@ -327,7 +403,11 @@ namespace System.Reflection
 
         // Copy modified values out. This is done with ByRef, Type.Missing and parameters changed by the Binder.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal void CopyBack(object?[] dest, Span<object?> copyOfParameters, Span<bool> shouldCopyBack)
+        internal void CopyBack(
+            object?[] dest,
+            Span<object?> copyOfParameters,
+            Span<bool> shouldCopyBack
+        )
         {
             for (int i = 0; i < dest.Length; i++)
             {
@@ -349,13 +429,13 @@ namespace System.Reflection
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal void CheckArguments(
-             ReadOnlySpan<object?> parameters,
-             Span<object?> copyOfParameters,
-             Span<bool> shouldCopyBack,
-             Binder? binder,
-             CultureInfo? culture,
-             BindingFlags invokeAttr
-         )
+            ReadOnlySpan<object?> parameters,
+            Span<object?> copyOfParameters,
+            Span<bool> shouldCopyBack,
+            Binder? binder,
+            CultureInfo? culture,
+            BindingFlags invokeAttr
+        )
         {
             for (int i = 0; i < parameters.Length; i++)
             {
@@ -374,7 +454,12 @@ namespace System.Reflection
                 {
                     if ((_invokerArgFlags[i] & InvokerArgFlags.IsValueType_ByRef_Or_Pointer) != 0)
                     {
-                        shouldCopyBack[i] = sigType.CheckValue(ref arg, binder, culture, invokeAttr);
+                        shouldCopyBack[i] = sigType.CheckValue(
+                            ref arg,
+                            binder,
+                            culture,
+                            invokeAttr
+                        );
                     }
                 }
                 else if (!ReferenceEquals(arg.GetType(), sigType))
@@ -387,7 +472,12 @@ namespace System.Reflection
                     }
                     else
                     {
-                        shouldCopyBack[i] = sigType.CheckValue(ref arg, binder, culture, invokeAttr);
+                        shouldCopyBack[i] = sigType.CheckValue(
+                            ref arg,
+                            binder,
+                            culture,
+                            invokeAttr
+                        );
                     }
                 }
 
@@ -397,8 +487,10 @@ namespace System.Reflection
 
         private static bool TryByRefFastPath(RuntimeType type, ref object arg)
         {
-            if (RuntimeType.TryGetByRefElementType(type, out RuntimeType? sigElementType) &&
-                ReferenceEquals(sigElementType, arg.GetType()))
+            if (
+                RuntimeType.TryGetByRefElementType(type, out RuntimeType? sigElementType)
+                && ReferenceEquals(sigElementType, arg.GetType())
+            )
             {
                 if (sigElementType.IsValueType)
                 {

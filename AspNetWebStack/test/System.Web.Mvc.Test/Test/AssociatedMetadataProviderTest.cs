@@ -34,7 +34,11 @@ namespace System.Web.Mvc.Test
             TestableAssociatedMetadataProvider provider = new TestableAssociatedMetadataProvider();
 
             // Act
-            provider.GetMetadataForProperty(() => null, typeof(ViewUserControl<PropertyModel>), "Model");
+            provider.GetMetadataForProperty(
+                () => null,
+                typeof(ViewUserControl<PropertyModel>),
+                "Model"
+            );
 
             // Assert
             CreateMetadataParams parms = provider.CreateMetadataLog.Single();
@@ -48,7 +52,11 @@ namespace System.Web.Mvc.Test
             TestableAssociatedMetadataProvider provider = new TestableAssociatedMetadataProvider();
 
             // Act
-            provider.GetMetadataForProperty(() => null, typeof(ModelWithReadOnlyProperty), "ReadOnlyProperty");
+            provider.GetMetadataForProperty(
+                () => null,
+                typeof(ModelWithReadOnlyProperty),
+                "ReadOnlyProperty"
+            );
 
             // Assert
             CreateMetadataParams parms = provider.CreateMetadataLog.Single();
@@ -66,37 +74,43 @@ namespace System.Web.Mvc.Test
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => provider.GetMetadataForProperties(new Object(), null),
-                "containerType");
+                "containerType"
+            );
         }
 
         [Fact]
         public void GetMetadataForPropertiesCreatesMetadataForAllPropertiesOnModelWithPropertyValues()
         {
             // Arrange
-            PropertyModel model = new PropertyModel { LocalAttributes = 42, MetadataAttributes = "hello", MixedAttributes = 21.12 };
+            PropertyModel model = new PropertyModel
+            {
+                LocalAttributes = 42,
+                MetadataAttributes = "hello",
+                MixedAttributes = 21.12,
+            };
             TestableAssociatedMetadataProvider provider = new TestableAssociatedMetadataProvider();
 
             // Act
             provider.GetMetadataForProperties(model, typeof(PropertyModel)).ToList(); // Call ToList() to force the lazy evaluation to evaluate
 
             // Assert
-            CreateMetadataParams local =
-                provider.CreateMetadataLog.Single(m => m.ContainerType == typeof(PropertyModel) &&
-                                                       m.PropertyName == "LocalAttributes");
+            CreateMetadataParams local = provider.CreateMetadataLog.Single(m =>
+                m.ContainerType == typeof(PropertyModel) && m.PropertyName == "LocalAttributes"
+            );
             Assert.Equal(typeof(int), local.ModelType);
             Assert.Equal(42, local.Model);
             Assert.Contains(local.Attributes, a => a is RequiredAttribute);
 
-            CreateMetadataParams metadata =
-                provider.CreateMetadataLog.Single(m => m.ContainerType == typeof(PropertyModel) &&
-                                                       m.PropertyName == "MetadataAttributes");
+            CreateMetadataParams metadata = provider.CreateMetadataLog.Single(m =>
+                m.ContainerType == typeof(PropertyModel) && m.PropertyName == "MetadataAttributes"
+            );
             Assert.Equal(typeof(string), metadata.ModelType);
             Assert.Equal("hello", metadata.Model);
             Assert.Contains(metadata.Attributes, a => a is RangeAttribute);
 
-            CreateMetadataParams mixed =
-                provider.CreateMetadataLog.Single(m => m.ContainerType == typeof(PropertyModel) &&
-                                                       m.PropertyName == "MixedAttributes");
+            CreateMetadataParams mixed = provider.CreateMetadataLog.Single(m =>
+                m.ContainerType == typeof(PropertyModel) && m.PropertyName == "MixedAttributes"
+            );
             Assert.Equal(typeof(double), mixed.ModelType);
             Assert.Equal(21.12, mixed.Model);
             Assert.Contains(mixed.Attributes, a => a is RequiredAttribute);
@@ -107,11 +121,18 @@ namespace System.Web.Mvc.Test
         public void GetMetadataForPropertiesContainerTest()
         {
             // Arrange
-            PropertyModel model = new PropertyModel { LocalAttributes = 42, MetadataAttributes = "hello", MixedAttributes = 21.12 };
+            PropertyModel model = new PropertyModel
+            {
+                LocalAttributes = 42,
+                MetadataAttributes = "hello",
+                MixedAttributes = 21.12,
+            };
             EmptyModelMetadataProvider provider = new EmptyModelMetadataProvider();
 
             // Act
-            List<ModelMetadata> metadata = provider.GetMetadataForProperties(model, typeof(PropertyModel)).ToList();
+            List<ModelMetadata> metadata = provider
+                .GetMetadataForProperties(model, typeof(PropertyModel))
+                .ToList();
 
             // Assert
             Assert.Equal(3, metadata.Count());
@@ -147,8 +168,16 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                () => provider.GetMetadataForProperty(null /* model */, null /* containerType */, "propertyName"),
-                "containerType");
+                () =>
+                    provider.GetMetadataForProperty(
+                        null /* model */
+                        ,
+                        null /* containerType */
+                        ,
+                        "propertyName"
+                    ),
+                "containerType"
+            );
         }
 
         [Fact]
@@ -159,11 +188,19 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
-                () => provider.GetMetadataForProperty(null /* model */, typeof(object), null /* propertyName */),
-                "propertyName");
+                () =>
+                    provider.GetMetadataForProperty(
+                        null /* model */
+                        ,
+                        typeof(object),
+                        null /* propertyName */
+                    ),
+                "propertyName"
+            );
             Assert.ThrowsArgumentNullOrEmpty(
                 () => provider.GetMetadataForProperty(null, typeof(object), String.Empty),
-                "propertyName");
+                "propertyName"
+            );
         }
 
         [Fact]
@@ -175,7 +212,8 @@ namespace System.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<ArgumentException>(
                 () => provider.GetMetadataForProperty(null, typeof(object), "BadPropertyName"),
-                "The property System.Object.BadPropertyName could not be found.");
+                "The property System.Object.BadPropertyName could not be found."
+            );
         }
 
         [Fact]
@@ -183,15 +221,28 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             TestableAssociatedMetadataProvider provider = new TestableAssociatedMetadataProvider();
-            ModelMetadata metadata = new ModelMetadata(provider, typeof(PropertyModel), null, typeof(int), "LocalAttributes");
+            ModelMetadata metadata = new ModelMetadata(
+                provider,
+                typeof(PropertyModel),
+                null,
+                typeof(int),
+                "LocalAttributes"
+            );
             provider.CreateMetadataReturnValue = metadata;
 
             // Act
-            ModelMetadata result = provider.GetMetadataForProperty(null, typeof(PropertyModel), "LocalAttributes");
+            ModelMetadata result = provider.GetMetadataForProperty(
+                null,
+                typeof(PropertyModel),
+                "LocalAttributes"
+            );
 
             // Assert
             Assert.Same(metadata, result);
-            Assert.Contains(provider.CreateMetadataLog.Single().Attributes, a => a is RequiredAttribute);
+            Assert.Contains(
+                provider.CreateMetadataLog.Single().Attributes,
+                a => a is RequiredAttribute
+            );
         }
 
         [Fact]
@@ -199,15 +250,27 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             TestableAssociatedMetadataProvider provider = new TestableAssociatedMetadataProvider();
-            ModelMetadata metadata = new ModelMetadata(provider, typeof(PropertyModel), null, typeof(string), "MetadataAttributes");
+            ModelMetadata metadata = new ModelMetadata(
+                provider,
+                typeof(PropertyModel),
+                null,
+                typeof(string),
+                "MetadataAttributes"
+            );
             provider.CreateMetadataReturnValue = metadata;
 
             // Act
-            ModelMetadata result = provider.GetMetadataForProperty(null, typeof(PropertyModel), "MetadataAttributes");
+            ModelMetadata result = provider.GetMetadataForProperty(
+                null,
+                typeof(PropertyModel),
+                "MetadataAttributes"
+            );
 
             // Assert
             Assert.Same(metadata, result);
-            CreateMetadataParams parms = provider.CreateMetadataLog.Single(p => p.PropertyName == "MetadataAttributes");
+            CreateMetadataParams parms = provider.CreateMetadataLog.Single(p =>
+                p.PropertyName == "MetadataAttributes"
+            );
             Assert.Contains(parms.Attributes, a => a is RangeAttribute);
         }
 
@@ -216,15 +279,27 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             TestableAssociatedMetadataProvider provider = new TestableAssociatedMetadataProvider();
-            ModelMetadata metadata = new ModelMetadata(provider, typeof(PropertyModel), null, typeof(double), "MixedAttributes");
+            ModelMetadata metadata = new ModelMetadata(
+                provider,
+                typeof(PropertyModel),
+                null,
+                typeof(double),
+                "MixedAttributes"
+            );
             provider.CreateMetadataReturnValue = metadata;
 
             // Act
-            ModelMetadata result = provider.GetMetadataForProperty(null, typeof(PropertyModel), "MixedAttributes");
+            ModelMetadata result = provider.GetMetadataForProperty(
+                null,
+                typeof(PropertyModel),
+                "MixedAttributes"
+            );
 
             // Assert
             Assert.Same(metadata, result);
-            CreateMetadataParams parms = provider.CreateMetadataLog.Single(p => p.PropertyName == "MixedAttributes");
+            CreateMetadataParams parms = provider.CreateMetadataLog.Single(p =>
+                p.PropertyName == "MixedAttributes"
+            );
             Assert.Contains(parms.Attributes, a => a is RequiredAttribute);
             Assert.Contains(parms.Attributes, a => a is RangeAttribute);
         }
@@ -240,14 +315,21 @@ namespace System.Web.Mvc.Test
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => provider.GetMetadataForType(() => new Object(), null),
-                "modelType");
+                "modelType"
+            );
         }
 
         [Fact]
         public void GetMetadataForTypeIncludesAttributesOnType()
         {
             TestableAssociatedMetadataProvider provider = new TestableAssociatedMetadataProvider();
-            ModelMetadata metadata = new ModelMetadata(provider, null, null, typeof(TypeModel), null);
+            ModelMetadata metadata = new ModelMetadata(
+                provider,
+                null,
+                null,
+                typeof(TypeModel),
+                null
+            );
             provider.CreateMetadataReturnValue = metadata;
 
             // Act
@@ -255,7 +337,9 @@ namespace System.Web.Mvc.Test
 
             // Assert
             Assert.Same(metadata, result);
-            CreateMetadataParams parms = provider.CreateMetadataLog.Single(p => p.ModelType == typeof(TypeModel));
+            CreateMetadataParams parms = provider.CreateMetadataLog.Single(p =>
+                p.ModelType == typeof(TypeModel)
+            );
             Assert.Contains(parms.Attributes, a => a is ReadOnlyAttribute);
         }
 
@@ -271,10 +355,19 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             TestableAssociatedMetadataProvider provider = new TestableAssociatedMetadataProvider();
-            provider.CreateMetadataReturnValue = new ModelMetadata(provider, null, null, typeof(ClassWithAdditionalMetadata), null);
+            provider.CreateMetadataReturnValue = new ModelMetadata(
+                provider,
+                null,
+                null,
+                typeof(ClassWithAdditionalMetadata),
+                null
+            );
 
             // Act
-            ModelMetadata metadata = provider.GetMetadataForType(null, typeof(ClassWithAdditionalMetadata));
+            ModelMetadata metadata = provider.GetMetadataForType(
+                null,
+                typeof(ClassWithAdditionalMetadata)
+            );
 
             // Assert
             var kvp = metadata.AdditionalValues.Single();
@@ -287,10 +380,20 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             TestableAssociatedMetadataProvider provider = new TestableAssociatedMetadataProvider();
-            provider.CreateMetadataReturnValue = new ModelMetadata(provider, typeof(ClassWithAdditionalMetadata), null, typeof(int), "MyProperty");
+            provider.CreateMetadataReturnValue = new ModelMetadata(
+                provider,
+                typeof(ClassWithAdditionalMetadata),
+                null,
+                typeof(int),
+                "MyProperty"
+            );
 
             // Act
-            ModelMetadata metadata = provider.GetMetadataForProperty(null, typeof(ClassWithAdditionalMetadata), "MyProperty");
+            ModelMetadata metadata = provider.GetMetadataForProperty(
+                null,
+                typeof(ClassWithAdditionalMetadata),
+                "MyProperty"
+            );
 
             // Assert
             var kvp = metadata.AdditionalValues.Single();
@@ -327,27 +430,31 @@ namespace System.Web.Mvc.Test
         }
 
         [ReadOnly(true)]
-        private class TypeModel
-        {
-        }
+        private class TypeModel { }
 
         class TestableAssociatedMetadataProvider : AssociatedMetadataProvider
         {
             public List<CreateMetadataParams> CreateMetadataLog = new List<CreateMetadataParams>();
             public ModelMetadata CreateMetadataReturnValue = null;
 
-            protected override ModelMetadata CreateMetadata(IEnumerable<Attribute> attributes, Type containerType,
-                                                            Func<object> modelAccessor, Type modelType,
-                                                            string propertyName)
+            protected override ModelMetadata CreateMetadata(
+                IEnumerable<Attribute> attributes,
+                Type containerType,
+                Func<object> modelAccessor,
+                Type modelType,
+                string propertyName
+            )
             {
-                CreateMetadataLog.Add(new CreateMetadataParams
-                {
-                    Attributes = attributes,
-                    ContainerType = containerType,
-                    Model = modelAccessor == null ? null : modelAccessor(),
-                    ModelType = modelType,
-                    PropertyName = propertyName
-                });
+                CreateMetadataLog.Add(
+                    new CreateMetadataParams
+                    {
+                        Attributes = attributes,
+                        ContainerType = containerType,
+                        Model = modelAccessor == null ? null : modelAccessor(),
+                        ModelType = modelType,
+                        PropertyName = propertyName,
+                    }
+                );
 
                 return CreateMetadataReturnValue;
             }

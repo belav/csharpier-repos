@@ -1,11 +1,11 @@
 ﻿// Copyright 2004-2021 Castle Project - http://www.castleproject.org/
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //     http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,20 +14,20 @@
 
 namespace Castle.Components.DictionaryAdapter.Xml
 {
-	using System;
-	using System.Threading;
-	using System.Xml;
-	using System.Xml.Serialization;
+    using System;
+    using System.Threading;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     public class XmlSubtreeReader : XmlReader
     {
         private readonly string rootLocalName;
-		private readonly string rootNamespaceURI;
-		private string underlyingNamespaceURI;
+        private readonly string rootNamespaceURI;
+        private string underlyingNamespaceURI;
         private XmlReader reader;
 
-		public XmlSubtreeReader(IXmlNode node, XmlRootAttribute root)
-			: this(node, root.ElementName, root.Namespace) { }
+        public XmlSubtreeReader(IXmlNode node, XmlRootAttribute root)
+            : this(node, root.ElementName, root.Namespace) { }
 
         public XmlSubtreeReader(IXmlNode node, string rootLocalName, string rootNamespaceUri)
         {
@@ -36,21 +36,29 @@ namespace Castle.Components.DictionaryAdapter.Xml
             if (null == rootLocalName)
                 throw Error.ArgumentNull(nameof(rootLocalName));
 
-            this.reader           = node.ReadSubtree();
-            this.rootLocalName    = reader.NameTable.Add(rootLocalName);
-			this.rootNamespaceURI = rootNamespaceUri ?? string.Empty;
+            this.reader = node.ReadSubtree();
+            this.rootLocalName = reader.NameTable.Add(rootLocalName);
+            this.rootNamespaceURI = rootNamespaceUri ?? string.Empty;
         }
 
         protected override void Dispose(bool managed)
         {
-            try { if (managed) DisposeReader(); }
-            finally { base.Dispose(managed); }
+            try
+            {
+                if (managed)
+                    DisposeReader();
+            }
+            finally
+            {
+                base.Dispose(managed);
+            }
         }
 
         private void DisposeReader()
         {
             IDisposable value = Interlocked.Exchange(ref reader, null);
-            if (null != value) value.Dispose();
+            if (null != value)
+                value.Dispose();
         }
 
         public bool IsDisposed
@@ -66,7 +74,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         protected XmlReader Reader
         {
-            get { RequireNotDisposed(); return reader; }
+            get
+            {
+                RequireNotDisposed();
+                return reader;
+            }
         }
 
         public override ReadState ReadState
@@ -89,12 +101,11 @@ namespace Castle.Components.DictionaryAdapter.Xml
             get
             {
                 RequireNotDisposed();
-                return
-                    reader.ReadState == ReadState.Interactive &&
-                    reader.Depth == 0 &&
-                    (
-                        reader.NodeType == XmlNodeType.Element ||
-                        reader.NodeType == XmlNodeType.EndElement
+                return reader.ReadState == ReadState.Interactive
+                    && reader.Depth == 0
+                    && (
+                        reader.NodeType == XmlNodeType.Element
+                        || reader.NodeType == XmlNodeType.EndElement
                     );
             }
         }
@@ -119,20 +130,20 @@ namespace Castle.Components.DictionaryAdapter.Xml
             get { return IsAtRootElement ? CaptureNamespaceUri() : TranslateNamespaceURI(); }
         }
 
-		private string CaptureNamespaceUri()
-		{
-			if (underlyingNamespaceURI == null)
-				underlyingNamespaceURI = Reader.NamespaceURI;
-			return rootNamespaceURI;
-		}
+        private string CaptureNamespaceUri()
+        {
+            if (underlyingNamespaceURI == null)
+                underlyingNamespaceURI = Reader.NamespaceURI;
+            return rootNamespaceURI;
+        }
 
-		private string TranslateNamespaceURI()
-		{
-			var actualNamespaceURI = Reader.NamespaceURI;
-			return actualNamespaceURI == underlyingNamespaceURI
-				? rootNamespaceURI
-				: actualNamespaceURI;
-		}
+        private string TranslateNamespaceURI()
+        {
+            var actualNamespaceURI = Reader.NamespaceURI;
+            return actualNamespaceURI == underlyingNamespaceURI
+                ? rootNamespaceURI
+                : actualNamespaceURI;
+        }
 
         public override string Value
         {
@@ -221,7 +232,8 @@ namespace Castle.Components.DictionaryAdapter.Xml
 
         public override void Close()
         {
-            if (!IsDisposed) reader.Close();
+            if (!IsDisposed)
+                reader.Close();
         }
     }
 }

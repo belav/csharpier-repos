@@ -22,14 +22,27 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// includes the code to assign to the pattern variables and evaluate the when clause. Since a
             /// when clause can yield a false value, it can jump back to a label in the lowered decision dag.
             /// </summary>
-            private readonly PooledDictionary<SyntaxNode, ArrayBuilder<BoundStatement>> _switchArms = PooledDictionary<SyntaxNode, ArrayBuilder<BoundStatement>>.GetInstance();
+            private readonly PooledDictionary<
+                SyntaxNode,
+                ArrayBuilder<BoundStatement>
+            > _switchArms = PooledDictionary<
+                SyntaxNode,
+                ArrayBuilder<BoundStatement>
+            >.GetInstance();
 
-            protected override ArrayBuilder<BoundStatement> BuilderForSection(SyntaxNode whenClauseSyntax)
+            protected override ArrayBuilder<BoundStatement> BuilderForSection(
+                SyntaxNode whenClauseSyntax
+            )
             {
                 // We need the section syntax to get the section builder from the map. Unfortunately this is a bit awkward
-                SyntaxNode? sectionSyntax = whenClauseSyntax is SwitchLabelSyntax l ? l.Parent : whenClauseSyntax;
+                SyntaxNode? sectionSyntax = whenClauseSyntax is SwitchLabelSyntax l
+                    ? l.Parent
+                    : whenClauseSyntax;
                 Debug.Assert(sectionSyntax is { });
-                bool found = _switchArms.TryGetValue(sectionSyntax, out ArrayBuilder<BoundStatement>? result);
+                bool found = _switchArms.TryGetValue(
+                    sectionSyntax,
+                    out ArrayBuilder<BoundStatement>? result
+                );
                 if (!found || result == null)
                     throw new InvalidOperationException();
 
@@ -40,7 +53,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 SyntaxNode node,
                 LocalRewriter localRewriter,
                 ImmutableArray<SyntaxNode> arms,
-                bool generateInstrumentation)
+                bool generateInstrumentation
+            )
                 : base(node, localRewriter, generateInstrumentation)
             {
                 foreach (var arm in arms)
@@ -65,10 +79,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             /// <summary>
             /// Lower the given nodes into _loweredDecisionDag. Should only be called once per instance of this.
             /// </summary>
-            protected (ImmutableArray<BoundStatement> loweredDag, ImmutableDictionary<SyntaxNode, ImmutableArray<BoundStatement>> switchSections) LowerDecisionDag(BoundDecisionDag decisionDag)
+            protected (
+                ImmutableArray<BoundStatement> loweredDag,
+                ImmutableDictionary<SyntaxNode, ImmutableArray<BoundStatement>> switchSections
+            ) LowerDecisionDag(BoundDecisionDag decisionDag)
             {
                 var loweredDag = LowerDecisionDagCore(decisionDag);
-                var switchSections = _switchArms.ToImmutableDictionary(kv => kv.Key, kv => kv.Value.ToImmutableAndFree());
+                var switchSections = _switchArms.ToImmutableDictionary(
+                    kv => kv.Key,
+                    kv => kv.Value.ToImmutableAndFree()
+                );
                 _switchArms.Clear();
                 return (loweredDag, switchSections);
             }

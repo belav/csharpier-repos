@@ -16,15 +16,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             this CSharpTestBase testBase,
             string source,
             MetadataReference[] additionalRefs = null,
-            string expectedOutput = null)
+            string expectedOutput = null
+        )
         {
             var isWin8 = OSVersion.IsWin8;
             return testBase.CompileAndVerifyWithWinRt(
                 source,
                 references: additionalRefs,
                 expectedOutput: isWin8 ? expectedOutput : null,
-                verify: isWin8 ? Verification.Passes : Verification.Fails);
+                verify: isWin8 ? Verification.Passes : Verification.Fails
+            );
         }
-
     }
 }

@@ -3,7 +3,6 @@
 
 using System.Collections;
 using System.Collections.Generic;
-
 using Xunit;
 
 namespace System.Net.Primitives.Functional.Tests
@@ -28,16 +27,43 @@ namespace System.Net.Primitives.Functional.Tests
         private static readonly string authenticationTypeBasic = "Basic";
         private static readonly string authenticationTypeDigest = "Digest";
 
-        private static readonly NetworkCredential customCredential = new NetworkCredential("username", "password");
-        private static readonly NetworkCredential credential1 = new NetworkCredential("username1", "password");
-        private static readonly NetworkCredential credential2 = new NetworkCredential("username2", "password");
-        private static readonly NetworkCredential credential3 = new NetworkCredential("username3", "password");
-        private static readonly NetworkCredential credential4 = new NetworkCredential("username4", "password");
+        private static readonly NetworkCredential customCredential = new NetworkCredential(
+            "username",
+            "password"
+        );
+        private static readonly NetworkCredential credential1 = new NetworkCredential(
+            "username1",
+            "password"
+        );
+        private static readonly NetworkCredential credential2 = new NetworkCredential(
+            "username2",
+            "password"
+        );
+        private static readonly NetworkCredential credential3 = new NetworkCredential(
+            "username3",
+            "password"
+        );
+        private static readonly NetworkCredential credential4 = new NetworkCredential(
+            "username4",
+            "password"
+        );
 
-        private static readonly NetworkCredential credential5 = new NetworkCredential("username5", "password");
-        private static readonly NetworkCredential credential6 = new NetworkCredential("username6", "password");
-        private static readonly NetworkCredential credential7 = new NetworkCredential("username7", "password");
-        private static readonly NetworkCredential credential8 = new NetworkCredential("username8", "password");
+        private static readonly NetworkCredential credential5 = new NetworkCredential(
+            "username5",
+            "password"
+        );
+        private static readonly NetworkCredential credential6 = new NetworkCredential(
+            "username6",
+            "password"
+        );
+        private static readonly NetworkCredential credential7 = new NetworkCredential(
+            "username7",
+            "password"
+        );
+        private static readonly NetworkCredential credential8 = new NetworkCredential(
+            "username8",
+            "password"
+        );
 
         private struct CredentialCacheCount
         {
@@ -54,15 +80,22 @@ namespace System.Net.Primitives.Functional.Tests
         private static CredentialCache CreateUriCredentialCache() =>
             CreateUriCredentialCacheCount().CredentialCache;
 
-        private static CredentialCacheCount CreateUriCredentialCacheCount(CredentialCache cc = null, int count = 0)
+        private static CredentialCacheCount CreateUriCredentialCacheCount(
+            CredentialCache cc = null,
+            int count = 0
+        )
         {
             cc = cc ?? new CredentialCache();
 
-            cc.Add(uriPrefix1, authenticationType1, credential1); count++;
-            cc.Add(uriPrefix1, authenticationType2, credential2); count++;
+            cc.Add(uriPrefix1, authenticationType1, credential1);
+            count++;
+            cc.Add(uriPrefix1, authenticationType2, credential2);
+            count++;
 
-            cc.Add(uriPrefix2, authenticationType1, credential3); count++;
-            cc.Add(uriPrefix2, authenticationType2, credential4); count++;
+            cc.Add(uriPrefix2, authenticationType1, credential3);
+            count++;
+            cc.Add(uriPrefix2, authenticationType2, credential4);
+            count++;
 
             return new CredentialCacheCount(cc, count);
         }
@@ -70,19 +103,30 @@ namespace System.Net.Primitives.Functional.Tests
         private static CredentialCache CreateHostPortCredentialCache() =>
             CreateHostPortCredentialCacheCount().CredentialCache;
 
-        private static CredentialCacheCount CreateHostPortCredentialCacheCount(CredentialCache cc = null, int count = 0)
+        private static CredentialCacheCount CreateHostPortCredentialCacheCount(
+            CredentialCache cc = null,
+            int count = 0
+        )
         {
             cc = cc ?? new CredentialCache();
 
-            cc.Add(host1, port1, authenticationType1, credential1); count++;
-            cc.Add(host1, port1, authenticationType2, credential2); count++;
-            cc.Add(host1, port2, authenticationType1, credential3); count++;
-            cc.Add(host1, port2, authenticationType2, credential4); count++;
+            cc.Add(host1, port1, authenticationType1, credential1);
+            count++;
+            cc.Add(host1, port1, authenticationType2, credential2);
+            count++;
+            cc.Add(host1, port2, authenticationType1, credential3);
+            count++;
+            cc.Add(host1, port2, authenticationType2, credential4);
+            count++;
 
-            cc.Add(host2, port1, authenticationType1, credential5); count++;
-            cc.Add(host2, port1, authenticationType2, credential6); count++;
-            cc.Add(host2, port2, authenticationType1, credential7); count++;
-            cc.Add(host2, port2, authenticationType2, credential8); count++;
+            cc.Add(host2, port1, authenticationType1, credential5);
+            count++;
+            cc.Add(host2, port1, authenticationType2, credential6);
+            count++;
+            cc.Add(host2, port2, authenticationType1, credential7);
+            count++;
+            cc.Add(host2, port2, authenticationType2, credential8);
+            count++;
 
             return new CredentialCacheCount(cc, count);
         }
@@ -104,34 +148,60 @@ namespace System.Net.Primitives.Functional.Tests
         public static IEnumerable<object[]> StandardAuthTypeWithNetworkCredential =>
             new[]
             {
-                new object[] {authenticationTypeNTLM, customCredential},
-                new object[] {authenticationTypeKerberos, customCredential},
-                new object[] {authenticationTypeNegotiate, customCredential},
-                new object[] {authenticationTypeBasic, customCredential},
-                new object[] {authenticationTypeDigest, customCredential},
-
-                new object[] {authenticationTypeNTLM, CredentialCache.DefaultNetworkCredentials as NetworkCredential},
-                new object[] {authenticationTypeKerberos, CredentialCache.DefaultNetworkCredentials as NetworkCredential},
-                new object[] {authenticationTypeNegotiate, CredentialCache.DefaultNetworkCredentials as NetworkCredential},
-                new object[] {authenticationTypeBasic, CredentialCache.DefaultNetworkCredentials as NetworkCredential},
-                new object[] {authenticationTypeDigest, CredentialCache.DefaultNetworkCredentials as NetworkCredential},
+                new object[] { authenticationTypeNTLM, customCredential },
+                new object[] { authenticationTypeKerberos, customCredential },
+                new object[] { authenticationTypeNegotiate, customCredential },
+                new object[] { authenticationTypeBasic, customCredential },
+                new object[] { authenticationTypeDigest, customCredential },
+                new object[]
+                {
+                    authenticationTypeNTLM,
+                    CredentialCache.DefaultNetworkCredentials as NetworkCredential,
+                },
+                new object[]
+                {
+                    authenticationTypeKerberos,
+                    CredentialCache.DefaultNetworkCredentials as NetworkCredential,
+                },
+                new object[]
+                {
+                    authenticationTypeNegotiate,
+                    CredentialCache.DefaultNetworkCredentials as NetworkCredential,
+                },
+                new object[]
+                {
+                    authenticationTypeBasic,
+                    CredentialCache.DefaultNetworkCredentials as NetworkCredential,
+                },
+                new object[]
+                {
+                    authenticationTypeDigest,
+                    CredentialCache.DefaultNetworkCredentials as NetworkCredential,
+                },
             };
 
         public static IEnumerable<object[]> CustomAuthTypeWithDefaultNetworkCredential =>
             new[]
             {
-                new object[] {authenticationType1, CredentialCache.DefaultNetworkCredentials as NetworkCredential},
-                new object[] {authenticationType2, CredentialCache.DefaultNetworkCredentials as NetworkCredential},
+                new object[]
+                {
+                    authenticationType1,
+                    CredentialCache.DefaultNetworkCredentials as NetworkCredential,
+                },
+                new object[]
+                {
+                    authenticationType2,
+                    CredentialCache.DefaultNetworkCredentials as NetworkCredential,
+                },
             };
 
         public static IEnumerable<object[]> CustomAuthTypeWithCustomNetworkCredential =>
             new[]
             {
-                new object[] {authenticationType1, customCredential},
-                new object[] {authenticationType1, customCredential},
-
-                new object[] {authenticationType2, customCredential},
-                new object[] {authenticationType2, customCredential},
+                new object[] { authenticationType1, customCredential },
+                new object[] { authenticationType1, customCredential },
+                new object[] { authenticationType2, customCredential },
+                new object[] { authenticationType2, customCredential },
             };
 
         [Fact]
@@ -160,8 +230,14 @@ namespace System.Net.Primitives.Functional.Tests
             Assert.Null(cc.GetCredential(new Uri("http://invalid.uri"), authenticationType1)); //No such uriPrefix
             Assert.Null(cc.GetCredential(uriPrefix1, "invalid-authentication-type")); //No such authenticationType
 
-            AssertExtensions.Throws<ArgumentNullException>("uriPrefix", () => cc.Add(null, "some", new NetworkCredential())); //Null uriPrefix
-            AssertExtensions.Throws<ArgumentNullException>("authType", () => cc.Add(new Uri("http://microsoft:80"), null, new NetworkCredential())); //Null authenticationType
+            AssertExtensions.Throws<ArgumentNullException>(
+                "uriPrefix",
+                () => cc.Add(null, "some", new NetworkCredential())
+            ); //Null uriPrefix
+            AssertExtensions.Throws<ArgumentNullException>(
+                "authType",
+                () => cc.Add(new Uri("http://microsoft:80"), null, new NetworkCredential())
+            ); //Null authenticationType
         }
 
         [Fact]
@@ -170,7 +246,10 @@ namespace System.Net.Primitives.Functional.Tests
             CredentialCache cc = new CredentialCache();
             cc.Add(uriPrefix1, authenticationType1, credential1);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => cc.Add(uriPrefix1, authenticationType1, credential1));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => cc.Add(uriPrefix1, authenticationType1, credential1)
+            );
         }
 
         [Fact]
@@ -198,17 +277,28 @@ namespace System.Net.Primitives.Functional.Tests
             Assert.Null(cc.GetCredential(host1, 900, authenticationType1)); //No such port
             Assert.Null(cc.GetCredential(host1, port1, "invalid-authentication-type")); //No such authenticationType
 
-            AssertExtensions.Throws<ArgumentNullException>("host", () => cc.Add(null, 500, "authenticationType", new NetworkCredential())); //Null host
-            AssertExtensions.Throws<ArgumentNullException>("authenticationType", () => cc.Add("host", 500, null, new NetworkCredential())); //Null authenticationType
+            AssertExtensions.Throws<ArgumentNullException>(
+                "host",
+                () => cc.Add(null, 500, "authenticationType", new NetworkCredential())
+            ); //Null host
+            AssertExtensions.Throws<ArgumentNullException>(
+                "authenticationType",
+                () => cc.Add("host", 500, null, new NetworkCredential())
+            ); //Null authenticationType
 
-            var exception = Record.Exception(() => cc.Add("", 500, "authenticationType", new NetworkCredential()));
+            var exception = Record.Exception(() =>
+                cc.Add("", 500, "authenticationType", new NetworkCredential())
+            );
             // On .NET Framework we get exception.ParamName as null while it is "host" on netcore
             Assert.NotNull(exception);
             Assert.True(exception is ArgumentException);
             ArgumentException ae = exception as ArgumentException;
             Assert.True(ae.ParamName == "host" || ae.ParamName == null);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => cc.Add("host", -1, "authenticationType", new NetworkCredential())); //Port < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "port",
+                () => cc.Add("host", -1, "authenticationType", new NetworkCredential())
+            ); //Port < 0
         }
 
         [Fact]
@@ -217,7 +307,10 @@ namespace System.Net.Primitives.Functional.Tests
             CredentialCache cc = new CredentialCache();
             cc.Add(host1, port1, authenticationType1, credential1);
 
-            AssertExtensions.Throws<ArgumentException>(null, () => cc.Add(host1, port1, authenticationType1, credential1));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => cc.Add(host1, port1, authenticationType1, credential1)
+            );
         }
 
         [Fact]
@@ -268,7 +361,10 @@ namespace System.Net.Primitives.Functional.Tests
             cc.Add(new Uri("http://microsoft:80/greaterpath"), authenticationType1, credential2);
             cc.Add(new Uri("http://microsoft:80/"), authenticationType1, credential1);
 
-            NetworkCredential nc = cc.GetCredential(new Uri("http://microsoft:80"), authenticationType1);
+            NetworkCredential nc = cc.GetCredential(
+                new Uri("http://microsoft:80"),
+                authenticationType1
+            );
             Assert.Equal(nc, credential2);
         }
 
@@ -277,8 +373,14 @@ namespace System.Net.Primitives.Functional.Tests
         {
             CredentialCache cc = new CredentialCache();
 
-            AssertExtensions.Throws<ArgumentNullException>("uriPrefix", () => cc.GetCredential(null, "authenticationType")); //Null uriPrefix
-            AssertExtensions.Throws<ArgumentNullException>("authType", () => cc.GetCredential(new Uri("http://microsoft:80"), null)); //Null authenticationType
+            AssertExtensions.Throws<ArgumentNullException>(
+                "uriPrefix",
+                () => cc.GetCredential(null, "authenticationType")
+            ); //Null uriPrefix
+            AssertExtensions.Throws<ArgumentNullException>(
+                "authType",
+                () => cc.GetCredential(new Uri("http://microsoft:80"), null)
+            ); //Null authenticationType
         }
 
         [Fact]
@@ -286,8 +388,14 @@ namespace System.Net.Primitives.Functional.Tests
         {
             CredentialCache cc = new CredentialCache();
 
-            AssertExtensions.Throws<ArgumentNullException>("host", () => cc.GetCredential(null, 500, "authenticationType")); //Null host
-            AssertExtensions.Throws<ArgumentNullException>("authenticationType", () => cc.GetCredential("host", 500, null)); //Null authenticationType
+            AssertExtensions.Throws<ArgumentNullException>(
+                "host",
+                () => cc.GetCredential(null, 500, "authenticationType")
+            ); //Null host
+            AssertExtensions.Throws<ArgumentNullException>(
+                "authenticationType",
+                () => cc.GetCredential("host", 500, null)
+            ); //Null authenticationType
 
             var exception = Record.Exception(() => cc.GetCredential("", 500, "authenticationType")); //Empty host
             // On .NET Framework we get exception.ParamName as null while it is "host" on netcore
@@ -296,7 +404,10 @@ namespace System.Net.Primitives.Functional.Tests
             ArgumentException ae = exception as ArgumentException;
             Assert.True(ae.ParamName == "host" || ae.ParamName == null);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("port", () => cc.GetCredential("host", -1, "authenticationType")); //Port < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "port",
+                () => cc.GetCredential("host", -1, "authenticationType")
+            ); //Port < 0
         }
 
         public static IEnumerable<object[]> GetEnumeratorWithCountTestData
@@ -351,7 +462,10 @@ namespace System.Net.Primitives.Functional.Tests
 
         [Theory]
         [MemberData(nameof(GetEnumeratorThenAddTestData))]
-        public static void GetEnumerator_MoveNextSynchronization_Invalid(CredentialCache cc, bool addUri)
+        public static void GetEnumerator_MoveNextSynchronization_Invalid(
+            CredentialCache cc,
+            bool addUri
+        )
         {
             //An InvalidOperationException is thrown when moving the enumerator
             //when a credential is added to the cache after getting the enumerator
@@ -371,7 +485,10 @@ namespace System.Net.Primitives.Functional.Tests
 
         [Theory]
         [MemberData(nameof(GetEnumeratorThenAddTestData))]
-        public static void GetEnumerator_CurrentSynchronization_Invalid(CredentialCache cc, bool addUri)
+        public static void GetEnumerator_CurrentSynchronization_Invalid(
+            CredentialCache cc,
+            bool addUri
+        )
         {
             //An InvalidOperationException is thrown when getting the current enumerated object
             //when a credential is added to the cache after getting the enumerator
@@ -438,7 +555,10 @@ namespace System.Net.Primitives.Functional.Tests
         public static void Add_UriAuthenticationType_Success(string authType, NetworkCredential nc)
         {
             // Default credentials cannot be supplied for the Basic authentication scheme.
-            if (string.Equals(authType, authenticationTypeBasic, StringComparison.OrdinalIgnoreCase) && (nc == CredentialCache.DefaultNetworkCredentials))
+            if (
+                string.Equals(authType, authenticationTypeBasic, StringComparison.OrdinalIgnoreCase)
+                && (nc == CredentialCache.DefaultNetworkCredentials)
+            )
             {
                 return;
             }
@@ -446,7 +566,13 @@ namespace System.Net.Primitives.Functional.Tests
             CredentialCache cc = new CredentialCache();
 
             // .NET Framework and .NET Core have different behaviors for Digest when default NetworkCredential is used.
-            if (string.Equals(authType, authenticationTypeDigest, StringComparison.OrdinalIgnoreCase) && (nc == CredentialCache.DefaultNetworkCredentials))
+            if (
+                string.Equals(
+                    authType,
+                    authenticationTypeDigest,
+                    StringComparison.OrdinalIgnoreCase
+                ) && (nc == CredentialCache.DefaultNetworkCredentials)
+            )
             {
                 if (PlatformDetection.IsNetFramework)
                 {
@@ -459,7 +585,10 @@ namespace System.Net.Primitives.Functional.Tests
                 {
                     // In .NET Core, WDigestAvailable will always be false (we don't support it).
                     // It will always throw ArgumentException.
-                    AssertExtensions.Throws<ArgumentException>("authType", () => cc.Add(uriPrefix1, authType, nc));
+                    AssertExtensions.Throws<ArgumentException>(
+                        "authType",
+                        () => cc.Add(uriPrefix1, authType, nc)
+                    );
                     return;
                 }
             }
@@ -470,19 +599,31 @@ namespace System.Net.Primitives.Functional.Tests
 
         [Theory]
         [MemberData(nameof(CustomAuthTypeWithDefaultNetworkCredential))]
-        public static void Add_UriCustomAuthTypeWithDefaultCredential_ThrowsArgumentException(string authType, NetworkCredential nc)
+        public static void Add_UriCustomAuthTypeWithDefaultCredential_ThrowsArgumentException(
+            string authType,
+            NetworkCredential nc
+        )
         {
             CredentialCache cc = new CredentialCache();
-            AssertExtensions.Throws<ArgumentException>("authType", () => cc.Add(uriPrefix1, authType, nc));
+            AssertExtensions.Throws<ArgumentException>(
+                "authType",
+                () => cc.Add(uriPrefix1, authType, nc)
+            );
         }
 
         [Theory]
         [MemberData(nameof(StandardAuthTypeWithNetworkCredential))]
         [MemberData(nameof(CustomAuthTypeWithCustomNetworkCredential))]
-        public static void Add_HostPortAuthenticationType_Success(string authType, NetworkCredential nc)
+        public static void Add_HostPortAuthenticationType_Success(
+            string authType,
+            NetworkCredential nc
+        )
         {
             // Default credentials cannot be supplied for the Basic authentication scheme.
-            if (string.Equals(authType, "Basic", StringComparison.OrdinalIgnoreCase) && (nc == CredentialCache.DefaultNetworkCredentials))
+            if (
+                string.Equals(authType, "Basic", StringComparison.OrdinalIgnoreCase)
+                && (nc == CredentialCache.DefaultNetworkCredentials)
+            )
             {
                 return;
             }
@@ -490,7 +631,13 @@ namespace System.Net.Primitives.Functional.Tests
             CredentialCache cc = new CredentialCache();
 
             // .NET Framework and .NET Core have different behaviors for Digest when default NetworkCredential is used.
-            if (string.Equals(authType, authenticationTypeDigest, StringComparison.OrdinalIgnoreCase) && (nc == CredentialCache.DefaultNetworkCredentials))
+            if (
+                string.Equals(
+                    authType,
+                    authenticationTypeDigest,
+                    StringComparison.OrdinalIgnoreCase
+                ) && (nc == CredentialCache.DefaultNetworkCredentials)
+            )
             {
                 if (PlatformDetection.IsNetFramework)
                 {
@@ -503,7 +650,10 @@ namespace System.Net.Primitives.Functional.Tests
                 {
                     // In .NET Core, WDigestAvailable will always be false (we don't support it).
                     // It will always throw ArgumentException.
-                    AssertExtensions.Throws<ArgumentException>("authenticationType", () => cc.Add(host1, port1, authType, nc));
+                    AssertExtensions.Throws<ArgumentException>(
+                        "authenticationType",
+                        () => cc.Add(host1, port1, authType, nc)
+                    );
                     return;
                 }
             }
@@ -514,10 +664,16 @@ namespace System.Net.Primitives.Functional.Tests
 
         [Theory]
         [MemberData(nameof(CustomAuthTypeWithDefaultNetworkCredential))]
-        public static void Add_HostPortCustomAuthTypeWithDefaultCredential_ThrowsArgumentException(string authType, NetworkCredential nc)
+        public static void Add_HostPortCustomAuthTypeWithDefaultCredential_ThrowsArgumentException(
+            string authType,
+            NetworkCredential nc
+        )
         {
             CredentialCache cc = new CredentialCache();
-            AssertExtensions.Throws<ArgumentException>("authenticationType", () => cc.Add(host1, port1, authType, nc));
+            AssertExtensions.Throws<ArgumentException>(
+                "authenticationType",
+                () => cc.Add(host1, port1, authType, nc)
+            );
         }
 
         [Fact]

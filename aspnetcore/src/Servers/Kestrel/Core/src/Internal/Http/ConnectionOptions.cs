@@ -9,5 +9,5 @@ internal enum ConnectionOptions
     None = 0,
     Close = 1,
     KeepAlive = 2,
-    Upgrade = 4
+    Upgrade = 4,
 }

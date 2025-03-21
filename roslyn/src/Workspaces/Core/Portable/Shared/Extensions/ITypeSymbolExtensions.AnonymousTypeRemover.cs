@@ -13,11 +13,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     {
         private class AnonymousTypeRemover(Compilation compilation) : SymbolVisitor<ITypeSymbol>
         {
-            public override ITypeSymbol DefaultVisit(ISymbol node)
-                => throw new NotImplementedException();
+            public override ITypeSymbol DefaultVisit(ISymbol node) =>
+                throw new NotImplementedException();
 
-            public override ITypeSymbol VisitDynamicType(IDynamicTypeSymbol symbol)
-                => symbol;
+            public override ITypeSymbol VisitDynamicType(IDynamicTypeSymbol symbol) => symbol;
 
             public override ITypeSymbol VisitArrayType(IArrayTypeSymbol symbol)
             {
@@ -61,8 +60,7 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 return compilation.CreatePointerTypeSymbol(elementType);
             }
 
-            public override ITypeSymbol VisitTypeParameter(ITypeParameterSymbol symbol)
-                => symbol;
+            public override ITypeSymbol VisitTypeParameter(ITypeParameterSymbol symbol) => symbol;
         }
     }
 }

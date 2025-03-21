@@ -101,16 +101,15 @@ namespace System.Security.Cryptography.Tests
                     taskArrays[iTask] = new byte[RandomSize];
                     byte[] taskLocal = taskArrays[iTask];
 
-                    tasks[iTask] = Task.Run(
-                        () =>
-                        {
-                            sync.WaitOne();
+                    tasks[iTask] = Task.Run(() =>
+                    {
+                        sync.WaitOne();
 
-                            for (int i = 0; i < PerTaskIterationCount; i++)
-                            {
-                                rng.GetBytes(taskLocal);
-                            }
-                        });
+                        for (int i = 0; i < PerTaskIterationCount; i++)
+                        {
+                            rng.GetBytes(taskLocal);
+                        }
+                    });
                 }
 
                 // Ready? Set() Go!
@@ -136,7 +135,10 @@ namespace System.Security.Cryptography.Tests
         {
             using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>("data", () => rng.GetNonZeroBytes(null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "data",
+                    () => rng.GetNonZeroBytes(null)
+                );
 
                 // Array should not have any zeros
                 byte[] rand = new byte[arraySize];
@@ -251,7 +253,10 @@ namespace System.Security.Cryptography.Tests
         {
             using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
             {
-                AssertExtensions.Throws<ArgumentNullException>("data", () => rng.GetNonZeroBytes(null));
+                AssertExtensions.Throws<ArgumentNullException>(
+                    "data",
+                    () => rng.GetNonZeroBytes(null)
+                );
                 GetBytes_InvalidArgs_Helper(rng);
             }
         }
@@ -269,8 +274,10 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public static void GetBytes_Int_Negative()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () =>
-                RandomNumberGenerator.GetBytes(-1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => RandomNumberGenerator.GetBytes(-1)
+            );
         }
 
         [Fact]
@@ -398,7 +405,9 @@ namespace System.Security.Cryptography.Tests
         [InlineData(-10, -11)]
         public static void GetInt32_LowerAndUpper_InvalidRange(int fromInclusive, int toExclusive)
         {
-            Assert.Throws<ArgumentException>(() => RandomNumberGenerator.GetInt32(fromInclusive, toExclusive));
+            Assert.Throws<ArgumentException>(() =>
+                RandomNumberGenerator.GetInt32(fromInclusive, toExclusive)
+            );
         }
 
         [Theory]
@@ -406,7 +415,9 @@ namespace System.Security.Cryptography.Tests
         [InlineData(-10)]
         public static void GetInt32_Upper_InvalidRange(int toExclusive)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => RandomNumberGenerator.GetInt32(toExclusive));
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                RandomNumberGenerator.GetInt32(toExclusive)
+            );
         }
 
         [Theory]
@@ -452,7 +463,10 @@ namespace System.Security.Cryptography.Tests
             int result3 = RandomNumberGenerator.GetInt32(int.MinValue, int.MaxValue);
 
             // The changes of this happening are (2^32 - 1) * 3.
-            Assert.False(result1 == result2 && result2 == result3, "Generated the same number three times in a row.");
+            Assert.False(
+                result1 == result2 && result2 == result3,
+                "Generated the same number three times in a row."
+            );
         }
 
         [Fact]
@@ -485,7 +499,6 @@ namespace System.Security.Cryptography.Tests
             VerifyAllInRange(generated, 0, 2);
             VerifyDistribution<int>(generated, 0.5);
         }
-
 
         [Fact]
         public static void GetInt32_CoinFlipOverByteBoundary()
@@ -534,7 +547,7 @@ namespace System.Security.Cryptography.Tests
         [InlineData(-257, -129)]
         [InlineData(-100, 5)]
         [InlineData(254, 512)]
-        [InlineData(-1_073_741_909, - 1_073_741_825)]
+        [InlineData(-1_073_741_909, -1_073_741_825)]
         [InlineData(65_534, 65_539)]
         [InlineData(16_777_214, 16_777_217)]
         public static void GetInt32_MaskRangeCorrect(int fromInclusive, int toExclusive)
@@ -555,30 +568,41 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public static void GetItems_Choices_Empty_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("choices",
-                () => RandomNumberGenerator.GetItems(ReadOnlySpan<int>.Empty, 6));
-            AssertExtensions.Throws<ArgumentException>("choices",
-                () => RandomNumberGenerator.GetItems(ReadOnlySpan<int>.Empty, stackalloc int[6]));
+            AssertExtensions.Throws<ArgumentException>(
+                "choices",
+                () => RandomNumberGenerator.GetItems(ReadOnlySpan<int>.Empty, 6)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "choices",
+                () => RandomNumberGenerator.GetItems(ReadOnlySpan<int>.Empty, stackalloc int[6])
+            );
         }
 
         [Fact]
         public static void GetString_Choices_Empty_ArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>("choices",
-                () => RandomNumberGenerator.GetString(ReadOnlySpan<char>.Empty, 6));
+            AssertExtensions.Throws<ArgumentException>(
+                "choices",
+                () => RandomNumberGenerator.GetString(ReadOnlySpan<char>.Empty, 6)
+            );
         }
 
         [Fact]
         public static void GetItems_NegativeLength_ArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("length",
-                () => RandomNumberGenerator.GetItems<int>(new int[1], -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "length",
+                () => RandomNumberGenerator.GetItems<int>(new int[1], -1)
+            );
         }
 
         [Fact]
         public static void GetString_NegativeLength_ArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () => RandomNumberGenerator.GetString("a", -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "length",
+                () => RandomNumberGenerator.GetString("a", -1)
+            );
         }
 
         [Fact]
@@ -619,7 +643,10 @@ namespace System.Security.Cryptography.Tests
         [Fact]
         public static void GetItems_CoinFlip_Int_RandomDistribution()
         {
-            Span<int> generated = RandomNumberGenerator.GetItems<int>(stackalloc int[] { 1, 2 }, 10_000);
+            Span<int> generated = RandomNumberGenerator.GetItems<int>(
+                stackalloc int[] { 1, 2 },
+                10_000
+            );
             VerifyAllInRange(generated, fromInclusive: 1, toExclusive: 3);
             VerifyDistribution<int>(generated, 0.5);
 
@@ -646,11 +673,17 @@ namespace System.Security.Cryptography.Tests
         {
             ReadOnlySpan<bool> choices = stackalloc bool[] { true, true, false };
             Span<bool> generated = RandomNumberGenerator.GetItems(choices, 10_000);
-            VerifyDistribution(generated, new Dictionary<bool, double>() { [true] = 0.66, [false] = 0.33 });
+            VerifyDistribution(
+                generated,
+                new Dictionary<bool, double>() { [true] = 0.66, [false] = 0.33 }
+            );
 
             generated.Clear();
             RandomNumberGenerator.GetItems(choices, generated);
-            VerifyDistribution(generated, new Dictionary<bool, double>() { [true] = 0.66, [false] = 0.33 });
+            VerifyDistribution(
+                generated,
+                new Dictionary<bool, double>() { [true] = 0.66, [false] = 0.33 }
+            );
         }
 
         [Fact]
@@ -658,11 +691,17 @@ namespace System.Security.Cryptography.Tests
         {
             ReadOnlySpan<int> choices = stackalloc int[] { 5, 5, 5, 20 };
             Span<int> generated = RandomNumberGenerator.GetItems(choices, 10_000);
-            VerifyDistribution(generated, new Dictionary<int, double>() { [5] = 0.75, [20] = 0.25 });
+            VerifyDistribution(
+                generated,
+                new Dictionary<int, double>() { [5] = 0.75, [20] = 0.25 }
+            );
 
             generated.Clear();
             RandomNumberGenerator.GetItems(choices, generated);
-            VerifyDistribution(generated, new Dictionary<int, double>() { [5] = 0.75, [20] = 0.25 });
+            VerifyDistribution(
+                generated,
+                new Dictionary<int, double>() { [5] = 0.75, [20] = 0.25 }
+            );
         }
 
         [Fact]
@@ -684,7 +723,14 @@ namespace System.Security.Cryptography.Tests
             string generated = RandomNumberGenerator.GetString(Choices, 10_000);
             VerifyDistribution<char>(
                 generated,
-                new Dictionary<char, double>() { ['c'] = 0.2, ['h'] = 0.2, ['e'] = 0.2, ['s'] = 0.4 });
+                new Dictionary<char, double>()
+                {
+                    ['c'] = 0.2,
+                    ['h'] = 0.2,
+                    ['e'] = 0.2,
+                    ['s'] = 0.4,
+                }
+            );
         }
 
         [Fact]
@@ -719,10 +765,15 @@ namespace System.Security.Cryptography.Tests
                     hashSet.Add(sample[index]);
                 }
 
-                AssertExtensions.GreaterThan(hashSet.Count, 1, $"Random character at position {index}.");
+                AssertExtensions.GreaterThan(
+                    hashSet.Count,
+                    1,
+                    $"Random character at position {index}."
+                );
                 hashSet.Clear();
             }
         }
+
         [Theory]
         [MemberData(nameof(GetHexStringLengths))]
         public static void GetHexString_Buffer_Random(int length)
@@ -747,7 +798,11 @@ namespace System.Security.Cryptography.Tests
                     hashSet.Add(sample[index]);
                 }
 
-                AssertExtensions.GreaterThan(hashSet.Count, 1, $"Random character at position {index}.");
+                AssertExtensions.GreaterThan(
+                    hashSet.Count,
+                    1,
+                    $"Random character at position {index}."
+                );
                 hashSet.Clear();
             }
         }
@@ -768,7 +823,11 @@ namespace System.Security.Cryptography.Tests
                 AssertHexString(result, spanResult, lowercase);
             }
 
-            static void AssertHexString(string allocatedString, Span<char> bufferString, bool generatedLowercase)
+            static void AssertHexString(
+                string allocatedString,
+                Span<char> bufferString,
+                bool generatedLowercase
+            )
             {
                 Assert.Equal(allocatedString.Length, bufferString.Length);
 
@@ -778,21 +837,25 @@ namespace System.Security.Cryptography.Tests
                     {
                         Assert.True(
                             char.IsAsciiHexDigitLower(bufferString[i]),
-                            $"Non-lower hex character at position {i} in string {bufferString}");
+                            $"Non-lower hex character at position {i} in string {bufferString}"
+                        );
 
                         Assert.True(
                             char.IsAsciiHexDigitLower(allocatedString[i]),
-                            $"Non-lower hex character at position {i} in string {allocatedString}");
+                            $"Non-lower hex character at position {i} in string {allocatedString}"
+                        );
                     }
                     else
                     {
                         Assert.True(
                             char.IsAsciiHexDigitUpper(bufferString[i]),
-                            $"Non-upper hex character at position {i} in string {bufferString}");
+                            $"Non-upper hex character at position {i} in string {bufferString}"
+                        );
 
                         Assert.True(
                             char.IsAsciiHexDigitUpper(allocatedString[i]),
-                            $"Non-upper hex character at position {i} in string {allocatedString}");
+                            $"Non-upper hex character at position {i} in string {allocatedString}"
+                        );
                     }
                 }
             }
@@ -881,7 +944,12 @@ namespace System.Security.Cryptography.Tests
             };
         }
 
-        private static void VerifyAllInRange<T>(ReadOnlySpan<T> numbers, T fromInclusive, T toExclusive) where T : INumber<T>
+        private static void VerifyAllInRange<T>(
+            ReadOnlySpan<T> numbers,
+            T fromInclusive,
+            T toExclusive
+        )
+            where T : INumber<T>
         {
             for (int i = 0; i < numbers.Length; i++)
             {
@@ -907,11 +975,17 @@ namespace System.Security.Cryptography.Tests
             {
                 double percentage = occurrences / (double)values.Length;
                 double actual = Math.Abs(expected - percentage);
-                Assert.True(actual < tolerance, $"Occurred number of times within threshold. Actual: {actual}");
+                Assert.True(
+                    actual < tolerance,
+                    $"Occurred number of times within threshold. Actual: {actual}"
+                );
             }
         }
 
-        private static void VerifyDistribution<T>(ReadOnlySpan<T> values, Dictionary<T, double> distribution)
+        private static void VerifyDistribution<T>(
+            ReadOnlySpan<T> values,
+            Dictionary<T, double> distribution
+        )
         {
             var observedValues = new Dictionary<T, int>(values.Length);
 
@@ -930,16 +1004,28 @@ namespace System.Security.Cryptography.Tests
                 double expected = distribution[value];
                 double percentage = occurrences / (double)values.Length;
                 double actual = Math.Abs(expected - percentage);
-                Assert.True(actual < tolerance, $"'{value}' occurred number of times within threshold. Actual: {actual}");
+                Assert.True(
+                    actual < tolerance,
+                    $"'{value}' occurred number of times within threshold. Actual: {actual}"
+                );
             }
         }
 
         private static void GetBytes_InvalidArgs_Helper(RandomNumberGenerator rng)
         {
             AssertExtensions.Throws<ArgumentNullException>("data", () => rng.GetBytes(null, 0, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => rng.GetBytes(Array.Empty<byte>(), -1, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => rng.GetBytes(Array.Empty<byte>(), 0, -1));
-            AssertExtensions.Throws<ArgumentException>(null, () => rng.GetBytes(Array.Empty<byte>(), 0, 1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "offset",
+                () => rng.GetBytes(Array.Empty<byte>(), -1, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => rng.GetBytes(Array.Empty<byte>(), 0, -1)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => rng.GetBytes(Array.Empty<byte>(), 0, 1)
+            );
             // GetBytes(null) covered in test NullInput()
         }
 

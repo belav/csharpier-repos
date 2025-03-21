@@ -25,77 +25,85 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public class ProxyStub {
-	
-		string	baseInterface;
-		string	iid;
-		string	name;
-		string	numMethods;
-		string	tlbId;
-		string	xmlBaseInterface;
-		string	xmlIID;
-		string	xmlName;
-		string	xmlNumMethods;
-		string	xmlTlbId;
-	
-		[MonoTODO]
-		public ProxyStub ()
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public string BaseInterface {
-			get { return baseInterface; }
-		}
-		
-		public string IID {
-			get { return iid; }
-		}
-		
-		public string Name {
-			get { return name; }
-		}
-		
-		public string NumMethods {
-			get { return numMethods; }
-		}
-		
-		public string TlbId {
-			get { return tlbId; }
-		}
-		
-		public string XmlBaseInterface {
-			get { return xmlBaseInterface; }
-			set { xmlBaseInterface = value; }
-		}
-		
-		public string XmlIID {
-			get { return xmlIID; }
-			set { xmlIID = value; }
-		}
-		
-		public string XmlName {
-			get { return xmlName; }
-			set { xmlName = value; }
-		}
-		
-		public string XmlNumMethods {
-			get { return xmlNumMethods; }
-			set { xmlNumMethods = value; }
-		}
-		
-		public string XmlTlbId {
-			get { return xmlTlbId; }
-			set { xmlTlbId = value; }
-		}
-	}
-}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public class ProxyStub
+    {
+        string baseInterface;
+        string iid;
+        string name;
+        string numMethods;
+        string tlbId;
+        string xmlBaseInterface;
+        string xmlIID;
+        string xmlName;
+        string xmlNumMethods;
+        string xmlTlbId;
 
+        [MonoTODO]
+        public ProxyStub()
+        {
+            throw new NotImplementedException();
+        }
+
+        public string BaseInterface
+        {
+            get { return baseInterface; }
+        }
+
+        public string IID
+        {
+            get { return iid; }
+        }
+
+        public string Name
+        {
+            get { return name; }
+        }
+
+        public string NumMethods
+        {
+            get { return numMethods; }
+        }
+
+        public string TlbId
+        {
+            get { return tlbId; }
+        }
+
+        public string XmlBaseInterface
+        {
+            get { return xmlBaseInterface; }
+            set { xmlBaseInterface = value; }
+        }
+
+        public string XmlIID
+        {
+            get { return xmlIID; }
+            set { xmlIID = value; }
+        }
+
+        public string XmlName
+        {
+            get { return xmlName; }
+            set { xmlName = value; }
+        }
+
+        public string XmlNumMethods
+        {
+            get { return xmlNumMethods; }
+            set { xmlNumMethods = value; }
+        }
+
+        public string XmlTlbId
+        {
+            get { return xmlTlbId; }
+            set { xmlTlbId = value; }
+        }
+    }
+}

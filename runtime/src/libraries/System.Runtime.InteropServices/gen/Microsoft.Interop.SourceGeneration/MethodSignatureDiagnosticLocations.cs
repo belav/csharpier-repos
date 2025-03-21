@@ -18,14 +18,17 @@ namespace Microsoft.Interop
         /// The diagnostic descriptor to use when the provided marshalling attribute is invalid.
         /// </summary>
         DiagnosticDescriptor InvalidMarshallingAttributeInfo { get; }
+
         /// <summary>
         /// The diagnostic descriptor to use when the provided configuration is not supported.
         /// </summary>
         DiagnosticDescriptor ConfigurationNotSupported { get; }
+
         /// <summary>
         /// The diagnostic descriptor to use when the provided value for a given configuration isn't supported.
         /// </summary>
         DiagnosticDescriptor ConfigurationValueNotSupported { get; }
+
         /// <summary>
         /// Gets the diagnostic to use for the given generator diagnostic, or <c>null</c> if no diagnostic should be reported to the user.
         /// </summary>
@@ -39,15 +42,26 @@ namespace Microsoft.Interop
 
     public interface ISignatureDiagnosticLocations
     {
-        DiagnosticInfo CreateDiagnosticInfo(DiagnosticDescriptor descriptor, GeneratorDiagnostic diagnostic);
+        DiagnosticInfo CreateDiagnosticInfo(
+            DiagnosticDescriptor descriptor,
+            GeneratorDiagnostic diagnostic
+        );
     }
 
-    public sealed record MethodSignatureDiagnosticLocations(string MethodIdentifier, ImmutableArray<Location> ManagedParameterLocations, Location FallbackLocation) : ISignatureDiagnosticLocations
+    public sealed record MethodSignatureDiagnosticLocations(
+        string MethodIdentifier,
+        ImmutableArray<Location> ManagedParameterLocations,
+        Location FallbackLocation
+    ) : ISignatureDiagnosticLocations
     {
         public MethodSignatureDiagnosticLocations(MethodDeclarationSyntax syntax)
-            : this(syntax.Identifier.Text, syntax.ParameterList.Parameters.Select(p => p.Identifier.GetLocation()).ToImmutableArray(), syntax.Identifier.GetLocation())
-        {
-        }
+            : this(
+                syntax.Identifier.Text,
+                syntax
+                    .ParameterList.Parameters.Select(p => p.Identifier.GetLocation())
+                    .ToImmutableArray(),
+                syntax.Identifier.GetLocation()
+            ) { }
 
         public bool Equals(MethodSignatureDiagnosticLocations other)
         {
@@ -58,11 +72,17 @@ namespace Microsoft.Interop
 
         public override int GetHashCode() => throw new UnreachableException();
 
-        public DiagnosticInfo CreateDiagnosticInfo(DiagnosticDescriptor descriptor, GeneratorDiagnostic diagnostic)
+        public DiagnosticInfo CreateDiagnosticInfo(
+            DiagnosticDescriptor descriptor,
+            GeneratorDiagnostic diagnostic
+        )
         {
             var (location, elementName) = diagnostic.TypePositionInfo switch
             {
-                { ManagedIndex: >= 0 and int index, InstanceIdentifier: string identifier } => (ManagedParameterLocations[index], identifier),
+                { ManagedIndex: >= 0 and int index, InstanceIdentifier: string identifier } => (
+                    ManagedParameterLocations[index],
+                    identifier
+                ),
                 _ => (FallbackLocation, MethodIdentifier),
             };
             return diagnostic.ToDiagnosticInfo(descriptor, location, elementName);

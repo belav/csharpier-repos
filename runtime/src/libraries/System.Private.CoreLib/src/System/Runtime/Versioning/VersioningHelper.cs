@@ -15,13 +15,17 @@ namespace System.Runtime.Versioning
         ProcessID = 0x2,
         CLRInstanceID = 0x4, // for multiple CLR's within the process
         AssemblyName = 0x8,
-        TypeName = 0x10
+        TypeName = 0x10,
     }
 
     public static partial class VersioningHelper
     {
         // These depend on the exact values given to members of the ResourceScope enum.
-        private const ResourceScope ResTypeMask = ResourceScope.Machine | ResourceScope.Process | ResourceScope.AppDomain | ResourceScope.Library;
+        private const ResourceScope ResTypeMask =
+            ResourceScope.Machine
+            | ResourceScope.Process
+            | ResourceScope.AppDomain
+            | ResourceScope.Library;
         private const ResourceScope VisibilityMask = ResourceScope.Private | ResourceScope.Assembly;
 
         public static string MakeVersionSafeName(string? name, ResourceScope from, ResourceScope to)
@@ -29,17 +33,31 @@ namespace System.Runtime.Versioning
             return MakeVersionSafeName(name, from, to, type: null);
         }
 
-        public static string MakeVersionSafeName(string? name, ResourceScope from, ResourceScope to, Type? type)
+        public static string MakeVersionSafeName(
+            string? name,
+            ResourceScope from,
+            ResourceScope to,
+            Type? type
+        )
         {
             ResourceScope fromResType = from & ResTypeMask;
             ResourceScope toResType = to & ResTypeMask;
             if (fromResType > toResType)
-                throw new ArgumentException(SR.Format(SR.Argument_ResourceScopeWrongDirection, fromResType, toResType), nameof(from));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_ResourceScopeWrongDirection, fromResType, toResType),
+                    nameof(from)
+                );
 
             SxSRequirements requires = GetRequirements(to, from);
 
-            if ((requires & (SxSRequirements.AssemblyName | SxSRequirements.TypeName)) != 0 && type == null)
-                throw new ArgumentNullException(nameof(type), SR.ArgumentNull_TypeRequiredByResourceScope);
+            if (
+                (requires & (SxSRequirements.AssemblyName | SxSRequirements.TypeName)) != 0
+                && type == null
+            )
+                throw new ArgumentNullException(
+                    nameof(type),
+                    SR.ArgumentNull_TypeRequiredByResourceScope
+                );
 
             // Add in process ID, CLR base address, and appdomain ID's.  Also, use a character identifier
             // to ensure that these can never accidentally overlap (ie, you create enough appdomains and your
@@ -87,7 +105,10 @@ namespace System.Runtime.Versioning
             return "3";
         }
 
-        private static SxSRequirements GetRequirements(ResourceScope consumeAsScope, ResourceScope calleeScope)
+        private static SxSRequirements GetRequirements(
+            ResourceScope consumeAsScope,
+            ResourceScope calleeScope
+        )
         {
             SxSRequirements requires = SxSRequirements.None;
 
@@ -105,11 +126,17 @@ namespace System.Runtime.Versioning
                             break;
 
                         case ResourceScope.AppDomain:
-                            requires |= SxSRequirements.AppDomainID | SxSRequirements.CLRInstanceID | SxSRequirements.ProcessID;
+                            requires |=
+                                SxSRequirements.AppDomainID
+                                | SxSRequirements.CLRInstanceID
+                                | SxSRequirements.ProcessID;
                             break;
 
                         default:
-                            throw new ArgumentException(SR.Format(SR.Argument_BadResourceScopeTypeBits, consumeAsScope), nameof(consumeAsScope));
+                            throw new ArgumentException(
+                                SR.Format(SR.Argument_BadResourceScopeTypeBits, consumeAsScope),
+                                nameof(consumeAsScope)
+                            );
                     }
                     break;
 
@@ -123,15 +150,18 @@ namespace System.Runtime.Versioning
                     break;
 
                 default:
-                    throw new ArgumentException(SR.Format(SR.Argument_BadResourceScopeTypeBits, calleeScope), nameof(calleeScope));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_BadResourceScopeTypeBits, calleeScope),
+                        nameof(calleeScope)
+                    );
             }
 
             switch (calleeScope & VisibilityMask)
             {
-                case ResourceScope.None:  // Public - implied
+                case ResourceScope.None: // Public - implied
                     switch (consumeAsScope & VisibilityMask)
                     {
-                        case ResourceScope.None:  // Public - implied
+                        case ResourceScope.None: // Public - implied
                             // No work
                             break;
 
@@ -144,7 +174,13 @@ namespace System.Runtime.Versioning
                             break;
 
                         default:
-                            throw new ArgumentException(SR.Format(SR.Argument_BadResourceScopeVisibilityBits, consumeAsScope), nameof(consumeAsScope));
+                            throw new ArgumentException(
+                                SR.Format(
+                                    SR.Argument_BadResourceScopeVisibilityBits,
+                                    consumeAsScope
+                                ),
+                                nameof(consumeAsScope)
+                            );
                     }
                     break;
 
@@ -158,12 +194,18 @@ namespace System.Runtime.Versioning
                     break;
 
                 default:
-                    throw new ArgumentException(SR.Format(SR.Argument_BadResourceScopeVisibilityBits, calleeScope), nameof(calleeScope));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_BadResourceScopeVisibilityBits, calleeScope),
+                        nameof(calleeScope)
+                    );
             }
 
             if (consumeAsScope == calleeScope)
             {
-                Debug.Assert(requires == SxSRequirements.None, "Computed a strange set of required resource scoping.  It's probably wrong.");
+                Debug.Assert(
+                    requires == SxSRequirements.None,
+                    "Computed a strange set of required resource scoping.  It's probably wrong."
+                );
             }
 
             return requires;

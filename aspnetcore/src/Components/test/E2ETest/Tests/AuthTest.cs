@@ -25,16 +25,16 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     public AuthTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
-        ITestOutputHelper output)
-        : this(browserFixture, serverFixture, output, ExecutionMode.Client)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : this(browserFixture, serverFixture, output, ExecutionMode.Client) { }
 
     protected AuthTest(
         BrowserFixture browserFixture,
         ToggleExecutionModeServerFixture<Program> serverFixture,
         ITestOutputHelper output,
-        ExecutionMode executionMode)
+        ExecutionMode executionMode
+    )
         : base(browserFixture, serverFixture, output)
     {
         // Normally, the E2E tests use the Blazor dev server if they are testing
@@ -43,10 +43,14 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         switch (executionMode)
         {
             case ExecutionMode.Client:
-                serverFixture.UseAspNetHost(TestServer.Program.BuildWebHost<TestServer.AuthenticationStartup>);
+                serverFixture.UseAspNetHost(
+                    TestServer.Program.BuildWebHost<TestServer.AuthenticationStartup>
+                );
                 break;
             case ExecutionMode.Server:
-                serverFixture.UseAspNetHost(TestServer.Program.BuildWebHost<TestServer.ServerAuthenticationStartup>);
+                serverFixture.UseAspNetHost(
+                    TestServer.Program.BuildWebHost<TestServer.ServerAuthenticationStartup>
+                );
                 break;
             default:
                 break;
@@ -85,8 +89,13 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         SignInAs(null, null);
         var appElement = MountAndNavigateToAuthTest(AuthorizeViewCases);
         Browser.Exists(By.CssSelector("#no-authorization-rule .not-authorized"));
-        Browser.Equal("You're not authorized, anonymous", () =>
-            appElement.FindElement(By.CssSelector("#no-authorization-rule .not-authorized")).Text);
+        Browser.Equal(
+            "You're not authorized, anonymous",
+            () =>
+                appElement
+                    .FindElement(By.CssSelector("#no-authorization-rule .not-authorized"))
+                    .Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -95,8 +104,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs("Some User", null);
         var appElement = MountAndNavigateToAuthTest(AuthorizeViewCases);
-        Browser.Equal("Welcome, Some User!", () =>
-            appElement.FindElement(By.CssSelector("#no-authorization-rule .authorized")).Text);
+        Browser.Equal(
+            "Welcome, Some User!",
+            () => appElement.FindElement(By.CssSelector("#no-authorization-rule .authorized")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -105,8 +116,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs("Some User", "IrrelevantRole,TestRole");
         var appElement = MountAndNavigateToAuthTest(AuthorizeViewCases);
-        Browser.Equal("Welcome, Some User!", () =>
-            appElement.FindElement(By.CssSelector("#authorize-role .authorized")).Text);
+        Browser.Equal(
+            "Welcome, Some User!",
+            () => appElement.FindElement(By.CssSelector("#authorize-role .authorized")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -115,8 +128,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs("Some User", "IrrelevantRole");
         var appElement = MountAndNavigateToAuthTest(AuthorizeViewCases);
-        Browser.Equal("You're not authorized, Some User", () =>
-            appElement.FindElement(By.CssSelector("#authorize-role .not-authorized")).Text);
+        Browser.Equal(
+            "You're not authorized, Some User",
+            () => appElement.FindElement(By.CssSelector("#authorize-role .not-authorized")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -125,8 +140,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs("Bert", null);
         var appElement = MountAndNavigateToAuthTest(AuthorizeViewCases);
-        Browser.Equal("Welcome, Bert!", () =>
-            appElement.FindElement(By.CssSelector("#authorize-policy .authorized")).Text);
+        Browser.Equal(
+            "Welcome, Bert!",
+            () => appElement.FindElement(By.CssSelector("#authorize-policy .authorized")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -135,8 +152,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs("Mallory", null);
         var appElement = MountAndNavigateToAuthTest(AuthorizeViewCases);
-        Browser.Equal("You're not authorized, Mallory", () =>
-            appElement.FindElement(By.CssSelector("#authorize-policy .not-authorized")).Text);
+        Browser.Equal(
+            "You're not authorized, Mallory",
+            () => appElement.FindElement(By.CssSelector("#authorize-policy .not-authorized")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -145,8 +164,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs(null, null);
         var appElement = MountAndNavigateToAuthTest(PageAllowingAnonymous);
-        Browser.Equal("Welcome to PageAllowingAnonymous!", () =>
-            appElement.FindElement(By.CssSelector("#auth-success")).Text);
+        Browser.Equal(
+            "Welcome to PageAllowingAnonymous!",
+            () => appElement.FindElement(By.CssSelector("#auth-success")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -155,8 +176,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs("Bert", null);
         var appElement = MountAndNavigateToAuthTest(PageAllowingAnonymous);
-        Browser.Equal("Welcome to PageAllowingAnonymous!", () =>
-            appElement.FindElement(By.CssSelector("#auth-success")).Text);
+        Browser.Equal(
+            "Welcome to PageAllowingAnonymous!",
+            () => appElement.FindElement(By.CssSelector("#auth-success")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -165,8 +188,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs("Bert", null);
         var appElement = MountAndNavigateToAuthTest(PageRequiringAuthorization);
-        Browser.Equal("Welcome to PageRequiringAuthorization!", () =>
-            appElement.FindElement(By.CssSelector("#auth-success")).Text);
+        Browser.Equal(
+            "Welcome to PageRequiringAuthorization!",
+            () => appElement.FindElement(By.CssSelector("#auth-success")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -175,8 +200,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs(null, null);
         var appElement = MountAndNavigateToAuthTest(PageRequiringAuthorization);
-        Browser.Equal("Sorry, anonymous, you're not authorized.", () =>
-            appElement.FindElement(By.CssSelector("#auth-failure")).Text);
+        Browser.Equal(
+            "Sorry, anonymous, you're not authorized.",
+            () => appElement.FindElement(By.CssSelector("#auth-failure")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -185,8 +212,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs("Bert", null);
         var appElement = MountAndNavigateToAuthTest(PageRequiringPolicy);
-        Browser.Equal("Welcome to PageRequiringPolicy!", () =>
-            appElement.FindElement(By.CssSelector("#auth-success")).Text);
+        Browser.Equal(
+            "Welcome to PageRequiringPolicy!",
+            () => appElement.FindElement(By.CssSelector("#auth-success")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -195,8 +224,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs("Mallory", null);
         var appElement = MountAndNavigateToAuthTest(PageRequiringPolicy);
-        Browser.Equal("Sorry, Mallory, you're not authorized.", () =>
-            appElement.FindElement(By.CssSelector("#auth-failure")).Text);
+        Browser.Equal(
+            "Sorry, Mallory, you're not authorized.",
+            () => appElement.FindElement(By.CssSelector("#auth-failure")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -205,8 +236,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs("Bert", "IrrelevantRole,TestRole");
         var appElement = MountAndNavigateToAuthTest(PageRequiringRole);
-        Browser.Equal("Welcome to PageRequiringRole!", () =>
-            appElement.FindElement(By.CssSelector("#auth-success")).Text);
+        Browser.Equal(
+            "Welcome to PageRequiringRole!",
+            () => appElement.FindElement(By.CssSelector("#auth-success")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -215,8 +248,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     {
         SignInAs("Bert", "IrrelevantRole");
         var appElement = MountAndNavigateToAuthTest(PageRequiringRole);
-        Browser.Equal("Sorry, Bert, you're not authorized.", () =>
-            appElement.FindElement(By.CssSelector("#auth-failure")).Text);
+        Browser.Equal(
+            "Sorry, Bert, you're not authorized.",
+            () => appElement.FindElement(By.CssSelector("#auth-failure")).Text
+        );
         AssertExpectedLayoutUsed();
     }
 
@@ -235,5 +270,10 @@ public class AuthTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     }
 
     private void SignInAs(string userName, string roles, bool useSeparateTab = false) =>
-        Browser.SignInAs(new Uri(_serverFixture.RootUri, "/subdir"), userName, roles, useSeparateTab);
+        Browser.SignInAs(
+            new Uri(_serverFixture.RootUri, "/subdir"),
+            userName,
+            roles,
+            useSeparateTab
+        );
 }

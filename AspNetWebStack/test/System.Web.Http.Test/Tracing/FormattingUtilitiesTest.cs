@@ -49,14 +49,16 @@ namespace System.Web.Http.Tracing
         {
             // Arrange
             Dictionary<string, object> arguments = new Dictionary<string, object>()
-                                                       {
-                                                           {"p1", 1},
-                                                           {"p2", true}
-                                                       };
+            {
+                { "p1", 1 },
+                { "p2", true },
+            };
 
-            string expected = String.Format("p1={0}, p2={1}",
-                                    FormattingUtilities.ValueToString(arguments["p1"], CultureInfo.CurrentCulture),
-                                    FormattingUtilities.ValueToString(arguments["p2"], CultureInfo.CurrentCulture));
+            string expected = String.Format(
+                "p1={0}, p2={1}",
+                FormattingUtilities.ValueToString(arguments["p1"], CultureInfo.CurrentCulture),
+                FormattingUtilities.ValueToString(arguments["p2"], CultureInfo.CurrentCulture)
+            );
 
             // Act
             string actual = FormattingUtilities.ActionArgumentsToString(arguments);
@@ -69,23 +71,44 @@ namespace System.Web.Http.Tracing
         public void ActionDescriptorToString_Formats()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> paramDescriptor1 = new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> paramDescriptor1 = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true,
+            };
             paramDescriptor1.Setup(p => p.ParameterName).Returns("p1");
             paramDescriptor1.Setup(p => p.ParameterType).Returns(typeof(int));
-            Mock<HttpParameterDescriptor> paramDescriptor2 = new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> paramDescriptor2 = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true,
+            };
             paramDescriptor2.Setup(p => p.ParameterName).Returns("p2");
             paramDescriptor2.Setup(p => p.ParameterType).Returns(typeof(bool));
 
-            Collection<HttpParameterDescriptor> parameterCollection = new Collection<HttpParameterDescriptor>(
-                new HttpParameterDescriptor[] { paramDescriptor1.Object, paramDescriptor2.Object });
-            Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>() { CallBase = true };
+            Collection<HttpParameterDescriptor> parameterCollection =
+                new Collection<HttpParameterDescriptor>(
+                    new HttpParameterDescriptor[]
+                    {
+                        paramDescriptor1.Object,
+                        paramDescriptor2.Object,
+                    }
+                );
+            Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
+            {
+                CallBase = true,
+            };
             mockActionDescriptor.Setup(a => a.GetParameters()).Returns(parameterCollection);
             mockActionDescriptor.Setup(a => a.ActionName).Returns("SampleAction");
 
-            string expected = String.Format("SampleAction({0} p1, {1} p2)", typeof(int).Name, typeof(bool).Name);
+            string expected = String.Format(
+                "SampleAction({0} p1, {1} p2)",
+                typeof(int).Name,
+                typeof(bool).Name
+            );
 
             // Act
-            string actual = FormattingUtilities.ActionDescriptorToString(mockActionDescriptor.Object);
+            string actual = FormattingUtilities.ActionDescriptorToString(
+                mockActionDescriptor.Object
+            );
 
             // Assert
             Assert.Equal(expected, actual);
@@ -96,14 +119,16 @@ namespace System.Web.Http.Tracing
         {
             // Arrange
             Dictionary<string, object> arguments = new Dictionary<string, object>()
-                                                       {
-                                                           {"p1", 1},
-                                                           {"p2", true}
-                                                       };
+            {
+                { "p1", 1 },
+                { "p2", true },
+            };
 
-            string expected = String.Format("SampleAction(p1={0}, p2={1})",
-                                    FormattingUtilities.ValueToString(arguments["p1"], CultureInfo.CurrentCulture),
-                                    FormattingUtilities.ValueToString(arguments["p2"], CultureInfo.CurrentCulture));
+            string expected = String.Format(
+                "SampleAction(p1={0}, p2={1})",
+                FormattingUtilities.ValueToString(arguments["p1"], CultureInfo.CurrentCulture),
+                FormattingUtilities.ValueToString(arguments["p2"], CultureInfo.CurrentCulture)
+            );
 
             // Act
             string actual = FormattingUtilities.ActionInvokeToString("SampleAction", arguments);
@@ -116,27 +141,51 @@ namespace System.Web.Http.Tracing
         public void ActionInvokeToString_With_ActionContext_Formats()
         {
             // Arrange
-            Mock<HttpParameterDescriptor> paramDescriptor1 = new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> paramDescriptor1 = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true,
+            };
             paramDescriptor1.Setup(p => p.ParameterName).Returns("p1");
             paramDescriptor1.Setup(p => p.ParameterType).Returns(typeof(int));
-            Mock<HttpParameterDescriptor> paramDescriptor2 = new Mock<HttpParameterDescriptor>() { CallBase = true };
+            Mock<HttpParameterDescriptor> paramDescriptor2 = new Mock<HttpParameterDescriptor>()
+            {
+                CallBase = true,
+            };
             paramDescriptor2.Setup(p => p.ParameterName).Returns("p2");
             paramDescriptor2.Setup(p => p.ParameterType).Returns(typeof(bool));
 
-            Collection<HttpParameterDescriptor> parameterCollection = new Collection<HttpParameterDescriptor>(
-                new HttpParameterDescriptor[] { paramDescriptor1.Object, paramDescriptor2.Object });
-            Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>() { CallBase = true };
+            Collection<HttpParameterDescriptor> parameterCollection =
+                new Collection<HttpParameterDescriptor>(
+                    new HttpParameterDescriptor[]
+                    {
+                        paramDescriptor1.Object,
+                        paramDescriptor2.Object,
+                    }
+                );
+            Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
+            {
+                CallBase = true,
+            };
             mockActionDescriptor.Setup(a => a.GetParameters()).Returns(parameterCollection);
             mockActionDescriptor.Setup(a => a.ActionName).Returns("SampleAction");
 
-            HttpActionContext actionContext =
-                ContextUtil.CreateActionContext(actionDescriptor: mockActionDescriptor.Object);
+            HttpActionContext actionContext = ContextUtil.CreateActionContext(
+                actionDescriptor: mockActionDescriptor.Object
+            );
             actionContext.ActionArguments["p1"] = 1;
             actionContext.ActionArguments["p2"] = true;
 
-            string expected = String.Format("SampleAction(p1={0}, p2={1})",
-                                    FormattingUtilities.ValueToString(actionContext.ActionArguments["p1"], CultureInfo.CurrentCulture),
-                                    FormattingUtilities.ValueToString(actionContext.ActionArguments["p2"], CultureInfo.CurrentCulture));
+            string expected = String.Format(
+                "SampleAction(p1={0}, p2={1})",
+                FormattingUtilities.ValueToString(
+                    actionContext.ActionArguments["p1"],
+                    CultureInfo.CurrentCulture
+                ),
+                FormattingUtilities.ValueToString(
+                    actionContext.ActionArguments["p2"],
+                    CultureInfo.CurrentCulture
+                )
+            );
 
             // Act
             string actual = FormattingUtilities.ActionInvokeToString(actionContext);
@@ -150,7 +199,10 @@ namespace System.Web.Http.Tracing
         {
             // Arrange
             MediaTypeFormatterCollection formatters = new MediaTypeFormatterCollection();
-            string expected = String.Join(", ", formatters.Select<MediaTypeFormatter, string>((f) => f.GetType().Name));
+            string expected = String.Join(
+                ", ",
+                formatters.Select<MediaTypeFormatter, string>((f) => f.GetType().Name)
+            );
 
             // Act
             string actual = FormattingUtilities.FormattersToString(formatters);
@@ -177,14 +229,20 @@ namespace System.Web.Http.Tracing
         public void ModelBinderToString_With_CompositeModelBinder_Formats()
         {
             // Arrange
-            ModelBinderProvider innerProvider1 = new SimpleModelBinderProvider(typeof(int), () => null);
+            ModelBinderProvider innerProvider1 = new SimpleModelBinderProvider(
+                typeof(int),
+                () => null
+            );
             ModelBinderProvider innerProvider2 = new ArrayModelBinderProvider();
-            CompositeModelBinderProvider compositeProvider = new CompositeModelBinderProvider(new ModelBinderProvider[] { innerProvider1, innerProvider2 });
+            CompositeModelBinderProvider compositeProvider = new CompositeModelBinderProvider(
+                new ModelBinderProvider[] { innerProvider1, innerProvider2 }
+            );
             string expected = String.Format(
-                                "{0}({1}, {2})",
-                                typeof(CompositeModelBinderProvider).Name,
-                                typeof(SimpleModelBinderProvider).Name,
-                                typeof(ArrayModelBinderProvider).Name);
+                "{0}({1}, {2})",
+                typeof(CompositeModelBinderProvider).Name,
+                typeof(SimpleModelBinderProvider).Name,
+                typeof(ArrayModelBinderProvider).Name
+            );
 
             // Act
             string actual = FormattingUtilities.ModelBinderToString(compositeProvider);
@@ -197,7 +255,11 @@ namespace System.Web.Http.Tracing
         public void ValueProviderToString_Formats()
         {
             // Arrange
-            IValueProvider provider = new ElementalValueProvider("unused", 1, CultureInfo.CurrentCulture);
+            IValueProvider provider = new ElementalValueProvider(
+                "unused",
+                1,
+                CultureInfo.CurrentCulture
+            );
             string expected = typeof(ElementalValueProvider).Name;
 
             // Act
@@ -212,17 +274,18 @@ namespace System.Web.Http.Tracing
         {
             // Arrange
             List<IValueProvider> providers = new List<IValueProvider>()
-                                                 {
-                                                    new ElementalValueProvider("unused", 1, CultureInfo.CurrentCulture),
-                                                    new NameValuePairsValueProvider(() => null, CultureInfo.CurrentCulture)
-                                                 };
+            {
+                new ElementalValueProvider("unused", 1, CultureInfo.CurrentCulture),
+                new NameValuePairsValueProvider(() => null, CultureInfo.CurrentCulture),
+            };
 
             CompositeValueProvider compositeProvider = new CompositeValueProvider(providers);
             string expected = String.Format(
-                                "{0}({1}, {2})",
-                                typeof(CompositeValueProvider).Name,
-                                typeof(ElementalValueProvider).Name,
-                                typeof(NameValuePairsValueProvider).Name);
+                "{0}({1}, {2})",
+                typeof(CompositeValueProvider).Name,
+                typeof(ElementalValueProvider).Name,
+                typeof(NameValuePairsValueProvider).Name
+            );
 
             // Act
             string actual = FormattingUtilities.ValueProviderToString(compositeProvider);
@@ -236,10 +299,10 @@ namespace System.Web.Http.Tracing
         {
             // Arrange
             Dictionary<string, object> routeDictionary = new Dictionary<string, object>()
-                                                             {
-                                                                 {"r1", "c1"},
-                                                                 {"r2", "c2"}
-                                                             };
+            {
+                { "r1", "c1" },
+                { "r2", "c2" },
+            };
             Mock<IHttpRouteData> mockRouteData = new Mock<IHttpRouteData>() { CallBase = true };
             mockRouteData.Setup(r => r.Values).Returns(routeDictionary);
             string expected = "r1:c1,r2:c2";

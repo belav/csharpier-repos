@@ -90,7 +90,7 @@ namespace CodeGenTests
                 ushort1++;
             }
 
-            // Invert to get ones-complement result 
+            // Invert to get ones-complement result
             return (ushort)~ushort1;
 
             // There should not be these kinds of zero extending 'mov' instructions here.

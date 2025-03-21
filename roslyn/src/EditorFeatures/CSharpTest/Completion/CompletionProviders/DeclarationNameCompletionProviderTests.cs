@@ -327,8 +327,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
             }
             """;
 
-        internal override Type GetCompletionProviderType()
-            => typeof(DeclarationNameCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(DeclarationNameCompletionProvider);
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/48310")]
         [InlineData("record")]
@@ -336,7 +336,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionSe
         [InlineData("record struct")]
         public async Task TreatRecordPositionalParameterAsProperty(string record)
         {
-            var markup = $@"
+            var markup =
+                $@"
 public class MyClass
 {{
 }}
@@ -351,7 +352,8 @@ public {record} R(MyClass $$
         [InlineData("struct")]
         public async Task DoNotTreatPrimaryConstructorParameterAsProperty(string record)
         {
-            var markup = $@"
+            var markup =
+                $@"
 public class MyClass
 {{
 }}
@@ -707,7 +709,7 @@ public {record} R(MyClass $$
 
             var options = new CompletionOptions()
             {
-                NamingStyleFallbackOptions = ParameterCamelCaseWithPascalCaseFallback()
+                NamingStyleFallbackOptions = ParameterCamelCaseWithPascalCaseFallback(),
             };
 
             var markup = """
@@ -717,7 +719,12 @@ public {record} R(MyClass $$
                     void Goo(CancellationToken $$
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "cancellationToken", glyph: (int)Glyph.Parameter, options: options);
+            await VerifyItemExistsAsync(
+                markup,
+                "cancellationToken",
+                glyph: (int)Glyph.Parameter,
+                options: options
+            );
             await VerifyItemIsAbsentAsync(markup, "CancellationToken", options: options);
         }
 
@@ -1170,8 +1177,20 @@ public {record} R(MyClass $$
                 """;
             var items = await GetCompletionItemsAsync(markup, SourceCodeKind.Regular);
             Assert.Equal(
-                new[] { "myClass", "my", "@class", "MyClass", "My", "Class", "GetMyClass", "GetMy", "GetClass" },
-                items.Select(item => item.DisplayText));
+                new[]
+                {
+                    "myClass",
+                    "my",
+                    "@class",
+                    "MyClass",
+                    "My",
+                    "Class",
+                    "GetMyClass",
+                    "GetMy",
+                    "GetClass",
+                },
+                items.Select(item => item.DisplayText)
+            );
         }
 
         [Fact]
@@ -1183,9 +1202,24 @@ public {record} R(MyClass $$
                     MyClass $$
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "myClass", glyph: (int)Glyph.FieldPublic, expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
-            await VerifyItemExistsAsync(markup, "MyClass", glyph: (int)Glyph.PropertyPublic, expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
-            await VerifyItemExistsAsync(markup, "GetMyClass", glyph: (int)Glyph.MethodPublic, expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "myClass",
+                glyph: (int)Glyph.FieldPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
+            await VerifyItemExistsAsync(
+                markup,
+                "MyClass",
+                glyph: (int)Glyph.PropertyPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
+            await VerifyItemExistsAsync(
+                markup,
+                "GetMyClass",
+                glyph: (int)Glyph.MethodPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact]
@@ -1200,7 +1234,12 @@ public {record} R(MyClass $$
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "myClass", glyph: (int)Glyph.Local, expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "myClass",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
             await VerifyItemIsAbsentAsync(markup, "MyClass");
             await VerifyItemIsAbsentAsync(markup, "GetMyClass");
         }
@@ -1219,6 +1258,7 @@ public {record} R(MyClass $$
             await VerifyItemExistsAsync(markup, "type");
             await VerifyItemExistsAsync(markup, "myType");
         }
+
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/20273")]
         public async Task AliasWithInterfacePattern()
         {
@@ -1580,14 +1620,15 @@ public {record} R(MyClass $$
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37366")]
         public async Task PluralizeSpan()
         {
-            var markup = """
-                using System;
+            var markup =
+                """
+                    using System;
 
-                class Test
-                {
-                    void M(Span<Test> $$) { }
-                }
-                """ + Span;
+                    class Test
+                    {
+                        void M(Span<Test> $$) { }
+                    }
+                    """ + Span;
             await VerifyItemExistsAsync(markup, "tests");
         }
 
@@ -1671,19 +1712,20 @@ public {record} R(MyClass $$
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/37366")]
         public async Task PluralizeForUnimplementedIAsyncEnumerable()
         {
-            var markup = """
-                using System.Collections.Generic;
+            var markup =
+                """
+                    using System.Collections.Generic;
 
-                class MyClass
-                {
-                    public void M(MyOwnCollection<MyClass> $$) { }
-                }
+                    class MyClass
+                    {
+                        public void M(MyOwnCollection<MyClass> $$) { }
+                    }
 
 
-                class MyOwnCollection<T> : IAsyncEnumerable<T>
-                {
-                }
-                """ + IAsyncEnumerable;
+                    class MyOwnCollection<T> : IAsyncEnumerable<T>
+                    {
+                    }
+                    """ + IAsyncEnumerable;
             await VerifyItemExistsAsync(markup, "myClasses");
         }
 
@@ -2122,7 +2164,9 @@ public {record} R(MyClass $$
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36364")]
-        [WorkItem("https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195")]
+        [WorkItem(
+            "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195"
+        )]
         public async Task TypeIsNullableStructInLocalWithNullableTypeName()
         {
             var markup = """
@@ -2142,7 +2186,9 @@ public {record} R(MyClass $$
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36364")]
-        [WorkItem("https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195")]
+        [WorkItem(
+            "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195"
+        )]
         public async Task TypeIsNullableStructInLocalWithQuestionMark()
         {
             var markup = """
@@ -2162,7 +2208,9 @@ public {record} R(MyClass $$
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36364")]
-        [WorkItem("https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195")]
+        [WorkItem(
+            "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195"
+        )]
         public async Task TypeIsNullableReferenceInLocal()
         {
             var markup = """
@@ -2182,7 +2230,9 @@ public {record} R(MyClass $$
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36364")]
-        [WorkItem("https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195")]
+        [WorkItem(
+            "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195"
+        )]
         public async Task TypeIsNullableStructInParameterWithNullableTypeName()
         {
             var markup = """
@@ -2201,7 +2251,9 @@ public {record} R(MyClass $$
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36364")]
-        [WorkItem("https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195")]
+        [WorkItem(
+            "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195"
+        )]
         public async Task TypeIsNullableStructInParameterWithQuestionMark()
         {
             var markup = """
@@ -2218,7 +2270,9 @@ public {record} R(MyClass $$
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/36364")]
-        [WorkItem("https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195")]
+        [WorkItem(
+            "https://developercommunity2.visualstudio.com/t/Regression-from-1675-Suggested-varia/1220195"
+        )]
         public async Task TypeIsNullableReferenceInParameter()
         {
             var markup = """
@@ -2357,7 +2411,7 @@ public {record} R(MyClass $$
 
             var options = new CompletionOptions()
             {
-                NamingStyleFallbackOptions = NamesEndWithSuffixPreferences()
+                NamingStyleFallbackOptions = NamesEndWithSuffixPreferences(),
             };
 
             var markup = """
@@ -2366,12 +2420,27 @@ public {record} R(MyClass $$
                     Configuration $$
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "ConfigurationField", glyph: (int)Glyph.FieldPublic,
-                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name, options: options);
-            await VerifyItemExistsAsync(markup, "ConfigurationProperty", glyph: (int)Glyph.PropertyPublic,
-                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name, options: options);
-            await VerifyItemExistsAsync(markup, "ConfigurationMethod", glyph: (int)Glyph.MethodPublic,
-                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name, options: options);
+            await VerifyItemExistsAsync(
+                markup,
+                "ConfigurationField",
+                glyph: (int)Glyph.FieldPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name,
+                options: options
+            );
+            await VerifyItemExistsAsync(
+                markup,
+                "ConfigurationProperty",
+                glyph: (int)Glyph.PropertyPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name,
+                options: options
+            );
+            await VerifyItemExistsAsync(
+                markup,
+                "ConfigurationMethod",
+                glyph: (int)Glyph.MethodPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name,
+                options: options
+            );
             await VerifyItemIsAbsentAsync(markup, "ConfigurationLocal", options: options);
             await VerifyItemIsAbsentAsync(markup, "ConfigurationLocalFunction", options: options);
         }
@@ -2385,7 +2454,7 @@ public {record} R(MyClass $$
 
             var options = new CompletionOptions()
             {
-                NamingStyleFallbackOptions = NamesEndWithSuffixPreferences()
+                NamingStyleFallbackOptions = NamesEndWithSuffixPreferences(),
             };
 
             var markup = """
@@ -2397,10 +2466,20 @@ public {record} R(MyClass $$
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "ConfigurationLocal", glyph: (int)Glyph.Local,
-                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name, options: options);
-            await VerifyItemExistsAsync(markup, "ConfigurationLocalFunction", glyph: (int)Glyph.MethodPublic,
-                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name, options: options);
+            await VerifyItemExistsAsync(
+                markup,
+                "ConfigurationLocal",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name,
+                options: options
+            );
+            await VerifyItemExistsAsync(
+                markup,
+                "ConfigurationLocalFunction",
+                glyph: (int)Glyph.MethodPublic,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name,
+                options: options
+            );
             await VerifyItemIsAbsentAsync(markup, "ConfigurationField", options: options);
             await VerifyItemIsAbsentAsync(markup, "ConfigurationMethod", options: options);
             await VerifyItemIsAbsentAsync(markup, "ConfigurationProperty", options: options);
@@ -2426,8 +2505,12 @@ public {record} R(MyClass $$
                 }
                 """;
             await VerifyItemIsAbsentAsync(markup, "classB");
-            await VerifyItemExistsAsync(markup, "classB1", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB1",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31304")]
@@ -2445,8 +2528,12 @@ public {record} R(MyClass $$
                 }
                 """;
             await VerifyItemIsAbsentAsync(markup, "classB");
-            await VerifyItemExistsAsync(markup, "classB1", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB1",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31304")]
@@ -2465,8 +2552,12 @@ public {record} R(MyClass $$
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31304")]
@@ -2485,8 +2576,12 @@ public {record} R(MyClass $$
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31304")]
@@ -2505,8 +2600,12 @@ public {record} R(MyClass $$
                 }
                 """;
             await VerifyItemIsAbsentAsync(markup, "classB");
-            await VerifyItemExistsAsync(markup, "classB1", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB1",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31304")]
@@ -2527,8 +2626,12 @@ public {record} R(MyClass $$
                 """;
             await VerifyItemIsAbsentAsync(markup, "classB");
             await VerifyItemIsAbsentAsync(markup, "classB1");
-            await VerifyItemExistsAsync(markup, "classB2", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB2",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31304")]
@@ -2550,8 +2653,12 @@ public {record} R(MyClass $$
                 }
                 """;
             await VerifyItemIsAbsentAsync(markup, "classB");
-            await VerifyItemExistsAsync(markup, "classB1", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB1",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31304")]
@@ -2566,8 +2673,12 @@ public {record} R(MyClass $$
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "classA", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classA",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/31304")]
@@ -2589,8 +2700,12 @@ public {record} R(MyClass $$
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [InlineData(LanguageVersion.CSharp7)]
@@ -2615,8 +2730,12 @@ public {record} R(MyClass $$
 
             if (languageVersion.MapSpecifiedToEffectiveVersion() >= LanguageVersion.CSharp8)
             {
-                await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Parameter,
-                        expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+                await VerifyItemExistsAsync(
+                    markup,
+                    "classB",
+                    glyph: (int)Glyph.Parameter,
+                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+                );
             }
             else
             {
@@ -2629,7 +2748,9 @@ public {record} R(MyClass $$
         [InlineData(LanguageVersion.Latest)]
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/35891")]
         [WorkItem("https://github.com/dotnet/roslyn/issues/42049")]
-        public async Task TestCompletionDoesNotUseLocalAsLocalFunctionVariable(LanguageVersion languageVersion)
+        public async Task TestCompletionDoesNotUseLocalAsLocalFunctionVariable(
+            LanguageVersion languageVersion
+        )
         {
             var source = """
                 class ClassA
@@ -2708,8 +2829,12 @@ public {record} R(MyClass $$
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Parameter,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Parameter,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35891")]
@@ -2729,8 +2854,12 @@ public {record} R(MyClass $$
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Parameter,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Parameter,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35891")]
@@ -2750,8 +2879,12 @@ public {record} R(MyClass $$
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/35891")]
@@ -2774,8 +2907,12 @@ public {record} R(MyClass $$
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "classB", glyph: (int)Glyph.Local,
-                    expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name);
+            await VerifyItemExistsAsync(
+                markup,
+                "classB",
+                glyph: (int)Glyph.Local,
+                expectedDescriptionOrNull: CSharpFeaturesResources.Suggested_name
+            );
         }
 
         [Fact]
@@ -2801,7 +2938,7 @@ public {record} R(MyClass $$
 
             var options = new CompletionOptions()
             {
-                NamingStyleFallbackOptions = MultipleCamelCaseLocalRules()
+                NamingStyleFallbackOptions = MultipleCamelCaseLocalRules(),
             };
 
             var markup = """
@@ -2814,7 +2951,12 @@ public {record} R(MyClass $$
                     }
                 }
                 """;
-            await VerifyItemExistsAsync(markup, "myClass1", glyph: (int)Glyph.Local, options: options);
+            await VerifyItemExistsAsync(
+                markup,
+                "myClass1",
+                glyph: (int)Glyph.Local,
+                options: options
+            );
         }
 
         [Fact]
@@ -2927,21 +3069,27 @@ public {record} R(MyClass $$
             return new NamingStylePreferences(
                 styles.Select(t => t.specification).ToImmutableArray(),
                 styles.Select(t => t.style).ToImmutableArray(),
-                styles.Select(t => CreateRule(t.specification, t.style)).ToImmutableArray());
+                styles.Select(t => CreateRule(t.specification, t.style)).ToImmutableArray()
+            );
 
             // Local functions
 
-            static (SymbolSpecification specification, NamingStyle style) SpecificationStyle(SymbolKindOrTypeKind kind, string name)
+            static (SymbolSpecification specification, NamingStyle style) SpecificationStyle(
+                SymbolKindOrTypeKind kind,
+                string name
+            )
             {
                 var symbolSpecification = new SymbolSpecification(
                     Guid.NewGuid(),
                     name,
-                    ImmutableArray.Create(kind));
+                    ImmutableArray.Create(kind)
+                );
 
                 var namingStyle = new NamingStyle(
                     Guid.NewGuid(),
                     name,
-                    capitalizationScheme: Capitalization.CamelCase);
+                    capitalizationScheme: Capitalization.CamelCase
+                );
 
                 return (symbolSpecification, namingStyle);
             }
@@ -2955,24 +3103,34 @@ public {record} R(MyClass $$
                 SpecificationStyle(new SymbolKindOrTypeKind(SymbolKind.Property), "Property"),
                 SpecificationStyle(new SymbolKindOrTypeKind(MethodKind.Ordinary), "Method"),
                 SpecificationStyle(new SymbolKindOrTypeKind(SymbolKind.Local), "Local"),
-                SpecificationStyle(new SymbolKindOrTypeKind(MethodKind.LocalFunction), "LocalFunction"),
+                SpecificationStyle(
+                    new SymbolKindOrTypeKind(MethodKind.LocalFunction),
+                    "LocalFunction"
+                ),
             };
 
             return new NamingStylePreferences(
                 specificationStyles.Select(t => t.specification).ToImmutableArray(),
                 specificationStyles.Select(t => t.style).ToImmutableArray(),
-                specificationStyles.Select(t => CreateRule(t.specification, t.style)).ToImmutableArray());
+                specificationStyles
+                    .Select(t => CreateRule(t.specification, t.style))
+                    .ToImmutableArray()
+            );
 
             // Local functions
 
-            static (SymbolSpecification specification, NamingStyle style) SpecificationStyle(SymbolKindOrTypeKind kind, string suffix)
+            static (SymbolSpecification specification, NamingStyle style) SpecificationStyle(
+                SymbolKindOrTypeKind kind,
+                string suffix
+            )
             {
                 var symbolSpecification = new SymbolSpecification(
                     Guid.NewGuid(),
                     name: suffix,
                     ImmutableArray.Create(kind),
                     accessibilityList: default,
-                    modifiers: default);
+                    modifiers: default
+                );
 
                 var namingStyle = new NamingStyle(
                     Guid.NewGuid(),
@@ -2980,7 +3138,8 @@ public {record} R(MyClass $$
                     capitalizationScheme: Capitalization.PascalCase,
                     prefix: "",
                     suffix: suffix,
-                    wordSeparator: "");
+                    wordSeparator: ""
+                );
 
                 return (symbolSpecification, namingStyle);
             }
@@ -2994,13 +3153,19 @@ public {record} R(MyClass $$
                     name: "parameters",
                     ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Parameter)),
                     accessibilityList: default,
-                    modifiers: default),
+                    modifiers: default
+                ),
                 new SymbolSpecification(
                     id: Guid.NewGuid(),
                     name: "fallback",
-                    ImmutableArray.Create(new SymbolKindOrTypeKind(SymbolKind.Parameter), new SymbolKindOrTypeKind(SymbolKind.Local)),
+                    ImmutableArray.Create(
+                        new SymbolKindOrTypeKind(SymbolKind.Parameter),
+                        new SymbolKindOrTypeKind(SymbolKind.Local)
+                    ),
                     accessibilityList: default,
-                    modifiers: default));
+                    modifiers: default
+                )
+            );
             var namingStyles = ImmutableArray.Create(
                 new NamingStyle(
                     Guid.NewGuid(),
@@ -3008,28 +3173,36 @@ public {record} R(MyClass $$
                     capitalizationScheme: Capitalization.CamelCase,
                     prefix: "",
                     suffix: "",
-                    wordSeparator: ""),
+                    wordSeparator: ""
+                ),
                 new NamingStyle(
                     Guid.NewGuid(),
                     name: "any_symbol",
                     capitalizationScheme: Capitalization.PascalCase,
                     prefix: "",
                     suffix: "",
-                    wordSeparator: ""));
+                    wordSeparator: ""
+                )
+            );
             return new NamingStylePreferences(
                 symbolSpecifications,
                 namingStyles,
                 namingRules: ImmutableArray.Create(
                     CreateRule(symbolSpecifications[0], namingStyles[0]),
-                    CreateRule(symbolSpecifications[1], namingStyles[1])));
+                    CreateRule(symbolSpecifications[1], namingStyles[1])
+                )
+            );
         }
 
-        private static SerializableNamingRule CreateRule(SymbolSpecification specification, NamingStyle style)
-            => new()
+        private static SerializableNamingRule CreateRule(
+            SymbolSpecification specification,
+            NamingStyle style
+        ) =>
+            new()
             {
                 SymbolSpecificationID = specification.ID,
                 NamingStyleID = style.ID,
-                EnforcementLevel = ReportDiagnostic.Error
+                EnforcementLevel = ReportDiagnostic.Error,
             };
     }
 }

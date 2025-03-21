@@ -3,26 +3,26 @@ namespace System.Workflow.ComponentModel
     #region Using directives
 
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Text;
     using System.CodeDom;
-    using System.Reflection;
-    using System.Xml.XPath;
     using System.Collections;
-    using System.Xml.Serialization;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.Collections.Specialized;
+    using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.Diagnostics;
-    using System.Globalization;
-    using System.Drawing.Design;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Serialization;
-    using System.Workflow.ComponentModel.Design;
     using System.Configuration;
+    using System.Diagnostics;
+    using System.Drawing.Design;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Text;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Workflow.ComponentModel.Serialization;
+    using System.Xml;
+    using System.Xml.Serialization;
+    using System.Xml.XPath;
     #endregion
 
     #region Bind
@@ -31,6 +31,7 @@ namespace System.Workflow.ComponentModel
     {
         [NonSerialized]
         protected bool designMode = true;
+
         [NonSerialized]
         private object syncRoot = new object();
 
@@ -38,9 +39,7 @@ namespace System.Workflow.ComponentModel
         public abstract object GetRuntimeValue(Activity activity, Type targetType);
         public abstract void SetRuntimeValue(Activity activity, object value);
 
-        protected virtual void OnRuntimeInitialized(Activity activity)
-        {
-        }
+        protected virtual void OnRuntimeInitialized(Activity activity) { }
     }
 
     #endregion
@@ -48,15 +47,13 @@ namespace System.Workflow.ComponentModel
     #region Redundant Binds
 
     #region MemberBind
-    // 
+    //
 
     internal abstract class MemberBind : BindBase
     {
         private string name = string.Empty;
 
-        protected MemberBind()
-        {
-        }
+        protected MemberBind() { }
 
         protected MemberBind(string name)
         {
@@ -66,10 +63,7 @@ namespace System.Workflow.ComponentModel
         [DefaultValue("")]
         public string Name
         {
-            get
-            {
-                return this.name;
-            }
+            get { return this.name; }
         }
 
         internal static object GetValue(MemberInfo memberInfo, object dataContext, string path)
@@ -109,7 +103,10 @@ namespace System.Workflow.ComponentModel
                         // GetValue() returns the actual value of the property.  We need the Bind object here.
                         // Find out if there is a matching dependency property and get the value throw the DP.
                         DependencyObject dependencyObject = targetObject as DependencyObject;
-                        DependencyProperty dependencyProperty = DependencyProperty.FromName(evt.Name, dependencyObject.GetType());
+                        DependencyProperty dependencyProperty = DependencyProperty.FromName(
+                            evt.Name,
+                            dependencyObject.GetType()
+                        );
                         if (dependencyProperty != null && dependencyObject != null)
                         {
                             if (dependencyObject.IsBindingSet(dependencyProperty))
@@ -132,7 +129,10 @@ namespace System.Workflow.ComponentModel
                             return;
                         }
 
-                        targetObject = (eventArgs.MemberInfo as PropertyInfo).GetValue(targetObject, null);
+                        targetObject = (eventArgs.MemberInfo as PropertyInfo).GetValue(
+                            targetObject,
+                            null
+                        );
                         break;
 
                     case PathMemberKind.IndexedProperty:
@@ -143,12 +143,21 @@ namespace System.Workflow.ComponentModel
                             return;
                         }
 
-                        targetObject = (eventArgs.MemberInfo as PropertyInfo).GetValue(targetObject, eventArgs.IndexParameters);
+                        targetObject = (eventArgs.MemberInfo as PropertyInfo).GetValue(
+                            targetObject,
+                            eventArgs.IndexParameters
+                        );
                         break;
 
-                    case PathMemberKind.Index://
+                    case PathMemberKind.Index: //
                         memberType = (eventArgs.MemberInfo as PropertyInfo).PropertyType;
-                        targetObject = (eventArgs.MemberInfo as PropertyInfo).GetValue(targetObject, BindingFlags.GetProperty, null, eventArgs.IndexParameters, CultureInfo.InvariantCulture);
+                        targetObject = (eventArgs.MemberInfo as PropertyInfo).GetValue(
+                            targetObject,
+                            BindingFlags.GetProperty,
+                            null,
+                            eventArgs.IndexParameters,
+                            CultureInfo.InvariantCulture
+                        );
                         break;
                 }
                 if (targetObject == null)
@@ -160,7 +169,9 @@ namespace System.Workflow.ComponentModel
                     }
                     else
                     {
-                        throw new InvalidOperationException(SR.GetString(SR.Error_BindPathNullValue, eventArgs.Path));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_BindPathNullValue, eventArgs.Path)
+                        );
                     }
                 }
             };
@@ -222,7 +233,10 @@ namespace System.Workflow.ComponentModel
 
                     case PathMemberKind.IndexedProperty:
                     case PathMemberKind.Index:
-                        obj = (eventArgs.MemberInfo as PropertyInfo).GetValue(parentObj, eventArgs.IndexParameters);
+                        obj = (eventArgs.MemberInfo as PropertyInfo).GetValue(
+                            parentObj,
+                            eventArgs.IndexParameters
+                        );
                         args = eventArgs.IndexParameters;
                         break;
                 }
@@ -241,7 +255,9 @@ namespace System.Workflow.ComponentModel
                     if ((memberInfo as PropertyInfo).CanWrite)
                         (memberInfo as PropertyInfo).SetValue(parentObj, value, args);
                     else
-                        throw new InvalidOperationException(SR.GetString(SR.Error_ReadOnlyField, memberInfo.Name));
+                        throw new InvalidOperationException(
+                            SR.GetString(SR.Error_ReadOnlyField, memberInfo.Name)
+                        );
                 }
             }
         }
@@ -257,11 +273,18 @@ namespace System.Workflow.ComponentModel
             if (path.Length == 0)
                 throw new ArgumentException(SR.GetString(SR.Error_EmptyPathValue), "path");
 
-            Debug.Assert(WorkflowCompilationContext.Current != null, "Can't have checkTypes set to true without a context in scope");
-            IList<AuthorizedType> authorizedTypes = WorkflowCompilationContext.Current.GetAuthorizedTypes();
+            Debug.Assert(
+                WorkflowCompilationContext.Current != null,
+                "Can't have checkTypes set to true without a context in scope"
+            );
+            IList<AuthorizedType> authorizedTypes =
+                WorkflowCompilationContext.Current.GetAuthorizedTypes();
             if (authorizedTypes == null)
             {
-                return new ValidationError(SR.GetString(SR.Error_ConfigFileMissingOrInvalid), ErrorNumbers.Error_ConfigFileMissingOrInvalid);
+                return new ValidationError(
+                    SR.GetString(SR.Error_ConfigFileMissingOrInvalid),
+                    ErrorNumbers.Error_ConfigFileMissingOrInvalid
+                );
             }
 
             Type propertyType = srcType;
@@ -281,7 +304,10 @@ namespace System.Workflow.ComponentModel
 
                 if (memberType != null && !SafeType(authorizedTypes, memberType))
                 {
-                    error = new ValidationError(SR.GetString(SR.Error_TypeNotAuthorized, memberType), ErrorNumbers.Error_TypeNotAuthorized);
+                    error = new ValidationError(
+                        SR.GetString(SR.Error_TypeNotAuthorized, memberType),
+                        ErrorNumbers.Error_TypeNotAuthorized
+                    );
                     eventArgs.Action = PathWalkAction.Stop;
                     return;
                 }
@@ -297,14 +323,19 @@ namespace System.Workflow.ComponentModel
             {
                 if (authorizedType.RegularExpression.IsMatch(referenceType.AssemblyQualifiedName))
                 {
-                    authorized = (String.Compare(bool.TrueString, authorizedType.Authorized, StringComparison.OrdinalIgnoreCase) == 0);
+                    authorized = (
+                        String.Compare(
+                            bool.TrueString,
+                            authorizedType.Authorized,
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    );
                     if (!authorized)
                         return false;
                 }
             }
             return authorized;
         }
-
 
         internal static MemberInfo GetMemberInfo(Type srcType, string path)
         {
@@ -344,14 +375,10 @@ namespace System.Workflow.ComponentModel
     {
         private string path = string.Empty;
 
-        public FieldBind()
-        {
-        }
+        public FieldBind() { }
 
         public FieldBind(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public FieldBind(string name, string path)
             : base(name)
@@ -361,14 +388,13 @@ namespace System.Workflow.ComponentModel
 
         public string Path
         {
-            get
-            {
-                return this.path;
-            }
+            get { return this.path; }
             set
             {
                 if (!this.designMode)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
 
                 this.path = value;
             }
@@ -389,7 +415,6 @@ namespace System.Workflow.ComponentModel
             throw new NotImplementedException();
         }
 
-
         protected override void OnRuntimeInitialized(Activity activity)
         {
             throw new NotImplementedException();
@@ -404,14 +429,10 @@ namespace System.Workflow.ComponentModel
     {
         private string path = string.Empty;
 
-        public PropertyBind()
-        {
-        }
+        public PropertyBind() { }
 
         public PropertyBind(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public PropertyBind(string name, string path)
             : base(name)
@@ -421,14 +442,13 @@ namespace System.Workflow.ComponentModel
 
         public string Path
         {
-            get
-            {
-                return this.path;
-            }
+            get { return this.path; }
             set
             {
                 if (!this.designMode)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
 
                 this.path = value;
             }
@@ -456,14 +476,10 @@ namespace System.Workflow.ComponentModel
     [ActivityValidator(typeof(MethodBindValidator))]
     internal sealed class MethodBind : MemberBind
     {
-        public MethodBind()
-        {
-        }
+        public MethodBind() { }
 
         public MethodBind(string name)
-            : base(name)
-        {
-        }
+            : base(name) { }
 
         public override object GetRuntimeValue(Activity activity, Type targetType)
         {
@@ -485,22 +501,32 @@ namespace System.Workflow.ComponentModel
     #endregion
 
     #region ActivityBind
-    internal enum ActivityBindTypes { Field = 1, Property = 2, Method = 3 };
+    internal enum ActivityBindTypes
+    {
+        Field = 1,
+        Property = 2,
+        Method = 3,
+    };
 
     [Browsable(true)]
     [TypeConverter(typeof(ActivityBindTypeConverter))]
     [ActivityValidator(typeof(ActivityBindValidator))]
     [DesignerSerializer(typeof(BindMarkupExtensionSerializer), typeof(WorkflowMarkupSerializer))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ActivityBind : MarkupExtension, IPropertyValueProvider
     {
         #region stuff from the former Bind
         [NonSerialized]
         private bool designMode = true;
+
         [NonSerialized]
         private bool dynamicUpdateMode = false;
+
         [NonSerialized]
         private IDictionary userData = null;
+
         [NonSerialized]
         private object syncRoot = new object();
 
@@ -512,25 +538,15 @@ namespace System.Workflow.ComponentModel
 
         internal bool DynamicUpdateMode
         {
-            get
-            {
-                return this.dynamicUpdateMode;
-            }
-            set
-            {
-                this.dynamicUpdateMode = false;
-            }
+            get { return this.dynamicUpdateMode; }
+            set { this.dynamicUpdateMode = false; }
         }
-
 
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         private bool DesignMode
         {
-            get
-            {
-                return this.designMode && !this.dynamicUpdateMode;
-            }
+            get { return this.designMode && !this.dynamicUpdateMode; }
         }
 
         [Browsable(false)]
@@ -551,7 +567,11 @@ namespace System.Workflow.ComponentModel
             }
         }
 
-        internal static object GetDataSourceObject(Activity activity, string inputName, out string name)
+        internal static object GetDataSourceObject(
+            Activity activity,
+            string inputName,
+            out string name
+        )
         {
             if (activity == null)
                 throw new ArgumentNullException("activity");
@@ -566,9 +586,7 @@ namespace System.Workflow.ComponentModel
         private string id = string.Empty;
         private string path = string.Empty;
 
-        public ActivityBind()
-        {
-        }
+        public ActivityBind() { }
 
         public ActivityBind(string name)
         {
@@ -586,14 +604,13 @@ namespace System.Workflow.ComponentModel
         [ConstructorArgument("name")]
         public string Name
         {
-            get
-            {
-                return this.id;
-            }
+            get { return this.id; }
             set
             {
                 if (!this.DesignMode)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
 
                 this.id = value;
             }
@@ -604,14 +621,13 @@ namespace System.Workflow.ComponentModel
         [TypeConverter(typeof(ActivityBindPathTypeConverter))]
         public string Path
         {
-            get
-            {
-                return this.path;
-            }
+            get { return this.path; }
             set
             {
                 if (!this.DesignMode)
-                    throw new InvalidOperationException(SR.GetString(SR.Error_CanNotChangeAtRuntime));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.Error_CanNotChangeAtRuntime)
+                    );
 
                 this.path = value;
             }
@@ -645,12 +661,27 @@ namespace System.Workflow.ComponentModel
             if (referencedActivity != null)
             {
                 //Now lets get the MemberInfo
-                MemberInfo memberInfo = ActivityBind.GetMemberInfo(referencedActivity.GetType(), Path, targetType);
+                MemberInfo memberInfo = ActivityBind.GetMemberInfo(
+                    referencedActivity.GetType(),
+                    Path,
+                    targetType
+                );
                 if (memberInfo != null)
                 {
-                    runtimeValue = ActivityBind.GetMemberValue(referencedActivity, memberInfo, Path, targetType);
-                    if (runtimeValue is ActivityBind && BindHelpers.GetMemberType(memberInfo) != typeof(ActivityBind))
-                        runtimeValue = ((ActivityBind)runtimeValue).GetRuntimeValue(referencedActivity, targetType);
+                    runtimeValue = ActivityBind.GetMemberValue(
+                        referencedActivity,
+                        memberInfo,
+                        Path,
+                        targetType
+                    );
+                    if (
+                        runtimeValue is ActivityBind
+                        && BindHelpers.GetMemberType(memberInfo) != typeof(ActivityBind)
+                    )
+                        runtimeValue = ((ActivityBind)runtimeValue).GetRuntimeValue(
+                            referencedActivity,
+                            targetType
+                        );
                 }
                 else
                 {
@@ -658,7 +689,10 @@ namespace System.Workflow.ComponentModel
                     // Note that we don't have corresponding logic for SetRuntimeValue because value should be only set
                     // at the end of the activity reference chain.
                     Activity rootActivity = Helpers.GetRootActivity(activity);
-                    DependencyProperty dependencyProperty = DependencyProperty.FromName(this.Path, rootActivity.GetType());
+                    DependencyProperty dependencyProperty = DependencyProperty.FromName(
+                        this.Path,
+                        rootActivity.GetType()
+                    );
                 }
             }
             return runtimeValue;
@@ -672,10 +706,16 @@ namespace System.Workflow.ComponentModel
             Activity referencedActivity = Helpers.ParseActivityForBind(activity, this.Name);
             if (referencedActivity != null)
             {
-                MemberInfo memberInfo = ActivityBind.GetMemberInfo(referencedActivity.GetType(), Path, null);
+                MemberInfo memberInfo = ActivityBind.GetMemberInfo(
+                    referencedActivity.GetType(),
+                    Path,
+                    null
+                );
                 if (memberInfo != null)
                 {
-                    ActivityBind bind = ActivityBind.GetMemberValue(referencedActivity, memberInfo, Path, null) as ActivityBind;
+                    ActivityBind bind =
+                        ActivityBind.GetMemberValue(referencedActivity, memberInfo, Path, null)
+                        as ActivityBind;
                     if (bind != null)
                         bind.SetRuntimeValue(referencedActivity, value);
                     else
@@ -697,26 +737,48 @@ namespace System.Workflow.ComponentModel
         private void OnRuntimeInitialized(Activity activity)
         {
             Activity dataSourceActivity = null;
-            ActivityBind activityBind = ActivityBind.GetContextBind(this, activity, out dataSourceActivity);
+            ActivityBind activityBind = ActivityBind.GetContextBind(
+                this,
+                activity,
+                out dataSourceActivity
+            );
             if (activityBind != null && dataSourceActivity != null)
             {
                 Type companionType = dataSourceActivity.GetType();
                 if (companionType != null)
                 {
-                    MemberInfo memberInfo = ActivityBind.GetMemberInfo(companionType, activityBind.Path, null);
+                    MemberInfo memberInfo = ActivityBind.GetMemberInfo(
+                        companionType,
+                        activityBind.Path,
+                        null
+                    );
                     if (memberInfo != null)
                     {
-                        if (memberInfo is FieldInfo || memberInfo is PropertyInfo || memberInfo is EventInfo)
+                        if (
+                            memberInfo is FieldInfo
+                            || memberInfo is PropertyInfo
+                            || memberInfo is EventInfo
+                        )
                         {
                             if (activityBind.UserData[UserDataKeys.BindDataSource] == null)
-                                activityBind.UserData[UserDataKeys.BindDataSource] = new Hashtable();
+                                activityBind.UserData[UserDataKeys.BindDataSource] =
+                                    new Hashtable();
 
-                            ((Hashtable)activityBind.UserData[UserDataKeys.BindDataSource])[activity.QualifiedName] = memberInfo;
+                            ((Hashtable)activityBind.UserData[UserDataKeys.BindDataSource])[
+                                activity.QualifiedName
+                            ] = memberInfo;
                             if (dataSourceActivity != null)
                             {
-                                if (activityBind.UserData[UserDataKeys.BindDataContextActivity] == null)
-                                    activityBind.UserData[UserDataKeys.BindDataContextActivity] = new Hashtable();
-                                ((Hashtable)activityBind.UserData[UserDataKeys.BindDataContextActivity])[activity.QualifiedName] = dataSourceActivity.QualifiedName;
+                                if (
+                                    activityBind.UserData[UserDataKeys.BindDataContextActivity]
+                                    == null
+                                )
+                                    activityBind.UserData[UserDataKeys.BindDataContextActivity] =
+                                        new Hashtable();
+                                (
+                                    (Hashtable)
+                                        activityBind.UserData[UserDataKeys.BindDataContextActivity]
+                                )[activity.QualifiedName] = dataSourceActivity.QualifiedName;
                             }
                         }
                     }
@@ -773,23 +835,41 @@ namespace System.Workflow.ComponentModel
         {
             MemberInfo memberInfo = MemberBind.GetMemberInfo(dataSourceType, path);
 
-            //The events can be either bound to properties or can be bound to methods, 
+            //The events can be either bound to properties or can be bound to methods,
             //There are cases where fields and methods can be of same name so in that case we either make sure for
             //in the case of event handlers we either find Property or a Method
-            if (targetType != null && typeof(Delegate).IsAssignableFrom(targetType) && (memberInfo == null || !(memberInfo is EventInfo)))
+            if (
+                targetType != null
+                && typeof(Delegate).IsAssignableFrom(targetType)
+                && (memberInfo == null || !(memberInfo is EventInfo))
+            )
             {
                 MethodInfo delegateMethod = targetType.GetMethod("Invoke");
                 List<Type> paramTypes = new List<Type>();
                 foreach (ParameterInfo paramInfo in delegateMethod.GetParameters())
                     paramTypes.Add(paramInfo.ParameterType);
 
-                memberInfo = dataSourceType.GetMethod(path, BindingFlags.Public | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy, null, paramTypes.ToArray(), null);
+                memberInfo = dataSourceType.GetMethod(
+                    path,
+                    BindingFlags.Public
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.FlattenHierarchy,
+                    null,
+                    paramTypes.ToArray(),
+                    null
+                );
             }
 
             return memberInfo;
         }
 
-        private static object GetMemberValue(object dataSourceObject, MemberInfo memberInfo, string path, Type targetType)
+        private static object GetMemberValue(
+            object dataSourceObject,
+            MemberInfo memberInfo,
+            string path,
+            Type targetType
+        )
         {
             object memberValue = null;
             if (memberInfo is FieldInfo || memberInfo is PropertyInfo || memberInfo is EventInfo)
@@ -812,7 +892,11 @@ namespace System.Workflow.ComponentModel
             }
             else if (targetType != null && memberInfo is MethodInfo)
             {
-                memberValue = Delegate.CreateDelegate(targetType, dataSourceObject, (MethodInfo)memberInfo); //the wrapper method will never be static (even if the original one is)
+                memberValue = Delegate.CreateDelegate(
+                    targetType,
+                    dataSourceObject,
+                    (MethodInfo)memberInfo
+                ); //the wrapper method will never be static (even if the original one is)
             }
             else
             {
@@ -825,7 +909,11 @@ namespace System.Workflow.ComponentModel
         //This function is used to get the outermost activity bind which is bound to actual field/property
         //The function is called in OnRuntimeInitialized and makes sure that we get outer target bind and cache
         //it so that at runtime we do not have to walk the bind chain to find the bound member
-        private static ActivityBind GetContextBind(ActivityBind activityBind, Activity activity, out Activity contextActivity)
+        private static ActivityBind GetContextBind(
+            ActivityBind activityBind,
+            Activity activity,
+            out Activity contextActivity
+        )
         {
             if (activityBind == null)
                 throw new ArgumentNullException("activityBind");
@@ -838,12 +926,19 @@ namespace System.Workflow.ComponentModel
 
             while (contextBind != null)
             {
-                Activity resolvedActivity = Helpers.ParseActivityForBind(contextActivity, contextBind.Name);
+                Activity resolvedActivity = Helpers.ParseActivityForBind(
+                    contextActivity,
+                    contextBind.Name
+                );
                 if (resolvedActivity == null)
                     return null;
 
                 object dataSourceObject = resolvedActivity;
-                MemberInfo memberInfo = ActivityBind.GetMemberInfo(dataSourceObject.GetType(), contextBind.Path, null);
+                MemberInfo memberInfo = ActivityBind.GetMemberInfo(
+                    dataSourceObject.GetType(),
+                    contextBind.Path,
+                    null
+                );
                 if (memberInfo == null)
                 {
                     contextActivity = resolvedActivity;
@@ -854,9 +949,17 @@ namespace System.Workflow.ComponentModel
                     contextActivity = resolvedActivity;
                     return contextBind;
                 }
-                else if (memberInfo is PropertyInfo && (memberInfo as PropertyInfo).PropertyType == typeof(ActivityBind) && dataSourceObject != null)
+                else if (
+                    memberInfo is PropertyInfo
+                    && (memberInfo as PropertyInfo).PropertyType == typeof(ActivityBind)
+                    && dataSourceObject != null
+                )
                 {
-                    object value = MemberBind.GetValue(memberInfo, dataSourceObject, contextBind.Path);
+                    object value = MemberBind.GetValue(
+                        memberInfo,
+                        dataSourceObject,
+                        contextBind.Path
+                    );
                     if (value is ActivityBind)
                     {
                         if (recursionContext.Contains(contextActivity, contextBind))
@@ -885,7 +988,10 @@ namespace System.Workflow.ComponentModel
         #region Helper Functions
         // This function replaces Activity1.code1 with /ParentContext.code1.  This must be done for Binds that refer to
         // to fields, properties and methods in the top level custom activity data context.
-        internal static string GetRelativePathExpression(Activity parentActivity, Activity childActivity)
+        internal static string GetRelativePathExpression(
+            Activity parentActivity,
+            Activity childActivity
+        )
         {
             string relativeBindExpression = String.Empty;
 
@@ -903,18 +1009,30 @@ namespace System.Workflow.ComponentModel
         {
             ArrayList values = new ArrayList();
 
-            if (string.Equals(context.PropertyDescriptor.Name, "Path", StringComparison.Ordinal) && !String.IsNullOrEmpty(Name) && context.PropertyDescriptor is ActivityBindPathPropertyDescriptor)
+            if (
+                string.Equals(context.PropertyDescriptor.Name, "Path", StringComparison.Ordinal)
+                && !String.IsNullOrEmpty(Name)
+                && context.PropertyDescriptor is ActivityBindPathPropertyDescriptor
+            )
             {
-                ITypeDescriptorContext outerPropertyContext = ((ActivityBindPathPropertyDescriptor)context.PropertyDescriptor).OuterPropertyContext;
+                ITypeDescriptorContext outerPropertyContext = (
+                    (ActivityBindPathPropertyDescriptor)context.PropertyDescriptor
+                ).OuterPropertyContext;
                 if (outerPropertyContext != null)
                 {
-                    Activity activity = PropertyDescriptorUtils.GetComponent(outerPropertyContext) as Activity;
+                    Activity activity =
+                        PropertyDescriptorUtils.GetComponent(outerPropertyContext) as Activity;
                     if (activity != null)
                     {
                         Activity targetActivity = Helpers.ParseActivityForBind(activity, Name);
                         if (targetActivity != null)
                         {
-                            foreach (MemberInfo memberInfo in ActivityBindPropertyDescriptor.GetBindableMembers(targetActivity, outerPropertyContext))
+                            foreach (
+                                MemberInfo memberInfo in ActivityBindPropertyDescriptor.GetBindableMembers(
+                                    targetActivity,
+                                    outerPropertyContext
+                                )
+                            )
                                 values.Add(memberInfo.Name);
                         }
                     }
@@ -974,24 +1092,36 @@ namespace System.Workflow.ComponentModel
     #region BindHelpers
     internal static class BindHelpers
     {
-        internal static Type GetBaseType(IServiceProvider serviceProvider, PropertyValidationContext validationContext)
+        internal static Type GetBaseType(
+            IServiceProvider serviceProvider,
+            PropertyValidationContext validationContext
+        )
         {
             Type type = null;
             if (validationContext.Property is PropertyInfo)
             {
-                type = Helpers.GetBaseType(validationContext.Property as PropertyInfo, validationContext.PropertyOwner, serviceProvider);
+                type = Helpers.GetBaseType(
+                    validationContext.Property as PropertyInfo,
+                    validationContext.PropertyOwner,
+                    serviceProvider
+                );
             }
             else if (validationContext.Property is DependencyProperty)
             {
                 //
-                DependencyProperty dependencyProperty = validationContext.Property as DependencyProperty;
+                DependencyProperty dependencyProperty =
+                    validationContext.Property as DependencyProperty;
                 if (dependencyProperty != null)
                 {
                     if (type == null)
                     {
-                        IDynamicPropertyTypeProvider basetypeProvider = validationContext.PropertyOwner as IDynamicPropertyTypeProvider;
+                        IDynamicPropertyTypeProvider basetypeProvider =
+                            validationContext.PropertyOwner as IDynamicPropertyTypeProvider;
                         if (basetypeProvider != null)
-                            type = basetypeProvider.GetPropertyType(serviceProvider, dependencyProperty.Name);
+                            type = basetypeProvider.GetPropertyType(
+                                serviceProvider,
+                                dependencyProperty.Name
+                            );
                     }
 
                     if (type == null)
@@ -1002,18 +1132,29 @@ namespace System.Workflow.ComponentModel
             return type;
         }
 
-        internal static AccessTypes GetAccessType(IServiceProvider serviceProvider, PropertyValidationContext validationContext)
+        internal static AccessTypes GetAccessType(
+            IServiceProvider serviceProvider,
+            PropertyValidationContext validationContext
+        )
         {
             AccessTypes accessType = AccessTypes.Read;
             if (validationContext.Property is PropertyInfo)
             {
-                accessType = Helpers.GetAccessType(validationContext.Property as PropertyInfo, validationContext.PropertyOwner, serviceProvider);
+                accessType = Helpers.GetAccessType(
+                    validationContext.Property as PropertyInfo,
+                    validationContext.PropertyOwner,
+                    serviceProvider
+                );
             }
             else if (validationContext.Property is DependencyProperty)
             {
-                IDynamicPropertyTypeProvider basetypeProvider = validationContext.PropertyOwner as IDynamicPropertyTypeProvider;
+                IDynamicPropertyTypeProvider basetypeProvider =
+                    validationContext.PropertyOwner as IDynamicPropertyTypeProvider;
                 if (basetypeProvider != null)
-                    accessType = basetypeProvider.GetAccessType(serviceProvider, ((DependencyProperty)validationContext.Property).Name);
+                    accessType = basetypeProvider.GetAccessType(
+                        serviceProvider,
+                        ((DependencyProperty)validationContext.Property).Name
+                    );
             }
 
             return accessType;
@@ -1057,8 +1198,11 @@ namespace System.Workflow.ComponentModel
                             //we should throw only if we are at the runtime
                             if (!refActivity.DesignMode)
                             {
-                                TargetInvocationException targetInvocationException = exception as TargetInvocationException;
-                                throw (targetInvocationException != null) ? targetInvocationException.InnerException : exception;
+                                TargetInvocationException targetInvocationException =
+                                    exception as TargetInvocationException;
+                                throw (targetInvocationException != null)
+                                    ? targetInvocationException.InnerException
+                                    : exception;
                             }
                         }
                         break;
@@ -1068,13 +1212,20 @@ namespace System.Workflow.ComponentModel
 
                         // GetValue() returns the actual value of the property.  We need the Bind object here.
                         // Find out if there is a matching dependency property and get the value throw the DP.
-                        DependencyProperty eventDependencyProperty = DependencyProperty.FromName(evt.Name, value.GetType());
+                        DependencyProperty eventDependencyProperty = DependencyProperty.FromName(
+                            evt.Name,
+                            value.GetType()
+                        );
                         if (eventDependencyProperty != null && value is DependencyObject)
                         {
                             if ((value as DependencyObject).IsBindingSet(eventDependencyProperty))
-                                value = (value as DependencyObject).GetBinding(eventDependencyProperty);
+                                value = (value as DependencyObject).GetBinding(
+                                    eventDependencyProperty
+                                );
                             else
-                                value = (value as DependencyObject).GetHandler(eventDependencyProperty);
+                                value = (value as DependencyObject).GetHandler(
+                                    eventDependencyProperty
+                                );
                         }
                         break;
 
@@ -1087,13 +1238,23 @@ namespace System.Workflow.ComponentModel
 
                         // GetValue() returns the actual value of the property.  We need the Bind object here.
                         // Find out if there is a matching dependency property and get the value throw the DP.
-                        DependencyProperty dependencyProperty = DependencyProperty.FromName(eventArgs.MemberInfo.Name, value.GetType());
-                        if (dependencyProperty != null && value is DependencyObject && (value as DependencyObject).IsBindingSet(dependencyProperty))
+                        DependencyProperty dependencyProperty = DependencyProperty.FromName(
+                            eventArgs.MemberInfo.Name,
+                            value.GetType()
+                        );
+                        if (
+                            dependencyProperty != null
+                            && value is DependencyObject
+                            && (value as DependencyObject).IsBindingSet(dependencyProperty)
+                        )
                             value = (value as DependencyObject).GetBinding(dependencyProperty);
                         else
                             try
                             {
-                                value = (eventArgs.MemberInfo as PropertyInfo).GetValue(value, null);
+                                value = (eventArgs.MemberInfo as PropertyInfo).GetValue(
+                                    value,
+                                    null
+                                );
                             }
                             catch (Exception exception)
                             {
@@ -1104,8 +1265,11 @@ namespace System.Workflow.ComponentModel
                                 //we should throw only if we are at the runtime
                                 if (!refActivity.DesignMode)
                                 {
-                                    TargetInvocationException targetInvocationException = exception as TargetInvocationException;
-                                    throw (targetInvocationException != null) ? targetInvocationException.InnerException : exception;
+                                    TargetInvocationException targetInvocationException =
+                                        exception as TargetInvocationException;
+                                    throw (targetInvocationException != null)
+                                        ? targetInvocationException.InnerException
+                                        : exception;
                                 }
                             }
                         break;
@@ -1114,7 +1278,13 @@ namespace System.Workflow.ComponentModel
                     case PathMemberKind.Index:
                         try
                         {
-                            value = (eventArgs.MemberInfo as PropertyInfo).GetValue(value, BindingFlags.GetProperty, null, eventArgs.IndexParameters, CultureInfo.InvariantCulture);
+                            value = (eventArgs.MemberInfo as PropertyInfo).GetValue(
+                                value,
+                                BindingFlags.GetProperty,
+                                null,
+                                eventArgs.IndexParameters,
+                                CultureInfo.InvariantCulture
+                            );
                         }
                         catch (Exception exception)
                         {
@@ -1125,8 +1295,11 @@ namespace System.Workflow.ComponentModel
                             //we should throw only if we are at the runtime
                             if (!refActivity.DesignMode)
                             {
-                                TargetInvocationException targetInvocationException = exception as TargetInvocationException;
-                                throw (targetInvocationException != null) ? targetInvocationException.InnerException : exception;
+                                TargetInvocationException targetInvocationException =
+                                    exception as TargetInvocationException;
+                                throw (targetInvocationException != null)
+                                    ? targetInvocationException.InnerException
+                                    : exception;
                             }
                         }
                         break;
@@ -1136,13 +1309,19 @@ namespace System.Workflow.ComponentModel
                 //do not unwrap if the property/field is itself of type ActivityBind
                 //we should not unwrap the latest ActivityBind though - only intermediate ones
                 //avoid circular reference problems with the BindRecursionContext
-                if (value is ActivityBind && !eventArgs.LastMemberInThePath && GetMemberType(eventArgs.MemberInfo) != typeof(ActivityBind))
+                if (
+                    value is ActivityBind
+                    && !eventArgs.LastMemberInThePath
+                    && GetMemberType(eventArgs.MemberInfo) != typeof(ActivityBind)
+                )
                 {
                     while (value is ActivityBind)
                     {
                         ActivityBind activityBind = value as ActivityBind;
                         if (recursionContext.Contains(refActivity, activityBind))
-                            throw new InvalidOperationException(SR.GetString(SR.Bind_ActivityDataSourceRecursionDetected));
+                            throw new InvalidOperationException(
+                                SR.GetString(SR.Bind_ActivityDataSourceRecursionDetected)
+                            );
 
                         recursionContext.Add(refActivity, activityBind);
                         value = activityBind.GetRuntimeValue(refActivity);
@@ -1156,7 +1335,11 @@ namespace System.Workflow.ComponentModel
                 return null;
         }
 
-        internal static PropertyInfo GetMatchedPropertyInfo(Type memberType, string[] aryArgName, object[] args)
+        internal static PropertyInfo GetMatchedPropertyInfo(
+            Type memberType,
+            string[] aryArgName,
+            object[] args
+        )
         {
             if (memberType == null)
                 throw new ArgumentNullException("memberType");
@@ -1171,7 +1354,13 @@ namespace System.Workflow.ComponentModel
             {
                 MemberInfo[] getMember = memberType.GetMember("Get"); //arrays will always implement that
                 MemberInfo[] setMember = memberType.GetMember("Set"); //arrays will always implement that
-                PropertyInfo getProperty = new ActivityBindPropertyInfo(memberType, getMember[0] as MethodInfo, setMember[0] as MethodInfo, string.Empty, null);
+                PropertyInfo getProperty = new ActivityBindPropertyInfo(
+                    memberType,
+                    getMember[0] as MethodInfo,
+                    setMember[0] as MethodInfo,
+                    string.Empty,
+                    null
+                );
                 aryMembers[1] = new MemberInfo[] { getProperty };
             }
 
@@ -1191,10 +1380,13 @@ namespace System.Workflow.ComponentModel
                 }
             }
             return null;
-
         }
 
-        internal static bool MatchIndexerParameters(PropertyInfo propertyInfo, string[] argNames, object[] args)
+        internal static bool MatchIndexerParameters(
+            PropertyInfo propertyInfo,
+            string[] argNames,
+            object[] args
+        )
         {
             if (propertyInfo == null)
                 throw new ArgumentNullException("propertyInfo");
@@ -1216,10 +1408,18 @@ namespace System.Workflow.ComponentModel
                 {
                     object arg = null;
                     string argName = argNames[index].Trim();
-                    if (paramType == typeof(String) && argName.StartsWith("\"", StringComparison.Ordinal) && argName.EndsWith("\"", StringComparison.Ordinal))
+                    if (
+                        paramType == typeof(String)
+                        && argName.StartsWith("\"", StringComparison.Ordinal)
+                        && argName.EndsWith("\"", StringComparison.Ordinal)
+                    )
                         arg = argName.Substring(1, argName.Length - 2).Trim();
                     else if (paramType == typeof(System.Int32))
-                        arg = Convert.ChangeType(argName, typeof(System.Int32), CultureInfo.InvariantCulture);
+                        arg = Convert.ChangeType(
+                            argName,
+                            typeof(System.Int32),
+                            CultureInfo.InvariantCulture
+                        );
 
                     if (arg != null)
                         args.SetValue(arg, index);
@@ -1262,8 +1462,21 @@ namespace System.Workflow.ComponentModel
     #endregion
 
     #region Class PathWalker
-    internal enum PathMemberKind { Field, Event, Property, IndexedProperty, Index }
-    internal enum PathWalkAction { Continue, Stop, Cancel }; //stop returns true, while cancel returns false
+    internal enum PathMemberKind
+    {
+        Field,
+        Event,
+        Property,
+        IndexedProperty,
+        Index,
+    }
+
+    internal enum PathWalkAction
+    {
+        Continue,
+        Stop,
+        Cancel,
+    }; //stop returns true, while cancel returns false
 
     internal class PathMemberInfoEventArgs : EventArgs
     {
@@ -1275,7 +1488,13 @@ namespace System.Workflow.ComponentModel
         private PathWalkAction action = PathWalkAction.Continue;
         private bool lastMemberInThePath = false;
 
-        public PathMemberInfoEventArgs(string path, Type parentType, MemberInfo memberInfo, PathMemberKind memberKind, bool lastMemberInThePath)
+        public PathMemberInfoEventArgs(
+            string path,
+            Type parentType,
+            MemberInfo memberInfo,
+            PathMemberKind memberKind,
+            bool lastMemberInThePath
+        )
         {
             if (string.IsNullOrEmpty(path))
                 throw new ArgumentNullException("path");
@@ -1291,7 +1510,14 @@ namespace System.Workflow.ComponentModel
             this.lastMemberInThePath = lastMemberInThePath;
         }
 
-        public PathMemberInfoEventArgs(string path, Type parentType, MemberInfo memberInfo, PathMemberKind memberKind, bool lastMemberInThePath, object[] indexParameters)
+        public PathMemberInfoEventArgs(
+            string path,
+            Type parentType,
+            MemberInfo memberInfo,
+            PathMemberKind memberKind,
+            bool lastMemberInThePath,
+            object[] indexParameters
+        )
             : this(path, parentType, memberInfo, memberKind, lastMemberInThePath)
         {
             this.indexParameters = indexParameters;
@@ -1301,6 +1527,7 @@ namespace System.Workflow.ComponentModel
         {
             get { return this.path; }
         }
+
         //public Type ParentType
         //{
         //    get { return this.parentType; }
@@ -1363,14 +1590,38 @@ namespace System.Workflow.ComponentModel
         private static MemberInfo[] PopulateMembers(Type type, string memberName)
         {
             List<MemberInfo> members = new List<MemberInfo>();
-            members.AddRange(type.GetMember(memberName, MemberTypes.Field | MemberTypes.Property | MemberTypes.Event | MemberTypes.Method, BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance | BindingFlags.FlattenHierarchy));
+            members.AddRange(
+                type.GetMember(
+                    memberName,
+                    MemberTypes.Field
+                        | MemberTypes.Property
+                        | MemberTypes.Event
+                        | MemberTypes.Method,
+                    BindingFlags.Public
+                        | BindingFlags.Static
+                        | BindingFlags.Instance
+                        | BindingFlags.FlattenHierarchy
+                )
+            );
 
             if (type.IsInterface)
             {
                 Type[] interfaces = type.GetInterfaces();
                 foreach (Type implementedInterface in interfaces)
                 {
-                    members.AddRange(implementedInterface.GetMember(memberName, MemberTypes.Field | MemberTypes.Property | MemberTypes.Event | MemberTypes.Method, BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance | BindingFlags.FlattenHierarchy));
+                    members.AddRange(
+                        implementedInterface.GetMember(
+                            memberName,
+                            MemberTypes.Field
+                                | MemberTypes.Property
+                                | MemberTypes.Event
+                                | MemberTypes.Method,
+                            BindingFlags.Public
+                                | BindingFlags.Static
+                                | BindingFlags.Instance
+                                | BindingFlags.FlattenHierarchy
+                        )
+                    );
                 }
             }
 
@@ -1403,8 +1654,14 @@ namespace System.Workflow.ComponentModel
                     return false;
                 }
 
-                string additionalPath = (info.type == SourceValueType.Property) ? info.name : "[" + info.name + "]";
-                string newPath = (string.IsNullOrEmpty(currentPath)) ? additionalPath : currentPath + ((info.type == SourceValueType.Property) ? "." : string.Empty) + additionalPath;
+                string additionalPath =
+                    (info.type == SourceValueType.Property) ? info.name : "[" + info.name + "]";
+                string newPath =
+                    (string.IsNullOrEmpty(currentPath))
+                        ? additionalPath
+                        : currentPath
+                            + ((info.type == SourceValueType.Property) ? "." : string.Empty)
+                            + additionalPath;
 
                 Type newPropertyType = null;
                 MemberInfo newMemberInfo = null;
@@ -1426,7 +1683,13 @@ namespace System.Workflow.ComponentModel
                         {
                             if (MemberFound != null)
                             {
-                                PathMemberInfoEventArgs args = new PathMemberInfoEventArgs(newPath, propertyType, newMemberInfo, PathMemberKind.Event, i == pathInfo.Count - 1);
+                                PathMemberInfoEventArgs args = new PathMemberInfoEventArgs(
+                                    newPath,
+                                    propertyType,
+                                    newMemberInfo,
+                                    PathMemberKind.Event,
+                                    i == pathInfo.Count - 1
+                                );
                                 MemberFound(this, args);
 
                                 if (args.Action == PathWalkAction.Cancel)
@@ -1444,27 +1707,51 @@ namespace System.Workflow.ComponentModel
                             PropertyInfo memberPropertyInfo = newMemberInfo as PropertyInfo;
                             MethodInfo getterMethod = memberPropertyInfo.GetGetMethod();
                             MethodInfo setterMethod = memberPropertyInfo.GetSetMethod();
-                            ActivityBindPropertyInfo properyInfo = new ActivityBindPropertyInfo(propertyType, getterMethod, setterMethod, memberPropertyInfo.Name, memberPropertyInfo);
+                            ActivityBindPropertyInfo properyInfo = new ActivityBindPropertyInfo(
+                                propertyType,
+                                getterMethod,
+                                setterMethod,
+                                memberPropertyInfo.Name,
+                                memberPropertyInfo
+                            );
 
                             newPropertyType = properyInfo.PropertyType;
                             ParameterInfo[] parameters = properyInfo.GetIndexParameters();
                             if (parameters.Length > 0)
                             {
                                 //need to check that the next parsed element is an indexer
-                                if (i < pathInfo.Count - 1 && pathInfo[i + 1].type == SourceValueType.Indexer && !string.IsNullOrEmpty(pathInfo[i + 1].name))
+                                if (
+                                    i < pathInfo.Count - 1
+                                    && pathInfo[i + 1].type == SourceValueType.Indexer
+                                    && !string.IsNullOrEmpty(pathInfo[i + 1].name)
+                                )
                                 {
                                     string[] arrayArgName = pathInfo[i + 1].name.Split(',');
                                     object[] arguments = new object[arrayArgName.Length];
 
                                     //match the number/type of parameters from the following indexer item
-                                    if (BindHelpers.MatchIndexerParameters(properyInfo, arrayArgName, arguments))
+                                    if (
+                                        BindHelpers.MatchIndexerParameters(
+                                            properyInfo,
+                                            arrayArgName,
+                                            arguments
+                                        )
+                                    )
                                     {
                                         newPath += "[" + pathInfo[i + 1].name + "]";
 
                                         //indexer property, uses two of the parsed array elements
                                         if (MemberFound != null)
                                         {
-                                            PathMemberInfoEventArgs args = new PathMemberInfoEventArgs(newPath, propertyType, properyInfo, PathMemberKind.IndexedProperty, i == pathInfo.Count - 2, arguments);
+                                            PathMemberInfoEventArgs args =
+                                                new PathMemberInfoEventArgs(
+                                                    newPath,
+                                                    propertyType,
+                                                    properyInfo,
+                                                    PathMemberKind.IndexedProperty,
+                                                    i == pathInfo.Count - 2,
+                                                    arguments
+                                                );
                                             MemberFound(this, args);
 
                                             if (args.Action == PathWalkAction.Cancel)
@@ -1480,7 +1767,10 @@ namespace System.Workflow.ComponentModel
                                     {
                                         //parameters didn't match
                                         if (PathErrorFound != null)
-                                            PathErrorFound(this, new PathErrorInfoEventArgs(info, currentPath));
+                                            PathErrorFound(
+                                                this,
+                                                new PathErrorInfoEventArgs(info, currentPath)
+                                            );
 
                                         return false;
                                     }
@@ -1489,7 +1779,10 @@ namespace System.Workflow.ComponentModel
                                 {
                                     //trailing index is missing or empty for the indexed property
                                     if (PathErrorFound != null)
-                                        PathErrorFound(this, new PathErrorInfoEventArgs(info, currentPath));
+                                        PathErrorFound(
+                                            this,
+                                            new PathErrorInfoEventArgs(info, currentPath)
+                                        );
 
                                     return false;
                                 }
@@ -1499,7 +1792,13 @@ namespace System.Workflow.ComponentModel
                                 //a regular property
                                 if (MemberFound != null)
                                 {
-                                    PathMemberInfoEventArgs args = new PathMemberInfoEventArgs(newPath, propertyType, properyInfo, PathMemberKind.Property, i == pathInfo.Count - 1);
+                                    PathMemberInfoEventArgs args = new PathMemberInfoEventArgs(
+                                        newPath,
+                                        propertyType,
+                                        properyInfo,
+                                        PathMemberKind.Property,
+                                        i == pathInfo.Count - 1
+                                    );
                                     MemberFound(this, args);
 
                                     if (args.Action == PathWalkAction.Cancel)
@@ -1514,7 +1813,13 @@ namespace System.Workflow.ComponentModel
                             //that would be a field
                             if (MemberFound != null)
                             {
-                                PathMemberInfoEventArgs args = new PathMemberInfoEventArgs(newPath, propertyType, newMemberInfo, PathMemberKind.Field, i == pathInfo.Count - 1);
+                                PathMemberInfoEventArgs args = new PathMemberInfoEventArgs(
+                                    newPath,
+                                    propertyType,
+                                    newMemberInfo,
+                                    PathMemberKind.Field,
+                                    i == pathInfo.Count - 1
+                                );
                                 MemberFound(this, args);
 
                                 if (args.Action == PathWalkAction.Cancel)
@@ -1534,12 +1839,23 @@ namespace System.Workflow.ComponentModel
                             string[] arrayArgName = info.name.Split(',');
                             object[] arguments = new object[arrayArgName.Length];
 
-                            PropertyInfo arrayPropertyInfo = BindHelpers.GetMatchedPropertyInfo(propertyType, arrayArgName, arguments);
+                            PropertyInfo arrayPropertyInfo = BindHelpers.GetMatchedPropertyInfo(
+                                propertyType,
+                                arrayArgName,
+                                arguments
+                            );
                             if (arrayPropertyInfo != null)
                             {
                                 if (MemberFound != null)
                                 {
-                                    PathMemberInfoEventArgs args = new PathMemberInfoEventArgs(newPath, propertyType, arrayPropertyInfo, PathMemberKind.Index, i == pathInfo.Count - 1, arguments);
+                                    PathMemberInfoEventArgs args = new PathMemberInfoEventArgs(
+                                        newPath,
+                                        propertyType,
+                                        arrayPropertyInfo,
+                                        PathMemberKind.Index,
+                                        i == pathInfo.Count - 1,
+                                        arguments
+                                    );
                                     MemberFound(this, args);
 
                                     if (args.Action == PathWalkAction.Cancel)
@@ -1556,7 +1872,10 @@ namespace System.Workflow.ComponentModel
                             {
                                 //did not mach number/type of arguments
                                 if (PathErrorFound != null)
-                                    PathErrorFound(this, new PathErrorInfoEventArgs(info, currentPath));
+                                    PathErrorFound(
+                                        this,
+                                        new PathErrorInfoEventArgs(info, currentPath)
+                                    );
 
                                 return false;
                             }
@@ -1591,7 +1910,13 @@ namespace System.Workflow.ComponentModel
         private string propertyName;
         private PropertyInfo originalPropertyInfo; //in vb fields get returned as properties
 
-        public ActivityBindPropertyInfo(Type declaringType, MethodInfo getMethod, MethodInfo setMethod, string propertyName, PropertyInfo originalPropertyInfo)
+        public ActivityBindPropertyInfo(
+            Type declaringType,
+            MethodInfo getMethod,
+            MethodInfo setMethod,
+            string propertyName,
+            PropertyInfo originalPropertyInfo
+        )
         {
             if (declaringType == null)
                 throw new ArgumentNullException("declaringType");
@@ -1643,10 +1968,21 @@ namespace System.Workflow.ComponentModel
                 return new ParameterInfo[0];
         }
 
-        public override object GetValue(object obj, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+        public override object GetValue(
+            object obj,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
         {
-            if (this.getMethod == null && (this.originalPropertyInfo == null || !this.originalPropertyInfo.CanRead))
-                throw new InvalidOperationException(SR.GetString(SR.Error_PropertyHasNoGetterDefined, this.propertyName));
+            if (
+                this.getMethod == null
+                && (this.originalPropertyInfo == null || !this.originalPropertyInfo.CanRead)
+            )
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_PropertyHasNoGetterDefined, this.propertyName)
+                );
 
             if (this.getMethod != null)
                 return this.getMethod.Invoke(obj, invokeAttr, binder, index, culture);
@@ -1654,10 +1990,22 @@ namespace System.Workflow.ComponentModel
                 return this.originalPropertyInfo.GetValue(obj, invokeAttr, binder, index, culture);
         }
 
-        public override void SetValue(object obj, object value, BindingFlags invokeAttr, Binder binder, object[] index, CultureInfo culture)
+        public override void SetValue(
+            object obj,
+            object value,
+            BindingFlags invokeAttr,
+            Binder binder,
+            object[] index,
+            CultureInfo culture
+        )
         {
-            if (this.setMethod == null && (this.originalPropertyInfo == null || !this.originalPropertyInfo.CanWrite))
-                throw new InvalidOperationException(SR.GetString(SR.Error_PropertyHasNoSetterDefined, this.propertyName));
+            if (
+                this.setMethod == null
+                && (this.originalPropertyInfo == null || !this.originalPropertyInfo.CanWrite)
+            )
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_PropertyHasNoSetterDefined, this.propertyName)
+                );
 
             if (this.setMethod != null)
             {
@@ -1716,14 +2064,17 @@ namespace System.Workflow.ComponentModel
         {
             get { return this.declaringType; }
         }
+
         public override object[] GetCustomAttributes(bool inherit)
         {
             return new object[0];
         }
+
         public override object[] GetCustomAttributes(Type attributeType, bool inherit)
         {
             return new object[0];
         }
+
         public override bool IsDefined(Type attributeType, bool inherit)
         {
             throw new NotSupportedException();
@@ -1736,13 +2087,13 @@ namespace System.Workflow.ComponentModel
     internal enum SourceValueType
     {
         Property,
-        Indexer
+        Indexer,
     };
 
     internal enum DrillIn
     {
         Never,
-        IfNeeded
+        IfNeeded,
     };
 
     internal struct SourceValueInfo
@@ -1776,15 +2127,12 @@ namespace System.Workflow.ComponentModel
         {
             Init,
             Prop,
-            Done
+            Done,
         };
 
         internal String Error
         {
-            get
-            {
-                return error;
-            }
+            get { return error; }
         }
 
         internal List<SourceValueInfo> Parse(string path, bool returnResultBeforeError)
@@ -1801,7 +2149,11 @@ namespace System.Workflow.ComponentModel
             if (this.pathLength > 0 && this.pathValue[0] == '.')
             {
                 //empty first prop - > input path was like ".bar"; need to add first empty property
-                SourceValueInfo info = new SourceValueInfo(SourceValueType.Property, this.drillIn, string.Empty);
+                SourceValueInfo info = new SourceValueInfo(
+                    SourceValueType.Property,
+                    this.drillIn,
+                    string.Empty
+                );
                 this.al.Add(info);
             }
 
@@ -1819,7 +2171,7 @@ namespace System.Workflow.ComponentModel
                             case NullChar:
                                 this.state = State.Prop;
                                 break;
-                            case ']'://unexpected close indexer, report error
+                            case ']': //unexpected close indexer, report error
                                 this.error = "path[" + this.index + "] = " + c;
                                 return returnResultBeforeError ? this.al : EmptyInfo;
 
@@ -1846,7 +2198,7 @@ namespace System.Workflow.ComponentModel
                                 this.error = "path[" + this.index + "] = " + c;
                                 return returnResultBeforeError ? this.al : EmptyInfo;
                         }
-                        ++this.index;      // skip over special character
+                        ++this.index; // skip over special character
                         if (isIndexer)
                             AddIndexer();
                         else
@@ -1861,13 +2213,17 @@ namespace System.Workflow.ComponentModel
         private void AddProperty()
         {
             int start = this.index;
-            while (this.index < this.pathLength && SpecialChars.IndexOf(this.pathValue[this.index]) < 0)
+            while (
+                this.index < this.pathLength && SpecialChars.IndexOf(this.pathValue[this.index]) < 0
+            )
                 ++this.index;
 
             string name = this.pathValue.Substring(start, this.index - start).Trim();
             SourceValueInfo info = new SourceValueInfo(
-                                        SourceValueType.Property,
-                                        this.drillIn, name);
+                SourceValueType.Property,
+                this.drillIn,
+                name
+            );
             this.al.Add(info);
             StartNewLevel();
         }
@@ -1889,9 +2245,7 @@ namespace System.Workflow.ComponentModel
                 ++this.index;
             }
             string name = this.pathValue.Substring(start, this.index - start - 1).Trim();
-            SourceValueInfo info = new SourceValueInfo(
-                                        SourceValueType.Indexer,
-                                        this.drillIn, name);
+            SourceValueInfo info = new SourceValueInfo(SourceValueType.Indexer, this.drillIn, name);
             this.al.Add(info);
             StartNewLevel();
         }
@@ -1906,4 +2260,3 @@ namespace System.Workflow.ComponentModel
 
     #endregion
 }
-

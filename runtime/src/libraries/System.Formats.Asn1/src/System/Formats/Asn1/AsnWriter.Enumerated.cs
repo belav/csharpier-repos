@@ -64,7 +64,8 @@ namespace System.Formats.Asn1
         ///   <typeparamref name="TEnum"/> is declared [<see cref="FlagsAttribute"/>].
         /// </exception>
         /// <seealso cref="WriteEnumeratedValue(Enum,Nullable{Asn1Tag})"/>
-        public void WriteEnumeratedValue<TEnum>(TEnum value, Asn1Tag? tag = null) where TEnum : Enum
+        public void WriteEnumeratedValue<TEnum>(TEnum value, Asn1Tag? tag = null)
+            where TEnum : Enum
         {
             WriteEnumeratedValue(tag?.AsPrimitive() ?? Asn1Tag.Enumerated, typeof(TEnum), value);
         }
@@ -80,7 +81,8 @@ namespace System.Formats.Asn1
             {
                 throw new ArgumentException(
                     SR.Argument_EnumeratedValueRequiresNonFlagsEnum,
-                    nameof(tEnum));
+                    nameof(tEnum)
+                );
             }
 
             if (backingType == typeof(ulong))

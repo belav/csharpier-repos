@@ -29,7 +29,13 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 throw new ArgumentNullException(nameof(options));
             }
 
-            var visitor = new Visitor(this, GetInternalBuilderOptions(options), GetPrimitiveOptions(options), GetTypeNameOptions(options), options.MemberDisplayFormat);
+            var visitor = new Visitor(
+                this,
+                GetInternalBuilderOptions(options),
+                GetPrimitiveOptions(options),
+                GetTypeNameOptions(options),
+                options.MemberDisplayFormat
+            );
             return visitor.FormatObject(obj);
         }
 
@@ -38,26 +44,33 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
         protected abstract CommonTypeNameFormatter TypeNameFormatter { get; }
         protected abstract CommonPrimitiveFormatter PrimitiveFormatter { get; }
 
-        protected virtual BuilderOptions GetInternalBuilderOptions(PrintOptions printOptions)
-            => new BuilderOptions(
+        protected virtual BuilderOptions GetInternalBuilderOptions(PrintOptions printOptions) =>
+            new BuilderOptions(
                 indentation: "  ",
                 newLine: Environment.NewLine,
                 ellipsis: printOptions.Ellipsis,
                 maximumLineLength: int.MaxValue,
-                maximumOutputLength: printOptions.MaximumOutputLength);
+                maximumOutputLength: printOptions.MaximumOutputLength
+            );
 
-        protected virtual CommonPrimitiveFormatterOptions GetPrimitiveOptions(PrintOptions printOptions)
-            => new CommonPrimitiveFormatterOptions(
+        protected virtual CommonPrimitiveFormatterOptions GetPrimitiveOptions(
+            PrintOptions printOptions
+        ) =>
+            new CommonPrimitiveFormatterOptions(
                 numberRadix: printOptions.NumberRadix,
                 includeCodePoints: false,
                 quoteStringsAndCharacters: true,
                 escapeNonPrintableCharacters: printOptions.EscapeNonPrintableCharacters,
-                cultureInfo: CultureInfo.CurrentUICulture);
+                cultureInfo: CultureInfo.CurrentUICulture
+            );
 
-        protected virtual CommonTypeNameFormatterOptions GetTypeNameOptions(PrintOptions printOptions)
-            => new CommonTypeNameFormatterOptions(
+        protected virtual CommonTypeNameFormatterOptions GetTypeNameOptions(
+            PrintOptions printOptions
+        ) =>
+            new CommonTypeNameFormatterOptions(
                 arrayBoundRadix: printOptions.NumberRadix,
-                showNamespaces: false);
+                showNamespaces: false
+            );
 
         public override string FormatException(Exception e)
         {
@@ -96,7 +109,14 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 var fileName = frame.GetFileName();
                 if (fileName != null)
                 {
-                    builder.Append(string.Format(CultureInfo.CurrentUICulture, ScriptingResources.AtFileLine, fileName, frame.GetFileLineNumber()));
+                    builder.Append(
+                        string.Format(
+                            CultureInfo.CurrentUICulture,
+                            ScriptingResources.AtFileLine,
+                            fileName,
+                            frame.GetFileLineNumber()
+                        )
+                    );
                 }
 
                 builder.AppendLine();
@@ -115,14 +135,19 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
             var builder = pooled.Builder;
 
             var declaringType = method.DeclaringType;
-            var options = new CommonTypeNameFormatterOptions(arrayBoundRadix: NumberRadixDecimal, showNamespaces: true);
+            var options = new CommonTypeNameFormatterOptions(
+                arrayBoundRadix: NumberRadixDecimal,
+                showNamespaces: true
+            );
 
             builder.Append(TypeNameFormatter.FormatTypeName(declaringType, options));
             builder.Append('.');
             builder.Append(method.Name);
             if (method.IsGenericMethod)
             {
-                builder.Append(TypeNameFormatter.FormatTypeArguments(method.GetGenericArguments(), options));
+                builder.Append(
+                    TypeNameFormatter.FormatTypeArguments(method.GetGenericArguments(), options)
+                );
             }
 
             builder.Append('(');
@@ -143,11 +168,18 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
                 {
                     builder.Append(FormatRefKind(parameter));
                     builder.Append(' ');
-                    builder.Append(TypeNameFormatter.FormatTypeName(parameter.ParameterType.GetElementType(), options));
+                    builder.Append(
+                        TypeNameFormatter.FormatTypeName(
+                            parameter.ParameterType.GetElementType(),
+                            options
+                        )
+                    );
                 }
                 else
                 {
-                    builder.Append(TypeNameFormatter.FormatTypeName(parameter.ParameterType, options));
+                    builder.Append(
+                        TypeNameFormatter.FormatTypeName(parameter.ParameterType, options)
+                    );
                 }
             }
 

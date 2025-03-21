@@ -8,27 +8,25 @@ using System;
 
 namespace System.Configuration
 {
-
     // ExeContext
     //
     // Represents the ExeContext that we are running within
     //
-    public sealed class ExeContext 
+    public sealed class ExeContext
     {
         private ConfigurationUserLevel _userContext;
-        private string                 _exePath;
-        
+        private string _exePath;
+
         // Constructor
         //
         // Constructor
         //
-        internal ExeContext( ConfigurationUserLevel userContext,
-                             string                 exePath )
+        internal ExeContext(ConfigurationUserLevel userContext, string exePath)
         {
             _userContext = userContext;
-            _exePath     = exePath;
+            _exePath = exePath;
         }
-        
+
         // UserLevel
         //
         // The ConfigurationUserLevel that we are running within.
@@ -39,10 +37,7 @@ namespace System.Configuration
         //
         public ConfigurationUserLevel UserLevel
         {
-            get 
-            {
-                return _userContext;
-            }
+            get { return _userContext; }
         }
 
         // ExePath
@@ -51,10 +46,7 @@ namespace System.Configuration
         //
         public string ExePath
         {
-            get 
-            {
-                return _exePath;
-            }
+            get { return _exePath; }
         }
     }
 }

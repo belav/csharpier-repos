@@ -1,32 +1,29 @@
 //------------------------------------------------------------------------------
 // <copyright file="ApplicatonManager.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Hosting {
-
-    using System.Web;
-    using System.Web.Configuration;
+namespace System.Web.Hosting
+{
     using System.Runtime.Remoting.Messaging;
     using System.Security.Permissions;
-    
-    internal class ContextBase {
+    using System.Web;
+    using System.Web.Configuration;
 
-        internal static Object Current {
-            get {
-                return CallContext.HostContext;
-            }
-
+    internal class ContextBase
+    {
+        internal static Object Current
+        {
+            get { return CallContext.HostContext; }
             [SecurityPermission(SecurityAction.Demand, Unrestricted = true)]
-            set {
-                CallContext.HostContext = value;
-            }
+            set { CallContext.HostContext = value; }
         }
 
         // static methods
 
-        internal static Object SwitchContext(Object newContext) {
+        internal static Object SwitchContext(Object newContext)
+        {
             Object oldContext = CallContext.HostContext;
             if (oldContext != newContext)
                 CallContext.HostContext = newContext;

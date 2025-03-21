@@ -17,7 +17,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         public void GetBufferTextFromNonTextContainerThrows()
         {
             var containerMock = new Mock<SourceTextContainer>(MockBehavior.Strict);
-            Assert.Throws<ArgumentException>(() => Microsoft.CodeAnalysis.Text.Extensions.GetTextBuffer(containerMock.Object));
+            Assert.Throws<ArgumentException>(() =>
+                Microsoft.CodeAnalysis.Text.Extensions.GetTextBuffer(containerMock.Object)
+            );
         }
 
         [Fact]
@@ -30,9 +32,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
             textSnapshotMock.SetupGet(s => s.TextImage).Returns(textImageMock.Object);
             textSnapshotMock.SetupGet(s => s.TextBuffer).Returns(bufferMock.Object);
             bufferMock.SetupGet(x => x.CurrentSnapshot).Returns(textSnapshotMock.Object);
-            bufferMock.SetupGet(x => x.Properties).Returns(new VisualStudio.Utilities.PropertyCollection());
+            bufferMock
+                .SetupGet(x => x.Properties)
+                .Returns(new VisualStudio.Utilities.PropertyCollection());
 
-            var textContainer = CodeAnalysis.Text.Extensions.TextBufferContainer.From(bufferMock.Object);
+            var textContainer = CodeAnalysis.Text.Extensions.TextBufferContainer.From(
+                bufferMock.Object
+            );
 
             CodeAnalysis.Text.Extensions.GetTextBuffer(textContainer);
         }

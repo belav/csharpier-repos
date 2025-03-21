@@ -5,24 +5,26 @@ namespace System.Workflow.ComponentModel.Compiler
     #region BindValidationContext
 
     [Flags]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public enum AccessTypes
     {
         Read = 0x01,
         Write = 0x02,
-        ReadWrite = Read | Write
+        ReadWrite = Read | Write,
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class BindValidationContext
     {
         private Type targetType = null;
         private AccessTypes access = AccessTypes.Read;
 
         public BindValidationContext(Type targetType)
-            : this(targetType, AccessTypes.Read)
-        {
-        }
+            : this(targetType, AccessTypes.Read) { }
 
         public BindValidationContext(Type targetType, AccessTypes access)
         {
@@ -34,18 +36,12 @@ namespace System.Workflow.ComponentModel.Compiler
 
         public Type TargetType
         {
-            get
-            {
-                return this.targetType;
-            }
+            get { return this.targetType; }
         }
 
         public AccessTypes Access
         {
-            get
-            {
-                return this.access;
-            }
+            get { return this.access; }
         }
     }
 

@@ -25,38 +25,45 @@ public class RequestLocalizationMiddlewareTest
     [InlineData("zh-Hans-CN", "zh-Hans")]
     [InlineData("zh-Hant-TW", "zh-Hant")]
     [InlineData("zh-TW", "zh-Hant")]
-    public async Task RequestLocalizationMiddleware_ShouldFallBackToParentCultures_RegradlessOfHyphenSeparatorCheck(string requestedCulture, string parentCulture)
+    public async Task RequestLocalizationMiddleware_ShouldFallBackToParentCultures_RegradlessOfHyphenSeparatorCheck(
+        string requestedCulture,
+        string parentCulture
+    )
     {
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseTestServer()
-                .Configure(app =>
-                {
-                    var supportedCultures = new[] { "ar", "en", parentCulture };
-
-                    app.UseRequestLocalization(options =>
+                    .UseTestServer()
+                    .Configure(app =>
                     {
-                        options.AddSupportedCultures(supportedCultures)
-                            .AddSupportedUICultures(supportedCultures)
-                            .AddInitialRequestCultureProvider(new CookieRequestCultureProvider
-                            {
-                                CookieName = "Preferences"
-                            });
+                        var supportedCultures = new[] { "ar", "en", parentCulture };
+
+                        app.UseRequestLocalization(options =>
+                        {
+                            options
+                                .AddSupportedCultures(supportedCultures)
+                                .AddSupportedUICultures(supportedCultures)
+                                .AddInitialRequestCultureProvider(
+                                    new CookieRequestCultureProvider { CookieName = "Preferences" }
+                                );
+                        });
+
+                        app.Run(async context =>
+                        {
+                            var requestCulture = context.Features.Get<IRequestCultureFeature>();
+
+                            Assert.Equal(parentCulture, requestCulture.RequestCulture.Culture.Name);
+                            Assert.Equal(
+                                parentCulture,
+                                requestCulture.RequestCulture.UICulture.Name
+                            );
+
+                            await Task.CompletedTask;
+                        });
                     });
-
-                    app.Run(async context =>
-                    {
-                        var requestCulture = context.Features.Get<IRequestCultureFeature>();
-
-                        Assert.Equal(parentCulture, requestCulture.RequestCulture.Culture.Name);
-                        Assert.Equal(parentCulture, requestCulture.RequestCulture.UICulture.Name);
-
-                        await Task.CompletedTask;
-                    });
-                });
-            }).Build();
+            })
+            .Build();
 
         await host.StartAsync();
 
@@ -64,7 +71,13 @@ public class RequestLocalizationMiddlewareTest
         {
             var client = server.CreateClient();
 
-            client.DefaultRequestHeaders.Add("Cookie", new CookieHeaderValue("Preferences", $"c={requestedCulture}|uic={requestedCulture}").ToString());
+            client.DefaultRequestHeaders.Add(
+                "Cookie",
+                new CookieHeaderValue(
+                    "Preferences",
+                    $"c={requestedCulture}|uic={requestedCulture}"
+                ).ToString()
+            );
 
             var response = await client.GetAsync(string.Empty);
 

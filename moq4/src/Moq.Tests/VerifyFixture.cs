@@ -4,10 +4,8 @@
 using System;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-
 using Moq;
 using Moq.Protected;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -43,13 +41,14 @@ namespace Moq.Tests
             var expectedArg = "lorem,ipsum";
             var mock = new Mock<IFoo>();
 
-            mock.Setup(x => x.Execute(expectedArg.Substring(0, 5)))
-                .Returns("ack")
-                .Verifiable();
+            mock.Setup(x => x.Execute(expectedArg.Substring(0, 5))).Returns("ack").Verifiable();
 
             var mex = Assert.Throws<MockException>(() => mock.Verify());
             Assert.True(mex.IsVerificationError);
-            Assert.True(mex.Message.Contains(@".Execute(""lorem"")"), "Contains evaluated expected argument.");
+            Assert.True(
+                mex.Message.Contains(@".Execute(""lorem"")"),
+                "Contains evaluated expected argument."
+            );
         }
 
         [Fact]
@@ -73,9 +72,7 @@ namespace Moq.Tests
 
             Expression<Func<string, bool>> nullOrEmpty = s => string.IsNullOrEmpty(s);
 
-            mock.Setup(x => x.Execute(It.Is(nullOrEmpty)))
-                .Returns("ack")
-                .Verifiable();
+            mock.Setup(x => x.Execute(It.Is(nullOrEmpty))).Returns("ack").Verifiable();
 
             var mex = Assert.Throws<MockException>(() => mock.Verify());
             Assert.True(mex.IsVerificationError);
@@ -91,9 +88,7 @@ namespace Moq.Tests
 
             Expression<Func<string, bool>> matchingPassword = s => s == password;
 
-            mock.Setup(x => x.Execute(It.Is(matchingPassword)))
-                .Returns("ack")
-                .Verifiable();
+            mock.Setup(x => x.Execute(It.Is(matchingPassword))).Returns("ack").Verifiable();
 
             var mex = Assert.Throws<MockException>(() => mock.Verify());
             Assert.True(mex.IsVerificationError);
@@ -169,8 +164,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            var me = Assert.Throws<MockException>(
-                () => mock.Verify(f => f.Execute("ping"), "Execute should have been invoked with 'ping'"));
+            var me = Assert.Throws<MockException>(() =>
+                mock.Verify(f => f.Execute("ping"), "Execute should have been invoked with 'ping'")
+            );
             Assert.Contains("Execute should have been invoked with 'ping'", me.Message);
             Assert.Contains("f.Execute(\"ping\")", me.Message);
         }
@@ -180,8 +176,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            var me = Assert.Throws<MockException>(
-                () => mock.Verify(f => f.Submit(), "Submit should be invoked"));
+            var me = Assert.Throws<MockException>(() =>
+                mock.Verify(f => f.Submit(), "Submit should be invoked")
+            );
             Assert.Contains("Submit should be invoked", me.Message);
             Assert.Contains("f.Submit()", me.Message);
         }
@@ -191,7 +188,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            var me = Assert.Throws<MockException>(() => mock.VerifyGet(f => f.Value, "Nobody called .Value"));
+            var me = Assert.Throws<MockException>(() =>
+                mock.VerifyGet(f => f.Value, "Nobody called .Value")
+            );
             Assert.Contains("Nobody called .Value", me.Message);
             Assert.Contains("f.Value", me.Message);
         }
@@ -201,7 +200,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            var me = Assert.Throws<MockException>(() => mock.VerifySet(f => f.Value = It.IsAny<int?>(), "Nobody called .Value"));
+            var me = Assert.Throws<MockException>(() =>
+                mock.VerifySet(f => f.Value = It.IsAny<int?>(), "Nobody called .Value")
+            );
             Assert.Contains("Nobody called .Value", me.Message);
             Assert.Contains("f.Value", me.Message);
         }
@@ -211,7 +212,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            var e = Assert.Throws<MockException>(() => mock.VerifySet(f => f.Value = 5, "Nobody called .Value"));
+            var e = Assert.Throws<MockException>(() =>
+                mock.VerifySet(f => f.Value = 5, "Nobody called .Value")
+            );
             Assert.Contains("Nobody called .Value", e.Message);
             Assert.Contains("f.Value", e.Message);
         }
@@ -222,8 +225,9 @@ namespace Moq.Tests
             var disposable = new Mock<IDisposable>();
             var mock = disposable.As<IFoo>();
 
-            var e = Assert.Throws<MockException>(
-                () => mock.Verify(f => f.Execute("ping"), "Execute should have been invoked with 'ping'"));
+            var e = Assert.Throws<MockException>(() =>
+                mock.Verify(f => f.Execute("ping"), "Execute should have been invoked with 'ping'")
+            );
 
             Assert.Contains("Execute should have been invoked with 'ping'", e.Message);
             Assert.Contains("f.Execute(\"ping\")", e.Message);
@@ -235,7 +239,9 @@ namespace Moq.Tests
             var disposable = new Mock<IDisposable>();
             var mock = disposable.As<IFoo>();
 
-            var e = Assert.Throws<MockException>(() => mock.Verify(f => f.Submit(), "Submit should be invoked"));
+            var e = Assert.Throws<MockException>(() =>
+                mock.Verify(f => f.Submit(), "Submit should be invoked")
+            );
 
             Assert.Contains("Submit should be invoked", e.Message);
             Assert.Contains("f.Submit()", e.Message);
@@ -247,7 +253,9 @@ namespace Moq.Tests
             var disposable = new Mock<IDisposable>();
             var mock = disposable.As<IFoo>();
 
-            var e = Assert.Throws<MockException>(() => mock.VerifyGet(f => f.Value, "Nobody called .Value"));
+            var e = Assert.Throws<MockException>(() =>
+                mock.VerifyGet(f => f.Value, "Nobody called .Value")
+            );
             Assert.Contains("Nobody called .Value", e.Message);
             Assert.Contains("f.Value", e.Message);
         }
@@ -258,8 +266,9 @@ namespace Moq.Tests
             var disposable = new Mock<IDisposable>();
             var mock = disposable.As<IBar>();
 
-            var e = Assert.Throws<MockException>(
-                () => mock.VerifySet(f => f.Value = It.IsAny<int?>(), "Nobody called .Value"));
+            var e = Assert.Throws<MockException>(() =>
+                mock.VerifySet(f => f.Value = It.IsAny<int?>(), "Nobody called .Value")
+            );
             Assert.Contains("Nobody called .Value", e.Message);
             Assert.Contains("f.Value", e.Message);
         }
@@ -270,7 +279,9 @@ namespace Moq.Tests
             var disposable = new Mock<IDisposable>();
             var mock = disposable.As<IBar>();
 
-            var e = Assert.Throws<MockException>(() => mock.VerifySet(f => f.Value = 5, "Nobody called .Value"));
+            var e = Assert.Throws<MockException>(() =>
+                mock.VerifySet(f => f.Value = 5, "Nobody called .Value")
+            );
             Assert.Contains("Nobody called .Value", e.Message);
             Assert.Contains("f.Value", e.Message);
         }
@@ -298,7 +309,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            var mex = Assert.Throws<MockException>(() => mock.VerifySet(f => f.Value = It.IsAny<int?>()));
+            var mex = Assert.Throws<MockException>(() =>
+                mock.VerifySet(f => f.Value = It.IsAny<int?>())
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -376,9 +389,13 @@ namespace Moq.Tests
             mock.Object.Submit();
 
             var mex = Assert.Throws<MockException>(() =>
-                mock.Verify(foo => foo.Submit(), Times.AtMostOnce()));
+                mock.Verify(foo => foo.Submit(), Times.AtMostOnce())
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock at most once, but was 2 times: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock at most once, but was 2 times: foo => foo.Submit()",
+                mex.Message
+            );
         }
 
         [Fact]
@@ -393,9 +410,13 @@ namespace Moq.Tests
             mock.Object.Submit();
 
             var mex = Assert.Throws<MockException>(() =>
-                mock.Verify(foo => foo.Submit(), Times.AtMost(2)));
+                mock.Verify(foo => foo.Submit(), Times.AtMost(2))
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock at most 2 times, but was 3 times: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock at most 2 times, but was 3 times: foo => foo.Submit()",
+                mex.Message
+            );
         }
 
         [Fact]
@@ -407,9 +428,14 @@ namespace Moq.Tests
 
             mock.Object.Submit();
 
-            var mex = Assert.Throws<MockException>(() => mock.Verify(foo => foo.Submit(), Times.Never()));
+            var mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Submit(), Times.Never())
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock should never have been performed, but was 1 times: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock should never have been performed, but was 1 times: foo => foo.Submit()",
+                mex.Message
+            );
         }
 
         [Fact]
@@ -417,9 +443,14 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            var mex = Assert.Throws<MockException>(() => mock.Verify(foo => foo.Submit(), Times.AtLeastOnce()));
+            var mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Submit(), Times.AtLeastOnce())
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock at least once, but was never performed: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock at least once, but was never performed: foo => foo.Submit()",
+                mex.Message
+            );
 
             mock.Object.Submit();
 
@@ -434,9 +465,14 @@ namespace Moq.Tests
             mock.Object.Submit();
             mock.Object.Submit();
 
-            var mex = Assert.Throws<MockException>(() => mock.Verify(foo => foo.Submit(), Times.AtLeast(3)));
+            var mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Submit(), Times.AtLeast(3))
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock at least 3 times, but was 2 times: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock at least 3 times, but was 2 times: foo => foo.Submit()",
+                mex.Message
+            );
 
             mock.Object.Submit();
 
@@ -453,9 +489,14 @@ namespace Moq.Tests
             mock.Object.Submit();
             mock.Object.Submit();
 
-            var mex = Assert.Throws<MockException>(() => mock.Verify(foo => foo.Submit(), Times.Exactly(5)));
+            var mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Submit(), Times.Exactly(5))
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock exactly 5 times, but was 4 times: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock exactly 5 times, but was 4 times: foo => foo.Submit()",
+                mex.Message
+            );
 
             mock.Object.Submit();
 
@@ -463,9 +504,14 @@ namespace Moq.Tests
 
             mock.Object.Submit();
 
-            mex = Assert.Throws<MockException>(() => mock.Verify(foo => foo.Submit(), Times.Exactly(5)));
+            mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Submit(), Times.Exactly(5))
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock exactly 5 times, but was 6 times: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock exactly 5 times, but was 6 times: foo => foo.Submit()",
+                mex.Message
+            );
         }
 
         [Fact]
@@ -473,9 +519,14 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            var mex = Assert.Throws<MockException>(() => mock.Verify(foo => foo.Submit(), Times.Once()));
+            var mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Submit(), Times.Once())
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock once, but was 0 times: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock once, but was 0 times: foo => foo.Submit()",
+                mex.Message
+            );
 
             mock.Object.Submit();
 
@@ -483,9 +534,13 @@ namespace Moq.Tests
 
             mock.Object.Submit();
 
-            mex = Assert.Throws<MockException>(() => mock.Verify(foo => foo.Submit(), Times.Once()));
+            mex = Assert.Throws<MockException>(() => mock.Verify(foo => foo.Submit(), Times.Once())
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock once, but was 2 times: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock once, but was 2 times: foo => foo.Submit()",
+                mex.Message
+            );
         }
 
         [Fact]
@@ -495,10 +550,14 @@ namespace Moq.Tests
 
             mock.Object.Submit();
 
-            var mex = Assert.Throws<MockException>(
-                () => mock.Verify(foo => foo.Submit(), Times.Between(1, 4, Range.Exclusive)));
+            var mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Submit(), Times.Between(1, 4, Range.Exclusive))
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock between 1 and 4 times (Exclusive), but was 1 times: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock between 1 and 4 times (Exclusive), but was 1 times: foo => foo.Submit()",
+                mex.Message
+            );
 
             mock.Object.Submit();
 
@@ -510,10 +569,14 @@ namespace Moq.Tests
 
             mock.Object.Submit();
 
-            mex = Assert.Throws<MockException>(
-                () => mock.Verify(foo => foo.Submit(), Times.Between(1, 4, Range.Exclusive)));
+            mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Submit(), Times.Between(1, 4, Range.Exclusive))
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock between 1 and 4 times (Exclusive), but was 4 times: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock between 1 and 4 times (Exclusive), but was 4 times: foo => foo.Submit()",
+                mex.Message
+            );
         }
 
         [Fact]
@@ -522,10 +585,14 @@ namespace Moq.Tests
             var mock = new Mock<IFoo>();
             mock.Object.Submit();
 
-            var mex = Assert.Throws<MockException>(
-                () => mock.Verify(foo => foo.Submit(), Times.Between(2, 4, Range.Inclusive)));
+            var mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Submit(), Times.Between(2, 4, Range.Inclusive))
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock between 2 and 4 times (Inclusive), but was 1 times: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock between 2 and 4 times (Inclusive), but was 1 times: foo => foo.Submit()",
+                mex.Message
+            );
 
             mock.Object.Submit();
 
@@ -538,10 +605,14 @@ namespace Moq.Tests
             mock.Object.Submit();
             mock.Object.Submit();
 
-            mex = Assert.Throws<MockException>(
-                () => mock.Verify(foo => foo.Submit(), Times.Between(2, 4, Range.Inclusive)));
+            mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Submit(), Times.Between(2, 4, Range.Inclusive))
+            );
             Assert.True(mex.IsVerificationError);
-            Assert.Contains("Expected invocation on the mock between 2 and 4 times (Inclusive), but was 5 times: foo => foo.Submit()", mex.Message);
+            Assert.Contains(
+                "Expected invocation on the mock between 2 and 4 times (Inclusive), but was 5 times: foo => foo.Submit()",
+                mex.Message
+            );
         }
 
         [Fact]
@@ -554,8 +625,9 @@ namespace Moq.Tests
 
             mock.Object.Execute("");
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.Verify(foo => foo.Execute(""), Times.AtMostOnce()));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Execute(""), Times.AtMostOnce())
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -570,8 +642,9 @@ namespace Moq.Tests
 
             mock.Object.Execute("");
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.Verify(foo => foo.Execute(""), Times.AtMost(2)));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Execute(""), Times.AtMost(2))
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -584,8 +657,9 @@ namespace Moq.Tests
 
             mock.Object.Execute("");
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.Verify(foo => foo.Execute(""), Times.Never()));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Execute(""), Times.Never())
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -594,8 +668,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.Verify(foo => foo.Execute(""), Times.AtLeastOnce()));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Execute(""), Times.AtLeastOnce())
+            );
             Assert.True(mex.IsVerificationError);
 
             mock.Object.Execute("");
@@ -611,8 +686,9 @@ namespace Moq.Tests
             mock.Object.Execute("");
             mock.Object.Execute("");
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.Verify(foo => foo.Execute(""), Times.AtLeast(3)));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Execute(""), Times.AtLeast(3))
+            );
             Assert.True(mex.IsVerificationError);
 
             mock.Object.Execute("");
@@ -630,8 +706,9 @@ namespace Moq.Tests
             mock.Object.Execute("");
             mock.Object.Execute("");
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.Verify(foo => foo.Execute(""), Times.Exactly(5)));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Execute(""), Times.Exactly(5))
+            );
             Assert.True(mex.IsVerificationError);
 
             mock.Object.Execute("");
@@ -640,7 +717,9 @@ namespace Moq.Tests
 
             mock.Object.Execute("");
 
-            mex = Assert.Throws<MockException>(() => mock.Verify(foo => foo.Execute(""), Times.Exactly(5)));
+            mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Execute(""), Times.Exactly(5))
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -651,8 +730,9 @@ namespace Moq.Tests
 
             mock.Object.Execute("");
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.Verify(foo => foo.Execute(""), Times.Between(1, 4, Range.Exclusive)));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Execute(""), Times.Between(1, 4, Range.Exclusive))
+            );
             Assert.True(mex.IsVerificationError);
 
             mock.Object.Execute("");
@@ -666,7 +746,8 @@ namespace Moq.Tests
             mock.Object.Execute("");
 
             mex = Assert.Throws<MockException>(() =>
-                mock.Verify(foo => foo.Execute(""), Times.Between(1, 4, Range.Exclusive)));
+                mock.Verify(foo => foo.Execute(""), Times.Between(1, 4, Range.Exclusive))
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -678,7 +759,8 @@ namespace Moq.Tests
             mock.Object.Execute("");
 
             MockException mex = Assert.Throws<MockException>(() =>
-                mock.Verify(foo => foo.Execute(""), Times.Between(2, 4, Range.Inclusive)));
+                mock.Verify(foo => foo.Execute(""), Times.Between(2, 4, Range.Inclusive))
+            );
             Assert.True(mex.IsVerificationError);
 
             mock.Object.Execute("");
@@ -692,8 +774,9 @@ namespace Moq.Tests
             mock.Object.Execute("");
             mock.Object.Execute("");
 
-            mex = Assert.Throws<MockException>(
-                () => mock.Verify(foo => foo.Execute(""), Times.Between(2, 4, Range.Inclusive)));
+            mex = Assert.Throws<MockException>(() =>
+                mock.Verify(foo => foo.Execute(""), Times.Between(2, 4, Range.Inclusive))
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -707,8 +790,9 @@ namespace Moq.Tests
 
             value = mock.Object.Value;
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.VerifyGet(foo => foo.Value, Times.AtMostOnce()));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.VerifyGet(foo => foo.Value, Times.AtMostOnce())
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -723,8 +807,9 @@ namespace Moq.Tests
 
             value = mock.Object.Value;
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.VerifyGet(foo => foo.Value, Times.AtMost(2)));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.VerifyGet(foo => foo.Value, Times.AtMost(2))
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -737,8 +822,9 @@ namespace Moq.Tests
 
             var value = mock.Object.Value;
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.VerifyGet(foo => foo.Value, Times.Never()));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.VerifyGet(foo => foo.Value, Times.Never())
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -747,8 +833,9 @@ namespace Moq.Tests
         {
             var mock = new Mock<IFoo>();
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.VerifyGet(foo => foo.Value, Times.AtLeastOnce()));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.VerifyGet(foo => foo.Value, Times.AtLeastOnce())
+            );
             Assert.True(mex.IsVerificationError);
 
             var value = mock.Object.Value;
@@ -764,8 +851,9 @@ namespace Moq.Tests
             var value = mock.Object.Value;
             value = mock.Object.Value;
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.VerifyGet(foo => foo.Value, Times.AtLeast(3)));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.VerifyGet(foo => foo.Value, Times.AtLeast(3))
+            );
             Assert.True(mex.IsVerificationError);
 
             value = mock.Object.Value;
@@ -783,8 +871,9 @@ namespace Moq.Tests
             value = mock.Object.Value;
             value = mock.Object.Value;
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.VerifyGet(foo => foo.Value, Times.Exactly(5)));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.VerifyGet(foo => foo.Value, Times.Exactly(5))
+            );
             Assert.True(mex.IsVerificationError);
 
             value = mock.Object.Value;
@@ -793,7 +882,9 @@ namespace Moq.Tests
 
             value = mock.Object.Value;
 
-            mex = Assert.Throws<MockException>(() => mock.VerifyGet(foo => foo.Value, Times.Exactly(5)));
+            mex = Assert.Throws<MockException>(() =>
+                mock.VerifyGet(foo => foo.Value, Times.Exactly(5))
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -804,8 +895,9 @@ namespace Moq.Tests
 
             var value = mock.Object.Value;
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.VerifyGet(foo => foo.Value, Times.Between(1, 4, Range.Exclusive)));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.VerifyGet(foo => foo.Value, Times.Between(1, 4, Range.Exclusive))
+            );
             Assert.True(mex.IsVerificationError);
 
             value = mock.Object.Value;
@@ -819,7 +911,8 @@ namespace Moq.Tests
             value = mock.Object.Value;
 
             mex = Assert.Throws<MockException>(() =>
-                mock.VerifyGet(foo => foo.Value, Times.Between(1, 4, Range.Exclusive)));
+                mock.VerifyGet(foo => foo.Value, Times.Between(1, 4, Range.Exclusive))
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -830,8 +923,9 @@ namespace Moq.Tests
 
             var value = mock.Object.Value;
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.VerifyGet(foo => foo.Value, Times.Between(2, 4, Range.Inclusive)));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.VerifyGet(foo => foo.Value, Times.Between(2, 4, Range.Inclusive))
+            );
             Assert.True(mex.IsVerificationError);
 
             value = mock.Object.Value;
@@ -846,7 +940,8 @@ namespace Moq.Tests
             value = mock.Object.Value;
 
             mex = Assert.Throws<MockException>(() =>
-                mock.VerifyGet(foo => foo.Value, Times.Between(2, 4, Range.Inclusive)));
+                mock.VerifyGet(foo => foo.Value, Times.Between(2, 4, Range.Inclusive))
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -860,8 +955,9 @@ namespace Moq.Tests
 
             mock.Object.Value = 3;
 
-            MockException mex = Assert.Throws<MockException>(
-                () => mock.VerifySet(f => f.Value = 3, Times.AtMostOnce()));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.VerifySet(f => f.Value = 3, Times.AtMostOnce())
+            );
             Assert.True(mex.IsVerificationError);
         }
 
@@ -877,11 +973,14 @@ namespace Moq.Tests
 
             var mex = Assert.Throws<MockException>(() => mock.Verify(f => f.Execute("pong")));
 
-            Assert.True(mex.Message.ContainsConsecutiveLines(
-                "      VerifyFixture.IFoo.Execute(\"ping\")",
-                "      VerifyFixture.IFoo.Echo(42)",
-                "      VerifyFixture.IFoo.Submit()",
-                "      VerifyFixture.IFoo.Save([1, 2, \"hello\"])"));
+            Assert.True(
+                mex.Message.ContainsConsecutiveLines(
+                    "      VerifyFixture.IFoo.Execute(\"ping\")",
+                    "      VerifyFixture.IFoo.Echo(42)",
+                    "      VerifyFixture.IFoo.Submit()",
+                    "      VerifyFixture.IFoo.Save([1, 2, \"hello\"])"
+                )
+            );
         }
 
         [Fact]
@@ -890,7 +989,9 @@ namespace Moq.Tests
             var expectedArg = "lorem,ipsum";
             var mock = new Moq.Mock<IFoo>();
 
-            var mex = Assert.Throws<MockException>(() => mock.Verify(f => f.Execute(expectedArg.Substring(0, 5))));
+            var mex = Assert.Throws<MockException>(() =>
+                mock.Verify(f => f.Execute(expectedArg.Substring(0, 5)))
+            );
             Assert.Contains("f.Execute(\"lorem\")", mex.Message);
         }
 
@@ -899,7 +1000,9 @@ namespace Moq.Tests
         {
             var mock = new Moq.Mock<IFoo>();
 
-            MockException mex = Assert.Throws<MockException>(() => mock.Verify(f => f.Execute("pong")));
+            MockException mex = Assert.Throws<MockException>(() =>
+                mock.Verify(f => f.Execute("pong"))
+            );
 
             Assert.Contains("   No invocations performed.", mex.Message);
         }
@@ -966,8 +1069,11 @@ namespace Moq.Tests
             var mock = new Mock<IArrays>();
             mock.Object.Method(strings);
             var mex = Assert.Throws<MockException>(() => mock.Verify(_ => _.Method(null)));
-            Assert.True(mex.Message.ContainsConsecutiveLines(
-                @"      VerifyFixture.IArrays.Method([""1"", null, ""3""])"));
+            Assert.True(
+                mex.Message.ContainsConsecutiveLines(
+                    @"      VerifyFixture.IArrays.Method([""1"", null, ""3""])"
+                )
+            );
         }
 
         [Fact]
@@ -977,8 +1083,11 @@ namespace Moq.Tests
             var mock = new Mock<IArrays>();
             mock.Object.Method(strings);
             var mex = Assert.Throws<MockException>(() => mock.Verify(_ => _.Method(null)));
-            Assert.True(mex.Message.ContainsConsecutiveLines(
-                @"      VerifyFixture.IArrays.Method([""1"", null, ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10""])"));
+            Assert.True(
+                mex.Message.ContainsConsecutiveLines(
+                    @"      VerifyFixture.IArrays.Method([""1"", null, ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10""])"
+                )
+            );
         }
 
         [Fact]
@@ -988,8 +1097,11 @@ namespace Moq.Tests
             var mock = new Mock<IArrays>();
             mock.Object.Method(strings);
             var mex = Assert.Throws<MockException>(() => mock.Verify(_ => _.Method(null)));
-            Assert.True(mex.Message.ContainsConsecutiveLines(
-                @"      VerifyFixture.IArrays.Method([""1"", null, ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10"", ...])"));
+            Assert.True(
+                mex.Message.ContainsConsecutiveLines(
+                    @"      VerifyFixture.IArrays.Method([""1"", null, ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10"", ...])"
+                )
+            );
         }
 
         [Fact]
@@ -999,7 +1111,10 @@ namespace Moq.Tests
             var mock = new Mock<IArrays>();
             mock.Object.Method(null);
             var mex = Assert.Throws<MockException>(() => mock.Verify(_ => _.Method(strings)));
-            Assert.Contains(@"Expected invocation on the mock at least once, but was never performed: _ => _.Method([""1"", null, ""3""])", mex.Message);
+            Assert.Contains(
+                @"Expected invocation on the mock at least once, but was never performed: _ => _.Method([""1"", null, ""3""])",
+                mex.Message
+            );
         }
 
         [Fact]
@@ -1009,7 +1124,10 @@ namespace Moq.Tests
             var mock = new Mock<IArrays>();
             mock.Object.Method(null);
             var mex = Assert.Throws<MockException>(() => mock.Verify(_ => _.Method(strings)));
-            Assert.Contains(@"Expected invocation on the mock at least once, but was never performed: _ => _.Method([""1"", null, ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10""])", mex.Message);
+            Assert.Contains(
+                @"Expected invocation on the mock at least once, but was never performed: _ => _.Method([""1"", null, ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10""])",
+                mex.Message
+            );
         }
 
         [Fact]
@@ -1019,7 +1137,10 @@ namespace Moq.Tests
             var mock = new Mock<IArrays>();
             mock.Object.Method(null);
             var mex = Assert.Throws<MockException>(() => mock.Verify(_ => _.Method(strings)));
-            Assert.Contains(@"Expected invocation on the mock at least once, but was never performed: _ => _.Method([""1"", null, ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10"", ...])", mex.Message);
+            Assert.Contains(
+                @"Expected invocation on the mock at least once, but was never performed: _ => _.Method([""1"", null, ""3"", ""4"", ""5"", ""6"", ""7"", ""8"", ""9"", ""10"", ...])",
+                mex.Message
+            );
         }
 
         /// <summary>
@@ -1029,11 +1150,15 @@ namespace Moq.Tests
         public void DoesNotThrowCollectionModifiedWhenMoreInvocationsInterceptedDuringVerfication()
         {
             var mock = new Mock<IFoo>();
-            Parallel.For(0, 100, (i) =>
-            {
-                mock.Object.Submit();
-                mock.Verify(foo => foo.Submit());
-            });
+            Parallel.For(
+                0,
+                100,
+                (i) =>
+                {
+                    mock.Object.Submit();
+                    mock.Verify(foo => foo.Submit());
+                }
+            );
         }
 
         [Fact]
@@ -1189,7 +1314,9 @@ namespace Moq.Tests
             Assert.False(invocations[1].IsVerified);
             Assert.False(invocations[2].IsVerified);
 
-            Assert.Throws<MockException>(() => mock.Verify(m => m.Echo(It.Is<int>(i => i != 2)), Times.Exactly(1)));
+            Assert.Throws<MockException>(() =>
+                mock.Verify(m => m.Echo(It.Is<int>(i => i != 2)), Times.Exactly(1))
+            );
             Assert.False(invocations[0].IsVerified);
             Assert.False(invocations[1].IsVerified);
             Assert.False(invocations[2].IsVerified);
@@ -1505,11 +1632,20 @@ namespace Moq.Tests
         public void VerifyProtectedMethodOnChildClass()
         {
             var mock = new Mock<Child>();
-            mock.Protected().Setup("Populate", exactParameterMatch: true, ItExpr.Ref<ChildDto>.IsAny).CallBase().Verifiable();
+            mock.Protected()
+                .Setup("Populate", exactParameterMatch: true, ItExpr.Ref<ChildDto>.IsAny)
+                .CallBase()
+                .Verifiable();
             ChildDto dto = new ChildDto();
             _ = mock.Object.InvokePopulate(ref dto);
 
-            mock.Protected().Verify("Populate", Times.Once(), exactParameterMatch: true, ItExpr.Ref<ChildDto>.IsAny);
+            mock.Protected()
+                .Verify(
+                    "Populate",
+                    Times.Once(),
+                    exactParameterMatch: true,
+                    ItExpr.Ref<ChildDto>.IsAny
+                );
         }
 
         [Fact]
@@ -1517,7 +1653,8 @@ namespace Moq.Tests
         {
             var mock = new Mock<Child>();
             Assert.Throws<NotSupportedException>(() =>
-                mock.Verify(m => m.InvokePopulate(ref It.Ref<ChildDto>.IsAny), Times.Never));
+                mock.Verify(m => m.InvokePopulate(ref It.Ref<ChildDto>.IsAny), Times.Never)
+            );
         }
 
         [Fact]
@@ -1681,7 +1818,8 @@ namespace Moq.Tests
                 {
                     int count = 0;
                     int index = -1;
-                    while ((index = str.IndexOf(substring, index + 1)) >= 0) ++count;
+                    while ((index = str.IndexOf(substring, index + 1)) >= 0)
+                        ++count;
                     return count;
                 }
             }
@@ -1736,24 +1874,20 @@ namespace Moq.Tests
             void Save(object o);
         }
 
-        public interface IBazParam
-        {
-        }
+        public interface IBazParam { }
 
         public interface IBaz
         {
-            void Call<T>(T param) where T : IBazParam;
-            void Subscribe<T>() where T : IBazParam;
+            void Call<T>(T param)
+                where T : IBazParam;
+            void Subscribe<T>()
+                where T : IBazParam;
             void Subscribe();
         }
 
-        public class BazParam : IBazParam
-        {
-        }
+        public class BazParam : IBazParam { }
 
-        public class BazParam2 : BazParam
-        {
-        }
+        public class BazParam2 : BazParam { }
 
         public interface IArrays
         {

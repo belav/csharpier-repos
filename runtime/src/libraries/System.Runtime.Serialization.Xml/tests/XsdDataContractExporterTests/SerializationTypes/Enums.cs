@@ -10,18 +10,19 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     public class Enums
     {
         public enum Mode
-        {   
+        {
             NotSpecified,
             Single,
             Multiple,
         }
 
-        [DataContract(Name="DifferentMode")]
+        [DataContract(Name = "DifferentMode")]
         public enum Mode2
-        {   
-            [EnumMember(Value="None")]
+        {
+            [EnumMember(Value = "None")]
             NotSpecified = -1,
             Single,
+
             [EnumMember]
             Multiple,
         }
@@ -50,22 +51,26 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             Foo = 1,
             Bar = 2,
             Baz = 4,
-            Bazooka = 8
+            Bazooka = 8,
         }
 
         [Flags]
-        [DataContract(Namespace="http://special2.tempuri.org")]
+        [DataContract(Namespace = "http://special2.tempuri.org")]
         public enum LongRange : long
         {
             [EnumMember]
             Min = Int64.MinValue,
-            [EnumMember(Value="Small")]
+
+            [EnumMember(Value = "Small")]
             Value1 = 1L,
             Value10 = 10L,
-            [EnumMember(Value="Medium")]
+
+            [EnumMember(Value = "Medium")]
             Value100 = 100L,
-            [EnumMember(Value="Large")]
+
+            [EnumMember(Value = "Large")]
             Value1000 = 1000L,
+
             [EnumMember]
             Max = Int64.MaxValue,
         }
@@ -91,19 +96,15 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             [DataMember]
             LongRange longFlagsEnum;
 
-            public EnumContainer()
-            {
-            }
-            
+            public EnumContainer() { }
+
             [DataContract]
             public class NestedEnumContainer
             {
                 [DataMember]
                 Mode mode;
 
-                NestedEnumContainer()
-                {
-                }
+                NestedEnumContainer() { }
             }
 
             internal enum NestedSimpleEnum
@@ -116,23 +117,22 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     }
 
     public enum Mode
-    {   
+    {
         NotSpecified,
         Single,
         Multiple,
     }
 
-    [DataContract(Name="Mode")]
+    [DataContract(Name = "Mode")]
     public enum DifferentMode
-    {   
-        [EnumMember(Value="NotSpecified")]
+    {
+        [EnumMember(Value = "NotSpecified")]
         Member1,
+
         [EnumMember]
-        Single=1,
-        [EnumMember(Value="Multiple")]
+        Single = 1,
+
+        [EnumMember(Value = "Multiple")]
         Mult,
     }
-
 }
-
-

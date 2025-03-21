@@ -18,7 +18,12 @@ namespace System.Web.Mvc.Razor.Test
             Mock<RazorEngineHost> mockHost = new Mock<RazorEngineHost>();
 
             // Act
-            var generator = new MvcCSharpRazorCodeGenerator("FooClass", "Root.Namespace", "SomeSourceFile.cshtml", mockHost.Object);
+            var generator = new MvcCSharpRazorCodeGenerator(
+                "FooClass",
+                "Root.Namespace",
+                "SomeSourceFile.cshtml",
+                mockHost.Object
+            );
 
             // Assert
             Assert.Equal("FooClass", generator.ClassName);
@@ -35,7 +40,12 @@ namespace System.Web.Mvc.Razor.Test
             mockHost.SetupGet(h => h.NamespaceImports).Returns(new HashSet<string>());
 
             // Act
-            var generator = new MvcCSharpRazorCodeGenerator("FooClass", "Root.Namespace", "SomeSourceFile.cshtml", mockHost.Object);
+            var generator = new MvcCSharpRazorCodeGenerator(
+                "FooClass",
+                "Root.Namespace",
+                "SomeSourceFile.cshtml",
+                mockHost.Object
+            );
 
             // Assert
             Assert.Empty(generator.Context.GeneratedClass.BaseTypes);
@@ -45,11 +55,19 @@ namespace System.Web.Mvc.Razor.Test
         public void Constructor_DoesNotSetBaseTypeForSpecialPage()
         {
             // Arrange
-            Mock<MvcWebPageRazorHost> mockHost = new Mock<MvcWebPageRazorHost>("_viewStart.cshtml", "_viewStart.cshtml");
+            Mock<MvcWebPageRazorHost> mockHost = new Mock<MvcWebPageRazorHost>(
+                "_viewStart.cshtml",
+                "_viewStart.cshtml"
+            );
             mockHost.SetupGet(h => h.NamespaceImports).Returns(new HashSet<string>());
 
             // Act
-            var generator = new MvcCSharpRazorCodeGenerator("FooClass", "Root.Namespace", "_viewStart.cshtml", mockHost.Object);
+            var generator = new MvcCSharpRazorCodeGenerator(
+                "FooClass",
+                "Root.Namespace",
+                "_viewStart.cshtml",
+                mockHost.Object
+            );
 
             // Assert
             Assert.Empty(generator.Context.GeneratedClass.BaseTypes);
@@ -59,14 +77,27 @@ namespace System.Web.Mvc.Razor.Test
         public void Constructor_SetsBaseTypeForRegularPage()
         {
             // Arrange
-            Mock<MvcWebPageRazorHost> mockHost = new Mock<MvcWebPageRazorHost>("SomeSourceFile.cshtml", "SomeSourceFile.cshtml") { CallBase = true };
+            Mock<MvcWebPageRazorHost> mockHost = new Mock<MvcWebPageRazorHost>(
+                "SomeSourceFile.cshtml",
+                "SomeSourceFile.cshtml"
+            )
+            {
+                CallBase = true,
+            };
             mockHost.SetupGet(h => h.NamespaceImports).Returns(new HashSet<string>());
 
             // Act
-            var generator = new MvcCSharpRazorCodeGenerator("FooClass", "Root.Namespace", "SomeSourceFile.cshtml", mockHost.Object);
+            var generator = new MvcCSharpRazorCodeGenerator(
+                "FooClass",
+                "Root.Namespace",
+                "SomeSourceFile.cshtml",
+                mockHost.Object
+            );
 
             // Assert
-            var baseType = Assert.IsType<CodeTypeReference>(Assert.Single(generator.Context.GeneratedClass.BaseTypes));
+            var baseType = Assert.IsType<CodeTypeReference>(
+                Assert.Single(generator.Context.GeneratedClass.BaseTypes)
+            );
             Assert.Equal("System.Web.Mvc.WebViewPage<dynamic>", baseType.BaseType);
         }
     }

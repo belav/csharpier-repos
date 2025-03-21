@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void NoneOperation_Expression_01()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -33,7 +34,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -102,14 +104,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NoneOperation_Expression_02()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -125,7 +132,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -190,14 +198,19 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NoneOperation_Expression_03()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C
 {
@@ -213,7 +226,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -243,14 +257,19 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void NoneOperation_Expression_04()
         {
-            string source = @"
+            string source =
+                @"
 unsafe public class MyClass
 {
     public static void Main(bool a, int b, int c, int* i, int j)
@@ -259,13 +278,15 @@ unsafe public class MyClass
     }/*</bind>*/
 }
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0196: A pointer must be indexed by only one value
                 //         j = i[1, (a ? b : c)];
-                Diagnostic(ErrorCode.ERR_PtrIndexSingle, "i[1, (a ? b : c)]").WithLocation(6, 13)
+                Diagnostic(ErrorCode.ERR_PtrIndexSingle, "i[1, (a ? b : c)]").WithLocation(6, 13),
             };
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -334,8 +355,12 @@ Block[B5] - Exit
     Predecessors: [B4]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, compilationOptions: TestOptions.UnsafeDebugDll);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                compilationOptions: TestOptions.UnsafeDebugDll
+            );
         }
-
     }
 }

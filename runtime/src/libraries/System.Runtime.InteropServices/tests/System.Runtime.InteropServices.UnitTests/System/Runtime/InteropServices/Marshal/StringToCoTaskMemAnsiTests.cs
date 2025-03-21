@@ -21,9 +21,12 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData("abc\0def")]
         public void StringToCoTaskMemAnsi_InvokePtrToStringAnsi_Roundtrips(string s)
         {
-            string expectedFullString = new string(s.ToCharArray().Select(c => c > 0xFF ? '?' : c).ToArray());
+            string expectedFullString = new string(
+                s.ToCharArray().Select(c => c > 0xFF ? '?' : c).ToArray()
+            );
             int nullIndex = expectedFullString.IndexOf('\0');
-            string expectedParameterlessString = nullIndex == -1 ? expectedFullString : expectedFullString.Substring(0, nullIndex);
+            string expectedParameterlessString =
+                nullIndex == -1 ? expectedFullString : expectedFullString.Substring(0, nullIndex);
 
             IntPtr ptr = Marshal.StringToCoTaskMemAnsi(s);
             try
@@ -37,7 +40,10 @@ namespace System.Runtime.InteropServices.Tests
                     // Make sure the native memory is correctly laid out.
                     for (int i = 0; i < s.Length; i++)
                     {
-                        Assert.Equal(expectedFullString[i], (char)Marshal.ReadByte(IntPtr.Add(ptr, i)));
+                        Assert.Equal(
+                            expectedFullString[i],
+                            (char)Marshal.ReadByte(IntPtr.Add(ptr, i))
+                        );
                     }
 
                     // Make sure the native memory roundtrips.

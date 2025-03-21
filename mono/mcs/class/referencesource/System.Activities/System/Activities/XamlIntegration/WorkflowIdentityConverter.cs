@@ -17,7 +17,11 @@ namespace System.Activities.XamlIntegration
             return sourceType == typeof(string);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             string valueString = value as string;
             if (valueString != null)

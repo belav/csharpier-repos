@@ -99,8 +99,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     SR.Format(
                         SR.ReflectionModel_ImportNotAssignableFromExport,
                         export.ToElement().DisplayName,
-                        type.FullName),
-                    Definition.ToElement());
+                        type.FullName
+                    ),
+                    Definition.ToElement()
+                );
             }
 
             return result;

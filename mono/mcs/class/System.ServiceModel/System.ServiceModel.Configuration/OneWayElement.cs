@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,60 +49,60 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class OneWayElement
-		 : BindingElementExtensionElement
-	{
-		public OneWayElement () {
-		}
+    public sealed class OneWayElement : BindingElementExtensionElement
+    {
+        public OneWayElement() { }
 
+        // Properties
 
-		// Properties
+        public override Type BindingElementType
+        {
+            get { return typeof(OneWayBindingElement); }
+        }
 
-		public override Type BindingElementType {
-			get { return typeof (OneWayBindingElement); }
-		}
+        [ConfigurationProperty("channelPoolSettings", Options = ConfigurationPropertyOptions.None)]
+        public ChannelPoolSettingsElement ChannelPoolSettings
+        {
+            get { return (ChannelPoolSettingsElement)base["channelPoolSettings"]; }
+        }
 
-		[ConfigurationProperty ("channelPoolSettings",
-			 Options = ConfigurationPropertyOptions.None)]
-		public ChannelPoolSettingsElement ChannelPoolSettings {
-			get { return (ChannelPoolSettingsElement) base ["channelPoolSettings"]; }
-		}
+        [ConfigurationProperty(
+            "maxAcceptedChannels",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = "10"
+        )]
+        [IntegerValidator(MinValue = 1, MaxValue = int.MaxValue, ExcludeRange = false)]
+        public int MaxAcceptedChannels
+        {
+            get { return (int)base["maxAcceptedChannels"]; }
+            set { base["maxAcceptedChannels"] = value; }
+        }
 
-		[ConfigurationProperty ("maxAcceptedChannels",
-			 Options = ConfigurationPropertyOptions.None,
-			 DefaultValue = "10")]
-		[IntegerValidator (MinValue = 1,
-			MaxValue = int.MaxValue,
-			ExcludeRange = false)]
-		public int MaxAcceptedChannels {
-			get { return (int) base ["maxAcceptedChannels"]; }
-			set { base ["maxAcceptedChannels"] = value; }
-		}
+        [ConfigurationProperty(
+            "packetRoutable",
+            Options = ConfigurationPropertyOptions.None,
+            DefaultValue = false
+        )]
+        public bool PacketRoutable
+        {
+            get { return (bool)base["packetRoutable"]; }
+            set { base["packetRoutable"] = value; }
+        }
 
-		[ConfigurationProperty ("packetRoutable",
-			 Options = ConfigurationPropertyOptions.None,
-			DefaultValue = false)]
-		public bool PacketRoutable {
-			get { return (bool) base ["packetRoutable"]; }
-			set { base ["packetRoutable"] = value; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return base.Properties; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
-
-
-		[MonoTODO]
-		protected internal override BindingElement CreateBindingElement () {
-			throw new NotImplementedException ();
-		}
-
-	}
-
+        [MonoTODO]
+        protected internal override BindingElement CreateBindingElement()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

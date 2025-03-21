@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -23,79 +23,89 @@
 //	Ravindra	rkumar@novell.com
 //
 
-
 // COMPLETE
 
-using System.Drawing;
-using System.ComponentModel;
 using System.Collections;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
 namespace System.Windows.Forms
 {
-	public class ImageIndexConverter : Int32Converter
-	{
-		#region Constructors
+    public class ImageIndexConverter : Int32Converter
+    {
+        #region Constructors
 
-		public ImageIndexConverter () { }
+        public ImageIndexConverter() { }
 
-		#endregion Constructors
+        #endregion Constructors
 
-		#region Protected Properties
+        #region Protected Properties
 
-		protected virtual bool IncludeNoneAsStandardValue {
-			get { return true; }
-		}
+        protected virtual bool IncludeNoneAsStandardValue
+        {
+            get { return true; }
+        }
 
-		#endregion Protected Properties
+        #endregion Protected Properties
 
-		#region Public Methods
+        #region Public Methods
 
-		public override object ConvertFrom (ITypeDescriptorContext context, CultureInfo culture, object value)
-		{
-			string indexStr;
-			if (value != null && value is string) {
-				indexStr = (string) value;
-				if (indexStr == "(none)")
-					return -1;
-				else
-					return Int32.Parse (indexStr);
-			}
-			else
-				return base.ConvertFrom (context, culture, value);
-		}
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
+        {
+            string indexStr;
+            if (value != null && value is string)
+            {
+                indexStr = (string)value;
+                if (indexStr == "(none)")
+                    return -1;
+                else
+                    return Int32.Parse(indexStr);
+            }
+            else
+                return base.ConvertFrom(context, culture, value);
+        }
 
-		public override object ConvertTo (ITypeDescriptorContext context, CultureInfo culture,
-						  object value, Type destinationType)
-		{
-			if (value != null && destinationType == typeof (string)) {
-				if (value is int && (int) value == -1)
-					return "(none)";
-				else
-					return value.ToString ();
-			}
-			else
-				return base.ConvertTo (context, culture, value, destinationType);
-		}
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
+        {
+            if (value != null && destinationType == typeof(string))
+            {
+                if (value is int && (int)value == -1)
+                    return "(none)";
+                else
+                    return value.ToString();
+            }
+            else
+                return base.ConvertTo(context, culture, value, destinationType);
+        }
 
-		public override StandardValuesCollection GetStandardValues (ITypeDescriptorContext context)
-		{
-			int [] stdVal = new int [] {-1};
-			return new TypeConverter.StandardValuesCollection (stdVal);
-		}
+        public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+        {
+            int[] stdVal = new int[] { -1 };
+            return new TypeConverter.StandardValuesCollection(stdVal);
+        }
 
-		public override bool GetStandardValuesExclusive (ITypeDescriptorContext context)
-		{
-			return false;
-		}
+        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
+        {
+            return false;
+        }
 
-		public override bool GetStandardValuesSupported (ITypeDescriptorContext context)
-		{
-			return true;
-		}
+        public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+        {
+            return true;
+        }
 
-		#endregion Public Methods
-	}
+        #endregion Public Methods
+    }
 }

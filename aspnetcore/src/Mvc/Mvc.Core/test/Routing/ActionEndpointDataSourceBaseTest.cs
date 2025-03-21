@@ -21,10 +21,17 @@ public abstract class ActionEndpointDataSourceBaseTest
     {
         // Arrange
         var actions = new Mock<IActionDescriptorCollectionProvider>();
-        actions.Setup(m => m.ActionDescriptors).Returns(new ActionDescriptorCollection(new List<ActionDescriptor>
-            {
-                CreateActionDescriptor(new { Name = "Value", }, "/Template!"),
-            }, 0));
+        actions
+            .Setup(m => m.ActionDescriptors)
+            .Returns(
+                new ActionDescriptorCollection(
+                    new List<ActionDescriptor>
+                    {
+                        CreateActionDescriptor(new { Name = "Value" }, "/Template!"),
+                    },
+                    0
+                )
+            );
 
         var dataSource = CreateDataSource(actions.Object);
 
@@ -41,13 +48,22 @@ public abstract class ActionEndpointDataSourceBaseTest
     public void Endpoints_CalledMultipleTimes_ReturnsSameInstance()
     {
         // Arrange
-        var actionDescriptorCollectionProviderMock = new Mock<IActionDescriptorCollectionProvider>();
+        var actionDescriptorCollectionProviderMock =
+            new Mock<IActionDescriptorCollectionProvider>();
         actionDescriptorCollectionProviderMock
             .Setup(m => m.ActionDescriptors)
-            .Returns(new ActionDescriptorCollection(new[]
-            {
-                    CreateActionDescriptor(new { controller = "TestController", action = "TestAction" }, "/test"),
-            }, version: 0));
+            .Returns(
+                new ActionDescriptorCollection(
+                    new[]
+                    {
+                        CreateActionDescriptor(
+                            new { controller = "TestController", action = "TestAction" },
+                            "/test"
+                        ),
+                    },
+                    version: 0
+                )
+            );
 
         var dataSource = CreateDataSource(actionDescriptorCollectionProviderMock.Object);
 
@@ -58,7 +74,8 @@ public abstract class ActionEndpointDataSourceBaseTest
         // Assert
         Assert.Collection(
             endpoints1,
-            (e) => Assert.Equal("/test", Assert.IsType<RouteEndpoint>(e).RoutePattern.RawText));
+            (e) => Assert.Equal("/test", Assert.IsType<RouteEndpoint>(e).RoutePattern.RawText)
+        );
         Assert.Same(endpoints1, endpoints2);
 
         actionDescriptorCollectionProviderMock.VerifyGet(m => m.ActionDescriptors, Times.Once);
@@ -71,10 +88,18 @@ public abstract class ActionEndpointDataSourceBaseTest
         var actionDescriptorCollectionProviderMock = new Mock<ActionDescriptorCollectionProvider>();
         actionDescriptorCollectionProviderMock
             .Setup(m => m.ActionDescriptors)
-            .Returns(new ActionDescriptorCollection(new[]
-            {
-                    CreateActionDescriptor(new { controller = "TestController", action = "TestAction" }, "/test")
-            }, version: 0));
+            .Returns(
+                new ActionDescriptorCollection(
+                    new[]
+                    {
+                        CreateActionDescriptor(
+                            new { controller = "TestController", action = "TestAction" },
+                            "/test"
+                        ),
+                    },
+                    version: 0
+                )
+            );
 
         CancellationTokenSource cts = null;
         actionDescriptorCollectionProviderMock
@@ -92,21 +117,31 @@ public abstract class ActionEndpointDataSourceBaseTest
         // Act
         var endpoints = dataSource.Endpoints;
 
-        Assert.Collection(endpoints,
+        Assert.Collection(
+            endpoints,
             (e) =>
             {
                 var routePattern = Assert.IsType<RouteEndpoint>(e).RoutePattern;
                 Assert.Equal("/test", routePattern.RawText);
                 Assert.Equal("TestController", routePattern.RequiredValues["controller"]);
                 Assert.Equal("TestAction", routePattern.RequiredValues["action"]);
-            });
+            }
+        );
 
         actionDescriptorCollectionProviderMock
             .Setup(m => m.ActionDescriptors)
-            .Returns(new ActionDescriptorCollection(new[]
-            {
-                    CreateActionDescriptor(new { controller = "NewTestController", action = "NewTestAction" }, "/test")
-            }, version: 1));
+            .Returns(
+                new ActionDescriptorCollection(
+                    new[]
+                    {
+                        CreateActionDescriptor(
+                            new { controller = "NewTestController", action = "NewTestAction" },
+                            "/test"
+                        ),
+                    },
+                    version: 1
+                )
+            );
 
         cts.Cancel();
 
@@ -114,24 +149,29 @@ public abstract class ActionEndpointDataSourceBaseTest
         var newEndpoints = dataSource.Endpoints;
 
         Assert.NotSame(endpoints, newEndpoints);
-        Assert.Collection(newEndpoints,
+        Assert.Collection(
+            newEndpoints,
             (e) =>
             {
                 var routePattern = Assert.IsType<RouteEndpoint>(e).RoutePattern;
                 Assert.Equal("/test", routePattern.RawText);
                 Assert.Equal("NewTestController", routePattern.RequiredValues["controller"]);
                 Assert.Equal("NewTestAction", routePattern.RequiredValues["action"]);
-            });
+            }
+        );
     }
 
-    private protected ActionEndpointDataSourceBase CreateDataSource(IActionDescriptorCollectionProvider actions = null)
+    private protected ActionEndpointDataSourceBase CreateDataSource(
+        IActionDescriptorCollectionProvider actions = null
+    )
     {
         if (actions == null)
         {
             actions = new DefaultActionDescriptorCollectionProvider(
                 Array.Empty<IActionDescriptorProvider>(),
                 Array.Empty<IActionDescriptorChangeProvider>(),
-                NullLogger<DefaultActionDescriptorCollectionProvider>.Instance);
+                NullLogger<DefaultActionDescriptorCollectionProvider>.Instance
+            );
         }
 
         var services = new ServiceCollection();
@@ -146,12 +186,19 @@ public abstract class ActionEndpointDataSourceBaseTest
 
         var serviceProvider = services.BuildServiceProvider();
 
-        var endpointFactory = new ActionEndpointFactory(serviceProvider.GetRequiredService<RoutePatternTransformer>(), Enumerable.Empty<IRequestDelegateFactory>(), serviceProvider);
+        var endpointFactory = new ActionEndpointFactory(
+            serviceProvider.GetRequiredService<RoutePatternTransformer>(),
+            Enumerable.Empty<IRequestDelegateFactory>(),
+            serviceProvider
+        );
 
         return CreateDataSource(actions, endpointFactory);
     }
 
-    private protected abstract ActionEndpointDataSourceBase CreateDataSource(IActionDescriptorCollectionProvider actions, ActionEndpointFactory endpointFactory);
+    private protected abstract ActionEndpointDataSourceBase CreateDataSource(
+        IActionDescriptorCollectionProvider actions,
+        ActionEndpointFactory endpointFactory
+    );
 
     private class UpperCaseParameterTransform : IOutboundParameterTransformer
     {
@@ -164,5 +211,6 @@ public abstract class ActionEndpointDataSourceBaseTest
     protected abstract ActionDescriptor CreateActionDescriptor(
         object values,
         string pattern = null,
-        IList<object> metadata = null);
+        IList<object> metadata = null
+    );
 }

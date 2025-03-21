@@ -1,11 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using System.Formats.Asn1;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Test.Cryptography;
 using Xunit;
@@ -36,7 +36,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate c2 = new X509Certificate())
             using (X509Certificate c3 = new X509Certificate())
             {
-                X509CertificateCollection cc = new X509CertificateCollection(new X509Certificate[] { c1, c2, c3 });
+                X509CertificateCollection cc = new X509CertificateCollection(
+                    new X509Certificate[] { c1, c2, c3 }
+                );
                 Assert.Equal(3, cc.Count);
                 Assert.Same(c1, cc[0]);
                 Assert.Same(c2, cc[1]);
@@ -48,7 +50,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Same(c2, cc2[1]);
                 Assert.Same(c3, cc2[2]);
 
-                Assert.Throws<ArgumentNullException>(() => new X509CertificateCollection(new X509Certificate[] { c1, c2, null, c3 }));
+                Assert.Throws<ArgumentNullException>(() =>
+                    new X509CertificateCollection(new X509Certificate[] { c1, c2, null, c3 })
+                );
             }
         }
 
@@ -59,7 +63,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate2 c2 = new X509Certificate2())
             using (X509Certificate2 c3 = new X509Certificate2())
             {
-                X509Certificate2Collection cc = new X509Certificate2Collection(new X509Certificate2[] { c1, c2, c3 });
+                X509Certificate2Collection cc = new X509Certificate2Collection(
+                    new X509Certificate2[] { c1, c2, c3 }
+                );
                 Assert.Equal(3, cc.Count);
                 Assert.Same(c1, cc[0]);
                 Assert.Same(c2, cc[1]);
@@ -71,14 +77,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Same(c2, cc2[1]);
                 Assert.Same(c3, cc2[2]);
 
-                Assert.Throws<ArgumentNullException>(() => new X509Certificate2Collection(new X509Certificate2[] { c1, c2, null, c3 }));
+                Assert.Throws<ArgumentNullException>(() =>
+                    new X509Certificate2Collection(new X509Certificate2[] { c1, c2, null, c3 })
+                );
 
                 using (X509Certificate c4 = new X509Certificate())
                 {
-                    X509Certificate2Collection collection = new X509Certificate2Collection { c1, c2, c3 };
+                    X509Certificate2Collection collection = new X509Certificate2Collection
+                    {
+                        c1,
+                        c2,
+                        c3,
+                    };
                     ((IList)collection).Add(c4); // Add non-X509Certificate2 object
 
-                    Assert.Throws<InvalidCastException>(() => new X509Certificate2Collection(collection));
+                    Assert.Throws<InvalidCastException>(() =>
+                        new X509Certificate2Collection(collection)
+                    );
                 }
             }
         }
@@ -90,7 +105,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate2 c2 = new X509Certificate2())
             using (X509Certificate2 c3 = new X509Certificate2())
             {
-                X509Certificate2Collection cc = new X509Certificate2Collection(new X509Certificate2[] { c1, c2, c3 });
+                X509Certificate2Collection cc = new X509Certificate2Collection(
+                    new X509Certificate2[] { c1, c2, c3 }
+                );
                 object ignored;
 
                 X509Certificate2Enumerator e = cc.GetEnumerator();
@@ -135,7 +152,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate2 c2 = new X509Certificate2())
             using (X509Certificate2 c3 = new X509Certificate2())
             {
-                X509CertificateCollection cc = new X509CertificateCollection(new X509Certificate[] { c1, c2, c3 });
+                X509CertificateCollection cc = new X509CertificateCollection(
+                    new X509Certificate[] { c1, c2, c3 }
+                );
                 object ignored;
 
                 X509CertificateCollection.X509CertificateEnumerator e = cc.GetEnumerator();
@@ -209,15 +228,26 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (X509Certificate certificate = new X509Certificate())
             {
-                Assert.Throws<ArgumentNullException>(() => new X509CertificateCollection((X509Certificate[])null));
-                Assert.Throws<ArgumentNullException>(() => new X509CertificateCollection((X509CertificateCollection)null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    new X509CertificateCollection((X509Certificate[])null)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    new X509CertificateCollection((X509CertificateCollection)null)
+                );
 
-                X509CertificateCollection collection = new X509CertificateCollection { certificate };
+                X509CertificateCollection collection = new X509CertificateCollection
+                {
+                    certificate,
+                };
 
                 Assert.Throws<ArgumentNullException>(() => collection[0] = null);
                 Assert.Throws<ArgumentNullException>(() => collection.Add(null));
-                Assert.Throws<ArgumentNullException>(() => collection.AddRange((X509Certificate[])null));
-                Assert.Throws<ArgumentNullException>(() => collection.AddRange((X509CertificateCollection)null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    collection.AddRange((X509Certificate[])null)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    collection.AddRange((X509CertificateCollection)null)
+                );
                 Assert.Throws<ArgumentNullException>(() => collection.CopyTo(null, 0));
                 Assert.Throws<ArgumentNullException>(() => collection.Insert(0, null));
                 Assert.Throws<ArgumentNullException>(() => collection.Remove(null));
@@ -230,8 +260,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Throws<ArgumentNullException>(() => ilist.Remove(null));
             }
 
-            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(
-                () => new X509CertificateCollection.X509CertificateEnumerator(null));
+            AssertExtensions.Throws<ArgumentNullException, NullReferenceException>(() =>
+                new X509CertificateCollection.X509CertificateEnumerator(null)
+            );
         }
 
         [Fact]
@@ -239,25 +270,50 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (X509Certificate2 certificate = new X509Certificate2())
             {
-                Assert.Throws<ArgumentNullException>(() => new X509Certificate2Collection((X509Certificate2[])null));
-                Assert.Throws<ArgumentNullException>(() => new X509Certificate2Collection((X509Certificate2Collection)null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    new X509Certificate2Collection((X509Certificate2[])null)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    new X509Certificate2Collection((X509Certificate2Collection)null)
+                );
 
-                X509Certificate2Collection collection = new X509Certificate2Collection { certificate };
+                X509Certificate2Collection collection = new X509Certificate2Collection
+                {
+                    certificate,
+                };
 
                 Assert.Throws<ArgumentNullException>(() => collection[0] = null);
                 Assert.Throws<ArgumentNullException>(() => collection.Add((X509Certificate)null));
                 Assert.Throws<ArgumentNullException>(() => collection.Add((X509Certificate2)null));
-                Assert.Throws<ArgumentNullException>(() => collection.AddRange((X509Certificate[])null));
-                Assert.Throws<ArgumentNullException>(() => collection.AddRange((X509CertificateCollection)null));
-                Assert.Throws<ArgumentNullException>(() => collection.AddRange((X509Certificate2[])null));
-                Assert.Throws<ArgumentNullException>(() => collection.AddRange((X509Certificate2Collection)null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    collection.AddRange((X509Certificate[])null)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    collection.AddRange((X509CertificateCollection)null)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    collection.AddRange((X509Certificate2[])null)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    collection.AddRange((X509Certificate2Collection)null)
+                );
                 Assert.Throws<ArgumentNullException>(() => collection.CopyTo(null, 0));
-                Assert.Throws<ArgumentNullException>(() => collection.Insert(0, (X509Certificate)null));
-                Assert.Throws<ArgumentNullException>(() => collection.Insert(0, (X509Certificate2)null));
-                Assert.Throws<ArgumentNullException>(() => collection.Remove((X509Certificate)null));
-                Assert.Throws<ArgumentNullException>(() => collection.Remove((X509Certificate2)null));
-                Assert.Throws<ArgumentNullException>(() => collection.RemoveRange((X509Certificate2[])null));
-                Assert.Throws<ArgumentNullException>(() => collection.RemoveRange((X509Certificate2Collection)null));
+                Assert.Throws<ArgumentNullException>(() =>
+                    collection.Insert(0, (X509Certificate)null)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    collection.Insert(0, (X509Certificate2)null)
+                );
+                Assert.Throws<ArgumentNullException>(() => collection.Remove((X509Certificate)null)
+                );
+                Assert.Throws<ArgumentNullException>(() => collection.Remove((X509Certificate2)null)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    collection.RemoveRange((X509Certificate2[])null)
+                );
+                Assert.Throws<ArgumentNullException>(() =>
+                    collection.RemoveRange((X509Certificate2Collection)null)
+                );
 
                 Assert.Throws<ArgumentNullException>(() => collection.Import((byte[])null));
                 Assert.Throws<ArgumentNullException>(() => collection.Import((string)null));
@@ -276,24 +332,38 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (X509Certificate certificate = new X509Certificate())
             {
-                X509CertificateCollection collection = new X509CertificateCollection { certificate };
+                X509CertificateCollection collection = new X509CertificateCollection
+                {
+                    certificate,
+                };
 
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection[-1]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection[collection.Count]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection[-1] = certificate);
-                Assert.Throws<ArgumentOutOfRangeException>(() => collection[collection.Count] = certificate);
-                Assert.Throws<ArgumentOutOfRangeException>(() => collection.Insert(-1, certificate));
-                Assert.Throws<ArgumentOutOfRangeException>(() => collection.Insert(collection.Count + 1, certificate));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    collection[collection.Count] = certificate
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(() => collection.Insert(-1, certificate)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    collection.Insert(collection.Count + 1, certificate)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection.RemoveAt(-1));
-                Assert.Throws<ArgumentOutOfRangeException>(() => collection.RemoveAt(collection.Count));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    collection.RemoveAt(collection.Count)
+                );
 
                 IList ilist = (IList)collection;
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist[-1]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist[collection.Count]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist[-1] = certificate);
-                Assert.Throws<ArgumentOutOfRangeException>(() => ilist[collection.Count] = certificate);
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    ilist[collection.Count] = certificate
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist.Insert(-1, certificate));
-                Assert.Throws<ArgumentOutOfRangeException>(() => ilist.Insert(collection.Count + 1, certificate));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    ilist.Insert(collection.Count + 1, certificate)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist.RemoveAt(-1));
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist.RemoveAt(collection.Count));
             }
@@ -304,24 +374,38 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (X509Certificate2 certificate = new X509Certificate2())
             {
-                X509Certificate2Collection collection = new X509Certificate2Collection { certificate };
+                X509Certificate2Collection collection = new X509Certificate2Collection
+                {
+                    certificate,
+                };
 
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection[-1]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection[collection.Count]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection[-1] = certificate);
-                Assert.Throws<ArgumentOutOfRangeException>(() => collection[collection.Count] = certificate);
-                Assert.Throws<ArgumentOutOfRangeException>(() => collection.Insert(-1, certificate));
-                Assert.Throws<ArgumentOutOfRangeException>(() => collection.Insert(collection.Count + 1, certificate));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    collection[collection.Count] = certificate
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(() => collection.Insert(-1, certificate)
+                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    collection.Insert(collection.Count + 1, certificate)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => collection.RemoveAt(-1));
-                Assert.Throws<ArgumentOutOfRangeException>(() => collection.RemoveAt(collection.Count));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    collection.RemoveAt(collection.Count)
+                );
 
                 IList ilist = (IList)collection;
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist[-1]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist[collection.Count]);
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist[-1] = certificate);
-                Assert.Throws<ArgumentOutOfRangeException>(() => ilist[collection.Count] = certificate);
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    ilist[collection.Count] = certificate
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist.Insert(-1, certificate));
-                Assert.Throws<ArgumentOutOfRangeException>(() => ilist.Insert(collection.Count + 1, certificate));
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                    ilist.Insert(collection.Count + 1, certificate)
+                );
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist.RemoveAt(-1));
                 Assert.Throws<ArgumentOutOfRangeException>(() => ilist.RemoveAt(collection.Count));
             }
@@ -334,7 +418,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate c2 = new X509Certificate())
             using (X509Certificate c3 = new X509Certificate())
             {
-                X509CertificateCollection collection = new X509CertificateCollection(new X509Certificate[] { c1, c2, c3 });
+                X509CertificateCollection collection = new X509CertificateCollection(
+                    new X509Certificate[] { c1, c2, c3 }
+                );
 
                 Assert.True(collection.Contains(c1));
                 Assert.True(collection.Contains(c2));
@@ -357,7 +443,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate2 c2 = new X509Certificate2())
             using (X509Certificate2 c3 = new X509Certificate2())
             {
-                X509Certificate2Collection collection = new X509Certificate2Collection(new X509Certificate2[] { c1, c2, c3 });
+                X509Certificate2Collection collection = new X509Certificate2Collection(
+                    new X509Certificate2[] { c1, c2, c3 }
+                );
 
                 Assert.True(collection.Contains(c1));
                 Assert.True(collection.Contains(c2));
@@ -385,7 +473,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate c2 = new X509Certificate())
             using (X509Certificate c3 = new X509Certificate())
             {
-                X509CertificateCollection cc = new X509CertificateCollection(new X509Certificate[] { c1, c2, c3 });
+                X509CertificateCollection cc = new X509CertificateCollection(
+                    new X509Certificate[] { c1, c2, c3 }
+                );
                 X509CertificateCollection.X509CertificateEnumerator e = cc.GetEnumerator();
 
                 cc.Add(c1);
@@ -403,7 +493,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate2 c2 = new X509Certificate2())
             using (X509Certificate2 c3 = new X509Certificate2())
             {
-                X509Certificate2Collection cc = new X509Certificate2Collection(new X509Certificate2[] { c1, c2, c3 });
+                X509Certificate2Collection cc = new X509Certificate2Collection(
+                    new X509Certificate2[] { c1, c2, c3 }
+                );
                 X509Certificate2Enumerator e = cc.GetEnumerator();
 
                 cc.Add(c1);
@@ -430,7 +522,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Same(c2, cc[1]);
 
                 Assert.Throws<ArgumentNullException>(() => cc.Add(null));
-
 
                 IList il = new X509CertificateCollection();
                 idx = il.Add(c1);
@@ -513,10 +604,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // StoreSavedAsSerializedCerData not supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // StoreSavedAsSerializedCerData not supported on Unix
         public static void ImportStoreSavedAsSerializedCerData_Windows()
         {
-            using (var pfxCer = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, Cert.EphemeralIfPossible))
+            using (
+                var pfxCer = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    Cert.EphemeralIfPossible
+                )
+            )
             {
                 using (ImportedCollection ic = Cert.Import(TestData.StoreSavedAsSerializedCerData))
                 {
@@ -537,24 +634,33 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // StoreSavedAsSerializedCerData not supported on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // StoreSavedAsSerializedCerData not supported on Unix
         public static void ImportStoreSavedAsSerializedCerData_Unix()
         {
             X509Certificate2Collection cc2 = new X509Certificate2Collection();
-            Assert.ThrowsAny<CryptographicException>(() => cc2.Import(TestData.StoreSavedAsSerializedCerData));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                cc2.Import(TestData.StoreSavedAsSerializedCerData)
+            );
             Assert.Equal(0, cc2.Count);
         }
 
         [Theory]
         [MemberData(nameof(StorageFlags))]
-        [PlatformSpecific(TestPlatforms.Windows)]  // StoreSavedAsSerializedStoreData not supported on Unix
-        public static void ImportStoreSavedAsSerializedStoreData_Windows(X509KeyStorageFlags keyStorageFlags)
+        [PlatformSpecific(TestPlatforms.Windows)] // StoreSavedAsSerializedStoreData not supported on Unix
+        public static void ImportStoreSavedAsSerializedStoreData_Windows(
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             using (var msCer = new X509Certificate2(TestData.MsCertificate))
-            using (var pfxCer = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, keyStorageFlags))
+            using (
+                var pfxCer = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    keyStorageFlags
+                )
+            )
             using (ImportedCollection ic = Cert.Import(TestData.StoreSavedAsSerializedStoreData))
             {
-
                 X509Certificate2Collection cc2 = ic.Collection;
                 int count = cc2.Count;
                 Assert.Equal(2, count);
@@ -572,11 +678,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // StoreSavedAsSerializedStoreData not supported on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // StoreSavedAsSerializedStoreData not supported on Unix
         public static void ImportStoreSavedAsSerializedStoreData_Unix()
         {
             X509Certificate2Collection cc2 = new X509Certificate2Collection();
-            Assert.ThrowsAny<CryptographicException>(() => cc2.Import(TestData.StoreSavedAsSerializedStoreData));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                cc2.Import(TestData.StoreSavedAsSerializedStoreData)
+            );
             Assert.Equal(0, cc2.Count);
         }
 
@@ -585,7 +693,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void ImportStoreSavedAsPfxData()
         {
             using (var msCer = new X509Certificate2(TestData.MsCertificate))
-            using (var pfxCer = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, Cert.EphemeralIfPossible))
+            using (
+                var pfxCer = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    Cert.EphemeralIfPossible
+                )
+            )
             using (ImportedCollection ic = Cert.Import(TestData.StoreSavedAsPfxData))
             {
                 X509Certificate2Collection cc2 = ic.Collection;
@@ -607,16 +721,30 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void ImportInvalidData()
         {
             X509Certificate2Collection cc2 = new X509Certificate2Collection();
-            Assert.ThrowsAny<CryptographicException>(() => cc2.Import(new byte[] { 0, 1, 1, 2, 3, 5, 8, 13, 21 }));
+            Assert.ThrowsAny<CryptographicException>(() =>
+                cc2.Import(new byte[] { 0, 1, 1, 2, 3, 5, 8, 13, 21 })
+            );
         }
 
         [Theory]
         [MemberData(nameof(StorageFlags))]
         public static void ImportFromFileTests(X509KeyStorageFlags storageFlags)
         {
-            using (var pfxCer = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, storageFlags))
+            using (
+                var pfxCer = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    storageFlags
+                )
+            )
             {
-                using (ImportedCollection ic = Cert.Import(TestFiles.PfxFile, TestData.PfxDataPassword, storageFlags))
+                using (
+                    ImportedCollection ic = Cert.Import(
+                        TestFiles.PfxFile,
+                        TestData.PfxDataPassword,
+                        storageFlags
+                    )
+                )
                 {
                     X509Certificate2Collection cc2 = ic.Collection;
                     int count = cc2.Count;
@@ -637,7 +765,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void ImportMultiplePrivateKeysPfx()
         {
-            using (ImportedCollection ic = Cert.Import(TestData.MultiPrivateKeyPfx, (string?)null, X509KeyStorageFlags.DefaultKeySet))
+            using (
+                ImportedCollection ic = Cert.Import(
+                    TestData.MultiPrivateKeyPfx,
+                    (string?)null,
+                    X509KeyStorageFlags.DefaultKeySet
+                )
+            )
             {
                 X509Certificate2Collection collection = ic.Collection;
 
@@ -663,40 +797,48 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // SerializedCert not supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // SerializedCert not supported on Unix
         public static void ExportSerializedCert_Windows()
         {
             TestExportSingleCert(X509ContentType.SerializedCert);
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // SerializedCert not supported on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // SerializedCert not supported on Unix
         public static void ExportSerializedCert_Unix()
         {
             using (var msCer = new X509Certificate2(TestData.MsCertificate))
             using (var ecdsa256Cer = new X509Certificate2(TestData.ECDsa256Certificate))
             {
-                X509Certificate2Collection cc = new X509Certificate2Collection(new[] { msCer, ecdsa256Cer });
-                Assert.Throws<PlatformNotSupportedException>(() => cc.Export(X509ContentType.SerializedCert));
+                X509Certificate2Collection cc = new X509Certificate2Collection(
+                    new[] { msCer, ecdsa256Cer }
+                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    cc.Export(X509ContentType.SerializedCert)
+                );
             }
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.Windows)]  // SerializedStore not supported on Unix
+        [PlatformSpecific(TestPlatforms.Windows)] // SerializedStore not supported on Unix
         public static void ExportSerializedStore_Windows()
         {
             TestExportStore(X509ContentType.SerializedStore);
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix)]  // SerializedStore not supported on Unix
+        [PlatformSpecific(TestPlatforms.AnyUnix)] // SerializedStore not supported on Unix
         public static void ExportSerializedStore_Unix()
         {
             using (var msCer = new X509Certificate2(TestData.MsCertificate))
             using (var ecdsa256Cer = new X509Certificate2(TestData.ECDsa256Certificate))
             {
-                X509Certificate2Collection cc = new X509Certificate2Collection(new[] { msCer, ecdsa256Cer });
-                Assert.Throws<PlatformNotSupportedException>(() => cc.Export(X509ContentType.SerializedStore));
+                X509Certificate2Collection cc = new X509Certificate2Collection(
+                    new[] { msCer, ecdsa256Cer }
+                );
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                    cc.Export(X509ContentType.SerializedStore)
+                );
             }
         }
 
@@ -744,16 +886,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (var cert2 = new X509Certificate2(TestData.ComplexNameInfoCert))
             using (var cert3 = new X509Certificate2(TestData.CertWithPolicies))
             {
-                var collection = new X509Certificate2Collection
-                {
-                    cert1,
-                    cert2,
-                    cert3,
-                };
+                var collection = new X509Certificate2Collection { cert1, cert2, cert3 };
 
                 byte[] exported = collection.Export(X509ContentType.Pkcs12);
 
-                using (ImportedCollection ic = Cert.Import(exported, (string?)null, X509KeyStorageFlags.DefaultKeySet))
+                using (
+                    ImportedCollection ic = Cert.Import(
+                        exported,
+                        (string?)null,
+                        X509KeyStorageFlags.DefaultKeySet
+                    )
+                )
                 {
                     X509Certificate2Collection importedCollection = ic.Collection;
 
@@ -768,7 +911,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                     for (int i = 0; i < collection.Count; i++)
                     {
                         subjects[i] = collection[i].GetNameInfo(X509NameType.SimpleName, false);
-                        importedSubjects[i] = importedCollection[i].GetNameInfo(X509NameType.SimpleName, false);
+                        importedSubjects[i] = importedCollection[i]
+                            .GetNameInfo(X509NameType.SimpleName, false);
                     }
 
                     Assert.Equal(subjects, importedSubjects);
@@ -786,8 +930,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             var collection = new X509Certificate2Collection();
             try
             {
-                collection.Import(TestFiles.DummyTcpServerPfxFile, (string)null, Cert.EphemeralIfPossible);
-                collection.Import(TestData.PfxData, TestData.PfxDataPassword, Cert.EphemeralIfPossible);
+                collection.Import(
+                    TestFiles.DummyTcpServerPfxFile,
+                    (string)null,
+                    Cert.EphemeralIfPossible
+                );
+                collection.Import(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    Cert.EphemeralIfPossible
+                );
                 Assert.Equal(3, collection.Count);
             }
             finally
@@ -806,8 +958,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             try
             {
-                collection.Import(TestFiles.DummyTcpServerPfxFile, (string)null, X509KeyStorageFlags.Exportable | Cert.EphemeralIfPossible);
-                collection.Import(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable | Cert.EphemeralIfPossible);
+                collection.Import(
+                    TestFiles.DummyTcpServerPfxFile,
+                    (string)null,
+                    X509KeyStorageFlags.Exportable | Cert.EphemeralIfPossible
+                );
+                collection.Import(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable | Cert.EphemeralIfPossible
+                );
 
                 // Pre-condition, we have multiple private keys
                 int originalPrivateKeyCount = collection.Count(c => c.HasPrivateKey);
@@ -815,7 +975,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 byte[] exported = collection.Export(X509ContentType.Pkcs12);
 
-                using (ImportedCollection ic = Cert.Import(exported, (string?)null, X509KeyStorageFlags.DefaultKeySet))
+                using (
+                    ImportedCollection ic = Cert.Import(
+                        exported,
+                        (string?)null,
+                        X509KeyStorageFlags.DefaultKeySet
+                    )
+                )
                 {
                     X509Certificate2Collection importedCollection = ic.Collection;
 
@@ -835,26 +1001,37 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "The PKCS#12 Exportable flag is not supported on iOS/MacCatalyst/tvOS")]
+        [SkipOnPlatform(
+            TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS,
+            "The PKCS#12 Exportable flag is not supported on iOS/MacCatalyst/tvOS"
+        )]
         public static void CanAddMultipleCertsWithSinglePrivateKey()
         {
-            using (var oneWithKey = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, X509KeyStorageFlags.Exportable | Cert.EphemeralIfPossible))
+            using (
+                var oneWithKey = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    X509KeyStorageFlags.Exportable | Cert.EphemeralIfPossible
+                )
+            )
             using (var twoWithoutKey = new X509Certificate2(TestData.ComplexNameInfoCert))
             {
                 Assert.True(oneWithKey.HasPrivateKey);
 
-                var col = new X509Certificate2Collection
-                {
-                    oneWithKey,
-                    twoWithoutKey,
-                };
+                var col = new X509Certificate2Collection { oneWithKey, twoWithoutKey };
 
                 Assert.Equal(1, col.Count(x => x.HasPrivateKey));
                 Assert.Equal(2, col.Count);
 
                 byte[] buffer = col.Export(X509ContentType.Pfx);
 
-                using (ImportedCollection newCollection = Cert.Import(buffer, (string?)null, X509KeyStorageFlags.DefaultKeySet))
+                using (
+                    ImportedCollection newCollection = Cert.Import(
+                        buffer,
+                        (string?)null,
+                        X509KeyStorageFlags.DefaultKeySet
+                    )
+                )
                 {
                     Assert.Equal(2, newCollection.Collection.Count);
                 }
@@ -868,7 +1045,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate c2 = new X509Certificate())
             using (X509Certificate c3 = new X509Certificate())
             {
-                X509CertificateCollection cc = new X509CertificateCollection(new X509Certificate[] { c1, c2, c3 });
+                X509CertificateCollection cc = new X509CertificateCollection(
+                    new X509Certificate[] { c1, c2, c3 }
+                );
 
                 X509Certificate[] array1 = new X509Certificate[cc.Count];
                 cc.CopyTo(array1, 0);
@@ -886,12 +1065,21 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported)
+        )]
         public static void X509ChainElementCollection_CopyTo_NonZeroLowerBound_ThrowsIndexOutOfRangeException()
         {
             using (var microsoftDotCom = new X509Certificate2(TestData.MicrosoftDotComSslCertBytes))
-            using (var microsoftDotComIssuer = new X509Certificate2(TestData.MicrosoftDotComIssuerBytes))
-            using (var microsoftDotComRoot = new X509Certificate2(TestData.MicrosoftDotComRootBytes))
+            using (
+                var microsoftDotComIssuer = new X509Certificate2(
+                    TestData.MicrosoftDotComIssuerBytes
+                )
+            )
+            using (
+                var microsoftDotComRoot = new X509Certificate2(TestData.MicrosoftDotComRootBytes)
+            )
             using (var chainHolder = new ChainHolder())
             {
                 X509Chain chain = chainHolder.Chain;
@@ -903,24 +1091,49 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 // Halfway between microsoftDotCom's NotBefore and NotAfter
                 // This isn't a boundary condition test.
-                chain.ChainPolicy.VerificationTime = new DateTime(2021, 02, 26, 12, 01, 01, DateTimeKind.Local);
+                chain.ChainPolicy.VerificationTime = new DateTime(
+                    2021,
+                    02,
+                    26,
+                    12,
+                    01,
+                    01,
+                    DateTimeKind.Local
+                );
 
                 bool valid = chain.Build(microsoftDotCom);
                 Assert.True(valid, "Precondition: Chain built validly");
 
                 ICollection collection = chain.ChainElements;
-                Array array = Array.CreateInstance(typeof(object), new int[] { 10 }, new int[] { 10 });
+                Array array = Array.CreateInstance(
+                    typeof(object),
+                    new int[] { 10 },
+                    new int[] { 10 }
+                );
                 Assert.Throws<IndexOutOfRangeException>(() => collection.CopyTo(array, 0));
             }
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNonZeroLowerBoundArraySupported)
+        )]
         public static void X509ExtensionCollection_CopyTo_NonZeroLowerBound_ThrowsIndexOutOfRangeException()
         {
-            using (X509Certificate2 cert = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, Cert.EphemeralIfPossible))
+            using (
+                X509Certificate2 cert = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    Cert.EphemeralIfPossible
+                )
+            )
             {
                 ICollection collection = cert.Extensions;
-                Array array = Array.CreateInstance(typeof(object), new int[] { 10 }, new int[] { 10 });
+                Array array = Array.CreateInstance(
+                    typeof(object),
+                    new int[] { 10 },
+                    new int[] { 10 }
+                );
                 Assert.Throws<IndexOutOfRangeException>(() => collection.CopyTo(array, 0));
             }
         }
@@ -929,9 +1142,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void X509CertificateCollectionIndexOf()
         {
             using (X509Certificate2 c1 = new X509Certificate2())
-            using (X509Certificate2 c2 = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, Cert.EphemeralIfPossible))
+            using (
+                X509Certificate2 c2 = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    Cert.EphemeralIfPossible
+                )
+            )
             {
-                X509CertificateCollection cc = new X509CertificateCollection(new X509Certificate[] { c1, c2 });
+                X509CertificateCollection cc = new X509CertificateCollection(
+                    new X509Certificate[] { c1, c2 }
+                );
                 Assert.Equal(0, cc.IndexOf(c1));
                 Assert.Equal(1, cc.IndexOf(c2));
 
@@ -945,9 +1166,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void X509CertificateCollectionRemove()
         {
             using (X509Certificate2 c1 = new X509Certificate2())
-            using (X509Certificate2 c2 = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, Cert.EphemeralIfPossible))
+            using (
+                X509Certificate2 c2 = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    Cert.EphemeralIfPossible
+                )
+            )
             {
-                X509CertificateCollection cc = new X509CertificateCollection(new X509Certificate[] { c1, c2 });
+                X509CertificateCollection cc = new X509CertificateCollection(
+                    new X509Certificate[] { c1, c2 }
+                );
 
                 cc.Remove(c1);
                 Assert.Equal(1, cc.Count);
@@ -978,7 +1207,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate c2 = new X509Certificate())
             using (X509Certificate c3 = new X509Certificate())
             {
-                X509CertificateCollection cc = new X509CertificateCollection(new X509Certificate[] { c1, c2, c3 });
+                X509CertificateCollection cc = new X509CertificateCollection(
+                    new X509Certificate[] { c1, c2, c3 }
+                );
 
                 cc.RemoveAt(0);
                 Assert.Equal(2, cc.Count);
@@ -991,7 +1222,6 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 cc.RemoveAt(0);
                 Assert.Equal(0, cc.Count);
-
 
                 IList il = new X509CertificateCollection(new X509Certificate[] { c1, c2, c3 });
 
@@ -1032,13 +1262,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Same(c2, cc[0]);
 
                 cc = new X509Certificate2Collection(array);
-                Assert.Throws<ArgumentNullException>(() => cc.RemoveRange(new X509Certificate2[] { c1, c2, null }));
+                Assert.Throws<ArgumentNullException>(() =>
+                    cc.RemoveRange(new X509Certificate2[] { c1, c2, null })
+                );
                 Assert.Equal(2, cc.Count);
                 Assert.Same(c1, cc[0]);
                 Assert.Same(c2, cc[1]);
 
                 cc = new X509Certificate2Collection(array);
-                Assert.Throws<ArgumentNullException>(() => cc.RemoveRange(new X509Certificate2[] { c1, null, c2 }));
+                Assert.Throws<ArgumentNullException>(() =>
+                    cc.RemoveRange(new X509Certificate2[] { c1, null, c2 })
+                );
                 Assert.Equal(2, cc.Count);
                 Assert.Same(c2, cc[0]);
                 Assert.Same(c1, cc[1]);
@@ -1048,7 +1282,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 // Add c1Clone back
                 // End state: { c1, c2 } => { c2, c1Clone }
                 cc = new X509Certificate2Collection(array);
-                AssertExtensions.Throws<ArgumentException>(null, () => cc.RemoveRange(new X509Certificate2[] { c1Clone, c1, c2 }));
+                AssertExtensions.Throws<ArgumentException>(
+                    null,
+                    () => cc.RemoveRange(new X509Certificate2[] { c1Clone, c1, c2 })
+                );
                 Assert.Equal(2, cc.Count);
                 Assert.Same(c2, cc[0]);
                 Assert.Same(c1Clone, cc[1]);
@@ -1103,12 +1340,7 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 // Add c1Clone back
                 // End state: { c1, c2 } => { c2, c1Clone }
                 cc = new X509Certificate2Collection(array);
-                collection = new X509Certificate2Collection
-                {
-                    c1Clone,
-                    c1,
-                    c2,
-                };
+                collection = new X509Certificate2Collection { c1Clone, c1, c2 };
                 AssertExtensions.Throws<ArgumentException>(null, () => cc.RemoveRange(collection));
                 Assert.Equal(2, cc.Count);
                 Assert.Same(c2, cc[0]);
@@ -1123,7 +1355,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate c2 = new X509Certificate())
             using (X509Certificate c3 = new X509Certificate())
             {
-                X509CertificateCollection cc = new X509CertificateCollection(new X509Certificate[] { c1, c2, c3 });
+                X509CertificateCollection cc = new X509CertificateCollection(
+                    new X509Certificate[] { c1, c2, c3 }
+                );
                 cc[0] = c3;
                 cc[1] = c2;
                 cc[2] = c1;
@@ -1148,7 +1382,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate2 c2 = new X509Certificate2())
             using (X509Certificate2 c3 = new X509Certificate2())
             {
-                X509Certificate2Collection cc = new X509Certificate2Collection(new X509Certificate2[] { c1, c2, c3 });
+                X509Certificate2Collection cc = new X509Certificate2Collection(
+                    new X509Certificate2[] { c1, c2, c3 }
+                );
                 cc[0] = c3;
                 cc[1] = c2;
                 cc[2] = c1;
@@ -1255,7 +1491,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate2 c2 = new X509Certificate2())
             using (X509Certificate2 c3 = new X509Certificate2())
             {
-                X509Certificate2Collection cc = new X509Certificate2Collection(new X509Certificate2[] { c1, c2, c3 });
+                X509Certificate2Collection cc = new X509Certificate2Collection(
+                    new X509Certificate2[] { c1, c2, c3 }
+                );
 
                 X509Certificate2[] array1 = new X509Certificate2[cc.Count];
                 cc.CopyTo(array1, 0);
@@ -1280,7 +1518,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate c2 = new X509Certificate())
             using (X509Certificate c3 = new X509Certificate())
             {
-                X509CertificateCollection cc = new X509CertificateCollection(new X509Certificate[] { c1, c2, c3 });
+                X509CertificateCollection cc = new X509CertificateCollection(
+                    new X509Certificate[] { c1, c2, c3 }
+                );
 
                 int expected = c1.GetHashCode() + c2.GetHashCode() + c3.GetHashCode();
                 Assert.Equal(expected, cc.GetHashCode());
@@ -1294,7 +1534,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             using (X509Certificate2 c2 = new X509Certificate2())
             using (X509Certificate2 c3 = new X509Certificate2())
             {
-                X509Certificate2Collection cc = new X509Certificate2Collection(new X509Certificate2[] { c1, c2, c3 });
+                X509Certificate2Collection cc = new X509Certificate2Collection(
+                    new X509Certificate2[] { c1, c2, c3 }
+                );
 
                 int expected = c1.GetHashCode() + c2.GetHashCode() + c3.GetHashCode();
                 Assert.Equal(expected, cc.GetHashCode());
@@ -1305,19 +1547,34 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         public static void X509ChainElementCollection_IndexerVsEnumerator()
         {
             using (var microsoftDotCom = new X509Certificate2(TestData.MicrosoftDotComSslCertBytes))
-            using (var microsoftDotComIssuer = new X509Certificate2(TestData.MicrosoftDotComIssuerBytes))
-            using (var microsoftDotComRoot = new X509Certificate2(TestData.MicrosoftDotComRootBytes))
+            using (
+                var microsoftDotComIssuer = new X509Certificate2(
+                    TestData.MicrosoftDotComIssuerBytes
+                )
+            )
+            using (
+                var microsoftDotComRoot = new X509Certificate2(TestData.MicrosoftDotComRootBytes)
+            )
             using (var chainHolder = new ChainHolder())
             {
                 X509Chain chain = chainHolder.Chain;
 
                 chain.ChainPolicy.ExtraStore.Add(microsoftDotComRoot);
                 chain.ChainPolicy.ExtraStore.Add(microsoftDotComIssuer);
-                chain.ChainPolicy.VerificationFlags = X509VerificationFlags.AllowUnknownCertificateAuthority;
+                chain.ChainPolicy.VerificationFlags =
+                    X509VerificationFlags.AllowUnknownCertificateAuthority;
 
                 // Halfway between microsoftDotCom's NotBefore and NotAfter
                 // This isn't a boundary condition test.
-                chain.ChainPolicy.VerificationTime = new DateTime(2021, 02, 26, 12, 01, 01, DateTimeKind.Local);
+                chain.ChainPolicy.VerificationTime = new DateTime(
+                    2021,
+                    02,
+                    26,
+                    12,
+                    01,
+                    01,
+                    DateTimeKind.Local
+                );
                 chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
 
                 bool valid = chain.Build(microsoftDotCom);
@@ -1374,7 +1631,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 // The friendly name of "Subject Key Identifier" is localized, but
                 // we can use the invariant form to ask for the friendly name to ask
                 // for the extension by friendly name.
-                X509Extension byFriendlyName = extensions[new Oid(SubjectKeyIdentifierOidValue).FriendlyName];
+                X509Extension byFriendlyName = extensions[
+                    new Oid(SubjectKeyIdentifierOidValue).FriendlyName
+                ];
                 Assert.Same(skidExtension, byFriendlyName);
             }
         }
@@ -1413,7 +1672,12 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public static void SerializedCertDisposeDoesNotRemoveKeyFile()
         {
-            using (X509Certificate2 fromPfx = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword))
+            using (
+                X509Certificate2 fromPfx = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword
+                )
+            )
             {
                 Assert.True(fromPfx.HasPrivateKey, "fromPfx.HasPrivateKey - before");
 
@@ -1433,7 +1697,11 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
                 using (RSA key = fromPfx.GetRSAPrivateKey())
                 {
-                    key.SignData(serializedCert, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
+                    key.SignData(
+                        serializedCert,
+                        HashAlgorithmName.SHA256,
+                        RSASignaturePadding.Pkcs1
+                    );
                 }
             }
         }
@@ -1441,10 +1709,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void ImportFromPem_SingleCertificate_Success()
         {
-            using(ImportedCollection ic = Cert.ImportFromPem(TestData.ECDsaCertificate))
+            using (ImportedCollection ic = Cert.ImportFromPem(TestData.ECDsaCertificate))
             {
                 Assert.Single(ic.Collection);
-                Assert.Equal("E844FA74BC8DCE46EF4F8605EA00008F161AB56F", ic.Collection[0].Thumbprint);
+                Assert.Equal(
+                    "E844FA74BC8DCE46EF4F8605EA00008F161AB56F",
+                    ic.Collection[0].Thumbprint
+                );
             }
         }
 
@@ -1453,10 +1724,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             string pemAggregate = TestData.ECDsaPkcs8Key + TestData.ECDsaCertificate;
 
-            using(ImportedCollection ic = Cert.ImportFromPem(pemAggregate))
+            using (ImportedCollection ic = Cert.ImportFromPem(pemAggregate))
             {
                 Assert.Single(ic.Collection);
-                Assert.Equal("E844FA74BC8DCE46EF4F8605EA00008F161AB56F", ic.Collection[0].Thumbprint);
+                Assert.Equal(
+                    "E844FA74BC8DCE46EF4F8605EA00008F161AB56F",
+                    ic.Collection[0].Thumbprint
+                );
             }
         }
 
@@ -1465,11 +1739,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             string pemAggregate = TestData.RsaCertificate + TestData.ECDsaCertificate;
 
-            using(ImportedCollection ic = Cert.ImportFromPem(pemAggregate))
+            using (ImportedCollection ic = Cert.ImportFromPem(pemAggregate))
             {
                 Assert.Equal(2, ic.Collection.Count);
-                Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", ic.Collection[0].Thumbprint);
-                Assert.Equal("E844FA74BC8DCE46EF4F8605EA00008F161AB56F", ic.Collection[1].Thumbprint);
+                Assert.Equal(
+                    "A33348E44A047A121F44E810E888899781E1FF19",
+                    ic.Collection[0].Thumbprint
+                );
+                Assert.Equal(
+                    "E844FA74BC8DCE46EF4F8605EA00008F161AB56F",
+                    ic.Collection[1].Thumbprint
+                );
             }
         }
 
@@ -1479,11 +1759,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             string pemAggregate = TestData.RsaCertificate + TestData.ECDsaCertificate;
 
             using (TempFileHolder aggregatePemFile = new TempFileHolder(pemAggregate))
-            using(ImportedCollection ic = Cert.ImportFromPemFile(aggregatePemFile.FilePath))
+            using (ImportedCollection ic = Cert.ImportFromPemFile(aggregatePemFile.FilePath))
             {
                 Assert.Equal(2, ic.Collection.Count);
-                Assert.Equal("A33348E44A047A121F44E810E888899781E1FF19", ic.Collection[0].Thumbprint);
-                Assert.Equal("E844FA74BC8DCE46EF4F8605EA00008F161AB56F", ic.Collection[1].Thumbprint);
+                Assert.Equal(
+                    "A33348E44A047A121F44E810E888899781E1FF19",
+                    ic.Collection[0].Thumbprint
+                );
+                Assert.Equal(
+                    "E844FA74BC8DCE46EF4F8605EA00008F161AB56F",
+                    ic.Collection[1].Thumbprint
+                );
             }
         }
 
@@ -1492,26 +1778,35 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             X509Certificate2Collection cc = new X509Certificate2Collection();
 
-            AssertExtensions.Throws<ArgumentNullException>("certPemFilePath", () =>
-                cc.ImportFromPemFile(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "certPemFilePath",
+                () => cc.ImportFromPemFile(null)
+            );
         }
 
         [Fact]
         public static void ImportFromPem_Exception_AllOrNothing()
         {
-            using(ImportedCollection ic = Cert.ImportFromPem(TestData.DsaCertificate))
+            using (ImportedCollection ic = Cert.ImportFromPem(TestData.DsaCertificate))
             {
                 StringBuilder builder = new StringBuilder();
                 builder.AppendLine(TestData.RsaCertificate);
-                builder.AppendLine(@"
+                builder.AppendLine(
+                    @"
     -----BEGIN CERTIFICATE-----
     MIII
-    -----END CERTIFICATE-----");
+    -----END CERTIFICATE-----"
+                );
                 builder.AppendLine(TestData.ECDsaCertificate);
 
-                Assert.ThrowsAny<CryptographicException>(() => ic.Collection.ImportFromPem(builder.ToString()));
+                Assert.ThrowsAny<CryptographicException>(() =>
+                    ic.Collection.ImportFromPem(builder.ToString())
+                );
                 Assert.Single(ic.Collection);
-                Assert.Equal("35052C549E4E7805E4EA204C2BE7F4BC19B88EC8", ic.Collection[0].Thumbprint);
+                Assert.Equal(
+                    "35052C549E4E7805E4EA204C2BE7F4BC19B88EC8",
+                    ic.Collection[0].Thumbprint
+                );
             }
         }
 
@@ -1520,10 +1815,16 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             X509Certificate2Collection cc = new X509Certificate2Collection();
 
-            using (X509Certificate2 cert = X509Certificate2.CreateFromPem(TestData.RsaCertificate, TestData.RsaPkcs1Key))
+            using (
+                X509Certificate2 cert = X509Certificate2.CreateFromPem(
+                    TestData.RsaCertificate,
+                    TestData.RsaPkcs1Key
+                )
+            )
             {
                 string content = Convert.ToBase64String(cert.Export(X509ContentType.Pkcs12));
-                string certContents = $@"
+                string certContents =
+                    $@"
 -----BEGIN CERTIFICATE-----
 {content}
 -----END CERTIFICATE-----
@@ -1538,7 +1839,8 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             X509Certificate2Collection cc = new X509Certificate2Collection();
 
             string content = Convert.ToBase64String(TestData.Pkcs7ChainDerBytes);
-            string certContents = $@"
+            string certContents =
+                $@"
 -----BEGIN CERTIFICATE-----
 {content}
 -----END CERTIFICATE-----
@@ -1584,22 +1886,23 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         [Fact]
         public static void ExportCertificatePems_MultiCert()
         {
-            const string MultiPem = "-----BEGIN CERTIFICATE-----\n" +
-                "MIIBETCBuaADAgECAgkA9StU5ZnBmM4wCgYIKoZIzj0EAwIwDzENMAsGA1UEAxME\n" +
-                "dGlueTAeFw0yMTA5MTUyMjAyNDNaFw0yMTA5MTUyMjAyNDNaMA8xDTALBgNVBAMT\n" +
-                "BHRpbnkwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQZ+baUXzzLi+p3cZEf4f23\n" +
-                "L/2Dbn5UB/uMCB7L71rWf3UwuCA3Is5uPci/3PQYLNwDkP3m3ZzxyzVCgFVqqYFg\n" +
-                "MAoGCCqGSM49BAMCA0cAMEQCIHafyKHQhv+03DaOJpuotD+jNu0Nc9pUI9OA8pUY\n" +
-                "3+qJAiBsqKjtc8LuGtUoqGvxLLQJwJ2QNY/qyEGtaImlqTYg5w==\n" +
-                "-----END CERTIFICATE-----\n" +
-                "-----BEGIN CERTIFICATE-----\n" +
-                "MIIBETCBuaADAgECAgkAg4L3Q2Ro0vcwCgYIKoZIzj0EAwIwDzENMAsGA1UEAxME\n" +
-                "dGlueTAeFw0yMTA5MTUyMjA1MTBaFw0yMTA5MTUyMjA1MTBaMA8xDTALBgNVBAMT\n" +
-                "BHRpbnkwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATaulLpfqjLAxefbhEgamRf\n" +
-                "HNyIRzCpXRtktpjEQi3kFa39SHJEvoX/LFTeSisw+0sNPGjIKVOLUQvx7+5x0H3F\n" +
-                "MAoGCCqGSM49BAMCA0cAMEQCIHIweJarpnxQ88gAtGbBq6iFWjGhXP0mfxJtrJKd\n" +
-                "WqzGAiBqbvlwpNMDKYGB7fwthHKn4SzxQaHYj27TdRuitsNCHg==\n" +
-                "-----END CERTIFICATE-----";
+            const string MultiPem =
+                "-----BEGIN CERTIFICATE-----\n"
+                + "MIIBETCBuaADAgECAgkA9StU5ZnBmM4wCgYIKoZIzj0EAwIwDzENMAsGA1UEAxME\n"
+                + "dGlueTAeFw0yMTA5MTUyMjAyNDNaFw0yMTA5MTUyMjAyNDNaMA8xDTALBgNVBAMT\n"
+                + "BHRpbnkwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAAQZ+baUXzzLi+p3cZEf4f23\n"
+                + "L/2Dbn5UB/uMCB7L71rWf3UwuCA3Is5uPci/3PQYLNwDkP3m3ZzxyzVCgFVqqYFg\n"
+                + "MAoGCCqGSM49BAMCA0cAMEQCIHafyKHQhv+03DaOJpuotD+jNu0Nc9pUI9OA8pUY\n"
+                + "3+qJAiBsqKjtc8LuGtUoqGvxLLQJwJ2QNY/qyEGtaImlqTYg5w==\n"
+                + "-----END CERTIFICATE-----\n"
+                + "-----BEGIN CERTIFICATE-----\n"
+                + "MIIBETCBuaADAgECAgkAg4L3Q2Ro0vcwCgYIKoZIzj0EAwIwDzENMAsGA1UEAxME\n"
+                + "dGlueTAeFw0yMTA5MTUyMjA1MTBaFw0yMTA5MTUyMjA1MTBaMA8xDTALBgNVBAMT\n"
+                + "BHRpbnkwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAATaulLpfqjLAxefbhEgamRf\n"
+                + "HNyIRzCpXRtktpjEQi3kFa39SHJEvoX/LFTeSisw+0sNPGjIKVOLUQvx7+5x0H3F\n"
+                + "MAoGCCqGSM49BAMCA0cAMEQCIHIweJarpnxQ88gAtGbBq6iFWjGhXP0mfxJtrJKd\n"
+                + "WqzGAiBqbvlwpNMDKYGB7fwthHKn4SzxQaHYj27TdRuitsNCHg==\n"
+                + "-----END CERTIFICATE-----";
 
             using (ImportedCollection ic = Cert.ImportFromPem(MultiPem))
             {
@@ -1612,7 +1915,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         private static void TestExportSingleCert_SecureStringPassword(X509ContentType ct)
         {
-            using (var pfxCer = new X509Certificate2(TestData.PfxData, TestData.CreatePfxDataPasswordSecureString(), Cert.EphemeralIfPossible))
+            using (
+                var pfxCer = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.CreatePfxDataPasswordSecureString(),
+                    Cert.EphemeralIfPossible
+                )
+            )
             {
                 TestExportSingleCert(ct, pfxCer);
             }
@@ -1620,7 +1929,13 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
         private static void TestExportSingleCert(X509ContentType ct)
         {
-            using (var pfxCer = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, Cert.EphemeralIfPossible))
+            using (
+                var pfxCer = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    Cert.EphemeralIfPossible
+                )
+            )
             {
                 TestExportSingleCert(ct, pfxCer);
             }
@@ -1630,7 +1945,9 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             using (var msCer = new X509Certificate2(TestData.MsCertificate))
             {
-                X509Certificate2Collection cc = new X509Certificate2Collection(new X509Certificate2[] { msCer, pfxCer });
+                X509Certificate2Collection cc = new X509Certificate2Collection(
+                    new X509Certificate2[] { msCer, pfxCer }
+                );
 
                 byte[] blob = cc.Export(ct);
 
@@ -1656,9 +1973,17 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         private static void TestExportStore(X509ContentType ct)
         {
             using (var msCer = new X509Certificate2(TestData.MsCertificate))
-            using (var pfxCer = new X509Certificate2(TestData.PfxData, TestData.PfxDataPassword, Cert.EphemeralIfPossible))
+            using (
+                var pfxCer = new X509Certificate2(
+                    TestData.PfxData,
+                    TestData.PfxDataPassword,
+                    Cert.EphemeralIfPossible
+                )
+            )
             {
-                X509Certificate2Collection cc = new X509Certificate2Collection(new X509Certificate2[] { msCer, pfxCer });
+                X509Certificate2Collection cc = new X509Certificate2Collection(
+                    new X509Certificate2[] { msCer, pfxCer }
+                );
 
                 byte[] blob = cc.Export(ct);
 
@@ -1687,7 +2012,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             }
         }
 
-        private static void AssertPemExport(X509Certificate2Collection collection, string expectedContents)
+        private static void AssertPemExport(
+            X509Certificate2Collection collection,
+            string expectedContents
+        )
         {
             Span<char> buffer;
             int written;
@@ -1698,13 +2026,19 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             if (expectedContents.Length > 0)
             {
                 buffer = new char[expectedContents.Length - 1];
-                Assert.False(collection.TryExportCertificatePems(buffer, out written), nameof(collection.TryExportCertificatePems));
+                Assert.False(
+                    collection.TryExportCertificatePems(buffer, out written),
+                    nameof(collection.TryExportCertificatePems)
+                );
                 Assert.Equal(0, written);
             }
 
             // Just enough
             buffer = new char[expectedContents.Length];
-            Assert.True(collection.TryExportCertificatePems(buffer, out written), nameof(collection.TryExportCertificatePems));
+            Assert.True(
+                collection.TryExportCertificatePems(buffer, out written),
+                nameof(collection.TryExportCertificatePems)
+            );
             Assert.Equal(written, expectedContents.Length);
             Assert.Equal(expectedContents, new string(buffer));
 
@@ -1712,7 +2046,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             int padding = 10;
             buffer = new char[expectedContents.Length + padding * 2];
             buffer.Fill('!');
-            Assert.True(collection.TryExportCertificatePems(buffer.Slice(10), out written), nameof(collection.TryExportCertificatePems));
+            Assert.True(
+                collection.TryExportCertificatePems(buffer.Slice(10), out written),
+                nameof(collection.TryExportCertificatePems)
+            );
             Assert.Equal(written, expectedContents.Length);
             Assert.Equal(expectedContents, new string(buffer.Slice(padding, written)));
             AssertExtensions.FilledWith('!', buffer.Slice(0, 10));
@@ -1737,16 +2074,31 @@ namespace System.Security.Cryptography.X509Certificates.Tests
                 Assert.Equal("PKCS7", new string(pemActual[fields.Label]));
                 byte[] data = Convert.FromBase64String(new string(actualBase64));
 
-                (int locationOffset, int locationLength) = fields.Location.GetOffsetAndLength(pemActual.Length);
+                (int locationOffset, int locationLength) = fields.Location.GetOffsetAndLength(
+                    pemActual.Length
+                );
                 Assert.Equal(0, locationOffset);
                 Assert.Equal(pemActual.Length, locationLength);
 
                 using (ImportedCollection imported = Cert.Import(data))
                 {
-                    X509Certificate2[] expectedCollection = expected.OrderBy(c => c.Thumbprint).ToArray();
-                    X509Certificate2[] actualCollection = imported.Collection.OrderBy(c => c.Thumbprint).ToArray();
-                    Assert.Equal(expectedCollection, actualCollection,
-                        EqualityComparer<X509Certificate2>.Create((x, y) => x == y || x != null && y != null && x.RawDataMemory.Span.SequenceEqual(y.RawDataMemory.Span)));
+                    X509Certificate2[] expectedCollection = expected
+                        .OrderBy(c => c.Thumbprint)
+                        .ToArray();
+                    X509Certificate2[] actualCollection = imported
+                        .Collection.OrderBy(c => c.Thumbprint)
+                        .ToArray();
+                    Assert.Equal(
+                        expectedCollection,
+                        actualCollection,
+                        EqualityComparer<X509Certificate2>.Create(
+                            (x, y) =>
+                                x == y
+                                || x != null
+                                    && y != null
+                                    && x.RawDataMemory.Span.SequenceEqual(y.RawDataMemory.Span)
+                        )
+                    );
                 }
             }
 
@@ -1757,12 +2109,18 @@ namespace System.Security.Cryptography.X509Certificates.Tests
 
             // Too small
             pkcs7Buffer = new char[pkcs7Pem.Length - 1];
-            Assert.False(collection.TryExportPkcs7Pem(pkcs7Buffer, out int written), nameof(collection.TryExportPkcs7Pem));
+            Assert.False(
+                collection.TryExportPkcs7Pem(pkcs7Buffer, out int written),
+                nameof(collection.TryExportPkcs7Pem)
+            );
             Assert.Equal(0, written);
 
             // Just enough
             pkcs7Buffer = new char[pkcs7Pem.Length];
-            Assert.True(collection.TryExportPkcs7Pem(pkcs7Buffer, out written), nameof(collection.TryExportPkcs7Pem));
+            Assert.True(
+                collection.TryExportPkcs7Pem(pkcs7Buffer, out written),
+                nameof(collection.TryExportPkcs7Pem)
+            );
             Assert.Equal(pkcs7Pem.Length, written);
             AssertPem(collection, pkcs7Buffer.Slice(0, written));
 
@@ -1770,7 +2128,10 @@ namespace System.Security.Cryptography.X509Certificates.Tests
             int padding = 10;
             pkcs7Buffer = new char[pkcs7Pem.Length + padding * 2];
             pkcs7Buffer.Fill('!');
-            Assert.True(collection.TryExportPkcs7Pem(pkcs7Buffer.Slice(padding), out written), nameof(collection.TryExportPkcs7Pem));
+            Assert.True(
+                collection.TryExportPkcs7Pem(pkcs7Buffer.Slice(padding), out written),
+                nameof(collection.TryExportPkcs7Pem)
+            );
             Assert.Equal(pkcs7Pem.Length, written);
             AssertPem(collection, pkcs7Buffer.Slice(padding, written));
 

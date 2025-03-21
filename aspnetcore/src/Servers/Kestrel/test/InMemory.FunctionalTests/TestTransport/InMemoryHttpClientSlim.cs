@@ -26,17 +26,29 @@ internal class InMemoryHttpClientSlim
         _inMemoryTestServer = testServer;
     }
 
-    public async Task<string> GetStringAsync(string requestUri, bool validateCertificate = true)
-        => await GetStringAsync(new Uri(requestUri), validateCertificate).ConfigureAwait(false);
+    public async Task<string> GetStringAsync(string requestUri, bool validateCertificate = true) =>
+        await GetStringAsync(new Uri(requestUri), validateCertificate).ConfigureAwait(false);
 
     public async Task<string> GetStringAsync(Uri requestUri, bool validateCertificate = true)
     {
         using (var connection = _inMemoryTestServer.CreateConnection())
-        using (var stream = await GetStream(connection.Stream, requestUri, validateCertificate).ConfigureAwait(false))
+        using (
+            var stream = await GetStream(connection.Stream, requestUri, validateCertificate)
+                .ConfigureAwait(false)
+        )
         {
-            using (var writer = new StreamWriter(stream, Encoding.ASCII, bufferSize: 1024, leaveOpen: true))
+            using (
+                var writer = new StreamWriter(
+                    stream,
+                    Encoding.ASCII,
+                    bufferSize: 1024,
+                    leaveOpen: true
+                )
+            )
             {
-                await writer.WriteAsync($"GET {requestUri.PathAndQuery} HTTP/1.0\r\n").ConfigureAwait(false);
+                await writer
+                    .WriteAsync($"GET {requestUri.PathAndQuery} HTTP/1.0\r\n")
+                    .ConfigureAwait(false);
                 await writer.WriteAsync($"Host: {GetHost(requestUri)}\r\n").ConfigureAwait(false);
                 await writer.WriteAsync("\r\n").ConfigureAwait(false);
             }
@@ -65,20 +77,43 @@ internal class InMemoryHttpClientSlim
         return authority;
     }
 
-    public async Task<string> PostAsync(string requestUri, HttpContent content, bool validateCertificate = true)
-        => await PostAsync(new Uri(requestUri), content, validateCertificate).ConfigureAwait(false);
+    public async Task<string> PostAsync(
+        string requestUri,
+        HttpContent content,
+        bool validateCertificate = true
+    ) => await PostAsync(new Uri(requestUri), content, validateCertificate).ConfigureAwait(false);
 
-    public async Task<string> PostAsync(Uri requestUri, HttpContent content, bool validateCertificate = true)
+    public async Task<string> PostAsync(
+        Uri requestUri,
+        HttpContent content,
+        bool validateCertificate = true
+    )
     {
         using (var connection = _inMemoryTestServer.CreateConnection())
-        using (var stream = await GetStream(connection.Stream, requestUri, validateCertificate).ConfigureAwait(false))
+        using (
+            var stream = await GetStream(connection.Stream, requestUri, validateCertificate)
+                .ConfigureAwait(false)
+        )
         {
-            using (var writer = new StreamWriter(stream, Encoding.ASCII, bufferSize: 1024, leaveOpen: true))
+            using (
+                var writer = new StreamWriter(
+                    stream,
+                    Encoding.ASCII,
+                    bufferSize: 1024,
+                    leaveOpen: true
+                )
+            )
             {
-                await writer.WriteAsync($"POST {requestUri.PathAndQuery} HTTP/1.0\r\n").ConfigureAwait(false);
+                await writer
+                    .WriteAsync($"POST {requestUri.PathAndQuery} HTTP/1.0\r\n")
+                    .ConfigureAwait(false);
                 await writer.WriteAsync($"Host: {requestUri.Authority}\r\n").ConfigureAwait(false);
-                await writer.WriteAsync($"Content-Type: {content.Headers.ContentType}\r\n").ConfigureAwait(false);
-                await writer.WriteAsync($"Content-Length: {content.Headers.ContentLength}\r\n").ConfigureAwait(false);
+                await writer
+                    .WriteAsync($"Content-Type: {content.Headers.ContentType}\r\n")
+                    .ConfigureAwait(false);
+                await writer
+                    .WriteAsync($"Content-Length: {content.Headers.ContentLength}\r\n")
+                    .ConfigureAwait(false);
                 await writer.WriteAsync("\r\n").ConfigureAwait(false);
             }
 
@@ -90,15 +125,24 @@ internal class InMemoryHttpClientSlim
 
     private static async Task<string> ReadResponse(Stream stream)
     {
-        using (var reader = new StreamReader(stream, Encoding.ASCII, detectEncodingFromByteOrderMarks: true,
-            bufferSize: 1024, leaveOpen: true))
+        using (
+            var reader = new StreamReader(
+                stream,
+                Encoding.ASCII,
+                detectEncodingFromByteOrderMarks: true,
+                bufferSize: 1024,
+                leaveOpen: true
+            )
+        )
         {
             var response = await reader.ReadToEndAsync().DefaultTimeout().ConfigureAwait(false);
 
             var status = GetStatus(response);
             new HttpResponseMessage(status).EnsureSuccessStatusCode();
 
-            var body = response.Substring(response.IndexOf("\r\n\r\n", StringComparison.Ordinal) + 4);
+            var body = response.Substring(
+                response.IndexOf("\r\n\r\n", StringComparison.Ordinal) + 4
+            );
             return body;
         }
     }
@@ -114,19 +158,34 @@ internal class InMemoryHttpClientSlim
             throw new InvalidDataException($"No StatusCode found in '{response}'");
         }
 
-        return (HttpStatusCode)int.Parse(response.Substring(statusStart, statusLength), CultureInfo.InvariantCulture);
+        return (HttpStatusCode)
+            int.Parse(response.Substring(statusStart, statusLength), CultureInfo.InvariantCulture);
     }
 
-    private static async Task<Stream> GetStream(Stream rawStream, Uri requestUri, bool validateCertificate)
+    private static async Task<Stream> GetStream(
+        Stream rawStream,
+        Uri requestUri,
+        bool validateCertificate
+    )
     {
         if (requestUri.Scheme.Equals("https", StringComparison.OrdinalIgnoreCase))
         {
-            var sslStream = new SslStream(rawStream, leaveInnerStreamOpen: false, userCertificateValidationCallback:
-                validateCertificate ? null : (RemoteCertificateValidationCallback)((a, b, c, d) => true));
+            var sslStream = new SslStream(
+                rawStream,
+                leaveInnerStreamOpen: false,
+                userCertificateValidationCallback: validateCertificate
+                    ? null
+                    : (RemoteCertificateValidationCallback)((a, b, c, d) => true)
+            );
 
-            await sslStream.AuthenticateAsClientAsync(requestUri.Host, clientCertificates: null,
-                enabledSslProtocols: SslProtocols.None,
-                checkCertificateRevocation: validateCertificate).ConfigureAwait(false);
+            await sslStream
+                .AuthenticateAsClientAsync(
+                    requestUri.Host,
+                    clientCertificates: null,
+                    enabledSslProtocols: SslProtocols.None,
+                    checkCertificateRevocation: validateCertificate
+                )
+                .ConfigureAwait(false);
             return sslStream;
         }
         else

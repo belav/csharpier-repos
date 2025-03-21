@@ -8,7 +8,8 @@ using System.Runtime.CompilerServices;
 namespace System.Collections.Frozen
 {
     /// <summary>The base class for the specialized frozen string sets.</summary>
-    internal abstract class OrdinalStringFrozenSet : FrozenSetInternalBase<string, OrdinalStringFrozenSet.GSW>
+    internal abstract class OrdinalStringFrozenSet
+        : FrozenSetInternalBase<string, OrdinalStringFrozenSet.GSW>
     {
         private readonly FrozenHashTable _hashTable;
         private readonly string[] _items;
@@ -21,7 +22,8 @@ namespace System.Collections.Frozen
             int minimumLength,
             int maximumLengthDiff,
             int hashIndex = -1,
-            int hashCount = -1)
+            int hashCount = -1
+        )
             : base(comparer)
         {
             _items = new string[entries.Length];
@@ -55,14 +57,19 @@ namespace System.Collections.Frozen
         private protected abstract bool Equals(string? x, string? y);
         private protected abstract int GetHashCode(string s);
         private protected override string[] ItemsCore => _items;
+
         private protected override Enumerator GetEnumeratorCore() => new Enumerator(_items);
+
         private protected override int CountCore => _hashTable.Count;
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private protected override int FindItemIndex(string item)
         {
-            if (item is not null && // this implementation won't be used for null values
-                (uint)(item.Length - _minimumLength) <= (uint)_maximumLengthDiff)
+            if (
+                item is not null
+                && // this implementation won't be used for null values
+                (uint)(item.Length - _minimumLength) <= (uint)_maximumLengthDiff
+            )
             {
                 int hashCode = GetHashCode(item);
                 _hashTable.FindMatchingEntries(hashCode, out int index, out int endIndex);
@@ -87,11 +94,14 @@ namespace System.Collections.Frozen
         internal struct GSW : IGenericSpecializedWrapper
         {
             private OrdinalStringFrozenSet _set;
+
             public void Store(FrozenSet<string> set) => _set = (OrdinalStringFrozenSet)set;
 
             public int Count => _set.Count;
             public IEqualityComparer<string> Comparer => _set.Comparer;
+
             public int FindItemIndex(string item) => _set.FindItemIndex(item);
+
             public Enumerator GetEnumerator() => _set.GetEnumerator();
         }
     }

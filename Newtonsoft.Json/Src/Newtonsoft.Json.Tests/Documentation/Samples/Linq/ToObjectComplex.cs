@@ -52,7 +52,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
         public void Example()
         {
             #region Usage
-            string json = @"{
+            string json =
+                @"{
               'd': [
                 {
                   'Name': 'John Smith'

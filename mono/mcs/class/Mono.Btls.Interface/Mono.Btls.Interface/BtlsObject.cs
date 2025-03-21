@@ -27,47 +27,51 @@ using System;
 
 namespace Mono.Btls.Interface
 {
-	public abstract class BtlsObject : IDisposable
-	{
-		MonoBtlsObject instance;
+    public abstract class BtlsObject : IDisposable
+    {
+        MonoBtlsObject instance;
 
-		internal MonoBtlsObject Instance {
-			get {
-				if (!IsValid)
-					throw new ObjectDisposedException (GetType ().Name);
-				return instance;
-			}
-		}
+        internal MonoBtlsObject Instance
+        {
+            get
+            {
+                if (!IsValid)
+                    throw new ObjectDisposedException(GetType().Name);
+                return instance;
+            }
+        }
 
-		internal BtlsObject (MonoBtlsObject instance)
-		{
-			this.instance = instance;
-		}
+        internal BtlsObject(MonoBtlsObject instance)
+        {
+            this.instance = instance;
+        }
 
-		public bool IsValid {
-			get { return instance != null && instance.IsValid; }
-		}
+        public bool IsValid
+        {
+            get { return instance != null && instance.IsValid; }
+        }
 
-		protected void Dispose (bool disposing)
-		{
-			if (disposing) {
-				if (instance != null) {
-					instance.Dispose ();
-					instance = null;
-				}
-			}
-		}
+        protected void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (instance != null)
+                {
+                    instance.Dispose();
+                    instance = null;
+                }
+            }
+        }
 
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		~BtlsObject ()
-		{
-			Dispose (false);
-		}
-	}
+        ~BtlsObject()
+        {
+            Dispose(false);
+        }
+    }
 }
-

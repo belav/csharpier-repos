@@ -43,10 +43,9 @@ public class DefaultModelMetadata : ModelMetadata
     public DefaultModelMetadata(
         IModelMetadataProvider provider,
         ICompositeMetadataDetailsProvider detailsProvider,
-        DefaultMetadataDetails details)
-        : this(provider, detailsProvider, details, new DefaultModelBindingMessageProvider())
-    {
-    }
+        DefaultMetadataDetails details
+    )
+        : this(provider, detailsProvider, details, new DefaultModelBindingMessageProvider()) { }
 
     /// <summary>
     /// Creates a new <see cref="DefaultModelMetadata"/>.
@@ -59,7 +58,8 @@ public class DefaultModelMetadata : ModelMetadata
         IModelMetadataProvider provider,
         ICompositeMetadataDetailsProvider detailsProvider,
         DefaultMetadataDetails details,
-        DefaultModelBindingMessageProvider modelBindingMessageProvider)
+        DefaultModelBindingMessageProvider modelBindingMessageProvider
+    )
         : base(details.Key)
     {
         ArgumentNullException.ThrowIfNull(provider);
@@ -93,7 +93,10 @@ public class DefaultModelMetadata : ModelMetadata
         {
             if (_details.BindingMetadata == null)
             {
-                var context = new BindingMetadataProviderContext(Identity, _details.ModelAttributes);
+                var context = new BindingMetadataProviderContext(
+                    Identity,
+                    _details.ModelAttributes
+                );
 
                 // Provide a unique ModelBindingMessageProvider instance so providers' customizations are per-type.
                 context.BindingMetadata.ModelBindingMessageProvider =
@@ -119,7 +122,10 @@ public class DefaultModelMetadata : ModelMetadata
         {
             if (_details.DisplayMetadata == null)
             {
-                var context = new DisplayMetadataProviderContext(Identity, _details.ModelAttributes);
+                var context = new DisplayMetadataProviderContext(
+                    Identity,
+                    _details.ModelAttributes
+                );
                 _detailsProvider.CreateDisplayMetadata(context);
                 _details.DisplayMetadata = context.DisplayMetadata;
             }
@@ -140,7 +146,10 @@ public class DefaultModelMetadata : ModelMetadata
         {
             if (_details.ValidationMetadata == null)
             {
-                var context = new ValidationMetadataProviderContext(Identity, _details.ModelAttributes);
+                var context = new ValidationMetadataProviderContext(
+                    Identity,
+                    _details.ModelAttributes
+                );
                 _detailsProvider.CreateValidationMetadata(context);
                 _details.ValidationMetadata = context.ValidationMetadata;
             }
@@ -156,7 +165,9 @@ public class DefaultModelMetadata : ModelMetadata
         {
             if (_additionalValues == null)
             {
-                _additionalValues = new ReadOnlyDictionary<object, object>(DisplayMetadata.AdditionalValues);
+                _additionalValues = new ReadOnlyDictionary<object, object>(
+                    DisplayMetadata.AdditionalValues
+                );
             }
 
             return _additionalValues;
@@ -227,11 +238,13 @@ public class DefaultModelMetadata : ModelMetadata
     }
 
     /// <inheritdoc />
-    public override IEnumerable<KeyValuePair<EnumGroupAndName, string>>? EnumGroupedDisplayNamesAndValues
-        => DisplayMetadata.EnumGroupedDisplayNamesAndValues;
+    public override IEnumerable<
+        KeyValuePair<EnumGroupAndName, string>
+    >? EnumGroupedDisplayNamesAndValues => DisplayMetadata.EnumGroupedDisplayNamesAndValues;
 
     /// <inheritdoc />
-    public override IReadOnlyDictionary<string, string>? EnumNamesAndValues => DisplayMetadata.EnumNamesAndValues;
+    public override IReadOnlyDictionary<string, string>? EnumNamesAndValues =>
+        DisplayMetadata.EnumNamesAndValues;
 
     /// <inheritdoc />
     public override bool HasNonDefaultEditFormat => DisplayMetadata.HasNonDefaultEditFormat;
@@ -385,7 +398,10 @@ public class DefaultModelMetadata : ModelMetadata
             if (_constructorMetadata == null)
             {
                 var modelMetadataProvider = (ModelMetadataProvider)_provider;
-                _constructorMetadata = modelMetadataProvider.GetMetadataForConstructor(BindingMetadata.BoundConstructor, ModelType);
+                _constructorMetadata = modelMetadataProvider.GetMetadataForConstructor(
+                    BindingMetadata.BoundConstructor,
+                    ModelType
+                );
             }
 
             return _constructorMetadata;
@@ -393,10 +409,12 @@ public class DefaultModelMetadata : ModelMetadata
     }
 
     /// <inheritdoc/>
-    public override IReadOnlyList<ModelMetadata>? BoundConstructorParameters => _details.BoundConstructorParameters;
+    public override IReadOnlyList<ModelMetadata>? BoundConstructorParameters =>
+        _details.BoundConstructorParameters;
 
     /// <inheritdoc />
-    public override IPropertyFilterProvider? PropertyFilterProvider => BindingMetadata.PropertyFilterProvider;
+    public override IPropertyFilterProvider? PropertyFilterProvider =>
+        BindingMetadata.PropertyFilterProvider;
 
     /// <inheritdoc />
     public override bool ShowForDisplay => DisplayMetadata.ShowForDisplay;
@@ -411,7 +429,8 @@ public class DefaultModelMetadata : ModelMetadata
     public override string? TemplateHint => DisplayMetadata.TemplateHint;
 
     /// <inheritdoc />
-    public override IPropertyValidationFilter? PropertyValidationFilter => ValidationMetadata.PropertyValidationFilter;
+    public override IPropertyValidationFilter? PropertyValidationFilter =>
+        ValidationMetadata.PropertyValidationFilter;
 
     /// <inheritdoc />
     public override bool ValidateChildren
@@ -459,7 +478,10 @@ public class DefaultModelMetadata : ModelMetadata
     /// <inheritdoc />
     internal override string? ValidationModelName => ValidationMetadata.ValidationModelName;
 
-    internal static bool CalculateHasValidators(HashSet<DefaultModelMetadata> visited, ModelMetadata metadata)
+    internal static bool CalculateHasValidators(
+        HashSet<DefaultModelMetadata> visited,
+        ModelMetadata metadata
+    )
     {
         RuntimeHelpers.EnsureSufficientExecutionStack();
 
@@ -508,7 +530,9 @@ public class DefaultModelMetadata : ModelMetadata
         }
         else if (defaultModelMetadata.IsComplexType)
         {
-            var parameters = defaultModelMetadata.BoundConstructor?.BoundConstructorParameters ?? Array.Empty<ModelMetadata>();
+            var parameters =
+                defaultModelMetadata.BoundConstructor?.BoundConstructorParameters
+                ?? Array.Empty<ModelMetadata>();
             foreach (var parameter in parameters)
             {
                 if (CalculateHasValidators(visited, parameter))
@@ -537,7 +561,9 @@ public class DefaultModelMetadata : ModelMetadata
         {
             if (_validatorMetadata == null)
             {
-                _validatorMetadata = new ReadOnlyCollection<object>(ValidationMetadata.ValidatorMetadata);
+                _validatorMetadata = new ReadOnlyCollection<object>(
+                    ValidationMetadata.ValidatorMetadata
+                );
             }
 
             return _validatorMetadata;
@@ -551,7 +577,8 @@ public class DefaultModelMetadata : ModelMetadata
     public override Action<object, object?>? PropertySetter => _details.PropertySetter;
 
     /// <inheritdoc/>
-    public override Func<object?[], object>? BoundConstructorInvoker => _details.BoundConstructorInvoker;
+    public override Func<object?[], object>? BoundConstructorInvoker =>
+        _details.BoundConstructorInvoker;
 
     internal DefaultMetadataDetails Details => _details;
 

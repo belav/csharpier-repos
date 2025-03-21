@@ -14,11 +14,13 @@ namespace System.Web.Http.ModelBinding
     public class CancellationTokenParameterBinding : HttpParameterBinding
     {
         public CancellationTokenParameterBinding(HttpParameterDescriptor descriptor)
-            : base(descriptor)
-        {
-        }
+            : base(descriptor) { }
 
-        public override Task ExecuteBindingAsync(ModelMetadataProvider metadataProvider, HttpActionContext actionContext, CancellationToken cancellationToken)
+        public override Task ExecuteBindingAsync(
+            ModelMetadataProvider metadataProvider,
+            HttpActionContext actionContext,
+            CancellationToken cancellationToken
+        )
         {
             string name = Descriptor.ParameterName;
             actionContext.ActionArguments.Add(name, cancellationToken);

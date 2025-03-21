@@ -25,86 +25,74 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
 using System;
 using System.IO;
-
-using Microsoft.Build.Framework; 
+using Microsoft.Build.Framework;
 using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 
-namespace Microsoft.Build.Tasks {
-	//FIXME: This should be in v3.5 only
-	public class FindAppConfigFile : TaskExtension {
+namespace Microsoft.Build.Tasks
+{
+    //FIXME: This should be in v3.5 only
+    public class FindAppConfigFile : TaskExtension
+    {
+        public FindAppConfigFile() { }
 
-		public FindAppConfigFile ()
-		{
-		}
+        // rules: (see FindAppConfigFileTest)
+        // 1. Check PrimaryList, app.config in top dir
+        // 2. Check SecondaryList, app.conf in top dir
+        // 3. Check PrimaryList, app.config in subdir
+        // 4. Check SecondaryList, app.conf in subdir
+        public override bool Execute()
+        {
+            AppConfigFile = FindAppConfig();
+            if (AppConfigFile != null)
+                AppConfigFile.SetMetadata("TargetPath", TargetPath);
 
-		// rules: (see FindAppConfigFileTest)
-		// 1. Check PrimaryList, app.config in top dir
-		// 2. Check SecondaryList, app.conf in top dir
-		// 3. Check PrimaryList, app.config in subdir
-		// 4. Check SecondaryList, app.conf in subdir
-		public override bool Execute ()
-		{
-			AppConfigFile = FindAppConfig ();
-			if (AppConfigFile != null)
-				AppConfigFile.SetMetadata ("TargetPath", TargetPath);
+            return true;
+        }
 
-			return true;
-		}
+        ITaskItem FindAppConfig()
+        {
+            foreach (ITaskItem item in PrimaryList)
+                if (IsAppConfig(item, false))
+                    return new TaskItem(item);
 
-		ITaskItem FindAppConfig ()
-		{
-			foreach (ITaskItem item in PrimaryList)
-				if (IsAppConfig (item, false))
-					return new TaskItem (item);
+            foreach (ITaskItem item in SecondaryList)
+                if (IsAppConfig(item, false))
+                    return new TaskItem(item);
 
-			foreach (ITaskItem item in SecondaryList)
-				if (IsAppConfig (item, false))
-					return new TaskItem (item);
+            foreach (ITaskItem item in PrimaryList)
+                if (IsAppConfig(item, true))
+                    return new TaskItem(item);
 
-			foreach (ITaskItem item in PrimaryList)
-				if (IsAppConfig (item, true))
-					return new TaskItem (item);
+            foreach (ITaskItem item in SecondaryList)
+                if (IsAppConfig(item, true))
+                    return new TaskItem(item);
 
-			foreach (ITaskItem item in SecondaryList)
-				if (IsAppConfig (item, true))
-					return new TaskItem (item);
+            return null;
+        }
 
-			return null;
-		}
+        bool IsAppConfig(ITaskItem item, bool require_subdir)
+        {
+            if (String.Compare(Path.GetFileName(item.ItemSpec), "app.config", true) != 0)
+                return false;
 
-		bool IsAppConfig (ITaskItem item, bool require_subdir)
-		{
-			if (String.Compare (Path.GetFileName (item.ItemSpec), "app.config", true) != 0)
-				return false;
+            bool has_dir = Path.GetDirectoryName(item.ItemSpec).Length > 0;
 
-			bool has_dir = Path.GetDirectoryName (item.ItemSpec).Length > 0;
+            return require_subdir == has_dir;
+        }
 
-			return require_subdir == has_dir;
-		}
+        [Output]
+        public ITaskItem AppConfigFile { get; set; }
 
-		[Output]
-		public ITaskItem AppConfigFile {
-			get; set;
-		}
+        [Required]
+        public ITaskItem[] PrimaryList { get; set; }
 
-		[Required]
-		public ITaskItem[] PrimaryList {
-			get; set;
-		}
+        [Required]
+        public ITaskItem[] SecondaryList { get; set; }
 
-		[Required]
-		public ITaskItem[] SecondaryList {
-			get; set;
-		}
-
-		[Required]
-		public string TargetPath {
-			get; set;
-		}
-	}
+        [Required]
+        public string TargetPath { get; set; }
+    }
 }
-

@@ -13,7 +13,10 @@ namespace Microsoft.AspNetCore.Authorization;
 public class AuthorizationResult
 {
     private static readonly AuthorizationResult _succeededResult = new() { Succeeded = true };
-    private static readonly AuthorizationResult _failedResult = new() { Failure = AuthorizationFailure.ExplicitFail() };
+    private static readonly AuthorizationResult _failedResult = new()
+    {
+        Failure = AuthorizationFailure.ExplicitFail(),
+    };
 
     private AuthorizationResult() { }
 
@@ -39,7 +42,8 @@ public class AuthorizationResult
     /// </summary>
     /// <param name="failure">Contains information about why authorization failed.</param>
     /// <returns>The <see cref="AuthorizationResult"/>.</returns>
-    public static AuthorizationResult Failed(AuthorizationFailure failure) => new AuthorizationResult { Failure = failure };
+    public static AuthorizationResult Failed(AuthorizationFailure failure) =>
+        new AuthorizationResult { Failure = failure };
 
     /// <summary>
     /// Creates a failed authorization result.

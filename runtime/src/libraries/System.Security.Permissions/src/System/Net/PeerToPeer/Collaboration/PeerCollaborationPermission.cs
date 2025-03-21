@@ -7,17 +7,40 @@ using System.Security.Permissions;
 namespace System.Net.PeerToPeer.Collaboration
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public sealed class PeerCollaborationPermission : CodeAccessPermission, IUnrestrictedPermission
     {
         public PeerCollaborationPermission(PermissionState state) { }
-        public override IPermission Copy() { return null; }
+
+        public override IPermission Copy()
+        {
+            return null;
+        }
+
         public override void FromXml(SecurityElement e) { }
-        public override IPermission Intersect(IPermission target) { return null; }
+
+        public override IPermission Intersect(IPermission target)
+        {
+            return null;
+        }
+
         public override bool IsSubsetOf(IPermission target) => false;
+
         public bool IsUnrestricted() => false;
-        public override SecurityElement ToXml() { return null; }
-        public override IPermission Union(IPermission target) { return null; }
+
+        public override SecurityElement ToXml()
+        {
+            return null;
+        }
+
+        public override IPermission Union(IPermission target)
+        {
+            return null;
+        }
     }
 }

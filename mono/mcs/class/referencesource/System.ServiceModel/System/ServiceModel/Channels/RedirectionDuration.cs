@@ -11,9 +11,13 @@ namespace System.ServiceModel.Channels
     [Serializable]
     public class RedirectionDuration
     {
-        static RedirectionDuration permanent = new RedirectionDuration(InternalRedirectionDuration.Permanent);
+        static RedirectionDuration permanent = new RedirectionDuration(
+            InternalRedirectionDuration.Permanent
+        );
 
-        static RedirectionDuration temporary = new RedirectionDuration(InternalRedirectionDuration.Temporary);
+        static RedirectionDuration temporary = new RedirectionDuration(
+            InternalRedirectionDuration.Temporary
+        );
         InternalRedirectionDuration internalDuration;
         string toString = null;
         Nullable<int> hashCode = null;
@@ -36,7 +40,9 @@ namespace System.ServiceModel.Channels
                     this.Value = RedirectionConstants.Duration.Permanent;
                     break;
                 default:
-                    Fx.Assert("This constructor doesn't support the following enum value: " + duration);
+                    Fx.Assert(
+                        "This constructor doesn't support the following enum value: " + duration
+                    );
                     break;
             }
         }
@@ -55,9 +61,16 @@ namespace System.ServiceModel.Channels
             Temporary,
             Permanent,
         }
-        public static RedirectionDuration Permanent { get { return permanent; } }
 
-        public static RedirectionDuration Temporary { get { return temporary; } }
+        public static RedirectionDuration Permanent
+        {
+            get { return permanent; }
+        }
+
+        public static RedirectionDuration Temporary
+        {
+            get { return temporary; }
+        }
         public string Namespace { get; private set; }
         public string Value { get; private set; }
 
@@ -95,8 +108,12 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    result = RedirectionUtility.IsNamespaceAndValueMatch(left.Value,
-                        left.Namespace, right.Value, right.Namespace);
+                    result = RedirectionUtility.IsNamespaceAndValueMatch(
+                        left.Value,
+                        left.Namespace,
+                        right.Value,
+                        right.Namespace
+                    );
                 }
             }
 
@@ -111,8 +128,10 @@ namespace System.ServiceModel.Channels
             }
             else if (duration.Length == 0)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("duration",
-                    SR.GetString(SR.ParameterCannotBeEmpty));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "duration",
+                    SR.GetString(SR.ParameterCannotBeEmpty)
+                );
             }
 
             return new RedirectionDuration(duration, ns);
@@ -146,27 +165,46 @@ namespace System.ServiceModel.Channels
             {
                 if (this.Namespace != null)
                 {
-                    this.toString = SR.GetString(SR.RedirectionInfoStringFormatWithNamespace, this.Value, this.Namespace);
+                    this.toString = SR.GetString(
+                        SR.RedirectionInfoStringFormatWithNamespace,
+                        this.Value,
+                        this.Namespace
+                    );
                 }
                 else
                 {
-                    this.toString = SR.GetString(SR.RedirectionInfoStringFormatNoNamespace, this.Value);
+                    this.toString = SR.GetString(
+                        SR.RedirectionInfoStringFormatNoNamespace,
+                        this.Value
+                    );
                 }
             }
             return this.toString;
         }
 
         //When Create(...) is used, we delay finding the enum value
-        //until the enum value is needed, avoiding the string comparisons if possible 
+        //until the enum value is needed, avoiding the string comparisons if possible
         void DetectDuration()
         {
             if (RedirectionUtility.IsNamespaceMatch(this.Namespace, RedirectionConstants.Namespace))
             {
-                if (string.Equals(this.Value, RedirectionConstants.Duration.Temporary, StringComparison.Ordinal))
+                if (
+                    string.Equals(
+                        this.Value,
+                        RedirectionConstants.Duration.Temporary,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     this.internalDuration = InternalRedirectionDuration.Temporary;
                 }
-                else if (string.Equals(this.Value, RedirectionConstants.Duration.Permanent, StringComparison.Ordinal))
+                else if (
+                    string.Equals(
+                        this.Value,
+                        RedirectionConstants.Duration.Permanent,
+                        StringComparison.Ordinal
+                    )
+                )
                 {
                     this.internalDuration = InternalRedirectionDuration.Permanent;
                 }
@@ -180,7 +218,10 @@ namespace System.ServiceModel.Channels
                 this.internalDuration = InternalRedirectionDuration.Custom;
             }
 
-            Fx.Assert(this.internalDuration != InternalRedirectionDuration.Unknown, "Failed to correctly detect internal redirection duration");
+            Fx.Assert(
+                this.internalDuration != InternalRedirectionDuration.Unknown,
+                "Failed to correctly detect internal redirection duration"
+            );
         }
     }
 }

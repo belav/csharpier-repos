@@ -127,7 +127,8 @@ internal sealed class HttpRequestPipeReader : PipeReader
         // report the same error we aborted it with if the read gets that far.
         _error?.Throw();
 
-        static void ThrowObjectDisposedException() => throw new ObjectDisposedException(nameof(HttpRequestStream));
+        static void ThrowObjectDisposedException() =>
+            throw new ObjectDisposedException(nameof(HttpRequestStream));
         static void ThrowTaskCanceledException() => throw new TaskCanceledException();
     }
 }

@@ -66,7 +66,7 @@ public class DrainRefillMultiTheaded
     [Benchmark]
     public void DrainRefillMulti()
     {
-        BenchmarkLoop(_stores[ThreadCount - 1]);  // take the last slot
+        BenchmarkLoop(_stores[ThreadCount - 1]); // take the last slot
     }
 
     private void BenchmarkLoop(Foo[] store)

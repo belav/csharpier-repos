@@ -24,7 +24,7 @@ namespace System.Tests
                 "System.Tests.EnvironmentStackTrace.StaticFrame(Object obj)",
                 "System.Tests.EnvironmentStackTrace.TestClass..ctor()",
                 "System.Tests.EnvironmentStackTrace.GenericFrame[T1,T2](T1 t1, T2 t2)",
-                "System.Tests.EnvironmentStackTrace.TestFrame()"
+                "System.Tests.EnvironmentStackTrace.TestFrame()",
             };
 
             //act
@@ -68,15 +68,20 @@ namespace System.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/50957", typeof(PlatformDetection), nameof(PlatformDetection.IsBrowser), nameof(PlatformDetection.IsMonoAOT))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/50957",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBrowser),
+            nameof(PlatformDetection.IsMonoAOT)
+        )]
         public void StackTraceDoesNotStartWithInternalFrame()
         {
-             string stackTrace = Environment.StackTrace;
+            string stackTrace = Environment.StackTrace;
 
-             // Find first line of the stacktrace and verify that it is Environment.get_StackTrace itself, not an internal frame
-             string firstFrame = new StringReader(stackTrace).ReadLine();
+            // Find first line of the stacktrace and verify that it is Environment.get_StackTrace itself, not an internal frame
+            string firstFrame = new StringReader(stackTrace).ReadLine();
 
-             Assert.True(firstFrame.IndexOf("System.Environment.get_StackTrace()") != -1);
+            Assert.True(firstFrame.IndexOf("System.Environment.get_StackTrace()") != -1);
         }
     }
 }

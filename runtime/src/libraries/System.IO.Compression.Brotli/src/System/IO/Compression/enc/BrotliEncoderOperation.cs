@@ -14,6 +14,6 @@ namespace System.IO.Compression
         Process,
         Flush,
         Finish,
-        EmitMetadata
+        EmitMetadata,
     }
 }
